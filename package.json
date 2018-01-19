@@ -1,7 +1,7 @@
 {
-  "name": "react-redux-universal-hot-example",
-  "description": "Example of an isomorphic (universal) webapp using react redux and hot reloading",
-  "author": "Kévin Berthommier <kevin.bertho@gmail.com> (http://github.com/bertho-zero)",
+  "name": "HomeTown",
+  "description": "Buy Furniture Online.",
+  "author": "Rama Krishna <rama.ped@gmail.com>",
   "contributors": [
     "Erik Rasmussen <rasmussenerik@gmail.com> (http://github.com/erikras)"
   ],
@@ -9,9 +9,9 @@
   "version": "0.9.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bertho-zero/react-redux-universal-hot-example"
+    "url": ""
   },
-  "homepage": "https://github.com/bertho-zero/react-redux-universal-hot-example",
+  "homepage": "https://hometown.in",
   "keywords": [
     "react",
     "isomorphic",
@@ -42,7 +42,7 @@
     "lint": "eslint -c .eslintrc api src",
     "test": "cross-env NODE_PATH=src jest src",
     "test-node": "cross-env NODE_PATH=api jest api",
-    "lighthouse-report": "lighthouse http://localhost:8080 --view",
+    "lighthouse-report": "lighthouse http://localhost:8080 --view"
   },
   "lint-staged": {
     "+(src|api)/**/*.js": [
