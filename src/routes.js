@@ -2,7 +2,6 @@ import { routerActions } from 'react-router-redux';
 import { connectedReduxRedirect } from 'redux-auth-wrapper/history4/redirect';
 import { App, Home, NotFound } from 'containers';
 import About from 'containers/About/Loadable';
-import Chat from 'containers/Chat/Loadable';
 import ChatFeathers from 'containers/ChatFeathers/Loadable';
 import Login from 'containers/Login/Loadable';
 import LoginSuccess from 'containers/LoginSuccess/Loadable';
@@ -31,7 +30,6 @@ const routes = [
     routes: [
       { path: '/', exact: true, component: Home },
       { path: '/about', component: About },
-      { path: '/chat', component: Chat },
       { path: '/chat-feathers', component: isAuthenticated(ChatFeathers) },
       { path: '/login', component: Login },
       { path: '/login-success', component: isAuthenticated(LoginSuccess) },

@@ -21,7 +21,7 @@ import createStore from 'redux/create';
 import apiClient from 'helpers/apiClient';
 import Html from 'helpers/Html';
 import routes from 'routes';
-import { createApp } from 'app';
+import createApp from 'app';
 import getChunks, { waitChunks } from 'utils/getChunks';
 import asyncMatchRoutes from 'utils/asyncMatchRoutes';
 import { ReduxAsyncConnect, Provider } from 'components';
@@ -73,10 +73,6 @@ app.use('/api', (req, res) => {
 
 app.use('/ws', (req, res) => {
   proxy.web(req, res, { target: `${targetUrl}/ws` });
-});
-
-server.on('upgrade', (req, socket, head) => {
-  proxy.ws(req, socket, head);
 });
 
 // added the error handling to avoid https://github.com/nodejitsu/node-http-proxy/issues/527

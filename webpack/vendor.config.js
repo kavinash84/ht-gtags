@@ -71,8 +71,7 @@ module.exports = {
       'react-router-redux',
       'redux',
       'redux-form',
-      'serialize-javascript',
-      'socket.io-client'
+      'serialize-javascript'
     ]
   },
 
