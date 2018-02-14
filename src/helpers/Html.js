@@ -37,7 +37,6 @@ export default class Html extends Component {
       assets, store, content, bundles
     } = this.props;
     const head = Helmet.renderStatic();
-
     /* eslint-disable react/no-danger */
     return (
       <html lang="en-US">

@@ -7,7 +7,6 @@ import morgan from 'morgan';
 import favicon from 'serve-favicon';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
-import httpProxy from 'http-proxy';
 import PrettyError from 'pretty-error';
 import http from 'http';
 import { ConnectedRouter } from 'react-router-redux';
@@ -30,14 +29,9 @@ const chunksPath = path.join(__dirname, '..', 'static', 'dist', 'loadable-chunks
 
 process.on('unhandledRejection', error => console.error(error));
 
-const targetUrl = `http://${config.apiHost}:${config.apiPort}`;
 const pretty = new PrettyError();
 const app = express();
 const server = new http.Server(app);
-const proxy = httpProxy.createProxyServer({
-  target: targetUrl,
-  ws: true
-});
 
 app
   .use(morgan('dev', { skip: req => req.originalUrl.indexOf('/ws') !== -1 }))
@@ -64,28 +58,6 @@ app.use(express.static(path.join(__dirname, '..', 'static')));
 app.use((req, res, next) => {
   res.setHeader('X-Forwarded-For', req.ip);
   return next();
-});
-
-// Proxy to API server
-app.use('/api', (req, res) => {
-  proxy.web(req, res, { target: targetUrl });
-});
-
-app.use('/ws', (req, res) => {
-  proxy.web(req, res, { target: `${targetUrl}/ws` });
-});
-
-// added the error handling to avoid https://github.com/nodejitsu/node-http-proxy/issues/527
-proxy.on('error', (error, req, res) => {
-  if (error.code !== 'ECONNRESET') {
-    console.error('proxy error', error);
-  }
-  if (!res.headersSent) {
-    res.writeHead(500, { 'content-type': 'application/json' });
-  }
-
-  const json = { error: 'proxy_error', reason: error.message };
-  res.end(JSON.stringify(json));
 });
 
 app.use(async (req, res) => {
@@ -165,7 +137,7 @@ app.use(async (req, res) => {
       if (err) {
         console.error(err);
       }
-      console.info('----\n==> ✅  %s is running, talking to API server on %s.', config.app.title, config.apiPort);
+      console.info('----\n==> ✅  %s is Running...', config.app.title);
       console.info('==> 💻  Open http://%s:%s in a browser to view the app.', config.host, config.port);
     });
   } else {

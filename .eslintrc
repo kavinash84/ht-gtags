@@ -7,7 +7,6 @@
     "es6": true
   },
   "rules": {
-    "linebreak-style": ["error", "windows"],
     "arrow-parens": ["error", "as-needed"],
     "comma-dangle": ["error", "only-multiline"],
     "consistent-return": "off",

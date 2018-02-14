@@ -25,7 +25,7 @@ export default function info(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: false,
-        error: action.error
+        error: ''
       };
     default:
       return state;
@@ -37,8 +37,10 @@ export function isLoaded(globalState) {
 }
 
 export function load() {
+  /* eslint-disable max-len */
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: ({ client }) => client.get('/loadInfo')
+    promise: ({ client }) => client.get('/api/coupons/load/2')
   };
+  /* eslint-disable max-len */
 }
