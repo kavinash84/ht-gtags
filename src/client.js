@@ -12,7 +12,6 @@ import Loadable from 'react-loadable';
 import { AppContainer as HotEnabler } from 'react-hot-loader';
 import { getStoredState } from 'redux-persist';
 import localForage from 'localforage';
-import createApp from 'app';
 import createStore from 'redux/create';
 import apiClient from 'helpers/apiClient';
 import routes from 'routes';
@@ -27,11 +26,8 @@ const persistConfig = {
 };
 
 const dest = document.getElementById('content');
-
-const app = createApp();
-const restApp = createApp('rest');
 const client = apiClient();
-const providers = { app, restApp, client };
+const providers = { app: {}, restApp: {}, client };
 
 (async () => {
   const storedData = await getStoredState(persistConfig);
