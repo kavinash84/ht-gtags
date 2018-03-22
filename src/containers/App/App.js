@@ -26,12 +26,18 @@ export default class App extends Component {
   componentDidUpdate() {}
 
   render() {
-    const styles = require('./App.css');
+    const styles = require('./App.scss');
 
     return (
       <div className={styles.app}>
         <Helmet {...config.app.head} />
-        <div>HomeTown Base Running !!</div>
+        <div className={styles.cssnext}>HomeTown Base Running !!</div>
+        <div className={styles.autoprefixer} />
+        <section className={styles.row}>
+          <div className={styles.quarter}>1</div>
+          <div className={styles.half}>2</div>
+          <div className={styles.quarter}>3</div>
+        </section>
       </div>
     );
   }
