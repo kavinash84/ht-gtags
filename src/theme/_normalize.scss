@@ -1,5 +1,6 @@
 html {
   font-family: sans-serif;
+  font-size: 16px;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
@@ -21,6 +22,9 @@ section,
 summary {
   display: block;
 }
+section {
+  padding: 20px 0;
+}
 audio,
 canvas,
 progress,
@@ -38,10 +42,13 @@ template {
 }
 a {
   background-color: transparent;
-}
-a:active,
-a:hover {
-  outline: 0;
+  &:active,
+  &:hover {
+    outline: none;
+    opacity: 0.8;
+    text-decoration: none;
+    color: $primary;
+  }
 }
 abbr[title] {
   border-bottom: 1px dotted;
@@ -79,6 +86,7 @@ sub {
 }
 img {
   border: 0;
+  max-width: 100%;
 }
 svg:not(:root) {
   overflow: hidden;

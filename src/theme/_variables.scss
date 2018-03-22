@@ -1,15 +1,33 @@
 /* ----- Variables ----- */
-:root {
-  --red: #da2127;
-  --purple: #632c8e;
-  --darkGrey: #111111;
-  --grey: #444444;
-  --lightGrey: #777777;
-  --lighterGrey: #999999;
-  --white: #ffffff;
-  --bg: #f1f1f1;
-  --green: #388e3c;
-  --black: #212121;
-  --textBlack: #4d4d4d;
-  --darkPurple: #331b50;
-}
+// --colors
+$white:    #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #6c757d !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+$black:    #000 !default;
+
+$primary: #ae8873 !default;
+$secondary: rgba(0, 0, 0, 0.7) !default;
+$text: rgba(0, 0, 0, 0.75) !default;
+$text-dark: rgba(0, 0, 0, 0.8) !default;
+$text-light: rgba(0, 0, 0, 0.6) !default;
+
+$border-width: 1px !default;
+$border-color: $gray-300 !default;
+$border-color-text-field: rgba(151, 151, 151, 0.47) !default;
+
+$font-family-base: "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+$font-size-base: 1rem !default; // Assumes the browser default, typically `16px`
+
+$h1-font-size: $font-size-base * 2.5 !default;
+$h2-font-size: $font-size-base * 2 !default;
+$h3-font-size: $font-size-base * 1.75 !default;
+$h4-font-size: $font-size-base * 1.5 !default;
+$h5-font-size: $font-size-base * 1.25 !default;
+$h6-font-size: $font-size-base !default;

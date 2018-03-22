@@ -1,0 +1,27 @@
+@mixin font-family($type) {
+  font-family: 'SFPD#{$type}';
+}
+@mixin font-size($size) {
+  font-size: #{$size}'rem';
+}
+@mixin border($borderWidth, $borderColor, $borderType) {
+  @if $borderType == 'full' {
+    border: $borderWidth solid $borderColor !important;
+  } @else {
+    border-#{$borderType}: $borderWidth solid $borderColor !important;
+  }
+}
+@mixin margin($type, $size) {
+  @if $type == 'both' {
+    margin: $size
+  } @else {
+    margin-#{$type}: $size
+  }
+}
+@mixin padding($type, $size) {
+  @if $type == 'both' {
+    padding: $size
+  } @else {
+    padding-#{$type}: $size
+  }
+}
