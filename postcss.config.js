@@ -7,6 +7,7 @@ module.exports = {
     'postcss-reporter'
   ],
   plugins: [
-    require('autoprefixer')
+    require('autoprefixer'),
+    require('lost')
   ]
 };
