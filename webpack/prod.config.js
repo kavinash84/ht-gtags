@@ -144,7 +144,6 @@ module.exports = {
             require("postcss-import")({ addDependencyTo: webpack }),
             require("postcss-url")(),
             require("postcss-cssnext")({ browsers: 'last 2 version' }),
-            require('autoprefixer')(),
             require('lost')(),
             // add your "plugins" here
             // ...
