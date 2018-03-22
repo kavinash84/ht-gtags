@@ -5,5 +5,8 @@ module.exports = {
     'postcss-cssnext',
     'postcss-browser-reporter',
     'postcss-reporter'
+  ],
+  plugins: [
+    require('autoprefixer')
   ]
 };
