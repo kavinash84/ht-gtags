@@ -25,4 +25,5 @@
 /* Testing cssnext */
 .cssnext {
   background: color(red alpha(-10%));
+  color: var(--red);
 }

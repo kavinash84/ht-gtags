@@ -32,7 +32,7 @@ export default class App extends Component {
       <div className={styles.app}>
         <Helmet {...config.app.head} />
         <div className={styles.cssnext}>HomeTown Base Running !!</div>
-        <div className={styles.autoprefixer} />
+        <div className={styles.autoprefixer}>dddd</div>
         <section className={styles.row}>
           <div className={styles.quarter}>1</div>
           <div className={styles.half}>2</div>
