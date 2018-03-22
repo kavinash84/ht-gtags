@@ -2,3 +2,27 @@
 @import "../../theme/normalize";
 
 /* ----- Base/Global Styles ----- */
+
+/* Testing autoprefixer */
+
+.autoprefixer {
+  display: flex;
+}
+
+/* Testing Lost */
+.row {
+  lost-utility: clearfix;
+}
+
+.quarter {
+  lost-column: 1/4 0;
+}
+
+.half {
+  lost-column: 1/2 0;
+}
+
+/* Testing cssnext */
+.cssnext {
+  background: color(red alpha(-10%));
+}
