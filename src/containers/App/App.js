@@ -26,7 +26,7 @@ export default class App extends Component {
   componentDidUpdate() {}
 
   render() {
-    const styles = require('./App.scss');
+    const styles = require('./App.css');
 
     return (
       <div className={styles.app}>

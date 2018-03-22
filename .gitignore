@@ -5,6 +5,7 @@ npm-debug.log
 yarn-error.log
 static/dist/
 *.iml
+*.css.map
 webpack-assets.json
 webpack-stats.json
 .happypack/
