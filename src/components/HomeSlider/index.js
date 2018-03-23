@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import Slider from 'react-slick';
 
+const MainSliderItem = require('../../data/MainSliderItem.js');
+
+console.log(MainSliderItem);
+
 const settings = {
   dots: false,
   infinite: true,
@@ -37,9 +41,6 @@ const settings = {
 export default class HomeSlider extends Component {
   render() {
     const styles = require('./HomeSlider.scss');
-    const MainSliderItem = require('../../data/MainSliderItem.js');
-    console.log(MainSliderItem);
-
     return (
       <div className={styles.homeSlider}>
         <Slider {...settings}>
