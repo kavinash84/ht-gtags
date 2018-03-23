@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { renderRoutes } from 'react-router-config';
 import { withRouter } from 'react-router';
 import { provideHooks } from 'redial';
 import Helmet from 'react-helmet';
 import { load as loadInfo } from 'redux/modules/info';
 import config from 'config';
+
+import 'slick-carousel/slick/slick.scss';
+import 'slick-carousel/slick/slick-theme.scss';
 
 @provideHooks({
   fetch: async ({ store: { dispatch } }) => {
@@ -13,7 +17,9 @@ import config from 'config';
 })
 @withRouter
 export default class App extends Component {
-  static propTypes = {};
+  static propTypes = {
+    route: PropTypes.objectOf(PropTypes.any).isRequired
+  };
 
   static defaultProps = {};
 
@@ -27,17 +33,11 @@ export default class App extends Component {
 
   render() {
     const styles = require('./App.scss');
-
+    const { route } = this.props;
     return (
       <div className={styles.app}>
         <Helmet {...config.app.head} />
-        <div className="inputField">HomeTown Base Running !!</div>
-        <div className="fl-right">dddd</div>
-        <section className={styles.row}>
-          <div className={styles.quarter}>1</div>
-          <div className={styles.half}>2</div>
-          <div className={styles.quarter}>3</div>
-        </section>
+        <main className={styles.appContent}>{renderRoutes(route.routes)}</main>
       </div>
     );
   }
