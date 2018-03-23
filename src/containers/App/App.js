@@ -7,9 +7,6 @@ import Helmet from 'react-helmet';
 import { load as loadInfo } from 'redux/modules/info';
 import config from 'config';
 
-import 'slick-carousel/slick/slick.scss';
-import 'slick-carousel/slick/slick-theme.scss';
-
 @provideHooks({
   fetch: async ({ store: { dispatch } }) => {
     await dispatch(loadInfo()).catch(() => null);
