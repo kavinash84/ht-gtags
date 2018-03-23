@@ -1,29 +1,265 @@
 @import "../../theme/variables";
+@import "../../theme/mixins";
 @import "../../theme/normalize";
 
 /* ----- Base/Global Styles ----- */
 
-/* Testing autoprefixer */
+/* ----- Typography ----- */
+/** thin **/
+// @font-face {
+// 	font-family: 'SFPDThin';
+// 	src: url('../../../static/fonts/thin/SF-Pro-Display-Thin.woff') format('woff');
+// 	font-weight: normal;
+// 	font-style: normal;
+// }
 
-.autoprefixer {
-  display: flex;
+/** Light **/
+@font-face {
+	font-family: 'SFPDLight';
+	src: url('../../../static/fonts/light/SF-Pro-Display-Light.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
 
-/* Testing Lost */
-.row {
-  lost-utility: clearfix;
+/** Regular **/
+@font-face {
+	font-family: 'SFPDRegular';
+	src: url('../../../static/fonts/regular/SF-Pro-Display-Regular.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
 
-.quarter {
-  lost-column: 1/4 0;
+/** Medium **/
+@font-face {
+	font-family: 'SFPDMedium';
+	src: url('../../../static/fonts/medium/SF-Pro-Display-Medium.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
 
-.half {
-  lost-column: 1/2 0;
+/** Semi Bold **/
+@font-face {
+	font-family: 'SFPDSemiBold';
+	src: url('../../../static/fonts/semibold/SF-Pro-Display-Semibold.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
 
-/* Testing cssnext */
-.cssnext {
-  background: color(red alpha(-10%));
-  color: var(--red);
+html, body {
+  @include font-family('Regular');
+  color: $text;
+}
+
+h1,h2,h3,h4,h5,h6,a,span {
+  color: $text;
+}
+@for $i from 1 through 6 {
+  h#{$i} {
+    @if $i == 1 {
+      @include font-size($h1-font-size);
+    } @else if $i == 2 {
+      @include font-size($h2-font-size);
+    } @else if $i == 3 {
+      @include font-size($h3-font-size);
+    } @else if $i == 4 {
+      @include font-size($h4-font-size);
+    } @else if $i == 5 {
+      @include font-size($h5-font-size);
+    } @else if $i == 6 {
+      @include font-size($h6-font-size);
+    }
+  }
+}
+/* ----- End of Typography ----- */
+
+/* Global Classed */
+:global {
+  /* ---- Border Style ---- */
+  .border {
+    border: $border-width solid $border-color !important;
+  }
+  .borderTop {
+    @include border($border-width, $border-color, 'top');
+  }
+  .borderBottom {
+    @include border($border-width, $border-color, 'bottom');
+  }
+  .borderRight {
+    @include border($border-width, $border-color, 'right');
+  }
+  .borderLeft {
+    @include border($border-width, $border-color, 'left');
+  }
+  .border0 {
+    border: 0 !important;
+  }
+  .borderTop0 {
+    border-top: 0 !important;
+  }
+  .borderRight0 {
+    border-right: 0 !important;
+  }
+  .borderBottom0 {
+    border-bottom: 0 !important;
+  }
+  .borderLeft0 {
+    border-left: 0 !important;
+  }
+  /* ---- End of Border Style ---- */
+
+  /* ---- Margin Classes ---- */
+  .mgAuto {
+    margin: auto;
+  }
+  .mlAuto {
+    margin-left: auto;
+  }
+  .mrAuto {
+    margin-right: auto;
+  }
+  .noMargin {
+    margin: 0;
+  }
+  $i: 0;
+  @while $i <= 30 {
+    .mgTop#{$i} {
+      @include margin('top', $i);
+    }
+    $i: $i + 5;
+  }
+  $i: 0;
+  @while $i <= 30 {
+    .mgBottom#{$i} {
+      @include margin('bottom', $i);
+    }
+    $i: $i + 5;
+  }
+  $i: 0;
+  @while $i <= 30 {
+    .mgLeft#{$i} {
+      @include margin('left', $i);
+    }
+    $i: $i + 5;
+  }
+  $i: 0;
+  @while $i <= 30 {
+    .mgRight#{$i} {
+      @include margin('right', $i);
+    }
+    $i: $i + 5;
+  }
+  /* ---- Padding Classes ---- */
+  $i: 0;
+  @while $i <= 30 {
+    .pdTop#{$i} {
+      @include padding('top', $i);
+    }
+    $i: $i + 5;
+  }
+  $i: 0;
+  @while $i <= 30 {
+    .pdBottom#{$i} {
+      @include padding('bottom', $i);
+    }
+    $i: $i + 5;
+  }
+  $i: 0;
+  @while $i <= 30 {
+    .pdLeft#{$i} {
+      @include padding('left', $i);
+    }
+    $i: $i + 5;
+  }
+  $i: 0;
+  @while $i <= 30 {
+    .pdRight#{$i} {
+      @include padding('right', $i);
+    }
+    $i: $i + 5;
+  }
+  .noPadding {
+    padding: 0;
+  }
+  /* ---- End of Padding/Margin Classes ---- */
+
+  /* ---- Float ---- */
+  .flNone {
+    float: none;
+  }
+  .flLeft {
+    float: left;
+  }
+  .flRight {
+    float: right;
+  }
+  /* ---- End of Float ---- */
+
+  /* ---- Display ---- */
+  .dNone,.hidden {
+    display: none;
+  }
+  .dBlock,.show {
+    display: block;
+  }
+  .dTable {
+    display: table;
+  }
+  .dInlineBlock {
+    display: inline-block;
+  }
+  .vHidden {
+    visibility: hidden;
+  }
+  .vShow {
+    visibility: visible;
+  }
+  /* ---- End of Display ---- */
+
+  /* ---- Alignment ---- */
+  .taCenter {
+    text-align: center;
+  }
+  .taLeft {
+    text-align: left;
+  }
+  .taRight {
+    text-align: right;
+  }
+  /* ---- End of Alignment ---- */
+
+  /* ---- Grid ----*/
+  .row {
+    lost-utility: clearfix;
+  }
+  .quarter {
+    lost-column: 1/4 0;
+  }
+  .half {
+    lost-column: 1/2 0;
+  }
+  /* ---- End of Grid ----*/
+
+  /* ---- Common Classes ---- */
+  .container {
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+  .shadow {
+    box-shadow: 0 5px 13px 0 rgba(0, 0, 0, 0.14);
+  }
+  .inputField {
+    height: $font-size-base * 2.625;
+    border-radius: 2px;
+    background-color: $white;
+    @include border($border-width, $border-color-text-field, 'full');
+  }
+  .title {
+    @include font-size(1.2);
+    @extend .mgBottom5;
+  }
+  .prodTitle {
+    @include font-size(1.2);
+    @extend .mgTop5;
+  }
+  /* ---- End of Common Classes ---- */
 }
