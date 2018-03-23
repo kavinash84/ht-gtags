@@ -1,40 +1,29 @@
 /* eslint-disable */
 const sliderItems = [
   {
+    id: 1,
     title: 'A bohemian vibe for free spirits',
-    description:
-      'Located in Goa, our customers wanted a home which an expression of themselves. Our experts were spot-on and within a month we were ready with this beautiful Bohemian home which resonates freedom and makes you feel HOME.',
-    img: 'http://via.placeholder.com/560x340'
+    img: 'http://via.placeholder.com/720x448/FFC720?text=Slide%201'
   },
   {
+    id: 2,
     title: 'A bohemian vibe for free spirits',
-    description:
-      'Located in Goa, our customers wanted a home which an expression of themselves. Our experts were spot-on and within a month we were ready with this beautiful Bohemian home which resonates freedom and makes you feel HOME.',
-    img: 'http://via.placeholder.com/560x340'
+    img: 'http://via.placeholder.com/720x448/FF7CBF?text=Slide%202'
   },
   {
+    id: 3,
     title: 'A bohemian vibe for free spirits',
-    description:
-      'Located in Goa, our customers wanted a home which an expression of themselves. Our experts were spot-on and within a month we were ready with this beautiful Bohemian home which resonates freedom and makes you feel HOME.',
-    img: 'http://via.placeholder.com/560x340'
+    img: 'http://via.placeholder.com/720x448/6F84FF?text=Slide%203'
   },
   {
+    id: 4,
     title: 'A bohemian vibe for free spirits',
-    description:
-      'Located in Goa, our customers wanted a home which an expression of themselves. Our experts were spot-on and within a month we were ready with this beautiful Bohemian home which resonates freedom and makes you feel HOME.',
-    img: 'http://via.placeholder.com/560x340'
+    img: 'http://via.placeholder.com/720x448/9AFFD2?text=Slide%204'
   },
   {
+    id: 5,
     title: 'A bohemian vibe for free spirits',
-    description:
-      'Located in Goa, our customers wanted a home which an expression of themselves. Our experts were spot-on and within a month we were ready with this beautiful Bohemian home which resonates freedom and makes you feel HOME.',
-    img: 'http://via.placeholder.com/560x340'
-  },
-  {
-    title: 'A bohemian vibe for free spirits',
-    description:
-      'Located in Goa, our customers wanted a home which an expression of themselves. Our experts were spot-on and within a month we were ready with this beautiful Bohemian home which resonates freedom and makes you feel HOME.',
-    img: 'http://via.placeholder.com/560x340'
+    img: 'http://via.placeholder.com/720x448/DDDDDD?text=Slide%205'
   }
 ];
 
