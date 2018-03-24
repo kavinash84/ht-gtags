@@ -13,7 +13,8 @@ const CarouselMain = ({
   showArrowsVal,
   centerSlidePercentageVal,
   className,
-  sliderImages
+  sliderImages,
+  titleStatus
 }) => (
   <Carousel
     autoPlay={autoPlayVal}
@@ -27,7 +28,7 @@ const CarouselMain = ({
     showArrows={showArrowsVal}
   >
     {sliderImages.map(slide => (
-      <CarouselItem key={slide.id} itemIndex={slide.id} title={slide.title} img={slide.img} />
+      <CarouselItem key={slide.id} itemIndex={slide.id} title={slide.title} titleStatus={titleStatus} img={slide.img} />
     ))}
   </Carousel>
 );
@@ -42,7 +43,8 @@ CarouselMain.propTypes = {
   centerSlidePercentageVal: PropTypes.string.isRequired,
   className: PropTypes.string.isRequired,
   showArrowsVal: PropTypes.bool.isRequired,
-  sliderImages: PropTypes.object.isRequired
+  sliderImages: PropTypes.object.isRequired,
+  titleStatus: PropTypes.bool.isRequired
 };
 
 export default CarouselMain;

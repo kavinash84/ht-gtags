@@ -5,8 +5,6 @@ const SliderItem = require('../../data/ShopByOccasion.js');
 
 export default class ShopByOccasion extends Component {
   render() {
-    const styles = require('./ShopByOccasion.scss');
-
     return (
       <div>
         <div className="head">
@@ -18,7 +16,7 @@ export default class ShopByOccasion extends Component {
         </div>
         <Carousel
           autoPlayVal={false}
-          className={styles.catSlider}
+          className="catSlider"
           showThumbsVal={false}
           showStatusVal={false}
           showArrowsVal={false}
@@ -27,6 +25,7 @@ export default class ShopByOccasion extends Component {
           centerModeVal
           centerSlidePercentageVal={42}
           sliderImages={SliderItem}
+          titleStatus
         />
       </div>
     );
