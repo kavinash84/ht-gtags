@@ -1,4 +1,4 @@
-import { App, Home, HomeSlider, NotFound } from 'containers';
+import { App, Home, HomeSlider, ShopByOccasion, NotFound } from 'containers';
 
 const routes = [
   {
@@ -6,6 +6,7 @@ const routes = [
     routes: [
       { path: '/', exact: true, component: Home },
       { path: '/home-slider', exact: true, component: HomeSlider },
+      { path: '/shop-by-occasion', exact: true, component: ShopByOccasion },
       { component: NotFound }
     ]
   }

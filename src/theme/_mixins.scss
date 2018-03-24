@@ -2,7 +2,7 @@
   font-family: 'SFPD#{$type}';
 }
 @mixin font-size($size) {
-  font-size: #{$size}'rem';
+  font-size: #{$size};
 }
 @mixin border($borderWidth, $borderColor, $borderType) {
   @if $borderType == 'full' {
@@ -13,15 +13,15 @@
 }
 @mixin margin($type, $size) {
   @if $type == 'both' {
-    margin: $size
+    margin: #{$size}px
   } @else {
-    margin-#{$type}: $size
+    margin-#{$type}: #{$size}px
   }
 }
 @mixin padding($type, $size) {
   @if $type == 'both' {
-    padding: $size
+    padding: #{$size}px
   } @else {
-    padding-#{$type}: $size
+    padding-#{$type}: #{$size}px
   }
 }

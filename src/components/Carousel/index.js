@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { Carousel } from 'react-responsive-carousel';
 import CarouselItem from '../Carousel/CarouselItem.js';
 
-const MainSliderItem = require('../../data/MainSliderItem.js');
-
 const CarouselMain = ({
   autoPlayVal,
   showThumbsVal,
@@ -12,7 +10,10 @@ const CarouselMain = ({
   showIndicatorsVal,
   infiniteLoopVal,
   centerModeVal,
-  centerSlidePercentageVal
+  showArrowsVal,
+  centerSlidePercentageVal,
+  className,
+  sliderImages
 }) => (
   <Carousel
     autoPlay={autoPlayVal}
@@ -22,8 +23,10 @@ const CarouselMain = ({
     infiniteLoop={infiniteLoopVal}
     centerMode={centerModeVal}
     centerSlidePercentage={centerSlidePercentageVal}
+    className={className}
+    showArrows={showArrowsVal}
   >
-    {MainSliderItem.map(slide => (
+    {sliderImages.map(slide => (
       <CarouselItem key={slide.id} itemIndex={slide.id} title={slide.title} img={slide.img} />
     ))}
   </Carousel>
@@ -36,7 +39,10 @@ CarouselMain.propTypes = {
   showIndicatorsVal: PropTypes.bool.isRequired,
   centerModeVal: PropTypes.bool.isRequired,
   infiniteLoopVal: PropTypes.bool.isRequired,
-  centerSlidePercentageVal: PropTypes.string.isRequired
+  centerSlidePercentageVal: PropTypes.string.isRequired,
+  className: PropTypes.string.isRequired,
+  showArrowsVal: PropTypes.bool.isRequired,
+  sliderImages: PropTypes.object.isRequired
 };
 
 export default CarouselMain;
