@@ -6,12 +6,11 @@ const SliderItem = require('../../data/MainSliderItem.js');
 
 export default class HomeSlider extends Component {
   render() {
-    // const styles = require('./HomeSlider.scss');
-
     return (
       <div>
         <Carousel
           autoPlayVal
+          className="homeSlider"
           showThumbsVal={false}
           showStatusVal={false}
           showIndicatorsVal

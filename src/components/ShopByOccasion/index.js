@@ -25,7 +25,7 @@ export default class ShopByOccasion extends Component {
           centerModeVal
           centerSlidePercentageVal={42}
           sliderImages={SliderItem}
-          titleStatus
+          contentStatus
         />
       </div>
     );

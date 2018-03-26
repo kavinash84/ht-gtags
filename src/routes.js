@@ -1,4 +1,13 @@
-import { App, Home, HomeSlider, ShopByOccasion, ShopByRoom, ShopByStyle, NotFound } from 'containers';
+import {
+  App,
+  Home,
+  HomeSlider,
+  ShopByOccasion,
+  ShopByRoom,
+  ShopByStyle,
+  RecommendedForYou,
+  NotFound
+} from 'containers';
 
 const routes = [
   {
@@ -9,6 +18,7 @@ const routes = [
       { path: '/shop-by-occasion', exact: true, component: ShopByOccasion },
       { path: '/shop-by-room', exact: true, component: ShopByRoom },
       { path: '/shop-by-style', exact: true, component: ShopByStyle },
+      { path: '/recommended-for-you', exact: true, component: RecommendedForYou },
       { component: NotFound }
     ]
   }
