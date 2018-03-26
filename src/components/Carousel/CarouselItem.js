@@ -21,7 +21,6 @@ const CarouseItem = ({
               </span>
             </div>
             <div className={styles.rating}>{itemData.rating}</div>
-            <div className={styles.tags}>{itemData.tags}</div>
           </div>
         )}
       </div>

@@ -6,7 +6,7 @@ const SliderItem = require('../../data/ShopByStyle.js');
 export default class ShopByStyle extends Component {
   render() {
     return (
-      <div>
+      <section>
         <div className="head">
           <div className="container">
             <div className="title">
@@ -27,7 +27,7 @@ export default class ShopByStyle extends Component {
           sliderImages={SliderItem}
           contentStatus
         />
-      </div>
+      </section>
     );
   }
 }

@@ -6,7 +6,7 @@ const SliderItem = require('../../data/RecommendedForYou.js');
 export default class RecommendedForYou extends Component {
   render() {
     return (
-      <div className="prodSlider">
+      <section className="prodSlider">
         <div className="head">
           <div className="container">
             <div className="title">
@@ -28,7 +28,7 @@ export default class RecommendedForYou extends Component {
           contentStatus
           typeOfSlider="productSlider"
         />
-      </div>
+      </section>
     );
   }
 }

@@ -6,7 +6,7 @@ const SliderItem = require('../../data/RecentlyViewedProducts.js');
 export default class RecentlyViewedProducts extends Component {
   render() {
     return (
-      <div className="prodSlider">
+      <section className="prodSlider">
         <div className="head">
           <div className="container">
             <div className="title">
@@ -28,7 +28,7 @@ export default class RecentlyViewedProducts extends Component {
           contentStatus
           typeOfSlider="productSlider"
         />
-      </div>
+      </section>
     );
   }
 }

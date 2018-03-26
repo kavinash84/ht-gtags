@@ -264,10 +264,10 @@ h1,h2,h3,h4,h5,h6,a,span {
 	}
 	.carousel .control-arrow:before,
 	.carousel.carousel-slider .control-arrow:before {
-		margin: 0 5px;
+		margin: 0 0 0 -3px;
 		display: inline-block;
-		border-top: 8px solid transparent;
-		border-bottom: 8px solid transparent;
+		border-top: 7px solid transparent;
+		border-bottom: 7px solid transparent;
 		content: '';
 	}
 	.carousel .control-disabled.control-arrow {
@@ -280,13 +280,14 @@ h1,h2,h3,h4,h5,h6,a,span {
 		left: 25px;
 	}
 	.carousel .control-prev.control-arrow:before {
-		border-right: 8px solid #000;
+		border-right: 7px solid #000;
 	}
 	.carousel .control-next.control-arrow {
 		right: 25px;
+		margin: 0 0 0 3px !important;
 	}
 	.carousel .control-next.control-arrow:before {
-		border-left: 8px solid #000;
+		border-left: 7px solid #000;
 	}
 	.carousel {
 		position: relative;
@@ -364,14 +365,13 @@ h1,h2,h3,h4,h5,h6,a,span {
 	.carousel.carousel-slider .control-arrow {
 		top: 0;
 		color: #fff;
-		font-size: 26px;
+		font-size: 24px;
 		bottom: 0;
 		margin-top: 0;
-		padding: 5px;
 		background: #FFF;
     border-radius: 5000px;
-    width: 42px;
-    height: 42px;
+    width: 34px;
+    height: 34px;
     top: 50%;
 	}
 	.carousel.carousel-slider .control-arrow:hover {
@@ -548,7 +548,6 @@ h1,h2,h3,h4,h5,h6,a,span {
 	.catSlider {
 	  ul {
 	    padding-right: 40px !important;
-	    padding-bottom: 10px !important;
 	  }
 	  li {
 	    margin: 0 0 0 15px !important;
@@ -559,7 +558,7 @@ h1,h2,h3,h4,h5,h6,a,span {
 	  }
 	}
 	.prodSlider {
-		padding: 0;
+		padding: 20px 0 10px;
 	  ul {
 	    padding-right: 0 !important;
 	  }
@@ -568,13 +567,19 @@ h1,h2,h3,h4,h5,h6,a,span {
 			padding: 0 15px;
 		}
 		.control-arrow {
-	    top: calc(50% - 72px) !important;
+	    top: calc(50% - 60px) !important;
 	  }
 	}
 	.homeSlider {
 	  .control-arrow {
 	    top: calc(50% - 21px) !important;
 	  }
+		.control-next {
+    	right: 15px !important;
+		}
+		.control-prev {
+    	left: 15px !important;
+		}
 	}
 	/* ---- End of Common Classes ---- */
 }

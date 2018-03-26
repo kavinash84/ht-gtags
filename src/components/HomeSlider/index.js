@@ -7,7 +7,7 @@ const SliderItem = require('../../data/MainSliderItem.js');
 export default class HomeSlider extends Component {
   render() {
     return (
-      <div>
+      <div className="mgBottom10">
         <Carousel
           autoPlayVal
           className="homeSlider"
