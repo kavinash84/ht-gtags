@@ -5,4 +5,6 @@ export ShopByOccasion from './ShopByOccasion/ShopByOccasion';
 export ShopByRoom from './ShopByRoom/ShopByRoom';
 export ShopByStyle from './ShopByStyle/ShopByStyle';
 export RecommendedForYou from './RecommendedForYou/RecommendedForYou';
+export TopSellingProducts from './TopSellingProducts/TopSellingProducts';
+export RecentlyViewedProducts from './RecentlyViewedProducts/RecentlyViewedProducts';
 export NotFound from './NotFound/NotFound';
