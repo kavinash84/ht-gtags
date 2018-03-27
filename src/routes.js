@@ -8,6 +8,7 @@ import {
   RecommendedForYou,
   TopSellingProducts,
   RecentlyViewedProducts,
+  Menu,
   NotFound
 } from 'containers';
 
@@ -23,6 +24,7 @@ const routes = [
       { path: '/recommended-for-you', exact: true, component: RecommendedForYou },
       { path: '/top-selling-products', exact: true, component: TopSellingProducts },
       { path: '/recently-viewed-products', exact: true, component: RecentlyViewedProducts },
+      { path: '/menu', exact: true, component: Menu },
       { component: NotFound }
     ]
   }

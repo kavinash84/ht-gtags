@@ -7,4 +7,5 @@ export ShopByStyle from './ShopByStyle/ShopByStyle';
 export RecommendedForYou from './RecommendedForYou/RecommendedForYou';
 export TopSellingProducts from './TopSellingProducts/TopSellingProducts';
 export RecentlyViewedProducts from './RecentlyViewedProducts/RecentlyViewedProducts';
+export Menu from './Menu/Menu';
 export NotFound from './NotFound/NotFound';

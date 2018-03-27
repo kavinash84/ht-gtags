@@ -1,0 +1,46 @@
+@import "../../theme/variables";
+@import "../../theme/mixins";
+@import "../../theme/normalize";
+
+.sidebar {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: transform .3s ease;
+  overflow: scroll;
+  z-index: 1000;
+  .hide {
+    transform: translate3d(-100vw, 0, 0);
+  }
+  .show {
+    transform: translate3d(0vw, 0, 0);
+    overflow: hidden;
+  }
+  .sidebarContainer {
+    max-width: 280px;
+    background: #FFF;
+    height: 100vh;
+  }
+}
+.sidebarUserDetails {
+  p {
+    font-size: 1.2rem;
+    color: $text;
+  }
+}
+.sidebarProfileMenu {
+  background-color: rgba(216, 216, 216, 1);
+  ul {
+    li {
+      border-bottom: solid 1px #ededed;
+      a {
+        color: #614839;
+        font-size: 1rem;
+        @include font-family('Medium');
+      }
+    }
+  }
+}
