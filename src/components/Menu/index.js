@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import Hamburger from 'components/Hamburger';
-import SideBar from 'components/SideBar';
 import NavBar from 'components/NavBar';
+import MenuSidebar from './MenuSidebar';
 
 // const MenuItem = require('../../data/Menu.js');
 
@@ -12,9 +11,8 @@ export default class Menu extends Component {
     return (
       <div className={styles.menuContainer}>
         <div className="container">
-          <Hamburger />
+          <MenuSidebar />
           <NavBar />
-          <SideBar />
         </div>
       </div>
     );

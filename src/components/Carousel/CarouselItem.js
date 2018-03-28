@@ -30,9 +30,13 @@ const CarouseItem = ({
   </div>
 );
 
+CarouseItem.defaultProps = {
+  img: ''
+};
+
 CarouseItem.propTypes = {
   itemData: PropTypes.object.isRequired,
-  img: PropTypes.string.isRequired,
+  img: PropTypes.string,
   contentStatus: PropTypes.bool.isRequired,
   typeOfSlider: PropTypes.string.isRequired
 };

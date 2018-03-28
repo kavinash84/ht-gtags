@@ -119,6 +119,9 @@ textarea {
 }
 button {
   overflow: visible;
+  &:hover, &:focus {
+    outline: none;
+  }
 }
 button,
 select {

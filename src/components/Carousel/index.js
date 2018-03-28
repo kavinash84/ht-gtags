@@ -48,10 +48,10 @@ CarouselMain.propTypes = {
   showIndicatorsVal: PropTypes.bool.isRequired,
   centerModeVal: PropTypes.bool.isRequired,
   infiniteLoopVal: PropTypes.bool.isRequired,
-  centerSlidePercentageVal: PropTypes.string.isRequired,
+  centerSlidePercentageVal: PropTypes.number.isRequired,
   className: PropTypes.string.isRequired,
   showArrowsVal: PropTypes.bool.isRequired,
-  sliderImages: PropTypes.object.isRequired,
+  sliderImages: PropTypes.array.isRequired,
   contentStatus: PropTypes.bool.isRequired,
   typeOfSlider: PropTypes.string.isRequired
 };

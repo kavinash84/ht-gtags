@@ -29,6 +29,36 @@ const menuItems = [
     id: 6,
     title: 'Kitchen & Dining',
     url: 'http://via.placeholder.com/720x448/FF7CBF?text=Slide%202'
+  },
+  {
+    id: 7,
+    title: 'Furniture',
+    url: 'http://via.placeholder.com/720x448/FFC720?text=Slide%201'
+  },
+  {
+    id: 8,
+    title: 'Kitchen & Dining',
+    url: 'http://via.placeholder.com/720x448/FF7CBF?text=Slide%202'
+  },
+  {
+    id: 9,
+    title: 'Furniture',
+    url: 'http://via.placeholder.com/720x448/FFC720?text=Slide%201'
+  },
+  {
+    id: 10,
+    title: 'Kitchen & Dining',
+    url: 'http://via.placeholder.com/720x448/FF7CBF?text=Slide%202'
+  },
+  {
+    id: 11,
+    title: 'Furniture',
+    url: 'http://via.placeholder.com/720x448/FFC720?text=Slide%201'
+  },
+  {
+    id: 12,
+    title: 'Kitchen & Dining',
+    url: 'http://via.placeholder.com/720x448/FF7CBF?text=Slide%202'
   }
 ];
 
