@@ -1,0 +1,25 @@
+@import "../../theme/variables";
+@import "../../theme/mixins";
+@import "../../theme/global";
+
+.navBar {
+  padding: 10px 0;
+  display: inline-block;
+}
+.homeIcon {
+  float: left;
+}
+.navBarSlider {
+  float: right;
+  width: calc(100% - 40px);
+  a {
+    font-size: 0.8rem;
+    @include font-family('Medium');
+    color: $text-dark;
+    p {
+      margin: 0 !important;
+      font-size: 0.9rem !important;
+      white-space: nowrap;
+    }
+  }
+}

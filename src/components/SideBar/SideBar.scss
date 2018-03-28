@@ -1,6 +1,5 @@
 @import "../../theme/variables";
 @import "../../theme/mixins";
-@import "../../theme/normalize";
 
 .sidebar {
   width: 100vw;
@@ -12,10 +11,11 @@
   transition: transform .3s ease;
   overflow: scroll;
   z-index: 1000;
-  .hide {
+  transform: translate3d(-100vw, 0, 0);
+  &.hide {
     transform: translate3d(-100vw, 0, 0);
   }
-  .show {
+  &.show {
     transform: translate3d(0vw, 0, 0);
     overflow: hidden;
   }
@@ -28,7 +28,7 @@
 .sidebarUserDetails {
   background-color: #ffffff;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.03);
-  padding: 2rem 1.5rem 1rem;
+  padding: 2.3rem 1.5rem 1rem;
   img {
     border-radius: 100%;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.16), 0 0 10px 0 rgba(0, 0, 0, 0.04);
@@ -60,4 +60,9 @@
       }
     }
   }
+}
+.closeIcon {
+  position: absolute;
+  right: 1.5rem;
+  top: 2.3rem;
 }

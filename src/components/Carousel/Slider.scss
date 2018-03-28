@@ -1,6 +1,5 @@
 @import "../../theme/variables";
 @import "../../theme/mixins";
-@import "../../theme/normalize";
 
 .content {
   text-align: left;
@@ -46,6 +45,10 @@
     color: $secondary;
     @include font-size(0.9rem);
   }
+}
+
+.link {
+  display: block;
 }
 
 .prodSliderItem {

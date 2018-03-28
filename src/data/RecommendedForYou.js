@@ -9,7 +9,8 @@ const sliderItems = [
     percentage: '5%',
     rating: '5',
     tags: '#minimalist   #garcia   #oneseater   #bachelorfriendly',
-    img: 'http://via.placeholder.com/300x300/FFC720?text=Martin%20Half%20Leather%20Single%20Seater%20Sofa'
+    img: 'http://via.placeholder.com/300x300/FFC720?text=Martin%20Half%20Leather%20Single%20Seater%20Sofa',
+    url: 'http://via.placeholder.com/720x448/FFC720?text=Slide%201'
   },
   {
     id: 2,
@@ -20,7 +21,8 @@ const sliderItems = [
     percentage: '5%',
     rating: '4',
     tags: '#minimalist   #garcia   #oneseater   #bachelorfriendly',
-    img: 'http://via.placeholder.com/300x300/FF7CBF?text=Martin%20Half%20Leather%20Single%20Seater%20Sofa'
+    img: 'http://via.placeholder.com/300x300/FF7CBF?text=Martin%20Half%20Leather%20Single%20Seater%20Sofa',
+    url: 'http://via.placeholder.com/720x448/FFC720?text=Slide%201'
   },
   {
     id: 3,
@@ -42,7 +44,8 @@ const sliderItems = [
     percentage: '5%',
     rating: '2',
     tags: '#minimalist   #garcia   #oneseater   #bachelorfriendly',
-    img: 'http://via.placeholder.com/300x300/6F84FF?text=Martin%20Half%20Leather%20Single%20Seater%20Sofa'
+    img: 'http://via.placeholder.com/300x300/6F84FF?text=Martin%20Half%20Leather%20Single%20Seater%20Sofa',
+    url: 'http://via.placeholder.com/720x448/FFC720?text=Slide%201'
   },
   {
     id: 5,
@@ -53,7 +56,8 @@ const sliderItems = [
     percentage: '5%',
     rating: '5',
     tags: '#minimalist   #garcia   #oneseater   #bachelorfriendly',
-    img: 'http://via.placeholder.com/300x300/FF7CBF?text=Martin%20Half%20Leather%20Single%20Seater%20Sofa'
+    img: 'http://via.placeholder.com/300x300/FF7CBF?text=Martin%20Half%20Leather%20Single%20Seater%20Sofa',
+    url: 'http://via.placeholder.com/720x448/FFC720?text=Slide%201'
   }
 ];
 

@@ -26,6 +26,7 @@ export default class ShopByRoom extends Component {
           centerSlidePercentageVal={42}
           sliderImages={SliderItem}
           contentStatus
+          typeOfSlider="catSlider"
         />
       </section>
     );
