@@ -14,13 +14,19 @@ export default class SideBar extends Component {
           <div className={styles.sidebarProfileMenu}>
             <ul>
               <li>
-                <a href="#profInfo">Profile Information</a>
+                <a href="#profInfo">
+                  Profile Information <span>❯</span>
+                </a>
               </li>
               <li>
-                <a href="#myWishList">My Wishlist</a>
+                <a href="#myWishList">
+                  My Wishlist <span>❯</span>
+                </a>
               </li>
               <li>
-                <a href="#UpdatePassword">Update Password</a>
+                <a href="#UpdatePassword">
+                  Update Password <span>❯</span>
+                </a>
               </li>
             </ul>
           </div>

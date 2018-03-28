@@ -42,11 +42,11 @@ template {
 }
 a {
   background-color: transparent;
+  text-decoration: none;
   &:active,
   &:hover {
     outline: none;
     opacity: 0.8;
-    text-decoration: none;
     color: $primary;
   }
 }
