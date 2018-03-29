@@ -41,6 +41,10 @@ const CarouselMain = ({
   </Carousel>
 );
 
+CarouselMain.defaultProps = {
+  showArrowsVal: false
+};
+
 CarouselMain.propTypes = {
   autoPlayVal: PropTypes.bool.isRequired,
   showThumbsVal: PropTypes.bool.isRequired,
@@ -50,7 +54,7 @@ CarouselMain.propTypes = {
   infiniteLoopVal: PropTypes.bool.isRequired,
   centerSlidePercentageVal: PropTypes.number.isRequired,
   className: PropTypes.string.isRequired,
-  showArrowsVal: PropTypes.bool.isRequired,
+  showArrowsVal: PropTypes.bool,
   sliderImages: PropTypes.array.isRequired,
   contentStatus: PropTypes.bool.isRequired,
   typeOfSlider: PropTypes.string.isRequired

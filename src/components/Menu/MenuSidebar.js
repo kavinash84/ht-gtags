@@ -10,6 +10,7 @@ export default class MenuSidebar extends Component {
       open: !prevState.open
     }));
   };
+
   render() {
     const { open } = this.state;
     const styles = require('./MenuSidebar.scss');

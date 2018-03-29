@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
+import Menu from 'components/Menu';
 import MainSlider from 'components/HomeSlider';
 import ShopByOccasion from 'components/ShopByOccasion';
 import ShopByRoom from 'components/ShopByRoom';
@@ -20,6 +21,7 @@ export default class Home extends Component {
       <div className={styles.home}>
         <Helmet title="Home" />
         <div className="wrapper">
+          <Menu />
           <MainSlider />
           <ShopByOccasion />
           <ShopByRoom />
