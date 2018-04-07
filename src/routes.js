@@ -9,6 +9,7 @@ import {
   TopSellingProducts,
   RecentlyViewedProducts,
   Menu,
+  Listing,
   NotFound
 } from 'containers';
 
@@ -25,6 +26,7 @@ const routes = [
       { path: '/top-selling-products', exact: true, component: TopSellingProducts },
       { path: '/recently-viewed-products', exact: true, component: RecentlyViewedProducts },
       { path: '/menu', exact: true, component: Menu },
+      { path: '/listing', exact: true, component: Listing },
       { component: NotFound }
     ]
   }
