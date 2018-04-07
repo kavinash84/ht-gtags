@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import { renderRoutes } from 'react-router-config';
 import { withRouter } from 'react-router';
 import { provideHooks } from 'redial';
+import { ThemeProvider } from 'styled-components';
 import Helmet from 'react-helmet';
 import { load as loadInfo } from 'redux/modules/info';
 import config from 'config';
+import Theme from 'hometown-components/lib/Theme';
 
 @provideHooks({
   fetch: async ({ store: { dispatch } }) => {
@@ -32,10 +34,12 @@ export default class App extends Component {
     const styles = require('./App.scss');
     const { route } = this.props;
     return (
-      <div className={styles.app}>
-        <Helmet {...config.app.head} />
-        <main className={styles.appContent}>{renderRoutes(route.routes)}</main>
-      </div>
+      <ThemeProvider theme={Theme}>
+        <div className={styles.app}>
+          <Helmet {...config.app.head} />
+          <main className={styles.appContent}>{renderRoutes(route.routes)}</main>
+        </div>
+      </ThemeProvider>
     );
   }
 }
