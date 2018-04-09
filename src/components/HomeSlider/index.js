@@ -19,6 +19,7 @@ export default class HomeSlider extends Component {
           centerSlidePercentageVal={100}
           sliderImages={SliderItem}
           typeOfSlider="homeSlider"
+          contentStatus={false}
         />
       </div>
     );
