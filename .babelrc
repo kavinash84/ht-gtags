@@ -22,7 +22,7 @@
   ],
   "ignore": [
     "node_modules",
-    "/Applications/MAMP/htdocs/hometown/hometown-components"
+    "hometown-components"
   ],
   "env": {
     "development": {
