@@ -13,16 +13,16 @@ export default class Listing extends Component {
 
     return (
       <Div type="block">
-        <Container type="container" pr="1rem" pl="1rem">
-          <Section mb="0" pr="0.5rem" pl="0.5rem">
+        <Section mb="0.3125rem" pr="0.5rem" pl="0.5rem">
+          <Container type="container" pr="1rem" pl="1rem">
             <Row display="block" mr="0" ml="0">
-              <Heading fontSize="1.25rem" color="textDark" mb="0" mt="0">
+              <Heading fontSize="1.25rem" color="textDark" mb="0px" mt="0px" fontFamily="SFPDLight">
                 One Seater Sofas (74)
               </Heading>
             </Row>
-          </Section>
-        </Container>
-        <Section pt="1.25rem" mb="0" bg="sectionBgDark" boxShadow="0px 1px 9px 0px rgba(0, 0, 0, 0.20)">
+          </Container>
+        </Section>
+        <Section pt="1.25rem" mb="0" bg="sectionBgDark" boxShadow="0px 1px 6px 0px rgba(0,0,0,0.20)">
           <Container type="container" pr="0.5rem" pl="0.5rem">
             {ProductItems.map(item => <Product key={item.id} itemData={item} rating />)}
           </Container>
