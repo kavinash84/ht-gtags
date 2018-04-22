@@ -10,6 +10,7 @@ import {
   RecentlyViewedProducts,
   Menu,
   Listing,
+  Wishlist,
   NotFound
 } from 'containers';
 
@@ -27,6 +28,7 @@ const routes = [
       { path: '/recently-viewed-products', exact: true, component: RecentlyViewedProducts },
       { path: '/menu', exact: true, component: Menu },
       { path: '/listing', exact: true, component: Listing },
+      { path: '/wishlist', exact: true, component: Wishlist },
       { component: NotFound }
     ]
   }

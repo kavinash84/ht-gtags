@@ -7,7 +7,7 @@ import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
 import ProductItems from '../../data/RecentlyViewedProducts.js';
 
-export default class Listing extends Component {
+export default class Wishlist extends Component {
   render() {
     return (
       <Div type="block">
@@ -15,7 +15,7 @@ export default class Listing extends Component {
           <Container type="container" pr="1rem" pl="1rem">
             <Row display="block" mr="0" ml="0">
               <Heading fontSize="1.25rem" color="textDark" mb="0px" mt="0px" fontFamily="SFPDLight">
-                One Seater Sofas (74)
+                Wishlist
               </Heading>
             </Row>
           </Container>

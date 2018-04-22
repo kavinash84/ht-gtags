@@ -9,4 +9,5 @@ export TopSellingProducts from './TopSellingProducts/TopSellingProducts';
 export RecentlyViewedProducts from './RecentlyViewedProducts/RecentlyViewedProducts';
 export Menu from './Menu/Menu';
 export Listing from './Listing/Listing';
+export Wishlist from './Wishlist/Wishlist';
 export NotFound from './NotFound/NotFound';
