@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Container from 'hometown-components/lib/Container';
 
 export default class OtherMenu extends Component {
   render() {
@@ -6,7 +7,7 @@ export default class OtherMenu extends Component {
 
     return (
       <div className={styles.otherMenuContainer}>
-        <div className="container">
+        <Container type="container" pr="1rem" pl="1rem">
           <div className={styles.back}>
             <a href="#back">
               <img src="http://via.placeholder.com/20x20" alt="" />
@@ -20,7 +21,7 @@ export default class OtherMenu extends Component {
               <img src="http://via.placeholder.com/20x20" alt="" />
             </a>
           </div>
-        </div>
+        </Container>
       </div>
     );
   }

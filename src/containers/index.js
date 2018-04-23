@@ -10,4 +10,7 @@ export RecentlyViewedProducts from './RecentlyViewedProducts/RecentlyViewedProdu
 export Menu from './Menu/Menu';
 export Listing from './Listing/Listing';
 export Wishlist from './Wishlist/Wishlist';
+export Cart from './Cart/Cart';
+export CartTotal from 'components/CartTotal';
+
 export NotFound from './NotFound/NotFound';
