@@ -34,7 +34,7 @@ const CarouselMain = ({
         itemIndex={slide.id}
         itemData={slide}
         contentStatus={contentStatus}
-        img={slide.img}
+        img={slide.image}
         typeOfSlider={typeOfSlider}
       />
     ))}
