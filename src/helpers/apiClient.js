@@ -3,7 +3,7 @@ import config from 'config';
 
 export default function apiClient(req) {
   const instance = axios.create({
-    baseURL: `https://${config.apiHost}`
+    baseURL: `http://${config.apiHost}`
   });
 
   let token;
