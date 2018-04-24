@@ -43,6 +43,7 @@
 html, body {
   @include font-family('Regular');
   color: $text;
+	overflow-x: hidden;
 }
 
 h1,h2,h3,h4,h5,h6,a,span {
