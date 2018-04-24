@@ -13,7 +13,6 @@ import {
   Listing,
   Wishlist,
   Cart,
-  CartTotal,
   NotFound
 } from 'containers';
 
@@ -34,7 +33,6 @@ const routes = [
       { path: '/listing', exact: true, component: Listing },
       { path: '/wishlist', exact: true, component: Wishlist },
       { path: '/cart', exact: true, component: Cart },
-      { path: '/cart-total', exact: true, component: CartTotal },
       { component: NotFound }
     ]
   }
