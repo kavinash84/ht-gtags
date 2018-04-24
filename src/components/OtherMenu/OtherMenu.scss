@@ -1,0 +1,17 @@
+@import "../../theme/variables";
+@import "../../theme/mixins";
+
+.otherMenuContainer {
+  position: relative;
+  padding: 15px 5px 0;
+  margin-bottom: 30px;
+  .back {
+    float: left;
+  }
+  .rightBLock {
+    float: right;
+    a {
+      margin-left: 15px;
+    }
+  }
+}

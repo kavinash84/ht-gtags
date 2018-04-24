@@ -9,4 +9,9 @@ export TopSellingProducts from './TopSellingProducts/TopSellingProducts';
 export RecentlyViewedProducts from './RecentlyViewedProducts/RecentlyViewedProducts';
 export Menu from './Menu/Menu';
 export Login from './Login';
+export Listing from './Listing/Listing';
+export Wishlist from './Wishlist/Wishlist';
+export Cart from './Cart/Cart';
+export CartTotal from 'components/CartTotal';
+
 export NotFound from './NotFound/NotFound';
