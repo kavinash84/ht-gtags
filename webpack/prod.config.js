@@ -166,7 +166,7 @@ module.exports = {
 
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"',
-      'process.env.APIHOST': '"api.hometown.in"',
+      'process.env.APIHOST': '"ec2-18-216-80-5.us-east-2.compute.amazonaws.com/api/"',
       __CLIENT__: true,
       __SERVER__: false,
       __DEVELOPMENT__: false,
