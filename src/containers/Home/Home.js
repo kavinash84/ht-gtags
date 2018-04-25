@@ -5,10 +5,7 @@ import Menu from 'components/Menu';
 import MainSlider from 'components/MainSlider';
 import CategorySlider from 'components/CategorySlider';
 import { connect } from 'react-redux';
-
-import RecommendedForYou from 'components/RecommendedForYou';
-import TopSellingProducts from 'components/TopSellingProducts';
-import RecentlyViewedProducts from 'components/RecentlyViewedProducts';
+import ProductSlider from 'components/ProductSlider';
 
 @connect(state => ({
   shopByOccasion: state.shopByOccasion.data,
@@ -32,9 +29,9 @@ export default class Home extends Component {
           <CategorySlider categoryName="Shop by Occasion" data={shopByOccasion} />
           <CategorySlider categoryName="Shop by Room" data={shopByRoom} />
           <CategorySlider categoryName="Shop by Style" data={shopByStyle} />
-          <RecommendedForYou />
-          <TopSellingProducts />
-          <RecentlyViewedProducts />
+          <ProductSlider productSliderTitle="Recommended for you" />
+          <ProductSlider productSliderTitle="Top Selling Products" />
+          <ProductSlider productSliderTitle="Recently Viewed Products" />
         </div>
       </div>
     );
