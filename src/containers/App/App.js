@@ -10,6 +10,14 @@ import { loadStyles } from 'redux/modules/homepageCategories';
 import config from 'config';
 import Theme from 'hometown-components/lib/Theme';
 
+// import { bindActionCreators } from 'multireducer';
+// import * as counterActions from 'redux/modules/counter';
+//
+// @connect(
+//   (state, { multireducerKey: key }) => ({ count: state.counter[key].count }),
+//   (dispatch, { multireducerKey: key }) => bindActionCreators(counterActions, dispatch, key)
+// )
+
 @provideHooks({
   fetch: async ({ store: { dispatch } }) => {
     // await dispatch(loadInfo()).catch(() => null);

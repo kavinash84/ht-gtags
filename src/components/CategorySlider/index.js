@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Carousel from '../Carousel';
 
-const SliderItem = require('../../data/ShopByRoom.js');
+@connect(({ shopByStles }) => ({
+  ...shopByStles
+}))
 
-export default class ShopByRoom extends Component {
+export default class CategorySlider extends Component {
   render() {
+    const { data, categoryName } = this.props;
     return (
       <section>
         <div className="head">
           <div className="container">
             <div className="title">
-              <h4>Shop by Room</h4>
+              <h4>{categoryName}</h4>
             </div>
           </div>
         </div>
@@ -24,7 +29,7 @@ export default class ShopByRoom extends Component {
           infiniteLoopVal={false}
           centerModeVal
           centerSlidePercentageVal={42}
-          sliderImages={SliderItem}
+          sliderImages={data}
           contentStatus
           typeOfSlider="catSlider"
         />
@@ -32,3 +37,13 @@ export default class ShopByRoom extends Component {
     );
   }
 }
+
+CategorySlider.defaultProps = {
+  data: [],
+  categoryName: ''
+};
+
+CategorySlider.propTypes = {
+  data: PropTypes.array,
+  categoryName: PropTypes.string
+};
