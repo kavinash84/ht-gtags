@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import ProfileForm from 'hometown-components/lib/Forms/ProfileForm';
+import Container from 'hometown-components/lib/Container';
 import Section from 'hometown-components/lib/Section';
 import Row from 'hometown-components/lib/Row';
 import Heading from 'hometown-components/lib/Heading';
 import Div from 'hometown-components/lib/Div';
-import Link from 'hometown-components/lib/Link';
-import { Label } from 'hometown-components/lib/Label';
-import Img from 'hometown-components/lib/Img';
+import Menu from 'components/OtherMenu';
 import { validateEmail, isBlank } from 'js-utility-functions';
-
-const closeIcon = require('../../../static/closebutton.png');
 
 export default class ProfileFormContainer extends Component {
   constructor() {
@@ -86,66 +83,46 @@ export default class ProfileFormContainer extends Component {
       passwordErrorMessage
     } = this.state;
     return (
-      <div className={styles.signupWrapper}>
-        <Section p="0" mb="0.3125rem">
-          <div className={styles.imgWrapper}>
-            <Img src="http://via.placeholder.com/720x480" />
-            <div className={styles.back}>
-              <img src={closeIcon} alt="Back" />
-            </div>
-          </div>
-        </Section>
-        <Section mb="0" p="1.25rem" pt="1.5rem" pb="1.5rem">
-          <Row display="block" mr="0" ml="0">
-            <Div col="6">
-              <Heading mt="0" mb="0" color="textDark" fontSize="1.25em">
+      <div className={styles.formContainer}>
+        <Menu />
+        <Section mb="0.3125rem" pr="0.5rem" pl="0.5rem">
+          <Container type="container" pr="1rem" pl="1rem">
+            <Row display="block" mr="0" ml="0">
+              <Heading fontSize="1.25rem" color="textDark" mb="0px" mt="0px" fontFamily="SFPDLight">
                 Profile Information
               </Heading>
-            </Div>
-            <Div col="6" ta="right">
-              <Label fontFamily="light">
-                <Link href="#login" fontSize="0.875em">
-                  Existing User? Log in now
-                </Link>
-              </Label>
-            </Div>
-          </Row>
-          <Row display="block" mr="0" ml="0">
-            <Div mt="1.25rem">
-              <ProfileForm
-                email={email}
-                onChangeEmail={this.onChangeEmail}
-                emailFeedBackError={emailError}
-                emailFeedBackMessage={emailErrorMessage}
-                phone={phone}
-                onChangePhone={this.onChangePhone}
-                phoneFeedBackError={phoneError}
-                phoneFeedBackMessage={phoneErrorMessage}
-                password={password}
-                onChangePassword={this.onChangePassword}
-                passwordFeedBackError={passwordError}
-                passwordFeedBackMessage={passwordErrorMessage}
-                onSubmitLogin={this.onSubmitLogin}
-              />
-            </Div>
-          </Row>
-          <Row display="block" mr="0" ml="0" pt="1.25rem">
-            <Div col="6">
-              <Label fontFamily="light">
-                <Link href="#forgot" fontSize="0.875em">
-                  Forgot Password?
-                </Link>
-              </Label>
-            </Div>
-            <Div col="6" ta="right">
-              <Label fontFamily="light">
-                <Link href="#otp" fontSize="0.875em">
-                  Login via OTP?
-                </Link>
-              </Label>
-            </Div>
-          </Row>
+            </Row>
+          </Container>
         </Section>
+        <div className={styles.formWrapper}>
+          <Section
+            p="1.25rem"
+            mb="0"
+            bg="sectionBgDark"
+            boxShadow="0px 1px 6px 0px rgba(0,0,0,0.20)"
+            height="calc(100vh - 104px)"
+          >
+            <Row display="block" mr="0" ml="0">
+              <Div>
+                <ProfileForm
+                  email={email}
+                  onChangeEmail={this.onChangeEmail}
+                  emailFeedBackError={emailError}
+                  emailFeedBackMessage={emailErrorMessage}
+                  phone={phone}
+                  onChangePhone={this.onChangePhone}
+                  phoneFeedBackError={phoneError}
+                  phoneFeedBackMessage={phoneErrorMessage}
+                  password={password}
+                  onChangePassword={this.onChangePassword}
+                  passwordFeedBackError={passwordError}
+                  passwordFeedBackMessage={passwordErrorMessage}
+                  onSubmitLogin={this.onSubmitLogin}
+                />
+              </Div>
+            </Row>
+          </Section>
+        </div>
       </div>
     );
   }
