@@ -1,7 +1,6 @@
 import {
   App,
   Home,
-  HomeSlider,
   RecommendedForYou,
   TopSellingProducts,
   RecentlyViewedProducts,
@@ -19,7 +18,6 @@ const routes = [
     component: App,
     routes: [
       { path: '/', exact: true, component: Home },
-      { path: '/home-slider', exact: true, component: HomeSlider },
       { path: '/recommended-for-you', exact: true, component: RecommendedForYou },
       { path: '/top-selling-products', exact: true, component: TopSellingProducts },
       { path: '/recently-viewed-products', exact: true, component: RecentlyViewedProducts },

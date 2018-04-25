@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import Menu from 'components/Menu';
-import MainSlider from 'components/HomeSlider';
+import BannersSlider from 'components/HomePageBanners';
 import CategorySlider from 'components/CategorySlider';
 import { connect } from 'react-redux';
 
@@ -25,7 +25,7 @@ export default class Home extends Component {
         <Helmet title="Home" />
         <div className="wrapper">
           <Menu />
-          <MainSlider />
+          <BannersSlider />
           <CategorySlider categoryName="Shop by Occasion" data={shopByOccasion} />
           <CategorySlider categoryName="Shop by Room" data={shopByRoom} />
           <CategorySlider categoryName="Shop by Style" data={shopByStyle} />
