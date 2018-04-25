@@ -11,6 +11,9 @@ import {
   Listing,
   Wishlist,
   Cart,
+  Profile,
+  UpdatePassword,
+  Payment,
   NotFound
 } from 'containers';
 
@@ -29,6 +32,9 @@ const routes = [
       { path: '/listing', exact: true, component: Listing },
       { path: '/wishlist', exact: true, component: Wishlist },
       { path: '/cart', exact: true, component: Cart },
+      { path: '/profile', exact: true, component: Profile },
+      { path: '/update-password', exact: true, component: UpdatePassword },
+      { path: '/payment', exact: true, component: Payment },
       { component: NotFound }
     ]
   }

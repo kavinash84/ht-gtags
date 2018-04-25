@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SignupForm from 'hometown-components/lib/Forms/SignupForm';
+import UpdatePasswordForm from 'hometown-components/lib/Forms/UpdatePasswordForm';
 import Section from 'hometown-components/lib/Section';
 import Row from 'hometown-components/lib/Row';
 import Heading from 'hometown-components/lib/Heading';
@@ -7,11 +7,11 @@ import Div from 'hometown-components/lib/Div';
 import Link from 'hometown-components/lib/Link';
 import { Label } from 'hometown-components/lib/Label';
 import Img from 'hometown-components/lib/Img';
-import { validateEmail, isBlank, validateMobile } from 'js-utility-functions';
+import { validateEmail, isBlank } from 'js-utility-functions';
 
 const closeIcon = require('../../../static/closebutton.png');
 
-export default class SignupFormContainer extends Component {
+export default class UpdatePasswordContainer extends Component {
   constructor() {
     super();
     this.state = {
@@ -37,11 +37,11 @@ export default class SignupFormContainer extends Component {
   };
   onChangePhone = e => {
     const { target: { value } } = e;
-    const checkError = validateMobile(value, 'Mobile should be 10 digits');
+    const checkError = isBlank(value);
     this.setState({
       phone: value,
       phoneError: checkError.error,
-      phoneErrorMessage: checkError.error ? checkError.errorMessage : ''
+      phoneErrorMessage: checkError ? "Phone can't be blank" : ''
     });
   };
   onChangePassword = e => {
@@ -53,18 +53,18 @@ export default class SignupFormContainer extends Component {
       passwordErrorMessage: checkError ? "Password can't be blank" : ''
     });
   };
-  onSubmitSignup = e => {
+  onSubmitLogin = e => {
     e.preventDefault();
     const { email, password, phone } = this.state;
     const checkEmail = validateEmail(email, 'Invalid Email');
-    const checkPhone = validateMobile(phone, 'Mobile no. should be 10 digits');
+    const checkPhone = isBlank(phone);
     const checkPassword = isBlank(password);
     if (checkEmail.error || checkPassword || checkPhone) {
       return this.setState({
         emailError: checkEmail.error,
         emailErrorMessage: checkEmail.errorMessage,
         phoneError: checkPhone.error,
-        phoneErrorMessage: checkPhone.errorMessage,
+        phoneErrorMessage: checkPhone ? "Phone can't be blank" : '',
         passwordError: checkPassword,
         passwordErrorMessage: checkPassword ? "Password can't be blank" : ''
       });
@@ -99,7 +99,7 @@ export default class SignupFormContainer extends Component {
           <Row display="block" mr="0" ml="0">
             <Div col="6">
               <Heading mt="0" mb="0" color="textDark" fontSize="1.25em">
-                Sign Up
+                Update Password
               </Heading>
             </Div>
             <Div col="6" ta="right">
@@ -112,7 +112,7 @@ export default class SignupFormContainer extends Component {
           </Row>
           <Row display="block" mr="0" ml="0">
             <Div mt="1.25rem">
-              <SignupForm
+              <UpdatePasswordForm
                 email={email}
                 onChangeEmail={this.onChangeEmail}
                 emailFeedBackError={emailError}
@@ -125,7 +125,7 @@ export default class SignupFormContainer extends Component {
                 onChangePassword={this.onChangePassword}
                 passwordFeedBackError={passwordError}
                 passwordFeedBackMessage={passwordErrorMessage}
-                onSubmitSignup={this.onSubmitSignup}
+                onSubmitLogin={this.onSubmitLogin}
               />
             </Div>
           </Row>
