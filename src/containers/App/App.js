@@ -6,14 +6,14 @@ import { provideHooks } from 'redial';
 import { ThemeProvider } from 'styled-components';
 import Helmet from 'react-helmet';
 // import { load as loadInfo } from 'redux/modules/info';
-import { load as shopByStyles } from 'redux/modules/shopByStyles';
+import { loadStyles } from 'redux/modules/homepageCategories';
 import config from 'config';
 import Theme from 'hometown-components/lib/Theme';
 
 @provideHooks({
   fetch: async ({ store: { dispatch } }) => {
     // await dispatch(loadInfo()).catch(() => null);
-    await dispatch(shopByStyles()).catch(error => console.log(error));
+    await dispatch(loadStyles()).catch(error => console.log(error));
   }
 })
 @withRouter

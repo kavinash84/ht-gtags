@@ -32,9 +32,16 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-export function load() {
+export function loadStyles() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: ({ client }) => client.get('/tesla/styles/')
+    promise: ({ client }) => client.get('tesla/styles/')
+  };
+}
+
+export function loadOccasions() {
+  return {
+    types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
+    promise: ({ client }) => client.get('tesla/occasions/')
   };
 }
