@@ -16,8 +16,10 @@ import Theme from 'hometown-components/lib/Theme';
 @provideHooks({
   fetch: async ({ store: { dispatch } }) => {
     await dispatch(loadBanners()).catch(() => null);
-    dispatch(loadStyles()).catch(error => console.log(error));
-    dispatch(loadOccasions()).catch(error => console.log(error));
+    await dispatch(loadStyles()).catch(error => console.log(error));
+    await dispatch(loadOccasions()).catch(error => console.log(error));
+  },
+  defer: ({ store: { dispatch } }) => {
     dispatch(loadRooms()).catch(error => console.log(error));
   }
 })
