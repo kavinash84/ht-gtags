@@ -9,6 +9,8 @@ import { Label } from 'hometown-components/lib/Label';
 import Img from 'hometown-components/lib/Img';
 import { validateEmail, isBlank } from 'js-utility-functions';
 
+const closeIcon = require('../../../static/closebutton.png');
+
 export default class LoginFormContainer extends Component {
   constructor() {
     super();
@@ -66,20 +68,22 @@ export default class LoginFormContainer extends Component {
           <div className={styles.imgWrapper}>
             <Img src="http://via.placeholder.com/720x480" />
             <div className={styles.back}>
-              <img src="http://via.placeholder.com/14x14" alt="Back" />
+              <img src={closeIcon} alt="Back" />
             </div>
           </div>
         </Section>
         <Section mb="0" p="1.25rem" pt="1.5rem" pb="1.5rem">
           <Row display="block" mr="0" ml="0">
             <Div col="6">
-              <Heading mt="0" mb="0" color="textDark">
+              <Heading mt="0" mb="0" color="textDark" fontSize="1.25em">
                 Login
               </Heading>
             </Div>
             <Div col="6" ta="right">
               <Label fontFamily="light">
-                <Link href="#login">New User? Sign Up now</Link>
+                <Link href="#login" fontSize="0.875em">
+                  New User? Sign Up now
+                </Link>
               </Label>
             </Div>
           </Row>
@@ -101,12 +105,16 @@ export default class LoginFormContainer extends Component {
           <Row display="block" mr="0" ml="0" pt="1.5625rem">
             <Div col="6">
               <Label fontFamily="light">
-                <Link href="#forgot">Forgot Password?</Link>
+                <Link href="#forgot" fontSize="0.875em">
+                  Forgot Password?
+                </Link>
               </Label>
             </Div>
             <Div col="6" ta="right">
               <Label fontFamily="light">
-                <Link href="#otp">Login via OTP?</Link>
+                <Link href="#otp" fontSize="0.875em">
+                  Login via OTP?
+                </Link>
               </Label>
             </Div>
           </Row>

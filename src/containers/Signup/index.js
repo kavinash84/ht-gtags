@@ -86,7 +86,7 @@ export default class SignupFormContainer extends Component {
       passwordErrorMessage
     } = this.state;
     return (
-      <div className={styles.loginWrapper}>
+      <div className={styles.signupWrapper}>
         <Section p="0" mb="0.3125rem">
           <div className={styles.imgWrapper}>
             <Img src="http://via.placeholder.com/720x480" />
@@ -98,13 +98,15 @@ export default class SignupFormContainer extends Component {
         <Section mb="0" p="1.25rem" pt="1.5rem" pb="1.5rem">
           <Row display="block" mr="0" ml="0">
             <Div col="6">
-              <Heading mt="0" mb="0" color="textDark">
+              <Heading mt="0" mb="0" color="textDark" fontSize="1.25em">
                 Sign Up
               </Heading>
             </Div>
             <Div col="6" ta="right">
               <Label fontFamily="light">
-                <Link href="#login">Existing User? Log in now</Link>
+                <Link href="#login" fontSize="0.875em">
+                  Existing User? Log in now
+                </Link>
               </Label>
             </Div>
           </Row>
@@ -130,12 +132,16 @@ export default class SignupFormContainer extends Component {
           <Row display="block" mr="0" ml="0" pt="1.5625rem">
             <Div col="6">
               <Label fontFamily="light">
-                <Link href="#forgot">Forgot Password?</Link>
+                <Link href="#forgot" fontSize="0.875em">
+                  Forgot Password?
+                </Link>
               </Label>
             </Div>
             <Div col="6" ta="right">
               <Label fontFamily="light">
-                <Link href="#otp">Login via OTP?</Link>
+                <Link href="#otp" fontSize="0.875em">
+                  Login via OTP?
+                </Link>
               </Label>
             </Div>
           </Row>
