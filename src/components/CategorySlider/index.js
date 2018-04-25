@@ -1,37 +1,32 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Carousel from '../Carousel';
 
-export default class CategorySlider extends Component {
-  render() {
-    const { data, categoryName } = this.props;
-    return (
-      <section>
-        <div className="head">
-          <div className="container">
-            <div className="title">
-              <h4>{categoryName}</h4>
-            </div>
-          </div>
+const CategorySlider = ({ data, categoryName }) => (
+  <section>
+    <div className="head">
+      <div className="container">
+        <div className="title">
+          <h4>{categoryName}</h4>
         </div>
-        <Carousel
-          autoPlayVal={false}
-          className="catSlider"
-          showThumbsVal={false}
-          showStatusVal={false}
-          showArrowsVal={false}
-          showIndicatorsVal={false}
-          infiniteLoopVal={false}
-          centerModeVal
-          centerSlidePercentageVal={42}
-          sliderImages={data}
-          contentStatus
-          typeOfSlider="catSlider"
-        />
-      </section>
-    );
-  }
-}
+      </div>
+    </div>
+    <Carousel
+      autoPlayVal={false}
+      className="catSlider"
+      showThumbsVal={false}
+      showStatusVal={false}
+      showArrowsVal={false}
+      showIndicatorsVal={false}
+      infiniteLoopVal={false}
+      centerModeVal
+      centerSlidePercentageVal={42}
+      sliderImages={data}
+      contentStatus
+      typeOfSlider="catSlider"
+    />
+  </section>
+);
 
 CategorySlider.defaultProps = {
   data: [],
@@ -42,3 +37,5 @@ CategorySlider.propTypes = {
   data: PropTypes.array,
   categoryName: PropTypes.string
 };
+
+export default CategorySlider;
