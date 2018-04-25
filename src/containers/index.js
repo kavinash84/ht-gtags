@@ -13,5 +13,5 @@ export Listing from './Listing/Listing';
 export Wishlist from './Wishlist/Wishlist';
 export Cart from './Cart/Cart';
 export CartTotal from 'components/CartTotal';
-
+export Signup from 'containers/Signup';
 export NotFound from './NotFound/NotFound';
