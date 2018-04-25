@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-// import 'react-responsive-carousel/lib/styles/carousel.css';
+import PropTypes from 'prop-types';
 import Carousel from '../Carousel';
 
-const SliderItem = require('../../data/MainSliderItem.js');
 
-export default class HomeSlider extends Component {
+export default class MainSlider extends Component {
   render() {
+    const { data } = this.props;
     return (
       <div className="mgBottom10">
         <Carousel
@@ -17,7 +17,7 @@ export default class HomeSlider extends Component {
           infiniteLoopVal
           centerModeVal={false}
           centerSlidePercentageVal={100}
-          sliderImages={SliderItem}
+          sliderImages={data}
           typeOfSlider="homeSlider"
           contentStatus={false}
         />
@@ -25,3 +25,11 @@ export default class HomeSlider extends Component {
     );
   }
 }
+
+MainSlider.defaultProps = {
+  data: []
+};
+
+MainSlider.propTypes = {
+  data: PropTypes.array
+};

@@ -2,12 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Carousel from '../Carousel';
 
-const CategorySlider = ({ data, categoryName }) => (
-  <section>
+const SliderItem = require('../../data/RecentlyViewedProducts.js');
+
+const ProductSlider = ({ productSliderTitle }) => (
+  <section className="prodSlider">
     <div className="head">
       <div className="container">
         <div className="title">
-          <h4>{categoryName}</h4>
+          <h4>{productSliderTitle}</h4>
         </div>
       </div>
     </div>
@@ -16,26 +18,24 @@ const CategorySlider = ({ data, categoryName }) => (
       className="catSlider"
       showThumbsVal={false}
       showStatusVal={false}
-      showArrowsVal={false}
+      showArrowsVal
       showIndicatorsVal={false}
       infiniteLoopVal={false}
       centerModeVal
-      centerSlidePercentageVal={42}
-      sliderImages={data}
+      centerSlidePercentageVal={100}
+      sliderImages={SliderItem}
       contentStatus
-      typeOfSlider="catSlider"
+      typeOfSlider="productSlider"
     />
   </section>
 );
 
-CategorySlider.defaultProps = {
-  data: [],
-  categoryName: ''
+ProductSlider.defaultProps = {
+  productSliderTitle: ''
 };
 
-CategorySlider.propTypes = {
-  data: PropTypes.array,
-  categoryName: PropTypes.string
+ProductSlider.propTypes = {
+  productSliderTitle: PropTypes.string
 };
 
-export default CategorySlider;
+export default ProductSlider;

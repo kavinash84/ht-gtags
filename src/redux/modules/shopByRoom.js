@@ -1,6 +1,6 @@
-const LOAD = 'shopByStles/LOAD';
-const LOAD_SUCCESS = 'shopByStles/LOAD_SUCCESS';
-const LOAD_FAIL = 'shopByStles/LOAD_FAIL';
+const LOAD = 'shopByRoom/LOAD';
+const LOAD_SUCCESS = 'shopByRoom/LOAD_SUCCESS';
+const LOAD_FAIL = 'shopByRoom/LOAD_FAIL';
 
 const initialState = {
   data: []
@@ -32,16 +32,9 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-export function loadStyles() {
+export function load() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: ({ client }) => client.get('tesla/styles/')
-  };
-}
-
-export function loadOccasions() {
-  return {
-    types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: ({ client }) => client.get('tesla/occasions/')
+    promise: ({ client }) => client.get('tesla/rooms/')
   };
 }
