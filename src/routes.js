@@ -10,10 +10,10 @@ import {
   RecentlyViewedProducts,
   Menu,
   Login,
+  Signup,
   Listing,
   Wishlist,
   Cart,
-  CartTotal,
   NotFound
 } from 'containers';
 
@@ -31,10 +31,10 @@ const routes = [
       { path: '/recently-viewed-products', exact: true, component: RecentlyViewedProducts },
       { path: '/menu', exact: true, component: Menu },
       { path: '/login', exact: true, component: Login },
+      { path: '/sign-up', exact: true, component: Signup },
       { path: '/listing', exact: true, component: Listing },
       { path: '/wishlist', exact: true, component: Wishlist },
       { path: '/cart', exact: true, component: Cart },
-      { path: '/cart-total', exact: true, component: CartTotal },
       { component: NotFound }
     ]
   }

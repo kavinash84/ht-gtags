@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LoginForm from 'hometown-components/lib/Forms/LoginForm';
+import SignupForm from 'hometown-components/lib/Forms/SignupForm';
 import Section from 'hometown-components/lib/Section';
 import Row from 'hometown-components/lib/Row';
 import Heading from 'hometown-components/lib/Heading';
@@ -9,13 +9,18 @@ import { Label } from 'hometown-components/lib/Label';
 import Img from 'hometown-components/lib/Img';
 import { validateEmail, isBlank } from 'js-utility-functions';
 
-export default class LoginFormContainer extends Component {
+const closeIcon = require('../../../static/closebutton.png');
+
+export default class SignupFormContainer extends Component {
   constructor() {
     super();
     this.state = {
       email: '',
       emailError: false,
       emailErrorMessage: '',
+      phone: '',
+      phoneError: false,
+      phoneErrorMessage: '',
       password: '',
       passwordError: false,
       passwordErrorMessage: ''
@@ -30,6 +35,15 @@ export default class LoginFormContainer extends Component {
       emailErrorMessage: checkError.error ? checkError.errorMessage : ''
     });
   };
+  onChangePhone = e => {
+    const { target: { value } } = e;
+    const checkError = isBlank(value);
+    this.setState({
+      phone: value,
+      phoneError: checkError.error,
+      phoneErrorMessage: checkError ? "Phone can't be blank" : ''
+    });
+  };
   onChangePassword = e => {
     const { target: { value } } = e;
     const checkError = isBlank(value);
@@ -41,24 +55,35 @@ export default class LoginFormContainer extends Component {
   };
   onSubmitLogin = e => {
     e.preventDefault();
-    const { email, password } = this.state;
+    const { email, password, phone } = this.state;
     const checkEmail = validateEmail(email, 'Invalid Email');
+    const checkPhone = isBlank(phone);
     const checkPassword = isBlank(password);
-    if (checkEmail.error || checkPassword) {
+    if (checkEmail.error || checkPassword || checkPhone) {
       return this.setState({
         emailError: checkEmail.error,
         emailErrorMessage: checkEmail.errorMessage,
+        phoneError: checkPhone.error,
+        phoneErrorMessage: checkPhone ? "Phone can't be blank" : '',
         passwordError: checkPassword,
         passwordErrorMessage: checkPassword ? "Password can't be blank" : ''
       });
     }
-    console.log(this.state);
+    // console.log(this.state);
   };
   render() {
     const styles = require('./index.scss');
 
     const {
-      email, password, emailError, emailErrorMessage, passwordError, passwordErrorMessage
+      email,
+      phone,
+      password,
+      emailError,
+      emailErrorMessage,
+      phoneError,
+      phoneErrorMessage,
+      passwordError,
+      passwordErrorMessage
     } = this.state;
     return (
       <div className={styles.loginWrapper}>
@@ -66,7 +91,7 @@ export default class LoginFormContainer extends Component {
           <div className={styles.imgWrapper}>
             <Img src="http://via.placeholder.com/720x480" />
             <div className={styles.back}>
-              <img src="http://via.placeholder.com/14x14" alt="Back" />
+              <img src={closeIcon} alt="Back" />
             </div>
           </div>
         </Section>
@@ -74,22 +99,26 @@ export default class LoginFormContainer extends Component {
           <Row display="block" mr="0" ml="0">
             <Div col="6">
               <Heading mt="0" mb="0" color="textDark">
-                Login
+                Sign Up
               </Heading>
             </Div>
             <Div col="6" ta="right">
               <Label fontFamily="light">
-                <Link href="#login">New User? Sign Up now</Link>
+                <Link href="#login">Existing User? Log in now</Link>
               </Label>
             </Div>
           </Row>
           <Row display="block" mr="0" ml="0">
             <Div mt="1.25rem">
-              <LoginForm
+              <SignupForm
                 email={email}
                 onChangeEmail={this.onChangeEmail}
                 emailFeedBackError={emailError}
                 emailFeedBackMessage={emailErrorMessage}
+                phone={phone}
+                onChangePhone={this.onChangePhone}
+                phoneFeedBackError={phoneError}
+                phoneFeedBackMessage={phoneErrorMessage}
                 password={password}
                 onChangePassword={this.onChangePassword}
                 passwordFeedBackError={passwordError}
