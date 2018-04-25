@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import Carousel from '../Carousel';
 
-@connect(({ banners }) => ({
-  ...banners
-}))
 
-export default class HomePageBanners extends Component {
+export default class MainSlider extends Component {
   render() {
     const { data } = this.props;
     return (
@@ -30,10 +26,10 @@ export default class HomePageBanners extends Component {
   }
 }
 
-HomePageBanners.defaultProps = {
+MainSlider.defaultProps = {
   data: []
 };
 
-HomePageBanners.propTypes = {
+MainSlider.propTypes = {
   data: PropTypes.array
 };
