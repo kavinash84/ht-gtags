@@ -102,7 +102,7 @@ export default class LoginFormContainer extends Component {
               />
             </Div>
           </Row>
-          <Row display="block" mr="0" ml="0" pt="1.5625rem">
+          <Row display="block" mr="0" ml="0" pt="1.25rem">
             <Div col="6">
               <Label fontFamily="light">
                 <Link href="#forgot" fontSize="0.875em">
