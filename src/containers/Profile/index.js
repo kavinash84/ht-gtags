@@ -6,7 +6,7 @@ import Row from 'hometown-components/lib/Row';
 import Heading from 'hometown-components/lib/Heading';
 import Div from 'hometown-components/lib/Div';
 import Menu from 'components/OtherMenu';
-import { validateEmail, isBlank } from 'js-utility-functions';
+import { validateEmail, validateMobile, isBlank } from 'js-utility-functions';
 
 export default class ProfileFormContainer extends Component {
   constructor() {
@@ -18,9 +18,9 @@ export default class ProfileFormContainer extends Component {
       phone: '',
       phoneError: false,
       phoneErrorMessage: '',
-      password: '',
-      passwordError: false,
-      passwordErrorMessage: ''
+      fullName: '',
+      fullNameError: false,
+      fullNameErrorMessage: ''
     };
   }
   onChangeEmail = e => {
@@ -34,36 +34,36 @@ export default class ProfileFormContainer extends Component {
   };
   onChangePhone = e => {
     const { target: { value } } = e;
-    const checkError = isBlank(value);
+    const checkError = validateMobile(value, 'Mobile should be 10 digits');
     this.setState({
       phone: value,
       phoneError: checkError.error,
-      phoneErrorMessage: checkError ? "Phone can't be blank" : ''
+      phoneErrorMessage: checkError.error ? checkError.errorMessage : ''
     });
   };
-  onChangePassword = e => {
+  onChangeFullName = e => {
     const { target: { value } } = e;
     const checkError = isBlank(value);
     this.setState({
-      password: value,
-      passwordError: checkError,
-      passwordErrorMessage: checkError ? "Password can't be blank" : ''
+      fullName: value,
+      fullNameError: checkError,
+      fullNameErrorMessage: checkError ? "Name can't be blank" : ''
     });
   };
-  onSubmitLogin = e => {
+  onSubmitProfile = e => {
     e.preventDefault();
-    const { email, password, phone } = this.state;
+    const { email, fullName, phone } = this.state;
     const checkEmail = validateEmail(email, 'Invalid Email');
-    const checkPhone = isBlank(phone);
-    const checkPassword = isBlank(password);
-    if (checkEmail.error || checkPassword || checkPhone) {
+    const checkPhone = validateMobile(phone, 'Mobile no. should be 10 digits');
+    const checkFullName = isBlank(fullName);
+    if (checkEmail.error || checkFullName || checkPhone) {
       return this.setState({
         emailError: checkEmail.error,
         emailErrorMessage: checkEmail.errorMessage,
         phoneError: checkPhone.error,
-        phoneErrorMessage: checkPhone ? "Phone can't be blank" : '',
-        passwordError: checkPassword,
-        passwordErrorMessage: checkPassword ? "Password can't be blank" : ''
+        phoneErrorMessage: checkPhone.errorMessage,
+        fullNameError: checkFullName,
+        fullNameErrorMessage: checkFullName ? "Name can't be blank" : ''
       });
     }
     // console.log(this.state);
@@ -74,13 +74,13 @@ export default class ProfileFormContainer extends Component {
     const {
       email,
       phone,
-      password,
+      fullName,
       emailError,
       emailErrorMessage,
       phoneError,
       phoneErrorMessage,
-      passwordError,
-      passwordErrorMessage
+      fullNameError,
+      fullNameErrorMessage
     } = this.state;
     return (
       <div className={styles.formContainer}>
@@ -113,11 +113,11 @@ export default class ProfileFormContainer extends Component {
                   onChangePhone={this.onChangePhone}
                   phoneFeedBackError={phoneError}
                   phoneFeedBackMessage={phoneErrorMessage}
-                  password={password}
-                  onChangePassword={this.onChangePassword}
-                  passwordFeedBackError={passwordError}
-                  passwordFeedBackMessage={passwordErrorMessage}
-                  onSubmitLogin={this.onSubmitLogin}
+                  fullName={fullName}
+                  onChangeFullName={this.onChangeFullName}
+                  fullNameFeedBackError={fullNameError}
+                  fullNameFeedBackMessage={fullNameErrorMessage}
+                  onSubmitProfile={this.onSubmitProfile}
                 />
               </Div>
             </Row>

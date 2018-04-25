@@ -1,72 +1,69 @@
 import React, { Component } from 'react';
 import UpdatePasswordForm from 'hometown-components/lib/Forms/UpdatePasswordForm';
+import Container from 'hometown-components/lib/Container';
 import Section from 'hometown-components/lib/Section';
 import Row from 'hometown-components/lib/Row';
 import Heading from 'hometown-components/lib/Heading';
 import Div from 'hometown-components/lib/Div';
-import Link from 'hometown-components/lib/Link';
-import { Label } from 'hometown-components/lib/Label';
-import Img from 'hometown-components/lib/Img';
-import { validateEmail, isBlank } from 'js-utility-functions';
+import Menu from 'components/OtherMenu';
+import { isBlank } from 'js-utility-functions';
 
-const closeIcon = require('../../../static/closebutton.png');
-
-export default class UpdatePasswordContainer extends Component {
+export default class UpdatePasswordFormContainer extends Component {
   constructor() {
     super();
     this.state = {
-      email: '',
-      emailError: false,
-      emailErrorMessage: '',
-      phone: '',
-      phoneError: false,
-      phoneErrorMessage: '',
-      password: '',
-      passwordError: false,
-      passwordErrorMessage: ''
+      oldPwd: '',
+      oldPwdError: false,
+      oldPwdErrorMessage: '',
+      newPwd: '',
+      newPwdError: false,
+      newPwdErrorMessage: '',
+      confirmPwd: '',
+      confirmPwdError: false,
+      confirmPwdErrorMessage: ''
     };
   }
-  onChangeEmail = e => {
-    const { target: { value } } = e;
-    const checkError = validateEmail(value, 'Enter valid email');
-    this.setState({
-      email: value,
-      emailError: checkError.error,
-      emailErrorMessage: checkError.error ? checkError.errorMessage : ''
-    });
-  };
-  onChangePhone = e => {
+  onChangeOldPwd = e => {
     const { target: { value } } = e;
     const checkError = isBlank(value);
     this.setState({
-      phone: value,
-      phoneError: checkError.error,
-      phoneErrorMessage: checkError ? "Phone can't be blank" : ''
+      oldPwd: value,
+      oldPwdError: checkError.error,
+      oldPwdErrorMessage: checkError ? "Old Password can't be blank" : ''
     });
   };
-  onChangePassword = e => {
+  onChangeNewPwd = e => {
     const { target: { value } } = e;
     const checkError = isBlank(value);
     this.setState({
-      password: value,
-      passwordError: checkError,
-      passwordErrorMessage: checkError ? "Password can't be blank" : ''
+      newPwd: value,
+      newPwdError: checkError.error,
+      newPwdErrorMessage: checkError ? "New Password can't be blank" : ''
     });
   };
-  onSubmitLogin = e => {
+  onChangeConfirmPwd = e => {
+    const { target: { value } } = e;
+    const checkError = isBlank(value);
+    this.setState({
+      confirmPwd: value,
+      confirmPwdError: checkError,
+      confirmPwdErrorMessage: checkError ? "Confirm Password can't be blank" : ''
+    });
+  };
+  onSubmitUpdatePassword = e => {
     e.preventDefault();
-    const { email, password, phone } = this.state;
-    const checkEmail = validateEmail(email, 'Invalid Email');
-    const checkPhone = isBlank(phone);
-    const checkPassword = isBlank(password);
-    if (checkEmail.error || checkPassword || checkPhone) {
+    const { oldPwd, confirmPwd, newPwd } = this.state;
+    const checkOldPwd = isBlank(oldPwd);
+    const checkNewPwd = isBlank(newPwd);
+    const checkConfirmPwd = isBlank(confirmPwd);
+    if (checkOldPwd || checkConfirmPwd || checkNewPwd) {
       return this.setState({
-        emailError: checkEmail.error,
-        emailErrorMessage: checkEmail.errorMessage,
-        phoneError: checkPhone.error,
-        phoneErrorMessage: checkPhone ? "Phone can't be blank" : '',
-        passwordError: checkPassword,
-        passwordErrorMessage: checkPassword ? "Password can't be blank" : ''
+        oldPwdError: checkOldPwd,
+        oldPwdErrorMessage: checkOldPwd ? "Old Password can't be blank" : '',
+        newPwdError: checkNewPwd,
+        newPwdErrorMessage: checkNewPwd ? "New Password can't be blank" : '',
+        confirmPwdError: checkConfirmPwd,
+        confirmPwdErrorMessage: checkConfirmPwd ? "Confirm Password can't be blank" : ''
       });
     }
     // console.log(this.state);
@@ -75,77 +72,57 @@ export default class UpdatePasswordContainer extends Component {
     const styles = require('./index.scss');
 
     const {
-      email,
-      phone,
-      password,
-      emailError,
-      emailErrorMessage,
-      phoneError,
-      phoneErrorMessage,
-      passwordError,
-      passwordErrorMessage
+      oldPwd,
+      newPwd,
+      confirmPwd,
+      oldPwdError,
+      oldPwdErrorMessage,
+      newPwdError,
+      newPwdErrorMessage,
+      confirmPwdError,
+      confirmPwdErrorMessage
     } = this.state;
     return (
-      <div className={styles.signupWrapper}>
-        <Section p="0" mb="0.3125rem">
-          <div className={styles.imgWrapper}>
-            <Img src="http://via.placeholder.com/720x480" />
-            <div className={styles.back}>
-              <img src={closeIcon} alt="Back" />
-            </div>
-          </div>
-        </Section>
-        <Section mb="0" p="1.25rem" pt="1.5rem" pb="1.5rem">
-          <Row display="block" mr="0" ml="0">
-            <Div col="6">
-              <Heading mt="0" mb="0" color="textDark" fontSize="1.25em">
+      <div className={styles.formContainer}>
+        <Menu />
+        <Section mb="0.3125rem" pr="0.5rem" pl="0.5rem">
+          <Container type="container" pr="1rem" pl="1rem">
+            <Row display="block" mr="0" ml="0">
+              <Heading fontSize="1.25rem" color="textDark" mb="0px" mt="0px" fontFamily="SFPDLight">
                 Update Password
               </Heading>
-            </Div>
-            <Div col="6" ta="right">
-              <Label fontFamily="light">
-                <Link href="#login" fontSize="0.875em">
-                  Existing User? Log in now
-                </Link>
-              </Label>
-            </Div>
-          </Row>
-          <Row display="block" mr="0" ml="0">
-            <Div mt="1.25rem">
-              <UpdatePasswordForm
-                email={email}
-                onChangeEmail={this.onChangeEmail}
-                emailFeedBackError={emailError}
-                emailFeedBackMessage={emailErrorMessage}
-                phone={phone}
-                onChangePhone={this.onChangePhone}
-                phoneFeedBackError={phoneError}
-                phoneFeedBackMessage={phoneErrorMessage}
-                password={password}
-                onChangePassword={this.onChangePassword}
-                passwordFeedBackError={passwordError}
-                passwordFeedBackMessage={passwordErrorMessage}
-                onSubmitLogin={this.onSubmitLogin}
-              />
-            </Div>
-          </Row>
-          <Row display="block" mr="0" ml="0" pt="1.25rem">
-            <Div col="6">
-              <Label fontFamily="light">
-                <Link href="#forgot" fontSize="0.875em">
-                  Forgot Password?
-                </Link>
-              </Label>
-            </Div>
-            <Div col="6" ta="right">
-              <Label fontFamily="light">
-                <Link href="#otp" fontSize="0.875em">
-                  Login via OTP?
-                </Link>
-              </Label>
-            </Div>
-          </Row>
+            </Row>
+          </Container>
         </Section>
+        <div className={styles.formWrapper}>
+          <Section
+            p="1.25rem"
+            mb="0"
+            bg="sectionBgDark"
+            boxShadow="0px 1px 6px 0px rgba(0,0,0,0.20)"
+            height="calc(100vh - 104px)"
+          >
+            <Row display="block" mr="0" ml="0">
+              <Div>
+                <UpdatePasswordForm
+                  oldPwd={oldPwd}
+                  onChangeOldPwd={this.onChangeOldPwd}
+                  oldPwdFeedBackError={oldPwdError}
+                  oldPwdFeedBackMessage={oldPwdErrorMessage}
+                  newPwd={newPwd}
+                  onChangeNewPwd={this.onChangeNewPwd}
+                  newPwdFeedBackError={newPwdError}
+                  newPwdFeedBackMessage={newPwdErrorMessage}
+                  confirmPwd={confirmPwd}
+                  onChangeconfirmPwd={this.onChangeConfirmPwd}
+                  confirmPwdFeedBackError={confirmPwdError}
+                  confirmPwdFeedBackMessage={confirmPwdErrorMessage}
+                  onSubmitUpdatePassword={this.onSubmitUpdatePassword}
+                />
+              </Div>
+            </Row>
+          </Section>
+        </div>
       </div>
     );
   }
