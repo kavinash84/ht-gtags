@@ -6,22 +6,19 @@ import { provideHooks } from 'redial';
 import { ThemeProvider } from 'styled-components';
 import Helmet from 'react-helmet';
 // import { load as loadInfo } from 'redux/modules/info';
-import { loadStyles } from 'redux/modules/homepageCategories';
+import { load as loadStyles } from 'redux/modules/shopByStyle';
+import { load as loadOccasions } from 'redux/modules/shopByOccasion';
+import { load as loadRooms } from 'redux/modules/shopByRoom';
+// import { load as loadStyles } from 'redux/modules/shopByStyle';
 import config from 'config';
 import Theme from 'hometown-components/lib/Theme';
-
-// import { bindActionCreators } from 'multireducer';
-// import * as counterActions from 'redux/modules/counter';
-//
-// @connect(
-//   (state, { multireducerKey: key }) => ({ count: state.counter[key].count }),
-//   (dispatch, { multireducerKey: key }) => bindActionCreators(counterActions, dispatch, key)
-// )
 
 @provideHooks({
   fetch: async ({ store: { dispatch } }) => {
     // await dispatch(loadInfo()).catch(() => null);
     await dispatch(loadStyles()).catch(error => console.log(error));
+    await dispatch(loadOccasions()).catch(error => console.log(error));
+    await dispatch(loadRooms()).catch(error => console.log(error));
   }
 })
 @withRouter

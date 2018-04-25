@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import Carousel from '../Carousel';
-
-@connect(({ shopByStles }) => ({
-  ...shopByStles
-}))
 
 export default class CategorySlider extends Component {
   render() {

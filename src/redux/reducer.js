@@ -1,16 +1,17 @@
 // import multireducer from 'multireducer';
 import { routerReducer } from 'react-router-redux';
 import info from './modules/info';
-import shopByStles from './modules/homepageCategories';
+import shopByOccasion from './modules/shopByOccasion';
+import shopByRoom from './modules/shopByRoom';
+import shopByStyle from './modules/shopByStyle';
 
 export default function createReducers(asyncReducers) {
   return {
     router: routerReducer,
     info,
-    shopByStles,
-    // homepage: multireducer({
-    //   shopByStles,
-    // }),
+    shopByStyle,
+    shopByOccasion,
+    shopByRoom,
     ...asyncReducers
   };
 }
