@@ -21,7 +21,7 @@ module.exports = Object.assign(
       head: {
         titleTemplate: 'HomeTown: %s',
         meta: [
-          { name: 'description', content: 'Buy Furniture Online !' },
+          { name: 'description', content: 'Buy Furniture, HomeDecor, Online !' },
           { charset: 'utf-8' },
           { property: 'og:site_name', content: 'HomeTown' },
           { property: 'og:image', content: 'https://react-redux.herokuapp.com/logo.jpg' },
