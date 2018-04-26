@@ -26,6 +26,7 @@
   }
   .saving {
     @extend .price;
+    text-decoration: none;
   }
   .rating {
     @include font-size(0.8rem);

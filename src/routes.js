@@ -1,4 +1,18 @@
-import { App, Home, Menu, Login, Signup, Listing, Wishlist, Cart, NotFound, TestCounter } from 'containers';
+import {
+  App,
+  Home,
+  Menu,
+  Login,
+  Signup,
+  Listing,
+  Wishlist,
+  Cart,
+  Profile,
+  UpdatePassword,
+  Payment,
+  TestCounter,
+  NotFound
+} from 'containers';
 
 const routes = [
   {
@@ -7,10 +21,13 @@ const routes = [
       { path: '/', exact: true, component: Home },
       { path: '/menu', exact: true, component: Menu },
       { path: '/login', exact: true, component: Login },
-      { path: '/sign-up', exact: true, component: Signup },
+      { path: '/signup', exact: true, component: Signup },
       { path: '/listing', exact: true, component: Listing },
       { path: '/wishlist', exact: true, component: Wishlist },
       { path: '/cart', exact: true, component: Cart },
+      { path: '/profile', exact: true, component: Profile },
+      { path: '/update-password', exact: true, component: UpdatePassword },
+      { path: '/payment', exact: true, component: Payment },
       { path: '/counter', exact: true, component: TestCounter },
       { component: NotFound }
     ]
