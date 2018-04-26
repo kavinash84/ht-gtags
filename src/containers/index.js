@@ -7,4 +7,5 @@ export Wishlist from './Wishlist/Wishlist';
 export Cart from './Cart/Cart';
 export CartTotal from 'components/CartTotal';
 export Signup from 'containers/Signup';
+export TestCounter from './ProductQuantityCounter';
 export NotFound from './NotFound/NotFound';

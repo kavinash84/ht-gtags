@@ -1,4 +1,4 @@
-import { App, Home, Menu, Login, Signup, Listing, Wishlist, Cart, NotFound } from 'containers';
+import { App, Home, Menu, Login, Signup, Listing, Wishlist, Cart, NotFound, TestCounter } from 'containers';
 
 const routes = [
   {
@@ -11,6 +11,7 @@ const routes = [
       { path: '/listing', exact: true, component: Listing },
       { path: '/wishlist', exact: true, component: Wishlist },
       { path: '/cart', exact: true, component: Cart },
+      { path: '/counter', exact: true, component: TestCounter },
       { component: NotFound }
     ]
   }
