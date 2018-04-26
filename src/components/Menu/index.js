@@ -1,20 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import NavBar from 'components/NavBar';
 import MenuSidebar from './MenuSidebar';
 
-// const MenuItem = require('../../data/Menu.js');
+const styles = require('./Menu.scss');
 
-export default class Menu extends Component {
-  render() {
-    const styles = require('./Menu.scss');
+const Menu = () => (
+  <div className={styles.menuContainer}>
+    <div className="container">
+      <MenuSidebar />
+      <NavBar />
+    </div>
+  </div>
+);
 
-    return (
-      <div className={styles.menuContainer}>
-        <div className="container">
-          <MenuSidebar />
-          <NavBar />
-        </div>
-      </div>
-    );
-  }
-}
+export default Menu;
