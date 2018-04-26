@@ -22,6 +22,7 @@ import Html from 'helpers/Html';
 import routes from 'routes';
 import getChunks, { waitChunks } from 'utils/getChunks';
 import asyncMatchRoutes from 'utils/asyncMatchRoutes';
+import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
 import { ReduxAsyncConnect, Provider } from 'components';
 
 const chunksPath = path.join(__dirname, '..', 'static', 'dist', 'loadable-chunks.json');
@@ -90,18 +91,20 @@ app.use(async (req, res) => {
       history,
       location: history.location
     });
-
+    const sheet = new ServerStyleSheet();
     const modules = [];
     const component = (
-      <Loadable.Capture report={moduleName => modules.push(moduleName)}>
-        <Provider store={store} {...providers}>
-          <ConnectedRouter history={history}>
-            <ReduxAsyncConnect routes={routes} store={store} helpers={providers}>
-              {renderRoutes(routes)}
-            </ReduxAsyncConnect>
-          </ConnectedRouter>
-        </Provider>
-      </Loadable.Capture>
+      <StyleSheetManager sheet={sheet.instance}>
+        <Loadable.Capture report={moduleName => modules.push(moduleName)}>
+          <Provider store={store} {...providers}>
+            <ConnectedRouter history={history}>
+              <ReduxAsyncConnect routes={routes} store={store} helpers={providers}>
+                {renderRoutes(routes)}
+              </ReduxAsyncConnect>
+            </ConnectedRouter>
+          </Provider>
+        </Loadable.Capture>
+      </StyleSheetManager>
     );
     const content = ReactDOM.renderToString(component);
 
@@ -109,9 +112,17 @@ app.use(async (req, res) => {
     if (req.originalUrl !== locationState.pathname + locationState.search) {
       return res.redirect(301, locationState.pathname);
     }
-
+    const styleTags = sheet.getStyleElement();
     const bundles = getBundles(getChunks(), modules);
-    const html = <Html assets={webpackIsomorphicTools.assets()} bundles={bundles} content={content} store={store} />;
+    const html = (
+      <Html
+        styleTags={styleTags}
+        assets={webpackIsomorphicTools.assets()}
+        bundles={bundles}
+        content={content}
+        store={store}
+      />
+    );
 
     res.status(200).send(`<!doctype html>${ReactDOM.renderToString(html)}`);
   } catch (mountError) {
