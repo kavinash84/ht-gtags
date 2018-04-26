@@ -81,7 +81,7 @@ export default class LoginFormContainer extends Component {
             </Div>
             <Div col="6" ta="right">
               <Label fontFamily="light">
-                <Link href="#login" fontSize="0.875em">
+                <Link href="/signup" fontSize="0.875em">
                   New User? Sign Up now
                 </Link>
               </Label>
