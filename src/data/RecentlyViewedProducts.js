@@ -2,7 +2,7 @@
 const sliderItems = [
   {
     id: 1,
-    title: 'Martin Half Leather Single Seater Sofa',
+    name: 'Martin Half Leather Single Seater Sofa',
     price: '65,000',
     disc_price: '62,000',
     saving: '3,000',
@@ -14,7 +14,7 @@ const sliderItems = [
   },
   {
     id: 2,
-    title: 'Martin Half Leather',
+    name: 'Martin Half Leather',
     price: '55,000',
     disc_price: '54,000',
     saving: '1,000',
@@ -26,7 +26,7 @@ const sliderItems = [
   },
   {
     id: 3,
-    title: 'Leather Single Seater Sofa',
+    name: 'Leather Single Seater Sofa',
     price: '44,000',
     disc_price: '41,000',
     saving: '3,000',
@@ -38,7 +38,7 @@ const sliderItems = [
   },
   {
     id: 4,
-    title: 'Half Leather Single Seater Sofa',
+    name: 'Half Leather Single Seater Sofa',
     price: '33,000',
     disc_price: '31,000',
     saving: '2,000',
@@ -50,7 +50,7 @@ const sliderItems = [
   },
   {
     id: 5,
-    title: 'Leather Single Seater Sofa',
+    name: 'Leather Single Seater Sofa',
     price: '22,000',
     disc_price: '21,000',
     saving: '1,000',
