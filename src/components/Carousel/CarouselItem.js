@@ -11,7 +11,7 @@ const CarouseItem = ({
       {typeOfSlider !== 'menuSlider' && <img src={img} alt={itemData.title} />}
       {contentStatus && (
         <div className={styles.content}>
-          <p className={styles.title}>{itemData.title}</p>
+          <p className={styles.title}>{itemData.name}</p>
           {typeOfSlider === 'productSlider' && (
             <div>
               <div className={`${styles.priceWrapper} taLeft`}>
