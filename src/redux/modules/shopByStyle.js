@@ -32,6 +32,10 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
+export function isLoaded(globalState) {
+  return globalState.shopByStyle && globalState.shopByStyle.loaded;
+}
+
 export function load() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],

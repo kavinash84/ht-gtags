@@ -69,7 +69,7 @@ export default class SignupFormContainer extends Component {
         passwordErrorMessage: checkPassword ? "Password can't be blank" : ''
       });
     }
-    // console.log(this.state);
+    console.log(this.state);
   };
   render() {
     const styles = require('./index.scss');

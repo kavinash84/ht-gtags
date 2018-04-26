@@ -5,22 +5,30 @@ import { withRouter } from 'react-router';
 import { provideHooks } from 'redial';
 import { ThemeProvider } from 'styled-components';
 import Helmet from 'react-helmet';
-import { load as loadBanners } from 'redux/modules/banners';
-import { load as loadStyles } from 'redux/modules/shopByStyle';
-import { load as loadOccasions } from 'redux/modules/shopByOccasion';
-import { load as loadRooms } from 'redux/modules/shopByRoom';
+import { load as loadBanners, isLoaded as isBannersLoaded } from 'redux/modules/banners';
+import { load as loadStyles, isLoaded as isStylesLoaded } from 'redux/modules/shopByStyle';
+import { load as loadOccasions, isLoaded as isOccasionsLoaded } from 'redux/modules/shopByOccasion';
+import { load as loadRooms, isLoaded as isRoomsLoaded } from 'redux/modules/shopByRoom';
 // import { load as loadStyles } from 'redux/modules/shopByStyle';
 import config from 'config';
 import Theme from 'hometown-components/lib/Theme';
 
 @provideHooks({
-  fetch: async ({ store: { dispatch } }) => {
-    await dispatch(loadBanners()).catch(() => null);
-    await dispatch(loadStyles()).catch(error => console.log(error));
-    await dispatch(loadOccasions()).catch(error => console.log(error));
+  fetch: async ({ store: { dispatch, getState } }) => {
+    if (!isBannersLoaded(getState())) {
+      await dispatch(loadBanners()).catch(() => null);
+    }
+    if (!isStylesLoaded(getState())) {
+      await dispatch(loadStyles()).catch(error => console.log(error));
+    }
+    if (!isOccasionsLoaded(getState())) {
+      await dispatch(loadOccasions()).catch(error => console.log(error));
+    }
   },
-  defer: ({ store: { dispatch } }) => {
-    dispatch(loadRooms()).catch(error => console.log(error));
+  defer: ({ store: { dispatch, getState } }) => {
+    if (!isRoomsLoaded(getState())) {
+      dispatch(loadRooms()).catch(error => console.log(error));
+    }
   }
 })
 @withRouter
