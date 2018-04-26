@@ -11,6 +11,7 @@ import {
   UpdatePassword,
   Payment,
   TestCounter,
+  ProductDetails,
   NotFound
 } from 'containers';
 
@@ -29,6 +30,7 @@ const routes = [
       { path: '/update-password', exact: true, component: UpdatePassword },
       { path: '/payment', exact: true, component: Payment },
       { path: '/counter', exact: true, component: TestCounter },
+      { path: '/product-details', exact: true, component: ProductDetails },
       { component: NotFound }
     ]
   }
