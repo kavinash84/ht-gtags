@@ -24,13 +24,14 @@ export default class Html extends Component {
     store: PropTypes.shape({
       getState: PropTypes.func
     }).isRequired,
-    styleTags: PropTypes.func.isRequired
+    styleTags: PropTypes.array
   };
 
   static defaultProps = {
     assets: {},
     bundles: [],
-    content: ''
+    content: '',
+    styleTags: []
   };
 
   render() {
