@@ -2,18 +2,18 @@ import {
   App,
   Home,
   Menu,
-  Login,
-  Signup,
   Listing,
   Wishlist,
   Cart,
-  Profile,
   UpdatePassword,
   Payment,
   TestCounter,
   ProductDetails,
   NotFound
 } from 'containers';
+import Login from 'containers/Login';
+import Signup from 'containers/Signup';
+import Profile from 'containers/Profile';
 
 const routes = [
   {

@@ -23,18 +23,20 @@ export default class Html extends Component {
     content: PropTypes.string,
     store: PropTypes.shape({
       getState: PropTypes.func
-    }).isRequired
+    }).isRequired,
+    styleTags: PropTypes.array
   };
 
   static defaultProps = {
     assets: {},
     bundles: [],
-    content: ''
+    content: '',
+    styleTags: []
   };
 
   render() {
     const {
-      assets, store, content, bundles
+      assets, store, content, bundles, styleTags
     } = this.props;
     const head = Helmet.renderStatic();
     /* eslint-disable react/no-danger */
@@ -56,6 +58,7 @@ export default class Html extends Component {
           <meta name="apple-mobile-web-app-status-bar-style" content="black" />
           <meta name="apple-mobile-web-app-title" content="HomeTown Mobile" />
           <meta name="theme-color" content="#3677dd" />
+          {styleTags}
           {/* styles (will be present only in production with webpack extract text plugin) */}
           {assets.styles &&
             Object.keys(assets.styles).map(style => (

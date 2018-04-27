@@ -28,7 +28,7 @@ module.exports = {
   output: {
     path: assetsPath,
     filename: '[name]-[chunkhash].js',
-    chunkFilename: '[name]-[chunkhash].js',
+    chunkFilename: '[name]-[chunkhash].chunk.js',
     publicPath: '/dist/'
   },
   performance: {
