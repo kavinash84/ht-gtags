@@ -4,6 +4,7 @@ export Menu from './Menu/Menu';
 export Listing from './Listing/Listing';
 export Wishlist from './Wishlist/Wishlist';
 export Cart from './Cart/Cart';
+export MyOrder from './MyOrder/MyOrder';
 export CartTotal from 'components/CartTotal';
 export UpdatePassword from './UpdatePassword';
 export Payment from './Payment';
