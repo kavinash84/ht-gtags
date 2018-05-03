@@ -9,24 +9,34 @@ const productDetails = {
   rating: '4',
   tags: '#minimalist   #garcia   #oneseater   #bachelorfriendly',
   url: 'http://via.placeholder.com/720x448/FFC720?text=Slide%201',
-  deliver_by: '23 Jan (Sunday)',
-  emi_starting: '1,419',
+  deliver_by: '16 Jan (Sunday)',
+  emi_starting: '2,419',
   description:
-    'Add of style to your home with an exciting range of designer furniture, furnishings, decor items and kitchenware. We promise to deliver best quality products at best prices.',
+    'Add oodles of style to your home with an exciting range of designer furniture, furnishings, decor items and kitchenware. We promise to deliver best quality products at best prices.',
   images: [
     {
-      id: 1,
-      image: 'http://via.placeholder.com/720x448/FFC720?text=Slide%201',
+      image:
+        'https://dt2czl74lk540.cloudfront.net/VUChVwc_-gBREU-D23PWHGEhMC8=/fit-in/780x446/http://assets.credr.com/bike_images/MH05CL0846_1.JPG',
       tag: 'Bike image'
     },
     {
-      id: 2,
-      image: 'http://via.placeholder.com/720x448/FFC720?text=Slide%202',
+      image:
+        'https://dt2czl74lk540.cloudfront.net/Qxjqpc7NQe6Ljy18G_b0pB1LR00=/fit-in/780x446/http://assets.credr.com/bike_images/MH05CL0846_2.JPG',
       tag: 'Bike image'
     },
     {
-      id: 3,
-      image: 'http://via.placeholder.com/720x448/FFC720?text=Slide%203',
+      image:
+        'https://dt2czl74lk540.cloudfront.net/-HOBhfevKFV-locj1bgj8Sk9aTI=/fit-in/780x446/http://assets.credr.com/bike_images/MH05CL0846_3.JPG',
+      tag: 'Bike image'
+    },
+    {
+      image:
+        'https://dt2czl74lk540.cloudfront.net/sFOajE554y6sBh8kU1GBKTednVs=/fit-in/780x446/http://assets.credr.com/bike_images/MH05CL0846_4.JPG',
+      tag: 'Bike image'
+    },
+    {
+      image:
+        'https://dt2czl74lk540.cloudfront.net/Vl76ug__lJ7ptuZ9BDloLmuph-s=/fit-in/780x446/http://assets.credr.com/bike_images/cc_1520672327682_a7b5hapjef8o9phufm2krhgpkm.JPG',
       tag: 'Bike image'
     }
   ],
@@ -45,9 +55,6 @@ const productDetails = {
     },
     {
       hex: 'green'
-    },
-    {
-      hex: 'orange'
     }
   ],
   specs: [
