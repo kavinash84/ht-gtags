@@ -6,6 +6,7 @@ export Wishlist from './Wishlist/Wishlist';
 export Cart from './Cart/Cart';
 export MyOrder from './MyOrder/MyOrder';
 export OrderDetails from './OrderDetails/OrderDetails';
+export OrderSummary from './OrderSummary/OrderSummary';
 export CartTotal from 'components/CartTotal';
 export UpdatePassword from './UpdatePassword';
 export Payment from './Payment';

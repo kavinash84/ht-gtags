@@ -28,7 +28,7 @@ const CartTotal = () => (
           </Div>
         </Row>
         <Row display="block" mr="0" ml="0">
-          <Button btnType="primary" size="block">
+          <Button btnType="primary" size="block" fontFamily="regular" fontSize="0.875em" height="42px" lh="2">
             PROCEED TO CHECKOUT
           </Button>
         </Row>
