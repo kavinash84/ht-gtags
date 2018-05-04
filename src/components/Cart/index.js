@@ -2,7 +2,7 @@ import React from 'react';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Heading from 'hometown-components/lib/Heading';
-import ProductInlineWithQuantity from 'hometown-components/lib/ProductInlineWithQuantity';
+import ProductInline from 'hometown-components/lib/ProductInline';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
 import ProductItems from '../../data/RecentlyViewedProducts.js';
@@ -30,7 +30,7 @@ const Cart = () => (
       <Container type="container" pr="0.5rem" pl="0.5rem">
         {ProductItems.map(item => (
           <div key={item.id}>
-            <ProductInlineWithQuantity itemData={item} />
+            <ProductInline itemData={item} />
             <ProductQuantityCounter skuId="1234" />
           </div>
         ))}
