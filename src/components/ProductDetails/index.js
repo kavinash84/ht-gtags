@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Section from 'hometown-components/lib/Section';
@@ -11,6 +12,8 @@ import Specs from 'hometown-components/lib/ProductDetails/Specs';
 import Reviews from 'hometown-components/lib/Reviews';
 import ProductDetailsSlider from 'components/ProductDetailsSlider';
 import ProductSlider from 'components/ProductSlider';
+import { CART_URL } from 'helpers/Constants';
+import AddToCart from './AddtoCart';
 
 import prodDetails from '../../data/ProductDetails';
 
@@ -37,6 +40,8 @@ const ProductDetails = () => (
         </Div>
       </Container>
     </Section>
+    <AddToCart skuId="1234" />
+    <Link to={`${CART_URL}`}>GO TO CART</Link>
     <Section p="0" pl="0.5rem" pr="0.5rem" mb="0" bg="sectionBgDark" boxShadow="0px 1px 6px 0px rgba(0,0,0,0.20)">
       <Container type="container" pr="0" pl="0">
         <ServiceDetails deliverBy={prodDetails.deliver_by} emiStarting={prodDetails.emi_starting} />

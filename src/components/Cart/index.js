@@ -6,6 +6,7 @@ import ProductInlineWithQuantity from 'hometown-components/lib/ProductInlineWith
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
 import ProductItems from '../../data/RecentlyViewedProducts.js';
+import ProductQuantityCounter from '../ProductQuantityCounter';
 
 const Cart = () => (
   <Div type="block">
@@ -27,7 +28,12 @@ const Cart = () => (
       height="calc(100vh - 240px)"
     >
       <Container type="container" pr="0.5rem" pl="0.5rem">
-        {ProductItems.map(item => <ProductInlineWithQuantity key={item.id} itemData={item} />)}
+        {ProductItems.map(item => (
+          <div key={item.id}>
+            <ProductInlineWithQuantity itemData={item} />
+            <ProductQuantityCounter skuId="1234" />
+          </div>
+        ))}
       </Container>
     </Section>
   </Div>

@@ -6,6 +6,7 @@ import shopByOccasion from './modules/shopByOccasion';
 import shopByRoom from './modules/shopByRoom';
 import shopByStyle from './modules/shopByStyle';
 import counter from './modules/quantityCounter';
+import cart from './modules/cart';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -20,6 +21,7 @@ export default function createReducers(asyncReducers) {
       detail: counter,
       cart: counter
     }),
+    cart,
     ...asyncReducers
   };
 }
