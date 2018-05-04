@@ -8,7 +8,7 @@ export default class Listing extends Component {
 
     return (
       <div>
-        <Menu />
+        <Menu filter search />
         <ListingContainer />
       </div>
     );

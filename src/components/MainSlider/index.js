@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Carousel from '../Carousel';
 
-
 export default class MainSlider extends Component {
   render() {
     const { data } = this.props;

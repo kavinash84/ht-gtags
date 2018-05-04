@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+const LogoutIcon = require('../../../static/logout.jpg');
+
 export default class MenuSidebar extends Component {
   state = {
     open: false
@@ -31,11 +33,11 @@ export default class MenuSidebar extends Component {
         <div className={`${styles.sidebar} ${open ? styles.show : ''}`}>
           <div className={styles.sidebarContainer}>
             <div className={styles.sidebarUserDetails}>
-              <img src="http://via.placeholder.com/60x60" alt="" />
+              <img className="userIcon" src="http://via.placeholder.com/60x60" alt="" />
               <p>Saurabh Suman</p>
               <div className={styles.closeIcon}>
                 <button className="noPadding" onClick={this.onClick}>
-                  <img src="http://via.placeholder.com/20x20" alt="" />
+                  <img src={LogoutIcon} alt="Logout" />
                 </button>
               </div>
             </div>
