@@ -1,0 +1,17 @@
+.addToCartWrapper {
+  position: fixed;
+  bottom: 0;
+  background: #FFF;
+  padding: 15px;
+  z-index: 10;
+  width: 100%;
+  border-top: 1px solid #dedede;
+  i {
+    font-size: 1em;
+    width: 100%;
+    display: block;
+    text-align: center;
+    color: #018c07;
+    margin-bottom: 5px;
+  }
+}

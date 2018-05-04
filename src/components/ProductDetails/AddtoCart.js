@@ -1,16 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Button from 'hometown-components/lib/Buttons';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from 'redux/modules/cart';
 
-const Btnstyle = {
-  width: '320px',
-  height: '42px',
-  borderRadius: '2px',
-  backgroundColor: '#ae8873',
-  align: 'center'
-};
+const styles = require('./AddToCart.scss');
 
 // const checkItemInCart = (items, id) => items.filter(item => item.sku === id);
 const checkItemInCart = (items, id) => items.find(item => item.sku === id);
@@ -24,22 +19,22 @@ const mapStateToProps = ({ cart }) => ({ ...cart });
 
 const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
 
-const AddToCart = ({
-  skuId, cartList, addToCart, removeFromCart, reduceQuantity
-}) => {
+const AddToCart = ({ skuId, cartList, addToCart }) => {
   const isExists = checkItemInCart(cartList, skuId);
   return (
-    <div>
+    <div className={styles.addToCartWrapper}>
       <i>{isExists ? `${"You've added this to cart"} x ${isExists.count}` : ''}</i>
-      <button style={Btnstyle} onClick={onClick(addToCart, skuId)}>
-        ADD TO CART
-      </button>
-      <button style={Btnstyle} onClick={onClick(removeFromCart, skuId)}>
-        REMOVE FROM CART
-      </button>
-      <button style={Btnstyle} onClick={onClick(reduceQuantity, skuId)}>
-        REDUCE CART
-      </button>
+      <Button
+        onClick={onClick(addToCart, skuId)}
+        btnType="primary"
+        size="block"
+        fontFamily="regular"
+        fontSize="0.875em"
+        height="42px"
+        lh="2"
+      >
+        PROCEED TO CHECKOUT
+      </Button>
     </div>
   );
 };
@@ -47,9 +42,9 @@ const AddToCart = ({
 AddToCart.propTypes = {
   cartList: PropTypes.array.isRequired,
   skuId: PropTypes.string.isRequired,
-  addToCart: PropTypes.func.isRequired,
-  removeFromCart: PropTypes.func.isRequired,
-  reduceQuantity: PropTypes.func.isRequired
+  addToCart: PropTypes.func.isRequired
+  // removeFromCart: PropTypes.func.isRequired,
+  // reduceQuantity: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddToCart);
