@@ -1,32 +1,36 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import * as counterActions from 'redux/modules/quantityCounter';
+import { bindActionCreators } from 'redux';
+import * as actionCreators from 'redux/modules/cart';
 
-import { bindActionCreators } from 'multireducer';
+const mapStateToProps = ({ cart }) => ({ ...cart });
 
-@connect(
-  (state, { counterType: key }) => ({ count: state.counters[key].count }),
-  (dispatch, { counterType: key }) => bindActionCreators(counterActions, dispatch, key)
-)
-export default class ProductQuantityCounter extends Component {
-  static propTypes = {
-    count: PropTypes.number.isRequired,
-    increment: PropTypes.func.isRequired,
-    decrement: PropTypes.func.isRequired
-  };
+const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
 
-  render() {
-    const { count, increment, decrement } = this.props;
-    return (
-      <div>
-        <button onClick={decrement} disabled={count === 0}>
-          {' '}
-          -{' '}
-        </button>
-        <span>{count}</span>
-        <button onClick={increment}> + </button>
-      </div>
-    );
-  }
-}
+const onClick = (dispatcher, skuId) => e => {
+  e.preventDefault();
+  dispatcher(skuId);
+};
+
+const ProductQuantityCounter = ({
+  skuId, cartList, reduceQuantity, addToCart
+}) => (
+  <div>
+    <button onClick={onClick(reduceQuantity, skuId)} disabled={cartList.length === 1}>
+      {' '}
+      -{' '}
+    </button>
+    <span>{cartList.length}</span>
+    <button onClick={onClick(addToCart, skuId)}> + </button>
+  </div>
+);
+
+ProductQuantityCounter.propTypes = {
+  skuId: PropTypes.string.isRequired,
+  cartList: PropTypes.array.isRequired,
+  reduceQuantity: PropTypes.func.isRequired,
+  addToCart: PropTypes.func.isRequired
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductQuantityCounter);
