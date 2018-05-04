@@ -13,18 +13,27 @@ const onClick = (dispatcher, skuId) => e => {
   dispatcher(skuId);
 };
 
+const getCount = (cartList, skuId) => {
+  const itemCount = cartList.find(item => item.sku === skuId);
+  const { count } = itemCount;
+  return count;
+};
+
 const ProductQuantityCounter = ({
   skuId, cartList, reduceQuantity, addToCart
-}) => (
-  <div>
-    <button onClick={onClick(reduceQuantity, skuId)} disabled={cartList.length === 1}>
-      {' '}
-      -{' '}
-    </button>
-    <span>{cartList.length}</span>
-    <button onClick={onClick(addToCart, skuId)}> + </button>
-  </div>
-);
+}) => {
+  const count = getCount(cartList, skuId);
+  return (
+    <div>
+      <button onClick={onClick(reduceQuantity, skuId)} disabled={count === 1}>
+        {' '}
+        -{' '}
+      </button>
+      <span>{count}</span>
+      <button onClick={onClick(addToCart, skuId)}> + </button>
+    </div>
+  );
+};
 
 ProductQuantityCounter.propTypes = {
   skuId: PropTypes.string.isRequired,
