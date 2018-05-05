@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'hometown-components/lib/Buttons';
+import Div from 'hometown-components/lib/Div';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from 'redux/modules/cart';
@@ -24,17 +25,32 @@ const AddToCart = ({ skuId, cartList, addToCart }) => {
   return (
     <div className={styles.addToCartWrapper}>
       <i>{isExists ? `${"You've added this to cart"} x ${isExists.count}` : ''}</i>
-      <Button
-        onClick={onClick(addToCart, skuId)}
-        btnType="primary"
-        size="block"
-        fontFamily="regular"
-        fontSize="0.875em"
-        height="42px"
-        lh="2"
-      >
-        PROCEED TO CHECKOUT
-      </Button>
+      <Div col="9">
+        <Button
+          onClick={onClick(addToCart, skuId)}
+          btnType="primary"
+          size="block"
+          fontFamily="regular"
+          fontSize="0.875em"
+          height="42px"
+          lh="2"
+        >
+          ADD TO CART
+        </Button>
+      </Div>
+      <Div col="3">
+        <Button
+          btnType="primary"
+          size="block"
+          fontFamily="regular"
+          fontSize="0.875em"
+          height="42px"
+          lh="2"
+          ml="0.325rem"
+        >
+          >
+        </Button>
+      </Div>
     </div>
   );
 };
