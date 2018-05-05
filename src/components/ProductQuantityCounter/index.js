@@ -21,44 +21,53 @@ const onClick = (dispatcher, skuId) => e => {
   dispatcher(skuId);
 };
 
+const getCount = (cartList, skuId) => {
+  const itemCount = cartList.find(item => item.sku === skuId);
+  const { count } = itemCount || 0;
+  return count;
+};
+
 const ProductQuantityCounter = ({
   skuId, cartList, reduceQuantity, addToCart
-}) => (
-  <Row display="block" mr="0" ml="0" mb="1.25rem">
-    <Div col="12" ta="right">
-      <Button
-        type="custom"
-        color="textDark"
-        border="none"
-        bg="white"
-        bc="transparent"
-        pt="0"
-        pb="0"
-        va="middle"
-        onClick={onClick(reduceQuantity, skuId)}
-        disabled={cartList.length === 1}
-      >
-        <Img src={ReductIcon} alt="" float="left" height="22px" />
-      </Button>
-      <Label color="textDark" mb="0" mt="0">
-        {cartList.length}
-      </Label>
-      <Button
-        type="custom"
-        color="textDark"
-        border="none"
-        bg="white"
-        bc="transparent"
-        pt="0"
-        pb="0"
-        va="middle"
-        onClick={onClick(addToCart, skuId)}
-      >
-        <Img src={IncreaseIcon} alt="" float="left" height="22px" />
-      </Button>
-    </Div>
-  </Row>
-);
+}) => {
+  const count = getCount(cartList, skuId);
+  return (
+    <Row display="block" mr="0" ml="0" mb="1.25rem">
+      <Div col="12" ta="right">
+        <Button
+          type="custom"
+          color="textDark"
+          border="none"
+          bg="white"
+          bc="transparent"
+          pt="0"
+          pb="0"
+          va="middle"
+          onClick={onClick(reduceQuantity, skuId)}
+          disabled={count <= 1}
+        >
+          <Img src={ReductIcon} alt="" float="left" height="22px" />
+        </Button>
+        <Label color="textDark" mb="0" mt="0">
+          {count}
+        </Label>
+        <Button
+          type="custom"
+          color="textDark"
+          border="none"
+          bg="white"
+          bc="transparent"
+          pt="0"
+          pb="0"
+          va="middle"
+          onClick={onClick(addToCart, skuId)}
+        >
+          <Img src={IncreaseIcon} alt="" float="left" height="22px" />
+        </Button>
+      </Div>
+    </Row>
+  );
+};
 
 ProductQuantityCounter.propTypes = {
   skuId: PropTypes.string.isRequired,
