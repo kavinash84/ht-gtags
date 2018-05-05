@@ -4,7 +4,9 @@ import Button from 'hometown-components/lib/Buttons';
 import Div from 'hometown-components/lib/Div';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 import * as actionCreators from 'redux/modules/cart';
+import { CART_URL } from 'helpers/Constants';
 
 const styles = require('./AddToCart.scss');
 
@@ -26,7 +28,7 @@ const AddToCart = ({ skuId, cartList, addToCart }) => {
     <div className={styles.addToCartWrapper}>
       <i>{isExists ? `${"You've added this to cart"} x ${isExists.count}` : ''}</i>
       {/* }<Div col="12"> */}
-      <Div col="9">
+      <Div col={isExists ? '9' : '12'}>
         <Button
           onClick={onClick(addToCart, skuId)}
           btnType="primary"
@@ -40,7 +42,7 @@ const AddToCart = ({ skuId, cartList, addToCart }) => {
         </Button>
       </Div>
       {/* }<Div col="3" hide> */}
-      <Div col="3">
+      <Div col="3" hide={!isExists}>
         <Button
           btnType="primary"
           size="block"
@@ -50,7 +52,7 @@ const AddToCart = ({ skuId, cartList, addToCart }) => {
           lh="2"
           ml="0.325rem"
         >
-          >
+          <Link to={`${CART_URL}`}> > </Link>
         </Button>
       </Div>
     </div>

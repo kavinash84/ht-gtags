@@ -1,11 +1,9 @@
-import multireducer from 'multireducer';
 import { routerReducer } from 'react-router-redux';
 import info from './modules/info';
 import banners from './modules/banners';
 import shopByOccasion from './modules/shopByOccasion';
 import shopByRoom from './modules/shopByRoom';
 import shopByStyle from './modules/shopByStyle';
-import counter from './modules/quantityCounter';
 import cart from './modules/cart';
 
 export default function createReducers(asyncReducers) {
@@ -16,11 +14,6 @@ export default function createReducers(asyncReducers) {
     shopByStyle,
     shopByOccasion,
     shopByRoom,
-    counters: multireducer({
-      listing: counter,
-      detail: counter,
-      cart: counter
-    }),
     cart,
     ...asyncReducers
   };

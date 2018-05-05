@@ -22,7 +22,7 @@ import { ReduxAsyncConnect, Provider } from 'components';
 const persistConfig = {
   key: 'primary',
   storage: localForage,
-  whitelist: ['auth', 'info', 'chat']
+  whitelist: ['cart']
 };
 
 const dest = document.getElementById('content');
