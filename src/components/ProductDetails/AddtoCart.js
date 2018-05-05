@@ -25,6 +25,7 @@ const AddToCart = ({ skuId, cartList, addToCart }) => {
   return (
     <div className={styles.addToCartWrapper}>
       <i>{isExists ? `${"You've added this to cart"} x ${isExists.count}` : ''}</i>
+      {/* }<Div col="12"> */}
       <Div col="9">
         <Button
           onClick={onClick(addToCart, skuId)}
@@ -38,6 +39,7 @@ const AddToCart = ({ skuId, cartList, addToCart }) => {
           ADD TO CART
         </Button>
       </Div>
+      {/* }<Div col="3" hide> */}
       <Div col="3">
         <Button
           btnType="primary"
