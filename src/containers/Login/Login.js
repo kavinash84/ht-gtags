@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import LoginForm from 'hometown-components/lib/Forms/LoginForm';
 import Section from 'hometown-components/lib/Section';
 import Row from 'hometown-components/lib/Row';
 import Heading from 'hometown-components/lib/Heading';
 import Div from 'hometown-components/lib/Div';
-import Link from 'hometown-components/lib/Link';
+import { Link } from 'react-router-dom';
 import { Label } from 'hometown-components/lib/Label';
 import Img from 'hometown-components/lib/Img';
 import { validateEmail, isBlank } from 'js-utility-functions';
+import { SIGNUP_URL } from 'helpers/Constants';
 
 const closeIcon = require('../../../static/closebutton.png');
 
+@withRouter
 export default class LoginFormContainer extends Component {
   constructor() {
     super();
@@ -81,9 +84,7 @@ export default class LoginFormContainer extends Component {
             </Div>
             <Div col="6" ta="right">
               <Label fontFamily="light">
-                <Link href="/signup" fontSize="0.875em">
-                  New User? Sign Up now
-                </Link>
+                <Link to={SIGNUP_URL}>New User? Sign Up now</Link>
               </Label>
             </Div>
           </Row>
@@ -105,16 +106,12 @@ export default class LoginFormContainer extends Component {
           <Row display="block" mr="0" ml="0" pt="1.25rem">
             <Div col="6">
               <Label fontFamily="light">
-                <Link href="#forgot" fontSize="0.875em">
-                  Forgot Password?
-                </Link>
+                <Link to={SIGNUP_URL}>Forgot Password?</Link>
               </Label>
             </Div>
             <Div col="6" ta="right">
               <Label fontFamily="light">
-                <Link href="#otp" fontSize="0.875em">
-                  Login via OTP?
-                </Link>
+                <Link to={SIGNUP_URL}>Login via OTP?</Link>
               </Label>
             </Div>
           </Row>

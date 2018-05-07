@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import SignupForm from 'hometown-components/lib/Forms/SignupForm';
 import Section from 'hometown-components/lib/Section';
 import Row from 'hometown-components/lib/Row';
@@ -12,6 +13,7 @@ import { LOGIN_URL } from 'helpers/Constants';
 
 const closeIcon = require('../../../static/closebutton.png');
 
+@withRouter
 export default class SignupFormContainer extends Component {
   constructor() {
     super();
