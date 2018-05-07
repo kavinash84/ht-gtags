@@ -10,6 +10,7 @@ import { CART_URL } from 'helpers/Constants';
 
 const styles = require('./AddToCart.scss');
 
+// const checkItemInCart = (items, id) => items.filter(item => item.sku === id);
 const checkItemInCart = (items, id) => items.find(item => item.sku === id);
 
 const onClick = (dispatcher, skuId) => e => {
@@ -22,7 +23,7 @@ const mapStateToProps = ({ cart }) => ({ ...cart });
 const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
 
 const AddToCart = ({ skuId, cartList, addToCart }) => {
-  const isExists = checkItemInCart(cartList, skuId);
+  const isExists = checkItemInCart(cartList, skuId) || false;
   return (
     <div className={styles.addToCartWrapper}>
       {isExists ? <i>{`${"You've added this to cart"} x ${isExists.count}`}</i> : ''}
