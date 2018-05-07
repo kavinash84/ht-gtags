@@ -10,7 +10,6 @@ import { CART_URL } from 'helpers/Constants';
 
 const styles = require('./AddToCart.scss');
 
-// const checkItemInCart = (items, id) => items.filter(item => item.sku === id);
 const checkItemInCart = (items, id) => items.find(item => item.sku === id);
 
 const onClick = (dispatcher, skuId) => e => {
@@ -26,7 +25,7 @@ const AddToCart = ({ skuId, cartList, addToCart }) => {
   const isExists = checkItemInCart(cartList, skuId);
   return (
     <div className={styles.addToCartWrapper}>
-      <i>{isExists ? `${"You've added this to cart"} x ${isExists.count}` : ''}</i>
+      {isExists ? <i>{`${"You've added this to cart"} x ${isExists.count}`}</i> : ''}
       {/* }<Div col="12"> */}
       <Div col={isExists ? '9' : '12'}>
         <Button
@@ -41,7 +40,6 @@ const AddToCart = ({ skuId, cartList, addToCart }) => {
           ADD TO CART
         </Button>
       </Div>
-      {/* }<Div col="3" hide> */}
       <Div col="3" hide={!isExists}>
         <Button
           btnType="primary"
@@ -63,8 +61,6 @@ AddToCart.propTypes = {
   cartList: PropTypes.array.isRequired,
   skuId: PropTypes.string.isRequired,
   addToCart: PropTypes.func.isRequired
-  // removeFromCart: PropTypes.func.isRequired,
-  // reduceQuantity: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddToCart);
