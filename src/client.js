@@ -34,7 +34,7 @@ const providers = { app: {}, restApp: {}, client };
   const online = await (window.__data ? true : isOnline());
 
   const history = createBrowserHistory();
-  const data = { ...window.__data, ...storedData, online };
+  const data = { ...window.__data, ...storedData };
   const store = createStore({
     history,
     data,
