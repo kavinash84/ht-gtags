@@ -33,105 +33,139 @@
 		@extend .mgTop5;
 	}
 	.catSlider {
-	  ul {
-	    padding-right: 40px !important;
-	  }
-	  li {
-	    margin: 0 0 0 15px !important;
+		ul {
+			padding-right: 40px !important;
+		}
+		li {
+			margin: 0 0 0 15px !important;
 			background: transparent !important;
 			img {
 				box-shadow: 0 5px 13px 0 rgba(0, 0, 0, 0.14);
 			}
-	  }
+		}
 	}
 	.prodSlider {
 		padding: 20px 0 10px;
-	  ul {
-	    padding-right: 0 !important;
-	  }
-	  li {
+		ul {
+			padding-right: 0 !important;
+		}
+		li {
 			margin: 0 !important;
 			padding: 0 15px;
 		}
 		.control-arrow {
-	    top: calc(50% - 60px) !important;
-	  }
+			top: calc(50% - 60px) !important;
+		}
 	}
 	.homeSlider {
-	  .control-arrow {
-	    top: calc(50% - 21px) !important;
-	  }
+		.control-arrow {
+			top: calc(50% - 21px) !important;
+		}
 		.control-next {
-    	right: 15px !important;
+			right: 15px !important;
 		}
 		.control-prev {
-    	left: 15px !important;
+			left: 15px !important;
 		}
 	}
 	.menuSlider {
 		ul {
 			padding-top: 2px !important;
 		}
-	  .slide {
+		.slide {
 			min-width: auto !important;
 			margin-right: 1rem !important;
-	  }
+		}
 	}
-	/* NProgress Start */
 
+	/* NProgress Start */
 	#nprogress {
-	  pointer-events: none;
-	  .bar {
-	    background: #29d;
-	    position: fixed;
-	    z-index: 1031;
-	    top: 0;
-	    left: 0;
-	    width: 100%;
-	    height: 2px;
-	  }
-	  .peg {
-	    display: block;
-	    position: absolute;
-	    right: 0px;
-	    width: 100px;
-	    height: 100%;
-	    box-shadow: 0 0 10px #29d, 0 0 5px #29d;
-	    opacity: 1.0;
-	    -webkit-transform: rotate(3deg) translate(0px, -4px);
-	    -ms-transform: rotate(3deg) translate(0px, -4px);
-	    transform: rotate(3deg) translate(0px, -4px);
-	  }
-	  .spinner {
-	    display: block;
-	    position: fixed;
-	    z-index: 1031;
-	    top: 15px;
-	    right: 15px;
-	  }
-	  .spinner-icon {
-	    width: 18px;
-	    height: 18px;
-	    box-sizing: border-box;
-	    border: solid 2px transparent;
-	    border-top-color: #29d;
-	    border-left-color: #29d;
-	    border-radius: 50%;
-	    -webkit-animation: nprogress-spinner 400ms linear infinite;
-	    animation: nprogress-spinner 400ms linear infinite;
-	  }
+		pointer-events: none;
+		.bar {
+			background: #29d;
+			position: fixed;
+			z-index: 1031;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 2px;
+		}
+		.peg {
+			display: block;
+			position: absolute;
+			right: 0px;
+			width: 100px;
+			height: 100%;
+			box-shadow: 0 0 10px #29d, 0 0 5px #29d;
+			opacity: 1.0;
+			-webkit-transform: rotate(3deg) translate(0px, -4px);
+			-ms-transform: rotate(3deg) translate(0px, -4px);
+			transform: rotate(3deg) translate(0px, -4px);
+		}
+		.spinner {
+			display: block;
+			position: fixed;
+			z-index: 1031;
+			top: 15px;
+			right: 15px;
+		}
+		.spinner-icon {
+			width: 18px;
+			height: 18px;
+			box-sizing: border-box;
+			border: solid 2px transparent;
+			border-top-color: #29d;
+			border-left-color: #29d;
+			border-radius: 50%;
+			-webkit-animation: nprogress-spinner 400ms linear infinite;
+			animation: nprogress-spinner 400ms linear infinite;
+		}
 	}
 
 	.nprogress-custom-parent {
-	  overflow: hidden;
-	  position: relative;
-	  #nprogress {
-	    .spinner, .bar {
-	      position: absolute;
-	    }
-	  }
+		overflow: hidden;
+		position: relative;
+		#nprogress {
+			.spinner, .bar {
+				position: absolute;
+			}
+		}
 	}
 	/* NProgress End */
+
+	/* Heart Symbol Start */
+	.heart-shape{
+		position: relative;
+		width: 20px;
+		height: 20px;
+		-webkit-transform: rotate(45deg);
+		-moz-transform: rotate(45deg);
+		-ms-transform: rotate(45deg);
+		-o-transform: rotate(45deg);
+		transform: rotate(45deg);
+		background-color: #7f7f7f;
+	}
+	.heart-shape:before,
+	.heart-shape:after{
+		position: absolute;
+		width: 20px;
+		height: 20px;
+		content: '';
+		-webkit-border-radius: 50%;
+		-moz-border-radius: 50%;
+		-o-border-radius: 50%;
+		border-radius: 50%;
+		background-color: #7f7f7f;
+	}
+	.heart-shape:before{
+		bottom: 0px;
+		left: -10px;
+	}
+	.heart-shape:after{
+		top: -10px;
+		right: 0px;
+	}
+	/* Heart Symbol End */
 }
 
 @-webkit-keyframes :global(nprogress-spinner) {

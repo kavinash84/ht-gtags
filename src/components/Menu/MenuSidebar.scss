@@ -5,12 +5,13 @@
   .barContainer {
     display: inline-block;
     cursor: pointer;
+    margin-right: 0.75rem;
   }
   .bar1, .bar2, .bar3 {
-    width: 30px;
+    width: 25px;
     height: 3px;
     background-color: #333;
-    margin: 6px 0;
+    margin: 5px 0;
     transition: 0.4s;
   }
   .close {
@@ -29,6 +30,21 @@
   button {
     background: transparent;
     border: none;
+  }
+  .logoWrapper {
+    display: inline-block;
+    vertical-align: bottom;
+    img {
+      height: 34px;
+    }
+  }
+  .heartBtn {
+    display: inline-block;
+  }
+  .cart {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 1.25rem;
   }
 }
 .sidebar {
