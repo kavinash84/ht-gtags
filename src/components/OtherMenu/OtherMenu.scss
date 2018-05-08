@@ -5,6 +5,11 @@
   position: relative;
   padding: 15px 5px 0;
   margin-bottom: 30px;
+  &.overlap {
+    position: absolute;
+    top: 0;
+    left: -5px;
+  }
   .back {
     float: left;
   }

@@ -8,8 +8,10 @@ const BackIcon = require('../../../static/back.jpg');
 const FilterIcon = require('../../../static/filter.jpg');
 const SearchIcon = require('../../../static/search.jpg');
 
-const OtherMenu = ({ filter, search, history }) => (
-  <div className={styles.otherMenuContainer}>
+const OtherMenu = ({
+  filter, search, history, type
+}) => (
+  <div className={`${styles.otherMenuContainer} ${type === 'overlap' ? styles.overlap : ''}`}>
     <Container type="container" pr="1rem" pl="1rem">
       <div className={styles.back}>
         <button onClick={history.goBack}>
@@ -35,13 +37,15 @@ const OtherMenu = ({ filter, search, history }) => (
 
 OtherMenu.defaultProps = {
   filter: false,
-  search: false
+  search: false,
+  type: ''
 };
 
 OtherMenu.propTypes = {
   filter: PropTypes.bool,
   search: PropTypes.bool,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  type: PropTypes.string
 };
 
 export default withRouter(OtherMenu);
