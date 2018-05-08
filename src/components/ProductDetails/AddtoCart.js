@@ -42,17 +42,7 @@ const AddToCart = ({ skuId, cartList, addToCart }) => {
         </Button>
       </Div>
       <Div col="3" hide={!isExists}>
-        <Button
-          btnType="primary"
-          size="block"
-          fontFamily="regular"
-          fontSize="0.875em"
-          height="42px"
-          lh="2"
-          ml="0.325rem"
-        >
-          <Link to={`${CART_URL}`}> > </Link>
-        </Button>
+        <Link to={`${CART_URL}`}> > </Link>
       </Div>
     </div>
   );
