@@ -3,15 +3,9 @@ import Carousel from '../Carousel';
 
 const styles = require('./NavBar.scss');
 const menuItems = require('../../data/Menu.js');
-const HomeIcon = require('../../../static/home.jpg');
 
 const NavBar = () => (
   <div className={styles.navBar}>
-    <div className={styles.homeIcon}>
-      <a href="#home">
-        <img src={HomeIcon} alt="" />
-      </a>
-    </div>
     <div className={styles.navBarSlider}>
       <Carousel
         autoPlayVal={false}

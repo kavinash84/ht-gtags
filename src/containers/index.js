@@ -12,4 +12,5 @@ export UpdatePassword from './UpdatePassword';
 export Payment from './Payment';
 export TestCounter from './ProductQuantityCounter';
 export ProductDetails from './ProductDetails/ProductDetails';
+export Search from './Search/Search';
 export NotFound from './NotFound/NotFound';

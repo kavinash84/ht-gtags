@@ -16,8 +16,8 @@
   }
 }
 .navBarSlider {
-  float: right;
-  width: calc(100% - 40px);
+  // float: right;
+  width: 100%;
   a {
     font-size: 0.8rem;
     @include font-family('Medium');

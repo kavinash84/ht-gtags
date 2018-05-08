@@ -12,6 +12,7 @@ import {
   Payment,
   TestCounter,
   ProductDetails,
+  Search,
   NotFound
 } from 'containers';
 import Login from 'containers/Login';
@@ -37,6 +38,7 @@ const routes = [
       { path: '/payment', exact: true, component: Payment },
       { path: '/counter', exact: true, component: TestCounter },
       { path: '/product-details', exact: true, component: ProductDetails },
+      { path: '/search', exact: true, component: Search },
       { component: NotFound }
     ]
   }

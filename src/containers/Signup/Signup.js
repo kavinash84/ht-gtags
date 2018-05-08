@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
+import Menu from 'components/OtherMenu';
 import SignupForm from 'hometown-components/lib/Forms/SignupForm';
 import Section from 'hometown-components/lib/Section';
 import Row from 'hometown-components/lib/Row';
@@ -10,8 +11,6 @@ import { Label } from 'hometown-components/lib/Label';
 import Img from 'hometown-components/lib/Img';
 import { validateEmail, isBlank, validateMobile } from 'js-utility-functions';
 import { LOGIN_URL } from 'helpers/Constants';
-
-const closeIcon = require('../../../static/closebutton.png');
 
 @withRouter
 export default class SignupFormContainer extends Component {
@@ -93,9 +92,7 @@ export default class SignupFormContainer extends Component {
         <Section p="0" mb="0.3125rem">
           <div className={styles.imgWrapper}>
             <Img src="http://via.placeholder.com/720x480" />
-            <div className={styles.back}>
-              <img src={closeIcon} alt="Back" />
-            </div>
+            <Menu type="overlap" />
           </div>
         </Section>
         <Section mb="0" p="1.25rem" pt="1.5rem" pb="1.5rem">
