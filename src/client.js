@@ -2,7 +2,7 @@
  * THIS IS THE ENTRY POINT FOR THE CLIENT, JUST LIKE server.js IS THE ENTRY POINT FOR THE SERVER.
  */
 import 'babel-polyfill';
-import _ from 'lodash';
+import pick from 'lodash/pick';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ConnectedRouter } from 'react-router-redux';
@@ -38,7 +38,7 @@ const providers = { app: {}, restApp: {}, client };
   const data = {
     ...storedData,
     ...window.__data,
-    ..._.pick(storedData, ['cart']),
+    ...pick(storedData, ['cart']),
     online
   };
   const store = createStore({
