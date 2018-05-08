@@ -23,10 +23,10 @@ const mapStateToProps = ({ cart }) => ({ ...cart });
 const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
 
 const AddToCart = ({ skuId, cartList, addToCart }) => {
-  const isExists = checkItemInCart(cartList, skuId) || false;
+  const isExists = checkItemInCart(cartList, skuId);
   return (
     <div className={styles.addToCartWrapper}>
-      {isExists ? <i>{`${"You've added this to cart"} x ${isExists.count}`}</i> : ''}
+      <i>{isExists ? `${"You've added this to cart"} x ${isExists.count}` : ''}</i>
       {/* }<Div col="12"> */}
       <Div col={isExists ? '9' : '12'}>
         <Button
@@ -42,7 +42,17 @@ const AddToCart = ({ skuId, cartList, addToCart }) => {
         </Button>
       </Div>
       <Div col="3" hide={!isExists}>
-        <Link to={`${CART_URL}`}> > </Link>
+        <Button
+          btnType="primary"
+          size="block"
+          fontFamily="regular"
+          fontSize="0.875em"
+          height="42px"
+          lh="2"
+          ml="0.325rem"
+        >
+          <Link to={`${CART_URL}`}> > </Link>
+        </Button>
       </Div>
     </div>
   );

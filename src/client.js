@@ -2,6 +2,7 @@
  * THIS IS THE ENTRY POINT FOR THE CLIENT, JUST LIKE server.js IS THE ENTRY POINT FOR THE SERVER.
  */
 import 'babel-polyfill';
+import _ from 'lodash';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ConnectedRouter } from 'react-router-redux';
@@ -31,10 +32,15 @@ const providers = { app: {}, restApp: {}, client };
 
 (async () => {
   const storedData = await getStoredState(persistConfig);
-  const online = await (window.__data ? true : isOnline());
+  const online = window.__data ? true : await isOnline();
 
   const history = createBrowserHistory();
-  const data = { ...window.__data, ...storedData };
+  const data = {
+    ...storedData,
+    ...window.__data,
+    ..._.pick(storedData, ['cart']),
+    online
+  };
   const store = createStore({
     history,
     data,
