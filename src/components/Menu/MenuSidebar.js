@@ -41,12 +41,12 @@ export default class MenuSidebar extends Component {
               </Link>
             </div>
           </Div>
-          <Div col="5" ta="right">
+          <Div col="5" ta="right" pt="0.625rem">
             <Button p="0" className={styles.heartBtn}>
               <div className="heart-shape" />
             </Button>
             <Link className={styles.cart} to={HOME_URL}>
-              <Img src={CartIcon} alt="Hometown" />
+              <Img src={CartIcon} alt="Hometown" height="26px" />
             </Link>
           </Div>
         </div>

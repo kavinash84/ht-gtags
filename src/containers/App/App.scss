@@ -136,8 +136,8 @@
 	/* Heart Symbol Start */
 	.heart-shape{
 		position: relative;
-		width: 20px;
-		height: 20px;
+		width: 15px;
+		height: 15px;
 		-webkit-transform: rotate(45deg);
 		-moz-transform: rotate(45deg);
 		-ms-transform: rotate(45deg);
@@ -148,8 +148,8 @@
 	.heart-shape:before,
 	.heart-shape:after{
 		position: absolute;
-		width: 20px;
-		height: 20px;
+		width: 15px;
+		height: 15px;
 		content: '';
 		-webkit-border-radius: 50%;
 		-moz-border-radius: 50%;
@@ -159,10 +159,10 @@
 	}
 	.heart-shape:before{
 		bottom: 0px;
-		left: -10px;
+		left: -7.5px;
 	}
 	.heart-shape:after{
-		top: -10px;
+		top: -7.5px;
 		right: 0px;
 	}
 	/* Heart Symbol End */
