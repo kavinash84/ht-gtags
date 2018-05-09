@@ -157,15 +157,24 @@
 		border-radius: 50%;
 		background-color: #7f7f7f;
 	}
+	.fillIn, .fillIn:before,.fillIn:after {
+		background-color: #FF5722;
+	}
 	.heart-shape:before{
 		bottom: 0px;
-		left: -7.5px;
+		left: -9.5px;
 	}
 	.heart-shape:after{
-		top: -7.5px;
+		top: -9.5px;
 		right: 0px;
 	}
 	/* Heart Symbol End */
+
+	.wishListBtn {
+		position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+	}
 }
 
 @-webkit-keyframes :global(nprogress-spinner) {

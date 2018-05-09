@@ -8,7 +8,7 @@ const SearchIcon = require('../../../static/search.jpg');
 const CloseIcon = require('../../../static/close.jpg');
 
 const Search = () => (
-  <Div className={styles.search} pt="0.9375rem" pb="0.625rem">
+  <Div className={styles.search} pt="0.625rem" pb="0.3125rem">
     <Input
       type="text"
       placeholder="Search"
