@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import Menu from 'components/Menu';
 import MainSlider from 'components/MainSlider';
-import CategorySlider from 'components/CategorySlider';
 import { connect } from 'react-redux';
 import ProductSlider from 'components/ProductSlider';
+import ProductCarousel from 'components/ProductCarousel';
 
 @connect(state => ({
   shopByOccasion: state.shopByOccasion.data,
@@ -26,9 +26,9 @@ export default class Home extends Component {
         <div className="wrapper">
           <Menu />
           <MainSlider data={banners} />
-          <CategorySlider categoryName="Shop by Occasion" data={shopByOccasion} />
-          <CategorySlider categoryName="Shop by Room" data={shopByRoom} />
-          <CategorySlider categoryName="Shop by Style" data={shopByStyle} />
+          <ProductCarousel categoryName="Shop by Occasion" data={shopByOccasion} />
+          <ProductCarousel categoryName="Shop by Room" data={shopByRoom} />
+          <ProductCarousel categoryName="Shop by Style" data={shopByStyle} />
           <ProductSlider productSliderTitle="Recommended for you" />
           <ProductSlider productSliderTitle="Top Selling Products" />
           <ProductSlider productSliderTitle="Recently Viewed Products" />

@@ -11,7 +11,7 @@ export default class Home extends Component {
   render() {
     const { shopByOccasion } = this.props;
 
-    return <ProductCarousel categoryName="Shop by Occasion" data={shopByOccasion} />;
+    return <ProductCarousel categoryName="Shop by Occasion" itemData={shopByOccasion} />;
   }
 }
 
