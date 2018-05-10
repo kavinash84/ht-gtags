@@ -23,7 +23,7 @@ import { ReduxAsyncConnect, Provider } from 'components';
 const persistConfig = {
   key: 'primary',
   storage: localForage,
-  whitelist: ['cart']
+  whitelist: ['cart', 'wishlist']
 };
 
 const dest = document.getElementById('content');
@@ -38,7 +38,7 @@ const providers = { app: {}, restApp: {}, client };
   const data = {
     ...storedData,
     ...window.__data,
-    ...pick(storedData, ['cart']),
+    ...pick(storedData, ['cart', 'wishlist']),
     online
   };
   const store = createStore({
@@ -75,10 +75,8 @@ const providers = { app: {}, restApp: {}, client };
       dest
     );
   };
-
-  await Loadable.preloadReady();
-
   await hydrate(routes);
+  await Loadable.preloadReady();
 
   if (module.hot) {
     module.hot.accept('./routes', () => {

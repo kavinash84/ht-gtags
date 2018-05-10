@@ -5,6 +5,9 @@ import shopByOccasion from './modules/shopByOccasion';
 import shopByRoom from './modules/shopByRoom';
 import shopByStyle from './modules/shopByStyle';
 import cart from './modules/cart';
+import products from './modules/products';
+import wishlist from './modules/wishlist';
+import search from './modules/search';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -15,6 +18,9 @@ export default function createReducers(asyncReducers) {
     shopByOccasion,
     shopByRoom,
     cart,
+    products,
+    wishlist,
+    search,
     ...asyncReducers
   };
 }
