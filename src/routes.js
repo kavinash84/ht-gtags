@@ -13,6 +13,7 @@ import {
   TestCounter,
   ProductDetails,
   Search,
+  ProductCarousel,
   NotFound
 } from 'containers';
 import Login from 'containers/Login';
@@ -39,6 +40,7 @@ const routes = [
       { path: '/counter', exact: true, component: TestCounter },
       { path: '/product-details', exact: true, component: ProductDetails },
       { path: '/search', exact: true, component: Search },
+      { path: '/product-carousel', exact: true, component: ProductCarousel },
       { component: NotFound }
     ]
   }

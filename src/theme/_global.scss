@@ -285,6 +285,7 @@ h1,h2,h3,h4,h5,h6,a,span {
 	}
 	.carousel .control-next.control-arrow:before {
 		border-left: 7px solid #000;
+		margin-left: 0 !important;
 	}
 	.carousel {
 		position: relative;
