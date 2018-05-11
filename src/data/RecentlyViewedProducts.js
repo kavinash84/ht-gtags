@@ -64,6 +64,97 @@ const sliderItems = [
     tags: '#minimalist   #garcia   #oneseater   #bachelorfriendly',
     image: 'http://via.placeholder.com/300x300/FF7CBF?text=Martin%20Half%20Leather%20Single%20Seater%20Sofa',
     url: 'http://via.placeholder.com/720x448/FFC720?text=Slide%201'
+  },
+  {
+    id: 6,
+    sku_id: 6,
+    name: 'Leather Single Seater Sofa',
+    price: '22,000',
+    disc_price: '21,000',
+    saving: '1,000',
+    percentage: '5%',
+    rating: '5',
+    tags: '#minimalist   #garcia   #oneseater   #bachelorfriendly',
+    image: 'http://via.placeholder.com/300x300/FF7CBF?text=Martin%20Half%20Leather%20Single%20Seater%20Sofa',
+    url: 'http://via.placeholder.com/720x448/FFC720?text=Slide%201'
+  },
+  {
+    id: 7,
+    sku_id: 7,
+    name: 'Leather Single Seater Sofa',
+    price: '22,000',
+    disc_price: '21,000',
+    saving: '1,000',
+    percentage: '5%',
+    rating: '5',
+    tags: '#minimalist   #garcia   #oneseater   #bachelorfriendly',
+    image: 'http://via.placeholder.com/300x300/FF7CBF?text=Martin%20Half%20Leather%20Single%20Seater%20Sofa',
+    url: 'http://via.placeholder.com/720x448/FFC720?text=Slide%201'
+  },
+  {
+    id: 8,
+    sku_id: 8,
+    name: 'Leather Single Seater Sofa',
+    price: '22,000',
+    disc_price: '21,000',
+    saving: '1,000',
+    percentage: '5%',
+    rating: '5',
+    tags: '#minimalist   #garcia   #oneseater   #bachelorfriendly',
+    image: 'http://via.placeholder.com/300x300/FF7CBF?text=Martin%20Half%20Leather%20Single%20Seater%20Sofa',
+    url: 'http://via.placeholder.com/720x448/FFC720?text=Slide%201'
+  },
+  {
+    id: 9,
+    sku_id: 9,
+    name: 'Leather Single Seater Sofa',
+    price: '22,000',
+    disc_price: '21,000',
+    saving: '1,000',
+    percentage: '5%',
+    rating: '5',
+    tags: '#minimalist   #garcia   #oneseater   #bachelorfriendly',
+    image: 'http://via.placeholder.com/300x300/FF7CBF?text=Martin%20Half%20Leather%20Single%20Seater%20Sofa',
+    url: 'http://via.placeholder.com/720x448/FFC720?text=Slide%201'
+  },
+  {
+    id: 10,
+    sku_id: 10,
+    name: 'Leather Single Seater Sofa',
+    price: '22,000',
+    disc_price: '21,000',
+    saving: '1,000',
+    percentage: '5%',
+    rating: '5',
+    tags: '#minimalist   #garcia   #oneseater   #bachelorfriendly',
+    image: 'http://via.placeholder.com/300x300/FF7CBF?text=Martin%20Half%20Leather%20Single%20Seater%20Sofa',
+    url: 'http://via.placeholder.com/720x448/FFC720?text=Slide%201'
+  },
+  {
+    id: 11,
+    sku_id: 11,
+    name: 'Leather Single Seater Sofa',
+    price: '22,000',
+    disc_price: '21,000',
+    saving: '1,000',
+    percentage: '5%',
+    rating: '5',
+    tags: '#minimalist   #garcia   #oneseater   #bachelorfriendly',
+    image: 'http://via.placeholder.com/300x300/FF7CBF?text=Martin%20Half%20Leather%20Single%20Seater%20Sofa',
+    url: 'http://via.placeholder.com/720x448/FFC720?text=Slide%201'
+  },
+  {
+    id: 12,
+    sku_id: 12,
+    name: 'Leather Single Seater Sofa',
+    price: '22,000',
+    disc_price: '21,000',
+    saving: '1,000',
+    percentage: '5%',
+    rating: '5',
+    tags: '#minimalist   #garcia   #oneseater   #bachelorfriendly',
+    image: 'http://via.placeholder.com/300x300/FF7CBF?text=Martin%20Half%20Leather%20Single%20Seater%20Sofa',
+    url: 'http://via.placeholder.com/720x448/FFC720?text=Slide%201'
   }
 ];
 

@@ -13,7 +13,7 @@ const ProductSlider = ({ productSliderTitle, colSize }) => (
       <Title title={productSliderTitle} />
       <Carousel
         autoPlayVal={false}
-        className="catSlider"
+        className="prodSlider"
         showThumbsVal={false}
         showStatusVal={false}
         showArrowsVal

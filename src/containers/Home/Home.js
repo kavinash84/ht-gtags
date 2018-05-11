@@ -7,6 +7,7 @@ import Section from 'hometown-components/lib/Section';
 import { connect } from 'react-redux';
 import ProductSlider from 'components/ProductSlider';
 import ProductCarousel from 'components/ProductCarousel';
+import HashTags from 'components/Home/HashTags';
 
 @connect(state => ({
   shopByOccasion: state.shopByOccasion.data,
@@ -56,9 +57,10 @@ export default class Home extends Component {
             data={shopByStyle}
             colSize="33.33"
           />
+          <HashTags />
           <ProductSlider productSliderTitle="Recommended for you" colSize="20" />
           <ProductSlider productSliderTitle="Top Selling Products" colSize="20" />
-          <ProductSlider productSliderTitle="Recently Viewed Products" colSize="25" />
+          <ProductSlider productSliderTitle="Recently Viewed Products" colSize="20" />
         </div>
       </Section>
     );
