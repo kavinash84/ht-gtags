@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import Menu from 'components/Menu';
 import MainSlider from 'components/MainSlider';
+import Section from 'hometown-components/lib/Section';
 import { connect } from 'react-redux';
 import ProductSlider from 'components/ProductSlider';
 import ProductCarousel from 'components/ProductCarousel';
@@ -18,10 +19,9 @@ export default class Home extends Component {
     const {
       shopByOccasion, shopByRoom, shopByStyle, banners
     } = this.props;
-    const styles = require('./Home.scss');
 
     return (
-      <div className={styles.home}>
+      <Section p="0" pb="1.5rem">
         <Helmet title="Home" />
         <div className="wrapper">
           <Menu />
@@ -30,37 +30,37 @@ export default class Home extends Component {
             categoryName="Popular Categories"
             subTitle="Products curated from the user-product engangement"
             data={shopByOccasion}
-            colSize="25%"
+            colSize="25"
           />
           <ProductCarousel
             categoryName="Shop by Room"
             subTitle="Products curated for every need of a room in your home"
             data={shopByRoom}
-            colSize="25%"
+            colSize="25"
           />
           <ProductCarousel
             categoryName="Shop by Style"
             subTitle="Products curated by style because your taste represents who you are"
             data={shopByStyle}
-            colSize="25%"
+            colSize="25"
           />
           <ProductCarousel
             categoryName="Shop by Occasion"
             subTitle="Our designers have carefully curated products for you for occasions of joy"
             data={shopByStyle}
-            colSize="25%"
+            colSize="25"
           />
           <ProductCarousel
             categoryName="Exclusive Services by HomeTown"
             subTitle="We are not just limited to products, but we also provide amazing services"
             data={shopByStyle}
-            colSize="33.33%"
+            colSize="33.33"
           />
-          <ProductSlider productSliderTitle="Recommended for you" />
-          <ProductSlider productSliderTitle="Top Selling Products" />
-          <ProductSlider productSliderTitle="Recently Viewed Products" />
+          <ProductSlider productSliderTitle="Recommended for you" colSize="20" />
+          <ProductSlider productSliderTitle="Top Selling Products" colSize="20" />
+          <ProductSlider productSliderTitle="Recently Viewed Products" colSize="25" />
         </div>
-      </div>
+      </Section>
     );
   }
 }

@@ -7,7 +7,7 @@ import Carousel from '../Carousel';
 
 const SliderItem = require('../../data/RecentlyViewedProducts.js');
 
-const ProductSlider = ({ productSliderTitle }) => (
+const ProductSlider = ({ productSliderTitle, colSize }) => (
   <Section p="0" pt="2.5rem" mb="0">
     <Container pr="0" pl="0">
       <Title title={productSliderTitle} />
@@ -20,7 +20,7 @@ const ProductSlider = ({ productSliderTitle }) => (
         showIndicatorsVal={false}
         infiniteLoopVal={false}
         centerModeVal
-        centerSlidePercentageVal={100}
+        centerSlidePercentageVal={colSize}
         sliderImages={SliderItem}
         contentStatus
         typeOfSlider="productSlider"
@@ -30,11 +30,13 @@ const ProductSlider = ({ productSliderTitle }) => (
 );
 
 ProductSlider.defaultProps = {
-  productSliderTitle: ''
+  productSliderTitle: '',
+  colSize: '100%'
 };
 
 ProductSlider.propTypes = {
-  productSliderTitle: PropTypes.string
+  productSliderTitle: PropTypes.string,
+  colSize: PropTypes.string
 };
 
 export default ProductSlider;
