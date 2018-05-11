@@ -11,17 +11,3 @@
     border-#{$borderType}: $borderWidth solid $borderColor !important;
   }
 }
-@mixin margin($type, $size) {
-  @if $type == 'both' {
-    margin: #{$size}px
-  } @else {
-    margin-#{$type}: #{$size}px
-  }
-}
-@mixin padding($type, $size) {
-  @if $type == 'both' {
-    padding: #{$size}px
-  } @else {
-    padding-#{$type}: #{$size}px
-  }
-}

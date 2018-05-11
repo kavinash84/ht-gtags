@@ -30,7 +30,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators },
 const Search = ({
   setSearchQuery, searchQuery, loading, loaded, results, clearSearchQuery
 }) => (
-  <Div className={styles.search} pt="0.625rem" pb="0.3125rem">
+  <Div className={styles.search} pt="0" pb="0.3125rem">
     <Input
       type="text"
       placeholder="Search"

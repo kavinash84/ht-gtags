@@ -1,3 +1,7 @@
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
 html {
   font-family: sans-serif;
   font-size: 16px;

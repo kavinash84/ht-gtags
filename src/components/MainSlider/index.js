@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Div from 'hometown-components/lib/Div';
 import Carousel from '../Carousel';
 
 export default class MainSlider extends Component {
   render() {
     const { data } = this.props;
     return (
-      <div className="mgBottom10">
+      <Div mb="10px">
         <Carousel
           autoPlayVal
           className="homeSlider"
@@ -20,7 +21,7 @@ export default class MainSlider extends Component {
           typeOfSlider="homeSlider"
           contentStatus={false}
         />
-      </div>
+      </Div>
     );
   }
 }

@@ -19,18 +19,14 @@
 		@include border($border-width, $border-color-text-field, 'full');
 	}
 	.head {
-		@extend .mgBottom5;
+		margin-bottom: 0;
 		.title {
-			h4 {
-				@include font-size(1.2rem);
-				@extend .mgBottom15;
-				@extend .mgTop0;
-			}
+			text-align: center;
 		}
 	}
 	.prodTitle {
 		@include font-size(1.2rem);
-		@extend .mgTop5;
+		margin-top: 0;
 	}
 	.catSlider {
 		ul {

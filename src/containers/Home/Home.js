@@ -26,9 +26,36 @@ export default class Home extends Component {
         <div className="wrapper">
           <Menu />
           <MainSlider data={banners} />
-          <ProductCarousel categoryName="Shop by Occasion" data={shopByOccasion} />
-          <ProductCarousel categoryName="Shop by Room" data={shopByRoom} />
-          <ProductCarousel categoryName="Shop by Style" data={shopByStyle} />
+          <ProductCarousel
+            categoryName="Popular Categories"
+            subTitle="Products curated from the user-product engangement"
+            data={shopByOccasion}
+            colSize="25%"
+          />
+          <ProductCarousel
+            categoryName="Shop by Room"
+            subTitle="Products curated for every need of a room in your home"
+            data={shopByRoom}
+            colSize="25%"
+          />
+          <ProductCarousel
+            categoryName="Shop by Style"
+            subTitle="Products curated by style because your taste represents who you are"
+            data={shopByStyle}
+            colSize="25%"
+          />
+          <ProductCarousel
+            categoryName="Shop by Occasion"
+            subTitle="Our designers have carefully curated products for you for occasions of joy"
+            data={shopByStyle}
+            colSize="25%"
+          />
+          <ProductCarousel
+            categoryName="Exclusive Services by HomeTown"
+            subTitle="We are not just limited to products, but we also provide amazing services"
+            data={shopByStyle}
+            colSize="33.33%"
+          />
           <ProductSlider productSliderTitle="Recommended for you" />
           <ProductSlider productSliderTitle="Top Selling Products" />
           <ProductSlider productSliderTitle="Recently Viewed Products" />
