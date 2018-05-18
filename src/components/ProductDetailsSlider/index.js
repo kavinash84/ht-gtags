@@ -13,7 +13,7 @@ const ProductDetailsSlider = ({ imageList }) => (
       showIndicatorsVal={false}
       infiniteLoopVal={false}
       centerModeVal
-      centerSlidePercentageVal={100}
+      centerSlidePercentageVal={28}
       sliderImages={imageList}
       contentStatus={false}
       typeOfSlider="productSlider"

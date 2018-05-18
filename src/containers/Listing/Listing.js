@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import ListingContainer from 'components/Listing';
-import Menu from 'components/OtherMenu';
+import Menu from 'components/Menu';
 
 @withRouter
 export default class Listing extends Component {

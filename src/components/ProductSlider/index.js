@@ -31,12 +31,12 @@ const ProductSlider = ({ productSliderTitle, colSize }) => (
 
 ProductSlider.defaultProps = {
   productSliderTitle: '',
-  colSize: '100%'
+  colSize: '100'
 };
 
 ProductSlider.propTypes = {
   productSliderTitle: PropTypes.string,
-  colSize: PropTypes.string
+  colSize: PropTypes.number
 };
 
 export default ProductSlider;

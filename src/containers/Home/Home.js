@@ -58,9 +58,9 @@ export default class Home extends Component {
             colSize="33.33"
           />
           <HashTags />
-          <ProductSlider productSliderTitle="Recommended for you" colSize="20" />
-          <ProductSlider productSliderTitle="Top Selling Products" colSize="20" />
-          <ProductSlider productSliderTitle="Recently Viewed Products" colSize="20" />
+          <ProductSlider productSliderTitle="Recommended for you" colSize={20} />
+          <ProductSlider productSliderTitle="Top Selling Products" colSize={20} />
+          <ProductSlider productSliderTitle="Recently Viewed Products" colSize={20} />
         </div>
       </Section>
     );
