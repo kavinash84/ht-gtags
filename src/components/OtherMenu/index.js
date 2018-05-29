@@ -16,7 +16,7 @@ const OtherMenu = ({
       <div className={styles.back}>
         <button onClick={history.goBack}>
           {' '}
-          <img src={BackIcon} alt="backkkkk" />{' '}
+          <img src={BackIcon} alt="back" />{' '}
         </button>
       </div>
       <div className={styles.rightBLock}>

@@ -1,0 +1,49 @@
+.addressBtn, .addAddressBtn {
+  border-radius: 4px;
+  background-color: #ffffff;
+  border: solid 2px #FFF;
+  padding: 0.625rem 1rem;
+  color: rgba(0, 0, 0, 0.6);
+  text-align: left;
+  line-height: 1.6;
+  font-size: 14px;
+  width: 100%;
+  min-height: 112px;
+  &.active, &:hover {
+    background-color: #ffffff;
+    border: solid 2px #ae8873;
+    outline: none;
+  }
+}
+
+.addAddressBtn {
+  text-align: center;
+}
+
+.headerLink {
+  color: rgba(255, 255, 255, 0.6);
+  font-family: "SFPDLight";
+  font-size: 1.5rem;
+  text-transform: capitalize;
+  &.active, &:hover {
+    color: #ffffff;
+    opacity: 1;
+  }
+  &:after {
+    content: '>';
+    position: absolute;
+    right: 13px;
+  }
+  &.hideArrow {
+    &:after {
+      display: none;
+    }
+  }
+}
+
+.back {
+  position: absolute;
+  left: -35px;
+  padding: 0;
+  top: -7px;
+}
