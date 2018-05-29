@@ -31,7 +31,7 @@ const routes = [
       { path: '/listing', exact: true, component: Listing },
       { path: '/wishlist', exact: true, component: Wishlist },
       { path: '/cart', exact: true, component: Cart },
-      { path: '/my-order', exact: true, component: MyOrder },
+      { path: '/my-orders', exact: true, component: MyOrder },
       { path: '/order-details', exact: true, component: OrderDetails },
       { path: '/order-summary', exact: true, component: OrderSummary },
       { path: '/profile', exact: true, component: Profile },

@@ -35,13 +35,12 @@
   overflow: auto;
   white-space: nowrap;
   width: 100%;
-  height: 46px;
+  height: 48px;
   a {
     display: inline-block;
     text-align: center;
-    padding: 15px 20px 15px 0;
+    padding: 17px 20px 17px 0;
     text-decoration: none;
-
     font-size: 0.875rem;
     @include font-family('Medium');
     color: $text-dark;
