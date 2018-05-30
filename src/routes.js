@@ -12,7 +12,6 @@ import {
   Payment,
   TestCounter,
   ProductDetails,
-  Search,
   ProductCarousel,
   DeliveryAddress,
   NotFound
@@ -40,9 +39,9 @@ const routes = [
       { path: '/payment', exact: true, component: Payment },
       { path: '/counter', exact: true, component: TestCounter },
       { path: '/product-details', exact: true, component: ProductDetails },
-      { path: '/search', exact: true, component: Search },
       { path: '/product-carousel', exact: true, component: ProductCarousel },
       { path: '/delivery-address', exact: true, component: DeliveryAddress },
+      { path: '/search', exact: false, component: Listing },
       {
         path: '/:category/:subcategory1?/:subcategory2?/:subcategory3?/:subcategory4?/:subcategory5?',
         exact: true,

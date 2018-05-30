@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Input from 'hometown-components/lib/Input';
@@ -28,6 +29,11 @@ const onChange = (dispatcher, load) => e => {
   if (value.length >= 2) load(value);
 };
 
+const onSubmit = (searchQuery, history) => e => {
+  e.preventDefault();
+  return history.push(`/search/?q=${searchQuery}`);
+};
+
 const mapStateToProps = ({ search }) => ({
   ...search
 });
@@ -44,20 +50,23 @@ const Search = ({
   showResultsonFocus,
   hideResultsonBlur,
   clearSearchQuery,
-  showResults
+  showResults,
+  history
 }) => (
   <Div className={styles.search} pt="0" pb="0.3125rem">
-    <Input
-      type="text"
-      placeholder="Search"
-      backgroundColor="rgba(0, 0, 0, 0.05)"
-      borderColor="rgba(0, 0, 0, 0.03)"
-      height="2.5rem"
-      onChange={onChange(setSearchQuery, load)}
-      onFocus={eventDispatcher(showResultsonFocus)}
-      onBlur={hideResults(hideResultsonBlur)}
-      value={searchQuery}
-    />
+    <form onSubmit={onSubmit(searchQuery, history)}>
+      <Input
+        type="text"
+        placeholder="Search"
+        backgroundColor="rgba(0, 0, 0, 0.05)"
+        borderColor="rgba(0, 0, 0, 0.03)"
+        height="2.5rem"
+        onChange={onChange(setSearchQuery, load)}
+        onFocus={eventDispatcher(showResultsonFocus)}
+        onBlur={hideResults(hideResultsonBlur)}
+        value={searchQuery}
+      />
+    </form>
     {searchQuery === '' ? (
       <img src={SearchIcon} className={styles.searchIcon} alt="Search" />
     ) : (
@@ -108,10 +117,11 @@ Search.propTypes = {
   loaded: PropTypes.bool,
   results: PropTypes.array,
   load: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
   showResultsonFocus: PropTypes.func.isRequired,
   hideResultsonBlur: PropTypes.func.isRequired,
   setSearchQuery: PropTypes.func.isRequired,
   clearSearchQuery: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search));
