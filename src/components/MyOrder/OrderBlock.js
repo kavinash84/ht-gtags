@@ -37,7 +37,7 @@ const OrderBlock = () => (
       </Row>
       <Row type="block" m="0">
         <Div col="12">
-          <table className={styles.ordersTable}>
+          <table className="ordersTable">
             <tbody>
               <tr>
                 <th colSpan="2">PRODUCT</th>

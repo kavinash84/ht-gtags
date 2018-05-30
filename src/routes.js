@@ -15,6 +15,8 @@ import {
   Search,
   ProductCarousel,
   DeliveryAddress,
+  PaymentOptions,
+  ReviewOrder,
   NotFound
 } from 'containers';
 import Login from 'containers/Login';
@@ -43,6 +45,8 @@ const routes = [
       { path: '/search', exact: true, component: Search },
       { path: '/product-carousel', exact: true, component: ProductCarousel },
       { path: '/delivery-address', exact: true, component: DeliveryAddress },
+      { path: '/payment-options', exact: true, component: PaymentOptions },
+      { path: '/review-order', exact: true, component: ReviewOrder },
       { component: NotFound }
     ]
   }

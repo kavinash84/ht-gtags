@@ -171,6 +171,32 @@
     top: 0.75rem;
     right: 1.25rem;
 	}
+
+	/* Orders Table */
+	.ordersTable {
+		width: 100%;
+		text-align: left;
+		img {
+			width: 60px;
+		}
+		th {
+			padding: 1rem 0;
+			font-size: 0.875rem;
+			color: rgba(0, 0, 0, 0.7);
+			font-family: SFPDLight;
+			padding: 0.25rem 0.325rem;
+			text-transform: uppercase;
+		}
+		td {
+			color: rgba(0, 0, 0, 0.6);
+			font-size: 0.875rem;
+			padding: 0.25rem 0.325rem;
+			button {
+				font-size: 0.875rem;
+				font-family: SFPDLight;
+			}
+		}
+	}
 }
 
 @-webkit-keyframes :global(nprogress-spinner) {
