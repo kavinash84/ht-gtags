@@ -43,6 +43,11 @@ const routes = [
       { path: '/search', exact: true, component: Search },
       { path: '/product-carousel', exact: true, component: ProductCarousel },
       { path: '/delivery-address', exact: true, component: DeliveryAddress },
+      {
+        path: '/:category/:subcategory1?/:subcategory2?/:subcategory3?/:subcategory4?/:subcategory5?',
+        exact: true,
+        component: Listing
+      },
       { component: NotFound }
     ]
   }

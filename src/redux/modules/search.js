@@ -1,6 +1,8 @@
 const LOAD = 'search/LOAD';
 const LOAD_SUCCESS = 'search/LOAD_SUCCESS';
 const LOAD_FAIL = 'search/LOAD_FAIL';
+const SHOW_RESULTS_ON_FOCUS = 'search/SHOW_RESULTS_ON_FOCUS';
+const HIDE_RESULTS_ON_BLUR = 'search/HIDE_RESULTS_ON_BLUR';
 const SET_SEARCH_QUERY = 'search/SET_SEARCH_QUERY';
 const CLEAR_SEARCH_QUERY = 'search/CLEAR_SEARCH_QUERY';
 
@@ -8,7 +10,8 @@ const initialState = {
   loading: false,
   loaded: false,
   results: [],
-  searchQuery: ''
+  searchQuery: '',
+  showResults: false
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -39,11 +42,22 @@ export default function reducer(state = initialState, action = {}) {
         loaded: false,
         searchQuery: action.query
       };
+    case SHOW_RESULTS_ON_FOCUS:
+      return {
+        ...state,
+        showResults: true
+      };
+    case HIDE_RESULTS_ON_BLUR:
+      return {
+        ...state,
+        showResults: false
+      };
     case CLEAR_SEARCH_QUERY:
       return {
         ...state,
         loading: false,
         loaded: true,
+        results: [],
         searchQuery: ''
       };
     default:
@@ -51,10 +65,10 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-export function load() {
+export function load(query) {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: ({ client }) => client.get('tesla/search/')
+    promise: ({ client }) => client.get(`tesla/search/suggestions/${query}`)
   };
 }
 
@@ -65,4 +79,12 @@ export const setSearchQuery = query => ({
 
 export const clearSearchQuery = () => ({
   type: CLEAR_SEARCH_QUERY
+});
+
+export const showResultsonFocus = () => ({
+  type: SHOW_RESULTS_ON_FOCUS
+});
+
+export const hideResultsonBlur = () => ({
+  type: HIDE_RESULTS_ON_BLUR
 });

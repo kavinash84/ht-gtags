@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Input from 'hometown-components/lib/Input';
@@ -11,14 +12,20 @@ const styles = require('./Search.scss');
 const SearchIcon = require('../../../static/search.jpg');
 const CloseIcon = require('../../../static/close.jpg');
 
-const clearSearch = dispatcher => e => {
+const eventDispatcher = dispatcher => e => {
   e.preventDefault();
   dispatcher();
 };
 
-const onChange = dispatcher => e => {
+const hideResults = dispatcher => e => {
+  e.preventDefault();
+  if (window) window.setTimeout(dispatcher, 500);
+};
+
+const onChange = (dispatcher, load) => e => {
   const { target: { value } } = e;
   dispatcher(value);
+  if (value.length >= 2) load(value);
 };
 
 const mapStateToProps = ({ search }) => ({
@@ -28,7 +35,16 @@ const mapStateToProps = ({ search }) => ({
 const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
 
 const Search = ({
-  setSearchQuery, searchQuery, loading, loaded, results, clearSearchQuery
+  setSearchQuery,
+  searchQuery,
+  load,
+  loading,
+  loaded,
+  results,
+  showResultsonFocus,
+  hideResultsonBlur,
+  clearSearchQuery,
+  showResults
 }) => (
   <Div className={styles.search} pt="0" pb="0.3125rem">
     <Input
@@ -37,7 +53,9 @@ const Search = ({
       backgroundColor="rgba(0, 0, 0, 0.05)"
       borderColor="rgba(0, 0, 0, 0.03)"
       height="2.5rem"
-      onChange={onChange(setSearchQuery)}
+      onChange={onChange(setSearchQuery, load)}
+      onFocus={eventDispatcher(showResultsonFocus)}
+      onBlur={hideResults(hideResultsonBlur)}
       value={searchQuery}
     />
     {searchQuery === '' ? (
@@ -45,7 +63,7 @@ const Search = ({
     ) : (
       <Button
         className={styles.closeBtn}
-        onClick={clearSearch(clearSearchQuery)}
+        onClick={eventDispatcher(clearSearchQuery)}
         btnType="custom"
         bg="transparent"
         border="none"
@@ -61,29 +79,14 @@ const Search = ({
         </ul>
       )}
       {loaded &&
+        showResults &&
         results.length > 0 && (
         <ul>
-          <li>
-            <a href="#prod 1">Product 1</a>
-          </li>
-          <li>
-            <a href="#prod 2">Product 2</a>
-          </li>
-          <li>
-            <a href="#prod 3">Product 3</a>
-          </li>
-          <li>
-            <a href="#prod 4">Product 4</a>
-          </li>
-          <li>
-            <a href="#prod 5">Product 5</a>
-          </li>
-          <li>
-            <a href="#prod 6">Product 6</a>
-          </li>
-          <li>
-            <a href="#prod 7">Product 7</a>
-          </li>
+          {results.map((item, index) => (
+            <li key={String(index)}>
+              <Link to={item.url_key}>{item.name}</Link>
+            </li>
+          ))}
         </ul>
       )}
     </Div>
@@ -91,17 +94,22 @@ const Search = ({
 );
 
 Search.defaultProps = {
-  searchQuery: PropTypes.string,
-  loading: PropTypes.bool,
-  loaded: PropTypes.bool,
-  results: PropTypes.array
+  searchQuery: '',
+  loading: false,
+  loaded: false,
+  results: [],
+  showResults: false
 };
 
 Search.propTypes = {
   searchQuery: PropTypes.string,
+  showResults: PropTypes.bool,
   loading: PropTypes.bool,
   loaded: PropTypes.bool,
   results: PropTypes.array,
+  load: PropTypes.func.isRequired,
+  showResultsonFocus: PropTypes.func.isRequired,
+  hideResultsonBlur: PropTypes.func.isRequired,
   setSearchQuery: PropTypes.func.isRequired,
   clearSearchQuery: PropTypes.func.isRequired
 };

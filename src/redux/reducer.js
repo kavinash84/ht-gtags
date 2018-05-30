@@ -8,6 +8,7 @@ import cart from './modules/cart';
 import products from './modules/products';
 import wishlist from './modules/wishlist';
 import search from './modules/search';
+import loadmore from './modules/loadmore';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -21,6 +22,7 @@ export default function createReducers(asyncReducers) {
     products,
     wishlist,
     search,
+    loadmore,
     ...asyncReducers
   };
 }
