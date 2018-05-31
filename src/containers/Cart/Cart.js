@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import CartContainer from 'components/Cart';
-import CartTotalContainer from 'components/CartTotal';
-import Menu from 'components/OtherMenu';
+import Menu from 'components/Menu';
+import TitleBar from 'components/TitleBar';
 
 export default class Cart extends Component {
   render() {
     return (
       <div>
         <Menu />
+        <TitleBar title="Shopping Cart" />
         <CartContainer />
-        <CartTotalContainer />
       </div>
     );
   }
