@@ -8,16 +8,13 @@ import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getProducts } from 'selectors/products';
-import { getWishList } from 'selectors/wishlist';
 import * as actionCreators from 'redux/modules/wishlist';
 
 // import ProductItems from '../../data/RecentlyViewedProducts.js';
-
-const mapStateToProps = state => ({
-  products: getProducts(state),
-  wishList: getWishList(state)
-});
+const getProductImage = url => {
+  const pp = `${url.split('/').slice(-1)}`;
+  return url.replace(pp, '1-product_500.jpg');
+};
 
 const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
 
@@ -28,7 +25,9 @@ const onClick = dispatcher => sku => e => {
 
 const isInWishList = (list, id) => list.includes(id);
 
-const Listing = ({ toggleWishList, products, wishList }) => (
+const Listing = ({
+  toggleWishList, products, categoryName, productCount, wishList
+}) => (
   <Div type="block">
     <Section mb="0.3125rem" p="1rem 0.5rem" bg="primary">
       <Container pr="0" pl="0">
@@ -42,7 +41,7 @@ const Listing = ({ toggleWishList, products, wishList }) => (
             className="searchTitle"
             ls="1.2px"
           >
-            Showing results for “One Seater Sofas”
+            {categoryName} ({productCount})
           </Heading>
         </Row>
       </Container>
@@ -52,11 +51,17 @@ const Listing = ({ toggleWishList, products, wishList }) => (
         {products.map(item => (
           <Product
             key={item.id}
-            itemData={item}
+            name={item.data.name}
+            price={item.netprice}
+            cutprice={item.cutprice}
+            saving={item.saving}
+            image={getProductImage(item.images[0].path)}
+            sku={item.data.sku}
             onClick={onClick(toggleWishList)}
-            isWishList={isInWishList(wishList, item.sku_id)}
-            rating
-            col="4"
+            isWishList={isInWishList(wishList, item.data.sku)}
+            rating={item.data.reviews.rating.toFixed(1)}
+            reviewsCount={item.data.reviews.count}
+            savingAmount={item.data.max_price - item.data.max_special_price}
           />
         ))}
       </Container>
@@ -65,13 +70,17 @@ const Listing = ({ toggleWishList, products, wishList }) => (
 );
 
 Listing.defaultProps = {
-  wishList: []
+  wishList: [],
+  categoryName: '',
+  productCount: ''
 };
 
 Listing.propTypes = {
   toggleWishList: PropTypes.func.isRequired,
   products: PropTypes.array.isRequired,
-  wishList: PropTypes.array
+  wishList: PropTypes.array,
+  categoryName: PropTypes.string,
+  productCount: PropTypes.string
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Listing);
+export default connect(null, mapDispatchToProps)(Listing);
