@@ -6,6 +6,7 @@ import Button from 'hometown-components/lib/Buttons';
 import Section from 'hometown-components/lib/Section';
 import ShippedTo from 'hometown-components/lib/ShippedTo';
 import PaymentMethod from 'hometown-components/lib/PaymentMethod';
+import ProductQuantityCounter from '../ProductQuantityCounter';
 import MenuCheckout from './MenuCheckout';
 import OrderSummary from './OrderSummary';
 
@@ -18,7 +19,7 @@ export default class ReviewOrder extends Component {
           <Container type="container" pr="2rem" pl="2rem">
             <Row display="block" mr="0" ml="0">
               <Div col="9" pr="2.5rem" pt="1.5rem">
-                <Row display="block" mr="0" ml="0">
+                <Row display="block" mr="0" ml="0" mb="1rem">
                   <Div col="5" pr="2rem">
                     <ShippedTo
                       name="Saurabh Suman"
@@ -37,51 +38,41 @@ export default class ReviewOrder extends Component {
                     <table className="ordersTable">
                       <tbody>
                         <tr>
-                          <th colSpan="2">PRODUCT</th>
-                          <th>Delivery Status</th>
-                          <th>Carrier</th>
-                          <th>Tracking ID</th>
-                          <th>Tracking Link</th>
+                          <th colSpan="2">Product</th>
+                          <th>Delivery</th>
+                          <th>Quantity</th>
+                          <th>Cost</th>
+                          <th />
                         </tr>
                         <tr>
                           <td>
-                            <img src="http://via.placeholder.com/75x75" alt="" />
+                            <img className="thumb" src="http://via.placeholder.com/75x75" alt="" />
                           </td>
                           <td>Ambra King Bed in Engineered Wood with Box Storage</td>
-                          <td>Dispatched at 2:35 PM, 16 Jan</td>
-                          <td>Bluedart</td>
-                          <td>AG567TG</td>
+                          <td>Delivered by 12 Jan</td>
                           <td>
-                            <Button fontSize="0.875rem" fontFamily="SFPDLight" color="#ae8873" btnType="link">
-                              Track Now
+                            <ProductQuantityCounter skuId="1234" />
+                          </td>
+                          <td>Rs 49,900</td>
+                          <td>
+                            <Button fontSize="1rem" fontFamily="SFPDLight" color="#ae8873" btnType="link">
+                              x
                             </Button>
                           </td>
                         </tr>
                         <tr>
                           <td>
-                            <img src="http://via.placeholder.com/75x75" alt="" />
+                            <img className="thumb" src="http://via.placeholder.com/75x75" alt="" />
                           </td>
                           <td>Ambra King Bed in Engineered Wood with Box Storage</td>
-                          <td>Dispatched at 2:35 PM, 16 Jan</td>
-                          <td>Bluedart</td>
-                          <td>AG567TG</td>
+                          <td>Delivered by 12 Jan</td>
                           <td>
-                            <Button fontSize="0.875rem" fontFamily="SFPDLight" color="#ae8873" btnType="link">
-                              Track Now
-                            </Button>
+                            <ProductQuantityCounter skuId="1234" />
                           </td>
-                        </tr>
-                        <tr>
+                          <td>Rs 49,900</td>
                           <td>
-                            <img src="http://via.placeholder.com/75x75" alt="" />
-                          </td>
-                          <td>Ambra King Bed in Engineered Wood with Box Storage</td>
-                          <td>Dispatched at 2:35 PM, 16 Jan</td>
-                          <td>Bluedart</td>
-                          <td>AG567TG</td>
-                          <td>
-                            <Button fontSize="0.875rem" fontFamily="SFPDLight" color="#ae8873" btnType="link">
-                              Track Now
+                            <Button fontSize="1rem" fontFamily="SFPDLight" color="#ae8873" btnType="link">
+                              x
                             </Button>
                           </td>
                         </tr>

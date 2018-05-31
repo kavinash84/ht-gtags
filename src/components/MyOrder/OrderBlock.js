@@ -48,7 +48,7 @@ const OrderBlock = () => (
               </tr>
               <tr>
                 <td>
-                  <img src="http://via.placeholder.com/75x75" alt="" />
+                  <img className="thumb" src="http://via.placeholder.com/75x75" alt="" />
                 </td>
                 <td>Ambra King Bed in Engineered Wood with Box Storage</td>
                 <td>Dispatched at 2:35 PM, 16 Jan</td>
@@ -62,7 +62,7 @@ const OrderBlock = () => (
               </tr>
               <tr>
                 <td>
-                  <img src="http://via.placeholder.com/75x75" alt="" />
+                  <img className="thumb" src="http://via.placeholder.com/75x75" alt="" />
                 </td>
                 <td>Ambra King Bed in Engineered Wood with Box Storage</td>
                 <td>Dispatched at 2:35 PM, 16 Jan</td>
@@ -76,7 +76,7 @@ const OrderBlock = () => (
               </tr>
               <tr>
                 <td>
-                  <img src="http://via.placeholder.com/75x75" alt="" />
+                  <img className="thumb" src="http://via.placeholder.com/75x75" alt="" />
                 </td>
                 <td>Ambra King Bed in Engineered Wood with Box Storage</td>
                 <td>Dispatched at 2:35 PM, 16 Jan</td>

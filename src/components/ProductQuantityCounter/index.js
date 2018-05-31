@@ -32,23 +32,22 @@ const ProductQuantityCounter = ({
 }) => {
   const count = getCount(cartList, skuId);
   return (
-    <Row display="block" mr="0" ml="0" mb="1.25rem">
-      <Div col="12" ta="right">
+    <Row display="block" m="0">
+      <Div col="12" ta="left">
         <Button
           type="custom"
           color="textDark"
           border="none"
           bg="white"
           bc="transparent"
-          pt="0"
-          pb="0"
+          p="0"
           va="middle"
           onClick={onClick(reduceQuantity, skuId)}
           disabled={count <= 1}
         >
           <Img src={ReductIcon} alt="" float="left" height="22px" />
         </Button>
-        <Label color="textDark" mb="0" mt="0">
+        <Label color="textDark" mb="0" mt="0" p="0 10px">
           {count}
         </Label>
         <Button
@@ -57,8 +56,7 @@ const ProductQuantityCounter = ({
           border="none"
           bg="white"
           bc="transparent"
-          pt="0"
-          pb="0"
+          p="0"
           va="middle"
           onClick={onClick(addToCart, skuId)}
         >
