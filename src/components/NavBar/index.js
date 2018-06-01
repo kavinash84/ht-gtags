@@ -1,19 +1,27 @@
 import React from 'react';
-// import Carousel from '../Carousel';
+import PropTypes from 'prop-types';
 
 const styles = require('./NavBar.scss');
-const menuItems = require('../../data/Menu.js');
 
-const NavBar = () => (
+const NavBar = ({ menuItems, handleEnter }) => (
   <div className={styles.navBar}>
     <div className={styles.navBarSlider}>
       {menuItems.map(menuItem => (
-        <a href="#home" key={menuItem.id}>
+        <a href={menuItem.url_key} id={menuItem.id} key={menuItem.id} onMouseEnter={handleEnter}>
           {menuItem.name}
         </a>
       ))}
     </div>
   </div>
 );
+
+NavBar.defaultProps = {
+  menuItems: []
+};
+
+NavBar.propTypes = {
+  menuItems: PropTypes.array,
+  handleEnter: PropTypes.func.isRequired
+};
 
 export default NavBar;
