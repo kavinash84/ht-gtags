@@ -7,7 +7,7 @@ const NavBar = ({ menuItems, handleEnter }) => (
   <div className={styles.navBar}>
     <div className={styles.navBarSlider}>
       {menuItems.map(menuItem => (
-        <a href={menuItem.url_key} id={menuItem.id} key={menuItem.id} onMouseEnter={handleEnter}>
+        <a href={menuItem.url_key} key={menuItem.id} onMouseEnter={handleEnter(menuItem.id)}>
           {menuItem.name}
         </a>
       ))}

@@ -21,10 +21,10 @@ const HoverMenuBox = ({ handleEnter, handleLeave, menuData }) => (
 );
 
 HoverMenuBox.defaultProps = {
-  menuData: []
+  menuData: {}
 };
 HoverMenuBox.propTypes = {
-  menuData: PropTypes.array,
+  menuData: PropTypes.object,
   handleEnter: PropTypes.func.isRequired,
   handleLeave: PropTypes.func.isRequired
 };
