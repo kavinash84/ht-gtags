@@ -25,6 +25,8 @@ const onClick = dispatcher => sku => e => {
 
 const isInWishList = (list, id) => list.includes(id);
 
+const styles = require('./Listing.scss');
+
 const Listing = ({
   toggleWishList, products, categoryName, productCount, wishList
 }) => (
@@ -49,20 +51,22 @@ const Listing = ({
     <Section pt="1.25rem" mb="0" bg="sectionBgDark" boxShadow="0px 1px 6px 0px rgba(0,0,0,0.20)">
       <Container pr="0" pl="0">
         {products.map(item => (
-          <Product
-            key={item.id}
-            name={item.data.name}
-            price={item.netprice}
-            cutprice={item.cutprice}
-            saving={item.saving}
-            image={getProductImage(item.images[0].path)}
-            sku={item.data.sku}
-            onClick={onClick(toggleWishList)}
-            isWishList={isInWishList(wishList, item.data.sku)}
-            rating={item.data.reviews.rating.toFixed(1)}
-            reviewsCount={item.data.reviews.count}
-            savingAmount={item.data.max_price - item.data.max_special_price}
-          />
+          <div className={styles.productWrapper}>
+            <Product
+              key={item.id}
+              name={item.data.name}
+              price={item.netprice}
+              cutprice={item.cutprice}
+              saving={item.saving}
+              image={getProductImage(item.images[0].path)}
+              sku={item.data.sku}
+              onClick={onClick(toggleWishList)}
+              isWishList={isInWishList(wishList, item.data.sku)}
+              rating={item.data.reviews.rating.toFixed(1)}
+              reviewsCount={item.data.reviews.count}
+              savingAmount={item.data.max_price - item.data.max_special_price}
+            />
+          </div>
         ))}
       </Container>
     </Section>
