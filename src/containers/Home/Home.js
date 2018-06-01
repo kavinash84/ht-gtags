@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-import Menu from 'components/Menu';
+// import Menu from 'components/Menu';
+import Menu from 'containers/MenuNew/index';
 import MainSlider from 'components/MainSlider';
 import Section from 'hometown-components/lib/Section';
 import { connect } from 'react-redux';
