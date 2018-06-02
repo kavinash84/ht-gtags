@@ -4,11 +4,52 @@
 
 .menuBoxContainer{
   position: relative;
+  transition: transform 1s ease;
 }
 .menuBox{
-  background: blue;
+  background-color: #ffffff;
   width: 100%;
   height: auto;
   z-index: 1;
   position: absolute;
+  -webkit-column-count: 4;
+  -moz-column-count: 4;
+  column-count: 4;
+  -webkit-column-gap: 1em;
+  -moz-column-gap: 1em;
+  column-gap: 1em;
+  padding: 1.5rem;
+  transition: transform 1s ease;
+  .list {
+    margin-bottom: 15px;
+    margin-top: 0;
+    display: inline-block;
+    list-style: none;
+    white-space: nowrap;
+    width: 100%;
+    text-align: left;
+    padding-left: 0;
+    h4 {
+      font-size: 1em;
+      margin: 0 0 5px;
+      a {
+        color: #f98d29;
+      }
+    }
+    li {
+      padding: 2px 0;
+      a {
+        color: rgba(0, 0, 0, 0.68);
+        font-size: 0.875em;
+      }
+    }
+    .media {
+      display: flex;
+      align-items: flex-start;
+      .mediaBody {
+        flex: 1;
+        padding-left: 0.875rem;
+      }
+    }
+  }
 }

@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import Img from 'hometown-components/lib/Img';
+// import Media from 'hometown-components/lib/Media';
 
 const styles = require('./HoverMenuBox.scss');
 
@@ -9,10 +12,23 @@ const HoverMenuBox = ({ handleEnter, handleLeave, menuData }) => (
       {menuData
         ? menuData.children.map(subCategory1 => (
           <div key={subCategory1.id}>
-            <ul>{subCategory1.name}</ul>
-            {subCategory1.children
-              ? subCategory1.children.map(subCategory2 => <li key={subCategory2.id}>{subCategory2.name}</li>)
-              : null}
+            <ul className={styles.list}>
+              <div className={styles.media}>
+                <Img src="http://via.placeholder.com/65x65" alt="" />
+                <div className={styles.mediaBody}>
+                  <h4>
+                    <Link to={subCategory1.url_key}>{subCategory1.name}</Link>
+                  </h4>
+                  {subCategory1.children
+                    ? subCategory1.children.map(subCategory2 => (
+                      <li key={subCategory2.id}>
+                        <Link to={subCategory2.url_key}>{subCategory2.name}</Link>
+                      </li>
+                    ))
+                    : null}
+                </div>
+              </div>
+            </ul>
           </div>
         ))
         : null}
