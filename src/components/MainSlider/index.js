@@ -11,9 +11,10 @@ export default class MainSlider extends Component {
         <Carousel
           autoPlayVal
           className="homeSlider"
+          showArrowsVal
           showThumbsVal={false}
           showStatusVal={false}
-          showIndicatorsVal
+          showIndicatorsVal={false}
           infiniteLoopVal
           centerModeVal={false}
           centerSlidePercentageVal={100}

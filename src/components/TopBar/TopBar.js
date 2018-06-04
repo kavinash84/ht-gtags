@@ -8,7 +8,10 @@ import Search from 'components/Search';
 import { HOME_URL } from 'helpers/Constants';
 
 const LogoIcon = require('../../../static/logo.png');
-const CartIcon = require('../../../static/cart.jpg');
+const CartIcon = require('../../../static/cart-icon.svg');
+const MapIcon = require('../../../static/map-icon.svg');
+const PhoneIcon = require('../../../static/phone-icon.svg');
+const FavIcon = require('../../../static/fav-icon.svg');
 
 export default class MenuSidebar extends Component {
   render() {
@@ -29,18 +32,20 @@ export default class MenuSidebar extends Component {
           </Div>
           <Div col="5" ta="right" pt="0.625rem">
             <Link className={styles.cart} to={HOME_URL}>
-              <Img src={CartIcon} alt="Hometown" height="20px" mr="0.625rem" float="left" />
-              <Span fontSize="0.8rem">400076</Span>
+              <Img src={MapIcon} alt="Hometown" height="26px" mr="0.625rem" float="left" />
+              <Span fontSize="0.875em">400076</Span>
             </Link>
             <Link className={styles.cart} to={HOME_URL}>
-              <Img src={CartIcon} alt="Hometown" height="20px" mr="0.625rem" float="left" />
-              <Span fontSize="0.8rem">1800-210-0004</Span>
+              <Img src={PhoneIcon} alt="Hometown" height="26px" mr="0.625rem" float="left" />
+              <Span fontSize="0.875em">1800-210-0004</Span>
             </Link>
             <Button p="0" m className={styles.heartBtn} ml="1.25rem">
-              <div className="heart-shape" />
+              <Img src={FavIcon} alt="Wishlist" height="26px" mr="0.625rem" float="left" />
+              <span className={styles.count}>0</span>
             </Button>
             <Link className={styles.cart} to={HOME_URL}>
               <Img src={CartIcon} alt="Hometown" height="26px" />
+              <span className={styles.count}>0</span>
             </Link>
           </Div>
         </div>
