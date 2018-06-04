@@ -21,6 +21,7 @@ import {
 import Login from 'containers/Login';
 import Signup from 'containers/Signup';
 import Profile from 'containers/Profile';
+import Pincode from 'components/Pincode';
 
 const routes = [
   {
@@ -46,6 +47,7 @@ const routes = [
       { path: '/payment-options', exact: true, component: PaymentOptions },
       { path: '/review-order', exact: true, component: ReviewOrder },
       { path: '/search', exact: false, component: Listing },
+      { path: '/pincode', exact: true, component: Pincode },
       {
         path: '/:category/:subcategory1?/:subcategory2?/:subcategory3?/:subcategory4?/:subcategory5?',
         exact: true,
