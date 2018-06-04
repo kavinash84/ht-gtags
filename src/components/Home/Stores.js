@@ -25,7 +25,7 @@ const Stores = ({ data, categoryName, subTitle }) => (
             showIndicatorsVal={false}
             infiniteLoopVal={false}
             centerModeVal
-            centerSlidePercentageVal={50}
+            centerSlidePercentageVal={20}
             data={data}
           />
         </Div>
