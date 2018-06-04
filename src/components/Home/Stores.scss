@@ -1,0 +1,22 @@
+@import "../../theme/variables";
+@import "../../theme/mixins";
+
+.storeBlock {
+  padding: 0 0.75rem 1.25rem;
+}
+.storeSliderItem {
+  .link {
+    background-color: rgba(255, 255, 255, 0);
+    border: solid 1px rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.5);
+    width: calc(100% - 15px);
+    padding: 10px 15px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    &.active {
+      background-color: rgba(255, 255, 255, 0);
+      border: solid 1px $primary;
+    }
+  }
+}

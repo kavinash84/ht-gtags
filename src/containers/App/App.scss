@@ -73,6 +73,20 @@
 			margin-right: 1rem !important;
 		}
 	}
+	.storeSlider {
+	  .carousel .control-prev.control-arrow {
+	    left: -15px;
+	  }
+	  .carousel .control-next.control-arrow {
+	    right: -15px;
+	  }
+	  .carousel.carousel-slider .control-arrow {
+	    top: -2%;
+			width: 40px;
+    	height: 40px;
+	    opacity: 0.95;
+	  }
+	}
 
 	/* NProgress Start */
 	#nprogress {
