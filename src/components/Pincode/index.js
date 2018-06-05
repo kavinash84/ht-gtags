@@ -6,7 +6,7 @@ import Input from 'hometown-components/lib/Input';
 import Div from 'hometown-components/lib/Div';
 import * as actionCreators from 'redux/modules/pincode';
 
-const styles = require('../Search/Search.scss');
+const styles = require('./Pincode.scss');
 
 const onChange = (dispatcher, load) => e => {
   const { target: { value } } = e;
@@ -28,7 +28,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators },
 const Pincode = ({
   setPincodeQuery, setPincode, pincodeQuery, load, loading, loaded, results, showResults
 }) => (
-  <Div className={styles.search} pt="0" pb="0.3125rem">
+  <Div className={styles.pincode} pt="0" pb="0.3125rem">
     <Input
       type="text"
       placeholder="Search"

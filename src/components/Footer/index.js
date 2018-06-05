@@ -20,7 +20,7 @@ const styles = require('./Footer.scss');
 
 const Footer = () => (
   <div mb="0" p="0" pt="15px" className={styles.footer}>
-    <Section bg="footerTop" mb="0" p="1rem 0">
+    <Section bg="footerTop" mb="0" p="2rem 0">
       <Container pr="0" pl="0">
         <Row m="0">
           <Div col={3}>

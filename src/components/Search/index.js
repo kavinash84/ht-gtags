@@ -10,8 +10,8 @@ import Div from 'hometown-components/lib/Div';
 import * as actionCreators from 'redux/modules/search';
 
 const styles = require('./Search.scss');
-const SearchIcon = require('../../../static/search.jpg');
-const CloseIcon = require('../../../static/close.jpg');
+const SearchIcon = require('../../../static/search-icon.svg');
+const CloseIcon = require('../../../static/close-icon.svg');
 
 const eventDispatcher = dispatcher => e => {
   e.preventDefault();
