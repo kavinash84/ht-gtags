@@ -13,7 +13,6 @@ export Payment from './Payment';
 export TestCounter from './ProductQuantityCounter';
 export ProductDetails from './ProductDetails/ProductDetails';
 export Search from './Search/Search';
-export ProductCarousel from './ProductCarousel/ProductCarousel';
 export DeliveryAddress from './DeliveryAddress/DeliveryAddress';
 export PaymentOptions from './PaymentOptions/PaymentOptions';
 export ReviewOrder from './ReviewOrder/ReviewOrder';
