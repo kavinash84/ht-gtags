@@ -6,9 +6,7 @@ import { provideHooks } from 'redial';
 import { ThemeProvider } from 'styled-components';
 import Helmet from 'react-helmet';
 import { load as loadBanners, isLoaded as isBannersLoaded } from 'redux/modules/banners';
-import { load as loadStyles, isLoaded as isStylesLoaded } from 'redux/modules/shopByStyle';
-import { load as loadOccasions, isLoaded as isOccasionsLoaded } from 'redux/modules/shopByOccasion';
-import { load as loadRooms, isLoaded as isRoomsLoaded } from 'redux/modules/shopByRoom';
+import { load as loadCategories, isLoaded as isCategoriesLoaded } from 'redux/modules/homepage';
 import { load as loadMenu, isLoaded as isMenuLoaded } from 'redux/modules/menu';
 // import { load as loadStyles } from 'redux/modules/shopByStyle';
 import config from 'config';
@@ -19,19 +17,11 @@ import Theme from 'hometown-components/lib/Theme';
     if (!isBannersLoaded(getState())) {
       await dispatch(loadBanners()).catch(() => null);
     }
-    if (!isStylesLoaded(getState())) {
-      await dispatch(loadStyles()).catch(error => console.log(error));
-    }
-    if (!isOccasionsLoaded(getState())) {
-      await dispatch(loadOccasions()).catch(error => console.log(error));
+    if (!isCategoriesLoaded(getState())) {
+      await dispatch(loadCategories()).catch(error => console.log(error));
     }
     if (!isMenuLoaded(getState())) {
       await dispatch(loadMenu()).catch(error => console.log(error));
-    }
-  },
-  defer: ({ store: { dispatch, getState } }) => {
-    if (!isRoomsLoaded(getState())) {
-      dispatch(loadRooms()).catch(error => console.log(error));
     }
   }
 })

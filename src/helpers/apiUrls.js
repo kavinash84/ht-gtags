@@ -7,3 +7,4 @@ export const TOP_SELLING = 'tesla/products/top-selling';
 export const RECOMMENDED_FOR_YOU = 'tesla/products/recommended-for-you';
 export const LOGIN = 'tesla/authentication/login';
 export const PINCODE = 'tesla/locations/pincode/';
+export const HOMEPAGE_CATEGORIES = 'tesla/page-sections/home/categories';

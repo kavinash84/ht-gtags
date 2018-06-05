@@ -1,9 +1,9 @@
 // API URL
 const CATEGORY_MENU = 'tesla/categories/';
 
-const LOAD = 'hompageCategories/LOAD';
-const LOAD_SUCCESS = 'hompageCategories/LOAD_SUCCESS';
-const LOAD_FAIL = 'hompageCategories/LOAD_FAIL';
+const LOAD = 'menu/LOAD';
+const LOAD_SUCCESS = 'menu/LOAD_SUCCESS';
+const LOAD_FAIL = 'menu/LOAD_FAIL';
 
 const initialState = {
   loaded: false,
