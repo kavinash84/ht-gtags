@@ -16,4 +16,10 @@
       border: solid 1px $primary;
     }
   }
+  &.active {
+    .link {
+      color: $primary;
+      border: solid 1px $primary;
+    }
+  }
 }
