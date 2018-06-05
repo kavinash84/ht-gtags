@@ -21,8 +21,7 @@ const prodSliderItem = require('../../data/RecentlyViewedProducts.js');
 @connect(({ homepage: { categories, banners }, stores }) => ({
   homepageCategories: categories.data,
   banners: banners.data,
-  cities: getCities(stores),
-  stores: stores.data
+  cities: getCities(stores)
 }))
 @provideHooks({
   defer: ({ store: { dispatch, getState } }) => {
@@ -36,10 +35,7 @@ const prodSliderItem = require('../../data/RecentlyViewedProducts.js');
 })
 export default class Home extends Component {
   render() {
-    const {
-      homepageCategories, banners, stores, cities
-    } = this.props;
-    console.log(stores);
+    const { homepageCategories, banners, cities } = this.props;
     return (
       <Section p="0" mb="0">
         <Helmet title="Home" />
@@ -67,13 +63,11 @@ export default class Home extends Component {
 Home.defaultProps = {
   homepageCategories: [],
   banners: [],
-  stores: [],
   cities: []
 };
 
 Home.propTypes = {
   homepageCategories: PropTypes.array,
   banners: PropTypes.array,
-  stores: PropTypes.array,
   cities: PropTypes.array
 };

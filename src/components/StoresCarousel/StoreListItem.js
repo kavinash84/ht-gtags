@@ -8,7 +8,7 @@ import Img from 'hometown-components/lib/Img';
 
 const styles = require('./Stores.scss');
 
-const Stores = ({
+const StoreListItem = ({
   city, store, address, pincode, state, phone
 }) => (
   <Div col={4}>
@@ -34,7 +34,7 @@ const Stores = ({
   </Div>
 );
 
-Stores.defaultProps = {
+StoreListItem.defaultProps = {
   city: '',
   store: '',
   address: '',
@@ -43,7 +43,7 @@ Stores.defaultProps = {
   phone: ''
 };
 
-Stores.propTypes = {
+StoreListItem.propTypes = {
   city: PropTypes.string,
   store: PropTypes.string,
   address: PropTypes.string,
@@ -52,4 +52,4 @@ Stores.propTypes = {
   phone: PropTypes.string
 };
 
-export default Stores;
+export default StoreListItem;
