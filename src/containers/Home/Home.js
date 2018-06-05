@@ -13,9 +13,9 @@ import StoresCarousel from 'components/StoresCarousel';
 
 const storesItems = require('../../data/stores.js');
 
-@connect(({ banners, homepage }) => ({
-  homepageCategories: homepage.data,
-  banners: banners.data
+@connect(({ homepage }) => ({
+  homepageCategories: homepage.categories.data,
+  banners: homepage.banners.data
 }))
 export default class Home extends Component {
   render() {
