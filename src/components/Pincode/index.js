@@ -14,8 +14,9 @@ const onChange = (dispatcher, load) => e => {
   if (value.length >= 2) load(value);
 };
 
-const setPincodeInStore = (dispatcher, pincode) => e => {
+const setPincodeInStore = (dispatcher, pincode, closeModal) => e => {
   e.preventDefault();
+  closeModal();
   dispatcher(pincode);
 };
 
@@ -26,7 +27,15 @@ const mapStateToProps = ({ pincode }) => ({
 const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
 
 const Pincode = ({
-  setPincodeQuery, setPincode, pincodeQuery, load, loading, loaded, results, showResults
+  setPincodeQuery,
+  setPincode,
+  pincodeQuery,
+  load,
+  loading,
+  loaded,
+  results,
+  showResults,
+  onCloseModal
 }) => (
   <Div className={styles.pincode} pt="0" pb="0.3125rem">
     <Input
@@ -50,7 +59,7 @@ const Pincode = ({
         <ul>
           {results.map((item, index) => (
             <li key={String(index)}>
-              <button onClick={setPincodeInStore(setPincode, item.name)}>{item.name}</button>
+              <button onClick={setPincodeInStore(setPincode, item.name, onCloseModal)}>{item.name}</button>
             </li>
           ))}
         </ul>
@@ -75,7 +84,8 @@ Pincode.propTypes = {
   results: PropTypes.array,
   load: PropTypes.func.isRequired,
   setPincodeQuery: PropTypes.func.isRequired,
-  setPincode: PropTypes.func.isRequired
+  setPincode: PropTypes.func.isRequired,
+  onCloseModal: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Pincode);
