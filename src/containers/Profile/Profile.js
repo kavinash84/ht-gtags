@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Container from 'hometown-components/lib/Container';
 import Row from 'hometown-components/lib/Row';
 import Div from 'hometown-components/lib/Div';
-import Menu from 'components/Menu';
+import Menu from 'containers/MenuNew/index';
 import MyMenu from 'components/MyMenu';
 import ProfileForm from 'components/ProfileForm';
 import UpdatePasswordForm from 'components/UpdatePasswordForm';

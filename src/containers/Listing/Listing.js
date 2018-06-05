@@ -4,7 +4,7 @@ import { withRouter } from 'react-router';
 import { provideHooks } from 'redial';
 import ListingContainer from 'components/Listing';
 import { connect } from 'react-redux';
-import Menu from 'components/Menu';
+import Menu from 'containers/MenuNew/index';
 import LoadMore from 'components/LoadMore';
 import { getWishList } from 'selectors/wishlist';
 import {
