@@ -16,9 +16,9 @@ const ProductItem = ({
         <div>
           <div className={`${styles.priceWrapper} taLeft`}>
             <span className={styles.discPrice}>Rs. {discPrice}</span>
-            <span className={styles.price}>Rs. {price}</span>
+            <span className={styles.price}>{price}</span>
             <span className={styles.saving}>
-              Saving Rs. {saving} ({percentage})
+              Saving {saving} ({percentage})
             </span>
           </div>
           <div className={styles.rating}>{rating}</div>
@@ -29,17 +29,18 @@ const ProductItem = ({
 );
 
 ProductItem.defaultProps = {
-  image: ''
+  image: '',
+  name: ''
 };
 
 ProductItem.propTypes = {
   image: PropTypes.string,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   url: PropTypes.string.isRequired,
   discPrice: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
   percentage: PropTypes.string.isRequired,
-  rating: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
   saving: PropTypes.string.isRequired
 };
 

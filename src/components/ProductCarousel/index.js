@@ -8,12 +8,14 @@ import SlickSlider from '../SlickSlider';
 
 const adjustSlides = length => ({
   slidesToShow: length >= 4 ? 4 : length,
-  slidesToScroll: 3
+  slidesToScroll: 1
 });
 
 export default class ProductCarousel extends Component {
   render() {
     const { data, title } = this.props;
+    const newData = data.splice(2, 1);
+    console.log(newData);
     return (
       <Section p="0" pt="2.5rem" mb="0.5rem" className="prodCarousel">
         <Container pr="0" pl="0">
@@ -22,14 +24,14 @@ export default class ProductCarousel extends Component {
             {data.map(item => (
               <div key={item.id}>
                 <ProductCarouselItem
-                  name={item.name}
-                  price={item.price}
-                  discPrice={item.disc_price}
+                  name={item.data.name}
+                  price={item.netprice}
+                  discPrice={item.cutprice}
                   saving={item.saving}
-                  percentage={item.percentage}
-                  rating={item.rating}
-                  image={item.image}
-                  url={item.url}
+                  percentage={item.saving}
+                  rating={item.data.reviews.rating}
+                  image={item.images[0].zoom_image}
+                  url={item.data.url}
                 />
               </div>
             ))}

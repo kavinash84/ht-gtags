@@ -23,7 +23,6 @@ const settings = {
 export default class StoresCarousel extends Component {
   render() {
     const { cities, filteredStores } = this.props;
-    console.log(filteredStores);
     return (
       <Section p="0" pt="2.5rem" mb="0" className="storeCarousel">
         <Container pr="0" pl="0">

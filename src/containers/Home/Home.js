@@ -16,17 +16,16 @@ import { loadStores, isLoaded as isStoresLoaded } from 'redux/modules/stores';
 import Footer from 'components/Footer';
 import { getCities } from '../../selectors/homepage';
 
-const prodSliderItem = require('../../data/RecentlyViewedProducts.js');
-
-@connect(({ homepage: { categories, banners }, stores }) => ({
-  homepageCategories: categories.data,
+@connect(({ homepage: { categories, banners, products }, stores }) => ({
   banners: banners.data,
+  homepageCategories: categories.data,
+  homepageProducts: products.data,
   cities: getCities(stores)
 }))
 @provideHooks({
   defer: ({ store: { dispatch, getState } }) => {
-    if (!isTopSellingLoaded(getState(), 'topSelling')) {
-      wrapDispatch(dispatch, 'topSelling')(loadTopSelling()).catch(error => console.log(error));
+    if (!isTopSellingLoaded(getState(), 'products')) {
+      wrapDispatch(dispatch, 'products')(loadTopSelling()).catch(error => console.log(error));
     }
     if (!isStoresLoaded(getState())) {
       dispatch(loadStores()).catch(error => console.log(error));
@@ -35,7 +34,9 @@ const prodSliderItem = require('../../data/RecentlyViewedProducts.js');
 })
 export default class Home extends Component {
   render() {
-    const { homepageCategories, banners, cities } = this.props;
+    const {
+      homepageCategories, homepageProducts, banners, cities
+    } = this.props;
     return (
       <Section p="0" mb="0">
         <Helmet title="Home" />
@@ -51,7 +52,14 @@ export default class Home extends Component {
             />
           ))}
           <HashTags />
-          <ProductCarousel data={prodSliderItem} title="Recommended for you" />
+          {homepageProducts.map((products, index) => (
+            <ProductCarousel
+              key={String(index)}
+              title={products.title}
+              subTitle={products.sub_title}
+              data={products.values}
+            />
+          ))}
           <StoresCarousel cities={cities} />
         </div>
         <Footer />
@@ -62,12 +70,14 @@ export default class Home extends Component {
 
 Home.defaultProps = {
   homepageCategories: [],
+  homepageProducts: [],
   banners: [],
   cities: []
 };
 
 Home.propTypes = {
   homepageCategories: PropTypes.array,
+  homepageProducts: PropTypes.array,
   banners: PropTypes.array,
   cities: PropTypes.array
 };

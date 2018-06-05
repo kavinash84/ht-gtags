@@ -22,9 +22,9 @@ export default function createReducers(asyncReducers) {
     pincode,
     homepage: multireducer({
       menu: homepage,
+      banners: homepage,
       categories: homepage,
-      topSelling: homepage,
-      banners: homepage
+      products: homepage
     }),
     stores,
     ...asyncReducers
