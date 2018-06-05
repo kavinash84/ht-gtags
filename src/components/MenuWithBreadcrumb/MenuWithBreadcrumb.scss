@@ -1,0 +1,34 @@
+.headerLink {
+  color: rgba(255, 255, 255, 1);
+  font-family: "SFPDLight";
+  font-size: 0.875rem;
+  text-transform: capitalize;
+  padding-right: 30px;
+  position: relative;
+  &.active, &:hover {
+    color: #ffffff;
+    opacity: 1;
+  }
+  &:after {
+    content: '>';
+    position: absolute;
+    right: 11px;
+    top: 0;
+  }
+  &.hideArrow {
+    &:after {
+      display: none;
+    }
+  }
+}
+.view360Btn {
+  line-height: 2;
+  &:hover {
+    background: transparent;
+    color: #FFF !important;
+    opacity: 0.8;
+  }
+  img {
+    width: 2rem;
+  }
+}

@@ -16,6 +16,7 @@ import {
   DeliveryAddress,
   PaymentOptions,
   ReviewOrder,
+  Stores,
   NotFound
 } from 'containers';
 import Login from 'containers/Login';
@@ -48,6 +49,7 @@ const routes = [
       { path: '/review-order', exact: true, component: ReviewOrder },
       { path: '/search', exact: false, component: Listing },
       { path: '/pincode', exact: true, component: Pincode },
+      { path: '/stores', exact: true, component: Stores },
       {
         path: '/:category/:subcategory1?/:subcategory2?/:subcategory3?/:subcategory4?/:subcategory5?',
         exact: true,

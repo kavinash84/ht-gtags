@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CartContainer from 'components/Cart';
-import Menu from 'components/Menu';
+import Menu from 'containers/MenuNew/index';
 import TitleBar from 'components/TitleBar';
 
 export default class Cart extends Component {
