@@ -6,15 +6,17 @@ import { wrapDispatch } from 'multireducer';
 import Menu from 'containers/MenuNew/index';
 import MainSlider from 'components/MainSlider';
 import CategoryCarousel from 'components/CategoryCarousel';
+import ProductCarousel from 'components/ProductCarousel';
 import Section from 'hometown-components/lib/Section';
 import { connect } from 'react-redux';
-import ProductSlider from 'components/ProductSlider';
 import HashTags from 'components/Home/HashTags';
 import StoresCarousel from 'components/StoresCarousel';
 import { loadTopSelling, isLoaded as isTopSellingLoaded } from 'redux/modules/homepage';
 import { loadStores, isLoaded as isStoresLoaded } from 'redux/modules/stores';
 import Footer from 'components/Footer';
 import { getCities } from '../../selectors/homepage';
+
+const prodSliderItem = require('../../data/RecentlyViewedProducts.js');
 
 @connect(({ homepage: { categories, banners }, stores }) => ({
   homepageCategories: categories.data,
@@ -53,8 +55,7 @@ export default class Home extends Component {
             />
           ))}
           <HashTags />
-          <ProductSlider productSliderTitle="Recommended for you" colSize={20} />
-          <ProductSlider productSliderTitle="Top Selling Products" colSize={20} />
+          <ProductCarousel data={prodSliderItem} title="Recommended for you" />
           <StoresCarousel cities={cities} />
         </div>
         <Footer />
