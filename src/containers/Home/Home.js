@@ -10,7 +10,7 @@ import ProductCarousel from 'components/ProductCarousel';
 import Section from 'hometown-components/lib/Section';
 import { connect } from 'react-redux';
 import HashTags from 'components/Home/HashTags';
-import StoresCarousel from 'components/StoresCarousel';
+import StoresCarousel from 'components/Stores';
 import { loadTopSelling, isLoaded as isTopSellingLoaded } from 'redux/modules/homepage';
 import { loadStores, isLoaded as isStoresLoaded } from 'redux/modules/stores';
 import Footer from 'components/Footer';
