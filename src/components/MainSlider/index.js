@@ -13,7 +13,7 @@ const settings = {
 
 const BannersSlider = ({ data }) => (
   <SlickSlider settings={settings}>
-    {data.map(slide => <SliderItemkey={slide.id} title={slide.title} image={slide.url} url={slide.target_url} />)}
+    {data.map(slide => <SliderItem key={slide.id} title={slide.title} image={slide.url} url={slide.target_url} />)}
   </SlickSlider>
 );
 
