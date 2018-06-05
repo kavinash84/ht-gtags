@@ -7,7 +7,7 @@ import CategoryCarouselItem from './CategoryCarouselItem';
 import SlickSlider from '../SlickSlider';
 
 const adjustSlides = length => ({
-  slidesToShow: length >= 4 ? 4 : 3,
+  slidesToShow: length >= 4 ? 4 : length,
   slidesToScroll: 3
 });
 
