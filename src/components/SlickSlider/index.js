@@ -12,7 +12,7 @@ const defaultSettings = {
 
 export default class SlickSlider extends Component {
   static propTypes = {
-    children: PropTypes.object.isRequired,
+    children: PropTypes.array.isRequired,
     settings: PropTypes.object.isRequired
   };
   render() {

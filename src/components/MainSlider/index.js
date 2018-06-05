@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import SliderItem from './SliderItem';
+// import { Link } from 'react-router-dom';
 import SlickSlider from '../SlickSlider';
 
 const settings = {
@@ -11,16 +12,25 @@ const settings = {
   slidesToScroll: 1
 };
 
-const BannersSlider = ({ data }) => (
-  <SlickSlider settings={settings}>
-    {data.map(slide => <SliderItem key={slide.id} title={slide.title} image={slide.url} url={slide.target_url} />)}
-  </SlickSlider>
-);
+export default class MainSlider extends Component {
+  render() {
+    const { data } = this.props;
+    return (
+      <SlickSlider settings={settings}>
+        {data.map(slide => (
+          <div key={slide.id}>
+            <SliderItem image={slide.url} url={slide.target_url} title={slide.title} />
+          </div>
+        ))}
+      </SlickSlider>
+    );
+  }
+}
 
-BannersSlider.defaultProps = {
+MainSlider.defaultProps = {
   data: []
 };
 
-BannersSlider.propTypes = {
+MainSlider.propTypes = {
   data: PropTypes.array
 };
