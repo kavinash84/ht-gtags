@@ -5,29 +5,18 @@ import Section from 'hometown-components/lib/Section';
 import Container from 'hometown-components/lib/Container';
 import Row from 'hometown-components/lib/Row';
 import Div from 'hometown-components/lib/Div';
-import StoreCarousel from './StoreCarousel';
+import StoresCarousel from 'components/StoresCarousel';
 import StoreItem from './StoreItem';
 
 const Stores = ({ data, categoryName, subTitle }) => (
-  <Section p="0" pt="2.5rem" mb="0">
+  <Section p="0" pt="2.5rem" mb="0" className="storeCarousel">
     <Container pr="0" pl="0">
       <Row type="block" m="0" mb="0.5rem">
         <Title title={categoryName} subTitle={subTitle} />
       </Row>
       <Row type="block" m="0" mb="0.5rem">
-        <Div col={12} p="0 0.75rem 1rem">
-          <StoreCarousel
-            autoPlayVal={false}
-            className="storeSlider"
-            showThumbsVal={false}
-            showStatusVal={false}
-            showArrowsVal
-            showIndicatorsVal={false}
-            infiniteLoopVal={false}
-            centerModeVal
-            centerSlidePercentageVal={20}
-            data={data}
-          />
+        <Div col={12} p="0 0.75rem 0.5rem">
+          <StoresCarousel data={data} />
         </Div>
       </Row>
       <Row type="block" m="0" mb="0.5rem">
