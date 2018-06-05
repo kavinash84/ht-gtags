@@ -1,0 +1,31 @@
+.footer {
+  padding: 2.5rem 0 0;
+  h4 {
+    color: rgba(255, 255, 255, 1);
+    font-family: SFPDLight;
+  }
+  ul {
+    padding-left: 0;
+    li {
+      list-style: none;
+      padding-bottom: 7px;
+      a {
+        color: #a6a6a6;
+        font-family: SFPDLight;
+        font-size: 0.875em;
+        opacity: 1;
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+}
+.socials {
+  display: inline-block;
+  margin: 0;
+  li {
+    display: inline-block;
+    padding: 0 5px !important;
+  }
+}

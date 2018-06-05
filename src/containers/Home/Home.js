@@ -12,8 +12,8 @@ import ProductSlider from 'components/ProductSlider';
 import HashTags from 'components/Home/HashTags';
 import Stores from 'components/Home/Stores';
 import { loadTopSelling, loadStores, isLoaded as isSectionLoaded } from 'redux/modules/homepage';
+import Footer from 'components/Footer';
 import { getCities } from '../../selectors/homepage';
-// import uniq from 'lodash/uniq';
 
 const storesItems = require('../../data/stores.js');
 
@@ -37,7 +37,7 @@ export default class Home extends Component {
     const { homepageCategories, banners, stores } = this.props;
     console.log(stores);
     return (
-      <Section p="0" pb="1.5rem">
+      <Section p="0" mb="0">
         <Helmet title="Home" />
         <div className="wrapper">
           <Menu />
@@ -59,6 +59,7 @@ export default class Home extends Component {
             data={storesItems}
           />
         </div>
+        <Footer />
       </Section>
     );
   }

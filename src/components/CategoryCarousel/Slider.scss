@@ -11,7 +11,7 @@
   }
   .title {
     @include font-family('SemiBold');
-    @include font-size(0.8rem);
+    @include font-size(0.825rem);
     margin: 10px 0 7px;
   }
   .discPrice {
@@ -53,6 +53,7 @@
 }
 
 .catSliderItem {
+  padding: 0 5px;
   .title {
     @include font-size(1rem);
   }

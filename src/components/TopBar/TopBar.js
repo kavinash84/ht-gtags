@@ -52,8 +52,12 @@ export default class MenuSidebar extends Component {
               <Img src={MapIcon} alt="Hometown" height="26px" mr="0.625rem" float="left" />
               <Span fontSize="0.875rem">{selectedPincode !== '' ? selectedPincode : 'Pincode'}</Span>
             </button>
-            <ResponsiveModal onCloseModal={this.onCloseModal} open={this.state.open}>
-              <Pincode />
+            <ResponsiveModal
+              classNames={{ modal: styles.pincodeModal }}
+              onCloseModal={this.onCloseModal}
+              open={this.state.open}
+            >
+              <Pincode onCloseModal={this.onCloseModal} />
             </ResponsiveModal>
             <Link className={styles.cart} to={HOME_URL}>
               <Img src={PhoneIcon} alt="Hometown" height="26px" mr="0.625rem" float="left" />
