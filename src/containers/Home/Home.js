@@ -10,31 +10,33 @@ import Section from 'hometown-components/lib/Section';
 import { connect } from 'react-redux';
 import ProductSlider from 'components/ProductSlider';
 import HashTags from 'components/Home/HashTags';
-import Stores from 'components/Home/Stores';
-import { loadTopSelling, loadStores, isLoaded as isSectionLoaded } from 'redux/modules/homepage';
+import StoresCarousel from 'components/StoresCarousel';
+import { loadTopSelling, isLoaded as isTopSellingLoaded } from 'redux/modules/homepage';
+import { loadStores, isLoaded as isStoresLoaded } from 'redux/modules/stores';
 import Footer from 'components/Footer';
 import { getCities } from '../../selectors/homepage';
 
-const storesItems = require('../../data/stores.js');
-
-@connect(({ homepage: { categories, banners, stores } }) => ({
+@connect(({ homepage: { categories, banners }, stores }) => ({
   homepageCategories: categories.data,
   banners: banners.data,
-  stores: getCities(stores)
+  cities: getCities(stores),
+  stores: stores.data
 }))
 @provideHooks({
   defer: ({ store: { dispatch, getState } }) => {
-    if (!isSectionLoaded(getState(), 'topSelling')) {
+    if (!isTopSellingLoaded(getState(), 'topSelling')) {
       wrapDispatch(dispatch, 'topSelling')(loadTopSelling()).catch(error => console.log(error));
     }
-    if (!isSectionLoaded(getState(), 'stores')) {
-      wrapDispatch(dispatch, 'stores')(loadStores()).catch(error => console.log(error));
+    if (!isStoresLoaded(getState())) {
+      dispatch(loadStores()).catch(error => console.log(error));
     }
   }
 })
 export default class Home extends Component {
   render() {
-    const { homepageCategories, banners, stores } = this.props;
+    const {
+      homepageCategories, banners, stores, cities
+    } = this.props;
     console.log(stores);
     return (
       <Section p="0" mb="0">
@@ -53,11 +55,7 @@ export default class Home extends Component {
           <HashTags />
           <ProductSlider productSliderTitle="Recommended for you" colSize={20} />
           <ProductSlider productSliderTitle="Top Selling Products" colSize={20} />
-          <Stores
-            categoryName="Visit Our Stores"
-            subTitle="Explore all products in a store near you, explore them here, there, anywhere"
-            data={storesItems}
-          />
+          <StoresCarousel cities={cities} />
         </div>
         <Footer />
       </Section>
@@ -68,11 +66,13 @@ export default class Home extends Component {
 Home.defaultProps = {
   homepageCategories: [],
   banners: [],
-  stores: []
+  stores: [],
+  cities: []
 };
 
 Home.propTypes = {
   homepageCategories: PropTypes.array,
   banners: PropTypes.array,
-  stores: PropTypes.array
+  stores: PropTypes.array,
+  cities: PropTypes.array
 };

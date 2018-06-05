@@ -8,6 +8,7 @@ import search from './modules/search';
 import loadmore from './modules/loadmore';
 import pincode from './modules/pincode';
 import homepage from './modules/homepage';
+import stores from './modules/stores';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -23,9 +24,9 @@ export default function createReducers(asyncReducers) {
       menu: homepage,
       categories: homepage,
       topSelling: homepage,
-      banners: homepage,
-      stores: homepage
+      banners: homepage
     }),
+    stores,
     ...asyncReducers
   };
 }

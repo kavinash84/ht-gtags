@@ -6,17 +6,17 @@ import SlickSlider from '../SlickSlider';
 const settings = {
   slidesToShow: 7,
   slidesToScroll: 7,
-  autoPlay: false
+  autoplay: false
 };
 
 export default class StoresCarousel extends Component {
   render() {
-    const { data } = this.props;
+    const { cities } = this.props;
     return (
       <SlickSlider settings={settings}>
-        {data.map((item, index) => (
+        {cities.map((city, index) => (
           <div key={String(index)}>
-            <StoresCarouselItem city={item.city} />
+            <StoresCarouselItem city={city} />
           </div>
         ))}
       </SlickSlider>
@@ -25,9 +25,9 @@ export default class StoresCarousel extends Component {
 }
 
 StoresCarousel.defaultProps = {
-  data: []
+  cities: []
 };
 
 StoresCarousel.propTypes = {
-  data: PropTypes.array
+  cities: PropTypes.array
 };
