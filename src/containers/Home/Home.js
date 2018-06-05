@@ -4,6 +4,7 @@ import Helmet from 'react-helmet';
 // import Menu from 'containers/MenuNew/index';
 import Menu from 'containers/MenuNew/index';
 import MainSlider from 'components/MainSlider';
+import CategoryCarousel from 'components/CategoryCarousel';
 import Section from 'hometown-components/lib/Section';
 import { connect } from 'react-redux';
 import ProductSlider from 'components/ProductSlider';
@@ -31,10 +32,15 @@ export default class Home extends Component {
         <div className="wrapper">
           <Menu />
           <MainSlider data={banners} />
-          <ProductCarousel
+          <CategoryCarousel
             categoryName="Popular Categories"
             subTitle="Products curated from the user-product engangement"
             data={shopByOccasion}
+          />
+
+          <ProductCarousel
+            categoryName="Popular Categories"
+            subTitle="Products curated from the user-product engangement"
             colSize="25"
           />
           <ProductCarousel

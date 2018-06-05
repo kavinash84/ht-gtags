@@ -28,18 +28,6 @@
 		@include font-size(1.2rem);
 		margin-top: 0;
 	}
-	.catSlider {
-		ul {
-			padding-right: 40px !important;
-		}
-		li {
-			margin: 0 0 0 15px !important;
-			background: transparent !important;
-			img {
-				box-shadow: 0 5px 13px 0 rgba(0, 0, 0, 0.14);
-			}
-		}
-	}
 	.prodSlider {
 		padding: 20px 0 10px;
 		ul {
@@ -210,6 +198,29 @@
 				font-size: 0.875rem;
 				font-family: SFPDLight;
 			}
+		}
+	}
+
+	/* Slick carousel */
+	.slick-next {
+	  right: 25px !important;
+		z-index: 1;
+	}
+	.slick-prev {
+	  left: 25px !important;
+		z-index: 1;
+	}
+	.slick-prev:before, .slick-next:before {
+	  color: #000;
+		font-size: 26px;
+	}
+
+	.catCarousel {
+		.slick-next {
+		  right: -30px !important;
+		}
+		.slick-prev {
+		  left: -30px !important;
 		}
 	}
 }
