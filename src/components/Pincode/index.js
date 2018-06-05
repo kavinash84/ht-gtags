@@ -47,7 +47,7 @@ const Pincode = ({
       onChange={onChange(setPincodeQuery, load)}
       value={pincodeQuery}
     />
-    <Div className={`${styles.active}`}>
+    <Div className={`${styles.searchList} ${styles.active}`}>
       {loading && (
         <ul>
           <li> Searching.... </li>
