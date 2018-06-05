@@ -17,4 +17,5 @@ export ProductCarousel from './ProductCarousel/ProductCarousel';
 export DeliveryAddress from './DeliveryAddress/DeliveryAddress';
 export PaymentOptions from './PaymentOptions/PaymentOptions';
 export ReviewOrder from './ReviewOrder/ReviewOrder';
+export Stores from './Stores/Stores';
 export NotFound from './NotFound/NotFound';
