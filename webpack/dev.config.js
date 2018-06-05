@@ -78,7 +78,13 @@ var webpackConfig = module.exports = {
         test: /\.scss$/,
         loader: 'happypack/loader?id=sass',
         include: [path.resolve(__dirname, '../src')]
-      }, {
+      },
+       {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader',
+        include: [path.resolve(__dirname, '../src'), path.resolve(__dirname, '../node_modules')]
+      },
+      {
         test: /\.woff2?(\?v=\d+\.\d+\.\d+)?$/,
         loader: 'url-loader',
         options: {
@@ -116,11 +122,11 @@ var webpackConfig = module.exports = {
       'src',
       'node_modules'
     ],
-    extensions: ['.json', '.js', '.jsx']
+    extensions: ['.json', '.js', '.jsx', '.css']
   },
   plugins: [
     new webpack.LoaderOptionsPlugin({
-      test: /\.(less|scss)/,
+      test: /\.(less|scss|css)/,
       options: {
         postcss: function (webpack) {
           return [
@@ -221,6 +227,7 @@ var webpackConfig = module.exports = {
     ])
   ]
 };
+
 
 if (process.env.WEBPACK_DLLS === '1' && validDLLs) {
   helpers.installVendorDLL(webpackConfig, 'vendor');

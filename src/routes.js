@@ -22,6 +22,7 @@ import Login from 'containers/Login';
 import Signup from 'containers/Signup';
 import Profile from 'containers/Profile';
 import Pincode from 'components/Pincode';
+import SimpleSlider from 'components/SlickSlider';
 
 const routes = [
   {
@@ -29,6 +30,7 @@ const routes = [
     routes: [
       { path: '/', exact: true, component: Home },
       { path: '/menu', exact: true, component: Menu },
+      { path: '/slick', exact: true, component: SimpleSlider },
       { path: '/login', exact: true, component: Login },
       { path: '/signup', exact: true, component: Signup },
       { path: '/listing', exact: true, component: Listing },
