@@ -6,20 +6,19 @@ import Title from 'components/Title';
 import CategoryCarouselItem from './CategoryCarouselItem';
 import SlickSlider from '../SlickSlider';
 
-const settings = {
-  slidesToShow: 4,
-  slidesToScroll: 4
-};
+const adjustSlides = length => ({
+  slidesToShow: length >= 4 ? 4 : 3,
+  slidesToScroll: 3
+});
 
 export default class CategoryCarousel extends Component {
   render() {
     const { data, categoryName, subTitle } = this.props;
-    console.log(data);
     return (
       <Section p="0" pt="2.5rem" mb="0" className="catCarousel">
         <Container pr="0" pl="0">
           <Title title={categoryName} subTitle={subTitle} />
-          <SlickSlider settings={settings}>
+          <SlickSlider settings={adjustSlides(data.length)}>
             {data.map(slide => (
               <div key={slide.category_id}>
                 <CategoryCarouselItem image={slide.image_url} name={slide.info.name} url={slide.info.url_key} />
