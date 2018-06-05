@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Img from 'hometown-components/lib/img';
+import Img from 'hometown-components/lib/Img';
 
 const SliderItem = ({ title, image, url }) => (
   <Link to={url}>
