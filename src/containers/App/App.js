@@ -5,23 +5,32 @@ import { withRouter } from 'react-router';
 import { provideHooks } from 'redial';
 import { ThemeProvider } from 'styled-components';
 import Helmet from 'react-helmet';
-import { load as loadBanners, isLoaded as isBannersLoaded } from 'redux/modules/banners';
-import { load as loadCategories, isLoaded as isCategoriesLoaded } from 'redux/modules/homepage';
-import { load as loadMenu, isLoaded as isMenuLoaded } from 'redux/modules/menu';
-// import { load as loadStyles } from 'redux/modules/shopByStyle';
+import { wrapDispatch } from 'multireducer';
+import {
+  loadCategories,
+  loadMainMenu,
+  loadTopSelling,
+  loadBanners,
+  isLoaded as isSectionLoaded
+} from 'redux/modules/homepage';
 import config from 'config';
 import Theme from 'hometown-components/lib/Theme';
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState } }) => {
-    if (!isBannersLoaded(getState())) {
-      await dispatch(loadBanners()).catch(() => null);
+    if (!isSectionLoaded(getState(), 'banners')) {
+      await wrapDispatch(dispatch, 'banners')(loadBanners()).catch(() => null);
     }
-    if (!isCategoriesLoaded(getState())) {
-      await dispatch(loadCategories()).catch(error => console.log(error));
+    if (!isSectionLoaded(getState(), 'categories')) {
+      await wrapDispatch(dispatch, 'categories')(loadCategories()).catch(error => console.log(error));
     }
-    if (!isMenuLoaded(getState())) {
-      await dispatch(loadMenu()).catch(error => console.log(error));
+    if (!isSectionLoaded(getState())) {
+      await wrapDispatch(dispatch, 'menu')(loadMainMenu()).catch(error => console.log(error));
+    }
+  },
+  defer: ({ store: { dispatch, getState } }) => {
+    if (!isSectionLoaded(getState(), 'topSelling')) {
+      wrapDispatch(dispatch, 'topSelling')(loadTopSelling()).catch(error => console.log(error));
     }
   }
 })

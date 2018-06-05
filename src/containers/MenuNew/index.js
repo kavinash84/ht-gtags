@@ -10,8 +10,8 @@ import HoverMenuBox from 'components/HoverBox/HoverMenuBox';
 
 const styles = require('./index.scss');
 
-@connect(({ menu }) => ({
-  menuItems: menu.data
+@connect(({ homepage }) => ({
+  menuItems: homepage.menu.data
 }))
 export default class Menu extends Component {
   state = {
