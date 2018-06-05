@@ -1,36 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import Div from 'hometown-components/lib/Div';
-import Carousel from '../Carousel';
+import SliderItem from './SliderItem';
+import SlickSlider from '../SlickSlider';
 
-export default class MainSlider extends Component {
-  render() {
-    const { data } = this.props;
-    return (
-      <Div mb="10px">
-        <Carousel
-          autoPlayVal
-          className="homeSlider"
-          showArrowsVal
-          showThumbsVal={false}
-          showStatusVal={false}
-          showIndicatorsVal={false}
-          infiniteLoopVal
-          centerModeVal={false}
-          centerSlidePercentageVal={100}
-          sliderImages={data}
-          typeOfSlider="homeSlider"
-          contentStatus={false}
-        />
-      </Div>
-    );
-  }
-}
+const settings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1
+};
 
-MainSlider.defaultProps = {
+const BannersSlider = ({ data }) => (
+  <SlickSlider settings={settings}>
+    {data.map(slide => <SliderItemkey={slide.id} title={slide.title} image={slide.url} url={slide.target_url} />)}
+  </SlickSlider>
+);
+
+BannersSlider.defaultProps = {
   data: []
 };
 
-MainSlider.propTypes = {
+BannersSlider.propTypes = {
   data: PropTypes.array
 };
