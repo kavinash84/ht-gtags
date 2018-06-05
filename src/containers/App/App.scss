@@ -28,19 +28,6 @@
 		@include font-size(1.2rem);
 		margin-top: 0;
 	}
-	.prodSlider {
-		padding: 20px 0 10px;
-		ul {
-			padding-right: 0 !important;
-		}
-		li {
-			margin: 0 !important;
-			padding: 0 7.5px;
-		}
-		.control-arrow {
-			top: calc(50% - 81px) !important;
-		}
-	}
 	.homeSlider {
 		.control-arrow {
 			top: calc(50% - 21px) !important;
