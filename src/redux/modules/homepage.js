@@ -1,4 +1,4 @@
-import { BANNERS, HOMEPAGE_CATEGORIES, HOMEPAGE_TOP_SELLING, CATEGORY_MENU } from 'helpers/apiUrls';
+import { BANNERS, HOMEPAGE_CATEGORIES, HOMEPAGE_TOP_SELLING, CATEGORY_MENU, STORES } from 'helpers/apiUrls';
 
 const LOAD = 'hompageCategories/LOAD';
 const LOAD_SUCCESS = 'hompageCategories/LOAD_SUCCESS';
@@ -37,6 +37,11 @@ export default function reducer(state = initialState, action = {}) {
 
 export const isLoaded = (globalState, key) => globalState.homepage[key] && globalState.homepage[key].loaded;
 
+export const loadMainMenu = () => ({
+  types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
+  promise: ({ client }) => client.get(CATEGORY_MENU)
+});
+
 export const loadCategories = () => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
   promise: ({ client }) => client.get(HOMEPAGE_CATEGORIES)
@@ -47,12 +52,12 @@ export const loadBanners = () => ({
   promise: ({ client }) => client.get(BANNERS)
 });
 
-export const loadMainMenu = () => ({
-  types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-  promise: ({ client }) => client.get(CATEGORY_MENU)
-});
-
 export const loadTopSelling = () => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
   promise: ({ client }) => client.get(HOMEPAGE_TOP_SELLING)
+});
+
+export const loadStores = () => ({
+  types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
+  promise: ({ client }) => client.get(STORES)
 });

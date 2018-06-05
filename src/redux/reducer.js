@@ -23,7 +23,8 @@ export default function createReducers(asyncReducers) {
       menu: homepage,
       categories: homepage,
       topSelling: homepage,
-      banners: homepage
+      banners: homepage,
+      stores: homepage
     }),
     ...asyncReducers
   };

@@ -5,7 +5,8 @@ import SlickSlider from '../SlickSlider';
 
 const settings = {
   slidesToShow: 7,
-  slidesToScroll: 7
+  slidesToScroll: 7,
+  autoPlay: false
 };
 
 export default class StoresCarousel extends Component {

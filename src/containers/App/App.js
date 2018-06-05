@@ -6,13 +6,7 @@ import { provideHooks } from 'redial';
 import { ThemeProvider } from 'styled-components';
 import Helmet from 'react-helmet';
 import { wrapDispatch } from 'multireducer';
-import {
-  loadCategories,
-  loadMainMenu,
-  loadTopSelling,
-  loadBanners,
-  isLoaded as isSectionLoaded
-} from 'redux/modules/homepage';
+import { loadCategories, loadMainMenu, loadBanners, isLoaded as isSectionLoaded } from 'redux/modules/homepage';
 import config from 'config';
 import Theme from 'hometown-components/lib/Theme';
 
@@ -26,11 +20,6 @@ import Theme from 'hometown-components/lib/Theme';
     }
     if (!isSectionLoaded(getState())) {
       await wrapDispatch(dispatch, 'menu')(loadMainMenu()).catch(error => console.log(error));
-    }
-  },
-  defer: ({ store: { dispatch, getState } }) => {
-    if (!isSectionLoaded(getState(), 'topSelling')) {
-      wrapDispatch(dispatch, 'topSelling')(loadTopSelling()).catch(error => console.log(error));
     }
   }
 })

@@ -5,4 +5,14 @@ export const encodeCategory = obj => {
   return btoa(JSON.stringify({ params: values }));
 };
 
-export const x = () => {};
+export const formatData = data => {
+  const x = data.toLowerCase();
+  const pp = x.split(' ');
+  return pp.map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+};
+
+export const filterStoresByCity = (stores, city) => {
+  if (stores) {
+    return stores.filter(store => store.city.toLowerCase() === city.toLowerCase());
+  }
+};
