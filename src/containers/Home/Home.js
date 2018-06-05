@@ -8,23 +8,18 @@ import CategoryCarousel from 'components/CategoryCarousel';
 import Section from 'hometown-components/lib/Section';
 import { connect } from 'react-redux';
 import ProductSlider from 'components/ProductSlider';
-import ProductCarousel from 'components/ProductCarousel';
 import HashTags from 'components/Home/HashTags';
 import Stores from 'components/Home/Stores';
 
 const storesItems = require('../../data/stores.js');
 
-@connect(state => ({
-  shopByOccasion: state.shopByOccasion.data,
-  shopByStyle: state.shopByStyle.data,
-  shopByRoom: state.shopByRoom.data,
-  banners: state.banners.data
+@connect(({ banners, homepage }) => ({
+  homepageCategories: homepage.data,
+  banners: banners.data
 }))
 export default class Home extends Component {
   render() {
-    const {
-      shopByOccasion, shopByRoom, shopByStyle, banners
-    } = this.props;
+    const { homepageCategories, banners } = this.props;
 
     return (
       <Section p="0" pb="1.5rem">
@@ -32,41 +27,14 @@ export default class Home extends Component {
         <div className="wrapper">
           <Menu />
           <MainSlider data={banners} />
-          <CategoryCarousel
-            categoryName="Popular Categories"
-            subTitle="Products curated from the user-product engangement"
-            data={shopByOccasion}
-          />
-
-          <ProductCarousel
-            categoryName="Popular Categories"
-            subTitle="Products curated from the user-product engangement"
-            colSize="25"
-          />
-          <ProductCarousel
-            categoryName="Shop by Room"
-            subTitle="Products curated for every need of a room in your home"
-            data={shopByRoom}
-            colSize="25"
-          />
-          <ProductCarousel
-            categoryName="Shop by Style"
-            subTitle="Products curated by style because your taste represents who you are"
-            data={shopByStyle}
-            colSize="25"
-          />
-          <ProductCarousel
-            categoryName="Shop by Occasion"
-            subTitle="Our designers have carefully curated products for you for occasions of joy"
-            data={shopByStyle}
-            colSize="25"
-          />
-          <ProductCarousel
-            categoryName="Exclusive Services by HomeTown"
-            subTitle="We are not just limited to products, but we also provide amazing services"
-            data={shopByStyle}
-            colSize="33.33"
-          />
+          {homepageCategories.map((category, index) => (
+            <CategoryCarousel
+              key={String(index)}
+              categoryName={category.title}
+              subTitle={category.sub_title}
+              data={category.values}
+            />
+          ))}
           <HashTags />
           <ProductSlider productSliderTitle="Recommended for you" colSize={20} />
           <ProductSlider productSliderTitle="Top Selling Products" colSize={20} />
@@ -82,15 +50,11 @@ export default class Home extends Component {
 }
 
 Home.defaultProps = {
-  shopByRoom: [],
-  shopByStyle: [],
-  shopByOccasion: [],
+  homepageCategories: [],
   banners: []
 };
 
 Home.propTypes = {
-  shopByRoom: PropTypes.array,
-  shopByStyle: PropTypes.array,
-  shopByOccasion: PropTypes.array,
+  homepageCategories: PropTypes.array,
   banners: PropTypes.array
 };

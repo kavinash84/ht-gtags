@@ -14,14 +14,15 @@ const settings = {
 export default class CategoryCarousel extends Component {
   render() {
     const { data, categoryName, subTitle } = this.props;
+    console.log(data);
     return (
       <Section p="0" pt="2.5rem" mb="0" className="catCarousel">
         <Container pr="0" pl="0">
           <Title title={categoryName} subTitle={subTitle} />
           <SlickSlider settings={settings}>
             {data.map(slide => (
-              <div key={slide.id}>
-                <CategoryCarouselItem id={slide.id} image={slide.image} name={slide.name} url={slide.url_key} />
+              <div key={slide.category_id}>
+                <CategoryCarouselItem image={slide.image_url} name={slide.info.name} url={slide.info.url_key} />
               </div>
             ))}
           </SlickSlider>

@@ -11,6 +11,7 @@ import search from './modules/search';
 import loadmore from './modules/loadmore';
 import menu from './modules/menu';
 import pincode from './modules/pincode';
+import homepage from './modules/homepage';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -27,6 +28,7 @@ export default function createReducers(asyncReducers) {
     loadmore,
     menu,
     pincode,
+    homepage,
     ...asyncReducers
   };
 }
