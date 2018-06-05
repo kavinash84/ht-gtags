@@ -11,17 +11,17 @@ const settings = {
   slidesToScroll: 7
 };
 
-export default class CategoryCarousel extends Component {
+export default class StoresCarousel extends Component {
   render() {
-    const { data, categoryName, subTitle } = this.props;
+    const { data, title, subTitle } = this.props;
     return (
       <Section p="0" pt="2.5rem" mb="0" className="catCarousel">
         <Container pr="0" pl="0">
-          <Title title={categoryName} subTitle={subTitle} />
+          <Title title={title} subTitle={subTitle} />
           <SlickSlider settings={settings}>
-            {data.map(slide => (
-              <div key={slide.id}>
-                <StoresCarouselItem name={slide.name} url={slide.url} />
+            {data.map((item, index) => (
+              <div key={String(index)}>
+                <StoresCarouselItem city={item.city} />
               </div>
             ))}
           </SlickSlider>
@@ -31,14 +31,14 @@ export default class CategoryCarousel extends Component {
   }
 }
 
-CategoryCarousel.defaultProps = {
+StoresCarousel.defaultProps = {
   data: [],
-  categoryName: '',
+  title: '',
   subTitle: ''
 };
 
-CategoryCarousel.propTypes = {
+StoresCarousel.propTypes = {
   data: PropTypes.array,
-  categoryName: PropTypes.string,
+  title: PropTypes.string,
   subTitle: PropTypes.string
 };

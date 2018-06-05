@@ -9,7 +9,6 @@ import Section from 'hometown-components/lib/Section';
 import { connect } from 'react-redux';
 import ProductSlider from 'components/ProductSlider';
 import HashTags from 'components/Home/HashTags';
-import Stores from 'components/Home/Stores';
 import StoresCarousel from 'components/StoresCarousel';
 
 const storesItems = require('../../data/stores.js');
@@ -39,14 +38,9 @@ export default class Home extends Component {
           <HashTags />
           <ProductSlider productSliderTitle="Recommended for you" colSize={20} />
           <ProductSlider productSliderTitle="Top Selling Products" colSize={20} />
-          <Stores
-            categoryName="Visit Our Stores"
-            subTitle="Explore all products in a store near you, explore them here, there, anywhere"
-            data={storesItems}
-          />
 
           <StoresCarousel
-            categoryName="Visit Our Stores"
+            title="Visit Our Stores"
             subTitle="Explore all products in a store near you, explore them here, there, anywhere"
             data={storesItems}
           />
