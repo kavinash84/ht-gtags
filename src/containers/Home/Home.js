@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-// import Menu from 'containers/MenuNew/index';
+import { provideHooks } from 'redial';
+import { wrapDispatch } from 'multireducer';
 import Menu from 'containers/MenuNew/index';
 import MainSlider from 'components/MainSlider';
 import CategoryCarousel from 'components/CategoryCarousel';
@@ -10,17 +11,31 @@ import { connect } from 'react-redux';
 import ProductSlider from 'components/ProductSlider';
 import HashTags from 'components/Home/HashTags';
 import Stores from 'components/Home/Stores';
+import { loadTopSelling, loadStores, isLoaded as isSectionLoaded } from 'redux/modules/homepage';
+import { getCities } from '../../selectors/homepage';
+// import uniq from 'lodash/uniq';
 
 const storesItems = require('../../data/stores.js');
 
-@connect(({ homepage }) => ({
-  homepageCategories: homepage.categories.data,
-  banners: homepage.banners.data
+@connect(({ homepage: { categories, banners, stores } }) => ({
+  homepageCategories: categories.data,
+  banners: banners.data,
+  stores: getCities(stores)
 }))
+@provideHooks({
+  defer: ({ store: { dispatch, getState } }) => {
+    if (!isSectionLoaded(getState(), 'topSelling')) {
+      wrapDispatch(dispatch, 'topSelling')(loadTopSelling()).catch(error => console.log(error));
+    }
+    if (!isSectionLoaded(getState(), 'stores')) {
+      wrapDispatch(dispatch, 'stores')(loadStores()).catch(error => console.log(error));
+    }
+  }
+})
 export default class Home extends Component {
   render() {
-    const { homepageCategories, banners } = this.props;
-
+    const { homepageCategories, banners, stores } = this.props;
+    console.log(stores);
     return (
       <Section p="0" pb="1.5rem">
         <Helmet title="Home" />
@@ -51,10 +66,12 @@ export default class Home extends Component {
 
 Home.defaultProps = {
   homepageCategories: [],
-  banners: []
+  banners: [],
+  stores: []
 };
 
 Home.propTypes = {
   homepageCategories: PropTypes.array,
-  banners: PropTypes.array
+  banners: PropTypes.array,
+  stores: PropTypes.array
 };
