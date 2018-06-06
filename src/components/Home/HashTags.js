@@ -33,7 +33,7 @@ const HashTags = ({ data }) => (
               fontSize="0.875rem"
               display="inline-block"
             >
-              {hashtag.name}
+              #{hashtag.name}
             </Span>
           ))}
         </Div>

@@ -42,7 +42,10 @@ module.exports = {
         exclude: /node_modules/
       }, {
         test: /\.css$/,
-        loader: 'style-loader!css-loader',
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader']
+        }),
         include: [path.resolve(__dirname, '../src'), path.resolve(__dirname, '../node_modules')]
       }, {
         test: /\.less$/,
