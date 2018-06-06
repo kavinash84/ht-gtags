@@ -18,7 +18,7 @@ import Theme from 'hometown-components/lib/Theme';
     if (!isSectionLoaded(getState(), 'categories')) {
       await wrapDispatch(dispatch, 'categories')(loadCategories()).catch(error => console.log(error));
     }
-    if (!isSectionLoaded(getState())) {
+    if (!isSectionLoaded(getState(), 'menu')) {
       await wrapDispatch(dispatch, 'menu')(loadMainMenu()).catch(error => console.log(error));
     }
   }

@@ -16,11 +16,16 @@ import { loadStores, isLoaded as isStoresLoaded } from 'redux/modules/stores';
 import Footer from 'components/Footer';
 import { getCities } from '../../selectors/homepage';
 
-@connect(({ homepage: { categories, banners, products }, stores }) => ({
+@connect(({
+  homepage: {
+    categories, banners, products, hashtags
+  }, stores
+}) => ({
   banners: banners.data,
   homepageCategories: categories.data,
   homepageProducts: products.data,
-  cities: getCities(stores)
+  cities: getCities(stores),
+  hashtags: hashtags.data
 }))
 @provideHooks({
   defer: ({ store: { dispatch, getState } }) => {
@@ -35,7 +40,7 @@ import { getCities } from '../../selectors/homepage';
 export default class Home extends Component {
   render() {
     const {
-      homepageCategories, homepageProducts, banners, cities
+      homepageCategories, homepageProducts, banners, cities, hashtags
     } = this.props;
     return (
       <Section p="0" mb="0">
@@ -51,7 +56,7 @@ export default class Home extends Component {
               data={category.values}
             />
           ))}
-          <HashTags />
+          <HashTags data={hashtags} />
           {homepageProducts.map((products, index) => (
             <ProductCarousel
               key={String(index)}
@@ -72,12 +77,14 @@ Home.defaultProps = {
   homepageCategories: [],
   homepageProducts: [],
   banners: [],
-  cities: []
+  cities: [],
+  hashtags: []
 };
 
 Home.propTypes = {
   homepageCategories: PropTypes.array,
   homepageProducts: PropTypes.array,
   banners: PropTypes.array,
-  cities: PropTypes.array
+  cities: PropTypes.array,
+  hashtags: PropTypes.array
 };

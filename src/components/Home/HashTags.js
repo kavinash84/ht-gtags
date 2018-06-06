@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Container from 'hometown-components/lib/Container';
 import Section from 'hometown-components/lib/Section';
 import Row from 'hometown-components/lib/Row';
@@ -8,7 +9,7 @@ import Span from 'hometown-components/lib/Span';
 
 const styles = require('./HashTags.scss');
 
-const HashTags = () => (
+const HashTags = ({ data }) => (
   <Container pr="0" pl="0">
     <Section p="3.5rem 20%" mt="3rem" mb="1rem" className={styles.hashTags} bg="hashTags">
       <Row>
@@ -23,58 +24,26 @@ const HashTags = () => (
       </Row>
       <Row>
         <Div ta="center">
-          <Span p="5px 10px" fontFamily="SFPDLight" color="#ffefd1bd" fontSize="0.875rem" display="inline-block">
-            # modernsofas
-          </Span>
-          <Span p="5px 10px" fontFamily="SFPDLight" color="#ffefd1bd" fontSize="0.875rem" display="inline-block">
-            # premium
-          </Span>
-          <Span p="5px 10px" fontFamily="SFPDLight" color="#ffefd1bd" fontSize="0.875rem" display="inline-block">
-            # diwalispecial
-          </Span>
-          <Span p="5px 10px" fontFamily="SFPDLight" color="#ffefd1bd" fontSize="0.875rem" display="inline-block">
-            # minimalist
-          </Span>
-          <Span p="5px 10px" fontFamily="SFPDLight" color="#ffefd1bd" fontSize="0.875rem" display="inline-block">
-            # party
-          </Span>
-          <Span p="5px 10px" fontFamily="SFPDLight" color="#ffefd1bd" fontSize="0.875rem" display="inline-block">
-            # ethnic
-          </Span>
-          <Span p="5px 10px" fontFamily="SFPDLight" color="#ffefd1bd" fontSize="0.875rem" display="inline-block">
-            # pearlwhite
-          </Span>
-          <Span p="5px 10px" fontFamily="SFPDLight" color="#ffefd1bd" fontSize="0.875rem" display="inline-block">
-            # designermade
-          </Span>
-          <Span p="5px 10px" fontFamily="SFPDLight" color="#ffefd1bd" fontSize="0.875rem" display="inline-block">
-            # kidsfriendly
-          </Span>
-          <Span p="5px 10px" fontFamily="SFPDLight" color="#ffefd1bd" fontSize="0.875rem" display="inline-block">
-            # utility
-          </Span>
-          <Span p="5px 10px" fontFamily="SFPDLight" color="#ffefd1bd" fontSize="0.875rem" display="inline-block">
-            # tech
-          </Span>
-          <Span p="5px 10px" fontFamily="SFPDLight" color="#ffefd1bd" fontSize="0.875rem" display="inline-block">
-            # unique
-          </Span>
-          <Span p="5px 10px" fontFamily="SFPDLight" color="#ffefd1bd" fontSize="0.875rem" display="inline-block">
-            # teakwood
-          </Span>
-          <Span p="5px 10px" fontFamily="SFPDLight" color="#ffefd1bd" fontSize="0.875rem" display="inline-block">
-            # MDFWood
-          </Span>
-          <Span p="5px 10px" fontFamily="SFPDLight" color="#ffefd1bd" fontSize="0.875rem" display="inline-block">
-            # synthetic
-          </Span>
-          <Span p="5px 10px" fontFamily="SFPDLight" color="#ffefd1bd" fontSize="0.875rem" display="inline-block">
-            # handmade
-          </Span>
+          {data.map(hashtag => (
+            <Span
+              key={hashtag.id}
+              p="5px 10px"
+              fontFamily="SFPDLight"
+              color="#ffefd1bd"
+              fontSize="0.875rem"
+              display="inline-block"
+            >
+              {hashtag.name}
+            </Span>
+          ))}
         </Div>
       </Row>
     </Section>
   </Container>
 );
+
+HashTags.propTypes = {
+  data: PropTypes.array.isRequired
+};
 
 export default HashTags;
