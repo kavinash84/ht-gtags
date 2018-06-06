@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Img from 'hometown-components/lib/Img';
-// import Media from 'hometown-components/lib/Media';
 
 const styles = require('./HoverMenuBox.scss');
 

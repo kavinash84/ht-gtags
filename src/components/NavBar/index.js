@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const styles = require('./NavBar.scss');
@@ -7,9 +8,9 @@ const NavBar = ({ menuItems, handleEnter }) => (
   <div className={styles.navBar}>
     <div className={styles.navBarSlider}>
       {menuItems.map(menuItem => (
-        <a href={menuItem.url_key} key={menuItem.id} onMouseEnter={handleEnter(menuItem.id)}>
+        <Link to={menuItem.url_key} key={menuItem.id} onMouseEnter={handleEnter(menuItem.id)}>
           {menuItem.name}
-        </a>
+        </Link>
       ))}
     </div>
   </div>
