@@ -15,8 +15,8 @@ const ProductItem = ({
         <p className={styles.title}>{name}</p>
         <div>
           <div className={`${styles.priceWrapper} taLeft`}>
-            <span className={styles.discPrice}>{discPrice}</span>
-            <span className={styles.price}>{price}</span>
+            <span className={styles.discPrice}>{price}</span>
+            <span className={styles.price}>{discPrice}</span>
             <span className={styles.saving}>Saving ({saving.replace('-', '')})</span>
           </div>
           <div className={styles.rating}>{rating}</div>
