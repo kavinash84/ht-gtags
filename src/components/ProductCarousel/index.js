@@ -14,8 +14,6 @@ const adjustSlides = length => ({
 export default class ProductCarousel extends Component {
   render() {
     const { data, title } = this.props;
-    const newData = data.splice(2, 1);
-    console.log(newData);
     return (
       <Section p="0" pt="2.5rem" mb="0.5rem" className="prodCarousel">
         <Container pr="0" pl="0">

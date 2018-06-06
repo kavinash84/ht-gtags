@@ -11,7 +11,7 @@ import Section from 'hometown-components/lib/Section';
 import { connect } from 'react-redux';
 import HashTags from 'components/Home/HashTags';
 import StoresCarousel from 'components/Stores';
-import { loadTopSelling, isLoaded as isTopSellingLoaded } from 'redux/modules/homepage';
+import { loadTopSelling, loadHashTags, isLoaded as isSectionLoaded } from 'redux/modules/homepage';
 import { loadStores, isLoaded as isStoresLoaded } from 'redux/modules/stores';
 import Footer from 'components/Footer';
 import { getCities } from '../../selectors/homepage';
@@ -29,11 +29,14 @@ import { getCities } from '../../selectors/homepage';
 }))
 @provideHooks({
   defer: ({ store: { dispatch, getState } }) => {
-    if (!isTopSellingLoaded(getState(), 'products')) {
+    if (!isSectionLoaded(getState(), 'products')) {
       wrapDispatch(dispatch, 'products')(loadTopSelling()).catch(error => console.log(error));
     }
     if (!isStoresLoaded(getState())) {
       dispatch(loadStores()).catch(error => console.log(error));
+    }
+    if (!isSectionLoaded(getState(), 'hashtags')) {
+      wrapDispatch(dispatch, 'hashtags')(loadHashTags()).catch(error => console.log(error));
     }
   }
 })
