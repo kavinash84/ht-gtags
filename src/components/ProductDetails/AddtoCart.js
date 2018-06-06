@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import * as actionCreators from 'redux/modules/cart';
 import { CART_URL } from 'helpers/Constants';
 
-const styles = require('./AddToCart.scss');
+const styles = require('./AddtoCart.scss');
 
 // const checkItemInCart = (items, id) => items.filter(item => item.sku === id);
 const checkItemInCart = (items, id) => items.find(item => item.sku === id);

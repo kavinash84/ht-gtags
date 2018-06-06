@@ -41,6 +41,10 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/
       }, {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader',
+        include: [path.resolve(__dirname, '../src'), path.resolve(__dirname, '../node_modules')]
+      }, {
         test: /\.less$/,
         loader: ExtractTextPlugin.extract({
           fallback: 'style-loader',
