@@ -5,8 +5,8 @@
 
 /* ---- Common Classes ---- */
 :global {
-	 @import '~slick-carousel/slick/slick.scss';
-	 @import '~slick-carousel/slick/slick-theme.scss';
+	@import '../../components/SlickSlider/slick/slick.scss';
+	@import '../../components/SlickSlider/slick/slick-theme.scss';
 
 	.container {
 		margin: 0 auto;
@@ -178,27 +178,30 @@
 	}
 
 	/* Slick carousel */
-	// .slick-next {
-	//   right: 25px !important;
-	// 	z-index: 1 !important;
-	// }
-	// .slick-prev {
-	//   left: 25px !important;
-	// 	z-index: 1 !important;
-	// }
-	// .slick-prev:before, .slick-next:before {
-	//   color: #000 !important;
-	// 	font-size: 26px !important;
-	// }
-	//
-	// .catCarousel, .storeCarousel, .prodCarousel {
-	// 	.slick-next {
-	// 	  right: -30px !important;
-	// 	}
-	// 	.slick-prev {
-	// 	  left: -30px !important;
-	// 	}
-	// }
+	.slick-next {
+	  right: 25px;
+		z-index: 1;
+	}
+	.slick-prev {
+	  left: 25px;
+		z-index: 1;
+	}
+	.slick-prev:before, .slick-next:before {
+	  color: #000;
+		font-size: 26px;
+	}
+	.slick-initialized .slick-slide {
+    display: block !important;
+	}
+
+	.catCarousel, .storeCarousel, .prodCarousel {
+		.slick-next {
+		  right: -30px !important;
+		}
+		.slick-prev {
+		  left: -30px !important;
+		}
+	}
 	.customModal {
 		padding: 3rem;
 	}

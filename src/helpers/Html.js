@@ -58,6 +58,7 @@ export default class Html extends Component {
           <meta name="apple-mobile-web-app-status-bar-style" content="black" />
           <meta name="apple-mobile-web-app-title" content="HomeTown Mobile" />
           <meta name="theme-color" content="#3677dd" />
+
           {styleTags}
           {/* styles (will be present only in production with webpack extract text plugin) */}
           {assets.styles &&
