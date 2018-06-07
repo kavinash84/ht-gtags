@@ -14,7 +14,8 @@ import SlickSlider from '../SlickSlider';
 const settings = {
   slidesToShow: 7,
   slidesToScroll: 7,
-  autoplay: false
+  autoplay: false,
+  infinite: false
 };
 
 @connect(({ stores }) => ({
