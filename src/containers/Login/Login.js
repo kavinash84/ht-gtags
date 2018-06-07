@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import Menu from 'components/OtherMenu';
 import LoginForm from 'hometown-components/lib/Forms/LoginForm';
@@ -11,20 +13,30 @@ import { Label } from 'hometown-components/lib/Label';
 import Img from 'hometown-components/lib/Img';
 import { validateEmail, isBlank } from 'js-utility-functions';
 import { SIGNUP_URL } from 'helpers/Constants';
+import { login } from 'redux/modules/login';
 
+@connect(state => ({
+  loginResponse: state.userLogin
+}))
 @withRouter
 export default class LoginFormContainer extends Component {
-  constructor() {
-    super();
-    this.state = {
-      email: '',
-      emailError: false,
-      emailErrorMessage: '',
-      password: '',
-      passwordError: false,
-      passwordErrorMessage: ''
-    };
-  }
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  };
+  static propTypes = {
+    loginResponse: PropTypes.shape({
+      isLoggedIn: PropTypes.bool.isRequired
+    }).isRequired
+  };
+
+  state = {
+    email: '',
+    emailError: false,
+    emailErrorMessage: '',
+    password: '',
+    passwordError: false,
+    passwordErrorMessage: ''
+  };
   onChangeEmail = e => {
     const { target: { value } } = e;
     const checkError = validateEmail(value, 'Enter valid email');
@@ -56,7 +68,8 @@ export default class LoginFormContainer extends Component {
         passwordErrorMessage: checkPassword ? "Password can't be blank" : ''
       });
     }
-    console.log(this.state);
+    const { dispatch } = this.context.store;
+    dispatch(login(this.state));
   };
   render() {
     const styles = require('./index.scss');
@@ -64,6 +77,7 @@ export default class LoginFormContainer extends Component {
     const {
       email, password, emailError, emailErrorMessage, passwordError, passwordErrorMessage
     } = this.state;
+    const { loginResponse } = this.props;
     return (
       <div className={styles.loginWrapper}>
         <Section p="0" mb="0.3125rem">
@@ -97,6 +111,7 @@ export default class LoginFormContainer extends Component {
                 passwordFeedBackError={passwordError}
                 passwordFeedBackMessage={passwordErrorMessage}
                 onSubmitLogin={this.onSubmitLogin}
+                loginResponse={loginResponse}
               />
             </Div>
           </Row>

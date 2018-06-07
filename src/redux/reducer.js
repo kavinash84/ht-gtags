@@ -9,6 +9,7 @@ import loadmore from './modules/loadmore';
 import pincode from './modules/pincode';
 import homepage from './modules/homepage';
 import stores from './modules/stores';
+import userLogin from './modules/login';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -28,6 +29,7 @@ export default function createReducers(asyncReducers) {
       products: homepage
     }),
     stores,
+    userLogin,
     ...asyncReducers
   };
 }

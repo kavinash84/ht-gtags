@@ -1,13 +1,11 @@
-export const BANNERS = 'tesla/banners/desktop/';
-export const CATEGORY_MENU = 'tesla/categories/';
-export const SHOP_BY_STYLE = 'tesla/styles/';
-export const SHOP_BY_OCCASION = 'tesla/occasions';
-export const SHOP_BY_ROOM = 'tesla/rooms/';
-export const TOP_SELLING = 'tesla/products/top-selling';
-export const RECOMMENDED_FOR_YOU = 'tesla/products/recommended-for-you';
-export const LOGIN = 'tesla/authentication/login';
-export const PINCODE = 'tesla/locations/pincode/';
+/* Homepage */
+export const BANNERS = 'tesla/banners/desktop';
+export const CATEGORY_MENU = 'tesla/categories';
+export const PINCODE = 'tesla/locations/pincode';
 export const HOMEPAGE_CATEGORIES = 'tesla/page-sections/home/categories';
 export const HOMEPAGE_TOP_SELLING = 'tesla/page-sections/home/products';
 export const STORES = 'tesla/stores';
 export const HASHTAGS = 'tesla/hashtags';
+
+/* Authentication */
+export const LOGIN = 'tesla/authentication/login';

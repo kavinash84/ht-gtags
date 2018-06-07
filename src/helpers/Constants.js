@@ -12,3 +12,7 @@ export const MY_WISHLIST_URL = '/wishlist';
 //   e.preventDefault();
 //   browserHistory.push(url);
 // };
+
+/* Configs */
+export const clientId = 'rama';
+export const clientSecret = 'ramahometown';

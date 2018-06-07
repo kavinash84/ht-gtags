@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import PropTypes from 'prop-types';
 import { renderRoutes } from 'react-router-config';
 import { withRouter } from 'react-router';
@@ -24,20 +26,51 @@ import Theme from 'hometown-components/lib/Theme';
   }
 })
 @withRouter
+@connect(
+  state => ({
+    login: state.userLogin
+  }),
+  { pushState: push }
+)
 export default class App extends Component {
   static propTypes = {
-    route: PropTypes.objectOf(PropTypes.any).isRequired
+    route: PropTypes.objectOf(PropTypes.any).isRequired,
+    location: PropTypes.objectOf(PropTypes.any).isRequired,
+    pushState: PropTypes.func.isRequired,
+    login: PropTypes.shape({
+      accessToken: PropTypes.string,
+      refreshToken: PropTypes.string,
+      isLoggedIn: PropTypes.bool
+    })
   };
 
-  static defaultProps = {};
+  static defaultProps = {
+    login: {
+      isLoggedIn: false
+    }
+  };
 
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
+  componentDidMount() {
+    /* Need to implement auto login when user has saved credentials to chrome */
+    // if (window && window.naviagtor) {
+    //   navigator.credentials.get({
+    //     password: true,
+    //   }).then(user => console.log(user));
+    // }
+  }
 
-  componentWillReceiveProps() {}
-
-  componentDidUpdate() {}
+  componentWillReceiveProps(nextProps) {
+    const { login: { isLoggedIn } } = this.props;
+    if (!isLoggedIn && nextProps.login.isLoggedIn) {
+      const query = new URLSearchParams(this.props.location.search);
+      this.props.pushState(query.get('redirect') || '/');
+    } else if (this.props.login && !nextProps.login) {
+      this.props.pushState('/');
+    }
+  }
 
   render() {
     const styles = require('./App.scss');

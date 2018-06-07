@@ -41,19 +41,19 @@ import ProductsNotFound from 'components/Listing/EmptyList';
 }))
 @withRouter
 export default class Listing extends Component {
-  static defaultProps = {
-    loading: false,
-    loaded: true,
-    products: [],
-    categoryName: '',
-    productCount: '0'
-  };
   static propTypes = {
     loading: PropTypes.bool,
     loaded: PropTypes.bool,
     products: PropTypes.array,
     categoryName: PropTypes.string,
     productCount: PropTypes.string
+  };
+  static defaultProps = {
+    loading: false,
+    loaded: true,
+    products: [],
+    categoryName: '',
+    productCount: '0'
   };
   state = {
     wishListState: []
