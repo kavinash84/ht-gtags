@@ -40,14 +40,22 @@ module.exports = {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         exclude: /node_modules/
-      }, {
+      },{
         test: /\.css$/,
         loader: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: ['css-loader']
+          use: [
+            {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 2,
+              sourceMap: true
+            }
+          }]
         }),
-        include: [path.resolve(__dirname, '../src'), path.resolve(__dirname, '../node_modules')]
-      }, {
+        include: [path.resolve(__dirname, '../node_modules')]
+      },{
         test: /\.less$/,
         loader: ExtractTextPlugin.extract({
           fallback: 'style-loader',
@@ -101,7 +109,7 @@ module.exports = {
             }
           ]
         })
-      }, {
+      },{
         test: /\.woff2?(\?v=\d+\.\d+\.\d+)?$/,
         loader: 'url-loader',
         options: {

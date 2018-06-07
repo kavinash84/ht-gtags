@@ -5,6 +5,9 @@
 
 /* ---- Common Classes ---- */
 :global {
+	 @import '~slick-carousel/slick/slick.scss';
+	 @import '~slick-carousel/slick/slick-theme.scss';
+
 	.container {
 		margin: 0 auto;
 		padding: 0 15px;
@@ -175,28 +178,27 @@
 	}
 
 	/* Slick carousel */
-	.slick-next {
-	  right: 25px !important;
-		z-index: 1 !important;
-	}
-	.slick-prev {
-	  left: 25px !important;
-		z-index: 1 !important;
-	}
-	.slick-prev:before, .slick-next:before {
-	  color: #000 !important;
-		font-size: 26px !important;
-	}
-
-	.catCarousel, .storeCarousel, .prodCarousel {
-		.slick-next {
-		  right: -30px !important;
-		}
-		.slick-prev {
-		  left: -30px !important;
-		}
-	}
-
+	// .slick-next {
+	//   right: 25px !important;
+	// 	z-index: 1 !important;
+	// }
+	// .slick-prev {
+	//   left: 25px !important;
+	// 	z-index: 1 !important;
+	// }
+	// .slick-prev:before, .slick-next:before {
+	//   color: #000 !important;
+	// 	font-size: 26px !important;
+	// }
+	//
+	// .catCarousel, .storeCarousel, .prodCarousel {
+	// 	.slick-next {
+	// 	  right: -30px !important;
+	// 	}
+	// 	.slick-prev {
+	// 	  left: -30px !important;
+	// 	}
+	// }
 	.customModal {
 		padding: 3rem;
 	}
