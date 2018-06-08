@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import UpdatePasswordForm from 'hometown-components/lib/Forms/UpdatePasswordForm';
 import Container from 'hometown-components/lib/Container';
 import Section from 'hometown-components/lib/Section';
@@ -7,8 +9,18 @@ import Heading from 'hometown-components/lib/Heading';
 import Div from 'hometown-components/lib/Div';
 import Menu from 'components/OtherMenu';
 import { isBlank } from 'js-utility-functions';
+import { validatePassword } from 'utils/validation';
+import { updatePassword } from 'redux/modules/updatepassword';
 
+@connect(state => ({
+  updatingPassword: state.updatingPassword,
+  updateError: state.updateError,
+  updateMessage: state.updateMessage
+}))
 export default class UpdatePasswordFormContainer extends Component {
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  };
   constructor() {
     super();
     this.state = {
@@ -24,7 +36,9 @@ export default class UpdatePasswordFormContainer extends Component {
     };
   }
   onChangeOldPwd = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = isBlank(value);
     this.setState({
       oldPwd: value,
@@ -33,41 +47,62 @@ export default class UpdatePasswordFormContainer extends Component {
     });
   };
   onChangeNewPwd = e => {
-    const { target: { value } } = e;
-    const checkError = isBlank(value);
+    const {
+      target: { value }
+    } = e;
+    const checkError = validatePassword(value, 'Password must be at least 6 character long');
     this.setState({
       newPwd: value,
       newPwdError: checkError.error,
-      newPwdErrorMessage: checkError ? "New Password can't be blank" : ''
+      newPwdErrorMessage: checkError ? checkError.errorMessage : ''
     });
   };
   onChangeConfirmPwd = e => {
-    const { target: { value } } = e;
-    const checkError = isBlank(value);
+    const {
+      target: { value }
+    } = e;
+    const checkError = this.matchConfirmPassword(value);
     this.setState({
       confirmPwd: value,
       confirmPwdError: checkError,
-      confirmPwdErrorMessage: checkError ? "Confirm Password can't be blank" : ''
+      confirmPwdErrorMessage: checkError ? "Confirm Password doesn't match" : ''
     });
   };
   onSubmitUpdatePassword = e => {
     e.preventDefault();
-    const { oldPwd, confirmPwd, newPwd } = this.state;
-    const checkOldPwd = isBlank(oldPwd);
-    const checkNewPwd = isBlank(newPwd);
-    const checkConfirmPwd = isBlank(confirmPwd);
+    const {
+      oldPwd, confirmPwd, newPwd, oldPwdError, newPwdError, confirmPwdError
+    } = this.state;
+    const checkOldPwd = isBlank(oldPwd) || oldPwdError;
+    const checkNewPwd = isBlank(newPwd) || newPwdError;
+    const checkConfirmPwd = isBlank(confirmPwd) || confirmPwdError;
+    if (newPwd !== confirmPwd) {
+      return this.setState({
+        confirmPwdError: true,
+        confirmPwdErrorMessage: "Confirm Password doesn't match"
+      });
+    }
+
     if (checkOldPwd || checkConfirmPwd || checkNewPwd) {
       return this.setState({
         oldPwdError: checkOldPwd,
         oldPwdErrorMessage: checkOldPwd ? "Old Password can't be blank" : '',
         newPwdError: checkNewPwd,
-        newPwdErrorMessage: checkNewPwd ? "New Password can't be blank" : '',
+        newPwdErrorMessage: checkNewPwd ? 'Password must be at least 6 character long' : '',
         confirmPwdError: checkConfirmPwd,
-        confirmPwdErrorMessage: checkConfirmPwd ? "Confirm Password can't be blank" : ''
+        confirmPwdErrorMessage: checkConfirmPwd ? "Confirm Password doesn't match" : ''
       });
     }
-    // console.log(this.state);
+    const { dispatch } = this.context.store;
+    dispatch(updatePassword(this.state));
   };
+  matchConfirmPassword = value => {
+    if (value === this.state.newPwd) {
+      return false;
+    }
+    return true;
+  };
+
   render() {
     const styles = require('./index.scss');
 
@@ -114,7 +149,7 @@ export default class UpdatePasswordFormContainer extends Component {
                   newPwdFeedBackError={newPwdError}
                   newPwdFeedBackMessage={newPwdErrorMessage}
                   confirmPwd={confirmPwd}
-                  onChangeconfirmPwd={this.onChangeConfirmPwd}
+                  onChangeConfirmPwd={this.onChangeConfirmPwd}
                   confirmPwdFeedBackError={confirmPwdError}
                   confirmPwdFeedBackMessage={confirmPwdErrorMessage}
                   onSubmitUpdatePassword={this.onSubmitUpdatePassword}
