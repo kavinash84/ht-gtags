@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import UpdatePasswordForm from 'hometown-components/lib/Forms/UpdatePasswordForm';
-import Container from 'hometown-components/lib/Container';
 import Section from 'hometown-components/lib/Section';
 import Row from 'hometown-components/lib/Row';
 import Heading from 'hometown-components/lib/Heading';
 import Div from 'hometown-components/lib/Div';
-import Menu from 'components/OtherMenu';
 import { isBlank } from 'js-utility-functions';
 import { validatePassword } from 'utils/validation';
 import { updatePassword } from 'redux/modules/updatepassword';
@@ -119,24 +117,15 @@ export default class UpdatePasswordFormContainer extends Component {
     } = this.state;
     return (
       <div className={styles.formContainer}>
-        <Menu />
         <Section mb="0.3125rem" pr="0.5rem" pl="0.5rem">
-          <Container type="container" pr="1rem" pl="1rem">
-            <Row display="block" mr="0" ml="0">
-              <Heading fontSize="1.25rem" color="textDark" mb="0px" mt="0px" fontFamily="SFPDLight">
-                Update Password
-              </Heading>
-            </Row>
-          </Container>
+          <Row display="block" mr="0" ml="0">
+            <Heading fontSize="1.25rem" color="textDark" mb="0px" mt="0px" fontFamily="SFPDLight">
+              Update Password
+            </Heading>
+          </Row>
         </Section>
         <div className={styles.formWrapper}>
-          <Section
-            p="1.25rem"
-            mb="0"
-            bg="sectionBgDark"
-            boxShadow="0px 1px 6px 0px rgba(0,0,0,0.20)"
-            height="calc(100vh - 104px)"
-          >
+          <Section p="0.5rem" mb="0">
             <Row display="block" mr="0" ml="0">
               <Div>
                 <UpdatePasswordForm
