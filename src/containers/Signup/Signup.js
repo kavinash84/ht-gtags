@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import Menu from 'components/OtherMenu';
 import SignupForm from 'hometown-components/lib/Forms/SignupForm';
@@ -11,9 +12,13 @@ import { Label } from 'hometown-components/lib/Label';
 import Img from 'hometown-components/lib/Img';
 import { validateEmail, isBlank, validateMobile } from 'js-utility-functions';
 import { LOGIN_URL } from 'helpers/Constants';
+import { signUp } from 'redux/modules/signUp';
 
 @withRouter
 export default class SignupFormContainer extends Component {
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  };
   constructor() {
     super();
     this.state = {
@@ -61,7 +66,7 @@ export default class SignupFormContainer extends Component {
     const checkEmail = validateEmail(email, 'Invalid Email');
     const checkPhone = validateMobile(phone, 'Mobile no. should be 10 digits');
     const checkPassword = isBlank(password);
-    if (checkEmail.error || checkPassword || checkPhone) {
+    if (checkEmail.error || checkPassword || checkPhone.error) {
       return this.setState({
         emailError: checkEmail.error,
         emailErrorMessage: checkEmail.errorMessage,
@@ -71,7 +76,8 @@ export default class SignupFormContainer extends Component {
         passwordErrorMessage: checkPassword ? "Password can't be blank" : ''
       });
     }
-    console.log(this.state);
+    const { dispatch } = this.context.store;
+    dispatch(signUp(this.state));
   };
   render() {
     const styles = require('./index.scss');

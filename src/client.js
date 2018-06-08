@@ -23,7 +23,7 @@ import { ReduxAsyncConnect, Provider } from 'components';
 const persistConfig = {
   key: 'primary',
   storage: localForage,
-  whitelist: ['cart', 'wishlist']
+  whitelist: ['cart', 'userLogin']
 };
 
 const dest = document.getElementById('content');
@@ -38,7 +38,7 @@ const providers = { app: {}, restApp: {}, client };
   const data = {
     ...storedData,
     ...window.__data,
-    ...pick(storedData, ['cart', 'wishlist']),
+    ...pick(storedData, ['cart', 'userLogin']),
     online
   };
   const store = createStore({

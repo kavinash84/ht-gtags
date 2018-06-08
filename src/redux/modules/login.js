@@ -4,6 +4,7 @@ import { clientId, clientSecret } from 'helpers/Constants';
 const LOGIN = 'login/LOGIN';
 const LOGIN_SUCCESS = 'login/LOGIN_SUCCESS';
 const LOGIN_FAIL = 'login/LOGIN_FAIL';
+const LOGIN_AFTER_SIGNUP = 'login/LOGIN_AFTER_SIGNUP';
 const LOGOUT = 'login/LOGOUT';
 const LOGOUT_SUCCESS = 'login/LOGOUT_SUCCESS';
 const LOGOUT_FAIL = 'login/LOGOUT_FAIL';
@@ -35,6 +36,16 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loggingIn: false,
         loginError: action.error
+      };
+    case LOGIN_AFTER_SIGNUP:
+      return {
+        ...state,
+        loggingIn: false,
+        isLoggedIn: true,
+        loaded: true,
+        accessToken: action.data.access_token,
+        refreshToken: action.data.refresh_token,
+        loginError: ''
       };
     case LOGOUT:
       return {
@@ -83,6 +94,11 @@ export const login = data => ({
       throw error;
     }
   }
+});
+
+export const loginUserAfterSignUp = data => ({
+  type: LOGIN_AFTER_SIGNUP,
+  data
 });
 
 // export function logout() {

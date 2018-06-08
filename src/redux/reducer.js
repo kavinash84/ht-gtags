@@ -10,6 +10,7 @@ import pincode from './modules/pincode';
 import homepage from './modules/homepage';
 import stores from './modules/stores';
 import userLogin from './modules/login';
+import userSignUp from './modules/signUp';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -30,6 +31,7 @@ export default function createReducers(asyncReducers) {
     }),
     stores,
     userLogin,
+    userSignUp,
     ...asyncReducers
   };
 }

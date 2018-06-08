@@ -9,6 +9,7 @@ import { ThemeProvider } from 'styled-components';
 import Helmet from 'react-helmet';
 import { wrapDispatch } from 'multireducer';
 import { loadCategories, loadMainMenu, loadBanners, isLoaded as isSectionLoaded } from 'redux/modules/homepage';
+import { loginUserAfterSignUp } from 'redux/modules/login';
 import config from 'config';
 import Theme from 'hometown-components/lib/Theme';
 
@@ -28,15 +29,23 @@ import Theme from 'hometown-components/lib/Theme';
 @withRouter
 @connect(
   state => ({
-    login: state.userLogin
+    login: state.userLogin,
+    signUp: state.userSignUp
   }),
-  { pushState: push }
+  {
+    pushState: push,
+    loginUser: loginUserAfterSignUp
+  }
 )
 export default class App extends Component {
   static propTypes = {
     route: PropTypes.objectOf(PropTypes.any).isRequired,
     location: PropTypes.objectOf(PropTypes.any).isRequired,
     pushState: PropTypes.func.isRequired,
+    loginUser: PropTypes.func.isRequired,
+    signUp: PropTypes.shape({
+      response: PropTypes.obj
+    }),
     login: PropTypes.shape({
       accessToken: PropTypes.string,
       refreshToken: PropTypes.string,
@@ -47,7 +56,8 @@ export default class App extends Component {
   static defaultProps = {
     login: {
       isLoggedIn: false
-    }
+    },
+    signUp: {}
   };
 
   static contextTypes = {
@@ -64,6 +74,12 @@ export default class App extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { login: { isLoggedIn } } = this.props;
+    const { signUp } = nextProps;
+    if (!isLoggedIn && signUp.response.signup_complete) {
+      const { dispatch } = this.context.store;
+      const { signUp: { response }, loginUser } = nextProps;
+      if (response.signup_complete) dispatch(loginUser(response.token));
+    }
     if (!isLoggedIn && nextProps.login.isLoggedIn) {
       const query = new URLSearchParams(this.props.location.search);
       this.props.pushState(query.get('redirect') || '/');
