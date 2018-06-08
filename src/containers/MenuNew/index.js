@@ -8,8 +8,6 @@ import Container from 'hometown-components/lib/Container';
 import Section from 'hometown-components/lib/Section';
 import HoverMenuBox from 'components/HoverBox/HoverMenuBox';
 
-const styles = require('./index.scss');
-
 @connect(({ homepage }) => ({
   menuItems: homepage.menu.data
 }))
@@ -69,7 +67,7 @@ export default class Menu extends Component {
     const { menuItems } = this.props;
 
     return (
-      <Section mb="0" p="0" pt="15px" className={styles.menuContainer}>
+      <Section mb="0" p="0" pt="15px" of="initial">
         <Container pr="0" pl="0">
           <TopBar />
           <NavBar handleEnter={this.enterMenu} handleLeave={this.leaveMenu} menuItems={menuItems} />
