@@ -1,5 +1,5 @@
 @mixin font-family($type) {
-  font-family: 'SFPD#{$type}';
+  font-weight: #{$type};
 }
 @mixin font-size($size) {
   font-size: #{$size};

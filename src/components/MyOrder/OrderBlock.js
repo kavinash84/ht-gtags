@@ -11,7 +11,7 @@ const OrderBlock = () => (
   <Div mb="2.5rem">
     <Row type="block" m="0" mb="1rem">
       <Div col="12">
-        <Heading fontSize="1.25rem" color="textLight" mb="0px" mt="0px" fontFamily="SFPDLight">
+        <Heading fontSize="1.25rem" color="textLight" mb="0px" mt="0px" fontFamily="300">
           Order No. 401261676
         </Heading>
       </Div>
@@ -19,18 +19,18 @@ const OrderBlock = () => (
     <Div className={styles.blockWrapper}>
       <Row type="block" m="0" mb="0.5rem">
         <Div col="2">
-          <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="SFPDMedium">
+          <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="600">
             ORDER DATE
           </Text>
-          <Text mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="SFPDLight">
+          <Text mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="300">
             16 Jan 2018
           </Text>
         </Div>
         <Div col="2">
-          <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="SFPDMedium">
+          <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="600">
             ORDER AMOUNT
           </Text>
-          <Text mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="SFPDLight">
+          <Text mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="300">
             Rs. 1,49,700
           </Text>
         </Div>
@@ -55,7 +55,7 @@ const OrderBlock = () => (
                 <td>Bluedart</td>
                 <td>AG567TG</td>
                 <td>
-                  <Button fontSize="0.875rem" fontFamily="SFPDLight" color="#ae8873" btnType="link">
+                  <Button fontSize="0.875rem" fontFamily="300" color="#ae8873" btnType="link">
                     Track Now
                   </Button>
                 </td>
@@ -69,7 +69,7 @@ const OrderBlock = () => (
                 <td>Bluedart</td>
                 <td>AG567TG</td>
                 <td>
-                  <Button fontSize="0.875rem" fontFamily="SFPDLight" color="#ae8873" btnType="link">
+                  <Button fontSize="0.875rem" fontFamily="300" color="#ae8873" btnType="link">
                     Track Now
                   </Button>
                 </td>
@@ -83,7 +83,7 @@ const OrderBlock = () => (
                 <td>Bluedart</td>
                 <td>AG567TG</td>
                 <td>
-                  <Button fontSize="0.875rem" fontFamily="SFPDLight" color="#ae8873" btnType="link">
+                  <Button fontSize="0.875rem" fontFamily="300" color="#ae8873" btnType="link">
                     Track Now
                   </Button>
                 </td>

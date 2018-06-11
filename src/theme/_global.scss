@@ -1,47 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
+
 /* ----- Base/Global Styles ----- */
-/* ----- Typography ----- */
-/** thin **/
-// @font-face {
-// 	font-family: 'SFPDThin';
-// 	src: url('../../../static/fonts/thin/SF-Pro-Display-Thin.woff') format('woff');
-// 	font-weight: normal;
-// 	font-style: normal;
-// }
-
-/** Light **/
-@font-face {
-	font-family: 'SFPDLight';
-	src: url('../../../static/fonts/light/SF-Pro-Display-Light.woff') format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-
-/** Regular **/
-@font-face {
-	font-family: 'SFPDRegular';
-	src: url('../../../static/fonts/regular/SF-Pro-Display-Regular.woff') format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-
-/** Medium **/
-@font-face {
-	font-family: 'SFPDMedium';
-	src: url('../../../static/fonts/medium/SF-Pro-Display-Medium.woff') format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-
-/** Semi Bold **/
-@font-face {
-	font-family: 'SFPDSemiBold';
-	src: url('../../../static/fonts/semibold/SF-Pro-Display-Semibold.woff') format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-
 html, body {
-	@include font-family('Regular');
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400;
 	color: $text;
 	overflow-x: hidden;
 }

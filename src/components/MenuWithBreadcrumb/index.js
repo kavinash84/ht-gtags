@@ -34,7 +34,7 @@ const MenuWithBreadcrumb = ({ page }) => (
             </Div>
           </Row>
           <Row display="block" mr="0" ml="0" mb="0.5rem">
-            <Heading fontSize="1.5rem" color="white" mt="0" mb="0" fontFamily="SFPDLight">
+            <Heading fontSize="1.5rem" color="white" mt="0" mb="0" fontFamily="300">
               HomeTown Showroom - 247 Vikhroli
             </Heading>
           </Row>

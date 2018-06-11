@@ -36,7 +36,7 @@ const ProductDetails = () => (
           <Div col="2">
             <Section mb="0.3125rem" p="0">
               <Row display="block" mr="0" ml="0">
-                <Heading fontSize="1em" color="textDark" mb="0.625rem" mt="0px" fontFamily="SFPDMedium">
+                <Heading fontSize="1em" color="textDark" mb="0.625rem" mt="0px" fontFamily="600">
                   Color Options
                 </Heading>
               </Row>
@@ -44,7 +44,7 @@ const ProductDetails = () => (
             </Section>
           </Div>
           <Div col="2">
-            <Heading fontSize="1em" color="textDark" mb="0.625rem" mt="0px" fontFamily="SFPDMedium">
+            <Heading fontSize="1em" color="textDark" mb="0.625rem" mt="0px" fontFamily="600">
               Size Options
             </Heading>
             <select className={styles.sizeDD}>
