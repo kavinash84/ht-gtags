@@ -1,4 +1,4 @@
-// import { UPDATE_PASSWORD as UPDATE_PASSWORD_API } from 'helpers/apiUrls';
+import { UPDATE_PASSWORD as UPDATE_PASSWORD_API } from 'helpers/apiUrls';
 // import { clientId, clientSecret } from 'helpers/Constants';
 
 const UPDATE_PASSWORD = 'updatePassword/UPDATE_PASSWORD';
@@ -38,15 +38,19 @@ export default function reducer(state = initialState, action = {}) {
 
 export const updatePassword = data => ({
   types: [UPDATE_PASSWORD, UPDATE_PASSWORD_SUCCESS, UPDATE_PASSWORD_FAIL],
-  promise: async () => {
+  promise: async ({ client }) => {
     try {
       console.log('Logged In Reducer', data);
       /* eslint-disable max-len */
-      // const postData = `oldPassword=${data.oldPwd}&newPassword=${
-      //   data.newPwd
-      // }
-      // const response = await client.post(UPDATE_PASSWORD_API, postData);
-      // return response;
+      const postData = {
+        current_spassword: data.oldPwd,
+        new_password: data.newPwd,
+        repeat_password: data.newPwd
+      };
+      console.log(postData);
+      const response = await client.post(UPDATE_PASSWORD_API, postData);
+      // console.log(response);
+      return response;
     } catch (error) {
       console.log('Logged In Reducer catch', error);
       throw error;
