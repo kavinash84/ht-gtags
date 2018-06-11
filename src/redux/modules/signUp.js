@@ -1,3 +1,4 @@
+import cookie from 'js-cookie';
 import { SIGNUP as SIGNUP_API } from 'helpers/apiUrls';
 
 const SIGNUP = 'signUp/SIGNUP';
@@ -40,6 +41,7 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 const setToken = ({ client }) => response => {
+  cookie.set('Authorization', `Bearer ${response.token.access_token}`);
   client.setJwtToken(response.token.access_token);
 };
 

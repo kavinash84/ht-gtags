@@ -72,7 +72,7 @@ export function createValidator(rules, params) {
 
 /* Need to move */
 
-export const validatePassword = (value, message, validLength = 6) => {
+export const validatePassword = (value, message, validLength = 8) => {
   if (isBlank(value) || value.length < validLength) {
     return { error: true, errorMessage: message };
   }

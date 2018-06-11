@@ -20,13 +20,13 @@ import { login } from 'redux/modules/login';
 }))
 @withRouter
 export default class LoginFormContainer extends Component {
-  static contextTypes = {
-    store: PropTypes.object.isRequired
-  };
   static propTypes = {
     loginResponse: PropTypes.shape({
       isLoggedIn: PropTypes.bool.isRequired
     }).isRequired
+  };
+  static contextTypes = {
+    store: PropTypes.object.isRequired
   };
 
   state = {
@@ -37,8 +37,11 @@ export default class LoginFormContainer extends Component {
     passwordError: false,
     passwordErrorMessage: ''
   };
+
   onChangeEmail = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = validateEmail(value, 'Enter valid email');
     this.setState({
       email: value,
@@ -47,7 +50,9 @@ export default class LoginFormContainer extends Component {
     });
   };
   onChangePassword = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = isBlank(value);
     this.setState({
       password: value,
