@@ -178,6 +178,10 @@
 	}
 
 	/* Slick carousel */
+	.slick-prev, .slick-next {
+		height: 44px;
+    width: 44px;
+	}
 	.slick-next {
 	  right: 25px;
 		z-index: 1;
@@ -196,10 +200,10 @@
 
 	.catCarousel, .storeCarousel, .prodCarousel {
 		.slick-next {
-		  right: -30px !important;
+		  right: -40px !important;
 		}
 		.slick-prev {
-		  left: -30px !important;
+		  left: -40px !important;
 		}
 	}
 	.customModal {

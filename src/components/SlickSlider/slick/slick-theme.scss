@@ -11,8 +11,8 @@ $slick-loader-path: "./" !default;
 $slick-arrow-color: white !default;
 $slick-dot-color: black !default;
 $slick-dot-color-active: $slick-dot-color !default;
-$slick-prev-character: "\2190" !default;
-$slick-next-character: "\2192" !default;
+$slick-prev-character: "<" !default;
+$slick-next-character: ">" !default;
 $slick-dot-character: "\2022" !default;
 $slick-dot-size: 6px !default;
 $slick-opacity-default: 0.75 !default;
@@ -80,13 +80,14 @@ $slick-opacity-not-active: 0.25 !default;
 }
 
 .slick-prev {
-    left: -25px;
+    left: -40px;
     [dir="rtl"] & {
         left: auto;
-        right: -25px;
+        right: -40px;
     }
     &:before {
-        content: $slick-prev-character;
+        // content: $slick-prev-character;
+        content: url('../../../static/left-arrow.png');
         [dir="rtl"] & {
             content: $slick-next-character;
         }
@@ -94,13 +95,14 @@ $slick-opacity-not-active: 0.25 !default;
 }
 
 .slick-next {
-    right: -25px;
+    right: -40px;
     [dir="rtl"] & {
-        left: -25px;
+        left: -40px;
         right: auto;
     }
     &:before {
-        content: $slick-next-character;
+        // content: $slick-next-character;
+        content: url('../../../static/right-arrow.png');
         [dir="rtl"] & {
             content: $slick-prev-character;
         }
