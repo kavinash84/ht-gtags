@@ -90,10 +90,12 @@ export default class LoginFormContainer extends Component {
           <Container pr="0" pl="0">
             <div className={styles.loginWrapper}>
               <Row display="block" mr="0" ml="0">
-                <Div col={4}>
+                <Div col={5}>
                   <div className={styles.imgWrapper}>
                     <Div>
-                      <Heading color="white">LOGIN</Heading>
+                      <Heading color="white" fontSize="1.375rem">
+                        LOGIN
+                      </Heading>
                       <Text color="white">
                         Get access to your Orders, <br />Wishlist and Recommendations
                       </Text>
@@ -101,7 +103,7 @@ export default class LoginFormContainer extends Component {
                     <Img src={SidebarImg} />
                   </div>
                 </Div>
-                <Div col={8} p="2rem 3.5rem">
+                <Div col={7} p="2rem 3.5rem">
                   <Row display="block" mr="0" ml="0">
                     <Div col="12" ta="right">
                       <Link to={SIGNUP_URL}>
@@ -127,15 +129,20 @@ export default class LoginFormContainer extends Component {
                       />
                     </Div>
                   </Row>
-                  <Row display="block" mr="0" ml="0" pt="1.25rem">
+                  <Row display="block" mr="0" ml="0" pt="0.625rem">
                     <Div col="6">
-                      <Label fontFamily="light">
-                        <Link to="/">Forgot Password?</Link>
-                      </Label>
+                      <Link to="/">
+                        <Label fontFamily="light" color="primary">
+                          Forgot Password?
+                        </Label>
+                      </Link>
                     </Div>
-                    <Div col="6" ta="right">
-                      <Label fontFamily="light">
-                        <Link to={SIGNUP_URL}>Login via OTP?</Link>
+                    <Div col="6" ta="right" />
+                  </Row>
+                  <Row display="block" mr="0" ml="0" pt="0.3125rem">
+                    <Div col="12">
+                      <Label fontFamily="light" color="error" display="block" ta="center">
+                        Message
                       </Label>
                     </Div>
                   </Row>

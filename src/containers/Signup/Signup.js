@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
-import Menu from 'components/OtherMenu';
+import Menu from 'containers/MenuNew/index';
+import Footer from 'components/Footer';
 import SignupForm from 'hometown-components/lib/Forms/SignupForm';
+import Container from 'hometown-components/lib/Container';
+import Text from 'hometown-components/lib/Text';
 import Section from 'hometown-components/lib/Section';
 import Row from 'hometown-components/lib/Row';
 import Heading from 'hometown-components/lib/Heading';
@@ -13,6 +16,8 @@ import Img from 'hometown-components/lib/Img';
 import { validateEmail, isBlank, validateMobile } from 'js-utility-functions';
 import { LOGIN_URL } from 'helpers/Constants';
 import { signUp } from 'redux/modules/signUp';
+
+const SidebarImg = require('../../../static/login-side-thumb.png');
 
 @withRouter
 export default class SignupFormContainer extends Component {
@@ -94,59 +99,78 @@ export default class SignupFormContainer extends Component {
       passwordErrorMessage
     } = this.state;
     return (
-      <div className={styles.signupWrapper}>
-        <Section p="0" mb="0.3125rem">
-          <div className={styles.imgWrapper}>
-            <Img src="http://via.placeholder.com/720x480" />
-            <Menu type="overlap" />
-          </div>
-        </Section>
-        <Section mb="0" p="1.25rem" pt="1.5rem" pb="1.5rem">
-          <Row display="block" mr="0" ml="0">
-            <Div col="6">
-              <Heading mt="0" mb="0" color="textDark" fontSize="1.25em">
-                Sign Up
-              </Heading>
-            </Div>
-            <Div col="6" ta="right">
-              <Label fontFamily="light">
-                <Link to={LOGIN_URL}>Existing User? Log in now</Link>
-              </Label>
-            </Div>
-          </Row>
-          <Row display="block" mr="0" ml="0">
-            <Div mt="1.25rem">
-              <SignupForm
-                email={email}
-                onChangeEmail={this.onChangeEmail}
-                emailFeedBackError={emailError}
-                emailFeedBackMessage={emailErrorMessage}
-                phone={phone}
-                onChangePhone={this.onChangePhone}
-                phoneFeedBackError={phoneError}
-                phoneFeedBackMessage={phoneErrorMessage}
-                password={password}
-                onChangePassword={this.onChangePassword}
-                passwordFeedBackError={passwordError}
-                passwordFeedBackMessage={passwordErrorMessage}
-                onSubmitSignup={this.onSubmitSignup}
-              />
-            </Div>
-          </Row>
-          <Row display="block" mr="0" ml="0" pt="1.25rem">
-            <Div col="6">
-              <Label fontFamily="light">
-                <Link to={`/${LOGIN_URL}`}>Forgot Password?</Link>
-              </Label>
-            </Div>
-            <Div col="6" ta="right">
-              <Label fontFamily="light">
-                <Link to={`/${LOGIN_URL}`}>Login via OTP?</Link>
-              </Label>
-            </Div>
-          </Row>
-        </Section>
-      </div>
+      <Section p="0" mb="0">
+        <Menu />
+        <div className="wrapper">
+          <Container pr="0" pl="0">
+            <div className={styles.signupWrapper}>
+              <Row display="block" mr="0" ml="0">
+                <Div col={5}>
+                  <div className={styles.imgWrapper}>
+                    <Div>
+                      <Heading color="white" fontSize="1.375rem">
+                        SIGN UP
+                      </Heading>
+                      <Text color="white">
+                        Get access to your Orders, <br /> Wishlist and Recommendations
+                      </Text>
+                    </Div>
+                    <Img src={SidebarImg} />
+                  </div>
+                </Div>
+                <Div col={7} p="1.25rem 3.5rem" bg="#f8f8f8">
+                  <Row display="block" mr="0" ml="0">
+                    <Div col="12" ta="right">
+                      <Link to={LOGIN_URL}>
+                        <Label fontFamily="light" color="primary">
+                          Existing User? Log in now
+                        </Label>
+                      </Link>
+                    </Div>
+                  </Row>
+                  <Row display="block" mr="0" ml="0">
+                    <Div mt="0">
+                      <SignupForm
+                        email={email}
+                        onChangeEmail={this.onChangeEmail}
+                        emailFeedBackError={emailError}
+                        emailFeedBackMessage={emailErrorMessage}
+                        phone={phone}
+                        onChangePhone={this.onChangePhone}
+                        phoneFeedBackError={phoneError}
+                        phoneFeedBackMessage={phoneErrorMessage}
+                        password={password}
+                        onChangePassword={this.onChangePassword}
+                        passwordFeedBackError={passwordError}
+                        passwordFeedBackMessage={passwordErrorMessage}
+                        onSubmitSignup={this.onSubmitSignup}
+                      />
+                    </Div>
+                  </Row>
+                  <Row display="block" mr="0" ml="0" pt="0.625rem">
+                    <Div col="6">
+                      <Link to="/">
+                        <Label fontFamily="light" color="primary">
+                          Forgot Password?
+                        </Label>
+                      </Link>
+                    </Div>
+                    <Div col="6" ta="right" />
+                  </Row>
+                  <Row display="block" mr="0" ml="0" pt="0.3125rem">
+                    <Div col="12">
+                      <Label fontFamily="light" color="error" display="block" ta="center">
+                        Message
+                      </Label>
+                    </Div>
+                  </Row>
+                </Div>
+              </Row>
+            </div>
+          </Container>
+        </div>
+        <Footer />
+      </Section>
     );
   }
 }
