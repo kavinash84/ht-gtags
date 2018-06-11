@@ -67,6 +67,7 @@
     right: 0 !important;
     top: 115%;
     z-index: 2 !important;
+    transition: all .3s ease;
     &:before {
       content: '';
       position: absolute;
@@ -77,6 +78,9 @@
       border-bottom: 7px solid #ededed;
       top: -7px;
       right: 15px;
+    }
+    &.hide {
+      display: none;
     }
     .yourAccountWrapper {
       a {

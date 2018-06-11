@@ -77,7 +77,7 @@ export default class MenuSidebar extends Component {
             <Button p="0" className={styles.heartBtn} ml="1.25rem">
               <Img src={UserIcon} alt="Account" height="24px" mr="0.625rem" float="left" />
             </Button>
-            <div className={`${styles.yourAccount} ${styles.hide}`}>
+            <div className={`${styles.yourAccount}`}>
               <Row display="block" mr="0" ml="0">
                 <Div col="12">
                   <Label fontFamily="regular" fontSize="1rem" mb="0.75rem" mt="0" color="black">
