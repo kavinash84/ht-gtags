@@ -122,7 +122,7 @@ export default class SignupFormContainer extends Component {
                   <Row display="block" mr="0" ml="0">
                     <Div col="12" ta="right">
                       <Link to={LOGIN_URL}>
-                        <Label fontFamily="light" color="primary">
+                        <Label fontWeight="light" color="primary">
                           Existing User? Log in now
                         </Label>
                       </Link>
@@ -150,7 +150,7 @@ export default class SignupFormContainer extends Component {
                   <Row display="block" mr="0" ml="0" pt="0.625rem">
                     <Div col="6">
                       <Link to="/">
-                        <Label fontFamily="light" color="primary">
+                        <Label fontWeight="light" color="primary">
                           Forgot Password?
                         </Label>
                       </Link>
@@ -159,7 +159,7 @@ export default class SignupFormContainer extends Component {
                   </Row>
                   <Row display="block" mr="0" ml="0" pt="0.3125rem">
                     <Div col="12">
-                      <Label fontFamily="light" color="error" display="block" ta="center">
+                      <Label fontWeight="light" color="error" display="block" ta="center">
                         Message
                       </Label>
                     </Div>

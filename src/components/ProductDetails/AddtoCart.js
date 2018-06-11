@@ -33,7 +33,7 @@ const AddToCart = ({ skuId, cartList, addToCart }) => {
           onClick={onClick(addToCart, skuId)}
           btnType="primary"
           size="block"
-          fontFamily="regular"
+          fontWeight="regular"
           fontSize="0.875em"
           height="42px"
           lh="2"
@@ -45,7 +45,7 @@ const AddToCart = ({ skuId, cartList, addToCart }) => {
         <Button
           btnType="primary"
           size="block"
-          fontFamily="regular"
+          fontWeight="regular"
           fontSize="0.875em"
           height="42px"
           lh="2"

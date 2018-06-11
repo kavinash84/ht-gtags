@@ -38,7 +38,7 @@ export default class Cart extends Component {
                           </td>
                           <td>Rs 49,900</td>
                           <td>
-                            <Button fontSize="1rem" fontFamily="300" color="#ae8873" btnType="link">
+                            <Button fontSize="1rem" fontWeight="300" color="#ae8873" btnType="link">
                               x
                             </Button>
                           </td>
@@ -54,7 +54,7 @@ export default class Cart extends Component {
                           </td>
                           <td>Rs 49,900</td>
                           <td>
-                            <Button fontSize="1rem" fontFamily="300" color="#ae8873" btnType="link">
+                            <Button fontSize="1rem" fontWeight="300" color="#ae8873" btnType="link">
                               x
                             </Button>
                           </td>

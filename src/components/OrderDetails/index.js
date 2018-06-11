@@ -16,7 +16,7 @@ const OrderDetails = () => (
     <Section mb="0.3125rem" pr="0.5rem" pl="0.5rem">
       <Container type="container" pr="1rem" pl="1rem">
         <Row display="block" mr="0" ml="0">
-          <Heading fontSize="1.25rem" color="textDark" mb="0px" mt="0px" fontFamily="300">
+          <Heading fontSize="1.25rem" color="textDark" mb="0px" mt="0px" fontWeight="300">
             View Order Details
           </Heading>
         </Row>
@@ -34,36 +34,36 @@ const OrderDetails = () => (
         <Section p="0">
           <Row display="block" mb="0.625rem" mr="0" ml="0">
             <Div col="5">
-              <Label fontSize="1em" fontFamily="light" mb="0">
+              <Label fontSize="1em" fontWeight="light" mb="0">
                 Order Number
               </Label>
             </Div>
             <Div col="7">
-              <Label fontSize="1em" color="textDark" fontFamily="medium" ta="right" display="block" mb="0">
+              <Label fontSize="1em" color="textDark" fontWeight="medium" ta="right" display="block" mb="0">
                 {orderData.order_details.order_no}
               </Label>
             </Div>
           </Row>
           <Row display="block" mb="0.625rem" mr="0" ml="0">
             <Div col="5">
-              <Label fontSize="1em" fontFamily="light" mb="0">
+              <Label fontSize="1em" fontWeight="light" mb="0">
                 Order Date
               </Label>
             </Div>
             <Div col="7">
-              <Label fontSize="1em" color="textDark" fontFamily="medium" ta="right" display="block" mb="0">
+              <Label fontSize="1em" color="textDark" fontWeight="medium" ta="right" display="block" mb="0">
                 {orderData.order_details.order_date}
               </Label>
             </Div>
           </Row>
           <Row display="block" mb="0.625rem" mr="0" ml="0">
             <Div col="5">
-              <Label fontSize="1em" fontFamily="light" mb="0">
+              <Label fontSize="1em" fontWeight="light" mb="0">
                 Order Total
               </Label>
             </Div>
             <Div col="7">
-              <Label fontSize="1em" color="textDark" fontFamily="medium" ta="right" display="block" mb="0">
+              <Label fontSize="1em" color="textDark" fontWeight="medium" ta="right" display="block" mb="0">
                 {orderData.order_details.order_total}
               </Label>
             </Div>

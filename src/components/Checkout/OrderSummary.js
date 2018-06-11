@@ -40,12 +40,12 @@ const OrderSummary = () => (
         </Text>
       </Div>
       <Div col="12" mt="0.625rem">
-        <Button btnType="link" color="#ae8873" fontFamily="Light" pl="0" pr="0" fontSize="0.875rem">
+        <Button btnType="link" color="#ae8873" fontWeight="Light" pl="0" pr="0" fontSize="0.875rem">
           Got a coupon?
         </Button>
       </Div>
       <Div col="12">
-        <Button btnType="link" color="#ae8873" fontFamily="Light" pl="0" pr="0" pt="0" fontSize="0.875rem">
+        <Button btnType="link" color="#ae8873" fontWeight="Light" pl="0" pr="0" pt="0" fontSize="0.875rem">
           Redeem your points?
         </Button>
       </Div>
@@ -55,7 +55,7 @@ const OrderSummary = () => (
           btnType="primary"
           height="42px"
           mt="0.625rem"
-          fontFamily="Light"
+          fontWeight="Light"
           fontSize="0.875rem"
           ls="1px"
         >
@@ -64,10 +64,10 @@ const OrderSummary = () => (
       </Div>
     </Div>
     <Div className={styles.questions}>
-      <Text color="rgba(0, 0, 0, 0.5)" fontSize="0.875rem" fontFamily="600">
+      <Text color="rgba(0, 0, 0, 0.5)" fontSize="0.875rem" fontWeight="600">
         Do you have Questions about your Order?
       </Text>
-      <Text color="#646464" fontFamily="300">
+      <Text color="#646464" fontWeight="300">
         Call us: 18002100004 <br />
         E Mail: care@hometown.in
       </Text>

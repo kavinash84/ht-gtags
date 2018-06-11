@@ -103,7 +103,7 @@ export default class PaymentMethodContainer extends Component {
               </Heading>
             </Div>
             <Div col="6" ta="right">
-              <Label fontFamily="light">
+              <Label fontWeight="light">
                 <Link href="#login" fontSize="0.875em">
                   Existing User? Log in now
                 </Link>
@@ -131,14 +131,14 @@ export default class PaymentMethodContainer extends Component {
           </Row>
           <Row display="block" mr="0" ml="0" pt="1.25rem">
             <Div col="6">
-              <Label fontFamily="light">
+              <Label fontWeight="light">
                 <Link href="#forgot" fontSize="0.875em">
                   Forgot Password?
                 </Link>
               </Label>
             </Div>
             <Div col="6" ta="right">
-              <Label fontFamily="light">
+              <Label fontWeight="light">
                 <Link href="#otp" fontSize="0.875em">
                   Login via OTP?
                 </Link>
