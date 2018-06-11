@@ -1,28 +1,53 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import ProfileFormContainer from 'hometown-components/lib/Forms/ProfileForm';
 import Section from 'hometown-components/lib/Section';
 import Row from 'hometown-components/lib/Row';
 import Heading from 'hometown-components/lib/Heading';
 import Div from 'hometown-components/lib/Div';
 import { validateEmail, validateMobile, isBlank } from 'js-utility-functions';
+import { updateProfile } from 'redux/modules/profile';
 
+@connect(({ updateprofile: { name, email, phone } }) => ({
+  name,
+  email,
+  phone
+}))
 export default class ProfileForm extends Component {
-  constructor() {
-    super();
+  static propTypes = {
+    name: PropTypes.string,
+    email: PropTypes.string,
+    phone: PropTypes.string
+  };
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  };
+  static defaultProps = {
+    name: '',
+    email: '',
+    phone: ''
+  };
+
+  constructor(props) {
+    super(props);
+    const { name, email, phone } = props;
     this.state = {
-      email: '',
+      email,
       emailError: false,
       emailErrorMessage: '',
-      phone: '',
+      phone,
       phoneError: false,
       phoneErrorMessage: '',
-      fullName: '',
+      fullName: name || '',
       fullNameError: false,
       fullNameErrorMessage: ''
     };
   }
   onChangeEmail = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = validateEmail(value, 'Enter valid email');
     this.setState({
       email: value,
@@ -31,7 +56,9 @@ export default class ProfileForm extends Component {
     });
   };
   onChangePhone = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = validateMobile(value, 'Mobile should be 10 digits');
     this.setState({
       phone: value,
@@ -40,7 +67,9 @@ export default class ProfileForm extends Component {
     });
   };
   onChangeFullName = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = isBlank(value);
     this.setState({
       fullName: value,
@@ -49,12 +78,13 @@ export default class ProfileForm extends Component {
     });
   };
   onSubmitProfile = e => {
+    console.log('In Submit ');
     e.preventDefault();
     const { email, fullName, phone } = this.state;
     const checkEmail = validateEmail(email, 'Invalid Email');
     const checkPhone = validateMobile(phone, 'Mobile no. should be 10 digits');
     const checkFullName = isBlank(fullName);
-    if (checkEmail.error || checkFullName || checkPhone) {
+    if (checkEmail.error || checkFullName || checkPhone.error) {
       return this.setState({
         emailError: checkEmail.error,
         emailErrorMessage: checkEmail.errorMessage,
@@ -64,7 +94,9 @@ export default class ProfileForm extends Component {
         fullNameErrorMessage: checkFullName ? "Name can't be blank" : ''
       });
     }
-    // console.log(this.state);
+    console.log(this.state);
+    const { dispatch } = this.context.store;
+    dispatch(updateProfile(this.state));
   };
   render() {
     const styles = require('./index.scss');

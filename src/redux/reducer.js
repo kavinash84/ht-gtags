@@ -11,6 +11,8 @@ import homepage from './modules/homepage';
 import stores from './modules/stores';
 import userLogin from './modules/login';
 import userSignUp from './modules/signUp';
+import updatepassword from './modules/updatepassword';
+import updateprofile from './modules/profile';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -32,6 +34,8 @@ export default function createReducers(asyncReducers) {
     stores,
     userLogin,
     userSignUp,
+    updatepassword,
+    updateprofile,
     ...asyncReducers
   };
 }

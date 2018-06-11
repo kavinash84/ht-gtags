@@ -1,9 +1,21 @@
 import _ from 'lodash';
 import { createStore as _createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
+import cookie from 'js-cookie';
 import { createPersistoid, persistCombineReducers, REGISTER } from 'redux-persist';
 import clientMiddleware from './middleware/clientMiddleware';
 import createReducers from './reducer';
+import getCookie from '../utils/cookies';
+
+/* check cookies in browser or set when client has login details */
+const checkClientCookies = authToken => {
+  if (window && document) {
+    const cookies = document.cookie;
+    if (getCookie(cookies, 'Authorization') === '') {
+      cookie.set('Authorization', `Bearer ${authToken}`);
+    }
+  }
+};
 
 function combine(reducers, persistConfig) {
   if (persistConfig) {
@@ -32,6 +44,10 @@ function getNoopReducers(reducers, data) {
 export default function createStore({
   history, data, helpers, persistConfig
 }) {
+  const authToken = (data && data.userLogin && data.userLogin.isLoggedIn && data.userLogin.accessToken) || '';
+  helpers.client.setJwtToken(authToken);
+  /* check authToken and set cookie if present */
+  if (authToken) checkClientCookies(authToken);
   const middleware = [clientMiddleware(helpers), routerMiddleware(history)];
 
   if (__CLIENT__ && __DEVELOPMENT__) {
