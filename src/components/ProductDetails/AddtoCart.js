@@ -64,4 +64,7 @@ AddToCart.propTypes = {
   addToCart: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddToCart);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddToCart);

@@ -22,7 +22,9 @@ export default class UpdatePasswordForm extends Component {
     };
   }
   onChangeOldPwd = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = isBlank(value);
     this.setState({
       oldPwd: value,
@@ -31,7 +33,9 @@ export default class UpdatePasswordForm extends Component {
     });
   };
   onChangeNewPwd = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = isBlank(value);
     this.setState({
       newPwd: value,
@@ -40,7 +44,9 @@ export default class UpdatePasswordForm extends Component {
     });
   };
   onChangeConfirmPwd = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = isBlank(value);
     this.setState({
       confirmPwd: value,
