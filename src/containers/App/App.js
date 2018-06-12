@@ -10,6 +10,7 @@ import Helmet from 'react-helmet';
 import { wrapDispatch } from 'multireducer';
 import { loadCategories, loadMainMenu, loadBanners, isLoaded as isSectionLoaded } from 'redux/modules/homepage';
 import { loginUserAfterSignUp } from 'redux/modules/login';
+import { loadWishlist, isLoaded as isWishListLoaded } from 'redux/modules/wishlist';
 import config from 'config';
 import Theme from 'hometown-components/lib/Theme';
 
@@ -23,6 +24,11 @@ import Theme from 'hometown-components/lib/Theme';
     }
     if (!isSectionLoaded(getState(), 'menu')) {
       await wrapDispatch(dispatch, 'menu')(loadMainMenu()).catch(error => console.log(error));
+    }
+  },
+  defer: ({ store: { dispatch, getState } }) => {
+    if (getState().userLogin.isLoggedIn && !isWishListLoaded(getState())) {
+      dispatch(loadWishlist()).catch(error => console.log(error()));
     }
   }
 })
@@ -76,13 +82,13 @@ export default class App extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    const { dispatch } = this.context.store;
     const {
       login: { isLoggedIn }
     } = this.props;
     if (nextProps.signUp && nextProps.signUp.loaded) {
       const { signUp } = nextProps;
       if (!isLoggedIn && signUp.response.signup_complete) {
-        const { dispatch } = this.context.store;
         const {
           signUp: { response },
           loginUser

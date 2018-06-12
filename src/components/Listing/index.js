@@ -18,9 +18,9 @@ const getProductImage = url => {
 
 const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
 
-const onClick = dispatcher => sku => e => {
+const onClick = (list, dispatcher) => sku => e => {
   e.preventDefault();
-  dispatcher(sku);
+  dispatcher(list, sku);
 };
 
 const isInWishList = (list, id) => list.includes(id);
@@ -28,7 +28,7 @@ const isInWishList = (list, id) => list.includes(id);
 const styles = require('./Listing.scss');
 
 const Listing = ({
-  toggleWishList, products, categoryName, productCount, wishList
+  toggleWishList, products, categoryName, productCount, wishList, wishListData
 }) => (
   <Div type="block">
     <Section mb="0.3125rem" p="1rem 0.5rem" bg="primary">
@@ -60,7 +60,8 @@ const Listing = ({
               saving={item.saving}
               image={getProductImage(item.images[0].path)}
               sku={item.data.sku}
-              onClick={onClick(toggleWishList)}
+              simple_sku={item.simples}
+              onClick={onClick(wishListData, toggleWishList)}
               isWishList={isInWishList(wishList, item.data.sku)}
               rating={item.data.reviews.rating.toFixed(1)}
               reviewsCount={item.data.reviews.count}
@@ -75,6 +76,7 @@ const Listing = ({
 
 Listing.defaultProps = {
   wishList: [],
+  wishListData: [],
   categoryName: '',
   productCount: ''
 };
@@ -83,6 +85,7 @@ Listing.propTypes = {
   toggleWishList: PropTypes.func.isRequired,
   products: PropTypes.array.isRequired,
   wishList: PropTypes.array,
+  wishListData: PropTypes.array,
   categoryName: PropTypes.string,
   productCount: PropTypes.string
 };
