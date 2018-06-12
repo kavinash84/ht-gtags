@@ -35,7 +35,7 @@ const Listing = ({
       <Container pr="0" pl="0">
         <Row display="block" mr="0" ml="0">
           <Heading
-            fontFamily="300"
+            fontWeight="300"
             fontSize="1.25rem"
             color="white"
             mb="0px"

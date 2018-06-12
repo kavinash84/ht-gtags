@@ -118,11 +118,21 @@ export default class UpdatePasswordFormContainer extends Component {
     return (
       <div className={styles.formContainer}>
         <Section mb="0.3125rem" pr="0.5rem" pl="0.5rem">
+<<<<<<< HEAD
           <Row display="block" mr="0" ml="0">
             <Heading fontSize="1.25rem" color="textDark" mb="0px" mt="0px" fontFamily="SFPDLight">
               Update Password
             </Heading>
           </Row>
+=======
+          <Container type="container" pr="1rem" pl="1rem">
+            <Row display="block" mr="0" ml="0">
+              <Heading fontSize="1.25rem" color="textDark" mb="0px" mt="0px" fontWeight="300">
+                Update Password
+              </Heading>
+            </Row>
+          </Container>
+>>>>>>> f23183ee43e15f7724a22391bae9259f258fe235
         </Section>
         <div className={styles.formWrapper}>
           <Section p="0.5rem" mb="0">

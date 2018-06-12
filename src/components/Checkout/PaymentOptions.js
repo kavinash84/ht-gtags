@@ -136,7 +136,7 @@ export default class PaymentOptions extends Component {
                     <Button
                       size="block"
                       btnType="primary"
-                      fontFamily="regular"
+                      fontWeight="regular"
                       height="42px"
                       mt="1.5rem"
                       fontSize="0.875rem"

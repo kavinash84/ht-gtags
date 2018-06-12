@@ -17,7 +17,7 @@ const OrderSummary = () => (
     <Section mb="0.3125rem" pr="0.5rem" pl="0.5rem">
       <Container type="container" pr="1rem" pl="1rem">
         <Row display="block" mr="0" ml="0">
-          <Heading fontSize="1.25rem" color="textDark" mb="0px" mt="0px" fontFamily="300">
+          <Heading fontSize="1.25rem" color="textDark" mb="0px" mt="0px" fontWeight="300">
             Order summary
           </Heading>
         </Row>
@@ -35,7 +35,7 @@ const OrderSummary = () => (
         <ShippedTo shipDetails={orderData.shipped_to} />
         <PaymentMethod />
         <Row display="block" mr="0" ml="0">
-          <Heading fontSize="1.25rem" color="textDark" mb="0.625rem" mt="0px" fontFamily="300">
+          <Heading fontSize="1.25rem" color="textDark" mb="0.625rem" mt="0px" fontWeight="300">
             Products
           </Heading>
         </Row>
@@ -43,30 +43,30 @@ const OrderSummary = () => (
         <Section p="0" mt="1rem">
           <Row display="block" mb="0.625rem" mr="0" ml="0">
             <Div col="5">
-              <Label fontSize="1em" fontFamily="light" mb="0">
+              <Label fontSize="1em" fontWeight="light" mb="0">
                 Items
               </Label>
             </Div>
             <Div col="7">
-              <Label fontSize="1em" color="textDark" fontFamily="medium" ta="right" display="block" mb="0">
+              <Label fontSize="1em" color="textDark" fontWeight="medium" ta="right" display="block" mb="0">
                 {orderData.price}
               </Label>
             </Div>
           </Row>
           <Row display="block" mb="0.625rem" mr="0" ml="0">
             <Div col="5">
-              <Label fontSize="1em" fontFamily="light" mb="0">
+              <Label fontSize="1em" fontWeight="light" mb="0">
                 Delivery
               </Label>
             </Div>
             <Div col="7">
-              <Label fontSize="1em" color="textDark" fontFamily="medium" ta="right" display="block" mb="0">
+              <Label fontSize="1em" color="textDark" fontWeight="medium" ta="right" display="block" mb="0">
                 Free
               </Label>
             </Div>
           </Row>
           <Row display="block" mr="0" ml="0" mt="1rem">
-            <Button btnType="primary" size="block" fontFamily="regular" fontSize="0.875em" height="42px" lh="2">
+            <Button btnType="primary" size="block" fontWeight="regular" fontSize="0.875em" height="42px" lh="2">
               PROCEED TO CHECKOUT
             </Button>
           </Row>

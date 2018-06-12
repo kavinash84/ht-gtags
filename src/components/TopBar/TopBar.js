@@ -80,7 +80,7 @@ export default class MenuSidebar extends Component {
             <div className={`${styles.yourAccount}`}>
               <Row display="block" mr="0" ml="0">
                 <Div col="12">
-                  <Label fontFamily="regular" fontSize="1rem" mb="0.75rem" mt="0" color="black">
+                  <Label fontWeight="regular" fontSize="1rem" mb="0.75rem" mt="0" color="black">
                     Your Account
                   </Label>
                 </Div>
