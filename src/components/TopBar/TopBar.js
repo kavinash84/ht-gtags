@@ -8,6 +8,7 @@ import Row from 'hometown-components/lib/Row';
 import Button from 'hometown-components/lib/Buttons';
 import Span from 'hometown-components/lib/Span';
 import { Label } from 'hometown-components/lib/Label';
+import Fav from 'hometown-components/lib/Icons/Fav';
 import Search from 'components/Search';
 import ResponsiveModal from 'components/Modal';
 import Pincode from 'components/Pincode';
@@ -18,7 +19,6 @@ const LogoIcon = require('../../../static/logo.png');
 const CartIcon = require('../../../static/cart-icon.svg');
 const MapIcon = require('../../../static/map-icon.svg');
 const PhoneIcon = require('../../../static/phone-icon.svg');
-const FavIcon = require('../../../static/fav-icon.svg');
 const UserIcon = require('../../../static/user-icon.svg');
 
 @connect(({ pincode }) => ({
@@ -27,7 +27,7 @@ const UserIcon = require('../../../static/user-icon.svg');
 export default class MenuSidebar extends Component {
   state = {
     openPincode: false,
-    openLogin: true
+    openLogin: false
   };
   onOpenPincodeModal = () => {
     this.setState({ openPincode: true });
@@ -58,7 +58,7 @@ export default class MenuSidebar extends Component {
           <Div col="5">
             <Search />
           </Div>
-          <Div col="5" ta="right" pt="0.625rem">
+          <Div col="5" ta="right" pt="0.3125rem">
             <button onClick={this.onOpenPincodeModal}>
               <Img src={MapIcon} alt="Hometown" height="24px" mr="0.625rem" float="left" />
               <Span fontSize="0.875rem">{selectedPincode !== '' ? selectedPincode : 'Pincode'}</Span>
@@ -75,7 +75,7 @@ export default class MenuSidebar extends Component {
               <Span fontSize="0.875em">1800-210-0004</Span>
             </Link>
             <Button p="0" className={styles.heartBtn} ml="1.25rem" onClick={this.onOpenLoginModal}>
-              <Img src={FavIcon} alt="Wishlist" height="24px" mr="0.625rem" float="left" />
+              <Fav />
               <span className={styles.count}>0</span>
             </Button>
             <ResponsiveModal

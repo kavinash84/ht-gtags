@@ -1,6 +1,6 @@
 import React from 'react';
 import LoginForm from 'components/Login/LoginForm';
-import Fav from 'components/Icons/Fav';
+import Fav from 'hometown-components/lib/Icons/Fav';
 import Row from 'hometown-components/lib/Row';
 import Div from 'hometown-components/lib/Div';
 import Img from 'hometown-components/lib/Img';
