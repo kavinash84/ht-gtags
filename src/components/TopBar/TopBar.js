@@ -11,6 +11,7 @@ import { Label } from 'hometown-components/lib/Label';
 import Search from 'components/Search';
 import ResponsiveModal from 'components/Modal';
 import Pincode from 'components/Pincode';
+import LoginModal from 'components/Login/LoginModal';
 import { HOME_URL } from 'helpers/Constants';
 
 const LogoIcon = require('../../../static/logo.png');
@@ -25,15 +26,22 @@ const UserIcon = require('../../../static/user-icon.svg');
 }))
 export default class MenuSidebar extends Component {
   state = {
-    open: false
+    openPincode: false,
+    openLogin: true
   };
-  onOpenModal = () => {
-    this.setState({ open: true });
+  onOpenPincodeModal = () => {
+    this.setState({ openPincode: true });
+  };
+  onClosePincodeModal = () => {
+    this.setState({ openPincode: false });
+  };
+  onOpenLoginModal = () => {
+    this.setState({ openLogin: true });
+  };
+  onCloseLoginModal = () => {
+    this.setState({ openLogin: false });
   };
 
-  onCloseModal = () => {
-    this.setState({ open: false });
-  };
   render() {
     const styles = require('./TopBar.scss');
     const { selectedPincode } = this.props;
@@ -51,25 +59,32 @@ export default class MenuSidebar extends Component {
             <Search />
           </Div>
           <Div col="5" ta="right" pt="0.625rem">
-            <button onClick={this.onOpenModal}>
+            <button onClick={this.onOpenPincodeModal}>
               <Img src={MapIcon} alt="Hometown" height="24px" mr="0.625rem" float="left" />
               <Span fontSize="0.875rem">{selectedPincode !== '' ? selectedPincode : 'Pincode'}</Span>
             </button>
             <ResponsiveModal
               classNames={{ modal: styles.pincodeModal }}
-              onCloseModal={this.onCloseModal}
-              open={this.state.open}
+              onCloseModal={this.onClosePincodeModal}
+              open={this.state.openPincode}
             >
-              <Pincode onCloseModal={this.onCloseModal} />
+              <Pincode onCloseModal={this.onClosePincodeModal} />
             </ResponsiveModal>
             <Link className={styles.cart} to={HOME_URL}>
               <Img src={PhoneIcon} alt="Hometown" height="24px" mr="0.625rem" float="left" />
               <Span fontSize="0.875em">1800-210-0004</Span>
             </Link>
-            <Button p="0" className={styles.heartBtn} ml="1.25rem">
+            <Button p="0" className={styles.heartBtn} ml="1.25rem" onClick={this.onOpenLoginModal}>
               <Img src={FavIcon} alt="Wishlist" height="24px" mr="0.625rem" float="left" />
               <span className={styles.count}>0</span>
             </Button>
+            <ResponsiveModal
+              classNames={{ modal: styles.loginModal }}
+              onCloseModal={this.onCloseLoginModal}
+              open={this.state.openLogin}
+            >
+              <LoginModal />
+            </ResponsiveModal>
             <Link className={styles.cart} to={HOME_URL}>
               <Img src={CartIcon} alt="Hometown" height="24px" />
               <span className={styles.count}>0</span>

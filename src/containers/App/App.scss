@@ -209,6 +209,21 @@
 	.customModal {
 		padding: 3rem;
 	}
+
+	/* Common Classes */
+	.socialBtn {
+		border-radius: 1px;
+	  background-color: #f8f8f8;
+	  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+		padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+		img {
+			width: 1.125rem;
+    	vertical-align: sub;
+    	margin-right: 0.625rem;
+		}
+	}
 }
 
 @-webkit-keyframes :global(nprogress-spinner) {
