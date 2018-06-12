@@ -157,13 +157,13 @@ export default class SignupFormContainer extends Component {
                     </Div>
                     <Div col="6" ta="right" />
                   </Row>
-                  <Row display="block" mr="0" ml="0" pt="0.3125rem">
+                  {/* <Row display="block" mr="0" ml="0" pt="0.3125rem">
                     <Div col="12">
-                      <Label fontWeight="light" color="error" display="block" ta="center">
+                      <Label fontWeight="medium" color="error" display="block" ta="center">
                         Message
                       </Label>
                     </Div>
-                  </Row>
+                  </Row> */}
                 </Div>
               </Row>
             </div>

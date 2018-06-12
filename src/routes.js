@@ -24,6 +24,7 @@ import {
 } from 'containers';
 import Login from 'containers/Login';
 import Signup from 'containers/Signup';
+import ForgotPassword from 'containers/ForgotPassword';
 import Profile from 'containers/Profile';
 import Pincode from 'components/Pincode';
 import SimpleSlider from 'components/SlickSlider';
@@ -37,6 +38,7 @@ const routes = [
       { path: '/slick', exact: true, component: SimpleSlider },
       { path: '/login', exact: true, component: Login },
       { path: '/signup', exact: true, component: Signup },
+      { path: '/forgot-password', exact: true, component: ForgotPassword },
       { path: '/listing', exact: true, component: Listing },
       { path: '/wishlist', exact: true, component: Wishlist },
       { path: '/cart', exact: true, component: Cart },
