@@ -2,7 +2,7 @@ import React from 'react';
 import NavBar from 'components/NavBar';
 import Container from 'hometown-components/lib/Container';
 import Section from 'hometown-components/lib/Section';
-import TopBar from './TopBar';
+import TopBar from '../TopBar/TopBar';
 
 const styles = require('./Menu.scss');
 
