@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Heading from 'hometown-components/lib/Heading';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
-import { Link } from 'react-router-dom';
 import { MY_ORDER_URL, MY_PROFILE_URL, MY_WISHLIST_URL } from 'helpers/Constants';
 
 const styles = require('./MyMenu.scss');
@@ -26,20 +26,20 @@ const MyOrder = ({ page }) => (
             </Link>
           </Div>
           <Div col="2">
-            <a href={MY_WISHLIST_URL} className={`${styles.headerLink} ${page === 'wishlist' ? styles.active : ''}`}>
+            <Link to={MY_WISHLIST_URL} className={`${styles.headerLink} ${page === 'wishlist' ? styles.active : ''}`}>
               My Wishlist
-            </a>
+            </Link>
           </Div>
           <Div col="2">
-            <a href={MY_PROFILE_URL} className={`${styles.headerLink} ${page === 'profile' ? styles.active : ''}`}>
+            <Link to={MY_PROFILE_URL} className={`${styles.headerLink} ${page === 'profile' ? styles.active : ''}`}>
               My Profile
-            </a>
+            </Link>
           </Div>
-          <Div col="2">
-            <a href="#myPoints" className={`${styles.headerLink} ${page === 'points' ? styles.active : ''}`}>
+          {/*  <Div col="2">
+            <Link href="#myPoints" className={`${styles.headerLink} ${page === 'points' ? styles.active : ''}`}>
               My Points
-            </a>
-          </Div>
+            </Link>
+          </Div> */}
         </Div>
       </Row>
     </Container>
