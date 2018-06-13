@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Img from 'hometown-components/lib/Img';
@@ -13,7 +14,7 @@ import Search from 'components/Search';
 import ResponsiveModal from 'components/Modal';
 import Pincode from 'components/Pincode';
 import LoginModal from 'components/Login/LoginModal';
-import { HOME_URL } from 'helpers/Constants';
+import { HOME_URL, LOGIN_URL, MY_WISHLIST_URL } from 'helpers/Constants';
 
 const LogoIcon = require('../../../static/logo.png');
 const CartIcon = require('../../../static/cart-icon.svg');
@@ -21,8 +22,15 @@ const MapIcon = require('../../../static/map-icon.svg');
 const PhoneIcon = require('../../../static/phone-icon.svg');
 const UserIcon = require('../../../static/user-icon.svg');
 
-@connect(({ pincode }) => ({
-  selectedPincode: pincode.selectedPincode
+const onClick = history => e => {
+  e.preventDefault();
+  history.push(MY_WISHLIST_URL);
+};
+
+@withRouter
+@connect(({ pincode, userLogin }) => ({
+  selectedPincode: pincode.selectedPincode,
+  isLoggedIn: userLogin.isLoggedIn
 }))
 export default class MenuSidebar extends Component {
   state = {
@@ -44,7 +52,7 @@ export default class MenuSidebar extends Component {
 
   render() {
     const styles = require('./TopBar.scss');
-    const { selectedPincode } = this.props;
+    const { selectedPincode, isLoggedIn, history } = this.props;
     return (
       <div>
         <div className={styles.hamburger}>
@@ -74,7 +82,12 @@ export default class MenuSidebar extends Component {
               <Img src={PhoneIcon} alt="Hometown" height="24px" mr="0.625rem" float="left" />
               <Span fontSize="0.875em">1800-210-0004</Span>
             </Link>
-            <Button p="0" className={styles.heartBtn} ml="1.25rem" onClick={this.onOpenLoginModal}>
+            <Button
+              p="0"
+              className={styles.heartBtn}
+              ml="1.25rem"
+              onClick={isLoggedIn ? onClick(history) : this.onOpenLoginModal}
+            >
               <Fav />
               <span className={styles.count}>0</span>
             </Button>
@@ -106,7 +119,7 @@ export default class MenuSidebar extends Component {
                     <Link to={HOME_URL}>Sign Up</Link>
                   </Div>
                   <Div col="6" pl="5px">
-                    <Link to={HOME_URL}>Log In</Link>
+                    <Link to={LOGIN_URL}>Log In</Link>
                   </Div>
                 </div>
               </Row>
@@ -119,9 +132,13 @@ export default class MenuSidebar extends Component {
 }
 
 MenuSidebar.defaultProps = {
-  selectedPincode: ''
+  selectedPincode: '',
+  isLoggedIn: false,
+  history: {}
 };
 
 MenuSidebar.propTypes = {
-  selectedPincode: PropTypes.string
+  selectedPincode: PropTypes.string,
+  isLoggedIn: PropTypes.bool,
+  history: PropTypes.object
 };
