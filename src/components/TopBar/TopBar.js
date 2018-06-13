@@ -14,7 +14,7 @@ import Search from 'components/Search';
 import ResponsiveModal from 'components/Modal';
 import Pincode from 'components/Pincode';
 import LoginModal from 'components/Login/LoginModal';
-import { HOME_URL, LOGIN_URL, MY_WISHLIST_URL } from 'helpers/Constants';
+import { SIGNUP_URL, HOME_URL, LOGIN_URL, MY_WISHLIST_URL, MY_PROFILE_URL } from 'helpers/Constants';
 
 const LogoIcon = require('../../../static/logo.png');
 const CartIcon = require('../../../static/cart-icon.svg');
@@ -35,7 +35,8 @@ const onClick = history => e => {
 export default class MenuSidebar extends Component {
   state = {
     openPincode: false,
-    openLogin: false
+    openLogin: false,
+    userPopOver: false
   };
   onOpenPincodeModal = () => {
     this.setState({ openPincode: true });
@@ -50,8 +51,15 @@ export default class MenuSidebar extends Component {
     this.setState({ openLogin: false });
   };
 
+  handleUserPopOver = () => {
+    this.setState({
+      userPopOver: !this.state.userPopOver
+    });
+  };
+
   render() {
     const styles = require('./TopBar.scss');
+    const { userPopOver } = this.state;
     const { selectedPincode, isLoggedIn, history } = this.props;
     return (
       <div>
@@ -102,10 +110,10 @@ export default class MenuSidebar extends Component {
               <Img src={CartIcon} alt="Hometown" height="24px" />
               <span className={styles.count}>0</span>
             </Link>
-            <Button p="0" className={styles.heartBtn} ml="1.25rem">
+            <Button p="0" className={styles.heartBtn} ml="1.25rem" onClick={this.handleUserPopOver}>
               <Img src={UserIcon} alt="Account" height="24px" mr="0.625rem" float="left" />
             </Button>
-            <div className={`${styles.yourAccount}`}>
+            <div className={`${styles.yourAccount} ${userPopOver ? '' : styles.hide}`}>
               <Row display="block" mr="0" ml="0">
                 <Div col="12">
                   <Label fontWeight="regular" fontSize="1rem" mb="0.75rem" mt="0" color="black">
@@ -114,14 +122,26 @@ export default class MenuSidebar extends Component {
                 </Div>
               </Row>
               <Row display="block" mr="0" ml="0">
-                <div className={styles.yourAccountWrapper}>
-                  <Div col="6" pr="5px">
-                    <Link to={HOME_URL}>Sign Up</Link>
-                  </Div>
-                  <Div col="6" pl="5px">
-                    <Link to={LOGIN_URL}>Log In</Link>
-                  </Div>
-                </div>
+                {!isLoggedIn && (
+                  <div className={styles.yourAccountWrapper}>
+                    <Div col="6" pr="5px">
+                      <Link to={SIGNUP_URL}>Sign Up</Link>
+                    </Div>
+                    <Div col="6" pl="5px">
+                      <Link to={LOGIN_URL}>Log In</Link>
+                    </Div>
+                  </div>
+                )}
+                {isLoggedIn && (
+                  <div className={styles.yourAccountWrapper}>
+                    <Div col="6" pr="5px">
+                      <Link to={MY_PROFILE_URL}>Profile</Link>
+                    </Div>
+                    <Div col="6" pl="5px">
+                      <Button to={LOGIN_URL}>Logout !</Button>
+                    </Div>
+                  </div>
+                )}
               </Row>
             </div>
           </Div>

@@ -2,7 +2,6 @@
  * THIS IS THE ENTRY POINT FOR THE CLIENT, JUST LIKE server.js IS THE ENTRY POINT FOR THE SERVER.
  */
 import 'babel-polyfill';
-import pick from 'lodash/pick';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ConnectedRouter } from 'react-router-redux';
@@ -10,9 +9,10 @@ import { renderRoutes } from 'react-router-config';
 import { trigger } from 'redial';
 import createBrowserHistory from 'history/createBrowserHistory';
 import Loadable from 'react-loadable';
+import { CookieStorage } from 'redux-persist-cookie-storage';
+import Cookies from 'cookies-js';
 import { AppContainer as HotEnabler } from 'react-hot-loader';
 import { getStoredState } from 'redux-persist';
-import localForage from 'localforage';
 import createStore from 'redux/create';
 import apiClient from 'helpers/apiClient';
 import routes from 'routes';
@@ -21,8 +21,11 @@ import asyncMatchRoutes from 'utils/asyncMatchRoutes';
 import { ReduxAsyncConnect, Provider } from 'components';
 
 const persistConfig = {
-  key: 'primary',
-  storage: localForage,
+  key: 'root',
+  storage: new CookieStorage(Cookies),
+  stateReconciler(inboundState, originalState) {
+    return originalState;
+  },
   whitelist: ['cart', 'userLogin']
 };
 
@@ -31,19 +34,18 @@ const client = apiClient();
 const providers = { app: {}, restApp: {}, client };
 
 (async () => {
-  const storedData = await getStoredState(persistConfig);
+  const preloadedState = await getStoredState(persistConfig);
   const online = window.__data ? true : await isOnline();
 
   const history = createBrowserHistory();
-  const data = {
-    ...storedData,
-    ...window.__data,
-    ...pick(storedData, ['cart', 'userLogin']),
-    online
-  };
+
   const store = createStore({
     history,
-    data,
+    data: {
+      ...preloadedState,
+      ...window.__data,
+      online
+    },
     helpers: providers,
     persistConfig
   });

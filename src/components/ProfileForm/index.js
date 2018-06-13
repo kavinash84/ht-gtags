@@ -10,14 +10,16 @@ import { validateEmail, validateMobile, isBlank } from 'js-utility-functions';
 import { updateProfile, loadProfile, isLoaded as isProfileLoaded } from 'redux/modules/profile';
 
 @connect(state => ({
-  profile: state.profile
+  profile: state.profile,
+  isLoggedIn: state.userLogin.isLoggedIn
 }))
 export default class ProfileForm extends Component {
   static propTypes = {
     profile: PropTypes.shape({
       loaded: PropTypes.bool,
       user: PropTypes.obj
-    })
+    }),
+    isLoggedIn: PropTypes.bool
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -25,7 +27,8 @@ export default class ProfileForm extends Component {
   static defaultProps = {
     profile: {
       loaded: false
-    }
+    },
+    isLoggedIn: false
   };
 
   state = {
@@ -41,8 +44,10 @@ export default class ProfileForm extends Component {
   };
 
   componentDidMount() {
+    console.log(this.props);
+    const { isLoggedIn } = this.props;
     const { dispatch, getState } = this.context.store;
-    if (getState().userLogin.isLoggedIn && !isProfileLoaded(getState())) {
+    if (isLoggedIn && !isProfileLoaded(getState())) {
       dispatch(loadProfile()).catch(error => console.log(error()));
     }
   }
@@ -59,9 +64,7 @@ export default class ProfileForm extends Component {
   }
 
   onChangePhone = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     const checkError = validateMobile(value, 'Mobile should be 10 digits');
     this.setState({
       phone: value,
@@ -70,9 +73,7 @@ export default class ProfileForm extends Component {
     });
   };
   onChangeFullName = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     const checkError = isBlank(value);
     this.setState({
       fullName: value,
@@ -102,9 +103,7 @@ export default class ProfileForm extends Component {
   };
 
   onChangeEmail = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     const checkError = validateEmail(value, 'Enter valid email');
     this.setState({
       email: value,
