@@ -22,6 +22,8 @@ import {
   ProductNotFound,
   NotFound
 } from 'containers';
+import { routerActions } from 'react-router-redux';
+import { connectedReduxRedirect } from 'redux-auth-wrapper/history4/redirect';
 import Login from 'containers/Login';
 import Signup from 'containers/Signup';
 import ForgotPassword from 'containers/ForgotPassword';
@@ -29,6 +31,21 @@ import ResetPassword from 'containers/ResetPassword';
 import Profile from 'containers/Profile';
 import Pincode from 'components/Pincode';
 import SimpleSlider from 'components/SlickSlider';
+
+const isAuthenticated = connectedReduxRedirect({
+  redirectPath: '/login',
+  authenticatedSelector: state => state.userLogin.isLoggedIn,
+  redirectAction: routerActions.replace,
+  wrapperDisplayName: 'UserLoggedIn'
+});
+
+const isNotAuthenticated = connectedReduxRedirect({
+  redirectPath: '/',
+  authenticatedSelector: state => !state.userLogin.isLoggedIn,
+  redirectAction: routerActions.replace,
+  wrapperDisplayName: 'UserIsAuthenticated',
+  allowRedirectBack: false
+});
 
 const routes = [
   {
@@ -38,7 +55,7 @@ const routes = [
       { path: '/menu', exact: true, component: Menu },
       { path: '/slick', exact: true, component: SimpleSlider },
       { path: '/login', exact: true, component: Login },
-      { path: '/signup', exact: true, component: Signup },
+      { path: '/signup', exact: true, component: isNotAuthenticated(Signup) },
       { path: '/forgot-password', exact: true, component: ForgotPassword },
       { path: '/reset-password', exact: true, component: ResetPassword },
       { path: '/listing', exact: true, component: Listing },
@@ -47,7 +64,7 @@ const routes = [
       { path: '/my-orders', exact: true, component: MyOrder },
       { path: '/order-details', exact: true, component: OrderDetails },
       { path: '/order-summary', exact: true, component: OrderSummary },
-      { path: '/profile', exact: true, component: Profile },
+      { path: '/profile', exact: true, component: isAuthenticated(Profile) },
       { path: '/update-password', exact: true, component: UpdatePassword },
       { path: '/payment', exact: true, component: Payment },
       { path: '/counter', exact: true, component: TestCounter },

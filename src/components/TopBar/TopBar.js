@@ -28,9 +28,10 @@ const onClick = history => e => {
 };
 
 @withRouter
-@connect(({ pincode, userLogin }) => ({
+@connect(({ pincode, userLogin, wishlist }) => ({
   selectedPincode: pincode.selectedPincode,
-  isLoggedIn: userLogin.isLoggedIn
+  isLoggedIn: userLogin.isLoggedIn,
+  wishListCount: wishlist.data.length
 }))
 export default class MenuSidebar extends Component {
   state = {
@@ -60,7 +61,9 @@ export default class MenuSidebar extends Component {
   render() {
     const styles = require('./TopBar.scss');
     const { userPopOver } = this.state;
-    const { selectedPincode, isLoggedIn, history } = this.props;
+    const {
+      selectedPincode, isLoggedIn, history, wishListCount
+    } = this.props;
     return (
       <div>
         <div className={styles.hamburger}>
@@ -97,7 +100,7 @@ export default class MenuSidebar extends Component {
               onClick={isLoggedIn ? onClick(history) : this.onOpenLoginModal}
             >
               <Fav />
-              <span className={styles.count}>0</span>
+              <span className={styles.count}>{wishListCount}</span>
             </Button>
             <ResponsiveModal
               classNames={{ modal: styles.loginModal }}
@@ -153,6 +156,7 @@ export default class MenuSidebar extends Component {
 
 MenuSidebar.defaultProps = {
   selectedPincode: '',
+  wishListCount: 0,
   isLoggedIn: false,
   history: {}
 };
@@ -160,5 +164,6 @@ MenuSidebar.defaultProps = {
 MenuSidebar.propTypes = {
   selectedPincode: PropTypes.string,
   isLoggedIn: PropTypes.bool,
-  history: PropTypes.object
+  history: PropTypes.object,
+  wishListCount: PropTypes.number
 };
