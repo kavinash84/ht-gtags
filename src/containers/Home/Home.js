@@ -42,15 +42,29 @@ import { getCities } from '../../selectors/homepage';
   }
 })
 export default class Home extends Component {
+  state = {
+    showRibbon: true
+  };
+  handleRibbon = () => {
+    this.setState({
+      showRibbon: !this.state.showRibbon
+    });
+  };
   render() {
     const {
       homepageCategories, homepageProducts, banners, cities, hashtags
     } = this.props;
+    const { showRibbon } = this.state;
     return (
       <Section p="0" mb="0">
         <Helmet title="Home" />
         <div className="wrapper">
-          <OfferRibbon title="Use code HOMETOWN to get up to 5% off. Offer ends on 25 th June, 23:59 pm" url="/offer" />
+          <OfferRibbon
+            title="Use code HOMETOWN to get up to 5% off. Offer ends on 25 th June, 23:59 pm"
+            showRibbon={showRibbon}
+            onClick={this.handleRibbon}
+            url="/offer"
+          />
           <Menu />
           <MainSlider data={banners} />
           {homepageCategories.map((category, index) => (
