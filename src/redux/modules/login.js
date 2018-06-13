@@ -57,13 +57,13 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         loggingOut: false,
+        isLoggedIn: false,
         accessToken: null,
         refreshToken: null
       };
     case LOGOUT_FAIL:
       return {
         ...state,
-        isLoggedIn: false,
         loggingOut: false,
         logoutError: action.error
       };
@@ -73,14 +73,17 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 const setToken = ({ client }) => response => {
+  if (response.access_token === null) {
+    cookie.remove('Authorization');
+    client.setJwtToken(null);
+    return;
+  }
   /* setting cookie for server call */
   cookie.set('Authorization', `Bearer ${response.access_token}`);
   client.setJwtToken(response.access_token);
 };
 
-export function isLoaded(globalState) {
-  return globalState.login && globalState.login.loaded;
-}
+export const isLoaded = globalState => globalState.login && globalState.login.loaded;
 
 export const login = data => ({
   types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
@@ -104,12 +107,9 @@ export const loginUserAfterSignUp = data => ({
   data
 });
 
-// export function logout() {
-//   return {
-//     types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
-//     promise: async ({ client, app, restApp }) => {
-//       await app.logout();
-//       setToken({ client, app, restApp })({ accessToken: null });
-//     }
-//   };
-// }
+export const logout = () => ({
+  types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
+  promise: async ({ client }) => {
+    await setToken({ client })({ access_token: null });
+  }
+});

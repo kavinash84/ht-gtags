@@ -15,6 +15,7 @@ import ResponsiveModal from 'components/Modal';
 import Pincode from 'components/Pincode';
 import LoginModal from 'components/Login/LoginModal';
 import { SIGNUP_URL, HOME_URL, LOGIN_URL, MY_WISHLIST_URL, MY_PROFILE_URL } from 'helpers/Constants';
+import { logout } from 'redux/modules/login';
 
 const LogoIcon = require('../../../static/logo.png');
 const CartIcon = require('../../../static/cart-icon.svg');
@@ -27,12 +28,21 @@ const onClick = history => e => {
   history.push(MY_WISHLIST_URL);
 };
 
+const onClickLogout = (dispatcher, history) => e => {
+  e.preventDefault();
+  dispatcher();
+  history.push(HOME_URL);
+};
+
 @withRouter
-@connect(({ pincode, userLogin, wishlist }) => ({
-  selectedPincode: pincode.selectedPincode,
-  isLoggedIn: userLogin.isLoggedIn,
-  wishListCount: wishlist.data.length
-}))
+@connect(
+  ({ pincode, userLogin, wishlist }) => ({
+    selectedPincode: pincode.selectedPincode,
+    isLoggedIn: userLogin.isLoggedIn,
+    wishListCount: wishlist.data.length
+  }),
+  { logoutUser: logout }
+)
 export default class MenuSidebar extends Component {
   state = {
     openPincode: false,
@@ -62,7 +72,7 @@ export default class MenuSidebar extends Component {
     const styles = require('./TopBar.scss');
     const { userPopOver } = this.state;
     const {
-      selectedPincode, isLoggedIn, history, wishListCount
+      selectedPincode, isLoggedIn, history, wishListCount, logoutUser
     } = this.props;
     return (
       <div>
@@ -100,7 +110,7 @@ export default class MenuSidebar extends Component {
               onClick={isLoggedIn ? onClick(history) : this.onOpenLoginModal}
             >
               <Fav />
-              <span className={styles.count}>{wishListCount}</span>
+              <span className={styles.count}>{isLoggedIn ? wishListCount : 0}</span>
             </Button>
             <ResponsiveModal
               classNames={{ modal: styles.loginModal }}
@@ -141,7 +151,7 @@ export default class MenuSidebar extends Component {
                       <Link to={MY_PROFILE_URL}>Profile</Link>
                     </Div>
                     <Div col="6" pl="5px">
-                      <Button to={LOGIN_URL}>Logout !</Button>
+                      <Button onClick={onClickLogout(logoutUser, history)}>Logout !</Button>
                     </Div>
                   </div>
                 )}
@@ -158,12 +168,14 @@ MenuSidebar.defaultProps = {
   selectedPincode: '',
   wishListCount: 0,
   isLoggedIn: false,
-  history: {}
+  history: {},
+  logoutUser: () => {}
 };
 
 MenuSidebar.propTypes = {
   selectedPincode: PropTypes.string,
   isLoggedIn: PropTypes.bool,
   history: PropTypes.object,
-  wishListCount: PropTypes.number
+  wishListCount: PropTypes.number,
+  logoutUser: PropTypes.func
 };
