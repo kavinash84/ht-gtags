@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { provideHooks } from 'redial';
 import PropTypes from 'prop-types';
 import ProfileFormContainer from 'hometown-components/lib/Forms/ProfileForm';
 import Section from 'hometown-components/lib/Section';
@@ -8,20 +7,12 @@ import Row from 'hometown-components/lib/Row';
 import Heading from 'hometown-components/lib/Heading';
 import Div from 'hometown-components/lib/Div';
 import { validateEmail, validateMobile, isBlank } from 'js-utility-functions';
-import { updateUserProfile, loadUserProfile, isLoaded as isUserProfileLoaded } from 'redux/modules/profile';
+import { updateUserProfile } from 'redux/modules/profile';
 
-const mapStateToProps = ({ profile }) => ({
+@connect(({ profile }) => ({
   profile: profile.data
-});
-
-@provideHooks({
-  fetch: async ({ store: { dispatch, getState } }) => {
-    if (!isUserProfileLoaded(getState())) {
-      await dispatch(loadUserProfile()).catch(error => console.log(error));
-    }
-  }
-})
-class ProfileForm extends Component {
+}))
+export default class ProfileForm extends Component {
   static propTypes = {
     profile: PropTypes.shape({
       contact_number: PropTypes.string,
@@ -50,7 +41,6 @@ class ProfileForm extends Component {
 
   componentWillMount() {
     const { profile: { full_name: fullName, email, contact_number: phone } } = this.props;
-    console.log(this.props);
     this.setState({
       fullName: (fullName && fullName.trim()) || '',
       email,
@@ -155,5 +145,3 @@ class ProfileForm extends Component {
     );
   }
 }
-
-export default connect(mapStateToProps, null)(ProfileForm);
