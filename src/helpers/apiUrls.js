@@ -10,3 +10,6 @@ export const HASHTAGS = 'tesla/hashtags';
 /* Authentication */
 export const LOGIN = 'tesla/authentication/login';
 export const SIGNUP = 'tesla/users/sign-up';
+
+/* Account */
+export const UPDATE_PASSWORD = 'tesla/users/update-password';

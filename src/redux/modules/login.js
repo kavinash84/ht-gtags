@@ -1,3 +1,4 @@
+import cookie from 'js-cookie';
 import { LOGIN as LOGIN_API } from 'helpers/apiUrls';
 import { clientId, clientSecret } from 'helpers/Constants';
 
@@ -72,6 +73,8 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 const setToken = ({ client }) => response => {
+  /* setting cookie for server call */
+  cookie.set('Authorization', `Bearer ${response.access_token}`);
   client.setJwtToken(response.access_token);
 };
 

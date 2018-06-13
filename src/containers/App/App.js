@@ -10,6 +10,7 @@ import Helmet from 'react-helmet';
 import { wrapDispatch } from 'multireducer';
 import { loadCategories, loadMainMenu, loadBanners, isLoaded as isSectionLoaded } from 'redux/modules/homepage';
 import { loginUserAfterSignUp } from 'redux/modules/login';
+import { loadWishlist, isLoaded as isWishListLoaded } from 'redux/modules/wishlist';
 import config from 'config';
 import Theme from 'hometown-components/lib/Theme';
 
@@ -23,6 +24,11 @@ import Theme from 'hometown-components/lib/Theme';
     }
     if (!isSectionLoaded(getState(), 'menu')) {
       await wrapDispatch(dispatch, 'menu')(loadMainMenu()).catch(error => console.log(error));
+    }
+  },
+  defer: ({ store: { dispatch, getState } }) => {
+    if (getState().userLogin.isLoggedIn && !isWishListLoaded(getState())) {
+      dispatch(loadWishlist()).catch(error => console.log(error()));
     }
   }
 })
@@ -44,7 +50,8 @@ export default class App extends Component {
     pushState: PropTypes.func.isRequired,
     loginUser: PropTypes.func.isRequired,
     signUp: PropTypes.shape({
-      response: PropTypes.obj
+      response: PropTypes.obj,
+      loaded: PropTypes.bool
     }),
     login: PropTypes.shape({
       accessToken: PropTypes.string,
@@ -52,17 +59,19 @@ export default class App extends Component {
       isLoggedIn: PropTypes.bool
     })
   };
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  };
 
   static defaultProps = {
     login: {
       isLoggedIn: false
     },
-    signUp: {}
+    signUp: {
+      loaded: false
+    }
   };
 
-  static contextTypes = {
-    store: PropTypes.object.isRequired
-  };
   componentDidMount() {
     /* Need to implement auto login when user has saved credentials to chrome */
     // if (window && window.naviagtor) {
@@ -73,12 +82,14 @@ export default class App extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    const { dispatch } = this.context.store;
     const { login: { isLoggedIn } } = this.props;
-    const { signUp } = nextProps;
-    if (!isLoggedIn && signUp.response.signup_complete) {
-      const { dispatch } = this.context.store;
-      const { signUp: { response }, loginUser } = nextProps;
-      if (response.signup_complete) dispatch(loginUser(response.token));
+    if (nextProps.signUp && nextProps.signUp.loaded) {
+      const { signUp } = nextProps;
+      if (!isLoggedIn && signUp.response.signup_complete) {
+        const { signUp: { response }, loginUser } = nextProps;
+        if (response.signup_complete) dispatch(loginUser(response.token));
+      }
     }
     if (!isLoggedIn && nextProps.login.isLoggedIn) {
       const query = new URLSearchParams(this.props.location.search);

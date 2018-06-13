@@ -6,7 +6,7 @@ import ListingContainer from 'components/Listing';
 import { connect } from 'react-redux';
 import Menu from 'containers/MenuNew/index';
 import LoadMore from 'components/LoadMore';
-import { getWishList } from 'selectors/wishlist';
+import { getSKUList } from 'selectors/wishlist';
 import {
   load as loadListing,
   loadSearchQuery,
@@ -34,7 +34,8 @@ import ProductsNotFound from 'components/Listing/EmptyList';
 @connect(state => ({
   loading: state.products.loading,
   loaded: state.products.loaded,
-  wishList: getWishList(state),
+  wishListedSKUs: getSKUList(state.wishlist),
+  wishListData: state.wishlist.data,
   products: getProducts(state),
   categoryName: getCategoryName(state),
   productCount: getProductCount(state)
@@ -46,40 +47,24 @@ export default class Listing extends Component {
     loaded: PropTypes.bool,
     products: PropTypes.array,
     categoryName: PropTypes.string,
-    productCount: PropTypes.string
+    productCount: PropTypes.string,
+    wishListedSKUs: PropTypes.array,
+    wishListData: PropTypes.array
   };
   static defaultProps = {
     loading: false,
     loaded: true,
     products: [],
     categoryName: '',
-    productCount: '0'
+    productCount: '0',
+    wishListedSKUs: [],
+    wishListData: []
   };
-  state = {
-    wishListState: []
-  };
-  /* TODO Fix the rehydrate store issue [Server client Mismatch] */
-  /* TODO Sync Store Globally Instead of LifeCycle Methods */
-  /* eslint-disable */
-  componentDidMount() {
-    const { wishList } = this.props;
-    this.setState({
-      wishListState: wishList
-    });
-  }
-
-  /* eslint-enable */
-  componentWillReceiveProps(nextProps) {
-    const { wishList } = nextProps;
-    this.setState({
-      wishListState: wishList
-    });
-  }
   render() {
     const {
       loading, loaded, products, categoryName, productCount
     } = this.props;
-    const { wishListState } = this.state;
+    const { wishListedSKUs, wishListData } = this.props;
     return (
       <div>
         <Menu filter search />
@@ -88,7 +73,8 @@ export default class Listing extends Component {
           products.length && (
           <div>
             <ListingContainer
-              wishList={wishListState}
+              wishList={wishListedSKUs}
+              wishListData={wishListData}
               products={products}
               categoryName={categoryName}
               productCount={productCount}

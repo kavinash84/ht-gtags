@@ -1,3 +1,5 @@
+import { isBlank } from 'js-utility-functions';
+
 const isEmpty = value => value === undefined || value === null || value === '';
 const join = rules => (value, data, params) => rules.map(rule => rule(value, data, params)).filter(error => !!error)[0];
 
@@ -67,3 +69,12 @@ export function createValidator(rules, params) {
     return errors;
   };
 }
+
+/* Need to move */
+
+export const validatePassword = (value, message, validLength = 8) => {
+  if (isBlank(value) || value.length < validLength) {
+    return { error: true, errorMessage: message };
+  }
+  return { error: false, errorMessage: '' };
+};

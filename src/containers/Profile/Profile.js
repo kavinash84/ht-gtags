@@ -5,7 +5,7 @@ import Div from 'hometown-components/lib/Div';
 import Menu from 'containers/MenuNew/index';
 import MyMenu from 'components/MyMenu';
 import ProfileForm from 'components/ProfileForm';
-import UpdatePasswordForm from 'components/UpdatePasswordForm';
+import UpdatePasswordForm from 'containers/UpdatePassword';
 
 export default class ProfileFormContainer extends Component {
   render() {
