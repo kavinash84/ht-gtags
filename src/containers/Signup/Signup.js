@@ -85,7 +85,7 @@ export default class SignupFormContainer extends Component {
     dispatch(signUp(this.state));
   };
   render() {
-    const styles = require('./index.scss');
+    const styles = require('../Login/index.scss');
 
     const {
       email,
@@ -103,7 +103,7 @@ export default class SignupFormContainer extends Component {
         <Menu />
         <div className="wrapper">
           <Container pr="0" pl="0">
-            <div className={styles.signupWrapper}>
+            <div className={styles.userWrapper}>
               <Row display="block" mr="0" ml="0">
                 <Div col={5}>
                   <div className={styles.imgWrapper}>
@@ -119,44 +119,46 @@ export default class SignupFormContainer extends Component {
                   </div>
                 </Div>
                 <Div col={7} p="1.25rem 3.5rem" bg="#f8f8f8">
-                  <Row display="block" mr="0" ml="0">
-                    <Div col="12" ta="right">
-                      <Link to={LOGIN_URL}>
-                        <Label fontWeight="light" color="primary">
-                          Existing User? Log in now
-                        </Label>
-                      </Link>
-                    </Div>
-                  </Row>
-                  <Row display="block" mr="0" ml="0">
-                    <Div mt="0">
-                      <SignupForm
-                        email={email}
-                        onChangeEmail={this.onChangeEmail}
-                        emailFeedBackError={emailError}
-                        emailFeedBackMessage={emailErrorMessage}
-                        phone={phone}
-                        onChangePhone={this.onChangePhone}
-                        phoneFeedBackError={phoneError}
-                        phoneFeedBackMessage={phoneErrorMessage}
-                        password={password}
-                        onChangePassword={this.onChangePassword}
-                        passwordFeedBackError={passwordError}
-                        passwordFeedBackMessage={passwordErrorMessage}
-                        onSubmitSignup={this.onSubmitSignup}
-                      />
-                    </Div>
-                  </Row>
-                  <Row display="block" mr="0" ml="0" pt="0.625rem">
-                    <Div col="6">
-                      <Link to={FORGOT_PASSWORD_URL}>
-                        <Label fontWeight="light" color="primary">
-                          Forgot Password?
-                        </Label>
-                      </Link>
-                    </Div>
-                    <Div col="6" ta="right" />
-                  </Row>
+                  <div className={styles.formBlock}>
+                    <Row display="block" mr="0" ml="0">
+                      <Div col="12" ta="right">
+                        <Link to={LOGIN_URL}>
+                          <Label fontWeight="light" color="primary">
+                            Existing User? Log in now
+                          </Label>
+                        </Link>
+                      </Div>
+                    </Row>
+                    <Row display="block" mr="0" ml="0">
+                      <Div mt="0">
+                        <SignupForm
+                          email={email}
+                          onChangeEmail={this.onChangeEmail}
+                          emailFeedBackError={emailError}
+                          emailFeedBackMessage={emailErrorMessage}
+                          phone={phone}
+                          onChangePhone={this.onChangePhone}
+                          phoneFeedBackError={phoneError}
+                          phoneFeedBackMessage={phoneErrorMessage}
+                          password={password}
+                          onChangePassword={this.onChangePassword}
+                          passwordFeedBackError={passwordError}
+                          passwordFeedBackMessage={passwordErrorMessage}
+                          onSubmitSignup={this.onSubmitSignup}
+                        />
+                      </Div>
+                    </Row>
+                    <Row display="block" mr="0" ml="0" pt="0.625rem">
+                      <Div col="6">
+                        <Link to={FORGOT_PASSWORD_URL}>
+                          <Label fontWeight="light" color="primary">
+                            Forgot Password?
+                          </Label>
+                        </Link>
+                      </Div>
+                      <Div col="6" ta="right" />
+                    </Row>
+                  </div>
                   {/* <Row display="block" mr="0" ml="0" pt="0.3125rem">
                     <Div col="12">
                       <Label fontWeight="medium" color="error" display="block" ta="center">

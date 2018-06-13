@@ -88,7 +88,7 @@ export default class ResetPasswordContainer extends Component {
   };
 
   render() {
-    const styles = require('./index.scss');
+    const styles = require('../Login/index.scss');
 
     const {
       newPwd, confirmPwd, newPwdError, newPwdErrorMessage, confirmPwdError, confirmPwdErrorMessage
@@ -98,7 +98,7 @@ export default class ResetPasswordContainer extends Component {
         <Menu />
         <div className="wrapper">
           <Container pr="0" pl="0">
-            <div className={styles.resetPasswordWrapper}>
+            <div className={styles.userWrapper}>
               <Row display="block" mr="0" ml="0">
                 <Div col={5}>
                   <div className={styles.imgWrapper}>
@@ -112,7 +112,7 @@ export default class ResetPasswordContainer extends Component {
                   </div>
                 </Div>
                 <Div col={7} p="1.25rem 3.5rem" bg="#f8f8f8">
-                  <div className={styles.formBlock}>
+                  <div className={`${styles.formBlock} ${styles.resetForm}`}>
                     <Row display="block" mr="0" ml="0">
                       <Div mt="0">
                         <ResetPasswordForm
