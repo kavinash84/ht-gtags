@@ -12,6 +12,5 @@ export const LOGIN = 'tesla/authentication/login';
 export const SIGNUP = 'tesla/users/sign-up';
 
 /* Account */
-export const UPDATE_PASSWORD = 'tesla/users/update-password';
-
-export const UPDATE_PROFILE = 'tesla/users/update-profile';
+export const USERPROFILE = 'tesla/users/details';
+export const UPDATEPROFILE = 'tesla/users/update-profile';

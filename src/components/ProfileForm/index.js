@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { provideHooks } from 'redial';
 import PropTypes from 'prop-types';
 import ProfileFormContainer from 'hometown-components/lib/Forms/ProfileForm';
 import Section from 'hometown-components/lib/Section';
@@ -7,28 +8,32 @@ import Row from 'hometown-components/lib/Row';
 import Heading from 'hometown-components/lib/Heading';
 import Div from 'hometown-components/lib/Div';
 import { validateEmail, validateMobile, isBlank } from 'js-utility-functions';
-import { updateProfile, loadProfile, isLoaded as isProfileLoaded } from 'redux/modules/profile';
+import { updateUserProfile, loadUserProfile, isLoaded as isUserProfileLoaded } from 'redux/modules/profile';
 
-@connect(state => ({
-  profile: state.profile,
-  isLoggedIn: state.userLogin.isLoggedIn
-}))
-export default class ProfileForm extends Component {
+const mapStateToProps = ({ profile }) => ({
+  profile: profile.data
+});
+
+@provideHooks({
+  fetch: async ({ store: { dispatch, getState } }) => {
+    if (!isUserProfileLoaded(getState())) {
+      await dispatch(loadUserProfile()).catch(error => console.log(error));
+    }
+  }
+})
+class ProfileForm extends Component {
   static propTypes = {
     profile: PropTypes.shape({
-      loaded: PropTypes.bool,
-      user: PropTypes.obj
-    }),
-    isLoggedIn: PropTypes.bool
+      contact_number: PropTypes.string,
+      email: PropTypes.string,
+      full_name: PropTypes.string
+    })
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
   static defaultProps = {
-    profile: {
-      loaded: false
-    },
-    isLoggedIn: false
+    profile: {}
   };
 
   state = {
@@ -43,26 +48,15 @@ export default class ProfileForm extends Component {
     fullNameErrorMessage: ''
   };
 
-  componentDidMount() {
+  componentWillMount() {
+    const { profile: { full_name: fullName, email, contact_number: phone } } = this.props;
     console.log(this.props);
-    const { isLoggedIn } = this.props;
-    const { dispatch, getState } = this.context.store;
-    if (isLoggedIn && !isProfileLoaded(getState())) {
-      dispatch(loadProfile()).catch(error => console.log(error()));
-    }
+    this.setState({
+      fullName: (fullName && fullName.trim()) || '',
+      email,
+      phone: phone || ''
+    });
   }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.profile && nextProps.profile.loaded) {
-      const { full_name: fullName, email, contact_number: phone } = nextProps.profile.user;
-      this.setState({
-        fullName,
-        email,
-        phone
-      });
-    }
-  }
-
   onChangePhone = e => {
     const { target: { value } } = e;
     const checkError = validateMobile(value, 'Mobile should be 10 digits');
@@ -98,8 +92,7 @@ export default class ProfileForm extends Component {
       });
     }
     const { dispatch } = this.context.store;
-
-    dispatch(updateProfile(this.state));
+    dispatch(updateUserProfile(this.state));
   };
 
   onChangeEmail = e => {
@@ -162,3 +155,5 @@ export default class ProfileForm extends Component {
     );
   }
 }
+
+export default connect(mapStateToProps, null)(ProfileForm);
