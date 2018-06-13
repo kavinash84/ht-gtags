@@ -11,6 +11,7 @@ import { wrapDispatch } from 'multireducer';
 import { loadCategories, loadMainMenu, loadBanners, isLoaded as isSectionLoaded } from 'redux/modules/homepage';
 import { loginUserAfterSignUp } from 'redux/modules/login';
 import { loadWishlist, isLoaded as isWishListLoaded } from 'redux/modules/wishlist';
+import { loadProfile, isLoaded as isProfileLoaded } from 'redux/modules/profile';
 import config from 'config';
 import Theme from 'hometown-components/lib/Theme';
 
@@ -28,7 +29,10 @@ import Theme from 'hometown-components/lib/Theme';
   },
   defer: ({ store: { dispatch, getState } }) => {
     if (getState().userLogin.isLoggedIn && !isWishListLoaded(getState())) {
-      dispatch(loadWishlist()).catch(error => console.log(error()));
+      dispatch(loadWishlist()).catch(error => console.log(error));
+    }
+    if (getState().userLogin.isLoggedIn && !isProfileLoaded(getState())) {
+      dispatch(loadProfile()).catch(error => console.log(error));
     }
   }
 })
@@ -83,11 +87,16 @@ export default class App extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { dispatch } = this.context.store;
-    const { login: { isLoggedIn } } = this.props;
+    const {
+      login: { isLoggedIn }
+    } = this.props;
     if (nextProps.signUp && nextProps.signUp.loaded) {
       const { signUp } = nextProps;
       if (!isLoggedIn && signUp.response.signup_complete) {
-        const { signUp: { response }, loginUser } = nextProps;
+        const {
+          signUp: { response },
+          loginUser
+        } = nextProps;
         if (response.signup_complete) dispatch(loginUser(response.token));
       }
     }
