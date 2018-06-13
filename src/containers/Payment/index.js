@@ -86,7 +86,7 @@ export default class PaymentMethodContainer extends Component {
       passwordErrorMessage
     } = this.state;
     return (
-      <div className={styles.signupWrapper}>
+      <div className={styles.paymentWrapper}>
         <Section p="0" mb="0.3125rem">
           <div className={styles.imgWrapper}>
             <Img src="http://via.placeholder.com/720x480" />
