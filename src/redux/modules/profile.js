@@ -1,21 +1,37 @@
-// import { UPDATE_PROFILE as UPDATE_PROFILE_API } from 'helpers/apiUrls';
+import { UPDATE_PROFILE as UPDATE_PROFILE_API } from 'helpers/apiUrls';
 // import { clientId, clientSecret } from 'helpers/Constants';
 
 const UPDATE_PROFILE = 'profile/UPDATE_PROFILE';
 const UPDATE_PROFILE_SUCCESS = 'profile/UPDATE_PROFILE_SUCCESS';
 const UPDATE_PROFILE_FAIL = 'profile/UPDATE_PROFILE_FAIL';
 
-const initialState = {
-  name: 'John Doe',
-  email: 'john@hometown.in',
-  phone: '1234567890',
-  updatingProfile: false,
-  updateError: true,
-  updateMessage: ''
-};
+const LOAD_PROFILE = 'profile/LOAD_PROFILE';
+const LOAD_PROFILE_SUCCESS = 'profile/LOAD_PROFILE_SUCCESS';
+const LOAD_PROFILE_FAIL = 'profile/LOAD_PROFILE_FAIL';
+
+const initialState = {};
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
+    case LOAD_PROFILE:
+      return {
+        ...state,
+        loading: true
+      };
+    case LOAD_PROFILE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        user: action.result
+      };
+    case LOAD_PROFILE_FAIL:
+      return {
+        ...state,
+        loading: false,
+        loaded: false,
+        error: action.error
+      };
     case UPDATE_PROFILE:
       return {
         ...state,
@@ -26,28 +42,40 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         updatingProfile: false,
         updateError: false,
-        updateMessage: action.result.message //
+        user: action.result
       };
     case UPDATE_PROFILE_FAIL:
       return {
         ...state,
         updatingProfile: false,
-        updateError: action.error //
+        updateError: action.error
       };
     default:
       return state;
   }
 }
 
+export const isLoaded = globalState => globalState.profile && globalState.wishlist.loaded;
+
 export const updateProfile = data => ({
   types: [UPDATE_PROFILE, UPDATE_PROFILE_SUCCESS, UPDATE_PROFILE_FAIL],
-  promise: async () => {
+  promise: async ({ client }) => {
     try {
-      console.log('Logged In  Profile Reducer', data);
-      // Will Do POST With DATA
+      const { email, fullName, phone } = data;
+      const postData = {
+        email,
+        mobile: phone,
+        full_name: fullName
+      };
+      const response = await client.put(UPDATE_PROFILE_API, postData);
+      return response;
     } catch (error) {
-      console.log('Logged In Profile Reducer catch', error);
       throw error;
     }
   }
+});
+
+export const loadProfile = () => ({
+  types: [LOAD_PROFILE, LOAD_PROFILE_SUCCESS, LOAD_PROFILE_FAIL],
+  promise: ({ client }) => client.get('tesla/users/details')
 });

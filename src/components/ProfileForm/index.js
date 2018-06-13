@@ -7,54 +7,61 @@ import Row from 'hometown-components/lib/Row';
 import Heading from 'hometown-components/lib/Heading';
 import Div from 'hometown-components/lib/Div';
 import { validateEmail, validateMobile, isBlank } from 'js-utility-functions';
-import { updateProfile } from 'redux/modules/profile';
+import { updateProfile, loadProfile, isLoaded as isProfileLoaded } from 'redux/modules/profile';
 
-@connect(({ updateprofile: { name, email, phone } }) => ({
-  name,
-  email,
-  phone
+@connect(state => ({
+  profile: state.profile
 }))
 export default class ProfileForm extends Component {
   static propTypes = {
-    name: PropTypes.string,
-    email: PropTypes.string,
-    phone: PropTypes.string
+    profile: PropTypes.shape({
+      loaded: PropTypes.bool,
+      user: PropTypes.obj
+    })
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
   static defaultProps = {
-    name: '',
-    email: '',
-    phone: ''
+    profile: {
+      loaded: false
+    }
   };
 
-  constructor(props) {
-    super(props);
-    const { name, email, phone } = props;
-    this.state = {
-      email,
-      emailError: false,
-      emailErrorMessage: '',
-      phone,
-      phoneError: false,
-      phoneErrorMessage: '',
-      fullName: name || '',
-      fullNameError: false,
-      fullNameErrorMessage: ''
-    };
-  }
-  onChangeEmail = e => {
-    const { target: { value } } = e;
-    const checkError = validateEmail(value, 'Enter valid email');
-    this.setState({
-      email: value,
-      emailError: checkError.error,
-      emailErrorMessage: checkError.error ? checkError.errorMessage : ''
-    });
+  state = {
+    email: '',
+    emailError: false,
+    emailErrorMessage: '',
+    phone: '',
+    phoneError: false,
+    phoneErrorMessage: '',
+    fullName: '',
+    fullNameError: false,
+    fullNameErrorMessage: ''
   };
+
+  componentDidMount() {
+    const { dispatch, getState } = this.context.store;
+    if (getState().userLogin.isLoggedIn && !isProfileLoaded(getState())) {
+      dispatch(loadProfile()).catch(error => console.log(error()));
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.profile && nextProps.profile.loaded) {
+      const { full_name: fullName, email, contact_number: phone } = nextProps.profile.user;
+      this.setState({
+        fullName,
+        email,
+        phone
+      });
+    }
+  }
+
   onChangePhone = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = validateMobile(value, 'Mobile should be 10 digits');
     this.setState({
       phone: value,
@@ -63,7 +70,9 @@ export default class ProfileForm extends Component {
     });
   };
   onChangeFullName = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = isBlank(value);
     this.setState({
       fullName: value,
@@ -72,7 +81,6 @@ export default class ProfileForm extends Component {
     });
   };
   onSubmitProfile = e => {
-    console.log('In Submit ');
     e.preventDefault();
     const { email, fullName, phone } = this.state;
     const checkEmail = validateEmail(email, 'Invalid Email');
@@ -88,13 +96,25 @@ export default class ProfileForm extends Component {
         fullNameErrorMessage: checkFullName ? "Name can't be blank" : ''
       });
     }
-    console.log(this.state);
     const { dispatch } = this.context.store;
+
     dispatch(updateProfile(this.state));
   };
+
+  onChangeEmail = e => {
+    const {
+      target: { value }
+    } = e;
+    const checkError = validateEmail(value, 'Enter valid email');
+    this.setState({
+      email: value,
+      emailError: checkError.error,
+      emailErrorMessage: checkError.error ? checkError.errorMessage : ''
+    });
+  };
+
   render() {
     const styles = require('./index.scss');
-
     const {
       email,
       phone,
@@ -106,6 +126,7 @@ export default class ProfileForm extends Component {
       fullNameError,
       fullNameErrorMessage
     } = this.state;
+
     return (
       <div className={styles.formContainer}>
         <Section mb="0.3125rem" pr="0.5rem" pl="0.5rem">
