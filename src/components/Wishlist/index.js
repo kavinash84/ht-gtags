@@ -29,7 +29,7 @@ const Wishlist = ({ list, toggleWishList, wishList }) => (
     <Section p="0" pt="1.25rem" mb="0">
       <Container type="container" pr="0.5rem" pl="0.5rem">
         {list.map(item => (
-          <div className={styles.wishlistWrapper}>
+          <div key={item.product_info.id} className={styles.wishlistWrapper}>
             <Product
               key={item.product_info.id}
               name={item.product_info.data.name}
