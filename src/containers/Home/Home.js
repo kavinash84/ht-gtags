@@ -5,6 +5,7 @@ import { provideHooks } from 'redial';
 import { wrapDispatch } from 'multireducer';
 import Menu from 'containers/MenuNew/index';
 import MainSlider from 'components/MainSlider';
+import OfferRibbon from 'components/OfferRibbon';
 import CategoryCarousel from 'components/CategoryCarousel';
 import ProductCarousel from 'components/ProductCarousel';
 import Section from 'hometown-components/lib/Section';
@@ -49,6 +50,7 @@ export default class Home extends Component {
       <Section p="0" mb="0">
         <Helmet title="Home" />
         <div className="wrapper">
+          <OfferRibbon title="Use code HOMETOWN to get up to 5% off. Offer ends on 25 th June, 23:59 pm" url="/offer" />
           <Menu />
           <MainSlider data={banners} />
           {homepageCategories.map((category, index) => (
