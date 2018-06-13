@@ -6,7 +6,7 @@ import Div from 'hometown-components/lib/Div';
 import Img from 'hometown-components/lib/Img';
 import { Link } from 'react-router-dom';
 import { Label } from 'hometown-components/lib/Label';
-import { SIGNUP_URL } from 'helpers/Constants';
+import { SIGNUP_URL, FORGOT_PASSWORD_URL } from 'helpers/Constants';
 
 // const FavIcon = require('../../../static/fav-icon.svg');
 const GoogleIcon = require('../../../static/google-icon.png');
@@ -41,7 +41,7 @@ const LoginModal = () => (
     </Row>
     <Row display="block" mr="0" ml="0" pt="0.625rem">
       <Div col="6">
-        <Link to="/">
+        <Link to={FORGOT_PASSWORD_URL}>
           <Label fontWeight="light" color="primary">
             Forgot Password?
           </Label>
