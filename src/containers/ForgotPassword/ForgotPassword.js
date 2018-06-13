@@ -14,6 +14,7 @@ import Img from 'hometown-components/lib/Img';
 import { validateEmail } from 'js-utility-functions';
 
 const SidebarImg = require('../../../static/login-side-thumb.png');
+const ForgotPasswordImg = require('../../../static/forgot-password-icon.png');
 
 @withRouter
 export default class ForgotPasswordContainer extends Component {
@@ -49,7 +50,7 @@ export default class ForgotPasswordContainer extends Component {
     }
   };
   render() {
-    const styles = require('./index.scss');
+    const styles = require('../Login/index.scss');
 
     const { email, emailError, emailErrorMessage } = this.state;
     return (
@@ -57,7 +58,7 @@ export default class ForgotPasswordContainer extends Component {
         <Menu />
         <div className="wrapper">
           <Container pr="0" pl="0">
-            <div className={styles.forgotPasswordWrapper}>
+            <div className={styles.userWrapper}>
               <Row display="block" mr="0" ml="0">
                 <Div col={5}>
                   <div className={styles.imgWrapper}>
@@ -71,24 +72,33 @@ export default class ForgotPasswordContainer extends Component {
                   </div>
                 </Div>
                 <Div col={7} p="1.25rem 3.5rem" bg="#f8f8f8">
-                  <Row display="block" mr="0" ml="0">
-                    <Div mt="0">
-                      <ForgotPasswordForm
-                        email={email}
-                        onChangeEmail={this.onChangeEmail}
-                        emailFeedBackError={emailError}
-                        emailFeedBackMessage={emailErrorMessage}
-                        onSubmitForgot={this.onSubmitForgot}
-                      />
-                    </Div>
-                  </Row>
-                  {/* <Row display="block" mr="0" ml="0" pt="0.3125rem">
-                    <Div col="12">
-                      <Label fontWeight="medium" color="error" display="block" ta="center">
-                        Message
-                      </Label>
-                    </Div>
-                  </Row> */}
+                  <div className={`${styles.formBlock} ${styles.forgotForm}`}>
+                    <Row display="block" mr="0" ml="0">
+                      <Div mt="0">
+                        <ForgotPasswordForm
+                          email={email}
+                          onChangeEmail={this.onChangeEmail}
+                          emailFeedBackError={emailError}
+                          emailFeedBackMessage={emailErrorMessage}
+                          onSubmitForgot={this.onSubmitForgot}
+                        />
+                      </Div>
+                    </Row>
+                  </div>
+                  <div className={`${styles.responseBlock} ${styles.hide}`}>
+                    <img src={ForgotPasswordImg} alt="" />
+                    <Row display="block" mr="0" ml="0">
+                      <Div mt="0">
+                        <div className={styles.content}>
+                          <p>
+                            An email has been sent to <br />
+                            <b>test123@gmail.com</b>
+                          </p>
+                          <p>Please follow the instructions to reset your password</p>
+                        </div>
+                      </Div>
+                    </Row>
+                  </div>
                 </Div>
               </Row>
             </div>
