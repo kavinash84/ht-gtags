@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { provideHooks } from 'redial';
+import Empty from 'hometown-components/lib/Empty';
+import Img from 'hometown-components/lib/Img';
+import Section from 'hometown-components/lib/Section';
 import ListingContainer from 'components/Listing';
 import { connect } from 'react-redux';
 import Menu from 'containers/MenuNew/index';
@@ -17,7 +20,8 @@ import {
 import { getProducts, getCategoryName, getProductCount } from 'selectors/products';
 import { resetLoadMore } from 'redux/modules/loadmore';
 import { encodeCategory } from 'utils/helper';
-import ProductsNotFound from 'components/Listing/EmptyList';
+
+const SearchEmptyIcon = require('../../../static/search-empty.jpg');
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState }, params, location }) => {
@@ -68,7 +72,20 @@ export default class Listing extends Component {
     return (
       <div>
         <Menu filter search />
-        {!loading && products.length === 0 && <ProductsNotFound />}
+        {!loading &&
+          products.length === 0 && (
+          <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
+            <Empty
+              title="Sorry no results found"
+              subTitle="Please check the selling or by a different search"
+              btnName="Search Again"
+              url="/"
+              bg="#fafafa"
+            >
+              <Img src={SearchEmptyIcon} width="initial" m="auto" alt="Sorry no results found" />
+            </Empty>
+          </Section>
+        )}
         {loaded &&
           products.length && (
           <div>

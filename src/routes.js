@@ -16,9 +16,7 @@ import {
   PaymentOptions,
   ReviewOrder,
   Stores,
-  WishlistEmpty,
   CartEmpty,
-  SearchEmpty,
   ProductNotFound,
   NotFound
 } from 'containers';
@@ -75,8 +73,6 @@ const routes = [
       { path: '/search', exact: false, component: Listing },
       { path: '/pincode', exact: true, component: Pincode },
       { path: '/stores', exact: true, component: Stores },
-      { path: '/wishlist-empty', exact: true, component: WishlistEmpty },
-      { path: '/search-empty', exact: true, component: SearchEmpty },
       { path: '/product-not-found', exact: true, component: ProductNotFound },
       { path: '/cart-empty', exact: true, component: CartEmpty },
       {
