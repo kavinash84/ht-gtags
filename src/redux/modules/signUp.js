@@ -8,6 +8,8 @@ const SIGNUP_FAIL = 'signUp/SIGNUP_FAIL';
 const initialState = {
   loaded: false,
   isLoggedIn: false,
+  error: false,
+  errorMessage: null,
   response: ''
 };
 
@@ -27,13 +29,14 @@ export default function reducer(state = initialState, action = {}) {
         response: action.result,
         accessToken: action.result.token.access_token,
         refreshToken: action.result.token.refresh_token,
-        signUpError: ''
+        errorMessage: null
       };
     case SIGNUP_FAIL:
       return {
         ...state,
         loading: false,
-        signUpError: action.error
+        error: true,
+        errorMessage: action.error
       };
     default:
       return state;
