@@ -11,11 +11,13 @@ import Row from 'hometown-components/lib/Row';
 import Heading from 'hometown-components/lib/Heading';
 import Div from 'hometown-components/lib/Div';
 import Img from 'hometown-components/lib/Img';
+import Empty from 'hometown-components/lib/Empty';
 import { isBlank } from 'js-utility-functions';
 import { validatePassword } from 'utils/validation';
 import { updatePassword } from 'redux/modules/updatepassword';
 
 const SidebarImg = require('../../../static/login-side-thumb.png');
+const PasswordExpiredIcon = require('../../../static/password-expired-icon.png');
 
 @connect(state => ({
   updatingPassword: state.updatingPassword,
@@ -133,6 +135,12 @@ export default class ResetPasswordContainer extends Component {
               </Row>
             </div>
           </Container>
+
+          <Section className="hide" display="flex" p="0.625rem" pt="1.25rem" mb="0">
+            <Empty title="Password link is expired !!" subTitle="" btnName="Resend Link" url="/" bg="#fafafa">
+              <Img src={PasswordExpiredIcon} width="initial" m="auto" alt="Password link is expired !!" />
+            </Empty>
+          </Section>
         </div>
         <Footer />
       </Section>
