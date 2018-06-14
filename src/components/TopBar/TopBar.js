@@ -49,6 +49,13 @@ export default class MenuSidebar extends Component {
     openLogin: false,
     userPopOver: false
   };
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isLoggedIn) {
+      this.setState({
+        openLogin: false
+      });
+    }
+  }
   onOpenPincodeModal = () => {
     this.setState({ openPincode: true });
   };
