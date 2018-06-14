@@ -5,9 +5,7 @@ const UPDATE_PASSWORD_SUCCESS = 'updatePassword/UPDATE_PASSWORD_SUCCESS';
 const UPDATE_PASSWORD_FAIL = 'updatePassword/UPDATE_PASSWORD_FAIL';
 
 const initialState = {
-  updatingPassword: false,
-  updateError: true,
-  updateMessage: ''
+  loaded: false
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -15,27 +13,31 @@ export default function reducer(state = initialState, action = {}) {
     case UPDATE_PASSWORD:
       return {
         ...state,
-        updatingPassword: true
+        loading: true
       };
     case UPDATE_PASSWORD_SUCCESS:
       return {
         ...state,
-        updatingPassword: false,
-        updateError: false,
-        updateMessage: action.result.message
+        loading: false,
+        loaded: true,
+        passwordUpdated: true,
+        error: '',
+        errorMessage: ''
       };
     case UPDATE_PASSWORD_FAIL:
       return {
         ...state,
-        updatingPassword: false,
-        updateError: action.error
+        loading: false,
+        passwordUpdated: false,
+        error: true,
+        errorMessage: action.error
       };
     default:
       return state;
   }
 }
 
-export const updatePassword = data => ({
+export const updateUserPassword = data => ({
   types: [UPDATE_PASSWORD, UPDATE_PASSWORD_SUCCESS, UPDATE_PASSWORD_FAIL],
   promise: async ({ client }) => {
     try {

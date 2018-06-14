@@ -8,31 +8,32 @@ import Heading from 'hometown-components/lib/Heading';
 import Div from 'hometown-components/lib/Div';
 import { isBlank } from 'js-utility-functions';
 import { validatePassword } from 'utils/validation';
-import { updatePassword } from 'redux/modules/updatepassword';
+import { updateUserPassword } from 'redux/modules/updatepassword';
 
-@connect(state => ({
-  updatingPassword: state.updatingPassword,
-  updateError: state.updateError,
-  updateMessage: state.updateMessage
+@connect(({ updatepassword }) => ({
+  response: updatepassword
 }))
 export default class UpdatePasswordFormContainer extends Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
-  constructor() {
-    super();
-    this.state = {
-      oldPwd: '',
-      oldPwdError: false,
-      oldPwdErrorMessage: '',
-      newPwd: '',
-      newPwdError: false,
-      newPwdErrorMessage: '',
-      confirmPwd: '',
-      confirmPwdError: false,
-      confirmPwdErrorMessage: ''
-    };
-  }
+  static defaultProps = {
+    response: {}
+  };
+  static propTypes = {
+    response: PropTypes.object
+  };
+  state = {
+    oldPwd: '',
+    oldPwdError: false,
+    oldPwdErrorMessage: '',
+    newPwd: '',
+    newPwdError: false,
+    newPwdErrorMessage: '',
+    confirmPwd: '',
+    confirmPwdError: false,
+    confirmPwdErrorMessage: ''
+  };
   onChangeOldPwd = e => {
     const { target: { value } } = e;
     const checkError = isBlank(value);
@@ -86,7 +87,7 @@ export default class UpdatePasswordFormContainer extends Component {
       });
     }
     const { dispatch } = this.context.store;
-    dispatch(updatePassword(this.state));
+    dispatch(updateUserPassword(this.state));
   };
   matchConfirmPassword = value => {
     if (value === this.state.newPwd) {
@@ -109,6 +110,7 @@ export default class UpdatePasswordFormContainer extends Component {
       confirmPwdError,
       confirmPwdErrorMessage
     } = this.state;
+    const { response } = this.props;
     return (
       <div className={styles.formContainer}>
         <Section mb="0.3125rem" pr="0.5rem" pl="0.5rem">
@@ -136,6 +138,7 @@ export default class UpdatePasswordFormContainer extends Component {
                   confirmPwdFeedBackError={confirmPwdError}
                   confirmPwdFeedBackMessage={confirmPwdErrorMessage}
                   onSubmitUpdatePassword={this.onSubmitUpdatePassword}
+                  response={response}
                 />
               </Div>
             </Row>
