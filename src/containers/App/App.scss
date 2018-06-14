@@ -225,6 +225,10 @@
     	margin-right: 0.625rem;
 		}
 	}
+
+	.hide {
+		display: none;
+	}
 }
 
 @-webkit-keyframes :global(nprogress-spinner) {
