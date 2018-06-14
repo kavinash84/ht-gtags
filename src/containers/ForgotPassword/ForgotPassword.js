@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
 import Menu from 'containers/MenuNew/index';
 import Footer from 'components/Footer';
 import ForgotPasswordForm from 'hometown-components/lib/Forms/ForgotPasswordForm';
@@ -12,12 +13,23 @@ import Heading from 'hometown-components/lib/Heading';
 import Div from 'hometown-components/lib/Div';
 import Img from 'hometown-components/lib/Img';
 import { validateEmail } from 'js-utility-functions';
+import { forgotPassword } from 'redux/modules/forgotpassword';
 
 const SidebarImg = require('../../../static/login-side-thumb.png');
 const ForgotPasswordImg = require('../../../static/forgot-password-icon.png');
 
+@connect(({ forgotpassword }) => ({
+  loading: forgotpassword.loading,
+  loaded: forgotpassword.loaded,
+  error: forgotpassword.error
+}))
 @withRouter
 export default class ForgotPasswordContainer extends Component {
+  static propTypes = {
+    loaded: PropTypes.bool.isRequired,
+    error: PropTypes.bool.isRequired,
+    loading: PropTypes.bool.isRequired
+  };
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
@@ -29,8 +41,11 @@ export default class ForgotPasswordContainer extends Component {
       emailErrorMessage: ''
     };
   }
+
   onChangeEmail = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = validateEmail(value, 'Enter valid email');
     this.setState({
       email: value,
@@ -38,6 +53,7 @@ export default class ForgotPasswordContainer extends Component {
       emailErrorMessage: checkError.error ? checkError.errorMessage : ''
     });
   };
+
   onSubmitForgot = e => {
     e.preventDefault();
     const { email } = this.state;
@@ -48,11 +64,20 @@ export default class ForgotPasswordContainer extends Component {
         emailErrorMessage: checkEmail.errorMessage
       });
     }
+    const { dispatch } = this.context.store;
+    dispatch(forgotPassword(email));
   };
   render() {
     const styles = require('../Login/index.scss');
 
     const { email, emailError, emailErrorMessage } = this.state;
+    const { loaded, error, loading } = this.props;
+    const forgotResponse = {
+      loggingIn: loading,
+      loaded,
+      error
+    };
+
     return (
       <Section p="0" mb="0">
         <Menu />
@@ -72,33 +97,39 @@ export default class ForgotPasswordContainer extends Component {
                   </div>
                 </Div>
                 <Div col={7} p="1.25rem 3.5rem" bg="#f8f8f8">
-                  <div className={`${styles.formBlock} ${styles.forgotForm}`}>
-                    <Row display="block" mr="0" ml="0">
-                      <Div mt="0">
-                        <ForgotPasswordForm
-                          email={email}
-                          onChangeEmail={this.onChangeEmail}
-                          emailFeedBackError={emailError}
-                          emailFeedBackMessage={emailErrorMessage}
-                          onSubmitForgot={this.onSubmitForgot}
-                        />
-                      </Div>
-                    </Row>
-                  </div>
-                  <div className={`${styles.responseBlock} ${styles.hide}`}>
-                    <img src={ForgotPasswordImg} alt="" />
-                    <Row display="block" mr="0" ml="0">
-                      <Div mt="0">
-                        <div className={styles.content}>
-                          <p>
-                            An email has been sent to <br />
-                            <b>test123@gmail.com</b>
-                          </p>
-                          <p>Please follow the instructions to reset your password</p>
-                        </div>
-                      </Div>
-                    </Row>
-                  </div>
+                  {(!loaded || error) && (
+                    <div className={`${styles.formBlock} ${styles.forgotForm}`}>
+                      <Row display="block" mr="0" ml="0">
+                        <Div mt="0">
+                          <ForgotPasswordForm
+                            email={email}
+                            onChangeEmail={this.onChangeEmail}
+                            emailFeedBackError={emailError}
+                            emailFeedBackMessage={emailErrorMessage}
+                            onSubmitForgot={this.onSubmitForgot}
+                            forgotResponse={forgotResponse}
+                          />
+                        </Div>
+                      </Row>
+                    </div>
+                  )}
+                  {loaded &&
+                    !error && (
+                    <div className={`${styles.responseBlock}`}>
+                      <img src={ForgotPasswordImg} alt="" />
+                      <Row display="block" mr="0" ml="0">
+                        <Div mt="0">
+                          <div className={styles.content}>
+                            <p>
+                                An email has been sent to <br />
+                              <b>{email}</b>
+                            </p>
+                            <p>Please follow the instructions to reset your password</p>
+                          </div>
+                        </Div>
+                      </Row>
+                    </div>
+                  )}
                 </Div>
               </Row>
             </div>
