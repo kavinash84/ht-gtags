@@ -16,24 +16,24 @@ export default function reducer(state = initialState, action = {}) {
     case SIGNUP:
       return {
         ...state,
-        loggingIn: true
+        loading: true
       };
     case SIGNUP_SUCCESS:
       return {
         ...state,
-        loggingIn: false,
-        isLoggedIn: true,
+        loading: false,
         loaded: true,
+        signUpSuccess: false,
         response: action.result,
         accessToken: action.result.token.access_token,
         refreshToken: action.result.token.refresh_token,
-        loginError: ''
+        signUpError: ''
       };
     case SIGNUP_FAIL:
       return {
         ...state,
-        loggingIn: false,
-        loginError: action.error
+        loading: false,
+        signUpError: action.error
       };
     default:
       return state;
@@ -66,13 +66,3 @@ export const signUp = data => ({
     }
   }
 });
-
-// export function logout() {
-//   return {
-//     types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
-//     promise: async ({ client, app, restApp }) => {
-//       await app.logout();
-//       setToken({ client, app, restApp })({ accessToken: null });
-//     }
-//   };
-// }
