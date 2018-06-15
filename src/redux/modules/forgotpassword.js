@@ -19,6 +19,7 @@ const RESET_PASSWORD_FAIL = 'forgotPassword/RESET_PASSWORD_FAIL';
 const initialState = {
   loading: false,
   loaded: false,
+  hashChecked: false,
   error: false
 };
 
@@ -60,6 +61,7 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: true,
+        hashChecked: true,
         checkHash: action.result
       };
     case CHECK_HASH_FAIL:
@@ -67,7 +69,7 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: true,
-        error: true
+        checkHash: action.result
       };
     case FORGOT_PASSWORD:
       return {
@@ -92,6 +94,8 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
+export const isHashChecked = globalState => globalState.forgotpassword && globalState.forgotpassword.hashChecked;
+
 export const forgotPassword = email => ({
   types: [FORGOT_PASSWORD, FORGOT_PASSWORD_SUCCESS, FORGOT_PASSWORD_FAIL],
   promise: async ({ client }) => {
@@ -114,9 +118,10 @@ export const checkHashValidity = hash => ({
     try {
       const response = await client.get(`${CHECK_HASH_API}/${hash}`);
       response.hash = hash;
+      console.log(response.statusCode);
       return response;
     } catch (error) {
-      throw error;
+      return error;
     }
   }
 });

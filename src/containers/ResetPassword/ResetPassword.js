@@ -15,14 +15,16 @@ import Img from 'hometown-components/lib/Img';
 import Empty from 'hometown-components/lib/Empty';
 import { isBlank } from 'js-utility-functions';
 import { validatePassword } from 'utils/validation';
-import { checkHashValidity, resetPassword } from 'redux/modules/forgotpassword';
+import { checkHashValidity, resetPassword, isHashChecked } from 'redux/modules/forgotpassword';
 
 const SidebarImg = require('../../../static/login-side-thumb.png');
 const PasswordExpiredIcon = require('../../../static/password-expired-icon.png');
 
 @provideHooks({
-  fetch: async ({ store: { dispatch }, params }) => {
-    await dispatch(checkHashValidity(params.hash));
+  fetch: async ({ store: { dispatch, getState }, params }) => {
+    if (!isHashChecked(getState())) {
+      await dispatch(checkHashValidity(params.hash)).then(err => console.log(err));
+    }
   }
 })
 @connect(({ forgotpassword }) => ({
@@ -53,7 +55,7 @@ export default class ResetPasswordContainer extends Component {
     const {
       target: { value }
     } = e;
-    const checkError = validatePassword(value, 'Password must be at least 6 character long');
+    const checkError = validatePassword(value, 'Password must be at least 8 character long');
     this.setState({
       newPwd: value,
       newPwdError: checkError.error,
@@ -88,7 +90,7 @@ export default class ResetPasswordContainer extends Component {
     if (checkConfirmPwd || checkNewPwd) {
       return this.setState({
         newPwdError: checkNewPwd,
-        newPwdErrorMessage: checkNewPwd ? 'Password must be at least 6 character long' : '',
+        newPwdErrorMessage: checkNewPwd ? 'Password must be at least 8 character long' : '',
         confirmPwdError: checkConfirmPwd,
         confirmPwdErrorMessage: checkConfirmPwd ? "Confirm Password doesn't match" : ''
       });
@@ -115,7 +117,6 @@ export default class ResetPasswordContainer extends Component {
     const {
       checkHash: { is_valid: isValid }
     } = response;
-    console.log(response);
     return (
       <Section p="0" mb="0">
         <Menu />
@@ -159,13 +160,11 @@ export default class ResetPasswordContainer extends Component {
               </div>
             </Container>
           )}
-          {!isValid && (
-            <Section className="hide" display="flex" p="0.625rem" pt="1.25rem" mb="0">
-              <Empty title="Password link is expired !!" subTitle="" btnName="Resend Link" url="/" bg="#fafafa">
-                <Img src={PasswordExpiredIcon} width="initial" m="auto" alt="Password link is expired !!" />
-              </Empty>
-            </Section>
-          )}
+          <Section className={isValid ? 'hide' : ''} display="flex" p="0.625rem" pt="1.25rem" mb="0">
+            <Empty title="Password link is expired !!" subTitle="" btnName="Resend Link" url="/" bg="#fafafa">
+              <Img src={PasswordExpiredIcon} width="initial" m="auto" alt="Password link is expired !!" />
+            </Empty>
+          </Section>
         </div>
         <Footer />
       </Section>
