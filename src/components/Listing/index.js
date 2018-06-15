@@ -48,27 +48,29 @@ const Listing = ({
         </Row>
       </Container>
     </Section>
-    <Section pt="1.25rem" mb="0">
+    <Section pt="2.5rem" mb="0">
       <Container pr="0" pl="0">
-        {products.map(item => (
-          <div className={styles.productWrapper}>
-            <Product
-              key={item.id}
-              name={item.data.name}
-              price={item.netprice}
-              cutprice={item.cutprice}
-              saving={item.saving}
-              image={getProductImage(item.images[0].path)}
-              sku={item.data.sku}
-              simple_sku={item.simples}
-              onClick={onClick(wishListData, toggleWishList)}
-              isWishList={isInWishList(wishList, item.data.sku)}
-              rating={item.data.reviews.rating.toFixed(1)}
-              reviewsCount={item.data.reviews.count}
-              savingAmount={item.data.max_price - item.data.max_special_price}
-            />
-          </div>
-        ))}
+        <Row display="block" mr="0" ml="0">
+          {products.map(item => (
+            <div className={styles.productWrapper}>
+              <Product
+                key={item.id}
+                name={item.data.name}
+                price={item.netprice}
+                cutprice={item.cutprice}
+                saving={item.saving}
+                image={getProductImage(item.images[0].path)}
+                sku={item.data.sku}
+                simple_sku={item.simples}
+                onClick={onClick(wishListData, toggleWishList)}
+                isWishList={isInWishList(wishList, item.data.sku)}
+                rating={item.data.reviews.rating.toFixed(1)}
+                reviewsCount={item.data.reviews.count}
+                savingAmount={item.data.max_price - item.data.max_special_price}
+              />
+            </div>
+          ))}
+        </Row>
       </Container>
     </Section>
   </Div>

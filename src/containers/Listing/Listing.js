@@ -8,6 +8,7 @@ import Section from 'hometown-components/lib/Section';
 import ListingContainer from 'components/Listing';
 import { connect } from 'react-redux';
 import Menu from 'containers/MenuNew/index';
+import Footer from 'components/Footer';
 import LoadMore from 'components/LoadMore';
 import { getSKUList } from 'selectors/wishlist';
 import {
@@ -70,36 +71,39 @@ export default class Listing extends Component {
     } = this.props;
     const { wishListedSKUs, wishListData } = this.props;
     return (
-      <div>
-        <Menu filter search />
-        {!loading &&
-          products.length === 0 && (
-          <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
-            <Empty
-              title="Sorry no results found"
-              subTitle="Please check the selling or by a different search"
-              btnName="Search Again"
-              url="/"
-              bg="#fafafa"
-            >
-              <Img src={SearchEmptyIcon} width="initial" m="auto" alt="Sorry no results found" />
-            </Empty>
-          </Section>
-        )}
-        {loaded &&
-          products.length && (
-          <div>
-            <ListingContainer
-              wishList={wishListedSKUs}
-              wishListData={wishListData}
-              products={products}
-              categoryName={categoryName}
-              productCount={productCount}
-            />
-            <LoadMore loading={loading} loaded={loaded} />
-          </div>
-        )}
-      </div>
+      <Section p="0" mb="0">
+        <div className="wrapper">
+          <Menu filter search />
+          {!loading &&
+            products.length === 0 && (
+            <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
+              <Empty
+                title="Sorry no results found"
+                subTitle="Please check the selling or by a different search"
+                btnName="Search Again"
+                url="/"
+                bg="#fafafa"
+              >
+                <Img src={SearchEmptyIcon} width="initial" m="auto" alt="Sorry no results found" />
+              </Empty>
+            </Section>
+          )}
+          {loaded &&
+            products.length && (
+            <div>
+              <ListingContainer
+                wishList={wishListedSKUs}
+                wishListData={wishListData}
+                products={products}
+                categoryName={categoryName}
+                productCount={productCount}
+              />
+              <LoadMore loading={loading} loaded={loaded} />
+            </div>
+          )}
+        </div>
+        <Footer />
+      </Section>
     );
   }
 }

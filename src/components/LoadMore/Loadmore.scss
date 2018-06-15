@@ -4,18 +4,15 @@
 }
 
 .loadMoreWrapper {
-  width: 100%;
   text-align: center;
   padding: 1rem 0;
   clear: both;
   button {
-    width: calc(100% - 30px);
-    padding: .375rem .75rem;
+    padding: 0.625rem 2rem;
     font-size: 1rem;
     color: #fff;
     background-color: #ae8873;
     border-color: #ae8873;
-    height: 42px;
     svg {
       vertical-align: middle;
       margin-left: 5px;
