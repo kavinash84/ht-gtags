@@ -13,6 +13,7 @@ import userLogin from './modules/login';
 import userSignUp from './modules/signUp';
 import updatepassword from './modules/updatepassword';
 import profile from './modules/profile';
+import forgotpassword from './modules/forgotpassword';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -36,6 +37,7 @@ export default function createReducers(asyncReducers) {
     userSignUp,
     updatepassword,
     profile,
+    forgotpassword,
     ...asyncReducers
   };
 }

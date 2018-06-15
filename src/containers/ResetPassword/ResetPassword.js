@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { provideHooks } from 'redial';
 import Menu from 'containers/MenuNew/index';
 import Footer from 'components/Footer';
 import ResetPasswordForm from 'hometown-components/lib/Forms/ResetPasswordForm';
@@ -14,34 +15,48 @@ import Img from 'hometown-components/lib/Img';
 import Empty from 'hometown-components/lib/Empty';
 import { isBlank } from 'js-utility-functions';
 import { validatePassword } from 'utils/validation';
-import { updatePassword } from 'redux/modules/updatepassword';
+import { checkHashValidity, resetPassword, isHashChecked } from 'redux/modules/forgotpassword';
 
 const SidebarImg = require('../../../static/login-side-thumb.png');
 const PasswordExpiredIcon = require('../../../static/password-expired-icon.png');
 
-@connect(state => ({
-  updatingPassword: state.updatingPassword,
-  updateError: state.updateError,
-  updateMessage: state.updateMessage
+@provideHooks({
+  fetch: async ({ store: { dispatch, getState }, params }) => {
+    if (!isHashChecked(getState())) {
+      await dispatch(checkHashValidity(params.hash)).then(err => console.log(err));
+    }
+  }
+})
+@connect(({ forgotpassword }) => ({
+  response: forgotpassword
 }))
 export default class ResetPasswordContainer extends Component {
-  static contextTypes = {
-    store: PropTypes.object.isRequired
+  static propTypes = {
+    response: PropTypes.object.isRequired,
+    history: PropTypes.func.isRequired
   };
-  constructor() {
-    super();
-    this.state = {
-      newPwd: '',
-      newPwdError: false,
-      newPwdErrorMessage: '',
-      confirmPwd: '',
-      confirmPwdError: false,
-      confirmPwdErrorMessage: ''
-    };
+
+  static contextTypes = {
+    store: PropTypes.object.isRequired,
+    params: PropTypes.object
+  };
+
+  state = {
+    newPwd: '',
+    newPwdError: false,
+    newPwdErrorMessage: '',
+    confirmPwd: '',
+    confirmPwdError: false,
+    confirmPwdErrorMessage: ''
+  };
+  componentWillReceiveProps(nextProps) {
+    if (window && nextProps.response.passwordUpdated) {
+      window.setTimeout(() => nextProps.history.push('/login'), 2000);
+    }
   }
   onChangeNewPwd = e => {
     const { target: { value } } = e;
-    const checkError = validatePassword(value, 'Password must be at least 6 character long');
+    const checkError = validatePassword(value, 'Password must be at least 8 character long');
     this.setState({
       newPwd: value,
       newPwdError: checkError.error,
@@ -74,13 +89,16 @@ export default class ResetPasswordContainer extends Component {
     if (checkConfirmPwd || checkNewPwd) {
       return this.setState({
         newPwdError: checkNewPwd,
-        newPwdErrorMessage: checkNewPwd ? 'Password must be at least 6 character long' : '',
+        newPwdErrorMessage: checkNewPwd ? 'Password must be at least 8 character long' : '',
         confirmPwdError: checkConfirmPwd,
         confirmPwdErrorMessage: checkConfirmPwd ? "Confirm Password doesn't match" : ''
       });
     }
     const { dispatch } = this.context.store;
-    dispatch(updatePassword(this.state));
+    const { response } = this.props;
+    const { hash } = response.checkHash;
+
+    dispatch(resetPassword(this.state, hash));
   };
   matchConfirmPassword = value => {
     if (value === this.state.newPwd) {
@@ -91,52 +109,55 @@ export default class ResetPasswordContainer extends Component {
 
   render() {
     const styles = require('../Login/index.scss');
-
     const {
       newPwd, confirmPwd, newPwdError, newPwdErrorMessage, confirmPwdError, confirmPwdErrorMessage
     } = this.state;
+    const { response } = this.props;
+    const { checkHash: { is_valid: isValid } } = response;
     return (
       <Section p="0" mb="0">
         <Menu />
         <div className="wrapper">
-          <Container pr="0" pl="0">
-            <div className={styles.userWrapper}>
-              <Row display="block" mr="0" ml="0">
-                <Div col={5}>
-                  <div className={styles.imgWrapper}>
-                    <Div>
-                      <Heading color="white" fontSize="1.375rem">
-                        RESET PASSWORD
-                      </Heading>
-                      <Text color="white" />
-                    </Div>
-                    <Img src={SidebarImg} />
-                  </div>
-                </Div>
-                <Div col={7} p="1.25rem 3.5rem" bg="#f8f8f8">
-                  <div className={`${styles.formBlock} ${styles.resetForm}`}>
-                    <Row display="block" mr="0" ml="0">
-                      <Div mt="0">
-                        <ResetPasswordForm
-                          newPwd={newPwd}
-                          onChangeNewPwd={this.onChangeNewPwd}
-                          newPwdFeedBackError={newPwdError}
-                          newPwdFeedBackMessage={newPwdErrorMessage}
-                          confirmPwd={confirmPwd}
-                          onChangeConfirmPwd={this.onChangeConfirmPwd}
-                          confirmPwdFeedBackError={confirmPwdError}
-                          confirmPwdFeedBackMessage={confirmPwdErrorMessage}
-                          onSubmitUpdatePassword={this.onSubmitUpdatePassword}
-                        />
+          {isValid && (
+            <Container pr="0" pl="0">
+              <div className={styles.userWrapper}>
+                <Row display="block" mr="0" ml="0">
+                  <Div col={5}>
+                    <div className={styles.imgWrapper}>
+                      <Div>
+                        <Heading color="white" fontSize="1.375rem">
+                          RESET PASSWORD
+                        </Heading>
+                        <Text color="white" />
                       </Div>
-                    </Row>
-                  </div>
-                </Div>
-              </Row>
-            </div>
-          </Container>
-
-          <Section className="hide" display="flex" p="0.625rem" pt="1.25rem" mb="0">
+                      <Img src={SidebarImg} />
+                    </div>
+                  </Div>
+                  <Div col={7} p="1.25rem 3.5rem" bg="#f8f8f8">
+                    <div className={`${styles.formBlock} ${styles.resetForm}`}>
+                      <Row display="block" mr="0" ml="0">
+                        <Div mt="0">
+                          <ResetPasswordForm
+                            newPwd={newPwd}
+                            onChangeNewPwd={this.onChangeNewPwd}
+                            newPwdFeedBackError={newPwdError}
+                            newPwdFeedBackMessage={newPwdErrorMessage}
+                            confirmPwd={confirmPwd}
+                            onChangeConfirmPwd={this.onChangeConfirmPwd}
+                            confirmPwdFeedBackError={confirmPwdError}
+                            confirmPwdFeedBackMessage={confirmPwdErrorMessage}
+                            onSubmitUpdatePassword={this.onSubmitUpdatePassword}
+                            resetResponse={response}
+                          />
+                        </Div>
+                      </Row>
+                    </div>
+                  </Div>
+                </Row>
+              </div>
+            </Container>
+          )}
+          <Section className={isValid ? 'hide' : ''} display="flex" p="0.625rem" pt="1.25rem" mb="0">
             <Empty title="Password link is expired !!" subTitle="" btnName="Resend Link" url="/" bg="#fafafa">
               <Img src={PasswordExpiredIcon} width="initial" m="auto" alt="Password link is expired !!" />
             </Empty>
