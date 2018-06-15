@@ -25,13 +25,12 @@ const PasswordExpiredIcon = require('../../../static/password-expired-icon.png')
     await dispatch(checkHashValidity(params.hash));
   }
 })
-@connect(state => ({
-  response: state.updatepassword,
-  checkhash: state.forgotpassword
+@connect(({ forgotpassword }) => ({
+  response: forgotpassword
 }))
 export default class ResetPasswordContainer extends Component {
   static propTypes = {
-    checkhash: PropTypes.object.isRequired
+    response: PropTypes.object.isRequired
   };
 
   static contextTypes = {
@@ -39,17 +38,17 @@ export default class ResetPasswordContainer extends Component {
     params: PropTypes.object
   };
 
-  constructor() {
-    super();
-    this.state = {
-      newPwd: '',
-      newPwdError: false,
-      newPwdErrorMessage: '',
-      confirmPwd: '',
-      confirmPwdError: false,
-      confirmPwdErrorMessage: ''
-    };
-  }
+  state = {
+    newPwd: '',
+    newPwdError: false,
+    newPwdErrorMessage: '',
+    confirmPwd: '',
+    confirmPwdError: false,
+    confirmPwdErrorMessage: ''
+  };
+  // componentWillReceiveProps(nextProps) {
+  //
+  // }
   onChangeNewPwd = e => {
     const {
       target: { value }
@@ -95,8 +94,8 @@ export default class ResetPasswordContainer extends Component {
       });
     }
     const { dispatch } = this.context.store;
-    const { checkhash } = this.props;
-    const { hash } = checkhash.checkHash;
+    const { response } = this.props;
+    const { hash } = response.checkHash;
 
     dispatch(resetPassword(this.state, hash));
   };
@@ -112,9 +111,11 @@ export default class ResetPasswordContainer extends Component {
     const {
       newPwd, confirmPwd, newPwdError, newPwdErrorMessage, confirmPwdError, confirmPwdErrorMessage
     } = this.state;
-    const { checkhash } = this.props;
-    const { is_valid: isValid } = checkhash.checkHash;
-
+    const { response } = this.props;
+    const {
+      checkHash: { is_valid: isValid }
+    } = response;
+    console.log(response);
     return (
       <Section p="0" mb="0">
         <Menu />
@@ -148,6 +149,7 @@ export default class ResetPasswordContainer extends Component {
                             confirmPwdFeedBackError={confirmPwdError}
                             confirmPwdFeedBackMessage={confirmPwdErrorMessage}
                             onSubmitUpdatePassword={this.onSubmitUpdatePassword}
+                            resetResponse={response}
                           />
                         </Div>
                       </Row>

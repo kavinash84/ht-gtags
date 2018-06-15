@@ -19,16 +19,12 @@ const SidebarImg = require('../../../static/login-side-thumb.png');
 const ForgotPasswordImg = require('../../../static/forgot-password-icon.png');
 
 @connect(({ forgotpassword }) => ({
-  loading: forgotpassword.loading,
-  loaded: forgotpassword.loaded,
-  error: forgotpassword.error
+  response: forgotpassword
 }))
 @withRouter
 export default class ForgotPasswordContainer extends Component {
   static propTypes = {
-    loaded: PropTypes.bool.isRequired,
-    error: PropTypes.bool.isRequired,
-    loading: PropTypes.bool.isRequired
+    response: PropTypes.object.isRequired
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -71,13 +67,9 @@ export default class ForgotPasswordContainer extends Component {
     const styles = require('../Login/index.scss');
 
     const { email, emailError, emailErrorMessage } = this.state;
-    const { loaded, error, loading } = this.props;
-    const forgotResponse = {
-      loggingIn: loading,
-      loaded,
-      error
-    };
-
+    const { response } = this.props;
+    const { loaded, error } = response;
+    console.log(response, 'Forgot');
     return (
       <Section p="0" mb="0">
         <Menu />
@@ -107,7 +99,7 @@ export default class ForgotPasswordContainer extends Component {
                             emailFeedBackError={emailError}
                             emailFeedBackMessage={emailErrorMessage}
                             onSubmitForgot={this.onSubmitForgot}
-                            forgotResponse={forgotResponse}
+                            forgotResponse={response}
                           />
                         </Div>
                       </Row>
