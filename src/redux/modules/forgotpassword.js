@@ -28,7 +28,9 @@ export default function reducer(state = initialState, action = {}) {
     case RESET_PASSWORD:
       return {
         ...state,
-        loading: true
+        loading: true,
+        loaded: false,
+        passwordUpdated: false
       };
     case RESET_PASSWORD_SUCCESS:
       return {
@@ -42,6 +44,7 @@ export default function reducer(state = initialState, action = {}) {
     case RESET_PASSWORD_FAIL:
       return {
         ...state,
+        loaded: true,
         loading: false,
         passwordUpdated: false,
         error: true,
@@ -50,7 +53,8 @@ export default function reducer(state = initialState, action = {}) {
     case CHECK_HASH:
       return {
         ...state,
-        loading: true
+        loading: true,
+        loaded: false
       };
     case CHECK_HASH_SUCCESS:
       return {
@@ -70,7 +74,8 @@ export default function reducer(state = initialState, action = {}) {
     case FORGOT_PASSWORD:
       return {
         ...state,
-        loading: true
+        loading: true,
+        loaded: false
       };
     case FORGOT_PASSWORD_SUCCESS:
       return {
@@ -82,8 +87,7 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         loading: false,
-        error: true,
-        errorMessage: action.result
+        error: true
       };
     default:
       return state;

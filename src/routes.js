@@ -38,7 +38,7 @@ const isAuthenticated = connectedReduxRedirect({
 });
 
 const isNotAuthenticated = connectedReduxRedirect({
-  redirectPath: '/',
+  redirectPath: '/profile',
   authenticatedSelector: state => !state.userLogin.isLoggedIn,
   redirectAction: routerActions.replace,
   wrapperDisplayName: 'UserIsAuthenticated',
@@ -52,10 +52,10 @@ const routes = [
       { path: '/', exact: true, component: Home },
       { path: '/menu', exact: true, component: Menu },
       { path: '/slick', exact: true, component: SimpleSlider },
-      { path: '/login', exact: true, component: Login },
+      { path: '/login', exact: true, component: isNotAuthenticated(Login) },
       { path: '/signup', exact: true, component: isNotAuthenticated(Signup) },
-      { path: '/forgot-password', exact: true, component: ForgotPassword },
       { path: '/forgot-password/verify/reset/:hash', exact: true, component: ResetPassword },
+      { path: '/forgot-password', exact: true, component: isNotAuthenticated(ForgotPassword) },
       { path: '/listing', exact: true, component: Listing },
       { path: '/wishlist', exact: true, component: isAuthenticated(Wishlist) },
       { path: '/cart', exact: true, component: Cart },

@@ -40,17 +40,17 @@ export default class ResetPasswordContainer extends Component {
     params: PropTypes.object
   };
 
-  constructor() {
-    super();
-    this.state = {
-      newPwd: '',
-      newPwdError: false,
-      newPwdErrorMessage: '',
-      confirmPwd: '',
-      confirmPwdError: false,
-      confirmPwdErrorMessage: ''
-    };
-  }
+  state = {
+    newPwd: '',
+    newPwdError: false,
+    newPwdErrorMessage: '',
+    confirmPwd: '',
+    confirmPwdError: false,
+    confirmPwdErrorMessage: ''
+  };
+  // componentWillReceiveProps(nextProps) {
+  //
+  // }
   onChangeNewPwd = e => {
     const { target: { value } } = e;
     const checkError = validatePassword(value, 'Password must be at least 8 character long');
@@ -110,8 +110,7 @@ export default class ResetPasswordContainer extends Component {
       newPwd, confirmPwd, newPwdError, newPwdErrorMessage, confirmPwdError, confirmPwdErrorMessage
     } = this.state;
     const { response } = this.props;
-    const { is_valid: isValid } = response.checkHash;
-    console.log(isValid);
+    const { checkHash: { is_valid: isValid } } = response;
     return (
       <Section p="0" mb="0">
         <Menu />
@@ -145,6 +144,7 @@ export default class ResetPasswordContainer extends Component {
                             confirmPwdFeedBackError={confirmPwdError}
                             confirmPwdFeedBackMessage={confirmPwdErrorMessage}
                             onSubmitUpdatePassword={this.onSubmitUpdatePassword}
+                            resetResponse={response}
                           />
                         </Div>
                       </Row>
