@@ -27,13 +27,12 @@ const PasswordExpiredIcon = require('../../../static/password-expired-icon.png')
     }
   }
 })
-@connect(state => ({
-  response: state.updatepassword,
-  checkhash: state.forgotpassword
+@connect(({ forgotpassword }) => ({
+  response: forgotpassword
 }))
 export default class ResetPasswordContainer extends Component {
   static propTypes = {
-    checkhash: PropTypes.object.isRequired
+    response: PropTypes.object.isRequired
   };
 
   static contextTypes = {
@@ -93,8 +92,8 @@ export default class ResetPasswordContainer extends Component {
       });
     }
     const { dispatch } = this.context.store;
-    const { checkhash } = this.props;
-    const { hash } = checkhash.checkHash;
+    const { response } = this.props;
+    const { hash } = response.checkHash;
 
     dispatch(resetPassword(this.state, hash));
   };
@@ -110,8 +109,8 @@ export default class ResetPasswordContainer extends Component {
     const {
       newPwd, confirmPwd, newPwdError, newPwdErrorMessage, confirmPwdError, confirmPwdErrorMessage
     } = this.state;
-    const { checkhash } = this.props;
-    const { is_valid: isValid } = checkhash.checkHash;
+    const { response } = this.props;
+    const { is_valid: isValid } = response.checkHash;
     console.log(isValid);
     return (
       <Section p="0" mb="0">
