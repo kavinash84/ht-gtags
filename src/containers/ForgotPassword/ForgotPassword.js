@@ -69,7 +69,6 @@ export default class ForgotPasswordContainer extends Component {
     const { email, emailError, emailErrorMessage } = this.state;
     const { response } = this.props;
     const { loaded, error } = response;
-    console.log(response, 'Forgot');
     return (
       <Section p="0" mb="0">
         <Menu />

@@ -32,7 +32,8 @@ const PasswordExpiredIcon = require('../../../static/password-expired-icon.png')
 }))
 export default class ResetPasswordContainer extends Component {
   static propTypes = {
-    response: PropTypes.object.isRequired
+    response: PropTypes.object.isRequired,
+    history: PropTypes.func.isRequired
   };
 
   static contextTypes = {
@@ -48,9 +49,11 @@ export default class ResetPasswordContainer extends Component {
     confirmPwdError: false,
     confirmPwdErrorMessage: ''
   };
-  // componentWillReceiveProps(nextProps) {
-  //
-  // }
+  componentWillReceiveProps(nextProps) {
+    if (window && nextProps.response.passwordUpdated) {
+      window.setTimeout(() => nextProps.history.push('/login'), 2000);
+    }
+  }
   onChangeNewPwd = e => {
     const {
       target: { value }

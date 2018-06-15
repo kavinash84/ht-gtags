@@ -75,17 +75,20 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         loading: true,
-        loaded: false
+        loaded: false,
+        error: false
       };
     case FORGOT_PASSWORD_SUCCESS:
       return {
         ...state,
         loading: false,
-        loaded: true
+        loaded: true,
+        error: false
       };
     case FORGOT_PASSWORD_FAIL:
       return {
         ...state,
+        loaded: true,
         loading: false,
         error: true
       };
