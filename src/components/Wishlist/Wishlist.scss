@@ -3,4 +3,7 @@
   width: calc(33.333333% - 16px);
   float: left;
   margin: 0 8px 16px;
+  &:nth-child(3n+1){
+    clear: both;
+  }
 }
