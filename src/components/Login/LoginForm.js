@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
 import LoginForm from 'hometown-components/lib/Forms/LoginForm';
 import { validateEmail, isBlank } from 'js-utility-functions';
 import { login } from 'redux/modules/login';
@@ -9,7 +8,6 @@ import { login } from 'redux/modules/login';
 @connect(state => ({
   loginResponse: state.userLogin
 }))
-@withRouter
 export default class LoginFormContainer extends Component {
   static propTypes = {
     loginResponse: PropTypes.shape({
