@@ -79,7 +79,7 @@ class Listing extends React.Component {
                     image={getProductImage(item.images[0].path)}
                     sku={item.data.sku}
                     simple_sku={item.simples}
-                    onClickWishList={onClick(wishListData, toggleWishList)}
+                    onClick={onClick(wishListData, toggleWishList)}
                     onOpenQuickViewModal={() => {
                       this.onOpenQuickViewModal(item.data.sku);
                     }}

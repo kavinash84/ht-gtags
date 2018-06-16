@@ -29,7 +29,6 @@ import ResetPassword from 'containers/ResetPassword';
 import Profile from 'containers/Profile';
 import Pincode from 'components/Pincode';
 import SimpleSlider from 'components/SlickSlider';
-// import QuickView from 'components/QuickView';
 
 const isAuthenticated = connectedReduxRedirect({
   redirectPath: '/login',
@@ -76,7 +75,6 @@ const routes = [
       { path: '/stores', exact: true, component: Stores },
       { path: '/product-not-found', exact: true, component: ProductNotFound },
       { path: '/cart-empty', exact: true, component: CartEmpty },
-      // { path: '/quick-view', exact: true, component: QuickView },
 
       {
         path: '/:category/:subcategory1?/:subcategory2?/:subcategory3?/:subcategory4?/:subcategory5?',

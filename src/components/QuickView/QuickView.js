@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import AddToCart from 'components/ProductDetails/AddtoCart';
 
 const styles = require('./QuickView.scss');
 
@@ -108,6 +109,7 @@ export default class QuickView extends Component {
   render() {
     const { images, data } = this.state.product;
     const { currentImage } = this.state;
+    const { sku } = this.props;
     const {
       name, price, special_price: discPrice, max_saving_percentage: saving
     } = data;
@@ -135,6 +137,7 @@ export default class QuickView extends Component {
               </button>
             ))}
           </div>
+          <AddToCart skuId={sku} />
         </div>
       </div>
     );
