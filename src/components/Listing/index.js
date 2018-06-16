@@ -6,6 +6,8 @@ import Heading from 'hometown-components/lib/Heading';
 import Product from 'hometown-components/lib/Product';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
+import ResponsiveModal from 'components/Modal';
+import QuickView from 'components/QuickView/QuickView';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actionCreators from 'redux/modules/wishlist';
@@ -27,54 +29,77 @@ const isInWishList = (list, id) => list.includes(id);
 
 const styles = require('./Listing.scss');
 
-const Listing = ({
-  toggleWishList, products, categoryName, productCount, wishList, wishListData
-}) => (
-  <Div type="block">
-    <Section mb="0.3125rem" p="1rem 0.5rem" bg="primary">
-      <Container pr="0" pl="0">
-        <Row display="block" mr="0" ml="0">
-          <Heading
-            fontWeight="300"
-            fontSize="1.25rem"
-            color="white"
-            mb="0px"
-            mt="0px"
-            className="searchTitle"
-            ls="1.2px"
-          >
-            {categoryName} ({productCount})
-          </Heading>
-        </Row>
-      </Container>
-    </Section>
-    <Section pt="2.5rem" mb="0">
-      <Container pr="0" pl="0">
-        <Row display="block" mr="0" ml="0">
-          {products.map(item => (
-            <div className={styles.productWrapper}>
-              <Product
-                key={item.id}
-                name={item.data.name}
-                price={item.netprice}
-                cutprice={item.cutprice}
-                saving={item.saving}
-                image={getProductImage(item.images[0].path)}
-                sku={item.data.sku}
-                simple_sku={item.simples}
-                onClick={onClick(wishListData, toggleWishList)}
-                isWishList={isInWishList(wishList, item.data.sku)}
-                rating={item.data.reviews.rating.toFixed(1)}
-                reviewsCount={item.data.reviews.count}
-                savingAmount={item.data.max_price - item.data.max_special_price}
-              />
-            </div>
-          ))}
-        </Row>
-      </Container>
-    </Section>
-  </Div>
-);
+class Listing extends React.Component {
+  state = {
+    openQuickView: false,
+    quickViewSku: ''
+  };
+  onOpenQuickViewModal = sku => {
+    this.setState({ openQuickView: true, quickViewSku: sku });
+  };
+  onCloseQuickViewModal = () => {
+    this.setState({ openQuickView: false });
+  };
+
+  render() {
+    const {
+      toggleWishList, products, categoryName, productCount, wishList, wishListData
+    } = this.props;
+
+    return (
+      <Div type="block">
+        <Section mb="0.3125rem" p="1rem 0.5rem" bg="primary">
+          <Container pr="0" pl="0">
+            <Row display="block" mr="0" ml="0">
+              <Heading
+                fontWeight="300"
+                fontSize="1.25rem"
+                color="white"
+                mb="0px"
+                mt="0px"
+                className="searchTitle"
+                ls="1.2px"
+              >
+                {categoryName} ({productCount})
+              </Heading>
+            </Row>
+          </Container>
+        </Section>
+        <Section pt="2.5rem" mb="0">
+          <Container pr="0" pl="0">
+            <Row display="block" mr="0" ml="0">
+              {products.map(item => (
+                <div className={styles.productWrapper}>
+                  <Product
+                    key={item.id}
+                    name={item.data.name}
+                    price={item.netprice}
+                    cutprice={item.cutprice}
+                    saving={item.saving}
+                    image={getProductImage(item.images[0].path)}
+                    sku={item.data.sku}
+                    simple_sku={item.simples}
+                    onClickWishList={onClick(wishListData, toggleWishList)}
+                    onOpenQuickViewModal={() => {
+                      this.onOpenQuickViewModal(item.data.sku);
+                    }}
+                    isWishList={isInWishList(wishList, item.data.sku)}
+                    rating={item.data.reviews.rating.toFixed(1)}
+                    reviewsCount={item.data.reviews.count}
+                    savingAmount={item.data.max_price - item.data.max_special_price}
+                  />
+                </div>
+              ))}
+              <ResponsiveModal onCloseModal={this.onCloseQuickViewModal} open={this.state.openQuickView}>
+                <QuickView onCloseModal={this.onCloseQuickViewModal} sku={this.state.quickViewSku} />
+              </ResponsiveModal>
+            </Row>
+          </Container>
+        </Section>
+      </Div>
+    );
+  }
+}
 
 Listing.defaultProps = {
   wishList: [],
@@ -92,4 +117,7 @@ Listing.propTypes = {
   productCount: PropTypes.string
 };
 
-export default connect(null, mapDispatchToProps)(Listing);
+export default connect(
+  null,
+  mapDispatchToProps
+)(Listing);
