@@ -6,9 +6,11 @@ import Heading from 'hometown-components/lib/Heading';
 import Product from 'hometown-components/lib/Product';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
+import { Label } from 'hometown-components/lib/Label';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actionCreators from 'redux/modules/wishlist';
+import Dropdown from '../Filters/Dropdown';
 
 // import ProductItems from '../../data/RecentlyViewedProducts.js';
 const getProductImage = url => {
@@ -48,9 +50,29 @@ const Listing = ({
         </Row>
       </Container>
     </Section>
-    <Section pt="2.5rem" mb="0">
+    <Section pt="1rem" mb="0">
       <Container pr="0" pl="0">
-        <Row display="block" mr="0" ml="0">
+        <div className={styles.filterBar}>
+          <Row display="block" mr="0" ml="0">
+            <Div col="9">
+              <Label display="inline-block">Filter By</Label>
+              <Dropdown checkbox title="Product Type" data="" />
+              <Dropdown checkbox title="Price" data="" />
+              <Dropdown checkbox title="DISCOUNT" data="" />
+              <Dropdown checkbox title="COLOR" data="" />
+              <Dropdown checkbox title="MATERIAL" data="" />
+            </Div>
+            <Div col="3" ta="right">
+              <Label>Sort By</Label>
+              <Dropdown display="rtl" title="MATERIAL" data="" />
+            </Div>
+          </Row>
+        </div>
+      </Container>
+    </Section>
+    <Section pt="1rem" mb="0">
+      <Container pr="0" pl="0">
+        <Row display="block" mr="-15px" ml="-15px">
           {products.map(item => (
             <div className={styles.productWrapper}>
               <Product
