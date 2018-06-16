@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import AddToCart from 'components/ProductDetails/AddtoCart';
 
 const styles = require('./QuickView.scss');
 
-@connect(({ products }) => ({
-  products
-}))
 export default class QuickView extends Component {
   state = {
     currentImage: 0,
@@ -29,7 +25,7 @@ export default class QuickView extends Component {
 
   getProductDetails = sku => {
     if (sku) {
-      const product = this.props.products.list.filter(pdt => pdt.data.sku === sku);
+      const product = this.props.products.filter(pdt => pdt.data.sku === sku);
       this.setState({
         product: product[0]
       });
@@ -119,7 +115,7 @@ export default class QuickView extends Component {
           PREVIOUS
         </button>
         <div className={styles.imageContainer}>
-          <img src={images[currentImage].path} alt="" />
+          <img src={images[currentImage].zoom_image} alt="" />
         </div>
         <button name="next" className={styles.next} onClick={this.changeImage}>
           NEXT
@@ -132,8 +128,8 @@ export default class QuickView extends Component {
           <p>{saving || null} %</p>
           <div className={styles.childImagesSlider}>
             {images.map((image, index) => (
-              <button onClick={this.setImage} id={index} key={image.id}>
-                <img className={styles.sliderImage} src={image.path} alt="" key={image.id} id={index} />
+              <button onClick={this.setImage} id={index} key={String(index)}>
+                <img className={styles.sliderImage} src={image.path} alt="" id={index} />
               </button>
             ))}
           </div>
@@ -146,5 +142,5 @@ export default class QuickView extends Component {
 
 QuickView.propTypes = {
   sku: PropTypes.string.isRequired,
-  products: PropTypes.object.isRequired
+  products: PropTypes.array.isRequired
 };

@@ -69,7 +69,7 @@ class Listing extends React.Component {
           <Container pr="0" pl="0">
             <Row display="block" mr="0" ml="0">
               {products.map(item => (
-                <div className={styles.productWrapper}>
+                <div className={styles.productWrapper} key={item.id}>
                   <Product
                     key={item.id}
                     name={item.data.name}
@@ -91,7 +91,11 @@ class Listing extends React.Component {
                 </div>
               ))}
               <ResponsiveModal onCloseModal={this.onCloseQuickViewModal} open={this.state.openQuickView}>
-                <QuickView onCloseModal={this.onCloseQuickViewModal} sku={this.state.quickViewSku} />
+                <QuickView
+                  onCloseModal={this.onCloseQuickViewModal}
+                  sku={this.state.quickViewSku}
+                  products={products}
+                />
               </ResponsiveModal>
             </Row>
           </Container>
