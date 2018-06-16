@@ -11,6 +11,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actionCreators from 'redux/modules/wishlist';
 import Dropdown from '../Filters/Dropdown';
+import AppliedFilters from '../Filters/AppliedFilters';
 
 // import ProductItems from '../../data/RecentlyViewedProducts.js';
 const getProductImage = url => {
@@ -68,6 +69,18 @@ const Listing = ({
             </Div>
           </Row>
         </div>
+      </Container>
+    </Section>
+    <Section pt="0.3125rem" pb="0.3125rem" mb="0">
+      <Container pr="0" pl="0">
+        <Row display="block" mr="0" ml="0">
+          <Div col="12">
+            <Label fontWeight="600" display="inline-block">
+              Applied Filters
+            </Label>
+            <AppliedFilters data="" />
+          </Div>
+        </Row>
       </Container>
     </Section>
     <Section pt="1rem" mb="0">
