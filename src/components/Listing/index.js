@@ -64,7 +64,7 @@ const Listing = ({
             </Div>
             <Div col="3" ta="right">
               <Label>Sort By</Label>
-              <Dropdown display="rtl" title="MATERIAL" data="" />
+              <Dropdown display="rtl" title="Price (low to high)" data="" />
             </Div>
           </Row>
         </div>
