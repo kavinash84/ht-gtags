@@ -56,7 +56,7 @@ GridLayout.defaultProps = {
   subTitle: '',
   layout: 'square',
   layoutStyle: 'slider',
-  col: 4
+  col: 3
 };
 
 GridLayout.propTypes = {

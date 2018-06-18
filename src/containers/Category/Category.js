@@ -56,7 +56,7 @@ export default class Category extends Component {
             data={homepageCategories[1].values}
             layout="square"
             layoutStyle="grid"
-            col={4}
+            col={3}
           />
           <GridLayout
             categoryName={homepageCategories[1].title}
@@ -64,7 +64,7 @@ export default class Category extends Component {
             data={homepageCategories[1].values}
             layout="round"
             layoutStyle="grid"
-            col={4}
+            col={3}
           />
         </div>
         <Footer />

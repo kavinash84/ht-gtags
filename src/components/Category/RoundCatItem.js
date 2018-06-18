@@ -6,9 +6,13 @@ import { Link } from 'react-router-dom';
 const styles = require('./Slider.scss');
 
 const RoundCatItem = ({
-  image, name, url, layout
+  image, name, url, layout, layoutStyle
 }) => (
-  <Div className={`${styles.sliderItem} ${styles.grid} ${layout === 'square' ? styles.square : styles.round}`}>
+  <Div
+    className={`${styles.sliderItem}
+  ${layoutStyle === 'grid' ? styles.grid : ''}
+  ${layout === 'square' ? styles.square : styles.round}`}
+  >
     <Link className={styles.link} to={url}>
       <img src={image} alt={name} />
       <div className={styles.content}>
@@ -22,7 +26,8 @@ RoundCatItem.propTypes = {
   image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
-  layout: PropTypes.string.isRequired
+  layout: PropTypes.string.isRequired,
+  layoutStyle: PropTypes.string.isRequired
 };
 
 export default RoundCatItem;
