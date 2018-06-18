@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Section from 'hometown-components/lib/Section';
 import Container from 'hometown-components/lib/Container';
@@ -10,45 +10,40 @@ import RoundCatItem from './RoundCatItem';
 
 const styles = require('./Grid.scss');
 
-export default class GridLayout extends Component {
-  render() {
-    const {
-      data, categoryName, layout, layoutStyle, col
-    } = this.props;
-    return (
-      <Section p="0" pt="2.5rem" mb="0" className="catCarousel">
-        <Container pr="0" pl="0">
-          <Title title={categoryName} subTitle="" />
-          <Row display="block" pt="0.625rem" ml="0" mr="0">
-            {data.map(slide => (
-              <Div col={col} key={slide.category_id}>
-                <div className={styles.catBlockWrapper} key={slide.category_id}>
-                  {layout === 'round' ? (
-                    <SquareCatItem
-                      image={slide.image_url}
-                      name={slide.info.name}
-                      url={slide.info.url_key}
-                      layout={layout}
-                      layoutStyle={layoutStyle}
-                    />
-                  ) : (
-                    <RoundCatItem
-                      image={slide.image_url}
-                      name={slide.info.name}
-                      url={slide.info.url_key}
-                      layout={layout}
-                      layoutStyle={layoutStyle}
-                    />
-                  )}
-                </div>
-              </Div>
-            ))}
-          </Row>
-        </Container>
-      </Section>
-    );
-  }
-}
+const GridLayout = ({
+  data, categoryName, layout, layoutStyle, col
+}) => (
+  <Section p="0" pt="2.5rem" mb="0" className="catCarousel">
+    <Container pr="0" pl="0">
+      <Title title={categoryName} subTitle="" />
+      <Row display="block" pt="0.625rem" ml="0" mr="0">
+        {data.map(slide => (
+          <Div col={col} key={slide.category_id}>
+            <div className={styles.catBlockWrapper} key={slide.category_id}>
+              {layout === 'round' ? (
+                <SquareCatItem
+                  image={slide.image}
+                  name={slide.title}
+                  url={slide.url_key}
+                  layout={layout}
+                  layoutStyle={layoutStyle}
+                />
+              ) : (
+                <RoundCatItem
+                  image={slide.image}
+                  name={slide.title}
+                  url={slide.url_key}
+                  layout={layout}
+                  layoutStyle={layoutStyle}
+                />
+              )}
+            </div>
+          </Div>
+        ))}
+      </Row>
+    </Container>
+  </Section>
+);
 
 GridLayout.defaultProps = {
   data: [],
@@ -65,3 +60,5 @@ GridLayout.propTypes = {
   layoutStyle: PropTypes.string,
   col: PropTypes.number
 };
+
+export default GridLayout;

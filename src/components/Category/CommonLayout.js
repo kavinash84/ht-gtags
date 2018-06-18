@@ -1,15 +1,22 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
-import MainSlider from 'components/MainSlider';
-// import
+import ProductCarousel from 'components/ProductCarousel';
+import Carousel from './Carousel';
+import GridLayout from './GridLayout';
 
-const CommonLayout = (component, data) => {
+const CommonLayout = (component, categoryName, data) => {
   switch (component) {
     case 1:
-      return <MainSlider data={data} />;
+      return <Carousel categoryName={categoryName} data={data} layout="square" />;
     case 2:
-      return <MainSlider data={data} />;
+      return <Carousel categoryName={categoryName} data={data} layout="round" />;
+    case 3:
+      return <GridLayout categoryName={categoryName} data={data} layout="square" layoutStyle="grid" col={3} />;
+    case 4:
+      return <GridLayout categoryName={categoryName} data={data} layout="round" layoutStyle="grid" col={3} />;
+    case 5:
+      return <ProductCarousel title={categoryName} data={data} />;
     default:
+      return <Carousel categoryName={categoryName} data={data} layout="square" />;
   }
 };
 

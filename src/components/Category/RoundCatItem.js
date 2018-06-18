@@ -23,14 +23,18 @@ const RoundCatItem = ({
 );
 
 RoundCatItem.defaultProps = {
-  layoutStyle: 'slider'
+  layoutStyle: 'slider',
+  image: '',
+  name: '',
+  url: '',
+  layout: ''
 };
 
 RoundCatItem.propTypes = {
-  image: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
-  layout: PropTypes.string.isRequired,
+  image: PropTypes.string,
+  name: PropTypes.string,
+  url: PropTypes.string,
+  layout: PropTypes.string,
   layoutStyle: PropTypes.string
 };
 
