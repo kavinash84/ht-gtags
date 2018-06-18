@@ -43,12 +43,12 @@ export default class Category extends Component {
           <Menu />
           <MainSlider data={category.mainsection.data} />
           <Container pr="0" pl="0">
-            <Row display="block" pt="0.625rem" ml="0" mr="0">
-              <Div col={3}>
-                <Title title="Filters" subTitle="" />
+            <Row display="block" pt="2.25rem" ml="0" mr="0">
+              <Div col={2}>
+                <Title title="Filters" subTitle="" ta="left" />
                 <CategoryFilters data="" />
               </Div>
-              <Div col={9}>
+              <Div col={10}>
                 {category.sections &&
                   category.sections.map((cat, index) => (
                     <div key={String(index)}>{CommonLayout(cat.component, cat.title, cat.data)}</div>

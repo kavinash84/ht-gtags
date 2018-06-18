@@ -2,19 +2,28 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
+import { Link } from 'react-router-dom';
 import { Label } from 'hometown-components/lib/Label';
 
 const CategoryFilters = () => (
-  <Row display="block">
+  <Row display="block" ml="0" mr="0">
     <Div>
-      <Label>Categories</Label>
-      <Label>Shoe Rack</Label>
-      <Label>TV Units & Cabinets</Label>
-      <Label>Showcases</Label>
-      <Label>Cabinets</Label>
-      <Label>Beds</Label>
-      <Label>Sofas</Label>
-      <Label>Wardrobes</Label>
+      <Label color="textDark" mb="1rem" fontWeight="medium" display="block">
+        Categories
+      </Label>
+
+      <Label color="textLight" mt="0.625rem" mb="0.625rem" display="block">
+        <Link to="/">Shoe Rack</Link>
+      </Label>
+      <Label color="textLight" mt="0.625rem" mb="0.625rem" display="block">
+        <Link to="/">Beds</Link>
+      </Label>
+      <Label color="textLight" mt="0.625rem" mb="0.625rem" display="block">
+        <Link to="/">Showcases</Link>
+      </Label>
+      <Label color="textLight" mt="0.625rem" mb="0.625rem" display="block">
+        <Link to="/">Cabinets</Link>
+      </Label>
     </Div>
   </Row>
 );
