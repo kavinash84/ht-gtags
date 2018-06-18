@@ -15,13 +15,11 @@ const adjustSlides = length => ({
 
 export default class CategoryCarousel extends Component {
   render() {
-    const {
-      data, categoryName, subTitle, layout
-    } = this.props;
+    const { data, categoryName, layout } = this.props;
     return (
       <Section p="0" pt="2.5rem" mb="0" className="catCarousel">
         <Container pr="0" pl="0">
-          <Title title={categoryName} subTitle={subTitle} />
+          <Title title={categoryName} subTitle="" />
           <Row display="block" pt="0.625rem" ml="0" mr="0">
             <SlickSlider settings={adjustSlides(data.length)}>
               {data.map(slide => (
@@ -54,13 +52,11 @@ export default class CategoryCarousel extends Component {
 CategoryCarousel.defaultProps = {
   data: [],
   categoryName: '',
-  subTitle: '',
   layout: 'square'
 };
 
 CategoryCarousel.propTypes = {
   data: PropTypes.array,
   categoryName: PropTypes.string,
-  subTitle: PropTypes.string,
   layout: PropTypes.string
 };
