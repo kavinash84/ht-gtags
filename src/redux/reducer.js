@@ -14,6 +14,7 @@ import userSignUp from './modules/signUp';
 import updatepassword from './modules/updatepassword';
 import profile from './modules/profile';
 import forgotpassword from './modules/forgotpassword';
+import category from './modules/category';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -32,6 +33,7 @@ export default function createReducers(asyncReducers) {
       hashtags: homepage,
       products: homepage
     }),
+    category,
     stores,
     userLogin,
     userSignUp,

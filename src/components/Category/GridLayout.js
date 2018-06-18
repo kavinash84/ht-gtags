@@ -21,7 +21,7 @@ export default class GridLayout extends Component {
           <Title title={categoryName} subTitle={subTitle} />
           <Row display="block" pt="0.625rem" ml="0" mr="0">
             {data.map(slide => (
-              <Div col={col}>
+              <Div col={col} key={slide.category_id}>
                 <div className={styles.catBlockWrapper} key={slide.category_id}>
                   {layout === 'round' ? (
                     <SquareCatItem

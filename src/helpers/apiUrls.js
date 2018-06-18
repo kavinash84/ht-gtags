@@ -17,3 +17,7 @@ export const UPDATEPROFILE = 'tesla/users/update-profile';
 export const FORGOT_PASSWORD = 'tesla/users/forgot-password';
 export const CHECK_HASH = 'tesla/users/forgot-password/verify';
 export const RESET_PASSWORD = 'tesla/users/forgot-password/reset';
+
+/* Category Page */
+
+export const CATEGORY_PAGE = 'tesla/categories';

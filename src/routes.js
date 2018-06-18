@@ -51,7 +51,7 @@ const routes = [
     component: App,
     routes: [
       { path: '/', exact: true, component: Home },
-      { path: '/category', exact: true, component: Category },
+      { path: '/category/:category', exact: true, component: Category },
       { path: '/menu', exact: true, component: Menu },
       { path: '/slick', exact: true, component: SimpleSlider },
       { path: '/login', exact: true, component: isNotAuthenticated(Login) },
