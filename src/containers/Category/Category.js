@@ -64,7 +64,7 @@ export default class Category extends Component {
             data={homepageCategories[1].values}
             layout="round"
             layoutStyle="grid"
-            col={5}
+            col={4}
           />
         </div>
         <Footer />
