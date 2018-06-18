@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import Text from 'hometown-components/lib/Text';
 import Div from 'hometown-components/lib/Div';
 
-const Title = ({ title, subTitle }) => (
+const Title = ({ title, subTitle, ta }) => (
   <Div mb="1.25rem">
-    <Text fontSize="1.8rem" color="rgba(0, 0, 0, 0.75)" mt="0" mb="0" lh="1.4" ta="center" fontWeight="300">
+    <Text fontSize="1.8rem" color="rgba(0, 0, 0, 0.75)" mt="0" mb="0" lh="1.4" ta={ta} fontWeight="300">
       {title}
     </Text>
     {subTitle !== '' && (
@@ -18,12 +18,14 @@ const Title = ({ title, subTitle }) => (
 
 Title.defaultProps = {
   title: '',
-  subTitle: ''
+  subTitle: '',
+  ta: 'center'
 };
 
 Title.propTypes = {
   title: PropTypes.string,
-  subTitle: PropTypes.string
+  subTitle: PropTypes.string,
+  ta: PropTypes.string
 };
 
 export default Title;

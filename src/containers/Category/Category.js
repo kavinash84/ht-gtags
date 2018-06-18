@@ -46,12 +46,12 @@ export default class Category extends Component {
           <Menu />
           <MainSlider data={banners} />
           <Container pr="0" pl="0">
-            <Row display="block" pt="0.625rem" ml="0" mr="0">
-              <Div col={3}>
-                <Title title="Filters" subTitle="" />
+            <Row display="block" pt="2.25rem" ml="0" mr="0">
+              <Div col={2}>
+                <Title title="Filters" subTitle="" ta="left" />
                 <CategoryFilters data="" />
               </Div>
-              <Div col={9}>
+              <Div col={10}>
                 <Carousel
                   categoryName={homepageCategories[1].title}
                   data={homepageCategories[1].values}
@@ -77,7 +77,7 @@ export default class Category extends Component {
                   col={3}
                 />
                 {homepageProducts.map((products, index) => (
-                  <ProductCarousel key={String(index)} title={products.title} data={products.values} />
+                  <ProductCarousel length={3} key={String(index)} title={products.title} data={products.values} />
                 ))}
               </Div>
             </Row>

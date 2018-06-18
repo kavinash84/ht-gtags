@@ -16,10 +16,10 @@ export default class GridLayout extends Component {
       data, categoryName, layout, layoutStyle, col
     } = this.props;
     return (
-      <Section p="0" pt="2.5rem" mb="0" className="catCarousel">
+      <Section p="0" pt="0" mb="1.5rem" className="catCarousel">
         <Container pr="0" pl="0">
-          <Title title={categoryName} subTitle="" />
-          <Row display="block" pt="0.625rem" ml="0" mr="0">
+          <Title title={categoryName} subTitle="" ta="left" />
+          <Row display="block" pt="0" ml="0" mr="0">
             {data.map(slide => (
               <Div col={col}>
                 <div className={styles.catBlockWrapper} key={slide.category_id}>
