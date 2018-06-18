@@ -7,6 +7,7 @@ import Menu from 'containers/MenuNew/index';
 import MainSlider from 'components/MainSlider';
 import Carousel from 'components/Category/Carousel';
 import GridLayout from 'components/Category/GridLayout';
+import ProductCarousel from 'components/ProductCarousel';
 import Section from 'hometown-components/lib/Section';
 import { connect } from 'react-redux';
 import { loadTopSelling, isLoaded as isSectionLoaded } from 'redux/modules/homepage';
@@ -14,9 +15,10 @@ import { loadStores, isLoaded as isStoresLoaded } from 'redux/modules/stores';
 import Footer from 'components/Footer';
 import { getCities } from '../../selectors/homepage';
 
-@connect(({ homepage: { categories, banners }, stores }) => ({
+@connect(({ homepage: { categories, banners, products }, stores }) => ({
   banners: banners.data,
   homepageCategories: categories.data,
+  homepageProducts: products.data,
   cities: getCities(stores)
 }))
 @provideHooks({
@@ -31,7 +33,7 @@ import { getCities } from '../../selectors/homepage';
 })
 export default class Category extends Component {
   render() {
-    const { homepageCategories, banners } = this.props;
+    const { homepageCategories, homepageProducts, banners } = this.props;
     return (
       <Section p="0" mb="0">
         <Helmet title="Home" />
@@ -66,6 +68,14 @@ export default class Category extends Component {
             layoutStyle="grid"
             col={3}
           />
+          {homepageProducts.map((products, index) => (
+            <ProductCarousel
+              key={String(index)}
+              title={products.title}
+              subTitle={products.sub_title}
+              data={products.values}
+            />
+          ))}
         </div>
         <Footer />
       </Section>
@@ -75,10 +85,12 @@ export default class Category extends Component {
 
 Category.defaultProps = {
   homepageCategories: [],
+  homepageProducts: [],
   banners: []
 };
 
 Category.propTypes = {
   homepageCategories: PropTypes.array,
+  homepageProducts: PropTypes.array,
   banners: PropTypes.array
 };

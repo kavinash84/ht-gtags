@@ -22,12 +22,16 @@ const RoundCatItem = ({
   </Div>
 );
 
+RoundCatItem.defaultProps = {
+  layoutStyle: 'slider'
+};
+
 RoundCatItem.propTypes = {
   image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
   layout: PropTypes.string.isRequired,
-  layoutStyle: PropTypes.string.isRequired
+  layoutStyle: PropTypes.string
 };
 
 export default RoundCatItem;

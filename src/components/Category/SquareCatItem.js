@@ -21,12 +21,16 @@ const SquareCatItem = ({
   </Div>
 );
 
+SquareCatItem.defaultProps = {
+  layoutStyle: 'slider'
+};
+
 SquareCatItem.propTypes = {
   image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
   layout: PropTypes.string.isRequired,
-  layoutStyle: PropTypes.string.isRequired
+  layoutStyle: PropTypes.string
 };
 
 export default SquareCatItem;
