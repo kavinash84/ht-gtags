@@ -12,22 +12,23 @@ import Title from 'components/Title';
 import Container from 'hometown-components/lib/Container';
 import { connect } from 'react-redux';
 // import { wrapDispatch } from 'multireducer';
-import { loadCategory } from 'redux/modules/category';
+import { loadCategory, setCategory, isLoaded } from 'redux/modules/category';
 import Footer from 'components/Footer';
 import CommonLayout from 'components/Category/CommonLayout';
 
 const getSubMenu = (categories, id) => categories.filter(category => Number(category.id) === id)[0].children;
 
-@connect(({ homepage: { menu, categories, banners }, category }) => ({
+@connect(({ homepage: { menu }, category }) => ({
   menu: menu.data,
-  banners: banners.data,
-  categories: categories.data,
   category: category.data && category.data.items.text
 }))
 @provideHooks({
-  fetch: async ({ store: { dispatch }, params }) => {
+  fetch: async ({ store: { dispatch, getState }, params }) => {
     console.log(params);
-    await dispatch(loadCategory(131)).catch(error => console.log(error));
+    if (!isLoaded(getState(), 131)) {
+      await dispatch(loadCategory(131)).catch(error => console.log(error));
+    }
+    await setCategory(131);
   }
 })
 export default class Category extends Component {

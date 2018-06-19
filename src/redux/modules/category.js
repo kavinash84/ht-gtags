@@ -3,6 +3,7 @@ import { CATEGORY_PAGE } from 'helpers/apiUrls';
 const LOAD = 'categoryPage/LOAD';
 const LOAD_SUCCESS = 'categoryPage/LOAD_SUCCESS';
 const LOAD_FAIL = 'categoryPage/LOAD_FAIL';
+const SET_CURRENT_CATEGORY = 'categoryPage/SET_CURRENT_CATEGORY';
 
 const initialState = {
   loaded: false,
@@ -30,12 +31,23 @@ export default function reducer(state = initialState, action = {}) {
         loaded: false,
         error: action.error
       };
+    case SET_CURRENT_CATEGORY:
+      return {
+        ...state,
+        currentCategory: action.payLoad
+      };
     default:
       return state;
   }
 }
 
-export const isLoaded = globalState => globalState.category && globalState.category.loaded;
+export const isLoaded = (globalState, category) =>
+  globalState.category && globalState.category.loaded && globalState.category.currentCategory === category;
+
+export const setCategory = payLoad => ({
+  type: SET_CURRENT_CATEGORY,
+  payLoad
+});
 
 export const loadCategory = id => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
