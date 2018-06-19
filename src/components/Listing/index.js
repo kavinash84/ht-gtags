@@ -74,7 +74,7 @@ const Listing = ({
       <Container pr="0" pl="0">
         <Row display="block" mr="-15px" ml="-15px">
           {products.map(item => (
-            <div className={styles.productWrapper}>
+            <div className={styles.productWrapper} key={item.id}>
               <Product
                 key={item.id}
                 name={item.data.name}

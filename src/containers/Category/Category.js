@@ -11,19 +11,17 @@ import Row from 'hometown-components/lib/Row';
 import Title from 'components/Title';
 import Container from 'hometown-components/lib/Container';
 import { connect } from 'react-redux';
+// import { wrapDispatch } from 'multireducer';
 import { loadCategory } from 'redux/modules/category';
 import Footer from 'components/Footer';
 import CommonLayout from 'components/Category/CommonLayout';
 
-@connect(({
-  homepage: {
-    menu, categories, banners, products
-  }, category
-}) => ({
+const getSubMenu = (categories, id) => categories.filter(category => Number(category.id) === id)[0].children;
+
+@connect(({ homepage: { menu, categories, banners }, category }) => ({
   menu: menu.data,
-  homepageCategories: categories.data,
-  homepageProducts: products.data,
   banners: banners.data,
+  categories: categories.data,
   category: category.data && category.data.items.text
 }))
 @provideHooks({
@@ -34,8 +32,7 @@ import CommonLayout from 'components/Category/CommonLayout';
 })
 export default class Category extends Component {
   render() {
-    const { category } = this.props;
-    console.log(category);
+    const { category, menu } = this.props;
     return (
       <Section p="0" mb="0">
         <Helmet title="Home" />
@@ -46,7 +43,7 @@ export default class Category extends Component {
             <Row display="block" pt="2.25rem" ml="0" mr="0">
               <Div col={2}>
                 <Title title="Filters" subTitle="" ta="left" />
-                <CategoryFilters data="" />
+                <CategoryFilters data={getSubMenu(menu, 131)} />
               </Div>
               <Div col={10}>
                 {category.sections &&
@@ -64,9 +61,11 @@ export default class Category extends Component {
 }
 
 Category.defaultProps = {
-  category: []
+  category: [],
+  menu: []
 };
 
 Category.propTypes = {
-  category: PropTypes.array
+  category: PropTypes.array,
+  menu: PropTypes.array
 };
