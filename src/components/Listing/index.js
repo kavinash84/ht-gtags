@@ -90,7 +90,11 @@ class Listing extends React.Component {
                   />
                 </div>
               ))}
-              <ResponsiveModal onCloseModal={this.onCloseQuickViewModal} open={this.state.openQuickView}>
+              <ResponsiveModal
+                onCloseModal={this.onCloseQuickViewModal}
+                open={this.state.openQuickView}
+                classNames={{ modal: styles.quickViewModal }}
+              >
                 <QuickView
                   onCloseModal={this.onCloseQuickViewModal}
                   sku={this.state.quickViewSku}
@@ -121,7 +125,4 @@ Listing.propTypes = {
   productCount: PropTypes.string
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Listing);
+export default connect(null, mapDispatchToProps)(Listing);
