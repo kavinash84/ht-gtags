@@ -10,15 +10,16 @@ const styles = require('./Loadmore.scss');
 
 const showLoadMore = (total, count) => Math.ceil(Number(total) / count);
 
-const onClickLoadMore = (nextPageDispatcher, loadProducts, pageNo, query) => e => {
+const onClickLoadMore = (nextPageDispatcher, loadProducts, pageNo, query, sort) => e => {
   e.preventDefault();
   nextPageDispatcher();
-  loadProducts(query, Number(pageNo) + 1);
+  loadProducts(query, Number(pageNo) + 1, sort);
 };
 
 const mapStateToProps = state => ({
   currentPageCount: state.loadmore.page,
   query: state.products.query,
+  sort: state.products.sort,
   resultsCount: getProducts(state).length,
   productCount: getProductCount(state)
 });
@@ -26,13 +27,20 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({ nextPage: loadMore, loadMoreProducts: load }, dispatch);
 
 const LoadMore = ({
-  nextPage, loading, productCount, currentPageCount, resultsCount, loadMoreProducts, query
+  nextPage,
+  loading,
+  productCount,
+  currentPageCount,
+  resultsCount,
+  loadMoreProducts,
+  query,
+  sort
 }) => {
   const showMore = showLoadMore(productCount, resultsCount);
   return (
     <div className={styles.loadMoreWrapper}>
       {showMore > 1 ? (
-        <button onClick={onClickLoadMore(nextPage, loadMoreProducts, currentPageCount, query)} disabled={loading}>
+        <button onClick={onClickLoadMore(nextPage, loadMoreProducts, currentPageCount, query, sort)} disabled={loading}>
           <span className={styles.label}>Load More</span>
           {loading && (
             <svg x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enableBackground="new 0 0 24 24">
@@ -63,7 +71,8 @@ LoadMore.defaultProps = {
   currentPageCount: 0,
   productCount: '',
   resultsCount: 0,
-  query: ''
+  query: '',
+  sort: ''
 };
 
 LoadMore.propTypes = {
@@ -71,9 +80,13 @@ LoadMore.propTypes = {
   currentPageCount: PropTypes.number,
   productCount: PropTypes.string,
   query: PropTypes.string,
+  sort: PropTypes.string,
   nextPage: PropTypes.func.isRequired,
   loadMoreProducts: PropTypes.func.isRequired,
   resultsCount: PropTypes.number
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoadMore);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoadMore);

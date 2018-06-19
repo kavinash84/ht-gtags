@@ -1,14 +1,15 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Button from 'hometown-components/lib/Buttons';
 
 const styles = require('./AppliedFilters.scss');
 
-const AppliedFilters = () => (
+const AppliedFilters = ({ data, onClickClearFilter }) => (
   <div className={styles.appliedFilters}>
     <ul>
+      {data.map(item => <li key={item[0].value}>{item[0].value}</li>)}
       <li>
-        One Seater Sofas
+        Clear All Filters
         <Button
           btnType="custom"
           bg="#ffffff"
@@ -19,22 +20,7 @@ const AppliedFilters = () => (
           lh="0"
           height="15px"
           mt="-1px"
-        >
-          ×
-        </Button>
-      </li>
-      <li>
-        One Seater Sofas
-        <Button
-          btnType="custom"
-          bg="#ffffff"
-          color="#5e5e5e"
-          border="none"
-          ml="0.625rem"
-          p="8px 4px"
-          lh="0"
-          height="15px"
-          mt="-1px"
+          onClick={onClickClearFilter}
         >
           ×
         </Button>
@@ -44,11 +30,12 @@ const AppliedFilters = () => (
 );
 
 AppliedFilters.defaultProps = {
-  // data: ''
+  data: []
 };
 
 AppliedFilters.propTypes = {
-  // data: PropTypes.object
+  data: PropTypes.array,
+  onClickClearFilter: PropTypes.func.isRequired
 };
 
 export default AppliedFilters;

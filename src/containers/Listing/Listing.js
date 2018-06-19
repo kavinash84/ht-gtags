@@ -16,11 +16,12 @@ import {
   loadSearchQuery,
   isLoaded as isInitialListLoaded,
   setCategoryQuery,
-  clearPreviousList
+  clearPreviousList,
+  clearPreviousSort
 } from 'redux/modules/products';
 import { getProducts, getCategoryName, getProductCount } from 'selectors/products';
 import { resetLoadMore } from 'redux/modules/loadmore';
-import { encodeCategory } from 'utils/helper';
+import { encodeCategory, getFilters } from 'utils/helper';
 
 const SearchEmptyIcon = require('../../../static/search-empty.jpg');
 
@@ -30,6 +31,7 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
     const loadResults = location.pathname === '/search/' ? loadSearchQuery(query, 1) : loadListing(query, 1);
     if (!isInitialListLoaded(getState(), query)) {
       await dispatch(clearPreviousList());
+      await dispatch(clearPreviousSort());
       await dispatch(resetLoadMore());
       await dispatch(loadResults).catch(() => null);
     }
@@ -39,6 +41,8 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
 @connect(state => ({
   loading: state.products.loading,
   loaded: state.products.loaded,
+  category: state.products.query,
+  filters: getFilters(state.products.data.metadata.filter),
   wishListedSKUs: getSKUList(state.wishlist),
   wishListData: state.wishlist.data,
   products: getProducts(state),
@@ -51,23 +55,27 @@ export default class Listing extends Component {
     loading: PropTypes.bool,
     loaded: PropTypes.bool,
     products: PropTypes.array,
+    category: PropTypes.string,
     categoryName: PropTypes.string,
     productCount: PropTypes.string,
     wishListedSKUs: PropTypes.array,
-    wishListData: PropTypes.array
+    wishListData: PropTypes.array,
+    filters: PropTypes.array
   };
   static defaultProps = {
     loading: false,
     loaded: true,
     products: [],
     categoryName: '',
+    category: '',
     productCount: '0',
     wishListedSKUs: [],
-    wishListData: []
+    wishListData: [],
+    filters: []
   };
   render() {
     const {
-      loading, loaded, products, categoryName, productCount
+      loading, loaded, products, categoryName, category, filters, productCount
     } = this.props;
     const { wishListedSKUs, wishListData } = this.props;
     return (
@@ -97,6 +105,8 @@ export default class Listing extends Component {
                 products={products}
                 categoryName={categoryName}
                 productCount={productCount}
+                category={category}
+                filters={filters}
               />
               <LoadMore loading={loading} loaded={loaded} />
             </div>

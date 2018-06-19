@@ -12,8 +12,12 @@ import QuickView from 'components/QuickView/QuickView';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actionCreators from 'redux/modules/wishlist';
+import { loadSortBy, applyFilter, clearAllFilters } from 'redux/modules/products';
+import { getSelectedFilters } from 'utils/helper';
 import Dropdown from '../Filters/Dropdown';
 import AppliedFilters from '../Filters/AppliedFilters';
+
+const sortBy = require('data/sortby');
 
 // import ProductItems from '../../data/RecentlyViewedProducts.js';
 const getProductImage = url => {
@@ -33,9 +37,13 @@ const isInWishList = (list, id) => list.includes(id);
 const styles = require('./Listing.scss');
 
 class Listing extends React.Component {
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  };
   state = {
     openQuickView: false,
-    quickViewSku: ''
+    quickViewSku: '',
+    sortby: 'Popularity'
   };
   onOpenQuickViewModal = sku => {
     this.setState({ openQuickView: true, quickViewSku: sku });
@@ -43,12 +51,36 @@ class Listing extends React.Component {
   onCloseQuickViewModal = () => {
     this.setState({ openQuickView: false });
   };
+  setSortBy = (key, name) => e => {
+    e.preventDefault();
+    const { category } = this.props;
+    const { dispatch } = this.context.store;
+    this.setState({
+      sortby: name
+    });
+    dispatch(loadSortBy(category, key));
+  };
+
+  setFilter = key => e => {
+    e.preventDefault();
+    const { category } = this.props;
+    const { dispatch } = this.context.store;
+    const query = key.split('/')[2];
+    dispatch(applyFilter(category, query));
+  };
+
+  clearFilters = () => {
+    const { category } = this.props;
+    const { dispatch } = this.context.store;
+    dispatch(clearAllFilters(category));
+  };
 
   render() {
     const {
-      toggleWishList, products, categoryName, productCount, wishList, wishListData
+      toggleWishList, products, categoryName, productCount, wishList, wishListData, filters
     } = this.props;
-
+    const { sortby } = this.state;
+    const selectedFilters = getSelectedFilters(filters);
     return (
       <Div type="block">
         <Section mb="0.3125rem" p="1rem 0.5rem" bg="primary">
@@ -74,15 +106,18 @@ class Listing extends React.Component {
               <Row display="block" mr="0" ml="0">
                 <Div col="9">
                   <Label display="inline-block">Filter By</Label>
-                  <Dropdown checkbox title="Product Type" data="" />
-                  <Dropdown checkbox title="Price" data="" />
-                  <Dropdown checkbox title="DISCOUNT" data="" />
-                  <Dropdown checkbox title="COLOR" data="" />
-                  <Dropdown checkbox title="MATERIAL" data="" />
+                  {filters.map(item => (
+                    <Dropdown
+                      checkbox
+                      title={item.name === 'Main Material' ? 'Material' : item.name}
+                      onclick={this.setFilter}
+                      data={item.attributes}
+                    />
+                  ))}
                 </Div>
                 <Div col="3" ta="right">
                   <Label>Sort By</Label>
-                  <Dropdown display="rtl" title="Price (low to high)" data="" />
+                  <Dropdown display="rtl" title={sortby} onclick={this.setSortBy} data={sortBy} />
                 </Div>
               </Row>
             </div>
@@ -95,7 +130,7 @@ class Listing extends React.Component {
                 <Label fontWeight="600" display="inline-block">
                   Applied Filters
                 </Label>
-                <AppliedFilters data="" />
+                <AppliedFilters data={selectedFilters} onClickClearFilter={this.clearFilters} />
               </Div>
             </Row>
           </Container>
@@ -104,7 +139,7 @@ class Listing extends React.Component {
           <Container pr="0" pl="0">
             <Row display="block" mr="-15px" ml="-15px">
               {products.map(item => (
-                <div className={styles.productWrapper}>
+                <div className={styles.productWrapper} key={item.id}>
                   <Product
                     key={item.id}
                     name={item.data.name}
@@ -144,7 +179,9 @@ Listing.defaultProps = {
   wishList: [],
   wishListData: [],
   categoryName: '',
-  productCount: ''
+  productCount: '',
+  category: '',
+  filters: []
 };
 
 Listing.propTypes = {
@@ -153,7 +190,9 @@ Listing.propTypes = {
   wishList: PropTypes.array,
   wishListData: PropTypes.array,
   categoryName: PropTypes.string,
-  productCount: PropTypes.string
+  productCount: PropTypes.string,
+  category: PropTypes.string,
+  filters: PropTypes.array
 };
 
 export default connect(
