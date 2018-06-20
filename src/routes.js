@@ -29,6 +29,7 @@ import ResetPassword from 'containers/ResetPassword';
 import Profile from 'containers/Profile';
 import Pincode from 'components/Pincode';
 import SimpleSlider from 'components/SlickSlider';
+import Category from 'containers/Category/Category';
 
 const isAuthenticated = connectedReduxRedirect({
   redirectPath: '/login',
@@ -50,6 +51,7 @@ const routes = [
     component: App,
     routes: [
       { path: '/', exact: true, component: Home },
+      { path: '/category/:category', exact: true, component: Category },
       { path: '/menu', exact: true, component: Menu },
       { path: '/slick', exact: true, component: SimpleSlider },
       { path: '/login', exact: true, component: isNotAuthenticated(Login) },

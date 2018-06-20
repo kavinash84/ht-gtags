@@ -6,7 +6,9 @@ import { Label } from 'hometown-components/lib/Label';
 
 const styles = require('./Dropdown.scss');
 
-const Dropdown = ({ title, checkbox, display }) => (
+const Dropdown = ({
+  title, checkbox, display, data, onclick
+}) => (
   <div className={`${styles.filterBlock} dropdownWrapper`}>
     <Button
       btnType="custom"
@@ -26,15 +28,25 @@ const Dropdown = ({ title, checkbox, display }) => (
       {/* eslint-disable */}
       <ul>
         <li>
-          {checkbox && (
-            <div className="checkbox">
-              <input type="checkbox" id="checkbox" />
-              <label htmlFor="checkbox" />
+          {data.map(item => (
+            <div key={item.value} onClick={onclick(item.url_key, item.value)}>
+              {checkbox && (
+                <div className="checkbox">
+                  <input type="checkbox" id="checkbox" defaultChecked={item.isSelected ? item.isSelected : false} />
+                  <label htmlFor="checkbox" />
+                </div>
+              )}
+              <Label htmlFor="checkbox" fontSize="0.75em" ml="0.625rem">
+                {item.value}
+              </Label>
+              {item.isHex && (
+                <span key={item.hex_key} className={styles.colorBox} style={{ backgroundColor: item.hex_key }}>
+                  {' '}
+                  _
+                </span>
+              )}
             </div>
-          )}
-          <Label htmlFor="checkbox" fontSize="0.75em" ml="0.625rem">
-            Product Type 1
-          </Label>
+          ))}
         </li>
       </ul>
     </div>
@@ -42,17 +54,18 @@ const Dropdown = ({ title, checkbox, display }) => (
 );
 
 Dropdown.defaultProps = {
-  // data: ''
+  data: [],
   title: '',
   display: 'ltr',
   checkbox: false
 };
 
 Dropdown.propTypes = {
-  // data: PropTypes.object
+  data: PropTypes.array,
   title: PropTypes.string,
   display: PropTypes.string,
-  checkbox: PropTypes.bool
+  checkbox: PropTypes.bool,
+  onclick: PropTypes.func
 };
 
 export default Dropdown;

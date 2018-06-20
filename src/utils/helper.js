@@ -1,4 +1,5 @@
 import btoa from 'btoa';
+import filterName from '../data/Filter.js';
 
 export const encodeCategory = obj => {
   const values = obj && Object.values(obj).filter(x => x !== undefined);
@@ -16,3 +17,7 @@ export const filterStoresByCity = (stores, city) => {
     return stores.filter(store => store.city.toLowerCase() === city.toLowerCase());
   }
 };
+
+export const getFilters = filters => filters.filter(item => filterName.includes(item.name));
+
+export const getSelectedFilters = filters => filters.map(item => item.attributes.filter(x => x.isSelected));
