@@ -121,7 +121,6 @@ export const checkHashValidity = hash => ({
     try {
       const response = await client.get(`${CHECK_HASH_API}/${hash}`);
       response.hash = hash;
-      console.log(response.statusCode);
       return response;
     } catch (error) {
       return error;
