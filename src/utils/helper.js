@@ -20,11 +20,4 @@ export const filterStoresByCity = (stores, city) => {
 
 export const getFilters = filters => filters.filter(item => filterName.includes(item.name));
 
-export const getSelectedFilters = filters => {
-  const newFilters = filters.map(item =>
-    item.attributes.filter(value => value.isSelected).length >= 1
-      ? item.attributes.filter(value => value.isSelected)
-      : null);
-
-  return newFilters.filter(item => item);
-};
+export const getSelectedFilters = filters => filters.map(item => item.attributes.filter(x => x.isSelected));

@@ -211,4 +211,7 @@ Listing.propTypes = {
   isLoggedIn: PropTypes.bool
 };
 
-export default connect(null, mapDispatchToProps)(Listing);
+export default connect(
+  null,
+  mapDispatchToProps
+)(Listing);
