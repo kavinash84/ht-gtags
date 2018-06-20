@@ -47,21 +47,11 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
   wishListData: state.wishlist.data,
   products: getProducts(state),
   categoryName: getCategoryName(state),
-  productCount: getProductCount(state)
+  productCount: getProductCount(state),
+  isLoggedIn: state.userLogin.isLoggedIn
 }))
 @withRouter
 export default class Listing extends Component {
-  static propTypes = {
-    loading: PropTypes.bool,
-    loaded: PropTypes.bool,
-    products: PropTypes.array,
-    category: PropTypes.string,
-    categoryName: PropTypes.string,
-    productCount: PropTypes.string,
-    wishListedSKUs: PropTypes.array,
-    wishListData: PropTypes.array,
-    filters: PropTypes.array
-  };
   static defaultProps = {
     loading: false,
     loaded: true,
@@ -71,11 +61,33 @@ export default class Listing extends Component {
     productCount: '0',
     wishListedSKUs: [],
     wishListData: [],
-    filters: []
+    filters: [],
+    isLoggedIn: false
+  };
+  static propTypes = {
+    loading: PropTypes.bool,
+    loaded: PropTypes.bool,
+    products: PropTypes.array,
+    category: PropTypes.string,
+    categoryName: PropTypes.string,
+    productCount: PropTypes.string,
+    wishListedSKUs: PropTypes.array,
+    wishListData: PropTypes.array,
+    filters: PropTypes.array,
+    history: PropTypes.object.isRequired,
+    isLoggedIn: PropTypes.bool
   };
   render() {
     const {
-      loading, loaded, products, categoryName, category, filters, productCount
+      loading,
+      loaded,
+      products,
+      categoryName,
+      category,
+      filters,
+      productCount,
+      isLoggedIn,
+      history
     } = this.props;
     const { wishListedSKUs, wishListData } = this.props;
     return (
@@ -107,6 +119,8 @@ export default class Listing extends Component {
                 productCount={productCount}
                 category={category}
                 filters={filters}
+                history={history}
+                isLoggedIn={isLoggedIn}
               />
               <LoadMore loading={loading} loaded={loaded} />
             </div>

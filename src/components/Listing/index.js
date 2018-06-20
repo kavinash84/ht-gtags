@@ -16,6 +16,7 @@ import { loadSortBy, applyFilter, clearAllFilters } from 'redux/modules/products
 import { getSelectedFilters } from 'utils/helper';
 import Dropdown from '../Filters/Dropdown';
 import AppliedFilters from '../Filters/AppliedFilters';
+import { LOGIN_URL } from '../../helpers/Constants';
 
 const sortBy = require('data/sortby');
 
@@ -26,9 +27,10 @@ const getProductImage = url => {
 
 const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
 
-const onClick = (list, dispatcher) => sku => e => {
+const onClick = (list, dispatcher, isUserLoggedIn, history) => sku => e => {
   e.preventDefault();
-  dispatcher(list, sku);
+  if (isUserLoggedIn) return dispatcher(list, sku);
+  return history.push(LOGIN_URL);
 };
 
 const isInWishList = (list, id) => list.includes(id);
@@ -76,7 +78,15 @@ class Listing extends React.Component {
 
   render() {
     const {
-      toggleWishList, products, categoryName, productCount, wishList, wishListData, filters
+      toggleWishList,
+      products,
+      categoryName,
+      productCount,
+      wishList,
+      wishListData,
+      filters,
+      history,
+      isLoggedIn
     } = this.props;
     const { sortby } = this.state;
     const selectedFilters = getSelectedFilters(filters);
@@ -148,7 +158,7 @@ class Listing extends React.Component {
                     image={getProductImage(item.images[0].path)}
                     sku={item.data.sku}
                     simple_sku={item.simples}
-                    onClick={onClick(wishListData, toggleWishList)}
+                    onClick={onClick(wishListData, toggleWishList, isLoggedIn, history)}
                     onOpenQuickViewModal={() => {
                       this.onOpenQuickViewModal(item.data.sku);
                     }}
@@ -184,7 +194,8 @@ Listing.defaultProps = {
   categoryName: '',
   productCount: '',
   category: '',
-  filters: []
+  filters: [],
+  isLoggedIn: false
 };
 
 Listing.propTypes = {
@@ -195,7 +206,9 @@ Listing.propTypes = {
   categoryName: PropTypes.string,
   productCount: PropTypes.string,
   category: PropTypes.string,
-  filters: PropTypes.array
+  filters: PropTypes.array,
+  history: PropTypes.object.isRequired,
+  isLoggedIn: PropTypes.bool
 };
 
 export default connect(null, mapDispatchToProps)(Listing);
