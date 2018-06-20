@@ -11,8 +11,8 @@ import ServiceDetails from 'hometown-components/lib/ProductDetails/ServiceDetail
 import ProductDesc from 'hometown-components/lib/ProductDetails/ProductDesc';
 import Specs from 'hometown-components/lib/ProductDetails/Specs';
 import Reviews from 'hometown-components/lib/Reviews';
-import ProductDetailsSlider from 'components/ProductDetailsSlider';
-import ProductSlider from 'components/ProductSlider';
+import ProductDetailsCarousel from './Carousel';
+// import ProductsCarousel from 'components/ProductCarousel';
 // import { CART_URL } from 'helpers/Constants';
 import AddToCart from './AddtoCart';
 
@@ -54,7 +54,7 @@ const ProductDetails = () => (
             </select>
           </Div>
         </Row>
-        <ProductDetailsSlider imageList={prodDetails.images} />
+        <ProductDetailsCarousel data={prodDetails.images} />
       </Container>
     </Section>
     <Section
@@ -72,8 +72,8 @@ const ProductDetails = () => (
             <ProductDesc desc={prodDetails.description} />
             <Specs specs={prodDetails.specs} />
             <Reviews reviewItems={prodDetails.reviews} />
-            <ProductSlider productSliderTitle="Related Products" colSize={20} />
-            <ProductSlider productSliderTitle="Frequently Bought Together" colSize={20} />
+            {/* <ProductSlider productSliderTitle="Related Products" colSize={20} />
+          <ProductSlider productSliderTitle="Frequently Bought Together" colSize={20} /> */}
           </Div>
           <Div col="3">
             <ServiceDetails deliverBy={prodDetails.deliver_by} emiStarting={prodDetails.emi_starting} />

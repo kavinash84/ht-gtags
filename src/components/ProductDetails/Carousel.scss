@@ -1,0 +1,21 @@
+@import "../../theme/variables";
+@import "../../theme/mixins";
+
+.link {
+  display: block;
+}
+
+.catSliderItem {
+  padding: 0 5px;
+  .title {
+    @include font-size(1rem);
+    margin-top: 0.625rem;
+  }
+  img {
+    margin-bottom: 5px;
+  }
+}
+
+.sliderItem {
+  // display: inline-block;
+}
