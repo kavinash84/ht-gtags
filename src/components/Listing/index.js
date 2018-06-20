@@ -115,8 +115,9 @@ class Listing extends React.Component {
               <Row display="block" mr="0" ml="0">
                 <Div col="9">
                   <Label display="inline-block">Filter By</Label>
-                  {filters.map(item => (
+                  {filters.map((item, index) => (
                     <Dropdown
+                      key={String(index)}
                       checkbox
                       title={item.name === 'Main Material' ? 'Material' : item.name}
                       onclick={this.setFilter}
@@ -211,7 +212,4 @@ Listing.propTypes = {
   isLoggedIn: PropTypes.bool
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Listing);
+export default connect(null, mapDispatchToProps)(Listing);

@@ -27,8 +27,9 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState }, params, location }) => {
+    const { products: { sort } } = getState();
     const query = location.pathname === '/search/' ? location.search.split('?q=')[1] : encodeCategory(params);
-    const loadResults = location.pathname === '/search/' ? loadSearchQuery(query, 1) : loadListing(query, 1);
+    const loadResults = location.pathname === '/search/' ? loadSearchQuery(query, 1) : loadListing(query, 1, sort);
     if (!isInitialListLoaded(getState(), query)) {
       await dispatch(clearPreviousList());
       await dispatch(clearPreviousSort());

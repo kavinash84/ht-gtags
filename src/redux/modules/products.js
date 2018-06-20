@@ -166,7 +166,7 @@ export const applyFilter = (category, key) => ({
 
 export const load = (category, page, sort) => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-  promise: ({ client }) => client.get(`tesla/products/${category}/?${sort}&page=${page}`)
+  promise: ({ client }) => client.get(`tesla/products/${category}/?${sort}&page=${page}&maxitems=30`)
 });
 
 export const loadSearchQuery = (searchText, page) => ({
