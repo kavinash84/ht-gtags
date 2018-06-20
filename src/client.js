@@ -26,7 +26,7 @@ const persistConfig = {
   stateReconciler(inboundState, originalState) {
     return originalState;
   },
-  whitelist: ['cart', 'userLogin']
+  whitelist: ['cart', 'userLogin', 'pincode']
 };
 
 const dest = document.getElementById('content');
