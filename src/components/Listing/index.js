@@ -19,7 +19,6 @@ import AppliedFilters from '../Filters/AppliedFilters';
 
 const sortBy = require('data/sortby');
 
-// import ProductItems from '../../data/RecentlyViewedProducts.js';
 const getProductImage = url => {
   const pp = `${url.split('/').slice(-1)}`;
   return url.replace(pp, '1-product_500.jpg');
