@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AddToCart from 'components/ProductDetails/AddtoCart';
+import Div from 'hometown-components/lib/Div';
+import Row from 'hometown-components/lib/Row';
+import Heading from 'hometown-components/lib/Heading';
+import Span from 'hometown-components/lib/Span';
+import Text from 'hometown-components/lib/Text';
 
 const styles = require('./QuickView.scss');
 
@@ -111,30 +116,56 @@ export default class QuickView extends Component {
     } = data;
     return (
       <div className={styles.quickView}>
-        <button name="previous" className={styles.previous} onClick={this.changeImage}>
-          PREVIOUS
-        </button>
-        <div className={styles.imageContainer}>
-          <img src={images[currentImage].zoom_image} alt="" />
-        </div>
-        <button name="next" className={styles.next} onClick={this.changeImage}>
-          NEXT
-        </button>
-        {/* DATA CONTAINER */}
-        <div className={styles.dataContainer}>
-          <p>{name || null}</p>
-          <p>{price || null}</p>
-          <p>{discPrice || null}</p>
-          <p>{saving || null} %</p>
-          <div className={styles.childImagesSlider}>
-            {images.map((image, index) => (
-              <button onClick={this.setImage} id={index} key={String(index)}>
-                <img className={styles.sliderImage} src={image.path} alt="" id={index} />
+        <Row>
+          <Div col="7">
+            <div className={styles.imgSliderContainer}>
+              <button name="previous" className={styles.previous} onClick={this.changeImage}>
+                &#8249;
               </button>
-            ))}
-          </div>
-          <AddToCart skuId={sku} />
-        </div>
+              <div className={styles.imageContainer}>
+                <img src={images[currentImage].zoom_image} alt="" />
+              </div>
+              <button name="next" className={styles.next} onClick={this.changeImage}>
+                &#8250;
+              </button>
+            </div>
+          </Div>
+          <Div col="5" pl="2rem" pr="2rem">
+            <Div pt="1rem" className={styles.content}>
+              <Heading color="rgba(0, 0, 0, 0.75)" ellipsis={false} fontSize="1.375em" lh="1.7" mt="0" mb="1rem">
+                {name}
+              </Heading>
+              <Text>
+                <Span color="rgba(0, 0, 0, 0.6)" fontWeight="600" fontSize="1.5em" mr="1rem">
+                  Rs. {price}
+                </Span>
+                <Span fontWeight="400" color="rgba(0, 0, 0, 0.6)" fontSize="1.125em">
+                  <s>Rs. {discPrice}</s>
+                </Span>
+              </Text>
+              <Text color="rgba(0, 0, 0, 0.6)" fontWeight="700" fontSize="0.857rem" mb="0">
+                Savings:{' '}
+                <Span color="rgba(0, 0, 0, 0.6)" fontSize="0.857rem" va="bottom">
+                  Rs. 2,000 ({saving}%)
+                </Span>
+              </Text>
+              <Text color="rgba(0, 0, 0, 0.6)" fontWeight="700" fontSize="0.857rem" mb="2rem" mt="0.3125rem">
+                EMI:{' '}
+                <Span color="rgba(0, 0, 0, 0.6)" fontSize="0.857rem" va="bottom">
+                  starting from Rs.2,419{' '}
+                </Span>
+              </Text>
+              <AddToCart skuId={sku} />
+            </Div>
+            <Div className={styles.thumb}>
+              {images.map((image, index) => (
+                <button onClick={this.setImage} id={index} key={String(index)}>
+                  <img className={styles.sliderImage} src={image.path} alt="" id={index} />
+                </button>
+              ))}
+            </Div>
+          </Div>
+        </Row>
       </div>
     );
   }
