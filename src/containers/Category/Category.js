@@ -23,7 +23,7 @@ const getSubMenu = (categories, id) => categories.filter(category => Number(cate
     if (!isLoaded(getState(), 131)) {
       await dispatch(loadCategory(131)).catch(error => console.log(error));
     }
-    await setCategory(131);
+    await dispatch(setCategory(131));
   }
 })
 @connect(({ homepage: { menu }, category }) => ({
@@ -48,7 +48,7 @@ export default class Category extends Component {
               <Div col={10}>
                 {category.sections &&
                   category.sections.map((cat, index) => (
-                    <div key={String(index)}>{CommonLayout(cat.component, cat.title, cat.data)}</div>
+                    <div key={String(index)}>{CommonLayout(cat.component, cat.title, cat.data, cat.grid)}</div>
                   ))}
               </Div>
             </Row>
