@@ -32,7 +32,7 @@ const Dropdown = ({
             <div key={item.value} onClick={onclick(item.url_key, item.value)}>
               {checkbox && (
                 <div className="checkbox">
-                  <input type="checkbox" id="checkbox" checked={item.isSelected ? item.isSelected : false} />
+                  <input type="checkbox" id="checkbox" defaultChecked={item.isSelected ? item.isSelected : false} />
                   <label htmlFor="checkbox" />
                 </div>
               )}
