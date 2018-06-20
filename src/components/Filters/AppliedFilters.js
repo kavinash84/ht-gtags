@@ -7,7 +7,7 @@ const styles = require('./AppliedFilters.scss');
 const AppliedFilters = ({ data, onClickClearFilter }) => (
   <div className={styles.appliedFilters}>
     <ul>
-      {data.map(item => <li key={item[0].value}>{item[0].value}</li>)}
+      {data.map(item => item.map(x => <li key={x.value}>{x.value}</li>))}
       <li>
         Clear All Filters
         <Button

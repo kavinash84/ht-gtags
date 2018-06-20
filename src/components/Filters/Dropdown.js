@@ -29,28 +29,18 @@ const Dropdown = ({
       <ul>
         <li>
           {data.map(item => (
-            <div key={item.value}>
+            <div key={item.value} onClick={onclick(item.url_key, item.value)}>
               {checkbox && (
                 <div className="checkbox">
-                  <input
-                    type="checkbox"
-                    id="checkbox"
-                    onClick={onclick(item.url_key, item.value)}
-                    checked={item.isSelected ? item.isSelected : false}
-                  />
+                  <input type="checkbox" id="checkbox" checked={item.isSelected ? item.isSelected : false} />
                   <label htmlFor="checkbox" />
                 </div>
               )}
-              <Label onClick={onclick(item.url_key, item.value)} htmlFor="checkbox" fontSize="0.75em" ml="0.625rem">
+              <Label htmlFor="checkbox" fontSize="0.75em" ml="0.625rem">
                 {item.value}
               </Label>
               {item.isHex && (
-                <span
-                  key={item.hex_key}
-                  onClick={onclick(item.url_key, item.value)}
-                  className={styles.colorBox}
-                  style={{ backgroundColor: item.hex_key }}
-                >
+                <span key={item.hex_key} className={styles.colorBox} style={{ backgroundColor: item.hex_key }}>
                   {' '}
                   _
                 </span>
