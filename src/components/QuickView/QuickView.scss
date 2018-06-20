@@ -1,6 +1,6 @@
 .quickView {
+  background: #FFF;
   .imgSliderContainer {
-    padding-right: 1.5rem;
     background: #FFF;
     .imageContainer{
       width: 450px;
@@ -24,7 +24,7 @@
     }
     button {
       position: absolute;
-      background: #ececec;
+      background: transparent;
       border: none;
       font-size: 3rem;
       line-height: 0;
@@ -32,6 +32,7 @@
       padding-bottom: 10px;
       height: 50px;
       top: calc(50% - 25px);
+      z-index: 1;
     }
   }
   .content {
@@ -42,9 +43,10 @@
     }
   }
   .thumb {
-    position: absolute !important;
-    bottom: 1.25rem !important;
-    left: 2rem !important;
+    // position: absolute !important;
+    // bottom: 1.25rem !important;
+    // left: 2rem !important;
+    margin-top: 1.25rem !important;
     button {
       box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
       background: transparent;
