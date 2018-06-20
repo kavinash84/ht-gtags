@@ -13,8 +13,8 @@ export default class MainSlider extends Component {
     const { data } = this.props;
     return (
       <SlickSlider settings={settings}>
-        {data.map(slide => (
-          <div key={slide.id}>
+        {data.map((slide, index) => (
+          <div key={String(index)}>
             <SliderItem image={slide.url} url={slide.target_url} title={slide.title} />
           </div>
         ))}

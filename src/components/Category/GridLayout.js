@@ -17,8 +17,8 @@ const GridLayout = ({
     <Container pr="0" pl="0">
       <Title title={categoryName} subTitle="" ta="left" />
       <Row display="block" pt="0" ml="0" mr="0">
-        {data.map(slide => (
-          <Div col={col} key={slide.category_id}>
+        {data.map((slide, index) => (
+          <Div col={col} key={String(index)}>
             <div className={styles.catBlockWrapper} key={slide.category_id}>
               {layout === 'round' ? (
                 <SquareCatItem

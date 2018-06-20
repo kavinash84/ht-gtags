@@ -1,7 +1,6 @@
 import {
   App,
   Home,
-  Category,
   Menu,
   Listing,
   Wishlist,
@@ -30,6 +29,7 @@ import ResetPassword from 'containers/ResetPassword';
 import Profile from 'containers/Profile';
 import Pincode from 'components/Pincode';
 import SimpleSlider from 'components/SlickSlider';
+import Category from 'containers/Category/Category';
 
 const isAuthenticated = connectedReduxRedirect({
   redirectPath: '/login',

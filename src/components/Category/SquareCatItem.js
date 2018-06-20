@@ -9,7 +9,8 @@ const SquareCatItem = ({
   image, name, url, layout, layoutStyle
 }) => (
   <Div
-    className={`${styles.sliderItem} ${layoutStyle === 'grid' ? styles.grid : ''}
+    className={`${styles.sliderItem}
+    ${layoutStyle === 'grid' ? styles.grid : ''}
     ${layout === 'square' ? styles.square : styles.round}`}
   >
     <Link className={styles.link} to={url}>

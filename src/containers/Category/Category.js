@@ -11,17 +11,12 @@ import Row from 'hometown-components/lib/Row';
 import Title from 'components/Title';
 import Container from 'hometown-components/lib/Container';
 import { connect } from 'react-redux';
-// import { wrapDispatch } from 'multireducer';
 import { loadCategory, setCategory, isLoaded } from 'redux/modules/category';
 import Footer from 'components/Footer';
 import CommonLayout from 'components/Category/CommonLayout';
 
 const getSubMenu = (categories, id) => categories.filter(category => Number(category.id) === id)[0].children;
 
-@connect(({ homepage: { menu }, category }) => ({
-  menu: menu.data,
-  category: category.data && category.data.items.text
-}))
 @provideHooks({
   fetch: async ({ store: { dispatch, getState }, params }) => {
     console.log(params);
@@ -31,6 +26,10 @@ const getSubMenu = (categories, id) => categories.filter(category => Number(cate
     await setCategory(131);
   }
 })
+@connect(({ homepage: { menu }, category }) => ({
+  menu: menu.data,
+  category: category.data && category.data.items.text
+}))
 export default class Category extends Component {
   render() {
     const { category, menu } = this.props;
