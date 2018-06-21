@@ -57,21 +57,13 @@ const ProductDetails = () => (
         <ProductDetailsCarousel data={prodDetails.images} />
       </Container>
     </Section>
-    <Section
-      p="0"
-      pl="0.5rem"
-      pr="0.5rem"
-      pb="5rem"
-      mb="0"
-      bg="sectionBgDark"
-      boxShadow="0px 1px 6px 0px rgba(0,0,0,0.20)"
-    >
+    <Section p="0" pl="0.5rem" pr="0.5rem" pb="1.5rem" mb="0">
       <Container type="container" pr="0" pl="0">
         <Row display="block" mt="0.625rem" mb="0.625rem" mr="0">
-          <Div col="9">
+          <Div col="9" pr="2rem">
             <ProductDesc desc={prodDetails.description} />
             <Specs specs={prodDetails.specs} />
-            <Reviews reviewItems={prodDetails.reviews} />
+            <Reviews col="6" reviewItems={prodDetails.reviews} />
             {/* <ProductSlider productSliderTitle="Related Products" colSize={20} />
           <ProductSlider productSliderTitle="Frequently Bought Together" colSize={20} /> */}
           </Div>
