@@ -10,16 +10,17 @@ const styles = require('./Loadmore.scss');
 
 const showLoadMore = (total, count) => Math.ceil(Number(total) / count);
 
-const onClickLoadMore = (nextPageDispatcher, loadProducts, pageNo, query, sort) => e => {
+const onClickLoadMore = (nextPageDispatcher, loadProducts, pageNo, query, sort, pincode) => e => {
   e.preventDefault();
   nextPageDispatcher();
-  loadProducts(query, Number(pageNo) + 1, sort);
+  loadProducts(query, Number(pageNo) + 1, sort, pincode);
 };
 
 const mapStateToProps = state => ({
   currentPageCount: state.loadmore.page,
   query: state.products.query,
   sort: state.products.sort,
+  pincode: state.pincode.selectedPincode,
   resultsCount: getProducts(state).length,
   productCount: getProductCount(state)
 });
@@ -34,13 +35,17 @@ const LoadMore = ({
   resultsCount,
   loadMoreProducts,
   query,
-  sort
+  sort,
+  pincode
 }) => {
   const showMore = showLoadMore(productCount, resultsCount);
   return (
     <div className={styles.loadMoreWrapper}>
       {showMore > 1 ? (
-        <button onClick={onClickLoadMore(nextPage, loadMoreProducts, currentPageCount, query, sort)} disabled={loading}>
+        <button
+          onClick={onClickLoadMore(nextPage, loadMoreProducts, currentPageCount, query, sort, pincode)}
+          disabled={loading}
+        >
           <span className={styles.label}>Load More</span>
           {loading && (
             <svg x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enableBackground="new 0 0 24 24">
@@ -72,7 +77,8 @@ LoadMore.defaultProps = {
   productCount: '',
   resultsCount: 0,
   query: '',
-  sort: ''
+  sort: '',
+  pincode: ''
 };
 
 LoadMore.propTypes = {
@@ -81,9 +87,13 @@ LoadMore.propTypes = {
   productCount: PropTypes.string,
   query: PropTypes.string,
   sort: PropTypes.string,
+  pincode: PropTypes.string,
   nextPage: PropTypes.func.isRequired,
   loadMoreProducts: PropTypes.func.isRequired,
   resultsCount: PropTypes.number
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoadMore);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoadMore);

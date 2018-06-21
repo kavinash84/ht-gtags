@@ -17,7 +17,8 @@ import {
   isLoaded as isInitialListLoaded,
   setCategoryQuery,
   clearPreviousList,
-  clearPreviousSort
+  clearPreviousSort,
+  clearAllFilters as loadAfterPincodeChange
 } from 'redux/modules/products';
 import { getProducts, getCategoryName, getProductCount } from 'selectors/products';
 import { resetLoadMore } from 'redux/modules/loadmore';
@@ -27,25 +28,33 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState }, params, location }) => {
-    const { products: { sort } } = getState();
+    const {
+      products: { sort },
+      pincode: { selectedPincode }
+    } = getState();
     const query = location.pathname === '/search/' ? location.search.split('?q=')[1] : encodeCategory(params);
-    const loadResults = location.pathname === '/search/' ? loadSearchQuery(query, 1) : loadListing(query, 1, sort);
+    const loadResults =
+      location.pathname === '/search/'
+        ? loadSearchQuery(query, 1, selectedPincode)
+        : loadListing(query, 1, sort, selectedPincode);
     if (!isInitialListLoaded(getState(), query)) {
       await dispatch(clearPreviousList());
       await dispatch(clearPreviousSort());
       await dispatch(resetLoadMore());
       await dispatch(loadResults).catch(() => null);
     }
-    await dispatch(setCategoryQuery(query));
+    await dispatch(setCategoryQuery(query, selectedPincode));
   }
 })
 @connect(state => ({
   loading: state.products.loading,
   loaded: state.products.loaded,
   category: state.products.query,
+  page: state.loadmore.page,
   filters: getFilters(state.products.data.metadata.filter),
   wishListedSKUs: getSKUList(state.wishlist),
   wishListData: state.wishlist.data,
+  pincode: state.pincode.selectedPincode,
   products: getProducts(state),
   categoryName: getCategoryName(state),
   productCount: getProductCount(state),
@@ -53,18 +62,6 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
 }))
 @withRouter
 export default class Listing extends Component {
-  static defaultProps = {
-    loading: false,
-    loaded: true,
-    products: [],
-    categoryName: '',
-    category: '',
-    productCount: '0',
-    wishListedSKUs: [],
-    wishListData: [],
-    filters: [],
-    isLoggedIn: false
-  };
   static propTypes = {
     loading: PropTypes.bool,
     loaded: PropTypes.bool,
@@ -76,8 +73,32 @@ export default class Listing extends Component {
     wishListData: PropTypes.array,
     filters: PropTypes.array,
     history: PropTypes.object.isRequired,
+    pincode: PropTypes.string,
     isLoggedIn: PropTypes.bool
   };
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  };
+  static defaultProps = {
+    loading: false,
+    loaded: true,
+    products: [],
+    categoryName: '',
+    category: '',
+    productCount: '0',
+    wishListedSKUs: [],
+    wishListData: [],
+    filters: [],
+    pincode: '',
+    isLoggedIn: false
+  };
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.pincode !== this.props.pincode) {
+      const { dispatch } = this.context.store;
+      const { category } = this.props;
+      dispatch(loadAfterPincodeChange(category, nextProps.pincode));
+    }
+  }
   render() {
     const {
       loading,
@@ -88,6 +109,7 @@ export default class Listing extends Component {
       filters,
       productCount,
       isLoggedIn,
+      pincode,
       history
     } = this.props;
     const { wishListedSKUs, wishListData } = this.props;
@@ -121,6 +143,7 @@ export default class Listing extends Component {
                 category={category}
                 filters={filters}
                 history={history}
+                pincode={pincode}
                 isLoggedIn={isLoggedIn}
               />
               <LoadMore loading={loading} loaded={loaded} />

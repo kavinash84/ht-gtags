@@ -1,3 +1,5 @@
+import { PINCODE } from 'helpers/Constants';
+
 const LOAD = 'products/LOAD';
 const LOAD_SUCCESS = 'products/LOAD_SUCCESS';
 const LOAD_FAIL = 'products/LOAD_FAIL';
@@ -25,6 +27,8 @@ const initialState = {
   query: '',
   sort: 'sort=popularity&dir=desc'
 };
+
+const defaultPincode = PINCODE;
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
@@ -142,16 +146,18 @@ export function isLoaded(globalState, query) {
   }
   return false;
 }
-export const clearAllFilters = category => ({
+export const clearAllFilters = (category, pincode) => ({
   types: [LOAD_CLEAR_FILTERS, LOAD_CLEAR_FILTERS_SUCCESS, LOAD_CLEAR_FILTERS_FAIL],
-  promise: ({ client }) => client.get(`tesla/products/${category}`)
+  promise: ({ client }) =>
+    client.get(`tesla/products/${category}/?&pincode=${pincode.length ? pincode : defaultPincode}&maxitems=30`)
 });
 
-export const loadSortBy = (category, sort) => ({
+export const loadSortBy = (category, sort, pincode) => ({
   types: [LOAD_SORTBY, LOAD_SORTBY_SUCCESS, LOAD_SORTBY_FAIL],
   promise: async ({ client }) => {
     try {
-      const response = await client.get(`tesla/products/${category}/?${sort}`);
+      const getPincode = pincode.length ? pincode : defaultPincode;
+      const response = await client.get(`tesla/products/${category}/?${sort}&pincode=${getPincode}&maxitems=30`);
       response.sort = sort;
       return response;
     } catch (error) {
@@ -159,19 +165,28 @@ export const loadSortBy = (category, sort) => ({
     }
   }
 });
-export const applyFilter = (category, key) => ({
+/* eslint-disable max-len */
+
+export const applyFilter = (category, key, pincode) => ({
   types: [LOAD_FILTER, LOAD_FILTER_SUCCESS, LOAD_FILTER_FAIL],
-  promise: ({ client }) => client.get(`tesla/products/${category}/${key}`)
+  promise: ({ client }) =>
+    client.get(`tesla/products/${category}/${key}&pincode=${pincode.length ? pincode : defaultPincode}&maxitems=30`)
 });
 
-export const load = (category, page, sort) => ({
+export const load = (category, page, sort, pincode) => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-  promise: ({ client }) => client.get(`tesla/products/${category}/?${sort}&page=${page}&maxitems=30`)
+  promise: ({ client }) =>
+    client.get(`tesla/products/${category}/?${sort}&page=${page}&pincode=${
+      pincode.length ? pincode : defaultPincode
+    }&maxitems=30`)
 });
 
-export const loadSearchQuery = (searchText, page) => ({
+export const loadSearchQuery = (searchText, page, pincode) => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-  promise: ({ client }) => client.get(`tesla/search/find/?page=${page}&q=${searchText}&sort=popularity&dir=desc`)
+  promise: ({ client }) =>
+    client.get(`tesla/search/find/?page=${page}&q=${searchText}&pincode=${
+      pincode.length ? pincode : defaultPincode
+    }&sort=popularity&dir=desc&maxitems=30`)
 });
 
 export const setCategoryQuery = payLoad => ({
