@@ -152,9 +152,11 @@
 		z-index: 1;
 		line-height: 1;
 		svg{
-			cursor:pointer;
-			overflow:visible;
-			width: 44px !important;
+			cursor: pointer;
+	    overflow: visible;
+	    width: 30px !important;
+	    background: #f9f9f9;
+	    border-radius: 100%;
 			#heart{
 				transform-origin:center;
 				animation:animateHeartOut .3s linear forwards;
@@ -504,7 +506,6 @@
 	}
 }
 
-/* Wishlist Btn */
 /* Wishlist Animation Key Frames */
 @keyframes animateCircle{
 	40%{
