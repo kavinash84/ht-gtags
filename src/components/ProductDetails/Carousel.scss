@@ -1,0 +1,16 @@
+@import "../../theme/variables";
+@import "../../theme/mixins";
+
+.pdSliderItem {
+  padding: 0 7px;
+  .title {
+    @include font-size(1rem);
+    margin-top: 0.625rem !important;
+  }
+  img {
+    margin-bottom: 5px !important;
+    padding: 5px;
+    box-shadow: 2px 2px 10px 0 rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+  }
+}
