@@ -2,6 +2,7 @@ import _ from 'lodash';
 import { createStore as _createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import { createPersistoid, persistCombineReducers, REGISTER } from 'redux-persist';
+import { v4 } from 'uuid';
 import clientMiddleware from './middleware/clientMiddleware';
 import createReducers from './reducer';
 
@@ -32,8 +33,17 @@ function getNoopReducers(reducers, data) {
 export default function createStore({
   history, data, helpers, persistConfig
 }) {
-  const authToken = (data && data.userLogin && data.userLogin.isLoggedIn && data.userLogin.accessToken) || '';
-  helpers.client.setJwtToken(authToken);
+  if (data && data.userLogin) {
+    /* Check userAuthentication */
+    const authToken = (data.userLogin.isLoggedIn && data.userLogin.accessToken) || '';
+    helpers.client.setJwtToken(authToken);
+
+    /* Check userSession */
+    if (!data.userLogin.sessionId) {
+      data.userLogin.sessionId = v4();
+    }
+  }
+
   const middleware = [clientMiddleware(helpers), routerMiddleware(history)];
 
   if (__CLIENT__ && __DEVELOPMENT__) {
