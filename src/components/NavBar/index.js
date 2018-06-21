@@ -7,7 +7,7 @@ const styles = require('./NavBar.scss');
 const NavBar = ({ menuItems, handleEnter, handleLeave }) => (
   <div className={styles.navBar} onMouseLeave={handleLeave}>
     <div className={styles.navBarSlider}>
-      {menuItems.map(menuItem => (
+      {menuItems.filter(menu => menu.visibility === 'on').map(menuItem => (
         <Link to={`/${menuItem.url_key}`} key={menuItem.id} onMouseEnter={handleEnter(menuItem.id)}>
           {menuItem.name}
         </Link>
