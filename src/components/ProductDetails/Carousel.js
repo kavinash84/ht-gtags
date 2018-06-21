@@ -14,7 +14,7 @@ export default class CategoryCarousel extends Component {
   render() {
     const { data } = this.props;
     return (
-      <Section display="flex" p="0" pt="0.5rem" mb="0" className="catCarousel">
+      <Section display="flex" p="0" pt="0.5rem" mb="0" className="prodDetailsCarousel">
         <Container pr="0" pl="0">
           <SlickSlider settings={adjustSlides(data.length)}>
             {data.map(slide => (
