@@ -9,7 +9,7 @@ const HoverMenuBox = ({ handleEnter, handleLeave, menuData }) => (
   <div className={styles.menuBoxContainer}>
     <div className={styles.menuBox} onMouseEnter={handleEnter} onMouseLeave={handleLeave}>
       {menuData
-        ? menuData.children.map(subCategory1 => (
+        ? menuData.children.filter(menu => menu.visibility === 'on').map(subCategory1 => (
           <div key={subCategory1.id}>
             <ul className={styles.list}>
               <div className={styles.media}>
@@ -19,7 +19,7 @@ const HoverMenuBox = ({ handleEnter, handleLeave, menuData }) => (
                     <Link to={`/${subCategory1.url_key}`}>{subCategory1.name}</Link>
                   </h4>
                   {subCategory1.children
-                    ? subCategory1.children.map(subCategory2 => (
+                    ? subCategory1.children.filter(menu => menu.visibility === 'on').map(subCategory2 => (
                       <li key={subCategory2.id}>
                         <Link to={`/${subCategory2.url_key}`}>{subCategory2.name}</Link>
                       </li>
