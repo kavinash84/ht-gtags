@@ -2,6 +2,8 @@ import { createSelector } from 'reselect';
 
 export const products = state => state.products;
 
+export const productsData = createSelector([products], list => list.data);
+
 export const productMeta = createSelector(
   [products],
   meta =>

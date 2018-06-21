@@ -43,7 +43,7 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
   loading: state.products.loading,
   loaded: state.products.loaded,
   category: state.products.query,
-  filters: getFilters(state.products.data.metadata.filter),
+  filters: state.products.loaded && getFilters(state.products.data.metadata.filter),
   wishListedSKUs: getSKUList(state.wishlist),
   wishListData: state.wishlist.data,
   products: getProducts(state),
