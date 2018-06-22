@@ -42,7 +42,6 @@ const Dropdown = ({
               {item.isHex && (
                 <span key={item.hex_key} className={styles.colorBox} style={{ backgroundColor: item.hex_key }}>
                   {' '}
-                  _
                 </span>
               )}
             </div>
