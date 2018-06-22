@@ -406,13 +406,6 @@
 				width: 12px;
 			}
 		}
-		.dropdownValue {
-			width: 83%;
-			vertical-align: middle !important;
-			white-space: nowrap !important;
-			overflow: hidden !important;
-			text-overflow: ellipsis !important;
-		}
 		input[type="checkbox"] {
 			visibility: hidden;
 			&:checked + label {
@@ -470,6 +463,13 @@
 		}
 		&:hover, &:focus {
 			display: block !important;
+		}
+		.dropdownValue {
+			width: 83%;
+			vertical-align: middle !important;
+			white-space: nowrap !important;
+			overflow: hidden !important;
+			text-overflow: ellipsis !important;
 		}
 	}
 
