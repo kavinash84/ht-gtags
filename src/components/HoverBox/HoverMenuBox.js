@@ -13,7 +13,9 @@ const HoverMenuBox = ({ handleEnter, handleLeave, menuData }) => (
           <div key={subCategory1.id}>
             <ul className={styles.list}>
               <div className={styles.media}>
-                <Img src="http://via.placeholder.com/65x65" alt="" />
+                <div className={styles.catImgWrapper}>
+                  <Img src="http://via.placeholder.com/150x100" alt="" />
+                </div>
                 <div className={styles.mediaBody}>
                   <h4>
                     <Link to={`/${subCategory1.url_key}`}>{subCategory1.name}</Link>
