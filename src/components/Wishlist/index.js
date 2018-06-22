@@ -41,7 +41,9 @@ class Wishlist extends React.Component {
   };
 
   render() {
-    const { list, toggleWishList, wishList } = this.props;
+    const {
+      list, toggleWishList, wishList, wishlistLoading
+    } = this.props;
     const { quickViewSku, openQuickView } = this.state;
     return (
       <Div type="block">
@@ -62,6 +64,7 @@ class Wishlist extends React.Component {
                     this.onOpenQuickViewModal(item.product_info.data.sku);
                   }}
                   isWishList={isInWishList(wishList, item.product_info.data.sku)}
+                  wishlistLoading={wishlistLoading}
                   rating={item.product_info.data.reviews.rating.toFixed(1)}
                   reviewsCount={item.product_info.data.reviews.count}
                   savingAmount={item.product_info.data.max_price - item.product_info.data.max_special_price}
@@ -85,13 +88,15 @@ class Wishlist extends React.Component {
 }
 Wishlist.defaultProps = {
   wishList: [],
-  list: []
+  list: [],
+  wishlistLoading: false
 };
 
 Wishlist.propTypes = {
   toggleWishList: PropTypes.func.isRequired,
   wishList: PropTypes.array,
-  list: PropTypes.array
+  list: PropTypes.array,
+  wishlistLoading: PropTypes.bool
 };
 
 export default connect(null, mapDispatchToProps)(Wishlist);

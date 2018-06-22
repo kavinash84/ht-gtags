@@ -46,6 +46,7 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
   filters: state.products.loaded && getFilters(state.products.data.metadata.filter),
   wishListedSKUs: getSKUList(state.wishlist),
   wishListData: state.wishlist.data,
+  wishlistLoading: state.wishlist.loading,
   products: getProducts(state),
   categoryName: getCategoryName(state),
   productCount: getProductCount(state),
@@ -62,6 +63,7 @@ export default class Listing extends Component {
     productCount: '0',
     wishListedSKUs: [],
     wishListData: [],
+    wishlistLoading: false,
     filters: [],
     isLoggedIn: false
   };
@@ -74,6 +76,7 @@ export default class Listing extends Component {
     productCount: PropTypes.string,
     wishListedSKUs: PropTypes.array,
     wishListData: PropTypes.array,
+    wishlistLoading: PropTypes.bool,
     filters: PropTypes.array,
     history: PropTypes.object.isRequired,
     isLoggedIn: PropTypes.bool
@@ -90,7 +93,7 @@ export default class Listing extends Component {
       isLoggedIn,
       history
     } = this.props;
-    const { wishListedSKUs, wishListData } = this.props;
+    const { wishListedSKUs, wishListData, wishlistLoading } = this.props;
     return (
       <Section p="0" mb="0">
         <div className="wrapper">
@@ -122,6 +125,7 @@ export default class Listing extends Component {
                 filters={filters}
                 history={history}
                 isLoggedIn={isLoggedIn}
+                wishlistLoading={wishlistLoading}
               />
               <LoadMore loading={loading} loaded={loaded} />
             </div>
