@@ -57,26 +57,26 @@ class Listing extends React.Component {
   };
   setSortBy = (key, name) => e => {
     e.preventDefault();
-    const { category } = this.props;
+    const { category, pincode } = this.props;
     const { dispatch } = this.context.store;
     this.setState({
       sortby: name
     });
-    dispatch(loadSortBy(category, key));
+    dispatch(loadSortBy(category, key, pincode));
   };
 
   setFilter = key => e => {
     e.preventDefault();
-    const { category } = this.props;
+    const { category, pincode } = this.props;
     const { dispatch } = this.context.store;
     const query = key.split('/')[2];
-    dispatch(applyFilter(category, query));
+    dispatch(applyFilter(category, query, pincode));
   };
 
   clearFilters = () => {
-    const { category } = this.props;
+    const { category, pincode } = this.props;
     const { dispatch } = this.context.store;
-    dispatch(clearAllFilters(category));
+    dispatch(clearAllFilters(category, pincode));
   };
 
   render() {
@@ -172,6 +172,7 @@ class Listing extends React.Component {
                     rating={item.data.reviews.rating.toFixed(1)}
                     reviewsCount={item.data.reviews.count}
                     savingAmount={item.data.max_price - item.data.max_special_price}
+                    deliveredBy={item.data.delivery_details[0].value}
                   />
                   <Div mt="0" p="0.25rem 0.75rem 0.5rem">
                     <Button btnType="custom" border="1px solid" bc="#ae8873" color="#ae8873" p="8px 15px 0">
@@ -209,8 +210,9 @@ Listing.defaultProps = {
   productCount: '',
   category: '',
   filters: [],
-  isLoggedIn: false,
-  wishlistLoading: false
+  pincode: '',
+  wishlistLoading: false,
+  isLoggedIn: false
 };
 
 Listing.propTypes = {
@@ -223,8 +225,9 @@ Listing.propTypes = {
   category: PropTypes.string,
   filters: PropTypes.array,
   history: PropTypes.object.isRequired,
-  isLoggedIn: PropTypes.bool,
-  wishlistLoading: PropTypes.bool
+  wishlistLoading: PropTypes.bool,
+  pincode: PropTypes.string,
+  isLoggedIn: PropTypes.bool
 };
 
 export default connect(null, mapDispatchToProps)(Listing);
