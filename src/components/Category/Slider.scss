@@ -4,6 +4,8 @@
 .sliderItem {
   padding: 0 5px;
   text-align: center;
+  overflow: hidden;
+  filter: grayscale(0);
   .link {
     display: block;
     position: relative;
@@ -58,10 +60,18 @@
   }
   img {
     margin-bottom: 5px;
+    transition: all 1s ease;
   }
   &.grid {
     .title {
       margin-top: 0;
+    }
+  }
+  &:hover {
+    img {
+      transform: scale(1.042);
+      -webkit-filter: grayscale(100%);
+      filter: grayscale(100%);
     }
   }
 }
