@@ -38,12 +38,12 @@ const Dropdown = ({
               )}
               <Label htmlFor="checkbox" fontSize="0.75em" ml="0.625rem" className="dropdownValue">
                 {item.value}
+                {item.isHex && (
+                  <span key={item.hex_key} className={styles.colorBox} style={{ backgroundColor: item.hex_key }}>
+                    {' '}
+                  </span>
+                )}
               </Label>
-              {item.isHex && (
-                <span key={item.hex_key} className={styles.colorBox} style={{ backgroundColor: item.hex_key }}>
-                  {' '}
-                </span>
-              )}
             </div>
           ))}
         </li>
