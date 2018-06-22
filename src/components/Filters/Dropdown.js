@@ -36,7 +36,7 @@ const Dropdown = ({
                   <label htmlFor="checkbox" />
                 </div>
               )}
-              <Label htmlFor="checkbox" fontSize="0.75em" ml="0.625rem">
+              <Label htmlFor="checkbox" fontSize="0.75em" ml="0.625rem" className="dropdownValue">
                 {item.value}
               </Label>
               {item.isHex && (
