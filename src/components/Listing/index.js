@@ -7,9 +7,6 @@ import Product from 'hometown-components/lib/Product';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
 import { Label } from 'hometown-components/lib/Label';
-import AddCart from 'hometown-components/lib/Icons/AddCart';
-import Button from 'hometown-components/lib/Buttons';
-import Span from 'hometown-components/lib/Span';
 import ResponsiveModal from 'components/Modal';
 import QuickView from 'components/QuickView/QuickView';
 import { bindActionCreators } from 'redux';
@@ -18,6 +15,7 @@ import * as actionCreators from 'redux/modules/wishlist';
 import { loadSortBy, applyFilter, clearAllFilters } from 'redux/modules/products';
 import { getSelectedFilters } from 'utils/helper';
 import Dropdown from '../Filters/Dropdown';
+import AddToCart from '../AddToCart';
 import AppliedFilters from '../Filters/AppliedFilters';
 import { LOGIN_URL } from '../../helpers/Constants';
 
@@ -175,12 +173,7 @@ class Listing extends React.Component {
                     deliveredBy={item.data.delivery_details[0].value}
                   />
                   <Div mt="0" p="0.25rem 0.75rem 0.5rem">
-                    <Button btnType="custom" border="1px solid" bc="#ae8873" color="#ae8873" p="8px 15px 0">
-                      <AddCart fill="#ae8873" />
-                      <Span ml="0.625rem" fontSize="0.857rem" fontWeight="600" color="#ae8873" va="top">
-                        ADD TO CART
-                      </Span>
-                    </Button>
+                    <AddToCart simpleSku={Object.keys(item.data.simples)[0]} sku={item.data.sku} />
                   </Div>
                 </div>
               ))}
