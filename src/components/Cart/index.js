@@ -1,14 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Button from 'hometown-components/lib/Buttons';
 import Section from 'hometown-components/lib/Section';
 // import ProductQuantityCounter from '../ProductQuantityCounter';
+import { removeFromCart } from 'redux/modules/cart';
 import OrderSummary from '../Checkout/OrderSummary';
 
-const Cart = ({ results }) => (
+const onClick = (cartId, sessionId, pincode) => dispatcher => e => {
+  e.preventDefault();
+  dispatcher(cartId, sessionId, pincode);
+};
+
+const mapStateToProps = ({ pincode, userLogin }) => ({
+  pincode: pincode.selectedPincode,
+  sessionId: userLogin.sessionId
+});
+
+const Cart = ({
+  results, summary, discardFromCart, pincode, sessionId
+}) => (
   <Div type="block">
     <Section display="flex" pt="1.25rem" pb="2.5rem" mb="0" height="auto">
       <Container type="container" pr="2rem" pl="2rem">
@@ -31,11 +45,20 @@ const Cart = ({ results }) => (
                           <img className="thumb" src="http://via.placeholder.com/75x75" alt="" />
                         </td>
                         <td>{item.product_info.data.name}</td>
-                        <td>{item.product_info.data.delivery_details[0].value}</td>
+                        <td>
+                          {item.product_info.data.delivery_details.length &&
+                            item.product_info.data.delivery_details[0].value}
+                        </td>
                         <td>{item.qty}</td>
                         <td>{item.product_info.netprice}</td>
                         <td>
-                          <Button fontSize="1rem" fontWeight="300" color="#ae8873" btnType="link">
+                          <Button
+                            fontSize="1rem"
+                            fontWeight="300"
+                            color="#ae8873"
+                            btnType="link"
+                            onClick={onClick(item.id_customer_cart, sessionId, pincode)(discardFromCart)}
+                          >
                             x
                           </Button>
                         </td>
@@ -46,7 +69,12 @@ const Cart = ({ results }) => (
               </Div>
             </Row>
           </Div>
-          <OrderSummary />
+          <OrderSummary
+            itemsTotal={summary.items}
+            savings={summary.savings}
+            shipping={summary.shipping_charges}
+            totalCart={summary.total}
+          />
         </Row>
       </Container>
     </Section>
@@ -54,11 +82,17 @@ const Cart = ({ results }) => (
 );
 
 Cart.propTypes = {
-  results: PropTypes.array
+  results: PropTypes.array,
+  summary: PropTypes.object,
+  pincode: PropTypes.string,
+  sessionId: PropTypes.string.isRequired,
+  discardFromCart: PropTypes.func.isRequired
 };
 
 Cart.defaultProps = {
-  results: []
+  results: [],
+  summary: null,
+  pincode: ''
 };
 
-export default Cart;
+export default connect(mapStateToProps, { discardFromCart: removeFromCart })(Cart);

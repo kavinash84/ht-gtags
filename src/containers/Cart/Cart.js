@@ -17,23 +17,26 @@ import { loadCart, isLoaded as isCartLoaded } from 'redux/modules/cart';
     }
   }
 })
-@connect(({ cart }) => ({
-  results: cart.data
+@connect(({ cart: { data, summary } }) => ({
+  results: data,
+  summary
 }))
 export default class CartContainer extends Component {
   static defaultProps = {
-    results: []
+    results: [],
+    summary: null
   };
   static propTypes = {
-    results: PropTypes.array
+    results: PropTypes.array,
+    summary: PropTypes.object
   };
   render() {
-    const { results } = this.props;
+    const { results, summary } = this.props;
     return (
       <div>
         <Menu />
         <TitleBar title="Shopping Cart" />
-        <Cart results={results} />
+        <Cart results={results} summary={summary} />
       </div>
     );
   }
