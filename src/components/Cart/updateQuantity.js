@@ -17,13 +17,13 @@ const mapStateToProps = ({ pincode, userLogin }) => ({
   sessionId: userLogin.sessionId
 });
 
-const onClick = (skuId, simpleSku, session, pincode, qty) => dispatcher => e => {
+const onClick = (cartId, skuId, simpleSku, session, pincode, qty) => dispatcher => e => {
   e.preventDefault();
-  dispatcher(skuId, simpleSku, session, pincode, qty);
+  dispatcher(cartId, skuId, simpleSku, session, pincode, qty);
 };
 
 const ProductQuantity = ({
-  updateQuantity, quantity, simpleSku, skuId, pincode, sessionId
+  cartId, updateQuantity, quantity, simpleSku, skuId, pincode, sessionId
 }) => (
   <Row display="block" m="0">
     <Div col="12" ta="left">
@@ -35,7 +35,7 @@ const ProductQuantity = ({
         bc="transparent"
         p="0"
         va="middle"
-        onClick={onClick(skuId, simpleSku, sessionId, pincode, -1)(updateQuantity)}
+        onClick={onClick(cartId, skuId, simpleSku, sessionId, pincode, -1)(updateQuantity)}
         disabled={quantity <= 1}
       >
         <Img src={ReductIcon} alt="" float="left" height="22px" />
@@ -51,7 +51,7 @@ const ProductQuantity = ({
         bc="transparent"
         p="0"
         va="middle"
-        onClick={onClick(skuId, simpleSku, sessionId, pincode, 1)(updateQuantity)}
+        onClick={onClick(cartId, skuId, simpleSku, sessionId, pincode, 1)(updateQuantity)}
       >
         <Img src={IncreaseIcon} alt="" float="left" height="22px" />
       </Button>
@@ -62,6 +62,7 @@ const ProductQuantity = ({
 ProductQuantity.propTypes = {
   updateQuantity: PropTypes.func.isRequired,
   quantity: PropTypes.number.isRequired,
+  cartId: PropTypes.number.isRequired,
   skuId: PropTypes.string.isRequired,
   simpleSku: PropTypes.string.isRequired,
   pincode: PropTypes.string.isRequired,

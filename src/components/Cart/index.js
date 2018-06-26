@@ -15,13 +15,15 @@ const onClick = (cartId, sessionId, pincode) => dispatcher => e => {
   dispatcher(cartId, sessionId, pincode);
 };
 
-const mapStateToProps = ({ pincode, userLogin }) => ({
+const mapStateToProps = ({ pincode, userLogin, cart }) => ({
+  currentId: cart.key,
+  cartUpdating: cart.cartUpdating,
   pincode: pincode.selectedPincode,
   sessionId: userLogin.sessionId
 });
 
 const Cart = ({
-  results, summary, discardFromCart, pincode, sessionId
+  results, summary, discardFromCart, pincode, sessionId, currentId, cartUpdating
 }) => (
   <Div type="block">
     <Section display="flex" pt="1.25rem" pb="2.5rem" mb="0" height="auto">
@@ -41,6 +43,7 @@ const Cart = ({
                     </tr>
                     {results.map(item => (
                       <tr key={item.id_customer_cart}>
+                        {cartUpdating && currentId === item.id_customer_cart ? "I'm loaing" : null}
                         <td>
                           <img className="thumb" src={item.product_info.images[0].path} alt="" />
                         </td>
@@ -51,6 +54,7 @@ const Cart = ({
                         </td>
                         <td>
                           <ProductQuantity
+                            cartId={item.id_customer_cart}
                             quantity={item.qty}
                             simpleSku={item.simple_sku}
                             skuId={item.configurable_sku}
@@ -91,6 +95,8 @@ Cart.propTypes = {
   results: PropTypes.array,
   summary: PropTypes.object,
   pincode: PropTypes.string,
+  cartUpdating: PropTypes.bool,
+  currentId: PropTypes.string,
   sessionId: PropTypes.string.isRequired,
   discardFromCart: PropTypes.func.isRequired
 };
@@ -98,7 +104,9 @@ Cart.propTypes = {
 Cart.defaultProps = {
   results: [],
   summary: null,
-  pincode: ''
+  pincode: '',
+  cartUpdating: false,
+  currentId: ''
 };
 
 export default connect(mapStateToProps, { discardFromCart: removeFromCart })(Cart);

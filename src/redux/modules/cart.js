@@ -12,13 +12,15 @@ const UPDATE_CART_FAIL = 'cart/UPDATE_CART_FAIL';
 const REMOVE_FROM_CART = 'cart/REMOVE_FROM_CART';
 const REMOVE_FROM_CART_SUCCESS = 'cart/REMOVE_FROM_CART_SUCCESS';
 const REMOVE_FROM_CART_FAIL = 'cart/REMOVE_FROM_CART_FAIL';
+const SET_LOADING = 'cart/SET_LOADING';
 
 const initialState = {
   data: [],
   summary: {},
   loaded: false,
   addedToCart: false,
-  cartUpdated: false
+  cartUpdated: false,
+  key: ''
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -42,7 +44,6 @@ export default function reducer(state = initialState, action = {}) {
     case ADD_TO_CART:
       return {
         ...state,
-        loaded: false /* because when user adds to cart -> cart page load agains */,
         addingToCart: true,
         addedToCart: false
       };
@@ -65,6 +66,7 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         cartUpdating: true,
+        key: action.payLoad,
         error: null
       };
     case UPDATE_CART_SUCCESS:
@@ -85,8 +87,10 @@ export default function reducer(state = initialState, action = {}) {
     case REMOVE_FROM_CART:
       return {
         ...state,
-        error: null,
-        cartLoading: true
+        key: action.payLoad,
+        cartUpdating: true,
+        cartUpdated: false,
+        error: null
       };
     case REMOVE_FROM_CART_SUCCESS:
       return {
@@ -134,7 +138,9 @@ export const addToCart = (sku, simpleSku, session, pincode) => ({
   }
 });
 
-export const updateCart = (sku, simpleSku, session, pincode, qty) => ({
+export const updateCart = (cartId, sku, simpleSku, session, pincode, qty) => ({
+  type: 'UPDATE_CART',
+  payLoad: cartId,
   types: [UPDATE_CART, UPDATE_CART_SUCCESS, UPDATE_CART_FAIL],
   promise: async ({ client }) => {
     try {
@@ -154,6 +160,8 @@ export const updateCart = (sku, simpleSku, session, pincode, qty) => ({
 });
 
 export const removeFromCart = (cartId, session, pincode) => ({
+  type: 'REMOVE_FROM_CART',
+  payLoad: cartId,
   types: [REMOVE_FROM_CART, REMOVE_FROM_CART_SUCCESS, REMOVE_FROM_CART_FAIL],
   promise: async ({ client }) => {
     try {
@@ -163,4 +171,9 @@ export const removeFromCart = (cartId, session, pincode) => ({
       throw error;
     }
   }
+});
+
+export const setLoading = payLoad => ({
+  type: SET_LOADING,
+  payLoad
 });
