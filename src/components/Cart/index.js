@@ -6,8 +6,8 @@ import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Button from 'hometown-components/lib/Buttons';
 import Section from 'hometown-components/lib/Section';
-// import ProductQuantityCounter from '../ProductQuantityCounter';
 import { removeFromCart } from 'redux/modules/cart';
+import ProductQuantity from './updateQuantity';
 import OrderSummary from '../Checkout/OrderSummary';
 
 const onClick = (cartId, sessionId, pincode) => dispatcher => e => {
@@ -42,14 +42,20 @@ const Cart = ({
                     {results.map(item => (
                       <tr key={item.id_customer_cart}>
                         <td>
-                          <img className="thumb" src="http://via.placeholder.com/75x75" alt="" />
+                          <img className="thumb" src={item.product_info.images[0].path} alt="" />
                         </td>
                         <td>{item.product_info.data.name}</td>
                         <td>
                           {item.product_info.data.delivery_details.length &&
                             item.product_info.data.delivery_details[0].value}
                         </td>
-                        <td>{item.qty}</td>
+                        <td>
+                          <ProductQuantity
+                            quantity={item.qty}
+                            simpleSku={item.simple_sku}
+                            skuId={item.configurable_sku}
+                          />
+                        </td>
                         <td>{item.product_info.netprice}</td>
                         <td>
                           <Button

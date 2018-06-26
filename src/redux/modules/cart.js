@@ -17,7 +17,7 @@ const initialState = {
   data: [],
   summary: {},
   loaded: false,
-  cartLoaded: false,
+  addedToCart: false,
   cartUpdated: false
 };
 
@@ -25,41 +25,47 @@ export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case LOAD_CART:
       return {
-        cartLoading: true
+        loading: true
       };
     case LOAD_CART_SUCCESS:
       return {
         data: action.result && 'cart' in action.result ? action.result.cart : [],
         summary: action.result && 'summary' in action.result ? action.result.summary : {},
-        cartLoading: false,
-        cartLoaded: true
+        loading: false,
+        loaded: true
       };
     case LOAD_CART_FAIL:
       return {
-        cartLoading: false,
-        cartLoaded: false
+        loading: false,
+        loaded: false
       };
     case ADD_TO_CART:
       return {
         ...state,
-        cartLoading: true
+        loaded: false /* because when user adds to cart -> cart page load agains */,
+        addingToCart: true,
+        addedToCart: false
       };
     case ADD_TO_CART_SUCCESS:
       return {
         ...state,
-        loading: false,
+        addingToCart: false,
+        addedToCart: true,
         data: action.result && 'cart' in action.result ? action.result.cart.cart : [],
         summary: action.result && 'cart' in action.result ? action.result.cart.summary : {}
       };
     case ADD_TO_CART_FAIL:
       return {
         ...state,
-        loaded: false
+        addingToCart: false,
+        addedToCart: false,
+        error: action.error
       };
     case UPDATE_CART:
       return {
         ...state,
-        cartUpdating: true
+        cartUpdating: true,
+        error: null
       };
     case UPDATE_CART_SUCCESS:
       return {
@@ -73,32 +79,36 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         cartUpdating: false,
-        loaded: false
+        cartUpdated: false,
+        error: action.error
       };
     case REMOVE_FROM_CART:
       return {
         ...state,
+        error: null,
         cartLoading: true
       };
     case REMOVE_FROM_CART_SUCCESS:
       return {
         ...state,
-        cartLoading: false,
-        cartLoaded: true,
+        cartUpdating: false,
+        cartUpdated: true,
         data: action.result && 'cart' in action.result ? action.result.cart.cart : [],
         summary: action.result && 'cart' in action.result ? action.result.cart.summary : {}
       };
     case REMOVE_FROM_CART_FAIL:
       return {
         ...state,
-        cartLoaded: false
+        cartUpdating: false,
+        cartUpdated: false,
+        error: action.error
       };
     default:
       return state;
   }
 }
 
-export const isLoaded = globalState => globalState.category && globalState.cart.cartLoaded;
+export const isLoaded = globalState => globalState.category && globalState.cart.loaded;
 
 export const loadCart = (session, pincode) => ({
   types: [LOAD_CART, LOAD_CART_SUCCESS, LOAD_CART_FAIL],
@@ -135,7 +145,7 @@ export const updateCart = (sku, simpleSku, session, pincode, qty) => ({
         pincode,
         qty
       };
-      const response = await client.post(ADDTOCART_API, postData);
+      const response = await client.put(ADDTOCART_API, postData);
       return response;
     } catch (error) {
       throw error;

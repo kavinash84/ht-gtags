@@ -6,69 +6,66 @@ import Row from 'hometown-components/lib/Row';
 import Div from 'hometown-components/lib/Div';
 import Img from 'hometown-components/lib/Img';
 import { connect } from 'react-redux';
-import * as actionCreators from 'redux/modules/cart';
+import { updateCart } from 'redux/modules/cart';
+import { PINCODE } from 'helpers/Constants';
 
 const ReductIcon = require('../../../static/minus.jpg');
 const IncreaseIcon = require('../../../static/plus.jpg');
 
-const mapStateToProps = ({ cart }) => ({ ...cart });
+const mapStateToProps = ({ pincode, userLogin }) => ({
+  pincode: pincode.selectedPincode === '' ? PINCODE : pincode.selectedPincode,
+  sessionId: userLogin.sessionId
+});
 
-const onClick = (dispatcher, skuId) => e => {
+const onClick = (skuId, simpleSku, session, pincode, qty) => dispatcher => e => {
   e.preventDefault();
-  dispatcher(skuId);
+  dispatcher(skuId, simpleSku, session, pincode, qty);
 };
 
-const getCount = (cartList, skuId) => {
-  const itemCount = cartList.find(item => item.sku === skuId);
-  const { count } = itemCount || 0;
-  return count;
-};
+const ProductQuantity = ({
+  updateQuantity, quantity, simpleSku, skuId, pincode, sessionId
+}) => (
+  <Row display="block" m="0">
+    <Div col="12" ta="left">
+      <Button
+        type="custom"
+        color="textDark"
+        border="none"
+        bg="white"
+        bc="transparent"
+        p="0"
+        va="middle"
+        onClick={onClick(skuId, simpleSku, sessionId, pincode, -1)(updateQuantity)}
+        disabled={quantity <= 1}
+      >
+        <Img src={ReductIcon} alt="" float="left" height="22px" />
+      </Button>
+      <Label color="textDark" mb="0" mt="0" p="0 10px">
+        {quantity}
+      </Label>
+      <Button
+        type="custom"
+        color="textDark"
+        border="none"
+        bg="white"
+        bc="transparent"
+        p="0"
+        va="middle"
+        onClick={onClick(skuId, simpleSku, sessionId, pincode, 1)(updateQuantity)}
+      >
+        <Img src={IncreaseIcon} alt="" float="left" height="22px" />
+      </Button>
+    </Div>
+  </Row>
+);
 
-const ProductQuantityCounter = ({
-  skuId, cartList, reduceQuantity, addToCart
-}) => {
-  const count = getCount(cartList, skuId);
-  return (
-    <Row display="block" m="0">
-      <Div col="12" ta="left">
-        <Button
-          type="custom"
-          color="textDark"
-          border="none"
-          bg="white"
-          bc="transparent"
-          p="0"
-          va="middle"
-          onClick={onClick(reduceQuantity, skuId)}
-          disabled={count <= 1}
-        >
-          <Img src={ReductIcon} alt="" float="left" height="22px" />
-        </Button>
-        <Label color="textDark" mb="0" mt="0" p="0 10px">
-          {count}
-        </Label>
-        <Button
-          type="custom"
-          color="textDark"
-          border="none"
-          bg="white"
-          bc="transparent"
-          p="0"
-          va="middle"
-          onClick={onClick(addToCart, skuId)}
-        >
-          <Img src={IncreaseIcon} alt="" float="left" height="22px" />
-        </Button>
-      </Div>
-    </Row>
-  );
-};
-
-ProductQuantityCounter.propTypes = {
+ProductQuantity.propTypes = {
+  updateQuantity: PropTypes.func.isRequired,
+  quantity: PropTypes.number.isRequired,
   skuId: PropTypes.string.isRequired,
-  cartList: PropTypes.array.isRequired,
-  reduceQuantity: PropTypes.func.isRequired,
-  addToCart: PropTypes.func.isRequired
+  simpleSku: PropTypes.string.isRequired,
+  pincode: PropTypes.string.isRequired,
+  sessionId: PropTypes.string.isRequired
 };
 
-export default connect(mapStateToProps, { ...actionCreators })(ProductQuantityCounter);
+export default connect(mapStateToProps, { updateQuantity: updateCart })(ProductQuantity);
