@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import AddCart from 'hometown-components/lib/Icons/AddCart';
 import Button from 'hometown-components/lib/Buttons';
+import Img from 'hometown-components/lib/Img';
 import Span from 'hometown-components/lib/Span';
 import * as actionCreators from 'redux/modules/cart';
 import { getCartListSKU } from 'selectors/cart';
@@ -12,6 +13,7 @@ import { PINCODE, CART_URL } from 'helpers/Constants';
 
 const checkSKUInCart = (list, sku) => list.includes(sku);
 const styles = require('./AddToCart.scss');
+const LoaderIcon = require('../../../static/refresh.svg');
 
 const onClick = (skuId, simpleSku, session, pincode) => dispatcher => e => {
   e.preventDefault();
@@ -46,6 +48,7 @@ const AddToCart = ({
           onClick={onClick(sku, simpleSku, session, pincode)(addToCart)}
         >
           <AddCart fill="#ae8873" />
+          <Img className="spin" src={LoaderIcon} display="inline" />
           <Span ml="0.625rem" fontSize="0.857rem" fontWeight="600" color="#ae8873" va="top">
             ADD TO CART
           </Span>
