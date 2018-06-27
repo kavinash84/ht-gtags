@@ -68,7 +68,7 @@ const routes = [
       { path: '/update-password', exact: true, component: UpdatePassword },
       { path: '/payment', exact: true, component: Payment },
       { path: '/counter', exact: true, component: TestCounter },
-      { path: '/product-details', exact: true, component: ProductDetails },
+      { path: '/product-details/:skuId', exact: true, component: ProductDetails },
       { path: '/delivery-address', exact: true, component: DeliveryAddress },
       { path: '/payment-options', exact: true, component: PaymentOptions },
       { path: '/review-order', exact: true, component: ReviewOrder },
