@@ -45,7 +45,6 @@ const Cart = ({
                         <th>Cost</th>
                         <th />
                       </tr>
-                      {results && results.length === 0 && <div>Cart Empty</div>}
                       {results.map(item => (
                         <tr key={item.id_customer_cart}>
                           <td>

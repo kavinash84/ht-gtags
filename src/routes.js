@@ -16,7 +16,6 @@ import {
   PaymentOptions,
   ReviewOrder,
   Stores,
-  CartEmpty,
   ProductNotFound,
   NotFound
 } from 'containers';
@@ -76,8 +75,6 @@ const routes = [
       { path: '/pincode', exact: true, component: Pincode },
       { path: '/stores', exact: true, component: Stores },
       { path: '/product-not-found', exact: true, component: ProductNotFound },
-      { path: '/cart-empty', exact: true, component: CartEmpty },
-
       {
         path: '/:category/:subcategory1?/:subcategory2?/:subcategory3?/:subcategory4?/:subcategory5?',
         exact: true,

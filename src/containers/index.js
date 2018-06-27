@@ -15,6 +15,5 @@ export ProductDetails from './ProductDetails/ProductDetails';
 export DeliveryAddress from './DeliveryAddress/DeliveryAddress';
 export PaymentOptions from './PaymentOptions/PaymentOptions';
 export ReviewOrder from './ReviewOrder/ReviewOrder';
-export CartEmpty from './Cart/Empty';
 export ProductNotFound from './ProductDetails/ProductNotFound';
 export NotFound from './NotFound/NotFound';
