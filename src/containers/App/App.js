@@ -12,6 +12,8 @@ import { loadCategories, loadMainMenu, loadBanners, isLoaded as isSectionLoaded 
 import { loginUserAfterSignUp } from 'redux/modules/login';
 import { loadWishlist, isLoaded as isWishListLoaded } from 'redux/modules/wishlist';
 import { loadUserProfile, isLoaded as isProfileLoaded } from 'redux/modules/profile';
+import { loadCart, isLoaded as isCartLoaded } from 'redux/modules/cart';
+import { PINCODE } from 'helpers/Constants';
 import config from 'config';
 import Theme from 'hometown-components/lib/Theme';
 
@@ -28,11 +30,16 @@ import Theme from 'hometown-components/lib/Theme';
     }
   },
   defer: ({ store: { dispatch, getState } }) => {
-    if (getState().userLogin.isLoggedIn && !isWishListLoaded(getState())) {
+    const { userLogin: { sessionId, isLoggedIn }, pincode: { selectedPincode } } = getState();
+    if (isLoggedIn && !isWishListLoaded(getState())) {
       dispatch(loadWishlist()).catch(error => console.log(error));
     }
-    if (getState().userLogin.isLoggedIn && !isProfileLoaded(getState())) {
+    if (isLoggedIn && !isProfileLoaded(getState())) {
       dispatch(loadUserProfile()).catch(error => console.log(error));
+    }
+    if (sessionId && !isCartLoaded(getState())) {
+      const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
+      dispatch(loadCart(sessionId, pincode)).catch(error => console.log(error));
     }
   }
 })
@@ -40,7 +47,8 @@ import Theme from 'hometown-components/lib/Theme';
 @connect(
   state => ({
     login: state.userLogin,
-    signUp: state.userSignUp
+    signUp: state.userSignUp,
+    pincode: state.pincode
   }),
   {
     pushState: push,
