@@ -90,7 +90,8 @@ class Listing extends React.Component {
       wishlistLoading,
       filters,
       history,
-      isLoggedIn
+      isLoggedIn,
+      metaResults
     } = this.props;
     const { sortby } = this.state;
     const selectedFilters = getSelectedFilters(filters);
@@ -152,7 +153,7 @@ class Listing extends React.Component {
         <Section pt="1rem" mb="0">
           <Container pr="0" pl="0">
             <Row display="block" mr="-15px" ml="-15px">
-              {products.map(item => (
+              {products.map((item, index) => (
                 <div className={styles.productWrapper} key={item.id}>
                   <Product
                     key={item.id}
@@ -173,6 +174,7 @@ class Listing extends React.Component {
                     reviewsCount={item.data.reviews.count}
                     savingAmount={item.data.max_price - item.data.max_special_price}
                   />
+                  <div>{metaResults[index].data.color_group_count}</div>
                   <Div mt="0" p="0.25rem 0.75rem 0.5rem">
                     <Button btnType="custom" border="1px solid" bc="#ae8873" color="#ae8873" p="8px 15px 0">
                       <AddCart fill="#ae8873" />
@@ -209,6 +211,7 @@ Listing.defaultProps = {
   productCount: '',
   category: '',
   filters: [],
+  metaResults: [],
   isLoggedIn: false,
   wishlistLoading: false
 };
@@ -224,7 +227,8 @@ Listing.propTypes = {
   filters: PropTypes.array,
   history: PropTypes.object.isRequired,
   isLoggedIn: PropTypes.bool,
-  wishlistLoading: PropTypes.bool
+  wishlistLoading: PropTypes.bool,
+  metaResults: PropTypes.array
 };
 
 export default connect(

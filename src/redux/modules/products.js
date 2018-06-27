@@ -144,14 +144,14 @@ export function isLoaded(globalState, query) {
 }
 export const clearAllFilters = category => ({
   types: [LOAD_CLEAR_FILTERS, LOAD_CLEAR_FILTERS_SUCCESS, LOAD_CLEAR_FILTERS_FAIL],
-  promise: ({ client }) => client.get(`tesla/products/${category}`)
+  promise: ({ client }) => client.get(`tesla/products/${category}&city=delhi`)
 });
 
 export const loadSortBy = (category, sort) => ({
   types: [LOAD_SORTBY, LOAD_SORTBY_SUCCESS, LOAD_SORTBY_FAIL],
   promise: async ({ client }) => {
     try {
-      const response = await client.get(`tesla/products/${category}/?${sort}`);
+      const response = await client.get(`tesla/products/${category}/?${sort}&city=delhi`);
       response.sort = sort;
       return response;
     } catch (error) {
@@ -161,12 +161,12 @@ export const loadSortBy = (category, sort) => ({
 });
 export const applyFilter = (category, key) => ({
   types: [LOAD_FILTER, LOAD_FILTER_SUCCESS, LOAD_FILTER_FAIL],
-  promise: ({ client }) => client.get(`tesla/products/${category}/${key}`)
+  promise: ({ client }) => client.get(`tesla/products/${category}/${key}&city=delhi`)
 });
 
 export const load = (category, page, sort) => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-  promise: ({ client }) => client.get(`tesla/products/${category}/?${sort}&page=${page}&maxitems=30`)
+  promise: ({ client }) => client.get(`tesla/products/${category}/?${sort}&page=${page}&maxitems=30&city=delhi`)
 });
 
 export const loadSearchQuery = (searchText, page) => ({
