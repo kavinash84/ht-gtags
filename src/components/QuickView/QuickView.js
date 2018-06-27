@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import AddToCart from 'components/AddtoCart';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Heading from 'hometown-components/lib/Heading';
 import Span from 'hometown-components/lib/Span';
 import Text from 'hometown-components/lib/Text';
+import AddToCart from 'components/AddToCart';
 
 const styles = require('./QuickView.scss');
 

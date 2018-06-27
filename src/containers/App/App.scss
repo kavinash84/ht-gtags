@@ -51,6 +51,9 @@
 			margin-right: 1rem !important;
 		}
 	}
+	.spin {
+		animation: spin 1s infinite linear;
+	}
 
 	/* NProgress Start */
 	#nprogress {
@@ -589,5 +592,9 @@
 	100% {
 		opacity: 1;
 	}
+}
+@keyframes :global(spin) {
+  0%  {-webkit-transform: rotate(0deg);}
+  100% {-webkit-transform: rotate(360deg);}
 }
 /* ---- End of Common Classes ---- */
