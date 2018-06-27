@@ -108,7 +108,7 @@ Cart.propTypes = {
   summary: PropTypes.object,
   pincode: PropTypes.string,
   cartUpdating: PropTypes.bool,
-  currentId: PropTypes.string,
+  currentId: PropTypes.number,
   sessionId: PropTypes.string.isRequired,
   discardFromCart: PropTypes.func.isRequired
 };
@@ -118,7 +118,7 @@ Cart.defaultProps = {
   summary: null,
   pincode: '',
   cartUpdating: false,
-  currentId: ''
+  currentId: 0
 };
 
 export default connect(mapStateToProps, { discardFromCart: removeFromCart })(Cart);

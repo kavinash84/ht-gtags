@@ -44,6 +44,7 @@ export default function reducer(state = initialState, action = {}) {
     case ADD_TO_CART:
       return {
         ...state,
+        key: action.payLoad,
         addingToCart: true,
         addedToCart: false
       };
@@ -119,7 +120,9 @@ export const loadCart = (session, pincode) => ({
   promise: ({ client }) => client.get(`${ADDTOCART_API}/${session}/${pincode}`)
 });
 
-export const addToCart = (sku, simpleSku, session, pincode) => ({
+export const addToCart = (key, sku, simpleSku, session, pincode) => ({
+  type: 'ADD_TO_CART',
+  payLoad: key,
   types: [ADD_TO_CART, ADD_TO_CART_SUCCESS, ADD_TO_CART_FAIL],
   promise: async ({ client }) => {
     try {
