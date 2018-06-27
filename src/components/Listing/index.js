@@ -177,7 +177,7 @@ class Listing extends React.Component {
                     savingAmount={item.data.max_price - item.data.max_special_price}
                     deliveredBy={item.data.delivery_details[0].value}
                   />
-                  <Div mt="0" p="0.25rem 0.75rem 0.5rem">
+                  <Div mt="0" p="0.25rem 0.125rem 0.5rem">
                     <AddToCart simpleSku={Object.keys(item.data.simples)[0]} sku={item.data.sku} />
                   </Div>
                 </div>
@@ -229,4 +229,7 @@ Listing.propTypes = {
   isLoggedIn: PropTypes.bool
 };
 
-export default connect(null, mapDispatchToProps)(Listing);
+export default connect(
+  null,
+  mapDispatchToProps
+)(Listing);

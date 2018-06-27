@@ -11,6 +11,7 @@ import { getCartListSKU } from 'selectors/cart';
 import { PINCODE, CART_URL } from 'helpers/Constants';
 
 const checkSKUInCart = (list, sku) => list.includes(sku);
+const styles = require('./AddToCart.scss');
 
 const onClick = (skuId, simpleSku, session, pincode) => dispatcher => e => {
   e.preventDefault();
@@ -51,8 +52,10 @@ const AddToCart = ({
         </Button>
       ) : (
         <div>
-          <span>✓ Added to Cart</span>
-          <Link to={CART_URL}>Go To Cart</Link>
+          <span className={styles.addedToCart}>✓ Added to Cart</span>
+          <Link className={styles.goToCart} to={CART_URL}>
+            Go To Cart
+          </Link>
         </div>
       )}
     </div>
@@ -72,4 +75,7 @@ AddToCart.propTypes = {
   addToCart: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddToCart);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddToCart);

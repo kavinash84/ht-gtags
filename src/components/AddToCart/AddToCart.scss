@@ -1,0 +1,29 @@
+@import "../../theme/variables";
+@import "../../theme/mixins";
+
+.addedToCart, .goToCart {
+  font-weight: 600;
+  line-height: 1.5;
+  display: inline;
+  position: relative;
+  top: 7px;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  padding: .375rem .75rem;
+  font-size: 0.857rem;
+  color: $white;
+  background-color: $primary;
+  border-color: $primary;
+  border: 1px solid;
+  padding: 10px 15px 9px;
+  margin: 0 5px;
+}
+
+.goToCart {
+  &:hover {
+    color: $primary;
+    background-color: $white;
+  }
+}
