@@ -43,7 +43,7 @@ const Cart = ({
                     </tr>
                     {results.map(item => (
                       <tr key={item.id_customer_cart}>
-                        {cartUpdating && currentId === item.id_customer_cart ? "I'm loaing" : null}
+                        {cartUpdating && currentId === item.id_customer_cart ? "I'm loading" : null}
                         <td>
                           <img className="thumb" src={item.product_info.images[0].path} alt="" />
                         </td>
@@ -96,7 +96,7 @@ Cart.propTypes = {
   summary: PropTypes.object,
   pincode: PropTypes.string,
   cartUpdating: PropTypes.bool,
-  currentId: PropTypes.string,
+  currentId: PropTypes.number,
   sessionId: PropTypes.string.isRequired,
   discardFromCart: PropTypes.func.isRequired
 };
