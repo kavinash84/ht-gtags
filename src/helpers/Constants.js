@@ -14,7 +14,7 @@ export const FORGOT_PASSWORD_URL = '/forgot-password';
 //   browserHistory.push(url);
 // };
 
-export const PINCODE = 110001;
+export const PINCODE = '110001';
 /* Configs */
 export const clientId = 'rama';
 export const clientSecret = 'ramahometown';

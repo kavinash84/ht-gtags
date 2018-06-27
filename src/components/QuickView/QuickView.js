@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import AddToCart from 'components/ProductDetails/AddtoCart';
+import AddToCart from 'components/AddtoCart';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Heading from 'hometown-components/lib/Heading';
@@ -110,7 +110,7 @@ export default class QuickView extends Component {
   render() {
     const { images, data } = this.state.product;
     const { currentImage } = this.state;
-    const { sku } = this.props;
+    const { sku, simpleSku } = this.props;
     const {
       name, price, special_price: discPrice, max_saving_percentage: saving
     } = data;
@@ -155,7 +155,7 @@ export default class QuickView extends Component {
                   starting from Rs.2,419{' '}
                 </Span>
               </Text>
-              <AddToCart skuId={sku} />
+              <AddToCart simpleSku={simpleSku} sku={sku} />
             </Div>
             <Div className={styles.thumb}>
               {images.map((image, index) => (
@@ -173,5 +173,6 @@ export default class QuickView extends Component {
 
 QuickView.propTypes = {
   sku: PropTypes.string.isRequired,
+  simpleSku: PropTypes.string.isRequired,
   products: PropTypes.array.isRequired
 };
