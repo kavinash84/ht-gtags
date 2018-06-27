@@ -69,8 +69,8 @@ class Listing extends React.Component {
     e.preventDefault();
     const { category } = this.props;
     const { dispatch } = this.context.store;
-    const query = key.split('/')[2];
-    dispatch(applyFilter(category, query));
+    const query = key.split('/');
+    dispatch(applyFilter(category, query[query.length - 1]));
   };
 
   clearFilters = () => {
