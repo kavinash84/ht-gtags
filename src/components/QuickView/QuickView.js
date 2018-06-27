@@ -149,7 +149,7 @@ export default class QuickView extends Component {
                   Rs. 2,000 ({saving}%)
                 </Span>
               </Text>
-              <Text color="rgba(0, 0, 0, 0.6)" fontWeight="700" fontSize="0.857rem" mb="2rem" mt="0.3125rem">
+              <Text color="rgba(0, 0, 0, 0.6)" fontWeight="700" fontSize="0.857rem" mb="1rem" mt="0.3125rem">
                 EMI:{' '}
                 <Span color="rgba(0, 0, 0, 0.6)" fontSize="0.857rem" va="bottom">
                   starting from Rs.2,419{' '}
