@@ -5,7 +5,7 @@ import Div from 'hometown-components/lib/Div';
 const styles = require('./Carousel.scss');
 
 const CategoryItem = ({ image, name }) => (
-  <Div className={styles.catSliderItem}>
+  <Div className={styles.pdSliderItem}>
     <img src={image} alt={name} />
   </Div>
 );

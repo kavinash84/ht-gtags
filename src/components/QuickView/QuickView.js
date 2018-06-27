@@ -116,7 +116,7 @@ export default class QuickView extends Component {
     } = data;
     return (
       <div className={styles.quickView}>
-        <Row>
+        <Row ml="0" mr="0">
           <Div col="7">
             <div className={styles.imgSliderContainer}>
               <button name="previous" className={styles.previous} onClick={this.changeImage}>
@@ -130,7 +130,7 @@ export default class QuickView extends Component {
               </button>
             </div>
           </Div>
-          <Div col="5" pl="2rem" pr="2rem">
+          <Div col="5" pl="1.5rem" pr="2rem">
             <Div pt="1rem" className={styles.content}>
               <Heading color="rgba(0, 0, 0, 0.75)" ellipsis={false} fontSize="1.375em" lh="1.7" mt="0" mb="1rem">
                 {name}

@@ -27,7 +27,9 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState }, params, location }) => {
-    const { products: { sort } } = getState();
+    const {
+      products: { sort }
+    } = getState();
     const query = location.pathname === '/search/' ? location.search.split('?q=')[1] : encodeCategory(params);
     const loadResults = location.pathname === '/search/' ? loadSearchQuery(query, 1) : loadListing(query, 1, sort);
     if (!isInitialListLoaded(getState(), query)) {
@@ -46,6 +48,7 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
   filters: getFilters(state.products.data.metadata.filter),
   wishListedSKUs: getSKUList(state.wishlist),
   wishListData: state.wishlist.data,
+  wishlistLoading: state.wishlist.loading,
   products: getProducts(state),
   categoryName: getCategoryName(state),
   productCount: getProductCount(state),
@@ -53,18 +56,6 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
 }))
 @withRouter
 export default class Listing extends Component {
-  static defaultProps = {
-    loading: false,
-    loaded: true,
-    products: [],
-    categoryName: '',
-    category: '',
-    productCount: '0',
-    wishListedSKUs: [],
-    wishListData: [],
-    filters: [],
-    isLoggedIn: false
-  };
   static propTypes = {
     loading: PropTypes.bool,
     loaded: PropTypes.bool,
@@ -74,9 +65,23 @@ export default class Listing extends Component {
     productCount: PropTypes.string,
     wishListedSKUs: PropTypes.array,
     wishListData: PropTypes.array,
+    wishlistLoading: PropTypes.bool,
     filters: PropTypes.array,
     history: PropTypes.object.isRequired,
     isLoggedIn: PropTypes.bool
+  };
+  static defaultProps = {
+    loading: false,
+    loaded: true,
+    products: [],
+    categoryName: '',
+    category: '',
+    productCount: '0',
+    wishListedSKUs: [],
+    wishListData: [],
+    wishlistLoading: false,
+    filters: [],
+    isLoggedIn: false
   };
   render() {
     const {
@@ -90,7 +95,7 @@ export default class Listing extends Component {
       isLoggedIn,
       history
     } = this.props;
-    const { wishListedSKUs, wishListData } = this.props;
+    const { wishListedSKUs, wishListData, wishlistLoading } = this.props;
     return (
       <Section p="0" mb="0">
         <div className="wrapper">
@@ -122,6 +127,7 @@ export default class Listing extends Component {
                 filters={filters}
                 history={history}
                 isLoggedIn={isLoggedIn}
+                wishlistLoading={wishlistLoading}
               />
               <LoadMore loading={loading} loaded={loaded} />
             </div>

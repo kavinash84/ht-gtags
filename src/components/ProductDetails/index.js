@@ -7,16 +7,19 @@ import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
 import Heading from 'hometown-components/lib/Heading';
+import Button from 'hometown-components/lib/Buttons';
 import TitlePrice from 'hometown-components/lib/ProductDetails/TitlePrice';
 import ColorOption from 'hometown-components/lib/ProductDetails/ColorOption';
 import ServiceDetails from 'hometown-components/lib/ProductDetails/ServiceDetails';
 import ProductDesc from 'hometown-components/lib/ProductDetails/ProductDesc';
+// import ProductCarousel from 'components/ProductCarousel';
 import Specs from 'hometown-components/lib/ProductDetails/Specs';
 import Reviews from 'hometown-components/lib/Reviews';
 import AddReview from 'hometown-components/lib/Reviews/WriteReview';
 import { addReview } from 'redux/modules/reviews';
 
 import ProductDetailsCarousel from './Carousel';
+import BreadCrumb from './BreadCrumb';
 // import ProductsCarousel from 'components/ProductCarousel';
 // import { CART_URL } from 'helpers/Constants';
 import Pincode from './Pincode';
@@ -62,12 +65,30 @@ class ProductDetails extends React.Component {
       <Div type="block">
         <Section tion p="0" pt="1.25rem" mb="0">
           <Container type="container" pr="0" pl="0">
+            <Row display="block" mt="0.625rem" mb="0.625rem" mr="0" ml="0">
+              <Div>
+                <BreadCrumb />
+              </Div>
+            </Row>
             <Row display="block" mt="0.625rem" mb="0.625rem" mr="0">
               <Div col="9" className={styles.titleWrapper}>
                 <TitlePrice name={meta.name} price={meta.price} discPrice={meta.special_price} />
               </Div>
               <Div col="3">
                 <AddToCart skuId={sku} />
+                <Div mt="1rem">
+                  <Button
+                    width="100%"
+                    color="rgba(0, 0, 0, 0.5)"
+                    btnType="custom"
+                    border="1px solid"
+                    bc="#979797"
+                    bg="transparent"
+                    size="block"
+                  >
+                    ADD TO WISHLIST
+                  </Button>
+                </Div>
               </Div>
             </Row>
             <Row display="block" mt="1.25rem" mb="0.625rem" mr="0" ml="0" className={styles.variationWrapper}>

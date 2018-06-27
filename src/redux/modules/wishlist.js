@@ -39,11 +39,13 @@ export default function reducer(state = initialState, action = {}) {
     case ADD_TO_WISHLIST:
       return {
         ...state,
+        loaded: false,
         loading: true
       };
     case ADD_TO_WISHLIST_SUCCESS:
       return {
         ...state,
+        loading: false,
         loaded: true,
         data: [...state.data, action.result]
       };
@@ -57,11 +59,13 @@ export default function reducer(state = initialState, action = {}) {
     case REMOVE_FROM_WISHLIST:
       return {
         ...state,
-        loading: true
+        loading: true,
+        loaded: false
       };
     case REMOVE_FROM_WISHLIST_SUCCESS:
       return {
         ...state,
+        loading: false,
         loaded: true,
         data: rehyDratedList(state.data, action.result.id)
       };

@@ -7,6 +7,9 @@ import Product from 'hometown-components/lib/Product';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
 import { Label } from 'hometown-components/lib/Label';
+import AddCart from 'hometown-components/lib/Icons/AddCart';
+import Button from 'hometown-components/lib/Buttons';
+import Span from 'hometown-components/lib/Span';
 import ResponsiveModal from 'components/Modal';
 import QuickView from 'components/QuickView/QuickView';
 import { bindActionCreators } from 'redux';
@@ -84,6 +87,7 @@ class Listing extends React.Component {
       productCount,
       wishList,
       wishListData,
+      wishlistLoading,
       filters,
       history,
       isLoggedIn
@@ -164,10 +168,19 @@ class Listing extends React.Component {
                       this.onOpenQuickViewModal(item.data.sku);
                     }}
                     isWishList={isInWishList(wishList, item.data.sku)}
+                    wishlistLoading={wishlistLoading}
                     rating={item.data.reviews.rating.toFixed(1)}
                     reviewsCount={item.data.reviews.count}
                     savingAmount={item.data.max_price - item.data.max_special_price}
                   />
+                  <Div mt="0" p="0.25rem 0.75rem 0.5rem">
+                    <Button btnType="custom" border="1px solid" bc="#ae8873" color="#ae8873" p="8px 15px 0">
+                      <AddCart fill="#ae8873" />
+                      <Span ml="0.625rem" fontSize="0.857rem" fontWeight="600" color="#ae8873" va="top">
+                        ADD TO CART
+                      </Span>
+                    </Button>
+                  </Div>
                 </div>
               ))}
               <ResponsiveModal
@@ -196,7 +209,8 @@ Listing.defaultProps = {
   productCount: '',
   category: '',
   filters: [],
-  isLoggedIn: false
+  isLoggedIn: false,
+  wishlistLoading: false
 };
 
 Listing.propTypes = {
@@ -209,7 +223,11 @@ Listing.propTypes = {
   category: PropTypes.string,
   filters: PropTypes.array,
   history: PropTypes.object.isRequired,
-  isLoggedIn: PropTypes.bool
+  isLoggedIn: PropTypes.bool,
+  wishlistLoading: PropTypes.bool
 };
 
-export default connect(null, mapDispatchToProps)(Listing);
+export default connect(
+  null,
+  mapDispatchToProps
+)(Listing);
