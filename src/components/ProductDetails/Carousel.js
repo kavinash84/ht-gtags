@@ -7,7 +7,8 @@ import SlickSlider from '../SlickSlider';
 
 const adjustSlides = length => ({
   slidesToShow: length >= 4 ? 4 : length,
-  slidesToScroll: 3
+  slidesToScroll: 3,
+  autoplay: false
 });
 
 export default class CategoryCarousel extends Component {

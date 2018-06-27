@@ -57,7 +57,7 @@ class ProductDetails extends React.Component {
       sku,
       groupedattributes
     } = product;
-
+    const { category_details: categoryDetails } = meta;
     const simpleSku = Object.keys(simples)[0];
     const shipping = simples[simpleSku].groupedattributes.product_shipping_cost;
 
@@ -67,7 +67,7 @@ class ProductDetails extends React.Component {
           <Container type="container" pr="0" pl="0">
             <Row display="block" mt="0.625rem" mb="0.625rem" mr="0" ml="0">
               <Div>
-                <BreadCrumb />
+                <BreadCrumb categoryDetails={categoryDetails} />
               </Div>
             </Row>
             <Row display="block" mt="0.625rem" mb="0.625rem" mr="0">
