@@ -45,10 +45,15 @@ class Listing extends React.Component {
   state = {
     openQuickView: false,
     quickViewSku: '',
+    simpleSku: '',
     sortby: 'Popularity'
   };
-  onOpenQuickViewModal = sku => {
-    this.setState({ openQuickView: true, quickViewSku: sku });
+  onOpenQuickViewModal = (sku, simpleSku) => {
+    this.setState({
+      openQuickView: true,
+      quickViewSku: sku,
+      simpleSku
+    });
   };
   onCloseQuickViewModal = () => {
     this.setState({ openQuickView: false });
@@ -163,7 +168,7 @@ class Listing extends React.Component {
                     simple_sku={item.simples}
                     onClick={onClick(wishListData, toggleWishList, isLoggedIn, history)}
                     onOpenQuickViewModal={() => {
-                      this.onOpenQuickViewModal(item.data.sku);
+                      this.onOpenQuickViewModal(item.data.sku, Object.keys(item.data.simples)[0]);
                     }}
                     isWishList={isInWishList(wishList, item.data.sku)}
                     wishlistLoading={wishlistLoading}
@@ -185,6 +190,7 @@ class Listing extends React.Component {
                 <QuickView
                   onCloseModal={this.onCloseQuickViewModal}
                   sku={this.state.quickViewSku}
+                  simpleSku={this.state.simpleSku}
                   products={products}
                 />
               </ResponsiveModal>

@@ -68,7 +68,7 @@ const ProductQuantity = ({
 );
 
 ProductQuantity.defaultProps = {
-  cartItemLoading: false
+  cartItemLoading: () => {}
 };
 
 ProductQuantity.propTypes = {
@@ -79,7 +79,7 @@ ProductQuantity.propTypes = {
   simpleSku: PropTypes.string.isRequired,
   pincode: PropTypes.string.isRequired,
   sessionId: PropTypes.string.isRequired,
-  cartItemLoading: PropTypes.bool
+  cartItemLoading: PropTypes.func
 };
 
 export default connect(mapStateToProps, { updateQuantity: updateCart })(ProductQuantity);

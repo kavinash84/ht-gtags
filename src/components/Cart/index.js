@@ -7,7 +7,7 @@ import Row from 'hometown-components/lib/Row';
 import Button from 'hometown-components/lib/Buttons';
 import Section from 'hometown-components/lib/Section';
 import { removeFromCart } from 'redux/modules/cart';
-import ProductQuantity from './updateQuantity';
+import ProductQuantity from './UpdateProductQuantity';
 import OrderSummary from '../Checkout/OrderSummary';
 
 const styles = require('./Cart.scss');
