@@ -326,17 +326,20 @@
 			padding: 1rem 0;
 			font-size: 0.875rem;
 			color: rgba(0, 0, 0, 0.7);
-			font-weight: 300;
+			font-weight: 600;
 			padding: 0.25rem 0.325rem;
 			text-transform: uppercase;
 		}
+		tr {
+			position: relative;
+		}
 		td {
-			color: rgba(0, 0, 0, 0.6);
-			font-size: 0.875rem;
+			color: rgba(0, 0, 0, 0.7);
+			font-size: 0.75rem;
 			padding: 0.25rem 0.325rem;
 			button {
 				font-size: 0.875rem;
-				font-weight: 300;
+				font-weight: 400;
 			}
 		}
 	}

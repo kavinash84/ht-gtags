@@ -10,6 +10,8 @@ import { removeFromCart } from 'redux/modules/cart';
 import ProductQuantity from './updateQuantity';
 import OrderSummary from '../Checkout/OrderSummary';
 
+const styles = require('./Cart.scss');
+
 const onClick = (cartId, sessionId, pincode) => dispatcher => e => {
   e.preventDefault();
   dispatcher(cartId, sessionId, pincode);
@@ -28,11 +30,11 @@ const Cart = ({
   const cartItemLoading = customerCardId => cartUpdating && currentId === customerCardId;
   return (
     <Div type="block">
-      <Section display="flex" pt="1.25rem" pb="2.5rem" mb="0" height="auto">
-        <Container type="container" pr="2rem" pl="2rem">
+      <Section display="flex" pt="3rem" pb="2.5rem" mb="0" height="auto">
+        <Container type="container" pr="0" pl="0">
           <Row display="block" mr="0" ml="0">
-            <Div col="9" pr="2.5rem" pt="1.5rem">
-              <Row type="block" m="0" mb="1.5rem" mt="1.5rem">
+            <Div col="9" pr="2.5rem" pt="0">
+              <Row type="block" m="0" mb="1.5rem" mt="0">
                 <Div col="12">
                   <table className="ordersTable">
                     <tbody>
@@ -46,7 +48,6 @@ const Cart = ({
                       {results && results.length === 0 && <div>Cart Empty</div>}
                       {results.map(item => (
                         <tr key={item.id_customer_cart}>
-                          {cartItemLoading(item.id_customer_cart) ? "I'm loading" : null}
                           <td>
                             <img className="thumb" src={item.product_info.images[0].path} alt="" />
                           </td>
@@ -76,6 +77,13 @@ const Cart = ({
                               x
                             </Button>
                           </td>
+                          {/* eslint-disable */}
+                          {cartItemLoading(item.id_customer_cart) && (
+                            <div className={styles.loadingCart}>
+                              <h4>THIS PRODUCT HAS BEEN</h4>
+                              <p>UPDATED TO YOUR CART</p>
+                            </div>
+                          )}
                         </tr>
                       ))}
                     </tbody>

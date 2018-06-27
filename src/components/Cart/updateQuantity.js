@@ -9,8 +9,8 @@ import { connect } from 'react-redux';
 import { updateCart } from 'redux/modules/cart';
 import { PINCODE } from 'helpers/Constants';
 
-const ReductIcon = require('../../../static/minus.jpg');
-const IncreaseIcon = require('../../../static/plus.jpg');
+const ReductIcon = require('../../../static/remove_circle_outline.svg');
+const IncreaseIcon = require('../../../static/add_circle_outline.svg');
 
 const mapStateToProps = ({ pincode, userLogin }) => ({
   pincode: pincode.selectedPincode === '' ? PINCODE : pincode.selectedPincode,
@@ -47,7 +47,7 @@ const ProductQuantity = ({
       >
         <Img src={ReductIcon} alt="" float="left" height="22px" />
       </Button>
-      <Label color="textDark" mb="0" mt="0" p="0 10px">
+      <Label color="textDark" mb="0" mt="0" p="0 10px" position="relative" top="2px">
         {quantity}
       </Label>
       <Button

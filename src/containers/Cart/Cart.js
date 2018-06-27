@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { provideHooks } from 'redial';
 import { connect } from 'react-redux';
 import Cart from 'components/Cart';
+import Notifications from 'components/Notifications';
 import Menu from 'containers/MenuNew/index';
 import TitleBar from 'components/TitleBar';
 import { PINCODE } from 'helpers/Constants';
@@ -39,7 +40,7 @@ export default class CartContainer extends Component {
       <div>
         <Menu />
         <TitleBar title="Shopping Cart" />
-        {error && <div>{error.error_message}</div>}
+        {error && <Notifications msg={error.error_message} type="error" />}
         <Cart results={results} summary={summary} />
       </div>
     );
