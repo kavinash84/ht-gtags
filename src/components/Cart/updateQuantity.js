@@ -23,7 +23,14 @@ const onClick = (cartId, skuId, simpleSku, session, pincode, qty) => dispatcher 
 };
 
 const ProductQuantity = ({
-  cartId, updateQuantity, quantity, simpleSku, skuId, pincode, sessionId
+  cartId,
+  updateQuantity,
+  quantity,
+  simpleSku,
+  skuId,
+  pincode,
+  sessionId,
+  cartItemLoading
 }) => (
   <Row display="block" m="0">
     <Div col="12" ta="left">
@@ -36,7 +43,7 @@ const ProductQuantity = ({
         p="0"
         va="middle"
         onClick={onClick(cartId, skuId, simpleSku, sessionId, pincode, -1)(updateQuantity)}
-        disabled={quantity <= 1}
+        disabled={cartItemLoading(cartId) || quantity <= 1}
       >
         <Img src={ReductIcon} alt="" float="left" height="22px" />
       </Button>
@@ -52,12 +59,17 @@ const ProductQuantity = ({
         p="0"
         va="middle"
         onClick={onClick(cartId, skuId, simpleSku, sessionId, pincode, 1)(updateQuantity)}
+        disabled={cartItemLoading(cartId)}
       >
         <Img src={IncreaseIcon} alt="" float="left" height="22px" />
       </Button>
     </Div>
   </Row>
 );
+
+ProductQuantity.defaultProps = {
+  cartItemLoading: false
+};
 
 ProductQuantity.propTypes = {
   updateQuantity: PropTypes.func.isRequired,
@@ -66,7 +78,8 @@ ProductQuantity.propTypes = {
   skuId: PropTypes.string.isRequired,
   simpleSku: PropTypes.string.isRequired,
   pincode: PropTypes.string.isRequired,
-  sessionId: PropTypes.string.isRequired
+  sessionId: PropTypes.string.isRequired,
+  cartItemLoading: PropTypes.bool
 };
 
 export default connect(mapStateToProps, { updateQuantity: updateCart })(ProductQuantity);
