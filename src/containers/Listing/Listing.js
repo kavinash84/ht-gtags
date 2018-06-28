@@ -56,7 +56,8 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
   products: getProducts(state),
   categoryName: getCategoryName(state),
   productCount: getProductCount(state),
-  isLoggedIn: state.userLogin.isLoggedIn
+  isLoggedIn: state.userLogin.isLoggedIn,
+  metadata: state.products.data.metadata
 }))
 @withRouter
 export default class Listing extends Component {
@@ -64,7 +65,7 @@ export default class Listing extends Component {
     loading: PropTypes.bool,
     loaded: PropTypes.bool,
     products: PropTypes.array,
-    metadata: PropTypes.array,
+    metadata: PropTypes.object,
     category: PropTypes.string,
     categoryName: PropTypes.string,
     productCount: PropTypes.string,
@@ -90,7 +91,7 @@ export default class Listing extends Component {
     wishListData: [],
     wishlistLoading: false,
     filters: [],
-    metadata: [],
+    metadata: null,
     pincode: '',
     isLoggedIn: false
   };
