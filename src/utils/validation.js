@@ -10,6 +10,13 @@ export function email(value) {
   }
 }
 
+export function pincode(value) {
+  if (!isEmpty(value) && !/^[1-9][0-9]{5}$/i.test(value)) {
+    return true;
+  }
+  return false;
+}
+
 export function required(value) {
   if (isEmpty(value)) {
     return 'Required';

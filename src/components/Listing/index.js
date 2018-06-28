@@ -70,10 +70,10 @@ class Listing extends React.Component {
 
   setFilter = key => e => {
     e.preventDefault();
-    const { category, pincode } = this.props;
+    const { category } = this.props;
     const { dispatch } = this.context.store;
-    const query = key.split('/')[2];
-    dispatch(applyFilter(category, query, pincode));
+    const query = key.split('/');
+    dispatch(applyFilter(category, query[query.length - 1]));
   };
 
   clearFilters = () => {
@@ -93,7 +93,8 @@ class Listing extends React.Component {
       wishlistLoading,
       filters,
       history,
-      isLoggedIn
+      isLoggedIn,
+      metaResults
     } = this.props;
     const { sortby } = this.state;
     const selectedFilters = getSelectedFilters(filters);
@@ -155,7 +156,7 @@ class Listing extends React.Component {
         <Section pt="1rem" mb="0">
           <Container pr="0" pl="0">
             <Row display="block" mr="-15px" ml="-15px">
-              {products.map(item => (
+              {products.map((item, index) => (
                 <div className={styles.productWrapper} key={item.id}>
                   <Product
                     key={item.id}
@@ -179,6 +180,7 @@ class Listing extends React.Component {
                   />
                   <Div mt="0" p="0.25rem 0.125rem 0.5rem">
                     <AddToCart simpleSku={Object.keys(item.data.simples)[0]} sku={item.data.sku} itemId={item.id} />
+                    <div>{metaResults[index].data.color_group_count}</div>
                   </Div>
                 </div>
               ))}
@@ -210,6 +212,7 @@ Listing.defaultProps = {
   category: '',
   filters: [],
   pincode: '',
+  metaResults: [],
   wishlistLoading: false,
   isLoggedIn: false
 };
@@ -226,7 +229,8 @@ Listing.propTypes = {
   history: PropTypes.object.isRequired,
   wishlistLoading: PropTypes.bool,
   pincode: PropTypes.string,
-  isLoggedIn: PropTypes.bool
+  isLoggedIn: PropTypes.bool,
+  metaResults: PropTypes.array
 };
 
 export default connect(null, mapDispatchToProps)(Listing);

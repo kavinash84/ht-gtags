@@ -146,18 +146,16 @@ export function isLoaded(globalState, query) {
   }
   return false;
 }
-export const clearAllFilters = (category, pincode) => ({
+export const clearAllFilters = (category, pincode, city = 'delhi') => ({
   types: [LOAD_CLEAR_FILTERS, LOAD_CLEAR_FILTERS_SUCCESS, LOAD_CLEAR_FILTERS_FAIL],
-  promise: ({ client }) =>
-    client.get(`tesla/products/${category}/?&pincode=${pincode.length ? pincode : defaultPincode}&maxitems=30`)
+  promise: ({ client }) => client.get(`tesla/products/${category}&pincode=${pincode}&city=${city}`)
 });
 
-export const loadSortBy = (category, sort, pincode) => ({
+export const loadSortBy = (category, sort, pincode, city = 'delhi') => ({
   types: [LOAD_SORTBY, LOAD_SORTBY_SUCCESS, LOAD_SORTBY_FAIL],
   promise: async ({ client }) => {
     try {
-      const getPincode = pincode.length ? pincode : defaultPincode;
-      const response = await client.get(`tesla/products/${category}/?${sort}&pincode=${getPincode}&maxitems=30`);
+      const response = await client.get(`tesla/products/${category}/?${sort}&pincode=${pincode}&city=${city}`);
       response.sort = sort;
       return response;
     } catch (error) {
@@ -167,18 +165,15 @@ export const loadSortBy = (category, sort, pincode) => ({
 });
 /* eslint-disable max-len */
 
-export const applyFilter = (category, key, pincode) => ({
+export const applyFilter = (category, key, pincode, city = 'delhi') => ({
   types: [LOAD_FILTER, LOAD_FILTER_SUCCESS, LOAD_FILTER_FAIL],
-  promise: ({ client }) =>
-    client.get(`tesla/products/${category}/${key}&pincode=${pincode.length ? pincode : defaultPincode}&maxitems=30`)
+  promise: ({ client }) => client.get(`tesla/products/${category}/${key}&pincode=${pincode}&city=${city}`)
 });
 
-export const load = (category, page, sort, pincode) => ({
+export const load = (category, page, sort, pincode, city = 'delhi') => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
   promise: ({ client }) =>
-    client.get(`tesla/products/${category}/?${sort}&page=${page}&pincode=${
-      pincode.length ? pincode : defaultPincode
-    }&maxitems=30`)
+    client.get(`tesla/products/${category}/?${sort}&page=${page}&maxitems=30&pincode=${pincode}&city=${city}`)
 });
 
 export const loadSearchQuery = (searchText, page, pincode) => ({

@@ -64,6 +64,7 @@ export default class Listing extends Component {
     loading: PropTypes.bool,
     loaded: PropTypes.bool,
     products: PropTypes.array,
+    metadata: PropTypes.array,
     category: PropTypes.string,
     categoryName: PropTypes.string,
     productCount: PropTypes.string,
@@ -89,6 +90,7 @@ export default class Listing extends Component {
     wishListData: [],
     wishlistLoading: false,
     filters: [],
+    metadata: [],
     pincode: '',
     isLoggedIn: false
   };
@@ -113,8 +115,10 @@ export default class Listing extends Component {
       history,
       wishListedSKUs,
       wishListData,
-      wishlistLoading
+      wishlistLoading,
+      metadata
     } = this.props;
+    const { results: metaResults } = metadata;
     return (
       <Section p="0" mb="0">
         <div className="wrapper">
@@ -148,6 +152,7 @@ export default class Listing extends Component {
                 pincode={pincode}
                 isLoggedIn={isLoggedIn}
                 wishlistLoading={wishlistLoading}
+                metaResults={metaResults}
               />
               <LoadMore loading={loading} loaded={loaded} />
             </div>
