@@ -17,11 +17,11 @@ const onClick = (cartId, sessionId, pincode) => dispatcher => e => {
   dispatcher(cartId, sessionId, pincode);
 };
 
-const mapStateToProps = ({ pincode, userLogin, cart }) => ({
+const mapStateToProps = ({ pincode, cart, app }) => ({
   currentId: cart.key,
   cartUpdating: cart.cartUpdating,
   pincode: pincode.selectedPincode,
-  sessionId: userLogin.sessionId
+  sessionId: app.sessionId
 });
 
 const Cart = ({

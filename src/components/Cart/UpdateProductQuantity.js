@@ -12,9 +12,9 @@ import { PINCODE } from 'helpers/Constants';
 const ReductIcon = require('../../../static/remove_circle_outline.svg');
 const IncreaseIcon = require('../../../static/add_circle_outline.svg');
 
-const mapStateToProps = ({ pincode, userLogin }) => ({
+const mapStateToProps = ({ pincode, app }) => ({
   pincode: pincode.selectedPincode === '' ? PINCODE : pincode.selectedPincode,
-  sessionId: userLogin.sessionId
+  sessionId: app.sessionId
 });
 
 const onClick = (cartId, skuId, simpleSku, session, pincode, qty) => dispatcher => e => {

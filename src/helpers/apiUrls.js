@@ -24,5 +24,8 @@ export const RESET_PASSWORD = 'tesla/users/forgot-password/reset';
 export const CATEGORY_PAGE = 'tesla/categories';
 
 /* Cart */
-
 export const ADDTOCART = 'tesla/cart';
+export const SYNCCART = 'tesla/cart/sync';
+
+/* Session */
+export const SESSION = 'tesla/session';

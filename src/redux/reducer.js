@@ -1,5 +1,6 @@
 import { routerReducer } from 'react-router-redux';
 import multireducer from 'multireducer';
+import app from './modules/app';
 import info from './modules/info';
 import cart from './modules/cart';
 import products from './modules/products';
@@ -19,6 +20,7 @@ import category from './modules/category';
 export default function createReducers(asyncReducers) {
   return {
     router: routerReducer,
+    app,
     info,
     cart,
     products,

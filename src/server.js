@@ -77,9 +77,13 @@ app.use(async (req, res) => {
 
   const persistConfig = {
     key: 'root',
-    storage: new CookieStorage(cookieJar),
+    storage: new CookieStorage(cookieJar, {
+      expiration: {
+        default: 30 * 86400
+      }
+    }),
     stateReconciler: (inboundState, originalState) => originalState,
-    whitelist: ['userLogin', 'pincode']
+    whitelist: ['app', 'userLogin', 'pincode']
   };
 
   let preloadedState;

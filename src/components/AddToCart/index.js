@@ -20,9 +20,9 @@ const onClick = (key, skuId, simpleSku, session, pincode) => dispatcher => e => 
 };
 
 const mapStateToProps = ({
-  userLogin, pincode, cart, cart: { addingToCart, addedToCart, key }
+  app: { sessionId }, pincode, cart, cart: { addingToCart, addedToCart, key }
 }) => ({
-  session: userLogin.sessionId,
+  session: sessionId,
   pincode: pincode.selectedPincode ? pincode.selectedPincode : PINCODE,
   addingToCart,
   addedToCart,
