@@ -12,7 +12,6 @@ import TitlePrice from 'hometown-components/lib/ProductDetails/TitlePrice';
 import ColorOption from 'hometown-components/lib/ProductDetails/ColorOption';
 import ServiceDetails from 'hometown-components/lib/ProductDetails/ServiceDetails';
 import ProductDesc from 'hometown-components/lib/ProductDetails/ProductDesc';
-// import ProductCarousel from 'components/ProductCarousel';
 import Specs from 'hometown-components/lib/ProductDetails/Specs';
 import Reviews from 'hometown-components/lib/Reviews';
 import AddReview from 'hometown-components/lib/Reviews/WriteReview';
@@ -23,7 +22,7 @@ import BreadCrumb from './BreadCrumb';
 // import ProductsCarousel from 'components/ProductCarousel';
 // import { CART_URL } from 'helpers/Constants';
 import Pincode from './Pincode';
-import AddToCart from './AddtoCart';
+import AddToCart from '../AddToCart';
 
 import prodDetails from '../../data/ProductDetails';
 
@@ -75,7 +74,7 @@ class ProductDetails extends React.Component {
                 <TitlePrice name={meta.name} price={meta.price} discPrice={meta.special_price} />
               </Div>
               <Div col="3">
-                <AddToCart skuId={sku} />
+                <AddToCart simpleSku={simpleSku} sku={sku} itemId={sku} />
                 <Div mt="1rem">
                   <Button
                     width="100%"
@@ -125,12 +124,12 @@ class ProductDetails extends React.Component {
                 <Reviews col="6" reviewItems={reviews.data} />
                 {/* <ProductSlider productSliderTitle="Related Products" colSize={20} />
           <ProductSlider productSliderTitle="Frequently Bought Together" colSize={20} /> */}
-                <AddReview sku={groupedattributes.id_catalog_config} onClickSubmit={this.addReview} />
+                <AddReview catalogId={groupedattributes.id_catalog_config} onClickSubmit={this.addReview} />
               </Div>
               <Div col="3">
                 <ServiceDetails
                   deliverBy={deliveryDetails[0].value}
-                  // emiStarting={prodDetails.emi_starting}
+                  emiStarting="xyz"
                   shipping={shipping}
                   pincode={pincode.selectedPincode}
                 >
