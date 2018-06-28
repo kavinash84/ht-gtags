@@ -7,7 +7,8 @@ import Span from 'hometown-components/lib/Span';
 import Button from 'hometown-components/lib/Buttons';
 import { formatAmount } from 'utils/formatters';
 
-const styles = require('./Checkout.scss');
+const styles = require('./OrderSummary.scss');
+const EditCouponIcon = require('../../../static/edit.svg');
 
 const OrderSummary = ({
   itemsTotal, savings, shipping, totalCart
@@ -44,16 +45,128 @@ const OrderSummary = ({
         </Text>
       </Div>
       <Div col="12" mt="0.625rem">
-        <Button btnType="link" color="#ae8873" fontWeight="Light" pl="0" pr="0" fontSize="0.875rem">
-          Got a coupon?
-        </Button>
+        <Heading fontSize="0.875em" mb="0.625rem" color="secondary">
+          APPLY COUPON
+        </Heading>
+        <Div className={styles.applyCoupon}>
+          <div className={`${styles.appliedCouponWrapper} hide`}>
+            <p className={styles.appliedCoupon}>
+              <span>FURNROOMAA500</span> Applied
+              <button className={styles.couponEdit}>
+                <img src={EditCouponIcon} alt="" />
+              </button>
+            </p>
+            <p className={styles.appliedSaveRs}>
+              Save <span>Rs. 339</span>
+            </p>
+          </div>
+          <div className={`${styles.applyCouponWrapper}`}>
+            <input className={styles.applyCopupnField} type="text" placeholder="Enter coupon code" />
+            <Button
+              className={styles.applyCouponBtn}
+              btnType="link"
+              color="#ae8873"
+              fontWeight="semibold"
+              pl="0"
+              pr="0"
+              fontSize="0.75rem"
+            >
+              Apply
+            </Button>
+          </div>
+          <div className={`${styles.offerList} ${styles.active}`}>
+            <ul>
+              <li>
+                <div className={styles.couponWrapper}>
+                  <p className={styles.coupon}>
+                    {/* eslint-disable */}
+                    <div className="checkbox">
+                      <input type="radio" id="checkbox" />
+                      <label htmlFor="checkbox" />
+                    </div>
+                    <label htmlFor="checkbox" className={styles.couponCode}>
+                      FURNROOMAA500
+                    </label>
+                    <label htmlFor="checkbox" className={styles.saveRs}>
+                      Save <span>Rs. 383</span>
+                    </label>
+                  </p>
+                  <p htmlFor="checkbox" className={styles.offerDetails}>
+                    Rs.500 off on minimum purchase of Rs.1499.0
+                  </p>
+                  <p htmlFor="checkbox" className={styles.offerDetails}>
+                    valid till 31st december,2018 Details
+                  </p>
+                  <ul className={styles.offerCondition}>
+                    <li>This is special coupon and can be applied on select style only</li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <div className={styles.couponWrapper}>
+                  <p className={styles.coupon}>
+                    {/* eslint-disable */}
+                    <div className="checkbox">
+                      <input type="radio" id="checkbox" />
+                      <label htmlFor="checkbox" />
+                    </div>
+                    <label className={styles.couponCode}>FURNROOMAA500</label>
+                    <label className={styles.saveRs}>
+                      Save <span>Rs. 383</span>
+                    </label>
+                  </p>
+                  <p className={styles.offerDetails}>Rs.500 off on minimum purchase of Rs.1499.0</p>
+                  <p className={styles.offerDetails}>valid till 31st december,2018 Details</p>
+                  <ul className={styles.offerCondition}>
+                    <li>This is special coupon and can be applied on select style only</li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <div className={styles.couponWrapper}>
+                  <p className={styles.coupon}>
+                    {/* eslint-disable */}
+                    <div className="checkbox">
+                      <input type="radio" id="checkbox" />
+                      <label htmlFor="checkbox" />
+                    </div>
+                    <label className={styles.couponCode}>FURNROOMAA500</label>
+                    <label className={styles.saveRs}>
+                      Save <span>Rs. 383</span>
+                    </label>
+                  </p>
+                  <p className={styles.offerDetails}>Rs.500 off on minimum purchase of Rs.1499.0</p>
+                  <p className={styles.offerDetails}>valid till 31st december,2018 Details</p>
+                  <ul className={styles.offerCondition}>
+                    <li>This is special coupon and can be applied on select style only</li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <div className={styles.couponWrapper}>
+                  <p className={styles.coupon}>
+                    {/* eslint-disable */}
+                    <div className="checkbox">
+                      <input type="radio" id="checkbox" />
+                      <label htmlFor="checkbox" />
+                    </div>
+                    <label className={styles.couponCode}>FURNROOMAA500</label>
+                    <label className={styles.saveRs}>
+                      Save <span>Rs. 383</span>
+                    </label>
+                  </p>
+                  <p className={styles.offerDetails}>Rs.500 off on minimum purchase of Rs.1499.0</p>
+                  <p className={styles.offerDetails}>valid till 31st december,2018 Details</p>
+                  <ul className={styles.offerCondition}>
+                    <li>This is special coupon and can be applied on select style only</li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </Div>
       </Div>
-      <Div col="12">
-        <Button btnType="link" color="#ae8873" fontWeight="Light" pl="0" pr="0" pt="0" fontSize="0.875rem">
-          Redeem your points?
-        </Button>
-      </Div>
-      <Div col="12" mt="0">
+      <Div col="12" mt="0.625rem">
         <Button
           size="block"
           btnType="primary"

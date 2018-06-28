@@ -412,7 +412,7 @@
 				width: 12px;
 			}
 		}
-		input[type="checkbox"] {
+		input[type="checkbox"], input[type="radio"] {
 			visibility: hidden;
 			&:checked + label {
 				background-color: #66bb6a;
@@ -420,6 +420,11 @@
 				&:after {
 					opacity: 1;
 				}
+			}
+		}
+		input[type="radio"] {
+			+ label {
+				border-radius: 100%;
 			}
 		}
 	}
