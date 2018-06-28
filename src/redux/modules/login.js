@@ -12,8 +12,7 @@ const LOGOUT_FAIL = 'login/LOGOUT_FAIL';
 
 const initialState = {
   loaded: false,
-  isLoggedIn: false,
-  sessionId: null
+  isLoggedIn: false
 };
 
 export default function reducer(state = initialState, action = {}) {
