@@ -1,0 +1,21 @@
+.addressBtn, .addAddressBtn {
+  border-radius: 4px;
+  background-color: #ffffff;
+  border: solid 2px #FFF;
+  padding: 0.625rem 1rem;
+  color: rgba(0, 0, 0, 0.6);
+  text-align: left;
+  line-height: 1.6;
+  font-size: 14px;
+  width: 100%;
+  min-height: 112px;
+  &.active, &:hover {
+    background-color: #ffffff;
+    border: solid 2px #ae8873;
+    outline: none;
+  }
+}
+
+.addAddressBtn {
+  text-align: center;
+}

@@ -6,12 +6,13 @@ import Menu from 'containers/MenuNew/index';
 import MyMenu from 'components/MyMenu';
 import ProfileForm from 'components/ProfileForm';
 import UpdatePasswordForm from 'containers/UpdatePassword';
+import Footer from 'components/Footer';
 
 const ProfileContainer = () => (
   <Div>
     <Menu />
     <MyMenu page="profile" />
-    <Container type="container" pr="1rem" pl="1rem">
+    <Container type="container" pr="0" pl="0">
       <Row display="block" mr="0" ml="0" p="2rem 0">
         <Div col="6" pr="3rem">
           <ProfileForm />
@@ -21,6 +22,7 @@ const ProfileContainer = () => (
         </Div>
       </Row>
     </Container>
+    <Footer />
   </Div>
 );
 

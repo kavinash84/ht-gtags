@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MyOrderContainer from 'components/MyOrder';
+import MyAddressContainer from 'components/MyAddress';
 import Menu from 'containers/MenuNew/index';
 import Footer from 'components/Footer';
 
@@ -8,7 +8,7 @@ export default class MyOrder extends Component {
     return (
       <div>
         <Menu />
-        <MyOrderContainer />
+        <MyAddressContainer />
         <Footer />
       </div>
     );

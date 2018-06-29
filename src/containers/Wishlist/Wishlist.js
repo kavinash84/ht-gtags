@@ -10,6 +10,7 @@ import Img from 'hometown-components/lib/Img';
 import Section from 'hometown-components/lib/Section';
 import Menu from 'containers/MenuNew/index';
 import MyMenu from 'components/MyMenu';
+import Footer from 'components/Footer';
 import { getSKUList } from '../../selectors/wishlist';
 
 const WishListIcon = require('../../../static/wishlist-empty.jpg');
@@ -27,7 +28,10 @@ export default class WishlistContainer extends Component {
     wishlist: {}
   };
   render() {
-    const { wishlist: { data }, wishListedSKUs } = this.props;
+    const {
+      wishlist: { data },
+      wishListedSKUs
+    } = this.props;
     return (
       <Div>
         <Menu />
@@ -47,6 +51,7 @@ export default class WishlistContainer extends Component {
             </Empty>
           </Section>
         )}
+        <Footer />
       </Div>
     );
   }
