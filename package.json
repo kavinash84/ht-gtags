@@ -28,7 +28,7 @@
   "main": "bin/server.js",
   "scripts": {
     "start": "concurrently --kill-others \"npm run start-prod\"",
-    "start-prod": "cross-env NODE_PATH=src NODE_ENV=production PORT=8080 APIHOST=ec2-18-220-156-195.us-east-2.compute.amazonaws.com/api/ APIPORT=80 node ./bin/server.js",
+    "start-prod": "cross-env NODE_PATH=src NODE_ENV=production PORT=8080 APIHOST=stageapi01.hometown.in/api/ APIPORT=80 node ./bin/server.js",
     "dev": "concurrently --kill-others \"npm run watch-client\" \"npm run start-dev\"",
     "start-dev": "cross-env NODE_PATH=src NODE_ENV=development PORT=3000 APIHOST=ec2-18-220-156-195.us-east-2.compute.amazonaws.com/api/ APIPORT=80 WEBPACK_DLLS=1 node ./bin/server.js",
     "watch-client": "cross-env UV_THREADPOOL_SIZE=100 NODE_PATH=src NODE_ENV=development PORT=3000 WEBPACK_DLLS=1 node webpack/webpack-dev-server.js",
