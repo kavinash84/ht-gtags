@@ -12,7 +12,6 @@ const UPDATE_CART_FAIL = 'cart/UPDATE_CART_FAIL';
 const REMOVE_FROM_CART = 'cart/REMOVE_FROM_CART';
 const REMOVE_FROM_CART_SUCCESS = 'cart/REMOVE_FROM_CART_SUCCESS';
 const REMOVE_FROM_CART_FAIL = 'cart/REMOVE_FROM_CART_FAIL';
-const SET_LOADING = 'cart/SET_LOADING';
 const SYNCING_CART = 'cart/SYNCING_CART';
 const SYNCING_CART_SUCCESS = 'cart/SYNCING_CART_SUCCESS';
 const SYNCING_CART_FAIL = 'cart/SYNCING_CART_FAIL';
@@ -137,7 +136,7 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-export const isLoaded = globalState => globalState.category && globalState.cart.loaded;
+export const isLoaded = globalState => globalState.cart && globalState.cart.loaded;
 
 export const loadCart = (session, pincode) => ({
   types: [LOAD_CART, LOAD_CART_SUCCESS, LOAD_CART_FAIL],
@@ -210,9 +209,4 @@ export const synCart = (sessionId, pincode) => ({
       throw error;
     }
   }
-});
-
-export const setLoading = payLoad => ({
-  type: SET_LOADING,
-  payLoad
 });
