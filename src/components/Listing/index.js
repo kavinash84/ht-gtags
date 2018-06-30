@@ -9,7 +9,6 @@ import Section from 'hometown-components/lib/Section';
 import { Label } from 'hometown-components/lib/Label';
 import ResponsiveModal from 'components/Modal';
 import QuickView from 'components/QuickView/QuickView';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actionCreators from 'redux/modules/wishlist';
 import { loadSortBy, applyFilter, clearAllFilters } from 'redux/modules/products';
@@ -26,8 +25,6 @@ const getProductImage = url => {
   return url.replace(pp, '1-product_500.jpg');
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
-
 const onClick = (list, dispatcher, isUserLoggedIn, history) => sku => e => {
   e.preventDefault();
   if (isUserLoggedIn) return dispatcher(list, sku);
@@ -38,7 +35,8 @@ const isInWishList = (list, id) => list.includes(id);
 
 const styles = require('./Listing.scss');
 
-class Listing extends React.Component {
+@connect(null, { ...actionCreators })
+export default class Listing extends React.Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
@@ -91,6 +89,7 @@ class Listing extends React.Component {
       wishList,
       wishListData,
       wishlistLoading,
+      wishlistKey,
       filters,
       history,
       isLoggedIn,
@@ -172,6 +171,7 @@ class Listing extends React.Component {
                       this.onOpenQuickViewModal(item.data.sku, Object.keys(item.data.simples)[0]);
                     }}
                     isWishList={isInWishList(wishList, item.data.sku)}
+                    wishlistKey={wishlistKey}
                     wishlistLoading={wishlistLoading}
                     rating={item.data.reviews.rating.toFixed(1)}
                     reviewsCount={item.data.reviews.count}
@@ -213,6 +213,7 @@ Listing.defaultProps = {
   filters: [],
   pincode: '',
   metaResults: [],
+  wishlistKey: '',
   wishlistLoading: false,
   isLoggedIn: false
 };
@@ -230,7 +231,6 @@ Listing.propTypes = {
   wishlistLoading: PropTypes.bool,
   pincode: PropTypes.string,
   isLoggedIn: PropTypes.bool,
-  metaResults: PropTypes.array
+  metaResults: PropTypes.array,
+  wishlistKey: PropTypes.string
 };
-
-export default connect(null, mapDispatchToProps)(Listing);
