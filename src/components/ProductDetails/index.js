@@ -73,6 +73,35 @@ class ProductDetails extends React.Component {
             <Row display="block" mt="0.625rem" mb="0.625rem" mr="0">
               <Div col="9" className={styles.titleWrapper}>
                 <TitlePrice name={meta.name} price={meta.price} discPrice={meta.special_price} />
+                <Row
+                  display="block"
+                  mt="1.25rem"
+                  mb="0.625rem"
+                  mr="0.9375rem"
+                  ml="0.9375rem"
+                  className={styles.variationWrapper}
+                >
+                  <Div col="2">
+                    <Section mb="0.3125rem" p="0">
+                      <Row display="block" mr="0" ml="0">
+                        <Heading fontSize="1em" color="textDark" mb="0.625rem" mt="0px" fontWeight="600">
+                          Color Options
+                        </Heading>
+                      </Row>
+                      <ColorOption colors={prodDetails.colors} />
+                    </Section>
+                  </Div>
+                  <Div col="2">
+                    <Heading fontSize="1em" color="textDark" mb="0.625rem" mt="0px" fontWeight="600">
+                      Size Options
+                    </Heading>
+                    <select className={styles.sizeDD}>
+                      <option>1 Seater</option>
+                      <option>2 Seater</option>
+                      <option>3 Seater</option>
+                    </select>
+                  </Div>
+                </Row>
               </Div>
               <Div col="3">
                 <AddToCart skuId={sku} />
@@ -85,46 +114,23 @@ class ProductDetails extends React.Component {
                     bc="#979797"
                     bg="transparent"
                     size="block"
+                    className={styles.addToWishlist}
                   >
                     ADD TO WISHLIST
                   </Button>
                 </Div>
               </Div>
             </Row>
-            <Row display="block" mt="1.25rem" mb="0.625rem" mr="0" ml="0" className={styles.variationWrapper}>
-              <Div col="2">
-                <Section mb="0.3125rem" p="0">
-                  <Row display="block" mr="0" ml="0">
-                    <Heading fontSize="1em" color="textDark" mb="0.625rem" mt="0px" fontWeight="600">
-                      Color Options
-                    </Heading>
-                  </Row>
-                  <ColorOption colors={prodDetails.colors} />
-                </Section>
-              </Div>
-              <Div col="2">
-                <Heading fontSize="1em" color="textDark" mb="0.625rem" mt="0px" fontWeight="600">
-                  Size Options
-                </Heading>
-                <select className={styles.sizeDD}>
-                  <option>1 Seater</option>
-                  <option>2 Seater</option>
-                  <option>3 Seater</option>
-                </select>
-              </Div>
-            </Row>
             <ProductDetailsCarousel data={images} title={meta.name} />
           </Container>
         </Section>
-        <Section p="0" pl="0.5rem" pr="0.5rem" pb="1.5rem" mb="0">
+        <Section p="0" pl="0.5rem" pr="0.5rem" pb="1.5rem" mb="0" mt="1.5rem">
           <Container type="container" pr="0" pl="0">
             <Row display="block" mt="0.625rem" mb="0.625rem" mr="0">
               <Div col="9" pr="2rem">
                 <ProductDesc desc={attributes.description} />
                 <Specs specs={groupedAttributes} pincode={pincode.selectedPincode} />
                 <Reviews col="6" reviewItems={reviews.data} />
-                {/* <ProductSlider productSliderTitle="Related Products" colSize={20} />
-          <ProductSlider productSliderTitle="Frequently Bought Together" colSize={20} /> */}
                 <AddReview sku={groupedattributes.id_catalog_config} onClickSubmit={this.addReview} />
               </Div>
               <Div col="3">
@@ -137,6 +143,10 @@ class ProductDetails extends React.Component {
                   <Pincode />
                 </ServiceDetails>
               </Div>
+            </Row>
+            <Row display="block" mt="0.625rem" mb="0.625rem" mr="0">
+              {/* <ProductSlider productSliderTitle="Related Products" colSize={20} />
+      <ProductSlider productSliderTitle="Frequently Bought Together" colSize={20} /> */}
             </Row>
           </Container>
         </Section>

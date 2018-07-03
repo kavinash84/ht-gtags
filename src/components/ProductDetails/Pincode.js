@@ -4,11 +4,13 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Input from 'hometown-components/lib/Input';
 import Div from 'hometown-components/lib/Div';
+import Img from 'hometown-components/lib/Img';
 import * as actionCreators from 'redux/modules/pincode';
 import { pincode as pincodeCheck } from 'utils/validation';
 import { loadProductDescription } from 'redux/modules/productdetails';
 
 const styles = require('./Pincode.scss');
+const ArrowIcon = require('../../../static/arrow_forward.svg');
 
 const onChange = dispatcher => e => {
   const {
@@ -61,7 +63,9 @@ class Pincode extends React.Component {
           onChange={onChange(setPincodeQuery)}
           value={pincodeQuery}
         />
-        <button onClick={this.setPincodeInStore(setPincode, pincodeQuery)}>CHECK</button>
+        <button className={styles.pincodeCheckBtn} onClick={this.setPincodeInStore(setPincode, pincodeQuery)}>
+          <Img src={ArrowIcon} alt="Check" />
+        </button>
         {validationError && <div>{validationErrorMessage}</div>}
       </Div>
     );
