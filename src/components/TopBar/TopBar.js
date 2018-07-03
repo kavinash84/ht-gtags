@@ -14,8 +14,9 @@ import Search from 'components/Search';
 import ResponsiveModal from 'components/Modal';
 import Pincode from 'components/Pincode';
 import LoginModal from 'components/Login/LoginModal';
-import { SIGNUP_URL, HOME_URL, LOGIN_URL, MY_WISHLIST_URL, MY_PROFILE_URL } from 'helpers/Constants';
+import { SIGNUP_URL, HOME_URL, LOGIN_URL, MY_WISHLIST_URL, MY_PROFILE_URL, CART_URL } from 'helpers/Constants';
 import { logout } from 'redux/modules/login';
+import { getCartCount } from 'selectors/cart';
 
 const LogoIcon = require('../../../static/logo.png');
 const CartIcon = require('../../../static/cart-icon.svg');
@@ -36,10 +37,13 @@ const onClickLogout = (dispatcher, history) => e => {
 
 @withRouter
 @connect(
-  ({ pincode, userLogin, wishlist }) => ({
+  ({
+    pincode, userLogin, wishlist, cart
+  }) => ({
     selectedPincode: pincode.selectedPincode,
     isLoggedIn: userLogin.isLoggedIn,
-    wishListCount: wishlist.data.length
+    wishListCount: wishlist.data.length,
+    cartCount: getCartCount(cart)
   }),
   { logoutUser: logout }
 )
@@ -79,7 +83,7 @@ export default class MenuSidebar extends Component {
     const styles = require('./TopBar.scss');
     const { userPopOver } = this.state;
     const {
-      selectedPincode, isLoggedIn, history, wishListCount, logoutUser
+      selectedPincode, isLoggedIn, history, wishListCount, cartCount, logoutUser
     } = this.props;
     return (
       <div>
@@ -126,9 +130,9 @@ export default class MenuSidebar extends Component {
             >
               <LoginModal />
             </ResponsiveModal>
-            <Link className={styles.cart} to={HOME_URL}>
+            <Link className={styles.cart} to={CART_URL}>
               <Img src={CartIcon} alt="Hometown" height="24px" />
-              <span className={styles.count}>0</span>
+              <span className={styles.count}>{cartCount}</span>
             </Link>
             <Button p="0" className={styles.heartBtn} ml="1.25rem" onClick={this.handleUserPopOver}>
               <Img src={UserIcon} alt="Account" height="24px" mr="0.625rem" float="left" />
@@ -174,6 +178,7 @@ export default class MenuSidebar extends Component {
 MenuSidebar.defaultProps = {
   selectedPincode: '',
   wishListCount: 0,
+  cartCount: 0,
   isLoggedIn: false,
   history: {},
   logoutUser: () => {}
@@ -184,5 +189,6 @@ MenuSidebar.propTypes = {
   isLoggedIn: PropTypes.bool,
   history: PropTypes.object,
   wishListCount: PropTypes.number,
+  cartCount: PropTypes.number,
   logoutUser: PropTypes.func
 };

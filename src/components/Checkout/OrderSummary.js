@@ -1,13 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Div from 'hometown-components/lib/Div';
 import Heading from 'hometown-components/lib/Heading';
 import Text from 'hometown-components/lib/Text';
 import Span from 'hometown-components/lib/Span';
 import Button from 'hometown-components/lib/Buttons';
+import { formatAmount } from 'utils/formatters';
 
 const styles = require('./Checkout.scss');
 
-const OrderSummary = () => (
+const OrderSummary = ({
+  itemsTotal, savings, shipping, totalCart
+}) => (
   <Div col="3">
     <Div className={styles.orderSummary}>
       <Heading fontSize="0.875em" mb="0.625rem" color="secondary">
@@ -17,25 +21,25 @@ const OrderSummary = () => (
         <Text color="rgba(0, 0, 0, 0.8);">
           Items
           <Span float="right" color="#000000" fontWeight="500">
-            Rs 1,49,700
+            Rs. {formatAmount(itemsTotal)}
           </Span>
         </Text>
         <Text color="rgba(0, 0, 0, 0.8);">
           Savings
           <Span float="right" color="#000000" fontWeight="500">
-            Rs 1,20,600
+            Rs. {formatAmount(savings)}
           </Span>
         </Text>
         <Text color="rgba(0, 0, 0, 0.8);">
           Shipping
           <Span float="right" color="#000000" fontWeight="500">
-            Free
+            {shipping === 0 ? 'Free' : shipping}
           </Span>
         </Text>
         <Text color="rgba(0, 0, 0, 0.8);">
           Total
           <Span float="right" color="#000000" fontWeight="500">
-            Rs 1,49,700
+            Rs. {formatAmount(totalCart)}
           </Span>
         </Text>
       </Div>
@@ -74,5 +78,12 @@ const OrderSummary = () => (
     </Div>
   </Div>
 );
+
+OrderSummary.propTypes = {
+  itemsTotal: PropTypes.number.isRequired,
+  savings: PropTypes.number.isRequired,
+  shipping: PropTypes.number.isRequired,
+  totalCart: PropTypes.number.isRequired
+};
 
 export default OrderSummary;

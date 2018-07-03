@@ -52,11 +52,13 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
   wishListedSKUs: getSKUList(state.wishlist),
   wishListData: state.wishlist.data,
   wishlistLoading: state.wishlist.loading,
+  wishlistKey: state.wishlist.key,
   pincode: state.pincode.selectedPincode,
   products: getProducts(state),
   categoryName: getCategoryName(state),
   productCount: getProductCount(state),
-  isLoggedIn: state.userLogin.isLoggedIn
+  isLoggedIn: state.userLogin.isLoggedIn,
+  metadata: state.products.data.metadata
 }))
 @withRouter
 export default class Listing extends Component {
@@ -64,12 +66,14 @@ export default class Listing extends Component {
     loading: PropTypes.bool,
     loaded: PropTypes.bool,
     products: PropTypes.array,
+    metadata: PropTypes.object,
     category: PropTypes.string,
     categoryName: PropTypes.string,
     productCount: PropTypes.string,
     wishListedSKUs: PropTypes.array,
     wishListData: PropTypes.array,
     wishlistLoading: PropTypes.bool,
+    wishlistKey: PropTypes.string,
     filters: PropTypes.array,
     history: PropTypes.object.isRequired,
     pincode: PropTypes.string,
@@ -88,7 +92,9 @@ export default class Listing extends Component {
     wishListedSKUs: [],
     wishListData: [],
     wishlistLoading: false,
+    wishlistKey: '',
     filters: [],
+    metadata: null,
     pincode: '',
     isLoggedIn: false
   };
@@ -113,8 +119,11 @@ export default class Listing extends Component {
       history,
       wishListedSKUs,
       wishListData,
-      wishlistLoading
+      wishlistLoading,
+      wishlistKey,
+      metadata
     } = this.props;
+    const { results: metaResults } = metadata;
     return (
       <Section p="0" mb="0">
         <div className="wrapper">
@@ -148,6 +157,8 @@ export default class Listing extends Component {
                 pincode={pincode}
                 isLoggedIn={isLoggedIn}
                 wishlistLoading={wishlistLoading}
+                wishlistKey={wishlistKey}
+                metaResults={metaResults}
               />
               <LoadMore loading={loading} loaded={loaded} />
             </div>

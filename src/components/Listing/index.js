@@ -7,17 +7,14 @@ import Product from 'hometown-components/lib/Product';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
 import { Label } from 'hometown-components/lib/Label';
-import AddCart from 'hometown-components/lib/Icons/AddCart';
-import Button from 'hometown-components/lib/Buttons';
-import Span from 'hometown-components/lib/Span';
 import ResponsiveModal from 'components/Modal';
 import QuickView from 'components/QuickView/QuickView';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actionCreators from 'redux/modules/wishlist';
 import { loadSortBy, applyFilter, clearAllFilters } from 'redux/modules/products';
 import { getSelectedFilters } from 'utils/helper';
 import Dropdown from '../Filters/Dropdown';
+import AddToCart from '../AddToCart';
 import AppliedFilters from '../Filters/AppliedFilters';
 import { LOGIN_URL } from '../../helpers/Constants';
 
@@ -27,8 +24,6 @@ const getProductImage = url => {
   const pp = `${url.split('/').slice(-1)}`;
   return url.replace(pp, '1-product_500.jpg');
 };
-
-const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
 
 const onClick = (list, dispatcher, isUserLoggedIn, history) => sku => e => {
   e.preventDefault();
@@ -40,17 +35,23 @@ const isInWishList = (list, id) => list.includes(id);
 
 const styles = require('./Listing.scss');
 
-class Listing extends React.Component {
+@connect(null, { ...actionCreators })
+export default class Listing extends React.Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
   state = {
     openQuickView: false,
     quickViewSku: '',
+    simpleSku: '',
     sortby: 'Popularity'
   };
-  onOpenQuickViewModal = sku => {
-    this.setState({ openQuickView: true, quickViewSku: sku });
+  onOpenQuickViewModal = (sku, simpleSku) => {
+    this.setState({
+      openQuickView: true,
+      quickViewSku: sku,
+      simpleSku
+    });
   };
   onCloseQuickViewModal = () => {
     this.setState({ openQuickView: false });
@@ -67,10 +68,10 @@ class Listing extends React.Component {
 
   setFilter = key => e => {
     e.preventDefault();
-    const { category, pincode } = this.props;
+    const { category } = this.props;
     const { dispatch } = this.context.store;
-    const query = key.split('/')[2];
-    dispatch(applyFilter(category, query, pincode));
+    const query = key.split('/');
+    dispatch(applyFilter(category, query[query.length - 1]));
   };
 
   clearFilters = () => {
@@ -88,9 +89,11 @@ class Listing extends React.Component {
       wishList,
       wishListData,
       wishlistLoading,
+      wishlistKey,
       filters,
       history,
-      isLoggedIn
+      isLoggedIn,
+      metaResults
     } = this.props;
     const { sortby } = this.state;
     const selectedFilters = getSelectedFilters(filters);
@@ -152,7 +155,7 @@ class Listing extends React.Component {
         <Section pt="1rem" mb="0">
           <Container pr="0" pl="0">
             <Row display="block" mr="-15px" ml="-15px">
-              {products.map(item => (
+              {products.map((item, index) => (
                 <div className={styles.productWrapper} key={item.id}>
                   <Product
                     key={item.id}
@@ -165,22 +168,19 @@ class Listing extends React.Component {
                     simple_sku={item.simples}
                     onClick={onClick(wishListData, toggleWishList, isLoggedIn, history)}
                     onOpenQuickViewModal={() => {
-                      this.onOpenQuickViewModal(item.data.sku);
+                      this.onOpenQuickViewModal(item.data.sku, Object.keys(item.data.simples)[0]);
                     }}
                     isWishList={isInWishList(wishList, item.data.sku)}
+                    wishlistKey={wishlistKey}
                     wishlistLoading={wishlistLoading}
                     rating={item.data.reviews.rating.toFixed(1)}
                     reviewsCount={item.data.reviews.count}
                     savingAmount={item.data.max_price - item.data.max_special_price}
                     deliveredBy={item.data.delivery_details[0].value}
                   />
-                  <Div mt="0" p="0.25rem 0.75rem 0.5rem">
-                    <Button btnType="custom" border="1px solid" bc="#ae8873" color="#ae8873" p="8px 15px 0">
-                      <AddCart fill="#ae8873" />
-                      <Span ml="0.625rem" fontSize="0.857rem" fontWeight="600" color="#ae8873" va="top">
-                        ADD TO CART
-                      </Span>
-                    </Button>
+                  <Div mt="0" p="0.25rem 0.125rem 0.5rem">
+                    <AddToCart simpleSku={Object.keys(item.data.simples)[0]} sku={item.data.sku} itemId={item.id} />
+                    <div>{metaResults[index].data.color_group_count}</div>
                   </Div>
                 </div>
               ))}
@@ -192,6 +192,7 @@ class Listing extends React.Component {
                 <QuickView
                   onCloseModal={this.onCloseQuickViewModal}
                   sku={this.state.quickViewSku}
+                  simpleSku={this.state.simpleSku}
                   products={products}
                 />
               </ResponsiveModal>
@@ -211,6 +212,8 @@ Listing.defaultProps = {
   category: '',
   filters: [],
   pincode: '',
+  metaResults: [],
+  wishlistKey: '',
   wishlistLoading: false,
   isLoggedIn: false
 };
@@ -227,7 +230,7 @@ Listing.propTypes = {
   history: PropTypes.object.isRequired,
   wishlistLoading: PropTypes.bool,
   pincode: PropTypes.string,
-  isLoggedIn: PropTypes.bool
+  isLoggedIn: PropTypes.bool,
+  metaResults: PropTypes.array,
+  wishlistKey: PropTypes.string
 };
-
-export default connect(null, mapDispatchToProps)(Listing);

@@ -11,7 +11,7 @@ const styles = require('./TitleBar.scss');
 
 const TitleBar = ({ title }) => (
   <Section mb="0.625rem" p="1.5rem 0.5rem" bg="primary" boxShadow="0 2px 8px 0 rgba(0, 0, 0, 0.17)">
-    <Container type="container" pr="2rem" pl="2rem">
+    <Container type="container" pr="0" pl="0">
       <Row display="block" mr="0" ml="0" mb="1rem">
         <Div col="9">
           <a href="/" className={`${styles.headerLink}`}>

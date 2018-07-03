@@ -77,9 +77,13 @@ app.use(async (req, res) => {
 
   const persistConfig = {
     key: 'root',
-    storage: new CookieStorage(cookieJar),
+    storage: new CookieStorage(cookieJar, {
+      expiration: {
+        default: 30 * 86400
+      }
+    }),
     stateReconciler: (inboundState, originalState) => originalState,
-    whitelist: ['auth', 'info', 'chat']
+    whitelist: ['app', 'userLogin', 'pincode']
   };
 
   let preloadedState;
@@ -105,7 +109,7 @@ app.use(async (req, res) => {
   }
 
   try {
-    const { components, match, params } = await asyncMatchRoutes(routes, req.originalUrl);
+    const { components, match, params } = await asyncMatchRoutes(routes, req.path);
     await trigger('fetch', components, {
       ...providers,
       store,

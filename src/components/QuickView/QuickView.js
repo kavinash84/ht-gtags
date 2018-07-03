@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import AddToCart from 'components/ProductDetails/AddtoCart';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Heading from 'hometown-components/lib/Heading';
 import Span from 'hometown-components/lib/Span';
 import Text from 'hometown-components/lib/Text';
+import AddToCart from 'components/AddToCart';
 
 const styles = require('./QuickView.scss');
 
@@ -110,7 +110,7 @@ export default class QuickView extends Component {
   render() {
     const { images, data } = this.state.product;
     const { currentImage } = this.state;
-    const { sku } = this.props;
+    const { sku, simpleSku } = this.props;
     const {
       name, price, special_price: discPrice, max_saving_percentage: saving
     } = data;
@@ -149,13 +149,13 @@ export default class QuickView extends Component {
                   Rs. 2,000 ({saving}%)
                 </Span>
               </Text>
-              <Text color="rgba(0, 0, 0, 0.6)" fontWeight="700" fontSize="0.857rem" mb="2rem" mt="0.3125rem">
+              <Text color="rgba(0, 0, 0, 0.6)" fontWeight="700" fontSize="0.857rem" mb="1rem" mt="0.3125rem">
                 EMI:{' '}
                 <Span color="rgba(0, 0, 0, 0.6)" fontSize="0.857rem" va="bottom">
                   starting from Rs.2,419{' '}
                 </Span>
               </Text>
-              <AddToCart skuId={sku} />
+              <AddToCart simpleSku={simpleSku} sku={sku} />
             </Div>
             <Div className={styles.thumb}>
               {images.map((image, index) => (
@@ -173,5 +173,6 @@ export default class QuickView extends Component {
 
 QuickView.propTypes = {
   sku: PropTypes.string.isRequired,
+  simpleSku: PropTypes.string.isRequired,
   products: PropTypes.array.isRequired
 };
