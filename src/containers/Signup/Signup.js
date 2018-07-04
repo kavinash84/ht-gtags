@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 import { Label } from 'hometown-components/lib/Label';
 import Img from 'hometown-components/lib/Img';
 import { validateEmail, isBlank, validateMobile } from 'js-utility-functions';
-import { LOGIN_URL, FORGOT_PASSWORD_URL } from 'helpers/Constants';
+import { LOGIN_URL } from 'helpers/Constants';
 import { signUp } from 'redux/modules/signUp';
 
 const SidebarImg = require('../../../static/login-side-thumb.png');
@@ -25,11 +25,11 @@ const SidebarImg = require('../../../static/login-side-thumb.png');
 }))
 @withRouter
 export default class SignupFormContainer extends Component {
-  static contextTypes = {
-    store: PropTypes.object.isRequired
-  };
   static propTypes = {
     signUpResponse: PropTypes.object.isRequired
+  };
+  static contextTypes = {
+    store: PropTypes.object.isRequired
   };
   constructor() {
     super();
@@ -46,7 +46,9 @@ export default class SignupFormContainer extends Component {
     };
   }
   onChangeEmail = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = validateEmail(value, 'Enter valid email');
     this.setState({
       email: value,
@@ -55,7 +57,9 @@ export default class SignupFormContainer extends Component {
     });
   };
   onChangePhone = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = validateMobile(value, 'Mobile should be 10 digits');
     this.setState({
       phone: value,
@@ -64,7 +68,9 @@ export default class SignupFormContainer extends Component {
     });
   };
   onChangePassword = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = isBlank(value);
     this.setState({
       password: value,
@@ -131,9 +137,7 @@ export default class SignupFormContainer extends Component {
                     <Row display="block" mr="0" ml="0">
                       <Div col="12" ta="right">
                         <Link to={LOGIN_URL}>
-                          <Label fontWeight="light" color="primary">
-                            Existing User? Log in now
-                          </Label>
+                          <Label color="primary">Existing User? Log in now</Label>
                         </Link>
                       </Div>
                     </Row>
@@ -156,16 +160,6 @@ export default class SignupFormContainer extends Component {
                           signUpResponse={signUpResponse}
                         />
                       </Div>
-                    </Row>
-                    <Row display="block" mr="0" ml="0" pt="0.625rem">
-                      <Div col="6">
-                        <Link to={FORGOT_PASSWORD_URL}>
-                          <Label fontWeight="light" color="primary">
-                            Forgot Password?
-                          </Label>
-                        </Link>
-                      </Div>
-                      <Div col="6" ta="right" />
                     </Row>
                   </div>
                   {/* <Row display="block" mr="0" ml="0" pt="0.3125rem">
