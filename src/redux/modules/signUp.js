@@ -10,7 +10,7 @@ const initialState = {
   isLoggedIn: false,
   error: false,
   errorMessage: null,
-  response: ''
+  response: {}
 };
 
 export default function reducer(state = initialState, action = {}) {
