@@ -1,25 +1,41 @@
-export App from './App/App';
-export Home from './Home/Home';
-export Category from './Category/Category';
-export Menu from './Menu/Menu';
-export Listing from './Listing/Listing';
-export Wishlist from './Wishlist/Wishlist';
-export Cart from './Cart/Cart';
-export MyOrder from './MyOrder/MyOrder';
-export OrderDetails from './OrderDetails/OrderDetails';
-export OrderSummary from './OrderSummary/OrderSummary';
-export CartTotal from 'components/CartTotal';
-export UpdatePassword from './UpdatePassword';
-export Payment from './Payment';
-export ProductDetails from './ProductDetails/ProductDetails';
-export DeliveryAddress from './DeliveryAddress/DeliveryAddress';
-export PaymentOptions from './PaymentOptions/PaymentOptions';
-export ReviewOrder from './ReviewOrder/ReviewOrder';
-export ReturnPolicy from './ReturnPolicy/ReturnPolicy';
-export PrivacyPolicy from './PrivacyPolicy/PrivacyPolicy';
-export Terms from './Terms/Terms';
-export FAQ from './Faq/Faq';
-export Cancellation from './Cancellation/Cancellation';
-export WhoWeAre from './WhoWeAre/WhoWeAre';
-export ProductNotFound from './ProductDetails/ProductNotFound';
-export NotFound from './NotFound/NotFound';
+import CartTotal from 'components/CartTotal';
+import App from './App/App';
+import Category from './Category/Category';
+import Listing from './Listing/Listing';
+import MyOrder from './MyOrder/MyOrder';
+import OrderDetails from './OrderDetails/OrderDetails';
+import OrderSummary from './OrderSummary/OrderSummary';
+import Payment from './Payment';
+import ProductDetails from './ProductDetails/ProductDetails';
+import DeliveryAddress from './DeliveryAddress/DeliveryAddress';
+import PaymentOptions from './PaymentOptions/PaymentOptions';
+import ReviewOrder from './ReviewOrder/ReviewOrder';
+import ReturnPolicy from './ReturnPolicy/ReturnPolicy';
+import PrivacyPolicy from './PrivacyPolicy/PrivacyPolicy';
+import Terms from './Terms/Terms';
+import FAQ from './Faq/Faq';
+import Cancellation from './Cancellation/Cancellation';
+import WhoWeAre from './WhoWeAre/WhoWeAre';
+import NotFound from './NotFound/NotFound';
+
+export {
+  App,
+  Category,
+  Listing,
+  MyOrder,
+  OrderDetails,
+  OrderSummary,
+  CartTotal,
+  Payment,
+  ProductDetails,
+  DeliveryAddress,
+  ReviewOrder,
+  ReturnPolicy,
+  Terms,
+  FAQ,
+  Cancellation,
+  PrivacyPolicy,
+  WhoWeAre,
+  NotFound,
+  PaymentOptions
+};

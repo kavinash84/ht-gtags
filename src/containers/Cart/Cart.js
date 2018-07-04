@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { provideHooks } from 'redial';
 import { connect } from 'react-redux';
 import Cart from 'components/Cart';
 import Empty from 'hometown-components/lib/Empty';
@@ -10,23 +9,9 @@ import Notifications from 'components/Notifications';
 import Menu from 'containers/MenuNew/index';
 import Footer from 'components/Footer';
 import TitleBar from 'components/TitleBar';
-import { PINCODE } from 'helpers/Constants';
-import { loadCart, isLoaded as isCartLoaded } from 'redux/modules/cart';
 
 const CartEmptyIcon = require('../../../static/cart-empty.jpg');
 
-@provideHooks({
-  fetch: async ({ store: { dispatch, getState } }) => {
-    const {
-      app: { sessionId },
-      pincode: { selectedPincode }
-    } = getState();
-    if (sessionId && !isCartLoaded(getState())) {
-      const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
-      dispatch(loadCart(sessionId, pincode)).catch(error => console.log(error));
-    }
-  }
-})
 @connect(({ cart: { data, summary, error } }) => ({
   results: data,
   summary,
