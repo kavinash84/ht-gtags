@@ -5,7 +5,6 @@ import {
   MyOrder,
   OrderDetails,
   OrderSummary,
-  UpdatePassword,
   Payment,
   ProductDetails,
   DeliveryAddress,
@@ -19,6 +18,7 @@ import Login from 'containers/Login';
 import Signup from 'containers/Signup';
 import ForgotPassword from 'containers/ForgotPassword';
 import ResetPassword from 'containers/ResetPassword';
+import UpdatePassword from 'containers/UpdatePassword';
 import Profile from 'containers/Profile';
 import Category from 'containers/Category/Category';
 import Wishlist from 'containers/Wishlist';
