@@ -18,6 +18,7 @@ import {
   setCategoryQuery,
   clearPreviousList,
   clearPreviousSort,
+  loadUrlQuery,
   clearAllFilters as loadAfterPincodeChange
 } from 'redux/modules/products';
 import { getProducts, getCategoryName, getProductCount } from 'selectors/products';
@@ -32,12 +33,20 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
       products: { sort },
       pincode: { selectedPincode }
     } = getState();
-    const query = location.pathname === '/search/' ? location.search.split('?q=')[1] : encodeCategory(params);
-    console.log(location.pathname);
-    const loadResults =
-      location.pathname === '/search/'
-        ? loadSearchQuery(query, 1, selectedPincode)
-        : loadListing(query, 1, sort, selectedPincode);
+    let query;
+    let loadResults;
+    if (location.pathname === '/catalog/all-products') {
+      query = location.search.split('?').join('');
+      loadResults = loadUrlQuery(encodeCategory(params), query, selectedPincode);
+    } else if (location.pathname === '/search/') {
+      /* eslint prefer-destructuring: ["error", {AssignmentExpression: {array: false}}] */
+      query = location.search.split('?q=')[1];
+      loadResults = loadSearchQuery(query, 1, selectedPincode);
+    } else {
+      query = encodeCategory(params);
+      loadResults = loadListing(query, 1, sort, selectedPincode);
+    }
+
     if (!isInitialListLoaded(getState(), query)) {
       await dispatch(clearPreviousList());
       await dispatch(clearPreviousSort());
@@ -147,6 +156,7 @@ export default class Listing extends Component {
             </Section>
           )}
           {loaded &&
+            !loading &&
             products.length && (
             <div>
               <ListingContainer
