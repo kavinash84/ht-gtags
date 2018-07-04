@@ -24,13 +24,16 @@ const hideResults = dispatcher => e => {
 };
 
 const onChange = (dispatcher, load) => e => {
-  const { target: { value } } = e;
+  const {
+    target: { value }
+  } = e;
   dispatcher(value);
   if (value.length >= 2) load(value);
 };
 
-const onSubmit = (searchQuery, history) => e => {
+const onSubmit = (searchQuery, history, hideResultsOnSubmit) => e => {
   e.preventDefault();
+  hideResultsOnSubmit();
   return history.push(`/search/?q=${searchQuery}`);
 };
 
@@ -49,12 +52,13 @@ const Search = ({
   results,
   showResultsonFocus,
   hideResultsonBlur,
+  hideResultsOnSubmit,
   clearSearchQuery,
   showResults,
   history
 }) => (
   <Div className={styles.search} pt="0" pb="0.3125rem">
-    <form onSubmit={onSubmit(searchQuery, history)}>
+    <form onSubmit={onSubmit(searchQuery, history, hideResultsOnSubmit)}>
       <Input
         type="text"
         placeholder="Search"
@@ -120,8 +124,12 @@ Search.propTypes = {
   history: PropTypes.object.isRequired,
   showResultsonFocus: PropTypes.func.isRequired,
   hideResultsonBlur: PropTypes.func.isRequired,
+  hideResultsOnSubmit: PropTypes.func.isRequired,
   setSearchQuery: PropTypes.func.isRequired,
   clearSearchQuery: PropTypes.func.isRequired
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search));
+export default withRouter(connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Search));
