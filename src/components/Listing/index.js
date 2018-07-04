@@ -9,8 +9,9 @@ import Section from 'hometown-components/lib/Section';
 import { Label } from 'hometown-components/lib/Label';
 import ResponsiveModal from 'components/Modal';
 import QuickView from 'components/QuickView/QuickView';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as actionCreators from 'redux/modules/wishlist';
+import { toggleWishList } from 'redux/modules/wishlist';
 import { loadSortBy, applyFilter, clearAllFilters } from 'redux/modules/products';
 import { getSelectedFilters } from 'utils/helper';
 import Dropdown from '../Filters/Dropdown';
@@ -35,8 +36,9 @@ const isInWishList = (list, id) => list.includes(id);
 
 const styles = require('./Listing.scss');
 
-@connect(null, { ...actionCreators })
-export default class Listing extends React.Component {
+const mapDispatchToProps = dispatch => bindActionCreators({ wishlistToggle: toggleWishList }, dispatch);
+
+class Listing extends React.Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
@@ -82,7 +84,7 @@ export default class Listing extends React.Component {
 
   render() {
     const {
-      toggleWishList,
+      wishlistToggle,
       products,
       categoryName,
       productCount,
@@ -166,7 +168,7 @@ export default class Listing extends React.Component {
                     image={getProductImage(item.images[0].path)}
                     sku={item.data.sku}
                     simple_sku={item.simples}
-                    onClick={onClick(wishListData, toggleWishList, isLoggedIn, history)}
+                    onClick={onClick(wishListData, wishlistToggle, isLoggedIn, history)}
                     onOpenQuickViewModal={() => {
                       this.onOpenQuickViewModal(item.data.sku, Object.keys(item.data.simples)[0]);
                     }}
@@ -219,7 +221,7 @@ Listing.defaultProps = {
 };
 
 Listing.propTypes = {
-  toggleWishList: PropTypes.func.isRequired,
+  wishlistToggle: PropTypes.func.isRequired,
   products: PropTypes.array.isRequired,
   wishList: PropTypes.array,
   wishListData: PropTypes.array,
@@ -234,3 +236,5 @@ Listing.propTypes = {
   metaResults: PropTypes.array,
   wishlistKey: PropTypes.string
 };
+
+export default connect(null, mapDispatchToProps)(Listing);
