@@ -16,6 +16,12 @@ import {
   PaymentOptions,
   ReviewOrder,
   Stores,
+  ReturnPolicy,
+  PrivacyPolicy,
+  Terms,
+  Cancellation,
+  WhoWeAre,
+  FAQ,
   ProductNotFound,
   NotFound
 } from 'containers';
@@ -74,6 +80,12 @@ const routes = [
       { path: '/search', exact: false, component: Listing },
       { path: '/pincode', exact: true, component: Pincode },
       { path: '/stores', exact: true, component: Stores },
+      { path: '/return-policy', exact: true, component: ReturnPolicy },
+      { path: '/privacy-policy', exact: true, component: PrivacyPolicy },
+      { path: '/cancellation', exact: true, component: Cancellation },
+      { path: '/terms-and-conditions', exact: true, component: Terms },
+      { path: '/faq', exact: true, component: FAQ },
+      { path: '/who-we-are', exact: true, component: WhoWeAre },
       { path: '/product-not-found', exact: true, component: ProductNotFound },
       {
         path: '/:category/:subcategory1?/:subcategory2?/:subcategory3?/:subcategory4?/:subcategory5?',

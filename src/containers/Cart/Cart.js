@@ -8,6 +8,7 @@ import Img from 'hometown-components/lib/Img';
 import Section from 'hometown-components/lib/Section';
 import Notifications from 'components/Notifications';
 import Menu from 'containers/MenuNew/index';
+import Footer from 'components/Footer';
 import TitleBar from 'components/TitleBar';
 import { PINCODE } from 'helpers/Constants';
 import { loadCart, isLoaded as isCartLoaded } from 'redux/modules/cart';
@@ -66,6 +67,7 @@ export default class CartContainer extends Component {
             <Cart results={results} summary={summary} />
           </div>
         )}
+        <Footer />
       </div>
     );
   }

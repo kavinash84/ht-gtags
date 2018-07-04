@@ -27,7 +27,9 @@ export default class PaymentMethodContainer extends Component {
     };
   }
   onChangeEmail = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = validateEmail(value, 'Enter valid email');
     this.setState({
       email: value,
@@ -36,7 +38,9 @@ export default class PaymentMethodContainer extends Component {
     });
   };
   onChangePhone = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = isBlank(value);
     this.setState({
       phone: value,
@@ -45,7 +49,9 @@ export default class PaymentMethodContainer extends Component {
     });
   };
   onChangePassword = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = isBlank(value);
     this.setState({
       password: value,
@@ -95,7 +101,7 @@ export default class PaymentMethodContainer extends Component {
             </div>
           </div>
         </Section>
-        <Section mb="0" p="1.25rem" pt="1.5rem" pb="1.5rem">
+        <Section mb="0" p="1.25rem" pt="2rem" pb="2.5rem">
           <Row display="block" mr="0" ml="0">
             <Div col="6">
               <Heading mt="0" mb="0" color="textDark" fontSize="1.25em">
