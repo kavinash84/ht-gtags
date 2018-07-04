@@ -16,6 +16,7 @@ import Terms from './Terms/Terms';
 import FAQ from './Faq/Faq';
 import Cancellation from './Cancellation/Cancellation';
 import WhoWeAre from './WhoWeAre/WhoWeAre';
+import ContactUs from './ContactUs/ContactUs';
 import NotFound from './NotFound/NotFound';
 
 export {
@@ -36,6 +37,7 @@ export {
   Cancellation,
   PrivacyPolicy,
   WhoWeAre,
+  ContactUs,
   NotFound,
   PaymentOptions
 };

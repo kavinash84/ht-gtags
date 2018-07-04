@@ -14,6 +14,7 @@ import {
   Terms,
   Cancellation,
   WhoWeAre,
+  ContactUs,
   FAQ,
   NotFound
 } from 'containers';
@@ -73,6 +74,7 @@ const routes = [
       { path: '/cancellation', exact: true, component: Cancellation },
       { path: '/terms-and-conditions', exact: true, component: Terms },
       { path: '/faq', exact: true, component: FAQ },
+      { path: '/contact-us', exact: true, component: ContactUs },
       { path: '/who-we-are', exact: true, component: WhoWeAre },
       {
         path: '/:category/:subcategory1?/:subcategory2?/:subcategory3?/:subcategory4?/:subcategory5?',
