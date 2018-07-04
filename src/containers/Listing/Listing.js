@@ -28,8 +28,12 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState }, params, location }) => {
-    const { products: { sort }, pincode: { selectedPincode } } = getState();
+    const {
+      products: { sort },
+      pincode: { selectedPincode }
+    } = getState();
     const query = location.pathname === '/search/' ? location.search.split('?q=')[1] : encodeCategory(params);
+    console.log(location.pathname);
     const loadResults =
       location.pathname === '/search/'
         ? loadSearchQuery(query, 1, selectedPincode)
