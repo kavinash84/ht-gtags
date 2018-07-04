@@ -16,7 +16,10 @@ const CartEmptyIcon = require('../../../static/cart-empty.jpg');
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState } }) => {
-    const { app: { sessionId }, pincode: { selectedPincode } } = getState();
+    const {
+      app: { sessionId },
+      pincode: { selectedPincode }
+    } = getState();
     if (sessionId && !isCartLoaded(getState())) {
       const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
       dispatch(loadCart(sessionId, pincode)).catch(error => console.log(error));
@@ -29,15 +32,15 @@ const CartEmptyIcon = require('../../../static/cart-empty.jpg');
   error
 }))
 export default class CartContainer extends Component {
-  static defaultProps = {
-    results: [],
-    summary: null,
-    error: null
-  };
   static propTypes = {
     results: PropTypes.array,
     summary: PropTypes.object,
     error: PropTypes.object
+  };
+  static defaultProps = {
+    results: [],
+    summary: null,
+    error: null
   };
   render() {
     const { results, summary, error } = this.props;
