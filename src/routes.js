@@ -15,7 +15,6 @@ import {
   DeliveryAddress,
   PaymentOptions,
   ReviewOrder,
-  Stores,
   ProductNotFound,
   NotFound
 } from 'containers';
@@ -27,6 +26,8 @@ import ForgotPassword from 'containers/ForgotPassword';
 import ResetPassword from 'containers/ResetPassword';
 import Profile from 'containers/Profile';
 import Pincode from 'components/Pincode';
+import Stores from 'containers/Stores/Stores';
+
 import SimpleSlider from 'components/SlickSlider';
 import Category from 'containers/Category/Category';
 
@@ -73,7 +74,7 @@ const routes = [
       { path: '/review-order', exact: true, component: ReviewOrder },
       { path: '/search', exact: false, component: Listing },
       { path: '/pincode', exact: true, component: Pincode },
-      { path: '/stores', exact: true, component: Stores },
+      { path: '/store/:city/:storeName', exact: true, component: Stores },
       { path: '/product-not-found', exact: true, component: ProductNotFound },
       {
         path: '/:category/:subcategory1?/:subcategory2?/:subcategory3?/:subcategory4?/:subcategory5?',
