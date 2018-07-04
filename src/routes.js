@@ -27,6 +27,7 @@ import ResetPassword from 'containers/ResetPassword';
 import Profile from 'containers/Profile';
 import Pincode from 'components/Pincode';
 import Stores from 'containers/Stores/Stores';
+import TrackOrder from 'containers/TrackOrder/TrackOrder';
 
 import SimpleSlider from 'components/SlickSlider';
 import Category from 'containers/Category/Category';
@@ -75,6 +76,7 @@ const routes = [
       { path: '/search', exact: false, component: Listing },
       { path: '/pincode', exact: true, component: Pincode },
       { path: '/store/:city/:storeName', exact: true, component: Stores },
+      { path: '/track-order', exact: true, component: TrackOrder },
       { path: '/product-not-found', exact: true, component: ProductNotFound },
       {
         path: '/:category/:subcategory1?/:subcategory2?/:subcategory3?/:subcategory4?/:subcategory5?',

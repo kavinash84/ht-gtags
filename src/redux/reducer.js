@@ -18,6 +18,7 @@ import forgotpassword from './modules/forgotpassword';
 import category from './modules/category';
 import productdetails from './modules/productdetails';
 import reviews from './modules/reviews';
+import trackorder from './modules/trackorder';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -46,6 +47,7 @@ export default function createReducers(asyncReducers) {
     forgotpassword,
     productdetails,
     reviews,
+    trackorder,
     ...asyncReducers
   };
 }
