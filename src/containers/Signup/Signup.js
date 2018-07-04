@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 import { Label } from 'hometown-components/lib/Label';
 import Img from 'hometown-components/lib/Img';
 import { validateEmail, isBlank, validateMobile } from 'js-utility-functions';
-import { LOGIN_URL, FORGOT_PASSWORD_URL } from 'helpers/Constants';
+import { LOGIN_URL } from 'helpers/Constants';
 import { signUp } from 'redux/modules/signUp';
 
 const SidebarImg = require('../../../static/login-side-thumb.png');
@@ -137,9 +137,7 @@ export default class SignupFormContainer extends Component {
                     <Row display="block" mr="0" ml="0">
                       <Div col="12" ta="right">
                         <Link to={LOGIN_URL}>
-                          <Label fontWeight="light" color="primary">
-                            Existing User? Log in now
-                          </Label>
+                          <Label color="primary">Existing User? Log in now</Label>
                         </Link>
                       </Div>
                     </Row>
@@ -162,16 +160,6 @@ export default class SignupFormContainer extends Component {
                           signUpResponse={signUpResponse}
                         />
                       </Div>
-                    </Row>
-                    <Row display="block" mr="0" ml="0" pt="0.625rem">
-                      <Div col="6">
-                        <Link to={FORGOT_PASSWORD_URL}>
-                          <Label fontWeight="light" color="primary">
-                            Forgot Password?
-                          </Label>
-                        </Link>
-                      </Div>
-                      <Div col="6" ta="right" />
                     </Row>
                   </div>
                   {/* <Row display="block" mr="0" ml="0" pt="0.3125rem">
