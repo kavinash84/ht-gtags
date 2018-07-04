@@ -6,6 +6,7 @@ import AddCart from 'hometown-components/lib/Icons/AddCart';
 import Button from 'hometown-components/lib/Buttons';
 import Img from 'hometown-components/lib/Img';
 import Span from 'hometown-components/lib/Span';
+import Div from 'hometown-components/lib/Div';
 import * as actionCreators from 'redux/modules/cart';
 import { getCartListSKU } from 'selectors/cart';
 import { PINCODE, CART_URL } from 'helpers/Constants';
@@ -42,6 +43,7 @@ const AddToCart = ({
           btnType="custom"
           border="1px solid"
           bc="#ae8873"
+          block="block"
           color="#ae8873"
           p="8px 15px 0"
           disabled={addLoading}
@@ -54,12 +56,12 @@ const AddToCart = ({
           </Span>
         </Button>
       ) : (
-        <div>
+        <Div display="block" mb="0.625rem">
           <span className={styles.addedToCart}>✓ Added to Cart</span>
           <Link className={styles.goToCart} to={CART_URL}>
             Go To Cart
           </Link>
-        </div>
+        </Div>
       )}
     </div>
   );
@@ -84,4 +86,7 @@ AddToCart.propTypes = {
   stateId: PropTypes.string
 };
 
-export default connect(mapStateToProps, { ...actionCreators })(AddToCart);
+export default connect(
+  mapStateToProps,
+  { ...actionCreators }
+)(AddToCart);
