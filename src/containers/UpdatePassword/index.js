@@ -14,14 +14,14 @@ import { updateUserPassword } from 'redux/modules/updatepassword';
   response: updatepassword
 }))
 export default class UpdatePasswordFormContainer extends Component {
+  static propTypes = {
+    response: PropTypes.object
+  };
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
   static defaultProps = {
     response: {}
-  };
-  static propTypes = {
-    response: PropTypes.object
   };
   state = {
     oldPwd: '',
@@ -35,7 +35,9 @@ export default class UpdatePasswordFormContainer extends Component {
     confirmPwdErrorMessage: ''
   };
   onChangeOldPwd = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = isBlank(value);
     this.setState({
       oldPwd: value,
@@ -44,7 +46,9 @@ export default class UpdatePasswordFormContainer extends Component {
     });
   };
   onChangeNewPwd = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = validatePassword(value, 'Password must be at least 6 character long');
     this.setState({
       newPwd: value,
@@ -53,7 +57,9 @@ export default class UpdatePasswordFormContainer extends Component {
     });
   };
   onChangeConfirmPwd = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = this.matchConfirmPassword(value);
     this.setState({
       confirmPwd: value,
