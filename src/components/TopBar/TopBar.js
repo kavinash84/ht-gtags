@@ -110,10 +110,10 @@ export default class MenuSidebar extends Component {
             >
               <Pincode onCloseModal={this.onClosePincodeModal} />
             </ResponsiveModal>
-            <Link className={styles.cart} to={HOME_URL}>
+            <a className={styles.cart} href="tel:18002100004">
               <Img src={PhoneIcon} alt="Hometown" height="24px" mr="0.625rem" float="left" />
               <Span fontSize="0.875em">1800-210-0004</Span>
-            </Link>
+            </a>
             <Button
               p="0"
               className={styles.heartBtn}
