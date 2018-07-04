@@ -1,6 +1,5 @@
 import {
   App,
-  Home,
   Listing,
   MyOrder,
   OrderDetails,
@@ -23,6 +22,7 @@ import Profile from 'containers/Profile';
 import Category from 'containers/Category/Category';
 import Wishlist from 'containers/Wishlist';
 import Cart from 'containers/Cart';
+import Home from 'containers/Home';
 
 const isAuthenticated = connectedReduxRedirect({
   redirectPath: '/login',

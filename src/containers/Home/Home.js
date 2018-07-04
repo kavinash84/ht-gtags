@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-import { provideHooks } from 'redial';
-import { wrapDispatch } from 'multireducer';
 import Menu from 'containers/MenuNew/index';
 import MainSlider from 'components/MainSlider';
 import OfferRibbon from 'components/OfferRibbon';
@@ -12,8 +10,6 @@ import Section from 'hometown-components/lib/Section';
 import { connect } from 'react-redux';
 import HashTags from 'components/Home/HashTags';
 import StoresCarousel from 'components/Stores';
-import { loadTopSelling, loadHashTags, loadOfferStrip, isLoaded as isSectionLoaded } from 'redux/modules/homepage';
-import { loadStores, isLoaded as isStoresLoaded } from 'redux/modules/stores';
 import Footer from 'components/Footer';
 import { getCities } from '../../selectors/homepage';
 
@@ -29,22 +25,6 @@ import { getCities } from '../../selectors/homepage';
   hashtags: hashtags.data,
   offerstrip: offerstrip.data && offerstrip.data.items
 }))
-@provideHooks({
-  defer: ({ store: { dispatch, getState } }) => {
-    if (!isSectionLoaded(getState(), 'products')) {
-      wrapDispatch(dispatch, 'products')(loadTopSelling()).catch(error => console.log(error));
-    }
-    if (!isStoresLoaded(getState())) {
-      dispatch(loadStores()).catch(error => console.log(error));
-    }
-    if (!isSectionLoaded(getState(), 'hashtags')) {
-      wrapDispatch(dispatch, 'hashtags')(loadHashTags()).catch(error => console.log(error));
-    }
-    if (!isSectionLoaded(getState(), 'offerstrip')) {
-      wrapDispatch(dispatch, 'offerstrip')(loadOfferStrip()).catch(error => console.log(error));
-    }
-  }
-})
 export default class Home extends Component {
   state = {
     showRibbon: true
