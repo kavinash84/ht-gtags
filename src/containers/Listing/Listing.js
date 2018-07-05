@@ -71,7 +71,7 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
   categoryName: getCategoryName(state),
   productCount: getProductCount(state),
   isLoggedIn: state.userLogin.isLoggedIn,
-  metadata: state.products.data.metadata
+  metadata: state.products.list
 }))
 @withRouter
 export default class Listing extends Component {
@@ -79,7 +79,7 @@ export default class Listing extends Component {
     loading: PropTypes.bool,
     loaded: PropTypes.bool,
     products: PropTypes.array,
-    metadata: PropTypes.object,
+    metadata: PropTypes.array,
     category: PropTypes.string,
     categoryName: PropTypes.string,
     productCount: PropTypes.string,
@@ -136,7 +136,7 @@ export default class Listing extends Component {
       wishlistKey,
       metadata
     } = this.props;
-    const { results: metaResults } = metadata;
+
     return (
       <Section p="0" mb="0">
         <div className="wrapper">
@@ -172,7 +172,7 @@ export default class Listing extends Component {
                 isLoggedIn={isLoggedIn}
                 wishlistLoading={wishlistLoading}
                 wishlistKey={wishlistKey}
-                metaResults={metaResults}
+                metaResults={metadata}
               />
               <LoadMore loading={loading} loaded={loaded} />
             </div>

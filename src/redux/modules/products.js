@@ -22,7 +22,7 @@ const CLEAR_PREVIOUS_SORT = 'products/CLEAR_PREVIOUS_SORT';
 
 const initialState = {
   loaded: false,
-  data: [],
+  data: {},
   list: [],
   query: '',
   sort: 'sort=popularity&dir=desc'
