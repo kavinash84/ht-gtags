@@ -6,6 +6,7 @@ import Empty from 'hometown-components/lib/Empty';
 import Img from 'hometown-components/lib/Img';
 import Section from 'hometown-components/lib/Section';
 import ListingContainer from 'components/Listing';
+import ListingShimmer from 'components/Listing/ListingShimmer';
 import { connect } from 'react-redux';
 import Menu from 'containers/MenuNew/index';
 import Footer from 'components/Footer';
@@ -141,6 +142,7 @@ export default class Listing extends Component {
       <Section p="0" mb="0">
         <div className="wrapper">
           <Menu filter search />
+          <ListingShimmer />
           {!loading &&
             products.length === 0 && (
             <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
