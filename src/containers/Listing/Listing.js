@@ -30,7 +30,10 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState }, params, location }) => {
-    const { products: { sort }, pincode: { selectedPincode } } = getState();
+    const {
+      products: { sort },
+      pincode: { selectedPincode }
+    } = getState();
     let query;
     let loadResults;
     if (location.pathname === '/catalog/all-products') {
@@ -57,6 +60,7 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
 @connect(state => ({
   loading: state.products.loading,
   loaded: state.products.loaded,
+  shimmer: state.products.shimmer,
   category: state.products.query,
   page: state.loadmore.page,
   filters: getFilters(state.products.data.metadata.filter),
@@ -76,6 +80,7 @@ export default class Listing extends Component {
   static propTypes = {
     loading: PropTypes.bool,
     loaded: PropTypes.bool,
+    shimmer: PropTypes.bool,
     products: PropTypes.array,
     metadata: PropTypes.array,
     category: PropTypes.string,
@@ -96,6 +101,7 @@ export default class Listing extends Component {
   static defaultProps = {
     loading: false,
     loaded: true,
+    shimmer: false,
     products: [],
     categoryName: '',
     category: '',
@@ -120,6 +126,7 @@ export default class Listing extends Component {
     const {
       loading,
       loaded,
+      shimmer,
       products,
       categoryName,
       category,
@@ -139,7 +146,6 @@ export default class Listing extends Component {
       <Section p="0" mb="0">
         <div className="wrapper">
           <Menu filter search />
-          <ListingShimmer />
           {!loading &&
             products.length === 0 && (
             <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
@@ -154,8 +160,7 @@ export default class Listing extends Component {
               </Empty>
             </Section>
           )}
-          {loaded &&
-            products.length && (
+          {loaded && products.length && !shimmer ? (
             <div>
               <ListingContainer
                 wishList={wishListedSKUs}
@@ -174,6 +179,8 @@ export default class Listing extends Component {
               />
               <LoadMore loading={loading} loaded={loaded} />
             </div>
+          ) : (
+            <ListingShimmer />
           )}
         </div>
         <Footer />

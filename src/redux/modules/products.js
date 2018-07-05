@@ -25,6 +25,7 @@ const initialState = {
   data: {},
   list: [],
   query: '',
+  shimmer: false,
   sort: 'sort=popularity&dir=desc'
 };
 
@@ -35,13 +36,15 @@ export default function reducer(state = initialState, action = {}) {
     case LOAD:
       return {
         ...state,
-        loading: true
+        loading: true,
+        shimmer: true
       };
     case LOAD_SUCCESS:
       return {
         ...state,
         loading: false,
         loaded: true,
+        shimmer: false,
         data: action.result,
         list: [...state.list, ...action.result.metadata.results]
       };
@@ -50,18 +53,21 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: false,
+        shimmer: false,
         error: action.error
       };
     case LOAD_CLEAR_FILTERS:
       return {
         ...state,
-        loading: true
+        loading: true,
+        shimmer: true
       };
     case LOAD_CLEAR_FILTERS_SUCCESS:
       return {
         ...state,
         loading: false,
         loaded: true,
+        shimmer: false,
         data: action.result,
         list: action.result.metadata.results
       };
@@ -70,18 +76,21 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: true,
+        shimmer: false,
         error: action.error
       };
     case LOAD_SORTBY:
       return {
         ...state,
-        loading: true
+        loading: true,
+        shimmer: true
       };
     case LOAD_SORTBY_SUCCESS:
       return {
         ...state,
         loading: false,
         loaded: true,
+        shimmer: false,
         data: action.result,
         sort: action.result.sort,
         list: action.result.metadata.results
@@ -91,12 +100,14 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: false,
+        shimmer: false,
         error: action.error
       };
     case LOAD_FILTER:
       return {
         ...state,
         loading: true,
+        shimmer: true,
         filterLoading: true,
         filterLoaded: false
       };
@@ -105,6 +116,7 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: true,
+        shimmer: false,
         filterLoading: false,
         filterLoaded: true,
         data: action.result,
@@ -114,6 +126,7 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         loading: false,
+        shimmer: false,
         filterLoading: false,
         error: action.error
       };
