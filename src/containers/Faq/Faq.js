@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FaqContainer from 'components/StaticPages/FAQ';
+import FaqContainer from 'components/StaticPages/Faqs';
 import Menu from 'containers/MenuNew/index';
 import Footer from 'components/Footer';
 
