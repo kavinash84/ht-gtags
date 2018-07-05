@@ -9,6 +9,13 @@ import {
   DeliveryAddress,
   PaymentOptions,
   ReviewOrder,
+  ReturnPolicy,
+  PrivacyPolicy,
+  Terms,
+  Cancellation,
+  WhoWeAre,
+  ContactUs,
+  FAQ,
   NotFound
 } from 'containers';
 import { routerActions } from 'react-router-redux';
@@ -19,6 +26,9 @@ import ForgotPassword from 'containers/ForgotPassword';
 import ResetPassword from 'containers/ResetPassword';
 import UpdatePassword from 'containers/UpdatePassword';
 import Profile from 'containers/Profile';
+import Pincode from 'components/Pincode';
+import Stores from 'containers/Stores/Stores';
+import TrackOrder from 'containers/TrackOrder/TrackOrder';
 import Category from 'containers/Category/Category';
 import Wishlist from 'containers/Wishlist';
 import Cart from 'containers/Cart';
@@ -62,6 +72,16 @@ const routes = [
       { path: '/payment-options', exact: true, component: PaymentOptions },
       { path: '/review-order', exact: true, component: ReviewOrder },
       { path: '/search', exact: false, component: Listing },
+      { path: '/return-policy', exact: true, component: ReturnPolicy },
+      { path: '/privacy-policy', exact: true, component: PrivacyPolicy },
+      { path: '/cancellation', exact: true, component: Cancellation },
+      { path: '/terms-and-conditions', exact: true, component: Terms },
+      { path: '/faq', exact: true, component: FAQ },
+      { path: '/contact-us', exact: true, component: ContactUs },
+      { path: '/who-we-are', exact: true, component: WhoWeAre },
+      { path: '/pincode', exact: true, component: Pincode },
+      { path: '/store/:city/:storeName', exact: true, component: Stores },
+      { path: '/track-order', exact: true, component: TrackOrder },
       {
         path: '/:category/:subcategory1?/:subcategory2?/:subcategory3?/:subcategory4?/:subcategory5?',
         exact: true,

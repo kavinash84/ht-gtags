@@ -30,3 +30,5 @@ export const SYNCCART = 'tesla/cart/sync';
 
 /* Session */
 export const SESSION = 'tesla/session';
+
+export const TRACK_ORDER = 'tesla/track';

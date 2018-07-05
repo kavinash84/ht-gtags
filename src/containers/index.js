@@ -10,6 +10,13 @@ import ProductDetails from './ProductDetails/ProductDetails';
 import DeliveryAddress from './DeliveryAddress/DeliveryAddress';
 import PaymentOptions from './PaymentOptions/PaymentOptions';
 import ReviewOrder from './ReviewOrder/ReviewOrder';
+import ReturnPolicy from './ReturnPolicy/ReturnPolicy';
+import PrivacyPolicy from './PrivacyPolicy/PrivacyPolicy';
+import Terms from './Terms/Terms';
+import FAQ from './Faq/Faq';
+import Cancellation from './Cancellation/Cancellation';
+import WhoWeAre from './WhoWeAre/WhoWeAre';
+import ContactUs from './ContactUs/ContactUs';
 import NotFound from './NotFound/NotFound';
 
 export {
@@ -24,6 +31,13 @@ export {
   ProductDetails,
   DeliveryAddress,
   ReviewOrder,
+  ReturnPolicy,
+  Terms,
+  FAQ,
+  Cancellation,
+  PrivacyPolicy,
+  WhoWeAre,
+  ContactUs,
   NotFound,
   PaymentOptions
 };

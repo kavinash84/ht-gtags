@@ -7,6 +7,7 @@ import Img from 'hometown-components/lib/Img';
 import Section from 'hometown-components/lib/Section';
 import Notifications from 'components/Notifications';
 import Menu from 'containers/MenuNew/index';
+import Footer from 'components/Footer';
 import TitleBar from 'components/TitleBar';
 
 const CartEmptyIcon = require('../../../static/cart-empty.jpg');
@@ -17,15 +18,15 @@ const CartEmptyIcon = require('../../../static/cart-empty.jpg');
   error
 }))
 export default class CartContainer extends Component {
-  static defaultProps = {
-    results: [],
-    summary: null,
-    error: null
-  };
   static propTypes = {
     results: PropTypes.array,
     summary: PropTypes.object,
     error: PropTypes.object
+  };
+  static defaultProps = {
+    results: [],
+    summary: null,
+    error: null
   };
   render() {
     const { results, summary, error } = this.props;
@@ -51,6 +52,7 @@ export default class CartContainer extends Component {
             <Cart results={results} summary={summary} />
           </div>
         )}
+        <Footer />
       </div>
     );
   }

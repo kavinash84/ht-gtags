@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Container from 'hometown-components/lib/Container';
 import Section from 'hometown-components/lib/Section';
 import Row from 'hometown-components/lib/Row';
@@ -26,16 +27,18 @@ const HashTags = ({ data }) => (
         <Row>
           <Div ta="center">
             {data.map(hashtag => (
-              <Span
-                key={hashtag.id}
-                p="5px 10px"
-                fontWeight="300"
-                color="#ffefd1bd"
-                fontSize="0.875rem"
-                display="inline-block"
-              >
-                #{hashtag.name}
-              </Span>
+              <Link to={hashtag.url_key}>
+                <Span
+                  key={hashtag.id}
+                  p="5px 10px"
+                  fontWeight="300"
+                  color="#ffefd1bd"
+                  fontSize="0.875rem"
+                  display="inline-block"
+                >
+                  #{hashtag.name}
+                </Span>
+              </Link>
             ))}
           </Div>
         </Row>

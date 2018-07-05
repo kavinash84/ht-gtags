@@ -5,7 +5,10 @@ import { loadCart, isLoaded as isCartLoaded } from 'redux/modules/cart';
 
 const hooks = {
   fetch: async ({ store: { dispatch, getState } }) => {
-    const { app: { sessionId }, pincode: { selectedPincode } } = getState();
+    const {
+      app: { sessionId },
+      pincode: { selectedPincode }
+    } = getState();
     if (sessionId && !isCartLoaded(getState())) {
       const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
       dispatch(loadCart(sessionId, pincode)).catch(error => console.log(error));

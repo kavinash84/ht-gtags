@@ -1,7 +1,7 @@
 .pincode {
   position: relative;
   width: 400px;
-  padding-top: 30px;
+  max-width: 100%;
   .searchIcon {
     position: absolute;
     right: 10px;
@@ -25,7 +25,7 @@
       width: 100%;
       position: absolute;
       left: 0;
-      top: 72px;
+      top: 42px;
     }
   }
   ul {
@@ -50,6 +50,8 @@
         font-family: 600;
         background: transparent;
         border: none;
+        width: 100%;
+        text-align: left;
         &:hover {
           opacity: 0.7;
         }

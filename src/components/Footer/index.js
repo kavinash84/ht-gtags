@@ -29,13 +29,15 @@ const Footer = () => (
             </Heading>
             <ul>
               <li>
-                <Link to="/">Who We Are</Link>
+                <Link to="/who-we-are">Who We Are</Link>
               </li>
               <li>
-                <Link to="/">Careers</Link>
+                <a href="http://praxisretail.in/careers.html" target="_blank">
+                  Careers
+                </a>
               </li>
               <li>
-                <Link to="/">Contact Us</Link>
+                <Link to="/contact-us">Contact Us</Link>
               </li>
             </ul>
           </Div>
@@ -45,22 +47,22 @@ const Footer = () => (
             </Heading>
             <ul>
               <li>
-                <Link to="/">Track Order</Link>
+                <Link to="/track-order">Track Order</Link>
               </li>
               <li>
-                <Link to="/">Returns</Link>
+                <Link to="/return-policy">Returns</Link>
               </li>
               <li>
-                <Link to="/">Cancellation</Link>
+                <Link to="/cancellation">Cancellation</Link>
               </li>
               <li>
-                <Link to="/">FAQ</Link>
+                <Link to="/faq">FAQ</Link>
               </li>
               <li>
-                <Link to="/">Privacy Policy</Link>
+                <Link to="/privacy-policy">Privacy Policy</Link>
               </li>
               <li>
-                <Link to="/">Terms and Conditions</Link>
+                <Link to="/terms-and-conditions">Terms and Conditions</Link>
               </li>
             </ul>
           </Div>
