@@ -6,36 +6,29 @@ import Heading from 'hometown-components/lib/Heading';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
 import Button from 'hometown-components/lib/Buttons';
+import { Label } from 'hometown-components/lib/Label';
 import Img from 'hometown-components/lib/Img';
 import { Link } from 'react-router-dom';
 
 const view360Icon = require('../../../static/360-icon.svg');
 const styles = require('./MenuWithBreadcrumb.scss');
 
-const MenuWithBreadcrumb = ({ page }) => (
+const MenuWithBreadcrumb = ({ storeName }) => (
   <Section mb="0.625rem" p="1.375rem 0.5rem 0.75rem" bg="primary" boxShadow="0 2px 8px 0 rgba(0, 0, 0, 0.17)">
     <Container type="container" pr="0.5rem" pl="0.5rem">
       <Row display="block" mr="0" ml="0">
         <Div col="10">
           <Row display="block" mr="0" ml="0" mb="1rem">
             <Div col="10">
-              <Link to="/" className={`${styles.headerLink} ${page === 'order' ? styles.active : ''}`}>
+              <Link to="/" className={`${styles.headerLink}`}>
                 Home
               </Link>
-              <Link to="/" className={`${styles.headerLink} ${page === 'wishlist' ? styles.active : ''}`}>
-                Stores
-              </Link>
-              <Link
-                to="/"
-                className={`${styles.headerLink} ${styles.hideArrow} ${page === 'profile' ? styles.active : ''}`}
-              >
-                247 Vikhroli
-              </Link>
+              <Label className={`${styles.headerLink} ${styles.hideArrow}`}>{storeName}</Label>
             </Div>
           </Row>
           <Row display="block" mr="0" ml="0" mb="0.5rem">
             <Heading fontSize="1.5rem" color="white" mt="0" mb="0" fontWeight="300">
-              HomeTown Showroom - 247 Vikhroli
+              {storeName}
             </Heading>
           </Row>
         </Div>
@@ -51,11 +44,11 @@ const MenuWithBreadcrumb = ({ page }) => (
 );
 
 MenuWithBreadcrumb.defaultProps = {
-  page: 'order'
+  storeName: ''
 };
 
 MenuWithBreadcrumb.propTypes = {
-  page: PropTypes.string
+  storeName: PropTypes.string
 };
 
 export default MenuWithBreadcrumb;
