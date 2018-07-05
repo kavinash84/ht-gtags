@@ -32,7 +32,7 @@ const Footer = () => (
                 <Link to="/who-we-are">Who We Are</Link>
               </li>
               <li>
-                <a href="http://praxisretail.in/careers.html" target="_blank">
+                <a href="http://praxisretail.in/careers.html" target="_blank" rel="noopener noreferrer">
                   Careers
                 </a>
               </li>
