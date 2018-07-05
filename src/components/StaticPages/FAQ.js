@@ -7,7 +7,8 @@ import Heading from 'hometown-components/lib/Heading';
 import Text from 'hometown-components/lib/Text';
 import Img from 'hometown-components/lib/Img';
 import Section from 'hometown-components/lib/Section';
-import faqData from '../../data/faq';
+
+const faqData = require('../../data/FAQ');
 
 const styles = require('./StaticPages.scss');
 const CloseIcon = require('../../../static/minus-round.svg');
