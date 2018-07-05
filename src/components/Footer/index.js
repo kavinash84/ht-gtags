@@ -47,7 +47,7 @@ const Footer = () => (
             </Heading>
             <ul>
               <li>
-                <Link to="/">Track Order</Link>
+                <Link to="/track-order">Track Order</Link>
               </li>
               <li>
                 <Link to="/return-policy">Returns</Link>
