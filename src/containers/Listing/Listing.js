@@ -146,7 +146,7 @@ export default class Listing extends Component {
             <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
               <Empty
                 title="Sorry no results found"
-                subTitle="Please check the selling or by a different search"
+                subTitle="Please check the Spelling or by a different search"
                 btnName="Search Again"
                 url="/"
                 bg="#fafafa"

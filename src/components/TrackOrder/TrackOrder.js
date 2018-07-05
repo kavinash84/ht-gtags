@@ -5,7 +5,13 @@ import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
+import Span from 'hometown-components/lib/Span';
+import { Label } from 'hometown-components/lib/Label';
+import FormInput from 'hometown-components/lib/Forms/FormInput';
+import Button from 'hometown-components/lib/Buttons';
 import { connect } from 'react-redux';
+
+const styles = require('./TrackOrder.scss');
 
 const mapStateToProps = ({ trackorder }) => ({
   ...trackorder
@@ -14,27 +20,101 @@ const mapStateToProps = ({ trackorder }) => ({
 const TrackOrder = ({
   status, handleSubmit, handleChange, loading, data, error, errorMessage
 }) => (
-  <Section display="block" p="0" mb="0" height="auto">
+  <Div>
     <TitleBar title="Track Order(s)" />
-    <Container type="container" pr="0.5rem" pl="0.5rem">
-      <Div type="block" pt="2rem" pb="2.5rem">
-        <Row display="block" mr="0" ml="0">
-          <form onSubmit={handleSubmit}>
-            <Div col="5">test</Div>
-          </form>
-          <input type="text" onChange={handleChange} required />
-          <button type="submit">SUBMIT</button>
-          {status && (
-            <div>
-              {loading && !error && <div>Loading...</div>}
-              {!error && !loading && <div> {JSON.stringify(data)}</div>}
-              {error && !loading && <div>{JSON.stringify(errorMessage)}</div>}
-            </div>
-          )}
-        </Row>
-      </Div>
-    </Container>
-  </Section>
+    <Section display="block" p="0" pb="1rem" mb="0" height="auto">
+      <Container type="container" pr="0.5rem" pl="0.5rem">
+        <Div type="block" pt="2rem" pb="2.5rem">
+          <Row display="block" mr="0" ml="0">
+            <form onSubmit={handleSubmit}>
+              <Div col="5">
+                <FormInput
+                  size="default"
+                  label="Order Number(s)*"
+                  type="text"
+                  placeholder=""
+                  onChange={handleChange}
+                  required
+                />
+              </Div>
+              <Div col="5" pt="0.875rem" pl="1rem">
+                <Button btnType="primary" fontWeight="regular" height="42px" mt="1.25rem" type="submit">
+                  SUBMIT
+                </Button>
+              </Div>
+            </form>
+            {status && (
+              <div>
+                {loading && !error && <div>Loading...</div>}
+                {!error && !loading && <div> {JSON.stringify(data)}</div>}
+                {error && !loading && <div>{JSON.stringify(errorMessage)}</div>}
+              </div>
+            )}
+          </Row>
+          <Row display="block" mr="0" ml="0" mt="2rem">
+            <Div col="12" className={styles.trackOrderTable} p="1.25rem">
+              <Label fontSize="1rem" mb="1.125rem">
+                Order No.: 1234567
+                <Span fontSize="0.875rem" ml="1rem">
+                  (Order Date: 4th July 2018)
+                </Span>
+              </Label>
+              <table className="table">
+                <tbody>
+                  <tr>
+                    <th colSpan="2">Item</th>
+                    <th>Status</th>
+                    <th>Updated On</th>
+                    <th>Carrier</th>
+                    <th>Tracking ID</th>
+                  </tr>
+                  <tr>
+                    <td>
+                      <img className="thumb" src="http://via.placeholder.com/75x75" alt="" />
+                    </td>
+                    <td>Ambra King Bed in Engineered Wood with Box Storage</td>
+                    <td>In Process</td>
+                    <td>Dispatched at 2:35 PM, 16 Jan</td>
+                    <td>Bluedart</td>
+                    <td>AG567TG</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <img className="thumb" src="http://via.placeholder.com/75x75" alt="" />
+                    </td>
+                    <td>Ambra King Bed in Engineered Wood with Box Storage</td>
+                    <td>In Process</td>
+                    <td>Dispatched at 2:35 PM, 16 Jan</td>
+                    <td>Bluedart</td>
+                    <td>AG567TG</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <img className="thumb" src="http://via.placeholder.com/75x75" alt="" />
+                    </td>
+                    <td>Ambra King Bed in Engineered Wood with Box Storage</td>
+                    <td>In Process</td>
+                    <td>Dispatched at 2:35 PM, 16 Jan</td>
+                    <td>Bluedart</td>
+                    <td>AG567TG</td>
+                  </tr>
+                </tbody>
+              </table>
+            </Div>
+          </Row>
+          <Row display="block" mr="0" ml="0" mt="1rem">
+            <Div>
+              <Label fontSize="0.75rem" lh="1.8" mb="1.125rem">
+                <b>Note:</b> Products with different delivery times may be shipped separately.<br />
+                For any queries please call 18002100004 (10AM - 8PM) or mail us at
+                <a href="mailto:care@homwtown.in">care@hometown.in</a>
+              </Label>
+            </Div>
+          </Row>
+        </Div>
+      </Container>
+    </Section>
+  </Div>
 );
 
 TrackOrder.propTypes = {
