@@ -15,6 +15,7 @@ import ProductDesc from 'hometown-components/lib/ProductDetails/ProductDesc';
 import Specs from 'hometown-components/lib/ProductDetails/Specs';
 import Reviews from 'hometown-components/lib/Reviews';
 import AddReview from 'hometown-components/lib/Reviews/WriteReview';
+import Theme from 'hometown-components/lib/Theme';
 import { addReview } from 'redux/modules/reviews';
 
 import ProductDetailsCarousel from './Carousel';
@@ -103,16 +104,18 @@ class ProductDetails extends React.Component {
                 </Row>
               </Div>
               <Div col="3">
-                <AddToCart simpleSku={simpleSku} sku={sku} itemId={sku} />
+                <AddToCart simpleSku={simpleSku} sku={sku} itemId={sku} size="block" />
                 <Div mt="1rem">
                   <Button
                     width="100%"
-                    color="rgba(0, 0, 0, 0.5)"
+                    color={Theme.colors.primary}
                     btnType="custom"
                     border="1px solid"
-                    bc="#979797"
+                    bc={Theme.colors.primary}
                     bg="transparent"
                     size="block"
+                    fontSize="0.857rem"
+                    height="40px"
                     className={styles.addToWishlist}
                   >
                     ADD TO WISHLIST
