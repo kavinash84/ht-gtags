@@ -14,7 +14,7 @@ const HoverMenuBox = ({ handleEnter, handleLeave, menuData }) => (
             <ul className={styles.list}>
               <div className={styles.media}>
                 <div className={styles.catImgWrapper}>
-                  <Img src="http://via.placeholder.com/150x100" alt="" />
+                  <Img src={subCategory1.category_image} alt="" />
                 </div>
                 <div className={styles.mediaBody}>
                   <h4>
