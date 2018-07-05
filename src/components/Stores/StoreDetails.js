@@ -27,7 +27,7 @@ export default class StoreDetails extends Component {
     const store = filterStore(city, storeName, stores)[0];
     return (
       <Div type="block">
-        <MenuWithBreadcrumb />
+        <MenuWithBreadcrumb storeName={store.store} />
         <Section display="flex" pt="2.5rem" pb="4.5rem" mb="0" height="auto">
           <Container type="container" pr="1rem" pl="1rem">
             <Row display="block" mr="0" ml="0" mb="1.25rem  ">

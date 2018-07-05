@@ -1,6 +1,7 @@
 import React from 'react';
 import Menu from 'containers/MenuNew/index';
 import PropTypes from 'prop-types';
+import Footer from 'components/Footer';
 import TrackOrderContainer from 'components/TrackOrder/TrackOrder';
 import { trackOrder } from 'redux/modules/trackorder';
 
@@ -33,8 +34,15 @@ class TrackOrder extends React.Component {
       <div>
         <Menu />
         <div>
-          <TrackOrderContainer status={this.state.status} handleSubmit={this.handleSubmit} loading={false} />
+          <TrackOrderContainer
+            status={this.state.status}
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+            loading={false}
+            orderId={this.state.orderId}
+          />
         </div>
+        <Footer />
       </div>
     );
   }

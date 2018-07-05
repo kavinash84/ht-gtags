@@ -17,7 +17,9 @@ export default function reducer(state = initialState, action = {}) {
     case LOAD:
       return {
         ...state,
-        loading: true
+        loading: true,
+        loaded: false,
+        error: false
       };
     case LOAD_SUCCESS:
       return {
@@ -30,8 +32,9 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         loading: false,
+        loaded: false,
         error: true,
-        errorMessage: 'Sorry Please Try again ! '
+        errorMessage: action.result || 'Some Error Occured, Try Again.'
       };
     default:
       return state;
