@@ -73,3 +73,8 @@ export const loadOfferStrip = () => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
   promise: ({ client }) => client.get(`${STATIC_BLOCK}/home_page_offerstrip_react`)
 });
+
+export const loadFooter = () => ({
+  types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
+  promise: ({ client }) => client.get(`${STATIC_BLOCK}/footer_react`)
+});
