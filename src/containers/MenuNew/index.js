@@ -34,6 +34,12 @@ export default class Menu extends Component {
     }
   };
 
+  exitOnClick = () => {
+    this.setState({
+      hoverBox: false
+    });
+  };
+
   enterMenu = id => () => {
     this.setState(
       {
@@ -70,12 +76,18 @@ export default class Menu extends Component {
       <Section mb="0" p="0" pt="15px" of="initial">
         <Container pr="0" pl="0">
           <TopBar />
-          <NavBar handleEnter={this.enterMenu} handleLeave={this.leaveMenu} menuItems={menuItems} />
+          <NavBar
+            exitOnClick={this.exitOnClick}
+            handleEnter={this.enterMenu}
+            handleLeave={this.leaveMenu}
+            menuItems={menuItems}
+          />
           {hoverBox && (
             <HoverMenuBox
               handleEnter={this.enterHoverBox}
               handleLeave={this.leaveHoverBox}
               menuData={currentMenuData}
+              exitOnClick={this.exitOnClick}
             />
           )}
         </Container>
