@@ -10,6 +10,7 @@ import { Label } from 'hometown-components/lib/Label';
 import FormInput from 'hometown-components/lib/Forms/FormInput';
 import Button from 'hometown-components/lib/Buttons';
 import { connect } from 'react-redux';
+import { formatDate } from 'utils/formatters';
 
 const styles = require('./TrackOrder.scss');
 
@@ -56,7 +57,7 @@ const TrackOrder = ({
                     <Label fontSize="1rem" mb="1.125rem">
                         Order No. : {data.order_nr || null}
                       <Span fontSize="0.875rem" ml="1rem">
-                          ({data.created_at})
+                          ({formatDate(data.created_at)})
                       </Span>
                     </Label>
                     <table className="table">
@@ -75,7 +76,7 @@ const TrackOrder = ({
                             </td>
                             <td>{item.product_name}</td>
                             <td>{item.order_item_status_display_name || 'Not Available'}</td>
-                            <td>{item.updated_at || 'Not Available'}</td>
+                            <td>{formatDate(item.updated_at) || 'Not Available'}</td>
                             <td>{item.carrier_name || 'Not Available'}</td>
                             <td>{item.tracking_id || 'Not Available'}</td>
                           </tr>
