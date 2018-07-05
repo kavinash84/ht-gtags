@@ -34,7 +34,13 @@ class TrackOrder extends React.Component {
       <div>
         <Menu />
         <div>
-          <TrackOrderContainer status={this.state.status} handleSubmit={this.handleSubmit} loading={false} />
+          <TrackOrderContainer
+            status={this.state.status}
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+            loading={false}
+            orderId={this.state.orderId}
+          />
         </div>
         <Footer />
       </div>

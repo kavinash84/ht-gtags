@@ -18,7 +18,7 @@ const mapStateToProps = ({ trackorder }) => ({
 });
 
 const TrackOrder = ({
-  status, handleSubmit, handleChange, loading, data, error, errorMessage
+  status, handleSubmit, handleChange, loading, data, error, errorMessage, orderId
 }) => (
   <Div>
     <TitleBar title="Track Order(s)" />
@@ -34,6 +34,7 @@ const TrackOrder = ({
                   type="text"
                   placeholder=""
                   onChange={handleChange}
+                  value={orderId}
                   required
                 />
               </Div>
@@ -43,71 +44,55 @@ const TrackOrder = ({
                 </Button>
               </Div>
             </form>
-            {status && (
-              <div>
-                {loading && !error && <div>Loading...</div>}
-                {!error && !loading && <div> {JSON.stringify(data)}</div>}
-                {error && !loading && <div>{JSON.stringify(errorMessage)}</div>}
-              </div>
-            )}
           </Row>
-          <Row display="block" mr="0" ml="0" mt="2rem">
-            <Div col="12" className={styles.trackOrderTable} p="1.25rem">
-              <Label fontSize="1rem" mb="1.125rem">
-                Order No.: 1234567
-                <Span fontSize="0.875rem" ml="1rem">
-                  (Order Date: 4th July 2018)
-                </Span>
-              </Label>
-              <table className="table">
-                <tbody>
-                  <tr>
-                    <th colSpan="2">Item</th>
-                    <th>Status</th>
-                    <th>Updated On</th>
-                    <th>Carrier</th>
-                    <th>Tracking ID</th>
-                  </tr>
-                  <tr>
-                    <td>
-                      <img className="thumb" src="http://via.placeholder.com/75x75" alt="" />
-                    </td>
-                    <td>Ambra King Bed in Engineered Wood with Box Storage</td>
-                    <td>In Process</td>
-                    <td>Dispatched at 2:35 PM, 16 Jan</td>
-                    <td>Bluedart</td>
-                    <td>AG567TG</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <img className="thumb" src="http://via.placeholder.com/75x75" alt="" />
-                    </td>
-                    <td>Ambra King Bed in Engineered Wood with Box Storage</td>
-                    <td>In Process</td>
-                    <td>Dispatched at 2:35 PM, 16 Jan</td>
-                    <td>Bluedart</td>
-                    <td>AG567TG</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <img className="thumb" src="http://via.placeholder.com/75x75" alt="" />
-                    </td>
-                    <td>Ambra King Bed in Engineered Wood with Box Storage</td>
-                    <td>In Process</td>
-                    <td>Dispatched at 2:35 PM, 16 Jan</td>
-                    <td>Bluedart</td>
-                    <td>AG567TG</td>
-                  </tr>
-                </tbody>
-              </table>
-            </Div>
-          </Row>
+          {status && (
+            <div>
+              {loading && !error && <div>Loading...</div>}
+              {error && !loading && <div>{errorMessage}</div>}
+              {!error &&
+                !loading && (
+                <Row display="block" mr="0" ml="0" mt="2rem">
+                  <Div col="12" className={styles.trackOrderTable} p="1.25rem">
+                    <Label fontSize="1rem" mb="1.125rem">
+                        Order No. : {data.order_nr || null}
+                      <Span fontSize="0.875rem" ml="1rem">
+                          ({data.created_at})
+                      </Span>
+                    </Label>
+                    <table className="table">
+                      <tbody>
+                        <tr>
+                          <th colSpan="2">Item</th>
+                          <th>Status</th>
+                          <th>Updated On</th>
+                          <th>Carrier</th>
+                          <th>Tracking ID</th>
+                        </tr>
+                        {data.order_items.map(item => (
+                          <tr key={item.order_item_id}>
+                            <td>
+                              <img className="thumb" src="http://via.placeholder.com/75x75" alt="" />
+                            </td>
+                            <td>{item.product_name}</td>
+                            <td>{item.order_item_status_display_name || 'Not Available'}</td>
+                            <td>{item.updated_at || 'Not Available'}</td>
+                            <td>{item.carrier_name || 'Not Available'}</td>
+                            <td>{item.tracking_id || 'Not Available'}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </Div>
+                </Row>
+              )}
+            </div>
+          )}
           <Row display="block" mr="0" ml="0" mt="1rem">
             <Div>
               <Label fontSize="0.75rem" lh="1.8" mb="1.125rem">
                 <b>Note:</b> Products with different delivery times may be shipped separately.<br />
                 For any queries please call 18002100004 (10AM - 8PM) or mail us at
-                <a href="mailto:care@homwtown.in">care@hometown.in</a>
+                <a href="mailto:care@homwtown.in"> care@hometown.in</a>
               </Label>
             </Div>
           </Row>
@@ -124,6 +109,7 @@ TrackOrder.propTypes = {
   handleChange: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
   error: PropTypes.bool.isRequired,
+  orderId: PropTypes.string.isRequired,
   errorMessage: PropTypes.string.isRequired
 };
 export default connect(
