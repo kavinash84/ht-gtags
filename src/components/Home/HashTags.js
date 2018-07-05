@@ -27,15 +27,8 @@ const HashTags = ({ data }) => (
         <Row>
           <Div ta="center">
             {data.map(hashtag => (
-              <Link to={hashtag.url_key}>
-                <Span
-                  key={hashtag.id}
-                  p="5px 10px"
-                  fontWeight="300"
-                  color="#ffefd1bd"
-                  fontSize="0.875rem"
-                  display="inline-block"
-                >
+              <Link to={hashtag.url_key} key={hashtag.id}>
+                <Span p="5px 10px" fontWeight="300" color="#ffefd1bd" fontSize="0.875rem" display="inline-block">
                   #{hashtag.name}
                 </Span>
               </Link>
