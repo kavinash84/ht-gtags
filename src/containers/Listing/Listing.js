@@ -156,7 +156,6 @@ export default class Listing extends Component {
             </Section>
           )}
           {loaded &&
-            !loading &&
             products.length && (
             <div>
               <ListingContainer
