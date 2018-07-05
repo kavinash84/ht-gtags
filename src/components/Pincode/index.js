@@ -9,7 +9,9 @@ import * as actionCreators from 'redux/modules/pincode';
 const styles = require('./Pincode.scss');
 
 const onChange = (dispatcher, load) => e => {
-  const { target: { value } } = e;
+  const {
+    target: { value }
+  } = e;
   dispatcher(value);
   if (value.length >= 2) load(value);
 };
@@ -40,8 +42,8 @@ const Pincode = ({
   <Div className={styles.pincode} pt="0" pb="0.3125rem">
     <Input
       type="text"
-      placeholder="Search"
-      backgroundColor="rgba(0, 0, 0, 0.05)"
+      placeholder="Pincode"
+      backgroundColor="#f2f2f2"
       borderColor="rgba(0, 0, 0, 0.03)"
       height="2.5rem"
       onChange={onChange(setPincodeQuery, load)}
@@ -88,4 +90,7 @@ Pincode.propTypes = {
   onCloseModal: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Pincode);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Pincode);

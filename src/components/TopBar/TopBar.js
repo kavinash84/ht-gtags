@@ -8,6 +8,7 @@ import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Button from 'hometown-components/lib/Buttons';
 import Span from 'hometown-components/lib/Span';
+import Heading from 'hometown-components/lib/Heading';
 import { Label } from 'hometown-components/lib/Label';
 import Fav from 'hometown-components/lib/Icons/Fav';
 import Search from 'components/Search';
@@ -108,7 +109,12 @@ export default class MenuSidebar extends Component {
               onCloseModal={this.onClosePincodeModal}
               open={this.state.openPincode}
             >
-              <Pincode onCloseModal={this.onClosePincodeModal} />
+              <Div>
+                <Heading ellipsis={false} color="rgba(0.0.0.0.8)" fontSize="1.375rem" mb="0.3125rem">
+                  Please enter your location to serve you better
+                </Heading>
+                <Pincode onCloseModal={this.onClosePincodeModal} />
+              </Div>
             </ResponsiveModal>
             <a className={styles.cart} href="tel:18002100004">
               <Img src={PhoneIcon} alt="Hometown" height="24px" mr="0.625rem" float="left" />
