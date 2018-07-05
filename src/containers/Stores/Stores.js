@@ -2,6 +2,7 @@ import React from 'react';
 import Menu from 'containers/MenuNew/index';
 import { provideHooks } from 'redial';
 import PropTypes from 'prop-types';
+import Footer from 'components/Footer';
 import StoreDetails from 'components/Stores/StoreDetails';
 import { loadStores, isLoaded as isStoresLoaded } from 'redux/modules/stores';
 
@@ -19,6 +20,7 @@ class Stores extends React.Component {
       <div>
         <Menu />
         <StoreDetails city={city} storeName={storeName} />
+        <Footer />
       </div>
     );
   }
