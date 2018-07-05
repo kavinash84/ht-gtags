@@ -1,8 +1,8 @@
 .pincode {
   position: relative;
-  width: calc(100% - 28px);
   padding-top: 0;
   margin-top: 0.625rem;
+  width: 100%;
   .pincodeCheckBtn {
     position: absolute;
     background: transparent;
@@ -10,5 +10,8 @@
     font-size: 0.75rem;
     right: 0;
     top: 9px;
+  }
+  input {
+    text-align: center;
   }
 }

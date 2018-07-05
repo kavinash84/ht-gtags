@@ -56,7 +56,7 @@ class Pincode extends React.Component {
       <Div className={styles.pincode} pt="0" pb="0.3125rem">
         <Input
           type="text"
-          placeholder="Search"
+          placeholder="Enter Pincode"
           backgroundColor="rgba(0, 0, 0, 0.05)"
           borderColor="rgba(0, 0, 0, 0.03)"
           height="2.5rem"

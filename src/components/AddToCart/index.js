@@ -32,7 +32,7 @@ const mapStateToProps = ({
 });
 
 const AddToCart = ({
-  session, simpleSku, sku, addToCart, pincode, cartSKUs, addingToCart, itemId, stateId
+  session, simpleSku, sku, addToCart, pincode, cartSKUs, addingToCart, itemId, stateId, size
 }) => {
   const checkStatus = checkSKUInCart(cartSKUs, sku);
   const addLoading = addingToCart && stateId === itemId;
@@ -43,9 +43,9 @@ const AddToCart = ({
           btnType="custom"
           border="1px solid"
           bc="#ae8873"
-          block="block"
           color="#ae8873"
           p="8px 15px 0"
+          size={size}
           disabled={addLoading}
           onClick={onClick(itemId, sku, simpleSku, session, pincode)(addToCart)}
         >
@@ -71,7 +71,8 @@ AddToCart.defaultProps = {
   cartSKUs: [],
   addingToCart: false,
   itemId: '',
-  stateId: ''
+  stateId: '',
+  size: 'default'
 };
 
 AddToCart.propTypes = {
@@ -83,7 +84,8 @@ AddToCart.propTypes = {
   addToCart: PropTypes.func.isRequired,
   addingToCart: PropTypes.bool,
   itemId: PropTypes.string,
-  stateId: PropTypes.string
+  stateId: PropTypes.string,
+  size: PropTypes.string
 };
 
 export default connect(

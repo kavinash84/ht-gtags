@@ -24,6 +24,7 @@ const CartIcon = require('../../../static/cart-icon.svg');
 const MapIcon = require('../../../static/map-icon.svg');
 const PhoneIcon = require('../../../static/phone-icon.svg');
 const UserIcon = require('../../../static/user-icon.svg');
+const PincodeModalIcon = require('../../../static/map-placeholder.svg');
 
 const onClick = history => e => {
   e.preventDefault();
@@ -110,7 +111,15 @@ export default class MenuSidebar extends Component {
               open={this.state.openPincode}
             >
               <Div>
-                <Heading ellipsis={false} color="rgba(0.0.0.0.8)" fontSize="1.375rem" mb="0.3125rem">
+                <Img width="100px" m="auto" mb="1.5rem" src={PincodeModalIcon} alt="Pincode" />
+                <Heading
+                  ellipsis={false}
+                  color="rgba(0.0.0.0.8)"
+                  ta="center"
+                  fontSize="1.375rem"
+                  mb="1rem"
+                  fontWeight="700"
+                >
                   Please enter your location to serve you better
                 </Heading>
                 <Pincode onCloseModal={this.onClosePincodeModal} />

@@ -42,7 +42,7 @@ const Pincode = ({
   <Div className={styles.pincode} pt="0" pb="0.3125rem">
     <Input
       type="text"
-      placeholder="Pincode"
+      placeholder="Enter Pincode"
       backgroundColor="#f2f2f2"
       borderColor="rgba(0, 0, 0, 0.03)"
       height="2.5rem"
