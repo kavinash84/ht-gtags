@@ -21,3 +21,5 @@ export const filterStoresByCity = (stores, city) => {
 export const getFilters = filters => filters.filter(item => filterName.includes(item.name));
 
 export const getSelectedFilters = filters => filters.map(item => item.attributes.filter(x => x.isSelected));
+
+export const hyphenedString = name => name.split(' ').join('-');

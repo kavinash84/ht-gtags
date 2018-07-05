@@ -26,6 +26,9 @@ import ForgotPassword from 'containers/ForgotPassword';
 import ResetPassword from 'containers/ResetPassword';
 import UpdatePassword from 'containers/UpdatePassword';
 import Profile from 'containers/Profile';
+import Pincode from 'components/Pincode';
+import Stores from 'containers/Stores/Stores';
+import TrackOrder from 'containers/TrackOrder/TrackOrder';
 import Category from 'containers/Category/Category';
 import Wishlist from 'containers/Wishlist';
 import Cart from 'containers/Cart';
@@ -76,6 +79,9 @@ const routes = [
       { path: '/faq', exact: true, component: FAQ },
       { path: '/contact-us', exact: true, component: ContactUs },
       { path: '/who-we-are', exact: true, component: WhoWeAre },
+      { path: '/pincode', exact: true, component: Pincode },
+      { path: '/store/:city/:storeName', exact: true, component: Stores },
+      { path: '/track-order', exact: true, component: TrackOrder },
       {
         path: '/:category/:subcategory1?/:subcategory2?/:subcategory3?/:subcategory4?/:subcategory5?',
         exact: true,

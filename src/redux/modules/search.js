@@ -3,6 +3,7 @@ const LOAD_SUCCESS = 'search/LOAD_SUCCESS';
 const LOAD_FAIL = 'search/LOAD_FAIL';
 const SHOW_RESULTS_ON_FOCUS = 'search/SHOW_RESULTS_ON_FOCUS';
 const HIDE_RESULTS_ON_BLUR = 'search/HIDE_RESULTS_ON_BLUR';
+const HIDE_RESULTS_ON_SUBMIT = 'search/HIDE_RESULTS_ON_SUBMIT';
 const SET_SEARCH_QUERY = 'search/SET_SEARCH_QUERY';
 const CLEAR_SEARCH_QUERY = 'search/CLEAR_SEARCH_QUERY';
 
@@ -52,6 +53,11 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         showResults: false
       };
+    case HIDE_RESULTS_ON_SUBMIT:
+      return {
+        ...state,
+        showResults: false
+      };
     case CLEAR_SEARCH_QUERY:
       return {
         ...state,
@@ -87,4 +93,7 @@ export const showResultsonFocus = () => ({
 
 export const hideResultsonBlur = () => ({
   type: HIDE_RESULTS_ON_BLUR
+});
+export const hideResultsOnSubmit = () => ({
+  type: HIDE_RESULTS_ON_SUBMIT
 });

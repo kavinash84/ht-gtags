@@ -6,6 +6,7 @@ import Section from 'hometown-components/lib/Section';
 import Container from 'hometown-components/lib/Container';
 import Row from 'hometown-components/lib/Row';
 import Div from 'hometown-components/lib/Div';
+import { hyphenedString } from 'utils/helper';
 import { filterStoreList } from 'selectors/homepage';
 import StoresCarouselItem from './StoresCarouselItem';
 import StoreListItem from './StoreListItem';
@@ -51,6 +52,7 @@ export default class StoresCarousel extends Component {
                 pincode={store.pincode}
                 state={store.state}
                 phone={store.phone}
+                url={`/store/${hyphenedString(store.city).toLowerCase()}/${hyphenedString(store.store).toLowerCase()}`}
               />
             ))}
           </Row>
