@@ -8,7 +8,13 @@ import { provideHooks } from 'redial';
 import { ThemeProvider } from 'styled-components';
 import Helmet from 'react-helmet';
 import { wrapDispatch } from 'multireducer';
-import { loadCategories, loadMainMenu, loadBanners, isLoaded as isSectionLoaded } from 'redux/modules/homepage';
+import {
+  loadCategories,
+  loadMainMenu,
+  loadBanners,
+  loadFooter,
+  isLoaded as isSectionLoaded
+} from 'redux/modules/homepage';
 import { generateSession, isLoaded as isSessionSet } from 'redux/modules/app';
 import { loginUserAfterSignUp } from 'redux/modules/login';
 import { loadWishlist, isLoaded as isWishListLoaded } from 'redux/modules/wishlist';
@@ -50,6 +56,9 @@ import Theme from 'hometown-components/lib/Theme';
     }
     if (isLoggedIn && !isProfileLoaded(getState())) {
       dispatch(loadUserProfile()).catch(error => console.log(error));
+    }
+    if (!isSectionLoaded(getState(), 'footer')) {
+      wrapDispatch(dispatch, 'footer')(loadFooter()).catch(error => console.log(error));
     }
   }
 })
@@ -140,6 +149,12 @@ export default class App extends Component {
       this.props.pushState(query.get('redirect') || '/');
     } else if (this.props.login && !nextProps.login) {
       this.props.pushState('/');
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.location !== prevProps.location) {
+      window.scrollTo(0, 0);
     }
   }
 
