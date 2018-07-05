@@ -29,10 +29,7 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState }, params, location }) => {
-    const {
-      products: { sort },
-      pincode: { selectedPincode }
-    } = getState();
+    const { products: { sort }, pincode: { selectedPincode } } = getState();
     let query;
     let loadResults;
     if (location.pathname === '/catalog/all-products') {
@@ -156,7 +153,6 @@ export default class Listing extends Component {
             </Section>
           )}
           {loaded &&
-            !loading &&
             products.length && (
             <div>
               <ListingContainer
