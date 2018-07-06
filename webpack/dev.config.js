@@ -151,7 +151,7 @@ var webpackConfig = module.exports = {
     new webpack.IgnorePlugin(/webpack-stats\.json$/),
 
     new webpack.DefinePlugin({
-      'process.env.APIHOST': '"ec2-18-220-156-195.us-east-2.compute.amazonaws.com/api/"',
+      'process.env.APIHOST': '"stageapi01.hometown.in/api/"',
       __CLIENT__: true,
       __SERVER__: false,
       __DEVELOPMENT__: true,
