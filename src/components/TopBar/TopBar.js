@@ -120,7 +120,7 @@ export default class MenuSidebar extends Component {
                   mb="1rem"
                   fontWeight="700"
                 >
-                  Please enter your location to serve you better
+                  Please enter your Pincode to serve you better
                 </Heading>
                 <Pincode onCloseModal={this.onClosePincodeModal} />
               </Div>
