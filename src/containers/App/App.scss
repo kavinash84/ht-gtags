@@ -375,8 +375,24 @@
 			left: -40px !important;
 		}
 	}
+	.prodDetailsCarousel {
+		.slick-slide {
+			max-width: 293px !important;
+		}
+	}
 	.customModal {
 		padding: 3rem;
+	}
+	.thumbCarousel {
+		.slick-next {
+			right: -40px !important;
+		}
+		.slick-prev {
+			left: -45px !important;
+		}
+		.slick-slide {
+			max-width: 79px;
+		}
 	}
 
 	/* Checkbox */

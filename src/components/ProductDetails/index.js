@@ -17,7 +17,6 @@ import Reviews from 'hometown-components/lib/Reviews';
 import AddReview from 'hometown-components/lib/Reviews/WriteReview';
 import Theme from 'hometown-components/lib/Theme';
 import { addReview } from 'redux/modules/reviews';
-
 import ProductDetailsCarousel from './Carousel';
 import BreadCrumb from './BreadCrumb';
 // import ProductsCarousel from 'components/ProductCarousel';
@@ -70,7 +69,7 @@ class ProductDetails extends React.Component {
                 <BreadCrumb categoryDetails={categoryDetails} />
               </Div>
             </Row>
-            <Row display="block" mt="0.625rem" mb="0.625rem" mr="0">
+            <Row display="block" mt="0.625rem" mb="0" mr="0">
               <Div col="9" className={styles.titleWrapper}>
                 <TitlePrice name={meta.name} price={meta.price} discPrice={meta.special_price} />
                 <Row

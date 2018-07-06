@@ -6,8 +6,15 @@ import Heading from 'hometown-components/lib/Heading';
 import Span from 'hometown-components/lib/Span';
 import Text from 'hometown-components/lib/Text';
 import AddToCart from 'components/AddToCart';
+import SlickSlider from '../SlickSlider';
 
 const styles = require('./QuickView.scss');
+
+const adjustSlides = length => ({
+  slidesToShow: length >= 3 ? 3 : length,
+  slidesToScroll: 3,
+  autoplay: false
+});
 
 export default class QuickView extends Component {
   state = {
@@ -157,12 +164,16 @@ export default class QuickView extends Component {
               </Text>
               <AddToCart simpleSku={simpleSku} sku={sku} />
             </Div>
-            <Div className={styles.thumb}>
-              {images.map((image, index) => (
-                <button onClick={this.setImage} id={index} key={String(index)}>
-                  <img className={styles.sliderImage} src={image.path} alt="" id={index} />
-                </button>
-              ))}
+            <Div className={`${styles.thumb} thumbCarousel`}>
+              <SlickSlider settings={adjustSlides(images.length)}>
+                {images.map((image, index) => (
+                  <div key={String(index)}>
+                    <button className={styles.thumbBtn} onClick={this.setImage} id={index}>
+                      <img className={styles.sliderImage} src={image.path} alt="" id={index} />
+                    </button>
+                  </div>
+                ))}
+              </SlickSlider>
             </Div>
           </Div>
         </Row>
