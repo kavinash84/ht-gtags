@@ -29,4 +29,7 @@ MyOrder.defaultProps = {
 MyOrder.propTypes = {
   results: PropTypes.array
 };
-export default connect(mapStateToProps, null)(MyOrder);
+export default connect(
+  mapStateToProps,
+  null
+)(MyOrder);

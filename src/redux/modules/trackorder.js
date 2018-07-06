@@ -34,7 +34,7 @@ export default function reducer(state = initialState, action = {}) {
         loading: false,
         loaded: false,
         error: true,
-        errorMessage: action.result.error_message || 'Some Error Occured, Try Again.'
+        errorMessage: action.error.error_message
       };
     default:
       return state;
