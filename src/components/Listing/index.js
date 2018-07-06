@@ -70,13 +70,13 @@ class Listing extends React.Component {
 
   setFilter = key => e => {
     e.preventDefault();
-    const { category } = this.props;
+    const { category, pincode } = this.props;
     const { dispatch } = this.context.store;
     const query = key
       .split('/')
       .slice(2)
       .join('/');
-    dispatch(applyFilter(category, query));
+    dispatch(applyFilter(category, query, pincode));
   };
 
   clearFilters = () => {
