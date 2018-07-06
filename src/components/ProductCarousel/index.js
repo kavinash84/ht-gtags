@@ -29,7 +29,7 @@ export default class ProductCarousel extends Component {
                   percentage={item.saving}
                   rating={item.data.reviews.rating}
                   image={item.images[0].zoom_image}
-                  url={item.data.url}
+                  url={`/product-details/${item.data.sku}`}
                 />
               </div>
             ))}
