@@ -17,6 +17,7 @@ import {
   loadSearchQuery,
   isLoaded as isInitialListLoaded,
   setCategoryQuery,
+  setUrlQuery,
   clearPreviousList,
   clearPreviousSort,
   loadUrlQuery,
@@ -34,27 +35,29 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
       products: { sort },
       pincode: { selectedPincode }
     } = getState();
-    let query;
+
+    let urlQuery;
     let loadResults;
+    const categoryQuery = encodeCategory(params);
     if (location.pathname === '/catalog/all-products') {
-      query = location.search.split('?').join('');
-      loadResults = loadUrlQuery(encodeCategory(params), query, selectedPincode);
+      urlQuery = location.search.split('?').join('');
+      loadResults = loadUrlQuery(categoryQuery, urlQuery, selectedPincode);
     } else if (location.pathname === '/search/') {
       /* eslint prefer-destructuring: ["error", {AssignmentExpression: {array: false}}] */
-      query = location.search.split('?q=')[1];
-      loadResults = loadSearchQuery(query, 1, selectedPincode);
+      urlQuery = location.search.split('?q=')[1];
+      loadResults = loadSearchQuery(urlQuery, 1, selectedPincode);
     } else {
-      query = encodeCategory(params);
-      loadResults = loadListing(query, 1, sort, selectedPincode);
+      loadResults = loadListing(categoryQuery, 1, sort, selectedPincode);
     }
 
-    if (!isInitialListLoaded(getState(), query)) {
+    if (!isInitialListLoaded(getState(), categoryQuery)) {
       await dispatch(clearPreviousList());
       await dispatch(clearPreviousSort());
       await dispatch(resetLoadMore());
       await dispatch(loadResults).catch(() => null);
     }
-    await dispatch(setCategoryQuery(query, selectedPincode));
+    await dispatch(setCategoryQuery(categoryQuery));
+    await dispatch(setUrlQuery(urlQuery));
   }
 })
 @connect(state => ({
