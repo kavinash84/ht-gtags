@@ -16,18 +16,21 @@ const WishListIcon = require('../../../static/wishlist-empty.jpg');
 
 @connect(({ wishlist }) => ({
   wishlist,
-  wishListedSKUs: getSKUList(wishlist)
+  wishListedSKUs: getSKUList(wishlist),
+  wishlistKey: wishlist.key
 }))
 export default class WishlistContainer extends Component {
   static propTypes = {
     wishlist: PropTypes.object,
+    wishlistKey: PropTypes.string,
     wishListedSKUs: PropTypes.array.isRequired
   };
   static defaultProps = {
-    wishlist: {}
+    wishlist: {},
+    wishlistKey: ''
   };
   render() {
-    const { wishlist: { data }, wishListedSKUs } = this.props;
+    const { wishlist: { data }, wishListedSKUs, wishlistKey } = this.props;
     return (
       <Div>
         <Menu />
@@ -36,7 +39,7 @@ export default class WishlistContainer extends Component {
           <Container type="container" pr="1rem" pl="1rem">
             <Row display="block" mr="0" ml="0" p="2rem 0">
               <Div col="12">
-                <Wishlist list={data} wishList={wishListedSKUs} />
+                <Wishlist list={data} wishList={wishListedSKUs} wishlistKey={wishlistKey} />
               </Div>
             </Row>
           </Container>
