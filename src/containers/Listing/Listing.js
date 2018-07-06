@@ -22,7 +22,7 @@ import {
   loadUrlQuery,
   clearAllFilters as loadAfterPincodeChange
 } from 'redux/modules/products';
-import { getProducts, getCategoryName, getProductCount, getFilters } from 'selectors/products';
+import { getProducts, getCategoryName, getProductCount, getFilters, getAppliedFilters } from 'selectors/products';
 import { resetLoadMore } from 'redux/modules/loadmore';
 import { encodeCategory } from 'utils/helper';
 
@@ -61,6 +61,7 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
   category: state.products.query,
   page: state.loadmore.page,
   filters: getFilters(state),
+  appliedFilters: getAppliedFilters(state),
   wishListedSKUs: getSKUList(state.wishlist),
   wishListData: state.wishlist.data,
   wishlistLoading: state.wishlist.loading,
@@ -88,6 +89,7 @@ export default class Listing extends Component {
     wishlistLoading: PropTypes.bool,
     wishlistKey: PropTypes.string,
     filters: PropTypes.array,
+    appliedFilters: PropTypes.array,
     history: PropTypes.object.isRequired,
     pincode: PropTypes.string,
     isLoggedIn: PropTypes.bool
@@ -108,6 +110,7 @@ export default class Listing extends Component {
     wishlistLoading: false,
     wishlistKey: '',
     filters: [],
+    appliedFilters: [],
     metadata: null,
     pincode: '',
     isLoggedIn: false
@@ -136,7 +139,8 @@ export default class Listing extends Component {
       wishListData,
       wishlistLoading,
       wishlistKey,
-      metadata
+      metadata,
+      appliedFilters
     } = this.props;
 
     return (
@@ -167,6 +171,7 @@ export default class Listing extends Component {
                 productCount={productCount}
                 category={category}
                 filters={filters}
+                appliedFilters={appliedFilters}
                 history={history}
                 pincode={pincode}
                 isLoggedIn={isLoggedIn}
