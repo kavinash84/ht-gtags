@@ -181,10 +181,10 @@ class Listing extends React.Component {
                     reviewsCount={item.data.reviews.count}
                     savingAmount={item.data.max_price - item.data.max_special_price}
                     deliveredBy={item.data.delivery_details[0].value}
+                    colors={metaResults[index].data.color_group_count}
                   />
                   <Div mt="0" p="0.25rem 0.125rem 0.5rem">
                     <AddToCart simpleSku={Object.keys(item.data.simples)[0]} sku={item.data.sku} itemId={item.id} />
-                    <div>{metaResults[index].data.color_group_count}</div>
                   </Div>
                 </div>
               ))}
