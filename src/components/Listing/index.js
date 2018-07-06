@@ -13,7 +13,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { toggleWishList } from 'redux/modules/wishlist';
 import { loadSortBy, applyFilter, clearAllFilters } from 'redux/modules/products';
-import { getSelectedFilters } from 'utils/helper';
 import Dropdown from '../Filters/Dropdown';
 import AddToCart from '../AddToCart';
 import AppliedFilters from '../Filters/AppliedFilters';
@@ -70,13 +69,13 @@ class Listing extends React.Component {
 
   setFilter = key => e => {
     e.preventDefault();
-    const { category, pincode } = this.props;
+    const { category } = this.props;
     const { dispatch } = this.context.store;
     const query = key
       .split('/')
       .slice(2)
       .join('/');
-    dispatch(applyFilter(category, query, pincode));
+    dispatch(applyFilter(category, query));
   };
 
   clearFilters = () => {
@@ -98,10 +97,10 @@ class Listing extends React.Component {
       filters,
       history,
       isLoggedIn,
-      metaResults
+      metaResults,
+      appliedFilters
     } = this.props;
     const { sortby } = this.state;
-    const selectedFilters = getSelectedFilters(filters);
     return (
       <Div type="block">
         <Section mb="0.3125rem" p="1rem 0.5rem" bg="primary">
@@ -152,7 +151,7 @@ class Listing extends React.Component {
                 <Label fontWeight="600" display="inline-block">
                   Applied Filters
                 </Label>
-                <AppliedFilters data={selectedFilters} onClickClearFilter={this.clearFilters} />
+                <AppliedFilters data={appliedFilters} onClickClearFilter={this.clearFilters} />
               </Div>
             </Row>
           </Container>
@@ -216,6 +215,7 @@ Listing.defaultProps = {
   productCount: '',
   category: '',
   filters: [],
+  appliedFilters: [],
   pincode: '',
   metaResults: [],
   wishlistKey: '',
@@ -232,6 +232,7 @@ Listing.propTypes = {
   productCount: PropTypes.string,
   category: PropTypes.string,
   filters: PropTypes.array,
+  appliedFilters: PropTypes.array,
   history: PropTypes.object.isRequired,
   wishlistLoading: PropTypes.bool,
   pincode: PropTypes.string,
