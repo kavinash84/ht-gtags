@@ -26,12 +26,9 @@ import Theme from 'hometown-components/lib/Theme';
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState } }) => {
-    const {
-      pincode: { selectedPincode },
-      app: { sessionId }
-    } = getState();
+    const { pincode: { selectedPincode }, app: { sessionId } } = getState();
     const defaultPincode = selectedPincode === '' ? PINCODE : selectedPincode;
-    if (!isSessionSet(getState())) {
+    if (!isSessionSet(getState()) || !sessionId) {
       await dispatch(generateSession(defaultPincode)).catch(error => console.log(error));
     }
     if (!isSectionLoaded(getState(), 'banners')) {
@@ -48,9 +45,7 @@ import Theme from 'hometown-components/lib/Theme';
     }
   },
   defer: ({ store: { dispatch, getState } }) => {
-    const {
-      userLogin: { isLoggedIn }
-    } = getState();
+    const { userLogin: { isLoggedIn } } = getState();
     if (isLoggedIn && !isWishListLoaded(getState())) {
       dispatch(loadWishlist()).catch(error => console.log(error));
     }
@@ -124,19 +119,12 @@ export default class App extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { dispatch } = this.context.store;
-    const {
-      login: { isLoggedIn },
-      pincode: { selectedPincode },
-      app: { sessionId }
-    } = this.props;
+    const { login: { isLoggedIn }, pincode: { selectedPincode }, app: { sessionId } } = this.props;
     const pincode = selectedPincode === '' ? PINCODE : '';
     if (nextProps.signUp && nextProps.signUp.loaded) {
       const { signUp } = nextProps;
       if (!isLoggedIn && signUp.response.signup_complete) {
-        const {
-          signUp: { response },
-          loginUser
-        } = nextProps;
+        const { signUp: { response }, loginUser } = nextProps;
         if (response.signup_complete) {
           dispatch(loginUser(response.token));
           dispatch(synCart(sessionId, pincode));
