@@ -19,6 +19,7 @@ import category from './modules/category';
 import productdetails from './modules/productdetails';
 import reviews from './modules/reviews';
 import trackorder from './modules/trackorder';
+import orders from './modules/orders';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -50,6 +51,7 @@ export default function createReducers(asyncReducers) {
     productdetails,
     reviews,
     trackorder,
+    orders,
     ...asyncReducers
   };
 }

@@ -32,3 +32,5 @@ export const SYNCCART = 'tesla/cart/sync';
 export const SESSION = 'tesla/session';
 
 export const TRACK_ORDER = 'tesla/orders/track';
+/* My Orders */
+export const MY_ORDERS = 'tesla/orders';
