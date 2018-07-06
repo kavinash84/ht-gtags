@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import filterName from '../data/Filter.js';
 
 export const products = state => state.products;
 
@@ -13,7 +14,8 @@ export const productMeta = createSelector(
         searchterm: '',
         product_catname: '',
         product_count: '',
-        results: []
+        results: [],
+        filter: []
       }
 );
 
@@ -30,3 +32,10 @@ export const getCategoryName = createSelector(
       ? `Search results for "${category.searchterm}"`
       : category.product_catname
 );
+
+export const filtersList = createSelector([productMeta], productList => productList.filter || []);
+
+export const getFilters = createSelector([filtersList], filters =>
+  filters.filter(item => filterName.includes(item.name)));
+
+export const getSelectedFilters = filters => filters.map(item => item.attributes.filter(x => x.isSelected));

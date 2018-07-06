@@ -45,7 +45,6 @@ class Wishlist extends React.Component {
       list, toggleWishList, wishList, wishlistLoading, wishlistKey
     } = this.props;
     const { quickViewSku, openQuickView } = this.state;
-    console.log(wishlistKey);
     return (
       <Div type="block">
         <Section p="0" pt="1.25rem" mb="0">

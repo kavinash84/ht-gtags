@@ -1,18 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Div from 'hometown-components/lib/Div';
 import Heading from 'hometown-components/lib/Heading';
 import Row from 'hometown-components/lib/Row';
 import Text from 'hometown-components/lib/Text';
 import Button from 'hometown-components/lib/Buttons';
+import { formatAmount } from 'utils/formatters';
 
 const styles = require('./MyOrder.scss');
 
-const OrderBlock = () => (
+const OrderBlock = ({ order }) => (
   <Div mb="2.5rem">
     <Row type="block" m="0" mb="1rem">
       <Div col="12">
         <Heading fontSize="1.25rem" color="textLight" mb="0px" mt="0px" fontWeight="300">
-          Order No. 401261676
+          Order No. {order.order_id}
         </Heading>
       </Div>
     </Row>
@@ -23,7 +25,7 @@ const OrderBlock = () => (
             ORDER DATE
           </Text>
           <Text mt="0" color="rgba(0, 0, 0, 0.6)" fontWeight="300">
-            16 Jan 2018
+            {order.order_date}
           </Text>
         </Div>
         <Div col="2">
@@ -31,7 +33,7 @@ const OrderBlock = () => (
             ORDER AMOUNT
           </Text>
           <Text mt="0" color="rgba(0, 0, 0, 0.6)" fontWeight="300">
-            Rs. 1,49,700
+            Rs. {formatAmount(order.grand_total)}
           </Text>
         </Div>
       </Row>
@@ -46,48 +48,22 @@ const OrderBlock = () => (
                 <th>Tracking ID</th>
                 <th>Tracking Link</th>
               </tr>
-              <tr>
-                <td>
-                  <img className="thumb" src="http://via.placeholder.com/75x75" alt="" />
-                </td>
-                <td>Ambra King Bed in Engineered Wood with Box Storage</td>
-                <td>Dispatched at 2:35 PM, 16 Jan</td>
-                <td>Bluedart</td>
-                <td>AG567TG</td>
-                <td>
-                  <Button fontSize="0.875rem" fontWeight="300" color="#ae8873" btnType="link">
-                    Track Now
-                  </Button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <img className="thumb" src="http://via.placeholder.com/75x75" alt="" />
-                </td>
-                <td>Ambra King Bed in Engineered Wood with Box Storage</td>
-                <td>Dispatched at 2:35 PM, 16 Jan</td>
-                <td>Bluedart</td>
-                <td>AG567TG</td>
-                <td>
-                  <Button fontSize="0.875rem" fontWeight="300" color="#ae8873" btnType="link">
-                    Track Now
-                  </Button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <img className="thumb" src="http://via.placeholder.com/75x75" alt="" />
-                </td>
-                <td>Ambra King Bed in Engineered Wood with Box Storage</td>
-                <td>Dispatched at 2:35 PM, 16 Jan</td>
-                <td>Bluedart</td>
-                <td>AG567TG</td>
-                <td>
-                  <Button fontSize="0.875rem" fontWeight="300" color="#ae8873" btnType="link">
-                    Track Now
-                  </Button>
-                </td>
-              </tr>
+              {order.order_items.map(item => (
+                <tr key={item.order_item_id}>
+                  <td>
+                    <img className="thumb" src="http://via.placeholder.com/75x75" alt="" />
+                  </td>
+                  <td>{item.product_name || 'NOT AVAILABLE'}</td>
+                  <td>{item.order_item_status_display_name || 'NOT AVAILABLE'}</td>
+                  <td>{item.carrier_name || 'NOT AVAILABLE'}</td>
+                  <td>{item.tracking_id || 'NOT AVAILABLE'}</td>
+                  <td>
+                    <Button fontSize="0.875rem" fontWeight="300" color="#ae8873" btnType="link">
+                      Track Now
+                    </Button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </Div>
@@ -96,4 +72,7 @@ const OrderBlock = () => (
   </Div>
 );
 
+OrderBlock.propTypes = {
+  order: PropTypes.object.isRequired
+};
 export default OrderBlock;

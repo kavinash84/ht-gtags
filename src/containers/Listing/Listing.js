@@ -22,18 +22,15 @@ import {
   loadUrlQuery,
   clearAllFilters as loadAfterPincodeChange
 } from 'redux/modules/products';
-import { getProducts, getCategoryName, getProductCount } from 'selectors/products';
+import { getProducts, getCategoryName, getProductCount, getFilters } from 'selectors/products';
 import { resetLoadMore } from 'redux/modules/loadmore';
-import { encodeCategory, getFilters } from 'utils/helper';
+import { encodeCategory } from 'utils/helper';
 
 const SearchEmptyIcon = require('../../../static/search-empty.jpg');
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState }, params, location }) => {
-    const {
-      products: { sort },
-      pincode: { selectedPincode }
-    } = getState();
+    const { products: { sort }, pincode: { selectedPincode } } = getState();
     let query;
     let loadResults;
     if (location.pathname === '/catalog/all-products') {
@@ -63,7 +60,7 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
   shimmer: state.products.shimmer,
   category: state.products.query,
   page: state.loadmore.page,
-  filters: getFilters(state.products.data.metadata.filter),
+  filters: getFilters(state),
   wishListedSKUs: getSKUList(state.wishlist),
   wishListData: state.wishlist.data,
   wishlistLoading: state.wishlist.loading,
