@@ -185,7 +185,7 @@ export default class Listing extends Component {
               <LoadMore loading={loading} loaded={loaded} />
             </div>
           ) : (
-            <ListingShimmer />
+            shimmer && <ListingShimmer />
           )}
         </div>
         <Footer />
