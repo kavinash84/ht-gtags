@@ -37,14 +37,12 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         loading: true
-        // shimmer: true
       };
     case LOAD_SUCCESS:
       return {
         ...state,
         loading: false,
         loaded: true,
-        // shimmer: false,
         data: action.result,
         list: [...state.list, ...action.result.metadata.results]
       };
@@ -53,7 +51,6 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: false,
-        // shimmer: false,
         error: action.error
       };
     case LOAD_CLEAR_FILTERS:

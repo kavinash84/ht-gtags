@@ -241,4 +241,7 @@ Listing.propTypes = {
   wishlistKey: PropTypes.string
 };
 
-export default connect(null, mapDispatchToProps)(Listing);
+export default connect(
+  null,
+  mapDispatchToProps
+)(Listing);
