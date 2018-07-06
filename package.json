@@ -1,9 +1,8 @@
 {
-  "name": "HomeTown",
+  "name": "HomeTown.in",
   "description": "Buy Furniture Online.",
-  "author": "Rama Krishna <rama.ped@gmail.com>",
+  "author": "Rama Krishna <rama@hometown.in>",
   "contributors": [
-    "Erik Rasmussen <rasmussenerik@gmail.com> (http://github.com/erikras)"
   ],
   "license": "MIT",
   "version": "1.0.0",
