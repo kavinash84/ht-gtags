@@ -13,6 +13,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { toggleWishList } from 'redux/modules/wishlist';
 import { loadSortBy, applyFilter, clearAllFilters } from 'redux/modules/products';
+import { formFilterLink } from 'utils/helper';
 import Dropdown from '../Filters/Dropdown';
 import AddToCart from '../AddToCart';
 import AppliedFilters from '../Filters/AppliedFilters';
@@ -67,15 +68,12 @@ class Listing extends React.Component {
     dispatch(loadSortBy(category, key, pincode));
   };
 
-  setFilter = key => e => {
+  setFilter = (key, selected) => e => {
     e.preventDefault();
-    const { category } = this.props;
+    const { pincode } = this.props;
     const { dispatch } = this.context.store;
-    const query = key
-      .split('/')
-      .slice(2)
-      .join('/');
-    dispatch(applyFilter(category, query));
+    const link = formFilterLink(key, selected);
+    dispatch(applyFilter(link, pincode));
   };
 
   clearFilters = () => {
@@ -241,7 +239,4 @@ Listing.propTypes = {
   wishlistKey: PropTypes.string
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Listing);
+export default connect(null, mapDispatchToProps)(Listing);

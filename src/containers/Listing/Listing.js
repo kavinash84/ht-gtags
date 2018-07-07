@@ -25,27 +25,26 @@ import {
 import { getProducts, getCategoryName, getProductCount, getFilters, getAppliedFilters } from 'selectors/products';
 import { resetLoadMore } from 'redux/modules/loadmore';
 import { encodeCategory } from 'utils/helper';
+import { PINCODE } from 'helpers/Constants';
 
 const SearchEmptyIcon = require('../../../static/search-empty.jpg');
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState }, params, location }) => {
-    const {
-      products: { sort },
-      pincode: { selectedPincode }
-    } = getState();
+    const { products: { sort }, pincode: { selectedPincode } } = getState();
     let query;
     let loadResults;
+    const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
     if (location.pathname === '/catalog/all-products') {
       query = location.search.split('?').join('');
-      loadResults = loadUrlQuery(encodeCategory(params), query, selectedPincode);
+      loadResults = loadUrlQuery(encodeCategory(params), query, pincode);
     } else if (location.pathname === '/search/') {
       /* eslint prefer-destructuring: ["error", {AssignmentExpression: {array: false}}] */
       query = location.search.split('?q=')[1];
-      loadResults = loadSearchQuery(query, 1, selectedPincode);
+      loadResults = loadSearchQuery(query, 1, pincode);
     } else {
       query = encodeCategory(params);
-      loadResults = loadListing(query, 1, sort, selectedPincode);
+      loadResults = loadListing(query, 1, sort, pincode);
     }
 
     if (!isInitialListLoaded(getState(), query)) {
@@ -54,7 +53,7 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
       await dispatch(resetLoadMore());
       await dispatch(loadResults).catch(() => null);
     }
-    await dispatch(setCategoryQuery(query, selectedPincode));
+    await dispatch(setCategoryQuery(query, pincode));
   }
 })
 @connect(state => ({
