@@ -144,7 +144,6 @@ export default class Listing extends Component {
       metadata,
       appliedFilters
     } = this.props;
-
     return (
       <Section p="0" mb="0">
         <div className="wrapper">
@@ -163,6 +162,7 @@ export default class Listing extends Component {
               </Empty>
             </Section>
           )}
+          {!loaded && loading && !products.length && <ListingShimmer />}
           {loaded && products.length && !shimmer ? (
             <div>
               <ListingContainer
