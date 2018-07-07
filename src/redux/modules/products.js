@@ -158,7 +158,7 @@ export function isLoaded(globalState, query) {
 }
 export const clearAllFilters = (category, pincode, city = 'delhi') => ({
   types: [LOAD_CLEAR_FILTERS, LOAD_CLEAR_FILTERS_SUCCESS, LOAD_CLEAR_FILTERS_FAIL],
-  promise: ({ client }) => client.get(`tesla/products/${category}&pincode=${pincode}&city=${city}`)
+  promise: ({ client }) => client.get(`tesla/products/${category}/?pincode=${pincode}&city=${city}`)
 });
 
 export const loadSortBy = (category, sort, pincode, city = 'delhi') => ({
@@ -175,9 +175,9 @@ export const loadSortBy = (category, sort, pincode, city = 'delhi') => ({
 });
 /* eslint-disable max-len */
 
-export const applyFilter = (category, key, pincode, city = 'delhi') => ({
+export const applyFilter = (key, pincode, city = 'delhi') => ({
   types: [LOAD_FILTER, LOAD_FILTER_SUCCESS, LOAD_FILTER_FAIL],
-  promise: ({ client }) => client.get(`tesla/products/${category}/${key}&pincode=${pincode}&city=${city}`)
+  promise: ({ client }) => client.get(`tesla/products/${key}&pincode=${pincode}&city=${city}`)
 });
 
 export const load = (category, page, sort, pincode, city = 'delhi') => ({

@@ -28,8 +28,8 @@ const Dropdown = ({
       {/* eslint-disable */}
       <ul>
         <li>
-          {data.map(item => (
-            <div key={item.value} onClick={onclick(item.url_key, item.value)}>
+          {data.map((item, index) => (
+            <div key={index} onClick={onclick(item.url_key, item.isSelected)}>
               {checkbox && (
                 <div className="checkbox">
                   <input type="checkbox" id="checkbox" checked={item.isSelected} onChange={() => true} />
