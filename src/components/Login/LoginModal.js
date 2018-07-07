@@ -7,6 +7,11 @@ import Img from 'hometown-components/lib/Img';
 import { Link } from 'react-router-dom';
 import { Label } from 'hometown-components/lib/Label';
 import { SIGNUP_URL, FORGOT_PASSWORD_URL } from 'helpers/Constants';
+import GoogleLogin from 'react-google-login';
+
+const onSuccess = res => {
+  console.log(res);
+};
 
 // const FavIcon = require('../../../static/fav-icon.svg');
 const GoogleIcon = require('../../../static/google-icon.png');
@@ -24,9 +29,14 @@ const LoginModal = () => (
     </Row>
     <Row display="block" mt="1.5rem" mr="0" ml="0">
       <Div col="12" ta="center">
-        <button className="socialBtn">
+        <GoogleLogin
+          className="socialBtn"
+          clientId="663311547699-jersj1hfflbl8gfukgsuvug8u1gc88nm.apps.googleusercontent.com"
+          onSuccess={onSuccess}
+          onFailure={onSuccess}
+        >
           <Img display="inline-block" src={GoogleIcon} alt="Google" /> Google
-        </button>
+        </GoogleLogin>
       </Div>
       <Div col="12" mb="1.25rem" mt="1.25rem">
         <Label display="block" ta="center" color="primary" fontWeight="400">
