@@ -37,6 +37,11 @@ export default function createStore({
     const authToken = (data.userLogin.isLoggedIn && data.userLogin.accessToken) || '';
     helpers.client.setJwtToken(authToken);
   }
+  if (data && data.app && data.app.csrfToken) {
+    /* add csrf token */
+    const csrfToken = data.app.csrfToken || '';
+    helpers.client.setCSRFToken(csrfToken);
+  }
 
   const middleware = [clientMiddleware(helpers), routerMiddleware(history)];
 

@@ -26,9 +26,9 @@ import Theme from 'hometown-components/lib/Theme';
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState } }) => {
-    const { pincode: { selectedPincode }, app: { sessionId } } = getState();
+    const { pincode: { selectedPincode }, app: { sessionId, csrfToken } } = getState();
     const defaultPincode = selectedPincode === '' ? PINCODE : selectedPincode;
-    if (!isSessionSet(getState()) || !sessionId) {
+    if (!isSessionSet(getState()) || !sessionId || !csrfToken) {
       await dispatch(generateSession(defaultPincode)).catch(error => console.log(error));
     }
     if (!isSectionLoaded(getState(), 'banners')) {

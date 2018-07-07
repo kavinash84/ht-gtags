@@ -20,13 +20,15 @@ import { signUp } from 'redux/modules/signUp';
 
 const SidebarImg = require('../../../static/login-side-thumb.png');
 
-@connect(state => ({
-  signUpResponse: state.userSignUp
+@connect(({ userSignUp, app }) => ({
+  signUpResponse: userSignUp,
+  session: app.csrfToken
 }))
 @withRouter
 export default class SignupFormContainer extends Component {
   static propTypes = {
-    signUpResponse: PropTypes.object.isRequired
+    signUpResponse: PropTypes.object.isRequired,
+    session: PropTypes.string.isRequired
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -46,9 +48,7 @@ export default class SignupFormContainer extends Component {
     };
   }
   onChangeEmail = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     const checkError = validateEmail(value, 'Enter valid email');
     this.setState({
       email: value,
@@ -57,9 +57,7 @@ export default class SignupFormContainer extends Component {
     });
   };
   onChangePhone = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     const checkError = validateMobile(value, 'Mobile should be 10 digits');
     this.setState({
       phone: value,
@@ -68,9 +66,7 @@ export default class SignupFormContainer extends Component {
     });
   };
   onChangePassword = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     const checkError = isBlank(value);
     this.setState({
       password: value,
@@ -95,7 +91,8 @@ export default class SignupFormContainer extends Component {
       });
     }
     const { dispatch } = this.context.store;
-    dispatch(signUp(this.state));
+    const { session } = this.props;
+    dispatch(signUp(this.state, session));
   };
   render() {
     const styles = require('../Login/index.scss');
