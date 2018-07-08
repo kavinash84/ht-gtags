@@ -13,8 +13,12 @@ import { SIGNUP_URL, FORGOT_PASSWORD_URL } from 'helpers/Constants';
 import GoogleLogin from 'react-google-login';
 import { googleLogin } from 'redux/modules/login';
 
-const onSuccess = dispatcher => result => {
-  dispatcher(result.tokenId);
+const mapStateToProps = ({ app }) => ({
+  session: app.sessionId
+});
+
+const onSuccess = (dispatcher, session) => result => {
+  dispatcher(result.tokenId, session);
 };
 
 const onError = error => {
@@ -27,7 +31,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({ loginViaLogin: googl
 const GoogleIcon = require('../../../static/google-icon.png');
 const styles = require('./LoginModal.scss');
 
-const LoginModal = ({ loginViaLogin }) => (
+const LoginModal = ({ loginViaLogin, session }) => (
   <div className={styles.loginModal}>
     <Row mr="0" ml="0">
       <Div col="12">
@@ -42,7 +46,7 @@ const LoginModal = ({ loginViaLogin }) => (
         <GoogleLogin
           className="socialBtn"
           clientId="663311547699-jersj1hfflbl8gfukgsuvug8u1gc88nm.apps.googleusercontent.com"
-          onSuccess={onSuccess(loginViaLogin)}
+          onSuccess={onSuccess(loginViaLogin, session)}
           onFailure={onError}
         >
           <Img display="inline-block" src={GoogleIcon} alt="Google" /> Google
@@ -79,7 +83,8 @@ const LoginModal = ({ loginViaLogin }) => (
 );
 
 LoginModal.propTypes = {
-  loginViaLogin: PropTypes.func.isRequired
+  loginViaLogin: PropTypes.func.isRequired,
+  session: PropTypes.string.isRequired
 };
 
-export default connect(null, mapDispatchToProps)(LoginModal);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginModal);
