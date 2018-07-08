@@ -1,5 +1,5 @@
 import cookie from 'js-cookie';
-import { LOGIN as LOGIN_API } from 'helpers/apiUrls';
+import { LOGIN as LOGIN_API, GOOGLE_LOGIN as GOOGLE_LOGIN_API } from 'helpers/apiUrls';
 import { clientId, clientSecret } from 'helpers/Constants';
 
 const LOGIN = 'login/LOGIN';
@@ -98,6 +98,25 @@ export const login = data => ({
       return response;
     } catch (error) {
       throw error;
+    }
+  }
+});
+
+export const googleLogin = token => ({
+  types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
+  promise: async ({ client }) => {
+    try {
+      const postData = {
+        token,
+        client_secret: clientSecret,
+        client_id: clientId,
+        grant_type: 'password'
+      };
+      const response = await client.post(GOOGLE_LOGIN_API, postData);
+      setToken({ client })(response);
+      return response;
+    } catch (error) {
+      return error;
     }
   }
 });
