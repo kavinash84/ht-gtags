@@ -17,7 +17,6 @@ import {
   loadSearchQuery,
   isLoaded as isInitialListLoaded,
   setCategoryQuery,
-  setUrlQuery,
   clearPreviousList,
   clearPreviousSort,
   loadUrlQuery,
@@ -26,6 +25,7 @@ import {
 import { getProducts, getCategoryName, getProductCount, getFilters, getAppliedFilters } from 'selectors/products';
 import { resetLoadMore } from 'redux/modules/loadmore';
 import { encodeCategory } from 'utils/helper';
+import { PINCODE } from 'helpers/Constants';
 
 const SearchEmptyIcon = require('../../../static/search-empty.jpg');
 
@@ -35,29 +35,31 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
       products: { sort },
       pincode: { selectedPincode }
     } = getState();
-
-    let urlQuery;
+    let query;
     let loadResults;
-    const categoryQuery = encodeCategory(params);
+    const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
     if (location.pathname === '/catalog/all-products') {
-      urlQuery = location.search.split('?').join('');
-      loadResults = loadUrlQuery(categoryQuery, urlQuery, selectedPincode);
+      console.log(location.pathname);
+      const hashQuery = location.search.split('?').join('');
+      console.log(hashQuery);
+      console.log(params);
+      query = encodeCategory(params);
+      loadResults = loadUrlQuery(encodeCategory(params), hashQuery, pincode);
     } else if (location.pathname === '/search/') {
       /* eslint prefer-destructuring: ["error", {AssignmentExpression: {array: false}}] */
-      urlQuery = location.search.split('?q=')[1];
-      loadResults = loadSearchQuery(urlQuery, 1, selectedPincode);
+      query = location.search.split('?q=')[1];
+      loadResults = loadSearchQuery(query, 1, pincode);
     } else {
-      loadResults = loadListing(categoryQuery, 1, sort, selectedPincode);
+      query = encodeCategory(params);
+      loadResults = loadListing(query, 1, sort, pincode);
     }
-
-    if (!isInitialListLoaded(getState(), categoryQuery)) {
+    if (!isInitialListLoaded(getState(), query)) {
       await dispatch(clearPreviousList());
       await dispatch(clearPreviousSort());
       await dispatch(resetLoadMore());
       await dispatch(loadResults).catch(() => null);
     }
-    await dispatch(setCategoryQuery(categoryQuery));
-    await dispatch(setUrlQuery(urlQuery));
+    await dispatch(setCategoryQuery(query, pincode));
   }
 })
 @connect(state => ({
@@ -148,7 +150,6 @@ export default class Listing extends Component {
       metadata,
       appliedFilters
     } = this.props;
-
     return (
       <Section p="0" mb="0">
         <div className="wrapper">
@@ -167,6 +168,7 @@ export default class Listing extends Component {
               </Empty>
             </Section>
           )}
+          {!loaded && loading && !products.length && <ListingShimmer />}
           {loaded && products.length && !shimmer ? (
             <div>
               <ListingContainer

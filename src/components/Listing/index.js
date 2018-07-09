@@ -13,6 +13,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { toggleWishList } from 'redux/modules/wishlist';
 import { loadSortBy, applyFilter, clearAllFilters } from 'redux/modules/products';
+import { formFilterLink } from 'utils/helper';
 import Dropdown from '../Filters/Dropdown';
 import AddToCart from '../AddToCart';
 import AppliedFilters from '../Filters/AppliedFilters';
@@ -67,15 +68,12 @@ class Listing extends React.Component {
     dispatch(loadSortBy(category, key, pincode));
   };
 
-  setFilter = key => e => {
+  setFilter = (key, selected) => e => {
     e.preventDefault();
-    const { category, pincode } = this.props;
+    const { pincode } = this.props;
     const { dispatch } = this.context.store;
-    const query = key
-      .split('/')
-      .slice(2)
-      .join('/');
-    dispatch(applyFilter(category, query, pincode));
+    const link = formFilterLink(key, selected);
+    dispatch(applyFilter(link, pincode));
   };
 
   clearFilters = () => {
@@ -181,10 +179,10 @@ class Listing extends React.Component {
                     reviewsCount={item.data.reviews.count}
                     savingAmount={item.data.max_price - item.data.max_special_price}
                     deliveredBy={item.data.delivery_details[0].value}
+                    colors={metaResults[index].data.color_group_count.split(' ')[0]}
                   />
                   <Div mt="0" p="0.25rem 0.125rem 0.5rem">
                     <AddToCart simpleSku={Object.keys(item.data.simples)[0]} sku={item.data.sku} itemId={item.id} />
-                    <div>{metaResults[index].data.color_group_count}</div>
                   </Div>
                 </div>
               ))}

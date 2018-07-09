@@ -18,3 +18,16 @@ export const filterStoresByCity = (stores, city) => {
 };
 
 export const hyphenedString = name => name.split(' ').join('-');
+
+export const formFilterLink = (key, selected) => {
+  let query;
+  const splitLink = key.split('?');
+  const paramLink = splitLink[0].split('/').filter(x => x !== '');
+  if (selected) {
+    query = paramLink.filter(param => param !== paramLink[1]);
+  } else query = paramLink;
+  const encode = btoa(JSON.stringify({
+    params: query
+  }));
+  return `${encode}/?${splitLink[1]}`;
+};

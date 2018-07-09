@@ -11,6 +11,7 @@ export const STATIC_BLOCK = 'tesla/static';
 /* Authentication */
 export const LOGIN = 'tesla/authentication/login';
 export const SIGNUP = 'tesla/users/sign-up';
+export const GOOGLE_LOGIN = 'tesla/authentication/login/google';
 
 /* Account */
 export const USERPROFILE = 'tesla/users/details';

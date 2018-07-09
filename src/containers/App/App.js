@@ -28,10 +28,10 @@ import Theme from 'hometown-components/lib/Theme';
   fetch: async ({ store: { dispatch, getState } }) => {
     const {
       pincode: { selectedPincode },
-      app: { sessionId }
+      app: { sessionId, csrfToken }
     } = getState();
     const defaultPincode = selectedPincode === '' ? PINCODE : selectedPincode;
-    if (!isSessionSet(getState())) {
+    if (!isSessionSet(getState()) || !sessionId || !csrfToken) {
       await dispatch(generateSession(defaultPincode)).catch(error => console.log(error));
     }
     if (!isSectionLoaded(getState(), 'banners')) {

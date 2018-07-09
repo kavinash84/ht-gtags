@@ -8,8 +8,13 @@ export default function apiClient(req) {
   });
 
   let token;
+  let csrfToken;
   instance.setJwtToken = newToken => {
     token = newToken;
+  };
+
+  instance.setCSRFToken = csrf => {
+    csrfToken = csrf;
   };
 
   instance.interceptors.request.use(
@@ -26,6 +31,9 @@ export default function apiClient(req) {
       }
       if (token) {
         conf.headers.Authorization = `Bearer ${token}`;
+      }
+      if (csrfToken) {
+        conf.headers['X-CSRF-Token'] = csrfToken;
       }
 
       return conf;

@@ -23,6 +23,7 @@ export default function reducer(state = initialState, action = {}) {
         loading: false,
         loaded: true,
         sessionId: action.result.session,
+        csrfToken: action.result.csrfToken,
         city: action.result.pincode_details && action.result.pincode_details[0].city
       };
     case LOAD_FAIL:

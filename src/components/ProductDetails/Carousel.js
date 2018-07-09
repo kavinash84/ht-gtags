@@ -8,14 +8,15 @@ import SlickSlider from '../SlickSlider';
 const adjustSlides = length => ({
   slidesToShow: length >= 4 ? 4 : length,
   slidesToScroll: 3,
-  autoplay: false
+  autoplay: false,
+  infinite: true
 });
 
 export default class CategoryCarousel extends Component {
   render() {
     const { data, title } = this.props;
     return (
-      <Section display="flex" p="0" pt="0.5rem" mb="0" className="prodDetailsCarousel">
+      <Section display="flex" p="0" pt="0" mb="0" className="prodDetailsCarousel">
         <Container pr="0" pl="0">
           <SlickSlider settings={adjustSlides(data.length)}>
             {data.map(slide => (

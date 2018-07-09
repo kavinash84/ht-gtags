@@ -52,14 +52,15 @@ export function isLoaded(globalState) {
   return globalState.signup && globalState.signup.loaded;
 }
 
-export const signUp = data => ({
+export const signUp = (data, session) => ({
   types: [SIGNUP, SIGNUP_SUCCESS, SIGNUP_FAIL],
   promise: async ({ client }) => {
     try {
       const postData = {
         email: data.email,
         mobile: data.phone,
-        password: data.password
+        password: data.password,
+        session_id: session
       };
       const response = await client.post(SIGNUP_API, postData);
       setToken({ client })(response);
