@@ -62,7 +62,7 @@ class ProductDetails extends React.Component {
 
     return (
       <Div type="block">
-        <Section tion p="0" pt="1.25rem" mb="0">
+        <Section p="0" pt="1.25rem" mb="0">
           <Container type="container" pr="0" pl="0">
             <Row display="block" mt="0.625rem" mb="0.625rem" mr="0" ml="0">
               <Div>
@@ -102,7 +102,7 @@ class ProductDetails extends React.Component {
                   </Div>
                 </Row>
               </Div>
-              <Div col="3">
+              <Div col="3" ta="right">
                 <AddToCart simpleSku={simpleSku} sku={sku} itemId={sku} size="block" />
                 <Div mt="1rem">
                   <Button
