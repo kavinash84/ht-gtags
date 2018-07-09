@@ -1,8 +1,9 @@
-import _ from 'lodash';
 import { createStore as _createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import { createPersistoid, persistCombineReducers, REGISTER } from 'redux-persist';
 import clientMiddleware from './middleware/clientMiddleware';
+import gaMiddleware from './middleware/gaMiddleware';
+import userMiddleware from './middleware/userMiddleware';
 import createReducers from './reducer';
 
 function combine(reducers, persistConfig) {
@@ -43,7 +44,7 @@ export default function createStore({
     helpers.client.setCSRFToken(csrfToken);
   }
 
-  const middleware = [clientMiddleware(helpers), routerMiddleware(history)];
+  const middleware = [clientMiddleware(helpers), routerMiddleware(history), gaMiddleware(), userMiddleware()];
 
   if (__CLIENT__ && __DEVELOPMENT__) {
     const logger = require('redux-logger').createLogger({
@@ -70,7 +71,7 @@ export default function createStore({
   const store = finalCreateStore(combine({ ...noopReducers, ...reducers }, persistConfig), data);
 
   store.asyncReducers = {};
-  store.inject = _.partial(inject, store, _, persistConfig);
+  store.inject = _reducers => inject(store, _reducers, persistConfig);
 
   if (persistConfig) {
     const persistoid = createPersistoid(persistConfig);
