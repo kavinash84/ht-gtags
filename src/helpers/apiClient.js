@@ -32,7 +32,7 @@ export default function apiClient(req) {
       if (token) {
         conf.headers.Authorization = `Bearer ${token}`;
       }
-      if (csrfToken) {
+      if (conf.method !== 'get' && csrfToken) {
         conf.headers['X-CSRF-Token'] = csrfToken;
       }
 
