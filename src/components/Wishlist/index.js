@@ -44,7 +44,7 @@ class Wishlist extends React.Component {
     } = this.props;
     const { quickViewSku, openQuickView } = this.state;
     return (
-      <Section display="inline-block" p="0" pt="2.5rem" mb="0">
+      <Section display="flex" p="0" pt="2.5rem" mb="0">
         {list.map(item => (
           <div key={item.product_info.id} className={styles.wishlistWrapper}>
             <Product
