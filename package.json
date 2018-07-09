@@ -32,7 +32,7 @@
     "watch-client": "cross-env UV_THREADPOOL_SIZE=100 NODE_PATH=src NODE_ENV=development PORT=3000 WEBPACK_DLLS=1 node webpack/webpack-dev-server.js",
     "build": "cross-env NODE_ENV=production webpack --colors --display-error-details --config=webpack/prod.config.js",
     "build-dlls": "webpack --colors --display-error-details --config webpack/vendor.config.js",
-    "postinstall": "concurrently \"npm run build\" \"npm run build-dlls\"",
+    "postinstall": "concurrently \"npm run build-dlls\"",
     "precommit": "lint-staged",
     "prettier": "prettier-eslint --write --eslint-config-path .eslintrc './+(src|api)/**/*.js'",
     "lint": "eslint -c .eslintrc api src",
