@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Wishlist from 'components/Wishlist';
 import Div from 'hometown-components/lib/Div';
-import Container from 'hometown-components/lib/Container';
 import Empty from 'hometown-components/lib/Empty';
 import Img from 'hometown-components/lib/Img';
 import Section from 'hometown-components/lib/Section';
@@ -40,9 +39,7 @@ export default class WishlistContainer extends Component {
         <Menu />
         <MyMenu page="wishlist" />
         {data && data.length ? (
-          <Container type="container" pr="0" pl="0">
-            <Wishlist list={data} wishList={wishListedSKUs} wishlistKey={wishlistKey} />
-          </Container>
+          <Wishlist list={data} wishList={wishListedSKUs} wishlistKey={wishlistKey} />
         ) : (
           <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
             <Empty title="No items yet !!" subTitle="Add items to it" btnName="Continue Shopping" url="/" bg="#fafafa">

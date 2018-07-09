@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actionCreators from 'redux/modules/wishlist';
 import Product from 'hometown-components/lib/Product';
+import Container from 'hometown-components/lib/Container';
 import Section from 'hometown-components/lib/Section';
 import ResponsiveModal from 'components/Modal';
 import QuickView from 'components/QuickView/QuickView';
@@ -45,34 +46,40 @@ class Wishlist extends React.Component {
     const { quickViewSku, openQuickView } = this.state;
     return (
       <Section display="flex" p="0" pt="2.5rem" mb="0">
-        {list.map(item => (
-          <div key={item.product_info.id} className={styles.wishlistWrapper}>
-            <Product
-              key={item.product_info.id}
-              name={item.product_info.data.name}
-              price={item.product_info.netprice}
-              cutprice={item.product_info.cutprice}
-              saving={item.product_info.saving}
-              image={getProductImage(item.product_info.images[0].path)}
-              sku={item.product_info.data.sku}
-              onClick={onClick(list, toggleWishList)}
-              onOpenQuickViewModal={() => {
-                this.onOpenQuickViewModal(item.product_info.data.sku);
-              }}
-              isWishList={isInWishList(wishList, item.product_info.data.sku)}
-              wishlistKey={wishlistKey}
-              wishlistLoading={wishlistLoading}
-              rating={item.product_info.data.reviews.rating.toFixed(1)}
-              reviewsCount={item.product_info.data.reviews.count}
-              savingAmount={item.product_info.data.max_price - item.product_info.data.max_special_price}
-            />
-          </div>
-        ))}
-        {list && (
-          <ResponsiveModal onCloseModal={this.onCloseQuickViewModal} open={openQuickView}>
-            <QuickView onCloseModal={this.onCloseQuickViewModal} sku={quickViewSku} products={sanitizeWishList(list)} />
-          </ResponsiveModal>
-        )}
+        <Container type="container" pr="0" pl="0">
+          {list.map(item => (
+            <div key={item.product_info.id} className={styles.wishlistWrapper}>
+              <Product
+                key={item.product_info.id}
+                name={item.product_info.data.name}
+                price={item.product_info.netprice}
+                cutprice={item.product_info.cutprice}
+                saving={item.product_info.saving}
+                image={getProductImage(item.product_info.images[0].path)}
+                sku={item.product_info.data.sku}
+                onClick={onClick(list, toggleWishList)}
+                onOpenQuickViewModal={() => {
+                  this.onOpenQuickViewModal(item.product_info.data.sku);
+                }}
+                isWishList={isInWishList(wishList, item.product_info.data.sku)}
+                wishlistKey={wishlistKey}
+                wishlistLoading={wishlistLoading}
+                rating={item.product_info.data.reviews.rating.toFixed(1)}
+                reviewsCount={item.product_info.data.reviews.count}
+                savingAmount={item.product_info.data.max_price - item.product_info.data.max_special_price}
+              />
+            </div>
+          ))}
+          {list && (
+            <ResponsiveModal onCloseModal={this.onCloseQuickViewModal} open={openQuickView}>
+              <QuickView
+                onCloseModal={this.onCloseQuickViewModal}
+                sku={quickViewSku}
+                products={sanitizeWishList(list)}
+              />
+            </ResponsiveModal>
+          )}
+        </Container>
       </Section>
     );
   }
