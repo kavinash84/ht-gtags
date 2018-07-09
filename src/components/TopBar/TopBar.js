@@ -8,6 +8,7 @@ import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Button from 'hometown-components/lib/Buttons';
 import Span from 'hometown-components/lib/Span';
+import Heading from 'hometown-components/lib/Heading';
 import { Label } from 'hometown-components/lib/Label';
 import Fav from 'hometown-components/lib/Icons/Fav';
 import Search from 'components/Search';
@@ -23,6 +24,7 @@ const CartIcon = require('../../../static/cart-icon.svg');
 const MapIcon = require('../../../static/map-icon.svg');
 const PhoneIcon = require('../../../static/phone-icon.svg');
 const UserIcon = require('../../../static/user-icon.svg');
+const PincodeModalIcon = require('../../../static/map-placeholder.svg');
 
 const onClick = history => e => {
   e.preventDefault();
@@ -108,12 +110,25 @@ export default class MenuSidebar extends Component {
               onCloseModal={this.onClosePincodeModal}
               open={this.state.openPincode}
             >
-              <Pincode onCloseModal={this.onClosePincodeModal} />
+              <Div>
+                <Img width="100px" m="auto" mb="1.5rem" src={PincodeModalIcon} alt="Pincode" />
+                <Heading
+                  ellipsis={false}
+                  color="rgba(0.0.0.0.8)"
+                  ta="center"
+                  fontSize="1.375rem"
+                  mb="1rem"
+                  fontWeight="700"
+                >
+                  Please enter your Pincode to serve you better
+                </Heading>
+                <Pincode onCloseModal={this.onClosePincodeModal} />
+              </Div>
             </ResponsiveModal>
-            <Link className={styles.cart} to={HOME_URL}>
+            <a className={styles.cart} href="tel:18002100004">
               <Img src={PhoneIcon} alt="Hometown" height="24px" mr="0.625rem" float="left" />
               <Span fontSize="0.875em">1800-210-0004</Span>
-            </Link>
+            </a>
             <Button
               p="0"
               className={styles.heartBtn}

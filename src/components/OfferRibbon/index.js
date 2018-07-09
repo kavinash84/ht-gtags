@@ -12,11 +12,17 @@ const OfferRibbon = ({
   title, url, onClick, showRibbon
 }) => (
   <Section bg="textDark" className={showRibbon ? '' : styles.hide}>
-    <Link to={url}>
+    {url === '' ? (
       <Text mt="0" mb="0" ta="center" color="#FFF">
         {title}
       </Text>
-    </Link>
+    ) : (
+      <Link to={url}>
+        <Text mt="0" mb="0" ta="center" color="#FFF">
+          {title}
+        </Text>
+      </Link>
+    )}
     <button className={styles.closeBtn} onClick={onClick}>
       <img src={CloseIcon} alt="Close" />
     </button>

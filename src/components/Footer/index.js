@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Container from 'hometown-components/lib/Container';
 import Row from 'hometown-components/lib/Row';
 import Div from 'hometown-components/lib/Div';
@@ -18,7 +20,15 @@ const ourAppIcon = require('../../../static/google-play-store.svg');
 const paymentMethodIcon = require('../../../static/paymentMethodIcon.jpg');
 const styles = require('./Footer.scss');
 
-const Footer = () => (
+const mapStateToProps = ({
+  homepage: {
+    footer: { data }
+  }
+}) => ({
+  categories: data.items && data.items.text.top_categories.values
+});
+
+const Footer = ({ categories }) => (
   <div mb="0" p="0" pt="15px" className={styles.footer}>
     <Section bg="footerTop" mb="0" p="2rem 0">
       <Container pr="0" pl="0">
@@ -29,13 +39,15 @@ const Footer = () => (
             </Heading>
             <ul>
               <li>
-                <Link to="/">Who We Are</Link>
+                <Link to="/who-we-are">Who We Are</Link>
               </li>
               <li>
-                <Link to="/">Careers</Link>
+                <a href="http://praxisretail.in/careers.html" rel="noreferrer noopener" target="_blank">
+                  Careers
+                </a>
               </li>
               <li>
-                <Link to="/">Contact Us</Link>
+                <Link to="/contact-us">Contact Us</Link>
               </li>
             </ul>
           </Div>
@@ -45,22 +57,22 @@ const Footer = () => (
             </Heading>
             <ul>
               <li>
-                <Link to="/">Track Order</Link>
+                <Link to="/track-order">Track Order</Link>
               </li>
               <li>
-                <Link to="/">Returns</Link>
+                <Link to="/return-policy">Returns</Link>
               </li>
               <li>
-                <Link to="/">Cancellation</Link>
+                <Link to="/cancellation">Cancellation</Link>
               </li>
               <li>
-                <Link to="/">FAQ</Link>
+                <Link to="/faq">FAQ</Link>
               </li>
               <li>
-                <Link to="/">Privacy Policy</Link>
+                <Link to="/privacy-policy">Privacy Policy</Link>
               </li>
               <li>
-                <Link to="/">Terms and Conditions</Link>
+                <Link to="/terms-and-conditions">Terms and Conditions</Link>
               </li>
             </ul>
           </Div>
@@ -69,33 +81,11 @@ const Footer = () => (
               TOP CATEGORIES
             </Heading>
             <ul>
-              <li>
-                <Link to="/">Furniture</Link>
-              </li>
-              <li>
-                <Link to="/">Home Decor</Link>
-              </li>
-              <li>
-                <Link to="/">Home Furnishing</Link>
-              </li>
-              <li>
-                <Link to="/">Kitchenware</Link>
-              </li>
-              <li>
-                <Link to="/">Tableware</Link>
-              </li>
-              <li>
-                <Link to="/">Design & Build</Link>
-              </li>
-              <li>
-                <Link to="/">Modular Kitchen</Link>
-              </li>
-              <li>
-                <Link to="/">Modular Wardrobes</Link>
-              </li>
-              <li>
-                <Link to="/">All Categories</Link>
-              </li>
+              {categories.map((category, index) => (
+                <li key={String(index)}>
+                  <Link to={category.url_key}>{category.title}</Link>
+                </li>
+              ))}
             </ul>
           </Div>
           <Div col={3}>
@@ -163,4 +153,15 @@ const Footer = () => (
   </div>
 );
 
-export default Footer;
+Footer.defaultProps = {
+  categories: []
+};
+
+Footer.propTypes = {
+  categories: PropTypes.array
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(Footer);

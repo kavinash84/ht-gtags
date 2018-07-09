@@ -1,5 +1,4 @@
-import React from 'react';
-import Loadable from 'react-loadable';
+import HomeTownLoader from 'containers/Loader';
 import { provideHooks } from 'redial';
 import { loadUserProfile, isLoaded as isUserProfileLoaded } from 'redux/modules/profile';
 
@@ -11,9 +10,8 @@ const hooks = {
   }
 };
 
-const ProfileLoadable = Loadable({
-  loader: () => import('./Profile' /* webpackChunkName: 'Profile' */),
-  loading: () => <div>Loading</div>
+const Profile = HomeTownLoader({
+  loader: () => import('./Profile' /* webpackChunkName: 'Profile' */)
 });
 
-export default provideHooks(hooks)(ProfileLoadable);
+export default provideHooks(hooks)(Profile);

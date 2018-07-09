@@ -1,5 +1,6 @@
 import { routerReducer } from 'react-router-redux';
 import multireducer from 'multireducer';
+import app from './modules/app';
 import info from './modules/info';
 import cart from './modules/cart';
 import products from './modules/products';
@@ -15,10 +16,15 @@ import updatepassword from './modules/updatepassword';
 import profile from './modules/profile';
 import forgotpassword from './modules/forgotpassword';
 import category from './modules/category';
+import productdetails from './modules/productdetails';
+import reviews from './modules/reviews';
+import trackorder from './modules/trackorder';
+import orders from './modules/orders';
 
 export default function createReducers(asyncReducers) {
   return {
     router: routerReducer,
+    app,
     info,
     cart,
     products,
@@ -31,7 +37,9 @@ export default function createReducers(asyncReducers) {
       banners: homepage,
       categories: homepage,
       hashtags: homepage,
-      products: homepage
+      products: homepage,
+      offerstrip: homepage,
+      footer: homepage
     }),
     category,
     stores,
@@ -40,6 +48,10 @@ export default function createReducers(asyncReducers) {
     updatepassword,
     profile,
     forgotpassword,
+    productdetails,
+    reviews,
+    trackorder,
+    orders,
     ...asyncReducers
   };
 }

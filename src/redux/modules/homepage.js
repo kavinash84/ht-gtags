@@ -1,4 +1,11 @@
-import { BANNERS, HOMEPAGE_CATEGORIES, HOMEPAGE_TOP_SELLING, CATEGORY_MENU, HASHTAGS } from 'helpers/apiUrls';
+import {
+  BANNERS,
+  HOMEPAGE_CATEGORIES,
+  HOMEPAGE_TOP_SELLING,
+  CATEGORY_MENU,
+  HASHTAGS,
+  STATIC_BLOCK
+} from 'helpers/apiUrls';
 
 const LOAD = 'hompageCategories/LOAD';
 const LOAD_SUCCESS = 'hompageCategories/LOAD_SUCCESS';
@@ -60,4 +67,14 @@ export const loadHashTags = () => ({
 export const loadTopSelling = () => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
   promise: ({ client }) => client.get(HOMEPAGE_TOP_SELLING)
+});
+
+export const loadOfferStrip = () => ({
+  types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
+  promise: ({ client }) => client.get(`${STATIC_BLOCK}/home_page_offerstrip_react`)
+});
+
+export const loadFooter = () => ({
+  types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
+  promise: ({ client }) => client.get(`${STATIC_BLOCK}/footer_react`)
 });

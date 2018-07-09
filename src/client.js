@@ -22,11 +22,15 @@ import { ReduxAsyncConnect, Provider } from 'components';
 
 const persistConfig = {
   key: 'root',
-  storage: new CookieStorage(Cookies),
+  storage: new CookieStorage(Cookies, {
+    expiration: {
+      default: 30 * 86400
+    }
+  }),
   stateReconciler(inboundState, originalState) {
     return originalState;
   },
-  whitelist: ['userLogin', 'pincode']
+  whitelist: ['app', 'userLogin', 'pincode']
 };
 
 const dest = document.getElementById('content');

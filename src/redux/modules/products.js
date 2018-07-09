@@ -22,9 +22,10 @@ const CLEAR_PREVIOUS_SORT = 'products/CLEAR_PREVIOUS_SORT';
 
 const initialState = {
   loaded: false,
-  data: [],
+  data: {},
   list: [],
   query: '',
+  shimmer: false,
   sort: 'sort=popularity&dir=desc'
 };
 
@@ -55,13 +56,15 @@ export default function reducer(state = initialState, action = {}) {
     case LOAD_CLEAR_FILTERS:
       return {
         ...state,
-        loading: true
+        loading: true,
+        shimmer: true
       };
     case LOAD_CLEAR_FILTERS_SUCCESS:
       return {
         ...state,
         loading: false,
         loaded: true,
+        shimmer: false,
         data: action.result,
         list: action.result.metadata.results
       };
@@ -70,18 +73,21 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: true,
+        shimmer: false,
         error: action.error
       };
     case LOAD_SORTBY:
       return {
         ...state,
-        loading: true
+        loading: true,
+        shimmer: true
       };
     case LOAD_SORTBY_SUCCESS:
       return {
         ...state,
         loading: false,
         loaded: true,
+        shimmer: false,
         data: action.result,
         sort: action.result.sort,
         list: action.result.metadata.results
@@ -91,12 +97,14 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: false,
+        shimmer: false,
         error: action.error
       };
     case LOAD_FILTER:
       return {
         ...state,
         loading: true,
+        shimmer: true,
         filterLoading: true,
         filterLoaded: false
       };
@@ -105,6 +113,7 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: true,
+        shimmer: false,
         filterLoading: false,
         filterLoaded: true,
         data: action.result,
@@ -114,6 +123,7 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         loading: false,
+        shimmer: false,
         filterLoading: false,
         error: action.error
       };
@@ -146,18 +156,16 @@ export function isLoaded(globalState, query) {
   }
   return false;
 }
-export const clearAllFilters = (category, pincode) => ({
+export const clearAllFilters = (category, pincode, city = 'delhi') => ({
   types: [LOAD_CLEAR_FILTERS, LOAD_CLEAR_FILTERS_SUCCESS, LOAD_CLEAR_FILTERS_FAIL],
-  promise: ({ client }) =>
-    client.get(`tesla/products/${category}/?&pincode=${pincode.length ? pincode : defaultPincode}&maxitems=30`)
+  promise: ({ client }) => client.get(`tesla/products/${category}/?pincode=${pincode}&city=${city}`)
 });
 
-export const loadSortBy = (category, sort, pincode) => ({
+export const loadSortBy = (category, sort, pincode, city = 'delhi') => ({
   types: [LOAD_SORTBY, LOAD_SORTBY_SUCCESS, LOAD_SORTBY_FAIL],
   promise: async ({ client }) => {
     try {
-      const getPincode = pincode.length ? pincode : defaultPincode;
-      const response = await client.get(`tesla/products/${category}/?${sort}&pincode=${getPincode}&maxitems=30`);
+      const response = await client.get(`tesla/products/${category}/?${sort}&pincode=${pincode}&city=${city}`);
       response.sort = sort;
       return response;
     } catch (error) {
@@ -167,18 +175,15 @@ export const loadSortBy = (category, sort, pincode) => ({
 });
 /* eslint-disable max-len */
 
-export const applyFilter = (category, key, pincode) => ({
+export const applyFilter = (key, pincode, city = 'delhi') => ({
   types: [LOAD_FILTER, LOAD_FILTER_SUCCESS, LOAD_FILTER_FAIL],
-  promise: ({ client }) =>
-    client.get(`tesla/products/${category}/${key}&pincode=${pincode.length ? pincode : defaultPincode}&maxitems=30`)
+  promise: ({ client }) => client.get(`tesla/products/${key}&pincode=${pincode}&city=${city}`)
 });
 
-export const load = (category, page, sort, pincode) => ({
+export const load = (category, page, sort, pincode, city = 'delhi') => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
   promise: ({ client }) =>
-    client.get(`tesla/products/${category}/?${sort}&page=${page}&pincode=${
-      pincode.length ? pincode : defaultPincode
-    }&maxitems=30`)
+    client.get(`tesla/products/${category}/?${sort}&page=${page}&maxitems=30&pincode=${pincode}&city=${city}`)
 });
 
 export const loadSearchQuery = (searchText, page, pincode) => ({
@@ -187,6 +192,12 @@ export const loadSearchQuery = (searchText, page, pincode) => ({
     client.get(`tesla/search/find/?page=${page}&q=${searchText}&pincode=${
       pincode.length ? pincode : defaultPincode
     }&sort=popularity&dir=desc&maxitems=30`)
+});
+
+export const loadUrlQuery = (category, query, pincode, city = 'delhi') => ({
+  types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
+  promise: ({ client }) =>
+    client.get(`tesla/products/${category}/?${query}&maxitems=30&pincode=${pincode}&city=${city}`)
 });
 
 export const setCategoryQuery = payLoad => ({

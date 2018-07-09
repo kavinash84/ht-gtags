@@ -43,25 +43,24 @@
     }
   }
   .thumb {
-    // position: absolute !important;
-    // bottom: 1.25rem !important;
-    // left: 2rem !important;
-    margin-top: 1.25rem !important;
-    button {
+    margin-top: 1.5rem !important;
+    padding: 0 10px;
+    .thumbBtn {
       box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
       background: transparent;
       border: none;
-      margin-right: 10px;
+      margin: 10px 3px;
       box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
       border: solid 4px transparent;
       transition: all 0.5s ease;
+      padding: 0;
       &.active, &:hover,&:focus {
         border: solid 4px #ae8873;
       }
     }
     .sliderImage{
-      height: 55px;
-      width: 55px;
+      height: 65px;
+      width: 65px;
     }
   }
 }

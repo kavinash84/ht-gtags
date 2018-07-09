@@ -156,10 +156,10 @@
 		line-height: 1;
 		svg{
 			cursor: pointer;
-	    overflow: visible;
-	    width: 30px !important;
-	    background: #ececec;
-	    border-radius: 100%;
+			overflow: visible;
+			width: 30px !important;
+			background: #ececec;
+			border-radius: 100%;
 			#heart{
 				transform-origin:center;
 				animation:animateHeartOut .3s linear forwards;
@@ -319,7 +319,7 @@
 	/* /Wishlist Btn */
 
 	/* Orders Table */
-	.ordersTable {
+	.ordersTable, .table {
 		width: 100%;
 		text-align: left;
 		.thumb {
@@ -375,8 +375,28 @@
 			left: -40px !important;
 		}
 	}
+	.prodDetailsCarousel {
+		.slick-slide {
+			max-width: 293px !important;
+		}
+	}
 	.customModal {
 		padding: 3rem;
+	}
+	.thumbCarousel {
+		.slick-next {
+			right: -30px !important;
+		}
+		.slick-prev {
+			left: -38px !important;
+		}
+		.slick-slide {
+			max-width: 86px;
+		}
+		.slick-prev, .slick-next {
+    	transform: scale(0.8);
+    	top: 27%;
+		}
 	}
 
 	/* Checkbox */
@@ -593,13 +613,12 @@
 	0% {
 		opacity: 0;
 	}
-
 	100% {
 		opacity: 1;
 	}
 }
 @keyframes :global(spin) {
-  0%  {-webkit-transform: rotate(0deg);}
-  100% {-webkit-transform: rotate(360deg);}
+	0%  {-webkit-transform: rotate(0deg);}
+	100% {-webkit-transform: rotate(360deg);}
 }
 /* ---- End of Common Classes ---- */

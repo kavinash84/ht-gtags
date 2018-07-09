@@ -7,10 +7,11 @@ const ADD_TO_WISHLIST_FAILURE = 'wishList/ADD_TO_WISHLIST_FAILURE';
 const REMOVE_FROM_WISHLIST = 'wishList/REMOVE_FROM_WISHLIST';
 const REMOVE_FROM_WISHLIST_SUCCESS = 'wishList/REMOVE_FROM_WISHLIST_SUCCESS';
 const REMOVE_FROM_WISHLIST_FAILURE = 'wishList/REMOVE_FROM_WISHLIST_FAILURE';
-// const TOGGLE_WISHLIST = 'wishList/TOGGLE_WISHLIST';
+const CLEAR_WISHLIST = 'wishList/CLEAR_WISHLIST';
 
 const initialState = {
-  data: []
+  data: [],
+  loaded: false
 };
 
 const rehyDratedList = (items, id) => items.filter(item => item.wishlist_info.id_customer_wishlist !== Number(id));
@@ -40,7 +41,8 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         loaded: false,
-        loading: true
+        loading: true,
+        key: action.payLoad
       };
     case ADD_TO_WISHLIST_SUCCESS:
       return {
@@ -60,7 +62,8 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         loading: true,
-        loaded: false
+        loaded: false,
+        key: action.payLoad
       };
     case REMOVE_FROM_WISHLIST_SUCCESS:
       return {
@@ -76,6 +79,10 @@ export default function reducer(state = initialState, action = {}) {
         loaded: false,
         error: action.error
       };
+    case CLEAR_WISHLIST:
+      return {
+        ...initialState
+      };
     default:
       return state;
   }
@@ -90,6 +97,8 @@ export const toggleWishList = (list, id) => {
   if (checkList) {
     const wishListID = checkList.wishlist_info.id_customer_wishlist;
     return {
+      type: REMOVE_FROM_WISHLIST,
+      payLoad: id,
       types: [REMOVE_FROM_WISHLIST, REMOVE_FROM_WISHLIST_SUCCESS, REMOVE_FROM_WISHLIST_FAILURE],
       promise: async ({ client }) => {
         try {
@@ -102,6 +111,8 @@ export const toggleWishList = (list, id) => {
     };
   }
   return {
+    type: ADD_TO_WISHLIST,
+    payLoad: id,
     types: [ADD_TO_WISHLIST, ADD_TO_WISHLIST_SUCCESS, ADD_TO_WISHLIST_FAILURE],
     promise: async ({ client }) => {
       try {
@@ -122,4 +133,8 @@ export const toggleWishList = (list, id) => {
 export const loadWishlist = () => ({
   types: [LOAD_WISHLIST, LOAD_WISHLIST_SUCCESS, LOAD_WISHLIST_FAIL],
   promise: ({ client }) => client.get('tesla/wishlist')
+});
+
+export const clearWishList = () => ({
+  type: CLEAR_WISHLIST
 });

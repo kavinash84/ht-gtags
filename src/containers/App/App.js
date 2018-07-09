@@ -8,17 +8,32 @@ import { provideHooks } from 'redial';
 import { ThemeProvider } from 'styled-components';
 import Helmet from 'react-helmet';
 import { wrapDispatch } from 'multireducer';
-import { loadCategories, loadMainMenu, loadBanners, isLoaded as isSectionLoaded } from 'redux/modules/homepage';
+import {
+  loadCategories,
+  loadMainMenu,
+  loadBanners,
+  loadFooter,
+  isLoaded as isSectionLoaded
+} from 'redux/modules/homepage';
+import { generateSession, isLoaded as isSessionSet } from 'redux/modules/app';
 import { loginUserAfterSignUp } from 'redux/modules/login';
 import { loadWishlist, isLoaded as isWishListLoaded } from 'redux/modules/wishlist';
 import { loadUserProfile, isLoaded as isProfileLoaded } from 'redux/modules/profile';
-import { loadCart, isLoaded as isCartLoaded } from 'redux/modules/cart';
+import { loadCart, isLoaded as isCartLoaded, synCart } from 'redux/modules/cart';
 import { PINCODE } from 'helpers/Constants';
 import config from 'config';
 import Theme from 'hometown-components/lib/Theme';
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState } }) => {
+    const {
+      pincode: { selectedPincode },
+      app: { sessionId, csrfToken }
+    } = getState();
+    const defaultPincode = selectedPincode === '' ? PINCODE : selectedPincode;
+    if (!isSessionSet(getState()) || !sessionId || !csrfToken) {
+      await dispatch(generateSession(defaultPincode)).catch(error => console.log(error));
+    }
     if (!isSectionLoaded(getState(), 'banners')) {
       await wrapDispatch(dispatch, 'banners')(loadBanners()).catch(() => null);
     }
@@ -28,18 +43,22 @@ import Theme from 'hometown-components/lib/Theme';
     if (!isSectionLoaded(getState(), 'menu')) {
       await wrapDispatch(dispatch, 'menu')(loadMainMenu()).catch(error => console.log(error));
     }
+    if (sessionId && !isCartLoaded(getState())) {
+      await dispatch(loadCart(sessionId, defaultPincode)).catch(error => console.log(error));
+    }
   },
   defer: ({ store: { dispatch, getState } }) => {
-    const { userLogin: { sessionId, isLoggedIn }, pincode: { selectedPincode } } = getState();
+    const {
+      userLogin: { isLoggedIn }
+    } = getState();
     if (isLoggedIn && !isWishListLoaded(getState())) {
       dispatch(loadWishlist()).catch(error => console.log(error));
     }
     if (isLoggedIn && !isProfileLoaded(getState())) {
       dispatch(loadUserProfile()).catch(error => console.log(error));
     }
-    if (sessionId && !isCartLoaded(getState())) {
-      const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
-      dispatch(loadCart(sessionId, pincode)).catch(error => console.log(error));
+    if (!isSectionLoaded(getState(), 'footer')) {
+      wrapDispatch(dispatch, 'footer')(loadFooter()).catch(error => console.log(error));
     }
   }
 })
@@ -48,7 +67,8 @@ import Theme from 'hometown-components/lib/Theme';
   state => ({
     login: state.userLogin,
     signUp: state.userSignUp,
-    pincode: state.pincode
+    pincode: state.pincode,
+    app: state.app
   }),
   {
     pushState: push,
@@ -61,15 +81,21 @@ export default class App extends Component {
     location: PropTypes.objectOf(PropTypes.any).isRequired,
     pushState: PropTypes.func.isRequired,
     loginUser: PropTypes.func.isRequired,
+    pincode: PropTypes.shape({
+      selectedPincode: PropTypes.string
+    }),
     signUp: PropTypes.shape({
-      response: PropTypes.obj,
+      response: PropTypes.object,
       loaded: PropTypes.bool
     }),
     login: PropTypes.shape({
       accessToken: PropTypes.string,
       refreshToken: PropTypes.string,
       isLoggedIn: PropTypes.bool
-    })
+    }),
+    app: PropTypes.shape({
+      sessionId: PropTypes.string
+    }).isRequired
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -81,6 +107,9 @@ export default class App extends Component {
     },
     signUp: {
       loaded: false
+    },
+    pincode: {
+      selectedPincode: ''
     }
   };
 
@@ -95,19 +124,37 @@ export default class App extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { dispatch } = this.context.store;
-    const { login: { isLoggedIn } } = this.props;
+    const {
+      login: { isLoggedIn },
+      pincode: { selectedPincode },
+      app: { sessionId }
+    } = this.props;
+    const pincode = selectedPincode === '' ? PINCODE : '';
     if (nextProps.signUp && nextProps.signUp.loaded) {
       const { signUp } = nextProps;
       if (!isLoggedIn && signUp.response.signup_complete) {
-        const { signUp: { response }, loginUser } = nextProps;
-        if (response.signup_complete) dispatch(loginUser(response.token));
+        const {
+          signUp: { response },
+          loginUser
+        } = nextProps;
+        if (response.signup_complete) {
+          dispatch(loginUser(response.token));
+          dispatch(synCart(sessionId, pincode));
+        }
       }
     }
     if (!isLoggedIn && nextProps.login.isLoggedIn) {
+      dispatch(synCart(sessionId, pincode));
       const query = new URLSearchParams(this.props.location.search);
       this.props.pushState(query.get('redirect') || '/');
     } else if (this.props.login && !nextProps.login) {
       this.props.pushState('/');
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.location !== prevProps.location) {
+      window.scrollTo(0, 0);
     }
   }
 

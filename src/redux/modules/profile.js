@@ -6,6 +6,7 @@ const LOAD_FAIL = 'profile/LOAD_FAIL';
 const UPDATE_PROFILE = 'profile/UPDATE_PROFILE';
 const UPDATE_PROFILE_SUCCESS = 'profile/UPDATE_PROFILE_SUCCESS';
 const UPDATE_PROFILE_FAIL = 'profile/UPDATE_PROFILE_FAIL';
+const CLEAR_PROFILE = 'profile/CLEAR_PROFILE';
 
 const initialState = {
   loading: false,
@@ -54,6 +55,10 @@ export default function reducer(state = initialState, action = {}) {
         profileUpdated: false,
         error: action.error
       };
+    case CLEAR_PROFILE:
+      return {
+        ...initialState
+      };
     default:
       return state;
   }
@@ -84,4 +89,8 @@ export const updateUserProfile = data => ({
 export const loadUserProfile = () => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
   promise: ({ client }) => client.get(USERPROFILE_API)
+});
+
+export const clearUserProfile = () => ({
+  type: CLEAR_PROFILE
 });

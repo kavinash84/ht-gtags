@@ -11,9 +11,9 @@ import ResponsiveModal from 'components/Modal';
 import QuickView from 'components/QuickView/QuickView';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as actionCreators from 'redux/modules/wishlist';
+import { toggleWishList } from 'redux/modules/wishlist';
 import { loadSortBy, applyFilter, clearAllFilters } from 'redux/modules/products';
-import { getSelectedFilters } from 'utils/helper';
+import { formFilterLink } from 'utils/helper';
 import Dropdown from '../Filters/Dropdown';
 import AddToCart from '../AddToCart';
 import AppliedFilters from '../Filters/AppliedFilters';
@@ -26,8 +26,6 @@ const getProductImage = url => {
   return url.replace(pp, '1-product_500.jpg');
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
-
 const onClick = (list, dispatcher, isUserLoggedIn, history) => sku => e => {
   e.preventDefault();
   if (isUserLoggedIn) return dispatcher(list, sku);
@@ -37,6 +35,8 @@ const onClick = (list, dispatcher, isUserLoggedIn, history) => sku => e => {
 const isInWishList = (list, id) => list.includes(id);
 
 const styles = require('./Listing.scss');
+
+const mapDispatchToProps = dispatch => bindActionCreators({ wishlistToggle: toggleWishList }, dispatch);
 
 class Listing extends React.Component {
   static contextTypes = {
@@ -68,12 +68,12 @@ class Listing extends React.Component {
     dispatch(loadSortBy(category, key, pincode));
   };
 
-  setFilter = key => e => {
+  setFilter = (key, selected) => e => {
     e.preventDefault();
-    const { category, pincode } = this.props;
+    const { pincode } = this.props;
     const { dispatch } = this.context.store;
-    const query = key.split('/')[2];
-    dispatch(applyFilter(category, query, pincode));
+    const link = formFilterLink(key, selected);
+    dispatch(applyFilter(link, pincode));
   };
 
   clearFilters = () => {
@@ -84,19 +84,21 @@ class Listing extends React.Component {
 
   render() {
     const {
-      toggleWishList,
+      wishlistToggle,
       products,
       categoryName,
       productCount,
       wishList,
       wishListData,
       wishlistLoading,
+      wishlistKey,
       filters,
       history,
-      isLoggedIn
+      isLoggedIn,
+      metaResults,
+      appliedFilters
     } = this.props;
     const { sortby } = this.state;
-    const selectedFilters = getSelectedFilters(filters);
     return (
       <Div type="block">
         <Section mb="0.3125rem" p="1rem 0.5rem" bg="primary">
@@ -147,7 +149,7 @@ class Listing extends React.Component {
                 <Label fontWeight="600" display="inline-block">
                   Applied Filters
                 </Label>
-                <AppliedFilters data={selectedFilters} onClickClearFilter={this.clearFilters} />
+                <AppliedFilters data={appliedFilters} onClickClearFilter={this.clearFilters} />
               </Div>
             </Row>
           </Container>
@@ -155,7 +157,7 @@ class Listing extends React.Component {
         <Section pt="1rem" mb="0">
           <Container pr="0" pl="0">
             <Row display="block" mr="-15px" ml="-15px">
-              {products.map(item => (
+              {products.map((item, index) => (
                 <div className={styles.productWrapper} key={item.id}>
                   <Product
                     key={item.id}
@@ -166,19 +168,21 @@ class Listing extends React.Component {
                     image={getProductImage(item.images[0].path)}
                     sku={item.data.sku}
                     simple_sku={item.simples}
-                    onClick={onClick(wishListData, toggleWishList, isLoggedIn, history)}
+                    onClick={onClick(wishListData, wishlistToggle, isLoggedIn, history)}
                     onOpenQuickViewModal={() => {
                       this.onOpenQuickViewModal(item.data.sku, Object.keys(item.data.simples)[0]);
                     }}
                     isWishList={isInWishList(wishList, item.data.sku)}
+                    wishlistKey={wishlistKey}
                     wishlistLoading={wishlistLoading}
                     rating={item.data.reviews.rating.toFixed(1)}
                     reviewsCount={item.data.reviews.count}
                     savingAmount={item.data.max_price - item.data.max_special_price}
                     deliveredBy={item.data.delivery_details[0].value}
+                    colors={metaResults[index].data.color_group_count.split(' ')[0]}
                   />
                   <Div mt="0" p="0.25rem 0.125rem 0.5rem">
-                    <AddToCart simpleSku={Object.keys(item.data.simples)[0]} sku={item.data.sku} />
+                    <AddToCart simpleSku={Object.keys(item.data.simples)[0]} sku={item.data.sku} itemId={item.id} />
                   </Div>
                 </div>
               ))}
@@ -209,13 +213,16 @@ Listing.defaultProps = {
   productCount: '',
   category: '',
   filters: [],
+  appliedFilters: [],
   pincode: '',
+  metaResults: [],
+  wishlistKey: '',
   wishlistLoading: false,
   isLoggedIn: false
 };
 
 Listing.propTypes = {
-  toggleWishList: PropTypes.func.isRequired,
+  wishlistToggle: PropTypes.func.isRequired,
   products: PropTypes.array.isRequired,
   wishList: PropTypes.array,
   wishListData: PropTypes.array,
@@ -223,10 +230,13 @@ Listing.propTypes = {
   productCount: PropTypes.string,
   category: PropTypes.string,
   filters: PropTypes.array,
+  appliedFilters: PropTypes.array,
   history: PropTypes.object.isRequired,
   wishlistLoading: PropTypes.bool,
   pincode: PropTypes.string,
-  isLoggedIn: PropTypes.bool
+  isLoggedIn: PropTypes.bool,
+  metaResults: PropTypes.array,
+  wishlistKey: PropTypes.string
 };
 
 export default connect(

@@ -25,7 +25,7 @@ const TitleBar = ({ title }) => (
           </a>
         </Div>
       </Row>
-      <Row display="block" mr="0" ml="0" mb="1rem">
+      <Row display="block" mr="0" ml="0" mb="0">
         <Heading fontSize="1.5rem" color="white" mt="0" mb="0" fontWeight="300">
           {title}
         </Heading>

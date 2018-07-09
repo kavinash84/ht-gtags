@@ -1,5 +1,4 @@
 import btoa from 'btoa';
-import filterName from '../data/Filter.js';
 
 export const encodeCategory = obj => {
   const values = obj && Object.values(obj).filter(x => x !== undefined);
@@ -18,6 +17,17 @@ export const filterStoresByCity = (stores, city) => {
   }
 };
 
-export const getFilters = filters => filters.filter(item => filterName.includes(item.name));
+export const hyphenedString = name => name.split(' ').join('-');
 
-export const getSelectedFilters = filters => filters.map(item => item.attributes.filter(x => x.isSelected));
+export const formFilterLink = (key, selected) => {
+  let query;
+  const splitLink = key.split('?');
+  const paramLink = splitLink[0].split('/').filter(x => x !== '');
+  if (selected) {
+    query = paramLink.filter(param => param !== paramLink[1]);
+  } else query = paramLink;
+  const encode = btoa(JSON.stringify({
+    params: query
+  }));
+  return `${encode}/?${splitLink[1]}`;
+};

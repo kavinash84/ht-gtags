@@ -5,7 +5,9 @@ import Img from 'hometown-components/lib/Img';
 
 const styles = require('./HoverMenuBox.scss');
 
-const HoverMenuBox = ({ handleEnter, handleLeave, menuData }) => (
+const HoverMenuBox = ({
+  handleEnter, handleLeave, menuData, exitOnClick
+}) => (
   <div className={styles.menuBoxContainer}>
     <div className={styles.menuBox} onMouseEnter={handleEnter} onMouseLeave={handleLeave}>
       {menuData
@@ -14,16 +16,20 @@ const HoverMenuBox = ({ handleEnter, handleLeave, menuData }) => (
             <ul className={styles.list}>
               <div className={styles.media}>
                 <div className={styles.catImgWrapper}>
-                  <Img src="http://via.placeholder.com/150x100" alt="" />
+                  <Img src={subCategory1.category_image} alt="" />
                 </div>
                 <div className={styles.mediaBody}>
                   <h4>
-                    <Link to={`/${subCategory1.url_key}`}>{subCategory1.name}</Link>
+                    <Link onClick={exitOnClick} to={`/${subCategory1.url_key}`}>
+                      {subCategory1.name}
+                    </Link>
                   </h4>
                   {subCategory1.children
                     ? subCategory1.children.filter(menu => menu.visibility === 'on').map(subCategory2 => (
                       <li key={subCategory2.id}>
-                        <Link to={`/${subCategory2.url_key}`}>{subCategory2.name}</Link>
+                        <Link onClick={exitOnClick} to={`/${subCategory2.url_key}`}>
+                          {subCategory2.name}
+                        </Link>
                       </li>
                     ))
                     : null}
@@ -43,7 +49,8 @@ HoverMenuBox.defaultProps = {
 HoverMenuBox.propTypes = {
   menuData: PropTypes.object,
   handleEnter: PropTypes.func.isRequired,
-  handleLeave: PropTypes.func.isRequired
+  handleLeave: PropTypes.func.isRequired,
+  exitOnClick: PropTypes.func.isRequired
 };
 
 export default HoverMenuBox;

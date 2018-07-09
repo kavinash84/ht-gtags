@@ -1,9 +1,7 @@
-import React from 'react';
-import Loadable from 'react-loadable';
+import HomeTownLoader from 'containers/Loader';
 
-const SignupLoadable = Loadable({
-  loader: () => import('./Signup' /* webpackChunkName: 'Signup' */),
-  loading: () => <div>Loading</div>
+const SignUp = HomeTownLoader({
+  loader: () => import('./Signup' /* webpackChunkName: 'Signup' */)
 });
 
-export default SignupLoadable;
+export default SignUp;

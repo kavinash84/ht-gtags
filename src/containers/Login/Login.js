@@ -58,9 +58,7 @@ export default class LoginFormContainer extends Component {
                     <Row display="block" mr="0" ml="0" pt="0.625rem">
                       <Div col="6">
                         <Link to={FORGOT_PASSWORD_URL}>
-                          <Label fontWeight="light" color="primary">
-                            Forgot Password?
-                          </Label>
+                          <Label color="primary">Forgot Password?</Label>
                         </Link>
                       </Div>
                       <Div col="6" ta="right" />

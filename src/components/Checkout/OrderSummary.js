@@ -22,13 +22,13 @@ const OrderSummary = ({
         <Text color="rgba(0, 0, 0, 0.8);">
           Items
           <Span float="right" color="#000000" fontWeight="500">
-            Rs. {formatAmount(itemsTotal)}
+            Rs. {itemsTotal ? formatAmount(itemsTotal) : null}
           </Span>
         </Text>
         <Text color="rgba(0, 0, 0, 0.8);">
           Savings
           <Span float="right" color="#000000" fontWeight="500">
-            Rs. {formatAmount(savings)}
+            Rs. {savings ? formatAmount(savings) : null}
           </Span>
         </Text>
         <Text color="rgba(0, 0, 0, 0.8);">
@@ -40,7 +40,7 @@ const OrderSummary = ({
         <Text color="rgba(0, 0, 0, 0.8);">
           Total
           <Span float="right" color="#000000" fontWeight="500">
-            Rs. {formatAmount(totalCart)}
+            Rs. {totalCart ? formatAmount(totalCart) : null}
           </Span>
         </Text>
       </Div>

@@ -17,11 +17,11 @@ const onClick = (cartId, sessionId, pincode) => dispatcher => e => {
   dispatcher(cartId, sessionId, pincode);
 };
 
-const mapStateToProps = ({ pincode, userLogin, cart }) => ({
+const mapStateToProps = ({ pincode, cart, app }) => ({
   currentId: cart.key,
   cartUpdating: cart.cartUpdating,
   pincode: pincode.selectedPincode,
-  sessionId: userLogin.sessionId
+  sessionId: app.sessionId
 });
 
 const Cart = ({
@@ -108,7 +108,7 @@ Cart.propTypes = {
   summary: PropTypes.object,
   pincode: PropTypes.string,
   cartUpdating: PropTypes.bool,
-  currentId: PropTypes.string,
+  currentId: PropTypes.number,
   sessionId: PropTypes.string.isRequired,
   discardFromCart: PropTypes.func.isRequired
 };
@@ -118,7 +118,10 @@ Cart.defaultProps = {
   summary: null,
   pincode: '',
   cartUpdating: false,
-  currentId: ''
+  currentId: 0
 };
 
-export default connect(mapStateToProps, { discardFromCart: removeFromCart })(Cart);
+export default connect(
+  mapStateToProps,
+  { discardFromCart: removeFromCart }
+)(Cart);
