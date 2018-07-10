@@ -30,10 +30,15 @@ const sanitizeWishList = list => list.map(item => item.product_info);
 class Wishlist extends React.Component {
   state = {
     openQuickView: false,
-    quickViewSku: ''
+    quickViewSku: '',
+    simpleSku: ''
   };
-  onOpenQuickViewModal = sku => {
-    this.setState({ openQuickView: true, quickViewSku: sku });
+  onOpenQuickViewModal = (sku, simpleSku) => {
+    this.setState({
+      openQuickView: true,
+      quickViewSku: sku,
+      simpleSku
+    });
   };
   onCloseQuickViewModal = () => {
     this.setState({ openQuickView: false });
@@ -43,7 +48,7 @@ class Wishlist extends React.Component {
     const {
       list, toggleWishList, wishList, wishlistLoading, wishlistKey
     } = this.props;
-    const { quickViewSku, openQuickView } = this.state;
+    const { quickViewSku, openQuickView, simpleSku } = this.state;
     return (
       <Section display="flex" p="0" pt="2.5rem" mb="0">
         <Container type="container" pr="0" pl="0">
@@ -59,7 +64,7 @@ class Wishlist extends React.Component {
                 sku={item.product_info.data.sku}
                 onClick={onClick(list, toggleWishList)}
                 onOpenQuickViewModal={() => {
-                  this.onOpenQuickViewModal(item.product_info.data.sku);
+                  this.onOpenQuickViewModal(item.product_info.data.sku, Object.keys(item.product_info.data.simples)[0]);
                 }}
                 isWishList={isInWishList(wishList, item.product_info.data.sku)}
                 wishlistKey={wishlistKey}
@@ -75,6 +80,7 @@ class Wishlist extends React.Component {
               <QuickView
                 onCloseModal={this.onCloseQuickViewModal}
                 sku={quickViewSku}
+                simpleSku={simpleSku}
                 products={sanitizeWishList(list)}
               />
             </ResponsiveModal>
@@ -99,7 +105,4 @@ Wishlist.propTypes = {
   wishlistKey: PropTypes.string
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Wishlist);
+export default connect(null, mapDispatchToProps)(Wishlist);
