@@ -47,9 +47,8 @@ const FAQ = () => (
                       fontSize="0.875rem"
                       mb="1rem"
                       ml="2.125rem"
-                    >
-                      {faqContent.ans}
-                    </Text>
+                      dangerouslySetInnerHTML={{ __html: faqContent.ans }}
+                    />
                   </Heading>
                 </Div>
               ))}
