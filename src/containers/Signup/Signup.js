@@ -48,7 +48,9 @@ export default class SignupFormContainer extends Component {
     };
   }
   onChangeEmail = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = validateEmail(value, 'Enter valid email');
     this.setState({
       email: value,
@@ -57,7 +59,9 @@ export default class SignupFormContainer extends Component {
     });
   };
   onChangePhone = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = validateMobile(value, 'Mobile should be 10 digits');
     this.setState({
       phone: value,
@@ -66,7 +70,9 @@ export default class SignupFormContainer extends Component {
     });
   };
   onChangePassword = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = isBlank(value);
     this.setState({
       password: value,

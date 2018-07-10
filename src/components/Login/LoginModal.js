@@ -87,4 +87,7 @@ LoginModal.propTypes = {
   session: PropTypes.string.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginModal);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginModal);
