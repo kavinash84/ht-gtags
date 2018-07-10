@@ -7,9 +7,11 @@ const ADD_TO_WISHLIST_FAILURE = 'wishList/ADD_TO_WISHLIST_FAILURE';
 const REMOVE_FROM_WISHLIST = 'wishList/REMOVE_FROM_WISHLIST';
 const REMOVE_FROM_WISHLIST_SUCCESS = 'wishList/REMOVE_FROM_WISHLIST_SUCCESS';
 const REMOVE_FROM_WISHLIST_FAILURE = 'wishList/REMOVE_FROM_WISHLIST_FAILURE';
+const CLEAR_WISHLIST = 'wishList/CLEAR_WISHLIST';
 
 const initialState = {
-  data: []
+  data: [],
+  loaded: false
 };
 
 const rehyDratedList = (items, id) => items.filter(item => item.wishlist_info.id_customer_wishlist !== Number(id));
@@ -77,6 +79,10 @@ export default function reducer(state = initialState, action = {}) {
         loaded: false,
         error: action.error
       };
+    case CLEAR_WISHLIST:
+      return {
+        ...initialState
+      };
     default:
       return state;
   }
@@ -127,4 +133,8 @@ export const toggleWishList = (list, id) => {
 export const loadWishlist = () => ({
   types: [LOAD_WISHLIST, LOAD_WISHLIST_SUCCESS, LOAD_WISHLIST_FAIL],
   promise: ({ client }) => client.get('tesla/wishlist')
+});
+
+export const clearWishList = () => ({
+  type: CLEAR_WISHLIST
 });

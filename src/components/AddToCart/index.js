@@ -50,7 +50,7 @@ const AddToCart = ({
           onClick={onClick(itemId, sku, simpleSku, session, pincode)(addToCart)}
         >
           {!addLoading && <AddCart fill="#ae8873" />}
-          {addLoading && <Img className="spin" src={LoaderIcon} display="inline" />}
+          {addLoading && <Img width="24px" className="spin" src={LoaderIcon} display="inline" />}
           <Span ml="0.625rem" fontSize="0.857rem" fontWeight="600" color="#ae8873" va="top">
             {addLoading ? 'Adding..' : 'ADD TO CART'}
           </Span>

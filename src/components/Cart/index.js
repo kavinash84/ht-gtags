@@ -41,7 +41,7 @@ const Cart = ({
                       <tr>
                         <th colSpan="2">Product</th>
                         <th>Delivery</th>
-                        <th>Quantity</th>
+                        <th width="100px">Quantity</th>
                         <th>Cost</th>
                         <th />
                       </tr>
@@ -121,4 +121,7 @@ Cart.defaultProps = {
   currentId: 0
 };
 
-export default connect(mapStateToProps, { discardFromCart: removeFromCart })(Cart);
+export default connect(
+  mapStateToProps,
+  { discardFromCart: removeFromCart }
+)(Cart);

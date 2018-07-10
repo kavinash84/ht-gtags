@@ -55,7 +55,7 @@ const faq = [
       {
         que: 'How do I pay using a Credit or Debit Card?',
         ans:
-          "We accept payments made by credit/debit cards issued in India. Credit cards<br />We accept payments made using Visa & MasterCard credit cards/Amex.<br />To pay using your credit card at checkout, you will need your card number, expiry date, CVV number. After entering these details, you will be redirected to the bank's page for entering the online 3D Secure password.<br />Debit cards<br />We accept payments made using Visa, MasterCard and Maestro debit cards.<br />To pay using your debit card at checkout, you will need your card number, expiry date (optional for Maestro cards CVV number (optional for Maestro cards). You will then be redirected to your bank's secure page for entering your online password (issued by your bank) to complete the payment."
+          "We accept payments made by credit/debit cards issued in India.<br /><br /><b>Credit cards</b><br />We accept payments made using Visa & MasterCard credit cards/Amex.<br />To pay using your credit card at checkout, you will need your card number, expiry date, CVV number. After entering these details, you will be redirected to the bank's page for entering the online 3D Secure password.<br /><br /><b>Debit cards</b><br />We accept payments made using Visa, MasterCard and Maestro debit cards.<br />To pay using your debit card at checkout, you will need your card number, expiry date (optional for Maestro cards CVV number (optional for Maestro cards). You will then be redirected to your bank's secure page for entering your online password (issued by your bank) to complete the payment."
       },
       {
         que: 'Is it safe to use my Credit / Debit card on HomeTown?',
