@@ -15,11 +15,12 @@ import { toggleWishList } from 'redux/modules/wishlist';
 import { loadSortBy, applyFilter, clearAllFilters } from 'redux/modules/products';
 import { formFilterLink } from 'utils/helper';
 import Dropdown from '../Filters/Dropdown';
+import SortByFilters from '../Filters/SortByFilters';
 import AddToCart from '../AddToCart';
 import AppliedFilters from '../Filters/AppliedFilters';
 import { LOGIN_URL } from '../../helpers/Constants';
 
-const sortBy = require('data/sortby');
+const sortByList = require('data/sortby');
 
 const getProductImage = url => {
   const pp = `${url.split('/').slice(-1)}`;
@@ -45,8 +46,7 @@ class Listing extends React.Component {
   state = {
     openQuickView: false,
     quickViewSku: '',
-    simpleSku: '',
-    sortby: 'Popularity'
+    simpleSku: ''
   };
   onOpenQuickViewModal = (sku, simpleSku) => {
     this.setState({
@@ -58,14 +58,11 @@ class Listing extends React.Component {
   onCloseQuickViewModal = () => {
     this.setState({ openQuickView: false });
   };
-  setSortBy = (key, name) => e => {
+  setSortBy = (key, sortBy) => e => {
     e.preventDefault();
     const { category, pincode } = this.props;
     const { dispatch } = this.context.store;
-    this.setState({
-      sortby: name
-    });
-    dispatch(loadSortBy(category, key, pincode));
+    dispatch(loadSortBy(category, key, sortBy, pincode));
   };
 
   setFilter = (key, selected) => e => {
@@ -96,9 +93,9 @@ class Listing extends React.Component {
       history,
       isLoggedIn,
       metaResults,
-      appliedFilters
+      appliedFilters,
+      sortBy
     } = this.props;
-    const { sortby } = this.state;
     return (
       <Div type="block">
         <Section mb="0.3125rem" p="1rem 0.5rem" bg="primary">
@@ -136,7 +133,7 @@ class Listing extends React.Component {
                 </Div>
                 <Div col="3" ta="right">
                   <Label>Sort By</Label>
-                  <Dropdown display="rtl" title={sortby} onclick={this.setSortBy} data={sortBy} />
+                  <SortByFilters display="rtl" title={sortBy} onclick={this.setSortBy} data={sortByList} />
                 </Div>
               </Row>
             </div>
@@ -230,6 +227,7 @@ Listing.propTypes = {
   productCount: PropTypes.string,
   category: PropTypes.string,
   filters: PropTypes.array,
+  sortBy: PropTypes.string.isRequired,
   appliedFilters: PropTypes.array,
   history: PropTypes.object.isRequired,
   wishlistLoading: PropTypes.bool,
