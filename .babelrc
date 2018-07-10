@@ -20,10 +20,6 @@
     "react-loadable/babel",
     ["babel-plugin-styled-components", { "ssr": true, "displayName": true, "preprocess": false }]
   ],
-  "ignore": [
-    "node_modules",
-    "hometown-components"
-  ],
   "env": {
     "development": {
       "plugins": [
