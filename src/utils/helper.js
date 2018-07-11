@@ -35,7 +35,7 @@ export const formFilterLink = (key, selected) => {
 export const calculateDiscount = (price, discPrice) => {
   const formatPrice = parseInt(price, 10);
   const formatDiscPrice = parseInt(discPrice, 10);
-  const discount = (formatPrice - formatDiscPrice) / price;
+  const discount = (formatPrice - formatDiscPrice) / formatPrice;
   return Math.round(discount * 100);
 };
 
