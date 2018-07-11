@@ -17,6 +17,8 @@ import Reviews from 'hometown-components/lib/Reviews';
 import AddReview from 'hometown-components/lib/Reviews/WriteReview';
 import Theme from 'hometown-components/lib/Theme';
 import { addReview } from 'redux/modules/reviews';
+import { formatAmount } from 'utils/formatters';
+import { calculateDiscount, calculateSavings } from 'utils/helper';
 import ProductDetailsCarousel from './Carousel';
 import BreadCrumb from './BreadCrumb';
 // import ProductsCarousel from 'components/ProductCarousel';
@@ -59,7 +61,8 @@ class ProductDetails extends React.Component {
     const { category_details: categoryDetails } = meta;
     const simpleSku = Object.keys(simples)[0];
     const shipping = simples[simpleSku].groupedattributes.product_shipping_cost;
-
+    const { price, special_price: specialPrice } = meta;
+    const checkSpecialPrice = specialPrice || price;
     return (
       <Div type="block">
         <Section p="0" pt="1.25rem" mb="0">
@@ -71,7 +74,13 @@ class ProductDetails extends React.Component {
             </Row>
             <Row display="block" mt="0.625rem" mb="0" mr="0">
               <Div col="9" className={styles.titleWrapper}>
-                <TitlePrice name={meta.name} price={meta.price} discPrice={meta.special_price} />
+                <TitlePrice
+                  name={meta.name}
+                  price={formatAmount(price)}
+                  discPrice={formatAmount(checkSpecialPrice)}
+                  savingsRs={formatAmount(calculateSavings(price, checkSpecialPrice) || '')}
+                  savingsPercentage={calculateDiscount(price, checkSpecialPrice)}
+                />
                 <Row
                   display="block"
                   mt="1.25rem"
