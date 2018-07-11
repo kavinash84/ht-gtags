@@ -24,18 +24,17 @@
   .applyCouponBtn {
     position: absolute !important;
     right: 5px;
-    bottom: -1px;
+    top: 0;
   }
 }
 .offerList {
-  display: none;
-  position: absolute;
+  // display: none;
+  // position: absolute;
   background: #FFF;
   top: 35px;
   z-index: 1;
-  box-shadow: 0 2px 8px 0 rgba(0,0,0,.1);
   border: 1px solid #ebebeb;
-  width: 300px;
+  // width: 300px;
   height: 200px;
   overflow: auto;
   &.active {
@@ -50,17 +49,17 @@
     li {
       list-style: none;
       .couponWrapper {
-        padding: 0.75rem 1.25rem;
+        padding: 0.75rem 0.75rem;
         border-bottom: 1px solid #d2d1d1;
       }
       .coupon {
         margin-bottom: 0.625rem;
       }
       .couponCode {
-        font-size: 0.75rem;
+        font-size: 0.625rem;
         border: 1px solid #d5d5d5;
-        padding: 0.25rem 0.9375rem;
-        margin: 0 10px;
+        padding: 0.25rem 0.3125rem;
+        margin: 0 8px 0 5px;
         color: #575757;
       }
       .saveRs {
@@ -119,4 +118,7 @@
     position: relative;
     top: 2px;
   }
+}
+.applyCouponWrapper {
+  margin-bottom: 0.625rem;
 }

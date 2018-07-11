@@ -5,6 +5,7 @@ import Heading from 'hometown-components/lib/Heading';
 import Text from 'hometown-components/lib/Text';
 import Span from 'hometown-components/lib/Span';
 import Button from 'hometown-components/lib/Buttons';
+import { Label } from 'hometown-components/lib/Label';
 import { formatAmount } from 'utils/formatters';
 
 const styles = require('./OrderSummary.scss');
@@ -74,6 +75,9 @@ const OrderSummary = ({
               Apply
             </Button>
           </div>
+          <Label ta="center" display="block" mt="0.625rem" mb="0.625rem">
+            OR
+          </Label>
           <div className={`${styles.offerList} ${styles.active}`}>
             <ul>
               <li>
