@@ -39,8 +39,12 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
     let loadResults;
     const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
     if (location.pathname === '/catalog/all-products') {
-      query = location.search.split('?').join('');
-      loadResults = loadUrlQuery(encodeCategory(params), query, pincode);
+      console.log(location.pathname);
+      const hashQuery = location.search.split('?').join('');
+      console.log(hashQuery);
+      console.log(params);
+      query = encodeCategory(params);
+      loadResults = loadUrlQuery(encodeCategory(params), hashQuery, pincode);
     } else if (location.pathname === '/search/') {
       /* eslint prefer-destructuring: ["error", {AssignmentExpression: {array: false}}] */
       query = location.search.split('?q=')[1];
@@ -49,7 +53,6 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
       query = encodeCategory(params);
       loadResults = loadListing(query, 1, sort, pincode);
     }
-
     if (!isInitialListLoaded(getState(), query)) {
       await dispatch(clearPreviousList());
       await dispatch(clearPreviousSort());
@@ -76,7 +79,8 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
   categoryName: getCategoryName(state),
   productCount: getProductCount(state),
   isLoggedIn: state.userLogin.isLoggedIn,
-  metadata: state.products.list
+  metadata: state.products.list,
+  sortBy: state.products.sortBy
 }))
 @withRouter
 export default class Listing extends Component {
@@ -97,6 +101,7 @@ export default class Listing extends Component {
     appliedFilters: PropTypes.array,
     history: PropTypes.object.isRequired,
     pincode: PropTypes.string,
+    sortBy: PropTypes.string.isRequired,
     isLoggedIn: PropTypes.bool
   };
   static contextTypes = {
@@ -145,7 +150,8 @@ export default class Listing extends Component {
       wishlistLoading,
       wishlistKey,
       metadata,
-      appliedFilters
+      appliedFilters,
+      sortBy
     } = this.props;
     return (
       <Section p="0" mb="0">
@@ -176,6 +182,7 @@ export default class Listing extends Component {
                 productCount={productCount}
                 category={category}
                 filters={filters}
+                sortBy={sortBy}
                 appliedFilters={appliedFilters}
                 history={history}
                 pincode={pincode}

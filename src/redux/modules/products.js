@@ -17,6 +17,7 @@ const LOAD_CLEAR_FILTERS_SUCCESS = 'products/LOAD_CLEAR_FILTERS_SUCCESS';
 const LOAD_CLEAR_FILTERS_FAIL = 'products/LOAD_CLEAR_FILTERS_FAIL';
 
 const SET_QUERY = 'products/SET_QUERY';
+
 const CLEAR_PREVIOUS_LIST = 'products/CLEAR_PREVIOUS_LIST';
 const CLEAR_PREVIOUS_SORT = 'products/CLEAR_PREVIOUS_SORT';
 
@@ -26,7 +27,8 @@ const initialState = {
   list: [],
   query: '',
   shimmer: false,
-  sort: 'sort=popularity&dir=desc'
+  sort: 'sort=popularity&dir=desc',
+  sortBy: 'Popularity'
 };
 
 const defaultPincode = PINCODE;
@@ -90,6 +92,7 @@ export default function reducer(state = initialState, action = {}) {
         shimmer: false,
         data: action.result,
         sort: action.result.sort,
+        sortBy: action.result.sortBy,
         list: action.result.metadata.results
       };
     case LOAD_SORTBY_FAIL:
@@ -161,12 +164,13 @@ export const clearAllFilters = (category, pincode, city = 'delhi') => ({
   promise: ({ client }) => client.get(`tesla/products/${category}/?pincode=${pincode}&city=${city}`)
 });
 
-export const loadSortBy = (category, sort, pincode, city = 'delhi') => ({
+export const loadSortBy = (category, sort, sortBy, pincode, city = 'delhi') => ({
   types: [LOAD_SORTBY, LOAD_SORTBY_SUCCESS, LOAD_SORTBY_FAIL],
   promise: async ({ client }) => {
     try {
       const response = await client.get(`tesla/products/${category}/?${sort}&pincode=${pincode}&city=${city}`);
       response.sort = sort;
+      response.sortBy = sortBy;
       return response;
     } catch (error) {
       return error;

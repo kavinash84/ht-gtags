@@ -45,3 +45,9 @@ export const setLoadMorQuery = payLoad => ({
   type: SET_QUERY,
   payLoad
 });
+
+// export const loadMoreProduct = (category, page, query) => ({
+//   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
+//   promise: ({ client }) =>
+//     client.get(`tesla/products/${category}/?page=${page}&${query}&maxitems=30&pincode=${pincode}&city=${city}`)
+// });
