@@ -15,14 +15,13 @@ import ProductDesc from 'hometown-components/lib/ProductDetails/ProductDesc';
 import Specs from 'hometown-components/lib/ProductDetails/Specs';
 import Reviews from 'hometown-components/lib/Reviews';
 import AddReview from 'hometown-components/lib/Reviews/WriteReview';
+// import ProductCarousel from 'components/ProductCarousel';
 import Theme from 'hometown-components/lib/Theme';
-import ProductSlider from 'components/ProductSlider';
 import { addReview } from 'redux/modules/reviews';
 import { formatAmount } from 'utils/formatters';
 import { calculateDiscount, calculateSavings } from 'utils/helper';
 import ProductDetailsCarousel from './Carousel';
 import BreadCrumb from './BreadCrumb';
-// import ProductsCarousel from 'components/ProductCarousel';
 // import { CART_URL } from 'helpers/Constants';
 import Pincode from './Pincode';
 import AddToCart from '../AddToCart';
@@ -156,8 +155,10 @@ class ProductDetails extends React.Component {
               </Div>
             </Row>
             <Row display="block" mt="0.625rem" mb="0.625rem" mr="0">
-              <ProductSlider productSliderTitle="Related Products" colSize={20} />
-              <ProductSlider productSliderTitle="Frequently Bought Together" colSize={20} />
+              {/* <ProductCarousel
+                title=""
+                data=""
+              /> */}
             </Row>
           </Container>
         </Section>
