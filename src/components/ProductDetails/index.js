@@ -15,6 +15,7 @@ import ProductDesc from 'hometown-components/lib/ProductDetails/ProductDesc';
 import Specs from 'hometown-components/lib/ProductDetails/Specs';
 import Reviews from 'hometown-components/lib/Reviews';
 import AddReview from 'hometown-components/lib/Reviews/WriteReview';
+import Img from 'hometown-components/lib/Img';
 // import ProductCarousel from 'components/ProductCarousel';
 import Theme from 'hometown-components/lib/Theme';
 import { addReview } from 'redux/modules/reviews';
@@ -67,13 +68,11 @@ class ProductDetails extends React.Component {
       <Div type="block">
         <Section p="0" pt="1.25rem" mb="0">
           <Container type="container" pr="0" pl="0">
-            <Row display="block" mt="0.625rem" mb="0.625rem" mr="0" ml="0">
-              <Div>
-                <BreadCrumb categoryDetails={categoryDetails} />
-              </Div>
-            </Row>
             <Row display="block" mt="0.625rem" mb="0" mr="0">
               <Div col="9" className={styles.titleWrapper}>
+                <Div mt="0" mb="0.625rem" pl="1rem" pr="1rem">
+                  <BreadCrumb categoryDetails={categoryDetails} />
+                </Div>
                 <TitlePrice
                   name={meta.name}
                   price={formatAmount(price)}
@@ -112,6 +111,7 @@ class ProductDetails extends React.Component {
                 </Row>
               </Div>
               <Div col="3" ta="right">
+                <Img src="http://via.placeholder.com/350x80" alt="" width="100%" mt="0.625rem" mb="1rem" />
                 <AddToCart simpleSku={simpleSku} sku={sku} itemId={sku} size="block" />
                 <Div mt="1rem">
                   <Button
