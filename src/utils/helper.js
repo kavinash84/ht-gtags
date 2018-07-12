@@ -31,3 +31,12 @@ export const formFilterLink = (key, selected) => {
   }));
   return `${encode}/?${splitLink[1]}`;
 };
+
+export const calculateDiscount = (price, discPrice) => {
+  const formatPrice = parseInt(price, 10);
+  const formatDiscPrice = parseInt(discPrice, 10);
+  const discount = (formatPrice - formatDiscPrice) / formatPrice;
+  return Math.round(discount * 100);
+};
+
+export const calculateSavings = (price, discPrice) => Math.round(parseInt(price, 10) - parseInt(discPrice, 10));
