@@ -5,7 +5,6 @@ import Listing from './Listing/Listing';
 import MyOrder from './MyOrder/MyOrder';
 import OrderDetails from './OrderDetails/OrderDetails';
 import OrderSummary from './OrderSummary/OrderSummary';
-import Payment from './Payment';
 import ProductDetails from './ProductDetails/ProductDetails';
 import DeliveryAddress from './DeliveryAddress/DeliveryAddress';
 import PaymentOptions from './PaymentOptions/PaymentOptions';
@@ -28,7 +27,6 @@ export {
   OrderDetails,
   OrderSummary,
   CartTotal,
-  Payment,
   ProductDetails,
   DeliveryAddress,
   ReviewOrder,
