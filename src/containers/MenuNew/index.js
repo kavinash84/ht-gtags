@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
 import NavBar from 'components/NavBar';
 import TopBar from 'components/TopBar/TopBar';
 import Container from 'hometown-components/lib/Container';
@@ -71,9 +70,10 @@ export default class Menu extends Component {
   render() {
     const { hoverBox, currentMenuData } = this.state;
     const { menuItems } = this.props;
+    const styles = require('./Menu.scss');
 
     return (
-      <Section mb="0" p="0" pt="15px" of="initial">
+      <Section mb="0" p="0" pt="15px" of="initial" className={styles.menuContainer}>
         <Container pr="0" pl="0">
           <TopBar />
           <NavBar
