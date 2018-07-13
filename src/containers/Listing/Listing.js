@@ -24,7 +24,6 @@ import {
 } from 'redux/modules/products';
 import Pagination from 'components/Pagination';
 import { getProducts, getCategoryName, getProductCount, getFilters, getAppliedFilters } from 'selectors/products';
-import { resetLoadMore } from 'redux/modules/loadmore';
 import { encodeCategory } from 'utils/helper';
 import { setPage } from 'redux/modules/pagination';
 import { PINCODE } from 'helpers/Constants';
@@ -55,7 +54,6 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
     if (!isInitialListLoaded(getState(), query) || currentPage !== page) {
       await dispatch(clearPreviousList());
       await dispatch(clearPreviousSort());
-      await dispatch(resetLoadMore());
       await dispatch(loadResults).catch(() => null);
       await dispatch(setPage(currentPage));
     }
@@ -192,7 +190,6 @@ export default class Listing extends Component {
                 metaResults={metadata}
               />
               <Pagination loading={loading} loaded={loaded} history={history} pageRangeDisplayed={9} />
-              {/* <LoadMore loading={loading} loaded={loaded} /> */}
             </div>
           ) : (
             shimmer && <ListingShimmer />
