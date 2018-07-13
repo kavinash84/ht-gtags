@@ -31,10 +31,13 @@ import prodDetails from '../../data/ProductDetails';
 
 const styles = require('./ProductDetails.scss');
 
-@connect(({ productdetails, pincode, reviews }) => ({
+@connect(({
+  productdetails, pincode, reviews, colorproducts
+}) => ({
   product: productdetails.productDescription,
   reviews,
-  pincode
+  pincode,
+  colorproducts: colorproducts.list
 }))
 class ProductDetails extends React.Component {
   static contextTypes = {
@@ -48,7 +51,9 @@ class ProductDetails extends React.Component {
   };
 
   render() {
-    const { product, pincode, reviews } = this.props;
+    const {
+      product, pincode, reviews, colorproducts
+    } = this.props;
     const {
       meta,
       images,
@@ -89,16 +94,18 @@ class ProductDetails extends React.Component {
                   className={styles.variationWrapper}
                 >
                   <Div col="2">
-                    <Section mb="0.3125rem" p="0">
-                      <Row display="block" mr="0" ml="0">
-                        <Heading fontSize="1em" color="textDark" mb="0.625rem" mt="0px" fontWeight="600">
-                          Color Options
-                        </Heading>
-                      </Row>
-                      <ColorOption colors={prodDetails.colors} />
-                    </Section>
+                    {colorproducts.length > 0 && (
+                      <Section mb="0.3125rem" p="0">
+                        <Row display="block" mr="0" ml="0">
+                          <Heading fontSize="1em" color="textDark" mb="0.625rem" mt="0px" fontWeight="600">
+                            Color Options
+                          </Heading>
+                        </Row>
+                        <ColorOption data={colorproducts} colors={prodDetails.colors} />
+                      </Section>
+                    )}
                   </Div>
-                  <Div col="2">
+                  {/* <Div col="2">
                     <Heading fontSize="1em" color="textDark" mb="0.625rem" mt="0px" fontWeight="600">
                       Size Options
                     </Heading>
@@ -107,7 +114,7 @@ class ProductDetails extends React.Component {
                       <option>2 Seater</option>
                       <option>3 Seater</option>
                     </select>
-                  </Div>
+                  </Div> */}
                 </Row>
               </Div>
               <Div col="3" ta="right">
@@ -169,11 +176,13 @@ class ProductDetails extends React.Component {
 ProductDetails.defaultProps = {
   product: {},
   pincode: {},
-  reviews: {}
+  reviews: {},
+  colorproducts: []
 };
 ProductDetails.propTypes = {
   product: PropTypes.object,
   pincode: PropTypes.object,
-  reviews: PropTypes.object
+  reviews: PropTypes.object,
+  colorproducts: PropTypes.array
 };
 export default ProductDetails;
