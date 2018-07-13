@@ -23,7 +23,7 @@ export const getProducts = createSelector([products], items => items.list || [])
 
 export const productsList = createSelector([productMeta], productList => productList.results);
 
-export const getProductCount = createSelector([productMeta], category => category.product_count);
+export const getProductCount = createSelector([productMeta], category => category.product_count || 0);
 
 export const getCategoryName = createSelector(
   [productMeta],

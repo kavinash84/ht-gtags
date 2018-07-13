@@ -10,7 +10,7 @@ import ListingShimmer from 'components/Listing/ListingShimmer';
 import { connect } from 'react-redux';
 import Menu from 'containers/MenuNew/index';
 import Footer from 'components/Footer';
-import LoadMore from 'components/LoadMore';
+// import LoadMore from 'components/LoadMore';
 import { getSKUList } from 'selectors/wishlist';
 import {
   load as loadListing,
@@ -22,41 +22,40 @@ import {
   loadUrlQuery,
   clearAllFilters as loadAfterPincodeChange
 } from 'redux/modules/products';
+import Pagination from 'components/Pagination';
 import { getProducts, getCategoryName, getProductCount, getFilters, getAppliedFilters } from 'selectors/products';
-import { resetLoadMore } from 'redux/modules/loadmore';
 import { encodeCategory } from 'utils/helper';
+import { setCurrentPage, resetPagination } from 'redux/modules/pagination';
 import { PINCODE } from 'helpers/Constants';
 
 const SearchEmptyIcon = require('../../../static/search-empty.jpg');
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState }, params, location }) => {
-    const {
-      products: { sort },
-      pincode: { selectedPincode }
-    } = getState();
+    const { products: { sort }, pincode: { selectedPincode }, pagination: { page } } = getState();
     let query;
     let loadResults;
     const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
+    const { search } = location;
+    const getPage = search.split('?page=')[1];
+    const currentPage = getPage || 1;
     if (location.pathname === '/catalog/all-products') {
-      console.log(location.pathname);
       const hashQuery = location.search.split('?').join('');
-      console.log(hashQuery);
-      console.log(params);
       query = encodeCategory(params);
       loadResults = loadUrlQuery(encodeCategory(params), hashQuery, pincode);
     } else if (location.pathname === '/search/') {
       /* eslint prefer-destructuring: ["error", {AssignmentExpression: {array: false}}] */
       query = location.search.split('?q=')[1];
-      loadResults = loadSearchQuery(query, 1, pincode);
+      loadResults = loadSearchQuery(query, currentPage, pincode);
     } else {
       query = encodeCategory(params);
-      loadResults = loadListing(query, 1, sort, pincode);
+      loadResults = loadListing(query, currentPage, sort, pincode);
     }
-    if (!isInitialListLoaded(getState(), query)) {
+    if (currentPage === 1) await dispatch(resetPagination());
+    if (!isInitialListLoaded(getState(), query) || currentPage !== page) {
       await dispatch(clearPreviousList());
+      await dispatch(setCurrentPage(currentPage));
       await dispatch(clearPreviousSort());
-      await dispatch(resetLoadMore());
       await dispatch(loadResults).catch(() => null);
     }
     await dispatch(setCategoryQuery(query, pincode));
@@ -191,7 +190,7 @@ export default class Listing extends Component {
                 wishlistKey={wishlistKey}
                 metaResults={metadata}
               />
-              <LoadMore loading={loading} loaded={loaded} />
+              <Pagination loading={loading} loaded={loaded} history={history} pageRangeDisplayed={9} />
             </div>
           ) : (
             shimmer && <ListingShimmer />

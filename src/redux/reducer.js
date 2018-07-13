@@ -20,6 +20,7 @@ import productdetails from './modules/productdetails';
 import reviews from './modules/reviews';
 import trackorder from './modules/trackorder';
 import orders from './modules/orders';
+import pagination from './modules/pagination';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -52,6 +53,7 @@ export default function createReducers(asyncReducers) {
     reviews,
     trackorder,
     orders,
+    pagination,
     ...asyncReducers
   };
 }
