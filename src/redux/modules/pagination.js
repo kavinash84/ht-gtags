@@ -1,39 +1,32 @@
-const RESET_PAGE = 'pagination/RESET_PAGE';
-const SET_PAGE = 'pagination/SET_PAGE';
-const maxpagestoshow = 5;
-const displayPages = Array(maxpagestoshow)
-  .fill()
-  .map((v, i) => i + 1);
+const SET_CURRENT_PAGE = 'pagination/SET_CURRENT_PAGE';
+const RESET_CURRENT_PAGE = 'pagination/RESET_CURRENT_PAGE';
 
 const initialState = {
-  page: 1,
-  displayPages
+  page: 1
 };
 
-export default function reducer(state = initialState, action = {}) {
+export default function info(state = initialState, action = {}) {
   switch (action.type) {
-    case SET_PAGE: {
+    case SET_CURRENT_PAGE:
+      console.log(action);
       return {
         ...state,
         page: action.page
       };
-    }
-    case RESET_PAGE: {
+    case RESET_CURRENT_PAGE:
       return {
         ...state,
         page: 1
       };
-    }
     default:
       return state;
   }
 }
-
 export const resetPagination = () => ({
-  type: RESET_PAGE
+  type: RESET_CURRENT_PAGE
 });
 
-export const setPage = page => ({
-  type: SET_PAGE,
+export const setCurrentPage = page => ({
+  type: SET_CURRENT_PAGE,
   page
 });

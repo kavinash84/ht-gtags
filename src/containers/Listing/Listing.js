@@ -25,7 +25,7 @@ import {
 import Pagination from 'components/Pagination';
 import { getProducts, getCategoryName, getProductCount, getFilters, getAppliedFilters } from 'selectors/products';
 import { encodeCategory } from 'utils/helper';
-import { setPage } from 'redux/modules/pagination';
+import { setCurrentPage, resetPagination } from 'redux/modules/pagination';
 import { PINCODE } from 'helpers/Constants';
 
 const SearchEmptyIcon = require('../../../static/search-empty.jpg');
@@ -38,7 +38,7 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
     const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
     const { search } = location;
     const getPage = search.split('?page=')[1];
-    const currentPage = getPage === '' ? 1 : getPage;
+    const currentPage = getPage || 1;
     if (location.pathname === '/catalog/all-products') {
       const hashQuery = location.search.split('?').join('');
       query = encodeCategory(params);
@@ -51,11 +51,12 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
       query = encodeCategory(params);
       loadResults = loadListing(query, currentPage, sort, pincode);
     }
+    if (currentPage === 1) await dispatch(resetPagination());
     if (!isInitialListLoaded(getState(), query) || currentPage !== page) {
       await dispatch(clearPreviousList());
+      await dispatch(setCurrentPage(currentPage));
       await dispatch(clearPreviousSort());
       await dispatch(loadResults).catch(() => null);
-      await dispatch(setPage(currentPage));
     }
     await dispatch(setCategoryQuery(query, pincode));
   }
