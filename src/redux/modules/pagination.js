@@ -8,7 +8,6 @@ const initialState = {
 export default function info(state = initialState, action = {}) {
   switch (action.type) {
     case SET_CURRENT_PAGE:
-      console.log(action);
       return {
         ...state,
         page: action.page

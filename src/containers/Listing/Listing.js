@@ -10,7 +10,6 @@ import ListingShimmer from 'components/Listing/ListingShimmer';
 import { connect } from 'react-redux';
 import Menu from 'containers/MenuNew/index';
 import Footer from 'components/Footer';
-// import LoadMore from 'components/LoadMore';
 import { getSKUList } from 'selectors/wishlist';
 import {
   load as loadListing,
@@ -37,6 +36,7 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
     let loadResults;
     const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
     const { search } = location;
+    // const queryString = search.replace('?', '').split('&');
     const getPage = search.split('?page=')[1];
     const currentPage = getPage || 1;
     if (location.pathname === '/catalog/all-products') {
