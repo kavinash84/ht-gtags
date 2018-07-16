@@ -16,6 +16,8 @@ const SYNCING_CART = 'cart/SYNCING_CART';
 const SYNCING_CART_SUCCESS = 'cart/SYNCING_CART_SUCCESS';
 const SYNCING_CART_FAIL = 'cart/SYNCING_CART_FAIL';
 
+const UPDATE_CART_SUMMARY_AFTER_COUPON = 'cart/UPDATE_CART_SUMMARY_AFTER_COUPON';
+
 const initialState = {
   data: [],
   summary: {},
@@ -131,6 +133,11 @@ export default function reducer(state = initialState, action = {}) {
         cartSynced: false,
         error: action.error
       };
+    case UPDATE_CART_SUMMARY_AFTER_COUPON:
+      return {
+        ...state,
+        summary: action.summary[0]
+      };
     default:
       return state;
   }
@@ -209,4 +216,9 @@ export const synCart = (sessionId, pincode) => ({
       throw error;
     }
   }
+});
+
+export const updateCartSummary = summary => ({
+  type: UPDATE_CART_SUMMARY_AFTER_COUPON,
+  summary
 });
