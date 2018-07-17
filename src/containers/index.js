@@ -18,6 +18,7 @@ import WhoWeAre from './WhoWeAre/WhoWeAre';
 import ContactUs from './ContactUs/ContactUs';
 import MyAddress from './MyAddress/MyAddress';
 import TrackOrderModal from './TrackOrderModal/TrackOrderModal';
+import EmiModal from './EmiModal/EmiModal';
 import NotFound from './NotFound/NotFound';
 
 export {
@@ -40,6 +41,7 @@ export {
   ContactUs,
   MyAddress,
   TrackOrderModal,
+  EmiModal,
   PaymentOptions,
   NotFound
 };
