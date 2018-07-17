@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 import { toggleWishList } from 'redux/modules/wishlist';
 import { loadSortBy, applyFilter, clearAllFilters } from 'redux/modules/products';
 import { formFilterLink } from 'utils/helper';
-import Dropdown from '../Filters/Dropdown';
+import Dropdown from '../Filters/Filters';
 import SortByFilters from '../Filters/SortByFilters';
 import AddToCart from '../AddToCart';
 import AppliedFilters from '../Filters/AppliedFilters';
@@ -96,6 +96,7 @@ class Listing extends React.Component {
       appliedFilters,
       sortBy
     } = this.props;
+
     return (
       <Div type="block">
         <Section mb="0.3125rem" p="1rem 0.5rem" bg="primary">
@@ -128,6 +129,7 @@ class Listing extends React.Component {
                       title={item.name === 'Main Material' ? 'Material' : item.name}
                       onclick={this.setFilter}
                       data={item.attributes}
+                      history={history}
                     />
                   ))}
                 </Div>
@@ -237,7 +239,4 @@ Listing.propTypes = {
   wishlistKey: PropTypes.string
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Listing);
+export default connect(null, mapDispatchToProps)(Listing);

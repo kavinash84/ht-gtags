@@ -1,5 +1,7 @@
 // import { browserHistory } from 'react-router';
 
+export const SITE_URL = 'https://hometown.in';
+
 export const HOME_URL = '/';
 export const SIGNUP_URL = '/signup';
 export const LOGIN_URL = '/login';
