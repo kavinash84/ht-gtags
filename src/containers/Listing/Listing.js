@@ -159,7 +159,7 @@ export default class Listing extends Component {
       page = search.replace('?', '').split('page=')[1];
     }
     const previousPage = !page || Number(page) === 1 ? '' : `?page=${page - 1}`;
-    const NextPage = !page ? '?page=1' : `?page=${Number(page) + 1}`;
+    const NextPage = !page ? '?page=2' : `?page=${Number(page) + 1}`;
     return (
       <Section p="0" mb="0">
         <Helmet>
