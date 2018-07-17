@@ -12,22 +12,34 @@ import TitleBar from 'components/TitleBar';
 
 const CartEmptyIcon = require('../../../static/cart-empty.jpg');
 
-@connect(({ cart: { data, summary, error } }) => ({
+@connect(({
+  cart: {
+    data, summary, error, proceedToCheckout
+  }
+}) => ({
   results: data,
   summary,
-  error
+  error,
+  proceedToCheckout
 }))
 export default class CartContainer extends Component {
   static propTypes = {
     results: PropTypes.array,
     summary: PropTypes.object,
-    error: PropTypes.object
+    error: PropTypes.object,
+    history: PropTypes.object.isRequired,
+    proceedToCheckout: PropTypes.bool.isRequired
   };
   static defaultProps = {
     results: [],
     summary: null,
     error: null
   };
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.proceedToCheckout) {
+      this.props.history.push('/delivery-address');
+    }
+  }
   render() {
     const { results, summary, error } = this.props;
     return (

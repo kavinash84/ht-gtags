@@ -16,6 +16,10 @@ const SYNCING_CART = 'cart/SYNCING_CART';
 const SYNCING_CART_SUCCESS = 'cart/SYNCING_CART_SUCCESS';
 const SYNCING_CART_FAIL = 'cart/SYNCING_CART_FAIL';
 
+const SHOULD_CHECKOUT = 'cart/SHOULD_CHECKOUT';
+const SHOULD_CHECKOUT_SUCCESS = 'cart/SHOULD_CHECKOUT_SUCCESS';
+const SHOULD_CHECKOUT_FAIL = 'cart/SHOULD_CHECKOUT_FAIL';
+
 const initialState = {
   data: [],
   summary: {},
@@ -23,6 +27,7 @@ const initialState = {
   addedToCart: false,
   cartUpdated: false,
   cartSynced: false,
+  proceedToCheckout: false,
   key: ''
 };
 
@@ -131,6 +136,30 @@ export default function reducer(state = initialState, action = {}) {
         cartSynced: false,
         error: action.error
       };
+    case SHOULD_CHECKOUT:
+      return {
+        ...state,
+        loading: true,
+        loaded: false,
+        error: false,
+        proceedToCheckout: false
+      };
+    case SHOULD_CHECKOUT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        proceedToCheckout: action.result.success,
+        error: false
+      };
+    case SHOULD_CHECKOUT_FAIL:
+      return {
+        ...state,
+        loading: false,
+        loaded: false,
+        proceedToCheckout: false,
+        error: 'Some Error Occured ! '
+      };
     default:
       return state;
   }
@@ -205,6 +234,20 @@ export const synCart = (sessionId, pincode) => ({
     try {
       const response = await client.put(`${SYNCCART_API}/${sessionId}/${pincode}`, {});
       return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+});
+
+export const proceedToCheckout = sessionId => ({
+  types: [SHOULD_CHECKOUT, SHOULD_CHECKOUT_SUCCESS, SHOULD_CHECKOUT_FAIL],
+  promise: async ({ client }) => {
+    try {
+      const postData = {
+        session_id: sessionId
+      };
+      return client.post('/tesla/checkout', postData);
     } catch (error) {
       throw error;
     }
