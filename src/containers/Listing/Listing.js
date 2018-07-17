@@ -156,14 +156,15 @@ export default class Listing extends Component {
     let page;
     const { location: { search, pathname } } = history;
     if (search !== '') {
-      page = search.replace('?', '').split('page=')[1] || 0;
+      page = search.replace('?', '').split('page=')[1];
     }
-    const previousPage = Number(page) === 1 ? '' : `?page=${page - 1}`;
+    const previousPage = !page || Number(page) === 1 ? '' : `?page=${page - 1}`;
+    const NextPage = !page ? '?page=1' : `?page=${Number(page) + 1}`;
     return (
       <Section p="0" mb="0">
         <Helmet>
           <link rel="canonical" href={`${SITE_URL}${pathname}${previousPage}`} />
-          <link rel="next" href={`${SITE_URL}${pathname}${search}`} />
+          <link rel="next" href={`${SITE_URL}${pathname}${NextPage}`} />
         </Helmet>
         <div className="wrapper">
           <Menu filter search />
