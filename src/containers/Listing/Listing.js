@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { provideHooks } from 'redial';
+import Helmet from 'react-helmet';
 import Empty from 'hometown-components/lib/Empty';
 import Img from 'hometown-components/lib/Img';
 import Section from 'hometown-components/lib/Section';
@@ -25,7 +26,7 @@ import Pagination from 'components/Pagination';
 import { getProducts, getCategoryName, getProductCount, getFilters, getAppliedFilters } from 'selectors/products';
 import { encodeCategory } from 'utils/helper';
 import { setCurrentPage, resetPagination } from 'redux/modules/pagination';
-import { PINCODE } from 'helpers/Constants';
+import { PINCODE, SITE_URL } from 'helpers/Constants';
 
 const SearchEmptyIcon = require('../../../static/search-empty.jpg');
 
@@ -152,8 +153,18 @@ export default class Listing extends Component {
       appliedFilters,
       sortBy
     } = this.props;
+    let page;
+    const { location: { search, pathname } } = history;
+    if (search !== '') {
+      page = search.replace('?', '').split('page=')[1] || 0;
+    }
+    const previousPage = Number(page) === 1 ? '' : `?page=${page - 1}`;
     return (
       <Section p="0" mb="0">
+        <Helmet>
+          <link rel="canonical" href={`${SITE_URL}${pathname}${previousPage}`} />
+          <link rel="next" href={`${SITE_URL}${pathname}${search}`} />
+        </Helmet>
         <div className="wrapper">
           <Menu filter search />
           {!loading &&
