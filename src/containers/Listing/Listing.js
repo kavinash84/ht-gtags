@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { provideHooks } from 'redial';
+import Helmet from 'react-helmet';
 import Empty from 'hometown-components/lib/Empty';
 import Img from 'hometown-components/lib/Img';
 import Section from 'hometown-components/lib/Section';
@@ -10,7 +11,6 @@ import ListingShimmer from 'components/Listing/ListingShimmer';
 import { connect } from 'react-redux';
 import Menu from 'containers/MenuNew/index';
 import Footer from 'components/Footer';
-import LoadMore from 'components/LoadMore';
 import { getSKUList } from 'selectors/wishlist';
 import {
   load as loadListing,
@@ -22,41 +22,41 @@ import {
   loadUrlQuery,
   clearAllFilters as loadAfterPincodeChange
 } from 'redux/modules/products';
+import Pagination from 'components/Pagination';
 import { getProducts, getCategoryName, getProductCount, getFilters, getAppliedFilters } from 'selectors/products';
-import { resetLoadMore } from 'redux/modules/loadmore';
 import { encodeCategory } from 'utils/helper';
-import { PINCODE } from 'helpers/Constants';
+import { setCurrentPage, resetPagination } from 'redux/modules/pagination';
+import { PINCODE, SITE_URL } from 'helpers/Constants';
 
 const SearchEmptyIcon = require('../../../static/search-empty.jpg');
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState }, params, location }) => {
-    const {
-      products: { sort },
-      pincode: { selectedPincode }
-    } = getState();
+    const { products: { sort }, pincode: { selectedPincode }, pagination: { page } } = getState();
     let query;
     let loadResults;
     const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
+    const { search } = location;
+    // const queryString = search.replace('?', '').split('&');
+    const getPage = search.split('?page=')[1];
+    const currentPage = getPage || 1;
     if (location.pathname === '/catalog/all-products') {
-      console.log(location.pathname);
       const hashQuery = location.search.split('?').join('');
-      console.log(hashQuery);
-      console.log(params);
       query = encodeCategory(params);
       loadResults = loadUrlQuery(encodeCategory(params), hashQuery, pincode);
     } else if (location.pathname === '/search/') {
       /* eslint prefer-destructuring: ["error", {AssignmentExpression: {array: false}}] */
       query = location.search.split('?q=')[1];
-      loadResults = loadSearchQuery(query, 1, pincode);
+      loadResults = loadSearchQuery(query, currentPage, pincode);
     } else {
       query = encodeCategory(params);
-      loadResults = loadListing(query, 1, sort, pincode);
+      loadResults = loadListing(query, currentPage, sort, pincode);
     }
-    if (!isInitialListLoaded(getState(), query)) {
+    if (currentPage === 1) await dispatch(resetPagination());
+    if (!isInitialListLoaded(getState(), query) || currentPage !== page) {
       await dispatch(clearPreviousList());
+      await dispatch(setCurrentPage(currentPage));
       await dispatch(clearPreviousSort());
-      await dispatch(resetLoadMore());
       await dispatch(loadResults).catch(() => null);
     }
     await dispatch(setCategoryQuery(query, pincode));
@@ -153,8 +153,19 @@ export default class Listing extends Component {
       appliedFilters,
       sortBy
     } = this.props;
+    let page;
+    const { location: { search, pathname } } = history;
+    if (search !== '') {
+      page = search.replace('?', '').split('page=')[1];
+    }
+    const previousPage = !page || Number(page) === 1 ? '' : `?page=${page - 1}`;
+    const NextPage = !page ? '?page=2' : `?page=${Number(page) + 1}`;
     return (
       <Section p="0" mb="0">
+        <Helmet>
+          <link rel="canonical" href={`${SITE_URL}${pathname}${previousPage}`} />
+          <link rel="next" href={`${SITE_URL}${pathname}${NextPage}`} />
+        </Helmet>
         <div className="wrapper">
           <Menu filter search />
           {!loading &&
@@ -191,7 +202,7 @@ export default class Listing extends Component {
                 wishlistKey={wishlistKey}
                 metaResults={metadata}
               />
-              <LoadMore loading={loading} loaded={loaded} />
+              <Pagination loading={loading} loaded={loaded} history={history} pageRangeDisplayed={9} />
             </div>
           ) : (
             shimmer && <ListingShimmer />
