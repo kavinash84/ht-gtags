@@ -22,6 +22,8 @@ import trackorder from './modules/trackorder';
 import orders from './modules/orders';
 import pagination from './modules/pagination';
 import checkout from './modules/checkout';
+import shipping from './modules/shipping';
+import billing from './modules/billing';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -56,6 +58,8 @@ export default function createReducers(asyncReducers) {
     orders,
     pagination,
     checkout,
+    shipping,
+    billing,
     ...asyncReducers
   };
 }

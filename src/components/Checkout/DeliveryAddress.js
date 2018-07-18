@@ -10,22 +10,25 @@ import Text from 'hometown-components/lib/Text';
 import { Label } from 'hometown-components/lib/Label';
 import { sendDeliveryAddress } from 'redux/modules/checkout';
 import MenuCheckout from './MenuCheckout';
-import AddressForm from './AddressForm';
+import ShippingForm from './ShippingForm';
+import BillingForm from './BillingForm';
 
 const addIcon = require('../../../static/round-add_circle_outline.svg');
 const styles = require('./DeliveryAddress.scss');
 
-@connect(({ userLogin, app }) => ({
+const mapStateToProps = ({ userLogin, app }) => ({
   isLoggedIn: userLogin.isLoggedIn,
   sessionId: app.sessionId
-}))
-export default class DeliveryAddress extends Component {
+});
+
+class DeliveryAddress extends Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
   state = {
     shippingIsBilling: true
   };
+
   handleSubmit = e => {
     e.preventDefault();
     if (this.state.shippingIsBilling) {
@@ -44,6 +47,7 @@ export default class DeliveryAddress extends Component {
     } else {
       const shippingForm = this.shipping_form.validateForm();
       const billingForm = this.billing_form.validateForm();
+      console.log(billingForm);
       if (shippingForm.error || billingForm.error) {
         alert('Please Fill All Details Correctly !');
       } else {
@@ -73,20 +77,29 @@ export default class DeliveryAddress extends Component {
         <Section display="flex" pt="1.25rem" mb="0" height="auto">
           <Container type="container" pr="2rem" pl="2rem">
             <form onSubmit={this.handleSubmit}>
-              <AddressForm
-                ref={ship => {
-                  this.shipping_form = ship;
+              <ShippingForm
+                ref={shippingform => {
+                  console.log(shippingform);
+                  if (shippingform) {
+                    console.log(shippingform);
+                    this.shipping_form = shippingform.getWrappedInstance();
+                    console.log(this.shipping_form);
+                  }
                 }}
               />
               <input type="checkbox" value={shippingIsBilling} onChange={this.toggleBillingForm} />
-              <Label>Shipping Address is Same as Billing Address</Label>
-              {!shippingIsBilling && (
-                <AddressForm
-                  ref={ship => {
-                    this.billing_form = ship;
-                  }}
-                />
-              )}
+              <Label>Different Billing Address ?</Label>
+
+              <BillingForm
+                ref={billingform => {
+                  if (billingform) {
+                    console.log(billingform);
+                    this.biling_form = billingform.getWrappedInstance();
+                    console.log(this.billing_form); // Don't know why it is undefined !
+                  }
+                }}
+              />
+
               <button type="submit ">NEXT PAYMENT OPTIONS</button>
             </form>
 
@@ -145,3 +158,9 @@ DeliveryAddress.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   sessionId: PropTypes.string.isRequired
 };
+export default connect(
+  mapStateToProps,
+  null,
+  null,
+  { withRef: true }
+)(DeliveryAddress);

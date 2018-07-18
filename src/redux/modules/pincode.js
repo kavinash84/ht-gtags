@@ -4,13 +4,18 @@ const LOAD_FAIL = 'pincode/LOAD_FAIL';
 const SET_PINCODE_QUERY = 'pincode/SET_PINCODE_QUERY';
 const SET_SELECTED_PINCODE = 'pincode/SET_SELECTED_PINCODE';
 
+const LOAD_PINCODE_DETAILS = 'pincode/LOAD_PINCODE_DETAILS';
+const LOAD_PINCODE_DETAILS_SUCCESS = 'pincode/LOAD_PINCODE_DETAILS_SUCCESS';
+const LOAD_PINCODE_DETAILS_FAIL = 'pincode/LOAD_PINCODE_DETAILS_FAIL';
+
 const initialState = {
   loading: false,
   loaded: false,
   results: [],
   pincodeQuery: '',
   showResults: false,
-  selectedPincode: ''
+  selectedPincode: '',
+  pincodeDetails: []
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -29,6 +34,25 @@ export default function reducer(state = initialState, action = {}) {
         results: 'metadata' in action.result ? action.result.metadata.suggestions : []
       };
     case LOAD_FAIL:
+      return {
+        ...state,
+        loading: false,
+        loaded: false,
+        error: action.error
+      };
+    case LOAD_PINCODE_DETAILS:
+      return {
+        ...state,
+        loading: true
+      };
+    case LOAD_PINCODE_DETAILS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        pincodeDetails: action.result.pincode_details || []
+      };
+    case LOAD_PINCODE_DETAILS_FAIL:
       return {
         ...state,
         loading: false,
@@ -59,12 +83,14 @@ export const load = query => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
   promise: ({ client }) => client.get(`tesla/locations/pincode/${query}`)
 });
-
+export const loadPincodeDetails = pincode => ({
+  types: [LOAD_PINCODE_DETAILS, LOAD_PINCODE_DETAILS_SUCCESS, LOAD_PINCODE_DETAILS_FAIL],
+  promise: ({ client }) => client.get(`tesla/session/${pincode}`)
+});
 export const setPincodeQuery = query => ({
   type: SET_PINCODE_QUERY,
   query
 });
-
 export const setPincode = pincode => ({
   type: SET_SELECTED_PINCODE,
   pincode
