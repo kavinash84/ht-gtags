@@ -36,7 +36,7 @@ export default class PaymentOptions extends Component {
                 <Row display="block" mr="0" ml="0" mt="5px">
                   <Div col="12">
                     <input type="radio" name="paymentOptions" id="paymentCC" />
-                    <Label for="paymentCC" pl="1rem" color="textLight" ml="0.9375rem">
+                    <Label for="paymentCC" pl="1rem" color="textLight" ml="0">
                       Credit Card
                     </Label>
                   </Div>
@@ -46,7 +46,7 @@ export default class PaymentOptions extends Component {
 
                   <Div col="12" mt="1.5rem">
                     <input type="radio" name="paymentOptions" id="paymentDC" />
-                    <Label for="paymentDC" pl="1rem" color="textLight" ml="0.9375rem">
+                    <Label for="paymentDC" pl="1rem" color="textLight" ml="0">
                       Debit Card
                     </Label>
                   </Div>
@@ -56,7 +56,7 @@ export default class PaymentOptions extends Component {
 
                   <Div col="12" mt="1.5rem">
                     <input type="radio" name="paymentOptions" id="paymentDC" />
-                    <Label for="paymentDC" pl="1rem" color="textLight" ml="0.9375rem">
+                    <Label for="paymentDC" pl="1rem" color="textLight" ml="0">
                       Internet Banking
                     </Label>
                   </Div>
@@ -86,7 +86,7 @@ export default class PaymentOptions extends Component {
 
                   <Div col="12" mt="1.5rem">
                     <input type="radio" name="paymentOptions" id="paymentDC" />
-                    <Label for="paymentDC" pl="1rem" color="textLight" ml="0.9375rem">
+                    <Label for="paymentDC" pl="1rem" color="textLight" ml="0">
                       EMI
                     </Label>
                   </Div>
@@ -152,7 +152,7 @@ export default class PaymentOptions extends Component {
 
                   <Div col="12" mt="1.5rem">
                     <input type="radio" name="paymentOptions" id="paymentDC" />
-                    <Label for="paymentDC" pl="1rem" color="textLight" ml="0.9375rem">
+                    <Label for="paymentDC" pl="1rem" color="textLight" ml="0">
                       Wallet
                     </Label>
                   </Div>
