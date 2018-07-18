@@ -35,3 +35,6 @@ export const SESSION = 'tesla/session';
 export const TRACK_ORDER = 'tesla/orders/track';
 /* My Orders */
 export const MY_ORDERS = 'tesla/orders';
+
+/* Payments */
+export const PAYMENT_OPTIONS = 'tesla/payments';

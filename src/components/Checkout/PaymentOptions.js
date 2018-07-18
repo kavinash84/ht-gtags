@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
@@ -6,16 +9,26 @@ import Section from 'hometown-components/lib/Section';
 import Button from 'hometown-components/lib/Buttons';
 import Heading from 'hometown-components/lib/Heading';
 import Text from 'hometown-components/lib/Text';
-import { Label } from 'hometown-components/lib/Label';
-import CardForm from './CardForm';
-import BankCard from './BankCard';
+import { setSelectedGateway } from 'redux/modules/paymentoptions';
+// import CardForm from './CardForm';
+// import BankCard from './BankCard';
 import MenuCheckout from './MenuCheckout';
 import OrderSummary from './OrderSummary';
+import CommonPayments from './CommonPayments';
 
-const styles = require('./Checkout.scss');
+const mapStateToProps = ({ paymentoptions }) => ({
+  selectedGateway: paymentoptions.selectedGateway
+});
 
-export default class PaymentOptions extends Component {
+const mapDispatchToProps = dispatch => bindActionCreators({ toggleGateway: setSelectedGateway }, dispatch);
+
+class PaymentOptions extends Component {
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  };
   render() {
+    const { data, selectedGateway, toggleGateway } = this.props;
+    console.log(this.props);
     return (
       <Div type="block">
         <MenuCheckout page="payment" />
@@ -34,103 +47,8 @@ export default class PaymentOptions extends Component {
                   </Div>
                 </Row>
                 <Row display="block" mr="0" ml="0" mt="5px">
-                  <Div col="12">
-                    <input type="radio" name="paymentOptions" id="paymentCC" />
-                    <Label for="paymentCC" pl="1rem" color="textLight" ml="0.9375rem">
-                      Credit Card
-                    </Label>
-                  </Div>
-                  <Div col="12" mt="0.625rem" pl="1.75rem">
-                    <CardForm />
-                  </Div>
-
-                  <Div col="12" mt="1.5rem">
-                    <input type="radio" name="paymentOptions" id="paymentDC" />
-                    <Label for="paymentDC" pl="1rem" color="textLight" ml="0.9375rem">
-                      Debit Card
-                    </Label>
-                  </Div>
-                  <Div col="12" mt="0.625rem" pl="1.75rem">
-                    <CardForm />
-                  </Div>
-
-                  <Div col="12" mt="1.5rem">
-                    <input type="radio" name="paymentOptions" id="paymentDC" />
-                    <Label for="paymentDC" pl="1rem" color="textLight" ml="0.9375rem">
-                      Internet Banking
-                    </Label>
-                  </Div>
-                  <Div col="12" mt="0.625rem" pl="1.75rem">
-                    <Div className={styles.paymentBlock}>
-                      <Div col="12" mb="1rem">
-                        <Label for="bankOptions1" pl="1rem" color="textLight">
-                          Choose From Preferred Bank
-                        </Label>
-                      </Div>
-
-                      <BankCard name="citibank" img="https://static.hometown.in/media/cms/BankLOGO/citi.gif" />
-                      <BankCard name="citibank" img="https://static.hometown.in/media/cms/BankLOGO/hdfc.gif" />
-                      <BankCard name="citibank" img="https://static.hometown.in/media/cms/BankLOGO/hsbc.gif" />
-                      <BankCard name="citibank" img="https://static.hometown.in/media/cms/BankLOGO/icici.gif" />
-
-                      <Div col="12" mt="1rem">
-                        <select className={`${styles.dropDown} ${styles.selectBank}`}>
-                          <option>Select Bank</option>
-                          <option>01</option>
-                          <option>02</option>
-                          <option>03</option>
-                        </select>
-                      </Div>
-                    </Div>
-                  </Div>
-
-                  <Div col="12" mt="1.5rem">
-                    <input type="radio" name="paymentOptions" id="paymentDC" />
-                    <Label for="paymentDC" pl="1rem" color="textLight" ml="0.9375rem">
-                      EMI
-                    </Label>
-                  </Div>
-                  <Div col="12" mt="0.625rem" pl="1.75rem">
-                    <Div className={styles.paymentBlock}>
-                      <Div col="12" mb="1rem">
-                        <Label for="bankOptions1" pl="1rem" color="textLight">
-                          Choose From Preferred Bank
-                        </Label>
-                      </Div>
-
-                      <BankCard name="citibank" img="https://static.hometown.in/media/cms/BankLOGO/citi.gif" />
-                      <BankCard name="hdfc" img="https://static.hometown.in/media/cms/BankLOGO/hdfc.gif" />
-                      <BankCard name="hsbc" img="https://static.hometown.in/media/cms/BankLOGO/hsbc.gif" />
-                      <BankCard name="icici" img="https://static.hometown.in/media/cms/BankLOGO/icici.gif" />
-                    </Div>
-                  </Div>
-
-                  <Div col="12" mt="1.5rem">
-                    <input type="radio" name="paymentOptions" id="paymentDC" />
-                    <Label for="paymentDC" pl="1rem" color="textLight" ml="0.9375rem">
-                      Wallet
-                    </Label>
-                  </Div>
-                  <Div col="12" mt="0.625rem" pl="1.75rem" mb="0.625rem">
-                    <Div className={styles.paymentBlock}>
-                      <Div col="12" mb="1rem">
-                        <Label for="bankOptions1" pl="1rem" color="textLight">
-                          Select From your preferred Wallet
-                        </Label>
-                      </Div>
-
-                      <BankCard
-                        name="payu"
-                        img="https://www.hometown.in/images/local_v2/onestepcheckout/logo/payu.jpg"
-                      />
-                      <BankCard
-                        name="mobikwik"
-                        img="https://www.hometown.in/images/local_v2/onestepcheckout/logo/mobikwik.jpg"
-                      />
-                    </Div>
-                  </Div>
+                  {data.map(paymentType => CommonPayments(paymentType.paymentType, toggleGateway, selectedGateway))}
                 </Row>
-
                 <Row display="block" mr="0" ml="0">
                   <Div col="4">
                     <Button
@@ -155,3 +73,16 @@ export default class PaymentOptions extends Component {
     );
   }
 }
+
+PaymentOptions.defaultProps = {
+  selectedGateway: 'creditcard',
+  data: []
+};
+
+PaymentOptions.propTypes = {
+  selectedGateway: PropTypes.string,
+  data: PropTypes.array,
+  toggleGateway: PropTypes.func.isRequired
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PaymentOptions);

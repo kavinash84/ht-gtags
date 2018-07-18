@@ -1,12 +1,35 @@
 import React, { Component } from 'react';
-import PaymentOptionsContainer from 'components/Checkout/PaymentOptions';
+import PropTypes from 'prop-types';
+// import { provideHooks } from 'redial';
+import { connect } from 'react-redux';
+// import { load } from 'redux/modules/paymentoptions';
+import { getPaymentOptions } from 'selectors/payments';
+import PaymentOptions from 'components/Checkout/PaymentOptions';
 
-export default class PaymentOptions extends Component {
+@connect(({ paymentoptions }) => ({
+  availableOptions: getPaymentOptions(paymentoptions)
+}))
+// @provideHooks({
+//   fetch: async ({ store: { dispatch, getState } }) => {
+//     const { app: { sessionId } } = getState();
+//     await dispatch(load(sessionId));
+//   }
+// })
+export default class PaymentOptionsContainer extends Component {
   render() {
+    const { availableOptions } = this.props;
     return (
       <div>
-        <PaymentOptionsContainer />
+        <PaymentOptions data={availableOptions} />
       </div>
     );
   }
 }
+
+PaymentOptionsContainer.defaultProps = {
+  availableOptions: {}
+};
+
+PaymentOptionsContainer.propTypes = {
+  availableOptions: PropTypes.object
+};
