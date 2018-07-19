@@ -8,6 +8,7 @@ import {
   ProductDetails,
   DeliveryAddress,
   PaymentOptions,
+  PaymentOptions1,
   ReviewOrder,
   ReturnPolicy,
   PrivacyPolicy,
@@ -16,6 +17,8 @@ import {
   WhoWeAre,
   ContactUs,
   FAQ,
+  TrackOrderModal,
+  EmiModal,
   NotFound
 } from 'containers';
 import { routerActions } from 'react-router-redux';
@@ -70,6 +73,7 @@ const routes = [
       { path: '/product-details/:skuId', exact: true, component: ProductDetails },
       { path: '/delivery-address', exact: true, component: DeliveryAddress },
       { path: '/payment-options', exact: true, component: PaymentOptions },
+      { path: '/payment-options1', exact: true, component: PaymentOptions1 },
       { path: '/review-order', exact: true, component: ReviewOrder },
       { path: '/search', exact: false, component: Listing },
       { path: '/return-policy', exact: true, component: ReturnPolicy },
@@ -82,6 +86,8 @@ const routes = [
       { path: '/pincode', exact: true, component: Pincode },
       { path: '/store/:city/:storeName', exact: true, component: Stores },
       { path: '/track-order', exact: true, component: TrackOrder },
+      { path: '/track-order-modal', exact: true, component: TrackOrderModal },
+      { path: '/emi-modal', exact: true, component: EmiModal },
       {
         path: '/:category/:subcategory1?/:subcategory2?/:subcategory3?/:subcategory4?/:subcategory5?',
         exact: true,

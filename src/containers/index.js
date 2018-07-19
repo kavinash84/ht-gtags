@@ -8,6 +8,7 @@ import OrderSummary from './OrderSummary/OrderSummary';
 import ProductDetails from './ProductDetails/ProductDetails';
 import DeliveryAddress from './DeliveryAddress/DeliveryAddress';
 import PaymentOptions from './PaymentOptions/PaymentOptions';
+import PaymentOptions1 from './PaymentOptions1/PaymentOptions';
 import ReviewOrder from './ReviewOrder/ReviewOrder';
 import ReturnPolicy from './ReturnPolicy/ReturnPolicy';
 import PrivacyPolicy from './PrivacyPolicy/PrivacyPolicy';
@@ -17,6 +18,8 @@ import Cancellation from './Cancellation/Cancellation';
 import WhoWeAre from './WhoWeAre/WhoWeAre';
 import ContactUs from './ContactUs/ContactUs';
 import MyAddress from './MyAddress/MyAddress';
+import TrackOrderModal from './TrackOrderModal/TrackOrderModal';
+import EmiModal from './EmiModal/EmiModal';
 import NotFound from './NotFound/NotFound';
 
 export {
@@ -38,6 +41,9 @@ export {
   WhoWeAre,
   ContactUs,
   MyAddress,
-  NotFound,
-  PaymentOptions
+  TrackOrderModal,
+  EmiModal,
+  PaymentOptions,
+  PaymentOptions1,
+  NotFound
 };
