@@ -42,7 +42,7 @@ export default class StoresCarousel extends Component {
               </SlickSlider>
             </Div>
           </Row>
-          <Row type="block" m="0" mb="0.5rem">
+          <Row type="block" m="0 1rem 0.5rem">
             {filteredStores.map((store, index) => (
               <StoreListItem
                 key={String(index)}

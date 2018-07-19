@@ -21,7 +21,8 @@ import { getCartCount } from 'selectors/cart';
 
 const LogoIcon = require('../../../static/logo.png');
 const CartIcon = require('../../../static/cart-icon.svg');
-const MapIcon = require('../../../static/map-icon.svg');
+const PinIcon = require('../../../static/map-icon.svg');
+const MapIcon = require('../../../static/map.svg');
 const PhoneIcon = require('../../../static/phone-icon.svg');
 const UserIcon = require('../../../static/user-icon.svg');
 const PincodeModalIcon = require('../../../static/map-placeholder.svg');
@@ -102,7 +103,7 @@ export default class MenuSidebar extends Component {
           </Div>
           <Div col="5" ta="right" pt="0.3125rem">
             <button onClick={this.onOpenPincodeModal}>
-              <Img src={MapIcon} alt="Hometown" height="24px" mr="0.625rem" float="left" />
+              <Img src={PinIcon} alt="Hometown" height="24px" mr="0.3125rem" float="left" />
               <Span fontSize="0.875rem">{selectedPincode !== '' ? selectedPincode : 'Pincode'}</Span>
             </button>
             <ResponsiveModal
@@ -126,13 +127,17 @@ export default class MenuSidebar extends Component {
               </Div>
             </ResponsiveModal>
             <a className={styles.cart} href="tel:18002100004">
-              <Img src={PhoneIcon} alt="Hometown" height="24px" mr="0.625rem" float="left" />
+              <Img src={PhoneIcon} alt="Hometown" height="24px" mr="0.3125rem" float="left" />
               <Span fontSize="0.875em">1800-210-0004</Span>
             </a>
+            <Link className={styles.cart} to="/store-locator">
+              <Img src={MapIcon} alt="Hometown" height="24px" mr="0.3125rem" float="left" />
+              <Span fontSize="0.875em">Store Locator</Span>
+            </Link>
             <Button
               p="0"
               className={styles.heartBtn}
-              ml="1.25rem"
+              ml="0.625rem"
               onClick={isLoggedIn ? onClick(history) : this.onOpenLoginModal}
             >
               <Fav />
@@ -149,8 +154,8 @@ export default class MenuSidebar extends Component {
               <Img src={CartIcon} alt="Hometown" height="24px" />
               <span className={styles.count}>{cartCount}</span>
             </Link>
-            <Button p="0" className={styles.heartBtn} ml="1.25rem" onClick={this.handleUserPopOver}>
-              <Img src={UserIcon} alt="Account" height="24px" mr="0.625rem" float="left" />
+            <Button p="0" className={styles.heartBtn} ml="0.625rem" onClick={this.handleUserPopOver}>
+              <Img src={UserIcon} alt="Account" height="24px" mr="0" float="left" />
             </Button>
             <div className={`${styles.yourAccount} ${userPopOver ? '' : styles.hide}`}>
               <Row display="block" mr="0" ml="0">
