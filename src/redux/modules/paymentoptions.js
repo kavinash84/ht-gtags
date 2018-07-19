@@ -4,14 +4,31 @@ const LOAD = 'paymentOptions/LOAD';
 const LOAD_SUCCESS = 'paymentOptions/LOAD_SUCCESS';
 const LOAD_FAIL = 'paymentOptions/LOAD_FAIL';
 const SELECTED_PAYMENT_METHOD = 'paymentOptions/SELECTED_PAYMENT_METHOD';
+const SELECTED_PAYMENT_METHOD_DETAILS = 'paymentOptions/SELECTED_PAYMENT_METHOD_DETAILS';
 
 const sampleData = require('../../data/PaymentOptions');
 
 const initialState = {
   loaded: false,
   data: sampleData,
-  selectedGateway: 'CreditCard'
+  selectedGateway: 'CreditCard',
+  paymentMethodDetails: {
+    CreditCard: {
+      nameOnCard: '',
+      cardNumber: '',
+      cvv: '',
+      expMonth: '',
+      expYear: ''
+    }
+  }
 };
+
+const appendData = (gateway, state, data) => ({
+  [gateway]: {
+    ...state.paymentMethodDetails[gateway],
+    ...data
+  }
+});
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
@@ -37,7 +54,13 @@ export default function reducer(state = initialState, action = {}) {
     case SELECTED_PAYMENT_METHOD:
       return {
         ...state,
-        selectedGateway: action.payLoad
+        selectedGateway: action.gateway,
+        paymentMethodDetails: appendData(action.gateway, state, action.initial)
+      };
+    case SELECTED_PAYMENT_METHOD_DETAILS:
+      return {
+        ...state,
+        paymentMethodDetails: appendData(action.payLoad.gateway, state, action.payLoad.data)
       };
     default:
       return state;
@@ -49,7 +72,13 @@ export const load = session => ({
   promise: ({ client }) => client.get(`${PAYMENT_OPTIONS}/${session}`)
 });
 
-export const setSelectedGateway = payLoad => ({
+export const setSelectedGateway = (gateway, initial) => ({
   type: SELECTED_PAYMENT_METHOD,
+  gateway,
+  initial
+});
+
+export const setSelectedPaymentDetails = payLoad => ({
+  type: SELECTED_PAYMENT_METHOD_DETAILS,
   payLoad
 });

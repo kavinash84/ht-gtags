@@ -1,17 +1,35 @@
 import React from 'react';
 import Div from 'hometown-components/lib/Div';
 import { Label } from 'hometown-components/lib/Label';
-import CardForm from './CardForm';
+import CreditCardForm from './CreditCardForm';
+import DebitCardForm from './DebitCardForm';
+
 import BankCard from './BankCard';
 
 const styles = require('./Checkout.scss');
 
-const onChangeGateway = (dispatcher, value) => () => {
-  dispatcher(value);
+const initial = {
+  CreditCard: {
+    nameOnCard: '',
+    cardNumber: '',
+    cvv: '',
+    expMonth: '',
+    expYear: ''
+  },
+  DebitCard: {
+    nameOnCard: '',
+    cardNumber: '',
+    cvv: '',
+    expMonth: '',
+    expYear: ''
+  }
 };
 
-const CommonPayments = (paymentType, onChange, selectedGateway) => {
-  console.log(selectedGateway);
+const onChangeGateway = (dispatcher, value) => () => {
+  dispatcher(value, initial[value]);
+};
+
+const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetails) => {
   switch (paymentType) {
     case 'CreditCard':
       return (
@@ -26,9 +44,11 @@ const CommonPayments = (paymentType, onChange, selectedGateway) => {
           <Label for="DebitCard" pl="1rem" color="textLight" ml="0.9375rem">
             Credit Card
           </Label>
-          <Div col="12" mt="0.625rem" pl="1.75rem" hide={!(selectedGateway === paymentType)}>
-            <CardForm />
-          </Div>
+          {selectedGateway === paymentType && (
+            <Div col="12" mt="0.625rem" pl="1.75rem">
+              <CreditCardForm setPaymentDetails={setPaymentDetails} gateway={selectedGateway} />
+            </Div>
+          )}
         </Div>
       );
     case 'DebitCard':
@@ -37,16 +57,18 @@ const CommonPayments = (paymentType, onChange, selectedGateway) => {
           <input
             type="radio"
             name="paymentOption"
-            value="CreditCard"
+            value="DebitCard"
             checked={selectedGateway === paymentType}
             onChange={onChangeGateway(onChange, paymentType)}
           />
           <Label for="DebitCard" pl="1rem" color="textLight" ml="0.9375rem">
             Debit Card
           </Label>
-          <Div col="12" mt="0.625rem" pl="1.75rem" hide={!(selectedGateway === paymentType)}>
-            <CardForm />
-          </Div>
+          {selectedGateway === paymentType && (
+            <Div col="12" mt="0.625rem" pl="1.75rem">
+              <DebitCardForm setPaymentDetails={setPaymentDetails} gateway={selectedGateway} />
+            </Div>
+          )}
         </Div>
       );
     case 'NetBanking':
@@ -64,29 +86,31 @@ const CommonPayments = (paymentType, onChange, selectedGateway) => {
               Internet Banking
             </Label>
           </Div>
-          <Div col="12" mt="0.625rem" pl="1.75rem" hide={!(selectedGateway === paymentType)}>
-            <Div className={styles.paymentBlock}>
-              <Div col="12" mb="1rem">
-                <Label for="bankOptions1" pl="1rem" color="textLight">
-                  Choose From Preferred Bank
-                </Label>
-              </Div>
+          {selectedGateway === paymentType && (
+            <Div col="12" mt="0.625rem" pl="1.75rem">
+              <Div className={styles.paymentBlock}>
+                <Div col="12" mb="1rem">
+                  <Label for="bankOptions1" pl="1rem" color="textLight">
+                    Choose From Preferred Bank
+                  </Label>
+                </Div>
 
-              <BankCard name="citibank" img="https://static.hometown.in/media/cms/BankLOGO/citi.gif" />
-              <BankCard name="citibank" img="https://static.hometown.in/media/cms/BankLOGO/hdfc.gif" />
-              <BankCard name="citibank" img="https://static.hometown.in/media/cms/BankLOGO/hsbc.gif" />
-              <BankCard name="citibank" img="https://static.hometown.in/media/cms/BankLOGO/icici.gif" />
+                <BankCard name="citibank" img="https://static.hometown.in/media/cms/BankLOGO/citi.gif" />
+                <BankCard name="citibank" img="https://static.hometown.in/media/cms/BankLOGO/hdfc.gif" />
+                <BankCard name="citibank" img="https://static.hometown.in/media/cms/BankLOGO/hsbc.gif" />
+                <BankCard name="citibank" img="https://static.hometown.in/media/cms/BankLOGO/icici.gif" />
 
-              <Div col="12" mt="1rem">
-                <select className={`${styles.dropDown} ${styles.selectBank}`}>
-                  <option>Select Bank</option>
-                  <option>01</option>
-                  <option>02</option>
-                  <option>03</option>
-                </select>
+                <Div col="12" mt="1rem">
+                  <select className={`${styles.dropDown} ${styles.selectBank}`}>
+                    <option>Select Bank</option>
+                    <option>01</option>
+                    <option>02</option>
+                    <option>03</option>
+                  </select>
+                </Div>
               </Div>
             </Div>
-          </Div>
+          )}
         </div>
       );
     case 'Emi':
@@ -104,20 +128,22 @@ const CommonPayments = (paymentType, onChange, selectedGateway) => {
               EMI
             </Label>
           </Div>
-          <Div col="12" mt="0.625rem" pl="1.75rem" hide={!(selectedGateway === paymentType)}>
-            <Div className={styles.paymentBlock}>
-              <Div col="12" mb="1rem">
-                <Label for="bankOptions1" pl="1rem" color="textLight">
-                  Choose From Preferred Bank
-                </Label>
-              </Div>
+          {selectedGateway === paymentType && (
+            <Div col="12" mt="0.625rem" pl="1.75rem" hide={!(selectedGateway === paymentType)}>
+              <Div className={styles.paymentBlock}>
+                <Div col="12" mb="1rem">
+                  <Label for="bankOptions1" pl="1rem" color="textLight">
+                    Choose From Preferred Bank
+                  </Label>
+                </Div>
 
-              <BankCard name="citibank" img="https://static.hometown.in/media/cms/BankLOGO/citi.gif" />
-              <BankCard name="hdfc" img="https://static.hometown.in/media/cms/BankLOGO/hdfc.gif" />
-              <BankCard name="hsbc" img="https://static.hometown.in/media/cms/BankLOGO/hsbc.gif" />
-              <BankCard name="icici" img="https://static.hometown.in/media/cms/BankLOGO/icici.gif" />
+                <BankCard name="citibank" img="https://static.hometown.in/media/cms/BankLOGO/citi.gif" />
+                <BankCard name="hdfc" img="https://static.hometown.in/media/cms/BankLOGO/hdfc.gif" />
+                <BankCard name="hsbc" img="https://static.hometown.in/media/cms/BankLOGO/hsbc.gif" />
+                <BankCard name="icici" img="https://static.hometown.in/media/cms/BankLOGO/icici.gif" />
+              </Div>
             </Div>
-          </Div>
+          )}
         </div>
       );
     case 'Wallet':
@@ -135,21 +161,23 @@ const CommonPayments = (paymentType, onChange, selectedGateway) => {
               Wallet
             </Label>
           </Div>
-          <Div col="12" mt="0.625rem" pl="1.75rem" mb="0.625rem" hide={!(selectedGateway === paymentType)}>
-            <Div className={styles.paymentBlock}>
-              <Div col="12" mb="1rem">
-                <Label for="bankOptions1" pl="1rem" color="textLight">
-                  Select From your preferred Wallet
-                </Label>
+          {selectedGateway === paymentType && (
+            <Div col="12" mt="0.625rem" pl="1.75rem" mb="0.625rem" hide={!(selectedGateway === paymentType)}>
+              <Div className={styles.paymentBlock}>
+                <Div col="12" mb="1rem">
+                  <Label for="bankOptions1" pl="1rem" color="textLight">
+                    Select From your preferred Wallet
+                  </Label>
+                </Div>
+                <BankCard name="payTm" img="https://www.hometown.in/images/local_v2/onestepcheckout/logo/paytm.jpg" />
+                <BankCard name="payu" img="https://www.hometown.in/images/local_v2/onestepcheckout/logo/payu.jpg" />
+                <BankCard
+                  name="mobikwik"
+                  img="https://www.hometown.in/images/local_v2/onestepcheckout/logo/mobikwik.jpg"
+                />
               </Div>
-              <BankCard name="payTm" img="https://www.hometown.in/images/local_v2/onestepcheckout/logo/paytm.jpg" />
-              <BankCard name="payu" img="https://www.hometown.in/images/local_v2/onestepcheckout/logo/payu.jpg" />
-              <BankCard
-                name="mobikwik"
-                img="https://www.hometown.in/images/local_v2/onestepcheckout/logo/mobikwik.jpg"
-              />
             </Div>
-          </Div>
+          )}
         </div>
       );
     case 'CashOnDelivery':

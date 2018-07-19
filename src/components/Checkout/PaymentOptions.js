@@ -9,7 +9,7 @@ import Section from 'hometown-components/lib/Section';
 import Button from 'hometown-components/lib/Buttons';
 import Heading from 'hometown-components/lib/Heading';
 import Text from 'hometown-components/lib/Text';
-import { setSelectedGateway } from 'redux/modules/paymentoptions';
+import { setSelectedGateway, setSelectedPaymentDetails } from 'redux/modules/paymentoptions';
 // import CardForm from './CardForm';
 // import BankCard from './BankCard';
 import MenuCheckout from './MenuCheckout';
@@ -20,15 +20,23 @@ const mapStateToProps = ({ paymentoptions }) => ({
   selectedGateway: paymentoptions.selectedGateway
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({ toggleGateway: setSelectedGateway }, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      toggleGateway: setSelectedGateway,
+      setPaymentDetails: setSelectedPaymentDetails
+    },
+    dispatch
+  );
 
 class PaymentOptions extends Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
   render() {
-    const { data, selectedGateway, toggleGateway } = this.props;
-    console.log(this.props);
+    const {
+      data, selectedGateway, toggleGateway, setPaymentDetails
+    } = this.props;
     return (
       <Div type="block">
         <MenuCheckout page="payment" />
@@ -47,7 +55,8 @@ class PaymentOptions extends Component {
                   </Div>
                 </Row>
                 <Row display="block" mr="0" ml="0" mt="5px">
-                  {data.map(paymentType => CommonPayments(paymentType.paymentType, toggleGateway, selectedGateway))}
+                  {data.map(paymentType =>
+                    CommonPayments(paymentType.paymentType, toggleGateway, selectedGateway, setPaymentDetails))}
                 </Row>
                 <Row display="block" mr="0" ml="0">
                   <Div col="4">
@@ -82,7 +91,11 @@ PaymentOptions.defaultProps = {
 PaymentOptions.propTypes = {
   selectedGateway: PropTypes.string,
   data: PropTypes.array,
-  toggleGateway: PropTypes.func.isRequired
+  toggleGateway: PropTypes.func.isRequired,
+  setPaymentDetails: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PaymentOptions);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PaymentOptions);
