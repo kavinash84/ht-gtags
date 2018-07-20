@@ -1,6 +1,6 @@
 import { isBlank } from 'js-utility-functions';
 
-const isEmpty = value => value === undefined || value === null || value === '';
+export const isEmpty = value => value === undefined || value === null || value === '';
 const join = rules => (value, data, params) => rules.map(rule => rule(value, data, params)).filter(error => !!error)[0];
 
 export function email(value) {

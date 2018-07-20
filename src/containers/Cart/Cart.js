@@ -9,25 +9,53 @@ import Notifications from 'components/Notifications';
 import Menu from 'containers/MenuNew/index';
 import Footer from 'components/Footer';
 import TitleBar from 'components/TitleBar';
+import { resetCheck } from 'redux/modules/cart';
 
 const CartEmptyIcon = require('../../../static/cart-empty.jpg');
 
-@connect(({ cart: { data, summary, error } }) => ({
-  results: data,
-  summary,
-  error
-}))
+@connect(
+  ({
+    cart: {
+      data, cartChecked, summary, error
+    }
+  }) => ({
+    results: data,
+    isCartChecked: cartChecked,
+    summary,
+    error
+  }),
+  {
+    resetCheckKey: resetCheck
+  }
+)
 export default class CartContainer extends Component {
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  };
+
   static propTypes = {
     results: PropTypes.array,
     summary: PropTypes.object,
-    error: PropTypes.object
+    error: PropTypes.object,
+    isCartChecked: PropTypes.bool,
+    history: PropTypes.object.isRequired,
+    resetCheckKey: PropTypes.func.isRequired
   };
   static defaultProps = {
     results: [],
     summary: null,
-    error: null
+    error: null,
+    isCartChecked: false
   };
+  componentWillReceiveProps(nextProps) {
+    const { isCartChecked, history, resetCheckKey } = this.props;
+    if (!isCartChecked && nextProps.isCartChecked) {
+      const { dispatch } = this.context.store;
+      dispatch(resetCheckKey());
+      return history.push('/delivery-address');
+    }
+  }
+
   render() {
     const { results, summary, error } = this.props;
     return (

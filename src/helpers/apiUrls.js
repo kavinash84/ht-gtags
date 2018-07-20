@@ -28,6 +28,7 @@ export const CATEGORY_PAGE = 'tesla/categories';
 /* Cart */
 export const ADDTOCART = 'tesla/cart';
 export const SYNCCART = 'tesla/cart/sync';
+export const CHECKCART = 'tesla/checkout';
 
 /* Session */
 export const SESSION = 'tesla/session';
@@ -35,3 +36,6 @@ export const SESSION = 'tesla/session';
 export const TRACK_ORDER = 'tesla/orders/track';
 /* My Orders */
 export const MY_ORDERS = 'tesla/orders';
+
+/* Payments */
+export const PAYMENT_OPTIONS = 'tesla/payments';

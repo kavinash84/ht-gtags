@@ -12,7 +12,7 @@ const styles = require('./OrderSummary.scss');
 const EditCouponIcon = require('../../../static/edit.svg');
 
 const OrderSummary = ({
-  itemsTotal, savings, shipping, totalCart
+  itemsTotal, savings, shipping, totalCart, onClick, checkingCart
 }) => (
   <Div col="3">
     <Div className={styles.orderSummary}>
@@ -179,8 +179,9 @@ const OrderSummary = ({
           fontWeight="Light"
           fontSize="0.875rem"
           ls="1px"
+          onClick={onClick}
         >
-          CONTINUE
+          {checkingCart ? 'Please wait...' : 'CONTINUE'}
         </Button>
       </Div>
     </Div>
@@ -196,11 +197,17 @@ const OrderSummary = ({
   </Div>
 );
 
+OrderSummary.defaultProps = {
+  checkingCart: false
+};
+
 OrderSummary.propTypes = {
   itemsTotal: PropTypes.number.isRequired,
   savings: PropTypes.number.isRequired,
   shipping: PropTypes.number.isRequired,
-  totalCart: PropTypes.number.isRequired
+  totalCart: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired,
+  checkingCart: PropTypes.bool
 };
 
 export default OrderSummary;
