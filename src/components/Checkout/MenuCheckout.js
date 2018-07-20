@@ -9,12 +9,12 @@ import Row from 'hometown-components/lib/Row';
 const Back = require('../../../static/arrow_back.svg');
 const styles = require('./Checkout.scss');
 
-const MenuCheckout = ({ page }) => (
+const MenuCheckout = ({ page, history }) => (
   <Section mb="0.625rem" p="3.5rem 0.5rem 1.375rem" bg="primary" boxShadow="0 2px 8px 0 rgba(0, 0, 0, 0.17)">
     <Container type="container" pr="2rem" pl="2rem">
       <Row display="block" mr="0" ml="0" mb="1rem">
         <Heading fontSize="0.875rem" color="white" mt="0" mb="0" fontWeight="300">
-          <button className={styles.back}>
+          <button className={styles.back} onClick={() => history.goBack()}>
             <img src={Back} alt="back" />
           </button>
           CHECKOUT
@@ -44,7 +44,8 @@ MenuCheckout.defaultProps = {
 };
 
 MenuCheckout.propTypes = {
-  page: PropTypes.string
+  page: PropTypes.string,
+  history: PropTypes.object.isRequired
 };
 
 export default MenuCheckout;
