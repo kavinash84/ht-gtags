@@ -10,7 +10,6 @@ import Button from 'hometown-components/lib/Buttons';
 import Heading from 'hometown-components/lib/Heading';
 import Text from 'hometown-components/lib/Text';
 import Footer from 'components/Footer';
-// import { setSelectedGateway, setSelectedPaymentDetails } from 'redux/modules/paymentoptions';
 import {
   setSelectedGateway,
   setSelectedPaymentDetails,
@@ -27,13 +26,14 @@ import CommonPayments from './CommonPayments';
 //   dispatcher(sessionId);
 // };
 
-const mapStateToProps = ({ paymentoptions, cart: { checkingCart, cartChecked, summary } }) => ({
+const mapStateToProps = ({ paymentoptions, cart: { checkingCart, cartChecked, summary }, app: { sessionId } }) => ({
   selectedGateway: paymentoptions.selectedGateway,
-  validationerror: paymentoptions.validationerror,
-  paymentDetails: paymentoptions.data.paymentMethodDetails,
+  isFormValid: paymentoptions.isFormValid,
+  paymentDetails: paymentoptions.paymentMethodDetails,
   checkingCart,
   cartChecked,
-  summary
+  summary,
+  sessionId
 });
 
 const mapDispatchToProps = dispatch =>
@@ -52,24 +52,25 @@ class PaymentOptions extends Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps, this.props);
-    if (!nextProps.validationerror && nextProps.validationerror !== this.props.validationerror) {
-      // const {
-      //   submitDetails, paymentDetails
-      // } = this.props;
-      console.log('Yaar ! ');
-      // submitDetails(paymentDetails);
-    }
-    if (nextProps.validationerror) {
-      const { setError } = this.props;
-      setError();
-      alert('Please Fill All Details');
-    }
+  componentWillReceiveProps() {
+    // if (this.props.validationerror && nextProps.validationerror === this.props.validationerror) {
+    //   // const {
+    //   //   submitDetails, paymentDetails
+    //   // } = this.props;
+    //   console.log('Yaar ! ');
+    //   // submitDetails(paymentDetails);
+    // }
+    // if (nextProps.validationerror) {
+    //   const { setError } = this.props;
+    //   setError();
+    //   alert('Please Fill All Details');
+    // }
   }
   nextStep = () => {
-    const { validateForm } = this.props;
-    validateForm();
+    const { paymentDetails, submitDetails, sessionId } = this.props;
+    // validateForm();
+    const { dispatch } = this.context.store;
+    dispatch(submitDetails(sessionId, paymentDetails));
   };
   render() {
     const {
@@ -141,7 +142,9 @@ PaymentOptions.defaultProps = {
   summary: null,
   // error: null,
   // isCartChecked: false,
-  checkingCart: false
+  checkingCart: false,
+  paymentDetails: {},
+  sessionId: ''
 };
 
 PaymentOptions.propTypes = {
@@ -150,13 +153,16 @@ PaymentOptions.propTypes = {
   toggleGateway: PropTypes.func.isRequired,
   setPaymentDetails: PropTypes.func.isRequired,
   summary: PropTypes.object,
-  setError: PropTypes.func.isRequired,
-  validateForm: PropTypes.func.isRequired,
-  validationerror: PropTypes.bool.isRequired,
+  submitDetails: PropTypes.func.isRequired,
+  paymentDetails: PropTypes.object,
+  // setError: PropTypes.func.isRequired,
+  // validateForm: PropTypes.func.isRequired,
+  // isFormValid: PropTypes.bool.isRequired,
 
   // error: PropTypes.object,
   // isCartChecked: PropTypes.bool,
-  checkingCart: PropTypes.bool
+  checkingCart: PropTypes.bool,
+  sessionId: PropTypes.string
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PaymentOptions);
