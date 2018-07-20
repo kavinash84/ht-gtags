@@ -4,8 +4,12 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Label } from 'hometown-components/lib/Label';
 import FormInput from 'hometown-components/lib/Forms/FormInput';
+import Img from 'hometown-components/lib/Img';
 
 const styles = require('./Checkout.scss');
+const mcIcon = require('../../../static/master-card.jpg');
+// const visaIcon = require('../../../static/visa.jpg');
+// const maestroIcon = require('../../../static/maestro.jpg');
 
 const MONTHS = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 const YEARS = [...Array(21)];
@@ -30,7 +34,7 @@ const CardForm = ({ gateway, setPaymentDetails, details: { nameOnCard, cardNumbe
         onChange={onChangeDetails(setPaymentDetails, gateway)}
       />
     </Div>
-    <Div col="5" pr="1rem">
+    <Div col="5" pr="1rem" className={styles.cardFieldWrapper}>
       <FormInput
         label="Card number"
         type="text"
@@ -39,6 +43,7 @@ const CardForm = ({ gateway, setPaymentDetails, details: { nameOnCard, cardNumbe
         value={cardNumber}
         onChange={onChangeDetails(setPaymentDetails, gateway)}
       />
+      <Img src={mcIcon} alt="" />
     </Div>
     <Div col="2">
       <FormInput
