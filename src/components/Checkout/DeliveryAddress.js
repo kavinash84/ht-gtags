@@ -15,7 +15,6 @@ import { sendDeliveryAddress } from 'redux/modules/checkout';
 import { MY_WISHLIST_URL } from 'helpers/Constants';
 import MenuCheckout from './MenuCheckout';
 import ShippingForm from './ShippingForm';
-// import BillingForm from './BillingForm';
 
 const addIcon = require('../../../static/round-add_circle_outline.svg');
 const styles = require('./DeliveryAddress.scss');
@@ -208,9 +207,4 @@ DeliveryAddress.propTypes = {
   sessionId: PropTypes.string.isRequired,
   history: PropTypes.object.isRequired
 };
-export default connect(
-  mapStateToProps,
-  null,
-  null,
-  { withRef: true }
-)(DeliveryAddress);
+export default connect(mapStateToProps, null, null, { withRef: true })(DeliveryAddress);

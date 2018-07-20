@@ -23,22 +23,15 @@ const MenuCheckout = ({ page }) => (
       <Row display="block" mr="0" ml="0">
         <Div col="9">
           <Div col="3">
-            <a href="/delivery-address" className={`${styles.headerLink} ${page === 'delivery' ? styles.active : ''}`}>
-              Delivery Address
-            </a>
+            <span className={`${styles.headerLink} ${page === 'delivery' ? styles.active : ''}`}>Delivery Address</span>
           </Div>
           <Div col="3">
-            <a href="/payment-options" className={`${styles.headerLink} ${page === 'payment' ? styles.active : ''}`}>
-              Payment Options
-            </a>
+            <span className={`${styles.headerLink} ${page === 'payment' ? styles.active : ''}`}>Payment Options</span>
           </Div>
           <Div col="3">
-            <a
-              href="/reviewOrder"
-              className={`${styles.headerLink} ${styles.hideArrow} ${page === 'review' ? styles.active : ''}`}
-            >
+            <span className={`${styles.headerLink} ${styles.hideArrow} ${page === 'review' ? styles.active : ''}`}>
               Review & Order
-            </a>
+            </span>
           </Div>
         </Div>
       </Row>

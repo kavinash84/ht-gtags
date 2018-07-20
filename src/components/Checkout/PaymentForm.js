@@ -30,6 +30,9 @@ class PaymentForm extends Component {
 
   render() {
     const { data: { form_data: { action, fields } } } = this.props;
+    if (action && fields) {
+      return <span />;
+    }
     const formFields = Object.entries(fields);
     return (
       <form
