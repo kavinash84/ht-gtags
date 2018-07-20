@@ -9,15 +9,27 @@ import Section from 'hometown-components/lib/Section';
 import Button from 'hometown-components/lib/Buttons';
 import Heading from 'hometown-components/lib/Heading';
 import Text from 'hometown-components/lib/Text';
+// import { setSelectedGateway, setSelectedPaymentDetails } from 'redux/modules/paymentoptions';
 import { setSelectedGateway, setSelectedPaymentDetails } from 'redux/modules/paymentoptions';
-// import CardForm from './CardForm';
-// import BankCard from './BankCard';
 import MenuCheckout from './MenuCheckout';
 import OrderSummary from './OrderSummary';
 import CommonPayments from './CommonPayments';
 
-const mapStateToProps = ({ paymentoptions }) => ({
-  selectedGateway: paymentoptions.selectedGateway
+// const checkCartAfterPayment = (dispatcher, sessionId) => e => {
+//   e.preventDefault();
+//   dispatcher(sessionId);
+// };
+
+const mapStateToProps = ({
+  paymentoptions, cart: {
+    checkingCart, cartChecked, summary, error
+  }
+}) => ({
+  selectedGateway: paymentoptions.selectedGateway,
+  checkingCart,
+  cartChecked,
+  summary,
+  error
 });
 
 const mapDispatchToProps = dispatch =>
@@ -35,7 +47,7 @@ class PaymentOptions extends Component {
   };
   render() {
     const {
-      data, selectedGateway, toggleGateway, setPaymentDetails
+      data, selectedGateway, toggleGateway, setPaymentDetails, summary, checkingCart
     } = this.props;
     return (
       <Div type="block">
@@ -80,7 +92,13 @@ class PaymentOptions extends Component {
                   </Div>
                 </Row>
               </Div>
-              <OrderSummary />
+              <OrderSummary
+                itemsTotal={summary.items}
+                savings={summary.savings}
+                shipping={summary.shipping_charges}
+                totalCart={summary.total}
+                checkingCart={checkingCart}
+              />
             </Row>
           </Container>
         </Section>
@@ -91,17 +109,22 @@ class PaymentOptions extends Component {
 
 PaymentOptions.defaultProps = {
   selectedGateway: 'creditcard',
-  data: []
+  data: [],
+  summary: null,
+  // error: null,
+  // isCartChecked: false,
+  checkingCart: false
 };
 
 PaymentOptions.propTypes = {
   selectedGateway: PropTypes.string,
   data: PropTypes.array,
   toggleGateway: PropTypes.func.isRequired,
-  setPaymentDetails: PropTypes.func.isRequired
+  setPaymentDetails: PropTypes.func.isRequired,
+  summary: PropTypes.object,
+  // error: PropTypes.object,
+  // isCartChecked: PropTypes.bool,
+  checkingCart: PropTypes.bool
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PaymentOptions);
+export default connect(mapStateToProps, mapDispatchToProps)(PaymentOptions);

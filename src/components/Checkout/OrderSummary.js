@@ -179,10 +179,9 @@ const OrderSummary = ({
           fontWeight="Light"
           fontSize="0.875rem"
           ls="1px"
-          disabled={checkingCart}
           onClick={onClick}
         >
-          {checkingCart ? 'Please wait..' : 'CONTINUE'}
+          {checkingCart ? 'Please wait...' : 'CONTINUE'}
         </Button>
       </Div>
     </Div>
