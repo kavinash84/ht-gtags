@@ -197,9 +197,10 @@ export default function reducer(state = initialState, action = {}) {
     case SET_SELECTED_PINCODE:
       return {
         ...state,
-        selectedPincode: action.pincode,
         pincode: action.pincode,
+        cityFeedBackError: false,
         pincodeFeedBackError: false,
+        stateFeedBackError: false,
         results: [],
         showResults: false
       };

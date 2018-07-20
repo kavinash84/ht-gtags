@@ -11,7 +11,7 @@ import { Label } from 'hometown-components/lib/Label';
 import { sendDeliveryAddress } from 'redux/modules/checkout';
 import MenuCheckout from './MenuCheckout';
 import ShippingForm from './ShippingForm';
-import BillingForm from './BillingForm';
+// import BillingForm from './BillingForm';
 
 const addIcon = require('../../../static/round-add_circle_outline.svg');
 const styles = require('./DeliveryAddress.scss');
@@ -47,7 +47,6 @@ class DeliveryAddress extends Component {
     } else {
       const shippingForm = this.shipping_form.validateForm();
       const billingForm = this.billing_form.validateForm();
-      console.log(billingForm);
       if (shippingForm.error || billingForm.error) {
         alert('Please Fill All Details Correctly !');
       } else {
@@ -70,7 +69,7 @@ class DeliveryAddress extends Component {
 
   render() {
     const { isLoggedIn } = this.props;
-    const { shippingIsBilling } = this.state;
+    // const { shippingIsBilling } = this.state;
     return (
       <Div type="block">
         <MenuCheckout />
@@ -79,18 +78,15 @@ class DeliveryAddress extends Component {
             <form onSubmit={this.handleSubmit}>
               <ShippingForm
                 ref={shippingform => {
-                  console.log(shippingform);
                   if (shippingform) {
-                    console.log(shippingform);
                     this.shipping_form = shippingform.getWrappedInstance();
-                    console.log(this.shipping_form);
                   }
                 }}
               />
-              <input type="checkbox" value={shippingIsBilling} onChange={this.toggleBillingForm} />
-              <Label>Different Billing Address ?</Label>
+              {/* <input type="checkbox" value={shippingIsBilling} onChange={this.toggleBillingForm} /> */}
+              {/* <Label>Different Billing Address ?</Label> */}
 
-              <BillingForm
+              {/* <BillingForm
                 ref={billingform => {
                   if (billingform) {
                     console.log(billingform);
@@ -98,7 +94,7 @@ class DeliveryAddress extends Component {
                     console.log(this.billing_form); // Don't know why it is undefined !
                   }
                 }}
-              />
+              /> */}
 
               <button type="submit ">NEXT PAYMENT OPTIONS</button>
             </form>
