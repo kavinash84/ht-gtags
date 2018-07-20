@@ -6,10 +6,12 @@ import FormInput from 'hometown-components/lib/Forms/FormInput';
 import Div from 'hometown-components/lib/Div';
 import * as actionCreators from 'redux/modules/shipping';
 
-const styles = require('./Pincode.scss');
+const styles = require('./ShippingPincode.scss');
 
 const onChange = (dispatcher, onChangePincode, load) => e => {
-  const { target: { value } } = e;
+  const {
+    target: { value }
+  } = e;
   dispatcher(value);
   onChangePincode(value);
   if (value.length >= 2) load(value);
@@ -97,4 +99,7 @@ Pincode.propTypes = {
   pincodeFeedBackMessage: PropTypes.string.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Pincode);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Pincode);

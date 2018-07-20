@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FormInput from 'hometown-components/lib/Forms/FormInput';
-import Row from 'hometown-components/lib/Row';
-import Div from 'hometown-components/lib/Div';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from 'redux/modules/shipping';
@@ -117,71 +115,67 @@ class ShippingForm extends React.Component {
 
     return (
       <div>
-        <Row display="block" mr="0" ml="0">
-          <Div col="5">
-            <FormInput
-              label="Full Name"
-              type="text"
-              placeholder=""
-              onChange={e => onChangeFullName(e.target.value)}
-              value={fullName}
-              feedBackError={fullNameFeedBackError}
-              feedBackMessage={fullNameFeedBackMessage}
-            />
-            <Pincode
-              pincode={pincode}
-              shippingForm={shippingForm}
-              feedBackError={pincodeFeedBackError}
-              onChangePincode={onChangePincode}
-              feedBackMessage={pincodeFeedBackMessage}
-            />
-            <FormInput
-              label="Address"
-              type="text-area"
-              placeholder=""
-              onChange={e => onChangeAddress(e.target.value)}
-              value={address}
-              feedBackError={addressFeedBackError}
-              feedBackMessage={addressFeedBackMessage}
-            />
-            <FormInput
-              label="City"
-              type="text"
-              placeholder=""
-              onChange={e => onChangeCity(e.target.value)}
-              value={city}
-              feedBackError={cityFeedBackError}
-              feedBackMessage={cityFeedBackMessage}
-            />
-            <FormInput
-              label="State"
-              type="text"
-              placeholder=""
-              onChange={e => onChangeState(e.target.value)}
-              value={state}
-              feedBackError={stateFeedBackError}
-              feedBackMessage={stateFeedBackMessage}
-            />
-            <FormInput
-              label="Email ID"
-              type="text"
-              placeholder=""
-              onChange={e => onChangeEmail(e.target.value)}
-              value={email}
-              feedBackError={emailFeedBackError}
-              feedBackMessage={emailFeedBackMessage}
-            />
-            <FormInput
-              label="Phone"
-              type="text"
-              placeholder=""
-              onChange={e => onChangePhone(e.target.value)}
-              value={phone}
-              feedBackError={phoneFeedBackError}
-              feedBackMessage={phoneFeedBackMessage}
-            />
-          </Div>
-        </Row>
+        <FormInput
+          label="Full Name"
+          type="text"
+          placeholder=""
+          onChange={e => onChangeFullName(e.target.value)}
+          value={fullName}
+          feedBackError={fullNameFeedBackError}
+          feedBackMessage={fullNameFeedBackMessage}
+        />
+        <FormInput
+          label="Email ID"
+          type="text"
+          placeholder=""
+          onChange={e => onChangeEmail(e.target.value)}
+          value={email}
+          feedBackError={emailFeedBackError}
+          feedBackMessage={emailFeedBackMessage}
+        />
+        <FormInput
+          label="Phone"
+          type="text"
+          placeholder=""
+          onChange={e => onChangePhone(e.target.value)}
+          value={phone}
+          feedBackError={phoneFeedBackError}
+          feedBackMessage={phoneFeedBackMessage}
+        />
+        <FormInput
+          label="Address"
+          type="text-area"
+          placeholder=""
+          onChange={e => onChangeAddress(e.target.value)}
+          value={address}
+          feedBackError={addressFeedBackError}
+          feedBackMessage={addressFeedBackMessage}
+        />
+        <FormInput
+          label="City"
+          type="text"
+          placeholder=""
+          onChange={e => onChangeCity(e.target.value)}
+          value={city}
+          feedBackError={cityFeedBackError}
+          feedBackMessage={cityFeedBackMessage}
+        />
+        <FormInput
+          label="State"
+          type="text"
+          placeholder=""
+          onChange={e => onChangeState(e.target.value)}
+          value={state}
+          feedBackError={stateFeedBackError}
+          feedBackMessage={stateFeedBackMessage}
+        />
+        <Pincode
+          pincode={pincode}
+          shippingForm={shippingForm}
+          feedBackError={pincodeFeedBackError}
+          onChangePincode={onChangePincode}
+          feedBackMessage={pincodeFeedBackMessage}
+        />
       </div>
     );
   }
@@ -227,4 +221,9 @@ ShippingForm.propTypes = {
   setStateError: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(ShippingForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  null,
+  { withRef: true }
+)(ShippingForm);

@@ -6,6 +6,7 @@ import Button from 'hometown-components/lib/Buttons';
 import Section from 'hometown-components/lib/Section';
 import ShippedTo from 'hometown-components/lib/ShippedTo';
 import PaymentMethod from 'hometown-components/lib/PaymentMethod';
+import Footer from 'components/Footer';
 import ProductQuantityCounter from '../ProductQuantityCounter';
 import MenuCheckout from './MenuCheckout';
 import OrderSummary from './OrderSummary';
@@ -85,6 +86,7 @@ export default class ReviewOrder extends Component {
             </Row>
           </Container>
         </Section>
+        <Footer />
       </Div>
     );
   }

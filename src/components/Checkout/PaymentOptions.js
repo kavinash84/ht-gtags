@@ -9,6 +9,7 @@ import Section from 'hometown-components/lib/Section';
 import Button from 'hometown-components/lib/Buttons';
 import Heading from 'hometown-components/lib/Heading';
 import Text from 'hometown-components/lib/Text';
+import Footer from 'components/Footer';
 // import { setSelectedGateway, setSelectedPaymentDetails } from 'redux/modules/paymentoptions';
 import { setSelectedGateway, setSelectedPaymentDetails } from 'redux/modules/paymentoptions';
 import MenuCheckout from './MenuCheckout';
@@ -102,6 +103,7 @@ class PaymentOptions extends Component {
             </Row>
           </Container>
         </Section>
+        <Footer />
       </Div>
     );
   }
@@ -127,4 +129,7 @@ PaymentOptions.propTypes = {
   checkingCart: PropTypes.bool
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PaymentOptions);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PaymentOptions);
