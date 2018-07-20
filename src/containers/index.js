@@ -8,7 +8,6 @@ import OrderSummary from './OrderSummary/OrderSummary';
 import ProductDetails from './ProductDetails/ProductDetails';
 import DeliveryAddress from './DeliveryAddress/DeliveryAddress';
 import PaymentOptions from './PaymentOptions/PaymentOptions';
-import PaymentOptions1 from './PaymentOptions1/PaymentOptions';
 import ReviewOrder from './ReviewOrder/ReviewOrder';
 import ReturnPolicy from './ReturnPolicy/ReturnPolicy';
 import PrivacyPolicy from './PrivacyPolicy/PrivacyPolicy';
@@ -44,6 +43,5 @@ export {
   TrackOrderModal,
   EmiModal,
   PaymentOptions,
-  PaymentOptions1,
   NotFound
 };

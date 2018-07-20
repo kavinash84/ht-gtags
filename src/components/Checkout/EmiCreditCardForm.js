@@ -12,10 +12,12 @@ const YEARS = [...Array(21)];
 
 const onChangeDetails = (dispatcher, gateway) => e => {
   const { name, value } = e.target;
+  console.log(name, value, gateway);
+
   dispatcher({ gateway, data: { [name]: value } });
 };
 const mapStateToProps = ({ paymentoptions }) => ({
-  details: paymentoptions.paymentMethodDetails.CreditCard
+  details: paymentoptions.paymentMethodDetails.Emi
 });
 
 const CardForm = ({ gateway, setPaymentDetails, details: { nameOnCard, cardNumber, cvv } }) => (

@@ -19,3 +19,11 @@ export const getPaymentOptions = createSelector([getPaymentConfig, allowedOption
   }
   return [];
 });
+
+export const getAllEMIBanks = createSelector(
+  [getPaymentOptions],
+  items => items.filter(item => item.paymentType === 'Emi')[0] || []
+);
+
+export const getEmiBanks = createSelector([getAllEMIBanks], banks =>
+  Object.values(banks.bankDetails).map(x => ({ bank: x.bank, values: Object.values(x.emiOptions) })));

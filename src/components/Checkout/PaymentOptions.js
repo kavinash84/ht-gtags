@@ -56,7 +56,13 @@ class PaymentOptions extends Component {
                 </Row>
                 <Row display="block" mr="0" ml="0" mt="5px">
                   {data.map(paymentType =>
-                    CommonPayments(paymentType.paymentType, toggleGateway, selectedGateway, setPaymentDetails))}
+                    CommonPayments(
+                      paymentType.paymentType,
+                      toggleGateway,
+                      selectedGateway,
+                      setPaymentDetails,
+                      paymentType
+                    ))}
                 </Row>
                 <Row display="block" mr="0" ml="0">
                   <Div col="4">

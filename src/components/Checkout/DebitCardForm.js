@@ -8,6 +8,7 @@ import FormInput from 'hometown-components/lib/Forms/FormInput';
 const styles = require('./Checkout.scss');
 
 const MONTHS = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+const YEARS = [...Array(21)];
 
 const onChangeDetails = (dispatcher, gateway) => e => {
   const { name, value } = e.target;
@@ -56,10 +57,12 @@ const CardForm = ({ gateway, setPaymentDetails, details: { nameOnCard, cardNumbe
     </Div>
     <Div col="5">
       <select className={styles.dropDown} name="expMonth" onChange={onChangeDetails(setPaymentDetails, gateway)}>
+        <option key="month">MM</option>
         {MONTHS.map(month => <option key={month}>{month}</option>)}
       </select>
       <select className={styles.dropDown} name="expYear" onChange={onChangeDetails(setPaymentDetails, gateway)}>
-        {MONTHS.map((v, i) => <option key={String(i)}>{new Date().getYear() + (i - 100)}</option>)}
+        <option key="year">YY</option>
+        {YEARS.map((v, i) => <option key={String(i)}>{new Date().getYear() + (i - 100)}</option>)}
       </select>
     </Div>
   </Div>
