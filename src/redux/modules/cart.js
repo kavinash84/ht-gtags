@@ -18,6 +18,7 @@ const SYNCING_CART_FAIL = 'cart/SYNCING_CART_FAIL';
 const CHECKCART = 'cart/CHECKCART';
 const CHECKCART_SUCCESS = 'cart/CHECKCART_SUCCESS';
 const CHECKCART_FAIL = 'cart/CHECKCART_FAIL';
+const RESET_CART_CHECK = 'cart/RESET_CART_CHECK';
 
 const initialState = {
   data: [],
@@ -144,14 +145,20 @@ export default function reducer(state = initialState, action = {}) {
     case CHECKCART_SUCCESS:
       return {
         ...state,
+        checkingCart: false,
         cartCheckData: action.result,
         checkCart: false,
-        cartChecked: true
+        cartChecked: action.result.success
       };
     case CHECKCART_FAIL:
       return {
         ...state,
         checkingCart: false,
+        cartChecked: false
+      };
+    case RESET_CART_CHECK:
+      return {
+        ...state,
         cartChecked: false
       };
     default:
@@ -244,4 +251,8 @@ export const checkCart = sessionId => ({
       throw error;
     }
   }
+});
+
+export const resetCheck = () => ({
+  type: RESET_CART_CHECK
 });
