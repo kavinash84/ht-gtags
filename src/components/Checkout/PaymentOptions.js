@@ -10,7 +10,13 @@ import Button from 'hometown-components/lib/Buttons';
 import Heading from 'hometown-components/lib/Heading';
 import Text from 'hometown-components/lib/Text';
 // import { setSelectedGateway, setSelectedPaymentDetails } from 'redux/modules/paymentoptions';
-import { setSelectedGateway, setSelectedPaymentDetails } from 'redux/modules/paymentoptions';
+import {
+  setSelectedGateway,
+  setSelectedPaymentDetails,
+  submitPaymentDetails,
+  checkPaymentDetails,
+  setValidationError
+} from 'redux/modules/paymentoptions';
 import MenuCheckout from './MenuCheckout';
 import OrderSummary from './OrderSummary';
 import CommonPayments from './CommonPayments';
@@ -20,23 +26,23 @@ import CommonPayments from './CommonPayments';
 //   dispatcher(sessionId);
 // };
 
-const mapStateToProps = ({
-  paymentoptions, cart: {
-    checkingCart, cartChecked, summary, error
-  }
-}) => ({
+const mapStateToProps = ({ paymentoptions, cart: { checkingCart, cartChecked, summary } }) => ({
   selectedGateway: paymentoptions.selectedGateway,
+  validationerror: paymentoptions.validationerror,
+  paymentDetails: paymentoptions.data.paymentMethodDetails,
   checkingCart,
   cartChecked,
-  summary,
-  error
+  summary
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       toggleGateway: setSelectedGateway,
-      setPaymentDetails: setSelectedPaymentDetails
+      setPaymentDetails: setSelectedPaymentDetails,
+      validateForm: checkPaymentDetails,
+      submitDetails: submitPaymentDetails,
+      setError: setValidationError
     },
     dispatch
   );
@@ -44,6 +50,25 @@ const mapDispatchToProps = dispatch =>
 class PaymentOptions extends Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
+  };
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps, this.props);
+    if (!nextProps.validationerror && nextProps.validationerror !== this.props.validationerror) {
+      // const {
+      //   submitDetails, paymentDetails
+      // } = this.props;
+      console.log('Yaar ! ');
+      // submitDetails(paymentDetails);
+    }
+    if (nextProps.validationerror) {
+      const { setError } = this.props;
+      setError();
+      alert('Please Fill All Details');
+    }
+  }
+  nextStep = () => {
+    const { validateForm } = this.props;
+    validateForm();
   };
   render() {
     const {
@@ -86,6 +111,7 @@ class PaymentOptions extends Component {
                       mt="1.5rem"
                       fontSize="0.875rem"
                       lh="2"
+                      onClick={this.nextStep}
                     >
                       NEXT : REVIEW BEFORE PAYMENT
                     </Button>
@@ -122,6 +148,10 @@ PaymentOptions.propTypes = {
   toggleGateway: PropTypes.func.isRequired,
   setPaymentDetails: PropTypes.func.isRequired,
   summary: PropTypes.object,
+  setError: PropTypes.func.isRequired,
+  validateForm: PropTypes.func.isRequired,
+  validationerror: PropTypes.bool.isRequired,
+
   // error: PropTypes.object,
   // isCartChecked: PropTypes.bool,
   checkingCart: PropTypes.bool
