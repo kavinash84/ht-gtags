@@ -57,6 +57,7 @@ const OrderSummary = ({
           fontSize="0.875rem"
           ls="1px"
           onClick={onClick}
+          disabled={checkingCart}
         >
           {checkingCart ? 'Please wait...' : 'CONTINUE'}
         </Button>

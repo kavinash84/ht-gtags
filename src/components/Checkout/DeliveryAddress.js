@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
@@ -24,11 +25,13 @@ const onClick = history => e => {
   history.push(MY_WISHLIST_URL);
 };
 
-const mapStateToProps = ({ userLogin, app }) => ({
+const mapStateToProps = ({ userLogin, app, checkout }) => ({
   isLoggedIn: userLogin.isLoggedIn,
-  sessionId: app.sessionId
+  sessionId: app.sessionId,
+  nextstep: checkout.nextstep,
+  loading: checkout.loading
 });
-
+@withRouter
 class DeliveryAddress extends Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -42,6 +45,10 @@ class DeliveryAddress extends Component {
       this.setState({
         openLogin: false
       });
+    }
+    if (nextProps.nextstep.success) {
+      const { history } = this.props;
+      history.push('/payment-options');
     }
   }
   onOpenLoginModal = () => {
@@ -90,7 +97,7 @@ class DeliveryAddress extends Component {
   };
 
   render() {
-    const { isLoggedIn, history } = this.props;
+    const { isLoggedIn, history, loading } = this.props;
     // const { shippingIsBilling } = this.state;
     return (
       <Div type="block">
@@ -120,8 +127,16 @@ class DeliveryAddress extends Component {
                 }}
               /> */}
                   <Div col="6">
-                    <Button type="submit" size="block" btnType="primary" fontWeight="regular" height="42px" mt="0.5rem">
-                      Next : Payment Options
+                    <Button
+                      type="submit"
+                      size="block"
+                      btnType="primary"
+                      fontWeight="regular"
+                      height="42px"
+                      mt="0.5rem"
+                      disabled={loading}
+                    >
+                      {loading ? 'Loading...' : 'Next: Payment Options'}
                     </Button>
                   </Div>
                 </form>
@@ -162,8 +177,15 @@ class DeliveryAddress extends Component {
                   </Row>
                   <Row display="block" mr="0" ml="0">
                     <Div col="3">
-                      <Button size="block" btnType="primary" fontWeight="regular" height="42px" mt="1.5rem">
-                        Next : Payment Options
+                      <Button
+                        size="block"
+                        btnType="primary"
+                        fontWeight="regular"
+                        height="42px"
+                        mt="1.5rem"
+                        disabled={loading}
+                      >
+                        {loading ? 'Loading...' : 'Next: Payment Options'}
                       </Button>
                     </Div>
                   </Row>
@@ -204,7 +226,14 @@ class DeliveryAddress extends Component {
 
 DeliveryAddress.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
   sessionId: PropTypes.string.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  nextstep: PropTypes.object.isRequired
 };
-export default connect(mapStateToProps, null, null, { withRef: true })(DeliveryAddress);
+export default connect(
+  mapStateToProps,
+  null,
+  null,
+  { withRef: true }
+)(DeliveryAddress);
