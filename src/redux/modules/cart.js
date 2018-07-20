@@ -1,4 +1,4 @@
-import { ADDTOCART as ADDTOCART_API, SYNCCART as SYNCCART_API } from 'helpers/apiUrls';
+import { ADDTOCART as ADDTOCART_API, SYNCCART as SYNCCART_API, CHECKCART as CHECKCART_API } from 'helpers/apiUrls';
 
 const LOAD_CART = 'cart/LOAD_CART';
 const LOAD_CART_SUCCESS = 'cart/LOAD_CART_SUCCESS';
@@ -15,6 +15,9 @@ const REMOVE_FROM_CART_FAIL = 'cart/REMOVE_FROM_CART_FAIL';
 const SYNCING_CART = 'cart/SYNCING_CART';
 const SYNCING_CART_SUCCESS = 'cart/SYNCING_CART_SUCCESS';
 const SYNCING_CART_FAIL = 'cart/SYNCING_CART_FAIL';
+const CHECKCART = 'cart/CHECKCART';
+const CHECKCART_SUCCESS = 'cart/CHECKCART_SUCCESS';
+const CHECKCART_FAIL = 'cart/CHECKCART_FAIL';
 
 const initialState = {
   data: [],
@@ -23,6 +26,8 @@ const initialState = {
   addedToCart: false,
   cartUpdated: false,
   cartSynced: false,
+  checkingCart: false,
+  cartChecked: false,
   key: ''
 };
 
@@ -131,6 +136,24 @@ export default function reducer(state = initialState, action = {}) {
         cartSynced: false,
         error: action.error
       };
+    case CHECKCART:
+      return {
+        ...state,
+        checkingCart: true
+      };
+    case CHECKCART_SUCCESS:
+      return {
+        ...state,
+        cartCheckData: action.result,
+        checkCart: false,
+        cartChecked: true
+      };
+    case CHECKCART_FAIL:
+      return {
+        ...state,
+        checkingCart: false,
+        cartChecked: false
+      };
     default:
       return state;
   }
@@ -204,6 +227,18 @@ export const synCart = (sessionId, pincode) => ({
   promise: async ({ client }) => {
     try {
       const response = await client.put(`${SYNCCART_API}/${sessionId}/${pincode}`, {});
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+});
+
+export const checkCart = sessionId => ({
+  types: [CHECKCART, CHECKCART_SUCCESS, CHECKCART_FAIL],
+  promise: async ({ client }) => {
+    try {
+      const response = await client.post(`${CHECKCART_API}`, { session_id: sessionId });
       return response;
     } catch (error) {
       throw error;

@@ -1,16 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Button from 'hometown-components/lib/Buttons';
 import Section from 'hometown-components/lib/Section';
-import { removeFromCart } from 'redux/modules/cart';
+import * as actionCreators from 'redux/modules/cart';
 import ProductQuantity from './UpdateProductQuantity';
 import OrderSummary from '../Checkout/OrderSummary';
 
 const styles = require('./Cart.scss');
+
+const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
+
+const checkCartBeforeCheckout = (dispatcher, session) => e => {
+  e.preventDefault();
+  dispatcher(session);
+};
 
 const onClick = (cartId, sessionId, pincode) => dispatcher => e => {
   e.preventDefault();
@@ -19,13 +27,23 @@ const onClick = (cartId, sessionId, pincode) => dispatcher => e => {
 
 const mapStateToProps = ({ pincode, cart, app }) => ({
   currentId: cart.key,
+  cartChecked: cart.cartChecked,
+  checkingCart: cart.checkingCart,
   cartUpdating: cart.cartUpdating,
   pincode: pincode.selectedPincode,
   sessionId: app.sessionId
 });
 
 const Cart = ({
-  results, summary, discardFromCart, pincode, sessionId, currentId, cartUpdating
+  results,
+  summary,
+  removeFromCart,
+  pincode,
+  sessionId,
+  currentId,
+  cartUpdating,
+  checkCart,
+  checkingCart
 }) => {
   const cartItemLoading = customerCardId => cartUpdating && currentId === customerCardId;
   return (
@@ -71,7 +89,7 @@ const Cart = ({
                               fontWeight="300"
                               color="#ae8873"
                               btnType="link"
-                              onClick={onClick(item.id_customer_cart, sessionId, pincode)(discardFromCart)}
+                              onClick={onClick(item.id_customer_cart, sessionId, pincode)(removeFromCart)}
                             >
                               x
                             </Button>
@@ -95,6 +113,8 @@ const Cart = ({
               savings={summary.savings}
               shipping={summary.shipping_charges}
               totalCart={summary.total}
+              checkingCart={checkingCart}
+              onClick={checkCartBeforeCheckout(checkCart, sessionId)}
             />
           </Row>
         </Container>
@@ -110,7 +130,9 @@ Cart.propTypes = {
   cartUpdating: PropTypes.bool,
   currentId: PropTypes.number,
   sessionId: PropTypes.string.isRequired,
-  discardFromCart: PropTypes.func.isRequired
+  removeFromCart: PropTypes.func.isRequired,
+  checkCart: PropTypes.func.isRequired,
+  checkingCart: PropTypes.bool
 };
 
 Cart.defaultProps = {
@@ -118,10 +140,8 @@ Cart.defaultProps = {
   summary: null,
   pincode: '',
   cartUpdating: false,
-  currentId: 0
+  currentId: 0,
+  checkingCart: false
 };
 
-export default connect(
-  mapStateToProps,
-  { discardFromCart: removeFromCart }
-)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
