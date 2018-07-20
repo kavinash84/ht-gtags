@@ -81,7 +81,8 @@ Pincode.defaultProps = {
   loading: false,
   loaded: false,
   results: [],
-  showResults: false
+  showResults: false,
+  pincode: ''
 };
 
 Pincode.propTypes = {
@@ -94,7 +95,7 @@ Pincode.propTypes = {
   setPincodeQuery: PropTypes.func.isRequired,
   setPincode: PropTypes.func.isRequired,
   onChangePincode: PropTypes.func.isRequired,
-  pincode: PropTypes.string.isRequired,
+  pincode: PropTypes.string,
   pincodeFeedBackError: PropTypes.string.isRequired,
   pincodeFeedBackMessage: PropTypes.string.isRequired
 };

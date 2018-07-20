@@ -20,6 +20,8 @@ const CHECKCART_SUCCESS = 'cart/CHECKCART_SUCCESS';
 const CHECKCART_FAIL = 'cart/CHECKCART_FAIL';
 const RESET_CART_CHECK = 'cart/RESET_CART_CHECK';
 
+const UPDATE_CART_SUMMARY_AFTER_COUPON = 'cart/UPDATE_CART_SUMMARY_AFTER_COUPON';
+
 const initialState = {
   data: [],
   summary: {},
@@ -161,6 +163,11 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         cartChecked: false
       };
+    case UPDATE_CART_SUMMARY_AFTER_COUPON:
+      return {
+        ...state,
+        summary: action.summary[0]
+      };
     default:
       return state;
   }
@@ -251,6 +258,11 @@ export const checkCart = sessionId => ({
       throw error;
     }
   }
+});
+
+export const updateCartSummary = summary => ({
+  type: UPDATE_CART_SUMMARY_AFTER_COUPON,
+  summary
 });
 
 export const resetCheck = () => ({

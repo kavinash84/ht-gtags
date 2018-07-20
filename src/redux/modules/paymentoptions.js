@@ -6,11 +6,11 @@ const LOAD_FAIL = 'paymentOptions/LOAD_FAIL';
 const SELECTED_PAYMENT_METHOD = 'paymentOptions/SELECTED_PAYMENT_METHOD';
 const SELECTED_PAYMENT_METHOD_DETAILS = 'paymentOptions/SELECTED_PAYMENT_METHOD_DETAILS';
 
-const sampleData = require('../../data/PaymentOptions');
+// const sampleData = require('../../data/PaymentOptions');
 
 const initialState = {
   loaded: false,
-  data: sampleData,
+  data: null,
   selectedGateway: 'CreditCard',
   paymentMethodDetails: {
     CreditCard: {

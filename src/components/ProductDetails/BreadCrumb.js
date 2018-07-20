@@ -9,12 +9,15 @@ const BreadCrumb = ({ categoryDetails }) => {
   return (
     <ul className={styles.breadCrumbList}>
       {categoryDetails.map(item => {
-        link += `/${item.url_key}`;
-        return (
-          <li key={item.id}>
-            <Link to={`${link}`}>{item.name}</Link>
-          </li>
-        );
+        if (item) {
+          link += `/${item.url_key}`;
+          return (
+            <li key={item.id}>
+              <Link to={`${link}`}>{item.name}</Link>
+            </li>
+          );
+        }
+        return <div />;
       })}
     </ul>
   );
