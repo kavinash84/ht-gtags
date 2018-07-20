@@ -5,11 +5,16 @@ import Heading from 'hometown-components/lib/Heading';
 import { Label } from 'hometown-components/lib/Label';
 import Div from 'hometown-components/lib/Div';
 import Button from 'hometown-components/lib/Buttons';
+import Img from 'hometown-components/lib/Img';
+import Span from 'hometown-components/lib/Span';
+import Theme from 'hometown-components/lib/Theme';
 import { applyCoupon, removeCoupon } from 'redux/modules/coupon';
 import { updateCartSummary } from 'redux/modules/cart';
 import { formatAmount } from 'utils/formatters';
 
 const EditCouponIcon = require('../../../static/edit.svg');
+const DiscountSuccessIcon = require('../../../static/percentage-green.svg');
+const CloseIcon = require('../../../static/close-icon.svg');
 
 const styles = require('./Coupon.scss');
 
@@ -79,8 +84,13 @@ class Coupon extends React.Component {
 
   render() {
     const { cart, coupon } = this.props;
-    const { summary: { coupon: appliedCoupon, coupon_discount: couponDiscount } } = cart;
-    const { error, errorMessage: { error_message: errorMsg } } = coupon;
+    const {
+      summary: { coupon: appliedCoupon, coupon_discount: couponDiscount }
+    } = cart;
+    const {
+      error,
+      errorMessage: { error_message: errorMsg }
+    } = coupon;
 
     const { applycoupon } = this.state;
     console.log(error, coupon);
@@ -88,17 +98,35 @@ class Coupon extends React.Component {
       <div>
         <Div className={styles.applyCoupon}>
           {appliedCoupon && !applycoupon ? (
-            <div className={`${styles.appliedCouponWrapper}`}>
-              <p className={styles.appliedCoupon}>
-                <span>{appliedCoupon}</span> Applied
-                <button className={styles.couponEdit} onClick={this.toggleCouponBox}>
-                  <img src={EditCouponIcon} alt="" />
-                </button>
-              </p>
-              <p className={styles.appliedSaveRs}>
-                Save <span>Rs. {formatAmount(couponDiscount)}</span>
-              </p>
-              <button onClick={() => this.removeCoupon(appliedCoupon)}>X</button>
+            <div className={styles.appliedCouponWrapper}>
+              <Button
+                display="block"
+                btnType="link"
+                fontWeight="Light"
+                pl="0"
+                pr="0"
+                fontSize="1rem"
+                ta="left"
+                color={Theme.colors.primary}
+                onClick={this.toggleCouponBox}
+              >
+                <Img src={DiscountSuccessIcon} float="left" mr="0.625rem" mb="1rem" mt="3px" alt="" />
+                Applied: <b>{appliedCoupon}</b> <br />
+                <Span fontSize="0.875em" color={Theme.colors.primary}>
+                  Save <b>Rs. {formatAmount(couponDiscount)}</b>
+                </Span>
+                <Img src={EditCouponIcon} display="inline" float="none" va="sub" width="18px" ml="0.3125rem" alt="" />
+              </Button>
+
+              <Button
+                btnType="link"
+                mt="30px"
+                p="0"
+                className="pull-right"
+                onClick={() => this.removeCoupon(appliedCoupon)}
+              >
+                <Img src={CloseIcon} alt="Close" />
+              </Button>
             </div>
           ) : (
             <div>

@@ -80,6 +80,9 @@
   }
 }
 .appliedCouponWrapper {
+  padding: 0rem 0.75rem;
+  border: 1px solid #d2d1d1;
+  background: #f3f3f3;
   .appliedCoupon {
     font-size: 0.875rem;
     margin-bottom: 0;
@@ -112,4 +115,5 @@
 }
 .applyCouponWrapper {
   margin-bottom: 0.625rem;
+  position: relative;
 }
