@@ -127,4 +127,7 @@ PaymentOptions.propTypes = {
   checkingCart: PropTypes.bool
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PaymentOptions);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PaymentOptions);

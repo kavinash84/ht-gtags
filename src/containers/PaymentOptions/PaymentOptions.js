@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 // import { load } from 'redux/modules/paymentoptions';
 import { getPaymentOptions } from 'selectors/payments';
 import PaymentOptions from 'components/Checkout/PaymentOptions';
-
 @connect(({ paymentoptions }) => ({
   availableOptions: getPaymentOptions(paymentoptions)
 }))

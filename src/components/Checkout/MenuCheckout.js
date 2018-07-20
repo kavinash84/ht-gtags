@@ -5,16 +5,17 @@ import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Section from 'hometown-components/lib/Section';
 import Row from 'hometown-components/lib/Row';
+import { Link } from 'react-router-dom';
 
 const Back = require('../../../static/arrow_back.svg');
 const styles = require('./Checkout.scss');
 
-const MenuCheckout = ({ page }) => (
+const MenuCheckout = ({ page, history }) => (
   <Section mb="0.625rem" p="3.5rem 0.5rem 1.375rem" bg="primary" boxShadow="0 2px 8px 0 rgba(0, 0, 0, 0.17)">
     <Container type="container" pr="2rem" pl="2rem">
       <Row display="block" mr="0" ml="0" mb="1rem">
         <Heading fontSize="0.875rem" color="white" mt="0" mb="0" fontWeight="300">
-          <button className={styles.back}>
+          <button className={styles.back} onClick={() => history.goBack()}>
             <img src={Back} alt="back" />
           </button>
           CHECKOUT
@@ -23,22 +24,22 @@ const MenuCheckout = ({ page }) => (
       <Row display="block" mr="0" ml="0">
         <Div col="9">
           <Div col="3">
-            <a href="/delivery-address" className={`${styles.headerLink} ${page === 'delivery' ? styles.active : ''}`}>
+            <Link to="/delivery-address" className={`${styles.headerLink} ${page === 'delivery' ? styles.active : ''}`}>
               Delivery Address
-            </a>
+            </Link>
           </Div>
           <Div col="3">
-            <a href="/payment-options" className={`${styles.headerLink} ${page === 'payment' ? styles.active : ''}`}>
+            <Link to="/payment-options" className={`${styles.headerLink} ${page === 'payment' ? styles.active : ''}`}>
               Payment Options
-            </a>
+            </Link>
           </Div>
           <Div col="3">
-            <a
-              href="/reviewOrder"
+            <Link
+              to="/reviewOrder"
               className={`${styles.headerLink} ${styles.hideArrow} ${page === 'review' ? styles.active : ''}`}
             >
               Review & Order
-            </a>
+            </Link>
           </Div>
         </Div>
       </Row>
@@ -51,7 +52,8 @@ MenuCheckout.defaultProps = {
 };
 
 MenuCheckout.propTypes = {
-  page: PropTypes.string
+  page: PropTypes.string,
+  history: PropTypes.object.isRequired
 };
 
 export default MenuCheckout;
