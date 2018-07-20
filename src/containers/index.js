@@ -17,6 +17,8 @@ import Cancellation from './Cancellation/Cancellation';
 import WhoWeAre from './WhoWeAre/WhoWeAre';
 import ContactUs from './ContactUs/ContactUs';
 import MyAddress from './MyAddress/MyAddress';
+import TrackOrderModal from './TrackOrderModal/TrackOrderModal';
+import EmiModal from './EmiModal/EmiModal';
 import NotFound from './NotFound/NotFound';
 
 export {
@@ -38,6 +40,8 @@ export {
   WhoWeAre,
   ContactUs,
   MyAddress,
-  NotFound,
-  PaymentOptions
+  TrackOrderModal,
+  EmiModal,
+  PaymentOptions,
+  NotFound
 };
