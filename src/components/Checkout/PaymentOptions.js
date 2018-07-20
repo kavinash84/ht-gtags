@@ -53,7 +53,6 @@ class PaymentOptions extends Component {
     store: PropTypes.object.isRequired
   };
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps, this.props);
     if (!nextProps.validationerror && nextProps.validationerror !== this.props.validationerror) {
       // const {
       //   submitDetails, paymentDetails
@@ -159,4 +158,7 @@ PaymentOptions.propTypes = {
   checkingCart: PropTypes.bool
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PaymentOptions);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PaymentOptions);

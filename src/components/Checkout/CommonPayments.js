@@ -15,14 +15,16 @@ const initial = {
     cardNumber: '',
     cvv: '',
     expMonth: '',
-    expYear: ''
+    expYear: '',
+    type: ''
   },
   DebitCard: {
     nameOnCard: '',
     cardNumber: '',
     cvv: '',
     expMonth: '',
-    expYear: ''
+    expYear: '',
+    type: ''
   },
   Emi: {
     nameOnCard: '',
