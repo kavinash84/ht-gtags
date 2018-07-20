@@ -39,3 +39,5 @@ export const MY_ORDERS = 'tesla/orders';
 
 /* Payments */
 export const PAYMENT_OPTIONS = 'tesla/payments';
+/* Checkout Flow */
+export const COUPON = 'tesla/cart/coupon';
