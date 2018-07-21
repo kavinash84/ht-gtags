@@ -69,7 +69,7 @@ const CardForm = ({ gateway, setPaymentDetails, details: { nameOnCard, cardNumbe
 );
 
 CardForm.propTypes = {
-  gateway: PropTypes.func.isRequired,
+  gateway: PropTypes.string.isRequired,
   setPaymentDetails: PropTypes.func.isRequired,
   details: PropTypes.object.isRequired
 };

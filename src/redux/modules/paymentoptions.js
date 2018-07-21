@@ -12,6 +12,10 @@ const SUBMIT_PAYMENT_DETAILS_SUCCESS = 'paymentOptions/SUBMIT_PAYMENT_DETAILS_SU
 const SUBMIT_PAYMENT_DETAILS_FAIL = 'paymentOptions/SUBMIT_PAYMENT_DETAILS_FAIL';
 const SET_VALIDATION_ERROR = 'paymentOptions/SET_VALIDATION_ERROR';
 
+const SET_CARD_TYPE = 'paymentOptions/SET_CARD_TYPE';
+const SET_CARD_TYPE_SUCCESS = 'paymentOptions/SET_CARD_TYPE_SUCCESS';
+const SET_CARD_TYPE_FAIL = 'paymentOptions/SET_CARD_TYPE_FAIL';
+
 const paymentJSON = {
   session_id: '',
   payment_method_type: '',
@@ -159,6 +163,24 @@ export default function reducer(state = initialState, action = {}) {
         loaded: false,
         error: action.error
       };
+
+    case SET_CARD_TYPE:
+      return {
+        ...state
+      };
+    case SET_CARD_TYPE_SUCCESS:
+      return {
+        ...state
+        // paymentMethodDetails: appendData(action.result.gateway, state, action.result)
+      };
+    case SET_CARD_TYPE_FAIL:
+      return {
+        ...state,
+        loading: false,
+        loaded: false,
+        error: action.error
+      };
+
     case SELECTED_PAYMENT_METHOD:
       return {
         ...state,
@@ -225,6 +247,17 @@ export const setSelectedGateway = (gateway, initial) => ({
 export const setSelectedPaymentDetails = payLoad => ({
   type: SELECTED_PAYMENT_METHOD_DETAILS,
   payLoad
+});
+
+export const setCardType = (cardno, session, gateway) => ({
+  types: [SET_CARD_TYPE, SET_CARD_TYPE_SUCCESS, SET_CARD_TYPE_FAIL],
+  promise: ({ client }) => {
+    console.log(cardno, session, gateway);
+    const response = client.get(`tesla/payments/card-type-info/${cardno}/${session}`);
+    response.gateway = gateway;
+    // return { cardType, gateway };
+    return response;
+  }
 });
 
 export const checkPaymentDetails = () => ({

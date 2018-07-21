@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import { Label } from 'hometown-components/lib/Label';
 import FormInput from 'hometown-components/lib/Forms/FormInput';
 import Img from 'hometown-components/lib/Img';
+import { setCardType } from 'redux/modules/paymentoptions';
+import { bindActionCreators } from 'redux';
 
 const styles = require('./Checkout.scss');
 const mcIcon = require('../../../static/master-card.jpg');
@@ -18,11 +20,22 @@ const onChangeDetails = (dispatcher, gateway) => e => {
   const { name, value } = e.target;
   dispatcher({ gateway, data: { [name]: value } });
 };
-const mapStateToProps = ({ paymentoptions }) => ({
-  details: paymentoptions.paymentMethodDetails.CreditCard
+
+const onGetCardType = (dispatcher, sessionId, gateway) => e => {
+  const { value } = e.target;
+  dispatcher(value, sessionId, gateway);
+};
+
+const mapStateToProps = ({ paymentoptions, app }) => ({
+  details: paymentoptions.paymentMethodDetails.CreditCard,
+  sessionId: app.sessionId
 });
 
-const CardForm = ({ gateway, setPaymentDetails, details: { nameOnCard, cardNumber, cvv } }) => (
+const mapDispatchToProps = dispatch => bindActionCreators({ getCardType: setCardType }, dispatch);
+
+const CardForm = ({
+  gateway, setPaymentDetails, details: { nameOnCard, cardNumber, cvv }, getCardType, sessionId
+}) => (
   <Div className={styles.paymentBlock}>
     <Div col="5" pr="1rem">
       <FormInput
@@ -42,6 +55,7 @@ const CardForm = ({ gateway, setPaymentDetails, details: { nameOnCard, cardNumbe
         name="cardNumber"
         value={cardNumber}
         onChange={onChangeDetails(setPaymentDetails, gateway)}
+        onBlur={onGetCardType(getCardType, sessionId, gateway)}
       />
       <Img src={mcIcon} alt="" />
     </Div>
@@ -74,11 +88,13 @@ const CardForm = ({ gateway, setPaymentDetails, details: { nameOnCard, cardNumbe
 );
 
 CardForm.propTypes = {
-  gateway: PropTypes.func.isRequired,
+  gateway: PropTypes.string.isRequired,
+  getCardType: PropTypes.func.isRequired,
+  sessionId: PropTypes.string.isRequired,
   setPaymentDetails: PropTypes.func.isRequired,
   details: PropTypes.object.isRequired
 };
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(CardForm);

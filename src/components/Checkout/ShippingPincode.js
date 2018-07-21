@@ -96,7 +96,7 @@ Pincode.propTypes = {
   setPincode: PropTypes.func.isRequired,
   onChangePincode: PropTypes.func.isRequired,
   pincode: PropTypes.string,
-  pincodeFeedBackError: PropTypes.string.isRequired,
+  pincodeFeedBackError: PropTypes.bool.isRequired,
   pincodeFeedBackMessage: PropTypes.string.isRequired
 };
 

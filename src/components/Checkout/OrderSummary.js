@@ -11,7 +11,7 @@ import Coupon from './Coupon';
 const styles = require('./OrderSummary.scss');
 
 const OrderSummary = ({
-  itemsTotal, savings, shipping, totalCart, onClick, checkingCart
+  itemsTotal, savings, shipping, totalCart, onClick, loadingnextstep, hidebutton
 }) => (
   <Div col="3">
     <Div className={styles.orderSummary}>
@@ -48,18 +48,22 @@ const OrderSummary = ({
         <Coupon />
       </Div>
       <Div col="12" mt="0.625rem">
-        <Button
-          size="block"
-          btnType="primary"
-          height="42px"
-          mt="0.625rem"
-          fontWeight="Light"
-          fontSize="0.875rem"
-          ls="1px"
-          onClick={onClick}
-        >
-          {checkingCart ? 'Please wait...' : 'CONTINUE'}
-        </Button>
+        {!hidebutton && (
+          <Button
+            size="block"
+            btnType="primary"
+            height="42px"
+            mt="0.625rem"
+            fontWeight="Light"
+            fontSize="0.875rem"
+            ls="1px"
+            onClick={onClick}
+            hide={hidebutton}
+            disabled={loadingnextstep}
+          >
+            {loadingnextstep ? 'Please wait...' : 'CONTINUE'}
+          </Button>
+        )}
       </Div>
     </Div>
     <Div className={styles.questions}>
@@ -75,7 +79,8 @@ const OrderSummary = ({
 );
 
 OrderSummary.defaultProps = {
-  checkingCart: false
+  loadingnextstep: false,
+  hidebutton: false
 };
 
 OrderSummary.propTypes = {
@@ -84,7 +89,8 @@ OrderSummary.propTypes = {
   shipping: PropTypes.number.isRequired,
   totalCart: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired,
-  checkingCart: PropTypes.bool
+  loadingnextstep: PropTypes.bool,
+  hidebutton: PropTypes.bool
 };
 
 export default OrderSummary;

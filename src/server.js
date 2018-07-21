@@ -83,7 +83,7 @@ app.use(async (req, res) => {
       }
     }),
     stateReconciler: (inboundState, originalState) => originalState,
-    whitelist: ['app', 'userLogin', 'pincode']
+    whitelist: ['app', 'userLogin', 'pincode', 'shipping', 'paymentoptions']
   };
 
   let preloadedState;
