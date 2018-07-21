@@ -55,7 +55,8 @@ const paymentJSON = {
   partpay_dc_security_code: '',
   partpay_dc_pg: '',
   partpay_netbanking_bankname: '',
-  partpay_netbanking_pg: ''
+  partpay_netbanking_pg: '',
+  wallet: ''
 };
 
 const paymentObject = (sessionId, selectedGateway, paymentData) => {
@@ -75,6 +76,33 @@ const paymentObject = (sessionId, selectedGateway, paymentData) => {
       cc_exp_year: expYear,
       cc_security_code: cvv,
       pg_cc: 'CC'
+    };
+  } else if (selectedGateway === 'DebitCard') {
+    const {
+      cardNumber, cvv, expMonth, expYear, nameOnCard
+    } = paymentData;
+    return {
+      ...paymentJSON,
+      session_id: sessionId,
+      payment_method_type: selectedGateway,
+      payment_method: 'Payu',
+      dc_number: cardNumber,
+      dc_card_type: 'visa',
+      dc_holder: nameOnCard,
+      dc_exp_month: expMonth,
+      dc_exp_year: expYear,
+      dc_security_code: cvv,
+      pg_dc: 'DC'
+    };
+  } else if (selectedGateway === 'NetBanking') {
+    const { bankCode } = paymentData;
+    return {
+      ...paymentJSON,
+      session_id: sessionId,
+      payment_method_type: selectedGateway,
+      payment_method: 'Payu',
+      netbanking_bankname: bankCode,
+      pg_nb: 'NB'
     };
   }
 };
@@ -136,13 +164,15 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         selectedGateway: action.gateway,
         isFormValid: true,
-        paymentMethodDetails: appendData(action.gateway, state, action.initial)
+        paymentMethodDetails: appendData(action.gateway, state, action.initial),
+        error: ''
       };
     case SELECTED_PAYMENT_METHOD_DETAILS:
       return {
         ...state,
         isFormValid: true,
-        paymentMethodDetails: appendData(action.payLoad.gateway, state, action.payLoad.data)
+        paymentMethodDetails: appendData(action.payLoad.gateway, state, action.payLoad.data),
+        error: ''
       };
     case CHECK_PAYMENT_DETAILS:
       return {
@@ -159,7 +189,8 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         submitting: true,
         submitted: false,
-        formData: action.result
+        formData: action.result,
+        error: ''
       };
     case SUBMIT_PAYMENT_DETAILS_SUCCESS:
       return {
