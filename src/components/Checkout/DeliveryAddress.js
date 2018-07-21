@@ -101,7 +101,7 @@ class DeliveryAddress extends Component {
     // const { shippingIsBilling } = this.state;
     return (
       <Div type="block">
-        <MenuCheckout />
+        <MenuCheckout history={history} />
         <Section display="flex" pt="1.25rem" mb="1rem" height="auto">
           <Container type="container" pr="2rem" pl="2rem">
             <Row display="block" mr="0" ml="0">
@@ -223,13 +223,15 @@ class DeliveryAddress extends Component {
     );
   }
 }
-
+DeliveryAddress.defaultProps = {
+  history: {}
+};
 DeliveryAddress.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
   sessionId: PropTypes.string.isRequired,
-  history: PropTypes.object.isRequired,
-  nextstep: PropTypes.object.isRequired
+  history: PropTypes.object,
+  nextstep: PropTypes.bool.isRequired
 };
 export default connect(
   mapStateToProps,

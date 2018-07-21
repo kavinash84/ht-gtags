@@ -88,7 +88,7 @@ const CardForm = ({
 );
 
 CardForm.propTypes = {
-  gateway: PropTypes.func.isRequired,
+  gateway: PropTypes.string.isRequired,
   getCardType: PropTypes.func.isRequired,
   sessionId: PropTypes.string.isRequired,
   setPaymentDetails: PropTypes.func.isRequired,

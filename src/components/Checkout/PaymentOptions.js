@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
@@ -21,9 +22,9 @@ import MenuCheckout from './MenuCheckout';
 import OrderSummary from './OrderSummary';
 import CommonPayments from './CommonPayments';
 
-const nextStep = (dispatcher, sessionId, paymentData) => e => {
+const nextStep = history => e => {
   e.preventDefault();
-  dispatcher(sessionId, paymentData);
+  history.push('/review-order');
 };
 
 const mapStateToProps = ({ paymentoptions, cart: { checkingCart, cartChecked, summary }, app: { sessionId } }) => ({
@@ -50,7 +51,7 @@ const mapDispatchToProps = dispatch =>
     },
     dispatch
   );
-
+@withRouter
 class PaymentOptions extends Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -77,21 +78,12 @@ class PaymentOptions extends Component {
   // };
   render() {
     const {
-      data,
-      selectedGateway,
-      toggleGateway,
-      setPaymentDetails,
-      summary,
-      checkingCart,
-      error,
-      submitting,
-      paymentDetails,
-      submitDetails,
-      sessionId
+      data, selectedGateway, toggleGateway, setPaymentDetails, summary, error, submitting, history
     } = this.props;
+    console.log(error);
     return (
       <Div type="block">
-        <MenuCheckout page="payment" />
+        <MenuCheckout history={history} page="payment" />
         <Section display="flex" pt="1.25rem" pb="2.5rem" mb="0" height="auto">
           <Container type="container" pr="2rem" pl="2rem">
             <Row display="block" mr="0" ml="0">
@@ -116,7 +108,7 @@ class PaymentOptions extends Component {
                       paymentType
                     ))}
                 </Row>
-                <p>{error}</p>
+                {/* <p>{error}</p> */}
                 <Row display="block" mr="0" ml="0">
                   <Div col="4">
                     <Button
@@ -127,7 +119,7 @@ class PaymentOptions extends Component {
                       mt="1.5rem"
                       fontSize="0.875rem"
                       lh="2"
-                      onClick={nextStep(submitDetails, sessionId, paymentDetails)}
+                      onClick={nextStep(history)}
                       disabled={submitting}
                     >
                       {submitting ? 'Please wait...' : 'NEXT : REVIEW BEFORE PAYMENT'}
@@ -140,7 +132,9 @@ class PaymentOptions extends Component {
                 savings={summary.savings}
                 shipping={summary.shipping_charges}
                 totalCart={summary.total}
-                checkingCart={checkingCart}
+                // loadingnextstep={checkingCart}
+                onClick={() => null}
+                hidebutton
               />
             </Row>
           </Container>
@@ -157,9 +151,6 @@ PaymentOptions.defaultProps = {
   summary: null,
   // error: null,
   // isCartChecked: false,
-  checkingCart: false,
-  paymentDetails: {},
-  sessionId: '',
   error: '',
   submitting: false
 };
@@ -170,16 +161,13 @@ PaymentOptions.propTypes = {
   toggleGateway: PropTypes.func.isRequired,
   setPaymentDetails: PropTypes.func.isRequired,
   summary: PropTypes.object,
-  submitDetails: PropTypes.func.isRequired,
-  paymentDetails: PropTypes.object,
+  history: PropTypes.object.isRequired,
   // setError: PropTypes.func.isRequired,
   // validateForm: PropTypes.func.isRequired,
   // isFormValid: PropTypes.bool.isRequired,
 
   // error: PropTypes.object,
   // isCartChecked: PropTypes.bool,
-  checkingCart: PropTypes.bool,
-  sessionId: PropTypes.string,
   error: PropTypes.string,
   submitting: PropTypes.bool
 };

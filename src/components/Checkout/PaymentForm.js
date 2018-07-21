@@ -11,14 +11,13 @@ class PaymentForm extends Component {
     data: PropTypes.object,
     error: PropTypes.bool
   };
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  };
 
   static defaultProps = {
     data: null,
     error: false
-  };
-
-  static contextTypes = {
-    store: PropTypes.object.isRequired
   };
 
   componentDidUpdate() {
@@ -29,7 +28,11 @@ class PaymentForm extends Component {
   }
 
   render() {
-    const { data: { form_data: { action, fields } } } = this.props;
+    const {
+      data: {
+        form_data: { action, fields }
+      }
+    } = this.props;
     if (action && fields) {
       return <span />;
     }
