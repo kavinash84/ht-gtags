@@ -5,6 +5,7 @@ import Cart from 'components/Cart';
 import Empty from 'hometown-components/lib/Empty';
 import Img from 'hometown-components/lib/Img';
 import Section from 'hometown-components/lib/Section';
+import CartShimmer from 'components/Cart/CartShimmer';
 import Notifications from 'components/Notifications';
 import Menu from 'containers/MenuNew/index';
 import Footer from 'components/Footer';
@@ -29,10 +30,6 @@ const CartEmptyIcon = require('../../../static/cart-empty.jpg');
   }
 )
 export default class CartContainer extends Component {
-  static contextTypes = {
-    store: PropTypes.object.isRequired
-  };
-
   static propTypes = {
     results: PropTypes.array,
     summary: PropTypes.object,
@@ -40,6 +37,9 @@ export default class CartContainer extends Component {
     isCartChecked: PropTypes.bool,
     history: PropTypes.object.isRequired,
     resetCheckKey: PropTypes.func.isRequired
+  };
+  static contextTypes = {
+    store: PropTypes.object.isRequired
   };
   static defaultProps = {
     results: [],
@@ -80,6 +80,7 @@ export default class CartContainer extends Component {
             <Cart results={results} summary={summary} />
           </div>
         )}
+        <CartShimmer />
         <Footer />
       </div>
     );
