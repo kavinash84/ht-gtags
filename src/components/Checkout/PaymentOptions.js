@@ -21,10 +21,10 @@ import MenuCheckout from './MenuCheckout';
 import OrderSummary from './OrderSummary';
 import CommonPayments from './CommonPayments';
 
-// const checkCartAfterPayment = (dispatcher, sessionId) => e => {
-//   e.preventDefault();
-//   dispatcher(sessionId);
-// };
+const nextStep = (dispatcher, sessionId, paymentData) => e => {
+  e.preventDefault();
+  dispatcher(sessionId, paymentData);
+};
 
 const mapStateToProps = ({ paymentoptions, cart: { checkingCart, cartChecked, summary }, app: { sessionId } }) => ({
   selectedGateway: paymentoptions.selectedGateway,
@@ -33,7 +33,10 @@ const mapStateToProps = ({ paymentoptions, cart: { checkingCart, cartChecked, su
   checkingCart,
   cartChecked,
   summary,
-  sessionId
+  sessionId,
+  error: paymentoptions.error,
+  submitting: paymentoptions.submitting,
+  submitted: paymentoptions.submitted
 });
 
 const mapDispatchToProps = dispatch =>
@@ -66,15 +69,25 @@ class PaymentOptions extends Component {
     //   alert('Please Fill All Details');
     // }
   }
-  nextStep = () => {
-    const { paymentDetails, submitDetails, sessionId } = this.props;
-    // validateForm();
-    const { dispatch } = this.context.store;
-    dispatch(submitDetails(sessionId, paymentDetails));
-  };
+  // nextStep = () => {
+  //   const { paymentDetails, submitDetails, sessionId } = this.props;
+  //   // validateForm();
+  //   const { dispatch } = this.context.store;
+  //   dispatch(submitDetails(sessionId, paymentDetails));
+  // };
   render() {
     const {
-      data, selectedGateway, toggleGateway, setPaymentDetails, summary, checkingCart
+      data,
+      selectedGateway,
+      toggleGateway,
+      setPaymentDetails,
+      summary,
+      checkingCart,
+      error,
+      submitting,
+      paymentDetails,
+      submitDetails,
+      sessionId
     } = this.props;
     return (
       <Div type="block">
@@ -103,6 +116,7 @@ class PaymentOptions extends Component {
                       paymentType
                     ))}
                 </Row>
+                <p>{error}</p>
                 <Row display="block" mr="0" ml="0">
                   <Div col="4">
                     <Button
@@ -113,9 +127,10 @@ class PaymentOptions extends Component {
                       mt="1.5rem"
                       fontSize="0.875rem"
                       lh="2"
-                      onClick={this.nextStep}
+                      onClick={nextStep(submitDetails, sessionId, paymentDetails)}
+                      disabled={submitting}
                     >
-                      NEXT : REVIEW BEFORE PAYMENT
+                      {submitting ? 'Please wait...' : 'NEXT : REVIEW BEFORE PAYMENT'}
                     </Button>
                   </Div>
                 </Row>
@@ -144,7 +159,9 @@ PaymentOptions.defaultProps = {
   // isCartChecked: false,
   checkingCart: false,
   paymentDetails: {},
-  sessionId: ''
+  sessionId: '',
+  error: '',
+  submitting: false
 };
 
 PaymentOptions.propTypes = {
@@ -162,7 +179,9 @@ PaymentOptions.propTypes = {
   // error: PropTypes.object,
   // isCartChecked: PropTypes.bool,
   checkingCart: PropTypes.bool,
-  sessionId: PropTypes.string
+  sessionId: PropTypes.string,
+  error: PropTypes.string,
+  submitting: PropTypes.bool
 };
 
 export default connect(
