@@ -22,7 +22,7 @@ const paymentJSON = {
   cc_exp_month: '',
   cc_exp_year: '',
   cc_security_code: '',
-  pg_cc: 'CC',
+  pg_cc: '',
   dc_number: '',
   dc_card_type: '',
   dc_holder: '',
