@@ -1,18 +1,27 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
-import Button from 'hometown-components/lib/Buttons';
 import Section from 'hometown-components/lib/Section';
 import ShippedTo from 'hometown-components/lib/ShippedTo';
 import PaymentMethod from 'hometown-components/lib/PaymentMethod';
 import Footer from 'components/Footer';
-import ProductQuantityCounter from '../ProductQuantityCounter';
+// import ProductQuantityCounter from '../ProductQuantityCounter';
+
 import MenuCheckout from './MenuCheckout';
 import OrderSummary from './OrderSummary';
 
+@connect(({ cart: { data, summary, error }, shipping }) => ({
+  results: data,
+  summary,
+  error,
+  shipping
+}))
 export default class ReviewOrder extends Component {
   render() {
+    const { summary, results, shipping } = this.props;
     return (
       <Div type="block">
         <MenuCheckout page="review" />
@@ -23,66 +32,62 @@ export default class ReviewOrder extends Component {
                 <Row display="block" mr="0" ml="0" mb="1rem">
                   <Div col="5" pr="2rem">
                     <ShippedTo
-                      name="Saurabh Suman"
-                      address="A-503, Mayfair Hillcrest, Near Pop Tates, Vikhroli"
-                      city="Mumbai"
-                      pincode="400076"
-                      state="Maharashtra"
+                      name={shipping.fullName}
+                      address={shipping.address}
+                      city={shipping.state}
+                      pincode={shipping.pincode}
+                      state={shipping.state}
                     />
                   </Div>
                   <Div col="4">
                     <PaymentMethod />
                   </Div>
                 </Row>
-                <Row type="block" m="0">
+                <Row type="block" m="0" mb="1.5rem" mt="0">
                   <Div col="12">
                     <table className="ordersTable">
                       <tbody>
                         <tr>
                           <th colSpan="2">Product</th>
                           <th>Delivery</th>
-                          <th>Quantity</th>
+                          <th width="100px">Quantity</th>
                           <th>Cost</th>
                           <th />
                         </tr>
-                        <tr>
-                          <td>
-                            <img className="thumb" src="http://via.placeholder.com/75x75" alt="" />
-                          </td>
-                          <td>Ambra King Bed in Engineered Wood with Box Storage</td>
-                          <td>Delivered by 12 Jan</td>
-                          <td>
-                            <ProductQuantityCounter skuId="1234" />
-                          </td>
-                          <td>Rs 49,900</td>
-                          <td>
-                            <Button fontSize="1rem" fontWeight="300" color="#ae8873" btnType="link">
-                              x
-                            </Button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <img className="thumb" src="http://via.placeholder.com/75x75" alt="" />
-                          </td>
-                          <td>Ambra King Bed in Engineered Wood with Box Storage</td>
-                          <td>Delivered by 12 Jan</td>
-                          <td>
-                            <ProductQuantityCounter skuId="1234" />
-                          </td>
-                          <td>Rs 49,900</td>
-                          <td>
-                            <Button fontSize="1rem" fontWeight="300" color="#ae8873" btnType="link">
-                              x
-                            </Button>
-                          </td>
-                        </tr>
+                        {results.map(item => (
+                          <tr key={item.id_customer_cart}>
+                            <td>
+                              <img className="thumb" src={item.product_info.images[0].path} alt="" />
+                            </td>
+                            <td>{item.product_info.data.name}</td>
+                            <td>
+                              {item.product_info.data.delivery_details.length &&
+                                item.product_info.data.delivery_details[0].value}
+                            </td>
+                            <td>
+                              {/* <ProductQuantity
+                                    cartItemLoading={cartItemLoading}
+                                    cartId={item.id_customer_cart}
+                                    quantity={item.qty}
+                                    simpleSku={item.simple_sku}
+                                    skuId={item.configurable_sku}
+                                  /> */}
+                              <center>{item.qty}</center>
+                            </td>
+                            <td>{item.product_info.netprice}</td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
                   </Div>
                 </Row>
               </Div>
-              <OrderSummary />
+              <OrderSummary
+                itemsTotal={summary.items}
+                savings={summary.savings}
+                shipping={summary.shipping_charges}
+                totalCart={summary.total}
+              />
             </Row>
           </Container>
         </Section>
@@ -91,3 +96,8 @@ export default class ReviewOrder extends Component {
     );
   }
 }
+ReviewOrder.propTypes = {
+  summary: PropTypes.object.isRequired,
+  results: PropTypes.object.isRequired,
+  shipping: PropTypes.object.isRequired
+};
