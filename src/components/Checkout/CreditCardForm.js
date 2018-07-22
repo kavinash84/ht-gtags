@@ -81,7 +81,7 @@ const CardForm = ({
       </select>
       <select className={styles.dropDown} name="expYear" onChange={onChangeDetails(setPaymentDetails, gateway)}>
         <option key="year">YY</option>
-        {YEARS.map((v, i) => <option key={String(i)}>{new Date().getYear() + (i - 100)}</option>)}
+        {YEARS.map((v, i) => <option key={String(i)}>{new Date().getFullYear() + i}</option>)}
       </select>
     </Div>
   </Div>
@@ -94,7 +94,4 @@ CardForm.propTypes = {
   setPaymentDetails: PropTypes.func.isRequired,
   details: PropTypes.object.isRequired
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CardForm);
+export default connect(mapStateToProps, mapDispatchToProps)(CardForm);

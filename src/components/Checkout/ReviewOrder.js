@@ -15,6 +15,7 @@ import Footer from 'components/Footer';
 
 import MenuCheckout from './MenuCheckout';
 import OrderSummary from './OrderSummary';
+// import PaymentForm from './PaymentForm';
 
 const nextStep = (dispatcher, sessionId, paymentData) => e => {
   e.preventDefault();
@@ -112,6 +113,7 @@ class ReviewOrder extends Component {
                   </Div>
                 </Row>
               </Div>
+              {/* <PaymentForm /> */}
               <OrderSummary
                 itemsTotal={summary.items}
                 savings={summary.savings}
@@ -142,7 +144,4 @@ ReviewOrder.propTypes = {
   gateway: PropTypes.string.isRequired,
   history: PropTypes.object
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ReviewOrder);
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewOrder);
