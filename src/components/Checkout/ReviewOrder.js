@@ -15,7 +15,7 @@ import Footer from 'components/Footer';
 
 import MenuCheckout from './MenuCheckout';
 import OrderSummary from './OrderSummary';
-// import PaymentForm from './PaymentForm';
+import PaymentForm from './PaymentForm';
 
 const nextStep = (dispatcher, sessionId, paymentData) => e => {
   e.preventDefault();
@@ -34,7 +34,9 @@ const mapStateToProps = ({
   shipping,
   paymentDetails: paymentoptions.paymentMethodDetails,
   gateway: paymentoptions.selectedGateway,
-  sessionId: app.sessionId
+  sessionId: app.sessionId,
+  paymentFormData: paymentoptions.formData,
+  paymentError: paymentoptions.error
 });
 
 const mapDispatchToProps = dispatch =>
@@ -57,7 +59,9 @@ class ReviewOrder extends Component {
       sessionId,
       gateway,
       checkingCart,
-      history
+      history,
+      paymentFormData,
+      paymentError
     } = this.props;
     const paymentinfo = Object.values(paymentDetails)[0];
     return (
@@ -81,6 +85,7 @@ class ReviewOrder extends Component {
                     <PaymentMethod gateway={gateway} cardtype="VISA" info={paymentinfo} />
                   </Div>
                 </Row>
+                {paymentError && paymentError.length > 0 && paymentError[0]}
                 <Row type="block" m="0" mb="1.5rem" mt="0">
                   <Div col="12">
                     <table className="ordersTable">
@@ -113,7 +118,7 @@ class ReviewOrder extends Component {
                   </Div>
                 </Row>
               </Div>
-              {/* <PaymentForm /> */}
+              {paymentFormData && <PaymentForm />}
               <OrderSummary
                 itemsTotal={summary.items}
                 savings={summary.savings}
@@ -131,7 +136,9 @@ class ReviewOrder extends Component {
   }
 }
 ReviewOrder.defaultProps = {
-  history: {}
+  history: {},
+  paymentFormData: {},
+  paymentError: []
 };
 ReviewOrder.propTypes = {
   summary: PropTypes.object.isRequired,
@@ -142,6 +149,8 @@ ReviewOrder.propTypes = {
   submitDetails: PropTypes.func.isRequired,
   sessionId: PropTypes.string.isRequired,
   gateway: PropTypes.string.isRequired,
-  history: PropTypes.object
+  history: PropTypes.object,
+  paymentFormData: PropTypes.object,
+  paymentError: PropTypes.array
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ReviewOrder);

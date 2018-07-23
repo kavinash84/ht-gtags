@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 const mapStateToProps = ({ paymentoptions }) => ({
-  data: paymentoptions.formData
+  data: paymentoptions.formData,
+  error: paymentoptions.error
 });
 
 class PaymentForm extends Component {
   static propTypes = {
     data: PropTypes.object,
-    error: PropTypes.bool
+    error: PropTypes.array
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -17,26 +18,24 @@ class PaymentForm extends Component {
 
   static defaultProps = {
     data: null,
-    error: false
+    error: []
   };
 
   componentDidUpdate() {
-    const { data, error } = this.props;
-    if (data && data !== null && !error) {
+    const { data: { form_data: formData }, error } = this.props;
+    if (formData && !error) {
+      console.log(this.paymentForm);
       this.paymentForm.submit();
     }
   }
 
   render() {
-    const {
-      data: {
-        form_data: { action, fields }
-      }
-    } = this.props;
-    if (action && fields) {
+    const { data: { form_data: { action, fields } } } = this.props;
+    if (!action && !fields) {
       return <span />;
     }
     const formFields = Object.entries(fields);
+    console.log(formFields);
     return (
       <form
         ref={form => {

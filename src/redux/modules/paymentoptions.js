@@ -15,45 +15,6 @@ const SET_VALIDATION_ERROR = 'paymentOptions/SET_VALIDATION_ERROR';
 const SET_CARD_TYPE = 'paymentOptions/SET_CARD_TYPE';
 const SET_CARD_TYPE_SUCCESS = 'paymentOptions/SET_CARD_TYPE_SUCCESS';
 const SET_CARD_TYPE_FAIL = 'paymentOptions/SET_CARD_TYPE_FAIL';
-/* eslint-disable max-len */
-// const formData = {
-//   form_data: {
-//     action: 'https://secure.payu.in/_payment',
-//     fields: {
-//       key: 'sWRk4y',
-//       txnid: '908398976',
-//       amount: '691.00',
-//       productinfo: '--LI889KD24GFVINDFUR-426428--LI889BB93WWSINDFUR-458550--',
-//       firstname: 'Bhargav',
-//       email: 'bhargav@hometown.in',
-//       phone: '9870149460',
-//       furl: 'https://alice-staging.hometown.in/checkout/finish/payment/',
-//       surl: 'https://alice-staging.hometown.in/checkout/finish/payment/',
-//       codurl: 'https://alice-staging.hometown.in/cart/',
-//       touturl: 'https://alice-staging.hometown.in/cart/',
-//       hash: 'c55997ae20dbd15fde8bb78df3441304ee801febd4300b12844d41ec6f190137b086f9a30f353d980b03a9197f05ebe473b5db42c08f0080fe915e871492fdd9',
-//       user_credentials: 'sWRk4y:1451764',
-//       udf1: '',
-//       udf2: '',
-//       udf3: '',
-//       udf4: '',
-//       udf5: '',
-//       udf6: '',
-//       udf7: '',
-//       udf8: '',
-//       udf9: '',
-//       udf10: '',
-//       pg: 'DC',
-//       bankcode: 'visa',
-//       ccnum: '4012001037141112',
-//       ccname: 'Test',
-//       ccvv: '123',
-//       ccexpmon: '5',
-//       ccexpyr: '2020',
-//       store_card: ''
-//     }
-//   }
-// };
 
 const paymentJSON = {
   session_id: '',
@@ -250,7 +211,6 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         submitting: true,
         submitted: false,
-        formData: action.result,
         error: ''
       };
     case SUBMIT_PAYMENT_DETAILS_SUCCESS:
