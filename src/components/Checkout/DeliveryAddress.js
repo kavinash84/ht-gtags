@@ -13,6 +13,7 @@ import ResponsiveModal from 'components/Modal';
 import LoginModal from 'components/Login/LoginModal';
 import Footer from 'components/Footer';
 import { sendDeliveryAddress } from 'redux/modules/checkout';
+import { setAddress } from 'redux/modules/shipping';
 import { MY_WISHLIST_URL } from 'helpers/Constants';
 import MenuCheckout from './MenuCheckout';
 import ShippingForm from './ShippingForm';
@@ -25,11 +26,14 @@ const onClick = history => e => {
   history.push(MY_WISHLIST_URL);
 };
 
-const mapStateToProps = ({ userLogin, app, checkout }) => ({
+const mapStateToProps = ({
+  userLogin, app, checkout, myaddress
+}) => ({
   isLoggedIn: userLogin.isLoggedIn,
   sessionId: app.sessionId,
   nextstep: checkout.nextstep,
-  loading: checkout.loading
+  loading: checkout.loading,
+  addresses: myaddress.data
 });
 @withRouter
 class DeliveryAddress extends Component {
@@ -95,9 +99,16 @@ class DeliveryAddress extends Component {
       shippingIsBilling: !prevState.shippingIsBilling
     }));
   };
+  handleClick = index => {
+    const { dispatch } = this.context.store;
+    const { addresses } = this.props;
+    dispatch(setAddress(addresses[index]));
+  };
 
   render() {
-    const { isLoggedIn, history, loading } = this.props;
+    const {
+      isLoggedIn, history, loading, addresses
+    } = this.props;
     // const { shippingIsBilling } = this.state;
     return (
       <Div type="block">
@@ -105,7 +116,68 @@ class DeliveryAddress extends Component {
         <Section display="flex" pt="1.25rem" mb="1rem" height="auto">
           <Container type="container" pr="2rem" pl="2rem">
             <Row display="block" mr="0" ml="0">
-              <Div col="5">
+              {isLoggedIn ? (
+                <div>
+                  <Row display="block" mr="0" ml="0">
+                    <Div col="12">
+                      <Label fontSize="0.875em" mb="0.875rem">
+                        SELECT BILLING ADDRESS
+                      </Label>
+                    </Div>
+                    {addresses.map((item, index) => (
+                      <Div col="4" pr="0.625rem">
+                        <button
+                          className={`${styles.addressBtn} ${styles.active}`}
+                          onClick={() => this.handleClick(index)}
+                        >
+                          <b>{item.full_name}</b>
+                          <br />
+                          {item.address}
+                          <br />
+                          {item.city}, {item.pincode}
+                          <br />
+                          {item.state}
+                          <br />
+                        </button>
+                      </Div>
+                    ))}
+                    <Div col="2">
+                      <button className={styles.addAddressBtn}>
+                        <img src={addIcon} alt="Add another address" />
+                        <Text color="rgba(0, 0, 0, 0.6)" ta="center">
+                          Add another address
+                        </Text>
+                      </button>
+                    </Div>
+                  </Row>
+                </div>
+              ) : (
+                <Div col="3" ml="20%">
+                  <Label mt="0" mb="0" color="textLight">
+                    Have an existing account with hometown?
+                  </Label>
+                  <Button
+                    btnType="primary"
+                    fontWeight="regular"
+                    height="42px"
+                    mt="0.5rem"
+                    fontSize="0.875rem"
+                    p="0.375rem 5rem"
+                    onClick={isLoggedIn ? onClick(history) : this.onOpenLoginModal}
+                  >
+                    LOGIN
+                  </Button>
+                  <ResponsiveModal
+                    classNames={{ modal: styles.loginModal }}
+                    onCloseModal={this.onCloseLoginModal}
+                    open={this.state.openLogin}
+                  >
+                    <LoginModal />
+                  </ResponsiveModal>
+                </Div>
+              )}
+
+              <Div col="5" mt="2rem">
                 <form onSubmit={this.handleSubmit}>
                   <ShippingForm
                     ref={shippingform => {
@@ -141,80 +213,6 @@ class DeliveryAddress extends Component {
                   </Div>
                 </form>
               </Div>
-
-              {isLoggedIn ? (
-                <div>
-                  <Row display="block" mr="0" ml="0">
-                    <Div col="12">
-                      <Label fontSize="0.875em" mb="0.875rem">
-                        SELECT BILLING ADDRESS
-                      </Label>
-                    </Div>
-                    <Div col="4" pr="0.625rem">
-                      <button className={`${styles.addressBtn} ${styles.active}`}>
-                        Saurabh Suman<br />
-                        A-503, Mayfair Hillcrest, Near Pop Tates,<br />
-                        Vikhroli, Mumbai, 400076<br />
-                        Maharashtra<br />
-                      </button>
-                    </Div>
-                    <Div col="4">
-                      <button className={styles.addressBtn}>
-                        Saurabh Suman<br />
-                        A-503, Mayfair Hillcrest, Near Pop Tates,<br />
-                        Vikhroli, Mumbai, 400076<br />
-                        Maharashtra<br />
-                      </button>
-                    </Div>
-                    <Div col="2">
-                      <button className={styles.addAddressBtn}>
-                        <img src={addIcon} alt="Add another address" />
-                        <Text color="rgba(0, 0, 0, 0.6)" ta="center">
-                          Add another address
-                        </Text>
-                      </button>
-                    </Div>
-                  </Row>
-                  <Row display="block" mr="0" ml="0">
-                    <Div col="3">
-                      <Button
-                        size="block"
-                        btnType="primary"
-                        fontWeight="regular"
-                        height="42px"
-                        mt="1.5rem"
-                        disabled={loading}
-                      >
-                        {loading ? 'Loading...' : 'Next: Payment Options'}
-                      </Button>
-                    </Div>
-                  </Row>
-                </div>
-              ) : (
-                <Div col="3" ml="20%">
-                  <Label mt="0" mb="0" color="textLight">
-                    Have an existing account with hometown?
-                  </Label>
-                  <Button
-                    btnType="primary"
-                    fontWeight="regular"
-                    height="42px"
-                    mt="0.5rem"
-                    fontSize="0.875rem"
-                    p="0.375rem 5rem"
-                    onClick={isLoggedIn ? onClick(history) : this.onOpenLoginModal}
-                  >
-                    LOGIN
-                  </Button>
-                  <ResponsiveModal
-                    classNames={{ modal: styles.loginModal }}
-                    onCloseModal={this.onCloseLoginModal}
-                    open={this.state.openLogin}
-                  >
-                    <LoginModal />
-                  </ResponsiveModal>
-                </Div>
-              )}
             </Row>
           </Container>
         </Section>
@@ -224,13 +222,15 @@ class DeliveryAddress extends Component {
   }
 }
 DeliveryAddress.defaultProps = {
-  history: {}
+  history: {},
+  addresses: []
 };
 DeliveryAddress.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
   sessionId: PropTypes.string.isRequired,
   history: PropTypes.object,
+  addresses: PropTypes.object,
   nextstep: PropTypes.bool.isRequired
 };
 export default connect(

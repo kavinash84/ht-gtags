@@ -20,6 +20,8 @@ const SET_CITY_ERROR = 'shipping/SET_CITY_ERROR';
 const SET_STATE_ERROR = 'shipping/SET_STATE_ERROR';
 const SET_EMAIL_ERROR = 'shipping/SET_EMAIL_ERROR';
 
+const SET_ADDRESS = 'shipping/SET_ADDRESS';
+
 // Pincode Methods
 const LOAD_PINCODE = 'shipping/LOAD_PINCODE';
 const LOAD_PINCODE_SUCCESS = 'shipping/LOAD_PINCODE_SUCCESS';
@@ -139,6 +141,17 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         phoneFeedBackError: action.payLoad
+      };
+    case SET_ADDRESS:
+      return {
+        ...state,
+        fullName: action.data.full_name,
+        pincode: action.data.pincode,
+        email: action.data.email,
+        phone: action.data.mobile,
+        address: action.data.address,
+        city: action.data.city,
+        state: action.data.state
       };
     case SET_PINCODE_ERROR:
       return {
@@ -289,4 +302,8 @@ export const setPincodeQuery = query => ({
 export const setPincode = pincode => ({
   type: SET_SELECTED_PINCODE,
   pincode
+});
+export const setAddress = data => ({
+  type: SET_ADDRESS,
+  data
 });

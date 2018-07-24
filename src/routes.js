@@ -64,7 +64,7 @@ const routes = [
       { path: '/wishlist', exact: true, component: isAuthenticated(Wishlist) },
       { path: '/cart', exact: true, component: Cart },
       { path: '/my-orders', exact: true, component: isAuthenticated(MyOrder) },
-      { path: '/my-address', exact: true, component: MyAddress },
+      { path: '/my-address', exact: true, component: isAuthenticated(MyAddress) },
       { path: '/order-details', exact: true, component: OrderDetails },
       { path: '/order-summary', exact: true, component: OrderSummary },
       { path: '/profile', exact: true, component: isAuthenticated(Profile) },
