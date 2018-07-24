@@ -13,7 +13,8 @@ const styles = require('./QuickView.scss');
 const adjustSlides = length => ({
   slidesToShow: length >= 3 ? 3 : length,
   slidesToScroll: 3,
-  autoplay: false
+  autoplay: false,
+  infinite: false
 });
 
 export default class QuickView extends Component {
