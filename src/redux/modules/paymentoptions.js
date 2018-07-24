@@ -63,7 +63,7 @@ const paymentJSON = {
   wallet: ''
 };
 
-const paymentObject = (sessionId, selectedGateway, paymentData) => {
+const paymentObject = (sessionId, selectedGateway, paymentData, cardType = 'visa') => {
   if (selectedGateway === 'CreditCard') {
     const {
       cardNumber, cvv, expMonth, expYear, nameOnCard
@@ -74,7 +74,7 @@ const paymentObject = (sessionId, selectedGateway, paymentData) => {
       payment_method_type: selectedGateway,
       payment_method: 'Payu',
       cc_number: cardNumber,
-      cc_card_type: 'visa',
+      cc_card_type: cardType,
       cc_holder: nameOnCard,
       cc_exp_month: expMonth,
       cc_exp_year: expYear,
@@ -91,7 +91,7 @@ const paymentObject = (sessionId, selectedGateway, paymentData) => {
       payment_method_type: selectedGateway,
       payment_method: 'Payu',
       dc_number: cardNumber,
-      dc_card_type: 'visa',
+      dc_card_type: cardType,
       dc_holder: nameOnCard,
       dc_exp_month: expMonth,
       dc_exp_year: expYear,
@@ -116,6 +116,8 @@ const initialState = {
   data: null,
   selectedGateway: 'CreditCard',
   isFormValid: false,
+  cardType: 'visa',
+  cardTypeError: null,
   paymentMethodDetails: {
     CreditCard: {
       nameOnCard: '',
@@ -170,15 +172,15 @@ export default function reducer(state = initialState, action = {}) {
       };
     case SET_CARD_TYPE_SUCCESS:
       return {
-        ...state
-        // paymentMethodDetails: appendData(action.result.gateway, state, action.result)
+        ...state,
+        cardType: action.result && action.result.cardType
       };
     case SET_CARD_TYPE_FAIL:
       return {
         ...state,
         loading: false,
         loaded: false,
-        error: action.error
+        cardTypeError: action.error
       };
 
     case SELECTED_PAYMENT_METHOD:
@@ -251,10 +253,8 @@ export const setSelectedPaymentDetails = payLoad => ({
 export const setCardType = (cardno, session, gateway) => ({
   types: [SET_CARD_TYPE, SET_CARD_TYPE_SUCCESS, SET_CARD_TYPE_FAIL],
   promise: ({ client }) => {
-    console.log(cardno, session, gateway);
     const response = client.get(`tesla/payments/card-type-info/${cardno}/${session}`);
     response.gateway = gateway;
-    // return { cardType, gateway };
     return response;
   }
 });
@@ -266,11 +266,11 @@ export const setValidationError = () => ({
   type: SET_VALIDATION_ERROR
 });
 
-export const submitPaymentDetails = (sessionId, data) => ({
+export const submitPaymentDetails = (sessionId, data, cardType) => ({
   types: [SUBMIT_PAYMENT_DETAILS, SUBMIT_PAYMENT_DETAILS_SUCCESS, SUBMIT_PAYMENT_DETAILS_FAIL],
   promise: async ({ client }) => {
     try {
-      const postData = paymentObject(sessionId, Object.keys(data)[0], Object.values(data)[0]);
+      const postData = paymentObject(sessionId, Object.keys(data)[0], Object.values(data)[0], cardType);
       const response = await client.post('tesla/orders', postData);
       return response;
     } catch (error) {

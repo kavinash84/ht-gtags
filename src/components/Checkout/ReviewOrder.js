@@ -17,26 +17,25 @@ import MenuCheckout from './MenuCheckout';
 import OrderSummary from './OrderSummary';
 import PaymentForm from './PaymentForm';
 
-const nextStep = (dispatcher, sessionId, paymentData) => e => {
+const nextStep = (dispatcher, sessionId, paymentData, cardType) => e => {
   e.preventDefault();
-  dispatcher(sessionId, paymentData);
+  dispatcher(sessionId, paymentData, cardType);
 };
 
 const mapStateToProps = ({
-  cart: {
-    checkingCart, data, summary, error
-  }, shipping, paymentoptions, app
+  cart: { data, summary, error }, shipping, paymentoptions, app
 }) => ({
   results: data,
   summary,
-  checkingCart,
   error,
   shipping,
   paymentDetails: paymentoptions.paymentMethodDetails,
   gateway: paymentoptions.selectedGateway,
   sessionId: app.sessionId,
   paymentFormData: paymentoptions.formData,
-  paymentError: paymentoptions.error
+  paymentError: paymentoptions.error,
+  cardType: paymentoptions.cardType,
+  submitting: paymentoptions.submitting
 });
 
 const mapDispatchToProps = dispatch =>
@@ -58,10 +57,11 @@ class ReviewOrder extends Component {
       submitDetails,
       sessionId,
       gateway,
-      checkingCart,
       history,
       paymentFormData,
-      paymentError
+      paymentError,
+      cardType,
+      submitting
     } = this.props;
     const paymentinfo = Object.values(paymentDetails)[0];
     return (
@@ -124,8 +124,8 @@ class ReviewOrder extends Component {
                 savings={summary.savings}
                 shipping={summary.shipping_charges}
                 totalCart={summary.total}
-                loadingnextstep={checkingCart}
-                onClick={nextStep(submitDetails, sessionId, paymentDetails)}
+                loadingnextstep={submitting}
+                onClick={nextStep(submitDetails, sessionId, paymentDetails, cardType)}
               />
             </Row>
           </Container>
@@ -138,12 +138,14 @@ class ReviewOrder extends Component {
 ReviewOrder.defaultProps = {
   history: {},
   paymentFormData: {},
-  paymentError: []
+  paymentError: [],
+  cardType: 'visa',
+  submitting: false
 };
 ReviewOrder.propTypes = {
   summary: PropTypes.object.isRequired,
   results: PropTypes.array.isRequired,
-  checkingCart: PropTypes.bool.isRequired,
+  // checkingCart: PropTypes.bool.isRequired,
   shipping: PropTypes.object.isRequired,
   paymentDetails: PropTypes.object.isRequired,
   submitDetails: PropTypes.func.isRequired,
@@ -151,6 +153,8 @@ ReviewOrder.propTypes = {
   gateway: PropTypes.string.isRequired,
   history: PropTypes.object,
   paymentFormData: PropTypes.object,
-  paymentError: PropTypes.array
+  paymentError: PropTypes.array,
+  cardType: PropTypes.string,
+  submitting: PropTypes.bool
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ReviewOrder);

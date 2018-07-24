@@ -10,8 +10,8 @@ import { bindActionCreators } from 'redux';
 
 const styles = require('./Checkout.scss');
 const mcIcon = require('../../../static/master-card.jpg');
-// const visaIcon = require('../../../static/visa.jpg');
-// const maestroIcon = require('../../../static/maestro.jpg');
+const visaIcon = require('../../../static/visa.jpg');
+const maestroIcon = require('../../../static/maestro.jpg');
 
 const MONTHS = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 const YEARS = [...Array(21)];
@@ -28,13 +28,21 @@ const onGetCardType = (dispatcher, sessionId, gateway) => e => {
 
 const mapStateToProps = ({ paymentoptions, app }) => ({
   details: paymentoptions.paymentMethodDetails.CreditCard,
-  sessionId: app.sessionId
+  sessionId: app.sessionId,
+  cardType: paymentoptions.cardType
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({ getCardType: setCardType }, dispatch);
 
 const CardForm = ({
-  gateway, setPaymentDetails, details: { nameOnCard, cardNumber, cvv }, getCardType, sessionId
+  gateway,
+  setPaymentDetails,
+  details: {
+    nameOnCard, cardNumber, cvv, expMonth, expYear
+  },
+  getCardType,
+  sessionId,
+  cardType
 }) => (
   <Div className={styles.paymentBlock}>
     <Div col="5" pr="1rem">
@@ -57,7 +65,9 @@ const CardForm = ({
         onChange={onChangeDetails(setPaymentDetails, gateway)}
         onBlur={onGetCardType(getCardType, sessionId, gateway)}
       />
-      <Img src={mcIcon} alt="" />
+      {cardType === 'VISA' && <Img src={visaIcon} alt="visaCard" />}
+      {cardType === 'MAST' && <Img src={mcIcon} alt="visaCard" />}
+      {cardType === 'MAESTRO' && <Img src={maestroIcon} alt="visaCard" />}
     </Div>
     <Div col="2">
       <FormInput
@@ -75,11 +85,21 @@ const CardForm = ({
       </Label>
     </Div>
     <Div col="5">
-      <select className={styles.dropDown} name="expMonth" onChange={onChangeDetails(setPaymentDetails, gateway)}>
+      <select
+        className={styles.dropDown}
+        name="expMonth"
+        onChange={onChangeDetails(setPaymentDetails, gateway)}
+        value={expMonth}
+      >
         <option key="month">MM</option>
         {MONTHS.map(month => <option key={month}>{month}</option>)}
       </select>
-      <select className={styles.dropDown} name="expYear" onChange={onChangeDetails(setPaymentDetails, gateway)}>
+      <select
+        className={styles.dropDown}
+        name="expYear"
+        onChange={onChangeDetails(setPaymentDetails, gateway)}
+        value={expYear}
+      >
         <option key="year">YY</option>
         {YEARS.map((v, i) => <option key={String(i)}>{new Date().getFullYear() + i}</option>)}
       </select>
@@ -87,11 +107,16 @@ const CardForm = ({
   </Div>
 );
 
+CardForm.defaultProps = {
+  cardType: 'visa'
+};
+
 CardForm.propTypes = {
   gateway: PropTypes.string.isRequired,
   getCardType: PropTypes.func.isRequired,
   sessionId: PropTypes.string.isRequired,
   setPaymentDetails: PropTypes.func.isRequired,
-  details: PropTypes.object.isRequired
+  details: PropTypes.object.isRequired,
+  cardType: PropTypes.string
 };
 export default connect(mapStateToProps, mapDispatchToProps)(CardForm);
