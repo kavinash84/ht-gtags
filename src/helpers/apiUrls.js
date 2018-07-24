@@ -34,8 +34,9 @@ export const CHECKCART = 'tesla/checkout';
 export const SESSION = 'tesla/session';
 
 export const TRACK_ORDER = 'tesla/orders/track';
-/* My Orders */
+/* Profile Details */
 export const MY_ORDERS = 'tesla/orders';
+export const MY_ADDRESS = 'tesla/users/address';
 
 /* Payments */
 export const PAYMENT_OPTIONS = 'tesla/payments';
