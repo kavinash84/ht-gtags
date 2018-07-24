@@ -161,7 +161,7 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: false,
-        error: action.error
+        error: action.error && action.error.error_message
       };
 
     case SET_CARD_TYPE:
@@ -187,14 +187,14 @@ export default function reducer(state = initialState, action = {}) {
         selectedGateway: action.gateway,
         isFormValid: true,
         paymentMethodDetails: appendData(action.gateway, state, action.initial),
-        error: ''
+        error: []
       };
     case SELECTED_PAYMENT_METHOD_DETAILS:
       return {
         ...state,
         isFormValid: true,
         paymentMethodDetails: appendData(action.payLoad.gateway, state, action.payLoad.data),
-        error: ''
+        error: []
       };
     case CHECK_PAYMENT_DETAILS:
       return {
@@ -211,7 +211,7 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         submitting: true,
         submitted: false,
-        error: ''
+        error: []
       };
     case SUBMIT_PAYMENT_DETAILS_SUCCESS:
       return {
@@ -225,7 +225,7 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         submitting: false,
         submitted: false,
-        error: action.error
+        error: action.error && action.error.error_message
       };
     default:
       return state;

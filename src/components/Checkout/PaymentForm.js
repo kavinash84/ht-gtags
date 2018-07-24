@@ -18,36 +18,41 @@ class PaymentForm extends Component {
 
   static defaultProps = {
     data: null,
-    error: []
+    error: {}
   };
 
   componentDidUpdate() {
-    const { data: { form_data: formData }, error } = this.props;
-    if (formData && !error) {
-      console.log(this.paymentForm);
-      this.paymentForm.submit();
+    if (this.props.data && this.props.data.form_data) {
+      const { data: { form_data: formData }, error } = this.props;
+      if (formData && !error) {
+        console.log(this.paymentForm);
+        this.paymentForm.submit();
+      }
     }
   }
 
   render() {
-    const { data: { form_data: { action, fields } } } = this.props;
-    if (!action && !fields) {
-      return <span />;
+    const { data } = this.props;
+    if (data && data.form_data) {
+      const { data: { form_data: { action, fields } } } = this.props;
+      if (!action && !fields) {
+        return <span />;
+      }
+      const formFields = Object.entries(fields);
+      return (
+        <form
+          ref={form => {
+            this.paymentForm = form;
+          }}
+          className="hide"
+          action={action}
+          encType="application/x-www-form-urlencoded"
+        >
+          {formFields.map(field => <input key={field[0]} type="hidden" name={field[0]} value={field[1]} />)}
+        </form>
+      );
     }
-    const formFields = Object.entries(fields);
-    console.log(formFields);
-    return (
-      <form
-        ref={form => {
-          this.paymentForm = form;
-        }}
-        className="hide"
-        action={action}
-        encType="application/x-www-form-urlencoded"
-      >
-        {formFields.map(field => <input key={field[0]} type="hidden" name={field[0]} value={field[1]} />)}
-      </form>
-    );
+    return null;
   }
 }
 

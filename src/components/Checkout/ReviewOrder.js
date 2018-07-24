@@ -68,6 +68,7 @@ class ReviewOrder extends Component {
       <Div type="block">
         <MenuCheckout history={history} page="review" />
         <Section display="flex" pt="1.25rem" pb="2.5rem" mb="0" height="auto">
+          {paymentError && paymentError.length > 0 && paymentError[0]}
           <Container type="container" pr="2rem" pl="2rem">
             <Row display="block" mr="0" ml="0">
               <Div col="9" pr="2.5rem" pt="1.5rem">
@@ -85,7 +86,6 @@ class ReviewOrder extends Component {
                     <PaymentMethod gateway={gateway} cardtype="VISA" info={paymentinfo} />
                   </Div>
                 </Row>
-                {paymentError && paymentError.length > 0 && paymentError[0]}
                 <Row type="block" m="0" mb="1.5rem" mt="0">
                   <Div col="12">
                     <table className="ordersTable">
