@@ -22,7 +22,7 @@ import { getCartCount } from 'selectors/cart';
 const LogoIcon = require('../../../static/logo.png');
 const CartIcon = require('../../../static/cart-icon.svg');
 const PinIcon = require('../../../static/map-icon.svg');
-const MapIcon = require('../../../static/map.svg');
+// const MapIcon = require('../../../static/map.svg');
 const PhoneIcon = require('../../../static/phone-icon.svg');
 const UserIcon = require('../../../static/user-icon.svg');
 const PincodeModalIcon = require('../../../static/map-placeholder.svg');
@@ -131,7 +131,7 @@ export default class MenuSidebar extends Component {
               <Span fontSize="0.875em">1800-210-0004</Span>
             </a>
             <Link className={styles.cart} to="/store-locator">
-              <Img src={MapIcon} alt="Hometown" height="24px" mr="0.3125rem" float="left" />
+              <Img src={PinIcon} alt="Hometown" height="24px" mr="0.3125rem" float="left" />
               <Span fontSize="0.875em">Store Locator</Span>
             </Link>
             <Button

@@ -19,6 +19,7 @@
   column-gap: 1em;
   padding: 1.5rem;
   transition: transform 1s ease;
+  top: -5px;
   .list {
     margin-bottom: 15px;
     margin-top: 0;
@@ -33,7 +34,7 @@
       margin: 0 0 5px;
       font-weight: 600;
       a {
-        color: #f98d29;
+        color: $primary;
       }
     }
     li {
