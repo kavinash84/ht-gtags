@@ -181,7 +181,9 @@ class ShippingForm extends React.Component {
   }
 }
 
-ShippingForm.defaultProps = {};
+ShippingForm.defaultProps = {
+  shippingForm: true
+};
 ShippingForm.propTypes = {
   fullName: PropTypes.string.isRequired,
   fullNameFeedBackError: PropTypes.bool.isRequired,
@@ -211,7 +213,7 @@ ShippingForm.propTypes = {
   onChangeCity: PropTypes.func.isRequired,
   onChangeState: PropTypes.func.isRequired,
   onChangePincode: PropTypes.func.isRequired,
-  shippingForm: PropTypes.bool.isRequired,
+  shippingForm: PropTypes.bool,
   setCityError: PropTypes.func.isRequired,
   setNameError: PropTypes.func.isRequired,
   setPhoneError: PropTypes.func.isRequired,

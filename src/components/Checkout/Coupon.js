@@ -38,12 +38,12 @@ class Coupon extends React.Component {
   };
   componentWillReceiveProps(nextProps) {
     const { coupon } = nextProps;
-    console.log(coupon);
+    // console.log(coupon);
     if (this.props.coupon.appliedCoupon !== coupon.appliedCoupon) {
       const { error, loaded, summary } = coupon;
       if (error && loaded) {
         // const { error_message: errorMsg } = errorMessage;
-        console.log('setting Error');
+        // console.log('setting Error');
         this.setState({
           // error: true
         });
@@ -93,7 +93,7 @@ class Coupon extends React.Component {
     } = coupon;
 
     const { applycoupon } = this.state;
-    console.log(error, coupon);
+    // console.log(error, coupon);
     return (
       <div>
         <Div className={styles.applyCoupon}>
@@ -258,11 +258,14 @@ class Coupon extends React.Component {
 
 Coupon.propTypes = {
   pincode: PropTypes.string,
-  sessionId: PropTypes.string.isRequired,
-  coupon: PropTypes.object.isRequired,
-  cart: PropTypes.object.isRequired
+  sessionId: PropTypes.string,
+  coupon: PropTypes.object,
+  cart: PropTypes.object
 };
 Coupon.defaultProps = {
-  pincode: ''
+  sessionId: '',
+  pincode: '',
+  cart: {},
+  coupon: {}
 };
 export default Coupon;

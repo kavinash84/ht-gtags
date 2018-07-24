@@ -9,7 +9,7 @@ const adjustSlides = length => ({
   slidesToShow: length >= 4 ? 4 : length,
   slidesToScroll: 3,
   autoplay: false,
-  infinite: true
+  infinite: false
 });
 
 export default class CategoryCarousel extends Component {

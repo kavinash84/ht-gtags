@@ -113,7 +113,7 @@ const Cart = ({
               savings={summary.savings}
               shipping={summary.shipping_charges}
               totalCart={summary.total}
-              checkingCart={checkingCart}
+              loadingnextstep={checkingCart}
               onClick={checkCartBeforeCheckout(checkCart, sessionId)}
             />
           </Row>
@@ -144,4 +144,7 @@ Cart.defaultProps = {
   checkingCart: false
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Cart);
