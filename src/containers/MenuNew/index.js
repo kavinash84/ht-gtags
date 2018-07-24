@@ -76,12 +76,14 @@ export default class Menu extends Component {
       <Section mb="0" p="0" pt="15px" of="initial" className={styles.menuContainer}>
         <Container pr="0" pl="0">
           <TopBar />
-          <NavBar
-            exitOnClick={this.exitOnClick}
-            handleEnter={this.enterMenu}
-            handleLeave={this.leaveMenu}
-            menuItems={menuItems}
-          />
+        </Container>
+        <NavBar
+          exitOnClick={this.exitOnClick}
+          handleEnter={this.enterMenu}
+          handleLeave={this.leaveMenu}
+          menuItems={menuItems}
+        />
+        <Container pr="0" pl="0">
           {hoverBox && (
             <HoverMenuBox
               handleEnter={this.enterHoverBox}

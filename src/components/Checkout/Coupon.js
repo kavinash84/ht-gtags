@@ -144,7 +144,7 @@ class Coupon extends React.Component {
                 <Button
                   className={styles.applyCouponBtn}
                   btnType="link"
-                  color="#ae8873"
+                  color="#f98d29"
                   fontWeight="semibold"
                   pl="0"
                   pr="0"

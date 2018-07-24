@@ -36,7 +36,7 @@ const LoginModal = ({ loginViaLogin, session }) => (
     <Row mr="0" ml="0">
       <Div col="12">
         <Label display="block" className={styles.title}>
-          <Fav fill="#ae8873" />
+          <Fav fill="#f98d29" />
           Login to proceed further
         </Label>
       </Div>

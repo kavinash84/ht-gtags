@@ -87,7 +87,7 @@ const Cart = ({
                             <Button
                               fontSize="1rem"
                               fontWeight="300"
-                              color="#ae8873"
+                              color="#f98d29"
                               btnType="link"
                               onClick={onClick(item.id_customer_cart, sessionId, pincode)(removeFromCart)}
                             >

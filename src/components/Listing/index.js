@@ -99,7 +99,7 @@ class Listing extends React.Component {
 
     return (
       <Div type="block">
-        <Section mb="0.3125rem" p="1rem 0.5rem" bg="primary">
+        <Section mb="0.3125rem" p="1rem 0.5rem" bg="oldMont">
           <Container pr="0" pl="0">
             <Row display="block" mr="0" ml="0">
               <Heading
@@ -239,4 +239,7 @@ Listing.propTypes = {
   wishlistKey: PropTypes.string
 };
 
-export default connect(null, mapDispatchToProps)(Listing);
+export default connect(
+  null,
+  mapDispatchToProps
+)(Listing);

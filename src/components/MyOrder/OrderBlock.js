@@ -58,7 +58,7 @@ const OrderBlock = ({ order }) => (
                   <td>{item.carrier_name || 'NOT AVAILABLE'}</td>
                   <td>{item.tracking_id || 'NOT AVAILABLE'}</td>
                   <td>
-                    <Button fontSize="0.875rem" fontWeight="300" color="#ae8873" btnType="link">
+                    <Button fontSize="0.875rem" fontWeight="300" color="#f98d29" btnType="link">
                       Track Now
                     </Button>
                   </td>
