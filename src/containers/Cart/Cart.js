@@ -17,13 +17,15 @@ const CartEmptyIcon = require('../../../static/cart-empty.jpg');
 @connect(
   ({
     cart: {
-      data, cartChecked, summary, error
+      data, cartChecked, summary, error, loading, loaded
     }
   }) => ({
     results: data,
     isCartChecked: cartChecked,
     summary,
-    error
+    error,
+    loading,
+    loaded
   }),
   {
     resetCheckKey: resetCheck
@@ -36,7 +38,9 @@ export default class CartContainer extends Component {
     error: PropTypes.object,
     isCartChecked: PropTypes.bool,
     history: PropTypes.object.isRequired,
-    resetCheckKey: PropTypes.func.isRequired
+    resetCheckKey: PropTypes.func.isRequired,
+    loading: PropTypes.bool,
+    loaded: PropTypes.bool
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -45,7 +49,9 @@ export default class CartContainer extends Component {
     results: [],
     summary: null,
     error: null,
-    isCartChecked: false
+    isCartChecked: false,
+    loading: false,
+    loaded: false
   };
   componentWillReceiveProps(nextProps) {
     const { isCartChecked, history, resetCheckKey } = this.props;
@@ -57,10 +63,13 @@ export default class CartContainer extends Component {
   }
 
   render() {
-    const { results, summary, error } = this.props;
+    const {
+      results, summary, error, loading, loaded
+    } = this.props;
     return (
       <div className="wrapper">
         <Menu />
+        {loading && !loaded && <CartShimmer />}
         {results && results.length === 0 ? (
           <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
             <Empty
@@ -80,7 +89,6 @@ export default class CartContainer extends Component {
             <Cart results={results} summary={summary} />
           </div>
         )}
-        <CartShimmer />
         <Footer />
       </div>
     );
