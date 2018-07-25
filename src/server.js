@@ -28,6 +28,8 @@ import asyncMatchRoutes from 'utils/asyncMatchRoutes';
 import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
 import { ReduxAsyncConnect, Provider } from 'components';
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
 const chunksPath = path.join(__dirname, '..', 'static', 'dist', 'loadable-chunks.json');
 
 process.on('unhandledRejection', error => console.error(error));
