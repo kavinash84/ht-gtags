@@ -478,7 +478,7 @@
 		z-index: 2;
 		background: #FFF;
 		border: 1px solid #dddddda1;
-		padding: 0.625rem 1rem;
+		// padding: 0.625rem 1rem;
 		min-width: 200px;
 		display: none;
 		&.blockRight {
@@ -491,8 +491,12 @@
 			transition: all 0.5s ease;
 			li {
 				text-align: left;
+				padding: 0.3125rem 0.625rem;
 				label {
 					cursor: pointer;
+				}
+				&:hover {
+					background: #dddddd;
 				}
 			}
 		}

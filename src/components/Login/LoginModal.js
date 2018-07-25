@@ -53,7 +53,7 @@ const LoginModal = ({ loginViaLogin, session }) => (
         </GoogleLogin>
       </Div>
       <Div col="12" mb="1.25rem" mt="1.25rem">
-        <Label display="block" ta="center" color="primary" fontWeight="400">
+        <Label fontWeight="medium" display="block" ta="center" color="primary">
           OR
         </Label>
       </Div>
@@ -66,14 +66,14 @@ const LoginModal = ({ loginViaLogin, session }) => (
     <Row display="block" mr="0" ml="0" pt="0.625rem">
       <Div col="6">
         <Link to={FORGOT_PASSWORD_URL}>
-          <Label fontWeight="light" color="primary">
+          <Label fontWeight="regular" color="primary">
             Forgot Password?
           </Label>
         </Link>
       </Div>
       <Div col="6" ta="right">
         <Link to={SIGNUP_URL}>
-          <Label fontWeight="light" color="primary">
+          <Label fontWeight="regular" color="primary">
             New User? Sign Up now
           </Label>
         </Link>

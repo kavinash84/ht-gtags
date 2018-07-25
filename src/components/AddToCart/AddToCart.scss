@@ -43,3 +43,16 @@
     background-color: $white;
   }
 }
+
+.addToCartBtn {
+  transition: 0.75s all ease;
+  &:hover {
+    background-color: $primary;
+    span {
+      color: #FFF;
+    }
+    svg {
+      fill: #FFF;
+    }
+  }
+}
