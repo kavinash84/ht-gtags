@@ -12,7 +12,8 @@ export default function reducer(state = initialState, action = {}) {
     case LOAD_PRODUCT_DESCRIPTION:
       return {
         ...state,
-        loading: true
+        loading: true,
+        loaded: false
       };
     case LOAD_PRODUCT_DESCRIPTION_SUCCESS:
       return {
