@@ -47,12 +47,12 @@
 .addToCartBtn {
   transition: 0.75s all ease;
   &:hover {
-    background-color: $primary;
+    background-color: $primary !important;
     span {
-      color: #FFF;
+      color: #FFF !important;
     }
     svg {
-      fill: #FFF;
+      fill: #FFF !important;
     }
   }
 }
