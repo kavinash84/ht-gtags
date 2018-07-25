@@ -1,5 +1,6 @@
 import { clearUserProfile } from '../modules/profile';
 import { clearWishList } from '../modules/wishlist';
+import { logout } from '../modules/login';
 
 export default function userMiddleware() {
   return ({ dispatch, getState }) => next => action => {
@@ -11,6 +12,11 @@ export default function userMiddleware() {
       if (type === 'login/LOGOUT') {
         dispatch(clearUserProfile());
         dispatch(clearWishList());
+      }
+      if (type === 'profile/LOAD_FAIL') {
+        if (action.error.error === 'invalid_token') {
+          dispatch(logout());
+        }
       }
     }
     return next(action);
