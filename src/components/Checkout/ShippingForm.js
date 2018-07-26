@@ -144,7 +144,7 @@ class ShippingForm extends React.Component {
         />
         <FormInput
           label="Address"
-          type="text-area"
+          type="textarea"
           placeholder=""
           onChange={e => onChangeAddress(e.target.value)}
           value={address}

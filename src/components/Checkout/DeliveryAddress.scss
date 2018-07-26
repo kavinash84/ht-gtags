@@ -1,17 +1,21 @@
+@import "../../theme/variables";
+@import "../../theme/mixins";
+
 .addressBtn, .addAddressBtn {
   border-radius: 4px;
   background-color: #ffffff;
-  border: solid 2px #FFF;
+  border: solid 2px #efefef;
   padding: 0.625rem 1rem;
   color: rgba(0, 0, 0, 0.6);
   text-align: left;
   line-height: 1.6;
   font-size: 14px;
   width: 100%;
-  min-height: 112px;
+  min-height: 135px;
+  margin-bottom: 10px;
   &.active, &:hover {
     background-color: #ffffff;
-    border: solid 2px #f98d29;
+    border: solid 2px $primary;
     outline: none;
   }
 }
