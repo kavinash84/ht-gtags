@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Heading from 'hometown-components/lib/Heading';
-import { Label } from 'hometown-components/lib/Label';
 import Div from 'hometown-components/lib/Div';
 import Button from 'hometown-components/lib/Buttons';
 import Img from 'hometown-components/lib/Img';
@@ -157,7 +156,7 @@ class Coupon extends React.Component {
               </div>
             </div>
           )}
-          <Label ta="center" display="block" mt="0.625rem" mb="0.625rem">
+          {/* <Label ta="center" display="block" mt="0.625rem" mb="0.625rem">
             OR
           </Label>
           <div className={`${styles.offerList} ${styles.active}`}>
@@ -165,7 +164,6 @@ class Coupon extends React.Component {
               <li>
                 <div className={styles.couponWrapper}>
                   <div className={styles.coupon}>
-                    {/* eslint-disable */}
                     <div className="checkbox">
                       <input type="radio" id="checkbox" />
                       <label htmlFor="checkbox" />
@@ -188,68 +186,8 @@ class Coupon extends React.Component {
                   </ul>
                 </div>
               </li>
-              <li>
-                <div className={styles.couponWrapper}>
-                  <div className={styles.coupon}>
-                    {/* eslint-disable */}
-                    <div className="checkbox">
-                      <input type="radio" id="checkbox" />
-                      <label htmlFor="checkbox" />
-                    </div>
-                    <label className={styles.couponCode}>FURNROOMAA500</label>
-                    <label className={styles.saveRs}>
-                      Save <span>Rs. 383</span>
-                    </label>
-                  </div>
-                  <p className={styles.offerDetails}>Rs.500 off on minimum purchase of Rs.1499.0</p>
-                  <p className={styles.offerDetails}>valid till 31st december,2018 Details</p>
-                  <ul className={styles.offerCondition}>
-                    <li>This is special coupon and can be applied on select style only</li>
-                  </ul>
-                </div>
-              </li>
-              <li>
-                <div className={styles.couponWrapper}>
-                  <div className={styles.coupon}>
-                    {/* eslint-disable */}
-                    <div className="checkbox">
-                      <input type="radio" id="checkbox" />
-                      <label htmlFor="checkbox" />
-                    </div>
-                    <label className={styles.couponCode}>FURNROOMAA500</label>
-                    <label className={styles.saveRs}>
-                      Save <span>Rs. 383</span>
-                    </label>
-                  </div>
-                  <p className={styles.offerDetails}>Rs.500 off on minimum purchase of Rs.1499.0</p>
-                  <p className={styles.offerDetails}>valid till 31st december,2018 Details</p>
-                  <ul className={styles.offerCondition}>
-                    <li>This is special coupon and can be applied on select style only</li>
-                  </ul>
-                </div>
-              </li>
-              <li>
-                <div className={styles.couponWrapper}>
-                  <div className={styles.coupon}>
-                    {/* eslint-disable */}
-                    <div className="checkbox">
-                      <input type="radio" id="checkbox" />
-                      <label htmlFor="checkbox" />
-                    </div>
-                    <label className={styles.couponCode}>FURNROOMAA500</label>
-                    <label className={styles.saveRs}>
-                      Save <span>Rs. 383</span>
-                    </label>
-                  </div>
-                  <p className={styles.offerDetails}>Rs.500 off on minimum purchase of Rs.1499.0</p>
-                  <p className={styles.offerDetails}>valid till 31st december,2018 Details</p>
-                  <ul className={styles.offerCondition}>
-                    <li>This is special coupon and can be applied on select style only</li>
-                  </ul>
-                </div>
-              </li>
             </ul>
-          </div>
+          </div> */}
         </Div>
       </div>
     );
