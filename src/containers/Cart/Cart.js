@@ -17,13 +17,15 @@ const CartEmptyIcon = require('../../../static/cart-empty.jpg');
 @connect(
   ({
     cart: {
-      data, cartChecked, summary, error
+      data, cartChecked, summary, error, loading, loaded
     }
   }) => ({
     results: data,
     isCartChecked: cartChecked,
     summary,
-    error
+    error,
+    loading,
+    loaded
   }),
   {
     resetCheckKey: resetCheck
@@ -36,7 +38,8 @@ export default class CartContainer extends Component {
     error: PropTypes.object,
     isCartChecked: PropTypes.bool,
     history: PropTypes.object.isRequired,
-    resetCheckKey: PropTypes.func.isRequired
+    resetCheckKey: PropTypes.func.isRequired,
+    loading: PropTypes.bool.isRequired
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -57,7 +60,9 @@ export default class CartContainer extends Component {
   }
 
   render() {
-    const { results, summary, error } = this.props;
+    const {
+      results, summary, error, loading
+    } = this.props;
     return (
       <div className="wrapper">
         <Menu />
@@ -73,14 +78,18 @@ export default class CartContainer extends Component {
               <Img src={CartEmptyIcon} width="initial" m="auto" alt="Sorry no results found" />
             </Empty>
           </Section>
-        ) : (
+        ) : null}
+
+        {!loading && (!results && results.length >= 0) ? (
           <div>
             <TitleBar title="Shopping Cart" />
             {error && <Notifications msg={error.error_message} type="error" />}
             <Cart results={results} summary={summary} />
           </div>
+        ) : (
+          loading && <CartShimmer />
         )}
-        <CartShimmer />
+
         <Footer />
       </div>
     );
