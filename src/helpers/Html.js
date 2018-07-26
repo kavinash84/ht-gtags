@@ -50,14 +50,16 @@ export default class Html extends Component {
           {head.script.toComponent()}
 
           <link rel="shortcut icon" href="/favicon.ico" />
+          <meta charSet="utf-8" />
+          <meta httpEquiv="x-ua-compatible" content="ie=edge" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link rel="manifest" href="/manifest.json" />
           <meta name="mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
-          <meta name="application-name" content="HomeTown Mobile" />
+          <meta name="application-name" content="HomeTown Web" />
           <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-          <meta name="apple-mobile-web-app-title" content="HomeTown Mobile" />
+          <meta name="apple-mobile-web-app-title" content="HomeTown Web" />
           <meta name="theme-color" content="#3677dd" />
+          <link rel="manifest" href="/manifest.json" />
 
           {styleTags}
           {/* styles (will be present only in production with webpack extract text plugin) */}
