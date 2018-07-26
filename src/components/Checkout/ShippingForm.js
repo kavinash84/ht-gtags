@@ -151,6 +151,13 @@ class ShippingForm extends React.Component {
           feedBackError={addressFeedBackError}
           feedBackMessage={addressFeedBackMessage}
         />
+        <Pincode
+          pincode={pincode}
+          shippingForm={shippingForm}
+          feedBackError={pincodeFeedBackError}
+          onChangePincode={onChangePincode}
+          feedBackMessage={pincodeFeedBackMessage}
+        />
         <FormInput
           label="City"
           type="text"
@@ -168,13 +175,6 @@ class ShippingForm extends React.Component {
           value={state}
           feedBackError={stateFeedBackError}
           feedBackMessage={stateFeedBackMessage}
-        />
-        <Pincode
-          pincode={pincode}
-          shippingForm={shippingForm}
-          feedBackError={pincodeFeedBackError}
-          onChangePincode={onChangePincode}
-          feedBackMessage={pincodeFeedBackMessage}
         />
       </div>
     );
