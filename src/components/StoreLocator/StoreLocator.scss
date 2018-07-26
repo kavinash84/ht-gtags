@@ -2,11 +2,11 @@
   position: relative;
 }
 .filterWrapper {
-  display: block;
+  display: block !important;
   background: rgba(255,255,255,0.85);
-  width: 400px;
+  width: 400px !important;
   padding: 25px;
-  position: absolute;
+  position: absolute !important;
   top: 2px;
   left: 100px;
   height: calc(100% - 9px);
