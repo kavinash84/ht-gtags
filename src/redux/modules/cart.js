@@ -23,6 +23,7 @@ const RESET_CART_CHECK = 'cart/RESET_CART_CHECK';
 const UPDATE_CART_SUMMARY_AFTER_COUPON = 'cart/UPDATE_CART_SUMMARY_AFTER_COUPON';
 
 const initialState = {
+  loading: false,
   data: [],
   summary: {},
   loaded: false,
