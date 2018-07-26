@@ -18,6 +18,9 @@
   }
   .filterBlock {
     width: 100%;
+    &:first-child {
+      margin-bottom: 1rem;
+    }
   }
   .dropDown {
     width: 100%;
@@ -34,6 +37,7 @@
           border: none;
           text-align: left;
           padding: 0.5rem 1rem;
+          width: 100%;
           &:hover {
             background: #efefef;
           }

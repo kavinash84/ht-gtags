@@ -498,6 +498,17 @@
 				&:hover {
 					background: #dddddd;
 				}
+				button {
+					border: none;
+					padding: 0;
+					background: none;
+					width: 100%;
+					text-align: left;
+					&:hover, &:focus {
+						background-color: transparent !important;
+						border: none;
+					}
+				}
 			}
 		}
 		&:hover, &:focus {

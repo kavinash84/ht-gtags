@@ -130,6 +130,7 @@ class StoreLocator extends React.Component {
                     border="none"
                     fontSize="0.75em"
                     tt="uppercase"
+                    ta="left"
                     fontWeight="medium"
                     className={styles.filterDD}
                   >
@@ -156,6 +157,7 @@ class StoreLocator extends React.Component {
                       btnType="custom"
                       size="block"
                       bg="#FFF"
+                      ta="left"
                       color="#656565"
                       border="none"
                       fontSize="0.75em"

@@ -13,11 +13,12 @@ const Map = ({
     {mapData.map((item, index) => (
       <MarkerWithLabel
         position={item.position}
+        containerElement={<div style={{ width: '400px' }} />}
         labelAnchor={new window.google.maps.Point(0, 0)}
-        labelStyle={{ backgroundColor: 'yellow', fontSize: '16px' }} // Remove this label style after custom css
+        labelStyle={{ backgroundColor: 'white', fontSize: '14px', top: '30px' }}
         key={String(index)}
       >
-        <div>
+        <div className="testtest">
           {open && <MapMarker store={item.store} address={item.address} phone={item.phone} position={item.position} />}
         </div>
       </MarkerWithLabel>
