@@ -5,11 +5,11 @@ import Div from 'hometown-components/lib/Div';
 
 const Title = ({ title, subTitle, ta }) => (
   <Div mb="1.25rem">
-    <Text fontSize="1.8rem" color="rgba(0, 0, 0, 0.75)" mt="0" mb="0" lh="1.4" ta={ta} fontWeight="300">
+    <Text fontSize="1.8rem" color="rgba(0, 0, 0, 0.75)" mt="0" mb="0" lh="1.4" ta={ta} fontWeight="400">
       {title}
     </Text>
     {subTitle !== '' && (
-      <Text fontSize="1rem" color="rgba(0, 0, 0, 0.6)" mt="0" mb="0" ta="center" fontWeight="300">
+      <Text fontSize="1rem" color="rgba(0, 0, 0, 0.6)" mt="0" mb="0" ta="center" fontWeight="400">
         {subTitle}
       </Text>
     )}

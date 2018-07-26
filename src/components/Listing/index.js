@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
-import Heading from 'hometown-components/lib/Heading';
 import Product from 'hometown-components/lib/Product';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
 import { Label } from 'hometown-components/lib/Label';
 import ResponsiveModal from 'components/Modal';
 import QuickView from 'components/QuickView/QuickView';
+import TitleBar from 'components/TitleBar';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { toggleWishList } from 'redux/modules/wishlist';
@@ -99,23 +99,7 @@ class Listing extends React.Component {
 
     return (
       <Div type="block">
-        <Section mb="0.3125rem" p="1rem 0.5rem" bg="oldMont">
-          <Container pr="0" pl="0">
-            <Row display="block" mr="0" ml="0">
-              <Heading
-                fontWeight="300"
-                fontSize="1.25rem"
-                color="white"
-                mb="0px"
-                mt="0px"
-                className="searchTitle"
-                ls="1.2px"
-              >
-                {categoryName} ({productCount})
-              </Heading>
-            </Row>
-          </Container>
-        </Section>
+        <TitleBar title={categoryName} productCount={productCount} />
         <Section pt="1rem" mb="0">
           <Container pr="0" pl="0">
             <div className={styles.filterBar}>
