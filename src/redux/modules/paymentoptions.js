@@ -213,14 +213,15 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         submitting: true,
         submitted: false,
-        error: []
+        error: null
       };
     case SUBMIT_PAYMENT_DETAILS_SUCCESS:
       return {
         ...state,
         submitting: false,
         submitted: true,
-        formData: action.result
+        formData: action.result,
+        error: null
       };
     case SUBMIT_PAYMENT_DETAILS_FAIL:
       return {

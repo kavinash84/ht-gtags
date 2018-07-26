@@ -144,12 +144,19 @@ class ShippingForm extends React.Component {
         />
         <FormInput
           label="Address"
-          type="text-area"
+          type="textarea"
           placeholder=""
           onChange={e => onChangeAddress(e.target.value)}
           value={address}
           feedBackError={addressFeedBackError}
           feedBackMessage={addressFeedBackMessage}
+        />
+        <Pincode
+          pincode={pincode}
+          shippingForm={shippingForm}
+          feedBackError={pincodeFeedBackError}
+          onChangePincode={onChangePincode}
+          feedBackMessage={pincodeFeedBackMessage}
         />
         <FormInput
           label="City"
@@ -168,13 +175,6 @@ class ShippingForm extends React.Component {
           value={state}
           feedBackError={stateFeedBackError}
           feedBackMessage={stateFeedBackMessage}
-        />
-        <Pincode
-          pincode={pincode}
-          shippingForm={shippingForm}
-          feedBackError={pincodeFeedBackError}
-          onChangePincode={onChangePincode}
-          feedBackMessage={pincodeFeedBackMessage}
         />
       </div>
     );

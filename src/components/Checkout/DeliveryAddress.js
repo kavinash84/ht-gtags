@@ -116,42 +116,75 @@ class DeliveryAddress extends Component {
         <Section display="flex" pt="1.25rem" mb="1rem" height="auto">
           <Container type="container" pr="2rem" pl="2rem">
             <Row display="block" mr="0" ml="0">
-              {isLoggedIn ? (
-                <div>
-                  <Row display="block" mr="0" ml="0">
-                    <Div col="12">
-                      <Label fontSize="0.875em" mb="0.875rem">
-                        SELECT BILLING ADDRESS
-                      </Label>
-                    </Div>
-                    {addresses.map((item, index) => (
-                      <Div col="4" pr="0.625rem">
-                        <button
-                          className={`${styles.addressBtn} ${styles.active}`}
-                          onClick={() => this.handleClick(index)}
-                        >
-                          <b>{item.full_name}</b>
-                          <br />
-                          {item.address}
-                          <br />
-                          {item.city}, {item.pincode}
-                          <br />
-                          {item.state}
-                          <br />
-                        </button>
-                      </Div>
-                    ))}
-                    <Div col="2">
-                      <button className={styles.addAddressBtn}>
-                        <img src={addIcon} alt="Add another address" />
-                        <Text color="rgba(0, 0, 0, 0.6)" ta="center">
-                          Add another address
-                        </Text>
+              {isLoggedIn && (
+                <Row display="block" mr="0" ml="0">
+                  <Div col="12">
+                    <Label fontSize="0.875em" mb="0.875rem">
+                      SELECT BILLING ADDRESS
+                    </Label>
+                  </Div>
+                  {addresses.map((item, index) => (
+                    <Div col="4" pr="0.625rem">
+                      <button className={`${styles.addressBtn}`} onClick={() => this.handleClick(index)}>
+                        <b>{item.full_name}</b>
+                        <br />
+                        {item.address}
+                        <br />
+                        {item.city}, {item.pincode}
+                        <br />
+                        {item.state}
+                        <br />
                       </button>
                     </Div>
-                  </Row>
-                </div>
-              ) : (
+                  ))}
+
+                  <Div col="2">
+                    <button className={styles.addAddressBtn}>
+                      <img src={addIcon} alt="Add another address" />
+                      <Text color="rgba(0, 0, 0, 0.6)" ta="center">
+                        Add another address
+                      </Text>
+                    </button>
+                  </Div>
+                </Row>
+              )}
+              <Div col="5" mt="0">
+                <form onSubmit={this.handleSubmit}>
+                  <ShippingForm
+                    ref={shippingform => {
+                      if (shippingform) {
+                        this.shipping_form = shippingform.getWrappedInstance();
+                      }
+                    }}
+                  />
+                  {/* <input type="checkbox" value={shippingIsBilling} onChange={this.toggleBillingForm} /> */}
+                  {/* <Label>Different Billing Address ?</Label> */}
+
+                  {/* <BillingForm
+                ref={billingform => {
+                  if (billingform) {
+                    console.log(billingform);
+                    this.biling_form = billingform.getWrappedInstance();
+                    console.log(this.billing_form); // Don't know why it is undefined !
+                  }
+                }}
+                /> */}
+                  <Div col="6">
+                    <Button
+                      type="submit"
+                      size="block"
+                      btnType="primary"
+                      fontWeight="regular"
+                      height="42px"
+                      mt="0.5rem"
+                      disabled={loading}
+                    >
+                      {loading ? 'Loading...' : 'Next: Payment Options'}
+                    </Button>
+                  </Div>
+                </form>
+              </Div>
+              {!isLoggedIn && (
                 <Div col="3" ml="20%">
                   <Label mt="0" mb="0" color="textLight">
                     Have an existing account with hometown?
@@ -176,43 +209,6 @@ class DeliveryAddress extends Component {
                   </ResponsiveModal>
                 </Div>
               )}
-
-              <Div col="5" mt="2rem">
-                <form onSubmit={this.handleSubmit}>
-                  <ShippingForm
-                    ref={shippingform => {
-                      if (shippingform) {
-                        this.shipping_form = shippingform.getWrappedInstance();
-                      }
-                    }}
-                  />
-                  {/* <input type="checkbox" value={shippingIsBilling} onChange={this.toggleBillingForm} /> */}
-                  {/* <Label>Different Billing Address ?</Label> */}
-
-                  {/* <BillingForm
-                ref={billingform => {
-                  if (billingform) {
-                    console.log(billingform);
-                    this.biling_form = billingform.getWrappedInstance();
-                    console.log(this.billing_form); // Don't know why it is undefined !
-                  }
-                }}
-              /> */}
-                  <Div col="6">
-                    <Button
-                      type="submit"
-                      size="block"
-                      btnType="primary"
-                      fontWeight="regular"
-                      height="42px"
-                      mt="0.5rem"
-                      disabled={loading}
-                    >
-                      {loading ? 'Loading...' : 'Next: Payment Options'}
-                    </Button>
-                  </Div>
-                </form>
-              </Div>
             </Row>
           </Container>
         </Section>

@@ -38,8 +38,8 @@ export default class Filters extends Component {
         <div className={`dropDown ${display === 'rtl' ? 'blockRight' : ''}`}>
           {/* eslint-disable */}
           <ul>
-            <li>
-              {data.map((item, index) => (
+            {data.map((item, index) => (
+              <li>
                 <div key={index} onClick={this.setFilter(item.url_key, history)}>
                   {checkbox && (
                     <div className="checkbox">
@@ -56,8 +56,8 @@ export default class Filters extends Component {
                     {item.value}
                   </Label>
                 </div>
-              ))}
-            </li>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

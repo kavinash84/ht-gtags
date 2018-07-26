@@ -15,7 +15,6 @@ import Terms from './Terms/Terms';
 import FAQ from './Faq/Faq';
 import Cancellation from './Cancellation/Cancellation';
 import WhoWeAre from './WhoWeAre/WhoWeAre';
-import ContactUs from './ContactUs/ContactUs';
 import MyAddress from './MyAddress/MyAddress';
 import TrackOrderModal from './TrackOrderModal/TrackOrderModal';
 import EmiModal from './EmiModal/EmiModal';
@@ -38,7 +37,6 @@ export {
   Cancellation,
   PrivacyPolicy,
   WhoWeAre,
-  ContactUs,
   MyAddress,
   TrackOrderModal,
   EmiModal,

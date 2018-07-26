@@ -116,7 +116,7 @@ const providers = { app: {}, restApp: {}, client };
 
   if (online && !__DEVELOPMENT__ && 'serviceWorker' in navigator) {
     try {
-      const registration = await navigator.serviceWorker.register('/dist/service-worker.js', { scope: '/' });
+      const registration = await navigator.serviceWorker.register('/service-worker.js', { scope: '/' });
       registration.onupdatefound = () => {
         // The updatefound event implies that reg.installing is set; see
         // https://w3c.github.io/ServiceWorker/#service-worker-registration-updatefound-event

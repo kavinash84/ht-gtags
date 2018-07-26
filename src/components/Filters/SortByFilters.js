@@ -27,8 +27,8 @@ const Dropdown = ({
     <div className={`dropDown ${display === 'rtl' ? 'blockRight' : ''}`}>
       {/* eslint-disable */}
       <ul>
-        <li>
-          {data.map((item, index) => (
+        {data.map((item, index) => (
+          <li>
             <div key={index} onClick={onclick(item.url_key, item.value)}>
               {checkbox && (
                 <div className="checkbox">
@@ -45,8 +45,8 @@ const Dropdown = ({
                 )}
               </Label>
             </div>
-          ))}
-        </li>
+          </li>
+        ))}
       </ul>
     </div>
   </div>

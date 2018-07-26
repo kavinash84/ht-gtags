@@ -14,7 +14,6 @@ import {
   Terms,
   Cancellation,
   WhoWeAre,
-  ContactUs,
   FAQ,
   TrackOrderModal,
   EmiModal,
@@ -36,6 +35,10 @@ import Wishlist from 'containers/Wishlist';
 import Cart from 'containers/Cart';
 import Home from 'containers/Home';
 import StoreLocator from 'containers/StoreLocator/StoreLocator';
+import ContactUs from 'containers/ContactUs/';
+import Feedback from 'containers/Feedback/';
+import ServiceRequest from 'containers/ServiceRequest/';
+import Grievance from 'containers/Grievance/';
 
 const isAuthenticated = connectedReduxRedirect({
   redirectPath: '/login',
@@ -80,7 +83,6 @@ const routes = [
       { path: '/cancellation', exact: true, component: Cancellation },
       { path: '/terms-and-conditions', exact: true, component: Terms },
       { path: '/faq', exact: true, component: FAQ },
-      { path: '/contact-us', exact: true, component: ContactUs },
       { path: '/who-we-are', exact: true, component: WhoWeAre },
       { path: '/pincode', exact: true, component: Pincode },
       { path: '/store/:city/:storeName', exact: true, component: Stores },
@@ -88,6 +90,10 @@ const routes = [
       { path: '/track-order-modal', exact: true, component: TrackOrderModal },
       { path: '/emi-modal', exact: true, component: EmiModal },
       { path: '/store-locator', exact: true, component: StoreLocator },
+      { path: '/contact-us', exact: true, component: ContactUs },
+      { path: '/feedback', exact: true, component: Feedback },
+      { path: '/service-request', exact: true, component: ServiceRequest },
+      { path: '/grievance', exact: true, component: Grievance },
       {
         path: '/:category/:subcategory1?/:subcategory2?/:subcategory3?/:subcategory4?/:subcategory5?',
         exact: true,
