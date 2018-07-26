@@ -44,7 +44,7 @@ export default class LoginFormContainer extends Component {
                     <Row display="block" mr="0" ml="0">
                       <Div col="12" ta="right">
                         <Link to={SIGNUP_URL}>
-                          <Label fontWeight="light" color="primary">
+                          <Label fontWeight="regular" color="primary">
                             New User? Sign Up now
                           </Label>
                         </Link>

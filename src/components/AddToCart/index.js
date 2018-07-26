@@ -48,6 +48,7 @@ const AddToCart = ({
           size={size}
           disabled={addLoading}
           onClick={onClick(itemId, sku, simpleSku, session, pincode)(addToCart)}
+          className={styles.addToCartBtn}
         >
           {!addLoading && <AddCart fill="#f98d29" />}
           {addLoading && <Img width="24px" className="spin" src={LoaderIcon} display="inline" />}

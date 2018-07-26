@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { provideHooks } from 'redial';
 import ProductDetailsContainer from 'components/ProductDetails';
 import Menu from 'containers/MenuNew/index';
@@ -33,17 +35,31 @@ import { loadReview } from 'redux/modules/reviews';
     }
   }
 })
+@connect(({ productdetails }) => ({
+  ...productdetails
+}))
 export default class ProductDetails extends Component {
   render() {
+    const { loading, loaded } = this.props;
     return (
       <Section p="0" mb="0">
         <div className="wrapper">
           <Menu />
+          {loading && !loaded && <ProductDetailsShimmer />}
           <ProductDetailsContainer />
-          <ProductDetailsShimmer />
         </div>
         <Footer />
       </Section>
     );
   }
 }
+
+ProductDetails.defaultProps = {
+  loading: false,
+  loaded: false
+};
+
+ProductDetails.propTypes = {
+  loading: PropTypes.bool,
+  loaded: PropTypes.bool
+};

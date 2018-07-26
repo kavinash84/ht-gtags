@@ -35,6 +35,7 @@ import Category from 'containers/Category/Category';
 import Wishlist from 'containers/Wishlist';
 import Cart from 'containers/Cart';
 import Home from 'containers/Home';
+import StoreLocator from 'containers/StoreLocator/StoreLocator';
 
 const isAuthenticated = connectedReduxRedirect({
   redirectPath: '/login',
@@ -86,6 +87,7 @@ const routes = [
       { path: '/track-order', exact: true, component: TrackOrder },
       { path: '/track-order-modal', exact: true, component: TrackOrderModal },
       { path: '/emi-modal', exact: true, component: EmiModal },
+      { path: '/store-locator', exact: true, component: StoreLocator },
       {
         path: '/:category/:subcategory1?/:subcategory2?/:subcategory3?/:subcategory4?/:subcategory5?',
         exact: true,
