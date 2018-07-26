@@ -11,8 +11,6 @@ import * as actionCreators from 'redux/modules/cart';
 import ProductQuantity from './UpdateProductQuantity';
 import OrderSummary from '../Checkout/OrderSummary';
 
-const styles = require('./Cart.scss');
-
 const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
 
 const checkCartBeforeCheckout = (dispatcher, session) => e => {
@@ -89,18 +87,13 @@ const Cart = ({
                               fontWeight="300"
                               color="#f98d29"
                               btnType="link"
+                              p="0"
+                              mt="-4px"
                               onClick={onClick(item.id_customer_cart, sessionId, pincode)(removeFromCart)}
                             >
                               x
                             </Button>
                           </td>
-                          {/* eslint-disable */}
-                          {cartItemLoading(item.id_customer_cart) && (
-                            <div className={styles.loadingCart}>
-                              <h4>THIS PRODUCT HAS BEEN</h4>
-                              <p>UPDATED TO YOUR CART</p>
-                            </div>
-                          )}
                         </tr>
                       ))}
                     </tbody>
