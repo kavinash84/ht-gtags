@@ -7,6 +7,10 @@ const SELECTED_PAYMENT_METHOD = 'paymentOptions/SELECTED_PAYMENT_METHOD';
 const SELECTED_PAYMENT_METHOD_DETAILS = 'paymentOptions/SELECTED_PAYMENT_METHOD_DETAILS';
 const CHECK_PAYMENT_DETAILS = 'paymentOptions/CHECK_PAYMENT_DETAILS';
 
+const SET_PAYMENT_METHOD = 'paymentOptions/SET_PAYMENT_METHOD';
+const SET_PAYMENT_METHOD_SUCCESS = 'paymentOptions/SET_PAYMENT_METHOD_SUCCESS';
+const SET_PAYMENT_METHOD_FAIL = 'paymentOptions/SET_PAYMENT_METHOD_FAIL';
+
 const SUBMIT_PAYMENT_DETAILS = 'paymentOptions/SUBMIT_PAYMENT_DETAILS';
 const SUBMIT_PAYMENT_DETAILS_SUCCESS = 'paymentOptions/SUBMIT_PAYMENT_DETAILS_SUCCESS';
 const SUBMIT_PAYMENT_DETAILS_FAIL = 'paymentOptions/SUBMIT_PAYMENT_DETAILS_FAIL';
@@ -184,6 +188,22 @@ export default function reducer(state = initialState, action = {}) {
         cardTypeError: action.error
       };
 
+    case SET_PAYMENT_METHOD:
+      return {
+        ...state
+      };
+    case SET_PAYMENT_METHOD_SUCCESS:
+      return {
+        ...state,
+        paymentOption: action.result
+      };
+    case SET_PAYMENT_METHOD_FAIL:
+      return {
+        ...state,
+        loading: false,
+        paymentOptionError: action.error
+      };
+
     case SELECTED_PAYMENT_METHOD:
       return {
         ...state,
@@ -241,10 +261,16 @@ export const load = session => ({
   promise: ({ client }) => client.get(`${PAYMENT_OPTIONS}/${session}`)
 });
 
-export const setSelectedGateway = (gateway, initial) => ({
+export const setSelectedGateway = (gateway, initial, session) => ({
   type: SELECTED_PAYMENT_METHOD,
   gateway,
-  initial
+  initial,
+  session
+});
+
+export const setSelectedGatewayInSession = (gateway, session) => ({
+  types: [SET_PAYMENT_METHOD, SET_PAYMENT_METHOD_SUCCESS, SET_PAYMENT_METHOD_FAIL],
+  promise: ({ client }) => client.get(`${PAYMENT_OPTIONS}/Payu/${gateway}/${session}`)
 });
 
 export const setSelectedPaymentDetails = payLoad => ({

@@ -4,6 +4,7 @@ import { createPersistoid, persistCombineReducers, REGISTER } from 'redux-persis
 import clientMiddleware from './middleware/clientMiddleware';
 import gaMiddleware from './middleware/gaMiddleware';
 import userMiddleware from './middleware/userMiddleware';
+import paymentsMiddleware from './middleware/paymentsMiddleware';
 import createReducers from './reducer';
 
 function combine(reducers, persistConfig) {
@@ -44,7 +45,13 @@ export default function createStore({
     helpers.client.setCSRFToken(csrfToken);
   }
 
-  const middleware = [clientMiddleware(helpers), routerMiddleware(history), gaMiddleware(), userMiddleware()];
+  const middleware = [
+    clientMiddleware(helpers),
+    routerMiddleware(history),
+    gaMiddleware(),
+    userMiddleware(),
+    paymentsMiddleware()
+  ];
 
   if (__CLIENT__ && __DEVELOPMENT__) {
     const logger = require('redux-logger').createLogger({

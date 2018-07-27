@@ -27,7 +27,12 @@ const nextStep = history => e => {
   history.push('/review-order');
 };
 
-const mapStateToProps = ({ paymentoptions, cart: { checkingCart, cartChecked, summary }, app: { sessionId } }) => ({
+const mapStateToProps = ({
+  app,
+  paymentoptions,
+  cart: { checkingCart, cartChecked, summary },
+  app: { sessionId }
+}) => ({
   selectedGateway: paymentoptions.selectedGateway,
   isFormValid: paymentoptions.isFormValid,
   paymentDetails: paymentoptions.paymentMethodDetails,
@@ -37,7 +42,8 @@ const mapStateToProps = ({ paymentoptions, cart: { checkingCart, cartChecked, su
   sessionId,
   error: paymentoptions.error,
   submitting: paymentoptions.submitting,
-  submitted: paymentoptions.submitted
+  submitted: paymentoptions.submitted,
+  session: app.sessionId
 });
 
 const mapDispatchToProps = dispatch =>
@@ -78,7 +84,14 @@ class PaymentOptions extends Component {
   // };
   render() {
     const {
-      data, selectedGateway, toggleGateway, setPaymentDetails, summary, submitting, history
+      data,
+      selectedGateway,
+      toggleGateway,
+      setPaymentDetails,
+      summary,
+      submitting,
+      history,
+      session
     } = this.props;
     return (
       <Div type="block">
@@ -104,7 +117,8 @@ class PaymentOptions extends Component {
                       toggleGateway,
                       selectedGateway,
                       setPaymentDetails,
-                      paymentType
+                      paymentType,
+                      session
                     ))}
                 </Row>
                 <Row display="block" mr="0" ml="0">
@@ -149,7 +163,8 @@ PaymentOptions.defaultProps = {
   summary: null,
   // error: null,
   // isCartChecked: false,
-  submitting: false
+  submitting: false,
+  session: ''
 };
 
 PaymentOptions.propTypes = {
@@ -159,6 +174,7 @@ PaymentOptions.propTypes = {
   setPaymentDetails: PropTypes.func.isRequired,
   summary: PropTypes.object,
   history: PropTypes.object.isRequired,
+  session: PropTypes.string,
   // setError: PropTypes.func.isRequired,
   // validateForm: PropTypes.func.isRequired,
   // isFormValid: PropTypes.bool.isRequired,

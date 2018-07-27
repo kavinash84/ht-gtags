@@ -36,8 +36,8 @@ const initial = {
   }
 };
 
-const onChangeGateway = (dispatcher, value) => () => {
-  dispatcher(value, initial[value]);
+const onChangeGateway = (dispatcher, value, session) => () => {
+  dispatcher(value, initial[value], session);
 };
 
 const onChangeDetails = (dispatcher, gateway) => e => {
@@ -45,7 +45,7 @@ const onChangeDetails = (dispatcher, gateway) => e => {
   dispatcher({ gateway, data: { [name]: value } });
 };
 
-const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetails, data) => {
+const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetails, data, session) => {
   switch (paymentType) {
     case 'CreditCard':
       return (
@@ -55,7 +55,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
             name="paymentOption"
             value="DebitCard"
             checked={selectedGateway === paymentType}
-            onChange={onChangeGateway(onChange, paymentType)}
+            onChange={onChangeGateway(onChange, paymentType, session)}
           />
           <Label for="DebitCard" pl="1rem" color="textLight" ml="0.9375rem">
             Credit Card
@@ -75,7 +75,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
             name="paymentOption"
             value="DebitCard"
             checked={selectedGateway === paymentType}
-            onChange={onChangeGateway(onChange, paymentType)}
+            onChange={onChangeGateway(onChange, paymentType, session)}
           />
           <Label for="DebitCard" pl="1rem" color="textLight" ml="0.9375rem">
             Debit Card
@@ -96,7 +96,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
               name="paymentOption"
               value="NetBanking"
               checked={selectedGateway === paymentType}
-              onChange={onChangeGateway(onChange, paymentType)}
+              onChange={onChangeGateway(onChange, paymentType, session)}
             />
             <Label for="paymentDC" pl="1rem" color="textLight" ml="0.9375rem">
               Internet Banking
@@ -166,7 +166,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
               name="paymentOption"
               value="Emi"
               checked={selectedGateway === paymentType}
-              onChange={onChangeGateway(onChange, paymentType)}
+              onChange={onChangeGateway(onChange, paymentType, session)}
             />
             <Label for="paymentDC" pl="1rem" color="textLight" ml="0.9375rem">
               EMI
@@ -186,7 +186,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
               name="paymentOption"
               value="Emi"
               checked={selectedGateway === paymentType}
-              onChange={onChangeGateway(onChange, paymentType)}
+              onChange={onChangeGateway(onChange, paymentType, session)}
             />
             <Label for="paymentDC" pl="1rem" color="textLight" ml="0.9375rem">
               Wallet
@@ -241,7 +241,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
             name="paymentOption"
             value="CashOnDelivery"
             checked={selectedGateway === paymentType}
-            onChange={onChangeGateway(onChange, paymentType)}
+            onChange={onChangeGateway(onChange, paymentType, session)}
           />
           <Label for="paymentDC" pl="1rem" color="textLight" ml="0.9375rem">
             Cash On Delivery
