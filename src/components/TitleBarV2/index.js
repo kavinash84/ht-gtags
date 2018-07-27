@@ -15,7 +15,7 @@ const TitleBar = ({ title, productCount }) => (
     p="1.5rem 0.5rem"
     bg="prime"
     boxShadow="0 2px 8px 0 rgba(0, 0, 0, 0.17)"
-    style={{ background: '#ae8873 !important' }}
+    style={{ background: '#ae8873' }}
   >
     <Container type="container" pr="0" pl="0">
       <Row display="block" mr="0" ml="0" mb="1rem">
