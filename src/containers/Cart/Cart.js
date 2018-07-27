@@ -82,12 +82,16 @@ export default class CartContainer extends Component {
               <Img src={CartEmptyIcon} width="initial" m="auto" alt="Sorry no results found" />
             </Empty>
           </Section>
-        ) : (
+        ) : null}
+
+        {!loading && (!results && results.length >= 0) ? (
           <div>
             <TitleBar title="Shopping Cart" />
             {error && <Notifications msg={error.error_message} type="error" />}
             <Cart results={results} summary={summary} />
           </div>
+        ) : (
+          loading && <CartShimmer />
         )}
         <Footer />
       </div>

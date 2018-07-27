@@ -14,13 +14,19 @@ import { loadReview } from 'redux/modules/reviews';
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState }, params }) => {
-    const { productdetails: { currentsku }, pincode: { selectedPincode } } = getState();
+    const {
+      productdetails: { currentsku },
+      pincode: { selectedPincode }
+    } = getState();
     if (currentsku !== params.skuId) {
       await dispatch(loadProductDescription(params.skuId, selectedPincode));
     }
   },
   defer: ({ store: { dispatch, getState }, params }) => {
-    const { productdetails: { currentsku }, pincode: { selectedPincode } } = getState();
+    const {
+      productdetails: { currentsku },
+      pincode: { selectedPincode }
+    } = getState();
     if (currentsku !== params.skuId || getState().reviews.data.length === 0) {
       dispatch(loadReview(params.skuId));
     }
