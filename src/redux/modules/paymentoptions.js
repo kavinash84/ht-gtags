@@ -99,6 +99,7 @@ const paymentObject = (sessionId, selectedGateway, paymentData, cardType = 'visa
       pg_dc: 'DC'
     };
   } else if (selectedGateway === 'NetBanking') {
+    console.log(paymentData);
     const { bankCode } = paymentData;
     return {
       ...paymentJSON,

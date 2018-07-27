@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import serialize from 'serialize-javascript';
 import Helmet from 'react-helmet';
 import config from 'config';
+// import { gtm } from 'utils/tracking';
 
 /**
  * Wrapper component containing HTML metadata and boilerplate tags.
