@@ -78,9 +78,8 @@ class PaymentOptions extends Component {
   // };
   render() {
     const {
-      data, selectedGateway, toggleGateway, setPaymentDetails, summary, error, submitting, history
+      data, selectedGateway, toggleGateway, setPaymentDetails, summary, submitting, history
     } = this.props;
-    console.log(error);
     return (
       <Div type="block">
         <MenuCheckout history={history} page="payment" />
@@ -108,7 +107,6 @@ class PaymentOptions extends Component {
                       paymentType
                     ))}
                 </Row>
-                {/* <p>{error}</p> */}
                 <Row display="block" mr="0" ml="0">
                   <Div col="4">
                     <Button
@@ -151,7 +149,6 @@ PaymentOptions.defaultProps = {
   summary: null,
   // error: null,
   // isCartChecked: false,
-  error: '',
   submitting: false
 };
 
@@ -168,11 +165,7 @@ PaymentOptions.propTypes = {
 
   // error: PropTypes.object,
   // isCartChecked: PropTypes.bool,
-  error: PropTypes.string,
   submitting: PropTypes.bool
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PaymentOptions);
+export default connect(mapStateToProps, mapDispatchToProps)(PaymentOptions);
