@@ -11,6 +11,7 @@ import { PINCODE } from 'helpers/Constants';
 
 const ReductIcon = require('../../../static/remove_circle_outline.svg');
 const IncreaseIcon = require('../../../static/add_circle_outline.svg');
+const LoaderIcon = require('../../../static/refresh-primary.svg');
 
 const mapStateToProps = ({ pincode, app }) => ({
   pincode: pincode.selectedPincode === '' ? PINCODE : pincode.selectedPincode,
@@ -48,7 +49,11 @@ const ProductQuantity = ({
         <Img src={ReductIcon} alt="" float="left" height="22px" />
       </Button>
       <Label color="textDark" mb="0" mt="0" p="0 10px" position="relative" top="2px">
-        {quantity}
+        {cartItemLoading(cartId) ? (
+          <Img width="19px" className="spin" va="bottom" src={LoaderIcon} display="inline" />
+        ) : (
+          quantity
+        )}
       </Label>
       <Button
         type="custom"
