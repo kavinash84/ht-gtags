@@ -66,6 +66,7 @@ export default class CartContainer extends Component {
     const {
       results, summary, error, loading, loaded
     } = this.props;
+    console.log(results);
     return (
       <div className="wrapper">
         <Menu />
@@ -83,8 +84,7 @@ export default class CartContainer extends Component {
             </Empty>
           </Section>
         ) : null}
-
-        {!loading && (!results && results.length >= 0) ? (
+        {!loading && (results && results.length >= 0) ? (
           <div>
             <TitleBar title="Shopping Cart" />
             {error && <Notifications msg={error.error_message} type="error" />}
