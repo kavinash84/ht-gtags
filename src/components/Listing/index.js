@@ -89,6 +89,7 @@ class Listing extends React.Component {
       metaResults,
       appliedFilters,
       sortBy
+      // categoryquery
     } = this.props;
     return (
       <Div type="block">
