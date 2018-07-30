@@ -1,6 +1,7 @@
 import { createStore as _createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import { createPersistoid, persistCombineReducers, REGISTER } from 'redux-persist';
+import thunkMiddleware from './middleware/thunkMiddleware';
 import clientMiddleware from './middleware/clientMiddleware';
 import gaMiddleware from './middleware/gaMiddleware';
 import userMiddleware from './middleware/userMiddleware';
@@ -46,6 +47,7 @@ export default function createStore({
   }
 
   const middleware = [
+    thunkMiddleware(),
     clientMiddleware(helpers),
     routerMiddleware(history),
     gaMiddleware(),
