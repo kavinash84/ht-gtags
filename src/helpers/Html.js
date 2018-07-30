@@ -61,7 +61,6 @@ export default class Html extends Component {
           <meta name="apple-mobile-web-app-title" content="HomeTown Web" />
           <meta name="theme-color" content="#3677dd" />
           <link rel="manifest" href="/manifest.json" />
-
           {styleTags}
           {/* styles (will be present only in production with webpack extract text plugin) */}
           {assets.styles &&
@@ -97,6 +96,22 @@ export default class Html extends Component {
           {assets.styles && Object.keys(assets.styles).length === 0 ? (
             <script dangerouslySetInnerHTML={{ __html: 'document.getElementById("content").style.display="block";' }} />
           ) : null}
+          <Helmet>
+            <script type="application/ld+json">
+              {`
+              {
+                "@context": "http://schema.org",
+                "@type": "WebSite",
+                "url": "https://www.hometown.in/",
+                "potentialAction": {
+                  "@type": "SearchAction",
+                  "target": "https://www.hometown.in/?q={search_term_string}",
+                  "query-input": "required name=search_term_string"
+                }
+              }
+            `}
+            </script>
+          </Helmet>
         </body>
       </html>
     );
