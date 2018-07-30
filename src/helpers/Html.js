@@ -61,7 +61,6 @@ export default class Html extends Component {
           <meta name="apple-mobile-web-app-title" content="HomeTown Web" />
           <meta name="theme-color" content="#3677dd" />
           <link rel="manifest" href="/manifest.json" />
-
           {styleTags}
           {/* styles (will be present only in production with webpack extract text plugin) */}
           {assets.styles &&

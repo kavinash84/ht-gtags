@@ -148,8 +148,8 @@ export default class App extends Component {
 
   render() {
     const styles = require('./App.scss');
-    const { route, location: { pathname } } = this.props;
-    console.log(pathname);
+    const { location, route } = this.props;
+    const pathname = (location && location.pathname) || '/';
     return (
       <ThemeProvider theme={Theme}>
         <div className={styles.app}>
