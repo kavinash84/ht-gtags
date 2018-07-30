@@ -12,8 +12,8 @@ import TitleBar from 'components/TitleBar';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { toggleWishList } from 'redux/modules/wishlist';
-import { loadSortBy, applyFilter, clearAllFilters } from 'redux/modules/products';
-import { formFilterLink } from 'utils/helper';
+import { loadSortBy, clearAllFilters } from 'redux/modules/products';
+// import { formFilterLink2 } from 'utils/helper';
 import Dropdown from '../Filters/Filters';
 import SortByFilters from '../Filters/SortByFilters';
 import AddToCart from '../AddToCart';
@@ -59,18 +59,25 @@ class Listing extends React.Component {
     this.setState({ openQuickView: false });
   };
   setSortBy = (key, sortBy) => e => {
+    console.log('Setting Sort By ', key, sortBy);
     e.preventDefault();
     const { category, pincode } = this.props;
     const { dispatch } = this.context.store;
     dispatch(loadSortBy(category, key, sortBy, pincode));
   };
 
-  setFilter = (key, selected) => e => {
+  setFilter = (key, name) => e => {
+    // let b64;
+    console.log(key, name, 'Set Filter');
     e.preventDefault();
-    const { pincode } = this.props;
-    const { dispatch } = this.context.store;
-    const link = formFilterLink(key, selected);
-    dispatch(applyFilter(link, pincode));
+    // const { pincode, history, categoryquery } = this.props;
+    // const { dispatch } = this.context.store;
+    // [, b64] = history.location.search.split('?filters=');
+
+    // const link = formFilterLink2(key, name, (b64 = null), categoryquery);
+    // console.log(link, 'LINK');
+    // dispatch(applyFilter(link, pincode));
+    // history.push(link);
   };
 
   clearFilters = () => {
@@ -95,8 +102,9 @@ class Listing extends React.Component {
       metaResults,
       appliedFilters,
       sortBy
+      // categoryquery
     } = this.props;
-
+    console.log(filters);
     return (
       <Div type="block">
         <TitleBar title={categoryName} productCount={productCount} />

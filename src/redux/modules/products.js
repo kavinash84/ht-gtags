@@ -17,6 +17,7 @@ const LOAD_CLEAR_FILTERS_SUCCESS = 'products/LOAD_CLEAR_FILTERS_SUCCESS';
 const LOAD_CLEAR_FILTERS_FAIL = 'products/LOAD_CLEAR_FILTERS_FAIL';
 
 const SET_QUERY = 'products/SET_QUERY';
+const SET_CATEGORY = 'products/SET_CATEGORY';
 
 const CLEAR_PREVIOUS_LIST = 'products/CLEAR_PREVIOUS_LIST';
 const CLEAR_PREVIOUS_SORT = 'products/CLEAR_PREVIOUS_SORT';
@@ -28,7 +29,8 @@ const initialState = {
   query: '',
   shimmer: false,
   sort: 'sort=popularity&dir=desc',
-  sortBy: 'Popularity'
+  sortBy: 'Popularity',
+  category: ''
 };
 
 const defaultPincode = PINCODE;
@@ -136,6 +138,11 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         query: action.payLoad
       };
+    case SET_CATEGORY:
+      return {
+        ...state,
+        category: action.payLoad
+      };
     case CLEAR_PREVIOUS_LIST:
       return {
         ...state,
@@ -179,9 +186,16 @@ export const loadSortBy = (category, sort, sortBy, pincode, city = 'delhi') => (
 });
 /* eslint-disable max-len */
 
-export const applyFilter = (key, pincode, city = 'delhi') => ({
+export const applyFilter = ({
+  query, pincode, city = 'delhi', filters
+}) => ({
   types: [LOAD_FILTER, LOAD_FILTER_SUCCESS, LOAD_FILTER_FAIL],
-  promise: ({ client }) => client.get(`tesla/products/${key}&pincode=${pincode}&city=${city}`)
+  promise: ({ client }) => {
+    console.log(filters);
+    console.log(query, pincode);
+    // console.log(atob(filters));
+    return client.get(`tesla/products/${query}/?&pincode=${pincode}&city=${city}`);
+  }
 });
 
 export const load = (category, page, sort, pincode, city = 'delhi') => ({
@@ -214,4 +228,9 @@ export const clearPreviousList = () => ({
 });
 export const clearPreviousSort = () => ({
   type: CLEAR_PREVIOUS_SORT
+});
+
+export const setCategory = payLoad => ({
+  type: SET_CATEGORY,
+  payLoad
 });
