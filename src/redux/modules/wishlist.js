@@ -92,13 +92,18 @@ const isSKUWishlisted = (list, skuId) => list.find(sku => sku.wishlist_info.conf
 
 export const isLoaded = globalState => globalState.wishlist && globalState.wishlist.loaded;
 
-export const toggleWishList = (list, id) => {
+export const currentSKU = id => ({
+  type: REMOVE_FROM_WISHLIST,
+  payLoad: id
+});
+
+export const toggleWishList = (list, id) => (dispatch, state) => {
   const checkList = isSKUWishlisted(list, id);
+  console.log(state);
+  dispatch(currentSKU(id));
   if (checkList) {
     const wishListID = checkList.wishlist_info.id_customer_wishlist;
     return {
-      type: REMOVE_FROM_WISHLIST,
-      payLoad: id,
       types: [REMOVE_FROM_WISHLIST, REMOVE_FROM_WISHLIST_SUCCESS, REMOVE_FROM_WISHLIST_FAILURE],
       promise: async ({ client }) => {
         try {

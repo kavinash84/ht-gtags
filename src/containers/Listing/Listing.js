@@ -13,14 +13,16 @@ import Menu from 'containers/MenuNew/index';
 import Footer from 'components/Footer';
 import { getSKUList } from 'selectors/wishlist';
 import {
-  load as loadListing,
+  // load as loadListing,
   loadSearchQuery,
   isLoaded as isInitialListLoaded,
   setCategoryQuery,
   clearPreviousList,
   clearPreviousSort,
   loadUrlQuery,
-  clearAllFilters as loadAfterPincodeChange
+  clearAllFilters as loadAfterPincodeChange,
+  setCategory,
+  applyFilter
 } from 'redux/modules/products';
 import Pagination from 'components/Pagination';
 import { getProducts, getCategoryName, getProductCount, getFilters, getAppliedFilters } from 'selectors/products';
@@ -32,34 +34,48 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState }, params, location }) => {
-    const { products: { sort }, pincode: { selectedPincode }, pagination: { page } } = getState();
+    const {
+      // products: { sort },
+      pincode: { selectedPincode },
+      pagination: { page }
+    } = getState();
     let query;
+    let filters;
     let loadResults;
     const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
     const { search } = location;
     // const queryString = search.replace('?', '').split('&');
-    const getPage = search.split('?page=')[1];
+    const getPage = search.split('page=')[1];
     const currentPage = getPage || 1;
     if (location.pathname === '/catalog/all-products') {
       const hashQuery = location.search.split('?').join('');
       query = encodeCategory(params);
+      // console.log('1');
       loadResults = loadUrlQuery(encodeCategory(params), hashQuery, pincode);
     } else if (location.pathname === '/search/') {
       /* eslint prefer-destructuring: ["error", {AssignmentExpression: {array: false}}] */
       query = location.search.split('?q=')[1];
+      // console.log('2');
       loadResults = loadSearchQuery(query, currentPage, pincode);
     } else {
+      // console.log('3');
       query = encodeCategory(params);
-      loadResults = loadListing(query, currentPage, sort, pincode);
+      [, filters] = location.search.split('?filters=');
+      // loadResults = loadListing(query, currentPage, sort, pincode, filters);
+      // [, filters] = location.search.split('?filters=');
+      loadResults = applyFilter({ query, pincode, filters });
+      dispatch(loadResults).catch(() => null);
     }
     if (currentPage === 1) await dispatch(resetPagination());
     if (!isInitialListLoaded(getState(), query) || currentPage !== page) {
+      // console.log('x', currentPage);
       await dispatch(clearPreviousList());
       await dispatch(setCurrentPage(currentPage));
       await dispatch(clearPreviousSort());
       await dispatch(loadResults).catch(() => null);
     }
     await dispatch(setCategoryQuery(query, pincode));
+    await dispatch(setCategory(query));
   }
 })
 @connect(state => ({
@@ -80,7 +96,8 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
   productCount: getProductCount(state),
   isLoggedIn: state.userLogin.isLoggedIn,
   metadata: state.products.list,
-  sortBy: state.products.sortBy
+  sortBy: state.products.filters.sortBy,
+  categoryquery: state.products.category
 }))
 @withRouter
 export default class Listing extends Component {
@@ -102,6 +119,7 @@ export default class Listing extends Component {
     history: PropTypes.object.isRequired,
     pincode: PropTypes.string,
     sortBy: PropTypes.string.isRequired,
+    categoryquery: PropTypes.string.isRequired,
     isLoggedIn: PropTypes.bool
   };
   static contextTypes = {
@@ -151,10 +169,13 @@ export default class Listing extends Component {
       wishlistKey,
       metadata,
       appliedFilters,
-      sortBy
+      sortBy,
+      categoryquery
     } = this.props;
     let page;
-    const { location: { search, pathname } } = history;
+    const {
+      location: { search, pathname }
+    } = history;
     if (search !== '') {
       page = search.replace('?', '').split('page=')[1];
     }
@@ -201,8 +222,15 @@ export default class Listing extends Component {
                 wishlistLoading={wishlistLoading}
                 wishlistKey={wishlistKey}
                 metaResults={metadata}
+                categoryquery={categoryquery}
               />
-              <Pagination loading={loading} loaded={loaded} history={history} pageRangeDisplayed={9} />
+              <Pagination
+                loading={loading}
+                loaded={loaded}
+                history={history}
+                categoryquery={categoryquery}
+                pageRangeDisplayed={9}
+              />
             </div>
           ) : (
             shimmer && <ListingShimmer />

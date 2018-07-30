@@ -7,6 +7,7 @@ import Container from 'hometown-components/lib/Container';
 import Section from 'hometown-components/lib/Section';
 import { connect } from 'react-redux';
 import { getProductCount } from 'selectors/products';
+import { formFilterLink2 } from 'utils/helper';
 
 @connect(state => ({
   location: state.router.location,
@@ -16,8 +17,11 @@ import { getProductCount } from 'selectors/products';
 export default class Pagination extends Component {
   handleClick = pagenumber => {
     if (window) window.scrollTo(0, 0);
-    const { history } = this.props;
-    history.push(`?page=${pagenumber}`);
+    // history.push(`?page=${pagenumber}`);
+    const { history, categoryquery } = this.props;
+    const [, b64] = history.location.search.split('?filters=');
+    const link = formFilterLink2(pagenumber, 'Pagination', b64, categoryquery);
+    history.push(link);
   };
   render() {
     const { pageno, productCount, pageRangeDisplayed } = this.props;
@@ -49,5 +53,6 @@ Pagination.propTypes = {
   history: PropTypes.object.isRequired,
   pageno: PropTypes.number,
   productCount: PropTypes.number,
+  categoryquery: PropTypes.string.isRequired,
   pageRangeDisplayed: PropTypes.number.isRequired
 };

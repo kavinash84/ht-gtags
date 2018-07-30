@@ -12,8 +12,8 @@ import TitleBar from 'components/TitleBar';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { toggleWishList } from 'redux/modules/wishlist';
-import { loadSortBy, applyFilter, clearAllFilters } from 'redux/modules/products';
-import { formFilterLink } from 'utils/helper';
+import { clearAllFilters } from 'redux/modules/products';
+import { formFilterLink2 } from 'utils/helper';
 import Dropdown from '../Filters/Filters';
 import SortByFilters from '../Filters/SortByFilters';
 import AddToCart from '../AddToCart';
@@ -58,19 +58,13 @@ class Listing extends React.Component {
   onCloseQuickViewModal = () => {
     this.setState({ openQuickView: false });
   };
-  setSortBy = (key, sortBy) => e => {
-    e.preventDefault();
-    const { category, pincode } = this.props;
-    const { dispatch } = this.context.store;
-    dispatch(loadSortBy(category, key, sortBy, pincode));
-  };
 
-  setFilter = (key, selected) => e => {
+  setFilter = (key, name, value) => e => {
     e.preventDefault();
-    const { pincode } = this.props;
-    const { dispatch } = this.context.store;
-    const link = formFilterLink(key, selected);
-    dispatch(applyFilter(link, pincode));
+    const { history, categoryquery } = this.props;
+    const [, b64] = history.location.search.split('?filters=');
+    const link = formFilterLink2(key, name, b64, categoryquery, value);
+    history.push(link);
   };
 
   clearFilters = () => {
@@ -96,7 +90,6 @@ class Listing extends React.Component {
       appliedFilters,
       sortBy
     } = this.props;
-
     return (
       <Div type="block">
         <TitleBar title={categoryName} productCount={productCount} />
@@ -119,7 +112,7 @@ class Listing extends React.Component {
                 </Div>
                 <Div col="3" ta="right">
                   <Label>Sort By</Label>
-                  <SortByFilters display="rtl" title={sortBy} onclick={this.setSortBy} data={sortByList} />
+                  <SortByFilters display="rtl" title={sortBy} onclick={this.setFilter} data={sortByList} />
                 </Div>
               </Row>
             </div>
@@ -201,7 +194,8 @@ Listing.defaultProps = {
   metaResults: [],
   wishlistKey: '',
   wishlistLoading: false,
-  isLoggedIn: false
+  isLoggedIn: false,
+  categoryquery: ''
 };
 
 Listing.propTypes = {
@@ -220,7 +214,8 @@ Listing.propTypes = {
   pincode: PropTypes.string,
   isLoggedIn: PropTypes.bool,
   metaResults: PropTypes.array,
-  wishlistKey: PropTypes.string
+  wishlistKey: PropTypes.string,
+  categoryquery: PropTypes.string
 };
 
 export default connect(

@@ -11,13 +11,16 @@ export default class Filters extends Component {
     store: PropTypes.object.isRequired
   };
 
-  setFilter = (key, history) => e => {
-    e.preventDefault();
-    history.push(`${key}`);
-  };
+  // setFilter = (key, history) => e => {
+  //   e.preventDefault();
+  //   console.log(key);
+  //   // make a helper fun and get the url to push from the keys
+  //   // history.push(`${key}`);
+  //   history.push(makeUrl(1, 2));
+  // };
   render() {
     const {
-      title, checkbox, display, data, history
+      title, checkbox, display, data, onclick
     } = this.props;
     return (
       <div className={`${styles.filterBlock} dropdownWrapper`}>
@@ -40,7 +43,7 @@ export default class Filters extends Component {
           <ul>
             {data.map((item, index) => (
               <li>
-                <div key={index} onClick={this.setFilter(item.url_key, history)}>
+                <div key={index} onClick={onclick(item.url_key, title)}>
                   {checkbox && (
                     <div className="checkbox">
                       <input type="checkbox" id="checkbox" checked={item.isSelected} onChange={() => true} />
