@@ -34,7 +34,7 @@ export const formFilterLink = (key, selected) => {
   return `${encode}/?${splitLink[1]}`;
 };
 
-export const formFilterLink2 = (key, name, b64, category, value) => {
+export const formFilterLink2 = (key, name, b64, category, value, selected) => {
   const cleanTail = url => {
     if (url[url.length - 1] === '/') {
       return url.substring(0, url.length - 1);
@@ -60,10 +60,16 @@ export const formFilterLink2 = (key, name, b64, category, value) => {
     obj64 = JSON.parse(atob(b64));
   }
   if (name === 'Category') {
-    let [urlquery] = key.split('?');
-    [urlquery] = cleanColor(urlquery);
-    urlquery = cleanTail(urlquery);
-    return urlquery;
+    let query;
+    const splitLink = key.split('?');
+    const paramLink = splitLink[0].split('/').filter(z => z !== '');
+    if (selected) {
+      query = paramLink.filter(param => param !== paramLink[1]);
+    } else query = paramLink;
+    query = query.join('/');
+    [query] = cleanColor(query);
+    query = cleanTail(query);
+    return `/${query}`;
   }
   if (name === 'Color') {
     let colors;

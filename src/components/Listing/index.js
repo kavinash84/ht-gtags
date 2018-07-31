@@ -59,11 +59,11 @@ class Listing extends React.Component {
     this.setState({ openQuickView: false });
   };
 
-  setFilter = (key, name, value) => e => {
+  setFilter = (key, name, value, selected) => e => {
     e.preventDefault();
     const { history, categoryquery } = this.props;
     const [, b64] = history.location.search.split('?filters=');
-    const link = formFilterLink2(key, name, b64, categoryquery, value);
+    const link = formFilterLink2(key, name, b64, categoryquery, value, selected);
     history.push(link);
   };
 

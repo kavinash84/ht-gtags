@@ -42,8 +42,8 @@ export default class Filters extends Component {
           {/* eslint-disable */}
           <ul>
             {data.map((item, index) => (
-              <li>
-                <div key={index} onClick={onclick(item.url_key, title)}>
+              <li key={index}>
+                <div onClick={onclick(item.url_key, title, '', item.isSelected)}>
                   {checkbox && (
                     <div className="checkbox">
                       <input type="checkbox" id="checkbox" checked={item.isSelected} onChange={() => true} />

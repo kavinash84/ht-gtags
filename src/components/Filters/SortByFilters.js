@@ -28,8 +28,8 @@ const Dropdown = ({
       {/* eslint-disable */}
       <ul>
         {data.map((item, index) => (
-          <li>
-            <div key={index} onClick={onclick(item.url_key, 'SortBy', item.value)}>
+          <li key={index}>
+            <div onClick={onclick(item.url_key, 'SortBy', item.value)}>
               <Label htmlFor="checkbox" fontSize="0.75em" ml="0.625rem" className="dropdownValue">
                 {item.value}
               </Label>
