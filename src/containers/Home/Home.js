@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import HashTags from 'components/Home/HashTags';
 import StoresCarousel from 'components/Stores';
 import Footer from 'components/Footer';
+import SeoContent from 'components/SeoContent';
 import { getCities } from '../../selectors/homepage';
 
 @connect(({
@@ -73,6 +74,7 @@ export default class Home extends Component {
           ))}
           <StoresCarousel cities={cities} />
         </div>
+        <SeoContent />
         <Footer />
       </Section>
     );
