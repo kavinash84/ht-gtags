@@ -4,10 +4,10 @@ import Heading from 'hometown-components/lib/Heading';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Section from 'hometown-components/lib/Section';
-import Span from 'hometown-components/lib/Span';
 import Row from 'hometown-components/lib/Row';
+import { Link } from 'react-router-dom';
 
-const styles = require('./TitleBar.scss');
+const styles = require('../productDetails/BreadCrumb.scss');
 
 const TitleBar = ({ title, productCount }) => (
   <Section
@@ -20,15 +20,20 @@ const TitleBar = ({ title, productCount }) => (
     <Container type="container" pr="0" pl="0">
       <Row display="block" mr="0" ml="0" mb="1rem">
         <Div col="9">
-          <a href="/" className={`${styles.headerLink}`}>
-            Home{' '}
-            <Span pl="0.625rem" pr="0.625rem" color="#000">
-              >
-            </Span>
-          </a>
-          <a href="/" className={`${styles.headerLink}`}>
-            {title}
-          </a>
+          <ul itemScope itemType="http://schema.org/BreadcrumbList" className={styles.breadCrumbList}>
+            <li itemProp="itemListElement" itemType="http://schema.org/ListItem" itemScope>
+              <Link itemProp="item" to="/">
+                <span itemProp="name">Home</span>
+                <meta itemProp="position" content="1" />
+              </Link>
+            </li>
+            <li itemProp="itemListElement" itemType="http://schema.org/ListItem" itemScope>
+              <Link itemProp="item" to="/">
+                <span itemProp="name">{title}</span>
+                <meta itemProp="position" content="2" />
+              </Link>
+            </li>
+          </ul>
         </Div>
       </Row>
       <Row display="block" mr="0" ml="0" mb="0">
