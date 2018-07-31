@@ -166,10 +166,10 @@ export const applyFilter = ({
     promise: ({ client }) => {
       const params = getParamsDetailFromLink(query, filters);
       const {
-        price, discount, material, modifiedQuery, sortby
+        price, discount, material, modifiedQuery, sortby, pageno
       } = params;
       dispatch(setFiltersInState(params));
-      return client.get(`tesla/products/${modifiedQuery}/?&pincode=${pincode}&city=${city}&${price}&${discount}&${material}&${sortby}`);
+      return client.get(`tesla/products/${modifiedQuery}/?&maxitems=32&pincode=${pincode}&city=${city}${price}${discount}${material}${sortby}${pageno}`);
     }
   });
 

@@ -17,7 +17,6 @@ import { formFilterLink2 } from 'utils/helper';
 export default class Pagination extends Component {
   handleClick = pagenumber => {
     if (window) window.scrollTo(0, 0);
-    // history.push(`?page=${pagenumber}`);
     const { history, categoryquery } = this.props;
     const [, b64] = history.location.search.split('?filters=');
     const link = formFilterLink2(pagenumber, 'Pagination', b64, categoryquery);

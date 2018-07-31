@@ -118,7 +118,7 @@ export default class Listing extends Component {
     appliedFilters: PropTypes.array,
     history: PropTypes.object.isRequired,
     pincode: PropTypes.string,
-    sortBy: PropTypes.string.isRequired,
+    sortBy: PropTypes.string,
     categoryquery: PropTypes.string.isRequired,
     isLoggedIn: PropTypes.bool
   };
@@ -141,6 +141,7 @@ export default class Listing extends Component {
     appliedFilters: [],
     metadata: null,
     pincode: '',
+    sortBy: '',
     isLoggedIn: false
   };
   componentWillReceiveProps(nextProps) {
@@ -173,9 +174,7 @@ export default class Listing extends Component {
       categoryquery
     } = this.props;
     let page;
-    const {
-      location: { search, pathname }
-    } = history;
+    const { location: { search, pathname } } = history;
     if (search !== '') {
       page = search.replace('?', '').split('page=')[1];
     }
