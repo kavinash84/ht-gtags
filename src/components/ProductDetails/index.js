@@ -73,7 +73,7 @@ class ProductDetails extends React.Component {
       <Div type="block">
         <Section p="0" pt="1.25rem" mb="0">
           <Container type="container" pr="0" pl="0">
-            <Row display="block" mt="0.625rem" mb="0" mr="0">
+            <Row display="block" mt="0.625rem" mb="0.625rem" mr="0">
               <Div col="9" className={styles.titleWrapper}>
                 <Div mt="0" mb="0.625rem" pl="1rem" pr="1rem">
                   <BreadCrumb categoryDetails={categoryDetails} />

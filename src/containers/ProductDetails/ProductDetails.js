@@ -46,7 +46,9 @@ export default class ProductDetails extends Component {
         <div className="wrapper">
           <Menu />
           {loading && !loaded && <ProductDetailsShimmer />}
-          <ProductDetailsContainer />
+          <div itemScope itemType="http://schema.org/Product">
+            <ProductDetailsContainer />
+          </div>
         </div>
         <Footer />
       </Section>

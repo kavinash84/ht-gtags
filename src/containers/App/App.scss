@@ -578,6 +578,13 @@
 	.hide {
 		display: none;
 	}
+
+	.ratings {
+		display: inline-block;
+    margin-left: 15px;
+		margin-right: 10px;
+		top: 3px;
+	}
 }
 
 @-webkit-keyframes :global(nprogress-spinner) {
