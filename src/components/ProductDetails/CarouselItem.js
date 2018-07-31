@@ -6,7 +6,7 @@ const styles = require('./Carousel.scss');
 
 const CategoryItem = ({ image, name }) => (
   <Div className={styles.pdSliderItem}>
-    <img src={image} alt={name} />
+    <img itemProp="image" src={image} alt={name} />
   </Div>
 );
 
