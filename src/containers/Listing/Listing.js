@@ -58,15 +58,12 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
     if (location.pathname === '/catalog/all-products') {
       const hashQuery = location.search.split('?').join('');
       query = encodeCategory(params);
-      // console.log('1');
       loadResults = loadUrlQuery(encodeCategory(params), hashQuery, pincode);
     } else if (location.pathname === '/search/') {
       /* eslint prefer-destructuring: ["error", {AssignmentExpression: {array: false}}] */
       query = location.search.split('?q=')[1];
-      // console.log('2');
       loadResults = loadSearchQuery(query, currentPage, pincode);
     } else {
-      // console.log('3');
       query = encodeCategory(params);
       [, filters] = location.search.split('?filters=');
       // loadResults = loadListing(query, currentPage, sort, pincode, filters);
@@ -76,7 +73,6 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
     }
     if (currentPage === 1) await dispatch(resetPagination());
     if (!isInitialListLoaded(getState(), query) || currentPage !== page) {
-      // console.log('x', currentPage);
       await dispatch(clearPreviousList());
       await dispatch(setCurrentPage(currentPage));
       await dispatch(clearPreviousSort());
