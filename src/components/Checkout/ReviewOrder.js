@@ -7,7 +7,7 @@ import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
 import ShippedTo from 'hometown-components/lib/ShippedTo';
-import PaymentMethod from 'hometown-components/lib/PaymentMethod';
+// import PaymentMethod from 'hometown-components/lib/PaymentMethod';
 import { bindActionCreators } from 'redux';
 import { submitPaymentDetails } from 'redux/modules/paymentoptions';
 import Footer from 'components/Footer';
@@ -56,14 +56,12 @@ class ReviewOrder extends Component {
       paymentDetails,
       submitDetails,
       sessionId,
-      gateway,
       history,
       paymentFormData,
       paymentError,
       cardType,
       submitting
     } = this.props;
-    const paymentinfo = Object.values(paymentDetails)[0];
     return (
       <Div type="block">
         <MenuCheckout history={history} page="review" />
@@ -82,9 +80,9 @@ class ReviewOrder extends Component {
                       state={shipping.state}
                     />
                   </Div>
-                  <Div col="4">
+                  {/* <Div col="4">
                     <PaymentMethod gateway={gateway} cardtype="VISA" info={paymentinfo} />
-                  </Div>
+                    </Div> */}
                 </Row>
                 <Row type="block" m="0" mb="1.5rem" mt="0">
                   <Div col="12">
@@ -150,7 +148,7 @@ ReviewOrder.propTypes = {
   paymentDetails: PropTypes.object.isRequired,
   submitDetails: PropTypes.func.isRequired,
   sessionId: PropTypes.string.isRequired,
-  gateway: PropTypes.string.isRequired,
+  // gateway: PropTypes.string.isRequired,
   history: PropTypes.object,
   paymentFormData: PropTypes.object,
   paymentError: PropTypes.array,
