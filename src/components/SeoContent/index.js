@@ -17,8 +17,12 @@ const SeoContent = ({ children }) => (
   </Div>
 );
 
+SeoContent.defaultProps = {
+  children: {}
+};
+
 SeoContent.propTypes = {
-  children: PropTypes.objectOf(PropTypes.any).isRequired
+  children: PropTypes.objectOf(PropTypes.any)
 };
 
 export default SeoContent;
