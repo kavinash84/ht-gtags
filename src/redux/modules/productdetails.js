@@ -35,6 +35,7 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
+/* need to dispatch an action to set recently veiwed products */
 export const loadProductDescription = (sku, pincode) => ({
   types: [LOAD_PRODUCT_DESCRIPTION, LOAD_PRODUCT_DESCRIPTION_SUCCESS, LOAD_PRODUCT_DESCRIPTION_FAIL],
   promise: async ({ client }) => {

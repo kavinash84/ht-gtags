@@ -8,10 +8,13 @@ const REMOVE_FROM_WISHLIST = 'wishList/REMOVE_FROM_WISHLIST';
 const REMOVE_FROM_WISHLIST_SUCCESS = 'wishList/REMOVE_FROM_WISHLIST_SUCCESS';
 const REMOVE_FROM_WISHLIST_FAILURE = 'wishList/REMOVE_FROM_WISHLIST_FAILURE';
 const CLEAR_WISHLIST = 'wishList/CLEAR_WISHLIST';
+const SET_LOADING_SKU = 'wishList/SET_LOADING_SKU';
+const REMOVE_LOADING_SKU = 'wishList/REMOVE_LOADING_SKU';
 
 const initialState = {
   data: [],
-  loaded: false
+  loaded: false,
+  loadingList: []
 };
 
 const rehyDratedList = (items, id) => items.filter(item => item.wishlist_info.id_customer_wishlist !== Number(id));
@@ -79,6 +82,17 @@ export default function reducer(state = initialState, action = {}) {
         loaded: false,
         error: action.error
       };
+    case SET_LOADING_SKU:
+      return {
+        ...state,
+        loadingList: [...state.loadingList, action.sku]
+      };
+    case REMOVE_LOADING_SKU:
+      return {
+        ...state,
+        loadingList: (state.loadingList || []).filter(list => list !== action.sku)
+      };
+
     case CLEAR_WISHLIST:
       return {
         ...initialState
@@ -88,36 +102,41 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
+const setLoadingState = sku => ({
+  type: SET_LOADING_SKU,
+  sku
+});
+
+const removeLoadingState = sku => ({
+  type: REMOVE_LOADING_SKU,
+  sku
+});
+
 const isSKUWishlisted = (list, skuId) => list.find(sku => sku.wishlist_info.configurable_sku === skuId);
 
 export const isLoaded = globalState => globalState.wishlist && globalState.wishlist.loaded;
 
-export const currentSKU = id => ({
-  type: REMOVE_FROM_WISHLIST,
-  payLoad: id
-});
-
-export const toggleWishList = (list, id) => (dispatch, state) => {
+export const toggleWishList = (list, id) => dispatch => {
   const checkList = isSKUWishlisted(list, id);
-  console.log(state);
-  dispatch(currentSKU(id));
   if (checkList) {
     const wishListID = checkList.wishlist_info.id_customer_wishlist;
-    return {
+    dispatch(setLoadingState(id));
+    return dispatch({
       types: [REMOVE_FROM_WISHLIST, REMOVE_FROM_WISHLIST_SUCCESS, REMOVE_FROM_WISHLIST_FAILURE],
       promise: async ({ client }) => {
         try {
           const response = await client.delete(`tesla/wishlist/${wishListID}`);
+          await dispatch(removeLoadingState(id));
           return response;
         } catch (error) {
+          await dispatch(removeLoadingState(id));
           throw error;
         }
       }
-    };
+    });
   }
-  return {
-    type: ADD_TO_WISHLIST,
-    payLoad: id,
+  dispatch(setLoadingState(id));
+  return dispatch({
     types: [ADD_TO_WISHLIST, ADD_TO_WISHLIST_SUCCESS, ADD_TO_WISHLIST_FAILURE],
     promise: async ({ client }) => {
       try {
@@ -127,12 +146,14 @@ export const toggleWishList = (list, id) => (dispatch, state) => {
           simple_sku: id
         };
         const response = await client.post('tesla/wishlist', postData);
+        await dispatch(removeLoadingState(id));
         return response;
       } catch (error) {
+        await dispatch(removeLoadingState(id));
         throw error;
       }
     }
-  };
+  });
 };
 
 export const loadWishlist = () => ({
