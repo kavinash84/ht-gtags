@@ -7,7 +7,7 @@ import Section from 'hometown-components/lib/Section';
 import Row from 'hometown-components/lib/Row';
 import { Link } from 'react-router-dom';
 
-const styles = require('../productDetails/BreadCrumb.scss');
+const styles = require('../ProductDetails/BreadCrumb.scss');
 
 const TitleBar = ({ title, productCount }) => (
   <Section
