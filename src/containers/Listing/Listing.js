@@ -25,6 +25,7 @@ import {
   applyFilter
 } from 'redux/modules/products';
 import Pagination from 'components/Pagination';
+import SeoContent from 'components/SeoContent';
 import {
   getProducts,
   getCategoryName,
@@ -250,7 +251,12 @@ export default class Listing extends Component {
             shimmer && <ListingShimmer />
           )}
         </div>
-        {seoInfo && seoInfo.seo_text && <div dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }} />}
+        {seoInfo &&
+          seoInfo.seo_text && (
+          <SeoContent>
+            <div dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }} />
+          </SeoContent>
+        )}
         <Footer />
       </Section>
     );
