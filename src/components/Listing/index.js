@@ -90,7 +90,6 @@ class Listing extends React.Component {
       sortBy
       // categoryquery
     } = this.props;
-    console.log(loadingList);
     return (
       <Div type="block">
         <TitleBar title={categoryName} productCount={productCount} />
