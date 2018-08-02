@@ -111,6 +111,15 @@ export default class Html extends Component {
               }
             `}
             </script>
+            <script src="https://cdn.ravenjs.com/3.24.0/raven.min.js" crossOrigin="anonymous" />
+            <script>
+              {`
+                Raven.config('https://e072a281afc44732a8976d0615f0e310@sentry.io/1254610', {
+                release: '0-0-0',
+                environment: 'development-test',
+                }).install()
+              `}
+            </script>
           </Helmet>
         </body>
       </html>
