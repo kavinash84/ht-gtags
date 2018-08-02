@@ -123,6 +123,7 @@ class ReviewOrder extends Component {
                 shipping={summary.shipping_charges}
                 totalCart={summary.total}
                 loadingnextstep={submitting}
+                itemsCount={summary.items_count}
                 onClick={nextStep(submitDetails, sessionId, paymentDetails, cardType)}
               />
             </Row>

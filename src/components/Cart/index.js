@@ -8,6 +8,7 @@ import Row from 'hometown-components/lib/Row';
 import Button from 'hometown-components/lib/Buttons';
 import Section from 'hometown-components/lib/Section';
 import * as actionCreators from 'redux/modules/cart';
+import { formatAmount } from 'utils/formatters';
 import ProductQuantity from './UpdateProductQuantity';
 import OrderSummary from '../Checkout/OrderSummary';
 
@@ -64,13 +65,10 @@ const Cart = ({
                       {results.map(item => (
                         <tr key={item.id_customer_cart}>
                           <td>
-                            <img className="thumb" src={item.product_info.images[0].path} alt="" />
+                            <img className="thumb" src={item.product_info.image} alt="" />
                           </td>
-                          <td>{item.product_info.data.name}</td>
-                          <td>
-                            {item.product_info.data.delivery_details.length &&
-                              item.product_info.data.delivery_details[0].value}
-                          </td>
+                          <td>{item.product_info.name}</td>
+                          <td>{item.product_info.delivery_time_text}</td>
                           <td>
                             <ProductQuantity
                               cartItemLoading={cartItemLoading}
@@ -80,7 +78,7 @@ const Cart = ({
                               skuId={item.configurable_sku}
                             />
                           </td>
-                          <td>{item.product_info.netprice}</td>
+                          <td>Rs. {formatAmount(item.product_info.net_price)}</td>
                           <td>
                             <Button
                               fontSize="1rem"
@@ -108,6 +106,7 @@ const Cart = ({
               totalCart={summary.total}
               loadingnextstep={checkingCart}
               onClick={checkCartBeforeCheckout(checkCart, sessionId)}
+              itemsCount={summary.items_count}
             />
           </Row>
         </Container>
