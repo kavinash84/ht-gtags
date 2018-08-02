@@ -28,6 +28,7 @@ import billing from './modules/billing';
 import colorproducts from './modules/colorproducts';
 import coupon from './modules/coupon';
 import myaddress from './modules/myaddress';
+import relatedproducts from './modules/relatedproducts';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -68,6 +69,7 @@ export default function createReducers(asyncReducers) {
     colorproducts,
     coupon,
     myaddress,
+    relatedproducts,
     ...asyncReducers
   };
 }
