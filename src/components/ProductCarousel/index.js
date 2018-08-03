@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Section from 'hometown-components/lib/Section';
 import Container from 'hometown-components/lib/Container';
 import Title from 'components/Title';
+import { formatAmount } from 'utils/formatters';
 import ProductCarouselItem from './ProductCarouselItem';
 import SlickSlider from '../SlickSlider';
 
@@ -22,14 +23,14 @@ export default class ProductCarousel extends Component {
             {data.map(item => (
               <div key={item.id}>
                 <ProductCarouselItem
-                  name={item.data.name}
-                  price={item.netprice}
-                  discPrice={item.cutprice}
-                  saving={item.saving}
-                  percentage={item.saving}
-                  rating={item.data.reviews.rating}
-                  image={item.images[0].zoom_image}
-                  url={`/product-details/${item.data.sku}`}
+                  name={item.meta.name}
+                  price={item.meta.max_special_price && formatAmount(item.meta.max_special_price)}
+                  discPrice={formatAmount(item.meta.price)}
+                  saving={item.meta.max_saving_percentage}
+                  percentage={item.meta.max_saving_percentage}
+                  rating={item.reviews.rating}
+                  image={`${item.image}-product_500.jpg`}
+                  url={`/product-details/${item.meta.sku}`}
                 />
               </div>
             ))}
