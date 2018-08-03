@@ -81,6 +81,15 @@ export default class Html extends Component {
           ) : null}
         </head>
         <body>
+          <noscript>
+            <iframe
+              src="https://www.googletagmanager.com/ns.html?id=GTM-T5VV7MZ"
+              height="0"
+              width="0"
+              style={{ display: 'none', visibility: 'hidden' }}
+              title="gaTag"
+            />
+          </noscript>
           <div id="content" dangerouslySetInnerHTML={{ __html: content }} />
           {store && (
             <script

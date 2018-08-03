@@ -13,6 +13,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { toggleWishList } from 'redux/modules/wishlist';
 import { clearAllFilters } from 'redux/modules/products';
+import { setProductPosition } from 'redux/modules/productdetails';
 import { formFilterLink2 } from 'utils/helper';
 import Dropdown from '../Filters/Filters';
 import SortByFilters from '../Filters/SortByFilters';
@@ -37,7 +38,14 @@ const isInWishList = (list, id) => list.includes(id);
 
 const styles = require('./Listing.scss');
 
-const mapDispatchToProps = dispatch => bindActionCreators({ wishlistToggle: toggleWishList }, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      wishlistToggle: toggleWishList,
+      productPosition: setProductPosition
+    },
+    dispatch
+  );
 
 class Listing extends React.Component {
   static contextTypes = {
@@ -76,6 +84,7 @@ class Listing extends React.Component {
   render() {
     const {
       wishlistToggle,
+      productPosition,
       products,
       categoryName,
       productCount,
@@ -137,6 +146,7 @@ class Listing extends React.Component {
               {products.map((item, index) => (
                 <div className={styles.productWrapper} key={item.id}>
                   <Product
+                    position={index}
                     key={item.id}
                     name={item.data.name}
                     price={item.netprice}
@@ -157,6 +167,8 @@ class Listing extends React.Component {
                     savingAmount={item.data.max_price - item.data.max_special_price}
                     deliveredBy={item.data.delivery_details[0].value}
                     colors={metaResults[index].data.color_group_count.split(' ')[0]}
+                    history={history}
+                    setProductPosition={productPosition}
                   />
                   <Div mt="0" p="0.25rem 0.125rem 0.5rem">
                     <AddToCart simpleSku={Object.keys(item.data.simples)[0]} sku={item.data.sku} itemId={item.id} />
@@ -201,6 +213,7 @@ Listing.defaultProps = {
 
 Listing.propTypes = {
   wishlistToggle: PropTypes.func.isRequired,
+  productPosition: PropTypes.func.isRequired,
   products: PropTypes.array.isRequired,
   wishList: PropTypes.array,
   wishListData: PropTypes.array,
@@ -219,4 +232,7 @@ Listing.propTypes = {
   categoryquery: PropTypes.string
 };
 
-export default connect(null, mapDispatchToProps)(Listing);
+export default connect(
+  null,
+  mapDispatchToProps
+)(Listing);
