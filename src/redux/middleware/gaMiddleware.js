@@ -25,8 +25,8 @@ export default function gaMiddleware() {
         }
         if (type === 'productdetails/LOAD_PRODUCT_DESCRIPTION') {
           const { products } = getState();
-          const { query } = products;
-          const category = query ? JSON.parse(window.atob(query)).params.join('/') : null;
+          // const { query } = products;
+          // const category = query ? JSON.parse(window.atob(query)).params.join('/') : null;
           const { position } = getState().productdetails;
           const product = products.list[position - 1];
 
@@ -38,13 +38,13 @@ export default function gaMiddleware() {
             event: 'productClick',
             ecommerce: {
               click: {
-                actionField: { list: '' }, //
+                actionField: { list: 'Listing' }, //
                 products: [
                   {
                     name,
                     price,
                     brand,
-                    category,
+                    // category,
                     position,
                     id: sku,
                     variant: ''
@@ -59,18 +59,17 @@ export default function gaMiddleware() {
         if (type === 'productdetails/LOAD_PRODUCT_DESCRIPTION_SUCCESS') {
           window.google_tag_params.ecomm_pagetype = 'product';
           window.google_tag_params.ecomm_totalvalue = action.result.meta.price;
-          const { query } = getState().products;
-          const category = query ? JSON.parse(window.atob(query)).params.join('/') : null;
           const { position } = getState().productdetails;
           const {
-            name, sku, price, brand
+            name, sku, price, brand, category_details: categoryDetails
           } = action.result.meta;
           const { color } = action.result.attributes;
+          const category = categoryDetails.map(item => item.url_key).join('/');
           const eventObject = {
             event: 'productDetail',
             ecommerce: {
               click: {
-                actionField: { list: '' }, //
+                actionField: { list: 'Listing' }, // D
                 products: [
                   {
                     name,
@@ -78,7 +77,7 @@ export default function gaMiddleware() {
                     brand,
                     category,
                     position,
-                    variant: color,
+                    variant: color, // D
                     id: sku
                   }
                 ]
@@ -133,9 +132,10 @@ export default function gaMiddleware() {
                   {
                     name,
                     price: netprice,
-                    brand: '', // Missing
-                    // category,
-                    list: '', // eg Search Result,
+                    variant: '',
+                    brand: '', // Missing //D
+                    // category, //D
+                    list: 'Listing', // eg Search Result, //D
                     id: product.configurable_sku,
                     quantity: product.qty
                   }
@@ -159,10 +159,10 @@ export default function gaMiddleware() {
                   {
                     name,
                     price: netprice,
-                    brand: '',
+                    brand: '', // D,
                     id: product.configurable_sku,
-                    // category,
-                    list: '', // eg Search Result,
+                    // category, //D
+                    list: 'Listing', // eg Search Result, //D
                     variant: '',
                     quantity: product.qty
                   }
@@ -174,44 +174,45 @@ export default function gaMiddleware() {
         // Handles Checkout GA
         if (type === '@@router/LOCATION_CHANGE') {
           const location = payload.pathname;
-          // const { query } = getState().products;
-          // const category = query ? JSON.parse(window.atob(query)).params.join('/') : null;
-
-          const { data } = getState().cart;
-          const products = data.map(item => {
-            const { name, net_price: netprice } = item.product_info;
-            return {
-              name,
-              price: netprice,
-              brand: '',
-              id: item.configurable_sku,
-              // category,
-              list: '', // eg Search Result,
-              variant: '',
-              quantity: item.qty
+          if (location === '/checkout/delivery-address' || '/checkout/payment-options' || '/checkout/review-order') {
+            // const { query } = getState().products;
+            // const category = query ? JSON.parse(window.atob(query)).params.join('/') : null;
+            const { data } = getState().cart;
+            const products = data.map(item => {
+              const { name, net_price: netprice } = item.product_info;
+              return {
+                name,
+                price: netprice,
+                brand: '',
+                id: item.configurable_sku,
+                // category, //D
+                list: '', // eg Search Result,
+                variant: '',
+                quantity: item.qty
+              };
+            });
+            const eventObject = {
+              event: 'checkout',
+              ecommerce: {
+                actionField: { step: null, option: '' },
+                products
+              }
             };
-          });
-          const eventObject = {
-            event: 'checkout',
-            ecommerce: {
-              actionField: { step: null, option: '' },
-              products
+            if (location === '/checkout/delivery-address') {
+              eventObject.ecommerce.actionField.step = 1;
+              eventObject.ecommerce.actionField.option = 'Shipping and Login';
+              window.dataLayer.push(eventObject);
             }
-          };
-          if (location === '/checkout/delivery-address') {
-            eventObject.ecommerce.actionField.step = 1;
-            eventObject.ecommerce.actionField.option = 'Shipping and Login';
-            window.dataLayer.push(eventObject);
-          }
-          if (location === '/checkout/payment-options') {
-            eventObject.ecommerce.actionField.step = 2;
-            eventObject.ecommerce.actionField.option = 'Payment Method';
-            window.dataLayer.push(eventObject);
-          }
-          if (location === '/checkout/review-order') {
-            eventObject.ecommerce.actionField.step = 3;
-            eventObject.ecommerce.actionField.option = 'Order Review';
-            window.dataLayer.push(eventObject);
+            if (location === '/checkout/payment-options') {
+              eventObject.ecommerce.actionField.step = 2;
+              eventObject.ecommerce.actionField.option = 'Payment Method';
+              window.dataLayer.push(eventObject);
+            }
+            if (location === '/checkout/review-order') {
+              eventObject.ecommerce.actionField.step = 3;
+              eventObject.ecommerce.actionField.option = 'Order Review';
+              window.dataLayer.push(eventObject);
+            }
           }
         }
       }
