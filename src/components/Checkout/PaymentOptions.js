@@ -24,7 +24,7 @@ import CommonPayments from './CommonPayments';
 
 const nextStep = history => e => {
   e.preventDefault();
-  history.push('/review-order');
+  history.push('/checkout/review-order');
 };
 
 const mapStateToProps = ({
@@ -184,4 +184,7 @@ PaymentOptions.propTypes = {
   submitting: PropTypes.bool
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PaymentOptions);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PaymentOptions);

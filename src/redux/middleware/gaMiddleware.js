@@ -121,8 +121,8 @@ export default function gaMiddleware() {
         if (type === 'cart/ADD_TO_CART_SUCCESS') {
           const { id_customer_cart: idcustomerCart } = action.result;
           const [product] = action.result.cart.cart.filter(item => item.id_customer_cart === idcustomerCart);
-          const { query } = getState().products;
-          const category = query ? JSON.parse(window.atob(query)).params.join('/') : null;
+          // const { query } = getState().products;
+          // const category = query ? JSON.parse(window.atob(query)).params.join('/') : null;
           const { name, net_price: netprice } = product.product_info;
           window.dataLayer.push({
             event: 'addToCart',
@@ -134,7 +134,7 @@ export default function gaMiddleware() {
                     name,
                     price: netprice,
                     brand: '', // Missing
-                    category,
+                    // category,
                     list: '', // eg Search Result,
                     id: product.configurable_sku,
                     quantity: product.qty
@@ -147,8 +147,8 @@ export default function gaMiddleware() {
         if (type === 'cart/REMOVE_FROM_CART_SUCCESS') {
           const { data } = getState().cart;
           const [product] = data.filter(item => item.id_customer_cart === action.payLoad);
-          const { query } = getState().products;
-          const category = query ? JSON.parse(window.atob(query)).params.join('/') : null;
+          // const { query } = getState().products;
+          // const category = query ? JSON.parse(window.atob(query)).params.join('/') : null;
           const { name, net_price: netprice } = product.product_info;
           window.dataLayer.push({
             event: 'removeFromCart',
@@ -161,15 +161,58 @@ export default function gaMiddleware() {
                     price: netprice,
                     brand: '',
                     id: product.configurable_sku,
-                    category,
+                    // category,
                     list: '', // eg Search Result,
-                    varient: '',
+                    variant: '',
                     quantity: product.qty
                   }
                 ]
               }
             }
           });
+        }
+        // Handles Checkout GA
+        if (type === '@@router/LOCATION_CHANGE') {
+          const location = payload.pathname;
+          // const { query } = getState().products;
+          // const category = query ? JSON.parse(window.atob(query)).params.join('/') : null;
+
+          const { data } = getState().cart;
+          const products = data.map(item => {
+            const { name, net_price: netprice } = item.product_info;
+            return {
+              name,
+              price: netprice,
+              brand: '',
+              id: item.configurable_sku,
+              // category,
+              list: '', // eg Search Result,
+              variant: '',
+              quantity: item.qty
+            };
+          });
+          const eventObject = {
+            event: 'checkout',
+            ecommerce: {
+              actionField: { step: null, option: '' },
+              products
+            }
+          };
+          if (location === '/checkout/delivery-address') {
+            eventObject.ecommerce.actionField.step = 1;
+            eventObject.ecommerce.actionField.option = 'Shipping and Login';
+            window.dataLayer.push(eventObject);
+          }
+          if (location === '/checkout/payment-options') {
+            eventObject.ecommerce.actionField.step = 2;
+            eventObject.ecommerce.actionField.option = 'Payment Method';
+            window.dataLayer.push(eventObject);
+          }
+          if (location === '/checkout/review-order') {
+            eventObject.ecommerce.actionField.step = 3;
+            eventObject.ecommerce.actionField.option = 'Order Review';
+            window.dataLayer.push(eventObject);
+          }
         }
       }
     }

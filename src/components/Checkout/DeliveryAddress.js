@@ -52,7 +52,7 @@ class DeliveryAddress extends Component {
     }
     if (nextProps.nextstep.success) {
       const { history } = this.props;
-      history.push('/payment-options');
+      history.push('/checkout/payment-options');
     }
   }
   onOpenLoginModal = () => {
