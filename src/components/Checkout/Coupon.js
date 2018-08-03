@@ -37,12 +37,10 @@ class Coupon extends React.Component {
   };
   componentWillReceiveProps(nextProps) {
     const { coupon } = nextProps;
-    // console.log(coupon);
     if (this.props.coupon.appliedCoupon !== coupon.appliedCoupon) {
       const { error, loaded, summary } = coupon;
       if (error && loaded) {
         // const { error_message: errorMsg } = errorMessage;
-        // console.log('setting Error');
         this.setState({
           // error: true
         });
@@ -83,13 +81,8 @@ class Coupon extends React.Component {
 
   render() {
     const { cart, coupon } = this.props;
-    const {
-      summary: { coupon: appliedCoupon, coupon_discount: couponDiscount }
-    } = cart;
-    const {
-      error,
-      errorMessage: { error_message: errorMsg }
-    } = coupon;
+    const { summary: { coupon: appliedCoupon, coupon_discount: couponDiscount } } = cart;
+    const { error, errorMessage: { error_message: errorMsg } } = coupon;
 
     const { applycoupon } = this.state;
     // console.log(error, coupon);

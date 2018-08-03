@@ -44,6 +44,7 @@ class PaymentForm extends Component {
           ref={form => {
             this.paymentForm = form;
           }}
+          method="POST"
           className="hide"
           action={action}
           encType="application/x-www-form-urlencoded"

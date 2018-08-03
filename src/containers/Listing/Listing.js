@@ -25,7 +25,15 @@ import {
   applyFilter
 } from 'redux/modules/products';
 import Pagination from 'components/Pagination';
-import { getProducts, getCategoryName, getProductCount, getFilters, getAppliedFilters } from 'selectors/products';
+import SeoContent from 'components/SeoContent';
+import {
+  getProducts,
+  getCategoryName,
+  getProductCount,
+  getFilters,
+  getAppliedFilters,
+  getSEOInfo
+} from 'selectors/products';
 import { encodeCategory } from 'utils/helper';
 import { setCurrentPage, resetPagination } from 'redux/modules/pagination';
 import { PINCODE, SITE_URL } from 'helpers/Constants';
@@ -50,15 +58,12 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
     if (location.pathname === '/catalog/all-products') {
       const hashQuery = location.search.split('?').join('');
       query = encodeCategory(params);
-      // console.log('1');
       loadResults = loadUrlQuery(encodeCategory(params), hashQuery, pincode);
     } else if (location.pathname === '/search/') {
       /* eslint prefer-destructuring: ["error", {AssignmentExpression: {array: false}}] */
       query = location.search.split('?q=')[1];
-      // console.log('2');
       loadResults = loadSearchQuery(query, currentPage, pincode);
     } else {
-      // console.log('3');
       query = encodeCategory(params);
       [, filters] = location.search.split('?filters=');
       // loadResults = loadListing(query, currentPage, sort, pincode, filters);
@@ -68,7 +73,6 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
     }
     if (currentPage === 1) await dispatch(resetPagination());
     if (!isInitialListLoaded(getState(), query) || currentPage !== page) {
-      // console.log('x', currentPage);
       await dispatch(clearPreviousList());
       await dispatch(setCurrentPage(currentPage));
       await dispatch(clearPreviousSort());
@@ -96,7 +100,8 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
   isLoggedIn: state.userLogin.isLoggedIn,
   metadata: state.products.list,
   sortBy: state.products.filters.sortBy,
-  categoryquery: state.products.category
+  categoryquery: state.products.category,
+  seoInfo: getSEOInfo(state)
 }))
 @withRouter
 export default class Listing extends Component {
@@ -118,7 +123,8 @@ export default class Listing extends Component {
     pincode: PropTypes.string,
     sortBy: PropTypes.string,
     categoryquery: PropTypes.string.isRequired,
-    isLoggedIn: PropTypes.bool
+    isLoggedIn: PropTypes.bool,
+    seoInfo: PropTypes.object
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -139,7 +145,8 @@ export default class Listing extends Component {
     metadata: null,
     pincode: '',
     sortBy: '',
-    isLoggedIn: false
+    isLoggedIn: false,
+    seoInfo: {}
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.pincode !== this.props.pincode) {
@@ -167,7 +174,8 @@ export default class Listing extends Component {
       metadata,
       appliedFilters,
       sortBy,
-      categoryquery
+      categoryquery,
+      seoInfo
     } = this.props;
     let page;
     const { location: { search, pathname } } = history;
@@ -176,9 +184,13 @@ export default class Listing extends Component {
     }
     const previousPage = !page || Number(page) === 1 ? '' : `?page=${page - 1}`;
     const NextPage = !page ? '?page=2' : `?page=${Number(page) + 1}`;
+    /* eslint-disable react/no-danger */
     return (
       <Section p="0" mb="0">
         <Helmet>
+          <title>{seoInfo && seoInfo.page_title}</title>
+          <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
+          <meta name="description" content={seoInfo && seoInfo.meta_description} />
           <link rel="canonical" href={`${SITE_URL}${pathname}${previousPage}`} />
           <link rel="next" href={`${SITE_URL}${pathname}${NextPage}`} />
         </Helmet>
@@ -230,6 +242,12 @@ export default class Listing extends Component {
             shimmer && <ListingShimmer />
           )}
         </div>
+        {seoInfo &&
+          seoInfo.seo_text && (
+          <SeoContent>
+            <div dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }} />
+          </SeoContent>
+        )}
         <Footer />
       </Section>
     );

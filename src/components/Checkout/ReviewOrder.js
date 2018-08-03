@@ -11,6 +11,7 @@ import ShippedTo from 'hometown-components/lib/ShippedTo';
 import { bindActionCreators } from 'redux';
 import { submitPaymentDetails } from 'redux/modules/paymentoptions';
 import Footer from 'components/Footer';
+import { formatAmount } from 'utils/formatters';
 // import ProductQuantityCounter from '../ProductQuantityCounter';
 
 import MenuCheckout from './MenuCheckout';
@@ -98,17 +99,14 @@ class ReviewOrder extends Component {
                         {results.map(item => (
                           <tr key={item.id_customer_cart}>
                             <td>
-                              <img className="thumb" src={item.product_info.images[0].path} alt="" />
+                              <img className="thumb" src={item.product_info.image} alt="" />
                             </td>
-                            <td>{item.product_info.data.name}</td>
-                            <td>
-                              {item.product_info.data.delivery_details.length &&
-                                item.product_info.data.delivery_details[0].value}
-                            </td>
+                            <td>{item.product_info.name}</td>
+                            <td>{item.product_info.delivery_time_text}</td>
                             <td>
                               <center>{item.qty}</center>
                             </td>
-                            <td>{item.product_info.netprice}</td>
+                            <td>Rs. {formatAmount(item.product_info.net_price)}</td>
                           </tr>
                         ))}
                       </tbody>
