@@ -5,9 +5,7 @@
 
 /* ---- Common Classes ---- */
 :global {
-	@import '../../components/SlickSlider/slick/slick.scss';
-	@import '../../components/SlickSlider/slick/slick-theme.scss';
-
+	
 	.container {
 		margin: 0 auto;
 		padding: 0 15px;
@@ -365,7 +363,7 @@
 		z-index: 1;
 	}
 	.slick-prev:before, .slick-next:before {
-		color: #000;
+		color: #000 !important;
 		font-size: 26px;
 	}
 	.slick-initialized .slick-slide {
@@ -577,6 +575,13 @@
 
 	.hide {
 		display: none;
+	}
+
+	.ratings {
+		display: inline-block;
+    margin-left: 15px;
+		margin-right: 10px;
+		top: 3px;
 	}
 }
 

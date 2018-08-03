@@ -144,8 +144,8 @@ class PaymentOptions extends Component {
                 savings={summary.savings}
                 shipping={summary.shipping_charges}
                 totalCart={summary.total}
-                // loadingnextstep={checkingCart}
                 onClick={() => null}
+                itemsCount={summary.items_count}
                 hidebutton
               />
             </Row>

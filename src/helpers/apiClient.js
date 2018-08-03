@@ -10,12 +10,17 @@ export default function apiClient(req) {
 
   let token;
   let csrfToken;
+  let session;
   instance.setJwtToken = newToken => {
     token = newToken;
   };
 
   instance.setCSRFToken = csrf => {
     csrfToken = csrf;
+  };
+
+  instance.setSessionId = SessionId => {
+    session = SessionId;
   };
 
   instance.interceptors.request.use(
@@ -32,6 +37,9 @@ export default function apiClient(req) {
       }
       if (token) {
         conf.headers.Authorization = `Bearer ${token}`;
+      }
+      if (session) {
+        conf.headers['X-SESSION-ID'] = session;
       }
       if (conf.method !== 'get' && csrfToken) {
         conf.headers['X-CSRF-Token'] = csrfToken;

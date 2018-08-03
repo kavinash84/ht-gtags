@@ -90,8 +90,7 @@ class Listing extends React.Component {
       productCount,
       wishList,
       wishListData,
-      wishlistLoading,
-      wishlistKey,
+      loadingList,
       filters,
       history,
       isLoggedIn,
@@ -160,8 +159,7 @@ class Listing extends React.Component {
                       this.onOpenQuickViewModal(item.data.sku, Object.keys(item.data.simples)[0]);
                     }}
                     isWishList={isInWishList(wishList, item.data.sku)}
-                    wishlistKey={wishlistKey}
-                    wishlistLoading={wishlistLoading}
+                    skuLoading={isInWishList(loadingList, item.data.sku)}
                     rating={item.data.reviews.rating.toFixed(1)}
                     reviewsCount={item.data.reviews.count}
                     savingAmount={item.data.max_price - item.data.max_special_price}
@@ -205,8 +203,7 @@ Listing.defaultProps = {
   appliedFilters: [],
   pincode: '',
   metaResults: [],
-  wishlistKey: '',
-  wishlistLoading: false,
+  loadingList: [],
   isLoggedIn: false,
   categoryquery: ''
 };
@@ -224,11 +221,10 @@ Listing.propTypes = {
   sortBy: PropTypes.string.isRequired,
   appliedFilters: PropTypes.array,
   history: PropTypes.object.isRequired,
-  wishlistLoading: PropTypes.bool,
+  loadingList: PropTypes.array,
   pincode: PropTypes.string,
   isLoggedIn: PropTypes.bool,
   metaResults: PropTypes.array,
-  wishlistKey: PropTypes.string,
   categoryquery: PropTypes.string
 };
 

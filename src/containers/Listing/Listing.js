@@ -88,8 +88,7 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
   appliedFilters: getAppliedFilters(state),
   wishListedSKUs: getSKUList(state.wishlist),
   wishListData: state.wishlist.data,
-  wishlistLoading: state.wishlist.loading,
-  wishlistKey: state.wishlist.key,
+  loadingList: state.wishlist.loadingList,
   pincode: state.pincode.selectedPincode,
   products: getProducts(state),
   categoryName: getCategoryName(state),
@@ -112,8 +111,7 @@ export default class Listing extends Component {
     productCount: PropTypes.string,
     wishListedSKUs: PropTypes.array,
     wishListData: PropTypes.array,
-    wishlistLoading: PropTypes.bool,
-    wishlistKey: PropTypes.string,
+    loadingList: PropTypes.array,
     filters: PropTypes.array,
     appliedFilters: PropTypes.array,
     history: PropTypes.object.isRequired,
@@ -135,8 +133,7 @@ export default class Listing extends Component {
     productCount: '0',
     wishListedSKUs: [],
     wishListData: [],
-    wishlistLoading: false,
-    wishlistKey: '',
+    loadingList: [],
     filters: [],
     appliedFilters: [],
     metadata: null,
@@ -166,8 +163,7 @@ export default class Listing extends Component {
       history,
       wishListedSKUs,
       wishListData,
-      wishlistLoading,
-      wishlistKey,
+      loadingList,
       metadata,
       appliedFilters,
       sortBy,
@@ -218,8 +214,7 @@ export default class Listing extends Component {
                 history={history}
                 pincode={pincode}
                 isLoggedIn={isLoggedIn}
-                wishlistLoading={wishlistLoading}
-                wishlistKey={wishlistKey}
+                loadingList={loadingList}
                 metaResults={metadata}
                 categoryquery={categoryquery}
               />

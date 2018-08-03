@@ -37,7 +37,7 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-export const loadColorProducts = (sku, pincode = '110004') => ({
+export const loadColorProducts = (sku, pincode) => ({
   types: [LOAD_COLOR_PRODUCTS, LOAD_COLOR_PRODUCTS_SUCCESS, LOAD_COLOR_PRODUCTS_FAIL],
   promise: ({ client }) => client.get(`tesla/product/color-products/${sku}/${pincode}`)
 });

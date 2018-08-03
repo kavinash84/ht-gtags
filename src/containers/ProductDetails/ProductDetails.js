@@ -9,29 +9,36 @@ import Section from 'hometown-components/lib/Section';
 import ProductDetailsShimmer from 'components/ProductDetails/ProductDetailsShimmer';
 import { loadProductDescription } from 'redux/modules/productdetails';
 import { loadColorProducts } from 'redux/modules/colorproducts';
+import { load as loadRelatedProducts } from 'redux/modules/relatedproducts';
 
 import { loadReview } from 'redux/modules/reviews';
+import { PINCODE } from '../../helpers/Constants';
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState }, params }) => {
-    const {
-      productdetails: { currentsku },
-      pincode: { selectedPincode }
-    } = getState();
+    const { productdetails: { currentsku }, pincode: { selectedPincode } } = getState();
+    const pincode = selectedPincode || PINCODE;
     if (currentsku !== params.skuId) {
-      await dispatch(loadProductDescription(params.skuId, selectedPincode));
+      await dispatch(loadProductDescription(params.skuId, pincode));
     }
   },
   defer: ({ store: { dispatch, getState }, params }) => {
     const {
       productdetails: { currentsku },
-      pincode: { selectedPincode }
+      pincode: { selectedPincode },
+      colorproducts,
+      relatedproducts,
+      reviews
     } = getState();
-    if (currentsku !== params.skuId || getState().reviews.data.length === 0) {
+    const pincode = selectedPincode || PINCODE;
+    if (currentsku !== params.skuId || reviews.data.length === 0) {
       dispatch(loadReview(params.skuId));
     }
-    if (currentsku !== params.skuId || getState().colorproducts.list.length === 0) {
-      dispatch(loadColorProducts(params.skuId, selectedPincode));
+    if (currentsku !== params.skuId || colorproducts.list.length === 0) {
+      dispatch(loadColorProducts(params.skuId, pincode));
+    }
+    if (currentsku !== params.skuId || relatedproducts.data.length === 0) {
+      dispatch(loadRelatedProducts(params.skuId, pincode));
     }
   }
 })
@@ -46,7 +53,9 @@ export default class ProductDetails extends Component {
         <div className="wrapper">
           <Menu />
           {loading && !loaded && <ProductDetailsShimmer />}
-          <ProductDetailsContainer />
+          <div itemScope itemType="http://schema.org/Product">
+            <ProductDetailsContainer />
+          </div>
         </div>
         <Footer />
       </Section>

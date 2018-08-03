@@ -11,7 +11,14 @@ import Coupon from './Coupon';
 const styles = require('./OrderSummary.scss');
 
 const OrderSummary = ({
-  itemsTotal, savings, shipping, totalCart, onClick, loadingnextstep, hidebutton
+  itemsTotal,
+  savings,
+  shipping,
+  totalCart,
+  onClick,
+  loadingnextstep,
+  hidebutton,
+  itemsCount
 }) => (
   <Div col="3">
     <Div className={styles.orderSummary}>
@@ -20,7 +27,7 @@ const OrderSummary = ({
       </Heading>
       <Div col="12">
         <Text color="rgba(0, 0, 0, 0.8);">
-          Items
+          Total Price ({itemsCount} item{itemsCount === 1 ? '' : 's'})
           <Span float="right" color="#000000" fontWeight="500">
             Rs. {itemsTotal ? formatAmount(itemsTotal) : null}
           </Span>
@@ -80,7 +87,8 @@ const OrderSummary = ({
 
 OrderSummary.defaultProps = {
   loadingnextstep: false,
-  hidebutton: false
+  hidebutton: false,
+  itemsCount: 0
 };
 
 OrderSummary.propTypes = {
@@ -90,7 +98,8 @@ OrderSummary.propTypes = {
   totalCart: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired,
   loadingnextstep: PropTypes.bool,
-  hidebutton: PropTypes.bool
+  hidebutton: PropTypes.bool,
+  itemsCount: PropTypes.number
 };
 
 export default OrderSummary;

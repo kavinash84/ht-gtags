@@ -43,7 +43,9 @@ export default function createStore({
   if (data && data.app && data.app.csrfToken) {
     /* add csrf token */
     const csrfToken = data.app.csrfToken || '';
+    const session = data.app.sessionId || '';
     helpers.client.setCSRFToken(csrfToken);
+    helpers.client.setSessionId(session);
   }
 
   const middleware = [
