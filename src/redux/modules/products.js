@@ -169,7 +169,7 @@ export const applyFilter = ({
         price, discount, material, modifiedQuery, sortby, pageno
       } = params;
       dispatch(setFiltersInState(params));
-      return client.get(`tesla/products/${modifiedQuery}/?&maxitems=32&pincode=${pincode}&city=${city}${price}${discount}${material}${sortby}${pageno}&category=Furniture`);
+      return client.get(`tesla/products/${modifiedQuery}/?&maxitems=32&pincode=${pincode}&city=${city}${price}${discount}${material}${sortby}${pageno}`);
     }
   });
 
