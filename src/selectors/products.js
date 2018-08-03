@@ -16,7 +16,8 @@ export const productMeta = createSelector(
         product_catname: '',
         product_count: '',
         results: [],
-        filter: []
+        filter: [],
+        seo: {}
       }
 );
 
@@ -44,4 +45,7 @@ export const getAppliedFilters = createSelector([getFilters], filters =>
 
 export const relatedProductsList = createSelector([relatedproducts], items => items.data || []);
 
-// export const
+export const getSEOInfo = createSelector(
+  [productMeta],
+  seoInfo => (Object.keys(seoInfo.seo).length > 0 ? seoInfo.seo.items : false)
+);
