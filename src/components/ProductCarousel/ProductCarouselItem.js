@@ -30,13 +30,14 @@ ProductItem.defaultProps = {
   image: '',
   name: '',
   percentage: '',
-  rating: ''
+  rating: '',
+  price: ''
 };
 
 ProductItem.propTypes = {
   url: PropTypes.string.isRequired,
   discPrice: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
+  price: PropTypes.string,
   image: PropTypes.string,
   name: PropTypes.string,
   rating: PropTypes.number,

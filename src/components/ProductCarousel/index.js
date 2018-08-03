@@ -20,8 +20,8 @@ export default class ProductCarousel extends Component {
         <Container pr="0" pl="0">
           <Title title={title} />
           <SlickSlider settings={adjustSlides(length)}>
-            {data.map(item => (
-              <div key={item.id}>
+            {data.map((item, index) => (
+              <div key={String(index)}>
                 <ProductCarouselItem
                   name={item.meta.name}
                   price={item.meta.max_special_price && formatAmount(item.meta.max_special_price)}
