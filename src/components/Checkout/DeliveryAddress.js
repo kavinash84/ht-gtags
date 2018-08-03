@@ -14,17 +14,11 @@ import LoginModal from 'components/Login/LoginModal';
 import Footer from 'components/Footer';
 import { sendDeliveryAddress } from 'redux/modules/checkout';
 import { setAddress } from 'redux/modules/shipping';
-import { MY_WISHLIST_URL } from 'helpers/Constants';
 import MenuCheckout from './MenuCheckout';
 import ShippingForm from './ShippingForm';
 
 const addIcon = require('../../../static/round-add_circle_outline.svg');
 const styles = require('./DeliveryAddress.scss');
-
-const onClick = history => e => {
-  e.preventDefault();
-  history.push(MY_WISHLIST_URL);
-};
 
 const mapStateToProps = ({
   userLogin, app, checkout, myaddress
@@ -56,9 +50,13 @@ class DeliveryAddress extends Component {
     }
   }
   onOpenLoginModal = () => {
+    const { history, location } = this.props;
+    history.push(`?redirect=${location.pathname}`);
     this.setState({ openLogin: true });
   };
   onCloseLoginModal = () => {
+    const { history } = this.props;
+    history.getBack();
     this.setState({ openLogin: false });
   };
 
@@ -196,7 +194,7 @@ class DeliveryAddress extends Component {
                     mt="0.5rem"
                     fontSize="0.875rem"
                     p="0.375rem 5rem"
-                    onClick={isLoggedIn ? onClick(history) : this.onOpenLoginModal}
+                    onClick={this.onOpenLoginModal}
                   >
                     LOGIN
                   </Button>
@@ -219,6 +217,7 @@ class DeliveryAddress extends Component {
 }
 DeliveryAddress.defaultProps = {
   history: {},
+  location: {},
   addresses: []
 };
 DeliveryAddress.propTypes = {
@@ -227,11 +226,7 @@ DeliveryAddress.propTypes = {
   sessionId: PropTypes.string.isRequired,
   history: PropTypes.object,
   addresses: PropTypes.object,
-  nextstep: PropTypes.bool.isRequired
+  nextstep: PropTypes.bool.isRequired,
+  location: PropTypes.object
 };
-export default connect(
-  mapStateToProps,
-  null,
-  null,
-  { withRef: true }
-)(DeliveryAddress);
+export default connect(mapStateToProps, null, null, { withRef: true })(DeliveryAddress);

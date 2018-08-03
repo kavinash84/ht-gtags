@@ -165,7 +165,10 @@ export default class DeliveryAddress extends Component {
             <Row display="block" mr="0" ml="0">
               {data.map((item, index) => (
                 <Div col="4" pr="0.625rem">
-                  <button className={`${styles.addressBtn} ${styles.active}`} onClick={() => this.handleClick(index)}>
+                  <button
+                    className={`${styles.addressBtn} ${index === 0 && styles.active}`}
+                    onClick={() => this.handleClick(index)}
+                  >
                     <b>{item.full_name}</b>
                     <br />
                     {item.address}
