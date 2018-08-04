@@ -8,6 +8,8 @@ import { isBlank } from 'js-utility-functions';
 
 import Pincode from './ShippingPincode';
 
+const styles = require('./ShippingForm.scss');
+
 const mapStateToProps = ({ shipping }) => ({
   ...shipping
 });
@@ -111,10 +113,9 @@ class ShippingForm extends React.Component {
       onChangePincode
     } = this.props;
 
-    const { shippingForm } = this.props;
-
+    const { shippingForm, hidden } = this.props;
     return (
-      <div>
+      <div className={hidden ? `${styles.hide}` : null}>
         <FormInput
           label="Full Name"
           type="text"
@@ -220,7 +221,8 @@ ShippingForm.propTypes = {
   setEmailError: PropTypes.func.isRequired,
   setAddressError: PropTypes.func.isRequired,
   setPincodeError: PropTypes.func.isRequired,
-  setStateError: PropTypes.func.isRequired
+  setStateError: PropTypes.func.isRequired,
+  hidden: PropTypes.bool.isRequired
 };
 
 export default connect(
