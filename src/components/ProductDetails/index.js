@@ -62,7 +62,8 @@ class ProductDetails extends React.Component {
       attributes,
       grouped_attributes: groupedAttributes,
       sku,
-      groupedattributes
+      groupedattributes,
+      reviews: { count, rating }
     } = product;
     const { category_details: categoryDetails } = meta;
     const simpleSku = Object.keys(simples)[0];
@@ -84,6 +85,8 @@ class ProductDetails extends React.Component {
                   discPrice={formatAmount(checkSpecialPrice)}
                   savingsRs={formatAmount(calculateSavings(price, checkSpecialPrice) || '')}
                   savingsPercentage={calculateDiscount(price, checkSpecialPrice)}
+                  ratings={rating}
+                  count={count}
                 />
                 <Row
                   display="block"
