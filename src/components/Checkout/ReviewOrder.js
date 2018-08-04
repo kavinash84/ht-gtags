@@ -49,6 +49,12 @@ const mapDispatchToProps = dispatch =>
 
 @withRouter
 class ReviewOrder extends Component {
+  componentDidMount() {
+    const { paymentDetails, history } = this.props;
+    if (!paymentDetails) {
+      history.push('/checkout/delivery-address');
+    }
+  }
   render() {
     const {
       summary,
@@ -63,6 +69,7 @@ class ReviewOrder extends Component {
       cardType,
       submitting
     } = this.props;
+    console.log(paymentDetails);
     return (
       <Div type="block">
         <MenuCheckout history={history} page="review" />
@@ -154,4 +161,7 @@ ReviewOrder.propTypes = {
   cardType: PropTypes.string,
   submitting: PropTypes.bool
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ReviewOrder);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ReviewOrder);

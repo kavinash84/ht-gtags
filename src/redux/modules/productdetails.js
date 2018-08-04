@@ -2,9 +2,12 @@ const LOAD_PRODUCT_DESCRIPTION = 'productdetails/LOAD_PRODUCT_DESCRIPTION';
 const LOAD_PRODUCT_DESCRIPTION_SUCCESS = 'productdetails/LOAD_PRODUCT_DESCRIPTION_SUCCESS';
 const LOAD_PRODUCT_DESCRIPTION_FAIL = 'productdetails/LOAD_PRODUCT_DESCRIPTION_FAIL';
 
+const SET_PROUDUCT_POSITION = 'products/SET_PROUDUCT_POSITION';
+
 const initialState = {
   productDescription: {},
-  currentsku: ''
+  currentsku: '',
+  position: null
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -30,6 +33,11 @@ export default function reducer(state = initialState, action = {}) {
         loaded: false,
         error: action.error
       };
+    case SET_PROUDUCT_POSITION:
+      return {
+        ...state,
+        position: action.payLoad
+      };
     default:
       return state;
   }
@@ -47,4 +55,9 @@ export const loadProductDescription = (sku, pincode) => ({
       return error;
     }
   }
+});
+
+export const setProductPosition = payLoad => ({
+  type: SET_PROUDUCT_POSITION,
+  payLoad
 });

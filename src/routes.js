@@ -73,7 +73,7 @@ const routes = [
       { path: '/order-summary', exact: true, component: OrderSummary },
       { path: '/profile', exact: true, component: isAuthenticated(Profile) },
       { path: '/update-password', exact: true, component: UpdatePassword },
-      { path: '/product-details/:skuId', exact: true, component: ProductDetails },
+      { path: '/:productname?/sku/:skuId', exact: true, component: ProductDetails },
       { path: '/delivery-address', exact: true, component: DeliveryAddress },
       { path: '/payment-options', exact: true, component: PaymentOptions },
       { path: '/review-order', exact: true, component: ReviewOrder },

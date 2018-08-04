@@ -58,7 +58,7 @@ export default class CartContainer extends Component {
     if (!isCartChecked && nextProps.isCartChecked) {
       const { dispatch } = this.context.store;
       dispatch(resetCheckKey());
-      return history.push('/delivery-address');
+      return history.push('/checkout/delivery-address');
     }
   }
 
