@@ -21,13 +21,14 @@ const addIcon = require('../../../static/round-add_circle_outline.svg');
 const styles = require('./DeliveryAddress.scss');
 
 const mapStateToProps = ({
-  userLogin, app, checkout, myaddress
+  userLogin, app, checkout, myaddress, shipping
 }) => ({
   isLoggedIn: userLogin.isLoggedIn,
   sessionId: app.sessionId,
   nextstep: checkout.nextstep,
   loading: checkout.loading,
-  addresses: myaddress.data
+  addresses: myaddress.data,
+  currentaddress: shipping.index
 });
 @withRouter
 class DeliveryAddress extends Component {
@@ -36,8 +37,16 @@ class DeliveryAddress extends Component {
   };
   state = {
     shippingIsBilling: true,
-    openLogin: false
+    openLogin: false,
+    addressform: false
   };
+  componentDidMount() {
+    const { dispatch } = this.context.store;
+    const { addresses } = this.props;
+    if (addresses.length) {
+      dispatch(setAddress(addresses[0], 0));
+    }
+  }
   componentWillReceiveProps(nextProps) {
     if (nextProps.isLoggedIn) {
       this.setState({
@@ -100,14 +109,34 @@ class DeliveryAddress extends Component {
   handleClick = index => {
     const { dispatch } = this.context.store;
     const { addresses } = this.props;
-    dispatch(setAddress(addresses[index]));
+    this.setState({
+      addressform: false
+    });
+    dispatch(setAddress(addresses[index], index));
   };
-
+  toggleAddAddress = e => {
+    e.preventDefault();
+    this.setState({
+      addressform: !this.state.addressform
+    });
+    const { dispatch } = this.context.store;
+    const data = {
+      full_name: '',
+      pincode: '',
+      email: '',
+      mobile: '',
+      address: '',
+      city: '',
+      state: ''
+    };
+    dispatch(setAddress(data));
+  };
   render() {
     const {
-      isLoggedIn, history, loading, addresses
+      isLoggedIn, history, loading, addresses, currentaddress
     } = this.props;
     // const { shippingIsBilling } = this.state;
+    const { addressform } = this.state;
     return (
       <Div type="block">
         <MenuCheckout history={history} />
@@ -123,7 +152,10 @@ class DeliveryAddress extends Component {
                   </Div>
                   {addresses.map((item, index) => (
                     <Div col="4" pr="0.625rem">
-                      <button className={`${styles.addressBtn}`} onClick={() => this.handleClick(index)}>
+                      <button
+                        className={`${styles.addressBtn} ${index === currentaddress ? styles.active : null}`}
+                        onClick={() => this.handleClick(index)}
+                      >
                         <b>{item.full_name}</b>
                         <br />
                         {item.address}
@@ -137,7 +169,7 @@ class DeliveryAddress extends Component {
                   ))}
 
                   <Div col="2">
-                    <button className={styles.addAddressBtn}>
+                    <button className={styles.addAddressBtn} onClick={this.toggleAddAddress}>
                       <img src={addIcon} alt="Add another address" />
                       <Text color="rgba(0, 0, 0, 0.6)" ta="center">
                         Add another address
@@ -154,11 +186,12 @@ class DeliveryAddress extends Component {
                         this.shipping_form = shippingform.getWrappedInstance();
                       }
                     }}
+                    hidden={isLoggedIn && !addressform}
                   />
-                  {/* <input type="checkbox" value={shippingIsBilling} onChange={this.toggleBillingForm} /> */}
-                  {/* <Label>Different Billing Address ?</Label> */}
+                  {/* <input type="checkbox" value={shippingIsBilling} onChange={this.toggleBillingForm} />
+                  <Label>Different Billing Address ?</Label>
 
-                  {/* <BillingForm
+                  <BillingForm
                 ref={billingform => {
                   if (billingform) {
                     console.log(billingform);
@@ -227,6 +260,7 @@ DeliveryAddress.propTypes = {
   history: PropTypes.object,
   addresses: PropTypes.object,
   nextstep: PropTypes.bool.isRequired,
-  location: PropTypes.object
+  location: PropTypes.object,
+  currentaddress: PropTypes.number.isRequired
 };
 export default connect(mapStateToProps, null, null, { withRef: true })(DeliveryAddress);

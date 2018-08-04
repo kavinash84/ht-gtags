@@ -178,19 +178,22 @@ export default function gaMiddleware() {
             // const { query } = getState().products;
             // const category = query ? JSON.parse(window.atob(query)).params.join('/') : null;
             const { data } = getState().cart;
-            const products = data.map(item => {
-              const { name, net_price: netprice } = item.product_info;
-              return {
-                name,
-                price: netprice,
-                brand: '',
-                id: item.configurable_sku,
-                // category, //D
-                list: '', // eg Search Result,
-                variant: '',
-                quantity: item.qty
-              };
-            });
+            let products;
+            if (data) {
+              products = data.map(item => {
+                const { name, net_price: netprice } = item.product_info;
+                return {
+                  name,
+                  price: netprice,
+                  brand: '',
+                  id: item.configurable_sku,
+                  // category, //D
+                  list: '', // eg Search Result,
+                  variant: '',
+                  quantity: item.qty
+                };
+              });
+            }
             const eventObject = {
               event: 'checkout',
               ecommerce: {

@@ -63,7 +63,8 @@ const initialState = {
   results: [],
   showResults: false,
   selectedPincode: '',
-  pincodeDetails: []
+  pincodeDetails: [],
+  index: null
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -146,12 +147,20 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         fullName: action.data.full_name,
+        fullNameFeedBackError: false,
         pincode: action.data.pincode,
+        pincodeFeedBackError: false,
         email: action.data.email,
+        emailFeedBackError: false,
         phone: action.data.mobile,
+        phoneFeedBackError: false,
         address: action.data.address,
+        addressFeedBackError: false,
         city: action.data.city,
-        state: action.data.state
+        cityFeedBackError: false,
+        state: action.data.state,
+        stateFeedBackError: false,
+        index: action.index
       };
     case SET_PINCODE_ERROR:
       return {
@@ -303,7 +312,8 @@ export const setPincode = pincode => ({
   type: SET_SELECTED_PINCODE,
   pincode
 });
-export const setAddress = data => ({
+export const setAddress = (data, index) => ({
   type: SET_ADDRESS,
-  data
+  data,
+  index
 });
