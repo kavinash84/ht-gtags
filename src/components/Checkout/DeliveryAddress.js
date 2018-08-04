@@ -151,7 +151,7 @@ class DeliveryAddress extends Component {
                     </Label>
                   </Div>
                   {addresses.map((item, index) => (
-                    <Div col="4" pr="0.625rem">
+                    <Div col="4" pr="0.625rem" key={item.id_customer_address}>
                       <button
                         className={`${styles.addressBtn} ${index === currentaddress ? styles.active : null}`}
                         onClick={() => this.handleClick(index)}
@@ -258,7 +258,7 @@ DeliveryAddress.propTypes = {
   loading: PropTypes.bool.isRequired,
   sessionId: PropTypes.string.isRequired,
   history: PropTypes.object,
-  addresses: PropTypes.object,
+  addresses: PropTypes.array,
   nextstep: PropTypes.bool.isRequired,
   location: PropTypes.object,
   currentaddress: PropTypes.number.isRequired

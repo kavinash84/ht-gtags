@@ -16,7 +16,7 @@ import Specs from 'hometown-components/lib/ProductDetails/Specs';
 import Reviews from 'hometown-components/lib/Reviews';
 import AddReview from 'hometown-components/lib/Reviews/WriteReview';
 import Img from 'hometown-components/lib/Img';
-// import ProductCarousel from 'components/ProductCarousel';
+import ProductCarousel from 'components/ProductCarousel';
 import Theme from 'hometown-components/lib/Theme';
 import { addReview } from 'redux/modules/reviews';
 import { formatAmount } from 'utils/formatters';
@@ -32,12 +32,13 @@ import prodDetails from '../../data/ProductDetails';
 const styles = require('./ProductDetails.scss');
 
 @connect(({
-  productdetails, pincode, reviews, colorproducts
+  productdetails, pincode, reviews, colorproducts, relatedproducts
 }) => ({
   product: productdetails.productDescription,
   reviews,
   pincode,
-  colorproducts: colorproducts.list
+  colorproducts: colorproducts.list,
+  relatedproductsList: relatedproducts.data
 }))
 class ProductDetails extends React.Component {
   static contextTypes = {
@@ -52,7 +53,7 @@ class ProductDetails extends React.Component {
 
   render() {
     const {
-      product, pincode, reviews, colorproducts
+      product, pincode, reviews, colorproducts, relatedproductsList
     } = this.props;
     const {
       meta,
@@ -70,6 +71,7 @@ class ProductDetails extends React.Component {
     const shipping = simples[simpleSku].groupedattributes.product_shipping_cost;
     const { price, special_price: specialPrice } = meta;
     const checkSpecialPrice = specialPrice || price;
+    console.log(relatedproductsList);
     return (
       <Div type="block">
         <Section p="0" pt="1.25rem" mb="0">
@@ -164,12 +166,11 @@ class ProductDetails extends React.Component {
                 </ServiceDetails>
               </Div>
             </Row>
-            <Row display="block" mt="0.625rem" mb="0.625rem" mr="0">
-              {/* <ProductCarousel
-                title=""
-                data=""
-              /> */}
-            </Row>
+            {relatedproductsList.length > 0 && (
+              <Row display="block" mt="0.625rem" mb="0.625rem" mr="0">
+                <ProductCarousel title="Related Products" data={relatedproductsList} />
+              </Row>
+            )}
           </Container>
         </Section>
       </Div>
@@ -180,12 +181,14 @@ ProductDetails.defaultProps = {
   product: {},
   pincode: {},
   reviews: {},
-  colorproducts: []
+  colorproducts: [],
+  relatedproductsList: []
 };
 ProductDetails.propTypes = {
   product: PropTypes.object,
   pincode: PropTypes.object,
   reviews: PropTypes.object,
-  colorproducts: PropTypes.array
+  colorproducts: PropTypes.array,
+  relatedproductsList: PropTypes.array
 };
 export default ProductDetails;

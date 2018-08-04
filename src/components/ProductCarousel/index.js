@@ -30,7 +30,7 @@ export default class ProductCarousel extends Component {
                   percentage={item.meta.max_saving_percentage}
                   rating={item.reviews.rating}
                   image={`${item.image}-product_500.jpg`}
-                  url={`/product-details/${item.meta.sku}`}
+                  url={`/${item.meta.name}/sku/${item.meta.sku}`}
                 />
               </div>
             ))}
