@@ -71,7 +71,6 @@ class ProductDetails extends React.Component {
     const shipping = simples[simpleSku].groupedattributes.product_shipping_cost;
     const { price, special_price: specialPrice } = meta;
     const checkSpecialPrice = specialPrice || price;
-    console.log(relatedproductsList);
     return (
       <Div type="block">
         <Section p="0" pt="1.25rem" mb="0">
