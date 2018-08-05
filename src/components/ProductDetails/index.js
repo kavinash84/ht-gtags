@@ -38,7 +38,8 @@ const styles = require('./ProductDetails.scss');
   reviews,
   pincode,
   colorproducts: colorproducts.list,
-  relatedproductsList: relatedproducts.data
+  relatedproductsList: relatedproducts.data,
+  deliveryInfo: productdetails.deliveryDetails
 }))
 class ProductDetails extends React.Component {
   static contextTypes = {
@@ -53,7 +54,7 @@ class ProductDetails extends React.Component {
 
   render() {
     const {
-      product, pincode, reviews, colorproducts, relatedproductsList
+      product, pincode, reviews, colorproducts, relatedproductsList, deliveryInfo
     } = this.props;
     const {
       meta,
@@ -156,7 +157,7 @@ class ProductDetails extends React.Component {
               </Div>
               <Div col="3">
                 <ServiceDetails
-                  deliverBy={deliveryDetails[0].value}
+                  deliverBy={(deliveryInfo && deliveryInfo[0].value) || deliveryDetails[0].value}
                   emiStarting="xyz"
                   shipping={shipping}
                   pincode={pincode.selectedPincode}
@@ -181,13 +182,15 @@ ProductDetails.defaultProps = {
   pincode: {},
   reviews: {},
   colorproducts: [],
-  relatedproductsList: []
+  relatedproductsList: [],
+  deliveryInfo: ''
 };
 ProductDetails.propTypes = {
   product: PropTypes.object,
   pincode: PropTypes.object,
   reviews: PropTypes.object,
   colorproducts: PropTypes.array,
-  relatedproductsList: PropTypes.array
+  relatedproductsList: PropTypes.array,
+  deliveryInfo: PropTypes.string
 };
 export default ProductDetails;

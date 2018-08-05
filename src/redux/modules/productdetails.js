@@ -1,13 +1,20 @@
+import { PRODUCT_DETAIL, PRODUCT_DELIVERY_DETAILS } from '../../helpers/apiUrls';
+
 const LOAD_PRODUCT_DESCRIPTION = 'productdetails/LOAD_PRODUCT_DESCRIPTION';
 const LOAD_PRODUCT_DESCRIPTION_SUCCESS = 'productdetails/LOAD_PRODUCT_DESCRIPTION_SUCCESS';
 const LOAD_PRODUCT_DESCRIPTION_FAIL = 'productdetails/LOAD_PRODUCT_DESCRIPTION_FAIL';
+
+const GET_DELIVERY_DETAILS = 'productdetails/GET_DELIVERY_DETAILS';
+const GET_DELIVERY_DETAILS_SUCCESS = 'productdetails/GET_DELIVERY_DETAILS_SUCCESS';
+const GET_DELIVERY_DETAILS_FAIL = 'productdetails/GET_DELIVERY_DETAILS_FAIL';
 
 const SET_PROUDUCT_POSITION = 'products/SET_PROUDUCT_POSITION';
 
 const initialState = {
   productDescription: {},
   currentsku: '',
-  position: null
+  position: null,
+  simpleSku: ''
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -24,9 +31,31 @@ export default function reducer(state = initialState, action = {}) {
         loading: false,
         loaded: true,
         currentsku: action.result.sku,
-        productDescription: action.result
+        productDescription: action.result,
+        simpleSku: Object.keys(action.result.simples)[0],
+        deliveryDetails: null
       };
     case LOAD_PRODUCT_DESCRIPTION_FAIL:
+      return {
+        ...state,
+        loading: false,
+        loaded: false,
+        error: action.error
+      };
+    case GET_DELIVERY_DETAILS:
+      return {
+        ...state,
+        loading: true,
+        loaded: false
+      };
+    case GET_DELIVERY_DETAILS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        deliveryDetails: action.result
+      };
+    case GET_DELIVERY_DETAILS_FAIL:
       return {
         ...state,
         loading: false,
@@ -48,8 +77,20 @@ export const loadProductDescription = (sku, pincode) => ({
   types: [LOAD_PRODUCT_DESCRIPTION, LOAD_PRODUCT_DESCRIPTION_SUCCESS, LOAD_PRODUCT_DESCRIPTION_FAIL],
   promise: async ({ client }) => {
     try {
-      const response = await client.get(`tesla/product/${sku}/${pincode}`);
+      const response = await client.get(`${PRODUCT_DETAIL}/${sku}/${pincode}`);
       response.sku = sku;
+      return response;
+    } catch (error) {
+      return error;
+    }
+  }
+});
+
+export const getDelieveryInfo = (simpleSku, pincode) => ({
+  types: [GET_DELIVERY_DETAILS, GET_DELIVERY_DETAILS_SUCCESS, GET_DELIVERY_DETAILS_FAIL],
+  promise: async ({ client }) => {
+    try {
+      const response = await client.get(`${PRODUCT_DELIVERY_DETAILS}/${simpleSku}/${pincode}`);
       return response;
     } catch (error) {
       return error;

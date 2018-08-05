@@ -21,6 +21,11 @@ export const FORGOT_PASSWORD = 'tesla/users/forgot-password';
 export const CHECK_HASH = 'tesla/users/forgot-password/verify';
 export const RESET_PASSWORD = 'tesla/users/forgot-password/reset';
 
+/* Product Detail */
+export const PRODUCT_DETAIL = 'tesla/product';
+export const PRODUCT_DELIVERY_DETAILS = 'tesla/product/delivery-detail';
+export const RELATED_PRODUCTS = 'tesla/product/related-products';
+
 /* Category Page */
 
 export const CATEGORY_PAGE = 'tesla/categories';
@@ -34,12 +39,13 @@ export const CHECKCART = 'tesla/checkout';
 export const SESSION = 'tesla/session';
 
 export const TRACK_ORDER = 'tesla/orders/track';
+
 /* Profile Details */
 export const MY_ORDERS = 'tesla/orders';
 export const MY_ADDRESS = 'tesla/users/address';
-export const RELATED_PRODUCTS = 'tesla/product/related-products';
 
 /* Payments */
 export const PAYMENT_OPTIONS = 'tesla/payments';
+
 /* Checkout Flow */
 export const COUPON = 'tesla/cart/coupon';
