@@ -67,6 +67,12 @@ const paymentJSON = {
   wallet: ''
 };
 
+const getURL = gateway => {
+  console.log(gateway);
+  if (gateway === 'CreditCard' || gateway === 'DebitCard' || gateway === 'NetBanking') return `Payu/${gateway}`;
+  if (gateway === 'Emi' || gateway === 'Wallet' || gateway === 'CashOnDelivery') return `${gateway}/${gateway}`;
+};
+
 const paymentObject = (sessionId, selectedGateway, paymentData, cardType = 'visa') => {
   if (selectedGateway === 'CreditCard') {
     const {
@@ -103,7 +109,6 @@ const paymentObject = (sessionId, selectedGateway, paymentData, cardType = 'visa
       pg_dc: 'DC'
     };
   } else if (selectedGateway === 'NetBanking') {
-    console.log(paymentData);
     const { bankCode } = paymentData;
     return {
       ...paymentJSON,
@@ -112,6 +117,33 @@ const paymentObject = (sessionId, selectedGateway, paymentData, cardType = 'visa
       payment_method: 'Payu',
       netbanking_bankname: bankCode,
       pg_nb: 'NB'
+    };
+  } else if (selectedGateway === 'Wallet') {
+    const { walletName } = paymentData;
+    return {
+      ...paymentJSON,
+      session_id: sessionId,
+      payment_method_type: selectedGateway,
+      payment_method: walletName,
+      wallet: walletName
+    };
+  } else if (selectedGateway === 'Emi') {
+    const {
+      emiBank, emiCode, nameOnCard, cardNumber, cvv, expMonth, expYear
+    } = paymentData;
+    return {
+      ...paymentJSON,
+      session_id: sessionId,
+      payment_method_type: selectedGateway,
+      payment_method: 'Payu',
+      emi_bank_name: emiBank,
+      emi_months: emiCode.match(/\d+/)[0].replace(/^0/, ''),
+      emi_cc_number: cardNumber,
+      emi_cc_card_type: cardType,
+      emi_cc_holder: nameOnCard,
+      emi_cc_exp_month: expMonth,
+      emi_cc_exp_year: expYear,
+      emi_cc_security_code: cvv
     };
   }
 };
@@ -270,7 +302,17 @@ export const setSelectedGateway = (gateway, initial, session) => ({
 
 export const setSelectedGatewayInSession = (gateway, session) => ({
   types: [SET_PAYMENT_METHOD, SET_PAYMENT_METHOD_SUCCESS, SET_PAYMENT_METHOD_FAIL],
-  promise: ({ client }) => client.get(`${PAYMENT_OPTIONS}/Payu/${gateway}/${session}`)
+  promise: ({ client }) => client.get(`${PAYMENT_OPTIONS}/${getURL(gateway)}/${session}`)
+});
+
+export const setWalletType = (walletName, session) => ({
+  types: [SET_PAYMENT_METHOD, SET_PAYMENT_METHOD_SUCCESS, SET_PAYMENT_METHOD_FAIL],
+  promise: ({ client }) => client.get(`${PAYMENT_OPTIONS}/${walletName}/Wallet/${session}`)
+});
+
+export const setEmiOption = (emiBank, months, session) => ({
+  types: [SET_PAYMENT_METHOD, SET_PAYMENT_METHOD_SUCCESS, SET_PAYMENT_METHOD_FAIL],
+  promise: ({ client }) => client.get(`${PAYMENT_OPTIONS}/Emi/Payu/${emiBank}/${months}/${session}`)
 });
 
 export const setSelectedPaymentDetails = payLoad => ({

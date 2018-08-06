@@ -49,3 +49,6 @@ export const PAYMENT_OPTIONS = 'tesla/payments';
 
 /* Checkout Flow */
 export const COUPON = 'tesla/cart/coupon';
+
+/* Payment Status */
+export const PAYMENT_STATUS = 'tesla/orders/success';

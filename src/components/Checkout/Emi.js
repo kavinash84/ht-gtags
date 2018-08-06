@@ -96,8 +96,8 @@ const EMI = ({
                   <th>Monthly Instalments</th>
                 </tr>
 
-                {currentBankDetails.values.map(item => (
-                  <tr>
+                {currentBankDetails.values.map((item, index) => (
+                  <tr key={String(index)}>
                     <td align="center">
                       <input
                         type="radio"
@@ -125,14 +125,11 @@ const EMI = ({
   );
 };
 
-export default connect(
-  mapStateToProps,
-  null
-)(EMI);
+export default connect(mapStateToProps, null)(EMI);
 
 EMI.propTypes = {
   selectedGateway: PropTypes.string.isRequired,
   setPaymentDetails: PropTypes.func.isRequired,
-  emiBankDetails: PropTypes.object.isRequired,
+  emiBankDetails: PropTypes.array.isRequired,
   details: PropTypes.object.isRequired
 };
