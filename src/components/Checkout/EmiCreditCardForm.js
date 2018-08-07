@@ -29,7 +29,6 @@ const CardForm = ({ gateway, setPaymentDetails, details: { nameOnCard, cardNumbe
         placeholder=""
         value={nameOnCard}
         name="nameOnCard"
-        pattern="[A-Za-z]{15}"
         onChange={onChangeDetails(setPaymentDetails, gateway)}
       />
     </Div>

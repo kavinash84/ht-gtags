@@ -52,7 +52,6 @@ const CardForm = ({
         placeholder=""
         value={nameOnCard}
         name="nameOnCard"
-        pattern="[0-9]{3}"
         onChange={onChangeDetails(setPaymentDetails, gateway)}
       />
     </Div>
