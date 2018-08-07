@@ -10,11 +10,11 @@ const changeDetails = (dispatcher, gateway, name, detailkey) => () => {
 };
 
 const BankCard = ({
-  name, img, setPaymentDetails, gateway, detailkey
+  name, img, setPaymentDetails, gateway, detailkey, currentSelection
 }) => (
   <Div col="4" pr="1rem" onClick={changeDetails(setPaymentDetails, gateway, name, detailkey)}>
     <Div className={styles.bankCard}>
-      <input type="radio" name="bankOptions" id="bankOptions1" />
+      <input type="radio" name="bankOptions" id="bankOptions1" checked={currentSelection === name} />
       <Label for="bankOptions1" bg="#FFF">
         <img src={img} alt={name} />
       </Label>
@@ -24,7 +24,8 @@ const BankCard = ({
 
 BankCard.defaultProps = {
   img: '',
-  name: ''
+  name: '',
+  currentSelection: ''
 };
 
 BankCard.propTypes = {
@@ -32,7 +33,8 @@ BankCard.propTypes = {
   name: PropTypes.string,
   detailkey: PropTypes.string.isRequired,
   gateway: PropTypes.string.isRequired,
-  setPaymentDetails: PropTypes.func.isRequired
+  setPaymentDetails: PropTypes.func.isRequired,
+  currentSelection: PropTypes.string
 };
 
 export default BankCard;

@@ -22,7 +22,7 @@ const onChangeDetails = (dispatcher, gateway) => e => {
 };
 
 const EMI = ({
-  selectedGateway, setPaymentDetails, emiBankDetails, details
+  selectedGateway, setPaymentDetails, emiBankDetails, details, currentSelection
 }) => {
   const currentBankDetails = emiBankDetails.filter(item => item.bank === details.emiBank)[0];
   return (
@@ -41,6 +41,7 @@ const EMI = ({
             detailkey="emiBank"
             name="citibank"
             img="https://static.hometown.in/media/cms/BankLOGO/citi.gif"
+            currentSelection={currentSelection}
           />
           <BankCard
             setPaymentDetails={setPaymentDetails}
@@ -48,6 +49,7 @@ const EMI = ({
             detailkey="emiBank"
             name="hdfc"
             img="https://static.hometown.in/media/cms/BankLOGO/hdfc.gif"
+            currentSelection={currentSelection}
           />
           <BankCard
             setPaymentDetails={setPaymentDetails}
@@ -55,6 +57,7 @@ const EMI = ({
             detailkey="emiBank"
             name="hsbc"
             img="https://static.hometown.in/media/cms/BankLOGO/hsbc.gif"
+            currentSelection={currentSelection}
           />
           <BankCard
             setPaymentDetails={setPaymentDetails}
@@ -62,6 +65,7 @@ const EMI = ({
             detailkey="emiBank"
             name="icici"
             img="https://static.hometown.in/media/cms/BankLOGO/icici.gif"
+            currentSelection={currentSelection}
           />
           <BankCard
             setPaymentDetails={setPaymentDetails}
@@ -69,6 +73,7 @@ const EMI = ({
             detailkey="emiBank"
             name="axis"
             img="https://static.hometown.in/media/cms/BankLOGO/axis.gif"
+            currentSelection={currentSelection}
           />
           <BankCard
             setPaymentDetails={setPaymentDetails}
@@ -76,6 +81,7 @@ const EMI = ({
             detailkey="emiBank"
             name="sbi"
             img="https://static.hometown.in/media/cms/BankLOGO/sbi.gif"
+            currentSelection={currentSelection}
           />
           <BankCard
             setPaymentDetails={setPaymentDetails}
@@ -83,6 +89,7 @@ const EMI = ({
             detailkey="emiBank"
             name="kotak"
             img="https://static.hometown.in/media/cms/BankLOGO/kotak.gif"
+            currentSelection={currentSelection}
           />
           {currentBankDetails && (
             <Div col="12" mb="1rem" mt="1rem">
@@ -131,5 +138,6 @@ EMI.propTypes = {
   selectedGateway: PropTypes.string.isRequired,
   setPaymentDetails: PropTypes.func.isRequired,
   emiBankDetails: PropTypes.array.isRequired,
-  details: PropTypes.object.isRequired
+  details: PropTypes.object.isRequired,
+  currentSelection: PropTypes.string.isRequired
 };

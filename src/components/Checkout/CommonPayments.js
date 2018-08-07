@@ -38,7 +38,7 @@ const initial = {
     bankCode: ''
   },
   Wallet: {
-    wallet: ''
+    walletName: ''
   }
 };
 
@@ -51,7 +51,7 @@ const onChangeDetails = (dispatcher, gateway) => e => {
   dispatcher({ gateway, data: { [name]: value } });
 };
 
-const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetails, data, session) => {
+const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetails, data, session, paymentDetails) => {
   switch (paymentType) {
     case 'CreditCard':
       return (
@@ -123,6 +123,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
                   name="HDFB"
                   detailkey="bankCode"
                   img="https://static.hometown.in/media/cms/BankLOGO/hdfc.gif"
+                  currentSelection={paymentDetails.NetBanking.bankCode}
                 />
                 <BankCard
                   setPaymentDetails={setPaymentDetails}
@@ -130,6 +131,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
                   name="ICIB"
                   detailkey="bankCode"
                   img="https://static.hometown.in/media/cms/BankLOGO/icici.gif"
+                  currentSelection={paymentDetails.NetBanking.bankCode}
                 />
                 <BankCard
                   setPaymentDetails={setPaymentDetails}
@@ -137,6 +139,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
                   name="AXIB"
                   detailkey="bankCode"
                   img="https://static.hometown.in/media/cms/BankLOGO/axis.gif"
+                  currentSelection={paymentDetails.NetBanking.bankCode}
                 />
                 <BankCard
                   setPaymentDetails={setPaymentDetails}
@@ -144,6 +147,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
                   name="SBIB"
                   detailkey="bankCode"
                   img="https://static.hometown.in/media/cms/BankLOGO/sbi.gif"
+                  currentSelection={paymentDetails.NetBanking.bankCode}
                 />
 
                 <Div col="12" mt="1rem">
@@ -151,6 +155,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
                     className={`${styles.dropDown} ${styles.selectBank}`}
                     name="bankCode"
                     onChange={onChangeDetails(setPaymentDetails, selectedGateway)}
+                    value={paymentDetails.NetBanking.bankCode}
                   >
                     <option>Select Bank</option>
                     {Object.keys(data.netBankingBanks).map((k, i) => (
@@ -179,7 +184,11 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
             </Label>
           </Div>
           {selectedGateway === paymentType && (
-            <Emi selectedGateway={selectedGateway} setPaymentDetails={setPaymentDetails} />
+            <Emi
+              selectedGateway={selectedGateway}
+              setPaymentDetails={setPaymentDetails}
+              currentSelection={paymentDetails.Emi.emiBank}
+            />
           )}
         </div>
       );

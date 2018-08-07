@@ -120,7 +120,8 @@ class PaymentOptions extends Component {
                       selectedGateway,
                       setPaymentDetails,
                       paymentType,
-                      session
+                      session,
+                      paymentDetails
                     ))}
                 </Row>
                 <Row display="block" mr="0" ml="0">
