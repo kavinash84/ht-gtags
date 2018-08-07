@@ -85,3 +85,14 @@ export const validatePassword = (value, message, validLength = 8) => {
   }
   return { error: false, errorMessage: '' };
 };
+
+export const validateInputs = inputs => {
+  const details = Object.values(Object.values(inputs)[0]);
+  return details.filter(detail => detail === '').length > 0;
+};
+
+export const validatePaymentDetails = data => {
+  // const type = Object.keys(data)[0];
+  const details = Object.values(data);
+  return validateInputs(details);
+};

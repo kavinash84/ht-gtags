@@ -29,6 +29,7 @@ const CardForm = ({ gateway, setPaymentDetails, details: { nameOnCard, cardNumbe
         placeholder=""
         value={nameOnCard}
         name="nameOnCard"
+        pattern="[A-Za-z]{15}"
         onChange={onChangeDetails(setPaymentDetails, gateway)}
       />
     </Div>
@@ -45,7 +46,7 @@ const CardForm = ({ gateway, setPaymentDetails, details: { nameOnCard, cardNumbe
     <Div col="2">
       <FormInput
         label="CVV"
-        type="text"
+        type="number"
         placeholder=""
         name="cvv"
         value={cvv}

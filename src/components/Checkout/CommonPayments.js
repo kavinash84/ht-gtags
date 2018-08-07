@@ -16,7 +16,7 @@ const initial = {
     cvv: '',
     expMonth: '',
     expYear: '',
-    type: ''
+    type: 'visa'
   },
   DebitCard: {
     nameOnCard: '',
@@ -24,7 +24,7 @@ const initial = {
     cvv: '',
     expMonth: '',
     expYear: '',
-    type: ''
+    type: 'visa'
   },
   Emi: {
     nameOnCard: '',
@@ -33,6 +33,12 @@ const initial = {
     expMonth: '',
     expYear: '',
     emiBank: ''
+  },
+  NetBanking: {
+    bankCode: ''
+  },
+  Wallet: {
+    wallet: ''
   }
 };
 

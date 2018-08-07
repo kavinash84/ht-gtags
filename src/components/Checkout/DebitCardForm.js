@@ -58,7 +58,7 @@ const CardForm = ({
     <Div col="5" pr="1rem">
       <FormInput
         label="Card number"
-        type="text"
+        type="number"
         placeholder=""
         name="cardNumber"
         value={cardNumber}

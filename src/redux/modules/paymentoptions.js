@@ -68,7 +68,6 @@ const paymentJSON = {
 };
 
 const getURL = gateway => {
-  console.log(gateway);
   if (gateway === 'CreditCard' || gateway === 'DebitCard' || gateway === 'NetBanking') return `Payu/${gateway}`;
   if (gateway === 'Emi' || gateway === 'Wallet' || gateway === 'CashOnDelivery') return `${gateway}/${gateway}`;
 };

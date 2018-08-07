@@ -52,13 +52,14 @@ const CardForm = ({
         placeholder=""
         value={nameOnCard}
         name="nameOnCard"
+        pattern="[0-9]{3}"
         onChange={onChangeDetails(setPaymentDetails, gateway)}
       />
     </Div>
     <Div col="5" pr="1rem" className={styles.cardFieldWrapper}>
       <FormInput
         label="Card number"
-        type="text"
+        type="number"
         placeholder=""
         name="cardNumber"
         value={cardNumber}

@@ -21,6 +21,7 @@ import {
 import MenuCheckout from './MenuCheckout';
 import OrderSummary from './OrderSummary';
 import CommonPayments from './CommonPayments';
+import { validatePaymentDetails } from '../../utils/validation';
 
 const nextStep = history => e => {
   e.preventDefault();
@@ -65,7 +66,7 @@ class PaymentOptions extends Component {
   componentWillReceiveProps() {
     // if (this.props.validationerror && nextProps.validationerror === this.props.validationerror) {
     //   // const {
-    //   //   submitDetails, paymentDetails
+    //   //   submitDetails, `paymentDetails`
     //   // } = this.props;
     //   console.log('Yaar ! ');
     //   // submitDetails(paymentDetails);
@@ -91,7 +92,8 @@ class PaymentOptions extends Component {
       summary,
       submitting,
       history,
-      session
+      session,
+      paymentDetails
     } = this.props;
     return (
       <Div type="block">
@@ -132,7 +134,7 @@ class PaymentOptions extends Component {
                       fontSize="0.875rem"
                       lh="2"
                       onClick={nextStep(history)}
-                      disabled={submitting}
+                      disabled={validatePaymentDetails(paymentDetails) || submitting}
                     >
                       {submitting ? 'Please wait...' : 'NEXT : REVIEW BEFORE PAYMENT'}
                     </Button>
@@ -175,6 +177,7 @@ PaymentOptions.propTypes = {
   summary: PropTypes.object,
   history: PropTypes.object.isRequired,
   session: PropTypes.string,
+  paymentDetails: PropTypes.object.isRequired,
   // setError: PropTypes.func.isRequired,
   // validateForm: PropTypes.func.isRequired,
   // isFormValid: PropTypes.bool.isRequired,
@@ -184,7 +187,4 @@ PaymentOptions.propTypes = {
   submitting: PropTypes.bool
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PaymentOptions);
+export default connect(mapStateToProps, mapDispatchToProps)(PaymentOptions);

@@ -12,6 +12,7 @@ import { bindActionCreators } from 'redux';
 import { submitPaymentDetails } from 'redux/modules/paymentoptions';
 import Footer from 'components/Footer';
 import { formatAmount } from 'utils/formatters';
+import { validatePaymentDetails } from 'utils/validation';
 // import ProductQuantityCounter from '../ProductQuantityCounter';
 
 import MenuCheckout from './MenuCheckout';
@@ -51,7 +52,7 @@ const mapDispatchToProps = dispatch =>
 class ReviewOrder extends Component {
   componentDidMount() {
     const { paymentDetails, history } = this.props;
-    if (!paymentDetails) {
+    if (validatePaymentDetails(paymentDetails)) {
       history.push('/checkout/delivery-address');
     }
   }
@@ -161,7 +162,4 @@ ReviewOrder.propTypes = {
   cardType: PropTypes.string,
   submitting: PropTypes.bool
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ReviewOrder);
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewOrder);
