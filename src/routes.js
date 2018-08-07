@@ -40,6 +40,8 @@ import Feedback from 'containers/Feedback/';
 import ServiceRequest from 'containers/ServiceRequest/';
 import Grievance from 'containers/Grievance/';
 import PaymentStatus from 'containers/PaymentStatus/';
+import PaymentSuccess from 'containers/PaymentSuccess/';
+import PaymentFailure from 'containers/PaymentFailure/';
 
 const isAuthenticated = connectedReduxRedirect({
   redirectPath: '/login',
@@ -95,6 +97,8 @@ const routes = [
       { path: '/feedback', exact: true, component: Feedback },
       { path: '/service-request', exact: true, component: ServiceRequest },
       { path: '/grievance', exact: true, component: Grievance },
+      { path: '/payment-success', exact: true, component: PaymentSuccess },
+      { path: '/payment-failed', exact: true, component: PaymentFailure },
       { path: '/payment-status/order/:status', exact: true, component: PaymentStatus },
       {
         path: '/:category/:subcategory1?/:subcategory2?/:subcategory3?/:subcategory4?/:subcategory5?',
