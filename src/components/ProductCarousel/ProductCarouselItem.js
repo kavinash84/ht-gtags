@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const styles = require('./Slider.scss');
 
 const ProductItem = ({
-  image, name, url, discPrice, price, rating, saving
+  image, name, url, discPrice, price, rating, percentage
 }) => (
   <Div className={styles.prodSliderItem}>
     <Link className={styles.link} to={url}>
@@ -15,11 +15,11 @@ const ProductItem = ({
         <p className={styles.title}>{name}</p>
         <div>
           <div className={`${styles.priceWrapper} taLeft`}>
-            <span className={styles.discPrice}>{price}</span>
-            <span className={styles.price}>{discPrice}</span>
-            <span className={styles.saving}>Saving ({saving.replace('-', '')})</span>
+            <span className={styles.discPrice}>Rs. {discPrice}</span>
+            {price && <span className={styles.price}>Rs. {price}</span>}
+            {percentage && <span className={styles.saving}>Saving ({percentage} %)</span>}
           </div>
-          <div className={styles.rating}>{rating}</div>
+          {rating !== 0 && <div className={styles.rating}>{rating}</div>}
         </div>
       </div>
     </Link>
@@ -28,17 +28,20 @@ const ProductItem = ({
 
 ProductItem.defaultProps = {
   image: '',
-  name: ''
+  name: '',
+  percentage: '',
+  rating: '',
+  price: ''
 };
 
 ProductItem.propTypes = {
-  image: PropTypes.string,
-  name: PropTypes.string,
   url: PropTypes.string.isRequired,
   discPrice: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired,
-  saving: PropTypes.string.isRequired
+  price: PropTypes.string,
+  image: PropTypes.string,
+  name: PropTypes.string,
+  rating: PropTypes.number,
+  percentage: PropTypes.string
 };
 
 export default ProductItem;

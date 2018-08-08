@@ -8,7 +8,7 @@ import { Shimmer, BackgroundMasker } from 'hometown-components/lib/Shimmer';
 const ListingShimmer = () => (
   <Div type="block">
     <Section mb="0.3125rem" p="0">
-      <Shimmer height="3.5rem" />
+      <Shimmer height="114px" />
     </Section>
     <Section pt="1rem" mb="0">
       <Container pr="0" pl="0">

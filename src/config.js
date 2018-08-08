@@ -24,16 +24,17 @@ module.exports = Object.assign(
           { name: 'description', content: 'Buy Furniture, HomeDecor, Online !' },
           { charset: 'utf-8' },
           { property: 'og:site_name', content: 'HomeTown' },
-          { property: 'og:image', content: 'https://react-redux.herokuapp.com/logo.jpg' },
+          { property: 'og:image', content: 'https://www.hometown.in/images/local_v2/icons/homeTown_logo.png' },
           { property: 'og:locale', content: 'en_US' },
           { property: 'og:title', content: 'HomeTown.in' },
           { property: 'og:description', content: 'Buy Furniture, Homeware Online' },
           { property: 'og:card', content: 'summary' },
           { property: 'og:site', content: 'hometown' },
-          { property: 'og:creator', content: 'ramakrishna' },
+          { property: 'og:creator', content: 'HomeTown-Tech' },
           { property: 'og:image:width', content: '200' },
           { property: 'og:image:height', content: '200' }
-        ]
+        ],
+        link: [{ rel: 'alternate', media: 'only screen and (max-width:640px)', href: 'https://m.hometown.in' }]
       }
     }
   },

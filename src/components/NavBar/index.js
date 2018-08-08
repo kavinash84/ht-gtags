@@ -1,4 +1,5 @@
 import React from 'react';
+import Container from 'hometown-components/lib/Container';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -8,18 +9,20 @@ const NavBar = ({
   menuItems, handleEnter, handleLeave, exitOnClick
 }) => (
   <div className={styles.navBar} onMouseLeave={handleLeave}>
-    <div className={styles.navBarSlider}>
-      {menuItems.filter(menu => menu.visibility === 'on').map(menuItem => (
-        <Link
-          onClick={exitOnClick}
-          to={`/${menuItem.url_key}`}
-          key={menuItem.id}
-          onMouseEnter={handleEnter(menuItem.id)}
-        >
-          {menuItem.name}
-        </Link>
-      ))}
-    </div>
+    <Container pr="0" pl="0">
+      <div className={styles.navBarSlider}>
+        {menuItems.filter(menu => menu.visibility === 'on').map(menuItem => (
+          <Link
+            onClick={exitOnClick}
+            to={`/${menuItem.url_key}`}
+            key={menuItem.id}
+            onMouseEnter={handleEnter(menuItem.id)}
+          >
+            {menuItem.name}
+          </Link>
+        ))}
+      </div>
+    </Container>
   </div>
 );
 

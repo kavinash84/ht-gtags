@@ -1,0 +1,27 @@
+@import "../../theme/variables";
+@import "../../theme/mixins";
+
+.headerContent {
+  border: 1px solid #dddddd;
+  padding: 3rem;
+  margin: -8px 8px 3rem;
+  background: rgba(247, 247, 247, 0.28);
+  position: relative;
+  border-top: none;
+  ul {
+    margin-bottom: 0px;
+    li {
+      list-style: none;
+      padding-bottom: 13px;
+      font-size: 16px;
+    }
+  }
+}
+.formList {
+  max-width: 500px;
+  margin: auto;
+  box-shadow: 2px 2px 10px 0 rgba(0, 0, 0, 0.1);
+  padding: 3rem 3rem;
+  border: 1px solid #e0e0e0;
+  background: #f7f7f7;
+}

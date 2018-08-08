@@ -5,7 +5,6 @@ import Listing from './Listing/Listing';
 import MyOrder from './MyOrder/MyOrder';
 import OrderDetails from './OrderDetails/OrderDetails';
 import OrderSummary from './OrderSummary/OrderSummary';
-import Payment from './Payment';
 import ProductDetails from './ProductDetails/ProductDetails';
 import DeliveryAddress from './DeliveryAddress/DeliveryAddress';
 import PaymentOptions from './PaymentOptions/PaymentOptions';
@@ -16,8 +15,9 @@ import Terms from './Terms/Terms';
 import FAQ from './Faq/Faq';
 import Cancellation from './Cancellation/Cancellation';
 import WhoWeAre from './WhoWeAre/WhoWeAre';
-import ContactUs from './ContactUs/ContactUs';
 import MyAddress from './MyAddress/MyAddress';
+import TrackOrderModal from './TrackOrderModal/TrackOrderModal';
+import EmiModal from './EmiModal/EmiModal';
 import NotFound from './NotFound/NotFound';
 
 export {
@@ -28,7 +28,6 @@ export {
   OrderDetails,
   OrderSummary,
   CartTotal,
-  Payment,
   ProductDetails,
   DeliveryAddress,
   ReviewOrder,
@@ -38,8 +37,9 @@ export {
   Cancellation,
   PrivacyPolicy,
   WhoWeAre,
-  ContactUs,
   MyAddress,
-  NotFound,
-  PaymentOptions
+  TrackOrderModal,
+  EmiModal,
+  PaymentOptions,
+  NotFound
 };

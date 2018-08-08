@@ -5,7 +5,6 @@ import {
   MyAddress,
   OrderDetails,
   OrderSummary,
-  Payment,
   ProductDetails,
   DeliveryAddress,
   PaymentOptions,
@@ -15,8 +14,9 @@ import {
   Terms,
   Cancellation,
   WhoWeAre,
-  ContactUs,
   FAQ,
+  TrackOrderModal,
+  EmiModal,
   NotFound
 } from 'containers';
 import { routerActions } from 'react-router-redux';
@@ -34,6 +34,15 @@ import Category from 'containers/Category/Category';
 import Wishlist from 'containers/Wishlist';
 import Cart from 'containers/Cart';
 import Home from 'containers/Home';
+import StoreLocator from 'containers/StoreLocator/StoreLocator';
+import ContactUs from 'containers/ContactUs/';
+import Feedback from 'containers/Feedback/';
+import ServiceRequest from 'containers/ServiceRequest/';
+import Grievance from 'containers/Grievance/';
+import PaymentStatus from 'containers/PaymentStatus/';
+import PaymentSuccess from 'containers/PaymentSuccess/';
+import PaymentFailure from 'containers/PaymentFailure/';
+import BulkOrder from 'containers/BulkOrder/';
 
 const isAuthenticated = connectedReduxRedirect({
   redirectPath: '/login',
@@ -63,27 +72,36 @@ const routes = [
       { path: '/wishlist', exact: true, component: isAuthenticated(Wishlist) },
       { path: '/cart', exact: true, component: Cart },
       { path: '/my-orders', exact: true, component: isAuthenticated(MyOrder) },
-      { path: '/my-address', exact: true, component: MyAddress },
+      { path: '/my-address', exact: true, component: isAuthenticated(MyAddress) },
       { path: '/order-details', exact: true, component: OrderDetails },
       { path: '/order-summary', exact: true, component: OrderSummary },
       { path: '/profile', exact: true, component: isAuthenticated(Profile) },
       { path: '/update-password', exact: true, component: UpdatePassword },
-      { path: '/payment', exact: true, component: Payment },
-      { path: '/product-details/:skuId', exact: true, component: ProductDetails },
-      { path: '/delivery-address', exact: true, component: DeliveryAddress },
-      { path: '/payment-options', exact: true, component: PaymentOptions },
-      { path: '/review-order', exact: true, component: ReviewOrder },
+      { path: '/:productname?/sku/:skuId', exact: true, component: ProductDetails },
+      { path: '/checkout/delivery-address', exact: true, component: DeliveryAddress },
+      { path: '/checkout/payment-options', exact: true, component: PaymentOptions },
+      { path: '/checkout/review-order', exact: true, component: ReviewOrder },
       { path: '/search', exact: false, component: Listing },
       { path: '/return-policy', exact: true, component: ReturnPolicy },
       { path: '/privacy-policy', exact: true, component: PrivacyPolicy },
       { path: '/cancellation', exact: true, component: Cancellation },
       { path: '/terms-and-conditions', exact: true, component: Terms },
       { path: '/faq', exact: true, component: FAQ },
-      { path: '/contact-us', exact: true, component: ContactUs },
       { path: '/who-we-are', exact: true, component: WhoWeAre },
       { path: '/pincode', exact: true, component: Pincode },
       { path: '/store/:city/:storeName', exact: true, component: Stores },
       { path: '/track-order', exact: true, component: TrackOrder },
+      { path: '/track-order-modal', exact: true, component: TrackOrderModal },
+      { path: '/emi-modal', exact: true, component: EmiModal },
+      { path: '/store-locator', exact: true, component: StoreLocator },
+      { path: '/contact-us', exact: true, component: ContactUs },
+      { path: '/feedback', exact: true, component: Feedback },
+      { path: '/service-request', exact: true, component: ServiceRequest },
+      { path: '/grievance', exact: true, component: Grievance },
+      { path: '/payment-success', exact: true, component: PaymentSuccess },
+      { path: '/payment-failed', exact: true, component: PaymentFailure },
+      { path: '/bulk-order', exact: true, component: BulkOrder },
+      { path: '/payment-status/order/:status', exact: true, component: PaymentStatus },
       {
         path: '/:category/:subcategory1?/:subcategory2?/:subcategory3?/:subcategory4?/:subcategory5?',
         exact: true,

@@ -7,7 +7,7 @@ import { Label } from 'hometown-components/lib/Label';
 const styles = require('./Dropdown.scss');
 
 const Dropdown = ({
-  title, checkbox, display, data, onclick
+  title, display, data, onclick
 }) => (
   <div className={`${styles.filterBlock} dropdownWrapper`}>
     <Button
@@ -27,26 +27,15 @@ const Dropdown = ({
     <div className={`dropDown ${display === 'rtl' ? 'blockRight' : ''}`}>
       {/* eslint-disable */}
       <ul>
-        <li>
-          {data.map((item, index) => (
-            <div key={index} onClick={onclick(item.url_key, item.value)}>
-              {checkbox && (
-                <div className="checkbox">
-                  <input type="checkbox" id="checkbox" checked={item.isSelected} onChange={() => true} />
-                  <label htmlFor="checkbox" />
-                </div>
-              )}
+        {data.map((item, index) => (
+          <li key={index}>
+            <div onClick={onclick(item.url_key, 'SortBy', item.value)}>
               <Label htmlFor="checkbox" fontSize="0.75em" ml="0.625rem" className="dropdownValue">
                 {item.value}
-                {item.isHex && (
-                  <span key={item.hex_key} className={styles.colorBox} style={{ backgroundColor: item.hex_key }}>
-                    {' '}
-                  </span>
-                )}
               </Label>
             </div>
-          ))}
-        </li>
+          </li>
+        ))}
       </ul>
     </div>
   </div>

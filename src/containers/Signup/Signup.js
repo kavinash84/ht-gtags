@@ -22,7 +22,7 @@ const SidebarImg = require('../../../static/login-side-thumb.png');
 
 @connect(({ userSignUp, app }) => ({
   signUpResponse: userSignUp,
-  session: app.csrfToken
+  session: app.sessionId
 }))
 @withRouter
 export default class SignupFormContainer extends Component {

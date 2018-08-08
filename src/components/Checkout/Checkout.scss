@@ -19,7 +19,6 @@
     }
   }
 }
-
 .back {
   position: absolute;
   left: -30px;
@@ -39,7 +38,6 @@
     max-width: 30rem;
   }
 }
-
 .dropDown {
   padding: 10px;
   height: 42px;
@@ -55,7 +53,6 @@
     outline: none;
   }
 }
-
 .bankCard {
   input {
     vertical-align: top;
@@ -69,5 +66,18 @@
   }
   img {
     height: 30px;
+  }
+}
+.emiTable {
+  th {
+    font-size: 0.75rem !important;
+  }
+}
+.cardFieldWrapper {
+  img {
+    width: 36px;
+    position: absolute;
+    right: 25px;
+    top: 44px;
   }
 }

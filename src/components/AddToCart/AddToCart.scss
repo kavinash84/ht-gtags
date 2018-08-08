@@ -17,7 +17,7 @@
   background-color: transparent;
   border: none;
   padding: 10px 5px 9px;
-  margin: 0 5px;
+  margin: 0 0 0 5px;
 }
 
 .goToCart {
@@ -41,5 +41,18 @@
   &:hover {
     color: $primary;
     background-color: $white;
+  }
+}
+
+.addToCartBtn {
+  transition: 0.75s all ease;
+  &:hover {
+    background-color: $primary !important;
+    span {
+      color: #FFF !important;
+    }
+    svg {
+      fill: #FFF !important;
+    }
   }
 }

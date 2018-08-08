@@ -20,6 +20,17 @@ import productdetails from './modules/productdetails';
 import reviews from './modules/reviews';
 import trackorder from './modules/trackorder';
 import orders from './modules/orders';
+import pagination from './modules/pagination';
+import paymentoptions from './modules/paymentoptions';
+import checkout from './modules/checkout';
+import shipping from './modules/shipping';
+import billing from './modules/billing';
+import colorproducts from './modules/colorproducts';
+import coupon from './modules/coupon';
+import myaddress from './modules/myaddress';
+import relatedproducts from './modules/relatedproducts';
+import paymentstatus from './modules/paymentstatus';
+import recentlyviewed from './modules/recentlyviewed';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -39,7 +50,8 @@ export default function createReducers(asyncReducers) {
       hashtags: homepage,
       products: homepage,
       offerstrip: homepage,
-      footer: homepage
+      footer: homepage,
+      recentlyviewed: homepage
     }),
     category,
     stores,
@@ -52,6 +64,17 @@ export default function createReducers(asyncReducers) {
     reviews,
     trackorder,
     orders,
+    pagination,
+    paymentoptions,
+    checkout,
+    shipping,
+    billing,
+    colorproducts,
+    coupon,
+    myaddress,
+    relatedproducts,
+    paymentstatus,
+    recentlyviewed,
     ...asyncReducers
   };
 }

@@ -5,7 +5,7 @@ import Row from 'hometown-components/lib/Row';
 import Div from 'hometown-components/lib/Div';
 import Text from 'hometown-components/lib/Text';
 import Heading from 'hometown-components/lib/Heading';
-import Img from 'hometown-components/lib/Img';
+// import Img from 'hometown-components/lib/Img';
 
 const styles = require('./Stores.scss');
 
@@ -15,7 +15,7 @@ const StoreListItem = ({
   <Div col={4}>
     <div className={styles.storeBlock}>
       <Link to={url}>
-        <Img src="https://www.hometown.in/media/cms/hometownv2/compressed/New-Delhi.jpg" alt="" />
+        {/* <Img src="https://www.hometown.in/media/cms/hometownv2/compressed/New-Delhi.jpg" alt="" /> */}
         <Row type="block" m="0">
           <Div>
             <Heading color="textDark" fontSize="1em" mt="1rem">

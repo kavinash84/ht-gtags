@@ -4,30 +4,41 @@ import Heading from 'hometown-components/lib/Heading';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Section from 'hometown-components/lib/Section';
-import Span from 'hometown-components/lib/Span';
 import Row from 'hometown-components/lib/Row';
+import { Link } from 'react-router-dom';
 
-const styles = require('./TitleBar.scss');
+const styles = require('../ProductDetails/BreadCrumb.scss');
 
-const TitleBar = ({ title }) => (
-  <Section mb="0.625rem" p="1.5rem 0.5rem" bg="primary" boxShadow="0 2px 8px 0 rgba(0, 0, 0, 0.17)">
+const TitleBar = ({ title, productCount }) => (
+  <Section
+    mb="0.625rem"
+    p="1.5rem 0.5rem"
+    bg="white"
+    boxShadow="0 2px 8px 0 rgba(0, 0, 0, 0.17)"
+    style={{ background: 'rgba(0,0,0,0.05)' }}
+  >
     <Container type="container" pr="0" pl="0">
       <Row display="block" mr="0" ml="0" mb="1rem">
         <Div col="9">
-          <a href="/" className={`${styles.headerLink}`}>
-            Home{' '}
-            <Span pl="0.625rem" pr="0.625rem" color="#FFF">
-              >
-            </Span>
-          </a>
-          <a href="/" className={`${styles.headerLink}`}>
-            {title}
-          </a>
+          <ul itemScope itemType="http://schema.org/BreadcrumbList" className={styles.breadCrumbList}>
+            <li itemProp="itemListElement" itemType="http://schema.org/ListItem" itemScope>
+              <Link itemProp="item" to="/">
+                <span itemProp="name">Home</span>
+                <meta itemProp="position" content="1" />
+              </Link>
+            </li>
+            <li itemProp="itemListElement" itemType="http://schema.org/ListItem" itemScope>
+              <Link itemProp="item" to="/">
+                <span itemProp="name">{title}</span>
+                <meta itemProp="position" content="2" />
+              </Link>
+            </li>
+          </ul>
         </Div>
       </Row>
       <Row display="block" mr="0" ml="0" mb="0">
-        <Heading fontSize="1.5rem" color="white" mt="0" mb="0" fontWeight="300">
-          {title}
+        <Heading fontSize="1.5rem" color="black" mt="0" mb="0" fontWeight="400">
+          {title} {productCount && `(${productCount})`}
         </Heading>
       </Row>
     </Container>
@@ -35,11 +46,13 @@ const TitleBar = ({ title }) => (
 );
 
 TitleBar.defaultProps = {
-  title: ''
+  title: '',
+  productCount: ''
 };
 
 TitleBar.propTypes = {
-  title: PropTypes.string
+  title: PropTypes.string,
+  productCount: PropTypes.string
 };
 
 export default TitleBar;

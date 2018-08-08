@@ -28,11 +28,20 @@ h1,h2,h3,h4,h5,h6,a,span {
 		}
 	}
 }
+a {
+	transition: 0.5s all ease;
+}
 /* ----- End of Typography ----- */
 
 /* Global Classed */
 :global {
 	.noPadding {
 		padding: 0;
+	}
+	.pull-right {
+		float: right
+	}
+	.pull-left {
+		float: left
 	}
 }

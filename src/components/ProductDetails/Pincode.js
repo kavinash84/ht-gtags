@@ -7,7 +7,7 @@ import Div from 'hometown-components/lib/Div';
 import Img from 'hometown-components/lib/Img';
 import * as actionCreators from 'redux/modules/pincode';
 import { pincode as pincodeCheck } from 'utils/validation';
-import { loadProductDescription } from 'redux/modules/productdetails';
+import { getDelieveryInfo } from 'redux/modules/productdetails';
 
 const styles = require('./Pincode.scss');
 const ArrowIcon = require('../../../static/arrow_forward.svg');
@@ -21,11 +21,11 @@ const onChange = dispatcher => e => {
 
 const mapStateToProps = ({ pincode, productdetails }) => ({
   ...pincode,
-  currentsku: productdetails.currentsku
+  simpleSku: productdetails.simpleSku
 });
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ ...actionCreators, loadDescription: loadProductDescription }, dispatch);
+  bindActionCreators({ ...actionCreators, deliveryInfo: getDelieveryInfo }, dispatch);
 
 class Pincode extends React.Component {
   state = {
@@ -35,7 +35,7 @@ class Pincode extends React.Component {
 
   setPincodeInStore = (dispatcher, pincode) => e => {
     e.preventDefault();
-    const { currentsku, loadDescription } = this.props;
+    const { simpleSku, deliveryInfo } = this.props;
     this.setState(
       {
         validationError: pincodeCheck(pincode)
@@ -43,7 +43,7 @@ class Pincode extends React.Component {
       () => {
         if (!this.state.validationError) {
           dispatcher(pincode);
-          loadDescription(currentsku, pincode);
+          deliveryInfo(simpleSku, pincode);
         }
       }
     );
@@ -74,15 +74,15 @@ class Pincode extends React.Component {
 
 Pincode.defaultProps = {
   pincodeQuery: '',
-  currentsku: ''
+  simpleSku: ''
 };
 
 Pincode.propTypes = {
   pincodeQuery: PropTypes.string,
   setPincodeQuery: PropTypes.func.isRequired,
   setPincode: PropTypes.func.isRequired,
-  loadDescription: PropTypes.func.isRequired,
-  currentsku: PropTypes.string
+  deliveryInfo: PropTypes.func.isRequired,
+  simpleSku: PropTypes.string
 };
 
 export default connect(

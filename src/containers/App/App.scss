@@ -5,8 +5,6 @@
 
 /* ---- Common Classes ---- */
 :global {
-	@import '../../components/SlickSlider/slick/slick.scss';
-	@import '../../components/SlickSlider/slick/slick-theme.scss';
 
 	.container {
 		margin: 0 auto;
@@ -339,13 +337,16 @@
 		}
 		td {
 			color: rgba(0, 0, 0, 0.7);
-			font-size: 0.75rem;
+			font-size: 0.875rem;
 			padding: 0.25rem 0.325rem;
 			button {
-				font-size: 0.875rem;
+				font-size: 1.5rem;
 				font-weight: 400;
 			}
 		}
+	}
+	.table-border {
+		border: 1px solid #d8d8d8;
 	}
 
 	/* Slick carousel */
@@ -362,7 +363,7 @@
 		z-index: 1;
 	}
 	.slick-prev:before, .slick-next:before {
-		color: #000;
+		color: #000 !important;
 		font-size: 26px;
 	}
 	.slick-initialized .slick-slide {
@@ -379,6 +380,11 @@
 	.prodDetailsCarousel {
 		.slick-slide {
 			max-width: 293px !important;
+		}
+	}
+	.prodCarousel {
+		.slick-slide {
+			max-width: 293px;
 		}
 	}
 	.customModal {
@@ -436,8 +442,8 @@
 		input[type="checkbox"], input[type="radio"] {
 			visibility: hidden;
 			&:checked + label {
-				background-color: #66bb6a;
-				border-color: #66bb6a;
+				background-color: #66bb6a !important;
+				border-color: #66bb6a !important;
 				&:after {
 					opacity: 1;
 				}
@@ -475,7 +481,7 @@
 		z-index: 2;
 		background: #FFF;
 		border: 1px solid #dddddda1;
-		padding: 0.625rem 1rem;
+		// padding: 0.625rem 1rem;
 		min-width: 200px;
 		display: none;
 		&.blockRight {
@@ -488,8 +494,23 @@
 			transition: all 0.5s ease;
 			li {
 				text-align: left;
+				padding: 0.3125rem 0.625rem;
 				label {
 					cursor: pointer;
+				}
+				&:hover {
+					background: #dddddd;
+				}
+				button {
+					border: none;
+					padding: 0;
+					background: none;
+					width: 100%;
+					text-align: left;
+					&:hover, &:focus {
+						background-color: transparent !important;
+						border: none;
+					}
 				}
 			}
 		}
@@ -520,8 +541,62 @@
 		}
 	}
 
+	/* Pagination */
+	.paginationWrapper {
+		.pagination {
+			li {
+				list-style: none;
+		    display: inline-block;
+		    background: #eee;
+		    margin: 0 5px;
+		    font-size: 14px;
+		    line-height: 40px;
+		    width: 40px;
+		    height: 40px;
+				border-radius: 100%;
+				&.disabled {
+					opacity: 0.4;
+				}
+				&.active {
+					background-color: $primary;
+					a {
+						color: $white;
+					}
+				}
+				a {
+					width: 40px;
+					height: 40px;
+					display: block;
+					border-radius: 100%;
+					transition: 0.25s ease all;
+					&:hover {
+						background-color: $primary;
+						color: $white;
+					}
+				}
+			}
+		}
+	}
+
 	.hide {
 		display: none;
+	}
+
+	.ratings {
+		display: inline-block;
+    margin-left: 15px;
+		margin-right: 10px;
+		top: 3px;
+	}
+
+	.form-control {
+		width: 100%;
+		height: 42px;
+		border-radius: 2px;
+		background-color: #FFF;
+		border: solid 1px rgba(151,151,151,0.47);
+		padding: 0 10px;
+		box-sizing: border-box;
 	}
 }
 

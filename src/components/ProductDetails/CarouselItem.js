@@ -9,13 +9,14 @@ const props = {
   width: 279,
   scale: 1.5,
   offset: { vertical: 0, horizontal: 10 },
-  zoomStyle: 'left: 103%;padding: 5px;box-shadow: 2px 2px 10px 0 rgba(0, 0, 0, 0.1);z-index: 1;',
-  zoomLensStyle: 'opacity: 0.5;background-color: gray;'
+  zoomStyle:
+    'left: 0%;width: 279px;height: 279px;padding: 5px;box-shadow: 2px 2px 10px 0 rgba(0, 0, 0, 0.1);z-index: 1;',
+  zoomLensStyle: 'opacity: 0.5;background-color: gray;z-index:2;'
 };
 
 const CategoryItem = ({ image }) => (
   <Div className={styles.pdSliderItem}>
-    <ReactImageZoom {...props} img={image} />
+    <ReactImageZoom itemProp="image" {...props} img={image} />
   </Div>
 );
 

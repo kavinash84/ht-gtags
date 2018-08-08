@@ -5,13 +5,13 @@
   width: 60%;
   margin: 3rem auto;
   border-radius: 1px;
-  background-color: #ae8873;
+  background-color: $oldMont;
   min-height: 435px;
   box-shadow: 7px 7px 14px -2px rgba(124, 122, 122, 0.5);
   .imgWrapper {
     position: relative;
     height: 435px;
-    background: $primary;
+    background: $oldMont;
     padding: 1rem 1.5rem;
     img {
       position: absolute !important;

@@ -1,16 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Button from 'hometown-components/lib/Buttons';
 import Section from 'hometown-components/lib/Section';
-import { removeFromCart } from 'redux/modules/cart';
+import * as actionCreators from 'redux/modules/cart';
+import { formatAmount } from 'utils/formatters';
 import ProductQuantity from './UpdateProductQuantity';
 import OrderSummary from '../Checkout/OrderSummary';
 
-const styles = require('./Cart.scss');
+const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
+
+const checkCartBeforeCheckout = (dispatcher, session) => e => {
+  e.preventDefault();
+  dispatcher(session);
+};
 
 const onClick = (cartId, sessionId, pincode) => dispatcher => e => {
   e.preventDefault();
@@ -19,13 +26,23 @@ const onClick = (cartId, sessionId, pincode) => dispatcher => e => {
 
 const mapStateToProps = ({ pincode, cart, app }) => ({
   currentId: cart.key,
+  cartChecked: cart.cartChecked,
+  checkingCart: cart.checkingCart,
   cartUpdating: cart.cartUpdating,
   pincode: pincode.selectedPincode,
   sessionId: app.sessionId
 });
 
 const Cart = ({
-  results, summary, discardFromCart, pincode, sessionId, currentId, cartUpdating
+  results,
+  summary,
+  removeFromCart,
+  pincode,
+  sessionId,
+  currentId,
+  cartUpdating,
+  checkCart,
+  checkingCart
 }) => {
   const cartItemLoading = customerCardId => cartUpdating && currentId === customerCardId;
   return (
@@ -48,13 +65,10 @@ const Cart = ({
                       {results.map(item => (
                         <tr key={item.id_customer_cart}>
                           <td>
-                            <img className="thumb" src={item.product_info.images[0].path} alt="" />
+                            <img className="thumb" src={item.product_info.image} alt="" />
                           </td>
-                          <td>{item.product_info.data.name}</td>
-                          <td>
-                            {item.product_info.data.delivery_details.length &&
-                              item.product_info.data.delivery_details[0].value}
-                          </td>
+                          <td>{item.product_info.name}</td>
+                          <td>{item.product_info.delivery_time_text}</td>
                           <td>
                             <ProductQuantity
                               cartItemLoading={cartItemLoading}
@@ -64,25 +78,20 @@ const Cart = ({
                               skuId={item.configurable_sku}
                             />
                           </td>
-                          <td>{item.product_info.netprice}</td>
+                          <td>Rs. {formatAmount(item.product_info.net_price)}</td>
                           <td>
                             <Button
                               fontSize="1rem"
                               fontWeight="300"
-                              color="#ae8873"
+                              color="#f98d29"
                               btnType="link"
-                              onClick={onClick(item.id_customer_cart, sessionId, pincode)(discardFromCart)}
+                              p="0"
+                              mt="-4px"
+                              onClick={onClick(item.id_customer_cart, sessionId, pincode)(removeFromCart)}
                             >
                               x
                             </Button>
                           </td>
-                          {/* eslint-disable */}
-                          {cartItemLoading(item.id_customer_cart) && (
-                            <div className={styles.loadingCart}>
-                              <h4>THIS PRODUCT HAS BEEN</h4>
-                              <p>UPDATED TO YOUR CART</p>
-                            </div>
-                          )}
                         </tr>
                       ))}
                     </tbody>
@@ -95,6 +104,9 @@ const Cart = ({
               savings={summary.savings}
               shipping={summary.shipping_charges}
               totalCart={summary.total}
+              loadingnextstep={checkingCart}
+              onClick={checkCartBeforeCheckout(checkCart, sessionId)}
+              itemsCount={summary.items_count}
             />
           </Row>
         </Container>
@@ -108,9 +120,11 @@ Cart.propTypes = {
   summary: PropTypes.object,
   pincode: PropTypes.string,
   cartUpdating: PropTypes.bool,
-  currentId: PropTypes.number,
+  currentId: PropTypes.string,
   sessionId: PropTypes.string.isRequired,
-  discardFromCart: PropTypes.func.isRequired
+  removeFromCart: PropTypes.func.isRequired,
+  checkCart: PropTypes.func.isRequired,
+  checkingCart: PropTypes.bool
 };
 
 Cart.defaultProps = {
@@ -118,10 +132,11 @@ Cart.defaultProps = {
   summary: null,
   pincode: '',
   cartUpdating: false,
-  currentId: 0
+  currentId: '',
+  checkingCart: false
 };
 
 export default connect(
   mapStateToProps,
-  { discardFromCart: removeFromCart }
+  mapDispatchToProps
 )(Cart);

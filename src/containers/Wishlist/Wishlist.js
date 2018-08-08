@@ -16,30 +16,31 @@ const WishListIcon = require('../../../static/wishlist-empty.jpg');
 @connect(({ wishlist }) => ({
   wishlist,
   wishListedSKUs: getSKUList(wishlist),
-  wishlistKey: wishlist.key
+  wishlistKey: wishlist.key,
+  loadingList: wishlist.loadingList
 }))
 export default class WishlistContainer extends Component {
   static propTypes = {
     wishlist: PropTypes.object,
-    wishlistKey: PropTypes.string,
+    loadingList: PropTypes.array,
     wishListedSKUs: PropTypes.array.isRequired
   };
   static defaultProps = {
     wishlist: {},
-    wishlistKey: ''
+    loadingList: []
   };
   render() {
     const {
       wishlist: { data },
       wishListedSKUs,
-      wishlistKey
+      loadingList
     } = this.props;
     return (
       <Div>
         <Menu />
         <MyMenu page="wishlist" />
         {data && data.length ? (
-          <Wishlist list={data} wishList={wishListedSKUs} wishlistKey={wishlistKey} />
+          <Wishlist list={data} wishList={wishListedSKUs} loadingList={loadingList} />
         ) : (
           <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
             <Empty title="No items yet !!" subTitle="Add items to it" btnName="Continue Shopping" url="/" bg="#fafafa">

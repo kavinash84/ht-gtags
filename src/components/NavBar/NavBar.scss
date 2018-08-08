@@ -5,6 +5,8 @@
   display: inline-block;
   width: 100%;
   height: 53px;
+  background: rgba(0,0,0,0.9);
+  margin-top: 10px;
   a {
     padding: 10px 15px 10px 0;
   }
@@ -35,15 +37,18 @@
   overflow: hidden;
   white-space: nowrap;
   width: 100%;
-  height: 48px;
+  height: 53px;
   a {
     display: inline-block;
     text-align: center;
     padding: 17px 20px 17px 0;
     text-decoration: none;
     font-size: 0.875rem;
-    @include font-family('Medium');
-    color: $text-dark;
+    font-weight: 500;
+    color: $white;
+    &:hover {
+      color: $primary;
+    }
     p {
       margin: 0 !important;
       font-size: 0.9rem !important;

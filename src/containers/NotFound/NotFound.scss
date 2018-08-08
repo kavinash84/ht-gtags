@@ -1,0 +1,20 @@
+@import "../../theme/variables";
+@import "../../theme/mixins";
+
+.catList {
+  padding-left: 0;
+  margin-top: 0;
+  li {
+    list-style: none;
+    padding-bottom: 5px;
+    a {
+      color: #222222;
+      font-weight: 500;
+      font-size: 0.875rem;
+      opacity: 1;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+}

@@ -15,7 +15,7 @@ import { getCities } from '../../selectors/homepage';
 
 @connect(({
   homepage: {
-    categories, banners, products, hashtags, offerstrip
+    categories, banners, products, hashtags, offerstrip, recentlyviewed
   }, stores
 }) => ({
   banners: banners.data,
@@ -23,7 +23,8 @@ import { getCities } from '../../selectors/homepage';
   homepageProducts: products.data,
   cities: getCities(stores),
   hashtags: hashtags.data,
-  offerstrip: offerstrip.data && offerstrip.data.items
+  offerstrip: offerstrip.data && offerstrip.data.items,
+  recentlyviewed: recentlyviewed.data
 }))
 export default class Home extends Component {
   state = {
@@ -36,7 +37,7 @@ export default class Home extends Component {
   };
   render() {
     const {
-      homepageCategories, homepageProducts, banners, cities, hashtags, offerstrip
+      homepageCategories, homepageProducts, banners, cities, hashtags, offerstrip, recentlyviewed
     } = this.props;
     const { showRibbon } = this.state;
     return (
@@ -71,6 +72,9 @@ export default class Home extends Component {
               data={products.values}
             />
           ))}
+          {recentlyviewed.length > 0 && (
+            <ProductCarousel title="Recently Viewed" data={recentlyviewed} length={recentlyviewed.length} />
+          )}
           <StoresCarousel cities={cities} />
         </div>
         <Footer />
@@ -85,7 +89,8 @@ Home.defaultProps = {
   banners: [],
   cities: [],
   hashtags: [],
-  offerstrip: {}
+  offerstrip: {},
+  recentlyviewed: []
 };
 
 Home.propTypes = {
@@ -94,5 +99,6 @@ Home.propTypes = {
   banners: PropTypes.array,
   cities: PropTypes.array,
   hashtags: PropTypes.array,
-  offerstrip: PropTypes.object
+  offerstrip: PropTypes.object,
+  recentlyviewed: PropTypes.array
 };

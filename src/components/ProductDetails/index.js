@@ -15,13 +15,14 @@ import ProductDesc from 'hometown-components/lib/ProductDetails/ProductDesc';
 import Specs from 'hometown-components/lib/ProductDetails/Specs';
 import Reviews from 'hometown-components/lib/Reviews';
 import AddReview from 'hometown-components/lib/Reviews/WriteReview';
+import Img from 'hometown-components/lib/Img';
+import ProductCarousel from 'components/ProductCarousel';
 import Theme from 'hometown-components/lib/Theme';
 import { addReview } from 'redux/modules/reviews';
 import { formatAmount } from 'utils/formatters';
 import { calculateDiscount, calculateSavings } from 'utils/helper';
 import ProductDetailsCarousel from './Carousel';
 import BreadCrumb from './BreadCrumb';
-// import ProductsCarousel from 'components/ProductCarousel';
 // import { CART_URL } from 'helpers/Constants';
 import Pincode from './Pincode';
 import AddToCart from '../AddToCart';
@@ -30,10 +31,15 @@ import prodDetails from '../../data/ProductDetails';
 
 const styles = require('./ProductDetails.scss');
 
-@connect(({ productdetails, pincode, reviews }) => ({
+@connect(({
+  productdetails, pincode, reviews, colorproducts, relatedproducts
+}) => ({
   product: productdetails.productDescription,
   reviews,
-  pincode
+  pincode,
+  colorproducts: colorproducts.list,
+  relatedproductsList: relatedproducts.data,
+  deliveryInfo: productdetails.deliveryDetails
 }))
 class ProductDetails extends React.Component {
   static contextTypes = {
@@ -47,7 +53,9 @@ class ProductDetails extends React.Component {
   };
 
   render() {
-    const { product, pincode, reviews } = this.props;
+    const {
+      product, pincode, reviews, colorproducts, relatedproductsList, deliveryInfo
+    } = this.props;
     const {
       meta,
       images,
@@ -56,7 +64,8 @@ class ProductDetails extends React.Component {
       attributes,
       grouped_attributes: groupedAttributes,
       sku,
-      groupedattributes
+      groupedattributes,
+      reviews: { count, rating }
     } = product;
     const { category_details: categoryDetails } = meta;
     const simpleSku = Object.keys(simples)[0];
@@ -67,19 +76,19 @@ class ProductDetails extends React.Component {
       <Div type="block">
         <Section p="0" pt="1.25rem" mb="0">
           <Container type="container" pr="0" pl="0">
-            <Row display="block" mt="0.625rem" mb="0.625rem" mr="0" ml="0">
-              <Div>
-                <BreadCrumb categoryDetails={categoryDetails} />
-              </Div>
-            </Row>
-            <Row display="block" mt="0.625rem" mb="0" mr="0">
+            <Row display="block" mt="0.625rem" mb="0.625rem" mr="0">
               <Div col="9" className={styles.titleWrapper}>
+                <Div mt="0" mb="0.625rem" pl="1rem" pr="1rem">
+                  <BreadCrumb categoryDetails={categoryDetails} />
+                </Div>
                 <TitlePrice
                   name={meta.name}
                   price={formatAmount(price)}
                   discPrice={formatAmount(checkSpecialPrice)}
                   savingsRs={formatAmount(calculateSavings(price, checkSpecialPrice) || '')}
                   savingsPercentage={calculateDiscount(price, checkSpecialPrice)}
+                  ratings={rating}
+                  count={count}
                 />
                 <Row
                   display="block"
@@ -90,16 +99,18 @@ class ProductDetails extends React.Component {
                   className={styles.variationWrapper}
                 >
                   <Div col="2">
-                    <Section mb="0.3125rem" p="0">
-                      <Row display="block" mr="0" ml="0">
-                        <Heading fontSize="1em" color="textDark" mb="0.625rem" mt="0px" fontWeight="600">
-                          Color Options
-                        </Heading>
-                      </Row>
-                      <ColorOption colors={prodDetails.colors} />
-                    </Section>
+                    {colorproducts.length > 0 && (
+                      <Section mb="0.3125rem" p="0">
+                        <Row display="block" mr="0" ml="0">
+                          <Heading fontSize="1em" color="textDark" mb="0.625rem" mt="0px" fontWeight="600">
+                            Color Options
+                          </Heading>
+                        </Row>
+                        <ColorOption data={colorproducts} colors={prodDetails.colors} />
+                      </Section>
+                    )}
                   </Div>
-                  <Div col="2">
+                  {/* <Div col="2">
                     <Heading fontSize="1em" color="textDark" mb="0.625rem" mt="0px" fontWeight="600">
                       Size Options
                     </Heading>
@@ -108,10 +119,11 @@ class ProductDetails extends React.Component {
                       <option>2 Seater</option>
                       <option>3 Seater</option>
                     </select>
-                  </Div>
+                  </Div> */}
                 </Row>
               </Div>
               <Div col="3" ta="right">
+                <Img src="http://via.placeholder.com/350x80" alt="" width="100%" mt="0.625rem" mb="1rem" />
                 <AddToCart simpleSku={simpleSku} sku={sku} itemId={sku} size="block" />
                 <Div mt="1rem">
                   <Button
@@ -145,7 +157,7 @@ class ProductDetails extends React.Component {
               </Div>
               <Div col="3">
                 <ServiceDetails
-                  deliverBy={deliveryDetails[0].value}
+                  deliverBy={(deliveryInfo && deliveryInfo[0].value) || deliveryDetails[0].value}
                   emiStarting="xyz"
                   shipping={shipping}
                   pincode={pincode.selectedPincode}
@@ -154,10 +166,11 @@ class ProductDetails extends React.Component {
                 </ServiceDetails>
               </Div>
             </Row>
-            <Row display="block" mt="0.625rem" mb="0.625rem" mr="0">
-              {/* <ProductSlider productSliderTitle="Related Products" colSize={20} />
-      <ProductSlider productSliderTitle="Frequently Bought Together" colSize={20} /> */}
-            </Row>
+            {relatedproductsList.length > 0 && (
+              <Row display="block" mt="0.625rem" mb="0.625rem" mr="0">
+                <ProductCarousel title="Related Products" data={relatedproductsList} />
+              </Row>
+            )}
           </Container>
         </Section>
       </Div>
@@ -167,11 +180,17 @@ class ProductDetails extends React.Component {
 ProductDetails.defaultProps = {
   product: {},
   pincode: {},
-  reviews: {}
+  reviews: {},
+  colorproducts: [],
+  relatedproductsList: [],
+  deliveryInfo: ''
 };
 ProductDetails.propTypes = {
   product: PropTypes.object,
   pincode: PropTypes.object,
-  reviews: PropTypes.object
+  reviews: PropTypes.object,
+  colorproducts: PropTypes.array,
+  relatedproductsList: PropTypes.array,
+  deliveryInfo: PropTypes.string
 };
 export default ProductDetails;

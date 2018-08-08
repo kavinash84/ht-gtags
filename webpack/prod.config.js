@@ -46,15 +46,10 @@ module.exports = {
           fallback: 'style-loader',
           use: [
             {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              importLoaders: 2,
-              sourceMap: true
-            }
+            loader: 'css-loader'
           }]
         }),
-        include: [path.resolve(__dirname, '../node_modules')]
+        include: [path.resolve(__dirname, '../src'), path.resolve(__dirname, '../node_modules')]
       },{
         test: /\.less$/,
         loader: ExtractTextPlugin.extract({

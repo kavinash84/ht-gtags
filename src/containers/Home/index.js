@@ -1,7 +1,13 @@
 import HomeTownLoader from 'containers/Loader';
 import { provideHooks } from 'redial';
 import { wrapDispatch } from 'multireducer';
-import { loadTopSelling, loadHashTags, loadOfferStrip, isLoaded as isSectionLoaded } from 'redux/modules/homepage';
+import {
+  loadTopSelling,
+  loadHashTags,
+  loadOfferStrip,
+  loadRecentlyViewed,
+  isLoaded as isSectionLoaded
+} from 'redux/modules/homepage';
 import { loadStores, isLoaded as isStoresLoaded } from 'redux/modules/stores';
 
 const hooks = {
@@ -18,6 +24,7 @@ const hooks = {
     if (!isSectionLoaded(getState(), 'offerstrip')) {
       wrapDispatch(dispatch, 'offerstrip')(loadOfferStrip()).catch(error => console.log(error));
     }
+    wrapDispatch(dispatch, 'recentlyviewed')(loadRecentlyViewed()).catch(error => console.log(error));
   }
 };
 

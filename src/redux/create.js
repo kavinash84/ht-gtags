@@ -1,9 +1,11 @@
 import { createStore as _createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import { createPersistoid, persistCombineReducers, REGISTER } from 'redux-persist';
+import thunkMiddleware from './middleware/thunkMiddleware';
 import clientMiddleware from './middleware/clientMiddleware';
 import gaMiddleware from './middleware/gaMiddleware';
 import userMiddleware from './middleware/userMiddleware';
+import paymentsMiddleware from './middleware/paymentsMiddleware';
 import createReducers from './reducer';
 
 function combine(reducers, persistConfig) {
@@ -41,10 +43,19 @@ export default function createStore({
   if (data && data.app && data.app.csrfToken) {
     /* add csrf token */
     const csrfToken = data.app.csrfToken || '';
+    const session = data.app.sessionId || '';
     helpers.client.setCSRFToken(csrfToken);
+    helpers.client.setSessionId(session);
   }
 
-  const middleware = [clientMiddleware(helpers), routerMiddleware(history), gaMiddleware(), userMiddleware()];
+  const middleware = [
+    thunkMiddleware(),
+    clientMiddleware(helpers),
+    routerMiddleware(history),
+    gaMiddleware(),
+    userMiddleware(),
+    paymentsMiddleware()
+  ];
 
   if (__CLIENT__ && __DEVELOPMENT__) {
     const logger = require('redux-logger').createLogger({

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import serialize from 'serialize-javascript';
 import Helmet from 'react-helmet';
 import config from 'config';
+// import { gtm } from 'utils/tracking';
 
 /**
  * Wrapper component containing HTML metadata and boilerplate tags.
@@ -50,15 +51,16 @@ export default class Html extends Component {
           {head.script.toComponent()}
 
           <link rel="shortcut icon" href="/favicon.ico" />
+          <meta charSet="utf-8" />
+          <meta httpEquiv="x-ua-compatible" content="ie=edge" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link rel="manifest" href="/manifest.json" />
           <meta name="mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
-          <meta name="application-name" content="HomeTown Mobile" />
+          <meta name="application-name" content="HomeTown Web" />
           <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-          <meta name="apple-mobile-web-app-title" content="HomeTown Mobile" />
+          <meta name="apple-mobile-web-app-title" content="HomeTown Web" />
           <meta name="theme-color" content="#3677dd" />
-
+          <link rel="manifest" href="/manifest.json" />
           {styleTags}
           {/* styles (will be present only in production with webpack extract text plugin) */}
           {assets.styles &&
@@ -79,6 +81,15 @@ export default class Html extends Component {
           ) : null}
         </head>
         <body>
+          <noscript>
+            <iframe
+              src="https://www.googletagmanager.com/ns.html?id=GTM-T5VV7MZ"
+              height="0"
+              width="0"
+              style={{ display: 'none', visibility: 'hidden' }}
+              title="gaTag"
+            />
+          </noscript>
           <div id="content" dangerouslySetInnerHTML={{ __html: content }} />
           {store && (
             <script
@@ -94,6 +105,35 @@ export default class Html extends Component {
           {assets.styles && Object.keys(assets.styles).length === 0 ? (
             <script dangerouslySetInnerHTML={{ __html: 'document.getElementById("content").style.display="block";' }} />
           ) : null}
+          <Helmet>
+            <script type="application/ld+json">
+              {`
+              {
+                "@context": "http://schema.org",
+                "@type": "WebSite",
+                "url": "https://www.hometown.in/",
+                "potentialAction": {
+                  "@type": "SearchAction",
+                  "target": "https://www.hometown.in/search/?q={search_term_string}",
+                  "query-input": "required name=search_term_string"
+                }
+              }
+            `}
+            </script>
+            {process.env.NODE_ENV !== 'development' && (
+              <span>
+                <script src="https://cdn.ravenjs.com/3.24.0/raven.min.js" crossOrigin="anonymous" />
+                <script>
+                  {`
+                  Raven.config('https://e072a281afc44732a8976d0615f0e310@sentry.io/1254610', {
+                  release: '0-0-0',
+                  environment: 'development-test',
+                  }).install()
+                `}
+                </script>
+              </span>
+            )}
+          </Helmet>
         </body>
       </html>
     );

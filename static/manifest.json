@@ -1,6 +1,6 @@
 {
-  "short_name": "React Hot",
-  "name": "React redux universal hot example",
+  "short_name": "HomeTown",
+  "name": "HomeTown",
   "icons": [
     {
       "src": "launcher-icon-2x.png",
@@ -20,7 +20,7 @@
   ],
   "start_url": "/",
   "display": "standalone",
-  "orientation": "landscape",
-  "theme_color": "#3677dd",
-  "background_color": "#3677dd"
+  "orientation": "portrait",
+  "theme_color": "#e8ba58",
+  "background_color": "#e8ba58"
 }

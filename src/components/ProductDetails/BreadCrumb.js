@@ -4,28 +4,24 @@ import { Link } from 'react-router-dom';
 
 const styles = require('./BreadCrumb.scss');
 
-const checkBreadCrumbs = data => {
-  if (data.length) {
-    if (data[0]) {
-      return true;
-    }
-  }
-  return false;
-};
-
 const BreadCrumb = ({ categoryDetails }) => {
   let link = '';
   return (
-    <ul className={styles.breadCrumbList}>
-      {checkBreadCrumbs(categoryDetails) &&
-        categoryDetails.map(item => {
+    <ul itemScope itemType="http://schema.org/BreadcrumbList" className={styles.breadCrumbList}>
+      {categoryDetails.map((item, index) => {
+        if (item) {
           link += `/${item.url_key}`;
           return (
-            <li key={item.id}>
-              <Link to={`${link}`}>{item.name}</Link>
+            <li itemProp="itemListElement" itemType="http://schema.org/ListItem" itemScope key={item.id}>
+              <Link itemProp="item" to={`${link}`}>
+                <span itemProp="name">{item.name}</span>
+                <meta itemProp="position" content={index + 1} />
+              </Link>
             </li>
           );
-        })}
+        }
+        return null;
+      })}
     </ul>
   );
 };
