@@ -75,7 +75,7 @@ export default class Home extends Component {
           ))}
           {recentlyviewed.length > 0 && (
             <Row display="block" mt="0.625rem" mb="0.625rem" mr="0">
-              <ProductCarousel title="Related Products" data={recentlyviewed} />
+              <ProductCarousel title="Recentlt Viewed" data={recentlyviewed} />
             </Row>
           )}
           <StoresCarousel cities={cities} />
