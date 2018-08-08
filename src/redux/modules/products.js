@@ -159,7 +159,7 @@ export const setFiltersInState = payLoad => ({
 /* eslint-disable max-len */
 
 export const applyFilter = ({
-  query, pincode, city = 'delhi', filters
+  query, pincode, city = 'delhi', filters, searchquery
 }) => dispatch =>
   dispatch({
     types: [LOAD_FILTER, LOAD_FILTER_SUCCESS, LOAD_FILTER_FAIL],
@@ -169,6 +169,9 @@ export const applyFilter = ({
         price, discount, material, modifiedQuery, sortby, pageno
       } = params;
       dispatch(setFiltersInState(params));
+      if (searchquery) {
+        return client.get(`tesla/search/find/?&q=${searchquery}&maxitems=32&pincode=${pincode}&city=${city}${price}${discount}${material}${pageno}`);
+      }
       return client.get(`tesla/products/${modifiedQuery}/?&maxitems=32&pincode=${pincode}&city=${city}${price}${discount}${material}${sortby}${pageno}`);
     }
   });
@@ -179,12 +182,10 @@ export const load = (category, page, sort, pincode, city = 'delhi') => ({
     client.get(`tesla/products/${category}/?${sort}&page=${page}&maxitems=32&pincode=${pincode}&city=${city}`)
 });
 
-export const loadSearchQuery = (searchText, page, pincode) => ({
+export const loadSearchQuery = ({ searchquery, page, pincode = defaultPincode }) => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
   promise: ({ client }) =>
-    client.get(`tesla/search/find/?page=${page}&q=${searchText}&pincode=${
-      pincode.length ? pincode : defaultPincode
-    }&sort=popularity&dir=desc&maxitems=32`)
+    client.get(`tesla/search/find/?page=${page}&q=${searchquery}&pincode=${pincode}&sort=popularity&dir=desc&maxitems=32`)
 });
 
 export const loadUrlQuery = (category, query, pincode, city = 'delhi') => ({
