@@ -12,7 +12,7 @@ import TitleBar from 'components/TitleBar';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { toggleWishList } from 'redux/modules/wishlist';
-import { clearAllFilters } from 'redux/modules/products';
+// import { clearAllFilters } from 'redux/modules/products';
 import { setProductPosition } from 'redux/modules/productdetails';
 import { formFilterLink2 } from 'utils/helper';
 import Dropdown from '../Filters/Filters';
@@ -70,15 +70,22 @@ class Listing extends React.Component {
   setFilter = (key, name, value, selected) => e => {
     e.preventDefault();
     const { history, categoryquery } = this.props;
-    const [, b64] = history.location.search.split('?filters=');
-    const link = formFilterLink2(key, name, b64, categoryquery, value, selected);
+    let searchquery;
+    [, searchquery] = history.location.search.split('q=');
+    if (searchquery) {
+      [searchquery] = searchquery.split('filters=');
+      [searchquery] = searchquery.split('&');
+    }
+    const [, b64] = history.location.search.split('filters=');
+
+    const link = formFilterLink2(key, name, b64, categoryquery, value, selected, searchquery);
     history.push(link);
   };
 
   clearFilters = () => {
-    const { category, pincode } = this.props;
-    const { dispatch } = this.context.store;
-    dispatch(clearAllFilters(category, pincode));
+    const { history, categoryquery } = this.props;
+    const link = formFilterLink2('key', 'reset', '', categoryquery);
+    history.push(link);
   };
 
   render() {
@@ -198,10 +205,10 @@ Listing.defaultProps = {
   wishListData: [],
   categoryName: '',
   productCount: '',
-  category: '',
+  // category: '',
   filters: [],
   appliedFilters: [],
-  pincode: '',
+  // pincode: '',
   metaResults: [],
   loadingList: [],
   isLoggedIn: false,
@@ -216,13 +223,13 @@ Listing.propTypes = {
   wishListData: PropTypes.array,
   categoryName: PropTypes.string,
   productCount: PropTypes.string,
-  category: PropTypes.string,
+  // category: PropTypes.string,
   filters: PropTypes.array,
   sortBy: PropTypes.string.isRequired,
   appliedFilters: PropTypes.array,
   history: PropTypes.object.isRequired,
   loadingList: PropTypes.array,
-  pincode: PropTypes.string,
+  // pincode: PropTypes.string,
   isLoggedIn: PropTypes.bool,
   metaResults: PropTypes.array,
   categoryquery: PropTypes.string

@@ -88,7 +88,7 @@ export default function reducer(state = initialState, action = {}) {
     case LOAD_PINCODE_DATA_SUCCESS:
       return {
         ...state,
-        selectedPincode: action.result.pincode || action.pincode,
+        selectedPincode: String(action.result.pincode) || action.pincode,
         pincodeQuery: action.pincode,
         city: action.result.city,
         results: [],
