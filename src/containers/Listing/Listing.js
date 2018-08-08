@@ -178,7 +178,9 @@ export default class Listing extends Component {
       seoInfo
     } = this.props;
     let page;
-    const { location: { search, pathname } } = history;
+    const {
+      location: { search, pathname }
+    } = history;
     if (search !== '') {
       page = search.replace('?', '').split('page=')[1];
     }

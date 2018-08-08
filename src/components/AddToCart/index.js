@@ -89,4 +89,7 @@ AddToCart.propTypes = {
   size: PropTypes.string
 };
 
-export default connect(mapStateToProps, { ...actionCreators })(AddToCart);
+export default connect(
+  mapStateToProps,
+  { ...actionCreators }
+)(AddToCart);

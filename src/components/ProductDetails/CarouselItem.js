@@ -1,12 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Div from 'hometown-components/lib/Div';
+import ReactImageZoom from 'react-image-zoom';
 
 const styles = require('./Carousel.scss');
 
-const CategoryItem = ({ image, name }) => (
+const props = {
+  width: 279,
+  scale: 1.5,
+  offset: { vertical: 0, horizontal: 10 },
+  zoomStyle:
+    'left: 0%;width: 279px;height: 279px;padding: 5px;box-shadow: 2px 2px 10px 0 rgba(0, 0, 0, 0.1);z-index: 1;',
+  zoomLensStyle: 'opacity: 0.5;background-color: gray;z-index:2;'
+};
+
+const CategoryItem = ({ image }) => (
   <Div className={styles.pdSliderItem}>
-    <img itemProp="image" src={image} alt={name} />
+    <ReactImageZoom itemProp="image" {...props} img={image} />
   </Div>
 );
 

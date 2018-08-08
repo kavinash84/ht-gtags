@@ -30,7 +30,11 @@ export default class WishlistContainer extends Component {
     loadingList: []
   };
   render() {
-    const { wishlist: { data }, wishListedSKUs, loadingList } = this.props;
+    const {
+      wishlist: { data },
+      wishListedSKUs,
+      loadingList
+    } = this.props;
     return (
       <Div>
         <Menu />

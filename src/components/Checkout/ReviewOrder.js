@@ -162,4 +162,7 @@ ReviewOrder.propTypes = {
   cardType: PropTypes.string,
   submitting: PropTypes.bool
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ReviewOrder);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ReviewOrder);
