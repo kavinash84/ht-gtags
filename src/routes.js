@@ -42,6 +42,7 @@ import Grievance from 'containers/Grievance/';
 import PaymentStatus from 'containers/PaymentStatus/';
 import PaymentSuccess from 'containers/PaymentSuccess/';
 import PaymentFailure from 'containers/PaymentFailure/';
+import BulkOrder from 'containers/BulkOrder/';
 
 const isAuthenticated = connectedReduxRedirect({
   redirectPath: '/login',
@@ -99,6 +100,7 @@ const routes = [
       { path: '/grievance', exact: true, component: Grievance },
       { path: '/payment-success', exact: true, component: PaymentSuccess },
       { path: '/payment-failed', exact: true, component: PaymentFailure },
+      { path: '/bulk-order', exact: true, component: BulkOrder },
       { path: '/payment-status/order/:status', exact: true, component: PaymentStatus },
       {
         path: '/:category/:subcategory1?/:subcategory2?/:subcategory3?/:subcategory4?/:subcategory5?',

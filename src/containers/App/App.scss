@@ -5,7 +5,7 @@
 
 /* ---- Common Classes ---- */
 :global {
-	
+
 	.container {
 		margin: 0 auto;
 		padding: 0 15px;
@@ -382,6 +382,11 @@
 			max-width: 293px !important;
 		}
 	}
+	.prodCarousel {
+		.slick-slide {
+			max-width: 293px;
+		}
+	}
 	.customModal {
 		padding: 3rem;
 	}
@@ -582,6 +587,16 @@
     margin-left: 15px;
 		margin-right: 10px;
 		top: 3px;
+	}
+
+	.form-control {
+		width: 100%;
+		height: 42px;
+		border-radius: 2px;
+		background-color: #FFF;
+		border: solid 1px rgba(151,151,151,0.47);
+		padding: 0 10px;
+		box-sizing: border-box;
 	}
 }
 

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-import Row from 'hometown-components/lib/Row';
 import Menu from 'containers/MenuNew/index';
 import MainSlider from 'components/MainSlider';
 import OfferRibbon from 'components/OfferRibbon';
@@ -74,9 +73,7 @@ export default class Home extends Component {
             />
           ))}
           {recentlyviewed.length > 0 && (
-            <Row display="block" mt="0.625rem" mb="0.625rem" mr="0">
-              <ProductCarousel title="Related Products" data={recentlyviewed} />
-            </Row>
+            <ProductCarousel title="Recently Viewed" data={recentlyviewed} length={recentlyviewed.length} />
           )}
           <StoresCarousel cities={cities} />
         </div>
