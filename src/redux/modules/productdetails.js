@@ -1,4 +1,5 @@
 import { PRODUCT_DETAIL, PRODUCT_DELIVERY_DETAILS } from '../../helpers/apiUrls';
+import { setRecentlyViewed } from './recentlyviewed';
 
 const LOAD_PRODUCT_DESCRIPTION = 'productdetails/LOAD_PRODUCT_DESCRIPTION';
 const LOAD_PRODUCT_DESCRIPTION_SUCCESS = 'productdetails/LOAD_PRODUCT_DESCRIPTION_SUCCESS';
@@ -73,11 +74,12 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 /* need to dispatch an action to set recently veiwed products */
-export const loadProductDescription = (sku, pincode) => ({
+export const loadProductDescription = (sku, pincode) => dispatch => ({
   types: [LOAD_PRODUCT_DESCRIPTION, LOAD_PRODUCT_DESCRIPTION_SUCCESS, LOAD_PRODUCT_DESCRIPTION_FAIL],
   promise: async ({ client }) => {
     try {
       const response = await client.get(`${PRODUCT_DETAIL}/${sku}/${pincode}`);
+      await dispatch(setRecentlyViewed(sku));
       response.sku = sku;
       return response;
     } catch (error) {

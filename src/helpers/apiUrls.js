@@ -25,6 +25,7 @@ export const RESET_PASSWORD = 'tesla/users/forgot-password/reset';
 export const PRODUCT_DETAIL = 'tesla/product';
 export const PRODUCT_DELIVERY_DETAILS = 'tesla/product/delivery-detail';
 export const RELATED_PRODUCTS = 'tesla/product/related-products';
+export const RECENTLY_VEIWED = 'tesla/recently-viewed';
 
 /* Category Page */
 

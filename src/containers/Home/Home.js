@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
+import Row from 'hometown-components/lib/Row';
 import Menu from 'containers/MenuNew/index';
 import MainSlider from 'components/MainSlider';
 import OfferRibbon from 'components/OfferRibbon';
@@ -15,7 +16,7 @@ import { getCities } from '../../selectors/homepage';
 
 @connect(({
   homepage: {
-    categories, banners, products, hashtags, offerstrip
+    categories, banners, products, hashtags, offerstrip, recentlyviewed
   }, stores
 }) => ({
   banners: banners.data,
@@ -23,7 +24,8 @@ import { getCities } from '../../selectors/homepage';
   homepageProducts: products.data,
   cities: getCities(stores),
   hashtags: hashtags.data,
-  offerstrip: offerstrip.data && offerstrip.data.items
+  offerstrip: offerstrip.data && offerstrip.data.items,
+  recentlyviewed: recentlyviewed.data
 }))
 export default class Home extends Component {
   state = {
@@ -36,7 +38,7 @@ export default class Home extends Component {
   };
   render() {
     const {
-      homepageCategories, homepageProducts, banners, cities, hashtags, offerstrip
+      homepageCategories, homepageProducts, banners, cities, hashtags, offerstrip, recentlyviewed
     } = this.props;
     const { showRibbon } = this.state;
     return (
@@ -71,6 +73,11 @@ export default class Home extends Component {
               data={products.values}
             />
           ))}
+          {recentlyviewed.length > 0 && (
+            <Row display="block" mt="0.625rem" mb="0.625rem" mr="0">
+              <ProductCarousel title="Related Products" data={recentlyviewed} />
+            </Row>
+          )}
           <StoresCarousel cities={cities} />
         </div>
         <Footer />
@@ -85,7 +92,8 @@ Home.defaultProps = {
   banners: [],
   cities: [],
   hashtags: [],
-  offerstrip: {}
+  offerstrip: {},
+  recentlyviewed: []
 };
 
 Home.propTypes = {
@@ -94,5 +102,6 @@ Home.propTypes = {
   banners: PropTypes.array,
   cities: PropTypes.array,
   hashtags: PropTypes.array,
-  offerstrip: PropTypes.object
+  offerstrip: PropTypes.object,
+  recentlyviewed: PropTypes.array
 };
