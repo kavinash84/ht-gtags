@@ -10,14 +10,6 @@ export default class Filters extends Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
-
-  // setFilter = (key, history) => e => {
-  //   e.preventDefault();
-  //   console.log(key);
-  //   // make a helper fun and get the url to push from the keys
-  //   // history.push(`${key}`);
-  //   history.push(makeUrl(1, 2));
-  // };
   render() {
     const {
       title, checkbox, display, data, onclick

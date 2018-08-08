@@ -14,7 +14,6 @@ import Footer from 'components/Footer';
 import { getSKUList } from 'selectors/wishlist';
 import {
   // load as loadListing,
-  loadSearchQuery,
   isLoaded as isInitialListLoaded,
   setCategoryQuery,
   clearPreviousList,
@@ -43,8 +42,7 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
 @provideHooks({
   fetch: async ({ store: { dispatch, getState }, params, location }) => {
     const {
-      // products: { sort },
-      pincode: { selectedPincode },
+      pincode: { selectedPincode, city },
       pagination: { page }
     } = getState();
     let query;
@@ -61,23 +59,37 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
       loadResults = loadUrlQuery(encodeCategory(params), hashQuery, pincode);
     } else if (location.pathname === '/search/') {
       /* eslint prefer-destructuring: ["error", {AssignmentExpression: {array: false}}] */
-      query = location.search.split('?q=')[1];
-      loadResults = loadSearchQuery(query, currentPage, pincode);
+      let searchquery;
+      [, searchquery] = location.search.split('q=');
+      if (searchquery) {
+        [searchquery] = searchquery.split('filters=');
+        [searchquery] = searchquery.split('&');
+      }
+      query = encodeCategory({ category: 'search' });
+      [, filters] = location.search.split('filters=');
+      loadResults = applyFilter({
+        searchquery,
+        query,
+        pincode,
+        filters
+      });
     } else {
       query = encodeCategory(params);
-      [, filters] = location.search.split('?filters=');
-      // loadResults = loadListing(query, currentPage, sort, pincode, filters);
-      // [, filters] = location.search.split('?filters=');
-      loadResults = applyFilter({ query, pincode, filters });
-      dispatch(loadResults).catch(() => null);
+      [, filters] = location.search.split('filters=');
+      loadResults = applyFilter({
+        query,
+        pincode,
+        filters,
+        city
+      });
     }
     if (currentPage === 1) await dispatch(resetPagination());
     if (!isInitialListLoaded(getState(), query) || currentPage !== page) {
       await dispatch(clearPreviousList());
       await dispatch(setCurrentPage(currentPage));
       await dispatch(clearPreviousSort());
-      await dispatch(loadResults).catch(() => null);
     }
+    await dispatch(loadResults).catch(() => null);
     await dispatch(setCategoryQuery(query, pincode));
     await dispatch(setCategory(query));
   }
@@ -178,7 +190,9 @@ export default class Listing extends Component {
       seoInfo
     } = this.props;
     let page;
-    const { location: { search, pathname } } = history;
+    const {
+      location: { search, pathname }
+    } = history;
     if (search !== '') {
       page = search.replace('?', '').split('page=')[1];
     }

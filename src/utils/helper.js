@@ -34,7 +34,7 @@ export const formFilterLink = (key, selected) => {
   return `${encode}/?${splitLink[1]}`;
 };
 
-export const formFilterLink2 = (key, name, b64, category, value, selected) => {
+export const formFilterLink2 = (key, name, b64, category, value, selected, urlquery = '') => {
   const cleanTail = url => {
     if (url[url.length - 1] === '/') {
       return url.substring(0, url.length - 1);
@@ -44,7 +44,7 @@ export const formFilterLink2 = (key, name, b64, category, value, selected) => {
   const cleanColor = url => url.split('color');
 
   const x = JSON.parse(atob(category)).params.join('/');
-
+  if (urlquery) urlquery = `q=${urlquery}&`;
   let obj64 = {
     category: `/${x}`,
     colors: '',
@@ -52,7 +52,7 @@ export const formFilterLink2 = (key, name, b64, category, value, selected) => {
     discount: '',
     material: '',
     pageno: '',
-    queryparameters: '',
+    urlquery,
     sortby: ''
   };
   if (b64) {
@@ -81,7 +81,7 @@ export const formFilterLink2 = (key, name, b64, category, value, selected) => {
       pageno: ''
     };
     b64 = encodeUrlQuery(obj64);
-    return `${obj64.category}/?filters=${b64}`;
+    return `${obj64.category}/?${urlquery}filters=${b64}`;
   }
   if (name === 'Price') {
     const [, price] = key.split('?price=');
@@ -92,7 +92,7 @@ export const formFilterLink2 = (key, name, b64, category, value, selected) => {
       pageno: ''
     };
     b64 = encodeUrlQuery(obj64);
-    return `${obj64.category}/?filters=${b64}`;
+    return `${obj64.category}/?${urlquery}filters=${b64}`;
   }
   if (name === 'Discount') {
     const [, discount] = key.split('discount_percent=');
@@ -103,7 +103,7 @@ export const formFilterLink2 = (key, name, b64, category, value, selected) => {
       pageno: ''
     };
     b64 = encodeUrlQuery(obj64);
-    return `${obj64.category}/?filters=${b64}`;
+    return `${obj64.category}/?${urlquery}filters=${b64}`;
   }
   if (name === 'Material') {
     const [, material] = key.split('z_main_material=');
@@ -114,7 +114,7 @@ export const formFilterLink2 = (key, name, b64, category, value, selected) => {
       pageno: ''
     };
     b64 = encodeUrlQuery(obj64);
-    return `${obj64.category}/?filters=${b64}`;
+    return `${obj64.category}/?${urlquery}filters=${b64}`;
   }
   if (name === 'SortBy') {
     const sortby = key || '&sort=popularity&dir=desc';
@@ -125,7 +125,7 @@ export const formFilterLink2 = (key, name, b64, category, value, selected) => {
       sortBy
     };
     b64 = encodeUrlQuery(obj64);
-    return `${obj64.category}/?filters=${b64}`;
+    return `${obj64.category}/?${urlquery}filters=${b64}`;
   }
   if (name === 'Pagination') {
     const pageno = `&page=${key}` || null;
@@ -134,7 +134,10 @@ export const formFilterLink2 = (key, name, b64, category, value, selected) => {
       pageno
     };
     b64 = encodeUrlQuery(obj64);
-    return `?filters=${b64}${pageno}`;
+    return `?${urlquery}filters=${b64}${pageno}`;
+  }
+  if (name === 'reset') {
+    return obj64.category;
   }
 };
 
@@ -143,7 +146,7 @@ export const getParamsDetailFromLink = (query, filter) => {
   if (!filter) {
     return {
       modifiedQuery,
-      queryparameters: '',
+      urlquery: '',
       price: '',
       discount: '',
       material: '',
@@ -163,12 +166,12 @@ export const getParamsDetailFromLink = (query, filter) => {
   }
 
   const {
-    queryparameters, material, price, discount, sortby, sortBy, pageno
+    urlquery, material, price, discount, sortby, sortBy, pageno
   } = x;
   return {
     query,
     modifiedQuery,
-    queryparameters,
+    urlquery,
     price,
     discount,
     material,
