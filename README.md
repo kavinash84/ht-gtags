@@ -21,6 +21,12 @@ npm run build
 npm run start 
 ```
 
+## Pm2 configuration
+
+```bash
+pm2 start npm --name "hometown-desktop" -i max -- start
+```
+
 ## Port Details
 
 - Runs production server on 8084 prot
