@@ -1,8 +1,8 @@
 import { RECENTLY_VEIWED } from 'helpers/apiUrls';
 
-const LOAD = 'hompageCategories/LOAD';
-const LOAD_SUCCESS = 'hompageCategories/LOAD_SUCCESS';
-const LOAD_FAIL = 'hompageCategories/LOAD_FAIL';
+const LOAD = 'recentlyviewed/LOAD';
+const LOAD_SUCCESS = 'recentlyviewed/LOAD_SUCCESS';
+const LOAD_FAIL = 'recentlyviewed/LOAD_FAIL';
 
 const initialState = {
   loaded: false,
