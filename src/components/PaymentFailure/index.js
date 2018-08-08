@@ -6,9 +6,12 @@ import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
 import Heading from 'hometown-components/lib/Heading';
+import Img from 'hometown-components/lib/Img';
 import Text from 'hometown-components/lib/Text';
 import * as actionCreators from 'redux/modules/cart';
 import TitleBar from '../TitleBar';
+
+const PaymentFailedIcon = require('../../../static/failed.svg');
 
 const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
 
@@ -24,19 +27,20 @@ const mapStateToProps = ({ pincode, cart, app }) => ({
 const PaymentFailure = () => (
   <Div type="block">
     <TitleBar title="Payment Failed" />
-    <Section display="block" pt="2rem" pb="2.5rem" mb="0" height="auto">
-      <Container type="container" pr="0" pl="0">
+    <Container type="container" pr="0" pl="0">
+      <Section bg="sectionBgDark" display="block" mt="3rem" mb="3rem" p="1.5rem" pt="1.5rem" pb="1.5rem" height="auto">
         <Row display="block" mr="0" ml="0">
           <Div col="12">
-            <Heading>Error During Payment</Heading>
-            <Text>Dear Customer,</Text>
-            <Text>
-              The Payment for your order no. <b>2222</b> was not successfull.
+            <Img width="4.5rem" mr="1rem" float="left" src={PaymentFailedIcon} alt="Test" />
+            <Heading mt="0">Error During Payment</Heading>
+            <Text fontSize="1rem" mb="0">
+              Dear Customer, The Payment for your order no. <b>2222</b>
+              was not successfull.
             </Text>
           </Div>
         </Row>
-      </Container>
-    </Section>
+      </Section>
+    </Container>
   </Div>
 );
 

@@ -9,8 +9,11 @@ import ShippedTo from 'hometown-components/lib/ShippedTo';
 import Span from 'hometown-components/lib/Span';
 import Heading from 'hometown-components/lib/Heading';
 import Text from 'hometown-components/lib/Text';
+import Img from 'hometown-components/lib/Img';
 import * as actionCreators from 'redux/modules/cart';
 import TitleBar from '../TitleBar';
+
+const PaymentSuccessIcon = require('../../../static/success.svg');
 
 const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
 
@@ -26,29 +29,29 @@ const mapStateToProps = ({ pincode, cart, app }) => ({
 const PaymentSuccess = () => (
   <Div type="block">
     <TitleBar title="Payment Success" />
-    <Section display="block" pt="2rem" pb="0.5rem" mb="0" height="auto">
-      <Container type="container" pr="0" pl="0">
+    <Container type="container" pr="0" pl="0">
+      <Section bg="sectionBgDark" display="block" mt="3rem" p="1.5rem" pt="1.5rem" pb="1.5rem" mb="0" height="auto">
         <Row display="block" mr="0" ml="0">
           <Div col="12">
-            <Heading>Thank you for placing your order</Heading>
-            <Text>
+            <Img width="4.5rem" mr="1rem" float="left" src={PaymentSuccessIcon} alt="Test" />
+            <Heading mt="0">Thank you for placing your order.</Heading>
+            <Text fontSize="1rem" mb="0">
               Your order number is. <b>2222</b> placed on
               <Span>01-12-2017</Span>. You will shortly receive an e-mailand SMS confirming your order.
             </Text>
-            <Text>When the item(s) are shipped, you will receive an e-mail and SMS with the Courier Tracking ID.</Text>
           </Div>
         </Row>
-      </Container>
-    </Section>
+      </Section>
+    </Container>
     <Section display="flex" pt="3rem" pb="2.5rem" mb="0" height="auto">
       <Container type="container" pr="0" pl="0">
         <Row display="block" mr="0" ml="0">
-          <Div col="2" pr="2.5rem" pt="0">
+          <Div col="3" pr="1.5rem" pt="0">
             <ShippedTo name="ankit Parsana" address="Gujarat" city="Gujarat" pincode="360002" state="Gujarat" />
           </Div>
-          <Div col="10" pr="2.5rem" pt="0">
-            <Row display="block" mr="0" ml="0" mb="0.3125rem">
-              <Heading fontSize="1.25rem" color="textDark" mb="0px" mt="0px" fontWeight="300">
+          <Div col="9" pt="0">
+            <Row display="block" mr="0" ml="0" mb="1rem">
+              <Heading fontSize="1.25rem" color="textDark" mb="0px" mt="0px" fontWeight="400">
                 Order Information
               </Heading>
             </Row>
