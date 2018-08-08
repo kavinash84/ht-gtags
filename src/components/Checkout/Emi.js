@@ -132,7 +132,10 @@ const EMI = ({
   );
 };
 
-export default connect(mapStateToProps, null)(EMI);
+export default connect(
+  mapStateToProps,
+  null
+)(EMI);
 
 EMI.propTypes = {
   selectedGateway: PropTypes.string.isRequired,

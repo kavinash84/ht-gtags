@@ -17,7 +17,10 @@ import { PINCODE } from '../../helpers/Constants';
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState }, params }) => {
-    const { productdetails: { currentsku }, pincode: { selectedPincode } } = getState();
+    const {
+      productdetails: { currentsku },
+      pincode: { selectedPincode }
+    } = getState();
     const pincode = selectedPincode || PINCODE;
     if (currentsku !== params.skuId) {
       await dispatch(loadProductDescription(params.skuId, pincode));
@@ -25,7 +28,10 @@ import { PINCODE } from '../../helpers/Constants';
   },
   defer: ({ store: { dispatch, getState }, params }) => {
     const {
-      productdetails: { currentsku }, pincode: { selectedPincode }, colorproducts, reviews
+      productdetails: { currentsku },
+      pincode: { selectedPincode },
+      colorproducts,
+      reviews
     } = getState();
     const pincode = selectedPincode || PINCODE;
     if (currentsku !== params.skuId || reviews.data.length === 0) {

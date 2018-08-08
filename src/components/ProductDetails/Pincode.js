@@ -13,7 +13,9 @@ const styles = require('./Pincode.scss');
 const ArrowIcon = require('../../../static/arrow_forward.svg');
 
 const onChange = dispatcher => e => {
-  const { target: { value } } = e;
+  const {
+    target: { value }
+  } = e;
   dispatcher(value);
 };
 
@@ -83,4 +85,7 @@ Pincode.propTypes = {
   simpleSku: PropTypes.string
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Pincode);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Pincode);

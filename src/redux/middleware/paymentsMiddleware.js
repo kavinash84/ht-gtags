@@ -2,7 +2,9 @@ import { setSelectedGatewayInSession, setWalletType, setEmiOption } from '../mod
 
 export default function paymentsMiddleware() {
   return ({ dispatch, getState }) => next => action => {
-    const { app: { sessionId } } = getState();
+    const {
+      app: { sessionId }
+    } = getState();
     const { type } = action;
     if (type === 'paymentOptions/SELECTED_PAYMENT_METHOD') {
       const { gateway, session } = action;
@@ -17,7 +19,13 @@ export default function paymentsMiddleware() {
       if (gateway === 'Emi') {
         const { emiCode } = data;
         if (emiCode) {
-          const { paymentoptions: { paymentMethodDetails: { Emi: { emiBank } } } } = getState();
+          const {
+            paymentoptions: {
+              paymentMethodDetails: {
+                Emi: { emiBank }
+              }
+            }
+          } = getState();
           const months = emiCode.match(/\d+/)[0].replace(/^0/, '');
           dispatch(setEmiOption(emiBank, months, sessionId));
         }

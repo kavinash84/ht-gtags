@@ -188,4 +188,7 @@ PaymentOptions.propTypes = {
   submitting: PropTypes.bool
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PaymentOptions);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PaymentOptions);

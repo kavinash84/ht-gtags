@@ -225,4 +225,9 @@ ShippingForm.propTypes = {
   hidden: PropTypes.bool.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(ShippingForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  null,
+  { withRef: true }
+)(ShippingForm);

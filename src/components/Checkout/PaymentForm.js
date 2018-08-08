@@ -23,7 +23,10 @@ class PaymentForm extends Component {
 
   componentDidUpdate() {
     if (this.props.data && this.props.data.form_data) {
-      const { data: { form_data: formData }, error } = this.props;
+      const {
+        data: { form_data: formData },
+        error
+      } = this.props;
       if (formData && !error) {
         console.log(this.paymentForm);
         this.paymentForm.submit();
@@ -34,7 +37,11 @@ class PaymentForm extends Component {
   render() {
     const { data } = this.props;
     if (data && data.form_data) {
-      const { data: { form_data: { action, fields } } } = this.props;
+      const {
+        data: {
+          form_data: { action, fields }
+        }
+      } = this.props;
       if (!action && !fields) {
         return <span />;
       }

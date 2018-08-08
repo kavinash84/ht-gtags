@@ -119,4 +119,7 @@ CardForm.propTypes = {
   details: PropTypes.object.isRequired,
   cardType: PropTypes.string
 };
-export default connect(mapStateToProps, mapDispatchToProps)(CardForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CardForm);

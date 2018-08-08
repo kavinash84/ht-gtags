@@ -223,4 +223,9 @@ BillingForm.propTypes = {
   setStateError: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(BillingForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  null,
+  { withRef: true }
+)(BillingForm);

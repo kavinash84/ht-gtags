@@ -44,7 +44,9 @@ export const load = () => (dispatch, store) => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
   promise: async ({ client }) => {
     try {
-      const { app: { sessionId } } = store.getState();
+      const {
+        app: { sessionId }
+      } = store.getState();
       const response = await client.get(`${PAYMENT_STATUS_API}/${sessionId}`);
       return response;
     } catch (error) {
