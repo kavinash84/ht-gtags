@@ -20,7 +20,7 @@ const BreadCrumb = ({ categoryDetails }) => {
             </li>
           );
         }
-        return <div />;
+        return null;
       })}
     </ul>
   );
