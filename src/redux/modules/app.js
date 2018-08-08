@@ -4,6 +4,7 @@ const LOAD = 'app/LOAD';
 const LOAD_SUCCESS = 'app/LOAD_SUCCESS';
 const LOAD_FAIL = 'app/LOAD_FAIL';
 
+const SET_CITY = 'app/SET_CITY';
 const initialState = {
   loaded: false,
   sessionId: '',
@@ -33,6 +34,11 @@ export default function reducer(state = initialState, action = {}) {
         loaded: false,
         error: action.error
       };
+    case SET_CITY:
+      return {
+        ...state,
+        city: action.query.city
+      };
     default:
       return state;
   }
@@ -51,4 +57,9 @@ export const generateSession = pincode => ({
       return error;
     }
   }
+});
+
+export const setCity = query => ({
+  type: SET_CITY,
+  query
 });
