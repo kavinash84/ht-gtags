@@ -4,7 +4,8 @@ import {
   HOMEPAGE_TOP_SELLING,
   CATEGORY_MENU,
   HASHTAGS,
-  STATIC_BLOCK
+  STATIC_BLOCK,
+  RECENTLY_VEIWED
 } from 'helpers/apiUrls';
 
 const LOAD = 'hompageCategories/LOAD';
@@ -77,4 +78,9 @@ export const loadOfferStrip = () => ({
 export const loadFooter = () => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
   promise: ({ client }) => client.get(`${STATIC_BLOCK}/footer_react`)
+});
+
+export const loadRecentlyViewed = () => ({
+  types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
+  promise: ({ client }) => client.get(`${RECENTLY_VEIWED}`)
 });

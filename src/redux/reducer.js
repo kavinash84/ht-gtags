@@ -30,6 +30,7 @@ import coupon from './modules/coupon';
 import myaddress from './modules/myaddress';
 import relatedproducts from './modules/relatedproducts';
 import paymentstatus from './modules/paymentstatus';
+import recentlyviewed from './modules/recentlyviewed';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -49,7 +50,8 @@ export default function createReducers(asyncReducers) {
       hashtags: homepage,
       products: homepage,
       offerstrip: homepage,
-      footer: homepage
+      footer: homepage,
+      recentlyviewed: homepage
     }),
     category,
     stores,
@@ -72,6 +74,7 @@ export default function createReducers(asyncReducers) {
     myaddress,
     relatedproducts,
     paymentstatus,
+    recentlyviewed,
     ...asyncReducers
   };
 }
