@@ -153,7 +153,7 @@ class ProductDetails extends React.Component {
                 <ProductDesc desc={attributes.description} />
                 <Specs specs={groupedAttributes} pincode={pincode.selectedPincode} />
                 <Reviews col="6" reviewItems={reviews.data} pr="2.5rem" />
-                <AddReview col="8" sku={groupedattributes.id_catalog_config} onClickSubmit={this.addReview} />
+                <AddReview col="8" catalogId={groupedattributes.id_catalog_config} onClickSubmit={this.addReview} />
               </Div>
               <Div col="3">
                 <ServiceDetails
