@@ -16,6 +16,8 @@ var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./w
 
 var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+const CompressionPlugin = require("compression-webpack-plugin");
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   devtool: 'source-map',
@@ -204,6 +206,13 @@ module.exports = {
       filename: 'index.html',
       template: 'src/pwa.js'
     }),
+
+    /* gzip compression */ 
+    new CompressionPlugin({
+      test: /\.js|.css|.scss/
+    }),
+    /* Bundle analyzer */
+    // new BundleAnalyzerPlugin(),
 
     new SWPrecacheWebpackPlugin({
       cacheId: 'react-redux-universal-hot-example',

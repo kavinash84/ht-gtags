@@ -15,6 +15,7 @@ var ReactLoadablePlugin = require('react-loadable/webpack').ReactLoadablePlugin;
 // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools'));
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 var babelrc = fs.readFileSync('./.babelrc');
 var babelrcObject = {};
@@ -224,7 +225,8 @@ var webpackConfig = module.exports = {
           sourceMap: true
         }
       }
-    ])
+    ]),
+    // new BundleAnalyzerPlugin() // Bundle analyzer
   ]
 };
 
