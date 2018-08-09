@@ -65,6 +65,7 @@ export default class QuickView extends Component {
   };
 
   setImage = e => {
+    e.preventDefault();
     this.setState({ currentImage: parseInt(e.target.id, 10) }, this.setDisable);
   };
 
@@ -169,7 +170,11 @@ export default class QuickView extends Component {
               <SlickSlider settings={adjustSlides(images.length)}>
                 {images.map((image, index) => (
                   <div key={String(index)}>
-                    <button className={styles.thumbBtn} onClick={this.setImage} id={index}>
+                    <button
+                      className={`${styles.thumbBtn} ${index === currentImage && styles.active}`}
+                      onClick={this.setImage}
+                      id={index}
+                    >
                       <img className={styles.sliderImage} src={image.path} alt="" id={index} />
                     </button>
                   </div>
