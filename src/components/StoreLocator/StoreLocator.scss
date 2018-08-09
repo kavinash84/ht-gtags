@@ -7,14 +7,19 @@
   width: 400px !important;
   padding: 25px;
   position: absolute !important;
-  top: 2px;
+  top: 0;
   left: 100px;
-  height: calc(100% - 9px);
+  height: 100%;
   .filterDD {
     border: 1px solid #dddfe2;
     border-radius: 2px;
     box-shadow: inset 0 -2px 0 0 #f5f5f5;
     padding: .625rem .75rem !important;
+    &:hover {
+      .arrow {
+        top: 16px !important;
+      }
+    }
   }
   .filterBlock {
     width: 100%;
@@ -24,6 +29,15 @@
   }
   .dropDown {
     width: 100%;
+    label {
+      text-transform: uppercase;
+    }
+  }
+  .arrow {
+    position: absolute;
+    right: 10px;
+    top: 13px;
+    line-height: 0.5;
   }
   .cistList {
     height: calc(100% - 32px);
