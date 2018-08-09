@@ -215,7 +215,7 @@ module.exports = {
     // new BundleAnalyzerPlugin(),
 
     new SWPrecacheWebpackPlugin({
-      cacheId: 'react-redux-universal-hot-example',
+      cacheId: 'beta.hometown.in',
       filename: 'service-worker.js',
       maximumFileSizeToCacheInBytes: 8388608,
 
