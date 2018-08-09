@@ -60,11 +60,8 @@ class StoreLocator extends React.Component {
     });
   };
 
-  handleSelectCity = city => {
-    let currentList = this.state.currentList.filter(item => item.city === city);
-    if (currentList.length === 0) {
-      currentList = mapData;
-    }
+  handleSelectCity = (city, list) => {
+    const currentList = list.filter(item => item.city === city);
     let lat = 0;
     currentList.map(item => {
       lat += item.position.lat;
@@ -92,9 +89,9 @@ class StoreLocator extends React.Component {
     } = this.state;
     //
     let stateList = mapData.map(item => item.state);
-    stateList = stateList.filter((item, pos) => stateList.indexOf(item) === pos);
-    let cityList = currentList.map(item => item.city);
+    let cityList = mapData.filter(item => item.state === currentState).map(item => item.city);
     cityList = cityList.filter((item, pos) => cityList.indexOf(item) === pos);
+    stateList = stateList.filter((item, pos) => stateList.indexOf(item) === pos);
     //
     return (
       <Div type="block">
@@ -171,7 +168,7 @@ class StoreLocator extends React.Component {
                       <ul>
                         {cityList.map(item => (
                           <li key={item}>
-                            <button onClick={() => this.handleSelectCity(item)}>
+                            <button onClick={() => this.handleSelectCity(item, mapData)}>
                               <Label fontSize="0.75em" ml="0.625rem">
                                 {item}
                               </Label>
