@@ -13,7 +13,11 @@ class ScrollToTop extends React.Component {
       window.addEventListener('scroll', this.handleScroll, false);
     }
   }
-
+  componentWillUnmount() {
+    if (window) {
+      window.removeEventListener('scroll', this.handleScroll, false);
+    }
+  }
   handleScroll = () => {
     const { threshold } = this.props;
     if (window.pageYOffset < threshold) {
