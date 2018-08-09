@@ -6,6 +6,8 @@ import Heading from 'hometown-components/lib/Heading';
 import Span from 'hometown-components/lib/Span';
 import Text from 'hometown-components/lib/Text';
 import AddToCart from 'components/AddToCart';
+import { calculateSavings, calculateDiscount } from 'utils/helper';
+import { formatAmount } from 'utils/formatters';
 import SlickSlider from '../SlickSlider';
 
 const styles = require('./QuickView.scss');
@@ -146,18 +148,20 @@ export default class QuickView extends Component {
               </Heading>
               <Text>
                 <Span color="rgba(0, 0, 0, 0.6)" fontWeight="600" fontSize="1.5em" mr="1rem">
-                  Rs. {price}
+                  Rs. {(discPrice && formatAmount(discPrice)) || (price && formatAmount(price))}
                 </Span>
                 <Span fontWeight="400" color="rgba(0, 0, 0, 0.6)" fontSize="1.125em">
-                  <s>Rs. {discPrice}</s>
+                  <s>Rs. {formatAmount(price)}</s>
                 </Span>
               </Text>
-              <Text color="rgba(0, 0, 0, 0.6)" fontWeight="700" fontSize="0.857rem" mb="0">
-                Savings:{' '}
-                <Span color="rgba(0, 0, 0, 0.6)" fontSize="0.857rem" va="bottom">
-                  Rs. 2,000 ({saving}%)
-                </Span>
-              </Text>
+              {saving && (
+                <Text color="rgba(0, 0, 0, 0.6)" fontWeight="700" fontSize="0.857rem" mb="0">
+                  Savings:{' '}
+                  <Span color="rgba(0, 0, 0, 0.6)" fontSize="0.857rem" va="bottom">
+                    Rs.{formatAmount(calculateSavings(price, discPrice))} ({calculateDiscount(price, discPrice)}%)
+                  </Span>
+                </Text>
+              )}
               <Text color="rgba(0, 0, 0, 0.6)" fontWeight="700" fontSize="0.857rem" mb="1rem" mt="0.3125rem">
                 EMI:{' '}
                 <Span color="rgba(0, 0, 0, 0.6)" fontSize="0.857rem" va="bottom">
