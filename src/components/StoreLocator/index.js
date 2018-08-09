@@ -7,8 +7,8 @@ import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
 import Button from 'hometown-components/lib/Buttons';
 import { Label } from 'hometown-components/lib/Label';
+import PropTypes from 'prop-types';
 import Map from './Map';
-import mapData from './mapData';
 
 const styles = require('./StoreLocator.scss');
 
@@ -16,6 +16,12 @@ const styles = require('./StoreLocator.scss');
   ...storelocator
 }))
 class StoreLocator extends React.Component {
+  static propTypes = {
+    data: PropTypes.object
+  };
+  static defaultProps = {
+    data: {}
+  };
   state = {
     position: { lat: 21.821027, lng: 78.415743 }, // Default Centre of
     zoomlevel: 5,
@@ -25,12 +31,14 @@ class StoreLocator extends React.Component {
     currentCity: null
   };
   componentWillMount() {
+    const { data } = this.props;
+    const mapData = data.items.text;
     this.setState({
       currentList: mapData
     });
   }
 
-  handleClick = value => {
+  handleClick = (value, mapData) => {
     const details = mapData.filter(item => item.store === value)[0];
     const { position } = details;
     this.setState({
@@ -40,7 +48,7 @@ class StoreLocator extends React.Component {
     });
   };
 
-  handleSelectState = state => {
+  handleSelectState = (state, mapData) => {
     const currentList = mapData.filter(item => item.state === state);
     let lat = 0;
     currentList.map(item => {
@@ -88,7 +96,8 @@ class StoreLocator extends React.Component {
   };
 
   render() {
-    // const { data: mapData } = this.props;
+    const { data } = this.props;
+    const mapData = data.items.text;
     const {
       position, zoomlevel, open, currentList, currentState, currentCity
     } = this.state;
@@ -142,7 +151,7 @@ class StoreLocator extends React.Component {
                     <ul>
                       {stateList.map(item => (
                         <li key={item}>
-                          <button onClick={() => this.handleSelectState(item)}>
+                          <button onClick={() => this.handleSelectState(item, mapData)}>
                             <Label fontSize="0.75em" ml="0.625rem">
                               {item}
                             </Label>
@@ -189,7 +198,7 @@ class StoreLocator extends React.Component {
                   <ul>
                     {currentList.map((item, index) => (
                       <li key={String(index)}>
-                        <button onClick={() => this.handleClick(item.store)}>
+                        <button onClick={() => this.handleClick(item.store, mapData)}>
                           <Label fontSize="1rem" mt="0" ml="0">
                             {item.store}
                           </Label>
