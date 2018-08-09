@@ -44,6 +44,10 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
+const setSessionID = ({ client }) => session => {
+  client.setSessionId(session);
+};
+
 export const isLoaded = globalState => globalState.app && globalState.app.loaded;
 
 export const generateSession = pincode => ({
@@ -51,6 +55,7 @@ export const generateSession = pincode => ({
   promise: async ({ client }) => {
     try {
       const response = await client.get(`${SESSION_API}/${pincode}`);
+      await setSessionID({ client })(response.session);
       return response;
     } catch (error) {
       console.log('Unable to generate session');
