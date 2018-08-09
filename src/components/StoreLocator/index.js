@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Heading from 'hometown-components/lib/Heading';
@@ -11,6 +12,9 @@ import mapData from './mapData';
 
 const styles = require('./StoreLocator.scss');
 
+@connect(({ storelocator }) => ({
+  ...storelocator
+}))
 class StoreLocator extends React.Component {
   state = {
     position: { lat: 21.821027, lng: 78.415743 }, // Default Centre of
@@ -84,6 +88,7 @@ class StoreLocator extends React.Component {
   };
 
   render() {
+    // const { data: mapData } = this.props;
     const {
       position, zoomlevel, open, currentList, currentState, currentCity
     } = this.state;

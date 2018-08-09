@@ -141,7 +141,7 @@ const mapData = [
     }
   },
   {
-    city: 'HYDERABAD',
+    city: 'Hyderabad',
     store: 'NAVAYUGAVIZVA',
     address: '4TH FLOR,,GACHIBOWLI VILAGE,RANGA REDDY DIS.,SERILINGAMPALLY MANDAL',
     pincode: '500032',
@@ -155,7 +155,7 @@ const mapData = [
     }
   },
   {
-    city: 'KOCHI',
+    city: 'Kochi',
     store: 'CENTRE SQUARE',
     address: ' NEAR HOTEL ABAD PLAZA,M. G. ROAD',
     pincode: '682035',
@@ -225,7 +225,7 @@ const mapData = [
     }
   },
   {
-    city: 'LUCKNOW',
+    city: 'Lucknow',
     store: 'Phoenix United Mall',
     address: 'Kanpur Road,3rd Floor, CP 8, Sector B, LDA Colony, Lucknow',
     pincode: '226012',
@@ -267,7 +267,7 @@ const mapData = [
     }
   },
   {
-    city: 'MYSORE',
+    city: 'Mysore',
     store: 'Big Bazzar Super Centre',
     address: 'Jhansi Laxmi Bai Road,Chamrajpuram',
     pincode: '570004',
@@ -281,7 +281,7 @@ const mapData = [
     }
   },
   {
-    city: 'NAGPUR',
+    city: 'Nagpur',
     store: 'Landmark Tower',
     address: 'Wardha Road ,Above Big Bazaar.',
     pincode: '440010',
@@ -295,7 +295,7 @@ const mapData = [
     }
   },
   {
-    city: 'NEW DELHI',
+    city: 'New Delhi',
     store: 'AMBIENCE MALL',
     address: 'ROHINI CENTRAL,PLOT NO.2B2,TWIN DIRSTICT CENTRE,ROHINI,SECTOR 10',
     pincode: '110085',
