@@ -65,9 +65,12 @@ const CardForm = ({
         onChange={onChangeDetails(setPaymentDetails, gateway)}
         onBlur={onGetCardType(getCardType, sessionId, gateway)}
       />
-      {cardType === 'VISA' && <Img src={visaIcon} alt="visaCard" />}
-      {cardType === 'MAST' && <Img src={mcIcon} alt="visaCard" />}
-      {cardType === 'MAESTRO' && <Img src={maestroIcon} alt="visaCard" />}
+      {cardType === 'visa' && <Img src={visaIcon} alt="visaCard" />}
+      {cardType === 'master' && <Img src={mcIcon} alt="masterCard" />}
+      {cardType === 'maestro' && <Img src={maestroIcon} alt="maestroCard" />}
+      {cardType === 'amex' && <Img src={maestroIcon} alt="maestroCard" />}
+      {cardType === 'discover' && <Img src={maestroIcon} alt="discoverCard" />}
+      {cardType === 'diners' && <Img src={maestroIcon} alt="amexCard" />}
     </Div>
     <Div col="2">
       <FormInput
@@ -119,7 +122,4 @@ CardForm.propTypes = {
   details: PropTypes.object.isRequired,
   cardType: PropTypes.string
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CardForm);
+export default connect(mapStateToProps, mapDispatchToProps)(CardForm);
