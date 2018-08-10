@@ -22,8 +22,7 @@ export default class Emi extends Component {
     this.setState({ open: false });
   };
   render() {
-    const { data } = this.props;
-    console.log(data);
+    const { data, price } = this.props;
     return (
       <div>
         <Button p="0" ml="1.25rem" onClick={this.onOpenModal}>
@@ -38,7 +37,8 @@ export default class Emi extends Component {
             <Row mr="1rem" ml="1rem">
               <Div col="12" ta="center">
                 <Heading color="text" mt="0.9375em" mb="0.3125em" fontWeight="700" ta="left">
-                  EMI Options For Rs.55,000 <Span fontSize="0.875rem">(Including shipping charge)</Span>
+                  EMI Options For Rs.
+                  {price} <Span fontSize="0.875rem">(Including shipping charge)</Span>
                 </Heading>
               </Div>
             </Row>
@@ -81,14 +81,17 @@ export default class Emi extends Component {
                             <img src={bank.bank_logo_url} alt={bank.gateway_type} />
                           </div>
                         </td>
-                        {bank.slabs.map(slab => (
-                          <td className="">
-                            <div>
-                              <p>Rs. {slab.slab_keys.emi} p.m.</p>
-                              <p>Interest Rate 13%</p>
-                            </div>
-                          </td>
-                        ))}
+                        {bank.slabs.map((slab, month) => {
+                          const values = Object.values(slab.slab_keys);
+                          return (
+                            <td className="">
+                              <div>
+                                {values[3] && <p>Rs. {values[3]} p.m.</p>}
+                                {values[3] && <p>Interest Rate {values[0]}%</p>}
+                              </div>
+                            </td>
+                          );
+                        })}
                       </tr>
                     ))}
                   </tbody>
@@ -103,5 +106,6 @@ export default class Emi extends Component {
 }
 
 Emi.propTypes = {
-  data: PropTypes.object.isRequired
+  data: PropTypes.object.isRequired,
+  price: PropTypes.string.isRequired
 };

@@ -24,7 +24,7 @@ import { addReview } from 'redux/modules/reviews';
 import { toggleWishList } from 'redux/modules/wishlist';
 import { setProductPosition } from 'redux/modules/productdetails';
 import { formatAmount } from 'utils/formatters';
-import { calculateDiscount, calculateSavings } from 'utils/helper';
+import { calculateDiscount, calculateSavings, calculateLowestEmi } from 'utils/helper';
 import { getSKUList } from 'selectors/wishlist';
 
 import ProductDetailsCarousel from './Carousel';
@@ -118,9 +118,10 @@ class ProductDetails extends React.Component {
     const { category_details: categoryDetails } = meta;
     const simpleSku = Object.keys(simples)[0];
     const shipping = simples[simpleSku].groupedattributes.product_shipping_cost;
+    const isEmiAvailable = Number(simples[simpleSku].meta.no_emi) === 0;
     const { price, special_price: specialPrice } = meta;
     const checkSpecialPrice = specialPrice || price;
-    console.log(isInWishList(wishList, sku), isInWishList(loadingList, sku));
+    // console.log(isInWishList(wishList, sku), isInWishList(loadingList, sku));
     return (
       <Div type="block">
         <Section p="0" pt="1.25rem" mb="0">
@@ -210,12 +211,13 @@ class ProductDetails extends React.Component {
               <Div col="3">
                 <ServiceDetails
                   deliverBy={(deliveryInfo && deliveryInfo[0].value) || deliveryDetails[0].value}
-                  emiStarting="xyz"
+                  emiStarting={formatAmount(calculateLowestEmi(emidata, price))}
                   shipping={shipping}
+                  isEmiAvailable={isEmiAvailable}
                   pincode={pincode.selectedPincode}
                 >
                   <Pincode key="pincode" />
-                  <EmiModal data={emidata} key="emi" />
+                  <EmiModal price={formatAmount(price)} data={emidata} key="emi" />
                 </ServiceDetails>
               </Div>
             </Row>
