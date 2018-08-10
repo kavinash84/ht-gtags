@@ -31,16 +31,13 @@ import { PINCODE } from '../../helpers/Constants';
     const {
       productdetails: { currentsku },
       pincode: { selectedPincode },
-      colorproducts,
       reviews
     } = getState();
     const pincode = selectedPincode || PINCODE;
     if (currentsku !== params.skuId || reviews.data.length === 0) {
       dispatch(loadReview(params.skuId));
     }
-    if (currentsku !== params.skuId || colorproducts.list.length === 0) {
-      dispatch(loadColorProducts(params.skuId, pincode));
-    }
+    dispatch(loadColorProducts(params.skuId, pincode));
     dispatch(loadRelatedProducts(params.skuId, pincode));
     dispatch(setRecentlyViewed(params.skuId));
     dispatch(loadEmiOptions(params.skuId, pincode));

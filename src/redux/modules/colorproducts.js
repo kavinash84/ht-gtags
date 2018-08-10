@@ -13,6 +13,7 @@ export default function reducer(state = initialState, action = {}) {
     case LOAD_COLOR_PRODUCTS:
       return {
         ...state,
+        list: [],
         loading: true,
         error: false
       };
