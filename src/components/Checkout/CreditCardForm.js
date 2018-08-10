@@ -9,9 +9,9 @@ import { setCardType } from 'redux/modules/paymentoptions';
 import { bindActionCreators } from 'redux';
 
 const styles = require('./Checkout.scss');
-// const aeIcon = require('../../../static/american-express.svg');
-// const dcIcon = require('../../../static/diners-club.svg');
-// const discoverIcon = require('../../../static/discover.svg');
+const aeIcon = require('../../../static/american-express.svg');
+const dcIcon = require('../../../static/diners-club.svg');
+const discoverIcon = require('../../../static/discover.svg');
 const maestroIcon = require('../../../static/maestro.svg');
 const mastercardIcon = require('../../../static/mastercard.svg');
 const visaIcon = require('../../../static/visa.svg');
@@ -71,6 +71,9 @@ const CardForm = ({
       {cardType === 'VISA' && <Img src={visaIcon} alt="visaCard" />}
       {cardType === 'MAST' && <Img src={mastercardIcon} alt="Master Card" />}
       {cardType === 'MAESTRO' && <Img src={maestroIcon} alt="Maestro" />}
+      {cardType === 'amex' && <Img src={aeIcon} alt="maestroCard" />}
+      {cardType === 'discover' && <Img src={discoverIcon} alt="discoverCard" />}
+      {cardType === 'diners' && <Img src={dcIcon} alt="amexCard" />}
     </Div>
     <Div col="2">
       <FormInput

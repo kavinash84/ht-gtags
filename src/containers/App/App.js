@@ -34,17 +34,17 @@ import Theme from 'hometown-components/lib/Theme';
     if (!isSessionSet(getState()) || !sessionId || !csrfToken) {
       await dispatch(generateSession(defaultPincode)).catch(error => console.log(error));
     }
+    if (!isSectionLoaded(getState(), 'menu')) {
+      await wrapDispatch(dispatch, 'menu')(loadMainMenu());
+    }
     if (!isSectionLoaded(getState(), 'banners')) {
-      await wrapDispatch(dispatch, 'banners')(loadBanners()).catch(() => null);
+      await wrapDispatch(dispatch, 'banners')(loadBanners()).catch(error => error);
     }
     if (!isSectionLoaded(getState(), 'categories')) {
-      await wrapDispatch(dispatch, 'categories')(loadCategories()).catch(error => console.log(error));
-    }
-    if (!isSectionLoaded(getState(), 'menu')) {
-      await wrapDispatch(dispatch, 'menu')(loadMainMenu()).catch(error => console.log(error));
+      await wrapDispatch(dispatch, 'categories')(loadCategories()).catch(error => error);
     }
     if (sessionId && !isCartLoaded(getState())) {
-      await dispatch(loadCart(sessionId, defaultPincode)).catch(error => console.log(error));
+      await dispatch(loadCart(sessionId, defaultPincode)).catch(error => error);
     }
   },
   defer: ({ store: { dispatch, getState } }) => {

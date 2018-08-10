@@ -38,12 +38,37 @@ const pretty = new PrettyError();
 const app = express();
 const server = new http.Server(app);
 
+/* serving compressed files from server */
+
+const setJSCompression = (req, res, next) => {
+  if (!(req.url.indexOf('service-worker.js') > 1)) {
+    if (req.url.indexOf('?_sw-precache') > 1) {
+      const swUrl = req.url.split('?_sw');
+      req.url = `${swUrl[0]}.gz`;
+    } else {
+      req.url = `${req.url}.gz`;
+    }
+    res.set('Content-Encoding', 'gzip');
+    res.set('Content-Type', 'text/javascript');
+  }
+  next();
+};
+
+const setCssCompression = (req, res, next) => {
+  req.url += '.gz';
+  res.set('Content-Encoding', 'gzip');
+  res.set('Content-Type', 'text/css');
+  next();
+};
+
 app
   .use(morgan('dev', { skip: req => req.originalUrl.indexOf('/ws') !== -1 }))
   .use(cookieParser())
   .use(compression())
   .use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')))
-  .use('/manifest.json', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'manifest.json')));
+  .use('/manifest.json', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'manifest.json')))
+  .get('*.js', setJSCompression)
+  .get('*.css', setCssCompression);
 
 app.use('/dist/service-worker.js', (req, res, next) => {
   res.setHeader('Service-Worker-Allowed', '/');

@@ -21,8 +21,8 @@ const onSuccess = (dispatcher, session) => result => {
   dispatcher(result.tokenId, session);
 };
 
-const onError = error => {
-  alert(error);
+const onError = error => e => {
+  console.log(error, e);
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators({ loginViaLogin: googleLogin }, dispatch);

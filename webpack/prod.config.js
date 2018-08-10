@@ -178,7 +178,7 @@ module.exports = {
 
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"',
-      'process.env.APIHOST': '"stageapi01.hometown.in/api/"',
+      'process.env.APIHOST': '"betanode.hometown.in/api/"',
       __CLIENT__: true,
       __SERVER__: false,
       __DEVELOPMENT__: false,
@@ -215,7 +215,7 @@ module.exports = {
     // new BundleAnalyzerPlugin(),
 
     new SWPrecacheWebpackPlugin({
-      cacheId: 'react-redux-universal-hot-example',
+      cacheId: 'beta.hometown.in',
       filename: 'service-worker.js',
       maximumFileSizeToCacheInBytes: 8388608,
 
