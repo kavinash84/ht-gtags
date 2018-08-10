@@ -24,9 +24,10 @@ const onChangeDetails = (dispatcher, gateway) => e => {
   dispatcher({ gateway, data: { [name]: value } });
 };
 const mapStateToProps = ({ paymentoptions, app }) => ({
-  details: paymentoptions.paymentMethodDetails.DebitCard,
+  details: paymentoptions.paymentMethodDetails[paymentoptions.selectedGateway],
   sessionId: app.sessionId,
-  cardType: paymentoptions.cardType
+  cardType: paymentoptions.cardType,
+  selectedGateway: paymentoptions.selectedGateway
 });
 
 const onGetCardType = (dispatcher, sessionId, gateway) => e => {
