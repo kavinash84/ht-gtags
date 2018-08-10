@@ -96,3 +96,30 @@ export const validatePaymentDetails = data => {
   const details = Object.values(data);
   return validateInputs(details);
 };
+
+export const getCardType = num => {
+  switch (true) {
+    case new RegExp(/^4\d{12}(\d{3})?$/).test(num):
+      return 'visa';
+    case new RegExp(/^(5[1-5]\d{4}|677189)\d{10}$/).test(num):
+      return 'mastercard';
+    case new RegExp(/^(?:5[0678]\d\d|6304|6390|67\d\d)\d{8,15}$/).test(num):
+      return 'maestro';
+    case new RegExp(/^3[47]\d{13}$/).test(num):
+      return 'amex';
+    case new RegExp(/^3(0[0-5]|[68]\d)\d{11}$/).test(num):
+      return 'diners';
+    case new RegExp(/^6(?:011|5[0-9]{2})[0-9]{12}$/).test(num):
+      return 'discover';
+    case new RegExp(/^6[0-9]{15}$/).test(num):
+      return 'rupay';
+    case new RegExp(/^(?:2131|1800|35\d{3})\d{11}$/).test(num):
+      return 'jcb';
+    case new RegExp(/^(5078\d{2})(\d{2})(\d{11})$/).test(num):
+      return 'aura';
+    case new RegExp(/^(606282\d{10}(\d{3})?)|(3841\d{15})$/).test(num):
+      return 'hipercard';
+    default:
+      return 'other';
+  }
+};

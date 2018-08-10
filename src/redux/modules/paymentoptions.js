@@ -1,4 +1,5 @@
 import { PAYMENT_OPTIONS } from 'helpers/apiUrls';
+import { getCardType } from '../../utils/validation';
 
 const LOAD = 'paymentOptions/LOAD';
 const LOAD_SUCCESS = 'paymentOptions/LOAD_SUCCESS';
@@ -19,6 +20,8 @@ const SET_VALIDATION_ERROR = 'paymentOptions/SET_VALIDATION_ERROR';
 const SET_CARD_TYPE = 'paymentOptions/SET_CARD_TYPE';
 const SET_CARD_TYPE_SUCCESS = 'paymentOptions/SET_CARD_TYPE_SUCCESS';
 const SET_CARD_TYPE_FAIL = 'paymentOptions/SET_CARD_TYPE_FAIL';
+
+const SET_CARD_COMPANY = 'paymentOption/SET_CARD_COMPANY';
 
 const paymentJSON = {
   session_id: '',
@@ -219,6 +222,11 @@ export default function reducer(state = initialState, action = {}) {
         cardTypeError: action.error
       };
 
+    case SET_CARD_COMPANY:
+      return {
+        ...state,
+        cardType: action.cardType
+      };
     case SET_PAYMENT_METHOD:
       return {
         ...state
@@ -319,13 +327,20 @@ export const setSelectedPaymentDetails = payLoad => ({
   payLoad
 });
 
-export const setCardType = (cardno, session, gateway) => ({
-  types: [SET_CARD_TYPE, SET_CARD_TYPE_SUCCESS, SET_CARD_TYPE_FAIL],
-  promise: ({ client }) => {
-    const response = client.get(`tesla/payments/card-type-info/${cardno}/${session}`);
-    response.gateway = gateway;
-    return response;
-  }
+/* since api not working falling back on regex */
+
+// export const setCardType = (cardno, session, gateway) => ({
+//   types: [SET_CARD_TYPE, SET_CARD_TYPE_SUCCESS, SET_CARD_TYPE_FAIL],
+//   promise: ({ client }) => {
+//     const response = client.get(`tesla/payments/card-type-info/${cardno}/${session}`);
+//     response.gateway = gateway;
+//     return response;
+//   }
+// });
+
+export const setCardType = cardno => ({
+  type: SET_CARD_COMPANY,
+  cardType: getCardType(cardno)
 });
 
 export const checkPaymentDetails = () => ({
