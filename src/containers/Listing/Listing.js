@@ -41,10 +41,7 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState }, params, location }) => {
-    const {
-      pincode: { selectedPincode, city },
-      pagination: { page }
-    } = getState();
+    const { pincode: { selectedPincode, city }, pagination: { page } } = getState();
     let query;
     let filters;
     let loadResults;
@@ -190,9 +187,7 @@ export default class Listing extends Component {
       seoInfo
     } = this.props;
     let page;
-    const {
-      location: { search, pathname }
-    } = history;
+    const { location: { search, pathname } } = history;
     if (search !== '') {
       page = search.replace('?', '').split('page=')[1];
     }
@@ -205,7 +200,8 @@ export default class Listing extends Component {
           <title>{seoInfo && seoInfo.page_title}</title>
           <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
           <meta name="description" content={seoInfo && seoInfo.meta_description} />
-          <link rel="canonical" href={`${SITE_URL}${pathname}${previousPage}`} />
+          <link rel="canonical" href={`${SITE_URL}${pathname}`} />
+          <link rel="prev" href={`${SITE_URL}${pathname}${previousPage}`} />
           <link rel="next" href={`${SITE_URL}${pathname}${NextPage}`} />
         </Helmet>
         <div className="wrapper">

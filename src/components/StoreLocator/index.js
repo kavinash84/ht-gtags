@@ -5,6 +5,7 @@ import Heading from 'hometown-components/lib/Heading';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
 import Button from 'hometown-components/lib/Buttons';
+import Span from 'hometown-components/lib/Span';
 import { Label } from 'hometown-components/lib/Label';
 import Map from './Map';
 import mapData from './mapData';
@@ -135,6 +136,9 @@ class StoreLocator extends React.Component {
                     className={styles.filterDD}
                   >
                     {currentState || 'Select State'}
+                    <Span ml="0.5rem" fontSize="1.5em" className={styles.arrow}>
+                      &#9662;
+                    </Span>
                   </Button>
                   <div className={`dropDown ${styles.dropDown}`}>
                     <ul>
@@ -166,6 +170,9 @@ class StoreLocator extends React.Component {
                       className={styles.filterDD}
                     >
                       {currentCity || 'Select City'}
+                      <Span ml="0.5rem" fontSize="1.5em" className={styles.arrow}>
+                        &#9662;
+                      </Span>
                     </Button>
                     <div className={`dropDown ${styles.dropDown}`}>
                       <ul>

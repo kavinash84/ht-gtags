@@ -1,11 +1,10 @@
-@import "../../theme/variables";
-@import "../../theme/mixins";
-@import "../../theme/normalize";
-@import "../../theme/global";
+@import "../../theme/_variables";
+@import "../../theme/_mixins";
+@import "../../theme/_normalize";
+@import "../../theme/_global";
 
 /* ---- Common Classes ---- */
 :global {
-
 	.container {
 		margin: 0 auto;
 		padding: 0 15px;
@@ -357,10 +356,22 @@
 	.slick-next {
 		right: 25px;
 		z-index: 1;
+		&:before {
+      content: url('../../../static/right-arrow.png');
+      [dir="rtl"] & {
+        content: url('../../../static/left-arrow.png');
+      }
+    }
 	}
 	.slick-prev {
 		left: 25px;
 		z-index: 1;
+		&:before {
+      content: url('../../../static/left-arrow.png');
+      [dir="rtl"] & {
+        content: url('../../../static/right-arrow.png');
+      }
+    }
 	}
 	.slick-prev:before, .slick-next:before {
 		color: #000 !important;
@@ -465,7 +476,7 @@
 				transition: all 0.5s ease;
 				display: inline-block !important;
 			}
-			&:hover, &:focus {
+			&:hover {
 				background-color: #FFF !important;
 				span {
 					transform: rotate(180deg) !important;
