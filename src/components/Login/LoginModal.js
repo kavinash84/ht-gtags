@@ -52,7 +52,7 @@ const LoginModal = ({ loginViaLogin, session }) => (
           <Img display="inline-block" src={GoogleIcon} alt="Google" /> Google
         </GoogleLogin>
       </Div>
-      <Div col="12" mb="1.25rem" mt="1.25rem">
+      <Div col="12" mb="1" mt="1">
         <Label fontWeight="medium" display="block" ta="center" color="primary">
           OR
         </Label>
@@ -87,4 +87,7 @@ LoginModal.propTypes = {
   session: PropTypes.string.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginModal);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginModal);

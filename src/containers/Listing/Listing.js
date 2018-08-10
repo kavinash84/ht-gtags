@@ -205,7 +205,8 @@ export default class Listing extends Component {
           <title>{seoInfo && seoInfo.page_title}</title>
           <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
           <meta name="description" content={seoInfo && seoInfo.meta_description} />
-          <link rel="canonical" href={`${SITE_URL}${pathname}${previousPage}`} />
+          <link rel="canonical" href={`${SITE_URL}${pathname}`} />
+          <link rel="prev" href={`${SITE_URL}${pathname}${previousPage}`} />
           <link rel="next" href={`${SITE_URL}${pathname}${NextPage}`} />
         </Helmet>
         <div className="wrapper">
