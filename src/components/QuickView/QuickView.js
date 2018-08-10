@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Heading from 'hometown-components/lib/Heading';
 import Span from 'hometown-components/lib/Span';
 import Text from 'hometown-components/lib/Text';
 import AddToCart from 'components/AddToCart';
-import { calculateSavings, calculateDiscount } from 'utils/helper';
+import { calculateSavings, calculateDiscount /* calculateLowestEmi */ } from 'utils/helper';
 import { formatAmount } from 'utils/formatters';
+// import { loadEmiOptions } from 'redux/modules/emioptions';
 import SlickSlider from '../SlickSlider';
 
 const styles = require('./QuickView.scss');
@@ -19,7 +21,13 @@ const adjustSlides = length => ({
   infinite: false
 });
 
+@connect(({ emioptions }) => ({
+  emidata: emioptions.data
+}))
 export default class QuickView extends Component {
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  };
   state = {
     currentImage: 0,
     previousDisabled: true,
@@ -29,6 +37,8 @@ export default class QuickView extends Component {
 
   componentWillMount() {
     this.getProductDetails(this.props.sku);
+    // const { dispatch } = this.context.store;
+    // dispatch(loadEmiOptions(this.props.sku));
   }
   componentDidMount() {
     window.addEventListener('keyup', this.handleArrowKey, false);
@@ -122,9 +132,11 @@ export default class QuickView extends Component {
     const { images, data } = this.state.product;
     const { currentImage } = this.state;
     const { sku, simpleSku } = this.props;
+    // const { emidata } = this.props;
     const {
       name, price, special_price: discPrice, max_saving_percentage: saving
     } = data;
+    // const lowestEmi = calculateLowestEmi(emidata, discPrice);
     return (
       <div className={styles.quickView}>
         <Row ml="0" mr="0">
@@ -158,16 +170,18 @@ export default class QuickView extends Component {
                 <Text color="rgba(0, 0, 0, 0.6)" fontWeight="700" fontSize="0.857rem" mb="0">
                   Savings:{' '}
                   <Span color="rgba(0, 0, 0, 0.6)" fontSize="0.857rem" va="bottom">
-                    Rs.{formatAmount(calculateSavings(price, discPrice))} ({calculateDiscount(price, discPrice)}%)
+                    Rs.
+                    {formatAmount(calculateSavings(price, discPrice))} ({calculateDiscount(price, discPrice)}
+                    %)
                   </Span>
                 </Text>
               )}
-              <Text color="rgba(0, 0, 0, 0.6)" fontWeight="700" fontSize="0.857rem" mb="1rem" mt="0.3125rem">
+              {/* <Text color="rgba(0, 0, 0, 0.6)" fontWeight="700" fontSize="0.857rem" mb="1rem" mt="0.3125rem">
                 EMI:{' '}
                 <Span color="rgba(0, 0, 0, 0.6)" fontSize="0.857rem" va="bottom">
-                  starting from Rs.2,419{' '}
+                  starting from Rs.{formatAmount(lowestEmi)}{' '}
                 </Span>
-              </Text>
+              </Text> */}
               <AddToCart simpleSku={simpleSku} sku={sku} />
             </Div>
             <Div className={`${styles.thumb} thumbCarousel`}>

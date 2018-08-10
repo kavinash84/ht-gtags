@@ -36,7 +36,7 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-export const loadEmiOptions = (sku, pincode) => ({
+export const loadEmiOptions = (sku, pincode = '400042') => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
   promise: ({ client }) => client.get(`${EMI_OPTIONS}/${sku}/${pincode}`)
 });
