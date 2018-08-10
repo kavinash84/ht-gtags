@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import Img from 'hometown-components/lib/Img';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Span from 'hometown-components/lib/Span';
 import Button from 'hometown-components/lib/Buttons';
 import Heading from 'hometown-components/lib/Heading';
-// import { Label } from 'hometown-components/lib/Label';
 import ResponsiveModal from 'components/Modal';
 
 const styles = require('./EmiModal.scss');
@@ -24,9 +22,17 @@ export default class Emi extends Component {
   render() {
     const { data, price } = this.props;
     return (
-      <div>
-        <Button p="0" ml="1.25rem" onClick={this.onOpenModal}>
-          EMI
+      <Span>
+        <Button
+          p="0"
+          ml="0.3125rem"
+          btnType="link"
+          fontSize="0.75rem"
+          color="#29d"
+          onClick={this.onOpenModal}
+          mt="-5px"
+        >
+          View Plans
         </Button>
         <ResponsiveModal
           classNames={{ modal: styles.emiModal }}
@@ -100,7 +106,7 @@ export default class Emi extends Component {
             </Row>
           </div>
         </ResponsiveModal>
-      </div>
+      </Span>
     );
   }
 }

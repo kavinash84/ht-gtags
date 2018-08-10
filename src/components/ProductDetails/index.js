@@ -217,7 +217,7 @@ class ProductDetails extends React.Component {
                   pincode={pincode.selectedPincode}
                 >
                   <Pincode key="pincode" />
-                  <EmiModal price={formatAmount(price)} data={emidata} key="emi" />
+                  <EmiModal price={formatAmount(checkSpecialPrice)} data={emidata} key="emi" />
                 </ServiceDetails>
               </Div>
             </Row>
