@@ -51,14 +51,14 @@ import { PINCODE } from '../../helpers/Constants';
 }))
 export default class ProductDetails extends Component {
   render() {
-    const { loading, loaded } = this.props;
+    const { loading, loaded, history } = this.props;
     return (
       <Section p="0" mb="0">
         <div className="wrapper">
           <Menu />
           {loading && !loaded && <ProductDetailsShimmer />}
           <div itemScope itemType="http://schema.org/Product">
-            <ProductDetailsContainer />
+            <ProductDetailsContainer history={history} />
           </div>
         </div>
         <Footer />
@@ -74,5 +74,6 @@ ProductDetails.defaultProps = {
 
 ProductDetails.propTypes = {
   loading: PropTypes.bool,
-  loaded: PropTypes.bool
+  loaded: PropTypes.bool,
+  history: PropTypes.object.isRequired
 };
