@@ -9,9 +9,12 @@ import { setCardType } from 'redux/modules/paymentoptions';
 import { bindActionCreators } from 'redux';
 
 const styles = require('./Checkout.scss');
-const mcIcon = require('../../../static/master-card.jpg');
-const visaIcon = require('../../../static/visa.jpg');
-const maestroIcon = require('../../../static/maestro.jpg');
+// const aeIcon = require('../../../static/american-express.svg');
+// const dcIcon = require('../../../static/diners-club.svg');
+// const discoverIcon = require('../../../static/discover.svg');
+const maestroIcon = require('../../../static/maestro.svg');
+const mastercardIcon = require('../../../static/mastercard.svg');
+const visaIcon = require('../../../static/visa.svg');
 
 const MONTHS = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 const YEARS = [...Array(21)];
@@ -66,8 +69,8 @@ const CardForm = ({
         onBlur={onGetCardType(getCardType, sessionId, gateway)}
       />
       {cardType === 'VISA' && <Img src={visaIcon} alt="visaCard" />}
-      {cardType === 'MAST' && <Img src={mcIcon} alt="visaCard" />}
-      {cardType === 'MAESTRO' && <Img src={maestroIcon} alt="visaCard" />}
+      {cardType === 'MAST' && <Img src={mastercardIcon} alt="Master Card" />}
+      {cardType === 'MAESTRO' && <Img src={maestroIcon} alt="Maestro" />}
     </Div>
     <Div col="2">
       <FormInput
