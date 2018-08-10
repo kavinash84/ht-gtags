@@ -17,6 +17,7 @@ import Reviews from 'hometown-components/lib/Reviews';
 import AddReview from 'hometown-components/lib/Reviews/WriteReview';
 import Img from 'hometown-components/lib/Img';
 import ProductCarousel from 'components/ProductCarousel';
+import EmiModal from 'containers/EmiModal/EmiModal';
 import Theme from 'hometown-components/lib/Theme';
 import { addReview } from 'redux/modules/reviews';
 import { formatAmount } from 'utils/formatters';
@@ -32,14 +33,15 @@ import prodDetails from '../../data/ProductDetails';
 const styles = require('./ProductDetails.scss');
 
 @connect(({
-  productdetails, pincode, reviews, colorproducts, relatedproducts
+  productdetails, pincode, reviews, colorproducts, relatedproducts, emioptions
 }) => ({
   product: productdetails.productDescription,
   reviews,
   pincode,
   colorproducts: colorproducts.list,
   relatedproductsList: relatedproducts.data,
-  deliveryInfo: productdetails.deliveryDetails
+  deliveryInfo: productdetails.deliveryDetails,
+  emidata: emioptions.data
 }))
 class ProductDetails extends React.Component {
   static contextTypes = {
@@ -54,7 +56,7 @@ class ProductDetails extends React.Component {
 
   render() {
     const {
-      product, pincode, reviews, colorproducts, relatedproductsList, deliveryInfo
+      product, pincode, reviews, colorproducts, relatedproductsList, deliveryInfo, emidata
     } = this.props;
     const {
       meta,
@@ -162,7 +164,8 @@ class ProductDetails extends React.Component {
                   shipping={shipping}
                   pincode={pincode.selectedPincode}
                 >
-                  <Pincode />
+                  <Pincode key="pincode" />
+                  <EmiModal data={emidata} key="emi" />
                 </ServiceDetails>
               </Div>
             </Row>
@@ -187,7 +190,8 @@ ProductDetails.defaultProps = {
   reviews: {},
   colorproducts: [],
   relatedproductsList: [],
-  deliveryInfo: ''
+  deliveryInfo: '',
+  emidata: []
 };
 ProductDetails.propTypes = {
   product: PropTypes.object,
@@ -195,6 +199,7 @@ ProductDetails.propTypes = {
   reviews: PropTypes.object,
   colorproducts: PropTypes.array,
   relatedproductsList: PropTypes.array,
-  deliveryInfo: PropTypes.string
+  deliveryInfo: PropTypes.string,
+  emidata: PropTypes.array
 };
 export default ProductDetails;

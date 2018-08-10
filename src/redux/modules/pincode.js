@@ -20,7 +20,7 @@ const initialState = {
   showResults: false,
   selectedPincode: '',
   pincodeDetails: [],
-  city: ''
+  city: null
 };
 
 export default function reducer(state = initialState, action = {}) {

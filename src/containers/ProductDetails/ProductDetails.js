@@ -10,6 +10,7 @@ import ProductDetailsShimmer from 'components/ProductDetails/ProductDetailsShimm
 import { loadProductDescription } from 'redux/modules/productdetails';
 import { loadColorProducts } from 'redux/modules/colorproducts';
 import { load as loadRelatedProducts } from 'redux/modules/relatedproducts';
+import { loadEmiOptions } from 'redux/modules/emioptions';
 import { setRecentlyViewed } from 'redux/modules/recentlyviewed';
 
 import { loadReview } from 'redux/modules/reviews';
@@ -42,6 +43,7 @@ import { PINCODE } from '../../helpers/Constants';
     }
     dispatch(loadRelatedProducts(params.skuId, pincode));
     dispatch(setRecentlyViewed(params.skuId));
+    dispatch(loadEmiOptions(params.skuId, pincode));
   }
 })
 @connect(({ productdetails }) => ({
