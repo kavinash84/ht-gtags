@@ -102,7 +102,7 @@ export const getCardType = num => {
     case new RegExp(/^4\d{12}(\d{3})?$/).test(num):
       return 'visa';
     case new RegExp(/^(5[1-5]\d{4}|677189)\d{10}$/).test(num):
-      return 'mastercard';
+      return 'mast';
     case new RegExp(/^(?:5[0678]\d\d|6304|6390|67\d\d)\d{8,15}$/).test(num):
       return 'maestro';
     case new RegExp(/^3[47]\d{13}$/).test(num):

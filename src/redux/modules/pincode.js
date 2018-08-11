@@ -4,7 +4,6 @@ const LOAD = 'pincode/LOAD';
 const LOAD_SUCCESS = 'pincode/LOAD_SUCCESS';
 const LOAD_FAIL = 'pincode/LOAD_FAIL';
 const SET_PINCODE_QUERY = 'pincode/SET_PINCODE_QUERY';
-const SET_SELECTED_PINCODE = 'pincode/SET_SELECTED_PINCODE';
 
 const LOAD_PINCODE_DETAILS = 'pincode/LOAD_PINCODE_DETAILS';
 const LOAD_PINCODE_DETAILS_SUCCESS = 'pincode/LOAD_PINCODE_DETAILS_SUCCESS';
@@ -21,7 +20,7 @@ const initialState = {
   showResults: false,
   selectedPincode: '',
   pincodeDetails: [],
-  city: ''
+  city: null
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -72,14 +71,6 @@ export default function reducer(state = initialState, action = {}) {
         loaded: false,
         pincodeQuery: action.query
       };
-    case SET_SELECTED_PINCODE:
-      return {
-        ...state,
-        selectedPincode: action.pincode,
-        pincodeQuery: action.pincode,
-        results: [],
-        showResults: false
-      };
     case LOAD_PINCODE_DATA:
       return {
         ...state,
@@ -88,11 +79,13 @@ export default function reducer(state = initialState, action = {}) {
     case LOAD_PINCODE_DATA_SUCCESS:
       return {
         ...state,
-        selectedPincode: String(action.result.pincode) || action.pincode,
+        selectedPincode: (action.result.pincode && String(action.result.pincode)) || action.pincode,
         pincodeQuery: action.pincode,
         city: action.result.city,
         results: [],
-        showResults: false
+        showResults: false,
+        loading: false,
+        loaded: true
       };
     case LOAD_PINCODE_DATA_FAIL:
       return {

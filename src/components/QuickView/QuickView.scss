@@ -54,7 +54,7 @@
       border: solid 4px transparent;
       transition: all 0.5s ease;
       padding: 0;
-      &.active, &:hover,&:focus {
+      &.active, &:hover{
         border: solid 4px #f98d29;
       }
     }

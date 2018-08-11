@@ -2,8 +2,7 @@ import React from 'react';
 import Div from 'hometown-components/lib/Div';
 import { Label } from 'hometown-components/lib/Label';
 
-import CreditCardForm from './CreditCardForm';
-import DebitCardForm from './DebitCardForm';
+import CardForm from './CardForm';
 import BankCard from './BankCard';
 import Emi from './Emi';
 
@@ -68,7 +67,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
           </Label>
           {selectedGateway === paymentType && (
             <Div col="12" mt="0.625rem" pl="1.75rem">
-              <CreditCardForm setPaymentDetails={setPaymentDetails} gateway={selectedGateway} />
+              <CardForm setPaymentDetails={setPaymentDetails} gateway={selectedGateway} />
             </Div>
           )}
         </Div>
@@ -88,7 +87,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
           </Label>
           {selectedGateway === paymentType && (
             <Div col="12" mt="0.625rem" pl="1.75rem">
-              <DebitCardForm setPaymentDetails={setPaymentDetails} gateway={selectedGateway} />
+              <CardForm setPaymentDetails={setPaymentDetails} gateway={selectedGateway} />
             </Div>
           )}
         </Div>

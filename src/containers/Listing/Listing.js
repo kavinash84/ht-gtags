@@ -41,13 +41,16 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState }, params, location }) => {
-    const { pincode: { selectedPincode, city }, pagination: { page } } = getState();
+    const {
+      pincode: { selectedPincode },
+      pagination: { page },
+      app: { city }
+    } = getState();
     let query;
     let filters;
     let loadResults;
     const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
     const { search } = location;
-    // const queryString = search.replace('?', '').split('&');
     const getPage = search.split('page=')[1];
     const currentPage = getPage || 1;
     if (location.pathname === '/catalog/all-products') {
@@ -187,7 +190,9 @@ export default class Listing extends Component {
       seoInfo
     } = this.props;
     let page;
-    const { location: { search, pathname } } = history;
+    const {
+      location: { search, pathname }
+    } = history;
     if (search !== '') {
       page = search.replace('?', '').split('page=')[1];
     }

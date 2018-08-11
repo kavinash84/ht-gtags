@@ -19,6 +19,7 @@ import Dropdown from '../Filters/Filters';
 import SortByFilters from '../Filters/SortByFilters';
 import AddToCart from '../AddToCart';
 import AppliedFilters from '../Filters/AppliedFilters';
+import ScrollToTop from '../ScrollToTop';
 import { LOGIN_URL } from '../../helpers/Constants';
 
 const sortByList = require('data/sortby');
@@ -192,6 +193,7 @@ class Listing extends React.Component {
                   products={products}
                 />
               </ResponsiveModal>
+              <ScrollToTop />
             </Row>
           </Container>
         </Section>

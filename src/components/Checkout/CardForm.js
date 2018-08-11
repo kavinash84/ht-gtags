@@ -9,9 +9,10 @@ import { Label } from 'hometown-components/lib/Label';
 import FormInput from 'hometown-components/lib/Forms/FormInput';
 
 const styles = require('./Checkout.scss');
-// const aeIcon = require('../../../static/american-express.svg');
-// const dcIcon = require('../../../static/diners-club.svg');
-// const discoverIcon = require('../../../static/discover.svg');
+
+const aeIcon = require('../../../static/american-express.svg');
+const dcIcon = require('../../../static/diners-club.svg');
+const discoverIcon = require('../../../static/discover.svg');
 const maestroIcon = require('../../../static/maestro.svg');
 const mastercardIcon = require('../../../static/mastercard.svg');
 const visaIcon = require('../../../static/visa.svg');
@@ -23,13 +24,16 @@ const onChangeDetails = (dispatcher, gateway) => e => {
   const { name, value } = e.target;
   dispatcher({ gateway, data: { [name]: value } });
 };
+
 const mapStateToProps = ({ paymentoptions, app }) => ({
-  details: paymentoptions.paymentMethodDetails.DebitCard,
+  details: paymentoptions.paymentMethodDetails[paymentoptions.selectedGateway],
   sessionId: app.sessionId,
-  cardType: paymentoptions.cardType
+  cardType: paymentoptions.cardType,
+  selectedGateway: paymentoptions.selectedGateway
 });
 
 const onGetCardType = (dispatcher, sessionId, gateway) => e => {
+  console.log(e.target.value);
   const { value } = e.target;
   dispatcher(value, sessionId, gateway);
 };
@@ -55,10 +59,9 @@ const CardForm = ({
         value={nameOnCard}
         name="nameOnCard"
         onChange={onChangeDetails(setPaymentDetails, gateway)}
-        onBlur={onGetCardType(getCardType, sessionId, gateway)}
       />
     </Div>
-    <Div col="5" pr="1rem">
+    <Div col="5" pr="1rem" className={styles.cardFieldWrapper}>
       <FormInput
         label="Card number"
         type="number"
@@ -66,10 +69,14 @@ const CardForm = ({
         name="cardNumber"
         value={cardNumber}
         onChange={onChangeDetails(setPaymentDetails, gateway)}
+        onBlur={onGetCardType(getCardType, sessionId, gateway)}
       />
-      {cardType === 'VISA' && <Img src={visaIcon} alt="visaCard" />}
-      {cardType === 'MAST' && <Img src={mastercardIcon} alt="Master Card" />}
-      {cardType === 'MAESTRO' && <Img src={maestroIcon} alt="Maestro" />}
+      {cardType === 'visa' && <Img src={visaIcon} alt="visaCard" />}
+      {cardType === 'mast' && <Img src={mastercardIcon} alt="Master Card" />}
+      {cardType === 'maestro' && <Img src={maestroIcon} alt="Maestro" />}
+      {cardType === 'amex' && <Img src={aeIcon} alt="maestroCard" />}
+      {cardType === 'discover' && <Img src={discoverIcon} alt="discoverCard" />}
+      {cardType === 'diners' && <Img src={dcIcon} alt="amexCard" />}
     </Div>
     <Div col="2">
       <FormInput
@@ -122,7 +129,4 @@ CardForm.propTypes = {
   sessionId: PropTypes.string,
   cardType: PropTypes.string
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CardForm);
+export default connect(mapStateToProps, mapDispatchToProps)(CardForm);

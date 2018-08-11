@@ -1,6 +1,7 @@
 import React from 'react';
 // import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
@@ -17,30 +18,65 @@ import Reviews from 'hometown-components/lib/Reviews';
 import AddReview from 'hometown-components/lib/Reviews/WriteReview';
 import Img from 'hometown-components/lib/Img';
 import ProductCarousel from 'components/ProductCarousel';
+import EmiModal from 'containers/EmiModal/EmiModal';
 import Theme from 'hometown-components/lib/Theme';
 import { addReview } from 'redux/modules/reviews';
+import { toggleWishList } from 'redux/modules/wishlist';
+import { setProductPosition } from 'redux/modules/productdetails';
 import { formatAmount } from 'utils/formatters';
-import { calculateDiscount, calculateSavings } from 'utils/helper';
+import { calculateDiscount, calculateSavings, calculateLowestEmi } from 'utils/helper';
+import { getSKUList } from 'selectors/wishlist';
+
 import ProductDetailsCarousel from './Carousel';
 import BreadCrumb from './BreadCrumb';
 // import { CART_URL } from 'helpers/Constants';
 import Pincode from './Pincode';
 import AddToCart from '../AddToCart';
+import { LOGIN_URL } from '../../helpers/Constants';
 
 import prodDetails from '../../data/ProductDetails';
 
 const styles = require('./ProductDetails.scss');
 
-@connect(({
-  productdetails, pincode, reviews, colorproducts, relatedproducts
+const onClickWishList = (sku, list, dispatcher, isUserLoggedIn, history) => e => {
+  e.preventDefault();
+  if (isUserLoggedIn) return dispatcher(list, sku);
+  return history.push(LOGIN_URL);
+};
+const isInWishList = (list, id) => list.includes(id);
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      wishlistToggle: toggleWishList,
+      productPosition: setProductPosition
+    },
+    dispatch
+  );
+
+const mapStateToProps = ({
+  productdetails,
+  pincode,
+  reviews,
+  colorproducts,
+  relatedproducts,
+  emioptions,
+  wishlist,
+  userLogin
 }) => ({
   product: productdetails.productDescription,
   reviews,
   pincode,
   colorproducts: colorproducts.list,
   relatedproductsList: relatedproducts.data,
-  deliveryInfo: productdetails.deliveryDetails
-}))
+  deliveryInfo: productdetails.deliveryDetails,
+  emidata: emioptions.data,
+  wishList: getSKUList(wishlist),
+  wishListData: wishlist.data,
+  isLoggedIn: userLogin.isLoggedIn,
+  loadingList: wishlist.loadingList
+});
+
 class ProductDetails extends React.Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -54,7 +90,19 @@ class ProductDetails extends React.Component {
 
   render() {
     const {
-      product, pincode, reviews, colorproducts, relatedproductsList, deliveryInfo
+      product,
+      pincode,
+      reviews,
+      colorproducts,
+      relatedproductsList,
+      deliveryInfo,
+      emidata,
+      wishList,
+      wishListData,
+      isLoggedIn,
+      history,
+      wishlistToggle,
+      loadingList
     } = this.props;
     const {
       meta,
@@ -70,8 +118,10 @@ class ProductDetails extends React.Component {
     const { category_details: categoryDetails } = meta;
     const simpleSku = Object.keys(simples)[0];
     const shipping = simples[simpleSku].groupedattributes.product_shipping_cost;
+    const isEmiAvailable = Number(simples[simpleSku].meta.no_emi) === 0;
     const { price, special_price: specialPrice } = meta;
     const checkSpecialPrice = specialPrice || price;
+    // console.log(isInWishList(wishList, sku), isInWishList(loadingList, sku));
     return (
       <Div type="block">
         <Section p="0" pt="1.25rem" mb="0">
@@ -137,6 +187,9 @@ class ProductDetails extends React.Component {
                     fontSize="0.857rem"
                     height="40px"
                     className={styles.addToWishlist}
+                    onClick={onClickWishList(sku, wishListData, wishlistToggle, isLoggedIn, history)}
+                    isWishList={isInWishList(wishList, sku)}
+                    wishlistLoading={isInWishList(loadingList, sku)}
                   >
                     ADD TO WISHLIST
                   </Button>
@@ -153,16 +206,18 @@ class ProductDetails extends React.Component {
                 <ProductDesc desc={attributes.description} />
                 <Specs specs={groupedAttributes} pincode={pincode.selectedPincode} />
                 <Reviews col="6" reviewItems={reviews.data} pr="2.5rem" />
-                <AddReview col="8" sku={groupedattributes.id_catalog_config} onClickSubmit={this.addReview} />
+                <AddReview col="8" catalogId={groupedattributes.id_catalog_config} onClickSubmit={this.addReview} />
               </Div>
               <Div col="3">
                 <ServiceDetails
                   deliverBy={(deliveryInfo && deliveryInfo[0].value) || deliveryDetails[0].value}
-                  emiStarting="xyz"
+                  emiStarting={formatAmount(calculateLowestEmi(emidata, price))}
                   shipping={shipping}
+                  isEmiAvailable={isEmiAvailable}
                   pincode={pincode.selectedPincode}
                 >
-                  <Pincode />
+                  <Pincode key="pincode" />
+                  <EmiModal price={formatAmount(checkSpecialPrice)} data={emidata} key="emi" />
                 </ServiceDetails>
               </Div>
             </Row>
@@ -187,7 +242,11 @@ ProductDetails.defaultProps = {
   reviews: {},
   colorproducts: [],
   relatedproductsList: [],
-  deliveryInfo: ''
+  deliveryInfo: '',
+  emidata: [],
+  wishList: [],
+  wishListData: [],
+  loadingList: []
 };
 ProductDetails.propTypes = {
   product: PropTypes.object,
@@ -195,6 +254,16 @@ ProductDetails.propTypes = {
   reviews: PropTypes.object,
   colorproducts: PropTypes.array,
   relatedproductsList: PropTypes.array,
-  deliveryInfo: PropTypes.string
+  deliveryInfo: PropTypes.string,
+  emidata: PropTypes.array,
+  wishList: PropTypes.array,
+  wishListData: PropTypes.array,
+  isLoggedIn: PropTypes.bool.isRequired,
+  history: PropTypes.object.isRequired,
+  wishlistToggle: PropTypes.func.isRequired,
+  loadingList: PropTypes.array
 };
-export default ProductDetails;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductDetails);
