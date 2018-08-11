@@ -59,6 +59,8 @@ export const formFilterLink2 = (key, name, b64, category, value, selected, urlqu
     [b64] = b64.split('&page=');
     obj64 = JSON.parse(atob(b64));
   }
+  console.log(obj64);
+  console.log(name);
   if (name === 'Category') {
     let query;
     const splitLink = key.split('?');
@@ -84,7 +86,7 @@ export const formFilterLink2 = (key, name, b64, category, value, selected, urlqu
     return `${obj64.category}/?${urlquery}filters=${b64}`;
   }
   if (name === 'Price') {
-    const [, price] = key.split('?price=');
+    const [, price] = key.split('price=');
     const priceparameters = price ? `&price=${price}` : null;
     obj64 = {
       ...obj64,
@@ -117,7 +119,7 @@ export const formFilterLink2 = (key, name, b64, category, value, selected, urlqu
     return `${obj64.category}/?${urlquery}filters=${b64}`;
   }
   if (name === 'SortBy') {
-    const sortby = key || '&sort=popularity&dir=desc';
+    const sortby = `&${key}` || '&sort=popularity&dir=desc';
     const sortBy = value || 'Popularity';
     obj64 = {
       ...obj64,

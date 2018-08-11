@@ -71,7 +71,8 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
         searchquery,
         query,
         pincode,
-        filters
+        filters,
+        city
       });
     } else {
       query = encodeCategory(params);
