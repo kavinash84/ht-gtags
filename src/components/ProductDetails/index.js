@@ -174,7 +174,13 @@ class ProductDetails extends React.Component {
               </Div>
               <Div col="3" ta="right">
                 <Img src="http://via.placeholder.com/350x80" alt="" width="100%" mt="0.625rem" mb="1rem" />
-                <AddToCart simpleSku={simpleSku} sku={sku} itemId={sku} size="block" />
+                <AddToCart
+                  simpleSku={simpleSku}
+                  sku={sku}
+                  itemId={sku}
+                  size="block"
+                  quantity={simples[simpleSku].meta.quantity}
+                />
                 <Div mt="1rem">
                   <Button
                     width="100%"

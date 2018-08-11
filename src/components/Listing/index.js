@@ -150,37 +150,46 @@ class Listing extends React.Component {
         <Section pt="1rem" mb="0">
           <Container pr="0" pl="0">
             <Row display="block" mr="-15px" ml="-15px">
-              {products.map((item, index) => (
-                <div className={styles.productWrapper} key={item.id}>
-                  <Product
-                    position={index}
-                    key={item.id}
-                    name={item.data.name}
-                    price={item.netprice}
-                    cutprice={item.cutprice}
-                    saving={item.saving}
-                    image={getProductImage(item.images[0].path)}
-                    sku={item.data.sku}
-                    simple_sku={item.simples}
-                    onClick={onClick(wishListData, wishlistToggle, isLoggedIn, history)}
-                    onOpenQuickViewModal={() => {
-                      this.onOpenQuickViewModal(item.data.sku, Object.keys(item.data.simples)[0]);
-                    }}
-                    isWishList={isInWishList(wishList, item.data.sku)}
-                    skuLoading={isInWishList(loadingList, item.data.sku)}
-                    rating={item.data.reviews.rating.toFixed(1)}
-                    reviewsCount={item.data.reviews.count}
-                    savingAmount={item.data.max_price - item.data.max_special_price}
-                    deliveredBy={item.data.delivery_details[0].value}
-                    colors={metaResults[index].data.color_group_count.split(' ')[0]}
-                    history={history}
-                    setProductPosition={productPosition}
-                  />
-                  <Div mt="0" p="0.25rem 0.125rem 0.5rem">
-                    <AddToCart simpleSku={Object.keys(item.data.simples)[0]} sku={item.data.sku} itemId={item.id} />
-                  </Div>
-                </div>
-              ))}
+              {products.map((item, index) => {
+                console.log();
+
+                return (
+                  <div className={styles.productWrapper} key={item.id}>
+                    <Product
+                      position={index}
+                      key={item.id}
+                      name={item.data.name}
+                      price={item.netprice}
+                      cutprice={item.cutprice}
+                      saving={item.saving}
+                      image={getProductImage(item.images[0].path)}
+                      sku={item.data.sku}
+                      simple_sku={item.simples}
+                      onClick={onClick(wishListData, wishlistToggle, isLoggedIn, history)}
+                      onOpenQuickViewModal={() => {
+                        this.onOpenQuickViewModal(item.data.sku, Object.keys(item.data.simples)[0]);
+                      }}
+                      isWishList={isInWishList(wishList, item.data.sku)}
+                      skuLoading={isInWishList(loadingList, item.data.sku)}
+                      rating={item.data.reviews.rating.toFixed(1)}
+                      reviewsCount={item.data.reviews.count}
+                      savingAmount={item.data.max_price - item.data.max_special_price}
+                      deliveredBy={item.data.delivery_details[0].value}
+                      colors={metaResults[index].data.color_group_count.split(' ')[0]}
+                      history={history}
+                      setProductPosition={productPosition}
+                    />
+                    <Div mt="0" p="0.25rem 0.125rem 0.5rem">
+                      <AddToCart
+                        simpleSku={Object.keys(item.data.simples)[0]}
+                        sku={item.data.sku}
+                        itemId={item.id}
+                        quantity={Object.values(item.data.simples)[0].meta.quantity}
+                      />
+                    </Div>
+                  </div>
+                );
+              })}
               <ResponsiveModal
                 onCloseModal={this.onCloseQuickViewModal}
                 open={this.state.openQuickView}
