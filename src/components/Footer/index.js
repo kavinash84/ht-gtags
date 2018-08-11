@@ -34,7 +34,7 @@ const Footer = ({ categories }) => (
       <Container pr="0" pl="0">
         <Row m="0">
           <Div col={3}>
-            <Heading fontSize="1em" mt="1rem">
+            <Heading color="white" fontSize="1em" mt="1rem">
               ABOUT US
             </Heading>
             <ul>
@@ -52,7 +52,7 @@ const Footer = ({ categories }) => (
             </ul>
           </Div>
           <Div col={3}>
-            <Heading fontSize="1em" mt="1rem">
+            <Heading color="white" fontSize="1em" mt="1rem">
               CUSTOMER SERVICE
             </Heading>
             <ul>
@@ -77,7 +77,7 @@ const Footer = ({ categories }) => (
             </ul>
           </Div>
           <Div col={3}>
-            <Heading fontSize="1em" mt="1rem">
+            <Heading color="white" fontSize="1em" mt="1rem">
               TOP CATEGORIES
             </Heading>
             <ul>
@@ -89,11 +89,11 @@ const Footer = ({ categories }) => (
             </ul>
           </Div>
           <Div col={3}>
-            <Heading fontSize="1em" mt="1rem">
+            <Heading color="white" fontSize="1em" mt="1rem">
               PAYMENT METHOD
             </Heading>
             <Img src={paymentMethodIcon} alt="Payment Method" mt="1.2rem" width="178px" />
-            <Heading fontSize="1em" mt="2rem">
+            <Heading color="white" fontSize="1em" mt="2rem">
               OUR APP
             </Heading>
             <a

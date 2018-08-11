@@ -14,8 +14,8 @@ const BankCard = ({
 }) => (
   <Div col="4" pr="1rem" onClick={changeDetails(setPaymentDetails, gateway, name, detailkey)}>
     <Div className={styles.bankCard}>
-      <input type="radio" name="bankOptions" id="bankOptions1" checked={currentSelection === name} />
-      <Label for="bankOptions1" bg="#FFF">
+      <input type="radio" name="bankOptions" id={`bankOptions${name}`} checked={currentSelection === name} />
+      <Label for={`bankOptions${name}`} bg="#FFF">
         <img src={img} alt={name} />
       </Label>
     </Div>

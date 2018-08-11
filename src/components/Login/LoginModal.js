@@ -42,7 +42,7 @@ const LoginModal = ({ loginViaLogin, session }) => (
       </Div>
     </Row>
     <Row display="block" mt="1.5rem" mr="0" ml="0">
-      <Div col="12" ta="center">
+      <Div col="12" ta="center" mb="0.625rem">
         <GoogleLogin
           className="socialBtn"
           clientId="663311547699-jersj1hfflbl8gfukgsuvug8u1gc88nm.apps.googleusercontent.com"

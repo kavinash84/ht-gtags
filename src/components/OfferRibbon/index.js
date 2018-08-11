@@ -11,14 +11,14 @@ const CloseIcon = require('../../../static/close-icon.svg');
 const OfferRibbon = ({
   title, url, onClick, showRibbon
 }) => (
-  <Section bg="textDark" className={showRibbon ? '' : styles.hide} mb="0.3125rem">
+  <Section bg="offerRibbon" className={showRibbon ? '' : styles.hide} mb="0.3125rem">
     {url === '' ? (
-      <Text mt="0" mb="0" ta="center" color="#FFF">
+      <Text mt="0" mb="0" ta="center" color="#222222">
         {title}
       </Text>
     ) : (
       <Link to={url}>
-        <Text mt="0" mb="0" ta="center" color="#FFF">
+        <Text mt="0" mb="0" ta="center" color="#222222">
           {title}
         </Text>
       </Link>
