@@ -16,7 +16,6 @@ import {
   WhoWeAre,
   FAQ,
   TrackOrderModal,
-  EmiModal,
   NotFound
 } from 'containers';
 import { routerActions } from 'react-router-redux';
@@ -92,7 +91,6 @@ const routes = [
       { path: '/store/:city/:storeName', exact: true, component: Stores },
       { path: '/track-order', exact: true, component: TrackOrder },
       { path: '/track-order-modal', exact: true, component: TrackOrderModal },
-      { path: '/emi-modal', exact: true, component: EmiModal },
       { path: '/store-locator', exact: true, component: StoreLocator },
       { path: '/contact-us', exact: true, component: ContactUs },
       { path: '/feedback', exact: true, component: Feedback },

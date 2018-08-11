@@ -10,6 +10,7 @@ import ProductDetailsShimmer from 'components/ProductDetails/ProductDetailsShimm
 import { loadProductDescription } from 'redux/modules/productdetails';
 import { loadColorProducts } from 'redux/modules/colorproducts';
 import { load as loadRelatedProducts } from 'redux/modules/relatedproducts';
+import { loadEmiOptions } from 'redux/modules/emioptions';
 import { setRecentlyViewed } from 'redux/modules/recentlyviewed';
 
 import { loadReview } from 'redux/modules/reviews';
@@ -30,18 +31,16 @@ import { PINCODE } from '../../helpers/Constants';
     const {
       productdetails: { currentsku },
       pincode: { selectedPincode },
-      colorproducts,
       reviews
     } = getState();
     const pincode = selectedPincode || PINCODE;
     if (currentsku !== params.skuId || reviews.data.length === 0) {
       dispatch(loadReview(params.skuId));
     }
-    if (currentsku !== params.skuId || colorproducts.list.length === 0) {
-      dispatch(loadColorProducts(params.skuId, pincode));
-    }
+    dispatch(loadColorProducts(params.skuId, pincode));
     dispatch(loadRelatedProducts(params.skuId, pincode));
     dispatch(setRecentlyViewed(params.skuId));
+    dispatch(loadEmiOptions(params.skuId, pincode));
   }
 })
 @connect(({ productdetails }) => ({
@@ -49,14 +48,14 @@ import { PINCODE } from '../../helpers/Constants';
 }))
 export default class ProductDetails extends Component {
   render() {
-    const { loading, loaded } = this.props;
+    const { loading, loaded, history } = this.props;
     return (
       <Section p="0" mb="0">
         <div className="wrapper">
           <Menu />
           {loading && !loaded && <ProductDetailsShimmer />}
           <div itemScope itemType="http://schema.org/Product">
-            <ProductDetailsContainer />
+            <ProductDetailsContainer history={history} />
           </div>
         </div>
         <Footer />
@@ -72,5 +71,6 @@ ProductDetails.defaultProps = {
 
 ProductDetails.propTypes = {
   loading: PropTypes.bool,
-  loaded: PropTypes.bool
+  loaded: PropTypes.bool,
+  history: PropTypes.object.isRequired
 };

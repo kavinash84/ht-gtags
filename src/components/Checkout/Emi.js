@@ -6,7 +6,7 @@ import { getEmiBanks } from 'selectors/payments';
 import PropTypes from 'prop-types';
 import BankCard from './BankCard';
 
-import EmiCreditCardForm from './EmiCreditCardForm';
+import CardForm from './CardForm';
 
 const styles = require('./Checkout.scss');
 
@@ -115,14 +115,23 @@ const EMI = ({
                     </td>
                     <td>{item.value} Months</td>
                     <td>{item.interestRate}%</td>
-                    <td>Rs.{Math.round(item.emiInterest)}</td>
-                    <td>Rs.{Math.round(item.totalAmount)}</td>
-                    <td>Rs.{Math.round(item.EMI)}</td>
+                    <td>
+                      Rs.
+                      {Math.round(item.emiInterest)}
+                    </td>
+                    <td>
+                      Rs.
+                      {Math.round(item.totalAmount)}
+                    </td>
+                    <td>
+                      Rs.
+                      {Math.round(item.EMI)}
+                    </td>
                   </tr>
                 ))}
               </table>
               <Div col="12" mb="1rem" mt="1rem">
-                <EmiCreditCardForm setPaymentDetails={setPaymentDetails} gateway={selectedGateway} />
+                <CardForm setPaymentDetails={setPaymentDetails} gateway={selectedGateway} />
               </Div>
             </Div>
           )}

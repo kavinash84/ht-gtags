@@ -159,7 +159,7 @@ export const setFiltersInState = payLoad => ({
 /* eslint-disable max-len */
 
 export const applyFilter = ({
-  query, pincode, city = 'delhi', filters, searchquery
+  query, pincode, city, filters, searchquery
 }) => dispatch =>
   dispatch({
     types: [LOAD_FILTER, LOAD_FILTER_SUCCESS, LOAD_FILTER_FAIL],

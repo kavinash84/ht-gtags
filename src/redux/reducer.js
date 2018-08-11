@@ -31,6 +31,8 @@ import myaddress from './modules/myaddress';
 import relatedproducts from './modules/relatedproducts';
 import paymentstatus from './modules/paymentstatus';
 import recentlyviewed from './modules/recentlyviewed';
+import storelocator from './modules/storelocator';
+import emioptions from './modules/emioptions';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -75,6 +77,8 @@ export default function createReducers(asyncReducers) {
     relatedproducts,
     paymentstatus,
     recentlyviewed,
+    storelocator,
+    emioptions,
     ...asyncReducers
   };
 }

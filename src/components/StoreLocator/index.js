@@ -1,33 +1,42 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Heading from 'hometown-components/lib/Heading';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
-import Button from 'hometown-components/lib/Buttons';
-import Span from 'hometown-components/lib/Span';
 import { Label } from 'hometown-components/lib/Label';
+import PropTypes from 'prop-types';
 import Map from './Map';
-import mapData from './mapData';
 
 const styles = require('./StoreLocator.scss');
 
+@connect(({ storelocator }) => ({
+  ...storelocator
+}))
 class StoreLocator extends React.Component {
+  static propTypes = {
+    data: PropTypes.object
+  };
+  static defaultProps = {
+    data: {}
+  };
   state = {
     position: { lat: 21.821027, lng: 78.415743 }, // Default Centre of
     zoomlevel: 5,
     open: false,
     currentList: [],
-    currentState: null,
-    currentCity: null
+    currentState: null
   };
   componentWillMount() {
+    const { data } = this.props;
+    const mapData = data.items.text;
     this.setState({
       currentList: mapData
     });
   }
 
-  handleClick = value => {
+  handleClick = (value, mapData) => {
     const details = mapData.filter(item => item.store === value)[0];
     const { position } = details;
     this.setState({
@@ -37,7 +46,7 @@ class StoreLocator extends React.Component {
     });
   };
 
-  handleSelectState = state => {
+  handleSelectState = (state, mapData) => {
     const currentList = mapData.filter(item => item.state === state);
     let lat = 0;
     currentList.map(item => {
@@ -55,17 +64,13 @@ class StoreLocator extends React.Component {
       currentList,
       position: { lat, lng },
       currentState: state,
-      currentCity: null,
       zoomlevel: 8,
       open: false
     });
   };
 
-  handleSelectCity = city => {
-    let currentList = this.state.currentList.filter(item => item.city === city);
-    if (currentList.length === 0) {
-      currentList = mapData;
-    }
+  handleSelectCity = (city, list) => {
+    const currentList = list.filter(item => item.city === city);
     let lat = 0;
     currentList.map(item => {
       lat += item.position.lat;
@@ -82,20 +87,21 @@ class StoreLocator extends React.Component {
       currentList,
       position: { lat, lng },
       zoomlevel: 11,
-      open: false,
-      currentCity: city
+      open: false
     });
   };
 
   render() {
+    const { data } = this.props;
+    const mapData = data.items.text;
     const {
-      position, zoomlevel, open, currentList, currentState, currentCity
+      position, zoomlevel, open, currentList, currentState
     } = this.state;
     //
     let stateList = mapData.map(item => item.state);
-    stateList = stateList.filter((item, pos) => stateList.indexOf(item) === pos);
-    let cityList = currentList.map(item => item.city);
+    let cityList = mapData.filter(item => item.state === currentState).map(item => item.city);
     cityList = cityList.filter((item, pos) => cityList.indexOf(item) === pos);
+    stateList = stateList.filter((item, pos) => stateList.indexOf(item) === pos);
     //
     return (
       <Div type="block">
@@ -122,79 +128,35 @@ class StoreLocator extends React.Component {
                 open={open}
               />
               <Div className={styles.filterWrapper}>
-                <div className={`${styles.filterBlock} dropdownWrapper`}>
-                  <Button
-                    btnType="custom"
-                    size="block"
-                    bg="#FFF"
-                    color="#656565"
-                    border="none"
-                    fontSize="0.75em"
-                    tt="uppercase"
-                    ta="left"
-                    fontWeight="medium"
-                    className={styles.filterDD}
-                  >
-                    {currentState || 'Select State'}
-                    <Span ml="0.5rem" fontSize="1.5em" className={styles.arrow}>
-                      &#9662;
-                    </Span>
-                  </Button>
-                  <div className={`dropDown ${styles.dropDown}`}>
-                    <ul>
-                      {stateList.map(item => (
-                        <li key={item}>
-                          <button onClick={() => this.handleSelectState(item)}>
-                            <Label fontSize="0.75em" ml="0.625rem">
-                              {item}
-                            </Label>
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
+                <select onChange={e => this.handleSelectState(e.target.value, mapData)}>
+                  <option value={null} key="state">
+                    SELECT STATE
+                  </option>
+                  {stateList.map(item => (
+                    <option value={item} key={item}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
 
                 {currentState && (
-                  <div className={`${styles.filterBlock} dropdownWrapper`}>
-                    <Button
-                      btnType="custom"
-                      size="block"
-                      bg="#FFF"
-                      ta="left"
-                      color="#656565"
-                      border="none"
-                      fontSize="0.75em"
-                      tt="uppercase"
-                      fontWeight="medium"
-                      className={styles.filterDD}
-                    >
-                      {currentCity || 'Select City'}
-                      <Span ml="0.5rem" fontSize="1.5em" className={styles.arrow}>
-                        &#9662;
-                      </Span>
-                    </Button>
-                    <div className={`dropDown ${styles.dropDown}`}>
-                      <ul>
-                        {cityList.map(item => (
-                          <li key={item}>
-                            <button onClick={() => this.handleSelectCity(item)}>
-                              <Label fontSize="0.75em" ml="0.625rem">
-                                {item}
-                              </Label>
-                            </button>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
+                  <select onChange={e => this.handleSelectCity(e.target.value, mapData)}>
+                    <option value={null} key="state">
+                      SELECT CITY
+                    </option>
+                    {cityList.map(item => (
+                      <option value={item} key={item}>
+                        {item}
+                      </option>
+                    ))}
+                  </select>
                 )}
 
                 <div className={styles.cistList}>
                   <ul>
                     {currentList.map((item, index) => (
                       <li key={String(index)}>
-                        <button onClick={() => this.handleClick(item.store)}>
+                        <button onClick={() => this.handleClick(item.store, mapData)}>
                           <Label fontSize="1rem" mt="0" ml="0">
                             {item.store}
                           </Label>
