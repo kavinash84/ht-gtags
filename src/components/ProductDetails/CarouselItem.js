@@ -10,7 +10,7 @@ const props = {
   scale: 1.5,
   offset: { vertical: 0, horizontal: 10 },
   zoomStyle:
-    'left: 0%;width: 279px;height: 279px;padding: 5px;box-shadow: 2px 2px 10px 0 rgba(0, 0, 0, 0.1);z-index: 1;',
+    'left: 100%;width: 600px;height: 600px;padding: 5px;box-shadow: 2px 2px 10px 0 rgba(0, 0, 0, 0.1);z-index: 1;',
   zoomLensStyle: 'opacity: 0.5;background-color: gray;z-index:2;'
 };
 

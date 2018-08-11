@@ -9,7 +9,7 @@
   background-color: #ffffff;
   width: 100%;
   height: auto;
-  max-height: 500px;
+  max-height: 550px;
   overflow: auto;
   z-index: 2;
   position: absolute;
@@ -38,7 +38,7 @@
       margin: 0 0 5px;
       font-weight: 600;
       a {
-        color: $primary;
+        color: #222222;
       }
     }
     li {

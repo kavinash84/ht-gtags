@@ -29,6 +29,8 @@
   }
   .dropDown {
     width: 100%;
+    max-height: 250px;
+    overflow: auto;
     label {
       text-transform: uppercase;
     }

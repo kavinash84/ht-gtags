@@ -2,7 +2,10 @@
 @import "../../theme/_mixins";
 
 .storeBlock {
-  padding: 0 0.75rem 1.25rem;
+  padding: 1.125rem;
+  background: #f7f7f7;
+  margin: 0 0.5rem 1rem;
+  cursor: pointer;
 }
 .storeSliderItem {
   .link {
