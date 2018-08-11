@@ -8,13 +8,13 @@ import * as actionCreators from 'redux/modules/shipping';
 
 const styles = require('./ShippingPincode.scss');
 
-const onChange = (dispatcher, onChangePincode, load) => e => {
+const onChange = (dispatcher, onChangePincode, loadPincodeDetails) => e => {
   const {
     target: { value }
   } = e;
   dispatcher(value);
   onChangePincode(value);
-  if (value.length >= 2) load(value);
+  if (value.length === 6) loadPincodeDetails(value);
 };
 
 // const setPincodeInStore = (dispatcher, loadPincodeDetails, pincode) => e => {
@@ -34,11 +34,11 @@ const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators },
 // }
 const Pincode = ({
   onChangePincode,
-  // loadPincodeDetails,
+  loadPincodeDetails,
   setPincodeQuery,
   // setPincode,
   pincode,
-  load,
+  // load,
   // loading,
   // loaded,
   // results,
@@ -55,7 +55,7 @@ const Pincode = ({
       backgroundColor="#f2f2f2"
       borderColor="rgba(0, 0, 0, 0.03)"
       height="2.5rem"
-      onChange={onChange(setPincodeQuery, onChangePincode, load)}
+      onChange={onChange(setPincodeQuery, onChangePincode, loadPincodeDetails)}
       value={pincode}
       feedBackError={pincodeFeedBackError}
       feedBackMessage={pincodeFeedBackMessage}
@@ -95,8 +95,8 @@ Pincode.propTypes = {
   // loading: PropTypes.bool,
   // loaded: PropTypes.bool,
   // results: PropTypes.array,
-  load: PropTypes.func.isRequired,
-  // loadPincodeDetails: PropTypes.func.isRequired,
+  // load: PropTypes.func.isRequired,
+  loadPincodeDetails: PropTypes.func.isRequired,
   setPincodeQuery: PropTypes.func.isRequired,
   // setPincode: PropTypes.func.isRequired,
   onChangePincode: PropTypes.func.isRequired,
