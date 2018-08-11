@@ -18,7 +18,7 @@ const StoreListItem = ({
         {/* <Img src="https://www.hometown.in/media/cms/hometownv2/compressed/New-Delhi.jpg" alt="" /> */}
         <Row type="block" m="0">
           <Div>
-            <Heading color="textDark" fontSize="1em" mt="1rem">
+            <Heading color="textDark" fontSize="1em" mt="0">
               {store}
             </Heading>
             <Text fontSize="0.875em" mb="0.125rem" mt="0">
@@ -27,7 +27,7 @@ const StoreListItem = ({
             <Text fontSize="0.875em" mb="0.125rem" mt="0">
               {city}, {state}, {pincode}
             </Text>
-            <Text fontSize="0.875em" mb="0.125rem" mt="0">
+            <Text fontSize="0.875em" mb="0" mt="0">
               {phone}
             </Text>
           </Div>

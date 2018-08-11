@@ -105,10 +105,10 @@ class StoreLocator extends React.Component {
     //
     return (
       <Div type="block">
-        <Section mb="0" p="1.375rem 0.5rem" bg="oldMont" boxShadow="0 2px 8px 0 rgba(0, 0, 0, 0.17)">
+        <Section mb="0" p="1.375rem 0.5rem" bg="block10" boxShadow="0 2px 8px 0 rgba(0, 0, 0, 0.17)">
           <Container type="container" pr="0.5rem" pl="0.5rem">
             <Row display="block" mr="0" ml="0" mb="0">
-              <Heading fontSize="1.75rem" color="white" mt="0" mb="0" fontWeight="400">
+              <Heading fontSize="1.75rem" color="text" mt="0" mb="0" fontWeight="400">
                 Store Locator
               </Heading>
             </Row>

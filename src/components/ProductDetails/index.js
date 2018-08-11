@@ -222,7 +222,7 @@ class ProductDetails extends React.Component {
               </Div>
             </Row>
             {relatedproductsList.length > 0 && (
-              <Row display="block" mt="0.625rem" mb="0.625rem" mr="0">
+              <Row display="block" mt="2.5rem" mb="0.625rem" mr="0">
                 <ProductCarousel
                   title="Related Products"
                   data={relatedproductsList}
