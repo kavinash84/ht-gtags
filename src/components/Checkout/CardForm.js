@@ -24,6 +24,7 @@ const onChangeDetails = (dispatcher, gateway) => e => {
   const { name, value } = e.target;
   dispatcher({ gateway, data: { [name]: value } });
 };
+
 const mapStateToProps = ({ paymentoptions, app }) => ({
   details: paymentoptions.paymentMethodDetails[paymentoptions.selectedGateway],
   sessionId: app.sessionId,
@@ -32,6 +33,7 @@ const mapStateToProps = ({ paymentoptions, app }) => ({
 });
 
 const onGetCardType = (dispatcher, sessionId, gateway) => e => {
+  console.log(e.target.value);
   const { value } = e.target;
   dispatcher(value, sessionId, gateway);
 };
@@ -57,10 +59,9 @@ const CardForm = ({
         value={nameOnCard}
         name="nameOnCard"
         onChange={onChangeDetails(setPaymentDetails, gateway)}
-        onBlur={onGetCardType(getCardType, sessionId, gateway)}
       />
     </Div>
-    <Div col="5" pr="1rem">
+    <Div col="5" pr="1rem" className={styles.cardFieldWrapper}>
       <FormInput
         label="Card number"
         type="number"
@@ -68,10 +69,11 @@ const CardForm = ({
         name="cardNumber"
         value={cardNumber}
         onChange={onChangeDetails(setPaymentDetails, gateway)}
+        onBlur={onGetCardType(getCardType, sessionId, gateway)}
       />
-      {cardType === 'VISA' && <Img src={visaIcon} alt="visaCard" />}
-      {cardType === 'MAST' && <Img src={mastercardIcon} alt="Master Card" />}
-      {cardType === 'MAESTRO' && <Img src={maestroIcon} alt="Maestro" />}
+      {cardType === 'visa' && <Img src={visaIcon} alt="visaCard" />}
+      {cardType === 'mast' && <Img src={mastercardIcon} alt="Master Card" />}
+      {cardType === 'maestro' && <Img src={maestroIcon} alt="Maestro" />}
       {cardType === 'amex' && <Img src={aeIcon} alt="maestroCard" />}
       {cardType === 'discover' && <Img src={discoverIcon} alt="discoverCard" />}
       {cardType === 'diners' && <Img src={dcIcon} alt="amexCard" />}
