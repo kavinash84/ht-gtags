@@ -59,8 +59,6 @@ export const formFilterLink2 = (key, name, b64, category, value, selected, urlqu
     [b64] = b64.split('&page=');
     obj64 = JSON.parse(atob(b64));
   }
-  console.log(obj64);
-  console.log(name);
   if (name === 'Category') {
     let query;
     const splitLink = key.split('?');
