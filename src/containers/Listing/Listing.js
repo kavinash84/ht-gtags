@@ -44,8 +44,11 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
     const {
       pincode: { selectedPincode },
       pagination: { page },
-      app: { city }
+      app: { city },
+      products: { list },
+      router: { location: prevLocation }
     } = getState();
+    const { search: prevSearch } = prevLocation;
     let query;
     let filters;
     let loadResults;
@@ -89,6 +92,9 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
       await dispatch(clearPreviousList());
       await dispatch(setCurrentPage(currentPage));
       await dispatch(clearPreviousSort());
+    }
+    if (location.search.split('redirect').length > 1 || (prevSearch === search && list.length > 0)) {
+      return;
     }
     await dispatch(loadResults).catch(() => null);
     await dispatch(setCategoryQuery(query, pincode));
