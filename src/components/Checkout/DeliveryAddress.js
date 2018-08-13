@@ -65,7 +65,7 @@ class DeliveryAddress extends Component {
   };
   onCloseLoginModal = () => {
     const { history } = this.props;
-    history.getBack();
+    history.goBack();
     this.setState({ openLogin: false });
   };
 
@@ -263,9 +263,4 @@ DeliveryAddress.propTypes = {
   location: PropTypes.object,
   currentaddress: PropTypes.number.isRequired
 };
-export default connect(
-  mapStateToProps,
-  null,
-  null,
-  { withRef: true }
-)(DeliveryAddress);
+export default connect(mapStateToProps, null, null, { withRef: true })(DeliveryAddress);
