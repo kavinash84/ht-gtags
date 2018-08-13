@@ -33,6 +33,7 @@ import paymentstatus from './modules/paymentstatus';
 import recentlyviewed from './modules/recentlyviewed';
 import storelocator from './modules/storelocator';
 import emioptions from './modules/emioptions';
+import notifs from './modules/notifs';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -79,6 +80,7 @@ export default function createReducers(asyncReducers) {
     recentlyviewed,
     storelocator,
     emioptions,
+    notifs,
     ...asyncReducers
   };
 }
