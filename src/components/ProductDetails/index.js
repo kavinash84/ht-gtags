@@ -144,7 +144,6 @@ class ProductDetails extends React.Component {
     const isEmiAvailable = Number(simples[simpleSku].meta.no_emi) === 0;
     const { price, special_price: specialPrice } = meta;
     const checkSpecialPrice = specialPrice || price;
-    // console.log(isInWishList(wishList, sku), isInWishList(loadingList, sku));
     return (
       <Div type="block">
         <Section p="0" pt="1.25rem" mb="0">
@@ -228,7 +227,7 @@ class ProductDetails extends React.Component {
                     isWishList={isInWishList(wishList, sku)}
                     wishlistLoading={isInWishList(loadingList, sku)}
                   >
-                    ADD TO WISHLIST
+                    {isInWishList(wishList, sku) ? 'REMOVE FROM WISHLIST' : 'ADD TO WISHLIST'}
                   </Button>
                 </Div>
               </Div>
