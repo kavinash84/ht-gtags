@@ -9,10 +9,11 @@ export default function userMiddleware() {
         dismissAfter: 2000
       }));
     }
-    if (action.type === 'cart/ADD_TO_CART_FAIL') {
+    if (action.type === 'cart/ADD_TO_CART_FAIL' || action.type === 'cart/UPDATE_CART_FAIL') {
+      const errorMessage = action.error && action.error.error_message;
       dispatch(notifSend({
         type: 'warning',
-        msg: 'Item already added to cart',
+        msg: errorMessage,
         dismissAfter: 2000
       }));
     }
