@@ -6,6 +6,7 @@ import clientMiddleware from './middleware/clientMiddleware';
 import gaMiddleware from './middleware/gaMiddleware';
 import userMiddleware from './middleware/userMiddleware';
 import paymentsMiddleware from './middleware/paymentsMiddleware';
+import notifyMiddleware from './middleware/notifyMiddleware';
 import createReducers from './reducer';
 
 function combine(reducers, persistConfig) {
@@ -54,7 +55,8 @@ export default function createStore({
     routerMiddleware(history),
     gaMiddleware(),
     userMiddleware(),
-    paymentsMiddleware()
+    paymentsMiddleware(),
+    notifyMiddleware()
   ];
 
   if (__CLIENT__ && __DEVELOPMENT__) {

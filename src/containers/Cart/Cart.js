@@ -6,7 +6,6 @@ import Empty from 'hometown-components/lib/Empty';
 import Img from 'hometown-components/lib/Img';
 import Section from 'hometown-components/lib/Section';
 import CartShimmer from 'components/Cart/CartShimmer';
-import Notifications from 'components/Notifications';
 import Menu from 'containers/MenuNew/index';
 import Footer from 'components/Footer';
 import TitleBar from 'components/TitleBar';
@@ -35,7 +34,6 @@ export default class CartContainer extends Component {
   static propTypes = {
     results: PropTypes.array,
     summary: PropTypes.object,
-    error: PropTypes.object,
     isCartChecked: PropTypes.bool,
     history: PropTypes.object.isRequired,
     resetCheckKey: PropTypes.func.isRequired,
@@ -48,7 +46,6 @@ export default class CartContainer extends Component {
   static defaultProps = {
     results: [],
     summary: null,
-    error: null,
     isCartChecked: false,
     loading: false,
     loaded: false
@@ -64,7 +61,7 @@ export default class CartContainer extends Component {
 
   render() {
     const {
-      results, summary, error, loading, loaded
+      results, summary, loading, loaded
     } = this.props;
     return (
       <div className="wrapper">
@@ -86,7 +83,6 @@ export default class CartContainer extends Component {
         {!loading && (results && results.length !== 0) ? (
           <div>
             <TitleBar title="Shopping Cart" />
-            {error && <Notifications msg={error.error_message} type="error" />}
             <Cart results={results} summary={summary} />
           </div>
         ) : (

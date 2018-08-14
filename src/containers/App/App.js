@@ -23,13 +23,13 @@ import { loadCart, isLoaded as isCartLoaded, synCart } from 'redux/modules/cart'
 import { PINCODE } from 'helpers/Constants';
 import config from 'config';
 import Theme from 'hometown-components/lib/Theme';
+import Alert from 'hometown-components/lib/Alert';
+import * as notifActions from 'redux/modules/notifs';
+import Notifs from '../../components/Notifs';
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState } }) => {
-    const {
-      pincode: { selectedPincode },
-      app: { sessionId, csrfToken }
-    } = getState();
+    const { pincode: { selectedPincode }, app: { sessionId, csrfToken } } = getState();
     const defaultPincode = selectedPincode === '' ? PINCODE : selectedPincode;
     if (!isSessionSet(getState()) || !sessionId || !csrfToken) {
       await dispatch(generateSession(defaultPincode)).catch(error => console.log(error));
@@ -48,9 +48,7 @@ import Theme from 'hometown-components/lib/Theme';
     }
   },
   defer: ({ store: { dispatch, getState } }) => {
-    const {
-      userLogin: { isLoggedIn }
-    } = getState();
+    const { userLogin: { isLoggedIn } } = getState();
     if (isLoggedIn && !isWishListLoaded(getState())) {
       dispatch(loadWishlist()).catch(error => console.log(error));
     }
@@ -68,11 +66,13 @@ import Theme from 'hometown-components/lib/Theme';
     login: state.userLogin,
     signUp: state.userSignUp,
     pincode: state.pincode,
-    app: state.app
+    app: state.app,
+    notifs: state.notifs
   }),
   {
     pushState: push,
-    loginUser: loginUserAfterSignUp
+    loginUser: loginUserAfterSignUp,
+    ...notifActions
   }
 )
 export default class App extends Component {
@@ -95,7 +95,11 @@ export default class App extends Component {
     }),
     app: PropTypes.shape({
       sessionId: PropTypes.string
-    }).isRequired
+    }).isRequired,
+    notifs: PropTypes.shape({
+      global: PropTypes.array
+    }).isRequired,
+    notifSend: PropTypes.func.isRequired
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -120,23 +124,21 @@ export default class App extends Component {
     //     password: true,
     //   }).then(user => console.log(user));
     // }
+    // this.props.notifSend({
+    //   msg: 'Welcome to HomeTown.in',
+    //   type: 'success',
+    //   dismissAfter: 2000
+    // });
   }
 
   componentWillReceiveProps(nextProps) {
     const { dispatch } = this.context.store;
-    const {
-      login: { isLoggedIn },
-      pincode: { selectedPincode },
-      app: { sessionId }
-    } = this.props;
+    const { login: { isLoggedIn }, pincode: { selectedPincode }, app: { sessionId } } = this.props;
     const pincode = selectedPincode === '' ? PINCODE : '';
     if (nextProps.signUp && nextProps.signUp.loaded) {
       const { signUp } = nextProps;
       if (!isLoggedIn && signUp.response.signup_complete) {
-        const {
-          signUp: { response },
-          loginUser
-        } = nextProps;
+        const { signUp: { response }, loginUser } = nextProps;
         if (response.signup_complete) {
           dispatch(loginUser(response.token));
           dispatch(synCart(sessionId, pincode));
@@ -159,45 +161,14 @@ export default class App extends Component {
       window.scrollTo(0, 0);
     }
   }
-  /* eslint-disable */
   render() {
     const styles = require('./App.scss');
-    const { location, route } = this.props;
+    const { location, route, notifs } = this.props;
     const pathname = (location && location.pathname) || '/';
     return (
       <ThemeProvider theme={Theme}>
         <div className={styles.app}>
           <Helmet {...config.app.head}>
-            <script>
-              {`
-                var dataLayer = [];
-                (function(w, d, s, l, i) {
-                    w[l] = w[l] || [];
-                    w[l].push({
-                        'gtm.start': new Date().getTime(),
-                        event: 'gtm.js'
-                    });
-                    var f = d.getElementsByTagName(s)[0],
-                        j = d.createElement(s),
-                        dl = l != 'dataLayer' ? '&l=' + l : '';
-                    j.async = true;
-                    j.src =
-                        'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-                    f.parentNode.insertBefore(j, f);
-                })(window, document, 'script', 'dataLayer', 'GTM-T5VV7MZ');
-              `}
-            </script>
-            <script>
-              {`
-              var google_tag_params={
-                  ecomm_pagetype: '',
-                  ecomm_prodid: [34592212, '23423-131-12'],
-                  ecomm_totalvalue: '',
-                };
-
-              `}
-            </script>
-
             <link
               rel="alternate"
               media="only screen and (max-width:640px)"
@@ -205,7 +176,18 @@ export default class App extends Component {
             />
             <link rel="canonical" href={`https://www.hometown.in${pathname}`} />
           </Helmet>
-          <main className={styles.appContent}>{renderRoutes(route.routes)}</main>
+          <main className={styles.appContent}>
+            {notifs.global && (
+              <div className="container">
+                <Notifs
+                  className={styles.notifs}
+                  namespace="global"
+                  NotifComponent={props => <Alert {...props} show />}
+                />
+              </div>
+            )}
+            {renderRoutes(route.routes)}
+          </main>
         </div>
       </ThemeProvider>
     );
