@@ -28,6 +28,10 @@ export default class QuickView extends Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
+  constructor(props) {
+    super(props);
+    this.quickViewSlider = React.createRef();
+  }
   state = {
     currentImage: 0,
     previousDisabled: true,
@@ -58,7 +62,7 @@ export default class QuickView extends Component {
   };
 
   setDisable = () => {
-    this.quickViewSlider.slickGoTo(this.state.currentImage);
+    this.quickViewSlider.current.slider.current.slickGoTo(this.state.currentImage);
     if (this.state.currentImage === this.state.product.images.length - 1) {
       this.setState({
         nextDisabled: true,
@@ -178,9 +182,11 @@ export default class QuickView extends Component {
             <Div className={`${styles.thumb} thumbCarousel`}>
               <SlickSlider
                 settings={adjustSlides(images.length)}
-                passedRef={quickViewSlider => {
-                  this.quickViewSlider = quickViewSlider;
-                }}
+                ref={this.quickViewSlider}
+
+                // passedRef={quickViewSlider => {
+                //   this.quickViewSlider = quickViewSlider;
+                // }}
               >
                 {images.map((image, index) => (
                   <div key={String(index)}>

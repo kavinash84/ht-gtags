@@ -24,14 +24,18 @@ export default class SlickSlider extends Component {
   static defaultProps = {
     passedRef: {}
   };
+  constructor(props) {
+    super(props);
+    this.slider = React.createRef();
+  }
 
   render() {
     const { children, settings } = this.props;
-    const { passedRef } = this.props;
+    // const { passedRef } = this.props;
     const newSettings = { ...defaultSettings, ...settings };
     return (
       <Div mb="0.625rem">
-        <Slider ref={passedRef} {...newSettings}>
+        <Slider ref={this.slider} {...newSettings}>
           {children}
         </Slider>
       </Div>
