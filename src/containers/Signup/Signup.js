@@ -62,7 +62,7 @@ export default class SignupFormContainer extends Component {
     const {
       target: { value }
     } = e;
-    const checkError = validateMobile(value, 'Mobile should be 10 digits');
+    const checkError = validateMobile(value, 'Mobile no. should be 10 digits');
     this.setState({
       phone: value,
       phoneError: checkError.error,

@@ -43,7 +43,9 @@ export default class ProfileForm extends Component {
   };
 
   componentWillMount() {
-    const { profile: { full_name: fullName, email, contact_number: phone } } = this.props;
+    const {
+      profile: { full_name: fullName, email, contact_number: phone }
+    } = this.props;
     this.setState({
       fullName: (fullName && fullName.trim()) || '',
       email,
@@ -51,8 +53,10 @@ export default class ProfileForm extends Component {
     });
   }
   onChangePhone = e => {
-    const { target: { value } } = e;
-    const checkError = validateMobile(value, 'Mobile should be 10 digits');
+    const {
+      target: { value }
+    } = e;
+    const checkError = validateMobile(value, 'Mobile no. should be 10 digits');
     this.setState({
       phone: value,
       phoneError: checkError.error,
@@ -60,7 +64,9 @@ export default class ProfileForm extends Component {
     });
   };
   onChangeFullName = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = isBlank(value);
     this.setState({
       fullName: value,
@@ -89,7 +95,9 @@ export default class ProfileForm extends Component {
   };
 
   onChangeEmail = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = validateEmail(value, 'Enter valid email');
     this.setState({
       email: value,
