@@ -41,12 +41,13 @@ const onClickLogout = (dispatcher, history) => e => {
 @withRouter
 @connect(
   ({
-    pincode, userLogin, wishlist, cart
+    pincode, userLogin, wishlist, cart, router
   }) => ({
     selectedPincode: pincode.selectedPincode,
     isLoggedIn: userLogin.isLoggedIn,
     wishListCount: wishlist.data.length,
-    cartCount: getCartCount(cart)
+    cartCount: getCartCount(cart),
+    router
   }),
   { logoutUser: logout }
 )
@@ -81,7 +82,11 @@ export default class MenuSidebar extends Component {
       userPopOver: !this.state.userPopOver
     });
   };
-
+  handleClick = URL => e => {
+    e.preventDefault();
+    const { history, router } = this.props;
+    history.push(`${URL}/?redirect=${router.location.pathname}`);
+  };
   render() {
     const styles = require('./TopBar.scss');
     const { userPopOver } = this.state;
@@ -169,10 +174,14 @@ export default class MenuSidebar extends Component {
                 {!isLoggedIn && (
                   <div className={styles.yourAccountWrapper}>
                     <Div col="6" pr="5px">
-                      <Link to={SIGNUP_URL}>Sign Up</Link>
+                      <Link to={SIGNUP_URL} onClick={this.handleClick(SIGNUP_URL)}>
+                        Sign Up
+                      </Link>
                     </Div>
                     <Div col="6" pl="5px">
-                      <Link to={LOGIN_URL}>Log In</Link>
+                      <Link to={LOGIN_URL} onClick={this.handleClick(LOGIN_URL)}>
+                        Log In
+                      </Link>
                     </Div>
                   </div>
                 )}
@@ -201,6 +210,7 @@ MenuSidebar.defaultProps = {
   cartCount: 0,
   isLoggedIn: false,
   history: {},
+  router: {},
   logoutUser: () => {}
 };
 
@@ -210,5 +220,6 @@ MenuSidebar.propTypes = {
   history: PropTypes.object,
   wishListCount: PropTypes.number,
   cartCount: PropTypes.number,
-  logoutUser: PropTypes.func
+  logoutUser: PropTypes.func,
+  router: PropTypes.object
 };
