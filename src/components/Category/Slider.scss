@@ -10,11 +10,6 @@
     display: block;
     position: relative;
   }
-  &.square {
-    .content {
-
-    }
-  }
   &.round {
     &:after {
       width: 240px;

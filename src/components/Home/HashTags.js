@@ -13,7 +13,7 @@ const styles = require('./HashTags.scss');
 const HashTags = ({ data }) => (
   <Div>
     <Container pr="0" pl="0">
-      <Section p="3.5rem 20%" mt="3rem" mb="3rem" className={styles.hashTags} bg="hashTags">
+      <Section p="3.5rem 20%" mt="1rem" mb="3rem" className={styles.hashTags} bg="hashTags">
         <Row>
           <Div>
             <Text ta="center" color="rgba(255, 255, 255, 0.75)" fontSize="1.8em" fontWeight="300" mb="0" mt="0">

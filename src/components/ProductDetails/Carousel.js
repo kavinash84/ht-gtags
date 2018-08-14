@@ -6,8 +6,8 @@ import CarouselItem from './CarouselItem';
 import SlickSlider from '../SlickSlider';
 
 const adjustSlides = length => ({
-  slidesToShow: length >= 4 ? 4 : length,
-  slidesToScroll: 4,
+  slidesToShow: length >= 3 ? 3 : length,
+  slidesToScroll: 3,
   autoplay: false,
   infinite: false
 });
@@ -20,9 +20,7 @@ export default class CategoryCarousel extends Component {
         <Container pr="0" pl="0">
           <SlickSlider settings={adjustSlides(data.length)}>
             {data.map(slide => (
-              <div key={slide.id_catalog_product_image}>
-                <CarouselItem image={`${slide.url}.jpg`} name={title} />
-              </div>
+              <CarouselItem key={slide.id_catalog_product_image} image={`${slide.url}.jpg`} name={title} />
             ))}
           </SlickSlider>
         </Container>

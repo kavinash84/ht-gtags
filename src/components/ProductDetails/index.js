@@ -236,7 +236,7 @@ class ProductDetails extends React.Component {
             <ProductDetailsCarousel data={images} title={meta.name} />
           </Container>
         </Section>
-        <Section p="0" pl="0.5rem" pr="0.5rem" pb="1.5rem" mb="0" mt="1.5rem">
+        <Section p="0" pl="0.5rem" pr="0.5rem" pb="1.5rem" mb="0" mt="1rem">
           <Container type="container" pr="0" pl="0">
             <Row display="block" mt="0.625rem" mb="0.625rem" mr="0">
               <Div col="9" pr="2rem">

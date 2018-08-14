@@ -155,19 +155,27 @@ export default class QuickView extends Component {
           </Div>
           <Div col="5" pl="1.5rem" pr="1rem">
             <Div pt="1rem" className={styles.content}>
-              <Heading color="rgba(0, 0, 0, 0.75)" ellipsis={false} fontSize="1.375em" lh="1.7" mt="0" mb="1rem">
+              <Heading
+                color="rgba(0, 0, 0, 0.75)"
+                ellipsis={false}
+                fontSize="1.25rem"
+                fontWeight="600"
+                lh="1.5"
+                mt="0"
+                mb="0.625rem"
+              >
                 {name}
               </Heading>
               <Text>
-                <Span color="rgba(0, 0, 0, 0.6)" fontWeight="600" fontSize="1.5em" mr="1rem">
+                <Span color="rgba(0, 0, 0, 0.6)" fontWeight="600" fontSize="1.325rem" mr="1rem">
                   Rs. {(discPrice && formatAmount(discPrice)) || (price && formatAmount(price))}
                 </Span>
-                <Span fontWeight="400" color="rgba(0, 0, 0, 0.6)" fontSize="1.125em">
+                <Span fontWeight="400" color="rgba(0, 0, 0, 0.6)" fontSize="1rem">
                   <s>Rs. {formatAmount(price)}</s>
                 </Span>
               </Text>
               {saving && (
-                <Text color="rgba(0, 0, 0, 0.6)" fontWeight="700" fontSize="0.857rem" mb="0">
+                <Text color="rgba(0, 0, 0, 0.6)" fontWeight="700" fontSize="0.857rem" mb="1rem">
                   Savings:{' '}
                   <Span color="rgba(0, 0, 0, 0.6)" fontSize="0.857rem" va="bottom">
                     Rs.
