@@ -20,14 +20,14 @@ import { signUp } from 'redux/modules/signUp';
 
 const SidebarImg = require('../../../static/login-side-thumb.png');
 
-@connect(({ userSignUp, app }) => ({
+@connect(({ userSignUp, app, notifs }) => ({
   signUpResponse: userSignUp,
-  session: app.sessionId
+  session: app.sessionId,
+  notifs
 }))
 @withRouter
 export default class SignupFormContainer extends Component {
   static propTypes = {
-    signUpResponse: PropTypes.object.isRequired,
     session: PropTypes.string.isRequired
   };
   static contextTypes = {
@@ -114,7 +114,6 @@ export default class SignupFormContainer extends Component {
       passwordError,
       passwordErrorMessage
     } = this.state;
-    const { signUpResponse } = this.props;
     return (
       <Section p="0" mb="0">
         <Menu />
@@ -160,7 +159,6 @@ export default class SignupFormContainer extends Component {
                           passwordFeedBackError={passwordError}
                           passwordFeedBackMessage={passwordErrorMessage}
                           onSubmitSignup={this.onSubmitSignup}
-                          signUpResponse={signUpResponse}
                         />
                       </Div>
                     </Row>
