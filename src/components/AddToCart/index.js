@@ -32,37 +32,59 @@ const mapStateToProps = ({
 });
 
 const AddToCart = ({
-  session, simpleSku, sku, addToCart, pincode, cartSKUs, addingToCart, itemId, stateId, size
+  session,
+  simpleSku,
+  sku,
+  addToCart,
+  pincode,
+  cartSKUs,
+  addingToCart,
+  itemId,
+  stateId,
+  size,
+  quantity
 }) => {
   const checkStatus = checkSKUInCart(cartSKUs, sku);
   const addLoading = addingToCart && stateId === itemId;
   return (
     <div>
-      {!checkStatus ? (
-        <Button
-          btnType="custom"
-          border="1px solid"
-          bc="#f98d29"
-          color="#f98d29"
-          p="8px 15px 0"
-          size={size}
-          disabled={addLoading}
-          onClick={onClick(itemId, sku, simpleSku, session, pincode)(addToCart)}
-          className={styles.addToCartBtn}
-        >
-          {!addLoading && <AddCart fill="#f98d29" />}
-          {addLoading && <Img width="24px" className="spin" src={LoaderIcon} display="inline" />}
-          <Span ml="0.625rem" fontSize="0.857rem" fontWeight="600" color="#f98d29" va="top">
-            {addLoading ? 'Adding..' : 'ADD TO CART'}
-          </Span>
-        </Button>
+      {quantity === '0' ? (
+        <div>
+          <Button btnType="custom" border="1px solid" bc="white" color="red" p="8px 15px 0" size={size}>
+            <Span ml="0.625rem" fontSize="0.857rem" fontWeight="600" color="red" va="top">
+              {'OUT OF STOCK'}
+            </Span>
+          </Button>
+        </div>
       ) : (
-        <Div display="block" mb="0.625rem">
-          <span className={styles.addedToCart}>✓ Added to Cart</span>
-          <Link className={styles.goToCart} to={CART_URL}>
-            Go To Cart
-          </Link>
-        </Div>
+        <div>
+          {!checkStatus ? (
+            <Button
+              btnType="custom"
+              border="1px solid"
+              bc="#f98d29"
+              color="#f98d29"
+              p="8px 15px 0"
+              size={size}
+              disabled={addLoading}
+              onClick={onClick(itemId, sku, simpleSku, session, pincode)(addToCart)}
+              className={styles.addToCartBtn}
+            >
+              {!addLoading && <AddCart fill="#f98d29" />}
+              {addLoading && <Img width="24px" className="spin" src={LoaderIcon} display="inline" />}
+              <Span ml="0.625rem" fontSize="0.857rem" fontWeight="600" color="#f98d29" va="top">
+                {addLoading ? 'Adding..' : 'ADD TO CART'}
+              </Span>
+            </Button>
+          ) : (
+            <Div display="block" mb="0.625rem">
+              <span className={styles.addedToCart}>✓ Added to Cart</span>
+              <Link className={styles.goToCart} to={CART_URL}>
+                Go To Cart
+              </Link>
+            </Div>
+          )}
+        </div>
       )}
     </div>
   );
@@ -86,10 +108,8 @@ AddToCart.propTypes = {
   addingToCart: PropTypes.bool,
   itemId: PropTypes.string,
   stateId: PropTypes.string,
-  size: PropTypes.string
+  size: PropTypes.string,
+  quantity: PropTypes.string.isRequired
 };
 
-export default connect(
-  mapStateToProps,
-  { ...actionCreators }
-)(AddToCart);
+export default connect(mapStateToProps, { ...actionCreators })(AddToCart);
