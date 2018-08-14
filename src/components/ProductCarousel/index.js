@@ -21,8 +21,8 @@ const ProductCarousel = ({ data, title, length }) => (
           <div key={String(index)}>
             <ProductCarouselItem
               name={item.meta.name}
-              price={item.meta.max_special_price && formatAmount(item.meta.max_special_price)}
-              discPrice={formatAmount(item.meta.price)}
+              discPrice={item.meta.max_special_price && formatAmount(item.meta.max_special_price)}
+              price={formatAmount(item.meta.price)}
               saving={item.meta.max_saving_percentage}
               percentage={item.meta.max_saving_percentage}
               rating={item.reviews.rating}

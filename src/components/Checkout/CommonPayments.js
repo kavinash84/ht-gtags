@@ -58,11 +58,17 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
           <input
             type="radio"
             name="paymentOption"
-            value="DebitCard"
+            value="CreditCard"
             checked={selectedGateway === paymentType}
             onChange={onChangeGateway(onChange, paymentType, session)}
           />
-          <Label for="DebitCard" pl="1rem" color="textLight" ml="0.9375rem">
+          <Label
+            for="CreditCard"
+            pl="0"
+            color="textLight"
+            ml="0.9375rem"
+            onClick={onChangeGateway(onChange, paymentType, session)}
+          >
             Credit Card
           </Label>
           {selectedGateway === paymentType && (
@@ -82,7 +88,13 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
             checked={selectedGateway === paymentType}
             onChange={onChangeGateway(onChange, paymentType, session)}
           />
-          <Label for="DebitCard" pl="1rem" color="textLight" ml="0.9375rem">
+          <Label
+            for="DebitCard"
+            pl="0"
+            color="textLight"
+            ml="0.9375rem"
+            onClick={onChangeGateway(onChange, paymentType, session)}
+          >
             Debit Card
           </Label>
           {selectedGateway === paymentType && (
@@ -103,7 +115,13 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
               checked={selectedGateway === paymentType}
               onChange={onChangeGateway(onChange, paymentType, session)}
             />
-            <Label for="paymentDC" pl="1rem" color="textLight" ml="0.9375rem">
+            <Label
+              for="paymentIB"
+              pl="0"
+              color="textLight"
+              ml="0.9375rem"
+              onClick={onChangeGateway(onChange, paymentType, session)}
+            >
               Internet Banking
             </Label>
           </Div>
@@ -115,7 +133,6 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
                     Choose From Preferred Bank
                   </Label>
                 </Div>
-
                 <BankCard
                   setPaymentDetails={setPaymentDetails}
                   gateway={selectedGateway}
@@ -178,7 +195,13 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
               checked={selectedGateway === paymentType}
               onChange={onChangeGateway(onChange, paymentType, session)}
             />
-            <Label for="paymentDC" pl="1rem" color="textLight" ml="0.9375rem">
+            <Label
+              for="paymentEmi"
+              pl="0"
+              color="textLight"
+              ml="0.9375rem"
+              onClick={onChangeGateway(onChange, paymentType, session)}
+            >
               EMI
             </Label>
           </Div>
@@ -202,7 +225,13 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
               checked={selectedGateway === paymentType}
               onChange={onChangeGateway(onChange, paymentType, session)}
             />
-            <Label for="paymentDC" pl="1rem" color="textLight" ml="0.9375rem">
+            <Label
+              for="paymentWallet"
+              pl="0"
+              color="textLight"
+              ml="0.9375rem"
+              onClick={onChangeGateway(onChange, paymentType, session)}
+            >
               Wallet
             </Label>
           </Div>
@@ -221,6 +250,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
                     gateway={selectedGateway}
                     name="Paytm"
                     detailkey="walletName"
+                    currentSelection={paymentDetails.Wallet.walletName}
                     img="https://www.hometown.in/images/local_v2/onestepcheckout/logo/paytm.jpg"
                   />
                 )}
@@ -230,6 +260,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
                     gateway={selectedGateway}
                     name="Payu"
                     detailkey="walletName"
+                    currentSelection={paymentDetails.Wallet.walletName}
                     img="https://www.hometown.in/images/local_v2/onestepcheckout/logo/payu.jpg"
                   />
                 )}
@@ -239,6 +270,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
                     gateway={selectedGateway}
                     name="Mobikwik"
                     detailkey="walletName"
+                    currentSelection={paymentDetails.Wallet.walletName}
                     img="https://www.hometown.in/images/local_v2/onestepcheckout/logo/mobikwik.jpg"
                   />
                 )}
@@ -253,17 +285,18 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
           <input
             type="radio"
             name="paymentOption"
+            id="paymentCD"
             value="CashOnDelivery"
             checked={selectedGateway === paymentType}
             onChange={onChangeGateway(onChange, paymentType, session)}
           />
-          <Label for="paymentDC" pl="1rem" color="textLight" ml="0.9375rem">
+          <Label for="paymentCD" pl="1rem" color="textLight" ml="0.9375rem">
             Cash On Delivery
           </Label>
         </Div>
       );
     default:
-      return <div>Test</div>;
+      return null;
   }
 };
 
