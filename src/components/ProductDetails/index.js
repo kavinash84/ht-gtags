@@ -139,6 +139,7 @@ class ProductDetails extends React.Component {
       reviews: { count, rating }
     } = product;
     const { category_details: categoryDetails } = meta;
+
     const simpleSku = Object.keys(simples)[0];
     const shipping = simples[simpleSku].groupedattributes.product_shipping_cost;
     const isEmiAvailable = Number(simples[simpleSku].meta.no_emi) === 0;
