@@ -10,11 +10,13 @@ const REMOVE_FROM_WISHLIST_FAILURE = 'wishList/REMOVE_FROM_WISHLIST_FAILURE';
 const CLEAR_WISHLIST = 'wishList/CLEAR_WISHLIST';
 const SET_LOADING_SKU = 'wishList/SET_LOADING_SKU';
 const REMOVE_LOADING_SKU = 'wishList/REMOVE_LOADING_SKU';
+const ADD_TO_WISHLIST_WAITLIST = 'wishlist/ADD_TO_WISHLIST_WAITLIST';
 
 const initialState = {
   data: [],
   loaded: false,
-  loadingList: []
+  loadingList: [],
+  waitlist: ''
 };
 
 const rehyDratedList = (items, id) => items.filter(item => item.wishlist_info.id_customer_wishlist !== Number(id));
@@ -92,7 +94,11 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loadingList: (state.loadingList || []).filter(list => list !== action.sku)
       };
-
+    case ADD_TO_WISHLIST_WAITLIST:
+      return {
+        ...state,
+        waitlist: action.sku
+      };
     case CLEAR_WISHLIST:
       return {
         ...initialState
@@ -164,3 +170,49 @@ export const loadWishlist = () => ({
 export const clearWishList = () => ({
   type: CLEAR_WISHLIST
 });
+
+export const wishListWaitList = sku => ({
+  type: ADD_TO_WISHLIST_WAITLIST,
+  sku
+});
+
+export const syncWishList = () => (dispatch, getState) => {
+  const { wishlist: { data: list, waitlist: id } } = getState();
+  const checkList = isSKUWishlisted(list, id);
+  if (checkList) {
+    const wishListID = checkList.wishlist_info.id_customer_wishlist;
+    dispatch(setLoadingState(id));
+    return dispatch({
+      types: [REMOVE_FROM_WISHLIST, REMOVE_FROM_WISHLIST_SUCCESS, REMOVE_FROM_WISHLIST_FAILURE],
+      promise: async ({ client }) => {
+        try {
+          const response = await client.delete(`tesla/wishlist/${wishListID}`);
+          await dispatch(removeLoadingState(id));
+          return response;
+        } catch (error) {
+          await dispatch(removeLoadingState(id));
+          throw error;
+        }
+      }
+    });
+  }
+  dispatch(setLoadingState(id));
+  return dispatch({
+    types: [ADD_TO_WISHLIST, ADD_TO_WISHLIST_SUCCESS, ADD_TO_WISHLIST_FAILURE],
+    promise: async ({ client }) => {
+      try {
+        const postData = {
+          comment: '',
+          configurable_sku: id,
+          simple_sku: id
+        };
+        const response = await client.post('tesla/wishlist', postData);
+        await dispatch(removeLoadingState(id));
+        return response;
+      } catch (error) {
+        await dispatch(removeLoadingState(id));
+        throw error;
+      }
+    }
+  });
+};

@@ -21,7 +21,8 @@ import {
   loadUrlQuery,
   clearAllFilters as loadAfterPincodeChange,
   setCategory,
-  applyFilter
+  applyFilter,
+  setFilter
 } from 'redux/modules/products';
 import Pagination from 'components/Pagination';
 import SeoContent from 'components/SeoContent';
@@ -44,8 +45,14 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
     const {
       pincode: { selectedPincode },
       pagination: { page },
-      app: { city }
+      app: { city },
+      products: { list, filter: prevFilter },
+      router: { location: prevLocation }
     } = getState();
+    let prevSearch;
+    if (prevLocation) {
+      prevSearch = prevLocation.search;
+    }
     let query;
     let filters;
     let loadResults;
@@ -71,7 +78,8 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
         searchquery,
         query,
         pincode,
-        filters
+        filters,
+        city
       });
     } else {
       query = encodeCategory(params);
@@ -89,9 +97,16 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
       await dispatch(setCurrentPage(currentPage));
       await dispatch(clearPreviousSort());
     }
+    if (
+      location.search.split('redirect').length > 1 ||
+      (prevSearch === search && list.length > 0 && filters === prevFilter)
+    ) {
+      return;
+    }
     await dispatch(loadResults).catch(() => null);
     await dispatch(setCategoryQuery(query, pincode));
     await dispatch(setCategory(query));
+    await dispatch(setFilter(filters));
   }
 })
 @connect(state => ({
@@ -190,9 +205,7 @@ export default class Listing extends Component {
       seoInfo
     } = this.props;
     let page;
-    const {
-      location: { search, pathname }
-    } = history;
+    const { location: { search, pathname } } = history;
     if (search !== '') {
       page = search.replace('?', '').split('page=')[1];
     }

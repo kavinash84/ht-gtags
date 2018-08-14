@@ -9,9 +9,10 @@ import { Label } from 'hometown-components/lib/Label';
 import ResponsiveModal from 'components/Modal';
 import QuickView from 'components/QuickView/QuickView';
 import TitleBar from 'components/TitleBar';
+import LoginModal from 'components/Login/LoginModal';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { toggleWishList } from 'redux/modules/wishlist';
+import { toggleWishList, wishListWaitList } from 'redux/modules/wishlist';
 // import { clearAllFilters } from 'redux/modules/products';
 import { setProductPosition } from 'redux/modules/productdetails';
 import { formFilterLink2 } from 'utils/helper';
@@ -20,7 +21,6 @@ import SortByFilters from '../Filters/SortByFilters';
 import AddToCart from '../AddToCart';
 import AppliedFilters from '../Filters/AppliedFilters';
 import ScrollToTop from '../ScrollToTop';
-import { LOGIN_URL } from '../../helpers/Constants';
 
 const sortByList = require('data/sortby');
 
@@ -29,10 +29,11 @@ const getProductImage = url => {
   return url.replace(pp, '1-product_500.jpg');
 };
 
-const onClick = (list, dispatcher, isUserLoggedIn, history) => sku => e => {
+const onClickWishList = (list, dispatcher, isUserLoggedIn, history, onOpenLoginModal, addToWaitList) => sku => e => {
   e.preventDefault();
   if (isUserLoggedIn) return dispatcher(list, sku);
-  return history.push(LOGIN_URL);
+  addToWaitList(sku);
+  return onOpenLoginModal();
 };
 
 const isInWishList = (list, id) => list.includes(id);
@@ -43,7 +44,8 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       wishlistToggle: toggleWishList,
-      productPosition: setProductPosition
+      productPosition: setProductPosition,
+      addToWaitList: wishListWaitList
     },
     dispatch
   );
@@ -55,7 +57,30 @@ class Listing extends React.Component {
   state = {
     openQuickView: false,
     quickViewSku: '',
-    simpleSku: ''
+    simpleSku: '',
+    openLogin: false
+  };
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isLoggedIn) {
+      this.setState({
+        openLogin: false
+      });
+    }
+  }
+  onOpenLoginModal = () => {
+    const { history } = this.props;
+    const { pathname, search } = history.location;
+    if (search) {
+      history.push(`${search}&redirect=${pathname}${search}`);
+    } else {
+      history.push(`?redirect=${pathname}${search}`);
+    }
+    this.setState({ openLogin: true });
+  };
+  onCloseLoginModal = () => {
+    const { history } = this.props;
+    history.goBack();
+    this.setState({ openLogin: false });
   };
   onOpenQuickViewModal = (sku, simpleSku) => {
     this.setState({
@@ -104,8 +129,8 @@ class Listing extends React.Component {
       isLoggedIn,
       metaResults,
       appliedFilters,
-      sortBy
-      // categoryquery
+      sortBy,
+      addToWaitList
     } = this.props;
     return (
       <Div type="block">
@@ -162,7 +187,14 @@ class Listing extends React.Component {
                     image={getProductImage(item.images[0].path)}
                     sku={item.data.sku}
                     simple_sku={item.simples}
-                    onClick={onClick(wishListData, wishlistToggle, isLoggedIn, history)}
+                    onClick={onClickWishList(
+                      wishListData,
+                      wishlistToggle,
+                      isLoggedIn,
+                      history,
+                      this.onOpenLoginModal,
+                      addToWaitList
+                    )}
                     onOpenQuickViewModal={() => {
                       this.onOpenQuickViewModal(item.data.sku, Object.keys(item.data.simples)[0]);
                     }}
@@ -177,7 +209,12 @@ class Listing extends React.Component {
                     setProductPosition={productPosition}
                   />
                   <Div mt="0" p="0.25rem 0.125rem 0.5rem">
-                    <AddToCart simpleSku={Object.keys(item.data.simples)[0]} sku={item.data.sku} itemId={item.id} />
+                    <AddToCart
+                      simpleSku={Object.keys(item.data.simples)[0]}
+                      sku={item.data.sku}
+                      itemId={item.id}
+                      quantity={Object.values(item.data.simples)[0].meta.quantity}
+                    />
                   </Div>
                 </div>
               ))}
@@ -195,6 +232,13 @@ class Listing extends React.Component {
               </ResponsiveModal>
               <ScrollToTop />
             </Row>
+            <ResponsiveModal
+              classNames={{ modal: styles.loginModal }}
+              onCloseModal={this.onCloseLoginModal}
+              open={this.state.openLogin}
+            >
+              <LoginModal />
+            </ResponsiveModal>
           </Container>
         </Section>
       </Div>
@@ -234,10 +278,8 @@ Listing.propTypes = {
   // pincode: PropTypes.string,
   isLoggedIn: PropTypes.bool,
   metaResults: PropTypes.array,
-  categoryquery: PropTypes.string
+  categoryquery: PropTypes.string,
+  addToWaitList: PropTypes.func.isRequired
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Listing);
+export default connect(null, mapDispatchToProps)(Listing);

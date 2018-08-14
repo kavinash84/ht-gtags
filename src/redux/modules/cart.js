@@ -178,7 +178,14 @@ export const isLoaded = globalState => globalState.cart && globalState.cart.load
 
 export const loadCart = (session, pincode) => ({
   types: [LOAD_CART, LOAD_CART_SUCCESS, LOAD_CART_FAIL],
-  promise: ({ client }) => client.get(`${ADDTOCART_API}/${session}/${pincode}`)
+  promise: async ({ client }) => {
+    try {
+      const response = await client.get(`${ADDTOCART_API}/${session}/${pincode}`);
+      return response;
+    } catch (error) {
+      return error;
+    }
+  }
 });
 
 export const addToCart = (key, sku, simpleSku, session, pincode) => ({

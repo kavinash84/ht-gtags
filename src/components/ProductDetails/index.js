@@ -20,8 +20,10 @@ import Img from 'hometown-components/lib/Img';
 import ProductCarousel from 'components/ProductCarousel';
 import EmiModal from 'containers/EmiModal/EmiModal';
 import Theme from 'hometown-components/lib/Theme';
+import ResponsiveModal from 'components/Modal';
+import LoginModal from 'components/Login/LoginModal';
 import { addReview } from 'redux/modules/reviews';
-import { toggleWishList } from 'redux/modules/wishlist';
+import { toggleWishList, wishListWaitList } from 'redux/modules/wishlist';
 import { setProductPosition } from 'redux/modules/productdetails';
 import { formatAmount } from 'utils/formatters';
 import { calculateDiscount, calculateSavings, calculateLowestEmi } from 'utils/helper';
@@ -32,16 +34,16 @@ import BreadCrumb from './BreadCrumb';
 // import { CART_URL } from 'helpers/Constants';
 import Pincode from './Pincode';
 import AddToCart from '../AddToCart';
-import { LOGIN_URL } from '../../helpers/Constants';
 
 import prodDetails from '../../data/ProductDetails';
 
 const styles = require('./ProductDetails.scss');
 
-const onClickWishList = (sku, list, dispatcher, isUserLoggedIn, history) => e => {
+const onClickWishList = (sku, list, dispatcher, isUserLoggedIn, history, onOpenLoginModal, addToWaitList) => e => {
   e.preventDefault();
   if (isUserLoggedIn) return dispatcher(list, sku);
-  return history.push(LOGIN_URL);
+  addToWaitList(sku);
+  return onOpenLoginModal();
 };
 const isInWishList = (list, id) => list.includes(id);
 
@@ -49,7 +51,8 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       wishlistToggle: toggleWishList,
-      productPosition: setProductPosition
+      productPosition: setProductPosition,
+      addToWaitList: wishListWaitList
     },
     dispatch
   );
@@ -81,7 +84,26 @@ class ProductDetails extends React.Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
-
+  state = {
+    openLogin: false
+  };
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isLoggedIn) {
+      this.setState({
+        openLogin: false
+      });
+    }
+  }
+  onOpenLoginModal = () => {
+    const { history } = this.props;
+    history.push(`?redirect=${history.location.pathname}`);
+    this.setState({ openLogin: true });
+  };
+  onCloseLoginModal = () => {
+    const { history } = this.props;
+    history.goBack();
+    this.setState({ openLogin: false });
+  };
   addReview = (sku, data) => e => {
     e.preventDefault();
     const { dispatch } = this.context.store;
@@ -102,6 +124,7 @@ class ProductDetails extends React.Component {
       isLoggedIn,
       history,
       wishlistToggle,
+      addToWaitList,
       loadingList
     } = this.props;
     const {
@@ -174,7 +197,13 @@ class ProductDetails extends React.Component {
               </Div>
               <Div col="3" ta="right">
                 <Img src="http://via.placeholder.com/350x80" alt="" width="100%" mt="0.625rem" mb="1rem" />
-                <AddToCart simpleSku={simpleSku} sku={sku} itemId={sku} size="block" />
+                <AddToCart
+                  simpleSku={simpleSku}
+                  sku={sku}
+                  itemId={sku}
+                  size="block"
+                  quantity={simples[simpleSku].meta.quantity}
+                />
                 <Div mt="1rem">
                   <Button
                     width="100%"
@@ -187,7 +216,15 @@ class ProductDetails extends React.Component {
                     fontSize="0.857rem"
                     height="40px"
                     className={styles.addToWishlist}
-                    onClick={onClickWishList(sku, wishListData, wishlistToggle, isLoggedIn, history)}
+                    onClick={onClickWishList(
+                      sku,
+                      wishListData,
+                      wishlistToggle,
+                      isLoggedIn,
+                      history,
+                      this.onOpenLoginModal,
+                      addToWaitList
+                    )}
                     isWishList={isInWishList(wishList, sku)}
                     wishlistLoading={isInWishList(loadingList, sku)}
                   >
@@ -230,6 +267,13 @@ class ProductDetails extends React.Component {
                 />
               </Row>
             )}
+            <ResponsiveModal
+              classNames={{ modal: styles.loginModal }}
+              onCloseModal={this.onCloseLoginModal}
+              open={this.state.openLogin}
+            >
+              <LoginModal />
+            </ResponsiveModal>
           </Container>
         </Section>
       </Div>
@@ -261,9 +305,7 @@ ProductDetails.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   history: PropTypes.object.isRequired,
   wishlistToggle: PropTypes.func.isRequired,
-  loadingList: PropTypes.array
+  loadingList: PropTypes.array,
+  addToWaitList: PropTypes.func.isRequired
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
