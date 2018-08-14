@@ -177,15 +177,9 @@ export default class App extends Component {
             <link rel="canonical" href={`https://www.hometown.in${pathname}`} />
           </Helmet>
           <main className={styles.appContent}>
-            {notifs.global && (
-              <div className="container">
-                <Notifs
-                  className={styles.notifs}
-                  namespace="global"
-                  NotifComponent={props => <Alert {...props} show />}
-                />
-              </div>
-            )}
+            <div className="container">
+              <Notifs namespace="global" NotifComponent={props => <Alert {...props} show={notifs.global.length} />} />
+            </div>
             {renderRoutes(route.routes)}
           </main>
         </div>
