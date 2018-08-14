@@ -120,7 +120,7 @@ Cart.propTypes = {
   summary: PropTypes.object,
   pincode: PropTypes.string,
   cartUpdating: PropTypes.bool,
-  currentId: PropTypes.string,
+  currentId: PropTypes.number,
   sessionId: PropTypes.string.isRequired,
   removeFromCart: PropTypes.func.isRequired,
   checkCart: PropTypes.func.isRequired,
@@ -132,11 +132,8 @@ Cart.defaultProps = {
   summary: null,
   pincode: '',
   cartUpdating: false,
-  currentId: '',
+  currentId: 0,
   checkingCart: false
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
