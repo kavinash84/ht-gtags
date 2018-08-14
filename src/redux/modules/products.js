@@ -17,6 +17,7 @@ const LOAD_CLEAR_FILTERS_FAIL = 'products/LOAD_CLEAR_FILTERS_FAIL';
 
 const SET_QUERY = 'products/SET_QUERY';
 const SET_CATEGORY = 'products/SET_CATEGORY';
+const SET_FILTER = 'products/SET_FILTER';
 
 const CLEAR_PREVIOUS_LIST = 'products/CLEAR_PREVIOUS_LIST';
 const CLEAR_PREVIOUS_SORT = 'products/CLEAR_PREVIOUS_SORT';
@@ -31,7 +32,8 @@ const initialState = {
   category: '',
   filters: {
     sortBy: 'Popularity'
-  }
+  },
+  filter: ''
 };
 
 const defaultPincode = PINCODE;
@@ -124,6 +126,11 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         category: action.payLoad
       };
+    case SET_FILTER:
+      return {
+        ...state,
+        filter: action.payLoad || ''
+      };
     case CLEAR_PREVIOUS_LIST:
       return {
         ...state,
@@ -208,5 +215,10 @@ export const clearPreviousSort = () => ({
 
 export const setCategory = payLoad => ({
   type: SET_CATEGORY,
+  payLoad
+});
+
+export const setFilter = payLoad => ({
+  type: SET_FILTER,
   payLoad
 });

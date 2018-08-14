@@ -8,42 +8,46 @@ import * as actionCreators from 'redux/modules/shipping';
 
 const styles = require('./ShippingPincode.scss');
 
-const onChange = (dispatcher, onChangePincode, load) => e => {
+const onChange = (dispatcher, onChangePincode, loadPincodeDetails) => e => {
   const {
     target: { value }
   } = e;
   dispatcher(value);
   onChangePincode(value);
-  if (value.length >= 2) load(value);
+  if (value.length === 6) loadPincodeDetails(value);
 };
 
-const setPincodeInStore = (dispatcher, loadPincodeDetails, pincode) => e => {
-  e.preventDefault();
-  loadPincodeDetails(pincode);
-  dispatcher(pincode);
-};
+// const setPincodeInStore = (dispatcher, loadPincodeDetails, pincode) => e => {
+//   e.preventDefault();
+//   loadPincodeDetails(pincode);
+//   dispatcher(pincode);
+// };
 
 const mapStateToProps = ({ shipping }) => ({
   ...shipping
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
-
+// const handleSubmit = (setPincode,loadPincodeDetails)=>e=>{
+//
+//
+// }
 const Pincode = ({
   onChangePincode,
   loadPincodeDetails,
   setPincodeQuery,
-  setPincode,
+  // setPincode,
   pincode,
-  load,
-  loading,
-  loaded,
-  results,
-  showResults,
+  // load,
+  // loading,
+  // loaded,
+  // results,
+  // showResults,
   pincodeFeedBackError,
   pincodeFeedBackMessage
 }) => (
   <Div className={styles.pincode} pt="0" pb="0.3125rem">
+    {/* <form onSubmit={() => setPincodeInStore(setPincode, loadPincodeDetails, setPincodeQuery)}> */}
     <FormInput
       label="Pincode"
       type="text"
@@ -51,12 +55,13 @@ const Pincode = ({
       backgroundColor="#f2f2f2"
       borderColor="rgba(0, 0, 0, 0.03)"
       height="2.5rem"
-      onChange={onChange(setPincodeQuery, onChangePincode, load)}
+      onChange={onChange(setPincodeQuery, onChangePincode, loadPincodeDetails)}
       value={pincode}
       feedBackError={pincodeFeedBackError}
       feedBackMessage={pincodeFeedBackMessage}
     />
-    <Div className={`${styles.searchList} ${styles.active}`}>
+    {/* </form> */}
+    {/* <Div className={`${styles.searchList} ${styles.active}`}>
       {loading && (
         <ul>
           <li> Searching.... </li>
@@ -73,27 +78,27 @@ const Pincode = ({
           ))}
         </ul>
       )}
-    </Div>
+    </Div> */}
   </Div>
 );
 
 Pincode.defaultProps = {
-  loading: false,
-  loaded: false,
-  results: [],
-  showResults: false,
+  // loading: false,
+  // loaded: false,
+  // results: [],
+  // showResults: false,
   pincode: ''
 };
 
 Pincode.propTypes = {
-  showResults: PropTypes.bool,
-  loading: PropTypes.bool,
-  loaded: PropTypes.bool,
-  results: PropTypes.array,
-  load: PropTypes.func.isRequired,
+  // showResults: PropTypes.bool,
+  // loading: PropTypes.bool,
+  // loaded: PropTypes.bool,
+  // results: PropTypes.array,
+  // load: PropTypes.func.isRequired,
   loadPincodeDetails: PropTypes.func.isRequired,
   setPincodeQuery: PropTypes.func.isRequired,
-  setPincode: PropTypes.func.isRequired,
+  // setPincode: PropTypes.func.isRequired,
   onChangePincode: PropTypes.func.isRequired,
   pincode: PropTypes.string,
   pincodeFeedBackError: PropTypes.bool.isRequired,

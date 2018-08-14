@@ -17,7 +17,7 @@ import {
 } from 'redux/modules/homepage';
 import { generateSession, isLoaded as isSessionSet } from 'redux/modules/app';
 import { loginUserAfterSignUp } from 'redux/modules/login';
-import { loadWishlist, isLoaded as isWishListLoaded } from 'redux/modules/wishlist';
+import { loadWishlist, isLoaded as isWishListLoaded, syncWishList } from 'redux/modules/wishlist';
 import { loadUserProfile, isLoaded as isProfileLoaded } from 'redux/modules/profile';
 import { loadCart, isLoaded as isCartLoaded, synCart } from 'redux/modules/cart';
 import { PINCODE } from 'helpers/Constants';
@@ -142,11 +142,13 @@ export default class App extends Component {
         if (response.signup_complete) {
           dispatch(loginUser(response.token));
           dispatch(synCart(sessionId, pincode));
+          dispatch(syncWishList());
         }
       }
     }
     if (!isLoggedIn && nextProps.login.isLoggedIn) {
       dispatch(synCart(sessionId, pincode));
+      dispatch(syncWishList());
       const query = new URLSearchParams(this.props.location.search);
       this.props.pushState(query.get('redirect') || '/');
     } else if (this.props.login && !nextProps.login) {
