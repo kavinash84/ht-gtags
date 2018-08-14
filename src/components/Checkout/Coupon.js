@@ -7,9 +7,11 @@ import Button from 'hometown-components/lib/Buttons';
 import Img from 'hometown-components/lib/Img';
 import Span from 'hometown-components/lib/Span';
 import Theme from 'hometown-components/lib/Theme';
+import LocalInlineNotification from 'components/LocalInlineNotification';
 import { applyCoupon, removeCoupon } from 'redux/modules/coupon';
 import { updateCartSummary } from 'redux/modules/cart';
 import { formatAmount } from 'utils/formatters';
+import Notifs from '../../components/Notifs';
 
 const EditCouponIcon = require('../../../static/edit.svg');
 const DiscountSuccessIcon = require('../../../static/percentage-green.svg');
@@ -18,12 +20,13 @@ const CloseIcon = require('../../../static/close-icon.svg');
 const styles = require('./Coupon.scss');
 
 @connect(({
-  pincode, app, coupon, cart
+  pincode, app, coupon, cart, notifs
 }) => ({
   pincode: pincode.selectedPincode,
   sessionId: app.sessionId,
   coupon,
-  cart
+  cart,
+  notifs
 }))
 class Coupon extends React.Component {
   static contextTypes = {
@@ -80,17 +83,12 @@ class Coupon extends React.Component {
   };
 
   render() {
-    const { cart, coupon } = this.props;
+    const { cart, notifs } = this.props;
     const {
       summary: { coupon: appliedCoupon, coupon_discount: couponDiscount }
     } = cart;
-    const {
-      error,
-      errorMessage: { error_message: errorMsg }
-    } = coupon;
-
     const { applycoupon } = this.state;
-    // console.log(error, coupon);
+
     return (
       <div>
         <Div className={styles.applyCoupon}>
@@ -150,7 +148,10 @@ class Coupon extends React.Component {
                 >
                   Apply
                 </Button>
-                {error && <div>{errorMsg}</div>}
+                {notifs.coupon && (
+                  <Notifs namespace="coupon" NotifComponent={props => <LocalInlineNotification {...props} />} />
+                )}
+                {/* {error && <div>{errorMsg}</div>} */}
               </div>
             </div>
           )}
@@ -191,17 +192,18 @@ class Coupon extends React.Component {
     );
   }
 }
-
 Coupon.propTypes = {
   pincode: PropTypes.string,
   sessionId: PropTypes.string,
   coupon: PropTypes.object,
-  cart: PropTypes.object
+  cart: PropTypes.object,
+  notifs: PropTypes.object
 };
 Coupon.defaultProps = {
   sessionId: '',
   pincode: '',
   cart: {},
-  coupon: {}
+  coupon: {},
+  notifs: {}
 };
 export default Coupon;
