@@ -177,9 +177,7 @@ export const wishListWaitList = sku => ({
 });
 
 export const syncWishList = () => (dispatch, getState) => {
-  const {
-    wishlist: { data: list, waitlist: id }
-  } = getState();
+  const { wishlist: { data: list, waitlist: id } } = getState();
   const checkList = isSKUWishlisted(list, id);
   if (checkList) {
     const wishListID = checkList.wishlist_info.id_customer_wishlist;

@@ -308,7 +308,4 @@ ProductDetails.propTypes = {
   loadingList: PropTypes.array,
   addToWaitList: PropTypes.func.isRequired
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

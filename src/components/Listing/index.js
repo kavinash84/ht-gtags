@@ -282,7 +282,4 @@ Listing.propTypes = {
   addToWaitList: PropTypes.func.isRequired
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Listing);
+export default connect(null, mapDispatchToProps)(Listing);

@@ -25,7 +25,7 @@ export const getProducts = createSelector([products], items => items.list || [])
 
 export const productsList = createSelector([productMeta], productList => productList.results);
 
-export const getProductCount = createSelector([productMeta], category => category.product_count || 0);
+export const getProductCount = createSelector([productMeta], category => category.product_count || '');
 
 export const getCategoryName = createSelector(
   [productMeta],
@@ -47,5 +47,5 @@ export const relatedProductsList = createSelector([relatedproducts], items => it
 
 export const getSEOInfo = createSelector(
   [productMeta],
-  seoInfo => (Object.keys(seoInfo.seo).length > 0 ? seoInfo.seo.items : false)
+  seoInfo => (Object.keys(seoInfo.seo).length > 0 ? seoInfo.seo.items : null)
 );

@@ -9,9 +9,7 @@ import * as actionCreators from 'redux/modules/shipping';
 const styles = require('./ShippingPincode.scss');
 
 const onChange = (dispatcher, onChangePincode, loadPincodeDetails) => e => {
-  const {
-    target: { value }
-  } = e;
+  const { target: { value } } = e;
   dispatcher(value);
   onChangePincode(value);
   if (value.length === 6) loadPincodeDetails(value);
@@ -105,7 +103,4 @@ Pincode.propTypes = {
   pincodeFeedBackMessage: PropTypes.string.isRequired
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Pincode);
+export default connect(mapStateToProps, mapDispatchToProps)(Pincode);
