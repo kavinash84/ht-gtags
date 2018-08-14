@@ -163,7 +163,7 @@ export default class Listing extends Component {
     products: [],
     categoryName: '',
     category: '',
-    productCount: '0',
+    productCount: '',
     wishListedSKUs: [],
     wishListData: [],
     loadingList: [],
@@ -213,7 +213,7 @@ export default class Listing extends Component {
     const NextPage = !page ? '?page=2' : `?page=${Number(page) + 1}`;
     /* eslint-disable react/no-danger */
     return (
-      <Section p="0" mb="0">
+      <Section p="0rem" mb="0">
         <Helmet>
           <title>{seoInfo && seoInfo.page_title}</title>
           <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
