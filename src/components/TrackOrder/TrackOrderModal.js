@@ -84,7 +84,7 @@ export default class TrackOrderModal extends Component {
                   <Img src={Step1Icon} alt="" m="auto" />
                 </div>
                 <Label color={Theme.colors.textDark} fontWeight="medium" mt="0.625rem">
-                  In Transit
+                  Dispatched
                 </Label>
               </Div>
               <Div col="3" ta="center" className={`${styles.processBlock}`}>
@@ -92,7 +92,15 @@ export default class TrackOrderModal extends Component {
                   <Img src={Step2Icon} alt="" m="auto" />
                 </div>
                 <Label color={Theme.colors.textDark} fontWeight="medium" mt="0.625rem">
-                  Pick Up
+                  Reached Nearest Hub
+                </Label>
+              </Div>
+              <Div col="3" ta="center" className={`${styles.processBlock}`}>
+                <div className={styles.processImg}>
+                  <Img src={Step2Icon} alt="" m="auto" />
+                </div>
+                <Label color={Theme.colors.textDark} fontWeight="medium" mt="0.625rem">
+                  Out For Delivery
                 </Label>
               </Div>
               <Div col="3" ta="center" className={`${styles.processBlock}`}>

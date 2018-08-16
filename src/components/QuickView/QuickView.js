@@ -28,6 +28,10 @@ export default class QuickView extends Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
+  constructor(props) {
+    super(props);
+    this.quickViewSlider = React.createRef();
+  }
   state = {
     currentImage: 0,
     previousDisabled: true,
@@ -58,6 +62,7 @@ export default class QuickView extends Component {
   };
 
   setDisable = () => {
+    this.quickViewSlider.current.slider.current.slickGoTo(this.state.currentImage);
     if (this.state.currentImage === this.state.product.images.length - 1) {
       this.setState({
         nextDisabled: true,
@@ -81,8 +86,8 @@ export default class QuickView extends Component {
     this.setState({ currentImage: parseInt(e.target.id, 10) }, this.setDisable);
   };
 
-  changeImage = e => {
-    if (e.target.name === 'previous' && !this.state.previousDisabled > 0) {
+  setCurrentImage = name => {
+    if (name === 'previous' && !this.state.previousDisabled > 0) {
       this.setState(
         {
           currentImage: this.state.currentImage - 1
@@ -90,7 +95,7 @@ export default class QuickView extends Component {
         this.setDisable
       );
     }
-    if (e.target.name === 'next' && !this.state.nextDisabled) {
+    if (name === 'next' && !this.state.nextDisabled) {
       this.setState(
         {
           currentImage: this.state.currentImage + 1
@@ -99,28 +104,18 @@ export default class QuickView extends Component {
       );
     }
   };
+  changeImage = e => {
+    const { name } = e.target;
+    this.setCurrentImage(name);
+  };
 
   handleArrowKey = e => {
     const keys = {
       37: () => {
-        if (!this.state.previousDisabled) {
-          this.setState(
-            {
-              currentImage: this.state.currentImage - 1
-            },
-            this.setDisable
-          );
-        }
+        this.setCurrentImage('previous');
       },
       39: () => {
-        if (!this.state.nextDisabled) {
-          this.setState(
-            {
-              currentImage: this.state.currentImage + 1
-            },
-            this.setDisable
-          );
-        }
+        this.setCurrentImage('next');
       }
     };
     if (keys[e.keyCode]) {
@@ -155,19 +150,27 @@ export default class QuickView extends Component {
           </Div>
           <Div col="5" pl="1.5rem" pr="1rem">
             <Div pt="1rem" className={styles.content}>
-              <Heading color="rgba(0, 0, 0, 0.75)" ellipsis={false} fontSize="1.375em" lh="1.7" mt="0" mb="1rem">
+              <Heading
+                color="rgba(0, 0, 0, 0.75)"
+                ellipsis={false}
+                fontSize="1.25rem"
+                fontWeight="600"
+                lh="1.5"
+                mt="0"
+                mb="0.625rem"
+              >
                 {name}
               </Heading>
               <Text>
-                <Span color="rgba(0, 0, 0, 0.6)" fontWeight="600" fontSize="1.5em" mr="1rem">
+                <Span color="rgba(0, 0, 0, 0.6)" fontWeight="600" fontSize="1.325rem" mr="1rem">
                   Rs. {(discPrice && formatAmount(discPrice)) || (price && formatAmount(price))}
                 </Span>
-                <Span fontWeight="400" color="rgba(0, 0, 0, 0.6)" fontSize="1.125em">
+                <Span fontWeight="400" color="rgba(0, 0, 0, 0.6)" fontSize="1rem">
                   <s>Rs. {formatAmount(price)}</s>
                 </Span>
               </Text>
               {saving && (
-                <Text color="rgba(0, 0, 0, 0.6)" fontWeight="700" fontSize="0.857rem" mb="0">
+                <Text color="rgba(0, 0, 0, 0.6)" fontWeight="700" fontSize="0.857rem" mb="1rem">
                   Savings:{' '}
                   <Span color="rgba(0, 0, 0, 0.6)" fontSize="0.857rem" va="bottom">
                     Rs.
@@ -185,7 +188,14 @@ export default class QuickView extends Component {
               <AddToCart simpleSku={simpleSku} sku={sku} />
             </Div>
             <Div className={`${styles.thumb} thumbCarousel`}>
-              <SlickSlider settings={adjustSlides(images.length)}>
+              <SlickSlider
+                settings={adjustSlides(images.length)}
+                ref={this.quickViewSlider}
+
+                // passedRef={quickViewSlider => {
+                //   this.quickViewSlider = quickViewSlider;
+                // }}
+              >
                 {images.map((image, index) => (
                   <div key={String(index)}>
                     <button

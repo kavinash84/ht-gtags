@@ -8,7 +8,6 @@ import Section from 'hometown-components/lib/Section';
 import { Label } from 'hometown-components/lib/Label';
 import ResponsiveModal from 'components/Modal';
 import QuickView from 'components/QuickView/QuickView';
-import TitleBar from 'components/TitleBar';
 import LoginModal from 'components/Login/LoginModal';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -16,11 +15,13 @@ import { toggleWishList, wishListWaitList } from 'redux/modules/wishlist';
 // import { clearAllFilters } from 'redux/modules/products';
 import { setProductPosition } from 'redux/modules/productdetails';
 import { formFilterLink2 } from 'utils/helper';
+import TitleBar from './TitleBar';
 import Dropdown from '../Filters/Filters';
 import SortByFilters from '../Filters/SortByFilters';
 import AddToCart from '../AddToCart';
 import AppliedFilters from '../Filters/AppliedFilters';
 import ScrollToTop from '../ScrollToTop';
+import BreadCrumb from './BreadCrumb';
 
 const sortByList = require('data/sortby');
 
@@ -130,11 +131,14 @@ class Listing extends React.Component {
       metaResults,
       appliedFilters,
       sortBy,
-      addToWaitList
+      addToWaitList,
+      breadCrumbs
     } = this.props;
     return (
       <Div type="block">
-        <TitleBar title={categoryName} productCount={productCount} />
+        <TitleBar title={categoryName} productCount={productCount}>
+          <BreadCrumb categoryDetails={breadCrumbs} />
+        </TitleBar>
         <Section pt="1rem" mb="0">
           <Container pr="0" pl="0">
             <div className={styles.filterBar}>
@@ -279,7 +283,8 @@ Listing.propTypes = {
   isLoggedIn: PropTypes.bool,
   metaResults: PropTypes.array,
   categoryquery: PropTypes.string,
-  addToWaitList: PropTypes.func.isRequired
+  addToWaitList: PropTypes.func.isRequired,
+  breadCrumbs: PropTypes.array.isRequired
 };
 
 export default connect(null, mapDispatchToProps)(Listing);

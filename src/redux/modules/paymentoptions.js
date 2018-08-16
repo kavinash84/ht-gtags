@@ -155,7 +155,7 @@ const initialState = {
   data: null,
   selectedGateway: 'CreditCard',
   isFormValid: false,
-  cardType: 'visa',
+  cardType: 'other',
   cardTypeError: null,
   paymentMethodDetails: {
     CreditCard: {

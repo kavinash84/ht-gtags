@@ -139,12 +139,12 @@ class ProductDetails extends React.Component {
       reviews: { count, rating }
     } = product;
     const { category_details: categoryDetails } = meta;
+
     const simpleSku = Object.keys(simples)[0];
     const shipping = simples[simpleSku].groupedattributes.product_shipping_cost;
     const isEmiAvailable = Number(simples[simpleSku].meta.no_emi) === 0;
     const { price, special_price: specialPrice } = meta;
     const checkSpecialPrice = specialPrice || price;
-    // console.log(isInWishList(wishList, sku), isInWishList(loadingList, sku));
     return (
       <Div type="block">
         <Section p="0" pt="1.25rem" mb="0">
@@ -228,7 +228,7 @@ class ProductDetails extends React.Component {
                     isWishList={isInWishList(wishList, sku)}
                     wishlistLoading={isInWishList(loadingList, sku)}
                   >
-                    ADD TO WISHLIST
+                    {isInWishList(wishList, sku) ? 'REMOVE FROM WISHLIST' : 'ADD TO WISHLIST'}
                   </Button>
                 </Div>
               </Div>
@@ -236,7 +236,7 @@ class ProductDetails extends React.Component {
             <ProductDetailsCarousel data={images} title={meta.name} />
           </Container>
         </Section>
-        <Section p="0" pl="0.5rem" pr="0.5rem" pb="1.5rem" mb="0" mt="1.5rem">
+        <Section p="0" pl="0.5rem" pr="0.5rem" pb="1.5rem" mb="0" mt="1rem">
           <Container type="container" pr="0" pl="0">
             <Row display="block" mt="0.625rem" mb="0.625rem" mr="0">
               <Div col="9" pr="2rem">
