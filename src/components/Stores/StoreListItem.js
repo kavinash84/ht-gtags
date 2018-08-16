@@ -18,7 +18,7 @@ const StoreListItem = ({
         {/* <Img src="https://www.hometown.in/media/cms/hometownv2/compressed/New-Delhi.jpg" alt="" /> */}
         <Row type="block" m="0">
           <Div>
-            <Heading color="textDark" fontSize="1em" mt="0">
+            <Heading color="textDark" fontSize="1em" mt="0" pb="2px" mb="5px">
               {store}
             </Heading>
             <Text color="rgba(0,0,0,0.5)" fontSize="0.875em" mb="0.125rem" mt="0">
