@@ -18,14 +18,26 @@ const defaultSettings = {
 export default class SlickSlider extends Component {
   static propTypes = {
     children: PropTypes.array.isRequired,
-    settings: PropTypes.object.isRequired
+    settings: PropTypes.object.isRequired,
+    passedRef: PropTypes.object
   };
+  static defaultProps = {
+    passedRef: {}
+  };
+  constructor(props) {
+    super(props);
+    this.slider = React.createRef();
+  }
+
   render() {
     const { children, settings } = this.props;
+    // const { passedRef } = this.props;
     const newSettings = { ...defaultSettings, ...settings };
     return (
       <Div mb="0.625rem">
-        <Slider {...newSettings}>{children}</Slider>
+        <Slider ref={this.slider} {...newSettings}>
+          {children}
+        </Slider>
       </Div>
     );
   }
