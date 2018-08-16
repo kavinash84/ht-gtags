@@ -28,6 +28,10 @@ export default class QuickView extends Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
+  constructor(props) {
+    super(props);
+    this.quickViewSlider = React.createRef();
+  }
   state = {
     currentImage: 0,
     previousDisabled: true,
@@ -58,6 +62,7 @@ export default class QuickView extends Component {
   };
 
   setDisable = () => {
+    this.quickViewSlider.current.slider.current.slickGoTo(this.state.currentImage);
     if (this.state.currentImage === this.state.product.images.length - 1) {
       this.setState({
         nextDisabled: true,
@@ -81,8 +86,8 @@ export default class QuickView extends Component {
     this.setState({ currentImage: parseInt(e.target.id, 10) }, this.setDisable);
   };
 
-  changeImage = e => {
-    if (e.target.name === 'previous' && !this.state.previousDisabled > 0) {
+  setCurrentImage = name => {
+    if (name === 'previous' && !this.state.previousDisabled > 0) {
       this.setState(
         {
           currentImage: this.state.currentImage - 1
@@ -90,7 +95,7 @@ export default class QuickView extends Component {
         this.setDisable
       );
     }
-    if (e.target.name === 'next' && !this.state.nextDisabled) {
+    if (name === 'next' && !this.state.nextDisabled) {
       this.setState(
         {
           currentImage: this.state.currentImage + 1
@@ -99,28 +104,18 @@ export default class QuickView extends Component {
       );
     }
   };
+  changeImage = e => {
+    const { name } = e.target;
+    this.setCurrentImage(name);
+  };
 
   handleArrowKey = e => {
     const keys = {
       37: () => {
-        if (!this.state.previousDisabled) {
-          this.setState(
-            {
-              currentImage: this.state.currentImage - 1
-            },
-            this.setDisable
-          );
-        }
+        this.setCurrentImage('previous');
       },
       39: () => {
-        if (!this.state.nextDisabled) {
-          this.setState(
-            {
-              currentImage: this.state.currentImage + 1
-            },
-            this.setDisable
-          );
-        }
+        this.setCurrentImage('next');
       }
     };
     if (keys[e.keyCode]) {
@@ -193,7 +188,14 @@ export default class QuickView extends Component {
               <AddToCart simpleSku={simpleSku} sku={sku} />
             </Div>
             <Div className={`${styles.thumb} thumbCarousel`}>
-              <SlickSlider settings={adjustSlides(images.length)}>
+              <SlickSlider
+                settings={adjustSlides(images.length)}
+                ref={this.quickViewSlider}
+
+                // passedRef={quickViewSlider => {
+                //   this.quickViewSlider = quickViewSlider;
+                // }}
+              >
                 {images.map((image, index) => (
                   <div key={String(index)}>
                     <button

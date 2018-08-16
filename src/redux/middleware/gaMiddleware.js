@@ -98,7 +98,8 @@ export default function gaMiddleware() {
           };
           const { query } = getState().products;
           const { location } = getState().router;
-
+          // const category = action.result.metadata.category_details.map(item => item.url_key).join('/');
+          // console.log(category);
           const category = query ? JSON.parse(window.atob(query)).params.join('/') : null;
           eventObject.impressions = action.result.metadata.results.map((item, position) => {
             const {

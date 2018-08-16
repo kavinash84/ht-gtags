@@ -128,7 +128,8 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
   metadata: state.products.list,
   sortBy: state.products.filters.sortBy,
   categoryquery: state.products.category,
-  seoInfo: getSEOInfo(state)
+  seoInfo: getSEOInfo(state),
+  breadCrumbs: state.products.categoryDetails
 }))
 @withRouter
 export default class Listing extends Component {
@@ -151,7 +152,8 @@ export default class Listing extends Component {
     sortBy: PropTypes.string,
     categoryquery: PropTypes.string.isRequired,
     isLoggedIn: PropTypes.bool,
-    seoInfo: PropTypes.object
+    seoInfo: PropTypes.object,
+    breadCrumbs: PropTypes.array
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -163,7 +165,7 @@ export default class Listing extends Component {
     products: [],
     categoryName: '',
     category: '',
-    productCount: '0',
+    productCount: '',
     wishListedSKUs: [],
     wishListData: [],
     loadingList: [],
@@ -173,7 +175,8 @@ export default class Listing extends Component {
     pincode: '',
     sortBy: '',
     isLoggedIn: false,
-    seoInfo: {}
+    seoInfo: {},
+    breadCrumbs: []
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.pincode !== this.props.pincode) {
@@ -202,7 +205,8 @@ export default class Listing extends Component {
       appliedFilters,
       sortBy,
       categoryquery,
-      seoInfo
+      seoInfo,
+      breadCrumbs
     } = this.props;
     let page;
     const { location: { search, pathname } } = history;
@@ -213,7 +217,7 @@ export default class Listing extends Component {
     const NextPage = !page ? '?page=2' : `?page=${Number(page) + 1}`;
     /* eslint-disable react/no-danger */
     return (
-      <Section p="0" mb="0">
+      <Section p="0rem" mb="0">
         <Helmet>
           <title>{seoInfo && seoInfo.page_title}</title>
           <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
@@ -257,6 +261,7 @@ export default class Listing extends Component {
                 loadingList={loadingList}
                 metaResults={metadata}
                 categoryquery={categoryquery}
+                breadCrumbs={breadCrumbs}
               />
               <Pagination
                 loading={loading}

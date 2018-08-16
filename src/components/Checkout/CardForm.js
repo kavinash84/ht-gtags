@@ -117,7 +117,7 @@ const CardForm = ({
 );
 
 CardForm.defaultProps = {
-  cardType: 'visa',
+  cardType: 'other',
   sessionId: ''
 };
 

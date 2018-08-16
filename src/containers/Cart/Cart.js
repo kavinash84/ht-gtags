@@ -10,16 +10,17 @@ import Menu from 'containers/MenuNew/index';
 import Footer from 'components/Footer';
 import TitleBar from 'components/TitleBar';
 import { resetCheck } from 'redux/modules/cart';
+import { getCartList } from 'selectors/cart';
 
 const CartEmptyIcon = require('../../../static/cart-empty.jpg');
 
 @connect(
   ({
-    cart: {
-      data, cartChecked, summary, error, loading, loaded
+    cart, cart: {
+      cartChecked, summary, error, loading, loaded
     }
   }) => ({
-    results: data,
+    results: getCartList(cart),
     isCartChecked: cartChecked,
     summary,
     error,

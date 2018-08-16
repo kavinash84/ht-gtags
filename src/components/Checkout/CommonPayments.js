@@ -15,7 +15,7 @@ const initial = {
     cvv: '',
     expMonth: '',
     expYear: '',
-    type: 'visa'
+    type: 'other'
   },
   DebitCard: {
     nameOnCard: '',
@@ -23,11 +23,12 @@ const initial = {
     cvv: '',
     expMonth: '',
     expYear: '',
-    type: 'visa'
+    type: 'other'
   },
   Emi: {
     nameOnCard: '',
     cardNumber: '',
+    type: 'other',
     cvv: '',
     expMonth: '',
     expYear: '',

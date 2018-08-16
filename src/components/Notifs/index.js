@@ -11,7 +11,6 @@ export default class Notifs extends Component {
 
   render() {
     const { notifs, NotifComponent } = this.props;
-
     return <div>{notifs.map(notif => <NotifComponent key={notif.id} msg={notif.msg} type={notif.type} />)}</div>;
   }
 }
