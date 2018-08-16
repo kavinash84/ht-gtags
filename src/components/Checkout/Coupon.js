@@ -84,7 +84,9 @@ class Coupon extends React.Component {
 
   render() {
     const { cart, notifs } = this.props;
-    const { summary: { coupon: appliedCoupon, coupon_discount: couponDiscount } } = cart;
+    const {
+      summary: { coupon: appliedCoupon, coupon_discount: couponDiscount }
+    } = cart;
     const { applycoupon } = this.state;
 
     return (
@@ -95,7 +97,7 @@ class Coupon extends React.Component {
               <Button
                 display="block"
                 btnType="link"
-                fontWeight="Light"
+                fontFamily="Light"
                 pl="0"
                 pr="0"
                 fontSize="1rem"
@@ -138,7 +140,7 @@ class Coupon extends React.Component {
                   className={styles.applyCouponBtn}
                   btnType="link"
                   color="#f98d29"
-                  fontWeight="semibold"
+                  fontFamily="medium"
                   pl="0"
                   pr="0"
                   fontSize="0.75rem"

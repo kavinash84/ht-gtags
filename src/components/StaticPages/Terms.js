@@ -24,7 +24,7 @@ const Terms = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="semibold" fontSize="1rem" color="text">
+            <Heading fontFamily="medium" fontSize="1rem" color="text">
               Introduction
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
@@ -40,7 +40,7 @@ const Terms = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="semibold" fontSize="1rem" color="text">
+            <Heading fontFamily="medium" fontSize="1rem" color="text">
               Membership Eligibility
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
@@ -73,7 +73,7 @@ const Terms = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="semibold" fontSize="1rem" color="text">
+            <Heading fontFamily="medium" fontSize="1rem" color="text">
               Account and Registration Obligations
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
@@ -84,7 +84,7 @@ const Terms = () => (
               incomplete, or not in accordance with the this Terms of Use, HomeTown.in has the right to indefinitely
               suspend or terminate or block access of your membership with HomeTown.in.
             </Text>
-            <Text color="rgba(0,0,0,0.7)" fontWeight="600" fontSize="0.875rem" mb="0">
+            <Text color="rgba(0,0,0,0.7)" fontFamily="medium" fontSize="0.875rem" mb="0">
               You also agree to:
             </Text>
             <ol>
@@ -107,7 +107,7 @@ const Terms = () => (
             </ol>
           </Div>
           <Div>
-            <Heading fontWeight="semibold" fontSize="1rem" color="text">
+            <Heading fontFamily="medium" fontSize="1rem" color="text">
               Pricing Information
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
@@ -138,7 +138,7 @@ const Terms = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="semibold" fontSize="1rem" color="text">
+            <Heading fontFamily="medium" fontSize="1rem" color="text">
               Third Party Products
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
@@ -159,7 +159,7 @@ const Terms = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="semibold" fontSize="1rem" color="text">
+            <Heading fontFamily="medium" fontSize="1rem" color="text">
               Credit/Debit Card Details
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
@@ -174,7 +174,7 @@ const Terms = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="semibold" fontSize="1rem" color="text">
+            <Heading fontFamily="medium" fontSize="1rem" color="text">
               Fraudulent /Declined Transactions
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
@@ -185,7 +185,7 @@ const Terms = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="semibold" fontSize="1rem" color="text">
+            <Heading fontFamily="medium" fontSize="1rem" color="text">
               Electronic Communications
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
@@ -196,7 +196,7 @@ const Terms = () => (
             </Text>
           </Div>
           <Div>
-            <Text color="rgba(0,0,0,0.7)" fontWeight="600" fontSize="0.875rem" mb="0">
+            <Text color="rgba(0,0,0,0.7)" fontFamily="medium" fontSize="0.875rem" mb="0">
               You also agree to:
             </Text>
             <ol>
@@ -245,7 +245,7 @@ const Terms = () => (
             </ol>
           </Div>
           <Div>
-            <Heading fontWeight="semibold" fontSize="1rem" color="text">
+            <Heading fontFamily="medium" fontSize="1rem" color="text">
               You may not use the Site for any of the following purposes:
             </Heading>
             <ol>
@@ -300,7 +300,7 @@ const Terms = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="semibold" fontSize="1rem" color="text">
+            <Heading fontFamily="medium" fontSize="1rem" color="text">
               Colours
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
@@ -310,7 +310,7 @@ const Terms = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="semibold" fontSize="1rem" color="text">
+            <Heading fontFamily="medium" fontSize="1rem" color="text">
               Images
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
@@ -318,7 +318,7 @@ const Terms = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="semibold" fontSize="1rem" color="text">
+            <Heading fontFamily="medium" fontSize="1rem" color="text">
               Modification of Terms & Conditions of Service
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
@@ -331,7 +331,7 @@ const Terms = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="semibold" fontSize="1rem" color="text">
+            <Heading fontFamily="medium" fontSize="1rem" color="text">
               Governing Law and Jurisdiction
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
@@ -348,7 +348,7 @@ const Terms = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="semibold" fontSize="1rem" color="text">
+            <Heading fontFamily="medium" fontSize="1rem" color="text">
               Reviews, Feedback, Submissions
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
@@ -381,7 +381,7 @@ const Terms = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="semibold" fontSize="1rem" color="text">
+            <Heading fontFamily="medium" fontSize="1rem" color="text">
               Copyright & Trademark
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
@@ -422,7 +422,7 @@ const Terms = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="semibold" fontSize="1rem" color="text">
+            <Heading fontFamily="medium" fontSize="1rem" color="text">
               Objectionable Material
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
@@ -434,7 +434,7 @@ const Terms = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="semibold" fontSize="1rem" color="text">
+            <Heading fontFamily="medium" fontSize="1rem" color="text">
               Indemnity
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
@@ -451,7 +451,7 @@ const Terms = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="semibold" fontSize="1rem" color="text">
+            <Heading fontFamily="medium" fontSize="1rem" color="text">
               Termination
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
@@ -468,7 +468,7 @@ const Terms = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="semibold" fontSize="1rem" color="text">
+            <Heading fontFamily="medium" fontSize="1rem" color="text">
               Limitation of Liability and Disclaimers
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
@@ -506,7 +506,7 @@ const Terms = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="semibold" fontSize="1rem" color="text">
+            <Heading fontFamily="medium" fontSize="1rem" color="text">
               Site Security
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">

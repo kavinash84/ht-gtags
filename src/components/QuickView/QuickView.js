@@ -154,7 +154,7 @@ export default class QuickView extends Component {
                 color="rgba(0, 0, 0, 0.75)"
                 ellipsis={false}
                 fontSize="1.25rem"
-                fontWeight="600"
+                fontFamily="medium"
                 lh="1.5"
                 mt="0"
                 mb="0.625rem"
@@ -162,15 +162,15 @@ export default class QuickView extends Component {
                 {name}
               </Heading>
               <Text>
-                <Span color="rgba(0, 0, 0, 0.6)" fontWeight="600" fontSize="1.325rem" mr="1rem">
+                <Span color="rgba(0, 0, 0, 0.6)" fontFamily="medium" fontSize="1.325rem" mr="1rem">
                   Rs. {(discPrice && formatAmount(discPrice)) || (price && formatAmount(price))}
                 </Span>
-                <Span fontWeight="400" color="rgba(0, 0, 0, 0.6)" fontSize="1rem">
+                <Span fontFamily="regular" color="rgba(0, 0, 0, 0.6)" fontSize="1rem">
                   <s>Rs. {formatAmount(price)}</s>
                 </Span>
               </Text>
               {saving && (
-                <Text color="rgba(0, 0, 0, 0.6)" fontWeight="700" fontSize="0.857rem" mb="1rem">
+                <Text color="rgba(0, 0, 0, 0.6)" fontFamily="700" fontSize="0.857rem" mb="1rem">
                   Savings:{' '}
                   <Span color="rgba(0, 0, 0, 0.6)" fontSize="0.857rem" va="bottom">
                     Rs.
@@ -179,7 +179,7 @@ export default class QuickView extends Component {
                   </Span>
                 </Text>
               )}
-              {/* <Text color="rgba(0, 0, 0, 0.6)" fontWeight="700" fontSize="0.857rem" mb="1rem" mt="0.3125rem">
+              {/* <Text color="rgba(0, 0, 0, 0.6)" fontFamily="700" fontSize="0.857rem" mb="1rem" mt="0.3125rem">
                 EMI:{' '}
                 <Span color="rgba(0, 0, 0, 0.6)" fontSize="0.857rem" va="bottom">
                   starting from Rs.{formatAmount(lowestEmi)}{' '}

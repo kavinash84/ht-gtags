@@ -92,7 +92,7 @@ const Feedback = () => (
               </Div>
             </Div>
             <Div col="2" pr="0.625rem" pl="0.625rem" mt="1rem">
-              <Button size="block" btnType="primary" fontWeight="regular" height="42px" mt="0.625rem" rows={5}>
+              <Button size="block" btnType="primary" fontFamily="regular" height="42px" mt="0.625rem" rows={5}>
                 SUBMIT
               </Button>
             </Div>

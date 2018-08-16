@@ -21,13 +21,13 @@ const StoreListItem = ({
             <Heading color="textDark" fontSize="1em" mt="0">
               {store}
             </Heading>
-            <Text fontSize="0.875em" mb="0.125rem" mt="0">
+            <Text color="rgba(0,0,0,0.5)" fontSize="0.875em" mb="0.125rem" mt="0">
               {address}
             </Text>
-            <Text fontSize="0.875em" mb="0.125rem" mt="0">
+            <Text color="rgba(0,0,0,0.5)" fontSize="0.875em" mb="0.125rem" mt="0">
               {city}, {state}, {pincode}
             </Text>
-            <Text fontSize="0.875em" mb="0" mt="0">
+            <Text color="rgba(0,0,0,0.5)" fontSize="0.875em" mb="0" mt="0">
               {phone}
             </Text>
           </Div>

@@ -10,7 +10,7 @@ The digitally encoded machine readable software for producing the Typefaces lice
 <font id="HelveticaNeue-Heavy" horiz-adv-x="1290" >
   <font-face 
     font-family="Helvetica 65 Medium"
-    font-weight="700"
+    font-family="700"
     font-stretch="normal"
     units-per-em="2048"
     panose-1="2 11 8 0 0 0 0 0 0 0"

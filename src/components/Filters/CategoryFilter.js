@@ -24,15 +24,7 @@ class CategoryFilter extends React.Component {
     } = this.props;
     return (
       <div className={`${styles.filterBlock} dropdownWrapper`}>
-        <Button
-          btnType="custom"
-          bg="#FFF"
-          color="#656565"
-          border="none"
-          fontSize="0.75em"
-          tt="uppercase"
-          fontWeight="medium"
-        >
+        <Button btnType="custom" bg="#FFF" color="#656565" border="none" fontSize="0.75em" tt="uppercase">
           {title}{' '}
           <Span ml="0.5rem" fontSize="1.5em">
             &#9662;

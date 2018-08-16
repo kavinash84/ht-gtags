@@ -3,7 +3,8 @@
 
 .breadCrumbList {
   padding: 0;
-      margin: 0;
+  margin: 0;
+  margin-bottom: 10px;
   li {
     list-style: none;
     display: inline-block;
@@ -20,7 +21,8 @@
       right: -10px;
       font-size: 14px;
       height: 14px;
-      line-height: 1.6;
+      line-height: 1.2;
+      top: 0;
     }
     &:last-child {
       &:after {
@@ -30,7 +32,6 @@
     a {
       color: rgba(7, 7, 7, 0.75);
       font-size: 0.75em;
-      font-weight: 600;
     }
   }
 }

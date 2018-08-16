@@ -24,7 +24,7 @@ const ReturnPolicy = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="700" fontSize="1rem" color="text">
+            <Heading fontFamily="700" fontSize="1rem" color="text">
               Product damaged or defective:
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
@@ -78,7 +78,7 @@ const ReturnPolicy = () => (
             </ul>
           </Div>
           <Div>
-            <Heading fontWeight="700" fontSize="1rem" color="text">
+            <Heading fontFamily="700" fontSize="1rem" color="text">
               Return it through Courier Collection:
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
@@ -99,7 +99,7 @@ const ReturnPolicy = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="700" fontSize="1rem" color="text">
+            <Heading fontFamily="700" fontSize="1rem" color="text">
               How will you be refunded?
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">

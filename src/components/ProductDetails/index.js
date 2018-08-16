@@ -162,6 +162,7 @@ class ProductDetails extends React.Component {
                   savingsPercentage={calculateDiscount(price, checkSpecialPrice)}
                   ratings={rating}
                   count={count}
+                  mt="1rem"
                 />
                 <Row
                   display="block"
@@ -175,7 +176,7 @@ class ProductDetails extends React.Component {
                     {colorproducts.length > 0 && (
                       <Section mb="0.3125rem" p="0">
                         <Row display="block" mr="0" ml="0">
-                          <Heading fontSize="1em" color="textDark" mb="0.625rem" mt="0px" fontWeight="600">
+                          <Heading fontSize="1em" color="textDark" mb="0.625rem" mt="0px" fontFamily="medium">
                             Color Options
                           </Heading>
                         </Row>
@@ -184,7 +185,7 @@ class ProductDetails extends React.Component {
                     )}
                   </Div>
                   {/* <Div col="2">
-                    <Heading fontSize="1em" color="textDark" mb="0.625rem" mt="0px" fontWeight="600">
+                    <Heading fontSize="1em" color="textDark" mb="0.625rem" mt="0px" fontFamily="medium">
                       Size Options
                     </Heading>
                     <select className={styles.sizeDD}>
@@ -308,4 +309,7 @@ ProductDetails.propTypes = {
   loadingList: PropTypes.array,
   addToWaitList: PropTypes.func.isRequired
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductDetails);

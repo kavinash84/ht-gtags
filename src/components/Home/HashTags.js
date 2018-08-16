@@ -16,10 +16,10 @@ const HashTags = ({ data }) => (
       <Section p="3.5rem 20%" mt="1rem" mb="3rem" className={styles.hashTags} bg="hashTags">
         <Row>
           <Div>
-            <Text ta="center" color="rgba(255, 255, 255, 0.75)" fontSize="1.8em" fontWeight="300" mb="0" mt="0">
+            <Text ta="center" color="rgba(255, 255, 255, 0.75)" fontSize="1.8em" fontFamily="thin" mb="0" mt="0">
               Shop by #hashtags
             </Text>
-            <Text ta="center" color="rgba(255, 255, 255, 0.75)" fontSize="1em" fontWeight="300" mb="2rem" mt="0">
+            <Text ta="center" color="rgba(255, 255, 255, 0.75)" fontSize="1em" fontFamily="thin" mb="2rem" mt="0">
               Exploring products couldn’t be easier than this
             </Text>
           </Div>
@@ -28,7 +28,7 @@ const HashTags = ({ data }) => (
           <Div ta="center">
             {data.map(hashtag => (
               <Link to={hashtag.url_key} key={hashtag.id}>
-                <Span p="5px 10px" fontWeight="300" color="#ffefd1bd" fontSize="0.875rem" display="inline-block">
+                <Span p="5px 10px" fontFamily="thin" color="#ffefd1bd" fontSize="0.875rem" display="inline-block">
                   #{hashtag.name}
                 </Span>
               </Link>

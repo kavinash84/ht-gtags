@@ -26,7 +26,7 @@ const TitleBar = ({ title, productCount }) => (
         </Div>
       </Row>
       <Row display="block" mr="0" ml="0" mb="0">
-        <Heading fontSize="1.5rem" color="white" mt="0" mb="0" fontWeight="400">
+        <Heading fontSize="1.5rem" color="white" mt="0" mb="0" fontFamily="regular">
           {title} {productCount !== '' && { productCount }}
         </Heading>
       </Row>

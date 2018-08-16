@@ -3,7 +3,7 @@
 
 .headerLink {
   color: $text;
-  font-weight: 400;
+  font-family: regular;
   font-size: 1.375rem;
   text-transform: capitalize;
   &.active, &:hover {
@@ -13,7 +13,7 @@
     content: '>';
     position: absolute;
     right: 13px;
-    top: 2px;
+    top: 0;
   }
   &.hideArrow {
     &:after {

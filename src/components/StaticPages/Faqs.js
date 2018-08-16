@@ -23,14 +23,14 @@ const FAQ = () => (
         <Row ml="0" mr="0">
           {faqData.map((faqItem, index) => (
             <Div mb="1rem">
-              <Heading fontWeight="700" fontSize="0.825rem" color="text">
+              <Heading fontFamily="700" fontSize="0.825rem" color="text">
                 {faqItem.key}
               </Heading>
               {faqItem.data.map((faqContent, index) => (
                 <Div className={styles.collposeBlock}>
                   <Heading
                     className={styles.collopseHeading}
-                    fontWeight="400"
+                    fontFamily="regular"
                     fontSize="1rem"
                     color="textDark"
                     lh="1.5"

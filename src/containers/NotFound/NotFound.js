@@ -32,7 +32,7 @@ export default function NotFound() {
         <Container pr="0" pl="0">
           <Row m="0">
             <Div col={2}>
-              <Heading fontSize="1rem" mt="1rem" fontWeight="600">
+              <Heading fontSize="1rem" mt="1rem" fontFamily="medium">
                 Furniture
               </Heading>
               <ul className={styles.catList}>
@@ -72,7 +72,7 @@ export default function NotFound() {
               </ul>
             </Div>
             <Div col={2}>
-              <Heading fontSize="1rem" mt="1rem" fontWeight="600">
+              <Heading fontSize="1rem" mt="1rem" fontFamily="medium">
                 Home Furnishing
               </Heading>
               <ul className={styles.catList}>
@@ -103,7 +103,7 @@ export default function NotFound() {
               </ul>
             </Div>
             <Div col={2}>
-              <Heading fontSize="1rem" mt="1rem" fontWeight="600">
+              <Heading fontSize="1rem" mt="1rem" fontFamily="medium">
                 Home Decor
               </Heading>
               <ul className={styles.catList}>
@@ -134,7 +134,7 @@ export default function NotFound() {
               </ul>
             </Div>
             <Div col={2}>
-              <Heading fontSize="1rem" mt="1rem" fontWeight="600">
+              <Heading fontSize="1rem" mt="1rem" fontFamily="medium">
                 Tableware
               </Heading>
               <ul className={styles.catList}>
@@ -162,7 +162,7 @@ export default function NotFound() {
               </ul>
             </Div>
             <Div col={2}>
-              <Heading fontSize="1rem" mt="1rem" fontWeight="600">
+              <Heading fontSize="1rem" mt="1rem" fontFamily="medium">
                 Kitchenware
               </Heading>
               <ul className={styles.catList}>
@@ -199,7 +199,7 @@ export default function NotFound() {
               </ul>
             </Div>
             <Div col={2}>
-              <Heading fontSize="1rem" mt="1rem" fontWeight="600">
+              <Heading fontSize="1rem" mt="1rem" fontFamily="medium">
                 Bath
               </Heading>
               <ul className={styles.catList}>

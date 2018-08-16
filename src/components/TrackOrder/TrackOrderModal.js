@@ -39,14 +39,14 @@ export default class TrackOrderModal extends Component {
           <div className={styles.trackOrderModalWrapper}>
             <Row mr="0" ml="0" pl="0" pr="0">
               <Div col="12" ta="center" bg={Theme.colors.primary}>
-                <Heading color="white" mt="0.9375em" mb="0.9375em" fontWeight="700">
+                <Heading color="white" mt="0.9375em" mb="0.9375em" fontFamily="700">
                   ORDER TRACKING
                 </Heading>
               </Div>
             </Row>
             <Row mr="0" ml="0" pl="0" pr="0">
               <Div col="4" bg={Theme.colors.primary} pt="1.25rem" pb="1.25rem" ta="center">
-                <Label color={Theme.colors.yellowDark} fontSize="1.125rem" fontWeight="600">
+                <Label color={Theme.colors.yellowDark} fontSize="1.125rem" fontFamily="medium">
                   Shipped Via :
                   <Span mt="-2px" ml="5px" va="baseline" color="#FFF">
                     xxxx
@@ -54,7 +54,7 @@ export default class TrackOrderModal extends Component {
                 </Label>
               </Div>
               <Div col="4" bg={Theme.colors.primary} pt="1.25rem" pb="1.25rem" ta="center">
-                <Label color={Theme.colors.yellowDark} fontSize="1.125rem" fontWeight="600">
+                <Label color={Theme.colors.yellowDark} fontSize="1.125rem" fontFamily="medium">
                   Shipped Via :
                   <Span mt="-2px" ml="5px" va="baseline" color="#FFF">
                     xxxx
@@ -62,7 +62,7 @@ export default class TrackOrderModal extends Component {
                 </Label>
               </Div>
               <Div col="4" bg={Theme.colors.primary} pt="1.25rem" pb="1.25rem" ta="center">
-                <Label color={Theme.colors.yellowDark} fontSize="1.125rem" fontWeight="600">
+                <Label color={Theme.colors.yellowDark} fontSize="1.125rem" fontFamily="medium">
                   Shipped Via :
                   <Span mt="-2px" ml="5px" va="baseline" color="#FFF">
                     xxxx
@@ -75,7 +75,7 @@ export default class TrackOrderModal extends Component {
                 <div className={styles.processImg}>
                   <Img src={Step1Icon} alt="" m="auto" />
                 </div>
-                <Label color={Theme.colors.textDark} fontWeight="medium" mt="0.625rem">
+                <Label color={Theme.colors.textDark} fontFamily="medium" mt="0.625rem">
                   Ordered
                 </Label>
               </Div>
@@ -83,7 +83,7 @@ export default class TrackOrderModal extends Component {
                 <div className={styles.processImg}>
                   <Img src={Step1Icon} alt="" m="auto" />
                 </div>
-                <Label color={Theme.colors.textDark} fontWeight="medium" mt="0.625rem">
+                <Label color={Theme.colors.textDark} fontFamily="medium" mt="0.625rem">
                   Dispatched
                 </Label>
               </Div>
@@ -91,7 +91,7 @@ export default class TrackOrderModal extends Component {
                 <div className={styles.processImg}>
                   <Img src={Step2Icon} alt="" m="auto" />
                 </div>
-                <Label color={Theme.colors.textDark} fontWeight="medium" mt="0.625rem">
+                <Label color={Theme.colors.textDark} fontFamily="medium" mt="0.625rem">
                   Reached Nearest Hub
                 </Label>
               </Div>
@@ -99,7 +99,7 @@ export default class TrackOrderModal extends Component {
                 <div className={styles.processImg}>
                   <Img src={Step2Icon} alt="" m="auto" />
                 </div>
-                <Label color={Theme.colors.textDark} fontWeight="medium" mt="0.625rem">
+                <Label color={Theme.colors.textDark} fontFamily="medium" mt="0.625rem">
                   Out For Delivery
                 </Label>
               </Div>
@@ -107,7 +107,7 @@ export default class TrackOrderModal extends Component {
                 <div className={styles.processImg}>
                   <Img src={Step2Icon} alt="" m="auto" />
                 </div>
-                <Label color={Theme.colors.textDark} fontWeight="medium" mt="0.625rem">
+                <Label color={Theme.colors.textDark} fontFamily="medium" mt="0.625rem">
                   Delivered
                 </Label>
               </Div>

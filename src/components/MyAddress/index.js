@@ -248,7 +248,7 @@ export default class DeliveryAddress extends Component {
                 </Row>
                 <Row display="block" mr="0" ml="0">
                   <Div col="2">
-                    <Button size="block" btnType="primary" fontWeight="regular" height="42px" mt="1.5rem">
+                    <Button size="block" btnType="primary" fontFamily="regular" height="42px" mt="1.5rem">
                       Save
                     </Button>
                   </Div>
@@ -313,7 +313,7 @@ export default class DeliveryAddress extends Component {
                 </Row>
                 <Row display="block" mr="0" ml="0">
                   <Div col="2">
-                    <Button size="block" btnType="primary" fontWeight="regular" height="42px" mt="1.5rem">
+                    <Button size="block" btnType="primary" fontFamily="regular" height="42px" mt="1.5rem">
                       Save
                     </Button>
                   </Div>

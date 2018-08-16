@@ -28,25 +28,25 @@ const OrderSummary = ({
       <Div col="12">
         <Text color="rgba(0, 0, 0, 0.8);">
           Total Price ({itemsCount} item{itemsCount === 1 ? '' : 's'})
-          <Span float="right" color="#000000" fontWeight="500">
+          <Span float="right" color="#000000" fontFamily="medium">
             Rs. {itemsTotal ? formatAmount(itemsTotal) : null}
           </Span>
         </Text>
         <Text color="rgba(0, 0, 0, 0.8);">
           Savings
-          <Span float="right" color="#000000" fontWeight="500">
+          <Span float="right" color="#000000" fontFamily="medium">
             Rs. {savings ? formatAmount(savings) : null}
           </Span>
         </Text>
         <Text color="rgba(0, 0, 0, 0.8);">
           Shipping
-          <Span float="right" color="#000000" fontWeight="500">
+          <Span float="right" color="#000000" fontFamily="medium">
             {shipping === 0 ? 'Free' : shipping}
           </Span>
         </Text>
         <Text color="rgba(0, 0, 0, 0.8);">
           Total
-          <Span float="right" color="#000000" fontWeight="500">
+          <Span float="right" color="#000000" fontFamily="medium">
             Rs. {totalCart ? formatAmount(totalCart) : null}
           </Span>
         </Text>
@@ -61,7 +61,7 @@ const OrderSummary = ({
             btnType="primary"
             height="42px"
             mt="0.625rem"
-            fontWeight="Light"
+            fontFamily="Light"
             fontSize="0.875rem"
             ls="1px"
             onClick={onClick}
@@ -74,10 +74,10 @@ const OrderSummary = ({
       </Div>
     </Div>
     <Div className={styles.questions}>
-      <Text color="rgba(0, 0, 0, 0.5)" fontSize="0.875rem" fontWeight="600">
+      <Text color="rgba(0, 0, 0, 0.5)" fontSize="0.875rem" fontFamily="medium">
         Do you have Questions about your Order?
       </Text>
-      <Text color="#646464" fontWeight="400">
+      <Text color="#646464" fontFamily="regular">
         Call us: 18002100004 <br />
         E Mail: care@hometown.in
       </Text>
