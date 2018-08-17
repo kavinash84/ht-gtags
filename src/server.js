@@ -1,5 +1,7 @@
 import fs from 'fs';
 import path from 'path';
+import qs from 'qs';
+import bodyParser from 'body-parser';
 import express from 'express';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
@@ -27,6 +29,9 @@ import getChunks, { waitChunks } from 'utils/getChunks';
 import asyncMatchRoutes from 'utils/asyncMatchRoutes';
 import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
 import { ReduxAsyncConnect, Provider } from 'components';
+import axios from 'axios';
+import getCookie from 'utils/cookies';
+import { PAYMENT_SUCCESS, PAYMENT_FAILURE } from './helpers/Constants';
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
@@ -88,6 +93,33 @@ app.use(express.static(path.join(__dirname, '..', 'static')));
 app.use((req, res, next) => {
   res.setHeader('X-Forwarded-For', req.ip);
   return next();
+});
+
+// parsing the request bodys
+app.use(bodyParser());
+app.use(bodyParser.json());
+app.use('/checkout/finish/payment/', async (req, res) => {
+  try {
+    const cookies = getCookie(req.header('cookie'), 'persist:root');
+    const session = JSON.parse(JSON.parse(cookies).app).sessionId;
+    const data = req.body;
+    console.log(`PayU Response => ${data}`);
+    const options = {
+      url: 'https://stage-alice.hometown.in/checkout/finish/payment/',
+      method: 'POST',
+      headers: {
+        Cookie: `PHPSESSID=${session}; path=/; domain=.hometown.in`,
+        ContentType: 'application/x-www-form-urlencoded'
+      },
+      data: qs.stringify(data)
+    };
+    const response = await axios(options);
+    console.log(`API Response => ${response}`);
+    if (response && response.status === 'success') return res.redirect(PAYMENT_SUCCESS);
+    return res.redirect(PAYMENT_FAILURE);
+  } catch (error) {
+    return res.redirect(PAYMENT_FAILURE);
+  }
 });
 
 app.use(async (req, res) => {
