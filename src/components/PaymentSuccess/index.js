@@ -1,6 +1,5 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
@@ -10,21 +9,9 @@ import Span from 'hometown-components/lib/Span';
 import Heading from 'hometown-components/lib/Heading';
 import Text from 'hometown-components/lib/Text';
 import Img from 'hometown-components/lib/Img';
-import * as actionCreators from 'redux/modules/cart';
 import TitleBar from '../TitleBar';
 
 const PaymentSuccessIcon = require('../../../static/success.svg');
-
-const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
-
-const mapStateToProps = ({ pincode, cart, app }) => ({
-  currentId: cart.key,
-  cartChecked: cart.cartChecked,
-  checkingCart: cart.checkingCart,
-  cartUpdating: cart.cartUpdating,
-  pincode: pincode.selectedPincode,
-  sessionId: app.sessionId
-});
 
 const PaymentSuccess = () => (
   <Div type="block">
@@ -107,4 +94,8 @@ const PaymentSuccess = () => (
   </Div>
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(PaymentSuccess);
+PaymentSuccess.prototype = {
+  data: PropTypes.object.isRequired
+};
+
+export default PaymentSuccess;

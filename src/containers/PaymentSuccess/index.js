@@ -1,16 +1,10 @@
-import React, { Component } from 'react';
-import PaymentSuccessContainer from 'components/PaymentSuccess';
-import Menu from 'containers/MenuNew/index';
-import Footer from 'components/Footer';
+import { provideHooks } from 'redial';
+import HomeTownLoader from 'containers/Loader';
+// import { loadCart, isLoaded as isCartLoaded } from 'redux/modules/cart';
 
-export default class PaymentSuccess extends Component {
-  render() {
-    return (
-      <div>
-        <Menu />
-        <PaymentSuccessContainer />
-        <Footer />
-      </div>
-    );
-  }
-}
+const hooks = {};
+const PaymentSuccess = HomeTownLoader({
+  loader: () => import('./PaymentSuccess' /* webpackChunkName: 'PaymentSuccess' */)
+});
+
+export default provideHooks(hooks)(PaymentSuccess);

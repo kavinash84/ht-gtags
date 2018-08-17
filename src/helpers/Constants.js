@@ -12,6 +12,9 @@ export const MY_WISHLIST_URL = '/wishlist';
 export const MY_ADDRESS_URL = '/my-address';
 export const FORGOT_PASSWORD_URL = '/forgot-password';
 
+export const PAYMENT_SUCCESS = '/payment-success';
+export const PAYMENT_FAILURE = '/payment-failed';
+
 // export const navigate = url => e => {
 //   e.preventDefault();
 //   browserHistory.push(url);
