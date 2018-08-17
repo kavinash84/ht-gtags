@@ -168,7 +168,7 @@ class Listing extends React.Component {
           <Container pr="0" pl="0">
             <Row display="block" mr="0" ml="0">
               <Div col="12">
-                <Label fontWeight="600" display="inline-block">
+                <Label fontFamily="medium" display="inline-block">
                   Applied Filters
                 </Label>
                 <AppliedFilters data={appliedFilters} onClickClearFilter={this.clearFilters} />

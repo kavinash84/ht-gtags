@@ -2,7 +2,6 @@
 @import "../../theme/_mixins";
 
 .addedToCart {
-  font-weight: 600;
   line-height: 1.5;
   display: inline;
   position: relative;
@@ -21,7 +20,6 @@
 }
 
 .goToCart {
-  font-weight: 600;
   line-height: 1.5;
   display: inline;
   position: relative;
@@ -43,7 +41,6 @@
     background-color: $white;
   }
 }
-
 .addToCartBtn {
   transition: 0.75s all ease;
   &:hover {

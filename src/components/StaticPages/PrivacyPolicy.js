@@ -24,7 +24,7 @@ const PrivacyPolicy = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="700" fontSize="1rem" color="text">
+            <Heading fontFamily="700" fontSize="1rem" color="text">
               Note:
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
@@ -42,7 +42,7 @@ const PrivacyPolicy = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="700" fontSize="1rem" color="text">
+            <Heading fontFamily="700" fontSize="1rem" color="text">
               1. Collection of Personally Identifiable Information and other Information
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
@@ -106,7 +106,7 @@ const PrivacyPolicy = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="700" fontSize="1rem" color="text">
+            <Heading fontFamily="700" fontSize="1rem" color="text">
               2. Use of Demographic / Profile Data / Your Information
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
@@ -142,7 +142,7 @@ const PrivacyPolicy = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="700" fontSize="1rem" color="text">
+            <Heading fontFamily="700" fontSize="1rem" color="text">
               3. Sharing of personal information
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
@@ -173,7 +173,7 @@ const PrivacyPolicy = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="700" fontSize="1rem" color="text">
+            <Heading fontFamily="700" fontSize="1rem" color="text">
               4. Links to Other Sites
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
@@ -182,7 +182,7 @@ const PrivacyPolicy = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="700" fontSize="1rem" color="text">
+            <Heading fontFamily="700" fontSize="1rem" color="text">
               5. Security Precautions
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
@@ -193,7 +193,7 @@ const PrivacyPolicy = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="700" fontSize="1rem" color="text">
+            <Heading fontFamily="700" fontSize="1rem" color="text">
               6. Your Consent
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
@@ -207,7 +207,7 @@ const PrivacyPolicy = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="700" fontSize="1rem" color="text">
+            <Heading fontFamily="700" fontSize="1rem" color="text">
               7. Grievance Officer
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">

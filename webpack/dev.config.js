@@ -86,6 +86,14 @@ var webpackConfig = module.exports = {
         include: [path.resolve(__dirname, '../src'), path.resolve(__dirname, '../node_modules')]
       },
       {
+        test: /\.woff?(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10240,
+          mimetype: 'application/font-woff'
+        }
+      },
+      {
         test: /\.woff2?(\?v=\d+\.\d+\.\d+)?$/,
         loader: 'url-loader',
         options: {
@@ -152,7 +160,7 @@ var webpackConfig = module.exports = {
     new webpack.IgnorePlugin(/webpack-stats\.json$/),
 
     new webpack.DefinePlugin({
-      'process.env.APIHOST': '"stageapi01.hometown.in/api/"',
+      'process.env.APIHOST': '"stage-node.hometown.in/api/"',
       __CLIENT__: true,
       __SERVER__: false,
       __DEVELOPMENT__: true,

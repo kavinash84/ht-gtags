@@ -1,9 +1,37 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
+@font-face {
+  font-family: 'light';
+  src: url('../../../static/fonts/light/HelvLight.eot');
+  src: url('../../../static/fonts/light/HelvLight.eot?#iefix') format('embedded-opentype'),
+	url('../../../static/fonts/light/HelvLight.woff2') format('woff2'),
+	url('../../../static/fonts/light/HelvLight.woff') format('woff'),
+	url('../../../static/fonts/light/HelvLight.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'regular';
+  src: url('../../../static/fonts/regular/Helvetica.eot');
+  src: url('../../../static/fonts/regular/Helvetica.eot?#iefix') format('embedded-opentype'),
+	url('../../../static/fonts/regular/Helvetica.woff2') format('woff2'),
+	url('../../../static/fonts/regular/Helvetica.woff') format('woff'),
+	url('../../../static/fonts/regular/Helvetica.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'medium';
+  src: url('../../../static/fonts/medium/Helvetica-Bold.eot');
+  src: url('../../../static/fonts/medium/Helvetica-Bold.eot?#iefix') format('embedded-opentype'),
+  url('../../../static/fonts/medium/Helvetica-Bold.woff2') format('woff2'),
+  url('../../../static/fonts/medium/Helvetica-Bold.woff') format('woff'),
+  url('../../../static/fonts/medium/Helvetica-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
 
 /* ----- Base/Global Styles ----- */
 body {
-	font-family: 'Open Sans', sans-serif;
-	font-weight: 400;
+	font-family: regular;
 	color: $text;
 	overflow-x: hidden;
 }

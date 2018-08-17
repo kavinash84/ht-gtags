@@ -16,7 +16,7 @@ const Notifications = ({ msg, type }) => (
           <Div col="12">
             <Label
               color="textExtraDark"
-              fontWeight="regular"
+              fontFamily="regular"
               fontSize="1rem"
               display="block"
               className={`${styles.alert} ${type === 'error' ? styles.alertError : styles.alertSuccess}`}

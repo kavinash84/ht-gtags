@@ -13,7 +13,7 @@ const OrderBlock = ({ order }) => (
   <Div mb="2.5rem">
     <Row type="block" m="0" mb="1rem">
       <Div col="12">
-        <Heading fontSize="1.25rem" color="textLight" mb="0px" mt="0px" fontWeight="300">
+        <Heading fontSize="1.25rem" color="textLight" mb="0px" mt="0px" fontFamily="thin">
           Order No. {order.order_id}
         </Heading>
       </Div>
@@ -21,18 +21,18 @@ const OrderBlock = ({ order }) => (
     <Div className={styles.blockWrapper}>
       <Row type="block" m="0" mb="0.5rem">
         <Div col="2">
-          <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontWeight="600">
+          <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
             ORDER DATE
           </Text>
-          <Text mt="0" color="rgba(0, 0, 0, 0.6)" fontWeight="300">
+          <Text mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="thin">
             {order.order_date}
           </Text>
         </Div>
         <Div col="2">
-          <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontWeight="600">
+          <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
             ORDER AMOUNT
           </Text>
-          <Text mt="0" color="rgba(0, 0, 0, 0.6)" fontWeight="300">
+          <Text mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="thin">
             Rs. {formatAmount(order.grand_total)}
           </Text>
         </Div>
@@ -58,7 +58,7 @@ const OrderBlock = ({ order }) => (
                   <td>{item.carrier_name || 'NOT AVAILABLE'}</td>
                   <td>{item.tracking_id || 'NOT AVAILABLE'}</td>
                   <td>
-                    <Button fontSize="0.875rem" fontWeight="300" color="#f98d29" btnType="link">
+                    <Button fontSize="0.875rem" fontFamily="thin" color="#f98d29" btnType="link">
                       Track Now
                     </Button>
                   </td>

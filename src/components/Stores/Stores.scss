@@ -6,6 +6,13 @@
   background: #f7f7f7;
   margin: 0 0.5rem 1rem;
   cursor: pointer;
+  a {
+    &:hover {
+      h1 {
+        color: $primary;
+      }
+    }
+  }
 }
 .storeSliderItem {
   .link {

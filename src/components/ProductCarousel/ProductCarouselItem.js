@@ -16,16 +16,16 @@ const ProductItem = ({
     <Link className={styles.link} to={url}>
       <img src={image} alt={name} />
       <div className={styles.content}>
-        <Heading mb="5px" color={Theme.colors.text} fontWeight="600" fontSize="0.9375em" ta="center">
+        <Heading mb="5px" color={Theme.colors.text} fontFamily="medium" fontSize="0.9375em" ta="center">
           {name}
         </Heading>
 
         <Div mb="0px" ta="center">
-          <Span mr="0.625rem" color={Theme.colors.text} fontSize="0.875em" fontWeight="600">
+          <Span mr="0.625rem" color={Theme.colors.text} fontSize="0.875em" fontFamily="medium">
             {' '}
             Rs. {price}{' '}
           </Span>
-          <Span mr="0" fontSize="0.75em" fontWeight="600">
+          <Span mr="0" fontSize="0.75em" fontFamily="medium">
             {' '}
             <s>Rs. {discPrice}</s>
           </Span>
@@ -41,9 +41,9 @@ const ProductItem = ({
         <Div mb="0px" ta="center">
           {' '}
           {percentage && (
-            <Span fontSize="0.75rem" fontWeight="600">
+            <Span fontSize="0.75rem" fontFamily="medium">
               Savings
-              <Span mr="0px" fontSize="0.75rem" border="none" fontWeight="600">
+              <Span mr="0px" fontSize="0.75rem" border="none" fontFamily="medium">
                 {' '}
                 ({percentage}%)
               </Span>

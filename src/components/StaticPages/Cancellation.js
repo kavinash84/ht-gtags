@@ -35,7 +35,7 @@ const Cancellation = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="700" fontSize="1rem" color="text">
+            <Heading fontFamily="700" fontSize="1rem" color="text">
               Cancellation by the Customer
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
@@ -43,7 +43,7 @@ const Cancellation = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="700" fontSize="1rem" color="text">
+            <Heading fontFamily="700" fontSize="1rem" color="text">
               Cancellation on Non-Receipt of Payment
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
@@ -53,7 +53,7 @@ const Cancellation = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="700" fontSize="1rem" color="text">
+            <Heading fontFamily="700" fontSize="1rem" color="text">
               Cancellation by HomeTown
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
@@ -75,7 +75,7 @@ const Cancellation = () => (
             </Text>
           </Div>
           <Div>
-            <Heading fontWeight="700" fontSize="1rem" color="text">
+            <Heading fontFamily="700" fontSize="1rem" color="text">
               Refunds
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">

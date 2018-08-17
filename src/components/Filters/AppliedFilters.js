@@ -12,14 +12,14 @@ const AppliedFilters = ({ data, onClickClearFilter }) => (
         Clear All Filters
         <Button
           btnType="custom"
-          bg="#ffffff"
+          bg="transparent"
           color="#5e5e5e"
           border="none"
           ml="0.625rem"
           p="8px 4px"
           lh="0"
           height="15px"
-          mt="-1px"
+          mt="-7px"
           onClick={onClickClearFilter}
         >
           ×

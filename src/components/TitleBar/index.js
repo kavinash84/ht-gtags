@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 const styles = require('../ProductDetails/BreadCrumb.scss');
 
 const TitleBar = ({ title, productCount }) => (
-  <Section mb="0.625rem" p="1.5rem 0.5rem" bg="block10">
+  <Section mb="0.625rem" p="1.25rem 0.5rem" bg="block10">
     <Container type="container" pr="0" pl="0">
       <Row display="block" mr="0" ml="0" mb="1rem">
         <Div col="9">
@@ -31,7 +31,7 @@ const TitleBar = ({ title, productCount }) => (
         </Div>
       </Row>
       <Row display="block" mr="0" ml="0" mb="0">
-        <Heading fontSize="1.5rem" color="text" mt="0" mb="0" fontWeight="400">
+        <Heading fontSize="1.5rem" color="text" mt="0" mb="0" pb="2px" fontFamily="regular">
           {title} {productCount && `(${productCount})`}
         </Heading>
       </Row>
