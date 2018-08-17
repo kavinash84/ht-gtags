@@ -6,7 +6,6 @@ import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
 import ShippedTo from 'hometown-components/lib/ShippedTo';
-import Span from 'hometown-components/lib/Span';
 import Heading from 'hometown-components/lib/Heading';
 import Text from 'hometown-components/lib/Text';
 import Img from 'hometown-components/lib/Img';
@@ -43,8 +42,8 @@ const PaymentSuccess = ({
                 <Img width="4.5rem" mr="1rem" float="left" src={PaymentSuccessIcon} alt="Test" />
                 <Heading mt="0">Thank you for placing your order.</Heading>
                 <Text fontSize="1rem" mb="0">
-                  Your order number is <b>{order_id}</b> placed on
-                  <Span>{order_date}</Span>. You will shortly receive an e-mailand SMS confirming your order.
+                  Your order number is <b>{order_id}</b> placed on &nbsp;
+                  <b>{order_date}</b>. You will shortly receive an e-mailand SMS confirming your order.
                 </Text>
               </Div>
             </Row>
