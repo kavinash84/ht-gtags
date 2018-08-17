@@ -10,9 +10,9 @@ const hooks = {
     }
   }
 };
-const ProfileLoadable = Loadable({
-  loader: () => import('./ResetPassword' /* webpackChunkName: 'Profile' */),
+const ResetLoadable = Loadable({
+  loader: () => import('./ResetPassword' /* webpackChunkName: 'ResetPassword' */),
   loading: () => <div>Loading</div>
 });
 
-export default provideHooks(hooks)(ProfileLoadable);
+export default provideHooks(hooks)(ResetLoadable);

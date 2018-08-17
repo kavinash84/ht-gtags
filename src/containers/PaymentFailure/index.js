@@ -1,16 +1,7 @@
-import React, { Component } from 'react';
-import PaymentFailureContainer from 'components/PaymentFailure';
-import Menu from 'containers/MenuNew/index';
-import Footer from 'components/Footer';
+import HomeTownLoader from 'containers/Loader';
 
-export default class PaymentFailure extends Component {
-  render() {
-    return (
-      <div>
-        <Menu />
-        <PaymentFailureContainer />
-        <Footer />
-      </div>
-    );
-  }
-}
+const PaymentFailure = HomeTownLoader({
+  loader: () => import('./PaymentFailure' /* webpackChunkName: 'PaymentFailure' */)
+});
+
+export default PaymentFailure;

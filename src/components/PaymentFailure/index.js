@@ -1,6 +1,5 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
@@ -8,23 +7,11 @@ import Section from 'hometown-components/lib/Section';
 import Heading from 'hometown-components/lib/Heading';
 import Img from 'hometown-components/lib/Img';
 import Text from 'hometown-components/lib/Text';
-import * as actionCreators from 'redux/modules/cart';
 import TitleBar from '../TitleBar';
 
 const PaymentFailedIcon = require('../../../static/failed.svg');
 
-const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
-
-const mapStateToProps = ({ pincode, cart, app }) => ({
-  currentId: cart.key,
-  cartChecked: cart.cartChecked,
-  checkingCart: cart.checkingCart,
-  cartUpdating: cart.cartUpdating,
-  pincode: pincode.selectedPincode,
-  sessionId: app.sessionId
-});
-
-const PaymentFailure = () => (
+const PaymentFailure = ({ orderId }) => (
   <Div type="block">
     <TitleBar title="Payment Failed" />
     <Container type="container" pr="0" pl="0">
@@ -33,10 +20,16 @@ const PaymentFailure = () => (
           <Div col="12">
             <Img width="4.5rem" mr="1rem" float="left" src={PaymentFailedIcon} alt="Test" />
             <Heading mt="0">Error During Payment</Heading>
-            <Text fontSize="1rem" mb="0">
-              Dear Customer, The Payment for your order no. <b>2222</b>
-              was not successfull.
-            </Text>
+            {orderId !== '' ? (
+              <Text fontSize="1rem" mb="0">
+                Dear Customer, The Payment for your order no.<b> {orderId} </b>
+                was not successful.
+              </Text>
+            ) : (
+              <Text fontSize="1rem" mb="0">
+                Something went wrong :( Please try later !
+              </Text>
+            )}
           </Div>
         </Row>
       </Section>
@@ -44,7 +37,12 @@ const PaymentFailure = () => (
   </Div>
 );
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PaymentFailure);
+PaymentFailure.defaultProps = {
+  orderId: ''
+};
+
+PaymentFailure.propTypes = {
+  orderId: PropTypes.string
+};
+
+export default PaymentFailure;

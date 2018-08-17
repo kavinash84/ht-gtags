@@ -113,9 +113,10 @@ app.use('/checkout/finish/payment/', async (req, res) => {
       data: qs.stringify(data)
     };
     const response = await axios(options);
-    console.log(response);
-    if (response && response.status === 'success') return res.redirect(PAYMENT_SUCCESS);
-    return res.redirect(PAYMENT_FAILURE);
+    if (response && response.data && response.data.status === 'success') return res.redirect(PAYMENT_SUCCESS);
+    if (response && response.data) {
+      return res.redirect(`${PAYMENT_FAILURE}/?order=${response.data.order_id}`);
+    }
   } catch (error) {
     return res.redirect(PAYMENT_FAILURE);
   }
