@@ -13,7 +13,7 @@ const TitleBar = ({ children, title, productCount }) => (
   <Section mb="0.625rem" p="1.5rem 0.5rem" bg="block10">
     <Container type="container" pr="0" pl="0">
       {children}
-      <Row display="block" mr="0" ml="0" mb="0">
+      <Row display="block" mr="0" ml="0" mb="0" mt="10px">
         <Heading fontSize="1.5rem" color="text" mt="0" mb="0" fontFamily="regular">
           {title} {productCount && `(${productCount})`}
         </Heading>
