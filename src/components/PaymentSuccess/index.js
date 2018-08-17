@@ -10,6 +10,7 @@ import Span from 'hometown-components/lib/Span';
 import Heading from 'hometown-components/lib/Heading';
 import Text from 'hometown-components/lib/Text';
 import Img from 'hometown-components/lib/Img';
+import { formatAmount } from 'utils/formatters';
 import TitleBar from '../TitleBar';
 
 const PaymentSuccessIcon = require('../../../static/success.svg');
@@ -85,26 +86,26 @@ const PaymentSuccess = ({
                             <td>{product.name}</td>
                             <td>{product.delivery_text}</td>
                             <td>{product.qty}</td>
-                            <td align="right">{product.total_price}</td>
+                            <td align="right">Rs. {formatAmount(product.total_price)}</td>
                           </tr>
                         ))}
                         <tr align="right">
                           <td colSpan="5">
-                            Sub-Total Amount: Rs. <b>{sub_total_amount}</b>
+                            Sub-Total Amount: Rs. <b>{formatAmount(sub_total_amount)}</b>
                           </td>
                         </tr>
                         <tr align="right">
                           <td colSpan="5">
-                            Shipping Charges: Rs. <b>{shipping_charges}</b>
+                            Shipping Charges: Rs. <b>{formatAmount(shipping_charges)}</b>
                           </td>
                         </tr>
                         <tr align="right">
                           <td colSpan="5">
-                            Discount / Coupon Value: Rs. <b>{discount_coupon_value}</b>
+                            Discount / Coupon Value: Rs. <b>{formatAmount(discount_coupon_value)}</b>
                           </td>
                         </tr>
                         <tr align="right">
-                          <td colSpan="5">Net Order Amount: {net_order_amount}</td>
+                          <td colSpan="5">Net Order Amount: {formatAmount(net_order_amount)}</td>
                         </tr>
                       </tbody>
                     </table>
