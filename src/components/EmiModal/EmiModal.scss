@@ -19,7 +19,9 @@
   table {
     .coloumn {
       background: #FFF;
-      border-bottom: 10px solid #edede5;
+      background: #FFF;
+      border-top: 7px solid #edede5;
+      border-bottom: 7px solid #edede5;
     }
     td, th {
       padding: 10px;
@@ -29,7 +31,7 @@
     th {
       font-size: 16px;
       white-space: nowrap;
-      font-weight: 600;
+      font-family: medium;
     }
     td {
       font-size: 14px;

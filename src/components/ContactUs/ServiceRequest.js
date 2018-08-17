@@ -25,7 +25,7 @@ const ServiceRequest = () => (
       <Container type="container" pr="1.5rem" pl="1.5rem">
         <Section boxShadow="1px 2px 5px 0px rgba(0,0,0,0.1)" bg="white" display="flex" mb="1rem">
           <Div>
-            <Heading mt="0" color="textDark" fontSize="0.875rem" fontWeight="600" ellipsis={false}>
+            <Heading mt="0" color="textDark" fontSize="0.875rem" fontFamily="medium" ellipsis={false}>
               Request a Technician for a service request –
             </Heading>
             <Text color="#8d8d8d" fontSize="0.75rem" mb="0">
@@ -96,7 +96,7 @@ const ServiceRequest = () => (
               </Div>
             </Div>
             <Div col="2" pr="0.625rem" pl="0.625rem" mt="1rem">
-              <Button size="block" btnType="primary" fontWeight="regular" height="42px" mt="0.625rem" rows={5}>
+              <Button size="block" btnType="primary" fontFamily="regular" height="42px" mt="0.625rem" rows={5}>
                 SUBMIT
               </Button>
             </Div>

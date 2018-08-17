@@ -17,10 +17,10 @@ const ContactUs = () => (
         {/* eslint-disable */}
         <Row ml="0" mr="0">
           <Div>
-            <Heading fontWeight="700" fontSize="0.875rem" color="text">
+            <Heading fontFamily="700" fontSize="0.875rem" color="text">
               In case of any queries or information, just to reach out to us. We are happy to hear from you.
             </Heading>
-            <Heading fontWeight="700" fontSize="0.875rem" color="text">
+            <Heading fontFamily="700" fontSize="0.875rem" color="text">
               Corporate Address:
             </Heading>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">

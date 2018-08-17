@@ -82,7 +82,7 @@ const Cart = ({
                           <td>
                             <Button
                               fontSize="1rem"
-                              fontWeight="300"
+                              fontFamily="thin"
                               color="#f98d29"
                               btnType="link"
                               p="0"
@@ -136,4 +136,7 @@ Cart.defaultProps = {
   checkingCart: false
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Cart);

@@ -8,7 +8,7 @@ import { Label } from 'hometown-components/lib/Label';
 const CategoryFilters = ({ data }) => (
   <Row display="block" ml="0" mr="0">
     <Div>
-      <Label color="textDark" mb="1rem" fontWeight="medium" display="block">
+      <Label color="textDark" mb="1rem" fontFamily="medium" display="block">
         Categories
       </Label>
       {data.map(sub => (

@@ -124,7 +124,7 @@ export default class MenuSidebar extends Component {
                   ta="center"
                   fontSize="1.375rem"
                   mb="1rem"
-                  fontWeight="700"
+                  fontFamily="700"
                 >
                   Please enter your Pincode to serve you better
                 </Heading>
@@ -165,7 +165,7 @@ export default class MenuSidebar extends Component {
             <div className={`${styles.yourAccount} ${userPopOver ? '' : styles.hide}`}>
               <Row display="block" mr="0" ml="0">
                 <Div col="12">
-                  <Label fontWeight="regular" fontSize="1rem" mb="0.75rem" mt="0" color="black">
+                  <Label fontFamily="regular" fontSize="1rem" mb="0.75rem" mt="0" color="black">
                     {isLoggedIn ? 'Your Account' : 'My Account'}
                   </Label>
                 </Div>

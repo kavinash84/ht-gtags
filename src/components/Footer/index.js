@@ -111,12 +111,12 @@ const Footer = ({ categories }) => (
       <Container pr="0" pl="0">
         <Row m="0">
           <Div col={6}>
-            <Text color="#a6a6a6" fontSize="1rem" mt="0" mb="0" lh="2">
+            <Text color="#a6a6a6" fontSize="0.875rem" mt="0" mb="0" lh="2">
               Copyright reserved @ 2018
             </Text>
           </Div>
           <Div col={6} ta="right">
-            <Label mr="1rem" va="super" color="footerText" fontSize="1rem">
+            <Label mr="1rem" va="super" color="footerText" fontSize="0.875rem">
               Follow Us
             </Label>
             <ul className={styles.socials}>

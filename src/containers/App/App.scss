@@ -327,7 +327,7 @@
 			padding: 1rem 0;
 			font-size: 0.875rem;
 			color: rgba(0, 0, 0, 0.7);
-			font-weight: 600;
+			font-family: medium;
 			padding: 0.25rem 0.325rem;
 			text-transform: uppercase;
 		}
@@ -340,7 +340,7 @@
 			padding: 0.25rem 0.325rem;
 			button {
 				font-size: 1rem;
-				font-weight: 400;
+				font-family: regular;
 			}
 		}
 	}
@@ -472,9 +472,14 @@
 		display: inline-block;
 		position: relative;
 		button {
+			padding: .5rem 2.125rem .5rem .75rem !important;
 			span {
 				transition: all 0.5s ease;
 				display: inline-block !important;
+				position: absolute;
+				right: 7px;
+    		height: 100%;
+    		top: calc(25% - 8px);
 			}
 			&:hover {
 				background-color: #FFF !important;
@@ -544,7 +549,7 @@
 		box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
 		padding: 10px 20px;
 		font-size: 14px;
-		font-weight: 600;
+		font-family: medium;
 		img {
 			width: 1.125rem;
 			vertical-align: sub;

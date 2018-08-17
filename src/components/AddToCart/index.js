@@ -50,8 +50,8 @@ const AddToCart = ({
     <div>
       {quantity === '0' ? (
         <div>
-          <Button btnType="custom" border="1px solid" bc="white" color="red" p="8px 15px 0" size={size}>
-            <Span ml="0.625rem" fontSize="0.857rem" fontWeight="600" color="red" va="top">
+          <Button btnType="custom" border="1px solid" bc="white" color="red" p="6px 15px 7px" size={size}>
+            <Span fontSize="0.857rem" fontFamily="medium" color="red" va="text-top">
               {'OUT OF STOCK'}
             </Span>
           </Button>
@@ -72,7 +72,7 @@ const AddToCart = ({
             >
               {!addLoading && <AddCart fill="#f98d29" />}
               {addLoading && <Img width="24px" className="spin" src={LoaderIcon} display="inline" />}
-              <Span ml="0.625rem" fontSize="0.857rem" fontWeight="600" color="#f98d29" va="top">
+              <Span ml="0.625rem" fontSize="0.857rem" fontFamily="regular" color="#f98d29" va="top">
                 {addLoading ? 'Adding..' : 'ADD TO CART'}
               </Span>
             </Button>
@@ -112,4 +112,7 @@ AddToCart.propTypes = {
   quantity: PropTypes.string.isRequired
 };
 
-export default connect(mapStateToProps, { ...actionCreators })(AddToCart);
+export default connect(
+  mapStateToProps,
+  { ...actionCreators }
+)(AddToCart);

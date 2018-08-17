@@ -10,13 +10,13 @@
     }
   }
   .title {
-    @include font-family(600);
+    @include font-family(medium);
     @include font-size(0.825rem);
     margin: 10px 0 7px;
   }
   .discPrice {
     @include font-size('0.875rem');
-    @include font-family(600);
+    @include font-family(medium);
     color: $text-dark;
   }
   .price {

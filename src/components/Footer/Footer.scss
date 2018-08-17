@@ -2,7 +2,7 @@
   padding: 2.5rem 0 0;
   h4 {
     color: rgba(255, 255, 255, 1);
-    font-weight: 300;
+    font-family: thin;
   }
   ul {
     padding-left: 0;
@@ -11,7 +11,7 @@
       padding-bottom: 7px;
       a {
         color: #cccccc;
-        font-weight: 400;
+        font-family: regular;
         font-size: 0.875em;
         opacity: 1;
         &:hover {

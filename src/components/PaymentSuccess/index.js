@@ -51,7 +51,7 @@ const PaymentSuccess = () => (
           </Div>
           <Div col="9" pt="0">
             <Row display="block" mr="0" ml="0" mb="1rem">
-              <Heading fontSize="1.25rem" color="textDark" mb="0px" mt="0px" fontWeight="400">
+              <Heading fontSize="1.25rem" color="textDark" mb="0px" mt="0px" fontFamily="regular">
                 Order Information
               </Heading>
             </Row>

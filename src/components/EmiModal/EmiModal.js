@@ -42,7 +42,7 @@ export default class Emi extends Component {
           <div className={styles.emiModalWrapper}>
             <Row mr="1rem" ml="1rem">
               <Div col="12" ta="center">
-                <Heading color="text" mt="0.9375em" mb="0.3125em" fontWeight="700" ta="left">
+                <Heading color="text" mt="0.9375em" mb="0.3125em" fontFamily="700" ta="left">
                   EMI Options For Rs.
                   {price} <Span fontSize="0.875rem">(Including shipping charge)</Span>
                 </Heading>

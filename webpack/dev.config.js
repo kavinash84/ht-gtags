@@ -86,6 +86,14 @@ var webpackConfig = module.exports = {
         include: [path.resolve(__dirname, '../src'), path.resolve(__dirname, '../node_modules')]
       },
       {
+        test: /\.woff?(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10240,
+          mimetype: 'application/font-woff'
+        }
+      },
+      {
         test: /\.woff2?(\?v=\d+\.\d+\.\d+)?$/,
         loader: 'url-loader',
         options: {

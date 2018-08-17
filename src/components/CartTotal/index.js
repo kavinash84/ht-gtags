@@ -12,12 +12,12 @@ const CartTotal = () => (
       <Container type="container" pr="1rem" pl="1rem">
         <Row display="block" mr="0" ml="0">
           <Div col="8">
-            <Label color="text" fontWeight="regular" fontSize="1.1rem">
+            <Label color="text" fontFamily="regular" fontSize="1.1rem">
               Cart Cubtotal (1 item)
             </Label>
           </Div>
           <Div col="4">
-            <Label ta="right" fontWeight="light" display="block" color="primary">
+            <Label ta="right" fontFamily="light" display="block" color="primary">
               Got a coupon?
             </Label>
           </Div>
@@ -28,7 +28,7 @@ const CartTotal = () => (
           </Div>
         </Row>
         <Row display="block" mr="0" ml="0">
-          <Button btnType="primary" size="block" fontWeight="regular" fontSize="0.875em" height="42px" lh="2">
+          <Button btnType="primary" size="block" fontFamily="regular" fontSize="0.875em" height="42px" lh="2">
             PROCEED TO CHECKOUT
           </Button>
         </Row>

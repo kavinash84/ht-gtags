@@ -63,7 +63,7 @@
       .offerDetails {
         color: #828282;
         font-size: 0.75rem;
-        font-weight: 300;
+        font-family: thin;
         line-height: 1.6;
       }
       .offerCondition {
@@ -73,7 +73,7 @@
           color: #828282;
           list-style: initial;
           font-size: 0.75rem;
-          font-weight: 300;
+          font-family: thin;
         }
       }
     }
@@ -91,7 +91,7 @@
     span {
       font-size: 1.125rem;
       color: $primary;
-      font-weight: 600;
+      font-family: medium;
     }
   }
   .appliedSaveRs {
@@ -100,7 +100,7 @@
     color: $primary;
     span {
       font-size: 1rem;
-      font-weight: 600;
+      font-family: medium;
       color: $primary;
     }
   }

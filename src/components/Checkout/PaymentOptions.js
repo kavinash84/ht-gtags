@@ -125,11 +125,11 @@ class PaymentOptions extends Component {
                     ))}
                 </Row>
                 <Row display="block" mr="0" ml="0">
-                  <Div col="4">
+                  <Div col="5">
                     <Button
                       size="block"
                       btnType="primary"
-                      fontWeight="regular"
+                      fontFamily="regular"
                       height="42px"
                       mt="1.5rem"
                       fontSize="0.875rem"

@@ -205,7 +205,7 @@ class DeliveryAddress extends Component {
                       type="submit"
                       size="block"
                       btnType="primary"
-                      fontWeight="regular"
+                      fontFamily="regular"
                       height="42px"
                       mt="0.5rem"
                       disabled={loading}
@@ -222,7 +222,7 @@ class DeliveryAddress extends Component {
                   </Label>
                   <Button
                     btnType="primary"
-                    fontWeight="regular"
+                    fontFamily="regular"
                     height="42px"
                     mt="0.5rem"
                     fontSize="0.875rem"
@@ -263,4 +263,9 @@ DeliveryAddress.propTypes = {
   location: PropTypes.object,
   currentaddress: PropTypes.number.isRequired
 };
-export default connect(mapStateToProps, null, null, { withRef: true })(DeliveryAddress);
+export default connect(
+  mapStateToProps,
+  null,
+  null,
+  { withRef: true }
+)(DeliveryAddress);

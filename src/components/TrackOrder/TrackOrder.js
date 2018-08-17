@@ -40,7 +40,7 @@ const TrackOrder = ({
                 />
               </Div>
               <Div col="5" pt="0.875rem" pl="1rem">
-                <Button btnType="primary" fontWeight="regular" height="42px" mt="1.25rem" type="submit">
+                <Button btnType="primary" fontFamily="regular" height="42px" mt="1.25rem" type="submit">
                   SUBMIT
                 </Button>
               </Div>
