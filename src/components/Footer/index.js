@@ -9,7 +9,11 @@ import Heading from 'hometown-components/lib/Heading';
 import Img from 'hometown-components/lib/Img';
 import Section from 'hometown-components/lib/Section';
 import Text from 'hometown-components/lib/Text';
+import FormInput from 'hometown-components/lib/Forms/FormInput';
+import Button from 'hometown-components/lib/Buttons';
 import { Label } from 'hometown-components/lib/Label';
+
+const linkData = require('../../data/FooterLinks');
 
 const fbIcon = require('../../../static/facebook.svg');
 const twIcon = require('../../../static/twitter.svg');
@@ -29,11 +33,62 @@ const mapStateToProps = ({
 });
 
 const Footer = ({ categories }) => (
-  <div mb="0" p="0" pt="15px" className={styles.footer}>
-    <Section bg="footerTop" mb="0" p="2rem 0">
+  <Div mb="0" p="0" pt="15px" pb="0" className={styles.footer}>
+    <Section bg="footerTop" mb="0" p="2.5rem 0 0">
       <Container pr="0" pl="0">
         <Row m="0">
-          <Div col={3}>
+          <Div col="6">
+            <Div col="9">
+              <FormInput label="" type="text" placeholder="" />
+            </Div>
+            <Div col="3">
+              <Button btnType="" fontFamily="regular" height="42px" mt="0" ml="-5px">
+                Subscribe
+              </Button>
+            </Div>
+          </Div>
+          <Div col="3">
+            <Heading color="white" fontSize="1em" mt="0">
+              CONTACT US
+            </Heading>
+            <ul>
+              <li>
+                <Link to="/track-order">Track Order</Link>
+              </li>
+              <li>
+                <Link to="/return-policy">Returns</Link>
+              </li>
+            </ul>
+          </Div>
+          <Div col="3">
+            <Heading color="white" fontSize="1em" mt="0">
+              FOLLOW US
+            </Heading>
+            <Img src={paymentMethodIcon} alt="Payment Method" mt="1.2rem" width="178px" />
+          </Div>
+        </Row>
+      </Container>
+    </Section>
+    <Section bg="footerTop" mb="0" p="1.5rem 0 2rem">
+      <Container pr="0" pl="0">
+        <Row m="0" mb="1.5rem">
+          {linkData.map(links => (
+            <Div display="flexEqual" col="13">
+              <Heading color="white" fontSize="1em" mt="1rem" pb="2px">
+                {links.key}
+              </Heading>
+              <ul>
+                {links.data.map(link => (
+                  <li>
+                    <Link to={`${link.url}`}>{link.name}</Link>
+                  </li>
+                ))}
+              </ul>
+            </Div>
+          ))}
+        </Row>
+        <Row m="0">
+          <Div display="flexEqual" col="13">
             <Heading color="white" fontSize="1em" mt="1rem">
               ABOUT US
             </Heading>
@@ -51,7 +106,7 @@ const Footer = ({ categories }) => (
               </li>
             </ul>
           </Div>
-          <Div col={3}>
+          <Div display="flexEqual" col="13">
             <Heading color="white" fontSize="1em" mt="1rem">
               CUSTOMER SERVICE
             </Heading>
@@ -76,7 +131,7 @@ const Footer = ({ categories }) => (
               </li>
             </ul>
           </Div>
-          <Div col={3}>
+          <Div display="flexEqual" col="13">
             <Heading color="white" fontSize="1em" mt="1rem">
               TOP CATEGORIES
             </Heading>
@@ -88,12 +143,8 @@ const Footer = ({ categories }) => (
               ))}
             </ul>
           </Div>
-          <Div col={3}>
+          <Div display="flexEqual" col="13">
             <Heading color="white" fontSize="1em" mt="1rem">
-              PAYMENT METHOD
-            </Heading>
-            <Img src={paymentMethodIcon} alt="Payment Method" mt="1.2rem" width="178px" />
-            <Heading color="white" fontSize="1em" mt="2rem">
               OUR APP
             </Heading>
             <a
@@ -103,6 +154,12 @@ const Footer = ({ categories }) => (
             >
               <Img src={ourAppIcon} alt="Our App" mt="1.2rem" width="178px" />
             </a>
+          </Div>
+          <Div display="flexEqual" col="13">
+            <Heading color="white" fontSize="1em" mt="1rem">
+              PAYMENT METHOD
+            </Heading>
+            <Img src={paymentMethodIcon} alt="Payment Method" mt="1.2rem" width="178px" />
           </Div>
         </Row>
       </Container>
@@ -150,7 +207,7 @@ const Footer = ({ categories }) => (
         </Row>
       </Container>
     </Section>
-  </div>
+  </Div>
 );
 
 Footer.defaultProps = {
