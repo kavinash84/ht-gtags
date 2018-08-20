@@ -104,7 +104,7 @@ app.use('/checkout/finish/payment/', async (req, res) => {
     const session = JSON.parse(JSON.parse(cookies).app).sessionId;
     const data = req.body;
     const options = {
-      url: 'https://stage-alice.hometown.in/checkout/finish/payment/',
+      url: process.env.PAYMENT_URL,
       method: 'POST',
       headers: {
         Cookie: `PHPSESSID=${session}; path=/; domain=.hometown.in`,
@@ -142,7 +142,7 @@ app.use(async (req, res) => {
       }
     }),
     stateReconciler: (inboundState, originalState) => originalState,
-    whitelist: ['app', 'userLogin', 'pincode', 'shipping', 'paymentoptions']
+    whitelist: ['app', 'userLogin', 'pincode', 'shipping']
   };
 
   let preloadedState;
