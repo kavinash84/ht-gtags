@@ -37,7 +37,8 @@ const mapStateToProps = ({
   paymentFormData: paymentoptions.formData,
   paymentError: paymentoptions.error,
   cardType: paymentoptions.cardType,
-  submitting: paymentoptions.submitting
+  submitting: paymentoptions.submitting,
+  submitted: paymentoptions.submitted
 });
 
 const mapDispatchToProps = dispatch =>
@@ -66,16 +67,14 @@ class ReviewOrder extends Component {
       sessionId,
       history,
       paymentFormData,
-      paymentError,
       cardType,
-      submitting
+      submitting,
+      submitted
     } = this.props;
-    console.log(paymentDetails);
     return (
       <Div type="block">
         <MenuCheckout history={history} page="review" />
         <Section display="flex" pt="1.25rem" pb="2.5rem" mb="0" height="auto">
-          {paymentError && paymentError.length > 0 && paymentError[0]}
           <Container type="container" pr="2rem" pl="2rem">
             <Row display="block" mr="0" ml="0">
               <Div col="9" pr="2.5rem" pt="1.5rem">
@@ -129,6 +128,7 @@ class ReviewOrder extends Component {
                 shipping={summary.shipping_charges}
                 totalCart={summary.total}
                 loadingnextstep={submitting}
+                isSubmitted={submitted}
                 itemsCount={summary.items_count}
                 onClick={nextStep(submitDetails, sessionId, paymentDetails, cardType)}
               />
@@ -143,9 +143,9 @@ class ReviewOrder extends Component {
 ReviewOrder.defaultProps = {
   history: {},
   paymentFormData: {},
-  paymentError: [],
   cardType: 'visa',
-  submitting: false
+  submitting: false,
+  submitted: false
 };
 ReviewOrder.propTypes = {
   summary: PropTypes.object.isRequired,
@@ -158,11 +158,8 @@ ReviewOrder.propTypes = {
   // gateway: PropTypes.string.isRequired,
   history: PropTypes.object,
   paymentFormData: PropTypes.object,
-  paymentError: PropTypes.array,
   cardType: PropTypes.string,
-  submitting: PropTypes.bool
+  submitting: PropTypes.bool,
+  submitted: PropTypes.bool
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ReviewOrder);
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewOrder);

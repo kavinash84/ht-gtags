@@ -136,7 +136,4 @@ Cart.defaultProps = {
   checkingCart: false
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

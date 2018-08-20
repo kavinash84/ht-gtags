@@ -18,7 +18,8 @@ const OrderSummary = ({
   onClick,
   loadingnextstep,
   hidebutton,
-  itemsCount
+  itemsCount,
+  isSubmitted
 }) => (
   <Div col="3">
     <Div className={styles.orderSummary}>
@@ -66,9 +67,9 @@ const OrderSummary = ({
             ls="1px"
             onClick={onClick}
             hide={hidebutton}
-            disabled={loadingnextstep}
+            disabled={loadingnextstep || isSubmitted}
           >
-            {loadingnextstep ? 'Please wait...' : 'CONTINUE'}
+            {loadingnextstep || isSubmitted ? 'Please wait...' : 'CONTINUE'}
           </Button>
         )}
       </Div>
@@ -88,7 +89,8 @@ const OrderSummary = ({
 OrderSummary.defaultProps = {
   loadingnextstep: false,
   hidebutton: false,
-  itemsCount: 0
+  itemsCount: 0,
+  isSubmitted: false
 };
 
 OrderSummary.propTypes = {
@@ -99,7 +101,8 @@ OrderSummary.propTypes = {
   onClick: PropTypes.func.isRequired,
   loadingnextstep: PropTypes.bool,
   hidebutton: PropTypes.bool,
-  itemsCount: PropTypes.number
+  itemsCount: PropTypes.number,
+  isSubmitted: PropTypes.bool
 };
 
 export default OrderSummary;

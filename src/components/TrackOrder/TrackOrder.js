@@ -113,7 +113,4 @@ TrackOrder.propTypes = {
   orderId: PropTypes.string.isRequired,
   errorMessage: PropTypes.string.isRequired
 };
-export default connect(
-  mapStateToProps,
-  null
-)(TrackOrder);
+export default connect(mapStateToProps, null)(TrackOrder);
