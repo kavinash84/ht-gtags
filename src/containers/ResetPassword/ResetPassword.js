@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { provideHooks } from 'redial';
 import Menu from 'containers/MenuNew/index';
 import Footer from 'components/Footer';
 import ResetPasswordForm from 'hometown-components/lib/Forms/ResetPasswordForm';
@@ -15,18 +14,11 @@ import Img from 'hometown-components/lib/Img';
 import Empty from 'hometown-components/lib/Empty';
 import { isBlank } from 'js-utility-functions';
 import { validatePassword } from 'utils/validation';
-import { checkHashValidity, resetPassword, isHashChecked } from 'redux/modules/forgotpassword';
+import { resetPassword } from 'redux/modules/forgotpassword';
 
 const SidebarImg = require('../../../static/login-side-thumb.png');
 const PasswordExpiredIcon = require('../../../static/password-expired-icon.png');
 
-@provideHooks({
-  fetch: async ({ store: { dispatch, getState }, params }) => {
-    if (!isHashChecked(getState())) {
-      await dispatch(checkHashValidity(params.hash)).then(err => console.log(err));
-    }
-  }
-})
 @connect(({ forgotpassword }) => ({
   response: forgotpassword
 }))

@@ -84,9 +84,7 @@ class Coupon extends React.Component {
 
   render() {
     const { cart, notifs } = this.props;
-    const {
-      summary: { coupon: appliedCoupon, coupon_discount: couponDiscount }
-    } = cart;
+    const { summary: { coupon: appliedCoupon, coupon_discount: couponDiscount } } = cart;
     const { applycoupon } = this.state;
 
     return (

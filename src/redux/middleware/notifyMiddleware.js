@@ -52,6 +52,18 @@ export default function userMiddleware() {
         ));
         break;
 
+      // Review orders
+      case 'paymentOptions/SUBMIT_PAYMENT_DETAILS_FAIL':
+        dispatch(notifSend({
+          type: 'warning',
+          msg:
+              (action.error.error_message &&
+                titleCase(action.error.error_message[action.error.error_message.length - 1])) ||
+              SOME_ERROR,
+          dismissAfter: 4000
+        }));
+        break;
+
       default:
         break;
     }

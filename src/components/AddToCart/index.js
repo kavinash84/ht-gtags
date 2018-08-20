@@ -112,7 +112,4 @@ AddToCart.propTypes = {
   quantity: PropTypes.string.isRequired
 };
 
-export default connect(
-  mapStateToProps,
-  { ...actionCreators }
-)(AddToCart);
+export default connect(mapStateToProps, { ...actionCreators })(AddToCart);
