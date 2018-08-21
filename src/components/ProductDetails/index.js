@@ -154,16 +154,16 @@ class ProductDetails extends React.Component {
                 <Div col="12" className={styles.breadCrumbWrapper} mb="1rem">
                   <BreadCrumb categoryDetails={categoryDetails} />
                 </Div>
-                <Div col="2">
+                <Div col="12">
                   <ProductDetailsCarousel data={images} title={meta.name} />
                 </Div>
-                <Div col="10">
+                {/* <Div col="10">
                   <div className={styles.imgSliderContainer}>
                     <div className={styles.imageContainer}>
                       <img src="https://www.hometown.in/media/product/78/2253/1.jpg" alt="" />
                     </div>
                   </div>
-                </Div>
+                </Div> */}
               </Div>
               <Div col="5" pl="1rem">
                 <Div className={styles.titleWrapper}>

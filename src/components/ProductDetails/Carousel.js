@@ -5,13 +5,20 @@ import Container from 'hometown-components/lib/Container';
 import CarouselItem from './CarouselItem';
 import SlickSlider from '../SlickSlider';
 
-const adjustSlides = length => ({
-  slidesToShow: length >= 5 ? 5 : length,
+const adjustSlides = (length, data) => ({
+  customPaging(i) {
+    return (
+      <a href={`#${i}`}>
+        <img src={`${data[0].url}.jpg`} alt="" />
+      </a>
+    );
+  },
+  slidesToShow: length >= 1 ? 1 : length,
   slidesToScroll: 1,
   autoplay: false,
   infinite: false,
-  vertical: true,
-  verticalSwiping: true
+  dots: true,
+  dotsClass: 'slick-dots slick-thumb'
 });
 
 export default class CategoryCarousel extends Component {
@@ -20,7 +27,7 @@ export default class CategoryCarousel extends Component {
     return (
       <Section display="flex" p="0" pt="0" mb="0" className="prodDetailsCarousel">
         <Container pr="0" pl="0">
-          <SlickSlider settings={adjustSlides(data.length)}>
+          <SlickSlider settings={adjustSlides(data.length, data)}>
             {data.map(slide => (
               <CarouselItem key={slide.id_catalog_product_image} image={`${slide.url}.jpg`} name={title} />
             ))}
