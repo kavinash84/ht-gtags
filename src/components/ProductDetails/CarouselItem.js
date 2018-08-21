@@ -6,11 +6,12 @@ import ReactImageZoom from 'react-image-zoom';
 const styles = require('./Carousel.scss');
 
 const props = {
-  scale: 1.5,
-  offset: { vertical: 0, horizontal: 10 },
+  width: 571,
+  offset: { vertical: 0, horizontal: 0 },
+  zoomWidth: 600,
   zoomStyle:
-    'left: 102%;width: 600px;height: 600px;padding: 0;box-shadow: 2px 2px 10px 0 rgba(0, 0, 0, 0.1);z-index: 1;',
-  zoomLensStyle: 'opacity: 0.5;background-color: gray;z-index:2;'
+    'left:50%;padding: 0;z-index: 100;box-shadow: 2px 2px 10px 0 rgba(0, 0, 0, 0.1);border: 1px solid #dddddd;',
+  zoomLensStyle: 'width:60px;height:50px;opacity: 0.5;background-color: gray;z-index:15;'
 };
 
 const CategoryItem = ({ image }) => (

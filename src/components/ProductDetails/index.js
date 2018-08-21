@@ -165,7 +165,7 @@ class ProductDetails extends React.Component {
                   </div>
                 </Div> */}
               </Div>
-              <Div col="5" pl="1rem">
+              <Div col="5" pl="1rem" className={styles.pdpRightWrapper}>
                 <Div className={styles.titleWrapper}>
                   <TitlePrice
                     name={meta.name}
@@ -210,15 +210,17 @@ class ProductDetails extends React.Component {
                   </ServiceDetails>
                 </Row>
                 <Row display="block" mt="0" mb="0.625rem" mr="0.9375rem" ml="0.9375rem">
-                  <Img src="http://via.placeholder.com/350x80" alt="" width="100%" mt="0.625rem" mb="1rem" />
-                  <AddToCart
-                    simpleSku={simpleSku}
-                    sku={sku}
-                    itemId={sku}
-                    size="block"
-                    quantity={simples[simpleSku].meta.quantity}
-                  />
-                  <Div mt="1rem">
+                  <Img src="http://via.placeholder.com/350x80" alt="" width="100%" mt="0" mb="1rem" />
+                  <Div col="6" mt="0">
+                    <AddToCart
+                      simpleSku={simpleSku}
+                      sku={sku}
+                      itemId={sku}
+                      size="block"
+                      quantity={simples[simpleSku].meta.quantity}
+                    />
+                  </Div>
+                  <Div col="6" mt="0">
                     <Button
                       width="100%"
                       color={Theme.colors.primary}
@@ -257,7 +259,7 @@ class ProductDetails extends React.Component {
           </Container>
         </Section>
 
-        <Section p="0" pl="0.5rem" pr="0.5rem" pb="1.5rem" mb="0" mt="1rem">
+        <Section p="0" pl="0.5rem" pr="0.5rem" pb="1.5rem" mb="0" mt="4rem">
           <Container type="container" pr="0" pl="0">
             {relatedproductsList.length > 0 && (
               <Row display="block" mt="2.5rem" mb="0.625rem" mr="0">
