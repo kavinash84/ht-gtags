@@ -23,6 +23,27 @@ export default function userMiddleware() {
         }));
         break;
 
+      case 'cart/UPDATE_CART_FAIL':
+        dispatch(notifSend({
+          type: 'warning',
+          msg:
+              (action.error.error_message &&
+                titleCase(action.error.error_message[action.error.error_message.length - 1])) ||
+              SOME_ERROR,
+          dismissAfter: 4000
+        }));
+        break;
+      case 'cart/REMOVE_FROM_CART_FAIL':
+        dispatch(notifSend({
+          type: 'warning',
+          msg:
+              (action.error.error_message &&
+                titleCase(action.error.error_message[action.error.error_message.length - 1])) ||
+              SOME_ERROR,
+          dismissAfter: 4000
+        }));
+        break;
+
       // SIGNUP
       case 'signUp/SIGNUP_SUCCESS':
         dispatch(notifSend({
@@ -63,7 +84,6 @@ export default function userMiddleware() {
           dismissAfter: 4000
         }));
         break;
-
       default:
         break;
     }
