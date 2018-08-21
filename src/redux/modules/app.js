@@ -58,6 +58,7 @@ export const generateSession = pincode => ({
       await setSessionID({ client })(response.session);
       return response;
     } catch (error) {
+      console.log(error.msg);
       console.log('Unable to generate session');
       return error;
     }
