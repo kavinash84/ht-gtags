@@ -150,29 +150,41 @@ class ProductDetails extends React.Component {
         <Section p="0" pt="1.25rem" mb="0">
           <Container type="container" pr="0" pl="0">
             <Row display="block" mt="0.625rem" mb="0.625rem" mr="0">
-              <Div col="9" className={styles.titleWrapper}>
-                <Div mt="0" mb="0.625rem" pl="1rem" pr="1rem">
+              <Div col="7" pr="1rem" className={styles.pdpLeftWrapper}>
+                <Div col="12" className={styles.breadCrumbWrapper} mb="1rem">
                   <BreadCrumb categoryDetails={categoryDetails} />
                 </Div>
-                <TitlePrice
-                  name={meta.name}
-                  price={formatAmount(price)}
-                  discPrice={formatAmount(checkSpecialPrice)}
-                  savingsRs={formatAmount(calculateSavings(price, checkSpecialPrice) || '')}
-                  savingsPercentage={calculateDiscount(price, checkSpecialPrice)}
-                  ratings={rating}
-                  count={count}
-                  mt="1rem"
-                />
-                <Row
-                  display="block"
-                  mt="1.25rem"
-                  mb="0.625rem"
-                  mr="0.9375rem"
-                  ml="0.9375rem"
-                  className={styles.variationWrapper}
-                >
-                  <Div col="2">
+                <Div col="2">
+                  <ProductDetailsCarousel data={images} title={meta.name} />
+                </Div>
+                <Div col="10">
+                  <div className={styles.imgSliderContainer}>
+                    <div className={styles.imageContainer}>
+                      <img src="https://www.hometown.in/media/product/78/2253/1.jpg" alt="" />
+                    </div>
+                  </div>
+                </Div>
+              </Div>
+              <Div col="5" pl="1rem">
+                <Div className={styles.titleWrapper}>
+                  <TitlePrice
+                    name={meta.name}
+                    price={formatAmount(price)}
+                    discPrice={formatAmount(checkSpecialPrice)}
+                    savingsRs={formatAmount(calculateSavings(price, checkSpecialPrice) || '')}
+                    savingsPercentage={calculateDiscount(price, checkSpecialPrice)}
+                    ratings={rating}
+                    count={count}
+                    mt="1rem"
+                  />
+                  <Row
+                    display="block"
+                    mt="1.25rem"
+                    mb="0.625rem"
+                    mr="0.9375rem"
+                    ml="0.9375rem"
+                    className={styles.variationWrapper}
+                  >
                     {colorproducts.length > 0 && (
                       <Section mb="0.3125rem" p="0">
                         <Row display="block" mr="0" ml="0">
@@ -183,82 +195,70 @@ class ProductDetails extends React.Component {
                         <ColorOption data={colorproducts} colors={prodDetails.colors} />
                       </Section>
                     )}
+                  </Row>
+                </Div>
+                <Row display="block" mt="1.25rem" mb="0" mr="0.9375rem" ml="0.9375rem">
+                  <ServiceDetails
+                    deliverBy={(deliveryInfo && deliveryInfo[0].value) || deliveryDetails[0].value}
+                    emiStarting={formatAmount(calculateLowestEmi(emidata, price))}
+                    shipping={shipping}
+                    isEmiAvailable={isEmiAvailable}
+                    pincode={pincode.selectedPincode}
+                  >
+                    <Pincode key="pincode" />
+                    <EmiModal price={formatAmount(checkSpecialPrice)} data={emidata} key="emi" />
+                  </ServiceDetails>
+                </Row>
+                <Row display="block" mt="0" mb="0.625rem" mr="0.9375rem" ml="0.9375rem">
+                  <Img src="http://via.placeholder.com/350x80" alt="" width="100%" mt="0.625rem" mb="1rem" />
+                  <AddToCart
+                    simpleSku={simpleSku}
+                    sku={sku}
+                    itemId={sku}
+                    size="block"
+                    quantity={simples[simpleSku].meta.quantity}
+                  />
+                  <Div mt="1rem">
+                    <Button
+                      width="100%"
+                      color={Theme.colors.primary}
+                      btnType="custom"
+                      border="1px solid"
+                      bc={Theme.colors.primary}
+                      bg="transparent"
+                      size="block"
+                      fontSize="0.857rem"
+                      height="40px"
+                      className={styles.addToWishlist}
+                      onClick={onClickWishList(
+                        sku,
+                        wishListData,
+                        wishlistToggle,
+                        isLoggedIn,
+                        history,
+                        this.onOpenLoginModal,
+                        addToWaitList
+                      )}
+                      isWishList={isInWishList(wishList, sku)}
+                      wishlistLoading={isInWishList(loadingList, sku)}
+                    >
+                      {isInWishList(wishList, sku) ? 'REMOVE FROM WISHLIST' : 'ADD TO WISHLIST'}
+                    </Button>
                   </Div>
-                  {/* <Div col="2">
-                    <Heading fontSize="1em" color="textDark" mb="0.625rem" mt="0px" fontFamily="medium">
-                      Size Options
-                    </Heading>
-                    <select className={styles.sizeDD}>
-                      <option>1 Seater</option>
-                      <option>2 Seater</option>
-                      <option>3 Seater</option>
-                    </select>
-                  </Div> */}
+                </Row>
+                <Row display="block" mt="1.25rem" mb="0" mr="0" ml="0">
+                  <ProductDesc desc={attributes.description} />
+                  <Specs specs={groupedAttributes} pincode={pincode.selectedPincode} />
+                  <Reviews col="6" reviewItems={reviews.data} pr="2.5rem" />
+                  <AddReview col="8" catalogId={groupedattributes.id_catalog_config} onClickSubmit={this.addReview} />
                 </Row>
               </Div>
-              <Div col="3" ta="right">
-                <Img src="http://via.placeholder.com/350x80" alt="" width="100%" mt="0.625rem" mb="1rem" />
-                <AddToCart
-                  simpleSku={simpleSku}
-                  sku={sku}
-                  itemId={sku}
-                  size="block"
-                  quantity={simples[simpleSku].meta.quantity}
-                />
-                <Div mt="1rem">
-                  <Button
-                    width="100%"
-                    color={Theme.colors.primary}
-                    btnType="custom"
-                    border="1px solid"
-                    bc={Theme.colors.primary}
-                    bg="transparent"
-                    size="block"
-                    fontSize="0.857rem"
-                    height="40px"
-                    className={styles.addToWishlist}
-                    onClick={onClickWishList(
-                      sku,
-                      wishListData,
-                      wishlistToggle,
-                      isLoggedIn,
-                      history,
-                      this.onOpenLoginModal,
-                      addToWaitList
-                    )}
-                    isWishList={isInWishList(wishList, sku)}
-                    wishlistLoading={isInWishList(loadingList, sku)}
-                  >
-                    {isInWishList(wishList, sku) ? 'REMOVE FROM WISHLIST' : 'ADD TO WISHLIST'}
-                  </Button>
-                </Div>
-              </Div>
             </Row>
-            <ProductDetailsCarousel data={images} title={meta.name} />
           </Container>
         </Section>
+
         <Section p="0" pl="0.5rem" pr="0.5rem" pb="1.5rem" mb="0" mt="1rem">
           <Container type="container" pr="0" pl="0">
-            <Row display="block" mt="0.625rem" mb="0.625rem" mr="0">
-              <Div col="9" pr="2rem">
-                <ProductDesc desc={attributes.description} />
-                <Specs specs={groupedAttributes} pincode={pincode.selectedPincode} />
-                <Reviews col="6" reviewItems={reviews.data} pr="2.5rem" />
-                <AddReview col="8" catalogId={groupedattributes.id_catalog_config} onClickSubmit={this.addReview} />
-              </Div>
-              <Div col="3">
-                <ServiceDetails
-                  deliverBy={(deliveryInfo && deliveryInfo[0].value) || deliveryDetails[0].value}
-                  emiStarting={formatAmount(calculateLowestEmi(emidata, price))}
-                  shipping={shipping}
-                  isEmiAvailable={isEmiAvailable}
-                  pincode={pincode.selectedPincode}
-                >
-                  <Pincode key="pincode" />
-                  <EmiModal price={formatAmount(checkSpecialPrice)} data={emidata} key="emi" />
-                </ServiceDetails>
-              </Div>
-            </Row>
             {relatedproductsList.length > 0 && (
               <Row display="block" mt="2.5rem" mb="0.625rem" mr="0">
                 <ProductCarousel
@@ -309,4 +309,7 @@ ProductDetails.propTypes = {
   loadingList: PropTypes.array,
   addToWaitList: PropTypes.func.isRequired
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductDetails);

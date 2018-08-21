@@ -6,8 +6,6 @@ import ReactImageZoom from 'react-image-zoom';
 const styles = require('./Carousel.scss');
 
 const props = {
-  width: 376,
-  height: 376,
   scale: 1.5,
   offset: { vertical: 0, horizontal: 10 },
   zoomStyle:

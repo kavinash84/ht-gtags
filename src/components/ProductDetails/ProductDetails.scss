@@ -7,3 +7,46 @@
 .variationWrapper {
   font-size: 14px;
 }
+.breadCrumbWrapper {
+  font-size: 18px;
+  background: #FFF;
+}
+.pdpLeftWrapper {
+  position: sticky;
+  top: 10px;
+}
+.imgSliderContainer {
+  background: #FFF;
+  .imageContainer{
+    width: 450px;
+    height: 450px;
+    img {
+      position: absolute;
+      max-height: 100%;
+      max-width: 100%;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      margin: auto;
+    }
+  }
+  .previous {
+    left: 0;
+  }
+  .next {
+    right: 0;
+  }
+  button {
+    position: absolute;
+    background: transparent;
+    border: none;
+    font-size: 3rem;
+    line-height: 0;
+    width: 30px;
+    padding-bottom: 10px;
+    height: 50px;
+    top: calc(50% - 25px);
+    z-index: 1;
+  }
+}

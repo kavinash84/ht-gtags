@@ -6,10 +6,12 @@ import CarouselItem from './CarouselItem';
 import SlickSlider from '../SlickSlider';
 
 const adjustSlides = length => ({
-  slidesToShow: length >= 3 ? 3 : length,
-  slidesToScroll: 3,
+  slidesToShow: length >= 5 ? 5 : length,
+  slidesToScroll: 1,
   autoplay: false,
-  infinite: false
+  infinite: false,
+  vertical: true,
+  verticalSwiping: true
 });
 
 export default class CategoryCarousel extends Component {
