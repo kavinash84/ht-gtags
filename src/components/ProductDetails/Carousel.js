@@ -8,11 +8,11 @@ const adjustSlides = (length, data) => ({
   customPaging(i) {
     return (
       <a href={`#${i}`}>
-        <img src={`${data[0].url}.jpg`} alt="" />
+        <img src={`${data[i].url}.jpg`} alt="" />
       </a>
     );
   },
-  slidesToShow: length >= 1 ? 1 : length,
+  slidesToShow: 1,
   slidesToScroll: 1,
   autoplay: false,
   infinite: false,
