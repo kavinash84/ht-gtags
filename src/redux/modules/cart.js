@@ -183,7 +183,7 @@ export const loadCart = (session, pincode) => ({
       const response = await client.get(`${ADDTOCART_API}/${session}/${pincode}`);
       return response;
     } catch (error) {
-      return error;
+      throw error;
     }
   }
 });
