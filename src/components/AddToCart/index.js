@@ -64,7 +64,7 @@ const AddToCart = ({
               border="1px solid"
               bc="#f98d29"
               color="#f98d29"
-              p="8px 15px 0"
+              p="9px 15px 0"
               size={size}
               disabled={addLoading}
               onClick={onClick(itemId, sku, simpleSku, session, pincode)(addToCart)}
@@ -113,4 +113,7 @@ AddToCart.propTypes = {
   isSoldOut: PropTypes.bool
 };
 
-export default connect(mapStateToProps, { ...actionCreators })(AddToCart);
+export default connect(
+  mapStateToProps,
+  { ...actionCreators }
+)(AddToCart);

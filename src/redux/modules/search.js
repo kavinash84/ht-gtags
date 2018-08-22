@@ -91,7 +91,9 @@ export const stopLoading = () => ({
 
 export const load = query => (dispatch, getState) => {
   const store = getState();
-  const { search: { loading } } = store;
+  const {
+    search: { loading }
+  } = store;
   if (loading) {
     dispatch(stopLoading());
     cancel('user cancelled request');
