@@ -1,3 +1,6 @@
+@import "../../theme/_variables";
+@import "../../theme/_mixins";
+
 .sizeDD {
   width: 100%;
 }
@@ -14,9 +17,25 @@
 .pdpLeftWrapper {
   position: sticky;
   top: 10px;
+  position: relative;
 }
 .pdpRightWrapper {
   z-index: 0;
+  position: relative;
+}
+.portal {
+  position: relative;
+  top: 3.1rem;
+  // left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  // border: 1px solid #dddddd;
+  background: #FFF;
+  overflow: auto;
+  img {
+    width: 1100px !important;
+  }
 }
 .imgSliderContainer {
   background: #FFF;
@@ -51,5 +70,12 @@
     height: 50px;
     top: calc(50% - 25px);
     z-index: 1;
+  }
+}
+.addToWishlist {
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  &:hover {
+    background-color: $primary !important;
+    color: #FFF !important;
   }
 }

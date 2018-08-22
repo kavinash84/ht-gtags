@@ -413,8 +413,10 @@
 		.slick-thumb {
 			li {
 				display: block;
-	    	width: 60px;
-	    	height: 60px;
+				width: 60px;
+				height: 60px;
+				border: 1px solid #dddddd66;
+				margin-bottom: 5px;
 				&.slick-active {
 					img {
 						filter: grayscale(0);
