@@ -1,3 +1,9 @@
+import axios from 'axios';
+import { SUGGESTIONS as SUGGESTIONS_API } from 'helpers/apiUrls';
+import { urlKeyResults } from 'utils/helper';
+
+const { CancelToken } = axios;
+
 const LOAD = 'search/LOAD';
 const LOAD_SUCCESS = 'search/LOAD_SUCCESS';
 const LOAD_FAIL = 'search/LOAD_FAIL';
@@ -6,6 +12,7 @@ const HIDE_RESULTS_ON_BLUR = 'search/HIDE_RESULTS_ON_BLUR';
 const HIDE_RESULTS_ON_SUBMIT = 'search/HIDE_RESULTS_ON_SUBMIT';
 const SET_SEARCH_QUERY = 'search/SET_SEARCH_QUERY';
 const CLEAR_SEARCH_QUERY = 'search/CLEAR_SEARCH_QUERY';
+const STOP_LOADING = 'search/STOP_LOADING';
 
 const initialState = {
   loading: false,
@@ -15,6 +22,7 @@ const initialState = {
   showResults: false
 };
 
+let cancel;
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case LOAD:
@@ -27,7 +35,7 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: true,
-        results: action.result
+        results: urlKeyResults(action.result)
       };
     case LOAD_FAIL:
       return {
@@ -66,17 +74,45 @@ export default function reducer(state = initialState, action = {}) {
         results: [],
         searchQuery: ''
       };
+    case STOP_LOADING:
+      return {
+        ...state,
+        loading: false,
+        loaded: false
+      };
     default:
       return state;
   }
 }
 
-export function load(query) {
-  return {
+export const stopLoading = () => ({
+  type: STOP_LOADING
+});
+
+/* eslint-disable */
+export const load = query => (dispatch, getState) => {
+  const store = getState();
+  const { search: { loading } } = store;
+  if (loading) {
+    dispatch(stopLoading());
+    cancel('user cancelled request');
+  }
+  return dispatch({
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: ({ client }) => client.get(`tesla/search/suggestions/${query}`)
-  };
-}
+    promise: async ({ client }) => {
+      try {
+        const response = await client.get(`${SUGGESTIONS_API}${query}`, {
+          cancelToken: new CancelToken(c => {
+            cancel = c;
+          })
+        });
+        return response;
+      } catch (error) {
+        throw error;
+      }
+    }
+  });
+};
 
 export const setSearchQuery = query => ({
   type: SET_SEARCH_QUERY,
