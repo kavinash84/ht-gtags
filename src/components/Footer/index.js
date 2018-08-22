@@ -24,11 +24,7 @@ const ourAppIcon = require('../../../static/google-play-store.svg');
 const paymentMethodIcon = require('../../../static/paymentMethodIcon.jpg');
 const styles = require('./Footer.scss');
 
-const mapStateToProps = ({
-  homepage: {
-    footer: { data }
-  }
-}) => ({
+const mapStateToProps = ({ homepage: { footer: { data } } }) => ({
   categories: data.items && data.items.text.top_categories.values
 });
 
@@ -79,14 +75,14 @@ const Footer = ({ categories }) => (
     <Section bg="footerTop" mb="0" p="1.5rem 0 2rem">
       <Container pr="0" pl="0">
         <Row m="0" mb="1.5rem">
-          {linkData.map(links => (
-            <Div display="flexEqual" col="13">
+          {linkData.map((links, index) => (
+            <Div key={String(index)} display="flexEqual" col="13">
               <Heading color="white" fontSize="1em" mt="1rem" pb="2px">
                 {links.key}
               </Heading>
               <ul>
-                {links.data.map(link => (
-                  <li>
+                {links.data.map((link, i) => (
+                  <li key={String(i)}>
                     <Link to={`${link.url}`}>{link.name}</Link>
                   </li>
                 ))}
@@ -225,7 +221,4 @@ Footer.propTypes = {
   categories: PropTypes.array
 };
 
-export default connect(
-  mapStateToProps,
-  null
-)(Footer);
+export default connect(mapStateToProps, null)(Footer);
