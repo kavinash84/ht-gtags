@@ -55,4 +55,4 @@ export const COUPON = 'tesla/cart/coupon';
 export const PAYMENT_STATUS = 'tesla/orders/success';
 
 /* Search Suggestions */
-export const SUGGESTIONS = 'tesla/search/suggestions/';
+export const SUGGESTIONS = 'tesla/search/suggestions';

@@ -1,4 +1,8 @@
+import axios from 'axios';
+import { PINCODE as PINCODE_API } from 'helpers/apiUrls';
 import { setCity } from './app';
+
+const { CancelToken } = axios;
 
 const LOAD = 'pincode/LOAD';
 const LOAD_SUCCESS = 'pincode/LOAD_SUCCESS';
@@ -12,6 +16,8 @@ const LOAD_PINCODE_DETAILS_FAIL = 'pincode/LOAD_PINCODE_DETAILS_FAIL';
 const LOAD_PINCODE_DATA = 'pincode/LOAD_PINCODE_DATA';
 const LOAD_PINCODE_DATA_SUCCESS = 'pincode/LOAD_PINCODE_DATA_SUCCESS';
 const LOAD_PINCODE_DATA_FAIL = 'pincode/LOAD_PINCODE_DATA_FAIL';
+const STOP_LOADING = 'pincode/STOP_LOADING';
+
 const initialState = {
   loading: false,
   loaded: false,
@@ -23,6 +29,7 @@ const initialState = {
   city: null
 };
 
+let cancel;
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case LOAD:
@@ -67,7 +74,6 @@ export default function reducer(state = initialState, action = {}) {
     case SET_PINCODE_QUERY:
       return {
         ...state,
-        loading: action.query.length >= 2,
         loaded: false,
         pincodeQuery: action.query
       };
@@ -94,19 +100,49 @@ export default function reducer(state = initialState, action = {}) {
         loaded: false,
         error: action.error
       };
+    case STOP_LOADING:
+      return {
+        ...state,
+        loading: false,
+        loaded: false
+      };
     default:
       return state;
   }
 }
 
-export const load = query => ({
-  types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-  promise: ({ client }) => client.get(`tesla/locations/pincode/${query}`)
+export const stopLoading = () => ({
+  type: STOP_LOADING
 });
+
+export const load = query => (dispatch, getState) => {
+  const { pincode: { loading } } = getState();
+  if (loading) {
+    dispatch(stopLoading());
+    cancel('user cancelled request');
+  }
+  return dispatch({
+    types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
+    promise: async ({ client }) => {
+      try {
+        const response = await client.get(`${PINCODE_API}/${query}`, {
+          cancelToken: new CancelToken(c => {
+            cancel = c;
+          })
+        });
+        return response;
+      } catch (error) {
+        throw error;
+      }
+    }
+  });
+};
+
 export const loadPincodeDetails = pincode => ({
   types: [LOAD_PINCODE_DETAILS, LOAD_PINCODE_DETAILS_SUCCESS, LOAD_PINCODE_DETAILS_FAIL],
   promise: ({ client }) => client.get(`tesla/session/${pincode}`)
 });
+
 export const setPincodeQuery = query => ({
   type: SET_PINCODE_QUERY,
   query
@@ -115,7 +151,7 @@ export const setPincode = pincode => dispatch =>
   dispatch({
     types: [LOAD_PINCODE_DATA, LOAD_PINCODE_DATA_SUCCESS, LOAD_PINCODE_DATA_FAIL],
     promise: async ({ client }) => {
-      const response = await client.get(`tesla/locations/pincode/details/${pincode}`);
+      const response = await client.get(`${PINCODE_API}/details/${pincode}`);
       dispatch(setCity(response));
       return response;
     },

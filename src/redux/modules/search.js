@@ -89,7 +89,6 @@ export const stopLoading = () => ({
   type: STOP_LOADING
 });
 
-/* eslint-disable */
 export const load = query => (dispatch, getState) => {
   const store = getState();
   const { search: { loading } } = store;
@@ -101,7 +100,7 @@ export const load = query => (dispatch, getState) => {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
     promise: async ({ client }) => {
       try {
-        const response = await client.get(`${SUGGESTIONS_API}${query}`, {
+        const response = await client.get(`${SUGGESTIONS_API}/${query}`, {
           cancelToken: new CancelToken(c => {
             cancel = c;
           })
