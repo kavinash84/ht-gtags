@@ -76,9 +76,9 @@ const Footer = ({ categories }) => (
         </Row>
       </Container>
     </Section>
-    <Section bg="footerTop" mb="0" p="1.5rem 0 2rem">
+    <Section bg="footerTop" mb="0" p="0.625rem 0 2rem">
       <Container pr="0" pl="0">
-        <Row m="0" mb="1.5rem">
+        <Row m="0" mb="1rem">
           {linkData.map(links => (
             <Div display="flexEqual" col="13">
               <Heading color="white" fontSize="1em" mt="1rem" pb="2px">

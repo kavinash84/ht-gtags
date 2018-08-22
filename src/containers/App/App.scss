@@ -380,9 +380,17 @@
 	.slick-initialized .slick-slide {
 		display: block !important;
 	}
-	.catCarousel, .storeCarousel, .prodCarousel {
+	.catCarousel, .prodCarousel {
 		.slick-next {
 			right: -40px !important;
+		}
+		.slick-prev {
+			left: -40px !important;
+		}
+	}
+	.storeCarousel {
+		.slick-next {
+			right: -47px !important;
 		}
 		.slick-prev {
 			left: -40px !important;
