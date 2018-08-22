@@ -64,7 +64,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
             onChange={onChangeGateway(onChange, paymentType, session)}
           />
           <Label
-            for="CreditCard"
+            htmlFor="CreditCard"
             pl="0"
             color="textLight"
             ml="0.9375rem"
@@ -90,7 +90,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
             onChange={onChangeGateway(onChange, paymentType, session)}
           />
           <Label
-            for="DebitCard"
+            htmlFor="DebitCard"
             pl="0"
             color="textLight"
             ml="0.9375rem"
@@ -117,7 +117,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
               onChange={onChangeGateway(onChange, paymentType, session)}
             />
             <Label
-              for="paymentIB"
+              htmlFor="paymentIB"
               pl="0"
               color="textLight"
               ml="0.9375rem"
@@ -130,7 +130,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
             <Div col="12" mt="0.625rem" pl="1.75rem">
               <Div className={styles.paymentBlock}>
                 <Div col="12" mb="1rem">
-                  <Label for="bankOptions1" pl="1rem" color="textLight">
+                  <Label htmlFor="bankOptions1" pl="1rem" color="textLight">
                     Choose From Preferred Bank
                   </Label>
                 </Div>
@@ -197,7 +197,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
               onChange={onChangeGateway(onChange, paymentType, session)}
             />
             <Label
-              for="paymentEmi"
+              htmlFor="paymentEmi"
               pl="0"
               color="textLight"
               ml="0.9375rem"
@@ -227,7 +227,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
               onChange={onChangeGateway(onChange, paymentType, session)}
             />
             <Label
-              for="paymentWallet"
+              htmlFor="paymentWallet"
               pl="0"
               color="textLight"
               ml="0.9375rem"
@@ -240,7 +240,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
             <Div col="12" mt="0.625rem" pl="1.75rem" mb="0.625rem">
               <Div className={styles.paymentBlock}>
                 <Div col="12" mb="1rem">
-                  <Label for="bankOptions1" pl="1rem" color="textLight">
+                  <Label htmlFor="bankOptions1" pl="1rem" color="textLight">
                     Select From your preferred Wallet
                   </Label>
                 </Div>
@@ -291,7 +291,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
             checked={selectedGateway === paymentType}
             onChange={onChangeGateway(onChange, paymentType, session)}
           />
-          <Label for="paymentCD" pl="1rem" color="textLight" ml="0.9375rem">
+          <Label htmlFor="paymentCD" pl="1rem" color="textLight" ml="0.9375rem">
             Cash On Delivery
           </Label>
         </Div>

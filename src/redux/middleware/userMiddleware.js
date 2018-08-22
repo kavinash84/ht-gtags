@@ -15,6 +15,9 @@ export default function userMiddleware() {
           dispatch(logout());
         }
       }
+      if (action.error && action.error.error === 'invalid_token') {
+        dispatch(logout());
+      }
     }
     return next(action);
   };

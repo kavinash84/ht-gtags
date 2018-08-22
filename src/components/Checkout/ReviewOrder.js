@@ -13,7 +13,7 @@ import { submitPaymentDetails } from 'redux/modules/paymentoptions';
 import Footer from 'components/Footer';
 import { formatAmount } from 'utils/formatters';
 import { validatePaymentDetails } from 'utils/validation';
-// import ProductQuantityCounter from '../ProductQuantityCounter';
+import { getCartList } from 'selectors/cart';
 
 import MenuCheckout from './MenuCheckout';
 import OrderSummary from './OrderSummary';
@@ -27,7 +27,7 @@ const nextStep = (dispatcher, sessionId, paymentData, cardType) => e => {
 const mapStateToProps = ({
   cart: { data, summary, error }, shipping, paymentoptions, app
 }) => ({
-  results: data,
+  results: getCartList(data),
   summary,
   error,
   shipping,
