@@ -101,7 +101,8 @@ export default function gaMiddleware() {
           // const category = action.result.metadata.category_details.map(item => item.url_key).join('/');
           // console.log(category);
           const category = query ? JSON.parse(window.atob(query)).params.join('/') : null;
-          eventObject.impressions = action.result.metadata.results.map((item, position) => {
+          const results = action.result && action.result.success ? action.result.metadata.results : [];
+          eventObject.impressions = results.map((item, position) => {
             const {
               name, sku, price, brand
             } = item.data;
