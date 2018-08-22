@@ -18,6 +18,7 @@ import LoginModal from 'components/Login/LoginModal';
 import { SIGNUP_URL, HOME_URL, LOGIN_URL, MY_WISHLIST_URL, MY_PROFILE_URL, CART_URL } from 'helpers/Constants';
 import { logout } from 'redux/modules/login';
 import { getCartCount } from 'selectors/cart';
+import { getWishListCount } from 'selectors/wishlist';
 
 const LogoIcon = require('../../../static/logo.png');
 const CartIcon = require('../../../static/cart-icon.svg');
@@ -45,7 +46,7 @@ const onClickLogout = (dispatcher, history) => e => {
   }) => ({
     selectedPincode: pincode.selectedPincode,
     isLoggedIn: userLogin.isLoggedIn,
-    wishListCount: wishlist.data.length,
+    wishListCount: getWishListCount(wishlist),
     cartCount: getCartCount(cart),
     router
   }),

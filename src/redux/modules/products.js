@@ -105,8 +105,8 @@ export default function reducer(state = initialState, action = {}) {
         filterLoading: false,
         filterLoaded: true,
         data: action.result,
-        categoryDetails: action.result.metadata.category_details,
-        list: action.result.metadata.results
+        categoryDetails: action.result.metadata && action.result.metadata.category_details,
+        list: action.result.metadata && action.result.metadata.results
       };
     case LOAD_FILTER_FAIL:
       return {
@@ -178,7 +178,7 @@ export const applyFilter = ({
       } = params;
       dispatch(setFiltersInState(params));
       if (searchquery) {
-        return client.get(`tesla/search/find/?&q=${searchquery}&maxitems=32&pincode=${pincode}&city=${city}${price}${discount}${material}${pageno}`);
+        return client.get(`tesla/search/find/?q=${searchquery}&maxitems=32&pincode=${pincode}&city=${city}${price}${discount}${material}${pageno}`);
       }
       return client.get(`tesla/products/${modifiedQuery}/?&maxitems=32&pincode=${pincode}&city=${city}${price}${discount}${material}${sortby}${pageno}`);
     }

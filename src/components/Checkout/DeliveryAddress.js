@@ -251,7 +251,8 @@ class DeliveryAddress extends Component {
 DeliveryAddress.defaultProps = {
   history: {},
   location: {},
-  addresses: []
+  addresses: [],
+  currentaddress: 0
 };
 DeliveryAddress.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
@@ -261,6 +262,11 @@ DeliveryAddress.propTypes = {
   addresses: PropTypes.array,
   nextstep: PropTypes.bool.isRequired,
   location: PropTypes.object,
-  currentaddress: PropTypes.number.isRequired
+  currentaddress: PropTypes.number
 };
-export default connect(mapStateToProps, null, null, { withRef: true })(DeliveryAddress);
+export default connect(
+  mapStateToProps,
+  null,
+  null,
+  { withRef: true }
+)(DeliveryAddress);

@@ -79,14 +79,14 @@ const Footer = ({ categories }) => (
     <Section bg="footerTop" mb="0" p="0.625rem 0 2rem">
       <Container pr="0" pl="0">
         <Row m="0" mb="1rem">
-          {linkData.map(links => (
-            <Div display="flexEqual" col="13">
+          {linkData.map((links, index) => (
+            <Div key={String(index)} display="flexEqual" col="13">
               <Heading color="white" fontSize="1em" mt="1rem" pb="2px">
                 {links.key}
               </Heading>
               <ul>
-                {links.data.map(link => (
-                  <li>
+                {links.data.map((link, i) => (
+                  <li key={String(i)}>
                     <Link to={`${link.url}`}>{link.name}</Link>
                   </li>
                 ))}

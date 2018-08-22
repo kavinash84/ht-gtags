@@ -29,7 +29,10 @@ import Notifs from '../../components/Notifs';
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState } }) => {
-    const { pincode: { selectedPincode }, app: { sessionId, csrfToken } } = getState();
+    const {
+      pincode: { selectedPincode },
+      app: { sessionId, csrfToken }
+    } = getState();
     const defaultPincode = selectedPincode === '' ? PINCODE : selectedPincode;
     if (!isSessionSet(getState()) || !sessionId || !csrfToken) {
       await dispatch(generateSession(defaultPincode)).catch(error => console.log(error));
@@ -48,7 +51,9 @@ import Notifs from '../../components/Notifs';
     }
   },
   defer: ({ store: { dispatch, getState } }) => {
-    const { userLogin: { isLoggedIn } } = getState();
+    const {
+      userLogin: { isLoggedIn }
+    } = getState();
     if (isLoggedIn && !isWishListLoaded(getState())) {
       dispatch(loadWishlist()).catch(error => console.log(error));
     }
@@ -99,7 +104,10 @@ export default class App extends Component {
     notifs: PropTypes.shape({
       global: PropTypes.array
     }).isRequired,
-    notifSend: PropTypes.func.isRequired
+    notifSend: PropTypes.func.isRequired,
+    wishlist: PropTypes.shape({
+      waitlist: PropTypes.string
+    })
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -114,6 +122,9 @@ export default class App extends Component {
     },
     pincode: {
       selectedPincode: ''
+    },
+    wishlist: {
+      waitlist: ''
     }
   };
 
@@ -133,22 +144,30 @@ export default class App extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { dispatch } = this.context.store;
-    const { login: { isLoggedIn }, pincode: { selectedPincode }, app: { sessionId } } = this.props;
+    const {
+      login: { isLoggedIn },
+      pincode: { selectedPincode },
+      app: { sessionId },
+      wishlist: { waitlist }
+    } = this.props;
     const pincode = selectedPincode === '' ? PINCODE : '';
     if (nextProps.signUp && nextProps.signUp.loaded) {
       const { signUp } = nextProps;
       if (!isLoggedIn && signUp.response.signup_complete) {
-        const { signUp: { response }, loginUser } = nextProps;
+        const {
+          signUp: { response },
+          loginUser
+        } = nextProps;
         if (response.signup_complete) {
           dispatch(loginUser(response.token));
           dispatch(synCart(sessionId, pincode));
-          dispatch(syncWishList());
+          if (waitlist !== '') dispatch(syncWishList());
         }
       }
     }
     if (!isLoggedIn && nextProps.login.isLoggedIn) {
       dispatch(synCart(sessionId, pincode));
-      dispatch(syncWishList());
+      if (waitlist !== '') dispatch(syncWishList());
       const query = new URLSearchParams(this.props.location.search);
       this.props.pushState(query.get('redirect') || '/');
     } else if (this.props.login && !nextProps.login) {

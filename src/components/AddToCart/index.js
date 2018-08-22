@@ -42,13 +42,13 @@ const AddToCart = ({
   itemId,
   stateId,
   size,
-  quantity
+  isSoldOut
 }) => {
   const checkStatus = checkSKUInCart(cartSKUs, sku);
   const addLoading = addingToCart && stateId === itemId;
   return (
     <div>
-      {quantity === '0' ? (
+      {isSoldOut ? (
         <div>
           <Button btnType="custom" border="1px solid" bc="white" color="red" p="6px 15px 7px" size={size}>
             <Span fontSize="0.857rem" fontFamily="medium" color="red" va="text-top">
@@ -95,7 +95,8 @@ AddToCart.defaultProps = {
   addingToCart: false,
   itemId: '',
   stateId: '',
-  size: 'default'
+  size: 'default',
+  isSoldOut: false
 };
 
 AddToCart.propTypes = {
@@ -109,7 +110,7 @@ AddToCart.propTypes = {
   itemId: PropTypes.string,
   stateId: PropTypes.string,
   size: PropTypes.string,
-  quantity: PropTypes.string.isRequired
+  isSoldOut: PropTypes.bool
 };
 
 export default connect(
