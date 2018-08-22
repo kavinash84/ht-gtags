@@ -26,20 +26,14 @@ export default function userMiddleware() {
       case 'cart/UPDATE_CART_FAIL':
         dispatch(notifSend({
           type: 'warning',
-          msg:
-              (action.error.error_message &&
-                titleCase(action.error.error_message[action.error.error_message.length - 1])) ||
-              SOME_ERROR,
+          msg: (action.error.error_message && titleCase(action.error.error_message)) || SOME_ERROR,
           dismissAfter: 4000
         }));
         break;
       case 'cart/REMOVE_FROM_CART_FAIL':
         dispatch(notifSend({
           type: 'warning',
-          msg:
-              (action.error.error_message &&
-                titleCase(action.error.error_message[action.error.error_message.length - 1])) ||
-              SOME_ERROR,
+          msg: (action.error.error_message && titleCase(action.error.error_message)) || SOME_ERROR,
           dismissAfter: 4000
         }));
         break;

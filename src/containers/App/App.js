@@ -99,7 +99,10 @@ export default class App extends Component {
     notifs: PropTypes.shape({
       global: PropTypes.array
     }).isRequired,
-    notifSend: PropTypes.func.isRequired
+    notifSend: PropTypes.func.isRequired,
+    wishlist: PropTypes.shape({
+      waitlist: PropTypes.string
+    })
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -114,6 +117,9 @@ export default class App extends Component {
     },
     pincode: {
       selectedPincode: ''
+    },
+    wishlist: {
+      waitlist: ''
     }
   };
 
@@ -133,7 +139,12 @@ export default class App extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { dispatch } = this.context.store;
-    const { login: { isLoggedIn }, pincode: { selectedPincode }, app: { sessionId } } = this.props;
+    const {
+      login: { isLoggedIn },
+      pincode: { selectedPincode },
+      app: { sessionId },
+      wishlist: { waitlist }
+    } = this.props;
     const pincode = selectedPincode === '' ? PINCODE : '';
     if (nextProps.signUp && nextProps.signUp.loaded) {
       const { signUp } = nextProps;
@@ -142,13 +153,13 @@ export default class App extends Component {
         if (response.signup_complete) {
           dispatch(loginUser(response.token));
           dispatch(synCart(sessionId, pincode));
-          dispatch(syncWishList());
+          if (waitlist !== '') dispatch(syncWishList());
         }
       }
     }
     if (!isLoggedIn && nextProps.login.isLoggedIn) {
       dispatch(synCart(sessionId, pincode));
-      dispatch(syncWishList());
+      if (waitlist !== '') dispatch(syncWishList());
       const query = new URLSearchParams(this.props.location.search);
       this.props.pushState(query.get('redirect') || '/');
     } else if (this.props.login && !nextProps.login) {
