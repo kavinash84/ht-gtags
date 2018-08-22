@@ -39,10 +39,6 @@ const CategoryItem = ({ image }) => (
         enlargedImageStyle: {
           width: '200%',
           height: '200%'
-        },
-        enlargedImageContainerStyle: {
-          width: 1100,
-          height: 550
         }
       }}
     />

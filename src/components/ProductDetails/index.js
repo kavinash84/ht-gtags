@@ -35,8 +35,6 @@ import BreadCrumb from './BreadCrumb';
 import Pincode from './Pincode';
 import AddToCart from '../AddToCart';
 
-import prodDetails from '../../data/ProductDetails';
-
 const styles = require('./ProductDetails.scss');
 
 const onClickWishList = (sku, list, dispatcher, isUserLoggedIn, history, onOpenLoginModal, addToWaitList) => e => {
@@ -193,7 +191,7 @@ class ProductDetails extends React.Component {
                             Color Options
                           </Heading>
                         </Row>
-                        <ColorOption data={colorproducts} colors={prodDetails.colors} />
+                        <ColorOption data={colorproducts} />
                       </Section>
                     )}
                   </Row>
