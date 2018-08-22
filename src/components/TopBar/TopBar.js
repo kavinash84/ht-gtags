@@ -77,12 +77,6 @@ export default class MenuSidebar extends Component {
   onCloseLoginModal = () => {
     this.setState({ openLogin: false });
   };
-
-  handleUserPopOver = () => {
-    this.setState({
-      userPopOver: !this.state.userPopOver
-    });
-  };
   handleClick = URL => e => {
     e.preventDefault();
     const { history, router } = this.props;
@@ -160,7 +154,7 @@ export default class MenuSidebar extends Component {
               <Img src={CartIcon} alt="Hometown" height="24px" />
               <span className={styles.count}>{cartCount}</span>
             </Link>
-            <Button p="0" className={styles.heartBtn} ml="0.625rem" onClick={this.handleUserPopOver}>
+            <Button p="0" className={styles.userBtn} ml="0.625rem">
               <Img src={UserIcon} alt="Account" height="24px" mr="0" float="left" />
             </Button>
             <div className={`${styles.yourAccount} ${userPopOver ? '' : styles.hide}`}>

@@ -10,4 +10,4 @@ export const getCartCount = createSelector([cartSummary], items => items.items_c
 
 export const getCartSummary = createSelector([cartSummary], summary => summary);
 
-export const getCartListSKU = createSelector([cartList], data => data.map(item => item.configurable_sku));
+export const getCartListSKU = createSelector([getCartList], data => data.map(item => item.configurable_sku));

@@ -264,4 +264,9 @@ DeliveryAddress.propTypes = {
   location: PropTypes.object,
   currentaddress: PropTypes.number
 };
-export default connect(mapStateToProps, null, null, { withRef: true })(DeliveryAddress);
+export default connect(
+  mapStateToProps,
+  null,
+  null,
+  { withRef: true }
+)(DeliveryAddress);

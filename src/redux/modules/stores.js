@@ -1,4 +1,4 @@
-import { STORES } from 'helpers/apiUrls';
+import { STATIC_BLOCK } from 'helpers/apiUrls';
 
 const LOAD = 'loadStores/LOAD';
 const LOAD_SUCCESS = 'loadStores/LOAD_SUCCESS';
@@ -46,7 +46,7 @@ export const isLoaded = globalState => globalState.stores && globalState.stores.
 
 export const loadStores = () => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-  promise: ({ client }) => client.get(STORES)
+  promise: ({ client }) => client.get(`${STATIC_BLOCK}/store_react`)
 });
 
 export const setCity = city => ({

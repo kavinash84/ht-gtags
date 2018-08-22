@@ -36,7 +36,7 @@ const OrderSummary = ({
         <Text color="rgba(0, 0, 0, 0.8);">
           Savings
           <Span float="right" color="#000000" fontFamily="medium">
-            Rs. {savings ? formatAmount(savings) : null}
+            Rs. {savings ? formatAmount(savings) : 0}
           </Span>
         </Text>
         <Text color="rgba(0, 0, 0, 0.8);">

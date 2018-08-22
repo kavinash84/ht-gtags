@@ -35,8 +35,6 @@ import BreadCrumb from './BreadCrumb';
 import Pincode from './Pincode';
 import AddToCart from '../AddToCart';
 
-import prodDetails from '../../data/ProductDetails';
-
 const styles = require('./ProductDetails.scss');
 
 const onClickWishList = (sku, list, dispatcher, isUserLoggedIn, history, onOpenLoginModal, addToWaitList) => e => {
@@ -165,6 +163,7 @@ class ProductDetails extends React.Component {
                   </div>
                 </Div> */}
               </Div>
+              <div id="portal" className={styles.portal} />
               <Div col="5" pl="1rem" className={styles.pdpRightWrapper}>
                 <Div className={styles.titleWrapper}>
                   <TitlePrice
@@ -192,7 +191,7 @@ class ProductDetails extends React.Component {
                             Color Options
                           </Heading>
                         </Row>
-                        <ColorOption data={colorproducts} colors={prodDetails.colors} />
+                        <ColorOption data={colorproducts} />
                       </Section>
                     )}
                   </Row>
@@ -210,8 +209,8 @@ class ProductDetails extends React.Component {
                   </ServiceDetails>
                 </Row>
                 <Row display="block" mt="0" mb="0.625rem" mr="0.9375rem" ml="0.9375rem">
-                  <Img src="http://via.placeholder.com/350x80" alt="" width="100%" mt="0" mb="1rem" />
-                  <Div col="6" mt="0">
+                  <Img src="http://via.placeholder.com/450x110" alt="" width="100%" mt="0" mb="1rem" />
+                  <Div col="6" mt="0" pr="0.3125rem">
                     <AddToCart
                       simpleSku={simpleSku}
                       sku={sku}
@@ -220,7 +219,7 @@ class ProductDetails extends React.Component {
                       quantity={simples[simpleSku].meta.quantity}
                     />
                   </Div>
-                  <Div col="6" mt="0">
+                  <Div col="6" mt="0" pl="0.3125rem">
                     <Button
                       width="100%"
                       color={Theme.colors.primary}
