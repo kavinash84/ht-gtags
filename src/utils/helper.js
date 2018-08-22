@@ -206,6 +206,7 @@ export const calculateLowestEmi = (data, price) => {
 
 export const titleCase = str =>
   str
+    .replace(/<(?:.|\n)*?>/gm, '')
     .toLowerCase()
     .split(' ')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))

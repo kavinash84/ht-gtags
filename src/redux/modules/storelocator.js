@@ -1,3 +1,5 @@
+import { STATIC_BLOCK } from 'helpers/apiUrls';
+
 const LOAD_STORES_DATA = 'storelocator/LOAD_STORES_DATA';
 const LOAD_STORES_DATA_SUCCESS = 'storelocator/LOAD_STORES_DATA_SUCCESS';
 const LOAD_STORES_DATA_FAIL = 'storelocator/LOAD_STORES_DATA_FAIL';
@@ -30,7 +32,8 @@ export default function reducer(state = initialState, action = {}) {
       return state;
   }
 }
+
 export const loadStoresData = () => ({
   types: [LOAD_STORES_DATA, LOAD_STORES_DATA_SUCCESS, LOAD_STORES_DATA_FAIL],
-  promise: ({ client }) => client.get('tesla/static/store_react')
+  promise: ({ client }) => client.get(`${STATIC_BLOCK}/store_react`)
 });
