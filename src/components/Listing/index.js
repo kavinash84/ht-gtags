@@ -217,7 +217,7 @@ class Listing extends React.Component {
                       simpleSku={Object.keys(item.data.simples)[0]}
                       sku={item.data.sku}
                       itemId={item.id}
-                      quantity={Object.values(item.data.simples)[0].meta.quantity}
+                      isSoldOut={item.data.soldout}
                     />
                   </Div>
                 </div>
