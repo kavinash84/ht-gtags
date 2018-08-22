@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { provideHooks } from 'redial';
 import Menu from 'containers/MenuNew/index';
-import MainSlider from 'components/MainSlider';
+// import MainSlider from 'components/MainSlider';
 import CategoryFilters from 'components/Category/CategoryFilters';
 import Section from 'hometown-components/lib/Section';
 import Div from 'hometown-components/lib/Div';
@@ -19,11 +19,11 @@ const getSubMenu = (categories, id) => categories.filter(category => Number(cate
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState }, params }) => {
-    console.log(params);
-    if (!isLoaded(getState(), 131)) {
-      await dispatch(loadCategory(131)).catch(error => console.log(error));
+    const { category } = params;
+    if (!isLoaded(getState(), category)) {
+      await dispatch(loadCategory(category)).catch(error => console.log(error));
     }
-    await dispatch(setCategory(131));
+    await dispatch(setCategory(category));
   }
 })
 @connect(({ homepage: { menu }, category }) => ({
@@ -38,7 +38,6 @@ export default class Category extends Component {
         <Helmet title="Home" />
         <div className="wrapper">
           <Menu />
-          <MainSlider data={category.mainsection.data} />
           <Container pr="0" pl="0">
             <Row display="block" pt="2.25rem" ml="0" mr="0">
               <Div col={2}>
