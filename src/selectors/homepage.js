@@ -1,7 +1,14 @@
 import { createSelector } from 'reselect';
 
 /* Stores */
-export const storesList = stores => (stores.data && stores.data.items.text) || [];
+export const storesData = stores =>
+  stores.data || {
+    items: {
+      text: []
+    }
+  };
+
+export const storesList = createSelector([storesData], data => data.items.text) || [];
 
 export const selectedCity = stores => stores.selectedCity;
 

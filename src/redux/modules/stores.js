@@ -7,7 +7,7 @@ const SET_SELECTED_CITY = 'loadStores/SET_SELECTED_CITY';
 
 const initialState = {
   loaded: false,
-  data: [],
+  data: null,
   selectedCity: 'AHMEDABAD'
 };
 
