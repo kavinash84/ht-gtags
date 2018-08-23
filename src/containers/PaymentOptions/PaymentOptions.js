@@ -15,17 +15,20 @@ import PaymentOptions from 'components/Checkout/PaymentOptions';
 }))
 @provideHooks({
   fetch: async ({ store: { dispatch, getState } }) => {
-    const { app: { sessionId } } = getState();
-    await dispatch(load(sessionId));
-    /* setting default paymentGateway in API */
-    dispatch(setSelectedGatewayInSession('CreditCard', sessionId));
+    const { app: { sessionId }, cart } = getState();
+    console.log(cart.data);
+    if (cart && cart.length !== 0) {
+      await dispatch(load(sessionId));
+      /* setting default paymentGateway in API */
+      dispatch(setSelectedGatewayInSession('CreditCard', sessionId));
+    }
   }
 })
 export default class PaymentOptionsContainer extends Component {
   componentDidMount() {
     const { cart, history } = this.props;
-    if (cart && cart.length) {
-      history.push('/checkout/delivery-address');
+    if (cart && cart.length === 0) {
+      history.push('/cart');
     }
   }
   render() {
