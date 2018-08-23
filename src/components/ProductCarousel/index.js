@@ -14,7 +14,7 @@ const adjustSlides = length => ({
 });
 
 const ProductCarousel = ({ data, title, length }) => (
-  <Section p="0" pt="0rem" mb="1rem" display="flex" className="prodCarousel">
+  <Section p="0" pt="0rem" mb="2.5rem" display="flex" className="prodCarousel">
     <Container pr="0" pl="0">
       <Title title={title} />
       <SlickSlider settings={adjustSlides(length)}>

@@ -5,7 +5,7 @@ import Div from 'hometown-components/lib/Div';
 
 const Title = ({ title, subTitle, ta }) => (
   <Div mb="1.25rem">
-    <Text fontSize="1.8rem" color="rgba(0, 0, 0, 0.75)" mt="0" mb="0" lh="1.4" ta={ta} fontFamily="regular">
+    <Text fontSize="1.5rem" color="rgba(0, 0, 0, 0.75)" mt="0" mb="0" lh="1.4" ta={ta} fontFamily="regular">
       {title}
     </Text>
     {subTitle !== '' && (

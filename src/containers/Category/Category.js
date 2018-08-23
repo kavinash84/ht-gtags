@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { provideHooks } from 'redial';
 import Menu from 'containers/MenuNew/index';
-// import MainSlider from 'components/MainSlider';
+import MainSlider from 'components/MainSlider';
 import CategoryFilters from 'components/Category/CategoryFilters';
 import Section from 'hometown-components/lib/Section';
 import Div from 'hometown-components/lib/Div';
@@ -26,18 +26,20 @@ const getSubMenu = (categories, id) => categories.filter(category => Number(cate
     await dispatch(setCategory(category));
   }
 })
-@connect(({ homepage: { menu }, category }) => ({
+@connect(({ homepage: { menu, banners }, category }) => ({
+  banners: banners.data,
   menu: menu.data,
   category: category.data && category.data.items.text
 }))
 export default class Category extends Component {
   render() {
-    const { category, menu } = this.props;
+    const { category, menu, banners } = this.props;
     return (
       <Section p="0" mb="0">
         <Helmet title="Home" />
         <div className="wrapper">
           <Menu />
+          <MainSlider data={banners} />
           <Container pr="0" pl="0">
             <Row display="block" pt="2.25rem" ml="0" mr="0">
               <Div col={2}>
@@ -61,10 +63,12 @@ export default class Category extends Component {
 
 Category.defaultProps = {
   category: [],
-  menu: []
+  menu: [],
+  banners: []
 };
 
 Category.propTypes = {
   category: PropTypes.array,
-  menu: PropTypes.array
+  menu: PropTypes.array,
+  banners: PropTypes.array
 };

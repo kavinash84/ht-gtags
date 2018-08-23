@@ -48,8 +48,8 @@ const TrackOrder = ({
           </Row>
           {status && (
             <div>
-              {loading && !error && <div>Loading...</div>}
-              {error && !loading && <div>{errorMessage}</div>}
+              {loading && !error && <div className="error">Loading...</div>}
+              {error && !loading && <div className="error">{errorMessage}</div>}
               {!error &&
                 !loading && (
                 <Row display="block" mr="0" ml="0" mt="2rem">
@@ -113,4 +113,7 @@ TrackOrder.propTypes = {
   orderId: PropTypes.string.isRequired,
   errorMessage: PropTypes.string.isRequired
 };
-export default connect(mapStateToProps, null)(TrackOrder);
+export default connect(
+  mapStateToProps,
+  null
+)(TrackOrder);

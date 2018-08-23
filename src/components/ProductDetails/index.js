@@ -300,7 +300,7 @@ ProductDetails.propTypes = {
   reviews: PropTypes.object,
   colorproducts: PropTypes.array,
   relatedproductsList: PropTypes.array,
-  deliveryInfo: PropTypes.string,
+  deliveryInfo: PropTypes.array,
   emidata: PropTypes.array,
   wishList: PropTypes.array,
   wishListData: PropTypes.array,
