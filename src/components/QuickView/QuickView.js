@@ -165,9 +165,11 @@ export default class QuickView extends Component {
                 <Span color="rgba(0, 0, 0, 0.6)" fontFamily="medium" fontSize="1.325rem" mr="1rem">
                   Rs. {(discPrice && formatAmount(discPrice)) || (price && formatAmount(price))}
                 </Span>
-                <Span fontFamily="regular" color="rgba(0, 0, 0, 0.6)" fontSize="1rem">
-                  <s>Rs. {formatAmount(price)}</s>
-                </Span>
+                {discPrice && (
+                  <Span fontFamily="regular" color="rgba(0, 0, 0, 0.6)" fontSize="1rem">
+                    <s>Rs. {formatAmount(price)}</s>
+                  </Span>
+                )}
               </Text>
               {saving && (
                 <Text color="rgba(0, 0, 0, 0.6)" fontFamily="700" fontSize="0.857rem" mb="1rem">

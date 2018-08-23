@@ -4,6 +4,7 @@ import Section from 'hometown-components/lib/Section';
 import Container from 'hometown-components/lib/Container';
 import Title from 'components/Title';
 import { formatAmount } from 'utils/formatters';
+import { formatProductURL } from 'utils/helper';
 import ProductCarouselItem from './ProductCarouselItem';
 import SlickSlider from '../SlickSlider';
 
@@ -27,7 +28,7 @@ const ProductCarousel = ({ data, title, length }) => (
               percentage={item.meta.max_saving_percentage}
               rating={item.reviews.rating}
               image={`${item.image}-product_500.jpg`}
-              url={`/${item.meta.name}/sku/${item.meta.sku}`}
+              url={`/${formatProductURL(item.meta.name, item.meta.sku)}`}
             />
           </div>
         ))}

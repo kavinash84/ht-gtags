@@ -2,7 +2,10 @@ import { createSelector } from 'reselect';
 
 export const cartList = cart => cart.data || [];
 
-export const cartSummary = cart => cart.summary;
+export const cartSummary = cart =>
+  cart.summary || {
+    items_count: 0
+  };
 
 export const getCartList = createSelector([cartList], data => data.filter(item => item.product_info.product_id !== ''));
 

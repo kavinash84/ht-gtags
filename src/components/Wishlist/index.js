@@ -8,13 +8,16 @@ import Container from 'hometown-components/lib/Container';
 import Section from 'hometown-components/lib/Section';
 import ResponsiveModal from 'components/Modal';
 import QuickView from 'components/QuickView/QuickView';
+import { setProductPosition } from 'redux/modules/productdetails';
+import { formatProductURL } from 'utils/helper';
 
 const getProductImage = url => {
   const pp = `${url.split('/').slice(-1)}`;
   return url.replace(pp, '1-product_500.jpg');
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ ...actionCreators, productPosition: setProductPosition }, dispatch);
 
 const onClick = (list, dispatcher) => sku => e => {
   e.preventDefault();
@@ -46,7 +49,7 @@ class Wishlist extends React.Component {
 
   render() {
     const {
-      list, toggleWishList, wishList, loadingList
+      list, toggleWishList, wishList, loadingList, productPosition
     } = this.props;
     const { quickViewSku, openQuickView, simpleSku } = this.state;
     return (
@@ -71,6 +74,8 @@ class Wishlist extends React.Component {
                 rating={item.product_info.data.reviews.rating.toFixed(1)}
                 reviewsCount={item.product_info.data.reviews.count}
                 savingAmount={item.product_info.data.max_price - item.product_info.data.max_special_price}
+                setProductPosition={productPosition}
+                productURL={formatProductURL(item.product_info.data.name, item.product_info.data.sku)}
               />
             </div>
           ))}
@@ -97,12 +102,10 @@ Wishlist.defaultProps = {
 
 Wishlist.propTypes = {
   toggleWishList: PropTypes.func.isRequired,
+  productPosition: PropTypes.func.isRequired,
   wishList: PropTypes.array,
   list: PropTypes.array,
   loadingList: PropTypes.array
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Wishlist);
+export default connect(null, mapDispatchToProps)(Wishlist);
