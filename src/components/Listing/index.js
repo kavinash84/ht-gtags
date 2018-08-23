@@ -209,7 +209,6 @@ class Listing extends React.Component {
                     savingAmount={item.data.max_price - item.data.max_special_price}
                     deliveredBy={item.data.delivery_details[0].value}
                     colors={metaResults[index].data.color_group_count.split(' ')[0]}
-                    history={history}
                     setProductPosition={productPosition}
                     productURL={formatProductURL(item.data.name, item.data.sku)}
                   />
