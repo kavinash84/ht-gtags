@@ -408,6 +408,8 @@
 			top: 0;
 			left: -80px;
 			width: 70px;
+			overflow: auto;
+    	height: calc(65px * 7.5);
 		}
 		.slick-thumb {
 			li {
