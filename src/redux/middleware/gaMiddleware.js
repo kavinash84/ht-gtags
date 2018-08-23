@@ -24,12 +24,12 @@ export default function gaMiddleware() {
           }
         }
         if (type === 'productdetails/LOAD_PRODUCT_DESCRIPTION') {
-          const { products, wishlist } = getState();
+          const { products } = getState();
           // const { query } = products;
           // const category = query ? JSON.parse(window.atob(query)).params.join('/') : null;
           const { position } = getState().productdetails;
           let eventObject;
-          if (products && products.length > 0) {
+          if (products && products.list.length > 0) {
             const product = products.list[position - 1];
             const {
               name, sku, price, brand
@@ -53,31 +53,7 @@ export default function gaMiddleware() {
                 }
               }
             };
-          } else if (wishlist && wishlist.data.length > 0) {
-            const product = wishlist.data[position].product_info;
-            const {
-              name, sku, price, brand
-            } = product.data;
-            eventObject = {
-              event: 'productClick',
-              ecommerce: {
-                click: {
-                  actionField: { list: 'Wishlist' }, //
-                  products: [
-                    {
-                      name,
-                      price,
-                      brand,
-                      // category,
-                      position,
-                      id: sku,
-                      variant: ''
-                    }
-                  ]
-                }
-              }
-            };
-          }
+          } else eventObject = {};
           window.dataLayer.push(eventObject);
         }
         if (type === 'productdetails/LOAD_PRODUCT_DESCRIPTION_SUCCESS') {
