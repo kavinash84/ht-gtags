@@ -216,3 +216,13 @@ export const urlKeyResults = results => {
   if (results && typeof results === 'object' && results.constructor === Object) return [];
   return results.filter(result => result.has_url_key === true);
 };
+
+export const formatProductURL = (name, sku) => {
+  const productname = name
+    .split(' ')
+    .join('-')
+    .toLowerCase()
+    .split('%')
+    .join('');
+  return `${productname}/sku/${sku}`;
+};
