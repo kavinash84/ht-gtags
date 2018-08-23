@@ -150,7 +150,13 @@ export default class ResetPasswordContainer extends Component {
             </Container>
           )}
           <Section className={isValid ? 'hide' : ''} display="flex" p="0.625rem" pt="1.25rem" mb="0">
-            <Empty title="Password link is expired !!" subTitle="" btnName="Resend Link" url="/" bg="#fafafa">
+            <Empty
+              title="Password link is expired !!"
+              subTitle=""
+              btnName="Resend Link"
+              url="/forgot-password"
+              bg="#fafafa"
+            >
               <Img src={PasswordExpiredIcon} width="initial" m="auto" alt="Password link is expired !!" />
             </Empty>
           </Section>

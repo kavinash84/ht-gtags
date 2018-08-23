@@ -167,7 +167,8 @@ PaymentOptions.defaultProps = {
   // error: null,
   // isCartChecked: false,
   submitting: false,
-  session: ''
+  session: '',
+  history: {}
 };
 
 PaymentOptions.propTypes = {
@@ -176,7 +177,7 @@ PaymentOptions.propTypes = {
   toggleGateway: PropTypes.func.isRequired,
   setPaymentDetails: PropTypes.func.isRequired,
   summary: PropTypes.object,
-  history: PropTypes.object.isRequired,
+  history: PropTypes.object,
   session: PropTypes.string,
   paymentDetails: PropTypes.object.isRequired,
   // setError: PropTypes.func.isRequired,

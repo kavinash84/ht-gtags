@@ -25,10 +25,12 @@ const ProductItem = ({
             {' '}
             Rs. {price}{' '}
           </Span>
-          <Span mr="0" fontSize="0.75em" fontFamily="medium">
-            {' '}
-            <s>Rs. {discPrice}</s>
-          </Span>
+          {discPrice && (
+            <Span mr="0" fontSize="0.75em" fontFamily="medium">
+              {' '}
+              <s>Rs. {discPrice}</s>
+            </Span>
+          )}
           {rating > 0 && (
             <Span ml="0.625rem">
               <Rating rating={rating}> ★{Number(rating).toFixed(1)} </Rating>

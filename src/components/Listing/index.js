@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 import { toggleWishList, wishListWaitList } from 'redux/modules/wishlist';
 // import { clearAllFilters } from 'redux/modules/products';
 import { setProductPosition } from 'redux/modules/productdetails';
-import { formFilterLink2 } from 'utils/helper';
+import { formFilterLink2, formatProductURL } from 'utils/helper';
 import TitleBar from './TitleBar';
 import Dropdown from '../Filters/Filters';
 import SortByFilters from '../Filters/SortByFilters';
@@ -188,7 +188,7 @@ class Listing extends React.Component {
                     price={item.netprice}
                     cutprice={item.cutprice}
                     saving={item.saving}
-                    image={getProductImage(item.images[0].path)}
+                    image={getProductImage(item.images && item.images.length > 0 && item.images[0].path)}
                     sku={item.data.sku}
                     simple_sku={item.simples}
                     onClick={onClickWishList(
@@ -209,8 +209,8 @@ class Listing extends React.Component {
                     savingAmount={item.data.max_price - item.data.max_special_price}
                     deliveredBy={item.data.delivery_details[0].value}
                     colors={metaResults[index].data.color_group_count.split(' ')[0]}
-                    history={history}
                     setProductPosition={productPosition}
+                    productURL={formatProductURL(item.data.name, item.data.sku)}
                   />
                   <Div mt="0" p="0.25rem 0.125rem 0.5rem">
                     <AddToCart
@@ -287,7 +287,4 @@ Listing.propTypes = {
   breadCrumbs: PropTypes.array.isRequired
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Listing);
+export default connect(null, mapDispatchToProps)(Listing);

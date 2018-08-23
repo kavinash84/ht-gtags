@@ -24,7 +24,6 @@ import Login from 'containers/Login';
 import Signup from 'containers/Signup';
 import ForgotPassword from 'containers/ForgotPassword';
 import ResetPassword from 'containers/ResetPassword';
-import UpdatePassword from 'containers/UpdatePassword';
 import Profile from 'containers/Profile';
 import Pincode from 'components/Pincode';
 import Stores from 'containers/Stores/Stores';
@@ -38,7 +37,6 @@ import ContactUs from 'containers/ContactUs/';
 import Feedback from 'containers/Feedback/';
 import ServiceRequest from 'containers/ServiceRequest/';
 import Grievance from 'containers/Grievance/';
-import PaymentStatus from 'containers/PaymentStatus/';
 import PaymentSuccess from 'containers/PaymentSuccess/';
 import PaymentFailure from 'containers/PaymentFailure/';
 import BulkOrder from 'containers/BulkOrder/';
@@ -66,7 +64,7 @@ const routes = [
       { path: '/category/:category', exact: true, component: Category },
       { path: '/login', exact: true, component: isNotAuthenticated(Login) },
       { path: '/signup', exact: true, component: isNotAuthenticated(Signup) },
-      { path: '/forgot-password/verify/reset/:hash', exact: true, component: ResetPassword },
+      { path: '/forgot-password/verify/reset/:hash', exact: true, component: isNotAuthenticated(ResetPassword) },
       { path: '/forgot-password', exact: true, component: isNotAuthenticated(ForgotPassword) },
       { path: '/wishlist', exact: true, component: isAuthenticated(Wishlist) },
       { path: '/cart', exact: true, component: Cart },
@@ -75,7 +73,6 @@ const routes = [
       { path: '/order-details', exact: true, component: OrderDetails },
       { path: '/order-summary', exact: true, component: OrderSummary },
       { path: '/profile', exact: true, component: isAuthenticated(Profile) },
-      { path: '/update-password', exact: true, component: UpdatePassword },
       { path: '/:productname?/sku/:skuId', exact: true, component: ProductDetails },
       { path: '/checkout/delivery-address', exact: true, component: DeliveryAddress },
       { path: '/checkout/payment-options', exact: true, component: PaymentOptions },
@@ -99,7 +96,6 @@ const routes = [
       { path: '/payment-success', exact: true, component: PaymentSuccess },
       { path: '/payment-failed/:orderId?', exact: true, component: PaymentFailure },
       { path: '/bulk-order', exact: true, component: BulkOrder },
-      { path: '/payment-status/order/:status', exact: true, component: PaymentStatus },
       {
         path: '/:category/:subcategory1?/:subcategory2?/:subcategory3?/:subcategory4?/:subcategory5?',
         exact: true,
