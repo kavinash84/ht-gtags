@@ -655,9 +655,10 @@
 	}
 	.error {
 		color: #dc3545;
-	  font-size: 13px;
+	  font-size: 14px;
 	  margin-bottom: 0;
 	  font-family: regular;
+		text-transform: capitalize;
 	}
 }
 
