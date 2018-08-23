@@ -635,18 +635,15 @@
 			}
 		}
 	}
-
 	.hide {
 		display: none;
 	}
-
 	.ratings {
 		display: inline-block;
     margin-left: 15px;
 		margin-right: 10px;
 		top: 3px;
 	}
-
 	.form-control {
 		width: 100%;
 		height: 42px;
@@ -655,6 +652,12 @@
 		border: solid 1px rgba(151,151,151,0.47);
 		padding: 0 10px;
 		box-sizing: border-box;
+	}
+	.error {
+		color: #dc3545;
+	  font-size: 13px;
+	  margin-bottom: 0;
+	  font-family: regular;
 	}
 }
 
