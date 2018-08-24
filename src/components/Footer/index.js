@@ -11,8 +11,9 @@ import Section from 'hometown-components/lib/Section';
 import Text from 'hometown-components/lib/Text';
 import FormInput from 'hometown-components/lib/Forms/FormInput';
 import Button from 'hometown-components/lib/Buttons';
-import { Label } from 'hometown-components/lib/Label';
+import { HOME_URL } from 'helpers/Constants';
 
+const LogoIcon = require('../../../static/logo.png');
 const linkData = require('../../data/FooterLinks');
 
 const fbIcon = require('../../../static/facebook.svg');
@@ -71,7 +72,33 @@ const Footer = ({ categories }) => (
             <Heading color="white" fontSize="1em" mt="0">
               FOLLOW US
             </Heading>
-            <Img src={paymentMethodIcon} alt="Payment Method" mt="1.2rem" width="178px" />
+            <ul className={styles.socials}>
+              <li>
+                <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/hometown.in/">
+                  <Img src={fbIcon} alt="Facebook" />
+                </a>
+              </li>
+              <li>
+                <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/HomeTown_In/">
+                  <Img src={twIcon} alt="Twitter" />
+                </a>
+              </li>
+              <li>
+                <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/hometown_in/?hl=en">
+                  <Img src={instaIcon} alt="Facebook" />
+                </a>
+              </li>
+              <li>
+                <a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/watch?v=gfLZgzaSlmg">
+                  <Img src={ytIcon} alt="Facebook" />
+                </a>
+              </li>
+              <li>
+                <a target="_blank" rel="noopener noreferrer" href="https://in.pinterest.com/hometownstore/">
+                  <Img src={pinIcon} alt="Facebook" />
+                </a>
+              </li>
+            </ul>
           </Div>
         </Row>
       </Container>
@@ -80,7 +107,7 @@ const Footer = ({ categories }) => (
       <Container pr="0" pl="0">
         <Row m="0" mb="1rem">
           {linkData.map((links, index) => (
-            <Div key={String(index)} display="flexEqual" col="13">
+            <Div key={String(index)} display="flexEqual" col="2">
               <Heading color="white" fontSize="1em" mt="1rem" pb="2px">
                 {links.key}
               </Heading>
@@ -175,41 +202,14 @@ const Footer = ({ categories }) => (
       <Container pr="0" pl="0">
         <Row m="0">
           <Div col={6}>
+            <Link to={HOME_URL}>
+              <Img src={LogoIcon} alt="Hometown" />
+            </Link>
+          </Div>
+          <Div col={6} ta="right">
             <Text color="#a6a6a6" fontSize="0.875rem" mt="0" mb="0" lh="2">
               Copyright reserved @ 2018
             </Text>
-          </Div>
-          <Div col={6} ta="right">
-            <Label mr="1rem" va="super" color="footerText" fontSize="0.875rem">
-              Follow Us
-            </Label>
-            <ul className={styles.socials}>
-              <li>
-                <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/hometown.in/">
-                  <Img src={fbIcon} alt="Facebook" />
-                </a>
-              </li>
-              <li>
-                <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/HomeTown_In/">
-                  <Img src={twIcon} alt="Twitter" />
-                </a>
-              </li>
-              <li>
-                <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/hometown_in/?hl=en">
-                  <Img src={instaIcon} alt="Facebook" />
-                </a>
-              </li>
-              <li>
-                <a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/watch?v=gfLZgzaSlmg">
-                  <Img src={ytIcon} alt="Facebook" />
-                </a>
-              </li>
-              <li>
-                <a target="_blank" rel="noopener noreferrer" href="https://in.pinterest.com/hometownstore/">
-                  <Img src={pinIcon} alt="Facebook" />
-                </a>
-              </li>
-            </ul>
           </Div>
         </Row>
       </Container>
