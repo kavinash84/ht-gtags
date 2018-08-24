@@ -4,6 +4,8 @@ import Div from 'hometown-components/lib/Div';
 import Span from 'hometown-components/lib/Span';
 import Heading from 'hometown-components/lib/Heading';
 import Rating from 'hometown-components/lib/Rating';
+import ProgressiveImageSchemer from 'hometown-components/lib/ProgressiveImageSchemer';
+import Img from 'hometown-components/lib/Img';
 import Theme from 'hometown-components/lib/Theme';
 import { Link } from 'react-router-dom';
 
@@ -14,7 +16,9 @@ const ProductItem = ({
 }) => (
   <Div className={styles.prodSliderItem}>
     <Link className={styles.link} to={url}>
-      <img src={image} alt={name} />
+      <ProgressiveImageSchemer src={image} height="263px">
+        {imageURL => <Img alt={name} src={imageURL} width="100%" className={styles.prodImage} />}
+      </ProgressiveImageSchemer>
       <div className={styles.content}>
         <Heading mb="5px" color={Theme.colors.text} fontFamily="medium" fontSize="0.9375em" ta="center">
           {name}
