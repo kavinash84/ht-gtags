@@ -118,6 +118,7 @@ app.use('/checkout/finish/payment/', async (req, res) => {
       return res.redirect(`${PAYMENT_FAILURE}/?order=${response.data.order_id}`);
     }
   } catch (error) {
+    console.log(error);
     return res.redirect(PAYMENT_FAILURE);
   }
 });

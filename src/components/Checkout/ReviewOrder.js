@@ -25,9 +25,9 @@ const nextStep = (dispatcher, sessionId, paymentData, cardType) => e => {
 };
 
 const mapStateToProps = ({
-  cart: { data, summary, error }, shipping, paymentoptions, app
+  cart, cart: { summary, error }, shipping, paymentoptions, app
 }) => ({
-  results: getCartList(data),
+  results: getCartList(cart),
   summary,
   error,
   shipping,
@@ -162,7 +162,4 @@ ReviewOrder.propTypes = {
   submitting: PropTypes.bool,
   submitted: PropTypes.bool
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ReviewOrder);
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewOrder);
