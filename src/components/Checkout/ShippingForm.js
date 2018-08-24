@@ -167,6 +167,7 @@ class ShippingForm extends React.Component {
           value={city}
           feedBackError={cityFeedBackError}
           feedBackMessage={cityFeedBackMessage}
+          readOnly
         />
         <FormInput
           label="State"
@@ -176,6 +177,7 @@ class ShippingForm extends React.Component {
           value={state}
           feedBackError={stateFeedBackError}
           feedBackMessage={stateFeedBackMessage}
+          readOnly
         />
       </div>
     );
@@ -225,9 +227,4 @@ ShippingForm.propTypes = {
   hidden: PropTypes.bool.isRequired
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-  null,
-  { withRef: true }
-)(ShippingForm);
+export default connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(ShippingForm);
