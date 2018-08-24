@@ -100,13 +100,11 @@ app.use(bodyParser());
 app.use(bodyParser.json());
 app.use('/checkout/finish/payment/', async (req, res) => {
   console.log(process.env.PAYMENT_URL);
+  console.log(req.body);
   try {
     const cookies = getCookie(req.header('cookie'), 'persist:root');
     const session = JSON.parse(JSON.parse(cookies).app).sessionId;
     const data = req.body;
-    console.group('payu');
-    console.log(data);
-    console.groupEnd('payu');
     const options = {
       url: process.env.PAYMENT_URL,
       method: 'POST',
@@ -117,14 +115,12 @@ app.use('/checkout/finish/payment/', async (req, res) => {
       data: qs.stringify(data)
     };
     const response = await axios(options);
-    console.group('API Response');
-    console.log(response);
-    console.groupEnd('API Response');
     if (response && response.data && response.data.status === 'success') return res.redirect(PAYMENT_SUCCESS);
     if (response && response.data) {
       return res.redirect(`${PAYMENT_FAILURE}/?order=${response.data.order_id}`);
     }
   } catch (error) {
+    console.log(error);
     return res.redirect(PAYMENT_FAILURE);
   }
 });
