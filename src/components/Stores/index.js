@@ -13,8 +13,8 @@ import StoreListItem from './StoreListItem';
 import SlickSlider from '../SlickSlider';
 
 const settings = {
-  slidesToShow: 7,
-  slidesToScroll: 7,
+  slidesToShow: 6,
+  slidesToScroll: 6,
   autoplay: false,
   infinite: false
 };
