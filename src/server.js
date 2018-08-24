@@ -99,12 +99,6 @@ app.use((req, res, next) => {
 app.use(bodyParser());
 app.use(bodyParser.json());
 app.use('/checkout/finish/payment/', async (req, res) => {
-  console.log(process.env.PAYMENT_URL);
-  console.log(req.body);
-  // const test = getCookie(req.header('cookie'), 'persist:root');
-  console.log(req.header('cookie'));
-  console.log('xxxxx');
-  console.log(req.header('Cookie'));
   try {
     const cookies = getCookie(req.header('cookie'), 'persist:root');
     const session = JSON.parse(JSON.parse(cookies).app).sessionId;
