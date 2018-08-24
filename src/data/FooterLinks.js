@@ -208,6 +208,51 @@ const FooterLinks = [
         url: '/Ladders'
       }
     ]
+  },
+  {
+    key: 'Bath',
+    data: [
+      {
+        name: 'Shower Room',
+        url: '/Shower Room'
+      },
+      {
+        name: 'Shower Multifunctions',
+        url: '/Shower Multifunctions'
+      },
+      {
+        name: 'Bath Tubs',
+        url: '/Bath Tubs'
+      },
+      {
+        name: 'Shower Panels',
+        url: '/Shower Panels'
+      },
+      {
+        name: 'Bath Vanity',
+        url: '/Bath Vanity'
+      },
+      {
+        name: 'Bath Cabinets',
+        url: '/Bath Cabinets'
+      },
+      {
+        name: 'Bath Accessories',
+        url: '/Bath Accessories'
+      },
+      {
+        name: 'Shower Curtains',
+        url: '/Shower Curtains'
+      },
+      {
+        name: 'Bath Linen',
+        url: '/Bath Linen'
+      },
+      {
+        name: 'Laundry',
+        url: '/Laundry'
+      }
+    ]
   }
 ];
 

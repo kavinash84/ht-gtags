@@ -16,6 +16,7 @@ const discoverIcon = require('../../../static/discover.svg');
 const maestroIcon = require('../../../static/maestro.svg');
 const mastercardIcon = require('../../../static/mastercard.svg');
 const visaIcon = require('../../../static/visa.svg');
+const cardIcon = require('../../../static/cardDefault.svg');
 
 const MONTHS = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 const YEARS = [...Array(21)];
@@ -74,9 +75,10 @@ const CardForm = ({
       {cardType === 'visa' && <Img src={visaIcon} alt="visaCard" />}
       {cardType === 'mast' && <Img src={mastercardIcon} alt="Master Card" />}
       {cardType === 'maestro' && <Img src={maestroIcon} alt="Maestro" />}
-      {cardType === 'amex' && <Img src={aeIcon} alt="maestroCard" />}
-      {cardType === 'discover' && <Img src={discoverIcon} alt="discoverCard" />}
-      {cardType === 'diners' && <Img src={dcIcon} alt="amexCard" />}
+      {cardType === 'amex' && <Img src={aeIcon} alt="Amex" />}
+      {cardType === 'discover' && <Img src={discoverIcon} alt="Discover Card" />}
+      {cardType === 'diners' && <Img src={dcIcon} alt="Diners Club" />}
+      {cardType === 'other' && <Img src={cardIcon} alt="Others" />}
     </Div>
     <Div col="2">
       <FormInput
