@@ -109,7 +109,7 @@ const CardForm = ({
         onChange={onChangeDetails(setPaymentDetails, gateway)}
         value={expYear}
       >
-        <option key="year">YY</option>
+        <option key="year">YYYY</option>
         {YEARS.map((v, i) => <option key={String(i)}>{new Date().getFullYear() + i}</option>)}
       </select>
     </Div>

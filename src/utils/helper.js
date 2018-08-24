@@ -224,5 +224,5 @@ export const formatProductURL = (name, sku) => {
     .toLowerCase()
     .split('%')
     .join('');
-  return `${productname}/sku/${sku}`;
+  return `/${productname}/sku/${sku}`;
 };

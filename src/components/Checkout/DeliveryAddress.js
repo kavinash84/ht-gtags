@@ -71,10 +71,12 @@ class DeliveryAddress extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    const { isLoggedIn } = this.props;
     if (this.state.shippingIsBilling) {
       const shippingForm = this.shipping_form.validateForm();
       if (shippingForm.error) {
-        alert('Please Fill All Details Correctly !');
+        const message = isLoggedIn ? 'Please select delivery address' : 'Please Fill All Details Correctly !';
+        alert(message);
       } else {
         const { dispatch } = this.context.store;
         const { sessionId } = this.props;
@@ -264,9 +266,4 @@ DeliveryAddress.propTypes = {
   location: PropTypes.object,
   currentaddress: PropTypes.number
 };
-export default connect(
-  mapStateToProps,
-  null,
-  null,
-  { withRef: true }
-)(DeliveryAddress);
+export default connect(mapStateToProps, null, null, { withRef: true })(DeliveryAddress);
