@@ -139,6 +139,9 @@ export const formFilterLink2 = (key, name, b64, category, value, selected, urlqu
   if (name === 'reset') {
     return obj64.category;
   }
+  if (name === 'resetsearch') {
+    return `/search/?q=${key}`;
+  }
 };
 
 export const getParamsDetailFromLink = (query, filter) => {

@@ -111,7 +111,16 @@ class Listing extends React.Component {
 
   clearFilters = () => {
     const { history, categoryquery } = this.props;
-    const link = formFilterLink2('key', 'reset', '', categoryquery);
+    console.log(history.location.pathname);
+    let link;
+    if (history.location.pathname === '/search/') {
+      console.log('In here ! ');
+      let [, searchQuery] = history.location.search.split('q=');
+      [searchQuery] = searchQuery.split('&filters');
+      link = formFilterLink2(searchQuery, 'resetsearch', '', categoryquery);
+      return history.push(link);
+    }
+    link = formFilterLink2('key', 'reset', '', categoryquery);
     history.push(link);
   };
 
@@ -287,4 +296,7 @@ Listing.propTypes = {
   breadCrumbs: PropTypes.array.isRequired
 };
 
-export default connect(null, mapDispatchToProps)(Listing);
+export default connect(
+  null,
+  mapDispatchToProps
+)(Listing);
