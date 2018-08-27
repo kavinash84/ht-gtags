@@ -226,3 +226,5 @@ export const formatProductURL = (name, sku) => {
     .join('');
   return `/${productname}/sku/${sku}`;
 };
+
+export const filterCategoryDetails = data => data.filter(item => item !== null);
