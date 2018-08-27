@@ -106,7 +106,7 @@ export default class Html extends Component {
             <script dangerouslySetInnerHTML={{ __html: 'document.getElementById("content").style.display="block";' }} />
           ) : null}
           <Helmet>
-            <script>
+            <script type="text/javascript">
               {`
                 var dataLayer = [];
                 (function(w, d, s, l, i) {
@@ -125,7 +125,7 @@ export default class Html extends Component {
                 })(window, document, 'script', 'dataLayer', 'GTM-T5VV7MZ');
               `}
             </script>
-            <script>
+            <script type="text/javascript">
               {`
                 var google_tag_params={
                     ecomm_pagetype: '',
