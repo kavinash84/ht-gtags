@@ -43,7 +43,7 @@ const PaymentSuccess = ({
                 <Heading mt="0">Thank you for placing your order.</Heading>
                 <Text fontSize="1rem" mb="0">
                   Your order number is <b>{order_no}</b> placed on &nbsp;
-                  <b>{order_date}</b>. You will shortly receive an e-mailand SMS confirming your order.
+                  <b>{order_date}</b>. You will shortly receive an e-mail and SMS confirming your order.
                 </Text>
               </Div>
             </Row>
