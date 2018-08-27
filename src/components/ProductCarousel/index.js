@@ -29,7 +29,7 @@ const ProductCarousel = ({ data, title, length }) => (
               rating={item.reviews.rating}
               reviewsCount={item.reviews.count}
               image={`${item.image}-product_500.jpg`}
-              url={`/${formatProductURL(item.meta.name, item.meta.sku)}`}
+              url={`${formatProductURL(item.meta.name, item.meta.sku)}`}
             />
           </div>
         ))}

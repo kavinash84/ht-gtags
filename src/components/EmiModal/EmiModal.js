@@ -80,17 +80,17 @@ export default class Emi extends Component {
                     </tr>
                     {/* eslint-disable */}
 
-                    {data.map(bank => (
-                      <tr className={styles.coloumn}>
+                    {data.map((bank, index) => (
+                      <tr key={String(index)} className={styles.coloumn}>
                         <td>
                           <div className={styles.bankImgWrapper}>
                             <img src={bank.bank_logo_url} alt={bank.gateway_type} />
                           </div>
                         </td>
-                        {bank.slabs.map((slab, month) => {
+                        {bank.slabs.map((slab, index) => {
                           const values = Object.values(slab.slab_keys);
                           return (
-                            <td className="">
+                            <td className="" key={String(index)}>
                               <div>
                                 {values[3] && <p>Rs. {values[3]} p.m.</p>}
                                 {values[3] && <p>Interest Rate {values[0]}%</p>}
@@ -111,7 +111,12 @@ export default class Emi extends Component {
   }
 }
 
+Emi.defaultProps = {
+  data: [],
+  price: ''
+};
+
 Emi.propTypes = {
-  data: PropTypes.object.isRequired,
-  price: PropTypes.string.isRequired
+  data: PropTypes.array,
+  price: PropTypes.string
 };

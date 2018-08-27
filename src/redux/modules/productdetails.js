@@ -81,7 +81,7 @@ export const loadProductDescription = (sku, pincode) => ({
       response.sku = sku;
       return response;
     } catch (error) {
-      return error;
+      throw error;
     }
   }
 });
