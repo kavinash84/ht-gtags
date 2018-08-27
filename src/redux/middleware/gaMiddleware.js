@@ -1,3 +1,5 @@
+import { filterCategoryDetails } from 'utils/helper';
+
 export default function gaMiddleware() {
   return ({ getState }) => next => action => {
     if (__CLIENT__) {
@@ -64,7 +66,9 @@ export default function gaMiddleware() {
             name, sku, price, brand, category_details: categoryDetails
           } = action.result.meta;
           const { color } = action.result.attributes;
-          const category = categoryDetails.map(item => item.url_key).join('/');
+          const category = filterCategoryDetails(categoryDetails)
+            .map(item => item.url_key)
+            .join('/');
           const eventObject = {
             event: 'productDetail',
             ecommerce: {

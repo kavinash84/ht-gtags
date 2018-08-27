@@ -12,35 +12,26 @@ import { loadColorProducts } from 'redux/modules/colorproducts';
 import { load as loadRelatedProducts } from 'redux/modules/relatedproducts';
 import { loadEmiOptions } from 'redux/modules/emioptions';
 import { setRecentlyViewed } from 'redux/modules/recentlyviewed';
-
 import { loadReview } from 'redux/modules/reviews';
 import { PINCODE } from '../../helpers/Constants';
+import ProductNotFoundContainer from './ProductNotFound';
 
 @provideHooks({
-  fetch: async ({ store: { dispatch, getState }, params }) => {
-    const {
-      productdetails: { currentsku },
-      pincode: { selectedPincode }
-    } = getState();
+  defer: ({ store: { dispatch, getState }, params }) => {
+    const { productdetails: { currentsku, loaded, loading }, pincode: { selectedPincode }, reviews } = getState();
     const pincode = selectedPincode || PINCODE;
     if (currentsku !== params.skuId) {
-      await dispatch(loadProductDescription(params.skuId, pincode));
+      dispatch(loadProductDescription(params.skuId, pincode));
     }
-  },
-  defer: ({ store: { dispatch, getState }, params }) => {
-    const {
-      productdetails: { currentsku },
-      pincode: { selectedPincode },
-      reviews
-    } = getState();
-    const pincode = selectedPincode || PINCODE;
-    if (currentsku !== params.skuId || reviews.data.length === 0) {
-      dispatch(loadReview(params.skuId));
+    if (loaded && !loading) {
+      if (currentsku !== params.skuId || reviews.data.length === 0) {
+        dispatch(loadReview(params.skuId));
+      }
+      dispatch(loadColorProducts(params.skuId, pincode));
+      dispatch(loadRelatedProducts(params.skuId, pincode));
+      dispatch(setRecentlyViewed(params.skuId));
+      dispatch(loadEmiOptions(params.skuId, pincode));
     }
-    dispatch(loadColorProducts(params.skuId, pincode));
-    dispatch(loadRelatedProducts(params.skuId, pincode));
-    dispatch(setRecentlyViewed(params.skuId));
-    dispatch(loadEmiOptions(params.skuId, pincode));
   }
 })
 @connect(({ productdetails }) => ({
@@ -48,15 +39,21 @@ import { PINCODE } from '../../helpers/Constants';
 }))
 export default class ProductDetails extends Component {
   render() {
-    const { loading, loaded, history } = this.props;
+    const {
+      loading, loaded, history, productDescription
+    } = this.props;
     return (
       <Section p="0" mb="0">
         <div className="wrapper">
           <Menu />
-          {loading && !loaded && <ProductDetailsShimmer />}
-          <div itemScope itemType="http://schema.org/Product">
-            <ProductDetailsContainer history={history} />
-          </div>
+          {loading && <ProductDetailsShimmer />}
+          {!loading &&
+            loaded && (
+            <div itemScope itemType="http://schema.org/Product">
+              <ProductDetailsContainer history={history} />
+            </div>
+          )}
+          {!loading && !loaded && Object.keys(productDescription).length === 0 && <ProductNotFoundContainer />}
         </div>
         <Footer />
       </Section>
@@ -66,11 +63,13 @@ export default class ProductDetails extends Component {
 
 ProductDetails.defaultProps = {
   loading: false,
-  loaded: false
+  loaded: false,
+  productDescription: {}
 };
 
 ProductDetails.propTypes = {
   loading: PropTypes.bool,
   loaded: PropTypes.bool,
+  productDescription: PropTypes.object,
   history: PropTypes.object.isRequired
 };

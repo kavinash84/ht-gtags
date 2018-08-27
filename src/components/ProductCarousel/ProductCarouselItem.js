@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 const styles = require('./Slider.scss');
 
 const ProductItem = ({
-  image, name, url, discPrice, price, rating, percentage
+  image, name, url, discPrice, price, rating, reviewsCount, percentage
 }) => (
   <Div className={styles.prodSliderItem}>
     <Link className={styles.link} to={url}>
@@ -39,7 +39,7 @@ const ProductItem = ({
             <Span ml="0.625rem">
               <Rating rating={rating}> ★{Number(rating).toFixed(1)} </Rating>
               <Span mr="0.625rem" fontSize="0.75rem" lh="1.7" va="text-top" color={Theme.colors.textExtraLight}>
-                ({Number(rating).toFixed(1)})
+                ({reviewsCount})
               </Span>
             </Span>
           )}
@@ -65,9 +65,10 @@ ProductItem.defaultProps = {
   image: '',
   name: '',
   percentage: '',
-  rating: '',
+  rating: 0,
   price: '',
-  discPrice: ''
+  discPrice: '',
+  reviewsCount: 0
 };
 
 ProductItem.propTypes = {
@@ -77,6 +78,7 @@ ProductItem.propTypes = {
   image: PropTypes.string,
   name: PropTypes.string,
   rating: PropTypes.number,
+  reviewsCount: PropTypes.number,
   percentage: PropTypes.string
 };
 

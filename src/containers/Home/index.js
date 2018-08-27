@@ -3,7 +3,7 @@ import { provideHooks } from 'redial';
 import { wrapDispatch } from 'multireducer';
 import {
   loadTopSelling,
-  loadHashTags,
+  // loadHashTags,
   loadOfferStrip,
   loadRecentlyViewed,
   isLoaded as isSectionLoaded
@@ -18,9 +18,9 @@ const hooks = {
     if (!isStoresLoaded(getState())) {
       dispatch(loadStores()).catch(error => console.log(error));
     }
-    if (!isSectionLoaded(getState(), 'hashtags')) {
-      wrapDispatch(dispatch, 'hashtags')(loadHashTags()).catch(error => console.log(error));
-    }
+    // if (!isSectionLoaded(getState(), 'hashtags')) {
+    //   wrapDispatch(dispatch, 'hashtags')(loadHashTags()).catch(error => console.log(error));
+    // }
     if (!isSectionLoaded(getState(), 'offerstrip')) {
       wrapDispatch(dispatch, 'offerstrip')(loadOfferStrip()).catch(error => console.log(error));
     }
