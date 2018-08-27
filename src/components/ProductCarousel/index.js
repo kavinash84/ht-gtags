@@ -27,6 +27,7 @@ const ProductCarousel = ({ data, title, length }) => (
               saving={item.meta.max_saving_percentage}
               percentage={item.meta.max_saving_percentage}
               rating={item.reviews.rating}
+              reviewsCount={item.reviews.count}
               image={`${item.image}-product_500.jpg`}
               url={`/${formatProductURL(item.meta.name, item.meta.sku)}`}
             />
