@@ -8,7 +8,7 @@ import CategoryCarousel from 'components/CategoryCarousel';
 import ProductCarousel from 'components/ProductCarousel';
 import Section from 'hometown-components/lib/Section';
 import { connect } from 'react-redux';
-import HashTags from 'components/Home/HashTags';
+// import HashTags from 'components/Home/HashTags';
 import StoresCarousel from 'components/Stores';
 import Footer from 'components/Footer';
 import { getCities } from '../../selectors/homepage';
@@ -37,7 +37,7 @@ export default class Home extends Component {
   };
   render() {
     const {
-      homepageCategories, homepageProducts, banners, cities, hashtags, offerstrip, recentlyviewed
+      homepageCategories, homepageProducts, banners, cities, offerstrip, recentlyviewed
     } = this.props;
     const { showRibbon } = this.state;
     return (
@@ -63,7 +63,7 @@ export default class Home extends Component {
               data={category.values}
             />
           ))}
-          <HashTags data={hashtags} />
+          {/* <HashTags data={hashtags} /> */}
           {homepageProducts.map((products, index) => (
             <ProductCarousel
               key={String(index)}
@@ -88,7 +88,7 @@ Home.defaultProps = {
   homepageProducts: [],
   banners: [],
   cities: [],
-  hashtags: [],
+  // hashtags: [],
   offerstrip: {},
   recentlyviewed: []
 };
@@ -98,7 +98,7 @@ Home.propTypes = {
   homepageProducts: PropTypes.array,
   banners: PropTypes.array,
   cities: PropTypes.array,
-  hashtags: PropTypes.array,
+  // hashtags: PropTypes.array,
   offerstrip: PropTypes.object,
   recentlyviewed: PropTypes.array
 };
