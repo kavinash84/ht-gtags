@@ -24,16 +24,18 @@ const hideResults = dispatcher => e => {
 };
 
 const onChange = (dispatcher, load) => e => {
-  const {
-    target: { value }
-  } = e;
+  const { target: { value } } = e;
   dispatcher(value);
   if (value.length >= 2) load(value);
 };
 
-const onSubmit = (searchQuery, history, hideResultsOnSubmit) => e => {
+const onSubmit = (searchQuery, history, hideResultsOnSubmit, results) => e => {
   e.preventDefault();
   hideResultsOnSubmit();
+  if (results && results.length > 0) {
+    const match = results.filter(result => result.name.toLowerCase() === searchQuery.toLowerCase())[0];
+    if (match) return history.push(`/${match.url_key}`);
+  }
   return history.push(`/search/?q=${searchQuery}`);
 };
 
@@ -58,7 +60,7 @@ const Search = ({
   history
 }) => (
   <Div className={styles.search} pt="0" pb="0.3125rem">
-    <form onSubmit={onSubmit(searchQuery, history, hideResultsOnSubmit)}>
+    <form onSubmit={onSubmit(searchQuery, history, hideResultsOnSubmit, results)}>
       <Input
         type="text"
         placeholder="Search"
@@ -129,7 +131,4 @@ Search.propTypes = {
   clearSearchQuery: PropTypes.func.isRequired
 };
 
-export default withRouter(connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Search));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search));
