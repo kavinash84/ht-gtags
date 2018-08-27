@@ -21,7 +21,7 @@ const mapStateToProps = ({ paymentstatus: { data, loaded } }) => ({
 
 /* eslint-disable camelcase */
 const PaymentSuccess = ({
-  order_id,
+  order_no,
   order_date,
   shipping_address,
   cart_products,
@@ -42,7 +42,7 @@ const PaymentSuccess = ({
                 <Img width="4.5rem" mr="1rem" float="left" src={PaymentSuccessIcon} alt="Test" />
                 <Heading mt="0">Thank you for placing your order.</Heading>
                 <Text fontSize="1rem" mb="0">
-                  Your order number is <b>{order_id}</b> placed on &nbsp;
+                  Your order number is <b>{order_no}</b> placed on &nbsp;
                   <b>{order_date}</b>. You will shortly receive an e-mailand SMS confirming your order.
                 </Text>
               </Div>
@@ -132,7 +132,7 @@ PaymentSuccess.defaultProps = {
 };
 
 PaymentSuccess.propTypes = {
-  order_id: PropTypes.string.isRequired,
+  order_no: PropTypes.string.isRequired,
   order_date: PropTypes.string,
   shipping_address: PropTypes.object,
   cart_products: PropTypes.array,
