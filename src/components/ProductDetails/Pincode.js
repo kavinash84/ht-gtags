@@ -11,6 +11,7 @@ import { getDelieveryInfo } from 'redux/modules/productdetails';
 
 const styles = require('./Pincode.scss');
 const ArrowIcon = require('../../../static/arrow_forward.svg');
+const location = require('../../../static/map-icon.svg');
 
 const onChange = dispatcher => e => {
   const {
@@ -54,9 +55,18 @@ class Pincode extends React.Component {
     const { validationError, validationErrorMessage } = this.state;
     return (
       <Div className={styles.pincode} pt="0" pb="0.3125rem">
+        <Img
+          width="initial"
+          height="1.5em"
+          mr="0.625rem"
+          mt="0"
+          float="left"
+          src={location}
+          className={styles.pincodeIcon}
+        />
         <Input
           type="text"
-          placeholder="Pincode"
+          placeholder="Enter Pincode"
           backgroundColor="rgba(0, 0, 0, 0.05)"
           borderColor="rgba(0, 0, 0, 0.03)"
           height="2.5rem"
