@@ -225,7 +225,7 @@ class Listing extends React.Component {
               <ResponsiveModal
                 onCloseModal={this.onCloseQuickViewModal}
                 open={this.state.openQuickView}
-                classNames={{ modal: styles.quickViewModal }}
+                classNames={{ overlay: styles.customModal, modal: styles.quickViewModal }}
               >
                 <QuickView
                   onCloseModal={this.onCloseQuickViewModal}
@@ -287,4 +287,7 @@ Listing.propTypes = {
   breadCrumbs: PropTypes.array.isRequired
 };
 
-export default connect(null, mapDispatchToProps)(Listing);
+export default connect(
+  null,
+  mapDispatchToProps
+)(Listing);

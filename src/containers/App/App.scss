@@ -91,8 +91,8 @@
 			border-top-color: #29d;
 			border-left-color: #29d;
 			border-radius: 50%;
-			-webkit-animation: nprogress-spinner 400ms linear infinite;
-			animation: nprogress-spinner 400ms linear infinite;
+			-webkit-animation: spin 400ms linear infinite;
+			animation: spin 400ms linear infinite;
 		}
 	}
 
@@ -155,6 +155,7 @@
 			cursor: pointer;
 			overflow: visible;
 			width: 30px !important;
+			height: 30px !important;
 			background: #ececec;
 			border-radius: 100%;
 			#heart{
@@ -458,7 +459,7 @@
 		}
 		.slick-prev, .slick-next {
     	transform: scale(0.8);
-    	top: 27%;
+    	top: calc(50% - 8px);
 		}
 	}
 
@@ -556,6 +557,7 @@
 			li {
 				text-align: left;
 				padding: 0.3125rem 0.625rem;
+				list-style: none;
 				label {
 					cursor: pointer;
 				}
@@ -665,26 +667,6 @@
 	}
 }
 
-@-webkit-keyframes :global(nprogress-spinner) {
-	0% {
-		-webkit-transform: rotate(0deg);
-	}
-
-	100% {
-		-webkit-transform: rotate(360deg);
-	}
-}
-
-@keyframes :global(nprogress-spinner) {
-	0% {
-		transform: rotate(0deg);
-	}
-
-	100% {
-		transform: rotate(360deg);
-	}
-}
-
 /* Wishlist Animation Key Frames */
 @keyframes animateCircle{
 	40%{
@@ -734,20 +716,25 @@
 @keyframes animateHeart{
 	0%{
 		transform:scale(.2);
+		-webkit-transform:scale(.2);
 	}
 	40%{
 		transform:scale(1.2);
+		-webkit-transform:scale(1.2);
 	}
 	100%{
 		transform:scale(1);
+		-webkit-transform:scale(1);
 	}
 }
 @keyframes animateHeartOut{
 	0%{
 		transform:scale(1.4);
+		-webkit-transform:scale(1.4);
 	}
 	100%{
 		transform:scale(1);
+		-webkit-transform:scale(1);
 	}
 }
 @keyframes :global(animateLoading) {
@@ -759,7 +746,13 @@
 	}
 }
 @keyframes :global(spin) {
-	0%  {-webkit-transform: rotate(0deg);}
-	100% {-webkit-transform: rotate(360deg);}
+	0%  {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
 }
 /* ---- End of Common Classes ---- */
