@@ -29,10 +29,7 @@ import Notifs from '../../components/Notifs';
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState } }) => {
-    const {
-      pincode: { selectedPincode },
-      app: { sessionId, csrfToken }
-    } = getState();
+    const { pincode: { selectedPincode }, app: { sessionId, csrfToken } } = getState();
     const defaultPincode = selectedPincode === '' ? PINCODE : selectedPincode;
     if (!isSessionSet(getState()) || !sessionId || !csrfToken) {
       await dispatch(generateSession(defaultPincode)).catch(error => console.log(error));
@@ -51,9 +48,7 @@ import Notifs from '../../components/Notifs';
     }
   },
   defer: ({ store: { dispatch, getState } }) => {
-    const {
-      userLogin: { isLoggedIn }
-    } = getState();
+    const { userLogin: { isLoggedIn } } = getState();
     if (isLoggedIn && !isWishListLoaded(getState())) {
       dispatch(loadWishlist()).catch(error => console.log(error));
     }
@@ -154,10 +149,7 @@ export default class App extends Component {
     if (nextProps.signUp && nextProps.signUp.loaded) {
       const { signUp } = nextProps;
       if (!isLoggedIn && signUp.response.signup_complete) {
-        const {
-          signUp: { response },
-          loginUser
-        } = nextProps;
+        const { signUp: { response }, loginUser } = nextProps;
         if (response.signup_complete) {
           dispatch(loginUser(response.token));
           dispatch(synCart(sessionId, pincode));
@@ -188,6 +180,34 @@ export default class App extends Component {
       <ThemeProvider theme={Theme}>
         <div className={styles.app}>
           <Helmet {...config.app.head}>
+            <script type="text/javascript">
+              {`
+                  var dataLayer = [];
+                  (function(w, d, s, l, i) {
+                      w[l] = w[l] || [];
+                      w[l].push({
+                          'gtm.start': new Date().getTime(),
+                          event: 'gtm.js'
+                      });
+                      var f = d.getElementsByTagName(s)[0],
+                          j = d.createElement(s),
+                          dl = l != 'dataLayer' ? '&l=' + l : '';
+                      j.async = true;
+                      j.src =
+                          'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+                      f.parentNode.insertBefore(j, f);
+                  })(window, document, 'script', 'dataLayer', 'GTM-T5VV7MZ');
+                `}
+            </script>
+            <script type="text/javascript">
+              {`
+                  var google_tag_params={
+                      ecomm_pagetype: '',
+                      ecomm_prodid: [34592212, '23423-131-12'],
+                      ecomm_totalvalue: '',
+                    };
+                `}
+            </script>
             <link
               rel="alternate"
               media="only screen and (max-width:640px)"

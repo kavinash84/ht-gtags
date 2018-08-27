@@ -106,47 +106,19 @@ export default class Html extends Component {
             <script dangerouslySetInnerHTML={{ __html: 'document.getElementById("content").style.display="block";' }} />
           ) : null}
           <Helmet>
-            <script type="text/javascript">
-              {`
-                var dataLayer = [];
-                (function(w, d, s, l, i) {
-                    w[l] = w[l] || [];
-                    w[l].push({
-                        'gtm.start': new Date().getTime(),
-                        event: 'gtm.js'
-                    });
-                    var f = d.getElementsByTagName(s)[0],
-                        j = d.createElement(s),
-                        dl = l != 'dataLayer' ? '&l=' + l : '';
-                    j.async = true;
-                    j.src =
-                        'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-                    f.parentNode.insertBefore(j, f);
-                })(window, document, 'script', 'dataLayer', 'GTM-T5VV7MZ');
-              `}
-            </script>
-            <script type="text/javascript">
-              {`
-                var google_tag_params={
-                    ecomm_pagetype: '',
-                    ecomm_prodid: [34592212, '23423-131-12'],
-                    ecomm_totalvalue: '',
-                  };
-              `}
-            </script>
             <script type="application/ld+json">
               {`
-              {
-                "@context": "http://schema.org",
-                "@type": "WebSite",
-                "url": "https://www.hometown.in/",
-                "potentialAction": {
-                  "@type": "SearchAction",
-                  "target": "https://www.hometown.in/search/?q={search_term_string}",
-                  "query-input": "required name=search_term_string"
+                {
+                  "@context": "http://schema.org",
+                  "@type": "WebSite",
+                  "url": "https://www.hometown.in/",
+                  "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": "https://www.hometown.in/search/?q={search_term_string}",
+                    "query-input": "required name=search_term_string"
+                  }
                 }
-              }
-            `}
+              `}
             </script>
             <script src="https://cdn.ravenjs.com/3.24.0/raven.min.js" crossOrigin="anonymous" />
             {process.env.NODE_ENV !== 'development' ? (
