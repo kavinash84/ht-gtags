@@ -139,6 +139,18 @@ export const formFilterLink2 = (key, name, b64, category, value, selected, urlqu
   if (name === 'reset') {
     return obj64.category;
   }
+  if (name === 'resetsearch') {
+    return `/search/?q=${key}`;
+  }
+  if (name === 'searchPagination') {
+    const pageno = `&page=${value}` || null;
+    obj64 = {
+      ...obj64,
+      pageno
+    };
+    b64 = encodeUrlQuery(obj64);
+    return `/search/?q=${key}&${urlquery}filters=${b64}${pageno}`;
+  }
 };
 
 export const getParamsDetailFromLink = (query, filter) => {

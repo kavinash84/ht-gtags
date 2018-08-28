@@ -50,7 +50,12 @@ export default function userMiddleware() {
       case 'signUp/SIGNUP_FAIL':
         dispatch(notifSend({
           type: 'warning',
-          msg: (action.error.error_message && titleCase(action.error.error_message)) || SOME_ERROR,
+          msg:
+              (action.error.mobile && titleCase(action.error.mobile)) ||
+              (action.error.password && ` Passowrd : ${titleCase(action.error.password)}`) ||
+              (action.error.error_message && titleCase(action.error.error_message)) ||
+              SOME_ERROR,
+
           dismissAfter: 4000
         }));
         break;
@@ -78,6 +83,25 @@ export default function userMiddleware() {
           dismissAfter: 4000
         }));
         break;
+
+      // Add Review
+
+      case 'reviews/ADD_REVIEW_FAIL':
+        dispatch(notifSend({
+          type: 'warning',
+          msg: (action.error.error_message && titleCase(action.error.error_message)) || SOME_ERROR,
+          dismissAfter: 4000
+        }));
+        break;
+
+      case 'reviews/ADD_REVIEW_SUCCESS':
+        dispatch(notifSend({
+          type: 'success',
+          msg: 'Review Added Succesfully !',
+          dismissAfter: 4000
+        }));
+        break;
+
       default:
         break;
     }

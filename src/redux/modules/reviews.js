@@ -5,9 +5,13 @@ const LOAD_REVIEW_FAIL = 'reviews/LOAD_REVIEW_FAIL';
 const ADD_REVIEW = 'reviews/ADD_REVIEW';
 const ADD_REVIEW_SUCCESS = 'reviews/ADD_REVIEW_SUCCESS';
 const ADD_REVIEW_FAIL = 'reviews/ADD_REVIEW_FAIL';
+const TOGGLE_REVIEW = 'reviews/TOGGLE_REVIEW';
 
 const initialState = {
-  data: []
+  data: [],
+  adding: false,
+  added: false,
+  error: false
 };
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
@@ -29,6 +33,36 @@ export default function reducer(state = initialState, action = {}) {
         loading: false,
         loaded: false,
         error: action.error
+      };
+    case ADD_REVIEW:
+      console.log(action);
+      return {
+        ...state,
+        adding: true,
+        added: false,
+        error: false
+      };
+    case ADD_REVIEW_SUCCESS:
+      console.log(action);
+      return {
+        ...state,
+        adding: false,
+        added: true,
+        error: false
+      };
+    case ADD_REVIEW_FAIL:
+      console.log(action);
+      return {
+        ...state,
+        adding: false,
+        added: false,
+        error: true,
+        errorMessage: action.error_message
+      };
+    case TOGGLE_REVIEW:
+      return {
+        ...state,
+        added: !state.added
       };
     default:
       return state;
@@ -56,4 +90,8 @@ export const addReview = (sku, data) => ({
       throw error;
     }
   }
+});
+
+export const toggleReview = () => ({
+  type: TOGGLE_REVIEW
 });
