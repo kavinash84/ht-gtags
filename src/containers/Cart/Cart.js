@@ -10,7 +10,8 @@ import Menu from 'containers/MenuNew/index';
 import Footer from 'components/Footer';
 import TitleBar from 'components/TitleBar';
 import { resetCheck } from 'redux/modules/cart';
-import { getCartList } from 'selectors/cart';
+import { getCartList, getStockOutProducts } from 'selectors/cart';
+import Notifications from 'components/Notifications';
 
 const CartEmptyIcon = require('../../../static/cart-empty.jpg');
 
@@ -21,6 +22,7 @@ const CartEmptyIcon = require('../../../static/cart-empty.jpg');
     }
   }) => ({
     results: getCartList(cart),
+    outOfStockList: getStockOutProducts(cart),
     isCartChecked: cartChecked,
     summary,
     error,
@@ -36,6 +38,7 @@ export default class CartContainer extends Component {
     results: PropTypes.array,
     summary: PropTypes.object,
     isCartChecked: PropTypes.bool,
+    outOfStockList: PropTypes.array,
     history: PropTypes.object.isRequired,
     resetCheckKey: PropTypes.func.isRequired,
     loading: PropTypes.bool,
@@ -48,6 +51,7 @@ export default class CartContainer extends Component {
     results: [],
     summary: null,
     isCartChecked: false,
+    outOfStockList: [],
     loading: false,
     loaded: false
   };
@@ -62,8 +66,9 @@ export default class CartContainer extends Component {
 
   render() {
     const {
-      results, summary, loading, loaded
+      results, summary, loading, loaded, outOfStockList
     } = this.props;
+    console.log(outOfStockList);
     return (
       <div className="wrapper">
         <Menu />
@@ -84,7 +89,14 @@ export default class CartContainer extends Component {
         {!loading && (results && results.length !== 0) ? (
           <div>
             <TitleBar title="Shopping Cart" />
-            <Cart results={results} summary={summary} />
+            {outOfStockList &&
+              outOfStockList.length > 0 && (
+              <Notifications
+                msg="One or more items in your cart are out of stock. Please remove to continue"
+                type="error"
+              />
+            )}
+            <Cart results={results} summary={summary} outOfStockList={outOfStockList} />
           </div>
         ) : (
           loading && <CartShimmer />
