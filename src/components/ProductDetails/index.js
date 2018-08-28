@@ -179,16 +179,9 @@ class ProductDetails extends React.Component {
                     count={count}
                     mt="1rem"
                   />
-                  <Row
-                    display="block"
-                    mt="1.25rem"
-                    mb="0"
-                    mr="0.9375rem"
-                    ml="0.9375rem"
-                    className={styles.variationWrapper}
-                  >
+                  <Row display="block" mb="0" mr="0.9375rem" ml="0.9375rem" className={styles.variationWrapper}>
                     {colorproducts.length > 0 && (
-                      <Section mb="0.3125rem" p="0">
+                      <Section mb="0.3125rem" p="0" mt="1.25rem">
                         <Row display="block" mr="0" ml="0">
                           <Heading fontSize="1em" color="textDark" mb="0.625rem" mt="0px" fontFamily="medium">
                             Color Options

@@ -13,8 +13,11 @@
 }
 .quickViewModal {
   padding: 20px !important;
+  margin: auto;
 }
-
+.customModal {
+  display: block;
+}
 .filterBar {
   border-radius: 3px;
   background-color: rgba(0,0,0,0.10);
