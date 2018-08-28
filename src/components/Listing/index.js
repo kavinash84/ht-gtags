@@ -111,10 +111,8 @@ class Listing extends React.Component {
 
   clearFilters = () => {
     const { history, categoryquery } = this.props;
-    console.log(history.location.pathname);
     let link;
     if (history.location.pathname === '/search/') {
-      console.log('In here ! ');
       let [, searchQuery] = history.location.search.split('q=');
       [searchQuery] = searchQuery.split('&filters');
       link = formFilterLink2(searchQuery, 'resetsearch', '', categoryquery);
