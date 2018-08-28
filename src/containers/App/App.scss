@@ -317,7 +317,41 @@
 	/* /Wishlist Btn */
 
 	/* Orders Table */
-	.ordersTable, .table {
+	.ordersTable {
+		width: 100%;
+		text-align: left;
+		display: table;
+		font-size: 0.875rem;
+		.thumb {
+			width: 60px;
+			margin: 0;
+		}
+		.tr {
+			position: relative;
+			display: flex;
+		}
+		.th {
+			padding: 1rem 0;
+			font-size: 0.875rem;
+			color: rgba(0, 0, 0, 0.7);
+			padding: 0.625rem 0.325rem;
+			text-transform: uppercase;
+			display: table-cell;
+			    align-self: center;
+		}
+		.td {
+			color: rgba(0, 0, 0, 0.5);
+			font-size: 0.875rem;
+			padding: 0.25rem 0.325rem;
+			display: table-cell;
+	    align-self: center;
+			button {
+				font-size: 1rem;
+				font-family: regular;
+			}
+		}
+	}
+	.table {
 		width: 100%;
 		text-align: left;
 		.thumb {
@@ -330,6 +364,7 @@
 			color: rgba(0, 0, 0, 0.7);
 			padding: 0.625rem 0.325rem;
 			text-transform: uppercase;
+			display: table-cell;
 		}
 		tr {
 			position: relative;
