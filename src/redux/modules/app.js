@@ -1,4 +1,5 @@
 import { SESSION as SESSION_API } from 'helpers/apiUrls';
+import { PINCODE } from 'helpers/Constants';
 
 const LOAD = 'app/LOAD';
 const LOAD_SUCCESS = 'app/LOAD_SUCCESS';
@@ -50,7 +51,7 @@ const setSessionID = ({ client }) => session => {
 
 export const isLoaded = globalState => globalState.app && globalState.app.loaded;
 
-export const generateSession = pincode => ({
+export const generateSession = (pincode = PINCODE) => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
   promise: async ({ client }) => {
     try {
