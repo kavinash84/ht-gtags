@@ -27,37 +27,27 @@ class ShippingForm extends React.Component {
       address,
       addressFeedBackError,
       city,
-      cityFeedBackError,
       pincode,
       pincodeFeedBackError,
       state,
-      stateFeedBackError
-    } = this.props;
-    const {
-      setCityError,
       setNameError,
       setPhoneError,
       setEmailError,
       setAddressError,
-      setPincodeError,
-      setStateError
+      setPincodeError
     } = this.props;
 
     const fullNameError = isBlank(fullName) || fullNameFeedBackError;
     const emailError = isBlank(email) || emailFeedBackError;
     const phoneError = isBlank(phone) || phoneFeedBackError;
     const pincodeError = isBlank(pincode) || pincodeFeedBackError;
-    const cityError = isBlank(city) || cityFeedBackError;
-    const stateError = isBlank(state) || stateFeedBackError;
     const addressError = isBlank(address) || addressFeedBackError;
 
-    if (fullNameError || emailError || pincodeError || phoneError || cityError || stateError || addressError) {
+    if (fullNameError || emailError || pincodeError || phoneError || addressError) {
       setNameError(fullNameError);
       setEmailError(emailError);
       setPincodeError(pincodeError);
       setPhoneError(phoneError);
-      setCityError(cityError);
-      setStateError(stateError);
       setAddressError(addressError);
       return {
         error: true,
@@ -104,13 +94,7 @@ class ShippingForm extends React.Component {
     } = this.props;
 
     const {
-      onChangeEmail,
-      onChangeCity,
-      onChangeState,
-      onChangePhone,
-      onChangeAddress,
-      onChangeFullName,
-      onChangePincode
+      onChangeEmail, onChangePhone, onChangeAddress, onChangeFullName, onChangePincode
     } = this.props;
 
     const { shippingForm, hidden } = this.props;
@@ -163,7 +147,6 @@ class ShippingForm extends React.Component {
           label="City"
           type="text"
           placeholder=""
-          onChange={e => onChangeCity(e.target.value)}
           value={city}
           feedBackError={cityFeedBackError}
           feedBackMessage={cityFeedBackMessage}
@@ -173,7 +156,6 @@ class ShippingForm extends React.Component {
           label="State"
           type="text"
           placeholder=""
-          onChange={e => onChangeState(e.target.value)}
           value={state}
           feedBackError={stateFeedBackError}
           feedBackMessage={stateFeedBackMessage}
@@ -213,17 +195,13 @@ ShippingForm.propTypes = {
   onChangePhone: PropTypes.func.isRequired,
   onChangeAddress: PropTypes.func.isRequired,
   onChangeFullName: PropTypes.func.isRequired,
-  onChangeCity: PropTypes.func.isRequired,
-  onChangeState: PropTypes.func.isRequired,
   onChangePincode: PropTypes.func.isRequired,
   shippingForm: PropTypes.bool,
-  setCityError: PropTypes.func.isRequired,
   setNameError: PropTypes.func.isRequired,
   setPhoneError: PropTypes.func.isRequired,
   setEmailError: PropTypes.func.isRequired,
   setAddressError: PropTypes.func.isRequired,
   setPincodeError: PropTypes.func.isRequired,
-  setStateError: PropTypes.func.isRequired,
   hidden: PropTypes.bool.isRequired
 };
 
