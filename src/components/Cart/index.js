@@ -130,6 +130,7 @@ const Cart = ({
               loadingnextstep={checkingCart}
               onClick={checkCartBeforeCheckout(checkCart, sessionId)}
               itemsCount={summary.items_count}
+              outOfStockList={outOfStockList}
             />
           </Row>
         </Container>
