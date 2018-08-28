@@ -12,6 +12,8 @@ import { formatAmount } from 'utils/formatters';
 import ProductQuantity from './UpdateProductQuantity';
 import OrderSummary from '../Checkout/OrderSummary';
 
+const styles = require('./Cart.scss');
+
 const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
 
 const checkCartBeforeCheckout = (dispatcher, session) => e => {
@@ -64,7 +66,7 @@ const Cart = ({
                       </tr>
                       {results.map(item => (
                         <tr key={item.id_customer_cart}>
-                          <td>
+                          <td width="85px">
                             <img className="thumb" src={item.product_info.image} alt="" />
                           </td>
                           <td>{item.product_info.name}</td>
@@ -92,6 +94,23 @@ const Cart = ({
                               x
                             </Button>
                           </td>
+                          <div className={styles.loadingCart}>
+                            <h4>
+                              This product is out of stock please remove before proceed.
+                              <br />
+                              <Button
+                                fontSize="1rem"
+                                fontFamily="light"
+                                color="#f98d29"
+                                btnType="link"
+                                p="0"
+                                mt="0"
+                                onClick={onClick(item.id_customer_cart, sessionId, pincode)(removeFromCart)}
+                              >
+                                Remove
+                              </Button>
+                            </h4>
+                          </div>
                         </tr>
                       ))}
                     </tbody>
@@ -136,4 +155,7 @@ Cart.defaultProps = {
   checkingCart: false
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Cart);
