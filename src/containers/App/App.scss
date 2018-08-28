@@ -351,32 +351,32 @@
 
 	/* Slick carousel */
 	.slick-prev, .slick-next {
-		height: 44px;
-		width: 44px;
+		height: 44px !important;
+		width: 44px !important;
 	}
 	.slick-next {
-		right: 25px;
-		z-index: 1;
+		right: 25px !important;
+		z-index: 1 !important;
 		&:before {
-      content: url('../../../static/right-arrow.png');
+      content: url('../../../static/right-arrow.png') !important;
       [dir="rtl"] & {
-        content: url('../../../static/left-arrow.png');
+        content: url('../../../static/left-arrow.png') !important;
       }
     }
 	}
 	.slick-prev {
-		left: 25px;
-		z-index: 1;
+		left: 25px !important;
+		z-index: 1 !important;
 		&:before {
-      content: url('../../../static/left-arrow.png');
+      content: url('../../../static/left-arrow.png') !important;
       [dir="rtl"] & {
-        content: url('../../../static/right-arrow.png');
+        content: url('../../../static/right-arrow.png') !important;
       }
     }
 	}
 	.slick-prev:before, .slick-next:before {
 		color: #000 !important;
-		font-size: 26px;
+		font-size: 26px !important;
 	}
 	.slick-initialized .slick-slide {
 		display: block !important;

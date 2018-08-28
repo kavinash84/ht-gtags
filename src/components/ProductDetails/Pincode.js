@@ -54,7 +54,7 @@ class Pincode extends React.Component {
     const { setPincodeQuery, setPincode, pincodeQuery } = this.props;
     const { validationError, validationErrorMessage } = this.state;
     return (
-      <Div className={styles.pincode} pt="0" pb="0.3125rem">
+      <Div className={styles.pdpPincode} pt="0" pb="0.3125rem">
         <Img
           width="initial"
           height="1.5em"
