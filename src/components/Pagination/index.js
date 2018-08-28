@@ -19,7 +19,6 @@ export default class Pagination extends Component {
     if (window) window.scrollTo(0, 0);
     const { history, categoryquery } = this.props;
     const [, b64] = history.location.search.split('?filters=');
-
     let link;
     if (history.location.pathname === '/search/') {
       let [, searchQuery] = history.location.search.split('q=');

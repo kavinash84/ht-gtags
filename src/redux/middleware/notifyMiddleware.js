@@ -50,7 +50,12 @@ export default function userMiddleware() {
       case 'signUp/SIGNUP_FAIL':
         dispatch(notifSend({
           type: 'warning',
-          msg: (action.error.error_message && titleCase(action.error.error_message)) || SOME_ERROR,
+          msg:
+              (action.error.mobile && titleCase(action.error.mobile)) ||
+              (action.error.password && ` Passowrd : ${titleCase(action.error.password)}`) ||
+              (action.error.error_message && titleCase(action.error.error_message)) ||
+              SOME_ERROR,
+
           dismissAfter: 4000
         }));
         break;
