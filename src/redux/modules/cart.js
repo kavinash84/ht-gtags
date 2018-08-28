@@ -1,4 +1,5 @@
 import { ADDTOCART as ADDTOCART_API, SYNCCART as SYNCCART_API, CHECKCART as CHECKCART_API } from 'helpers/apiUrls';
+import { PINCODE } from '../../helpers/Constants';
 
 const LOAD_CART = 'cart/LOAD_CART';
 const LOAD_CART_SUCCESS = 'cart/LOAD_CART_SUCCESS';
@@ -230,7 +231,7 @@ export const updateCart = (cartId, sku, simpleSku, session, pincode, qty) => ({
   }
 });
 
-export const removeFromCart = (cartId, session, pincode) => ({
+export const removeFromCart = (cartId, session, pincode = PINCODE) => ({
   type: 'REMOVE_FROM_CART',
   payLoad: cartId,
   types: [REMOVE_FROM_CART, REMOVE_FROM_CART_SUCCESS, REMOVE_FROM_CART_FAIL],
@@ -244,7 +245,7 @@ export const removeFromCart = (cartId, session, pincode) => ({
   }
 });
 
-export const synCart = (sessionId, pincode) => ({
+export const synCart = (sessionId, pincode = PINCODE) => ({
   types: [SYNCING_CART, SYNCING_CART_SUCCESS, SYNCING_CART_FAIL],
   promise: async ({ client }) => {
     try {
