@@ -145,7 +145,7 @@ export default class App extends Component {
       app: { sessionId },
       wishlist: { waitlist }
     } = this.props;
-    const pincode = selectedPincode === '' ? PINCODE : '';
+    const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
     if (nextProps.signUp && nextProps.signUp.loaded) {
       const { signUp } = nextProps;
       if (!isLoggedIn && signUp.response.signup_complete) {
