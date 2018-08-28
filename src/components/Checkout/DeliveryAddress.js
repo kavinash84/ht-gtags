@@ -149,7 +149,7 @@ class DeliveryAddress extends Component {
                 <Row display="block" mr="0" ml="0">
                   <Div col="12">
                     <Label fontSize="0.875em" mb="0.875rem">
-                      SELECT BILLING ADDRESS
+                      SELECT SHIPPING ADDRESS
                     </Label>
                   </Div>
                   {addresses.map((item, index) => (

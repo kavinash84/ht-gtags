@@ -99,7 +99,7 @@ const Search = ({
         <ul>
           {results.map((item, index) => (
             <li key={String(index)}>
-              <Link to={item.url_key}>{item.name}</Link>
+              <Link to={`/${item.url_key}`}>{item.name}</Link>
             </li>
           ))}
         </ul>
