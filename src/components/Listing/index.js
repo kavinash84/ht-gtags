@@ -26,6 +26,7 @@ import BreadCrumb from './BreadCrumb';
 const sortByList = require('data/sortby');
 
 const getProductImage = url => {
+  if (!url) return '';
   const pp = `${url.split('/').slice(-1)}`;
   return url.replace(pp, '1-product_500.jpg');
 };
@@ -111,7 +112,14 @@ class Listing extends React.Component {
 
   clearFilters = () => {
     const { history, categoryquery } = this.props;
-    const link = formFilterLink2('key', 'reset', '', categoryquery);
+    let link;
+    if (history.location.pathname === '/search/') {
+      let [, searchQuery] = history.location.search.split('q=');
+      [searchQuery] = searchQuery.split('&filters');
+      link = formFilterLink2(searchQuery, 'resetsearch', '', categoryquery);
+      return history.push(link);
+    }
+    link = formFilterLink2('key', 'reset', '', categoryquery);
     history.push(link);
   };
 

@@ -22,7 +22,7 @@ import EmiModal from 'containers/EmiModal/EmiModal';
 import Theme from 'hometown-components/lib/Theme';
 import ResponsiveModal from 'components/Modal';
 import LoginModal from 'components/Login/LoginModal';
-import { addReview } from 'redux/modules/reviews';
+import { addReview, toggleReview } from 'redux/modules/reviews';
 import { toggleWishList, wishListWaitList } from 'redux/modules/wishlist';
 import { setProductPosition } from 'redux/modules/productdetails';
 import { formatAmount } from 'utils/formatters';
@@ -50,7 +50,8 @@ const mapDispatchToProps = dispatch =>
     {
       wishlistToggle: toggleWishList,
       productPosition: setProductPosition,
-      addToWaitList: wishListWaitList
+      addToWaitList: wishListWaitList,
+      toggleReviewBox: toggleReview
     },
     dispatch
   );
@@ -123,7 +124,8 @@ class ProductDetails extends React.Component {
       history,
       wishlistToggle,
       addToWaitList,
-      loadingList
+      loadingList,
+      toggleReviewBox
     } = this.props;
     const {
       meta,
@@ -143,6 +145,7 @@ class ProductDetails extends React.Component {
     const isEmiAvailable = Number(simples[simpleSku].meta.no_emi) === 0;
     const { price, special_price: specialPrice } = meta;
     const checkSpecialPrice = specialPrice || price;
+    const { adding, added } = reviews;
     return (
       <Div type="block">
         <Section p="0" pt="1.25rem" mb="0">
@@ -244,7 +247,15 @@ class ProductDetails extends React.Component {
                   <ProductDesc desc={attributes.description} />
                   <Specs specs={groupedAttributes} pincode={pincode.selectedPincode} />
                   <Reviews col="6" reviewItems={reviews.data} pr="2.5rem" />
-                  <AddReview col="8" catalogId={groupedattributes.id_catalog_config} onClickSubmit={this.addReview} />
+                  <AddReview
+                    col="8"
+                    catalogId={groupedattributes.id_catalog_config}
+                    loaded
+                    onClickSubmit={this.addReview}
+                    adding={adding}
+                    added={added}
+                    toggleReview={toggleReviewBox}
+                  />
                 </Row>
               </Div>
             </Row>
@@ -301,7 +312,8 @@ ProductDetails.propTypes = {
   history: PropTypes.object.isRequired,
   wishlistToggle: PropTypes.func.isRequired,
   loadingList: PropTypes.array,
-  addToWaitList: PropTypes.func.isRequired
+  addToWaitList: PropTypes.func.isRequired,
+  toggleReviewBox: PropTypes.func.isRequired
 };
 export default connect(
   mapStateToProps,

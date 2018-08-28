@@ -35,9 +35,7 @@ export default class UpdatePasswordFormContainer extends Component {
     confirmPwdErrorMessage: ''
   };
   onChangeOldPwd = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     const checkError = isBlank(value);
     this.setState({
       oldPwd: value,
@@ -46,10 +44,8 @@ export default class UpdatePasswordFormContainer extends Component {
     });
   };
   onChangeNewPwd = e => {
-    const {
-      target: { value }
-    } = e;
-    const checkError = validatePassword(value, 'Password must be at least 6 character long');
+    const { target: { value } } = e;
+    const checkError = validatePassword(value, 'Password must be at least 8 character long');
     this.setState({
       newPwd: value,
       newPwdError: checkError.error,
@@ -57,9 +53,7 @@ export default class UpdatePasswordFormContainer extends Component {
     });
   };
   onChangeConfirmPwd = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     const checkError = this.matchConfirmPassword(value);
     this.setState({
       confirmPwd: value,

@@ -37,7 +37,7 @@ const ProductItem = ({
           )}
           {rating > 0 && (
             <Span ml="0.625rem">
-              <Rating rating={rating}> ★{Number(rating).toFixed(1)} </Rating>
+              <Rating rating={rating}> ★{parseFloat(rating).toFixed(2)} </Rating>
               <Span mr="0.625rem" fontSize="0.75rem" lh="1.7" va="text-top" color={Theme.colors.textExtraLight}>
                 ({reviewsCount})
               </Span>

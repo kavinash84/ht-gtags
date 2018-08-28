@@ -19,7 +19,14 @@ export default class Pagination extends Component {
     if (window) window.scrollTo(0, 0);
     const { history, categoryquery } = this.props;
     const [, b64] = history.location.search.split('?filters=');
-    const link = formFilterLink2(pagenumber, 'Pagination', b64, categoryquery);
+    let link;
+    if (history.location.pathname === '/search/') {
+      let [, searchQuery] = history.location.search.split('q=');
+      [searchQuery] = searchQuery.split('&filters');
+      link = formFilterLink2(searchQuery, 'searchPagination', '', categoryquery, pagenumber);
+      return history.push(link);
+    }
+    link = formFilterLink2(pagenumber, 'Pagination', b64, categoryquery);
     history.push(link);
   };
   render() {

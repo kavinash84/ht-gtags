@@ -1,5 +1,5 @@
 import cookie from 'js-cookie';
-import { LOGIN as LOGIN_API, GOOGLE_LOGIN as GOOGLE_LOGIN_API } from 'helpers/apiUrls';
+import { LOGIN as LOGIN_API, GOOGLE_LOGIN as GOOGLE_LOGIN_API, LOGOUT as LOGOUT_API } from 'helpers/apiUrls';
 import { clientId, clientSecret } from 'helpers/Constants';
 
 const LOGIN = 'login/LOGIN';
@@ -9,6 +9,7 @@ const LOGIN_AFTER_SIGNUP = 'login/LOGIN_AFTER_SIGNUP';
 const LOGOUT = 'login/LOGOUT';
 const LOGOUT_SUCCESS = 'login/LOGOUT_SUCCESS';
 const LOGOUT_FAIL = 'login/LOGOUT_FAIL';
+const CLEAR_LOGIN_STATE = 'login/CLEAR_LOGIN_STATE';
 
 const initialState = {
   loaded: false,
@@ -66,6 +67,10 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loggingOut: false,
         logoutError: action.error
+      };
+    case CLEAR_LOGIN_STATE:
+      return {
+        ...initialState
       };
     default:
       return state;
@@ -130,6 +135,11 @@ export const loginUserAfterSignUp = data => ({
 export const logout = () => ({
   types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
   promise: async ({ client }) => {
+    await client.put(LOGOUT_API);
     await setToken({ client })({ access_token: null });
   }
+});
+
+export const clearLoginState = () => ({
+  type: CLEAR_LOGIN_STATE
 });

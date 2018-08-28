@@ -106,7 +106,7 @@ export default function reducer(state = initialState, action = {}) {
         filterLoaded: true,
         data: action.result,
         categoryDetails: action.result.metadata && action.result.metadata.category_details,
-        list: action.result.metadata && action.result.metadata.results
+        list: (action.result.metadata && action.result.metadata.results) || []
       };
     case LOAD_FILTER_FAIL:
       return {
