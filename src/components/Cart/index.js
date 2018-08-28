@@ -44,9 +44,11 @@ const Cart = ({
   currentId,
   cartUpdating,
   checkCart,
-  checkingCart
+  checkingCart,
+  outOfStockList
 }) => {
   const cartItemLoading = customerCardId => cartUpdating && currentId === customerCardId;
+  const isProductOutofStock = sku => outOfStockList.includes(sku);
   return (
     <Div type="block">
       <Section display="flex" pt="3rem" pb="2.5rem" mb="0" height="auto">
@@ -94,23 +96,25 @@ const Cart = ({
                               x
                             </Button>
                           </td>
-                          <div className={styles.loadingCart}>
-                            <h4>
-                              This product is out of stock please remove before proceed.
-                              <br />
-                              <Button
-                                fontSize="1rem"
-                                fontFamily="light"
-                                color="#f98d29"
-                                btnType="link"
-                                p="0"
-                                mt="0"
-                                onClick={onClick(item.id_customer_cart, sessionId, pincode)(removeFromCart)}
-                              >
-                                Remove
-                              </Button>
-                            </h4>
-                          </div>
+                          {isProductOutofStock(item.configurable_sku) && (
+                            <div className={styles.loadingCart}>
+                              <h4>
+                                This product is out of stock. Please remove to proceed.
+                                <br />
+                                <Button
+                                  fontSize="1rem"
+                                  fontFamily="light"
+                                  color="#f98d29"
+                                  btnType="link"
+                                  p="0"
+                                  mt="0"
+                                  onClick={onClick(item.id_customer_cart, sessionId, pincode)(removeFromCart)}
+                                >
+                                  Remove
+                                </Button>
+                              </h4>
+                            </div>
+                          )}
                         </tr>
                       ))}
                     </tbody>
@@ -126,6 +130,7 @@ const Cart = ({
               loadingnextstep={checkingCart}
               onClick={checkCartBeforeCheckout(checkCart, sessionId)}
               itemsCount={summary.items_count}
+              outOfStockList={outOfStockList}
             />
           </Row>
         </Container>
@@ -143,7 +148,8 @@ Cart.propTypes = {
   sessionId: PropTypes.string.isRequired,
   removeFromCart: PropTypes.func.isRequired,
   checkCart: PropTypes.func.isRequired,
-  checkingCart: PropTypes.bool
+  checkingCart: PropTypes.bool,
+  outOfStockList: PropTypes.array
 };
 
 Cart.defaultProps = {
@@ -152,7 +158,8 @@ Cart.defaultProps = {
   pincode: '',
   cartUpdating: false,
   currentId: '',
-  checkingCart: false
+  checkingCart: false,
+  outOfStockList: []
 };
 
 export default connect(
