@@ -15,7 +15,8 @@ import { loadCategory, setCategory, isLoaded } from 'redux/modules/category';
 import Footer from 'components/Footer';
 import CommonLayout from 'components/Category/CommonLayout';
 
-const getSubMenu = (categories, id) => categories.filter(category => Number(category.id) === id)[0].children;
+const getSubMenu = (categories, key) =>
+  categories && categories.filter(category => category.url_key === key)[0].children;
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState }, params }) => {
@@ -33,7 +34,10 @@ const getSubMenu = (categories, id) => categories.filter(category => Number(cate
 }))
 export default class Category extends Component {
   render() {
-    const { category, menu, banners } = this.props;
+    const {
+      category, menu, banners, match: { params: { category: currentCategory } }
+    } = this.props;
+    console.log(this.props);
     return (
       <Section p="0" mb="0">
         <Helmet title="Home" />
@@ -44,7 +48,7 @@ export default class Category extends Component {
             <Row display="block" pt="2.25rem" ml="0" mr="0">
               <Div col={2}>
                 <Title title="Filters" subTitle="" ta="left" />
-                <CategoryFilters data={getSubMenu(menu, 131)} />
+                <CategoryFilters data={getSubMenu(menu, currentCategory)} />
               </Div>
               <Div col={10} pl="2rem">
                 {category.sections &&
@@ -70,5 +74,8 @@ Category.defaultProps = {
 Category.propTypes = {
   category: PropTypes.array,
   menu: PropTypes.array,
-  banners: PropTypes.array
+  banners: PropTypes.array,
+  match: PropTypes.shape({
+    params: PropTypes.object.isRequired
+  }).isRequired
 };

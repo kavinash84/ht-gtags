@@ -107,6 +107,7 @@ export default class DeliveryAddress extends Component {
     this.setState({
       addForm: false,
       editForm: true,
+      currentaddressindex: index,
       address,
       pincode,
       phone,
@@ -154,7 +155,7 @@ export default class DeliveryAddress extends Component {
       fullNameFeedBackMessage
     } = this.state;
     const {
-      fullName, email, phone, address, pincode, editForm, addForm
+      fullName, email, phone, address, pincode, editForm, addForm, currentaddressindex
     } = this.state;
     const { data } = this.props;
     return (
@@ -166,7 +167,7 @@ export default class DeliveryAddress extends Component {
               {data.map((item, index) => (
                 <Div col="4" pr="0.625rem">
                   <button
-                    className={`${styles.addressBtn} ${index === 0 && styles.active}`}
+                    className={`${styles.addressBtn} ${index === currentaddressindex && styles.active}`}
                     onClick={() => this.handleClick(index)}
                   >
                     <b>{item.full_name}</b>

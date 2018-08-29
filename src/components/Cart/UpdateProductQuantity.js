@@ -48,7 +48,7 @@ const ProductQuantity = ({
       >
         <Img src={ReductIcon} alt="" float="left" height="22px" />
       </Button>
-      <Label color="textDark" mb="0" mt="0" p="0 10px" position="relative" top="2px">
+      <Label color="textLight" mb="0" mt="0" p="0 10px" position="relative" top="2px">
         {cartItemLoading(cartId) ? (
           <Img width="19px" className="spin" va="bottom" src={LoaderIcon} display="inline" />
         ) : (

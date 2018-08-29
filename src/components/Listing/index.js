@@ -84,11 +84,12 @@ class Listing extends React.Component {
     history.goBack();
     this.setState({ openLogin: false });
   };
-  onOpenQuickViewModal = (sku, simpleSku) => {
+  onOpenQuickViewModal = (sku, simpleSku, soldOut) => {
     this.setState({
       openQuickView: true,
       quickViewSku: sku,
-      simpleSku
+      simpleSku,
+      soldOut
     });
   };
   onCloseQuickViewModal = () => {
@@ -208,7 +209,7 @@ class Listing extends React.Component {
                       addToWaitList
                     )}
                     onOpenQuickViewModal={() => {
-                      this.onOpenQuickViewModal(item.data.sku, Object.keys(item.data.simples)[0]);
+                      this.onOpenQuickViewModal(item.data.sku, Object.keys(item.data.simples)[0], item.soldout);
                     }}
                     isWishList={isInWishList(wishList, item.data.sku)}
                     skuLoading={isInWishList(loadingList, item.data.sku)}
@@ -225,7 +226,7 @@ class Listing extends React.Component {
                       simpleSku={Object.keys(item.data.simples)[0]}
                       sku={item.data.sku}
                       itemId={item.id}
-                      isSoldOut={item.data.soldout}
+                      isSoldOut={item.soldout}
                     />
                   </Div>
                 </div>
@@ -240,6 +241,7 @@ class Listing extends React.Component {
                   sku={this.state.quickViewSku}
                   simpleSku={this.state.simpleSku}
                   products={products}
+                  soldOut={this.state.soldOut}
                 />
               </ResponsiveModal>
               <ScrollToTop />

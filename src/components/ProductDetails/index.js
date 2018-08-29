@@ -212,7 +212,7 @@ class ProductDetails extends React.Component {
                       sku={sku}
                       itemId={sku}
                       size="block"
-                      quantity={simples[simpleSku].meta.quantity}
+                      isSoldOut={!simples[simpleSku].meta.quantity > 0}
                     />
                   </Div>
                   <Div col="6" mt="0" pl="0.3125rem">
@@ -237,7 +237,7 @@ class ProductDetails extends React.Component {
                         addToWaitList
                       )}
                       isWishList={isInWishList(wishList, sku)}
-                      wishlistLoading={isInWishList(loadingList, sku)}
+                      disabled={isInWishList(loadingList, sku)}
                     >
                       {isInWishList(wishList, sku) ? 'REMOVE FROM WISHLIST' : 'ADD TO WISHLIST'}
                     </Button>
