@@ -29,7 +29,10 @@ import Notifs from '../../components/Notifs';
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState } }) => {
-    const { pincode: { selectedPincode }, app: { sessionId, csrfToken } } = getState();
+    const {
+      pincode: { selectedPincode },
+      app: { sessionId, csrfToken }
+    } = getState();
     const defaultPincode = selectedPincode === '' ? PINCODE : selectedPincode;
     if (!isSessionSet(getState()) || !sessionId || !csrfToken) {
       await dispatch(generateSession(defaultPincode)).catch(error => console.log(error));
@@ -48,7 +51,9 @@ import Notifs from '../../components/Notifs';
     }
   },
   defer: ({ store: { dispatch, getState } }) => {
-    const { userLogin: { isLoggedIn } } = getState();
+    const {
+      userLogin: { isLoggedIn }
+    } = getState();
     if (isLoggedIn && !isWishListLoaded(getState())) {
       dispatch(loadWishlist()).catch(error => console.log(error));
     }
@@ -67,7 +72,8 @@ import Notifs from '../../components/Notifs';
     signUp: state.userSignUp,
     pincode: state.pincode,
     app: state.app,
-    notifs: state.notifs
+    notifs: state.notifs,
+    wishlist: state.wishlist
   }),
   {
     pushState: push,
@@ -149,7 +155,10 @@ export default class App extends Component {
     if (nextProps.signUp && nextProps.signUp.loaded) {
       const { signUp } = nextProps;
       if (!isLoggedIn && signUp.response.signup_complete) {
-        const { signUp: { response }, loginUser } = nextProps;
+        const {
+          signUp: { response },
+          loginUser
+        } = nextProps;
         if (response.signup_complete) {
           dispatch(loginUser(response.token));
           dispatch(synCart(sessionId, pincode));
@@ -159,6 +168,7 @@ export default class App extends Component {
     }
     if (!isLoggedIn && nextProps.login.isLoggedIn) {
       dispatch(synCart(sessionId, pincode));
+      console.log(waitlist);
       if (waitlist !== '') dispatch(syncWishList());
       const query = new URLSearchParams(this.props.location.search);
       this.props.pushState(query.get('redirect') || '/');
