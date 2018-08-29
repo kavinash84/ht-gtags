@@ -348,6 +348,9 @@
 			button {
 				font-size: 1rem;
 				font-family: regular;
+				&.close {
+					float: right;
+				}
 			}
 		}
 	}
