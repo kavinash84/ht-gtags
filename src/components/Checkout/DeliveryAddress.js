@@ -12,8 +12,8 @@ import { Label } from 'hometown-components/lib/Label';
 import ResponsiveModal from 'components/Modal';
 import LoginModal from 'components/Login/LoginModal';
 import Footer from 'components/Footer';
-import { sendDeliveryAddress } from 'redux/modules/checkout';
-import { setAddress } from 'redux/modules/shipping';
+import { sendDeliveryAddress, resetGuestRegisterFlag } from 'redux/modules/checkout';
+import { setAddress, clearShippingAddress } from 'redux/modules/shipping';
 import MenuCheckout from './MenuCheckout';
 import ShippingForm from './ShippingForm';
 
@@ -42,18 +42,24 @@ class DeliveryAddress extends Component {
   };
   componentDidMount() {
     const { dispatch } = this.context.store;
-    const { addresses } = this.props;
+    const { addresses, nextstep } = this.props;
     if (addresses.length) {
       dispatch(setAddress(addresses[0], 0));
     }
+    if (nextstep.success) {
+      dispatch(resetGuestRegisterFlag());
+    }
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.isLoggedIn) {
+    const { isLoggedIn, nextstep } = this.props;
+    const { dispatch } = this.context.store;
+    if (nextProps.isLoggedIn !== isLoggedIn) {
       this.setState({
         openLogin: false
       });
+      dispatch(clearShippingAddress());
     }
-    if (nextProps.nextstep.success) {
+    if (nextProps.nextstep.success !== nextstep.success) {
       const { history } = this.props;
       history.push('/checkout/payment-options');
     }
@@ -80,11 +86,15 @@ class DeliveryAddress extends Component {
       } else {
         const { dispatch } = this.context.store;
         const { sessionId } = this.props;
-        dispatch(sendDeliveryAddress(sessionId, {
-          shippingIsBilling: this.state.shippingIsBilling,
-          shippingAddress: shippingForm.data,
-          billingAddress: shippingForm.data
-        }));
+        dispatch(sendDeliveryAddress(
+          sessionId,
+          {
+            shippingIsBilling: this.state.shippingIsBilling,
+            shippingAddress: shippingForm.data,
+            billingAddress: shippingForm.data
+          },
+          isLoggedIn
+        ));
       }
     } else {
       const shippingForm = this.shipping_form.validateForm();
