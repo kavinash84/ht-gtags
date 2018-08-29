@@ -237,7 +237,7 @@ class ProductDetails extends React.Component {
                         addToWaitList
                       )}
                       isWishList={isInWishList(wishList, sku)}
-                      wishlistLoading={isInWishList(loadingList, sku)}
+                      disabled={isInWishList(loadingList, sku)}
                     >
                       {isInWishList(wishList, sku) ? 'REMOVE FROM WISHLIST' : 'ADD TO WISHLIST'}
                     </Button>
