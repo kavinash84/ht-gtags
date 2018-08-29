@@ -41,6 +41,7 @@ import Grievance from 'containers/Grievance/';
 import PaymentSuccess from 'containers/PaymentSuccess/';
 import PaymentFailure from 'containers/PaymentFailure/';
 import BulkOrder from 'containers/BulkOrder/';
+import SimpleForm from 'containers/Address';
 
 const isAuthenticated = connectedReduxRedirect({
   redirectPath: '/login',
@@ -61,6 +62,7 @@ const routes = [
   {
     component: App,
     routes: [
+      { path: '/test-form', exact: true, component: SimpleForm },
       { path: '/', exact: true, component: Home },
       { path: '/category/:category', exact: true, component: Category },
       { path: '/login', exact: true, component: isNotAuthenticated(Login) },
