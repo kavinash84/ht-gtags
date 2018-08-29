@@ -126,7 +126,7 @@ export default class QuickView extends Component {
   render() {
     const { images, data } = this.state.product;
     const { currentImage } = this.state;
-    const { sku, simpleSku } = this.props;
+    const { sku, simpleSku, soldOut } = this.props;
     // const { emidata } = this.props;
     const {
       name, price, special_price: discPrice, max_saving_percentage: saving
@@ -187,7 +187,7 @@ export default class QuickView extends Component {
                   starting from Rs.{formatAmount(lowestEmi)}{' '}
                 </Span>
               </Text> */}
-              <AddToCart simpleSku={simpleSku} sku={sku} />
+              <AddToCart simpleSku={simpleSku} sku={sku} isSoldOut={soldOut} />
             </Div>
             <Div className={`${styles.thumb} thumbCarousel`}>
               <SlickSlider
@@ -217,9 +217,12 @@ export default class QuickView extends Component {
     );
   }
 }
-
+QuickView.defaultProps = {
+  soldOut: false
+};
 QuickView.propTypes = {
   sku: PropTypes.string.isRequired,
   simpleSku: PropTypes.string.isRequired,
-  products: PropTypes.array.isRequired
+  products: PropTypes.array.isRequired,
+  soldOut: PropTypes.bool
 };
