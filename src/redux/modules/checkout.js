@@ -83,10 +83,20 @@ export const sendDeliveryAddress = (sessionId, data, isLoggedIn) => (dispatch, g
             fullname: shippingAddress.fullName,
             mobile: shippingAddress.phone,
             shipping_info: {
+              email: shippingAddress.email,
+              fullname: shippingAddress.fullName,
+              mobile: shippingAddress.phone,
+              pincode: shippingAddress.pincode,
+              address: shippingAddress.address,
               address_id: addressId
             },
             is_billing_address_same: shippingIsBilling,
             billing_form: {
+              email: shippingAddress.email,
+              fullname: shippingAddress.fullName,
+              mobile: shippingAddress.phone,
+              pincode: shippingAddress.pincode,
+              address: shippingAddress.address,
               address_id: addressId
             }
           };
