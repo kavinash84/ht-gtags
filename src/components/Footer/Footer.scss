@@ -2,7 +2,7 @@
   padding: 2.5rem 0 0;
   h4 {
     color: rgba(255, 255, 255, 1);
-    font-family: thin;
+    font-family: light;
   }
   ul {
     padding-left: 0;
@@ -12,7 +12,7 @@
       padding-bottom: 7px;
       a {
         color: #cccccc;
-        font-family: regular;
+        font-family: light;
         font-size: 0.875em;
         opacity: 1;
         &:hover {
@@ -21,6 +21,10 @@
       }
     }
   }
+}
+.footerLogo {
+  top: 3px;
+  position: relative;
 }
 .socials {
   display: inline-block;

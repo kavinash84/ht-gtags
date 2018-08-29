@@ -83,10 +83,9 @@ class Coupon extends React.Component {
   };
 
   render() {
-    const { cart, notifs } = this.props;
+    const { cart, notifs, coupon: { loading } } = this.props;
     const { summary: { coupon: appliedCoupon, coupon_discount: couponDiscount } } = cart;
     const { applycoupon } = this.state;
-
     return (
       <div>
         <Div className={styles.applyCoupon}>
@@ -142,6 +141,7 @@ class Coupon extends React.Component {
                   pl="0"
                   pr="0"
                   fontSize="0.75rem"
+                  disabled={loading}
                   onClick={this.handleApply}
                 >
                   Apply

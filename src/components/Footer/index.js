@@ -25,7 +25,11 @@ const ourAppIcon = require('../../../static/google-play-store.svg');
 const paymentMethodIcon = require('../../../static/paymentMethodIcon.jpg');
 const styles = require('./Footer.scss');
 
-const mapStateToProps = ({ homepage: { footer: { data } } }) => ({
+const mapStateToProps = ({
+  homepage: {
+    footer: { data }
+  }
+}) => ({
   categories: data.items && data.items.text.top_categories.values
 });
 
@@ -43,7 +47,7 @@ const Footer = ({ categories }) => (
                 btnType="primary"
                 boder="solid 1px rgba(151,151,151,0.47)"
                 fontFamily="regular"
-                height="42px"
+                height="38px"
                 mt="0"
                 ml="-1px"
               >
@@ -52,20 +56,20 @@ const Footer = ({ categories }) => (
             </Div>
           </Div>
           <Div col="3">
-            <Heading color="white" fontSize="1em" mt="0">
+            <Heading color="white" fontFamily="light" fontSize="1em" mt="0">
               CONTACT US
             </Heading>
             <ul>
               <li>
-                <Link to="/track-order">Track Order</Link>
+                <a href="tel:1800-210-0004">Call Us: 1800-210-0004</a>
               </li>
               <li>
-                <Link to="/return-policy">Returns</Link>
+                <a href="mailto:care@hometown.in">Email: care@hometown.in</a>
               </li>
             </ul>
           </Div>
           <Div col="3">
-            <Heading color="white" fontSize="1em" mt="0">
+            <Heading color="white" fontFamily="light" fontSize="1em" mt="0">
               FOLLOW US
             </Heading>
             <ul className={styles.socials}>
@@ -104,7 +108,7 @@ const Footer = ({ categories }) => (
         <Row m="0" mb="1rem">
           {linkData.map((links, index) => (
             <Div key={String(index)} display="flexEqual" col="2">
-              <Heading color="white" fontSize="1em" mt="1rem" pb="2px">
+              <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem" pb="2px">
                 {links.key}
               </Heading>
               <ul>
@@ -119,7 +123,7 @@ const Footer = ({ categories }) => (
         </Row>
         <Row m="0">
           <Div display="flexEqual" col="13">
-            <Heading color="white" fontSize="1em" mt="1rem">
+            <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem">
               ABOUT US
             </Heading>
             <ul>
@@ -137,7 +141,7 @@ const Footer = ({ categories }) => (
             </ul>
           </Div>
           <Div display="flexEqual" col="13">
-            <Heading color="white" fontSize="1em" mt="1rem">
+            <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem">
               CUSTOMER SERVICE
             </Heading>
             <ul>
@@ -162,7 +166,7 @@ const Footer = ({ categories }) => (
             </ul>
           </Div>
           <Div display="flexEqual" col="13">
-            <Heading color="white" fontSize="1em" mt="1rem">
+            <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem">
               TOP CATEGORIES
             </Heading>
             <ul>
@@ -174,7 +178,7 @@ const Footer = ({ categories }) => (
             </ul>
           </Div>
           <Div display="flexEqual" col="13">
-            <Heading color="white" fontSize="1em" mt="1rem">
+            <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem">
               OUR APP
             </Heading>
             <a
@@ -186,7 +190,7 @@ const Footer = ({ categories }) => (
             </a>
           </Div>
           <Div display="flexEqual" col="13">
-            <Heading color="white" fontSize="1em" mt="1rem">
+            <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem">
               PAYMENT METHOD
             </Heading>
             <Img src={paymentMethodIcon} alt="Payment Method" mt="1.2rem" width="178px" />
@@ -194,17 +198,17 @@ const Footer = ({ categories }) => (
         </Row>
       </Container>
     </Section>
-    <Section bg="footerBottom" mb="0" p="1.25rem 0">
+    <Section bg="footerBottom" mb="0" p="0.625rem 0">
       <Container pr="0" pl="0">
         <Row m="0">
           <Div col={6}>
             <Link to={HOME_URL}>
-              <Img src={LogoIcon} alt="Hometown" />
+              <Img src={LogoIcon} className={styles.footerLogo} alt="Hometown" height="40px" />
             </Link>
           </Div>
-          <Div col={6} ta="right">
-            <Text color="#a6a6a6" fontSize="0.875rem" mt="0" mb="0" lh="2">
-              Copyright reserved @ 2018
+          <Div col={6} ta="right" alignSelf="center">
+            <Text color="#a6a6a6" fontSize="0.875rem" mt="0" mb="0" lh="2" ta="right">
+              © 2018 Praxis Home Retail Limited
             </Text>
           </Div>
         </Row>
@@ -221,4 +225,7 @@ Footer.propTypes = {
   categories: PropTypes.array
 };
 
-export default connect(mapStateToProps, null)(Footer);
+export default connect(
+  mapStateToProps,
+  null
+)(Footer);

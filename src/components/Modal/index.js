@@ -5,7 +5,7 @@ import Modal from 'react-responsive-modal';
 const ResponsiveModal = ({
   open, onCloseModal, children, classNames
 }) => (
-  <Modal classNames={classNames} open={open} onClose={onCloseModal} center className="customModal">
+  <Modal classNames={classNames} open={open} onClose={onCloseModal} center>
     {children}
   </Modal>
 );
