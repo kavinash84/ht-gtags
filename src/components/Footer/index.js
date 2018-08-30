@@ -37,7 +37,7 @@ const Footer = ({ categories }) => (
   <Div mb="0" p="0" pt="15px" pb="0" className={styles.footer}>
     <Section bg="footerTop" mb="0" p="2.5rem 0 0">
       <Container pr="0" pl="0">
-        <Row m="0">
+        <Row m="0" flexWrap="nowrap">
           <Div col="6">
             <Div col="9">
               <FormInput label="" type="text" placeholder="" />
@@ -105,7 +105,7 @@ const Footer = ({ categories }) => (
     </Section>
     <Section bg="footerTop" mb="0" p="0.625rem 0 2rem">
       <Container pr="0" pl="0">
-        <Row m="0" mb="1rem">
+        <Row m="0" mb="1rem" flexWrap="nowrap">
           {linkData.map((links, index) => (
             <Div key={String(index)} display="flexEqual" col="2">
               <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem" pb="2px">
@@ -121,7 +121,7 @@ const Footer = ({ categories }) => (
             </Div>
           ))}
         </Row>
-        <Row m="0">
+        <Row m="0" flexWrap="nowrap">
           <Div display="flexEqual" col="13">
             <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem">
               ABOUT US

@@ -102,6 +102,54 @@ export default class ModularKitchen extends Component {
                 />
               </Div>
             </Row>
+            <Row ml="0" mr="0" pt="3.5rem">
+              <Div>
+                <Heading mt="0" mb="1rem" color="text" fontSize="1.75rem" ta="center" fontFamily="light">
+                  OUR DESIGNS
+                </Heading>
+                <Row m="0">
+                  <Div>
+                    {/* eslint-disable */}
+                    <Heading pb="2px" color="text" fontSize="0.875rem" mb="0.625rem">
+                      HomeTown gives a perfect excuse to refurbish your living space
+                    </Heading>
+                    <Text fontSize="0.75rem" mb="1rem">
+                      Interior designing is not just about making your interiors look beautiful but it also plays a
+                      major role in functionality. A tiny apartment can also be transformed into a cozy residence with
+                      enough space if having a good interior design.
+                    </Text>
+
+                    <Heading pb="2px" color="text" fontSize="0.875rem" mb="0.625rem">
+                      Get home design services from HomeTown – A way to state of the art interiors
+                    </Heading>
+                    <Text fontSize="0.75rem" mb="1rem">
+                      HomeTown, a one stop destination for all types of furniture, home décor and kitchenware shopping
+                      also offers interior design services for home. It has a dedicated team of skilled and experienced
+                      professional interior design consultants. The market is flooded with plethora of interior design
+                      companies but the best thing about HomeTown is that it goes an extra mile to understand the needs
+                      and preferences of the customers so that they can deliver the best to them. They believe in
+                      creating an environment friendly, aesthetically pleasing and strikingly beautiful space by using
+                      their professional skills. How to find to the best interior decorators near me? Does this question
+                      bother you? Well, get in touch with HomeTown to avail affordable interior design services. Add a
+                      unique sense of sophistication and elegance to your living space.
+                    </Text>
+
+                    <Heading pb="2px" color="text" fontSize="0.875rem" mb="0.625rem">
+                      For best office interior designs – Reach out to HomeTown!
+                    </Heading>
+                    <Text fontSize="0.75rem" mb="1rem">
+                      Gone are the days when office spaces meant boring work desks, mundane walls and elementary décor.
+                      The latest trend needs to maintain a dynamic and cheerful environment to boost the morale and
+                      productivity of employees. Apart from residential interior designing services, you can also reach
+                      out to HomeTown for office interior designs. Regular looking offices are a pretty dated idea,
+                      HomeTown believes in trying something different from regular designs. The basic idea includes
+                      enough open spaces to welcome natural light and splashes of bright and vivacious colors to build a
+                      creative, buoyant and energetic atmosphere.
+                    </Text>
+                  </Div>
+                </Row>
+              </Div>
+            </Row>
           </Container>
         </Section>
       </div>
