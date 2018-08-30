@@ -18,8 +18,8 @@
   border-bottom: 1px solid #f1f1f1;
 }
 .pdpLeftWrapper {
-  position: sticky;
-  top: 10px;
+  position: sticky !important;
+  top: 0;
 }
 .pdpRightWrapper {
   z-index: 0;

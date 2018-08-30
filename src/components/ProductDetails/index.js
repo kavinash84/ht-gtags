@@ -146,6 +146,7 @@ class ProductDetails extends React.Component {
     const { price, special_price: specialPrice } = meta;
     const checkSpecialPrice = specialPrice || price;
     const { adding, added } = reviews;
+    const offerImage = simples[simpleSku].groupedattributes.offer_image || null;
     return (
       <Div type="block">
         <Section p="0" mb="0" className={styles.pdpWrapper}>
@@ -204,8 +205,14 @@ class ProductDetails extends React.Component {
                     <EmiModal price={formatAmount(checkSpecialPrice)} data={emidata} key="emi" />
                   </ServiceDetails>
                 </Row>
+                {offerImage && (
+                  <Row display="block" mt="0" mb="0" mr="0.9375rem" ml="0.9375rem">
+                    <Div col="6" mt="0" pr="0.3125rem">
+                      <Img src={offerImage} alt="" width="100%" mt="0" mb="0.625rem" />
+                    </Div>
+                  </Row>
+                )}
                 <Row display="block" mt="0" mb="0.625rem" mr="0.9375rem" ml="0.9375rem">
-                  <Img src="http://via.placeholder.com/530x130" alt="" width="100%" mt="0" mb="1rem" />
                   <Div col="6" mt="0" pr="0.3125rem">
                     <AddToCart
                       simpleSku={simpleSku}
@@ -246,7 +253,7 @@ class ProductDetails extends React.Component {
                 <Row display="block" mt="1.25rem" mb="0" mr="0" ml="0">
                   <ProductDesc desc={attributes.description} />
                   <Specs specs={groupedAttributes} pincode={pincode.selectedPincode} />
-                  <Reviews col="6" reviewItems={reviews.data} pr="2.5rem" />
+                  <Reviews col="12" reviewItems={reviews.data} pr="2.5rem" />
                   <AddReview
                     col="8"
                     catalogId={groupedattributes.id_catalog_config}

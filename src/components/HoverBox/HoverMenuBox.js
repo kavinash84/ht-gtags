@@ -18,19 +18,19 @@ const HoverMenuBox = ({
               <div className={styles.media}>
                 <div className={styles.catImgWrapper}>
                   <ProgressiveImageSchemer src={subCategory1.category_image} height="65px">
-                    {imageURL => <Img src={imageURL} alt="" />}
+                    {imageURL => <Img src={imageURL} alt={subCategory1.name} />}
                   </ProgressiveImageSchemer>
                 </div>
                 <div className={styles.mediaBody}>
                   <h4>
-                    <Link onClick={exitOnClick} to={`/${subCategory1.url_key}`}>
+                    <Link onClick={exitOnClick} to={`/${subCategory1.url_key}`} title={subCategory1.name}>
                       {subCategory1.name}
                     </Link>
                   </h4>
                   {subCategory1.children
                     ? subCategory1.children.filter(menu => menu.visibility === 'on').map(subCategory2 => (
                       <li key={subCategory2.id}>
-                        <Link onClick={exitOnClick} to={`/${subCategory2.url_key}`}>
+                        <Link onClick={exitOnClick} to={`/${subCategory2.url_key}`} title={subCategory2.name}>
                           {subCategory2.name}
                         </Link>
                       </li>

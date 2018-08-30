@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Container from 'hometown-components/lib/Container';
@@ -33,11 +32,11 @@ const mapStateToProps = ({
   categories: data.items && data.items.text.top_categories.values
 });
 
-const Footer = ({ categories }) => (
+const Footer = () => (
   <Div mb="0" p="0" pt="15px" pb="0" className={styles.footer}>
     <Section bg="footerTop" mb="0" p="2.5rem 0 0">
       <Container pr="0" pl="0">
-        <Row m="0">
+        <Row m="0" flexWrap="nowrap">
           <Div col="6">
             <Div col="9">
               <FormInput label="" type="text" placeholder="" />
@@ -105,7 +104,7 @@ const Footer = ({ categories }) => (
     </Section>
     <Section bg="footerTop" mb="0" p="0.625rem 0 2rem">
       <Container pr="0" pl="0">
-        <Row m="0" mb="1rem">
+        <Row m="0" mb="1rem" flexWrap="nowrap">
           {linkData.map((links, index) => (
             <Div key={String(index)} display="flexEqual" col="2">
               <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem" pb="2px">
@@ -121,7 +120,7 @@ const Footer = ({ categories }) => (
             </Div>
           ))}
         </Row>
-        <Row m="0">
+        <Row m="0" flexWrap="nowrap">
           <Div display="flexEqual" col="13">
             <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem">
               ABOUT US
@@ -167,14 +166,12 @@ const Footer = ({ categories }) => (
           </Div>
           <Div display="flexEqual" col="13">
             <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem">
-              TOP CATEGORIES
+              Useful Links
             </Heading>
             <ul>
-              {categories.map((category, index) => (
-                <li key={String(index)}>
-                  <Link to={category.url_key}>{category.title}</Link>
-                </li>
-              ))}
+              <li>
+                <Link to="/sitemap.xml">Sitemap</Link>
+              </li>
             </ul>
           </Div>
           <Div display="flexEqual" col="13">
@@ -216,14 +213,6 @@ const Footer = ({ categories }) => (
     </Section>
   </Div>
 );
-
-Footer.defaultProps = {
-  categories: []
-};
-
-Footer.propTypes = {
-  categories: PropTypes.array
-};
 
 export default connect(
   mapStateToProps,
