@@ -33,6 +33,8 @@ const LOAD_PINCODE_DETAILS = 'shipping/LOAD_PINCODE_DETAILS';
 const LOAD_PINCODE_DETAILS_SUCCESS = 'shipping/LOAD_PINCODE_DETAILS_SUCCESS';
 const LOAD_PINCODE_DETAILS_FAIL = 'shipping/LOAD_PINCODE_DETAILS_FAIL';
 
+const CLEAR_SHIPPING = 'shipping/CLEAR_SHIPPING';
+
 const initialState = {
   // Form State
   fullName: '',
@@ -64,7 +66,8 @@ const initialState = {
   showResults: false,
   selectedPincode: '',
   pincodeDetails: [],
-  index: null
+  index: null,
+  address_id: null
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -160,7 +163,8 @@ export default function reducer(state = initialState, action = {}) {
         cityFeedBackError: false,
         state: action.data.state,
         stateFeedBackError: false,
-        index: action.index
+        index: action.index,
+        address_id: action.data.id_customer_address
       };
     case SET_PINCODE_ERROR:
       return {
@@ -225,6 +229,10 @@ export default function reducer(state = initialState, action = {}) {
         stateFeedBackError: false,
         results: [],
         showResults: false
+      };
+    case CLEAR_SHIPPING:
+      return {
+        ...initialState
       };
     default:
       return state;
@@ -316,4 +324,8 @@ export const setAddress = (data, index) => ({
   type: SET_ADDRESS,
   data,
   index
+});
+
+export const clearShippingAddress = () => ({
+  type: CLEAR_SHIPPING
 });

@@ -13,7 +13,7 @@ const CategoryFilters = ({ data }) => (
       </Label>
       {data.map(sub => (
         <Label key={sub.id} color="textLight" mt="0.625rem" mb="0.625rem" display="block">
-          <Link to={sub.url_key}>{sub.name}</Link>
+          <Link to={`/${sub.url_key}`}>{sub.name}</Link>
         </Label>
       ))}
     </Div>
