@@ -28,6 +28,7 @@ import { setProductPosition } from 'redux/modules/productdetails';
 import { formatAmount } from 'utils/formatters';
 import { calculateDiscount, calculateSavings, calculateLowestEmi } from 'utils/helper';
 import { getSKUList } from 'selectors/wishlist';
+import { getShortDescription } from 'selectors/products';
 
 import ProductDetailsCarousel from './Carousel';
 import BreadCrumb from './BreadCrumb';
@@ -84,7 +85,8 @@ class ProductDetails extends React.Component {
     store: PropTypes.object.isRequired
   };
   state = {
-    openLogin: false
+    openLogin: false,
+    showmore: true
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.isLoggedIn) {
@@ -108,7 +110,11 @@ class ProductDetails extends React.Component {
     const { dispatch } = this.context.store;
     dispatch(addReview(sku, data));
   };
-
+  toggleShowMore = () => {
+    this.setState({
+      showmore: !this.state.showmore
+    });
+  };
   render() {
     const {
       product,
@@ -132,20 +138,21 @@ class ProductDetails extends React.Component {
       images,
       simples,
       delivery_details: deliveryDetails,
-      attributes,
+      // attributes,
       grouped_attributes: groupedAttributes,
       sku,
       groupedattributes,
       reviews: { count, rating }
     } = product;
     const { category_details: categoryDetails } = meta;
-
+    const shortDesccription = getShortDescription(groupedAttributes);
     const simpleSku = Object.keys(simples)[0];
     const shipping = simples[simpleSku].groupedattributes.product_shipping_cost;
     const isEmiAvailable = Number(simples[simpleSku].meta.no_emi) === 0;
     const { price, special_price: specialPrice } = meta;
     const checkSpecialPrice = specialPrice || price;
     const { adding, added } = reviews;
+    const { showmore } = this.state;
     return (
       <Div type="block">
         <Section p="0" pt="1.25rem" mb="0">
@@ -244,7 +251,8 @@ class ProductDetails extends React.Component {
                   </Div>
                 </Row>
                 <Row display="block" mt="1.25rem" mb="0" mr="0" ml="0">
-                  <ProductDesc desc={attributes.description} />
+                  <ProductDesc desc={shortDesccription} showmore={showmore} toggleShowMore={this.toggleShowMore} />
+                  {/* <button onClick={this.toggleShowMore}></button> */}
                   <Specs specs={groupedAttributes} pincode={pincode.selectedPincode} />
                   <Reviews col="6" reviewItems={reviews.data} pr="2.5rem" />
                   <AddReview

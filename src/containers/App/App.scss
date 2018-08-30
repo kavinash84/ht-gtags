@@ -677,6 +677,14 @@
 	.hide {
 		display: none;
 	}
+	.showMore{
+		height: auto;
+    overflow: auto;
+	}
+	.showLess {
+		height: 200px;
+    overflow: hidden;
+	}
 	.ratings {
 		display: inline-block;
     margin-left: 15px;
