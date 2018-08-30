@@ -148,10 +148,10 @@ class ProductDetails extends React.Component {
     const { adding, added } = reviews;
     return (
       <Div type="block">
-        <Section p="0" pt="1.25rem" mb="0">
+        <Section p="0" mb="0" className={styles.pdpWrapper}>
           <Container type="container" pr="0" pl="0">
-            <Row display="block" mt="0.625rem" mb="0.625rem" mr="0">
-              <Div col="7" pr="1rem" className={styles.pdpLeftWrapper}>
+            <Row display="block" mt="0" mb="0" mr="0">
+              <Div col="6" pt="1.5rem" pr="1rem" className={styles.pdpLeftWrapper}>
                 <Div col="12" className={styles.breadCrumbWrapper} mb="1rem">
                   <BreadCrumb categoryDetails={categoryDetails} />
                 </Div>
@@ -166,8 +166,8 @@ class ProductDetails extends React.Component {
                   </div>
                 </Div> */}
               </Div>
-              <div id="portal" className={styles.portal} />
-              <Div col="5" pl="1rem" className={styles.pdpRightWrapper}>
+              <Div col="6" pt="1.5rem" pl="1rem" pb="1rem" pr="1rem" className={styles.pdpRightWrapper}>
+                <div id="portal" className={styles.portal} />
                 <Div className={styles.titleWrapper}>
                   <TitlePrice
                     name={meta.name}
@@ -205,7 +205,7 @@ class ProductDetails extends React.Component {
                   </ServiceDetails>
                 </Row>
                 <Row display="block" mt="0" mb="0.625rem" mr="0.9375rem" ml="0.9375rem">
-                  <Img src="http://via.placeholder.com/450x110" alt="" width="100%" mt="0" mb="1rem" />
+                  <Img src="http://via.placeholder.com/530x130" alt="" width="100%" mt="0" mb="1rem" />
                   <Div col="6" mt="0" pr="0.3125rem">
                     <AddToCart
                       simpleSku={simpleSku}
@@ -262,26 +262,19 @@ class ProductDetails extends React.Component {
           </Container>
         </Section>
 
-        <Section p="0" pl="0.5rem" pr="0.5rem" pb="1.5rem" mb="0" mt="4rem">
-          <Container type="container" pr="0" pl="0">
-            {relatedproductsList.length > 0 && (
-              <Row display="block" mt="2.5rem" mb="0.625rem" mr="0">
-                <ProductCarousel
-                  title="Related Products"
-                  data={relatedproductsList}
-                  length={relatedproductsList.length}
-                />
-              </Row>
-            )}
-            <ResponsiveModal
-              classNames={{ modal: styles.loginModal }}
-              onCloseModal={this.onCloseLoginModal}
-              open={this.state.openLogin}
-            >
-              <LoginModal />
-            </ResponsiveModal>
-          </Container>
-        </Section>
+        {relatedproductsList.length > 0 && (
+          <Row display="block" pt="0.5rem" mt="2.5rem" mb="0" mr="0">
+            <ProductCarousel title="Related Products" data={relatedproductsList} length={relatedproductsList.length} />
+          </Row>
+        )}
+
+        <ResponsiveModal
+          classNames={{ modal: styles.loginModal }}
+          onCloseModal={this.onCloseLoginModal}
+          open={this.state.openLogin}
+        >
+          <LoginModal />
+        </ResponsiveModal>
       </Div>
     );
   }
@@ -315,7 +308,4 @@ ProductDetails.propTypes = {
   addToWaitList: PropTypes.func.isRequired,
   toggleReviewBox: PropTypes.func.isRequired
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

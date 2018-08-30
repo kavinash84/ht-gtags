@@ -59,7 +59,7 @@ const Cart = ({
               <Row type="block" m="0" mb="1.5rem" mt="0">
                 <Div col="12" className="ordersTable">
                   <Row className="tr" type="block" m="0" mb="0.5rem" mt="0">
-                    <Div className="th" col="5">
+                    <Div className="th" col="6">
                       Product
                     </Div>
                     <Div className="th" col="2">
@@ -71,7 +71,6 @@ const Cart = ({
                     <Div className="th" col="2">
                       Cost
                     </Div>
-                    <Div className="th" col="1" />
                   </Row>
                   {results.map(item => (
                     <Row className="tr" type="block" m="0" mb="0.5rem" mt="0" key={item.id_customer_cart}>
@@ -80,7 +79,7 @@ const Cart = ({
                           {imageURL => <img src={imageURL} alt="" />}
                         </ProgressiveImageSchemer>
                       </Div>
-                      <Div className="td" col="4">
+                      <Div className="td" col="5">
                         {item.product_info.name}
                       </Div>
                       <Div className="td" col="2">
@@ -97,8 +96,6 @@ const Cart = ({
                       </Div>
                       <Div className="td" col="2">
                         Rs. {formatAmount(item.product_info.net_price)}
-                      </Div>
-                      <Div className="td" col="1">
                         <Button
                           fontSize="1rem"
                           fontFamily="thin"
@@ -106,6 +103,7 @@ const Cart = ({
                           btnType="link"
                           p="0"
                           mt="-4px"
+                          className="close"
                           onClick={onClick(item.id_customer_cart, sessionId, pincode)(removeFromCart)}
                         >
                           x
@@ -175,7 +173,4 @@ Cart.defaultProps = {
   outOfStockList: []
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

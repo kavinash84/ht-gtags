@@ -16,6 +16,7 @@ import {
   WhoWeAre,
   FAQ,
   ModularKitchen,
+  DesignBuild,
   TrackOrderModal,
   NotFound
 } from 'containers';
@@ -94,6 +95,7 @@ const routes = [
       { path: '/service-request', exact: true, component: ServiceRequest },
       { path: '/grievance', exact: true, component: Grievance },
       { path: '/modular-kitchens', exact: true, component: ModularKitchen },
+      { path: '/design-build', exact: true, component: DesignBuild },
       { path: '/payment-success', exact: true, component: PaymentSuccess },
       { path: '/payment-failed/:orderId?', exact: true, component: PaymentFailure },
       { path: '/bulk-order', exact: true, component: BulkOrder },

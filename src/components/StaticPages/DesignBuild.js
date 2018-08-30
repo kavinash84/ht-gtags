@@ -37,11 +37,7 @@ export default class ModularKitchen extends Component {
             <Row ml="0" mr="0" mt="2rem">
               <Div col="1" />
               <Div col="10">
-                <Img
-                  src="https://www.hometown.in/media/cms/Staticpage/modular-kitchen/20161209/book-our-services.jpg"
-                  alt=""
-                  m="auto"
-                />
+                <Img src="https://www.hometown.in/media/cms/Staticpage/modular-wardrobes/process.jpg" alt="" m="auto" />
               </Div>
             </Row>
             <Row ml="0" mr="0" mt="2.5rem">
@@ -54,31 +50,31 @@ export default class ModularKitchen extends Component {
             <Row ml="0" mr="0" pt="3.5rem">
               <Div>
                 <Heading mt="0" mb="0" color="text" fontSize="1.75rem" ta="center" fontFamily="light">
-                  Kitchens Made Easy For Every Indian Family
+                  Complete Design & Execution Solutions For Your Dream Home
                 </Heading>
                 <Text fontSize="1rem" mt="0.3125rem" ta="center">
-                  BEAUTIFUL KITCHEN DESIGNS
+                  BEAUTIFUL HOME DESIGNS
                 </Text>
               </Div>
             </Row>
             <Row ml="0" mr="0" mt="2rem">
               <Div col="4" pl="0.625rem" pr="0.625rem">
                 <Img
-                  src="https://www.hometown.in/media/cms/hometown-hp/2017/nov/20171129/modular-kitchen/moduler-1.jpg"
+                  src="https://www.hometown.in/media/cms/Staticpage/modular-wardrobes/hassle-free-home-interior.jpg"
                   alt=""
                   width="100%"
                 />
               </Div>
               <Div col="4" pl="0.625rem" pr="0.625rem">
                 <Img
-                  src="https://www.hometown.in/media/cms/hometown-hp/2017/nov/20171129/modular-kitchen/moduler-2.jpg"
+                  src="https://www.hometown.in/media/cms/Staticpage/modular-wardrobes/sofa.jpg"
                   alt=""
                   width="100%"
                 />
               </Div>
               <Div col="4" pl="0.625rem" pr="0.625rem">
                 <Img
-                  src="https://www.hometown.in/media/cms/hometown-hp/2017/nov/20171129/modular-kitchen/moduler-3.jpg"
+                  src="https://www.hometown.in/media/cms/Staticpage/modular-wardrobes/room-wise-design.jpg"
                   alt=""
                   width="100%"
                 />
@@ -87,35 +83,20 @@ export default class ModularKitchen extends Component {
             <Row ml="0" mr="0" pt="3.5rem">
               <Div>
                 <Heading mt="0" mb="1rem" color="text" fontSize="1.75rem" ta="center" fontFamily="light">
-                  WHY HOMETOWN KITCHENS
+                  WHY HOMETOWN
                 </Heading>
                 <Text fontSize="1rem" mt="0.3125rem" ta="center" color="textLight">
-                  Kitchen Delivery within 45 Days<br />
-                  Highest Quality Fitting And Accessories<br />
-                  100% Customized Designs Created Only For You<br />
-                  On Time, On Budget. Project Handover Gurantee
+                  200+ Professional Interior Designers Over 4000 Happy Customers Across The <br />
+                  Country 100% Customized Designs Created Only for You on Time,<br />
+                  On Budget, Project Handover Guarantee
                 </Text>
               </Div>
             </Row>
             <Row ml="0" mr="0" mt="3rem">
-              <Div col="3" />
-              <Div col="2" pl="0.625rem" pr="0.625rem">
+              <Div col="2" />
+              <Div col="8" pl="0.625rem" pr="0.625rem">
                 <Img
-                  src="https://www.hometown.in/media/cms/Staticpage/modular-kitchen/20161209/5-year-warranty.jpg"
-                  alt=""
-                  width="100%"
-                />
-              </Div>
-              <Div col="2" pl="0.625rem" pr="0.625rem">
-                <Img
-                  src="https://www.hometown.in/media/cms/Staticpage/modular-kitchen/20161209/free-service-visit.jpg"
-                  alt=""
-                  width="100%"
-                />
-              </Div>
-              <Div col="2" pl="0.625rem" pr="0.625rem">
-                <Img
-                  src="https://www.hometown.in/media/cms/Staticpage/modular-kitchen/20161209/emi-available.jpg"
+                  src="https://www.hometown.in/media/cms/Staticpage/modular-wardrobes/build-services.jpg"
                   alt=""
                   width="100%"
                 />
