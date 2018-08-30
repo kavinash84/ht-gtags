@@ -253,7 +253,7 @@ class ProductDetails extends React.Component {
                 <Row display="block" mt="1.25rem" mb="0" mr="0" ml="0">
                   <ProductDesc desc={attributes.description} />
                   <Specs specs={groupedAttributes} pincode={pincode.selectedPincode} />
-                  <Reviews col="6" reviewItems={reviews.data} pr="2.5rem" />
+                  <Reviews col="12" reviewItems={reviews.data} pr="2.5rem" />
                   <AddReview
                     col="8"
                     catalogId={groupedattributes.id_catalog_config}
