@@ -146,6 +146,7 @@ class ProductDetails extends React.Component {
     const { price, special_price: specialPrice } = meta;
     const checkSpecialPrice = specialPrice || price;
     const { adding, added } = reviews;
+    const offerImage = simples[simpleSku].groupedattributes.offer_image || null;
     return (
       <Div type="block">
         <Section p="0" mb="0" className={styles.pdpWrapper}>
@@ -204,11 +205,13 @@ class ProductDetails extends React.Component {
                     <EmiModal price={formatAmount(checkSpecialPrice)} data={emidata} key="emi" />
                   </ServiceDetails>
                 </Row>
-                <Row display="block" mt="0" mb="0" mr="0.9375rem" ml="0.9375rem">
-                  <Div col="6" mt="0" pr="0.3125rem">
-                    <Img src="http://via.placeholder.com/530x130" alt="" width="100%" mt="0" mb="0.625rem" />
-                  </Div>
-                </Row>
+                {offerImage && (
+                  <Row display="block" mt="0" mb="0" mr="0.9375rem" ml="0.9375rem">
+                    <Div col="6" mt="0" pr="0.3125rem">
+                      <Img src={offerImage} alt="" width="100%" mt="0" mb="0.625rem" />
+                    </Div>
+                  </Row>
+                )}
                 <Row display="block" mt="0" mb="0.625rem" mr="0.9375rem" ml="0.9375rem">
                   <Div col="6" mt="0" pr="0.3125rem">
                     <AddToCart
@@ -312,7 +315,4 @@ ProductDetails.propTypes = {
   addToWaitList: PropTypes.func.isRequired,
   toggleReviewBox: PropTypes.func.isRequired
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

@@ -27,12 +27,12 @@ const ProductItem = ({
         <Div mb="0px" ta="center">
           <Span mr="0.625rem" color={Theme.colors.text} fontSize="0.875em" fontFamily="medium">
             {' '}
-            Rs. {price}{' '}
+            Rs. {discPrice || price}{' '}
           </Span>
           {discPrice && (
             <Span mr="0" fontSize="0.75em" fontFamily="medium">
               {' '}
-              <s>Rs. {discPrice}</s>
+              <s>Rs. {price}</s>
             </Span>
           )}
           {rating > 0 && (
