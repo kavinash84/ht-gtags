@@ -34,6 +34,7 @@ import recentlyviewed from './modules/recentlyviewed';
 import storelocator from './modules/storelocator';
 import emioptions from './modules/emioptions';
 import notifs from './modules/notifs';
+import address from './modules/address';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -81,6 +82,7 @@ export default function createReducers(asyncReducers) {
     storelocator,
     emioptions,
     notifs,
+    address,
     ...asyncReducers
   };
 }

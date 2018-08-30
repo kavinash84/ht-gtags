@@ -18,6 +18,7 @@ import WhoWeAre from './WhoWeAre/WhoWeAre';
 import MyAddress from './MyAddress/MyAddress';
 import TrackOrderModal from './TrackOrderModal/TrackOrderModal';
 import EmiModal from './EmiModal/EmiModal';
+import ModularKitchen from './ModularKitchen/ModularKitchen';
 import NotFound from './NotFound/NotFound';
 
 export {
@@ -41,5 +42,6 @@ export {
   TrackOrderModal,
   EmiModal,
   PaymentOptions,
+  ModularKitchen,
   NotFound
 };

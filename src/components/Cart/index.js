@@ -7,6 +7,7 @@ import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Button from 'hometown-components/lib/Buttons';
 import Section from 'hometown-components/lib/Section';
+import ProgressiveImageSchemer from 'hometown-components/lib/ProgressiveImageSchemer';
 import * as actionCreators from 'redux/modules/cart';
 import { formatAmount } from 'utils/formatters';
 import ProductQuantity from './UpdateProductQuantity';
@@ -56,69 +57,81 @@ const Cart = ({
           <Row display="block" mr="0" ml="0">
             <Div col="9" pr="2.5rem" pt="0">
               <Row type="block" m="0" mb="1.5rem" mt="0">
-                <Div col="12">
-                  <table className="ordersTable">
-                    <tbody>
-                      <tr>
-                        <th colSpan="2">Product</th>
-                        <th>Delivery</th>
-                        <th width="100px">Quantity</th>
-                        <th>Cost</th>
-                        <th />
-                      </tr>
-                      {results.map(item => (
-                        <tr key={item.id_customer_cart}>
-                          <td width="85px">
-                            <img className="thumb" src={item.product_info.image} alt="" />
-                          </td>
-                          <td>{item.product_info.name}</td>
-                          <td>{item.product_info.delivery_time_text}</td>
-                          <td>
-                            <ProductQuantity
-                              cartItemLoading={cartItemLoading}
-                              cartId={item.id_customer_cart}
-                              quantity={item.qty}
-                              simpleSku={item.simple_sku}
-                              skuId={item.configurable_sku}
-                            />
-                          </td>
-                          <td>Rs. {formatAmount(item.product_info.net_price)}</td>
-                          <td>
+                <Div col="12" className="ordersTable">
+                  <Row className="tr" type="block" m="0" mb="0.5rem" mt="0">
+                    <Div className="th" col="5">
+                      Product
+                    </Div>
+                    <Div className="th" col="2">
+                      Delivery
+                    </Div>
+                    <Div className="th" col="2" width="100px">
+                      Quantity
+                    </Div>
+                    <Div className="th" col="2">
+                      Cost
+                    </Div>
+                    <Div className="th" col="1" />
+                  </Row>
+                  {results.map(item => (
+                    <Row className="tr" type="block" m="0" mb="0.5rem" mt="0" key={item.id_customer_cart}>
+                      <Div className="td" col="1">
+                        <ProgressiveImageSchemer src={item.product_info.image} height="60px">
+                          {imageURL => <img src={imageURL} alt="" />}
+                        </ProgressiveImageSchemer>
+                      </Div>
+                      <Div className="td" col="4">
+                        {item.product_info.name}
+                      </Div>
+                      <Div className="td" col="2">
+                        {item.product_info.delivery_time_text}
+                      </Div>
+                      <Div className="td" col="2">
+                        <ProductQuantity
+                          cartItemLoading={cartItemLoading}
+                          cartId={item.id_customer_cart}
+                          quantity={item.qty}
+                          simpleSku={item.simple_sku}
+                          skuId={item.configurable_sku}
+                        />
+                      </Div>
+                      <Div className="td" col="2">
+                        Rs. {formatAmount(item.product_info.net_price)}
+                      </Div>
+                      <Div className="td" col="1">
+                        <Button
+                          fontSize="1rem"
+                          fontFamily="thin"
+                          color="#f98d29"
+                          btnType="link"
+                          p="0"
+                          mt="-4px"
+                          onClick={onClick(item.id_customer_cart, sessionId, pincode)(removeFromCart)}
+                        >
+                          x
+                        </Button>
+                      </Div>
+                      {isProductOutofStock(item.configurable_sku) && (
+                        <div className={styles.loadingCart}>
+                          <h4>
+                            This product is out of stock please remove before proceed.
+                            <br />
                             <Button
                               fontSize="1rem"
-                              fontFamily="thin"
+                              fontFamily="light"
                               color="#f98d29"
                               btnType="link"
                               p="0"
-                              mt="-4px"
+                              mt="0"
                               onClick={onClick(item.id_customer_cart, sessionId, pincode)(removeFromCart)}
                             >
-                              x
+                              Remove
                             </Button>
-                          </td>
-                          {isProductOutofStock(item.configurable_sku) && (
-                            <div className={styles.loadingCart}>
-                              <h4>
-                                This product is out of stock. Please remove to proceed.
-                                <br />
-                                <Button
-                                  fontSize="1rem"
-                                  fontFamily="light"
-                                  color="#f98d29"
-                                  btnType="link"
-                                  p="0"
-                                  mt="0"
-                                  onClick={onClick(item.id_customer_cart, sessionId, pincode)(removeFromCart)}
-                                >
-                                  Remove
-                                </Button>
-                              </h4>
-                            </div>
-                          )}
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                          </h4>
+                        </div>
+                      )}
+                    </Row>
+                  ))}
                 </Div>
               </Row>
             </Div>
@@ -162,4 +175,7 @@ Cart.defaultProps = {
   outOfStockList: []
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Cart);

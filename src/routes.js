@@ -15,6 +15,7 @@ import {
   Cancellation,
   WhoWeAre,
   FAQ,
+  ModularKitchen,
   TrackOrderModal,
   NotFound
 } from 'containers';
@@ -40,6 +41,7 @@ import Grievance from 'containers/Grievance/';
 import PaymentSuccess from 'containers/PaymentSuccess/';
 import PaymentFailure from 'containers/PaymentFailure/';
 import BulkOrder from 'containers/BulkOrder/';
+import SimpleForm from 'containers/Address';
 
 const isAuthenticated = connectedReduxRedirect({
   redirectPath: '/login',
@@ -60,6 +62,7 @@ const routes = [
   {
     component: App,
     routes: [
+      { path: '/test-form', exact: true, component: SimpleForm },
       { path: '/', exact: true, component: Home },
       { path: '/category/:category', exact: true, component: Category },
       { path: '/login', exact: true, component: isNotAuthenticated(Login) },
@@ -93,6 +96,7 @@ const routes = [
       { path: '/feedback', exact: true, component: Feedback },
       { path: '/service-request', exact: true, component: ServiceRequest },
       { path: '/grievance', exact: true, component: Grievance },
+      { path: '/modular-kitchens', exact: true, component: ModularKitchen },
       { path: '/payment-success', exact: true, component: PaymentSuccess },
       { path: '/payment-failed/:orderId?', exact: true, component: PaymentFailure },
       { path: '/bulk-order', exact: true, component: BulkOrder },
