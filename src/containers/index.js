@@ -19,6 +19,7 @@ import MyAddress from './MyAddress/MyAddress';
 import TrackOrderModal from './TrackOrderModal/TrackOrderModal';
 import EmiModal from './EmiModal/EmiModal';
 import ModularKitchen from './ModularKitchen/ModularKitchen';
+import DesignBuild from './DesignBuild/DesignBuild';
 import NotFound from './NotFound/NotFound';
 
 export {
@@ -43,5 +44,6 @@ export {
   EmiModal,
   PaymentOptions,
   ModularKitchen,
+  DesignBuild,
   NotFound
 };
