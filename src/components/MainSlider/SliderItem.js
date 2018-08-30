@@ -9,9 +9,14 @@ const SliderItem = ({ title, image, url }) => (
   </Link>
 );
 
+SliderItem.defaultProps = {
+  title: '',
+  image: ''
+};
+
 SliderItem.propTypes = {
-  title: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  image: PropTypes.string,
   url: PropTypes.string.isRequired
 };
 

@@ -62,7 +62,6 @@ const routes = [
     component: App,
     routes: [
       { path: '/', exact: true, component: Home },
-      { path: '/category/:category', exact: true, component: Category },
       { path: '/login', exact: true, component: isNotAuthenticated(Login) },
       { path: '/signup', exact: true, component: isNotAuthenticated(Signup) },
       { path: '/forgot-password/verify/reset/:hash', exact: true, component: isNotAuthenticated(ResetPassword) },
@@ -98,6 +97,11 @@ const routes = [
       { path: '/payment-success', exact: true, component: PaymentSuccess },
       { path: '/payment-failed/:orderId?', exact: true, component: PaymentFailure },
       { path: '/bulk-order', exact: true, component: BulkOrder },
+      {
+        path: '/:category(furniture|home-decor|homefurnishings|bath|kitchenware|tableware)',
+        exact: true,
+        component: Category
+      },
       {
         path: '/:category/:subcategory1?/:subcategory2?/:subcategory3?/:subcategory4?/:subcategory5?',
         exact: true,

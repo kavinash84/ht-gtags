@@ -14,7 +14,7 @@ const NavBar = ({
         {menuItems.filter(menu => menu.visibility === 'on').map(menuItem => (
           <Link
             onClick={exitOnClick}
-            to={`/category/${menuItem.url_key}`}
+            to={`/${menuItem.url_key}`}
             key={menuItem.id}
             onMouseEnter={handleEnter(menuItem.id)}
           >
