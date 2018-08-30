@@ -23,8 +23,6 @@ import orders from './modules/orders';
 import pagination from './modules/pagination';
 import paymentoptions from './modules/paymentoptions';
 import checkout from './modules/checkout';
-import shipping from './modules/shipping';
-import billing from './modules/billing';
 import colorproducts from './modules/colorproducts';
 import coupon from './modules/coupon';
 import myaddress from './modules/myaddress';
@@ -71,8 +69,6 @@ export default function createReducers(asyncReducers) {
     pagination,
     paymentoptions,
     checkout,
-    shipping,
-    billing,
     colorproducts,
     coupon,
     myaddress,
