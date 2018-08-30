@@ -1,7 +1,7 @@
 .pincode {
-  position: relative;
-  width: 400px;
-  max-width: 100%;
+  position: relative !important;
+  width: 400px !important;
+  max-width: 100% !important;
   .searchIcon {
     position: absolute;
     right: 10px;
