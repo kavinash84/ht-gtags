@@ -196,7 +196,7 @@ app.use(async (req, res) => {
     const content = ReactDOM.renderToString(component);
 
     const locationState = store.getState().router.location;
-    if (req.originalUrl !== locationState.pathname + locationState.search) {
+    if (decodeURIComponent(req.originalUrl) !== decodeURIComponent(locationState.pathname + locationState.search)) {
       return res.redirect(301, locationState.pathname);
     }
     const styleTags = sheet.getStyleElement();

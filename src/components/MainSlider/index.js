@@ -15,7 +15,11 @@ export default class MainSlider extends Component {
       <SlickSlider settings={settings}>
         {data.map((slide, index) => (
           <div key={String(index)}>
-            <SliderItem image={slide.url} url={slide.target_url} title={slide.title} />
+            <SliderItem
+              image={slide.url || slide.image}
+              url={slide.target_url || slide.url_key}
+              title={slide.title || ''}
+            />
           </div>
         ))}
       </SlickSlider>

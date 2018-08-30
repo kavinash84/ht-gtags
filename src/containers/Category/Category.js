@@ -27,23 +27,19 @@ const getSubMenu = (categories, key) =>
     await dispatch(setCategory(category));
   }
 })
-@connect(({ homepage: { menu, banners }, category }) => ({
-  banners: banners.data,
+@connect(({ homepage: { menu }, category }) => ({
   menu: menu.data,
   category: category.data && category.data.items.text
 }))
 export default class Category extends Component {
   render() {
-    const {
-      category, menu, banners, match: { params: { category: currentCategory } }
-    } = this.props;
-    console.log(this.props);
+    const { category, menu, match: { params: { category: currentCategory } } } = this.props;
     return (
       <Section p="0" mb="0">
         <Helmet title="Home" />
         <div className="wrapper">
           <Menu />
-          <MainSlider data={banners} />
+          <MainSlider data={category.main} />
           <Container pr="0" pl="0">
             <Row display="block" pt="2.25rem" ml="0" mr="0">
               <Div col={2}>
@@ -67,14 +63,12 @@ export default class Category extends Component {
 
 Category.defaultProps = {
   category: [],
-  menu: [],
-  banners: []
+  menu: []
 };
 
 Category.propTypes = {
   category: PropTypes.array,
   menu: PropTypes.array,
-  banners: PropTypes.array,
   match: PropTypes.shape({
     params: PropTypes.object.isRequired
   }).isRequired
