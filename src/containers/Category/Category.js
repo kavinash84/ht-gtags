@@ -34,7 +34,6 @@ const getSubMenu = (categories, key) =>
 export default class Category extends Component {
   render() {
     const { category, menu, match: { params: { category: currentCategory } } } = this.props;
-    console.log(this.props);
     return (
       <Section p="0" mb="0">
         <Helmet title="Home" />
