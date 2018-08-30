@@ -19,6 +19,7 @@ import routes from 'routes';
 import isOnline from 'utils/isOnline';
 import asyncMatchRoutes from 'utils/asyncMatchRoutes';
 import { ReduxAsyncConnect, Provider } from 'components';
+import cookie from 'js-cookie';
 
 const persistConfig = {
   key: 'root',
@@ -40,6 +41,9 @@ const providers = { app: {}, restApp: {}, client };
 (async () => {
   const preloadedState = await getStoredState(persistConfig);
   const online = window.__data ? true : await isOnline();
+
+  /* setting cookie for phpstorm debug */
+  cookie.set('XDEBUG_SESSION', 'PHPSTORM');
 
   const history = createBrowserHistory();
 

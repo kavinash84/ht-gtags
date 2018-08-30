@@ -173,7 +173,4 @@ Cart.defaultProps = {
   outOfStockList: []
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
