@@ -25,7 +25,7 @@ const nextStep = (dispatcher, sessionId, paymentData, cardType) => e => {
 };
 
 const mapStateToProps = ({
-  cart, cart: { summary, error }, shipping, paymentoptions, app
+  cart, cart: { summary, error }, address: { shipping }, paymentoptions, app
 }) => ({
   results: getCartList(cart),
   summary,
