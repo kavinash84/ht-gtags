@@ -209,7 +209,9 @@ export default class Listing extends Component {
       breadCrumbs
     } = this.props;
     let page;
-    const { location: { search, pathname } } = history;
+    const {
+      location: { search, pathname }
+    } = history;
     if (search !== '') {
       page = search.replace('?', '').split('page=')[1];
     }
@@ -227,7 +229,7 @@ export default class Listing extends Component {
           <link rel="next" href={`${SITE_URL}${pathname}${NextPage}`} />
         </Helmet>
         <div className="wrapper">
-          <Menu filter search />
+          <Menu />
           {!loading &&
             products.length === 0 && (
             <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
