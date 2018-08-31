@@ -11,11 +11,12 @@ const CategoryFilters = ({ data }) => (
       <Label color="textDark" mb="1rem" fontFamily="medium" display="block">
         Categories
       </Label>
-      {data.map(sub => (
-        <Label key={sub.id} color="textLight" mt="0.625rem" mb="0.625rem" display="block">
-          <Link to={`/${sub.url_key}`}>{sub.name}</Link>
-        </Label>
-      ))}
+      {data &&
+        data.filter(menu => menu.visibility === 'on').map(sub => (
+          <Label key={sub.id} color="textLight" mt="0.625rem" mb="0.625rem" display="block">
+            <Link to={`/${sub.url_key}`}>{sub.name}</Link>
+          </Label>
+        ))}
     </Div>
   </Row>
 );

@@ -47,6 +47,7 @@ export default function reducer(state = initialState, action = {}) {
         loaded: true,
         accessToken: action.data.access_token,
         refreshToken: action.data.refresh_token,
+        meta: action.data.meta,
         loginError: ''
       };
     case LOGOUT:
@@ -86,6 +87,12 @@ const setToken = ({ client }) => response => {
   /* setting cookie for server call */
   cookie.set('Authorization', `Bearer ${response.access_token}`);
   client.setJwtToken(response.access_token);
+  if (response && response.meta) {
+    const [xId] = Object.keys(response.meta).filter(key => key !== 'customerId');
+    console.log(xId);
+    client.setCustomerInfo('customerId', response.meta.customerId);
+    client.setXId(xId, response.meta[xId]);
+  }
 };
 
 export const isLoaded = globalState => globalState.login && globalState.login.loaded;

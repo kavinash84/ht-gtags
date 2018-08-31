@@ -11,6 +11,11 @@ export default function apiClient(req) {
   let token;
   let csrfToken;
   let session;
+  let customerKey;
+  let customerValue;
+  let xIdKey;
+  let xIdValue;
+
   instance.setJwtToken = newToken => {
     token = newToken;
   };
@@ -21,6 +26,16 @@ export default function apiClient(req) {
 
   instance.setSessionId = SessionId => {
     session = SessionId;
+  };
+
+  instance.setCustomerInfo = (key, value) => {
+    customerKey = key;
+    customerValue = value;
+  };
+
+  instance.setXId = (id, value) => {
+    xIdKey = id;
+    xIdValue = value;
   };
 
   instance.interceptors.request.use(
@@ -43,6 +58,16 @@ export default function apiClient(req) {
       }
       if (conf.method !== 'get' && csrfToken) {
         conf.headers['X-CSRF-Token'] = csrfToken;
+      }
+      /* for logged in user payments */
+      if (customerKey && customerValue) {
+        conf.headers['X-CUSTOMER-KEY'] = customerKey;
+        conf.headers['X-CUSTOMER-VALUE'] = customerValue;
+      }
+
+      if (xIdKey && xIdValue) {
+        conf.headers['X-ID-KEY'] = xIdKey;
+        conf.headers['X-ID-VALUE'] = xIdValue;
       }
 
       return conf;

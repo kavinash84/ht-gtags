@@ -36,17 +36,23 @@ function getNoopReducers(reducers, data) {
 export default function createStore({
   history, data, helpers, persistConfig
 }) {
-  if (data && data.userLogin) {
-    /* Check userAuthentication */
-    const authToken = (data.userLogin.isLoggedIn && data.userLogin.accessToken) || '';
-    helpers.client.setJwtToken(authToken);
-  }
   if (data && data.app && data.app.csrfToken) {
     /* add csrf token */
     const csrfToken = data.app.csrfToken || '';
     const session = data.app.sessionId || '';
     helpers.client.setCSRFToken(csrfToken);
     helpers.client.setSessionId(session);
+  }
+  if (data && data.userLogin) {
+    /* Check userAuthentication */
+    const authToken = (data.userLogin.isLoggedIn && data.userLogin.accessToken) || '';
+    if (data && data.userLogin.meta) {
+      const { userLogin: { meta } } = data;
+      const [xId] = Object.keys(meta).filter(key => key !== 'customerId');
+      helpers.client.setCustomerInfo('customerId', meta.customerId);
+      helpers.client.setXId(xId, meta[xId]);
+    }
+    helpers.client.setJwtToken(authToken);
   }
 
   const middleware = [

@@ -4,6 +4,8 @@ import { provideHooks } from 'redial';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import DeliveryAddress from 'components/Checkout/DeliveryAddress';
+import Menu from 'components/MenuWithLogoOnly';
+import Section from 'hometown-components/lib/Section';
 import { loadMyAddress } from 'redux/modules/myaddress';
 import { getCartList } from 'selectors/cart';
 
@@ -12,7 +14,9 @@ import { getCartList } from 'selectors/cart';
 }))
 @provideHooks({
   defer: async ({ store: { dispatch, getState } }) => {
-    const { userLogin: { isLoggedIn } } = getState();
+    const {
+      userLogin: { isLoggedIn }
+    } = getState();
     if (isLoggedIn) {
       await dispatch(loadMyAddress());
     }
@@ -28,9 +32,12 @@ export default class DeliveryAddressContainer extends Component {
   }
   render() {
     return (
-      <div>
-        <DeliveryAddress />
-      </div>
+      <Section p="0rem" mb="0">
+        <div className="wrapper">
+          <Menu />
+          <DeliveryAddress />
+        </div>
+      </Section>
     );
   }
 }

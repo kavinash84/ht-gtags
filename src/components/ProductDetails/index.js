@@ -159,7 +159,7 @@ class ProductDetails extends React.Component {
         <Section p="0" mb="0" className={styles.pdpWrapper}>
           <Container type="container" pr="0" pl="0">
             <Row display="block" mt="0" mb="0" mr="0">
-              <Div col="6" pt="1.5rem" pr="1rem" className={styles.pdpLeftWrapper}>
+              <Div col="7" pt="1.5rem" pr="1rem" className={styles.pdpLeftWrapper}>
                 <Div col="12" className={styles.breadCrumbWrapper} mb="1rem">
                   <BreadCrumb categoryDetails={categoryDetails} />
                 </Div>
@@ -174,7 +174,7 @@ class ProductDetails extends React.Component {
                   </div>
                 </Div> */}
               </Div>
-              <Div col="6" pt="1.5rem" pl="1rem" pb="1rem" pr="1rem" className={styles.pdpRightWrapper}>
+              <Div col="5" pt="1.5rem" pl="1rem" pb="1rem" pr="1rem" className={styles.pdpRightWrapper}>
                 <div id="portal" className={styles.portal} />
                 <Div className={styles.titleWrapper}>
                   <TitlePrice
@@ -258,7 +258,13 @@ class ProductDetails extends React.Component {
                   </Div>
                 </Row>
                 <Row display="block" mt="1.25rem" mb="0" mr="0" ml="0">
-                  <ProductDesc desc={shortDesccription} showmore={showmore} toggleShowMore={this.toggleShowMore} />
+                  {shortDesccription && (
+                    <ProductDesc
+                      desc={shortDesccription || ''}
+                      showmore={showmore}
+                      toggleShowMore={this.toggleShowMore}
+                    />
+                  )}
                   {/* <button onClick={this.toggleShowMore}></button> */}
                   <Specs specs={groupedAttributes} pincode={pincode.selectedPincode} />
                   <Reviews col="12" reviewItems={reviews.data} pr="2.5rem" />
@@ -323,4 +329,7 @@ ProductDetails.propTypes = {
   addToWaitList: PropTypes.func.isRequired,
   toggleReviewBox: PropTypes.func.isRequired
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductDetails);

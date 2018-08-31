@@ -168,7 +168,7 @@ export default function reducer(state = initialState, action = {}) {
     case UPDATE_CART_SUMMARY_AFTER_COUPON:
       return {
         ...state,
-        summary: action.summary[0]
+        summary: action.summary
       };
     default:
       return state;

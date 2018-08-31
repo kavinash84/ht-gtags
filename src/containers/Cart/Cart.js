@@ -68,7 +68,6 @@ export default class CartContainer extends Component {
     const {
       results, summary, loading, loaded, outOfStockList
     } = this.props;
-    console.log(outOfStockList);
     return (
       <div className="wrapper">
         <Menu />

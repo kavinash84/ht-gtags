@@ -28,7 +28,6 @@ class PaymentForm extends Component {
         error
       } = this.props;
       if (formData && !error) {
-        console.log(this.paymentForm);
         this.paymentForm.submit();
       }
     }

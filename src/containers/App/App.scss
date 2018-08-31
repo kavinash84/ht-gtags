@@ -418,6 +418,12 @@
 	.slick-initialized .slick-slide {
 		display: block !important;
 	}
+	.slick-slide img {
+    display: block;
+		&:hover {
+			outline: none;
+		}
+	}
 	.catCarousel, .prodCarousel {
 		.slick-next {
 			right: -40px !important;
@@ -475,6 +481,30 @@
 			}
 		}
 	}
+	.pdpThumbSlider {
+		min-height: 360px;
+		padding-top: 50px;
+		padding-bottom: 50px;
+		.slick-prev {
+			left: 6px !important;
+    	top: 0 !important;
+    	transform: rotate(90deg);
+		}
+		.slick-next {
+			left: 6px !important;
+			bottom: 0 !important;
+			transform: rotate(90deg);
+			top: initial !important;
+		}
+		.pdpThumbSliderItem {
+			padding: 2px 0;
+		}
+		.slick-current {
+			border: 1px solid $primary;
+			opacity: 0.8;
+		}
+	}
+
 	.prodCarousel {
 		.slick-slide {
 			max-width: 293px;
@@ -709,6 +739,16 @@
 	  margin-bottom: 0;
 	  font-family: regular;
 		text-transform: capitalize;
+	}
+	.react-autosuggest__suggestion {
+	  cursor: pointer;
+		padding: 10px 20px;
+	}
+	.react-autosuggest__input--focused {
+	  outline: none;
+	}
+	.react-autosuggest__suggestion--highlighted {
+	  background-color: #ddd;
 	}
 }
 

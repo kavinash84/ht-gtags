@@ -119,11 +119,11 @@ export default class MenuSidebar extends Component {
                   ta="center"
                   fontSize="1.375rem"
                   mb="1rem"
-                  fontFamily="700"
+                  fontFamily="light"
                 >
                   Please enter your Pincode to serve you better
                 </Heading>
-                <Pincode onCloseModal={this.onClosePincodeModal} />
+                <Pincode color="#f2f2f2" onCloseModal={this.onClosePincodeModal} />
               </Div>
             </ResponsiveModal>
             <a className={styles.cart} href="tel:18002100004">

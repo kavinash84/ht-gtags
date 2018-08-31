@@ -30,6 +30,7 @@ export default function reducer(state = initialState, action = {}) {
         response: action.result,
         accessToken: action.result.token.access_token,
         refreshToken: action.result.token.refresh_token,
+        meta: action.result && action.result.token && action.result.token.meta,
         errorMessage: null
       };
     case SIGNUP_FAIL:
@@ -45,8 +46,13 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 const setToken = ({ client }) => response => {
-  cookie.set('Authorization', `Bearer ${response.access_token}`, { expires: TOKEN_EXPIRY });
+  cookie.set('Authorization', `Bearer ${response.token.access_token}`, { expires: TOKEN_EXPIRY });
   client.setJwtToken(response.token.access_token);
+  if (response && response.token && response.token.meta) {
+    const [xId] = Object.keys(response.token.meta).filter(key => key !== 'customerId');
+    client.setCustomerInfo('customerId', response.token.meta.customerId);
+    client.setXId(xId, response.token.meta[xId]);
+  }
 };
 
 export function isLoaded(globalState) {

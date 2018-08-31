@@ -10,7 +10,7 @@ const Back = require('../../../static/arrow_back_black.svg');
 const styles = require('./Checkout.scss');
 
 const MenuCheckout = ({ page, history }) => (
-  <Section mb="0.625rem" p="3.5rem 0.5rem 1.375rem" bg="block10" boxShadow="0 2px 8px 0 rgba(0, 0, 0, 0.17)">
+  <Section mb="0.625rem" p="1.75rem 0.5rem 1.375rem" bg="block10" boxShadow="0 2px 8px 0 rgba(0, 0, 0, 0.17)">
     <Container type="container" pr="2rem" pl="2rem">
       <Row display="block" mr="0" ml="0" mb="1rem">
         <Heading fontSize="0.875rem" color="text" mt="0" mb="0" fontFamily="medium">

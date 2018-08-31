@@ -75,8 +75,7 @@ export const sendDeliveryAddress = (sessionId, data, isLoggedIn) => (dispatch, g
             }
           };
         } else {
-          const { shipping: { address_id: addressId } } = getState();
-          console.log(addressId);
+          const { address: { shipping: { address_id: addressId } } } = getState();
           postData = {
             session_id: sessionId,
             email: shippingAddress.email,

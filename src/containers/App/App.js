@@ -168,7 +168,6 @@ export default class App extends Component {
     }
     if (!isLoggedIn && nextProps.login.isLoggedIn) {
       dispatch(synCart(sessionId, pincode));
-      console.log(waitlist);
       if (waitlist !== '') dispatch(syncWishList());
       const query = new URLSearchParams(this.props.location.search);
       this.props.pushState(query.get('redirect') || '/');
@@ -218,11 +217,7 @@ export default class App extends Component {
                     };
                 `}
             </script>
-            <link
-              rel="alternate"
-              media="only screen and (max-width:640px)"
-              href={`https://www.hometown.in${pathname}`}
-            />
+            <link rel="alternate" media="only screen and (max-width:640px)" href={`https://m.hometown.in${pathname}`} />
             <link rel="canonical" href={`https://www.hometown.in${pathname}`} />
           </Helmet>
           <main className={styles.appContent}>

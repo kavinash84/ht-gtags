@@ -12,7 +12,6 @@ const YEARS = [...Array(21)];
 
 const onChangeDetails = (dispatcher, gateway) => e => {
   const { name, value } = e.target;
-  console.log(name, value, gateway);
 
   dispatcher({ gateway, data: { [name]: value } });
 };

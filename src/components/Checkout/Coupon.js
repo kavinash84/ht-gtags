@@ -9,7 +9,6 @@ import Span from 'hometown-components/lib/Span';
 import Theme from 'hometown-components/lib/Theme';
 import LocalInlineNotification from 'components/LocalInlineNotification';
 import { applyCoupon, removeCoupon } from 'redux/modules/coupon';
-import { updateCartSummary } from 'redux/modules/cart';
 import { formatAmount } from 'utils/formatters';
 import Notifs from '../../components/Notifs';
 
@@ -33,34 +32,11 @@ class Coupon extends React.Component {
     store: PropTypes.object.isRequired
   };
   state = {
-    coupon: '',
-    // error: false,
-    // errorMessage: '',
-    applycoupon: false
+    coupon: ''
   };
-  componentWillReceiveProps(nextProps) {
-    const { coupon } = nextProps;
-    if (this.props.coupon.appliedCoupon !== coupon.appliedCoupon) {
-      const { error, loaded, summary } = coupon;
-      if (error && loaded) {
-        // const { error_message: errorMsg } = errorMessage;
-        this.setState({
-          // error: true
-        });
-      }
-      if (!error && loaded) {
-        const { dispatch } = this.context.store;
-        this.setState({
-          applycoupon: false
-        });
-        dispatch(updateCartSummary(summary));
-      }
-    }
-  }
 
   handleChange = e => {
     this.setState({
-      // error: false,
       coupon: e.target.value
     });
   };
@@ -71,11 +47,6 @@ class Coupon extends React.Component {
     dispatch(applyCoupon(this.state.coupon, sessionId, pincode));
   };
 
-  toggleCouponBox = () => {
-    this.setState({
-      applycoupon: true
-    });
-  };
   removeCoupon = coupon => {
     const { pincode, sessionId } = this.props;
     const { dispatch } = this.context.store;
@@ -83,13 +54,18 @@ class Coupon extends React.Component {
   };
 
   render() {
-    const { cart, notifs, coupon: { loading } } = this.props;
-    const { summary: { coupon: appliedCoupon, coupon_discount: couponDiscount } } = cart;
-    const { applycoupon } = this.state;
+    const {
+      cart,
+      notifs,
+      coupon: { loading }
+    } = this.props;
+    const {
+      summary: { coupon: appliedCoupon, coupon_discount: couponDiscount }
+    } = cart;
     return (
       <div>
         <Div className={styles.applyCoupon}>
-          {appliedCoupon && !applycoupon ? (
+          {appliedCoupon ? (
             <div className={styles.appliedCouponWrapper}>
               <Button
                 display="block"
