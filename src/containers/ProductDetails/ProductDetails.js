@@ -18,20 +18,18 @@ import ProductNotFoundContainer from './ProductNotFound';
 
 @provideHooks({
   defer: ({ store: { dispatch, getState }, params }) => {
-    const { productdetails: { currentsku, loaded, loading }, pincode: { selectedPincode }, reviews } = getState();
+    const { productdetails: { currentsku }, pincode: { selectedPincode }, reviews } = getState();
     const pincode = selectedPincode || PINCODE;
     if (currentsku !== params.skuId) {
       dispatch(loadProductDescription(params.skuId, pincode));
     }
-    if (loaded && !loading) {
-      if (currentsku !== params.skuId || reviews.data.length === 0) {
-        dispatch(loadReview(params.skuId));
-      }
-      dispatch(loadColorProducts(params.skuId, pincode));
-      dispatch(loadRelatedProducts(params.skuId, pincode));
-      dispatch(setRecentlyViewed(params.skuId));
-      dispatch(loadEmiOptions(params.skuId, pincode));
+    if (currentsku !== params.skuId || reviews.data.length === 0) {
+      dispatch(loadReview(params.skuId));
     }
+    dispatch(loadColorProducts(params.skuId, pincode));
+    dispatch(loadRelatedProducts(params.skuId, pincode));
+    dispatch(setRecentlyViewed(params.skuId));
+    dispatch(loadEmiOptions(params.skuId, pincode));
   }
 })
 @connect(({ productdetails }) => ({
