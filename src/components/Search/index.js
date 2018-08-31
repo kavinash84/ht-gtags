@@ -5,7 +5,6 @@ import { withRouter } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Autosuggest from 'react-autosuggest';
-import Input from 'hometown-components/lib/Input';
 import Button from 'hometown-components/lib/Buttons';
 import Div from 'hometown-components/lib/Div';
 import * as actionCreators from 'redux/modules/search';
@@ -37,13 +36,14 @@ const getSuggestionValue = suggestion => suggestion.name;
 const renderSuggestion = suggestion => <Link to={`/${suggestion.url_key}`}>{suggestion.name}</Link>;
 
 const renderInputComponent = inputProps => (
-  <Input
+  <input
     type="text"
     placeholder="Search"
     backgroundColor="rgba(0, 0, 0, 0.05)"
     borderColor="rgba(0, 0, 0, 0.03)"
     height="2.5rem"
     {...inputProps}
+    className={styles.inputSearch}
   />
 );
 /* eslint react/prop-types: 0 */

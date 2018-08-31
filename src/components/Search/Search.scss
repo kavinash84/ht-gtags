@@ -56,3 +56,14 @@
     }
   }
 }
+.inputSearch{
+  background:rgba(0, 0, 0, 0.05);
+  border:rgba(0, 0, 0, 0.03);
+  height:2.5rem;
+  width:100%;
+  padding: 0 10px;
+  box-sizing: border-box;
+  &:hover, &:focus {
+    outline: none;
+  };
+}
