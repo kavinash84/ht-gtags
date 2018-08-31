@@ -13,51 +13,108 @@ import ResponsiveModal from 'components/Modal';
 import LoginModal from 'components/Login/LoginModal';
 import Footer from 'components/Footer';
 import { sendDeliveryAddress, resetGuestRegisterFlag } from 'redux/modules/checkout';
-import { setAddress, clearShippingAddress } from 'redux/modules/shipping';
+import { bindActionCreators } from 'redux';
+import * as actionCreators from 'redux/modules/address';
+import { isBlank } from 'js-utility-functions';
 import MenuCheckout from './MenuCheckout';
-import ShippingForm from './ShippingForm';
+import AddressForm from './AddressForm';
 
 const addIcon = require('../../../static/round-add_circle_outline.svg');
 const styles = require('./DeliveryAddress.scss');
 
+const formValdiator = (props, data, formType) => {
+  const {
+    fullName,
+    fullNameFeedBackError,
+    email,
+    emailFeedBackError,
+    phone,
+    phoneFeedBackError,
+    address,
+    addressFeedBackError,
+    city,
+    pincode,
+    pincodeFeedBackError,
+    state
+  } = data;
+  const {
+    setNameError, setPhoneError, setEmailError, setAddressError, setPincodeError
+  } = props;
+  const fullNameError = isBlank(fullName) || fullNameFeedBackError;
+  const emailError = isBlank(email) || emailFeedBackError;
+  const phoneError = isBlank(phone) || phoneFeedBackError;
+  const pincodeError = isBlank(pincode) || pincodeFeedBackError;
+  const addressError = isBlank(address) || addressFeedBackError;
+  if (fullNameError || emailError || pincodeError || phoneError || addressError) {
+    setNameError(formType, fullNameError);
+    setEmailError(formType, emailError);
+    setPincodeError(formType, pincodeError);
+    setPhoneError(formType, phoneError);
+    setAddressError(formType, addressError);
+    return {
+      error: true,
+      data: null
+    };
+  }
+  return {
+    error: false,
+    data: {
+      fullName,
+      phone,
+      email,
+      pincode,
+      address,
+      city,
+      state
+    }
+  };
+};
 const mapStateToProps = ({
-  userLogin, app, checkout, myaddress, shipping
+  userLogin, app, checkout, myaddress, address, profile
 }) => ({
   isLoggedIn: userLogin.isLoggedIn,
   sessionId: app.sessionId,
   nextstep: checkout.nextstep,
   loading: checkout.loading,
   addresses: myaddress.data,
-  currentaddress: shipping.index
+  currentaddressindex: address.shipping.index,
+  shippingIsBilling: address.shippingIsBilling,
+  userEmail: profile.data.email,
+  address
 });
+const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
 @withRouter
 class DeliveryAddress extends Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
   state = {
-    shippingIsBilling: true,
     openLogin: false,
     addressform: false
   };
   componentDidMount() {
     const { dispatch } = this.context.store;
-    const { addresses, nextstep } = this.props;
+    const {
+      addresses, nextstep, setAddress, isLoggedIn, onChangeEmail, userEmail
+    } = this.props;
+    if (isLoggedIn) {
+      onChangeEmail('shipping', userEmail);
+      onChangeEmail('billing', userEmail);
+    }
     if (addresses.length) {
-      dispatch(setAddress(addresses[0], 0));
+      setAddress('shipping', addresses[0], 0);
     }
     if (nextstep.success) {
       dispatch(resetGuestRegisterFlag());
     }
   }
   componentWillReceiveProps(nextProps) {
-    const { isLoggedIn, nextstep } = this.props;
-    const { dispatch } = this.context.store;
+    const { isLoggedIn, nextstep, clearShippingAddress } = this.props;
     if (nextProps.isLoggedIn !== isLoggedIn) {
       this.setState({
         openLogin: false
       });
-      dispatch(clearShippingAddress());
+      clearShippingAddress();
     }
     if (nextProps.nextstep.success !== nextstep.success) {
       const { history } = this.props;
@@ -77,9 +134,10 @@ class DeliveryAddress extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    const { address: { shipping, billing, shippingIsBilling } } = this.props;
     const { isLoggedIn } = this.props;
-    if (this.state.shippingIsBilling) {
-      const shippingForm = this.shipping_form.validateForm();
+    if (shippingIsBilling) {
+      const shippingForm = formValdiator(this.props, shipping, 'shipping');
       if (shippingForm.error) {
         const message = isLoggedIn ? 'Please select delivery address' : 'Please Fill All Details Correctly !';
         alert(message);
@@ -89,7 +147,7 @@ class DeliveryAddress extends Component {
         dispatch(sendDeliveryAddress(
           sessionId,
           {
-            shippingIsBilling: this.state.shippingIsBilling,
+            shippingIsBilling,
             shippingAddress: shippingForm.data,
             billingAddress: shippingForm.data
           },
@@ -97,15 +155,15 @@ class DeliveryAddress extends Component {
         ));
       }
     } else {
-      const shippingForm = this.shipping_form.validateForm();
-      const billingForm = this.billing_form.validateForm();
+      const shippingForm = formValdiator(this.props, shipping, 'shipping');
+      const billingForm = formValdiator(this.props, billing, 'billing');
       if (shippingForm.error || billingForm.error) {
         alert('Please Fill All Details Correctly !');
       } else {
         const { dispatch } = this.context.store;
         const { sessionId } = this.props;
         dispatch(sendDeliveryAddress(sessionId, {
-          shippingIsBilling: this.state.shippingIsBilling,
+          shippingIsBilling,
           shippingAddress: shippingForm.data,
           billingAddress: billingForm.data
         }));
@@ -114,24 +172,22 @@ class DeliveryAddress extends Component {
   };
 
   toggleBillingForm = () => {
-    this.setState(prevState => ({
-      shippingIsBilling: !prevState.shippingIsBilling
-    }));
+    const { toggleShippingIsBilling } = this.props;
+    toggleShippingIsBilling();
   };
   handleClick = index => {
-    const { dispatch } = this.context.store;
-    const { addresses } = this.props;
+    const { addresses, setAddress } = this.props;
     this.setState({
       addressform: false
     });
-    dispatch(setAddress(addresses[index], index));
+    setAddress('shipping', addresses[index], index);
   };
   toggleAddAddress = e => {
+    const { setAddress } = this.props;
     e.preventDefault();
     this.setState({
       addressform: !this.state.addressform
     });
-    const { dispatch } = this.context.store;
     const data = {
       full_name: '',
       pincode: '',
@@ -139,15 +195,16 @@ class DeliveryAddress extends Component {
       mobile: '',
       address: '',
       city: '',
-      state: ''
+      state: '',
+      index: null
     };
-    dispatch(setAddress(data));
+    setAddress('shipping', data, null);
   };
   render() {
     const {
-      isLoggedIn, history, loading, addresses, currentaddress
+      isLoggedIn, history, loading, addresses, currentaddressindex
     } = this.props;
-    // const { shippingIsBilling } = this.state;
+    const { shippingIsBilling, userEmail } = this.props;
     const { addressform } = this.state;
     return (
       <Div type="block">
@@ -165,7 +222,7 @@ class DeliveryAddress extends Component {
                   {addresses.map((item, index) => (
                     <Div col="4" pr="0.625rem" key={item.id_customer_address}>
                       <button
-                        className={`${styles.addressBtn} ${index === currentaddress ? styles.active : null}`}
+                        className={`${styles.addressBtn} ${index === currentaddressindex ? styles.active : null}`}
                         onClick={() => this.handleClick(index)}
                       >
                         <b>{item.full_name}</b>
@@ -192,26 +249,17 @@ class DeliveryAddress extends Component {
               )}
               <Div col="5" mt="0">
                 <form onSubmit={this.handleSubmit}>
-                  <ShippingForm
-                    ref={shippingform => {
-                      if (shippingform) {
-                        this.shipping_form = shippingform.getWrappedInstance();
-                      }
-                    }}
-                    hidden={isLoggedIn && !addressform}
-                  />
-                  {/* <input type="checkbox" value={shippingIsBilling} onChange={this.toggleBillingForm} />
-                  <Label>Different Billing Address ?</Label>
+                  {(addressform || !isLoggedIn) && (
+                    <AddressForm formType="shipping" isLoggedIn={isLoggedIn} userEmail={userEmail} />
+                  )}
+                  <div>
+                    <input type="checkbox" value={!shippingIsBilling} onChange={this.toggleBillingForm} />
+                    <Label>Different Billing Address ?</Label>
+                  </div>
+                  {!shippingIsBilling && (
+                    <AddressForm formType="billing" isLoggedIn={isLoggedIn} userEmail={userEmail} />
+                  )}
 
-                  <BillingForm
-                ref={billingform => {
-                  if (billingform) {
-                    console.log(billingform);
-                    this.biling_form = billingform.getWrappedInstance();
-                    console.log(this.billing_form); // Don't know why it is undefined !
-                  }
-                }}
-                /> */}
                   <Div col="6">
                     <Button
                       type="submit"
@@ -264,7 +312,8 @@ DeliveryAddress.defaultProps = {
   history: {},
   location: {},
   addresses: [],
-  currentaddress: 0
+  currentaddressindex: 0,
+  userEmail: ''
 };
 DeliveryAddress.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
@@ -274,6 +323,13 @@ DeliveryAddress.propTypes = {
   addresses: PropTypes.array,
   nextstep: PropTypes.bool.isRequired,
   location: PropTypes.object,
-  currentaddress: PropTypes.number
+  currentaddressindex: PropTypes.number,
+  address: PropTypes.object.isRequired,
+  shippingIsBilling: PropTypes.bool.isRequired,
+  setAddress: PropTypes.func.isRequired,
+  clearShippingAddress: PropTypes.func.isRequired,
+  toggleShippingIsBilling: PropTypes.func.isRequired,
+  userEmail: PropTypes.string,
+  onChangeEmail: PropTypes.func.isRequired
 };
-export default connect(mapStateToProps, null, null, { withRef: true })(DeliveryAddress);
+export default connect(mapStateToProps, mapDispatchToProps)(DeliveryAddress);
