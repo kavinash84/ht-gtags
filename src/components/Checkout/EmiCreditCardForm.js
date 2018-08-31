@@ -12,7 +12,6 @@ const YEARS = [...Array(21)];
 
 const onChangeDetails = (dispatcher, gateway) => e => {
   const { name, value } = e.target;
-  console.log(name, value, gateway);
 
   dispatcher({ gateway, data: { [name]: value } });
 };
@@ -75,7 +74,4 @@ CardForm.propTypes = {
   setPaymentDetails: PropTypes.func.isRequired,
   details: PropTypes.object.isRequired
 };
-export default connect(
-  mapStateToProps,
-  null
-)(CardForm);
+export default connect(mapStateToProps, null)(CardForm);

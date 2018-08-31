@@ -35,7 +35,6 @@ export default function reducer(state = initialState, action = {}) {
         error: action.error
       };
     case ADD_REVIEW:
-      console.log(action);
       return {
         ...state,
         adding: true,
@@ -43,7 +42,6 @@ export default function reducer(state = initialState, action = {}) {
         error: false
       };
     case ADD_REVIEW_SUCCESS:
-      console.log(action);
       return {
         ...state,
         adding: false,
@@ -51,7 +49,6 @@ export default function reducer(state = initialState, action = {}) {
         error: false
       };
     case ADD_REVIEW_FAIL:
-      console.log(action);
       return {
         ...state,
         adding: false,

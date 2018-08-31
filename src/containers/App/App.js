@@ -160,7 +160,6 @@ export default class App extends Component {
     }
     if (!isLoggedIn && nextProps.login.isLoggedIn) {
       dispatch(synCart(sessionId, pincode));
-      console.log(waitlist);
       if (waitlist !== '') dispatch(syncWishList());
       const query = new URLSearchParams(this.props.location.search);
       this.props.pushState(query.get('redirect') || '/');

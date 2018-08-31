@@ -16,7 +16,6 @@ import PaymentOptions from 'components/Checkout/PaymentOptions';
 @provideHooks({
   fetch: async ({ store: { dispatch, getState } }) => {
     const { app: { sessionId }, cart } = getState();
-    console.log(cart.data);
     if (cart && cart.length !== 0) {
       await dispatch(load(sessionId));
       /* setting default paymentGateway in API */
