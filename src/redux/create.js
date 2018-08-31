@@ -50,7 +50,7 @@ export default function createStore({
       const { userLogin: { meta } } = data;
       const [xId] = Object.keys(meta).filter(key => key !== 'customerId');
       helpers.client.setCustomerInfo('customerId', meta.customerId);
-      helpers.client.setXId(xId, meta.xId);
+      helpers.client.setXId(xId, meta[xId]);
     }
     helpers.client.setJwtToken(authToken);
   }

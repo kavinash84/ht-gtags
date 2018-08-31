@@ -51,7 +51,7 @@ const setToken = ({ client }) => response => {
   if (response && response.token && response.token.meta) {
     const [xId] = Object.keys(response.token.meta).filter(key => key !== 'customerId');
     client.setCustomerInfo('customerId', response.token.meta.customerId);
-    client.setXId(xId, response.token.meta.xId);
+    client.setXId(xId, response.token.meta[xId]);
   }
 };
 

@@ -89,8 +89,9 @@ const setToken = ({ client }) => response => {
   client.setJwtToken(response.access_token);
   if (response && response.meta) {
     const [xId] = Object.keys(response.meta).filter(key => key !== 'customerId');
+    console.log(xId);
     client.setCustomerInfo('customerId', response.meta.customerId);
-    client.setXId(xId, response.meta.xId);
+    client.setXId(xId, response.meta[xId]);
   }
 };
 

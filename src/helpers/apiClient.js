@@ -13,8 +13,8 @@ export default function apiClient(req) {
   let session;
   let customerKey;
   let customerValue;
-  let loginKey;
-  let loginValue;
+  let xIdKey;
+  let xIdValue;
 
   instance.setJwtToken = newToken => {
     token = newToken;
@@ -33,9 +33,9 @@ export default function apiClient(req) {
     customerValue = value;
   };
 
-  instance.setXId = (key, value) => {
-    loginKey = key;
-    loginValue = value;
+  instance.setXId = (id, value) => {
+    xIdKey = id;
+    xIdValue = value;
   };
 
   instance.interceptors.request.use(
@@ -65,9 +65,9 @@ export default function apiClient(req) {
         conf.headers['X-CUSTOMER-VALUE'] = customerValue;
       }
 
-      if (loginKey && loginValue) {
-        conf.headers['X-ID-KEY'] = loginKey;
-        conf.headers['X-ID-VALUE'] = loginValue;
+      if (xIdKey && xIdValue) {
+        conf.headers['X-ID-KEY'] = xIdKey;
+        conf.headers['X-ID-VALUE'] = xIdValue;
       }
 
       return conf;
