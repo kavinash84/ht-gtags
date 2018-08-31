@@ -86,6 +86,11 @@ const setToken = ({ client }) => response => {
   /* setting cookie for server call */
   cookie.set('Authorization', `Bearer ${response.access_token}`);
   client.setJwtToken(response.access_token);
+  if (response && response.meta) {
+    const [xId] = Object.keys(response.meta).filter(key => key !== 'customerId');
+    client.setCustomerInfo('customerId', response.meta.customerId);
+    client.setXId(xId, response.meta.xId);
+  }
 };
 
 export const isLoaded = globalState => globalState.login && globalState.login.loaded;

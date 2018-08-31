@@ -100,7 +100,7 @@ const routes = [
       { path: '/payment-failed/:orderId?', exact: true, component: PaymentFailure },
       { path: '/bulk-order', exact: true, component: BulkOrder },
       {
-        path: '/:category(furniture|home-decor|homefurnishings|bath|kitchenware|tableware)',
+        path: '/:category(furniture|home-decor|homefurnishings|home-improvement|kitchenware|tableware)',
         exact: true,
         component: Category
       },

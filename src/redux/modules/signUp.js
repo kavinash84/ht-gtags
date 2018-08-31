@@ -45,8 +45,13 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 const setToken = ({ client }) => response => {
-  cookie.set('Authorization', `Bearer ${response.access_token}`, { expires: TOKEN_EXPIRY });
+  cookie.set('Authorization', `Bearer ${response.token.access_token}`, { expires: TOKEN_EXPIRY });
   client.setJwtToken(response.token.access_token);
+  if (response && response.token && response.token.meta) {
+    const [xId] = Object.keys(response.token.meta).filter(key => key !== 'customerId');
+    client.setCustomerInfo('customerId', response.token.meta.customerId);
+    client.setXId(xId, response.token.meta.xId);
+  }
 };
 
 export function isLoaded(globalState) {
