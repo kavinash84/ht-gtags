@@ -14,7 +14,8 @@ import Div from 'hometown-components/lib/Div';
 import { Link } from 'react-router-dom';
 import { Label } from 'hometown-components/lib/Label';
 import Img from 'hometown-components/lib/Img';
-import { validateEmail, isBlank, validateMobile } from 'js-utility-functions';
+import { validateEmail, isBlank } from 'js-utility-functions';
+import { validateMobile } from 'utils/validation';
 import { LOGIN_URL } from 'helpers/Constants';
 import { signUp } from 'redux/modules/signUp';
 
@@ -58,11 +59,11 @@ export default class SignupFormContainer extends Component {
   };
   onChangePhone = e => {
     const { target: { value } } = e;
-    const checkError = validateMobile(value, 'Mobile no. should be 10 digits');
+    const checkError = !validateMobile(value);
     this.setState({
       phone: value,
-      phoneError: checkError.error,
-      phoneErrorMessage: checkError.error ? checkError.errorMessage : ''
+      phoneError: checkError,
+      phoneErrorMessage: checkError ? 'Mobile no. should be 10 digits' : ''
     });
   };
   onChangePassword = e => {

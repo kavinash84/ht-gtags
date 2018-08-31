@@ -123,3 +123,5 @@ export const getCardType = num => {
       return 'other';
   }
 };
+
+export const validateMobile = num => RegExp(/^[6-9]\d{9}$/).test(num);
