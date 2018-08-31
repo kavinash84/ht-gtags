@@ -726,6 +726,16 @@
 	  font-family: regular;
 		text-transform: capitalize;
 	}
+	.react-autosuggest__suggestion {
+	  cursor: pointer;
+		padding: 10px 20px;
+	}
+	.react-autosuggest__input--focused {
+	  outline: none;
+	}
+	.react-autosuggest__suggestion--highlighted {
+	  background-color: #ddd;
+	}
 }
 
 /* Wishlist Animation Key Frames */
