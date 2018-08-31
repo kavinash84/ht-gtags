@@ -36,15 +36,7 @@ const getSuggestionValue = suggestion => suggestion.name;
 const renderSuggestion = suggestion => <Link to={`/${suggestion.url_key}`}>{suggestion.name}</Link>;
 
 const renderInputComponent = inputProps => (
-  <input
-    type="text"
-    placeholder="Search"
-    backgroundColor="rgba(0, 0, 0, 0.05)"
-    borderColor="rgba(0, 0, 0, 0.03)"
-    height="2.5rem"
-    {...inputProps}
-    className={styles.inputSearch}
-  />
+  <input type="text" placeholder="Search" {...inputProps} className={styles.inputSearch} />
 );
 /* eslint react/prop-types: 0 */
 const renderSuggestionsContainer = ({ loaded }) => ({ containerProps, children }) => (
