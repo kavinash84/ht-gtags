@@ -30,6 +30,7 @@ export default function reducer(state = initialState, action = {}) {
         response: action.result,
         accessToken: action.result.token.access_token,
         refreshToken: action.result.token.refresh_token,
+        meta: action.result && action.result.token && action.result.token.meta,
         errorMessage: null
       };
     case SIGNUP_FAIL:
