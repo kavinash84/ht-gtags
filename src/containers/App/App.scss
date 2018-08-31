@@ -490,7 +490,15 @@
 			transform: rotate(90deg);
 			top: initial !important;
 		}
+		.pdpThumbSliderItem {
+			padding: 2px 0;
+		}
+		.slick-current {
+			border: 1px solid $primary;
+			opacity: 0.8;
+		}
 	}
+
 	.prodCarousel {
 		.slick-slide {
 			max-width: 293px;
