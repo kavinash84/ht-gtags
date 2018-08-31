@@ -34,7 +34,6 @@ const mapStateToProps = ({ paymentoptions, app }) => ({
 });
 
 const onGetCardType = (dispatcher, sessionId, gateway) => e => {
-  console.log(e.target.value);
   const { value } = e.target;
   dispatcher(value, sessionId, gateway);
 };
@@ -131,4 +130,7 @@ CardForm.propTypes = {
   sessionId: PropTypes.string,
   cardType: PropTypes.string
 };
-export default connect(mapStateToProps, mapDispatchToProps)(CardForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CardForm);

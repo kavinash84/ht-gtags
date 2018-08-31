@@ -80,7 +80,6 @@ export const updateUserProfile = data => ({
       const response = await client.put(UPDATEPROFILE_API, postData);
       return response;
     } catch (error) {
-      console.log('Logged In Profile Reducer catch', error);
       throw error;
     }
   }

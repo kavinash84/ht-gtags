@@ -6,7 +6,6 @@ import { load as loadPaymentStatus, isLoaded } from 'redux/modules/paymentstatus
 @provideHooks({
   fetch: async ({ store: { dispatch, getState }, params }) => {
     const { status } = params;
-    console.log(status);
     if (!isLoaded(getState())) {
       dispatch(loadPaymentStatus(status));
     }

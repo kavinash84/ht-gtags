@@ -258,7 +258,13 @@ class ProductDetails extends React.Component {
                   </Div>
                 </Row>
                 <Row display="block" mt="1.25rem" mb="0" mr="0" ml="0">
-                  <ProductDesc desc={shortDesccription} showmore={showmore} toggleShowMore={this.toggleShowMore} />
+                  {shortDesccription && (
+                    <ProductDesc
+                      desc={shortDesccription || ''}
+                      showmore={showmore}
+                      toggleShowMore={this.toggleShowMore}
+                    />
+                  )}
                   {/* <button onClick={this.toggleShowMore}></button> */}
                   <Specs specs={groupedAttributes} pincode={pincode.selectedPincode} />
                   <Reviews col="12" reviewItems={reviews.data} pr="2.5rem" />
@@ -323,4 +329,7 @@ ProductDetails.propTypes = {
   addToWaitList: PropTypes.func.isRequired,
   toggleReviewBox: PropTypes.func.isRequired
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductDetails);

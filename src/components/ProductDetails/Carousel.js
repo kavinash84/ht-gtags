@@ -1,46 +1,57 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Section from 'hometown-components/lib/Section';
+import Slider from 'react-slick';
 import CarouselItem from './CarouselItem';
-import SlickSlider from '../SlickSlider';
 
-const adjustSlides = (length, data) => ({
-  customPaging(i) {
-    return (
-      <a href={`#${i}`}>
-        <img src={`${data[i].url}.jpg`} alt="" />
-      </a>
-    );
-  },
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  autoplay: false,
-  infinite: false,
-  dots: true,
-  dotsClass: 'slick-dots slick-thumb'
-});
+/* eslint-disable */
+export default class ProductDetailSlider extends Component {
+  state = {
+    nav1: null,
+    nav2: null
+  };
 
-export default class CategoryCarousel extends Component {
+  componentDidMount() {
+    this.setState({
+      nav1: this.slider1,
+      nav2: this.slider2
+    });
+  }
+
   render() {
     const { data, title } = this.props;
     return (
-      <Section display="flex" p="0" pt="0" mb="0" className="prodDetailsCarousel">
-        <SlickSlider settings={adjustSlides(data.length, data)}>
+      <div>
+        <Slider asNavFor={this.state.nav2} ref={slider => (this.slider1 = slider)}>
           {data.map(slide => (
             <CarouselItem key={slide.id_catalog_product_image} image={`${slide.url}.jpg`} name={title} />
           ))}
-        </SlickSlider>
-      </Section>
+        </Slider>
+        <Slider
+          asNavFor={this.state.nav1}
+          ref={slider => (this.slider2 = slider)}
+          slidesToShow={6}
+          swipeToSlide
+          focusOnSelect
+          vertical
+          verticalSwiping
+        >
+          {data.map(slide => (
+            <div>
+              <img key={slide.id_catalog_product_image} src={`${slide.url}.jpg`} alt={title} />
+            </div>
+          ))}
+        </Slider>
+      </div>
     );
   }
 }
 
-CategoryCarousel.defaultProps = {
+ProductDetailSlider.defaultProps = {
   data: [],
   title: ''
 };
 
-CategoryCarousel.propTypes = {
+ProductDetailSlider.propTypes = {
   data: PropTypes.array,
   title: PropTypes.string
 };

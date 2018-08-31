@@ -1,4 +1,5 @@
 import { COUPON as COUPON_API } from 'helpers/apiUrls';
+import { updateCartSummary } from 'redux/modules/cart';
 
 const LOAD_COUPONS = 'coupon/LOAD_COUPONS';
 const LOAD_COUPONS_SUCCESS = 'coupon/LOAD_COUPONS_SUCCESS';
@@ -107,29 +108,35 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-export const applyCoupon = (coupon, sessionId, pincode) => ({
-  types: [APPLY_COUPON, APPLY_COUPON_SUCCESS, APPLY_COUPON_FAIL],
-  promise: async ({ client }) => {
-    try {
-      const postData = { coupon, session_id: sessionId, pincode };
-      return await client.post(COUPON_API, postData);
-    } catch (error) {
-      throw error;
+export const applyCoupon = (coupon, sessionId, pincode) => dispatch =>
+  dispatch({
+    types: [APPLY_COUPON, APPLY_COUPON_SUCCESS, APPLY_COUPON_FAIL],
+    promise: async ({ client }) => {
+      try {
+        const postData = { coupon, session_id: sessionId, pincode };
+        const response = await client.post(COUPON_API, postData);
+        dispatch(updateCartSummary(response.summary));
+        return response;
+      } catch (error) {
+        throw error;
+      }
     }
-  }
-});
+  });
 
-export const removeCoupon = (coupon, sessionId, pincode) => ({
-  types: [REMOVE_COUPON, REMOVE_COUPON_SUCCESS, REMOVE_COUPON_FAIL],
-  promise: async ({ client }) => {
-    try {
-      const postData = { coupon, session_id: sessionId, pincode };
-      return await client.delete(COUPON_API, { data: postData });
-    } catch (error) {
-      throw error;
+export const removeCoupon = (coupon, sessionId, pincode) => dispatch =>
+  dispatch({
+    types: [REMOVE_COUPON, REMOVE_COUPON_SUCCESS, REMOVE_COUPON_FAIL],
+    promise: async ({ client }) => {
+      try {
+        const postData = { coupon, session_id: sessionId, pincode };
+        const response = await client.delete(COUPON_API, { data: postData });
+        dispatch(updateCartSummary(response.summary));
+        return response;
+      } catch (error) {
+        throw error;
+      }
     }
-  }
-});
+  });
 
 // export const loadCoupons = (sku, pincode = '110004') => ({
 //   types: [LOAD_COLOR_PRODUCTS, LOAD_COLOR_PRODUCTS_SUCCESS, LOAD_COLOR_PRODUCTS_FAIL],
