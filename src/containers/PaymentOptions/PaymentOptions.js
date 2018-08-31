@@ -6,6 +6,8 @@ import { withRouter } from 'react-router';
 import { load, setSelectedGatewayInSession } from 'redux/modules/paymentoptions';
 import { getPaymentOptions } from 'selectors/payments';
 import { getCartList } from 'selectors/cart';
+import Menu from 'components/MenuWithLogoOnly';
+import Section from 'hometown-components/lib/Section';
 import PaymentOptions from 'components/Checkout/PaymentOptions';
 
 @withRouter
@@ -15,7 +17,11 @@ import PaymentOptions from 'components/Checkout/PaymentOptions';
 }))
 @provideHooks({
   fetch: async ({ store: { dispatch, getState } }) => {
-    const { app: { sessionId }, cart } = getState();
+    const {
+      app: { sessionId },
+      cart
+    } = getState();
+    console.log(cart.data);
     if (cart && cart.length !== 0) {
       await dispatch(load(sessionId));
       /* setting default paymentGateway in API */
@@ -33,9 +39,12 @@ export default class PaymentOptionsContainer extends Component {
   render() {
     const { availableOptions } = this.props;
     return (
-      <div>
-        <PaymentOptions data={availableOptions} />
-      </div>
+      <Section p="0rem" mb="0">
+        <div className="wrapper">
+          <Menu />
+          <PaymentOptions data={availableOptions} />
+        </div>
+      </Section>
     );
   }
 }

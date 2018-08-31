@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
@@ -134,7 +134,9 @@ class DeliveryAddress extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { address: { shipping, billing, shippingIsBilling } } = this.props;
+    const {
+      address: { shipping, billing, shippingIsBilling }
+    } = this.props;
     const { isLoggedIn } = this.props;
     if (shippingIsBilling) {
       const shippingForm = formValdiator(this.props, shipping, 'shipping');
@@ -208,19 +210,22 @@ class DeliveryAddress extends Component {
     const { addressform } = this.state;
     return (
       <Div type="block">
-        <MenuCheckout history={history} />
+        <MenuCheckout page="delivery" history={history} />
         <Section display="flex" pt="1.25rem" mb="1rem" height="auto">
           <Container type="container" pr="2rem" pl="2rem">
-            <Row display="block" mr="0" ml="0">
-              {isLoggedIn && (
+            {isLoggedIn && (
+              <Fragment>
                 <Row display="block" mr="0" ml="0">
                   <Div col="12">
-                    <Label fontSize="0.875em" mb="0.875rem">
+                    <Label fontSize="1.125rem" mb="0.875rem">
                       SELECT SHIPPING ADDRESS
                     </Label>
                   </Div>
+                </Row>
+
+                <Row display="block" mr="0" ml="0">
                   {addresses.map((item, index) => (
-                    <Div col="4" pr="0.625rem" key={item.id_customer_address}>
+                    <Div className={styles.addressBlock} col="4" pr="0.625rem" key={item.id_customer_address}>
                       <button
                         className={`${styles.addressBtn} ${index === currentaddressindex ? styles.active : null}`}
                         onClick={() => this.handleClick(index)}
@@ -246,61 +251,89 @@ class DeliveryAddress extends Component {
                     </button>
                   </Div>
                 </Row>
-              )}
-              <Div col="5" mt="0">
-                <form onSubmit={this.handleSubmit}>
-                  {(addressform || !isLoggedIn) && (
+              </Fragment>
+            )}
+            <Div col="5" mt="0">
+              <form onSubmit={this.handleSubmit}>
+                {(addressform || !isLoggedIn) && (
+                  <Row display="block" mr="0" ml="0">
+                    <Div col="12">
+                      <Label fontSize="1.125rem" mb="0.875rem">
+                        SHIPPING ADDRESS
+                      </Label>
+                    </Div>
                     <AddressForm formType="shipping" isLoggedIn={isLoggedIn} userEmail={userEmail} />
-                  )}
-                  <div>
-                    <input type="checkbox" value={!shippingIsBilling} onChange={this.toggleBillingForm} />
-                    <Label>Different Billing Address ?</Label>
-                  </div>
-                  {!shippingIsBilling && (
-                    <AddressForm formType="billing" isLoggedIn={isLoggedIn} userEmail={userEmail} />
-                  )}
-
-                  <Div col="6">
-                    <Button
-                      type="submit"
-                      size="block"
-                      btnType="primary"
-                      fontFamily="regular"
-                      height="42px"
-                      mt="0.5rem"
-                      disabled={loading}
-                    >
-                      {loading ? 'Loading...' : 'Next: Payment Options'}
-                    </Button>
+                  </Row>
+                )}
+                <Row display="block" mr="0" ml="0" mt="1rem" mb="0.5rem">
+                  <Div col="12">
+                    <div className="checkbox">
+                      <input
+                        type="checkbox"
+                        id="checkbox"
+                        value={!shippingIsBilling}
+                        onChange={this.toggleBillingForm}
+                      />
+                      {/* eslint-disable */}
+                      <label htmlFor="checkbox" />
+                    </div>
+                    <Label fontSize="0.875em" mt="0" mb="0" ml="0.625rem" htmlFor="checkbox">
+                      Different Billing Address ?
+                    </Label>
                   </Div>
-                </form>
-              </Div>
-              {!isLoggedIn && (
-                <Div col="3" ml="20%">
-                  <Label mt="0" mb="0" color="textLight">
-                    Have an existing account with hometown?
-                  </Label>
+                </Row>
+
+                {!shippingIsBilling && (
+                  <Row display="block" mr="0" ml="0" mt="1.5rem">
+                    <Div col="12">
+                      <Label fontSize="1.125rem" mb="0.875rem">
+                        Billing ADDRESS
+                      </Label>
+                    </Div>
+                    <AddressForm formType="billing" isLoggedIn={isLoggedIn} userEmail={userEmail} />
+                  </Row>
+                )}
+
+                <Div col="6">
                   <Button
+                    type="submit"
+                    size="block"
                     btnType="primary"
                     fontFamily="regular"
                     height="42px"
                     mt="0.5rem"
-                    fontSize="0.875rem"
-                    p="0.375rem 5rem"
-                    onClick={this.onOpenLoginModal}
+                    disabled={loading}
                   >
-                    LOGIN
+                    {loading ? 'Loading...' : 'Next: Payment Options'}
                   </Button>
-                  <ResponsiveModal
-                    classNames={{ modal: styles.loginModal }}
-                    onCloseModal={this.onCloseLoginModal}
-                    open={this.state.openLogin}
-                  >
-                    <LoginModal />
-                  </ResponsiveModal>
                 </Div>
-              )}
-            </Row>
+              </form>
+            </Div>
+            {!isLoggedIn && (
+              <Div col="3" ml="20%">
+                <Label mt="0" mb="0" color="textLight">
+                  Have an existing account with hometown?
+                </Label>
+                <Button
+                  btnType="primary"
+                  fontFamily="regular"
+                  height="42px"
+                  mt="0.5rem"
+                  fontSize="0.875rem"
+                  p="0.375rem 5rem"
+                  onClick={this.onOpenLoginModal}
+                >
+                  LOGIN
+                </Button>
+                <ResponsiveModal
+                  classNames={{ modal: styles.loginModal }}
+                  onCloseModal={this.onCloseLoginModal}
+                  open={this.state.openLogin}
+                >
+                  <LoginModal />
+                </ResponsiveModal>
+              </Div>
+            )}
           </Container>
         </Section>
         <Footer />
@@ -332,4 +365,7 @@ DeliveryAddress.propTypes = {
   userEmail: PropTypes.string,
   onChangeEmail: PropTypes.func.isRequired
 };
-export default connect(mapStateToProps, mapDispatchToProps)(DeliveryAddress);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DeliveryAddress);

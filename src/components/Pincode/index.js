@@ -37,13 +37,14 @@ const Pincode = ({
   loaded,
   results,
   showResults,
-  onCloseModal
+  onCloseModal,
+  color
 }) => (
   <Div className={styles.pincode} pt="0" pb="0.3125rem">
     <Input
       type="text"
       placeholder="Enter Pincode / City"
-      backgroundColor="#f2f2f2"
+      backgroundColor={color}
       borderColor="rgba(0, 0, 0, 0.03)"
       height="2.5rem"
       onChange={onChange(setPincodeQuery, load)}
@@ -75,7 +76,8 @@ Pincode.defaultProps = {
   loading: false,
   loaded: false,
   results: [],
-  showResults: false
+  showResults: false,
+  color: '#fff'
 };
 
 Pincode.propTypes = {
@@ -87,7 +89,8 @@ Pincode.propTypes = {
   load: PropTypes.func.isRequired,
   setPincodeQuery: PropTypes.func.isRequired,
   setPincode: PropTypes.func.isRequired,
-  onCloseModal: PropTypes.func.isRequired
+  onCloseModal: PropTypes.func.isRequired,
+  color: PropTypes.string
 };
 
 export default connect(

@@ -9,7 +9,9 @@ import * as actionCreators from 'redux/modules/address';
 const styles = require('./Pincode.scss');
 
 const onChange = (dispatcher, onChangePincode, loadPincodeDetails, formType) => e => {
-  const { target: { value } } = e;
+  const {
+    target: { value }
+  } = e;
   dispatcher(formType, value);
   onChangePincode(formType, value);
   if (value.length === 6) loadPincodeDetails(formType, value);
@@ -26,13 +28,13 @@ const Pincode = ({
   feedBackMessage,
   formType
 }) => (
-  <Div className={styles.pincode} pt="0" pb="0.3125rem">
+  <Div className={styles.checkoutPincode} pt="0" pb="0.3125rem">
     <FormInput
       label="Pincode"
       type="text"
       placeholder=""
-      backgroundColor="#f2f2f2"
-      borderColor="rgba(0, 0, 0, 0.03)"
+      backgroundColor="#fff"
+      borderColor="rgba(151,151,151,0.47)"
       height="2.5rem"
       onChange={onChange(setPincodeQuery, onChangePincode, loadPincodeDetails, formType)}
       value={pincode}
@@ -56,4 +58,7 @@ Pincode.propTypes = {
   formType: PropTypes.string.isRequired
 };
 
-export default connect(null, mapDispatchToProps)(Pincode);
+export default connect(
+  null,
+  mapDispatchToProps
+)(Pincode);

@@ -22,3 +22,8 @@
 .addAddressBtn {
   text-align: center;
 }
+.addressBlock {
+  &:nth-child(3n+1) {
+    clear: both;
+  }
+}

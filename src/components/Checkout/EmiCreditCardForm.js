@@ -74,4 +74,7 @@ CardForm.propTypes = {
   setPaymentDetails: PropTypes.func.isRequired,
   details: PropTypes.object.isRequired
 };
-export default connect(mapStateToProps, null)(CardForm);
+export default connect(
+  mapStateToProps,
+  null
+)(CardForm);

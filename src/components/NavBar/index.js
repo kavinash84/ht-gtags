@@ -21,6 +21,12 @@ const NavBar = ({
             {menuItem.name}
           </Link>
         ))}
+        <Link onClick={exitOnClick} to="/modular-kitchens">
+          Modular Kitchens
+        </Link>
+        <Link onClick={exitOnClick} to="/design-build">
+          Design & Build
+        </Link>
       </div>
     </Container>
   </div>
