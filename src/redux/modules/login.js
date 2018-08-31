@@ -31,6 +31,7 @@ export default function reducer(state = initialState, action = {}) {
         loaded: true,
         accessToken: action.result.access_token,
         refreshToken: action.result.refresh_token,
+        meta: action.result.meta,
         loginError: ''
       };
     case LOGIN_FAIL:
