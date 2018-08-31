@@ -28,6 +28,7 @@ import { setProductPosition } from 'redux/modules/productdetails';
 import { formatAmount } from 'utils/formatters';
 import { calculateDiscount, calculateSavings, calculateLowestEmi } from 'utils/helper';
 import { getSKUList } from 'selectors/wishlist';
+import { getShortDescription } from 'selectors/products';
 
 import ProductDetailsCarousel from './Carousel';
 import BreadCrumb from './BreadCrumb';
@@ -84,7 +85,8 @@ class ProductDetails extends React.Component {
     store: PropTypes.object.isRequired
   };
   state = {
-    openLogin: false
+    openLogin: false,
+    showmore: true
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.isLoggedIn) {
@@ -108,7 +110,11 @@ class ProductDetails extends React.Component {
     const { dispatch } = this.context.store;
     dispatch(addReview(sku, data));
   };
-
+  toggleShowMore = () => {
+    this.setState({
+      showmore: !this.state.showmore
+    });
+  };
   render() {
     const {
       product,
@@ -132,20 +138,22 @@ class ProductDetails extends React.Component {
       images,
       simples,
       delivery_details: deliveryDetails,
-      attributes,
+      // attributes,
       grouped_attributes: groupedAttributes,
       sku,
       groupedattributes,
       reviews: { count, rating }
     } = product;
     const { category_details: categoryDetails } = meta;
-
+    const shortDesccription = getShortDescription(groupedAttributes);
     const simpleSku = Object.keys(simples)[0];
     const shipping = simples[simpleSku].groupedattributes.product_shipping_cost;
     const isEmiAvailable = Number(simples[simpleSku].meta.no_emi) === 0;
     const { price, special_price: specialPrice } = meta;
     const checkSpecialPrice = specialPrice || price;
     const { adding, added } = reviews;
+    const offerImage = simples[simpleSku].groupedattributes.offer_image || null;
+    const { showmore } = this.state;
     return (
       <Div type="block">
         <Section p="0" mb="0" className={styles.pdpWrapper}>
@@ -204,11 +212,13 @@ class ProductDetails extends React.Component {
                     <EmiModal price={formatAmount(checkSpecialPrice)} data={emidata} key="emi" />
                   </ServiceDetails>
                 </Row>
-                <Row display="block" mt="0" mb="0" mr="0.9375rem" ml="0.9375rem">
-                  <Div col="6" mt="0" pr="0.3125rem">
-                    <Img src="http://via.placeholder.com/530x130" alt="" width="100%" mt="0" mb="0.625rem" />
-                  </Div>
-                </Row>
+                {offerImage && (
+                  <Row display="block" mt="0" mb="0" mr="0.9375rem" ml="0.9375rem">
+                    <Div col="6" mt="0" pr="0.3125rem">
+                      <Img src={offerImage} alt="" width="100%" mt="0" mb="0.625rem" />
+                    </Div>
+                  </Row>
+                )}
                 <Row display="block" mt="0" mb="0.625rem" mr="0.9375rem" ml="0.9375rem">
                   <Div col="6" mt="0" pr="0.3125rem">
                     <AddToCart
@@ -248,7 +258,8 @@ class ProductDetails extends React.Component {
                   </Div>
                 </Row>
                 <Row display="block" mt="1.25rem" mb="0" mr="0" ml="0">
-                  <ProductDesc desc={attributes.description} />
+                  <ProductDesc desc={shortDesccription} showmore={showmore} toggleShowMore={this.toggleShowMore} />
+                  {/* <button onClick={this.toggleShowMore}></button> */}
                   <Specs specs={groupedAttributes} pincode={pincode.selectedPincode} />
                   <Reviews col="12" reviewItems={reviews.data} pr="2.5rem" />
                   <AddReview
@@ -312,7 +323,4 @@ ProductDetails.propTypes = {
   addToWaitList: PropTypes.func.isRequired,
   toggleReviewBox: PropTypes.func.isRequired
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
