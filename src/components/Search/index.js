@@ -50,7 +50,7 @@ const renderInputComponent = inputProps => (
 const renderSuggestionsContainer = ({ loaded }) => ({ containerProps, children }) => (
   <div>
     {loaded && (
-      <Div {...containerProps} className={`${styles.searchList} ${styles.active}`}>
+      <Div {...containerProps} p="0" className={`${styles.searchList} ${styles.active}`}>
         {children}
       </Div>
     )}
