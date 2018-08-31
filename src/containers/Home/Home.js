@@ -28,7 +28,7 @@ import { getCities } from '../../selectors/homepage';
 }))
 export default class Home extends Component {
   state = {
-    showRibbon: false
+    showRibbon: true
   };
   handleRibbon = () => {
     this.setState({
