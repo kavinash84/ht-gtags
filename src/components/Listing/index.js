@@ -15,6 +15,7 @@ import { toggleWishList, wishListWaitList } from 'redux/modules/wishlist';
 // import { clearAllFilters } from 'redux/modules/products';
 import { setProductPosition } from 'redux/modules/productdetails';
 import { formFilterLink2, formatProductURL } from 'utils/helper';
+import { formatAmount } from 'utils/formatters';
 import TitleBar from './TitleBar';
 import Dropdown from '../Filters/Filters';
 import SortByFilters from '../Filters/SortByFilters';
@@ -215,7 +216,7 @@ class Listing extends React.Component {
                     skuLoading={isInWishList(loadingList, item.data.sku)}
                     rating={item.data.reviews.rating.toFixed(1)}
                     reviewsCount={item.data.reviews.count}
-                    savingAmount={item.data.max_price - item.data.max_special_price}
+                    savingAmount={formatAmount(item.data.max_price - item.data.max_special_price)}
                     deliveredBy={item.data.delivery_details[0].value}
                     colors={metaResults[index].data.color_group_count.split(' ')[0]}
                     setProductPosition={productPosition}
