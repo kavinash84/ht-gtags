@@ -418,6 +418,12 @@
 	.slick-initialized .slick-slide {
 		display: block !important;
 	}
+	.slick-slide img {
+    display: block;
+		&:hover {
+			outline: none;
+		}
+	}
 	.catCarousel, .prodCarousel {
 		.slick-next {
 			right: -40px !important;
