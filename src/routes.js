@@ -68,7 +68,7 @@ const routes = [
       { path: '/forgot-password/verify/reset/:hash', exact: true, component: isNotAuthenticated(ResetPassword) },
       { path: '/forgot-password', exact: true, component: isNotAuthenticated(ForgotPassword) },
       { path: '/wishlist', exact: true, component: isAuthenticated(Wishlist) },
-      { path: '/cart', exact: true, component: Cart },
+      { path: '/checkout/cart', exact: true, component: Cart },
       { path: '/my-orders', exact: true, component: isAuthenticated(MyOrder) },
       { path: '/my-address', exact: true, component: isAuthenticated(MyAddress) },
       { path: '/order-details', exact: true, component: OrderDetails },

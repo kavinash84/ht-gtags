@@ -1,4 +1,5 @@
 import { filterCategoryDetails } from 'utils/helper';
+import { CART_URL } from 'helpers/Constants';
 
 export default function gaMiddleware() {
   return ({ getState }) => next => action => {
@@ -12,7 +13,7 @@ export default function gaMiddleware() {
             vpv: location
           });
           window.google_tag_params.ecomm_pagetype = 'other';
-          if (location === '/cart') {
+          if (location === CART_URL) {
             window.google_tag_params.ecomm_pagetype = 'cart';
             if (getState().cart.summary) {
               window.google_tag_params.ecomm_totalvalue = getState().cart.summary.total;
