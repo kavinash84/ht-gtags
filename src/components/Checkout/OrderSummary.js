@@ -43,7 +43,7 @@ const OrderSummary = ({
         <Text color="rgba(0, 0, 0, 0.8);">
           Shipping
           <Span float="right" color="#000000" fontFamily="medium">
-            {shipping === 0 ? 'Free' : shipping}
+            {shipping === 0 ? 'Free' : `Rs. ${shipping}`}
           </Span>
         </Text>
         <Text color="rgba(0, 0, 0, 0.8);">
