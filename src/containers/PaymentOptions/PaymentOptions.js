@@ -9,6 +9,7 @@ import { getCartList } from 'selectors/cart';
 import Menu from 'components/MenuWithLogoOnly';
 import Section from 'hometown-components/lib/Section';
 import PaymentOptions from 'components/Checkout/PaymentOptions';
+import { CART_URL } from 'helpers/Constants';
 
 @withRouter
 @connect(({ paymentoptions, cart }) => ({
@@ -17,10 +18,7 @@ import PaymentOptions from 'components/Checkout/PaymentOptions';
 }))
 @provideHooks({
   fetch: async ({ store: { dispatch, getState } }) => {
-    const {
-      app: { sessionId },
-      cart
-    } = getState();
+    const { app: { sessionId }, cart } = getState();
     console.log(cart.data);
     if (cart && cart.length !== 0) {
       await dispatch(load(sessionId));
@@ -33,7 +31,7 @@ export default class PaymentOptionsContainer extends Component {
   componentDidMount() {
     const { cart, history } = this.props;
     if (cart && cart.length === 0) {
-      history.push('/cart');
+      history.push(CART_URL);
     }
   }
   render() {

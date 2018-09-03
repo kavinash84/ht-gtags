@@ -143,8 +143,12 @@ export const loginUserAfterSignUp = data => ({
 export const logout = () => ({
   types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
   promise: async ({ client }) => {
-    await client.put(LOGOUT_API);
-    await setToken({ client })({ access_token: null });
+    try {
+      await client.put(LOGOUT_API);
+      await setToken({ client })({ access_token: null });
+    } catch (err) {
+      throw err;
+    }
   }
 });
 

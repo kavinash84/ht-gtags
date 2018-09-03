@@ -8,15 +8,14 @@ import Menu from 'components/MenuWithLogoOnly';
 import Section from 'hometown-components/lib/Section';
 import { loadMyAddress } from 'redux/modules/myaddress';
 import { getCartList } from 'selectors/cart';
+import { CART_URL } from 'helpers/Constants';
 
 @connect(({ cart }) => ({
   cart: getCartList(cart)
 }))
 @provideHooks({
   defer: async ({ store: { dispatch, getState } }) => {
-    const {
-      userLogin: { isLoggedIn }
-    } = getState();
+    const { userLogin: { isLoggedIn } } = getState();
     if (isLoggedIn) {
       await dispatch(loadMyAddress());
     }
@@ -27,7 +26,7 @@ export default class DeliveryAddressContainer extends Component {
   componentDidMount() {
     const { cart, history } = this.props;
     if (cart && cart.length === 0) {
-      history.push('/cart');
+      history.push(CART_URL);
     }
   }
   render() {
