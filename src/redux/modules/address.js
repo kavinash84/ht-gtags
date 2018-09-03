@@ -1,6 +1,5 @@
 // Validators
-import { validateMobile } from 'js-utility-functions';
-import { isEmpty, pincode as pincodeIsValid } from 'utils/validation';
+import { isEmpty, pincode as pincodeIsValid, validateMobile } from 'utils/validation';
 
 const emailIsValid = value => !isEmpty(value) && /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value);
 
@@ -144,7 +143,7 @@ export default function reducer(state = initialState, action = {}) {
         [action.formType]: {
           ...state[action.formType],
           phone: action.phone,
-          phoneFeedBackError: validateMobile(action.phone).error
+          phoneFeedBackError: !validateMobile(action.phone)
         }
       };
     case SET_PINCODE:
