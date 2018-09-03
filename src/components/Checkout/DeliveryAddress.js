@@ -122,7 +122,7 @@ class DeliveryAddress extends Component {
       });
       clearShippingAddress();
     }
-    if (nextProps.nextstep.success !== nextstep.success) {
+    if (nextProps.nextstep.success && nextProps.nextstep.success !== nextstep.success) {
       const { history } = this.props;
       history.push('/checkout/payment-options');
     }
