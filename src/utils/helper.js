@@ -231,12 +231,17 @@ export const urlKeyResults = results => {
 
 export const formatProductURL = (name, sku) => {
   const productname = name
+    .replace(/[^a-zA-Z0-9]/g, '-')
     .split(' ')
     .join('-')
-    .toLowerCase()
-    .split('%')
-    .join('');
+    .toLowerCase();
   return `/${productname}/sku/${sku}`;
 };
 
 export const filterCategoryDetails = data => data.filter(item => item !== null);
+
+export const checkRedirection = path => {
+  const pattern = /^\/(login|signup)\/$/;
+  if (pattern.test(path)) return '/';
+  return path;
+};

@@ -7,7 +7,7 @@ import Row from 'hometown-components/lib/Row';
 import Heading from 'hometown-components/lib/Heading';
 import Div from 'hometown-components/lib/Div';
 import { isBlank } from 'js-utility-functions';
-import { validatePassword } from 'utils/validation';
+import { validateUpdatePassword } from 'utils/validation';
 import { updateUserPassword } from 'redux/modules/updatepassword';
 
 @connect(({ updatepassword }) => ({
@@ -45,7 +45,7 @@ export default class UpdatePasswordFormContainer extends Component {
   };
   onChangeNewPwd = e => {
     const { target: { value } } = e;
-    const checkError = validatePassword(value, 'Password must be at least 8 character long');
+    const checkError = validateUpdatePassword(value, 'Password should be minimum 4 and maximum 15 characters');
     this.setState({
       newPwd: value,
       newPwdError: checkError.error,
@@ -54,7 +54,7 @@ export default class UpdatePasswordFormContainer extends Component {
   };
   onChangeConfirmPwd = e => {
     const { target: { value } } = e;
-    const checkError = this.matchConfirmPassword(value);
+    const checkError = value === this.state.newPwd;
     this.setState({
       confirmPwd: value,
       confirmPwdError: checkError,
@@ -81,19 +81,13 @@ export default class UpdatePasswordFormContainer extends Component {
         oldPwdError: checkOldPwd,
         oldPwdErrorMessage: checkOldPwd ? "Old Password can't be blank" : '',
         newPwdError: checkNewPwd,
-        newPwdErrorMessage: checkNewPwd ? 'Password must be at least 6 character long' : '',
+        newPwdErrorMessage: checkNewPwd ? 'Password should be minimum 4 and maximum 15 characters' : '',
         confirmPwdError: checkConfirmPwd,
         confirmPwdErrorMessage: checkConfirmPwd ? "Confirm Password doesn't match" : ''
       });
     }
     const { dispatch } = this.context.store;
     dispatch(updateUserPassword(this.state));
-  };
-  matchConfirmPassword = value => {
-    if (value === this.state.newPwd) {
-      return false;
-    }
-    return true;
   };
 
   render() {

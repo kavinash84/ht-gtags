@@ -19,6 +19,7 @@ import { SIGNUP_URL, HOME_URL, LOGIN_URL, MY_WISHLIST_URL, MY_PROFILE_URL, CART_
 import { logout } from 'redux/modules/login';
 import { getCartCount } from 'selectors/cart';
 import { getWishListCount } from 'selectors/wishlist';
+import { checkRedirection } from 'utils/helper';
 
 const LogoIcon = require('../../../static/logo.png');
 const CartIcon = require('../../../static/cart-icon.svg');
@@ -80,7 +81,7 @@ export default class MenuSidebar extends Component {
   handleClick = URL => e => {
     e.preventDefault();
     const { history, router } = this.props;
-    history.push(`${URL}/?redirect=${router.location.pathname}`);
+    history.push(`${URL}/?redirect=${checkRedirection(router.location.pathname)}`);
   };
   render() {
     const styles = require('./TopBar.scss');
