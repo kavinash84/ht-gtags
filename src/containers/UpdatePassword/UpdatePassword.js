@@ -81,7 +81,7 @@ export default class UpdatePasswordFormContainer extends Component {
         oldPwdError: checkOldPwd,
         oldPwdErrorMessage: checkOldPwd ? "Old Password can't be blank" : '',
         newPwdError: checkNewPwd,
-        newPwdErrorMessage: checkNewPwd ? 'Password must be at least 6 character long' : '',
+        newPwdErrorMessage: checkNewPwd ? 'Password should be minimum 4 and maximum 15 characters' : '',
         confirmPwdError: checkConfirmPwd,
         confirmPwdErrorMessage: checkConfirmPwd ? "Confirm Password doesn't match" : ''
       });
