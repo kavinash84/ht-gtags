@@ -86,6 +86,13 @@ export const validatePassword = (value, message, validLength = 8) => {
   return { error: false, errorMessage: '' };
 };
 
+export const validateUpdatePassword = (value, message) => {
+  if (value.length >= 4 || value.length <= 15) {
+    return { error: true, errorMessage: message };
+  }
+  return { error: false, errorMessage: '' };
+};
+
 export const validateInputs = inputs => {
   const details = Object.values(Object.values(inputs)[0]);
   return details.filter(detail => detail === '').length > 0;
