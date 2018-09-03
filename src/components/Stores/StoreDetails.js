@@ -52,7 +52,7 @@ export default class StoreDetails extends Component {
                   TIMING
                 </Heading>
                 <Text fontSize="0.875em" mb="0rem" mt="0.3125rem" color="rgba(0, 0, 0, 0.5)">
-                  {store.timing || null}
+                  {store.timings || null}
                 </Text>
               </Div>
               <Div col="2">
