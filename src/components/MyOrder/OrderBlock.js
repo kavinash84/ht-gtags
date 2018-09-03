@@ -51,7 +51,7 @@ const OrderBlock = ({ order }) => (
               {order.order_items.map(item => (
                 <tr key={item.order_item_id}>
                   <td>
-                    <img className="thumb" src="http://via.placeholder.com/75x75" alt="" />
+                    <img className="thumb" src={item.image} alt="item.product_name" />
                   </td>
                   <td>{item.product_name || 'NOT AVAILABLE'}</td>
                   <td>{item.order_item_status_display_name || 'NOT AVAILABLE'}</td>
