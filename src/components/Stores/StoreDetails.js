@@ -14,7 +14,7 @@ import { hyphenedString } from 'utils/helper';
 const storesImg = require('../../../static/storedemoimg.jpg');
 
 const filterStore = (city, storeName, stores) =>
-  stores
+  stores.items.text
     .filter(store => hyphenedString(store.city.toLowerCase()) === city.toLowerCase())
     .filter(store => hyphenedString(store.store.toLowerCase()) === storeName.toLowerCase());
 
@@ -24,7 +24,7 @@ const filterStore = (city, storeName, stores) =>
 export default class StoreDetails extends Component {
   render() {
     const { city, storeName, stores } = this.props;
-    const store = filterStore(city, storeName, stores)[0];
+    const store = stores && filterStore(city, storeName, stores)[0];
     return (
       <Div type="block">
         <MenuWithBreadcrumb storeName={store.store} />
@@ -78,9 +78,11 @@ export default class StoreDetails extends Component {
     );
   }
 }
-
+// StoreDetails.defaultProps = {
+//   stores: {}
+// };
 StoreDetails.propTypes = {
   city: PropTypes.string.isRequired,
   storeName: PropTypes.string.isRequired,
-  stores: PropTypes.string.isRequired
+  stores: PropTypes.object.isRequired
 };
