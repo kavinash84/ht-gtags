@@ -231,11 +231,10 @@ export const urlKeyResults = results => {
 
 export const formatProductURL = (name, sku) => {
   const productname = name
+    .replace(/[^a-zA-Z0-9]/g, '-')
     .split(' ')
     .join('-')
-    .toLowerCase()
-    .split('%')
-    .join('');
+    .toLowerCase();
   return `/${productname}/sku/${sku}`;
 };
 

@@ -36,9 +36,9 @@ export default class ProductDetailSlider extends Component {
             verticalSwiping
             className="pdpThumbSlider"
           >
-            {data.map(slide => (
-              <div className={styles.pdpThumbSliderItem}>
-                <img key={slide.id_catalog_product_image} src={`${slide.url}.jpg`} alt={title} />
+            {data.map((slide, index) => (
+              <div className={styles.pdpThumbSliderItem} key={slide.id_catalog_product_image}>
+                <img src={`${slide.url}.jpg`} alt={title} />
               </div>
             ))}
           </Slider>
