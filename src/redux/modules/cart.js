@@ -23,6 +23,8 @@ const RESET_CART_CHECK = 'cart/RESET_CART_CHECK';
 
 const UPDATE_CART_SUMMARY_AFTER_COUPON = 'cart/UPDATE_CART_SUMMARY_AFTER_COUPON';
 
+const CLEAR_CART = 'cart/CLEAR_CART';
+
 const initialState = {
   loading: false,
   data: [],
@@ -170,6 +172,11 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         summary: action.summary
       };
+
+    case CLEAR_CART:
+      return {
+        ...initialState
+      };
     default:
       return state;
   }
@@ -276,4 +283,8 @@ export const updateCartSummary = summary => ({
 
 export const resetCheck = () => ({
   type: RESET_CART_CHECK
+});
+
+export const clearCart = () => ({
+  type: CLEAR_CART
 });

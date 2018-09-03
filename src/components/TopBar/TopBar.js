@@ -36,7 +36,7 @@ const onClick = history => e => {
 const onClickLogout = (dispatcher, history) => e => {
   e.preventDefault();
   dispatcher();
-  history.go(0);
+  history.push('/');
 };
 
 @withRouter
