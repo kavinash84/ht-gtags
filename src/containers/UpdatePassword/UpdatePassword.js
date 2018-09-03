@@ -54,7 +54,7 @@ export default class UpdatePasswordFormContainer extends Component {
   };
   onChangeConfirmPwd = e => {
     const { target: { value } } = e;
-    const checkError = value === this.state.newPwd;
+    const checkError = value !== this.state.newPwd;
     this.setState({
       confirmPwd: value,
       confirmPwdError: checkError,

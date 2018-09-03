@@ -87,7 +87,7 @@ export const validatePassword = (value, message, validLength = 8) => {
 };
 
 export const validateUpdatePassword = (value, message) => {
-  if (value.length >= 4 || value.length <= 15) {
+  if (value.length < 4 || value.length > 15) {
     return { error: true, errorMessage: message };
   }
   return { error: false, errorMessage: '' };
