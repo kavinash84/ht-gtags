@@ -22,6 +22,7 @@ import {
 } from 'containers';
 import { routerActions } from 'react-router-redux';
 import { connectedReduxRedirect } from 'redux-auth-wrapper/history4/redirect';
+import locationHelperBuilder from 'redux-auth-wrapper/history4/locationHelper';
 import Login from 'containers/Login';
 import Signup from 'containers/Signup';
 import ForgotPassword from 'containers/ForgotPassword';
@@ -43,6 +44,8 @@ import PaymentSuccess from 'containers/PaymentSuccess/';
 import PaymentFailure from 'containers/PaymentFailure/';
 import BulkOrder from 'containers/BulkOrder/';
 
+const locationHelper = locationHelperBuilder({});
+
 const isAuthenticated = connectedReduxRedirect({
   redirectPath: '/login',
   authenticatedSelector: state => state.userLogin.isLoggedIn,
@@ -51,7 +54,7 @@ const isAuthenticated = connectedReduxRedirect({
 });
 
 const isNotAuthenticated = connectedReduxRedirect({
-  redirectPath: '/profile',
+  redirectPath: (state, ownProps) => locationHelper.getRedirectQueryParam(ownProps) || '/profile',
   authenticatedSelector: state => !state.userLogin.isLoggedIn,
   redirectAction: routerActions.replace,
   wrapperDisplayName: 'UserIsAuthenticated',
