@@ -109,7 +109,13 @@ class DeliveryAddress extends Component {
     }
   }
   componentWillReceiveProps(nextProps) {
-    const { isLoggedIn, nextstep, clearShippingAddress } = this.props;
+    const {
+      isLoggedIn, nextstep, clearShippingAddress, onChangeEmail, userEmail
+    } = this.props;
+    if (isLoggedIn && nextProps.userEmail !== userEmail) {
+      onChangeEmail('shipping', nextProps.userEmail);
+      onChangeEmail('billing', nextProps.userEmail);
+    }
     if (nextProps.isLoggedIn !== isLoggedIn) {
       this.setState({
         openLogin: false
@@ -185,15 +191,15 @@ class DeliveryAddress extends Component {
     setAddress('shipping', addresses[index], index);
   };
   toggleAddAddress = e => {
-    const { setAddress } = this.props;
+    const { setAddress, isLoggedIn, userEmail } = this.props;
     e.preventDefault();
     this.setState({
       addressform: !this.state.addressform
     });
     const data = {
       full_name: '',
+      email: isLoggedIn ? userEmail : '',
       pincode: '',
-      email: '',
       mobile: '',
       address: '',
       city: '',
