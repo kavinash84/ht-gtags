@@ -160,6 +160,7 @@ export default class App extends Component {
           loginUser
         } = nextProps;
         if (response.signup_complete) {
+          dispatch(loadUserProfile());
           dispatch(loginUser(response.token));
           dispatch(synCart(sessionId, pincode));
           if (waitlist !== '') dispatch(syncWishList());
@@ -168,6 +169,7 @@ export default class App extends Component {
     }
     if (!isLoggedIn && nextProps.login.isLoggedIn) {
       dispatch(synCart(sessionId, pincode));
+      dispatch(loadUserProfile());
       if (waitlist !== '') dispatch(syncWishList());
       const query = new URLSearchParams(this.props.location.search);
       this.props.pushState(query.get('redirect') || '/');

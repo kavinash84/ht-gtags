@@ -5,12 +5,12 @@ import Div from 'hometown-components/lib/Div';
 import Heading from 'hometown-components/lib/Heading';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
-import Button from 'hometown-components/lib/Buttons';
+// import Button from 'hometown-components/lib/Buttons';
 import { Label } from 'hometown-components/lib/Label';
-import Img from 'hometown-components/lib/Img';
+// import Img from 'hometown-components/lib/Img';
 import { Link } from 'react-router-dom';
 
-const view360Icon = require('../../../static/360-icon.svg');
+// const view360Icon = require('../../../static/360-icon.svg');
 const styles = require('./MenuWithBreadcrumb.scss');
 
 const MenuWithBreadcrumb = ({ storeName }) => (
@@ -32,12 +32,12 @@ const MenuWithBreadcrumb = ({ storeName }) => (
             </Heading>
           </Row>
         </Div>
-        <Div col="2" mt="0.625rem" ta="right">
+        {/* <Div col="2" mt="0.625rem" ta="right">
           <Button btnType="link" color="#FFF" className={styles.view360Btn}>
             <Img src={view360Icon} alt="View in 360" float="left" mr="0.625rem" />
             View in 360
           </Button>
-        </Div>
+        </Div> */}
       </Row>
     </Container>
   </Section>
