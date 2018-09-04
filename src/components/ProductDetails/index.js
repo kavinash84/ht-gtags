@@ -226,7 +226,9 @@ class ProductDetails extends React.Component {
                       sku={sku}
                       itemId={sku}
                       size="block"
-                      isSoldOut={!simples[simpleSku].meta.quantity > 0}
+                      isSoldOut={
+                        !(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)
+                      }
                     />
                   </Div>
                   <Div col="6" mt="0" pl="0.3125rem">

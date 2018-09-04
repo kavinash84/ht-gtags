@@ -34,30 +34,32 @@ export default function gaMiddleware() {
           let eventObject;
           if (products && products.list.length > 0) {
             const product = products.list[position - 1];
-            const {
-              name, sku, price, brand
-            } = product.data;
-            eventObject = {
-              event: 'productClick',
-              ecommerce: {
-                click: {
-                  actionField: { list: 'Listing' }, //
-                  products: [
-                    {
-                      name,
-                      price,
-                      brand,
-                      // category,
-                      position,
-                      id: sku,
-                      variant: ''
-                    }
-                  ]
+            if (product) {
+              const {
+                name, sku, price, brand
+              } = product.data;
+              eventObject = {
+                event: 'productClick',
+                ecommerce: {
+                  click: {
+                    actionField: { list: 'Listing' }, //
+                    products: [
+                      {
+                        name,
+                        price,
+                        brand,
+                        // category,
+                        position,
+                        id: sku,
+                        variant: ''
+                      }
+                    ]
+                  }
                 }
-              }
-            };
-          } else eventObject = {};
-          window.dataLayer.push(eventObject);
+              };
+              window.dataLayer.push(eventObject);
+            }
+          }
         }
         if (type === 'productdetails/LOAD_PRODUCT_DESCRIPTION_SUCCESS') {
           window.google_tag_params.ecomm_pagetype = 'product';
