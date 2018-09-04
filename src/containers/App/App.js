@@ -16,7 +16,7 @@ import {
   isLoaded as isSectionLoaded
 } from 'redux/modules/homepage';
 import { generateSession, isLoaded as isSessionSet } from 'redux/modules/app';
-import { loginUserAfterSignUp } from 'redux/modules/login';
+import { loginUserAfterSignUp, login } from 'redux/modules/login';
 import { loadWishlist, isLoaded as isWishListLoaded, syncWishList } from 'redux/modules/wishlist';
 import { loadUserProfile, isLoaded as isProfileLoaded } from 'redux/modules/profile';
 import { loadCart, isLoaded as isCartLoaded, synCart } from 'redux/modules/cart';
@@ -126,17 +126,24 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-    /* Need to implement auto login when user has saved credentials to chrome */
-    // if (window && window.naviagtor) {
-    //   navigator.credentials.get({
-    //     password: true,
-    //   }).then(user => console.log(user));
-    // }
-    // this.props.notifSend({
-    //   msg: 'Welcome to HomeTown.in',
-    //   type: 'success',
-    //   dismissAfter: 2000
-    // });
+    const { login: { isLoggedIn } } = this.props;
+    const { dispatch } = this.context.store;
+    if (!isLoggedIn && (window && window.naviagtor)) {
+      navigator.credentials
+        .get({
+          password: true
+        })
+        .then(user => {
+          const { id, password, type } = user;
+          if (type === 'password' && id && password) {
+            const data = {
+              email: id,
+              password
+            };
+            dispatch(login(data));
+          }
+        });
+    }
   }
 
   componentWillReceiveProps(nextProps) {
