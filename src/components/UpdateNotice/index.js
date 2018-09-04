@@ -17,16 +17,7 @@ class UpdateNotification extends Component {
   render() {
     return (
       <ResponsiveModal open={this.state.active} onCloseModal={() => {}}>
-        <p>
-          <span role="img" aria-label="updates">
-            {' '}
-            😇{' '}
-          </span>
-          A new version of this page available.
-          <span role="img" aria-label="updates">
-            😇
-          </span>
-        </p>
+        <p>A new version of this page available.</p>
         <p>Please Reload.</p>
         <p>&nbsp;</p>
         <button label="Reload" onClick={() => window && window.location.reload()} />
