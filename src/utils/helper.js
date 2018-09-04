@@ -226,7 +226,15 @@ export const titleCase = str =>
 
 export const urlKeyResults = results => {
   if (results && typeof results === 'object' && results.constructor === Object) return [];
-  return results.filter(result => result.has_url_key === true);
+  const searchResults = results.filter(result => result.url_key !== '').map(x => {
+    const { url_key: urlKey } = x;
+    if (urlKey.indexOf('/') !== 0) return x;
+    return {
+      ...x,
+      url_key: urlKey.slice(1)
+    };
+  });
+  return searchResults;
 };
 
 export const formatProductURL = (name, sku) => {
