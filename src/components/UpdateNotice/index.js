@@ -7,13 +7,13 @@ import Img from 'hometown-components/lib/Img';
 
 class UpdateNotification extends Component {
   state = {
-    active: true
+    active: false
   };
   componentDidMount() {
-    window.addEventListener('updateFound', this.handleToggle);
+    window.addEventListener('updatesFound', this.handleToggle);
   }
   componentWillUnmount() {
-    window.removeEventListener('updateFound', this.handleToggle);
+    window.removeEventListener('updatesFound', this.handleToggle);
   }
   handleToggle = () => {
     this.setState({ active: true });
@@ -23,11 +23,16 @@ class UpdateNotification extends Component {
     const reloadIcon = require('../../../static/reload-browser.svg');
 
     return (
-      <ResponsiveModal open={this.state.active} onCloseModal={() => {}}>
+      <ResponsiveModal
+        open={this.state.active}
+        onCloseModal={() => window && window.location.reload()}
+        closeOnOverlayClick={false}
+        closeOnEsc={false}
+      >
         <Div className={styles.UpdateNoticeWrapper} ta="center">
           <Img m="0 auto 5px" width="125px" src={reloadIcon} alt="Reload Page" />
           <Text ta="center" fontSize="1rem" mb="0.625rem" mt="0" color="rgba(51, 51, 51, 0.85)">
-            A New Version of This Page Available.
+            A new version of this page available.
           </Text>
           <Button btnType="primary" pl="1.5rem" pr="1.5rem" onClick={() => window && window.location.reload()}>
             Reload
