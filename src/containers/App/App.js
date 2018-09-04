@@ -128,7 +128,7 @@ export default class App extends Component {
   componentDidMount() {
     const { login: { isLoggedIn } } = this.props;
     const { dispatch } = this.context.store;
-    if (!isLoggedIn && (window && window.naviagtor)) {
+    if (!isLoggedIn && window.navigator) {
       navigator.credentials
         .get({
           password: true
