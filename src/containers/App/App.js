@@ -25,14 +25,12 @@ import config from 'config';
 import Theme from 'hometown-components/lib/Theme';
 import Alert from 'hometown-components/lib/Alert';
 import * as notifActions from 'redux/modules/notifs';
-import Notifs from '../../components/Notifs';
+// import UpdateNotification from 'components/UpdateNotice';
+import Notifs from 'components/Notifs';
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState } }) => {
-    const {
-      pincode: { selectedPincode },
-      app: { sessionId, csrfToken }
-    } = getState();
+    const { pincode: { selectedPincode }, app: { sessionId, csrfToken } } = getState();
     const defaultPincode = selectedPincode === '' ? PINCODE : selectedPincode;
     if (!isSessionSet(getState()) || !sessionId || !csrfToken) {
       await dispatch(generateSession(defaultPincode)).catch(error => console.log(error));
@@ -51,9 +49,7 @@ import Notifs from '../../components/Notifs';
     }
   },
   defer: ({ store: { dispatch, getState } }) => {
-    const {
-      userLogin: { isLoggedIn }
-    } = getState();
+    const { userLogin: { isLoggedIn } } = getState();
     if (isLoggedIn && !isWishListLoaded(getState())) {
       dispatch(loadWishlist()).catch(error => console.log(error));
     }
@@ -155,10 +151,7 @@ export default class App extends Component {
     if (nextProps.signUp && nextProps.signUp.loaded) {
       const { signUp } = nextProps;
       if (!isLoggedIn && signUp.response.signup_complete) {
-        const {
-          signUp: { response },
-          loginUser
-        } = nextProps;
+        const { signUp: { response }, loginUser } = nextProps;
         if (response.signup_complete) {
           dispatch(loadUserProfile());
           dispatch(loginUser(response.token));
