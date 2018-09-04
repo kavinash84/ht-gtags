@@ -133,16 +133,21 @@ export default class App extends Component {
         .get({
           password: true
         })
-        .then(user => {
-          const { id, password, type } = user;
-          if (type === 'password' && id && password) {
-            const data = {
-              email: id,
-              password
-            };
-            dispatch(login(data));
-          }
-        });
+        .then(
+          user => {
+            if (user) {
+              const { id, password, type } = user;
+              if (type === 'password' && id && password) {
+                const data = {
+                  email: id,
+                  password
+                };
+                dispatch(login(data));
+              }
+            }
+          },
+          error => console.log(error)
+        );
     }
   }
 

@@ -105,7 +105,7 @@ export default function userMiddleware() {
       case 'login/LOGIN_FAIL':
         dispatch(notifSend({
           type: 'warning',
-          msg: (action.error.error === 'invalid_grant' && 'Invalid Creedntials') || SOME_ERROR,
+          msg: (action.error.error === 'invalid_grant' && 'Invalid Credentials') || SOME_ERROR,
           dismissAfter: 4000
         }));
         break;
