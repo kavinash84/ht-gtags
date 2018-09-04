@@ -130,6 +130,8 @@ const providers = { app: {}, restApp: {}, client };
           switch (installingWorker.state) {
             case 'installed':
               if (navigator.serviceWorker.controller) {
+                const event = new Event('updatesFound');
+                window.dispatchEvent(event);
                 // At this point, the old content will have been purged and the fresh content will
                 // have been added to the cache.
                 // It's the perfect time to display a "New content is available; please refresh."

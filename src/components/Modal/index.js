@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import Modal from 'react-responsive-modal';
 
 const ResponsiveModal = ({
-  open, onCloseModal, children, classNames
+  open, onCloseModal, children, classNames, ...rest
 }) => (
-  <Modal classNames={classNames} open={open} onClose={onCloseModal} center>
+  <Modal classNames={classNames} open={open} onClose={onCloseModal} center {...rest}>
     {children}
   </Modal>
 );
