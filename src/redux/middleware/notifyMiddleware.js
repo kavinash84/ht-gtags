@@ -101,6 +101,22 @@ export default function userMiddleware() {
           dismissAfter: 4000
         }));
         break;
+      // Login
+      case 'login/LOGIN_FAIL':
+        dispatch(notifSend({
+          type: 'warning',
+          msg: (action.error.error === 'invalid_grant' && 'Invalid Creedntials') || SOME_ERROR,
+          dismissAfter: 4000
+        }));
+        break;
+
+      case 'login/LOGIN_SUCCESS':
+        dispatch(notifSend({
+          type: 'success',
+          msg: 'Logged In Succesfully !',
+          dismissAfter: 4000
+        }));
+        break;
 
       default:
         break;
