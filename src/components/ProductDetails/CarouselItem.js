@@ -23,13 +23,13 @@ const CategoryItem = ({ image }) => (
         },
         largeImage: {
           src: image,
-          width: 1100,
-          height: 1100
+          width: 800,
+          height: 800
         },
         enlargedImagePortalId: 'portal',
         enlargedImageContainerDimensions: {
-          width: '100%',
-          height: '100%'
+          width: '75%',
+          height: '75%'
         }
       }}
     /> */}

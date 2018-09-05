@@ -291,7 +291,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
             checked={selectedGateway === paymentType}
             onChange={onChangeGateway(onChange, paymentType, session)}
           />
-          <Label htmlFor="paymentCD" pl="1rem" color="textLight" ml="0.9375rem">
+          <Label htmlFor="paymentCD" pl="0" color="textLight" ml="0.9375rem">
             Cash On Delivery
           </Label>
         </Div>
