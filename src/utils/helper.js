@@ -253,3 +253,9 @@ export const checkRedirection = path => {
   if (pattern.test(path)) return '/';
   return path;
 };
+
+export const isKeyExists = (obj, nesting) => {
+  const value = nesting.split('.').reduce((a, b) => (a || {})[b], obj);
+  if (!value) return false;
+  return value;
+};
