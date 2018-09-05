@@ -391,6 +391,11 @@
 		height: 44px !important;
 		width: 44px !important;
 	}
+	.slick-slide, .slick-slide img, .slick-slide div {
+		&:focus {
+			outline: none;
+		}
+	}
 	.slick-next {
 		right: 25px !important;
 		z-index: 1 !important;
