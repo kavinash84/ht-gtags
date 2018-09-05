@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { triggerImpression, triggerClick } from 'redux/modules/analytics';
 import SliderItem from './SliderItem';
 import SlickSlider from '../SlickSlider';
 
@@ -8,17 +10,18 @@ const settings = {
   slidesToScroll: 1
 };
 
-export default class MainSlider extends Component {
+class MainSlider extends Component {
   render() {
-    const { data } = this.props;
+    const { data, triggerSlideChange, triggerSlideClick } = this.props;
     return (
-      <SlickSlider settings={settings}>
+      <SlickSlider settings={settings} afterChange={e => triggerSlideChange(e)}>
         {data.map((slide, index) => (
           <div key={String(index)}>
             <SliderItem
-              image={slide.url || slide.image}
-              url={slide.target_url || slide.url_key}
+              image={slide.image}
+              url={slide.url_key}
               title={slide.title || ''}
+              onClick={() => triggerSlideClick(index)}
             />
           </div>
         ))}
@@ -32,5 +35,9 @@ MainSlider.defaultProps = {
 };
 
 MainSlider.propTypes = {
-  data: PropTypes.array
+  data: PropTypes.array,
+  triggerSlideChange: PropTypes.func.isRequired,
+  triggerSlideClick: PropTypes.func.isRequired
 };
+
+export default connect(null, { triggerSlideChange: triggerImpression, triggerSlideClick: triggerClick })(MainSlider);

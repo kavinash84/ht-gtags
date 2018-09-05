@@ -30,12 +30,11 @@ export default class SlickSlider extends Component {
   }
 
   render() {
-    const { children, settings } = this.props;
-    // const { passedRef } = this.props;
+    const { children, settings, ...rest } = this.props;
     const newSettings = { ...defaultSettings, ...settings };
     return (
       <Div mb="0.625rem">
-        <Slider ref={this.slider} {...newSettings}>
+        <Slider ref={this.slider} {...newSettings} {...rest}>
           {children}
         </Slider>
       </Div>
