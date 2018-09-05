@@ -75,15 +75,6 @@ const OrderSummary = ({
         )}
       </Div>
     </Div>
-    <Div className={styles.questions}>
-      <Text color="rgba(0, 0, 0, 0.5)" fontSize="0.875rem" fontFamily="medium">
-        Do you have Questions about your Order?
-      </Text>
-      <Text color="#646464" fontFamily="regular">
-        Call us: 18002100004 <br />
-        E Mail: care@hometown.in
-      </Text>
-    </Div>
   </Div>
 );
 
