@@ -5,6 +5,8 @@ import Heading from 'hometown-components/lib/Heading';
 import Row from 'hometown-components/lib/Row';
 import Text from 'hometown-components/lib/Text';
 import Button from 'hometown-components/lib/Buttons';
+import Img from 'hometown-components/lib/Img';
+import ProgressiveImageSchemer from 'hometown-components/lib/ProgressiveImageSchemer';
 import { formatAmount } from 'utils/formatters';
 
 const styles = require('./MyOrder.scss');
@@ -51,7 +53,9 @@ const OrderBlock = ({ order }) => (
               {order.order_items.map(item => (
                 <tr key={item.order_item_id}>
                   <td>
-                    <img className="thumb" src={item.image} alt="item.product_name" />
+                    <ProgressiveImageSchemer src={item.image} height="10px">
+                      {imageURL => <Img src={imageURL} alt={item.product_name} />}
+                    </ProgressiveImageSchemer>
                   </td>
                   <td>{item.product_name || 'NOT AVAILABLE'}</td>
                   <td>{item.order_item_status_display_name || 'NOT AVAILABLE'}</td>

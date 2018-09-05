@@ -14,8 +14,9 @@ import TitleBar from '../TitleBar';
 
 const PaymentSuccessIcon = require('../../../static/success.svg');
 
-const mapStateToProps = ({ paymentstatus: { data, loaded } }) => ({
+const mapStateToProps = ({ paymentstatus: { data, loaded, error } }) => ({
   isLoaded: loaded,
+  error,
   ...data
 });
 
@@ -29,9 +30,10 @@ const PaymentSuccess = ({
   shipping_charges,
   discount_coupon_value,
   net_order_amount,
-  isLoaded
+  isLoaded,
+  error
 }) => {
-  if (isLoaded) {
+  if (isLoaded && !error) {
     return (
       <Div type="block">
         <TitleBar title="Payment Success" />
@@ -128,7 +130,8 @@ PaymentSuccess.defaultProps = {
   shipping_charges: 0,
   discount_coupon_value: 0,
   net_order_amount: 0,
-  cart_products: []
+  cart_products: [],
+  error: ''
 };
 
 PaymentSuccess.propTypes = {
@@ -140,7 +143,8 @@ PaymentSuccess.propTypes = {
   shipping_charges: PropTypes.number,
   discount_coupon_value: PropTypes.number,
   net_order_amount: PropTypes.number,
-  isLoaded: PropTypes.bool
+  isLoaded: PropTypes.bool,
+  error: PropTypes.string
 };
 
 export default connect(mapStateToProps, null)(PaymentSuccess);

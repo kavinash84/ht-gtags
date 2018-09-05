@@ -12,15 +12,15 @@ import PaymentOptions from 'components/Checkout/PaymentOptions';
 import { CART_URL } from 'helpers/Constants';
 
 @withRouter
-@connect(({ paymentoptions, cart }) => ({
+@connect(({ paymentoptions, cart, address: { shipping } }) => ({
   availableOptions: getPaymentOptions(paymentoptions),
-  cart: getCartList(cart)
+  cart: getCartList(cart),
+  shipping
 }))
 @provideHooks({
   fetch: async ({ store: { dispatch, getState } }) => {
-    const { app: { sessionId }, cart } = getState();
-    console.log(cart.data);
-    if (cart && cart.length !== 0) {
+    const { app: { sessionId }, cart, address: { shipping: { pincode, fullName, phone } } } = getState();
+    if ((cart && cart.length !== 0) || (pincode !== '' || fullName !== '' || phone !== '')) {
       await dispatch(load(sessionId));
       /* setting default paymentGateway in API */
       dispatch(setSelectedGatewayInSession('CreditCard', sessionId));
@@ -29,8 +29,8 @@ import { CART_URL } from 'helpers/Constants';
 })
 export default class PaymentOptionsContainer extends Component {
   componentDidMount() {
-    const { cart, history } = this.props;
-    if (cart && cart.length === 0) {
+    const { cart, history, shipping: { pincode, fullName, phone } } = this.props;
+    if ((cart && cart.length === 0) || (pincode === '' || fullName === '' || phone === '')) {
       history.push(CART_URL);
     }
   }
@@ -50,11 +50,21 @@ export default class PaymentOptionsContainer extends Component {
 PaymentOptionsContainer.defaultProps = {
   availableOptions: {},
   cart: [],
-  history: {}
+  history: {},
+  shipping: {
+    fullName: '',
+    phone: '',
+    pincode: ''
+  }
 };
 
 PaymentOptionsContainer.propTypes = {
   availableOptions: PropTypes.object,
   history: PropTypes.object,
-  cart: PropTypes.array
+  cart: PropTypes.array,
+  shipping: PropTypes.shape({
+    fullName: PropTypes.string,
+    pincode: PropTypes.string,
+    phon: PropTypes.string
+  })
 };
