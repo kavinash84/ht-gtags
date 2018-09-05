@@ -94,7 +94,7 @@ class ReviewOrder extends Component {
                 </Row>
                 <Row type="block" m="0" mb="1.5rem" mt="0">
                   <Div col="12">
-                    <table className="ordersTable">
+                    <table className="ordersTable table">
                       <tbody>
                         <tr>
                           <th colSpan="2">Product</th>
