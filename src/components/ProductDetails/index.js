@@ -158,128 +158,130 @@ class ProductDetails extends React.Component {
       <Div type="block">
         <Section p="0" mb="0" className={styles.pdpWrapper}>
           <Container type="container" pr="0" pl="0">
-            <Row display="block" mt="0" mb="0" mr="0">
-              <Div col="7" pt="1.5rem" pr="1rem" className={styles.pdpLeftWrapper}>
-                <Div col="12" className={styles.breadCrumbWrapper} mb="1rem">
-                  <BreadCrumb categoryDetails={categoryDetails} />
-                </Div>
-                <Div col="12">
-                  <ProductDetailsCarousel data={images} title={meta.name} />
-                </Div>
-                {/* <Div col="10">
-                  <div className={styles.imgSliderContainer}>
-                    <div className={styles.imageContainer}>
-                      <img src="https://www.hometown.in/media/product/78/2253/1.jpg" alt="" />
+            <Row display="block" mt="0" mb="0" mr="0" ml="0">
+              <Div>
+                <Div col="7" pt="1.5rem" pr="1rem" className={styles.pdpLeftWrapper}>
+                  <Div col="12" className={styles.breadCrumbWrapper} mb="1rem">
+                    <BreadCrumb categoryDetails={categoryDetails} />
+                  </Div>
+                  <Div col="12">
+                    <ProductDetailsCarousel data={images} title={meta.name} />
+                  </Div>
+                  {/* <Div col="10">
+                    <div className={styles.imgSliderContainer}>
+                      <div className={styles.imageContainer}>
+                        <img src="https://www.hometown.in/media/product/78/2253/1.jpg" alt="" />
+                      </div>
                     </div>
-                  </div>
-                </Div> */}
-              </Div>
-              <Div col="5" pt="1.5rem" pl="1rem" pb="1rem" pr="1rem" className={styles.pdpRightWrapper}>
-                <div id="portal" className={styles.portal} />
-                <Div className={styles.titleWrapper}>
-                  <TitlePrice
-                    name={meta.name}
-                    price={formatAmount(price)}
-                    discPrice={formatAmount(checkSpecialPrice)}
-                    savingsRs={formatAmount(calculateSavings(price, checkSpecialPrice) || '')}
-                    savingsPercentage={calculateDiscount(price, checkSpecialPrice)}
-                    ratings={rating}
-                    count={count}
-                    mt="1rem"
-                  />
-                  <Row display="block" mb="0" mr="0.9375rem" ml="0.9375rem" className={styles.variationWrapper}>
-                    {colorproducts.length > 0 && (
-                      <Section mb="0.3125rem" p="0" mt="1.25rem">
-                        <Row display="block" mr="0" ml="0">
-                          <Heading fontSize="1em" color="textDark" mb="0.625rem" mt="0px" fontFamily="medium">
-                            Color Options
-                          </Heading>
-                        </Row>
-                        <ColorOption data={colorproducts} />
-                      </Section>
-                    )}
-                  </Row>
+                  </Div> */}
                 </Div>
-                <Row display="block" mt="0.3125rem" mb="0" mr="0.9375rem" ml="0.9375rem">
-                  <ServiceDetails
-                    deliverBy={(deliveryInfo && deliveryInfo[0].value) || deliveryDetails[0].value}
-                    emiStarting={formatAmount(calculateLowestEmi(emidata, price))}
-                    shipping={shipping}
-                    isEmiAvailable={isEmiAvailable}
-                    pincode={pincode.selectedPincode}
-                  >
-                    <Pincode key="pincode" />
-                    <EmiModal price={formatAmount(checkSpecialPrice)} data={emidata} key="emi" />
-                  </ServiceDetails>
-                </Row>
-                {offerImage && (
-                  <Row display="block" mt="0" mb="0" mr="0.9375rem" ml="0.9375rem">
+                <div id="portal" className={styles.portal} />
+                <Div col="5" pt="1.5rem" pl="0.3125rem" pr="0.3125rem" pb="1rem" className={styles.pdpRightWrapper}>
+                  <Div className={styles.titleWrapper}>
+                    <TitlePrice
+                      name={meta.name}
+                      price={formatAmount(price)}
+                      discPrice={formatAmount(checkSpecialPrice)}
+                      savingsRs={formatAmount(calculateSavings(price, checkSpecialPrice) || '')}
+                      savingsPercentage={calculateDiscount(price, checkSpecialPrice)}
+                      ratings={rating}
+                      count={count}
+                      mt="1rem"
+                    />
+                    <Row display="block" mb="0" mr="0.9375rem" ml="0.9375rem" className={styles.variationWrapper}>
+                      {colorproducts.length > 0 && (
+                        <Section mb="0.3125rem" p="0" mt="1.25rem">
+                          <Row display="block" mr="0" ml="0">
+                            <Heading fontSize="1em" color="textDark" mb="0.625rem" mt="0px" fontFamily="medium">
+                              Color Options
+                            </Heading>
+                          </Row>
+                          <ColorOption data={colorproducts} />
+                        </Section>
+                      )}
+                    </Row>
+                  </Div>
+                  <Row display="block" mt="0.3125rem" mb="0" mr="0.9375rem" ml="0.9375rem">
+                    <ServiceDetails
+                      deliverBy={(deliveryInfo && deliveryInfo[0].value) || deliveryDetails[0].value}
+                      emiStarting={formatAmount(calculateLowestEmi(emidata, price))}
+                      shipping={shipping}
+                      isEmiAvailable={isEmiAvailable}
+                      pincode={pincode.selectedPincode}
+                    >
+                      <Pincode key="pincode" />
+                      <EmiModal price={formatAmount(checkSpecialPrice)} data={emidata} key="emi" />
+                    </ServiceDetails>
+                  </Row>
+                  {offerImage && (
+                    <Row display="block" mt="0" mb="0" mr="0.9375rem" ml="0.9375rem">
+                      <Div col="6" mt="0" pr="0.3125rem">
+                        <Img src={offerImage} alt="" width="100%" mt="0" mb="0.625rem" />
+                      </Div>
+                    </Row>
+                  )}
+                  <Row display="block" mt="0" mb="0.625rem" mr="0.9375rem" ml="0.9375rem">
                     <Div col="6" mt="0" pr="0.3125rem">
-                      <Img src={offerImage} alt="" width="100%" mt="0" mb="0.625rem" />
+                      <AddToCart
+                        simpleSku={simpleSku}
+                        sku={sku}
+                        itemId={sku}
+                        size="block"
+                        isSoldOut={
+                          !(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)
+                        }
+                      />
+                    </Div>
+                    <Div col="6" mt="0" pl="0.3125rem">
+                      <Button
+                        width="100%"
+                        color={Theme.colors.primary}
+                        btnType="custom"
+                        border="1px solid"
+                        bc={Theme.colors.primary}
+                        bg="transparent"
+                        size="block"
+                        fontSize="0.857rem"
+                        height="40px"
+                        className={styles.addToWishlist}
+                        onClick={onClickWishList(
+                          sku,
+                          wishListData,
+                          wishlistToggle,
+                          isLoggedIn,
+                          history,
+                          this.onOpenLoginModal,
+                          addToWaitList
+                        )}
+                        isWishList={isInWishList(wishList, sku)}
+                        disabled={isInWishList(loadingList, sku)}
+                      >
+                        {isInWishList(wishList, sku) ? 'REMOVE FROM WISHLIST' : 'ADD TO WISHLIST'}
+                      </Button>
                     </Div>
                   </Row>
-                )}
-                <Row display="block" mt="0" mb="0.625rem" mr="0.9375rem" ml="0.9375rem">
-                  <Div col="6" mt="0" pr="0.3125rem">
-                    <AddToCart
-                      simpleSku={simpleSku}
-                      sku={sku}
-                      itemId={sku}
-                      size="block"
-                      isSoldOut={
-                        !(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)
-                      }
+                  <Row display="block" mt="1.25rem" mb="0" mr="0" ml="0">
+                    {shortDesccription && (
+                      <ProductDesc
+                        desc={shortDesccription || ''}
+                        showmore={showmore}
+                        toggleShowMore={this.toggleShowMore}
+                      />
+                    )}
+                    {/* <button onClick={this.toggleShowMore}></button> */}
+                    <Specs specs={groupedAttributes} pincode={pincode.selectedPincode} />
+                    <Reviews col="12" reviewItems={reviews.data} pr="2.5rem" />
+                    <AddReview
+                      col="8"
+                      catalogId={groupedattributes.id_catalog_config}
+                      loaded
+                      onClickSubmit={this.addReview}
+                      adding={adding}
+                      added={added}
+                      toggleReview={toggleReviewBox}
                     />
-                  </Div>
-                  <Div col="6" mt="0" pl="0.3125rem">
-                    <Button
-                      width="100%"
-                      color={Theme.colors.primary}
-                      btnType="custom"
-                      border="1px solid"
-                      bc={Theme.colors.primary}
-                      bg="transparent"
-                      size="block"
-                      fontSize="0.857rem"
-                      height="40px"
-                      className={styles.addToWishlist}
-                      onClick={onClickWishList(
-                        sku,
-                        wishListData,
-                        wishlistToggle,
-                        isLoggedIn,
-                        history,
-                        this.onOpenLoginModal,
-                        addToWaitList
-                      )}
-                      isWishList={isInWishList(wishList, sku)}
-                      disabled={isInWishList(loadingList, sku)}
-                    >
-                      {isInWishList(wishList, sku) ? 'REMOVE FROM WISHLIST' : 'ADD TO WISHLIST'}
-                    </Button>
-                  </Div>
-                </Row>
-                <Row display="block" mt="1.25rem" mb="0" mr="0" ml="0">
-                  {shortDesccription && (
-                    <ProductDesc
-                      desc={shortDesccription || ''}
-                      showmore={showmore}
-                      toggleShowMore={this.toggleShowMore}
-                    />
-                  )}
-                  {/* <button onClick={this.toggleShowMore}></button> */}
-                  <Specs specs={groupedAttributes} pincode={pincode.selectedPincode} />
-                  <Reviews col="12" reviewItems={reviews.data} pr="2.5rem" />
-                  <AddReview
-                    col="8"
-                    catalogId={groupedattributes.id_catalog_config}
-                    loaded
-                    onClickSubmit={this.addReview}
-                    adding={adding}
-                    added={added}
-                    toggleReview={toggleReviewBox}
-                  />
-                </Row>
+                  </Row>
+                </Div>
               </Div>
             </Row>
           </Container>
