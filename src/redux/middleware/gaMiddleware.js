@@ -42,7 +42,7 @@ export default function gaMiddleware() {
                 event: 'productClick',
                 ecommerce: {
                   click: {
-                    actionField: { list: 'Listing' }, //
+                    actionField: { list: 'Listing' },
                     products: [
                       {
                         name,
@@ -66,9 +66,8 @@ export default function gaMiddleware() {
           window.google_tag_params.ecomm_totalvalue = action.result.meta.price;
           const { position } = getState().productdetails;
           const {
-            name, sku, price, brand, category_details: categoryDetails
+            name, sku, price, brand, category_details: categoryDetails, color
           } = action.result.meta;
-          const { color } = action.result.attributes;
           const category = filterCategoryDetails(categoryDetails)
             .map(item => item.url_key)
             .join('/');
@@ -76,7 +75,7 @@ export default function gaMiddleware() {
             event: 'productDetail',
             ecommerce: {
               click: {
-                actionField: { list: 'Listing' }, // D
+                actionField: { list: 'Listing' },
                 products: [
                   {
                     name,
@@ -84,7 +83,7 @@ export default function gaMiddleware() {
                     brand,
                     category,
                     position,
-                    variant: color, // D
+                    variant: color,
                     id: sku
                   }
                 ]
@@ -114,7 +113,7 @@ export default function gaMiddleware() {
           const results = action.result && action.result.success ? action.result.metadata.results : [];
           eventObject.impressions = results.map((item, position) => {
             const {
-              name, sku, price, brand
+              name, sku, price, brand, color
             } = item.data;
             return {
               name,
@@ -123,7 +122,7 @@ export default function gaMiddleware() {
               category,
               position: position + 1,
               id: sku,
-              variant: '', // ? To be discussed ?
+              variant: color,
               list: location.pathname === '/search/' ? 'Search Result' : ' category listing page'
             };
           });
@@ -134,9 +133,8 @@ export default function gaMiddleware() {
           const [product] =
             action.result && action.result.cart.cart.filter(item => item.id_customer_cart === idcustomerCart);
           const {
-            name, net_price: netprice, color, brand
+            name, net_price: netprice, color, brand, category_details: categoryDetails
           } = product.product_info;
-          const { category_details: categoryDetails } = product.product_info;
           const category = categoryDetails ? categoryDetails.join('/') : null;
           window.dataLayer.push({
             event: 'addToCart',
@@ -148,9 +146,9 @@ export default function gaMiddleware() {
                     name,
                     price: netprice,
                     variant: color,
-                    brand, // Missing //D
+                    brand,
                     category,
-                    list: 'Listing', // eg Search Result, //D
+                    list: 'Listing',
                     id: product.configurable_sku,
                     quantity: product.qty
                   }
@@ -281,6 +279,48 @@ export default function gaMiddleware() {
               }
             };
             window.dataLayer.push(paymentObj);
+          }
+        }
+        if (type === 'mainSlider/BANNER_IMPRESSION') {
+          const { homepage: { banners: { data } } } = getState();
+          if (data && data.length) {
+            const imp = data[action.payload];
+            const obj = {
+              event: 'promotionImpression',
+              ecommerce: {
+                promoView: {
+                  promotions: [
+                    {
+                      ...imp.meta,
+                      position: action.payload + 1,
+                      creative: imp.image
+                    }
+                  ]
+                }
+              }
+            };
+            window.dataLayer.push(obj);
+          }
+        }
+        if (type === 'mainSlider/BANNER_CLICK') {
+          const { homepage: { banners: { data } } } = getState();
+          if (data && data.length) {
+            const imp = data[action.payload];
+            const obj = {
+              event: 'promotionClick',
+              ecommerce: {
+                promoClick: {
+                  promotions: [
+                    {
+                      ...imp.meta,
+                      position: action.payload + 1,
+                      creative: imp.image
+                    }
+                  ]
+                }
+              }
+            };
+            window.dataLayer.push(obj);
           }
         }
       }
