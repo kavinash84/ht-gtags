@@ -47,7 +47,7 @@ export const load = sessionId => ({
       const response = await client.get(`${PAYMENT_STATUS_API}/${sessionId}`);
       return response;
     } catch (error) {
-      throw error;
+      return error;
     }
   }
 });
