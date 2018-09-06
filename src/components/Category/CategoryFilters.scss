@@ -1,0 +1,25 @@
+.categoryUl {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0;
+  li {
+    list-style: none;
+    clear: both;
+    > a {
+      width: calc(100% - 40px);
+      float: left;
+    }
+    button {
+      float: right;
+    }
+    ul {
+      list-style: none;
+      padding-left: 15px;
+      clear: both;
+      padding-top: 1px;
+      li {
+
+      }
+    }
+  }
+}

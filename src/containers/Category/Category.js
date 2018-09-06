@@ -33,7 +33,13 @@ const getSubMenu = (categories, key) =>
 }))
 export default class Category extends Component {
   render() {
-    const { category, menu, match: { params: { category: currentCategory } } } = this.props;
+    const {
+      category,
+      menu,
+      match: {
+        params: { category: currentCategory }
+      }
+    } = this.props;
     return (
       <Section p="0" mb="0">
         <Helmet title="Home" />
@@ -43,10 +49,10 @@ export default class Category extends Component {
           <Container pr="0" pl="0">
             <Row display="block" pt="2.25rem" ml="0" mr="0">
               <Div col={2}>
-                <Title title="Filters" subTitle="" ta="left" />
+                <Title title="Categories" subTitle="" ta="left" />
                 <CategoryFilters data={getSubMenu(menu, currentCategory)} />
               </Div>
-              <Div col={10} pl="2rem">
+              <Div col={10} pl="3rem">
                 {category.sections &&
                   category.sections.map((cat, index) => (
                     <div key={String(index)}>{CommonLayout(cat.component, cat.title, cat.data, cat.grid)}</div>

@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
+import Button from 'hometown-components/lib/Buttons';
 import { Link } from 'react-router-dom';
 import { Label } from 'hometown-components/lib/Label';
+
+const styles = require('./CategoryFilters.scss');
 
 class CategoryFilterItem extends Component {
   state = {
@@ -19,20 +22,26 @@ class CategoryFilterItem extends Component {
     const { show } = this.state;
     return (
       <li key={sub.id}>
-        <Label color="textLight" mt="0.625rem" mb="0.625rem" display="block">
-          <Link to={`/${sub.url_key}`}>{sub.name}</Link>
-          {sub.children && <button onClick={this.handleClick}>{show ? '+' : '-'}</button>}
-          <ul>
-            {sub.children &&
-              sub.children.map(sub3 => (
-                <li>
-                  <Label key={sub3.id} color="textLight" mt="0.625rem" mb="0.625rem" display="block">
-                    <Link to={`/${sub3.url_key}`}>{sub3.name}</Link>
-                  </Label>
-                </li>
-              ))}
-          </ul>
-        </Label>
+        <Link to={`/${sub.url_key}`}>
+          <Label color="textDark" mt="0.3125rem" mb="0.3125rem" display="block" fontFamily="regular">
+            {sub.name}
+          </Label>
+        </Link>
+        {sub.children && (
+          <Button pl="0" pr="0" lh="0.5" fontSize="1.25rem" btnType="link" onClick={this.handleClick}>
+            {show ? '-' : '+'}
+          </Button>
+        )}
+        <ul className={show ? 'show' : 'hide'}>
+          {sub.children &&
+            sub.children.map(sub3 => (
+              <li>
+                <Label key={sub3.id} color="textLight" mt="0.625rem" mb="0.625rem" display="block" fontSize="0.875rem">
+                  <Link to={`/${sub3.url_key}`}>{sub3.name}</Link>
+                </Label>
+              </li>
+            ))}
+        </ul>
       </li>
     );
   }
@@ -41,10 +50,9 @@ class CategoryFilterItem extends Component {
 const CategoryFilters = ({ data }) => (
   <Row display="block" ml="0" mr="0">
     <Div>
-      <Label color="textDark" mb="1rem" fontFamily="medium" display="block">
-        Categories
-      </Label>
-      <ul>{data && data.filter(menu => menu.visibility === 'on').map(sub => <CategoryFilterItem sub={sub} />)}</ul>
+      <ul className={styles.categoryUl}>
+        {data && data.filter(menu => menu.visibility === 'on').map(sub => <CategoryFilterItem sub={sub} />)}
+      </ul>
     </Div>
   </Row>
 );
