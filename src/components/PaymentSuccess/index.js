@@ -147,4 +147,7 @@ PaymentSuccess.propTypes = {
   error: PropTypes.string
 };
 
-export default connect(mapStateToProps, null)(PaymentSuccess);
+export default connect(
+  mapStateToProps,
+  null
+)(PaymentSuccess);

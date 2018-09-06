@@ -43,6 +43,7 @@ import Grievance from 'containers/Grievance/';
 import PaymentSuccess from 'containers/PaymentSuccess/';
 import PaymentFailure from 'containers/PaymentFailure/';
 import BulkOrder from 'containers/BulkOrder/';
+import ServiceSignUpContainer from 'components/ServiceSignUp/';
 
 const locationHelper = locationHelperBuilder({});
 
@@ -102,6 +103,7 @@ const routes = [
       { path: '/payment-success', exact: true, component: PaymentSuccess },
       { path: '/payment-failed/:orderId?', exact: true, component: PaymentFailure },
       { path: '/bulk-order', exact: true, component: BulkOrder },
+      { path: '/service-signup', exact: true, component: ServiceSignUpContainer },
       {
         path: '/:category(furniture|home-decor|homefurnishings|home-improvement|kitchenware|tableware)',
         exact: true,

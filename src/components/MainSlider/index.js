@@ -40,4 +40,7 @@ MainSlider.propTypes = {
   triggerSlideClick: PropTypes.func.isRequired
 };
 
-export default connect(null, { triggerSlideChange: triggerImpression, triggerSlideClick: triggerClick })(MainSlider);
+export default connect(
+  null,
+  { triggerSlideChange: triggerImpression, triggerSlideClick: triggerClick }
+)(MainSlider);

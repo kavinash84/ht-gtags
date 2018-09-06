@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import MainSlider from 'components/MainSlider';
 import Section from 'hometown-components/lib/Section';
 import Container from 'hometown-components/lib/Container';
@@ -8,19 +7,15 @@ import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Text from 'hometown-components/lib/Text';
 import Img from 'hometown-components/lib/Img';
-import Button from 'hometown-components/lib/Buttons';
-import { connect } from 'react-redux';
+import ServiceSignUp from 'components/ServiceSignUp';
 
-@connect(({ homepage: { banners } }) => ({
-  banners: banners.data
-}))
 export default class ModularKitchen extends Component {
   render() {
-    const { banners } = this.props;
+    const sliderData = require('../../data/dandbSlider.js');
     return (
       <div>
         <Section p="0" mb="0">
-          <MainSlider data={banners} />
+          <MainSlider data={sliderData} />
         </Section>
         <Section pt="2rem">
           <Container type="container" pr="0.5rem" pl="0.5rem">
@@ -41,11 +36,7 @@ export default class ModularKitchen extends Component {
               </Div>
             </Row>
             <Row ml="0" mr="0" mt="2.5rem">
-              <Div col="12" ta="center">
-                <Button btnType="primary" pl="1rem" pr="2rem">
-                  SIGN UP NOW
-                </Button>
-              </Div>
+              <ServiceSignUp formType="dandb" />
             </Row>
             <Row ml="0" mr="0" pt="3.5rem">
               <Div>
@@ -156,11 +147,3 @@ export default class ModularKitchen extends Component {
     );
   }
 }
-
-ModularKitchen.defaultProps = {
-  banners: []
-};
-
-ModularKitchen.propTypes = {
-  banners: PropTypes.array
-};

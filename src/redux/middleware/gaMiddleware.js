@@ -243,7 +243,9 @@ export default function gaMiddleware() {
         }
         // Handle Payment success
         /* eslint-disable camelcase */
-        const { location: { pathname } } = getState().router;
+        const {
+          location: { pathname }
+        } = getState().router;
         if (type === '@@INIT' && pathname && pathname === '/payment-success') {
           const { data } = getState().paymentstatus;
           if (data) {
@@ -282,7 +284,11 @@ export default function gaMiddleware() {
           }
         }
         if (type === 'mainSlider/BANNER_IMPRESSION') {
-          const { homepage: { banners: { data } } } = getState();
+          const {
+            homepage: {
+              banners: { data }
+            }
+          } = getState();
           if (data && data.length) {
             const imp = data[action.payload];
             const obj = {
@@ -303,7 +309,11 @@ export default function gaMiddleware() {
           }
         }
         if (type === 'mainSlider/BANNER_CLICK') {
-          const { homepage: { banners: { data } } } = getState();
+          const {
+            homepage: {
+              banners: { data }
+            }
+          } = getState();
           if (data && data.length) {
             const imp = data[action.payload];
             const obj = {

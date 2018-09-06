@@ -19,7 +19,13 @@ import { CART_URL } from 'helpers/Constants';
 }))
 @provideHooks({
   fetch: async ({ store: { dispatch, getState } }) => {
-    const { app: { sessionId }, cart, address: { shipping: { pincode, fullName, phone } } } = getState();
+    const {
+      app: { sessionId },
+      cart,
+      address: {
+        shipping: { pincode, fullName, phone }
+      }
+    } = getState();
     if ((cart && cart.length !== 0) || (pincode !== '' || fullName !== '' || phone !== '')) {
       await dispatch(load(sessionId));
       /* setting default paymentGateway in API */
@@ -29,7 +35,11 @@ import { CART_URL } from 'helpers/Constants';
 })
 export default class PaymentOptionsContainer extends Component {
   componentDidMount() {
-    const { cart, history, shipping: { pincode, fullName, phone } } = this.props;
+    const {
+      cart,
+      history,
+      shipping: { pincode, fullName, phone }
+    } = this.props;
     if ((cart && cart.length === 0) || (pincode === '' || fullName === '' || phone === '')) {
       history.push(CART_URL);
     }

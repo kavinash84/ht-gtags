@@ -24,7 +24,7 @@ export default class ProductDetailSlider extends Component {
     const styles = require('./Carousel.scss');
 
     return (
-      <Row display="block" mt="0" mb="0" mr="0">
+      <Row display="block" mt="0" mb="0" mr="0" ml="0">
         <Div col="1">
           <Slider
             asNavFor={this.state.nav1}
@@ -43,7 +43,7 @@ export default class ProductDetailSlider extends Component {
             ))}
           </Slider>
         </Div>
-        <Div col="11" pl="1rem" pr="0.625rem" pb="1rem">
+        <Div col="11" pl="0.625rem" pr="0" pb="1rem">
           <Slider asNavFor={this.state.nav2} ref={slider => (this.slider1 = slider)}>
             {data.map(slide => (
               <CarouselItem key={slide.id_catalog_product_image} image={`${slide.url}.jpg`} name={title} />

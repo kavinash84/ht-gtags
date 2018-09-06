@@ -18,7 +18,9 @@ export default (state = initialState, action) => {
 };
 
 export const triggerImpression = payload => (dispatch, getState) => {
-  const { analytics: { bannerSlides } } = getState();
+  const {
+    analytics: { bannerSlides }
+  } = getState();
   if (!bannerSlides.includes(payload)) {
     dispatch({
       type: BANNER_IMPRESSION,

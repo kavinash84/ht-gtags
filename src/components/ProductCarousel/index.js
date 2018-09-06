@@ -13,8 +13,10 @@ const adjustSlides = length => ({
   slidesToScroll: 1
 });
 
-const ProductCarousel = ({ data, title, length }) => (
-  <Section p="0" pt="0rem" mb="2.5rem" display="flex" className="prodCarousel">
+const ProductCarousel = ({
+  data, title, length, pt, pb
+}) => (
+  <Section p="0" pt={pt} pb={pb} mt="0" mb="0" display="flex" className="prodCarousel">
     <Container pr="0" pl="0">
       <Title title={title} />
       <SlickSlider settings={adjustSlides(length)}>
@@ -41,13 +43,17 @@ const ProductCarousel = ({ data, title, length }) => (
 ProductCarousel.defaultProps = {
   data: [],
   title: '',
-  length: 4
+  length: 4,
+  pt: '0',
+  pb: '0'
 };
 
 ProductCarousel.propTypes = {
   data: PropTypes.array,
   title: PropTypes.string,
-  length: PropTypes.number
+  length: PropTypes.number,
+  pt: PropTypes.string,
+  pb: PropTypes.string
 };
 
 export default ProductCarousel;

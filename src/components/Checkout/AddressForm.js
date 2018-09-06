@@ -6,54 +6,9 @@ import * as actionCreators from 'redux/modules/address';
 import FormInput from 'hometown-components/lib/Forms/FormInput';
 import Pincode from './Pincode';
 
-const mapStateToProps = (reduxstate, props) => {
-  const {
-    fullName,
-    fullNameFeedBackError,
-    fullNameFeedBackMessage,
-    email,
-    emailFeedBackError,
-    emailFeedBackMessage,
-    phone,
-    phoneFeedBackError,
-    phoneFeedBackMessage,
-    address,
-    addressFeedBackError,
-    addressFeedBackMessage,
-    city,
-    cityFeedBackError,
-    cityFeedBackMessage,
-    pincode,
-    pincodeFeedBackError,
-    pincodeFeedBackMessage,
-    state,
-    stateFeedBackError,
-    stateFeedBackMessage
-  } = reduxstate.address[props.formType];
-  return {
-    fullName,
-    fullNameFeedBackError,
-    fullNameFeedBackMessage,
-    email,
-    emailFeedBackError,
-    emailFeedBackMessage,
-    phone,
-    phoneFeedBackError,
-    phoneFeedBackMessage,
-    address,
-    addressFeedBackError,
-    addressFeedBackMessage,
-    city,
-    cityFeedBackError,
-    cityFeedBackMessage,
-    pincode,
-    pincodeFeedBackError,
-    pincodeFeedBackMessage,
-    state,
-    stateFeedBackError,
-    stateFeedBackMessage
-  };
-};
+const mapStateToProps = ({ address }, props) => ({
+  ...address[props.formType]
+});
 
 const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
 
