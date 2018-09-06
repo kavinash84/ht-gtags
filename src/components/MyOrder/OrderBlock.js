@@ -4,7 +4,6 @@ import Div from 'hometown-components/lib/Div';
 import Heading from 'hometown-components/lib/Heading';
 import Row from 'hometown-components/lib/Row';
 import Text from 'hometown-components/lib/Text';
-import Button from 'hometown-components/lib/Buttons';
 import Img from 'hometown-components/lib/Img';
 import ProgressiveImageSchemer from 'hometown-components/lib/ProgressiveImageSchemer';
 import { formatAmount } from 'utils/formatters';
@@ -48,7 +47,6 @@ const OrderBlock = ({ order }) => (
                 <th>Delivery Status</th>
                 <th>Carrier</th>
                 <th>Tracking ID</th>
-                <th>Tracking Link</th>
               </tr>
               {order.order_items.map(item => (
                 <tr key={item.order_item_id}>
@@ -61,11 +59,6 @@ const OrderBlock = ({ order }) => (
                   <td>{item.order_item_status_display_name || 'NOT AVAILABLE'}</td>
                   <td>{item.carrier_name || 'NOT AVAILABLE'}</td>
                   <td>{item.tracking_id || 'NOT AVAILABLE'}</td>
-                  <td>
-                    <Button fontSize="0.875rem" fontFamily="light" color="#f98d29" btnType="link">
-                      Track Now
-                    </Button>
-                  </td>
                 </tr>
               ))}
             </tbody>
