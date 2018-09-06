@@ -35,7 +35,7 @@ class CategoryFilterItem extends Component {
         <ul className={show ? 'show' : 'hide'}>
           {sub.children &&
             sub.children.map(sub3 => (
-              <li>
+              <li key={sub3.id}>
                 <Label key={sub3.id} color="textLight" mt="0.625rem" mb="0.625rem" display="block" fontSize="0.875rem">
                   <Link to={`/${sub3.url_key}`}>{sub3.name}</Link>
                 </Label>

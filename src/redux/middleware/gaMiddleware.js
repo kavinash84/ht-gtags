@@ -28,15 +28,20 @@ export default function gaMiddleware() {
         }
         if (type === 'productdetails/LOAD_PRODUCT_DESCRIPTION') {
           const { products } = getState();
-          // const { query } = products;
-          // const category = query ? JSON.parse(window.atob(query)).params.join('/') : null;
           const { position } = getState().productdetails;
           let eventObject;
           if (products && products.list.length > 0) {
             const product = products.list[position - 1];
+            const checkKey = isKeyExists(products, 'data.metadata.category_details');
+            const category = checkKey
+              ? checkKey
+                .filter(x => x !== null)
+                .map(item => item.url_key)
+                .join('/')
+              : '';
             if (product) {
               const {
-                name, sku, price, brand
+                name, sku, price, brand, color
               } = product.data;
               eventObject = {
                 event: 'productClick',
@@ -48,10 +53,10 @@ export default function gaMiddleware() {
                         name,
                         price,
                         brand,
-                        // category,
+                        category,
                         position,
                         id: sku,
-                        variant: ''
+                        variant: color
                       }
                     ]
                   }
@@ -111,7 +116,7 @@ export default function gaMiddleware() {
               .join('/')
             : '';
           const results = action.result && action.result.success ? action.result.metadata.results : [];
-          eventObject.impressions = results.map((item, position) => {
+          eventObject.ecommerce.impressions = results.map((item, position) => {
             const {
               name, sku, price, brand, color
             } = item.data;
@@ -220,32 +225,32 @@ export default function gaMiddleware() {
             const eventObject = {
               event: 'checkout',
               ecommerce: {
-                actionField: { step: null, option: '' },
-                products
+                checkout: {
+                  actionField: { step: null, option: '' },
+                  products
+                }
               }
             };
             if (location === '/checkout/delivery-address') {
-              eventObject.ecommerce.actionField.step = 1;
-              eventObject.ecommerce.actionField.option = 'Shipping and Login';
+              eventObject.ecommerce.checkout.actionField.step = 1;
+              eventObject.ecommerce.checkout.actionField.option = 'Shipping and Login';
               window.dataLayer.push(eventObject);
             }
             if (location === '/checkout/payment-options') {
-              eventObject.ecommerce.actionField.step = 2;
-              eventObject.ecommerce.actionField.option = 'Payment Method';
+              eventObject.ecommerce.checkout.actionField.step = 2;
+              eventObject.ecommerce.checkout.actionField.option = 'Payment Method';
               window.dataLayer.push(eventObject);
             }
             if (location === '/checkout/review-order') {
-              eventObject.ecommerce.actionField.step = 3;
-              eventObject.ecommerce.actionField.option = 'Order Review';
+              eventObject.ecommerce.checkout.actionField.step = 3;
+              eventObject.ecommerce.checkout.actionField.option = 'Order Review';
               window.dataLayer.push(eventObject);
             }
           }
         }
         // Handle Payment success
         /* eslint-disable camelcase */
-        const {
-          location: { pathname }
-        } = getState().router;
+        const { location: { pathname } } = getState().router;
         if (type === '@@INIT' && pathname && pathname === '/payment-success') {
           const { data } = getState().paymentstatus;
           if (data) {
@@ -284,11 +289,7 @@ export default function gaMiddleware() {
           }
         }
         if (type === 'mainSlider/BANNER_IMPRESSION') {
-          const {
-            homepage: {
-              banners: { data }
-            }
-          } = getState();
+          const { homepage: { banners: { data } } } = getState();
           if (data && data.length) {
             const imp = data[action.payload];
             const obj = {
@@ -309,11 +310,7 @@ export default function gaMiddleware() {
           }
         }
         if (type === 'mainSlider/BANNER_CLICK') {
-          const {
-            homepage: {
-              banners: { data }
-            }
-          } = getState();
+          const { homepage: { banners: { data } } } = getState();
           if (data && data.length) {
             const imp = data[action.payload];
             const obj = {
