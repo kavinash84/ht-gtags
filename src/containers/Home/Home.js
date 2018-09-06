@@ -9,6 +9,7 @@ import ProductCarousel from 'components/ProductCarousel';
 import Section from 'hometown-components/lib/Section';
 import { connect } from 'react-redux';
 // import HashTags from 'components/Home/HashTags';
+import OfferBanner from 'components/Home/OfferBanner';
 import StoresCarousel from 'components/Stores';
 import Footer from 'components/Footer';
 import { getCities } from '../../selectors/homepage';
@@ -63,6 +64,7 @@ export default class Home extends Component {
               data={category.values}
             />
           ))}
+          <OfferBanner />
           {/* <HashTags data={hashtags} /> */}
           {homepageProducts.map((products, index) => (
             <ProductCarousel
