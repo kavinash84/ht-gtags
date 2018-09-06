@@ -35,9 +35,7 @@ export default class ModularKitchen extends Component {
                 <Img src="https://www.hometown.in/media/cms/Staticpage/modular-wardrobes/process.jpg" alt="" m="auto" />
               </Div>
             </Row>
-            <Row ml="0" mr="0" mt="2.5rem">
-              <ServiceSignUp formType="dandb" />
-            </Row>
+            <ServiceSignUp formType="dandb" />
             <Row ml="0" mr="0" pt="3.5rem">
               <Div>
                 <Heading mt="0" mb="0" color="text" fontSize="1.75rem" ta="center" fontFamily="light">

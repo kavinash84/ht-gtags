@@ -758,6 +758,22 @@
 	.react-autosuggest__suggestion--highlighted {
 	  background-color: #ddd;
 	}
+	.portal {
+	  position: sticky;
+		top: 63px;
+		z-index: 1;
+		.enlarge {
+			position: absolute;
+		  left: 0%;
+		  top: 3rem;
+		  right: 0;
+		  bottom: 0;
+			z-index: 100;
+		}
+	  img {
+	    max-width: 800px !important;
+	  }
+	}
 }
 
 /* Wishlist Animation Key Frames */

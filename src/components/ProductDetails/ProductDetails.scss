@@ -26,23 +26,6 @@
   position: relative;
   background: #f7f7f7;
 }
-.portal {
-  position: absolute;
-  left: 58.33%;
-  top: 4rem;
-  right: 0;
-  bottom: 0;
-  z-index: 10;
-  width: 455.25px;
-  height: 455.25px;
-  z-index: -1;
-  // border: 1px solid #dddddd;
-  // background: #FFF;
-  // overflow: auto;
-  img {
-    max-width: 800px !important;
-  }
-}
 .imgSliderContainer {
   background: #FFF;
   .imageContainer{
