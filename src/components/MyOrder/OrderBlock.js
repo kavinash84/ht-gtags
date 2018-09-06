@@ -15,7 +15,7 @@ const OrderBlock = ({ order }) => (
   <Div mb="2.5rem">
     <Row type="block" m="0" mb="1rem">
       <Div col="12">
-        <Heading fontSize="1.25rem" color="textLight" mb="0px" mt="0px" fontFamily="thin">
+        <Heading fontSize="1.25rem" color="textLight" mb="0px" mt="0px" fontFamily="light">
           Order No. {order.order_id}
         </Heading>
       </Div>
@@ -26,7 +26,7 @@ const OrderBlock = ({ order }) => (
           <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
             ORDER DATE
           </Text>
-          <Text mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="thin">
+          <Text mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
             {order.order_date}
           </Text>
         </Div>
@@ -34,14 +34,14 @@ const OrderBlock = ({ order }) => (
           <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
             ORDER AMOUNT
           </Text>
-          <Text mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="thin">
+          <Text mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
             Rs. {formatAmount(order.grand_total)}
           </Text>
         </Div>
       </Row>
       <Row type="block" m="0">
         <Div col="12">
-          <table className="ordersTable">
+          <table className="ordersTable table">
             <tbody>
               <tr>
                 <th colSpan="2">PRODUCT</th>
@@ -52,8 +52,8 @@ const OrderBlock = ({ order }) => (
               </tr>
               {order.order_items.map(item => (
                 <tr key={item.order_item_id}>
-                  <td>
-                    <ProgressiveImageSchemer src={item.image} height="10px">
+                  <td width="70px">
+                    <ProgressiveImageSchemer src={item.image} height="60px">
                       {imageURL => <Img src={imageURL} alt={item.product_name} />}
                     </ProgressiveImageSchemer>
                   </td>
@@ -62,7 +62,7 @@ const OrderBlock = ({ order }) => (
                   <td>{item.carrier_name || 'NOT AVAILABLE'}</td>
                   <td>{item.tracking_id || 'NOT AVAILABLE'}</td>
                   <td>
-                    <Button fontSize="0.875rem" fontFamily="thin" color="#f98d29" btnType="link">
+                    <Button fontSize="0.875rem" fontFamily="light" color="#f98d29" btnType="link">
                       Track Now
                     </Button>
                   </td>

@@ -27,7 +27,7 @@ const MenuWithBreadcrumb = ({ storeName }) => (
             </Div>
           </Row>
           <Row display="block" mr="0" ml="0" mb="0.5rem">
-            <Heading fontSize="1.5rem" color="white" mt="0" mb="0" fontFamily="thin">
+            <Heading fontSize="1.5rem" color="white" mt="0" mb="0" fontFamily="light">
               {storeName}
             </Heading>
           </Row>
