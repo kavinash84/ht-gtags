@@ -51,7 +51,10 @@ const CategoryFilters = ({ data }) => (
   <Row display="block" ml="0" mr="0">
     <Div>
       <ul className={styles.categoryUl}>
-        {data && data.filter(menu => menu.visibility === 'on').map(sub => <CategoryFilterItem sub={sub} />)}
+        {data &&
+          data
+            .filter(menu => menu.visibility === 'on')
+            .map((sub, index) => <CategoryFilterItem sub={sub} key={String(index)} />)}
       </ul>
     </Div>
   </Row>
