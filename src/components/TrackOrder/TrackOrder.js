@@ -66,8 +66,8 @@ const TrackOrder = ({
                           <th colSpan="2">Item</th>
                           <th>Status</th>
                           <th>Updated On</th>
-                          <th>Carrier</th>
-                          <th>Tracking ID</th>
+                          {/* <th>Carrier</th>
+                          <th>Tracking ID</th> */}
                         </tr>
                         {data.order_items.map(item => (
                           <tr key={item.order_item_id}>
@@ -77,8 +77,8 @@ const TrackOrder = ({
                             <td>{item.product_name}</td>
                             <td>{item.order_item_status_display_name || 'Not Available'}</td>
                             <td>{formatDate(item.updated_at) || 'Not Available'}</td>
-                            <td>{item.carrier_name || 'Not Available'}</td>
-                            <td>{item.tracking_id || 'Not Available'}</td>
+                            {/* <td>{item.carrier_name || 'Not Available'}</td>
+                            <td>{item.tracking_id || 'Not Available'}</td> */}
                           </tr>
                         ))}
                       </tbody>
