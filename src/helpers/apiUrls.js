@@ -57,3 +57,6 @@ export const PAYMENT_STATUS = 'tesla/orders/success';
 
 /* Search Suggestions */
 export const SUGGESTIONS = 'tesla/search/suggestions';
+
+/* Services */
+export const SERVICE_SIGNUPS = 'tesla/campaign-signups';

@@ -7,7 +7,7 @@ import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Text from 'hometown-components/lib/Text';
 import Img from 'hometown-components/lib/Img';
-import Button from 'hometown-components/lib/Buttons';
+import ServiceSignUp from 'components/ServiceSignUp';
 
 export default class ModularKitchen extends Component {
   render() {
@@ -36,11 +36,7 @@ export default class ModularKitchen extends Component {
               </Div>
             </Row>
             <Row ml="0" mr="0" mt="2.5rem">
-              <Div col="12" ta="center">
-                <Button btnType="primary" pl="1rem" pr="2rem">
-                  SIGN UP NOW
-                </Button>
-              </Div>
+              <ServiceSignUp formType="dandb" />
             </Row>
             <Row ml="0" mr="0" pt="3.5rem">
               <Div>

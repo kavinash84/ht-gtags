@@ -34,6 +34,7 @@ import emioptions from './modules/emioptions';
 import notifs from './modules/notifs';
 import address from './modules/address';
 import analytics from './modules/analytics';
+import services from './modules/services';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -81,6 +82,7 @@ export default function createReducers(asyncReducers) {
     notifs,
     address,
     analytics,
+    services,
     ...asyncReducers
   };
 }

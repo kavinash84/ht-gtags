@@ -19,7 +19,7 @@ ResponsiveModal.propTypes = {
   open: PropTypes.bool,
   onCloseModal: PropTypes.func.isRequired,
   classNames: PropTypes.object,
-  children: PropTypes.objectOf(PropTypes.any).isRequired
+  children: PropTypes.any.isRequired
 };
 
 export default ResponsiveModal;
