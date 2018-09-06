@@ -11,6 +11,8 @@ import { formatAmount } from 'utils/formatters';
 
 const styles = require('./MyOrder.scss');
 
+const getImageURL = url => `${url.replace(/(beta|stage)/, 'static')}-catalog_360.jpg`;
+
 const OrderBlock = ({ order }) => (
   <Div mb="2.5rem">
     <Row type="block" m="0" mb="1rem">
@@ -53,7 +55,7 @@ const OrderBlock = ({ order }) => (
               {order.order_items.map(item => (
                 <tr key={item.order_item_id}>
                   <td width="70px">
-                    <ProgressiveImageSchemer src={item.image} height="60px">
+                    <ProgressiveImageSchemer src={getImageURL(item.image)} height="60px">
                       {imageURL => <Img src={imageURL} alt={item.product_name} />}
                     </ProgressiveImageSchemer>
                   </td>
