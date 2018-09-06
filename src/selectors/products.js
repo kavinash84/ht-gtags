@@ -55,6 +55,7 @@ export const getShortDescription = groupedAttributes => {
   if (shortDesc) {
     [shortDesc] = Object.values(shortDesc);
     [shortDesc] = shortDesc.filter(item => item.label === 'Short description');
+    if (!shortDesc) return null;
     return shortDesc.value;
   }
   return null;
