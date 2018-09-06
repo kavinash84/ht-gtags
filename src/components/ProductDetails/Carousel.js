@@ -5,6 +5,8 @@ import Row from 'hometown-components/lib/Row';
 import Div from 'hometown-components/lib/Div';
 import CarouselItem from './CarouselItem';
 
+const showSlides = data => (data && data.length >= 6 ? 6 : data.length || 0);
+
 /* eslint-disable */
 export default class ProductDetailSlider extends Component {
   state = {
@@ -29,7 +31,7 @@ export default class ProductDetailSlider extends Component {
           <Slider
             asNavFor={this.state.nav1}
             ref={slider => (this.slider2 = slider)}
-            slidesToShow={6}
+            slidesToShow={showSlides(data)}
             swipeToSlide
             focusOnSelect
             vertical
@@ -38,7 +40,7 @@ export default class ProductDetailSlider extends Component {
           >
             {data.map((slide, index) => (
               <div className={styles.pdpThumbSliderItem} key={slide.id_catalog_product_image}>
-                <img src={`${slide.url}.jpg`} alt={title} />
+                <img src={`${slide.url}-catalog_360.jpg`} alt={title} />
               </div>
             ))}
           </Slider>
