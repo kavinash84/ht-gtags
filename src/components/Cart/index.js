@@ -98,7 +98,7 @@ const Cart = ({
                         Rs. {formatAmount(item.product_info.net_price)}
                         <Button
                           fontSize="1rem"
-                          fontFamily="thin"
+                          fontFamily="light"
                           color="#f98d29"
                           btnType="link"
                           p="0"
@@ -173,4 +173,7 @@ Cart.defaultProps = {
   outOfStockList: []
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Cart);
