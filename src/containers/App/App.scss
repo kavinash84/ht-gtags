@@ -631,7 +631,7 @@
 			transition: all 0.5s ease;
 			li {
 				text-align: left;
-				padding: 0.3125rem 0.625rem;
+				padding: 0.125rem 0.625rem;
 				list-style: none;
 				label {
 					cursor: pointer;
@@ -658,9 +658,9 @@
 		.dropdownValue {
 			width: 83%;
 			vertical-align: middle !important;
-			white-space: nowrap !important;
-			overflow: hidden !important;
-			text-overflow: ellipsis !important;
+			// white-space: nowrap !important;
+			// overflow: hidden !important;
+			// text-overflow: ellipsis !important;
 		}
 	}
 
