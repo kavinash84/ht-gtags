@@ -40,11 +40,7 @@ export default class ModularKitchen extends Component {
                 />
               </Div>
             </Row>
-            <Row ml="0" mr="0" mt="2.5rem">
-              <Div col="12" ta="center">
-                <ServiceSignUp formType="modular" />
-              </Div>
-            </Row>
+            <ServiceSignUp formType="modular" />
             <Row ml="0" mr="0" pt="3.5rem">
               <Div>
                 <Heading mt="0" mb="0" color="text" fontSize="1.75rem" ta="center" fontFamily="light">

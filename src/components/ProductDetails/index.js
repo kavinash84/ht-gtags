@@ -175,8 +175,8 @@ class ProductDetails extends React.Component {
                     </div>
                   </Div> */}
                 </Div>
-                <div id="portal" className={styles.portal} />
                 <Div col="5" pt="1.5rem" pl="0.3125rem" pr="0.3125rem" pb="1rem" className={styles.pdpRightWrapper}>
+                  <div id="portal" className="portal" />
                   <Div className={styles.titleWrapper}>
                     <TitlePrice
                       name={meta.name}
@@ -338,4 +338,7 @@ ProductDetails.propTypes = {
   addToWaitList: PropTypes.func.isRequired,
   toggleReviewBox: PropTypes.func.isRequired
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductDetails);
