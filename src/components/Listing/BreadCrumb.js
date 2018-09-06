@@ -8,11 +8,11 @@ const BreadCrumb = ({ categoryDetails }) => {
   let link = '';
   return (
     <ul itemScope itemType="http://schema.org/BreadcrumbList" className={styles.breadCrumbList}>
-      {categoryDetails.map((item, index) => {
+      {categoryDetails.filter(details => Object.keys(details).length > 0).map((item, index) => {
         if (item) {
           link += `/${item.url_key}`;
           return (
-            <li itemProp="itemListElement" itemType="http://schema.org/ListItem" itemScope key={item.id}>
+            <li key={item.id} itemProp="itemListElement" itemType="http://schema.org/ListItem" itemScope>
               <Link itemProp="item" to={`${link}`}>
                 <span itemProp="name">{item.name}</span>
                 <meta itemProp="position" content={index + 1} />
