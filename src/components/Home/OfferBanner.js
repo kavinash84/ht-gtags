@@ -7,7 +7,7 @@ import Img from 'hometown-components/lib/Img';
 import Div from 'hometown-components/lib/Div';
 
 const OfferBanner = () => (
-  <Section mt="1rem" mb="0">
+  <Section mt="1.5rem" mb="0.5rem">
     <Container pr="0" pl="0">
       <Row ml="0.3125rem" mr="0.3125rem">
         <Div>
