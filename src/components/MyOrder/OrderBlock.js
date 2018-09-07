@@ -7,10 +7,9 @@ import Text from 'hometown-components/lib/Text';
 import Img from 'hometown-components/lib/Img';
 import ProgressiveImageSchemer from 'hometown-components/lib/ProgressiveImageSchemer';
 import { formatAmount } from 'utils/formatters';
+import { getImageURL } from 'utils/helper';
 
 const styles = require('./MyOrder.scss');
-
-const getImageURL = url => `${url.replace(/(beta|stage)/, 'static')}-catalog_360.jpg`;
 
 const OrderBlock = ({ order }) => (
   <Div mb="2.5rem">
@@ -47,20 +46,20 @@ const OrderBlock = ({ order }) => (
               <tr>
                 <th colSpan="2">PRODUCT</th>
                 <th>Delivery Status</th>
-                <th>Carrier</th>
-                <th>Tracking ID</th>
+                {/* <th>Carrier</th>
+                <th>Tracking ID</th> */}
               </tr>
               {order.order_items.map(item => (
                 <tr key={item.order_item_id}>
                   <td width="70px">
-                    <ProgressiveImageSchemer src={getImageURL(item.image)} height="60px">
+                    <ProgressiveImageSchemer src={getImageURL(item.image, 'catalog_360')} height="60px">
                       {imageURL => <Img src={imageURL} alt={item.product_name} />}
                     </ProgressiveImageSchemer>
                   </td>
-                  <td>{item.product_name || 'NOT AVAILABLE'}</td>
+                  <td width="50%">{item.product_name || 'NOT AVAILABLE'}</td>
                   <td>{item.order_item_status_display_name || 'NOT AVAILABLE'}</td>
-                  <td>{item.carrier_name || 'NOT AVAILABLE'}</td>
-                  <td>{item.tracking_id || 'NOT AVAILABLE'}</td>
+                  {/* <td>{item.carrier_name || 'NOT AVAILABLE'}</td>
+                  <td>{item.tracking_id || 'NOT AVAILABLE'}</td> */}
                 </tr>
               ))}
             </tbody>

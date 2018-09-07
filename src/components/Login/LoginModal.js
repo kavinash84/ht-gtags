@@ -1,37 +1,16 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import LoginForm from 'components/Login/LoginForm';
+import GoogleLoginBtn from 'components/Login/GoogleLogin';
 import Fav from 'hometown-components/lib/Icons/Fav';
 import Row from 'hometown-components/lib/Row';
 import Div from 'hometown-components/lib/Div';
-import Img from 'hometown-components/lib/Img';
 import { Link } from 'react-router-dom';
 import { Label } from 'hometown-components/lib/Label';
 import { SIGNUP_URL, FORGOT_PASSWORD_URL } from 'helpers/Constants';
-import GoogleLogin from 'react-google-login';
-import { googleLogin } from 'redux/modules/login';
 
-const mapStateToProps = ({ app }) => ({
-  session: app.sessionId
-});
-
-const onSuccess = (dispatcher, session) => result => {
-  dispatcher(result.tokenId, session);
-};
-
-const onError = error => e => {
-  console.log(error, e);
-};
-
-const mapDispatchToProps = dispatch => bindActionCreators({ loginViaLogin: googleLogin }, dispatch);
-
-// const FavIcon = require('../../../static/fav-icon.svg');
-const GoogleIcon = require('../../../static/google-icon.png');
 const styles = require('./LoginModal.scss');
 
-const LoginModal = ({ loginViaLogin, session }) => (
+const LoginModal = () => (
   <div className={styles.loginModal}>
     <Row mr="0" ml="0">
       <Div col="12">
@@ -43,17 +22,10 @@ const LoginModal = ({ loginViaLogin, session }) => (
     </Row>
     <Row display="block" mt="1.5rem" mr="0" ml="0">
       <Div col="12" ta="center" mb="0.625rem">
-        <GoogleLogin
-          className="socialBtn"
-          clientId="663311547699-jersj1hfflbl8gfukgsuvug8u1gc88nm.apps.googleusercontent.com"
-          onSuccess={onSuccess(loginViaLogin, session)}
-          onFailure={onError}
-        >
-          <Img display="inline-block" src={GoogleIcon} alt="Google" /> Google
-        </GoogleLogin>
+        <GoogleLoginBtn />
       </Div>
       <Div col="12" mb="1" mt="1">
-        <Label fontFamily="medium" display="block" ta="center" color="primary">
+        <Label fontFamily="regular" display="block" ta="center" color="primary">
           OR
         </Label>
       </Div>
@@ -82,9 +54,4 @@ const LoginModal = ({ loginViaLogin, session }) => (
   </div>
 );
 
-LoginModal.propTypes = {
-  loginViaLogin: PropTypes.func.isRequired,
-  session: PropTypes.string.isRequired
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(LoginModal);
+export default LoginModal;

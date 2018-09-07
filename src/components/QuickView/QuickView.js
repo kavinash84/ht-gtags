@@ -7,7 +7,7 @@ import Heading from 'hometown-components/lib/Heading';
 import Span from 'hometown-components/lib/Span';
 import Text from 'hometown-components/lib/Text';
 import AddToCart from 'components/AddToCart';
-import { calculateSavings, calculateDiscount /* calculateLowestEmi */ } from 'utils/helper';
+import { calculateSavings, calculateDiscount, getImageURL } from 'utils/helper';
 import { formatAmount } from 'utils/formatters';
 // import { loadEmiOptions } from 'redux/modules/emioptions';
 import SlickSlider from '../SlickSlider';
@@ -141,7 +141,7 @@ export default class QuickView extends Component {
                 &#8249;
               </button>
               <div className={styles.imageContainer}>
-                <img src={images[currentImage].zoom_image} alt="" />
+                <img src={images[currentImage] && getImageURL(images[currentImage].path, 'product_500')} alt="" />
               </div>
               <button name="next" className={styles.next} onClick={this.changeImage}>
                 &#8250;

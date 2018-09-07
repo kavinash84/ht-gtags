@@ -53,7 +53,7 @@ const AddressForm = props => {
       />
       <FormInput
         label="Email ID"
-        type="text"
+        type={isLoggedIn ? 'hidden' : 'text'}
         placeholder=""
         onChange={e => onChangeEmail(formType, e.target.value)}
         value={isLoggedIn ? userEmail : email}
@@ -145,4 +145,7 @@ AddressForm.propTypes = {
   userEmail: PropTypes.string.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddressForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddressForm);

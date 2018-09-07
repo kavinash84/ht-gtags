@@ -49,7 +49,7 @@ const ProductItem = ({
           {percentage && (
             <Span fontSize="0.75rem" fontFamily="medium">
               Savings
-              <Span mr="0px" fontSize="0.75rem" border="none" fontFamily="medium">
+              <Span mr="0px" fontSize="0.75rem" border="none" fontFamily="medium" va="bottom">
                 {' '}
                 ({percentage}%)
               </Span>

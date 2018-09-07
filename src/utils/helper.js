@@ -259,3 +259,15 @@ export const isKeyExists = (obj, nesting) => {
   if (!value) return false;
   return value;
 };
+
+export const getImageURL = (url, size) => {
+  if (!url) return null;
+  const urlCheck = url.replace(/(beta.|stage.)/, 'static');
+  const [first] = urlCheck.split('.jpg');
+  if (first) {
+    const rp = first.replace(/(-product_500|-catalog|-catalog_360|-zoom)/, '');
+    const imageurl = `${rp}-${size}.jpg`;
+    return imageurl;
+  }
+  return null;
+};

@@ -49,14 +49,3 @@ export const getSEOInfo = createSelector(
   [productMeta],
   seoInfo => (Object.keys(seoInfo.seo).length > 0 ? seoInfo.seo.items : null)
 );
-
-export const getShortDescription = groupedAttributes => {
-  let [shortDesc] = groupedAttributes.filter(item => 'Overview' in item);
-  if (shortDesc) {
-    [shortDesc] = Object.values(shortDesc);
-    [shortDesc] = shortDesc.filter(item => item.label === 'Short description');
-    if (!shortDesc) return null;
-    return shortDesc.value;
-  }
-  return null;
-};
