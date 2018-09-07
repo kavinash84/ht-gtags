@@ -130,7 +130,7 @@ export const googleLogin = (token, session) => ({
       setToken({ client })(response);
       return response;
     } catch (error) {
-      return error;
+      throw error;
     }
   }
 });
