@@ -131,7 +131,6 @@ export default class QuickView extends Component {
     const {
       name, price, special_price: discPrice, max_saving_percentage: saving
     } = data;
-    console.log(images, currentImage);
     // const lowestEmi = calculateLowestEmi(emidata, discPrice);
     return (
       <div className={styles.quickView}>
