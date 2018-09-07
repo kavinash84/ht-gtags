@@ -1,6 +1,5 @@
 import cookie from 'js-cookie';
 import { SIGNUP as SIGNUP_API } from 'helpers/apiUrls';
-import { TOKEN_EXPIRY } from 'helpers/Constants';
 
 const SIGNUP = 'signUp/SIGNUP';
 const SIGNUP_SUCCESS = 'signUp/SIGNUP_SUCCESS';
@@ -46,7 +45,7 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 const setToken = ({ client }) => response => {
-  cookie.set('Authorization', `Bearer ${response.token.access_token}`, { expires: TOKEN_EXPIRY });
+  cookie.set('Authorization', `Bearer ${response.token.access_token}`);
   client.setJwtToken(response.token.access_token);
   if (response && response.token && response.token.meta) {
     const [xId] = Object.keys(response.token.meta).filter(key => key !== 'customerId');
@@ -70,7 +69,7 @@ export const signUp = (data, session) => ({
         session_id: session
       };
       const response = await client.post(SIGNUP_API, postData);
-      setToken({ client })(response);
+      await setToken({ client })(response);
       return response;
     } catch (error) {
       throw error;

@@ -55,27 +55,29 @@ class Pincode extends React.Component {
     const { validationError, validationErrorMessage } = this.state;
     return (
       <Div className={styles.pdpPincode} pt="0" pb="0.3125rem">
-        <Img
-          width="initial"
-          height="1.5em"
-          mr="0.625rem"
-          mt="0"
-          float="left"
-          src={location}
-          className={styles.pincodeIcon}
-        />
-        <Input
-          type="text"
-          placeholder="Enter Pincode"
-          backgroundColor="rgba(0, 0, 0, 0.05)"
-          borderColor="rgba(0, 0, 0, 0.03)"
-          height="2.5rem"
-          onChange={onChange(setPincodeQuery)}
-          value={pincodeQuery}
-        />
-        <button className={styles.pincodeCheckBtn} onClick={this.setPincodeInStore(setPincode, pincodeQuery)}>
-          <Img src={ArrowIcon} alt="Check" />
-        </button>
+        <form onSubmit={this.setPincodeInStore(setPincode, pincodeQuery)}>
+          <Img
+            width="initial"
+            height="1.5em"
+            mr="0.625rem"
+            mt="0"
+            float="left"
+            src={location}
+            className={styles.pincodeIcon}
+          />
+          <Input
+            type="text"
+            placeholder="Enter Pincode"
+            backgroundColor="rgba(0, 0, 0, 0.05)"
+            borderColor="rgba(0, 0, 0, 0.03)"
+            height="2.5rem"
+            onChange={onChange(setPincodeQuery, this.setPincodeInStore(setPincode, pincodeQuery))}
+            value={pincodeQuery}
+          />
+          <button className={styles.pincodeCheckBtn} onClick={this.setPincodeInStore(setPincode, pincodeQuery)}>
+            <Img src={ArrowIcon} alt="Check" />
+          </button>
+        </form>
         {validationError && <div>{validationErrorMessage}</div>}
       </Div>
     );

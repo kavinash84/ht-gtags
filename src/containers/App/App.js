@@ -17,9 +17,9 @@ import {
 } from 'redux/modules/homepage';
 import { generateSession, isLoaded as isSessionSet } from 'redux/modules/app';
 import { loginUserAfterSignUp, login } from 'redux/modules/login';
-import { loadWishlist, isLoaded as isWishListLoaded, syncWishList } from 'redux/modules/wishlist';
+import { loadWishlist, isLoaded as isWishListLoaded } from 'redux/modules/wishlist';
 import { loadUserProfile, isLoaded as isProfileLoaded } from 'redux/modules/profile';
-import { loadCart, isLoaded as isCartLoaded, synCart } from 'redux/modules/cart';
+import { loadCart, isLoaded as isCartLoaded } from 'redux/modules/cart';
 import { PINCODE } from 'helpers/Constants';
 import config from 'config';
 import Theme from 'hometown-components/lib/Theme';
@@ -27,13 +27,11 @@ import Alert from 'hometown-components/lib/Alert';
 import * as notifActions from 'redux/modules/notifs';
 import UpdateNotification from 'components/UpdateNotice';
 import Notifs from 'components/Notifs';
+import { isKeyExists } from 'utils/helper';
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState } }) => {
-    const {
-      pincode: { selectedPincode },
-      app: { sessionId, csrfToken }
-    } = getState();
+    const { pincode: { selectedPincode }, app: { sessionId, csrfToken } } = getState();
     const defaultPincode = selectedPincode === '' ? PINCODE : selectedPincode;
     if (!isSessionSet(getState()) || !sessionId || !csrfToken) {
       await dispatch(generateSession(defaultPincode)).catch(error => console.log(error));
@@ -44,21 +42,20 @@ import Notifs from 'components/Notifs';
     if (!isSectionLoaded(getState(), 'banners')) {
       await wrapDispatch(dispatch, 'banners')(loadBanners()).catch(error => error);
     }
-    if (!isSectionLoaded(getState(), 'categories')) {
-      await wrapDispatch(dispatch, 'categories')(loadCategories()).catch(error => error);
-    }
-    if (sessionId && !isCartLoaded(getState())) {
-      await dispatch(loadCart(sessionId, defaultPincode)).catch(error => error);
-    }
   },
   defer: ({ store: { dispatch, getState } }) => {
-    const {
-      userLogin: { isLoggedIn }
-    } = getState();
-    if (isLoggedIn && !isWishListLoaded(getState())) {
+    const { userLogin: { isLoggedIn, loggingOut }, app: { sessionId }, pincode: { selectedPincode } } = getState();
+    const defaultPincode = selectedPincode === '' ? PINCODE : selectedPincode;
+    if (!isSectionLoaded(getState(), 'categories')) {
+      wrapDispatch(dispatch, 'categories')(loadCategories()).catch(error => error);
+    }
+    if (sessionId && !loggingOut && !isCartLoaded(getState())) {
+      dispatch(loadCart(sessionId, defaultPincode)).catch(error => error);
+    }
+    if (isLoggedIn && !loggingOut && !isWishListLoaded(getState())) {
       dispatch(loadWishlist()).catch(error => console.log(error));
     }
-    if (isLoggedIn && !isProfileLoaded(getState())) {
+    if (isLoggedIn && !loggingOut && !isProfileLoaded(getState())) {
       dispatch(loadUserProfile()).catch(error => console.log(error));
     }
     if (!isSectionLoaded(getState(), 'footer')) {
@@ -131,11 +128,9 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-    const {
-      login: { isLoggedIn }
-    } = this.props;
+    const { login: { isLoggedIn } } = this.props;
     const { dispatch } = this.context.store;
-    if (!isLoggedIn && window.navigator) {
+    if (!isLoggedIn && isKeyExists(window.navigator, 'credentials.get')) {
       navigator.credentials
         .get({
           password: true
@@ -155,41 +150,6 @@ export default class App extends Component {
           },
           error => console.log(error)
         );
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { dispatch } = this.context.store;
-    const {
-      login: { isLoggedIn },
-      pincode: { selectedPincode },
-      app: { sessionId },
-      wishlist: { waitlist }
-    } = this.props;
-    const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
-    if (nextProps.signUp && nextProps.signUp.loaded) {
-      const { signUp } = nextProps;
-      if (!isLoggedIn && signUp.response.signup_complete) {
-        const {
-          signUp: { response },
-          loginUser
-        } = nextProps;
-        if (response.signup_complete) {
-          dispatch(loadUserProfile());
-          dispatch(loginUser(response.token));
-          dispatch(synCart(sessionId, pincode));
-          if (waitlist !== '') dispatch(syncWishList());
-        }
-      }
-    }
-    if (!isLoggedIn && nextProps.login.isLoggedIn) {
-      dispatch(synCart(sessionId, pincode));
-      dispatch(loadUserProfile());
-      if (waitlist !== '') dispatch(syncWishList());
-      const query = new URLSearchParams(this.props.location.search);
-      this.props.pushState(query.get('redirect') || '/');
-    } else if (this.props.login && !nextProps.login) {
-      this.props.pushState('/');
     }
   }
 
