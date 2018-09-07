@@ -17,9 +17,9 @@ import {
 } from 'redux/modules/homepage';
 import { generateSession, isLoaded as isSessionSet } from 'redux/modules/app';
 import { loginUserAfterSignUp, login } from 'redux/modules/login';
-import { loadWishlist, isLoaded as isWishListLoaded, syncWishList } from 'redux/modules/wishlist';
+import { loadWishlist, isLoaded as isWishListLoaded } from 'redux/modules/wishlist';
 import { loadUserProfile, isLoaded as isProfileLoaded } from 'redux/modules/profile';
-import { loadCart, isLoaded as isCartLoaded, synCart } from 'redux/modules/cart';
+import { loadCart, isLoaded as isCartLoaded } from 'redux/modules/cart';
 import { PINCODE } from 'helpers/Constants';
 import config from 'config';
 import Theme from 'hometown-components/lib/Theme';
@@ -42,15 +42,16 @@ import { isKeyExists } from 'utils/helper';
     if (!isSectionLoaded(getState(), 'banners')) {
       await wrapDispatch(dispatch, 'banners')(loadBanners()).catch(error => error);
     }
-    if (!isSectionLoaded(getState(), 'categories')) {
-      await wrapDispatch(dispatch, 'categories')(loadCategories()).catch(error => error);
-    }
-    if (sessionId && !isCartLoaded(getState())) {
-      await dispatch(loadCart(sessionId, defaultPincode)).catch(error => error);
-    }
   },
   defer: ({ store: { dispatch, getState } }) => {
-    const { userLogin: { isLoggedIn } } = getState();
+    const { userLogin: { isLoggedIn }, app: { sessionId }, pincode: { selectedPincode } } = getState();
+    const defaultPincode = selectedPincode === '' ? PINCODE : selectedPincode;
+    if (!isSectionLoaded(getState(), 'categories')) {
+      wrapDispatch(dispatch, 'categories')(loadCategories()).catch(error => error);
+    }
+    if (sessionId && !isCartLoaded(getState())) {
+      dispatch(loadCart(sessionId, defaultPincode)).catch(error => error);
+    }
     if (isLoggedIn && !isWishListLoaded(getState())) {
       dispatch(loadWishlist()).catch(error => console.log(error));
     }
@@ -149,38 +150,6 @@ export default class App extends Component {
           },
           error => console.log(error)
         );
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { dispatch } = this.context.store;
-    const {
-      login: { isLoggedIn },
-      pincode: { selectedPincode },
-      app: { sessionId },
-      wishlist: { waitlist }
-    } = this.props;
-    const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
-    if (nextProps.signUp && nextProps.signUp.loaded) {
-      const { signUp } = nextProps;
-      if (!isLoggedIn && signUp.response.signup_complete) {
-        const { signUp: { response }, loginUser } = nextProps;
-        if (response.signup_complete) {
-          dispatch(loadUserProfile());
-          dispatch(loginUser(response.token));
-          dispatch(synCart(sessionId, pincode));
-          if (waitlist !== '') dispatch(syncWishList());
-        }
-      }
-    }
-    if (!isLoggedIn && nextProps.login.isLoggedIn) {
-      dispatch(synCart(sessionId, pincode));
-      dispatch(loadUserProfile());
-      if (waitlist !== '') dispatch(syncWishList());
-      const query = new URLSearchParams(this.props.location.search);
-      this.props.pushState(query.get('redirect') || '/');
-    } else if (this.props.login && !nextProps.login) {
-      this.props.pushState('/');
     }
   }
 
