@@ -235,7 +235,8 @@ export default class DeliveryAddress extends Component {
                       feedBackMessage={pinFeedBackMessage}
                     />
                     <FormInput
-                      type="text"
+                      label="Email ID *"
+                      type="hidden"
                       placeholder=""
                       onChange={this.handleChange}
                       value={useremail}
@@ -300,14 +301,14 @@ export default class DeliveryAddress extends Component {
                       feedBackMessage={pinFeedBackMessage}
                     />
                     <FormInput
-                      type="text"
+                      label="Email ID *"
+                      type="hidden"
                       placeholder=""
                       onChange={this.handleChange}
                       value={useremail}
                       name="email"
                       feedBackError={emailFeedBackError}
                       feedBackMessage={emailFeedBackMessage}
-                      hidden
                     />
                   </Div>
                 </Row>
