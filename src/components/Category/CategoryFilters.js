@@ -35,7 +35,7 @@ class CategoryFilterItem extends Component {
         <ul className={show ? 'show' : 'hide'}>
           {sub.children &&
             sub.children.map(sub3 => (
-              <li>
+              <li key={sub3.id}>
                 <Label key={sub3.id} color="textLight" mt="0.625rem" mb="0.625rem" display="block" fontSize="0.875rem">
                   <Link to={`/${sub3.url_key}`}>{sub3.name}</Link>
                 </Label>
@@ -51,7 +51,10 @@ const CategoryFilters = ({ data }) => (
   <Row display="block" ml="0" mr="0">
     <Div>
       <ul className={styles.categoryUl}>
-        {data && data.filter(menu => menu.visibility === 'on').map(sub => <CategoryFilterItem sub={sub} />)}
+        {data &&
+          data
+            .filter(menu => menu.visibility === 'on')
+            .map((sub, index) => <CategoryFilterItem sub={sub} key={String(index)} />)}
       </ul>
     </Div>
   </Row>
