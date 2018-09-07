@@ -13,7 +13,8 @@ const CLEAR_LOGIN_STATE = 'login/CLEAR_LOGIN_STATE';
 
 const initialState = {
   loaded: false,
-  isLoggedIn: false
+  isLoggedIn: false,
+  loggingOut: false
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -144,8 +145,10 @@ export const logout = () => ({
   types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
   promise: async ({ client }) => {
     try {
-      await client.put(LOGOUT_API);
-      await setToken({ client })({ access_token: null });
+      const response = await client.put(LOGOUT_API);
+      if (response.success) {
+        await setToken({ client })({ access_token: null });
+      }
     } catch (err) {
       throw err;
     }

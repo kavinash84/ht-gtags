@@ -12,6 +12,7 @@ import { loadStores, isLoaded as isStoresLoaded } from 'redux/modules/stores';
 
 const hooks = {
   defer: ({ store: { dispatch, getState } }) => {
+    const { userLogin: { loggingOut } } = getState();
     if (!isSectionLoaded(getState(), 'products')) {
       wrapDispatch(dispatch, 'products')(loadTopSelling()).catch(error => console.log(error));
     }
@@ -24,7 +25,9 @@ const hooks = {
     if (!isSectionLoaded(getState(), 'offerstrip')) {
       wrapDispatch(dispatch, 'offerstrip')(loadOfferStrip()).catch(error => console.log(error));
     }
-    wrapDispatch(dispatch, 'recentlyviewed')(loadRecentlyViewed()).catch(error => console.log(error));
+    if (!loggingOut) {
+      wrapDispatch(dispatch, 'recentlyviewed')(loadRecentlyViewed()).catch(error => console.log(error));
+    }
   }
 };
 

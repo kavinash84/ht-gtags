@@ -37,6 +37,8 @@ const LOAD_PINCODE_DETAILS_FAIL = 'deliveryaddress/LOAD_PINCODE_DETAILS_FAIL';
 const CLEAR_SHIPPING = 'deliveryaddress/CLEAR_SHIPPING';
 const SUBMIT_FORM = 'deliveryaddress/SUBMIT_FORM';
 
+const CLEAR_ADDRESS = 'deliveryaddress/CLEAR_ADDRESS';
+
 const initialState = {
   shipping: {
     fullName: '',
@@ -343,6 +345,10 @@ export default function reducer(state = initialState, action = {}) {
           ...initialState[action.formType]
         }
       };
+    case CLEAR_ADDRESS:
+      return {
+        ...initialState
+      };
     default:
       return state;
   }
@@ -457,4 +463,8 @@ export const setAddress = (formType, data, index) => ({
 export const clearShippingAddress = formType => ({
   type: CLEAR_SHIPPING,
   formType
+});
+
+export const clearAddresses = () => ({
+  type: CLEAR_ADDRESS
 });

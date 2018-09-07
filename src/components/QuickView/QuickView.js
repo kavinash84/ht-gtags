@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
@@ -7,7 +8,7 @@ import Heading from 'hometown-components/lib/Heading';
 import Span from 'hometown-components/lib/Span';
 import Text from 'hometown-components/lib/Text';
 import AddToCart from 'components/AddToCart';
-import { calculateSavings, calculateDiscount, getImageURL } from 'utils/helper';
+import { calculateSavings, calculateDiscount, getImageURL, formatProductURL } from 'utils/helper';
 import { formatAmount } from 'utils/formatters';
 // import { loadEmiOptions } from 'redux/modules/emioptions';
 import SlickSlider from '../SlickSlider';
@@ -159,7 +160,7 @@ export default class QuickView extends Component {
                 mt="0"
                 mb="0.625rem"
               >
-                {name}
+                <Link to={formatProductURL(name, sku)}>{name}</Link>
               </Heading>
               <Text>
                 <Span color="rgba(0, 0, 0, 0.6)" fontFamily="medium" fontSize="1.325rem" mr="1rem">

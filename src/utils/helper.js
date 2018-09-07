@@ -262,7 +262,7 @@ export const isKeyExists = (obj, nesting) => {
 
 export const getImageURL = (url, size) => {
   if (!url) return null;
-  const urlCheck = url.replace(/(beta.|stage.)/, 'static');
+  const urlCheck = url.replace(/(beta.|stage.)/, 'static.');
   const [first] = urlCheck.split('.jpg');
   if (first) {
     const rp = first.replace(/(-product_500|-catalog|-catalog_360|-zoom)/, '');
