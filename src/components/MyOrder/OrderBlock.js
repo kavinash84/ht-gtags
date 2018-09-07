@@ -46,8 +46,8 @@ const OrderBlock = ({ order }) => (
               <tr>
                 <th colSpan="2">PRODUCT</th>
                 <th>Delivery Status</th>
-                <th>Carrier</th>
-                <th>Tracking ID</th>
+                {/* <th>Carrier</th>
+                <th>Tracking ID</th> */}
               </tr>
               {order.order_items.map(item => (
                 <tr key={item.order_item_id}>
@@ -56,10 +56,10 @@ const OrderBlock = ({ order }) => (
                       {imageURL => <Img src={imageURL} alt={item.product_name} />}
                     </ProgressiveImageSchemer>
                   </td>
-                  <td>{item.product_name || 'NOT AVAILABLE'}</td>
+                  <td width="50%">{item.product_name || 'NOT AVAILABLE'}</td>
                   <td>{item.order_item_status_display_name || 'NOT AVAILABLE'}</td>
-                  <td>{item.carrier_name || 'NOT AVAILABLE'}</td>
-                  <td>{item.tracking_id || 'NOT AVAILABLE'}</td>
+                  {/* <td>{item.carrier_name || 'NOT AVAILABLE'}</td>
+                  <td>{item.tracking_id || 'NOT AVAILABLE'}</td> */}
                 </tr>
               ))}
             </tbody>
