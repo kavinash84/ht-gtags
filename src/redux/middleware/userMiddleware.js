@@ -5,6 +5,7 @@ import { clearLoginState, loginUserAfterSignUp } from '../modules/login';
 import { generateSession } from '../modules/app';
 import { clearCart, synCart } from '../modules/cart';
 import { notifSend } from '../modules/notifs';
+import { clearAddresses } from '../modules/address';
 
 export default function userMiddleware() {
   return ({ dispatch, getState }) => next => action => {
@@ -44,6 +45,7 @@ export default function userMiddleware() {
         dispatch(clearUserProfile());
         dispatch(clearWishList());
         dispatch(clearCart());
+        dispatch(clearAddresses());
       }
     }
     return next(action);

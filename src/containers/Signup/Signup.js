@@ -14,22 +14,26 @@ import Div from 'hometown-components/lib/Div';
 import { Link } from 'react-router-dom';
 import { Label } from 'hometown-components/lib/Label';
 import Img from 'hometown-components/lib/Img';
-import { validateEmail, isBlank } from 'js-utility-functions';
-import { validateMobile } from 'utils/validation';
+import { validateEmail } from 'js-utility-functions';
+import { validateMobile, validatePassword } from 'utils/validation';
 import { LOGIN_URL } from 'helpers/Constants';
 import { signUp } from 'redux/modules/signUp';
 
 const SidebarImg = require('../../../static/login-side-thumb.png');
 
 @connect(({ userSignUp, app, notifs }) => ({
-  signUpResponse: userSignUp,
+  loading: userSignUp.loading,
   session: app.sessionId,
   notifs
 }))
 @withRouter
 export default class SignupFormContainer extends Component {
   static propTypes = {
-    session: PropTypes.string.isRequired
+    session: PropTypes.string.isRequired,
+    loading: PropTypes.bool
+  };
+  static defaultProps = {
+    loading: false
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -68,11 +72,11 @@ export default class SignupFormContainer extends Component {
   };
   onChangePassword = e => {
     const { target: { value } } = e;
-    const checkError = isBlank(value);
+    const checkError = validatePassword(value);
     this.setState({
       password: value,
-      passwordError: checkError,
-      passwordErrorMessage: checkError ? "Password can't be blank" : ''
+      passwordError: checkError.error,
+      passwordErrorMessage: checkError.error ? checkError.errorMessage : ''
     });
   };
   onSubmitSignup = e => {
@@ -80,15 +84,15 @@ export default class SignupFormContainer extends Component {
     const { email, password, phone } = this.state;
     const checkEmail = validateEmail(email, 'Invalid Email');
     const checkPhone = validateMobile(phone, 'Mobile no. should be 10 digits');
-    const checkPassword = isBlank(password);
-    if (checkEmail.error || checkPassword || checkPhone.error) {
+    const checkPassword = validatePassword(password);
+    if (checkEmail.error || checkPassword.error || checkPhone.error) {
       return this.setState({
         emailError: checkEmail.error,
         emailErrorMessage: checkEmail.errorMessage,
         phoneError: checkPhone.error,
         phoneErrorMessage: checkPhone.errorMessage,
-        passwordError: checkPassword,
-        passwordErrorMessage: checkPassword ? "Password can't be blank" : ''
+        passwordError: checkPassword.error,
+        passwordErrorMessage: checkPassword.error ? checkPassword.errorMessage : ''
       });
     }
     const { dispatch } = this.context.store;
@@ -109,6 +113,7 @@ export default class SignupFormContainer extends Component {
       passwordError,
       passwordErrorMessage
     } = this.state;
+    const { loading } = this.props;
     return (
       <Section p="0" mb="0">
         <Menu />
@@ -154,6 +159,7 @@ export default class SignupFormContainer extends Component {
                           passwordFeedBackError={passwordError}
                           passwordFeedBackMessage={passwordErrorMessage}
                           onSubmitSignup={this.onSubmitSignup}
+                          loading={loading}
                         />
                       </Div>
                     </Row>

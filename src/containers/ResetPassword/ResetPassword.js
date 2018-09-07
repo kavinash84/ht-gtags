@@ -48,7 +48,7 @@ export default class ResetPasswordContainer extends Component {
   }
   onChangeNewPwd = e => {
     const { target: { value } } = e;
-    const checkError = validatePassword(value, 'Password must be at least 8 character long');
+    const checkError = validatePassword(value);
     this.setState({
       newPwd: value,
       newPwdError: checkError.error,

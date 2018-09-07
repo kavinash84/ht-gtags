@@ -7,7 +7,7 @@ import Row from 'hometown-components/lib/Row';
 import Heading from 'hometown-components/lib/Heading';
 import Div from 'hometown-components/lib/Div';
 import { isBlank } from 'js-utility-functions';
-import { validateUpdatePassword } from 'utils/validation';
+import { validatePassword } from 'utils/validation';
 import { updateUserPassword } from 'redux/modules/updatepassword';
 
 @connect(({ updatepassword }) => ({
@@ -45,7 +45,7 @@ export default class UpdatePasswordFormContainer extends Component {
   };
   onChangeNewPwd = e => {
     const { target: { value } } = e;
-    const checkError = validateUpdatePassword(value, 'Password should be minimum 4 and maximum 15 characters');
+    const checkError = validatePassword(value);
     this.setState({
       newPwd: value,
       newPwdError: checkError.error,
