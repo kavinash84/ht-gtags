@@ -74,22 +74,20 @@ export const loadReview = sku => ({
 export const toggleReview = () => ({
   type: TOGGLE_REVIEW
 });
-export const addReview = (sku, data) => dispatch =>
-  dispatch({
-    types: [ADD_REVIEW, ADD_REVIEW_SUCCESS, ADD_REVIEW_FAIL],
-    promise: async ({ client }) => {
-      try {
-        /* eslint-disable max-len */
-        const postData = {
-          name: data.name,
-          rating: parseInt(data.rating, 10),
-          review: data.review
-        };
-        const response = await client.post(`tesla/ratings/${sku}`, postData);
-        dispatch(toggleReview);
-        return response;
-      } catch (error) {
-        throw error;
-      }
+export const addReview = (sku, data) => ({
+  types: [ADD_REVIEW, ADD_REVIEW_SUCCESS, ADD_REVIEW_FAIL],
+  promise: async ({ client }) => {
+    try {
+      /* eslint-disable max-len */
+      const postData = {
+        name: data.name,
+        rating: parseInt(data.rating, 10),
+        review: data.review
+      };
+      const response = await client.post(`tesla/ratings/${sku}`, postData);
+      return response;
+    } catch (error) {
+      throw error;
     }
-  });
+  }
+});

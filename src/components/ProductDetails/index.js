@@ -28,7 +28,6 @@ import { setProductPosition } from 'redux/modules/productdetails';
 import { formatAmount } from 'utils/formatters';
 import { calculateDiscount, calculateSavings, calculateLowestEmi } from 'utils/helper';
 import { getSKUList } from 'selectors/wishlist';
-import { getShortDescription } from 'selectors/products';
 
 import ProductDetailsCarousel from './Carousel';
 import BreadCrumb from './BreadCrumb';
@@ -137,6 +136,7 @@ class ProductDetails extends React.Component {
       meta,
       images,
       simples,
+      attributes,
       delivery_details: deliveryDetails,
       // attributes,
       grouped_attributes: groupedAttributes,
@@ -145,7 +145,7 @@ class ProductDetails extends React.Component {
       reviews: { count, rating }
     } = product;
     const { category_details: categoryDetails } = meta;
-    const shortDesccription = getShortDescription(groupedAttributes);
+    const { short_description: shortDescription } = attributes;
     const simpleSku = Object.keys(simples)[0];
     const shipping = simples[simpleSku].groupedattributes.product_shipping_cost;
     const isEmiAvailable = Number(simples[simpleSku].meta.no_emi) === 0;
@@ -261,9 +261,9 @@ class ProductDetails extends React.Component {
                     </Div>
                   </Row>
                   <Row display="block" mt="1.25rem" mb="0" mr="0" ml="0">
-                    {shortDesccription && (
+                    {shortDescription && (
                       <ProductDesc
-                        desc={shortDesccription || ''}
+                        desc={shortDescription || ''}
                         showmore={showmore}
                         toggleShowMore={this.toggleShowMore}
                       />
