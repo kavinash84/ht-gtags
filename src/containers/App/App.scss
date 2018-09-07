@@ -645,6 +645,7 @@
 					background: none;
 					width: 100%;
 					text-align: left;
+					border-radius: 3px;
 					&:hover, &:focus {
 						background-color: transparent !important;
 						border: none;
@@ -723,8 +724,16 @@
     overflow: auto;
 	}
 	.showLess {
-		height: 200px;
+		height: 125px;
     overflow: hidden;
+		&:after {
+			content: "";
+	    position: absolute;
+	    height: 40px;
+	    background-image: linear-gradient(rgba(247, 247, 247, 0), rgb(247, 247, 247) 80%, rgb(247, 247, 247));
+	    width: 100%;
+	    bottom: 0px;
+		}
 	}
 	.ratings {
 		display: inline-block;
@@ -769,6 +778,7 @@
 		  right: 0;
 		  bottom: 0;
 			z-index: 100;
+			border: 1px solid #ddd;
 		}
 	  img {
 	    max-width: 800px !important;
