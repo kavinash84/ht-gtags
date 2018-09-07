@@ -724,7 +724,7 @@
     overflow: auto;
 	}
 	.showLess {
-		height: 125px;
+		max-height: 150px;
     overflow: hidden;
 		&:after {
 			content: "";
