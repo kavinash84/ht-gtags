@@ -102,26 +102,28 @@ class Coupon extends React.Component {
                 APPLY COUPON
               </Heading>
               <div className={`${styles.applyCouponWrapper}`}>
-                <input
-                  className={styles.applyCopupnField}
-                  type="text"
-                  onChange={this.handleChange}
-                  value={this.state.coupon}
-                  placeholder="Enter coupon code"
-                />
-                <Button
-                  className={styles.applyCouponBtn}
-                  btnType="link"
-                  color="#f98d29"
-                  fontFamily="medium"
-                  pl="0"
-                  pr="0"
-                  fontSize="0.75rem"
-                  disabled={loading}
-                  onClick={this.handleApply}
-                >
-                  Apply
-                </Button>
+                <form onSubmit={this.handleApply}>
+                  <input
+                    className={styles.applyCopupnField}
+                    type="text"
+                    onChange={this.handleChange}
+                    value={this.state.coupon}
+                    placeholder="Enter coupon code"
+                  />
+                  <Button
+                    className={styles.applyCouponBtn}
+                    btnType="link"
+                    color="#f98d29"
+                    fontFamily="medium"
+                    pl="0"
+                    pr="0"
+                    fontSize="0.75rem"
+                    disabled={loading}
+                    onClick={this.handleApply}
+                  >
+                    Apply
+                  </Button>
+                </form>
                 {notifs.coupon && (
                   <Notifs namespace="coupon" NotifComponent={props => <LocalInlineNotification {...props} />} />
                 )}
