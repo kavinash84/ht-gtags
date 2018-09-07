@@ -42,15 +42,14 @@ import { isKeyExists } from 'utils/helper';
     if (!isSectionLoaded(getState(), 'banners')) {
       await wrapDispatch(dispatch, 'banners')(loadBanners()).catch(error => error);
     }
+    if (sessionId && !isCartLoaded(getState())) {
+      await dispatch(loadCart(sessionId, defaultPincode)).catch(error => error);
+    }
   },
   defer: ({ store: { dispatch, getState } }) => {
-    const { userLogin: { isLoggedIn, loggingOut }, app: { sessionId }, pincode: { selectedPincode } } = getState();
-    const defaultPincode = selectedPincode === '' ? PINCODE : selectedPincode;
+    const { userLogin: { isLoggedIn, loggingOut } } = getState();
     if (!isSectionLoaded(getState(), 'categories')) {
       wrapDispatch(dispatch, 'categories')(loadCategories()).catch(error => error);
-    }
-    if (sessionId && !loggingOut && !isCartLoaded(getState())) {
-      dispatch(loadCart(sessionId, defaultPincode)).catch(error => error);
     }
     if (isLoggedIn && !loggingOut && !isWishListLoaded(getState())) {
       dispatch(loadWishlist()).catch(error => console.log(error));
