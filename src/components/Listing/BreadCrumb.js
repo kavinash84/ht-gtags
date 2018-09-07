@@ -17,7 +17,6 @@ const BreadCrumb = ({ categoryDetails }) => {
                 <span itemProp="name">{item.name}</span>
                 <meta itemProp="position" content={index + 1} />
               </Link>
-              <br />
             </li>
           );
         }
