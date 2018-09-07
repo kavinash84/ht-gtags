@@ -41,8 +41,9 @@ const initialState = {
   fullNameFeedBackError: false,
   fullNameFeedBackMessage: 'Name cannot be left Empty'
 };
-@connect(({ myaddress }) => ({
-  ...myaddress
+@connect(({ myaddress, profile }) => ({
+  ...myaddress,
+  useremail: profile.data.email
 }))
 @withRouter
 export default class DeliveryAddress extends Component {
@@ -54,7 +55,6 @@ export default class DeliveryAddress extends Component {
     address: '',
     pincode: '',
     phone: '',
-    email: '',
     addressId: '',
     selectedAddress: '',
     editForm: false,
@@ -137,7 +137,6 @@ export default class DeliveryAddress extends Component {
       address: '',
       pincode: '',
       phone: '',
-      email: '',
       fullName: ''
     });
   };
@@ -155,9 +154,9 @@ export default class DeliveryAddress extends Component {
       fullNameFeedBackMessage
     } = this.state;
     const {
-      fullName, email, phone, address, pincode, editForm, addForm, currentaddressindex
+      fullName, phone, address, pincode, editForm, addForm, currentaddressindex
     } = this.state;
-    const { data } = this.props;
+    const { data, useremail } = this.props;
     return (
       <Div type="block" mb="2rem">
         <MyMenu page="address" />
@@ -165,7 +164,7 @@ export default class DeliveryAddress extends Component {
           <Container type="container" pr="0" pl="0">
             <Row display="block" mr="0" ml="0">
               {data.map((item, index) => (
-                <Div col="4" pr="0.625rem">
+                <Div col="4" pr="0.625rem" key={String(index)}>
                   <button
                     className={`${styles.addressBtn} ${index === currentaddressindex && styles.active}`}
                     onClick={() => this.handleClick(index)}
@@ -236,14 +235,14 @@ export default class DeliveryAddress extends Component {
                       feedBackMessage={pinFeedBackMessage}
                     />
                     <FormInput
-                      label="Email ID *"
                       type="text"
                       placeholder=""
                       onChange={this.handleChange}
-                      value={email}
+                      value={useremail}
                       name="email"
                       feedBackError={emailFeedBackError}
                       feedBackMessage={emailFeedBackMessage}
+                      hidden
                     />
                   </Div>
                 </Row>
@@ -301,14 +300,14 @@ export default class DeliveryAddress extends Component {
                       feedBackMessage={pinFeedBackMessage}
                     />
                     <FormInput
-                      label="Email ID *"
                       type="text"
                       placeholder=""
                       onChange={this.handleChange}
-                      value={email}
+                      value={useremail}
                       name="email"
                       feedBackError={emailFeedBackError}
                       feedBackMessage={emailFeedBackMessage}
+                      hidden
                     />
                   </Div>
                 </Row>
@@ -329,9 +328,11 @@ export default class DeliveryAddress extends Component {
 }
 
 DeliveryAddress.defaultProps = {
-  data: []
+  data: [],
+  useremail: ''
 };
 
 DeliveryAddress.propTypes = {
-  data: PropTypes.object
+  data: PropTypes.object,
+  useremail: PropTypes.string
 };
