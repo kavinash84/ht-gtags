@@ -15,6 +15,7 @@ import Footer from 'components/Footer';
 import { sendDeliveryAddress, resetGuestRegisterFlag } from 'redux/modules/checkout';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from 'redux/modules/address';
+import { notifSend } from 'redux/modules/notifs';
 import { isBlank } from 'js-utility-functions';
 import MenuCheckout from './MenuCheckout';
 import AddressForm from './AddressForm';
@@ -143,14 +144,22 @@ class DeliveryAddress extends Component {
     const {
       address: { shipping, billing, shippingIsBilling }
     } = this.props;
+    const { dispatch } = this.context.store;
     const { isLoggedIn } = this.props;
+    const { addressform } = this.state;
     if (shippingIsBilling) {
       const shippingForm = formValdiator(this.props, shipping, 'shipping');
       if (shippingForm.error) {
-        const message = isLoggedIn ? 'Please select delivery address' : 'Please Fill All Details Correctly !';
-        alert(message);
+        const message =
+          isLoggedIn && !addressform
+            ? 'Please Add new Address  /  Select delivery Address '
+            : 'Please Fill All Details Correctly !';
+        dispatch(notifSend({
+          type: 'warning',
+          msg: message,
+          dismissAfter: 2000
+        }));
       } else {
-        const { dispatch } = this.context.store;
         const { sessionId } = this.props;
         dispatch(sendDeliveryAddress(
           sessionId,
@@ -166,9 +175,12 @@ class DeliveryAddress extends Component {
       const shippingForm = formValdiator(this.props, shipping, 'shipping');
       const billingForm = formValdiator(this.props, billing, 'billing');
       if (shippingForm.error || billingForm.error) {
-        alert('Please Fill All Details Correctly !');
+        dispatch(notifSend({
+          type: 'warning',
+          msg: 'Fill All Details Correctly',
+          dismissAfter: 2000
+        }));
       } else {
-        const { dispatch } = this.context.store;
         const { sessionId } = this.props;
         dispatch(sendDeliveryAddress(sessionId, {
           shippingIsBilling,
