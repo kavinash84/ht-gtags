@@ -131,7 +131,11 @@ class ServiceSignUpModal extends Component {
                 </Button>
               </Div>
             </Row>
-            <ResponsiveModal onCloseModal={this.handleModal} open={this.state.open}>
+            <ResponsiveModal
+              classNames={{ modal: 'responsiveModal' }}
+              onCloseModal={this.handleModal}
+              open={this.state.open}
+            >
               {loading && (
                 <div className={styles.overlay}>
                   <Img className="spin" m="0 auto" width="36px" src={refreshIcon} alt="Pls Wait..." />

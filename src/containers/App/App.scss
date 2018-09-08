@@ -522,6 +522,10 @@
 	.customModal {
 		padding: 3rem;
 	}
+	.responsiveModal {
+		max-height: 100%;
+    overflow: auto;
+	}
 	.thumbCarousel {
 		.slick-next {
 			right: -30px !important;
