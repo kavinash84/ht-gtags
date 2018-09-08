@@ -117,6 +117,17 @@ export default function userMiddleware() {
           dismissAfter: 4000
         }));
         break;
+      // Delivery
+      case 'checkout/SEND_DELIVERY_ADDRESS_FAIL':
+        dispatch(notifSend({
+          type: 'warning',
+          msg:
+              action.error.error_message && action.error.error_message.indexOf('fullname') !== -1
+                ? 'Name Should Not Consists of Special Characters'
+                : SOME_ERROR,
+          dismissAfter: 4000
+        }));
+        break;
 
       default:
         break;
