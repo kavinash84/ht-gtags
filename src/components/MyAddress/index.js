@@ -70,6 +70,12 @@ export default class DeliveryAddress extends Component {
     fullNameFeedBackError: false,
     fullNameFeedBackMessage: 'Name cannot be left Empty'
   };
+  componentWillMount() {
+    const { useremail } = this.props;
+    this.setState({
+      email: useremail
+    });
+  }
   onSubmitValidator = () => {
     const {
       email, fullName, pincode, address, phone
@@ -108,10 +114,10 @@ export default class DeliveryAddress extends Component {
       addForm: false,
       editForm: true,
       currentaddressindex: index,
+      email,
       address,
       pincode,
       phone,
-      email,
       fullName,
       addressId
     });
@@ -243,7 +249,6 @@ export default class DeliveryAddress extends Component {
                       name="email"
                       feedBackError={emailFeedBackError}
                       feedBackMessage={emailFeedBackMessage}
-                      hidden
                     />
                   </Div>
                 </Row>
