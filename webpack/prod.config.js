@@ -226,13 +226,38 @@ module.exports = {
       directoryIndex: '/',
       verbose: true,
       navigateFallback: '/dist/index.html',
-      runtimeCaching: [{
-        urlPattern: /\/api\/widget\/load(.*)/,
-        handler: 'networkFirst',
-        options: {
-          debug: true
+      runtimeCaching: [
+        {
+          urlPattern: /\/api\/tesla\/(categories|banners\/desktop|cart|static\/(footer_react|store_react|home_page_offerstrip_react)|page-sections\/home\/products|recently-viewed)/, 
+          handler: 'fastest',
+          options: {
+            cache: {
+              maxEntries: 2,
+              name: 'homepage-cache'
+            }
+          }
+        },
+        {
+          urlPattern: /api\/tesla\/(categories|products)\//,
+          handler: 'networkFirst',
+          options: {
+            cache: {
+              maxEntries: 10,
+              name: 'api-cache'
+            }
+          }
+        },
+        {
+          urlPattern: /\/media\/(cms|product)\//,
+          handler: 'cacheFirst',
+          options: {
+            cache: {
+              maxEntries: 25,
+              name: 'images-cache'
+            }
+          }
         }
-      }]
+      ]
     })
   ]
 };
