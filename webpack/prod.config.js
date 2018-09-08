@@ -232,7 +232,7 @@ module.exports = {
           handler: 'fastest',
           options: {
             cache: {
-              maxEntries: 2,
+              maxEntries: 10,
               name: 'homepage-cache'
             }
           }
