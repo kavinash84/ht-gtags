@@ -83,14 +83,14 @@ export default class SignupFormContainer extends Component {
     e.preventDefault();
     const { email, password, phone } = this.state;
     const checkEmail = validateEmail(email, 'Invalid Email');
-    const checkPhone = validateMobile(phone, 'Mobile no. should be 10 digits');
+    const checkPhone = !validateMobile(phone, 'Mobile no. should be 10 digits');
     const checkPassword = validatePassword(password);
     if (checkEmail.error || checkPassword.error || checkPhone.error) {
       return this.setState({
         emailError: checkEmail.error,
         emailErrorMessage: checkEmail.errorMessage,
-        phoneError: checkPhone.error,
-        phoneErrorMessage: checkPhone.errorMessage,
+        phoneError: checkPhone,
+        phoneErrorMessage: checkPhone ? 'Invalid Mobile Number' : '',
         passwordError: checkPassword.error,
         passwordErrorMessage: checkPassword.error ? checkPassword.errorMessage : ''
       });
