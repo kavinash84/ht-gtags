@@ -55,11 +55,12 @@ export default class DeliveryAddressContainer extends Component {
 
 DeliveryAddressContainer.defaultProps = {
   cart: [],
-  history: {}
+  history: {},
+  isLoggedIn: false
 };
 
 DeliveryAddressContainer.propTypes = {
   history: PropTypes.object,
   cart: PropTypes.array,
-  isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool
 };
