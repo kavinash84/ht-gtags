@@ -232,7 +232,7 @@ module.exports = {
           handler: 'fastest',
           options: {
             cache: {
-              maxEntries: 10,
+              maxEntries: 5,
               name: 'homepage-cache'
             }
           }
@@ -242,17 +242,17 @@ module.exports = {
           handler: 'networkFirst',
           options: {
             cache: {
-              maxEntries: 10,
+              maxEntries: 2,
               name: 'api-cache'
             }
           }
         },
         {
-          urlPattern: /\/media\/(cms|product)\//,
+          urlPattern: /\/media\/cms\//,
           handler: 'cacheFirst',
           options: {
             cache: {
-              maxEntries: 25,
+              maxEntries: 10,
               name: 'images-cache'
             }
           }
