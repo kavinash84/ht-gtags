@@ -18,17 +18,23 @@ export default class Menu extends Component {
 
   setCurrentMenuData = () => {
     const menuData = this.props.menuItems.find(menu => menu.id === this.state.currentMenu);
-    if (menuData.children) {
-      if (menuData.children.length > 0) {
+    if (menuData) {
+      if (menuData.children) {
+        if (menuData.children.length > 0) {
+          this.setState({
+            hoverBox: true,
+            currentMenuData: menuData
+          });
+        }
+      } else {
         this.setState({
-          hoverBox: true,
+          hoverBox: false,
           currentMenuData: menuData
         });
       }
     } else {
       this.setState({
-        hoverBox: false,
-        currentMenuData: menuData
+        hoverBox: false
       });
     }
   };
