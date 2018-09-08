@@ -51,11 +51,11 @@
       border: none;
       margin: 0 3px;
       box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
-      border: solid 4px transparent;
+      border: solid 3px transparent;
       transition: all 0.5s ease;
       padding: 0;
       &.active, &:hover{
-        border: solid 4px #f98d29;
+        border: solid 3px #f98d29;
       }
     }
     .sliderImage{
