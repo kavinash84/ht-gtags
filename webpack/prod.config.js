@@ -242,14 +242,14 @@ module.exports = {
           handler: 'networkFirst',
           options: {
             cache: {
-              maxEntries: 2,
+              maxEntries: 50,
               name: 'api-cache'
             }
           }
         },
         {
           urlPattern: /\/media\/cms\//,
-          handler: 'cacheFirst',
+          handler: 'networkFirst',
           options: {
             cache: {
               maxEntries: 10,
