@@ -229,10 +229,10 @@ module.exports = {
       runtimeCaching: [
         {
           urlPattern: /\/api\/tesla\/(categories|banners\/desktop|cart|static\/(footer_react|store_react|home_page_offerstrip_react)|page-sections\/home\/products|recently-viewed)/, 
-          handler: 'fastest',
+          handler: 'networkFirst',
           options: {
             cache: {
-              maxEntries: 5,
+              maxEntries: 15,
               name: 'homepage-cache'
             }
           }
