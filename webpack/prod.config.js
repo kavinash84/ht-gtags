@@ -228,31 +228,21 @@ module.exports = {
       navigateFallback: '/dist/index.html',
       runtimeCaching: [
         {
-          urlPattern: /\/api\/tesla\/(categories|banners\/desktop|cart|static\/(footer_react|store_react|home_page_offerstrip_react)|page-sections\/home\/products|recently-viewed)/, 
+          urlPattern: /api\/tesla\//,
           handler: 'networkFirst',
           options: {
             cache: {
-              maxEntries: 15,
-              name: 'homepage-cache'
-            }
-          }
-        },
-        {
-          urlPattern: /api\/tesla\/(categories|products)\//,
-          handler: 'networkFirst',
-          options: {
-            cache: {
-              maxEntries: 50,
+              maxEntries: 25,
               name: 'api-cache'
             }
           }
         },
         {
-          urlPattern: /\/media\/cms\//,
+          urlPattern: /\/media\/cms\/hometownv2\//,
           handler: 'networkFirst',
           options: {
             cache: {
-              maxEntries: 10,
+              maxEntries: 5,
               name: 'images-cache'
             }
           }
