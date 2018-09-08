@@ -41,10 +41,12 @@
   a {
     display: inline-block;
     text-align: center;
-    padding: 17px 20px 17px 0;
+    padding: 10px;
     text-decoration: none;
-    font-size: 0.875rem;
+    font-size: 1rem;
     color: $white;
+    height: 53px;
+    line-height: 2;
     &:hover {
       color: #FFF;
     }
