@@ -151,6 +151,9 @@
 		right: 5px;
 		z-index: 1;
 		line-height: 1;
+		&:hover {
+			background: transparent;
+		}
 		svg{
 			cursor: pointer;
 			overflow: visible;
@@ -741,9 +744,12 @@
 	}
 	.ratings {
 		display: inline-block;
-    margin-left: 15px;
+    margin-left: 0;
 		margin-right: 10px;
-		top: 3px;
+		top: 0;
+	}
+	.ratingsCount {
+
 	}
 	.form-control {
 		width: 100%;
