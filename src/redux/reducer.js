@@ -35,6 +35,7 @@ import notifs from './modules/notifs';
 import address from './modules/address';
 import analytics from './modules/analytics';
 import services from './modules/services';
+import contactus from './modules/contactus';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -83,6 +84,7 @@ export default function createReducers(asyncReducers) {
     address,
     analytics,
     services,
+    contactus,
     ...asyncReducers
   };
 }

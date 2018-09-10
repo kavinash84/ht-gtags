@@ -128,7 +128,14 @@ export default function userMiddleware() {
           dismissAfter: 4000
         }));
         break;
-
+      // Contact US
+      case 'contactus/FEEDBACK_FAIL':
+        dispatch(notifSend({
+          type: 'warning',
+          msg: SOME_ERROR,
+          dismissAfter: 4000
+        }));
+        break;
       default:
         break;
     }

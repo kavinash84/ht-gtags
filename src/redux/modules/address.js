@@ -154,7 +154,9 @@ export default function reducer(state = initialState, action = {}) {
         [action.formType]: {
           ...state[action.formType],
           pincode: action.pincode,
-          pincodeFeedBackError: isEmpty(action.pincode) || pincodeIsValid(action.pincode)
+          pincodeFeedBackError: isEmpty(action.pincode) || pincodeIsValid(action.pincode),
+          city: '',
+          state: ''
         }
       };
     // Errors
@@ -285,8 +287,8 @@ export default function reducer(state = initialState, action = {}) {
           ...state[action.formType],
           loading: false,
           loaded: true,
-          city: action.result.pincode_details[0].city,
-          state: action.result.pincode_details[0].state,
+          city: (action.result.pincode_details[0] && action.result.pincode_details[0].city) || '',
+          state: (action.result.pincode_details[0] && action.result.pincode_details[0].state) || '',
           pincodeDetails: action.result.pincode_details || []
         }
       };
