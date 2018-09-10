@@ -236,16 +236,6 @@ module.exports = {
               name: 'api-cache'
             }
           }
-        },
-        {
-          urlPattern: /\/media\/cms\/hometownv2\//,
-          handler: 'networkFirst',
-          options: {
-            cache: {
-              maxEntries: 5,
-              name: 'images-cache'
-            }
-          }
         }
       ]
     })
