@@ -233,7 +233,9 @@ class ProductDetails extends React.Component {
                         }
                       />
                     </Div>
-                    <Div col="6" mt="0" pl="0.3125rem">
+                  </Row>
+                  <Row display="block" mt="0" mb="0.625rem" mr="0.9375rem" ml="0.9375rem">
+                    <Div col="6" mt="0" pl="0">
                       <Button
                         width="100%"
                         color={Theme.colors.secondary}
@@ -243,7 +245,7 @@ class ProductDetails extends React.Component {
                         size="block"
                         fontSize="0.75rem"
                         height="auto"
-                        p="0 .75rem"
+                        p="0 .75rem 0 0"
                         fontFamily="medium"
                         className={styles.addToWishlist}
                         onClick={onClickWishList(

@@ -126,16 +126,18 @@ class ReviewOrder extends Component {
                 </Row>
               </Div>
               {paymentFormData && <PaymentForm />}
-              <OrderSummary
-                itemsTotal={summary.items}
-                savings={summary.savings}
-                shipping={summary.shipping_charges}
-                totalCart={summary.total}
-                loadingnextstep={submitting}
-                isSubmitted={submitted}
-                itemsCount={summary.items_count}
-                onClick={nextStep(submitDetails, sessionId, paymentDetails, cardType)}
-              />
+              <Div col="3">
+                <OrderSummary
+                  itemsTotal={summary.items}
+                  savings={summary.savings}
+                  shipping={summary.shipping_charges}
+                  totalCart={summary.total}
+                  loadingnextstep={submitting}
+                  isSubmitted={submitted}
+                  itemsCount={summary.items_count}
+                  onClick={nextStep(submitDetails, sessionId, paymentDetails, cardType)}
+                />
+              </Div>
             </Row>
           </Container>
         </Section>
