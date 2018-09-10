@@ -271,3 +271,10 @@ export const getImageURL = (url, size) => {
   }
   return null;
 };
+
+export const allowNChar = (value, n) => {
+  if (value.length <= n) {
+    return true;
+  }
+  return false;
+};
