@@ -126,7 +126,7 @@ class ServiceSignUpModal extends Component {
           <Div>
             <Row ml="0" mr="0" mt="1.5rem">
               <Div col="12" ta="center">
-                <Button btnType="primary" pl="1rem" pr="2rem" onClick={this.handleModal}>
+                <Button btnType="primary" pl="1.5rem" pr="1.5rem" onClick={this.handleModal}>
                   SIGN UP NOW
                 </Button>
               </Div>
