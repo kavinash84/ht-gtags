@@ -6,7 +6,7 @@ import Row from 'hometown-components/lib/Row';
 import Div from 'hometown-components/lib/Div';
 import Section from 'hometown-components/lib/Section';
 import TitleBar from 'components/TitleBar';
-import FeedbackForm from 'hometown-components/lib/Forms/FeedbackForm';
+import FeedBackForm from 'hometown-components/lib/Forms/FeedBackForm';
 import { validateMobile, isEmpty, validateEmail } from 'utils/validation';
 import { notifSend } from 'redux/modules/notifs';
 import { sendData } from 'redux/modules/services';
@@ -108,18 +108,14 @@ class Feedback extends React.Component {
     }
   };
   handleChange = e => {
-    const {
-      target: { value, name }
-    } = e;
+    const { target: { value, name } } = e;
     this.setState({
       [name]: value,
       [`${name}FeedBackError`]: false
     });
   };
   handleCheckBoxChange = e => {
-    const {
-      target: { name }
-    } = e;
+    const { target: { name } } = e;
     this.setState({
       [name]: !this.state[name]
     });
@@ -140,7 +136,7 @@ class Feedback extends React.Component {
         >
           <Container type="container" pr="1.5rem" pl="1.5rem">
             <Row m="0 -0.625rem">
-              <FeedbackForm
+              <FeedBackForm
                 onSubmitForm={this.onSubmitForm}
                 handleChange={this.handleChange}
                 handleCheckBoxChange={this.handleCheckBoxChange}
