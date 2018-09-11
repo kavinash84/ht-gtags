@@ -9,11 +9,11 @@ import TitleBar from 'components/TitleBar';
 import FeedbackForm from 'hometown-components/lib/Forms/FeedbackForm';
 import { validateMobile, isEmpty, validateEmail } from 'utils/validation';
 import { notifSend } from 'redux/modules/notifs';
-import { submitFeedBack } from 'redux/modules/contactus';
+import { sendData } from 'redux/modules/services';
+import { FEEDBACK as FEEDBACK_API } from 'helpers/apiUrls';
 
-@connect(({ contactus }) => ({
-  loading: contactus.loading,
-  loaded: contactus.loaded
+@connect(({ services }) => ({
+  serviceRequest: services.feedback
 }))
 class Feedback extends React.Component {
   static contextTypes = {
@@ -44,7 +44,18 @@ class Feedback extends React.Component {
     // Validate Form
     const { dispatch } = this.context.store;
     const {
-      firstName, lastName, phone, email, city
+      firstName,
+      lastName,
+      phone,
+      email,
+      city,
+      storeName,
+      instore,
+      aftersale,
+      fitment,
+      delivery,
+      review,
+      order
     } = this.state;
     const firstNameFeedBackError = isEmpty(firstName);
     const lastNameFeedBackError = isEmpty(lastName);
@@ -71,7 +82,29 @@ class Feedback extends React.Component {
         dismissAfter: 3000
       }));
     } else {
-      dispatch(submitFeedBack(this.state));
+      let services = {
+        aftersale,
+        delivery,
+        instore,
+        fitment
+      };
+      services = Object.values(services)
+        .map((item, index) => item && Object.keys(services)[index])
+        .filter(item => item !== false)
+        .join(',');
+
+      const postData = {
+        firstName,
+        lastName,
+        email,
+        store: storeName,
+        city,
+        review,
+        services,
+        mobile: phone,
+        orderNumber: order
+      };
+      dispatch(sendData(FEEDBACK_API, postData, 'serviceRequest'));
     }
   };
   handleChange = e => {
@@ -92,7 +125,7 @@ class Feedback extends React.Component {
     });
   };
   render() {
-    const { loaded, loading } = this.props;
+    const { loaded, loading } = this.props.feedback;
     return (
       <Div type="block">
         <TitleBar title="FEEDBACK" />
@@ -124,10 +157,12 @@ class Feedback extends React.Component {
 }
 Feedback.defaultProps = {
   loading: false,
-  loaded: false
+  loaded: false,
+  feedback: {}
 };
 Feedback.propTypes = {
   loading: PropTypes.bool,
-  loaded: PropTypes.bool
+  loaded: PropTypes.bool,
+  feedback: PropTypes.object
 };
 export default Feedback;

@@ -60,3 +60,5 @@ export const SUGGESTIONS = 'tesla/search/suggestions';
 
 /* Services */
 export const SERVICE_SIGNUPS = 'tesla/campaign-signups';
+export const FEEDBACK = 'tesla/contact-us';
+export const SERVICE_REQUEST = 'tesla/contact-us';

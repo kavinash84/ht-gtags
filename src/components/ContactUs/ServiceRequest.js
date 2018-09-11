@@ -11,11 +11,11 @@ import TitleBar from 'components/TitleBar';
 import ServiceRequestForm from 'hometown-components/lib/Forms/ServiceRequestForm';
 import { validateMobile, isEmpty, validateEmail } from 'utils/validation';
 import { notifSend } from 'redux/modules/notifs';
-import { submitServiceRequest } from 'redux/modules/contactus';
+import { sendData } from 'redux/modules/services';
+import { SERVICE_REQUEST as SERVICE_REQUEST_API } from 'helpers/apiUrls';
 
-@connect(({ contactus }) => ({
-  loading: contactus.loading,
-  loaded: contactus.loaded
+@connect(({ services }) => ({
+  serviceRequest: services.serviceRequest
 }))
 class ServiceRequest extends React.Component {
   static contextTypes = {
@@ -46,9 +46,21 @@ class ServiceRequest extends React.Component {
     e.preventDefault();
     // Validate Form
     const { dispatch } = this.context.store;
+    /* eslint-disable */
     const {
-      firstName, lastName, phone, email, city, order, review
+      firstName,
+      lastName,
+      phone,
+      email,
+      city,
+      order,
+      review,
+      storeName,
+      assembly_dismatling,
+      out_of_warranty,
+      under_warranty
     } = this.state;
+    /* eslint-enable */
     const firstNameFeedBackError = isEmpty(firstName);
     const lastNameFeedBackError = isEmpty(lastName);
     const phoneFeedBackError = !validateMobile(phone);
@@ -79,7 +91,27 @@ class ServiceRequest extends React.Component {
         dismissAfter: 3000
       }));
     } else {
-      dispatch(submitServiceRequest(this.state));
+      let services = {
+        assembly_dismatling,
+        out_of_warranty,
+        under_warranty
+      };
+      services = Object.values(services)
+        .map((item, index) => item && Object.keys(services)[index])
+        .filter(item => item !== false)
+        .join(',');
+      const postData = {
+        firstName,
+        lastName,
+        email,
+        store: storeName,
+        city,
+        review,
+        services,
+        mobile: phone,
+        orderNumber: order
+      };
+      dispatch(sendData(SERVICE_REQUEST_API, postData, 'serviceRequest'));
     }
   };
   handleChange = e => {
@@ -100,7 +132,7 @@ class ServiceRequest extends React.Component {
     });
   };
   render() {
-    const { loaded, loading } = this.props;
+    const { loaded, loading } = this.props.serviceRequest;
     return (
       <Div type="block">
         <TitleBar title="SERVICE REQUEST" />
@@ -143,11 +175,13 @@ class ServiceRequest extends React.Component {
 }
 ServiceRequest.defaultProps = {
   loading: false,
-  loaded: false
+  loaded: false,
+  serviceRequest: {}
 };
 ServiceRequest.propTypes = {
   loading: PropTypes.bool,
-  loaded: PropTypes.bool
+  loaded: PropTypes.bool,
+  serviceRequest: PropTypes.object
 };
 
 export default ServiceRequest;
