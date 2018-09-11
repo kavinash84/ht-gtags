@@ -14,6 +14,7 @@ const debitcardIcon = require('../../../static/debit-card.svg');
 const intBankingIcon = require('../../../static/net-banking.svg');
 const emiIcon = require('../../../static/emi.svg');
 const walletIcon = require('../../../static/wallet.svg');
+const codIcon = require('../../../static/cod.svg');
 
 const initial = {
   CreditCard: {
@@ -328,6 +329,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
             onChange={onChangeGateway(onChange, paymentType, session)}
           />
           <Label htmlFor="paymentCD" pl="0" color="textLight" ml="0.9375rem">
+            <Img width="30px" float="left" mr="10px" top="-5px" position="relative" src={codIcon} alt="Wallet" />
             Cash On Delivery
           </Label>
         </Div>
