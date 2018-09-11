@@ -52,13 +52,13 @@
     display: inline-block;
     position: relative;
     height: 24px;
-    &:hover {
-      outline: none;
-      opacity: 0.8;
-      &+ .yourAccount {
-        display: block !important;
-      }
-    }
+    // &:hover {
+    //   outline: none;
+    //   opacity: 0.8;
+    //   &+ .yourAccount {
+    //     display: block !important;
+    //   }
+    // }
   }
   .cart {
     display: inline-block;

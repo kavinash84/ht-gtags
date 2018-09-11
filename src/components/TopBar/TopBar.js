@@ -83,6 +83,12 @@ export default class MenuSidebar extends Component {
     const { history, router } = this.props;
     history.push(`${URL}/?redirect=${checkRedirection(router.location.pathname)}`);
   };
+  handleUserPopOver = () => {
+    setTimeout(() => this.setState({ userPopOver: false }), 500);
+  };
+  handleUserPopIn = () => {
+    this.setState({ userPopOver: true });
+  };
   render() {
     const styles = require('./TopBar.scss');
     const { userPopOver } = this.state;
@@ -155,7 +161,15 @@ export default class MenuSidebar extends Component {
               <Img src={CartIcon} alt="Hometown" height="24px" />
               <span className={styles.count}>{cartCount}</span>
             </Link>
-            <Button p="0" className={styles.userBtn} ml="0.625rem">
+            <Button
+              p="0"
+              className={styles.userBtn}
+              ml="0.625rem"
+              onFocus={this.handleUserPopIn}
+              onBlur={this.handleUserPopOver}
+              onMouseOver={this.handleUserPopIn}
+              onMouseOut={this.handleUserPopOver}
+            >
               <Img src={UserIcon} alt="Account" height="24px" mr="0" float="left" />
             </Button>
             <div className={`${styles.yourAccount} ${userPopOver ? '' : styles.hide}`}>
