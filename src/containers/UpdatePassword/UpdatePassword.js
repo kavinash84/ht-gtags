@@ -9,6 +9,7 @@ import Div from 'hometown-components/lib/Div';
 import { isBlank } from 'js-utility-functions';
 import { validatePassword } from 'utils/validation';
 import { updateUserPassword } from 'redux/modules/updatepassword';
+import { allowNChar } from 'utils/helper';
 
 @connect(({ updatepassword }) => ({
   response: updatepassword
@@ -50,6 +51,9 @@ export default class UpdatePasswordFormContainer extends Component {
       target: { value }
     } = e;
     const checkError = validatePassword(value);
+    if (!allowNChar(value, 15)) {
+      return;
+    }
     this.setState({
       newPwd: value,
       newPwdError: checkError.error,
@@ -61,6 +65,9 @@ export default class UpdatePasswordFormContainer extends Component {
       target: { value }
     } = e;
     const checkError = value !== this.state.newPwd;
+    if (!allowNChar(value, 15)) {
+      return;
+    }
     this.setState({
       confirmPwd: value,
       confirmPwdError: checkError,

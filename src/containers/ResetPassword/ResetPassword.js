@@ -15,6 +15,7 @@ import Empty from 'hometown-components/lib/Empty';
 import { isBlank } from 'js-utility-functions';
 import { validatePassword } from 'utils/validation';
 import { resetPassword } from 'redux/modules/forgotpassword';
+import { allowNChar } from 'utils/helper';
 
 const SidebarImg = require('../../../static/login-side-thumb.png');
 const PasswordExpiredIcon = require('../../../static/password-expired-icon.png');
@@ -51,6 +52,9 @@ export default class ResetPasswordContainer extends Component {
       target: { value }
     } = e;
     const checkError = validatePassword(value);
+    if (!allowNChar(value, 15)) {
+      return;
+    }
     this.setState({
       newPwd: value,
       newPwdError: checkError.error,

@@ -82,7 +82,7 @@ export default class SignupFormContainer extends Component {
       target: { value }
     } = e;
     const checkError = validatePassword(value);
-    if (!allowNChar(value, 16)) {
+    if (!allowNChar(value, 15)) {
       return;
     }
     this.setState({

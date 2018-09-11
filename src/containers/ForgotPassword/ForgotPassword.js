@@ -34,7 +34,8 @@ export default class ForgotPasswordContainer extends Component {
     this.state = {
       email: '',
       emailError: false,
-      emailErrorMessage: ''
+      emailErrorMessage: '',
+      submitted: false
     };
   }
 
@@ -60,13 +61,16 @@ export default class ForgotPasswordContainer extends Component {
         emailErrorMessage: checkEmail.errorMessage
       });
     }
+    this.setState({ submitted: true });
     const { dispatch } = this.context.store;
     dispatch(forgotPassword(email));
   };
   render() {
     const styles = require('../Login/index.scss');
 
-    const { email, emailError, emailErrorMessage } = this.state;
+    const {
+      email, emailError, emailErrorMessage, submitted
+    } = this.state;
     const { response } = this.props;
     const { loaded, error } = response;
     return (
@@ -88,10 +92,7 @@ export default class ForgotPasswordContainer extends Component {
                   </div>
                 </Div>
                 <Div col={7} p="1.25rem 3.5rem" bg="#f8f8f8">
-                  {/* {(!loaded || error) && !email && (
-
-                  )} */}
-                  {loaded && !error && email ? (
+                  {loaded && !error && submitted ? (
                     <div className={`${styles.responseBlock}`}>
                       <img src={ForgotPasswordImg} alt="" />
                       <Row display="block" mr="0" ml="0">
