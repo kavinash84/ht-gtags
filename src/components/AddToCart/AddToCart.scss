@@ -43,6 +43,7 @@
 }
 .addToCartBtn {
   transition: 0.75s all ease;
+  border-radius: 3px;
   &:hover {
     background-color: $primary !important;
     span {
