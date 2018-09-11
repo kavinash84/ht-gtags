@@ -1,6 +1,6 @@
-import HomeTownLoader from 'containers/Loader';
 import { provideHooks } from 'redial';
 import { wrapDispatch } from 'multireducer';
+import HomeTownLoader from 'containers/Loader';
 import {
   loadTopSelling,
   // loadHashTags,

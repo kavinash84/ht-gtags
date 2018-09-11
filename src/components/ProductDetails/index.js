@@ -17,7 +17,7 @@ import Specs from 'hometown-components/lib/ProductDetails/Specs';
 import Reviews from 'hometown-components/lib/Reviews';
 import AddReview from 'hometown-components/lib/Reviews/WriteReview';
 import Img from 'hometown-components/lib/Img';
-import WisListIcon from 'hometown-components/lib/Icons/WisListIcon';
+import WishListIcon from 'hometown-components/lib/Icons/WishListIcon';
 import ProductCarousel from 'components/ProductCarousel';
 import EmiModal from 'containers/EmiModal/EmiModal';
 import Theme from 'hometown-components/lib/Theme';
@@ -260,7 +260,7 @@ class ProductDetails extends React.Component {
                         isWishList={isInWishList(wishList, sku)}
                         disabled={isInWishList(loadingList, sku)}
                       >
-                        <WisListIcon width="40" height="40" />
+                        <WishListIcon width="40" height="40" />
                         {isInWishList(wishList, sku) ? 'REMOVE FROM WISHLIST' : 'ADD TO WISHLIST'}
                       </Button>
                     </Div>

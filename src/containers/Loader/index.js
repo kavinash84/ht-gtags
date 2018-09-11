@@ -7,13 +7,12 @@ const CustomLoader = () => (
   </div>
 );
 
-export default function HomeTownLoader(opts) {
-  return Loadable(Object.assign(
-    {
-      loading: CustomLoader,
-      delay: 200,
-      timeout: 10
-    },
-    opts
-  ));
-}
+export default opts => {
+  const optionsObj = {
+    loading: CustomLoader,
+    delay: 200,
+    timeout: 10,
+    ...opts
+  };
+  return Loadable(optionsObj);
+};
