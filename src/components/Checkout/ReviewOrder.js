@@ -6,6 +6,7 @@ import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
+import Img from 'hometown-components/lib/Img';
 import ShippedTo from 'hometown-components/lib/ShippedTo';
 // import PaymentMethod from 'hometown-components/lib/PaymentMethod';
 import { bindActionCreators } from 'redux';
@@ -14,6 +15,7 @@ import Footer from 'components/Footer';
 import { formatAmount } from 'utils/formatters';
 import { validatePaymentDetails } from 'utils/validation';
 import { getCartList } from 'selectors/cart';
+import ProgressiveImageSchemer from 'hometown-components/lib/ProgressiveImageSchemer';
 
 import MenuCheckout from './MenuCheckout';
 import OrderSummary from './OrderSummary';
@@ -101,12 +103,14 @@ class ReviewOrder extends Component {
                           <th>Delivery</th>
                           <th width="100px">Quantity</th>
                           <th>Cost</th>
-                          <th />
+                          <th width="110px" />
                         </tr>
                         {results.map(item => (
                           <tr key={item.id_customer_cart}>
                             <td>
-                              <img className="thumb" src={item.product_info.image} alt="" />
+                              <ProgressiveImageSchemer src={item.product_info.image} width="60px" height="60px">
+                                {imageURL => <Img width="60px" src={imageURL} alt="" />}
+                              </ProgressiveImageSchemer>
                             </td>
                             <td>{item.product_info.name}</td>
                             <td>{item.product_info.delivery_time_text}</td>
@@ -122,16 +126,18 @@ class ReviewOrder extends Component {
                 </Row>
               </Div>
               {paymentFormData && <PaymentForm />}
-              <OrderSummary
-                itemsTotal={summary.items}
-                savings={summary.savings}
-                shipping={summary.shipping_charges}
-                totalCart={summary.total}
-                loadingnextstep={submitting}
-                isSubmitted={submitted}
-                itemsCount={summary.items_count}
-                onClick={nextStep(submitDetails, sessionId, paymentDetails, cardType)}
-              />
+              <Div col="3">
+                <OrderSummary
+                  itemsTotal={summary.items}
+                  savings={summary.savings}
+                  shipping={summary.shipping_charges}
+                  totalCart={summary.total}
+                  loadingnextstep={submitting}
+                  isSubmitted={submitted}
+                  itemsCount={summary.items_count}
+                  onClick={nextStep(submitDetails, sessionId, paymentDetails, cardType)}
+                />
+              </Div>
             </Row>
           </Container>
         </Section>
@@ -162,7 +168,4 @@ ReviewOrder.propTypes = {
   submitting: PropTypes.bool,
   submitted: PropTypes.bool
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ReviewOrder);
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewOrder);

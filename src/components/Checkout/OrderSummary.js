@@ -22,58 +22,56 @@ const OrderSummary = ({
   isSubmitted,
   outOfStockList
 }) => (
-  <Div col="3">
-    <Div className={styles.orderSummary}>
-      <Heading fontSize="0.875em" mb="0.625rem" color="secondary">
-        ORDER SUMMARY
-      </Heading>
-      <Div col="12">
-        <Text color="rgba(0, 0, 0, 0.8);">
-          Total Price ({itemsCount} item{itemsCount === 1 ? '' : 's'})
-          <Span float="right" color="#000000" fontFamily="medium">
-            Rs. {itemsTotal ? formatAmount(itemsTotal) : null}
-          </Span>
-        </Text>
-        <Text color="rgba(0, 0, 0, 0.8);">
-          Savings
-          <Span float="right" color="#000000" fontFamily="medium">
-            Rs. {savings ? formatAmount(savings) : 0}
-          </Span>
-        </Text>
-        <Text color="rgba(0, 0, 0, 0.8);">
-          Shipping
-          <Span float="right" color="#000000" fontFamily="medium">
-            {shipping === 0 ? 'Free' : `Rs. ${shipping}`}
-          </Span>
-        </Text>
-        <Text color="rgba(0, 0, 0, 0.8);">
-          Total
-          <Span float="right" color="#000000" fontFamily="medium">
-            Rs. {totalCart ? formatAmount(totalCart) : null}
-          </Span>
-        </Text>
-      </Div>
-      <Div col="12" mt="0.625rem">
-        <Coupon />
-      </Div>
-      <Div col="12" mt="0.625rem">
-        {!hidebutton && (
-          <Button
-            size="block"
-            btnType="primary"
-            height="42px"
-            mt="0.625rem"
-            fontFamily="Light"
-            fontSize="0.875rem"
-            ls="1px"
-            onClick={onClick}
-            hide={hidebutton}
-            disabled={loadingnextstep || isSubmitted || (outOfStockList && outOfStockList.length > 0)}
-          >
-            {loadingnextstep || isSubmitted ? 'Please wait...' : 'CONTINUE'}
-          </Button>
-        )}
-      </Div>
+  <Div className={styles.orderSummary}>
+    <Heading fontSize="0.875em" mb="0.625rem" color="secondary">
+      ORDER SUMMARY
+    </Heading>
+    <Div col="12">
+      <Text color="rgba(0, 0, 0, 0.8);">
+        Total Price ({itemsCount} item{itemsCount === 1 ? '' : 's'})
+        <Span float="right" color="#000000" fontFamily="medium">
+          Rs. {itemsTotal ? formatAmount(itemsTotal) : null}
+        </Span>
+      </Text>
+      <Text color="rgba(0, 0, 0, 0.8);">
+        Savings
+        <Span float="right" color="#000000" fontFamily="medium">
+          Rs. {savings ? formatAmount(savings) : 0}
+        </Span>
+      </Text>
+      <Text color="rgba(0, 0, 0, 0.8);">
+        Shipping
+        <Span float="right" color="#000000" fontFamily="medium">
+          {shipping === 0 ? 'Free' : `Rs. ${shipping}`}
+        </Span>
+      </Text>
+      <Text color="rgba(0, 0, 0, 0.8);">
+        Total
+        <Span float="right" color="#000000" fontFamily="medium">
+          Rs. {totalCart ? formatAmount(totalCart) : null}
+        </Span>
+      </Text>
+    </Div>
+    <Div col="12" mt="0.625rem">
+      <Coupon />
+    </Div>
+    <Div col="12" mt="0.625rem">
+      {!hidebutton && (
+        <Button
+          size="block"
+          btnType="primary"
+          height="42px"
+          mt="0.625rem"
+          fontFamily="Light"
+          fontSize="0.875rem"
+          ls="1px"
+          onClick={onClick}
+          hide={hidebutton}
+          disabled={loadingnextstep || isSubmitted || (outOfStockList && outOfStockList.length > 0)}
+        >
+          {loadingnextstep || isSubmitted ? 'Please wait...' : 'CONTINUE'}
+        </Button>
+      )}
     </Div>
   </Div>
 );

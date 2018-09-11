@@ -27,25 +27,19 @@ class ServiceSignUpModal extends Component {
     open: false
   };
   onChangeName = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     this.setState({
       name: value
     });
   };
   onChangeEmail = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     this.setState({
       email: value
     });
   };
   onChangePhone = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     const regex = /^((?!(0))[0-9]{1,10})$/;
     if (regex.test(value)) {
       this.setState({
@@ -54,25 +48,19 @@ class ServiceSignUpModal extends Component {
     }
   };
   onChangeAddress = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     this.setState({
       address: value
     });
   };
   onChangeLocation = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     this.setState({
       location: value
     });
   };
   onChangePincode = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     const regex = /^((?!(0))[0-9]{1,6})$/;
     if (regex.test(value)) {
       this.setState({
@@ -81,9 +69,7 @@ class ServiceSignUpModal extends Component {
     }
   };
   onChangeService = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     this.setState({
       service: value
     });
@@ -126,12 +112,16 @@ class ServiceSignUpModal extends Component {
           <Div>
             <Row ml="0" mr="0" mt="1.5rem">
               <Div col="12" ta="center">
-                <Button btnType="primary" pl="1rem" pr="2rem" onClick={this.handleModal}>
+                <Button btnType="primary" pl="1.5rem" pr="1.5rem" onClick={this.handleModal}>
                   SIGN UP NOW
                 </Button>
               </Div>
             </Row>
-            <ResponsiveModal onCloseModal={this.handleModal} open={this.state.open}>
+            <ResponsiveModal
+              classNames={{ modal: 'responsiveModal' }}
+              onCloseModal={this.handleModal}
+              open={this.state.open}
+            >
               {loading && (
                 <div className={styles.overlay}>
                   <Img className="spin" m="0 auto" width="36px" src={refreshIcon} alt="Pls Wait..." />
@@ -188,7 +178,4 @@ ServiceSignUpModal.propTypes = {
   sendFormData: PropTypes.func.isRequired
 };
 
-export default connect(
-  mapStateToProps,
-  { sendFormData: sendData }
-)(ServiceSignUpModal);
+export default connect(mapStateToProps, { sendFormData: sendData })(ServiceSignUpModal);

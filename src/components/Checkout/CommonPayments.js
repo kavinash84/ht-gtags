@@ -1,5 +1,6 @@
 import React from 'react';
 import Div from 'hometown-components/lib/Div';
+import Img from 'hometown-components/lib/Img';
 import { Label } from 'hometown-components/lib/Label';
 
 import CardForm from './CardForm';
@@ -7,6 +8,12 @@ import BankCard from './BankCard';
 import Emi from './Emi';
 
 const styles = require('./Checkout.scss');
+
+const creditcardIcon = require('../../../static/credit-card.svg');
+const debitcardIcon = require('../../../static/debit-card.svg');
+const intBankingIcon = require('../../../static/net-banking.svg');
+const emiIcon = require('../../../static/emi.svg');
+const walletIcon = require('../../../static/wallet.svg');
 
 const initial = {
   CreditCard: {
@@ -70,6 +77,15 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
             ml="0.9375rem"
             onClick={onChangeGateway(onChange, paymentType, session)}
           >
+            <Img
+              width="30px"
+              float="left"
+              mr="10px"
+              top="-5px"
+              position="relative"
+              src={creditcardIcon}
+              alt="Credit Card"
+            />
             Credit Card
           </Label>
           {selectedGateway === paymentType && (
@@ -96,6 +112,15 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
             ml="0.9375rem"
             onClick={onChangeGateway(onChange, paymentType, session)}
           >
+            <Img
+              width="30px"
+              float="left"
+              mr="10px"
+              top="-5px"
+              position="relative"
+              src={debitcardIcon}
+              alt="Debit Card"
+            />
             Debit Card
           </Label>
           {selectedGateway === paymentType && (
@@ -123,6 +148,15 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
               ml="0.9375rem"
               onClick={onChangeGateway(onChange, paymentType, session)}
             >
+              <Img
+                width="30px"
+                float="left"
+                mr="10px"
+                top="-5px"
+                position="relative"
+                src={intBankingIcon}
+                alt="Internet Banking"
+              />
               Internet Banking
             </Label>
           </Div>
@@ -203,6 +237,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
               ml="0.9375rem"
               onClick={onChangeGateway(onChange, paymentType, session)}
             >
+              <Img width="30px" float="left" mr="10px" top="-5px" position="relative" src={emiIcon} alt="EMI" />
               EMI
             </Label>
           </Div>
@@ -222,7 +257,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
             <input
               type="radio"
               name="paymentOption"
-              value="Emi"
+              value="Wallet"
               checked={selectedGateway === paymentType}
               onChange={onChangeGateway(onChange, paymentType, session)}
             />
@@ -233,6 +268,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
               ml="0.9375rem"
               onClick={onChangeGateway(onChange, paymentType, session)}
             >
+              <Img width="30px" float="left" mr="10px" top="-5px" position="relative" src={walletIcon} alt="Wallet" />
               Wallet
             </Label>
           </Div>

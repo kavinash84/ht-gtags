@@ -17,6 +17,7 @@ import Specs from 'hometown-components/lib/ProductDetails/Specs';
 import Reviews from 'hometown-components/lib/Reviews';
 import AddReview from 'hometown-components/lib/Reviews/WriteReview';
 import Img from 'hometown-components/lib/Img';
+import WisListIcon from 'hometown-components/lib/Icons/WisListIcon';
 import ProductCarousel from 'components/ProductCarousel';
 import EmiModal from 'containers/EmiModal/EmiModal';
 import Theme from 'hometown-components/lib/Theme';
@@ -160,7 +161,7 @@ class ProductDetails extends React.Component {
           <Container type="container" pr="0" pl="0">
             <Row display="block" mt="0" mb="0" mr="0" ml="0">
               <Div>
-                <Div col="7" pt="1.5rem" pr="1rem" className={styles.pdpLeftWrapper}>
+                <Div col="8" pt="1.5rem" pr="1rem" className={styles.pdpLeftWrapper}>
                   <Div col="12" className={styles.breadCrumbWrapper} mb="1rem">
                     <BreadCrumb categoryDetails={categoryDetails} />
                   </Div>
@@ -175,7 +176,7 @@ class ProductDetails extends React.Component {
                     </div>
                   </Div> */}
                 </Div>
-                <Div col="5" pt="1.5rem" pl="0.3125rem" pr="0.3125rem" pb="1rem" className={styles.pdpRightWrapper}>
+                <Div col="4" pt="1.5rem" pl="0.3125rem" pr="0.3125rem" pb="1rem" className={styles.pdpRightWrapper}>
                   <div id="portal" className="portal" />
                   <Div className={styles.titleWrapper}>
                     <TitlePrice
@@ -232,17 +233,20 @@ class ProductDetails extends React.Component {
                         }
                       />
                     </Div>
-                    <Div col="6" mt="0" pl="0.3125rem">
+                  </Row>
+                  <Row display="block" mt="0" mb="0.625rem" mr="0.9375rem" ml="0.9375rem">
+                    <Div col="6" mt="0" pl="0">
                       <Button
                         width="100%"
-                        color={Theme.colors.primary}
-                        btnType="custom"
+                        color={Theme.colors.secondary}
+                        btnType="link"
                         border="1px solid"
-                        bc={Theme.colors.primary}
                         bg="transparent"
                         size="block"
-                        fontSize="0.857rem"
-                        height="40px"
+                        fontSize="0.75rem"
+                        height="auto"
+                        p="0 .75rem 0 0"
+                        fontFamily="medium"
                         className={styles.addToWishlist}
                         onClick={onClickWishList(
                           sku,
@@ -256,6 +260,7 @@ class ProductDetails extends React.Component {
                         isWishList={isInWishList(wishList, sku)}
                         disabled={isInWishList(loadingList, sku)}
                       >
+                        <WisListIcon width="40" height="40" />
                         {isInWishList(wishList, sku) ? 'REMOVE FROM WISHLIST' : 'ADD TO WISHLIST'}
                       </Button>
                     </Div>
@@ -338,7 +343,4 @@ ProductDetails.propTypes = {
   addToWaitList: PropTypes.func.isRequired,
   toggleReviewBox: PropTypes.func.isRequired
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

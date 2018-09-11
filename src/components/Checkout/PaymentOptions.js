@@ -142,15 +142,17 @@ class PaymentOptions extends Component {
                   </Div>
                 </Row>
               </Div>
-              <OrderSummary
-                itemsTotal={summary.items}
-                savings={summary.savings}
-                shipping={summary.shipping_charges}
-                totalCart={summary.total}
-                onClick={() => null}
-                itemsCount={summary.items_count}
-                hidebutton
-              />
+              <Div col="3">
+                <OrderSummary
+                  itemsTotal={summary.items}
+                  savings={summary.savings}
+                  shipping={summary.shipping_charges}
+                  totalCart={summary.total}
+                  onClick={() => null}
+                  itemsCount={summary.items_count}
+                  hidebutton
+                />
+              </Div>
             </Row>
           </Container>
         </Section>

@@ -51,6 +51,12 @@
 	.spin {
 		animation: spin 1s infinite linear;
 	}
+	.btn-primary {
+	  &:hover {
+	    background-color: transparent !important;
+	    color: $primary !important;
+	  }
+	}
 
 	/* NProgress Start */
 	#nprogress {
@@ -151,6 +157,9 @@
 		right: 5px;
 		z-index: 1;
 		line-height: 1;
+		&:hover {
+			background: transparent;
+		}
 		svg{
 			cursor: pointer;
 			overflow: visible;
@@ -522,6 +531,10 @@
 	.customModal {
 		padding: 3rem;
 	}
+	.responsiveModal {
+		max-height: 100%;
+    overflow: auto;
+	}
 	.thumbCarousel {
 		.slick-next {
 			right: -30px !important;
@@ -534,7 +547,7 @@
 		}
 		.slick-prev, .slick-next {
     	transform: scale(0.8);
-    	top: calc(50% - 8px);
+    	top: calc(50% - 17px);
 		}
 	}
 
@@ -737,9 +750,12 @@
 	}
 	.ratings {
 		display: inline-block;
-    margin-left: 15px;
+    margin-left: 0;
 		margin-right: 10px;
-		top: 3px;
+		top: 0;
+	}
+	.ratingsCount {
+
 	}
 	.form-control {
 		width: 100%;
