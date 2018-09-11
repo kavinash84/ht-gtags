@@ -35,7 +35,9 @@ export default class UpdatePasswordFormContainer extends Component {
     confirmPwdErrorMessage: ''
   };
   onChangeOldPwd = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = isBlank(value);
     this.setState({
       oldPwd: value,
@@ -44,7 +46,9 @@ export default class UpdatePasswordFormContainer extends Component {
     });
   };
   onChangeNewPwd = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = validatePassword(value);
     this.setState({
       newPwd: value,
@@ -53,7 +57,9 @@ export default class UpdatePasswordFormContainer extends Component {
     });
   };
   onChangeConfirmPwd = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = value !== this.state.newPwd;
     this.setState({
       confirmPwd: value,
@@ -81,7 +87,7 @@ export default class UpdatePasswordFormContainer extends Component {
         oldPwdError: checkOldPwd,
         oldPwdErrorMessage: checkOldPwd ? "Old Password can't be blank" : '',
         newPwdError: checkNewPwd,
-        newPwdErrorMessage: checkNewPwd ? 'Password should be minimum 4 and maximum 15 characters' : '',
+        newPwdErrorMessage: checkNewPwd ? 'Password should be minimum 6 and maximum 15 characters' : '',
         confirmPwdError: checkConfirmPwd,
         confirmPwdErrorMessage: checkConfirmPwd ? "Confirm Password doesn't match" : ''
       });
