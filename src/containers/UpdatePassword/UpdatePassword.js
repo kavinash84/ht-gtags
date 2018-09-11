@@ -9,6 +9,7 @@ import Div from 'hometown-components/lib/Div';
 import { isBlank } from 'js-utility-functions';
 import { validatePassword } from 'utils/validation';
 import { updateUserPassword } from 'redux/modules/updatepassword';
+import { allowNChar } from 'utils/helper';
 
 @connect(({ updatepassword }) => ({
   response: updatepassword
@@ -35,7 +36,9 @@ export default class UpdatePasswordFormContainer extends Component {
     confirmPwdErrorMessage: ''
   };
   onChangeOldPwd = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = isBlank(value);
     this.setState({
       oldPwd: value,
@@ -44,8 +47,13 @@ export default class UpdatePasswordFormContainer extends Component {
     });
   };
   onChangeNewPwd = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = validatePassword(value);
+    if (!allowNChar(value, 15)) {
+      return;
+    }
     this.setState({
       newPwd: value,
       newPwdError: checkError.error,
@@ -53,8 +61,13 @@ export default class UpdatePasswordFormContainer extends Component {
     });
   };
   onChangeConfirmPwd = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = value !== this.state.newPwd;
+    if (!allowNChar(value, 15)) {
+      return;
+    }
     this.setState({
       confirmPwd: value,
       confirmPwdError: checkError,
@@ -81,7 +94,7 @@ export default class UpdatePasswordFormContainer extends Component {
         oldPwdError: checkOldPwd,
         oldPwdErrorMessage: checkOldPwd ? "Old Password can't be blank" : '',
         newPwdError: checkNewPwd,
-        newPwdErrorMessage: checkNewPwd ? 'Password should be minimum 4 and maximum 15 characters' : '',
+        newPwdErrorMessage: checkNewPwd ? 'Password should be minimum 6 and maximum 15 characters' : '',
         confirmPwdError: checkConfirmPwd,
         confirmPwdErrorMessage: checkConfirmPwd ? "Confirm Password doesn't match" : ''
       });

@@ -168,4 +168,7 @@ ReviewOrder.propTypes = {
   submitting: PropTypes.bool,
   submitted: PropTypes.bool
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ReviewOrder);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ReviewOrder);

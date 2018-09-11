@@ -15,6 +15,7 @@ import Empty from 'hometown-components/lib/Empty';
 import { isBlank } from 'js-utility-functions';
 import { validatePassword } from 'utils/validation';
 import { resetPassword } from 'redux/modules/forgotpassword';
+import { allowNChar } from 'utils/helper';
 
 const SidebarImg = require('../../../static/login-side-thumb.png');
 const PasswordExpiredIcon = require('../../../static/password-expired-icon.png');
@@ -47,8 +48,13 @@ export default class ResetPasswordContainer extends Component {
     }
   }
   onChangeNewPwd = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = validatePassword(value);
+    if (!allowNChar(value, 15)) {
+      return;
+    }
     this.setState({
       newPwd: value,
       newPwdError: checkError.error,
@@ -56,7 +62,9 @@ export default class ResetPasswordContainer extends Component {
     });
   };
   onChangeConfirmPwd = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = this.matchConfirmPassword(value);
     this.setState({
       confirmPwd: value,
@@ -81,7 +89,7 @@ export default class ResetPasswordContainer extends Component {
     if (checkConfirmPwd || checkNewPwd) {
       return this.setState({
         newPwdError: checkNewPwd,
-        newPwdErrorMessage: checkNewPwd ? 'Password must be at least 8 character long' : '',
+        newPwdErrorMessage: checkNewPwd ? 'Password must contain atleast 6 and max 15 characters' : '',
         confirmPwdError: checkConfirmPwd,
         confirmPwdErrorMessage: checkConfirmPwd ? "Confirm Password doesn't match" : ''
       });
@@ -105,7 +113,9 @@ export default class ResetPasswordContainer extends Component {
       newPwd, confirmPwd, newPwdError, newPwdErrorMessage, confirmPwdError, confirmPwdErrorMessage
     } = this.state;
     const { response } = this.props;
-    const { checkHash: { is_valid: isValid } } = response;
+    const {
+      checkHash: { is_valid: isValid }
+    } = response;
     return (
       <Section p="0" mb="0">
         <Menu />

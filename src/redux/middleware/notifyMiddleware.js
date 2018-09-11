@@ -105,7 +105,7 @@ export default function userMiddleware() {
       case 'login/LOGIN_FAIL':
         dispatch(notifSend({
           type: 'warning',
-          msg: (action.error.error === 'invalid_grant' && 'Invalid Credentials') || SOME_ERROR,
+          msg: (action.error.error === 'invalid_grant' && 'Incorrect Email or Password') || SOME_ERROR,
           dismissAfter: 4000
         }));
         break;
@@ -117,7 +117,30 @@ export default function userMiddleware() {
           dismissAfter: 4000
         }));
         break;
-
+      // Delivery
+      case 'checkout/SEND_DELIVERY_ADDRESS_FAIL': {
+        let msg;
+        if (action.error.error_message && action.error.error_message.indexOf('fullname') !== -1) {
+          msg = 'Name Should Not Consists of Special Characters.';
+        }
+        if (action.error.error_message && action.error.error_message.indexOf('pincode') !== -1) {
+          msg = 'Pincode is Not Valid !';
+        }
+        dispatch(notifSend({
+          type: 'warning',
+          msg: msg || SOME_ERROR,
+          dismissAfter: 4000
+        }));
+        break;
+      }
+      // Contact US
+      case 'contactus/FEEDBACK_FAIL':
+        dispatch(notifSend({
+          type: 'warning',
+          msg: SOME_ERROR,
+          dismissAfter: 4000
+        }));
+        break;
       default:
         break;
     }

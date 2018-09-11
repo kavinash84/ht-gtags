@@ -27,19 +27,25 @@ class ServiceSignUpModal extends Component {
     open: false
   };
   onChangeName = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     this.setState({
       name: value
     });
   };
   onChangeEmail = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     this.setState({
       email: value
     });
   };
   onChangePhone = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const regex = /^((?!(0))[0-9]{1,10})$/;
     if (regex.test(value)) {
       this.setState({
@@ -48,19 +54,25 @@ class ServiceSignUpModal extends Component {
     }
   };
   onChangeAddress = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     this.setState({
       address: value
     });
   };
   onChangeLocation = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     this.setState({
       location: value
     });
   };
   onChangePincode = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const regex = /^((?!(0))[0-9]{1,6})$/;
     if (regex.test(value)) {
       this.setState({
@@ -69,7 +81,9 @@ class ServiceSignUpModal extends Component {
     }
   };
   onChangeService = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     this.setState({
       service: value
     });
@@ -178,4 +192,7 @@ ServiceSignUpModal.propTypes = {
   sendFormData: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps, { sendFormData: sendData })(ServiceSignUpModal);
+export default connect(
+  mapStateToProps,
+  { sendFormData: sendData }
+)(ServiceSignUpModal);

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { PINCODE as PINCODE_API } from 'helpers/apiUrls';
+import { allowNChar, allowTypeOf } from 'utils/helper';
 import { setCity } from './app';
 
 const { CancelToken } = axios;
@@ -72,6 +73,9 @@ export default function reducer(state = initialState, action = {}) {
         error: action.error
       };
     case SET_PINCODE_QUERY:
+      if (!allowNChar(action.query, 6) || (!allowTypeOf(action.query, 'number') && action.query.length > 0)) {
+        return state;
+      }
       return {
         ...state,
         loaded: false,

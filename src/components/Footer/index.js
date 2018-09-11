@@ -29,7 +29,11 @@ const mastercardIcon = require('../../../static/mastercard.svg');
 const visaIcon = require('../../../static/visa.svg');
 const styles = require('./Footer.scss');
 
-const mapStateToProps = ({ homepage: { footer: { data } } }) => ({
+const mapStateToProps = ({
+  homepage: {
+    footer: { data }
+  }
+}) => ({
   categories: data.items && data.items.text.top_categories.values
 });
 
@@ -234,4 +238,7 @@ const Footer = () => (
   </Div>
 );
 
-export default connect(mapStateToProps, null)(Footer);
+export default connect(
+  mapStateToProps,
+  null
+)(Footer);

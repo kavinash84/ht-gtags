@@ -18,6 +18,7 @@ import { validateEmail } from 'js-utility-functions';
 import { validateMobile, validatePassword } from 'utils/validation';
 import { LOGIN_URL } from 'helpers/Constants';
 import { signUp } from 'redux/modules/signUp';
+import { allowNChar } from 'utils/helper';
 
 const SidebarImg = require('../../../static/login-side-thumb.png');
 
@@ -32,11 +33,11 @@ export default class SignupFormContainer extends Component {
     session: PropTypes.string.isRequired,
     loading: PropTypes.bool
   };
-  static defaultProps = {
-    loading: false
-  };
   static contextTypes = {
     store: PropTypes.object.isRequired
+  };
+  static defaultProps = {
+    loading: false
   };
   constructor() {
     super();
@@ -46,14 +47,16 @@ export default class SignupFormContainer extends Component {
       emailErrorMessage: '',
       phone: '',
       phoneError: false,
-      phoneErrorMessage: '',
+      phoneErrorMessage: 'Enter 10 Digits Valid Mobile Number',
       password: '',
       passwordError: false,
       passwordErrorMessage: ''
     };
   }
   onChangeEmail = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = validateEmail(value, 'Enter valid email');
     this.setState({
       email: value,
@@ -62,17 +65,26 @@ export default class SignupFormContainer extends Component {
     });
   };
   onChangePhone = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = !validateMobile(value);
+    if (!allowNChar(value, 10)) {
+      return;
+    }
     this.setState({
       phone: value,
-      phoneError: checkError,
-      phoneErrorMessage: checkError ? 'Mobile no. should be 10 digits' : ''
+      phoneError: checkError
     });
   };
   onChangePassword = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = validatePassword(value);
+    if (!allowNChar(value, 15)) {
+      return;
+    }
     this.setState({
       password: value,
       passwordError: checkError.error,
@@ -83,14 +95,13 @@ export default class SignupFormContainer extends Component {
     e.preventDefault();
     const { email, password, phone } = this.state;
     const checkEmail = validateEmail(email, 'Invalid Email');
-    const checkPhone = !validateMobile(phone, 'Mobile no. should be 10 digits');
+    const checkPhone = validateMobile(phone);
     const checkPassword = validatePassword(password);
     if (checkEmail.error || checkPassword.error || checkPhone.error) {
       return this.setState({
         emailError: checkEmail.error,
         emailErrorMessage: checkEmail.errorMessage,
         phoneError: checkPhone,
-        phoneErrorMessage: checkPhone ? 'Invalid Mobile Number' : '',
         passwordError: checkPassword.error,
         passwordErrorMessage: checkPassword.error ? checkPassword.errorMessage : ''
       });
