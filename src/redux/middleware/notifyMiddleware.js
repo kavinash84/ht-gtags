@@ -118,16 +118,21 @@ export default function userMiddleware() {
         }));
         break;
       // Delivery
-      case 'checkout/SEND_DELIVERY_ADDRESS_FAIL':
+      case 'checkout/SEND_DELIVERY_ADDRESS_FAIL': {
+        let msg;
+        if (action.error.error_message && action.error.error_message.indexOf('fullname') !== -1) {
+          msg = 'Name Should Not Consists of Special Characters.';
+        }
+        if (action.error.error_message && action.error.error_message.indexOf('pincode') !== -1) {
+          msg = 'Pincode is Not Valid !';
+        }
         dispatch(notifSend({
           type: 'warning',
-          msg:
-              action.error.error_message && action.error.error_message.indexOf('fullname') !== -1
-                ? 'Name Should Not Consists of Special Characters'
-                : SOME_ERROR,
+          msg: msg || SOME_ERROR,
           dismissAfter: 4000
         }));
         break;
+      }
       // Contact US
       case 'contactus/FEEDBACK_FAIL':
         dispatch(notifSend({
