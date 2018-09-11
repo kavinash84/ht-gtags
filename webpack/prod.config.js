@@ -226,13 +226,18 @@ module.exports = {
       directoryIndex: '/',
       verbose: true,
       navigateFallback: '/dist/index.html',
-      runtimeCaching: [{
-        urlPattern: /\/api\/widget\/load(.*)/,
-        handler: 'networkFirst',
-        options: {
-          debug: true
+      runtimeCaching: [
+        {
+          urlPattern: /api\/tesla\//,
+          handler: 'networkFirst',
+          options: {
+            cache: {
+              maxEntries: 25,
+              name: 'api-cache'
+            }
+          }
         }
-      }]
+      ]
     })
   ]
 };

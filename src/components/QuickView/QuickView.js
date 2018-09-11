@@ -163,12 +163,12 @@ export default class QuickView extends Component {
                 <Link to={formatProductURL(name, sku)}>{name}</Link>
               </Heading>
               <Text>
-                <Span color="rgba(0, 0, 0, 0.6)" fontFamily="medium" fontSize="1.325rem" mr="1rem">
-                  Rs. {(discPrice && formatAmount(discPrice)) || (price && formatAmount(price))}
+                <Span color="rgba(0, 0, 0, 0.6)" fontFamily="medium" fontSize="1.325rem" mr="0.625rem">
+                  ₹ {(discPrice && formatAmount(discPrice)) || (price && formatAmount(price))}
                 </Span>
                 {discPrice && (
-                  <Span fontFamily="regular" color="rgba(0, 0, 0, 0.6)" fontSize="1rem">
-                    <s>Rs. {formatAmount(price)}</s>
+                  <Span fontFamily="regular" color="rgba(0, 0, 0, 0.6)" fontSize="0.875rem">
+                    <s>₹ {formatAmount(price)}</s>
                   </Span>
                 )}
               </Text>
@@ -176,7 +176,7 @@ export default class QuickView extends Component {
                 <Text color="rgba(0, 0, 0, 0.6)" fontFamily="700" fontSize="0.857rem" mb="1rem">
                   Savings:{' '}
                   <Span color="rgba(0, 0, 0, 0.6)" fontSize="0.857rem" va="bottom">
-                    Rs.
+                    ₹
                     {formatAmount(calculateSavings(price, discPrice))} ({calculateDiscount(price, discPrice)}
                     %)
                   </Span>

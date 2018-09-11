@@ -21,7 +21,12 @@ const ytIcon = require('../../../static/youtube.svg');
 const instaIcon = require('../../../static/instagram.svg');
 const pinIcon = require('../../../static/pinterest.svg');
 const ourAppIcon = require('../../../static/google-play-store.svg');
-const paymentMethodIcon = require('../../../static/paymentMethodIcon.jpg');
+const aeIcon = require('../../../static/american-express.svg');
+const dcIcon = require('../../../static/diners-club.svg');
+const discoverIcon = require('../../../static/discover.svg');
+const maestroIcon = require('../../../static/maestro.svg');
+const mastercardIcon = require('../../../static/mastercard.svg');
+const visaIcon = require('../../../static/visa.svg');
 const styles = require('./Footer.scss');
 
 const mapStateToProps = ({
@@ -121,7 +126,7 @@ const Footer = () => (
           ))}
         </Row>
         <Row m="0" flexWrap="nowrap">
-          <Div display="flexEqual" col="13">
+          <Div display="flexEqual" col="2">
             <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem">
               ABOUT US
             </Heading>
@@ -139,7 +144,7 @@ const Footer = () => (
               </li>
             </ul>
           </Div>
-          <Div display="flexEqual" col="13">
+          <Div display="flexEqual" col="2">
             <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem">
               CUSTOMER SERVICE
             </Heading>
@@ -164,7 +169,7 @@ const Footer = () => (
               </li>
             </ul>
           </Div>
-          <Div display="flexEqual" col="13">
+          <Div display="flexEqual" col="2">
             <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem">
               Useful Links
             </Heading>
@@ -174,7 +179,7 @@ const Footer = () => (
               </li>
             </ul>
           </Div>
-          <Div display="flexEqual" col="13">
+          <Div display="flexEqual" col="3">
             <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem">
               OUR APP
             </Heading>
@@ -186,11 +191,30 @@ const Footer = () => (
               <Img src={ourAppIcon} alt="Our App" mt="1.2rem" width="178px" />
             </a>
           </Div>
-          <Div display="flexEqual" col="13">
+          <Div display="flexEqual" col="3">
             <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem">
               PAYMENT METHOD
             </Heading>
-            <Img src={paymentMethodIcon} alt="Payment Method" mt="1.2rem" width="178px" />
+            <Row ml="0" mr="0" className={styles.paymentWrapper}>
+              <Div col="2" p="0 5px">
+                <Img src={visaIcon} alt="visaCard" width="100%" />
+              </Div>
+              <Div col="2" p="0 5px">
+                <Img src={mastercardIcon} alt="Master Card" width="100%" />
+              </Div>
+              <Div col="2" p="0 5px">
+                <Img src={maestroIcon} alt="Maestro" width="100%" />
+              </Div>
+              <Div col="2" p="0 5px">
+                <Img src={aeIcon} alt="Amex" width="100%" />
+              </Div>
+              <Div col="2" p="0 5px">
+                <Img src={discoverIcon} alt="Discover Card" width="100%" />
+              </Div>
+              <Div col="2" p="0 5px">
+                <Img src={dcIcon} alt="Diners Club" width="100%" />
+              </Div>
+            </Row>
           </Div>
         </Row>
       </Container>

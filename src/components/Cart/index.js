@@ -7,6 +7,8 @@ import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Button from 'hometown-components/lib/Buttons';
 import Section from 'hometown-components/lib/Section';
+import Heading from 'hometown-components/lib/Heading';
+import Img from 'hometown-components/lib/Img';
 import ProgressiveImageSchemer from 'hometown-components/lib/ProgressiveImageSchemer';
 import * as actionCreators from 'redux/modules/cart';
 import { formatAmount } from 'utils/formatters';
@@ -14,6 +16,13 @@ import ProductQuantity from './UpdateProductQuantity';
 import OrderSummary from '../Checkout/OrderSummary';
 
 const styles = require('./Cart.scss');
+
+const aeIcon = require('../../../static/american-express.svg');
+const dcIcon = require('../../../static/diners-club.svg');
+const discoverIcon = require('../../../static/discover.svg');
+const maestroIcon = require('../../../static/maestro.svg');
+const mastercardIcon = require('../../../static/mastercard.svg');
+const visaIcon = require('../../../static/visa.svg');
 
 const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
 
@@ -133,16 +142,43 @@ const Cart = ({
                 </Div>
               </Row>
             </Div>
-            <OrderSummary
-              itemsTotal={summary.items}
-              savings={summary.savings}
-              shipping={summary.shipping_charges}
-              totalCart={summary.total}
-              loadingnextstep={checkingCart}
-              onClick={checkCartBeforeCheckout(checkCart, sessionId)}
-              itemsCount={summary.items_count}
-              outOfStockList={outOfStockList}
-            />
+            <Div col="3">
+              <OrderSummary
+                itemsTotal={summary.items}
+                savings={summary.savings}
+                shipping={summary.shipping_charges}
+                totalCart={summary.total}
+                loadingnextstep={checkingCart}
+                onClick={checkCartBeforeCheckout(checkCart, sessionId)}
+                itemsCount={summary.items_count}
+                outOfStockList={outOfStockList}
+              />
+              <Div mt="1rem" pl="0.625rem" pr="0.625rem">
+                <Heading fontSize="1em" mb="0.625rem" color="secondary">
+                  We Accept
+                </Heading>
+                <Row ml="0" mr="0">
+                  <Div col="2" mb="0.625rem" p="0 5px">
+                    <Img src={visaIcon} alt="visaCard" width="100%" />
+                  </Div>
+                  <Div col="2" mb="0.625rem" p="0 5px">
+                    <Img src={mastercardIcon} alt="Master Card" width="100%" />
+                  </Div>
+                  <Div col="2" mb="0.625rem" p="0 5px">
+                    <Img src={maestroIcon} alt="Maestro" width="100%" />
+                  </Div>
+                  <Div col="2" mb="0.625rem" p="0 5px">
+                    <Img src={aeIcon} alt="Amex" width="100%" />
+                  </Div>
+                  <Div col="2" mb="0.625rem" p="0 5px">
+                    <Img src={discoverIcon} alt="Discover Card" width="100%" />
+                  </Div>
+                  <Div col="2" mb="0.625rem" p="0 5px">
+                    <Img src={dcIcon} alt="Diners Club" width="100%" />
+                  </Div>
+                </Row>
+              </Div>
+            </Div>
           </Row>
         </Container>
       </Section>
