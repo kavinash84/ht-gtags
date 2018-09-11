@@ -13,7 +13,7 @@ import { sendData } from 'redux/modules/services';
 import { FEEDBACK as FEEDBACK_API } from 'helpers/apiUrls';
 
 @connect(({ services }) => ({
-  serviceRequest: services.feedback
+  serviceRequest: services.feedback || {}
 }))
 class Feedback extends React.Component {
   static contextTypes = {

@@ -15,7 +15,7 @@ import { sendData } from 'redux/modules/services';
 import { SERVICE_REQUEST as SERVICE_REQUEST_API } from 'helpers/apiUrls';
 
 @connect(({ services }) => ({
-  serviceRequest: services.serviceRequest
+  serviceRequest: services.serviceRequest || {}
 }))
 class ServiceRequest extends React.Component {
   static contextTypes = {
