@@ -84,7 +84,7 @@ export default class MenuSidebar extends Component {
     history.push(`${URL}/?redirect=${checkRedirection(router.location.pathname)}`);
   };
   handleUserPopOver = () => {
-    setTimeout(() => this.setState({ userPopOver: false }), 500);
+    setTimeout(() => this.setState({ userPopOver: false }), 300);
   };
   handleUserPopIn = () => {
     this.setState({ userPopOver: true });

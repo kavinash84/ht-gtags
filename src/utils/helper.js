@@ -278,3 +278,8 @@ export const allowNChar = (value, n) => {
   }
   return false;
 };
+export const allowTypeOf = (value, type) => {
+  if (type === 'number') {
+    return /^\d+$/.test(value);
+  }
+};

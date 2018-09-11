@@ -1,5 +1,6 @@
 // Validators
 import { isEmpty, pincode as pincodeIsValid, validateMobile } from 'utils/validation';
+import { allowNChar, allowTypeOf } from 'utils/helper';
 
 const emailIsValid = value => !isEmpty(value) && /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value);
 
@@ -140,6 +141,9 @@ export default function reducer(state = initialState, action = {}) {
         }
       };
     case SET_PHONE:
+      if (!allowNChar(action.phone, 10) || (!allowTypeOf(action.phone, 'number') && action.phone.length > 0)) {
+        return state;
+      }
       return {
         ...state,
         [action.formType]: {
@@ -149,6 +153,9 @@ export default function reducer(state = initialState, action = {}) {
         }
       };
     case SET_PINCODE:
+      if (!allowNChar(action.pincode, 6) || (!allowTypeOf(action.pincode, 'number') && action.pincode.length > 0)) {
+        return state;
+      }
       return {
         ...state,
         [action.formType]: {
@@ -159,6 +166,7 @@ export default function reducer(state = initialState, action = {}) {
           state: ''
         }
       };
+
     // Errors
     case SET_NAME_ERROR:
       return {
@@ -303,6 +311,9 @@ export default function reducer(state = initialState, action = {}) {
         }
       };
     case SET_PINCODE_QUERY:
+      if (!allowNChar(action.query, 6) || (!allowTypeOf(action.query, 'number') && action.query.length > 0)) {
+        return state;
+      }
       return {
         ...state,
         [action.formType]: {
