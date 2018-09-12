@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Img from 'hometown-components/lib/Img';
-import ProgressiveImageSchemer from 'hometown-components/lib/ProgressiveImageSchemer';
+import ImageShimmer from 'hometown-components/lib/ImageShimmer';
 
 const styles = require('./HoverMenuBox.scss');
 
@@ -17,9 +17,9 @@ const HoverMenuBox = ({
             <ul className={styles.list}>
               <div className={styles.media}>
                 <div className={styles.catImgWrapper}>
-                  <ProgressiveImageSchemer src={subCategory1.category_image} height="65px">
+                  <ImageShimmer src={subCategory1.category_image} height="65px">
                     {imageURL => <Img src={imageURL} alt={subCategory1.name} />}
-                  </ProgressiveImageSchemer>
+                  </ImageShimmer>
                 </div>
                 <div className={styles.mediaBody}>
                   <h4>
