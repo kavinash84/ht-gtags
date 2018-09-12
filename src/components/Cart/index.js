@@ -9,7 +9,7 @@ import Button from 'hometown-components/lib/Buttons';
 import Section from 'hometown-components/lib/Section';
 import Heading from 'hometown-components/lib/Heading';
 import Img from 'hometown-components/lib/Img';
-import ProgressiveImageSchemer from 'hometown-components/lib/ProgressiveImageSchemer';
+import ImageShimmer from 'hometown-components/lib/ImageShimmer';
 import * as actionCreators from 'redux/modules/cart';
 import { formatAmount } from 'utils/formatters';
 import ProductQuantity from './UpdateProductQuantity';
@@ -84,9 +84,9 @@ const Cart = ({
                   {results.map(item => (
                     <Row className="tr" type="block" m="0" mb="0.5rem" mt="0" key={item.id_customer_cart}>
                       <Div className="td" col="1">
-                        <ProgressiveImageSchemer src={item.product_info.image} height="60px">
+                        <ImageShimmer src={item.product_info.image} height="60px">
                           {imageURL => <img src={imageURL} alt="" />}
-                        </ProgressiveImageSchemer>
+                        </ImageShimmer>
                       </Div>
                       <Div className="td" col="5">
                         {item.product_info.name}
@@ -209,7 +209,4 @@ Cart.defaultProps = {
   outOfStockList: []
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

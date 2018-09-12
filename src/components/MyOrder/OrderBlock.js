@@ -5,7 +5,7 @@ import Heading from 'hometown-components/lib/Heading';
 import Row from 'hometown-components/lib/Row';
 import Text from 'hometown-components/lib/Text';
 import Img from 'hometown-components/lib/Img';
-import ProgressiveImageSchemer from 'hometown-components/lib/ProgressiveImageSchemer';
+import ImageShimmer from 'hometown-components/lib/ImageShimmer';
 import { formatAmount } from 'utils/formatters';
 import { getImageURL } from 'utils/helper';
 
@@ -52,9 +52,9 @@ const OrderBlock = ({ order }) => (
               {order.order_items.map(item => (
                 <tr key={item.order_item_id}>
                   <td width="70px">
-                    <ProgressiveImageSchemer src={getImageURL(item.image, 'catalog_360')} height="60px">
+                    <ImageShimmer src={getImageURL(item.image, 'catalog_360')} height="60px">
                       {imageURL => <Img src={imageURL} alt={item.product_name} />}
-                    </ProgressiveImageSchemer>
+                    </ImageShimmer>
                   </td>
                   <td width="50%">{item.product_name || 'NOT AVAILABLE'}</td>
                   <td>{item.order_item_status_display_name || 'NOT AVAILABLE'}</td>
