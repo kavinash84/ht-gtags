@@ -15,7 +15,7 @@ import Footer from 'components/Footer';
 import { formatAmount } from 'utils/formatters';
 import { validatePaymentDetails } from 'utils/validation';
 import { getCartList } from 'selectors/cart';
-import ProgressiveImageSchemer from 'hometown-components/lib/ProgressiveImageSchemer';
+import ImageShimmer from 'hometown-components/lib/ImageShimmer';
 
 import MenuCheckout from './MenuCheckout';
 import OrderSummary from './OrderSummary';
@@ -108,9 +108,9 @@ class ReviewOrder extends Component {
                         {results.map(item => (
                           <tr key={item.id_customer_cart}>
                             <td>
-                              <ProgressiveImageSchemer src={item.product_info.image} width="60px" height="60px">
+                              <ImageShimmer src={item.product_info.image} width="60px" height="60px">
                                 {imageURL => <Img width="60px" src={imageURL} alt="" />}
-                              </ProgressiveImageSchemer>
+                              </ImageShimmer>
                             </td>
                             <td>{item.product_info.name}</td>
                             <td>{item.product_info.delivery_time_text}</td>
@@ -168,7 +168,4 @@ ReviewOrder.propTypes = {
   submitting: PropTypes.bool,
   submitted: PropTypes.bool
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ReviewOrder);
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewOrder);
