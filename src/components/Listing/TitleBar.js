@@ -10,11 +10,11 @@ import Row from 'hometown-components/lib/Row';
 // const styles = require('./BreadCrumb.scss');
 
 const TitleBar = ({ children, title, productCount }) => (
-  <Section mb="0.625rem" p="1.5rem 0.5rem" bg="bg">
+  <Section mb="0.625rem" p="1.25rem 0.5rem" bg="bg">
     <Container type="container" pr="0" pl="0">
       {children}
       <Row display="block" mr="0" ml="0" mb="0" mt="10px">
-        <Heading fontSize="1.25rem" color="text" mt="0" mb="0" fontFamily="regular">
+        <Heading fontSize="1.25rem" color="text" mt="0" mb="0" fontFamily="light">
           {title} {productCount && `(${productCount})`}
         </Heading>
       </Row>
