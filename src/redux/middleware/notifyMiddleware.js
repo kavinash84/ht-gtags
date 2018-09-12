@@ -128,7 +128,7 @@ export default function userMiddleware() {
         }
         dispatch(notifSend({
           type: 'warning',
-          msg: msg || SOME_ERROR,
+          msg: msg || (action.error && action.error.error_message) || SOME_ERROR,
           dismissAfter: 4000
         }));
         break;
