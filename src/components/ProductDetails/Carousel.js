@@ -27,7 +27,7 @@ export default class ProductDetailSlider extends Component {
 
     return (
       <Row display="block" mt="0" mb="0" mr="0" ml="0">
-        <Div col="1">
+        <Div col="2">
           <Slider
             asNavFor={this.state.nav1}
             ref={slider => (this.slider2 = slider)}
@@ -45,7 +45,7 @@ export default class ProductDetailSlider extends Component {
             ))}
           </Slider>
         </Div>
-        <Div col="11" pl="0.625rem" pr="0" pb="1rem">
+        <Div col="10" pl="0.625rem" pr="0" pb="1rem">
           <Slider asNavFor={this.state.nav2} ref={slider => (this.slider1 = slider)}>
             {data.map(slide => (
               <CarouselItem key={slide.id_catalog_product_image} image={`${slide.url}.jpg`} name={title} />

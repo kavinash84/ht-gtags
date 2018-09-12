@@ -500,12 +500,12 @@
 		padding-top: 50px;
 		padding-bottom: 50px;
 		.slick-prev {
-			left: 6px !important;
+			left: calc(50% - 22px) !important;
     	top: 0 !important;
     	transform: rotate(90deg);
 		}
 		.slick-next {
-			left: 6px !important;
+			left: calc(50% - 22px) !important;
 			bottom: 0 !important;
 			transform: rotate(90deg);
 			top: initial !important;
