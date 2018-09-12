@@ -1,5 +1,6 @@
 // Validators
 import { isEmpty, pincode as pincodeIsValid, validateMobile } from 'utils/validation';
+import { allowNChar, allowTypeOf } from 'utils/helper';
 
 const emailIsValid = value => !isEmpty(value) && /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value);
 
@@ -49,7 +50,7 @@ const initialState = {
     emailFeedBackMessage: 'Email is Not Valid  !',
     phone: '',
     phoneFeedBackError: false,
-    phoneFeedBackMessage: 'Phone is Not Valid !',
+    phoneFeedBackMessage: 'Enter 10 Digits Valid Mobile Number !',
     address: '',
     addressFeedBackError: false,
     addressFeedBackMessage: 'Address Cannot be Left Empty !',
@@ -73,7 +74,7 @@ const initialState = {
     emailFeedBackMessage: 'Email is Not Valid  !',
     phone: '',
     phoneFeedBackError: false,
-    phoneFeedBackMessage: 'Phone is Not Valid !',
+    phoneFeedBackMessage: 'Enter 10 Digits Valid Mobile Number !',
     address: '',
     addressFeedBackError: false,
     addressFeedBackMessage: 'Address Cannot be Left Empty !',
@@ -140,6 +141,9 @@ export default function reducer(state = initialState, action = {}) {
         }
       };
     case SET_PHONE:
+      if (!allowNChar(action.phone, 10) || (!allowTypeOf(action.phone, 'number') && action.phone.length > 0)) {
+        return state;
+      }
       return {
         ...state,
         [action.formType]: {
@@ -149,14 +153,20 @@ export default function reducer(state = initialState, action = {}) {
         }
       };
     case SET_PINCODE:
+      if (!allowNChar(action.pincode, 6) || (!allowTypeOf(action.pincode, 'number') && action.pincode.length > 0)) {
+        return state;
+      }
       return {
         ...state,
         [action.formType]: {
           ...state[action.formType],
           pincode: action.pincode,
-          pincodeFeedBackError: isEmpty(action.pincode) || pincodeIsValid(action.pincode)
+          pincodeFeedBackError: isEmpty(action.pincode) || pincodeIsValid(action.pincode),
+          city: '',
+          state: ''
         }
       };
+
     // Errors
     case SET_NAME_ERROR:
       return {
@@ -285,8 +295,8 @@ export default function reducer(state = initialState, action = {}) {
           ...state[action.formType],
           loading: false,
           loaded: true,
-          city: action.result.pincode_details[0].city,
-          state: action.result.pincode_details[0].state,
+          city: (action.result.pincode_details[0] && action.result.pincode_details[0].city) || '',
+          state: (action.result.pincode_details[0] && action.result.pincode_details[0].state) || '',
           pincodeDetails: action.result.pincode_details || []
         }
       };
@@ -301,6 +311,9 @@ export default function reducer(state = initialState, action = {}) {
         }
       };
     case SET_PINCODE_QUERY:
+      if (!allowNChar(action.query, 6) || (!allowTypeOf(action.query, 'number') && action.query.length > 0)) {
+        return state;
+      }
       return {
         ...state,
         [action.formType]: {
