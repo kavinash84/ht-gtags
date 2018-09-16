@@ -1,0 +1,1 @@
+artillery -e production -o loadtest_report run load-test.yml
