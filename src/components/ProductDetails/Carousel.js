@@ -5,7 +5,7 @@ import Row from 'hometown-components/lib/Row';
 import Div from 'hometown-components/lib/Div';
 import CarouselItem from './CarouselItem';
 
-const showSlides = data => (data && data.length >= 6 ? 6 : data.length || 0);
+const showSlides = data => (data && data.length >= 4 ? 4 : data.length || 0);
 
 /* eslint-disable */
 export default class ProductDetailSlider extends Component {
