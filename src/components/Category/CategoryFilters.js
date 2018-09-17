@@ -26,7 +26,7 @@ class CategoryFilterItem extends Component {
     return (
       <li key={sub.id}>
         <Link to={`/${sub.url_key}`}>
-          <Label color="textDark" mt="0.3125rem" mb="0.3125rem" display="block" fontFamily="regular">
+          <Label color="black" mt="0.3125rem" mb="0.3125rem" display="block" fontFamily="regular">
             {sub.name}
           </Label>
         </Link>

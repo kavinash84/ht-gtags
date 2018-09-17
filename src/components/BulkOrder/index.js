@@ -43,50 +43,63 @@ const BulkOrder = () => (
               <li>6. we will revert within 1 working day on an enquiry</li>
             </ul>
             <Div col="12" mt="2rem">
-              <div className={styles.formList}>
-                <Text ta="center" mt="0" mb="0.3125rem" fontSize="0.875rem">
-                  To know more, call us at 18002100004
-                </Text>
-                <Text fontSize="0.875rem" ta="center" mt="0" mb="0.3125rem">
-                  Or
-                </Text>
-                <Text fontSize="0.875rem" ta="center" mt="0" mb="1.5rem">
-                  Drop in your Requirement.
-                </Text>
-                <form
-                  method="post"
-                  id="custom_form"
-                  action="/customer/order/bulkorder"
-                  name="custom_form"
-                  encType="multipart/form-data"
-                  className="bulk-order-form"
-                >
-                  <FormInput label="Name*" type="text" placeholder="" />
-                  <FormInput label="Email*" type="text" placeholder="" />
-                  <FormInput label="Mobile No.*" type="text" placeholder="" />
-                  <InputField mb="0.625rem">
-                    <Label fontSize="0.875em" mb="0.625rem">
-                      Category*
-                    </Label>
-                    <select className="form-control" name="bulkOrderCategory">
-                      <option value="Furniture">Furniture</option>
-                      <option value="Home Furnishings">Home Furnishings</option>
-                      <option value="Home Decor">Home Decor</option>
-                      <option value="Tableware">Tableware</option>
-                      <option value="Tableware">Kitchenware</option>
-                      <option value="Home Improvement">Home Improvement</option>
-                    </select>
-                  </InputField>
-                  <FormInput label="Budget*" type="text" placeholder="" />
-                  <FormInput label="Quantity*" type="text" placeholder="" />
-                  <FormInput label="Category*" type="text" placeholder="" />
-                  <div className="buttons-set">
-                    <Button btnType="primary" mt="0.625rem" title="Submit" type="submit">
-                      Submit
-                    </Button>
-                  </div>
-                </form>
-              </div>
+              <form
+                method="post"
+                id="custom_form"
+                action="/customer/order/bulkorder"
+                name="custom_form"
+                encType="multipart/form-data"
+                className="bulk-order-form"
+              >
+                <div className={styles.formList}>
+                  <Text ta="center" mt="0" mb="0.3125rem" fontSize="0.875rem">
+                    To know more, call us at 18002100004
+                  </Text>
+                  <Text fontSize="0.875rem" ta="center" mt="0" mb="0.3125rem">
+                    Or
+                  </Text>
+                  <Text fontSize="0.875rem" ta="center" mt="0" mb="1.5rem">
+                    Drop in your Requirement.
+                  </Text>
+                  <Div col="6" pl="10px" pr="10px">
+                    <FormInput label="Name*" type="text" placeholder="" />
+                  </Div>
+                  <Div col="6" pl="10px" pr="10px">
+                    <FormInput label="Email*" type="text" placeholder="" />
+                  </Div>
+                  <Div col="6" pl="10px" pr="10px">
+                    <FormInput label="Mobile No.*" type="text" placeholder="" />
+                  </Div>
+                  <Div col="6" pl="10px" pr="10px">
+                    <InputField mb="0.625rem">
+                      <Label fontSize="0.875em" mb="0.625rem">
+                        Category*
+                      </Label>
+                      <select className="form-control" name="bulkOrderCategory">
+                        <option value="Furniture">Furniture</option>
+                        <option value="Home Furnishings">Home Furnishings</option>
+                        <option value="Home Decor">Home Decor</option>
+                        <option value="Tableware">Tableware</option>
+                        <option value="Tableware">Kitchenware</option>
+                        <option value="Home Improvement">Home Improvement</option>
+                      </select>
+                    </InputField>
+                  </Div>
+                  <Div col="6" pl="10px" pr="10px">
+                    <FormInput label="Budget*" type="text" placeholder="" />
+                  </Div>
+                  <Div col="6" pl="10px" pr="10px">
+                    <FormInput label="Quantity*" type="text" placeholder="" />
+                  </Div>
+                  <Div col="6" pl="10px" pr="10px">
+                    <div className="buttons-set">
+                      <Button btnType="primary" mt="0.625rem" title="Submit" type="submit">
+                        Submit
+                      </Button>
+                    </div>
+                  </Div>
+                </div>
+              </form>
             </Div>
           </Div>
         </Row>
