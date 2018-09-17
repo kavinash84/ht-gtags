@@ -14,8 +14,7 @@ import Div from 'hometown-components/lib/Div';
 import { Link } from 'react-router-dom';
 import { Label } from 'hometown-components/lib/Label';
 import Img from 'hometown-components/lib/Img';
-import { validateEmail } from 'js-utility-functions';
-import { validateMobile, validatePassword } from 'utils/validation';
+import { validateMobile, validatePassword, validateEmail } from 'utils/validation';
 import { LOGIN_URL } from 'helpers/Constants';
 import { signUp } from 'redux/modules/signUp';
 import { allowNChar } from 'utils/helper';
@@ -44,24 +43,23 @@ export default class SignupFormContainer extends Component {
     this.state = {
       email: '',
       emailError: false,
-      emailErrorMessage: '',
+      emailErrorMessage: 'Enter Valid Email Id',
       phone: '',
       phoneError: false,
       phoneErrorMessage: 'Enter 10 Digits Valid Mobile Number',
       password: '',
       passwordError: false,
-      passwordErrorMessage: ''
+      passwordErrorMessage: 'Password must contain atleast 6 and max 15 characters'
     };
   }
   onChangeEmail = e => {
     const {
       target: { value }
     } = e;
-    const checkError = validateEmail(value, 'Enter valid email');
+    const checkError = !validateEmail(value);
     this.setState({
       email: value,
-      emailError: checkError.error,
-      emailErrorMessage: checkError.error ? checkError.errorMessage : ''
+      emailError: checkError
     });
   };
   onChangePhone = e => {
@@ -81,29 +79,26 @@ export default class SignupFormContainer extends Component {
     const {
       target: { value }
     } = e;
-    const checkError = validatePassword(value);
+    const checkError = !validatePassword(value);
     if (!allowNChar(value, 15)) {
       return;
     }
     this.setState({
       password: value,
-      passwordError: checkError.error,
-      passwordErrorMessage: checkError.error ? checkError.errorMessage : ''
+      passwordError: checkError
     });
   };
   onSubmitSignup = e => {
     e.preventDefault();
     const { email, password, phone } = this.state;
-    const checkEmail = validateEmail(email, 'Invalid Email');
-    const checkPhone = validateMobile(phone);
+    const checkEmail = !validateEmail(email);
+    const checkPhone = phone ? !validateMobile(phone) : false;
     const checkPassword = validatePassword(password);
-    if (checkEmail.error || checkPassword.error || checkPhone.error) {
+    if (checkEmail || checkPassword.error || checkPhone) {
       return this.setState({
-        emailError: checkEmail.error,
-        emailErrorMessage: checkEmail.errorMessage,
+        emailError: checkEmail,
         phoneError: checkPhone,
-        passwordError: checkPassword.error,
-        passwordErrorMessage: checkPassword.error ? checkPassword.errorMessage : ''
+        passwordError: checkPassword.error
       });
     }
     const { dispatch } = this.context.store;
