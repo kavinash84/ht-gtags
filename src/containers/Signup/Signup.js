@@ -17,7 +17,7 @@ import Img from 'hometown-components/lib/Img';
 import { validateMobile, validatePassword, validateEmail } from 'utils/validation';
 import { LOGIN_URL } from 'helpers/Constants';
 import { signUp } from 'redux/modules/signUp';
-import { allowNChar } from 'utils/helper';
+import { allowNChar, allowTypeOf } from 'utils/helper';
 
 const SidebarImg = require('../../../static/login-side-thumb.png');
 
@@ -67,7 +67,7 @@ export default class SignupFormContainer extends Component {
       target: { value }
     } = e;
     const checkError = !validateMobile(value);
-    if (!allowNChar(value, 10)) {
+    if (!allowNChar(value, 10) || (!allowTypeOf(value, 'number') && value.length > 0)) {
       return;
     }
     this.setState({
