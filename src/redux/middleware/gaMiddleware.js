@@ -23,6 +23,8 @@ export default function gaMiddleware() {
             }
           } else if (location === '/search/') {
             window.google_tag_params.ecomm_pagetype = 'searchresults';
+          } else if (location === '/payment-success') {
+            window.google_tag_params.ecomm_pagetype = 'purchase';
           } else {
             window.google_tag_params.ecomm_pagetype = 'other';
             window.google_tag_params.ecomm_totalvalue = '';
