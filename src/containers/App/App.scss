@@ -165,7 +165,7 @@
 			overflow: visible;
 			width: 30px !important;
 			height: 30px !important;
-			background: #ececec;
+			background: rgba(238, 238, 199, 0.9);
 			border-radius: 100%;
 			#heart{
 				transform-origin:center;
@@ -500,12 +500,12 @@
 		padding-top: 50px;
 		padding-bottom: 50px;
 		.slick-prev {
-			left: 6px !important;
+			left: calc(50% - 22px) !important;
     	top: 0 !important;
     	transform: rotate(90deg);
 		}
 		.slick-next {
-			left: 6px !important;
+			left: calc(50% - 22px) !important;
 			bottom: 0 !important;
 			transform: rotate(90deg);
 			top: initial !important;
@@ -606,7 +606,10 @@
 		display: inline-block;
 		position: relative;
 		button {
-			padding: .5rem 2.125rem .5rem .75rem !important;
+			padding: .25rem 2.125rem .25rem .75rem !important;
+			font-family: medium;
+			font-size: 12px;
+			text-transform: initial;
 			span {
 				transition: all 0.5s ease;
 				display: inline-block !important;
@@ -699,7 +702,7 @@
 			li {
 				list-style: none;
 		    display: inline-block;
-		    background: #eee;
+		    background: rgba(238, 238, 199, 0.9);
 		    margin: 0 5px;
 		    font-size: 14px;
 		    line-height: 40px;

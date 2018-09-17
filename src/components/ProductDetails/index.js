@@ -161,7 +161,7 @@ class ProductDetails extends React.Component {
           <Container type="container" pr="0" pl="0">
             <Row display="block" mt="0" mb="0" mr="0" ml="0">
               <Div>
-                <Div col="8" pt="1.5rem" pr="1rem" className={styles.pdpLeftWrapper}>
+                <Div col="7" pt="1.5rem" pr="1rem" className={styles.pdpLeftWrapper}>
                   <Div col="12" className={styles.breadCrumbWrapper} mb="1rem">
                     <BreadCrumb categoryDetails={categoryDetails} />
                   </Div>
@@ -176,7 +176,7 @@ class ProductDetails extends React.Component {
                     </div>
                   </Div> */}
                 </Div>
-                <Div col="4" pt="1.5rem" pl="0.3125rem" pr="0.3125rem" pb="1rem" className={styles.pdpRightWrapper}>
+                <Div col="5" pt="1.5rem" pl="0.3125rem" pr="0.3125rem" pb="1rem" className={styles.pdpRightWrapper}>
                   <div id="portal" className="portal" />
                   <Div className={styles.titleWrapper}>
                     <TitlePrice
@@ -233,8 +233,6 @@ class ProductDetails extends React.Component {
                         }
                       />
                     </Div>
-                  </Row>
-                  <Row display="block" mt="0" mb="0.625rem" mr="0.9375rem" ml="0.9375rem">
                     <Div col="6" mt="0" pl="0">
                       <Button
                         width="100%"
@@ -247,6 +245,7 @@ class ProductDetails extends React.Component {
                         height="auto"
                         p="0 .75rem 0 0"
                         fontFamily="medium"
+                        ta="right"
                         className={styles.addToWishlist}
                         onClick={onClickWishList(
                           sku,
@@ -265,6 +264,7 @@ class ProductDetails extends React.Component {
                       </Button>
                     </Div>
                   </Row>
+                  <Row display="block" mt="0" mb="0.625rem" mr="0.9375rem" ml="0.9375rem" />
                   <Row display="block" mt="1.25rem" mb="0" mr="0" ml="0">
                     {shortDescription && (
                       <ProductDesc

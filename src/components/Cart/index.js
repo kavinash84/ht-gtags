@@ -10,6 +10,7 @@ import Section from 'hometown-components/lib/Section';
 import Heading from 'hometown-components/lib/Heading';
 import Img from 'hometown-components/lib/Img';
 import ImageShimmer from 'hometown-components/lib/ImageShimmer';
+import Text from 'hometown-components/lib/Text';
 import * as actionCreators from 'redux/modules/cart';
 import { formatAmount } from 'utils/formatters';
 import ProductQuantity from './UpdateProductQuantity';
@@ -19,10 +20,10 @@ const styles = require('./Cart.scss');
 
 const aeIcon = require('../../../static/american-express.svg');
 const dcIcon = require('../../../static/diners-club.svg');
-const discoverIcon = require('../../../static/discover.svg');
 const maestroIcon = require('../../../static/maestro.svg');
 const mastercardIcon = require('../../../static/mastercard.svg');
 const visaIcon = require('../../../static/visa.svg');
+const intBankingIcon = require('../../../static/net-banking.png');
 
 const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
 
@@ -171,10 +172,15 @@ const Cart = ({
                     <Img src={aeIcon} alt="Amex" width="100%" />
                   </Div>
                   <Div col="2" mb="0.625rem" p="0 5px">
-                    <Img src={discoverIcon} alt="Discover Card" width="100%" />
+                    <Img src={dcIcon} alt="Diners Club" width="100%" />
                   </Div>
                   <Div col="2" mb="0.625rem" p="0 5px">
-                    <Img src={dcIcon} alt="Diners Club" width="100%" />
+                    <Img src={intBankingIcon} alt="Diners Club" width="100%" />
+                  </Div>
+                </Row>
+                <Row ml="0" mr="0">
+                  <Div col="12" mb="0.625rem" p="0 5px">
+                    <Text>International card also accept.</Text>
                   </Div>
                 </Row>
               </Div>
@@ -209,4 +215,7 @@ Cart.defaultProps = {
   outOfStockList: []
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Cart);

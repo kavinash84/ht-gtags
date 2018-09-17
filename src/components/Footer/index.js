@@ -23,10 +23,10 @@ const pinIcon = require('../../../static/pinterest.svg');
 const ourAppIcon = require('../../../static/google-play-store.svg');
 const aeIcon = require('../../../static/american-express.svg');
 const dcIcon = require('../../../static/diners-club.svg');
-const discoverIcon = require('../../../static/discover.svg');
 const maestroIcon = require('../../../static/maestro.svg');
 const mastercardIcon = require('../../../static/mastercard.svg');
 const visaIcon = require('../../../static/visa.svg');
+const intBankingIcon = require('../../../static/net-banking.png');
 const styles = require('./Footer.scss');
 
 const mapStateToProps = ({
@@ -209,10 +209,10 @@ const Footer = () => (
                 <Img src={aeIcon} alt="Amex" width="100%" />
               </Div>
               <Div col="2" p="0 5px">
-                <Img src={discoverIcon} alt="Discover Card" width="100%" />
+                <Img src={dcIcon} alt="Diners Club" width="100%" />
               </Div>
               <Div col="2" p="0 5px">
-                <Img src={dcIcon} alt="Diners Club" width="100%" />
+                <Img src={intBankingIcon} alt="Internet Banking" width="100%" />
               </Div>
             </Row>
           </Div>
