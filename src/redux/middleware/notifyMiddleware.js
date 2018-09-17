@@ -141,6 +141,16 @@ export default function userMiddleware() {
           dismissAfter: 4000
         }));
         break;
+
+      // MY-address
+      case 'myaddress/UPDATE_ADDRESS_FAIL':
+        dispatch(notifSend({
+          type: 'warning',
+          msg: (action.error && action.error.error_message) || SOME_ERROR,
+          dismissAfter: 4000
+        }));
+        break;
+
       default:
         break;
     }
