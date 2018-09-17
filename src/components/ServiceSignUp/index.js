@@ -28,6 +28,7 @@ class ServiceSignUpModal extends Component {
     address: '',
     addressErrorMessage: 'Address should not be left blank ',
     service: '',
+    serviceErrorMessage: 'Please Choose A Service',
     pincode: '',
     pincodeErrorMessage: 'Pincode is Invalid',
     location: '',
@@ -114,6 +115,25 @@ class ServiceSignUpModal extends Component {
     const {
       name, phone, email, location, pincode, address, service
     } = this.state;
+    const nameError = isEmpty(name);
+    const phoneError = !validateMobile(phone);
+    const emailError = !validateEmail(email);
+    const locationError = isEmpty(location);
+    const pincodeError = validatePincode(pincode) || isEmpty(pincode);
+    const addressError = isEmpty(address);
+    const serviceError = isEmpty(service);
+    if (nameError || phoneError || emailError || locationError || pincodeError || addressError || serviceError) {
+      this.setState({
+        nameError,
+        phoneError,
+        emailError,
+        locationError,
+        pincodeError,
+        addressError,
+        serviceError
+      });
+      return;
+    }
     const data = {
       name,
       mobile: phone,
@@ -152,7 +172,9 @@ class ServiceSignUpModal extends Component {
       emailError,
       emailErrorMessage,
       phoneError,
-      phoneErrorMessage
+      phoneErrorMessage,
+      serviceError,
+      serviceErrorMessage
     } = this.state;
     return (
       <div>
@@ -197,6 +219,8 @@ class ServiceSignUpModal extends Component {
                     pincodeError={pincodeError}
                     pincodeErrorMessage={pincodeErrorMessage}
                     service={service}
+                    serviceError={serviceError}
+                    serviceErrorMessage={serviceErrorMessage}
                     onChangeName={this.onChangeName}
                     onChangeEmail={this.onChangeEmail}
                     onChangePhone={this.onChangePhone}
