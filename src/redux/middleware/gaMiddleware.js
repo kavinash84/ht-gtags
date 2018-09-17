@@ -1,5 +1,6 @@
 import { filterCategoryDetails, isKeyExists } from 'utils/helper';
 import { CART_URL } from 'helpers/Constants';
+import { getCartListSKU } from 'selectors/cart';
 
 export default function gaMiddleware() {
   return ({ getState }) => next => action => {
@@ -12,18 +13,20 @@ export default function gaMiddleware() {
             event: 'pageviewtracking',
             vpv: location
           });
-          window.google_tag_params.ecomm_pagetype = 'other';
-          if (location === CART_URL) {
+          if (location === '/') {
+            window.google_tag_params.ecomm_pagetype = 'home';
+          } else if (location === CART_URL) {
             window.google_tag_params.ecomm_pagetype = 'cart';
             if (getState().cart.summary) {
               window.google_tag_params.ecomm_totalvalue = getState().cart.summary.total;
+              window.google_tag_params.ecomm_prodid = getCartListSKU(getState().cart);
             }
-          }
-          if (location === '/') {
-            window.google_tag_params.ecomm_pagetype = 'home';
-          }
-          if (location === '/search/') {
+          } else if (location === '/search/') {
             window.google_tag_params.ecomm_pagetype = 'searchresults';
+          } else {
+            window.google_tag_params.ecomm_pagetype = 'other';
+            window.google_tag_params.ecomm_totalvalue = '';
+            window.google_tag_params.ecomm_prodid = [];
           }
         }
         if (type === 'productdetails/LOAD_PRODUCT_DESCRIPTION') {
@@ -68,7 +71,7 @@ export default function gaMiddleware() {
         }
         if (type === 'productdetails/LOAD_PRODUCT_DESCRIPTION_SUCCESS') {
           window.google_tag_params.ecomm_pagetype = 'product';
-          window.google_tag_params.ecomm_totalvalue = action.result.meta.price;
+          window.google_tag_params.ecomm_totalvalue = action.result.meta.special_price;
           const { position } = getState().productdetails;
           const {
             name, sku, price, brand, category_details: categoryDetails, color
@@ -95,11 +98,16 @@ export default function gaMiddleware() {
               }
             }
           };
-
+          window.google_tag_params.ecomm_prodid = sku;
           window.dataLayer.push(eventObject);
         }
         if (type === 'products/LOAD_FILTER_SUCCESS') {
-          window.google_tag_params.ecomm_pagetype = 'category';
+          const { location } = getState().router;
+          if (location.pathname === '/search/') {
+            window.google_tag_params.ecomm_pagetype = 'searchresults';
+          } else {
+            window.google_tag_params.ecomm_pagetype = 'category';
+          }
           const eventObject = {
             event: 'impression',
             ecommerce: {
@@ -107,7 +115,8 @@ export default function gaMiddleware() {
               impressions: []
             }
           };
-          const { location } = getState().router;
+          const skus = [];
+          let totalValue = 0;
           const checkKey = isKeyExists(action.result, 'metadata.category_details');
           const category = checkKey
             ? checkKey
@@ -118,8 +127,10 @@ export default function gaMiddleware() {
           const results = action.result && action.result.success ? action.result.metadata.results : [];
           eventObject.ecommerce.impressions = results.map((item, position) => {
             const {
-              name, sku, price, brand, color
+              name, sku, price, brand, color, special_price: netprice
             } = item.data;
+            skus.push(sku);
+            totalValue += parseInt(netprice, 10);
             return {
               name,
               price,
@@ -131,6 +142,10 @@ export default function gaMiddleware() {
               list: location.pathname === '/search/' ? 'Search Result' : ' category listing page'
             };
           });
+
+          window.google_tag_params.ecomm_prodid = skus;
+          window.google_tag_params.ecomm_totalvalue = String(totalValue);
+
           window.dataLayer.push(eventObject);
         }
         if (type === 'cart/ADD_TO_CART_SUCCESS') {
@@ -250,17 +265,21 @@ export default function gaMiddleware() {
         }
         // Handle Payment success
         /* eslint-disable camelcase */
-        const { location: { pathname } } = getState().router;
+        const {
+          location: { pathname }
+        } = getState().router;
         if (type === '@@INIT' && pathname && pathname === '/payment-success') {
           const { data } = getState().paymentstatus;
           if (data) {
             const {
               cart_products: products, net_order_amount, shipping_charges, transaction_id, coupon_code
             } = data;
+            const skus = [];
             const cartList = products.map(x => {
               const {
                 sku, name, qty, price, brand, category_details, color
               } = x;
+              skus.push(sku);
               return {
                 id: sku,
                 name,
@@ -285,11 +304,18 @@ export default function gaMiddleware() {
                 products: [...cartList]
               }
             };
+            window.google_tag_params.ecomm_pagetype = 'purchase';
+            window.google_tag_params.ecomm_prodid = skus;
+            window.google_tag_params.ecomm_totalvalue = net_order_amount;
             window.dataLayer.push(paymentObj);
           }
         }
         if (type === 'mainSlider/BANNER_IMPRESSION') {
-          const { homepage: { banners: { data } } } = getState();
+          const {
+            homepage: {
+              banners: { data }
+            }
+          } = getState();
           if (data && data.length) {
             const imp = data[action.payload];
             const obj = {
@@ -310,7 +336,11 @@ export default function gaMiddleware() {
           }
         }
         if (type === 'mainSlider/BANNER_CLICK') {
-          const { homepage: { banners: { data } } } = getState();
+          const {
+            homepage: {
+              banners: { data }
+            }
+          } = getState();
           if (data && data.length) {
             const imp = data[action.payload];
             const obj = {
