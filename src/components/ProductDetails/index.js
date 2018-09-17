@@ -18,6 +18,7 @@ import Reviews from 'hometown-components/lib/Reviews';
 import AddReview from 'hometown-components/lib/Reviews/WriteReview';
 import Img from 'hometown-components/lib/Img';
 import WishListIcon from 'hometown-components/lib/Icons/WishListIcon';
+import WishlistBtn from 'hometown-components/lib/WishlistBtn';
 import ProductCarousel from 'components/ProductCarousel';
 import EmiModal from 'containers/EmiModal/EmiModal';
 import Theme from 'hometown-components/lib/Theme';
@@ -166,6 +167,18 @@ class ProductDetails extends React.Component {
                     <BreadCrumb categoryDetails={categoryDetails} />
                   </Div>
                   <Div col="12">
+                    <WishlistBtn
+                      onClick={onClickWishList(
+                        sku,
+                        wishListData,
+                        wishlistToggle,
+                        isLoggedIn,
+                        history,
+                        this.onOpenLoginModal,
+                        addToWaitList
+                      )}
+                      isWishList={isInWishList(wishList, sku)}
+                    />
                     <ProductDetailsCarousel data={images} title={meta.name} />
                   </Div>
                   {/* <Div col="10">
