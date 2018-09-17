@@ -67,8 +67,8 @@ class Pincode extends React.Component {
           <Input
             type="text"
             placeholder="Enter Pincode"
-            backgroundColor="rgba(238,238,199,0.68)"
-            borderColor="rgba(238, 238, 199, 0.90)"
+            backgroundColor="transparent"
+            borderColor="rgb(202, 202, 202)"
             height="2.5rem"
             onChange={onChange(setPincodeQuery, this.setPincodeInStore(setPincode, pincodeQuery))}
             value={pincodeQuery}

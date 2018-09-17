@@ -8,14 +8,14 @@
   clear: both !important;
   .pincodeCheckBtn {
     position: absolute !important;
-    background: $primary !important;
+    background: rgb(194, 194, 194);
     border: none !important;
     font-size: 0.75rem !important;
     right: 0 !important;
     top: 0 !important;
     height: 40px;
-    color: #FFF;
-    padding: 0 10px;
+    color: #222222;
+    padding: 0 20px;
   }
   .pincodeIcon {
     position: absolute !important;

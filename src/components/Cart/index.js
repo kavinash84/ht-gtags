@@ -19,7 +19,6 @@ import OrderSummary from '../Checkout/OrderSummary';
 const styles = require('./Cart.scss');
 
 const aeIcon = require('../../../static/american-express.svg');
-const dcIcon = require('../../../static/diners-club.svg');
 const maestroIcon = require('../../../static/maestro.svg');
 const mastercardIcon = require('../../../static/mastercard.svg');
 const visaIcon = require('../../../static/visa.svg');
@@ -159,28 +158,27 @@ const Cart = ({
                   We Accept
                 </Heading>
                 <Row ml="0" mr="0">
-                  <Div col="2" mb="0.625rem" p="0 5px">
+                  <Div col="2" mb="0" p="0 5px">
                     <Img src={visaIcon} alt="visaCard" width="100%" />
                   </Div>
-                  <Div col="2" mb="0.625rem" p="0 5px">
+                  <Div col="2" mb="0" p="0 5px">
                     <Img src={mastercardIcon} alt="Master Card" width="100%" />
                   </Div>
-                  <Div col="2" mb="0.625rem" p="0 5px">
+                  <Div col="2" mb="0" p="0 5px">
                     <Img src={maestroIcon} alt="Maestro" width="100%" />
                   </Div>
-                  <Div col="2" mb="0.625rem" p="0 5px">
+                  <Div col="2" mb="0" p="0 5px">
                     <Img src={aeIcon} alt="Amex" width="100%" />
                   </Div>
-                  <Div col="2" mb="0.625rem" p="0 5px">
-                    <Img src={dcIcon} alt="Diners Club" width="100%" />
-                  </Div>
-                  <Div col="2" mb="0.625rem" p="0 5px">
+                  <Div col="2" mb="0" p="0 5px">
                     <Img src={intBankingIcon} alt="Diners Club" width="100%" />
                   </Div>
                 </Row>
                 <Row ml="0" mr="0">
-                  <Div col="12" mb="0.625rem" p="0 5px">
-                    <Text>International card also accept.</Text>
+                  <Div col="12" mb="0" p="0 5px">
+                    <Text mt="0.3125rem" fontSize="0.75rem">
+                      International card also accept.
+                    </Text>
                   </Div>
                 </Row>
               </Div>
