@@ -15,6 +15,8 @@ export default function gaMiddleware() {
           });
           if (location === '/') {
             window.google_tag_params.ecomm_pagetype = 'home';
+            window.google_tag_params.ecomm_totalvalue = '';
+            window.google_tag_params.ecomm_prodid = [];
           } else if (location === CART_URL) {
             window.google_tag_params.ecomm_pagetype = 'cart';
             if (getState().cart.summary) {
