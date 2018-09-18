@@ -10,6 +10,8 @@ import Img from 'hometown-components/lib/Img';
 import Text from 'hometown-components/lib/Text';
 import { sendData } from 'redux/modules/services';
 import { SERVICE_SIGNUPS } from 'helpers/apiUrls';
+import { validateMobile, validateEmail, isEmpty, pincode as validatePincode } from 'utils/validation';
+import { allowNChar, allowTypeOf } from 'utils/helper';
 
 const mapStateToProps = ({ services }, props) => ({
   ...services[props.formType]
@@ -18,67 +20,86 @@ const mapStateToProps = ({ services }, props) => ({
 class ServiceSignUpModal extends Component {
   state = {
     name: '',
+    nameErrorMessage: 'Name should not be left blank ',
     phone: '',
+    phoneErrorMessage: 'Enter Valid 10 Digit Phone Number',
     email: '',
+    emailErrorMessage: 'Please Enter Valid Email ',
     address: '',
+    addressErrorMessage: 'Address should not be left blank ',
     service: '',
+    serviceErrorMessage: 'Please Choose A Service',
     pincode: '',
+    pincodeErrorMessage: 'Pincode is Invalid',
     location: '',
+    locationErrorMessage: 'Location should not be left blank',
     open: false
   };
   onChangeName = e => {
     const {
       target: { value }
     } = e;
+    const checkError = isEmpty(value);
     this.setState({
-      name: value
+      name: value,
+      nameError: checkError
     });
   };
   onChangeEmail = e => {
     const {
       target: { value }
     } = e;
+    const checkError = !validateEmail(value);
     this.setState({
-      email: value
+      email: value,
+      emailError: checkError
     });
   };
   onChangePhone = e => {
     const {
       target: { value }
     } = e;
-    const regex = /^((?!(0))[0-9]{1,10})$/;
-    if (regex.test(value)) {
-      this.setState({
-        phone: value
-      });
+    const checkError = !validateMobile(value);
+    if (!allowNChar(value, 10) || (!allowTypeOf(value, 'number') && value.length > 0)) {
+      return;
     }
+    this.setState({
+      phone: value,
+      phoneError: checkError
+    });
   };
   onChangeAddress = e => {
     const {
       target: { value }
     } = e;
+    const checkError = isEmpty(value);
     this.setState({
-      address: value
+      address: value,
+      addressError: checkError
     });
   };
   onChangeLocation = e => {
     const {
       target: { value }
     } = e;
+    const checkError = isEmpty(value);
     this.setState({
-      location: value
+      location: value,
+      locationError: checkError
     });
   };
   onChangePincode = e => {
     const {
       target: { value }
     } = e;
-    const regex = /^((?!(0))[0-9]{1,6})$/;
-    if (regex.test(value)) {
-      this.setState({
-        pincode: value
-      });
+    const checkError = validatePincode(value);
+    if (!allowNChar(value, 6) || (!allowTypeOf(value, 'number') && value.length > 0)) {
+      return;
     }
+    this.setState({
+      pincode: value,
+      pincodeError: checkError
+    });
   };
   onChangeService = e => {
     const {
@@ -94,6 +115,25 @@ class ServiceSignUpModal extends Component {
     const {
       name, phone, email, location, pincode, address, service
     } = this.state;
+    const nameError = isEmpty(name);
+    const phoneError = !validateMobile(phone);
+    const emailError = !validateEmail(email);
+    const locationError = isEmpty(location);
+    const pincodeError = validatePincode(pincode) || isEmpty(pincode);
+    const addressError = isEmpty(address);
+    const serviceError = isEmpty(service);
+    if (nameError || phoneError || emailError || locationError || pincodeError || addressError || serviceError) {
+      this.setState({
+        nameError,
+        phoneError,
+        emailError,
+        locationError,
+        pincodeError,
+        addressError,
+        serviceError
+      });
+      return;
+    }
     const data = {
       name,
       mobile: phone,
@@ -120,6 +160,22 @@ class ServiceSignUpModal extends Component {
     const refreshIcon = require('../../../static/refresh-primary.svg');
     const { loading, loaded } = this.props;
     console.log(loading);
+    const {
+      nameError,
+      nameErrorMessage,
+      addressError,
+      addressErrorMessage,
+      pincodeError,
+      pincodeErrorMessage,
+      locationError,
+      locationErrorMessage,
+      emailError,
+      emailErrorMessage,
+      phoneError,
+      phoneErrorMessage,
+      serviceError,
+      serviceErrorMessage
+    } = this.state;
     return (
       <div>
         <Row display="block" mr="0" ml="0">
@@ -145,12 +201,26 @@ class ServiceSignUpModal extends Component {
                 {!loaded && (
                   <ServiceSignUpForm
                     name={name}
+                    nameError={nameError}
+                    nameErrorMessage={nameErrorMessage}
                     email={email}
+                    emailError={emailError}
+                    emailErrorMessage={emailErrorMessage}
                     phone={phone}
+                    phoneError={phoneError}
+                    phoneErrorMessage={phoneErrorMessage}
                     address={address}
+                    addressError={addressError}
+                    addressErrorMessage={addressErrorMessage}
                     location={location}
+                    locationError={locationError}
+                    locationErrorMessage={locationErrorMessage}
                     pincode={pincode}
+                    pincodeError={pincodeError}
+                    pincodeErrorMessage={pincodeErrorMessage}
                     service={service}
+                    serviceError={serviceError}
+                    serviceErrorMessage={serviceErrorMessage}
                     onChangeName={this.onChangeName}
                     onChangeEmail={this.onChangeEmail}
                     onChangePhone={this.onChangePhone}
