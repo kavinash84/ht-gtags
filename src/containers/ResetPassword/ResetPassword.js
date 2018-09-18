@@ -116,6 +116,9 @@ export default class ResetPasswordContainer extends Component {
     const {
       checkHash: { is_valid: isValid }
     } = response;
+
+    console.log(response);
+    console.log(isValid);
     return (
       <Section p="0" mb="0">
         <Menu />
