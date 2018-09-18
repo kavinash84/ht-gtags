@@ -8,7 +8,6 @@ import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
 import Heading from 'hometown-components/lib/Heading';
-import Button from 'hometown-components/lib/Buttons';
 import TitlePrice from 'hometown-components/lib/ProductDetails/TitlePrice';
 import ColorOption from 'hometown-components/lib/ProductDetails/ColorOption';
 import ServiceDetails from 'hometown-components/lib/ProductDetails/ServiceDetails';
@@ -17,10 +16,11 @@ import Specs from 'hometown-components/lib/ProductDetails/Specs';
 import Reviews from 'hometown-components/lib/Reviews';
 import AddReview from 'hometown-components/lib/Reviews/WriteReview';
 import Img from 'hometown-components/lib/Img';
-import WishListIcon from 'hometown-components/lib/Icons/WishListIcon';
+// import WishListIcon from 'hometown-components/lib/Icons/WishListIcon';
+import WishlistBtn from 'hometown-components/lib/WishlistBtn';
 import ProductCarousel from 'components/ProductCarousel';
 import EmiModal from 'containers/EmiModal/EmiModal';
-import Theme from 'hometown-components/lib/Theme';
+// import Theme from 'hometown-components/lib/Theme';
 import ResponsiveModal from 'components/Modal';
 import LoginModal from 'components/Login/LoginModal';
 import { addReview, toggleReview } from 'redux/modules/reviews';
@@ -130,7 +130,6 @@ class ProductDetails extends React.Component {
       history,
       wishlistToggle,
       addToWaitList,
-      loadingList,
       toggleReviewBox
     } = this.props;
     const {
@@ -166,6 +165,18 @@ class ProductDetails extends React.Component {
                     <BreadCrumb categoryDetails={categoryDetails} />
                   </Div>
                   <Div col="12">
+                    <WishlistBtn
+                      onClick={onClickWishList(
+                        sku,
+                        wishListData,
+                        wishlistToggle,
+                        isLoggedIn,
+                        history,
+                        this.onOpenLoginModal,
+                        addToWaitList
+                      )}
+                      isWishList={isInWishList(wishList, sku)}
+                    />
                     <ProductDetailsCarousel data={images} title={meta.name} />
                   </Div>
                   {/* <Div col="10">
@@ -233,36 +244,6 @@ class ProductDetails extends React.Component {
                         }
                       />
                     </Div>
-                    <Div col="6" mt="0" pl="0">
-                      <Button
-                        width="100%"
-                        color={Theme.colors.secondary}
-                        btnType="link"
-                        border="1px solid"
-                        bg="transparent"
-                        size="block"
-                        fontSize="0.75rem"
-                        height="auto"
-                        p="0 .75rem 0 0"
-                        fontFamily="medium"
-                        ta="right"
-                        className={styles.addToWishlist}
-                        onClick={onClickWishList(
-                          sku,
-                          wishListData,
-                          wishlistToggle,
-                          isLoggedIn,
-                          history,
-                          this.onOpenLoginModal,
-                          addToWaitList
-                        )}
-                        isWishList={isInWishList(wishList, sku)}
-                        disabled={isInWishList(loadingList, sku)}
-                      >
-                        <WishListIcon width="40" height="40" />
-                        {isInWishList(wishList, sku) ? 'REMOVE FROM WISHLIST' : 'ADD TO WISHLIST'}
-                      </Button>
-                    </Div>
                   </Row>
                   <Row display="block" mt="0" mb="0.625rem" mr="0.9375rem" ml="0.9375rem" />
                   <Row display="block" mt="1.25rem" mb="0" mr="0" ml="0">
@@ -323,8 +304,7 @@ ProductDetails.defaultProps = {
   deliveryInfo: '',
   emidata: [],
   wishList: [],
-  wishListData: [],
-  loadingList: []
+  wishListData: []
 };
 ProductDetails.propTypes = {
   product: PropTypes.object,
@@ -339,7 +319,6 @@ ProductDetails.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   history: PropTypes.object.isRequired,
   wishlistToggle: PropTypes.func.isRequired,
-  loadingList: PropTypes.array,
   addToWaitList: PropTypes.func.isRequired,
   toggleReviewBox: PropTypes.func.isRequired
 };
