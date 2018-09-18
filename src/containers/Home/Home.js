@@ -73,10 +73,17 @@ export default class Home extends Component {
               subTitle={products.sub_title}
               data={products.values}
               pt="1.5rem"
+              height="281px"
             />
           ))}
           {recentlyviewed.length > 0 && (
-            <ProductCarousel title="Recently Viewed" data={recentlyviewed} length={recentlyviewed.length} pt="1.5rem" />
+            <ProductCarousel
+              title="Recently Viewed"
+              data={recentlyviewed}
+              length={recentlyviewed.length}
+              pt="1.5rem"
+              height="281px"
+            />
           )}
           <StoresCarousel cities={cities} />
         </div>

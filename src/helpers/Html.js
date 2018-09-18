@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import serialize from 'serialize-javascript';
 import Helmet from 'react-helmet';
 import config from 'config';
-// import { gtm } from 'utils/tracking';
+import { newRelic } from 'utils/tracking';
 
 /**
  * Wrapper component containing HTML metadata and boilerplate tags.
@@ -40,7 +40,7 @@ export default class Html extends Component {
       assets, store, content, bundles, styleTags
     } = this.props;
     const head = Helmet.renderStatic();
-    /* eslint-disable react/no-danger */
+    /* eslint-disable */
     return (
       <html lang="en-US">
         <head>
@@ -79,6 +79,7 @@ export default class Html extends Component {
           {assets.styles && Object.keys(assets.styles).length === 0 ? (
             <style dangerouslySetInnerHTML={{ __html: '#content{display:none}' }} />
           ) : null}
+          <script dangerouslySetInnerHTML={{ __html: newRelic }} />
         </head>
         <body>
           <noscript>

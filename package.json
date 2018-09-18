@@ -26,7 +26,7 @@
   "main": "bin/server.js",
   "scripts": {
     "start": "concurrently --kill-others \"npm run start-prod\"",
-    "start-prod": "cross-env NODE_PATH=src NODE_ENV=production PORT=8084 APIHOST=betanode.hometown.in/api/ APIPORT=443 PAYMENT_URL=https://alice.hometown.in/checkout/finish/payment/ node ./bin/server.js",
+    "start-prod": "cross-env NODE_PATH=src NODE_ENV=production PORT=8084 APIHOST=beta-api.hometown.in/api/ APIPORT=443 PAYMENT_URL=https://alice.hometown.in/checkout/finish/payment/ node ./bin/server.js",
     "build": "cross-env NODE_ENV=production PAYMENT_URL=https://alice.hometown.in/checkout/finish/payment/ webpack --colors --display-error-details --config=webpack/prod.config.js",
     "start-stage": "cross-env NODE_PATH=src NODE_ENV=production PORT=8084 APIHOST=stage-node.hometown.in/api/ APIPORT=443 PAYMENT_URL=https://stage-alice.hometown.in/checkout/finish/payment/ node ./bin/server.js",
     "build-stage": "cross-env NODE_ENV=production PAYMENT_URL=https://stage-alice.hometown.in/checkout/finish/payment/ webpack --colors --display-error-details --config=webpack/stage.config.js",
@@ -72,7 +72,7 @@
     "express": "^4.15.4",
     "express-session": "^1.15.5",
     "history": "^4.7.2",
-    "hometown-components": "^0.1.44",
+    "hometown-components": "^0.1.46",
     "http-proxy": "^1.16.2",
     "is-promise": "^2.1.0",
     "js-cookie": "^2.1.3",

@@ -1,53 +1,6 @@
 @import "../../theme/_variables";
 @import "../../theme/_mixins";
 
-.content {
-  text-align: left;
-  .priceWrapper {
-    margin-bottom: 4px;
-    span {
-      margin-right: 10px;
-    }
-  }
-  .title {
-    @include font-family(medium);
-    @include font-size(0.825rem);
-    margin: 10px 0 7px;
-  }
-  .discPrice {
-    @include font-size('0.875rem');
-    @include font-family(medium);
-    color: $text-dark;
-  }
-  .price {
-    color: rgba(0, 0, 0, 0.4);
-    @include font-size(0.8rem);
-    text-decoration: line-through;
-  }
-  .saving {
-    @extend .price;
-    text-decoration: none;
-  }
-  .rating {
-    @include font-size(0.8rem);
-    color: $text-light;
-    margin-bottom: 4px;
-    position: relative;
-    &:before {
-      content: '★ ';
-      width:1em;
-      // text-shadow:1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0,0,0,.5);
-      color: $primary;
-      @include font-size(1rem);
-      margin-right: 2px;
-    }
-  }
-  .tags {
-    color: $secondary;
-    @include font-size(0.9rem);
-  }
-}
-
 .link {
   display: block;
   position: relative;
@@ -64,7 +17,6 @@
   }
 }
 .prodSliderItem {
-  padding: 0 10px;
   .title {
     @include font-size(1rem);
   }
@@ -72,7 +24,56 @@
     margin-bottom: 5px;
   }
 }
-
+.prodSliderItemWrapper {
+  border: 1px solid #e8e8e8;
+  .content {
+    text-align: left;
+    padding: 0 10px 10px;
+    .priceWrapper {
+      margin-bottom: 4px;
+      span {
+        margin-right: 10px;
+      }
+    }
+    .title {
+      @include font-family(medium);
+      @include font-size(0.825rem);
+      margin: 10px 0 7px;
+    }
+    .discPrice {
+      @include font-size('0.875rem');
+      @include font-family(medium);
+      color: $text-dark;
+    }
+    .price {
+      color: rgba(0, 0, 0, 0.4);
+      @include font-size(0.8rem);
+      text-decoration: line-through;
+    }
+    .saving {
+      @extend .price;
+      text-decoration: none;
+    }
+    .rating {
+      @include font-size(0.8rem);
+      color: $text-light;
+      margin-bottom: 4px;
+      position: relative;
+      &:before {
+        content: '★ ';
+        width:1em;
+        // text-shadow:1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0,0,0,.5);
+        color: $primary;
+        @include font-size(1rem);
+        margin-right: 2px;
+      }
+    }
+    .tags {
+      color: $secondary;
+      @include font-size(0.9rem);
+    }
+  }
+}
 .sliderItem {
   // display: inline-block;
 }

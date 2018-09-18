@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Button from 'hometown-components/lib/Buttons';
+import Img from 'hometown-components/lib/Img';
 import { Link } from 'react-router-dom';
 import { Label } from 'hometown-components/lib/Label';
 
 const styles = require('./CategoryFilters.scss');
+const showLessIcon = require('../../../static/chevron_right.svg');
+const showMoreIcon = require('../../../static/expand_more.svg');
 
 class CategoryFilterItem extends Component {
   state = {
@@ -23,13 +26,13 @@ class CategoryFilterItem extends Component {
     return (
       <li key={sub.id}>
         <Link to={`/${sub.url_key}`}>
-          <Label color="textDark" mt="0.3125rem" mb="0.3125rem" display="block" fontFamily="regular">
+          <Label color="black" mt="0.3125rem" mb="0.3125rem" display="block" fontFamily="regular">
             {sub.name}
           </Label>
         </Link>
         {sub.children && (
-          <Button pl="0" pr="0" lh="0.5" fontSize="1.25rem" btnType="link" onClick={this.handleClick}>
-            {show ? '-' : '+'}
+          <Button p="4px 0" lh="0.5" fontSize="1.25rem" btnType="link" onClick={this.handleClick}>
+            {show ? <Img src={showMoreIcon} alt="less" /> : <Img src={showLessIcon} alt="less" />}
           </Button>
         )}
         <ul className={show ? 'show' : 'hide'}>

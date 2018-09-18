@@ -10,7 +10,6 @@ import { pincode as pincodeCheck } from 'utils/validation';
 import { getDelieveryInfo } from 'redux/modules/productdetails';
 
 const styles = require('./Pincode.scss');
-const ArrowIcon = require('../../../static/arrow_forward.svg');
 const location = require('../../../static/map-icon.svg');
 
 const onChange = dispatcher => e => {
@@ -68,14 +67,14 @@ class Pincode extends React.Component {
           <Input
             type="text"
             placeholder="Enter Pincode"
-            backgroundColor="rgba(0, 0, 0, 0.05)"
-            borderColor="rgba(0, 0, 0, 0.03)"
+            backgroundColor="transparent"
+            borderColor="rgb(202, 202, 202)"
             height="2.5rem"
             onChange={onChange(setPincodeQuery, this.setPincodeInStore(setPincode, pincodeQuery))}
             value={pincodeQuery}
           />
           <button className={styles.pincodeCheckBtn} onClick={this.setPincodeInStore(setPincode, pincodeQuery)}>
-            <Img src={ArrowIcon} alt="Check" />
+            Check
           </button>
         </form>
         {validationError && <div>{validationErrorMessage}</div>}

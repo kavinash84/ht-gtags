@@ -11,7 +11,7 @@ const styles = require('./Checkout.scss');
 
 const creditcardIcon = require('../../../static/credit-card.svg');
 const debitcardIcon = require('../../../static/debit-card.svg');
-const intBankingIcon = require('../../../static/net-banking.svg');
+const intBankingIcon = require('../../../static/net-banking.png');
 const emiIcon = require('../../../static/emi.svg');
 const walletIcon = require('../../../static/wallet.svg');
 const codIcon = require('../../../static/cod.svg');

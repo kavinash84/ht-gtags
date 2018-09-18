@@ -1,16 +1,21 @@
+@import "../../theme/_variables";
+
 .pdpPincode {
   position: relative !important;
   padding-top: 0 !important;
   margin-top: 0.3125rem !important;
-  width: 80% !important;
+  width: 65% !important;
   clear: both !important;
   .pincodeCheckBtn {
     position: absolute !important;
-    background: transparent !important;
+    background: rgb(194, 194, 194);
     border: none !important;
     font-size: 0.75rem !important;
     right: 0 !important;
-    top: 8px !important;
+    top: 0 !important;
+    height: 40px;
+    color: #222222;
+    padding: 0 20px;
   }
   .pincodeIcon {
     position: absolute !important;

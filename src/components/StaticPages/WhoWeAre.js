@@ -1,5 +1,5 @@
 import React from 'react';
-import TitleBar from 'components/TitleBarV2';
+import TitleBar from 'components/TitleBar';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';

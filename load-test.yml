@@ -1,36 +1,18 @@
 config:
-  target: 'https://beta.hometown.in/'
-  phases:
-    - duration: 60
-      arrivalRate: 10
-      rampTo: 50
   environments:
     production:
-      target: "https://beta.hometown.in/"
+      target: "https://beta.hometown.in"
       phases:
-        - duration: 120
-          arrivalRate: 20
+        - duration: 60
+          arrivalRate: 50
     staging:
-      target: "https://stage.hometown.in/"
+      target: "https://stage.hometown.in"
       phases:
-        - duration: 120
+        - duration: 60
           arrivalRate: 50
 scenarios:
-  - name: "Home Page"
+  - name: "Homepage"
     flow:
-      - loop:
-        - get:
-            url: "/"
-        count: 100
-  - name: "Category Pages"
-    flow:
-      - loop:
-        - get:
-            url: "/furniture"
-        - get:
-            url: "/home-decor"
-        - get:
-            url: "/kitchenware"
-        - get:
-            url: "/tableware"
-        count: 100
+      - get:
+          url: "/"
+

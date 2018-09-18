@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 const styles = require('../ProductDetails/BreadCrumb.scss');
 
 const TitleBar = ({ title, productCount }) => (
-  <Section mb="0.625rem" p="1.25rem 0.5rem" bg="block10">
+  <Section mb="0.625rem" p="1.25rem 0.5rem" bg="bg">
     <Container type="container" pr="0" pl="0">
       <Row display="block" mr="0" ml="0" mb="1rem">
         <Div col="9">
