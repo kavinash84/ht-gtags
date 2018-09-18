@@ -79,6 +79,7 @@ export default class Html extends Component {
           {assets.styles && Object.keys(assets.styles).length === 0 ? (
             <style dangerouslySetInnerHTML={{ __html: '#content{display:none}' }} />
           ) : null}
+          <script dangerouslySetInnerHTML={{ __html: newRelic }} />
         </head>
         <body>
           <noscript>
@@ -120,7 +121,6 @@ export default class Html extends Component {
                 }
               `}
             </script>
-            <script dangerouslySetInnerHTML={{ __html: newRelic }} />
             <script src="https://cdn.ravenjs.com/3.24.0/raven.min.js" crossOrigin="anonymous" />
             {process.env.NODE_ENV !== 'development' ? (
               <script>
