@@ -46,7 +46,7 @@ const server = new http.Server(app);
 /* serving compressed files from server */
 
 const setJSCompression = (req, res, next) => {
-  if (!(req.url.indexOf('service-worker.js') > 1)) {
+  if (!(req.url.indexOf('service-worker.js') > 1) || !(req.url.indexOf('service-worker.js.gz') > 1)) {
     if (req.url.indexOf('?_sw-precache') > 1) {
       const swUrl = req.url.split('?_sw');
       req.url = `${swUrl[0]}.gz`;
