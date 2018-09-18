@@ -133,6 +133,7 @@ export default function userMiddleware() {
         }));
         break;
       }
+
       // Contact US
       case 'contactus/FEEDBACK_FAIL':
         dispatch(notifSend({
@@ -151,6 +152,22 @@ export default function userMiddleware() {
         }));
         break;
 
+      // Services
+      case 'services/LOAD_FAIL': {
+        let msg;
+        if (action.error.error_message && action.error.error_message.indexOf('fullname') !== -1) {
+          msg = 'Name Should Not Consists of Special Characters.';
+        }
+        if (action.error.error_message && action.error.error_message.indexOf('pincode') !== -1) {
+          msg = 'Pincode is Not Valid !';
+        }
+        dispatch(notifSend({
+          type: 'warning',
+          msg: msg || (action.error && action.error.error_message) || SOME_ERROR,
+          dismissAfter: 4000
+        }));
+        break;
+      }
       default:
         break;
     }

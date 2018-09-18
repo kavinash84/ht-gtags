@@ -8,7 +8,7 @@ import Heading from 'hometown-components/lib/Heading';
 import Text from 'hometown-components/lib/Text';
 import Img from 'hometown-components/lib/Img';
 import Span from 'hometown-components/lib/Span';
-import TitleBar from 'components/TitleBarV1';
+import TitleBar from 'components/TitleBar';
 
 const phoneIcon = require('../../../static/phone-icon-primary.svg');
 const mailIcon = require('../../../static/email-primary.svg');

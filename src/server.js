@@ -44,9 +44,10 @@ const app = express();
 const server = new http.Server(app);
 
 /* serving compressed files from server */
+// (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'dist', 'service-worker.js'))
 
 const setJSCompression = (req, res, next) => {
-  if (!(req.url.indexOf('service-worker.js') > 1) || !(req.url.indexOf('service-worker.js.gz') > 1)) {
+  if (!(req.url.indexOf('service-worker.js') >= 1)) {
     if (req.url.indexOf('?_sw-precache') > 1) {
       const swUrl = req.url.split('?_sw');
       req.url = `${swUrl[0]}.gz`;
@@ -56,14 +57,14 @@ const setJSCompression = (req, res, next) => {
     res.set('Content-Encoding', 'gzip');
     res.set('Content-Type', 'text/javascript');
   }
-  next();
+  return next();
 };
 
 const setCssCompression = (req, res, next) => {
   req.url += '.gz';
   res.set('Content-Encoding', 'gzip');
   res.set('Content-Type', 'text/css');
-  next();
+  return next();
 };
 
 app
@@ -73,6 +74,8 @@ app
   .use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')))
   .use('/manifest.json', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'manifest.json')))
   .get('*.js', setJSCompression)
+  .use('/service-worker.js', (req, res) =>
+    res.sendFile(path.join(__dirname, '..', 'static', 'dist', 'service-worker.js')))
   .get('*.css', setCssCompression);
 
 app.use('/dist/service-worker.js', (req, res, next) => {

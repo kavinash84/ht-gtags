@@ -12,20 +12,20 @@ import { Link } from 'react-router-dom';
 const styles = require('./Slider.scss');
 
 const ProductItem = ({
-  image, name, url, discPrice, price, rating, reviewsCount, percentage
+  image, name, url, discPrice, price, rating, reviewsCount, percentage, height
 }) => (
   <Div className={styles.prodSliderItem}>
     <Link className={styles.link} to={url}>
-      <ImageShimmer src={image} height="263px">
+      <ImageShimmer src={image} height={height}>
         {imageURL => <Img alt={name} src={imageURL} width="100%" className={styles.prodImage} />}
       </ImageShimmer>
-      <div className={styles.content}>
+      <Div className={styles.content}>
         <Heading mb="5px" color={Theme.colors.text} fontFamily="medium" fontSize="0.9375em" ta="center">
           {name}
         </Heading>
 
         <Div mb="0px" ta="center">
-          <Span mr="0.625rem" color={Theme.colors.text} fontSize="0.875em" fontFamily="medium">
+          <Span mr="0.3125rem" color={Theme.colors.text} fontSize="0.875em" fontFamily="medium">
             {' '}
             Rs. {discPrice || price}{' '}
           </Span>
@@ -56,7 +56,7 @@ const ProductItem = ({
             </Span>
           )}
         </Div>
-      </div>
+      </Div>
     </Link>
   </Div>
 );
@@ -68,7 +68,8 @@ ProductItem.defaultProps = {
   rating: 0,
   price: '',
   discPrice: '',
-  reviewsCount: 0
+  reviewsCount: 0,
+  height: 0
 };
 
 ProductItem.propTypes = {
@@ -79,7 +80,8 @@ ProductItem.propTypes = {
   name: PropTypes.string,
   rating: PropTypes.number,
   reviewsCount: PropTypes.number,
-  percentage: PropTypes.string
+  percentage: PropTypes.string,
+  height: PropTypes.string
 };
 
 export default ProductItem;

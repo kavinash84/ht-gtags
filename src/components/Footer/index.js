@@ -22,7 +22,6 @@ const instaIcon = require('../../../static/instagram.svg');
 const pinIcon = require('../../../static/pinterest.svg');
 const ourAppIcon = require('../../../static/google-play-store.svg');
 const aeIcon = require('../../../static/american-express.svg');
-const dcIcon = require('../../../static/diners-club.svg');
 const maestroIcon = require('../../../static/maestro.svg');
 const mastercardIcon = require('../../../static/mastercard.svg');
 const visaIcon = require('../../../static/visa.svg');
@@ -207,9 +206,6 @@ const Footer = () => (
               </Div>
               <Div col="2" p="0 5px">
                 <Img src={aeIcon} alt="Amex" width="100%" />
-              </Div>
-              <Div col="2" p="0 5px">
-                <Img src={dcIcon} alt="Diners Club" width="100%" />
               </Div>
               <Div col="2" p="0 5px">
                 <Img src={intBankingIcon} alt="Internet Banking" width="100%" />
