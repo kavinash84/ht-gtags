@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Container from 'hometown-components/lib/Container';
 import Row from 'hometown-components/lib/Row';
 import Div from 'hometown-components/lib/Div';
@@ -13,7 +14,6 @@ import Button from 'hometown-components/lib/Buttons';
 import { HOME_URL } from 'helpers/Constants';
 
 const LogoIcon = require('../../../static/logo.png');
-const linkData = require('../../data/FooterLinks');
 
 const fbIcon = require('../../../static/facebook.svg');
 const twIcon = require('../../../static/twitter.svg');
@@ -28,15 +28,11 @@ const visaIcon = require('../../../static/visa.svg');
 const intBankingIcon = require('../../../static/net-banking.png');
 const styles = require('./Footer.scss');
 
-const mapStateToProps = ({
-  homepage: {
-    footer: { data }
-  }
-}) => ({
-  categories: data.items && data.items.text.top_categories.values
+const mapStateToProps = ({ homepage }) => ({
+  menuItems: homepage.menu.data
 });
 
-const Footer = () => (
+const Footer = ({ menuItems }) => (
   <Div mb="0" p="0" pt="15px" pb="0" className={styles.footer}>
     <Section bg="footerTop" mb="0" p="2.5rem 0 0">
       <Container pr="0" pl="0">
@@ -109,20 +105,21 @@ const Footer = () => (
     <Section bg="footerTop" mb="0" p="0.625rem 0 2rem">
       <Container pr="0" pl="0">
         <Row m="0" mb="1rem" flexWrap="nowrap">
-          {linkData.map((links, index) => (
-            <Div key={String(index)} display="flexEqual" col="2">
-              <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem" pb="2px">
-                {links.key}
-              </Heading>
-              <ul>
-                {links.data.map((link, i) => (
-                  <li key={String(i)}>
-                    <Link to={`${link.url}`}>{link.name}</Link>
-                  </li>
-                ))}
-              </ul>
-            </Div>
-          ))}
+          {menuItems.map(menu =>
+            menu.children && (
+              <Div key={menu.name} display="flexEqual" col="2">
+                <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem" pb="2px">
+                  {menu.name}
+                </Heading>
+                <ul>
+                  {menu.children.map(subMenu => (
+                    <li key={subMenu.name}>
+                      <Link to={subMenu.url_key}>{subMenu.name}</Link>
+                    </li>
+                  ))}
+                </ul>
+              </Div>
+            ))}
         </Row>
         <Row m="0" flexWrap="nowrap">
           <Div display="flexEqual" col="2">
@@ -234,6 +231,12 @@ const Footer = () => (
   </Div>
 );
 
+Footer.defaultProps = {
+  menuItems: []
+};
+Footer.propTypes = {
+  menuItems: PropTypes.array
+};
 export default connect(
   mapStateToProps,
   null
