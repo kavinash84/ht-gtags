@@ -178,7 +178,7 @@ module.exports = {
 
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"',
-      'process.env.APIHOST': '"betanode.hometown.in/api/"',
+      'process.env.APIHOST': '"beta-api.hometown.in/api/"',
       __CLIENT__: true,
       __SERVER__: false,
       __DEVELOPMENT__: false,
