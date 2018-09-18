@@ -106,17 +106,19 @@ const Footer = ({ menuItems }) => (
       <Container pr="0" pl="0">
         <Row m="0" mb="1rem" flexWrap="nowrap">
           {menuItems.map(menu =>
-            menu.children && (
+            menu.children &&
+              menu.visibility === 'on' && (
               <Div key={menu.name} display="flexEqual" col="2">
                 <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem" pb="2px">
                   {menu.name}
                 </Heading>
                 <ul>
-                  {menu.children.map(subMenu => (
-                    <li key={subMenu.name}>
-                      <Link to={subMenu.url_key}>{subMenu.name}</Link>
-                    </li>
-                  ))}
+                  {menu.children.map(subMenu =>
+                    subMenu.visibility === 'on' && (
+                      <li key={subMenu.name}>
+                        <Link to={subMenu.url_key}>{subMenu.name}</Link>
+                      </li>
+                    ))}
                 </ul>
               </Div>
             ))}
