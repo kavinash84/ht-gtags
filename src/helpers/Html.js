@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import serialize from 'serialize-javascript';
 import Helmet from 'react-helmet';
 import config from 'config';
-// import { gtm } from 'utils/tracking';
+import { newRelic } from 'utils/tracking';
 
 /**
  * Wrapper component containing HTML metadata and boilerplate tags.
@@ -40,7 +40,7 @@ export default class Html extends Component {
       assets, store, content, bundles, styleTags
     } = this.props;
     const head = Helmet.renderStatic();
-    /* eslint-disable react/no-danger */
+    /* eslint-disable */
     return (
       <html lang="en-US">
         <head>
@@ -120,6 +120,7 @@ export default class Html extends Component {
                 }
               `}
             </script>
+            <script dangerouslySetInnerHTML={{ __html: newRelic }} />
             <script src="https://cdn.ravenjs.com/3.24.0/raven.min.js" crossOrigin="anonymous" />
             {process.env.NODE_ENV !== 'development' ? (
               <script>
