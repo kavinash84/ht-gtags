@@ -76,6 +76,7 @@ app
   .get('*.js', setJSCompression)
   .use('/service-worker.js', (req, res) =>
     res.sendFile(path.join(__dirname, '..', 'static', 'dist', 'service-worker.js')))
+  .use('/robots.txt', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'robots.txt')))
   .get('*.css', setCssCompression);
 
 app.use('/dist/service-worker.js', (req, res, next) => {
