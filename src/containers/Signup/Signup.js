@@ -72,7 +72,9 @@ export default class SignupFormContainer extends Component {
     }
     this.setState({
       phone: value,
-      phoneError: checkError
+      phoneError: checkError,
+      phoneErrorMessage:
+        value[0] === '0' ? 'Mobile number must not start with 0' : 'Enter 10 Digits Valid Mobile Number'
     });
   };
   onChangePassword = e => {
