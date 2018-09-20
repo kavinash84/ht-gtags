@@ -12,16 +12,14 @@ import FormInput from 'hometown-components/lib/Forms/FormInput';
 import MyMenu from 'components/MyMenu';
 import { addAddress, updateAddress } from 'redux/modules/myaddress';
 // Validators
-import { validateMobile } from 'js-utility-functions';
-import { isEmpty, pincode as pincodeIsValid } from 'utils/validation';
-
-const emailIsValid = value => !isEmpty(value) && /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value);
+import { isEmpty, pincode as validatePincode, validateEmail, validateMobile } from 'utils/validation';
+import { allowNChar, allowTypeOf } from 'utils/helper';
 
 const addIcon = require('../../../static/round-add_circle_outline.svg');
 const styles = require('./MyAddress.scss');
 
 const initialState = {
-  fullName: '',
+  name: '',
   address: '',
   pincode: '',
   phone: '',
@@ -30,20 +28,21 @@ const initialState = {
   selectedAddress: '',
   editForm: false,
   addForm: false,
-  emailFeedBackError: false,
-  emailFeedBackMessage: 'Email not Valid',
-  phoneFeedBackError: false,
-  phoneFeedBackMessage: 'Phone number not Valid',
-  pinFeedBackError: false,
-  pinFeedBackMessage: 'PinCode not Valid',
-  addressFeedBackError: false,
-  addressFeedBackMessage: 'Address not Valid',
-  fullNameFeedBackError: false,
-  fullNameFeedBackMessage: 'Name cannot be left Empty'
+  emailError: false,
+  emailErrorMessage: 'Email not Valid',
+  phoneError: false,
+  phoneErrorMessage: 'Phone number not Valid',
+  pincodeError: false,
+  pincodeErrorMessage: 'PinCode not Valid',
+  addressError: false,
+  addressErrorMessage: 'Address not Valid',
+  nameError: false,
+  nameErrorMessage: 'Name cannot be left Empty'
 };
 @connect(({ myaddress, profile }) => ({
   ...myaddress,
-  useremail: profile.data.email
+  useremail: profile.data.email,
+  myaddress
 }))
 @withRouter
 export default class DeliveryAddress extends Component {
@@ -51,7 +50,7 @@ export default class DeliveryAddress extends Component {
     store: PropTypes.object.isRequired
   };
   state = {
-    fullName: '',
+    name: '',
     address: '',
     pincode: '',
     phone: '',
@@ -59,16 +58,16 @@ export default class DeliveryAddress extends Component {
     selectedAddress: '',
     editForm: false,
     addForm: false,
-    emailFeedBackError: false,
-    emailFeedBackMessage: 'Email not Valid',
-    phoneFeedBackError: false,
-    phoneFeedBackMessage: 'Phone number not Valid',
-    pinFeedBackError: false,
-    pinFeedBackMessage: 'PinCode not Valid',
-    addressFeedBackError: false,
-    addressFeedBackMessage: 'Address not Valid',
-    fullNameFeedBackError: false,
-    fullNameFeedBackMessage: 'Name cannot be left Empty'
+    emailError: false,
+    emailErrorMessage: 'Email not Valid',
+    phoneError: false,
+    phoneErrorMessage: 'Enter 10 Digits Valid Mobile Number',
+    pincodeError: false,
+    pincodeErrorMessage: 'Pincode is not Valid',
+    addressError: false,
+    addressErrorMessage: 'Address cannot be left Empty',
+    nameError: false,
+    nameErrorMessage: 'Name cannot be left Empty'
   };
   componentWillMount() {
     const { useremail } = this.props;
@@ -76,28 +75,91 @@ export default class DeliveryAddress extends Component {
       email: useremail
     });
   }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.updated) {
+      this.setState(initialState);
+    }
+  }
   onSubmitValidator = () => {
     const {
-      email, fullName, pincode, address, phone
+      email, name, pincode, address, phone
     } = this.state;
 
-    const fullNameFeedBackError = isEmpty(fullName);
-    const emailFeedBackError = isEmpty(email) || !emailIsValid(email);
-    const phoneFeedBackError = isEmpty(phone) || validateMobile(phone).error;
-    const pinFeedBackError = isEmpty(pincode) || pincodeIsValid(pincode);
-    const addressFeedBackError = isEmpty(address);
+    const nameError = isEmpty(name);
+    const emailError = isEmpty(email) || !validateEmail(email);
+    const phoneError = isEmpty(phone) || validateMobile(phone).error;
+    const pincodeError = isEmpty(pincode) || validatePincode(pincode);
+    const addressError = isEmpty(address);
     this.setState({
-      fullNameFeedBackError,
-      emailFeedBackError,
-      phoneFeedBackError,
-      pinFeedBackError,
-      addressFeedBackError
+      nameError,
+      emailError,
+      phoneError,
+      pincodeError,
+      addressError
     });
 
-    if (fullNameFeedBackError || emailFeedBackError || phoneFeedBackError || pinFeedBackError || addressFeedBackError) {
+    if (nameError || emailError || phoneError || pincodeError || addressError) {
       return false;
     }
     return true;
+  };
+  onChangeName = e => {
+    const {
+      target: { value }
+    } = e;
+    const checkError = isEmpty(value);
+    this.setState({
+      name: value,
+      nameError: checkError
+    });
+  };
+  onChangeAddress = e => {
+    const {
+      target: { value }
+    } = e;
+    const checkError = isEmpty(value);
+    this.setState({
+      address: value,
+      addressError: checkError
+    });
+  };
+  onChangePhone = e => {
+    const {
+      target: { value }
+    } = e;
+    const checkError = !validateMobile(value);
+    if (!allowNChar(value, 10) || (!allowTypeOf(value, 'number') && value.length > 0)) {
+      return;
+    }
+    this.setState({
+      phone: value,
+      phoneError: checkError,
+      phoneErrorMessage:
+        value[0] === '0' ? 'Mobile number must not start with 0' : 'Enter 10 Digits Valid Mobile Number'
+    });
+  };
+  onChangePincode = e => {
+    const {
+      target: { value }
+    } = e;
+    const checkError = validatePincode(value);
+    if (!allowNChar(value, 6) || (!allowTypeOf(value, 'number') && value.length > 0)) {
+      return;
+    }
+    this.setState({
+      pincode: value,
+      pincodeError: checkError
+    });
+  };
+  onChangeEmail = e => {
+    const {
+      target: { value }
+    } = e;
+    const checkError = !validateEmail(value);
+    this.setState({
+      email: value,
+      emailError: checkError
+    });
   };
   handleChange = e => {
     const { name, value } = e.target;
@@ -108,7 +170,7 @@ export default class DeliveryAddress extends Component {
   handleClick = index => {
     const { data } = this.props;
     const {
-      full_name: fullName, address, pincode, mobile: phone, email, id_customer_address: addressId
+      full_name: name, address, pincode, mobile: phone, email, id_customer_address: addressId
     } = data[index];
     this.setState({
       addForm: false,
@@ -118,7 +180,7 @@ export default class DeliveryAddress extends Component {
       address,
       pincode,
       phone,
-      fullName,
+      name,
       addressId
     });
   };
@@ -129,10 +191,8 @@ export default class DeliveryAddress extends Component {
     if (this.onSubmitValidator()) {
       if (editForm) {
         dispatch(updateAddress(this.state));
-        this.setState(initialState);
       } else {
         dispatch(addAddress(this.state));
-        this.setState(initialState);
       }
     }
   };
@@ -143,26 +203,27 @@ export default class DeliveryAddress extends Component {
       address: '',
       pincode: '',
       phone: '',
-      fullName: ''
+      name: ''
     });
   };
   render() {
     const {
-      emailFeedBackError,
-      emailFeedBackMessage,
-      phoneFeedBackError,
-      phoneFeedBackMessage,
-      pinFeedBackError,
-      pinFeedBackMessage,
-      addressFeedBackError,
-      addressFeedBackMessage,
-      fullNameFeedBackError,
-      fullNameFeedBackMessage
+      emailError,
+      emailErrorMessage,
+      phoneError,
+      phoneErrorMessage,
+      pincodeError,
+      pincodeErrorMessage,
+      addressError,
+      addressErrorMessage,
+      nameError,
+      nameErrorMessage
     } = this.state;
     const {
-      fullName, phone, address, pincode, editForm, addForm, currentaddressindex
+      name, phone, address, pincode, editForm, addForm, currentaddressindex
     } = this.state;
     const { data, useremail } = this.props;
+    const { loading } = this.props;
     return (
       <Div type="block" mb="2rem">
         <MyMenu page="address" />
@@ -204,58 +265,60 @@ export default class DeliveryAddress extends Component {
                       label="Full Name *"
                       type="text"
                       placeholder=""
-                      onChange={this.handleChange}
-                      value={fullName}
-                      name="fullName"
-                      feedBackError={fullNameFeedBackError}
-                      feedBackMessage={fullNameFeedBackMessage}
+                      onChange={this.onChangeName}
+                      value={name}
+                      feedBackError={nameError}
+                      feedBackMessage={nameErrorMessage}
                     />
                     <FormInput
                       label="Street Address *"
                       type="text"
                       placeholder=""
-                      onChange={this.handleChange}
+                      onChange={this.onChangeAddress}
                       value={address}
-                      name="address"
-                      feedBackError={addressFeedBackError}
-                      feedBackMessage={addressFeedBackMessage}
+                      feedBackError={addressError}
+                      feedBackMessage={addressErrorMessage}
                     />
                     <FormInput
                       label="Phone *"
                       type="text"
                       placeholder=""
-                      onChange={this.handleChange}
+                      onChange={this.onChangePhone}
                       value={phone}
-                      name="phone"
-                      feedBackError={phoneFeedBackError}
-                      feedBackMessage={phoneFeedBackMessage}
+                      feedBackError={phoneError}
+                      feedBackMessage={phoneErrorMessage}
                     />
                     <FormInput
                       label="PIN Code *"
                       type="text"
                       placeholder=""
-                      onChange={this.handleChange}
+                      onChange={this.onChangePincode}
                       value={pincode}
-                      name="pincode"
-                      feedBackError={pinFeedBackError}
-                      feedBackMessage={pinFeedBackMessage}
+                      feedBackError={pincodeError}
+                      feedBackMessage={pincodeErrorMessage}
                     />
                     <FormInput
                       label="Email ID *"
                       type="hidden"
                       placeholder=""
-                      onChange={this.handleChange}
+                      onChange={this.onChangeEmail}
                       value={useremail}
-                      name="email"
-                      feedBackError={emailFeedBackError}
-                      feedBackMessage={emailFeedBackMessage}
+                      feedBackError={emailError}
+                      feedBackMessage={emailErrorMessage}
                     />
                   </Div>
                 </Row>
                 <Row display="block" mr="0" ml="0">
                   <Div col="2">
-                    <Button size="block" btnType="primary" fontFamily="regular" height="42px" mt="1.5rem">
-                      Save
+                    <Button
+                      size="block"
+                      btnType="primary"
+                      fontFamily="regular"
+                      height="42px"
+                      mt="1.5rem"
+                      onClick={this.handleSubmit}
+                    >
+                      {loading ? 'Please wait ...' : 'Save'}
                     </Button>
                   </Div>
                 </Row>
@@ -269,58 +332,60 @@ export default class DeliveryAddress extends Component {
                       label="Full Name *"
                       type="text"
                       placeholder=""
-                      onChange={this.handleChange}
-                      value={fullName}
-                      name="fullName"
-                      feedBackError={fullNameFeedBackError}
-                      feedBackMessage={fullNameFeedBackMessage}
+                      onChange={this.onChangeName}
+                      value={name}
+                      feedBackError={nameError}
+                      feedBackMessage={nameErrorMessage}
                     />
                     <FormInput
                       label="Street Address *"
                       type="text"
                       placeholder=""
-                      onChange={this.handleChange}
+                      onChange={this.onChangeAddress}
                       value={address}
-                      name="address"
-                      feedBackError={addressFeedBackError}
-                      feedBackMessage={addressFeedBackMessage}
+                      feedBackError={addressError}
+                      feedBackMessage={addressErrorMessage}
                     />
                     <FormInput
                       label="Phone *"
                       type="text"
                       placeholder=""
-                      onChange={this.handleChange}
+                      onChange={this.onChangePhone}
                       value={phone}
-                      name="phone"
-                      feedBackError={phoneFeedBackError}
-                      feedBackMessage={phoneFeedBackMessage}
+                      feedBackError={phoneError}
+                      feedBackMessage={phoneErrorMessage}
                     />
                     <FormInput
                       label="PIN Code *"
                       type="text"
                       placeholder=""
-                      onChange={this.handleChange}
+                      onChange={this.onChangePincode}
                       value={pincode}
-                      name="pincode"
-                      feedBackError={pinFeedBackError}
-                      feedBackMessage={pinFeedBackMessage}
+                      feedBackError={pincodeError}
+                      feedBackMessage={pincodeErrorMessage}
                     />
                     <FormInput
                       label="Email ID *"
                       type="hidden"
                       placeholder=""
-                      onChange={this.handleChange}
+                      onChange={this.onChangeEmail}
                       value={useremail}
-                      name="email"
-                      feedBackError={emailFeedBackError}
-                      feedBackMessage={emailFeedBackMessage}
+                      feedBackError={emailError}
+                      feedBackMessage={emailErrorMessage}
                     />
                   </Div>
                 </Row>
                 <Row display="block" mr="0" ml="0">
                   <Div col="2">
-                    <Button size="block" btnType="primary" fontFamily="regular" height="42px" mt="1.5rem">
-                      Save
+                    <Button
+                      size="block"
+                      btnType="primary"
+                      fontFamily="regular"
+                      height="42px"
+                      mt="1.5rem"
+                      onClick={this.handleSubmit}
+                    >
+                      {loading ? 'Please wait ...' : 'Save'}
                     </Button>
                   </Div>
                 </Row>
@@ -335,10 +400,14 @@ export default class DeliveryAddress extends Component {
 
 DeliveryAddress.defaultProps = {
   data: [],
-  useremail: ''
+  useremail: '',
+  loading: false,
+  updated: false
 };
 
 DeliveryAddress.propTypes = {
   data: PropTypes.object,
-  useremail: PropTypes.string
+  useremail: PropTypes.string,
+  loading: PropTypes.bool,
+  updated: PropTypes.bool
 };

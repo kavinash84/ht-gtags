@@ -15,7 +15,9 @@ const ADD_ADDRESS_FAIL = 'myaddress/ADD_ADDRESS_FAIL';
 const initialState = {
   loading: false,
   loaded: false,
-  data: []
+  data: [],
+  toggleForm: false,
+  updated: false
 };
 
 const removeAddress = (id, data) => data.filter(item => parseInt(item.id_customer_address, 10) !== parseInt(id, 10));
@@ -25,7 +27,8 @@ export default function reducer(state = initialState, action = {}) {
     case LOAD:
       return {
         ...state,
-        loading: true
+        loading: true,
+        loaded: false
       };
     case LOAD_SUCCESS:
       return {
@@ -43,13 +46,16 @@ export default function reducer(state = initialState, action = {}) {
     case UPDATE_ADDRESS:
       return {
         ...state,
-        loading: true
+        loading: true,
+        loaded: false,
+        updated: false
       };
     case UPDATE_ADDRESS_SUCCESS:
       return {
         ...state,
         loading: false,
         loaded: true,
+        updated: true,
         data: [...removeAddress(action.result.id_customer_address, state.data), action.result]
       };
     case UPDATE_ADDRESS_FAIL:
@@ -61,13 +67,16 @@ export default function reducer(state = initialState, action = {}) {
     case ADD_ADDRESS:
       return {
         ...state,
-        loading: true
+        loading: true,
+        loaded: false,
+        updated: false
       };
     case ADD_ADDRESS_SUCCESS:
       return {
         ...state,
         loading: false,
         loaded: true,
+        updated: true,
         data: [...state.data, action.result]
       };
     case ADD_ADDRESS_FAIL:
