@@ -35,15 +35,16 @@
     z-index: 100;
     li {
       list-style: none;
-      padding-bottom: 3px;
-      padding-top: 3px;
+      padding-bottom: 2px;
+      padding-top: 2px;
       &:last-child {
         //padding-bottom: 0;
       }
       a {
-        font-size: 0.75em;
+        font-size: 0.75rem;
         font-family: regular;
         color: #666666;
+        line-height: 2;
       }
     }
   }
