@@ -12,7 +12,7 @@ import {
   loadCategories,
   loadMainMenu,
   loadBanners,
-  loadFooter,
+  // loadFooter,
   isLoaded as isSectionLoaded
 } from 'redux/modules/homepage';
 import { generateSession, isLoaded as isSessionSet } from 'redux/modules/app';
@@ -31,10 +31,7 @@ import { isKeyExists } from 'utils/helper';
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState } }) => {
-    const {
-      pincode: { selectedPincode },
-      app: { sessionId, csrfToken }
-    } = getState();
+    const { pincode: { selectedPincode }, app: { sessionId, csrfToken } } = getState();
     const defaultPincode = selectedPincode === '' ? PINCODE : selectedPincode;
     if (!isSessionSet(getState()) || !sessionId || !csrfToken) {
       await dispatch(generateSession(defaultPincode)).catch(error => console.log(error));
@@ -50,9 +47,7 @@ import { isKeyExists } from 'utils/helper';
     }
   },
   defer: ({ store: { dispatch, getState } }) => {
-    const {
-      userLogin: { isLoggedIn, loggingOut }
-    } = getState();
+    const { userLogin: { isLoggedIn, loggingOut } } = getState();
     if (!isSectionLoaded(getState(), 'categories')) {
       wrapDispatch(dispatch, 'categories')(loadCategories()).catch(error => error);
     }
@@ -62,9 +57,9 @@ import { isKeyExists } from 'utils/helper';
     if (isLoggedIn && !loggingOut && !isProfileLoaded(getState())) {
       dispatch(loadUserProfile()).catch(error => console.log(error));
     }
-    if (!isSectionLoaded(getState(), 'footer')) {
-      wrapDispatch(dispatch, 'footer')(loadFooter()).catch(error => console.log(error));
-    }
+    // if (!isSectionLoaded(getState(), 'footer')) {
+    //   wrapDispatch(dispatch, 'footer')(loadFooter()).catch(error => console.log(error));
+    // }
   }
 })
 @withRouter
@@ -132,9 +127,7 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-    const {
-      login: { isLoggedIn }
-    } = this.props;
+    const { login: { isLoggedIn } } = this.props;
     const { dispatch } = this.context.store;
     if (!isLoggedIn && isKeyExists(window.navigator, 'credentials.get')) {
       navigator.credentials
