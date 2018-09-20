@@ -24,3 +24,15 @@ export const PINCODE = '110001';
 /* Configs */
 export const clientId = 'rama';
 export const clientSecret = 'ramahometown';
+
+/* Routes Config */
+export const categoryRoutes = [
+  'furniture',
+  'home-decor',
+  'homefurnishings',
+  'home-improvement',
+  'kitchenware',
+  'tableware'
+];
+
+export const listingRoutes = [...categoryRoutes, 'exclusive', 'clearance-sale-offer', 'appliances', 'gifts'];

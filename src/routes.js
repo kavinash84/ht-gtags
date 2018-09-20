@@ -45,6 +45,10 @@ import PaymentFailure from 'containers/PaymentFailure/';
 import BulkOrder from 'containers/BulkOrder/';
 import ServiceSignUpContainer from 'components/ServiceSignUp/';
 
+import { categoryRoutes, listingRoutes } from 'helpers/Constants';
+
+const createRegex = data => data.join('|');
+
 const locationHelper = locationHelperBuilder({});
 
 const isAuthenticated = connectedReduxRedirect({
@@ -62,6 +66,7 @@ const isNotAuthenticated = connectedReduxRedirect({
   allowRedirectBack: false
 });
 
+/* eslint-disable max-len */
 const routes = [
   {
     component: App,
@@ -105,16 +110,16 @@ const routes = [
       { path: '/bulk-order', exact: true, component: BulkOrder },
       { path: '/service-signup', exact: true, component: ServiceSignUpContainer },
       {
-        path: '/:category(furniture|home-decor|homefurnishings|home-improvement|kitchenware|tableware)',
+        path: `/:category(${createRegex(categoryRoutes)})`,
         exact: true,
         component: Category
       },
       {
-        path: '/:category/:subcategory1?/:subcategory2?/:subcategory3?/:subcategory4?/:subcategory5?',
+        path: `/:category(${createRegex(listingRoutes)})/:subcategory1?/:subcategory2?/:subcategory3?/:subcategory4?/:subcategory5?`,
         exact: true,
         component: Listing
       },
-      { component: NotFound }
+      { component: NotFound, status: 404 }
     ]
   }
 ];

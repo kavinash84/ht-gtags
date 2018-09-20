@@ -116,11 +116,14 @@ export default class ResetPasswordContainer extends Component {
     const {
       checkHash: { is_valid: isValid }
     } = response;
+
+    console.log(response);
+    console.log(isValid);
     return (
       <Section p="0" mb="0">
         <Menu />
         <div className="wrapper">
-          {isValid && (
+          {isValid ? (
             <Container pr="0" pl="0">
               <div className={styles.userWrapper}>
                 <Row display="block" mr="0" ml="0">
@@ -158,18 +161,19 @@ export default class ResetPasswordContainer extends Component {
                 </Row>
               </div>
             </Container>
+          ) : (
+            <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
+              <Empty
+                title="Password link is expired !!"
+                subTitle=""
+                btnName="Resend Link"
+                url="/forgot-password"
+                bg="#fafafa"
+              >
+                <Img src={PasswordExpiredIcon} width="initial" m="auto" alt="Password link is expired !!" />
+              </Empty>
+            </Section>
           )}
-          <Section className={isValid ? 'hide' : ''} display="flex" p="0.625rem" pt="1.25rem" mb="0">
-            <Empty
-              title="Password link is expired !!"
-              subTitle=""
-              btnName="Resend Link"
-              url="/forgot-password"
-              bg="#fafafa"
-            >
-              <Img src={PasswordExpiredIcon} width="initial" m="auto" alt="Password link is expired !!" />
-            </Empty>
-          </Section>
         </div>
         <Footer />
       </Section>

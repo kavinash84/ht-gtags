@@ -12,7 +12,7 @@ import {
   loadCategories,
   loadMainMenu,
   loadBanners,
-  loadFooter,
+  // loadFooter,
   isLoaded as isSectionLoaded
 } from 'redux/modules/homepage';
 import { generateSession, isLoaded as isSessionSet } from 'redux/modules/app';
@@ -57,9 +57,9 @@ import { isKeyExists } from 'utils/helper';
     if (isLoggedIn && !loggingOut && !isProfileLoaded(getState())) {
       dispatch(loadUserProfile()).catch(error => console.log(error));
     }
-    if (!isSectionLoaded(getState(), 'footer')) {
-      wrapDispatch(dispatch, 'footer')(loadFooter()).catch(error => console.log(error));
-    }
+    // if (!isSectionLoaded(getState(), 'footer')) {
+    //   wrapDispatch(dispatch, 'footer')(loadFooter()).catch(error => console.log(error));
+    // }
   }
 })
 @withRouter
@@ -186,11 +186,11 @@ export default class App extends Component {
             </script>
             <script type="text/javascript">
               {`
-                  var google_tag_params={
-                      ecomm_pagetype: '',
-                      ecomm_prodid: [34592212, '23423-131-12'],
-                      ecomm_totalvalue: '',
-                    };
+                var google_tag_params={
+                    ecomm_pagetype: '',
+                    ecomm_prodid: [],
+                    ecomm_totalvalue: '',
+                  };
                 `}
             </script>
             <link rel="alternate" media="only screen and (max-width:640px)" href={`https://m.hometown.in${pathname}`} />

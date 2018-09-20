@@ -1,44 +1,18 @@
 config:
-  target: 'https://beta.hometown.in/'
-  phases:
-    - duration: 60
-      arrivalRate: 10
-      rampTo: 50
   environments:
     production:
-      target: "https://beta.hometown.in/"
+      target: "https://beta.hometown.in"
       phases:
         - duration: 60
-          arrivalRate: 20
+          arrivalRate: 50
     staging:
-      target: "https://stage.hometown.in/"
+      target: "https://stage.hometown.in"
       phases:
         - duration: 60
           arrivalRate: 50
 scenarios:
-  - name: "Home Page"
+  - name: "Homepage"
     flow:
-      - loop:
-        - get:
-            url: "/"
-        count: 50
-  - name: "Category Pages"
-    flow:
-      - loop:
-        - get:
-            url: "/furniture"
-        - get:
-            url: "/home-decor"
-        - get:
-            url: "/kitchenware"
-        - get:
-            url: "/tableware"
-        count: 50
-  - name: "Listing Page"
-    flow:
-      - loop:
-        - get:
-            url: "/furniture/living-room/sofas-sectional"
-        - get:
-            url: "/home-decor/religion-spirituality/fountains"
-        count: 50
+      - get:
+          url: "/"
+

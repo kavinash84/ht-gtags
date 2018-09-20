@@ -305,7 +305,7 @@ class DeliveryAddress extends Component {
                   <Row display="block" mr="0" ml="0" mt="1.5rem">
                     <Div col="12">
                       <Label fontSize="1.125rem" mb="0.875rem">
-                        Billing ADDRESS
+                        BILLING ADDRESS
                       </Label>
                     </Div>
                     <AddressForm formType="billing" isLoggedIn={isLoggedIn} userEmail={userEmail} />
