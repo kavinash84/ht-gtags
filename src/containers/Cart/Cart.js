@@ -76,7 +76,7 @@ export default class CartContainer extends Component {
           <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
             <Empty
               title="Your cart is currently empty!"
-              subTitle="Add items to it"
+              subTitle="Add items to cart"
               btnName="Shop Now"
               url="/"
               bg="#fafafa"

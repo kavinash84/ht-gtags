@@ -34,7 +34,7 @@ const ProductQuantity = ({
   cartItemLoading
 }) => (
   <Row display="block" m="0">
-    <Div col="12" ta="left">
+    <Div col="12" ta="center">
       <Button
         type="custom"
         color="textDark"

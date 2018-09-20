@@ -6,16 +6,17 @@ import Menu from 'containers/MenuNew/index';
 import Footer from 'components/Footer';
 import ForgotPasswordForm from 'hometown-components/lib/Forms/ForgotPasswordForm';
 import Container from 'hometown-components/lib/Container';
-import Text from 'hometown-components/lib/Text';
 import Section from 'hometown-components/lib/Section';
 import Row from 'hometown-components/lib/Row';
-import Heading from 'hometown-components/lib/Heading';
 import Div from 'hometown-components/lib/Div';
 import Img from 'hometown-components/lib/Img';
+import Heading from 'hometown-components/lib/Heading';
+import Text from 'hometown-components/lib/Text';
+import { LOGIN_URL } from 'helpers/Constants';
 import { validateEmail } from 'js-utility-functions';
 import { forgotPassword } from 'redux/modules/forgotpassword';
 
-const SidebarImg = require('../../../static/login-side-thumb.png');
+const SidebarImg = require('../../../static/forgotpassword-sidebar-bg.jpg');
 const ForgotPasswordImg = require('../../../static/forgot-password-icon.png');
 
 @connect(({ forgotpassword }) => ({
@@ -80,18 +81,12 @@ export default class ForgotPasswordContainer extends Component {
           <Container pr="0" pl="0">
             <div className={styles.userWrapper}>
               <Row display="block" mr="0" ml="0">
-                <Div col={5}>
+                <Div col={6}>
                   <div className={styles.imgWrapper}>
-                    <Div>
-                      <Heading color="white" fontSize="1.375rem">
-                        FORGOT PASSWORD
-                      </Heading>
-                      <Text color="white" />
-                    </Div>
                     <Img src={SidebarImg} />
                   </div>
                 </Div>
-                <Div col={7} p="1.25rem 3.5rem" bg="#f8f8f8">
+                <Div col={6} p="1.25rem 3.5rem">
                   {loaded && !error && submitted ? (
                     <div className={`${styles.responseBlock}`}>
                       <img src={ForgotPasswordImg} alt="" />
@@ -109,6 +104,25 @@ export default class ForgotPasswordContainer extends Component {
                     </div>
                   ) : (
                     <div className={`${styles.formBlock} ${styles.forgotForm}`}>
+                      <Row display="block" mt="1.5rem" mr="0" ml="0">
+                        <Div col="12" ta="center">
+                          <Heading
+                            color="color676767"
+                            mt="0"
+                            mb="0"
+                            fontWeight="400"
+                            fontSize="2rem"
+                            ta="center"
+                            fontFamily="light"
+                          >
+                            Forgot password?
+                          </Heading>
+                          <Text color="color676767" ta="center" lh="1.6">
+                            Enter the e-mail address associated with your account <br />
+                            Click submit to have your password e-mailed to you.
+                          </Text>
+                        </Div>
+                      </Row>
                       <Row display="block" mr="0" ml="0">
                         <Div mt="0">
                           <ForgotPasswordForm
@@ -118,6 +132,7 @@ export default class ForgotPasswordContainer extends Component {
                             emailFeedBackMessage={emailErrorMessage}
                             onSubmitForgot={this.onSubmitForgot}
                             forgotResponse={response}
+                            loginUrl={LOGIN_URL}
                           />
                         </Div>
                       </Row>

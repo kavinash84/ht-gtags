@@ -91,7 +91,7 @@ class Coupon extends React.Component {
                 btnType="link"
                 mt="30px"
                 p="0"
-                className="pull-right"
+                className={`${styles.applyClose} pull-right`}
                 onClick={() => this.removeCoupon(appliedCoupon)}
               >
                 <Img src={CloseIcon} alt="Close" />
