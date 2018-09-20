@@ -41,7 +41,8 @@ class Coupon extends React.Component {
     });
   };
 
-  handleApply = () => {
+  handleApply = e => {
+    e.preventDefault();
     const { pincode, sessionId } = this.props;
     const { dispatch } = this.context.store;
     dispatch(applyCoupon(this.state.coupon, sessionId, pincode));

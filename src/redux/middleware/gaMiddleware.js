@@ -1,6 +1,6 @@
 import { filterCategoryDetails, isKeyExists } from 'utils/helper';
 import { CART_URL } from 'helpers/Constants';
-import { getCartListSKU } from 'selectors/cart';
+import { getCartListSKU, getCartListSKUFromResult } from 'selectors/cart';
 
 export default function gaMiddleware() {
   return ({ getState }) => next => action => {
@@ -15,6 +15,8 @@ export default function gaMiddleware() {
           });
           if (location === '/') {
             window.google_tag_params.ecomm_pagetype = 'home';
+            window.google_tag_params.ecomm_totalvalue = '';
+            window.google_tag_params.ecomm_prodid = [];
           } else if (location === CART_URL) {
             window.google_tag_params.ecomm_pagetype = 'cart';
             if (getState().cart.summary) {
@@ -73,7 +75,7 @@ export default function gaMiddleware() {
         }
         if (type === 'productdetails/LOAD_PRODUCT_DESCRIPTION_SUCCESS') {
           window.google_tag_params.ecomm_pagetype = 'product';
-          window.google_tag_params.ecomm_totalvalue = action.result.meta.special_price;
+          window.google_tag_params.ecomm_totalvalue = action.result.meta.special_price || action.result.meta.price;
           const { position } = getState().productdetails;
           const {
             name, sku, price, brand, category_details: categoryDetails, color
@@ -132,7 +134,7 @@ export default function gaMiddleware() {
               name, sku, price, brand, color, special_price: netprice
             } = item.data;
             skus.push(sku);
-            totalValue += parseInt(netprice, 10);
+            totalValue += parseInt(netprice, 10) || parseInt(price, 10);
             return {
               name,
               price,
@@ -158,6 +160,7 @@ export default function gaMiddleware() {
             name, net_price: netprice, color, brand, category_details: categoryDetails
           } = product.product_info;
           const category = categoryDetails ? categoryDetails.join('/') : null;
+
           window.dataLayer.push({
             event: 'addToCart',
             ecommerce: {
@@ -192,6 +195,10 @@ export default function gaMiddleware() {
           const {
             name, net_price: netprice, color, brand
           } = product.product_info;
+          if (action.result) {
+            window.google_tag_params.ecomm_totalvalue = action.result.cart.summary.total;
+            window.google_tag_params.ecomm_prodid = getCartListSKUFromResult(action.result.cart);
+          }
           window.dataLayer.push({
             event: 'removeFromCart',
             ecommerce: {
@@ -361,6 +368,11 @@ export default function gaMiddleware() {
             };
             window.dataLayer.push(obj);
           }
+        }
+      }
+      if (type === 'cart/UPDATE_CART_SUCCESS') {
+        if (action.result.cart.summary) {
+          window.google_tag_params.ecomm_totalvalue = action.result.cart.summary.total;
         }
       }
     }

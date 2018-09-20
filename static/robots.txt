@@ -1,0 +1,39 @@
+User-agent: *
+Allow: /
+
+User-agent: Googlebot-Mobile, bingbot-mobile
+Disallow: /
+
+Disallow: /q?
+Disallow: /checkout/
+Disallow: /wishlist/
+Disallow: /my-orders/
+Disallow: /profile/
+Disallow: /my-address/
+
+Disallow: https://alice.hometown.in/
+Disallow: https://stage-alice.hometown.in/
+Disallow: https://api.hometown.in/
+Disallow: http://alice-qa.hometown.in/
+Disallow: http://alice-qa01.hometown.in/
+Disallow: http://alice-qa02.hometown.in/
+Disallow: http://alice-staging.hometown.in/
+
+Noindex: /q?
+Noindex: /checkout/
+Noindex: /wishlist/
+Noindex: /my-orders/
+Noindex: /profile/
+Noindex: /my-address/
+
+Noindex: https://alice.hometown.in/
+Noindex: https://stage-alice.hometown.in/
+Noindex: https://api.hometown.in/
+Noindex: http://alice-qa.hometown.in/
+Noindex: http://alice-qa01.hometown.in/
+Noindex: http://alice-qa02.hometown.in/
+Noindex: http://alice-staging.hometown.in/
+
+
+
+sitemap: https://www.hometown.in/sitemap.xml
