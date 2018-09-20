@@ -13,6 +13,7 @@ import Container from 'hometown-components/lib/Container';
 import { connect } from 'react-redux';
 import { loadCategory, setCategory, isLoaded } from 'redux/modules/category';
 import Footer from 'components/Footer';
+import SeoContent from 'components/SeoContent';
 import CommonLayout from 'components/Category/CommonLayout';
 
 const getSubMenu = (categories, key) =>
@@ -27,19 +28,17 @@ const getSubMenu = (categories, key) =>
     await dispatch(setCategory(category));
   }
 })
-@connect(({ homepage: { menu }, category }) => ({
+@connect(({ homepage: { menu }, category: { data } }) => ({
   menu: menu.data,
-  category: category.data && category.data.items.text
+  category: data && data.items.text,
+  seoInfo: data && data.seo
 }))
 export default class Category extends Component {
   render() {
     const {
-      category,
-      menu,
-      match: {
-        params: { category: currentCategory }
-      }
+      category, seoInfo, menu, match: { params: { category: currentCategory } }
     } = this.props;
+    /* eslint-disable react/no-danger */
     return (
       <Section p="0" mb="0">
         <Helmet title="Home" />
@@ -61,6 +60,12 @@ export default class Category extends Component {
             </Row>
           </Container>
         </div>
+        {seoInfo &&
+          seoInfo.seo_text && (
+          <SeoContent>
+            <div dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }} />
+          </SeoContent>
+        )}
         <Footer />
       </Section>
     );
@@ -69,7 +74,10 @@ export default class Category extends Component {
 
 Category.defaultProps = {
   category: [],
-  menu: []
+  menu: [],
+  seoInfo: {
+    seo_text: ''
+  }
 };
 
 Category.propTypes = {
@@ -77,5 +85,6 @@ Category.propTypes = {
   menu: PropTypes.array,
   match: PropTypes.shape({
     params: PropTypes.object.isRequired
-  }).isRequired
+  }).isRequired,
+  seoInfo: PropTypes.object
 };
