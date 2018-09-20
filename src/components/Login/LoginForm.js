@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import LoginForm from 'hometown-components/lib/Forms/LoginForm';
 import { validateEmail, isBlank } from 'js-utility-functions';
 import { login } from 'redux/modules/login';
+import { SIGNUP_URL, FORGOT_PASSWORD_URL } from 'helpers/Constants';
 
 @connect(state => ({
   loginResponse: state.userLogin
@@ -28,7 +29,9 @@ export default class LoginFormContainer extends Component {
   };
 
   onChangeEmail = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = validateEmail(value, 'Enter valid email');
     this.setState({
       email: value,
@@ -37,7 +40,9 @@ export default class LoginFormContainer extends Component {
     });
   };
   onChangePassword = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = isBlank(value);
     this.setState({
       password: value,
@@ -78,6 +83,8 @@ export default class LoginFormContainer extends Component {
         passwordFeedBackMessage={passwordErrorMessage}
         onSubmitLogin={this.onSubmitLogin}
         loginResponse={loginResponse}
+        signupUrl={SIGNUP_URL}
+        forgotUrl={FORGOT_PASSWORD_URL}
       />
     );
   }

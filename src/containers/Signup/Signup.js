@@ -11,15 +11,14 @@ import Section from 'hometown-components/lib/Section';
 import Row from 'hometown-components/lib/Row';
 import Heading from 'hometown-components/lib/Heading';
 import Div from 'hometown-components/lib/Div';
-import { Link } from 'react-router-dom';
-import { Label } from 'hometown-components/lib/Label';
+import Theme from 'hometown-components/lib/Theme';
 import Img from 'hometown-components/lib/Img';
 import { validateMobile, validatePassword, validateEmail } from 'utils/validation';
 import { LOGIN_URL } from 'helpers/Constants';
 import { signUp } from 'redux/modules/signUp';
 import { allowNChar, allowTypeOf } from 'utils/helper';
 
-const SidebarImg = require('../../../static/login-side-thumb.png');
+const SidebarImg = require('../../../static/signup-sidebar-bg.jpg');
 
 @connect(({ userSignUp, app, notifs }) => ({
   loading: userSignUp.loading,
@@ -106,7 +105,7 @@ export default class SignupFormContainer extends Component {
     dispatch(signUp(this.state, session));
   };
   render() {
-    const styles = require('../Login/index.scss');
+    const styles = require('./index.scss');
 
     const {
       email,
@@ -125,28 +124,51 @@ export default class SignupFormContainer extends Component {
         <Menu />
         <div className="wrapper">
           <Container pr="0" pl="0">
-            <div className={styles.userWrapper}>
+            <div className={styles.signupWrapper}>
               <Row display="block" mr="0" ml="0">
-                <Div col={5}>
+                <Div col={12} bg={Theme.colors.colora39994} pt="0.625rem" pb="0.625rem">
+                  <Heading
+                    color="white"
+                    mt="0"
+                    mb="0"
+                    fontWeight="400"
+                    fontSize="2.75rem"
+                    ta="center"
+                    fontFamily="light"
+                    lh="1"
+                  >
+                    Be the first!
+                  </Heading>
+                  <Text color="white" ta="center" mb="0" mt="0" fontSize="1rem">
+                    to get regular updates on new product launches, exclusive previews ans specials offers.
+                  </Text>
+                </Div>
+              </Row>
+              <Row display="block" mr="0" ml="0">
+                <Div col={6}>
                   <div className={styles.imgWrapper}>
-                    <Div>
-                      <Heading color="white" fontSize="1.375rem">
-                        SIGN UP
-                      </Heading>
-                      <Text color="white">
-                        Get access to your Orders, <br /> Wishlist and Recommendations
-                      </Text>
-                    </Div>
                     <Img src={SidebarImg} />
                   </div>
                 </Div>
-                <Div col={7} p="1.25rem 3.5rem" bg="#f8f8f8">
+                <Div col={6} p="1.25rem 3.5rem">
                   <div className={styles.formBlock}>
-                    <Row display="block" mr="0" ml="0">
-                      <Div col="12" ta="right">
-                        <Link to={LOGIN_URL}>
-                          <Label color="primary">Existing User? Log in now</Label>
-                        </Link>
+                    <Row display="block" mt="0" mr="0" ml="0">
+                      <Div col="12" ta="center">
+                        <Heading
+                          color="#000"
+                          mt="0"
+                          mb="0"
+                          fontWeight="400"
+                          fontSize="2rem"
+                          ta="center"
+                          fontFamily="light"
+                        >
+                          Sign up now<br />
+                          and get Rs 500 off*
+                        </Heading>
+                        <Text color="#676767" ta="center" fontSize="1rem" mt="0">
+                          on your first purchase
+                        </Text>
                       </Div>
                     </Row>
                     <Row display="block" mr="0" ml="0">
@@ -166,6 +188,7 @@ export default class SignupFormContainer extends Component {
                           passwordFeedBackMessage={passwordErrorMessage}
                           onSubmitSignup={this.onSubmitSignup}
                           loading={loading}
+                          loginUrl={LOGIN_URL}
                         />
                       </Div>
                     </Row>

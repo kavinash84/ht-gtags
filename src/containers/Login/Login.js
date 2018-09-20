@@ -9,17 +9,13 @@ import Row from 'hometown-components/lib/Row';
 import Heading from 'hometown-components/lib/Heading';
 import Div from 'hometown-components/lib/Div';
 import Text from 'hometown-components/lib/Text';
-import { Link } from 'react-router-dom';
 import { Label } from 'hometown-components/lib/Label';
 import Img from 'hometown-components/lib/Img';
-import { SIGNUP_URL, FORGOT_PASSWORD_URL } from 'helpers/Constants';
-
-const SidebarImg = require('../../../static/login-side-thumb.png');
 
 export default class LoginFormContainer extends Component {
   render() {
     const styles = require('./index.scss');
-
+    const SidebarImg = require('../../../static/login-sidebar-bg.jpg');
     return (
       <Section p="0" mb="0">
         <Menu />
@@ -27,48 +23,49 @@ export default class LoginFormContainer extends Component {
           <Container pr="0" pl="0">
             <div className={styles.userWrapper}>
               <Row display="block" mr="0" ml="0">
-                <Div col={5}>
+                <Div col={6}>
                   <div className={styles.imgWrapper}>
-                    <Div>
-                      <Heading color="white" fontSize="1.375rem">
-                        LOGIN
-                      </Heading>
-                      <Text color="white">
-                        Get access to your Orders, <br />Wishlist and Recommendations
-                      </Text>
-                    </Div>
                     <Img src={SidebarImg} />
                   </div>
                 </Div>
-                <Div col={7} p="2rem 3.5rem" bg="#f8f8f8">
+                <Div col={6} p="2rem 3rem">
                   <div className={styles.formBlock}>
                     <Row display="block" mt="1.5rem" mr="0" ml="0">
-                      <Div col="12" ta="center" mb="0.625rem">
-                        <GoogleLoginBtn />
-                      </Div>
-                      <Div col="12" mb="1" mt="1">
-                        <Label fontFamily="regular" display="block" ta="center" color="primary">
-                          OR
-                        </Label>
+                      <Div col="12" ta="center">
+                        <Heading
+                          color="color676767"
+                          mt="0"
+                          mb="0"
+                          fontWeight="400"
+                          fontSize="2rem"
+                          ta="center"
+                          fontFamily="light"
+                        >
+                          Sign in to your account
+                        </Heading>
+                        <Text color="color676767" ta="center">
+                          To track your orders, manage your account and more.
+                        </Text>
                       </Div>
                     </Row>
-                    <Row display="block" mr="0" ml="0">
+                    <Row display="block" mr="0" ml="0" pb="3rem">
                       <Div mt="0.675rem">
                         <LoginForm />
                       </Div>
                     </Row>
-                    <Row display="block" mr="0" ml="0" pt="0.625rem">
-                      <Div col="5">
-                        <Link to={FORGOT_PASSWORD_URL}>
-                          <Label color="primary">Forgot Password?</Label>
-                        </Link>
-                      </Div>
-                      <Div col="7" ta="right">
-                        <Link to={SIGNUP_URL}>
-                          <Label fontFamily="regular" color="primary">
-                            New User? Sign Up Now
-                          </Label>
-                        </Link>
+                    <Row className={styles.socialLogin} display="block" mr="0" ml="0" pt="2.5rem">
+                      <Div col="12" ta="center" mb="0.625rem">
+                        <Label
+                          fontFamily="regular"
+                          ta="center"
+                          color="color79716c"
+                          mr="0.625rem"
+                          fontSize="1rem"
+                          va="super"
+                        >
+                          Or continue with
+                        </Label>
+                        <GoogleLoginBtn />
                       </Div>
                     </Row>
                   </div>

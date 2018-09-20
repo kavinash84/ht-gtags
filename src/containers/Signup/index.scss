@@ -1,18 +1,14 @@
 @import "../../theme/_variables";
 @import "../../theme/_mixins";
 
-.userWrapper {
+.signupWrapper {
   width: 900px;
   margin: 3rem auto;
   border-radius: 1px;
   background-color: $white;
-  min-height: 599px;
   box-shadow: 1px 1px 10px -1px rgba(124, 122, 122, 0.3);
   .imgWrapper {
     position: relative;
-    height: 599px;
-    img {
-    }
   }
   .back {
     position: absolute;
@@ -23,7 +19,7 @@
     min-height: calc(435px - 2.5rem);
     &.forgotForm {
       form {
-        top: 4rem;
+        top: 7rem;
         position: relative;
       }
     }
@@ -48,6 +44,6 @@
     display: none;
   }
 }
-.socialLogin {
-  border-top: 1px solid #dddddd;
+.loginModal {
+  min-height: 599px;
 }
