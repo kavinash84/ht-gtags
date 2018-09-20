@@ -211,7 +211,9 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
                   >
                     <option>Select Bank</option>
                     {Object.keys(data.netBankingBanks).map((k, i) => (
-                      <option value={k}>{Object.values(data.netBankingBanks)[i]}</option>
+                      <option value={k} key={k}>
+                        {Object.values(data.netBankingBanks)[i]}
+                      </option>
                     ))}
                   </select>
                 </Div>

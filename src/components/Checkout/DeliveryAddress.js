@@ -289,7 +289,7 @@ class DeliveryAddress extends Component {
                       <input
                         type="checkbox"
                         id="checkbox"
-                        value={!shippingIsBilling}
+                        checked={!shippingIsBilling}
                         onChange={this.toggleBillingForm}
                       />
                       {/* eslint-disable */}

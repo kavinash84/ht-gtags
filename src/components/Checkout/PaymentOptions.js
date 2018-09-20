@@ -63,26 +63,6 @@ class PaymentOptions extends Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
-  componentWillReceiveProps() {
-    // if (this.props.validationerror && nextProps.validationerror === this.props.validationerror) {
-    //   // const {
-    //   //   submitDetails, `paymentDetails`
-    //   // } = this.props;
-    //   console.log('Yaar ! ');
-    //   // submitDetails(paymentDetails);
-    // }
-    // if (nextProps.validationerror) {
-    //   const { setError } = this.props;
-    //   setError();
-    //   alert('Please Fill All Details');
-    // }
-  }
-  // nextStep = () => {
-  //   const { paymentDetails, submitDetails, sessionId } = this.props;
-  //   // validateForm();
-  //   const { dispatch } = this.context.store;
-  //   dispatch(submitDetails(sessionId, paymentDetails));
-  // };
   render() {
     const {
       data,

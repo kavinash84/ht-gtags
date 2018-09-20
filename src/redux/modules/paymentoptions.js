@@ -170,12 +170,33 @@ const initialState = {
   submitted: false
 };
 
-const appendData = (gateway, state, data) => ({
-  [gateway]: {
-    ...state.paymentMethodDetails[gateway],
-    ...data
+const appendData = (gateway, state, data) => {
+  if (data.cvv) {
+    if (data.cvv.length > 3 || !Number(data.cvv)) {
+      return {
+        [gateway]: {
+          ...state.paymentMethodDetails[gateway]
+        }
+      };
+    }
   }
-});
+  if (data.cardNumber) {
+    if (data.cardNumber.length > 19 || !Number(data.cardNumber)) {
+      return {
+        [gateway]: {
+          ...state.paymentMethodDetails[gateway]
+        }
+      };
+    }
+  }
+
+  return {
+    [gateway]: {
+      ...state.paymentMethodDetails[gateway],
+      ...data
+    }
+  };
+};
 
 const verifyForm = state => {
   const paymentMethodDetails = Object.values(state.paymentMethodDetails);
