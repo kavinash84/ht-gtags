@@ -2,6 +2,7 @@ import axios from 'axios';
 import { PINCODE as PINCODE_API } from 'helpers/apiUrls';
 import { allowNChar, allowTypeOf } from 'utils/helper';
 import { setCity } from './app';
+import { loadCart } from './cart';
 
 const { CancelToken } = axios;
 
@@ -153,12 +154,13 @@ export const setPincodeQuery = query => ({
   type: SET_PINCODE_QUERY,
   query
 });
-export const setPincode = pincode => dispatch =>
+export const setPincode = pincode => (dispatch, getState) =>
   dispatch({
     types: [LOAD_PINCODE_DATA, LOAD_PINCODE_DATA_SUCCESS, LOAD_PINCODE_DATA_FAIL],
     promise: async ({ client }) => {
       const response = await client.get(`${PINCODE_API}/details/${pincode}`);
       dispatch(setCity(response));
+      dispatch(loadCart(getState().app.sessionId, pincode));
       return response;
     },
     pincode
