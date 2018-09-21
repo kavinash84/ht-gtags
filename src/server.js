@@ -218,7 +218,7 @@ app.use(async (req, res) => {
     res.status(200).send(`<!doctype html>${ReactDOM.renderToString(html)}`);
   } catch (mountError) {
     console.error('MOUNT ERROR:', pretty.render(mountError));
-    res.status(500);
+    // res.status(500);
     hydrate();
   }
 });
