@@ -31,7 +31,7 @@ const getSubMenu = (categories, key) =>
 @connect(({ homepage: { menu }, category: { data } }) => ({
   menu: menu.data,
   category: data && data.items.text,
-  seoInfo: data && data.seo
+  seoInfo: data && data.seo && data.seo.items
 }))
 export default class Category extends Component {
   render() {
