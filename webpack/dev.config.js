@@ -160,7 +160,7 @@ var webpackConfig = module.exports = {
     new webpack.IgnorePlugin(/webpack-stats\.json$/),
 
     new webpack.DefinePlugin({
-      'process.env.APIHOST': '"stage-node.hometown.in/api/"',
+      'process.env.APIHOST': '"beta-api.hometown.in/api/"',
       __CLIENT__: true,
       __SERVER__: false,
       __DEVELOPMENT__: true,

@@ -117,10 +117,11 @@ class DeliveryAddress extends Component {
       onChangeEmail('shipping', nextProps.userEmail);
       onChangeEmail('billing', nextProps.userEmail);
     }
-    if (nextProps.isLoggedIn !== isLoggedIn) {
+    if (nextProps.isLoggedIn && nextProps.isLoggedIn !== isLoggedIn) {
       this.setState({
         openLogin: false
       });
+      this.handleClick();
       clearShippingAddress();
     }
     if (nextProps.nextstep.success && nextProps.nextstep.success !== nextstep.success) {
@@ -195,7 +196,7 @@ class DeliveryAddress extends Component {
     const { toggleShippingIsBilling } = this.props;
     toggleShippingIsBilling();
   };
-  handleClick = index => {
+  handleClick = (index = 0) => {
     const { addresses, setAddress } = this.props;
     this.setState({
       addressform: false
@@ -289,7 +290,7 @@ class DeliveryAddress extends Component {
                       <input
                         type="checkbox"
                         id="checkbox"
-                        value={!shippingIsBilling}
+                        checked={!shippingIsBilling}
                         onChange={this.toggleBillingForm}
                       />
                       {/* eslint-disable */}

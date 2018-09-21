@@ -64,7 +64,7 @@ const CardForm = ({
     <Div col="5" pr="1rem" className={styles.cardFieldWrapper}>
       <FormInput
         label="Card number"
-        type="number"
+        type="text"
         placeholder=""
         name="cardNumber"
         value={cardNumber}
