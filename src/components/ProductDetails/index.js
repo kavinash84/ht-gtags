@@ -70,6 +70,7 @@ const mapStateToProps = ({
   product: productdetails.productDescription,
   reviews,
   pincode,
+  deliveryDateLoading: productdetails.deliveryDateLoading,
   colorproducts: colorproducts.list,
   relatedproductsList: relatedproducts.data,
   deliveryInfo: productdetails.deliveryDetails,
@@ -130,7 +131,8 @@ class ProductDetails extends React.Component {
       history,
       wishlistToggle,
       addToWaitList,
-      toggleReviewBox
+      toggleReviewBox,
+      deliveryDateLoading
     } = this.props;
     const {
       meta,
@@ -220,6 +222,7 @@ class ProductDetails extends React.Component {
                       shipping={shipping}
                       isEmiAvailable={isEmiAvailable}
                       pincode={pincode.selectedPincode}
+                      loading={deliveryDateLoading}
                     >
                       <Pincode key="pincode" />
                       <EmiModal price={formatAmount(checkSpecialPrice)} data={emidata} key="emi" />
@@ -304,7 +307,8 @@ ProductDetails.defaultProps = {
   deliveryInfo: '',
   emidata: [],
   wishList: [],
-  wishListData: []
+  wishListData: [],
+  deliveryDateLoading: false
 };
 ProductDetails.propTypes = {
   product: PropTypes.object,
@@ -320,9 +324,7 @@ ProductDetails.propTypes = {
   history: PropTypes.object.isRequired,
   wishlistToggle: PropTypes.func.isRequired,
   addToWaitList: PropTypes.func.isRequired,
-  toggleReviewBox: PropTypes.func.isRequired
+  toggleReviewBox: PropTypes.func.isRequired,
+  deliveryDateLoading: PropTypes.bool
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

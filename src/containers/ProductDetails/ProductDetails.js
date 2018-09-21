@@ -17,12 +17,16 @@ import { PINCODE } from '../../helpers/Constants';
 import ProductNotFoundContainer from './ProductNotFound';
 
 @provideHooks({
-  defer: ({ store: { dispatch, getState }, params }) => {
-    const { productdetails: { currentsku }, pincode: { selectedPincode }, reviews } = getState();
+  fetch: async ({ store: { dispatch, getState }, params }) => {
+    const { productdetails: { currentsku }, pincode: { selectedPincode } } = getState();
     const pincode = selectedPincode || PINCODE;
     if (currentsku !== params.skuId) {
       dispatch(loadProductDescription(params.skuId, pincode));
     }
+  },
+  defer: ({ store: { dispatch, getState }, params }) => {
+    const { productdetails: { currentsku }, pincode: { selectedPincode }, reviews } = getState();
+    const pincode = selectedPincode || PINCODE;
     if (currentsku !== params.skuId || reviews.data.length === 0) {
       dispatch(loadReview(params.skuId));
     }
