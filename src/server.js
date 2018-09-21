@@ -9,7 +9,7 @@ import morgan from 'morgan';
 import favicon from 'serve-favicon';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
-import PrettyError from 'pretty-error';
+// import PrettyError from 'pretty-error';
 import http from 'http';
 import { ConnectedRouter } from 'react-router-redux';
 import { renderRoutes } from 'react-router-config';
@@ -39,7 +39,7 @@ const chunksPath = path.join(__dirname, '..', 'static', 'dist', 'loadable-chunks
 
 process.on('unhandledRejection', error => console.error(error));
 
-const pretty = new PrettyError();
+// const pretty = new PrettyError();
 const app = express();
 const server = new http.Server(app);
 
@@ -171,56 +171,49 @@ app.use(async (req, res) => {
   if (__DISABLE_SSR__) {
     return hydrate();
   }
+  const sheet = new ServerStyleSheet();
+  const modules = [];
+  const component = (
+    <StyleSheetManager sheet={sheet.instance}>
+      <Loadable.Capture report={moduleName => modules.push(moduleName)}>
+        <Provider store={store} {...providers}>
+          <ConnectedRouter history={history}>
+            <ReduxAsyncConnect routes={routes} store={store} helpers={providers}>
+              {renderRoutes(routes)}
+            </ReduxAsyncConnect>
+          </ConnectedRouter>
+        </Provider>
+      </Loadable.Capture>
+    </StyleSheetManager>
+  );
+  const content = ReactDOM.renderToString(component);
 
-  try {
-    const { components, match, params } = await asyncMatchRoutes(routes, req.path);
-    await trigger('fetch', components, {
-      ...providers,
-      store,
-      match,
-      params,
-      history,
-      location: history.location
-    });
-    const sheet = new ServerStyleSheet();
-    const modules = [];
-    const component = (
-      <StyleSheetManager sheet={sheet.instance}>
-        <Loadable.Capture report={moduleName => modules.push(moduleName)}>
-          <Provider store={store} {...providers}>
-            <ConnectedRouter history={history}>
-              <ReduxAsyncConnect routes={routes} store={store} helpers={providers}>
-                {renderRoutes(routes)}
-              </ReduxAsyncConnect>
-            </ConnectedRouter>
-          </Provider>
-        </Loadable.Capture>
-      </StyleSheetManager>
-    );
-    const content = ReactDOM.renderToString(component);
-
-    const locationState = store.getState().router.location;
-    if (decodeURIComponent(req.originalUrl) !== decodeURIComponent(locationState.pathname + locationState.search)) {
-      return res.redirect(301, locationState.pathname);
-    }
-    const styleTags = sheet.getStyleElement();
-    const bundles = getBundles(getChunks(), modules);
-    const html = (
-      <Html
-        styleTags={styleTags}
-        assets={webpackIsomorphicTools.assets()}
-        bundles={bundles}
-        content={content}
-        store={store}
-      />
-    );
-
-    res.status(200).send(`<!doctype html>${ReactDOM.renderToString(html)}`);
-  } catch (mountError) {
-    console.error('MOUNT ERROR:', pretty.render(mountError));
-    res.status(500);
-    hydrate();
+  const locationState = store.getState().router.location;
+  if (decodeURIComponent(req.originalUrl) !== decodeURIComponent(locationState.pathname + locationState.search)) {
+    return res.redirect(301, locationState.pathname);
   }
+  const styleTags = sheet.getStyleElement();
+  const bundles = getBundles(getChunks(), modules);
+  const html = (
+    <Html
+      styleTags={styleTags}
+      assets={webpackIsomorphicTools.assets()}
+      bundles={bundles}
+      content={content}
+      store={store}
+    />
+  );
+
+  const { components, match, params } = await asyncMatchRoutes(routes, req.path);
+  await trigger('fetch', components, {
+    ...providers,
+    store,
+    match,
+    params,
+    history,
+    location: history.location
+  });
+  res.status(200).send(`<!doctype html>${ReactDOM.renderToString(html)}`);
 });
 
 (async () => {

@@ -209,9 +209,7 @@ export default class Listing extends Component {
       breadCrumbs
     } = this.props;
     let page;
-    const {
-      location: { search, pathname }
-    } = history;
+    const { location: { search, pathname } } = history;
     if (search !== '') {
       page = search.replace('?', '').split('page=')[1];
     }
@@ -225,8 +223,8 @@ export default class Listing extends Component {
           <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
           <meta name="description" content={seoInfo && seoInfo.meta_description} />
           <link rel="canonical" href={`${SITE_URL}${pathname}`} />
-          <link rel="prev" href={`${SITE_URL}${pathname}${previousPage}`} />
-          <link rel="next" href={`${SITE_URL}${pathname}${NextPage}`} />
+          {previousPage !== '' && <link rel="prev" href={`${SITE_URL}${pathname}${previousPage}`} />}
+          {productCount / 32 !== 1 && <link rel="next" href={`${SITE_URL}${pathname}${NextPage}`} />}
         </Helmet>
         <div className="wrapper">
           <Menu />

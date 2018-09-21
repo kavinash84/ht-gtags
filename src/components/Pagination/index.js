@@ -39,7 +39,7 @@ export default class Pagination extends Component {
             <Div ta="center">
               <Pager
                 activePage={parseInt(pageno, 10)}
-                itemsCountPerPage={30}
+                itemsCountPerPage={32}
                 totalItemsCount={productCount}
                 pageRangeDisplayed={pageRangeDisplayed}
                 onChange={this.handleClick}
