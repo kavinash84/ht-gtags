@@ -224,7 +224,7 @@ export default class Listing extends Component {
           <meta name="description" content={seoInfo && seoInfo.meta_description} />
           <link rel="canonical" href={`${SITE_URL}${pathname}`} />
           {previousPage !== '' && <link rel="prev" href={`${SITE_URL}${pathname}${previousPage}`} />}
-          {productCount / 32 !== 1 && <link rel="next" href={`${SITE_URL}${pathname}${NextPage}`} />}
+          {productCount / 32 / Number(page) > 1 && <link rel="next" href={`${SITE_URL}${pathname}${NextPage}`} />}
         </Helmet>
         <div className="wrapper">
           <Menu />
