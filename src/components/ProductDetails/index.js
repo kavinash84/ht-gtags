@@ -16,11 +16,9 @@ import Specs from 'hometown-components/lib/ProductDetails/Specs';
 import Reviews from 'hometown-components/lib/Reviews';
 import AddReview from 'hometown-components/lib/Reviews/WriteReview';
 import Img from 'hometown-components/lib/Img';
-// import WishListIcon from 'hometown-components/lib/Icons/WishListIcon';
 import WishlistBtn from 'hometown-components/lib/WishlistBtn';
 import ProductCarousel from 'components/ProductCarousel';
 import EmiModal from 'containers/EmiModal/EmiModal';
-// import Theme from 'hometown-components/lib/Theme';
 import ResponsiveModal from 'components/Modal';
 import LoginModal from 'components/Login/LoginModal';
 import { addReview, toggleReview } from 'redux/modules/reviews';
@@ -32,7 +30,6 @@ import { getSKUList } from 'selectors/wishlist';
 
 import ProductDetailsCarousel from './Carousel';
 import BreadCrumb from './BreadCrumb';
-// import { CART_URL } from 'helpers/Constants';
 import Pincode from './Pincode';
 import AddToCart from '../AddToCart';
 

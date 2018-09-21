@@ -21,7 +21,7 @@ import ProductNotFoundContainer from './ProductNotFound';
     const { productdetails: { currentsku }, pincode: { selectedPincode } } = getState();
     const pincode = selectedPincode || PINCODE;
     if (currentsku !== params.skuId) {
-      dispatch(loadProductDescription(params.skuId, pincode));
+      await dispatch(loadProductDescription(params.skuId, pincode));
     }
   },
   defer: ({ store: { dispatch, getState }, params }) => {
