@@ -693,14 +693,11 @@
 
 	/* Common Classes */
 	.socialBtn {
-		border-radius: 1px;
-		background-color: #f8f8f8;
-		box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
-		padding: 10px 20px;
-		font-size: 14px;
-		font-family: medium;
+		background-color: transparent;
+		padding: 0;
+		border: none;
 		img {
-			width: 1.125rem;
+			width: 36px;
 			vertical-align: sub;
 			margin-right: 0.625rem;
 		}

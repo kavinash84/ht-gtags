@@ -16,11 +16,9 @@ import Specs from 'hometown-components/lib/ProductDetails/Specs';
 import Reviews from 'hometown-components/lib/Reviews';
 import AddReview from 'hometown-components/lib/Reviews/WriteReview';
 import Img from 'hometown-components/lib/Img';
-// import WishListIcon from 'hometown-components/lib/Icons/WishListIcon';
 import WishlistBtn from 'hometown-components/lib/WishlistBtn';
 import ProductCarousel from 'components/ProductCarousel';
 import EmiModal from 'containers/EmiModal/EmiModal';
-// import Theme from 'hometown-components/lib/Theme';
 import ResponsiveModal from 'components/Modal';
 import LoginModal from 'components/Login/LoginModal';
 import { addReview, toggleReview } from 'redux/modules/reviews';
@@ -32,7 +30,6 @@ import { getSKUList } from 'selectors/wishlist';
 
 import ProductDetailsCarousel from './Carousel';
 import BreadCrumb from './BreadCrumb';
-// import { CART_URL } from 'helpers/Constants';
 import Pincode from './Pincode';
 import AddToCart from '../AddToCart';
 
@@ -70,6 +67,7 @@ const mapStateToProps = ({
   product: productdetails.productDescription,
   reviews,
   pincode,
+  deliveryDateLoading: productdetails.deliveryDateLoading,
   colorproducts: colorproducts.list,
   relatedproductsList: relatedproducts.data,
   deliveryInfo: productdetails.deliveryDetails,
@@ -130,7 +128,8 @@ class ProductDetails extends React.Component {
       history,
       wishlistToggle,
       addToWaitList,
-      toggleReviewBox
+      toggleReviewBox,
+      deliveryDateLoading
     } = this.props;
     const {
       meta,
@@ -220,6 +219,7 @@ class ProductDetails extends React.Component {
                       shipping={shipping}
                       isEmiAvailable={isEmiAvailable}
                       pincode={pincode.selectedPincode}
+                      loading={deliveryDateLoading}
                     >
                       <Pincode key="pincode" />
                       <EmiModal price={formatAmount(checkSpecialPrice)} data={emidata} key="emi" />
@@ -304,7 +304,8 @@ ProductDetails.defaultProps = {
   deliveryInfo: '',
   emidata: [],
   wishList: [],
-  wishListData: []
+  wishListData: [],
+  deliveryDateLoading: false
 };
 ProductDetails.propTypes = {
   product: PropTypes.object,
@@ -320,9 +321,7 @@ ProductDetails.propTypes = {
   history: PropTypes.object.isRequired,
   wishlistToggle: PropTypes.func.isRequired,
   addToWaitList: PropTypes.func.isRequired,
-  toggleReviewBox: PropTypes.func.isRequired
+  toggleReviewBox: PropTypes.func.isRequired,
+  deliveryDateLoading: PropTypes.bool
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

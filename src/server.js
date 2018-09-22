@@ -25,7 +25,7 @@ import createStore from 'redux/create';
 import apiClient from 'helpers/apiClient';
 import Html from 'helpers/Html';
 import routes from 'routes';
-import getChunks, { waitChunks } from 'utils/getChunks';
+import { getChunks, waitChunks } from 'utils/chunks';
 import asyncMatchRoutes from 'utils/asyncMatchRoutes';
 import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
 import { ReduxAsyncConnect, Provider } from 'components';
@@ -42,9 +42,6 @@ process.on('unhandledRejection', error => console.error(error));
 const pretty = new PrettyError();
 const app = express();
 const server = new http.Server(app);
-
-/* serving compressed files from server */
-// (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'dist', 'service-worker.js'))
 
 const setJSCompression = (req, res, next) => {
   if (!(req.url.indexOf('service-worker.js') >= 1)) {
@@ -81,6 +78,7 @@ app
 
 app.use('/dist/service-worker.js', (req, res, next) => {
   res.setHeader('Service-Worker-Allowed', '/');
+  res.setHeader('Cache-Control', 'no-store');
   return next();
 });
 
@@ -184,6 +182,7 @@ app.use(async (req, res) => {
     });
     const sheet = new ServerStyleSheet();
     const modules = [];
+    const context = {};
     const component = (
       <StyleSheetManager sheet={sheet.instance}>
         <Loadable.Capture report={moduleName => modules.push(moduleName)}>
@@ -198,6 +197,10 @@ app.use(async (req, res) => {
       </StyleSheetManager>
     );
     const content = ReactDOM.renderToString(component);
+
+    if (context.url) {
+      return res.redirect(301, context.url);
+    }
 
     const locationState = store.getState().router.location;
     if (decodeURIComponent(req.originalUrl) !== decodeURIComponent(locationState.pathname + locationState.search)) {
@@ -218,7 +221,7 @@ app.use(async (req, res) => {
     res.status(200).send(`<!doctype html>${ReactDOM.renderToString(html)}`);
   } catch (mountError) {
     console.error('MOUNT ERROR:', pretty.render(mountError));
-    res.status(500);
+    // res.status(500);
     hydrate();
   }
 });

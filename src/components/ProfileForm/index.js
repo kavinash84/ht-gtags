@@ -6,8 +6,10 @@ import Section from 'hometown-components/lib/Section';
 import Row from 'hometown-components/lib/Row';
 import Heading from 'hometown-components/lib/Heading';
 import Div from 'hometown-components/lib/Div';
-import { validateEmail, validateMobile, isBlank } from 'js-utility-functions';
+import { validateEmail, isBlank } from 'js-utility-functions';
+import { validateMobile } from 'utils/validation';
 import { updateUserProfile } from 'redux/modules/profile';
+import { allowNChar, allowTypeOf } from 'utils/helper';
 
 @connect(({ profile }) => ({
   profile: profile.data,
@@ -56,11 +58,15 @@ export default class ProfileForm extends Component {
     const {
       target: { value }
     } = e;
-    const checkError = validateMobile(value, 'Mobile no. should be 10 digits');
+    const checkError = !validateMobile(value);
+    if (!allowNChar(value, 10) || (!allowTypeOf(value, 'number') && value.length > 0)) {
+      return;
+    }
     this.setState({
       phone: value,
-      phoneError: checkError.error,
-      phoneErrorMessage: checkError.error ? checkError.errorMessage : ''
+      phoneError: checkError,
+      phoneErrorMessage:
+        value[0] === '0' ? 'Mobile number must not start with 0' : 'Enter 10 Digits Valid Mobile Number'
     });
   };
   onChangeFullName = e => {

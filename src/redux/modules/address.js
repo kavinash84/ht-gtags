@@ -1,6 +1,7 @@
 // Validators
 import { isEmpty, pincode as pincodeIsValid, validateMobile } from 'utils/validation';
 import { allowNChar, allowTypeOf } from 'utils/helper';
+import { loadCart } from './cart';
 
 const emailIsValid = value => !isEmpty(value) && /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value);
 
@@ -451,11 +452,18 @@ export const load = (formType, query) => ({
   promise: ({ client }) => client.get(`tesla/locations/pincode/${query}`),
   formType
 });
-export const loadPincodeDetails = (formType, pincode) => ({
-  types: [LOAD_PINCODE_DETAILS, LOAD_PINCODE_DETAILS_SUCCESS, LOAD_PINCODE_DETAILS_FAIL],
-  promise: ({ client }) => client.get(`tesla/session/${pincode}`),
-  formType
-});
+export const loadPincodeDetails = (formType, pincode) => (dispatch, getState) =>
+  dispatch({
+    types: [LOAD_PINCODE_DETAILS, LOAD_PINCODE_DETAILS_SUCCESS, LOAD_PINCODE_DETAILS_FAIL],
+    promise: ({ client }) => {
+      const response = client.get(`tesla/session/${pincode}`);
+      if (formType === 'shipping') {
+        dispatch(loadCart(getState().app.sessionId, pincode));
+      }
+      return response;
+    },
+    formType
+  });
 export const setPincodeQuery = (formType, query) => ({
   type: SET_PINCODE_QUERY,
   formType,

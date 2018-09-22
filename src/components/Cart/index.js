@@ -74,7 +74,7 @@ const Cart = ({
                     <Div className="th" col="2">
                       Delivery
                     </Div>
-                    <Div className="th" col="2" width="100px">
+                    <Div className="th" col="2" width="100px" ta="center">
                       Quantity
                     </Div>
                     <Div className="th" col="2">

@@ -102,8 +102,7 @@ class ReviewOrder extends Component {
                           <th colSpan="2">Product</th>
                           <th>Delivery</th>
                           <th width="100px">Quantity</th>
-                          <th>Cost</th>
-                          <th width="110px" />
+                          <th width="110px">Cost</th>
                         </tr>
                         {results.map(item => (
                           <tr key={item.id_customer_cart}>
@@ -114,9 +113,7 @@ class ReviewOrder extends Component {
                             </td>
                             <td>{item.product_info.name}</td>
                             <td>{item.product_info.delivery_time_text}</td>
-                            <td>
-                              <center>{item.qty}</center>
-                            </td>
+                            <td align="center">{item.qty}</td>
                             <td>Rs. {formatAmount(item.product_info.net_price)}</td>
                           </tr>
                         ))}
@@ -168,4 +165,7 @@ ReviewOrder.propTypes = {
   submitting: PropTypes.bool,
   submitted: PropTypes.bool
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ReviewOrder);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ReviewOrder);

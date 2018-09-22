@@ -28,22 +28,23 @@
     padding-left: 0;
     background: #FFF;
     border: solid 1px rgba(0, 0, 0, 0.03);
-    padding: 0;
+    padding: 0 0 10px;
     margin: 0;
-    max-height: 200px;
+    // max-height: 200px;
     overflow: auto;
     z-index: 100;
     li {
       list-style: none;
-      padding-bottom: 5px;
-      padding-top: 5px;
+      padding-bottom: 2px;
+      padding-top: 2px;
       &:last-child {
-        padding-bottom: 0;
+        //padding-bottom: 0;
       }
       a {
-        font-size: 0.75em;
+        font-size: 0.75rem;
         font-family: regular;
         color: #666666;
+        line-height: 2;
       }
     }
   }
@@ -64,6 +65,7 @@
   width:100%;
   padding: 0 10px;
   box-sizing: border-box;
+  border-radius: 5px;
   &:hover, &:focus {
     outline: none;
   };

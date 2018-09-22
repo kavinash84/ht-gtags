@@ -14,7 +14,9 @@ const initialState = {
   productDescription: {},
   currentsku: '',
   position: null,
-  simpleSku: ''
+  simpleSku: '',
+  loaded: false,
+  deliveryDateLoaded: false
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -45,21 +47,20 @@ export default function reducer(state = initialState, action = {}) {
     case GET_DELIVERY_DETAILS:
       return {
         ...state,
-        loading: true,
-        loaded: false
+        deliveryDateLoading: true
       };
     case GET_DELIVERY_DETAILS_SUCCESS:
       return {
         ...state,
-        loading: false,
-        loaded: true,
+        deliveryDateLoading: false,
+        deliveryDateLoaded: true,
         deliveryDetails: action.result
       };
     case GET_DELIVERY_DETAILS_FAIL:
       return {
         ...state,
-        loading: false,
-        loaded: false,
+        deliveryDateLoading: false,
+        deliveryDateLoaded: false,
         error: action.error
       };
     case SET_PROUDUCT_POSITION:

@@ -7,12 +7,15 @@ import Div from 'hometown-components/lib/Div';
 import Heading from 'hometown-components/lib/Heading';
 import Text from 'hometown-components/lib/Text';
 import Section from 'hometown-components/lib/Section';
+import Img from 'hometown-components/lib/Img';
+import ResponsiveModal from 'components/Modal';
 import TitleBar from 'components/TitleBar';
 import ServiceRequestForm from 'hometown-components/lib/Forms/ServiceRequestForm';
 import { validateMobile, isEmpty, validateEmail } from 'utils/validation';
 import { notifSend } from 'redux/modules/notifs';
 import { sendData } from 'redux/modules/services';
 import { SERVICE_REQUEST as SERVICE_REQUEST_API } from 'helpers/apiUrls';
+import styles from './ContactUs.scss';
 
 @connect(({ services }) => ({
   serviceRequest: services.serviceRequest || {}
@@ -40,8 +43,28 @@ class ServiceRequest extends React.Component {
     reviewFeedBackMessage: 'Should Not be Empty',
     under_warranty: false,
     out_of_warranty: false,
-    assembly_dismatling: false
+    assembly_dismatling: false,
+    open: false
   };
+  componentWillReceiveProps(nextProps) {
+    const { loaded, loading } = nextProps.serviceRequest;
+    if (loaded && !loading) {
+      this.setState({
+        open: true,
+        firstName: '',
+        lastName: '',
+        phone: '',
+        email: '',
+        city: '',
+        order: '',
+        review: '',
+        storeName: '',
+        assembly_dismatling: false,
+        out_of_warranty: false,
+        under_warranty: false
+      });
+    }
+  }
   onSubmitForm = e => {
     e.preventDefault();
     // Validate Form
@@ -131,8 +154,13 @@ class ServiceRequest extends React.Component {
       [name]: !this.state[name]
     });
   };
+  handleModal = () => {
+    this.setState({ open: !this.state.open });
+  };
   render() {
     const { loaded, loading } = this.props.serviceRequest;
+    const { open } = this.state;
+    const correctIcon = require('../../../static/correct.svg');
     return (
       <Div type="block">
         <TitleBar title="SERVICE REQUEST" />
@@ -167,6 +195,14 @@ class ServiceRequest extends React.Component {
                 {...this.state}
               />
             </Row>
+            <ResponsiveModal onCloseModal={this.handleModal} open={open}>
+              <Div ta="center" className={styles.serviceThankYouWrapper}>
+                <Img m="0 auto 5px" width="100px" src={correctIcon} alt="Reload Page" />
+                <Text ta="center" fontSize="1.25rem" mb="0.625rem" mt="0" color="rgba(51, 51, 51, 0.85)">
+                  Thank you !
+                </Text>
+              </Div>
+            </ResponsiveModal>
           </Container>
         </Section>
       </Div>

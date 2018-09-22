@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
-import { provideHooks } from 'redial';
 import Helmet from 'react-helmet';
 import Empty from 'hometown-components/lib/Empty';
 import Img from 'hometown-components/lib/Img';
@@ -12,18 +11,7 @@ import { connect } from 'react-redux';
 import Menu from 'containers/MenuNew/index';
 import Footer from 'components/Footer';
 import { getSKUList } from 'selectors/wishlist';
-import {
-  // load as loadListing,
-  isLoaded as isInitialListLoaded,
-  setCategoryQuery,
-  clearPreviousList,
-  clearPreviousSort,
-  loadUrlQuery,
-  clearAllFilters as loadAfterPincodeChange,
-  setCategory,
-  applyFilter,
-  setFilter
-} from 'redux/modules/products';
+import { clearAllFilters as loadAfterPincodeChange } from 'redux/modules/products';
 import Pagination from 'components/Pagination';
 import SeoContent from 'components/SeoContent';
 import {
@@ -34,81 +22,10 @@ import {
   getAppliedFilters,
   getSEOInfo
 } from 'selectors/products';
-import { encodeCategory } from 'utils/helper';
-import { setCurrentPage, resetPagination } from 'redux/modules/pagination';
-import { PINCODE, SITE_URL } from 'helpers/Constants';
+import { SITE_URL } from 'helpers/Constants';
 
 const SearchEmptyIcon = require('../../../static/search-empty.jpg');
 
-@provideHooks({
-  fetch: async ({ store: { dispatch, getState }, params, location }) => {
-    const {
-      pincode: { selectedPincode },
-      pagination: { page },
-      app: { city },
-      products: { list, filter: prevFilter },
-      router: { location: prevLocation }
-    } = getState();
-    let prevSearch;
-    if (prevLocation) {
-      prevSearch = prevLocation.search;
-    }
-    let query;
-    let filters;
-    let loadResults;
-    const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
-    const { search } = location;
-    const getPage = search.split('page=')[1];
-    const currentPage = getPage || 1;
-    if (location.pathname === '/catalog/all-products') {
-      const hashQuery = location.search.split('?').join('');
-      query = encodeCategory(params);
-      loadResults = loadUrlQuery(encodeCategory(params), hashQuery, pincode);
-    } else if (location.pathname === '/search/') {
-      /* eslint prefer-destructuring: ["error", {AssignmentExpression: {array: false}}] */
-      let searchquery;
-      [, searchquery] = location.search.split('q=');
-      if (searchquery) {
-        [searchquery] = searchquery.split('filters=');
-        [searchquery] = searchquery.split('&');
-      }
-      query = encodeCategory({ category: 'search' });
-      [, filters] = location.search.split('filters=');
-      loadResults = applyFilter({
-        searchquery,
-        query,
-        pincode,
-        filters,
-        city
-      });
-    } else {
-      query = encodeCategory(params);
-      [, filters] = location.search.split('filters=');
-      loadResults = applyFilter({
-        query,
-        pincode,
-        filters,
-        city
-      });
-    }
-    if (currentPage === 1) await dispatch(resetPagination());
-    if (!isInitialListLoaded(getState(), query) || currentPage !== page) {
-      await dispatch(clearPreviousList());
-      await dispatch(setCurrentPage(currentPage));
-      await dispatch(clearPreviousSort());
-    }
-    if (
-      location.search.split('redirect').length > 1 ||
-      (prevSearch === search && list.length > 0 && filters === prevFilter)
-    ) {
-      return;
-    }
-    await dispatch(loadResults).catch(() => null);
-    await dispatch(setCategoryQuery(query, pincode));
-    await dispatch(setCategory(query));
-    await dispatch(setFilter(filters));
-  }
-})
 @connect(state => ({
   loading: state.products.loading,
   loaded: state.products.loaded,
@@ -129,7 +46,8 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
   sortBy: state.products.filters.sortBy,
   categoryquery: state.products.category,
   seoInfo: getSEOInfo(state),
-  breadCrumbs: state.products.categoryDetails
+  breadCrumbs: state.products.categoryDetails,
+  currentPage: state.pagination.page
 }))
 @withRouter
 export default class Listing extends Component {
@@ -153,7 +71,8 @@ export default class Listing extends Component {
     categoryquery: PropTypes.string.isRequired,
     isLoggedIn: PropTypes.bool,
     seoInfo: PropTypes.object,
-    breadCrumbs: PropTypes.array
+    breadCrumbs: PropTypes.array,
+    currentPage: PropTypes.number
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -176,7 +95,8 @@ export default class Listing extends Component {
     sortBy: '',
     isLoggedIn: false,
     seoInfo: {},
-    breadCrumbs: []
+    breadCrumbs: [],
+    currentPage: 1
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.pincode !== this.props.pincode) {
@@ -206,15 +126,14 @@ export default class Listing extends Component {
       sortBy,
       categoryquery,
       seoInfo,
-      breadCrumbs
+      breadCrumbs,
+      currentPage
     } = this.props;
     let page;
-    const {
-      location: { search, pathname }
-    } = history;
+    const { location: { search, pathname } } = history;
     if (search !== '') {
-      page = search.replace('?', '').split('page=')[1];
-    }
+      [, page] = search.replace('?', '').split('page=');
+    } else page = currentPage;
     const previousPage = !page || Number(page) === 1 ? '' : `?page=${page - 1}`;
     const NextPage = !page ? '?page=2' : `?page=${Number(page) + 1}`;
     /* eslint-disable react/no-danger */
@@ -225,8 +144,8 @@ export default class Listing extends Component {
           <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
           <meta name="description" content={seoInfo && seoInfo.meta_description} />
           <link rel="canonical" href={`${SITE_URL}${pathname}`} />
-          <link rel="prev" href={`${SITE_URL}${pathname}${previousPage}`} />
-          <link rel="next" href={`${SITE_URL}${pathname}${NextPage}`} />
+          {previousPage !== '' && <link rel="prev" href={`${SITE_URL}${pathname}${previousPage}`} />}
+          {productCount / 32 / Number(page) > 1 && <link rel="next" href={`${SITE_URL}${pathname}${NextPage}`} />}
         </Helmet>
         <div className="wrapper">
           <Menu />

@@ -14,7 +14,7 @@ export const productMeta = createSelector(
       : {
         searchterm: '',
         product_catname: '',
-        product_count: '',
+        product_count: '0',
         results: [],
         filter: [],
         seo: {}

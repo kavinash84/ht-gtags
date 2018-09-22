@@ -7,6 +7,7 @@ import Row from 'hometown-components/lib/Row';
 import Heading from 'hometown-components/lib/Heading';
 import Span from 'hometown-components/lib/Span';
 import Text from 'hometown-components/lib/Text';
+import Rating from 'hometown-components/lib/Rating';
 import AddToCart from 'components/AddToCart';
 import { calculateSavings, calculateDiscount, getImageURL, formatProductURL } from 'utils/helper';
 import { formatAmount } from 'utils/formatters';
@@ -21,6 +22,22 @@ const adjustSlides = length => ({
   autoplay: false,
   infinite: false
 });
+
+const judgeColor = rating => {
+  if (!rating) {
+    return '';
+  }
+  rating = parseInt(rating, 10);
+  if (rating < 2) {
+    return 'red';
+  }
+  if (rating >= 2 && rating < 3) {
+    return 'yellow';
+  }
+  if (rating >= 3) {
+    return 'green';
+  }
+};
 
 @connect(({ emioptions }) => ({
   emidata: emioptions.data
@@ -127,11 +144,14 @@ export default class QuickView extends Component {
   render() {
     const { images, data } = this.state.product;
     const { currentImage } = this.state;
-    const { sku, simpleSku, soldOut } = this.props;
+    const {
+      sku, simpleSku, soldOut, rating, deliveredBy
+    } = this.props;
     // const { emidata } = this.props;
     const {
       name, price, special_price: discPrice, max_saving_percentage: saving
     } = data;
+    const color = judgeColor(rating);
     // const lowestEmi = calculateLowestEmi(emidata, discPrice);
     return (
       <div className={styles.quickView}>
@@ -182,6 +202,16 @@ export default class QuickView extends Component {
                   </Span>
                 </Text>
               )}
+              {deliveredBy && (
+                <Text color="green" fontFamily="700" fontSize="0.857rem" mb="1rem">
+                  {deliveredBy}
+                </Text>
+              )}
+              {rating > 0 && (
+                <Rating color={color} rating={rating}>
+                  ★ {rating}
+                </Rating>
+              )}
               {/* <Text color="rgba(0, 0, 0, 0.6)" fontFamily="700" fontSize="0.857rem" mb="1rem" mt="0.3125rem">
                 EMI:{' '}
                 <Span color="rgba(0, 0, 0, 0.6)" fontSize="0.857rem" va="bottom">
@@ -191,14 +221,7 @@ export default class QuickView extends Component {
               <AddToCart simpleSku={simpleSku} sku={sku} isSoldOut={soldOut} />
             </Div>
             <Div className={`${styles.thumb} thumbCarousel`}>
-              <SlickSlider
-                settings={adjustSlides(images.length)}
-                ref={this.quickViewSlider}
-
-                // passedRef={quickViewSlider => {
-                //   this.quickViewSlider = quickViewSlider;
-                // }}
-              >
+              <SlickSlider settings={adjustSlides(images.length)} ref={this.quickViewSlider}>
                 {images.map((image, index) => (
                   <div key={String(index)}>
                     <button
@@ -219,11 +242,15 @@ export default class QuickView extends Component {
   }
 }
 QuickView.defaultProps = {
-  soldOut: false
+  soldOut: false,
+  rating: 0,
+  deliveredBy: ''
 };
 QuickView.propTypes = {
   sku: PropTypes.string.isRequired,
   simpleSku: PropTypes.string.isRequired,
   products: PropTypes.array.isRequired,
-  soldOut: PropTypes.bool
+  soldOut: PropTypes.bool,
+  deliveredBy: PropTypes.string,
+  rating: PropTypes.number
 };

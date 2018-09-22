@@ -151,6 +151,27 @@ export default function userMiddleware() {
           dismissAfter: 4000
         }));
         break;
+      case 'myaddress/UPDATE_ADDRESS_SUCCESS':
+        dispatch(notifSend({
+          type: 'success',
+          msg: 'Address Updated Succesfully',
+          dismissAfter: 4000
+        }));
+        break;
+      case 'myaddress/ADD_ADDRESS_FAIL':
+        dispatch(notifSend({
+          type: 'warning',
+          msg: (action.error && action.error.error_message) || SOME_ERROR,
+          dismissAfter: 4000
+        }));
+        break;
+      case 'myaddress/ADD_ADDRESS_SUCCESS':
+        dispatch(notifSend({
+          type: 'success',
+          msg: 'Address Added Succesfully',
+          dismissAfter: 4000
+        }));
+        break;
 
       // Services
       case 'services/LOAD_FAIL': {
@@ -168,6 +189,14 @@ export default function userMiddleware() {
         }));
         break;
       }
+      // Forgot-password
+      case 'forgotPassword/FORGOT_PASSWORD_FAIL':
+        dispatch(notifSend({
+          type: 'warning',
+          msg: (action.error && action.error.error_message) || SOME_ERROR,
+          dismissAfter: 4000
+        }));
+        break;
       default:
         break;
     }
