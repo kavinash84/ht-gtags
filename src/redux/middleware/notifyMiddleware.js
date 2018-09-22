@@ -189,6 +189,14 @@ export default function userMiddleware() {
         }));
         break;
       }
+      // Forgot-password
+      case 'forgotPassword/FORGOT_PASSWORD_FAIL':
+        dispatch(notifSend({
+          type: 'warning',
+          msg: (action.error && action.error.error_message) || SOME_ERROR,
+          dismissAfter: 4000
+        }));
+        break;
       default:
         break;
     }
