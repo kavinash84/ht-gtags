@@ -4,13 +4,17 @@ import { connect } from 'react-redux';
 import Container from 'hometown-components/lib/Container';
 import Row from 'hometown-components/lib/Row';
 import Div from 'hometown-components/lib/Div';
+import Text from 'hometown-components/lib/Text';
+import Img from 'hometown-components/lib/Img';
 import Section from 'hometown-components/lib/Section';
 import TitleBar from 'components/TitleBar';
+import ResponsiveModal from 'components/Modal';
 import FeedBackForm from 'hometown-components/lib/Forms/FeedBackForm';
 import { validateMobile, isEmpty, validateEmail } from 'utils/validation';
 import { notifSend } from 'redux/modules/notifs';
 import { sendData } from 'redux/modules/services';
 import { FEEDBACK as FEEDBACK_API } from 'helpers/apiUrls';
+import styles from './ContactUs.scss';
 
 @connect(({ services }) => ({
   serviceRequest: services.feedback || {}
@@ -39,6 +43,26 @@ class Feedback extends React.Component {
     fitment: false,
     aftersale: false
   };
+  componentWillReceiveProps(nextProps) {
+    const { loaded, loading } = nextProps.serviceRequest;
+    if (loaded && !loading) {
+      this.setState({
+        open: true,
+        firstName: '',
+        lastName: '',
+        phone: '',
+        email: '',
+        city: '',
+        order: '',
+        review: '',
+        storeName: '',
+        instore: false,
+        delivery: false,
+        fitment: false,
+        aftersale: false
+      });
+    }
+  }
   onSubmitForm = e => {
     e.preventDefault();
     // Validate Form
@@ -50,12 +74,12 @@ class Feedback extends React.Component {
       email,
       city,
       storeName,
+      review,
+      order,
       instore,
       aftersale,
       fitment,
-      delivery,
-      review,
-      order
+      delivery
     } = this.state;
     const firstNameFeedBackError = isEmpty(firstName);
     const lastNameFeedBackError = isEmpty(lastName);
@@ -104,24 +128,33 @@ class Feedback extends React.Component {
         mobile: phone,
         orderNumber: order
       };
-      dispatch(sendData(FEEDBACK_API, postData, 'serviceRequest'));
+      dispatch(sendData(FEEDBACK_API, postData, 'feedback'));
     }
   };
   handleChange = e => {
-    const { target: { value, name } } = e;
+    const {
+      target: { value, name }
+    } = e;
     this.setState({
       [name]: value,
       [`${name}FeedBackError`]: false
     });
   };
   handleCheckBoxChange = e => {
-    const { target: { name } } = e;
+    const {
+      target: { name }
+    } = e;
     this.setState({
       [name]: !this.state[name]
     });
   };
+  handleModal = () => {
+    this.setState({ open: !this.state.open });
+  };
   render() {
-    const { loaded, loading } = this.props.feedback;
+    const { loaded, loading } = this.props.serviceRequest;
+    const correctIcon = require('../../../static/correct.svg');
+    const { open } = this.state;
     return (
       <Div type="block">
         <TitleBar title="FEEDBACK" />
@@ -145,6 +178,14 @@ class Feedback extends React.Component {
                 loaded={loaded}
               />
             </Row>
+            <ResponsiveModal onCloseModal={this.handleModal} open={open}>
+              <Div ta="center" className={styles.serviceThankYouWrapper}>
+                <Img m="0 auto 5px" width="100px" src={correctIcon} alt="Reload Page" />
+                <Text ta="center" fontSize="1.25rem" mb="0.625rem" mt="0" color="rgba(51, 51, 51, 0.85)">
+                  Thank you !
+                </Text>
+              </Div>
+            </ResponsiveModal>
           </Container>
         </Section>
       </Div>
@@ -154,11 +195,11 @@ class Feedback extends React.Component {
 Feedback.defaultProps = {
   loading: false,
   loaded: false,
-  feedback: {}
+  serviceRequest: {}
 };
 Feedback.propTypes = {
   loading: PropTypes.bool,
   loaded: PropTypes.bool,
-  feedback: PropTypes.object
+  serviceRequest: PropTypes.object
 };
 export default Feedback;
