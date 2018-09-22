@@ -117,12 +117,17 @@ const Footer = ({ menuItems }) => {
                     {menu.name}
                   </Heading>
                   <ul>
-                    {menu.children.map(subMenu =>
-                      subMenu.visibility === 'on' && (
-                        <li key={subMenu.name}>
-                          <Link to={subMenu.url_key}>{subMenu.name}</Link>
-                        </li>
-                      ))}
+                    {/*eslint-disable*/}
+                      {menu.children.map(
+                        (subMenu, index) =>
+                          subMenu.visibility === 'on' &&
+                          index < 11 && (
+                            <li key={subMenu.name}>
+                              <Link to={subMenu.url_key}>{subMenu.name}</Link>
+                            </li>
+                          )
+                      )}
+                      {/* eslint-enable */}
                   </ul>
                 </Div>
               ))}
