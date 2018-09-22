@@ -101,10 +101,10 @@ export const updateAddress = data => ({
     try {
       /* eslint-disable max-len */
       const {
-        addressId, fullName, address, pincode, phone, email, isBilling, isShipping
+        addressId, name, address, pincode, phone, email, isBilling, isShipping
       } = data;
       const postData = {
-        full_name: fullName,
+        full_name: name,
         address,
         is_billing: isBilling || false,
         is_shipping: isShipping || false,
@@ -123,12 +123,12 @@ export const addAddress = data => ({
   types: [ADD_ADDRESS, ADD_ADDRESS_SUCCESS, ADD_ADDRESS_FAIL],
   promise: async ({ client }) => {
     const {
-      fullName, address, pincode, phone, email, isBilling, isShipping
+      name, address, pincode, phone, email, isBilling, isShipping
     } = data;
     try {
       /* eslint-disable max-len */
       const postData = {
-        full_name: fullName,
+        full_name: name,
         address,
         is_billing: isBilling || false,
         is_shipping: isShipping || false,

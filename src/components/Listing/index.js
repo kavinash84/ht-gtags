@@ -85,12 +85,14 @@ class Listing extends React.Component {
     history.goBack();
     this.setState({ openLogin: false });
   };
-  onOpenQuickViewModal = (sku, simpleSku, soldOut) => {
+  onOpenQuickViewModal = (sku, simpleSku, soldOut, deliveredBy, rating) => {
     this.setState({
       openQuickView: true,
       quickViewSku: sku,
       simpleSku,
-      soldOut
+      soldOut,
+      deliveredBy,
+      rating
     });
   };
   onCloseQuickViewModal = () => {
@@ -210,7 +212,13 @@ class Listing extends React.Component {
                       addToWaitList
                     )}
                     onOpenQuickViewModal={() => {
-                      this.onOpenQuickViewModal(item.data.sku, Object.keys(item.data.simples)[0], item.soldout);
+                      this.onOpenQuickViewModal(
+                        item.data.sku,
+                        Object.keys(item.data.simples)[0],
+                        item.soldout,
+                        item.data.delivery_details[0].value,
+                        item.data.reviews.rating.toFixed(1)
+                      );
                     }}
                     isWishList={isInWishList(wishList, item.data.sku)}
                     skuLoading={isInWishList(loadingList, item.data.sku)}
@@ -243,6 +251,8 @@ class Listing extends React.Component {
                   simpleSku={this.state.simpleSku}
                   products={products}
                   soldOut={this.state.soldOut}
+                  deliveredBy={this.state.deliveredBy}
+                  rating={this.state.rating}
                 />
               </ResponsiveModal>
               <ScrollToTop />
