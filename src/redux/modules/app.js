@@ -45,10 +45,6 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-const setSessionID = ({ client }) => session => {
-  client.setSessionId(session);
-};
-
 export const isLoaded = globalState => globalState.app && globalState.app.loaded;
 
 export const generateSession = (pincode = PINCODE) => ({
@@ -56,7 +52,7 @@ export const generateSession = (pincode = PINCODE) => ({
   promise: async ({ client }) => {
     try {
       const response = await client.get(`${SESSION_API}/${pincode}`);
-      await setSessionID({ client })(response.session);
+      await client.setSessionId(response.session);
       return response;
     } catch (error) {
       console.log(error);

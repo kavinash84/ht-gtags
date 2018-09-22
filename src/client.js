@@ -118,7 +118,17 @@ const providers = { app: {}, restApp: {}, client };
     );
   }
 
+  /* unregister service worker */
   if (online && !__DEVELOPMENT__ && 'serviceWorker' in navigator) {
+    try {
+      const registration = await navigator.serviceWorker.register('/service-worker.js', { scope: '/' });
+      await registration.unregister();
+    } catch (error) {
+      console.log('Error registering service worker: ', error);
+    }
+  }
+
+  /* if (online && !__DEVELOPMENT__ && 'serviceWorker' in navigator) {
     try {
       const registration = await navigator.serviceWorker.register('/service-worker.js', { scope: '/' });
       registration.onupdatefound = () => {
@@ -156,5 +166,5 @@ const providers = { app: {}, restApp: {}, client };
 
     await navigator.serviceWorker.ready;
     console.log('Service Worker Ready');
-  }
+  } */
 })();
