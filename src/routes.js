@@ -1,11 +1,9 @@
 import {
   App,
-  Listing,
   MyOrder,
   MyAddress,
   OrderDetails,
   OrderSummary,
-  ProductDetails,
   DeliveryAddress,
   PaymentOptions,
   ReviewOrder,
@@ -44,6 +42,8 @@ import PaymentSuccess from 'containers/PaymentSuccess/';
 import PaymentFailure from 'containers/PaymentFailure/';
 import BulkOrder from 'containers/BulkOrder/';
 import ServiceSignUpContainer from 'components/ServiceSignUp/';
+import Listing from 'containers/Listing';
+import ProductDetails from 'containers/ProductDetails';
 
 import { categoryRoutes, listingRoutes } from 'helpers/Constants';
 
