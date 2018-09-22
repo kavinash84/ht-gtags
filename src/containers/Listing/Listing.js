@@ -46,7 +46,8 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
   sortBy: state.products.filters.sortBy,
   categoryquery: state.products.category,
   seoInfo: getSEOInfo(state),
-  breadCrumbs: state.products.categoryDetails
+  breadCrumbs: state.products.categoryDetails,
+  currentPage: state.pagination.page
 }))
 @withRouter
 export default class Listing extends Component {
@@ -70,7 +71,8 @@ export default class Listing extends Component {
     categoryquery: PropTypes.string.isRequired,
     isLoggedIn: PropTypes.bool,
     seoInfo: PropTypes.object,
-    breadCrumbs: PropTypes.array
+    breadCrumbs: PropTypes.array,
+    currentPage: PropTypes.number
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -93,7 +95,8 @@ export default class Listing extends Component {
     sortBy: '',
     isLoggedIn: false,
     seoInfo: {},
-    breadCrumbs: []
+    breadCrumbs: [],
+    currentPage: 1
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.pincode !== this.props.pincode) {
@@ -123,13 +126,14 @@ export default class Listing extends Component {
       sortBy,
       categoryquery,
       seoInfo,
-      breadCrumbs
+      breadCrumbs,
+      currentPage
     } = this.props;
     let page;
     const { location: { search, pathname } } = history;
     if (search !== '') {
       [, page] = search.replace('?', '').split('page=');
-    }
+    } else page = currentPage;
     const previousPage = !page || Number(page) === 1 ? '' : `?page=${page - 1}`;
     const NextPage = !page ? '?page=2' : `?page=${Number(page) + 1}`;
     /* eslint-disable react/no-danger */
