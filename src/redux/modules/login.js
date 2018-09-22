@@ -89,12 +89,6 @@ const setToken = ({ client }) => response => {
   /* setting cookie for server call */
   cookie.set('Authorization', `Bearer ${response.access_token}`);
   client.setJwtToken(response.access_token);
-  if (response && response.meta) {
-    const [xId] = Object.keys(response.meta).filter(key => key !== 'customerId');
-    console.log(xId);
-    client.setCustomerInfo('customerId', response.meta.customerId);
-    client.setXId(xId, response.meta[xId]);
-  }
 };
 
 export const isLoaded = globalState => globalState.login && globalState.login.loaded;
@@ -108,7 +102,7 @@ export const login = data => ({
         data.password
       }&grant_type=password&client_id=${clientId}&client_secret=${clientSecret}`;
       const response = await client.post(LOGIN_API, postData);
-      setToken({ client })(response);
+      await setToken({ client })(response);
       return response;
     } catch (error) {
       throw error;

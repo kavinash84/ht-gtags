@@ -34,7 +34,7 @@ import { isKeyExists } from 'utils/helper';
     const { pincode: { selectedPincode }, app: { sessionId, csrfToken } } = getState();
     const defaultPincode = selectedPincode === '' ? PINCODE : selectedPincode;
     if (!isSessionSet(getState()) || !sessionId || !csrfToken) {
-      await dispatch(generateSession(defaultPincode)).catch(error => console.log(error));
+      await dispatch(generateSession(defaultPincode));
     }
     if (!isSectionLoaded(getState(), 'menu')) {
       await wrapDispatch(dispatch, 'menu')(loadMainMenu());
