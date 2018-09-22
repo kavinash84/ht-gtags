@@ -23,7 +23,11 @@ const HoverMenuBox = ({
                 </div>
                 <div className={styles.mediaBody}>
                   <h4>
-                    <Link onClick={exitOnClick} to={`/${subCategory1.url_key}`} title={subCategory1.name}>
+                    <Link
+                      onClick={exitOnClick}
+                      to={`/${subCategory1.url_key ? subCategory1.url_key : '/'}`}
+                      title={subCategory1.name}
+                    >
                       {subCategory1.name}
                     </Link>
                   </h4>
