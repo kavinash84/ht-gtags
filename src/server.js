@@ -43,38 +43,15 @@ const pretty = new PrettyError();
 const app = express();
 const server = new http.Server(app);
 
-const setJSCompression = (req, res, next) => {
-  if (!(req.url.indexOf('service-worker.js') >= 1)) {
-    if (req.url.indexOf('?_sw-precache') > 1) {
-      const swUrl = req.url.split('?_sw');
-      req.url = `${swUrl[0]}.gz`;
-    } else {
-      req.url = `${req.url}.gz`;
-    }
-    res.set('Content-Encoding', 'gzip');
-    res.set('Content-Type', 'text/javascript');
-  }
-  return next();
-};
-
-const setCssCompression = (req, res, next) => {
-  req.url += '.gz';
-  res.set('Content-Encoding', 'gzip');
-  res.set('Content-Type', 'text/css');
-  return next();
-};
-
 app
   .use(morgan('dev', { skip: req => req.originalUrl.indexOf('/ws') !== -1 }))
   .use(cookieParser())
   .use(compression())
   .use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')))
   .use('/manifest.json', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'manifest.json')))
-  .get('*.js', setJSCompression)
   .use('/service-worker.js', (req, res) =>
     res.sendFile(path.join(__dirname, '..', 'static', 'dist', 'service-worker.js')))
-  .use('/robots.txt', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'robots.txt')))
-  .get('*.css', setCssCompression);
+  .use('/robots.txt', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'robots.txt')));
 
 app.use('/dist/service-worker.js', (req, res, next) => {
   res.setHeader('Service-Worker-Allowed', '/');
@@ -220,6 +197,7 @@ app.use(async (req, res) => {
 
     res.status(200).send(`<!doctype html>${ReactDOM.renderToString(html)}`);
   } catch (mountError) {
+    console.log(mountError);
     console.error('MOUNT ERROR:', pretty.render(mountError));
     // res.status(500);
     hydrate();

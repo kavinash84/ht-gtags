@@ -17,11 +17,9 @@ const hooks = {
     }
   },
   defer: ({ store: { dispatch, getState }, params }) => {
-    const { productdetails: { currentsku }, pincode: { selectedPincode }, reviews } = getState();
+    const { pincode: { selectedPincode } } = getState();
     const pincode = selectedPincode || PINCODE;
-    if (currentsku !== params.skuId || reviews.data.length === 0) {
-      dispatch(loadReview(params.skuId));
-    }
+    dispatch(loadReview(params.skuId));
     dispatch(loadColorProducts(params.skuId, pincode));
     dispatch(loadRelatedProducts(params.skuId, pincode));
     dispatch(setRecentlyViewed(params.skuId));
