@@ -121,8 +121,12 @@ class DeliveryAddress extends Component {
       this.setState({
         openLogin: false
       });
-      this.handleClick();
       clearShippingAddress();
+    }
+    if (nextProps.addresses.length > 0 && nextProps.addresses.length !== this.props.addresses.length) {
+      const { setAddress } = this.props;
+      const { addresses } = nextProps;
+      setAddress('shipping', addresses[0], 0);
     }
     if (nextProps.nextstep.success && nextProps.nextstep.success !== nextstep.success) {
       const { history } = this.props;

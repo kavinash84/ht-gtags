@@ -20,14 +20,15 @@ export default class ProductDetails extends Component {
       <Section p="0" mb="0">
         <div className="wrapper">
           <Menu />
-          {loading && <ProductDetailsShimmer />}
+          {loading && !loaded && <ProductDetailsShimmer />}
+          {!loading && loaded && productDescription && productDescription.error_message && <ProductNotFoundContainer />}
           {!loading &&
+            !productDescription.error_message &&
             loaded && (
             <div itemScope itemType="http://schema.org/Product">
               <ProductDetailsContainer history={history} />
             </div>
           )}
-          {!loading && !loaded && Object.keys(productDescription).length === 0 && <ProductNotFoundContainer />}
         </div>
         <Footer />
       </Section>
