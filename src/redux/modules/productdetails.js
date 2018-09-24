@@ -34,7 +34,7 @@ export default function reducer(state = initialState, action = {}) {
         loaded: true,
         currentsku: action.result.sku,
         productDescription: action.result,
-        simpleSku: Object.keys(action.result.simples)[0],
+        simpleSku: !action.result.error_message && Object.keys(action.result.simples)[0],
         deliveryDetails: null
       };
     case LOAD_PRODUCT_DESCRIPTION_FAIL:

@@ -17,13 +17,15 @@ const hooks = {
     }
   },
   defer: ({ store: { dispatch, getState }, params }) => {
-    const { pincode: { selectedPincode } } = getState();
-    const pincode = selectedPincode || PINCODE;
-    dispatch(loadReview(params.skuId));
-    dispatch(loadColorProducts(params.skuId, pincode));
-    dispatch(loadRelatedProducts(params.skuId, pincode));
-    dispatch(setRecentlyViewed(params.skuId));
-    dispatch(loadEmiOptions(params.skuId, pincode));
+    const { pincode: { selectedPincode }, productdetails: { productDescription } } = getState();
+    if (productDescription && !productDescription.error_message) {
+      const pincode = selectedPincode || PINCODE;
+      dispatch(loadReview(params.skuId));
+      dispatch(loadColorProducts(params.skuId, pincode));
+      dispatch(loadRelatedProducts(params.skuId, pincode));
+      dispatch(setRecentlyViewed(params.skuId));
+      dispatch(loadEmiOptions(params.skuId, pincode));
+    }
   }
 };
 
