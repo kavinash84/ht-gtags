@@ -345,7 +345,7 @@ class DeliveryAddress extends Component {
                   LOGIN
                 </Button>
                 <ResponsiveModal
-                  classNames={{ modal: styles.loginModal }}
+                  classNames={{ modal: 'loginModal' }}
                   onCloseModal={this.onCloseLoginModal}
                   open={this.state.openLogin}
                 >

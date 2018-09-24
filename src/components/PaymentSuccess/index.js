@@ -39,7 +39,7 @@ const PaymentSuccess = ({
         <TitleBar title="Payment Success" />
         <Container type="container" pr="0" pl="0">
           <Section bg="sectionBgDark" display="block" mt="3rem" p="1.5rem" pt="1.5rem" pb="1.5rem" mb="0" height="auto">
-            <Row display="block" mr="0" ml="0">
+            <Row display="block" mr="0" ml="0" m-xs-l="0">
               <Div col="12">
                 <Img width="4.5rem" mr="1rem" float="left" src={PaymentSuccessIcon} alt="Test" />
                 <Heading mt="0">Thank you for placing your order.</Heading>

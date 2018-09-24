@@ -285,7 +285,7 @@ class ProductDetails extends React.Component {
         )}
 
         <ResponsiveModal
-          classNames={{ modal: styles.loginModal }}
+          classNames={{ modal: 'loginModal' }}
           onCloseModal={this.onCloseLoginModal}
           open={this.state.openLogin}
         >
@@ -324,4 +324,7 @@ ProductDetails.propTypes = {
   toggleReviewBox: PropTypes.func.isRequired,
   deliveryDateLoading: PropTypes.bool
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductDetails);
