@@ -51,12 +51,6 @@
 	.spin {
 		animation: spin 1s infinite linear;
 	}
-	.btn-primary {
-	  &:hover {
-	    background-color: transparent !important;
-	    color: $primary !important;
-	  }
-	}
 
 	/* NProgress Start */
 	#nprogress {
