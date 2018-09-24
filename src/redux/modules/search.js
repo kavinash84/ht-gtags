@@ -47,7 +47,7 @@ export default function reducer(state = initialState, action = {}) {
     case SET_SEARCH_QUERY:
       return {
         ...state,
-        loading: action.query.length >= 3,
+        loading: action.query.length >= 4,
         loaded: false,
         searchQuery: action.query
       };
