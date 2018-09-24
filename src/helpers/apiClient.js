@@ -1,5 +1,6 @@
 import axios from 'axios';
 import config from 'config';
+import uuid from 'uuid/v4';
 import getCookie from '../utils/cookies';
 
 export default function apiClient(req) {
@@ -41,7 +42,7 @@ export default function apiClient(req) {
       }
       if (session) {
         conf.headers['X-SESSION-ID'] = session;
-      } else conf.headers['X-SESSION-ID'] = '4npi1s4ru4q8rtsp0c35qfe241';
+      } else conf.headers['X-SESSION-ID'] = uuid();
       if (conf.method !== 'get' && csrfToken) {
         conf.headers['X-CSRF-Token'] = csrfToken;
       }
