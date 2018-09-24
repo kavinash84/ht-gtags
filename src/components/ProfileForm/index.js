@@ -112,7 +112,6 @@ export default class ProfileForm extends Component {
   };
 
   render() {
-    console.log(this.state.phoneErrorMessage);
     const styles = require('./index.scss');
     const {
       email,
