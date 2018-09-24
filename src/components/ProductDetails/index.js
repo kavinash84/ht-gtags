@@ -147,12 +147,12 @@ class ProductDetails extends React.Component {
     const { short_description: shortDescription } = attributes;
     const simpleSku = Object.keys(simples)[0];
     const shipping = simples[simpleSku].groupedattributes.product_shipping_cost;
-    const isEmiAvailable = Number(simples[simpleSku].meta.no_emi) === 0;
     const { price, special_price: specialPrice } = meta;
     const checkSpecialPrice = specialPrice || price;
     const { adding, added } = reviews;
     const offerImage = simples[simpleSku].groupedattributes.offer_image || null;
     const { showmore } = this.state;
+    const isEmiAvailable = Number(checkSpecialPrice) >= 3000;
     return (
       <Div type="block">
         <Section p="0" mb="0" className={styles.pdpWrapper}>
