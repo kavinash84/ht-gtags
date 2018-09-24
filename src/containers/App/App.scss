@@ -810,6 +810,12 @@
 	    max-width: 800px !important;
 	  }
 	}
+
+	/* Signup and Login Modal */
+	.signupModal,.loginModal {
+		max-width: inherit !important;
+		padding: 0;
+	}
 }
 
 /* Wishlist Animation Key Frames */

@@ -14,7 +14,8 @@ import Fav from 'hometown-components/lib/Icons/Fav';
 import Search from 'components/Search';
 import ResponsiveModal from 'components/Modal';
 import Pincode from 'components/Pincode';
-import LoginModal from 'components/Login/LoginModal';
+import LoginModal from 'containers/Login/LoginForm';
+import SignupModal from 'containers/Signup/SignupForm';
 import { SIGNUP_URL, HOME_URL, LOGIN_URL, MY_WISHLIST_URL, MY_PROFILE_URL, CART_URL } from 'helpers/Constants';
 import { logout } from 'redux/modules/login';
 import { getCartCount } from 'selectors/cart';
@@ -57,6 +58,7 @@ export default class MenuSidebar extends Component {
   state = {
     openPincode: false,
     openLogin: false,
+    openSignup: false,
     userPopOver: false
   };
   componentWillReceiveProps(nextProps) {
@@ -77,6 +79,12 @@ export default class MenuSidebar extends Component {
   };
   onCloseLoginModal = () => {
     this.setState({ openLogin: false });
+  };
+  onOpenSignupModal = () => {
+    this.setState({ openSignup: true });
+  };
+  onCloseSignupModal = () => {
+    this.setState({ openSignup: false });
   };
   handleClick = URL => e => {
     e.preventDefault();
@@ -151,11 +159,18 @@ export default class MenuSidebar extends Component {
               <span className={styles.count}>{isLoggedIn ? wishListCount : 0}</span>
             </Button>
             <ResponsiveModal
-              classNames={{ modal: styles.loginModal }}
+              classNames={{ modal: 'loginModal' }}
               onCloseModal={this.onCloseLoginModal}
               open={this.state.openLogin}
             >
               <LoginModal />
+            </ResponsiveModal>
+            <ResponsiveModal
+              classNames={{ modal: 'signupModal' }}
+              onCloseModal={this.onCloseSignupModal}
+              open={this.state.openSignup}
+            >
+              <SignupModal />
             </ResponsiveModal>
             <Link className={styles.cart} to={CART_URL}>
               <Img src={CartIcon} alt="Hometown" height="24px" />
