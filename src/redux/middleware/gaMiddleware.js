@@ -73,7 +73,7 @@ export default function gaMiddleware() {
             }
           }
         }
-        if (type === 'productdetails/LOAD_PRODUCT_DESCRIPTION_SUCCESS') {
+        if (type === 'productdetails/LOAD_PRODUCT_DESCRIPTION_SUCCESS' && !action.result.error_message) {
           window.google_tag_params.ecomm_pagetype = 'product';
           window.google_tag_params.ecomm_totalvalue = action.result.meta.special_price || action.result.meta.price;
           const { position } = getState().productdetails;
@@ -274,9 +274,7 @@ export default function gaMiddleware() {
         }
         // Handle Payment success
         /* eslint-disable camelcase */
-        const {
-          location: { pathname }
-        } = getState().router;
+        const { location: { pathname } } = getState().router;
         if (type === '@@INIT' && pathname && pathname === '/payment-success') {
           const { data } = getState().paymentstatus;
           if (data) {
@@ -320,11 +318,7 @@ export default function gaMiddleware() {
           }
         }
         if (type === 'mainSlider/BANNER_IMPRESSION') {
-          const {
-            homepage: {
-              banners: { data }
-            }
-          } = getState();
+          const { homepage: { banners: { data } } } = getState();
           if (data && data.length) {
             const imp = data[action.payload];
             const obj = {
@@ -345,11 +339,7 @@ export default function gaMiddleware() {
           }
         }
         if (type === 'mainSlider/BANNER_CLICK') {
-          const {
-            homepage: {
-              banners: { data }
-            }
-          } = getState();
+          const { homepage: { banners: { data } } } = getState();
           if (data && data.length) {
             const imp = data[action.payload];
             const obj = {
