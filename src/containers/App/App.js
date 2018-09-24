@@ -22,6 +22,7 @@ import { loadUserProfile, isLoaded as isProfileLoaded } from 'redux/modules/prof
 import { loadCart, isLoaded as isCartLoaded } from 'redux/modules/cart';
 import { PINCODE } from 'helpers/Constants';
 import config from 'config';
+import Cookie from 'js-cookie';
 import Theme from 'hometown-components/lib/Theme';
 import Alert from 'hometown-components/lib/Alert';
 import * as notifActions from 'redux/modules/notifs';
@@ -129,7 +130,10 @@ export default class App extends Component {
   componentDidMount() {
     const { login: { isLoggedIn } } = this.props;
     const { dispatch } = this.context.store;
-    if (!isLoggedIn && isKeyExists(window.navigator, 'credentials.get')) {
+    /* get cookie of glogin for pop up */
+    const gCookie = Cookie.get('Glogin');
+    const gCookieVal = gCookie ? Number(gCookie) : 0;
+    if (gCookieVal === 0 && !isLoggedIn && isKeyExists(window.navigator, 'credentials.get')) {
       navigator.credentials
         .get({
           password: true
@@ -146,6 +150,7 @@ export default class App extends Component {
                 dispatch(login(data));
               }
             }
+            Cookie.set('Glogin', 1, { expires: 1 });
           },
           error => console.log(error)
         );
