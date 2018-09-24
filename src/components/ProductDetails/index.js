@@ -146,7 +146,7 @@ class ProductDetails extends React.Component {
     const { category_details: categoryDetails } = meta;
     const { short_description: shortDescription } = attributes;
     const simpleSku = Object.keys(simples)[0];
-    const shipping = simples[simpleSku].groupedattributes.product_shipping_cost;
+    // const shipping = simples[simpleSku].groupedattributes.product_shipping_cost;
     const { price, special_price: specialPrice } = meta;
     const checkSpecialPrice = specialPrice || price;
     const { adding, added } = reviews;
@@ -216,7 +216,7 @@ class ProductDetails extends React.Component {
                     <ServiceDetails
                       deliverBy={(deliveryInfo && deliveryInfo[0].value) || deliveryDetails[0].value}
                       emiStarting={formatAmount(calculateLowestEmi(emidata, price))}
-                      shipping={shipping}
+                      shipping={checkSpecialPrice}
                       isEmiAvailable={isEmiAvailable}
                       pincode={pincode.selectedPincode}
                       loading={deliveryDateLoading}
