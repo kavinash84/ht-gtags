@@ -28,10 +28,10 @@ import Cart from 'containers/Cart';
 import ModularKitchen from 'containers/ModularKitchen';
 import DesignBuild from 'containers/DesignBuild';
 import BulkOrder from 'containers/BulkOrder';
-import ContactUs from 'containers/ContactUs/';
-import Feedback from 'containers/Feedback/';
-import ServiceRequest from 'containers/ServiceRequest/';
-import ServiceSignUpContainer from 'components/ServiceSignUp/';
+import ContactUs from 'containers/ContactUs';
+import Feedback from 'containers/Feedback';
+import ServiceRequest from 'containers/ServiceRequest';
+import ServiceSignUpContainer from 'components/ServiceSignUp';
 
 /* user */
 import Profile from 'containers/Profile';
@@ -52,7 +52,7 @@ import ReturnPolicy from 'containers/ReturnPolicy';
 import PrivacyPolicy from 'containers/PrivacyPolicy';
 import FAQ from 'containers/Faq';
 import Cancellation from 'containers/Cancellation';
-import Grievance from 'containers/Grievance/';
+import Grievance from 'containers/Grievance';
 import Terms from 'containers/Terms';
 import WhoWeAre from 'containers/WhoWeAre';
 
