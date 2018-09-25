@@ -122,7 +122,7 @@ class ReviewOrder extends Component {
                             <td>{item.product_info.delivery_time_text}</td>
                             <td align="center">{item.qty}</td>
                             <td>Rs. {formatAmount(item.product_info.net_price)}</td>
-                            {(!item.is_deliverable || isProductOutofStock(item.configurable_sku)) && (
+                            {(!item.product_info.is_deliverable || isProductOutofStock(item.configurable_sku)) && (
                               <td>
                                 <h4>
                                   {isProductOutofStock(item.configurable_sku)
