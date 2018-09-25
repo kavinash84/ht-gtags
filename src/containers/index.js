@@ -11,7 +11,6 @@ import FAQ from './Faq/Faq';
 import WhoWeAre from './WhoWeAre/WhoWeAre';
 import TrackOrderModal from './TrackOrderModal/TrackOrderModal';
 import EmiModal from './EmiModal/EmiModal';
-import ModularKitchenMicro from './ModularKitchenMicro/ModularKitchenMicro';
 import NotFound from './NotFound/NotFound';
 
 export {
@@ -28,6 +27,5 @@ export {
   TrackOrderModal,
   EmiModal,
   PaymentOptions,
-  ModularKitchenMicro,
   NotFound
 };
