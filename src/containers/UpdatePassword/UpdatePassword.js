@@ -122,7 +122,7 @@ export default class UpdatePasswordFormContainer extends Component {
       <div className={styles.formContainer}>
         <Section mb="0.3125rem" pr="0.5rem" pl="0.5rem">
           <Row display="block" mr="0" ml="0">
-            <Heading fontSize="1.25rem" color="textDark" mb="0px" mt="0px" fontFamily="SFPDLight">
+            <Heading fontSize="1.25rem" color="textDark" mb="0px" mt="0px" fontFamily="light">
               Update Password
             </Heading>
           </Row>

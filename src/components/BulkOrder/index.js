@@ -29,16 +29,16 @@ const mapStateToProps = ({ services }) => ({
 class BulkOrder extends React.Component {
   state = {
     name: '',
-    nameErrorMessage: 'Name should not be left blank ',
+    nameErrorMessage: 'Name should Not Be Left Blank ',
     phone: '',
     phoneErrorMessage: 'Enter Valid 10 Digit Phone Number',
     email: '',
     emailErrorMessage: 'Please Enter Valid Email ',
     category: 'Furniture',
     budget: '',
-    budgetErrorMessage: 'Enter your budget',
+    budgetErrorMessage: 'Enter Your Budget',
     quantity: '',
-    quantityErrorMessage: 'Enter the approx quantity',
+    quantityErrorMessage: 'Enter the Approx Quantity',
     open: false
   };
   componentWillReceiveProps(nextProps) {
@@ -86,7 +86,7 @@ class BulkOrder extends React.Component {
       phone: value,
       phoneError: checkError,
       phoneErrorMessage:
-        value[0] === '0' ? 'Mobile number must not start with 0' : 'Enter 10 Digits Valid Mobile Number'
+        value[0] === '0' ? 'Mobile Number Must Not Start With 0' : 'Enter 10 Digits Valid Mobile Number'
     });
   };
 
@@ -225,89 +225,97 @@ class BulkOrder extends React.Component {
                       <Text fontSize="0.875rem" ta="center" mt="0" mb="1.5rem">
                         Drop in your Requirement.
                       </Text>
-                      <Div col="6" pl="10px" pr="10px">
-                        <FormInput
-                          label="Name*"
-                          type="text"
-                          placeholder=""
-                          onChange={this.onChangeName}
-                          value={name}
-                          feedBackError={nameError}
-                          feedBackMessage={nameErrorMessage}
-                        />
-                      </Div>
-                      <Div col="6" pl="10px" pr="10px">
-                        <FormInput
-                          label="Email*"
-                          type="text"
-                          placeholder=""
-                          onChange={this.onChangeEmail}
-                          value={email}
-                          feedBackError={emailError}
-                          feedBackMessage={emailErrorMessage}
-                        />
-                      </Div>
-                      <Div col="6" pl="10px" pr="10px">
-                        <FormInput
-                          label="Mobile No.*"
-                          type="text"
-                          placeholder=""
-                          onChange={this.onChangePhone}
-                          value={phone}
-                          feedBackError={phoneError}
-                          feedBackMessage={phoneErrorMessage}
-                        />
-                      </Div>
-                      <Div col="6" pl="10px" pr="10px">
-                        <InputField mb="0.625rem">
-                          <Label fontSize="0.875em" mb="0.625rem">
-                            Category*
-                          </Label>
-                          <select onChange={this.onChangeCategory} className="form-control" name="bulkOrderCategory">
-                            <option value="Furniture">Furniture</option>
-                            <option value="Home Furnishings">Home Furnishings</option>
-                            <option value="Home Decor">Home Decor</option>
-                            <option value="Tableware">Tableware</option>
-                            <option value="Tableware">Kitchenware</option>
-                            <option value="Home Improvement">Home Improvement</option>
-                          </select>
-                        </InputField>
-                      </Div>
-                      <Div col="6" pl="10px" pr="10px">
-                        <FormInput
-                          label="Budget*"
-                          type="text"
-                          placeholder=""
-                          onChange={this.onChangeBudget}
-                          value={budget}
-                          feedBackError={budgetError}
-                          feedBackMessage={budgetErrorMessage}
-                        />
-                      </Div>
-                      <Div col="6" pl="10px" pr="10px">
-                        <FormInput
-                          label="Quantity*"
-                          type="text"
-                          placeholder=""
-                          onChange={this.onChangeQuantity}
-                          value={quantity}
-                          feedBackError={quantityError}
-                          feedBackMessage={quantityErrorMessage}
-                        />
-                      </Div>
-                      <Div col="6" pl="10px" pr="10px">
-                        <div className="buttons-set">
-                          <Button
-                            onClick={this.onSubmitForm}
-                            btnType="primary"
-                            mt="0.625rem"
-                            title="Submit"
-                            type="submit"
-                          >
-                            Submit
-                          </Button>
-                        </div>
-                      </Div>
+                      <Row ml="0" mr="0">
+                        <Div col="6" pl="10px" pr="10px">
+                          <FormInput
+                            label="Name*"
+                            type="text"
+                            placeholder=""
+                            onChange={this.onChangeName}
+                            value={name}
+                            feedBackError={nameError}
+                            feedBackMessage={nameErrorMessage}
+                          />
+                        </Div>
+                        <Div col="6" pl="10px" pr="10px">
+                          <FormInput
+                            label="Email*"
+                            type="text"
+                            placeholder=""
+                            onChange={this.onChangeEmail}
+                            value={email}
+                            feedBackError={emailError}
+                            feedBackMessage={emailErrorMessage}
+                          />
+                        </Div>
+                      </Row>
+                      <Row ml="0" mr="0">
+                        <Div col="6" pl="10px" pr="10px">
+                          <FormInput
+                            label="Mobile No.*"
+                            type="text"
+                            placeholder=""
+                            onChange={this.onChangePhone}
+                            value={phone}
+                            feedBackError={phoneError}
+                            feedBackMessage={phoneErrorMessage}
+                          />
+                        </Div>
+                        <Div col="6" pl="10px" pr="10px">
+                          <InputField mb="0.625rem">
+                            <Label fontSize="0.875em" mb="0.625rem">
+                              Category*
+                            </Label>
+                            <select onChange={this.onChangeCategory} className="form-control" name="bulkOrderCategory">
+                              <option value="Furniture">Furniture</option>
+                              <option value="Home Furnishings">Home Furnishings</option>
+                              <option value="Home Decor">Home Decor</option>
+                              <option value="Tableware">Tableware</option>
+                              <option value="Tableware">Kitchenware</option>
+                              <option value="Home Improvement">Home Improvement</option>
+                            </select>
+                          </InputField>
+                        </Div>
+                      </Row>
+                      <Row ml="0" mr="0">
+                        <Div col="6" pl="10px" pr="10px">
+                          <FormInput
+                            label="Budget*"
+                            type="text"
+                            placeholder=""
+                            onChange={this.onChangeBudget}
+                            value={budget}
+                            feedBackError={budgetError}
+                            feedBackMessage={budgetErrorMessage}
+                          />
+                        </Div>
+                        <Div col="6" pl="10px" pr="10px">
+                          <FormInput
+                            label="Quantity*"
+                            type="text"
+                            placeholder=""
+                            onChange={this.onChangeQuantity}
+                            value={quantity}
+                            feedBackError={quantityError}
+                            feedBackMessage={quantityErrorMessage}
+                          />
+                        </Div>
+                      </Row>
+                      <Row ml="0" mr="0">
+                        <Div col="6" pl="10px" pr="10px">
+                          <div className="buttons-set">
+                            <Button
+                              onClick={this.onSubmitForm}
+                              btnType="primary"
+                              mt="0.625rem"
+                              title="Submit"
+                              type="submit"
+                            >
+                              Submit
+                            </Button>
+                          </div>
+                        </Div>
+                      </Row>
                     </div>
                   </form>
                 </Div>
