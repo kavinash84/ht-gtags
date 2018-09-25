@@ -44,8 +44,8 @@ import TrackOrder from 'containers/TrackOrder';
 import DeliveryAddress from 'containers/DeliveryAddress';
 import PaymentOptions from 'containers/PaymentOptions';
 import ReviewOrder from 'containers/ReviewOrder';
-import PaymentSuccess from 'containers/PaymentSuccess/';
-import PaymentFailure from 'containers/PaymentFailure/';
+import PaymentSuccess from 'containers/PaymentSuccess';
+import PaymentFailure from 'containers/PaymentFailure';
 
 /* static pages */
 import ReturnPolicy from 'containers/ReturnPolicy';
