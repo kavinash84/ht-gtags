@@ -26,6 +26,7 @@ import Cart from 'containers/Cart';
 
 /* services */
 import ModularKitchen from 'containers/ModularKitchen';
+import ModularKitchenMicro from 'containers/ModularKitchenMicro';
 import DesignBuild from 'containers/DesignBuild';
 import BulkOrder from 'containers/BulkOrder';
 import ContactUs from 'containers/ContactUs';
@@ -111,6 +112,7 @@ const routes = [
       { path: '/service-request', exact: true, component: ServiceRequest },
       { path: '/grievance', exact: true, component: Grievance },
       { path: '/modular-kitchens', exact: true, component: ModularKitchen },
+      { path: '/modular-kitchens-micro', exact: true, component: ModularKitchenMicro },
       { path: '/design-build', exact: true, component: DesignBuild },
       { path: '/payment-success', exact: true, component: PaymentSuccess },
       { path: '/payment-failed/:orderId?', exact: true, component: PaymentFailure },
