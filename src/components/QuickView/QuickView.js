@@ -9,7 +9,7 @@ import Span from 'hometown-components/lib/Span';
 import Text from 'hometown-components/lib/Text';
 import Rating from 'hometown-components/lib/Rating';
 import AddToCart from 'components/AddToCart';
-import { calculateSavings, calculateDiscount, getImageURL, formatProductURL } from 'utils/helper';
+import { calculateSavings, calculateDiscount, formatProductURL } from 'utils/helper';
 import { formatAmount } from 'utils/formatters';
 // import { loadEmiOptions } from 'redux/modules/emioptions';
 import SlickSlider from '../SlickSlider';
@@ -148,6 +148,7 @@ export default class QuickView extends Component {
       sku, simpleSku, soldOut, rating, deliveredBy
     } = this.props;
     // const { emidata } = this.props;
+    // console.log(getImageURL(images[currentImage].path, 'product_500'));
     const {
       name, price, special_price: discPrice, max_saving_percentage: saving
     } = data;
@@ -162,7 +163,7 @@ export default class QuickView extends Component {
                 &#8249;
               </button>
               <div className={styles.imageContainer}>
-                <img src={images[currentImage] && getImageURL(images[currentImage].path, 'product_500')} alt="" />
+                <img src={images[currentImage] && images[currentImage].zoom_image} alt="" />
               </div>
               <button name="next" className={styles.next} onClick={this.changeImage}>
                 &#8250;
@@ -229,7 +230,7 @@ export default class QuickView extends Component {
                       onClick={this.setImage}
                       id={index}
                     >
-                      <img className={styles.sliderImage} src={image.path} alt="" id={index} />
+                      <img className={styles.sliderImage} src={image.zoom_image} alt={name} id={index} />
                     </button>
                   </div>
                 ))}
