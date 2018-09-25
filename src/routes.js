@@ -1,49 +1,60 @@
-import {
-  App,
-  OrderDetails,
-  OrderSummary,
-  PaymentOptions,
-  ReviewOrder,
-  ReturnPolicy,
-  PrivacyPolicy,
-  Terms,
-  WhoWeAre,
-  FAQ,
-  TrackOrderModal,
-  NotFound
-} from 'containers';
+import { App, NotFound } from 'containers';
 import { routerActions } from 'react-router-redux';
 import { connectedReduxRedirect } from 'redux-auth-wrapper/history4/redirect';
 import locationHelperBuilder from 'redux-auth-wrapper/history4/locationHelper';
+
+/* Category */
+import Category from 'containers/Category';
+
+/* Home */
+import Home from 'containers/Home';
+
+/* store */
+import Stores from 'containers/Stores';
+import StoreLocator from 'containers/StoreLocator';
+
+/* auth */
 import Login from 'containers/Login';
 import Signup from 'containers/Signup';
 import ForgotPassword from 'containers/ForgotPassword';
 import ResetPassword from 'containers/ResetPassword';
-import Profile from 'containers/Profile';
-import Pincode from 'components/Pincode';
-import Stores from 'containers/Stores/Stores';
-import TrackOrder from 'containers/TrackOrder/TrackOrder';
-import Category from 'containers/Category';
-import Wishlist from 'containers/Wishlist';
+
+/* products */
+import Listing from 'containers/Listing';
+import ProductDetails from 'containers/ProductDetails';
 import Cart from 'containers/Cart';
-import Home from 'containers/Home';
-import StoreLocator from 'containers/StoreLocator/StoreLocator';
+
+/* services */
+import ModularKitchen from 'containers/ModularKitchen';
+import DesignBuild from 'containers/DesignBuild';
+import BulkOrder from 'containers/BulkOrder';
 import ContactUs from 'containers/ContactUs/';
 import Feedback from 'containers/Feedback/';
 import ServiceRequest from 'containers/ServiceRequest/';
-import Grievance from 'containers/Grievance/';
-import PaymentSuccess from 'containers/PaymentSuccess/';
-import PaymentFailure from 'containers/PaymentFailure/';
-import BulkOrder from 'containers/BulkOrder';
 import ServiceSignUpContainer from 'components/ServiceSignUp/';
-import Listing from 'containers/Listing';
-import ProductDetails from 'containers/ProductDetails';
-import ModularKitchen from 'containers/ModularKitchen';
-import DesignBuild from 'containers/DesignBuild';
-import DeliveryAddress from 'containers/DeliveryAddress';
-import Cancellation from 'containers/Cancellation';
+
+/* user */
+import Profile from 'containers/Profile';
 import MyOrder from 'containers/MyOrder';
 import MyAddress from 'containers/MyAddress';
+import Wishlist from 'containers/Wishlist';
+import TrackOrder from 'containers/TrackOrder';
+
+/* checkout */
+import DeliveryAddress from 'containers/DeliveryAddress';
+import PaymentOptions from 'containers/PaymentOptions';
+import ReviewOrder from 'containers/ReviewOrder';
+import PaymentSuccess from 'containers/PaymentSuccess/';
+import PaymentFailure from 'containers/PaymentFailure/';
+
+/* static pages */
+import ReturnPolicy from 'containers/ReturnPolicy';
+import PrivacyPolicy from 'containers/PrivacyPolicy';
+import FAQ from 'containers/Faq';
+import Cancellation from 'containers/Cancellation';
+import Grievance from 'containers/Grievance/';
+import Terms from 'containers/Terms';
+import WhoWeAre from 'containers/WhoWeAre';
 
 import { categoryRoutes, listingRoutes } from 'helpers/Constants';
 
@@ -80,8 +91,6 @@ const routes = [
       { path: '/checkout/cart', exact: true, component: Cart },
       { path: '/my-orders', exact: true, component: isAuthenticated(MyOrder) },
       { path: '/my-address', exact: true, component: isAuthenticated(MyAddress) },
-      { path: '/order-details', exact: true, component: OrderDetails },
-      { path: '/order-summary', exact: true, component: OrderSummary },
       { path: '/profile', exact: true, component: isAuthenticated(Profile) },
       { path: '/:productname?/sku/:skuId', exact: true, component: ProductDetails },
       { path: '/checkout/delivery-address', exact: true, component: DeliveryAddress },
@@ -94,10 +103,8 @@ const routes = [
       { path: '/terms-and-conditions', exact: true, component: Terms },
       { path: '/faq', exact: true, component: FAQ },
       { path: '/who-we-are', exact: true, component: WhoWeAre },
-      { path: '/pincode', exact: true, component: Pincode },
       { path: '/store/:city/:storeName', exact: true, component: Stores },
       { path: '/track-order', exact: true, component: TrackOrder },
-      { path: '/track-order-modal', exact: true, component: TrackOrderModal },
       { path: '/store-locator', exact: true, component: StoreLocator },
       { path: '/contact-us', exact: true, component: ContactUs },
       { path: '/feedback', exact: true, component: Feedback },
