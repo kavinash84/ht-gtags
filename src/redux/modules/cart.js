@@ -42,10 +42,12 @@ export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case LOAD_CART:
       return {
+        ...state,
         loading: true
       };
     case LOAD_CART_SUCCESS:
       return {
+        ...state,
         data: action.result && 'cart' in action.result ? action.result.cart : [],
         summary: action.result && 'summary' in action.result ? action.result.summary : {},
         loading: false,
@@ -53,6 +55,7 @@ export default function reducer(state = initialState, action = {}) {
       };
     case LOAD_CART_FAIL:
       return {
+        ...state,
         loading: false,
         loaded: false
       };

@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
 import Img from 'hometown-components/lib/Img';
+import Button from 'hometown-components/lib/Buttons';
 import ShippedTo from 'hometown-components/lib/ShippedTo';
 // import PaymentMethod from 'hometown-components/lib/PaymentMethod';
 import { bindActionCreators } from 'redux';
@@ -14,7 +16,7 @@ import { submitPaymentDetails } from 'redux/modules/paymentoptions';
 import Footer from 'components/Footer';
 import { formatAmount } from 'utils/formatters';
 import { validatePaymentDetails } from 'utils/validation';
-import { getCartList } from 'selectors/cart';
+import { getCartList, getNotDelivered, getStockOutProducts } from 'selectors/cart';
 import ImageShimmer from 'hometown-components/lib/ImageShimmer';
 
 import MenuCheckout from './MenuCheckout';
@@ -40,7 +42,9 @@ const mapStateToProps = ({
   paymentError: paymentoptions.error,
   cardType: paymentoptions.cardType,
   submitting: paymentoptions.submitting,
-  submitted: paymentoptions.submitted
+  submitted: paymentoptions.submitted,
+  undelivered: getNotDelivered(cart),
+  outOfStockList: getStockOutProducts(cart)
 });
 
 const mapDispatchToProps = dispatch =>
@@ -56,7 +60,7 @@ class ReviewOrder extends Component {
   componentDidMount() {
     const { paymentDetails, history } = this.props;
     if (validatePaymentDetails(paymentDetails)) {
-      history.push('/checkout/delivery-address');
+      history.push('/checkout/cart');
     }
   }
   render() {
@@ -71,8 +75,11 @@ class ReviewOrder extends Component {
       paymentFormData,
       cardType,
       submitting,
-      submitted
+      submitted,
+      undelivered,
+      outOfStockList
     } = this.props;
+    const isProductOutofStock = sku => outOfStockList.includes(sku);
     return (
       <Div type="block">
         <MenuCheckout history={history} page="review" />
@@ -115,6 +122,28 @@ class ReviewOrder extends Component {
                             <td>{item.product_info.delivery_time_text}</td>
                             <td align="center">{item.qty}</td>
                             <td>Rs. {formatAmount(item.product_info.net_price)}</td>
+                            {(!item.is_deliverable || isProductOutofStock(item.configurable_sku)) && (
+                              <td>
+                                <h4>
+                                  {isProductOutofStock(item.configurable_sku)
+                                    ? 'This product is out of stock please remove before proceed.'
+                                    : 'This product cannot be delivered to your pincode.'}
+                                  <br />
+                                  <Link to="/checkout/cart">
+                                    <Button
+                                      fontSize="1rem"
+                                      fontFamily="light"
+                                      color="#f98d29"
+                                      btnType="link"
+                                      p="0"
+                                      mt="0"
+                                    >
+                                      Edit Cart
+                                    </Button>
+                                  </Link>
+                                </h4>
+                              </td>
+                            )}
                           </tr>
                         ))}
                       </tbody>
@@ -132,6 +161,7 @@ class ReviewOrder extends Component {
                   loadingnextstep={submitting}
                   isSubmitted={submitted}
                   itemsCount={summary.items_count}
+                  disabled={undelivered.length > 0}
                   onClick={nextStep(submitDetails, sessionId, paymentDetails, cardType)}
                 />
               </Div>
@@ -148,7 +178,9 @@ ReviewOrder.defaultProps = {
   paymentFormData: {},
   cardType: 'visa',
   submitting: false,
-  submitted: false
+  submitted: false,
+  undelivered: [],
+  outOfStockList: []
 };
 ReviewOrder.propTypes = {
   summary: PropTypes.object.isRequired,
@@ -163,7 +195,9 @@ ReviewOrder.propTypes = {
   paymentFormData: PropTypes.object,
   cardType: PropTypes.string,
   submitting: PropTypes.bool,
-  submitted: PropTypes.bool
+  submitted: PropTypes.bool,
+  undelivered: PropTypes.array,
+  outOfStockList: PropTypes.array
 };
 export default connect(
   mapStateToProps,
