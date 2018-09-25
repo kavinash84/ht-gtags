@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-import { provideHooks } from 'redial';
 import Menu from 'containers/MenuNew/index';
 import MainSlider from 'components/MainSlider';
 import CategoryFilters from 'components/Category/CategoryFilters';
@@ -11,7 +10,6 @@ import Row from 'hometown-components/lib/Row';
 import Title from 'components/Title';
 import Container from 'hometown-components/lib/Container';
 import { connect } from 'react-redux';
-import { loadCategory, setCategory, isLoaded } from 'redux/modules/category';
 import Footer from 'components/Footer';
 import SeoContent from 'components/SeoContent';
 import CommonLayout from 'components/Category/CommonLayout';
@@ -19,15 +17,6 @@ import CommonLayout from 'components/Category/CommonLayout';
 const getSubMenu = (categories, key) =>
   categories && categories.filter(category => category.url_key === key)[0].children;
 
-@provideHooks({
-  fetch: async ({ store: { dispatch, getState }, params }) => {
-    const { category } = params;
-    if (!isLoaded(getState(), category)) {
-      await dispatch(loadCategory(category)).catch(error => console.log(error));
-    }
-    await dispatch(setCategory(category));
-  }
-})
 @connect(({ homepage: { menu }, category: { data } }) => ({
   menu: menu.data,
   category: data && data.items.text,

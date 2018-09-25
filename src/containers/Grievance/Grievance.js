@@ -1,9 +1,9 @@
 import React from 'react';
-import CancellationContainer from 'components/StaticPages/Cancellation';
+import GrievanceContainer from 'components/ContactUs/Grievance';
 import MenuFooter from 'containers/MenuFooter';
 
 export default () => (
   <MenuFooter>
-    <CancellationContainer />
+    <GrievanceContainer />
   </MenuFooter>
 );

@@ -1,20 +1,14 @@
 import {
   App,
-  MyOrder,
-  MyAddress,
   OrderDetails,
   OrderSummary,
-  DeliveryAddress,
   PaymentOptions,
   ReviewOrder,
   ReturnPolicy,
   PrivacyPolicy,
   Terms,
-  Cancellation,
   WhoWeAre,
   FAQ,
-  ModularKitchen,
-  DesignBuild,
   TrackOrderModal,
   NotFound
 } from 'containers';
@@ -29,7 +23,7 @@ import Profile from 'containers/Profile';
 import Pincode from 'components/Pincode';
 import Stores from 'containers/Stores/Stores';
 import TrackOrder from 'containers/TrackOrder/TrackOrder';
-import Category from 'containers/Category/Category';
+import Category from 'containers/Category';
 import Wishlist from 'containers/Wishlist';
 import Cart from 'containers/Cart';
 import Home from 'containers/Home';
@@ -40,10 +34,16 @@ import ServiceRequest from 'containers/ServiceRequest/';
 import Grievance from 'containers/Grievance/';
 import PaymentSuccess from 'containers/PaymentSuccess/';
 import PaymentFailure from 'containers/PaymentFailure/';
-import BulkOrder from 'containers/BulkOrder/';
+import BulkOrder from 'containers/BulkOrder';
 import ServiceSignUpContainer from 'components/ServiceSignUp/';
 import Listing from 'containers/Listing';
 import ProductDetails from 'containers/ProductDetails';
+import ModularKitchen from 'containers/ModularKitchen';
+import DesignBuild from 'containers/DesignBuild';
+import DeliveryAddress from 'containers/DeliveryAddress';
+import Cancellation from 'containers/Cancellation';
+import MyOrder from 'containers/MyOrder';
+import MyAddress from 'containers/MyAddress';
 
 import { categoryRoutes, listingRoutes } from 'helpers/Constants';
 

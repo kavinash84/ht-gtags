@@ -2,5 +2,5 @@ import HomeTownLoader from 'containers/Loader';
 
 export default () =>
   HomeTownLoader({
-    loader: () => import('./ForgotPassword' /* webpackChunkName: 'ForgotPassword' */)
+    loader: () => import('./Faq' /* webpackChunkName: 'Faq' */)
   });

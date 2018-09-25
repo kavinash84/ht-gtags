@@ -1,16 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ModularKitchenContainer from 'components/StaticPages/ModularKitchen';
-import Menu from 'containers/MenuNew/index';
-import Footer from 'components/Footer';
+import MenuFooter from 'containers/MenuFooter';
 
-export default class ModularKitchen extends Component {
-  render() {
-    return (
-      <div className="wrapper">
-        <Menu />
-        <ModularKitchenContainer />
-        <Footer />
-      </div>
-    );
-  }
-}
+export default () => (
+  <div className="wrapper">
+    <MenuFooter>
+      <ModularKitchenContainer />
+    </MenuFooter>
+  </div>
+);

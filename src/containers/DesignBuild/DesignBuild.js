@@ -1,16 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import DesignBuildContainer from 'components/StaticPages/DesignBuild';
-import Menu from 'containers/MenuNew/index';
-import Footer from 'components/Footer';
+import MenuFooter from 'containers/MenuFooter';
 
-export default class DesignBuild extends Component {
-  render() {
-    return (
-      <div className="wrapper">
-        <Menu />
-        <DesignBuildContainer />
-        <Footer />
-      </div>
-    );
-  }
-}
+export default () => (
+  <div className="wrapper">
+    <MenuFooter>
+      <DesignBuildContainer />
+    </MenuFooter>
+  </div>
+);
