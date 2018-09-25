@@ -1,6 +1,7 @@
 import HomeTownLoader from 'containers/Loader';
 
-export default () =>
-  HomeTownLoader({
-    loader: () => import('./DesignBuild' /* webpackChunkName: 'DesignBuild' */)
-  });
+const DesignBuild = HomeTownLoader({
+  loader: () => import('./DesignBuild' /* webpackChunkName: 'DesignBuild' */)
+});
+
+export default DesignBuild;

@@ -1,6 +1,7 @@
 import HomeTownLoader from 'containers/Loader';
 
-export default () =>
-  HomeTownLoader({
-    loader: () => import('./Faq' /* webpackChunkName: 'Faq' */)
-  });
+const Faq = HomeTownLoader({
+  loader: () => import('./Faq' /* webpackChunkName: 'Faq' */)
+});
+
+export default Faq;

@@ -1,6 +1,7 @@
 import HomeTownLoader from 'containers/Loader';
 
-export default () =>
-  HomeTownLoader({
-    loader: () => import('./ReviewOrder' /* webpackChunkName: 'ReviewOrder' */)
-  });
+const ReviewOrder = HomeTownLoader({
+  loader: () => import('./ReviewOrder' /* webpackChunkName: 'ReviewOrder' */)
+});
+
+export default ReviewOrder;

@@ -1,6 +1,7 @@
 import HomeTownLoader from 'containers/Loader';
 
-export default () =>
-  HomeTownLoader({
-    loader: () => import('./ReturnPolicy' /* webpackChunkName: 'ReturnPolicy' */)
-  });
+const ReturnPolicy = HomeTownLoader({
+  loader: () => import('./ReturnPolicy' /* webpackChunkName: 'ReturnPolicy' */)
+});
+
+export default ReturnPolicy;

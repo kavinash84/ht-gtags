@@ -1,6 +1,7 @@
 import HomeTownLoader from 'containers/Loader';
 
-export default () =>
-  HomeTownLoader({
-    loader: () => import('./WhoWeAre' /* webpackChunkName: 'WhoWeAre' */)
-  });
+const WhoWeAre = HomeTownLoader({
+  loader: () => import('./WhoWeAre' /* webpackChunkName: 'WhoWeAre' */)
+});
+
+export default WhoWeAre;

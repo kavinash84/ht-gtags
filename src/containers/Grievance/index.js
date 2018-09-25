@@ -1,6 +1,7 @@
 import HomeTownLoader from 'containers/Loader';
 
-export default () =>
-  HomeTownLoader({
-    loader: () => import('./Grievance' /* webpackChunkName: 'Grievance' */)
-  });
+const Grievance = HomeTownLoader({
+  loader: () => import('./Grievance' /* webpackChunkName: 'Grievance' */)
+});
+
+export default Grievance;

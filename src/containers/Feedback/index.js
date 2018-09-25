@@ -1,6 +1,7 @@
 import HomeTownLoader from 'containers/Loader';
 
-export default () =>
-  HomeTownLoader({
-    loader: () => import('./Feedback' /* webpackChunkName: 'Feedback' */)
-  });
+const Feedback = HomeTownLoader({
+  loader: () => import('./Feedback' /* webpackChunkName: 'Feedback' */)
+});
+
+export default Feedback;

@@ -1,6 +1,7 @@
 import HomeTownLoader from 'containers/Loader';
 
-export default () =>
-  HomeTownLoader({
-    loader: () => import('./MyOrder' /* webpackChunkName: 'MyOrder' */)
-  });
+const MyOrder = HomeTownLoader({
+  loader: () => import('./MyOrder' /* webpackChunkName: 'MyOrder' */)
+});
+
+export default MyOrder;
