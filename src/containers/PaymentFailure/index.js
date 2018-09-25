@@ -1,6 +1,7 @@
 import HomeTownLoader from 'containers/Loader';
 
-export default () =>
-  HomeTownLoader({
-    loader: () => import('./PaymentFailure' /* webpackChunkName: 'PaymentFailure' */)
-  });
+const PaymentFailure = HomeTownLoader({
+  loader: () => import('./PaymentFailure' /* webpackChunkName: 'PaymentFailure' */)
+});
+
+export default PaymentFailure;

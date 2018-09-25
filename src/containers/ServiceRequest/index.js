@@ -1,6 +1,7 @@
 import HomeTownLoader from 'containers/Loader';
 
-export default () =>
-  HomeTownLoader({
-    loader: () => import('./ServiceRequest' /* webpackChunkName: /ServiceRequest' */)
-  });
+const ServiceRequest = HomeTownLoader({
+  loader: () => import('./ServiceRequest' /* webpackChunkName: /ServiceRequest' */)
+});
+
+export default ServiceRequest;

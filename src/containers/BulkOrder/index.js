@@ -1,6 +1,7 @@
 import HomeTownLoader from 'containers/Loader';
 
-export default () =>
-  HomeTownLoader({
-    loader: () => import('./BulkOrder' /* webpackChunkName: 'BulkOrder' */)
-  });
+const BulkOrder = HomeTownLoader({
+  loader: () => import('./BulkOrder' /* webpackChunkName: 'BulkOrder' */)
+});
+
+export default BulkOrder;

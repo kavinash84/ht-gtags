@@ -1,6 +1,7 @@
 import HomeTownLoader from 'containers/Loader';
 
-export default () =>
-  HomeTownLoader({
-    loader: () => import('./MyAddress' /* webpackChunkName: 'MyAddress' */)
-  });
+const MyAddress = HomeTownLoader({
+  loader: () => import('./MyAddress' /* webpackChunkName: 'MyAddress' */)
+});
+
+export default MyAddress;

@@ -1,6 +1,7 @@
 import HomeTownLoader from 'containers/Loader';
 
-export default () =>
-  HomeTownLoader({
-    loader: () => import('./Cancellation' /* webpackChunkName: 'Cancellation' */)
-  });
+const Cancellation = HomeTownLoader({
+  loader: () => import('./Cancellation' /* webpackChunkName: 'Cancellation' */)
+});
+
+export default Cancellation;

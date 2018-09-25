@@ -1,6 +1,7 @@
 import HomeTownLoader from 'containers/Loader';
 
-export default () =>
-  HomeTownLoader({
-    loader: () => import('./TrackOrder' /* webpackChunkName: 'TrackOrder' */)
-  });
+const TrackOrder = HomeTownLoader({
+  loader: () => import('./TrackOrder' /* webpackChunkName: 'TrackOrder' */)
+});
+
+export default TrackOrder;

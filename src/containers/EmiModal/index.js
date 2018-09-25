@@ -1,6 +1,7 @@
 import HomeTownLoader from 'containers/Loader';
 
-export default () =>
-  HomeTownLoader({
-    loader: () => import('./EmiModal' /* webpackChunkName: 'EmiModal' */)
-  });
+const EmiModal = HomeTownLoader({
+  loader: () => import('./EmiModal' /* webpackChunkName: 'EmiModal' */)
+});
+
+export default EmiModal;

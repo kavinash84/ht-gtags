@@ -1,6 +1,7 @@
 import HomeTownLoader from 'containers/Loader';
 
-export default () =>
-  HomeTownLoader({
-    loader: () => import('./ContactUs' /* webpackChunkName: 'ContactUs' */)
-  });
+const ContactUs = HomeTownLoader({
+  loader: () => import('./ContactUs' /* webpackChunkName: 'ContactUs' */)
+});
+
+export default ContactUs;

@@ -1,6 +1,7 @@
 import HomeTownLoader from 'containers/Loader';
 
-export default () =>
-  HomeTownLoader({
-    loader: () => import('./Terms' /* webpackChunkName: 'Terms' */)
-  });
+const Terms = HomeTownLoader({
+  loader: () => import('./Terms' /* webpackChunkName: 'Terms' */)
+});
+
+export default Terms;

@@ -1,6 +1,7 @@
 import HomeTownLoader from 'containers/Loader';
 
-export default () =>
-  HomeTownLoader({
-    loader: () => import('./ForgotPassword' /* webpackChunkName: 'ForgotPassword' */)
-  });
+const ForgotPassword = HomeTownLoader({
+  loader: () => import('./ForgotPassword' /* webpackChunkName: 'ForgotPassword' */)
+});
+
+export default ForgotPassword;
