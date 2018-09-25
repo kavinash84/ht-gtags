@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { provideHooks } from 'redial';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import DeliveryAddress from 'components/Checkout/DeliveryAddress';
@@ -14,16 +13,6 @@ import { CART_URL } from 'helpers/Constants';
   cart: getCartList(cart),
   isLoggedIn: userLogin.isLoggedIn
 }))
-@provideHooks({
-  defer: async ({ store: { dispatch, getState } }) => {
-    const {
-      userLogin: { isLoggedIn }
-    } = getState();
-    if (isLoggedIn) {
-      await dispatch(loadMyAddress());
-    }
-  }
-})
 @withRouter
 export default class DeliveryAddressContainer extends Component {
   static contextTypes = {

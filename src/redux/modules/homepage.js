@@ -70,7 +70,7 @@ export const loadTopSelling = () => ({
   promise: ({ client }) => client.get(HOMEPAGE_TOP_SELLING)
 });
 
-export const loadOfferStrip = () => ({
+export const loadOffers = () => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
   promise: ({ client }) => client.get(`${STATIC_BLOCK}/home_page_offerstrip_react`)
 });

@@ -8,15 +8,14 @@ import CategoryCarousel from 'components/CategoryCarousel';
 import ProductCarousel from 'components/ProductCarousel';
 import Section from 'hometown-components/lib/Section';
 import { connect } from 'react-redux';
-// import HashTags from 'components/Home/HashTags';
 import OfferBanner from 'components/Home/OfferBanner';
 import StoresCarousel from 'components/Stores';
 import Footer from 'components/Footer';
-import { getCities } from '../../selectors/homepage';
+import { getCities, getOfferStripData, getMiddleBannerData } from 'selectors/homepage';
 
 @connect(({
   homepage: {
-    categories, banners, products, hashtags, offerstrip, recentlyviewed
+    categories, banners, products, hashtags, offers, recentlyviewed
   }, stores
 }) => ({
   banners: banners.data,
@@ -24,7 +23,8 @@ import { getCities } from '../../selectors/homepage';
   homepageProducts: products.data,
   cities: getCities(stores),
   hashtags: hashtags.data,
-  offerstrip: offerstrip.data && offerstrip.data.items,
+  offerStrip: getOfferStripData(offers),
+  middleBanner: getMiddleBannerData(offers),
   recentlyviewed: recentlyviewed.data
 }))
 export default class Home extends Component {
@@ -38,20 +38,25 @@ export default class Home extends Component {
   };
   render() {
     const {
-      homepageCategories, homepageProducts, banners, cities, offerstrip, recentlyviewed
+      homepageCategories,
+      homepageProducts,
+      banners,
+      cities,
+      offerStrip,
+      middleBanner,
+      recentlyviewed
     } = this.props;
     const { showRibbon } = this.state;
     return (
       <Section p="0" mb="0">
         <Helmet title="Home" />
         <div className="wrapper">
-          {offerstrip &&
-            offerstrip.text && (
+          {offerStrip && (
             <OfferRibbon
-              title={offerstrip.text.description}
+              title={offerStrip.description}
               showRibbon={showRibbon}
               onClick={this.handleRibbon}
-              url={offerstrip.text.url_key}
+              url={offerStrip.url_key}
             />
           )}
           <Menu />
@@ -64,8 +69,7 @@ export default class Home extends Component {
               data={category.values}
             />
           ))}
-          <OfferBanner />
-          {/* <HashTags data={hashtags} /> */}
+          <OfferBanner image={middleBanner.image_url} url={middleBanner.url_key} />
           {homepageProducts.map((products, index) => (
             <ProductCarousel
               key={String(index)}
@@ -98,9 +102,9 @@ Home.defaultProps = {
   homepageProducts: [],
   banners: [],
   cities: [],
-  // hashtags: [],
-  offerstrip: {},
-  recentlyviewed: []
+  offerStrip: {},
+  recentlyviewed: [],
+  middleBanner: {}
 };
 
 Home.propTypes = {
@@ -108,7 +112,7 @@ Home.propTypes = {
   homepageProducts: PropTypes.array,
   banners: PropTypes.array,
   cities: PropTypes.array,
-  // hashtags: PropTypes.array,
-  offerstrip: PropTypes.object,
-  recentlyviewed: PropTypes.array
+  offerStrip: PropTypes.object,
+  recentlyviewed: PropTypes.array,
+  middleBanner: PropTypes.object
 };

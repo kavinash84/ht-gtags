@@ -36,9 +36,7 @@ export default class UpdatePasswordFormContainer extends Component {
     confirmPwdErrorMessage: ''
   };
   onChangeOldPwd = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     const checkError = isBlank(value);
     this.setState({
       oldPwd: value,
@@ -47,9 +45,7 @@ export default class UpdatePasswordFormContainer extends Component {
     });
   };
   onChangeNewPwd = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     const checkError = validatePassword(value);
     if (!allowNChar(value, 15)) {
       return;
@@ -61,9 +57,7 @@ export default class UpdatePasswordFormContainer extends Component {
     });
   };
   onChangeConfirmPwd = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     const checkError = value !== this.state.newPwd;
     if (!allowNChar(value, 15)) {
       return;

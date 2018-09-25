@@ -1,13 +1,7 @@
 import { provideHooks } from 'redial';
 import { wrapDispatch } from 'multireducer';
 import HomeTownLoader from 'containers/Loader';
-import {
-  loadTopSelling,
-  // loadHashTags,
-  loadOfferStrip,
-  loadRecentlyViewed,
-  isLoaded as isSectionLoaded
-} from 'redux/modules/homepage';
+import { loadTopSelling, loadOffers, loadRecentlyViewed, isLoaded as isSectionLoaded } from 'redux/modules/homepage';
 import { loadStores, isLoaded as isStoresLoaded } from 'redux/modules/stores';
 
 const hooks = {
@@ -19,11 +13,8 @@ const hooks = {
     if (!isStoresLoaded(getState())) {
       dispatch(loadStores()).catch(error => console.log(error));
     }
-    // if (!isSectionLoaded(getState(), 'hashtags')) {
-    //   wrapDispatch(dispatch, 'hashtags')(loadHashTags()).catch(error => console.log(error));
-    // }
-    if (!isSectionLoaded(getState(), 'offerstrip')) {
-      wrapDispatch(dispatch, 'offerstrip')(loadOfferStrip()).catch(error => console.log(error));
+    if (!isSectionLoaded(getState(), 'offers')) {
+      wrapDispatch(dispatch, 'offers')(loadOffers()).catch(error => console.log(error));
     }
     if (!loggingOut) {
       wrapDispatch(dispatch, 'recentlyviewed')(loadRecentlyViewed()).catch(error => console.log(error));

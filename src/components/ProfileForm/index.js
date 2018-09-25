@@ -38,7 +38,7 @@ export default class ProfileForm extends Component {
     emailErrorMessage: '',
     phone: '',
     phoneError: false,
-    phoneErrorMessage: '',
+    phoneErrorMessage: 'Enter 10 Digits Valid Mobile Number',
     fullName: '',
     fullNameError: false,
     fullNameErrorMessage: ''
@@ -84,16 +84,15 @@ export default class ProfileForm extends Component {
     e.preventDefault();
     const { email, fullName, phone } = this.state;
     const checkEmail = validateEmail(email, 'Invalid Email');
-    const checkPhone = validateMobile(phone, 'Mobile no. should be 10 digits');
+    const phoneError = !validateMobile(phone);
     const checkFullName = isBlank(fullName);
-    if (checkEmail.error || checkFullName || checkPhone.error) {
+    if (checkEmail.error || checkFullName || phoneError) {
       return this.setState({
         emailError: checkEmail.error,
         emailErrorMessage: checkEmail.errorMessage,
-        phoneError: checkPhone.error,
-        phoneErrorMessage: checkPhone.errorMessage,
         fullNameError: checkFullName,
-        fullNameErrorMessage: checkFullName ? "Name can't be blank" : ''
+        fullNameErrorMessage: checkFullName ? "Name can't be blank" : '',
+        phoneError
       });
     }
     const { dispatch } = this.context.store;

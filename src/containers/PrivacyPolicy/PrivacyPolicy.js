@@ -1,16 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PrivacyPolicyContainer from 'components/StaticPages/PrivacyPolicy';
-import Menu from 'containers/MenuNew/index';
-import Footer from 'components/Footer';
+import MenuFooter from 'containers/MenuFooter';
 
-export default class PrivacyPolicy extends Component {
-  render() {
-    return (
-      <div>
-        <Menu />
-        <PrivacyPolicyContainer />
-        <Footer />
-      </div>
-    );
-  }
-}
+export default () => (
+  <MenuFooter>
+    <PrivacyPolicyContainer />
+  </MenuFooter>
+);

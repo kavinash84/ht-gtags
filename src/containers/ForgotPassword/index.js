@@ -1,9 +1,6 @@
-import React from 'react';
-import Loadable from 'react-loadable';
+import HomeTownLoader from 'containers/Loader';
 
-const ForgotPasswordLoadable = Loadable({
-  loader: () => import('./ForgotPassword' /* webpackChunkName: 'ForgotPassword' */),
-  loading: () => <div>Loading</div>
-});
-
-export default ForgotPasswordLoadable;
+export default () =>
+  HomeTownLoader({
+    loader: () => import('./ForgotPassword' /* webpackChunkName: 'ForgotPassword' */)
+  });

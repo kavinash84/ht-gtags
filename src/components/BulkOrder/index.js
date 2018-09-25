@@ -55,9 +55,7 @@ class BulkOrder extends React.Component {
     }
   }
   onChangeName = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     const checkError = isEmpty(value);
     this.setState({
       name: value,
@@ -65,9 +63,7 @@ class BulkOrder extends React.Component {
     });
   };
   onChangeEmail = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     const checkError = !validateEmail(value);
     this.setState({
       email: value,
@@ -75,9 +71,7 @@ class BulkOrder extends React.Component {
     });
   };
   onChangePhone = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     const checkError = !validateMobile(value);
     if (!allowNChar(value, 10) || (!allowTypeOf(value, 'number') && value.length > 0)) {
       return;
@@ -91,17 +85,13 @@ class BulkOrder extends React.Component {
   };
 
   onChangeCategory = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     this.setState({
       category: value
     });
   };
   onChangeQuantity = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     const checkError = isEmpty(value);
     if (!allowTypeOf(value, 'number') && value.length > 0) {
       return;
@@ -112,9 +102,7 @@ class BulkOrder extends React.Component {
     });
   };
   onChangeBudget = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     if (!allowTypeOf(value, 'number') && value.length > 0) {
       return;
     }
@@ -342,7 +330,4 @@ BulkOrder.propTypes = {
   serviceRequest: PropTypes.object,
   sendFormData: PropTypes.func.isRequired
 };
-export default connect(
-  mapStateToProps,
-  { sendFormData: sendData }
-)(BulkOrder);
+export default connect(mapStateToProps, { sendFormData: sendData })(BulkOrder);

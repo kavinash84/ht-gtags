@@ -1,16 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import WhoWeAreContainer from 'components/StaticPages/WhoWeAre';
-import Menu from 'containers/MenuNew/index';
-import Footer from 'components/Footer';
+import MenuFooter from 'containers/MenuFooter';
 
-export default class WhoWeAre extends Component {
-  render() {
-    return (
-      <div>
-        <Menu />
-        <WhoWeAreContainer />
-        <Footer />
-      </div>
-    );
-  }
-}
+export default () => (
+  <MenuFooter>
+    <WhoWeAreContainer />
+  </MenuFooter>
+);

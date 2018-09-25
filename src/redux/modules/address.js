@@ -150,7 +150,9 @@ export default function reducer(state = initialState, action = {}) {
         [action.formType]: {
           ...state[action.formType],
           phone: action.phone,
-          phoneFeedBackError: !validateMobile(action.phone)
+          phoneFeedBackError: !validateMobile(action.phone),
+          phoneFeedBackMessage:
+            action.phone[0] === '0' ? 'Mobile number must not start with 0' : 'Enter 10 Digits Valid Mobile Number !'
         }
       };
     case SET_PINCODE:

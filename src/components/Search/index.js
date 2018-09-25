@@ -68,7 +68,7 @@ class Search extends React.Component {
     const { load, setSearchQuery } = this.props;
     const { dispatch } = this.context.store;
     dispatch(setSearchQuery(value));
-    if (value.length >= 2) {
+    if (value.length >= 3) {
       await load(value);
       const { results } = this.props;
       this.setState({
@@ -155,4 +155,7 @@ Search.propTypes = {
   clearSearchQuery: PropTypes.func.isRequired
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search));
+export default withRouter(connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Search));

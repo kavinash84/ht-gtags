@@ -1,16 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import TermsContainer from 'components/StaticPages/Terms';
-import Menu from 'containers/MenuNew/index';
-import Footer from 'components/Footer';
+import MenuFooter from 'containers/MenuFooter';
 
-export default class Terms extends Component {
-  render() {
-    return (
-      <div>
-        <Menu />
-        <TermsContainer />
-        <Footer />
-      </div>
-    );
-  }
-}
+export default () => (
+  <MenuFooter>
+    <TermsContainer />
+  </MenuFooter>
+);

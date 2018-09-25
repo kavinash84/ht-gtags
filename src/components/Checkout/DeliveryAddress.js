@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
@@ -237,7 +237,7 @@ class DeliveryAddress extends Component {
         <Section display="flex" pt="1.25rem" mb="1rem" height="auto">
           <Container type="container" pr="2rem" pl="2rem">
             {isLoggedIn && (
-              <Fragment>
+              <div>
                 <Row display="block" mr="0" ml="0">
                   <Div col="12">
                     <Label fontSize="1.125rem" mb="0.875rem">
@@ -274,7 +274,7 @@ class DeliveryAddress extends Component {
                     </button>
                   </Div>
                 </Row>
-              </Fragment>
+              </div>
             )}
             <Div col="5" mt="0">
               <form onSubmit={this.handleSubmit}>

@@ -41,9 +41,7 @@ export default class ForgotPasswordContainer extends Component {
   }
 
   onChangeEmail = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     const checkError = validateEmail(value, 'Enter valid email');
     this.setState({
       email: value,

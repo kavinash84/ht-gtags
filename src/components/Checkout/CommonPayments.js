@@ -40,7 +40,8 @@ const initial = {
     cvv: '',
     expMonth: '',
     expYear: '',
-    emiBank: ''
+    emiBank: '',
+    emiCode: ''
   },
   NetBanking: {
     bankCode: ''

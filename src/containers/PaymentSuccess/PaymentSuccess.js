@@ -1,14 +1,9 @@
 import React from 'react';
 import PaymentSuccess from 'components/PaymentSuccess';
-import Menu from 'containers/MenuNew/index';
-import Footer from 'components/Footer';
+import MenuFooter from 'containers/MenuFooter';
 
-const PaymentSuccessContainer = () => (
-  <div>
-    <Menu />
+export default () => (
+  <MenuFooter>
     <PaymentSuccess />
-    <Footer />
-  </div>
+  </MenuFooter>
 );
-
-export default PaymentSuccessContainer;
