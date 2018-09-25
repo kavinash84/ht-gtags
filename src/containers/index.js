@@ -18,6 +18,7 @@ import TrackOrderModal from './TrackOrderModal/TrackOrderModal';
 import EmiModal from './EmiModal/EmiModal';
 import ModularKitchen from './ModularKitchen/ModularKitchen';
 import DesignBuild from './DesignBuild/DesignBuild';
+import ModularKitchenMicro from './ModularKitchenMicro/ModularKitchenMicro';
 import NotFound from './NotFound/NotFound';
 
 export {
@@ -41,5 +42,6 @@ export {
   PaymentOptions,
   ModularKitchen,
   DesignBuild,
+  ModularKitchenMicro,
   NotFound
 };

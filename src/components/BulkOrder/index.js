@@ -225,7 +225,7 @@ class BulkOrder extends React.Component {
                       <Text fontSize="0.875rem" ta="center" mt="0" mb="1.5rem">
                         Drop in your Requirement.
                       </Text>
-                      <Row ml="0" mr="0">
+                      <Row>
                         <Div col="6" pl="10px" pr="10px">
                           <FormInput
                             label="Name*"
@@ -249,7 +249,7 @@ class BulkOrder extends React.Component {
                           />
                         </Div>
                       </Row>
-                      <Row ml="0" mr="0">
+                      <Row>
                         <Div col="6" pl="10px" pr="10px">
                           <FormInput
                             label="Mobile No.*"
@@ -277,7 +277,7 @@ class BulkOrder extends React.Component {
                           </InputField>
                         </Div>
                       </Row>
-                      <Row ml="0" mr="0">
+                      <Row>
                         <Div col="6" pl="10px" pr="10px">
                           <FormInput
                             label="Budget*"
@@ -301,7 +301,7 @@ class BulkOrder extends React.Component {
                           />
                         </Div>
                       </Row>
-                      <Row ml="0" mr="0">
+                      <Row>
                         <Div col="6" pl="10px" pr="10px">
                           <div className="buttons-set">
                             <Button
