@@ -112,7 +112,7 @@ const Footer = ({ menuItems }) => {
             {menuItems.map(menu =>
               menu.children &&
                 menu.visibility === 'on' && (
-                <Div key={menu.name} display="flexEqual" col="2">
+                <Div key={menu.name} display="flexEqual">
                   <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem" pb="2px">
                     {menu.name}
                   </Heading>
