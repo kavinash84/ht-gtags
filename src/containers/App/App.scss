@@ -51,12 +51,6 @@
 	.spin {
 		animation: spin 1s infinite linear;
 	}
-	.btn-primary {
-	  &:hover {
-	    background-color: transparent !important;
-	    color: $primary !important;
-	  }
-	}
 
 	/* NProgress Start */
 	#nprogress {
@@ -752,10 +746,10 @@
 		&:after {
 			content: "";
 	    position: absolute;
-	    height: 40px;
-	    background-image: linear-gradient(rgba(247, 247, 247, 0), rgb(247, 247, 247) 80%, rgb(247, 247, 247));
+	    height: 60px;
+	    background-image: linear-gradient(rgba(247, 247, 247, 0), #FFF 80%, #FFF);
 	    width: 100%;
-	    bottom: 0px;
+	    bottom: -1px;
 		}
 	}
 	.ratings {
