@@ -8,7 +8,6 @@ import CategoryCarousel from 'components/CategoryCarousel';
 import ProductCarousel from 'components/ProductCarousel';
 import Section from 'hometown-components/lib/Section';
 import { connect } from 'react-redux';
-// import HashTags from 'components/Home/HashTags';
 import OfferBanner from 'components/Home/OfferBanner';
 import StoresCarousel from 'components/Stores';
 import Footer from 'components/Footer';
@@ -71,7 +70,6 @@ export default class Home extends Component {
             />
           ))}
           <OfferBanner image={middleBanner.image_url} url={middleBanner.url_key} />
-          {/* <HashTags data={hashtags} /> */}
           {homepageProducts.map((products, index) => (
             <ProductCarousel
               key={String(index)}
@@ -104,7 +102,6 @@ Home.defaultProps = {
   homepageProducts: [],
   banners: [],
   cities: [],
-  // hashtags: [],
   offerStrip: {},
   recentlyviewed: [],
   middleBanner: {}
@@ -115,7 +112,6 @@ Home.propTypes = {
   homepageProducts: PropTypes.array,
   banners: PropTypes.array,
   cities: PropTypes.array,
-  // hashtags: PropTypes.array,
   offerStrip: PropTypes.object,
   recentlyviewed: PropTypes.array,
   middleBanner: PropTypes.object
