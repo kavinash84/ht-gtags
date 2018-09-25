@@ -26,6 +26,7 @@ import Cart from 'containers/Cart';
 
 /* services */
 import ModularKitchen from 'containers/ModularKitchen';
+import ModularKitchenMicro from 'containers/ModularKitchenMicro';
 import DesignBuild from 'containers/DesignBuild';
 import BulkOrder from 'containers/BulkOrder';
 import ContactUs from 'containers/ContactUs';
@@ -55,6 +56,7 @@ import Cancellation from 'containers/Cancellation';
 import Grievance from 'containers/Grievance';
 import Terms from 'containers/Terms';
 import WhoWeAre from 'containers/WhoWeAre';
+import LoaderShimmer from 'containers/Loader/LoaderShimmer';
 
 import { categoryRoutes, listingRoutes } from 'helpers/Constants';
 
@@ -111,11 +113,13 @@ const routes = [
       { path: '/service-request', exact: true, component: ServiceRequest },
       { path: '/grievance', exact: true, component: Grievance },
       { path: '/modular-kitchens', exact: true, component: ModularKitchen },
+      { path: '/modular-kitchens-micro', exact: true, component: ModularKitchenMicro },
       { path: '/design-build', exact: true, component: DesignBuild },
       { path: '/payment-success', exact: true, component: PaymentSuccess },
       { path: '/payment-failed/:orderId?', exact: true, component: PaymentFailure },
       { path: '/bulk-order', exact: true, component: BulkOrder },
       { path: '/service-signup', exact: true, component: ServiceSignUpContainer },
+      { path: '/loader-shimmer', exact: true, component: LoaderShimmer },
       {
         path: `/:category(${createRegex(categoryRoutes)})`,
         exact: true,
