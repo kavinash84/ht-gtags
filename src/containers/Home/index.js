@@ -4,7 +4,7 @@ import HomeTownLoader from 'containers/Loader';
 import {
   loadTopSelling,
   // loadHashTags,
-  loadOfferStrip,
+  loadOffers,
   loadRecentlyViewed,
   isLoaded as isSectionLoaded
 } from 'redux/modules/homepage';
@@ -22,8 +22,8 @@ const hooks = {
     // if (!isSectionLoaded(getState(), 'hashtags')) {
     //   wrapDispatch(dispatch, 'hashtags')(loadHashTags()).catch(error => console.log(error));
     // }
-    if (!isSectionLoaded(getState(), 'offerstrip')) {
-      wrapDispatch(dispatch, 'offerstrip')(loadOfferStrip()).catch(error => console.log(error));
+    if (!isSectionLoaded(getState(), 'offers')) {
+      wrapDispatch(dispatch, 'offers')(loadOffers()).catch(error => console.log(error));
     }
     if (!loggingOut) {
       wrapDispatch(dispatch, 'recentlyviewed')(loadRecentlyViewed()).catch(error => console.log(error));
