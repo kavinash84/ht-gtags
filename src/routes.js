@@ -56,6 +56,7 @@ import Cancellation from 'containers/Cancellation';
 import Grievance from 'containers/Grievance';
 import Terms from 'containers/Terms';
 import WhoWeAre from 'containers/WhoWeAre';
+import LoaderShimmer from 'containers/Loader/LoaderShimmer';
 
 import { categoryRoutes, listingRoutes } from 'helpers/Constants';
 
@@ -118,6 +119,7 @@ const routes = [
       { path: '/payment-failed/:orderId?', exact: true, component: PaymentFailure },
       { path: '/bulk-order', exact: true, component: BulkOrder },
       { path: '/service-signup', exact: true, component: ServiceSignUpContainer },
+      { path: '/loader-shimmer', exact: true, component: LoaderShimmer },
       {
         path: `/:category(${createRegex(categoryRoutes)})`,
         exact: true,
