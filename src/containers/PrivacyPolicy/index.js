@@ -1,6 +1,7 @@
 import HomeTownLoader from 'containers/Loader';
 
-export default () =>
-  HomeTownLoader({
-    loader: () => import('./PrivacyPolicy' /* webpackChunkName: 'PrivacyPolicy' */)
-  });
+const PrivacyPolicy = HomeTownLoader({
+  loader: () => import('./PrivacyPolicy' /* webpackChunkName: 'PrivacyPolicy' */)
+});
+
+export default PrivacyPolicy;

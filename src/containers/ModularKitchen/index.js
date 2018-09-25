@@ -1,6 +1,7 @@
 import HomeTownLoader from 'containers/Loader';
 
-export default () =>
-  HomeTownLoader({
-    loader: () => import('./ModularKitchen' /* webpackChunkName: 'ModularKitchen' */)
-  });
+const ModularKitchen = HomeTownLoader({
+  loader: () => import('./ModularKitchen' /* webpackChunkName: 'ModularKitchen' */)
+});
+
+export default ModularKitchen;
