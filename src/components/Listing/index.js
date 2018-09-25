@@ -258,7 +258,7 @@ class Listing extends React.Component {
               <ScrollToTop />
             </Row>
             <ResponsiveModal
-              classNames={{ modal: styles.loginModal }}
+              classNames={{ modal: 'loginModal' }}
               onCloseModal={this.onCloseLoginModal}
               open={this.state.openLogin}
             >

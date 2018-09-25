@@ -146,13 +146,13 @@ class ProductDetails extends React.Component {
     const { category_details: categoryDetails } = meta;
     const { short_description: shortDescription } = attributes;
     const simpleSku = Object.keys(simples)[0];
-    const shipping = simples[simpleSku].groupedattributes.product_shipping_cost;
-    const isEmiAvailable = Number(simples[simpleSku].meta.no_emi) === 0;
+    // const shipping = simples[simpleSku].groupedattributes.product_shipping_cost;
     const { price, special_price: specialPrice } = meta;
     const checkSpecialPrice = specialPrice || price;
     const { adding, added } = reviews;
     const offerImage = simples[simpleSku].groupedattributes.offer_image || null;
     const { showmore } = this.state;
+    const isEmiAvailable = Number(checkSpecialPrice) >= 3000;
     return (
       <Div type="block">
         <Section p="0" mb="0" className={styles.pdpWrapper}>
@@ -216,7 +216,7 @@ class ProductDetails extends React.Component {
                     <ServiceDetails
                       deliverBy={(deliveryInfo && deliveryInfo[0].value) || deliveryDetails[0].value}
                       emiStarting={formatAmount(calculateLowestEmi(emidata, price))}
-                      shipping={shipping}
+                      shipping={checkSpecialPrice}
                       isEmiAvailable={isEmiAvailable}
                       pincode={pincode.selectedPincode}
                       loading={deliveryDateLoading}
@@ -285,7 +285,7 @@ class ProductDetails extends React.Component {
         )}
 
         <ResponsiveModal
-          classNames={{ modal: styles.loginModal }}
+          classNames={{ modal: 'loginModal' }}
           onCloseModal={this.onCloseLoginModal}
           open={this.state.openLogin}
         >
@@ -324,4 +324,7 @@ ProductDetails.propTypes = {
   toggleReviewBox: PropTypes.func.isRequired,
   deliveryDateLoading: PropTypes.bool
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductDetails);

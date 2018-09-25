@@ -1,16 +1,6 @@
-import React, { Component } from 'react';
-import ContactUsContainer from 'components/ContactUs/';
-import Menu from 'containers/MenuNew/index';
-import Footer from 'components/Footer';
+import HomeTownLoader from 'containers/Loader';
 
-export default class ContactUs extends Component {
-  render() {
-    return (
-      <div>
-        <Menu />
-        <ContactUsContainer />
-        <Footer />
-      </div>
-    );
-  }
-}
+export default () =>
+  HomeTownLoader({
+    loader: () => import('./ContactUs' /* webpackChunkName: 'ContactUs' */)
+  });

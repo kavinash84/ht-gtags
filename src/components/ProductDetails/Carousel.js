@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 import Row from 'hometown-components/lib/Row';
 import Div from 'hometown-components/lib/Div';
+import Img from 'hometown-components/lib/Img';
+import ImageShimmer from 'hometown-components/lib/ImageShimmer';
 import CarouselItem from './CarouselItem';
 
 const showSlides = data => (data && data.length >= 4 ? 4 : data.length || 0);
@@ -40,7 +42,9 @@ export default class ProductDetailSlider extends Component {
           >
             {data.map((slide, index) => (
               <div className={styles.pdpThumbSliderItem} key={slide.id_catalog_product_image}>
-                <img src={`${slide.url}-catalog_360.jpg`} alt={title} />
+                <ImageShimmer src={`${slide.url}-catalog_360.jpg`} style={{ width: '105px' }} height="105px">
+                  {imageURL => <Img alt={title} src={imageURL} width="105px" />}
+                </ImageShimmer>
               </div>
             ))}
           </Slider>

@@ -1,5 +1,4 @@
-import React from 'react';
-import Loadable from 'react-loadable';
+import HomeTownLoader from 'containers/Loader';
 import { provideHooks } from 'redial';
 import { checkHashValidity, isHashChecked } from 'redux/modules/forgotpassword';
 
@@ -10,9 +9,9 @@ const hooks = {
     }
   }
 };
-const ResetLoadable = Loadable({
-  loader: () => import('./ResetPassword' /* webpackChunkName: 'ResetPassword' */),
-  loading: () => <div>Loading</div>
+
+const ResetPassword = HomeTownLoader({
+  loader: () => import('./ResetPassword' /* webpackChunkName: 'ResetPassword' */)
 });
 
-export default provideHooks(hooks)(ResetLoadable);
+export default provideHooks(hooks)(ResetPassword);

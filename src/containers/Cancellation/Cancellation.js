@@ -1,16 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import CancellationContainer from 'components/StaticPages/Cancellation';
-import Menu from 'containers/MenuNew/index';
-import Footer from 'components/Footer';
+import MenuFooter from 'containers/MenuFooter';
 
-export default class Cancellation extends Component {
-  render() {
-    return (
-      <div>
-        <Menu />
-        <CancellationContainer />
-        <Footer />
-      </div>
-    );
-  }
-}
+export default () => (
+  <MenuFooter>
+    <CancellationContainer />
+  </MenuFooter>
+);

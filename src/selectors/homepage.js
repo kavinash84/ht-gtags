@@ -1,10 +1,18 @@
 import { createSelector } from 'reselect';
+import { isKeyExists } from 'utils/helper';
 
 /* Stores */
 export const storesData = stores =>
   stores.data || {
     items: {
       text: []
+    }
+  };
+
+export const staticBlockData = blockData =>
+  blockData.data || {
+    items: {
+      text: {}
     }
   };
 
@@ -19,3 +27,8 @@ export const getCities = createSelector([getAllCities], cities =>
 
 export const filterStoreList = createSelector([storesList, selectedCity], (stores, city) =>
   stores.filter(store => store.city.toUpperCase() === city));
+
+export const getOfferStripData = createSelector([staticBlockData], data => isKeyExists(data, 'items.text.offer_strip'));
+
+export const getMiddleBannerData = createSelector([staticBlockData], data =>
+  isKeyExists(data, 'items.text.middle_banner'));
