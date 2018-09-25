@@ -1,9 +1,9 @@
 import React from 'react';
-import StoreLocatorContainer from 'components/StoreLocator';
+import ServiceRequestContainer from 'components/ContactUs/ServiceRequest';
 import MenuFooter from 'containers/MenuFooter';
 
 export default () => (
   <MenuFooter>
-    <StoreLocatorContainer />
+    <ServiceRequestContainer />
   </MenuFooter>
 );
