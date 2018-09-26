@@ -298,8 +298,10 @@ export default function reducer(state = initialState, action = {}) {
           ...state[action.formType],
           loading: false,
           loaded: true,
-          city: (action.result.pincode_details[0] && action.result.pincode_details[0].city) || '',
-          state: (action.result.pincode_details[0] && action.result.pincode_details[0].state) || '',
+          // city: (action.result.pincode_details[0] && action.result.pincode_details[0].city) || '',
+          // state: (action.result.pincode_details[0] && action.result.pincode_details[0].state) || '',
+          city: action.result.city || '',
+          state: action.result.state || '',
           pincodeDetails: action.result.pincode_details || []
         }
       };
@@ -457,8 +459,10 @@ export const load = (formType, query) => ({
 export const loadPincodeDetails = (formType, pincode) => (dispatch, getState) =>
   dispatch({
     types: [LOAD_PINCODE_DETAILS, LOAD_PINCODE_DETAILS_SUCCESS, LOAD_PINCODE_DETAILS_FAIL],
-    promise: ({ client }) => {
-      const response = client.get(`tesla/session/${pincode}`);
+    promise: async ({ client }) => {
+      // const response = client.get(`tesla/session/${pincode}`);
+      const response = await client.get(`tesla/locations/pincode/details/${pincode}`);
+      // api/tesla/locations/pincode/details/
       if (formType === 'shipping') {
         dispatch(loadCart(getState().app.sessionId, pincode));
       }
