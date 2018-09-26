@@ -7,9 +7,11 @@ import Product from 'hometown-components/lib/Product';
 import Container from 'hometown-components/lib/Container';
 import Section from 'hometown-components/lib/Section';
 import ResponsiveModal from 'components/Modal';
+import Div from 'hometown-components/lib/Div';
 import QuickView from 'components/QuickView/QuickView';
 import { setProductPosition } from 'redux/modules/productdetails';
 import { formatProductURL } from 'utils/helper';
+import AddToCart from '../AddToCart';
 
 const getProductImage = url => {
   const pp = `${url.split('/').slice(-1)}`;
@@ -36,12 +38,13 @@ class Wishlist extends React.Component {
     quickViewSku: '',
     simpleSku: ''
   };
-  onOpenQuickViewModal = (sku, simpleSku, soldOut) => {
+  onOpenQuickViewModal = (sku, simpleSku, soldOut, rating) => {
     this.setState({
       openQuickView: true,
       quickViewSku: sku,
       simpleSku,
-      soldOut
+      soldOut,
+      rating
     });
   };
   onCloseQuickViewModal = () => {
@@ -71,7 +74,8 @@ class Wishlist extends React.Component {
                   this.onOpenQuickViewModal(
                     item.product_info.data.sku,
                     Object.keys(item.product_info.data.simples)[0],
-                    item.product_info.soldout
+                    item.product_info.soldout,
+                    item.product_info.data.reviews.rating.toFixed(1)
                   );
                 }}
                 isWishList={isInWishList(wishList, item.product_info.data.sku)}
@@ -82,6 +86,14 @@ class Wishlist extends React.Component {
                 setProductPosition={productPosition}
                 productURL={formatProductURL(item.product_info.data.name, item.product_info.data.sku)}
               />
+              <Div mt="0" p="0.25rem 0.125rem 0.5rem">
+                <AddToCart
+                  simpleSku={Object.keys(item.product_info.data.simples)[0]}
+                  sku={item.product_info.data.sku}
+                  itemId={item.product_info.id}
+                  isSoldOut={item.product_info.data.soldout}
+                />
+              </Div>
             </div>
           ))}
           {list && (
@@ -92,6 +104,8 @@ class Wishlist extends React.Component {
                 simpleSku={simpleSku}
                 products={sanitizeWishList(list)}
                 soldOut={this.state.soldOut}
+                // deliveredBy={this.state.deliveredBy}
+                rating={this.state.rating}
               />
             </ResponsiveModal>
           )}
