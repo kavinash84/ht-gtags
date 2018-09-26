@@ -12,6 +12,7 @@ import ImageShimmer from 'hometown-components/lib/ImageShimmer';
 import { formatAmount } from 'utils/formatters';
 import TitleBar from '../TitleBar';
 
+const styles = require('./PaymentSuccess.scss');
 const PaymentSuccessIcon = require('../../../static/success.svg');
 
 /* eslint-disable camelcase */
@@ -38,8 +39,10 @@ const PaymentSuccess = ({
             <Row display="block" mr="0" ml="0" m-xs-l="0">
               <Div col="12">
                 <Img width="4.5rem" mr="1rem" float="left" src={PaymentSuccessIcon} alt="Test" />
-                <Heading mt="0">Thank you for placing your order.</Heading>
-                <Text fontSize="1rem" mb="0">
+                <Heading mt="0.625rem" mb="0.3125rem">
+                  Thank you for placing your order.
+                </Heading>
+                <Text fontSize="1rem" mb="0" mt="0">
                   Your order number is <b>{order_no}</b> placed on &nbsp;
                   <b>{order_date}</b>. You will shortly receive an e-mail and SMS confirming your order.
                 </Text>
@@ -67,7 +70,7 @@ const PaymentSuccess = ({
                 </Row>
                 <Row type="block" m="0" mb="1.5rem" mt="0">
                   <Div col="12">
-                    <table className="ordersTable">
+                    <table className="table">
                       <tbody>
                         <tr>
                           <th colSpan="2">Product</th>
@@ -88,26 +91,25 @@ const PaymentSuccess = ({
                             <td align="right">Rs. {formatAmount(product.total_price)}</td>
                           </tr>
                         ))}
-                        <tr align="right">
-                          <td colSpan="5">
-                            Sub-Total Amount: Rs. <b>{formatAmount(sub_total_amount)}</b>
-                          </td>
-                        </tr>
-                        <tr align="right">
-                          <td colSpan="5">
-                            Shipping Charges: Rs. <b>{formatAmount(shipping_charges)}</b>
-                          </td>
-                        </tr>
-                        <tr align="right">
-                          <td colSpan="5">
-                            Discount / Coupon Value: Rs. <b>{formatAmount(discount_coupon_value)}</b>
-                          </td>
-                        </tr>
-                        <tr align="right">
-                          <td colSpan="5">Net Order Amount: {formatAmount(net_order_amount)}</td>
-                        </tr>
                       </tbody>
                     </table>
+                  </Div>
+                </Row>
+                <Row type="block" m="0" mb="1.5rem" mt="0">
+                  <Div col="8" />
+                  <Div col="4" ta="right">
+                    <Div className={styles.totalAmountRow}>
+                      Sub-Total Amount : Rs. <b>{formatAmount(sub_total_amount)}</b>
+                    </Div>
+                    <Div className={styles.totalAmountRow}>
+                      Shipping Charges : Rs. <b>{formatAmount(shipping_charges)}</b>
+                    </Div>
+                    <Div className={styles.totalAmountRow}>
+                      Discount / Coupon Value : Rs. <b>{formatAmount(discount_coupon_value)}</b>
+                    </Div>
+                    <Div className={styles.totalAmountRow}>
+                      Net Order Amount : <b>{formatAmount(net_order_amount)}</b>
+                    </Div>
                   </Div>
                 </Row>
               </Div>
