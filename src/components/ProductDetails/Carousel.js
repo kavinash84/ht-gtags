@@ -40,16 +40,17 @@ export default class ProductDetailSlider extends Component {
             verticalSwiping
             className="pdpThumbSlider"
           >
-            {data.map((slide, index) => (
+            {data.map(slide => (
               <div className={styles.pdpThumbSliderItem} key={slide.id_catalog_product_image}>
                 <ImageShimmer src={`${slide.url}-catalog_360.jpg`} style={{ width: '105px' }} height="105px">
-                  {imageURL => <Img alt={title} src={imageURL} width="105px" />}
+                  {imageURL => <Img itemProp="image" alt={title} src={imageURL} width="105px" />}
                 </ImageShimmer>
               </div>
             ))}
           </Slider>
         </Div>
         <Div col="10" pl="0.625rem" pr="0" pb="1rem">
+          <img className="hide" itemProp="image" src={(data && `${data[0].url}.jpg`) || ''} alt={title} />
           <Slider asNavFor={this.state.nav2} ref={slider => (this.slider1 = slider)}>
             {data.map(slide => (
               <CarouselItem key={slide.id_catalog_product_image} image={`${slide.url}.jpg`} name={title} />

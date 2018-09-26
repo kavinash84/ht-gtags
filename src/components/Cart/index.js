@@ -175,9 +175,9 @@ const Cart = ({
                   </Div>
                 </Row>
                 <Row ml="0" mr="0">
-                  <Div col="12" mb="0" p="0 5px">
-                    <Text mt="0.3125rem" fontSize="0.75rem">
-                      International card also accept.
+                  <Div col="12" mb="0" p="0 10px">
+                    <Text mt="0.3125rem" fontSize="0.875rem">
+                      International card also accepted.
                     </Text>
                   </Div>
                 </Row>
