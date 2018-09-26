@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
@@ -9,31 +8,28 @@ import ShippedTo from 'hometown-components/lib/ShippedTo';
 import Heading from 'hometown-components/lib/Heading';
 import Text from 'hometown-components/lib/Text';
 import Img from 'hometown-components/lib/Img';
+import ImageShimmer from 'hometown-components/lib/ImageShimmer';
 import { formatAmount } from 'utils/formatters';
 import TitleBar from '../TitleBar';
 
 const PaymentSuccessIcon = require('../../../static/success.svg');
 
-const mapStateToProps = ({ paymentstatus: { data, loaded, error } }) => ({
-  isLoaded: loaded,
-  error,
-  ...data
-});
-
 /* eslint-disable camelcase */
 const PaymentSuccess = ({
-  order_no,
-  order_date,
-  shipping_address,
-  cart_products,
-  sub_total_amount,
-  shipping_charges,
-  discount_coupon_value,
-  net_order_amount,
-  isLoaded,
+  data: {
+    order_no,
+    order_date,
+    shipping_address,
+    cart_products,
+    sub_total_amount,
+    shipping_charges,
+    discount_coupon_value,
+    net_order_amount
+  },
+  loaded,
   error
 }) => {
-  if (isLoaded && !error) {
+  if (loaded && !error) {
     return (
       <Div type="block">
         <TitleBar title="Payment Success" />
@@ -82,7 +78,9 @@ const PaymentSuccess = ({
                         {cart_products.map((product, index) => (
                           <tr key={String(index)}>
                             <td>
-                              <img className="thumb" src={product.image_url} alt={product.name} />
+                              <ImageShimmer src={product.image_url} height="60px">
+                                {imageURL => <img className="thumb" src={imageURL} alt={product.name} />}
+                              </ImageShimmer>
                             </td>
                             <td>{product.name}</td>
                             <td>{product.delivery_text}</td>
@@ -123,31 +121,32 @@ const PaymentSuccess = ({
 };
 
 PaymentSuccess.defaultProps = {
-  isLoaded: false,
-  order_date: '',
-  shipping_address: {},
-  sub_total_amount: 0,
-  shipping_charges: 0,
-  discount_coupon_value: 0,
-  net_order_amount: 0,
-  cart_products: [],
+  data: {
+    order_date: '',
+    shipping_address: {},
+    sub_total_amount: 0,
+    shipping_charges: 0,
+    discount_coupon_value: 0,
+    net_order_amount: 0,
+    cart_products: []
+  },
+  loaded: false,
   error: ''
 };
 
 PaymentSuccess.propTypes = {
-  order_no: PropTypes.string.isRequired,
-  order_date: PropTypes.string,
-  shipping_address: PropTypes.object,
-  cart_products: PropTypes.array,
-  sub_total_amount: PropTypes.number,
-  shipping_charges: PropTypes.number,
-  discount_coupon_value: PropTypes.number,
-  net_order_amount: PropTypes.number,
-  isLoaded: PropTypes.bool,
+  data: PropTypes.shape({
+    order_no: PropTypes.string.isRequired,
+    order_date: PropTypes.string,
+    shipping_address: PropTypes.object,
+    cart_products: PropTypes.array,
+    sub_total_amount: PropTypes.number,
+    shipping_charges: PropTypes.number,
+    discount_coupon_value: PropTypes.number,
+    net_order_amount: PropTypes.number
+  }),
+  loaded: PropTypes.bool,
   error: PropTypes.string
 };
 
-export default connect(
-  mapStateToProps,
-  null
-)(PaymentSuccess);
+export default PaymentSuccess;

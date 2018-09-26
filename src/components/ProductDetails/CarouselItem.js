@@ -1,31 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactImageMagnify from 'react-image-magnify';
+import Img from 'hometown-components/lib/Img';
+import ImageShimmer from 'hometown-components/lib/ImageShimmer';
 
 const getLowResolution = url => url.replace('.jpg', '-product_500.jpg');
 
 const CategoryItem = ({ image, name }) => (
-  <ReactImageMagnify
-    {...{
-      smallImage: {
-        alt: name,
-        isFluidWidth: true,
-        src: getLowResolution(image)
-      },
-      largeImage: {
-        src: image,
-        alt: name,
-        width: 800,
-        height: 800
-      },
-      enlargedImagePortalId: 'portal',
-      enlargedImageContainerDimensions: {
-        width: '75%',
-        height: '75%'
-      },
-      enlargedImageContainerClassName: 'enlarge'
+  <ImageShimmer src={image} height="545px">
+    {(imageURL, error) => {
+      if (error) return <Img alt={name} src={imageURL} height="545px" />;
+      return (
+        <ReactImageMagnify
+          {...{
+            smallImage: {
+              alt: name,
+              isFluidWidth: true,
+              src: getLowResolution(imageURL)
+            },
+            largeImage: {
+              src: imageURL,
+              alt: name,
+              width: 800,
+              height: 800
+            },
+            enlargedImagePortalId: 'portal',
+            enlargedImageContainerDimensions: {
+              width: '75%',
+              height: '75%'
+            },
+            enlargedImageContainerClassName: 'enlarge'
+          }}
+        />
+      );
     }}
-  />
+  </ImageShimmer>
 );
 
 CategoryItem.defaultProps = {

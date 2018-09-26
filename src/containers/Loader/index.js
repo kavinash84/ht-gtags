@@ -1,9 +1,10 @@
 import React from 'react';
 import Loadable from 'react-loadable';
+import LoaderShimmer from './LoaderShimmer';
 
 const CustomLoader = () => (
   <div>
-    <p>Loading...!!</p>
+    <LoaderShimmer />
   </div>
 );
 
