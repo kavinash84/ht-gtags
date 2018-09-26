@@ -16,7 +16,7 @@ const adjustSlides = length => ({
 const CategoryCarousel = ({ data, categoryName, layout }) => (
   <Section p="0" pt="0" mb="1.5rem" className="catCarousel">
     <Container pr="0" pl="0">
-      <Title title={categoryName} subTitle="" ta="left" />
+      <Title title={categoryName} subTitle="" ta="center" />
       <Row display="block" pt="0" ml="0" mr="0">
         <SlickSlider settings={adjustSlides(data.length)}>
           {data.map((slide, index) => (
