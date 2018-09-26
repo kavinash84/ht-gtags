@@ -72,6 +72,7 @@ app.use(express.static(path.join(__dirname, '..', 'static')));
 
 app.use((req, res, next) => {
   res.setHeader('X-Forwarded-For', req.ip);
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
   return next();
 });
 

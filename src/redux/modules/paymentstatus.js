@@ -22,7 +22,8 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: true,
-        data: action.result
+        data: action.result,
+        error: (action.result && action.result.error_message) || ''
       };
     case LOAD_FAIL:
       return {
