@@ -8,6 +8,7 @@ import ShippedTo from 'hometown-components/lib/ShippedTo';
 import Heading from 'hometown-components/lib/Heading';
 import Text from 'hometown-components/lib/Text';
 import Img from 'hometown-components/lib/Img';
+import ImageShimmer from 'hometown-components/lib/ImageShimmer';
 import { formatAmount } from 'utils/formatters';
 import TitleBar from '../TitleBar';
 
@@ -77,7 +78,9 @@ const PaymentSuccess = ({
                         {cart_products.map((product, index) => (
                           <tr key={String(index)}>
                             <td>
-                              <img className="thumb" src={product.image_url} alt={product.name} />
+                              <ImageShimmer src={product.image_url} height="60px">
+                                {imageURL => <img className="thumb" src={imageURL} alt={product.name} />}
+                              </ImageShimmer>
                             </td>
                             <td>{product.name}</td>
                             <td>{product.delivery_text}</td>
