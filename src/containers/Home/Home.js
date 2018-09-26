@@ -40,7 +40,7 @@ export default class Home extends Component {
   componentDidMount() {
     const { isLoggedIn } = this.props;
     if (!isLoggedIn && !(cookie.get('PROMO_SIGNUP') === 'AVOID')) {
-      setTimeout(() => this.handleModal(), 60000);
+      setTimeout(() => this.handleModal(), 5000);
     }
   }
   handleRibbon = () => {
