@@ -19,6 +19,7 @@ import { notifSend } from 'redux/modules/notifs';
 import { isBlank } from 'js-utility-functions';
 import MenuCheckout from './MenuCheckout';
 import AddressForm from './AddressForm';
+// import { getNotDelivered } from 'selectors/cart';
 
 const addIcon = require('../../../static/round-add_circle_outline.svg');
 const styles = require('./DeliveryAddress.scss');
@@ -71,7 +72,7 @@ const formValdiator = (props, data, formType) => {
   };
 };
 const mapStateToProps = ({
-  userLogin, app, checkout, myaddress, address, profile
+  userLogin, app, checkout, myaddress, address, profile, cart
 }) => ({
   isLoggedIn: userLogin.isLoggedIn,
   sessionId: app.sessionId,
@@ -81,7 +82,8 @@ const mapStateToProps = ({
   currentaddressindex: address.shipping.index,
   shippingIsBilling: address.shippingIsBilling,
   userEmail: profile.data.email,
-  address
+  address,
+  cart
 });
 const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
 @withRouter
@@ -93,26 +95,32 @@ class DeliveryAddress extends Component {
     openLogin: false,
     addressform: false
   };
+
   componentDidMount() {
     const { dispatch } = this.context.store;
+    const { cart, history } = this.props;
     const {
-      addresses, nextstep, setAddress, isLoggedIn, onChangeEmail, userEmail
+      addresses, nextstep, isLoggedIn, onChangeEmail, userEmail
     } = this.props;
     if (isLoggedIn) {
       onChangeEmail('shipping', userEmail);
       onChangeEmail('billing', userEmail);
     }
-    if (addresses.length) {
-      setAddress('shipping', addresses[0], 0);
+    if (addresses.length > 0) {
+      this.handleClick(0);
     }
     if (nextstep.success) {
       dispatch(resetGuestRegisterFlag());
+    }
+    if (!cart.cartCheckData) {
+      history.push('/checkout/cart');
     }
   }
   componentWillReceiveProps(nextProps) {
     const {
       isLoggedIn, nextstep, clearShippingAddress, onChangeEmail, userEmail
     } = this.props;
+
     if (isLoggedIn && nextProps.userEmail !== userEmail) {
       onChangeEmail('shipping', nextProps.userEmail);
       onChangeEmail('billing', nextProps.userEmail);
@@ -124,9 +132,7 @@ class DeliveryAddress extends Component {
       clearShippingAddress();
     }
     if (nextProps.addresses.length > 0 && nextProps.addresses.length !== this.props.addresses.length) {
-      const { setAddress } = this.props;
-      const { addresses } = nextProps;
-      setAddress('shipping', addresses[0], 0);
+      this.handleClick(0);
     }
     if (nextProps.nextstep.success && nextProps.nextstep.success !== nextstep.success) {
       const { history } = this.props;
@@ -201,11 +207,12 @@ class DeliveryAddress extends Component {
     toggleShippingIsBilling();
   };
   handleClick = (index = 0) => {
-    const { addresses, setAddress } = this.props;
+    const { addresses, setAddress, loadPincodeDetails } = this.props;
     this.setState({
       addressform: false
     });
     setAddress('shipping', addresses[index], index);
+    loadPincodeDetails('shipping', addresses[index].pincode);
   };
   toggleAddAddress = e => {
     const { setAddress, isLoggedIn, userEmail } = this.props;
@@ -386,7 +393,9 @@ DeliveryAddress.propTypes = {
   clearShippingAddress: PropTypes.func.isRequired,
   toggleShippingIsBilling: PropTypes.func.isRequired,
   userEmail: PropTypes.string,
-  onChangeEmail: PropTypes.func.isRequired
+  onChangeEmail: PropTypes.func.isRequired,
+  loadPincodeDetails: PropTypes.func.isRequired,
+  cart: PropTypes.object.isRequired
 };
 export default connect(
   mapStateToProps,

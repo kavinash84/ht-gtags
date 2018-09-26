@@ -27,3 +27,6 @@ export const getCartListFromResult = createSelector(
 );
 export const getCartListSKUFromResult = createSelector([getCartListFromResult], data =>
   data.map(item => item.configurable_sku));
+
+export const getNotDelivered = createSelector([getCartList], products =>
+  products.filter(product => product.product_info.is_deliverable === false));

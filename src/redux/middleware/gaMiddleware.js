@@ -152,8 +152,9 @@ export default function gaMiddleware() {
 
           window.dataLayer.push(eventObject);
         }
+        /* Cart Tracking */
         if (type === 'cart/ADD_TO_CART_SUCCESS') {
-          const { id_customer_cart: idcustomerCart } = action.result;
+          const { id_customer_cart: idcustomerCart, cart: { summary: { total } } } = action.result;
           const [product] =
             action.result && action.result.cart.cart.filter(item => item.id_customer_cart === idcustomerCart);
           const {
@@ -161,64 +162,79 @@ export default function gaMiddleware() {
           } = product.product_info;
           const category = categoryDetails ? categoryDetails.join('/') : null;
 
-          window.dataLayer.push({
-            event: 'addToCart',
-            ecommerce: {
-              currencyCode: 'INR',
-              add: {
-                products: [
-                  {
-                    name,
-                    price: netprice,
-                    variant: color,
-                    brand,
-                    category,
-                    list: 'Listing',
-                    id: product.configurable_sku,
-                    quantity: product.qty
-                  }
-                ]
+          window.dataLayer.push(
+            {
+              event: 'addToCart',
+              ecommerce: {
+                currencyCode: 'INR',
+                add: {
+                  products: [
+                    {
+                      name,
+                      price: netprice,
+                      variant: color,
+                      brand,
+                      category,
+                      list: 'Listing',
+                      id: product.configurable_sku,
+                      quantity: product.qty
+                    }
+                  ]
+                }
               }
+            },
+            {
+              event: 'cart change',
+              cart_total: total
             }
-          });
+          );
         }
         if (type === 'cart/REMOVE_FROM_CART_SUCCESS') {
           const { data } = getState().cart;
-          const [product] = data.filter(item => item.id_customer_cart === action.payLoad);
-          const checkKey = isKeyExists(product.product_info, 'category_details');
-          const category = checkKey
-            ? checkKey
-              .filter(x => x !== null)
-              .map(item => item.url_key)
-              .join('/')
-            : '';
-          const {
-            name, net_price: netprice, color, brand
-          } = product.product_info;
-          if (action.result) {
-            window.google_tag_params.ecomm_totalvalue = action.result.cart.summary.total;
-            window.google_tag_params.ecomm_prodid = getCartListSKUFromResult(action.result.cart);
-          }
-          window.dataLayer.push({
-            event: 'removeFromCart',
-            ecommerce: {
-              currencyCode: 'INR',
-              remove: {
-                products: [
-                  {
-                    name,
-                    price: netprice,
-                    brand,
-                    id: product.configurable_sku,
-                    category,
-                    list: 'Listing', // eg Search Result, //D
-                    variant: color,
-                    quantity: product.qty
-                  }
-                ]
-              }
+          const { cart: { summary: { total } } } = action.result;
+          const [product] = data.filter(item => item.id_customer_cart === Number(action.result.cartId));
+          if (product) {
+            const checkKey = isKeyExists(product.product_info, 'category_details');
+            const category = checkKey
+              ? checkKey
+                .filter(x => x !== null)
+                .map(item => item.url_key)
+                .join('/')
+              : '';
+            const {
+              name, net_price: netprice, color, brand
+            } = product.product_info;
+            if (action.result) {
+              window.google_tag_params.ecomm_totalvalue = action.result.cart.summary.total;
+              window.google_tag_params.ecomm_prodid = getCartListSKUFromResult(action.result.cart);
             }
-          });
+            window.dataLayer.push(
+              {
+                event: 'removeFromCart',
+                ecommerce: {
+                  currencyCode: 'INR',
+                  remove: {
+                    products: [
+                      {
+                        name,
+                        price: netprice,
+                        brand,
+                        id: product.configurable_sku,
+                        category,
+                        list: 'Listing', // eg Search Result, //D
+                        variant: color,
+                        quantity: product.qty
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                event: 'cart change',
+                cart_total: total
+              }
+            );
+          }
         }
         // Handles Checkout GA
         if (type === '@@router/LOCATION_CHANGE') {
@@ -275,11 +291,16 @@ export default function gaMiddleware() {
         // Handle Payment success
         /* eslint-disable camelcase */
         const { location: { pathname } } = getState().router;
-        if (type === '@@INIT' && pathname && pathname === '/payment-success') {
+        if (type === 'PUSH_TO_DATALAYER' && pathname && pathname === '/payment-success') {
           const { data } = getState().paymentstatus;
           if (data) {
             const {
-              cart_products: products, net_order_amount, shipping_charges, transaction_id, coupon_code
+              cart_products: products,
+              net_order_amount,
+              shipping_charges,
+              transaction_id,
+              coupon_code,
+              customer_type
             } = data;
             const skus = [];
             const cartList = products.map(x => {
@@ -306,7 +327,7 @@ export default function gaMiddleware() {
                   revenue: net_order_amount,
                   tax: '',
                   shipping: shipping_charges,
-                  coupon: coupon_code
+                  coupon: coupon_code || ''
                 },
                 products: [...cartList]
               }
@@ -314,7 +335,11 @@ export default function gaMiddleware() {
             window.google_tag_params.ecomm_pagetype = 'purchase';
             window.google_tag_params.ecomm_prodid = skus;
             window.google_tag_params.ecomm_totalvalue = net_order_amount;
-            window.dataLayer.push(paymentObj);
+            /* customer type */
+            let cust_type;
+            if (customer_type === 'returning customer') cust_type = 'Repeat';
+            else cust_type = 'Fresh';
+            window.dataLayer.push(paymentObj, { event: 'buyer_type', type: cust_type });
           }
         }
         if (type === 'mainSlider/BANNER_IMPRESSION') {

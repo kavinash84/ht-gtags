@@ -20,6 +20,7 @@ const OrderSummary = ({
   hidebutton,
   itemsCount,
   isSubmitted,
+  disabled,
   outOfStockList
 }) => (
   <Div className={styles.orderSummary}>
@@ -67,7 +68,7 @@ const OrderSummary = ({
           ls="1px"
           onClick={onClick}
           hide={hidebutton}
-          disabled={loadingnextstep || isSubmitted || (outOfStockList && outOfStockList.length > 0)}
+          disabled={loadingnextstep || isSubmitted || (outOfStockList && outOfStockList.length > 0) || disabled}
         >
           {loadingnextstep || isSubmitted ? 'Please wait...' : 'CONTINUE'}
         </Button>
@@ -81,7 +82,8 @@ OrderSummary.defaultProps = {
   hidebutton: false,
   itemsCount: 0,
   isSubmitted: false,
-  outOfStockList: []
+  outOfStockList: [],
+  disabled: false
 };
 
 OrderSummary.propTypes = {
@@ -94,7 +96,8 @@ OrderSummary.propTypes = {
   hidebutton: PropTypes.bool,
   itemsCount: PropTypes.number,
   isSubmitted: PropTypes.bool,
-  outOfStockList: PropTypes.array
+  outOfStockList: PropTypes.array,
+  disabled: PropTypes.bool
 };
 
 export default OrderSummary;
