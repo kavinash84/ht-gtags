@@ -11,12 +11,16 @@ import { connect } from 'react-redux';
 import OfferBanner from 'components/Home/OfferBanner';
 import StoresCarousel from 'components/Stores';
 import Footer from 'components/Footer';
+import SignupModal from 'containers/Signup/SignupForm';
+import ResponsiveModal from 'components/Modal';
+import cookie from 'js-cookie';
+
 import { getCities, getOfferStripData, getMiddleBannerData } from 'selectors/homepage';
 
 @connect(({
   homepage: {
     categories, banners, products, hashtags, offers, recentlyviewed
-  }, stores
+  }, stores, userLogin
 }) => ({
   banners: banners.data,
   homepageCategories: categories.data,
@@ -25,15 +29,30 @@ import { getCities, getOfferStripData, getMiddleBannerData } from 'selectors/hom
   hashtags: hashtags.data,
   offerStrip: getOfferStripData(offers),
   middleBanner: getMiddleBannerData(offers),
-  recentlyviewed: recentlyviewed.data
+  recentlyviewed: recentlyviewed.data,
+  isLoggedIn: userLogin.isLoggedIn
 }))
 export default class Home extends Component {
   state = {
-    showRibbon: true
+    showRibbon: true,
+    openSignup: false
   };
+  componentDidMount() {
+    const { isLoggedIn } = this.props;
+    if (!isLoggedIn && !(cookie.get('PROMO_SIGNUP') === 'AVOID')) {
+      setTimeout(() => this.handleModal(), 60000);
+    }
+  }
   handleRibbon = () => {
     this.setState({
       showRibbon: !this.state.showRibbon
+    });
+  };
+  handleModal = () => {
+    this.setState({ openSignup: !this.state.openSignup }, () => {
+      if (!this.state.openSignup) {
+        cookie.set('PROMO_SIGNUP', 'AVOID', { expires: 7 });
+      }
     });
   };
   render() {
@@ -91,6 +110,13 @@ export default class Home extends Component {
           )}
           <StoresCarousel cities={cities} />
         </div>
+        <ResponsiveModal
+          classNames={{ modal: 'signupModal' }}
+          onCloseModal={this.handleModal}
+          open={this.state.openSignup}
+        >
+          <SignupModal />
+        </ResponsiveModal>
         <Footer />
       </Section>
     );
@@ -104,7 +130,8 @@ Home.defaultProps = {
   cities: [],
   offerStrip: {},
   recentlyviewed: [],
-  middleBanner: {}
+  middleBanner: {},
+  isLoggedIn: false
 };
 
 Home.propTypes = {
@@ -114,5 +141,6 @@ Home.propTypes = {
   cities: PropTypes.array,
   offerStrip: PropTypes.object,
   recentlyviewed: PropTypes.array,
-  middleBanner: PropTypes.object
+  middleBanner: PropTypes.object,
+  isLoggedIn: PropTypes.bool
 };
