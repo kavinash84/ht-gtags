@@ -356,16 +356,18 @@ export default function gaMiddleware() {
             });
             const paymentObj = {
               event: 'purchase',
-              purchase: {
-                actionField: {
-                  id: transaction_id,
-                  affiliation: 'Online Store',
-                  revenue: net_order_amount,
-                  tax: '',
-                  shipping: shipping_charges,
-                  coupon: coupon_code || ''
-                },
-                products: [...cartList]
+              ecommerce: {
+                purchase: {
+                  actionField: {
+                    id: transaction_id,
+                    affiliation: 'Online Store',
+                    revenue: net_order_amount,
+                    tax: '',
+                    shipping: shipping_charges,
+                    coupon: coupon_code || ''
+                  },
+                  products: [...cartList]
+                }
               }
             };
             window.google_tag_params.ecomm_pagetype = 'purchase';
