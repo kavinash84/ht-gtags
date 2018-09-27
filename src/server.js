@@ -104,6 +104,24 @@ app.use('/checkout/finish/payment/', async (req, res) => {
   }
 });
 
+/* Blanket Redirection for old urls Color Products */
+app.get(/\/color-/, (req, res) => {
+  const { url } = req;
+  const [redirect] = url.split('/color-');
+  return res.redirect(301, redirect || '/');
+});
+
+/* Redirection from urls */
+app.get(/\/(.*)-(\d+).html/, async (req, res, next) => {
+  const filePath = path.join(__dirname, 'data', 'urls.json');
+  const json = await JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  if (json && json.length) {
+    const [redirect] = json.filter(x => x.url.lowerCase() === req.url.lowerCase());
+    return res.redirect(301, (redirect && redirect.endpoint) || '/');
+  }
+  return next();
+});
+
 app.use(async (req, res) => {
   if (__DEVELOPMENT__) {
     // Do not cache webpack stats: the script file would change since
