@@ -64,7 +64,7 @@ const initialState = {
     state: '',
     stateFeedBackError: false,
     stateFeedBackMessage: 'State cannot be Empty',
-    index: 0
+    index: -1
   },
   billing: {
     fullName: '',
