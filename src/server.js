@@ -104,6 +104,23 @@ app.use('/checkout/finish/payment/', async (req, res) => {
   }
 });
 
+/* Blanket Redirection for old urls Color Products */
+app.get(/\/color-/, (req, res) => {
+  const { url } = req;
+  const [redirect] = url.split('/color-');
+  return res.redirect(301, redirect || '/');
+});
+
+/* Redirection from urls */
+app.get(/\/(.*)-(\d+).html/, async (req, res, next) => {
+  const data = require('./data/urls.json');
+  if (data && data[req.url.toLowerCase()]) {
+    const redirect = data[req.url.toLowerCase()];
+    return res.redirect(301, redirect || '/');
+  }
+  return next();
+});
+
 app.use(async (req, res) => {
   if (__DEVELOPMENT__) {
     // Do not cache webpack stats: the script file would change since
