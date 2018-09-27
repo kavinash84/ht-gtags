@@ -20,6 +20,8 @@ const LOAD_PINCODE_DATA_SUCCESS = 'pincode/LOAD_PINCODE_DATA_SUCCESS';
 const LOAD_PINCODE_DATA_FAIL = 'pincode/LOAD_PINCODE_DATA_FAIL';
 const STOP_LOADING = 'pincode/STOP_LOADING';
 
+const SET_PINCODE_DETAILS = 'pincode/SET_PINCODE_DETAILS';
+
 const initialState = {
   loading: false,
   loaded: false,
@@ -111,6 +113,15 @@ export default function reducer(state = initialState, action = {}) {
         loading: false,
         loaded: false
       };
+    case SET_PINCODE_DETAILS:
+      return {
+        ...state,
+        selectedPincode: (action.response.pincode && String(action.response.pincode)) || action.pincode,
+        pincodeQuery: action.pincode,
+        city: action.response.city,
+        loading: false,
+        loaded: true
+      };
     default:
       return state;
   }
@@ -165,3 +176,9 @@ export const setPincode = pincode => (dispatch, getState) =>
     },
     pincode
   });
+
+export const setPincodeDetails = (response, pincode) => ({
+  type: SET_PINCODE_DETAILS,
+  response,
+  pincode
+});
