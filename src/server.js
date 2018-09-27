@@ -113,11 +113,10 @@ app.get(/\/color-/, (req, res) => {
 
 /* Redirection from urls */
 app.get(/\/(.*)-(\d+).html/, async (req, res, next) => {
-  const filePath = path.join(__dirname, 'data', 'urls.json');
-  const json = await JSON.parse(fs.readFileSync(filePath, 'utf8'));
-  if (json && json.length) {
-    const [redirect] = json.filter(x => x.url.lowerCase() === req.url.lowerCase());
-    return res.redirect(301, (redirect && redirect.endpoint) || '/');
+  const data = require('./data/urls.json');
+  if (data && data[req.url.toLowerCase()]) {
+    const redirect = data[req.url.toLowerCase()];
+    return res.redirect(301, redirect || '/');
   }
   return next();
 });
