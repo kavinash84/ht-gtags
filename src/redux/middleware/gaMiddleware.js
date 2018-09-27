@@ -374,9 +374,7 @@ export default function gaMiddleware() {
             window.google_tag_params.ecomm_prodid = skus;
             window.google_tag_params.ecomm_totalvalue = net_order_amount;
             /* customer type */
-            let cust_type;
-            if (customer_type === 'returning customer') cust_type = 'Repeat';
-            else cust_type = 'Fresh';
+            const cust_type = customer_type === 'returning customer' ? 'Repeat' : 'Fresh';
             window.dataLayer.push(paymentObj, { event: 'buyer_type', type: cust_type });
           }
         }
