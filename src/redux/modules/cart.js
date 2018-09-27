@@ -242,6 +242,7 @@ export const updateCart = (cartId, sku, simpleSku, session, pincode, qty) => dis
           qty
         };
         const response = await client.put(ADDTOCART_API, postData);
+        response.updateType = qty === 1 ? 'add' : 'remove';
         return response;
       } catch (error) {
         throw error;

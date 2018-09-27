@@ -189,6 +189,42 @@ export default function gaMiddleware() {
             }
           );
         }
+        if (type === 'cart/UPDATE_CART_SUCCESS') {
+          const { id_customer_cart: idcustomerCart, cart: { summary: { total } } } = action.result;
+          const [product] =
+            action.result && action.result.cart.cart.filter(item => item.id_customer_cart === idcustomerCart);
+          const {
+            name, net_price: netprice, color, brand, category_details: categoryDetails
+          } = product.product_info;
+          const category = categoryDetails ? categoryDetails.join('/') : null;
+          const { updateType } = action.result;
+          window.dataLayer.push(
+            {
+              event: updateType === 'add' ? 'addToCart' : 'removeFromCart',
+              ecommerce: {
+                currencyCode: 'INR',
+                [updateType]: {
+                  products: [
+                    {
+                      name,
+                      price: netprice,
+                      variant: color,
+                      brand,
+                      category,
+                      list: 'Listing',
+                      id: product.configurable_sku,
+                      quantity: product.qty
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              event: 'cart change',
+              cart_total: total
+            }
+          );
+        }
         if (type === 'cart/REMOVE_FROM_CART_SUCCESS') {
           const { data } = getState().cart;
           const { cart: { summary: { total } } } = action.result;
