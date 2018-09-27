@@ -189,6 +189,42 @@ export default function gaMiddleware() {
             }
           );
         }
+        if (type === 'cart/UPDATE_CART_SUCCESS') {
+          const { id_customer_cart: idcustomerCart, cart: { summary: { total } } } = action.result;
+          const [product] =
+            action.result && action.result.cart.cart.filter(item => item.id_customer_cart === idcustomerCart);
+          const {
+            name, net_price: netprice, color, brand, category_details: categoryDetails
+          } = product.product_info;
+          const category = categoryDetails ? categoryDetails.join('/') : null;
+          const { updateType } = action.result;
+          window.dataLayer.push(
+            {
+              event: updateType === 'add' ? 'addToCart' : 'removeFromCart',
+              ecommerce: {
+                currencyCode: 'INR',
+                [updateType]: {
+                  products: [
+                    {
+                      name,
+                      price: netprice,
+                      variant: color,
+                      brand,
+                      category,
+                      list: 'Listing',
+                      id: product.configurable_sku,
+                      quantity: product.qty
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              event: 'cart change',
+              cart_total: total
+            }
+          );
+        }
         if (type === 'cart/REMOVE_FROM_CART_SUCCESS') {
           const { data } = getState().cart;
           const { cart: { summary: { total } } } = action.result;
@@ -320,25 +356,25 @@ export default function gaMiddleware() {
             });
             const paymentObj = {
               event: 'purchase',
-              purchase: {
-                actionField: {
-                  id: transaction_id,
-                  affiliation: 'Online Store',
-                  revenue: net_order_amount,
-                  tax: '',
-                  shipping: shipping_charges,
-                  coupon: coupon_code || ''
-                },
-                products: [...cartList]
+              ecommerce: {
+                purchase: {
+                  actionField: {
+                    id: transaction_id,
+                    affiliation: 'Online Store',
+                    revenue: net_order_amount,
+                    tax: '',
+                    shipping: shipping_charges,
+                    coupon: coupon_code || ''
+                  },
+                  products: [...cartList]
+                }
               }
             };
             window.google_tag_params.ecomm_pagetype = 'purchase';
             window.google_tag_params.ecomm_prodid = skus;
             window.google_tag_params.ecomm_totalvalue = net_order_amount;
             /* customer type */
-            let cust_type;
-            if (customer_type === 'returning customer') cust_type = 'Repeat';
-            else cust_type = 'Fresh';
+            const cust_type = customer_type === 'returning customer' ? 'Repeat' : 'Fresh';
             window.dataLayer.push(paymentObj, { event: 'buyer_type', type: cust_type });
           }
         }
