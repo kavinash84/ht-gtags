@@ -130,7 +130,9 @@ export default class Listing extends Component {
       currentPage
     } = this.props;
     let page;
-    const { location: { search, pathname } } = history;
+    const {
+      location: { search, pathname }
+    } = history;
     if (search !== '') {
       [, page] = search.replace('?', '').split('page=');
     } else page = currentPage;
@@ -155,7 +157,6 @@ export default class Listing extends Component {
               <Empty
                 title="Sorry no results found"
                 subTitle="Please check the Spelling or by a different search"
-                btnName="Search Again"
                 url="/"
                 bg="#fafafa"
               >

@@ -100,15 +100,15 @@ class DeliveryAddress extends Component {
     const { dispatch } = this.context.store;
     const { cart, history } = this.props;
     const {
-      addresses, nextstep, isLoggedIn, onChangeEmail, userEmail
+      nextstep, isLoggedIn, onChangeEmail, userEmail
     } = this.props;
     if (isLoggedIn) {
       onChangeEmail('shipping', userEmail);
       onChangeEmail('billing', userEmail);
     }
-    if (addresses.length > 0) {
-      this.handleClick(0);
-    }
+    // if (addresses.length > 0) {
+    //   this.handleClick(0);
+    // }
     if (nextstep.success) {
       dispatch(resetGuestRegisterFlag());
     }
@@ -131,9 +131,9 @@ class DeliveryAddress extends Component {
       });
       clearShippingAddress();
     }
-    if (nextProps.addresses.length > 0 && nextProps.addresses.length !== this.props.addresses.length) {
-      this.handleClick(0);
-    }
+    // if (nextProps.addresses.length > 0 && nextProps.addresses.length !== this.props.addresses.length) {
+    //   this.handleClick(0);
+    // }
     if (nextProps.nextstep.success && nextProps.nextstep.success !== nextstep.success) {
       const { history } = this.props;
       history.push('/checkout/payment-options');
@@ -206,7 +206,7 @@ class DeliveryAddress extends Component {
     const { toggleShippingIsBilling } = this.props;
     toggleShippingIsBilling();
   };
-  handleClick = (index = 0) => {
+  handleClick = index => {
     const { addresses, setAddress, loadPincodeDetails } = this.props;
     this.setState({
       addressform: false
@@ -375,7 +375,7 @@ DeliveryAddress.defaultProps = {
   history: {},
   location: {},
   addresses: [],
-  currentaddressindex: 0,
+  currentaddressindex: -1,
   userEmail: ''
 };
 DeliveryAddress.propTypes = {

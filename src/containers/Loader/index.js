@@ -2,11 +2,7 @@ import React from 'react';
 import Loadable from 'react-loadable';
 import LoaderShimmer from './LoaderShimmer';
 
-const CustomLoader = () => (
-  <div>
-    <LoaderShimmer />
-  </div>
-);
+const CustomLoader = () => <LoaderShimmer />;
 
 export default opts => {
   const optionsObj = {

@@ -230,7 +230,7 @@ export const addToCart = (key, sku, simpleSku, session, pincode) => dispatch => 
 
 export const updateCart = (cartId, sku, simpleSku, session, pincode, qty) => dispatch => {
   dispatch(setCurrentKey(cartId));
-  return {
+  return dispatch({
     types: [UPDATE_CART, UPDATE_CART_SUCCESS, UPDATE_CART_FAIL],
     promise: async ({ client }) => {
       try {
@@ -242,12 +242,13 @@ export const updateCart = (cartId, sku, simpleSku, session, pincode, qty) => dis
           qty
         };
         const response = await client.put(ADDTOCART_API, postData);
+        response.updateType = qty === 1 ? 'add' : 'remove';
         return response;
       } catch (error) {
         throw error;
       }
     }
-  };
+  });
 };
 
 export const removeFromCart = (cartId, session, pincode = PINCODE) => dispatch => {
