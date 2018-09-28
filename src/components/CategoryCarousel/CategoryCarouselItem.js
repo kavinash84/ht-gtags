@@ -19,10 +19,16 @@ const CategoryItem = ({ image, name, url }) => (
   </Div>
 );
 
+CategoryItem.defaultProps = {
+  image: '',
+  name: '',
+  url: ''
+};
+
 CategoryItem.propTypes = {
-  image: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired
+  image: PropTypes.string,
+  name: PropTypes.string,
+  url: PropTypes.string
 };
 
 export default CategoryItem;

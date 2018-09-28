@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
@@ -27,7 +28,13 @@ import { setProductPosition } from 'redux/modules/productdetails';
 import { formatAmount } from 'utils/formatters';
 import { calculateDiscount, calculateSavings, calculateLowestEmi } from 'utils/helper';
 import { getSKUList } from 'selectors/wishlist';
+import {
+  groupedAttributes as getgroupedAttributes,
+  categoryDetails as getcategoryDetails,
+  category as getCategory
+} from 'selectors/product';
 
+import { productPageTitle, productName, productMetaDescription, productMetaKeywords } from 'utils/seo';
 import ProductDetailsCarousel from './Carousel';
 import BreadCrumb from './BreadCrumb';
 import Pincode from './Pincode';
@@ -75,7 +82,10 @@ const mapStateToProps = ({
   wishList: getSKUList(wishlist),
   wishListData: wishlist.data,
   isLoggedIn: userLogin.isLoggedIn,
-  loadingList: wishlist.loadingList
+  loadingList: wishlist.loadingList,
+  gattributes: getgroupedAttributes(productdetails),
+  categoryDetails: getcategoryDetails(productdetails),
+  category: getCategory(productdetails)
 });
 
 class ProductDetails extends React.Component {
@@ -129,7 +139,10 @@ class ProductDetails extends React.Component {
       wishlistToggle,
       addToWaitList,
       toggleReviewBox,
-      deliveryDateLoading
+      deliveryDateLoading,
+      categoryDetails,
+      gattributes,
+      category
     } = this.props;
     const {
       meta,
@@ -137,13 +150,11 @@ class ProductDetails extends React.Component {
       simples,
       attributes,
       delivery_details: deliveryDetails,
-      // attributes,
       grouped_attributes: groupedAttributes,
       sku,
       groupedattributes,
       reviews: { count, rating }
     } = product;
-    const { category_details: categoryDetails } = meta;
     const { short_description: shortDescription } = attributes;
     const simpleSku = Object.keys(simples)[0];
     // const shipping = simples[simpleSku].groupedattributes.product_shipping_cost;
@@ -153,9 +164,26 @@ class ProductDetails extends React.Component {
     const offerImage = simples[simpleSku].groupedattributes.offer_image || null;
     const { showmore } = this.state;
     const isEmiAvailable = Number(checkSpecialPrice) >= 3000;
+    const {
+      family_name: family, z_main_material: material, color, brand
+    } = gattributes;
+    const { name: categoryName } = category;
+    const name = productName({
+      family,
+      material,
+      color,
+      brand,
+      category: categoryName
+    });
+
     return (
       <Div type="block">
         <Section p="0" mb="0" className={styles.pdpWrapper}>
+          <Helmet>
+            <title>{productPageTitle(name)}</title>
+            <meta name="keywords" content={productMetaKeywords(categoryName, material)} />
+            <meta name="description" content={productMetaDescription(name, categoryName, material, color)} />
+          </Helmet>
           <Container type="container" pr="0" pl="0">
             <Row display="block" mt="0" mb="0" mr="0" ml="0">
               <Div>
@@ -190,7 +218,7 @@ class ProductDetails extends React.Component {
                   <div id="portal" className="portal" />
                   <Div className={styles.titleWrapper}>
                     <TitlePrice
-                      name={meta.name}
+                      name={name}
                       price={formatAmount(price)}
                       discPrice={formatAmount(checkSpecialPrice)}
                       savingsRs={formatAmount(calculateSavings(price, checkSpecialPrice) || '')}
@@ -215,7 +243,7 @@ class ProductDetails extends React.Component {
                   <Row display="block" mt="0.3125rem" mb="0" mr="0.9375rem" ml="0.9375rem">
                     <ServiceDetails
                       deliverBy={
-                        (deliveryInfo && deliveryInfo[0].value) || (deliveryDetails && deliveryDetails[0].value)
+                        (deliveryInfo && deliveryInfo[0].value) || (deliveryDetails[0] && deliveryDetails[0].value)
                       }
                       emiStarting={formatAmount(calculateLowestEmi(emidata, price))}
                       shipping={checkSpecialPrice}
@@ -324,6 +352,9 @@ ProductDetails.propTypes = {
   wishlistToggle: PropTypes.func.isRequired,
   addToWaitList: PropTypes.func.isRequired,
   toggleReviewBox: PropTypes.func.isRequired,
-  deliveryDateLoading: PropTypes.bool
+  deliveryDateLoading: PropTypes.bool,
+  categoryDetails: PropTypes.object.isRequired,
+  gattributes: PropTypes.object.isRequired,
+  category: PropTypes.object.isRequired
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

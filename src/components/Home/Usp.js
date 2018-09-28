@@ -19,7 +19,7 @@ const usp6Icon = require('../../../static/usp-6.png');
 const Usp = () => (
   <Div>
     <Container pr="0" pl="0">
-      <Section p="1rem 1rem" mt="2rem" mb="2rem" className={styles.hashTags} bg="bg">
+      <Section p="1rem 1rem" mt="2rem" mb="2rem" bg="bg">
         <Row>
           <Div display="flexEqual" ta="center" className={styles.uspImg}>
             <Img src={usp1Icon} height="60px" width="auto" m="auto" alt="Free Delivery" />
@@ -27,7 +27,7 @@ const Usp = () => (
               Free Delivery
             </Heading>
             <Text ta="center" color="#7c7c7b" fontSize="0.75rem" fontFamily="light" mb="0" mt="0">
-              Assuered
+              Assured
             </Text>
           </Div>
           <Div display="flexEqual" ta="center" className={styles.uspImg}>
