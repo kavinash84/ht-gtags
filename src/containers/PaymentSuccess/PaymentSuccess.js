@@ -10,13 +10,13 @@ import { connect } from 'react-redux';
   error
 }))
 export default class PaymentSuccessContainer extends Component {
-  static contextTypes = {
-    store: PropTypes.object.isRequired
-  };
   static propTypes = {
     data: PropTypes.object,
     error: PropTypes.string,
     loaded: PropTypes.bool
+  };
+  static contextTypes = {
+    store: PropTypes.object.isRequired
   };
   static defaultProps = {
     data: {},

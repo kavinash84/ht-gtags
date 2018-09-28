@@ -37,7 +37,7 @@ export default class Category extends Component {
           <Container pr="0" pl="0">
             <Row display="block" pt="2.25rem" ml="0" mr="0">
               <Div col={2}>
-                <Title title="Categories" subTitle="" ta="left" />
+                <Title title="Categories" subTitle="" ta="left" titleColor="#424242" />
                 <CategoryFilters data={getSubMenu(menu, currentCategory)} />
               </Div>
               <Div col={10} pl="3rem">
