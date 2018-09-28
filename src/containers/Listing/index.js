@@ -66,7 +66,7 @@ const hooks = {
       });
     }
     if (currentPage === 1) await dispatch(resetPagination());
-    if (!isInitialListLoaded(getState(), query) || currentPage !== page) {
+    if (!isInitialListLoaded(getState(), query) || Number(currentPage) !== Number(page)) {
       await dispatch(clearPreviousList());
       await dispatch(setCurrentPage(currentPage));
       await dispatch(clearPreviousSort());

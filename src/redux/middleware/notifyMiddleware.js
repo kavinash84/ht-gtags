@@ -197,6 +197,23 @@ export default function userMiddleware() {
           dismissAfter: 4000
         }));
         break;
+
+      // Profile
+      case 'profile/UPDATE_PROFILE_SUCCESS':
+        dispatch(notifSend({
+          type: 'success',
+          msg: 'Profile Updated Succesfully !',
+          dismissAfter: 4000
+        }));
+        break;
+      case 'profile/UPDATE_PROFILE_FAIL':
+        dispatch(notifSend({
+          type: 'warning',
+          msg: SOME_ERROR,
+          dismissAfter: 4000
+        }));
+        break;
+
       default:
         break;
     }
