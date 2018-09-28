@@ -12,3 +12,8 @@ export const productMetaDescription = (name, productType = '', materialProductTy
 
 export const productMetaKeywords = (productType = '', material = '') =>
   `${productType}, ${productType} online, buy ${productType}, ${productType} price, ${productType} sale, ${material} ${productType} online shopping`;
+
+export const productUrl = (family = '', material = '', category = '', color = '', brand = 'HomeTown') => {
+  console.log(family, material, category);
+  return `${family}-${material}-${category}-${color}-${brand}`;
+};

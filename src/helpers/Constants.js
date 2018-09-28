@@ -32,7 +32,8 @@ export const categoryRoutes = [
   'homefurnishings',
   'home-improvement',
   'kitchenware',
-  'tableware'
+  'tableware',
+  'bath'
 ];
 
 export const listingRoutes = [...categoryRoutes, 'exclusive', 'clearance-sale-offer', 'appliances', 'gifts'];
