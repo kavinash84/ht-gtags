@@ -30,6 +30,37 @@ const OrderBlock = ({ order }) => (
             {order.order_date}
           </Text>
         </Div>
+
+        <Div col="3">
+          <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
+            SHIPPING ADDRESS
+          </Text>
+          <Text mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
+            {`${order.customer_first_name} ${order.customer_last_name}`}
+            <br />
+            {order.s_address_1}
+            <br />
+            {order.s_city}, {order.s_pincode}
+            <br />
+            {order.s_region}
+            <br />
+          </Text>
+        </Div>
+        <Div col="3">
+          <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
+            BILLING ADDRESS
+          </Text>
+          <Text mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
+            {`${order.customer_first_name} ${order.customer_last_name}`}
+            <br />
+            {order.b_address_1}
+            <br />
+            {order.b_city}, {order.b_pincode}
+            <br />
+            {order.b_region}
+            <br />
+          </Text>
+        </Div>
         <Div col="2">
           <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
             ORDER AMOUNT
@@ -45,7 +76,8 @@ const OrderBlock = ({ order }) => (
             <tbody>
               <tr>
                 <th colSpan="2">PRODUCT</th>
-                <th>Delivery Status</th>
+                <th>Order Status</th>
+                <th>Delivery Estimate</th>
                 {/* <th>Carrier</th>
                 <th>Tracking ID</th> */}
               </tr>
@@ -58,6 +90,8 @@ const OrderBlock = ({ order }) => (
                   </td>
                   <td width="50%">{item.product_name || 'NOT AVAILABLE'}</td>
                   <td>{item.order_item_status_display_name || 'NOT AVAILABLE'}</td>
+                  <td>{item.delivery_date_text || 'NOT AVAILABLE'}</td>
+
                   {/* <td>{item.carrier_name || 'NOT AVAILABLE'}</td>
                   <td>{item.tracking_id || 'NOT AVAILABLE'}</td> */}
                 </tr>
