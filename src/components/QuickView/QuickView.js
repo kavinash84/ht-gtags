@@ -203,7 +203,8 @@ export default class QuickView extends Component {
                   </Span>
                 </Text>
               )}
-              {deliveredBy && (
+              {deliveredBy &&
+                deliveredBy.indexOf('out') === -1 && (
                 <Text color="green" fontFamily="700" fontSize="0.857rem" mb="1rem">
                   {deliveredBy}
                 </Text>
