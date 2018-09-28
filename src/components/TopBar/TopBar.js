@@ -119,7 +119,9 @@ export default class MenuSidebar extends Component {
           <Div col="5" ta="right" pt="0.3125rem">
             <button onClick={this.onOpenPincodeModal}>
               <Img src={PinIcon} alt="Hometown" height="24px" mr="0.3125rem" float="left" />
-              <Span fontSize="0.875rem">{selectedPincode !== '' ? selectedPincode : 'Pincode'}</Span>
+              <Span fontSize="0.875rem" lh="2">
+                {selectedPincode !== '' ? selectedPincode : 'Pincode'}
+              </Span>
             </button>
             <ResponsiveModal
               classNames={{ modal: styles.pincodeModal }}

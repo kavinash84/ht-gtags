@@ -1,0 +1,14 @@
+.uspImg {
+  &:before {
+    width: 1px;
+    height: 60px;
+    background: #dadada;
+    position: absolute;
+    right: 0;
+    top: 0;
+    content: '';
+  }
+  &:last-child {
+    display: none;
+  }
+}
