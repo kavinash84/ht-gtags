@@ -214,7 +214,9 @@ class ProductDetails extends React.Component {
                   </Div>
                   <Row display="block" mt="0.3125rem" mb="0" mr="0.9375rem" ml="0.9375rem">
                     <ServiceDetails
-                      deliverBy={(deliveryInfo && deliveryInfo[0].value) || deliveryDetails[0].value}
+                      deliverBy={
+                        (deliveryInfo && deliveryInfo[0].value) || (deliveryDetails && deliveryDetails[0].value)
+                      }
                       emiStarting={formatAmount(calculateLowestEmi(emidata, price))}
                       shipping={checkSpecialPrice}
                       isEmiAvailable={isEmiAvailable}
@@ -324,7 +326,4 @@ ProductDetails.propTypes = {
   toggleReviewBox: PropTypes.func.isRequired,
   deliveryDateLoading: PropTypes.bool
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
