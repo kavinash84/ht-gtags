@@ -113,7 +113,7 @@ app.get(/\/color-/, (req, res) => {
 
 /* Redirection from urls */
 app.get(/\/(.*)-(\d+).html/, async (req, res, next) => {
-  const data = require('./data/urls.json');
+  const data = require('./data/pdp-urls.json');
   if (data && data[req.url.toLowerCase()]) {
     const redirect = data[req.url.toLowerCase()];
     return res.redirect(301, redirect || '/');
