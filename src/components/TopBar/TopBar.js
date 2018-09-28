@@ -145,15 +145,11 @@ export default class MenuSidebar extends Component {
             </ResponsiveModal>
             <a className={styles.cart} href="tel:18002100004">
               <Img src={PhoneIcon} alt="Hometown" height="24px" mr="0.3125rem" float="left" />
-              <Span fontSize="0.875em" lh="2">
-                1800-210-0004
-              </Span>
+              <Span fontSize="0.875em">1800-210-0004</Span>
             </a>
             <Link className={styles.cart} to="/store-locator">
               <Img src={PinIcon} alt="Hometown" height="24px" mr="0.3125rem" float="left" />
-              <Span fontSize="0.875em" lh="2">
-                Store Locator
-              </Span>
+              <Span fontSize="0.875em">Store Locator</Span>
             </Link>
             <Button
               p="0"
