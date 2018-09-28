@@ -27,6 +27,9 @@ const NavBar = ({
         <Link onClick={exitOnClick} to="/design-build" onMouseEnter={handleEnter('')}>
           Design & Build
         </Link>
+        <Link onClick={exitOnClick} to="/bulk-order" onMouseEnter={handleEnter('')}>
+          Bulk Order
+        </Link>
       </div>
     </Container>
   </div>

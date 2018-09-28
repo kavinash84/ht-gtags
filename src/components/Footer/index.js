@@ -160,9 +160,6 @@ const Footer = ({ menuItems }) => {
                   <Link to="/track-order">Track Order</Link>
                 </li>
                 <li>
-                  <Link to="/bulk-order">Bulk Order</Link>
-                </li>
-                <li>
                   <Link to="/return-policy">Returns</Link>
                 </li>
                 <li>
