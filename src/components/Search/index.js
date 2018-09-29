@@ -76,7 +76,10 @@ class Search extends React.Component {
       });
     }
   };
-  onSuggestionsClearRequested = async () => {
+  onSuggestionsClearRequested = () => {
+    // Implement Suggesion Clear Reuest if needed here
+  };
+  onSuggestionsClear = async () => {
     const { dispatch } = this.context.store;
     const { clearSearchQuery } = this.props;
     await dispatch(clearSearchQuery());
@@ -122,7 +125,7 @@ class Search extends React.Component {
         ) : (
           <Button
             className={styles.closeBtn}
-            onClick={this.onSuggestionsClearRequested}
+            onClick={this.onSuggestionsClear}
             btnType="custom"
             bg="transparent"
             border="none"
