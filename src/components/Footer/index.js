@@ -121,8 +121,8 @@ class Footer extends React.Component {
                     </Div>
                   </form>
                 ) : (
-                  <Text color="#ffffff" fontSize="0.955rem" mt="0" mb="0" lh="2" ta="left">
-                    Thank You! Please Check Your email.
+                  <Text color="green" fontSize="0.955rem" mt="0" mb="0" lh="2" ta="left">
+                    You have been successfully subscribed to the Newsletter
                   </Text>
                 )}
               </Div>
