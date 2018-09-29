@@ -9,6 +9,7 @@ import ProductCarousel from 'components/ProductCarousel';
 import Section from 'hometown-components/lib/Section';
 import { connect } from 'react-redux';
 import OfferBanner from 'components/Home/OfferBanner';
+import Usp from 'components/Home/Usp';
 import StoresCarousel from 'components/Stores';
 import Footer from 'components/Footer';
 import SignupModal from 'containers/Signup/SignupForm';
@@ -80,6 +81,7 @@ export default class Home extends Component {
           )}
           <Menu />
           <MainSlider data={banners} />
+          <Usp />
           {homepageCategories.map((category, index) => (
             <CategoryCarousel
               key={String(index)}

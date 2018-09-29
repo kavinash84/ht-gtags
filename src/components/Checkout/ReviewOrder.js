@@ -10,7 +10,7 @@ import Section from 'hometown-components/lib/Section';
 import Img from 'hometown-components/lib/Img';
 import Button from 'hometown-components/lib/Buttons';
 import ShippedTo from 'hometown-components/lib/ShippedTo';
-// import PaymentMethod from 'hometown-components/lib/PaymentMethod';
+import PaymentMethod from 'hometown-components/lib/PaymentMethod';
 import { bindActionCreators } from 'redux';
 import { submitPaymentDetails } from 'redux/modules/paymentoptions';
 import Footer from 'components/Footer';
@@ -80,6 +80,7 @@ class ReviewOrder extends Component {
       outOfStockList
     } = this.props;
     const isProductOutofStock = sku => outOfStockList.includes(sku);
+    const [gateway] = Object.keys(paymentDetails);
     return (
       <Div type="block">
         <MenuCheckout history={history} page="review" />
@@ -97,9 +98,9 @@ class ReviewOrder extends Component {
                       state={shipping.state}
                     />
                   </Div>
-                  {/* <Div col="4">
-                    <PaymentMethod gateway={gateway} cardtype="VISA" info={paymentinfo} />
-                    </Div> */}
+                  <Div col="4">
+                    <PaymentMethod gateway={gateway} />
+                  </Div>
                 </Row>
                 <Row type="block" m="0" mb="1.5rem" mt="0">
                   <Div col="12">

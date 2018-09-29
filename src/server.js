@@ -31,7 +31,7 @@ import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
 import { ReduxAsyncConnect, Provider } from 'components';
 import axios from 'axios';
 import getCookie from 'utils/cookies';
-import { PAYMENT_SUCCESS, PAYMENT_FAILURE } from './helpers/Constants';
+import { PAYMENT_SUCCESS, PAYMENT_FAILURE } from 'helpers/Constants';
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
@@ -113,13 +113,27 @@ app.get(/\/color-/, (req, res) => {
 
 /* Redirection from urls */
 app.get(/\/(.*)-(\d+).html/, async (req, res, next) => {
-  const data = require('./data/urls.json');
+  const data = require('./data/pdp-urls.json');
   if (data && data[req.url.toLowerCase()]) {
     const redirect = data[req.url.toLowerCase()];
     return res.redirect(301, redirect || '/');
   }
   return next();
 });
+
+/* eslint-disable max-len */
+/* Category url redirection */
+app.get(
+  /\/^(furniture|home-decor|homefurnishings|tableware|kitchenware|home-improvement|clearance-sale-offer|clearance_sale|design|design-inspiration|gifts|appliances|lighting|solidwood|test_bed|exclusive|invisible|luggage-bags)\//,
+  async (req, res, next) => {
+    const data = require('./data/category-urls.json');
+    if (data && data[req.url.toLowerCase()]) {
+      const redirect = data[req.url.toLowerCase()];
+      return res.redirect(301, redirect || '/');
+    }
+    return next();
+  }
+);
 
 app.use(async (req, res) => {
   if (__DEVELOPMENT__) {

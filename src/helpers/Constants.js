@@ -1,5 +1,3 @@
-// import { browserHistory } from 'react-router';
-
 export const SITE_URL = 'https://hometown.in';
 
 export const HOME_URL = '/';
@@ -14,11 +12,6 @@ export const FORGOT_PASSWORD_URL = '/forgot-password';
 
 export const PAYMENT_SUCCESS = '/payment-success';
 export const PAYMENT_FAILURE = '/payment-failed';
-
-// export const navigate = url => e => {
-//   e.preventDefault();
-//   browserHistory.push(url);
-// };
 
 export const PINCODE = '110001';
 /* Configs */
@@ -36,4 +29,7 @@ export const categoryRoutes = [
   'bath'
 ];
 
-export const listingRoutes = [...categoryRoutes, 'exclusive', 'clearance-sale-offer', 'appliances', 'gifts'];
+export const listingRoutes = [...categoryRoutes, 'exclusive', 'clearance-sale'];
+/* eslint-disable max-len */
+export const redirectURLs =
+  'furniture|home-decor|homefurnishings|tableware|kitchenware|home-improvement|clearance-sale-offer|clearance_sale|design|design-inspiration|gifts|appliances|lighting|solidwood|test_bed|exclusive|invisible|luggage-bags';
