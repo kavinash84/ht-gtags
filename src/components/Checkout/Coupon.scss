@@ -4,17 +4,18 @@
 .applyCoupon {
   position: relative;
   .applyCopupnField {
-    border: none;
-    border-bottom: 1px solid;
+    border: 1px solid #ededed;
     width: 100%;
+    color: rgba(0,0,0,0.5);
     font-size: 14px;
     padding-bottom: 5px;
     padding-top: 5px;
     outline: none !important;
+    padding: 10px;
   }
   .applyCouponBtn {
     position: absolute !important;
-    right: 5px;
+    right: 0;
     top: 0;
   }
 }
