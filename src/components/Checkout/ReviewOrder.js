@@ -200,4 +200,7 @@ ReviewOrder.propTypes = {
   undelivered: PropTypes.array,
   outOfStockList: PropTypes.array
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ReviewOrder);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ReviewOrder);

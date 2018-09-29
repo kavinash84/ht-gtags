@@ -357,4 +357,7 @@ ProductDetails.propTypes = {
   gattributes: PropTypes.object.isRequired,
   category: PropTypes.object.isRequired
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductDetails);
