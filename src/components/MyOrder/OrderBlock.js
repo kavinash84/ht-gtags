@@ -16,7 +16,7 @@ const OrderBlock = ({ order }) => (
     <Row type="block" m="0" mb="1rem">
       <Div col="12">
         <Heading fontSize="1.25rem" color="textLight" mb="0px" mt="0px" fontFamily="light">
-          Order No. {order.order_id}
+          Order No. {order.order_number}
         </Heading>
       </Div>
     </Row>
