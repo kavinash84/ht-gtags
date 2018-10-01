@@ -60,7 +60,8 @@ const Cart = ({
   cartUpdating,
   checkCart,
   checkingCart,
-  outOfStockList
+  outOfStockList,
+  handlePincodeModal
 }) => {
   const cartItemLoading = customerCardId => cartUpdating && currentId === customerCardId;
   const isProductOutofStock = sku => outOfStockList.includes(sku);
@@ -77,9 +78,9 @@ const Cart = ({
                     Delivery & Assembly details for pincode
                   </Label>
                   <Label className={styles.borderBottom} color="black" mt="0" ml="1rem" mb="0" mr="1rem">
-                    400002
+                    {pincode}
                   </Label>
-                  <Button fontSize="0.75rem" color="#3cc0dc" btnType="link" p="0">
+                  <Button fontSize="0.75rem" color="#3cc0dc" btnType="link" p="0" onClick={handlePincodeModal}>
                     change
                   </Button>
                 </Div>
@@ -235,7 +236,8 @@ Cart.propTypes = {
   removeFromCart: PropTypes.func.isRequired,
   checkCart: PropTypes.func.isRequired,
   checkingCart: PropTypes.bool,
-  outOfStockList: PropTypes.array
+  outOfStockList: PropTypes.array,
+  handlePincodeModal: PropTypes.func.isRequired
 };
 
 Cart.defaultProps = {
