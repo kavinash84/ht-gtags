@@ -100,7 +100,7 @@ class Coupon extends React.Component {
           ) : (
             <div>
               <Heading fontSize="0.875em" mb="0.625rem" color="secondary">
-                APPLY COUPON
+                Have a Coupon Code?
               </Heading>
               <div className={`${styles.applyCouponWrapper}`}>
                 <form onSubmit={this.handleApply}>
@@ -113,13 +113,13 @@ class Coupon extends React.Component {
                   />
                   <Button
                     className={styles.applyCouponBtn}
-                    btnType="link"
+                    btnType="primary"
                     color="#f98d29"
-                    fontFamily="medium"
-                    pl="0"
-                    pr="0"
+                    p="10px 20px"
                     fontSize="0.75rem"
                     disabled={loading}
+                    fontFamily="regular"
+                    borderRadius="0"
                     onClick={this.handleApply}
                   >
                     Apply

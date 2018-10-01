@@ -192,18 +192,6 @@ class ProductDetails extends React.Component {
                     <BreadCrumb categoryDetails={categoryDetails} />
                   </Div>
                   <Div col="12">
-                    <WishlistBtn
-                      onClick={onClickWishList(
-                        sku,
-                        wishListData,
-                        wishlistToggle,
-                        isLoggedIn,
-                        history,
-                        this.onOpenLoginModal,
-                        addToWaitList
-                      )}
-                      isWishList={isInWishList(wishList, sku)}
-                    />
                     <ProductDetailsCarousel data={images} title={meta.name} />
                   </Div>
                   {/* <Div col="10">
@@ -217,16 +205,32 @@ class ProductDetails extends React.Component {
                 <Div col="5" pt="1.5rem" pl="0.3125rem" pr="0.3125rem" pb="1rem" className={styles.pdpRightWrapper}>
                   <div id="portal" className="portal" />
                   <Div className={styles.titleWrapper}>
-                    <TitlePrice
-                      name={name}
-                      price={formatAmount(price)}
-                      discPrice={formatAmount(checkSpecialPrice)}
-                      savingsRs={formatAmount(calculateSavings(price, checkSpecialPrice) || '')}
-                      savingsPercentage={calculateDiscount(price, checkSpecialPrice)}
-                      ratings={rating}
-                      count={count}
-                      mt="1rem"
-                    />
+                    <Div col="11" mt="0">
+                      <TitlePrice
+                        name={name}
+                        price={formatAmount(price)}
+                        discPrice={formatAmount(checkSpecialPrice)}
+                        savingsRs={formatAmount(calculateSavings(price, checkSpecialPrice) || '')}
+                        savingsPercentage={calculateDiscount(price, checkSpecialPrice)}
+                        ratings={rating}
+                        count={count}
+                        mt="1rem"
+                      />
+                    </Div>
+                    <Div col="1" mt="0">
+                      <WishlistBtn
+                        onClick={onClickWishList(
+                          sku,
+                          wishListData,
+                          wishlistToggle,
+                          isLoggedIn,
+                          history,
+                          this.onOpenLoginModal,
+                          addToWaitList
+                        )}
+                        isWishList={isInWishList(wishList, sku)}
+                      />
+                    </Div>
                     <Row display="block" mb="0" mr="0.9375rem" ml="0.9375rem" className={styles.variationWrapper}>
                       {colorproducts.length > 0 && (
                         <Section mb="0.3125rem" p="0" mt="1.25rem">
@@ -257,18 +261,19 @@ class ProductDetails extends React.Component {
                   </Row>
                   {offerImage && (
                     <Row display="block" mt="0" mb="0" mr="0.9375rem" ml="0.9375rem">
-                      <Div col="6" mt="0" pr="0.3125rem">
+                      <Div col="12" mt="0" pr="0.3125rem">
                         <Img src={offerImage} alt="" width="100%" mt="0" mb="0.625rem" />
                       </Div>
                     </Row>
                   )}
-                  <Row display="block" mt="0" mb="0.625rem" mr="0.9375rem" ml="0.9375rem">
-                    <Div col="6" mt="0" pr="0.3125rem">
+                  <Row display="block" mt="0.625rem" mb="0.625rem" mr="0.9375rem" ml="0.9375rem">
+                    <Div col="8" mt="0" pr="0.3125rem">
                       <AddToCart
                         simpleSku={simpleSku}
                         sku={sku}
                         itemId={sku}
                         size="block"
+                        btnType="black"
                         isSoldOut={
                           !(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)
                         }

@@ -20,17 +20,17 @@ const ProductItem = ({
         {imageURL => <Img alt={name} src={imageURL} width="100%" className={styles.prodImage} />}
       </ImageShimmer>
       <Div className={styles.content}>
-        <Heading mb="5px" color={Theme.colors.text} fontFamily="medium" fontSize="0.9375em" ta="center">
+        <Heading mb="5px" color={Theme.colors.text} fontFamily="regular" fontSize="0.9375em" ta="center">
           {name}
         </Heading>
 
         <Div mb="0px" ta="center">
-          <Span mr="0.3125rem" color={Theme.colors.text} fontSize="0.875em" fontFamily="medium">
+          <Span mr="0.3125rem" color={Theme.colors.text} fontSize="0.875em" fontFamily="regular">
             {' '}
             Rs. {discPrice || price}{' '}
           </Span>
           {discPrice && (
-            <Span mr="0" fontSize="0.75em" fontFamily="medium">
+            <Span mr="0" fontSize="0.75em" fontFamily="regular">
               {' '}
               <s>Rs. {price}</s>
             </Span>
@@ -47,9 +47,9 @@ const ProductItem = ({
         <Div mb="0px" ta="center">
           {' '}
           {percentage && (
-            <Span fontSize="0.75rem" fontFamily="medium">
+            <Span fontSize="0.75rem" fontFamily="regular">
               Savings
-              <Span mr="0px" fontSize="0.75rem" border="none" fontFamily="medium" va="bottom">
+              <Span mr="0px" fontSize="0.75rem" border="none" fontFamily="regular" va="bottom">
                 {' '}
                 ({percentage}%)
               </Span>

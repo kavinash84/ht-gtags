@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { Label } from 'hometown-components/lib/Label';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
-import Img from 'hometown-components/lib/Img';
-import Button from 'hometown-components/lib/Buttons';
 import ShippedTo from 'hometown-components/lib/ShippedTo';
 import PaymentMethod from 'hometown-components/lib/PaymentMethod';
 import { bindActionCreators } from 'redux';
@@ -18,10 +17,11 @@ import { formatAmount } from 'utils/formatters';
 import { validatePaymentDetails } from 'utils/validation';
 import { getCartList, getNotDelivered, getStockOutProducts } from 'selectors/cart';
 import ImageShimmer from 'hometown-components/lib/ImageShimmer';
-
 import MenuCheckout from './MenuCheckout';
 import OrderSummary from './OrderSummary';
 import PaymentForm from './PaymentForm';
+
+const styles = require('../Cart/Cart.scss');
 
 const nextStep = (dispatcher, sessionId, paymentData, cardType) => e => {
   e.preventDefault();
@@ -103,52 +103,57 @@ class ReviewOrder extends Component {
                   </Div>
                 </Row>
                 <Row type="block" m="0" mb="1.5rem" mt="0">
-                  <Div col="12">
-                    <table className="ordersTable table">
-                      <tbody>
-                        <tr>
-                          <th colSpan="2">Product</th>
-                          <th>Delivery</th>
-                          <th width="100px">Quantity</th>
-                          <th width="110px">Cost</th>
-                        </tr>
-                        {results.map(item => (
-                          <tr key={item.id_customer_cart}>
-                            <td>
-                              <ImageShimmer src={item.product_info.image} width="60px" height="60px">
-                                {imageURL => <Img width="60px" src={imageURL} alt="" />}
-                              </ImageShimmer>
-                            </td>
-                            <td>{item.product_info.name}</td>
-                            <td>{item.product_info.delivery_time_text}</td>
-                            <td align="center">{item.qty}</td>
-                            <td>Rs. {formatAmount(item.product_info.net_price)}</td>
-                            {(!item.product_info.is_deliverable || isProductOutofStock(item.configurable_sku)) && (
-                              <td>
-                                <h4>
-                                  {isProductOutofStock(item.configurable_sku)
-                                    ? 'This product is out of stock please remove before proceed.'
-                                    : 'This product cannot be delivered to your pincode.'}
-                                  <br />
-                                  <Link to="/checkout/cart">
-                                    <Button
-                                      fontSize="1rem"
-                                      fontFamily="light"
-                                      color="#f98d29"
-                                      btnType="link"
-                                      p="0"
-                                      mt="0"
-                                    >
-                                      Edit Cart
-                                    </Button>
-                                  </Link>
-                                </h4>
-                              </td>
-                            )}
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
+                  <Div col="12" className="ordersTable">
+                    <Row className="tr" type="block" m="0" mb="0.5rem" mt="0">
+                      <Div className="th" col="6">
+                        Product
+                      </Div>
+                      <Div className="th" col="2">
+                        Delivery
+                      </Div>
+                      <Div className="th" col="2" width="100px" ta="center">
+                        Quantity
+                      </Div>
+                      <Div className="th" col="2">
+                        Cost
+                      </Div>
+                    </Row>
+                    {results.map(item => (
+                      <Row className="tr" type="block" m="0" mb="0.5rem" mt="0" key={item.id_customer_cart}>
+                        <Div className="td" col="1">
+                          <ImageShimmer src={item.product_info.image} height="60px">
+                            {imageURL => <img src={imageURL} alt="" />}
+                          </ImageShimmer>
+                        </Div>
+                        <Div className="td" col="5">
+                          {item.product_info.name}
+                        </Div>
+                        <Div className="td" col="2">
+                          {item.product_info.delivery_time_text}
+                        </Div>
+                        <Div className="td" col="2">
+                          {item.qty}
+                        </Div>
+                        <Div className="td" col="2" ta="center">
+                          Rs. {formatAmount(item.product_info.net_price)}
+                        </Div>
+                        {(!item.product_info.is_deliverable || isProductOutofStock(item.configurable_sku)) && (
+                          <div className={styles.loadingCart}>
+                            <h4>
+                              {isProductOutofStock(item.configurable_sku)
+                                ? 'This product is out of stock please remove before proceed.'
+                                : 'This product cannot be delivered to your pincode.'}
+                              <br />
+                              <Link to="/checkout/cart">
+                                <Label fontSize="0.875rem" fontFamily="light" color="primary" p="0" mt="5px" mb="0">
+                                  Edit Cart
+                                </Label>
+                              </Link>
+                            </h4>
+                          </div>
+                        )}
+                      </Row>
+                    ))}
                   </Div>
                 </Row>
               </Div>

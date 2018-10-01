@@ -14,6 +14,7 @@ import { PINCODE, CART_URL } from 'helpers/Constants';
 const checkSKUInCart = (list, sku) => list.includes(sku);
 const styles = require('./AddToCart.scss');
 const LoaderIcon = require('../../../static/refresh.svg');
+const CheckedIcon = require('../../../static/checked.svg');
 
 const onClick = (key, skuId, simpleSku, session, pincode) => dispatcher => e => {
   e.preventDefault();
@@ -42,7 +43,8 @@ const AddToCart = ({
   itemId,
   stateId,
   size,
-  isSoldOut
+  isSoldOut,
+  btnType
 }) => {
   const checkStatus = checkSKUInCart(cartSKUs, sku);
   const addLoading = addingToCart && stateId === itemId;
@@ -62,23 +64,33 @@ const AddToCart = ({
             <Button
               btnType="custom"
               border="1px solid"
-              bc="#f98d29"
-              color="#f98d29"
-              p="9px 15px 0"
+              bc={btnType === 'black' ? 'transparent' : '#f98d29'}
+              color={btnType === 'black' ? '#FFF' : '#f98d29'}
+              bg={btnType === 'black' ? '#515151' : 'transparent'}
+              p="7px 15px 2px"
               size={size}
               disabled={addLoading}
               onClick={onClick(itemId, sku, simpleSku, session, pincode)(addToCart)}
               className={styles.addToCartBtn}
             >
-              {!addLoading && <AddCart fill="#f98d29" />}
+              {!addLoading && <AddCart fill={btnType === 'black' ? '#FFF' : '#f98d29'} />}
               {addLoading && <Img width="24px" className="spin" src={LoaderIcon} display="inline" />}
-              <Span ml="0.625rem" fontSize="0.857rem" fontFamily="regular" color="#f98d29" va="top">
+              <Span
+                ml="0.625rem"
+                fontSize="0.857rem"
+                fontFamily="regular"
+                color={btnType === 'black' ? '#FFF' : '#f98d29'}
+                va="top"
+              >
                 {addLoading ? 'Adding..' : 'ADD TO CART'}
               </Span>
             </Button>
           ) : (
             <Div display="block" mb="0.625rem">
-              <span className={styles.addedToCart}>✓ Added to Cart</span>
+              <span className={styles.addedToCart}>
+                <Img width="22px" src={CheckedIcon} display="inline" va="middle" mr="8px" />
+                Added to Cart
+              </span>
               <Link className={styles.goToCart} to={CART_URL}>
                 Go To Cart
               </Link>
@@ -96,6 +108,7 @@ AddToCart.defaultProps = {
   itemId: '',
   stateId: '',
   size: 'default',
+  btnType: 'default',
   isSoldOut: false
 };
 
@@ -110,6 +123,7 @@ AddToCart.propTypes = {
   itemId: PropTypes.string,
   stateId: PropTypes.string,
   size: PropTypes.string,
+  btnType: PropTypes.string,
   isSoldOut: PropTypes.bool
 };
 

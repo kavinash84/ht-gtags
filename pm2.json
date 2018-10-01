@@ -8,9 +8,27 @@
         "NODE_ENV": "production",
         "PORT": 8084,
         "NODE_PATH": "src",
+        "APIHOST": "api.hometown.in/api/",
+        "APIPORT": 443,
+        "PAYMENT_URL": "https://alice.hometown.in/checkout/finish/payment/",
+        "TZ": "Asia/Kolkata"
+      },
+      "env_beta": {
+        "NODE_ENV": "production",
+        "PORT": 8084,
+        "NODE_PATH": "src",
         "APIHOST": "beta-api.hometown.in/api/",
         "APIPORT": 443,
         "PAYMENT_URL": "https://beta-alice.hometown.in/checkout/finish/payment/",
+        "TZ": "Asia/Kolkata"
+      },
+      "env_stage": {
+        "NODE_ENV": "production",
+        "PORT": 8084,
+        "NODE_PATH": "src",
+        "APIHOST": "stage-api.hometown.in/api/",
+        "APIPORT": 443,
+        "PAYMENT_URL": "https://stage-alice.hometown.in/checkout/finish/payment/",
         "TZ": "Asia/Kolkata"
       }
     }]
