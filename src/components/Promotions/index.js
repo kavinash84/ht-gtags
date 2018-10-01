@@ -16,13 +16,15 @@ const Promotions = ({ results }) => (
     <Container type="container" pr="0.5rem" pl="0.5rem">
       {results.items &&
         results.items.text && (
-        <Text
-          color="rgba(0,0,0,0.5)"
-          fontSize="0.875rem"
-          mb="1rem"
-          ml="2.125rem"
-          dangerouslySetInnerHTML={{ __html: results.items.text }}
-        />
+        <div>
+          <Text
+            color="rgba(0,0,0,0.5)"
+            fontSize="0.875rem"
+            mb="1rem"
+            ml="2.125rem"
+            dangerouslySetInnerHTML={{ __html: results.items.text }}
+          />
+        </div>
       )}
     </Container>
   </Section>
@@ -33,6 +35,6 @@ Promotions.defaultProps = {
 };
 
 Promotions.propTypes = {
-  results: PropTypes.array
+  results: PropTypes.object
 };
 export default connect(mapStateToProps)(Promotions);

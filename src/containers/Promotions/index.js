@@ -1,11 +1,13 @@
 import HomeTownLoader from 'containers/Loader';
 import { provideHooks } from 'redial';
-import { getData } from 'redux/modules/services';
+import { getData, isLoaded } from 'redux/modules/services';
 import { PROMOTIONS as PROMOTIONS_API } from 'helpers/apiUrls';
 
 const hooks = {
-  fetch: async ({ store: { dispatch } }) => {
-    dispatch(getData(PROMOTIONS_API, 'promotions'));
+  fetch: async ({ store: { dispatch, getState } }) => {
+    if (!isLoaded(getState(), 'promotions')) {
+      await dispatch(getData(PROMOTIONS_API, 'promotions'));
+    }
   }
 };
 
