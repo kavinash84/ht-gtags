@@ -57,6 +57,7 @@ import Grievance from 'containers/Grievance';
 import Terms from 'containers/Terms';
 import WhoWeAre from 'containers/WhoWeAre';
 import LoaderShimmer from 'containers/Loader/LoaderShimmer';
+import Promotions from 'containers/Promotions';
 
 import { categoryRoutes, listingRoutes } from 'helpers/Constants';
 
@@ -120,6 +121,7 @@ const routes = [
       { path: '/bulk-order', exact: true, component: BulkOrder },
       { path: '/service-signup', exact: true, component: ServiceSignUpContainer },
       { path: '/loader-shimmer', exact: true, component: LoaderShimmer },
+      { path: '/promotions', exact: true, component: Promotions },
       {
         path: `/:category(${createRegex(categoryRoutes)})`,
         exact: true,
