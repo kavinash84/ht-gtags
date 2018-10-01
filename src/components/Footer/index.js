@@ -252,6 +252,9 @@ class Footer extends React.Component {
                   <li>
                     <Link to="/sitemap.xml">Sitemap</Link>
                   </li>
+                  <li>
+                    <Link to="/promotions">Promotions</Link>
+                  </li>
                 </ul>
               </Div>
               <Div display="flexEqual" col="3">
