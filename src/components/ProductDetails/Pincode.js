@@ -74,7 +74,7 @@ class Pincode extends React.Component {
             value={pincodeQuery}
           />
           <button className={styles.pincodeCheckBtn} onClick={this.setPincodeInStore(setPincode, pincodeQuery)}>
-            Check
+            Go
           </button>
         </form>
         {validationError && <div>{validationErrorMessage}</div>}
