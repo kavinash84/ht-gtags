@@ -28,7 +28,7 @@ const onClick = (list, dispatcher) => sku => e => {
 
 const isInWishList = (list, id) => list.includes(id);
 
-const styles = require('./Wishlist.scss');
+const styles = require('../Listing/Listing.scss');
 
 const sanitizeWishList = list => list.map(item => item.product_info);
 
@@ -60,7 +60,7 @@ class Wishlist extends React.Component {
       <Section display="flex" p="0" pt="2.5rem" mb="0">
         <Container type="container" pr="0" pl="0">
           {list.map(item => (
-            <div key={item.product_info.id} className={styles.wishlistWrapper}>
+            <div key={item.product_info.id} className={styles.productWrapper}>
               <Product
                 key={item.product_info.id}
                 name={item.product_info.data.name}

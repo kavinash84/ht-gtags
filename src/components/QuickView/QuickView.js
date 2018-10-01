@@ -176,14 +176,19 @@ export default class QuickView extends Component {
                 color="rgba(0, 0, 0, 0.75)"
                 ellipsis={false}
                 fontSize="1.25rem"
-                fontFamily="medium"
+                fontFamily="regular"
                 lh="1.5"
                 mt="0"
-                mb="0.625rem"
+                mb="0.3125rem"
               >
                 <Link to={formatProductURL(name, sku)}>{name}</Link>
+                {rating > 0 && (
+                  <Rating color={color} rating={rating} ml="10px">
+                    ★ {rating}
+                  </Rating>
+                )}
               </Heading>
-              <Text>
+              <Text mt="0" mb="0.3125rem">
                 <Span color="rgba(0, 0, 0, 0.6)" fontFamily="medium" fontSize="1.325rem" mr="0.625rem">
                   ₹ {(discPrice && formatAmount(discPrice)) || (price && formatAmount(price))}
                 </Span>
@@ -194,7 +199,7 @@ export default class QuickView extends Component {
                 )}
               </Text>
               {saving && (
-                <Text color="rgba(0, 0, 0, 0.6)" fontFamily="700" fontSize="0.857rem" mb="1rem">
+                <Text color="rgba(0, 0, 0, 0.6)" fontFamily="medium" fontSize="0.857rem" mb="0.3125rem" mt="0">
                   Savings:{' '}
                   <Span color="rgba(0, 0, 0, 0.6)" fontSize="0.857rem" va="bottom">
                     ₹
@@ -205,14 +210,9 @@ export default class QuickView extends Component {
               )}
               {deliveredBy &&
                 deliveredBy.indexOf('out') === -1 && (
-                <Text color="green" fontFamily="700" fontSize="0.857rem" mb="1rem">
+                <Text color="green" fontFamily="700" fontSize="0.857rem" mt="0.3125rem" mb="1.5rem">
                   {deliveredBy}
                 </Text>
-              )}
-              {rating > 0 && (
-                <Rating color={color} rating={rating}>
-                  ★ {rating}
-                </Rating>
               )}
               {/* <Text color="rgba(0, 0, 0, 0.6)" fontFamily="700" fontSize="0.857rem" mb="1rem" mt="0.3125rem">
                 EMI:{' '}
