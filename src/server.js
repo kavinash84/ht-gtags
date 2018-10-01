@@ -77,7 +77,7 @@ app.use((req, res, next) => {
 });
 
 // parsing the request bodys
-app.use(bodyParser());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use('/checkout/finish/payment/', async (req, res) => {
   try {
@@ -208,6 +208,8 @@ app.use(async (req, res) => {
     );
     const content = ReactDOM.renderToString(component);
 
+    console.log(context);
+
     if (context.url) {
       return res.redirect(301, context.url);
     }
@@ -227,7 +229,6 @@ app.use(async (req, res) => {
         store={store}
       />
     );
-
     res.status(200).send(`<!doctype html>${ReactDOM.renderToString(html)}`);
   } catch (mountError) {
     console.log(mountError);
