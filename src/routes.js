@@ -130,7 +130,7 @@ const routes = [
         exact: true,
         component: Listing
       },
-      { component: NotFound, status: 404 }
+      { component: NotFound }
     ]
   }
 ];
