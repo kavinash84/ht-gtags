@@ -178,7 +178,7 @@ module.exports = {
 
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"',
-      'process.env.APIHOST': '"stage-node.hometown.in/api/"',
+      'process.env.APIHOST': '"stage-api.hometown.in/api/"',
       __CLIENT__: true,
       __SERVER__: false,
       __DEVELOPMENT__: false,
@@ -215,24 +215,29 @@ module.exports = {
     // new BundleAnalyzerPlugin(),
 
     new SWPrecacheWebpackPlugin({
-      cacheId: 'beta.hometown.in',
+      cacheId: 'stage.hometown.in',
       filename: 'service-worker.js',
       maximumFileSizeToCacheInBytes: 8388608,
 
       // Ensure all our static, local assets are cached.
-      staticFileGlobs: [path.dirname(assetsPath) + '/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff,woff2}'],
+      staticFileGlobs: [path.dirname(assetsPath) + '/**/*.{html,png,jpg,gif,svg,eot,ttf,woff,woff2}'],
       stripPrefix: path.dirname(assetsPath),
 
       directoryIndex: '/',
       verbose: true,
       navigateFallback: '/dist/index.html',
-      runtimeCaching: [{
-        urlPattern: /\/api\/widget\/load(.*)/,
-        handler: 'networkFirst',
-        options: {
-          debug: true
+      runtimeCaching: [
+        {
+          urlPattern: /api\/tesla\//,
+          handler: 'networkFirst',
+          options: {
+            cache: {
+              maxEntries: 25,
+              name: 'api-cache'
+            }
+          }
         }
-      }]
+      ]
     })
   ]
 };
