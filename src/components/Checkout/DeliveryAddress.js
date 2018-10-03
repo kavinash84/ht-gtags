@@ -8,6 +8,7 @@ import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
 import Button from 'hometown-components/lib/Buttons';
 import Text from 'hometown-components/lib/Text';
+import Theme from 'hometown-components/lib/Theme';
 import { Label } from 'hometown-components/lib/Label';
 import ResponsiveModal from 'components/Modal';
 import LoginModal from 'components/Login/LoginModal';
@@ -19,6 +20,8 @@ import { notifSend } from 'redux/modules/notifs';
 import { isBlank } from 'js-utility-functions';
 import MenuCheckout from './MenuCheckout';
 import AddressForm from './AddressForm';
+import OrderSummary from './OrderSummary';
+
 // import { getNotDelivered } from 'selectors/cart';
 
 const addIcon = require('../../../static/round-add_circle_outline.svg');
@@ -83,7 +86,8 @@ const mapStateToProps = ({
   shippingIsBilling: address.shippingIsBilling,
   userEmail: profile.data.email,
   address,
-  cart
+  cart,
+  summary: cart.summary
 });
 const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
 @withRouter
@@ -236,14 +240,41 @@ class DeliveryAddress extends Component {
     const {
       isLoggedIn, history, loading, addresses, currentaddressindex
     } = this.props;
-    const { shippingIsBilling, userEmail } = this.props;
+    const { shippingIsBilling, userEmail, summary } = this.props;
     const { addressform } = this.state;
     return (
       <Div type="block">
         <MenuCheckout page="delivery" history={history} />
-        <Section display="flex" pt="1.25rem" mb="1rem" height="auto">
+        <Section display="flex" pt="2.25rem" mb="1rem" height="auto">
           <Container type="container" pr="2rem" pl="2rem">
             <Div col="8" mt="0">
+              {!isLoggedIn && (
+                <Div col="12" className={styles.isLoggedIn}>
+                  <Label fontSize="1rem" mt="0" mb="0" color="textLight">
+                    Already have an account?
+                  </Label>
+                  <Button
+                    btnType="link"
+                    fontFamily="regular"
+                    height="18px"
+                    mt="-5px"
+                    fontSize="1rem"
+                    p="0 0.625rem"
+                    color={Theme.colors.primary}
+                    onClick={this.onOpenLoginModal}
+                    lh="1"
+                  >
+                    Login
+                  </Button>
+                  <ResponsiveModal
+                    classNames={{ modal: 'loginModal' }}
+                    onCloseModal={this.onCloseLoginModal}
+                    open={this.state.openLogin}
+                  >
+                    <LoginModal />
+                  </ResponsiveModal>
+                </Div>
+              )}
               {isLoggedIn && (
                 <div>
                   <Row display="block" mr="0" ml="0">
@@ -273,7 +304,7 @@ class DeliveryAddress extends Component {
                       </Div>
                     ))}
 
-                    <Div col="6">
+                    <Div col="6" pr="0.625rem">
                       <button className={styles.addAddressBtn} onClick={this.toggleAddAddress}>
                         <img src={addIcon} alt="Add another address" />
                         <Text color="rgba(0, 0, 0, 0.6)" ta="center">
@@ -337,34 +368,17 @@ class DeliveryAddress extends Component {
                   </Row>
                 </form>
               </Div>
-              {!isLoggedIn && (
-                <Div col="3" ml="20%">
-                  <Label mt="0" mb="0" color="textLight">
-                    Have an existing account with hometown?
-                  </Label>
-                  <Button
-                    btnType="primary"
-                    fontFamily="regular"
-                    height="42px"
-                    mt="0.5rem"
-                    fontSize="0.875rem"
-                    p="0.375rem 5rem"
-                    onClick={this.onOpenLoginModal}
-                  >
-                    LOGIN
-                  </Button>
-                  <ResponsiveModal
-                    classNames={{ modal: 'loginModal' }}
-                    onCloseModal={this.onCloseLoginModal}
-                    open={this.state.openLogin}
-                  >
-                    <LoginModal />
-                  </ResponsiveModal>
-                </Div>
-              )}
             </Div>
-            <Div col="4" mt="0">
-              dd
+            <Div col="4" mt="0" pl="0.625rem">
+              <OrderSummary
+                itemsTotal={summary.items}
+                savings={summary.savings}
+                shipping={summary.shipping_charges}
+                totalCart={summary.total}
+                onClick={() => null}
+                itemsCount={summary.items_count}
+                hidebutton
+              />
             </Div>
           </Container>
         </Section>
@@ -378,7 +392,8 @@ DeliveryAddress.defaultProps = {
   location: {},
   addresses: [],
   currentaddressindex: -1,
-  userEmail: ''
+  userEmail: '',
+  summary: null
 };
 DeliveryAddress.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
@@ -397,7 +412,8 @@ DeliveryAddress.propTypes = {
   userEmail: PropTypes.string,
   onChangeEmail: PropTypes.func.isRequired,
   loadPincodeDetails: PropTypes.func.isRequired,
-  cart: PropTypes.object.isRequired
+  cart: PropTypes.object.isRequired,
+  summary: PropTypes.object
 };
 export default connect(
   mapStateToProps,
