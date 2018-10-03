@@ -1,21 +1,26 @@
 .loadingCart {
   position: absolute;
   width: 100%;
-  height: 67px;
+  height: 100%;
   margin: 0;
   text-align: center;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(0, 0, 0, 0.7);
   padding: 0;
   z-index: 1;
   left: 0;
+  top: 0;
   border: 1px solid rgba(221, 221, 221, 0.68);
   box-shadow: 2px 2px 7px 0 rgba(0, 0, 0, 0.1);
   display: flex;
   h4 {
     margin: 0;
-    font-size: 0.875rem;
+    font-size: 1.125rem;
     width: 100%;
     align-self: center;
+    padding: 10px 10px;
+    color: #FFF;
+    line-height: 1.5;
+    font-family: 'light';
   }
   p {
     margin: 0;
