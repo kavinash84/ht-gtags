@@ -135,6 +135,17 @@ app.get(
   }
 );
 
+/* eslint-disable max-len */
+/* static pages redirection */
+app.get(/^\/(.*)\/$/, async (req, res, next) => {
+  const data = require('./data/static-urls.json');
+  if (data && data[req.url.toLowerCase()]) {
+    const redirect = data[req.url.toLowerCase()];
+    return res.redirect(301, redirect || '/');
+  }
+  return next();
+});
+
 app.use(async (req, res) => {
   if (__DEVELOPMENT__) {
     // Do not cache webpack stats: the script file would change since

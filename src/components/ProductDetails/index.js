@@ -39,6 +39,7 @@ import ProductDetailsCarousel from './Carousel';
 import BreadCrumb from './BreadCrumb';
 import Pincode from './Pincode';
 import AddToCart from '../AddToCart';
+import BuyNow from '../BuyNow';
 
 const styles = require('./ProductDetails.scss');
 
@@ -113,8 +114,7 @@ class ProductDetails extends React.Component {
     history.goBack();
     this.setState({ openLogin: false });
   };
-  addReview = (sku, data) => e => {
-    e.preventDefault();
+  addReview = (sku, data) => {
     const { dispatch } = this.context.store;
     dispatch(addReview(sku, data));
   };
@@ -165,7 +165,7 @@ class ProductDetails extends React.Component {
     const { showmore } = this.state;
     const isEmiAvailable = Number(checkSpecialPrice) >= 3000;
     const {
-      family_name: family, z_main_material: material, color, brand
+      family_name: family, main_material: material, color, brand
     } = gattributes;
     const { name: categoryName } = category;
     const name = productName({
@@ -191,9 +191,7 @@ class ProductDetails extends React.Component {
                   <Div col="12" className={styles.breadCrumbWrapper} mb="1rem">
                     <BreadCrumb categoryDetails={categoryDetails} />
                   </Div>
-                  <Div col="12">
-                    <ProductDetailsCarousel data={images} title={meta.name} />
-                  </Div>
+                  <Div col="12">{images && <ProductDetailsCarousel data={images} title={meta.name} />}</Div>
                   {/* <Div col="10">
                     <div className={styles.imgSliderContainer}>
                       <div className={styles.imageContainer}>
@@ -272,6 +270,15 @@ class ProductDetails extends React.Component {
                         simpleSku={simpleSku}
                         sku={sku}
                         itemId={sku}
+                        size="block"
+                        btnType="black"
+                        isSoldOut={
+                          !(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)
+                        }
+                      />
+                      <BuyNow
+                        simpleSku={simpleSku}
+                        sku={sku}
                         size="block"
                         btnType="black"
                         isSoldOut={
@@ -362,7 +369,4 @@ ProductDetails.propTypes = {
   gattributes: PropTypes.object.isRequired,
   category: PropTypes.object.isRequired
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
