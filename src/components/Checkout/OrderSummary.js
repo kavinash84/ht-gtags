@@ -31,25 +31,25 @@ const OrderSummary = ({
     <Div col="12" className={styles.orderSummary}>
       <Text color="#6e6e6e" mt="0">
         Total Price ({itemsCount} item{itemsCount === 1 ? '' : 's'})
-        <Span float="right" color={Theme.colors.primary}>
+        <Span float="right" color={Theme.colors.text}>
           Rs. {itemsTotal ? formatAmount(itemsTotal) : null}
         </Span>
       </Text>
       <Text color="#6e6e6e">
         Savings
-        <Span float="right" color={Theme.colors.primary}>
+        <Span float="right" color={Theme.colors.text}>
           Rs. {savings ? formatAmount(savings) : 0}
         </Span>
       </Text>
       <Text color="#6e6e6e">
         Shipping
-        <Span float="right" color={Theme.colors.primary}>
+        <Span float="right" color={Theme.colors.text}>
           {shipping === 0 ? 'Free' : `Rs. ${shipping}`}
         </Span>
       </Text>
       <Text color="#6e6e6e" mb="0" fontSize="2rem" className={styles.totalWrapper} fontFamily="light">
         Total
-        <Span float="right" color={Theme.colors.primary} mt="10px" fontSize="1.25rem">
+        <Span float="right" color={Theme.colors.text} mt="10px" fontSize="1.25rem">
           Rs. {totalCart ? formatAmount(totalCart) : null}
         </Span>
       </Text>
