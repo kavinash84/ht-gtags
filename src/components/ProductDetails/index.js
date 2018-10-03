@@ -192,7 +192,7 @@ class ProductDetails extends React.Component {
                     <BreadCrumb categoryDetails={categoryDetails} />
                   </Div>
                   <Div col="12">
-                    <ProductDetailsCarousel data={images} title={meta.name} />
+                    <ProductDetailsCarousel data={images} title={name} />
                   </Div>
                   {/* <Div col="10">
                     <div className={styles.imgSliderContainer}>
@@ -362,7 +362,4 @@ ProductDetails.propTypes = {
   gattributes: PropTypes.object.isRequired,
   category: PropTypes.object.isRequired
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
