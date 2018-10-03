@@ -165,7 +165,7 @@ class ProductDetails extends React.Component {
     const { showmore } = this.state;
     const isEmiAvailable = Number(checkSpecialPrice) >= 3000;
     const {
-      family_name: family, z_main_material: material, color, brand
+      family_name: family, main_material: material, color, brand
     } = gattributes;
     const { name: categoryName } = category;
     const name = productName({
