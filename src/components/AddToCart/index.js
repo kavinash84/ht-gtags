@@ -65,24 +65,24 @@ const AddToCart = ({
               btnType="custom"
               border="1px solid"
               bc={btnType === 'black' ? 'transparent' : '#f98d29'}
-              color={btnType === 'black' ? '#FFF' : '#f98d29'}
-              bg={btnType === 'black' ? '#515151' : 'transparent'}
+              color={btnType === 'black' ? '#FFF' : '#FFF'}
+              bg={btnType === 'black' ? '#515151' : '#f98d29'}
               p="7px 15px 2px"
               size={size}
               disabled={addLoading}
               onClick={onClick(itemId, sku, simpleSku, session, pincode)(addToCart)}
               className={styles.addToCartBtn}
             >
-              {!addLoading && <AddCart fill={btnType === 'black' ? '#FFF' : '#f98d29'} />}
+              {!addLoading && <AddCart fill={btnType === 'black' ? '#FFF' : '#FFF'} />}
               {addLoading && <Img width="24px" className="spin" src={LoaderIcon} display="inline" />}
               <Span
                 ml="0.625rem"
                 fontSize="0.857rem"
                 fontFamily="regular"
-                color={btnType === 'black' ? '#FFF' : '#f98d29'}
+                color={btnType === 'black' ? '#FFF' : '#FFF'}
                 va="top"
               >
-                {addLoading ? 'Adding..' : 'ADD TO CART'}
+                {addLoading ? 'Adding..' : 'Add to Cart'}
               </Span>
             </Button>
           ) : (
