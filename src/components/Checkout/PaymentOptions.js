@@ -9,8 +9,8 @@ import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
 import Button from 'hometown-components/lib/Buttons';
 import Heading from 'hometown-components/lib/Heading';
-import Text from 'hometown-components/lib/Text';
 import Footer from 'components/Footer';
+// import { Label } from 'hometown-components/lib/Label';
 import {
   setSelectedGateway,
   setSelectedPaymentDetails,
@@ -18,15 +18,24 @@ import {
   checkPaymentDetails,
   setValidationError
 } from 'redux/modules/paymentoptions';
+// import BankCard from './BankCard';
+// import CardForm from './CardForm';
 import MenuCheckout from './MenuCheckout';
 import OrderSummary from './OrderSummary';
 import CommonPayments from './CommonPayments';
 import { validatePaymentDetails } from '../../utils/validation';
 
+// const styles = require('./Checkout.scss');
+
 const nextStep = history => e => {
   e.preventDefault();
   history.push('/checkout/review-order');
 };
+
+// const onChangeDetails = (dispatcher, gateway) => e => {
+//   const { name, value } = e.target;
+//   dispatcher({ gateway, data: { [name]: value } });
+// };
 
 const mapStateToProps = ({
   app,
@@ -81,28 +90,28 @@ class PaymentOptions extends Component {
         <Section display="flex" pt="1.25rem" pb="2.5rem" mb="0" height="auto">
           <Container type="container" pr="2rem" pl="2rem">
             <Row display="block" mr="0" ml="0">
-              <Div col="9" pr="7rem">
+              <Div col="8" pr="1rem">
                 <Row display="block" mr="0" ml="0">
                   <Div col="12">
                     <Heading fontSize="0.875em" mb="0.625rem" color="secondary">
-                      Choose a payment method
+                      Select Payment Method
                     </Heading>
-                    <Text fontSize="0.875em" mb="0.625rem" color="rgba(0, 0, 0, 0.5)">
-                      Don’t worry, you’ll be able to review everything in the next step before placing the order
-                    </Text>
                   </Div>
                 </Row>
                 <Row display="block" mr="0" ml="0" mt="5px">
-                  {data.map(paymentType =>
-                    CommonPayments(
-                      paymentType.paymentType,
-                      toggleGateway,
-                      selectedGateway,
-                      setPaymentDetails,
-                      paymentType,
-                      session,
-                      paymentDetails
-                    ))}
+                  <Div col="3">
+                    {data.map(paymentType =>
+                      CommonPayments(
+                        paymentType.paymentType,
+                        toggleGateway,
+                        selectedGateway,
+                        setPaymentDetails,
+                        paymentType,
+                        session,
+                        paymentDetails
+                      ))}
+                  </Div>
+                  <Div col="9">add here..</Div>
                 </Row>
                 <Row display="block" mr="0" ml="0">
                   <Div col="5">
@@ -122,7 +131,7 @@ class PaymentOptions extends Component {
                   </Div>
                 </Row>
               </Div>
-              <Div col="3">
+              <Div col="4">
                 <OrderSummary
                   itemsTotal={summary.items}
                   savings={summary.savings}

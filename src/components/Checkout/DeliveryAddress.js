@@ -243,127 +243,129 @@ class DeliveryAddress extends Component {
         <MenuCheckout page="delivery" history={history} />
         <Section display="flex" pt="1.25rem" mb="1rem" height="auto">
           <Container type="container" pr="2rem" pl="2rem">
-            {isLoggedIn && (
-              <div>
-                <Row display="block" mr="0" ml="0">
-                  <Div col="12">
-                    <Label fontSize="1.125rem" mb="0.875rem">
-                      SELECT SHIPPING ADDRESS
-                    </Label>
-                  </Div>
-                </Row>
-
-                <Row display="block" mr="0" ml="0">
-                  {addresses.map((item, index) => (
-                    <Div className={styles.addressBlock} col="4" pr="0.625rem" key={item.id_customer_address}>
-                      <button
-                        className={`${styles.addressBtn} ${index === currentaddressindex ? styles.active : null}`}
-                        onClick={() => this.handleClick(index)}
-                      >
-                        <b>{item.full_name}</b>
-                        <br />
-                        {item.address}
-                        <br />
-                        {item.city}, {item.pincode}
-                        <br />
-                        {item.state}
-                        <br />
-                      </button>
-                    </Div>
-                  ))}
-
-                  <Div col="2">
-                    <button className={styles.addAddressBtn} onClick={this.toggleAddAddress}>
-                      <img src={addIcon} alt="Add another address" />
-                      <Text color="rgba(0, 0, 0, 0.6)" ta="center">
-                        Add another address
-                      </Text>
-                    </button>
-                  </Div>
-                </Row>
-              </div>
-            )}
-            <Div col="5" mt="0">
-              <form onSubmit={this.handleSubmit}>
-                {(addressform || !isLoggedIn) && (
+            <Div col="8" mt="0">
+              {isLoggedIn && (
+                <div>
                   <Row display="block" mr="0" ml="0">
                     <Div col="12">
                       <Label fontSize="1.125rem" mb="0.875rem">
-                        SHIPPING ADDRESS
+                        Select Shipping Address
                       </Label>
                     </Div>
-                    <AddressForm formType="shipping" isLoggedIn={isLoggedIn} userEmail={userEmail} />
                   </Row>
-                )}
-                <Row display="block" mr="0" ml="0" mt="1rem" mb="0.5rem">
-                  <Div col="12">
-                    <div className="checkbox">
-                      <input
-                        type="checkbox"
-                        id="checkbox"
-                        checked={!shippingIsBilling}
-                        onChange={this.toggleBillingForm}
-                      />
-                      {/* eslint-disable */}
-                      <label htmlFor="checkbox" />
-                    </div>
-                    <Label fontSize="0.875em" mt="0" mb="0" ml="0.625rem" htmlFor="checkbox">
-                      Different Billing Address ?
-                    </Label>
-                  </Div>
-                </Row>
 
-                {!shippingIsBilling && (
-                  <Row display="block" mr="0" ml="0" mt="1.5rem">
-                    <Div col="12">
-                      <Label fontSize="1.125rem" mb="0.875rem">
-                        BILLING ADDRESS
-                      </Label>
+                  <Row display="block" mr="0" ml="0">
+                    {addresses.map((item, index) => (
+                      <Div className={styles.addressBlock} col="6" pr="0.625rem" key={item.id_customer_address}>
+                        <button
+                          className={`${styles.addressBtn} ${index === currentaddressindex ? styles.active : null}`}
+                          onClick={() => this.handleClick(index)}
+                        >
+                          <b>{item.full_name}</b>
+                          <br />
+                          {item.address}
+                          <br />
+                          {item.city}, {item.pincode}
+                          <br />
+                          {item.state}
+                          <br />
+                        </button>
+                      </Div>
+                    ))}
+
+                    <Div col="6">
+                      <button className={styles.addAddressBtn} onClick={this.toggleAddAddress}>
+                        <img src={addIcon} alt="Add another address" />
+                        <Text color="rgba(0, 0, 0, 0.6)" ta="center">
+                          Add another address
+                        </Text>
+                      </button>
                     </Div>
-                    <AddressForm formType="billing" isLoggedIn={isLoggedIn} userEmail={userEmail} />
                   </Row>
-                )}
-
-                <Div col="6">
+                </div>
+              )}
+              <Div col="12" mt="0">
+                <form onSubmit={this.handleSubmit}>
+                  <Row display="block" mr="0" ml="0">
+                    {(addressform || !isLoggedIn) && (
+                      <Div col="6" pr="2rem" mt="1rem">
+                        <Label fontSize="1.125rem" mb="0.875rem">
+                          Shipping Address
+                        </Label>
+                        <AddressForm formType="shipping" isLoggedIn={isLoggedIn} userEmail={userEmail} />
+                      </Div>
+                    )}
+                    <Div col="6" pr="2rem" mt="1.5rem">
+                      <div className="checkbox">
+                        <input
+                          type="checkbox"
+                          id="checkbox"
+                          checked={!shippingIsBilling}
+                          onChange={this.toggleBillingForm}
+                        />
+                        {/* eslint-disable */}
+                        <label htmlFor="checkbox" />
+                        {/* eslint-enable */}
+                      </div>
+                      <Label fontSize="0.875em" mt="0" mb="0" ml="0.625rem" htmlFor="checkbox">
+                        Different Billing Address ?
+                      </Label>
+                      {!shippingIsBilling && (
+                        <Div col="12" mt="1rem">
+                          <Label fontSize="1.125rem" mb="0.875rem">
+                            Billing Address
+                          </Label>
+                          <AddressForm formType="billing" isLoggedIn={isLoggedIn} userEmail={userEmail} />
+                        </Div>
+                      )}
+                    </Div>
+                  </Row>
+                  <Row display="block" mr="0" ml="0">
+                    <Div col="5" mt="1.5rem">
+                      <Button
+                        type="submit"
+                        size="block"
+                        btnType="primary"
+                        fontFamily="regular"
+                        height="42px"
+                        mt="0.5rem"
+                        disabled={loading}
+                      >
+                        {loading ? 'Loading...' : 'Next: Payment Options'}
+                      </Button>
+                    </Div>
+                  </Row>
+                </form>
+              </Div>
+              {!isLoggedIn && (
+                <Div col="3" ml="20%">
+                  <Label mt="0" mb="0" color="textLight">
+                    Have an existing account with hometown?
+                  </Label>
                   <Button
-                    type="submit"
-                    size="block"
                     btnType="primary"
                     fontFamily="regular"
                     height="42px"
                     mt="0.5rem"
-                    disabled={loading}
+                    fontSize="0.875rem"
+                    p="0.375rem 5rem"
+                    onClick={this.onOpenLoginModal}
                   >
-                    {loading ? 'Loading...' : 'Next: Payment Options'}
+                    LOGIN
                   </Button>
+                  <ResponsiveModal
+                    classNames={{ modal: 'loginModal' }}
+                    onCloseModal={this.onCloseLoginModal}
+                    open={this.state.openLogin}
+                  >
+                    <LoginModal />
+                  </ResponsiveModal>
                 </Div>
-              </form>
+              )}
             </Div>
-            {!isLoggedIn && (
-              <Div col="3" ml="20%">
-                <Label mt="0" mb="0" color="textLight">
-                  Have an existing account with hometown?
-                </Label>
-                <Button
-                  btnType="primary"
-                  fontFamily="regular"
-                  height="42px"
-                  mt="0.5rem"
-                  fontSize="0.875rem"
-                  p="0.375rem 5rem"
-                  onClick={this.onOpenLoginModal}
-                >
-                  LOGIN
-                </Button>
-                <ResponsiveModal
-                  classNames={{ modal: 'loginModal' }}
-                  onCloseModal={this.onCloseLoginModal}
-                  open={this.state.openLogin}
-                >
-                  <LoginModal />
-                </ResponsiveModal>
-              </Div>
-            )}
+            <Div col="4" mt="0">
+              dd
+            </Div>
           </Container>
         </Section>
         <Footer />
