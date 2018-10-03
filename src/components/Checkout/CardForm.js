@@ -91,10 +91,10 @@ const CardForm = ({
     </Div>
     <Div col="12">
       <Label color="secondary" mb="0.625rem">
-        Expiration Date
+        Expiry Date
       </Label>
     </Div>
-    <Div col="5">
+    <Div col="7">
       <select
         className={styles.dropDown}
         name="expMonth"
