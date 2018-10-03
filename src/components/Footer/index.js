@@ -191,7 +191,7 @@ class Footer extends React.Component {
                             subMenu.visibility === 'on' &&
                             index < 11 && (
                               <li key={subMenu.name}>
-                                <Link to={subMenu.url_key}>{subMenu.name}</Link>
+                                <Link to={`/${subMenu.url_key}`}>{subMenu.name}</Link>
                               </li>
                             )
                         )}
