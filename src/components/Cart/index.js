@@ -140,14 +140,17 @@ const Cart = ({
                       simpleSku={item.simple_sku}
                       skuId={item.configurable_sku}
                     />
-                    {item.product_info.unit_price !== item.product_info.special_price && (
-                      <Label color="black" fontSize="1rem" mt="0.625rem">
-                        <s>Rs. {formatAmount(item.product_info.unit_price)}</s>
+                    <Div mt="0.3125rem">
+                      {item.product_info.unit_price !== item.product_info.special_price && (
+                        <Label color="black" fontSize="0.875rem" mt="0">
+                          <s>Rs. {formatAmount(item.product_info.unit_price)}</s>
+                        </Label>
+                      )}
+                      <br />
+                      <Label color="primary" fontSize="1.25rem" mt="0">
+                        Rs. {formatAmount(item.product_info.special_price)}
                       </Label>
-                    )}
-                    <Label color="primary" fontSize="1.125rem" mt="0.625rem">
-                      Rs. {formatAmount(item.product_info.special_price)}
-                    </Label>
+                    </Div>
                   </Div>
                   <Div className="td" col="1" pr="0.625rem" ta="right">
                     <Button
@@ -257,4 +260,7 @@ Cart.defaultProps = {
   outOfStockList: []
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Cart);
