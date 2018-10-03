@@ -9,11 +9,11 @@ import { Label } from 'hometown-components/lib/Label';
 
 const styles = require('./CommonPayments.scss');
 
-const creditcardIcon = require('../../../static/credit-card.svg');
-const debitcardIcon = require('../../../static/debit-card.svg');
-const intBankingIcon = require('../../../static/net-banking.png');
-const emiIcon = require('../../../static/emi.svg');
-const walletIcon = require('../../../static/wallet.svg');
+const creditcardIcon = require('../../../static/credit-card.png');
+const debitcardIcon = require('../../../static/debit-card.png');
+const intBankingIcon = require('../../../static/net-banking-icon.png');
+const emiIcon = require('../../../static/emi.png');
+const walletIcon = require('../../../static/wallet.png');
 const codIcon = require('../../../static/cod.svg');
 
 const initial = {
@@ -76,14 +76,16 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
             htmlFor="CreditCard"
             pl="0"
             color="textLight"
-            ml="0.9375rem"
+            mt="0"
+            mb="0"
             onClick={onChangeGateway(onChange, paymentType, session)}
           >
             <Img
-              width="30px"
+              height="23px"
+              width="auto"
               float="left"
               mr="10px"
-              top="-5px"
+              top="-2px"
               position="relative"
               src={creditcardIcon}
               alt="Credit Card"
@@ -106,14 +108,16 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
             htmlFor="DebitCard"
             pl="0"
             color="textLight"
-            ml="0.9375rem"
+            mt="0"
+            mb="0"
             onClick={onChangeGateway(onChange, paymentType, session)}
           >
             <Img
-              width="30px"
+              height="23px"
+              width="auto"
               float="left"
               mr="10px"
-              top="-5px"
+              top="-2px"
               position="relative"
               src={debitcardIcon}
               alt="Debit Card"
@@ -136,14 +140,16 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
             htmlFor="paymentIB"
             pl="0"
             color="textLight"
-            ml="0.9375rem"
+            mt="0"
+            mb="0"
             onClick={onChangeGateway(onChange, paymentType, session)}
           >
             <Img
-              width="30px"
+              height="23px"
+              width="auto"
               float="left"
               mr="10px"
-              top="-5px"
+              top="-2px"
               position="relative"
               src={intBankingIcon}
               alt="Internet Banking"
@@ -166,10 +172,20 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
             htmlFor="paymentEmi"
             pl="0"
             color="textLight"
-            ml="0.9375rem"
+            mt="0"
+            mb="0"
             onClick={onChangeGateway(onChange, paymentType, session)}
           >
-            <Img width="30px" float="left" mr="10px" top="-5px" position="relative" src={emiIcon} alt="EMI" />
+            <Img
+              height="23px"
+              width="auto"
+              float="left"
+              mr="10px"
+              top="-2px"
+              position="relative"
+              src={emiIcon}
+              alt="EMI"
+            />
             EMI
           </Label>
         </Div>
@@ -188,10 +204,20 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
             htmlFor="paymentWallet"
             pl="0"
             color="textLight"
-            ml="0.9375rem"
+            mt="0"
+            mb="0"
             onClick={onChangeGateway(onChange, paymentType, session)}
           >
-            <Img width="30px" float="left" mr="10px" top="-5px" position="relative" src={walletIcon} alt="Wallet" />
+            <Img
+              height="23px"
+              width="auto"
+              float="left"
+              mr="10px"
+              top="-2px"
+              position="relative"
+              src={walletIcon}
+              alt="Wallet"
+            />
             Wallet
           </Label>
         </Div>
@@ -207,8 +233,17 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
             checked={selectedGateway === paymentType}
             onChange={onChangeGateway(onChange, paymentType, session)}
           />
-          <Label htmlFor="paymentCD" pl="0" color="textLight" ml="0.9375rem">
-            <Img width="30px" float="left" mr="10px" top="-5px" position="relative" src={codIcon} alt="Wallet" />
+          <Label htmlFor="paymentCD" pl="0" color="textLight" mt="0" mb="0">
+            <Img
+              height="23px"
+              width="auto"
+              float="left"
+              mr="10px"
+              top="-2px"
+              position="relative"
+              src={codIcon}
+              alt="Wallet"
+            />
             Cash On Delivery
           </Label>
         </Div>
