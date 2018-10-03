@@ -10,7 +10,7 @@ import Button from 'hometown-components/lib/Buttons';
 import Text from 'hometown-components/lib/Text';
 import { Label } from 'hometown-components/lib/Label';
 import ResponsiveModal from 'components/Modal';
-import LoginModal from 'components/Login/LoginModal';
+import LoginModal from 'containers/Login/LoginForm';
 import Footer from 'components/Footer';
 import { sendDeliveryAddress, resetGuestRegisterFlag } from 'redux/modules/checkout';
 import { bindActionCreators } from 'redux';
