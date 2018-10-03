@@ -131,9 +131,7 @@ export default class Listing extends Component {
       currentPage
     } = this.props;
     let page;
-    const {
-      location: { search, pathname }
-    } = history;
+    const { location: { search, pathname } } = history;
     if (search !== '') {
       [, page] = search.replace('?', '').split('page=');
     } else page = currentPage;
@@ -147,7 +145,9 @@ export default class Listing extends Component {
           <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
           <meta name="description" content={seoInfo && seoInfo.meta_description} />
           {CANONICALS[pathname] && <link rel="canonical" href={`${SITE_URL}${CANONICALS[pathname]}`} />}
-          {previousPage !== '' && <link rel="prev" href={`${SITE_URL}${pathname}${previousPage}`} />}
+          {previousPage !== '' &&
+            Number(page) !== 2 && <link rel="prev" href={`${SITE_URL}${pathname}${previousPage}`} />}
+          {Number(page) === 2 && <link rel="prev" href={`${SITE_URL}${pathname}`} />}
           {productCount / 32 / Number(page) > 1 && <link rel="next" href={`${SITE_URL}${pathname}${NextPage}`} />}
         </Helmet>
         <div className="wrapper">
