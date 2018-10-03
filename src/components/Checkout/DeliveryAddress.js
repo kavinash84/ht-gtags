@@ -247,7 +247,7 @@ class DeliveryAddress extends Component {
         <MenuCheckout page="delivery" history={history} />
         <Section display="flex" pt="2.25rem" mb="1rem" height="auto">
           <Container type="container" pr="2rem" pl="2rem">
-            <Div col="8" mt="0">
+            <Div col="9" mt="0">
               {!isLoggedIn && (
                 <Div col="12" className={styles.isLoggedIn}>
                   <Label fontSize="1rem" mt="0" mb="0" color="textLight">
@@ -369,7 +369,7 @@ class DeliveryAddress extends Component {
                 </form>
               </Div>
             </Div>
-            <Div col="4" mt="0" pl="0.625rem">
+            <Div col="3" mt="0" pl="0.625rem">
               <OrderSummary
                 itemsTotal={summary.items}
                 savings={summary.savings}

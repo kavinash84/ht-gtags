@@ -166,7 +166,7 @@ const Cart = ({
                           color="#f98d29"
                           btnType="link"
                           p="0"
-                          mt="0"
+                          mt="8px"
                           onClick={onClick(item.id_customer_cart, sessionId, pincode)(removeFromCart)}
                         >
                           Remove
