@@ -29,7 +29,7 @@ export const categoryRoutes = [
   'bath'
 ];
 
-export const listingRoutes = [...categoryRoutes, 'exclusive', 'clearance-sale'];
+export const listingRoutes = [...categoryRoutes, 'clearance-sale'];
 /* eslint-disable max-len */
 export const redirectURLs =
   'furniture|home-decor|homefurnishings|tableware|kitchenware|home-improvement|clearance-sale-offer|clearance_sale|design|design-inspiration|gifts|appliances|lighting|solidwood|test_bed|exclusive|invisible|luggage-bags';
