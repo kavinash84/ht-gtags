@@ -1,7 +1,7 @@
 import { PINCODE } from 'helpers/Constants';
 import { clearUserProfile, loadUserProfile } from '../modules/profile';
 import { clearWishList, syncWishList } from '../modules/wishlist';
-import { clearLoginState, loginUserAfterSignUp } from '../modules/login';
+import { clearLoginState, loginUserAfterSignUp, logout } from '../modules/login';
 import { generateSession } from '../modules/app';
 import { clearCart, synCart } from '../modules/cart';
 import { notifSend } from '../modules/notifs';
@@ -14,10 +14,7 @@ export default function userMiddleware() {
     const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
     if (__CLIENT__) {
       if (action.error && action.error.error === 'invalid_token') {
-        dispatch(clearLoginState());
-        dispatch(clearUserProfile());
-        dispatch(clearWishList());
-        dispatch(clearCart());
+        dispatch(logout());
       }
       if (type === 'signUp/SIGNUP_SUCCESS') {
         const { result: { token, token_error: tokenError } } = action;
