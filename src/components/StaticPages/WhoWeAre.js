@@ -10,7 +10,7 @@ const styles = require('./StaticPages.scss');
 
 const WhoWeAre = () => (
   <Section display="block" p="0" mb="0" height="auto">
-    <TitleBar title="About hometown.in" />
+    <TitleBar title="We are HomeTown" />
     <Container type="container" pr="0.5rem" pl="0.5rem">
       <Div className={styles.staticPageWrapper} type="block" pt="2rem" pb="2.5rem">
         {/* eslint-disable */}
