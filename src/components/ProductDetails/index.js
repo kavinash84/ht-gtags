@@ -191,9 +191,7 @@ class ProductDetails extends React.Component {
                   <Div col="12" className={styles.breadCrumbWrapper} mb="1rem">
                     <BreadCrumb categoryDetails={categoryDetails} />
                   </Div>
-                  <Div col="12">
-                    <ProductDetailsCarousel data={images} title={name} />
-                  </Div>
+                  <Div col="12">{images && <ProductDetailsCarousel data={images} title={meta.name} />}</Div>
                   {/* <Div col="10">
                     <div className={styles.imgSliderContainer}>
                       <div className={styles.imageContainer}>
