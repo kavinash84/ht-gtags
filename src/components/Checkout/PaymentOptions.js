@@ -10,7 +10,7 @@ import Section from 'hometown-components/lib/Section';
 import Button from 'hometown-components/lib/Buttons';
 import Heading from 'hometown-components/lib/Heading';
 import Footer from 'components/Footer';
-// import { Label } from 'hometown-components/lib/Label';
+import { Label } from 'hometown-components/lib/Label';
 import {
   setSelectedGateway,
   setSelectedPaymentDetails,
@@ -24,6 +24,9 @@ import MenuCheckout from './MenuCheckout';
 import OrderSummary from './OrderSummary';
 import CommonPayments from './CommonPayments';
 import { validatePaymentDetails } from '../../utils/validation';
+import BankCard from './BankCard';
+import CardForm from './CardForm';
+import Emi from './Emi';
 
 const styles = require('./Checkout.scss');
 
@@ -32,10 +35,10 @@ const nextStep = history => e => {
   history.push('/checkout/review-order');
 };
 
-// const onChangeDetails = (dispatcher, gateway) => e => {
-//   const { name, value } = e.target;
-//   dispatcher({ gateway, data: { [name]: value } });
-// };
+const onChangeDetails = (dispatcher, gateway) => e => {
+  const { name, value } = e.target;
+  dispatcher({ gateway, data: { [name]: value } });
+};
 
 const mapStateToProps = ({
   app,
@@ -84,6 +87,8 @@ class PaymentOptions extends Component {
       session,
       paymentDetails
     } = this.props;
+    const [netBankingData] = data.filter(bank => bank.paymentType === 'NetBanking');
+    const [WalletData] = data.filter(bank => bank.paymentType === 'Wallet');
     return (
       <Div type="block">
         <MenuCheckout history={history} page="payment" />
@@ -101,18 +106,132 @@ class PaymentOptions extends Component {
                 <Row display="block" mr="0" ml="0" mt="5px">
                   <Div col="3">
                     {data.map(paymentType =>
-                      CommonPayments(
-                        paymentType.paymentType,
-                        toggleGateway,
-                        selectedGateway,
-                        setPaymentDetails,
-                        paymentType,
-                        session,
-                        paymentDetails
-                      ))}
+                      CommonPayments(paymentType.paymentType, toggleGateway, selectedGateway, session))}
                   </Div>
                   <Div col="9">
-                    <div className={styles.paymentFormOptions}>add here..</div>
+                    <div className={styles.paymentFormOptions}>
+                      {selectedGateway === 'CreditCard' && (
+                        <Div col="12" mt="0.625rem" pl="1.75rem">
+                          <CardForm setPaymentDetails={setPaymentDetails} gateway={selectedGateway} />
+                        </Div>
+                      )}
+                      {selectedGateway === 'DebitCard' && (
+                        <Div col="12" mt="0.625rem" pl="1.75rem">
+                          Debit
+                          <CardForm setPaymentDetails={setPaymentDetails} gateway={selectedGateway} />
+                        </Div>
+                      )}
+                      {selectedGateway === 'NetBanking' && (
+                        <Div col="12" mt="0.625rem" pl="1.75rem">
+                          <Div className={styles.paymentBlock}>
+                            <Div col="12" mb="1rem">
+                              <Label htmlFor="bankOptions1" pl="1rem" color="textLight">
+                                Choose From Preferred Bank
+                              </Label>
+                            </Div>
+                            <BankCard
+                              setPaymentDetails={setPaymentDetails}
+                              gateway={selectedGateway}
+                              name="HDFB"
+                              detailkey="bankCode"
+                              img="https://static.hometown.in/media/cms/BankLOGO/hdfc.gif"
+                              currentSelection={paymentDetails.NetBanking.bankCode}
+                            />
+                            <BankCard
+                              setPaymentDetails={setPaymentDetails}
+                              gateway={selectedGateway}
+                              name="ICIB"
+                              detailkey="bankCode"
+                              img="https://static.hometown.in/media/cms/BankLOGO/icici.gif"
+                              currentSelection={paymentDetails.NetBanking.bankCode}
+                            />
+                            <BankCard
+                              setPaymentDetails={setPaymentDetails}
+                              gateway={selectedGateway}
+                              name="AXIB"
+                              detailkey="bankCode"
+                              img="https://static.hometown.in/media/cms/BankLOGO/axis.gif"
+                              currentSelection={paymentDetails.NetBanking.bankCode}
+                            />
+                            <BankCard
+                              setPaymentDetails={setPaymentDetails}
+                              gateway={selectedGateway}
+                              name="SBIB"
+                              detailkey="bankCode"
+                              img="https://static.hometown.in/media/cms/BankLOGO/sbi.gif"
+                              currentSelection={paymentDetails.NetBanking.bankCode}
+                            />
+                            <Div col="12" mt="1rem">
+                              <select
+                                className={`${styles.dropDown} ${styles.selectBank}`}
+                                name="bankCode"
+                                onChange={onChangeDetails(setPaymentDetails, selectedGateway)}
+                                value={paymentDetails.NetBanking.bankCode}
+                              >
+                                <option>Select Bank</option>
+                                {netBankingData &&
+                                  netBankingData.netBankingBanks &&
+                                  Object.keys(netBankingData.netBankingBanks).map((k, i) => (
+                                    <option value={k} key={k}>
+                                      {Object.values(netBankingData.netBankingBanks)[i]}
+                                    </option>
+                                  ))}
+                              </select>
+                            </Div>
+                          </Div>
+                        </Div>
+                      )}
+                      {selectedGateway === 'Emi' && (
+                        <Emi
+                          selectedGateway={selectedGateway}
+                          setPaymentDetails={setPaymentDetails}
+                          currentSelection={paymentDetails.Emi.emiBank}
+                        />
+                      )}
+                      {WalletData &&
+                        selectedGateway === 'Wallet' && (
+                        <Div col="12" mt="0.625rem" pl="1.75rem" mb="0.625rem">
+                          <Div className={styles.paymentBlock}>
+                            <Div col="12" mb="1rem">
+                              <Label htmlFor="bankOptions1" pl="1rem" color="textLight">
+                                  Select From your preferred Wallet
+                              </Label>
+                            </Div>
+
+                            {WalletData.isPaytmWalletEnable && (
+                              <BankCard
+                                setPaymentDetails={setPaymentDetails}
+                                gateway={selectedGateway}
+                                name="Paytm"
+                                detailkey="walletName"
+                                currentSelection={paymentDetails.Wallet.walletName}
+                                img="https://www.hometown.in/images/local_v2/onestepcheckout/logo/paytm.jpg"
+                              />
+                            )}
+                            {WalletData.isPayuWalletEnable && (
+                              <BankCard
+                                setPaymentDetails={setPaymentDetails}
+                                gateway={selectedGateway}
+                                name="Payu"
+                                detailkey="walletName"
+                                currentSelection={paymentDetails.Wallet.walletName}
+                                img="https://www.hometown.in/images/local_v2/onestepcheckout/logo/payu.jpg"
+                              />
+                            )}
+                            {WalletData.isMobikwikWalletEnable && (
+                              <BankCard
+                                setPaymentDetails={setPaymentDetails}
+                                gateway={selectedGateway}
+                                name="Mobikwik"
+                                detailkey="walletName"
+                                currentSelection={paymentDetails.Wallet.walletName}
+                                img="https://www.hometown.in/images/local_v2/onestepcheckout/logo/mobikwik.jpg"
+                              />
+                            )}
+                          </Div>
+                        </Div>
+                      )}
+                    </div>
                   </Div>
                 </Row>
                 <Row display="block" mr="0" ml="0">
@@ -157,8 +276,6 @@ PaymentOptions.defaultProps = {
   selectedGateway: 'creditcard',
   data: [],
   summary: null,
-  // error: null,
-  // isCartChecked: false,
   submitting: false,
   session: '',
   history: {}
@@ -173,16 +290,7 @@ PaymentOptions.propTypes = {
   history: PropTypes.object,
   session: PropTypes.string,
   paymentDetails: PropTypes.object.isRequired,
-  // setError: PropTypes.func.isRequired,
-  // validateForm: PropTypes.func.isRequired,
-  // isFormValid: PropTypes.bool.isRequired,
-
-  // error: PropTypes.object,
-  // isCartChecked: PropTypes.bool,
   submitting: PropTypes.bool
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PaymentOptions);
+export default connect(mapStateToProps, mapDispatchToProps)(PaymentOptions);

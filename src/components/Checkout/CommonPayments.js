@@ -3,10 +3,6 @@ import Div from 'hometown-components/lib/Div';
 import Img from 'hometown-components/lib/Img';
 import { Label } from 'hometown-components/lib/Label';
 
-// import CardForm from './CardForm';
-// import BankCard from './BankCard';
-// import Emi from './Emi';
-
 const styles = require('./CommonPayments.scss');
 
 const creditcardIcon = require('../../../static/credit-card.png');
@@ -14,7 +10,6 @@ const debitcardIcon = require('../../../static/debit-card.png');
 const intBankingIcon = require('../../../static/net-banking-icon.png');
 const emiIcon = require('../../../static/emi.png');
 const walletIcon = require('../../../static/wallet.png');
-const codIcon = require('../../../static/cod.svg');
 
 const initial = {
   CreditCard: {
@@ -55,12 +50,7 @@ const onChangeGateway = (dispatcher, value, session) => () => {
   dispatcher(value, initial[value], session);
 };
 
-// const onChangeDetails = (dispatcher, gateway) => e => {
-//   const { name, value } = e.target;
-//   dispatcher({ gateway, data: { [name]: value } });
-// };
-
-const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetails, data, session) => {
+const CommonPayments = (paymentType, onChange, selectedGateway, session) => {
   switch (paymentType) {
     case 'CreditCard':
       return (
@@ -219,32 +209,6 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
               alt="Wallet"
             />
             Wallet
-          </Label>
-        </Div>
-      );
-    case 'CashOnDelivery':
-      return (
-        <Div col="12" key={paymentType} className={styles.paymentOptions}>
-          <input
-            type="radio"
-            name="paymentOption"
-            id="paymentCD"
-            value="CashOnDelivery"
-            checked={selectedGateway === paymentType}
-            onChange={onChangeGateway(onChange, paymentType, session)}
-          />
-          <Label htmlFor="paymentCD" pl="0" color="textLight" mt="0" mb="0">
-            <Img
-              height="20px"
-              width="auto"
-              float="left"
-              mr="10px"
-              top="-2px"
-              position="relative"
-              src={codIcon}
-              alt="Wallet"
-            />
-            Cash On Delivery
           </Label>
         </Div>
       );
