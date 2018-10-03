@@ -25,7 +25,7 @@ import OrderSummary from './OrderSummary';
 import CommonPayments from './CommonPayments';
 import { validatePaymentDetails } from '../../utils/validation';
 
-// const styles = require('./Checkout.scss');
+const styles = require('./Checkout.scss');
 
 const nextStep = history => e => {
   e.preventDefault();
@@ -92,8 +92,8 @@ class PaymentOptions extends Component {
             <Row display="block" mr="0" ml="0">
               <Div col="8" pr="1rem">
                 <Row display="block" mr="0" ml="0">
-                  <Div col="12">
-                    <Heading fontSize="0.875em" mb="0.625rem" color="secondary">
+                  <Div col="12" bg="#969696">
+                    <Heading fontSize="1rem" ls="1px" mb="0.625rem" color="white" p="10px 20px" pb="10px">
                       Select Payment Method
                     </Heading>
                   </Div>
@@ -111,7 +111,9 @@ class PaymentOptions extends Component {
                         paymentDetails
                       ))}
                   </Div>
-                  <Div col="9">add here..</Div>
+                  <Div col="9">
+                    <div className={styles.paymentFormOptions}>add here..</div>
+                  </Div>
                 </Row>
                 <Row display="block" mr="0" ml="0">
                   <Div col="5">

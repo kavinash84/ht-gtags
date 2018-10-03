@@ -81,7 +81,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
             onClick={onChangeGateway(onChange, paymentType, session)}
           >
             <Img
-              height="23px"
+              height="20px"
               width="auto"
               float="left"
               mr="10px"
@@ -113,7 +113,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
             onClick={onChangeGateway(onChange, paymentType, session)}
           >
             <Img
-              height="23px"
+              height="20px"
               width="auto"
               float="left"
               mr="10px"
@@ -145,7 +145,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
             onClick={onChangeGateway(onChange, paymentType, session)}
           >
             <Img
-              height="23px"
+              height="20px"
               width="auto"
               float="left"
               mr="10px"
@@ -177,7 +177,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
             onClick={onChangeGateway(onChange, paymentType, session)}
           >
             <Img
-              height="23px"
+              height="20px"
               width="auto"
               float="left"
               mr="10px"
@@ -209,7 +209,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
             onClick={onChangeGateway(onChange, paymentType, session)}
           >
             <Img
-              height="23px"
+              height="20px"
               width="auto"
               float="left"
               mr="10px"
@@ -235,7 +235,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, setPaymentDetail
           />
           <Label htmlFor="paymentCD" pl="0" color="textLight" mt="0" mb="0">
             <Img
-              height="23px"
+              height="20px"
               width="auto"
               float="left"
               mr="10px"
