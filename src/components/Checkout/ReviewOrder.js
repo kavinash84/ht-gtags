@@ -124,34 +124,42 @@ class ReviewOrder extends Component {
                           {item.product_info.delivery_time_text}
                         </Text>
                       </Div>
-                      <Div color="uspTitle" fontSize="0.75rem">
-                        <Img
-                          width="initial"
-                          height="20px"
-                          mr="0.625rem"
-                          mt="4px"
-                          mb="50px"
-                          float="left"
-                          src={assemblyIcon}
-                        />
-                        <Text color="#575757" fontSize="0.75rem" mt="0" mb="0">
-                          Assembly
-                        </Text>
-                        <Text fontSize="0.875rem" mt="0" mb="0">
-                          Offered By Hometown
-                        </Text>
-                        <Text fontSize="0.875rem" mt="0">
-                          <Button fontSize="0.875rem" color="#3cc0dc" btnType="link" p="0">
-                            Details
-                          </Button>
-                        </Text>
-                      </Div>
+                      {item.product_info.assembly_service && (
+                        <Div color="uspTitle" fontSize="0.75rem">
+                          <Img
+                            width="initial"
+                            height="20px"
+                            mr="0.625rem"
+                            mt="4px"
+                            mb="50px"
+                            float="left"
+                            src={assemblyIcon}
+                          />
+                          <Text color="#575757" fontSize="0.75rem" mt="0" mb="0">
+                            Assembly
+                          </Text>
+                          <Text fontSize="0.875rem" mt="0" mb="0">
+                            Offered By Hometown
+                          </Text>
+                          <Text fontSize="0.875rem" mt="0">
+                            <Button fontSize="0.875rem" color="#3cc0dc" btnType="link" p="0">
+                              Details
+                            </Button>
+                          </Text>
+                        </Div>
+                      )}
                     </Div>
                     <Div className="td" col="3" pr="0.625rem">
                       Quantity: {item.qty}
                       <br />
+                      {item.product_info.unit_price !== item.product_info.special_price && (
+                        <Label color="black" fontSize="1rem" mt="0.625rem">
+                          <s>Rs. {formatAmount(item.product_info.unit_price)}</s>
+                        </Label>
+                      )}
+                      <br />
                       <Label color="primary" fontSize="1.125rem" mt="0.625rem">
-                        Rs. {formatAmount(item.product_info.net_price)}
+                        Rs. {formatAmount(item.product_info.special_price)}
                       </Label>
                     </Div>
                     {(!item.product_info.is_deliverable || isProductOutofStock(item.configurable_sku)) && (
