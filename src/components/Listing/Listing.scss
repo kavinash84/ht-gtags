@@ -2,7 +2,7 @@
   position: relative;
   width: calc(25% - 30px);
   float: left;
-  margin: 0 15px 30px;
+  margin: 0 15px 25px;
   // box-shadow: 0 3px 6px 0 rgba(8, 8, 8, 0.12);
   background: #FFF;
   height: 420px;
@@ -14,9 +14,6 @@
 .quickViewModal {
   padding: 20px !important;
   margin: auto;
-}
-.customModal {
-  // display: block;
 }
 .filterBar {
   border-radius: 3px;

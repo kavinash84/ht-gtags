@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Container from 'hometown-components/lib/Container';
-import Row from 'hometown-components/lib/Row';
 import Div from 'hometown-components/lib/Div';
 import Text from 'hometown-components/lib/Text';
 import Img from 'hometown-components/lib/Img';
@@ -168,16 +167,14 @@ class Feedback extends React.Component {
           display="flex"
         >
           <Container type="container" pr="1.5rem" pl="1.5rem">
-            <Row m="0 -0.625rem">
-              <FeedBackForm
-                onSubmitForm={this.onSubmitForm}
-                handleChange={this.handleChange}
-                handleCheckBoxChange={this.handleCheckBoxChange}
-                {...this.state}
-                loading={loading}
-                loaded={loaded}
-              />
-            </Row>
+            <FeedBackForm
+              onSubmitForm={this.onSubmitForm}
+              handleChange={this.handleChange}
+              handleCheckBoxChange={this.handleCheckBoxChange}
+              {...this.state}
+              loading={loading}
+              loaded={loaded}
+            />
             <ResponsiveModal onCloseModal={this.handleModal} open={open}>
               <Div ta="center" className={styles.serviceThankYouWrapper}>
                 <Img m="0 auto 5px" width="100px" src={correctIcon} alt="Reload Page" />

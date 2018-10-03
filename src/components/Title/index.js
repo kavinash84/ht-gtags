@@ -7,7 +7,7 @@ const Title = ({
   title, subTitle, ta, titleColor
 }) => (
   <Div mb="1.25rem">
-    <Text fontSize="1rem" color={titleColor} mt="0" mb="0" lh="1.4" ta={ta} fontFamily="regular">
+    <Text fontSize="1.5rem" color={titleColor} mt="0" mb="0.3125rem" lh="1.4" ta={ta} fontFamily="regular">
       {title}
     </Text>
     {subTitle !== '' && (
