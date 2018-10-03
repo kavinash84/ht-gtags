@@ -39,6 +39,7 @@ import ProductDetailsCarousel from './Carousel';
 import BreadCrumb from './BreadCrumb';
 import Pincode from './Pincode';
 import AddToCart from '../AddToCart';
+import BuyNow from '../BuyNow';
 
 const styles = require('./ProductDetails.scss');
 
@@ -272,6 +273,15 @@ class ProductDetails extends React.Component {
                         simpleSku={simpleSku}
                         sku={sku}
                         itemId={sku}
+                        size="block"
+                        btnType="black"
+                        isSoldOut={
+                          !(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)
+                        }
+                      />
+                      <BuyNow
+                        simpleSku={simpleSku}
+                        sku={sku}
                         size="block"
                         btnType="black"
                         isSoldOut={
