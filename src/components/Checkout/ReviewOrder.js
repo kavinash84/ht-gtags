@@ -141,9 +141,20 @@ class ReviewOrder extends Component {
                           Offered By Hometown
                         </Text>
                         <Text fontSize="0.875rem" mt="0">
-                          <Button fontSize="0.875rem" color="#3cc0dc" btnType="link" p="0">
+                          <Button
+                            className={styles.popoverBtn}
+                            fontSize="0.875rem"
+                            color="#3cc0dc"
+                            btnType="link"
+                            p="0"
+                          >
                             Details
                           </Button>
+                          <div className={styles.popover}>
+                            <Text fontSize="0.875rem" mt="0" mb="0" ta="center">
+                              Assembly will be done within 48hrs of Delivery & applicable within serviceable limits
+                            </Text>
+                          </div>
                         </Text>
                       </Div>
                     </Div>

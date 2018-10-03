@@ -39,3 +39,34 @@
 .borderBottom {
   border-bottom: 1px solid;
 }
+.popoverBtn:hover + .popover {
+  display: block !important;
+}
+.popover {
+  border-radius: 2px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 7px 0 rgba(116, 116, 116, 0.5);
+  width: 15rem;
+  text-align: left;
+  padding: 1rem;
+  position: absolute !important;
+  left: 0px !important;
+  top: 100%;
+  z-index: 3 !important;
+  transition: all .3s ease;
+  display: none;
+  :hover {
+    display: block !important;
+  }
+  &:before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid #ededed;
+    top: -7px;
+    left: 43px;
+  }
+}
