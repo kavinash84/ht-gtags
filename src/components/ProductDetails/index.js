@@ -114,8 +114,7 @@ class ProductDetails extends React.Component {
     history.goBack();
     this.setState({ openLogin: false });
   };
-  addReview = (sku, data) => e => {
-    e.preventDefault();
+  addReview = (sku, data) => {
     const { dispatch } = this.context.store;
     dispatch(addReview(sku, data));
   };
