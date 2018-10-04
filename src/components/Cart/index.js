@@ -109,7 +109,11 @@ const Cart = ({
                       <Text color="#575757" fontSize="0.75rem" mt="0" mb="0">
                         Delivery Details
                       </Text>
-                      <Text fontSize="0.875rem" mt="0">
+                      <Text
+                        color={item.product_info.delivery_time_text.indexOf('Sorry') === -1 ? 'green' : 'red'}
+                        fontSize="0.875rem"
+                        mt="0"
+                      >
                         {item.product_info.delivery_time_text}
                       </Text>
                     </Div>
