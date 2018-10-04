@@ -120,49 +120,65 @@ class ReviewOrder extends Component {
                         <Text color="#575757" fontSize="0.75rem" mt="0" mb="0">
                           Delivery Details
                         </Text>
-                        <Text fontSize="0.875rem" mt="0">
+                        <Text
+                          color={item.product_info.delivery_time_text.indexOf('Sorry') === -1 ? 'green' : 'red'}
+                          fontSize="0.875rem"
+                          mt="0"
+                        >
                           {item.product_info.delivery_time_text}
                         </Text>
                       </Div>
-                      <Div color="uspTitle" fontSize="0.75rem">
-                        <Img
-                          width="initial"
-                          height="20px"
-                          mr="0.625rem"
-                          mt="4px"
-                          mb="50px"
-                          float="left"
-                          src={assemblyIcon}
-                        />
-                        <Text color="#575757" fontSize="0.75rem" mt="0" mb="0">
-                          Assembly
-                        </Text>
-                        <Text fontSize="0.875rem" mt="0" mb="0">
-                          Offered By Hometown
-                        </Text>
-                        <Text fontSize="0.875rem" mt="0">
-                          <Button
-                            className={styles.popoverBtn}
-                            fontSize="0.875rem"
-                            color="#3cc0dc"
-                            btnType="link"
-                            p="0"
-                          >
-                            Details
-                          </Button>
-                          <div className={styles.popover}>
-                            <Text fontSize="0.875rem" mt="0" mb="0" ta="center">
-                              Assembly will be done within 48hrs of Delivery & applicable within serviceable limits
-                            </Text>
-                          </div>
-                        </Text>
-                      </Div>
+                      {item.product_info.assembly_service && (
+                        <Div color="uspTitle" fontSize="0.75rem">
+                          <Img
+                            width="initial"
+                            height="20px"
+                            mr="0.625rem"
+                            mt="4px"
+                            mb="50px"
+                            float="left"
+                            src={assemblyIcon}
+                          />
+                          <Text color="#575757" fontSize="0.75rem" mt="0" mb="0">
+                            Assembly
+                          </Text>
+                          <Text fontSize="0.875rem" mt="0" mb="0">
+                            Offered By Hometown
+                          </Text>
+                          <Text fontSize="0.875rem" mt="0">
+                            <Button
+                              className={styles.popoverBtn}
+                              fontSize="0.875rem"
+                              color="#3cc0dc"
+                              btnType="link"
+                              p="0"
+                            >
+                              Details
+                            </Button>
+                            <div className={styles.popover}>
+                              <Text fontSize="0.875rem" mt="0" mb="0" ta="center">
+                                Assembly will be done within 48hrs of Delivery & applicable within serviceable limits
+                              </Text>
+                            </div>
+                          </Text>
+                        </Div>
+                      )}
                     </Div>
                     <Div className="td" col="3" pr="0.625rem">
                       Quantity: {item.qty}
                       <br />
+                      {item.product_info.unit_price !== item.product_info.special_price &&
+                        item.product_info.special_price !== 0 && (
+                        <Label color="black" fontSize="1rem" mt="0.625rem">
+                          <s>Rs. {formatAmount(item.product_info.unit_price)}</s>
+                        </Label>
+                      )}
+                      <br />
                       <Label color="primary" fontSize="1.125rem" mt="0.625rem">
-                        Rs. {formatAmount(item.product_info.net_price)}
+                        Rs.{' '}
+                        {item.product_info.special_price === 0
+                          ? formatAmount(item.product_info.unit_price)
+                          : formatAmount(item.product_info.special_price)}
                       </Label>
                     </Div>
                     {(!item.product_info.is_deliverable || isProductOutofStock(item.configurable_sku)) && (
@@ -171,12 +187,17 @@ class ReviewOrder extends Component {
                           {/* eslint-disable*/}
                           {isProductOutofStock(item.configurable_sku)
                             ? 'This product is out of stock please remove before proceed.'
-                            : "Sorry, this product isn't deliverable to selected pincode, Please remove same to continue."}
+                            : "Sorry, this product isn't deliverable to selected pincode."}
                           <br />
                           {/* eslint-enable */}
                           <Link to="/checkout/delivery-address">
                             <Label fontSize="1rem" fontFamily="light" color="primary" p="0" mt="10px" mb="0">
-                              Edit Cart
+                              Edit Address
+                            </Label>
+                          </Link>
+                          <Link to="/checkout/cart">
+                            <Label fontSize="1rem" fontFamily="light" color="primary" p="0" mt="10px" mb="0">
+                              / Edit Cart
                             </Label>
                           </Link>
                         </h4>

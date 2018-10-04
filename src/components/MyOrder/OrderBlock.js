@@ -90,7 +90,7 @@ const OrderBlock = ({ order }) => (
                   </td>
                   <td width="50%">{item.product_name || 'NOT AVAILABLE'}</td>
                   <td>{item.order_item_status_display_name || 'NOT AVAILABLE'}</td>
-                  <td>{item.delivery_date_text || 'NOT AVAILABLE'}</td>
+                  <td>{item.order_item_status_display_name !== 'Cancelled' ? item.delivery_date_text : '--'}</td>
 
                   {/* <td>{item.carrier_name || 'NOT AVAILABLE'}</td>
                   <td>{item.tracking_id || 'NOT AVAILABLE'}</td> */}

@@ -210,7 +210,13 @@ export default class QuickView extends Component {
               )}
               {deliveredBy &&
                 deliveredBy.indexOf('out') === -1 && (
-                <Text color="green" fontFamily="700" fontSize="0.857rem" mt="0.3125rem" mb="1.5rem">
+                <Text
+                  color={deliveredBy.indexOf('Sorry') === -1 ? 'green' : 'red'}
+                  fontFamily="700"
+                  fontSize="0.857rem"
+                  mt="0.3125rem"
+                  mb="1.5rem"
+                >
                   {deliveredBy}
                 </Text>
               )}

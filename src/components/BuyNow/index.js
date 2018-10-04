@@ -104,7 +104,8 @@ BuyNow.defaultProps = {
   stateId: '',
   size: 'default',
   btnType: 'default',
-  isSoldOut: false
+  isSoldOut: false,
+  history: {}
 };
 
 BuyNow.propTypes = {
@@ -121,7 +122,7 @@ BuyNow.propTypes = {
   btnType: PropTypes.string,
   isSoldOut: PropTypes.bool,
   addedToCart: PropTypes.bool.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object
 };
 
 export default connect(

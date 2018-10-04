@@ -63,14 +63,6 @@ export default class StoreDetails extends Component {
                   {store.phone || null}
                 </Text>
               </Div>
-              <Div col="2">
-                <Heading fontSize="1em" mb="0.625rem" color="secondary">
-                  STORE MANAGER
-                </Heading>
-                <Text fontSize="0.875em" mb="0rem" mt="0.3125rem" color="rgba(0, 0, 0, 0.5)">
-                  {store.store_manager || null}
-                </Text>
-              </Div>
             </Row>
           </Container>
         </Section>
