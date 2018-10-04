@@ -34,7 +34,7 @@ import {
   category as getCategory
 } from 'selectors/product';
 
-import { productPageTitle, productName, productMetaDescription, productMetaKeywords } from 'utils/seo';
+import { productPageTitle, productMetaDescription, productMetaKeywords } from 'utils/seo';
 import ProductDetailsCarousel from './Carousel';
 import BreadCrumb from './BreadCrumb';
 import Pincode from './Pincode';
@@ -158,23 +158,21 @@ class ProductDetails extends React.Component {
     const { short_description: shortDescription } = attributes;
     const simpleSku = Object.keys(simples)[0];
     // const shipping = simples[simpleSku].groupedattributes.product_shipping_cost;
-    const { price, special_price: specialPrice } = meta;
+    const { name, price, special_price: specialPrice } = meta;
     const checkSpecialPrice = specialPrice || price;
     const { adding, added } = reviews;
     const offerImage = simples[simpleSku].groupedattributes.offer_image || null;
     const { showmore } = this.state;
     const isEmiAvailable = Number(checkSpecialPrice) >= 3000;
-    const {
-      family_name: family, main_material: material, color, brand
-    } = gattributes;
+    const { main_material: material, color } = gattributes;
     const { name: categoryName } = category;
-    const name = productName({
-      family,
-      material,
-      color,
-      brand,
-      category: categoryName
-    });
+    // const name = productName({
+    //   family,
+    //   material,
+    //   color,
+    //   brand,
+    //   category: categoryName
+    // });
 
     return (
       <Div type="block">
@@ -369,4 +367,7 @@ ProductDetails.propTypes = {
   gattributes: PropTypes.object.isRequired,
   category: PropTypes.object.isRequired
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductDetails);

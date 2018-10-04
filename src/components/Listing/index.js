@@ -15,7 +15,7 @@ import { toggleWishList, wishListWaitList } from 'redux/modules/wishlist';
 // import { clearAllFilters } from 'redux/modules/products';
 import { setProductPosition } from 'redux/modules/productdetails';
 import { formFilterLink2, formatProductURL } from 'utils/helper';
-import { productUrl } from 'utils/seo';
+// import { productUrl } from 'utils/seo';
 import { formatAmount } from 'utils/formatters';
 import TitleBar from './TitleBar';
 import Dropdown from '../Filters/Filters';
@@ -229,13 +229,14 @@ class Listing extends React.Component {
                     colors={metaResults[index].data.color_group_count.split(' ')[0]}
                     setProductPosition={productPosition}
                     productURL={formatProductURL(
-                      productUrl(
-                        item.data.family_name,
-                        item.data.main_material,
-                        'categoryName',
-                        item.data.color,
-                        item.data.brand
-                      ),
+                      // productUrl(
+                      //   item.data.family_name,
+                      //   item.data.main_material,
+                      //   'categoryName',
+                      //   item.data.color,
+                      //   item.data.brand
+                      // ),
+                      item.data.name,
                       item.data.sku
                     )}
                   />
