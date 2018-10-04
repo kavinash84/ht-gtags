@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { PINCODE as PINCODE_API } from 'helpers/apiUrls';
+import { PINCODE } from 'helpers/Constants';
 import { allowNChar, allowTypeOf } from 'utils/helper';
 import { setCity } from './app';
 import { loadCart } from './cart';
@@ -28,7 +29,7 @@ const initialState = {
   results: [],
   pincodeQuery: '',
   showResults: false,
-  selectedPincode: '',
+  selectedPincode: PINCODE,
   pincodeDetails: [],
   city: null
 };
