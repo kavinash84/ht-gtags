@@ -21,6 +21,7 @@ import { isBlank } from 'js-utility-functions';
 import MenuCheckout from './MenuCheckout';
 import AddressForm from './AddressForm';
 import OrderSummary from './OrderSummary';
+import PaymentMethods from '../PaymentMethods/';
 
 // import { getNotDelivered } from 'selectors/cart';
 
@@ -247,7 +248,7 @@ class DeliveryAddress extends Component {
         <MenuCheckout page="delivery" history={history} />
         <Section display="flex" pt="2.25rem" mb="1rem" height="auto">
           <Container type="container" pr="2rem" pl="2rem">
-            <Div col="9" mt="0">
+            <Div col="9" mt="0" pr="1rem">
               {!isLoggedIn && (
                 <Div col="12" className={styles.isLoggedIn}>
                   <Label fontSize="1rem" mt="0" mb="0" color="textLight">
@@ -342,10 +343,7 @@ class DeliveryAddress extends Component {
                         Different Billing Address ?
                       </Label>
                       {!shippingIsBilling && (
-                        <Div col="12" mt="1rem">
-                          <Label fontSize="1.125rem" mb="0.875rem">
-                            Billing Address
-                          </Label>
+                        <Div col="12" mt="11px">
                           <AddressForm formType="billing" isLoggedIn={isLoggedIn} userEmail={userEmail} />
                         </Div>
                       )}
@@ -379,6 +377,7 @@ class DeliveryAddress extends Component {
                 itemsCount={summary.items_count}
                 hidebutton
               />
+              <PaymentMethods />
             </Div>
           </Container>
         </Section>

@@ -27,6 +27,7 @@ import { validatePaymentDetails } from '../../utils/validation';
 import BankCard from './BankCard';
 import CardForm from './CardForm';
 import Emi from './Emi';
+import PaymentMethods from '../PaymentMethods/';
 
 const styles = require('./Checkout.scss');
 
@@ -257,6 +258,7 @@ class PaymentOptions extends Component {
                     </Button>
                   </Div>
                 </Row>
+                <PaymentMethods />
               </Div>
             </Row>
           </Container>
