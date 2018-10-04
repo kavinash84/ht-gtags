@@ -8,7 +8,7 @@ import Section from 'hometown-components/lib/Section';
 import { Label } from 'hometown-components/lib/Label';
 import ResponsiveModal from 'components/Modal';
 import QuickView from 'components/QuickView/QuickView';
-import LoginModal from 'components/Login/LoginModal';
+import LoginModal from 'containers/Login/LoginForm';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { toggleWishList, wishListWaitList } from 'redux/modules/wishlist';
