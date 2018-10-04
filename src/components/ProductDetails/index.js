@@ -363,7 +363,7 @@ ProductDetails.propTypes = {
   addToWaitList: PropTypes.func.isRequired,
   toggleReviewBox: PropTypes.func.isRequired,
   deliveryDateLoading: PropTypes.bool,
-  categoryDetails: PropTypes.object.isRequired,
+  categoryDetails: PropTypes.array.isRequired,
   gattributes: PropTypes.object.isRequired,
   category: PropTypes.object.isRequired
 };
