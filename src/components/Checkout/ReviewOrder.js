@@ -176,12 +176,17 @@ class ReviewOrder extends Component {
                           {/* eslint-disable*/}
                           {isProductOutofStock(item.configurable_sku)
                             ? 'This product is out of stock please remove before proceed.'
-                            : "Sorry, this product isn't deliverable to selected pincode, Please remove same to continue."}
+                            : "Sorry, this product isn't deliverable to selected pincode."}
                           <br />
                           {/* eslint-enable */}
                           <Link to="/checkout/delivery-address">
                             <Label fontSize="1rem" fontFamily="light" color="primary" p="0" mt="10px" mb="0">
-                              Edit Cart
+                              Edit Address
+                            </Label>
+                          </Link>
+                          <Link to="/checkout/cart">
+                            <Label fontSize="1rem" fontFamily="light" color="primary" p="0" mt="10px" mb="0">
+                              / Edit Cart
                             </Label>
                           </Link>
                         </h4>
