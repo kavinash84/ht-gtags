@@ -19,7 +19,7 @@
   margin: 0 0 0 0;
 }
 .goToCart {
-  line-height: 1.65;
+  line-height: 1.5;
   display: inline-block;
   // position: relative;
   // top: 7px;
@@ -33,11 +33,13 @@
   background-color: #515151;
   border-color: #515151;
   border: 1px solid;
-  padding: 10px 15px;
+  padding: 8px 15px;
   margin: 0 0 0 5px;
   border-radius: 3px;
   &.heightFix {
     height: 50px;
+    line-height: 1.75;
+    padding: 8px 15px;
   }
   &:hover {
     color: $primary;

@@ -14,6 +14,7 @@ import { withRouter } from 'react-router';
 const checkSKUInCart = (list, sku) => list.includes(sku);
 const styles = require('./BuyNow.scss');
 const LoaderIcon = require('../../../static/refresh.svg');
+const buyNowIcon = require('../../../static/buynow-icon.png');
 
 const mapStateToProps = ({
   app: { sessionId }, pincode, cart, cart: { addingToCart, addedToCart, key }
@@ -76,6 +77,7 @@ class BuyNow extends React.Component {
                 onClick={this.handleClick(itemId, sku, simpleSku, session, pincode)(addToCart)}
                 className={styles.buyNowBtn}
               >
+                {!addLoading && <Img width="24px" va="middle" src={buyNowIcon} display="inline" />}
                 {addLoading && <Img width="24px" className="spin" src={LoaderIcon} display="inline" />}
                 <Span ml="0.625rem" fontSize="14px" fontFamily="regular" color="#FFF" va="top">
                   Buy Now
@@ -85,7 +87,7 @@ class BuyNow extends React.Component {
               <Div display="block" mb="0.625rem">
                 <Link className={styles.buyNowBtn} to={CART_URL}>
                   <Span ml="0.625rem" fontSize="14px" fontFamily="regular" color="#FFF" va="middle">
-                    Buy Now
+                    <Img width="24px" va="middle" src={buyNowIcon} display="inline" /> Buy Now
                   </Span>
                 </Link>
               </Div>

@@ -270,6 +270,7 @@ class ProductDetails extends React.Component {
                         itemId={sku}
                         size="block"
                         btnType="black"
+                        btnColor="#515151"
                         height="50px"
                         isSoldOut={
                           !(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)

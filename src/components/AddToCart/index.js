@@ -14,7 +14,7 @@ import { PINCODE, CART_URL } from 'helpers/Constants';
 const checkSKUInCart = (list, sku) => list.includes(sku);
 const styles = require('./AddToCart.scss');
 const LoaderIcon = require('../../../static/refresh.svg');
-const CheckedIcon = require('../../../static/checked.svg');
+const CheckedIcon = require('../../../static/added-to-cart-icon.png');
 
 const onClick = (key, skuId, simpleSku, session, pincode) => dispatcher => e => {
   e.preventDefault();
@@ -44,8 +44,8 @@ const AddToCart = ({
   stateId,
   size,
   isSoldOut,
-  btnType,
-  height
+  height,
+  btnColor
 }) => {
   const checkStatus = checkSKUInCart(cartSKUs, sku);
   const addLoading = addingToCart && stateId === itemId;
@@ -73,9 +73,9 @@ const AddToCart = ({
             <Button
               btnType="custom"
               border="1px solid"
-              bc={btnType === 'black' ? 'transparent' : '#f98d29'}
-              color={btnType === 'black' ? '#FFF' : '#FFF'}
-              bg={btnType === 'black' ? '#515151' : '#f98d29'}
+              bc={btnColor === 'transparent' ? '#f98d29' : btnColor}
+              color={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
+              bg={btnColor === 'transparent' ? 'transparent' : btnColor}
               p="7px 15px 2px"
               size={size}
               disabled={addLoading}
@@ -83,13 +83,13 @@ const AddToCart = ({
               className={styles.addToCartBtn}
               height={height}
             >
-              {!addLoading && <AddCart fill={btnType === 'black' ? '#FFF' : '#FFF'} />}
+              {!addLoading && <AddCart fill={btnColor === 'transparent' ? '#f98d29' : '#FFF'} />}
               {addLoading && <Img width="24px" className="spin" src={LoaderIcon} display="inline" />}
               <Span
                 ml="0.625rem"
                 fontSize="14px"
                 fontFamily="regular"
-                color={btnType === 'black' ? '#FFF' : '#FFF'}
+                color={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
                 va="top"
               >
                 {addLoading ? 'Adding..' : 'Add to Cart'}
@@ -120,9 +120,9 @@ AddToCart.defaultProps = {
   itemId: '',
   stateId: '',
   size: 'default',
-  btnType: 'default',
   isSoldOut: false,
-  height: 'auto'
+  height: 'auto',
+  btnColor: '#f98d29'
 };
 
 AddToCart.propTypes = {
@@ -136,8 +136,8 @@ AddToCart.propTypes = {
   itemId: PropTypes.string,
   stateId: PropTypes.string,
   size: PropTypes.string,
-  btnType: PropTypes.string,
   height: PropTypes.string,
+  btnColor: PropTypes.string,
   isSoldOut: PropTypes.bool
 };
 
