@@ -44,7 +44,8 @@ const AddToCart = ({
   stateId,
   size,
   isSoldOut,
-  btnType
+  btnType,
+  height
 }) => {
   const checkStatus = checkSKUInCart(cartSKUs, sku);
   const addLoading = addingToCart && stateId === itemId;
@@ -52,7 +53,15 @@ const AddToCart = ({
     <div>
       {isSoldOut ? (
         <div>
-          <Button btnType="custom" border="1px solid" bc="white" color="red" p="6px 15px 7px" size={size}>
+          <Button
+            btnType="custom"
+            border="1px solid"
+            bc="white"
+            color="red"
+            p="6px 15px 7px"
+            size={size}
+            height={height}
+          >
             <Span fontSize="0.857rem" fontFamily="medium" color="red" va="text-top">
               {'OUT OF STOCK'}
             </Span>
@@ -72,12 +81,13 @@ const AddToCart = ({
               disabled={addLoading}
               onClick={onClick(itemId, sku, simpleSku, session, pincode)(addToCart)}
               className={styles.addToCartBtn}
+              height={height}
             >
               {!addLoading && <AddCart fill={btnType === 'black' ? '#FFF' : '#FFF'} />}
               {addLoading && <Img width="24px" className="spin" src={LoaderIcon} display="inline" />}
               <Span
                 ml="0.625rem"
-                fontSize="0.857rem"
+                fontSize="14px"
                 fontFamily="regular"
                 color={btnType === 'black' ? '#FFF' : '#FFF'}
                 va="top"
@@ -91,8 +101,10 @@ const AddToCart = ({
                 <Img width="22px" src={CheckedIcon} display="inline" va="middle" mr="8px" />
                 Added to Cart
               </span>
-              <Link className={styles.goToCart} to={CART_URL}>
-                Go To Cart
+              <Link className={`${styles.goToCart} ${height !== 'auto' && styles.heightFix} `} to={CART_URL}>
+                <Span fontSize="14px" fontFamily="regular" color="#FFF" va="middle">
+                  Go to Cart
+                </Span>
               </Link>
             </Div>
           )}
@@ -109,7 +121,8 @@ AddToCart.defaultProps = {
   stateId: '',
   size: 'default',
   btnType: 'default',
-  isSoldOut: false
+  isSoldOut: false,
+  height: 'auto'
 };
 
 AddToCart.propTypes = {
@@ -124,6 +137,7 @@ AddToCart.propTypes = {
   stateId: PropTypes.string,
   size: PropTypes.string,
   btnType: PropTypes.string,
+  height: PropTypes.string,
   isSoldOut: PropTypes.bool
 };
 

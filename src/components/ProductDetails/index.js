@@ -265,22 +265,25 @@ class ProductDetails extends React.Component {
                     </Row>
                   )}
                   <Row display="block" mt="0.625rem" mb="0.625rem" mr="0.9375rem" ml="0.9375rem">
-                    <Div col="8" mt="0" pr="0.3125rem">
+                    <Div col="6" mt="0" pr="0.3125rem">
                       <AddToCart
                         simpleSku={simpleSku}
                         sku={sku}
                         itemId={sku}
                         size="block"
                         btnType="black"
+                        height="50px"
                         isSoldOut={
                           !(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)
                         }
                       />
+                    </Div>
+                    <Div col="6" mt="0" pr="0.3125rem">
                       <BuyNow
                         simpleSku={simpleSku}
                         sku={sku}
                         size="block"
-                        btnType="black"
+                        btnType="primary"
                         isSoldOut={
                           !(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)
                         }
@@ -369,4 +372,7 @@ ProductDetails.propTypes = {
   gattributes: PropTypes.object.isRequired,
   category: PropTypes.object.isRequired
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductDetails);

@@ -66,32 +66,27 @@ class BuyNow extends React.Component {
           <div>
             {!checkStatus ? (
               <Button
-                btnType="custom"
+                btnType={btnType}
                 border="1px solid"
-                bc={btnType === 'black' ? 'transparent' : '#f98d29'}
-                color={btnType === 'black' ? '#FFF' : '#f98d29'}
-                bg={btnType === 'black' ? '#515151' : 'transparent'}
+                bc="#f98d29"
+                color="#FFF"
                 p="7px 15px 2px"
                 size={size}
                 disabled={addLoading}
                 onClick={this.handleClick(itemId, sku, simpleSku, session, pincode)(addToCart)}
-                className={styles.addToCartBtn}
+                className={styles.buyNowBtn}
               >
                 {addLoading && <Img width="24px" className="spin" src={LoaderIcon} display="inline" />}
-                <Span
-                  ml="0.625rem"
-                  fontSize="0.857rem"
-                  fontFamily="regular"
-                  color={btnType === 'black' ? '#FFF' : '#f98d29'}
-                  va="top"
-                >
-                  BUY NOW
+                <Span ml="0.625rem" fontSize="14px" fontFamily="regular" color="#FFF" va="top">
+                  Buy Now
                 </Span>
               </Button>
             ) : (
               <Div display="block" mb="0.625rem">
-                <Link className={styles.goToCart} to={CART_URL}>
-                  BUY NOW
+                <Link className={styles.buyNowBtn} to={CART_URL}>
+                  <Span ml="0.625rem" fontSize="14px" fontFamily="regular" color="#FFF" va="middle">
+                    Buy Now
+                  </Span>
                 </Link>
               </Div>
             )}

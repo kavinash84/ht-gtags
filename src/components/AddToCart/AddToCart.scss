@@ -3,42 +3,48 @@
 
 .addedToCart {
   line-height: 1.5;
-  display: inline;
-  position: relative;
-  top: 7px;
+  display: inline-block;
+  // position: relative;
+  // top: 7px;
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
   transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
   padding: .375rem .75rem;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   color: $textFull;
   background-color: transparent;
   border: none;
-  padding: 10px 5px 9px;
-  margin: 0 0 0 5px;
+  padding: 10px 5px 10px 0;
+  margin: 0 0 0 0;
 }
-
 .goToCart {
-  line-height: 1.5;
-  display: inline;
-  position: relative;
-  top: 7px;
+  line-height: 1.65;
+  display: inline-block;
+  // position: relative;
+  // top: 7px;
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
   transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
   padding: .375rem .75rem;
-  font-size: 0.857rem;
+  font-size: 14px;
   color: $white;
-  background-color: $primary;
-  border-color: $primary;
+  background-color: #515151;
+  border-color: #515151;
   border: 1px solid;
   padding: 10px 15px;
-  margin: 0 5px;
+  margin: 0 0 0 5px;
+  border-radius: 3px;
+  &.heightFix {
+    height: 50px;
+  }
   &:hover {
     color: $primary;
     background-color: $white;
+    span {
+      color: $primary;
+    }
   }
 }
 .addToCartBtn {
