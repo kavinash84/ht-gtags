@@ -120,7 +120,11 @@ class ReviewOrder extends Component {
                         <Text color="#575757" fontSize="0.75rem" mt="0" mb="0">
                           Delivery Details
                         </Text>
-                        <Text fontSize="0.875rem" mt="0">
+                        <Text
+                          color={item.product_info.delivery_time_text.indexOf('Sorry') === -1 ? 'green' : 'red'}
+                          fontSize="0.875rem"
+                          mt="0"
+                        >
                           {item.product_info.delivery_time_text}
                         </Text>
                       </Div>
@@ -152,14 +156,18 @@ class ReviewOrder extends Component {
                     <Div className="td" col="3" pr="0.625rem">
                       Quantity: {item.qty}
                       <br />
-                      {item.product_info.unit_price !== item.product_info.special_price && (
+                      {item.product_info.unit_price !== item.product_info.special_price &&
+                        item.product_info.special_price !== 0 && (
                         <Label color="black" fontSize="1rem" mt="0.625rem">
                           <s>Rs. {formatAmount(item.product_info.unit_price)}</s>
                         </Label>
                       )}
                       <br />
                       <Label color="primary" fontSize="1.125rem" mt="0.625rem">
-                        Rs. {formatAmount(item.product_info.special_price)}
+                        Rs.{' '}
+                        {item.product_info.special_price === 0
+                          ? formatAmount(item.product_info.unit_price)
+                          : formatAmount(item.product_info.special_price)}
                       </Label>
                     </Div>
                     {(!item.product_info.is_deliverable || isProductOutofStock(item.configurable_sku)) && (
