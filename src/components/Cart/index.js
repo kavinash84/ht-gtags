@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Container from 'hometown-components/lib/Container';
 import { Label } from 'hometown-components/lib/Label';
 import Div from 'hometown-components/lib/Div';
@@ -10,6 +11,7 @@ import Button from 'hometown-components/lib/Buttons';
 import Section from 'hometown-components/lib/Section';
 import Heading from 'hometown-components/lib/Heading';
 import Img from 'hometown-components/lib/Img';
+import { formatProductURL } from 'utils/helper';
 import ImageShimmer from 'hometown-components/lib/ImageShimmer';
 import Text from 'hometown-components/lib/Text';
 import * as actionCreators from 'redux/modules/cart';
@@ -88,16 +90,20 @@ const Cart = ({
               {results.map(item => (
                 <Row className={styles.cartItem} type="block" m="0" mb="0" mt="0" key={item.id_customer_cart}>
                   <Div className="td" col="2" pr="0.625rem">
-                    <ImageShimmer src={item.product_info.image} height="131px">
-                      {imageURL => <Img src={imageURL} alt="" />}
-                    </ImageShimmer>
+                    <Link to={formatProductURL(item.product_info.name, item.configurable_sku)}>
+                      <ImageShimmer src={item.product_info.image} height="131px">
+                        {imageURL => <Img src={imageURL} alt="" />}
+                      </ImageShimmer>
+                    </Link>
                   </Div>
                   <Div className="td" col="6" pr="2rem" pl="0.3125rem">
-                    <Div mb="10px">
-                      <Label color="text" mt="0">
-                        {item.product_info.name}
-                      </Label>
-                    </Div>
+                    <Link to={formatProductURL(item.product_info.name, item.configurable_sku)}>
+                      <Div mb="10px">
+                        <Label color="text" mt="0">
+                          {item.product_info.name}
+                        </Label>
+                      </Div>
+                    </Link>
                     <Div>
                       <Img width="initial" height="20px" mr="0.625rem" mt="3px" float="left" src={calendarImage} />
                       <Text color="#575757" fontSize="0.75rem" mt="0" mb="0">
@@ -141,14 +147,18 @@ const Cart = ({
                       skuId={item.configurable_sku}
                     />
                     <Div mt="0.3125rem">
-                      {item.product_info.unit_price !== item.product_info.special_price && (
+                      {item.product_info.unit_price !== item.product_info.special_price &&
+                        item.product_info.special_price !== 0 && (
                         <Label color="black" fontSize="0.875rem" mt="0">
                           <s>Rs. {formatAmount(item.product_info.unit_price)}</s>
                         </Label>
                       )}
                       <br />
                       <Label color="primary" fontSize="1.25rem" mt="0">
-                        Rs. {formatAmount(item.product_info.special_price)}
+                        Rs.{' '}
+                        {item.product_info.special_price === 0
+                          ? formatAmount(item.product_info.unit_price)
+                          : formatAmount(item.product_info.special_price)}
                       </Label>
                     </Div>
                   </Div>
