@@ -35,10 +35,10 @@ import { isKeyExists } from 'utils/helper';
       await wrapDispatch(dispatch, 'menu')(loadMainMenu());
     }
     if (!isSectionLoaded(getState(), 'banners')) {
-      await wrapDispatch(dispatch, 'banners')(loadBanners()).catch(error => error);
+      await wrapDispatch(dispatch, 'banners')(loadBanners()).catch(error => console.log(error));
     }
     if (sessionId && !isCartLoaded(getState())) {
-      await dispatch(loadCart(sessionId, defaultPincode)).catch(error => error);
+      await dispatch(loadCart(sessionId, defaultPincode)).catch(error => console.log(error));
     }
   },
   defer: ({ store: { dispatch, getState } }) => {
