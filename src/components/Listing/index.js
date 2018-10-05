@@ -8,14 +8,14 @@ import Section from 'hometown-components/lib/Section';
 import { Label } from 'hometown-components/lib/Label';
 import ResponsiveModal from 'components/Modal';
 import QuickView from 'components/QuickView/QuickView';
-import LoginModal from 'components/Login/LoginModal';
+import LoginModal from 'containers/Login/LoginForm';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { toggleWishList, wishListWaitList } from 'redux/modules/wishlist';
 // import { clearAllFilters } from 'redux/modules/products';
 import { setProductPosition } from 'redux/modules/productdetails';
 import { formFilterLink2, formatProductURL } from 'utils/helper';
-import { productUrl } from 'utils/seo';
+// import { productUrl } from 'utils/seo';
 import { formatAmount } from 'utils/formatters';
 import TitleBar from './TitleBar';
 import Dropdown from '../Filters/Filters';
@@ -33,10 +33,13 @@ const getProductImage = url => {
   return url.replace(pp, '1-product_500.jpg');
 };
 
-const onClickWishList = (list, dispatcher, isUserLoggedIn, history, onOpenLoginModal, addToWaitList) => sku => e => {
+const onClickWishList = (list, dispatcher, isUserLoggedIn, history, onOpenLoginModal, addToWaitList) => (
+  sku,
+  simpleSku
+) => e => {
   e.preventDefault();
-  if (isUserLoggedIn) return dispatcher(list, sku);
-  addToWaitList(sku);
+  if (isUserLoggedIn) return dispatcher(list, sku, simpleSku);
+  addToWaitList(sku, simpleSku);
   return onOpenLoginModal();
 };
 
@@ -202,7 +205,7 @@ class Listing extends React.Component {
                     saving={item.saving}
                     image={getProductImage(item.images && item.images.length > 0 && item.images[0].path)}
                     sku={item.data.sku}
-                    simple_sku={item.simples}
+                    simpleSku={Object.keys(item.data.simples)[0]}
                     onClick={onClickWishList(
                       wishListData,
                       wishlistToggle,
@@ -228,16 +231,7 @@ class Listing extends React.Component {
                     deliveredBy={item.data.delivery_details[0].value}
                     colors={metaResults[index].data.color_group_count.split(' ')[0]}
                     setProductPosition={productPosition}
-                    productURL={formatProductURL(
-                      productUrl(
-                        item.data.family_name,
-                        item.data.main_material,
-                        'categoryName',
-                        item.data.color,
-                        item.data.brand
-                      ),
-                      item.data.sku
-                    )}
+                    productURL={formatProductURL(item.data.name, item.data.sku)}
                   />
                   <Div mt="0" p="0.25rem 0.125rem 0.5rem">
                     <AddToCart
@@ -245,6 +239,8 @@ class Listing extends React.Component {
                       sku={item.data.sku}
                       itemId={item.id}
                       isSoldOut={item.soldout}
+                      btnType="black"
+                      btnColor="transparent"
                     />
                   </Div>
                 </div>
@@ -317,7 +313,4 @@ Listing.propTypes = {
   breadCrumbs: PropTypes.array.isRequired
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Listing);
+export default connect(null, mapDispatchToProps)(Listing);

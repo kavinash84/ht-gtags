@@ -1,26 +1,34 @@
 @import "../../theme/_variables";
 @import "../../theme/_mixins";
 
-.addedToCart {
-  line-height: 1.5;
-  display: inline;
-  position: relative;
-  top: 7px;
+.buyNowBtn {
+  font-family: regular;
+  line-height: 1.9;
+  display: inline-block;
+  cursor: pointer;
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
+  -webkit-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
   transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  border-radius: 3px;
+  display: block;
+  width: 100%;
   padding: .375rem .75rem;
-  font-size: 0.875rem;
-  color: $textFull;
-  background-color: transparent;
-  border: none;
-  padding: 10px 5px 9px;
-  margin: 0 0 0 5px;
+  font-size: 14px;
+  color: #FFF;
+  background-color: #f98d29;
+  border: 1px solid #f98d29;
+  height: 50px;
+  &:hover {
+    background: transparent;
+    span {
+      color: $primary !important;
+    }
+  }
 }
-
-.goToCart {
-  line-height: 1.5;
+.goTobuyNowBtn {
+  line-height: 1.65;
   display: inline;
   position: relative;
   top: 7px;
@@ -29,7 +37,7 @@
   vertical-align: middle;
   transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
   padding: .375rem .75rem;
-  font-size: 0.857rem;
+  font-size: 14px;
   color: $white;
   background-color: $primary;
   border-color: $primary;
@@ -39,18 +47,5 @@
   &:hover {
     color: $primary;
     background-color: $white;
-  }
-}
-.addToCartBtn {
-  transition: 0.75s all ease;
-  border-radius: 3px;
-  &:hover {
-    background-color: $primary !important;
-    span {
-      color: #FFF !important;
-    }
-    svg {
-      fill: #FFF !important;
-    }
   }
 }

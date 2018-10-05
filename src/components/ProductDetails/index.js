@@ -34,7 +34,7 @@ import {
   category as getCategory
 } from 'selectors/product';
 
-import { productPageTitle, productName, productMetaDescription, productMetaKeywords } from 'utils/seo';
+import { productPageTitle, productMetaDescription, productMetaKeywords } from 'utils/seo';
 import ProductDetailsCarousel from './Carousel';
 import BreadCrumb from './BreadCrumb';
 import Pincode from './Pincode';
@@ -158,23 +158,21 @@ class ProductDetails extends React.Component {
     const { short_description: shortDescription } = attributes;
     const simpleSku = Object.keys(simples)[0];
     // const shipping = simples[simpleSku].groupedattributes.product_shipping_cost;
-    const { price, special_price: specialPrice } = meta;
+    const { name, price, special_price: specialPrice } = meta;
     const checkSpecialPrice = specialPrice || price;
     const { adding, added } = reviews;
     const offerImage = simples[simpleSku].groupedattributes.offer_image || null;
     const { showmore } = this.state;
     const isEmiAvailable = Number(checkSpecialPrice) >= 3000;
-    const {
-      family_name: family, main_material: material, color, brand
-    } = gattributes;
+    const { main_material: material, color } = gattributes;
     const { name: categoryName } = category;
-    const name = productName({
-      family,
-      material,
-      color,
-      brand,
-      category: categoryName
-    });
+    // const name = productName({
+    //   family,
+    //   material,
+    //   color,
+    //   brand,
+    //   category: categoryName
+    // });
 
     return (
       <Div type="block">
@@ -265,22 +263,26 @@ class ProductDetails extends React.Component {
                     </Row>
                   )}
                   <Row display="block" mt="0.625rem" mb="0.625rem" mr="0.9375rem" ml="0.9375rem">
-                    <Div col="8" mt="0" pr="0.3125rem">
+                    <Div col="6" mt="0" pr="0.3125rem">
                       <AddToCart
                         simpleSku={simpleSku}
                         sku={sku}
                         itemId={sku}
                         size="block"
                         btnType="black"
+                        btnColor="#515151"
+                        height="50px"
                         isSoldOut={
                           !(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)
                         }
                       />
+                    </Div>
+                    <Div col="6" mt="0" pr="0.3125rem">
                       <BuyNow
                         simpleSku={simpleSku}
                         sku={sku}
                         size="block"
-                        btnType="black"
+                        btnType="primary"
                         isSoldOut={
                           !(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)
                         }
@@ -365,8 +367,11 @@ ProductDetails.propTypes = {
   addToWaitList: PropTypes.func.isRequired,
   toggleReviewBox: PropTypes.func.isRequired,
   deliveryDateLoading: PropTypes.bool,
-  categoryDetails: PropTypes.object.isRequired,
+  categoryDetails: PropTypes.array.isRequired,
   gattributes: PropTypes.object.isRequired,
   category: PropTypes.object.isRequired
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductDetails);

@@ -2,28 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Container from 'hometown-components/lib/Container';
 import { Label } from 'hometown-components/lib/Label';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Button from 'hometown-components/lib/Buttons';
 import Section from 'hometown-components/lib/Section';
-import Heading from 'hometown-components/lib/Heading';
 import Img from 'hometown-components/lib/Img';
+import { formatProductURL } from 'utils/helper';
 import ImageShimmer from 'hometown-components/lib/ImageShimmer';
 import Text from 'hometown-components/lib/Text';
 import * as actionCreators from 'redux/modules/cart';
 import { formatAmount } from 'utils/formatters';
 import ProductQuantity from './UpdateProductQuantity';
 import OrderSummary from '../Checkout/OrderSummary';
+import PaymentMethods from '../PaymentMethods/';
 
 const styles = require('./Cart.scss');
 
-const aeIcon = require('../../../static/american-express.svg');
-const maestroIcon = require('../../../static/maestro.svg');
-const mastercardIcon = require('../../../static/mastercard.svg');
-const visaIcon = require('../../../static/visa.svg');
-const intBankingIcon = require('../../../static/net-banking.png');
 const calendarImage = require('../../../static/calendar.svg');
 const assemblyIcon = require('../../../static/cube-of-notes-stack.svg');
 const deleteIcon = require('../../../static/delete.svg');
@@ -88,22 +85,30 @@ const Cart = ({
               {results.map(item => (
                 <Row className={styles.cartItem} type="block" m="0" mb="0" mt="0" key={item.id_customer_cart}>
                   <Div className="td" col="2" pr="0.625rem">
-                    <ImageShimmer src={item.product_info.image} height="131px">
-                      {imageURL => <Img src={imageURL} alt="" />}
-                    </ImageShimmer>
+                    <Link to={formatProductURL(item.product_info.name, item.configurable_sku)}>
+                      <ImageShimmer src={item.product_info.image} height="131px">
+                        {imageURL => <Img src={imageURL} alt="" />}
+                      </ImageShimmer>
+                    </Link>
                   </Div>
                   <Div className="td" col="6" pr="2rem" pl="0.3125rem">
-                    <Div mb="10px">
-                      <Label color="text" mt="0">
-                        {item.product_info.name}
-                      </Label>
-                    </Div>
+                    <Link to={formatProductURL(item.product_info.name, item.configurable_sku)}>
+                      <Div mb="10px">
+                        <Label color="text" mt="0">
+                          {item.product_info.name}
+                        </Label>
+                      </Div>
+                    </Link>
                     <Div>
                       <Img width="initial" height="20px" mr="0.625rem" mt="3px" float="left" src={calendarImage} />
                       <Text color="#575757" fontSize="0.75rem" mt="0" mb="0">
                         Delivery Details
                       </Text>
-                      <Text fontSize="0.875rem" mt="0">
+                      <Text
+                        color={item.product_info.delivery_time_text.indexOf('Sorry') === -1 ? 'green' : 'red'}
+                        fontSize="0.875rem"
+                        mt="0"
+                      >
                         {item.product_info.delivery_time_text}
                       </Text>
                     </Div>
@@ -140,14 +145,21 @@ const Cart = ({
                       simpleSku={item.simple_sku}
                       skuId={item.configurable_sku}
                     />
-                    {item.product_info.unit_price !== item.product_info.special_price && (
-                      <Label color="black" fontSize="1rem" mt="0.625rem">
-                        <s>Rs. {formatAmount(item.product_info.unit_price)}</s>
+                    <Div mt="0.3125rem">
+                      {item.product_info.unit_price !== item.product_info.special_price &&
+                        item.product_info.special_price !== 0 && (
+                        <Label color="black" fontSize="0.875rem" mt="0">
+                          <s>Rs. {formatAmount(item.product_info.unit_price)}</s>
+                        </Label>
+                      )}
+                      <br />
+                      <Label color="primary" fontSize="1.25rem" mt="0">
+                        Rs.{' '}
+                        {item.product_info.special_price === 0
+                          ? formatAmount(item.product_info.unit_price)
+                          : formatAmount(item.product_info.special_price)}
                       </Label>
-                    )}
-                    <Label color="primary" fontSize="1.125rem" mt="0.625rem">
-                      Rs. {formatAmount(item.product_info.special_price)}
-                    </Label>
+                    </Div>
                   </Div>
                   <Div className="td" col="1" pr="0.625rem" ta="right">
                     <Button
@@ -174,7 +186,7 @@ const Cart = ({
                           color="#f98d29"
                           btnType="link"
                           p="0"
-                          mt="0"
+                          mt="8px"
                           onClick={onClick(item.id_customer_cart, sessionId, pincode)(removeFromCart)}
                         >
                           Remove
@@ -196,35 +208,7 @@ const Cart = ({
                 itemsCount={summary.items_count}
                 outOfStockList={outOfStockList}
               />
-              <Div mt="1rem" pl="0.625rem" pr="0.625rem">
-                <Heading fontSize="1em" mb="0.625rem" color="secondary">
-                  We Accept
-                </Heading>
-                <Row ml="0" mr="0">
-                  <Div col="2" mb="0" p="0 5px">
-                    <Img src={visaIcon} alt="visaCard" width="100%" />
-                  </Div>
-                  <Div col="2" mb="0" p="0 5px">
-                    <Img src={mastercardIcon} alt="Master Card" width="100%" />
-                  </Div>
-                  <Div col="2" mb="0" p="0 5px">
-                    <Img src={maestroIcon} alt="Maestro" width="100%" />
-                  </Div>
-                  <Div col="2" mb="0" p="0 5px">
-                    <Img src={aeIcon} alt="Amex" width="100%" />
-                  </Div>
-                  <Div col="2" mb="0" p="0 5px">
-                    <Img src={intBankingIcon} alt="Diners Club" width="100%" />
-                  </Div>
-                </Row>
-                <Row ml="0" mr="0">
-                  <Div col="12" mb="0" p="0 10px">
-                    <Text mt="0.3125rem" fontSize="0.75rem" color="rgba(0,0,0,0.5)">
-                      International card also accepted.
-                    </Text>
-                  </Div>
-                </Row>
-              </Div>
+              <PaymentMethods />
             </Div>
           </Row>
         </Container>
@@ -257,4 +241,7 @@ Cart.defaultProps = {
   outOfStockList: []
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Cart);

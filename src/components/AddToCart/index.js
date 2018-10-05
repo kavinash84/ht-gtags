@@ -14,7 +14,7 @@ import { PINCODE, CART_URL } from 'helpers/Constants';
 const checkSKUInCart = (list, sku) => list.includes(sku);
 const styles = require('./AddToCart.scss');
 const LoaderIcon = require('../../../static/refresh.svg');
-const CheckedIcon = require('../../../static/checked.svg');
+const CheckedIcon = require('../../../static/added-to-cart-icon.png');
 
 const onClick = (key, skuId, simpleSku, session, pincode) => dispatcher => e => {
   e.preventDefault();
@@ -44,7 +44,8 @@ const AddToCart = ({
   stateId,
   size,
   isSoldOut,
-  btnType
+  height,
+  btnColor
 }) => {
   const checkStatus = checkSKUInCart(cartSKUs, sku);
   const addLoading = addingToCart && stateId === itemId;
@@ -52,7 +53,15 @@ const AddToCart = ({
     <div>
       {isSoldOut ? (
         <div>
-          <Button btnType="custom" border="1px solid" bc="white" color="red" p="6px 15px 7px" size={size}>
+          <Button
+            btnType="custom"
+            border="1px solid"
+            bc="white"
+            color="red"
+            p="6px 15px 7px"
+            size={size}
+            height={height}
+          >
             <Span fontSize="0.857rem" fontFamily="medium" color="red" va="text-top">
               {'OUT OF STOCK'}
             </Span>
@@ -64,25 +73,26 @@ const AddToCart = ({
             <Button
               btnType="custom"
               border="1px solid"
-              bc={btnType === 'black' ? 'transparent' : '#f98d29'}
-              color={btnType === 'black' ? '#FFF' : '#f98d29'}
-              bg={btnType === 'black' ? '#515151' : 'transparent'}
+              bc={btnColor === 'transparent' ? '#f98d29' : btnColor}
+              color={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
+              bg={btnColor === 'transparent' ? 'transparent' : btnColor}
               p="7px 15px 2px"
               size={size}
               disabled={addLoading}
               onClick={onClick(itemId, sku, simpleSku, session, pincode)(addToCart)}
               className={styles.addToCartBtn}
+              height={height}
             >
-              {!addLoading && <AddCart fill={btnType === 'black' ? '#FFF' : '#f98d29'} />}
+              {!addLoading && <AddCart fill={btnColor === 'transparent' ? '#f98d29' : '#FFF'} />}
               {addLoading && <Img width="24px" className="spin" src={LoaderIcon} display="inline" />}
               <Span
                 ml="0.625rem"
-                fontSize="0.857rem"
+                fontSize="14px"
                 fontFamily="regular"
-                color={btnType === 'black' ? '#FFF' : '#f98d29'}
+                color={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
                 va="top"
               >
-                {addLoading ? 'Adding..' : 'ADD TO CART'}
+                {addLoading ? 'Adding..' : 'Add to Cart'}
               </Span>
             </Button>
           ) : (
@@ -91,8 +101,10 @@ const AddToCart = ({
                 <Img width="22px" src={CheckedIcon} display="inline" va="middle" mr="8px" />
                 Added to Cart
               </span>
-              <Link className={styles.goToCart} to={CART_URL}>
-                Go To Cart
+              <Link className={`${styles.goToCart} ${height !== 'auto' && styles.heightFix} `} to={CART_URL}>
+                <Span fontSize="14px" fontFamily="regular" color="#FFF" va="middle">
+                  Go to Cart
+                </Span>
               </Link>
             </Div>
           )}
@@ -108,8 +120,9 @@ AddToCart.defaultProps = {
   itemId: '',
   stateId: '',
   size: 'default',
-  btnType: 'default',
-  isSoldOut: false
+  isSoldOut: false,
+  height: 'auto',
+  btnColor: '#f98d29'
 };
 
 AddToCart.propTypes = {
@@ -123,7 +136,8 @@ AddToCart.propTypes = {
   itemId: PropTypes.string,
   stateId: PropTypes.string,
   size: PropTypes.string,
-  btnType: PropTypes.string,
+  height: PropTypes.string,
+  btnColor: PropTypes.string,
   isSoldOut: PropTypes.bool
 };
 

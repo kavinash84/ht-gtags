@@ -29,6 +29,7 @@ const maestroIcon = require('../../../static/maestro.svg');
 const mastercardIcon = require('../../../static/mastercard.svg');
 const visaIcon = require('../../../static/visa.svg');
 const intBankingIcon = require('../../../static/net-banking.png');
+const walletIcon = require('../../../static/wallet.svg');
 const styles = require('./Footer.scss');
 
 const FooterLinks = require('data/FooterLinks');
@@ -156,17 +157,17 @@ class Footer extends React.Component {
                   </li>
                   <li>
                     <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/hometown_in/?hl=en">
-                      <Img src={instaIcon} alt="Facebook" />
+                      <Img src={instaIcon} alt="Instagram" />
                     </a>
                   </li>
                   <li>
                     <a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/watch?v=gfLZgzaSlmg">
-                      <Img src={ytIcon} alt="Facebook" />
+                      <Img src={ytIcon} alt="Youtube" />
                     </a>
                   </li>
                   <li>
                     <a target="_blank" rel="noopener noreferrer" href="https://in.pinterest.com/hometownstore/">
-                      <Img src={pinIcon} alt="Facebook" />
+                      <Img src={pinIcon} alt="Pinterest" />
                     </a>
                   </li>
                 </ul>
@@ -288,6 +289,9 @@ class Footer extends React.Component {
                   </Div>
                   <Div col="2" p="0 5px">
                     <Img src={intBankingIcon} alt="Internet Banking" width="100%" />
+                  </Div>
+                  <Div col="2" p="3px 5px">
+                    <Img src={walletIcon} height="22px" alt="Wallet" width="100%" />
                   </Div>
                 </Row>
               </Div>
