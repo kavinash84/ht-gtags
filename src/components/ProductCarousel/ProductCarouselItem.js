@@ -11,6 +11,22 @@ import { Link } from 'react-router-dom';
 
 const styles = require('./Slider.scss');
 
+const judgeColor = rating => {
+  if (!rating) {
+    return '';
+  }
+  rating = parseInt(rating, 10);
+  if (rating < 2) {
+    return 'red';
+  }
+  if (rating >= 2 && rating < 3) {
+    return 'yellow';
+  }
+  if (rating >= 3) {
+    return 'green';
+  }
+};
+
 const ProductItem = ({
   image, name, url, discPrice, price, rating, reviewsCount, percentage, height
 }) => (
@@ -37,7 +53,9 @@ const ProductItem = ({
           )}
           {rating > 0 && (
             <Span ml="0.625rem">
-              <Rating rating={parseFloat(rating).toFixed(1)} />
+              <Rating color={judgeColor(rating)} rating={parseFloat(rating).toFixed(1)}>
+                ★ {rating}
+              </Rating>
               <Span mr="0.625rem" fontSize="0.75rem" lh="1.7" va="text-top" color={Theme.colors.textExtraLight}>
                 ({reviewsCount})
               </Span>
