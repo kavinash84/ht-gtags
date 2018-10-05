@@ -74,7 +74,10 @@ export default class CartContainer extends Component {
       return history.push('/checkout/delivery-address');
     }
   }
-  handlePincodeModal = () => {
+  handlePincodeModal = e => {
+    if (e) {
+      e.preventDefault();
+    }
     this.setState({
       openPincode: !this.state.openPincode
     });

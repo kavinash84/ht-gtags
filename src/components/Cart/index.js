@@ -74,7 +74,16 @@ const Cart = ({
                   <Label color="filterTitle" mt="0" mb="0">
                     Delivery & Assembly details for pincode
                   </Label>
-                  <Label className={styles.borderBottom} color="black" mt="0" ml="1rem" mb="0" mr="1rem">
+
+                  <Label
+                    className={styles.borderBottom}
+                    color="black"
+                    mt="0"
+                    ml="1rem"
+                    mb="0"
+                    mr="1rem"
+                    onClick={handlePincodeModal}
+                  >
                     {pincode}
                   </Label>
                   <Button fontSize="0.75rem" color="#3cc0dc" btnType="link" p="0" onClick={handlePincodeModal}>
