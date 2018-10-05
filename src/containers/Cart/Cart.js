@@ -121,7 +121,7 @@ export default class CartContainer extends Component {
           loading && <CartShimmer />
         )}
         <ResponsiveModal
-          // classNames={{ modal: styles.pincodeModal }}
+          classNames={{ modal: 'pincodeModal' }}
           onCloseModal={this.handlePincodeModal}
           open={this.state.openPincode}
         >
