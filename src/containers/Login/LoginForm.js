@@ -7,6 +7,7 @@ import Div from 'hometown-components/lib/Div';
 import Text from 'hometown-components/lib/Text';
 import { Label } from 'hometown-components/lib/Label';
 import Img from 'hometown-components/lib/Img';
+import ImageShimmer from 'hometown-components/lib/ImageShimmer';
 
 export default class LoginFormContainer extends Component {
   render() {
@@ -17,7 +18,9 @@ export default class LoginFormContainer extends Component {
         <Row display="block" mr="0" ml="0">
           <Div col={6}>
             <div className={styles.imgWrapper}>
-              <Img src={SidebarImg} />
+              <ImageShimmer src={SidebarImg} height="599px">
+                {imageURL => <Img src={imageURL} alt="" />}
+              </ImageShimmer>
             </div>
           </Div>
           <Div col={6} p="2rem 3rem">

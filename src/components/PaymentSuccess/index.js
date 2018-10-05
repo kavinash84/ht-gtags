@@ -63,6 +63,7 @@ const PaymentSuccess = ({
                   city={city}
                   pincode={postcode}
                   state={state}
+                  edit={false}
                 />
               </Div>
               <Div col="9" pt="0">
