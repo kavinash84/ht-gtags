@@ -309,7 +309,7 @@ class DeliveryAddress extends Component {
                       <button className={styles.addAddressBtn} onClick={this.toggleAddAddress}>
                         <img src={addIcon} alt="Add another address" />
                         <Text color="rgba(0, 0, 0, 0.6)" ta="center">
-                          Add another address
+                          {addresses.length > 0 ? 'Add another address' : 'Add Address'}
                         </Text>
                       </button>
                     </Div>
