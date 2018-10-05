@@ -9,6 +9,7 @@ import Heading from 'hometown-components/lib/Heading';
 import Div from 'hometown-components/lib/Div';
 import Theme from 'hometown-components/lib/Theme';
 import Img from 'hometown-components/lib/Img';
+import ImageShimmer from 'hometown-components/lib/ImageShimmer';
 import { validateMobile, validatePassword, validateEmail } from 'utils/validation';
 import { LOGIN_URL } from 'helpers/Constants';
 import { signUp } from 'redux/modules/signUp';
@@ -140,7 +141,9 @@ export default class SignupFormContainer extends Component {
         <Row display="block" mr="0" ml="0">
           <Div col={6}>
             <div className={styles.imgWrapper}>
-              <Img src={SidebarImg} />
+              <ImageShimmer src={SidebarImg} height="514px">
+                {imageURL => <Img src={imageURL} alt="" />}
+              </ImageShimmer>
             </div>
           </Div>
           <Div col={6} p="1.25rem 3.5rem">
