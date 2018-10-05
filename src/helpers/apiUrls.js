@@ -32,6 +32,9 @@ export const EMI_OPTIONS = 'tesla/bank-emi';
 
 export const CATEGORY_PAGE = 'tesla/categories';
 
+/* Wishlist */
+export const WISHLIST = 'tesla/wishlist';
+
 /* Cart */
 export const ADDTOCART = 'tesla/cart';
 export const SYNCCART = 'tesla/cart/sync';

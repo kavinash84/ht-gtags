@@ -47,7 +47,7 @@ import { isKeyExists } from 'utils/helper';
       wrapDispatch(dispatch, 'categories')(loadCategories()).catch(error => error);
     }
     if (isLoggedIn && !loggingOut && !isWishListLoaded(getState())) {
-      dispatch(loadWishlist()).catch(error => console.log(error));
+      dispatch(loadWishlist());
     }
     if (isLoggedIn && !loggingOut && !isProfileLoaded(getState())) {
       dispatch(loadUserProfile()).catch(error => console.log(error));
