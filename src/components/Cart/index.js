@@ -170,6 +170,7 @@ const Cart = ({
                       p="0"
                       mt="-4px"
                       className="close"
+                      disabled={cartItemLoading(item.id_customer_cart)}
                       onClick={onClick(item.id_customer_cart, sessionId, pincode)(removeFromCart)}
                     >
                       <Img src={deleteIcon} alt="Delete" height="20px" mt="3px" />
