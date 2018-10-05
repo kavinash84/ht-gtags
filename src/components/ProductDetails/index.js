@@ -155,9 +155,8 @@ class ProductDetails extends React.Component {
       groupedattributes,
       reviews: { count, rating }
     } = product;
-    const { short_description: shortDescription } = attributes;
+    const { description } = attributes;
     const simpleSku = Object.keys(simples)[0];
-    // const shipping = simples[simpleSku].groupedattributes.product_shipping_cost;
     const { name, price, special_price: specialPrice } = meta;
     const checkSpecialPrice = specialPrice || price;
     const { adding, added } = reviews;
@@ -166,13 +165,6 @@ class ProductDetails extends React.Component {
     const isEmiAvailable = Number(checkSpecialPrice) >= 3000;
     const { main_material: material, color } = gattributes;
     const { name: categoryName } = category;
-    // const name = productName({
-    //   family,
-    //   material,
-    //   color,
-    //   brand,
-    //   category: categoryName
-    // });
 
     return (
       <Div type="block">
@@ -190,13 +182,6 @@ class ProductDetails extends React.Component {
                     <BreadCrumb categoryDetails={categoryDetails} />
                   </Div>
                   <Div col="12">{images && <ProductDetailsCarousel data={images} title={meta.name} />}</Div>
-                  {/* <Div col="10">
-                    <div className={styles.imgSliderContainer}>
-                      <div className={styles.imageContainer}>
-                        <img src="https://www.hometown.in/media/product/78/2253/1.jpg" alt="" />
-                      </div>
-                    </div>
-                  </Div> */}
                 </Div>
                 <Div col="5" pt="1.5rem" pl="0.3125rem" pr="0.3125rem" pb="1rem" className={styles.pdpRightWrapper}>
                   <div id="portal" className="portal" />
@@ -291,12 +276,8 @@ class ProductDetails extends React.Component {
                   </Row>
                   <Row display="block" mt="0" mb="0.625rem" mr="0.9375rem" ml="0.9375rem" />
                   <Row display="block" mt="1.25rem" mb="0" mr="0" ml="0">
-                    {shortDescription && (
-                      <ProductDesc
-                        desc={shortDescription || ''}
-                        showmore={showmore}
-                        toggleShowMore={this.toggleShowMore}
-                      />
+                    {description && (
+                      <ProductDesc desc={description || ''} showmore={showmore} toggleShowMore={this.toggleShowMore} />
                     )}
                     {/* <button onClick={this.toggleShowMore}></button> */}
                     <Specs specs={groupedAttributes} pincode={pincode.selectedPincode} />
@@ -371,7 +352,4 @@ ProductDetails.propTypes = {
   gattributes: PropTypes.object.isRequired,
   category: PropTypes.object.isRequired
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
