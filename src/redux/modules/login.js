@@ -84,10 +84,12 @@ const setToken = ({ client }) => response => {
   if (response.access_token === null) {
     cookie.remove('Authorization');
     client.setJwtToken(null);
+    client.setSessionId(null);
+    client.setCSRFToken(null);
     return;
   }
   /* setting cookie for server call */
-  cookie.set('Authorization', `Bearer ${response.access_token}`);
+  cookie.set('Authorization', `Bearer ${response.access_token}`, { expires: 1 });
   client.setJwtToken(response.access_token);
 };
 

@@ -97,7 +97,10 @@ export default function reducer(state = initialState, action = {}) {
     case ADD_TO_WISHLIST_WAITLIST:
       return {
         ...state,
-        waitlist: action.sku
+        waitlist: {
+          sku: action.sku,
+          simpleSku: action.simpleSku
+        }
       };
     case CLEAR_WISHLIST:
       return {
@@ -122,40 +125,40 @@ const isSKUWishlisted = (list, skuId) => list.find(sku => sku.wishlist_info.conf
 
 export const isLoaded = globalState => globalState.wishlist && globalState.wishlist.loaded;
 
-export const toggleWishList = (list, id) => dispatch => {
-  const checkList = isSKUWishlisted(list, id);
+export const toggleWishList = (list, sku, simpleSku) => dispatch => {
+  const checkList = isSKUWishlisted(list, sku);
   if (checkList) {
     const wishListID = checkList.wishlist_info.id_customer_wishlist;
-    dispatch(setLoadingState(id));
+    dispatch(setLoadingState(sku));
     return dispatch({
       types: [REMOVE_FROM_WISHLIST, REMOVE_FROM_WISHLIST_SUCCESS, REMOVE_FROM_WISHLIST_FAILURE],
       promise: async ({ client }) => {
         try {
           const response = await client.delete(`tesla/wishlist/${wishListID}`);
-          await dispatch(removeLoadingState(id));
+          await dispatch(removeLoadingState(sku));
           return response;
         } catch (error) {
-          await dispatch(removeLoadingState(id));
+          await dispatch(removeLoadingState(sku));
           throw error;
         }
       }
     });
   }
-  dispatch(setLoadingState(id));
+  dispatch(setLoadingState(sku));
   return dispatch({
     types: [ADD_TO_WISHLIST, ADD_TO_WISHLIST_SUCCESS, ADD_TO_WISHLIST_FAILURE],
     promise: async ({ client }) => {
       try {
         const postData = {
           comment: '',
-          configurable_sku: id,
-          simple_sku: id
+          configurable_sku: sku,
+          simple_sku: simpleSku
         };
         const response = await client.post('tesla/wishlist', postData);
-        await dispatch(removeLoadingState(id));
+        await dispatch(removeLoadingState(sku));
         return response;
       } catch (error) {
-        await dispatch(removeLoadingState(id));
+        await dispatch(removeLoadingState(sku));
         throw error;
       }
     }
@@ -171,33 +174,32 @@ export const clearWishList = () => ({
   type: CLEAR_WISHLIST
 });
 
-export const wishListWaitList = sku => ({
+export const wishListWaitList = (sku, simpleSku) => ({
   type: ADD_TO_WISHLIST_WAITLIST,
-  sku
+  sku,
+  simpleSku
 });
 
 export const syncWishList = () => async (dispatch, getState) => {
   await dispatch(loadWishlist());
-  const {
-    wishlist: { data: list, waitlist: id }
-  } = getState();
-  const checkList = isSKUWishlisted(list, id);
+  const { wishlist: { data: list, waitlist: { sku, simpleSku } } } = getState();
+  const checkList = isSKUWishlisted(list, sku);
   if (!checkList) {
-    dispatch(setLoadingState(id));
+    dispatch(setLoadingState(sku));
     return dispatch({
       types: [ADD_TO_WISHLIST, ADD_TO_WISHLIST_SUCCESS, ADD_TO_WISHLIST_FAILURE],
       promise: async ({ client }) => {
         try {
           const postData = {
             comment: '',
-            configurable_sku: id,
-            simple_sku: id
+            configurable_sku: sku,
+            simple_sku: simpleSku
           };
           const response = await client.post('tesla/wishlist', postData);
-          await dispatch(removeLoadingState(id));
+          await dispatch(removeLoadingState(sku));
           return response;
         } catch (error) {
-          await dispatch(removeLoadingState(id));
+          await dispatch(removeLoadingState(sku));
           throw error;
         }
       }

@@ -8,13 +8,7 @@ import { provideHooks } from 'redial';
 import { ThemeProvider } from 'styled-components';
 import Helmet from 'react-helmet';
 import { wrapDispatch } from 'multireducer';
-import {
-  loadCategories,
-  loadMainMenu,
-  loadBanners,
-  // loadFooter,
-  isLoaded as isSectionLoaded
-} from 'redux/modules/homepage';
+import { loadCategories, loadMainMenu, loadBanners, isLoaded as isSectionLoaded } from 'redux/modules/homepage';
 import { generateSession, isLoaded as isSessionSet } from 'redux/modules/app';
 import { loginUserAfterSignUp, login } from 'redux/modules/login';
 import { loadWishlist, isLoaded as isWishListLoaded } from 'redux/modules/wishlist';
@@ -58,9 +52,6 @@ import { isKeyExists } from 'utils/helper';
     if (isLoggedIn && !loggingOut && !isProfileLoaded(getState())) {
       dispatch(loadUserProfile()).catch(error => console.log(error));
     }
-    // if (!isSectionLoaded(getState(), 'footer')) {
-    //   wrapDispatch(dispatch, 'footer')(loadFooter()).catch(error => console.log(error));
-    // }
   }
 })
 @withRouter
@@ -70,8 +61,7 @@ import { isKeyExists } from 'utils/helper';
     signUp: state.userSignUp,
     pincode: state.pincode,
     app: state.app,
-    notifs: state.notifs,
-    wishlist: state.wishlist
+    notifs: state.notifs
   }),
   {
     pushState: push,
@@ -103,10 +93,7 @@ export default class App extends Component {
     notifs: PropTypes.shape({
       global: PropTypes.array
     }).isRequired,
-    notifSend: PropTypes.func.isRequired,
-    wishlist: PropTypes.shape({
-      waitlist: PropTypes.string
-    })
+    notifSend: PropTypes.func.isRequired
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -121,9 +108,6 @@ export default class App extends Component {
     },
     pincode: {
       selectedPincode: ''
-    },
-    wishlist: {
-      waitlist: ''
     }
   };
 
