@@ -36,15 +36,17 @@ class Wishlist extends React.Component {
   state = {
     openQuickView: false,
     quickViewSku: '',
-    simpleSku: ''
+    simpleSku: '',
+    deliveredBy: ''
   };
-  onOpenQuickViewModal = (sku, simpleSku, soldOut, rating) => {
+  onOpenQuickViewModal = (sku, simpleSku, soldOut, rating, deliveredBy) => {
     this.setState({
       openQuickView: true,
       quickViewSku: sku,
       simpleSku,
       soldOut,
-      rating
+      rating,
+      deliveredBy
     });
   };
   onCloseQuickViewModal = () => {
@@ -75,7 +77,8 @@ class Wishlist extends React.Component {
                     item.product_info.data.sku,
                     Object.keys(item.product_info.data.simples)[0],
                     item.product_info.soldout,
-                    item.product_info.data.reviews.rating.toFixed(1)
+                    item.product_info.data.reviews.rating.toFixed(1),
+                    item.wishlist_info.delivery_details && item.wishlist_info.delivery_details[0].value
                   );
                 }}
                 isWishList={isInWishList(wishList, item.product_info.data.sku)}
@@ -104,7 +107,7 @@ class Wishlist extends React.Component {
                 simpleSku={simpleSku}
                 products={sanitizeWishList(list)}
                 soldOut={this.state.soldOut}
-                // deliveredBy={this.state.deliveredBy}
+                deliveredBy={this.state.deliveredBy}
                 rating={this.state.rating}
               />
             </ResponsiveModal>
@@ -128,7 +131,4 @@ Wishlist.propTypes = {
   loadingList: PropTypes.array
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Wishlist);
+export default connect(null, mapDispatchToProps)(Wishlist);
