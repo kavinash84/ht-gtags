@@ -25,7 +25,7 @@ const persistConfig = {
   key: 'root',
   storage: new CookieStorage(Cookies, {
     expiration: {
-      default: 30 * 86400
+      default: 28800
     }
   }),
   stateReconciler(inboundState, originalState) {

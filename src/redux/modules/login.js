@@ -89,7 +89,7 @@ const setToken = ({ client }) => response => {
     return;
   }
   /* setting cookie for server call */
-  cookie.set('Authorization', `Bearer ${response.access_token}`, { expires: 1 });
+  cookie.set('Authorization', `Bearer ${response.access_token}`, { expires: 8 / 24 });
   client.setJwtToken(response.access_token);
 };
 

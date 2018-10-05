@@ -162,7 +162,7 @@ app.use(async (req, res) => {
     key: 'root',
     storage: new CookieStorage(cookieJar, {
       expiration: {
-        default: 30 * 86400
+        default: 28800
       }
     }),
     stateReconciler: (inboundState, originalState) => originalState,
