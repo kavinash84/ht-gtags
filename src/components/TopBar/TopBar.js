@@ -124,7 +124,7 @@ export default class MenuSidebar extends Component {
               </Span>
             </button>
             <ResponsiveModal
-              classNames={{ modal: styles.pincodeModal }}
+              classNames={{ modal: 'pincodeModal' }}
               onCloseModal={this.onClosePincodeModal}
               open={this.state.openPincode}
             >
