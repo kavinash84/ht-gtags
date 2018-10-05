@@ -4,7 +4,7 @@ import { getData, isLoaded } from 'redux/modules/services';
 import { PROMOTIONS as PROMOTIONS_API } from 'helpers/apiUrls';
 
 const hooks = {
-  fetch: async ({ store: { dispatch, getState } }) => {
+  defer: async ({ store: { dispatch, getState } }) => {
     if (!isLoaded(getState(), 'promotions')) {
       await dispatch(getData(PROMOTIONS_API, 'promotions'));
     }
