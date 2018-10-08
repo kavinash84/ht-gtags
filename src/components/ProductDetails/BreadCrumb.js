@@ -9,7 +9,7 @@ const BreadCrumb = ({ categoryDetails }) => {
   return (
     <ul itemScope itemType="http://schema.org/BreadcrumbList" className={styles.breadCrumbList}>
       {categoryDetails.filter(details => Object.keys(details).length > 0).map((item, index) => {
-        if (item) {
+        if (item && item.url_key.indexOf('clearance') === -1) {
           link += `/${item.url_key}`;
           return (
             <li key={item.id} itemProp="itemListElement" itemType="http://schema.org/ListItem" itemScope>

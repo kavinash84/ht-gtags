@@ -169,15 +169,15 @@ const Cart = ({
                       {item.product_info.unit_price !== item.product_info.special_price &&
                         item.product_info.special_price !== 0 && (
                         <Label color="black" fontSize="0.875rem" mt="0">
-                          <s>Rs. {formatAmount(item.product_info.unit_price)}</s>
+                          <s>Rs. {formatAmount(Number(item.product_info.unit_price) * Number(item.qty))}</s>
                         </Label>
                       )}
                       <br />
                       <Label color="primary" fontSize="1.25rem" mt="0">
                         Rs.{' '}
                         {item.product_info.special_price === 0
-                          ? formatAmount(item.product_info.unit_price)
-                          : formatAmount(item.product_info.special_price)}
+                          ? formatAmount(Number(item.product_info.unit_price) * Number(item.qty))
+                          : formatAmount(Number(item.product_info.special_price) * Number(item.qty))}
                       </Label>
                     </Div>
                   </Div>
