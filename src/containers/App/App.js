@@ -20,7 +20,6 @@ import Cookie from 'js-cookie';
 import Theme from 'hometown-components/lib/Theme';
 import Alert from 'hometown-components/lib/Alert';
 import * as notifActions from 'redux/modules/notifs';
-import UpdateNotification from 'components/UpdateNotice';
 import Notifs from 'components/Notifs';
 import { isKeyExists } from 'utils/helper';
 
@@ -139,6 +138,8 @@ export default class App extends Component {
           error => console.log(error)
         );
     }
+    /* Split Test Cookie */
+    Cookie.set('split_test', 'A', { expires: 365 });
   }
 
   componentDidUpdate(prevProps) {
@@ -190,7 +191,6 @@ export default class App extends Component {
               <Notifs namespace="global" NotifComponent={props => <Alert {...props} show={notifs.global.length} />} />
             </div>
             {renderRoutes(route.routes)}
-            <UpdateNotification />
           </main>
         </div>
       </ThemeProvider>
