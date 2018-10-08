@@ -1,3 +1,5 @@
+import { CUSTOMER_REGISTRATION } from 'helpers/apiUrls';
+
 const SEND_DELIVERY_ADDRESS = 'checkout/SEND_DELIVERY_ADDRESS';
 const SEND_DELIVERY_ADDRESS_SUCCESS = 'checkout/SEND_DELIVERY_ADDRESS_SUCCESS';
 const SEND_DELIVERY_ADDRESS_FAIL = 'checkout/SEND_DELIVERY_ADDRESS_FAIL';
@@ -101,7 +103,7 @@ export const sendDeliveryAddress = (sessionId, data, isLoggedIn) => (dispatch, g
           };
         }
 
-        return client.post('/tesla/checkout/customer-registration', postData);
+        return client.post(CUSTOMER_REGISTRATION, postData);
       } catch (error) {
         throw error;
       }

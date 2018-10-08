@@ -1,6 +1,7 @@
 // Validators
 import { isEmpty, pincode as pincodeIsValid, validateMobile } from 'utils/validation';
 import { allowNChar, allowTypeOf } from 'utils/helper';
+import { PINCODE_INFO } from 'helpers/apiUrls';
 import { loadCart } from './cart';
 import { setPincodeDetails } from './pincode';
 import { setCity } from './app';
@@ -300,8 +301,6 @@ export default function reducer(state = initialState, action = {}) {
           ...state[action.formType],
           loading: false,
           loaded: true,
-          // city: (action.result.pincode_details[0] && action.result.pincode_details[0].city) || '',
-          // state: (action.result.pincode_details[0] && action.result.pincode_details[0].state) || '',
           city: action.result.city || '',
           state: action.result.state || '',
           pincodeDetails: action.result.pincode_details || []
@@ -455,16 +454,14 @@ export const setAddressError = (formType, payLoad) => ({
 
 export const load = (formType, query) => ({
   types: [LOAD_PINCODE, LOAD_PINCODE_SUCCESS, LOAD_PINCODE_FAIL],
-  promise: ({ client }) => client.get(`tesla/locations/pincode/${query}`),
+  promise: ({ client }) => client.get(`${PINCODE_INFO}/${query}`),
   formType
 });
 export const loadPincodeDetails = (formType, pincode) => (dispatch, getState) =>
   dispatch({
     types: [LOAD_PINCODE_DETAILS, LOAD_PINCODE_DETAILS_SUCCESS, LOAD_PINCODE_DETAILS_FAIL],
     promise: async ({ client }) => {
-      // const response = client.get(`tesla/session/${pincode}`);
-      const response = await client.get(`tesla/locations/pincode/details/${pincode}`);
-      // api/tesla/locations/pincode/details/
+      const response = await client.get(`${PINCODE_INFO}/details/${pincode}`);
       if (formType === 'shipping') {
         dispatch(loadCart(getState().app.sessionId, pincode));
         dispatch(setCity(response));
