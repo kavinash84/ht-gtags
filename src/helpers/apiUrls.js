@@ -39,6 +39,7 @@ export const WISHLIST = 'tesla/wishlist';
 export const ADDTOCART = 'tesla/cart';
 export const SYNCCART = 'tesla/cart/sync';
 export const CHECKCART = 'tesla/checkout';
+export const CUSTOMER_REGISTRATION = 'tesla/checkout/customer-registration';
 
 /* Session */
 export const SESSION = 'tesla/session';
