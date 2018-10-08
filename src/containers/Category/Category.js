@@ -25,17 +25,12 @@ const getSubMenu = (categories, key) =>
 export default class Category extends Component {
   render() {
     const {
-      category,
-      seoInfo,
-      menu,
-      match: {
-        params: { category: currentCategory }
-      }
+      category, seoInfo, menu, match: { params: { category: currentCategory } }
     } = this.props;
     /* eslint-disable react/no-danger */
     return (
       <Section p="0" mb="0">
-        <Helmet title="Home" />
+        <Helmet title={`${(seoInfo && seoInfo.page_title) || (currentCategory && currentCategory.toUpperCase())}`} />
         <div className="wrapper">
           <Menu />
           <MainSlider data={category.main} />

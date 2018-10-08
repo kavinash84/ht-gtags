@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Helmet from 'react-helmet';
 import Cart from 'components/Cart';
 import Empty from 'hometown-components/lib/Empty';
 import Img from 'hometown-components/lib/Img';
@@ -88,6 +89,7 @@ export default class CartContainer extends Component {
     } = this.props;
     return (
       <div className="wrapper">
+        <Helmet title="Shopping Cart" />
         <Menu />
         {loading && !loaded && <CartShimmer />}
         {results && results.length === 0 ? (
