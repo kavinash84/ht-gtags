@@ -45,6 +45,12 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
+const setAppAuth = ({ client }) => async response => {
+  const { csrfToken, session } = response;
+  await client.setCSRFToken(csrfToken);
+  await client.setSessionId(session);
+};
+
 export const isLoaded = globalState => globalState.app && globalState.app.loaded;
 
 export const generateSession = (pincode = PINCODE) => ({
@@ -52,7 +58,7 @@ export const generateSession = (pincode = PINCODE) => ({
   promise: async ({ client }) => {
     try {
       const response = await client.get(`${SESSION_API}/${pincode}`);
-      await client.setSessionId(response.session);
+      await setAppAuth({ client })(response);
       return response;
     } catch (error) {
       console.log(error);
