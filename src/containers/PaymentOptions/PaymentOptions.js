@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { getPaymentOptions } from 'selectors/payments';
@@ -26,6 +27,7 @@ export default class PaymentOptionsContainer extends Component {
     const { availableOptions } = this.props;
     return (
       <Section p="0rem" mb="0">
+        <Helmet title="Payment Options" />
         <div className="wrapper">
           <Menu />
           <PaymentOptions data={availableOptions} />

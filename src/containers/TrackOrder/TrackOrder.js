@@ -31,7 +31,7 @@ class TrackOrder extends React.Component {
   render() {
     return (
       <div>
-        <MenuFooter>
+        <MenuFooter pageTitle="Track your Order Online">
           <div>
             <TrackOrderContainer
               status={this.state.status}

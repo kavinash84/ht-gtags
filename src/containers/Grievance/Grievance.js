@@ -3,7 +3,7 @@ import GrievanceContainer from 'components/ContactUs/Grievance';
 import MenuFooter from 'containers/MenuFooter';
 
 export default () => (
-  <MenuFooter>
+  <MenuFooter pageTitle="Grievance">
     <GrievanceContainer />
   </MenuFooter>
 );

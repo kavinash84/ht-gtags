@@ -3,7 +3,7 @@ import PrivacyPolicyContainer from 'components/StaticPages/PrivacyPolicy';
 import MenuFooter from 'containers/MenuFooter';
 
 export default () => (
-  <MenuFooter>
+  <MenuFooter pageTitle="Privacy Policy">
     <PrivacyPolicyContainer />
   </MenuFooter>
 );

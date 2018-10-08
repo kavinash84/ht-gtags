@@ -3,7 +3,7 @@ import ContactUsContainer from 'components/ContactUs';
 import MenuFooter from 'containers/MenuFooter';
 
 export default () => (
-  <MenuFooter>
+  <MenuFooter pageTitle="Contact us">
     <ContactUsContainer />
   </MenuFooter>
 );

@@ -3,7 +3,7 @@ import CancellationContainer from 'components/StaticPages/Cancellation';
 import MenuFooter from 'containers/MenuFooter';
 
 export default () => (
-  <MenuFooter>
+  <MenuFooter pageTitle="Cancellation">
     <CancellationContainer />
   </MenuFooter>
 );
