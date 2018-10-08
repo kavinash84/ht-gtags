@@ -3,7 +3,7 @@ import CorporateAddContainer from 'components/ContactUs/CorporateAdd';
 import MenuFooter from 'containers/MenuFooter';
 
 export default () => (
-  <MenuFooter>
+  <MenuFooter pageTitle="CorporateAdd">
     <CorporateAddContainer />
   </MenuFooter>
 );
