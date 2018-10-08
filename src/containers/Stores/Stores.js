@@ -7,7 +7,7 @@ class Stores extends Component {
   render() {
     const { city, storeName } = this.props.match.params;
     return (
-      <MenuFooter>
+      <MenuFooter pageTitle={`${city} - ${storeName}`}>
         <StoreDetails city={city} storeName={storeName} />
       </MenuFooter>
     );

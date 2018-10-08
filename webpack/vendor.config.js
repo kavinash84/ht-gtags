@@ -1,6 +1,7 @@
-var path = require('path');
-var webpack = require('webpack');
-var projectRootPath = path.resolve(__dirname, '../');
+const path = require('path');
+const webpack = require('webpack');
+
+const projectRootPath = path.resolve(__dirname, '../');
 
 module.exports = {
   devtool: process.env.NODE_ENV === 'production' ? false : 'inline-source-map',
@@ -68,14 +69,13 @@ module.exports = {
       'react-router',
       'react-router-redux',
       'redux',
-      'redux-form',
       'serialize-javascript'
     ]
   },
 
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }),
 
     new webpack.DllPlugin({

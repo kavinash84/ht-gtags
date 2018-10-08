@@ -3,7 +3,7 @@ import Promotions from 'components/Promotions';
 import MenuFooter from 'containers/MenuFooter';
 
 export default () => (
-  <MenuFooter>
+  <MenuFooter pageTitle="Promotions and Offers">
     <Promotions />
   </MenuFooter>
 );

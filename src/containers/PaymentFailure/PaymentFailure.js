@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import PaymentFailure from 'components/PaymentFailure';
-import Menu from 'containers/MenuNew/index';
-import Footer from 'components/Footer';
+import MenuFooter from 'containers/MenuFooter';
 
 export default class PaymentFailureContainer extends Component {
   render() {
     const { match: { params: { orderId } } } = this.props;
     return (
-      <div>
-        <Menu />
+      <MenuFooter pageTitle="Payment Failed">
         <PaymentFailure orderId={orderId} />
-        <Footer />
-      </div>
+      </MenuFooter>
     );
   }
 }

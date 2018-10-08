@@ -3,7 +3,7 @@ import FeedbackContainer from 'components/ContactUs/Feedback';
 import MenuFooter from 'containers/MenuFooter';
 
 export default () => (
-  <MenuFooter>
+  <MenuFooter pageTitle="Feedback">
     <FeedbackContainer />
   </MenuFooter>
 );
