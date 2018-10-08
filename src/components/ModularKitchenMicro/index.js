@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import MainSlider from 'components/MainSlider';
+import { HOME_URL } from 'helpers/Constants';
 import Section from 'hometown-components/lib/Section';
 import Container from 'hometown-components/lib/Container';
 import Heading from 'hometown-components/lib/Heading';
@@ -10,6 +11,7 @@ import Text from 'hometown-components/lib/Text';
 import Theme from 'hometown-components/lib/Theme';
 import Img from 'hometown-components/lib/Img';
 import Button from 'hometown-components/lib/Buttons';
+import Span from 'hometown-components/lib/Span';
 import SlickSlider from '../SlickSlider';
 // import ServiceSignUp from 'components/ServiceSignUp';
 
@@ -38,6 +40,8 @@ export default class ModularKitchen extends Component {
     const huwilIcon = require('../../../static/huwil.png');
     const kessebIcon = require('../../../static/kesseb.png');
     const mkLogo = require('../../../static/mkLogo.png');
+    const LogoIcon = require('../../../static/logo.png');
+    const PhoneIcon = require('../../../static/phone-icon.svg');
 
     return (
       <Div display="block">
@@ -45,6 +49,9 @@ export default class ModularKitchen extends Component {
           <Container type="container" pr="0.5rem" pl="0.5rem">
             <Row ml="0" mr="0">
               <Div col="7">
+                <Link to={HOME_URL}>
+                  <Img float="left" height="40px" src={LogoIcon} alt="Hometown" />
+                </Link>
                 <Link to="/modular-kitchens-micro">
                   <Img height="40px" width="auto" mr="15px" float="left" src={mkLogo} alt="" />
                 </Link>
@@ -57,6 +64,17 @@ export default class ModularKitchen extends Component {
                   </li>
                   <li>
                     <Link to="/plan-your-kitchen">Plan Your Kitchen</Link>
+                  </li>
+                  <li>
+                    <Link to="/store-locator">Store Locator</Link>
+                  </li>
+                  <li>
+                    <a href="tel:18002100004">
+                      <Span fontSize="0.875rem">
+                        <Img src={PhoneIcon} alt="Hometown" height="24px" mr="0.3125rem" float="left" />
+                        1800-210-0004
+                      </Span>
+                    </a>
                   </li>
                 </ul>
               </Div>
