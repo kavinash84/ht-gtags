@@ -17,6 +17,7 @@ export const PINCODE = '110001';
 /* Configs */
 export const clientId = 'rama';
 export const clientSecret = 'ramahometown';
+export const mapKey = 'AIzaSyB1eWfFVnqjXMWy2BCwxtnVNk5ZhFZVGS4';
 
 /* Routes Config */
 export const categoryRoutes = [
