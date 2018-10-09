@@ -1,4 +1,5 @@
 import { PINCODE } from 'helpers/Constants';
+import cookie from 'js-cookie';
 import { clearUserProfile, loadUserProfile } from '../modules/profile';
 import { clearWishList, syncWishList } from '../modules/wishlist';
 import { clearLoginState, loginUserAfterSignUp /* logout */ } from '../modules/login';
@@ -10,7 +11,11 @@ import { clearAddresses } from '../modules/address';
 export default function userMiddleware() {
   return ({ dispatch, getState }) => next => action => {
     const { type } = action;
-    const { pincode: { selectedPincode }, app: { sessionId }, wishlist: { waitlist } } = getState();
+    const {
+      pincode: { selectedPincode },
+      app: { sessionId },
+      wishlist: { waitlist }
+    } = getState();
     const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
     if (__CLIENT__) {
       if (action.error && action.error.error === 'invalid_token') {
@@ -21,7 +26,9 @@ export default function userMiddleware() {
         dispatch(clearCart());
       }
       if (type === 'signUp/SIGNUP_SUCCESS') {
-        const { result: { token, token_error: tokenError } } = action;
+        const {
+          result: { token, token_error: tokenError }
+        } = action;
         if (!tokenError) {
           dispatch(loginUserAfterSignUp(token));
           dispatch(synCart(sessionId, pincode));
@@ -38,6 +45,7 @@ export default function userMiddleware() {
       if (type === 'login/LOGIN_SUCCESS') {
         dispatch(synCart(sessionId, pincode));
         dispatch(loadUserProfile());
+        cookie.set('PROMO_SIGNUP', 'AVOID', { expires: 7 });
         if (waitlist !== '') dispatch(syncWishList());
       }
       if (type === 'login/LOGOUT_SUCCESS') {
@@ -47,6 +55,7 @@ export default function userMiddleware() {
         dispatch(clearWishList());
         dispatch(clearCart());
         dispatch(clearAddresses());
+        cookie.set('PROMO_SIGNUP', '', { expires: 7 });
       }
     }
     return next(action);
