@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import MainSlider from 'components/MainSlider';
+import { HOME_URL } from 'helpers/Constants';
 import Section from 'hometown-components/lib/Section';
 import Container from 'hometown-components/lib/Container';
 import Heading from 'hometown-components/lib/Heading';
@@ -10,6 +11,8 @@ import Text from 'hometown-components/lib/Text';
 import Theme from 'hometown-components/lib/Theme';
 import Img from 'hometown-components/lib/Img';
 import Button from 'hometown-components/lib/Buttons';
+import Span from 'hometown-components/lib/Span';
+import FormInput from 'hometown-components/lib/Forms/FormInput';
 import SlickSlider from '../SlickSlider';
 // import ServiceSignUp from 'components/ServiceSignUp';
 
@@ -38,6 +41,8 @@ export default class ModularKitchen extends Component {
     const huwilIcon = require('../../../static/huwil.png');
     const kessebIcon = require('../../../static/kesseb.png');
     const mkLogo = require('../../../static/mkLogo.png');
+    const LogoIcon = require('../../../static/logo.png');
+    const PhoneIcon = require('../../../static/phone-icon.svg');
 
     return (
       <Div display="block">
@@ -45,6 +50,9 @@ export default class ModularKitchen extends Component {
           <Container type="container" pr="0.5rem" pl="0.5rem">
             <Row ml="0" mr="0">
               <Div col="7">
+                <Link to={HOME_URL}>
+                  <Img float="left" height="40px" src={LogoIcon} alt="Hometown" />
+                </Link>
                 <Link to="/modular-kitchens-micro">
                   <Img height="40px" width="auto" mr="15px" float="left" src={mkLogo} alt="" />
                 </Link>
@@ -58,6 +66,17 @@ export default class ModularKitchen extends Component {
                   <li>
                     <Link to="/plan-your-kitchen">Plan Your Kitchen</Link>
                   </li>
+                  <li>
+                    <Link to="/store-locator">Store Locator</Link>
+                  </li>
+                  <li>
+                    <a href="tel:18002100004">
+                      <Span fontSize="0.875rem">
+                        <Img src={PhoneIcon} alt="Hometown" height="24px" mr="0.3125rem" float="left" />
+                        1800-210-0004
+                      </Span>
+                    </a>
+                  </li>
                 </ul>
               </Div>
             </Row>
@@ -65,6 +84,46 @@ export default class ModularKitchen extends Component {
         </Section>
         <Section p="0" mb="0">
           <MainSlider data={sliderData} />
+          <Container className={styles.mkWrapper}>
+            <Div className={styles.mkForm}>
+              <form>
+                <Row m="0 1rem">
+                  <Div col="12" pr="0.625rem" pl="0.625rem">
+                    <Heading mb="0.625rem" mt="0" color="mkFormHeading" fontSize="1.25rem" fontFamily="light">
+                      Want to design your kitchen?
+                    </Heading>
+                  </Div>
+                </Row>
+                <Row m="0 1rem">
+                  <Div col="6" pr="0.625rem" pl="0.625rem">
+                    <FormInput label="Name" type="text" placeholder="" />
+                  </Div>
+                  <Div col="6" pr="0.625rem" pl="0.625rem">
+                    <FormInput label="Phone" type="text" placeholder="" />
+                  </Div>
+                </Row>
+                <Row m="0 1rem">
+                  <Div col="6" pr="0.625rem" pl="0.625rem">
+                    <FormInput label="Email" type="email" placeholder="" />
+                  </Div>
+                  <Div col="6" pr="0.625rem" pl="0.625rem">
+                    <FormInput label="State" type="text" placeholder="" />
+                  </Div>
+                </Row>
+                <Row m="0 1rem">
+                  <Div col="6" pr="0.625rem" pl="0.625rem">
+                    <FormInput label="City" type="text" placeholder="" />
+                  </Div>
+                  <Div col="6" pr="0.625rem" pl="0.625rem">
+                    <Button size="block" btnType="primary" fontFamily="regular" height="38px" mt="2rem">
+                      {' '}
+                      Submit{' '}
+                    </Button>
+                  </Div>
+                </Row>
+              </form>
+            </Div>
+          </Container>
         </Section>
         <Section p="2.5rem 0" mb="0">
           <Container type="container" pr="0.5rem" pl="0.5rem">
@@ -282,7 +341,7 @@ export default class ModularKitchen extends Component {
                 <Img src={steps6Img} alt="" width="100%" />
               </Div>
             </Row>
-            <Row ml="0" mr="0" mt="2rem" alignItems="center">
+            <Row ml="0" mr="0" alignItems="center">
               <Div col="6">
                 <Img src={steps6Img} alt="" width="100%" />
               </Div>
@@ -316,7 +375,7 @@ export default class ModularKitchen extends Component {
                 <Img src={steps6Img} alt="" width="100%" />
               </Div>
             </Row>
-            <Row ml="0" mr="0" mt="2rem" alignItems="center">
+            <Row ml="0" mr="0" alignItems="center">
               <Div col="6">
                 <Img src={steps6Img} alt="" width="100%" />
               </Div>
