@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import MainSlider from 'components/MainSlider';
-import { HOME_URL } from 'helpers/Constants';
 import Section from 'hometown-components/lib/Section';
 import Container from 'hometown-components/lib/Container';
 import Heading from 'hometown-components/lib/Heading';
@@ -11,10 +9,9 @@ import Text from 'hometown-components/lib/Text';
 import Theme from 'hometown-components/lib/Theme';
 import Img from 'hometown-components/lib/Img';
 import Button from 'hometown-components/lib/Buttons';
-import Span from 'hometown-components/lib/Span';
 import FormInput from 'hometown-components/lib/Forms/FormInput';
 import SlickSlider from '../SlickSlider';
-// import ServiceSignUp from 'components/ServiceSignUp';
+import Header from './Header';
 
 const adjustSlides = length => ({
   slidesToShow: length >= 3 ? 3 : length,
@@ -40,48 +37,10 @@ export default class ModularKitchen extends Component {
     const hettichIcon = require('../../../static/hettich.png');
     const huwilIcon = require('../../../static/huwil.png');
     const kessebIcon = require('../../../static/kesseb.png');
-    const mkLogo = require('../../../static/mkLogo.png');
-    const LogoIcon = require('../../../static/logo.png');
-    const PhoneIcon = require('../../../static/phone-icon.svg');
 
     return (
       <Div display="block">
-        <Section p="20px 0" mb="0">
-          <Container type="container" pr="0.5rem" pl="0.5rem">
-            <Row ml="0" mr="0">
-              <Div col="7">
-                <Link to={HOME_URL}>
-                  <Img float="left" height="40px" src={LogoIcon} alt="Hometown" />
-                </Link>
-                <Link to="/modular-kitchens-micro">
-                  <Img height="40px" width="auto" mr="15px" float="left" src={mkLogo} alt="" />
-                </Link>
-                <Text color="#614839">The world of stylist and durable kitchens</Text>
-              </Div>
-              <Div col="5" ta="right">
-                <ul className={styles.menuMk}>
-                  <li>
-                    <Link to="/modular-kitchens-micro">Home</Link>
-                  </li>
-                  <li>
-                    <Link to="/plan-your-kitchen">Plan Your Kitchen</Link>
-                  </li>
-                  <li>
-                    <Link to="/store-locator">Store Locator</Link>
-                  </li>
-                  <li>
-                    <a href="tel:18002100004">
-                      <Span fontSize="0.875rem">
-                        <Img src={PhoneIcon} alt="Hometown" height="24px" mr="0.3125rem" float="left" />
-                        1800-210-0004
-                      </Span>
-                    </a>
-                  </li>
-                </ul>
-              </Div>
-            </Row>
-          </Container>
-        </Section>
+        <Header />
         <Section p="0" mb="0">
           <MainSlider data={sliderData} />
           <Container className={styles.mkWrapper}>
@@ -115,7 +74,16 @@ export default class ModularKitchen extends Component {
                     <FormInput label="City" type="text" placeholder="" />
                   </Div>
                   <Div col="6" pr="0.625rem" pl="0.625rem">
-                    <Button size="block" btnType="primary" fontFamily="regular" height="38px" mt="2rem">
+                    <Button
+                      size="block"
+                      btnType="custom"
+                      color="#FFF"
+                      bg="#dc4c3a"
+                      bc="#dc4c3a"
+                      fontFamily="regular"
+                      height="38px"
+                      mt="2rem"
+                    >
                       {' '}
                       Submit{' '}
                     </Button>
