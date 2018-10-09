@@ -22,7 +22,7 @@ export const clientSecret = 'ramahometown';
 export const categoryRoutes = [
   'furniture',
   'home-decor',
-  'homefurnishings',
+  'home-furnishings',
   'home-improvement',
   'kitchenware',
   'tableware',
@@ -30,6 +30,3 @@ export const categoryRoutes = [
 ];
 
 export const listingRoutes = [...categoryRoutes, 'clearance-sale'];
-/* eslint-disable max-len */
-export const redirectURLs =
-  'furniture|home-decor|home-furnishings|tableware|kitchenware|home-improvement|clearance-sale-offer|clearance_sale|design|design-inspiration|gifts|appliances|lighting|solidwood|test_bed|exclusive|invisible|luggage-bags';
