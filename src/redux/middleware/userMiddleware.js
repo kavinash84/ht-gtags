@@ -11,14 +11,14 @@ import { clearAddresses } from '../modules/address';
 export default function userMiddleware() {
   return ({ dispatch, getState }) => next => action => {
     const { type } = action;
-    const {
-      pincode: { selectedPincode },
-      app: { sessionId },
-      wishlist: { waitlist }
-    } = getState();
+    const { pincode: { selectedPincode }, app: { sessionId }, wishlist: { waitlist } } = getState();
     const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
     if (__CLIENT__) {
-      if (action.error && action.error.error === 'invalid_token') {
+      if (
+        (action.error && action.error.error === 'invalid_token') ||
+        (action.error && action.error.error === 'invalid_request') ||
+        type === 'profile/LOAD_FAIL'
+      ) {
         // dispatch(logout());
         dispatch(clearLoginState());
         dispatch(clearUserProfile());
@@ -26,9 +26,7 @@ export default function userMiddleware() {
         dispatch(clearCart());
       }
       if (type === 'signUp/SIGNUP_SUCCESS') {
-        const {
-          result: { token, token_error: tokenError }
-        } = action;
+        const { result: { token, token_error: tokenError } } = action;
         if (!tokenError) {
           dispatch(loginUserAfterSignUp(token));
           dispatch(synCart(sessionId, pincode));
