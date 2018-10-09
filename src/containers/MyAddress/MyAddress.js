@@ -10,7 +10,7 @@ const hooks = {
   }
 };
 const MyAddress = () => (
-  <MenuFooter>
+  <MenuFooter pageTitle="Profile - My Address">
     <MyAddressContainer />
   </MenuFooter>
 );

@@ -3,7 +3,7 @@ import TermsContainer from 'components/StaticPages/Terms';
 import MenuFooter from 'containers/MenuFooter';
 
 export default () => (
-  <MenuFooter>
+  <MenuFooter pageTitle="Terms and Conditions">
     <TermsContainer />
   </MenuFooter>
 );

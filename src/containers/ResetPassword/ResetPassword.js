@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Menu from 'containers/MenuNew/index';
-import Footer from 'components/Footer';
 import ResetPasswordForm from 'hometown-components/lib/Forms/ResetPasswordForm';
 import Container from 'hometown-components/lib/Container';
 import Text from 'hometown-components/lib/Text';
@@ -16,6 +14,7 @@ import { isBlank } from 'js-utility-functions';
 import { validatePassword } from 'utils/validation';
 import { resetPassword } from 'redux/modules/forgotpassword';
 import { allowNChar } from 'utils/helper';
+import MenuFooter from 'containers/MenuFooter';
 
 const SidebarImg = require('../../../static/login-side-thumb.png');
 const PasswordExpiredIcon = require('../../../static/password-expired-icon.png');
@@ -48,9 +47,7 @@ export default class ResetPasswordContainer extends Component {
     }
   }
   onChangeNewPwd = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     const checkError = validatePassword(value);
     if (!allowNChar(value, 15)) {
       return;
@@ -62,9 +59,7 @@ export default class ResetPasswordContainer extends Component {
     });
   };
   onChangeConfirmPwd = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     const checkError = this.matchConfirmPassword(value);
     this.setState({
       confirmPwd: value,
@@ -113,69 +108,64 @@ export default class ResetPasswordContainer extends Component {
       newPwd, confirmPwd, newPwdError, newPwdErrorMessage, confirmPwdError, confirmPwdErrorMessage
     } = this.state;
     const { response } = this.props;
-    const {
-      checkHash: { is_valid: isValid }
-    } = response;
-
-    console.log(response);
-    console.log(isValid);
+    const { checkHash: { is_valid: isValid } } = response;
     return (
       <Section p="0" mb="0">
-        <Menu />
-        <div className="wrapper">
-          {isValid ? (
-            <Container pr="0" pl="0">
-              <div className={styles.userWrapper}>
-                <Row display="block" mr="0" ml="0">
-                  <Div col={5}>
-                    <div className={styles.imgWrapper}>
-                      <Div>
-                        <Heading color="white" fontSize="1.375rem">
-                          RESET PASSWORD
-                        </Heading>
-                        <Text color="white" />
-                      </Div>
-                      <Img src={SidebarImg} />
-                    </div>
-                  </Div>
-                  <Div col={7} p="1.25rem 3.5rem" bg="#f8f8f8">
-                    <div className={`${styles.formBlock} ${styles.resetForm}`}>
-                      <Row display="block" mr="0" ml="0">
-                        <Div mt="0">
-                          <ResetPasswordForm
-                            newPwd={newPwd}
-                            onChangeNewPwd={this.onChangeNewPwd}
-                            newPwdFeedBackError={newPwdError}
-                            newPwdFeedBackMessage={newPwdErrorMessage}
-                            confirmPwd={confirmPwd}
-                            onChangeConfirmPwd={this.onChangeConfirmPwd}
-                            confirmPwdFeedBackError={confirmPwdError}
-                            confirmPwdFeedBackMessage={confirmPwdErrorMessage}
-                            onSubmitUpdatePassword={this.onSubmitUpdatePassword}
-                            resetResponse={response}
-                          />
+        <MenuFooter pageTitle="Reset Password">
+          <div className="wrapper">
+            {isValid ? (
+              <Container pr="0" pl="0">
+                <div className={styles.userWrapper}>
+                  <Row display="block" mr="0" ml="0">
+                    <Div col={5}>
+                      <div className={styles.imgWrapper}>
+                        <Div>
+                          <Heading color="white" fontSize="1.375rem">
+                            RESET PASSWORD
+                          </Heading>
+                          <Text color="white" />
                         </Div>
-                      </Row>
-                    </div>
-                  </Div>
-                </Row>
-              </div>
-            </Container>
-          ) : (
-            <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
-              <Empty
-                title="Password link is expired !!"
-                subTitle=""
-                btnName="Resend Link"
-                url="/forgot-password"
-                bg="#fafafa"
-              >
-                <Img src={PasswordExpiredIcon} width="initial" m="auto" alt="Password link is expired !!" />
-              </Empty>
-            </Section>
-          )}
-        </div>
-        <Footer />
+                        <Img src={SidebarImg} />
+                      </div>
+                    </Div>
+                    <Div col={7} p="1.25rem 3.5rem" bg="#f8f8f8">
+                      <div className={`${styles.formBlock} ${styles.resetForm}`}>
+                        <Row display="block" mr="0" ml="0">
+                          <Div mt="0">
+                            <ResetPasswordForm
+                              newPwd={newPwd}
+                              onChangeNewPwd={this.onChangeNewPwd}
+                              newPwdFeedBackError={newPwdError}
+                              newPwdFeedBackMessage={newPwdErrorMessage}
+                              confirmPwd={confirmPwd}
+                              onChangeConfirmPwd={this.onChangeConfirmPwd}
+                              confirmPwdFeedBackError={confirmPwdError}
+                              confirmPwdFeedBackMessage={confirmPwdErrorMessage}
+                              onSubmitUpdatePassword={this.onSubmitUpdatePassword}
+                              resetResponse={response}
+                            />
+                          </Div>
+                        </Row>
+                      </div>
+                    </Div>
+                  </Row>
+                </div>
+              </Container>
+            ) : (
+              <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
+                <Empty
+                  title="Password link is expired !!"
+                  subTitle=""
+                  btnName="Resend Link"
+                  url="/forgot-password"
+                  bg="#fafafa"
+                >
+                  <Img src={PasswordExpiredIcon} width="initial" m="auto" alt="Password link is expired !!" />
+                </Empty>
+              </Section>
+            )}
+          </div>
+        </MenuFooter>
       </Section>
     );
   }

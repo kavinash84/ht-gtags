@@ -3,7 +3,7 @@ import ReturnPolicyContainer from 'components/StaticPages/ReturnPolicy';
 import MenuFooter from 'containers/MenuFooter';
 
 export default () => (
-  <MenuFooter>
+  <MenuFooter pageTitle="Return Policy">
     <ReturnPolicyContainer />
   </MenuFooter>
 );

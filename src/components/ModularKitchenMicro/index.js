@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import MainSlider from 'components/MainSlider';
+import { HOME_URL } from 'helpers/Constants';
 import Section from 'hometown-components/lib/Section';
 import Container from 'hometown-components/lib/Container';
 import Heading from 'hometown-components/lib/Heading';
@@ -10,6 +11,7 @@ import Text from 'hometown-components/lib/Text';
 import Theme from 'hometown-components/lib/Theme';
 import Img from 'hometown-components/lib/Img';
 import Button from 'hometown-components/lib/Buttons';
+import Span from 'hometown-components/lib/Span';
 import SlickSlider from '../SlickSlider';
 // import ServiceSignUp from 'components/ServiceSignUp';
 
@@ -26,9 +28,20 @@ export default class ModularKitchen extends Component {
     const steps6Img = require('../../../static/share-an-enquiry.jpg');
     const CloseIcon = require('../../../static/minus-round.svg');
     const OpenIcon = require('../../../static/plus-round.svg');
-    const ProfessionalServicesIcon = require('../../../static/professional-services.png');
-    const partners = require('../../../static/partners-1.png');
+    const ProfessionalServicesIcon = require('../../../static/hand-shake.png');
+    const ISOIcon = require('../../../static/iso-icon.png');
+    const FiraIcon = require('../../../static/fira-icon.png');
+    const QualityIcon = require('../../../static/quality.png');
+    const Years10Icon = require('../../../static/years-icons.png');
+    const Years5Icon = require('../../../static/years-icons.png');
+    const Free6Icon = require('../../../static/free6-icon.png');
+    const grassIcon = require('../../../static/grass.png');
+    const hettichIcon = require('../../../static/hettich.png');
+    const huwilIcon = require('../../../static/huwil.png');
+    const kessebIcon = require('../../../static/kesseb.png');
     const mkLogo = require('../../../static/mkLogo.png');
+    const LogoIcon = require('../../../static/logo.png');
+    const PhoneIcon = require('../../../static/phone-icon.svg');
 
     return (
       <Div display="block">
@@ -36,6 +49,9 @@ export default class ModularKitchen extends Component {
           <Container type="container" pr="0.5rem" pl="0.5rem">
             <Row ml="0" mr="0">
               <Div col="7">
+                <Link to={HOME_URL}>
+                  <Img float="left" height="40px" src={LogoIcon} alt="Hometown" />
+                </Link>
                 <Link to="/modular-kitchens-micro">
                   <Img height="40px" width="auto" mr="15px" float="left" src={mkLogo} alt="" />
                 </Link>
@@ -48,6 +64,17 @@ export default class ModularKitchen extends Component {
                   </li>
                   <li>
                     <Link to="/plan-your-kitchen">Plan Your Kitchen</Link>
+                  </li>
+                  <li>
+                    <Link to="/store-locator">Store Locator</Link>
+                  </li>
+                  <li>
+                    <a href="tel:18002100004">
+                      <Span fontSize="0.875rem">
+                        <Img src={PhoneIcon} alt="Hometown" height="24px" mr="0.3125rem" float="left" />
+                        1800-210-0004
+                      </Span>
+                    </a>
                   </li>
                 </ul>
               </Div>
@@ -142,7 +169,7 @@ export default class ModularKitchen extends Component {
                 </Text>
               </Div>
               <Div display="flexEqual">
-                <Img src={ProfessionalServicesIcon} alt="Professional Services" width="auto" height="45px" m="auto" />
+                <Img src={ISOIcon} alt="ISO 9001 Certified Factory" width="auto" height="45px" m="auto" />
                 <Text
                   fontSize="0.75rem"
                   color={Theme.colors.textLight}
@@ -155,7 +182,7 @@ export default class ModularKitchen extends Component {
                 </Text>
               </Div>
               <Div display="flexEqual">
-                <Img src={ProfessionalServicesIcon} alt="Professional Services" width="auto" height="45px" m="auto" />
+                <Img src={FiraIcon} alt="FIRA certified" width="auto" height="45px" m="auto" />
                 <Text
                   fontSize="0.75rem"
                   color={Theme.colors.textLight}
@@ -168,7 +195,7 @@ export default class ModularKitchen extends Component {
                 </Text>
               </Div>
               <Div display="flexEqual">
-                <Img src={ProfessionalServicesIcon} alt="Professional Services" width="auto" height="45px" m="auto" />
+                <Img src={QualityIcon} alt="Quality Fittings" width="auto" height="45px" m="auto" />
                 <Text
                   fontSize="0.75rem"
                   color={Theme.colors.textLight}
@@ -177,11 +204,11 @@ export default class ModularKitchen extends Component {
                   mb="0"
                   ta="center"
                 >
-                  quality<br /> fittings
+                  Quality<br /> Fittings
                 </Text>
               </Div>
               <Div display="flexEqual">
-                <Img src={ProfessionalServicesIcon} alt="Professional Services" width="auto" height="45px" m="auto" />
+                <Img src={Years10Icon} alt="10 years warranty Duratuf" width="auto" height="45px" m="auto" />
                 <Text
                   fontSize="0.75rem"
                   color={Theme.colors.textLight}
@@ -194,7 +221,7 @@ export default class ModularKitchen extends Component {
                 </Text>
               </Div>
               <Div display="flexEqual">
-                <Img src={ProfessionalServicesIcon} alt="Professional Services" width="auto" height="45px" m="auto" />
+                <Img src={Years5Icon} alt="5 years warranty Kitchen Furniture" width="auto" height="45px" m="auto" />
                 <Text
                   fontSize="0.75rem"
                   color={Theme.colors.textLight}
@@ -207,7 +234,7 @@ export default class ModularKitchen extends Component {
                 </Text>
               </Div>
               <Div display="flexEqual">
-                <Img src={ProfessionalServicesIcon} alt="Professional Services" width="auto" height="45px" m="auto" />
+                <Img src={Free6Icon} alt="6 Free Service Visits" width="auto" height="45px" m="auto" />
                 <Text
                   fontSize="0.75rem"
                   color={Theme.colors.textLight}
@@ -589,16 +616,16 @@ export default class ModularKitchen extends Component {
             </Row>
             <Row ml="0" mr="0" mt="2rem">
               <Div display="flexEqual">
-                <Img src={partners} alt="" width="auto" height="45px" m="auto" />
+                <Img src={hettichIcon} alt="" width="auto" height="50px" m="auto" />
               </Div>
               <Div display="flexEqual">
-                <Img src={partners} alt="" width="auto" height="45px" m="auto" />
+                <Img src={grassIcon} alt="" width="auto" height="50px" m="auto" />
               </Div>
               <Div display="flexEqual">
-                <Img src={partners} alt="" width="auto" height="45px" m="auto" />
+                <Img src={kessebIcon} alt="" width="auto" height="50px" m="auto" />
               </Div>
               <Div display="flexEqual">
-                <Img src={partners} alt="" width="auto" height="45px" m="auto" />
+                <Img src={huwilIcon} alt="" width="auto" height="50px" m="auto" />
               </Div>
             </Row>
           </Container>

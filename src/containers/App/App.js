@@ -20,7 +20,6 @@ import Cookie from 'js-cookie';
 import Theme from 'hometown-components/lib/Theme';
 import Alert from 'hometown-components/lib/Alert';
 import * as notifActions from 'redux/modules/notifs';
-import UpdateNotification from 'components/UpdateNotice';
 import Notifs from 'components/Notifs';
 import { isKeyExists } from 'utils/helper';
 
@@ -35,10 +34,10 @@ import { isKeyExists } from 'utils/helper';
       await wrapDispatch(dispatch, 'menu')(loadMainMenu());
     }
     if (!isSectionLoaded(getState(), 'banners')) {
-      await wrapDispatch(dispatch, 'banners')(loadBanners()).catch(error => error);
+      await wrapDispatch(dispatch, 'banners')(loadBanners()).catch(error => console.log(error));
     }
     if (sessionId && !isCartLoaded(getState())) {
-      await dispatch(loadCart(sessionId, defaultPincode)).catch(error => error);
+      await dispatch(loadCart(sessionId, defaultPincode)).catch(error => console.log(error));
     }
   },
   defer: ({ store: { dispatch, getState } }) => {
@@ -47,7 +46,7 @@ import { isKeyExists } from 'utils/helper';
       wrapDispatch(dispatch, 'categories')(loadCategories()).catch(error => error);
     }
     if (isLoggedIn && !loggingOut && !isWishListLoaded(getState())) {
-      dispatch(loadWishlist()).catch(error => console.log(error));
+      dispatch(loadWishlist());
     }
     if (isLoggedIn && !loggingOut && !isProfileLoaded(getState())) {
       dispatch(loadUserProfile()).catch(error => console.log(error));
@@ -139,6 +138,8 @@ export default class App extends Component {
           error => console.log(error)
         );
     }
+    /* Split Test Cookie */
+    Cookie.set('split_test', 'A', { expires: 365 });
   }
 
   componentDidUpdate(prevProps) {
@@ -190,7 +191,6 @@ export default class App extends Component {
               <Notifs namespace="global" NotifComponent={props => <Alert {...props} show={notifs.global.length} />} />
             </div>
             {renderRoutes(route.routes)}
-            <UpdateNotification />
           </main>
         </div>
       </ThemeProvider>

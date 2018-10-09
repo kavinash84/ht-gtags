@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -28,11 +27,7 @@ import { setProductPosition } from 'redux/modules/productdetails';
 import { formatAmount } from 'utils/formatters';
 import { calculateDiscount, calculateSavings, calculateLowestEmi } from 'utils/helper';
 import { getSKUList } from 'selectors/wishlist';
-import {
-  groupedAttributes as getgroupedAttributes,
-  categoryDetails as getcategoryDetails,
-  category as getCategory
-} from 'selectors/product';
+import { groupedAttributes as getgroupedAttributes, categoryDetails as getcategoryDetails } from 'selectors/product';
 
 import { productPageTitle, productMetaDescription, productMetaKeywords } from 'utils/seo';
 import ProductDetailsCarousel from './Carousel';
@@ -85,8 +80,7 @@ const mapStateToProps = ({
   isLoggedIn: userLogin.isLoggedIn,
   loadingList: wishlist.loadingList,
   gattributes: getgroupedAttributes(productdetails),
-  categoryDetails: getcategoryDetails(productdetails),
-  category: getCategory(productdetails)
+  categoryDetails: getcategoryDetails(productdetails)
 });
 
 class ProductDetails extends React.Component {
@@ -141,8 +135,7 @@ class ProductDetails extends React.Component {
       toggleReviewBox,
       deliveryDateLoading,
       categoryDetails,
-      gattributes,
-      category
+      gattributes
     } = this.props;
     const {
       meta,
@@ -163,16 +156,15 @@ class ProductDetails extends React.Component {
     const offerImage = simples[simpleSku].groupedattributes.offer_image || null;
     const { showmore } = this.state;
     const isEmiAvailable = Number(checkSpecialPrice) >= 3000;
-    const { main_material: material, color } = gattributes;
-    const { name: categoryName } = category;
+    const { main_material: material, color, category_type: productType } = gattributes;
 
     return (
       <Div type="block">
         <Section p="0" mb="0" className={styles.pdpWrapper}>
           <Helmet>
             <title>{productPageTitle(name)}</title>
-            <meta name="keywords" content={productMetaKeywords(categoryName, material)} />
-            <meta name="description" content={productMetaDescription(name, categoryName, material, color)} />
+            <meta name="keywords" content={productMetaKeywords(productType, material)} />
+            <meta name="description" content={productMetaDescription(name, productType, material, color)} />
           </Helmet>
           <Container type="container" pr="0" pl="0">
             <Row display="block" mt="0" mb="0" mr="0" ml="0">
@@ -349,7 +341,6 @@ ProductDetails.propTypes = {
   toggleReviewBox: PropTypes.func.isRequired,
   deliveryDateLoading: PropTypes.bool,
   categoryDetails: PropTypes.array.isRequired,
-  gattributes: PropTypes.object.isRequired,
-  category: PropTypes.object.isRequired
+  gattributes: PropTypes.object.isRequired
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

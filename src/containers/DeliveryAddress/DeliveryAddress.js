@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import Helmet from 'react-helmet';
 import DeliveryAddress from 'components/Checkout/DeliveryAddress';
 import Menu from 'components/MenuWithLogoOnly';
 import Section from 'hometown-components/lib/Section';
@@ -33,6 +34,7 @@ export default class DeliveryAddressContainer extends Component {
   render() {
     return (
       <Section p="0rem" mb="0">
+        <Helmet title="Delivery Address" />
         <div className="wrapper">
           <Menu />
           <DeliveryAddress />

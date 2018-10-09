@@ -341,7 +341,7 @@ export default function gaMiddleware() {
             const skus = [];
             const cartList = products.map(x => {
               const {
-                sku, name, qty, price, brand, categories, color
+                sku, name, qty, price, brand, categories, details: { attributes: { color } }
               } = x;
               skus.push(sku);
               return {

@@ -8,14 +8,13 @@ import Heading from 'hometown-components/lib/Heading';
 import Div from 'hometown-components/lib/Div';
 import Section from 'hometown-components/lib/Section';
 import CartShimmer from 'components/Cart/CartShimmer';
-import Menu from 'containers/MenuNew/index';
 import Pincode from 'components/Pincode';
 import ResponsiveModal from 'components/Modal';
-import Footer from 'components/Footer';
 import TitleBar from 'components/TitleBar';
 import { resetCheck } from 'redux/modules/cart';
 import { getCartList, getStockOutProducts } from 'selectors/cart';
 import Notifications from 'components/Notifications';
+import MenuFooter from 'containers/MenuFooter';
 
 const CartEmptyIcon = require('../../../static/cart-empty.jpg');
 const PincodeModalIcon = require('../../../static/map-placeholder.svg');
@@ -74,7 +73,10 @@ export default class CartContainer extends Component {
       return history.push('/checkout/delivery-address');
     }
   }
-  handlePincodeModal = () => {
+  handlePincodeModal = e => {
+    if (e) {
+      e.preventDefault();
+    }
     this.setState({
       openPincode: !this.state.openPincode
     });
@@ -85,62 +87,62 @@ export default class CartContainer extends Component {
     } = this.props;
     return (
       <div className="wrapper">
-        <Menu />
-        {loading && !loaded && <CartShimmer />}
-        {results && results.length === 0 ? (
-          <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
-            <Empty
-              title="Your cart is currently empty!"
-              subTitle="Add items to cart"
-              btnName="Shop Now"
-              url="/"
-              bg="#fafafa"
-            >
-              <Img src={CartEmptyIcon} width="initial" m="auto" alt="Sorry no results found" />
-            </Empty>
-          </Section>
-        ) : null}
-        {!loading && (results && results.length !== 0) ? (
-          <div>
-            <TitleBar title="Shopping Cart" />
-            {outOfStockList &&
-              outOfStockList.length > 0 && (
-              <Notifications
-                msg="One or more items in your cart are out of stock. Please remove to continue"
-                type="error"
+        <MenuFooter pageTitle="Shopping Cart">
+          {loading && !loaded && <CartShimmer />}
+          {results && results.length === 0 ? (
+            <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
+              <Empty
+                title="Your cart is currently empty!"
+                subTitle="Add items to cart"
+                btnName="Shop Now"
+                url="/"
+                bg="#fafafa"
+              >
+                <Img src={CartEmptyIcon} width="initial" m="auto" alt="Sorry no results found" />
+              </Empty>
+            </Section>
+          ) : null}
+          {!loading && (results && results.length !== 0) ? (
+            <div>
+              <TitleBar title="Shopping Cart" />
+              {outOfStockList &&
+                outOfStockList.length > 0 && (
+                <Notifications
+                  msg="One or more items in your cart are out of stock. Please remove to continue"
+                  type="error"
+                />
+              )}
+              <Cart
+                results={results}
+                summary={summary}
+                outOfStockList={outOfStockList}
+                handlePincodeModal={this.handlePincodeModal}
               />
-            )}
-            <Cart
-              results={results}
-              summary={summary}
-              outOfStockList={outOfStockList}
-              handlePincodeModal={this.handlePincodeModal}
-            />
-          </div>
-        ) : (
-          loading && <CartShimmer />
-        )}
-        <ResponsiveModal
-          // classNames={{ modal: styles.pincodeModal }}
-          onCloseModal={this.handlePincodeModal}
-          open={this.state.openPincode}
-        >
-          <Div>
-            <Img width="100px" m="auto" mb="1.5rem" src={PincodeModalIcon} alt="Pincode" />
-            <Heading
-              ellipsis={false}
-              color="rgba(0.0.0.0.8)"
-              ta="center"
-              fontSize="1.375rem"
-              mb="1rem"
-              fontFamily="light"
-            >
-              Please enter your Pincode to serve you better
-            </Heading>
-            <Pincode color="#f2f2f2" onCloseModal={this.handlePincodeModal} />
-          </Div>
-        </ResponsiveModal>
-        <Footer />
+            </div>
+          ) : (
+            loading && <CartShimmer />
+          )}
+          <ResponsiveModal
+            classNames={{ modal: 'pincodeModal' }}
+            onCloseModal={this.handlePincodeModal}
+            open={this.state.openPincode}
+          >
+            <Div>
+              <Img width="100px" m="auto" mb="1.5rem" src={PincodeModalIcon} alt="Pincode" />
+              <Heading
+                ellipsis={false}
+                color="rgba(0.0.0.0.8)"
+                ta="center"
+                fontSize="1.375rem"
+                mb="1rem"
+                fontFamily="light"
+              >
+                Please enter your Pincode to serve you better
+              </Heading>
+              <Pincode color="#f2f2f2" onCloseModal={this.handlePincodeModal} />
+            </Div>
+          </ResponsiveModal>
+        </MenuFooter>
       </div>
     );
   }

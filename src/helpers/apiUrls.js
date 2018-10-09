@@ -32,10 +32,14 @@ export const EMI_OPTIONS = 'tesla/bank-emi';
 
 export const CATEGORY_PAGE = 'tesla/categories';
 
+/* Wishlist */
+export const WISHLIST = 'tesla/wishlist';
+
 /* Cart */
 export const ADDTOCART = 'tesla/cart';
 export const SYNCCART = 'tesla/cart/sync';
 export const CHECKCART = 'tesla/checkout';
+export const CUSTOMER_REGISTRATION = 'tesla/checkout/customer-registration';
 
 /* Session */
 export const SESSION = 'tesla/session';
@@ -65,3 +69,6 @@ export const SERVICE_REQUEST = 'tesla/contact-us';
 export const BULK_ORDER = 'tesla/bulk-order';
 export const SUBSCRIPTION = 'tesla/users/subscribe-us';
 export const PROMOTIONS = 'tesla/static/text/promotions_react';
+
+/* Pincode */
+export const PINCODE_INFO = 'tesla/locations/pincode';

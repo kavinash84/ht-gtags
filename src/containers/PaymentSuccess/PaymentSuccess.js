@@ -35,7 +35,7 @@ export default class PaymentSuccessContainer extends Component {
   render() {
     const { data, error, loaded } = this.props;
     return (
-      <MenuFooter>
+      <MenuFooter pageTitle="Payment Success">
         <PaymentSuccess data={data} error={error} loaded={loaded} />
       </MenuFooter>
     );

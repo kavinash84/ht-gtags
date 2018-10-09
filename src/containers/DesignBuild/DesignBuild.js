@@ -4,7 +4,7 @@ import MenuFooter from 'containers/MenuFooter';
 
 export default () => (
   <div className="wrapper">
-    <MenuFooter>
+    <MenuFooter pageTitle="Design & Build">
       <DesignBuildContainer />
     </MenuFooter>
   </div>

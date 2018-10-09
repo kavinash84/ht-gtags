@@ -2,6 +2,8 @@ import React from 'react';
 import { compose, withProps } from 'recompose';
 import PropTypes from 'prop-types';
 import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps';
+import { Shimmer } from 'hometown-components/lib/Shimmer';
+import { mapKey } from 'helpers/Constants';
 import MapMarker from './MapMarker';
 
 const { MarkerWithLabel } = require('react-google-maps/lib/components/addons/MarkerWithLabel');
@@ -40,9 +42,12 @@ Map.propTypes = {
 const MapContainer = compose(
   withProps({
     /* eslint-disable max-len */
-    googleMapURL:
-      'https://maps.googleapis.com/maps/api/js?key=AIzaSyDCzUmL0n8ph9msf-Rbr-Z7zKuxjI-Rz1M&v=3.exp&libraries=geometry,drawing,places',
-    loadingElement: <div style={{ height: '100%' }}>Loading......</div>,
+    googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${mapKey}&v=3.exp&libraries=geometry,drawing,places`,
+    loadingElement: (
+      <div style={{ height: '100%' }}>
+        <Shimmer height="500px" />
+      </div>
+    ),
     containerElement: <div style={{ height: '600px' }} />,
     mapElement: <div style={{ height: '100%' }} />
   }),

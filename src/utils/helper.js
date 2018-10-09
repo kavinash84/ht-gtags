@@ -106,8 +106,8 @@ export const formFilterLink2 = (key, name, b64, category, value, selected, urlqu
     return `${obj64.category}/?${urlquery}filters=${b64}`;
   }
   if (name === 'Material') {
-    const [, material] = key.split('z_main_material=');
-    const materialparameters = material ? `&z_main_material=${material}` : null;
+    const [, material] = key.split('main_material=');
+    const materialparameters = material ? `&main_material=${material}` : null;
     obj64 = {
       ...obj64,
       material: materialparameters,

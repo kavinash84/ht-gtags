@@ -19,7 +19,6 @@ import { sendData } from 'redux/modules/services';
 import { BULK_ORDER as BULK_ORDER_API } from 'helpers/apiUrls';
 import TitleBar from '../TitleBar';
 
-const bulkOrderBG = require('../../../static/bulk-order-collage.jpg');
 const styles = require('./BulkOrder.scss');
 
 const mapStateToProps = ({ services }) => ({
@@ -173,7 +172,7 @@ class BulkOrder extends React.Component {
           <Container type="container" pr="0" pl="0">
             <Row display="block" mr="0" ml="0">
               <Div col="12">
-                <Img src={bulkOrderBG} alt="" />
+                <Img src="https://static.hometown.in/media/cms/hometownv2/best-sellers/111.jpg" alt="" />
               </Div>
             </Row>
             <Row display="block" mr="0" ml="0">

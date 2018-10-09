@@ -44,6 +44,13 @@ export default class Home extends Component {
       setTimeout(() => this.handleModal(), 5000);
     }
   }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isLoggedIn && nextProps.isLoggedIn !== this.props.isLoggedIn) {
+      this.setState({
+        openSignup: !this.state.openSignup
+      });
+    }
+  }
   handleRibbon = () => {
     this.setState({
       showRibbon: !this.state.showRibbon

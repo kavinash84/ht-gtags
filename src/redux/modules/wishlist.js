@@ -1,3 +1,5 @@
+import { WISHLIST } from 'helpers/apiUrls';
+
 const LOAD_WISHLIST = 'wishList/LOAD_WISHLIST';
 const LOAD_WISHLIST_SUCCESS = 'wishList/LOAD_WISHLIST_SUCCESS';
 const LOAD_WISHLIST_FAIL = 'wishList/LOAD_WISHLIST_FAIL';
@@ -154,7 +156,7 @@ export const toggleWishList = (list, sku, simpleSku) => dispatch => {
           configurable_sku: sku,
           simple_sku: simpleSku
         };
-        const response = await client.post('tesla/wishlist', postData);
+        const response = await client.post(WISHLIST, postData);
         await dispatch(removeLoadingState(sku));
         return response;
       } catch (error) {
@@ -165,10 +167,17 @@ export const toggleWishList = (list, sku, simpleSku) => dispatch => {
   });
 };
 
-export const loadWishlist = () => ({
-  types: [LOAD_WISHLIST, LOAD_WISHLIST_SUCCESS, LOAD_WISHLIST_FAIL],
-  promise: ({ client }) => client.get('tesla/wishlist')
-});
+export const loadWishlist = () => (dispatch, getState) => {
+  const { pincode: { selectedPincode } } = getState();
+  try {
+    return dispatch({
+      types: [LOAD_WISHLIST, LOAD_WISHLIST_SUCCESS, LOAD_WISHLIST_FAIL],
+      promise: ({ client }) => client.get(`${WISHLIST}/${selectedPincode}`)
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const clearWishList = () => ({
   type: CLEAR_WISHLIST
@@ -195,7 +204,7 @@ export const syncWishList = () => async (dispatch, getState) => {
             configurable_sku: sku,
             simple_sku: simpleSku
           };
-          const response = await client.post('tesla/wishlist', postData);
+          const response = await client.post(WISHLIST, postData);
           await dispatch(removeLoadingState(sku));
           return response;
         } catch (error) {

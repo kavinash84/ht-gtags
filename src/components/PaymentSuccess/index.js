@@ -31,6 +31,9 @@ const PaymentSuccess = ({
   error
 }) => {
   if (loaded && !error) {
+    const {
+      first_name, last_name, address1, city, postcode, state
+    } = shipping_address;
     return (
       <Div type="block">
         <TitleBar title="Payment Success" />
@@ -55,11 +58,12 @@ const PaymentSuccess = ({
             <Row display="block" mr="0" ml="0">
               <Div col="3" pr="1.5rem" pt="0">
                 <ShippedTo
-                  name={`${shipping_address.first_name}${shipping_address.last_name}`}
-                  address={shipping_address.address1}
-                  city={shipping_address.city}
-                  pincode={shipping_address.postcode}
-                  state={shipping_address.state}
+                  name={`${first_name} ${last_name}`}
+                  address={address1}
+                  city={city}
+                  pincode={postcode}
+                  state={state}
+                  edit={false}
                 />
               </Div>
               <Div col="9" pt="0">
@@ -108,7 +112,7 @@ const PaymentSuccess = ({
                       Discount / Coupon Value : Rs. <b>{formatAmount(discount_coupon_value)}</b>
                     </Div>
                     <Div className={styles.totalAmountRow}>
-                      Net Order Amount : <b>{formatAmount(net_order_amount)}</b>
+                      Net Order Amount : Rs. <b>{formatAmount(net_order_amount)}</b>
                     </Div>
                   </Div>
                 </Row>

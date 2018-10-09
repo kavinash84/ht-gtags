@@ -17,12 +17,13 @@ export const PINCODE = '110001';
 /* Configs */
 export const clientId = 'rama';
 export const clientSecret = 'ramahometown';
+export const mapKey = 'AIzaSyB1eWfFVnqjXMWy2BCwxtnVNk5ZhFZVGS4';
 
 /* Routes Config */
 export const categoryRoutes = [
   'furniture',
   'home-decor',
-  'homefurnishings',
+  'home-furnishings',
   'home-improvement',
   'kitchenware',
   'tableware',
@@ -30,6 +31,3 @@ export const categoryRoutes = [
 ];
 
 export const listingRoutes = [...categoryRoutes, 'clearance-sale'];
-/* eslint-disable max-len */
-export const redirectURLs =
-  'furniture|home-decor|homefurnishings|tableware|kitchenware|home-improvement|clearance-sale-offer|clearance_sale|design|design-inspiration|gifts|appliances|lighting|solidwood|test_bed|exclusive|invisible|luggage-bags';

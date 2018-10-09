@@ -3,7 +3,7 @@ import WhoWeAreContainer from 'components/StaticPages/WhoWeAre';
 import MenuFooter from 'containers/MenuFooter';
 
 export default () => (
-  <MenuFooter>
+  <MenuFooter pageTitle="About us">
     <WhoWeAreContainer />
   </MenuFooter>
 );

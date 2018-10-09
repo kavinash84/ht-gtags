@@ -3,7 +3,7 @@ import BulkOrderContainer from 'components/BulkOrder';
 import MenuFooter from 'containers/MenuFooter';
 
 export default () => (
-  <MenuFooter>
+  <MenuFooter pageTitle="Bulk Order">
     <BulkOrderContainer />
   </MenuFooter>
 );

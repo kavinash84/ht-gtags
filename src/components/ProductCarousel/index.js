@@ -12,7 +12,7 @@ const styles = require('./Slider.scss');
 
 const adjustSlides = length => ({
   slidesToShow: length >= 4 ? 4 : length,
-  slidesToScroll: 1
+  slidesToScroll: length === 1 ? 0 : 1
 });
 
 const ProductCarousel = ({
