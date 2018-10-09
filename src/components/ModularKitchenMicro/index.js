@@ -341,7 +341,7 @@ export default class ModularKitchen extends Component {
                 <Img src={steps6Img} alt="" width="100%" />
               </Div>
             </Row>
-            <Row ml="0" mr="0" mt="2rem" alignItems="center">
+            <Row ml="0" mr="0" alignItems="center">
               <Div col="6">
                 <Img src={steps6Img} alt="" width="100%" />
               </Div>
@@ -375,7 +375,7 @@ export default class ModularKitchen extends Component {
                 <Img src={steps6Img} alt="" width="100%" />
               </Div>
             </Row>
-            <Row ml="0" mr="0" mt="2rem" alignItems="center">
+            <Row ml="0" mr="0" alignItems="center">
               <Div col="6">
                 <Img src={steps6Img} alt="" width="100%" />
               </Div>
