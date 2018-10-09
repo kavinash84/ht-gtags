@@ -164,7 +164,7 @@ class Listing extends React.Component {
                     <Dropdown
                       key={String(index)}
                       checkbox
-                      title={item.name === 'Main Material' ? 'Material' : item.name}
+                      title={item.name === 'Product main material' ? 'Material' : item.name}
                       onclick={this.setFilter}
                       data={item.attributes}
                       history={history}
@@ -313,4 +313,7 @@ Listing.propTypes = {
   breadCrumbs: PropTypes.array.isRequired
 };
 
-export default connect(null, mapDispatchToProps)(Listing);
+export default connect(
+  null,
+  mapDispatchToProps
+)(Listing);
