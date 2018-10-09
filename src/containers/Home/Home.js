@@ -78,7 +78,8 @@ export default class Home extends Component {
       <Section p="0" mb="0">
         <Helmet title="Home" />
         <div className="wrapper">
-          {offerStrip && (
+          {offerStrip &&
+            offerStrip.description !== '' && (
             <OfferRibbon
               title={offerStrip.description}
               showRibbon={showRibbon}
