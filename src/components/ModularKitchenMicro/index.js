@@ -12,6 +12,7 @@ import Theme from 'hometown-components/lib/Theme';
 import Img from 'hometown-components/lib/Img';
 import Button from 'hometown-components/lib/Buttons';
 import Span from 'hometown-components/lib/Span';
+import FormInput from 'hometown-components/lib/Forms/FormInput';
 import SlickSlider from '../SlickSlider';
 // import ServiceSignUp from 'components/ServiceSignUp';
 
@@ -83,6 +84,46 @@ export default class ModularKitchen extends Component {
         </Section>
         <Section p="0" mb="0">
           <MainSlider data={sliderData} />
+          <Container className={styles.mkWrapper}>
+            <Div className={styles.mkForm}>
+              <form>
+                <Row m="0 1rem">
+                  <Div col="12" pr="0.625rem" pl="0.625rem">
+                    <Heading mb="0.625rem" mt="0" color="mkFormHeading" fontSize="1.25rem" fontFamily="light">
+                      Want to design your kitchen?
+                    </Heading>
+                  </Div>
+                </Row>
+                <Row m="0 1rem">
+                  <Div col="6" pr="0.625rem" pl="0.625rem">
+                    <FormInput label="Name" type="text" placeholder="" />
+                  </Div>
+                  <Div col="6" pr="0.625rem" pl="0.625rem">
+                    <FormInput label="Phone" type="text" placeholder="" />
+                  </Div>
+                </Row>
+                <Row m="0 1rem">
+                  <Div col="6" pr="0.625rem" pl="0.625rem">
+                    <FormInput label="Email" type="email" placeholder="" />
+                  </Div>
+                  <Div col="6" pr="0.625rem" pl="0.625rem">
+                    <FormInput label="State" type="text" placeholder="" />
+                  </Div>
+                </Row>
+                <Row m="0 1rem">
+                  <Div col="6" pr="0.625rem" pl="0.625rem">
+                    <FormInput label="City" type="text" placeholder="" />
+                  </Div>
+                  <Div col="6" pr="0.625rem" pl="0.625rem">
+                    <Button size="block" btnType="primary" fontFamily="regular" height="38px" mt="2rem">
+                      {' '}
+                      Submit{' '}
+                    </Button>
+                  </Div>
+                </Row>
+              </form>
+            </Div>
+          </Container>
         </Section>
         <Section p="2.5rem 0" mb="0">
           <Container type="container" pr="0.5rem" pl="0.5rem">
