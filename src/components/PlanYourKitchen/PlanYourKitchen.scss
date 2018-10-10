@@ -13,8 +13,10 @@
   position: relative;
 }
 .stepBlock {
+  top: -26px;
+  padding: 0;
   .stepContainer {
-    min-height: 100vh;
+    min-height: 80vh;
     position: relative;
     .content {
       -webkit-backdrop-filter: blur(1px);
@@ -48,8 +50,8 @@
           font-family: light;
           font-size: 14px;
           list-style: none;
-          padding-bottom: 10px;
-          padding-top: 10px;
+          // padding-bottom: 10px;
+          // padding-top: 10px;
           border-bottom: 1px solid #FFF;
           &:last-child {
             border-bottom: none;
@@ -60,70 +62,63 @@
   }
 }
 .step1Block {
-  top: -13px;
-  background: url('../../../static/step1-bg.jpg') no-repeat;
-  background-size: cover;
+  // background: url('../../../static/step1-bg.jpg') no-repeat;
+  // background-size: cover;
   .content {
     right: 1rem;
     bottom: 5rem;
   }
 }
 .step2Block {
-  top: -13px;
-  background: url('../../../static/step2-bg.jpg') no-repeat;
-  background-size: cover;
+  // background: url('../../../static/step2-bg.jpg') no-repeat;
+  // background-size: cover;
   .content {
     left: 1rem;
-    top: 2rem;
+    top: 4rem;
     bottom: auto !important;
   }
 }
 .step3Block {
-  top: -13px;
-  background: url('../../../static/step3-bg.jpg') no-repeat;
-  background-size: cover;
+  // background: url('../../../static/step3-bg.jpg') no-repeat;
+  // background-size: cover;
   .content {
     right: 1rem;
-    top: 2rem;
+    top: 4rem;
     bottom: auto !important;
   }
 }
 .step4Block {
-  top: -13px;
-  background: url('../../../static/step4-bg.jpg') no-repeat;
-  background-size: cover;
-  background-position: center;
+  // background: url('../../../static/step4-bg.jpg') no-repeat;
+  // background-size: cover;
+  // background-position: center;
   .content {
     left: 1rem;
-    top: 2rem;
+    top: 4rem;
     bottom: auto !important;
   }
 }
 .step5Block {
-  top: -13px;
-  background: url('../../../static/step5-bg.jpg') no-repeat;
-  background-size: cover;
+  // background: url('../../../static/step5-bg.jpg') no-repeat;
+  // background-size: cover;
   .content {
     right: 1rem;
-    top: 2rem;
+    top: 4rem;
     bottom: auto !important;
   }
 }
 .step6Block {
-  top: -13px;
-  background: url('../../../static/step6-bg.jpg') no-repeat;
-  background-size: cover;
-  background-position: center;
+  // background: url('../../../static/step6-bg.jpg') no-repeat;
+  // background-size: cover;
+  // background-position: center;
   .content {
     left: 1rem;
-    top: 2rem;
+    top: 4rem;
     bottom: auto !important;
   }
 }
 .step7Block {
-  top: -13px;
-  background: url('../../../static/step7-bg.jpg') no-repeat;
-  background-size: cover;
+  // background: url('../../../static/step7-bg.jpg') no-repeat;
+  // background-size: cover;
   .content {
     left: 1rem;
     top: 6rem;
@@ -131,9 +126,8 @@
   }
 }
 .step8Block {
-  top: -13px;
-  background: url('../../../static/step8-bg.jpg') no-repeat;
-  background-size: cover;
+  // background: url('../../../static/step8-bg.jpg') no-repeat;
+  // background-size: cover;
   .content {
     left: 1rem;
     top: 4rem;
@@ -141,9 +135,8 @@
   }
 }
 .step9Block {
-  top: -13px;
-  background: url('../../../static/step9-bg.jpg') no-repeat;
-  background-size: cover;
+  // background: url('../../../static/step9-bg.jpg') no-repeat;
+  // background-size: cover;
   .content {
     left: 1rem;
     top: 4rem;

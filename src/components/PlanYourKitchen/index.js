@@ -8,6 +8,7 @@ import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Text from 'hometown-components/lib/Text';
 import Theme from 'hometown-components/lib/Theme';
+import Button from 'hometown-components/lib/Buttons';
 import Img from 'hometown-components/lib/Img';
 import ModularKitchenForm from '../ModularKitchenMicro/ModularKitchenForm';
 
@@ -50,7 +51,8 @@ export default class PlanYourKitchen extends Component {
           </Container>
         </Section>
         {sections.map(item => (
-          <Section p="2.5rem 0" mb="0" className={`${styles.stepBlock} ${styles[item.class]}`}>
+          <Section p="0" mb="0" className={`${styles.stepBlock} ${styles[item.class]}`}>
+            <MainSlider data={sliderData} />
             <Container type="container" pr="0.5rem" pl="0.5rem" className={`${styles.stepContainer}`}>
               <Row ml="0" mr="0">
                 <Div col="12">
@@ -66,7 +68,15 @@ export default class PlanYourKitchen extends Component {
                 <Text fontSize="0.875rem" mt="0.3125rem" ta="center" color={Theme.colors.textExtraLight}>
                   {item.data}
                 </Text>
-                <ul>{item.items.map(list => <li>{list.title}</li>)}</ul>
+                <ul>
+                  {item.items.map(list => (
+                    <li>
+                      <Button btnType="custom" bc="transparent" p="10px 0" border="none" size="block" ta="left">
+                        {list.title}
+                      </Button>
+                    </li>
+                  ))}
+                </ul>
               </Div>
             </Container>
           </Section>
