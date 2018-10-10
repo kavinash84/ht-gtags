@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import MainSlider from 'components/MainSlider';
 import Section from 'hometown-components/lib/Section';
 import Container from 'hometown-components/lib/Container';
@@ -19,6 +21,10 @@ const newSettings = {
   autoplay: false,
   arrows: false
 };
+
+@connect(({ services }) => ({
+  ...services.plankitchen
+}))
 export default class PlanYourKitchen extends Component {
   constructor(props) {
     super(props);
@@ -29,59 +35,58 @@ export default class PlanYourKitchen extends Component {
   }
   render() {
     const styles = require('./PlanYourKitchen.scss');
-
-    const sliderData = require('../../data/MKSlider.js');
-
+    const { results } = this.props;
     return (
       <Div display="block">
         <Header />
         <Section p="0" mb="0">
-          <MainSlider data={sliderData} />
+          {results && <MainSlider data={results.items.text.banner} />}
           <Container className={styles.mkWrapper}>
             <ModularKitchenForm />
           </Container>
         </Section>
-        {sections.map(item => (
-          <Section p="0" mb="0" className={`${styles.stepBlock} ${styles[item.class]}`} key={item.name}>
-            <MainSlider data={item.items} newSettings={newSettings} reference={this[item.name]} />
-            <Container type="container" pr="0.5rem" pl="0.5rem" className={`${styles.stepContainer}`}>
-              <Row ml="0" mr="0">
-                <Div col="12">
+        {results &&
+          results.items.text.sections.map(item => (
+            <Section p="0" mb="0" className={`${styles.stepBlock} ${styles[item.class]}`} key={item.name}>
+              <MainSlider data={item.items} newSettings={newSettings} reference={this[item.name]} />
+              <Container type="container" pr="0.5rem" pl="0.5rem" className={`${styles.stepContainer}`}>
+                <Row ml="0" mr="0">
+                  <Div col="12">
+                    <Heading mt="0" mb="0.625rem" color="text" fontSize="1.75rem" ta="center" fontFamily="light">
+                      {item.title}
+                    </Heading>
+                  </Div>
+                </Row>
+                <Div col="12" className={styles.content}>
                   <Heading mt="0" mb="0.625rem" color="text" fontSize="1.75rem" ta="center" fontFamily="light">
-                    {item.title}
+                    {item.name}
                   </Heading>
+                  <Text fontSize="0.875rem" mt="0.3125rem" ta="center" color={Theme.colors.textExtraLight}>
+                    {item.data}
+                  </Text>
+                  <ul>
+                    {item.items.map((list, index) => (
+                      <li key={String(index)}>
+                        <Button
+                          btnType="custom"
+                          bc="transparent"
+                          p="10px 0"
+                          border="none"
+                          size="block"
+                          ta="left"
+                          onClick={() => {
+                            this[item.name].current.slider.current.slickGoTo(index);
+                          }}
+                        >
+                          {list.title}
+                        </Button>
+                      </li>
+                    ))}
+                  </ul>
                 </Div>
-              </Row>
-              <Div col="12" className={styles.content}>
-                <Heading mt="0" mb="0.625rem" color="text" fontSize="1.75rem" ta="center" fontFamily="light">
-                  {item.name}
-                </Heading>
-                <Text fontSize="0.875rem" mt="0.3125rem" ta="center" color={Theme.colors.textExtraLight}>
-                  {item.data}
-                </Text>
-                <ul>
-                  {item.items.map((list, index) => (
-                    <li key={String(index)}>
-                      <Button
-                        btnType="custom"
-                        bc="transparent"
-                        p="10px 0"
-                        border="none"
-                        size="block"
-                        ta="left"
-                        onClick={() => {
-                          this[item.name].current.slider.current.slickGoTo(index);
-                        }}
-                      >
-                        {list.title}
-                      </Button>
-                    </li>
-                  ))}
-                </ul>
-              </Div>
-            </Container>
-          </Section>
-        ))}
+              </Container>
+            </Section>
+          ))}
         <Section p="4rem 0" mb="0" bg="microBg">
           <Container type="container" pr="0.5rem" pl="0.5rem">
             <Row ml="0" mr="0">
@@ -114,3 +119,9 @@ export default class PlanYourKitchen extends Component {
     );
   }
 }
+PlanYourKitchen.defaultProps = {
+  results: null
+};
+PlanYourKitchen.propTypes = {
+  results: PropTypes.object
+};
