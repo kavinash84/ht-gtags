@@ -21,10 +21,11 @@
   border: 1px solid #f98d29;
   height: 50px;
   &:hover {
-    background: transparent;
-    span {
-      color: $primary !important;
-    }
+    opacity: 0.85;
+    // background: transparent;
+    // span {
+    //   color: $primary !important;
+    // }
   }
 }
 .goTobuyNowBtn {
@@ -45,7 +46,8 @@
   padding: 10px 15px;
   margin: 0 5px;
   &:hover {
-    color: $primary;
-    background-color: $white;
+    opacity: 0.85;
+    // color: $primary;
+    // background-color: $white;
   }
 }

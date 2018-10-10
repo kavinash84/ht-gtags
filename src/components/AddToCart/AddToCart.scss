@@ -42,18 +42,20 @@
     padding: 8px 15px;
   }
   &:hover {
-    color: $primary;
-    background-color: $white;
-    span {
-      color: $primary;
-    }
+    opacity: 0.85;
+    // color: $primary;
+    // background-color: #515151;
+    // span {
+    //   color: $primary;
+    // }
   }
 }
 .addToCartBtn {
   transition: 0.75s all ease;
   border-radius: 3px;
   &:hover {
-    background-color: $primary !important;
+    opacity: 0.85;
+    background-color: #515151 !important;
     span {
       color: #FFF !important;
     }

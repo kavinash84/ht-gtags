@@ -62,7 +62,7 @@ const AddToCart = ({
             size={size}
             height={height}
           >
-            <Span fontSize="0.857rem" fontFamily="medium" color="red" va="text-top">
+            <Span fontSize="16px" fontFamily="medium" color="red" va="text-top">
               {'OUT OF STOCK'}
             </Span>
           </Button>
@@ -87,7 +87,7 @@ const AddToCart = ({
               {addLoading && <Img width="24px" className="spin" src={LoaderIcon} display="inline" />}
               <Span
                 ml="0.625rem"
-                fontSize="14px"
+                fontSize="16px"
                 fontFamily="regular"
                 color={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
                 va="top"
@@ -102,7 +102,7 @@ const AddToCart = ({
                 Added to Cart
               </span>
               <Link className={`${styles.goToCart} ${height !== 'auto' && styles.heightFix} `} to={CART_URL}>
-                <Span fontSize="14px" fontFamily="regular" color="#FFF" va="middle">
+                <Span fontSize="16px" fontFamily="regular" color="#FFF" va="middle">
                   Go to Cart
                 </Span>
               </Link>

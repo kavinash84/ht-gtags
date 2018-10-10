@@ -12,6 +12,7 @@ import Button from 'hometown-components/lib/Buttons';
 import FormInput from 'hometown-components/lib/Forms/FormInput';
 import SlickSlider from '../SlickSlider';
 import Header from './Header';
+import Footer from './Footer';
 
 const adjustSlides = length => ({
   slidesToShow: length >= 3 ? 3 : length,
@@ -639,6 +640,7 @@ export default class ModularKitchen extends Component {
             </Row>
           </Container>
         </Section>
+        <Footer />
       </Div>
     );
   }

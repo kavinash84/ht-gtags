@@ -79,7 +79,7 @@ class BuyNow extends React.Component {
               >
                 {!addLoading && <Img width="24px" va="middle" src={buyNowIcon} display="inline" />}
                 {addLoading && <Img width="24px" className="spin" src={LoaderIcon} display="inline" />}
-                <Span ml="0.625rem" fontSize="14px" fontFamily="regular" color="#FFF" va="top">
+                <Span ml="0.625rem" fontSize="16px" fontFamily="regular" color="#FFF" va="top">
                   Buy Now
                 </Span>
               </Button>
