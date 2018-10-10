@@ -63,9 +63,10 @@ export default function reducer(state = initialState, action = {}) {
       return state;
   }
 }
-export function isLoaded(globalState, formType) {
-  return globalState.services[formType] && globalState.services[formType].loaded;
-}
+export const isLoaded = (globalState, formType) =>
+  globalState.services[formType] && globalState.services[formType].loaded;
+
+export const gotData = (globalState, formType) => globalState.services[formType] && globalState.services[formType].got;
 
 export const sendData = (API, data, formType) => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
