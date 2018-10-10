@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import qs from 'qs';
+import Url from 'url';
 import bodyParser from 'body-parser';
 import express from 'express';
 import React from 'react';
@@ -32,6 +33,14 @@ import { ReduxAsyncConnect, Provider } from 'components';
 import axios from 'axios';
 import getCookie from 'utils/cookies';
 import { PAYMENT_SUCCESS, PAYMENT_FAILURE } from 'helpers/Constants';
+
+const WHITELIST_TO_REDIRECT = new Set([
+  'localhost:3000',
+  'hometown.in',
+  'www.hometown.in',
+  'stage.hometown.in',
+  'beta.hometown.in'
+]);
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
@@ -71,6 +80,13 @@ app.use('/dist/dlls/:dllName.js', (req, res, next) => {
 app.use(express.static(path.join(__dirname, '..', 'static')));
 
 app.use((req, res, next) => {
+  const { redirect } = req.query;
+  const targetUrl = Url.parse(redirect);
+  console.log('req.hostname: [%s]', req.hostname);
+  console.log('url.host: [%s]', targetUrl.host);
+  if (!WHITELIST_TO_REDIRECT.has(targetUrl.host)) {
+    return next(new Error('Open redirect attack detected'));
+  }
   res.setHeader('X-Forwarded-For', req.ip);
   res.setHeader('X-Frame-Options', 'SAMEORIGIN');
   return next();
