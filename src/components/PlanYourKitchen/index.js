@@ -15,8 +15,6 @@ import Header from '../ModularKitchenMicro/Header';
 
 import ModularKitchenForm from '../ModularKitchenMicro/ModularKitchenForm';
 
-const sections = require('../../data/plankitchen');
-
 const newSettings = {
   autoplay: false,
   arrows: false
@@ -28,10 +26,14 @@ const newSettings = {
 export default class PlanYourKitchen extends Component {
   constructor(props) {
     super(props);
-    sections.map(item => {
-      this[item.name] = React.createRef();
-      return null;
-    });
+    const { results } = props;
+    if (results && results.items) {
+      const { items: { text: { sections } } } = results;
+      sections.map(item => {
+        this[item.name] = React.createRef();
+        return null;
+      });
+    }
   }
   render() {
     const styles = require('./PlanYourKitchen.scss');
