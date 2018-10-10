@@ -52,6 +52,17 @@ const pretty = new PrettyError();
 const app = express();
 const server = new http.Server(app);
 
+app.get('/', (req, res, next) => {
+  const { redirect } = req.query;
+  const targetUrl = Url.parse(redirect);
+  console.log('req.hostname: [%s]', req.hostname);
+  console.log('url.host: [%s]', targetUrl.host);
+  if (!WHITELIST_TO_REDIRECT.has(targetUrl.host)) {
+    return next(new Error('Open redirect attack detected'));
+  }
+  return next();
+});
+
 app
   .use(morgan('dev', { skip: req => req.originalUrl.indexOf('/ws') !== -1 }))
   .use(cookieParser())
@@ -80,13 +91,6 @@ app.use('/dist/dlls/:dllName.js', (req, res, next) => {
 app.use(express.static(path.join(__dirname, '..', 'static')));
 
 app.use((req, res, next) => {
-  const { redirect } = req.query;
-  const targetUrl = Url.parse(redirect);
-  console.log('req.hostname: [%s]', req.hostname);
-  console.log('url.host: [%s]', targetUrl.host);
-  if (!WHITELIST_TO_REDIRECT.has(targetUrl.host)) {
-    return next(new Error('Open redirect attack detected'));
-  }
   res.setHeader('X-Forwarded-For', req.ip);
   res.setHeader('X-Frame-Options', 'SAMEORIGIN');
   return next();
