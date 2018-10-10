@@ -12,9 +12,12 @@ const settings = {
 
 class MainSlider extends Component {
   render() {
-    const { data, triggerSlideChange, triggerSlideClick } = this.props;
+    const {
+      data, triggerSlideChange, triggerSlideClick, reference, newSettings
+    } = this.props;
+    const finalSettings = { ...settings, ...newSettings };
     return (
-      <SlickSlider settings={settings} afterChange={e => triggerSlideChange(e)}>
+      <SlickSlider settings={finalSettings} afterChange={e => triggerSlideChange(e)} ref={reference}>
         {data.map((slide, index) => (
           <div key={String(index)}>
             <SliderItem
@@ -31,13 +34,17 @@ class MainSlider extends Component {
 }
 
 MainSlider.defaultProps = {
-  data: []
+  data: [],
+  reference: null,
+  newSettings: {}
 };
 
 MainSlider.propTypes = {
   data: PropTypes.array,
   triggerSlideChange: PropTypes.func.isRequired,
-  triggerSlideClick: PropTypes.func.isRequired
+  triggerSlideClick: PropTypes.func.isRequired,
+  reference: PropTypes.object,
+  newSettings: PropTypes.object
 };
 
 export default connect(

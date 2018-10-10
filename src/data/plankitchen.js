@@ -11,7 +11,11 @@ const planYourKitchen = [
         id: 1,
         title: '',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/Cafe_Kitchen_Black.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       }
     ]
   },
@@ -29,37 +33,61 @@ const planYourKitchen = [
         id: 1,
         title: 'Intelligent Kitchen',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/Cafe_Kitchen_Black.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 2,
         title: 'Parallel Kitchen',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 3,
         title: 'L-Shaped Kitchen',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 4,
         title: 'L-Shaped Kitchen with Island',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 5,
         title: 'U-Shaped Kitchen',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 6,
         title: 'Straight Kitchen',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       }
     ]
   },
@@ -77,19 +105,31 @@ const planYourKitchen = [
         id: 1,
         title: 'Wall Units',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/Cafe_Kitchen_Black.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 2,
         title: 'Tall Units',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 3,
         title: 'Loft',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       }
     ]
   },
@@ -105,31 +145,51 @@ const planYourKitchen = [
         id: 1,
         title: 'Base Unit Accessories',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/Cafe_Kitchen_Black.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 2,
         title: 'Tall Unit Accessories',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 3,
         title: 'Wall Unit Accessories',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 4,
         title: 'Dado Accessories',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 5,
         title: 'Handles',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       }
     ]
   },
@@ -150,55 +210,91 @@ const planYourKitchen = [
         id: 1,
         title: 'Foil (Membrane)',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/Cafe_Kitchen_Black.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 2,
         title: 'Laminate',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 3,
         title: 'Acrylic',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 4,
         title: 'PU',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 5,
         title: 'Veneer',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 6,
         title: 'R Gloss',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 7,
         title: 'Glax (Looks of Glass and strength of Acrylic)',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 8,
         title: 'Super Matt',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 9,
         title: 'Polymer',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       }
     ]
   },
@@ -217,37 +313,61 @@ const planYourKitchen = [
         id: 1,
         title: 'Hobs',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/Cafe_Kitchen_Black.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 2,
         title: 'Chimney',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 3,
         title: 'Built in Oven',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 4,
         title: 'Microwave',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 5,
         title: 'Dishwashers',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 6,
         title: 'Sink',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       }
     ]
   },
@@ -262,25 +382,41 @@ const planYourKitchen = [
         id: 1,
         title: 'Marine Ply',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/Cafe_Kitchen_Black.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 2,
         title: 'HDF HMR',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 3,
         title: 'MDF',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 4,
         title: 'Glass',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       }
     ]
   },
@@ -295,25 +431,41 @@ const planYourKitchen = [
         id: 1,
         title: 'Paint',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/Cafe_Kitchen_Black.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 2,
         title: 'Wall Paper',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 3,
         title: 'Acrolyc',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 4,
         title: 'Solid Surface',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       }
     ]
   },
@@ -328,43 +480,71 @@ const planYourKitchen = [
         id: 1,
         title: 'Lights',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/Cafe_Kitchen_Black.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 2,
         title: 'Countertops',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 3,
         title: 'Granite',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 4,
         title: 'Marbel',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 5,
         title: 'Acrolyc solid surface',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 6,
         title: 'Quartz',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       },
       {
         id: 7,
         title: 'Onyx (Artificial Stone)',
         image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
-        url_key: '#'
+        url_key: '#',
+        meta: {
+          name: '',
+          id: ''
+        }
       }
     ]
   }

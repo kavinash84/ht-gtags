@@ -29,6 +29,7 @@ const HoverMenuBox = ({
                       title={subCategory1.name}
                     >
                       {subCategory1.name}
+                      {subCategory1.name === 'HOT SELLERS' && '🔥'}
                     </Link>
                   </h4>
                   {subCategory1.children

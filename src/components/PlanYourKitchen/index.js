@@ -10,14 +10,27 @@ import Text from 'hometown-components/lib/Text';
 import Theme from 'hometown-components/lib/Theme';
 import Button from 'hometown-components/lib/Buttons';
 import Img from 'hometown-components/lib/Img';
+import { smoothScroll } from 'utils/helper';
+
 import ModularKitchenForm from '../ModularKitchenMicro/ModularKitchenForm';
 
 const sections = require('../../data/plankitchen');
 
+const newSettings = {
+  autoplay: false,
+  arrows: false
+};
 export default class PlanYourKitchen extends Component {
+  constructor(props) {
+    super(props);
+    sections.map(item => {
+      this[item.name] = React.createRef();
+      return null;
+    });
+  }
   render() {
     const styles = require('./PlanYourKitchen.scss');
-    const sliderData = require('../../data/MKSlider.js');
+    const sliderData = require('../../data/PKSlider.js');
     const mkLogo = require('../../../static/mkLogo.png');
 
     return (
@@ -51,8 +64,8 @@ export default class PlanYourKitchen extends Component {
           </Container>
         </Section>
         {sections.map(item => (
-          <Section p="0" mb="0" className={`${styles.stepBlock} ${styles[item.class]}`}>
-            <MainSlider data={sliderData} />
+          <Section p="0" mb="0" className={`${styles.stepBlock} ${styles[item.class]}`} key={item.name}>
+            <MainSlider data={item.items} newSettings={newSettings} reference={this[item.name]} />
             <Container type="container" pr="0.5rem" pl="0.5rem" className={`${styles.stepContainer}`}>
               <Row ml="0" mr="0">
                 <Div col="12">
@@ -69,9 +82,19 @@ export default class PlanYourKitchen extends Component {
                   {item.data}
                 </Text>
                 <ul>
-                  {item.items.map(list => (
-                    <li>
-                      <Button btnType="custom" bc="transparent" p="10px 0" border="none" size="block" ta="left">
+                  {item.items.map((list, index) => (
+                    <li key={String(index)}>
+                      <Button
+                        btnType="custom"
+                        bc="transparent"
+                        p="10px 0"
+                        border="none"
+                        size="block"
+                        ta="left"
+                        onClick={() => {
+                          this[item.name].current.slider.current.slickGoTo(index);
+                        }}
+                      >
                         {list.title}
                       </Button>
                     </li>
@@ -81,6 +104,34 @@ export default class PlanYourKitchen extends Component {
             </Container>
           </Section>
         ))}
+        <Section p="4rem 0" mb="0" bg="microBg">
+          <Container type="container" pr="0.5rem" pl="0.5rem">
+            <Row ml="0" mr="0">
+              <Div col="1" />
+              <Div col="10" ta="center">
+                <Heading mt="0" mb="0.625rem" color="text" fontSize="1.75rem" ta="center" fontFamily="light">
+                  Why to wait, get started now!
+                </Heading>
+                <Text fontSize="0.875rem" mt="0.3125rem" mb="1rem" ta="center" color={Theme.colors.textExtraLight}>
+                  At Duracucine, we believe in turning your everyday activities like cooking and eating into a feast.
+                  And that’s why we build bespoke kitchens for you. Whatever your requirements are for your favourite
+                  space, we make it happen. Because we believe you just don’t cook in your kitchen, you create, you
+                  indulge, you live.
+                </Text>
+                <Button
+                  type="button"
+                  btnType="custom"
+                  p=".5rem 2rem"
+                  bg={Theme.colors.mkPrimary}
+                  color="white"
+                  onClick={() => smoothScroll(12)}
+                >
+                  Book Now
+                </Button>
+              </Div>
+            </Row>
+          </Container>
+        </Section>
       </Div>
     );
   }
