@@ -1,4 +1,5 @@
 import { PINCODE } from 'helpers/Constants';
+import cookie from 'js-cookie';
 import { clearUserProfile, loadUserProfile } from '../modules/profile';
 import { clearWishList, syncWishList } from '../modules/wishlist';
 import { clearLoginState, loginUserAfterSignUp /* logout */ } from '../modules/login';
@@ -13,7 +14,11 @@ export default function userMiddleware() {
     const { pincode: { selectedPincode }, app: { sessionId }, wishlist: { waitlist } } = getState();
     const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
     if (__CLIENT__) {
-      if (action.error && action.error.error === 'invalid_token') {
+      if (
+        (action.error && action.error.error === 'invalid_token') ||
+        (action.error && action.error.error === 'invalid_request') ||
+        type === 'profile/LOAD_FAIL'
+      ) {
         // dispatch(logout());
         dispatch(clearLoginState());
         dispatch(clearUserProfile());
@@ -38,6 +43,7 @@ export default function userMiddleware() {
       if (type === 'login/LOGIN_SUCCESS') {
         dispatch(synCart(sessionId, pincode));
         dispatch(loadUserProfile());
+        cookie.set('PROMO_SIGNUP', 'AVOID', { expires: 7 });
         if (waitlist !== '') dispatch(syncWishList());
       }
       if (type === 'login/LOGOUT_SUCCESS') {
@@ -47,6 +53,7 @@ export default function userMiddleware() {
         dispatch(clearWishList());
         dispatch(clearCart());
         dispatch(clearAddresses());
+        cookie.set('PROMO_SIGNUP', '', { expires: 7 });
       }
     }
     return next(action);

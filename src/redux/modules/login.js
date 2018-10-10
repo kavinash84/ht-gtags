@@ -124,7 +124,7 @@ export const googleLogin = (token, session) => ({
         session_id: session
       };
       const response = await client.post(GOOGLE_LOGIN_API, postData);
-      setToken({ client })(response);
+      await setToken({ client })(response);
       return response;
     } catch (error) {
       throw error;
