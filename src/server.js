@@ -219,8 +219,6 @@ app.use(async (req, res) => {
     );
     const content = ReactDOM.renderToString(component);
 
-    console.log(context);
-
     if (context.url) {
       return res.redirect(301, context.url);
     }
