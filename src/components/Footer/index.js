@@ -305,12 +305,12 @@ class Footer extends React.Component {
                 </Link>
               </Div>
               <Div col={6} ta="left" alignSelf="center">
-                <Text color="#a6a6a6" fontSize="0.875rem" mt="0" mb="0" lh="2" ta="right">
-                  version: {`v${process.env.APP_VERSION}`}
-                </Text>
                 {/* <Text color="#a6a6a6" fontSize="0.875rem" mt="0" mb="0" lh="2" ta="right">
-                  © {new Date().getFullYear()} Praxis Home Retail Limited
+                  version: {`v${process.env.APP_VERSION}`}
                 </Text> */}
+                <Text color="#a6a6a6" fontSize="0.875rem" mt="0" mb="0" lh="2" ta="right">
+                  © {new Date().getFullYear()} Praxis Home Retail Limited
+                </Text>
               </Div>
             </Row>
           </Container>
