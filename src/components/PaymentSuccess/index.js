@@ -129,7 +129,14 @@ const PaymentSuccess = ({
 PaymentSuccess.defaultProps = {
   data: {
     order_date: '',
-    shipping_address: {},
+    shipping_address: {
+      first_name: '',
+      last_name: '',
+      address1: '',
+      city: '',
+      postcode: '',
+      state: ''
+    },
     sub_total_amount: 0,
     shipping_charges: 0,
     discount_coupon_value: 0,
@@ -144,7 +151,14 @@ PaymentSuccess.propTypes = {
   data: PropTypes.shape({
     order_no: PropTypes.string.isRequired,
     order_date: PropTypes.string,
-    shipping_address: PropTypes.object,
+    shipping_address: PropTypes.shape({
+      first_name: PropTypes.string,
+      last_name: PropTypes.string,
+      address1: PropTypes.string,
+      city: PropTypes.string,
+      postcode: PropTypes.string,
+      state: PropTypes.string
+    }),
     cart_products: PropTypes.array,
     sub_total_amount: PropTypes.number,
     shipping_charges: PropTypes.number,

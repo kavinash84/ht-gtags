@@ -32,7 +32,7 @@ const intBankingIcon = require('../../../static/net-banking.png');
 const walletIcon = require('../../../static/wallet.svg');
 const styles = require('./Footer.scss');
 
-const FooterLinks = require('data/FooterLinks');
+const FooterLinks = ['Furniture', 'Home Furnishings', 'Home Décor', 'Home Decor', 'Tableware', 'Kitchenware', 'Bath'];
 
 const mapStateToProps = ({ services, homepage, notifs }) => ({
   menuItems: homepage.menu.data,
@@ -58,9 +58,7 @@ class Footer extends React.Component {
     }
   }
   onChangeEmail = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     const checkError = !validateEmail(value);
     this.setState({
       email: value,
@@ -247,7 +245,7 @@ class Footer extends React.Component {
               </Div>
               <Div display="flexEqual" col="2">
                 <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem">
-                  Useful Links
+                  USEFUL LINKS
                 </Heading>
                 <ul>
                   <li>
@@ -272,7 +270,7 @@ class Footer extends React.Component {
               </Div>
               <Div display="flexEqual" col="3">
                 <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem">
-                  PAYMENT METHOD
+                  PAYMENT METHODS
                 </Heading>
                 <Row ml="0" mr="0" className={styles.paymentWrapper}>
                   <Div col="2" p="0 5px">
@@ -306,10 +304,13 @@ class Footer extends React.Component {
                   <Img src={LogoIcon} className={styles.footerLogo} alt="Hometown" height="40px" />
                 </Link>
               </Div>
-              <Div col={6} ta="right" alignSelf="center">
+              <Div col={6} ta="left" alignSelf="center">
                 <Text color="#a6a6a6" fontSize="0.875rem" mt="0" mb="0" lh="2" ta="right">
-                  © 2018 Praxis Home Retail Limited
+                  version: {`v${process.env.APP_VERSION}`}
                 </Text>
+                {/* <Text color="#a6a6a6" fontSize="0.875rem" mt="0" mb="0" lh="2" ta="right">
+                  © {new Date().getFullYear()} Praxis Home Retail Limited
+                </Text> */}
               </Div>
             </Row>
           </Container>
@@ -329,7 +330,4 @@ Footer.propTypes = {
   sendFormData: PropTypes.func.isRequired,
   subscribe: PropTypes.object
 };
-export default connect(
-  mapStateToProps,
-  { sendFormData: sendData }
-)(Footer);
+export default connect(mapStateToProps, { sendFormData: sendData })(Footer);
