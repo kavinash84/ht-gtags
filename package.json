@@ -74,7 +74,7 @@
     "express": "^4.15.4",
     "express-session": "^1.15.5",
     "history": "^4.7.2",
-    "hometown-components": "^0.1.59",
+    "hometown-components": "^0.1.60",
     "http-proxy": "^1.16.2",
     "is-promise": "^2.1.0",
     "js-cookie": "^2.1.3",
