@@ -3,8 +3,20 @@ const sliderItems = [
   {
     id: 1,
     title: '',
-    image: 'https://www.hometown.in/media/cms/hometown-hp/2017/nov/20171129/modular-kitchen/modular-kitchen.jpg',
-    url_key: '/'
+    image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/Cafe_Kitchen_Black.jpg',
+    url_key: '#'
+  },
+  {
+    id: 2,
+    title: '',
+    image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town0146-darken_B.jpg',
+    url_key: '#'
+  },
+  {
+    id: 3,
+    title: '',
+    image: 'https://static.hometown.in/media/cms/hometownv2/compressed/banner/home-town-day20519_B.jpg',
+    url_key: '#'
   }
 ];
 
