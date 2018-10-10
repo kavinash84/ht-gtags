@@ -283,3 +283,22 @@ export const allowTypeOf = (value, type) => {
     return /^\d+$/.test(value);
   }
 };
+
+export const smoothScroll = speed => {
+  if (!window) return;
+  let pageoffset = window.pageYOffset;
+  const scroller = pset =>
+    new Promise(resolve => {
+      window.setTimeout(() => {
+        window.scroll(0, pset);
+        resolve();
+      }, 2);
+    });
+  (async () => {
+    while (pageoffset > 0) {
+      pageoffset -= speed ** 2;
+      /* eslint-disable no-await-in-loop */
+      await scroller(pageoffset);
+    }
+  })();
+};

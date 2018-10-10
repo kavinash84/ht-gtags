@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import MainSlider from 'components/MainSlider';
 import { HOME_URL } from 'helpers/Constants';
 import Section from 'hometown-components/lib/Section';
@@ -12,38 +14,47 @@ import Theme from 'hometown-components/lib/Theme';
 import Img from 'hometown-components/lib/Img';
 import Button from 'hometown-components/lib/Buttons';
 import Span from 'hometown-components/lib/Span';
-import FormInput from 'hometown-components/lib/Forms/FormInput';
+import StoresCarousel from 'components/Stores';
+import { getCities } from 'selectors/homepage';
+import { sendData, getData } from 'redux/modules/services';
+import { smoothScroll } from 'utils/helper';
 import SlickSlider from '../SlickSlider';
-// import ServiceSignUp from 'components/ServiceSignUp';
+import ModularKitchenForm from './ModularKitchenForm';
+
+const styles = require('./ModularKitchen.scss');
+
+const sliderData = require('../../data/MKSlider.js');
+const steps6Img = require('../../../static/share-an-enquiry.jpg');
+const CloseIcon = require('../../../static/minus-round.svg');
+const OpenIcon = require('../../../static/plus-round.svg');
+const ProfessionalServicesIcon = require('../../../static/hand-shake.png');
+const ISOIcon = require('../../../static/iso-icon.png');
+const FiraIcon = require('../../../static/fira-icon.png');
+const QualityIcon = require('../../../static/quality.png');
+const Years10Icon = require('../../../static/years-icons.png');
+const Years5Icon = require('../../../static/years-icons.png');
+const Free6Icon = require('../../../static/free6-icon.png');
+const grassIcon = require('../../../static/grass.png');
+const hettichIcon = require('../../../static/hettich.png');
+const kessebIcon = require('../../../static/kesseb.png');
+const mkLogo = require('../../../static/mkLogo.png');
+const LogoIcon = require('../../../static/logo.png');
+const PhoneIcon = require('../../../static/phone-icon.svg');
 
 const adjustSlides = length => ({
-  slidesToShow: length >= 3 ? 3 : length,
-  slidesToScroll: 3
+  slidesToShow: length >= 1 ? 1 : length,
+  slidesToScroll: 1
 });
 
+@connect(
+  ({ stores }) => ({
+    cities: getCities(stores)
+  }),
+  { sendFormData: sendData, loadPincodeDetails: getData }
+)
 export default class ModularKitchen extends Component {
   render() {
-    const styles = require('./ModularKitchen.scss');
-
-    const sliderData = require('../../data/MKSlider.js');
-    const steps6Img = require('../../../static/share-an-enquiry.jpg');
-    const CloseIcon = require('../../../static/minus-round.svg');
-    const OpenIcon = require('../../../static/plus-round.svg');
-    const ProfessionalServicesIcon = require('../../../static/hand-shake.png');
-    const ISOIcon = require('../../../static/iso-icon.png');
-    const FiraIcon = require('../../../static/fira-icon.png');
-    const QualityIcon = require('../../../static/quality.png');
-    const Years10Icon = require('../../../static/years-icons.png');
-    const Years5Icon = require('../../../static/years-icons.png');
-    const Free6Icon = require('../../../static/free6-icon.png');
-    const grassIcon = require('../../../static/grass.png');
-    const hettichIcon = require('../../../static/hettich.png');
-    const huwilIcon = require('../../../static/huwil.png');
-    const kessebIcon = require('../../../static/kesseb.png');
-    const mkLogo = require('../../../static/mkLogo.png');
-    const LogoIcon = require('../../../static/logo.png');
-    const PhoneIcon = require('../../../static/phone-icon.svg');
-
+    const { cities } = this.props;
     return (
       <Div display="block">
         <Section p="20px 0" mb="0">
@@ -85,44 +96,7 @@ export default class ModularKitchen extends Component {
         <Section p="0" mb="0">
           <MainSlider data={sliderData} />
           <Container className={styles.mkWrapper}>
-            <Div className={styles.mkForm}>
-              <form>
-                <Row m="0 1rem">
-                  <Div col="12" pr="0.625rem" pl="0.625rem">
-                    <Heading mb="0.625rem" mt="0" color="mkFormHeading" fontSize="1.25rem" fontFamily="light">
-                      Want to design your kitchen?
-                    </Heading>
-                  </Div>
-                </Row>
-                <Row m="0 1rem">
-                  <Div col="6" pr="0.625rem" pl="0.625rem">
-                    <FormInput label="Name" type="text" placeholder="" />
-                  </Div>
-                  <Div col="6" pr="0.625rem" pl="0.625rem">
-                    <FormInput label="Phone" type="text" placeholder="" />
-                  </Div>
-                </Row>
-                <Row m="0 1rem">
-                  <Div col="6" pr="0.625rem" pl="0.625rem">
-                    <FormInput label="Email" type="email" placeholder="" />
-                  </Div>
-                  <Div col="6" pr="0.625rem" pl="0.625rem">
-                    <FormInput label="State" type="text" placeholder="" />
-                  </Div>
-                </Row>
-                <Row m="0 1rem">
-                  <Div col="6" pr="0.625rem" pl="0.625rem">
-                    <FormInput label="City" type="text" placeholder="" />
-                  </Div>
-                  <Div col="6" pr="0.625rem" pl="0.625rem">
-                    <Button size="block" btnType="primary" fontFamily="regular" height="38px" mt="2rem">
-                      {' '}
-                      Submit{' '}
-                    </Button>
-                  </Div>
-                </Row>
-              </form>
-            </Div>
+            <ModularKitchenForm />
           </Container>
         </Section>
         <Section p="2.5rem 0" mb="0">
@@ -288,13 +262,6 @@ export default class ModularKitchen extends Component {
                 </Text>
               </Div>
             </Row>
-            <Row ml="0" mr="0" mt="2rem">
-              <Div col="12" ta="center">
-                <Button type="button" btnType="custom" p=".5rem 2rem" bg={Theme.colors.mkPrimary} color="white">
-                  Know More
-                </Button>
-              </Div>
-            </Row>
           </Container>
         </Section>
         <Section p="2.5rem 0" mb="0">
@@ -313,7 +280,7 @@ export default class ModularKitchen extends Component {
               </Div>
               <Div col="6" p="2rem" ta="left">
                 <Heading ta="left" fontFamily="light" mt="0" mb="0" color="textDark">
-                  Share an Enquiry
+                  Share an Inquiry
                 </Heading>
                 <Text color={Theme.colors.secondary} fontWeight="light" mt="0.3125rem" mb="0" ta="left" fontSize="1rem">
                   kitchen designs that are perfect for you— Contact us to know and order your dream kitchen
@@ -417,7 +384,14 @@ export default class ModularKitchen extends Component {
                   space, we make it happen. Because we believe you just don’t cook in your kitchen, you create, you
                   indulge, you live.
                 </Text>
-                <Button type="button" btnType="custom" p=".5rem 2rem" bg={Theme.colors.mkPrimary} color="white">
+                <Button
+                  type="button"
+                  btnType="custom"
+                  p=".5rem 2rem"
+                  bg={Theme.colors.mkPrimary}
+                  color="white"
+                  onClick={() => smoothScroll(12)}
+                >
                   Book Now
                 </Button>
               </Div>
@@ -571,73 +545,64 @@ export default class ModularKitchen extends Component {
                 </Heading>
               </Div>
               <Div col="12">
-                <SlickSlider settings={adjustSlides(3)}>
+                <SlickSlider settings={adjustSlides(1)}>
                   <Div p="0 1rem">
-                    <Img
-                      width="80px"
-                      m="0 auto 0.625rem"
-                      src="https://placeimg.com/80/80/people?t=1538054343339"
-                      alt=""
-                      color="textExtraLight"
-                    />
-                    <Text ta="center" fontSize="0.75rem" color="rgba(0,0,0,0.5)">
-                      Right from the start, there has been amazing service. I would like to especially mention Aparna
-                      for her design assistance and alternative solutions. She figured out exactly what we wanted even
-                      though we didn’t
+                    <Text ta="center" fontSize="1rem" color="rgba(0,0,0,0.5)">
+                      This is humble note of appreciation for<br />
+                      the outstanding customer service provided by your<br />
+                      Modular Kitchen Department at HomeTown.<br />
+                      My special thanks to Ms. Priyanka & team for helping me<br />
+                      in customising my kitchen as per my requirements and<br />
+                      installing the same, well-within the committed time lines.<br />
+                      I am elated with the service quality of your team.<br />
+                      Keep the good work !
                     </Text>
                     <Heading ta="center" color="text" fontSize="1rem">
-                      - NANDINI GUPTA
+                      - Mr. Srikanth, Hydrabad
                     </Heading>
                   </Div>
                   <Div p="0 1rem">
-                    <Img
-                      width="80px"
-                      m="0 auto 0.625rem"
-                      src="https://placeimg.com/80/80/people?t=1538054343339"
-                      alt=""
-                      color="textExtraLight"
-                    />
-                    <Text ta="center" fontSize="0.75rem" color="rgba(0,0,0,0.5)">
-                      Right from the start, there has been amazing service. I would like to especially mention Aparna
-                      for her design assistance and alternative solutions. She figured out exactly what we wanted even
-                      though we didn’t
+                    <Text ta="center" fontSize="1rem" color="rgba(0,0,0,0.5)">
+                      After spending few years in Australia,<br />
+                      I was wondering whether I could get the same quality<br />
+                      of Kitchens & Home Furniture in India. We were pleasantly<br />
+                      surprised to see international quality furniture, kitchens<br />
+                      & more at HomeTown. My wife & I were really amazed with<br />
+                      how knowledgeable HomeTown’s Team was. They helped choose & build<br />
+                      the perfect kitchen and wardrobes for us - steeply step.<br />
+                      It feels great to have a living space that is tailor made<br />
+                      for our lifestyle and preferences.
                     </Text>
                     <Heading ta="center" color="text" fontSize="1rem">
-                      - NANDINI GUPTA
+                      - Mr Rajendra Rao, Bangalore
                     </Heading>
                   </Div>
+
                   <Div p="0 1rem">
-                    <Img
-                      width="80px"
-                      m="0 auto 0.625rem"
-                      src="https://placeimg.com/80/80/people?t=1538054343339"
-                      alt=""
-                      color="textExtraLight"
-                    />
-                    <Text ta="center" fontSize="0.75rem" color="rgba(0,0,0,0.5)">
-                      Right from the start, there has been amazing service. I would like to especially mention Aparna
-                      for her design assistance and alternative solutions. She figured out exactly what we wanted even
-                      though we didn’t
+                    <Text ta="center" fontSize="1rem" color="rgba(0,0,0,0.5)">
+                      I am extremely happy about my decision to come to HomeTown<br />
+                      for renovating my kitchen. After having spent weeks trying<br />
+                      to figure out designs & budget for my kitchen; it took just one<br />
+                      visit to HomeTown to answer all my queries.<br />
+                      You guys saved me a lot of trouble and time.<br />
+                      Thank you for the wonderful kitchen.
                     </Text>
                     <Heading ta="center" color="text" fontSize="1rem">
-                      - NANDINI GUPTA
+                      - Mrs. Kiran Shah, Mumbai
                     </Heading>
                   </Div>
+
                   <Div p="0 1rem">
-                    <Img
-                      width="80px"
-                      m="0 auto 0.625rem"
-                      src="https://placeimg.com/80/80/people?t=1538054343339"
-                      alt=""
-                      color="textExtraLight"
-                    />
-                    <Text ta="center" fontSize="0.75rem" color="rgba(0,0,0,0.5)">
-                      Right from the start, there has been amazing service. I would like to especially mention Aparna
-                      for her design assistance and alternative solutions. She figured out exactly what we wanted even
-                      though we didn’t
+                    <Text ta="center" fontSize="1rem" color="rgba(0,0,0,0.5)">
+                      Awesome work done by HomeTown team! <br />
+                      I was particularly impressed with how real the 3D designs looked.<br />
+                      It helped me take all the important decision even before starting the work.<br />
+                      The execution quality was very good without compromising on aesthetics or speed.<br />
+                      I keep getting complimented for my new kitchen & I never feel like leaving it at all.<br />
+                      Thank you HomeTown!
                     </Text>
                     <Heading ta="center" color="text" fontSize="1rem">
-                      - NANDINI GUPTA
+                      - Mrs. Arpita Bhatnagar, Kolkata
                     </Heading>
                   </Div>
                 </SlickSlider>
@@ -657,17 +622,22 @@ export default class ModularKitchen extends Component {
             </Row>
             <Row ml="0" mr="0" mt="2rem">
               <Div display="flexEqual">
-                <Img src={hettichIcon} alt="" width="auto" height="50px" m="auto" />
+                <Img src={hettichIcon} alt="" width="auto" height="80px" m="auto" />
               </Div>
               <Div display="flexEqual">
-                <Img src={grassIcon} alt="" width="auto" height="50px" m="auto" />
+                <Img src={grassIcon} alt="" width="auto" height="80px" m="auto" />
               </Div>
               <Div display="flexEqual">
-                <Img src={kessebIcon} alt="" width="auto" height="50px" m="auto" />
+                <Img src={kessebIcon} alt="" width="auto" height="30px" mt="20px" m="auto" />
               </Div>
-              <Div display="flexEqual">
-                <Img src={huwilIcon} alt="" width="auto" height="50px" m="auto" />
-              </Div>
+            </Row>
+          </Container>
+        </Section>
+
+        <Section p="1.5rem 0" mb="0" bg="microBg">
+          <Container type="container" pr="0.5rem" pl="0.5rem">
+            <Row ml="0" mr="0" mt="1rem" mb="2rem">
+              <StoresCarousel cities={cities} />
             </Row>
           </Container>
         </Section>
@@ -675,3 +645,10 @@ export default class ModularKitchen extends Component {
     );
   }
 }
+
+ModularKitchen.defaultProps = {
+  cities: []
+};
+ModularKitchen.propTypes = {
+  cities: PropTypes.array
+};

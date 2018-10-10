@@ -38,15 +38,15 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         [action.formType]: {
-          loading: true
+          getting: true
         }
       };
     case GET_SUCCESS:
       return {
         ...state,
         [action.formType]: {
-          loading: false,
-          loaded: true,
+          getting: false,
+          got: true,
           results: action.result
         }
       };
@@ -54,8 +54,8 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         [action.formType]: {
-          loading: false,
-          loaded: false,
+          getting: false,
+          got: false,
           error: action.error
         }
       };
