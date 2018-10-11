@@ -642,7 +642,6 @@ export default class ModularKitchen extends Component {
             </Row>
           </Container>
         </Section>
-        <Footer />
         <Section p="1.5rem 0" mb="0" bg="microBg">
           <Container type="container" pr="0.5rem" pl="0.5rem">
             <Row ml="0" mr="0" mt="1rem" mb="2rem">
@@ -650,6 +649,7 @@ export default class ModularKitchen extends Component {
             </Row>
           </Container>
         </Section>
+        <Footer />
       </Div>
     );
   }
