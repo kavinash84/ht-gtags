@@ -14,7 +14,6 @@ import Notifs from '../../components/Notifs';
 
 const EditCouponIcon = require('../../../static/edit.svg');
 const DiscountSuccessIcon = require('../../../static/percentage-green.svg');
-const CloseIcon = require('../../../static/close-icon.svg');
 
 const styles = require('./Coupon.scss');
 
@@ -84,17 +83,16 @@ class Coupon extends React.Component {
                 <Span fontSize="0.875em" color={Theme.colors.primary}>
                   Save <b>Rs. {formatAmount(couponDiscount)}</b>
                 </Span>
-                <Img src={EditCouponIcon} display="inline" float="none" va="sub" width="18px" ml="0.3125rem" alt="" />
-              </Button>
-
-              <Button
-                btnType="link"
-                mt="30px"
-                p="0"
-                className={`${styles.applyClose} pull-right`}
-                onClick={() => this.removeCoupon(appliedCoupon)}
-              >
-                <Img src={CloseIcon} alt="Close" />
+                <Img
+                  src={EditCouponIcon}
+                  display="inline"
+                  float="none"
+                  va="sub"
+                  width="18px"
+                  ml="0.625rem"
+                  alt="Change"
+                  onClick={() => this.removeCoupon(appliedCoupon)}
+                />
               </Button>
             </div>
           ) : (

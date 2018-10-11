@@ -29,7 +29,7 @@
   transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
   padding: .375rem .75rem;
   font-size: 14px;
-  color: $white;
+  color: #515151;
   background-color: #515151;
   border-color: #515151;
   border: 1px solid;
@@ -43,7 +43,7 @@
   }
   &:hover {
     opacity: 0.85;
-    // color: $primary;
+    color: #515151;
     // background-color: #515151;
     // span {
     //   color: $primary;

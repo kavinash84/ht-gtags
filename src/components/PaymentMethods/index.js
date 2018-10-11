@@ -3,7 +3,6 @@ import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Heading from 'hometown-components/lib/Heading';
 import Img from 'hometown-components/lib/Img';
-import Text from 'hometown-components/lib/Text';
 
 const aeIcon = require('../../../static/american-express.svg');
 const maestroIcon = require('../../../static/maestro.svg');
@@ -35,13 +34,6 @@ const PaymentMethods = () => (
       </Div>
       <Div col="2" mb="0" p="5px 5px">
         <Img height="24px" src={walletIcon} alt="Wallet" width="100%" />
-      </Div>
-    </Row>
-    <Row ml="0" mr="0">
-      <Div col="12" mb="0" p="0 10px">
-        <Text mt="0.3125rem" fontSize="0.75rem" color="rgba(0,0,0,0.5)">
-          International card also accepted.
-        </Text>
       </Div>
     </Row>
   </Div>

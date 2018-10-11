@@ -8,6 +8,8 @@ import Heading from 'hometown-components/lib/Heading';
 import Span from 'hometown-components/lib/Span';
 import Text from 'hometown-components/lib/Text';
 import Rating from 'hometown-components/lib/Rating';
+import Img from 'hometown-components/lib/Img';
+import Theme from 'hometown-components/lib/Theme';
 import AddToCart from 'components/AddToCart';
 import { calculateSavings, calculateDiscount, formatProductURL } from 'utils/helper';
 import { formatAmount } from 'utils/formatters';
@@ -15,6 +17,9 @@ import { formatAmount } from 'utils/formatters';
 import SlickSlider from '../SlickSlider';
 
 const styles = require('./QuickView.scss');
+
+const calendarImageGreen = require('../../../static/calendar-green.svg');
+const calendarImageRed = require('../../../static/calendar-red.svg');
 
 const adjustSlides = length => ({
   slidesToShow: length >= 3 ? 3 : length,
@@ -189,7 +194,7 @@ export default class QuickView extends Component {
                 )}
               </Heading>
               <Text mt="0" mb="0.3125rem">
-                <Span color="rgba(0, 0, 0, 0.6)" fontFamily="medium" fontSize="1.325rem" mr="0.625rem">
+                <Span color={Theme.colors.primary} fontFamily="medium" fontSize="1.325rem" mr="0.625rem">
                   ₹ {(discPrice && formatAmount(discPrice)) || (price && formatAmount(price))}
                 </Span>
                 {discPrice && (
@@ -217,6 +222,11 @@ export default class QuickView extends Component {
                   mt="0.3125rem"
                   mb="1.5rem"
                 >
+                  {deliveredBy.indexOf('Sorry') === 0 ? (
+                    <Img width="initial" height="1.5em" mr="0.625rem" float="left" src={calendarImageRed} />
+                  ) : (
+                    <Img width="initial" height="1.5em" mr="0.625rem" float="left" src={calendarImageGreen} />
+                  )}
                   {deliveredBy}
                 </Text>
               )}
