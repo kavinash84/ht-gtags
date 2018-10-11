@@ -35,10 +35,9 @@ const onClick = history => e => {
   history.push(MY_WISHLIST_URL);
 };
 
-const onClickLogout = (dispatcher, history) => e => {
+const onClickLogout = dispatcher => e => {
   e.preventDefault();
   dispatcher();
-  history.push('/');
 };
 
 @withRouter
@@ -50,6 +49,7 @@ const onClickLogout = (dispatcher, history) => e => {
     isLoggedIn: userLogin.isLoggedIn,
     wishListCount: getWishListCount(wishlist),
     cartCount: getCartCount(cart),
+    logoutResponse: userLogin.logoutResponse,
     router
   }),
   { logoutUser: logout }
@@ -66,6 +66,14 @@ export default class MenuSidebar extends Component {
       this.setState({
         openLogin: false
       });
+    }
+    if (
+      this.props.isLoggedIn !== nextProps.isLoggedIn &&
+      nextProps.logoutResponse &&
+      nextProps.logoutResponse.success
+    ) {
+      const { history } = this.props;
+      history.push('/');
     }
   }
   onOpenPincodeModal = () => {
@@ -218,7 +226,7 @@ export default class MenuSidebar extends Component {
                       <Link to={MY_PROFILE_URL}>Profile</Link>
                     </Div>
                     <Div col="6" pl="5px">
-                      <Button onClick={onClickLogout(logoutUser, history)}>Logout !</Button>
+                      <Button onClick={onClickLogout(logoutUser)}>Logout !</Button>
                     </Div>
                   </div>
                 )}
@@ -238,7 +246,8 @@ MenuSidebar.defaultProps = {
   isLoggedIn: false,
   history: {},
   router: {},
-  logoutUser: () => {}
+  logoutUser: () => {},
+  logoutResponse: {}
 };
 
 MenuSidebar.propTypes = {
@@ -248,5 +257,6 @@ MenuSidebar.propTypes = {
   wishListCount: PropTypes.number,
   cartCount: PropTypes.number,
   logoutUser: PropTypes.func,
-  router: PropTypes.object
+  router: PropTypes.object,
+  logoutResponse: PropTypes.object
 };
