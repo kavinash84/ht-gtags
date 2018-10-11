@@ -72,8 +72,7 @@ export default class MenuSidebar extends Component {
       nextProps.logoutResponse &&
       nextProps.logoutResponse.success
     ) {
-      const { history } = this.props;
-      history.push('/');
+      if (window) window.location.reload();
     }
   }
   onOpenPincodeModal = () => {
