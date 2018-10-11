@@ -11,7 +11,6 @@ import Text from 'hometown-components/lib/Text';
 import Theme from 'hometown-components/lib/Theme';
 import Img from 'hometown-components/lib/Img';
 import Button from 'hometown-components/lib/Buttons';
-import FormInput from 'hometown-components/lib/Forms/FormInput';
 import StoresCarousel from 'components/Stores';
 import { getCities } from 'selectors/homepage';
 import { sendData, getData } from 'redux/modules/services';
@@ -58,53 +57,6 @@ export default class ModularKitchen extends Component {
         <Section p="0" mb="0">
           <MainSlider data={sliderData} />
           <Container className={styles.mkWrapper}>
-            <Div className={styles.mkForm}>
-              <form>
-                <Row m="0 1rem">
-                  <Div col="12" pr="0.625rem" pl="0.625rem">
-                    <Heading mb="0.625rem" mt="0" color="mkFormHeading" fontSize="1.25rem" fontFamily="light">
-                      Want to design your kitchen?
-                    </Heading>
-                  </Div>
-                </Row>
-                <Row m="0 1rem">
-                  <Div col="6" pr="0.625rem" pl="0.625rem">
-                    <FormInput label="Name" type="text" placeholder="" />
-                  </Div>
-                  <Div col="6" pr="0.625rem" pl="0.625rem">
-                    <FormInput label="Phone" type="text" placeholder="" />
-                  </Div>
-                </Row>
-                <Row m="0 1rem">
-                  <Div col="6" pr="0.625rem" pl="0.625rem">
-                    <FormInput label="Email" type="email" placeholder="" />
-                  </Div>
-                  <Div col="6" pr="0.625rem" pl="0.625rem">
-                    <FormInput label="State" type="text" placeholder="" />
-                  </Div>
-                </Row>
-                <Row m="0 1rem">
-                  <Div col="6" pr="0.625rem" pl="0.625rem">
-                    <FormInput label="City" type="text" placeholder="" />
-                  </Div>
-                  <Div col="6" pr="0.625rem" pl="0.625rem">
-                    <Button
-                      size="block"
-                      btnType="custom"
-                      color="#FFF"
-                      bg="#dc4c3a"
-                      bc="#dc4c3a"
-                      fontFamily="regular"
-                      height="38px"
-                      mt="2rem"
-                    >
-                      {' '}
-                      Submit{' '}
-                    </Button>
-                  </Div>
-                </Row>
-              </form>
-            </Div>
             <ModularKitchenForm />
           </Container>
         </Section>
@@ -642,7 +594,6 @@ export default class ModularKitchen extends Component {
             </Row>
           </Container>
         </Section>
-        <Footer />
         <Section p="1.5rem 0" mb="0" bg="microBg">
           <Container type="container" pr="0.5rem" pl="0.5rem">
             <Row ml="0" mr="0" mt="1rem" mb="2rem">
@@ -650,6 +601,7 @@ export default class ModularKitchen extends Component {
             </Row>
           </Container>
         </Section>
+        <Footer />
       </Div>
     );
   }
