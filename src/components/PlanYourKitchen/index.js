@@ -28,7 +28,11 @@ export default class PlanYourKitchen extends Component {
     super(props);
     const { results } = props;
     if (results && results.items) {
-      const { items: { text: { sections } } } = results;
+      const {
+        items: {
+          text: { sections }
+        }
+      } = results;
       sections.map(item => {
         this[item.name] = React.createRef();
         return null;
