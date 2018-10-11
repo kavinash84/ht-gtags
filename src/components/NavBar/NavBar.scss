@@ -34,7 +34,7 @@
   }
 }
 .navBarSlider {
-  overflow: hidden;
+  // overflow: hidden;
   white-space: nowrap;
   width: 100%;
   height: 46px;
@@ -51,6 +51,7 @@
     text-transform: uppercase;
     &:hover {
       color: #FFF;
+      opacity: 0.8;
     }
     p {
       margin: 0 !important;
@@ -58,4 +59,7 @@
       white-space: nowrap;
     }
   }
+}
+.moreDropdownWrapper {
+  top: -1px;
 }
