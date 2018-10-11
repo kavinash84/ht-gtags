@@ -615,7 +615,7 @@
 			padding: .25rem 2.125rem .25rem .75rem !important;
 			font-family: regular;
 			font-size: 12px;
-			text-transform: initial;
+			// text-transform: initial;
 			span {
 				transition: all 0.5s ease;
 				display: inline-block !important;
@@ -631,6 +631,20 @@
 				}
 				+ .dropDown {
 					display: block !important;
+				}
+			}
+			&.moreDropdown {
+				padding: 10px 0 !important;
+				&:hover {
+					background-color: transparent !important;
+					opacity: 0.8;
+				}
+				+ .dropDown {
+					a {
+						color: rgba(0,0,0,0.8);
+						padding: 0;
+						height: auto;
+					}
 				}
 			}
 		}
