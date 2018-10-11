@@ -36,7 +36,7 @@ const OrderBlock = ({ order }) => (
             SHIPPING ADDRESS
           </Text>
           <Text mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
-            {`${order.customer_first_name} ${order.customer_last_name}`}
+            {`${order.customer_first_name} ${order.customer_last_name !== null ? order.customer_last_name : ''}`}
             <br />
             {order.s_address_1}
             <br />
@@ -51,7 +51,7 @@ const OrderBlock = ({ order }) => (
             BILLING ADDRESS
           </Text>
           <Text mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
-            {`${order.customer_first_name} ${order.customer_last_name}`}
+            {`${order.customer_first_name} ${order.customer_last_name !== null ? order.customer_last_name : ''}`}
             <br />
             {order.b_address_1}
             <br />
