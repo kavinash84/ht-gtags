@@ -31,8 +31,6 @@ export default class ModularKitchen extends Component {
     emailErrorMessage: 'Please Enter Valid Email ',
     address: '',
     addressErrorMessage: 'Address should not be left blank ',
-    service: '',
-    serviceErrorMessage: 'Please Choose A Service',
     pincode: '',
     pincodeErrorMessage: 'Pincode is Invalid',
     open: false
@@ -47,7 +45,12 @@ export default class ModularKitchen extends Component {
     }
     if (nextprops.loaded && nextprops.loaded !== this.props.loaded) {
       this.setState({
-        open: true
+        open: true,
+        name: '',
+        phone: '',
+        email: '',
+        address: '',
+        pincode: ''
       });
     }
   }
