@@ -251,7 +251,7 @@ export default class ModularKitchen extends Component {
             <Row ml="0" mr="0" alignItems="center">
               <Div col="6" p="2rem" ta="right">
                 <Heading ta="right" fontFamily="light" mt="0" mb="0" color="textDark">
-                  Meet an Expert
+                  Meet Our Design Experts
                 </Heading>
                 <Text
                   color={Theme.colors.secondary}
@@ -275,7 +275,7 @@ export default class ModularKitchen extends Component {
               </Div>
               <Div col="6" p="2rem" ta="left">
                 <Heading ta="left" fontFamily="light" mt="0" mb="0" color="textDark">
-                  Personalize the designs using 3D technology
+                  First Site measurement
                 </Heading>
                 <Text color={Theme.colors.secondary} fontWeight="light" mt="0.3125rem" mb="0" ta="left" fontSize="1rem">
                   your chosen design, guided by your very own dedicated expert designer — who understands everything
@@ -286,7 +286,7 @@ export default class ModularKitchen extends Component {
             <Row ml="0" mr="0" alignItems="center">
               <Div col="6" p="2rem" ta="right">
                 <Heading ta="right" fontFamily="light" mt="0" mb="0" color="textDark">
-                  Book your dream kitchen
+                  Discuss your requirement
                 </Heading>
                 <Text
                   color={Theme.colors.secondary}
@@ -309,7 +309,7 @@ export default class ModularKitchen extends Component {
               </Div>
               <Div col="6" p="2rem" ta="left">
                 <Heading ta="left" fontFamily="light" mt="0" mb="0" color="textDark">
-                  See the designs come to life while we install your kitchen
+                  Book your order.
                 </Heading>
                 <Text color={Theme.colors.secondary} fontWeight="light" mt="0.3125rem" mb="0" ta="left" fontSize="1rem">
                   It’s time for you to pick up culinary skills in a new cuisine while we do all the hard work for you.
@@ -320,9 +320,7 @@ export default class ModularKitchen extends Component {
             <Row ml="0" mr="0" alignItems="center">
               <Div col="6" p="2rem" ta="right">
                 <Heading ta="right" fontFamily="light" mt="0" mb="0" color="textDark">
-                  Enjoy hassle free cooking<br />
-                  as we take care of your kitchen<br />
-                  with 6 free services
+                  Install the kitchen
                 </Heading>
               </Div>
               <Div col="6">
@@ -340,7 +338,7 @@ export default class ModularKitchen extends Component {
                   Why to wait, get started now!
                 </Heading>
                 <Text fontSize="0.875rem" mt="0.3125rem" mb="1rem" ta="center" color={Theme.colors.textExtraLight}>
-                  At Duracucine, we believe in turning your everyday activities like cooking and eating into a feast.
+                  At Duracucine, we believe in turning your everyday activities \like cooking and eating into a feast.
                   And that’s why we build bespoke kitchens for you. Whatever your requirements are for your favourite
                   space, we make it happen. Because we believe you just don’t cook in your kitchen, you create, you
                   indulge, you live.
