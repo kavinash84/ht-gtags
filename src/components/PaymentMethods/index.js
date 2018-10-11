@@ -9,7 +9,7 @@ const maestroIcon = require('../../../static/maestro.svg');
 const mastercardIcon = require('../../../static/mastercard.svg');
 const visaIcon = require('../../../static/visa.svg');
 const intBankingIcon = require('../../../static/net-banking.png');
-const walletIcon = require('../../../static/wallet.svg');
+const walletIcon = require('../../../static/wallet-icon.png');
 
 const PaymentMethods = () => (
   <Div mt="1rem" pl="0.625rem" pr="0.625rem">
@@ -29,7 +29,7 @@ const PaymentMethods = () => (
       <Div col="2" mb="0" p="0 5px">
         <Img src={aeIcon} alt="Amex" width="100%" />
       </Div>
-      <Div col="2" mb="0" p="0 5px">
+      <Div col="2" mb="0" p="6px 5px">
         <Img src={intBankingIcon} alt="Diners Club" width="100%" />
       </Div>
       <Div col="2" mb="0" p="5px 5px">
