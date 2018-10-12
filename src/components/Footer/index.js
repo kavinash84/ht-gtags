@@ -58,7 +58,9 @@ class Footer extends React.Component {
     }
   }
   onChangeEmail = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = !validateEmail(value);
     this.setState({
       email: value,
@@ -126,7 +128,7 @@ class Footer extends React.Component {
                 )}
               </Div>
               <Div col="3">
-                <Heading color="white" fontFamily="light" fontSize="1em" mt="0">
+                <Heading color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="0">
                   CONTACT US
                 </Heading>
                 <ul>
@@ -139,7 +141,7 @@ class Footer extends React.Component {
                 </ul>
               </Div>
               <Div col="3">
-                <Heading color="white" fontFamily="light" fontSize="1em" mt="0">
+                <Heading color="footerHeading" fontFamily="regular" fontSize="1em" mt="0">
                   FOLLOW US
                 </Heading>
                 <ul className={styles.socials}>
@@ -180,7 +182,7 @@ class Footer extends React.Component {
                 menu.children &&
                   menu.visibility === 'on' && (
                   <Div key={menu.name} display="flexEqual">
-                    <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem" pb="2px">
+                    <Heading color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
                       {menu.name}
                     </Heading>
                     <ul>
@@ -330,4 +332,7 @@ Footer.propTypes = {
   sendFormData: PropTypes.func.isRequired,
   subscribe: PropTypes.object
 };
-export default connect(mapStateToProps, { sendFormData: sendData })(Footer);
+export default connect(
+  mapStateToProps,
+  { sendFormData: sendData }
+)(Footer);

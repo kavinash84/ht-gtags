@@ -113,7 +113,7 @@ class Coupon extends React.Component {
                     className={styles.applyCouponBtn}
                     btnType="primary"
                     color="#f98d29"
-                    p="10px 20px"
+                    p="9px 20px"
                     fontSize="0.75rem"
                     disabled={loading}
                     fontFamily="regular"

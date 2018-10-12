@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import MainSlider from 'components/MainSlider';
+import Footer from 'components/Footer';
 import Section from 'hometown-components/lib/Section';
 import Container from 'hometown-components/lib/Container';
 import Heading from 'hometown-components/lib/Heading';
@@ -16,7 +17,6 @@ import { getCities } from 'selectors/homepage';
 import { sendData, getData } from 'redux/modules/services';
 import { smoothScroll } from 'utils/helper';
 import Header from './Header';
-import Footer from './Footer';
 import SlickSlider from '../SlickSlider';
 import ModularKitchenForm from './ModularKitchenForm';
 

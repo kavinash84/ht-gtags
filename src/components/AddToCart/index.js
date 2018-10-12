@@ -91,6 +91,7 @@ const AddToCart = ({
                 fontFamily="regular"
                 color={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
                 va="top"
+                lh="1.8"
               >
                 {addLoading ? 'Adding..' : 'Add to Cart'}
               </Span>

@@ -119,7 +119,7 @@ export default class MenuSidebar extends Component {
           <Div col="5" ta="right" pt="0.3125rem">
             <button onClick={this.onOpenPincodeModal}>
               <Img src={PinIcon} alt="Hometown" height="24px" mr="0.3125rem" float="left" />
-              <Span fontSize="0.875rem" lh="2">
+              <Span fontSize="0.875rem" lh="2" fontFamily="light">
                 {selectedPincode !== '' ? selectedPincode : 'Pincode'}
               </Span>
             </button>
@@ -145,11 +145,15 @@ export default class MenuSidebar extends Component {
             </ResponsiveModal>
             <a className={styles.cart} href="tel:18002100004">
               <Img src={PhoneIcon} alt="Hometown" height="24px" mr="0.3125rem" float="left" />
-              <Span fontSize="0.875em">1800-210-0004</Span>
+              <Span fontFamily="light" fontSize="0.875em">
+                1800-210-0004
+              </Span>
             </a>
             <Link className={styles.cart} to="/store-locator">
               <Img src={PinIcon} alt="Hometown" height="24px" mr="0.3125rem" float="left" />
-              <Span fontSize="0.875em">Store Locator</Span>
+              <Span fontFamily="light" fontSize="0.875em">
+                Store Locator
+              </Span>
             </Link>
             <Button
               p="0"
