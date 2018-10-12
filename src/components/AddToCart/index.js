@@ -91,6 +91,7 @@ const AddToCart = ({
                 fontFamily="regular"
                 color={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
                 va="top"
+                lh="1.8"
               >
                 {addLoading ? 'Adding..' : 'Add to Cart'}
               </Span>
@@ -102,7 +103,7 @@ const AddToCart = ({
                 Added to Cart
               </span>
               <Link className={`${styles.goToCart} ${height !== 'auto' && styles.heightFix} `} to={CART_URL}>
-                <Span fontSize="16px" fontFamily="regular" color="#FFF" va="middle">
+                <Span fontSize="14px" fontFamily="regular" color="#FFF" va="middle">
                   Go to Cart
                 </Span>
               </Link>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import MainSlider from 'components/MainSlider';
+import Footer from 'components/Footer';
 import Section from 'hometown-components/lib/Section';
 import Container from 'hometown-components/lib/Container';
 import Heading from 'hometown-components/lib/Heading';
@@ -63,32 +64,39 @@ export default class PlanYourKitchen extends Component {
                     </Heading>
                   </Div>
                 </Row>
-                <Div col="12" className={styles.content}>
-                  <Heading mt="0" mb="0.625rem" color="text" fontSize="1.75rem" ta="center" fontFamily="light">
-                    {item.name}
-                  </Heading>
-                  <Text fontSize="0.875rem" mt="0.3125rem" ta="center" color={Theme.colors.textExtraLight}>
-                    {item.data}
-                  </Text>
-                  <ul>
-                    {item.items.map((list, index) => (
-                      <li key={String(index)}>
-                        <Button
-                          btnType="custom"
-                          bc="transparent"
-                          p="10px 0"
-                          border="none"
-                          size="block"
-                          ta="left"
-                          onClick={() => {
-                            this[item.name].current.slider.current.slickGoTo(index);
-                          }}
-                        >
-                          {list.title}
-                        </Button>
-                      </li>
-                    ))}
-                  </ul>
+                <Div className={styles.content}>
+                  <Row ml="0" mr="0">
+                    <Div col="6">
+                      <Heading mt="0" mb="0.625rem" color="text" fontSize="1.75rem" ta="center" fontFamily="light">
+                        {item.name}
+                      </Heading>
+                      <Text fontSize="0.875rem" mt="0.3125rem" ta="center" color={Theme.colors.textExtraLight}>
+                        {item.data}
+                      </Text>
+                      <ul>
+                        {item.items.map((list, index) => (
+                          <li key={String(index)}>
+                            <Button
+                              btnType="custom"
+                              bc="transparent"
+                              p="10px 0"
+                              border="none"
+                              size="block"
+                              ta="left"
+                              onClick={() => {
+                                this[item.name].current.slider.current.slickGoTo(index);
+                              }}
+                            >
+                              {list.title}
+                            </Button>
+                          </li>
+                        ))}
+                      </ul>
+                    </Div>
+                    <Div col="6" pl="2.5rem">
+                      <MainSlider data={item.items} newSettings={newSettings} reference={this[item.name]} />
+                    </Div>
+                  </Row>
                 </Div>
               </Container>
             </Section>
@@ -121,6 +129,7 @@ export default class PlanYourKitchen extends Component {
             </Row>
           </Container>
         </Section>
+        <Footer />
       </Div>
     );
   }

@@ -38,9 +38,10 @@ const NavBar = ({
             fontSize="0.875rem !important"
             tt="uppercase"
             p="10px 15px 10px 0px"
-            lh="1.8"
+            lh="2"
             height="46px"
             className="moreDropdown"
+            fontFamily="light"
           >
             More
           </Button>

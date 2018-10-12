@@ -46,8 +46,8 @@
     font-size: 0.875rem;
     color: #fff;
     height: 46px;
-    line-height: 1.8;
-    font-family: regular;
+    line-height: 2;
+    font-family: light;
     text-transform: uppercase;
     &:hover {
       color: #FFF;
@@ -61,5 +61,5 @@
   }
 }
 .moreDropdownWrapper {
-  top: -1px;
+  top: -2px;
 }

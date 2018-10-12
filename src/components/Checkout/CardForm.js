@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { setCardType } from 'redux/modules/paymentoptions';
 import Img from 'hometown-components/lib/Img';
+import Text from 'hometown-components/lib/Text';
 import { Label } from 'hometown-components/lib/Label';
 import FormInput from 'hometown-components/lib/Forms/FormInput';
 
@@ -51,7 +52,7 @@ const CardForm = ({
   sessionId
 }) => (
   <Div className={styles.paymentBlock}>
-    <Div col="5" pr="1rem">
+    <Div col="6" pr="1rem">
       <FormInput
         label="Name on card"
         type="text"
@@ -61,7 +62,7 @@ const CardForm = ({
         onChange={onChangeDetails(setPaymentDetails, gateway)}
       />
     </Div>
-    <Div col="5" pr="1rem" className={styles.cardFieldWrapper}>
+    <Div col="6" pr="1rem" className={styles.cardFieldWrapper}>
       <FormInput
         label="Card number"
         type="text"
@@ -79,7 +80,7 @@ const CardForm = ({
       {cardType === 'diners' && <Img src={dcIcon} alt="Diners Club" />}
       {cardType === 'other' && <Img src={cardIcon} alt="Others" />}
     </Div>
-    <Div col="2">
+    <Div col="3" pr="1rem">
       <FormInput
         label="CVV"
         type="text"
@@ -89,7 +90,7 @@ const CardForm = ({
         onChange={onChangeDetails(setPaymentDetails, gateway)}
       />
     </Div>
-    <Div col="12">
+    <Div col="9">
       <Label color="secondary" mb="0.625rem">
         Expiry Date
       </Label>
@@ -113,6 +114,11 @@ const CardForm = ({
         <option key="year">YYYY</option>
         {YEARS.map((v, i) => <option key={String(i)}>{new Date().getFullYear() + i}</option>)}
       </select>
+    </Div>
+    <Div col="12" mb="0" p="0">
+      <Text mt="1rem" fontSize="0.875rem" color="rgba(0,0,0,0.5)">
+        International card also accepted.
+      </Text>
     </Div>
   </Div>
 );
