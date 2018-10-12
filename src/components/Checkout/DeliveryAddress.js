@@ -360,7 +360,7 @@ class DeliveryAddress extends Component {
                         mt="0.5rem"
                         disabled={loading}
                       >
-                        {loading ? 'Loading...' : 'Next: Payment Options'}
+                        {loading ? 'Loading...' : 'Save and Continue'}
                       </Button>
                     </Div>
                   </Row>

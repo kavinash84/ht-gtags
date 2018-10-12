@@ -72,7 +72,7 @@ const OrderSummary = ({
           borderRadius="0"
           disabled={loadingnextstep || isSubmitted || (outOfStockList && outOfStockList.length > 0) || disabled}
         >
-          {loadingnextstep || isSubmitted ? 'Please wait...' : 'Checkout'}
+          {loadingnextstep || isSubmitted ? 'Please wait...' : 'Place Order'}
         </Button>
       )}
     </Div>
