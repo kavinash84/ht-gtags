@@ -3,17 +3,21 @@ import PropTypes from 'prop-types';
 import PaymentSuccess from 'components/PaymentSuccess';
 import MenuFooter from 'containers/MenuFooter';
 import { connect } from 'react-redux';
+import Oops from 'components/PaymentSuccess/Oops';
 
-@connect(({ paymentstatus: { data, loaded, error } }) => ({
+@connect(({ paymentstatus: { data, loaded, error }, userLogin: { isLoggedIn } }) => ({
   data,
   loaded,
-  error
+  error,
+  isLoggedIn
 }))
 export default class PaymentSuccessContainer extends Component {
   static propTypes = {
     data: PropTypes.object,
     error: PropTypes.string,
-    loaded: PropTypes.bool
+    loaded: PropTypes.bool,
+    isLoggedIn: PropTypes.bool,
+    history: PropTypes.object.isRequired
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -21,10 +25,19 @@ export default class PaymentSuccessContainer extends Component {
   static defaultProps = {
     data: {},
     error: '',
-    loaded: false
+    loaded: false,
+    isLoggedIn: false
   };
   componentDidMount() {
-    const { error } = this.props;
+    const {
+      error, data, history, isLoggedIn
+    } = this.props;
+    if (data === 'An internal server error occurred' || data.error_message === 'details not found') {
+      if (isLoggedIn) {
+        return history.push('/my-orders');
+      }
+      return history.push('/');
+    }
     if (error === '') {
       const { dispatch } = this.context.store;
       dispatch({
@@ -36,7 +49,11 @@ export default class PaymentSuccessContainer extends Component {
     const { data, error, loaded } = this.props;
     return (
       <MenuFooter pageTitle="Payment Success">
-        <PaymentSuccess data={data} error={error} loaded={loaded} />
+        {data !== 'An internal server error occurred' ? (
+          <PaymentSuccess data={data} error={error} loaded={loaded} />
+        ) : (
+          <Oops />
+        )}
       </MenuFooter>
     );
   }
