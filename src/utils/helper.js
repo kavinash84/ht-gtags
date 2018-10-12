@@ -70,6 +70,7 @@ export const formFilterLink2 = (key, name, b64, category, value, selected, urlqu
     query = query.join('/');
     [query] = cleanColor(query);
     query = cleanTail(query);
+    query = query.replace('catalog/', '');
     return `/${query}`;
   }
   if (name === 'Color') {
