@@ -14,11 +14,11 @@ import { Link } from 'react-router-dom';
 const styles = require('./MenuWithBreadcrumb.scss');
 
 const MenuWithBreadcrumb = ({ storeName }) => (
-  <Section mb="0.625rem" p="1.375rem 0.5rem 0.75rem" bg="bg" boxShadow="0 2px 8px 0 rgba(0, 0, 0, 0.17)">
-    <Container type="container" pr="0.5rem" pl="0.5rem">
+  <Section mb="0.625rem" p="1.25rem 0.5rem" bg="bg">
+    <Container type="container" pr="0" pl="0">
       <Row display="block" mr="0" ml="0">
         <Div col="10">
-          <Row display="block" mr="0" ml="0" mb="1rem">
+          <Row display="block" mr="0" ml="0" mb="0.3125rem">
             <Div col="10">
               <Link to="/" className={`${styles.headerLink}`}>
                 Home
@@ -26,8 +26,8 @@ const MenuWithBreadcrumb = ({ storeName }) => (
               <Label className={`${styles.headerLink} ${styles.hideArrow}`}>{storeName}</Label>
             </Div>
           </Row>
-          <Row display="block" mr="0" ml="0" mb="0.5rem">
-            <Heading fontSize="1.5rem" color="white" mt="0" mb="0" fontFamily="light">
+          <Row display="block" mr="0" ml="0" mb="0">
+            <Heading fontSize="1.25rem" color="text" mt="0" mb="0" fontFamily="light">
               {storeName}
             </Heading>
           </Row>
