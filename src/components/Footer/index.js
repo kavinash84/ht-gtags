@@ -58,7 +58,9 @@ class Footer extends React.Component {
     }
   }
   onChangeEmail = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = !validateEmail(value);
     this.setState({
       email: value,
@@ -249,7 +251,7 @@ class Footer extends React.Component {
                 </Heading>
                 <ul>
                   <li>
-                    <Link to="/sitemap.xml">Sitemap</Link>
+                    <Link to="/sitemap.html">Sitemap</Link>
                   </li>
                   <li>
                     <Link to="/promotions">Promotions</Link>
@@ -330,4 +332,7 @@ Footer.propTypes = {
   sendFormData: PropTypes.func.isRequired,
   subscribe: PropTypes.object
 };
-export default connect(mapStateToProps, { sendFormData: sendData })(Footer);
+export default connect(
+  mapStateToProps,
+  { sendFormData: sendData }
+)(Footer);
