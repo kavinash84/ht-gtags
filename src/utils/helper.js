@@ -241,6 +241,7 @@ export const urlKeyResults = results => {
 
 export const formatProductURL = (name, sku) => {
   const productname = name
+    .replace('&', 'and')
     .replace(/[^a-zA-Z0-9]/g, '-')
     .split(' ')
     .join('-')
