@@ -20,7 +20,9 @@ export default class Emi extends Component {
     this.setState({ open: false });
   };
   render() {
-    const { data, price } = this.props;
+    const { price } = this.props;
+    let { data } = this.props;
+    data = data && data.sort((a, b) => Number(a.bank_code) - Number(b.bank_code));
     return (
       <Span>
         <Button
@@ -60,9 +62,6 @@ export default class Emi extends Component {
                         <div>3 Months</div>
                       </th>
                       <th>
-                        <div>4 Months</div>
-                      </th>
-                      <th>
                         <div>6 Months</div>
                       </th>
                       <th>
@@ -78,28 +77,28 @@ export default class Emi extends Component {
                         <div>24 Months</div>
                       </th>
                     </tr>
-                    {/* eslint-disable */}
 
-                    {data.map((bank, index) => (
-                      <tr key={String(index)} className={styles.coloumn}>
-                        <td>
-                          <div className={styles.bankImgWrapper}>
-                            <img src={bank.bank_logo_url} alt={bank.gateway_type} />
-                          </div>
-                        </td>
-                        {bank.slabs.map((slab, index) => {
-                          const values = Object.values(slab.slab_keys);
-                          return (
-                            <td className="" key={String(index)}>
-                              <div>
-                                {values[3] && <p>Rs. {values[3]} p.m.</p>}
-                                {values[3] && <p>Interest Rate {values[0]}%</p>}
-                              </div>
-                            </td>
-                          );
-                        })}
-                      </tr>
-                    ))}
+                    {data.length > 0 &&
+                      data.map((bank, index) => (
+                        <tr key={String(index)} className={styles.coloumn}>
+                          <td>
+                            <div className={styles.bankImgWrapper}>
+                              <img src={bank.bank_logo_url} alt={bank.gateway_type} />
+                            </div>
+                          </td>
+                          {bank.slabs.map((slab, i) => {
+                            const values = Object.values(slab.slab_keys);
+                            return (
+                              <td className="" key={String(i)}>
+                                <div>
+                                  {values[3] && <p>Rs. {values[3]} p.m.</p>}
+                                  {values[3] && <p>Interest Rate {values[0]}%</p>}
+                                </div>
+                              </td>
+                            );
+                          })}
+                        </tr>
+                      ))}
                   </tbody>
                 </table>
               </Div>

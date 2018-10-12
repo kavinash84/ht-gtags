@@ -251,7 +251,7 @@ class Footer extends React.Component {
                 </Heading>
                 <ul>
                   <li>
-                    <Link to="/sitemap.xml">Sitemap</Link>
+                    <Link to="/sitemap.html">Sitemap</Link>
                   </li>
                   <li>
                     <Link to="/promotions">Promotions</Link>
