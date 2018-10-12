@@ -13,7 +13,7 @@ const NavBar = ({
   <div className={styles.navBar} onMouseLeave={handleLeave}>
     <Container pr="0" pl="0">
       <div className={styles.navBarSlider}>
-        {menuItems.filter(menu => menu.visibility === 'on').map(menuItem => (
+        {menuItems.filter(menu => menu.visibility === 'on' && menu.name !== 'Clearance Sale').map(menuItem => (
           <Link
             onClick={exitOnClick}
             to={`/${menuItem.url_key}`}
@@ -48,14 +48,19 @@ const NavBar = ({
             <ul>
               <li>
                 <Label htmlFor="checkbox" fontSize="0.75em" ml="0.625rem" className="dropdownValue">
-                  <Link onClick={exitOnClick} to="/clearance-sale" onMouseEnter={handleEnter('')}>
+                  <Link
+                    onClick={exitOnClick}
+                    to="/clearance-sale"
+                    onMouseEnter={handleEnter('')}
+                    title="Clearance Sale"
+                  >
                     Clearance Sale
                   </Link>
                 </Label>
               </li>
               <li>
                 <Label htmlFor="checkbox" fontSize="0.75em" ml="0.625rem" className="dropdownValue">
-                  <Link onClick={exitOnClick} to="/bulk-order" onMouseEnter={handleEnter('')}>
+                  <Link onClick={exitOnClick} to="/bulk-order" onMouseEnter={handleEnter('')} title="Bulk Order">
                     Bulk Order
                   </Link>
                 </Label>
