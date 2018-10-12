@@ -19,7 +19,7 @@ module.exports = Object.assign(
       title: 'HomeTown',
       description: 'Buy Furniture, Homeware Online',
       head: {
-        titleTemplate: 'HomeTown: %s',
+        titleTemplate: '%s',
         meta: [
           { name: 'description', content: 'Buy Furniture, HomeDecor, Online !' },
           { charset: 'utf-8' },
