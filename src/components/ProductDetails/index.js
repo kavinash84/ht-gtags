@@ -154,6 +154,7 @@ class ProductDetails extends React.Component {
     const checkSpecialPrice = specialPrice || price;
     const { adding, added } = reviews;
     const offerImage = simples[simpleSku].groupedattributes.offer_image || null;
+    const offerImageRedirect = simples[simpleSku].groupedattributes.offer_image_click_url || '';
     const { showmore } = this.state;
     const isEmiAvailable = Number(checkSpecialPrice) >= 3000;
     const { main_material: material, color, category_type: productType } = gattributes;
@@ -235,7 +236,9 @@ class ProductDetails extends React.Component {
                   {offerImage && (
                     <Row display="block" mt="0" mb="0" mr="0.9375rem" ml="0.9375rem">
                       <Div col="12" mt="0" pr="0.3125rem">
-                        <Img src={offerImage} alt="" width="100%" mt="0" mb="0.625rem" />
+                        <a target="_blank" rel="noopener noreferrer" href={offerImageRedirect}>
+                          <Img src={offerImage} alt="" width="100%" mt="0" mb="0.625rem" />
+                        </a>
                       </Div>
                     </Row>
                   )}
