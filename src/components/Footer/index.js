@@ -129,7 +129,7 @@ class Footer extends React.Component {
                 )}
               </Div>
               <Div col="3">
-                <Heading color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="0">
+                <Heading color="footerHeading" fontFamily="regular" fontSize="1rem" mt="0">
                   CONTACT US
                 </Heading>
                 <ul>
@@ -183,7 +183,7 @@ class Footer extends React.Component {
                 menu.children &&
                   menu.visibility === 'on' && (
                   <Div key={menu.name} display="flexEqual">
-                    <Heading color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
+                    <Heading color="footerHeading" fontFamily="regular" fontSize="1rem" mt="1rem" pb="2px">
                       {menu.name}
                     </Heading>
                     <ul>
@@ -204,7 +204,7 @@ class Footer extends React.Component {
             </Row>
             <Row m="0" flexWrap="nowrap">
               <Div display="flexEqual" col="2">
-                <Heading color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
+                <Heading color="footerHeading" fontFamily="regular" fontSize="1rem" mt="1rem" pb="2px">
                   ABOUT US
                 </Heading>
                 <ul>
@@ -222,7 +222,7 @@ class Footer extends React.Component {
                 </ul>
               </Div>
               <Div display="flexEqual" col="2">
-                <Heading color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
+                <Heading color="footerHeading" fontFamily="regular" fontSize="1rem" mt="1rem" pb="2px">
                   CUSTOMER SERVICE
                 </Heading>
                 <ul>
@@ -247,7 +247,7 @@ class Footer extends React.Component {
                 </ul>
               </Div>
               <Div display="flexEqual" col="2">
-                <Heading color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
+                <Heading color="footerHeading" fontFamily="regular" fontSize="1rem" mt="1rem" pb="2px">
                   USEFUL LINKS
                 </Heading>
                 <ul>
@@ -260,7 +260,7 @@ class Footer extends React.Component {
                 </ul>
               </Div>
               <Div display="flexEqual" col="3">
-                <Heading color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
+                <Heading color="footerHeading" fontFamily="regular" fontSize="1rem" mt="1rem" pb="2px">
                   OUR APP
                 </Heading>
                 <a
@@ -272,7 +272,7 @@ class Footer extends React.Component {
                 </a>
               </Div>
               <Div display="flexEqual" col="3">
-                <Heading color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
+                <Heading color="footerHeading" fontFamily="regular" fontSize="1rem" mt="1rem" pb="2px">
                   PAYMENT METHODS
                 </Heading>
                 <Row ml="0" mr="0" className={styles.paymentWrapper}>
@@ -304,15 +304,22 @@ class Footer extends React.Component {
             <Row m="0">
               <Div col={6}>
                 <Link to={HOME_URL}>
-                  <Img src={LogoIcon} className={styles.footerLogo} alt="Hometown" height="40px" />
+                  <Img
+                    src={LogoIcon}
+                    className={styles.footerLogo}
+                    alt="Hometown"
+                    height="40px"
+                    float="left"
+                    mr="1.5rem"
+                  />
                 </Link>
+                <Text color="#a6a6a6" fontSize="0.875rem" mb="0" lh="2" ta="left" mt="7px">
+                  © {new Date().getFullYear()} Praxis Home Retail Limited
+                </Text>
               </Div>
               <Div col={6} ta="left" alignSelf="center">
-                <Text color="#a6a6a6" fontSize="0.875rem" mt="0" mb="0" lh="2" ta="right">
-                  version: {version}
-                </Text>
-                <Text color="#a6a6a6" fontSize="0.875rem" mt="0" mb="0" lh="2" ta="right">
-                  © {new Date().getFullYear()} Praxis Home Retail Limited
+                <Text color="rgba(166, 166, 166, 0.5)" fontSize="0.75rem" mt="0" mb="0" lh="2" ta="right" pr="4.5rem">
+                  v {version}
                 </Text>
               </Div>
             </Row>
