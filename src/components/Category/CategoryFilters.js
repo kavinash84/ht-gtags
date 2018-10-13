@@ -12,9 +12,13 @@ const showLessIcon = require('../../../static/chevron_right.svg');
 const showMoreIcon = require('../../../static/expand_more.svg');
 
 class CategoryFilterItem extends Component {
-  state = {
-    show: false
+  static propTypes = {
+    index: PropTypes.number.isRequired
   };
+  state = {
+    show: this.props.index === 0
+  };
+
   handleClick = () => {
     this.setState({
       show: !this.state.show
@@ -57,7 +61,7 @@ const CategoryFilters = ({ data }) => (
         {data &&
           data
             .filter(menu => menu.visibility === 'on')
-            .map((sub, index) => <CategoryFilterItem sub={sub} key={String(index)} />)}
+            .map((sub, index) => <CategoryFilterItem index={index} sub={sub} key={String(index)} />)}
       </ul>
     </Div>
   </Row>

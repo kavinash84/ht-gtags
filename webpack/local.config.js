@@ -2,10 +2,9 @@
 
 // Webpack config for creating the production bundle.
 var path = require('path');
-const fs = require('fs');
+var fs = require('fs');
 var webpack = require('webpack');
-
-// var CleanPlugin = require('clean-webpack-plugin');
+var CleanPlugin = require('clean-webpack-plugin');
 var ReactLoadablePlugin = require('react-loadable/webpack').ReactLoadablePlugin;
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -23,6 +22,7 @@ const CompressionPlugin = require("compression-webpack-plugin");
 var WebpackOnBuildPlugin = require('on-build-webpack');
 
 var version = require('../package.json').version;
+
 
 module.exports = {
   devtool: 'source-map',
@@ -208,7 +208,7 @@ module.exports = {
     }),
 
     new HtmlWebpackPlugin({
-      filename: 'index.html',
+      filename: '../index.html',
       template: 'src/pwa.js'
     }),
 
@@ -220,8 +220,8 @@ module.exports = {
     // new BundleAnalyzerPlugin(),
 
     new SWPrecacheWebpackPlugin({
-      cacheId: 'stage.hometown.in',
-      filename: 'service-worker.js',
+      cacheId: 'beta.hometown.in',
+      filename: '../service-worker.js',
       maximumFileSizeToCacheInBytes: 8388608,
 
       // Ensure all our static, local assets are cached.
@@ -244,6 +244,8 @@ module.exports = {
         }
       ]
     }),
+
+
     new WebpackOnBuildPlugin(function() {
         const data = {
           version,
@@ -256,7 +258,6 @@ module.exports = {
           if (err) throw err;
           console.log(`VERSION RELEASE : ${version}`);
         });
-    }),
-
+      }),
   ]
 };

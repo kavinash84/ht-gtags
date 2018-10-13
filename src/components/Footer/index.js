@@ -31,6 +31,7 @@ const visaIcon = require('../../../static/visa.svg');
 const intBankingIcon = require('../../../static/net-banking.png');
 const walletIcon = require('../../../static/wallet.svg');
 const styles = require('./Footer.scss');
+const { version } = require('../../../package.json');
 
 const FooterLinks = ['Furniture', 'Home Furnishings', 'Home Décor', 'Home Decor', 'Tableware', 'Kitchenware', 'Bath'];
 
@@ -307,9 +308,9 @@ class Footer extends React.Component {
                 </Link>
               </Div>
               <Div col={6} ta="left" alignSelf="center">
-                {/* <Text color="#a6a6a6" fontSize="0.875rem" mt="0" mb="0" lh="2" ta="right">
-                  version: {`v${process.env.APP_VERSION}`}
-                </Text> */}
+                <Text color="#a6a6a6" fontSize="0.875rem" mt="0" mb="0" lh="2" ta="right">
+                  version: {version}
+                </Text>
                 <Text color="#a6a6a6" fontSize="0.875rem" mt="0" mb="0" lh="2" ta="right">
                   © {new Date().getFullYear()} Praxis Home Retail Limited
                 </Text>
