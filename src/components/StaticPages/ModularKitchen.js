@@ -34,7 +34,7 @@ export default class ModularKitchen extends Component {
               <Div col="1" />
               <Div col="10">
                 <Img
-                  src="https://www.hometown.in/media/cms/Staticpage/modular-kitchen/20161209/book-our-services.jpg"
+                  src="https://static.hometown.in/media/cms/Staticpage/modular-kitchen/20161209/book-our-services.jpg"
                   alt=""
                   m="auto"
                 />
@@ -54,21 +54,21 @@ export default class ModularKitchen extends Component {
             <Row ml="0" mr="0" mt="2rem">
               <Div col="4" pl="0.625rem" pr="0.625rem">
                 <Img
-                  src="https://www.hometown.in/media/cms/hometown-hp/2017/nov/20171129/modular-kitchen/moduler-1.jpg"
+                  src="https://static.hometown.in/media/cms/hometown-hp/2017/nov/20171129/modular-kitchen/moduler-1.jpg"
                   alt=""
                   width="100%"
                 />
               </Div>
               <Div col="4" pl="0.625rem" pr="0.625rem">
                 <Img
-                  src="https://www.hometown.in/media/cms/hometown-hp/2017/nov/20171129/modular-kitchen/moduler-2.jpg"
+                  src="https://static.hometown.in/media/cms/hometown-hp/2017/nov/20171129/modular-kitchen/moduler-2.jpg"
                   alt=""
                   width="100%"
                 />
               </Div>
               <Div col="4" pl="0.625rem" pr="0.625rem">
                 <Img
-                  src="https://www.hometown.in/media/cms/hometown-hp/2017/nov/20171129/modular-kitchen/moduler-3.jpg"
+                  src="https://static.hometown.in/media/cms/hometown-hp/2017/nov/20171129/modular-kitchen/moduler-3.jpg"
                   alt=""
                   width="100%"
                 />
@@ -91,21 +91,21 @@ export default class ModularKitchen extends Component {
               <Div col="3" />
               <Div col="2" pl="0.625rem" pr="0.625rem">
                 <Img
-                  src="https://www.hometown.in/media/cms/Staticpage/modular-kitchen/20161209/5-year-warranty.jpg"
+                  src="https://static.hometown.in/media/cms/Staticpage/modular-kitchen/20161209/5-year-warranty.jpg"
                   alt=""
                   width="100%"
                 />
               </Div>
               <Div col="2" pl="0.625rem" pr="0.625rem">
                 <Img
-                  src="https://www.hometown.in/media/cms/Staticpage/modular-kitchen/20161209/free-service-visit.jpg"
+                  src="https://static.hometown.in/media/cms/Staticpage/modular-kitchen/20161209/free-service-visit.jpg"
                   alt=""
                   width="100%"
                 />
               </Div>
               <Div col="2" pl="0.625rem" pr="0.625rem">
                 <Img
-                  src="https://www.hometown.in/media/cms/Staticpage/modular-kitchen/20161209/emi-available.jpg"
+                  src="https://static.hometown.in/media/cms/Staticpage/modular-kitchen/20161209/emi-available.jpg"
                   alt=""
                   width="100%"
                 />
