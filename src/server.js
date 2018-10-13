@@ -44,7 +44,9 @@ const WHITELIST_TO_REDIRECT = new Set([
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-const chunksPath = path.join(__dirname, '..', 'static', 'dist', 'loadable-chunks.json');
+const ver = require('../version.json').version;
+
+const chunksPath = path.join(__dirname, '..', 'static', 'dist', ver, 'loadable-chunks.json');
 
 process.on('unhandledRejection', error => console.error(error));
 
