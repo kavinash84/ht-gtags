@@ -38,15 +38,15 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         [action.formType]: {
-          loading: true
+          getting: true
         }
       };
     case GET_SUCCESS:
       return {
         ...state,
         [action.formType]: {
-          loading: false,
-          loaded: true,
+          getting: false,
+          got: true,
           results: action.result
         }
       };
@@ -54,8 +54,8 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         [action.formType]: {
-          loading: false,
-          loaded: false,
+          getting: false,
+          got: false,
           error: action.error
         }
       };
@@ -63,9 +63,10 @@ export default function reducer(state = initialState, action = {}) {
       return state;
   }
 }
-export function isLoaded(globalState, formType) {
-  return globalState.services[formType] && globalState.services[formType].loaded;
-}
+export const isLoaded = (globalState, formType) =>
+  globalState.services[formType] && globalState.services[formType].loaded;
+
+export const gotData = (globalState, formType) => globalState.services[formType] && globalState.services[formType].got;
 
 export const sendData = (API, data, formType) => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],

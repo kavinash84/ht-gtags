@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import Menu from 'containers/MenuNew/index';
 import MainSlider from 'components/MainSlider';
-import OfferRibbon from 'components/OfferRibbon';
+// import OfferRibbon from 'components/OfferRibbon';
 import CategoryCarousel from 'components/CategoryCarousel';
 import ProductCarousel from 'components/ProductCarousel';
 import Section from 'hometown-components/lib/Section';
@@ -69,23 +69,24 @@ export default class Home extends Component {
       homepageProducts,
       banners,
       cities,
-      offerStrip,
+      // offerStrip,
       middleBanner,
       recentlyviewed
     } = this.props;
-    const { showRibbon } = this.state;
+    // const { showRibbon } = this.state;
     return (
       <Section p="0" mb="0">
         <Helmet title="Home" />
         <div className="wrapper">
-          {offerStrip && (
+          {/* {offerStrip &&
+            offerStrip.description !== '' && (
             <OfferRibbon
               title={offerStrip.description}
               showRibbon={showRibbon}
               onClick={this.handleRibbon}
               url={offerStrip.url_key}
             />
-          )}
+          )} */}
           <Menu />
           <MainSlider data={banners} />
           <Usp />
@@ -137,7 +138,7 @@ Home.defaultProps = {
   homepageProducts: [],
   banners: [],
   cities: [],
-  offerStrip: {},
+  // offerStrip: {},
   recentlyviewed: [],
   middleBanner: {},
   isLoggedIn: false
@@ -148,7 +149,7 @@ Home.propTypes = {
   homepageProducts: PropTypes.array,
   banners: PropTypes.array,
   cities: PropTypes.array,
-  offerStrip: PropTypes.object,
+  // offerStrip: PropTypes.object,
   recentlyviewed: PropTypes.array,
   middleBanner: PropTypes.object,
   isLoggedIn: PropTypes.bool

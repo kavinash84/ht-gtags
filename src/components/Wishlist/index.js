@@ -95,6 +95,8 @@ class Wishlist extends React.Component {
                   sku={item.product_info.data.sku}
                   itemId={item.product_info.id}
                   isSoldOut={item.product_info.data.soldout}
+                  btnType="black"
+                  btnColor="transparent"
                 />
               </Div>
             </div>
@@ -131,4 +133,7 @@ Wishlist.propTypes = {
   loadingList: PropTypes.array
 };
 
-export default connect(null, mapDispatchToProps)(Wishlist);
+export default connect(
+  null,
+  mapDispatchToProps
+)(Wishlist);

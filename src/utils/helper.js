@@ -63,12 +63,14 @@ export const formFilterLink2 = (key, name, b64, category, value, selected, urlqu
     let query;
     const splitLink = key.split('?');
     const paramLink = splitLink[0].split('/').filter(z => z !== '');
-    if (selected) {
-      query = paramLink.filter(param => param !== paramLink[1]);
-    } else query = paramLink;
+    if (paramLink.length >= 4) {
+      paramLink.splice(1, 1);
+    }
+    query = paramLink;
     query = query.join('/');
     [query] = cleanColor(query);
     query = cleanTail(query);
+    query = query.replace('catalog/', '');
     return `/${query}`;
   }
   if (name === 'Color') {
@@ -239,6 +241,7 @@ export const urlKeyResults = results => {
 
 export const formatProductURL = (name, sku) => {
   const productname = name
+    .replace('&', 'and')
     .replace(/[^a-zA-Z0-9]/g, '-')
     .split(' ')
     .join('-')
@@ -282,4 +285,23 @@ export const allowTypeOf = (value, type) => {
   if (type === 'number') {
     return /^\d+$/.test(value);
   }
+};
+
+export const smoothScroll = speed => {
+  if (!window) return;
+  let pageoffset = window.pageYOffset;
+  const scroller = pset =>
+    new Promise(resolve => {
+      window.setTimeout(() => {
+        window.scroll(0, pset);
+        resolve();
+      }, 2);
+    });
+  (async () => {
+    while (pageoffset > 0) {
+      pageoffset -= speed ** 2;
+      /* eslint-disable no-await-in-loop */
+      await scroller(pageoffset);
+    }
+  })();
 };

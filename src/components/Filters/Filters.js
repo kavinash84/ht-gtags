@@ -10,10 +10,19 @@ export default class Filters extends Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
+
   render() {
     const {
       title, checkbox, display, data, onclick
     } = this.props;
+
+    let lastselected;
+    data.map((item, index) => {
+      if (item.isSelected) {
+        lastselected = index;
+      }
+      return 0;
+    });
     return (
       <div className={`${styles.filterBlock} dropdownWrapper`}>
         <Button btnType="custom" bg="#FFF" color="#656565" border="none" fontSize="0.75em" tt="uppercase">
@@ -27,7 +36,13 @@ export default class Filters extends Component {
           <ul>
             {data.map((item, index) => (
               <li key={index}>
-                <div onClick={onclick(item.url_key, title, '', item.isSelected)}>
+                <div
+                  onClick={
+                    index === lastselected
+                      ? onclick(data[lastselected - 1].url_key, title, '', data[lastselected - 1].isSelected)
+                      : onclick(item.url_key, title, '', item.isSelected)
+                  }
+                >
                   {checkbox && (
                     <div className="checkbox">
                       <input type="checkbox" id="checkbox" checked={item.isSelected} onChange={() => true} />

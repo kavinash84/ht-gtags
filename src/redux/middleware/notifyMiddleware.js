@@ -79,6 +79,7 @@ export default function userMiddleware() {
           msg:
               (action.error.error_message &&
                 titleCase(action.error.error_message[action.error.error_message.length - 1])) ||
+              (action.error.error_message && titleCase(action.error.error_message)) ||
               SOME_ERROR,
           dismissAfter: 4000
         }));

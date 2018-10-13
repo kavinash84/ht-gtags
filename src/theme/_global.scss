@@ -1,32 +1,17 @@
-@font-face {
-  font-family: 'light';
-  src: url('../../../static/fonts/light/HelvLight.eot');
-  src: url('../../../static/fonts/light/HelvLight.eot?#iefix') format('embedded-opentype'),
-	url('../../../static/fonts/light/HelvLight.woff2') format('woff2'),
-	url('../../../static/fonts/light/HelvLight.woff') format('woff'),
-	url('../../../static/fonts/light/HelvLight.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
+@font-face{
+    font-family: light;
+    src:url("../../../static/fonts/3a74c169-76ee-4223-b4b4-aac92e8da5ec.eot?#iefix");
+    src:url("../../../static/fonts/3a74c169-76ee-4223-b4b4-aac92e8da5ec.eot?#iefix") format("eot"),url("../../../static/fonts/37953885-0443-4c72-a693-9152a9f5a901.woff2") format("woff2"),url("../../../static/fonts/315bbeb9-a30f-4f38-91ae-d6cfbbf89437.ttf") format("truetype");
 }
-@font-face {
-  font-family: 'regular';
-  src: url('../../../static/fonts/regular/Helvetica.eot');
-  src: url('../../../static/fonts/regular/Helvetica.eot?#iefix') format('embedded-opentype'),
-	url('../../../static/fonts/regular/Helvetica.woff2') format('woff2'),
-	url('../../../static/fonts/regular/Helvetica.woff') format('woff'),
-	url('../../../static/fonts/regular/Helvetica.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+@font-face{
+    font-family: regular;
+    src:url("../../../static/fonts/05598d95-f297-4c7f-a825-ab617e7e045f.eot?#iefix");
+    src:url("../../../static/fonts/05598d95-f297-4c7f-a825-ab617e7e045f.eot?#iefix") format("eot"),url("../../../static/fonts/89294146-207c-4803-91fe-338f0d0094bd.woff2") format("woff2"),url("../../../static/fonts/2922d55c-8df4-4066-b7b0-eec2d1524330.ttf") format("truetype");
 }
-@font-face {
-  font-family: 'medium';
-  src: url('../../../static/fonts/medium/Helvetica-Bold.eot');
-  src: url('../../../static/fonts/medium/Helvetica-Bold.eot?#iefix') format('embedded-opentype'),
-  url('../../../static/fonts/medium/Helvetica-Bold.woff2') format('woff2'),
-  url('../../../static/fonts/medium/Helvetica-Bold.woff') format('woff'),
-  url('../../../static/fonts/medium/Helvetica-Bold.ttf') format('truetype');
-  font-weight: bold;
-  font-style: normal;
+@font-face{
+    font-family: medium;
+    src:url("../../../static/fonts/05f47e74-d17c-45af-86c3-8ab878fd4ec7.eot?#iefix");
+    src:url("../../../static/fonts/05f47e74-d17c-45af-86c3-8ab878fd4ec7.eot?#iefix") format("eot"),url("../../../static/fonts/7ce0a2f5-eb00-46aa-919c-5b3f3667646c.woff2") format("woff2"),url("../../../static/fonts/8ebb9b04-d12d-488e-aa96-0bb6e6777336.ttf") format("truetype");
 }
 
 /* ----- Base/Global Styles ----- */

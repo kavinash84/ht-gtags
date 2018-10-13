@@ -29,7 +29,7 @@
   transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
   padding: .375rem .75rem;
   font-size: 14px;
-  color: $white;
+  color: #515151;
   background-color: #515151;
   border-color: #515151;
   border: 1px solid;
@@ -42,23 +42,25 @@
     padding: 8px 15px;
   }
   &:hover {
-    color: $primary;
-    background-color: $white;
-    span {
-      color: $primary;
-    }
+    opacity: 0.85;
+    color: #515151;
+    // background-color: #515151;
+    // span {
+    //   color: $primary;
+    // }
   }
 }
 .addToCartBtn {
   transition: 0.75s all ease;
   border-radius: 3px;
   &:hover {
-    background-color: $primary !important;
-    span {
-      color: #FFF !important;
-    }
-    svg {
-      fill: #FFF !important;
-    }
+    opacity: 0.85;
+    //background-color: #515151 !important;
+    // span {
+    //   color: $primary !important;
+    // }
+    // svg {
+    //   fill: $primary !important;
+    // }
   }
 }

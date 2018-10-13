@@ -13,3 +13,20 @@
     }
   }
 }
+.mkWrapper {
+  position: relative;
+}
+.mkForm {
+  max-width: 500px;
+  background-color: rgba(255, 255, 255, 0.99);
+  border-radius: 3px;
+  box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.13);
+  position: absolute !important;
+  right: 0;
+  top: 5rem;
+  padding: 25px 0;
+  input {
+    background: #f1f1f1;
+    border: 1px solid #dedede;
+  }
+}

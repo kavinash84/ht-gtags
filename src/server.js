@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import qs from 'qs';
+import Url from 'url';
 import bodyParser from 'body-parser';
 import express from 'express';
 import React from 'react';
@@ -33,6 +34,14 @@ import axios from 'axios';
 import getCookie from 'utils/cookies';
 import { PAYMENT_SUCCESS, PAYMENT_FAILURE } from 'helpers/Constants';
 
+const WHITELIST_TO_REDIRECT = new Set([
+  'localhost',
+  'hometown.in',
+  'www.hometown.in',
+  'stage.hometown.in',
+  'beta.hometown.in'
+]);
+
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 const chunksPath = path.join(__dirname, '..', 'static', 'dist', 'loadable-chunks.json');
@@ -42,6 +51,19 @@ process.on('unhandledRejection', error => console.error(error));
 const pretty = new PrettyError();
 const app = express();
 const server = new http.Server(app);
+
+app.get('/', (req, res, next) => {
+  const { redirect } = req.query;
+  if (redirect) {
+    const targetUrl = Url.parse(redirect);
+    console.log('req.hostname: [%s]', req.hostname);
+    console.log('url.host: [%s]', targetUrl.host);
+    if (!WHITELIST_TO_REDIRECT.has(targetUrl.host)) {
+      return next(new Error('Open redirect attack detected'));
+    }
+  }
+  return next();
+});
 
 app
   .use(morgan('dev', { skip: req => req.originalUrl.indexOf('/ws') !== -1 }))
@@ -218,8 +240,6 @@ app.use(async (req, res) => {
       </StyleSheetManager>
     );
     const content = ReactDOM.renderToString(component);
-
-    console.log(context);
 
     if (context.url) {
       return res.redirect(301, context.url);

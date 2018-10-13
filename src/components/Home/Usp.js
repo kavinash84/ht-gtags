@@ -54,7 +54,7 @@ const Usp = () => (
               Free Assembly
             </Heading>
             <Text ta="center" color="#7c7c7b" fontSize="0.75rem" fontFamily="light" mb="0" mt="0">
-              with in 48 Hours
+              within 48 Hours
             </Text>
           </Div>
           <Div display="flexEqual" ta="center" className={styles.uspImg}>

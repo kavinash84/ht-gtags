@@ -61,7 +61,7 @@ class NotFound extends Component {
                         {menu.children.map(subMenu =>
                           subMenu.visibility === 'on' && (
                             <li key={subMenu.name}>
-                              <Link to={subMenu.url_key}>{subMenu.name}</Link>
+                              <Link to={`/${subMenu.url_key}`}>{subMenu.name}</Link>
                             </li>
                           ))}
                       </ul>

@@ -6,12 +6,12 @@ import Div from 'hometown-components/lib/Div';
 const Title = ({
   title, subTitle, ta, titleColor
 }) => (
-  <Div mb="1.25rem">
-    <Text fontSize="1.5rem" color={titleColor} mt="0" mb="0.3125rem" lh="1.4" ta={ta} fontFamily="regular">
+  <Div mb="1rem">
+    <Text fontSize="1.5rem" color={titleColor} mt="0" mb="0.3125rem" lh="1.4" ta={ta} fontFamily="light">
       {title}
     </Text>
     {subTitle !== '' && (
-      <Text fontSize="1rem" color="rgba(0, 0, 0, 0.6)" mt="0" mb="0" ta="center" fontFamily="regular">
+      <Text fontSize="1rem" color="rgba(0, 0, 0, 0.6)" mt="0" mb="0" ta="center" fontFamily="light">
         {subTitle}
       </Text>
     )}

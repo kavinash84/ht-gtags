@@ -32,7 +32,7 @@ const intBankingIcon = require('../../../static/net-banking.png');
 const walletIcon = require('../../../static/wallet.svg');
 const styles = require('./Footer.scss');
 
-const FooterLinks = require('data/FooterLinks');
+const FooterLinks = ['Furniture', 'Home Furnishings', 'Home Décor', 'Home Decor', 'Tableware', 'Kitchenware', 'Bath'];
 
 const mapStateToProps = ({ services, homepage, notifs }) => ({
   menuItems: homepage.menu.data,
@@ -128,7 +128,7 @@ class Footer extends React.Component {
                 )}
               </Div>
               <Div col="3">
-                <Heading color="white" fontFamily="light" fontSize="1em" mt="0">
+                <Heading color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="0">
                   CONTACT US
                 </Heading>
                 <ul>
@@ -141,7 +141,7 @@ class Footer extends React.Component {
                 </ul>
               </Div>
               <Div col="3">
-                <Heading color="white" fontFamily="light" fontSize="1em" mt="0">
+                <Heading color="footerHeading" fontFamily="regular" fontSize="1em" mt="0">
                   FOLLOW US
                 </Heading>
                 <ul className={styles.socials}>
@@ -182,7 +182,7 @@ class Footer extends React.Component {
                 menu.children &&
                   menu.visibility === 'on' && (
                   <Div key={menu.name} display="flexEqual">
-                    <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem" pb="2px">
+                    <Heading color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
                       {menu.name}
                     </Heading>
                     <ul>
@@ -203,7 +203,7 @@ class Footer extends React.Component {
             </Row>
             <Row m="0" flexWrap="nowrap">
               <Div display="flexEqual" col="2">
-                <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem">
+                <Heading color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
                   ABOUT US
                 </Heading>
                 <ul>
@@ -221,7 +221,7 @@ class Footer extends React.Component {
                 </ul>
               </Div>
               <Div display="flexEqual" col="2">
-                <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem">
+                <Heading color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
                   CUSTOMER SERVICE
                 </Heading>
                 <ul>
@@ -246,12 +246,12 @@ class Footer extends React.Component {
                 </ul>
               </Div>
               <Div display="flexEqual" col="2">
-                <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem">
-                  Useful Links
+                <Heading color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
+                  USEFUL LINKS
                 </Heading>
                 <ul>
                   <li>
-                    <Link to="/sitemap.xml">Sitemap</Link>
+                    <Link to="/sitemap.html">Sitemap</Link>
                   </li>
                   <li>
                     <Link to="/promotions">Promotions</Link>
@@ -259,7 +259,7 @@ class Footer extends React.Component {
                 </ul>
               </Div>
               <Div display="flexEqual" col="3">
-                <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem">
+                <Heading color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
                   OUR APP
                 </Heading>
                 <a
@@ -271,8 +271,8 @@ class Footer extends React.Component {
                 </a>
               </Div>
               <Div display="flexEqual" col="3">
-                <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem">
-                  PAYMENT METHOD
+                <Heading color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
+                  PAYMENT METHODS
                 </Heading>
                 <Row ml="0" mr="0" className={styles.paymentWrapper}>
                   <Div col="2" p="0 5px">
@@ -287,7 +287,7 @@ class Footer extends React.Component {
                   <Div col="2" p="0 5px">
                     <Img src={aeIcon} alt="Amex" width="100%" />
                   </Div>
-                  <Div col="2" p="0 5px">
+                  <Div col="2" p="5px 5px 0">
                     <Img src={intBankingIcon} alt="Internet Banking" width="100%" />
                   </Div>
                   <Div col="2" p="3px 5px">
@@ -306,9 +306,12 @@ class Footer extends React.Component {
                   <Img src={LogoIcon} className={styles.footerLogo} alt="Hometown" height="40px" />
                 </Link>
               </Div>
-              <Div col={6} ta="right" alignSelf="center">
+              <Div col={6} ta="left" alignSelf="center">
+                {/* <Text color="#a6a6a6" fontSize="0.875rem" mt="0" mb="0" lh="2" ta="right">
+                  version: {`v${process.env.APP_VERSION}`}
+                </Text> */}
                 <Text color="#a6a6a6" fontSize="0.875rem" mt="0" mb="0" lh="2" ta="right">
-                  © 2018 Praxis Home Retail Limited
+                  © {new Date().getFullYear()} Praxis Home Retail Limited
                 </Text>
               </Div>
             </Row>

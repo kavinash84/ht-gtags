@@ -14,7 +14,8 @@ const CLEAR_LOGIN_STATE = 'login/CLEAR_LOGIN_STATE';
 const initialState = {
   loaded: false,
   isLoggedIn: false,
-  loggingOut: false
+  loggingOut: false,
+  logoutResponse: {}
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -63,7 +64,8 @@ export default function reducer(state = initialState, action = {}) {
         loggingOut: false,
         isLoggedIn: false,
         accessToken: null,
-        refreshToken: null
+        refreshToken: null,
+        logoutResponse: action.result
       };
     case LOGOUT_FAIL:
       return {
@@ -144,6 +146,7 @@ export const logout = () => ({
       const response = await client.put(LOGOUT_API);
       if (response.success) {
         await setToken({ client })({ access_token: null });
+        return response;
       }
     } catch (err) {
       throw err;
