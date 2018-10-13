@@ -2,6 +2,7 @@
 
 // Webpack config for creating the production bundle.
 var path = require('path');
+const fs = require('fs');
 var webpack = require('webpack');
 // var CleanPlugin = require('clean-webpack-plugin');
 var ReactLoadablePlugin = require('react-loadable/webpack').ReactLoadablePlugin;
