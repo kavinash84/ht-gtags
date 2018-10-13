@@ -46,7 +46,7 @@ export default class PlanYourKitchen extends Component {
     return (
       <Div display="block">
         <Header />
-        <Section p="0" mb="0">
+        <Section p="0" mb="3rem">
           {results && <MainSlider data={results.items.text.banner} />}
           <Container className={styles.mkWrapper}>
             <ModularKitchenForm />
@@ -55,27 +55,28 @@ export default class PlanYourKitchen extends Component {
         {results &&
           results.items.text.sections.map(item => (
             <Section p="0" mb="0" className={`${styles.stepBlock} ${styles[item.class]}`} key={item.name}>
-              <MainSlider data={item.items} newSettings={newSettings} reference={this[item.name]} />
               <Container type="container" pr="0.5rem" pl="0.5rem" className={`${styles.stepContainer}`}>
-                <Row ml="0" mr="0">
-                  <Div col="12">
-                    <Heading mt="0" mb="0.625rem" color="text" fontSize="1.75rem" ta="center" fontFamily="light">
-                      {item.title}
-                    </Heading>
-                  </Div>
-                </Row>
+                {item.title && (
+                  <Row ml="0" mr="0">
+                    <Div col="12">
+                      <Heading mt="5rem" mb="1.5rem" color="text" fontSize="1.75rem" ta="center" fontFamily="light">
+                        {item.title}
+                      </Heading>
+                    </Div>
+                  </Row>
+                )}
                 <Div className={styles.content}>
                   <Row ml="0" mr="0">
-                    <Div col="6">
+                    <Div col="6" pr="3.5rem">
                       <Heading mt="0" mb="0.625rem" color="text" fontSize="1.75rem" ta="center" fontFamily="light">
                         {item.name}
                       </Heading>
                       <Text fontSize="0.875rem" mt="0.3125rem" ta="center" color={Theme.colors.textExtraLight}>
                         {item.data}
                       </Text>
-                      <ul>
+                      <ul className="collposeBlock">
                         {item.items.map((list, index) => (
-                          <li key={String(index)}>
+                          <li key={String(index)} className="collopseHeading">
                             <Button
                               btnType="custom"
                               bc="transparent"
@@ -89,11 +90,19 @@ export default class PlanYourKitchen extends Component {
                             >
                               {list.title}
                             </Button>
+                            <Text
+                              mt="0"
+                              pt="0.3125rem"
+                              fontSize="0.875rem !important"
+                              className="collopseContent close"
+                            >
+                              {list.description}
+                            </Text>
                           </li>
                         ))}
                       </ul>
                     </Div>
-                    <Div col="6" pl="2.5rem">
+                    <Div col="6">
                       <MainSlider data={item.items} newSettings={newSettings} reference={this[item.name]} />
                     </Div>
                   </Row>

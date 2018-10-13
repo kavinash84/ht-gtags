@@ -9,7 +9,7 @@ const styles = require('./Slider.scss');
 const CategoryItem = ({ image, name, url }) => (
   <Div className={styles.catSliderItem}>
     <Link className={styles.link} to={url || '/'}>
-      <ImageShimmer src={image} height="190px">
+      <ImageShimmer src={image} height="192px">
         {imageURL => <img src={imageURL} alt={name} />}
       </ImageShimmer>
       <div className={styles.content}>
