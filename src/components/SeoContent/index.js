@@ -7,7 +7,7 @@ import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
 
 const SeoContent = ({ children }) => (
-  <Div type="block" pb="0" pt="0">
+  <Div type="block" pb="2rem" pt="0">
     <SeoContentContainer>
       <Section pt="0.3125rem" pb="0.3125rem" mb="0.625rem">
         <Container pr="0" pl="0">

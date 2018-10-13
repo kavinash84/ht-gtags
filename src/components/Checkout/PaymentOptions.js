@@ -93,7 +93,7 @@ class PaymentOptions extends Component {
     return (
       <Div type="block">
         <MenuCheckout history={history} page="payment" />
-        <Section display="flex" pt="1.25rem" pb="2.5rem" mb="0" height="auto">
+        <Section display="flex" pt="1.25rem" pb="3.5rem" mb="0" height="auto">
           <Container type="container" pr="2rem" pl="2rem">
             <Row display="block" mr="0" ml="0">
               <Div col="9" pr="1rem">

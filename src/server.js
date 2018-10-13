@@ -43,8 +43,13 @@ const WHITELIST_TO_REDIRECT = new Set([
 ]);
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-
-const chunksPath = path.join(__dirname, '..', 'static', 'dist', 'loadable-chunks.json');
+let chunksPath;
+if (process.env.NODE_ENV === 'development') {
+  chunksPath = path.join(__dirname, '..', 'static', 'dist', 'loadable-chunks.json');
+} else {
+  const ver = require('../version.json').version;
+  chunksPath = path.join(__dirname, '..', 'static', 'dist', ver, 'loadable-chunks.json');
+}
 
 process.on('unhandledRejection', error => console.error(error));
 

@@ -59,7 +59,7 @@ class Wishlist extends React.Component {
     } = this.props;
     const { quickViewSku, openQuickView, simpleSku } = this.state;
     return (
-      <Section display="flex" p="0" pt="2.5rem" mb="0">
+      <Section display="flex" p="0" pt="2.5rem" mb="2rem">
         <Container type="container" pr="0" pl="0">
           {list.map(item => (
             <div key={item.product_info.id} className={styles.productWrapper}>
@@ -95,7 +95,7 @@ class Wishlist extends React.Component {
                   sku={item.product_info.data.sku}
                   itemId={item.product_info.id}
                   isSoldOut={item.product_info.data.soldout}
-                  btnType="black"
+                  btnType="btnOutline"
                   btnColor="transparent"
                 />
               </Div>

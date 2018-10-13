@@ -632,7 +632,7 @@
 				}
 			}
 			&.moreDropdown {
-				padding: 10px 0 !important;
+				padding: 10px 18px !important;
 				&:hover {
 					background-color: transparent !important;
 					opacity: 0.8;
@@ -861,6 +861,9 @@
 	.pincodeModal {
 	  width: 25rem;
 	  padding: 3rem 3.5rem;
+	}
+	.promotion {
+		margin: 2rem 0;
 	}
 }
 

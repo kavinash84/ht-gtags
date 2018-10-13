@@ -2,9 +2,11 @@
   "name": "hometown.in",
   "description": "Buy Furniture Online.",
   "author": "Rama Krishna <rama@hometown.in>",
-  "contributors": ["Amar Pathak <amar.pathak@hometown.in"],
+  "contributors": [
+    "Amar Pathak <amar.pathak@hometown.in"
+  ],
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "repository": {
     "type": "git",
     "url": "https://bitbucket.org/hometown-tech/frontend/"
@@ -155,6 +157,7 @@
     "lost": "^8.2.1",
     "mocha": "^4.0.1",
     "node-sass": "^4.5.0",
+    "on-build-webpack": "^0.1.0",
     "piping": "^1.0.0-rc.4",
     "postcss": "^6.0.9",
     "postcss-browser-reporter": "^0.5.0",

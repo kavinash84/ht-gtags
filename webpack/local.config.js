@@ -2,6 +2,7 @@
 
 // Webpack config for creating the production bundle.
 var path = require('path');
+var fs = require('fs');
 var webpack = require('webpack');
 var CleanPlugin = require('clean-webpack-plugin');
 var ReactLoadablePlugin = require('react-loadable/webpack').ReactLoadablePlugin;
@@ -18,6 +19,7 @@ var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require("compression-webpack-plugin");
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+var WebpackOnBuildPlugin = require('on-build-webpack');
 
 var version = require('../package.json').version;
 
@@ -181,7 +183,7 @@ module.exports = {
 
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"',
-      'process.env.APIHOST': '"beta-api.hometown.in/api/"',
+      'process.env.APIHOST': '"stage-api.hometown.in/api/"',
       __CLIENT__: true,
       __SERVER__: false,
       __DEVELOPMENT__: false,
@@ -210,7 +212,7 @@ module.exports = {
       template: 'src/pwa.js'
     }),
 
-    /* gzip compression */ 
+    /* gzip compression */
     new CompressionPlugin({
       test: /\.js|.css|.scss/
     }),
@@ -241,6 +243,21 @@ module.exports = {
           }
         }
       ]
-    })
+    }),
+
+
+    new WebpackOnBuildPlugin(function() {
+        const data = {
+          version,
+          date:Date.now()
+          }
+        const versionPath = path.join(__dirname,'..')
+        fs.writeFile(`${versionPath}/version.json`,
+          JSON.stringify(data),
+          (err) => {
+          if (err) throw err;
+          console.log(`VERSION RELEASE : ${version}`);
+        });
+      }),
   ]
 };

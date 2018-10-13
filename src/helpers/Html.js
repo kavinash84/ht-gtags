@@ -5,6 +5,8 @@ import Helmet from 'react-helmet';
 import config from 'config';
 import { newRelic } from 'utils/tracking';
 
+const { version } = require('../../package.json');
+
 /**
  * Wrapper component containing HTML metadata and boilerplate tags.
  * Used in server-side code only to wrap the string output of the
@@ -126,7 +128,7 @@ export default class Html extends Component {
               <script>
                 {`
                 Raven.config('https://e072a281afc44732a8976d0615f0e310@sentry.io/1254610', {
-                release: '0-0-0',
+                release: '${version.replace('.', '-')}',
                 environment: 'development-test',
                 }).install()
               `}

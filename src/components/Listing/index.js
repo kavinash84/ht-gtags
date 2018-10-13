@@ -239,7 +239,7 @@ class Listing extends React.Component {
                       sku={item.data.sku}
                       itemId={item.id}
                       isSoldOut={item.soldout}
-                      btnType="black"
+                      btnType="btnOutline"
                       btnColor="transparent"
                     />
                   </Div>
