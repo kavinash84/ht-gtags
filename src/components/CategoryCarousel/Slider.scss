@@ -7,12 +7,24 @@
 
 .catSliderItem {
   padding: 0 5px;
+  overflow: hidden;
   .title {
     @include font-size(1rem);
     margin-top: 0.625rem;
   }
   img {
     margin-bottom: 5px;
+    transition: all 0.75s ease;
+  }
+  div {
+    overflow: hidden;
+  }
+  &:hover {
+    img {
+      transform: scale(1.042);
+      -webkit-filter: grayscale(100%);
+      filter: grayscale(100%);
+    }
   }
 }
 

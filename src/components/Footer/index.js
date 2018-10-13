@@ -204,7 +204,7 @@ class Footer extends React.Component {
             </Row>
             <Row m="0" flexWrap="nowrap">
               <Div display="flexEqual" col="2">
-                <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem">
+                <Heading color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
                   ABOUT US
                 </Heading>
                 <ul>
@@ -222,7 +222,7 @@ class Footer extends React.Component {
                 </ul>
               </Div>
               <Div display="flexEqual" col="2">
-                <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem">
+                <Heading color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
                   CUSTOMER SERVICE
                 </Heading>
                 <ul>
@@ -247,7 +247,7 @@ class Footer extends React.Component {
                 </ul>
               </Div>
               <Div display="flexEqual" col="2">
-                <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem">
+                <Heading color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
                   USEFUL LINKS
                 </Heading>
                 <ul>
@@ -260,7 +260,7 @@ class Footer extends React.Component {
                 </ul>
               </Div>
               <Div display="flexEqual" col="3">
-                <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem">
+                <Heading color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
                   OUR APP
                 </Heading>
                 <a
@@ -272,7 +272,7 @@ class Footer extends React.Component {
                 </a>
               </Div>
               <Div display="flexEqual" col="3">
-                <Heading color="white" fontFamily="light" fontSize="1em" mt="1rem">
+                <Heading color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
                   PAYMENT METHODS
                 </Heading>
                 <Row ml="0" mr="0" className={styles.paymentWrapper}>
@@ -288,7 +288,7 @@ class Footer extends React.Component {
                   <Div col="2" p="0 5px">
                     <Img src={aeIcon} alt="Amex" width="100%" />
                   </Div>
-                  <Div col="2" p="0 5px">
+                  <Div col="2" p="5px 5px 0">
                     <Img src={intBankingIcon} alt="Internet Banking" width="100%" />
                   </Div>
                   <Div col="2" p="3px 5px">
