@@ -38,7 +38,7 @@ export default class Filters extends Component {
               <li key={index}>
                 <div
                   onClick={
-                    index === lastselected
+                    lastselected >= 1 && index === lastselected
                       ? onclick(data[lastselected - 1].url_key, title, '', data[lastselected - 1].isSelected)
                       : onclick(item.url_key, title, '', item.isSelected)
                   }
