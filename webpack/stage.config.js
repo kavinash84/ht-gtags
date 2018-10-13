@@ -2,8 +2,10 @@
 
 // Webpack config for creating the production bundle.
 var path = require('path');
+const fs = require('fs');
 var webpack = require('webpack');
-var CleanPlugin = require('clean-webpack-plugin');
+
+// var CleanPlugin = require('clean-webpack-plugin');
 var ReactLoadablePlugin = require('react-loadable/webpack').ReactLoadablePlugin;
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -18,6 +20,9 @@ var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require("compression-webpack-plugin");
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+var WebpackOnBuildPlugin = require('on-build-webpack');
+
+var version = require('../package.json').version;
 
 module.exports = {
   devtool: 'source-map',
@@ -28,10 +33,10 @@ module.exports = {
     ]
   },
   output: {
-    path: assetsPath,
+    path: `${assetsPath}/${version}`,
     filename: '[name]-[chunkhash].js',
     chunkFilename: '[name]-[chunkhash].chunk.js',
-    publicPath: '/dist/'
+    publicPath: `/dist/${version}/`
   },
   performance: {
     hints: false
@@ -167,7 +172,7 @@ module.exports = {
       }
     }),
 
-    new CleanPlugin([assetsPath], { root: projectRootPath }),
+    // new CleanPlugin([assetsPath], { root: projectRootPath }),
 
     // css files from the extract-text-plugin loader
     new ExtractTextPlugin({
@@ -199,7 +204,7 @@ module.exports = {
     webpackIsomorphicToolsPlugin,
 
     new ReactLoadablePlugin({
-      filename: path.join(assetsPath, 'loadable-chunks.json')
+      filename: path.join(`${assetsPath}/${version}`, 'loadable-chunks.json')
     }),
 
     new HtmlWebpackPlugin({
@@ -207,7 +212,7 @@ module.exports = {
       template: 'src/pwa.js'
     }),
 
-    /* gzip compression */ 
+    /* gzip compression */
     new CompressionPlugin({
       test: /\.js|.css|.scss/
     }),
@@ -220,8 +225,8 @@ module.exports = {
       maximumFileSizeToCacheInBytes: 8388608,
 
       // Ensure all our static, local assets are cached.
-      staticFileGlobs: [path.dirname(assetsPath) + '/**/*.{html,png,jpg,gif,svg,eot,ttf,woff,woff2}'],
-      stripPrefix: path.dirname(assetsPath),
+      staticFileGlobs: [path.dirname(`${assetsPath}/${version}`) + '/**/*.{html,png,jpg,gif,svg,eot,ttf,woff,woff2}'],
+      stripPrefix: path.dirname(`${assetsPath}/${version}`),
 
       directoryIndex: '/',
       verbose: true,
@@ -238,6 +243,20 @@ module.exports = {
           }
         }
       ]
-    })
+    }),
+    new WebpackOnBuildPlugin(function() {
+        const data = {
+          version,
+          date:Date.now()
+          }
+        const versionPath = path.join(__dirname,'..')
+        fs.writeFile(`${versionPath}/version.json`,
+          JSON.stringify(data),
+          (err) => {
+          if (err) throw err;
+          console.log(`VERSION RELEASE : ${version}`);
+        });
+    }),
+
   ]
 };
