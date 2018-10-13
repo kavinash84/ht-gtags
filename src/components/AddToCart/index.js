@@ -45,7 +45,8 @@ const AddToCart = ({
   size,
   isSoldOut,
   height,
-  btnColor
+  btnColor,
+  btnType
 }) => {
   const checkStatus = checkSKUInCart(cartSKUs, sku);
   const addLoading = addingToCart && stateId === itemId;
@@ -71,7 +72,7 @@ const AddToCart = ({
         <div>
           {!checkStatus ? (
             <Button
-              btnType="custom"
+              btnType={btnType}
               border="1px solid"
               bc={btnColor === 'transparent' ? '#f98d29' : btnColor}
               color={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
@@ -123,7 +124,8 @@ AddToCart.defaultProps = {
   size: 'default',
   isSoldOut: false,
   height: 'auto',
-  btnColor: '#f98d29'
+  btnColor: '#f98d29',
+  btnType: 'custom'
 };
 
 AddToCart.propTypes = {
@@ -139,6 +141,7 @@ AddToCart.propTypes = {
   size: PropTypes.string,
   height: PropTypes.string,
   btnColor: PropTypes.string,
+  btnType: PropTypes.string,
   isSoldOut: PropTypes.bool
 };
 

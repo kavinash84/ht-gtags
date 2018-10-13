@@ -249,7 +249,7 @@ class ProductDetails extends React.Component {
                         sku={sku}
                         itemId={sku}
                         size="block"
-                        btnType="black"
+                        btnType="custom"
                         btnColor="#515151"
                         height="50px"
                         isSoldOut={
@@ -346,4 +346,7 @@ ProductDetails.propTypes = {
   categoryDetails: PropTypes.array.isRequired,
   gattributes: PropTypes.object.isRequired
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductDetails);
