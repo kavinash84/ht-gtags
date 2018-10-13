@@ -208,7 +208,7 @@ module.exports = {
     }),
 
     new HtmlWebpackPlugin({
-      filename: 'index.html',
+      filename: '../index.html',
       template: 'src/pwa.js'
     }),
 
@@ -221,16 +221,16 @@ module.exports = {
 
     new SWPrecacheWebpackPlugin({
       cacheId: 'stage.hometown.in',
-      filename: 'service-worker.js',
+      filename: '../service-worker.js',
       maximumFileSizeToCacheInBytes: 8388608,
 
       // Ensure all our static, local assets are cached.
-      staticFileGlobs: [path.dirname(`${assetsPath}/${version}`) + '/**/*.{html,png,jpg,gif,svg,eot,ttf,woff,woff2}'],
+      staticFileGlobs: [path.dirname(`${assetsPath}/${version}`) + '/**/*.{html,css,png,jpg,gif,svg,eot,ttf,woff,woff2}'],
       stripPrefix: path.dirname(`${assetsPath}/${version}`),
 
       directoryIndex: '/',
       verbose: true,
-      navigateFallback: '/dist/index.html',
+      navigateFallback: `/dist/index.html`,
       runtimeCaching: [
         {
           urlPattern: /api\/tesla\//,

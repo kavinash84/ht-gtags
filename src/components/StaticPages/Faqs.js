@@ -23,7 +23,7 @@ const FAQ = () => (
         <Row ml="0" mr="0">
           {faqData.map((faqItem, index) => (
             <Div mb="1rem">
-              <Heading fontFamily="700" fontSize="0.825rem" color="text">
+              <Heading fontFamily="400" fontSize="0.825rem" color="textLight">
                 {faqItem.key}
               </Heading>
               {faqItem.data.map((faqContent, index) => (
@@ -32,7 +32,7 @@ const FAQ = () => (
                     className={styles.collopseHeading}
                     fontFamily="regular"
                     fontSize="1rem"
-                    color="textDark"
+                    color="secondary"
                     lh="1.5"
                     ellipsis={false}
                   >

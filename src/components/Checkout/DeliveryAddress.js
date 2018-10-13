@@ -246,7 +246,7 @@ class DeliveryAddress extends Component {
     return (
       <Div type="block">
         <MenuCheckout page="delivery" history={history} />
-        <Section display="flex" pt="2.25rem" mb="1rem" height="auto">
+        <Section display="flex" pt="2.25rem" pb="2rem" mb="1rem" height="auto">
           <Container type="container" pr="2rem" pl="2rem">
             <Div col="9" mt="0" pr="1rem">
               {!isLoggedIn && (
