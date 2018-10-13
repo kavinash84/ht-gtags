@@ -99,18 +99,6 @@ export default class ProfileForm extends Component {
     dispatch(updateUserProfile(this.state));
   };
 
-  onChangeEmail = e => {
-    const {
-      target: { value }
-    } = e;
-    const checkError = validateEmail(value, 'Enter valid email');
-    this.setState({
-      email: value,
-      emailError: checkError.error,
-      emailErrorMessage: checkError.error ? checkError.errorMessage : ''
-    });
-  };
-
   render() {
     const styles = require('./index.scss');
     const {
@@ -140,7 +128,7 @@ export default class ProfileForm extends Component {
               <Div>
                 <ProfileFormContainer
                   email={email}
-                  onChangeEmail={this.onChangeEmail}
+                  onChangeEmail={() => {}}
                   emailFeedBackError={emailError}
                   emailFeedBackMessage={emailErrorMessage}
                   phone={phone}
