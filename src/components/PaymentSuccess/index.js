@@ -11,6 +11,7 @@ import Img from 'hometown-components/lib/Img';
 import ImageShimmer from 'hometown-components/lib/ImageShimmer';
 import { formatAmount } from 'utils/formatters';
 import TitleBar from '../TitleBar';
+import Oops from './Oops';
 
 const styles = require('./PaymentSuccess.scss');
 const PaymentSuccessIcon = require('../../../static/success.svg');
@@ -123,7 +124,7 @@ const PaymentSuccess = ({
       </Div>
     );
   }
-  return <div>Unable to check Payment Status at the moment !</div>;
+  return <Oops />;
 };
 
 PaymentSuccess.defaultProps = {

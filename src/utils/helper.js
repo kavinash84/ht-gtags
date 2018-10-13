@@ -63,12 +63,14 @@ export const formFilterLink2 = (key, name, b64, category, value, selected, urlqu
     let query;
     const splitLink = key.split('?');
     const paramLink = splitLink[0].split('/').filter(z => z !== '');
-    if (selected) {
-      query = paramLink.filter(param => param !== paramLink[1]);
-    } else query = paramLink;
+    if (paramLink.length >= 4) {
+      paramLink.splice(1, 1);
+    }
+    query = paramLink;
     query = query.join('/');
     [query] = cleanColor(query);
     query = cleanTail(query);
+    query = query.replace('catalog/', '');
     return `/${query}`;
   }
   if (name === 'Color') {
@@ -239,6 +241,7 @@ export const urlKeyResults = results => {
 
 export const formatProductURL = (name, sku) => {
   const productname = name
+    .replace('&', 'and')
     .replace(/[^a-zA-Z0-9]/g, '-')
     .split(' ')
     .join('-')

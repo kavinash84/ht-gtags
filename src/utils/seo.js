@@ -8,7 +8,7 @@ export const productName = ({
 export const productPageTitle = name => `Buy ${name} Online at Best Price - HomeTown.in`;
 
 export const productMetaDescription = (name, productType = '', materialProductType = '', color = '') =>
-  `Buy ${name} online at Best Price. Shop ${materialProductType} in ${color} color from amazing designs. Avail discounts upto 50% on ${productType} which will elevate the decor of your house. ✔Fast Shipping ✔Easy Finance Options ✔Free Assembly`;
+  `Buy ${name} online at Best Price. Shop ${materialProductType} ${productType} in ${color} color from amazing designs. Avail discounts upto 50% on ${productType} which will elevate the decor of your house. ✔Fast Shipping ✔Easy Finance Options ✔Free Assembly`;
 
 export const productMetaKeywords = (productType = '', material = '') =>
   `${productType}, ${productType} online, buy ${productType}, ${productType} price, ${productType} sale, ${material} ${productType} online shopping`;
