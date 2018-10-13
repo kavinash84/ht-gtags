@@ -375,14 +375,15 @@
 			padding: 0.625rem 0.325rem;
 			text-transform: uppercase;
 			display: table-cell;
+			line-height: 1.6;
 		}
 		tr {
 			position: relative;
 		}
 		td {
 			color: rgba(0, 0, 0, 0.7);
-			font-size: 0.875rem;
-			padding: 0.25rem 0.325rem;
+			font-size: 13px;
+    	padding: 0.625rem 0.625rem;
 			button {
 				font-size: 1rem;
 				font-family: regular;
