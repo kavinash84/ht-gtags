@@ -10,7 +10,7 @@
         "NODE_PATH": "src",
         "APIHOST": "api.hometown.in/api/",
         "APIPORT": 443,
-        "PAYMENT_URL": "https://alice.hometown.in/checkout/finish/payment/",
+        "PAYMENT_URL": "https://www.hometown.in/checkout/finish/payment/",
         "TZ": "Asia/Kolkata"
       },
       "env_beta": {
