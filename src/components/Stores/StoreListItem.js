@@ -15,7 +15,7 @@ const StoreListItem = ({
   <Div col={4}>
     <div className={styles.storeBlock}>
       <Link to={url}>
-        {/* <Img src="https://www.hometown.in/media/cms/hometownv2/compressed/New-Delhi.jpg" alt="" /> */}
+        {/* <Img src="https://static.hometown.in/media/cms/hometownv2/compressed/New-Delhi.jpg" alt="" /> */}
         <Row type="block" m="0">
           <Div>
             <Heading color="textDark" fontSize="1em" mt="0" pb="2px" mb="5px">

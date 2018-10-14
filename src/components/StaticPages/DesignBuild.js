@@ -32,7 +32,11 @@ export default class ModularKitchen extends Component {
             <Row ml="0" mr="0" mt="2rem">
               <Div col="1" />
               <Div col="10">
-                <Img src="https://www.hometown.in/media/cms/Staticpage/modular-wardrobes/process.jpg" alt="" m="auto" />
+                <Img
+                  src="https://static.hometown.in/media/cms/Staticpage/modular-wardrobes/process.jpg"
+                  alt=""
+                  m="auto"
+                />
               </Div>
             </Row>
             <ServiceSignUp formType="dandb" />
@@ -49,21 +53,21 @@ export default class ModularKitchen extends Component {
             <Row ml="0" mr="0" mt="2rem">
               <Div col="4" pl="0.625rem" pr="0.625rem">
                 <Img
-                  src="https://www.hometown.in/media/cms/Staticpage/modular-wardrobes/hassle-free-home-interior.jpg"
+                  src="https://static.hometown.in/media/cms/Staticpage/modular-wardrobes/hassle-free-home-interior.jpg"
                   alt=""
                   width="100%"
                 />
               </Div>
               <Div col="4" pl="0.625rem" pr="0.625rem">
                 <Img
-                  src="https://www.hometown.in/media/cms/Staticpage/modular-wardrobes/sofa.jpg"
+                  src="https://static.hometown.in/media/cms/Staticpage/modular-wardrobes/sofa.jpg"
                   alt=""
                   width="100%"
                 />
               </Div>
               <Div col="4" pl="0.625rem" pr="0.625rem">
                 <Img
-                  src="https://www.hometown.in/media/cms/Staticpage/modular-wardrobes/room-wise-design.jpg"
+                  src="https://static.hometown.in/media/cms/Staticpage/modular-wardrobes/room-wise-design.jpg"
                   alt=""
                   width="100%"
                 />
@@ -85,7 +89,7 @@ export default class ModularKitchen extends Component {
               <Div col="2" />
               <Div col="8" pl="0.625rem" pr="0.625rem">
                 <Img
-                  src="https://www.hometown.in/media/cms/Staticpage/modular-wardrobes/build-services.jpg"
+                  src="https://static.hometown.in/media/cms/Staticpage/modular-wardrobes/build-services.jpg"
                   alt=""
                   width="100%"
                 />
