@@ -113,12 +113,20 @@ class PaymentOptions extends Component {
                     <div className={styles.paymentFormOptions}>
                       {selectedGateway === 'CreditCard' && (
                         <Div col="12">
-                          <CardForm setPaymentDetails={setPaymentDetails} gateway={selectedGateway} />
+                          <CardForm
+                            setPaymentDetails={setPaymentDetails}
+                            gateway={selectedGateway}
+                            padding="3rem 2rem"
+                          />
                         </Div>
                       )}
                       {selectedGateway === 'DebitCard' && (
                         <Div col="12">
-                          <CardForm setPaymentDetails={setPaymentDetails} gateway={selectedGateway} />
+                          <CardForm
+                            setPaymentDetails={setPaymentDetails}
+                            gateway={selectedGateway}
+                            padding="3rem 2rem"
+                          />
                         </Div>
                       )}
                       {selectedGateway === 'NetBanking' && (
