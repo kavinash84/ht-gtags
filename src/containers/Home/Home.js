@@ -4,6 +4,7 @@ import Helmet from 'react-helmet';
 import Menu from 'containers/MenuNew/index';
 import MainSlider from 'components/MainSlider';
 // import OfferRibbon from 'components/OfferRibbon';
+import ReloadNotification from 'components/ReloadNotification';
 import CategoryCarousel from 'components/CategoryCarousel';
 import ProductCarousel from 'components/ProductCarousel';
 import Section from 'hometown-components/lib/Section';
@@ -87,6 +88,7 @@ export default class Home extends Component {
               url={offerStrip.url_key}
             />
           )} */}
+          <ReloadNotification title="New version available" showRibbon onClick={this.handleRibbon} />
           <Menu />
           <MainSlider data={banners} />
           <Usp />
