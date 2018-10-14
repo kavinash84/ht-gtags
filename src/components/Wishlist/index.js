@@ -94,7 +94,7 @@ class Wishlist extends React.Component {
                   simpleSku={Object.keys(item.product_info.data.simples)[0]}
                   sku={item.product_info.data.sku}
                   itemId={item.product_info.id}
-                  isSoldOut={item.product_info.data.soldout}
+                  isSoldOut={item.product_info.soldout}
                   btnType="btnOutline"
                   btnColor="transparent"
                 />
