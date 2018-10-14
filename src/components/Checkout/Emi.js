@@ -26,71 +26,69 @@ const EMI = ({
 }) => {
   const currentBankDetails = emiBankDetails.filter(item => item.bank === details.emiBank)[0];
   return (
-    <Div col="12">
-      <Div className={styles.paymentBlock}>
-        <Div col="12" mb="1rem">
-          <Label for="bankOptions1" color="textLight">
-            Choose From Preferred Bank
-          </Label>
-        </Div>
-        {emiBankDetails.map(bank => (
-          <BankCard
-            setPaymentDetails={setPaymentDetails}
-            gateway={selectedGateway}
-            detailkey="emiBank"
-            name={bank.bank}
-            img={`https://static.hometown.in/media/cms/BankLOGO/${bank.bank}.gif`}
-            currentSelection={currentSelection}
-            key={bank.bank}
-          />
-        ))}
-        {currentBankDetails && (
-          <Div col="12" mb="1rem" mt="1rem">
-            <table border="1" className={`table table-border ${styles.emiTable}`}>
-              <tbody>
-                <tr>
-                  <th />
-                  <th>Tenure</th>
-                  <th>Annual Interest Rate</th>
-                  <th>EMI Interest</th>
-                  <th>Total Cost</th>
-                  <th>Monthly Instalments</th>
-                </tr>
-
-                {currentBankDetails.values.map((item, index) => (
-                  <tr key={String(index)}>
-                    <td align="center">
-                      <input
-                        type="radio"
-                        onChange={onChangeDetails(setPaymentDetails, selectedGateway)}
-                        name="emiCode"
-                        value={item.emiCode}
-                      />
-                    </td>
-                    <td>{item.value} Months</td>
-                    <td>{item.interestRate}%</td>
-                    <td>
-                      Rs.
-                      {Math.round(item.emiInterest)}
-                    </td>
-                    <td>
-                      Rs.
-                      {Math.round(item.totalAmount)}
-                    </td>
-                    <td>
-                      Rs.
-                      {Math.round(item.EMI)}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <Div col="12" mb="1rem" mt="1rem">
-              <CardForm setPaymentDetails={setPaymentDetails} gateway={selectedGateway} />
-            </Div>
-          </Div>
-        )}
+    <Div col="12" p="3rem 2rem">
+      <Div col="12" mb="1rem">
+        <Label for="bankOptions1" color="textLight">
+          Choose From Preferred Bank
+        </Label>
       </Div>
+      {emiBankDetails.map(bank => (
+        <BankCard
+          setPaymentDetails={setPaymentDetails}
+          gateway={selectedGateway}
+          detailkey="emiBank"
+          name={bank.bank}
+          img={`https://static.hometown.in/media/cms/BankLOGO/${bank.bank}.gif`}
+          currentSelection={currentSelection}
+          key={bank.bank}
+        />
+      ))}
+      {currentBankDetails && (
+        <Div col="12" mb="0" mt="1rem">
+          <table border="1" className={`table table-border ${styles.emiTable}`}>
+            <tbody>
+              <tr>
+                <th />
+                <th width="85px">Tenure</th>
+                <th>Annual Interest Rate</th>
+                <th>EMI Interest</th>
+                <th>Total Cost</th>
+                <th>Monthly Instalments</th>
+              </tr>
+
+              {currentBankDetails.values.map((item, index) => (
+                <tr key={String(index)}>
+                  <td align="center">
+                    <input
+                      type="radio"
+                      onChange={onChangeDetails(setPaymentDetails, selectedGateway)}
+                      name="emiCode"
+                      value={item.emiCode}
+                    />
+                  </td>
+                  <td>{item.value} Months</td>
+                  <td>{item.interestRate}%</td>
+                  <td>
+                    Rs.
+                    {Math.round(item.emiInterest)}
+                  </td>
+                  <td>
+                    Rs.
+                    {Math.round(item.totalAmount)}
+                  </td>
+                  <td>
+                    Rs.
+                    {Math.round(item.EMI)}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <Div col="12" mb="1rem" mt="1rem">
+            <CardForm setPaymentDetails={setPaymentDetails} gateway={selectedGateway} padding="1rem 0rem 0" />
+          </Div>
+        </Div>
+      )}
     </Div>
   );
 };

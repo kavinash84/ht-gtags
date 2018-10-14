@@ -49,9 +49,10 @@ const CardForm = ({
   },
   getCardType,
   cardType,
-  sessionId
+  sessionId,
+  padding
 }) => (
-  <Div className={styles.paymentBlock}>
+  <Div className={styles.paymentBlock} p={padding}>
     <Div col="6" pr="1rem">
       <FormInput
         label="Name on card"
@@ -125,7 +126,8 @@ const CardForm = ({
 
 CardForm.defaultProps = {
   cardType: 'other',
-  sessionId: ''
+  sessionId: '',
+  padding: '3.5rem 2rem'
 };
 
 CardForm.propTypes = {
@@ -134,7 +136,8 @@ CardForm.propTypes = {
   details: PropTypes.object.isRequired,
   getCardType: PropTypes.func.isRequired,
   sessionId: PropTypes.string,
-  cardType: PropTypes.string
+  cardType: PropTypes.string,
+  padding: PropTypes.string
 };
 export default connect(
   mapStateToProps,
