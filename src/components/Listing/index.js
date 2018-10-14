@@ -227,7 +227,11 @@ class Listing extends React.Component {
                     skuLoading={isInWishList(loadingList, item.data.sku)}
                     rating={item.data.reviews.rating.toFixed(1)}
                     reviewsCount={item.data.reviews.count}
-                    savingAmount={formatAmount(item.data.max_price - item.data.max_special_price)}
+                    savingAmount={
+                      item.data.max_special_price
+                        ? formatAmount(Number(item.data.max_price) - Number(item.data.max_special_price))
+                        : 0
+                    }
                     deliveredBy={item.data.delivery_details[0].value}
                     colors={metaResults[index].data.color_group_count.split(' ')[0]}
                     setProductPosition={productPosition}
@@ -313,7 +317,4 @@ Listing.propTypes = {
   breadCrumbs: PropTypes.array.isRequired
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Listing);
+export default connect(null, mapDispatchToProps)(Listing);
