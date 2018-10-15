@@ -210,7 +210,7 @@ class PaymentOptions extends Component {
                               name="Paytm"
                               detailkey="walletName"
                               currentSelection={paymentDetails.Wallet.walletName}
-                              img="https://www.hometown.in/images/local_v2/onestepcheckout/logo/paytm.jpg"
+                              img="https://static.hometown.in/images/local_v2/onestepcheckout/logo/paytm.jpg"
                             />
                           )}
                           {WalletData.isPayuWalletEnable && (
@@ -220,7 +220,7 @@ class PaymentOptions extends Component {
                               name="Payu"
                               detailkey="walletName"
                               currentSelection={paymentDetails.Wallet.walletName}
-                              img="https://www.hometown.in/images/local_v2/onestepcheckout/logo/payu.jpg"
+                              img="https://static.hometown.in/images/local_v2/onestepcheckout/logo/payu.jpg"
                             />
                           )}
                           {WalletData.isMobikwikWalletEnable && (
@@ -230,7 +230,7 @@ class PaymentOptions extends Component {
                               name="Mobikwik"
                               detailkey="walletName"
                               currentSelection={paymentDetails.Wallet.walletName}
-                              img="https://www.hometown.in/images/local_v2/onestepcheckout/logo/mobikwik.jpg"
+                              img="https://static.hometown.in/images/local_v2/onestepcheckout/logo/mobikwik.jpg"
                             />
                           )}
                         </Div>
