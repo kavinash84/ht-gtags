@@ -248,7 +248,7 @@ export default class QuickView extends Component {
                       onClick={this.setImage}
                       id={index}
                     >
-                      <img className={styles.sliderImage} src={image.zoom_image} alt={name} id={index} />
+                      <img className={styles.sliderImage} src={image && image.zoom_image} alt={name} id={index} />
                     </button>
                   </div>
                 ))}

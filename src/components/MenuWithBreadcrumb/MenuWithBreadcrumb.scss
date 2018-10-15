@@ -1,6 +1,6 @@
 .headerLink {
   color: rgba(51,51,51,0.85);
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   text-transform: capitalize;
   padding-right: 30px;
   position: relative;
@@ -11,7 +11,7 @@
   &:after {
     content: url('../../../static/next.svg');
     position: absolute;
-    right: -13px;
+    right: 10px;
     font-size: 14px;
     height: 14px;
     line-height: 1.2;

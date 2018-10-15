@@ -9,9 +9,7 @@ import * as actionCreators from 'redux/modules/pincode';
 const styles = require('./Pincode.scss');
 
 const onChange = (dispatcher, load) => e => {
-  const {
-    target: { value }
-  } = e;
+  const { target: { value } } = e;
   dispatcher(value);
   if (value.length >= 2) load(value);
 };
@@ -93,7 +91,4 @@ Pincode.propTypes = {
   color: PropTypes.string
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Pincode);
+export default connect(mapStateToProps, mapDispatchToProps)(Pincode);
