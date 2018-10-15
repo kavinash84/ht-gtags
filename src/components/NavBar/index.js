@@ -66,6 +66,19 @@ const NavBar = ({
                   </Link>
                 </Label>
               </li>
+              <li>
+                <Label htmlFor="checkbox" fontSize="0.75em" ml="0.625rem" className="dropdownValue">
+                  <a
+                    href="https://static.hometown.in/media/Institutional+Catalogue.pdf"
+                    title="Festive Catalogue"
+                    download
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Festive Catalogue
+                  </a>
+                </Label>
+              </li>
             </ul>
           </div>
         </div>
