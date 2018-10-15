@@ -42,7 +42,7 @@ export default class Home extends Component {
   componentDidMount() {
     const { isLoggedIn } = this.props;
     if (!isLoggedIn && !(cookie.get('PROMO_SIGNUP') === 'AVOID')) {
-      setTimeout(() => this.handleModal(), 5000);
+      setTimeout(() => this.handleModal(), 45000);
     }
   }
   componentWillReceiveProps(nextProps) {
@@ -60,7 +60,7 @@ export default class Home extends Component {
   handleModal = () => {
     this.setState({ openSignup: !this.state.openSignup }, () => {
       if (!this.state.openSignup) {
-        cookie.set('PROMO_SIGNUP', 'AVOID', { expires: 7 });
+        cookie.set('PROMO_SIGNUP', 'AVOID', { expires: 2 });
       }
     });
   };

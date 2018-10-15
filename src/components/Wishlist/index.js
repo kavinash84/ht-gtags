@@ -69,7 +69,7 @@ class Wishlist extends React.Component {
                 price={item.product_info.netprice}
                 cutprice={item.product_info.cutprice}
                 saving={item.product_info.saving}
-                image={getProductImage(item.product_info.images[0].path)}
+                image={getProductImage(item.product_info.images.filter(i => i.main === '1')[0].path)}
                 sku={item.product_info.data.sku}
                 onClick={onClick(list, toggleWishList)}
                 onOpenQuickViewModal={() => {
@@ -94,7 +94,7 @@ class Wishlist extends React.Component {
                   simpleSku={Object.keys(item.product_info.data.simples)[0]}
                   sku={item.product_info.data.sku}
                   itemId={item.product_info.id}
-                  isSoldOut={item.product_info.data.soldout}
+                  isSoldOut={item.product_info.soldout}
                   btnType="btnOutline"
                   btnColor="transparent"
                 />

@@ -16,13 +16,13 @@
       padding-left: 0;
     }
     &:after {
-      content: '>';
+      content: url('../../../static/next.svg');
       position: absolute;
       right: -10px;
       font-size: 14px;
       height: 14px;
       line-height: 1.2;
-      top: 0;
+      top: 1px;
     }
     &:last-child {
       &:after {
