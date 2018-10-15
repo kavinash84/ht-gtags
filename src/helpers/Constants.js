@@ -13,6 +13,9 @@ export const FORGOT_PASSWORD_URL = '/forgot-password';
 export const PAYMENT_SUCCESS = '/payment-success';
 export const PAYMENT_FAILURE = '/payment-failed';
 
+export const MK_URL = '/modular-kitchens';
+export const PYK_URL = '/plan-your-kitchen';
+
 export const PINCODE = '110001';
 /* Configs */
 export const clientId = 'rama';
