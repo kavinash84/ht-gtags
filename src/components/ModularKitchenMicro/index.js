@@ -22,10 +22,10 @@ import ModularKitchenForm from './ModularKitchenForm';
 
 const styles = require('./ModularKitchen.scss');
 
-const sliderData = require('../../data/MKSlider.js');
-const steps6Img = require('../../../static/share-an-enquiry.jpg');
-const CloseIcon = require('../../../static/minus-round.svg');
-const OpenIcon = require('../../../static/plus-round.svg');
+// const sliderData = require('../../data/MKSlider.js');
+// const steps6Img = require('../../../static/share-an-enquiry.jpg');
+// const CloseIcon = require('../../../static/minus-round.svg');
+// const OpenIcon = require('../../../static/plus-round.svg');
 const ProfessionalServicesIcon = require('../../../static/hand-shake.png');
 const ISOIcon = require('../../../static/iso-icon.png');
 const FiraIcon = require('../../../static/fira-icon.png');
@@ -43,19 +43,21 @@ const adjustSlides = length => ({
 });
 
 @connect(
-  ({ stores }) => ({
-    cities: getCities(stores)
+  ({ stores, services }) => ({
+    cities: getCities(stores),
+    ...services.modularkitchen
   }),
   { sendFormData: sendData, loadPincodeDetails: getData }
 )
 export default class ModularKitchen extends Component {
   render() {
-    const { cities } = this.props;
+    const { cities, results } = this.props;
+
     return (
       <Div display="block">
         <Header />
         <Section p="0" mb="0">
-          <MainSlider data={sliderData} />
+          {results && <MainSlider data={results.items.text.banner} />}
           <Container className={styles.mkWrapper}>
             <ModularKitchenForm />
           </Container>
@@ -95,7 +97,7 @@ export default class ModularKitchen extends Component {
               </Div>
               <Div display="flexEqual">
                 <Heading ta="center" fontFamily="light" mt="0" mb="0" color="mkPrimary">
-                  1000+
+                  200+
                 </Heading>
                 <Text color={Theme.colors.textLight} textTransform="uppercase" mt="0.3125rem" mb="0" ta="center">
                   Finishes
@@ -103,7 +105,7 @@ export default class ModularKitchen extends Component {
               </Div>
               <Div display="flexEqual">
                 <Heading ta="center" fontFamily="light" mt="0" mb="0" color="mkPrimary">
-                  1000+
+                  100+
                 </Heading>
                 <Text color={Theme.colors.textLight} textTransform="uppercase" mt="0.3125rem" mb="0" ta="center">
                   Accessories
@@ -111,7 +113,7 @@ export default class ModularKitchen extends Component {
               </Div>
               <Div display="flexEqual">
                 <Heading ta="center" fontFamily="light" mt="0" mb="0" color="mkPrimary">
-                  1000+
+                  30,000+
                 </Heading>
                 <Text color={Theme.colors.textLight} textTransform="uppercase" mt="0.3125rem" mb="0" ta="center">
                   Customers
@@ -227,7 +229,7 @@ export default class ModularKitchen extends Component {
         </Section>
         <Section p="2.5rem 0" mb="0">
           <Container type="container" pr="0.5rem" pl="0.5rem">
-            <Row ml="0" mr="0">
+            <Row ml="0" mr="0" mb="1rem" mt="1rem">
               <Div col="1" />
               <Div col="10">
                 <Heading mt="0" mb="0.625rem" color="text" fontSize="1.75rem" ta="center" fontFamily="light">
@@ -235,129 +237,132 @@ export default class ModularKitchen extends Component {
                 </Heading>
               </Div>
             </Row>
-            <Row ml="0" mr="0" mt="2rem" alignItems="center">
-              <Div col="6">
-                <Img src={steps6Img} alt="" width="100%" />
-              </Div>
-              <Div col="6" p="2rem" ta="left">
-                <Heading ta="left" fontFamily="light" mt="0" mb="0" color="textDark">
-                  Share an Inquiry
-                </Heading>
-                <Text color={Theme.colors.secondary} fontWeight="light" mt="0.3125rem" mb="0" ta="left" fontSize="1rem">
-                  kitchen designs that are perfect for you— Contact us to know and order your dream kitchen
-                </Text>
-              </Div>
-            </Row>
-            <Row ml="0" mr="0" alignItems="center">
-              <Div col="6" p="2rem" ta="right">
-                <Heading ta="right" fontFamily="light" mt="0" mb="0" color="textDark">
-                  Meet Our Design Experts
-                </Heading>
-                <Text
-                  color={Theme.colors.secondary}
-                  fontWeight="light"
-                  mt="0.3125rem"
-                  mb="0"
-                  ta="right"
-                  fontSize="1rem"
-                >
-                  your very own kitchen expert at a Homwtown near you, or a preview home, for a free consultation. Touch
-                  and feel the brilliance in quality along with experiencing design.
-                </Text>
-              </Div>
-              <Div col="6">
-                <Img src={steps6Img} alt="" width="100%" />
-              </Div>
-            </Row>
-            <Row ml="0" mr="0" alignItems="center">
-              <Div col="6">
-                <Img src={steps6Img} alt="" width="100%" />
-              </Div>
-              <Div col="6" p="2rem" ta="left">
-                <Heading ta="left" fontFamily="light" mt="0" mb="0" color="textDark">
-                  First Site measurement
-                </Heading>
-                <Text color={Theme.colors.secondary} fontWeight="light" mt="0.3125rem" mb="0" ta="left" fontSize="1rem">
-                  your chosen design, guided by your very own dedicated expert designer — who understands everything
-                  from your cooking style and lifestyle to visual preferences and budget
-                </Text>
-              </Div>
-            </Row>
-            <Row ml="0" mr="0" alignItems="center">
-              <Div col="6" p="2rem" ta="right">
-                <Heading ta="right" fontFamily="light" mt="0" mb="0" color="textDark">
-                  Discuss your requirement
-                </Heading>
-                <Text
-                  color={Theme.colors.secondary}
-                  fontWeight="light"
-                  mt="0.3125rem"
-                  mb="0"
-                  ta="right"
-                  fontSize="1rem"
-                >
-                  Got the final quote and Book your personalized kitchen
-                </Text>
-              </Div>
-              <Div col="6">
-                <Img src={steps6Img} alt="" width="100%" />
-              </Div>
-            </Row>
-            <Row ml="0" mr="0" alignItems="center">
-              <Div col="6">
-                <Img src={steps6Img} alt="" width="100%" />
-              </Div>
-              <Div col="6" p="2rem" ta="left">
-                <Heading ta="left" fontFamily="light" mt="0" mb="0" color="textDark">
-                  Book your order.
-                </Heading>
-                <Text color={Theme.colors.secondary} fontWeight="light" mt="0.3125rem" mb="0" ta="left" fontSize="1rem">
-                  It’s time for you to pick up culinary skills in a new cuisine while we do all the hard work for you.
-                  Your kitchen is delivered and installed by experts.
-                </Text>
-              </Div>
-            </Row>
-            <Row ml="0" mr="0" alignItems="center">
-              <Div col="6" p="2rem" ta="right">
-                <Heading ta="right" fontFamily="light" mt="0" mb="0" color="textDark">
-                  Install the kitchen
-                </Heading>
-              </Div>
-              <Div col="6">
-                <Img src={steps6Img} alt="" width="100%" />
-              </Div>
-            </Row>
+            {results &&
+              results.items.text.sections.map((item, index) => (
+                <div key={String(index)}>
+                  {index % 2 === 0 ? (
+                    <Row ml="0" mr="0" mt="0" alignItems="center">
+                      <Div col="6">
+                        <Img src={item.items[0].image} alt="" width="100%" />
+                      </Div>
+                      <Div col="6" p="2rem" ta={item.class}>
+                        <Heading ta={item.class} fontFamily="light" mt="0" mb="0" color="textDark">
+                          {item.title}
+                        </Heading>
+                        <Text
+                          color={Theme.colors.secondary}
+                          fontWeight="light"
+                          mt="0.3125rem"
+                          mb="0"
+                          ta={item.class}
+                          fontSize="1rem"
+                        >
+                          {item.data}
+                        </Text>
+                      </Div>
+                    </Row>
+                  ) : (
+                    <Row ml="0" mr="0" mt="0" alignItems="center">
+                      <Div col="6" p="2rem" ta={item.class}>
+                        <Heading ta={item.class} fontFamily="light" mt="0" mb="0" color="textDark">
+                          {item.title}
+                        </Heading>
+                        <Text
+                          color={Theme.colors.secondary}
+                          fontWeight="light"
+                          mt="0.3125rem"
+                          mb="0"
+                          ta={item.class}
+                          fontSize="1rem"
+                        >
+                          {item.data}
+                        </Text>
+                      </Div>
+                      <Div col="6">
+                        <Img src={item.items[0].image} alt="" width="100%" />
+                      </Div>
+                    </Row>
+                  )}
+                </div>
+              ))}
           </Container>
         </Section>
         <Section p="4rem 0" mb="0" bg="microBg">
           <Container type="container" pr="0.5rem" pl="0.5rem">
             <Row ml="0" mr="0">
-              <Div col="1" />
-              <Div col="10" ta="center">
+              <Div col="12" ta="center" pb="1.25rem">
                 <Heading mt="0" mb="0.625rem" color="text" fontSize="1.75rem" ta="center" fontFamily="light">
-                  Why to wait, get started now!
+                  Testimonials by our customers
                 </Heading>
-                <Text fontSize="0.875rem" mt="0.3125rem" mb="1rem" ta="center" color={Theme.colors.textExtraLight}>
-                  At Duracucine, we believe in turning your everyday activities \like cooking and eating into a feast.
-                  And that’s why we build bespoke kitchens for you. Whatever your requirements are for your favourite
-                  space, we make it happen. Because we believe you just don’t cook in your kitchen, you create, you
-                  indulge, you live.
-                </Text>
-                <Button
-                  type="button"
-                  btnType="custom"
-                  p=".5rem 2rem"
-                  bg={Theme.colors.mkPrimary}
-                  color="white"
-                  onClick={() => smoothScroll(12)}
-                >
-                  Book Now
-                </Button>
+              </Div>
+              <Div col="12">
+                <SlickSlider settings={adjustSlides(1)}>
+                  <Div p="0 1rem">
+                    <Text ta="center" fontSize="1rem" color="rgba(0,0,0,0.5)">
+                      This is humble note of appreciation for<br />
+                      the outstanding customer service provided by your<br />
+                      Modular Kitchen Department at HomeTown.<br />
+                      My special thanks to Ms. Priyanka & team for helping me<br />
+                      in customising my kitchen as per my requirements and<br />
+                      installing the same, well-within the committed time lines.<br />
+                      I am elated with the service quality of your team.<br />
+                      Keep the good work !
+                    </Text>
+                    <Heading ta="center" color="text" fontSize="1rem">
+                      - Mr. Srikanth, Hydrabad
+                    </Heading>
+                  </Div>
+                  <Div p="0 1rem">
+                    <Text ta="center" fontSize="1rem" color="rgba(0,0,0,0.5)">
+                      After spending few years in Australia,<br />
+                      I was wondering whether I could get the same quality<br />
+                      of Kitchens & Home Furniture in India. We were pleasantly<br />
+                      surprised to see international quality furniture, kitchens<br />
+                      & more at HomeTown. My wife & I were really amazed with<br />
+                      how knowledgeable HomeTown’s Team was. They helped choose & build<br />
+                      the perfect kitchen and wardrobes for us - steeply step.<br />
+                      It feels great to have a living space that is tailor made<br />
+                      for our lifestyle and preferences.
+                    </Text>
+                    <Heading ta="center" color="text" fontSize="1rem">
+                      - Mr Rajendra Rao, Bangalore
+                    </Heading>
+                  </Div>
+
+                  <Div p="0 1rem">
+                    <Text ta="center" fontSize="1rem" color="rgba(0,0,0,0.5)">
+                      I am extremely happy about my decision to come to HomeTown<br />
+                      for renovating my kitchen. After having spent weeks trying<br />
+                      to figure out designs & budget for my kitchen; it took just one<br />
+                      visit to HomeTown to answer all my queries.<br />
+                      You guys saved me a lot of trouble and time.<br />
+                      Thank you for the wonderful kitchen.
+                    </Text>
+                    <Heading ta="center" color="text" fontSize="1rem">
+                      - Mrs. Kiran Shah, Mumbai
+                    </Heading>
+                  </Div>
+
+                  <Div p="0 1rem">
+                    <Text ta="center" fontSize="1rem" color="rgba(0,0,0,0.5)">
+                      Awesome work done by HomeTown team! <br />
+                      I was particularly impressed with how real the 3D designs looked.<br />
+                      It helped me take all the important decision even before starting the work.<br />
+                      The execution quality was very good without compromising on aesthetics or speed.<br />
+                      I keep getting complimented for my new kitchen & I never feel like leaving it at all.<br />
+                      Thank you HomeTown!
+                    </Text>
+                    <Heading ta="center" color="text" fontSize="1rem">
+                      - Mrs. Arpita Bhatnagar, Kolkata
+                    </Heading>
+                  </Div>
+                </SlickSlider>
               </Div>
             </Row>
           </Container>
         </Section>
-        <Section p="4rem 0" mb="0">
+
+        {/* <Section p="4rem 0" mb="0">
           <Container type="container" pr="0.5rem" pl="0.5rem">
             <Row ml="0" mr="0">
               <Div col="12" ta="center">
@@ -494,82 +499,9 @@ export default class ModularKitchen extends Component {
               </Div>
             </Row>
           </Container>
-        </Section>
-        <Section p="4rem 0" mb="0" bg="microBg">
-          <Container type="container" pr="0.5rem" pl="0.5rem">
-            <Row ml="0" mr="0">
-              <Div col="12" ta="center" pb="1.25rem">
-                <Heading mt="0" mb="0.625rem" color="text" fontSize="1.75rem" ta="center" fontFamily="light">
-                  Testimonials by our customers
-                </Heading>
-              </Div>
-              <Div col="12">
-                <SlickSlider settings={adjustSlides(1)}>
-                  <Div p="0 1rem">
-                    <Text ta="center" fontSize="1rem" color="rgba(0,0,0,0.5)">
-                      This is humble note of appreciation for<br />
-                      the outstanding customer service provided by your<br />
-                      Modular Kitchen Department at HomeTown.<br />
-                      My special thanks to Ms. Priyanka & team for helping me<br />
-                      in customising my kitchen as per my requirements and<br />
-                      installing the same, well-within the committed time lines.<br />
-                      I am elated with the service quality of your team.<br />
-                      Keep the good work !
-                    </Text>
-                    <Heading ta="center" color="text" fontSize="1rem">
-                      - Mr. Srikanth, Hydrabad
-                    </Heading>
-                  </Div>
-                  <Div p="0 1rem">
-                    <Text ta="center" fontSize="1rem" color="rgba(0,0,0,0.5)">
-                      After spending few years in Australia,<br />
-                      I was wondering whether I could get the same quality<br />
-                      of Kitchens & Home Furniture in India. We were pleasantly<br />
-                      surprised to see international quality furniture, kitchens<br />
-                      & more at HomeTown. My wife & I were really amazed with<br />
-                      how knowledgeable HomeTown’s Team was. They helped choose & build<br />
-                      the perfect kitchen and wardrobes for us - steeply step.<br />
-                      It feels great to have a living space that is tailor made<br />
-                      for our lifestyle and preferences.
-                    </Text>
-                    <Heading ta="center" color="text" fontSize="1rem">
-                      - Mr Rajendra Rao, Bangalore
-                    </Heading>
-                  </Div>
+        </Section> */}
 
-                  <Div p="0 1rem">
-                    <Text ta="center" fontSize="1rem" color="rgba(0,0,0,0.5)">
-                      I am extremely happy about my decision to come to HomeTown<br />
-                      for renovating my kitchen. After having spent weeks trying<br />
-                      to figure out designs & budget for my kitchen; it took just one<br />
-                      visit to HomeTown to answer all my queries.<br />
-                      You guys saved me a lot of trouble and time.<br />
-                      Thank you for the wonderful kitchen.
-                    </Text>
-                    <Heading ta="center" color="text" fontSize="1rem">
-                      - Mrs. Kiran Shah, Mumbai
-                    </Heading>
-                  </Div>
-
-                  <Div p="0 1rem">
-                    <Text ta="center" fontSize="1rem" color="rgba(0,0,0,0.5)">
-                      Awesome work done by HomeTown team! <br />
-                      I was particularly impressed with how real the 3D designs looked.<br />
-                      It helped me take all the important decision even before starting the work.<br />
-                      The execution quality was very good without compromising on aesthetics or speed.<br />
-                      I keep getting complimented for my new kitchen & I never feel like leaving it at all.<br />
-                      Thank you HomeTown!
-                    </Text>
-                    <Heading ta="center" color="text" fontSize="1rem">
-                      - Mrs. Arpita Bhatnagar, Kolkata
-                    </Heading>
-                  </Div>
-                </SlickSlider>
-              </Div>
-            </Row>
-          </Container>
-        </Section>
-        <Section p="1.5rem 0" mb="0">
+        <Section p="1.5rem 0" mb="1.5rem" mt="1rem">
           <Container type="container" pr="0.5rem" pl="0.5rem">
             <Row ml="0" mr="0">
               <Div col="1" />
@@ -592,7 +524,35 @@ export default class ModularKitchen extends Component {
             </Row>
           </Container>
         </Section>
-        <Section p="1.5rem 0" mb="0" bg="microBg">
+        <Section p="4rem 0" mb="0" bg="microBg">
+          <Container type="container" pr="0.5rem" pl="0.5rem">
+            <Row ml="0" mr="0">
+              <Div col="1" />
+              <Div col="10" ta="center">
+                <Heading mt="0" mb="0.625rem" color="text" fontSize="1.75rem" ta="center" fontFamily="light">
+                  Why to wait, get started now!
+                </Heading>
+                <Text fontSize="0.875rem" mt="0.3125rem" mb="1rem" ta="center" color={Theme.colors.textExtraLight}>
+                  At Duracucine, we believe in turning your everyday activities like cooking and eating into a feast.
+                  And that’s why we build bespoke kitchens for you. Whatever your requirements are for your favourite
+                  space, we make it happen. Because we believe you just don’t cook in your kitchen, you create, you
+                  indulge, you live.
+                </Text>
+                <Button
+                  type="button"
+                  btnType="custom"
+                  p=".5rem 2rem"
+                  bg={Theme.colors.mkPrimary}
+                  color="white"
+                  onClick={() => smoothScroll(12)}
+                >
+                  Book Now
+                </Button>
+              </Div>
+            </Row>
+          </Container>
+        </Section>
+        <Section p="1.5rem 0" mb="0">
           <Container type="container" pr="0.5rem" pl="0.5rem">
             <Row ml="0" mr="0" mt="1rem" mb="2rem">
               <StoresCarousel cities={cities} />
@@ -606,8 +566,10 @@ export default class ModularKitchen extends Component {
 }
 
 ModularKitchen.defaultProps = {
-  cities: []
+  cities: [],
+  results: null
 };
 ModularKitchen.propTypes = {
-  cities: PropTypes.array
+  cities: PropTypes.array,
+  results: PropTypes.object
 };
