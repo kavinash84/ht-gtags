@@ -41,7 +41,9 @@ export default class ForgotPasswordContainer extends Component {
   }
 
   onChangeEmail = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = validateEmail(value, 'Enter valid email');
     this.setState({
       email: value,
@@ -77,7 +79,7 @@ export default class ForgotPasswordContainer extends Component {
         <Menu />
         <div className="wrapper">
           <Container pr="0" pl="0">
-            <Div p="3rem 0 1rem">
+            <Div p="3rem 0 3rem">
               <div className={styles.userWrapper}>
                 <Row display="block" mr="0" ml="0">
                   <Div col={6}>
