@@ -613,29 +613,22 @@
 		display: inline-block;
 		position: relative;
 		button {
-			padding: .25rem 1rem .25rem .75rem !important;
+			padding: .25rem  2.125rem .25rem .75rem !important;
 			font-size: 12px;
 			line-height: 1.9;
 			span {
 				transition: all 0.5s ease;
 				display: inline-block !important;
-		    position: absolute;
-		    right: 0px;
-		    height: 27px;
-		    width: 27px;
-		    text-align: center;
-		    top: 3px;
-			}
-			img {
-				position: relative;
-    		left: 14px;
-    		top: 0;
-				transition: 0.75s all ease;
+				position: absolute;
+				right: 7px;
+				height: 12px;
+				line-height: 0.5;
+    		top: 8px;
 			}
 			&:hover {
 				background-color: #FFF !important;
-				span, img {
-					transform: rotate(90deg) !important;
+				span {
+					transform: rotate(180deg) !important;
 				}
 				+ .dropDown {
 					display: block !important;
