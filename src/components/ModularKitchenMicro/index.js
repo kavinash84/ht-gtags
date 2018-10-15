@@ -229,7 +229,7 @@ export default class ModularKitchen extends Component {
         </Section>
         <Section p="2.5rem 0" mb="0">
           <Container type="container" pr="0.5rem" pl="0.5rem">
-            <Row ml="0" mr="0">
+            <Row ml="0" mr="0" mb="1rem" mt="1rem">
               <Div col="1" />
               <Div col="10">
                 <Heading mt="0" mb="0.625rem" color="text" fontSize="1.75rem" ta="center" fontFamily="light">
@@ -239,9 +239,9 @@ export default class ModularKitchen extends Component {
             </Row>
             {results &&
               results.items.text.sections.map((item, index) => (
-                <div>
+                <div key={String(index)}>
                   {index % 2 === 0 ? (
-                    <Row ml="0" mr="0" mt="2rem" alignItems="center">
+                    <Row ml="0" mr="0" mt="0" alignItems="center">
                       <Div col="6">
                         <Img src={item.items[0].image} alt="" width="100%" />
                       </Div>
@@ -262,7 +262,7 @@ export default class ModularKitchen extends Component {
                       </Div>
                     </Row>
                   ) : (
-                    <Row ml="0" mr="0" mt="2rem" alignItems="center">
+                    <Row ml="0" mr="0" mt="0" alignItems="center">
                       <Div col="6" p="2rem" ta={item.class}>
                         <Heading ta={item.class} fontFamily="light" mt="0" mb="0" color="textDark">
                           {item.title}
