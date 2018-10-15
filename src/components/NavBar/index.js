@@ -23,7 +23,7 @@ const NavBar = ({
             {menuItem.name}
           </Link>
         ))}
-        <Link onClick={exitOnClick} to="/modular-kitchens" onMouseEnter={handleEnter('')}>
+        <Link onClick={exitOnClick} to="/modular-kitchens-micro" onMouseEnter={handleEnter('')}>
           Modular Kitchens
         </Link>
         <Link onClick={exitOnClick} to="/design-build" onMouseEnter={handleEnter('')}>
