@@ -9,6 +9,7 @@ import Section from 'hometown-components/lib/Section';
 import ResponsiveModal from 'components/Modal';
 import Div from 'hometown-components/lib/Div';
 import QuickView from 'components/QuickView/QuickView';
+import { formatAmount } from 'utils/formatters';
 import { setProductPosition } from 'redux/modules/productdetails';
 import { formatProductURL } from 'utils/helper';
 import AddToCart from '../AddToCart';
@@ -86,7 +87,12 @@ class Wishlist extends React.Component {
                 skuLoading={isInWishList(loadingList, item.product_info.data.sku)}
                 rating={item.product_info.data.reviews.rating.toFixed(1)}
                 reviewsCount={item.product_info.data.reviews.count}
-                savingAmount={item.product_info.data.max_price - item.product_info.data.max_special_price}
+                /* eslint-disable max-len */
+                savingAmount={
+                  item.product_info.data.max_special_price
+                    ? formatAmount(Number(item.product_info.data.max_price) - Number(item.product_info.data.max_special_price))
+                    : 0
+                }
                 setProductPosition={productPosition}
                 productURL={formatProductURL(item.product_info.data.name, item.product_info.data.sku)}
               />
