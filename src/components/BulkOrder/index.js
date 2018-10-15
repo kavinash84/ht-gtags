@@ -54,7 +54,9 @@ class BulkOrder extends React.Component {
     }
   }
   onChangeName = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = isEmpty(value);
     this.setState({
       name: value,
@@ -62,7 +64,9 @@ class BulkOrder extends React.Component {
     });
   };
   onChangeEmail = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = !validateEmail(value);
     this.setState({
       email: value,
@@ -70,7 +74,9 @@ class BulkOrder extends React.Component {
     });
   };
   onChangePhone = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = !validateMobile(value);
     if (!allowNChar(value, 10) || (!allowTypeOf(value, 'number') && value.length > 0)) {
       return;
@@ -84,30 +90,36 @@ class BulkOrder extends React.Component {
   };
 
   onChangeCategory = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     this.setState({
       category: value
     });
   };
   onChangeQuantity = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = isEmpty(value);
     if (!allowTypeOf(value, 'number') && value.length > 0) {
       return;
     }
     this.setState({
-      quantity: Number(value),
+      quantity: value,
       quantityError: checkError
     });
   };
   onChangeBudget = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     if (!allowTypeOf(value, 'number') && value.length > 0) {
       return;
     }
     const checkError = isEmpty(value);
     this.setState({
-      budget: Number(value),
+      budget: value,
       budgetError: checkError
     });
   };
@@ -137,8 +149,8 @@ class BulkOrder extends React.Component {
       mobile: phone,
       email,
       category,
-      budget,
-      quantity
+      budget: Number(budget),
+      quantity: Number(quantity)
     };
     sendFormData(BULK_ORDER_API, data, 'bulkorder');
   };
@@ -329,4 +341,7 @@ BulkOrder.propTypes = {
   serviceRequest: PropTypes.object,
   sendFormData: PropTypes.func.isRequired
 };
-export default connect(mapStateToProps, { sendFormData: sendData })(BulkOrder);
+export default connect(
+  mapStateToProps,
+  { sendFormData: sendData }
+)(BulkOrder);
