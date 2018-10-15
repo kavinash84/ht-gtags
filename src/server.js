@@ -32,6 +32,7 @@ import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
 import { ReduxAsyncConnect, Provider } from 'components';
 import axios from 'axios';
 import getCookie from 'utils/cookies';
+import { redirectionHelper } from 'utils/helper';
 import { PAYMENT_SUCCESS, PAYMENT_FAILURE } from 'helpers/Constants';
 
 const WHITELIST_TO_REDIRECT = new Set([
@@ -154,8 +155,9 @@ app.get(
   /^\/(furniture|home-decor|homefurnishings|tableware|kitchenware|home-improvement|clearance-sale-offer|clearance_sale|design|design-inspiration|gifts|appliances|lighting|solidwood|test_bed|exclusive|invisible|luggage-bags)\//,
   async (req, res, next) => {
     const data = require('./data/category-urls.json');
-    if (data && data[req.url.toLowerCase()]) {
-      const redirect = data[req.url.toLowerCase()];
+    const requestURL = redirectionHelper(req.url);
+    if (data && data[requestURL.toLowerCase()]) {
+      const redirect = data[requestURL.toLowerCase()];
       return res.redirect(301, redirect || '/');
     }
     return next();
@@ -166,8 +168,9 @@ app.get(
 /* static pages redirection */
 app.get(/^\/(.*)\/$/, async (req, res, next) => {
   const data = require('./data/static-urls.json');
-  if (data && data[req.url.toLowerCase()]) {
-    const redirect = data[req.url.toLowerCase()];
+  const requestURL = redirectionHelper(req.url);
+  if (data && data[requestURL.toLowerCase()]) {
+    const redirect = data[requestURL.toLowerCase()];
     return res.redirect(301, redirect || '/');
   }
   return next();
