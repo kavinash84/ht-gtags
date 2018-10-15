@@ -144,15 +144,8 @@ class DeliveryAddress extends Component {
       history.push('/checkout/payment-options');
     }
   }
-  onOpenLoginModal = () => {
-    // const { history, location } = this.props;
-    // history.push(`?redirect=${location.pathname}`);
-    this.setState({ openLogin: true });
-  };
-  onCloseLoginModal = () => {
-    const { history } = this.props;
-    history.goBack();
-    this.setState({ openLogin: false });
+  handleLoginModal = () => {
+    this.setState({ openLogin: !this.state.openLogin });
   };
 
   handleSubmit = e => {
@@ -262,14 +255,14 @@ class DeliveryAddress extends Component {
                     fontSize="1rem"
                     p="0 0.625rem"
                     color={Theme.colors.primary}
-                    onClick={this.onOpenLoginModal}
+                    onClick={this.handleLoginModal}
                     lh="1"
                   >
                     Login
                   </Button>
                   <ResponsiveModal
                     classNames={{ modal: 'loginModal' }}
-                    onCloseModal={this.onCloseLoginModal}
+                    onCloseModal={this.handleLoginModal}
                     open={this.state.openLogin}
                   >
                     <LoginModal />

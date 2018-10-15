@@ -98,15 +98,8 @@ class ProductDetails extends React.Component {
       });
     }
   }
-  onOpenLoginModal = () => {
-    // const { history } = this.props;
-    // history.push(`?redirect=${history.location.pathname}`);
-    this.setState({ openLogin: true });
-  };
-  onCloseLoginModal = () => {
-    const { history } = this.props;
-    history.goBack();
-    this.setState({ openLogin: false });
+  handleLoginModal = () => {
+    this.setState({ openLogin: !this.state.openLogin });
   };
   addReview = (sku, data) => {
     const { dispatch } = this.context.store;
@@ -198,7 +191,7 @@ class ProductDetails extends React.Component {
                           wishlistToggle,
                           isLoggedIn,
                           history,
-                          this.onOpenLoginModal,
+                          this.handleLoginModal,
                           addToWaitList
                         )}
                         isWishList={isInWishList(wishList, sku)}
@@ -305,7 +298,7 @@ class ProductDetails extends React.Component {
 
         <ResponsiveModal
           classNames={{ modal: 'loginModal' }}
-          onCloseModal={this.onCloseLoginModal}
+          onCloseModal={this.handleLoginModal}
           open={this.state.openLogin}
         >
           <LoginModal />

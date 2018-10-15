@@ -73,14 +73,6 @@ class Listing extends React.Component {
       });
     }
   }
-  onOpenLoginModal = () => {
-    this.setState({ openLogin: true });
-  };
-  onCloseLoginModal = () => {
-    const { history } = this.props;
-    history.goBack();
-    this.setState({ openLogin: false });
-  };
   onOpenQuickViewModal = (sku, simpleSku, soldOut, deliveredBy, rating) => {
     this.setState({
       openQuickView: true,
@@ -108,6 +100,9 @@ class Listing extends React.Component {
 
     const link = formFilterLink2(key, name, b64, categoryquery, value, selected, searchquery);
     history.push(link);
+  };
+  handleLoginModal = () => {
+    this.setState({ openLogin: !this.state.openLogin });
   };
 
   clearFilters = () => {
@@ -204,7 +199,7 @@ class Listing extends React.Component {
                       wishlistToggle,
                       isLoggedIn,
                       history,
-                      this.onOpenLoginModal,
+                      this.handleLoginModal,
                       addToWaitList
                     )}
                     onOpenQuickViewModal={() => {
@@ -261,7 +256,7 @@ class Listing extends React.Component {
             </Row>
             <ResponsiveModal
               classNames={{ modal: 'loginModal' }}
-              onCloseModal={this.onCloseLoginModal}
+              onCloseModal={this.handleLoginModal}
               open={this.state.openLogin}
             >
               <LoginModal />
