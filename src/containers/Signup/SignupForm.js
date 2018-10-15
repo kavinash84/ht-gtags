@@ -48,7 +48,9 @@ export default class SignupFormContainer extends Component {
     };
   }
   onChangeEmail = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = !validateEmail(value);
     this.setState({
       email: value,
@@ -56,7 +58,9 @@ export default class SignupFormContainer extends Component {
     });
   };
   onChangePhone = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = !validateMobile(value);
     if (!allowNChar(value, 10) || (!allowTypeOf(value, 'number') && value.length > 0)) {
       return;
@@ -69,7 +73,9 @@ export default class SignupFormContainer extends Component {
     });
   };
   onChangePassword = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = validatePassword(value);
     if (!allowNChar(value, 15)) {
       return;
@@ -146,7 +152,7 @@ export default class SignupFormContainer extends Component {
                 <Div col="12" ta="center">
                   <Heading color="#000" mt="0" mb="0" fontWeight="400" fontSize="2rem" ta="center" fontFamily="light">
                     Sign up now<br />
-                    and get Rs 500 off*
+                    and get Rs. 500 off*
                   </Heading>
                   <Text color="#676767" ta="center" fontSize="1rem" mt="0">
                     on your first purchase
