@@ -47,7 +47,7 @@ export default class Emi extends Component {
               <Div col="12" ta="center">
                 <Heading color="text" mt="0.9375em" mb="0.3125em" fontFamily="700" ta="left">
                   EMI Options For Rs.
-                  {formatAmount(price)} <Span fontSize="0.875rem">(Including shipping charge)</Span>
+                  {price} <Span fontSize="0.875rem">(Including shipping charge)</Span>
                 </Heading>
               </Div>
             </Row>
@@ -92,7 +92,7 @@ export default class Emi extends Component {
                             return (
                               <td className="" key={String(i)}>
                                 <div>
-                                  {values[3] && <p>Rs. {values[3]} p.m.</p>}
+                                  {values[3] && <p>Rs. {formatAmount(values[3])} p.m.</p>}
                                   {values[3] && <p>Interest Rate {values[0]}%</p>}
                                 </div>
                               </td>
