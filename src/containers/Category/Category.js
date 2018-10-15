@@ -19,13 +19,18 @@ const getSubMenu = (categories, key) =>
 
 @connect(({ homepage: { menu }, category: { data } }) => ({
   menu: menu.data,
-  category: data && data.items.text,
+  category: data && data.items && data.items.text,
   seoInfo: data && data.seo && data.seo.items
 }))
 export default class Category extends Component {
   render() {
     const {
-      category, seoInfo, menu, match: { params: { category: currentCategory } }
+      category,
+      seoInfo,
+      menu,
+      match: {
+        params: { category: currentCategory }
+      }
     } = this.props;
     /* eslint-disable react/no-danger */
     return (
