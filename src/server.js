@@ -71,6 +71,13 @@ app.get('/', (req, res, next) => {
   return next();
 });
 
+/* set Headers */
+app.get('/dist/*', (req, res, next) => {
+  res.setHeader('Cache-Control', 'public, max-age=0');
+  res.setHeader('Expires', new Date(Date.now() + 864000000).toUTCString());
+  next();
+});
+
 app
   .use(morgan('dev', { skip: req => req.originalUrl.indexOf('/ws') !== -1 }))
   .use(cookieParser())

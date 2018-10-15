@@ -26,10 +26,10 @@ import BreadCrumb from './BreadCrumb';
 const sortByList = require('data/sortby');
 
 const getProductImage = images => {
+  console.log(images);
   const image = images && images.length > 0 && (images.filter(i => i.main === '1')[0] || images[0]);
   if (!image || !image.path) return '';
-  const pp = `${image.path.split('/').slice(-1)}`;
-  return image.path.replace(pp, '1-product_500.jpg');
+  return `${image.path && image.path.split('-')[0]}-product_500.jpg`;
 };
 
 const onClickWishList = (list, dispatcher, isUserLoggedIn, history, onOpenLoginModal, addToWaitList) => (
@@ -303,7 +303,4 @@ Listing.propTypes = {
   breadCrumbs: PropTypes.array.isRequired
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Listing);
+export default connect(null, mapDispatchToProps)(Listing);
