@@ -80,7 +80,8 @@ app
   .use('/service-worker.js', (req, res) =>
     res.sendFile(path.join(__dirname, '..', 'static', 'dist', 'service-worker.js')))
   .use('/robots.txt', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'robots.txt')))
-  .use('/sitemap.html', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'sitemap.html')));
+  .use('/sitemap.html', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'sitemap.html')))
+  .use('/maintenance.html', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'maintenance.html')));
 
 app.use('/dist/service-worker.js', (req, res, next) => {
   res.setHeader('Service-Worker-Allowed', '/');
@@ -116,7 +117,7 @@ app.use('/', async (req, res, next) => {
     if (cookies) {
       return next();
     }
-    return res.redirect(301, 'https://s3.ap-south-1.amazonaws.com/hometown-live-v1/index.html');
+    return res.redirect(301, '/maintenance.html');
   } catch (error) {
     console.log(error);
   }
