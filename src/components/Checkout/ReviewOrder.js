@@ -233,6 +233,7 @@ class ReviewOrder extends Component {
                   discount={summary.coupon_discount}
                   disabled={undelivered.length > 0 || outOfStockList.length > 0}
                   onClick={nextStep(submitDetails, sessionId, paymentDetails, cardType)}
+                  btnText="Place Order"
                 />
               </Div>
             </Row>
