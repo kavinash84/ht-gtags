@@ -29,7 +29,7 @@ const mapStateToProps = ({ pincode }) => ({
 const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
 
 const Pincode = ({
-  setPincodeQuery,
+  setPincodeOrCityQuery,
   setPincode,
   pincodeQuery,
   load,
@@ -47,7 +47,7 @@ const Pincode = ({
       backgroundColor={color}
       borderColor="rgba(0, 0, 0, 0.03)"
       height="2.5rem"
-      onChange={onChange(setPincodeQuery, load)}
+      onChange={onChange(setPincodeOrCityQuery, load)}
       value={pincodeQuery}
     />
     <Div className={`${styles.searchList} ${styles.active}`}>
@@ -87,7 +87,7 @@ Pincode.propTypes = {
   loaded: PropTypes.bool,
   results: PropTypes.array,
   load: PropTypes.func.isRequired,
-  setPincodeQuery: PropTypes.func.isRequired,
+  setPincodeOrCityQuery: PropTypes.func.isRequired,
   setPincode: PropTypes.func.isRequired,
   onCloseModal: PropTypes.func.isRequired,
   color: PropTypes.string
