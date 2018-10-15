@@ -19,7 +19,7 @@ export default class MenuFooter extends Component {
 }
 
 MenuFooter.propTypes = {
-  children: PropTypes.object.isRequired,
+  children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
   pageTitle: PropTypes.string
 };
 

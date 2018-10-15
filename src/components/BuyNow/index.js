@@ -119,7 +119,7 @@ BuyNow.propTypes = {
   addToCart: PropTypes.func.isRequired,
   addingToCart: PropTypes.bool,
   itemId: PropTypes.string,
-  stateId: PropTypes.string,
+  stateId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   size: PropTypes.string,
   btnType: PropTypes.string,
   isSoldOut: PropTypes.bool,

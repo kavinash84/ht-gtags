@@ -1,9 +1,6 @@
 User-agent: *
 Allow: /
 
-User-agent: Googlebot-Mobile, bingbot-mobile
-Disallow: /
-
 Disallow: /q?
 Disallow: /checkout/
 Disallow: /wishlist/
@@ -35,5 +32,4 @@ Noindex: http://alice-qa02.hometown.in/
 Noindex: http://alice-staging.hometown.in/
 
 
-
-sitemap: https://www.hometown.in/sitemap.xml
+sitemap: https://www.hometown.in/sitemap_index.xml

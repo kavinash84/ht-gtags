@@ -11,6 +11,7 @@ const LOAD = 'pincode/LOAD';
 const LOAD_SUCCESS = 'pincode/LOAD_SUCCESS';
 const LOAD_FAIL = 'pincode/LOAD_FAIL';
 const SET_PINCODE_QUERY = 'pincode/SET_PINCODE_QUERY';
+const SET_PINCODE_OR_CITY_QUERY = 'pincode/SET_PINCODE_OR_CITY_QUERY';
 
 const LOAD_PINCODE_DETAILS = 'pincode/LOAD_PINCODE_DETAILS';
 const LOAD_PINCODE_DETAILS_SUCCESS = 'pincode/LOAD_PINCODE_DETAILS_SUCCESS';
@@ -85,6 +86,15 @@ export default function reducer(state = initialState, action = {}) {
         loaded: false,
         pincodeQuery: action.query
       };
+    case SET_PINCODE_OR_CITY_QUERY:
+      if (!allowNChar(action.query, 6) && action.query.length > 0) {
+        return state;
+      }
+      return {
+        ...state,
+        loaded: false,
+        pincodeQuery: action.query
+      };
     case LOAD_PINCODE_DATA:
       return {
         ...state,
@@ -133,9 +143,7 @@ export const stopLoading = () => ({
 });
 
 export const load = query => (dispatch, getState) => {
-  const {
-    pincode: { loading }
-  } = getState();
+  const { pincode: { loading } } = getState();
   if (loading) {
     dispatch(stopLoading());
     cancel('user cancelled request');
@@ -164,6 +172,11 @@ export const loadPincodeDetails = pincode => ({
 
 export const setPincodeQuery = query => ({
   type: SET_PINCODE_QUERY,
+  query
+});
+
+export const setPincodeOrCityQuery = query => ({
+  type: SET_PINCODE_OR_CITY_QUERY,
   query
 });
 export const setPincode = pincode => (dispatch, getState) =>
