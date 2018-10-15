@@ -71,6 +71,13 @@ app.get('/', (req, res, next) => {
   return next();
 });
 
+/* set Headers */
+app.get('/dist/*', (req, res, next) => {
+  res.setHeader('Cache-Control', 'public, max-age=0');
+  res.setHeader('Expires', new Date(Date.now() + 864000000).toUTCString());
+  next();
+});
+
 app
   .use(morgan('dev', { skip: req => req.originalUrl.indexOf('/ws') !== -1 }))
   .use(cookieParser())
@@ -80,7 +87,8 @@ app
   .use('/service-worker.js', (req, res) =>
     res.sendFile(path.join(__dirname, '..', 'static', 'dist', 'service-worker.js')))
   .use('/robots.txt', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'robots.txt')))
-  .use('/sitemap.html', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'sitemap.html')));
+  .use('/sitemap.html', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'sitemap.html')))
+  .use('/maintenance.html', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'maintenance.html')));
 
 app.use('/dist/service-worker.js', (req, res, next) => {
   res.setHeader('Service-Worker-Allowed', '/');
@@ -107,6 +115,21 @@ app.use((req, res, next) => {
 // parsing the request bodys
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+/* check cookie for testing */
+app.use('/', async (req, res, next) => {
+  try {
+    const cookies = getCookie(req.header('cookie'), 'TEST_HT');
+    console.log(cookies);
+    if (cookies) {
+      return next();
+    }
+    return res.redirect(301, '/maintenance.html');
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 app.use('/checkout/finish/payment/', async (req, res) => {
   try {
     const cookies = getCookie(req.header('cookie'), 'persist:root');

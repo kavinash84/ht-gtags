@@ -1,7 +1,7 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { HOME_URL } from 'helpers/Constants';
+import { HOME_URL, MK_URL, PYK_URL } from 'helpers/Constants';
 import Container from 'hometown-components/lib/Container';
 import Section from 'hometown-components/lib/Section';
 import Row from 'hometown-components/lib/Row';
@@ -24,7 +24,7 @@ const Header = () => (
           <Link to={HOME_URL}>
             <Img float="left" height="40px" src={LogoIcon} alt="Hometown" />
           </Link>
-          <Link to="/modular-kitchens-micro">
+          <Link to={MK_URL}>
             <Img height="40px" width="auto" mr="15px" float="left" src={mkLogo} alt="" />
           </Link>
           <Text color="#614839">The world of stylist and durable kitchens</Text>
@@ -32,10 +32,10 @@ const Header = () => (
         <Div col="5" ta="right">
           <ul className={styles.menuMk}>
             <li>
-              <Link to="/modular-kitchens-micro">Home</Link>
+              <Link to={MK_URL}>Home</Link>
             </li>
             <li>
-              <Link to="/plan-your-kitchen">Plan Your Kitchen</Link>
+              <Link to={PYK_URL}>Plan Your Kitchen</Link>
             </li>
             <li>
               <Link to="/store-locator">Store Locator</Link>

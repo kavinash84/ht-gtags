@@ -25,8 +25,7 @@ import ProductDetails from 'containers/ProductDetails';
 import Cart from 'containers/Cart';
 
 /* services */
-import ModularKitchen from 'containers/ModularKitchen';
-import ModularKitchenMicro from 'containers/ModularKitchenMicro';
+import ModularKitchen from 'containers/ModularKitchenMicro';
 import PlanYourKitchen from 'containers/PlanYourKitchen';
 import DesignBuild from 'containers/DesignBuild';
 import BulkOrder from 'containers/BulkOrder';
@@ -115,7 +114,6 @@ const routes = [
       { path: '/service-request', exact: true, component: ServiceRequest },
       { path: '/grievance', exact: true, component: Grievance },
       { path: '/modular-kitchens', exact: true, component: ModularKitchen },
-      { path: '/modular-kitchens-micro', exact: true, component: ModularKitchenMicro },
       { path: '/plan-your-kitchen', exact: true, component: PlanYourKitchen },
       { path: '/design-build', exact: true, component: DesignBuild },
       { path: '/payment-success', exact: true, component: PaymentSuccess },

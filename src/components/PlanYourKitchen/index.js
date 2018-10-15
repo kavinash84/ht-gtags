@@ -27,33 +27,30 @@ const newSettings = {
 export default class PlanYourKitchen extends Component {
   constructor(props) {
     super(props);
-    const { results } = props;
-    if (results && results.items) {
-      const {
-        items: {
-          text: { sections }
-        }
-      } = results;
+    const { data } = props;
+    if (data && data.items) {
+      const { items: { text: { sections } } } = data;
       sections.map(item => {
         this[item.name] = React.createRef();
         return null;
       });
     }
   }
+  state = {};
   render() {
     const styles = require('./PlanYourKitchen.scss');
-    const { results } = this.props;
+    const { data } = this.props;
     return (
       <Div display="block">
         <Header />
         <Section p="0" mb="3rem">
-          {results && <MainSlider data={results.items.text.banner} />}
+          {data && <MainSlider data={data.items && data.items.text && data.items.text.banner} />}
           <Container className={styles.mkWrapper}>
             <ModularKitchenForm />
           </Container>
         </Section>
-        {results &&
-          results.items.text.sections.map(item => (
+        {data &&
+          data.items.text.sections.map(item => (
             <Section p="0" mb="0" className={`${styles.stepBlock} ${styles[item.class]}`} key={item.name}>
               <Container type="container" pr="0.5rem" pl="0.5rem" className={`${styles.stepContainer}`}>
                 {item.title && (
@@ -76,7 +73,7 @@ export default class PlanYourKitchen extends Component {
                       </Text>
                       <ul className="collposeBlock">
                         {item.items.map((list, index) => (
-                          <li key={String(index)} className="collopseHeading">
+                          <li key={String(index)}>
                             <Button
                               btnType="custom"
                               bc="transparent"
@@ -86,17 +83,23 @@ export default class PlanYourKitchen extends Component {
                               ta="left"
                               onClick={() => {
                                 this[item.name].current.slider.current.slickGoTo(index);
+                                this.setState({
+                                  [item.name]: [list.description]
+                                });
                               }}
                             >
                               {list.title}
-                              <Text
-                                mt="0"
-                                pt="0.3125rem"
-                                fontSize="0.875rem !important"
-                                className="collopseContent close"
-                              >
-                                {list.description}
-                              </Text>
+                              {list.description &&
+                                list.description.length > 0 && (
+                                <Text
+                                  mt="0"
+                                  pt="0.3125rem"
+                                  fontSize="0.875rem !important"
+                                  className="collopseContent close"
+                                >
+                                  {this.state[item.name] && this.state[item.name][0]}
+                                </Text>
+                              )}
                             </Button>
                           </li>
                         ))}
@@ -144,8 +147,8 @@ export default class PlanYourKitchen extends Component {
   }
 }
 PlanYourKitchen.defaultProps = {
-  results: null
+  data: null
 };
 PlanYourKitchen.propTypes = {
-  results: PropTypes.object
+  data: PropTypes.object
 };

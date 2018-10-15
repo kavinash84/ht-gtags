@@ -380,23 +380,25 @@ export default function gaMiddleware() {
         }
         if (type === 'mainSlider/BANNER_IMPRESSION') {
           const { homepage: { banners: { data } } } = getState();
-          if (data && data.length) {
-            const imp = data[action.payload];
-            const obj = {
-              event: 'promotionImpression',
-              ecommerce: {
-                promoView: {
-                  promotions: [
-                    {
-                      ...imp.meta,
-                      position: action.payload + 1,
-                      creative: imp.image
-                    }
-                  ]
+          if (pathname !== '/plan-your-kitchen') {
+            if (data && data.length) {
+              const imp = data[action.payload];
+              const obj = {
+                event: 'promotionImpression',
+                ecommerce: {
+                  promoView: {
+                    promotions: [
+                      {
+                        ...imp.meta,
+                        position: action.payload + 1,
+                        creative: imp.image
+                      }
+                    ]
+                  }
                 }
-              }
-            };
-            window.dataLayer.push(obj);
+              };
+              window.dataLayer.push(obj);
+            }
           }
         }
         if (type === 'mainSlider/BANNER_CLICK') {
