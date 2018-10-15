@@ -252,7 +252,9 @@ class Footer extends React.Component {
                 </Heading>
                 <ul>
                   <li>
-                    <Link to="/sitemap.html">Sitemap</Link>
+                    <a href="/sitemap.html" target="_blank">
+                      Sitemap
+                    </a>
                   </li>
                   <li>
                     <Link to="/promotions">Promotions</Link>
