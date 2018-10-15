@@ -161,7 +161,7 @@ class ProductDetails extends React.Component {
 
     return (
       <Div type="block">
-        <Section p="0" mb="0" className={styles.pdpWrapper}>
+        <Section p="0" pb="2rem" mb="0" className={styles.pdpWrapper}>
           <Helmet>
             <title>{productPageTitle(name)}</title>
             <meta name="keywords" content={productMetaKeywords(productType, material)} />
