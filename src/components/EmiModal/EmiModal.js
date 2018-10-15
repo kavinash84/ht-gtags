@@ -47,7 +47,7 @@ export default class Emi extends Component {
               <Div col="12" ta="center">
                 <Heading color="text" mt="0.9375em" mb="0.3125em" fontFamily="700" ta="left">
                   EMI Options For Rs.
-                  {price} <Span fontSize="0.875rem">(Including shipping charge)</Span>
+                  {` ${price}`} <Span fontSize="0.875rem">(Including shipping charge)</Span>
                 </Heading>
               </Div>
             </Row>
