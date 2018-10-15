@@ -154,7 +154,12 @@ export default function gaMiddleware() {
         }
         /* Cart Tracking */
         if (type === 'cart/ADD_TO_CART_SUCCESS') {
-          const { id_customer_cart: idcustomerCart, cart: { summary: { total } } } = action.result;
+          const {
+            id_customer_cart: idcustomerCart,
+            cart: {
+              summary: { total }
+            }
+          } = action.result;
           const [product] =
             action.result && action.result.cart.cart.filter(item => item.id_customer_cart === idcustomerCart);
           const {
@@ -190,7 +195,12 @@ export default function gaMiddleware() {
           );
         }
         if (type === 'cart/UPDATE_CART_SUCCESS') {
-          const { id_customer_cart: idcustomerCart, cart: { summary: { total } } } = action.result;
+          const {
+            id_customer_cart: idcustomerCart,
+            cart: {
+              summary: { total }
+            }
+          } = action.result;
           const [product] =
             action.result && action.result.cart.cart.filter(item => item.id_customer_cart === idcustomerCart);
           const {
@@ -227,7 +237,11 @@ export default function gaMiddleware() {
         }
         if (type === 'cart/REMOVE_FROM_CART_SUCCESS') {
           const { data } = getState().cart;
-          const { cart: { summary: { total } } } = action.result;
+          const {
+            cart: {
+              summary: { total }
+            }
+          } = action.result;
           const [product] = data.filter(item => item.id_customer_cart === Number(action.result.cartId));
           if (product) {
             const checkKey = isKeyExists(product.product_info, 'category_details');
@@ -326,7 +340,9 @@ export default function gaMiddleware() {
         }
         // Handle Payment success
         /* eslint-disable camelcase */
-        const { location: { pathname } } = getState().router;
+        const {
+          location: { pathname }
+        } = getState().router;
         if (type === 'PUSH_TO_DATALAYER' && pathname && pathname === '/payment-success') {
           const { data } = getState().paymentstatus;
           if (data) {
@@ -341,7 +357,15 @@ export default function gaMiddleware() {
             const skus = [];
             const cartList = products.map(x => {
               const {
-                sku, name, qty, price, brand, categories, details: { attributes: { color } }
+                sku,
+                name,
+                qty,
+                price,
+                brand,
+                categories,
+                details: {
+                  attributes: { color }
+                }
               } = x;
               skus.push(sku);
               return {
@@ -379,28 +403,38 @@ export default function gaMiddleware() {
           }
         }
         if (type === 'mainSlider/BANNER_IMPRESSION') {
-          const { homepage: { banners: { data } } } = getState();
-          if (data && data.length) {
-            const imp = data[action.payload];
-            const obj = {
-              event: 'promotionImpression',
-              ecommerce: {
-                promoView: {
-                  promotions: [
-                    {
-                      ...imp.meta,
-                      position: action.payload + 1,
-                      creative: imp.image
-                    }
-                  ]
+          const {
+            homepage: {
+              banners: { data }
+            }
+          } = getState();
+          if (pathname !== '/plan-your-kitchen') {
+            if (data && data.length) {
+              const imp = data[action.payload];
+              const obj = {
+                event: 'promotionImpression',
+                ecommerce: {
+                  promoView: {
+                    promotions: [
+                      {
+                        ...imp.meta,
+                        position: action.payload + 1,
+                        creative: imp.image
+                      }
+                    ]
+                  }
                 }
-              }
-            };
-            window.dataLayer.push(obj);
+              };
+              window.dataLayer.push(obj);
+            }
           }
         }
         if (type === 'mainSlider/BANNER_CLICK') {
-          const { homepage: { banners: { data } } } = getState();
+          const {
+            homepage: {
+              banners: { data }
+            }
+          } = getState();
           if (data && data.length) {
             const imp = data[action.payload];
             const obj = {

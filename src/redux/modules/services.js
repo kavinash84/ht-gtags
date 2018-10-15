@@ -13,6 +13,7 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         [action.formType]: {
+          ...state[action.formType],
           loading: true
         }
       };
@@ -20,6 +21,7 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         [action.formType]: {
+          ...state[action.formType],
           loading: false,
           loaded: true,
           results: action.result
@@ -29,6 +31,7 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         [action.formType]: {
+          ...state[action.formType],
           loading: false,
           loaded: false,
           error: action.error
@@ -38,6 +41,7 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         [action.formType]: {
+          ...state[action.formType],
           getting: true
         }
       };
@@ -45,15 +49,20 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         [action.formType]: {
+          ...state[action.formType],
           getting: false,
           got: true,
-          results: action.result
+          data: {
+            ...state[action.formType].data,
+            ...action.result
+          }
         }
       };
     case GET_FAIL:
       return {
         ...state,
         [action.formType]: {
+          ...state[action.formType],
           getting: false,
           got: false,
           error: action.error

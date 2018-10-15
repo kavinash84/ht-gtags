@@ -51,13 +51,13 @@ const adjustSlides = length => ({
 )
 export default class ModularKitchen extends Component {
   render() {
-    const { cities, results } = this.props;
+    const { cities, data } = this.props;
 
     return (
       <Div display="block">
         <Header />
         <Section p="0" mb="0">
-          {results && <MainSlider data={results.items.text.banner} />}
+          {data && <MainSlider data={data.items.text.banner} />}
           <Container className={styles.mkWrapper}>
             <ModularKitchenForm />
           </Container>
@@ -237,8 +237,8 @@ export default class ModularKitchen extends Component {
                 </Heading>
               </Div>
             </Row>
-            {results &&
-              results.items.text.sections.map((item, index) => (
+            {data &&
+              data.items.text.sections.map((item, index) => (
                 <div key={String(index)}>
                   {index % 2 === 0 ? (
                     <Row ml="0" mr="0" mt="0" alignItems="center">
@@ -567,9 +567,9 @@ export default class ModularKitchen extends Component {
 
 ModularKitchen.defaultProps = {
   cities: [],
-  results: null
+  data: null
 };
 ModularKitchen.propTypes = {
   cities: PropTypes.array,
-  results: PropTypes.object
+  data: PropTypes.object
 };
