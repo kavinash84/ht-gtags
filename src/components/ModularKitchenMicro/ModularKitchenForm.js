@@ -37,10 +37,10 @@ export default class ModularKitchen extends Component {
   };
 
   componentWillReceiveProps(nextprops) {
-    if (nextprops.results && nextprops.results !== this.props.results) {
+    if (nextprops.data && nextprops.data !== this.props.data) {
       this.setState({
-        city: nextprops.results.city,
-        state: nextprops.results.state
+        city: nextprops.data.city,
+        state: nextprops.data.state
       });
     }
     if (nextprops.loaded && nextprops.loaded !== this.props.loaded) {
@@ -263,7 +263,7 @@ export default class ModularKitchen extends Component {
 ModularKitchen.defaultProps = {
   loading: false,
   loaded: false,
-  results: {},
+  data: {},
   loadPincodeDetails: () => {},
   sendFormData: () => {}
 };
@@ -271,6 +271,6 @@ ModularKitchen.propTypes = {
   loading: PropTypes.bool,
   loaded: PropTypes.bool,
   loadPincodeDetails: PropTypes.func,
-  results: PropTypes.object,
+  data: PropTypes.object,
   sendFormData: PropTypes.func
 };
