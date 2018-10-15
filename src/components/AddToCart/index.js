@@ -137,7 +137,7 @@ AddToCart.propTypes = {
   addToCart: PropTypes.func.isRequired,
   addingToCart: PropTypes.bool,
   itemId: PropTypes.string,
-  stateId: PropTypes.string,
+  stateId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   size: PropTypes.string,
   height: PropTypes.string,
   btnColor: PropTypes.string,

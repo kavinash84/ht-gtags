@@ -13,7 +13,7 @@ const canonicals = {
   '/home-furnishings/bath-accessories/soap-dispensers-homefurnishings/': '/bath/bath-accessories/soap-dispensers/',
   '/home-furnishings/bath-accessories/toothbrush-holders-homefurnishings/':
     '/bath/bath-accessories/toothbrush-holders/',
-  '/home-furnishings/bath-accessories/toothbrush-holders-homefurnishingss/': '/bath/bath-accessories/tumblers/',
+  '/home-furnishings/bath-accessories/tumblers-homefurnishings/': '/bath/bath-accessories/tumblers/',
   '/home-furnishings/bath-accessories/soap-dish-homefurnishings/': '/bath/bath-accessories/soap-dish/',
   '/home-furnishings/bath-accessories/shower-rods-homefurnishings/': '/bath/bath-accessories/shower-rods/',
   '/kitchenware/kitchen-linen/table-mat/': '/tableware/table-essentials/table-mats/',
