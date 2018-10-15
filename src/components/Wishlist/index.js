@@ -13,11 +13,12 @@ import { setProductPosition } from 'redux/modules/productdetails';
 import { formatProductURL } from 'utils/helper';
 import AddToCart from '../AddToCart';
 
-const getProductImage = url => {
-  const pp = `${url.split('/').slice(-1)}`;
-  return url.replace(pp, '1-product_500.jpg');
+const getProductImage = images => {
+  const image = images && images.length > 0 && (images.filter(i => i.main === '1')[0] || images[0]);
+  if (!image || !image.path) return '';
+  const pp = `${image.path.split('/').slice(-1)}`;
+  return image.path.replace(pp, '1-product_500.jpg');
 };
-
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ ...actionCreators, productPosition: setProductPosition }, dispatch);
 
@@ -69,7 +70,7 @@ class Wishlist extends React.Component {
                 price={item.product_info.netprice}
                 cutprice={item.product_info.cutprice}
                 saving={item.product_info.saving}
-                image={getProductImage(item.product_info.images.filter(i => i.main === '1')[0].path)}
+                image={getProductImage(item.product_info.images)}
                 sku={item.product_info.data.sku}
                 onClick={onClick(list, toggleWishList)}
                 onOpenQuickViewModal={() => {
