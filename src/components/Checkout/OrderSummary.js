@@ -52,7 +52,7 @@ const OrderSummary = ({
         <Text color="#6e6e6e">
           Discount
           <Span float="right" color={Theme.colors.text}>
-            Rs. {-formatAmount(discount)}
+            Rs. {` -${formatAmount(Number(discount))}`}
           </Span>
         </Text>
       )}
