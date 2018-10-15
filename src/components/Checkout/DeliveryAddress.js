@@ -359,6 +359,7 @@ class DeliveryAddress extends Component {
                         height="42px"
                         mt="0.5rem"
                         disabled={loading}
+                        fontSize="1.125rem"
                       >
                         {loading ? 'Loading...' : 'Save and Continue'}
                       </Button>

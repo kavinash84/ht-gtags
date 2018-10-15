@@ -7,7 +7,7 @@ const styles = require('./BreadCrumb.scss');
 const BreadCrumb = ({ categoryDetails }) => {
   let link = '';
   return (
-    <ul itemScope itemType="http://schema.org/BreadcrumbList" className={styles.breadCrumbList}>
+    <ul itemScope itemType="http://schema.org/BreadcrumbList" className={styles.breadCrumbPdp}>
       {categoryDetails.filter(details => Object.keys(details).length > 0).map((item, index) => {
         if (item && item.url_key.indexOf('clearance') === -1) {
           link += `/${item.url_key}`;

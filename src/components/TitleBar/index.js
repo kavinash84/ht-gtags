@@ -7,12 +7,12 @@ import Section from 'hometown-components/lib/Section';
 import Row from 'hometown-components/lib/Row';
 import { Link } from 'react-router-dom';
 
-const styles = require('../ProductDetails/BreadCrumb.scss');
+const styles = require('../Listing/BreadCrumb.scss');
 
 const TitleBar = ({ title, productCount }) => (
   <Section mb="0.625rem" p="1.25rem 0.5rem" bg="bg">
     <Container type="container" pr="0" pl="0">
-      <Row display="block" mr="0" ml="0" mb="1rem">
+      <Row display="block" mr="0" ml="0" mb="0">
         <Div col="9">
           <ul itemScope itemType="http://schema.org/BreadcrumbList" className={styles.breadCrumbList}>
             <li itemProp="itemListElement" itemType="http://schema.org/ListItem" itemScope>
