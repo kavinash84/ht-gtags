@@ -375,6 +375,7 @@ class DeliveryAddress extends Component {
                 totalCart={summary.total}
                 onClick={() => null}
                 itemsCount={summary.items_count}
+                discount={summary.coupon_discount}
                 hidebutton
               />
               <PaymentMethods />

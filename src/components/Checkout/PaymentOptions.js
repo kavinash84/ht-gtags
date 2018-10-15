@@ -246,6 +246,7 @@ class PaymentOptions extends Component {
                   shipping={summary.shipping_charges}
                   totalCart={summary.total}
                   onClick={() => null}
+                  discount={summary.coupon_discount}
                   itemsCount={summary.items_count}
                   hidebutton
                 />

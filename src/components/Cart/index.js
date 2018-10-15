@@ -228,6 +228,7 @@ const Cart = ({
                 onClick={checkCartBeforeCheckout(checkCart, sessionId)}
                 itemsCount={summary.items_count}
                 outOfStockList={outOfStockList}
+                discount={summary.coupon_discount}
               />
               <PaymentMethods />
             </Div>
