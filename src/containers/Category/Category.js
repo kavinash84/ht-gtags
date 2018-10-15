@@ -30,7 +30,10 @@ export default class Category extends Component {
     /* eslint-disable react/no-danger */
     return (
       <Section p="0" mb="0">
-        <Helmet title={`${(seoInfo && seoInfo.page_title) || (currentCategory && currentCategory.toUpperCase())}`} />
+        <Helmet title={`${(seoInfo && seoInfo.page_title) || (currentCategory && currentCategory.toUpperCase())}`}>
+          <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
+          <meta name="description" content={seoInfo && seoInfo.meta_description} />
+        </Helmet>
         <div className="wrapper">
           <Menu />
           <MainSlider data={category.main} />

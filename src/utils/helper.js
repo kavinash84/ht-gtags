@@ -305,3 +305,12 @@ export const smoothScroll = speed => {
     }
   })();
 };
+
+export const redirectionHelper = url => {
+  if (url) {
+    const hasForwardSlash = url[url.length - 1] === '/';
+    if (hasForwardSlash) return url;
+    return `${url}/`;
+  }
+  return '';
+};
