@@ -128,7 +128,8 @@ class ProductDetails extends React.Component {
       toggleReviewBox,
       deliveryDateLoading,
       gattributes,
-      breadcrumbs
+      breadcrumbs,
+      loadingList
     } = this.props;
     const {
       meta,
@@ -195,6 +196,7 @@ class ProductDetails extends React.Component {
                           addToWaitList
                         )}
                         isWishList={isInWishList(wishList, sku)}
+                        wishlistLoading={isInWishList(loadingList, sku)}
                       />
                     </Div>
                     <Row display="block" mb="0" mr="0.9375rem" ml="0.9375rem" className={styles.variationWrapper}>
@@ -317,7 +319,8 @@ ProductDetails.defaultProps = {
   emidata: [],
   wishList: [],
   wishListData: [],
-  deliveryDateLoading: false
+  deliveryDateLoading: false,
+  loadingList: []
 };
 ProductDetails.propTypes = {
   product: PropTypes.object,
@@ -336,6 +339,7 @@ ProductDetails.propTypes = {
   toggleReviewBox: PropTypes.func.isRequired,
   deliveryDateLoading: PropTypes.bool,
   breadcrumbs: PropTypes.array.isRequired,
-  gattributes: PropTypes.object.isRequired
+  gattributes: PropTypes.object.isRequired,
+  loadingList: PropTypes.array
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
