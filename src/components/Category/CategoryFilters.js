@@ -9,7 +9,6 @@ import { Label } from 'hometown-components/lib/Label';
 
 const styles = require('./CategoryFilters.scss');
 const showLessIcon = require('../../../static/chevron_right.svg');
-const showMoreIcon = require('../../../static/expand_more.svg');
 
 class CategoryFilterItem extends Component {
   static propTypes = {
@@ -30,16 +29,16 @@ class CategoryFilterItem extends Component {
     return (
       <li key={sub.id}>
         <Link to={`/${sub.url_key}`}>
-          <Label color="filterTitle" mt="0.3125rem" mb="0.3125rem" display="block" fontFamily="regular">
+          <Label color="filterTitle" mt="0.3125rem" mb="0.3125rem" display="block" fontFamily="regular" lh="1.5">
             {sub.name}
           </Label>
         </Link>
         {sub.children && (
           <Button p="4px 0" lh="0.5" fontSize="1.25rem" btnType="link" onClick={this.handleClick}>
-            {show ? <Img src={showMoreIcon} alt="less" /> : <Img src={showLessIcon} alt="less" />}
+            <Img src={showLessIcon} alt={show ? 'more' : 'less'} className={show ? styles.open : styles.close} />
           </Button>
         )}
-        <ul className={show ? 'show' : 'hide'}>
+        <ul className={`${styles.categoryLevel3} ${show ? '' : styles.hide}`}>
           {sub.children &&
             sub.children.map(sub3 => (
               <li key={sub3.id}>

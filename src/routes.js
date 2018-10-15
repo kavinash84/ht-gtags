@@ -74,7 +74,7 @@ const isAuthenticated = connectedReduxRedirect({
 });
 
 const isNotAuthenticated = connectedReduxRedirect({
-  redirectPath: (state, ownProps) => locationHelper.getRedirectQueryParam(ownProps),
+  redirectPath: (state, ownProps) => locationHelper.getRedirectQueryParam(ownProps) || '/profile',
   authenticatedSelector: state => !state.userLogin.isLoggedIn,
   redirectAction: routerActions.replace,
   wrapperDisplayName: 'UserIsAuthenticated',

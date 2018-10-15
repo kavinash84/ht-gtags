@@ -154,7 +154,7 @@ class ProductDetails extends React.Component {
     const { main_material: material, color, category_type: productType } = gattributes;
     return (
       <Div type="block">
-        <Section p="0" mb="0" className={styles.pdpWrapper}>
+        <Section p="0" pb="2rem" mb="0" className={styles.pdpWrapper}>
           <Helmet>
             <title>{productPageTitle(name)}</title>
             <meta name="keywords" content={productMetaKeywords(productType, material)} />
@@ -342,7 +342,4 @@ ProductDetails.propTypes = {
   gattributes: PropTypes.object.isRequired,
   loadingList: PropTypes.array
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

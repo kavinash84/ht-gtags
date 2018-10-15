@@ -11,10 +11,13 @@
     opacity: 1;
   }
   &:after {
-    content: '>';
+    content: url('../../../static/next_18.svg');
     position: absolute;
-    right: 13px;
-    top: 0;
+    right: 11px;
+    font-size: 14px;
+    height: 14px;
+    line-height: 1.2;
+    top: 5px;
   }
   &.hideArrow {
     &:after {
@@ -41,6 +44,9 @@
     width: 100%;
     max-width: 30rem;
   }
+  input {
+    border-radius: 5px;
+  }
 }
 .paymentFormOptions {
   border: 1px solid #ededed;
@@ -53,7 +59,7 @@
   height: 38px;
   border-radius: 0;
   font-size: 0.875rem;
-  -webkit-appearance: none;
+  // -webkit-appearance: none;
   min-width: 100px;
   text-align: center;
   background-color: #FFF;
@@ -75,6 +81,7 @@
     border: 1px solid #e9e9e9;
     padding: 0.125rem 0.325rem 0;
     cursor: pointer;
+    border-radius: 5px;
   }
   img {
     height: 30px;
@@ -84,15 +91,12 @@
   th {
     font-size: 0.75rem !important;
   }
-  td {
-
-  }
 }
 .cardFieldWrapper {
   img {
     width: 36px;
     position: absolute;
     right: 25px;
-    top: 34px;
+    top: 32px;
   }
 }

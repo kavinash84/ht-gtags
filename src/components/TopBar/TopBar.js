@@ -49,7 +49,6 @@ const onClickLogout = dispatcher => e => {
     isLoggedIn: userLogin.isLoggedIn,
     wishListCount: getWishListCount(wishlist),
     cartCount: getCartCount(cart),
-    logoutResponse: userLogin.logoutResponse,
     router
   }),
   { logoutUser: logout }
@@ -66,13 +65,6 @@ export default class MenuSidebar extends Component {
       this.setState({
         openLogin: false
       });
-    }
-    if (
-      this.props.isLoggedIn !== nextProps.isLoggedIn &&
-      nextProps.logoutResponse &&
-      nextProps.logoutResponse.success
-    ) {
-      if (window) window.location.reload();
     }
   }
   onOpenPincodeModal = () => {
@@ -249,8 +241,7 @@ MenuSidebar.defaultProps = {
   isLoggedIn: false,
   history: {},
   router: {},
-  logoutUser: () => {},
-  logoutResponse: {}
+  logoutUser: () => {}
 };
 
 MenuSidebar.propTypes = {
@@ -260,6 +251,5 @@ MenuSidebar.propTypes = {
   wishListCount: PropTypes.number,
   cartCount: PropTypes.number,
   logoutUser: PropTypes.func,
-  router: PropTypes.object,
-  logoutResponse: PropTypes.object
+  router: PropTypes.object
 };
