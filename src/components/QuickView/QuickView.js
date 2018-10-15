@@ -209,7 +209,7 @@ export default class QuickView extends Component {
                     Savings:{' '}
                   <Span color="rgba(0, 0, 0, 0.6)" fontSize="0.857rem" va="bottom">
                       ₹
-                    {formatAmount(calculateSavings(price, discPrice))} ({calculateDiscount(price, discPrice)}
+                    {` ${formatAmount(calculateSavings(price, discPrice))}`} ({calculateDiscount(price, discPrice)}
                       %)
                   </Span>
                 </Text>
