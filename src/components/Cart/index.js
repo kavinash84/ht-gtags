@@ -244,7 +244,7 @@ Cart.propTypes = {
   summary: PropTypes.object,
   pincode: PropTypes.string,
   cartUpdating: PropTypes.bool,
-  currentId: PropTypes.string,
+  currentId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   sessionId: PropTypes.string.isRequired,
   removeFromCart: PropTypes.func.isRequired,
   checkCart: PropTypes.func.isRequired,
