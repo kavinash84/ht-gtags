@@ -10,7 +10,7 @@ const BreadCrumb = ({ categoryDetails }) => {
     <ul itemScope itemType="http://schema.org/BreadcrumbList" className={styles.breadCrumbList}>
       {categoryDetails.filter(details => Object.keys(details).length > 0).map((item, index) => {
         if (item) {
-          link += `/${item.url_key}`;
+          link = `/${item.url_key}`;
           return (
             <li key={item.id} itemProp="itemListElement" itemType="http://schema.org/ListItem" itemScope>
               <Link itemProp="item" to={`${link}`}>
