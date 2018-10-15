@@ -23,7 +23,7 @@ const ReloadNotification = ({ title, onClick, showRibbon }) => (
           bc="#FFF"
           border="1px solid"
           bg="transparent"
-          p="4px 10px"
+          p="0px 8px"
           ml="10px"
         >
           <Refresh fill="rgba(0,0,0,0.8)" width="14px" height="14px" />
