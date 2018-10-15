@@ -20,7 +20,7 @@ import WishlistBtn from 'hometown-components/lib/WishlistBtn';
 import ProductCarousel from 'components/ProductCarousel';
 import EmiModal from 'containers/EmiModal/EmiModal';
 import ResponsiveModal from 'components/Modal';
-import LoginModal from 'components/Login/LoginModal';
+import LoginModal from 'containers/Login/LoginForm';
 import { addReview, toggleReview } from 'redux/modules/reviews';
 import { toggleWishList, wishListWaitList } from 'redux/modules/wishlist';
 import { setProductPosition } from 'redux/modules/productdetails';
