@@ -1,3 +1,9 @@
+.reloadRibbion {
+  display: flex;
+  height: 38px;
+  transition: 1s height ease;
+  visibility: visible;
+}
 .closeBtn {
   position: absolute;
   right: 3rem;
@@ -8,7 +14,7 @@
   border: none;
   padding: 0;
 }
-
-.hide {
-  display: none !important;
+.hideRibbon {
+  height: 0;
+  visibility: hidden;
 }
