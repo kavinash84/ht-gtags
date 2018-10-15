@@ -145,8 +145,8 @@ class DeliveryAddress extends Component {
     }
   }
   onOpenLoginModal = () => {
-    const { history, location } = this.props;
-    history.push(`?redirect=${location.pathname}`);
+    // const { history, location } = this.props;
+    // history.push(`?redirect=${location.pathname}`);
     this.setState({ openLogin: true });
   };
   onCloseLoginModal = () => {
@@ -389,7 +389,7 @@ class DeliveryAddress extends Component {
 }
 DeliveryAddress.defaultProps = {
   history: {},
-  location: {},
+  // location: {},
   addresses: [],
   currentaddressindex: -1,
   userEmail: '',
@@ -402,7 +402,7 @@ DeliveryAddress.propTypes = {
   history: PropTypes.object,
   addresses: PropTypes.array,
   nextstep: PropTypes.bool.isRequired,
-  location: PropTypes.object,
+  // location: PropTypes.object,
   currentaddressindex: PropTypes.number,
   address: PropTypes.object.isRequired,
   shippingIsBilling: PropTypes.bool.isRequired,

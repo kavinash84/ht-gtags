@@ -99,8 +99,8 @@ class ProductDetails extends React.Component {
     }
   }
   onOpenLoginModal = () => {
-    const { history } = this.props;
-    history.push(`?redirect=${history.location.pathname}`);
+    // const { history } = this.props;
+    // history.push(`?redirect=${history.location.pathname}`);
     this.setState({ openLogin: true });
   };
   onCloseLoginModal = () => {
