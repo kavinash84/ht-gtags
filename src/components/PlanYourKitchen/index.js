@@ -89,14 +89,17 @@ export default class PlanYourKitchen extends Component {
                               }}
                             >
                               {list.title}
-                              <Text
-                                mt="0"
-                                pt="0.3125rem"
-                                fontSize="0.875rem !important"
-                                className="collopseContent close"
-                              >
-                                {list.description}
-                              </Text>
+                              {list.description &&
+                                list.description.length > 0 && (
+                                <Text
+                                  mt="0"
+                                  pt="0.3125rem"
+                                  fontSize="0.875rem !important"
+                                  className="collopseContent close"
+                                >
+                                  {list.description}
+                                </Text>
+                              )}
                             </Button>
                           </li>
                         ))}
