@@ -69,7 +69,7 @@ class Wishlist extends React.Component {
                 price={item.product_info.netprice}
                 cutprice={item.product_info.cutprice}
                 saving={item.product_info.saving}
-                image={getProductImage(item.product_info.images[0].path)}
+                image={getProductImage(item.product_info.images.filter(i => i.main === '1')[0].path)}
                 sku={item.product_info.data.sku}
                 onClick={onClick(list, toggleWishList)}
                 onOpenQuickViewModal={() => {
