@@ -11,10 +11,13 @@
     opacity: 1;
   }
   &:after {
-    content: '>';
+    content: url('../../../static/next_18.svg');
     position: absolute;
-    right: 13px;
-    top: 0;
+    right: 11px;
+    font-size: 14px;
+    height: 14px;
+    line-height: 1.2;
+    top: 5px;
   }
   &.hideArrow {
     &:after {
