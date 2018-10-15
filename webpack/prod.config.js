@@ -231,7 +231,7 @@ module.exports = {
       directoryIndex: '/',
       verbose: true,
       navigateFallback: '/dist/index.html',
-      runtimeCaching: [
+      /* runtimeCaching: [
         {
           urlPattern: /api\/tesla\//,
           handler: 'networkFirst',
@@ -242,7 +242,7 @@ module.exports = {
             }
           }
         }
-      ]
+      ] */
     }),
     new WebpackOnBuildPlugin(function() {
         const data = {
