@@ -74,13 +74,6 @@ class Listing extends React.Component {
     }
   }
   onOpenLoginModal = () => {
-    const { history } = this.props;
-    const { pathname, search } = history.location;
-    if (search) {
-      history.push(`${search}&redirect=${pathname}${search}`);
-    } else {
-      history.push(`?redirect=${pathname}${search}`);
-    }
     this.setState({ openLogin: true });
   };
   onCloseLoginModal = () => {
