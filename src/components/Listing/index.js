@@ -12,10 +12,8 @@ import LoginModal from 'containers/Login/LoginForm';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { toggleWishList, wishListWaitList } from 'redux/modules/wishlist';
-// import { clearAllFilters } from 'redux/modules/products';
 import { setProductPosition } from 'redux/modules/productdetails';
 import { formFilterLink2, formatProductURL } from 'utils/helper';
-// import { productUrl } from 'utils/seo';
 import { formatAmount } from 'utils/formatters';
 import TitleBar from './TitleBar';
 import Dropdown from '../Filters/Filters';
@@ -303,13 +301,11 @@ Listing.propTypes = {
   wishListData: PropTypes.array,
   categoryName: PropTypes.string,
   productCount: PropTypes.string,
-  // category: PropTypes.string,
   filters: PropTypes.array,
   sortBy: PropTypes.string.isRequired,
   appliedFilters: PropTypes.array,
   history: PropTypes.object.isRequired,
   loadingList: PropTypes.array,
-  // pincode: PropTypes.string,
   isLoggedIn: PropTypes.bool,
   metaResults: PropTypes.array,
   categoryquery: PropTypes.string,
@@ -317,4 +313,7 @@ Listing.propTypes = {
   breadCrumbs: PropTypes.array.isRequired
 };
 
-export default connect(null, mapDispatchToProps)(Listing);
+export default connect(
+  null,
+  mapDispatchToProps
+)(Listing);

@@ -4,29 +4,28 @@ import { Link } from 'react-router-dom';
 
 const styles = require('./BreadCrumb.scss');
 
-const BreadCrumb = ({ categoryDetails }) => {
+const BreadCrumb = ({ breadcrumbs }) => {
   let link = '';
   return (
     <ul itemScope itemType="http://schema.org/BreadcrumbList" className={styles.breadCrumbList}>
-      {categoryDetails.filter(details => Object.keys(details).length > 0).map((item, index) => {
-        if (item && item.url_key.indexOf('clearance') === -1) {
-          link += `/${item.url_key}`;
-          return (
-            <li key={item.id} itemProp="itemListElement" itemType="http://schema.org/ListItem" itemScope>
-              <Link itemProp="item" to={`${link}`}>
-                <span itemProp="name">{item.name}</span>
-                <meta itemProp="position" content={index + 1} />
-              </Link>
-            </li>
-          );
-        }
-        return null;
+      {breadcrumbs.map((item, index) => {
+        link += `/${item.urlkey}`;
+        return (
+          <li key={String(index)} itemProp="itemListElement" itemType="http://schema.org/ListItem" itemScope>
+            <Link itemProp="item" to={`${link}`}>
+              <span itemProp="name">{item.name}</span>
+              <meta itemProp="position" content={index + 1} />
+            </Link>
+          </li>
+        );
       })}
     </ul>
   );
 };
-
+BreadCrumb.defaultProps = {
+  breadcrumbs: []
+};
 BreadCrumb.propTypes = {
-  categoryDetails: PropTypes.array.isRequired
+  breadcrumbs: PropTypes.array
 };
 export default BreadCrumb;

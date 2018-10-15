@@ -27,7 +27,7 @@ import { setProductPosition } from 'redux/modules/productdetails';
 import { formatAmount } from 'utils/formatters';
 import { calculateDiscount, calculateSavings, calculateLowestEmi } from 'utils/helper';
 import { getSKUList } from 'selectors/wishlist';
-import { groupedAttributes as getgroupedAttributes, categoryDetails as getcategoryDetails } from 'selectors/product';
+import { groupedAttributes as getgroupedAttributes, getBreadCrumbs } from 'selectors/product';
 
 import { productPageTitle, productMetaDescription, productMetaKeywords } from 'utils/seo';
 import ProductDetailsCarousel from './Carousel';
@@ -80,7 +80,7 @@ const mapStateToProps = ({
   isLoggedIn: userLogin.isLoggedIn,
   loadingList: wishlist.loadingList,
   gattributes: getgroupedAttributes(productdetails),
-  categoryDetails: getcategoryDetails(productdetails)
+  breadcrumbs: getBreadCrumbs(productdetails)
 });
 
 class ProductDetails extends React.Component {
@@ -134,8 +134,8 @@ class ProductDetails extends React.Component {
       addToWaitList,
       toggleReviewBox,
       deliveryDateLoading,
-      categoryDetails,
-      gattributes
+      gattributes,
+      breadcrumbs
     } = this.props;
     const {
       meta,
@@ -158,7 +158,6 @@ class ProductDetails extends React.Component {
     const { showmore } = this.state;
     const isEmiAvailable = Number(checkSpecialPrice) >= 3000;
     const { main_material: material, color, category_type: productType } = gattributes;
-
     return (
       <Div type="block">
         <Section p="0" mb="0" className={styles.pdpWrapper}>
@@ -172,7 +171,7 @@ class ProductDetails extends React.Component {
               <Div>
                 <Div col="7" pt="1.5rem" pr="1rem" className={styles.pdpLeftWrapper}>
                   <Div col="12" className={styles.breadCrumbWrapper} mb="1rem">
-                    <BreadCrumb categoryDetails={categoryDetails} />
+                    <BreadCrumb breadcrumbs={breadcrumbs} />
                   </Div>
                   <Div col="12">{images && <ProductDetailsCarousel data={images} title={meta.name} />}</Div>
                 </Div>
@@ -343,7 +342,7 @@ ProductDetails.propTypes = {
   addToWaitList: PropTypes.func.isRequired,
   toggleReviewBox: PropTypes.func.isRequired,
   deliveryDateLoading: PropTypes.bool,
-  categoryDetails: PropTypes.array.isRequired,
+  breadcrumbs: PropTypes.array.isRequired,
   gattributes: PropTypes.object.isRequired
 };
 export default connect(
