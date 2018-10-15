@@ -23,7 +23,8 @@ const OrderSummary = ({
   isSubmitted,
   disabled,
   outOfStockList,
-  discount
+  discount,
+  btnText
 }) => (
   <Row ml="0" mr="0">
     <Div col="12" mb="0.625rem">
@@ -81,7 +82,7 @@ const OrderSummary = ({
           borderRadius="0"
           disabled={loadingnextstep || isSubmitted || (outOfStockList && outOfStockList.length > 0) || disabled}
         >
-          {loadingnextstep || isSubmitted ? 'Please wait...' : 'Place Order'}
+          {loadingnextstep || isSubmitted ? 'Please wait...' : btnText}
         </Button>
       )}
     </Div>
@@ -95,7 +96,8 @@ OrderSummary.defaultProps = {
   isSubmitted: false,
   outOfStockList: [],
   disabled: false,
-  discount: 0
+  discount: 0,
+  btnText: 'Place Order'
 };
 
 OrderSummary.propTypes = {
@@ -110,7 +112,8 @@ OrderSummary.propTypes = {
   isSubmitted: PropTypes.bool,
   outOfStockList: PropTypes.array,
   disabled: PropTypes.bool,
-  discount: PropTypes.number
+  discount: PropTypes.number,
+  btnText: PropTypes.string
 };
 
 export default OrderSummary;

@@ -229,6 +229,7 @@ const Cart = ({
                 itemsCount={summary.items_count}
                 outOfStockList={outOfStockList}
                 discount={summary.coupon_discount}
+                btnText="Checkout"
               />
               <PaymentMethods />
             </Div>
