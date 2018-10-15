@@ -197,19 +197,20 @@ export default class QuickView extends Component {
                 <Span color={Theme.colors.primary} fontFamily="medium" fontSize="1.325rem" mr="0.625rem">
                   ₹ {(discPrice && formatAmount(discPrice)) || (price && formatAmount(price))}
                 </Span>
-                {discPrice && (
+                {price !== discPrice && (
                   <Span fontFamily="regular" color="rgba(0, 0, 0, 0.6)" fontSize="0.875rem">
                     <s>₹ {formatAmount(price)}</s>
                   </Span>
                 )}
               </Text>
-              {saving && (
+              {saving &&
+                saving > 0 && (
                 <Text color="rgba(0, 0, 0, 0.6)" fontFamily="medium" fontSize="0.857rem" mb="0.3125rem" mt="0">
-                  Savings:{' '}
+                    Savings:{' '}
                   <Span color="rgba(0, 0, 0, 0.6)" fontSize="0.857rem" va="bottom">
-                    ₹
-                    {formatAmount(calculateSavings(price, discPrice))} ({calculateDiscount(price, discPrice)}
-                    %)
+                      ₹
+                    {` ${formatAmount(calculateSavings(price, discPrice))}`} ({calculateDiscount(price, discPrice)}
+                      %)
                   </Span>
                 </Text>
               )}
@@ -261,7 +262,7 @@ export default class QuickView extends Component {
 }
 QuickView.defaultProps = {
   soldOut: false,
-  rating: 0,
+  rating: '0',
   deliveredBy: ''
 };
 QuickView.propTypes = {
@@ -270,5 +271,5 @@ QuickView.propTypes = {
   products: PropTypes.array.isRequired,
   soldOut: PropTypes.bool,
   deliveredBy: PropTypes.string,
-  rating: PropTypes.number
+  rating: PropTypes.string
 };
