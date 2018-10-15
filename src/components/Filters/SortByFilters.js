@@ -1,20 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'hometown-components/lib/Buttons';
-import Span from 'hometown-components/lib/Span';
+import Img from 'hometown-components/lib/Img';
 import { Label } from 'hometown-components/lib/Label';
 
 const styles = require('./Dropdown.scss');
+
+const showLessIcon = require('../../../static/chevron_right.svg');
 
 const Dropdown = ({
   title, display, data, onclick
 }) => (
   <div className={`${styles.filterBlock} dropdownWrapper`}>
     <Button btnType="custom" bg="#FFF" color="#656565" border="none" fontSize="0.75em" tt="uppercase">
-      {title || 'Popularity'}{' '}
-      <Span ml="0.5rem" fontSize="1.5em">
-        &#9662;
-      </Span>
+      {title || 'Popularity'} <Img src={showLessIcon} alt="ddd" height="20px" float="right" />
     </Button>
     <div className={`dropDown ${display === 'rtl' ? 'blockRight' : ''}`}>
       {/* eslint-disable */}

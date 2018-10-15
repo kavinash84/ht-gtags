@@ -19,18 +19,26 @@ const getSubMenu = (categories, key) =>
 
 @connect(({ homepage: { menu }, category: { data } }) => ({
   menu: menu.data,
-  category: data && data.items.text,
+  category: data && data.items && data.items.text,
   seoInfo: data && data.seo && data.seo.items
 }))
 export default class Category extends Component {
   render() {
     const {
-      category, seoInfo, menu, match: { params: { category: currentCategory } }
+      category,
+      seoInfo,
+      menu,
+      match: {
+        params: { category: currentCategory }
+      }
     } = this.props;
     /* eslint-disable react/no-danger */
     return (
       <Section p="0" mb="0">
-        <Helmet title={`${(seoInfo && seoInfo.page_title) || (currentCategory && currentCategory.toUpperCase())}`} />
+        <Helmet title={`${(seoInfo && seoInfo.page_title) || (currentCategory && currentCategory.toUpperCase())}`}>
+          <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
+          <meta name="description" content={seoInfo && seoInfo.meta_description} />
+        </Helmet>
         <div className="wrapper">
           <Menu />
           <MainSlider data={category.main} />

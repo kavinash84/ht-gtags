@@ -9,6 +9,8 @@
     content: '';
   }
   &:last-child {
-    display: none;
+    &:before {
+      display: none;
+    }
   }
 }

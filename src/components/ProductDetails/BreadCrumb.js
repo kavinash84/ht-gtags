@@ -7,7 +7,7 @@ const styles = require('./BreadCrumb.scss');
 const BreadCrumb = ({ breadcrumbs }) => {
   let link = '';
   return (
-    <ul itemScope itemType="http://schema.org/BreadcrumbList" className={styles.breadCrumbList}>
+    <ul itemScope itemType="http://schema.org/BreadcrumbList" className={styles.breadCrumbPdp}>
       {breadcrumbs.map((item, index) => {
         link += `/${item.urlkey}`;
         return (

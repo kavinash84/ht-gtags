@@ -22,7 +22,8 @@ const OrderSummary = ({
   itemsCount,
   isSubmitted,
   disabled,
-  outOfStockList
+  outOfStockList,
+  discount
 }) => (
   <Row ml="0" mr="0">
     <Div col="12" mb="0.625rem">
@@ -47,6 +48,14 @@ const OrderSummary = ({
           {shipping === 0 ? 'Free' : `Rs. ${shipping}`}
         </Span>
       </Text>
+      {discount > 0 && (
+        <Text color="#6e6e6e">
+          Discount
+          <Span float="right" color={Theme.colors.text}>
+            Rs. {-formatAmount(discount)}
+          </Span>
+        </Text>
+      )}
       <Text color="#6e6e6e" mb="0" fontSize="2rem" className={styles.totalWrapper} fontFamily="light">
         Total
         <Span float="right" color={Theme.colors.text} mt="10px" fontSize="1.25rem">
@@ -65,7 +74,7 @@ const OrderSummary = ({
           height="42px"
           mt="0"
           fontFamily="Light"
-          fontSize="0.875rem"
+          fontSize="1.125rem"
           ls="1px"
           onClick={onClick}
           hide={hidebutton}
@@ -85,7 +94,8 @@ OrderSummary.defaultProps = {
   itemsCount: 0,
   isSubmitted: false,
   outOfStockList: [],
-  disabled: false
+  disabled: false,
+  discount: 0
 };
 
 OrderSummary.propTypes = {
@@ -99,7 +109,8 @@ OrderSummary.propTypes = {
   itemsCount: PropTypes.number,
   isSubmitted: PropTypes.bool,
   outOfStockList: PropTypes.array,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  discount: PropTypes.number
 };
 
 export default OrderSummary;

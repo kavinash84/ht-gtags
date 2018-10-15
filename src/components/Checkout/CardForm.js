@@ -118,7 +118,7 @@ const CardForm = ({
     </Div>
     <Div col="12" mb="0" p="0">
       <Text mt="1rem" fontSize="0.875rem" color="rgba(0,0,0,0.5)">
-        International card also accepted.
+        International cards are also accepted.
       </Text>
     </Div>
   </Div>
@@ -139,7 +139,4 @@ CardForm.propTypes = {
   cardType: PropTypes.string,
   padding: PropTypes.string
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CardForm);
+export default connect(mapStateToProps, mapDispatchToProps)(CardForm);

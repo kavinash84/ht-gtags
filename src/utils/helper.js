@@ -252,7 +252,7 @@ export const formatProductURL = (name, sku) => {
 export const filterCategoryDetails = data => data.filter(item => item !== null);
 
 export const checkRedirection = path => {
-  const pattern = /^\/(login|signup)\/$/;
+  const pattern = /^\/(login|signup|forgot-password)/;
   if (pattern.test(path)) return '/';
   return path;
 };

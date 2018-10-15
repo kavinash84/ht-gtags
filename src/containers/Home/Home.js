@@ -87,13 +87,9 @@ export default class Home extends Component {
               onClick={this.handleRibbon}
               url={offerStrip.url_key}
             />
-          )}
-          <ReloadNotification
-            title="New version available"
-            showRibbon
-            onClick={this.handleRibbon}
-          />
-          */}
+          )} */}
+          {/* <ReloadNotification title="A new version available." showRibbon onClick={this.handleRibbon} /> */}
+
           <Menu />
           <MainSlider data={banners} />
           <Usp />

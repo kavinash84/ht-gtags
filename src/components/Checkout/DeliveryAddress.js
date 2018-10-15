@@ -144,22 +144,13 @@ class DeliveryAddress extends Component {
       history.push('/checkout/payment-options');
     }
   }
-  onOpenLoginModal = () => {
-    const { history, location } = this.props;
-    history.push(`?redirect=${location.pathname}`);
-    this.setState({ openLogin: true });
-  };
-  onCloseLoginModal = () => {
-    const { history } = this.props;
-    history.goBack();
-    this.setState({ openLogin: false });
+  handleLoginModal = () => {
+    this.setState({ openLogin: !this.state.openLogin });
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    const {
-      address: { shipping, billing, shippingIsBilling }
-    } = this.props;
+    const { address: { shipping, billing, shippingIsBilling } } = this.props;
     const { dispatch } = this.context.store;
     const { isLoggedIn } = this.props;
     const { addressform } = this.state;
@@ -262,14 +253,14 @@ class DeliveryAddress extends Component {
                     fontSize="1rem"
                     p="0 0.625rem"
                     color={Theme.colors.primary}
-                    onClick={this.onOpenLoginModal}
+                    onClick={this.handleLoginModal}
                     lh="1"
                   >
                     Login
                   </Button>
                   <ResponsiveModal
                     classNames={{ modal: 'loginModal' }}
-                    onCloseModal={this.onCloseLoginModal}
+                    onCloseModal={this.handleLoginModal}
                     open={this.state.openLogin}
                   >
                     <LoginModal />
@@ -359,6 +350,7 @@ class DeliveryAddress extends Component {
                         height="42px"
                         mt="0.5rem"
                         disabled={loading}
+                        fontSize="1.125rem"
                       >
                         {loading ? 'Loading...' : 'Save and Continue'}
                       </Button>
@@ -375,6 +367,7 @@ class DeliveryAddress extends Component {
                 totalCart={summary.total}
                 onClick={() => null}
                 itemsCount={summary.items_count}
+                discount={summary.coupon_discount}
                 hidebutton
               />
               <PaymentMethods />
@@ -388,7 +381,7 @@ class DeliveryAddress extends Component {
 }
 DeliveryAddress.defaultProps = {
   history: {},
-  location: {},
+  // location: {},
   addresses: [],
   currentaddressindex: -1,
   userEmail: '',
@@ -401,7 +394,7 @@ DeliveryAddress.propTypes = {
   history: PropTypes.object,
   addresses: PropTypes.array,
   nextstep: PropTypes.bool.isRequired,
-  location: PropTypes.object,
+  // location: PropTypes.object,
   currentaddressindex: PropTypes.number,
   address: PropTypes.object.isRequired,
   shippingIsBilling: PropTypes.bool.isRequired,
@@ -414,7 +407,4 @@ DeliveryAddress.propTypes = {
   cart: PropTypes.object.isRequired,
   summary: PropTypes.object
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DeliveryAddress);
+export default connect(mapStateToProps, mapDispatchToProps)(DeliveryAddress);

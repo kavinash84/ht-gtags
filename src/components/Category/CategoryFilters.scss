@@ -12,7 +12,10 @@
     button {
       float: right;
       img {
-        transition: 1s all ease;
+        transition: 0.5s all ease;
+      }
+      .open {
+        transform: rotate(90deg);
       }
     }
     ul {
@@ -21,5 +24,13 @@
       clear: both;
       padding-top: 1px;
     }
+  }
+}
+.categoryLevel3 {
+  max-height: 100vh;
+  transition: 0.75s max-height ease;
+  overflow: hidden;
+  &.hide {
+    max-height: 0;
   }
 }

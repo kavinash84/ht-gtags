@@ -98,15 +98,8 @@ class ProductDetails extends React.Component {
       });
     }
   }
-  onOpenLoginModal = () => {
-    const { history } = this.props;
-    history.push(`?redirect=${history.location.pathname}`);
-    this.setState({ openLogin: true });
-  };
-  onCloseLoginModal = () => {
-    const { history } = this.props;
-    history.goBack();
-    this.setState({ openLogin: false });
+  handleLoginModal = () => {
+    this.setState({ openLogin: !this.state.openLogin });
   };
   addReview = (sku, data) => {
     const { dispatch } = this.context.store;
@@ -160,7 +153,7 @@ class ProductDetails extends React.Component {
     const { main_material: material, color, category_type: productType } = gattributes;
     return (
       <Div type="block">
-        <Section p="0" mb="0" className={styles.pdpWrapper}>
+        <Section p="0" pb="2rem" mb="0" className={styles.pdpWrapper}>
           <Helmet>
             <title>{productPageTitle(name)}</title>
             <meta name="keywords" content={productMetaKeywords(productType, material)} />
@@ -198,7 +191,7 @@ class ProductDetails extends React.Component {
                           wishlistToggle,
                           isLoggedIn,
                           history,
-                          this.onOpenLoginModal,
+                          this.handleLoginModal,
                           addToWaitList
                         )}
                         isWishList={isInWishList(wishList, sku)}
@@ -305,7 +298,7 @@ class ProductDetails extends React.Component {
 
         <ResponsiveModal
           classNames={{ modal: 'loginModal' }}
-          onCloseModal={this.onCloseLoginModal}
+          onCloseModal={this.handleLoginModal}
           open={this.state.openLogin}
         >
           <LoginModal />
@@ -345,7 +338,4 @@ ProductDetails.propTypes = {
   breadcrumbs: PropTypes.array.isRequired,
   gattributes: PropTypes.object.isRequired
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

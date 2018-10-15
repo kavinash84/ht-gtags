@@ -230,6 +230,7 @@ class ReviewOrder extends Component {
                   loadingnextstep={submitting}
                   isSubmitted={submitted}
                   itemsCount={summary.items_count}
+                  discount={summary.coupon_discount}
                   disabled={undelivered.length > 0 || outOfStockList.length > 0}
                   onClick={nextStep(submitDetails, sessionId, paymentDetails, cardType)}
                 />
