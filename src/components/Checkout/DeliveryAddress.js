@@ -150,9 +150,7 @@ class DeliveryAddress extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const {
-      address: { shipping, billing, shippingIsBilling }
-    } = this.props;
+    const { address: { shipping, billing, shippingIsBilling } } = this.props;
     const { dispatch } = this.context.store;
     const { isLoggedIn } = this.props;
     const { addressform } = this.state;
@@ -352,6 +350,7 @@ class DeliveryAddress extends Component {
                         height="42px"
                         mt="0.5rem"
                         disabled={loading}
+                        fontSize="1.125rem"
                       >
                         {loading ? 'Loading...' : 'Save and Continue'}
                       </Button>
@@ -408,7 +407,4 @@ DeliveryAddress.propTypes = {
   cart: PropTypes.object.isRequired,
   summary: PropTypes.object
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DeliveryAddress);
+export default connect(mapStateToProps, mapDispatchToProps)(DeliveryAddress);

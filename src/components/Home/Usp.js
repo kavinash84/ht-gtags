@@ -19,7 +19,7 @@ const Usp = () => (
     <Row>
       <Div display="flexEqual" ta="center" className={styles.uspImg}>
         <Img src={usp1Icon} height="60px" width="auto" m="auto" alt="Free Delivery" />
-        <Heading ta="center" color="uspTitle" fontSize="1rem" fontFamily="light" mb="0">
+        <Heading ta="center" color="uspTitle" fontSize="0.875rem" fontFamily="light" mb="0">
           Free Delivery
         </Heading>
         <Text ta="center" color="#7c7c7b" fontSize="0.75rem" fontFamily="light" mb="0" mt="0">
@@ -28,25 +28,25 @@ const Usp = () => (
       </Div>
       <Div display="flexEqual" ta="center" className={styles.uspImg}>
         <Img src={usp2Icon} height="60px" width="auto" m="auto" alt="Assured Quality" />
-        <Heading ta="center" color="uspTitle" fontSize="1rem" fontFamily="light" mb="0">
+        <Heading ta="center" color="uspTitle" fontSize="0.875rem" fontFamily="light" mb="0">
           Assured Quality
         </Heading>
       </Div>
       <Div display="flexEqual" ta="center" className={styles.uspImg}>
         <Img src={usp3Icon} height="60px" width="auto" m="auto" alt="Easy Finance" />
-        <Heading ta="center" color="uspTitle" fontSize="1rem" fontFamily="light" mb="0">
+        <Heading ta="center" color="uspTitle" fontSize="0.875rem" fontFamily="light" mb="0">
           Easy Finance
         </Heading>
       </Div>
       <Div display="flexEqual" ta="center" className={styles.uspImg}>
         <Img src={usp4Icon} height="60px" width="auto" m="auto" alt="1 Year Warranty*" />
-        <Heading ta="center" color="uspTitle" fontSize="1rem" fontFamily="light" mb="0">
+        <Heading ta="center" color="uspTitle" fontSize="0.875rem" fontFamily="light" mb="0">
           1 Year Warranty*
         </Heading>
       </Div>
       <Div display="flexEqual" ta="center" className={styles.uspImg}>
         <Img src={usp5Icon} height="60px" width="auto" m="auto" alt="Free Assembly" />
-        <Heading ta="center" color="uspTitle" fontSize="1rem" fontFamily="light" mb="0">
+        <Heading ta="center" color="uspTitle" fontSize="0.875rem" fontFamily="light" mb="0">
           Free Assembly
         </Heading>
         <Text ta="center" color="#7c7c7b" fontSize="0.75rem" fontFamily="light" mb="0" mt="0">
@@ -55,7 +55,7 @@ const Usp = () => (
       </Div>
       <Div display="flexEqual" ta="center" className={styles.uspImg}>
         <Img src={usp6Icon} height="60px" width="auto" m="auto" alt="Free Service Support" />
-        <Heading ta="center" color="uspTitle" fontSize="1rem" fontFamily="light" mb="0">
+        <Heading ta="center" color="uspTitle" fontSize="0.875rem" fontFamily="light" mb="0">
           Lifetime Service
         </Heading>
       </Div>

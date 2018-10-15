@@ -130,7 +130,7 @@ class PaymentOptions extends Component {
                         </Div>
                       )}
                       {selectedGateway === 'NetBanking' && (
-                        <Div col="12" className={styles.paymentBlock}>
+                        <Div col="12" className={styles.paymentBlock} p="3rem 2rem">
                           <Div col="12" mb="1rem">
                             <Label htmlFor="bankOptions1" color="textLight">
                               Choose From Preferred Bank
@@ -196,7 +196,7 @@ class PaymentOptions extends Component {
                       )}
                       {WalletData &&
                         selectedGateway === 'Wallet' && (
-                        <Div col="12" className={styles.paymentBlock}>
+                        <Div col="12" className={styles.paymentBlock} p="3rem 2rem">
                           <Div col="12" mb="1rem">
                             <Label htmlFor="bankOptions1" color="textLight">
                                 Select From your preferred Wallet
@@ -257,7 +257,7 @@ class PaymentOptions extends Component {
                       btnType="primary"
                       fontFamily="regular"
                       height="42px"
-                      fontSize="1rem"
+                      fontSize="1.125rem"
                       lh="1"
                       borderRadius="0"
                       onClick={nextStep(history)}
@@ -299,7 +299,4 @@ PaymentOptions.propTypes = {
   submitting: PropTypes.bool
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PaymentOptions);
+export default connect(mapStateToProps, mapDispatchToProps)(PaymentOptions);

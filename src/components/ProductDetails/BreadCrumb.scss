@@ -1,7 +1,7 @@
 @import "../../theme/_variables";
 @import "../../theme/_mixins";
 
-.breadCrumbList {
+.breadCrumbPdp {
   padding: 0;
   margin: 0;
   li {
@@ -15,13 +15,13 @@
       padding-left: 0;
     }
     &:after {
-      content: '>';
+      content: url('../../../static/next.svg');
       position: absolute;
-      right: -10px;
+      right: -13px;
       font-size: 14px;
       height: 14px;
       line-height: 1.2;
-      top: 2px;
+      top: 3px;
     }
     &:last-child {
       &:after {
@@ -30,7 +30,7 @@
     }
     a {
       color: rgba(7, 7, 7, 0.75);
-      font-size: 0.75em;
+      font-size: 0.75rem;
       //text-transform: uppercase;
     }
   }
