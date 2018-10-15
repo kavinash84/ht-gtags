@@ -107,6 +107,21 @@ app.use((req, res, next) => {
 // parsing the request bodys
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+/* check cookie for testing */
+app.use('/', async (req, res, next) => {
+  try {
+    const cookies = getCookie(req.header('cookie'), 'TEST_HT');
+    console.log(cookies);
+    if (cookies) {
+      return next();
+    }
+    return res.redirect(301, 'https://s3.ap-south-1.amazonaws.com/hometown-live-v1/index.html');
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 app.use('/checkout/finish/payment/', async (req, res) => {
   try {
     const cookies = getCookie(req.header('cookie'), 'persist:root');
