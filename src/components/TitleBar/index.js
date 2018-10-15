@@ -22,7 +22,7 @@ const TitleBar = ({ title, productCount }) => (
               </Link>
             </li>
             <li itemProp="itemListElement" itemType="http://schema.org/ListItem" itemScope>
-              <Link itemProp="item" to="/">
+              <Link itemProp="item" to="/" onClick={e => e.preventDefault()}>
                 <span itemProp="name">{title}</span>
                 <meta itemProp="position" content="2" />
               </Link>
