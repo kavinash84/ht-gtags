@@ -201,7 +201,8 @@ class Listing extends React.Component {
                     price={item.netprice}
                     cutprice={item.cutprice}
                     saving={item.saving}
-                    image={getProductImage(item.images && item.images.length > 0 && item.images[0].path)}
+                    /* eslint-disable max-len */
+                    image={getProductImage(item.images && item.images.length > 0 && item.images.filter(i => i.main === '1')[0].path)}
                     sku={item.data.sku}
                     simpleSku={Object.keys(item.data.simples)[0]}
                     onClick={onClickWishList(
