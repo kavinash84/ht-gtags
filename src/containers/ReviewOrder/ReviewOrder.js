@@ -18,6 +18,7 @@ export default class ReviewOrderContainer extends Component {
     }
   }
   render() {
+    const { history } = this.props;
     return (
       <Section p="0rem" mb="0">
         <Helmet title="Review Order">
@@ -29,7 +30,7 @@ export default class ReviewOrderContainer extends Component {
         </Helmet>
         <div className="wrapper">
           <Menu />
-          <ReviewOrder />
+          <ReviewOrder history={history} />
         </div>
       </Section>
     );
