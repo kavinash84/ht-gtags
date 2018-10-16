@@ -175,7 +175,7 @@ app.get(/\/(.*)-(\d+).html/, async (req, res, next) => {
 /* eslint-disable max-len */
 /* Category url redirection */
 app.get(
-  /^\/(furniture|home-decor|homefurnishings|tableware|kitchenware|home-improvement|clearance-sale-offer|clearance_sale|design|design-inspiration|gifts|appliances|lighting|solidwood|test_bed|exclusive|invisible|luggage-bags)\//,
+  /^\/(all-products|furniture|home-decor|homefurnishings|tableware|kitchenware|home-improvement|clearance-sale-offer|clearance_sale|design|design-inspiration|gifts|appliances|lighting|solidwood|test_bed|exclusive|invisible|luggage-bags)\//,
   async (req, res, next) => {
     const data = require('./data/category-urls.json');
     const requestURL = redirectionHelper(req.url);
