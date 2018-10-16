@@ -77,7 +77,7 @@ export default class PlanYourKitchen extends Component {
                       </Text>
                       <ul className="collposeBlock">
                         {item.items.map((list, index) => (
-                          <li key={String(index)}>
+                          <li key={String(index)} className="collopseHeading">
                             <Button
                               btnType="custom"
                               bc="transparent"
