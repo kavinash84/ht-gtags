@@ -32,4 +32,4 @@ Noindex: http://alice-qa02.hometown.in/
 Noindex: http://alice-staging.hometown.in/
 
 
-sitemap: https://www.hometown.in/sitemap_index.xml
+sitemap: https://www.hometown.in/sitemap/sitemap_index.xml

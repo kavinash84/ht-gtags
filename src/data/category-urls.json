@@ -1,4 +1,6 @@
 {
+	"/all-products/": "/",
+	"/kitchenware/kitchen-storage/":"/kitchenware/food-storage/",
 	"/furniture/living-room/": "/furniture/living-room-furniture/",
 	"/furniture/sofa-sets/": "/furniture/living-room-furniture/sofas/",
 	"/furniture/sofas-sectional/": "/furniture/living-room-furniture/sofas/",
@@ -106,7 +108,7 @@
 	"/home-decor/showpieces/": "/home-decor/idols-figurines/",
 	"/home-decor/garden-patio/": "/home-decor/garden/",
 	"/home-decor/pots-planters/": "/home-decor/garden/pots-planters/",
-	"/home-decor/Lightings/": "/home-decor/lamps-lighting/",
+	"/home-decor/lightings/": "/home-decor/lamps-lighting/",
 	"/home-decor/tea-light-candles/": "/home-decor/candles-fragrances/candles/",
 	"/home-decor/candle-stands/": "/home-decor/candles-fragrances/candle-holders/",
 	"/home-decor/votives-jars/": "/home-decor/candles-fragrances/candle-holders/",
@@ -189,7 +191,7 @@
 	"/homefurnishings/neck-rest-pillows/": "/home-furnishings/pillows/",
 	"/homefurnishings/bed-in-a-bag/": "/home-furnishings/bedding/bed-in-a-bag/",
 	"/homefurnishings/duvet-covers/": "/home-furnishings/bedding/duvets/",
-	"/homefurnishings/Offer/": "/home-furnishings/new-arrivals/",
+	"/homefurnishings/offer/": "/home-furnishings/new-arrivals/",
 	"/tableware/tableware-drinkware/": "/tableware/drinkware/",
 	"/tableware/mason-jars/": "/tableware/drinkware/mason-jars/",
 	"/tableware/barware-drinkware/": "/tableware/drinkware/bar-glassware/",
@@ -353,10 +355,10 @@
 	"/lighting/surface-lights/": "/home-decor/lamps-lighting/",
 	"/lighting/outdoor-lights/surface-lights/spot-lights/": "/home-decor/lamps-lighting/",
 	"/lighting/outdoor-lights/surface-lights/spike-lights/": "/home-decor/lamps-lighting/",
-	"/lighting/Outdoor-wall-lights/": "/home-decor/lamps-lighting/",
-	"/lighting/outdoor-lights/Outdoor-wall-lights/outdoor-upward-mount/": "/home-decor/lamps-lighting/",
-	"/lighting/outdoor-lights/Outdoor-wall-lights/outdoor-downward-mount/": "/home-decor/lamps-lighting/",
-	"/lighting/outdoor-lights/Outdoor-wall-lights/pillar-post-lights/": "/home-decor/lamps-lighting/",
+	"/lighting/outdoor-wall-lights/": "/home-decor/lamps-lighting/",
+	"/lighting/outdoor-lights/outdoor-wall-lights/outdoor-upward-mount/": "/home-decor/lamps-lighting/",
+	"/lighting/outdoor-lights/outdoor-wall-lights/outdoor-downward-mount/": "/home-decor/lamps-lighting/",
+	"/lighting/outdoor-lights/outdoor-wall-lights/pillar-post-lights/": "/home-decor/lamps-lighting/",
 	"/solidwood/": "/furniture/",
 	"/solidwood/living-room-sw/": "/furniture/living-room-furniture/",
 	"/solidwood/sw-seating/": "/furniture/",
@@ -403,6 +405,5 @@
 	"/invisible/": "/",
 	"/luggage-bags/backpacks/": "/",
 	"/luggage-bags/handbags/": "/",
-	"/categories/": "/sitemap.html",
-	"/all-products/": "/"
+	"/categories/": "/sitemap.html"
 }

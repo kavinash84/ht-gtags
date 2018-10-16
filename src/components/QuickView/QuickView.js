@@ -168,7 +168,7 @@ export default class QuickView extends Component {
                 &#8249;
               </button>
               <div className={styles.imageContainer}>
-                <img src={images[currentImage] && images[currentImage].zoom_image} alt="" />
+                <img src={images && images[currentImage] && images[currentImage].zoom_image} alt="" />
               </div>
               <button name="next" className={styles.next} onClick={this.changeImage}>
                 &#8250;
@@ -240,19 +240,21 @@ export default class QuickView extends Component {
               <AddToCart simpleSku={simpleSku} sku={sku} isSoldOut={soldOut} />
             </Div>
             <Div className={`${styles.thumb} thumbCarousel`}>
-              <SlickSlider settings={adjustSlides(images.length)} ref={this.quickViewSlider}>
-                {images.map((image, index) => (
-                  <div key={String(index)}>
-                    <button
-                      className={`${styles.thumbBtn} ${index === currentImage && styles.active}`}
-                      onClick={this.setImage}
-                      id={index}
-                    >
-                      <img className={styles.sliderImage} src={image && image.zoom_image} alt={name} id={index} />
-                    </button>
-                  </div>
-                ))}
-              </SlickSlider>
+              {images && (
+                <SlickSlider settings={adjustSlides(images.length)} ref={this.quickViewSlider}>
+                  {images.map((image, index) => (
+                    <div key={String(index)}>
+                      <button
+                        className={`${styles.thumbBtn} ${index === currentImage && styles.active}`}
+                        onClick={this.setImage}
+                        id={index}
+                      >
+                        <img className={styles.sliderImage} src={image && image.zoom_image} alt={name} id={index} />
+                      </button>
+                    </div>
+                  ))}
+                </SlickSlider>
+              )}
             </Div>
           </Div>
         </Row>

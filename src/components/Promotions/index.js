@@ -10,18 +10,18 @@ const mapStateToProps = ({ services }) => ({
 });
 
 /* eslint-disable react/no-danger */
-const Promotions = ({ results }) => (
+const Promotions = ({ data }) => (
   <Section display="block" p="0" mb="0" height="auto">
     <TitleBar title="Promotions" />
     <Container type="container" pr="0.5rem" pl="0.5rem">
-      {results.items &&
-        results.items.text && (
+      {data.items &&
+        data.items.text && (
         <div
           color="rgba(0,0,0,0.5)"
           fontSize="0.875rem"
           mb="1rem"
           ml="2.125rem"
-          dangerouslySetInnerHTML={{ __html: results.items.text }}
+          dangerouslySetInnerHTML={{ __html: data.items.text }}
         />
       )}
     </Container>
@@ -29,10 +29,10 @@ const Promotions = ({ results }) => (
 );
 
 Promotions.defaultProps = {
-  results: {}
+  data: {}
 };
 
 Promotions.propTypes = {
-  results: PropTypes.object
+  data: PropTypes.object
 };
 export default connect(mapStateToProps)(Promotions);

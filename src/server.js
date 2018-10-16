@@ -117,7 +117,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 /* check cookie for testing */
-app.use('/', async (req, res, next) => {
+/* app.use('/', async (req, res, next) => {
   try {
     const cookies = getCookie(req.header('cookie'), 'TEST_HT');
     console.log(cookies);
@@ -128,7 +128,7 @@ app.use('/', async (req, res, next) => {
   } catch (error) {
     console.log(error);
   }
-});
+}); */
 
 app.use('/checkout/finish/payment/', async (req, res) => {
   try {
@@ -175,7 +175,7 @@ app.get(/\/(.*)-(\d+).html/, async (req, res, next) => {
 /* eslint-disable max-len */
 /* Category url redirection */
 app.get(
-  /^\/(furniture|home-decor|homefurnishings|tableware|kitchenware|home-improvement|clearance-sale-offer|clearance_sale|design|design-inspiration|gifts|appliances|lighting|solidwood|test_bed|exclusive|invisible|luggage-bags)\//,
+  /^\/(all-products|furniture|home-decor|homefurnishings|tableware|kitchenware|home-improvement|clearance-sale-offer|clearance_sale|design|design-inspiration|gifts|appliances|lighting|solidwood|test_bed|exclusive|invisible|luggage-bags)\//,
   async (req, res, next) => {
     const data = require('./data/category-urls.json');
     const requestURL = redirectionHelper(req.url);
