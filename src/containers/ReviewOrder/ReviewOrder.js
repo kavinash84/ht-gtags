@@ -13,9 +13,8 @@ import Section from 'hometown-components/lib/Section';
 export default class ReviewOrderContainer extends Component {
   componentDidMount() {
     const { paymentDetails, history } = this.props;
-    console.log(history);
     if (validatePaymentDetails(paymentDetails)) {
-      if (window) window.location.href = '/checkout/cart';
+      history.push('/checkout/cart');
     }
   }
   render() {
