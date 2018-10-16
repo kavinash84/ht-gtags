@@ -20,7 +20,13 @@ export default class ReviewOrderContainer extends Component {
   render() {
     return (
       <Section p="0rem" mb="0">
-        <Helmet title="Review Order" />
+        <Helmet title="Review Order">
+          <meta httpEquiv="cache-control" content="max-age=0" />
+          <meta httpEquiv="cache-control" content="no-store" />
+          <meta httpEquiv="expires" content="-1" />
+          <meta httpEquiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+          <meta httpEquiv="pragma" content="no-cache" />
+        </Helmet>
         <div className="wrapper">
           <Menu />
           <ReviewOrder />
