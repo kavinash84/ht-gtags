@@ -57,7 +57,12 @@ export const formFilterLink2 = (key, name, b64, category, value, selected, urlqu
   };
   if (b64) {
     [b64] = b64.split('&page=');
-    obj64 = JSON.parse(atob(b64));
+    try {
+      obj64 = JSON.parse(atob(b64));
+    } catch (e) {
+      console.log(obj64);
+      return obj64.category;
+    }
   }
   if (name === 'Category') {
     let query;
@@ -170,7 +175,21 @@ export const getParamsDetailFromLink = (query, filter) => {
     };
   }
   [filter] = filter.split('&page=');
-  const x = JSON.parse(atob(filter));
+  let x;
+  try {
+    x = JSON.parse(atob(filter));
+  } catch (e) {
+    return {
+      modifiedQuery,
+      urlquery: '',
+      price: '',
+      discount: '',
+      material: '',
+      sortby: '',
+      sortBy: '',
+      pageno: ''
+    };
+  }
 
   if (x.colors) {
     const colorLink = `color${x.colors}`;
