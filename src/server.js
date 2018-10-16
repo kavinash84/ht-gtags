@@ -117,7 +117,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 /* check cookie for testing */
-app.use('/', async (req, res, next) => {
+/* app.use('/', async (req, res, next) => {
   try {
     const cookies = getCookie(req.header('cookie'), 'TEST_HT');
     console.log(cookies);
@@ -128,7 +128,7 @@ app.use('/', async (req, res, next) => {
   } catch (error) {
     console.log(error);
   }
-});
+}); */
 
 app.use('/checkout/finish/payment/', async (req, res) => {
   try {
