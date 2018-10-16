@@ -26,7 +26,6 @@ import BreadCrumb from './BreadCrumb';
 const sortByList = require('data/sortby');
 
 const getProductImage = images => {
-  console.log(images);
   const image = images && images.length > 0 && (images.filter(i => i.main === '1')[0] || images[0]);
   if (!image || !image.path) return '';
   return `${image.path && image.path.split('-')[0]}-product_500.jpg`;
