@@ -37,10 +37,11 @@ export default class ReviewOrderContainer extends Component {
 }
 
 ReviewOrderContainer.defaultProps = {
-  history: {}
+  history: {},
+  paymentDetails: {}
 };
 
 ReviewOrderContainer.propTypes = {
-  paymentDetails: PropTypes.object.isRequired,
+  paymentDetails: PropTypes.object,
   history: PropTypes.object
 };
