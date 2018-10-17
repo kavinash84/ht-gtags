@@ -41,7 +41,7 @@ export default class Category extends Component {
         </Helmet>
         <div className="wrapper">
           <Menu />
-          <MainSlider data={category.main} />
+          {category && <MainSlider data={category.main} />}
           <Container pr="0" pl="0">
             <Row display="block" pt="2.25rem" ml="0" mr="0">
               <Div col={2}>
