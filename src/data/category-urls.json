@@ -405,5 +405,7 @@
 	"/invisible/": "/",
 	"/luggage-bags/backpacks/": "/",
 	"/luggage-bags/handbags/": "/",
-	"/categories/": "/sitemap.html"
+	"/categories/": "/",
+	"/categories/furniture-products/": "/",
+	"/categories/gifts-products/": "/"
 }
