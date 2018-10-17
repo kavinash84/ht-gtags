@@ -11,6 +11,7 @@
   .title {
     @include font-size(1rem);
     margin-top: 0.625rem;
+    text-align: center;
   }
   img {
     margin-bottom: 5px;
