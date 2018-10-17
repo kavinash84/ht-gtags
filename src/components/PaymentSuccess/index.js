@@ -31,7 +31,7 @@ const PaymentSuccess = ({
   loaded,
   error
 }) => {
-  if (loaded && !error) {
+  if (loaded && !error && shipping_address) {
     const {
       first_name, last_name, address1, city, postcode, state
     } = shipping_address;
