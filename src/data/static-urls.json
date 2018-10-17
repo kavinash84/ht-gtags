@@ -19,5 +19,6 @@
 	"/test2/":	"/",
 	"/diwali/gifts/":	"/",
 	"/test/":	"/",
-	"/customer/order/index": "/"
+	"/customer/order/index": "/",
+	"/brands/": "/"
 }
