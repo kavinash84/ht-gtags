@@ -18,5 +18,6 @@
 	"/old_ff_faq/":	"/",
 	"/test2/":	"/",
 	"/diwali/gifts/":	"/",
-	"/test/":	"/"
+	"/test/":	"/",
+	"/customer/order/index": "/"
 }

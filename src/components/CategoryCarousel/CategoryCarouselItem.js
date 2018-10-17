@@ -12,7 +12,7 @@ const CategoryItem = ({ image, name, url }) => (
       <ImageShimmer src={image} height="283px">
         {imageURL => <img src={imageURL} alt={name} />}
       </ImageShimmer>
-      <div className={styles.content}>
+      <div className={styles.content} ta="center">
         <p className={styles.title}>{name}</p>
       </div>
     </Link>

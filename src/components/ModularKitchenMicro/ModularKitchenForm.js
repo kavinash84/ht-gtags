@@ -56,9 +56,7 @@ export default class ModularKitchen extends Component {
   }
 
   onChangeName = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     const checkError = isEmpty(value);
     this.setState({
       name: value,
@@ -66,9 +64,7 @@ export default class ModularKitchen extends Component {
     });
   };
   onChangeEmail = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     const checkError = !validateEmail(value);
     this.setState({
       email: value,
@@ -76,9 +72,7 @@ export default class ModularKitchen extends Component {
     });
   };
   onChangePhone = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     const checkError = !validateMobile(value);
     if (!allowNChar(value, 10) || (!allowTypeOf(value, 'number') && value.length > 0)) {
       return;
@@ -91,9 +85,7 @@ export default class ModularKitchen extends Component {
     });
   };
   onChangeAddress = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     const checkError = isEmpty(value);
     this.setState({
       address: value,
@@ -101,9 +93,7 @@ export default class ModularKitchen extends Component {
     });
   };
   onChangePincode = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     const checkError = validatePincode(value);
     if (!allowNChar(value, 6) || (!allowTypeOf(value, 'number') && value.length > 0)) {
       // Dispatch the load state and city api
@@ -119,9 +109,7 @@ export default class ModularKitchen extends Component {
     });
   };
   onChangeService = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     this.setState({
       service: value
     });

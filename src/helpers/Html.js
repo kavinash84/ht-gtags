@@ -129,7 +129,7 @@ export default class Html extends Component {
                 {`
                 Raven.config('https://e072a281afc44732a8976d0615f0e310@sentry.io/1254610', {
                 release: '${version.replace(/\./g, '-')}',
-                environment: 'development-test',
+                environment: 'production',
                 }).install()
               `}
               </script>

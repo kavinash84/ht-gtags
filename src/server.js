@@ -165,8 +165,8 @@ app.get(/\/color-/, (req, res) => {
 /* Redirection from urls */
 app.get(/\/(.*)-(\d+).html/, async (req, res, next) => {
   const data = require('./data/pdp-urls.json');
-  if (data && data[req.url.toLowerCase()]) {
-    const redirect = data[req.url.toLowerCase()];
+  if (data && data[req.path.toLowerCase()]) {
+    const redirect = data[req.path.toLowerCase()];
     return res.redirect(301, redirect || '/');
   }
   return next();
@@ -178,7 +178,7 @@ app.get(
   /^\/(all-products|furniture|home-decor|homefurnishings|tableware|kitchenware|home-improvement|clearance-sale-offer|clearance_sale|design|design-inspiration|gifts|appliances|lighting|solidwood|test_bed|exclusive|invisible|luggage-bags)\//,
   async (req, res, next) => {
     const data = require('./data/category-urls.json');
-    const requestURL = redirectionHelper(req.url);
+    const requestURL = redirectionHelper(req.path);
     if (data && data[requestURL.toLowerCase()]) {
       const redirect = data[requestURL.toLowerCase()];
       return res.redirect(301, redirect || '/');
@@ -191,7 +191,7 @@ app.get(
 /* static pages redirection */
 app.get(/^\/(.*)\/$/, async (req, res, next) => {
   const data = require('./data/static-urls.json');
-  const requestURL = redirectionHelper(req.url);
+  const requestURL = redirectionHelper(req.path);
   if (data && data[requestURL.toLowerCase()]) {
     const redirect = data[requestURL.toLowerCase()];
     return res.redirect(301, redirect || '/');
