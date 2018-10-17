@@ -1,5 +1,6 @@
 {
 	"/all-products/": "/",
+	"/decor/": "/home-decor",
 	"/kitchenware/kitchen-storage/":"/kitchenware/food-storage/",
 	"/furniture/living-room/": "/furniture/living-room-furniture/",
 	"/furniture/sofa-sets/": "/furniture/living-room-furniture/sofas/",

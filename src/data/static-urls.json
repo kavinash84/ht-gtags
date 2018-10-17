@@ -20,5 +20,16 @@
 	"/diwali/gifts/":	"/",
 	"/test/":	"/",
 	"/customer/order/index": "/",
-	"/brands/": "/"
+	"/brands/": "/",
+	"/servewell/": "/",
+	"/bohemia/": "/",
+	"/hometown/": "/",
+	"/bergner/": "/",
+	"/curators/": "/",
+	"/rosemoore/": "/",
+	"/borosil/": "/",
+	"/dealoftheday/": "/",
+	"/wonderchef/": "/",
+	"/milton": "/",
+	"/tangerine/": "/"
 }
