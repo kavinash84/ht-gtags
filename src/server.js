@@ -78,6 +78,15 @@ app.get('/dist/*', (req, res, next) => {
   next();
 });
 
+/* check letter case and redirect */
+app.get('*', (req, res, next) => {
+  if (req.path && req.path !== req.path.toLowerCase()) {
+    const redirect = req.path.toLowerCase();
+    return res.redirect(301, redirect);
+  }
+  return next();
+});
+
 app
   .use(morgan('dev', { skip: req => req.originalUrl.indexOf('/ws') !== -1 }))
   .use(cookieParser())
