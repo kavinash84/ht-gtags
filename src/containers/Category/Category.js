@@ -49,7 +49,8 @@ export default class Category extends Component {
                 <CategoryFilters data={getSubMenu(menu, currentCategory)} />
               </Div>
               <Div col={10} pl="3rem">
-                {category.sections &&
+                {category &&
+                  category.sections &&
                   category.sections.map((cat, index) => (
                     <div key={String(index)}>{CommonLayout(cat.component, cat.title, cat.data, cat.grid)}</div>
                   ))}
