@@ -48,9 +48,7 @@ export default class SignupFormContainer extends Component {
     };
   }
   onChangeEmail = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     const checkError = !validateEmail(value);
     this.setState({
       email: value,
@@ -58,9 +56,7 @@ export default class SignupFormContainer extends Component {
     });
   };
   onChangePhone = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     const checkError = !validateMobile(value);
     if (!allowNChar(value, 10) || (!allowTypeOf(value, 'number') && value.length > 0)) {
       return;
@@ -73,9 +69,7 @@ export default class SignupFormContainer extends Component {
     });
   };
   onChangePassword = e => {
-    const {
-      target: { value }
-    } = e;
+    const { target: { value } } = e;
     const checkError = validatePassword(value);
     if (!allowNChar(value, 15)) {
       return;
@@ -134,7 +128,7 @@ export default class SignupFormContainer extends Component {
               Be the first!
             </Heading>
             <Text color="white" ta="center" mb="0" mt="0" fontSize="1rem">
-              to get regular updates on new product launches, exclusive previews ans specials offers.
+              to get regular updates on new product launches, exclusive previews and specials offers.
             </Text>
           </Div>
         </Row>
