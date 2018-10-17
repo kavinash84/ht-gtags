@@ -33,13 +33,15 @@ class CategoryFilterItem extends Component {
             {sub.name}
           </Label>
         </Link>
-        {sub.children && (
+        {sub &&
+          sub.children && (
           <Button p="4px 0" lh="0.5" fontSize="1.25rem" btnType="link" onClick={this.handleClick}>
             <Img src={showLessIcon} alt={show ? 'more' : 'less'} className={show ? styles.open : styles.close} />
           </Button>
         )}
         <ul className={`${styles.categoryLevel3} ${show ? '' : styles.hide}`}>
-          {sub.children &&
+          {sub &&
+            sub.children &&
             sub.children.map(sub3 => (
               <li key={sub3.id}>
                 <Label key={sub3.id} color="textLight" mt="0.625rem" mb="0.625rem" display="block" fontSize="0.875rem">
