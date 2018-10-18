@@ -41,7 +41,7 @@ export default class Category extends Component {
         </Helmet>
         <div className="wrapper">
           <Menu />
-          <MainSlider data={category.main} />
+          {category && <MainSlider data={category.main} />}
           <Container pr="0" pl="0">
             <Row display="block" pt="2.25rem" ml="0" mr="0">
               <Div col={2}>
@@ -49,7 +49,8 @@ export default class Category extends Component {
                 <CategoryFilters data={getSubMenu(menu, currentCategory)} />
               </Div>
               <Div col={10} pl="3rem">
-                {category.sections &&
+                {category &&
+                  category.sections &&
                   category.sections.map((cat, index) => (
                     <div key={String(index)}>{CommonLayout(cat.component, cat.title, cat.data, cat.grid)}</div>
                   ))}

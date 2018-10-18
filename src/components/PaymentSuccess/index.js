@@ -31,7 +31,7 @@ const PaymentSuccess = ({
   loaded,
   error
 }) => {
-  if (loaded && !error) {
+  if (loaded && !error && shipping_address) {
     const {
       first_name, last_name, address1, city, postcode, state
     } = shipping_address;
@@ -59,7 +59,7 @@ const PaymentSuccess = ({
             <Row display="block" mr="0" ml="0">
               <Div col="3" pr="1.5rem" pt="0">
                 <ShippedTo
-                  name={`${first_name} ${last_name}`}
+                  name={`${first_name || ''} ${last_name || ''}`}
                   address={address1}
                   city={city}
                   pincode={postcode}

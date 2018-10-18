@@ -78,6 +78,15 @@ app.get('/dist/*', (req, res, next) => {
   next();
 });
 
+/* check letter case and redirect */
+app.get('*', (req, res, next) => {
+  if (req.path && req.path !== req.path.toLowerCase()) {
+    const redirect = req.path.toLowerCase();
+    return res.redirect(301, redirect);
+  }
+  return next();
+});
+
 app
   .use(morgan('dev', { skip: req => req.originalUrl.indexOf('/ws') !== -1 }))
   .use(cookieParser())
@@ -175,7 +184,7 @@ app.get(/\/(.*)-(\d+).html/, async (req, res, next) => {
 /* eslint-disable max-len */
 /* Category url redirection */
 app.get(
-  /^\/(all-products|furniture|home-decor|homefurnishings|tableware|kitchenware|home-improvement|clearance-sale-offer|clearance_sale|design|design-inspiration|gifts|appliances|lighting|solidwood|test_bed|exclusive|invisible|luggage-bags)\//,
+  /^\/(all-products|catalog|categories|furniture|home-decor|homefurnishings|tableware|kitchenware|home-improvement|clearance-sale-offer|clearance_sale|design|design-inspiration|gifts|appliances|lighting|solidwood|test_bed|exclusive|invisible|luggage-bags)\//,
   async (req, res, next) => {
     const data = require('./data/category-urls.json');
     const requestURL = redirectionHelper(req.path);
@@ -315,6 +324,7 @@ app.use(async (req, res) => {
       }
       console.info('----\n==> ✅  %s is Running...', config.app.title);
       console.info('==> 💻  Open http://%s:%s in a browser to view the app.', config.host, config.port);
+      process.send('ready');
     });
   } else {
     console.error('==>     ERROR: No PORT environment variable has been specified');

@@ -237,7 +237,8 @@ class ProductDetails extends React.Component {
                       </Div>
                     </Row>
                   )}
-                  {offerImage && (
+                  {offerImage &&
+                    !offerImageRedirect && (
                     <Row display="block" mt="0" mb="0" mr="0.9375rem" ml="0.9375rem">
                       <Div col="12" mt="0" pr="0.3125rem">
                         <Img src={offerImage} alt="" width="100%" mt="0" mb="0.625rem" />

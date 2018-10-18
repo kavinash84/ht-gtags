@@ -42,7 +42,7 @@ export default class Home extends Component {
   componentDidMount() {
     const { isLoggedIn } = this.props;
     if (!isLoggedIn && !(cookie.get('PROMO_SIGNUP') === 'AVOID')) {
-      setTimeout(() => this.handleModal(), 45000);
+      this.signupmodalreference = setTimeout(() => this.handleModal(), 45000);
     }
   }
   componentWillReceiveProps(nextProps) {
@@ -52,16 +52,21 @@ export default class Home extends Component {
       });
     }
   }
-  handleRibbon = () => {
-    this.setState({
-      showRibbon: !this.state.showRibbon
-    });
-  };
+  componentWillUnmount() {
+    if (this.signupmodalreference) {
+      clearTimeout(this.signupmodalreference);
+    }
+  }
   handleModal = () => {
     this.setState({ openSignup: !this.state.openSignup }, () => {
       if (!this.state.openSignup) {
         cookie.set('PROMO_SIGNUP', 'AVOID', { expires: 2 });
       }
+    });
+  };
+  handleRibbon = () => {
+    this.setState({
+      showRibbon: !this.state.showRibbon
     });
   };
   render() {

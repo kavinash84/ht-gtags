@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Heading from 'hometown-components/lib/Heading';
@@ -11,9 +10,6 @@ import Map from './Map';
 
 const styles = require('./StoreLocator.scss');
 
-@connect(({ storelocator }) => ({
-  ...storelocator
-}))
 class StoreLocator extends React.Component {
   static propTypes = {
     data: PropTypes.object
@@ -30,10 +26,12 @@ class StoreLocator extends React.Component {
   };
   componentWillMount() {
     const { data } = this.props;
-    const mapData = data.items.text;
-    this.setState({
-      currentList: mapData
-    });
+    if (data && data.items && data.items.text) {
+      const mapData = data.items.text;
+      this.setState({
+        currentList: mapData
+      });
+    }
   }
 
   handleClick = (value, mapData) => {
