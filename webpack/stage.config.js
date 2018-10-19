@@ -261,7 +261,7 @@ module.exports = {
       },
       s3UploadOptions: {
         Bucket: 'hometown-preprod-v1',
-        Expiration: 86400
+        Expires: 86400
       }
     }),
     new WebpackOnBuildPlugin(function() {
