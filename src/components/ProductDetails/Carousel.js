@@ -30,7 +30,6 @@ export default class ProductDetailSlider extends Component {
     return (
       <Row display="block" mt="0" mb="0" mr="0" ml="0">
         <Div col="2">
-          <img className="hide" itemProp="image" src={(data && data[0] && `${data[0].url}-catalog_360.jpg`) || ''} />
           <Slider
             asNavFor={this.state.nav1}
             ref={slider => (this.slider2 = slider)}
