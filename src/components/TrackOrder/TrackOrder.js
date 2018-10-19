@@ -11,6 +11,7 @@ import FormInput from 'hometown-components/lib/Forms/FormInput';
 import Button from 'hometown-components/lib/Buttons';
 import { connect } from 'react-redux';
 import { formatDate } from 'utils/formatters';
+import ImageShimmer from 'hometown-components/lib/ImageShimmer';
 
 const styles = require('./TrackOrder.scss');
 
@@ -72,7 +73,9 @@ const TrackOrder = ({
                         {data.order_items.map(item => (
                           <tr key={item.order_item_id}>
                             <td>
-                              <img className="thumb" src="http://via.placeholder.com/75x75" alt="" />
+                              <ImageShimmer src={`${item.image}-catalog_360.jpg`} height="75px">
+                                {imageURL => <img className="thumb" src={imageURL} alt="" />}
+                              </ImageShimmer>
                             </td>
                             <td>{item.product_name}</td>
                             <td>{item.order_item_status_display_name || 'Not Available'}</td>
