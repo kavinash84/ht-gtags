@@ -12,13 +12,15 @@ import ImageShimmer from 'hometown-components/lib/ImageShimmer';
 export default class LoginFormContainer extends Component {
   render() {
     const styles = require('./index.scss');
-    const SidebarImg = require('../../../static/login-sidebar-bg.jpg');
     return (
       <div className={styles.userWrapper}>
         <Row display="block" mr="0" ml="0">
           <Div col={6}>
             <div className={styles.imgWrapper}>
-              <ImageShimmer src={SidebarImg} height="599px">
+              <ImageShimmer
+                src="https://static.hometown.in/media/cms/hometownnew/compressed/signup-sidebar-bg.jpg"
+                height="599px"
+              >
                 {imageURL => <Img src={imageURL} alt="" />}
               </ImageShimmer>
             </div>
