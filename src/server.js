@@ -174,13 +174,13 @@ app.get(/\/color-/, (req, res) => {
 });
 
 /* Redirection from urls */
-app.get(/\/(.*)-(\d+).html/, async (req, res, next) => {
+app.get(/\/(.*)-(\d+).html/, async (req, res) => {
   const data = require('./data/pdp-urls.json');
   if (data && data[req.path.toLowerCase()]) {
     const redirect = data[req.path.toLowerCase()];
     return res.redirect(301, redirect || '/');
   }
-  return next();
+  return res.redirect(301, '/');
 });
 
 /* eslint-disable max-len */
