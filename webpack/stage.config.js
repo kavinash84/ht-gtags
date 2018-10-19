@@ -250,7 +250,7 @@ module.exports = {
     }),
     new S3Plugin({
       // Exclude uploading of html
-      exclude: /.*\.html$/,
+      exclude: /.*\.gz$/,
       basePath: `dist/${version}`,
       // s3Options are required
       s3Options: {
