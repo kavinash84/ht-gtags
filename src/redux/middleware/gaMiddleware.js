@@ -128,7 +128,8 @@ export default function gaMiddleware() {
               .map(item => item.url_key)
               .join('/')
             : '';
-          const results = action.result && action.result.success ? action.result.metadata.results : [];
+          const results =
+            action.result && action.result.success && action.result.metadata ? action.result.metadata.results : [];
           eventObject.ecommerce.impressions = results.map((item, position) => {
             const {
               name, sku, price, brand, color, special_price: netprice
