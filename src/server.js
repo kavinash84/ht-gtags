@@ -80,9 +80,11 @@ app.get('/dist/*', (req, res, next) => {
 
 /* check letter case and redirect */
 app.get('*', (req, res, next) => {
-  if (req.path && req.path !== req.path.toLowerCase()) {
-    const redirect = req.path.toLowerCase();
-    return res.redirect(301, redirect);
+  if (req.path && req.path.indexOf('/sku/') < 0) {
+    if (req.path !== req.path.toLowerCase()) {
+      const redirect = req.path.toLowerCase();
+      return res.redirect(301, redirect);
+    }
   }
   return next();
 });
@@ -324,7 +326,7 @@ app.use(async (req, res) => {
       }
       console.info('----\n==> ✅  %s is Running...', config.app.title);
       console.info('==> 💻  Open http://%s:%s in a browser to view the app.', config.host, config.port);
-      process.send('ready');
+      // process.send('ready');
     });
   } else {
     console.error('==>     ERROR: No PORT environment variable has been specified');

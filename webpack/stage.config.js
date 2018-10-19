@@ -24,6 +24,8 @@ var WebpackOnBuildPlugin = require('on-build-webpack');
 
 var version = require('../package.json').version;
 
+var S3Plugin = require('webpack-s3-plugin')
+
 module.exports = {
   devtool: 'source-map',
   context: path.resolve(__dirname, '..'),
@@ -244,6 +246,24 @@ module.exports = {
         }
       ]
     }),
+    new S3Plugin({
+      // Exclude uploading of html
+      exclude: /.*\.html$/,
+      basePath: `dist/${version}`,
+      // s3Options are required
+      s3Options: {
+        accessKeyId: 'AKIAJOKALHUAXUWJF2SQ',
+        secretAccessKey: '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',
+        region: 'ap-south-1',
+        signatureVersion: 'v4'
+      },
+      s3UploadOptions: {
+        Bucket: 'hometown-preprod-v1'
+      },
+      cdnizerOptions: {
+        defaultCDNBase: 'https://s3.ap-south-1.amazonaws.com'
+      }
+    }),
     new WebpackOnBuildPlugin(function() {
         const data = {
           version,
@@ -257,6 +277,5 @@ module.exports = {
           console.log(`VERSION RELEASE : ${version}`);
         });
     }),
-
   ]
 };
