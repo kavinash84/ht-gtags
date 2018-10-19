@@ -71,13 +71,6 @@ app.get('/', (req, res, next) => {
   return next();
 });
 
-/* set Headers */
-app.get('/dist/*', (req, res, next) => {
-  res.setHeader('Cache-Control', 'public, max-age=0');
-  res.setHeader('Expires', new Date(Date.now() + 864000000).toUTCString());
-  next();
-});
-
 /* check letter case and redirect */
 app.get('*', (req, res, next) => {
   if (req.path && req.path.indexOf('/sku/') < 0) {
