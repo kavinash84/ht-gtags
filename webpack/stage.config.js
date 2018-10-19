@@ -260,10 +260,8 @@ module.exports = {
         signatureVersion: 'v4'
       },
       s3UploadOptions: {
-        Bucket: 'hometown-preprod-v1'
-      },
-      cdnizerOptions: {
-        defaultCDNBase: 'https://s3.ap-south-1.amazonaws.com'
+        Bucket: 'hometown-preprod-v1',
+        Expiration: 86400
       }
     }),
     new WebpackOnBuildPlugin(function() {
