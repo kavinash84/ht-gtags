@@ -210,7 +210,7 @@ module.exports = {
     }),
 
     new HtmlWebpackPlugin({
-      filename: '../index.html',
+      filename: 'index.html',
       template: 'src/pwa.js'
     }),
 
@@ -227,12 +227,14 @@ module.exports = {
       maximumFileSizeToCacheInBytes: 8388608,
 
       // Ensure all our static, local assets are cached.
-      staticFileGlobs: [path.dirname(`${assetsPath}/${version}`) + '/**/*.{html,css,png,jpg,gif,svg,eot,ttf,woff,woff2}'],
+      staticFileGlobs: [
+        `${path.join(`${assetsPath}/${version}`)}/**/*.{html,css,png,jpg,gif,svg,eot,ttf,woff,woff2}`
+      ],
       stripPrefix: path.dirname(`${assetsPath}/${version}`),
 
       directoryIndex: '/',
       verbose: true,
-      navigateFallback: `/dist/index.html`,
+      navigateFallback: `/dist/${version}/index.html`,
       runtimeCaching: [
         {
           urlPattern: /api\/tesla\//,
@@ -248,7 +250,7 @@ module.exports = {
     }),
     new S3Plugin({
       // Exclude uploading of html
-      exclude: /.*\.html$/,
+      exclude: /.*\.gz$/,
       basePath: `dist/${version}`,
       // s3Options are required
       s3Options: {

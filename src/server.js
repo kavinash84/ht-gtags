@@ -326,7 +326,7 @@ app.use(async (req, res) => {
       }
       console.info('----\n==> ✅  %s is Running...', config.app.title);
       console.info('==> 💻  Open http://%s:%s in a browser to view the app.', config.host, config.port);
-      // process.send('ready');
+      if (process && typeof process.send === 'function') process.send('ready');
     });
   } else {
     console.error('==>     ERROR: No PORT environment variable has been specified');

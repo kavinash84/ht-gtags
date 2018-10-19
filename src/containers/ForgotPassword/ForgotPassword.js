@@ -10,13 +10,13 @@ import Section from 'hometown-components/lib/Section';
 import Row from 'hometown-components/lib/Row';
 import Div from 'hometown-components/lib/Div';
 import Img from 'hometown-components/lib/Img';
+import ImageShimmer from 'hometown-components/lib/ImageShimmer';
 import Heading from 'hometown-components/lib/Heading';
 import Text from 'hometown-components/lib/Text';
 import { LOGIN_URL } from 'helpers/Constants';
 import { validateEmail } from 'js-utility-functions';
 import { forgotPassword } from 'redux/modules/forgotpassword';
 
-const SidebarImg = require('../../../static/forgotpassword-sidebar-bg.jpg');
 const ForgotPasswordImg = require('../../../static/forgot-password-icon.png');
 
 @connect(({ forgotpassword }) => ({
@@ -84,7 +84,14 @@ export default class ForgotPasswordContainer extends Component {
                 <Row display="block" mr="0" ml="0">
                   <Div col={6}>
                     <div className={styles.imgWrapper}>
-                      <Img src={SidebarImg} />
+                      {/*eslint-disable*/}
+                      <ImageShimmer
+                        src="https://static.hometown.in/media/cms/hometownnew/compressed/forgotpassword-sidebar-bg.jpg"
+                        height="596px"
+                      >
+                        {imageURL => <Img src={imageURL} alt="" />}
+                      </ImageShimmer>
+                      {/* eslint-enable */}
                     </div>
                   </Div>
                   <Div col={6} p="1.25rem 3.5rem">

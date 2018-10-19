@@ -47,5 +47,5 @@ export const relatedProductsList = createSelector([relatedproducts], items => it
 
 export const getSEOInfo = createSelector(
   [productMeta],
-  seoInfo => (Object.keys(seoInfo.seo).length > 0 ? seoInfo.seo.items : null)
+  seoInfo => (seoInfo && seoInfo.seo && Object.keys(seoInfo.seo).length > 0 ? seoInfo.seo.items : null)
 );

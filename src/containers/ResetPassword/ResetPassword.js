@@ -8,6 +8,7 @@ import Row from 'hometown-components/lib/Row';
 import Heading from 'hometown-components/lib/Heading';
 import Div from 'hometown-components/lib/Div';
 import Img from 'hometown-components/lib/Img';
+import ImageShimmer from 'hometown-components/lib/ImageShimmer';
 import Empty from 'hometown-components/lib/Empty';
 import { isBlank } from 'js-utility-functions';
 import { validatePassword } from 'utils/validation';
@@ -15,7 +16,6 @@ import { resetPassword } from 'redux/modules/forgotpassword';
 import { allowNChar } from 'utils/helper';
 import MenuFooter from 'containers/MenuFooter';
 
-const SidebarImg = require('../../../static/forgotpassword-sidebar-bg.jpg');
 const PasswordExpiredIcon = require('../../../static/password-expired-icon.png');
 
 @connect(({ forgotpassword }) => ({
@@ -125,7 +125,14 @@ export default class ResetPasswordContainer extends Component {
                     <Row display="block" mr="0" ml="0">
                       <Div col={6}>
                         <div className={styles.imgWrapper}>
-                          <Img src={SidebarImg} />
+                          {/*eslint-disable*/}
+                          <ImageShimmer
+                            src="https://static.hometown.in/media/cms/hometownnew/compressed/forgotpassword-sidebar-bg.jpg"
+                            height="596px"
+                          >
+                            {imageURL => <Img src={imageURL} alt="" />}
+                          </ImageShimmer>
+                          {/* eslint-enable */}
                         </div>
                       </Div>
                       <Div col={6} p="4rem 3.5rem">

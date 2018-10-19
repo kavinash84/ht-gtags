@@ -36,7 +36,7 @@ const ProductItem = ({
         {imageURL => <Img alt={name} src={imageURL} width="100%" className={styles.prodImage} />}
       </ImageShimmer>
       <Div className={styles.content}>
-        <Heading mb="5px" color={Theme.colors.text} fontFamily="regular" fontSize="0.9375em" ta="center">
+        <Heading mb="2px" color={Theme.colors.text} fontFamily="regular" fontSize="0.9375rem" ta="center">
           {name}
         </Heading>
 

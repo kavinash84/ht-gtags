@@ -206,7 +206,7 @@ class Listing extends React.Component {
                         item.data.sku,
                         Object.keys(item.data.simples)[0],
                         item.soldout,
-                        item.data.delivery_details[0].value,
+                        item.data.delivery_details && item.data.delivery_details[0].value,
                         item.data.reviews.rating.toFixed(1)
                       );
                     }}
@@ -219,8 +219,11 @@ class Listing extends React.Component {
                         ? formatAmount(Number(item.data.max_price) - Number(item.data.max_special_price))
                         : 0
                     }
-                    deliveredBy={item.data.delivery_details[0].value}
-                    colors={metaResults[index].data.color_group_count.split(' ')[0]}
+                    deliveredBy={item.data.delivery_details && item.data.delivery_details[0].value}
+                    colors={
+                      metaResults[index].data.color_group_count.split(' ') &&
+                      metaResults[index].data.color_group_count.split(' ')[0]
+                    }
                     setProductPosition={productPosition}
                     productURL={formatProductURL(item.data.name, item.data.sku)}
                   />
@@ -302,4 +305,7 @@ Listing.propTypes = {
   breadCrumbs: PropTypes.array.isRequired
 };
 
-export default connect(null, mapDispatchToProps)(Listing);
+export default connect(
+  null,
+  mapDispatchToProps
+)(Listing);

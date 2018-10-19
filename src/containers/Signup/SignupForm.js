@@ -15,8 +15,6 @@ import { LOGIN_URL } from 'helpers/Constants';
 import { signUp } from 'redux/modules/signUp';
 import { allowNChar, allowTypeOf } from 'utils/helper';
 
-const SidebarImg = require('../../../static/signup-sidebar-bg.jpg');
-
 @connect(({ userSignUp, app }) => ({
   loading: userSignUp.loading,
   session: app.sessionId
@@ -48,7 +46,9 @@ export default class SignupFormContainer extends Component {
     };
   }
   onChangeEmail = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = !validateEmail(value);
     this.setState({
       email: value,
@@ -56,7 +56,9 @@ export default class SignupFormContainer extends Component {
     });
   };
   onChangePhone = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = !validateMobile(value);
     if (!allowNChar(value, 10) || (!allowTypeOf(value, 'number') && value.length > 0)) {
       return;
@@ -69,7 +71,9 @@ export default class SignupFormContainer extends Component {
     });
   };
   onChangePassword = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = validatePassword(value);
     if (!allowNChar(value, 15)) {
       return;
@@ -135,7 +139,7 @@ export default class SignupFormContainer extends Component {
         <Row display="block" mr="0" ml="0">
           <Div col={6}>
             <div className={styles.imgWrapper}>
-              <ImageShimmer src={SidebarImg} height="514px">
+              <ImageShimmer src="https://static.hometown.in/media/cms/hometownnew/compressed/login.jpg" height="514px">
                 {imageURL => <Img src={imageURL} alt="" />}
               </ImageShimmer>
             </div>
