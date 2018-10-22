@@ -17,13 +17,13 @@ const judgeColor = rating => {
   }
   rating = parseInt(rating, 10);
   if (rating < 2) {
-    return 'red';
+    return '#dc3545';
   }
   if (rating >= 2 && rating < 3) {
-    return 'yellow';
+    return '#f5a623';
   }
   if (rating >= 3) {
-    return 'green';
+    return '#28a745';
   }
 };
 

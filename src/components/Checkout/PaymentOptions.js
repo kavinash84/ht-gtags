@@ -175,7 +175,7 @@ class PaymentOptions extends Component {
                               onChange={onChangeDetails(setPaymentDetails, selectedGateway)}
                               value={paymentDetails.NetBanking.bankCode}
                             >
-                              <option>Select Bank</option>
+                              <option value="">Select Bank</option>
                               {netBankingData &&
                                 netBankingData.netBankingBanks &&
                                 Object.keys(netBankingData.netBankingBanks).map((k, i) => (

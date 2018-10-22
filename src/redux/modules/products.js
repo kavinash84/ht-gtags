@@ -196,12 +196,6 @@ export const loadSearchQuery = ({ searchquery, page, pincode = defaultPincode })
     client.get(`tesla/search/find/?page=${page}&q=${searchquery}&pincode=${pincode}&sort=popularity&dir=desc&maxitems=32`)
 });
 
-export const loadUrlQuery = (category, query, pincode, city = 'delhi') => ({
-  types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-  promise: ({ client }) =>
-    client.get(`tesla/products/${category}/?${query}&maxitems=32&pincode=${pincode}&city=${city}`)
-});
-
 export const setCategoryQuery = payLoad => ({
   type: SET_QUERY,
   payLoad
