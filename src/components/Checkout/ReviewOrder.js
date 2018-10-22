@@ -86,7 +86,16 @@ const ReviewOrder = ({
             <Div col="9" pr="2.5rem" pt="1.5rem">
               <Row display="block" mr="0" ml="0">
                 <Div col="12" bg="#969696">
-                  <Heading fontSize="1rem" ls="1px" mb="0.625rem" color="white" p="10px 20px" pb="10px">
+                  <Heading
+                    fontSize="1rem"
+                    ls="1px"
+                    mb="0.3125rem"
+                    mt="0.3125rem"
+                    color="white"
+                    p="10px 20px"
+                    pb="10px"
+                    fontFamily="light"
+                  >
                     Order Summary
                   </Heading>
                 </Div>
@@ -158,12 +167,12 @@ const ReviewOrder = ({
                     <br />
                     {item.product_info.unit_price !== item.product_info.special_price &&
                       item.product_info.special_price !== 0 && (
-                      <Label color="black" fontSize="1rem" mt="0.625rem">
+                      <Label color="black" fontSize="0.875rem" mt="0.625rem">
                         <s>Rs. {formatAmount(item.product_info.unit_price)}</s>
                       </Label>
                     )}
                     <br />
-                    <Label color="primary" fontSize="1.125rem" mt="0.625rem">
+                    <Label color="primary" fontSize="1.25rem" mt="0">
                       Rs.{' '}
                       {item.product_info.special_price === 0
                         ? formatAmount(item.product_info.unit_price)
@@ -257,4 +266,7 @@ ReviewOrder.propTypes = {
   undelivered: PropTypes.array,
   outOfStockList: PropTypes.array
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ReviewOrder);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ReviewOrder);

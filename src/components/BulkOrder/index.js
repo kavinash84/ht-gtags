@@ -272,6 +272,8 @@ class BulkOrder extends React.Component {
                               <option value="Tableware">Tableware</option>
                               <option value="Tableware">Kitchenware</option>
                               <option value="Home Improvement">Home Improvement</option>
+                              <option value="Electronics">Electronics</option>
+                              <option value="Home Appliances">Home Appliances</option>
                             </select>
                           </InputField>
                         </Div>
