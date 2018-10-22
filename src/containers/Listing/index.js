@@ -15,7 +15,12 @@ import { PINCODE } from 'helpers/Constants';
 
 const hooks = {
   fetch: async ({ store: { dispatch, getState }, params, location }) => {
-    const { pincode: { selectedPincode }, pagination: { page }, app: { city } } = getState();
+    const {
+      pincode: { selectedPincode },
+      pagination: { page },
+      app: { city },
+      products: { filter: prevFilter }
+    } = getState();
     let query;
     let filters;
     let loadResults;
@@ -50,8 +55,13 @@ const hooks = {
         city
       });
     }
+    console.log(filters, prevFilter);
     if (currentPage === 1) await dispatch(resetPagination());
-    if (!isInitialListLoaded(getState(), query) || Number(currentPage) !== Number(page)) {
+    if (
+      !isInitialListLoaded(getState(), query) ||
+      Number(currentPage) !== Number(page) ||
+      (filters && filters !== prevFilter)
+    ) {
       await dispatch(clearPreviousList());
       await dispatch(setCurrentPage(currentPage));
       await dispatch(clearPreviousSort());
