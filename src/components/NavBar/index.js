@@ -26,9 +26,6 @@ const NavBar = ({
         <Link onClick={exitOnClick} to="/modular-kitchens" onMouseEnter={handleEnter('')}>
           Modular Kitchens
         </Link>
-        <Link onClick={exitOnClick} to="/design-build" onMouseEnter={handleEnter('')}>
-          Design & Build
-        </Link>
         <div className={`${styles.moreDropdownWrapper} dropdownWrapper`}>
           <Button
             btnType="custom"
@@ -47,6 +44,13 @@ const NavBar = ({
           </Button>
           <div className="dropDown blockRight">
             <ul>
+              <li>
+                <Label htmlFor="checkbox" fontSize="0.75em" ml="0.625rem" className="dropdownValue">
+                  <Link onClick={exitOnClick} to="/design-build" onMouseEnter={handleEnter('')}>
+                    Design & Build
+                  </Link>
+                </Label>
+              </li>
               <li>
                 <Label htmlFor="checkbox" fontSize="0.75em" ml="0.625rem" className="dropdownValue">
                   <Link

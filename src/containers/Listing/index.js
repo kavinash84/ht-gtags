@@ -55,12 +55,12 @@ const hooks = {
         city
       });
     }
-    console.log(filters, prevFilter);
     if (currentPage === 1) await dispatch(resetPagination());
     if (
       !isInitialListLoaded(getState(), query) ||
       Number(currentPage) !== Number(page) ||
-      (filters && filters !== prevFilter)
+      (filters && filters !== prevFilter) ||
+      prevFilter === 'clearAll'
     ) {
       await dispatch(clearPreviousList());
       await dispatch(setCurrentPage(currentPage));
