@@ -228,25 +228,13 @@ module.exports = {
 
       // Ensure all our static, local assets are cached.
       staticFileGlobs: [
-        `${path.join(`${assetsPath}/${version}`)}/**/*.{html,css,png,jpg,gif,svg,eot,ttf,woff,woff2}`
+        `${path.join(`${assetsPath}/${version}`)}/**/*.{css,png,jpg,gif,svg,eot,ttf,woff,woff2}`
       ],
       stripPrefix: path.dirname(`${assetsPath}/${version}`),
 
       directoryIndex: '/',
       verbose: true,
-      navigateFallback: `/dist/${version}/index.html`,
-      runtimeCaching: [
-        {
-          urlPattern: /api\/tesla\//,
-          handler: 'networkFirst',
-          options: {
-            cache: {
-              maxEntries: 25,
-              name: 'api-cache'
-            }
-          }
-        }
-      ]
+      navigateFallback: `/dist/${version}/index.html`
     }),
     new S3Plugin({
       // Exclude uploading of html

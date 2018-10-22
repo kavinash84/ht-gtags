@@ -4,6 +4,7 @@
 var path = require('path');
 const fs = require('fs');
 var webpack = require('webpack');
+
 // var CleanPlugin = require('clean-webpack-plugin');
 var ReactLoadablePlugin = require('react-loadable/webpack').ReactLoadablePlugin;
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -22,6 +23,8 @@ const CompressionPlugin = require("compression-webpack-plugin");
 var WebpackOnBuildPlugin = require('on-build-webpack');
 
 var version = require('../package.json').version;
+
+var S3Plugin = require('webpack-s3-plugin')
 
 module.exports = {
   devtool: 'source-map',
@@ -207,11 +210,11 @@ module.exports = {
     }),
 
     new HtmlWebpackPlugin({
-      filename: '../index.html',
+      filename: 'index.html',
       template: 'src/pwa.js'
     }),
 
-    /* gzip compression */ 
+    /* gzip compression */
     new CompressionPlugin({
       test: /\.js|.css|.scss/
     }),
@@ -224,37 +227,43 @@ module.exports = {
       maximumFileSizeToCacheInBytes: 8388608,
 
       // Ensure all our static, local assets are cached.
-      staticFileGlobs: [path.dirname(`${assetsPath}/${version}`) + '/**/*.{html,css,png,jpg,gif,svg,eot,ttf,woff,woff2}'],
+      staticFileGlobs: [
+        `${path.join(`${assetsPath}/${version}`)}/**/*.{css,png,jpg,gif,svg,eot,ttf,woff,woff2}`
+      ],
       stripPrefix: path.dirname(`${assetsPath}/${version}`),
 
       directoryIndex: '/',
       verbose: true,
-      navigateFallback: '/dist/index.html',
-      runtimeCaching: [
-        {
-          urlPattern: /api\/tesla\//,
-          handler: 'networkFirst',
-          options: {
-            cache: {
-              maxEntries: 25,
-              name: 'api-cache'
-            }
-          }
-        }
-      ]
+      navigateFallback: `/dist/${version}/index.html`,
+    }),
+    new S3Plugin({
+      // Exclude uploading of html
+      exclude: /.*\.gz$/,
+      basePath: `dist/${version}`,
+      // s3Options are required
+      s3Options: {
+        accessKeyId: 'AKIAJOKALHUAXUWJF2SQ',
+        secretAccessKey: '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',
+        region: 'ap-south-1',
+        signatureVersion: 'v4'
+      },
+      s3UploadOptions: {
+        Bucket: 'hometown-preprod-v1',
+        Expires: 86400
+      }
     }),
     new WebpackOnBuildPlugin(function() {
-      const data = {
-        version,
-        date:Date.now()
-        }
-      const versionPath = path.join(__dirname,'..');
-      fs.writeFile(`${versionPath}/version.json`,
-        JSON.stringify(data),
-        (err) => {
-        if (err) throw err;
-        console.log(`VERSION RELEASE : ${version}`);
-      });
+        const data = {
+          version,
+          date:Date.now()
+          }
+        const versionPath = path.join(__dirname,'..')
+        fs.writeFile(`${versionPath}/version.json`,
+          JSON.stringify(data),
+          (err) => {
+          if (err) throw err;
+          console.log(`VERSION RELEASE : ${version}`);
+        });
     }),
   ]
 };
