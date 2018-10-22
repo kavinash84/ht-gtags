@@ -22,7 +22,10 @@ const CompressionPlugin = require("compression-webpack-plugin");
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 var WebpackOnBuildPlugin = require('on-build-webpack');
 
+var S3Plugin = require('webpack-s3-plugin')
+
 var version = require('../package.json').version;
+
 
 module.exports = {
   devtool: 'source-map',
@@ -208,7 +211,7 @@ module.exports = {
     }),
 
     new HtmlWebpackPlugin({
-      filename: '../index.html',
+      filename: 'index.html',
       template: 'src/pwa.js'
     }),
 
@@ -225,12 +228,29 @@ module.exports = {
       maximumFileSizeToCacheInBytes: 8388608,
 
       // Ensure all our static, local assets are cached.
-      staticFileGlobs: [path.dirname(`${assetsPath}/${version}`) + '/**/*.{html,css,png,jpg,gif,svg,eot,ttf,woff,woff2}'],
+      staticFileGlobs: [
+        `${path.join(`${assetsPath}/${version}`)}/**/*.{html,css,png,jpg,gif,svg,eot,ttf,woff,woff2}`
+      ],
       stripPrefix: path.dirname(`${assetsPath}/${version}`),
 
       directoryIndex: '/',
       verbose: true,
-      navigateFallback: '/dist/index.html',
+      navigateFallback: `/dist/${version}/index.html`,
+    }),
+    new S3Plugin({
+      // Exclude uploading of html
+      exclude: /.*\.gz$/,
+      basePath: `dist/${version}`,
+      // s3Options are required
+      s3Options: {
+        accessKeyId: 'AKIAJP6PV377QISMNWSQ',
+        secretAccessKey: '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',
+        region: 'ap-south-1',
+        signatureVersion: 'v4'
+      },
+      s3UploadOptions: {
+        Bucket: 'ht-live'
+      }
     }),
     new WebpackOnBuildPlugin(function() {
         const data = {
