@@ -7,7 +7,6 @@ import {
   setCategoryQuery,
   clearPreviousList,
   clearPreviousSort,
-  loadUrlQuery,
   setCategory,
   applyFilter,
   setFilter
@@ -16,17 +15,7 @@ import { PINCODE } from 'helpers/Constants';
 
 const hooks = {
   fetch: async ({ store: { dispatch, getState }, params, location }) => {
-    const {
-      pincode: { selectedPincode },
-      pagination: { page },
-      app: { city },
-      products: { list, filter: prevFilter },
-      router: { location: prevLocation }
-    } = getState();
-    let prevSearch;
-    if (prevLocation) {
-      prevSearch = prevLocation.search;
-    }
+    const { pincode: { selectedPincode }, pagination: { page }, app: { city } } = getState();
     let query;
     let filters;
     let loadResults;
@@ -34,11 +23,7 @@ const hooks = {
     const { search } = location;
     const getPage = search.split('page=')[1];
     const currentPage = getPage || 1;
-    if (location.pathname === '/catalog/all-products') {
-      const hashQuery = location.search.split('?').join('');
-      query = encodeCategory(params);
-      loadResults = loadUrlQuery(encodeCategory(params), hashQuery, pincode);
-    } else if (location.pathname === '/search/') {
+    if (location.pathname === '/search/') {
       /* eslint prefer-destructuring: ["error", {AssignmentExpression: {array: false}}] */
       let searchquery;
       [, searchquery] = location.search.split('q=');
@@ -70,17 +55,11 @@ const hooks = {
       await dispatch(clearPreviousList());
       await dispatch(setCurrentPage(currentPage));
       await dispatch(clearPreviousSort());
+      await dispatch(loadResults).catch(() => null);
+      await dispatch(setCategoryQuery(query, pincode));
+      await dispatch(setCategory(query));
+      await dispatch(setFilter(filters));
     }
-    if (
-      location.search.split('redirect').length > 1 ||
-      (prevSearch === search && list.length > 0 && filters === prevFilter)
-    ) {
-      return;
-    }
-    await dispatch(loadResults).catch(() => null);
-    await dispatch(setCategoryQuery(query, pincode));
-    await dispatch(setCategory(query));
-    await dispatch(setFilter(filters));
   }
 };
 
