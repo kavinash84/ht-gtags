@@ -33,4 +33,4 @@ export const categoryRoutes = [
   'bath'
 ];
 
-export const listingRoutes = [...categoryRoutes, 'festive-gifts', 'clearance-sale'];
+export const listingRoutes = [...categoryRoutes, 'gifts', 'clearance-sale'];
