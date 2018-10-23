@@ -324,4 +324,10 @@ app.use(async (req, res) => {
   } else {
     console.error('==>     ERROR: No PORT environment variable has been specified');
   }
+
+  process.on('SIGINT', () => {
+    server.close(err => {
+      process.exit(err ? 1 : 0);
+    });
+  });
 })();

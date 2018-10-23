@@ -178,7 +178,7 @@ export const applyFilter = ({
       } = params;
       dispatch(setFiltersInState(params));
       if (searchquery) {
-        return client.get(`tesla/search/find/?q=${searchquery}&maxitems=32&pincode=${pincode}&city=${city}${price}${discount}${material}${pageno}`);
+        return client.get(`tesla/search/find/?q=${searchquery}&maxitems=32&pincode=${pincode}&city=${city}${price}${discount}${material}${sortby}${pageno}`);
       }
       return client.get(`tesla/products/${modifiedQuery}/?&maxitems=32&pincode=${pincode}&city=${city}${price}${discount}${material}${sortby}${pageno}`);
     }
