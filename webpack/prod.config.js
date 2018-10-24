@@ -229,7 +229,7 @@ module.exports = {
 
       // Ensure all our static, local assets are cached.
       staticFileGlobs: [
-        `${path.join(`${assetsPath}/${version}`)}/**/*.{html,css,png,jpg,gif,svg,eot,ttf,woff,woff2}`
+        `${path.join(`${assetsPath}/${version}`)}/**/*.{css,png,jpg,gif,svg,eot,ttf,woff,woff2}`
       ],
       stripPrefix: path.dirname(`${assetsPath}/${version}`),
 
