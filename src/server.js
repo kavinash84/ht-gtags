@@ -91,8 +91,8 @@ app
   .use('/service-worker.js', (req, res) =>
     res.sendFile(path.join(__dirname, '..', 'static', 'dist', 'service-worker.js')))
   .use('/robots.txt', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'robots.txt')))
-  .use('/sitemap.html', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'sitemap.html')))
-  .use('/maintenance.html', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'maintenance.html')));
+  .use('/sitemap.html', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'sitemap.html')));
+// .use('/maintenance.html', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'maintenance.html')));
 
 app.use('/dist/service-worker.js', (req, res, next) => {
   res.setHeader('Service-Worker-Allowed', '/');
@@ -164,6 +164,16 @@ app.get(/\/color-/, (req, res) => {
   const { url } = req;
   const [redirect] = url.split('/color-');
   return res.redirect(301, redirect || '/');
+});
+
+app.get(/\/(hometown|hometown\/)$/, async (req, res) => {
+  const data = require('./data/blanket-urls.json');
+  const requestURL = redirectionHelper(req.path);
+  if (data && data[requestURL.toLowerCase()]) {
+    const redirect = data[requestURL.toLowerCase()];
+    return res.redirect(301, redirect);
+  }
+  return res.redirect(301, '/');
 });
 
 /* Redirection from urls */
@@ -324,4 +334,10 @@ app.use(async (req, res) => {
   } else {
     console.error('==>     ERROR: No PORT environment variable has been specified');
   }
+
+  process.on('SIGINT', () => {
+    server.close(err => {
+      process.exit(err ? 1 : 0);
+    });
+  });
 })();

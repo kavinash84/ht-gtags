@@ -1,5 +1,6 @@
 import { PINCODE } from 'helpers/Constants';
 import { getParamsDetailFromLink } from 'utils/helper';
+import { PRODUCTS as PRODUCTS_API, SEARCH as SEARCH_API } from 'helpers/apiUrls';
 
 const LOAD = 'products/LOAD';
 const LOAD_SUCCESS = 'products/LOAD_SUCCESS';
@@ -157,7 +158,7 @@ export function isLoaded(globalState, query) {
 }
 export const clearAllFilters = (category, pincode, city = 'delhi') => ({
   types: [LOAD_CLEAR_FILTERS, LOAD_CLEAR_FILTERS_SUCCESS, LOAD_CLEAR_FILTERS_FAIL],
-  promise: ({ client }) => client.get(`tesla/products/${category}/?pincode=${pincode}&city=${city}`)
+  promise: ({ client }) => client.get(`${PRODUCTS_API}/${category}/?pincode=${pincode}&city=${city}`)
 });
 
 export const setFiltersInState = payLoad => ({
@@ -178,28 +179,23 @@ export const applyFilter = ({
       } = params;
       dispatch(setFiltersInState(params));
       if (searchquery) {
-        return client.get(`tesla/search/find/?q=${searchquery}&maxitems=32&pincode=${pincode}&city=${city}${price}${discount}${material}${pageno}`);
+        return client.get(`${SEARCH_API}/?q=${searchquery}&maxitems=32&pincode=${pincode}&city=${city}${price}${discount}${material}${sortby}${pageno}`);
       }
-      return client.get(`tesla/products/${modifiedQuery}/?&maxitems=32&pincode=${pincode}&city=${city}${price}${discount}${material}${sortby}${pageno}`);
+      const fetchURL = `${PRODUCTS_API}/${modifiedQuery}/?&maxitems=32&pincode=${pincode}&city=${city}${price}${discount}${material}${sortby}${pageno}`;
+      return client.get(fetchURL.replace(/null/, '').trim());
     }
   });
 
 export const load = (category, page, sort, pincode, city = 'delhi') => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
   promise: ({ client }) =>
-    client.get(`tesla/products/${category}/?${sort}&page=${page}&maxitems=32&pincode=${pincode}&city=${city}`)
+    client.get(`${PRODUCTS_API}/${category}/?${sort}&page=${page}&maxitems=32&pincode=${pincode}&city=${city}`)
 });
 
 export const loadSearchQuery = ({ searchquery, page, pincode = defaultPincode }) => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
   promise: ({ client }) =>
-    client.get(`tesla/search/find/?page=${page}&q=${searchquery}&pincode=${pincode}&sort=popularity&dir=desc&maxitems=32`)
-});
-
-export const loadUrlQuery = (category, query, pincode, city = 'delhi') => ({
-  types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-  promise: ({ client }) =>
-    client.get(`tesla/products/${category}/?${query}&maxitems=32&pincode=${pincode}&city=${city}`)
+    client.get(`${SEARCH_API}/?page=${page}&q=${searchquery}&pincode=${pincode}&sort=popularity&dir=desc&maxitems=32`)
 });
 
 export const setCategoryQuery = payLoad => ({

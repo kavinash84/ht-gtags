@@ -7,15 +7,17 @@ import { connect } from 'react-redux';
 import Autosuggest from 'react-autosuggest';
 import Button from 'hometown-components/lib/Buttons';
 import Div from 'hometown-components/lib/Div';
+import { setFilter } from 'redux/modules/products';
 import * as actionCreators from 'redux/modules/search';
 
 const styles = require('./Search.scss');
 const SearchIcon = require('../../../static/search-icon.svg');
 const CloseIcon = require('../../../static/close-icon.svg');
 
-const onSubmit = (searchQuery, history, hideResultsOnSubmit, results) => e => {
+const onSubmit = (searchQuery, history, hideResultsOnSubmit, results, setFilterState) => e => {
   e.preventDefault();
   hideResultsOnSubmit();
+  setFilterState('clearAll');
   if (results && results.length > 0) {
     const match = results.filter(result => result.name.toLowerCase() === searchQuery.toLowerCase())[0];
     if (match) return history.push(`/${match.url_key}`);
@@ -27,7 +29,7 @@ const mapStateToProps = ({ search }) => ({
   ...search
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators, setFilterState: setFilter }, dispatch);
 
 const getSuggestions = results => results;
 
@@ -95,7 +97,7 @@ class Search extends React.Component {
 
   render() {
     const {
-      searchQuery, load, loading, loaded, results, hideResultsOnSubmit, history
+      searchQuery, load, loading, loaded, results, hideResultsOnSubmit, history, setFilterState
     } = this.props;
     const { value, suggestions } = this.state;
 
@@ -107,7 +109,7 @@ class Search extends React.Component {
     };
     return (
       <Div className={styles.search} pt="0" pb="0.3125rem">
-        <form onSubmit={onSubmit(searchQuery, history, hideResultsOnSubmit, results)}>
+        <form onSubmit={onSubmit(searchQuery, history, hideResultsOnSubmit, results, setFilterState)}>
           <Autosuggest
             suggestions={suggestions}
             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -155,10 +157,8 @@ Search.propTypes = {
   history: PropTypes.object.isRequired,
   hideResultsOnSubmit: PropTypes.func.isRequired,
   setSearchQuery: PropTypes.func.isRequired,
-  clearSearchQuery: PropTypes.func.isRequired
+  clearSearchQuery: PropTypes.func.isRequired,
+  setFilterState: PropTypes.func.isRequired
 };
 
-export default withRouter(connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Search));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search));

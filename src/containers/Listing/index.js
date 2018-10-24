@@ -7,7 +7,6 @@ import {
   setCategoryQuery,
   clearPreviousList,
   clearPreviousSort,
-  loadUrlQuery,
   setCategory,
   applyFilter,
   setFilter
@@ -20,13 +19,8 @@ const hooks = {
       pincode: { selectedPincode },
       pagination: { page },
       app: { city },
-      products: { list, filter: prevFilter },
-      router: { location: prevLocation }
+      products: { filter: prevFilter }
     } = getState();
-    let prevSearch;
-    if (prevLocation) {
-      prevSearch = prevLocation.search;
-    }
     let query;
     let filters;
     let loadResults;
@@ -34,11 +28,7 @@ const hooks = {
     const { search } = location;
     const getPage = search.split('page=')[1];
     const currentPage = getPage || 1;
-    if (location.pathname === '/catalog/all-products') {
-      const hashQuery = location.search.split('?').join('');
-      query = encodeCategory(params);
-      loadResults = loadUrlQuery(encodeCategory(params), hashQuery, pincode);
-    } else if (location.pathname === '/search/') {
+    if (location.pathname === '/search/') {
       /* eslint prefer-destructuring: ["error", {AssignmentExpression: {array: false}}] */
       let searchquery;
       [, searchquery] = location.search.split('q=');
@@ -66,21 +56,20 @@ const hooks = {
       });
     }
     if (currentPage === 1) await dispatch(resetPagination());
-    if (!isInitialListLoaded(getState(), query) || Number(currentPage) !== Number(page)) {
+    if (
+      !isInitialListLoaded(getState(), query) ||
+      Number(currentPage) !== Number(page) ||
+      (filters && filters !== prevFilter) ||
+      prevFilter === 'clearAll'
+    ) {
       await dispatch(clearPreviousList());
       await dispatch(setCurrentPage(currentPage));
       await dispatch(clearPreviousSort());
+      await dispatch(loadResults).catch(() => null);
+      await dispatch(setCategoryQuery(query, pincode));
+      await dispatch(setCategory(query));
+      await dispatch(setFilter(filters));
     }
-    if (
-      location.search.split('redirect').length > 1 ||
-      (prevSearch === search && list.length > 0 && filters === prevFilter)
-    ) {
-      return;
-    }
-    await dispatch(loadResults).catch(() => null);
-    await dispatch(setCategoryQuery(query, pincode));
-    await dispatch(setCategory(query));
-    await dispatch(setFilter(filters));
   }
 };
 

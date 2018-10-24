@@ -12,6 +12,7 @@ import LoginModal from 'containers/Login/LoginForm';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { toggleWishList, wishListWaitList } from 'redux/modules/wishlist';
+import { setFilter } from 'redux/modules/products';
 import { setProductPosition } from 'redux/modules/productdetails';
 import { formFilterLink2, formatProductURL } from 'utils/helper';
 import { formatAmount } from 'utils/formatters';
@@ -113,6 +114,8 @@ class Listing extends React.Component {
       link = formFilterLink2(searchQuery, 'resetsearch', '', categoryquery);
       return history.push(link);
     }
+    const { dispatch } = this.context.store;
+    dispatch(setFilter('clearAll'));
     link = formFilterLink2('key', 'reset', '', categoryquery);
     history.push(link);
   };
@@ -305,7 +308,4 @@ Listing.propTypes = {
   breadCrumbs: PropTypes.array.isRequired
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Listing);
+export default connect(null, mapDispatchToProps)(Listing);

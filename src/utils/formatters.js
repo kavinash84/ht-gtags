@@ -1,6 +1,5 @@
 export const formatAmount = amount => {
   const amt = amount.toString();
-  // const afterPoint = amt.indexOf('.') > 0 ? amt.substring(amt.indexOf('.'), amt.length) : '';
   const newAmt = Math.floor(amt).toString();
   const lastThree = newAmt.substring(newAmt.length - 3);
   const otherNumbers = newAmt.substring(0, newAmt.length - 3);
