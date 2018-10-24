@@ -1,5 +1,5 @@
 import React from 'react';
-import TestComponent from 'components/Test/';
+import ImageLoader from 'components/ImageLoader/';
 
 class Test extends React.Component {
   render() {
@@ -12,7 +12,7 @@ class Test extends React.Component {
     ];
     return (
       <div>
-        <TestComponent data={data} />
+        <ImageLoader data={data} />
       </div>
     );
   }

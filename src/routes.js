@@ -8,7 +8,7 @@ import Category from 'containers/Category';
 
 /* Home */
 import Home from 'containers/Home';
-import Test from 'containers/Test';
+import ImageLoader from 'containers/ImageLoader';
 
 /* store */
 import Stores from 'containers/Stores';
@@ -123,7 +123,7 @@ const routes = [
       { path: '/service-signup', exact: true, component: ServiceSignUpContainer },
       { path: '/loader-shimmer', exact: true, component: LoaderShimmer },
       { path: '/promotions', exact: true, component: Promotions },
-      { path: '/imgtest', exact: true, component: Test },
+      { path: '/loadimage', exact: true, component: ImageLoader },
       {
         path: `/:category(${createRegex(categoryRoutes)})`,
         exact: true,
