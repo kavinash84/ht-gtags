@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Img from 'hometown-components/lib/Img';
-import ProgressiveImage from '../ImageLoader/ProgressiveImage';
+import ProgressiveImage from 'components/ImageLoader';
 
 const SliderItem = ({
   title, image, url, onClick
