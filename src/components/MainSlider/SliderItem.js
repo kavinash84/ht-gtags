@@ -2,13 +2,22 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Img from 'hometown-components/lib/Img';
+import ProgressiveImage from 'components/ImageLoader';
 
 const SliderItem = ({
   title, image, url, onClick
 }) => (
-  <Link to={url} onClick={onClick}>
-    <Img src={image} alt={title} width="100%" />
-  </Link>
+  <ProgressiveImage
+    lowImage="https://static.hometown.in/media/cms/hometownv2/compressed/hp-2_tn.jpg"
+    highImage={image}
+    defaultImage="https://s3-ap-southeast-1.amazonaws.com/sanjeev-hometown/default.jpg"
+  >
+    {(imageURL, style) => (
+      <Link to={url} onClick={onClick}>
+        <Img style={style} src={imageURL} alt={title} width="100%" />
+      </Link>
+    )}
+  </ProgressiveImage>
 );
 
 SliderItem.defaultProps = {
