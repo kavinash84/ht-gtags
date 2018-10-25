@@ -1,7 +1,7 @@
 import HomeTownLoader from 'containers/Loader';
 
-const Test = HomeTownLoader({
+const Loader = HomeTownLoader({
   loader: () => import('./ImageLoader' /* webpackChunkName: 'Terms' */)
 });
 
-export default Test;
+export default Loader;

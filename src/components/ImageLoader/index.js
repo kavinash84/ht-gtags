@@ -1,37 +1,29 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ImageLoader from './ImageLoader';
-// import Img from 'hometown-components/lib/Img';
+import ProgressiveImage from './ProgressiveImage';
 
-class TestComponent extends Component {
+class ImgLoader extends Component {
   static propTypes = {
     data: PropTypes.array
   };
   render() {
-    const { data } = this.props;
-    return data.map(img => (
-      <ImageLoader
-        title="testing blur images"
-        url="/furniture/"
-        lowImage={img.low}
-        highImage={img.high}
-        defaultImage={img.defaultImage}
-        onClick={() => { console.log('clicked'); }}
+    return (
+      <ProgressiveImage
+        lowImage="https://s3-ap-southeast-1.amazonaws.com/sanjeev-hometown/small.jpg"
+        highImage="https://s3-ap-southeast-1.amazonaws.com/sanjeev-hometown/large.jpg"
+        defaultImage="https://s3-ap-southeast-1.amazonaws.com/sanjeev-hometown/default.jpg"
       >
-        {(imageURL, imageTitle, routeURL, onClickHandler, isBlurred) => {
-          const blurStyle = isBlurred ? { filter: 'blur(5px)' } : {};
-          return <img style={blurStyle} src={imageURL} alt="" height="400" width="600" />;
-        }}
-      </ImageLoader>
-    ));
+        {(imageURL, style) => <img style={style} src={imageURL} alt="testing" />}
+      </ProgressiveImage>
+    );
   }
 }
-TestComponent.defaultProps = {
+ImgLoader.defaultProps = {
   data: []
 };
 
-TestComponent.propTypes = {
-  data: PropTypes.array
+ImgLoader.propTypes = {
+  data: PropTypes.array //eslint-disable-line
 };
 
-export default TestComponent;
+export default ImgLoader;
