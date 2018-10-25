@@ -2,14 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Img from 'hometown-components/lib/Img';
-// import ImageLoader from '../ImageLoader/ImageLoader';
 import ProgressiveImage from '../ImageLoader/ProgressiveImage';
 
 const SliderItem = ({
-  title, image, url, onClick //eslint-disable-line
+  title, image, url, onClick
 }) => (
   <ProgressiveImage
-    lowImage="https://s3-ap-southeast-1.amazonaws.com/sanjeev-hometown/thumbnail.jpg"
+    lowImage="https://static.hometown.in/media/cms/hometownv2/compressed/hp-2_tn.jpg"
     highImage={image}
     defaultImage="https://s3-ap-southeast-1.amazonaws.com/sanjeev-hometown/default.jpg"
   >
