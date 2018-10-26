@@ -249,7 +249,9 @@ module.exports = {
         signatureVersion: 'v4'
       },
       s3UploadOptions: {
-        Bucket: 'ht-live'
+        Bucket: 'ht-live',
+        CacheControl: 'max-age=31536000',
+        Expires: new Date(new Date().getTime() + 31536000000) // expiry for one year
       }
     }),
     new WebpackOnBuildPlugin(function() {
