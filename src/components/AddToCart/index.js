@@ -59,11 +59,11 @@ const AddToCart = ({
             border="1px solid"
             bc="white"
             color="red"
-            p="6px 15px 7px"
+            p="7px 15px 8px"
             size={size}
             height={height}
           >
-            <Span fontSize="16px" fontFamily="medium" color="red" va="text-top">
+            <Span fontSize="14px" fontFamily="regular" color="red" va="text-top">
               {'OUT OF STOCK'}
             </Span>
           </Button>
