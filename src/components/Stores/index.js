@@ -29,7 +29,7 @@ export default class StoresCarousel extends Component {
       <Section p="0" pt="2.5rem" pb="2rem" mb="0" className="storeCarousel">
         <Container pr="0" pl="0">
           <Row type="block" m="0" mb="0.5rem">
-            <Title title="Stores" subTitle="" />
+            {cities && cities.length > 0 && <Title title="Stores" subTitle="" />}
           </Row>
           <Row type="block" m="0" mb="0.5rem">
             <Div col={12} p="0 0.75rem 0.5rem">
