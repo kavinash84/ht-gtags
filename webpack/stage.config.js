@@ -249,7 +249,7 @@ module.exports = {
       },
       s3UploadOptions: {
         Bucket: 'hometown-preprod-v1',
-        Expires: 86400
+        CacheControl: 'max-age=31536000'
       }
     }),
     new WebpackOnBuildPlugin(function() {
