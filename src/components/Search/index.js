@@ -14,6 +14,11 @@ const styles = require('./Search.scss');
 const SearchIcon = require('../../../static/search-icon.svg');
 const CloseIcon = require('../../../static/close-icon.svg');
 
+const onClick = setFilterState => e => {
+  e.preventDefault();
+  setFilterState('clearAll');
+};
+
 const onSubmit = (searchQuery, history, hideResultsOnSubmit, results, setFilterState) => e => {
   e.preventDefault();
   hideResultsOnSubmit();
@@ -35,7 +40,11 @@ const getSuggestions = results => results;
 
 const getSuggestionValue = suggestion => suggestion.name;
 
-const renderSuggestion = suggestion => <Link to={`/${suggestion.url_key}`}>{suggestion.name}</Link>;
+const renderSuggestion = setFilterState => suggestion => (
+  <Link to={`/${suggestion.url_key}`} onClick={onClick(setFilterState)}>
+    {suggestion.name}
+  </Link>
+);
 
 const renderInputComponent = inputProps => (
   <input type="text" placeholder="Search" {...inputProps} className={styles.inputSearch} />
@@ -115,7 +124,7 @@ class Search extends React.Component {
             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
             onSuggestionsClearRequested={this.onSuggestionsClearRequested}
             getSuggestionValue={getSuggestionValue}
-            renderSuggestion={renderSuggestion}
+            renderSuggestion={renderSuggestion(setFilterState)}
             inputProps={inputProps}
             renderInputComponent={renderInputComponent}
             renderSuggestionsContainer={renderSuggestionsContainer({ load, loading, loaded })}

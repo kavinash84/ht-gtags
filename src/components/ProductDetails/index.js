@@ -38,12 +38,13 @@ import BuyNow from '../BuyNow';
 
 const styles = require('./ProductDetails.scss');
 
-const onClickWishList = (sku, list, dispatcher, isUserLoggedIn, history, onOpenLoginModal, addToWaitList) => e => {
+const onClickWishList = (sku, list, dispatcher, isUserLoggedIn, onOpenLoginModal, addToWaitList, simpleSku) => e => {
   e.preventDefault();
-  if (isUserLoggedIn) return dispatcher(list, sku);
-  addToWaitList(sku);
+  if (isUserLoggedIn) return dispatcher(list, sku, simpleSku);
+  addToWaitList(sku, simpleSku);
   return onOpenLoginModal();
 };
+
 const isInWishList = (list, id) => list.includes(id);
 
 const mapDispatchToProps = dispatch =>
@@ -122,7 +123,6 @@ class ProductDetails extends React.Component {
       wishList,
       wishListData,
       isLoggedIn,
-      history,
       wishlistToggle,
       addToWaitList,
       toggleReviewBox,
@@ -191,9 +191,9 @@ class ProductDetails extends React.Component {
                           wishListData,
                           wishlistToggle,
                           isLoggedIn,
-                          history,
                           this.handleLoginModal,
-                          addToWaitList
+                          addToWaitList,
+                          simpleSku
                         )}
                         isWishList={isInWishList(wishList, sku)}
                         wishlistLoading={isInWishList(loadingList, sku)}
@@ -342,7 +342,6 @@ ProductDetails.propTypes = {
   wishList: PropTypes.array,
   wishListData: PropTypes.array,
   isLoggedIn: PropTypes.bool.isRequired,
-  history: PropTypes.object.isRequired,
   wishlistToggle: PropTypes.func.isRequired,
   addToWaitList: PropTypes.func.isRequired,
   toggleReviewBox: PropTypes.func.isRequired,
