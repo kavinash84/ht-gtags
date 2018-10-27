@@ -3,24 +3,44 @@
   "name": "HomeTown",
   "icons": [
     {
-      "src": "launcher-icon-2x.png",
-      "sizes": "96x96",
+      "src": "logo1x.png",
+      "sizes": "16x16",
       "type": "image/png"
     },
     {
-      "src": "launcher-icon-3x.png",
-      "sizes": "144x144",
+      "src": "logo2x.png",
+      "sizes": "48x48",
       "type": "image/png"
     },
     {
-      "src": "launcher-icon-4x.png",
+      "src": "logo3x.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "logo4x.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "logo5x.png",
       "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "logo6x.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "logo7x.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ],
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "theme_color": "#e8ba58",
-  "background_color": "#e8ba58"
+  "theme_color": "#f98d29",
+  "background_color": "#FFF"
 }
