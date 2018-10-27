@@ -76,7 +76,7 @@ class Coupon extends React.Component {
                 fontSize="1rem"
                 ta="left"
                 color={Theme.colors.primary}
-                onClick={this.toggleCouponBox}
+                onClick={() => this.removeCoupon(appliedCoupon)}
               >
                 <Img src={DiscountSuccessIcon} float="left" mr="0.625rem" mb="1rem" mt="3px" alt="" />
                 Applied: <b>{appliedCoupon}</b> <br />
@@ -91,7 +91,6 @@ class Coupon extends React.Component {
                   width="18px"
                   ml="0.625rem"
                   alt="Change"
-                  onClick={() => this.removeCoupon(appliedCoupon)}
                 />
               </Button>
             </div>
