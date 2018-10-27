@@ -97,7 +97,9 @@ class ServiceRequest extends React.Component {
       lastNameFeedBackError ||
       phoneFeedBackError ||
       emailFeedBackError ||
-      cityFeedBackError
+      cityFeedBackError ||
+      orderFeedBackError ||
+      reviewFeedBackError
     ) {
       this.setState({
         firstNameFeedBackError,

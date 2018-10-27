@@ -85,19 +85,28 @@ class Feedback extends React.Component {
     const phoneFeedBackError = !validateMobile(phone);
     const emailFeedBackError = !validateEmail(email);
     const cityFeedBackError = isEmpty(city);
+    const orderFeedBackError = isEmpty(city);
+    const reviewFeedBackError = isEmpty(city);
+    const storeNameFeedBackError = isEmpty(city);
     if (
       firstNameFeedBackError ||
       lastNameFeedBackError ||
       phoneFeedBackError ||
       emailFeedBackError ||
-      cityFeedBackError
+      cityFeedBackError ||
+      orderFeedBackError ||
+      reviewFeedBackError ||
+      storeNameFeedBackError
     ) {
       this.setState({
         firstNameFeedBackError,
         lastNameFeedBackError,
         phoneFeedBackError,
         cityFeedBackError,
-        emailFeedBackError
+        emailFeedBackError,
+        orderFeedBackError,
+        reviewFeedBackError,
+        storeNameFeedBackError
       });
       dispatch(notifSend({
         type: 'warning',
