@@ -140,18 +140,14 @@ class ServiceRequest extends React.Component {
     }
   };
   handleChange = e => {
-    const {
-      target: { value, name }
-    } = e;
+    const { target: { value, name } } = e;
     this.setState({
       [name]: value,
       [`${name}FeedBackError`]: false
     });
   };
   handleCheckBoxChange = e => {
-    const {
-      target: { name }
-    } = e;
+    const { target: { name } } = e;
     this.setState({
       [name]: !this.state[name]
     });
