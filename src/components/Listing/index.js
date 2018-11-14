@@ -150,18 +150,14 @@ class Listing extends React.Component {
                 <Div col="9">
                   <Label display="inline-block">Filter By</Label>
                   {filters.map((item, index) => (
-                    <React.Fragment>
-                      {item.name !== 'Color' && (
-                        <Dropdown
-                          key={String(index)}
-                          checkbox
-                          title={item.name === 'Product main material' ? 'Material' : item.name}
-                          onclick={this.setFilter}
-                          data={item.attributes}
-                          history={history}
-                        />
-                      )}
-                    </React.Fragment>
+                    <Dropdown
+                      key={String(index)}
+                      checkbox
+                      title={item.name === 'Product main material' ? 'Material' : item.name}
+                      onclick={this.setFilter}
+                      data={item.attributes}
+                      history={history}
+                    />
                   ))}
                 </Div>
                 <Div col="3" ta="right">
@@ -312,7 +308,4 @@ Listing.propTypes = {
   breadCrumbs: PropTypes.array.isRequired
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Listing);
+export default connect(null, mapDispatchToProps)(Listing);
