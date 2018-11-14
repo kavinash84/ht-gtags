@@ -150,14 +150,18 @@ class Listing extends React.Component {
                 <Div col="9">
                   <Label display="inline-block">Filter By</Label>
                   {filters.map((item, index) => (
-                    <Dropdown
-                      key={String(index)}
-                      checkbox
-                      title={item.name === 'Product main material' ? 'Material' : item.name}
-                      onclick={this.setFilter}
-                      data={item.name !== 'Color' ? item.attributes : []}
-                      history={history}
-                    />
+                    <React.Fragment>
+                      {item.name !== 'Color' && (
+                        <Dropdown
+                          key={String(index)}
+                          checkbox
+                          title={item.name === 'Product main material' ? 'Material' : item.name}
+                          onclick={this.setFilter}
+                          data={item.attributes}
+                          history={history}
+                        />
+                      )}
+                    </React.Fragment>
                   ))}
                 </Div>
                 <Div col="3" ta="right">
