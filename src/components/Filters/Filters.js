@@ -34,32 +34,34 @@ export default class Filters extends Component {
         <div className={`dropDown ${display === 'rtl' ? 'blockRight' : ''}`}>
           {/* eslint-disable */}
           <ul>
-            {data.map((item, index) => (
-              <li key={index}>
-                <div
-                  onClick={
-                    lastselected >= 1 && index === lastselected && title === 'Category'
-                      ? onclick(data[lastselected - 1].url_key, title, '', data[lastselected - 1].isSelected)
-                      : onclick(item.url_key, title, '', item.isSelected)
-                  }
-                >
-                  {checkbox && (
-                    <div className="checkbox">
-                      <input type="checkbox" id="checkbox" checked={item.isSelected} onChange={() => true} />
-                      <label htmlFor="checkbox" />
-                    </div>
-                  )}
-                  <Label htmlFor="checkbox" fontSize="0.75em" ml="0.625rem" className="dropdownValue">
-                    {item.isHex && (
-                      <span key={item.hex_key} className={styles.colorBox} style={{ backgroundColor: item.hex_key }}>
-                        {' '}
-                      </span>
+            {data &&
+              data.constructor === Array &&
+              data.map((item, index) => (
+                <li key={index}>
+                  <div
+                    onClick={
+                      lastselected >= 1 && index === lastselected && title === 'Category'
+                        ? onclick(data[lastselected - 1].url_key, title, '', data[lastselected - 1].isSelected)
+                        : onclick(item.url_key, title, '', item.isSelected)
+                    }
+                  >
+                    {checkbox && (
+                      <div className="checkbox">
+                        <input type="checkbox" id="checkbox" checked={item.isSelected} onChange={() => true} />
+                        <label htmlFor="checkbox" />
+                      </div>
                     )}
-                    {item.value}
-                  </Label>
-                </div>
-              </li>
-            ))}
+                    <Label htmlFor="checkbox" fontSize="0.75em" ml="0.625rem" className="dropdownValue">
+                      {item.isHex && (
+                        <span key={item.hex_key} className={styles.colorBox} style={{ backgroundColor: item.hex_key }}>
+                          {' '}
+                        </span>
+                      )}
+                      {item.value}
+                    </Label>
+                  </div>
+                </li>
+              ))}
           </ul>
         </div>
       </div>
