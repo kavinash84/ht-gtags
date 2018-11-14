@@ -295,12 +295,7 @@ export default function gaMiddleware() {
             if (data) {
               products = data.map(item => {
                 const { name, net_price: netprice, category_details: categoryDetails } = item.product_info;
-                const category = categoryDetails
-                  ? categoryDetails
-                    .filter(x => x !== null)
-                    .map(pp => pp.url_key)
-                    .join('/')
-                  : '';
+                const category = categoryDetails ? categoryDetails.filter(x => x !== null).join('/') : '';
                 return {
                   name,
                   price: netprice,
