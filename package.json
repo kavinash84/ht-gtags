@@ -13,17 +13,11 @@
   },
   "homepage": "https://hometown.in",
   "keywords": [
+    "hometown",
     "react",
-    "isomorphic",
-    "universal",
-    "webpack",
-    "express",
-    "hot reloading",
-    "react-hot-reloader",
     "redux",
-    "starter",
-    "boilerplate",
-    "babel"
+    "Desktop",
+    "SSR"
   ],
   "main": "bin/server.js",
   "scripts": {
@@ -76,7 +70,7 @@
     "express": "^4.15.4",
     "express-session": "^1.15.5",
     "history": "^4.7.2",
-    "hometown-components": "^1.0.4",
+    "hometown-components": "1.0.4",
     "http-proxy": "^1.16.2",
     "is-promise": "^2.1.0",
     "js-cookie": "^2.1.3",
