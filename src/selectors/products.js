@@ -44,7 +44,8 @@ export const getAppliedFilters = createSelector(
   [getFilters],
   filters =>
     filters.constructor === Array
-      ? filters.map(item => (item.attributes.constructor === Array ? item.attributes.filter(x => x.isSelected) : []))
+      ? filters.map(item =>
+        item.attributes && item.attributes.constructor === Array ? item.attributes.filter(x => x.isSelected) : [])
       : []
 );
 
