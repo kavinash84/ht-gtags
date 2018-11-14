@@ -40,8 +40,13 @@ export const filtersList = createSelector([productMeta], productList => productL
 export const getFilters = createSelector([filtersList], filters =>
   filters.filter(item => filterName.includes(item.name)));
 
-export const getAppliedFilters = createSelector([getFilters], filters =>
-  filters.map(item => (item.attributes.constructor === Array ? item.attributes.filter(x => x.isSelected) : [])));
+export const getAppliedFilters = createSelector(
+  [getFilters],
+  filters =>
+    filters.constructor === Array
+      ? filters.map(item => (item.attributes.constructor === Array ? item.attributes.filter(x => x.isSelected) : []))
+      : []
+);
 
 export const relatedProductsList = createSelector([relatedproducts], items => items.data || []);
 
