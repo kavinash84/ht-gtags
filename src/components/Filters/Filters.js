@@ -35,7 +35,6 @@ export default class Filters extends Component {
           {/* eslint-disable */}
           <ul>
             {data &&
-              data.constructor === Array &&
               data.map((item, index) => (
                 <li key={index}>
                   <div
