@@ -123,6 +123,17 @@ export default class Html extends Component {
                 }
               `}
             </script>
+            <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async="" />
+            <script>
+              {`
+                  var OneSignal = window.OneSignal || [];
+                  OneSignal.push(function() {
+                    OneSignal.init({
+                      appId: "c84b6b57-cadf-4c15-ad82-82e4e5430382",
+                    });
+                  });
+              `}
+            </script>
             <script src="https://cdn.ravenjs.com/3.24.0/raven.min.js" crossOrigin="anonymous" />
             {process.env.NODE_ENV !== 'development' ? (
               <script>
