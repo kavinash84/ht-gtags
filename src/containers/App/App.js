@@ -185,12 +185,12 @@ export default class App extends Component {
             </script>
             <script>
               {`
-                  var OneSignal = window.OneSignal || [];
-                  OneSignal.push(function() {
-                    OneSignal.init({
-                      appId: "c84b6b57-cadf-4c15-ad82-82e4e5430382",
-                    });
+                var OneSignal = window.OneSignal || [];
+                OneSignal.push(function() {
+                  OneSignal.init({
+                    appId: "b2f22db2-b562-4530-8888-516550bfbe6d",
                   });
+                });
               `}
             </script>
             <link rel="alternate" media="only screen and (max-width:640px)" href={`https://m.hometown.in${pathname}`} />
