@@ -126,10 +126,10 @@ export default class Html extends Component {
             <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async="" />
             <script>
               {`
-                  var OneSignal = window.OneSignal || [];
+                var OneSignal = window.OneSignal || [];
                   OneSignal.push(function() {
                     OneSignal.init({
-                      appId: "c84b6b57-cadf-4c15-ad82-82e4e5430382",
+                      appId: "b2f22db2-b562-4530-8888-516550bfbe6d",
                     });
                   });
               `}
