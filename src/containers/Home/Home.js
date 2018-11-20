@@ -16,7 +16,7 @@ import Footer from 'components/Footer';
 import SignupModal from 'containers/Signup/SignupForm';
 import ResponsiveModal from 'components/Modal';
 import cookie from 'js-cookie';
-
+import LazyLoad from 'react-lazyload';
 import { getCities, getOfferStripData, getMiddleBannerData } from 'selectors/homepage';
 
 @connect(({
@@ -107,34 +107,36 @@ export default class Home extends Component {
           <MainSlider data={banners} />
           <Usp />
           {homepageCategories.map((category, index) => (
-            <CategoryCarousel
-              key={String(index)}
-              categoryName={category.title}
-              subTitle={category.sub_title}
-              data={category.values}
-            />
+            <LazyLoad height={200} offset={100} key={String(index)}>
+              <CategoryCarousel categoryName={category.title} subTitle={category.sub_title} data={category.values} />
+            </LazyLoad>
           ))}
           <OfferBanner image={middleBanner.image_url} url={middleBanner.url_key} />
           {homepageProducts.map((products, index) => (
-            <ProductCarousel
-              key={String(index)}
-              title={products.title}
-              subTitle={products.sub_title}
-              data={products.values}
-              pt="1.5rem"
-              height="281px"
-            />
+            <LazyLoad height={200} offset={100} key={String(index)}>
+              <ProductCarousel
+                title={products.title}
+                subTitle={products.sub_title}
+                data={products.values}
+                pt="1.5rem"
+                height="281px"
+              />
+            </LazyLoad>
           ))}
-          {recentlyviewed.length > 0 && (
-            <ProductCarousel
-              title="Recently Viewed"
-              data={recentlyviewed}
-              length={recentlyviewed.length}
-              pt="1.5rem"
-              height="281px"
-            />
-          )}
-          <StoresCarousel cities={cities} />
+          <LazyLoad height={200} offset={100}>
+            {recentlyviewed.length > 0 && (
+              <ProductCarousel
+                title="Recently Viewed"
+                data={recentlyviewed}
+                length={recentlyviewed.length}
+                pt="1.5rem"
+                height="281px"
+              />
+            )}
+          </LazyLoad>
+          <LazyLoad height={200} offset={100}>
+            <StoresCarousel cities={cities} />
+          </LazyLoad>
         </div>
         <ResponsiveModal
           classNames={{ modal: 'signupModal' }}
