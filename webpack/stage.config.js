@@ -219,12 +219,7 @@ module.exports = {
     /* preload plugin */
     new PreloadWebpackPlugin({
       rel: 'preload',
-      as(entry) {
-        if (/\.css$/.test(entry)) return 'style';
-        if (/\.(woff|woff2|ttf|otf)$/.test(entry)) return 'font';
-        if (/\.(png|jpg|svg)$/.test(entry)) return 'image';
-        return 'script';
-      }
+      include: ['main', 'Home']
     }),
 
     /* gzip compression */
