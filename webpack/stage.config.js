@@ -26,6 +26,8 @@ var version = require('../package.json').version;
 
 var S3Plugin = require('webpack-s3-plugin')
 
+const PreloadWebpackPlugin = require('preload-webpack-plugin');
+
 module.exports = {
   devtool: 'source-map',
   context: path.resolve(__dirname, '..'),
@@ -212,6 +214,17 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'src/pwa.js'
+    }),
+
+    /* preload plugin */
+    new PreloadWebpackPlugin({
+      rel: 'preload',
+      as(entry) {
+        if (/\.css$/.test(entry)) return 'style';
+        if (/\.(woff|woff2|ttf|otf)$/.test(entry)) return 'font';
+        if (/\.(png|jpg|svg)$/.test(entry)) return 'image';
+        return 'script';
+      }
     }),
 
     /* gzip compression */
