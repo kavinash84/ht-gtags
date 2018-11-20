@@ -183,6 +183,17 @@ export default class App extends Component {
                   };
                 `}
             </script>
+            <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async="" />
+            <script>
+              {`
+                var OneSignal = window.OneSignal || [];
+                  OneSignal.push(function() {
+                    OneSignal.init({
+                      appId: "b2f22db2-b562-4530-8888-516550bfbe6d",
+                    });
+                  });
+              `}
+            </script>
             <link rel="alternate" media="only screen and (max-width:640px)" href={`https://m.hometown.in${pathname}`} />
             <link rel="canonical" href={`https://www.hometown.in${pathname}`} />
           </Helmet>
