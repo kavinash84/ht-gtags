@@ -43,18 +43,24 @@ export default class StoresCarousel extends Component {
             </Div>
           </Row>
           <Row type="block" m="0 1.5rem 0.5rem">
-            {filteredStores.map((store, index) => (
-              <StoreListItem
-                key={String(index)}
-                city={store.city}
-                store={store.store}
-                address={store.address}
-                pincode={store.pincode}
-                state={store.state}
-                phone={store.phone}
-                url={`/store/${hyphenedString(store.city).toLowerCase()}/${hyphenedString(store.store).toLowerCase()}`}
-              />
-            ))}
+            {filteredStores.map((store, index) => {
+              const url =
+                store.meta.url.length > 0
+                  ? store.meta.url
+                  : `/store/${hyphenedString(store.city).toLowerCase()}/${hyphenedString(store.store).toLowerCase()}`;
+              return (
+                <StoreListItem
+                  key={String(index)}
+                  city={store.city}
+                  store={store.store}
+                  address={store.address}
+                  pincode={store.pincode}
+                  state={store.state}
+                  phone={store.phone}
+                  url={url}
+                />
+              );
+            })}
           </Row>
         </Container>
       </Section>
