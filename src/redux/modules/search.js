@@ -22,7 +22,6 @@ const initialState = {
   showResults: false
 };
 
-let cancel;
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case LOAD:
@@ -89,14 +88,13 @@ export const stopLoading = () => ({
   type: STOP_LOADING
 });
 
+let cancel;
 export const load = query => (dispatch, getState) => {
   const store = getState();
-  const {
-    search: { loading }
-  } = store;
+  const { search: { loading } } = store;
   if (loading) {
     dispatch(stopLoading());
-    cancel('user cancelled request');
+    if (typeof cancel === 'function') cancel('user cancelled request');
   }
   return dispatch({
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
