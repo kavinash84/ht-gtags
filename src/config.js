@@ -1,3 +1,5 @@
+const ver = require('../package.json').version;
+
 const environment = {
   development: {
     isProduction: false,
@@ -5,7 +7,7 @@ const environment = {
   },
   production: {
     isProduction: true,
-    assetsPath: '/dist/'
+    assetsPath: `/dist/${ver}`
   }
 }[process.env.NODE_ENV || 'development'];
 

@@ -7,7 +7,7 @@ export const getWishList = createSelector([wishList], items =>
 
 export const getSKUList = createSelector(
   [wishList],
-  products => products.map(product => product.wishlist_info.configurable_sku) || []
+  products => products.map(product => product.wishlist_info && product.wishlist_info.configurable_sku) || []
 );
 
 export const getWishListCount = createSelector([getWishList], items => items.length);
