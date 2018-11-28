@@ -118,6 +118,18 @@
     }
   }
 }
+.phoneDropdown {
+  button {
+    width: 100%;
+    &:hover {
+      background: #000 !important;
+      color: #FFF !important;
+    }
+  }
+}
+.callusDropdown {
+  padding: 2px 7px !important;
+}
 .sidebar {
   width: 100vw;
   height: 100vh;
