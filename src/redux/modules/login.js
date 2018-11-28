@@ -1,5 +1,11 @@
 import cookie from 'js-cookie';
-import { LOGIN as LOGIN_API, GOOGLE_LOGIN as GOOGLE_LOGIN_API, LOGOUT as LOGOUT_API } from 'helpers/apiUrls';
+import {
+  LOGIN as LOGIN_API,
+  GOOGLE_LOGIN as GOOGLE_LOGIN_API,
+  LOGOUT as LOGOUT_API,
+  OTP as OTP_API,
+  RESEND_OTP as RESEND_OTP_API
+} from 'helpers/apiUrls';
 import { clientId, clientSecret } from 'helpers/Constants';
 
 const LOGIN = 'login/LOGIN';
@@ -11,11 +17,18 @@ const LOGOUT_SUCCESS = 'login/LOGOUT_SUCCESS';
 const LOGOUT_FAIL = 'login/LOGOUT_FAIL';
 const CLEAR_LOGIN_STATE = 'login/CLEAR_LOGIN_STATE';
 
+const GET_OTP = 'login/GET_OTP';
+const GET_OTP_SUCCESS = 'login/GET_OTP_SUCCESS';
+const GET_OTP_FAIL = 'login/GET_OTP_FAIL';
+
 const initialState = {
   loaded: false,
   isLoggedIn: false,
   loggingOut: false,
-  isLoggedOut: false
+  isLoggedOut: false,
+  otp: '',
+  error: false,
+  errorMessage: ''
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -74,6 +87,29 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loggingOut: false,
         logoutError: action.error
+      };
+    case GET_OTP:
+      return {
+        ...state,
+        loading: true,
+        loaded: false,
+        otpSent: false
+      };
+    case GET_OTP_SUCCESS:
+      return {
+        ...state,
+        otpSent: true,
+        loading: false,
+        loaded: true
+      };
+    case GET_OTP_FAIL:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        otpError: true,
+        otpSent: false,
+        errorMessage: action.error.error_message
       };
     case CLEAR_LOGIN_STATE:
       return {
@@ -161,3 +197,31 @@ export const logout = () => dispatch =>
       }
     }
   });
+
+export const getOtp = mobile => ({
+  types: [GET_OTP, GET_OTP_SUCCESS, GET_OTP_FAIL],
+  promise: async ({ client }) => {
+    try {
+      const postData = {
+        mobile
+      };
+      await client.post(OTP_API, postData);
+    } catch (err) {
+      throw err;
+    }
+  }
+});
+
+export const resendOtp = mobile => ({
+  types: [GET_OTP, GET_OTP_SUCCESS, GET_OTP_FAIL],
+  promise: async ({ client }) => {
+    try {
+      const postData = {
+        mobile
+      };
+      await client.post(RESEND_OTP_API, postData);
+    } catch (err) {
+      throw err;
+    }
+  }
+});
