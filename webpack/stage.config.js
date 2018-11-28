@@ -26,6 +26,8 @@ var version = require('../package.json').version;
 
 var S3Plugin = require('webpack-s3-plugin')
 
+const PreloadWebpackPlugin = require('preload-webpack-plugin');
+
 module.exports = {
   devtool: 'source-map',
   context: path.resolve(__dirname, '..'),
@@ -214,6 +216,12 @@ module.exports = {
       template: 'src/pwa.js'
     }),
 
+    /* preload plugin */
+    new PreloadWebpackPlugin({
+      rel: 'preload',
+      include: ['main', 'Home']
+    }),
+
     /* gzip compression */
     new CompressionPlugin({
       test: /\.js|.css|.scss/
@@ -224,6 +232,9 @@ module.exports = {
     new SWPrecacheWebpackPlugin({
       cacheId: 'stage.hometown.in',
       filename: '../service-worker.js',
+      importScripts: [
+        'https://cdn.onesignal.com/sdks/OneSignalSDKWorker.js'
+      ],
       maximumFileSizeToCacheInBytes: 8388608,
 
       // Ensure all our static, local assets are cached.

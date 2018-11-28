@@ -25,7 +25,7 @@ import { addReview, toggleReview } from 'redux/modules/reviews';
 import { toggleWishList, wishListWaitList } from 'redux/modules/wishlist';
 import { setProductPosition } from 'redux/modules/productdetails';
 import { formatAmount } from 'utils/formatters';
-import { calculateDiscount, calculateSavings, calculateLowestEmi } from 'utils/helper';
+import { calculateDiscount, calculateSavings, calculateLowestEmi, getVideoID } from 'utils/helper';
 import { getSKUList } from 'selectors/wishlist';
 import { groupedAttributes as getgroupedAttributes, getBreadCrumbs } from 'selectors/product';
 
@@ -35,6 +35,7 @@ import BreadCrumb from './BreadCrumb';
 import Pincode from './Pincode';
 import AddToCart from '../AddToCart';
 import BuyNow from '../BuyNow';
+import Video from './Video';
 
 const styles = require('./ProductDetails.scss');
 
@@ -279,6 +280,14 @@ class ProductDetails extends React.Component {
                     )}
                     {/* <button onClick={this.toggleShowMore}></button> */}
                     <Specs specs={groupedAttributes} pincode={pincode.selectedPincode} />
+                    {groupedattributes &&
+                      groupedattributes.youtubeid && (
+                      <Row display="block" mt="0" mb="0" mr="0.9375rem" ml="0.9375rem">
+                        <Div col="12" mt="0" pr="0.3125rem">
+                          <Video id={getVideoID(groupedattributes.youtubeid)} />
+                        </Div>
+                      </Row>
+                    )}
                     <Reviews col="12" reviewItems={reviews.data} pr="2.5rem" />
                     <AddReview
                       col="8"

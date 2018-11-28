@@ -1,6 +1,7 @@
 {
   "short_name": "HomeTown",
   "name": "HomeTown",
+  "gcm_sender_id": "482941778795",
   "icons": [
     {
       "src": "logo1x.png",

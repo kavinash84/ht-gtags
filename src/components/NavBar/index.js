@@ -13,9 +13,10 @@ const NavBar = ({
   <div className={styles.navBar} onMouseLeave={handleLeave}>
     <Container pr="0" pl="0">
       <div className={styles.navBarSlider}>
-        {menuItems.filter(menu => menu.visibility === 'on' && menu.name !== 'Clearance Sale').map(menuItem => (
+        {menuItems.filter(menu => menu.visibility === 'on' && menu.name !== 'Festive Gifts').map(menuItem => (
           <Link
             onClick={exitOnClick}
+            title={menuItem.name}
             to={`/${menuItem.url_key}`}
             key={menuItem.id}
             onMouseEnter={handleEnter(menuItem.id)}
@@ -23,7 +24,7 @@ const NavBar = ({
             {menuItem.name}
           </Link>
         ))}
-        <Link onClick={exitOnClick} to="/modular-kitchens" onMouseEnter={handleEnter('')}>
+        <Link onClick={exitOnClick} to="/modular-kitchens" onMouseEnter={handleEnter('')} title="Modular Kitchens">
           Modular Kitchens
         </Link>
         <div className={`${styles.moreDropdownWrapper} dropdownWrapper`}>
@@ -46,20 +47,15 @@ const NavBar = ({
             <ul>
               <li>
                 <Label htmlFor="checkbox" fontSize="0.75em" ml="0.625rem" className="dropdownValue">
-                  <Link onClick={exitOnClick} to="/design-build" onMouseEnter={handleEnter('')}>
+                  <Link onClick={exitOnClick} to="/design-build" onMouseEnter={handleEnter('')} title="Design & Build">
                     Design & Build
                   </Link>
                 </Label>
               </li>
               <li>
                 <Label htmlFor="checkbox" fontSize="0.75em" ml="0.625rem" className="dropdownValue">
-                  <Link
-                    onClick={exitOnClick}
-                    to="/clearance-sale"
-                    onMouseEnter={handleEnter('')}
-                    title="Clearance Sale"
-                  >
-                    Clearance Sale
+                  <Link onClick={exitOnClick} to="/gifts" onMouseEnter={handleEnter('')} title="Festive Gifts">
+                    Festive Gifts
                   </Link>
                 </Label>
               </li>

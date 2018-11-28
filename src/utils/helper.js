@@ -333,3 +333,11 @@ export const redirectionHelper = url => {
   }
   return '';
 };
+
+export const getVideoID = url => {
+  if (url.indexOf('youtube') >= 1 || url.indexOf('youtu') >= 1) {
+    const [, id] = url.split('?v=');
+    return id;
+  }
+  return url;
+};
