@@ -10,6 +10,7 @@ import Button from 'hometown-components/lib/Buttons';
 import Span from 'hometown-components/lib/Span';
 import Heading from 'hometown-components/lib/Heading';
 import { Label } from 'hometown-components/lib/Label';
+import Callus from 'hometown-components/lib/Callus';
 import Fav from 'hometown-components/lib/Icons/Fav';
 import Search from 'components/Search';
 import ResponsiveModal from 'components/Modal';
@@ -142,12 +143,26 @@ export default class MenuSidebar extends Component {
                 <Pincode color="#f2f2f2" onCloseModal={this.onClosePincodeModal} />
               </Div>
             </ResponsiveModal>
-            <a className={styles.cart} href="tel:18002100004">
-              <Img src={PhoneIcon} alt="Hometown" height="24px" mr="0.3125rem" float="left" />
-              <Span fontFamily="light" fontSize="0.875em">
-                1800-210-0004
-              </Span>
-            </a>
+            <div className={`${styles.moreDropdownWrapper} dropdownWrapper`}>
+              <Button
+                btnType="custom"
+                bg="transparent"
+                color="rgba(0,0,0,0.6)"
+                border="none"
+                fontSize="0.875rem !important"
+                tt="capitalize"
+                p="10px 15px 10px 0px"
+                lh="2"
+                height="32px"
+                fontFamily="light"
+                className={`callusDropdown ${styles.cart}`}
+              >
+                <Img src={PhoneIcon} alt="Hometown" height="24px" mr="0.3125rem" float="left" />Call us
+              </Button>
+              <div className={`${styles.phoneDropdown} dropDown`}>
+                <Callus />
+              </div>
+            </div>
             <Link className={styles.cart} to="/store-locator">
               <Img src={PinIcon} alt="Hometown" height="24px" mr="0.3125rem" float="left" />
               <Span fontFamily="light" fontSize="0.875em">
