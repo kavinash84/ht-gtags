@@ -10,11 +10,11 @@ import Button from 'hometown-components/lib/Buttons';
 import Span from 'hometown-components/lib/Span';
 import Heading from 'hometown-components/lib/Heading';
 import { Label } from 'hometown-components/lib/Label';
-import Callus from 'hometown-components/lib/Callus';
 import Fav from 'hometown-components/lib/Icons/Fav';
 import Search from 'components/Search';
 import ResponsiveModal from 'components/Modal';
 import Pincode from 'components/Pincode';
+import CallUs from 'components/CallUs';
 import LoginModal from 'containers/Login/LoginForm';
 import SignupModal from 'containers/Signup/SignupForm';
 import { SIGNUP_URL, HOME_URL, LOGIN_URL, MY_WISHLIST_URL, MY_PROFILE_URL, CART_URL } from 'helpers/Constants';
@@ -52,7 +52,9 @@ const onClickLogout = dispatcher => e => {
     cartCount: getCartCount(cart),
     router
   }),
-  { logoutUser: logout }
+  {
+    logoutUser: logout
+  }
 )
 export default class MenuSidebar extends Component {
   state = {
@@ -157,10 +159,11 @@ export default class MenuSidebar extends Component {
                 fontFamily="light"
                 className={`callusDropdown ${styles.cart}`}
               >
-                <Img src={PhoneIcon} alt="Hometown" height="24px" mr="0.3125rem" float="left" />Call us
+                <Img src={PhoneIcon} alt="Hometown" height="24px" mr="0.3125rem" float="left" />
+                Call us
               </Button>
               <div className={`${styles.phoneDropdown} dropDown`}>
-                <Callus />
+                <CallUs />
               </div>
             </div>
             <Link className={styles.cart} to="/store-locator">
