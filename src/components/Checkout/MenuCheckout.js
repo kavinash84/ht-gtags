@@ -28,11 +28,11 @@ const MenuCheckout = ({ page, history }) => (
           <Div col="3">
             <span className={`${styles.headerLink} ${page === 'payment' ? styles.active : ''}`}>Payment Options</span>
           </Div>
-          <Div col="3">
+          {/* <Div col="3">
             <span className={`${styles.headerLink} ${styles.hideArrow} ${page === 'review' ? styles.active : ''}`}>
               Review & Order
             </span>
-          </Div>
+          </Div> */}
         </Div>
       </Row>
     </Container>
