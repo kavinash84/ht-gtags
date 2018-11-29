@@ -1,0 +1,18 @@
+.shareBar {
+  position: absolute !important;
+  right: -7%;
+  width: auto !important;
+  top: 40px;
+  text-align: right;
+  ul {
+    padding-left: 0;
+    list-style: none;
+    margin-top: 2px;
+    margin-bottom: 0;
+    li {
+      display: inline-block;
+      list-style: none;
+
+    }
+  }
+}

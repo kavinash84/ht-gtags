@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Container from 'hometown-components/lib/Container';
 import Row from 'hometown-components/lib/Row';
 import Div from 'hometown-components/lib/Div';
-import Heading from 'hometown-components/lib/Heading';
+import HeadingH3 from 'hometown-components/lib/HeadingH3';
 import Img from 'hometown-components/lib/Img';
 import Section from 'hometown-components/lib/Section';
 import Text from 'hometown-components/lib/Text';
@@ -129,9 +129,9 @@ class Footer extends React.Component {
                 )}
               </Div>
               <Div col="3">
-                <Heading color="footerHeading" fontFamily="regular" fontSize="1rem" mt="0">
+                <HeadingH3 color="footerHeading" fontFamily="regular" fontSize="1rem" mt="0">
                   CONTACT US
-                </Heading>
+                </HeadingH3>
                 <ul>
                   <li>
                     <a href="tel:1800-210-0004">Call Us: 1800-210-0004</a>
@@ -142,9 +142,9 @@ class Footer extends React.Component {
                 </ul>
               </Div>
               <Div col="3">
-                <Heading color="footerHeading" fontFamily="regular" fontSize="1em" mt="0">
+                <HeadingH3 color="footerHeading" fontFamily="regular" fontSize="1em" mt="0">
                   FOLLOW US
-                </Heading>
+                </HeadingH3>
                 <ul className={styles.socials}>
                   <li>
                     <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/hometown.in/">
@@ -183,9 +183,9 @@ class Footer extends React.Component {
                 menu.children &&
                   menu.visibility === 'on' && (
                   <Div key={menu.name} display="flexEqual">
-                    <Heading color="footerHeading" fontFamily="regular" fontSize="1rem" mt="1rem" pb="2px">
+                    <HeadingH3 color="footerHeading" fontFamily="regular" fontSize="1rem" mt="1rem" pb="2px">
                       {menu.name}
-                    </Heading>
+                    </HeadingH3>
                     <ul>
                       {/*eslint-disable*/}
                         {menu.children.map(
@@ -204,9 +204,9 @@ class Footer extends React.Component {
             </Row>
             <Row m="0" flexWrap="nowrap">
               <Div display="flexEqual" col="2">
-                <Heading color="footerHeading" fontFamily="regular" fontSize="1rem" mt="1rem" pb="2px">
+                <HeadingH3 color="footerHeading" fontFamily="regular" fontSize="1rem" mt="1rem" pb="2px">
                   ABOUT US
-                </Heading>
+                </HeadingH3>
                 <ul>
                   <li>
                     <Link to="/who-we-are">Who We Are</Link>
@@ -222,9 +222,9 @@ class Footer extends React.Component {
                 </ul>
               </Div>
               <Div display="flexEqual" col="2">
-                <Heading color="footerHeading" fontFamily="regular" fontSize="1rem" mt="1rem" pb="2px">
+                <HeadingH3 color="footerHeading" fontFamily="regular" fontSize="1rem" mt="1rem" pb="2px">
                   CUSTOMER SERVICE
-                </Heading>
+                </HeadingH3>
                 <ul>
                   <li>
                     <Link to="/track-order">Track Order</Link>
@@ -247,9 +247,9 @@ class Footer extends React.Component {
                 </ul>
               </Div>
               <Div display="flexEqual" col="2">
-                <Heading color="footerHeading" fontFamily="regular" fontSize="1rem" mt="1rem" pb="2px">
+                <HeadingH3 color="footerHeading" fontFamily="regular" fontSize="1rem" mt="1rem" pb="2px">
                   USEFUL LINKS
-                </Heading>
+                </HeadingH3>
                 <ul>
                   <li>
                     <a href="/sitemap.html" target="_blank">
@@ -262,9 +262,9 @@ class Footer extends React.Component {
                 </ul>
               </Div>
               <Div display="flexEqual" col="3">
-                <Heading color="footerHeading" fontFamily="regular" fontSize="1rem" mt="1rem" pb="2px">
+                <HeadingH3 color="footerHeading" fontFamily="regular" fontSize="1rem" mt="1rem" pb="2px">
                   OUR APP
-                </Heading>
+                </HeadingH3>
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
@@ -274,9 +274,9 @@ class Footer extends React.Component {
                 </a>
               </Div>
               <Div display="flexEqual" col="3">
-                <Heading color="footerHeading" fontFamily="regular" fontSize="1rem" mt="1rem" pb="2px">
+                <HeadingH3 color="footerHeading" fontFamily="regular" fontSize="1rem" mt="1rem" pb="2px">
                   PAYMENT METHODS
-                </Heading>
+                </HeadingH3>
                 <Row ml="0" mr="0" className={styles.paymentWrapper}>
                   <Div col="2" p="0 5px">
                     <Img src={visaIcon} alt="visaCard" width="100%" />

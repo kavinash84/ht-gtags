@@ -21,6 +21,7 @@ import ProductCarousel from 'components/ProductCarousel';
 import EmiModal from 'containers/EmiModal/EmiModal';
 import ResponsiveModal from 'components/Modal';
 import LoginModal from 'containers/Login/LoginForm';
+import ShareBar from 'components/ShareBar';
 import { addReview, toggleReview } from 'redux/modules/reviews';
 import { toggleWishList, wishListWaitList } from 'redux/modules/wishlist';
 import { setProductPosition } from 'redux/modules/productdetails';
@@ -183,6 +184,7 @@ class ProductDetails extends React.Component {
                         count={count}
                         mt="1rem"
                       />
+                      <ShareBar mt="10px" />
                     </Div>
                     <Div col="1" mt="0">
                       <WishlistBtn
@@ -350,4 +352,7 @@ ProductDetails.propTypes = {
   gattributes: PropTypes.object.isRequired,
   loadingList: PropTypes.array
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductDetails);
