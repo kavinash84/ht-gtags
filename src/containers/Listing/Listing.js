@@ -20,7 +20,8 @@ import {
   getProductCount,
   getFilters,
   getAppliedFilters,
-  getSEOInfo
+  getSEOInfo,
+  getl4
 } from 'selectors/products';
 import { SITE_URL } from 'helpers/Constants';
 import CANONICALS from 'data/canonical';
@@ -48,7 +49,8 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
   categoryquery: state.products.category,
   seoInfo: getSEOInfo(state),
   breadCrumbs: state.products.categoryDetails,
-  currentPage: state.pagination.page
+  currentPage: state.pagination.page,
+  categoryBar: getl4(state)
 }))
 @withRouter
 export default class Listing extends Component {
@@ -73,7 +75,8 @@ export default class Listing extends Component {
     isLoggedIn: PropTypes.bool,
     seoInfo: PropTypes.object,
     breadCrumbs: PropTypes.array,
-    currentPage: PropTypes.number
+    currentPage: PropTypes.number,
+    categoryBar: PropTypes.array
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -97,7 +100,8 @@ export default class Listing extends Component {
     isLoggedIn: false,
     seoInfo: {},
     breadCrumbs: [],
-    currentPage: 1
+    currentPage: 1,
+    categoryBar: []
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.pincode !== this.props.pincode) {
@@ -128,10 +132,13 @@ export default class Listing extends Component {
       categoryquery,
       seoInfo,
       breadCrumbs,
-      currentPage
+      currentPage,
+      categoryBar
     } = this.props;
     let page;
-    const { location: { search, pathname } } = history;
+    const {
+      location: { search, pathname }
+    } = history;
     if (search !== '') {
       [, page] = search.replace('?', '').split('page=');
     } else page = currentPage;
@@ -166,6 +173,7 @@ export default class Listing extends Component {
             </Section>
           )}
           {!loaded && loading && !products.length && <ListingShimmer />}
+
           {loaded && products.length && !shimmer ? (
             <div>
               <ListingContainer
@@ -185,6 +193,7 @@ export default class Listing extends Component {
                 metaResults={metadata}
                 categoryquery={categoryquery}
                 breadCrumbs={breadCrumbs}
+                categoryBar={categoryBar}
               />
               <Pagination
                 loading={loading}

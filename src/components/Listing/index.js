@@ -23,6 +23,7 @@ import AddToCart from '../AddToCart';
 import AppliedFilters from '../Filters/AppliedFilters';
 import ScrollToTop from '../ScrollToTop';
 import BreadCrumb from './BreadCrumb';
+import CategoryBar from './CategoryBar';
 
 const sortByList = require('data/sortby');
 
@@ -136,13 +137,15 @@ class Listing extends React.Component {
       appliedFilters,
       sortBy,
       addToWaitList,
-      breadCrumbs
+      breadCrumbs,
+      categoryBar
     } = this.props;
     return (
       <Div type="block">
         <TitleBar title={categoryName} productCount={productCount}>
           <BreadCrumb categoryDetails={breadCrumbs} />
         </TitleBar>
+        <CategoryBar categoryBar={categoryBar} />
         <Section pt="1rem" mb="0">
           <Container pr="0" pl="0">
             <div className={styles.filterBar}>
@@ -285,7 +288,8 @@ Listing.defaultProps = {
   metaResults: [],
   loadingList: [],
   isLoggedIn: false,
-  categoryquery: ''
+  categoryquery: '',
+  categoryBar: []
 };
 
 Listing.propTypes = {
@@ -305,7 +309,11 @@ Listing.propTypes = {
   metaResults: PropTypes.array,
   categoryquery: PropTypes.string,
   addToWaitList: PropTypes.func.isRequired,
-  breadCrumbs: PropTypes.array.isRequired
+  breadCrumbs: PropTypes.array.isRequired,
+  categoryBar: PropTypes.array
 };
 
-export default connect(null, mapDispatchToProps)(Listing);
+export default connect(
+  null,
+  mapDispatchToProps
+)(Listing);
