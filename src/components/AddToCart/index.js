@@ -77,7 +77,7 @@ const AddToCart = ({
               bc={btnColor === 'transparent' ? '#f98d29' : btnColor}
               color={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
               bg={btnColor === 'transparent' ? 'transparent' : btnColor}
-              p="7px 15px 2px"
+              p="7px 15px"
               size={size}
               disabled={addLoading}
               onClick={onClick(itemId, sku, simpleSku, session, pincode)(addToCart)}
@@ -92,7 +92,7 @@ const AddToCart = ({
                 fontFamily="regular"
                 color={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
                 va="top"
-                lh="1.8"
+                lh="1.5"
               >
                 {addLoading ? 'Adding..' : 'Add to Cart'}
               </Span>
