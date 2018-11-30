@@ -136,7 +136,8 @@ class Listing extends React.Component {
       appliedFilters,
       sortBy,
       addToWaitList,
-      breadCrumbs
+      breadCrumbs,
+      selectedPincode
     } = this.props;
     return (
       <Div type="block">
@@ -229,6 +230,7 @@ class Listing extends React.Component {
                     }
                     setProductPosition={productPosition}
                     productURL={formatProductURL(item.data.name, item.data.sku)}
+                    pincode={selectedPincode}
                   />
                   <Div mt="0" p="0.25rem 0.125rem 0.5rem">
                     <AddToCart
@@ -305,7 +307,8 @@ Listing.propTypes = {
   metaResults: PropTypes.array,
   categoryquery: PropTypes.string,
   addToWaitList: PropTypes.func.isRequired,
-  breadCrumbs: PropTypes.array.isRequired
+  breadCrumbs: PropTypes.array.isRequired,
+  selectedPincode: PropTypes.string.isRequired
 };
 
 export default connect(null, mapDispatchToProps)(Listing);

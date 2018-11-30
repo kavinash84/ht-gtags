@@ -48,7 +48,8 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
   categoryquery: state.products.category,
   seoInfo: getSEOInfo(state),
   breadCrumbs: state.products.categoryDetails,
-  currentPage: state.pagination.page
+  currentPage: state.pagination.page,
+  selectedPincode: state.pincode.selectedPincode
 }))
 @withRouter
 export default class Listing extends Component {
@@ -73,7 +74,8 @@ export default class Listing extends Component {
     isLoggedIn: PropTypes.bool,
     seoInfo: PropTypes.object,
     breadCrumbs: PropTypes.array,
-    currentPage: PropTypes.number
+    currentPage: PropTypes.number,
+    selectedPincode: PropTypes.string
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -97,7 +99,8 @@ export default class Listing extends Component {
     isLoggedIn: false,
     seoInfo: {},
     breadCrumbs: [],
-    currentPage: 1
+    currentPage: 1,
+    selectedPincode: ''
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.pincode !== this.props.pincode) {
@@ -128,7 +131,8 @@ export default class Listing extends Component {
       categoryquery,
       seoInfo,
       breadCrumbs,
-      currentPage
+      currentPage,
+      selectedPincode
     } = this.props;
     let page;
     const { location: { search, pathname } } = history;
@@ -185,6 +189,7 @@ export default class Listing extends Component {
                 metaResults={metadata}
                 categoryquery={categoryquery}
                 breadCrumbs={breadCrumbs}
+                selectedPincode={selectedPincode}
               />
               <Pagination
                 loading={loading}
