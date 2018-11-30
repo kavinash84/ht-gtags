@@ -30,7 +30,7 @@ class CallUs extends React.Component {
       const { dispatch } = this.context.store;
       dispatch(notifSend({
         type: 'success',
-        msg: "Thank you! We'll Contack You soon.",
+        msg: "Thank you! We'll Contact You soon.",
         dismissAfter: 2000
       }));
     }
