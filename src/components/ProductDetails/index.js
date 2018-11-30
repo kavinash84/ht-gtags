@@ -26,7 +26,7 @@ import { addReview, toggleReview } from 'redux/modules/reviews';
 import { toggleWishList, wishListWaitList } from 'redux/modules/wishlist';
 import { setProductPosition } from 'redux/modules/productdetails';
 import { formatAmount } from 'utils/formatters';
-import { calculateDiscount, calculateSavings, calculateLowestEmi } from 'utils/helper';
+import { calculateDiscount, calculateSavings, calculateLowestEmi, getVideoID, formatProductURL } from 'utils/helper';
 import { getSKUList } from 'selectors/wishlist';
 import { groupedAttributes as getgroupedAttributes, getBreadCrumbs } from 'selectors/product';
 
@@ -36,6 +36,7 @@ import BreadCrumb from './BreadCrumb';
 import Pincode from './Pincode';
 import AddToCart from '../AddToCart';
 import BuyNow from '../BuyNow';
+import Video from './Video';
 
 const styles = require('./ProductDetails.scss');
 
@@ -89,6 +90,10 @@ class ProductDetails extends React.Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
+  constructor(props) {
+    super(props);
+    this.reviewsRef = React.createRef();
+  }
   state = {
     openLogin: false,
     showmore: true
@@ -100,6 +105,17 @@ class ProductDetails extends React.Component {
       });
     }
   }
+  onClickReviews = () => {
+    try {
+      const { top } = this.reviewsRef.current.getBoundingClientRect();
+      window.scroll({
+        top: Number(top - 60),
+        behavior: 'smooth'
+      });
+    } catch (e) {
+      window.scroll(0, this.reviewsRef.current.offsetTop);
+    }
+  };
   handleLoginModal = () => {
     this.setState({ openLogin: !this.state.openLogin });
   };
@@ -112,6 +128,7 @@ class ProductDetails extends React.Component {
       showmore: !this.state.showmore
     });
   };
+
   render() {
     const {
       product,
@@ -153,6 +170,7 @@ class ProductDetails extends React.Component {
     const { showmore } = this.state;
     const isEmiAvailable = Number(checkSpecialPrice) >= 3000;
     const { main_material: material, color, category_type: productType } = gattributes;
+    const productURL = `https://www.hometown.in${formatProductURL(name, sku)}`;
     return (
       <Div type="block">
         <Section p="0" pb="2rem" mb="0" className={styles.pdpWrapper}>
@@ -160,6 +178,11 @@ class ProductDetails extends React.Component {
             <title>{productPageTitle(name)}</title>
             <meta name="keywords" content={productMetaKeywords(productType, material)} />
             <meta name="description" content={productMetaDescription(name, productType, material, color)} />
+            <meta property="og:url" content={productURL} />
+            <meta property="og:type" content="article" />
+            <meta property="og:title" content={name} />
+            <meta property="og:description" content={name} />
+            <meta property="og:image" content={images && images.length > 0 && `${images[0].url}.jpg`} />
           </Helmet>
           <Container type="container" pr="0" pl="0">
             <Row display="block" mt="0" mb="0" mr="0" ml="0">
@@ -183,8 +206,9 @@ class ProductDetails extends React.Component {
                         ratings={rating}
                         count={count}
                         mt="1rem"
+                        onClickReviews={this.onClickReviews}
                       />
-                      <ShareBar mt="10px" />
+                      <ShareBar title={name} url={productURL} mt="10px" />
                     </Div>
                     <Div col="1" mt="0">
                       <WishlistBtn
@@ -281,16 +305,26 @@ class ProductDetails extends React.Component {
                     )}
                     {/* <button onClick={this.toggleShowMore}></button> */}
                     <Specs specs={groupedAttributes} pincode={pincode.selectedPincode} />
-                    <Reviews col="12" reviewItems={reviews.data} pr="2.5rem" />
-                    <AddReview
-                      col="8"
-                      catalogId={groupedattributes.id_catalog_config}
-                      loaded
-                      onClickSubmit={this.addReview}
-                      adding={adding}
-                      added={added}
-                      toggleReview={toggleReviewBox}
-                    />
+                    {groupedattributes &&
+                      groupedattributes.youtubeid && (
+                      <Row display="block" mt="0" mb="0" mr="0.9375rem" ml="0.9375rem">
+                        <Div col="12" mt="0" pr="0.3125rem">
+                          <Video id={getVideoID(groupedattributes.youtubeid)} />
+                        </Div>
+                      </Row>
+                    )}
+                    <div ref={this.reviewsRef}>
+                      <Reviews col="12" reviewItems={reviews.data} pr="2.5rem" />
+                      <AddReview
+                        col="8"
+                        catalogId={groupedattributes.id_catalog_config}
+                        loaded
+                        onClickSubmit={this.addReview}
+                        adding={adding}
+                        added={added}
+                        toggleReview={toggleReviewBox}
+                      />
+                    </div>
                   </Row>
                 </Div>
               </Div>
@@ -352,7 +386,4 @@ ProductDetails.propTypes = {
   gattributes: PropTypes.object.isRequired,
   loadingList: PropTypes.array
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
