@@ -232,7 +232,7 @@ class Listing extends React.Component {
                     productURL={formatProductURL(item.data.name, item.data.sku)}
                     pincode={selectedPincode}
                   />
-                  <Div mt="0" p="0.3125rem 0.125rem 0rem">
+                  <Div mt="0" p="0.5rem 0.125rem">
                     <AddToCart
                       simpleSku={Object.keys(item.data.simples)[0]}
                       sku={item.data.sku}
@@ -311,4 +311,7 @@ Listing.propTypes = {
   selectedPincode: PropTypes.string.isRequired
 };
 
-export default connect(null, mapDispatchToProps)(Listing);
+export default connect(
+  null,
+  mapDispatchToProps
+)(Listing);
