@@ -142,41 +142,48 @@ class Coupon extends React.Component {
                 )}
                 {/* {error && <div>{errorMsg}</div>} */}
               </div>
+              <Label ta="center" color="primary" display="block" mt="5px" mb="0.9375rem">
+                <Button p="0" color="primary" size="block" btnType="link" ta="right">
+                  View Applicable Coupons
+                </Button>
+              </Label>
             </div>
           )}
           {coupons.length > 0 && (
-            <div>
-              <Label ta="center" display="block" mt="1rem" mb="0.9375rem">
-                OR
-              </Label>
-              <div className={`${styles.offerList} ${styles.active}`}>
-                <ul>
-                  {coupons.map(item => (
-                    <button
+            <div className={`${styles.offerList} ${styles.active}`}>
+              <ul>
+                {coupons.map(item => (
+                  <li className={styles.active}>
+                    <Button
                       onClick={() => {
                         this.handleClick(item.couponCode);
                       }}
+                      btnType="link"
+                      size="block"
+                      p="0"
+                      ta="left"
                     >
-                      <li>
-                        <div className={styles.couponWrapper}>
-                          <div className={styles.coupon}>
-                            <label htmlFor="checkbox" className={styles.couponCode}>
-                              {item.couponCode}
-                            </label>
-                            <label htmlFor="checkbox" className={styles.saveRs}>
-                              Flat <span>{item.discount_percentage} %</span> Off
-                            </label>
-                          </div>
-                          <p htmlFor="checkbox" className={styles.offerDetails}>
-                            {item.description}
-                          </p>
-                          <ul className={styles.offerCondition} />
+                      <div className={styles.couponWrapper}>
+                        <div className={styles.coupon}>
+                          <Label htmlFor="checkbox" className={styles.couponCode}>
+                            {item.couponCode}
+                          </Label>
+                          <Label htmlFor="checkbox" className={styles.saveRs}>
+                            Flat{' '}
+                            <span>
+                              <b>{item.discount_percentage} %</b>
+                            </span>{' '}
+                            Off
+                          </Label>
                         </div>
-                      </li>
-                    </button>
-                  ))}
-                </ul>
-              </div>
+                        <p htmlFor="checkbox" className={styles.offerDetails}>
+                          {item.description}
+                        </p>
+                      </div>
+                    </Button>
+                  </li>
+                ))}
+              </ul>
             </div>
           )}
         </Div>
