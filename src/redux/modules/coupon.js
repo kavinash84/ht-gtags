@@ -138,7 +138,7 @@ export const removeCoupon = (coupon, sessionId, pincode) => dispatch =>
     }
   });
 
-// export const loadCoupons = (sku, pincode = '110004') => ({
-//   types: [LOAD_COLOR_PRODUCTS, LOAD_COLOR_PRODUCTS_SUCCESS, LOAD_COLOR_PRODUCTS_FAIL],
-//   promise: ({ client }) => client.get(`tesla/product/color-products/${sku}/${pincode}`)
-// });
+export const loadCoupons = (sessionId, pincode = '110004') => ({
+  types: [LOAD_COUPONS, LOAD_COUPONS_SUCCESS, LOAD_COUPONS_FAIL],
+  promise: ({ client }) => client.get(`${COUPON_API}s/${sessionId}/${pincode}`)
+});
