@@ -7,7 +7,7 @@ import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
-import Heading from 'hometown-components/lib/Heading';
+import HeadingH6 from 'hometown-components/lib/HeadingH6';
 import TitlePrice from 'hometown-components/lib/ProductDetails/TitlePrice';
 import ColorOption from 'hometown-components/lib/ProductDetails/ColorOption';
 import ServiceDetails from 'hometown-components/lib/ProductDetails/ServiceDetails';
@@ -229,9 +229,9 @@ class ProductDetails extends React.Component {
                       {colorproducts.length > 0 && (
                         <Section mb="0.3125rem" p="0" mt="1.25rem">
                           <Row display="block" mr="0" ml="0">
-                            <Heading fontSize="1em" color="textDark" mb="0.625rem" mt="0px" fontFamily="medium">
+                            <HeadingH6 fontSize="1em" color="textDark" mb="0.625rem" mt="0px" fontFamily="medium">
                               Color Options
-                            </Heading>
+                            </HeadingH6>
                           </Row>
                           <ColorOption data={colorproducts} />
                         </Section>
