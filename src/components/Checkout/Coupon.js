@@ -160,7 +160,7 @@ class Coupon extends React.Component {
             <div className={`${styles.offerList} `}>
               <ul>
                 {coupons.map(item => (
-                  <li className={`${item.couponCode === appliedCoupon ? styles.active : ''}`}>
+                  <li className={`${item.couponCode === appliedCoupon ? styles.active : ''}`} key={item.couponCode}>
                     <Button
                       onClick={() => {
                         this.handleClick(item.couponCode);
