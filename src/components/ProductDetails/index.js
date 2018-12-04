@@ -18,6 +18,7 @@ import AddReview from 'hometown-components/lib/Reviews/WriteReview';
 import Img from 'hometown-components/lib/Img';
 import WishlistBtn from 'hometown-components/lib/WishlistBtn';
 import ProductCarousel from 'components/ProductCarousel';
+import CombinedBuy from 'components/CombinedBuy';
 import EmiModal from 'containers/EmiModal/EmiModal';
 import ResponsiveModal from 'components/Modal';
 import LoginModal from 'containers/Login/LoginForm';
@@ -28,8 +29,8 @@ import { setProductPosition } from 'redux/modules/productdetails';
 import { formatAmount } from 'utils/formatters';
 import { calculateDiscount, calculateSavings, calculateLowestEmi, getVideoID, formatProductURL } from 'utils/helper';
 import { getSKUList } from 'selectors/wishlist';
-import { groupedAttributes as getgroupedAttributes, getBreadCrumbs } from 'selectors/product';
-
+import { groupedAttributes as getgroupedAttributes, getBreadCrumbs, getSimpleSku } from 'selectors/product';
+import { getCombinedBuy } from 'redux/modules/combinedbuy';
 import { productPageTitle, productMetaDescription, productMetaKeywords } from 'utils/seo';
 import ProductDetailsCarousel from './Carousel';
 import BreadCrumb from './BreadCrumb';
@@ -68,11 +69,13 @@ const mapStateToProps = ({
   relatedproducts,
   emioptions,
   wishlist,
-  userLogin
+  userLogin,
+  combinedbuy
 }) => ({
   product: productdetails.productDescription,
   reviews,
   pincode,
+  combinedbuy: combinedbuy.results,
   deliveryDateLoading: productdetails.deliveryDateLoading,
   colorproducts: colorproducts.list,
   relatedproductsList: relatedproducts.data,
@@ -83,7 +86,8 @@ const mapStateToProps = ({
   isLoggedIn: userLogin.isLoggedIn,
   loadingList: wishlist.loadingList,
   gattributes: getgroupedAttributes(productdetails),
-  breadcrumbs: getBreadCrumbs(productdetails)
+  breadcrumbs: getBreadCrumbs(productdetails),
+  simpleSku: getSimpleSku(productdetails)
 });
 
 class ProductDetails extends React.Component {
@@ -98,6 +102,14 @@ class ProductDetails extends React.Component {
     openLogin: false,
     showmore: true
   };
+  componentDidMount() {
+    const { dispatch } = this.context.store;
+    const {
+      simpleSku,
+      pincode: { selectedPincode }
+    } = this.props;
+    dispatch(getCombinedBuy(simpleSku, selectedPincode));
+  }
   componentWillReceiveProps(nextProps) {
     if (nextProps.isLoggedIn) {
       this.setState({
@@ -128,7 +140,10 @@ class ProductDetails extends React.Component {
       showmore: !this.state.showmore
     });
   };
-
+  handleCombinedBuy = (name, skus) => {
+    console.log(name);
+    console.log(skus);
+  };
   render() {
     const {
       product,
@@ -147,6 +162,7 @@ class ProductDetails extends React.Component {
       deliveryDateLoading,
       gattributes,
       breadcrumbs,
+      combinedbuy,
       loadingList
     } = this.props;
     const {
@@ -332,6 +348,23 @@ class ProductDetails extends React.Component {
           </Container>
         </Section>
 
+        {combinedbuy.length > 0 &&
+          combinedbuy.map(item => (
+            <div>
+              <Row display="block" pt="0.5rem" mt="2.5rem" mb="0" mr="0">
+                <CombinedBuy
+                  pb="2.5rem"
+                  title={item.name}
+                  data={item.products}
+                  length={item.products.length}
+                  price={item.total_price}
+                  discountedPrice={item.total_price_after_discount}
+                  handleCombinedBuy={() => this.handleCombinedBuy(item.name, item.skus)}
+                />
+              </Row>
+            </div>
+          ))}
+
         {relatedproductsList.length > 0 && (
           <Row display="block" pt="0.5rem" mt="2.5rem" mb="0" mr="0">
             <ProductCarousel
@@ -365,7 +398,9 @@ ProductDetails.defaultProps = {
   wishList: [],
   wishListData: [],
   deliveryDateLoading: false,
-  loadingList: []
+  loadingList: [],
+  combinedbuy: [],
+  simpleSku: ''
 };
 ProductDetails.propTypes = {
   product: PropTypes.object,
@@ -384,6 +419,11 @@ ProductDetails.propTypes = {
   deliveryDateLoading: PropTypes.bool,
   breadcrumbs: PropTypes.array.isRequired,
   gattributes: PropTypes.object.isRequired,
-  loadingList: PropTypes.array
+  loadingList: PropTypes.array,
+  simpleSku: PropTypes.string,
+  combinedbuy: PropTypes.array
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductDetails);
