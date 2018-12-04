@@ -24,9 +24,15 @@ const NavBar = ({
             {menuItem.name}
           </Link>
         ))}
-        <Link onClick={exitOnClick} to="/modular-kitchens" onMouseEnter={handleEnter('')} title="Modular Kitchens">
+        <a
+          href="https://www.hometown.in/modular-kitchens"
+          title="Design & Build"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={exitOnClick}
+        >
           Modular Kitchens
-        </Link>
+        </a>
         <div className={`${styles.moreDropdownWrapper} dropdownWrapper`}>
           <Button
             btnType="custom"
@@ -47,9 +53,15 @@ const NavBar = ({
             <ul>
               <li>
                 <Label htmlFor="checkbox" fontSize="0.75em" ml="0.625rem" className="dropdownValue">
-                  <Link onClick={exitOnClick} to="/design-build" onMouseEnter={handleEnter('')} title="Design & Build">
+                  <a
+                    href="https://www.hometown.in/design-build"
+                    title="Design & Build"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={exitOnClick}
+                  >
                     Design & Build
-                  </Link>
+                  </a>
                 </Label>
               </li>
               <li>

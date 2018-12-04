@@ -8,8 +8,8 @@ import StoreDetails from 'components/Stores/StoreDetails';
 const getStoreInfo = (data, props) =>
   data.filter(store => store.meta.url.split('/')[3] === props.match.params.storeName);
 
-@connect(({ stores }, props) => ({
-  stores: getStoreInfo(stores.data.items.text, props)
+@connect(({ stores: { data } }, props) => ({
+  stores: getStoreInfo((data && data.items && data.items.text) || [], props)
 }))
 class Stores extends Component {
   render() {
