@@ -67,7 +67,11 @@ class Coupon extends React.Component {
       coupon: e.target.value
     });
   };
-
+  toggleMoreCoupons = () => {
+    this.setState({
+      showmorecoupons: !this.state.showmorecoupons
+    });
+  };
   render() {
     const {
       cart,
@@ -142,18 +146,21 @@ class Coupon extends React.Component {
                 )}
                 {/* {error && <div>{errorMsg}</div>} */}
               </div>
-              <Label ta="center" color="primary" display="block" mt="5px" mb="0.9375rem">
-                <Button p="0" color="primary" size="block" btnType="link" ta="right">
-                  View Applicable Coupons
-                </Button>
-              </Label>
+              {coupons.length > 0 && (
+                <Label ta="center" color="primary" display="block" mt="5px" mb="0.9375rem">
+                  <Button onClick={this.toggleMoreCoupons} p="0" color="primary" size="block" btnType="link" ta="right">
+                    View Applicable Coupons
+                  </Button>
+                </Label>
+              )}
             </div>
           )}
-          {coupons.length > 0 && (
-            <div className={`${styles.offerList} ${styles.active}`}>
+          {coupons.length > 0 &&
+            this.state.showmorecoupons && (
+            <div className={`${styles.offerList} `}>
               <ul>
                 {coupons.map(item => (
-                  <li className={styles.active}>
+                  <li className={`${item.couponCode === appliedCoupon ? styles.active : ''}`}>
                     <Button
                       onClick={() => {
                         this.handleClick(item.couponCode);
@@ -169,11 +176,11 @@ class Coupon extends React.Component {
                             {item.couponCode}
                           </Label>
                           <Label htmlFor="checkbox" className={styles.saveRs}>
-                            Flat{' '}
+                              Flat{' '}
                             <span>
                               <b>{item.discount_percentage} %</b>
                             </span>{' '}
-                            Off
+                              Off
                           </Label>
                         </div>
                         <p htmlFor="checkbox" className={styles.offerDetails}>
