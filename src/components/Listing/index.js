@@ -232,7 +232,7 @@ class Listing extends React.Component {
                     productURL={formatProductURL(item.data.name, item.data.sku)}
                     pincode={selectedPincode}
                   />
-                  <Div mt="0" p="0.5rem 0.125rem">
+                  <Div mt="0" p="10px 0.125rem 0.5rem 0">
                     <AddToCart
                       simpleSku={Object.keys(item.data.simples)[0]}
                       sku={item.data.sku}
@@ -240,6 +240,7 @@ class Listing extends React.Component {
                       isSoldOut={item.soldout}
                       btnType="btnOutline"
                       btnColor="transparent"
+                      ta="left"
                     />
                   </Div>
                 </div>
@@ -311,7 +312,4 @@ Listing.propTypes = {
   selectedPincode: PropTypes.string.isRequired
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Listing);
+export default connect(null, mapDispatchToProps)(Listing);

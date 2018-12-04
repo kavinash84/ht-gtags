@@ -46,12 +46,13 @@ const AddToCart = ({
   isSoldOut,
   height,
   btnColor,
-  btnType
+  btnType,
+  ta
 }) => {
   const checkStatus = checkSKUInCart(cartSKUs, sku);
   const addLoading = addingToCart && stateId === itemId;
   return (
-    <div>
+    <Div ta={ta}>
       {isSoldOut ? (
         <div>
           <Button
@@ -112,7 +113,7 @@ const AddToCart = ({
           )}
         </div>
       )}
-    </div>
+    </Div>
   );
 };
 
@@ -125,7 +126,8 @@ AddToCart.defaultProps = {
   isSoldOut: false,
   height: 'auto',
   btnColor: '#f98d29',
-  btnType: 'custom'
+  btnType: 'custom',
+  ta: 'center'
 };
 
 AddToCart.propTypes = {
@@ -142,10 +144,8 @@ AddToCart.propTypes = {
   height: PropTypes.string,
   btnColor: PropTypes.string,
   btnType: PropTypes.string,
+  ta: PropTypes.string,
   isSoldOut: PropTypes.bool
 };
 
-export default connect(
-  mapStateToProps,
-  { ...actionCreators }
-)(AddToCart);
+export default connect(mapStateToProps, { ...actionCreators })(AddToCart);
