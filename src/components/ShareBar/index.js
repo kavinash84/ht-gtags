@@ -3,20 +3,14 @@ import PropTypes from 'prop-types';
 import Div from 'hometown-components/lib/Div';
 import Button from 'hometown-components/lib/Buttons';
 import Img from 'hometown-components/lib/Img';
-import Heading from 'hometown-components/lib/Heading';
 
 const fbIcon = require('../../../static/facebook-round.svg');
 const emailIcon = require('../../../static/closed-envelope-circle.svg');
 const pintIcon = require('../../../static/pinterest-round.svg');
-const shareIcon = require('../../../static/share-symbol.svg');
 const styles = require('./ShareBar.scss');
 
 const ShareBar = ({ url, title, ...rest }) => (
   <Div className={styles.shareBar} {...rest}>
-    <Heading fontSize="14px" color="textDark" fontWeight="400" mt="0" mb="0" p="0 3px" pb="4px">
-      <Img display="inline-block" va="middle" mr="8px" src={shareIcon} alt="Share" width="16px" />
-      Share
-    </Heading>
     <ul>
       <li>
         <a target="_blank" rel="noopener noreferrer" href={`http://www.facebook.com/sharer.php?u=${url}`}>

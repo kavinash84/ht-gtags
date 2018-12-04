@@ -173,7 +173,7 @@ const Cart = ({
                         </Label>
                       )}
                       <br />
-                      <Label color="primary" fontSize="1.25rem" mt="0">
+                      <Label color="primary" fontSize="1.25rem" mt="3px">
                         Rs.{' '}
                         {item.product_info.special_price === 0
                           ? formatAmount(Number(item.product_info.unit_price) * Number(item.qty))
