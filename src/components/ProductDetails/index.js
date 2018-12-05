@@ -173,17 +173,18 @@ class ProductDetails extends React.Component {
     const isEmiAvailable = Number(checkSpecialPrice) >= 3000;
     const { main_material: material, color, category_type: productType } = gattributes;
     const productURL = `${SITE_URL}${formatProductURL(name, sku)}`;
+    const productDescription = productMetaDescription(name, productType, material, color);
     return (
       <Div type="block">
         <Section p="0" pb="2rem" mb="0" className={styles.pdpWrapper}>
           <Helmet>
             <title>{productPageTitle(name)}</title>
             <meta name="keywords" content={productMetaKeywords(productType, material)} />
-            <meta name="description" content={productMetaDescription(name, productType, material, color)} />
+            <meta name="description" content={productDescription} />
             <meta property="og:url" content={productURL} />
-            <meta property="og:type" content="article" />
+            <meta property="og:type" content="website" />
             <meta property="og:title" content={name} />
-            <meta property="og:description" content={name} />
+            <meta property="og:description" content={productDescription} />
             <meta property="og:image" content={images && images.length > 0 && `${images[0].url}.jpg`} />
           </Helmet>
           <Container type="container" pr="0" pl="0">
