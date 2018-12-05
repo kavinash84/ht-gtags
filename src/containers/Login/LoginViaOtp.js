@@ -45,7 +45,7 @@ export default class LoginViaOtp extends React.Component {
               onChange={onChangeMobile}
               value={mobile}
               type="text"
-              placeholder="Without 0, + or 91"
+              placeholder="Enter your 10 digits number"
               feedBackError={mobileError}
               feedBackMessage={mobileErrorMessage}
             />
