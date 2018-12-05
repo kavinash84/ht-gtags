@@ -7,6 +7,8 @@ import PropTypes from 'prop-types';
 
 const styles = require('./NavBar.scss');
 
+const { SITE_URL } = process.env;
+
 const NavBar = ({
   menuItems, handleEnter, handleLeave, exitOnClick
 }) => (
@@ -25,8 +27,8 @@ const NavBar = ({
           </Link>
         ))}
         <a
-          href="https://www.hometown.in/modular-kitchens"
-          title="Design & Build"
+          href={`${SITE_URL}/modular-kitchens`}
+          title="Modular Kitchens"
           target="_blank"
           rel="noopener noreferrer"
           onClick={exitOnClick}
@@ -54,7 +56,7 @@ const NavBar = ({
               <li>
                 <Label htmlFor="checkbox" fontSize="0.75em" ml="0.625rem" className="dropdownValue">
                   <a
-                    href="https://www.hometown.in/design-build"
+                    href={`${SITE_URL}/design-build`}
                     title="Design & Build"
                     target="_blank"
                     rel="noopener noreferrer"

@@ -23,6 +23,8 @@ import * as notifActions from 'redux/modules/notifs';
 import Notifs from 'components/Notifs';
 import { isKeyExists } from 'utils/helper';
 
+const { SITE_URL } = process.env;
+
 @provideHooks({
   fetch: async ({ store: { dispatch, getState } }) => {
     const { pincode: { selectedPincode }, app: { sessionId, csrfToken } } = getState();
@@ -195,7 +197,7 @@ export default class App extends Component {
               `}
             </script>
             <link rel="alternate" media="only screen and (max-width:640px)" href={`https://m.hometown.in${pathname}`} />
-            <link rel="canonical" href={`https://www.hometown.in${pathname}`} />
+            <link rel="canonical" href={`${SITE_URL}${pathname}`} />
           </Helmet>
           <main className={styles.appContent}>
             <div className="container">

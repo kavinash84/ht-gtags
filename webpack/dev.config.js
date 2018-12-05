@@ -161,6 +161,7 @@ var webpackConfig = module.exports = {
 
     new webpack.DefinePlugin({
       'process.env.APIHOST': '"stage-api.hometown.in/api/"',
+      'process.env.SITE_URL': '"localhost:3000"',
       __CLIENT__: true,
       __SERVER__: false,
       __DEVELOPMENT__: true,

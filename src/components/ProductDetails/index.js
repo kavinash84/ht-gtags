@@ -40,6 +40,8 @@ import Video from './Video';
 
 const styles = require('./ProductDetails.scss');
 
+const { SITE_URL } = process.env;
+
 const onClickWishList = (sku, list, dispatcher, isUserLoggedIn, onOpenLoginModal, addToWaitList, simpleSku) => e => {
   e.preventDefault();
   if (isUserLoggedIn) return dispatcher(list, sku, simpleSku);
@@ -170,7 +172,7 @@ class ProductDetails extends React.Component {
     const { showmore } = this.state;
     const isEmiAvailable = Number(checkSpecialPrice) >= 3000;
     const { main_material: material, color, category_type: productType } = gattributes;
-    const productURL = `https://www.hometown.in${formatProductURL(name, sku)}`;
+    const productURL = `${SITE_URL}${formatProductURL(name, sku)}`;
     return (
       <Div type="block">
         <Section p="0" pb="2rem" mb="0" className={styles.pdpWrapper}>
