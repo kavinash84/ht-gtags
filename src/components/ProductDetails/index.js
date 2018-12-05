@@ -189,7 +189,7 @@ class ProductDetails extends React.Component {
     const productURL = `https://www.hometown.in${formatProductURL(name, sku)}`;
     return (
       <Div type="block">
-        <Section p="0" pb="2rem" mb="0" className={styles.pdpWrapper}>
+        <Section p="0" pb="2rem" mb="2.5rem" className={styles.pdpWrapper}>
           <Helmet>
             <title>{productPageTitle(name)}</title>
             <meta name="keywords" content={productMetaKeywords(productType, material)} />
@@ -350,19 +350,17 @@ class ProductDetails extends React.Component {
 
         {combinedbuy.length > 0 &&
           combinedbuy.map(item => (
-            <div>
-              <Row display="block" pt="0.5rem" mt="2.5rem" mb="0" mr="0">
-                <CombinedBuy
-                  pb="2.5rem"
-                  title={item.name}
-                  data={item.products}
-                  length={item.products.length}
-                  price={item.total_price}
-                  discountedPrice={item.total_price_after_discount}
-                  handleCombinedBuy={() => this.handleCombinedBuy(item.name, item.skus)}
-                />
-              </Row>
-            </div>
+            <Row display="block" pt="0" mt="0" mb="0" mr="0">
+              <CombinedBuy
+                pb="2rem"
+                title={item.name}
+                data={item.products}
+                length={item.products.length}
+                price={item.total_price}
+                discountedPrice={item.total_price_after_discount}
+                handleCombinedBuy={() => this.handleCombinedBuy(item.name, item.skus)}
+              />
+            </Row>
           ))}
 
         {relatedproductsList.length > 0 && (

@@ -16,7 +16,7 @@
     width: 100%;
   }
 }
-.prodSliderItem {
+.combineItem {
   .title {
     @include font-size(1rem);
   }
@@ -24,11 +24,11 @@
     margin-bottom: 5px;
   }
 }
-.prodSliderItemWrapper {
-  border: 1px solid #e8e8e8;
+.combineItemWrapper {
+  padding: 0 15px;
   .content {
     text-align: left;
-    padding: 0 10px 10px;
+    padding: 0 10px 0;
     min-height: 85px;
     .priceWrapper {
       margin-bottom: 4px;
@@ -75,6 +75,12 @@
     }
   }
 }
-.sliderItem {
-  // display: inline-block;
+.combinedProductsWrapper {
+  background: #f5f5f5;
+  padding: 24px 30px;
+  border-radius: 10px;
+  box-shadow: 7px 7px 14px -9px rgba(124,122,122,0.5);
+}
+.combineBottom {
+  border-top: 2px dashed #ddd;
 }

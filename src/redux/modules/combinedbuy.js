@@ -5,23 +5,33 @@ const GET_COMBINED_BUY_SUCCESS = 'combinedbuy/GET_COMBINED_BUY_SUCCESS';
 const GET_COMBINED_BUY_FAIL = 'combinedbuy/GET_COMBINED_BUY_FAIL';
 
 const initialState = {
-  results: []
+  results: [],
+  loading: false,
+  loaded: false,
+  error: false
 };
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case GET_COMBINED_BUY:
       return {
-        ...state
+        ...state,
+        loading: true,
+        loaded: false,
+        error: false
       };
     case GET_COMBINED_BUY_SUCCESS:
       return {
         ...state,
+        loading: false,
+        loaded: true,
         results: action.result
       };
     case GET_COMBINED_BUY_FAIL:
       return {
         ...state,
+        loading: false,
+        loaded: false,
         error: action.error
       };
     default:
@@ -36,7 +46,7 @@ export const getCombinedBuy = (simpleSku, pincode) => ({
       const response = await client.get(`${COMBINED_BUY_API}/${simpleSku}/${pincode}`);
       return response;
     } catch (error) {
-      return error;
+      throw error;
     }
   }
 });
