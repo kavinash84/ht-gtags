@@ -25,7 +25,7 @@ import {
 import { SITE_URL } from 'helpers/Constants';
 import CANONICALS from 'data/canonical';
 
-const SearchEmptyIcon = require('../../../static/search-empty.jpg');
+const SearchEmptyIcon = require('../../../static/search-empty.png');
 
 @connect(state => ({
   loading: state.products.loading,
@@ -131,7 +131,9 @@ export default class Listing extends Component {
       currentPage
     } = this.props;
     let page;
-    const { location: { search, pathname } } = history;
+    const {
+      location: { search, pathname }
+    } = history;
     if (search !== '') {
       [, page] = search.replace('?', '').split('page=');
     } else page = currentPage;
@@ -156,7 +158,7 @@ export default class Listing extends Component {
             products.length === 0 && (
             <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
               <Empty
-                title="Sorry no results found"
+                title="Sorry! No Results Found"
                 subTitle="Please check the Spelling or by a different search"
                 url="/"
                 bg="#fafafa"

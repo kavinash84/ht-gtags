@@ -16,7 +16,7 @@ import { getCartList, getStockOutProducts } from 'selectors/cart';
 import Notifications from 'components/Notifications';
 import MenuFooter from 'containers/MenuFooter';
 
-const CartEmptyIcon = require('../../../static/cart-empty.jpg');
+const CartEmptyIcon = require('../../../static/cart-empty.png');
 const PincodeModalIcon = require('../../../static/map-placeholder.svg');
 
 @connect(
@@ -97,6 +97,7 @@ export default class CartContainer extends Component {
                 btnName="Shop Now"
                 url="/"
                 bg="#fafafa"
+                subTitleWidth="43%"
               >
                 <Img src={CartEmptyIcon} width="initial" m="auto" alt="Sorry no results found" />
               </Empty>
