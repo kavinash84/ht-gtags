@@ -44,7 +44,7 @@ class NotFound extends Component {
               url="/"
               bg="#fafafa"
             >
-              <Img src={SearchEmptyIcon} width="initial" m="auto" alt="Sorry no results found" />
+              <Img src={SearchEmptyIcon} width="initial" m="1.25rem auto" alt="Sorry no results found" />
             </Empty>
           </Section>
           <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
