@@ -140,12 +140,12 @@ export const login = data => ({
   promise: async ({ client }) => {
     try {
       /* eslint-disable max-len */
-      const postData = `username=${data.email}&password=${
-        data.password
-      }&grant_type=password&client_id=${clientId}&client_secret=${clientSecret}`;
+      const username = data.otp ? data.mobile : data.email;
+      const type = data.otp ? 'mobile' : 'email';
+      const password = data.otp ? data.otp : data.password;
+      const postData = `username=${username}&password=${password}&type=${type}&grant_type=password&client_id=${clientId}&client_secret=${clientSecret}`;
       const response = await client.post(LOGIN_API, postData);
-      await setToken({ client })(response);
-      return response;
+      setToken({ client })(response);
     } catch (error) {
       throw error;
     }
