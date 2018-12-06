@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Container from 'hometown-components/lib/Container';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
@@ -9,31 +8,14 @@ import Heading from 'hometown-components/lib/Heading';
 import Text from 'hometown-components/lib/Text';
 import Img from 'hometown-components/lib/Img';
 import MenuWithBreadcrumb from 'components/MenuWithBreadcrumb';
-import { hyphenedString } from 'utils/helper';
-import Helmet from 'react-helmet';
 
 const storesImg = require('../../../static/storedemoimg.jpg');
 
-const filterStore = (city, storeName, stores) =>
-  stores.items.text
-    .filter(store => hyphenedString(store.city.toLowerCase()) === city.toLowerCase())
-    .filter(store => hyphenedString(store.store.toLowerCase()) === storeName.toLowerCase());
-
-@connect(({ stores }) => ({
-  stores: stores.data
-}))
 export default class StoreDetails extends Component {
   render() {
-    const { city, storeName, stores } = this.props;
-    const store = stores && filterStore(city, storeName, stores)[0];
-    const { title, description, keyword } = store.meta;
+    const { store } = this.props;
     return (
       <Div type="block">
-        <Helmet>
-          <title>{title}</title>
-          <meta name="keywords" content={keyword} />
-          <meta name="description" content={description} />
-        </Helmet>
         <MenuWithBreadcrumb storeName={store.store} />
         <Section display="flex" pt="2.5rem" pb="4.5rem" mb="0" height="auto">
           <Container type="container" pr="1rem" pl="1rem">
@@ -77,11 +59,11 @@ export default class StoreDetails extends Component {
     );
   }
 }
-// StoreDetails.defaultProps = {
-//   stores: {}
-// };
+
+StoreDetails.defaultProps = {
+  store: {}
+};
+
 StoreDetails.propTypes = {
-  city: PropTypes.string.isRequired,
-  storeName: PropTypes.string.isRequired,
-  stores: PropTypes.object.isRequired
+  store: PropTypes.object
 };

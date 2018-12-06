@@ -7,7 +7,7 @@ import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
-import Heading from 'hometown-components/lib/Heading';
+import HeadingH6 from 'hometown-components/lib/HeadingH6';
 import TitlePrice from 'hometown-components/lib/ProductDetails/TitlePrice';
 import ColorOption from 'hometown-components/lib/ProductDetails/ColorOption';
 import ServiceDetails from 'hometown-components/lib/ProductDetails/ServiceDetails';
@@ -39,6 +39,8 @@ import BuyNow from '../BuyNow';
 import Video from './Video';
 
 const styles = require('./ProductDetails.scss');
+
+const { SITE_URL } = process.env;
 
 const onClickWishList = (sku, list, dispatcher, isUserLoggedIn, onOpenLoginModal, addToWaitList, simpleSku) => e => {
   e.preventDefault();
@@ -176,18 +178,19 @@ class ProductDetails extends React.Component {
     const { showmore, showmorecolorproducts } = this.state;
     const isEmiAvailable = Number(checkSpecialPrice) >= 3000;
     const { main_material: material, color, category_type: productType } = gattributes;
-    const productURL = `https://www.hometown.in${formatProductURL(name, sku)}`;
+    const productURL = `${SITE_URL}${formatProductURL(name, sku)}`;
+    const productDescription = productMetaDescription(name, productType, material, color);
     return (
       <Div type="block">
         <Section p="0" pb="2rem" mb="0" className={styles.pdpWrapper}>
           <Helmet>
             <title>{productPageTitle(name)}</title>
             <meta name="keywords" content={productMetaKeywords(productType, material)} />
-            <meta name="description" content={productMetaDescription(name, productType, material, color)} />
+            <meta name="description" content={productDescription} />
             <meta property="og:url" content={productURL} />
-            <meta property="og:type" content="article" />
+            <meta property="og:type" content="website" />
             <meta property="og:title" content={name} />
-            <meta property="og:description" content={name} />
+            <meta property="og:description" content={productDescription} />
             <meta property="og:image" content={images && images.length > 0 && `${images[0].url}.jpg`} />
           </Helmet>
           <Container type="container" pr="0" pl="0">
@@ -235,9 +238,9 @@ class ProductDetails extends React.Component {
                       {colorproducts.length > 0 && (
                         <Section mb="0.3125rem" p="0" mt="1.25rem">
                           <Row display="block" mr="0" ml="0">
-                            <Heading fontSize="1em" color="textDark" mb="0.625rem" mt="0px" fontFamily="medium">
+                            <HeadingH6 fontSize="1em" color="textDark" mb="0.625rem" mt="0px" fontFamily="medium">
                               Color Options
-                            </Heading>
+                            </HeadingH6>
                           </Row>
                           <ColorOption
                             data={colorproducts}
