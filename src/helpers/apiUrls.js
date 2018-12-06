@@ -13,6 +13,8 @@ export const LOGIN = 'tesla/authentication/login';
 export const SIGNUP = 'tesla/users/sign-up';
 export const GOOGLE_LOGIN = 'tesla/authentication/login/google';
 export const LOGOUT = 'tesla/users/logout';
+export const OTP = 'tesla/otp';
+export const RESEND_OTP = 'tesla/otp/resend';
 
 /* Account */
 export const USERPROFILE = 'tesla/users/details';
