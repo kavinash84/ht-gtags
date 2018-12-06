@@ -143,9 +143,11 @@ export const login = data => ({
       const username = data.otp ? data.mobile : data.email;
       const type = data.otp ? 'mobile' : 'email';
       const password = data.otp ? data.otp : data.password;
-      const postData = `username=${username}&password=${password}&type=${type}&grant_type=password&client_id=${clientId}&client_secret=${clientSecret}`;
+      const method = data.otp ? 'otp' : 'password';
+      const postData = `username=${username}&password=${password}&type=${type}&method=${method}&grant_type=password&client_id=${clientId}&client_secret=${clientSecret}`;
       const response = await client.post(LOGIN_API, postData);
       setToken({ client })(response);
+      return response;
     } catch (error) {
       throw error;
     }
