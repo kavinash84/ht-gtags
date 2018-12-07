@@ -232,7 +232,7 @@ class Listing extends React.Component {
                     productURL={formatProductURL(item.data.name, item.data.sku)}
                     pincode={selectedPincode}
                   />
-                  <Div mt="0" p="10px 0.125rem 0.5rem 0">
+                  <Div mt="0" p="12px 0.125rem 0.5rem 0.125rem">
                     <AddToCart
                       simpleSku={Object.keys(item.data.simples)[0]}
                       sku={item.data.sku}
