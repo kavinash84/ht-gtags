@@ -98,7 +98,8 @@ class ProductDetails extends React.Component {
   }
   state = {
     openLogin: false,
-    showmore: true
+    showmore: true,
+    showmorecolorproducts: true
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.isLoggedIn) {
@@ -128,6 +129,11 @@ class ProductDetails extends React.Component {
   toggleShowMore = () => {
     this.setState({
       showmore: !this.state.showmore
+    });
+  };
+  toggleShowMoreColorProducts = () => {
+    this.setState({
+      showmorecolorproducts: !this.state.showmorecolorproducts
     });
   };
 
@@ -169,7 +175,7 @@ class ProductDetails extends React.Component {
     const { adding, added } = reviews;
     const offerImage = simples[simpleSku].groupedattributes.offer_image || null;
     const offerImageRedirect = simples[simpleSku].groupedattributes.offer_image_click_url || null;
-    const { showmore } = this.state;
+    const { showmore, showmorecolorproducts } = this.state;
     const isEmiAvailable = Number(checkSpecialPrice) >= 3000;
     const { main_material: material, color, category_type: productType } = gattributes;
     const productURL = `${SITE_URL}${formatProductURL(name, sku)}`;
@@ -236,7 +242,11 @@ class ProductDetails extends React.Component {
                               Color Options
                             </HeadingH6>
                           </Row>
-                          <ColorOption data={colorproducts} />
+                          <ColorOption
+                            data={colorproducts}
+                            showmorecolorproducts={showmorecolorproducts}
+                            toggleShowMoreColorProducts={this.toggleShowMoreColorProducts}
+                          />
                         </Section>
                       )}
                     </Row>
