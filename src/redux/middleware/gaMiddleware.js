@@ -16,7 +16,7 @@ export default function gaMiddleware() {
             vpv: location
           });
           if (document.referrer !== '' && document.referrer !== 'https://www.hometown.in' && isFirstHit !== 1) {
-            Object.defineProperty(document, 'referrer', { get: () => 'https://hometown.in' });
+            Object.defineProperty(document, 'referrer', { get: () => 'https://www.hometown.in' });
           }
           if (isFirstHit === 1) dispatch(resetReferrer());
           if (location === '/') {
