@@ -1,11 +1,13 @@
 import { filterCategoryDetails, isKeyExists } from 'utils/helper';
 import { CART_URL } from 'helpers/Constants';
 import { getCartListSKU, getCartListSKUFromResult } from 'selectors/cart';
+import { resetReferrer } from '../modules/analytics';
 
 export default function gaMiddleware() {
-  return ({ getState }) => next => action => {
+  return ({ getState, dispatch }) => next => action => {
     if (__CLIENT__) {
       const { payload, type } = action;
+      const { analytics: { isFirstHit } } = getState();
       if (window && window.dataLayer) {
         if (type === '@@router/LOCATION_CHANGE') {
           const location = payload.pathname;
@@ -13,7 +15,10 @@ export default function gaMiddleware() {
             event: 'pageviewtracking',
             vpv: location
           });
-          document.referrer = 'www.hometown.in';
+          if (document.referrer !== '' && document.referrer !== 'https://www.hometown.in' && isFirstHit !== 1) {
+            Object.defineProperty(document, 'referrer', { get: () => 'https://hometown.in' });
+          }
+          if (isFirstHit === 1) dispatch(resetReferrer());
           if (location === '/') {
             window.google_tag_params.ecomm_pagetype = 'home';
             window.google_tag_params.ecomm_totalvalue = '';
