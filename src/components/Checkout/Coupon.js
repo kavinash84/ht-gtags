@@ -56,7 +56,8 @@ class Coupon extends React.Component {
   handleClick = coupon => {
     this.setState(
       {
-        coupon
+        coupon,
+        showmorecoupons: false
       },
       () => this.handleApply()
     );
@@ -175,13 +176,23 @@ class Coupon extends React.Component {
                           <Label htmlFor="checkbox" className={styles.couponCode}>
                             {item.couponCode}
                           </Label>
-                          <Label htmlFor="checkbox" className={styles.saveRs}>
-                              Flat{' '}
-                            <span>
-                              <b>{item.discount_percentage} %</b>
-                            </span>{' '}
-                              Off
-                          </Label>
+                          {item.discount_type === 'fixed' ? (
+                            <Label htmlFor="checkbox" className={styles.saveRs}>
+                                Flat{' '}
+                              <span>
+                                <b>Rs. {parseInt(item.discount_amount, 10)}</b>
+                              </span>{' '}
+                                OFF
+                            </Label>
+                          ) : (
+                            <Label htmlFor="checkbox" className={styles.saveRs}>
+                                Flat{' '}
+                              <span>
+                                <b>{parseInt(item.discount_percentage, 10)} %</b>
+                              </span>{' '}
+                                Off
+                            </Label>
+                          )}
                         </div>
                         <p htmlFor="checkbox" className={styles.offerDetails}>
                           {item.description}
