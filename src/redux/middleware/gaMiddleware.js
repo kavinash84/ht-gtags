@@ -15,8 +15,9 @@ export default function gaMiddleware() {
             event: 'pageviewtracking',
             vpv: location
           });
-          if (document.referrer !== '' && document.referrer !== 'https://www.hometown.in' && isFirstHit !== 1) {
-            Object.defineProperty(document, 'referrer', { get: () => 'https://www.hometown.in' });
+          const { location: { hostname } } = window;
+          if (document.referrer !== '' && document.referrer !== hostname && isFirstHit !== 1) {
+            Object.defineProperty(document, 'referrer', { get: () => hostname });
           }
           if (isFirstHit === 1) dispatch(resetReferrer());
           if (location === '/') {
