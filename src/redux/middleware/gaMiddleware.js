@@ -11,15 +11,15 @@ export default function gaMiddleware() {
       if (window && window.dataLayer) {
         if (type === '@@router/LOCATION_CHANGE') {
           const location = payload.pathname;
-          window.dataLayer.push({
-            event: 'pageviewtracking',
-            vpv: location
-          });
           const { location: { hostname } } = window;
           if (document.referrer !== '' && document.referrer !== hostname && isFirstHit !== 1) {
             Object.defineProperty(document, 'referrer', { get: () => hostname });
           }
           if (isFirstHit === 1) dispatch(resetReferrer());
+          window.dataLayer.push({
+            event: 'pageviewtracking',
+            vpv: location
+          });
           if (location === '/') {
             window.google_tag_params.ecomm_pagetype = 'home';
             window.google_tag_params.ecomm_totalvalue = '';
