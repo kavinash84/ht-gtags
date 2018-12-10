@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 export default class LoginViaOtp extends React.Component {
   state = {
     resendtimer: 30,
-    timerref: ''
+    timerref: null
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.mobilesubmitted && nextProps.mobilesubmitted !== this.props.mobilesubmitted) {
@@ -17,6 +17,12 @@ export default class LoginViaOtp extends React.Component {
         this.setState(prevstate => ({ resendtimer: prevstate.resendtimer - 1 }));
       }, 1000);
       this.setState({ timerref });
+    }
+  }
+  componentWillUnmount() {
+    const { timerref } = this.state;
+    if (timerref) {
+      clearInterval(timerref);
     }
   }
   render() {
