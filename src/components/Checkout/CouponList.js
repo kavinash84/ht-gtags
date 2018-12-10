@@ -21,8 +21,8 @@ class CouponList extends React.Component {
     } = this.props;
     return (
       <div className={`${styles.offerList} `}>
-        {loading && <span>Spinner......</span>}
-        {!loading && !coupons.length > 0 && <span>Sorry No Coupone Found ! </span>}
+        {loading && <span>Loading......</span>}
+        {!loading && !coupons.length > 0 && <span>Sorry No Coupon Found ! </span>}
         {!loading &&
           coupons.length > 0 && (
           <ul>
