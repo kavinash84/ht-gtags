@@ -4,10 +4,7 @@ import filterName from '../data/Filter.js';
 export const products = state => state.products;
 export const relatedproducts = state => state.relatedproducts;
 
-export const productsData = createSelector(
-  [products],
-  list => list.data
-);
+export const productsData = createSelector([products], list => list.data);
 
 export const productMeta = createSelector(
   [products],
@@ -24,20 +21,11 @@ export const productMeta = createSelector(
       }
 );
 
-export const getProducts = createSelector(
-  [products],
-  items => items.list || []
-);
+export const getProducts = createSelector([products], items => items.list || []);
 
-export const productsList = createSelector(
-  [productMeta],
-  productList => productList.results
-);
+export const productsList = createSelector([productMeta], productList => productList.results);
 
-export const getProductCount = createSelector(
-  [productMeta],
-  category => category.product_count || ''
-);
+export const getProductCount = createSelector([productMeta], category => category.product_count || '');
 
 export const getCategoryName = createSelector(
   [productMeta],
@@ -47,20 +35,32 @@ export const getCategoryName = createSelector(
       : category.product_catname
 );
 
-export const filtersArr = createSelector(
-  [productMeta],
-  productList => productList.filter || []
+export const filtersArr = createSelector([productMeta], productList => productList.filter || []);
+
+export const getColorFilter = createSelector([filtersArr], filters =>
+  filters.filter(filter => filter.name === 'Color'));
+
+export const colorArr = createSelector(
+  [getColorFilter],
+  list =>
+    list.length > 0
+      ? list.map(attr =>
+        attr.attributes.constructor === Array
+          ? attr
+          : {
+            ...attr,
+            attributes: [...Object.values(attr.attributes)]
+          })
+      : []
 );
 
 export const filtersList = createSelector(
-  [filtersArr],
-  list => list.filter(x => x.attributes && x.attributes.constructor === Array) || []
+  [filtersArr, colorArr],
+  (list, colorFilter) => [...list.filter(x => x.attributes && x.attributes.constructor === Array), ...colorFilter] || []
 );
 
-export const getFilters = createSelector(
-  [filtersList],
-  filters => filters.filter(item => filterName.includes(item.name))
-);
+export const getFilters = createSelector([filtersList], filters =>
+  filters.filter(item => filterName.includes(item.name)));
 
 export const getAppliedFilters = createSelector(
   [getFilters],
@@ -71,10 +71,7 @@ export const getAppliedFilters = createSelector(
       : []
 );
 
-export const relatedProductsList = createSelector(
-  [relatedproducts],
-  items => items.data || []
-);
+export const relatedProductsList = createSelector([relatedproducts], items => items.data || []);
 
 export const getSEOInfo = createSelector(
   [productMeta],

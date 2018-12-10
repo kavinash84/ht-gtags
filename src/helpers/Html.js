@@ -109,20 +109,6 @@ export default class Html extends Component {
             <script dangerouslySetInnerHTML={{ __html: 'document.getElementById("content").style.display="block";' }} />
           ) : null}
           <Helmet>
-            <script type="application/ld+json">
-              {`
-                {
-                  "@context": "http://schema.org",
-                  "@type": "WebSite",
-                  "url": "https://www.hometown.in/",
-                  "potentialAction": {
-                    "@type": "SearchAction",
-                    "target": "https://www.hometown.in/search/?q={search_term_string}",
-                    "query-input": "required name=search_term_string"
-                  }
-                }
-              `}
-            </script>
             <script src="https://cdn.ravenjs.com/3.24.0/raven.min.js" crossOrigin="anonymous" />
             {process.env.NODE_ENV !== 'development' ? (
               <script>

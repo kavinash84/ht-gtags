@@ -8,13 +8,19 @@ const BreadCrumb = ({ breadcrumbs }) => {
   let link = '';
   return (
     <ul itemScope itemType="http://schema.org/BreadcrumbList" className={styles.breadCrumbPdp}>
+      <li key="home" itemProp="itemListElement" itemType="http://schema.org/ListItem" itemScope>
+        <Link itemProp="item" to="/">
+          <span itemProp="name">Home</span>
+          <meta itemProp="position" content={1} />
+        </Link>
+      </li>
       {breadcrumbs.map((item, index) => {
         link += `/${item.urlkey}`;
         return (
           <li key={String(index)} itemProp="itemListElement" itemType="http://schema.org/ListItem" itemScope>
             <Link itemProp="item" to={`${link}`}>
               <span itemProp="name">{item.name}</span>
-              <meta itemProp="position" content={index + 1} />
+              <meta itemProp="position" content={index + 2} />
             </Link>
           </li>
         );

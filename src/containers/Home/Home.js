@@ -90,6 +90,20 @@ export default class Home extends Component {
           />
           <meta name="keywords" content="furniture, home-decor" />
           <meta name="robots" content="index, follow" />
+          <script type="application/ld+json">
+            {`
+                {
+                  "@context": "http://schema.org",
+                  "@type": "WebSite",
+                  "url": "https://www.hometown.in/",
+                  "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": "https://www.hometown.in/search/?q={search_term_string}",
+                    "query-input": "required name=search_term_string"
+                  }
+                }
+              `}
+          </script>
         </Helmet>
         <div className="wrapper">
           {/* {offerStrip &&

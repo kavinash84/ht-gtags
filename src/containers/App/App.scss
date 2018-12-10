@@ -616,6 +616,9 @@
 			padding: .25rem  2.125rem .25rem .75rem !important;
 			font-size: 12px;
 			line-height: 1.9;
+			&.callusDropdown {
+				padding: 2px 7px !important;
+			}
 			span {
 				transition: all 0.5s ease;
 				display: inline-block !important;
@@ -626,7 +629,7 @@
     		top: 8px;
 			}
 			&:hover {
-				background-color: #FFF !important;
+				// background-color: #FFF !important;
 				span {
 					transform: rotate(180deg) !important;
 				}

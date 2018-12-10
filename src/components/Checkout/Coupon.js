@@ -6,9 +6,10 @@ import Div from 'hometown-components/lib/Div';
 import Button from 'hometown-components/lib/Buttons';
 import Img from 'hometown-components/lib/Img';
 import Span from 'hometown-components/lib/Span';
+import { Label } from 'hometown-components/lib/Label';
 import Theme from 'hometown-components/lib/Theme';
 import LocalInlineNotification from 'components/LocalInlineNotification';
-import { applyCoupon, removeCoupon } from 'redux/modules/coupon';
+import { applyCoupon, removeCoupon, loadCoupons } from 'redux/modules/coupon';
 import { formatAmount } from 'utils/formatters';
 import Notifs from '../../components/Notifs';
 
@@ -33,15 +34,15 @@ class Coupon extends React.Component {
   state = {
     coupon: ''
   };
-
-  handleChange = e => {
-    this.setState({
-      coupon: e.target.value
-    });
-  };
-
+  componentDidMount() {
+    const { pincode, sessionId } = this.props;
+    const { dispatch } = this.context.store;
+    dispatch(loadCoupons(sessionId, pincode));
+  }
   handleApply = e => {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     const { pincode, sessionId } = this.props;
     const { dispatch } = this.context.store;
     dispatch(applyCoupon(this.state.coupon, sessionId, pincode));
@@ -52,12 +53,31 @@ class Coupon extends React.Component {
     const { dispatch } = this.context.store;
     dispatch(removeCoupon(coupon, sessionId, pincode));
   };
+  handleClick = coupon => {
+    this.setState(
+      {
+        coupon,
+        showmorecoupons: false
+      },
+      () => this.handleApply()
+    );
+  };
 
+  handleChange = e => {
+    this.setState({
+      coupon: e.target.value
+    });
+  };
+  toggleMoreCoupons = () => {
+    this.setState({
+      showmorecoupons: !this.state.showmorecoupons
+    });
+  };
   render() {
     const {
       cart,
       notifs,
-      coupon: { loading }
+      coupon: { loading, coupons }
     } = this.props;
     const {
       summary: { coupon: appliedCoupon, coupon_discount: couponDiscount }
@@ -127,40 +147,63 @@ class Coupon extends React.Component {
                 )}
                 {/* {error && <div>{errorMsg}</div>} */}
               </div>
+              {coupons.length > 0 && (
+                <Label ta="center" color="primary" display="block" mt="5px" mb="0.9375rem">
+                  <Button onClick={this.toggleMoreCoupons} p="0" color="primary" size="block" btnType="link" ta="right">
+                    View Applicable Coupons
+                  </Button>
+                </Label>
+              )}
             </div>
           )}
-          {/* <Label ta="center" display="block" mt="0.625rem" mb="0.625rem">
-            OR
-          </Label>
-          <div className={`${styles.offerList} ${styles.active}`}>
-            <ul>
-              <li>
-                <div className={styles.couponWrapper}>
-                  <div className={styles.coupon}>
-                    <div className="checkbox">
-                      <input type="radio" id="checkbox" />
-                      <label htmlFor="checkbox" />
-                    </div>
-                    <label htmlFor="checkbox" className={styles.couponCode}>
-                      FURNROOMAA500
-                    </label>
-                    <label htmlFor="checkbox" className={styles.saveRs}>
-                      Save <span>Rs. 383</span>
-                    </label>
-                  </div>
-                  <p htmlFor="checkbox" className={styles.offerDetails}>
-                    Rs.500 off on minimum purchase of Rs.1499.0
-                  </p>
-                  <p htmlFor="checkbox" className={styles.offerDetails}>
-                    valid till 31st december,2018 Details
-                  </p>
-                  <ul className={styles.offerCondition}>
-                    <li>This is special coupon and can be applied on select style only</li>
-                  </ul>
-                </div>
-              </li>
-            </ul>
-          </div> */}
+          {coupons.length > 0 &&
+            this.state.showmorecoupons && (
+            <div className={`${styles.offerList} `}>
+              <ul>
+                {coupons.map(item => (
+                  <li className={`${item.couponCode === appliedCoupon ? styles.active : ''}`} key={item.couponCode}>
+                    <Button
+                      onClick={() => {
+                        this.handleClick(item.couponCode);
+                      }}
+                      btnType="link"
+                      size="block"
+                      p="0"
+                      ta="left"
+                    >
+                      <div className={styles.couponWrapper}>
+                        <div className={styles.coupon}>
+                          <Label htmlFor="checkbox" className={styles.couponCode}>
+                            {item.couponCode}
+                          </Label>
+                          {item.discount_type === 'fixed' ? (
+                            <Label htmlFor="checkbox" className={styles.saveRs}>
+                                Flat{' '}
+                              <span>
+                                <b>Rs. {parseInt(item.discount_amount, 10)}</b>
+                              </span>{' '}
+                                OFF
+                            </Label>
+                          ) : (
+                            <Label htmlFor="checkbox" className={styles.saveRs}>
+                                Flat{' '}
+                              <span>
+                                <b>{parseInt(item.discount_percentage, 10)} %</b>
+                              </span>{' '}
+                                Off
+                            </Label>
+                          )}
+                        </div>
+                        <p htmlFor="checkbox" className={styles.offerDetails}>
+                          {item.description}
+                        </p>
+                      </div>
+                    </Button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </Div>
       </div>
     );

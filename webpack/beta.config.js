@@ -186,6 +186,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"',
       'process.env.APIHOST': '"beta-api.hometown.in/api/"',
+      'process.env.SITE_URL': '"https://beta.hometown.in"',
       __CLIENT__: true,
       __SERVER__: false,
       __DEVELOPMENT__: false,
@@ -224,6 +225,9 @@ module.exports = {
     new SWPrecacheWebpackPlugin({
       cacheId: 'beta.hometown.in',
       filename: '../service-worker.js',
+      importScripts: [
+        'https://cdn.onesignal.com/sdks/OneSignalSDKWorker.js'
+      ],
       maximumFileSizeToCacheInBytes: 8388608,
 
       // Ensure all our static, local assets are cached.

@@ -7,7 +7,7 @@ import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
-import Heading from 'hometown-components/lib/Heading';
+import HeadingH6 from 'hometown-components/lib/HeadingH6';
 import TitlePrice from 'hometown-components/lib/ProductDetails/TitlePrice';
 import ColorOption from 'hometown-components/lib/ProductDetails/ColorOption';
 import ServiceDetails from 'hometown-components/lib/ProductDetails/ServiceDetails';
@@ -21,11 +21,12 @@ import ProductCarousel from 'components/ProductCarousel';
 import EmiModal from 'containers/EmiModal/EmiModal';
 import ResponsiveModal from 'components/Modal';
 import LoginModal from 'containers/Login/LoginForm';
+import ShareBar from 'components/ShareBar';
 import { addReview, toggleReview } from 'redux/modules/reviews';
 import { toggleWishList, wishListWaitList } from 'redux/modules/wishlist';
 import { setProductPosition } from 'redux/modules/productdetails';
 import { formatAmount } from 'utils/formatters';
-import { calculateDiscount, calculateSavings, calculateLowestEmi } from 'utils/helper';
+import { calculateDiscount, calculateSavings, calculateLowestEmi, getVideoID, formatProductURL } from 'utils/helper';
 import { getSKUList } from 'selectors/wishlist';
 import { groupedAttributes as getgroupedAttributes, getBreadCrumbs } from 'selectors/product';
 
@@ -35,8 +36,11 @@ import BreadCrumb from './BreadCrumb';
 import Pincode from './Pincode';
 import AddToCart from '../AddToCart';
 import BuyNow from '../BuyNow';
+import Video from './Video';
 
 const styles = require('./ProductDetails.scss');
+
+const { SITE_URL } = process.env;
 
 const onClickWishList = (sku, list, dispatcher, isUserLoggedIn, onOpenLoginModal, addToWaitList, simpleSku) => e => {
   e.preventDefault();
@@ -88,9 +92,14 @@ class ProductDetails extends React.Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
+  constructor(props) {
+    super(props);
+    this.reviewsRef = React.createRef();
+  }
   state = {
     openLogin: false,
-    showmore: true
+    showmore: true,
+    showmorecolorproducts: true
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.isLoggedIn) {
@@ -99,6 +108,17 @@ class ProductDetails extends React.Component {
       });
     }
   }
+  onClickReviews = () => {
+    try {
+      const { top } = this.reviewsRef.current.getBoundingClientRect();
+      window.scroll({
+        top: Number(top - 60),
+        behavior: 'smooth'
+      });
+    } catch (e) {
+      window.scroll(0, this.reviewsRef.current.offsetTop);
+    }
+  };
   handleLoginModal = () => {
     this.setState({ openLogin: !this.state.openLogin });
   };
@@ -111,6 +131,12 @@ class ProductDetails extends React.Component {
       showmore: !this.state.showmore
     });
   };
+  toggleShowMoreColorProducts = () => {
+    this.setState({
+      showmorecolorproducts: !this.state.showmorecolorproducts
+    });
+  };
+
   render() {
     const {
       product,
@@ -149,16 +175,23 @@ class ProductDetails extends React.Component {
     const { adding, added } = reviews;
     const offerImage = simples[simpleSku].groupedattributes.offer_image || null;
     const offerImageRedirect = simples[simpleSku].groupedattributes.offer_image_click_url || null;
-    const { showmore } = this.state;
+    const { showmore, showmorecolorproducts } = this.state;
     const isEmiAvailable = Number(checkSpecialPrice) >= 3000;
     const { main_material: material, color, category_type: productType } = gattributes;
+    const productURL = `${SITE_URL}${formatProductURL(name, sku)}`;
+    const productDescription = productMetaDescription(name, productType, material, color);
     return (
       <Div type="block">
         <Section p="0" pb="2rem" mb="0" className={styles.pdpWrapper}>
           <Helmet>
             <title>{productPageTitle(name)}</title>
             <meta name="keywords" content={productMetaKeywords(productType, material)} />
-            <meta name="description" content={productMetaDescription(name, productType, material, color)} />
+            <meta name="description" content={productDescription} />
+            <meta property="og:url" content={productURL} />
+            <meta property="og:type" content="website" />
+            <meta property="og:title" content={name} />
+            <meta property="og:description" content={productDescription} />
+            <meta property="og:image" content={images && images.length > 0 && `${images[0].url}.jpg`} />
           </Helmet>
           <Container type="container" pr="0" pl="0">
             <Row display="block" mt="0" mb="0" mr="0" ml="0">
@@ -182,7 +215,9 @@ class ProductDetails extends React.Component {
                         ratings={rating}
                         count={count}
                         mt="1rem"
+                        onClickReviews={this.onClickReviews}
                       />
+                      <ShareBar title={name} url={productURL} mt="10px" />
                     </Div>
                     <Div col="1" mt="0">
                       <WishlistBtn
@@ -203,11 +238,15 @@ class ProductDetails extends React.Component {
                       {colorproducts.length > 0 && (
                         <Section mb="0.3125rem" p="0" mt="1.25rem">
                           <Row display="block" mr="0" ml="0">
-                            <Heading fontSize="1em" color="textDark" mb="0.625rem" mt="0px" fontFamily="medium">
+                            <HeadingH6 fontSize="1em" color="textDark" mb="0.625rem" mt="0px" fontFamily="medium">
                               Color Options
-                            </Heading>
+                            </HeadingH6>
                           </Row>
-                          <ColorOption data={colorproducts} />
+                          <ColorOption
+                            data={colorproducts}
+                            showmorecolorproducts={showmorecolorproducts}
+                            toggleShowMoreColorProducts={this.toggleShowMoreColorProducts}
+                          />
                         </Section>
                       )}
                     </Row>
@@ -279,16 +318,26 @@ class ProductDetails extends React.Component {
                     )}
                     {/* <button onClick={this.toggleShowMore}></button> */}
                     <Specs specs={groupedAttributes} pincode={pincode.selectedPincode} />
-                    <Reviews col="12" reviewItems={reviews.data} pr="2.5rem" />
-                    <AddReview
-                      col="8"
-                      catalogId={groupedattributes.id_catalog_config}
-                      loaded
-                      onClickSubmit={this.addReview}
-                      adding={adding}
-                      added={added}
-                      toggleReview={toggleReviewBox}
-                    />
+                    {groupedattributes &&
+                      groupedattributes.youtubeid && (
+                      <Row display="block" mt="0" mb="0" mr="0.9375rem" ml="0.9375rem">
+                        <Div col="12" mt="0" pr="0.3125rem">
+                          <Video id={getVideoID(groupedattributes.youtubeid)} />
+                        </Div>
+                      </Row>
+                    )}
+                    <div ref={this.reviewsRef}>
+                      <Reviews col="12" reviewItems={reviews.data} pr="2.5rem" />
+                      <AddReview
+                        col="8"
+                        catalogId={groupedattributes.id_catalog_config}
+                        loaded
+                        onClickSubmit={this.addReview}
+                        adding={adding}
+                        added={added}
+                        toggleReview={toggleReviewBox}
+                      />
+                    </div>
                   </Row>
                 </Div>
               </Div>
