@@ -1,5 +1,11 @@
 .categoryBar{
   width: 100%;
   display: inline-block;
-
+}
+.categoryBlock {
+  border: solid 1px transparent;
+  &:hover {
+    border: solid 1px #f16521;
+    background-color: rgba(241,101,33,.03);
+  }
 }
