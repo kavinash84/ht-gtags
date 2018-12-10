@@ -89,33 +89,40 @@ class Coupon extends React.Component {
       <div>
         <Div className={styles.applyCoupon}>
           {appliedCoupon ? (
-            <div className={styles.appliedCouponWrapper}>
-              <Button
-                display="block"
-                btnType="link"
-                fontFamily="Light"
-                pl="0"
-                pr="0"
-                fontSize="1rem"
-                ta="left"
-                color={Theme.colors.primary}
-                onClick={() => this.removeCoupon(appliedCoupon)}
-              >
-                <Img src={DiscountSuccessIcon} float="left" mr="0.625rem" mb="1rem" mt="3px" alt="" />
-                Applied: <b>{appliedCoupon}</b> <br />
-                <Span fontSize="0.875em" color={Theme.colors.primary}>
-                  Save <b>Rs. {formatAmount(couponDiscount)}</b>
-                </Span>
-                <Img
-                  src={EditCouponIcon}
-                  display="inline"
-                  float="none"
-                  va="sub"
-                  width="18px"
-                  ml="0.625rem"
-                  alt="Change"
-                />
-              </Button>
+            <div>
+              <div className={styles.appliedCouponWrapper}>
+                <Button
+                  display="block"
+                  btnType="link"
+                  fontFamily="Light"
+                  pl="0"
+                  pr="0"
+                  fontSize="1rem"
+                  ta="left"
+                  color={Theme.colors.primary}
+                  onClick={() => this.removeCoupon(appliedCoupon)}
+                >
+                  <Img src={DiscountSuccessIcon} float="left" mr="0.625rem" mb="1rem" mt="3px" alt="" />
+                  Applied: <b>{appliedCoupon}</b> <br />
+                  <Span fontSize="0.875em" color={Theme.colors.primary}>
+                    Save <b>Rs. {formatAmount(couponDiscount)}</b>
+                  </Span>
+                  <Img
+                    src={EditCouponIcon}
+                    display="inline"
+                    float="none"
+                    va="sub"
+                    width="18px"
+                    ml="0.625rem"
+                    alt="Change"
+                  />
+                </Button>
+              </div>
+              <Label ta="center" color="primary" display="block" mt="5px" mb="0.9375rem">
+                <Button onClick={this.toggleMoreCoupons} p="0" color="primary" size="block" btnType="link" ta="right">
+                  {couponlistToggle ? 'Hide Coupons' : ' View Applicable Coupons'}
+                </Button>
+              </Label>
             </div>
           ) : (
             <div>
