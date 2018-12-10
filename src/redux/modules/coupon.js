@@ -22,7 +22,8 @@ const initialState = {
   applied: false,
   appliedCoupon: '',
   summary: {},
-  coupons: []
+  coupons: [],
+  getingcoupon: false
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -30,13 +31,14 @@ export default function reducer(state = initialState, action = {}) {
     case LOAD_COUPONS:
       return {
         ...state,
-        loading: true,
-        error: false
+        getingcoupon: true,
+        error: false,
+        coupons: []
       };
     case LOAD_COUPONS_SUCCESS:
       return {
         ...state,
-        loading: false,
+        getingcoupon: false,
         loaded: true,
         error: false,
         coupons: action.result
@@ -44,7 +46,7 @@ export default function reducer(state = initialState, action = {}) {
     case LOAD_COUPONS_FAIL:
       return {
         ...state,
-        loading: false,
+        getingcoupon: false,
         loaded: false,
         error: true,
         errorMessage: action.error

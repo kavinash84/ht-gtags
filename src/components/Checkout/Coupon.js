@@ -9,9 +9,11 @@ import Span from 'hometown-components/lib/Span';
 import { Label } from 'hometown-components/lib/Label';
 import Theme from 'hometown-components/lib/Theme';
 import LocalInlineNotification from 'components/LocalInlineNotification';
-import { applyCoupon, removeCoupon, loadCoupons } from 'redux/modules/coupon';
+import { applyCoupon, removeCoupon } from 'redux/modules/coupon';
+import { toggleCouponList } from 'redux/modules/cart';
 import { formatAmount } from 'utils/formatters';
 import Notifs from '../../components/Notifs';
+import CouponList from './CouponList';
 
 const EditCouponIcon = require('../../../static/edit.svg');
 const DiscountSuccessIcon = require('../../../static/percentage-green.svg');
@@ -34,11 +36,7 @@ class Coupon extends React.Component {
   state = {
     coupon: ''
   };
-  componentDidMount() {
-    const { pincode, sessionId } = this.props;
-    const { dispatch } = this.context.store;
-    dispatch(loadCoupons(sessionId, pincode));
-  }
+
   handleApply = e => {
     if (e) {
       e.preventDefault();
@@ -72,47 +70,59 @@ class Coupon extends React.Component {
     this.setState({
       showmorecoupons: !this.state.showmorecoupons
     });
+    const { dispatch } = this.context.store;
+    dispatch(toggleCouponList());
   };
   render() {
     const {
       cart,
       notifs,
-      coupon: { loading, coupons }
+      coupon: { loading, coupons, getingcoupon },
+      pincode,
+      sessionId
     } = this.props;
     const {
-      summary: { coupon: appliedCoupon, coupon_discount: couponDiscount }
+      summary: { coupon: appliedCoupon, coupon_discount: couponDiscount },
+      couponlistToggle
     } = cart;
     return (
       <div>
         <Div className={styles.applyCoupon}>
           {appliedCoupon ? (
-            <div className={styles.appliedCouponWrapper}>
-              <Button
-                display="block"
-                btnType="link"
-                fontFamily="Light"
-                pl="0"
-                pr="0"
-                fontSize="1rem"
-                ta="left"
-                color={Theme.colors.primary}
-                onClick={() => this.removeCoupon(appliedCoupon)}
-              >
-                <Img src={DiscountSuccessIcon} float="left" mr="0.625rem" mb="1rem" mt="3px" alt="" />
-                Applied: <b>{appliedCoupon}</b> <br />
-                <Span fontSize="0.875em" color={Theme.colors.primary}>
-                  Save <b>Rs. {formatAmount(couponDiscount)}</b>
-                </Span>
-                <Img
-                  src={EditCouponIcon}
-                  display="inline"
-                  float="none"
-                  va="sub"
-                  width="18px"
-                  ml="0.625rem"
-                  alt="Change"
-                />
-              </Button>
+            <div>
+              <div className={styles.appliedCouponWrapper}>
+                <Button
+                  display="block"
+                  btnType="link"
+                  fontFamily="Light"
+                  pl="0"
+                  pr="0"
+                  fontSize="1rem"
+                  ta="left"
+                  color={Theme.colors.primary}
+                  onClick={() => this.removeCoupon(appliedCoupon)}
+                >
+                  <Img src={DiscountSuccessIcon} float="left" mr="0.625rem" mb="1rem" mt="3px" alt="" />
+                  Applied: <b>{appliedCoupon}</b> <br />
+                  <Span fontSize="0.875em" color={Theme.colors.primary}>
+                    Save <b>Rs. {formatAmount(couponDiscount)}</b>
+                  </Span>
+                  <Img
+                    src={EditCouponIcon}
+                    display="inline"
+                    float="none"
+                    va="sub"
+                    width="18px"
+                    ml="0.625rem"
+                    alt="Change"
+                  />
+                </Button>
+              </div>
+              <Label ta="center" color="primary" display="block" mt="5px" mb="0.9375rem">
+                <Button onClick={this.toggleMoreCoupons} p="0" color="primary" size="block" btnType="link" ta="right">
+                  {couponlistToggle ? 'Hide Coupons' : ' View Applicable Coupons'}
+                </Button>
+              </Label>
             </div>
           ) : (
             <div>
@@ -145,64 +155,24 @@ class Coupon extends React.Component {
                 {notifs.coupon && (
                   <Notifs namespace="coupon" NotifComponent={props => <LocalInlineNotification {...props} />} />
                 )}
-                {/* {error && <div>{errorMsg}</div>} */}
               </div>
-              {coupons.length > 0 && (
-                <Label ta="center" color="primary" display="block" mt="5px" mb="0.9375rem">
-                  <Button onClick={this.toggleMoreCoupons} p="0" color="primary" size="block" btnType="link" ta="right">
-                    View Applicable Coupons
-                  </Button>
-                </Label>
-              )}
+
+              <Label ta="center" color="primary" display="block" mt="5px" mb="0.9375rem">
+                <Button onClick={this.toggleMoreCoupons} p="0" color="primary" size="block" btnType="link" ta="right">
+                  {couponlistToggle ? 'Hide Coupons' : ' View Applicable Coupons'}
+                </Button>
+              </Label>
             </div>
           )}
-          {coupons.length > 0 &&
-            this.state.showmorecoupons && (
-            <div className={`${styles.offerList} `}>
-              <ul>
-                {coupons.map(item => (
-                  <li className={`${item.couponCode === appliedCoupon ? styles.active : ''}`} key={item.couponCode}>
-                    <Button
-                      onClick={() => {
-                        this.handleClick(item.couponCode);
-                      }}
-                      btnType="link"
-                      size="block"
-                      p="0"
-                      ta="left"
-                    >
-                      <div className={styles.couponWrapper}>
-                        <div className={styles.coupon}>
-                          <Label htmlFor="checkbox" className={styles.couponCode}>
-                            {item.couponCode}
-                          </Label>
-                          {item.discount_type === 'fixed' ? (
-                            <Label htmlFor="checkbox" className={styles.saveRs}>
-                                Flat{' '}
-                              <span>
-                                <b>Rs. {parseInt(item.discount_amount, 10)}</b>
-                              </span>{' '}
-                                OFF
-                            </Label>
-                          ) : (
-                            <Label htmlFor="checkbox" className={styles.saveRs}>
-                                Flat{' '}
-                              <span>
-                                <b>{parseInt(item.discount_percentage, 10)} %</b>
-                              </span>{' '}
-                                Off
-                            </Label>
-                          )}
-                        </div>
-                        <p htmlFor="checkbox" className={styles.offerDetails}>
-                          {item.description}
-                        </p>
-                      </div>
-                    </Button>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          {couponlistToggle && (
+            <CouponList
+              coupons={coupons}
+              appliedCoupon={appliedCoupon}
+              pincode={pincode}
+              sessionId={sessionId}
+              handleClick={this.handleClick}
+              loading={getingcoupon}
+            />
           )}
         </Div>
       </div>
