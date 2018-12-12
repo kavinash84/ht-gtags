@@ -10,6 +10,8 @@ const GET_DELIVERY_DETAILS_FAIL = 'productdetails/GET_DELIVERY_DETAILS_FAIL';
 
 const SET_PROUDUCT_POSITION = 'products/SET_PROUDUCT_POSITION';
 
+const PRODUCT_DETAILS_TRACK = 'productdetails/PRODUCT_DETAILS_TRACK';
+
 const initialState = {
   productDescription: {},
   currentsku: '',
@@ -102,4 +104,8 @@ export const getDelieveryInfo = (simpleSku, pincode) => ({
 export const setProductPosition = payLoad => ({
   type: SET_PROUDUCT_POSITION,
   payLoad
+});
+
+export const gaTrack = () => ({
+  type: PRODUCT_DETAILS_TRACK
 });
