@@ -23,9 +23,14 @@ import * as notifActions from 'redux/modules/notifs';
 import Notifs from 'components/Notifs';
 import { isKeyExists } from 'utils/helper';
 
+const { SITE_URL } = process.env;
+
 @provideHooks({
   fetch: async ({ store: { dispatch, getState } }) => {
-    const { pincode: { selectedPincode }, app: { sessionId, csrfToken } } = getState();
+    const {
+      pincode: { selectedPincode },
+      app: { sessionId, csrfToken }
+    } = getState();
     const defaultPincode = selectedPincode === '' ? PINCODE : selectedPincode;
     if (!isSessionSet(getState()) || !sessionId || !csrfToken) {
       await dispatch(generateSession(defaultPincode));
@@ -41,7 +46,9 @@ import { isKeyExists } from 'utils/helper';
     }
   },
   defer: ({ store: { dispatch, getState } }) => {
-    const { userLogin: { isLoggedIn, loggingOut } } = getState();
+    const {
+      userLogin: { isLoggedIn, loggingOut }
+    } = getState();
     if (!isSectionLoaded(getState(), 'categories')) {
       wrapDispatch(dispatch, 'categories')(loadCategories()).catch(error => error);
     }
@@ -111,7 +118,9 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-    const { login: { isLoggedIn } } = this.props;
+    const {
+      login: { isLoggedIn }
+    } = this.props;
     const { dispatch } = this.context.store;
     /* get cookie of glogin for pop up */
     const gCookie = Cookie.get('Glogin');
@@ -195,7 +204,7 @@ export default class App extends Component {
               `}
             </script>
             <link rel="alternate" media="only screen and (max-width:640px)" href={`https://m.hometown.in${pathname}`} />
-            <link rel="canonical" href={`https://www.hometown.in${pathname}`} />
+            <link rel="canonical" href={`${SITE_URL}${pathname}`} />
           </Helmet>
           <main className={styles.appContent}>
             <div className="container">

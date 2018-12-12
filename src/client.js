@@ -71,6 +71,7 @@ const providers = { app: {}, restApp: {}, client };
 
     await trigger('fetch', components, triggerLocals);
     await trigger('defer', components, triggerLocals);
+    trigger('done', components, triggerLocals);
 
     ReactDOM.hydrate(
       <HotEnabler>

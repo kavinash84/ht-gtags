@@ -237,14 +237,17 @@ export const calculateLowestEmi = (data, price) => {
   return lowest;
 };
 
-export const titleCase = str =>
-  str
-    .replace(/<(?:.|\n)*?>/gm, '')
-    .toLowerCase()
-    .split(' ')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
-
+export const titleCase = str => {
+  if (str) {
+    return str
+      .replace(/<(?:.|\n)*?>/gm, '')
+      .toLowerCase()
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
+  return '';
+};
 export const urlKeyResults = results => {
   if (results && typeof results === 'object' && results.constructor === Object) return [];
   const searchResults = results.filter(result => result.url_key !== '').map(x => {

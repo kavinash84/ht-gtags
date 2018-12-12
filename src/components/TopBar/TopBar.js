@@ -14,20 +14,20 @@ import Fav from 'hometown-components/lib/Icons/Fav';
 import Search from 'components/Search';
 import ResponsiveModal from 'components/Modal';
 import Pincode from 'components/Pincode';
-import CallUs from 'components/CallUs';
+// import CallUs from 'components/CallUs';
 import LoginModal from 'containers/Login/LoginForm';
 import SignupModal from 'containers/Signup/SignupForm';
 import { SIGNUP_URL, HOME_URL, LOGIN_URL, MY_WISHLIST_URL, MY_PROFILE_URL, CART_URL } from 'helpers/Constants';
 import { logout } from 'redux/modules/login';
 import { getCartCount } from 'selectors/cart';
 import { getWishListCount } from 'selectors/wishlist';
-import { checkRedirection } from 'utils/helper';
+import { titleCase, checkRedirection } from 'utils/helper';
 
 const LogoIcon = require('../../../static/logo.png');
 const CartIcon = require('../../../static/cart-icon.svg');
 const PinIcon = require('../../../static/map-icon.svg');
 // const MapIcon = require('../../../static/map.svg');
-const PhoneIcon = require('../../../static/phone-icon.svg');
+// const PhoneIcon = require('../../../static/phone-icon.svg');
 const UserIcon = require('../../../static/user-icon.svg');
 const PincodeModalIcon = require('../../../static/map-placeholder.svg');
 
@@ -44,13 +44,15 @@ const onClickLogout = dispatcher => e => {
 @withRouter
 @connect(
   ({
-    pincode, userLogin, wishlist, cart, router
+    pincode, userLogin, wishlist, cart, router, profile
   }) => ({
     selectedPincode: pincode.selectedPincode,
     isLoggedIn: userLogin.isLoggedIn,
+    name: profile.data.first_name,
     wishListCount: getWishListCount(wishlist),
     cartCount: getCartCount(cart),
-    router
+    router,
+    profile
   }),
   {
     logoutUser: logout
@@ -103,7 +105,7 @@ export default class MenuSidebar extends Component {
     const styles = require('./TopBar.scss');
     const { userPopOver } = this.state;
     const {
-      selectedPincode, isLoggedIn, history, wishListCount, cartCount, logoutUser
+      selectedPincode, isLoggedIn, history, wishListCount, cartCount, logoutUser, name
     } = this.props;
     return (
       <div>
@@ -145,7 +147,7 @@ export default class MenuSidebar extends Component {
                 <Pincode color="#f2f2f2" onCloseModal={this.onClosePincodeModal} />
               </Div>
             </ResponsiveModal>
-            <div className={`${styles.moreDropdownWrapper} dropdownWrapper`}>
+            {/* <div className={`${styles.moreDropdownWrapper} dropdownWrapper`}>
               <Button
                 btnType="custom"
                 bg="transparent"
@@ -165,7 +167,7 @@ export default class MenuSidebar extends Component {
               <div className={`${styles.phoneDropdown} dropDown`}>
                 <CallUs />
               </div>
-            </div>
+            </div> */}
             <Link className={styles.cart} to="/store-locator">
               <Img src={PinIcon} alt="Hometown" height="24px" mr="0.3125rem" float="left" />
               <Span fontFamily="light" fontSize="0.875em">
@@ -208,7 +210,11 @@ export default class MenuSidebar extends Component {
               onMouseOver={this.handleUserPopIn}
               onMouseOut={this.handleUserPopOver}
             >
-              <Img src={UserIcon} alt="Account" height="24px" mr="0" float="left" />
+              {isLoggedIn ? (
+                `Hi ${titleCase(name)} `
+              ) : (
+                <Img src={UserIcon} alt="Account" height="24px" mr="0" float="left" />
+              )}
             </Button>
             <div className={`${styles.yourAccount} ${userPopOver ? '' : styles.hide}`}>
               <Row display="block" mr="0" ml="0">
@@ -257,6 +263,7 @@ MenuSidebar.defaultProps = {
   wishListCount: 0,
   cartCount: 0,
   isLoggedIn: false,
+  name: '',
   history: {},
   router: {},
   logoutUser: () => {}
@@ -269,5 +276,6 @@ MenuSidebar.propTypes = {
   wishListCount: PropTypes.number,
   cartCount: PropTypes.number,
   logoutUser: PropTypes.func,
-  router: PropTypes.object
+  router: PropTypes.object,
+  name: PropTypes.string
 };

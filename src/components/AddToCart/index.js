@@ -46,12 +46,13 @@ const AddToCart = ({
   isSoldOut,
   height,
   btnColor,
-  btnType
+  btnType,
+  ta
 }) => {
   const checkStatus = checkSKUInCart(cartSKUs, sku);
   const addLoading = addingToCart && stateId === itemId;
   return (
-    <div>
+    <Div ta={ta}>
       {isSoldOut ? (
         <div>
           <Button
@@ -77,7 +78,7 @@ const AddToCart = ({
               bc={btnColor === 'transparent' ? '#f98d29' : btnColor}
               color={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
               bg={btnColor === 'transparent' ? 'transparent' : btnColor}
-              p="7px 15px 2px"
+              p="7px 15px"
               size={size}
               disabled={addLoading}
               onClick={onClick(itemId, sku, simpleSku, session, pincode)(addToCart)}
@@ -92,7 +93,7 @@ const AddToCart = ({
                 fontFamily="regular"
                 color={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
                 va="top"
-                lh="1.8"
+                lh="1.5"
               >
                 {addLoading ? 'Adding..' : 'Add to Cart'}
               </Span>
@@ -112,7 +113,7 @@ const AddToCart = ({
           )}
         </div>
       )}
-    </div>
+    </Div>
   );
 };
 
@@ -125,7 +126,8 @@ AddToCart.defaultProps = {
   isSoldOut: false,
   height: 'auto',
   btnColor: '#f98d29',
-  btnType: 'custom'
+  btnType: 'custom',
+  ta: 'center'
 };
 
 AddToCart.propTypes = {
@@ -142,6 +144,7 @@ AddToCart.propTypes = {
   height: PropTypes.string,
   btnColor: PropTypes.string,
   btnType: PropTypes.string,
+  ta: PropTypes.string,
   isSoldOut: PropTypes.bool
 };
 

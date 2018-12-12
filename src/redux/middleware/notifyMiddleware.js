@@ -121,6 +121,15 @@ export default function userMiddleware() {
           dismissAfter: 4000
         }));
         break;
+
+      // OTP
+      case 'login/GET_OTP_FAIL':
+        dispatch(notifSend({
+          type: 'warning',
+          msg: (action.error && action.error.error_message) || SOME_ERROR,
+          dismissAfter: 4000
+        }));
+        break;
       // Delivery
       case 'checkout/SEND_DELIVERY_ADDRESS_FAIL': {
         let msg;
@@ -188,7 +197,7 @@ export default function userMiddleware() {
         }
         dispatch(notifSend({
           type: 'warning',
-          msg: msg || (action.error && action.error.error_message) || SOME_ERROR,
+          msg: msg || (action.error && titleCase(action.error.error_message)) || SOME_ERROR,
           dismissAfter: 4000
         }));
         break;

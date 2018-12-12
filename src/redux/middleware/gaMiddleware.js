@@ -7,11 +7,15 @@ export default function gaMiddleware() {
   return ({ getState, dispatch }) => next => action => {
     if (__CLIENT__) {
       const { payload, type } = action;
-      const { analytics: { isFirstHit } } = getState();
+      const {
+        analytics: { isFirstHit }
+      } = getState();
       if (window && window.dataLayer) {
         if (type === '@@router/LOCATION_CHANGE') {
           const location = payload.pathname;
-          const { location: { hostname } } = window;
+          const {
+            location: { hostname }
+          } = window;
           if (document.referrer !== '' && document.referrer !== hostname && isFirstHit !== 1) {
             Object.defineProperty(document, 'referrer', { get: () => hostname });
           }
@@ -80,13 +84,14 @@ export default function gaMiddleware() {
             }
           }
         }
-        if (type === 'productdetails/LOAD_PRODUCT_DESCRIPTION_SUCCESS' && !action.result.error_message) {
+        if (type === 'productdetails/PRODUCT_DETAILS_TRACK') {
+          const { position, productDescription } = getState().productdetails;
           window.google_tag_params.ecomm_pagetype = 'product';
-          window.google_tag_params.ecomm_totalvalue = action.result.meta.special_price || action.result.meta.price;
-          const { position } = getState().productdetails;
+          window.google_tag_params.ecomm_totalvalue =
+            productDescription.meta.special_price || productDescription.meta.price;
           const {
             name, sku, price, brand, category_details: categoryDetails, color
-          } = action.result.meta;
+          } = productDescription.meta;
           const category = filterCategoryDetails(categoryDetails)
             .map(item => item.url_key)
             .join('/');
@@ -162,7 +167,12 @@ export default function gaMiddleware() {
         }
         /* Cart Tracking */
         if (type === 'cart/ADD_TO_CART_SUCCESS') {
-          const { id_customer_cart: idcustomerCart, cart: { summary: { total } } } = action.result;
+          const {
+            id_customer_cart: idcustomerCart,
+            cart: {
+              summary: { total }
+            }
+          } = action.result;
           const [product] =
             action.result && action.result.cart.cart.filter(item => item.id_customer_cart === idcustomerCart);
           const {
@@ -197,7 +207,12 @@ export default function gaMiddleware() {
           );
         }
         if (type === 'cart/UPDATE_CART_SUCCESS') {
-          const { id_customer_cart: idcustomerCart, cart: { summary: { total } } } = action.result;
+          const {
+            id_customer_cart: idcustomerCart,
+            cart: {
+              summary: { total }
+            }
+          } = action.result;
           const [product] =
             action.result && action.result.cart.cart.filter(item => item.id_customer_cart === idcustomerCart);
           const {
@@ -234,7 +249,11 @@ export default function gaMiddleware() {
         }
         if (type === 'cart/REMOVE_FROM_CART_SUCCESS') {
           const { data } = getState().cart;
-          const { cart: { summary: { total } } } = action.result;
+          const {
+            cart: {
+              summary: { total }
+            }
+          } = action.result;
           const [product] = data.filter(item => item.id_customer_cart === Number(action.result.cartId));
           if (product) {
             const checkKey = isKeyExists(product.product_info, 'category_details');
@@ -328,7 +347,9 @@ export default function gaMiddleware() {
         }
         // Handle Payment success
         /* eslint-disable camelcase */
-        const { location: { pathname } } = getState().router;
+        const {
+          location: { pathname }
+        } = getState().router;
         if (type === 'PUSH_TO_DATALAYER' && pathname && pathname === '/payment-success') {
           const { data } = getState().paymentstatus;
           if (data) {
@@ -343,7 +364,15 @@ export default function gaMiddleware() {
             const skus = [];
             const cartList = products.map(x => {
               const {
-                sku, name, qty, price, brand, categories, details: { attributes: { color } }
+                sku,
+                name,
+                qty,
+                price,
+                brand,
+                categories,
+                details: {
+                  attributes: { color }
+                }
               } = x;
               skus.push(sku);
               return {
@@ -381,7 +410,11 @@ export default function gaMiddleware() {
           }
         }
         if (type === 'mainSlider/BANNER_IMPRESSION') {
-          const { homepage: { banners: { data } } } = getState();
+          const {
+            homepage: {
+              banners: { data }
+            }
+          } = getState();
           if (pathname !== '/plan-your-kitchen') {
             if (data && data.length) {
               const imp = data[action.payload];
@@ -404,7 +437,11 @@ export default function gaMiddleware() {
           }
         }
         if (type === 'mainSlider/BANNER_CLICK') {
-          const { homepage: { banners: { data } } } = getState();
+          const {
+            homepage: {
+              banners: { data }
+            }
+          } = getState();
           if (data && data.length) {
             const imp = data[action.payload];
             const obj = {

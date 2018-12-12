@@ -32,6 +32,7 @@ module.exports = Object.assign(
           { property: 'og:description', content: 'Buy Furniture, Homeware Online' },
           { property: 'og:card', content: 'summary' },
           { property: 'og:site', content: 'hometown' },
+          { property: 'fb:app_id', content: '987405118075400' },
           { property: 'og:creator', content: 'HomeTown-Tech' },
           { property: 'og:image:width', content: '200' },
           { property: 'og:image:height', content: '200' }

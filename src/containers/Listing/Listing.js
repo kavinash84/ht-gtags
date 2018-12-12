@@ -26,7 +26,7 @@ import {
 import { SITE_URL } from 'helpers/Constants';
 import CANONICALS from 'data/canonical';
 
-const SearchEmptyIcon = require('../../../static/search-empty.jpg');
+const SearchEmptyIcon = require('../../../static/search-empty.png');
 
 @connect(state => ({
   loading: state.products.loading,
@@ -50,7 +50,8 @@ const SearchEmptyIcon = require('../../../static/search-empty.jpg');
   seoInfo: getSEOInfo(state),
   breadCrumbs: state.products.categoryDetails,
   currentPage: state.pagination.page,
-  categoryBar: getl4(state)
+  categoryBar: getl4(state),
+  selectedPincode: state.pincode.selectedPincode
 }))
 @withRouter
 export default class Listing extends Component {
@@ -76,7 +77,8 @@ export default class Listing extends Component {
     seoInfo: PropTypes.object,
     breadCrumbs: PropTypes.array,
     currentPage: PropTypes.number,
-    categoryBar: PropTypes.array
+    categoryBar: PropTypes.array,
+    selectedPincode: PropTypes.string
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -101,7 +103,8 @@ export default class Listing extends Component {
     seoInfo: {},
     breadCrumbs: [],
     currentPage: 1,
-    categoryBar: []
+    categoryBar: [],
+    selectedPincode: ''
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.pincode !== this.props.pincode) {
@@ -133,7 +136,8 @@ export default class Listing extends Component {
       seoInfo,
       breadCrumbs,
       currentPage,
-      categoryBar
+      categoryBar,
+      selectedPincode
     } = this.props;
     let page;
     const {
@@ -163,7 +167,7 @@ export default class Listing extends Component {
             products.length === 0 && (
             <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
               <Empty
-                title="Sorry no results found"
+                title="Sorry! No Results Found"
                 subTitle="Please check the Spelling or by a different search"
                 url="/"
                 bg="#fafafa"
@@ -194,6 +198,7 @@ export default class Listing extends Component {
                 categoryquery={categoryquery}
                 breadCrumbs={breadCrumbs}
                 categoryBar={categoryBar}
+                selectedPincode={selectedPincode}
               />
               <Pagination
                 loading={loading}
