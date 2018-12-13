@@ -9,7 +9,8 @@ import {
   clearPreviousSort,
   setCategory,
   applyFilter,
-  setFilter
+  setFilter,
+  gaTrack as listingLoadTrack
 } from 'redux/modules/products';
 import { PINCODE } from 'helpers/Constants';
 
@@ -70,7 +71,8 @@ const hooks = {
       await dispatch(setCategory(query));
       await dispatch(setFilter(filters));
     }
-  }
+  },
+  done: ({ store: { dispatch } }) => dispatch(listingLoadTrack())
 };
 
 const Listing = HomeTownLoader({
