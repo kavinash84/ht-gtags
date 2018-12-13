@@ -77,7 +77,9 @@ class Coupon extends React.Component {
     const {
       cart,
       notifs,
-      coupon: { loading, coupons, getingcoupon },
+      coupon: {
+        loading, coupons, getingcoupon, unapplicablecoupons
+      },
       pincode,
       sessionId
     } = this.props;
@@ -172,6 +174,7 @@ class Coupon extends React.Component {
               sessionId={sessionId}
               handleClick={this.handleClick}
               loading={getingcoupon}
+              unapplicablecoupons={unapplicablecoupons}
             />
           )}
         </Div>

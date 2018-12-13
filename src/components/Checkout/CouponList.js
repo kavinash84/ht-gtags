@@ -17,7 +17,7 @@ class CouponList extends React.Component {
   }
   render() {
     const {
-      coupons, appliedCoupon, handleClick, loading
+      coupons, appliedCoupon, handleClick, loading, unapplicablecoupons
     } = this.props;
     return (
       <div className={`${styles.offerList} `}>
@@ -69,6 +69,53 @@ class CouponList extends React.Component {
             ))}
           </ul>
         )}
+
+        {!loading &&
+          unapplicablecoupons.length > 0 && (
+          <div>
+            <Label ta="center" display="block" mt="1.5rem" mb="1.5rem">
+                NON APPLICABLE COUPONS PLEASE UPGRADE YOUR CART
+            </Label>
+            <div className={`${styles.offerList} `}>
+              <ul>
+                {unapplicablecoupons.map(item => (
+                  <li className={`${item.couponCode === appliedCoupon ? styles.active : ''}`} key={item.couponCode}>
+                    <div className={styles.couponWrapper}>
+                      <div className={styles.coupon}>
+                        <Label htmlFor={item.couponCode} className={styles.couponCode} ml="0.625rem">
+                          {item.couponCode}
+                        </Label>
+                        {item.discount_type === 'fixed' ? (
+                          <Label htmlFor={item.couponCode} className={styles.saveRs}>
+                              Flat{' '}
+                            <span>
+                              <b>
+                                  Rs.
+                                {parseInt(item.discount_amount, 10)}
+                              </b>
+                            </span>{' '}
+                              OFF
+                          </Label>
+                        ) : (
+                          <Label htmlFor={item.couponCode} className={styles.saveRs}>
+                              Flat{' '}
+                            <span>
+                              <b>{parseInt(item.discount_percentage, 10)} %</b>
+                            </span>{' '}
+                              Off
+                          </Label>
+                        )}
+                      </div>
+                      <p htmlFor={item.couponCode} className={styles.offerDetails}>
+                        {item.description}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -77,7 +124,8 @@ class CouponList extends React.Component {
 CouponList.defaultProps = {
   coupons: [],
   appliedCoupon: '',
-  loading: true
+  loading: true,
+  unapplicablecoupons: []
 };
 CouponList.propTypes = {
   coupons: PropTypes.array,
@@ -85,6 +133,7 @@ CouponList.propTypes = {
   pincode: PropTypes.string.isRequired,
   sessionId: PropTypes.string.isRequired,
   handleClick: PropTypes.func.isRequired,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
+  unapplicablecoupons: PropTypes.array
 };
 export default CouponList;
