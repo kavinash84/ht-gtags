@@ -23,6 +23,8 @@ const SET_FILTER = 'products/SET_FILTER';
 const CLEAR_PREVIOUS_LIST = 'products/CLEAR_PREVIOUS_LIST';
 const CLEAR_PREVIOUS_SORT = 'products/CLEAR_PREVIOUS_SORT';
 
+const LISTING_TRACK = 'products/LISTING_TRACK';
+
 const initialState = {
   loaded: false,
   data: {},
@@ -218,4 +220,8 @@ export const setCategory = payLoad => ({
 export const setFilter = payLoad => ({
   type: SET_FILTER,
   payLoad
+});
+
+export const gaTrack = () => ({
+  type: LISTING_TRACK
 });
