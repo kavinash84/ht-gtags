@@ -10,29 +10,36 @@ import { Label } from 'hometown-components/lib/Label';
 
 const styles = require('./CategoryBar.scss');
 
-const CategoryBar = ({ categoryBar }) => (
+const CategoryBar = ({ categoryBar, maxItem }) => (
   <Section mb="0" p="0">
     <Container>
       <Row>
-        {categoryBar.map(item => (
-          <Div className={styles.categoryBlock} display="flexEqual" pb="1rem">
-            <Link to={`/${item.url_key}`} key={item.name}>
-              <Img width="100px" m="auto" src={item.icon_url ? item.icon_url : '/'} alt={item.name} />
-              <Label mt="-0.625rem" display="block" ta="center">
-                {item.name}
-              </Label>
-            </Link>
-          </Div>
-        ))}
+        {categoryBar.map((item, index) => {
+          if (index < maxItem) {
+            return (
+              <Div className={styles.categoryBlock} display="flexEqual" pb="1rem">
+                <Link to={`/${item.url_key}`} key={item.name}>
+                  <Img width="100px" m="auto" src={item.icon_url ? item.icon_url : '/'} alt={item.name} />
+                  <Label mt="0" display="block" ta="center">
+                    {item.name}
+                  </Label>
+                </Link>
+              </Div>
+            );
+          }
+          return null;
+        })}
       </Row>
     </Container>
   </Section>
 );
 
 CategoryBar.defaultProps = {
-  categoryBar: []
+  categoryBar: [],
+  maxItem: 8 // default
 };
 CategoryBar.propTypes = {
-  categoryBar: PropTypes.array
+  categoryBar: PropTypes.array,
+  maxItem: PropTypes.number
 };
 export default CategoryBar;
