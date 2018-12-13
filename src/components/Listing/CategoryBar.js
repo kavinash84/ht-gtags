@@ -13,14 +13,14 @@ const styles = require('./CategoryBar.scss');
 const CategoryBar = ({ categoryBar, maxItem }) => (
   <Section mb="0" p="0">
     <Container>
-      <Row>
+      <Row justifyContent="center">
         {categoryBar.map((item, index) => {
           if (index < maxItem) {
             return (
-              <Div className={styles.categoryBlock} display="flexEqual" pb="1rem">
+              <Div className={styles.categoryBlock} col="14" display="flex" pb="1rem">
                 <Link to={`/${item.url_key}`} key={item.name}>
-                  <Img width="100px" m="auto" src={item.icon_url ? item.icon_url : '/'} alt={item.name} />
-                  <Label mt="0" display="block" ta="center">
+                  <Img width="80px" m="auto" src={item.icon_url ? item.icon_url : '/'} alt={item.name} />
+                  <Label mt="0" mb="0" display="block" ta="center">
                     {item.name}
                   </Label>
                 </Link>
