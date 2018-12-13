@@ -117,8 +117,11 @@ export default function gaMiddleware() {
           window.google_tag_params.ecomm_prodid = sku;
           window.dataLayer.push(eventObject);
         }
-        if (type === 'products/LOAD_FILTER_SUCCESS') {
-          const { location } = getState().router;
+        if (type === 'products/LISTING_TRACK') {
+          const {
+            router: { location },
+            products: { list: results, data }
+          } = getState();
           if (location.pathname === '/search/') {
             window.google_tag_params.ecomm_pagetype = 'searchresults';
           } else {
@@ -133,15 +136,13 @@ export default function gaMiddleware() {
           };
           const skus = [];
           let totalValue = 0;
-          const checkKey = isKeyExists(action.result, 'metadata.category_details');
+          const checkKey = isKeyExists(data, 'metadata.category_details');
           const category = checkKey
             ? checkKey
               .filter(x => x !== null)
               .map(item => item.url_key)
               .join('/')
             : '';
-          const results =
-            action.result && action.result.success && action.result.metadata ? action.result.metadata.results : [];
           eventObject.ecommerce.impressions = results.map((item, position) => {
             const {
               name, sku, price, brand, color, special_price: netprice
