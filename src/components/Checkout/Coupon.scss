@@ -21,18 +21,16 @@
   }
 }
 .offerList {
-  background: #FFF;
-  top: 35px;
-  z-index: 1;
-  border: 1px solid #ebebeb;
-  max-height: 240px;
+  max-height: 275px;
   overflow: auto;
   &.active {
     display: block !important;
   }
   ul {
+    background: #FFF;
+    border: 1px solid #ebebeb;
     padding: 0;
-    margin: 0;
+    margin: 0 0 20px 0;
     p {
       margin: 0;
     }
@@ -47,21 +45,15 @@
         padding: 12px;
       }
       .coupon {
-        margin-bottom: 0.625rem;
+        margin-bottom: 0.3125rem;
       }
       .couponCode {
         font-size: 0.875rem;
-        border: 1px solid #d5d5d5;
+        border: 1px dashed #d5d5d5;
         padding: 3px 10px;
         margin: 0 5px 0 0;
         color: #575757;
         text-transform: uppercase;
-      }
-      &.active, &:hover {
-        border: 1px solid $primary;
-        .couponCode {
-          border: 1px solid $primary;
-        }
       }
       .saveRs {
         font-size: 0.875rem;
@@ -88,6 +80,25 @@
           font-family: light;
         }
       }
+    }
+    &.applicableCoupons {
+      li {
+        &.active, &:hover {
+          background: #F5F5F5;
+          .couponCode {
+            border: 1px dashed $primary;
+            background: #FFF;
+          }
+        }
+      }
+    }
+    &.unapplicableCoupons {
+      opacity: 0.6;
+    }
+  }
+  .unapplicableCouponsWrapper {
+    ul {
+      margin-bottom: 0;
     }
   }
 }

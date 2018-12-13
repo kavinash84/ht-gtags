@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'hometown-components/lib/Buttons';
+import Div from 'hometown-components/lib/Div';
 import { Label } from 'hometown-components/lib/Label';
 import { loadCoupons } from 'redux/modules/coupon';
 
@@ -25,79 +26,45 @@ class CouponList extends React.Component {
         {!loading && !coupons.length > 0 && <span>Sorry No Coupon Found ! </span>}
         {!loading &&
           coupons.length > 0 && (
-          <ul>
-            {coupons.map(item => (
-              <li className={`${item.couponCode === appliedCoupon ? styles.active : ''}`} key={item.couponCode}>
-                <Button
-                  onClick={() => {
-                    handleClick(item.couponCode);
-                  }}
-                  btnType="link"
-                  size="block"
-                  p="0"
-                  ta="left"
-                >
-                  <div className={styles.couponWrapper}>
-                    <div className={styles.coupon}>
-                      <Label htmlFor="checkbox" className={styles.couponCode}>
-                        {item.couponCode}
-                      </Label>
-                      {item.discount_type === 'fixed' ? (
-                        <Label htmlFor="checkbox" className={styles.saveRs}>
-                            Flat{' '}
-                          <span>
-                            <b>Rs. {parseInt(item.discount_amount, 10)}</b>
-                          </span>{' '}
-                            OFF
-                        </Label>
-                      ) : (
-                        <Label htmlFor="checkbox" className={styles.saveRs}>
-                            Flat{' '}
-                          <span>
-                            <b>{parseInt(item.discount_percentage, 10)} %</b>
-                          </span>{' '}
-                            Off
-                        </Label>
-                      )}
-                    </div>
-                    <p htmlFor="checkbox" className={styles.offerDetails}>
-                      {item.description}
-                    </p>
-                  </div>
-                </Button>
-              </li>
-            ))}
-          </ul>
-        )}
-
-        {!loading &&
-          unapplicablecoupons.length > 0 && (
-          <div>
-            <Label ta="center" display="block" mt="1.5rem" mb="1.5rem">
-                NON APPLICABLE COUPONS PLEASE UPGRADE YOUR CART
+          <Div className={styles.applicableCouponsWrapper}>
+            <Label
+              color="label"
+              fontSize="0.75rem"
+              fontFamily="medium"
+              display="block"
+              mt="0"
+              mb="0.625rem"
+              ta="left"
+            >
+                Choose a Valid Coupon
             </Label>
-            <div className={`${styles.offerList} `}>
-              <ul>
-                {unapplicablecoupons.map(item => (
-                  <li className={`${item.couponCode === appliedCoupon ? styles.active : ''}`} key={item.couponCode}>
+            <ul className={styles.applicableCoupons}>
+              {coupons.map(item => (
+                <li className={`${item.couponCode === appliedCoupon ? styles.active : ''}`} key={item.couponCode}>
+                  <Button
+                    onClick={() => {
+                      handleClick(item.couponCode);
+                    }}
+                    btnType="link"
+                    size="block"
+                    p="0"
+                    ta="left"
+                  >
                     <div className={styles.couponWrapper}>
                       <div className={styles.coupon}>
-                        <Label htmlFor={item.couponCode} className={styles.couponCode} ml="0.625rem">
+                        <Label htmlFor="checkbox" className={styles.couponCode}>
                           {item.couponCode}
                         </Label>
                         {item.discount_type === 'fixed' ? (
-                          <Label htmlFor={item.couponCode} className={styles.saveRs}>
+                          <Label htmlFor="checkbox" className={styles.saveRs}>
                               Flat{' '}
                             <span>
-                              <b>
-                                  Rs.
-                                {parseInt(item.discount_amount, 10)}
-                              </b>
+                              <b>Rs. {parseInt(item.discount_amount, 10)}</b>
                             </span>{' '}
                               OFF
                           </Label>
                         ) : (
-                          <Label htmlFor={item.couponCode} className={styles.saveRs}>
+                          <Label htmlFor="checkbox" className={styles.saveRs}>
                               Flat{' '}
                             <span>
                               <b>{parseInt(item.discount_percentage, 10)} %</b>
@@ -106,15 +73,64 @@ class CouponList extends React.Component {
                           </Label>
                         )}
                       </div>
-                      <p htmlFor={item.couponCode} className={styles.offerDetails}>
+                      <p htmlFor="checkbox" className={styles.offerDetails}>
                         {item.description}
                       </p>
                     </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+                  </Button>
+                </li>
+              ))}
+            </ul>
+          </Div>
+        )}
+        {!loading &&
+          unapplicablecoupons.length > 0 && (
+          <Div className={styles.unapplicableCouponsWrapper}>
+            <Label
+              color="primary"
+              fontSize="0.75rem"
+              fontFamily="medium"
+              display="block"
+              mt="0"
+              mb="0.625rem"
+              ta="left"
+            >
+                Coupon not valid for this order
+            </Label>
+            <ul className={styles.unapplicableCoupons}>
+              {unapplicablecoupons.map(item => (
+                <li className={`${item.couponCode === appliedCoupon ? styles.active : ''}`} key={item.couponCode}>
+                  <div className={styles.couponWrapper}>
+                    <div className={styles.coupon}>
+                      <Label htmlFor={item.couponCode} className={styles.couponCode} ml="0.625rem">
+                        {item.couponCode}
+                      </Label>
+                      {item.discount_type === 'fixed' ? (
+                        <Label htmlFor={item.couponCode} className={styles.saveRs}>
+                            Flat{' '}
+                          <span>
+                            <b>Rs.{parseInt(item.discount_amount, 10)}</b>
+                          </span>{' '}
+                            OFF
+                        </Label>
+                      ) : (
+                        <Label htmlFor={item.couponCode} className={styles.saveRs}>
+                            Flat{' '}
+                          <span>
+                            <b>{parseInt(item.discount_percentage, 10)} %</b>
+                          </span>{' '}
+                            Off
+                        </Label>
+                      )}
+                    </div>
+                    <p htmlFor={item.couponCode} className={styles.offerDetails}>
+                      {item.description}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </Div>
         )}
       </div>
     );

@@ -28,7 +28,7 @@ const OrderSummary = ({
   hidecoupon
 }) => (
   <Row ml="0" mr="0">
-    <Div col="12" mb="0.625rem">
+    <Div col="12" mb="1.25rem">
       {!hidecoupon && <Coupon />}
     </Div>
     <Div col="12" className={styles.orderSummary}>
