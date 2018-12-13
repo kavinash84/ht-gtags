@@ -153,26 +153,26 @@ export default class LoginFormContainer extends Component {
     return (
       <div className={styles.userWrapper}>
         <Row display="block" mr="0" ml="0">
-          <Div col={6}>
+          <Div col={5}>
             <div className={styles.imgWrapper}>
               <ImageShimmer
                 src="https://static.hometown.in/media/cms/hometownnew/compressed/signup-sidebar-bg.jpg"
-                height="599px"
+                height="520px"
               >
-                {imageURL => <Img src={imageURL} alt="" />}
+                {imageURL => <Img height="520px" src={imageURL} alt="" />}
               </ImageShimmer>
             </div>
           </Div>
-          <Div col={6} p="2rem 3rem">
+          <Div col={7} p="1.5rem 2.5rem 0.5rem 2.5rem">
             <div className={styles.formBlock}>
-              <Row display="block" mt="1.5rem" mr="0" ml="0">
+              <Row display="block" mt="rem" mr="0" ml="0">
                 <Div col="12" ta="center">
                   <Heading
                     color="color676767"
                     mt="0"
                     mb="0"
                     fontWeight="400"
-                    fontSize="2rem"
+                    fontSize="26px"
                     ta="center"
                     fontFamily="light"
                   >
@@ -183,7 +183,7 @@ export default class LoginFormContainer extends Component {
                   </Text>
                 </Div>
               </Row>
-              <Row display="block" mr="0" ml="0" pb="3rem">
+              <Row display="block" mr="0" ml="0" pb="0">
                 <Div mt="0.675rem">
                   {!this.state.loginviaotp ? (
                     <LoginForm />
@@ -209,34 +209,36 @@ export default class LoginFormContainer extends Component {
                   )}
                 </Div>
               </Row>
-              <Row className={styles.socialLogin} display="block" mr="0" ml="0" pt="2.5rem">
+              <Row className={styles.socialLogin} display="block" mr="0" ml="0" pt="1.25rem">
                 <Div col="12" ta="center" mb="0.625rem">
-                  <Label fontFamily="regular" ta="center" color="color79716c" mr="0.625rem" fontSize="1rem" va="super">
+                  <Label fontFamily="regular" ta="center" color="color79716c" fontSize="1rem" va="middle">
                     Or continue with
                   </Label>
-                  <Div col="6" ta="center" mb="0" pr="0.625rem">
-                    <Button
-                      btnType="custom"
-                      fontFamily="regular"
-                      ta="center"
-                      color="color79716c"
-                      mr="0.3125rem"
-                      fontSize="0.825rem"
-                      va="middle"
-                      border="1px solid #e6e6e6"
-                      size="block"
-                      height="42px"
-                      bg="#f5f5f5"
-                      onClick={this.toggleLoginForm}
-                    >
-                      {!this.state.loginviaotp ? (
-                        <Img display="inline-block" src={OTPIcon} alt="OTP" va="sub" width="18px" mr="10px" />
-                      ) : (
-                        <Img display="inline-block" src={EmailIcon} alt="OTP" va="sub" width="18px" mr="10px" />
-                      )}
-                      {!this.state.loginviaotp ? 'OTP' : 'Login Via Email Id'}
-                    </Button>
-                  </Div>
+                </Div>
+                <Div col="6" ta="center" mb="0" pr="0.625rem">
+                  <Button
+                    btnType="custom"
+                    fontFamily="regular"
+                    ta="center"
+                    color="black"
+                    mr="0.3125rem"
+                    fontSize="0.825rem"
+                    va="middle"
+                    border="1px solid #e6e6e6"
+                    size="block"
+                    height="42px"
+                    bg="#FFF"
+                    onClick={this.toggleLoginForm}
+                  >
+                    {!this.state.loginviaotp ? (
+                      <Img display="inline-block" src={OTPIcon} alt="OTP" va="sub" width="18px" mr="10px" />
+                    ) : (
+                      <Img display="inline-block" src={EmailIcon} alt="OTP" va="sub" width="18px" mr="10px" />
+                    )}
+                    {!this.state.loginviaotp ? 'OTP' : 'Login Via Email Id'}
+                  </Button>
+                </Div>
+                <Div col="6" ta="center" mb="0" pl="0.625rem">
                   <GoogleLoginBtn />
                 </Div>
               </Row>

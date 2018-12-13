@@ -709,11 +709,16 @@
 
 	/* Common Classes */
 	.socialBtn {
-		background-color: transparent;
-		padding: 0;
-		border: none;
+		background: #FFF;
+		color: #000;
+	  border: none;
+		width: 100%;
+		padding: .375rem .75rem;
+		border: 1px solid #e6e6e6;
+		font-size: 0.825rem;
+		height: 42px;
 		img {
-			width: 36px;
+			width: 18px;
 			vertical-align: sub;
 			margin-right: 0.625rem;
 		}
