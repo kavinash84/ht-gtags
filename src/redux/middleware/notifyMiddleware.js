@@ -226,6 +226,24 @@ export default function userMiddleware() {
           dismissAfter: 4000
         }));
         break;
+      // Password
+      case 'updatePassword/UPDATE_PASSWORD_SUCCESS':
+        dispatch(notifSend({
+          type: 'success',
+          msg: 'Password Updated Succesfully !',
+          dismissAfter: 4000
+        }));
+        break;
+      case 'updatePassword/UPDATE_PASSWORD_FAIL':
+        dispatch(notifSend({
+          type: 'warning',
+          msg:
+              (action.error && action.error.new_password && titleCase(action.error.new_password)) ||
+              (action.error && action.error.current_password && titleCase(action.error.current_password)) ||
+              SOME_ERROR,
+          dismissAfter: 4000
+        }));
+        break;
 
       default:
         break;
