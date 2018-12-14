@@ -11,8 +11,8 @@ import SlickSlider from '../SlickSlider';
 
 const styles = require('./CategoryBar.scss');
 
-const adjustSlides = length => ({
-  slidesToShow: length >= 8 ? 8 : 8,
+const adjustSlides = () => ({
+  slidesToShow: 8,
   slidesToScroll: 1,
   autoplay: false,
   infinite: false
@@ -22,7 +22,7 @@ const CategoryBar = ({ categoryBar }) => (
   <Section mb="0" p="0">
     <Container>
       <Row justifyContent="center" className="categoryBarCarousel" mt="0" mb="-1rem">
-        <SlickSlider settings={adjustSlides(categoryBar.length)}>
+        <SlickSlider settings={adjustSlides()}>
           {categoryBar.map((item, index) => (
             <Div
               key={String(index)}
