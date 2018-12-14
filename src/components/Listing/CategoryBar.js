@@ -12,9 +12,10 @@ import SlickSlider from '../SlickSlider';
 const styles = require('./CategoryBar.scss');
 
 const adjustSlides = length => ({
-  slidesToShow: length >= 8 ? 8 : length,
+  slidesToShow: length >= 8 ? 8 : 8,
   slidesToScroll: 1,
-  autoplay: false
+  autoplay: false,
+  infinite: false
 });
 
 const CategoryBar = ({ categoryBar }) => (
