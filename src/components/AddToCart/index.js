@@ -60,13 +60,13 @@ const AddToCart = ({
             border="1px solid"
             bc="white"
             color="red"
-            p="3px 10px"
+            p="1px 4px"
             size={size}
             height={height}
-            lh="1.75"
+            lh="1.5"
           >
             <Span fontSize="12px" fontFamily="regular" color="red" va="text-top">
-              {'OUT OF STOCK'}
+              {'Out of Stock'}
             </Span>
           </Button>
         </div>
@@ -79,7 +79,7 @@ const AddToCart = ({
               bc={btnColor === 'transparent' ? '#f98d29' : btnColor}
               color={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
               bg={btnColor === 'transparent' ? 'transparent' : btnColor}
-              p="5px 10px"
+              p="1px 4px"
               lh="1.5"
               size={size}
               disabled={addLoading}
@@ -97,7 +97,7 @@ const AddToCart = ({
               )}
               {addLoading && <Img className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />}
               <Span
-                ml="0.3125rem"
+                ml="2px"
                 fontSize="0.75rem"
                 fontFamily="regular"
                 color={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
@@ -108,7 +108,7 @@ const AddToCart = ({
               </Span>
             </Button>
           ) : (
-            <Div display="block" mb="0.625rem">
+            <Div display="block" mb="0">
               <span className={styles.addedToCart}>
                 <Img width="22px" src={CheckedIcon} display="inline" va="middle" mr="8px" />
                 Added to Cart
