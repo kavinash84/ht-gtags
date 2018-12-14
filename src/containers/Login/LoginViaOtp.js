@@ -77,7 +77,7 @@ export default class LoginViaOtp extends React.Component {
                 onChange={onChangeOtp}
                 value={otp}
                 type="text"
-                placeholder="123456"
+                placeholder="******"
                 feedBackError={otpError}
                 feedBackMessage={otpErrorMessage}
               />
@@ -99,9 +99,11 @@ export default class LoginViaOtp extends React.Component {
               <Button
                 boder="solid 1px rgba(151,151,151,0.47)"
                 fontFamily="regular"
-                height="30px"
+                fontSize="14px"
                 mt="5px"
                 ml="-1px"
+                px="0"
+                btnType="link"
                 onClick={handleResend}
                 disabled={resendtimer > 0}
               >

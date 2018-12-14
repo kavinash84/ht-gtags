@@ -97,8 +97,8 @@ class Coupon extends React.Component {
                   display="block"
                   btnType="link"
                   fontFamily="Light"
-                  pl="0"
-                  pr="0"
+                  pl="5px"
+                  pr="20px"
                   fontSize="1rem"
                   ta="left"
                   color={Theme.colors.primary}
