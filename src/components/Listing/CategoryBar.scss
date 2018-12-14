@@ -5,7 +5,7 @@
 .categoryBlock {
   border: solid 1px transparent;
   width: calc(100% / 8);
-  &:hover {
+  &.categoryBlock, &:hover {
     border: solid 1px #f16521;
     background-color: rgba(241,101,33,.03);
   }

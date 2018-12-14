@@ -17,7 +17,7 @@ const CategoryBar = ({ categoryBar, maxItem }) => (
         {categoryBar.map((item, index) => {
           if (index < maxItem) {
             return (
-              <Div className={styles.categoryBlock} col="14" display="flex" pb="1rem">
+              <Div className={`${styles.categoryBlock} ${styles.active}`} col="14" display="flex" pb="1rem">
                 <Link to={`/${item.url_key}`} key={item.name}>
                   <Img width="80px" m="auto" src={item.icon_url ? item.icon_url : '/'} alt={item.name} />
                   <Label mt="0" mb="0" display="block" ta="center">
