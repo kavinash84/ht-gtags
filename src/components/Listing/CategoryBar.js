@@ -18,38 +18,45 @@ const adjustSlides = () => ({
   infinite: false
 });
 
-const CategoryBar = ({ categoryBar }) => (
-  <Section mb="0" p="0">
-    <Container>
-      <Row justifyContent="center" className="categoryBarCarousel" mt="0" mb="-1rem">
-        <SlickSlider settings={adjustSlides()}>
-          {categoryBar.map((item, index) => (
-            <Div
-              key={String(index)}
-              className={`${styles.categoryBlock} ${styles.active}`}
-              col="12"
-              display="flex"
-              pb="0.625rem"
-              pt="0.625rem"
-            >
-              <Link to={`/${item.url_key}`} key={item.name}>
-                <Img width="80px" m="auto" src={item.icon_url ? item.icon_url : '/'} alt={item.name} />
-                <Label mt="0" mb="0" display="block" ta="center">
-                  {item.name}
-                </Label>
-              </Link>
-            </Div>
-          ))}
-        </SlickSlider>
-      </Row>
-    </Container>
-  </Section>
-);
+const CategoryBar = ({ categoryBar, pathname }) => {
+  if (pathname[pathname.length - 1] === '/') {
+    pathname = pathname.slice(0, -1);
+  }
+  return (
+    <Section mb="0" p="0">
+      <Container>
+        <Row justifyContent="center" className="categoryBarCarousel" mt="0" mb="-1rem">
+          <SlickSlider settings={adjustSlides()}>
+            {categoryBar.map((item, index) => (
+              <Div
+                key={String(index)}
+                className={`${styles.categoryBlock} ${pathname === `/${item.url_key}` ? styles.active : ''}`}
+                col="12"
+                display="flex"
+                pb="0.625rem"
+                pt="0.625rem"
+              >
+                <Link to={`/${item.url_key}`} key={item.name}>
+                  <Img width="80px" m="auto" src={item.icon_url ? item.icon_url : '/'} alt={item.name} />
+                  <Label mt="0" mb="0" display="block" ta="center">
+                    {item.name}
+                  </Label>
+                </Link>
+              </Div>
+            ))}
+          </SlickSlider>
+        </Row>
+      </Container>
+    </Section>
+  );
+};
 
 CategoryBar.defaultProps = {
-  categoryBar: []
+  categoryBar: [],
+  pathname: ' '
 };
 CategoryBar.propTypes = {
-  categoryBar: PropTypes.array
+  categoryBar: PropTypes.array,
+  pathname: PropTypes.string
 };
 export default CategoryBar;

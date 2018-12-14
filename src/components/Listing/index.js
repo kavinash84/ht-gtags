@@ -146,7 +146,7 @@ class Listing extends React.Component {
         <TitleBar title={categoryName} productCount={productCount}>
           <BreadCrumb categoryDetails={breadCrumbs} />
         </TitleBar>
-        <CategoryBar categoryBar={categoryBar} />
+        <CategoryBar pathname={history.location.pathname} categoryBar={categoryBar} />
         <Section pt="1rem" mb="0">
           <Container pr="0" pl="0">
             <div className={styles.filterBar}>
