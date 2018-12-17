@@ -111,7 +111,7 @@ export default function userMiddleware() {
           type: 'warning',
           msg:
               (action.error.error_message === 'invalid_grant' && 'Incorrect Email or Password') ||
-              titleCase(action.error.error_message) ||
+              action.error.error_message ||
               SOME_ERROR,
           dismissAfter: 4000
         }));
@@ -129,7 +129,7 @@ export default function userMiddleware() {
       case 'login/GET_OTP_FAIL':
         dispatch(notifSend({
           type: 'warning',
-          msg: (action.error && action.error.error_message) || SOME_ERROR,
+          msg: (action.error && titleCase(action.error.error_message)) || SOME_ERROR,
           dismissAfter: 4000
         }));
         break;
