@@ -39,46 +39,53 @@ class CouponList extends React.Component {
                 Choose a Valid Coupon
             </Label>
             <ul className={styles.applicableCoupons}>
-              {coupons.map(item => (
+              {coupons.map((item, index) => (
                 <li className={`${item.couponCode === appliedCoupon ? styles.active : ''}`} key={item.couponCode}>
-                  <Button
-                    onClick={() => {
-                      handleClick(item.couponCode);
-                    }}
-                    btnType="link"
-                    size="block"
-                    p="0"
-                    ta="left"
-                  >
-                    <div className={styles.couponWrapper}>
-                      <Label display="block" mt="0" mb="0" htmlFor={`coupon${item.couponCode}`}>
-                        <div className={styles.coupon}>
-                          <input type="radio" name="coupons" id={`coupon${item.couponCode}`} />
-                          <Label htmlFor={`coupon${item.couponCode}`} className={styles.couponCode} ml="0.625rem">
-                            {item.couponCode}
-                          </Label>
-                          {item.discount_type === 'fixed' ? (
-                            <Label htmlFor={`coupon${item.couponCode}`} className={styles.saveRs}>
-                                Flat{' '}
-                              <span>
-                                <b>Rs. {parseInt(item.discount_amount, 10)}</b>
-                              </span>{' '}
-                                OFF
+                  <Label display="block" mt="0" mb="0" htmlFor={`coupon-${String(index)}`}>
+                    <Button
+                      onClick={() => {
+                        handleClick(item.couponCode);
+                      }}
+                      btnType="link"
+                      size="block"
+                      p="0"
+                      ta="left"
+                    >
+                      <div className={styles.couponWrapper}>
+                        <Label display="block" mt="0" mb="0">
+                          <div className={styles.coupon}>
+                            <input
+                              checked={item.couponCode.toLowerCase() === appliedCoupon.toLowerCase()}
+                              type="radio"
+                              name="coupons"
+                              id={`coupon-${String(index)}`}
+                            />
+                            <Label className={styles.couponCode} ml="0.625rem">
+                              {item.couponCode}
                             </Label>
-                          ) : (
-                            <Label htmlFor={`coupon${item.couponCode}`} className={styles.saveRs}>
-                                Flat{' '}
-                              <span>
-                                <b>{parseInt(item.discount_percentage, 10)} %</b>
-                              </span>{' '}
-                                Off
-                            </Label>
-                          )}
-                        </div>
-                        <p className={styles.offerDetails}>{item.description}</p>
-                      </Label>
-                    </div>
-                  </Button>
+                            {item.discount_type === 'fixed' ? (
+                              <Label className={styles.saveRs}>
+                                  Flat{' '}
+                                <span>
+                                  <b>Rs. {parseInt(item.discount_amount, 10)}</b>
+                                </span>{' '}
+                                  OFF
+                              </Label>
+                            ) : (
+                              <Label className={styles.saveRs}>
+                                  Flat{' '}
+                                <span>
+                                  <b>{parseInt(item.discount_percentage, 10)} %</b>
+                                </span>{' '}
+                                  Off
+                              </Label>
+                            )}
+                            <p className={styles.offerDetails}>{item.description}</p>
+                          </div>
+                        </Label>
+                      </div>
+                    </Button>
+                  </Label>
                 </li>
               ))}
             </ul>
