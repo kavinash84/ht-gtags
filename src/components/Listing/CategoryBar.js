@@ -7,6 +7,7 @@ import Img from 'hometown-components/lib/Img';
 import Section from 'hometown-components/lib/Section';
 import Container from 'hometown-components/lib/Container';
 import { Label } from 'hometown-components/lib/Label';
+import ImageShimmer from 'hometown-components/lib/ImageShimmer';
 import SlickSlider from '../SlickSlider';
 
 const styles = require('./CategoryBar.scss');
@@ -26,29 +27,27 @@ const CategoryBar = ({ categoryBar, pathname }) => {
     <Section mb="0" p="0">
       <Container>
         <Row justifyContent="center" className="categoryBarCarousel" mt="0" mb="-1rem">
-          {/*eslint-disable*/}
           <SlickSlider settings={adjustSlides()}>
-            {categoryBar.map((item, index) => {
-              if (item.show_l4 === '1') {
-                return (
-                  <Div
-                    key={String(index)}
-                    className={`${styles.categoryBlock} ${pathname === `/${item.url_key}` ? styles.active : ''}`}
-                    col="12"
-                    display="flex"
-                    pb="0.625rem"
-                    pt="0.625rem"
-                  >
-                    <Link to={`/${item.url_key}`} key={item.name}>
-                      <Img width="80px" m="auto" src={item.icon_url ? item.icon_url : '/'} alt={item.name} />
-                      <Label mt="0" mb="0" display="block" ta="center">
-                        {item.name}
-                      </Label>
-                    </Link>
-                  </Div>
-                );
-              }
-            })}
+            {categoryBar &&
+              categoryBar.filter(list => list.show_l4 === '1').map((item, index) => (
+                <Div
+                  key={String(index)}
+                  className={`${styles.categoryBlock} ${pathname === `/${item.url_key}` ? styles.active : ''}`}
+                  col="12"
+                  display="flex"
+                  pb="0.625rem"
+                  pt="0.625rem"
+                >
+                  <Link to={`/${item.url_key}`} key={item.name}>
+                    <ImageShimmer src={item.icon_url} height="80px">
+                      {imageURL => <Img width="80px" m="auto" src={imageURL} alt={item.name} />}
+                    </ImageShimmer>
+                    <Label mt="0" mb="0" display="block" ta="center">
+                      {item.name}
+                    </Label>
+                  </Link>
+                </Div>
+              ))}
           </SlickSlider>
         </Row>
       </Container>
