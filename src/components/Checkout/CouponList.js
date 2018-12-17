@@ -59,6 +59,7 @@ class CouponList extends React.Component {
                               type="radio"
                               name="coupons"
                               id={`coupon-${String(index)}`}
+                              readOnly
                             />
                             <Label className={styles.couponCode} ml="0.625rem">
                               {item.couponCode}
