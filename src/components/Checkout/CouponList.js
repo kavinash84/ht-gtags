@@ -22,8 +22,10 @@ class CouponList extends React.Component {
     } = this.props;
     return (
       <div className={`${styles.offerList} `}>
-        {loading && <span>Loading......</span>}
-        {!loading && !coupons.length > 0 && <span>Sorry No Coupon Found ! </span>}
+        <Div className={styles.couponMessage}>
+          {loading && <span>Loading......</span>}
+          {!loading && !coupons.length > 0 && <span>Sorry No Coupon Found ! </span>}
+        </Div>
         {!loading &&
           coupons.length > 0 && (
           <Div className={styles.applicableCouponsWrapper}>
@@ -59,7 +61,6 @@ class CouponList extends React.Component {
                               type="radio"
                               name="coupons"
                               id={`coupon-${String(index)}`}
-                              readOnly
                             />
                             <Label className={styles.couponCode} ml="0.625rem">
                               {item.couponCode}
