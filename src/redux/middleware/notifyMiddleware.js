@@ -109,7 +109,10 @@ export default function userMiddleware() {
       case 'login/LOGIN_FAIL':
         dispatch(notifSend({
           type: 'warning',
-          msg: (action.error.error === 'invalid_grant' && 'Incorrect Email or Password') || SOME_ERROR,
+          msg:
+              (action.error.error_message === 'invalid_grant' && 'Incorrect Email or Password') ||
+              titleCase(action.error.error_message) ||
+              SOME_ERROR,
           dismissAfter: 4000
         }));
         break;
