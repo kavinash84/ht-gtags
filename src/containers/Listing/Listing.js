@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import Menu from 'containers/MenuNew/index';
 import Footer from 'components/Footer';
 import { getSKUList } from 'selectors/wishlist';
-import { clearAllFilters as loadAfterPincodeChange } from 'redux/modules/products';
+import { setReloadListing } from 'redux/modules/products';
 import Pagination from 'components/Pagination';
 import SeoContent from 'components/SeoContent';
 import {
@@ -105,8 +105,12 @@ export default class Listing extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.pincode !== this.props.pincode) {
       const { dispatch } = this.context.store;
-      const { category } = this.props;
-      dispatch(loadAfterPincodeChange(category, nextProps.pincode));
+      const { history } = this.props;
+      const {
+        location: { search, pathname }
+      } = history;
+      dispatch(setReloadListing(true));
+      history.push(`${pathname}${search}`);
     }
   }
   render() {

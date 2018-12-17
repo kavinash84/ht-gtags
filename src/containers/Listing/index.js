@@ -10,7 +10,8 @@ import {
   setCategory,
   applyFilter,
   setFilter,
-  gaTrack as listingLoadTrack
+  gaTrack as listingLoadTrack,
+  setReloadListing
 } from 'redux/modules/products';
 import { PINCODE } from 'helpers/Constants';
 
@@ -20,7 +21,7 @@ const hooks = {
       pincode: { selectedPincode },
       pagination: { page },
       app: { city },
-      products: { filter: prevFilter }
+      products: { filter: prevFilter, reloadListing }
     } = getState();
     let query;
     let filters;
@@ -61,7 +62,8 @@ const hooks = {
       !isInitialListLoaded(getState(), query) ||
       Number(currentPage) !== Number(page) ||
       (filters && filters !== prevFilter) ||
-      prevFilter === 'clearAll'
+      prevFilter === 'clearAll' ||
+      reloadListing
     ) {
       await dispatch(clearPreviousList());
       await dispatch(setCurrentPage(currentPage));
@@ -70,6 +72,7 @@ const hooks = {
       await dispatch(setCategoryQuery(query, pincode));
       await dispatch(setCategory(query));
       await dispatch(setFilter(filters));
+      dispatch(setReloadListing(false));
     }
   },
   done: ({ store: { dispatch } }) => dispatch(listingLoadTrack())
