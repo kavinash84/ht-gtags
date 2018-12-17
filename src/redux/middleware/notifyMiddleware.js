@@ -222,7 +222,7 @@ export default function userMiddleware() {
       case 'profile/UPDATE_PROFILE_FAIL':
         dispatch(notifSend({
           type: 'warning',
-          msg: SOME_ERROR,
+          msg: (action.error && action.error.error_message) || SOME_ERROR,
           dismissAfter: 4000
         }));
         break;
