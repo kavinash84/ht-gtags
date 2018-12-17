@@ -23,6 +23,10 @@ const SET_FILTER = 'products/SET_FILTER';
 const CLEAR_PREVIOUS_LIST = 'products/CLEAR_PREVIOUS_LIST';
 const CLEAR_PREVIOUS_SORT = 'products/CLEAR_PREVIOUS_SORT';
 
+const LISTING_TRACK = 'products/LISTING_TRACK';
+
+const SET_RELOAD_LISTING = 'products/SET_RELOAD_LISTING';
+
 const initialState = {
   loaded: false,
   data: {},
@@ -34,7 +38,8 @@ const initialState = {
   filters: {
     sortBy: 'Popularity'
   },
-  filter: ''
+  filter: '',
+  reloadListing: false
 };
 
 const defaultPincode = PINCODE;
@@ -133,6 +138,11 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         filter: action.payLoad || ''
       };
+    case SET_RELOAD_LISTING:
+      return {
+        ...state,
+        reloadListing: action.payLoad
+      };
     case CLEAR_PREVIOUS_LIST:
       return {
         ...state,
@@ -217,5 +227,14 @@ export const setCategory = payLoad => ({
 
 export const setFilter = payLoad => ({
   type: SET_FILTER,
+  payLoad
+});
+
+export const gaTrack = () => ({
+  type: LISTING_TRACK
+});
+
+export const setReloadListing = payLoad => ({
+  type: SET_RELOAD_LISTING,
   payLoad
 });

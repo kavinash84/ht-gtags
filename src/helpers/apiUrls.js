@@ -13,6 +13,8 @@ export const LOGIN = 'tesla/authentication/login';
 export const SIGNUP = 'tesla/users/sign-up';
 export const GOOGLE_LOGIN = 'tesla/authentication/login/google';
 export const LOGOUT = 'tesla/users/logout';
+export const OTP = 'tesla/otp';
+export const RESEND_OTP = 'tesla/otp/resend';
 
 /* Account */
 export const USERPROFILE = 'tesla/users/details';
@@ -71,6 +73,7 @@ export const SERVICE_REQUEST = 'tesla/contact-us';
 export const BULK_ORDER = 'tesla/bulk-order';
 export const SUBSCRIPTION = 'tesla/users/subscribe-us';
 export const PROMOTIONS = 'tesla/static/text/promotions_react';
+export const CALL_BACK = 'tesla/call-back';
 
 /* Pincode */
 export const PINCODE_INFO = 'tesla/locations/pincode';

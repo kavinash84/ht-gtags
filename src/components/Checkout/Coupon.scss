@@ -1,5 +1,5 @@
-@import "../../theme/_variables";
-@import "../../theme/_mixins";
+@import "../../theme/variables";
+@import "../../theme/mixins";
 
 .applyCoupon {
   position: relative;
@@ -17,55 +17,61 @@
     position: absolute !important;
     right: 0;
     top: 0;
+    padding: 9px 20px 8px !important;
   }
 }
 .offerList {
-  // display: none;
-  // position: absolute;
-  background: #FFF;
-  top: 35px;
-  z-index: 1;
-  border: 1px solid #ebebeb;
-  // width: 300px;
-  height: 200px;
+  max-height: 275px;
   overflow: auto;
   &.active {
     display: block !important;
   }
   ul {
+    background: #FFF;
+    border: 1px solid #ebebeb;
     padding: 0;
-    margin: 0;
+    margin: 0 0 20px 0;
     p {
       margin: 0;
     }
     li {
       list-style: none;
+      border: 1px solid transparent;
+      border-bottom: 1px solid #ebebeb;
+      &:last-child {
+        border-bottom: none;
+      }
       .couponWrapper {
-        padding: 0.75rem 0.75rem;
-        border-bottom: 1px solid #d2d1d1;
+        padding: 12px;
       }
       .coupon {
-        margin-bottom: 0.625rem;
+        margin-bottom: 0.3125rem;
       }
       .couponCode {
-        font-size: 0.625rem;
-        border: 1px solid #d5d5d5;
-        padding: 0.25rem 0.3125rem;
-        margin: 0 8px 0 5px;
+        font-size: 0.875rem;
+        border: 1px dashed #d5d5d5;
+        padding: 3px 10px;
+        margin: 0 5px;
         color: #575757;
+        text-transform: uppercase;
       }
       .saveRs {
-        font-size: 0.75rem;
+        font-size: 0.875rem;
         color: #575757;
+        margin-left: 5px;
         span {
           color: #f5a623;
+          font-size: 1rem;
+          font-family: medium;
         }
       }
       .offerDetails {
         color: #828282;
-        font-size: 0.75rem;
-        font-family: thin;
+        font-size: 0.8125rem;
+        font-family: regular;
         line-height: 1.6;
+        white-space: normal;
+        margin-top: 3px;
       }
       .offerCondition {
         margin-top: 0.325rem;
@@ -74,9 +80,28 @@
           color: #828282;
           list-style: initial;
           font-size: 0.75rem;
-          font-family: thin;
+          font-family: light;
         }
       }
+    }
+    &.applicableCoupons {
+      li {
+        &.active, &:hover {
+          background: #F5F5F5;
+          .couponCode {
+            border: 1px dashed $primary;
+            background: #FFF;
+          }
+        }
+      }
+    }
+    &.unapplicableCoupons {
+      opacity: 0.6;
+    }
+  }
+  .unapplicableCouponsWrapper {
+    ul {
+      margin-bottom: 0;
     }
   }
 }

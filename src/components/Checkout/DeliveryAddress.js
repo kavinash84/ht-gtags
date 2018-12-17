@@ -14,6 +14,7 @@ import ResponsiveModal from 'components/Modal';
 import LoginModal from 'containers/Login/LoginForm';
 import Footer from 'components/Footer';
 import { sendDeliveryAddress, resetGuestRegisterFlag } from 'redux/modules/checkout';
+import { loadCoupons } from 'redux/modules/coupon';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from 'redux/modules/address';
 import { notifSend } from 'redux/modules/notifs';
@@ -88,7 +89,8 @@ const mapStateToProps = ({
   userEmail: profile.data.email,
   address,
   cart,
-  summary: cart.summary
+  summary: cart.summary,
+  couponlistToggle: cart.couponlistToggle
 });
 const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
 @withRouter
@@ -123,8 +125,9 @@ class DeliveryAddress extends Component {
   }
   componentWillReceiveProps(nextProps) {
     const {
-      isLoggedIn, nextstep, clearShippingAddress, onChangeEmail, userEmail
+      isLoggedIn, nextstep, clearShippingAddress, onChangeEmail, userEmail, couponlistToggle
     } = this.props;
+    const { dispatch } = this.context.store;
 
     if (isLoggedIn && nextProps.userEmail !== userEmail) {
       onChangeEmail('shipping', nextProps.userEmail);
@@ -135,6 +138,9 @@ class DeliveryAddress extends Component {
         openLogin: false
       });
       clearShippingAddress();
+      if (couponlistToggle) {
+        dispatch(loadCoupons());
+      }
     }
     // if (nextProps.addresses.length > 0 && nextProps.addresses.length !== this.props.addresses.length) {
     //   this.handleClick(0);
@@ -150,7 +156,9 @@ class DeliveryAddress extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { address: { shipping, billing, shippingIsBilling } } = this.props;
+    const {
+      address: { shipping, billing, shippingIsBilling }
+    } = this.props;
     const { dispatch } = this.context.store;
     const { isLoggedIn } = this.props;
     const { addressform } = this.state;
@@ -385,7 +393,8 @@ DeliveryAddress.defaultProps = {
   addresses: [],
   currentaddressindex: -1,
   userEmail: '',
-  summary: null
+  summary: null,
+  couponlistToggle: false
 };
 DeliveryAddress.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
@@ -405,6 +414,10 @@ DeliveryAddress.propTypes = {
   onChangeEmail: PropTypes.func.isRequired,
   loadPincodeDetails: PropTypes.func.isRequired,
   cart: PropTypes.object.isRequired,
-  summary: PropTypes.object
+  summary: PropTypes.object,
+  couponlistToggle: PropTypes.bool
 };
-export default connect(mapStateToProps, mapDispatchToProps)(DeliveryAddress);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DeliveryAddress);

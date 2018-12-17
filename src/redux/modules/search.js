@@ -91,7 +91,9 @@ export const stopLoading = () => ({
 let cancel;
 export const load = query => (dispatch, getState) => {
   const store = getState();
-  const { search: { loading } } = store;
+  const {
+    search: { loading }
+  } = store;
   if (loading) {
     dispatch(stopLoading());
     if (typeof cancel === 'function') cancel('cancelled previous search request');

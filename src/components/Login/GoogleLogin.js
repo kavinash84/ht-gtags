@@ -20,7 +20,7 @@ const onError = error => e => {
 
 const mapDispatchToProps = dispatch => bindActionCreators({ loginViaLogin: googleLogin }, dispatch);
 
-const GoogleIcon = require('../../../static/google-plus.svg');
+const GoogleIcon = require('../../../static/google.svg');
 
 const GoogleLogin = ({ loginViaLogin, session }) => (
   <GoogleLoginBtn
@@ -29,7 +29,7 @@ const GoogleLogin = ({ loginViaLogin, session }) => (
     onSuccess={onSuccess(loginViaLogin, session)}
     onFailure={onError}
   >
-    <Img display="inline-block" src={GoogleIcon} alt="Google" />
+    <Img display="inline-block" src={GoogleIcon} alt="Google" va="sub" width="18px" mr="10px" /> GOOGLE
   </GoogleLoginBtn>
 );
 

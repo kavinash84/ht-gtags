@@ -2,17 +2,15 @@
 @import "../../theme/_mixins";
 
 .userWrapper {
-  width: 900px;
+  width: 800px;
   margin: 0 auto;
   border-radius: 1px;
   background-color: $white;
-  min-height: 599px;
+  min-height: 520px;
   box-shadow: 1px 1px 10px -1px rgba(124, 122, 122, 0.3);
   .imgWrapper {
     position: relative;
-    height: 599px;
-    img {
-    }
+    height: 520px;
   }
   .back {
     position: absolute;
@@ -49,5 +47,4 @@
   }
 }
 .socialLogin {
-  border-top: 1px solid #dddddd;
 }

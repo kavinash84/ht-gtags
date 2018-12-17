@@ -46,6 +46,7 @@ export default class ReduxAsyncConnect extends Component {
       await trigger('fetch', components, triggerLocals);
       if (__CLIENT__) {
         await trigger('defer', components, triggerLocals);
+        trigger('done', components, triggerLocals);
       }
 
       // clear previousLocation so the next screen renders

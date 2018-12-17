@@ -23,6 +23,7 @@ import AddToCart from '../AddToCart';
 import AppliedFilters from '../Filters/AppliedFilters';
 import ScrollToTop from '../ScrollToTop';
 import BreadCrumb from './BreadCrumb';
+import CategoryBar from './CategoryBar';
 
 const sortByList = require('data/sortby');
 
@@ -136,13 +137,16 @@ class Listing extends React.Component {
       appliedFilters,
       sortBy,
       addToWaitList,
-      breadCrumbs
+      breadCrumbs,
+      categoryBar,
+      selectedPincode
     } = this.props;
     return (
       <Div type="block">
         <TitleBar title={categoryName} productCount={productCount}>
           <BreadCrumb categoryDetails={breadCrumbs} />
         </TitleBar>
+        <CategoryBar pathname={history.location.pathname} categoryBar={categoryBar} />
         <Section pt="1rem" mb="0">
           <Container pr="0" pl="0">
             <div className={styles.filterBar}>
@@ -229,8 +233,9 @@ class Listing extends React.Component {
                     }
                     setProductPosition={productPosition}
                     productURL={formatProductURL(item.data.name, item.data.sku)}
+                    pincode={selectedPincode}
                   />
-                  <Div mt="0" p="0.25rem 0.125rem 0.5rem">
+                  <Div mt="0" p="12px 0.125rem 0.5rem 0.125rem">
                     <AddToCart
                       simpleSku={Object.keys(item.data.simples)[0]}
                       sku={item.data.sku}
@@ -238,6 +243,7 @@ class Listing extends React.Component {
                       isSoldOut={item.soldout}
                       btnType="btnOutline"
                       btnColor="transparent"
+                      ta="left"
                     />
                   </Div>
                 </div>
@@ -285,7 +291,8 @@ Listing.defaultProps = {
   metaResults: [],
   loadingList: [],
   isLoggedIn: false,
-  categoryquery: ''
+  categoryquery: '',
+  categoryBar: []
 };
 
 Listing.propTypes = {
@@ -305,7 +312,12 @@ Listing.propTypes = {
   metaResults: PropTypes.array,
   categoryquery: PropTypes.string,
   addToWaitList: PropTypes.func.isRequired,
-  breadCrumbs: PropTypes.array.isRequired
+  breadCrumbs: PropTypes.array.isRequired,
+  categoryBar: PropTypes.array,
+  selectedPincode: PropTypes.string.isRequired
 };
 
-export default connect(null, mapDispatchToProps)(Listing);
+export default connect(
+  null,
+  mapDispatchToProps
+)(Listing);

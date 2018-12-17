@@ -2,7 +2,7 @@ import React from 'react';
 import Section from 'hometown-components/lib/Section';
 import Row from 'hometown-components/lib/Row';
 import Div from 'hometown-components/lib/Div';
-import Heading from 'hometown-components/lib/Heading';
+import Heading from 'hometown-components/lib/HeadingH6';
 import Img from 'hometown-components/lib/Img';
 
 const styles = require('./Usp.scss');

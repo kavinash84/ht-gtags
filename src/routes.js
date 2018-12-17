@@ -44,7 +44,7 @@ import TrackOrder from 'containers/TrackOrder';
 /* checkout */
 import DeliveryAddress from 'containers/DeliveryAddress';
 import PaymentOptions from 'containers/PaymentOptions';
-import ReviewOrder from 'containers/ReviewOrder';
+// import ReviewOrder from 'containers/ReviewOrder';
 import PaymentSuccess from 'containers/PaymentSuccess';
 import PaymentFailure from 'containers/PaymentFailure';
 
@@ -98,7 +98,7 @@ const routes = [
       { path: '/:productname?/sku/:skuId', exact: true, component: ProductDetails },
       { path: '/checkout/delivery-address', exact: true, component: DeliveryAddress },
       { path: '/checkout/payment-options', exact: true, component: PaymentOptions },
-      { path: '/checkout/review-order', exact: true, component: ReviewOrder },
+      // { path: '/checkout/review-order', exact: true, component: ReviewOrder },
       { path: '/search', exact: false, component: Listing },
       { path: '/return-policy', exact: true, component: ReturnPolicy },
       { path: '/privacy-policy', exact: true, component: PrivacyPolicy },
