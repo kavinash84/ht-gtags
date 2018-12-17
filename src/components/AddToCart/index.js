@@ -60,7 +60,7 @@ const AddToCart = ({
             border="1px solid"
             bc="white"
             color="red"
-            p="1px 4px"
+            p="4px 8px"
             size={size}
             height={height}
             lh="1.5"
@@ -79,7 +79,7 @@ const AddToCart = ({
               bc={btnColor === 'transparent' ? '#f98d29' : btnColor}
               color={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
               bg={btnColor === 'transparent' ? 'transparent' : btnColor}
-              p="1px 4px"
+              p="4px 8px"
               lh="1.5"
               size={size}
               disabled={addLoading}
