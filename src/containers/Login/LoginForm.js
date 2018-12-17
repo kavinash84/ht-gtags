@@ -103,7 +103,7 @@ export default class LoginFormContainer extends Component {
     if (checkmobile) {
       return this.setState({
         mobileError: true,
-        mobileErrorMessage: 'Please Enter Valid Mobile NUmber'
+        mobileErrorMessage: 'Please Enter Valid Mobile Number'
       });
     }
     const { dispatch } = this.context.store;
