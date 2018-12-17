@@ -20,7 +20,8 @@ import {
   getProductCount,
   getFilters,
   getAppliedFilters,
-  getSEOInfo
+  getSEOInfo,
+  getl4
 } from 'selectors/products';
 import { SITE_URL } from 'helpers/Constants';
 import CANONICALS from 'data/canonical';
@@ -49,6 +50,7 @@ const SearchEmptyIcon = require('../../../static/search-empty.png');
   seoInfo: getSEOInfo(state),
   breadCrumbs: state.products.categoryDetails,
   currentPage: state.pagination.page,
+  categoryBar: getl4(state),
   selectedPincode: state.pincode.selectedPincode
 }))
 @withRouter
@@ -75,6 +77,7 @@ export default class Listing extends Component {
     seoInfo: PropTypes.object,
     breadCrumbs: PropTypes.array,
     currentPage: PropTypes.number,
+    categoryBar: PropTypes.array,
     selectedPincode: PropTypes.string
   };
   static contextTypes = {
@@ -100,6 +103,7 @@ export default class Listing extends Component {
     seoInfo: {},
     breadCrumbs: [],
     currentPage: 1,
+    categoryBar: [],
     selectedPincode: ''
   };
   componentWillReceiveProps(nextProps) {
@@ -132,6 +136,7 @@ export default class Listing extends Component {
       seoInfo,
       breadCrumbs,
       currentPage,
+      categoryBar,
       selectedPincode
     } = this.props;
     let page;
@@ -172,6 +177,7 @@ export default class Listing extends Component {
             </Section>
           )}
           {!loaded && loading && !products.length && <ListingShimmer />}
+
           {loaded && products.length && !shimmer ? (
             <div>
               <ListingContainer
@@ -191,6 +197,7 @@ export default class Listing extends Component {
                 metaResults={metadata}
                 categoryquery={categoryquery}
                 breadCrumbs={breadCrumbs}
+                categoryBar={categoryBar}
                 selectedPincode={selectedPincode}
               />
               <Pagination

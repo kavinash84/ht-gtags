@@ -14,7 +14,9 @@ const getStoreInfo = (data, props) =>
 class Stores extends Component {
   render() {
     const [storeInfo] = this.props.stores;
-    const { meta: { title, description, keyword } } = storeInfo;
+    const {
+      meta: { title, description, keyword }
+    } = storeInfo;
     return (
       <MenuFooter pageTitle={title}>
         <Helmet>
