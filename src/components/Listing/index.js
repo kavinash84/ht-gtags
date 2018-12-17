@@ -244,6 +244,7 @@ class Listing extends React.Component {
                       btnType="btnOutline"
                       btnColor="transparent"
                       ta="left"
+                      fontSize="12px"
                     />
                   </Div>
                 </div>
@@ -317,7 +318,4 @@ Listing.propTypes = {
   selectedPincode: PropTypes.string.isRequired
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Listing);
+export default connect(null, mapDispatchToProps)(Listing);

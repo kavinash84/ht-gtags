@@ -294,6 +294,7 @@ class ProductDetails extends React.Component {
                         btnType="custom"
                         btnColor="#515151"
                         height="50px"
+                        fontSize="16px"
                         isSoldOut={
                           !(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)
                         }
@@ -399,7 +400,4 @@ ProductDetails.propTypes = {
   gattributes: PropTypes.object.isRequired,
   loadingList: PropTypes.array
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

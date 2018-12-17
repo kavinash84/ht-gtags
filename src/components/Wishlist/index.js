@@ -104,6 +104,8 @@ class Wishlist extends React.Component {
                   isSoldOut={item.product_info.soldout}
                   btnType="btnOutline"
                   btnColor="transparent"
+                  ta="left"
+                  fontSize="12px"
                 />
               </Div>
             </div>
@@ -140,7 +142,4 @@ Wishlist.propTypes = {
   loadingList: PropTypes.array
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Wishlist);
+export default connect(null, mapDispatchToProps)(Wishlist);
