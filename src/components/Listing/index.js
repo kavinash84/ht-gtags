@@ -244,6 +244,7 @@ class Listing extends React.Component {
                       btnType="btnOutline"
                       btnColor="transparent"
                       ta="left"
+                      fontSize="12px"
                     />
                   </Div>
                 </div>

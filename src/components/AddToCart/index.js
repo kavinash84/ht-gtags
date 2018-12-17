@@ -47,7 +47,8 @@ const AddToCart = ({
   height,
   btnColor,
   btnType,
-  ta
+  ta,
+  fontSize
 }) => {
   const checkStatus = checkSKUInCart(cartSKUs, sku);
   const addLoading = addingToCart && stateId === itemId;
@@ -98,7 +99,7 @@ const AddToCart = ({
               {addLoading && <Img className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />}
               <Span
                 ml="2px"
-                fontSize="0.75rem"
+                fontSize={fontSize}
                 fontFamily="regular"
                 color={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
                 va="middle"
@@ -136,7 +137,8 @@ AddToCart.defaultProps = {
   height: 'auto',
   btnColor: '#f98d29',
   btnType: 'custom',
-  ta: 'center'
+  ta: 'center',
+  fontSize: '16px'
 };
 
 AddToCart.propTypes = {
@@ -154,6 +156,7 @@ AddToCart.propTypes = {
   btnColor: PropTypes.string,
   btnType: PropTypes.string,
   ta: PropTypes.string,
+  fontSize: PropTypes.string,
   isSoldOut: PropTypes.bool
 };
 
