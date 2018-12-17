@@ -73,13 +73,16 @@ export default function userMiddleware() {
         break;
 
       // Review orders
+      /* eslint-disable no-case-declarations */
       case 'paymentOptions/SUBMIT_PAYMENT_DETAILS_FAIL':
+        const errorResponse = action.error && action.error.error_message;
         dispatch(notifSend({
           type: 'warning',
           msg:
-              (action.error.error_message &&
-                titleCase(action.error.error_message[action.error.error_message.length - 1])) ||
-              (action.error.error_message && titleCase(action.error.error_message)) ||
+              (errorResponse &&
+                errorResponse.constructor !== String &&
+                titleCase(errorResponse[errorResponse.length - 1])) ||
+              (errorResponse && titleCase(errorResponse)) ||
               SOME_ERROR,
           dismissAfter: 4000
         }));

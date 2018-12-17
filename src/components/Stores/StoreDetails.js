@@ -10,6 +10,7 @@ import Text from 'hometown-components/lib/Text';
 import Img from 'hometown-components/lib/Img';
 import MenuWithBreadcrumb from 'components/MenuWithBreadcrumb';
 import { hyphenedString } from 'utils/helper';
+import Helmet from 'react-helmet';
 
 const storesImg = require('../../../static/storedemoimg.jpg');
 
@@ -25,8 +26,14 @@ export default class StoreDetails extends Component {
   render() {
     const { city, storeName, stores } = this.props;
     const store = stores && filterStore(city, storeName, stores)[0];
+    const { title, description, keyword } = store.meta;
     return (
       <Div type="block">
+        <Helmet>
+          <title>{title}</title>
+          <meta name="keywords" content={keyword} />
+          <meta name="description" content={description} />
+        </Helmet>
         <MenuWithBreadcrumb storeName={store.store} />
         <Section display="flex" pt="2.5rem" pb="4.5rem" mb="0" height="auto">
           <Container type="container" pr="1rem" pl="1rem">

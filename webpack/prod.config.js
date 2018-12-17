@@ -187,6 +187,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"',
       'process.env.APIHOST': '"api.hometown.in/api/"',
+      'process.env.SITE_URL': '"https://www.hometown.in"',
       __CLIENT__: true,
       __SERVER__: false,
       __DEVELOPMENT__: false,
@@ -249,7 +250,9 @@ module.exports = {
         signatureVersion: 'v4'
       },
       s3UploadOptions: {
-        Bucket: 'ht-live'
+        Bucket: 'ht-live',
+        CacheControl: 'max-age=31536000',
+        Expires: new Date(new Date().getTime() + 31536000000) // expiry for one year
       }
     }),
     new WebpackOnBuildPlugin(function() {

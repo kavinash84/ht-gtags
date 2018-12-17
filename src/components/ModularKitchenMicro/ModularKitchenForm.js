@@ -140,7 +140,8 @@ export default class ModularKitchen extends Component {
       pincode,
       city,
       state,
-      mobile: phone
+      mobile: phone,
+      service: 1
     };
     sendFormData(SERVICE_SIGNUPS, data, 'modularkitchen');
   };

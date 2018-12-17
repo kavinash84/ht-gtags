@@ -8,6 +8,7 @@ import userMiddleware from './middleware/userMiddleware';
 import paymentsMiddleware from './middleware/paymentsMiddleware';
 import notifyMiddleware from './middleware/notifyMiddleware';
 import createReducers from './reducer';
+import { resetReferrer } from './modules/analytics';
 
 function combine(reducers, persistConfig) {
   if (persistConfig) {
@@ -98,6 +99,7 @@ export default function createStore({
       persistoid.update(store.getState());
     });
     store.dispatch({ type: REGISTER });
+    store.dispatch(resetReferrer());
   }
 
   if (__DEVELOPMENT__ && module.hot) {

@@ -7,15 +7,18 @@ import PropTypes from 'prop-types';
 
 const styles = require('./NavBar.scss');
 
+const { SITE_URL } = process.env;
+
 const NavBar = ({
   menuItems, handleEnter, handleLeave, exitOnClick
 }) => (
   <div className={styles.navBar} onMouseLeave={handleLeave}>
     <Container pr="0" pl="0">
       <div className={styles.navBarSlider}>
-        {menuItems.filter(menu => menu.visibility === 'on' && menu.name !== 'Clearance Sale').map(menuItem => (
+        {menuItems.filter(menu => menu.visibility === 'on' && menu.name !== 'Festive Gifts').map(menuItem => (
           <Link
             onClick={exitOnClick}
+            title={menuItem.name}
             to={`/${menuItem.url_key}`}
             key={menuItem.id}
             onMouseEnter={handleEnter(menuItem.id)}
@@ -23,9 +26,15 @@ const NavBar = ({
             {menuItem.name}
           </Link>
         ))}
-        <Link onClick={exitOnClick} to="/modular-kitchens" onMouseEnter={handleEnter('')}>
+        <a
+          href={`${SITE_URL}/modular-kitchens`}
+          title="Modular Kitchens"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={exitOnClick}
+        >
           Modular Kitchens
-        </Link>
+        </a>
         <div className={`${styles.moreDropdownWrapper} dropdownWrapper`}>
           <Button
             btnType="custom"
@@ -46,20 +55,21 @@ const NavBar = ({
             <ul>
               <li>
                 <Label htmlFor="checkbox" fontSize="0.75em" ml="0.625rem" className="dropdownValue">
-                  <Link onClick={exitOnClick} to="/design-build" onMouseEnter={handleEnter('')}>
+                  <a
+                    href={`${SITE_URL}/design-build`}
+                    title="Design & Build"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={exitOnClick}
+                  >
                     Design & Build
-                  </Link>
+                  </a>
                 </Label>
               </li>
               <li>
                 <Label htmlFor="checkbox" fontSize="0.75em" ml="0.625rem" className="dropdownValue">
-                  <Link
-                    onClick={exitOnClick}
-                    to="/clearance-sale"
-                    onMouseEnter={handleEnter('')}
-                    title="Clearance Sale"
-                  >
-                    Clearance Sale
+                  <Link onClick={exitOnClick} to="/gifts" onMouseEnter={handleEnter('')} title="Festive Gifts">
+                    Festive Gifts
                   </Link>
                 </Label>
               </li>
