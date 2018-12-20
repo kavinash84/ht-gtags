@@ -11,19 +11,24 @@ export default function gaMiddleware() {
         analytics: { isFirstHit }
       } = getState();
       if (window && window.dataLayer) {
-        if (type === '@@router/LOCATION_CHANGE') {
-          const location = payload.pathname;
+        if (type === 'TRACK_PAGEVIEW') {
           const {
-            location: { hostname }
+            location: { pathname, search }
           } = window;
+          window.dataLayer.push({
+            event: 'pageviewtracking',
+            vpv: `${pathname}${search}`.trim()
+          });
+        }
+        if (type === '@@router/LOCATION_CHANGE') {
+          const {
+            location: { hostname, pathname }
+          } = window;
+          const location = (payload && payload.pathname) || pathname;
           if (document.referrer !== '' && document.referrer !== hostname && isFirstHit !== 1) {
             Object.defineProperty(document, 'referrer', { get: () => hostname });
           }
           if (isFirstHit === 1) dispatch(resetReferrer());
-          window.dataLayer.push({
-            event: 'pageviewtracking',
-            vpv: location
-          });
           if (location === '/') {
             window.google_tag_params.ecomm_pagetype = 'home';
             window.google_tag_params.ecomm_totalvalue = '';
