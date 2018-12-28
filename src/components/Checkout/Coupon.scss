@@ -106,8 +106,10 @@
   }
 }
 .couponMessage {
-  border: 1px solid #ededed;
+  border: 1px solid #f78585;
   padding: 1rem;
+  padding: 12px 13px;
+  background: rgba(255, 0, 0, 0.08);
 }
 .appliedCouponWrapper {
   padding: 0rem 0.75rem;

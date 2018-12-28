@@ -22,12 +22,29 @@ class CouponList extends React.Component {
     } = this.props;
     return (
       <div className={`${styles.offerList} `}>
-        <Div className={styles.couponMessage}>
-          {loading && <span>Loading......</span>}
-          {!loading &&
-            coupons.length === 0 &&
-            unapplicablecoupons.length === 0 && <span>Coupon not valid for this order</span>}
-        </Div>
+        {loading && (
+          <Label color="label" fontSize="0.875rem" fontFamily="medium" display="block" mt="0" mb="0.625rem" ta="left">
+            Loading......
+          </Label>
+        )}
+        {!loading &&
+          coupons.length === 0 &&
+          unapplicablecoupons.length !== 0 && (
+          <Div className={styles.couponMessage} mb="1rem">
+            <Label color="label" fontSize="0.875rem" fontFamily="medium" display="block" mt="0" mb="0" ta="left">
+                Coupon not valid for this order
+            </Label>
+          </Div>
+        )}
+        {!loading &&
+          coupons.length === 0 &&
+          unapplicablecoupons.length === 0 && (
+          <Div className={styles.couponMessage} mb="1rem">
+            <Label color="label" fontSize="0.875rem" fontFamily="medium" display="block" mt="0" mb="0" ta="left">
+                No Coupons Valid for this order
+            </Label>
+          </Div>
+        )}
         {!loading &&
           coupons.length > 0 && (
           <Div className={styles.applicableCouponsWrapper}>
