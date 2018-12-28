@@ -26,7 +26,7 @@ class CouponList extends React.Component {
           {loading && <span>Loading......</span>}
           {!loading &&
             coupons.length === 0 &&
-            unapplicablecoupons.length === 0 && <span>Sorry No Coupon Found ! </span>}
+            unapplicablecoupons.length === 0 && <span>Coupon not valid for this order</span>}
         </Div>
         {!loading &&
           coupons.length > 0 && (
