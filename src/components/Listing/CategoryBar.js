@@ -28,25 +28,26 @@ const CategoryBar = ({ categoryBar, pathname }) => {
       <Container>
         <Row justifyContent="center" className="categoryBarCarousel" mt="0" mb="-1rem">
           <SlickSlider settings={adjustSlides()}>
-            {categoryBar.map((item, index) => (
-              <Div
-                key={String(index)}
-                className={`${styles.categoryBlock} ${pathname === `/${item.url_key}` ? styles.active : ''}`}
-                col="12"
-                display="flex"
-                pb="0.625rem"
-                pt="0.625rem"
-              >
-                <Link to={`/${item.url_key}`} key={item.name}>
-                  <ImageShimmer src={item.icon_url} height="80px">
-                    {imageURL => <Img width="80px" m="auto" src={imageURL} alt={item.name} />}
-                  </ImageShimmer>
-                  <Label mt="0" mb="0" display="block" ta="center">
-                    {item.name}
-                  </Label>
-                </Link>
-              </Div>
-            ))}
+            {categoryBar &&
+              categoryBar.filter(list => list.show_l4 === '1').map((item, index) => (
+                <Div
+                  key={String(index)}
+                  className={`${styles.categoryBlock} ${pathname === `/${item.url_key}` ? styles.active : ''}`}
+                  col="12"
+                  display="flex"
+                  pb="0.625rem"
+                  pt="0.625rem"
+                >
+                  <Link to={`/${item.url_key}`} key={item.name}>
+                    <ImageShimmer src={item.icon_url} height="80px">
+                      {imageURL => <Img width="80px" m="auto" src={imageURL} alt={item.name} />}
+                    </ImageShimmer>
+                    <Label mt="0" mb="0" display="block" ta="center">
+                      {item.name}
+                    </Label>
+                  </Link>
+                </Div>
+              ))}
           </SlickSlider>
         </Row>
       </Container>

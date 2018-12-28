@@ -119,7 +119,10 @@ class CouponList extends React.Component {
                         <Label htmlFor={item.couponCode} className={styles.saveRs}>
                             Flat{' '}
                           <span>
-                            <b>Rs.{parseInt(item.discount_amount, 10)}</b>
+                            <b>
+                                Rs.
+                              {parseInt(item.discount_amount, 10)}
+                            </b>
                           </span>{' '}
                             OFF
                         </Label>

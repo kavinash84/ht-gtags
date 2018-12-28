@@ -142,7 +142,4 @@ Wishlist.propTypes = {
   loadingList: PropTypes.array
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Wishlist);
+export default connect(null, mapDispatchToProps)(Wishlist);

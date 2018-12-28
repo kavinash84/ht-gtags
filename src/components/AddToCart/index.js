@@ -160,7 +160,4 @@ AddToCart.propTypes = {
   isSoldOut: PropTypes.bool
 };
 
-export default connect(
-  mapStateToProps,
-  { ...actionCreators }
-)(AddToCart);
+export default connect(mapStateToProps, { ...actionCreators })(AddToCart);

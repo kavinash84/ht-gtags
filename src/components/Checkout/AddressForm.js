@@ -74,7 +74,7 @@ const AddressForm = props => {
         label="Address"
         type="textarea"
         placeholder=""
-        onChange={e => onChangeAddress(formType, e.target.value)}
+        onChange={e => onChangeAddress(formType, e.target.value.replace(/#/g, ''))}
         value={address}
         feedBackError={addressFeedBackError}
         feedBackMessage={addressFeedBackMessage}

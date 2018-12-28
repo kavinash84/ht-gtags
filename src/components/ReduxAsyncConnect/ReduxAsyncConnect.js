@@ -10,7 +10,8 @@ export default class ReduxAsyncConnect extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     history: PropTypes.objectOf(PropTypes.any).isRequired,
-    location: PropTypes.objectOf(PropTypes.any).isRequired
+    location: PropTypes.objectOf(PropTypes.any).isRequired,
+    store: PropTypes.object.isRequired
   };
 
   state = {
@@ -20,14 +21,22 @@ export default class ReduxAsyncConnect extends Component {
   componentWillMount() {
     NProgress.configure({ trickleSpeed: 200 });
   }
-
+  componentDidMount() {
+    const {
+      store: { dispatch }
+    } = this.props;
+    dispatch({
+      type: 'TRACK_PAGEVIEW'
+    });
+  }
   async componentWillReceiveProps(nextProps) {
     const {
       history, location, routes, store, helpers
     } = this.props;
-    const navigated = nextProps.location !== location;
+    const nextLocation = `${nextProps.location.pathname}${nextProps.location.search}`;
+    const lastLocation = `${location.pathname}${location.search}`;
 
-    if (navigated) {
+    if (nextLocation.trim() !== lastLocation.trim()) {
       // save the location so we can render the old screen
       NProgress.start();
       this.setState({ previousLocation: location });
@@ -48,13 +57,21 @@ export default class ReduxAsyncConnect extends Component {
         await trigger('defer', components, triggerLocals);
         trigger('done', components, triggerLocals);
       }
-
       // clear previousLocation so the next screen renders
       this.setState({ previousLocation: null });
       NProgress.done();
+      if (!NProgress.status) {
+        const { dispatch } = store;
+        setTimeout(
+          () =>
+            dispatch({
+              type: 'TRACK_PAGEVIEW'
+            }),
+          0
+        );
+      }
     }
   }
-
   render() {
     const { children, location } = this.props;
     const { previousLocation } = this.state;
