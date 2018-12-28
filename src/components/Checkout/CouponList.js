@@ -24,7 +24,9 @@ class CouponList extends React.Component {
       <div className={`${styles.offerList} `}>
         <Div className={styles.couponMessage}>
           {loading && <span>Loading......</span>}
-          {!loading && !coupons.length > 0 && <span>Sorry No Coupon Found ! </span>}
+          {!loading &&
+            coupons.length === 0 &&
+            unapplicablecoupons.length === 0 && <span>Sorry No Coupon Found ! </span>}
         </Div>
         {!loading &&
           coupons.length > 0 && (
