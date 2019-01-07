@@ -473,6 +473,15 @@ export default function gaMiddleware() {
           window.google_tag_params.ecomm_totalvalue = action.result.cart.summary.total;
         }
       }
+      if (type === 'signUp/SIGNUP_SUCCESS') {
+        const signUpEvent = {
+          event: 'event register',
+          category: 'New User Sign Up',
+          action: 'Register',
+          label: 'Success'
+        };
+        window.dataLayer.push(signUpEvent);
+      }
     }
     return next(action);
   };
