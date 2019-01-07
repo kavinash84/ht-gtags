@@ -244,7 +244,7 @@ export default class QuickView extends Component {
                   starting from Rs.{formatAmount(lowestEmi)}{' '}
                 </Span>
               </Text> */}
-              <AddToCart simpleSku={simpleSku} sku={sku} isSoldOut={soldOut} />
+              <AddToCart ta="left" simpleSku={simpleSku} sku={sku} isSoldOut={soldOut} height="auto" />
             </Div>
             <Div className={`${styles.thumb} thumbCarousel`}>
               {images && (

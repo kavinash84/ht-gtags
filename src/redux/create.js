@@ -8,6 +8,7 @@ import userMiddleware from './middleware/userMiddleware';
 import paymentsMiddleware from './middleware/paymentsMiddleware';
 import notifyMiddleware from './middleware/notifyMiddleware';
 import createReducers from './reducer';
+import { resetReferrer } from './modules/analytics';
 
 function combine(reducers, persistConfig) {
   if (persistConfig) {
@@ -47,7 +48,9 @@ export default function createStore({
     /* Check userAuthentication */
     const authToken = (data.userLogin.isLoggedIn && data.userLogin.accessToken) || '';
     if (data && data.userLogin.meta) {
-      const { userLogin: { meta } } = data;
+      const {
+        userLogin: { meta }
+      } = data;
       const [xId] = Object.keys(meta).filter(key => key !== 'customerId');
       helpers.client.setCustomerInfo('customerId', meta.customerId);
       helpers.client.setXId(xId, meta[xId]);
@@ -98,6 +101,7 @@ export default function createStore({
       persistoid.update(store.getState());
     });
     store.dispatch({ type: REGISTER });
+    store.dispatch(resetReferrer());
   }
 
   if (__DEVELOPMENT__ && module.hot) {

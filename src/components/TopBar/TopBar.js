@@ -14,7 +14,7 @@ import Fav from 'hometown-components/lib/Icons/Fav';
 import Search from 'components/Search';
 import ResponsiveModal from 'components/Modal';
 import Pincode from 'components/Pincode';
-import CallUs from 'components/CallUs';
+// import CallUs from 'components/CallUs';
 import LoginModal from 'containers/Login/LoginForm';
 import SignupModal from 'containers/Signup/SignupForm';
 import { SIGNUP_URL, HOME_URL, LOGIN_URL, MY_WISHLIST_URL, MY_PROFILE_URL, CART_URL } from 'helpers/Constants';
@@ -27,7 +27,7 @@ const LogoIcon = require('../../../static/logo.png');
 const CartIcon = require('../../../static/cart-icon.svg');
 const PinIcon = require('../../../static/map-icon.svg');
 // const MapIcon = require('../../../static/map.svg');
-const PhoneIcon = require('../../../static/phone-icon.svg');
+// const PhoneIcon = require('../../../static/phone-icon.svg');
 const UserIcon = require('../../../static/user-icon.svg');
 const PincodeModalIcon = require('../../../static/map-placeholder.svg');
 
@@ -147,7 +147,7 @@ export default class MenuSidebar extends Component {
                 <Pincode color="#f2f2f2" onCloseModal={this.onClosePincodeModal} />
               </Div>
             </ResponsiveModal>
-            <div className={`${styles.moreDropdownWrapper} dropdownWrapper`}>
+            {/* <div className={`${styles.moreDropdownWrapper} dropdownWrapper`}>
               <Button
                 btnType="custom"
                 bg="transparent"
@@ -167,7 +167,7 @@ export default class MenuSidebar extends Component {
               <div className={`${styles.phoneDropdown} dropDown`}>
                 <CallUs />
               </div>
-            </div>
+            </div> */}
             <Link className={styles.cart} to="/store-locator">
               <Img src={PinIcon} alt="Hometown" height="24px" mr="0.3125rem" float="left" />
               <Span fontFamily="light" fontSize="0.875em">

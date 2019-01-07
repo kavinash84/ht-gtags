@@ -524,7 +524,6 @@
 			height: 560px !important;
 		}
 	}
-
 	.prodCarousel {
 		.slick-slide {
 			max-width: 293px;
@@ -532,6 +531,14 @@
 			> div {
 				padding: 0 5px;
 			}
+		}
+	}
+	.categoryBarCarousel {
+		.slick-next {
+			right: -20px !important;
+		}
+		.slick-prev {
+			left: -20px !important;
 		}
 	}
 	.customModal {
@@ -709,11 +716,16 @@
 
 	/* Common Classes */
 	.socialBtn {
-		background-color: transparent;
-		padding: 0;
-		border: none;
+		background: #FFF;
+		color: #000;
+	  border: none;
+		width: 100%;
+		padding: .375rem .75rem;
+		border: 1px solid #e6e6e6;
+		font-size: 0.825rem;
+		height: 42px;
 		img {
-			width: 36px;
+			width: 18px;
 			vertical-align: sub;
 			margin-right: 0.625rem;
 		}
@@ -777,7 +789,7 @@
 	.ratings {
 		display: inline-block;
     margin-left: 0;
-		margin-right: 10px;
+		margin-right: 5px;
 		top: 0;
 	}
 	.ratingsCount {

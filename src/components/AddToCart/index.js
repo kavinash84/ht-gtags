@@ -46,12 +46,14 @@ const AddToCart = ({
   isSoldOut,
   height,
   btnColor,
-  btnType
+  btnType,
+  ta,
+  fontSize
 }) => {
   const checkStatus = checkSKUInCart(cartSKUs, sku);
   const addLoading = addingToCart && stateId === itemId;
   return (
-    <div>
+    <Div ta={ta}>
       {isSoldOut ? (
         <div>
           <Button
@@ -59,12 +61,13 @@ const AddToCart = ({
             border="1px solid"
             bc="white"
             color="red"
-            p="7px 15px 8px"
+            p="4px 8px"
             size={size}
             height={height}
+            lh="1.5"
           >
-            <Span fontSize="14px" fontFamily="regular" color="red" va="text-top">
-              {'OUT OF STOCK'}
+            <Span fontSize="12px" fontFamily="regular" color="red" va="text-top">
+              {'Out of Stock'}
             </Span>
           </Button>
         </div>
@@ -77,34 +80,42 @@ const AddToCart = ({
               bc={btnColor === 'transparent' ? '#f98d29' : btnColor}
               color={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
               bg={btnColor === 'transparent' ? 'transparent' : btnColor}
-              p="7px 15px 2px"
+              p="4px 8px"
+              lh="1.5"
               size={size}
               disabled={addLoading}
               onClick={onClick(itemId, sku, simpleSku, session, pincode)(addToCart)}
               className={styles.addToCartBtn}
               height={height}
             >
-              {!addLoading && <AddCart fill={btnColor === 'transparent' ? '#f98d29' : '#FFF'} />}
-              {addLoading && <Img width="24px" className="spin" src={LoaderIcon} display="inline" />}
+              {!addLoading && (
+                <AddCart
+                  width="18px"
+                  height="18px"
+                  va="middle"
+                  fill={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
+                />
+              )}
+              {addLoading && <Img className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />}
               <Span
-                ml="0.625rem"
-                fontSize="16px"
+                ml="2px"
+                fontSize={fontSize}
                 fontFamily="regular"
                 color={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
-                va="top"
+                va="middle"
                 lh="1.8"
               >
                 {addLoading ? 'Adding..' : 'Add to Cart'}
               </Span>
             </Button>
           ) : (
-            <Div display="block" mb="0.625rem">
+            <Div display="block" mb="0">
               <span className={styles.addedToCart}>
                 <Img width="22px" src={CheckedIcon} display="inline" va="middle" mr="8px" />
                 Added to Cart
               </span>
               <Link className={`${styles.goToCart} ${height !== 'auto' && styles.heightFix} `} to={CART_URL}>
-                <Span fontSize="14px" fontFamily="regular" color="#FFF" va="middle">
+                <Span ml="0" fontSize="12px" fontFamily="regular" color="#FFF" va="text-bottom" lh="1.5">
                   Go to Cart
                 </Span>
               </Link>
@@ -112,7 +123,7 @@ const AddToCart = ({
           )}
         </div>
       )}
-    </div>
+    </Div>
   );
 };
 
@@ -125,7 +136,9 @@ AddToCart.defaultProps = {
   isSoldOut: false,
   height: 'auto',
   btnColor: '#f98d29',
-  btnType: 'custom'
+  btnType: 'custom',
+  ta: 'center',
+  fontSize: '16px'
 };
 
 AddToCart.propTypes = {
@@ -142,6 +155,8 @@ AddToCart.propTypes = {
   height: PropTypes.string,
   btnColor: PropTypes.string,
   btnType: PropTypes.string,
+  ta: PropTypes.string,
+  fontSize: PropTypes.string,
   isSoldOut: PropTypes.bool
 };
 

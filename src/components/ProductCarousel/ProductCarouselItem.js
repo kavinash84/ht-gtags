@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Div from 'hometown-components/lib/Div';
 import Span from 'hometown-components/lib/Span';
-import Heading from 'hometown-components/lib/Heading';
+import Heading from 'hometown-components/lib/HeadingH3';
 import Rating from 'hometown-components/lib/Rating';
 import ImageShimmer from 'hometown-components/lib/ImageShimmer';
 import Img from 'hometown-components/lib/Img';

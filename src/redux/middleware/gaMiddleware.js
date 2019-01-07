@@ -1,18 +1,34 @@
 import { filterCategoryDetails, isKeyExists } from 'utils/helper';
 import { CART_URL } from 'helpers/Constants';
 import { getCartListSKU, getCartListSKUFromResult } from 'selectors/cart';
+import { resetReferrer } from '../modules/analytics';
 
 export default function gaMiddleware() {
-  return ({ getState }) => next => action => {
+  return ({ getState, dispatch }) => next => action => {
     if (__CLIENT__) {
       const { payload, type } = action;
+      const {
+        analytics: { isFirstHit }
+      } = getState();
       if (window && window.dataLayer) {
-        if (type === '@@router/LOCATION_CHANGE') {
-          const location = payload.pathname;
+        if (type === 'TRACK_PAGEVIEW') {
+          const {
+            location: { pathname, search }
+          } = window;
           window.dataLayer.push({
             event: 'pageviewtracking',
-            vpv: location
+            vpv: `${pathname}${search}`.trim()
           });
+        }
+        if (type === '@@router/LOCATION_CHANGE') {
+          const {
+            location: { hostname, pathname }
+          } = window;
+          const location = (payload && payload.pathname) || pathname;
+          if (document.referrer !== '' && document.referrer !== hostname && isFirstHit !== 1) {
+            Object.defineProperty(document, 'referrer', { get: () => hostname });
+          }
+          if (isFirstHit === 1) dispatch(resetReferrer());
           if (location === '/') {
             window.google_tag_params.ecomm_pagetype = 'home';
             window.google_tag_params.ecomm_totalvalue = '';
@@ -73,13 +89,14 @@ export default function gaMiddleware() {
             }
           }
         }
-        if (type === 'productdetails/LOAD_PRODUCT_DESCRIPTION_SUCCESS' && !action.result.error_message) {
+        if (type === 'productdetails/PRODUCT_DETAILS_TRACK') {
+          const { position, productDescription } = getState().productdetails;
           window.google_tag_params.ecomm_pagetype = 'product';
-          window.google_tag_params.ecomm_totalvalue = action.result.meta.special_price || action.result.meta.price;
-          const { position } = getState().productdetails;
+          window.google_tag_params.ecomm_totalvalue =
+            productDescription.meta.special_price || productDescription.meta.price;
           const {
             name, sku, price, brand, category_details: categoryDetails, color
-          } = action.result.meta;
+          } = productDescription.meta;
           const category = filterCategoryDetails(categoryDetails)
             .map(item => item.url_key)
             .join('/');
@@ -105,8 +122,11 @@ export default function gaMiddleware() {
           window.google_tag_params.ecomm_prodid = sku;
           window.dataLayer.push(eventObject);
         }
-        if (type === 'products/LOAD_FILTER_SUCCESS') {
-          const { location } = getState().router;
+        if (type === 'products/LISTING_TRACK') {
+          const {
+            router: { location },
+            products: { list: results, data }
+          } = getState();
           if (location.pathname === '/search/') {
             window.google_tag_params.ecomm_pagetype = 'searchresults';
           } else {
@@ -121,15 +141,13 @@ export default function gaMiddleware() {
           };
           const skus = [];
           let totalValue = 0;
-          const checkKey = isKeyExists(action.result, 'metadata.category_details');
+          const checkKey = isKeyExists(data, 'metadata.category_details');
           const category = checkKey
             ? checkKey
               .filter(x => x !== null)
               .map(item => item.url_key)
               .join('/')
             : '';
-          const results =
-            action.result && action.result.success && action.result.metadata ? action.result.metadata.results : [];
           eventObject.ecommerce.impressions = results.map((item, position) => {
             const {
               name, sku, price, brand, color, special_price: netprice

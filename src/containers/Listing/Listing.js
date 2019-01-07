@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import Menu from 'containers/MenuNew/index';
 import Footer from 'components/Footer';
 import { getSKUList } from 'selectors/wishlist';
-import { clearAllFilters as loadAfterPincodeChange } from 'redux/modules/products';
+import { setReloadListing } from 'redux/modules/products';
 import Pagination from 'components/Pagination';
 import SeoContent from 'components/SeoContent';
 import {
@@ -20,7 +20,8 @@ import {
   getProductCount,
   getFilters,
   getAppliedFilters,
-  getSEOInfo
+  getSEOInfo,
+  getl4
 } from 'selectors/products';
 import { SITE_URL } from 'helpers/Constants';
 import CANONICALS from 'data/canonical';
@@ -48,7 +49,9 @@ const SearchEmptyIcon = require('../../../static/search-empty.png');
   categoryquery: state.products.category,
   seoInfo: getSEOInfo(state),
   breadCrumbs: state.products.categoryDetails,
-  currentPage: state.pagination.page
+  currentPage: state.pagination.page,
+  categoryBar: getl4(state),
+  selectedPincode: state.pincode.selectedPincode
 }))
 @withRouter
 export default class Listing extends Component {
@@ -73,7 +76,9 @@ export default class Listing extends Component {
     isLoggedIn: PropTypes.bool,
     seoInfo: PropTypes.object,
     breadCrumbs: PropTypes.array,
-    currentPage: PropTypes.number
+    currentPage: PropTypes.number,
+    categoryBar: PropTypes.array,
+    selectedPincode: PropTypes.string
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -97,13 +102,19 @@ export default class Listing extends Component {
     isLoggedIn: false,
     seoInfo: {},
     breadCrumbs: [],
-    currentPage: 1
+    currentPage: 1,
+    categoryBar: [],
+    selectedPincode: ''
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.pincode !== this.props.pincode) {
       const { dispatch } = this.context.store;
-      const { category } = this.props;
-      dispatch(loadAfterPincodeChange(category, nextProps.pincode));
+      const { history } = this.props;
+      const {
+        location: { search, pathname }
+      } = history;
+      dispatch(setReloadListing(true));
+      history.push(`${pathname}${search}`);
     }
   }
   render() {
@@ -128,7 +139,9 @@ export default class Listing extends Component {
       categoryquery,
       seoInfo,
       breadCrumbs,
-      currentPage
+      currentPage,
+      categoryBar,
+      selectedPincode
     } = this.props;
     let page;
     const {
@@ -168,6 +181,7 @@ export default class Listing extends Component {
             </Section>
           )}
           {!loaded && loading && !products.length && <ListingShimmer />}
+
           {loaded && products.length && !shimmer ? (
             <div>
               <ListingContainer
@@ -187,6 +201,8 @@ export default class Listing extends Component {
                 metaResults={metadata}
                 categoryquery={categoryquery}
                 breadCrumbs={breadCrumbs}
+                categoryBar={categoryBar}
+                selectedPincode={selectedPincode}
               />
               <Pagination
                 loading={loading}

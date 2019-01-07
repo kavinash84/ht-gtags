@@ -11,12 +11,9 @@ import Section from 'hometown-components/lib/Section';
 import Text from 'hometown-components/lib/Text';
 import FormInput from 'hometown-components/lib/Forms/FormInput';
 import Button from 'hometown-components/lib/Buttons';
-import { HOME_URL } from 'helpers/Constants';
 import { validateEmail } from 'utils/validation';
 import { sendData } from 'redux/modules/services';
 import { SUBSCRIPTION as SUBSCRIPTION_API } from 'helpers/apiUrls';
-
-const LogoIcon = require('../../../static/logo.png');
 
 const fbIcon = require('../../../static/facebook.svg');
 const twIcon = require('../../../static/twitter.svg');
@@ -305,16 +302,6 @@ class Footer extends React.Component {
           <Container pr="0" pl="0">
             <Row m="0">
               <Div col={6}>
-                <Link to={HOME_URL}>
-                  <Img
-                    src={LogoIcon}
-                    className={styles.footerLogo}
-                    alt="Hometown"
-                    height="40px"
-                    float="left"
-                    mr="1.5rem"
-                  />
-                </Link>
                 <Text color="#a6a6a6" fontSize="0.875rem" mb="0" lh="2" ta="left" mt="7px">
                   © {new Date().getFullYear()} Praxis Home Retail Limited
                 </Text>

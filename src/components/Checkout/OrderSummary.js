@@ -24,15 +24,17 @@ const OrderSummary = ({
   disabled,
   outOfStockList,
   discount,
-  btnText
+  btnText,
+  hidecoupon
 }) => (
   <Row ml="0" mr="0">
-    <Div col="12" mb="0.625rem">
-      <Coupon />
+    <Div col="12" mb="1.25rem">
+      {!hidecoupon && <Coupon />}
     </Div>
     <Div col="12" className={styles.orderSummary}>
       <Text color="#6e6e6e" mt="0">
-        Total Price ({itemsCount} item{itemsCount === 1 ? '' : 's'})
+        Total Price ({itemsCount} item
+        {itemsCount === 1 ? '' : 's'})
         <Span float="right" color={Theme.colors.text}>
           Rs. {itemsTotal ? formatAmount(itemsTotal) : null}
         </Span>
@@ -97,7 +99,8 @@ OrderSummary.defaultProps = {
   outOfStockList: [],
   disabled: false,
   discount: 0,
-  btnText: 'Place Order'
+  btnText: 'Place Order',
+  hidecoupon: false
 };
 
 OrderSummary.propTypes = {
@@ -113,7 +116,8 @@ OrderSummary.propTypes = {
   outOfStockList: PropTypes.array,
   disabled: PropTypes.bool,
   discount: PropTypes.number,
-  btnText: PropTypes.string
+  btnText: PropTypes.string,
+  hidecoupon: PropTypes.bool
 };
 
 export default OrderSummary;

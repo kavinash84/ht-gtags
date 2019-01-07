@@ -26,7 +26,9 @@ const MenuCheckout = ({ page, history }) => (
             <span className={`${styles.headerLink} ${page === 'delivery' ? styles.active : ''}`}>Delivery Address</span>
           </Div>
           <Div col="3">
-            <span className={`${styles.headerLink} ${page === 'payment' ? styles.active : ''}`}>Payment Options</span>
+            <span className={`${styles.headerLink} ${styles.hideArrow} ${page === 'payment' ? styles.active : ''}`}>
+              Payment Options
+            </span>
           </Div>
           {/* <Div col="3">
             <span className={`${styles.headerLink} ${styles.hideArrow} ${page === 'review' ? styles.active : ''}`}>

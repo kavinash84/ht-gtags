@@ -420,6 +420,7 @@ class PaymentOptions extends Component {
                   discount={summary.coupon_discount}
                   itemsCount={summary.items_count}
                   hidebutton
+                  hidecoupon
                 />
                 <Row display="block" mr="0" ml="0">
                   <Div col="12">

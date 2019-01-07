@@ -26,6 +26,8 @@ const UPDATE_CART_SUMMARY_AFTER_COUPON = 'cart/UPDATE_CART_SUMMARY_AFTER_COUPON'
 
 const CLEAR_CART = 'cart/CLEAR_CART';
 
+const TOGGLE_COUPON_LIST = 'cart/TOGGLE_COUPON_LIST';
+
 const initialState = {
   loading: false,
   data: [],
@@ -36,7 +38,8 @@ const initialState = {
   cartSynced: false,
   checkingCart: false,
   cartChecked: false,
-  key: ''
+  key: '',
+  couponlistToggle: false
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -52,7 +55,8 @@ export default function reducer(state = initialState, action = {}) {
         data: action.result && 'cart' in action.result ? action.result.cart : [],
         summary: action.result && 'summary' in action.result ? action.result.summary : {},
         loading: false,
-        loaded: true
+        loaded: true,
+        couponlistToggle: false
       };
     case LOAD_CART_FAIL:
       return {
@@ -71,6 +75,7 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         addingToCart: false,
         addedToCart: true,
+        couponlistToggle: false,
         data: action.result && 'cart' in action.result ? action.result.cart.cart : [],
         summary: action.result && 'cart' in action.result ? action.result.cart.summary : {}
       };
@@ -93,7 +98,8 @@ export default function reducer(state = initialState, action = {}) {
         cartUpdating: false,
         cartUpdated: true,
         data: action.result && 'cart' in action.result ? action.result.cart.cart : [],
-        summary: action.result && 'cart' in action.result ? action.result.cart.summary : {}
+        summary: action.result && 'cart' in action.result ? action.result.cart.summary : {},
+        couponlistToggle: false
       };
     case UPDATE_CART_FAIL:
       return {
@@ -115,7 +121,8 @@ export default function reducer(state = initialState, action = {}) {
         cartUpdating: false,
         cartUpdated: true,
         data: action.result && 'cart' in action.result ? action.result.cart.cart : [],
-        summary: action.result && 'cart' in action.result ? action.result.cart.summary : {}
+        summary: action.result && 'cart' in action.result ? action.result.cart.summary : {},
+        couponlistToggle: false
       };
     case REMOVE_FROM_CART_FAIL:
       return {
@@ -177,6 +184,11 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         key: action.payLoad
+      };
+    case TOGGLE_COUPON_LIST:
+      return {
+        ...state,
+        couponlistToggle: !state.couponlistToggle
       };
     case CLEAR_CART:
       return {
@@ -301,4 +313,8 @@ export const resetCheck = () => ({
 
 export const clearCart = () => ({
   type: CLEAR_CART
+});
+
+export const toggleCouponList = () => ({
+  type: TOGGLE_COUPON_LIST
 });

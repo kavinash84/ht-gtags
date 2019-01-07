@@ -37,9 +37,26 @@ export const getCategoryName = createSelector(
 
 export const filtersArr = createSelector([productMeta], productList => productList.filter || []);
 
+export const getColorFilter = createSelector([filtersArr], filters =>
+  filters.filter(filter => filter.name === 'Color'));
+
+export const colorArr = createSelector(
+  [getColorFilter],
+  list =>
+    list.length > 0
+      ? list.map(attr =>
+        attr.attributes.constructor === Array
+          ? attr
+          : {
+            ...attr,
+            attributes: [...Object.values(attr.attributes)]
+          })
+      : []
+);
+
 export const filtersList = createSelector(
-  [filtersArr],
-  list => list.filter(x => x.attributes && x.attributes.constructor === Array) || []
+  [filtersArr, colorArr],
+  (list, colorFilter) => [...list.filter(x => x.attributes && x.attributes.constructor === Array), ...colorFilter] || []
 );
 
 export const getFilters = createSelector([filtersList], filters =>
@@ -60,3 +77,24 @@ export const getSEOInfo = createSelector(
   [productMeta],
   seoInfo => (seoInfo && seoInfo.seo && Object.keys(seoInfo.seo).length > 0 ? seoInfo.seo.items : null)
 );
+
+export const getCategoryDetails = createSelector([productMeta], item => item.category_details || []);
+
+export const getl4 = state => {
+  const catData = getCategoryDetails(state);
+  const l4 = [];
+  const getChildren = node => {
+    node.children.map(item => {
+      l4.push(item);
+      return 0;
+    });
+  };
+  if (catData.length > 0) {
+    if (catData[catData.length - 1].children) {
+      getChildren(catData[catData.length - 1]);
+    } else {
+      getChildren(catData[catData.length - 2]);
+    }
+  }
+  return l4;
+};
