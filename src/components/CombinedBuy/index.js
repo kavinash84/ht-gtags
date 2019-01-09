@@ -21,7 +21,7 @@ const ProductCarousel = ({
     <Container pr="0" pl="0" className={styles.combinedProductsWrapper}>
       <Row>
         <Div>
-          <HeadingH4 fontSize="1.25rem" color="text" fontWeight="500" ta="center" mb="1rem">
+          <HeadingH4 fontSize="1.25rem" color="text" fontWeight="500" ta="center" mb="1rem" mt="0">
             {title}
           </HeadingH4>
         </Div>
@@ -90,8 +90,11 @@ const ProductCarousel = ({
             <Span ml="10px" color="rgba(0,0,0,0.5)" fontSize="0.875rem">
               <s>{formatAmount(price)}</s>
             </Span>
+            <Span ml="10px" color="rgba(0,0,0,0.8)" fontSize="0.75rem">
+              (Saving ₹595)
+            </Span>
           </Label>
-          <Button btnType="primary" onClick={handleCombinedBuy}>
+          <Button ml="1rem" mt="-25px" fontSize="0.875rem" btnType="primary" onClick={handleCombinedBuy}>
             ADD 3 ITEMS TO CART
           </Button>
         </Div>

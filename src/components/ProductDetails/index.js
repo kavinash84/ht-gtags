@@ -16,7 +16,9 @@ import Specs from 'hometown-components/lib/ProductDetails/Specs';
 import Reviews from 'hometown-components/lib/Reviews';
 import AddReview from 'hometown-components/lib/Reviews/WriteReview';
 import Img from 'hometown-components/lib/Img';
+import Button from 'hometown-components/lib/Buttons';
 import WishlistBtn from 'hometown-components/lib/WishlistBtn';
+import Theme from 'hometown-components/lib/Theme';
 import ProductCarousel from 'components/ProductCarousel';
 import CombinedBuy from 'components/CombinedBuy';
 import EmiModal from 'containers/EmiModal/EmiModal';
@@ -283,6 +285,19 @@ class ProductDetails extends React.Component {
                       <EmiModal price={formatAmount(checkSpecialPrice)} data={emidata} key="emi" />
                     </ServiceDetails>
                   </Row>
+                  <Row display="block" mt="-0.625rem" mb="1.25rem" mr="0" ml="0.9375rem">
+                    <Div col="12" pl="0" pr="0">
+                      <Button
+                        className={styles.seeAllCombine}
+                        btnType="link"
+                        p="0"
+                        fontSize="1rem"
+                        color={Theme.colors.primary}
+                      >
+                        See All Combined Offers (2)
+                      </Button>
+                    </Div>
+                  </Row>
                   {offerImage &&
                     offerImageRedirect && (
                     <Row display="block" mt="0" mb="0" mr="0.9375rem" ml="0.9375rem">
@@ -363,20 +378,37 @@ class ProductDetails extends React.Component {
           </Container>
         </Section>
 
-        {combinedbuy.length > 0 &&
-          combinedbuy.map(item => (
-            <Row display="block" pt="0" mt="0" mb="0" mr="0">
-              <CombinedBuy
-                pb="2rem"
-                title={item.name}
-                data={item.products}
-                length={item.products.length}
-                price={item.total_price}
-                discountedPrice={item.total_price_after_discount}
-                handleCombinedBuy={() => this.handleCombinedBuy(item.name, item.skus)}
-              />
+        {combinedbuy.length > 0 && (
+          <Section mb="0">
+            <Row>
+              <Container pr="0" pl="0" className={styles.combinedProductsWrapper}>
+                <HeadingH6
+                  ta="left"
+                  fontSize="20px"
+                  mt="0 !important"
+                  mb="1rem !important"
+                  color="primary"
+                  fontFamily="light"
+                >
+                  Combined Offers (3)
+                </HeadingH6>
+              </Container>
             </Row>
-          ))}
+            {combinedbuy.map(item => (
+              <Row display="block" pt="0" mt="0" mb="0">
+                <CombinedBuy
+                  pb="2rem"
+                  title={item.name}
+                  data={item.products}
+                  length={item.products.length}
+                  price={item.total_price}
+                  discountedPrice={item.total_price_after_discount}
+                  handleCombinedBuy={() => this.handleCombinedBuy(item.name, item.skus)}
+                />
+              </Row>
+            ))}
+          </Section>
+        )}
 
         {relatedproductsList.length > 0 && (
           <Row display="block" pt="0.5rem" mt="2.5rem" mb="0" mr="0">
