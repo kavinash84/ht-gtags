@@ -6,7 +6,6 @@ import Row from 'hometown-components/lib/Row';
 import Div from 'hometown-components/lib/Div';
 import Button from 'hometown-components/lib/Buttons';
 import Span from 'hometown-components/lib/Span';
-import HeadingH4 from 'hometown-components/lib/HeadingH4';
 import { Label } from 'hometown-components/lib/Label';
 import { formatAmount } from 'utils/formatters';
 import { formatProductURL } from 'utils/helper';
@@ -15,17 +14,10 @@ import ProductCarouselItem from './ProductCarouselItem';
 const styles = require('./Slider.scss');
 
 const ProductCarousel = ({
-  data, title, length, pt, pb, height, handleCombinedBuy, price, discountedPrice
+  data, length, pt, pb, height, handleCombinedBuy, price, discountedPrice
 }) => (
   <Section p="0" pt={pt} pb={pb} mt="0" mb="0" display="flex" className="prodCarousel">
     <Container pr="0" pl="0" className={styles.combinedProductsWrapper}>
-      <Row>
-        <Div>
-          <HeadingH4 fontSize="1.25rem" color="text" fontWeight="500" ta="center" mb="1rem" mt="0">
-            {title}
-          </HeadingH4>
-        </Div>
-      </Row>
       <Row>
         {data.map((item, index) => (
           <Fragment>
@@ -105,7 +97,6 @@ const ProductCarousel = ({
 
 ProductCarousel.defaultProps = {
   data: [],
-  title: '',
   length: 3,
   pt: '0',
   pb: '0',
@@ -114,7 +105,6 @@ ProductCarousel.defaultProps = {
 
 ProductCarousel.propTypes = {
   data: PropTypes.array,
-  title: PropTypes.string,
   length: PropTypes.number,
   pt: PropTypes.string,
   pb: PropTypes.string,
