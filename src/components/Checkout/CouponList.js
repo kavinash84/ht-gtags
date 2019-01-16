@@ -30,7 +30,7 @@ class CouponList extends React.Component {
         {!loading && coupons.length === 0 && unapplicablecoupons.length !== 0 && (
           <Div className={styles.couponMessage} mb="1rem">
             <Label color="label" fontSize="0.875rem" fontFamily="medium" display="block" mt="0" mb="0" ta="left">
-              Coupon not valid for this order
+              No Coupons applicable for this order.
             </Label>
           </Div>
         )}
