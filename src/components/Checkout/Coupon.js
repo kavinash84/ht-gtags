@@ -121,8 +121,8 @@ class Coupon extends React.Component {
                   />
                 </Button>
               </div>
-              <Label ta="center" color="primary" display="block" mt="5px" mb="0.9375rem">
-                <Button onClick={this.toggleMoreCoupons} p="0" color="primary" size="block" btnType="link" ta="right">
+              <Label ta="center" color="#3cc0dc" display="block" mt="5px" mb="0.9375rem">
+                <Button onClick={this.toggleMoreCoupons} p="0" color="#3cc0dc" size="block" btnType="link" ta="right">
                   {couponlistToggle ? 'Hide Coupons' : ' View Applicable Coupons'}
                 </Button>
               </Label>
@@ -160,8 +160,8 @@ class Coupon extends React.Component {
                 )}
               </div>
 
-              <Label ta="center" color="primary" display="block" mt="5px" mb="0.9375rem">
-                <Button onClick={this.toggleMoreCoupons} p="0" color="primary" size="block" btnType="link" ta="right">
+              <Label ta="center" color="#3cc0dc" display="block" mt="5px" mb="0.9375rem">
+                <Button onClick={this.toggleMoreCoupons} p="0" color="#3cc0dc" size="block" btnType="link" ta="right">
                   {couponlistToggle ? 'Hide Coupons' : ' View Applicable Coupons'}
                 </Button>
               </Label>
