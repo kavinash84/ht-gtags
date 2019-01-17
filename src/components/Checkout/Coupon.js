@@ -44,7 +44,7 @@ class Coupon extends React.Component {
     const { pincode, sessionId } = this.props;
     const { dispatch } = this.context.store;
     dispatch(applyCoupon(this.state.coupon, sessionId, pincode));
-    this.toggleMoreCoupons();
+    // this.toggleMoreCoupons();
   };
 
   removeCoupon = coupon => {
