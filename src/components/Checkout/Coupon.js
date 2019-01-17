@@ -147,7 +147,7 @@ class Coupon extends React.Component {
                     color="#f98d29"
                     p="9px 20px"
                     fontSize="0.75rem"
-                    disabled={loading}
+                    disabled={loading || (notifs.coupon && notifs.coupon.length > 0)}
                     fontFamily="regular"
                     borderRadius="0"
                     onClick={this.handleApply}
