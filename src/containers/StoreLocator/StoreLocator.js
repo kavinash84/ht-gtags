@@ -9,7 +9,15 @@ const mapStateToProps = ({ storelocator }) => ({
 });
 
 const StoreLocator = ({ storelocator }) => (
-  <MenuFooter pageTitle="Store Locator">
+  <MenuFooter
+    pageTitle="Store Locator"
+    seoDescription="Visit HomeTown, a Homeware & Furniture store near you.
+     Buy Furniture at sale prices at nearby HomeTown store.
+      Get best discounts & offers on Home Decor, Home Furnishings,
+       Furniture, Kitchenware & Tableware items at HomeTown shop near you!"
+    seoKeywords="furniture shop near me, furniture stores near me, online furniture stores,
+     furniture near me, furniture stores nearby, furniture shop nearby"
+  >
     <StoreLocatorContainer {...storelocator} />
   </MenuFooter>
 );
