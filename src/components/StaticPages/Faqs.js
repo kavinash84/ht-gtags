@@ -1,5 +1,4 @@
 import React from 'react';
-import TitleBar from 'components/TitleBar';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
@@ -16,13 +15,12 @@ const OpenIcon = require('../../../static/plus-round.svg');
 
 const FAQ = () => (
   <Section display="block" p="0" mb="0" height="auto">
-    <TitleBar title="Frequently Asked Questions" />
     <Container type="container" pr="0.5rem" pl="0.5rem">
       <Div className={styles.staticPageWrapper} type="block" pt="2rem" pb="2.5rem">
         {/* eslint-disable */}
         <Row ml="0" mr="0">
           {faqData.map((faqItem, index) => (
-            <Div mb="1rem">
+            <Div mb="1rem" key={faqItem.key}>
               <Heading fontFamily="400" fontSize="0.825rem" color="textLight">
                 {faqItem.key}
               </Heading>

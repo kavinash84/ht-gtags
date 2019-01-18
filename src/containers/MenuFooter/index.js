@@ -6,10 +6,16 @@ import Footer from 'components/Footer';
 
 export default class MenuFooter extends Component {
   render() {
-    const { children, pageTitle } = this.props;
+    const {
+      children, pageTitle, seoDescription, seoKeywords
+    } = this.props;
     return (
       <div>
-        <Helmet title={pageTitle} />
+        {pageTitle && <Helmet title={pageTitle} />}
+        <Helmet>
+          {seoDescription && <meta name="description" content={seoDescription} />}
+          {seoKeywords && <meta name="keywords" content={seoKeywords} />}
+        </Helmet>
         <Menu />
         {children}
         <Footer />
@@ -20,9 +26,13 @@ export default class MenuFooter extends Component {
 
 MenuFooter.propTypes = {
   children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
-  pageTitle: PropTypes.string
+  pageTitle: PropTypes.string,
+  seoDescription: PropTypes.string,
+  seoKeywords: PropTypes.string
 };
 
 MenuFooter.defaultProps = {
-  pageTitle: ''
+  pageTitle: null,
+  seoDescription: null,
+  seoKeywords: null
 };

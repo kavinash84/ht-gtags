@@ -1,5 +1,4 @@
 import React from 'react';
-import TitleBar from 'components/TitleBar';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
@@ -10,7 +9,6 @@ const styles = require('./StaticPages.scss');
 
 const WhoWeAre = () => (
   <Section display="block" p="0" mb="0" height="auto">
-    <TitleBar title="We are HomeTown" />
     <Container type="container" pr="0.5rem" pl="0.5rem">
       <Div className={styles.staticPageWrapper} type="block" pt="2rem" pb="2.5rem">
         {/* eslint-disable */}

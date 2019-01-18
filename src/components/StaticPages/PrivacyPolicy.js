@@ -1,5 +1,4 @@
 import React from 'react';
-import TitleBar from 'components/TitleBar';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
@@ -11,7 +10,6 @@ const styles = require('./StaticPages.scss');
 
 const PrivacyPolicy = () => (
   <Section display="block" p="0" mb="0" height="auto">
-    <TitleBar title="Privacy Policy" />
     <Container type="container" pr="0.5rem" pl="0.5rem">
       <Div className={styles.staticPageWrapper} type="block" pt="2rem" pb="2.5rem">
         {/* eslint-disable */}
@@ -134,11 +132,10 @@ const PrivacyPolicy = () => (
             </Text>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
               <b>Cookies</b>
-              <br />
-              A "cookie" is a small piece of information stored by a web server on a web browser so it can be later read
-              back from that browser. Cookies are useful for enabling the browser to remember information specific to a
-              given user. We place both permanent and temporary cookies in your computer's hard drive. The cookies do
-              not contain any of your personally identifiable information.
+              <br />A "cookie" is a small piece of information stored by a web server on a web browser so it can be
+              later read back from that browser. Cookies are useful for enabling the browser to remember information
+              specific to a given user. We place both permanent and temporary cookies in your computer's hard drive. The
+              cookies do not contain any of your personally identifiable information.
             </Text>
           </Div>
           <Div>
