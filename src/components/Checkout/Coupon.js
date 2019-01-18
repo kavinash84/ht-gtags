@@ -138,7 +138,7 @@ class Coupon extends React.Component {
                     className={styles.applyCopupnField}
                     type="text"
                     onChange={this.handleChange}
-                    value={this.state.coupon}
+                    value={this.state.coupon.toUpperCase()}
                     placeholder="Enter coupon code"
                   />
                   <Button
