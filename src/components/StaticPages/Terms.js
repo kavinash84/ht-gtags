@@ -5,11 +5,13 @@ import Row from 'hometown-components/lib/Row';
 import Heading from 'hometown-components/lib/Heading';
 import Text from 'hometown-components/lib/Text';
 import Section from 'hometown-components/lib/Section';
+import TitleBar from 'components/TitleBar';
 
 const styles = require('./StaticPages.scss');
 
 const Terms = () => (
   <Section display="block" p="0" mb="0" height="auto">
+    <TitleBar title="Terms And Conditions" />
     <Container type="container" pr="0.5rem" pl="0.5rem">
       <Div className={styles.staticPageWrapper} type="block" pt="2rem" pb="2.5rem">
         {/* eslint-disable */}

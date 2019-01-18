@@ -6,6 +6,7 @@ import Heading from 'hometown-components/lib/Heading';
 import Text from 'hometown-components/lib/Text';
 import Img from 'hometown-components/lib/Img';
 import Section from 'hometown-components/lib/Section';
+import TitleBar from 'components/TitleBar';
 
 const faqData = require('../../data/FAQ');
 
@@ -15,6 +16,7 @@ const OpenIcon = require('../../../static/plus-round.svg');
 
 const FAQ = () => (
   <Section display="block" p="0" mb="0" height="auto">
+    <TitleBar title="FAQs" />
     <Container type="container" pr="0.5rem" pl="0.5rem">
       <Div className={styles.staticPageWrapper} type="block" pt="2rem" pb="2.5rem">
         {/* eslint-disable */}
@@ -25,7 +27,7 @@ const FAQ = () => (
                 {faqItem.key}
               </Heading>
               {faqItem.data.map((faqContent, index) => (
-                <Div className={styles.collposeBlock}>
+                <Div className={styles.collposeBlock} key={String(index)}>
                   <Heading
                     className={styles.collopseHeading}
                     fontFamily="regular"
