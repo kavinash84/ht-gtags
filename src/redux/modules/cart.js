@@ -27,6 +27,7 @@ const UPDATE_CART_SUMMARY_AFTER_COUPON = 'cart/UPDATE_CART_SUMMARY_AFTER_COUPON'
 const CLEAR_CART = 'cart/CLEAR_CART';
 
 const TOGGLE_COUPON_LIST = 'cart/TOGGLE_COUPON_LIST';
+const HIDE_COUPON_LIST = 'cart/HIDE_COUPON_LIST';
 
 const initialState = {
   loading: false,
@@ -190,6 +191,11 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         couponlistToggle: !state.couponlistToggle
       };
+    case HIDE_COUPON_LIST:
+      return {
+        ...state,
+        couponlistToggle: false
+      };
     case CLEAR_CART:
       return {
         ...initialState
@@ -317,4 +323,7 @@ export const clearCart = () => ({
 
 export const toggleCouponList = () => ({
   type: TOGGLE_COUPON_LIST
+});
+export const hideCouponList = () => ({
+  type: HIDE_COUPON_LIST
 });

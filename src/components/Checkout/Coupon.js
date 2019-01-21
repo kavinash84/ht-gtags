@@ -10,7 +10,7 @@ import { Label } from 'hometown-components/lib/Label';
 import Theme from 'hometown-components/lib/Theme';
 import LocalInlineNotification from 'components/LocalInlineNotification';
 import { applyCoupon, removeCoupon } from 'redux/modules/coupon';
-import { toggleCouponList } from 'redux/modules/cart';
+import { toggleCouponList, hideCouponList } from 'redux/modules/cart';
 import { formatAmount } from 'utils/formatters';
 import Notifs from '../../components/Notifs';
 import CouponList from './CouponList';
@@ -45,6 +45,7 @@ class Coupon extends React.Component {
     const { dispatch } = this.context.store;
     dispatch(applyCoupon(this.state.coupon, sessionId, pincode));
     // this.toggleMoreCoupons();
+    this.hideMoreCoupons();
   };
 
   removeCoupon = coupon => {
@@ -73,6 +74,10 @@ class Coupon extends React.Component {
     });
     const { dispatch } = this.context.store;
     dispatch(toggleCouponList());
+  };
+  hideMoreCoupons = () => {
+    const { dispatch } = this.context.store;
+    dispatch(hideCouponList());
   };
   render() {
     const {
