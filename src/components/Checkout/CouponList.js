@@ -22,23 +22,29 @@ class CouponList extends React.Component {
     } = this.props;
     return (
       <div className={`${styles.offerList} `}>
-        <Div className={styles.couponMessage}>
-          {loading && <span>Loading......</span>}
-          {!loading && !coupons.length > 0 && <span>Sorry No Coupon Found ! </span>}
-        </Div>
-        {!loading &&
-          coupons.length > 0 && (
+        {loading && (
+          <Label color="label" fontSize="0.875rem" fontFamily="medium" display="block" mt="0" mb="0.625rem" ta="left">
+            Loading......
+          </Label>
+        )}
+        {!loading && coupons.length === 0 && unapplicablecoupons.length !== 0 && (
+          <Div className={styles.couponMessage} mb="1rem">
+            <Label color="label" fontSize="0.875rem" fontFamily="medium" display="block" mt="0" mb="0" ta="left">
+              No Coupons applicable for this order.
+            </Label>
+          </Div>
+        )}
+        {!loading && coupons.length === 0 && unapplicablecoupons.length === 0 && (
+          <Div className={styles.couponMessage} mb="1rem">
+            <Label color="label" fontSize="0.875rem" fontFamily="medium" display="block" mt="0" mb="0" ta="left">
+              No Coupons Valid for this order
+            </Label>
+          </Div>
+        )}
+        {!loading && coupons.length > 0 && (
           <Div className={styles.applicableCouponsWrapper}>
-            <Label
-              color="label"
-              fontSize="0.75rem"
-              fontFamily="medium"
-              display="block"
-              mt="0"
-              mb="0.625rem"
-              ta="left"
-            >
-                Choose a Valid Coupon
+            <Label color="label" fontSize="0.75rem" fontFamily="medium" display="block" mt="0" mb="0.625rem" ta="left">
+              Choose a Valid Coupon
             </Label>
             <ul className={styles.applicableCoupons}>
               {coupons.map((item, index) => (
@@ -67,19 +73,19 @@ class CouponList extends React.Component {
                             </Label>
                             {item.discount_type === 'fixed' ? (
                               <Label className={styles.saveRs}>
-                                  Flat{' '}
+                                Flat{' '}
                                 <span>
                                   <b>Rs. {parseInt(item.discount_amount, 10)}</b>
                                 </span>{' '}
-                                  OFF
+                                OFF
                               </Label>
                             ) : (
                               <Label className={styles.saveRs}>
-                                  Flat{' '}
+                                Flat{' '}
                                 <span>
                                   <b>{parseInt(item.discount_percentage, 10)} %</b>
                                 </span>{' '}
-                                  Off
+                                Off
                               </Label>
                             )}
                             <p className={styles.offerDetails}>{item.description}</p>
@@ -93,8 +99,7 @@ class CouponList extends React.Component {
             </ul>
           </Div>
         )}
-        {!loading &&
-          unapplicablecoupons.length > 0 && (
+        {!loading && unapplicablecoupons.length > 0 && (
           <Div className={styles.unapplicableCouponsWrapper}>
             <Label
               color="primary"
@@ -105,7 +110,7 @@ class CouponList extends React.Component {
               mb="0.625rem"
               ta="left"
             >
-                Coupon not valid for this order
+              Other Offers
             </Label>
             <ul className={styles.unapplicableCoupons}>
               {unapplicablecoupons.map(item => (
@@ -117,22 +122,22 @@ class CouponList extends React.Component {
                       </Label>
                       {item.discount_type === 'fixed' ? (
                         <Label htmlFor={item.couponCode} className={styles.saveRs}>
-                            Flat{' '}
+                          Flat{' '}
                           <span>
                             <b>
-                                Rs.
+                              Rs.
                               {parseInt(item.discount_amount, 10)}
                             </b>
                           </span>{' '}
-                            OFF
+                          OFF
                         </Label>
                       ) : (
                         <Label htmlFor={item.couponCode} className={styles.saveRs}>
-                            Flat{' '}
+                          Flat{' '}
                           <span>
                             <b>{parseInt(item.discount_percentage, 10)} %</b>
                           </span>{' '}
-                            Off
+                          Off
                         </Label>
                       )}
                     </div>

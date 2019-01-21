@@ -31,7 +31,12 @@ class TrackOrder extends React.Component {
   render() {
     return (
       <div>
-        <MenuFooter pageTitle="Track your Order Online">
+        <MenuFooter
+          pageTitle="Track Order - Hometown.in"
+          seoDescription="Tracking the order that you placed with us?
+            All you need to have is your order number.
+             Visit our track order page at Hometown to know about your orders today!"
+        >
           <div>
             <TrackOrderContainer
               status={this.state.status}

@@ -6,14 +6,14 @@ import Div from 'hometown-components/lib/Div';
 import Button from 'hometown-components/lib/Buttons';
 import Img from 'hometown-components/lib/Img';
 import Span from 'hometown-components/lib/Span';
-// import { Label } from 'hometown-components/lib/Label';
+import { Label } from 'hometown-components/lib/Label';
 import Theme from 'hometown-components/lib/Theme';
 import LocalInlineNotification from 'components/LocalInlineNotification';
 import { applyCoupon, removeCoupon } from 'redux/modules/coupon';
-import { toggleCouponList } from 'redux/modules/cart';
+import { toggleCouponList, hideCouponList } from 'redux/modules/cart';
 import { formatAmount } from 'utils/formatters';
 import Notifs from '../../components/Notifs';
-// import CouponList from './CouponList';
+import CouponList from './CouponList';
 
 const EditCouponIcon = require('../../../static/edit.svg');
 const DiscountSuccessIcon = require('../../../static/percentage-green.svg');
@@ -44,6 +44,8 @@ class Coupon extends React.Component {
     const { pincode, sessionId } = this.props;
     const { dispatch } = this.context.store;
     dispatch(applyCoupon(this.state.coupon, sessionId, pincode));
+    // this.toggleMoreCoupons();
+    this.hideMoreCoupons();
   };
 
   removeCoupon = coupon => {
@@ -73,20 +75,23 @@ class Coupon extends React.Component {
     const { dispatch } = this.context.store;
     dispatch(toggleCouponList());
   };
+  hideMoreCoupons = () => {
+    const { dispatch } = this.context.store;
+    dispatch(hideCouponList());
+  };
   render() {
     const {
       cart,
       notifs,
       coupon: {
-        loading
-        // coupons, getingcoupon, unapplicablecoupons
-      }
-      // pincode,
-      // sessionId
+        loading, coupons, getingcoupon, unapplicablecoupons
+      },
+      pincode,
+      sessionId
     } = this.props;
     const {
-      summary: { coupon: appliedCoupon, coupon_discount: couponDiscount }
-      // couponlistToggle
+      summary: { coupon: appliedCoupon, coupon_discount: couponDiscount },
+      couponlistToggle
     } = cart;
     return (
       <div>
@@ -121,11 +126,11 @@ class Coupon extends React.Component {
                   />
                 </Button>
               </div>
-              {/* <Label ta="center" color="primary" display="block" mt="5px" mb="0.9375rem">
-                <Button onClick={this.toggleMoreCoupons} p="0" color="primary" size="block" btnType="link" ta="right">
+              <Label ta="center" color="#3cc0dc" display="block" mt="5px" mb="0.9375rem">
+                <Button onClick={this.toggleMoreCoupons} p="0" color="#3cc0dc" size="block" btnType="link" ta="right">
                   {couponlistToggle ? 'Hide Coupons' : ' View Applicable Coupons'}
                 </Button>
-              </Label> */}
+              </Label>
             </div>
           ) : (
             <div>
@@ -138,7 +143,7 @@ class Coupon extends React.Component {
                     className={styles.applyCopupnField}
                     type="text"
                     onChange={this.handleChange}
-                    value={this.state.coupon}
+                    value={this.state.coupon.toUpperCase()}
                     placeholder="Enter coupon code"
                   />
                   <Button
@@ -147,7 +152,7 @@ class Coupon extends React.Component {
                     color="#f98d29"
                     p="9px 20px"
                     fontSize="0.75rem"
-                    disabled={loading}
+                    disabled={loading || (notifs.coupon && notifs.coupon.length > 0)}
                     fontFamily="regular"
                     borderRadius="0"
                     onClick={this.handleApply}
@@ -160,14 +165,14 @@ class Coupon extends React.Component {
                 )}
               </div>
 
-              {/* <Label ta="center" color="primary" display="block" mt="5px" mb="0.9375rem">
-                <Button onClick={this.toggleMoreCoupons} p="0" color="primary" size="block" btnType="link" ta="right">
+              <Label ta="center" color="#3cc0dc" display="block" mt="5px" mb="0.9375rem">
+                <Button onClick={this.toggleMoreCoupons} p="0" color="#3cc0dc" size="block" btnType="link" ta="right">
                   {couponlistToggle ? 'Hide Coupons' : ' View Applicable Coupons'}
                 </Button>
-              </Label> */}
+              </Label>
             </div>
           )}
-          {/* {couponlistToggle && (
+          {couponlistToggle && (
             <CouponList
               coupons={coupons}
               appliedCoupon={appliedCoupon}
@@ -177,7 +182,7 @@ class Coupon extends React.Component {
               loading={getingcoupon}
               unapplicablecoupons={unapplicablecoupons}
             />
-          )} */}
+          )}
         </Div>
       </div>
     );

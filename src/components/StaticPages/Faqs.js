@@ -1,5 +1,4 @@
 import React from 'react';
-import TitleBar from 'components/TitleBar';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
@@ -7,6 +6,7 @@ import Heading from 'hometown-components/lib/Heading';
 import Text from 'hometown-components/lib/Text';
 import Img from 'hometown-components/lib/Img';
 import Section from 'hometown-components/lib/Section';
+import TitleBar from 'components/TitleBar';
 
 const faqData = require('../../data/FAQ');
 
@@ -16,18 +16,18 @@ const OpenIcon = require('../../../static/plus-round.svg');
 
 const FAQ = () => (
   <Section display="block" p="0" mb="0" height="auto">
-    <TitleBar title="Frequently Asked Questions" />
+    <TitleBar title="FAQs" />
     <Container type="container" pr="0.5rem" pl="0.5rem">
       <Div className={styles.staticPageWrapper} type="block" pt="2rem" pb="2.5rem">
         {/* eslint-disable */}
         <Row ml="0" mr="0">
           {faqData.map((faqItem, index) => (
-            <Div mb="1rem">
+            <Div mb="1rem" key={faqItem.key}>
               <Heading fontFamily="400" fontSize="0.825rem" color="textLight">
                 {faqItem.key}
               </Heading>
               {faqItem.data.map((faqContent, index) => (
-                <Div className={styles.collposeBlock}>
+                <Div className={styles.collposeBlock} key={String(index)}>
                   <Heading
                     className={styles.collopseHeading}
                     fontFamily="regular"
