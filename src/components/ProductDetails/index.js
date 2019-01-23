@@ -21,6 +21,7 @@ import WishlistBtn from 'hometown-components/lib/WishlistBtn';
 import Theme from 'hometown-components/lib/Theme';
 import ProductCarousel from 'components/ProductCarousel';
 import CombinedBuy from 'components/CombinedBuy';
+import { PINCODE } from 'helpers/Constants';
 import EmiModal from 'containers/EmiModal/EmiModal';
 import ResponsiveModal from 'components/Modal';
 import LoginModal from 'containers/Login/LoginForm';
@@ -33,6 +34,7 @@ import { calculateDiscount, calculateSavings, calculateLowestEmi, getVideoID, fo
 import { getSKUList } from 'selectors/wishlist';
 import { groupedAttributes as getgroupedAttributes, getBreadCrumbs, getSimpleSku } from 'selectors/product';
 import { getCombinedBuy } from 'redux/modules/combinedbuy';
+import { addToCartCombined } from 'redux/modules/cart';
 import { productPageTitle, productMetaDescription, productMetaKeywords } from 'utils/seo';
 import ProductDetailsCarousel from './Carousel';
 import BreadCrumb from './BreadCrumb';
@@ -66,6 +68,7 @@ const mapDispatchToProps = dispatch =>
   );
 
 const mapStateToProps = ({
+  app: { sessionId },
   productdetails,
   pincode,
   reviews,
@@ -76,6 +79,7 @@ const mapStateToProps = ({
   userLogin,
   combinedbuy
 }) => ({
+  session: sessionId,
   product: productdetails.productDescription,
   reviews,
   pincode,
@@ -145,9 +149,17 @@ class ProductDetails extends React.Component {
       showmore: !this.state.showmore
     });
   };
-  handleCombinedBuy = (name, skus) => {
-    console.log(name);
-    console.log(skus);
+  handleCombinedBuy = (item, pincode, session) => {
+    const {id_catalog_buildyourset: set_id, skus} = item;
+    const { selectedPincode } = pincode;
+    const simple_skus = skus.map((val) => {
+      return {simple_sku: val.sku, qty: Number(val.qty)}
+    });
+    // set_id, skus, session_id, pincode
+    // console.log(name);
+    // console.log(skus);
+    const { dispatch } = this.context.store;
+    dispatch(addToCartCombined(set_id, simple_skus, session, selectedPincode));
   };
   toggleShowMoreColorProducts = () => {
     this.setState({
@@ -159,6 +171,7 @@ class ProductDetails extends React.Component {
     const {
       product,
       pincode,
+      session,
       reviews,
       colorproducts,
       relatedproductsList,
@@ -390,7 +403,7 @@ class ProductDetails extends React.Component {
                   color="primary"
                   fontFamily="light"
                 >
-                  Combined Offers (3)
+                  Combined Offers
                 </HeadingH6>
               </Container>
             </Row>
@@ -403,7 +416,7 @@ class ProductDetails extends React.Component {
                   length={item.products.length}
                   price={item.total_price}
                   discountedPrice={item.total_price_after_discount}
-                  handleCombinedBuy={() => this.handleCombinedBuy(item.name, item.skus)}
+                  handleCombinedBuy={() => this.handleCombinedBuy(item, pincode, session)}
                 />
               </Row>
             ))}

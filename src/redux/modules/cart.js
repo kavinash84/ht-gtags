@@ -1,4 +1,4 @@
-import { ADDTOCART as ADDTOCART_API, SYNCCART as SYNCCART_API, CHECKCART as CHECKCART_API } from 'helpers/apiUrls';
+import { ADDTOCARTCOMBINED as ADDTOCARTCOMBINED_API, ADDTOCART as ADDTOCART_API, SYNCCART as SYNCCART_API, CHECKCART as CHECKCART_API } from 'helpers/apiUrls';
 import { PINCODE } from '../../helpers/Constants';
 
 const LOAD_CART = 'cart/LOAD_CART';
@@ -232,6 +232,27 @@ export const addToCart = (key, sku, simpleSku, session, pincode) => dispatch => 
           qty: 1
         };
         const response = await client.post(ADDTOCART_API, postData);
+        return response;
+      } catch (error) {
+        throw error;
+      }
+    }
+  });
+};
+
+export const addToCartCombined = (set_id, skus, session_id, pincode) => dispatch => {
+  dispatch(setCurrentKey(set_id));
+  return dispatch({
+    types: [ADD_TO_CART, ADD_TO_CART_SUCCESS, ADD_TO_CART_FAIL],
+    promise: async ({ client }) => {
+      try {
+        const postData = {
+          set_id,
+          skus,
+          session_id,
+          pincode
+        };
+        const response = await client.post(ADDTOCARTCOMBINED_API, postData);
         return response;
       } catch (error) {
         throw error;
