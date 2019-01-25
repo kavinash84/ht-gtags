@@ -22,6 +22,20 @@ export default function userMiddleware() {
           dismissAfter: 2000
         }));
         break;
+      case 'cart/ADD_TO_CART_COMBINED_SUCCESS':
+        dispatch(notifSend({
+          type: 'success',
+          msg: 'All items added to your cart !',
+          dismissAfter: 2000
+        }));
+        break;
+      case 'cart/ADD_TO_CART_COMBINED_FAIL':
+        dispatch(notifSend({
+          type: 'warning',
+          msg: action.error || 'Items not added in cart, please try after some time',
+          dismissAfter: 2000
+        }));
+        break;
 
       case 'cart/UPDATE_CART_FAIL':
         dispatch(notifSend({

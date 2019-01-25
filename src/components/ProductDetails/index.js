@@ -16,8 +16,11 @@ import Specs from 'hometown-components/lib/ProductDetails/Specs';
 import Reviews from 'hometown-components/lib/Reviews';
 import AddReview from 'hometown-components/lib/Reviews/WriteReview';
 import Img from 'hometown-components/lib/Img';
+import Button from 'hometown-components/lib/Buttons';
 import WishlistBtn from 'hometown-components/lib/WishlistBtn';
+import Theme from 'hometown-components/lib/Theme';
 import ProductCarousel from 'components/ProductCarousel';
+import CombinedBuy from 'components/CombinedBuy';
 import EmiModal from 'containers/EmiModal/EmiModal';
 import ResponsiveModal from 'components/Modal';
 import LoginModal from 'containers/Login/LoginForm';
@@ -28,8 +31,9 @@ import { setProductPosition } from 'redux/modules/productdetails';
 import { formatAmount } from 'utils/formatters';
 import { calculateDiscount, calculateSavings, calculateLowestEmi, getVideoID, formatProductURL } from 'utils/helper';
 import { getSKUList } from 'selectors/wishlist';
-import { groupedAttributes as getgroupedAttributes, getBreadCrumbs } from 'selectors/product';
-
+import { groupedAttributes as getgroupedAttributes, getBreadCrumbs, getSimpleSku } from 'selectors/product';
+import { getCombinedBuy } from 'redux/modules/combinedbuy';
+import { addToCartCombined } from 'redux/modules/cart';
 import { productPageTitle, productMetaDescription, productMetaKeywords } from 'utils/seo';
 import ProductDetailsCarousel from './Carousel';
 import BreadCrumb from './BreadCrumb';
@@ -63,6 +67,7 @@ const mapDispatchToProps = dispatch =>
   );
 
 const mapStateToProps = ({
+  app: { sessionId },
   productdetails,
   pincode,
   reviews,
@@ -70,11 +75,14 @@ const mapStateToProps = ({
   relatedproducts,
   emioptions,
   wishlist,
-  userLogin
+  userLogin,
+  combinedbuy
 }) => ({
+  session: sessionId,
   product: productdetails.productDescription,
   reviews,
   pincode,
+  combinedbuy: combinedbuy.results,
   deliveryDateLoading: productdetails.deliveryDateLoading,
   colorproducts: colorproducts.list,
   relatedproductsList: relatedproducts.data,
@@ -85,7 +93,8 @@ const mapStateToProps = ({
   isLoggedIn: userLogin.isLoggedIn,
   loadingList: wishlist.loadingList,
   gattributes: getgroupedAttributes(productdetails),
-  breadcrumbs: getBreadCrumbs(productdetails)
+  breadcrumbs: getBreadCrumbs(productdetails),
+  simpleSku: getSimpleSku(productdetails)
 });
 
 class ProductDetails extends React.Component {
@@ -101,6 +110,14 @@ class ProductDetails extends React.Component {
     showmore: true,
     showmorecolorproducts: true
   };
+  componentDidMount() {
+    const { dispatch } = this.context.store;
+    const {
+      simpleSku,
+      pincode: { selectedPincode }
+    } = this.props;
+    dispatch(getCombinedBuy(simpleSku, selectedPincode));
+  }
   componentWillReceiveProps(nextProps) {
     if (nextProps.isLoggedIn) {
       this.setState({
@@ -131,6 +148,16 @@ class ProductDetails extends React.Component {
       showmore: !this.state.showmore
     });
   };
+  handleCombinedBuy = (item, pincode, session) => {
+    const { id_catalog_buildyourset: setId, skus } = item;
+    const { selectedPincode } = pincode;
+    const simpleSKUS = skus.map(val => ({ simple_sku: val.sku, qty: Number(val.qty) }));
+    // set_id, skus, session_id, pincode
+    // console.log(name);
+    // console.log(skus);
+    const { dispatch } = this.context.store;
+    dispatch(addToCartCombined(setId, simpleSKUS, session, selectedPincode));
+  };
   toggleShowMoreColorProducts = () => {
     this.setState({
       showmorecolorproducts: !this.state.showmorecolorproducts
@@ -141,6 +168,7 @@ class ProductDetails extends React.Component {
     const {
       product,
       pincode,
+      session,
       reviews,
       colorproducts,
       relatedproductsList,
@@ -155,6 +183,7 @@ class ProductDetails extends React.Component {
       deliveryDateLoading,
       gattributes,
       breadcrumbs,
+      combinedbuy,
       loadingList
     } = this.props;
     const {
@@ -182,7 +211,7 @@ class ProductDetails extends React.Component {
     const productDescription = productMetaDescription(name, productType, material, color);
     return (
       <Div type="block">
-        <Section p="0" pb="2rem" mb="0" className={styles.pdpWrapper}>
+        <Section p="0" pb="2rem" mb="2.5rem" className={styles.pdpWrapper}>
           <Helmet>
             <title>{productPageTitle(name)}</title>
             <meta name="keywords" content={productMetaKeywords(productType, material)} />
@@ -266,8 +295,20 @@ class ProductDetails extends React.Component {
                       <EmiModal price={formatAmount(checkSpecialPrice)} data={emidata} key="emi" />
                     </ServiceDetails>
                   </Row>
-                  {offerImage &&
-                    offerImageRedirect && (
+                  <Row display="block" mt="-0.625rem" mb="1.25rem" mr="0" ml="0.9375rem">
+                    <Div col="12" pl="0" pr="0">
+                      <Button
+                        className={styles.seeAllCombine}
+                        btnType="link"
+                        p="0"
+                        fontSize="1rem"
+                        color={Theme.colors.primary}
+                      >
+                        See All Combined Offers (2)
+                      </Button>
+                    </Div>
+                  </Row>
+                  {offerImage && offerImageRedirect && (
                     <Row display="block" mt="0" mb="0" mr="0.9375rem" ml="0.9375rem">
                       <Div col="12" mt="0" pr="0.3125rem">
                         <a target="_blank" rel="noopener noreferrer" href={offerImageRedirect}>
@@ -276,8 +317,7 @@ class ProductDetails extends React.Component {
                       </Div>
                     </Row>
                   )}
-                  {offerImage &&
-                    !offerImageRedirect && (
+                  {offerImage && !offerImageRedirect && (
                     <Row display="block" mt="0" mb="0" mr="0.9375rem" ml="0.9375rem">
                       <Div col="12" mt="0" pr="0.3125rem">
                         <Img src={offerImage} alt="" width="100%" mt="0" mb="0.625rem" />
@@ -319,8 +359,7 @@ class ProductDetails extends React.Component {
                     )}
                     {/* <button onClick={this.toggleShowMore}></button> */}
                     <Specs specs={groupedAttributes} pincode={pincode.selectedPincode} />
-                    {groupedattributes &&
-                      groupedattributes.youtubeid && (
+                    {groupedattributes && groupedattributes.youtubeid && (
                       <Row display="block" mt="0" mb="0" mr="0.9375rem" ml="0.9375rem">
                         <Div col="12" mt="0" pr="0.3125rem">
                           <Video id={getVideoID(groupedattributes.youtubeid)} />
@@ -345,6 +384,39 @@ class ProductDetails extends React.Component {
             </Row>
           </Container>
         </Section>
+
+        {combinedbuy.length > 0 && (
+          <Section mb="0">
+            <Row>
+              <Container pr="0" pl="0" className={styles.combinedProductsWrapper}>
+                <HeadingH6
+                  ta="left"
+                  fontSize="20px"
+                  mt="0 !important"
+                  mb="1rem !important"
+                  color="primary"
+                  fontFamily="light"
+                >
+                  Combined Offers
+                </HeadingH6>
+              </Container>
+            </Row>
+            {combinedbuy.map((item, index) => (
+              <Row key={String(index)} display="block" pt="0" mt="0" mb="0">
+                <CombinedBuy
+                  pb="2rem"
+                  title={item.name}
+                  item={item}
+                  data={item.products}
+                  length={item.products.length}
+                  price={item.total_price}
+                  discountedPrice={item.total_price_after_discount}
+                  handleCombinedBuy={() => this.handleCombinedBuy(item, pincode, session)}
+                />
+              </Row>
+            ))}
+          </Section>
+        )}
 
         {relatedproductsList.length > 0 && (
           <Row display="block" pt="0.5rem" mt="2.5rem" mb="0" mr="0">
@@ -379,7 +451,10 @@ ProductDetails.defaultProps = {
   wishList: [],
   wishListData: [],
   deliveryDateLoading: false,
-  loadingList: []
+  loadingList: [],
+  combinedbuy: [],
+  simpleSku: '',
+  session: ''
 };
 ProductDetails.propTypes = {
   product: PropTypes.object,
@@ -398,6 +473,12 @@ ProductDetails.propTypes = {
   deliveryDateLoading: PropTypes.bool,
   breadcrumbs: PropTypes.array.isRequired,
   gattributes: PropTypes.object.isRequired,
-  loadingList: PropTypes.array
+  loadingList: PropTypes.array,
+  simpleSku: PropTypes.string,
+  combinedbuy: PropTypes.array,
+  session: PropTypes.string
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductDetails);
