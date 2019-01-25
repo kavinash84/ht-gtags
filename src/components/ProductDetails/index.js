@@ -21,7 +21,6 @@ import WishlistBtn from 'hometown-components/lib/WishlistBtn';
 import Theme from 'hometown-components/lib/Theme';
 import ProductCarousel from 'components/ProductCarousel';
 import CombinedBuy from 'components/CombinedBuy';
-import { PINCODE } from 'helpers/Constants';
 import EmiModal from 'containers/EmiModal/EmiModal';
 import ResponsiveModal from 'components/Modal';
 import LoginModal from 'containers/Login/LoginForm';
@@ -150,16 +149,14 @@ class ProductDetails extends React.Component {
     });
   };
   handleCombinedBuy = (item, pincode, session) => {
-    const {id_catalog_buildyourset: set_id, skus} = item;
+    const { id_catalog_buildyourset: setId, skus } = item;
     const { selectedPincode } = pincode;
-    const simple_skus = skus.map((val) => {
-      return {simple_sku: val.sku, qty: Number(val.qty)}
-    });
+    const simpleSKUS = skus.map(val => ({ simple_sku: val.sku, qty: Number(val.qty) }));
     // set_id, skus, session_id, pincode
     // console.log(name);
     // console.log(skus);
     const { dispatch } = this.context.store;
-    dispatch(addToCartCombined(set_id, simple_skus, session, selectedPincode));
+    dispatch(addToCartCombined(setId, simpleSKUS, session, selectedPincode));
   };
   toggleShowMoreColorProducts = () => {
     this.setState({
@@ -311,8 +308,7 @@ class ProductDetails extends React.Component {
                       </Button>
                     </Div>
                   </Row>
-                  {offerImage &&
-                    offerImageRedirect && (
+                  {offerImage && offerImageRedirect && (
                     <Row display="block" mt="0" mb="0" mr="0.9375rem" ml="0.9375rem">
                       <Div col="12" mt="0" pr="0.3125rem">
                         <a target="_blank" rel="noopener noreferrer" href={offerImageRedirect}>
@@ -321,8 +317,7 @@ class ProductDetails extends React.Component {
                       </Div>
                     </Row>
                   )}
-                  {offerImage &&
-                    !offerImageRedirect && (
+                  {offerImage && !offerImageRedirect && (
                     <Row display="block" mt="0" mb="0" mr="0.9375rem" ml="0.9375rem">
                       <Div col="12" mt="0" pr="0.3125rem">
                         <Img src={offerImage} alt="" width="100%" mt="0" mb="0.625rem" />
@@ -364,8 +359,7 @@ class ProductDetails extends React.Component {
                     )}
                     {/* <button onClick={this.toggleShowMore}></button> */}
                     <Specs specs={groupedAttributes} pincode={pincode.selectedPincode} />
-                    {groupedattributes &&
-                      groupedattributes.youtubeid && (
+                    {groupedattributes && groupedattributes.youtubeid && (
                       <Row display="block" mt="0" mb="0" mr="0.9375rem" ml="0.9375rem">
                         <Div col="12" mt="0" pr="0.3125rem">
                           <Video id={getVideoID(groupedattributes.youtubeid)} />
@@ -407,11 +401,12 @@ class ProductDetails extends React.Component {
                 </HeadingH6>
               </Container>
             </Row>
-            {combinedbuy.map(item => (
-              <Row display="block" pt="0" mt="0" mb="0">
+            {combinedbuy.map((item, index) => (
+              <Row key={String(index)} display="block" pt="0" mt="0" mb="0">
                 <CombinedBuy
                   pb="2rem"
                   title={item.name}
+                  item={item}
                   data={item.products}
                   length={item.products.length}
                   price={item.total_price}
@@ -458,7 +453,8 @@ ProductDetails.defaultProps = {
   deliveryDateLoading: false,
   loadingList: [],
   combinedbuy: [],
-  simpleSku: ''
+  simpleSku: '',
+  session: ''
 };
 ProductDetails.propTypes = {
   product: PropTypes.object,
@@ -479,7 +475,8 @@ ProductDetails.propTypes = {
   gattributes: PropTypes.object.isRequired,
   loadingList: PropTypes.array,
   simpleSku: PropTypes.string,
-  combinedbuy: PropTypes.array
+  combinedbuy: PropTypes.array,
+  session: PropTypes.string
 };
 export default connect(
   mapStateToProps,
