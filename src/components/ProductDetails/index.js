@@ -308,7 +308,8 @@ class ProductDetails extends React.Component {
                       </Button>
                     </Div>
                   </Row>
-                  {offerImage && offerImageRedirect && (
+                  {offerImage &&
+                    offerImageRedirect && (
                     <Row display="block" mt="0" mb="0" mr="0.9375rem" ml="0.9375rem">
                       <Div col="12" mt="0" pr="0.3125rem">
                         <a target="_blank" rel="noopener noreferrer" href={offerImageRedirect}>
@@ -317,7 +318,8 @@ class ProductDetails extends React.Component {
                       </Div>
                     </Row>
                   )}
-                  {offerImage && !offerImageRedirect && (
+                  {offerImage &&
+                    !offerImageRedirect && (
                     <Row display="block" mt="0" mb="0" mr="0.9375rem" ml="0.9375rem">
                       <Div col="12" mt="0" pr="0.3125rem">
                         <Img src={offerImage} alt="" width="100%" mt="0" mb="0.625rem" />
@@ -359,7 +361,8 @@ class ProductDetails extends React.Component {
                     )}
                     {/* <button onClick={this.toggleShowMore}></button> */}
                     <Specs specs={groupedAttributes} pincode={pincode.selectedPincode} />
-                    {groupedattributes && groupedattributes.youtubeid && (
+                    {groupedattributes &&
+                      groupedattributes.youtubeid && (
                       <Row display="block" mt="0" mb="0" mr="0.9375rem" ml="0.9375rem">
                         <Div col="12" mt="0" pr="0.3125rem">
                           <Video id={getVideoID(groupedattributes.youtubeid)} />
@@ -393,7 +396,7 @@ class ProductDetails extends React.Component {
                   ta="left"
                   fontSize="20px"
                   mt="0 !important"
-                  mb="1rem !important"
+                  mb="5px !important"
                   color="primary"
                   fontFamily="light"
                 >

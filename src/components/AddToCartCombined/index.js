@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -62,7 +62,6 @@ const AddToCartCombined = ({
   height,
   btnColor,
   btnType,
-  ta,
   fontSize
 }) => {
   const checkStatus = checkSKUInCart(cartSKUs, skusData);
@@ -70,9 +69,9 @@ const AddToCartCombined = ({
   const { id_catalog_buildyourset: itemId } = skusData;
   const addLoading = addingToCart && stateId === itemId;
   return (
-    <Div ta={ta}>
+    <Fragment>
       {
-        <div>
+        <Fragment>
           {!checkStatus ? (
             <Button
               btnType={btnType}
@@ -80,7 +79,7 @@ const AddToCartCombined = ({
               bc={btnColor === 'transparent' ? '#f98d29' : btnColor}
               color={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
               bg={btnColor === 'transparent' ? 'transparent' : btnColor}
-              p="4px 8px"
+              p="4px 20px"
               lh="1.5"
               size={size}
               disabled={addLoading}
@@ -121,9 +120,9 @@ const AddToCartCombined = ({
               </Link>
             </Div>
           )}
-        </div>
+        </Fragment>
       }
-    </Div>
+    </Fragment>
   );
 };
 
@@ -136,7 +135,6 @@ AddToCartCombined.defaultProps = {
   height: 'auto',
   btnColor: '#f98d29',
   btnType: 'custom',
-  ta: 'center',
   fontSize: '16px'
 };
 
@@ -152,7 +150,6 @@ AddToCartCombined.propTypes = {
   height: PropTypes.string,
   btnColor: PropTypes.string,
   btnType: PropTypes.string,
-  ta: PropTypes.string,
   fontSize: PropTypes.string
 };
 

@@ -43,7 +43,7 @@ const ProductCarousel = ({
           </Div>
         ))}
       </Row>
-      <Row mr="0" ml="0" className={styles.combineBottom} pt="15px">
+      <Row mr="0" ml="0" className={styles.combineBottom} pt="10px">
         <Div col="12" alignSelf="center">
           {data.map((skuItem, index) => (
             <Fragment key={String(index)}>
@@ -68,17 +68,19 @@ const ProductCarousel = ({
               <s>{formatAmount(price)}</s>
             </Span>
           </Label>
-          {
-            <AddToCartCombined
-              skusData={item}
-              size="block"
-              btnType="custom"
-              btnColor="#515151"
-              height="50px"
-              fontSize="16px"
-              isSoldOut={false}
-            />
-          }
+          <Label mt="0" mb="0" va="bottom" ml="1rem">
+            {
+              <AddToCartCombined
+                skusData={item}
+                size="block"
+                btnType="custom"
+                btnColor="#515151"
+                height="50px"
+                fontSize="14px"
+                isSoldOut={false}
+              />
+            }
+          </Label>
         </Div>
       </Row>
     </Container>
