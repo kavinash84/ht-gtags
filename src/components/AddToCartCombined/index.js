@@ -56,6 +56,7 @@ const AddToCartCombined = ({
   pincode,
   addingToCart,
   skusData,
+  products,
   cartSKUs,
   stateId,
   size,
@@ -65,7 +66,7 @@ const AddToCartCombined = ({
   fontSize
 }) => {
   const checkStatus = checkSKUInCart(cartSKUs, skusData);
-  const { skus } = skusData;
+  // const { skus } = skusData;
   const { id_catalog_buildyourset: itemId } = skusData;
   const addLoading = addingToCart && stateId === itemId;
   return (
@@ -104,7 +105,9 @@ const AddToCartCombined = ({
                 va="middle"
                 lh="1.8"
               >
-                {addLoading ? 'Adding..' : `Add ${skus && skus.length ? `${skus.length} items` : ''} to Cart`}
+                {addLoading
+                  ? 'Adding..'
+                  : `Add ${products && products.length ? `${products.length} items` : ''} to Cart`}
               </Span>
             </Button>
           ) : (
@@ -130,6 +133,7 @@ AddToCartCombined.defaultProps = {
   addingToCart: false,
   cartSKUs: [],
   skusData: {},
+  products: [],
   stateId: '',
   size: 'default',
   height: 'auto',
@@ -145,6 +149,7 @@ AddToCartCombined.propTypes = {
   stateId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   addingToCart: PropTypes.bool,
   skusData: PropTypes.object,
+  products: PropTypes.array,
   cartSKUs: PropTypes.array,
   size: PropTypes.string,
   height: PropTypes.string,
