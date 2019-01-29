@@ -73,7 +73,7 @@ const ProductCarousel = ({
               <AddToCartCombined
                 skusData={item}
                 size="block"
-                btnType="custom"
+                btnType="primary"
                 btnColor="#515151"
                 height="50px"
                 fontSize="14px"
