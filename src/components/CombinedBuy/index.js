@@ -20,7 +20,7 @@ const ProductCarousel = ({
     <Container pr="0" pl="0" className={styles.combinedProductsWrapper}>
       <Row>
         {data.map((skuItem, index) => (
-          <Div col="3" className={styles.combineItemWrapper} key={`${skuItem.meta.sku || String(index)}`}>
+          <Div col="3" className={styles.combineItemWrapper} key={`${skuItem.meta.sku}_${String(index)}`}>
             <Row key={String(index)}>
               <ProductCarouselItem
                 name={skuItem.meta.name}

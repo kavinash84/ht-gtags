@@ -65,6 +65,16 @@ const mapDispatchToProps = dispatch =>
     },
     dispatch
   );
+const getProductsList = products => {
+  const items = [];
+  products.forEach(item => {
+    const { set_qty: qty = 0 } = item;
+    for (let i = 0; i < qty; i += 1) {
+      items.push(item);
+    }
+  });
+  return items;
+};
 
 const mapStateToProps = ({
   app: { sessionId },
@@ -411,7 +421,7 @@ class ProductDetails extends React.Component {
                   pb="2rem"
                   title={item.name}
                   item={item}
-                  data={item.products}
+                  data={getProductsList(item.products || [])}
                   length={item.products.length}
                   price={item.total_price}
                   discountedPrice={item.total_price_after_discount}

@@ -29,7 +29,7 @@ const checkSKUInCart = (list, sku) => {
   return isAlreadyAdded;
 };
 const styles = require('../AddToCart/AddToCart.scss');
-const LoaderIcon = require('../../../static/refresh.svg');
+const LoaderIcon = require('../../../static/refresh-black.svg');
 const CheckedIcon = require('../../../static/added-to-cart-icon.png');
 
 const onClick = (item, session, pincode) => dispatcher => e => {
