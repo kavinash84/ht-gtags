@@ -295,8 +295,8 @@ class ProductDetails extends React.Component {
                       <EmiModal price={formatAmount(checkSpecialPrice)} data={emidata} key="emi" />
                     </ServiceDetails>
                   </Row>
-                  <Row display="block" mt="-0.625rem" mb="1.25rem" mr="0" ml="0.9375rem">
-                    {combinedbuy.length && (
+                  {combinedbuy.length ? (
+                    <Row display="block" mt="-0.625rem" mb="1.25rem" mr="0" ml="0.9375rem">
                       <Div col="12" pl="0" pr="0">
                         <Button
                           className={styles.seeAllCombine}
@@ -308,8 +308,10 @@ class ProductDetails extends React.Component {
                           <a href="#combined_buy_offers">{`See ${combinedbuy.length} Combined Offers`}</a>
                         </Button>
                       </Div>
-                    )}
-                  </Row>
+                    </Row>
+                  ) : (
+                    ''
+                  )}
                   {offerImage && offerImageRedirect && (
                     <Row display="block" mt="0" mb="0" mr="0.9375rem" ml="0.9375rem">
                       <Div col="12" mt="0" pr="0.3125rem">
