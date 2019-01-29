@@ -296,20 +296,21 @@ class ProductDetails extends React.Component {
                     </ServiceDetails>
                   </Row>
                   <Row display="block" mt="-0.625rem" mb="1.25rem" mr="0" ml="0.9375rem">
-                    <Div col="12" pl="0" pr="0">
-                      <Button
-                        className={styles.seeAllCombine}
-                        btnType="link"
-                        p="0"
-                        fontSize="1rem"
-                        color={Theme.colors.primary}
-                      >
-                        See All Combined Offers (2)
-                      </Button>
-                    </Div>
+                    {combinedbuy.length && (
+                      <Div col="12" pl="0" pr="0">
+                        <Button
+                          className={styles.seeAllCombine}
+                          btnType="link"
+                          p="0"
+                          fontSize="1rem"
+                          color={Theme.colors.primary}
+                        >
+                          <a href="#combined_buy_offers">{`See ${combinedbuy.length} Combined Offers`}</a>
+                        </Button>
+                      </Div>
+                    )}
                   </Row>
-                  {offerImage &&
-                    offerImageRedirect && (
+                  {offerImage && offerImageRedirect && (
                     <Row display="block" mt="0" mb="0" mr="0.9375rem" ml="0.9375rem">
                       <Div col="12" mt="0" pr="0.3125rem">
                         <a target="_blank" rel="noopener noreferrer" href={offerImageRedirect}>
@@ -318,8 +319,7 @@ class ProductDetails extends React.Component {
                       </Div>
                     </Row>
                   )}
-                  {offerImage &&
-                    !offerImageRedirect && (
+                  {offerImage && !offerImageRedirect && (
                     <Row display="block" mt="0" mb="0" mr="0.9375rem" ml="0.9375rem">
                       <Div col="12" mt="0" pr="0.3125rem">
                         <Img src={offerImage} alt="" width="100%" mt="0" mb="0.625rem" />
@@ -361,8 +361,7 @@ class ProductDetails extends React.Component {
                     )}
                     {/* <button onClick={this.toggleShowMore}></button> */}
                     <Specs specs={groupedAttributes} pincode={pincode.selectedPincode} />
-                    {groupedattributes &&
-                      groupedattributes.youtubeid && (
+                    {groupedattributes && groupedattributes.youtubeid && (
                       <Row display="block" mt="0" mb="0" mr="0.9375rem" ml="0.9375rem">
                         <Div col="12" mt="0" pr="0.3125rem">
                           <Video id={getVideoID(groupedattributes.youtubeid)} />
@@ -390,7 +389,7 @@ class ProductDetails extends React.Component {
 
         {combinedbuy.length > 0 && (
           <Section mb="0">
-            <Row>
+            <Row id="combined_buy_offers">
               <Container pr="0" pl="0" className={styles.combinedProductsWrapper}>
                 <HeadingH6
                   ta="left"
