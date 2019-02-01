@@ -156,12 +156,16 @@ class Footer extends React.Component {
                     </a>
                   </li>
                   <li>
-                    <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/hometown_in/?hl=en">
+                    <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/hometownindia/">
                       <Img src={instaIcon} alt="Instagram" />
                     </a>
                   </li>
                   <li>
-                    <a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/watch?v=gfLZgzaSlmg">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://www.youtube.com/channel/UCBZGArWnKT6MYYwOsPCNjiw"
+                    >
                       <Img src={ytIcon} alt="Youtube" />
                     </a>
                   </li>
