@@ -407,7 +407,8 @@ export default function reducer(state = initialState, action = {}) {
     case SUBMIT_CHECKOUT_FINISH_PAYMENT:
       return {
         ...state,
-        processingOrder: true
+        processingOrder: true,
+        submitting: true
       };
     case SUBMIT_CHECKOUT_FINISH_PAYMENT_SUCCESS:
       return {
@@ -415,14 +416,18 @@ export default function reducer(state = initialState, action = {}) {
         processingOrder: false,
         processedOrder: true,
         processOrderError: null,
-        processOrderResult: action.result
+        processOrderResult: action.result,
+        submitting: false,
+        submitted: true
       };
     case SUBMIT_CHECKOUT_FINISH_PAYMENT_FAIL:
       return {
         ...state,
         processingOrder: false,
         processedOrder: false,
-        processOrderError: action.error
+        processOrderError: action.error,
+        submitted: false,
+        submitting: false
       };
     case RESET_EASY_EMI:
       return {
@@ -506,7 +511,8 @@ export const submitPaymentDetails = (sessionId, data, cardType) => ({
     } catch (error) {
       throw error;
     }
-  }
+  },
+  data
 });
 
 export const verifyEasyEmi = (data, session) => ({
@@ -545,15 +551,15 @@ export const submitCheckoutFinishPayment = (data, gateway) => ({
   promise: async () => {
     try {
       const options = {
-        url: '/checkout/finish/payment/',
+        url: '/checkout/finish/payment/easyemi/',
         method: 'POST',
         data: {
           ...data,
           gateway
         }
       };
-      await axios(options);
-      return { success: true };
+      const response = await axios(options);
+      return response;
     } catch (error) {
       throw error;
     }

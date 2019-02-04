@@ -62,43 +62,6 @@ const onChangeDetails = (dispatcher, gateway) => e => {
   dispatcher({ gateway, data: { [name]: value } });
 };
 
-const mapStateToProps = ({
-  app,
-  paymentoptions,
-  cart: { checkingCart, cartChecked, summary },
-  app: { sessionId },
-  cart
-}) => ({
-  selectedGateway: paymentoptions.selectedGateway,
-  isFormValid: paymentoptions.isFormValid,
-  paymentDetails: paymentoptions.paymentMethodDetails,
-  error: paymentoptions.error,
-  submitting: paymentoptions.submitting,
-  submitted: paymentoptions.submitted,
-  session: app.sessionId,
-  paymentFormData: paymentoptions.formData,
-  cardType: paymentoptions.cardType,
-  results: getCartList(cart),
-  outOfStockList: getStockOutProducts(cart),
-  undelivered: getNotDelivered(cart),
-  checkingCart,
-  cartChecked,
-  summary,
-  sessionId
-});
-
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      toggleGateway: setSelectedGateway,
-      setPaymentDetails: setSelectedPaymentDetails,
-      validateForm: checkPaymentDetails,
-      submitDetails: submitPaymentDetails,
-      setError: setValidationError,
-      resetEasyEmi: resetEasyEmiState
-    },
-    dispatch
-  );
 @withRouter
 class PaymentOptions extends Component {
   static contextTypes = {
@@ -503,6 +466,44 @@ PaymentOptions.propTypes = {
   submitDetails: PropTypes.func.isRequired,
   resetEasyEmi: PropTypes.func.isRequired
 };
+
+const mapStateToProps = ({
+  app,
+  paymentoptions,
+  cart: { checkingCart, cartChecked, summary },
+  app: { sessionId },
+  cart
+}) => ({
+  selectedGateway: paymentoptions.selectedGateway,
+  isFormValid: paymentoptions.isFormValid,
+  paymentDetails: paymentoptions.paymentMethodDetails,
+  error: paymentoptions.error,
+  submitting: paymentoptions.submitting,
+  submitted: paymentoptions.submitted,
+  session: app.sessionId,
+  paymentFormData: paymentoptions.formData,
+  cardType: paymentoptions.cardType,
+  results: getCartList(cart),
+  outOfStockList: getStockOutProducts(cart),
+  undelivered: getNotDelivered(cart),
+  checkingCart,
+  cartChecked,
+  summary,
+  sessionId
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      toggleGateway: setSelectedGateway,
+      setPaymentDetails: setSelectedPaymentDetails,
+      validateForm: checkPaymentDetails,
+      submitDetails: submitPaymentDetails,
+      setError: setValidationError,
+      resetEasyEmi: resetEasyEmiState
+    },
+    dispatch
+  );
 
 export default connect(
   mapStateToProps,

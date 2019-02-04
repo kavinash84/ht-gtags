@@ -120,7 +120,7 @@ class CardForm extends Component {
           <Fragment>
             <Div col="12" mb="0" p="0">
               <Text mt="1rem" fontSize="0.875rem" color="rgba(0,0,0,0.5)">
-                {easyEmiProcessResponse.sttaus === 'success'
+                {easyEmiProcessResponse.status === 'success'
                   ? 'OTP verification successfull. Please click on PLACE ORDER to place your order'
                   : easyEmiProcessResponse.ERRDESC}
               </Text>

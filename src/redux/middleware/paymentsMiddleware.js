@@ -5,6 +5,7 @@ import {
   setSelectedPaymentDetails,
   submitCheckoutFinishPayment
 } from '../modules/paymentoptions';
+import { PAYMENT_SUCCESS, PAYMENT_FAILURE } from '../../helpers/Constants';
 
 export default function paymentsMiddleware() {
   return ({ dispatch, getState }) => next => action => {
@@ -61,13 +62,28 @@ export default function paymentsMiddleware() {
       }));
     }
     if (type === 'paymentOptions/SUBMIT_PAYMENT_DETAILS_SUCCESS') {
-      const { gateway } = action;
-      dispatch(submitCheckoutFinishPayment({
-        gateway,
-        data: {
-          newWebsite: 1
+      const { data } = action;
+      if (data && data.EasyEmi) {
+        if (Object.keys(data.EasyEmi).length > 0) {
+          dispatch(submitCheckoutFinishPayment({
+            data: {
+              newWebsite: 1,
+              transresponse: data.EasyEmi.easyemi_auth_response
+            }
+          }));
         }
-      }));
+      }
+    }
+    if (type === 'paymentOptions/SUBMIT_CHECKOUT_FINISH_PAYMENT_SUCCESS') {
+      const { result } = action;
+      if (result && result.success) {
+        window.location.href = PAYMENT_SUCCESS;
+      } else {
+        window.location.href = `${PAYMENT_FAILURE}/?order=${result.data.order_id}`;
+      }
+    }
+    if (type === 'paymentOptions/SUBMIT_CHECKOUT_FINISH_PAYMENT_FAIL') {
+      window.location.href = PAYMENT_FAILURE;
     }
     return next(action);
   };
