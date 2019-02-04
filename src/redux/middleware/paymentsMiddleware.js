@@ -1,4 +1,10 @@
-import { setSelectedGatewayInSession, setWalletType, setEmiOption } from '../modules/paymentoptions';
+import {
+  setSelectedGatewayInSession,
+  setWalletType,
+  setEmiOption,
+  setSelectedPaymentDetails,
+  submitCheckoutFinishPayment
+} from '../modules/paymentoptions';
 
 export default function paymentsMiddleware() {
   return ({ dispatch, getState }) => next => action => {
@@ -30,6 +36,38 @@ export default function paymentsMiddleware() {
           dispatch(setEmiOption(emiBank, months, sessionId));
         }
       }
+    }
+    if (type === 'paymentOptions/SUBMIT_EASY_EMI_PAYMENT_PROCESS_SUCCESS') {
+      const {
+        gateway, data, processingFees, result
+      } = action;
+      const authResponse = [result];
+      const {
+        cardNumber, otp, orderNumber, emiCode, emiTenure
+      } = data;
+      dispatch(setSelectedPaymentDetails({
+        gateway,
+        data: {
+          cardNumber,
+          is_success: true,
+          easyemi_otp_code: otp,
+          easyemi_emi_code: emiCode,
+          easyemi_order_number: orderNumber,
+          easyemi_tenure: emiTenure,
+          easyemi_processingFees: processingFees,
+          easyemi_auth_response: JSON.stringify(authResponse),
+          easyemi_downpayment: 0
+        }
+      }));
+    }
+    if (type === 'paymentOptions/SUBMIT_PAYMENT_DETAILS_SUCCESS') {
+      const { gateway } = action;
+      dispatch(submitCheckoutFinishPayment({
+        gateway,
+        data: {
+          newWebsite: 1
+        }
+      }));
     }
     return next(action);
   };

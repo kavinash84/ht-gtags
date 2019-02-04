@@ -10,7 +10,7 @@ const mapStateToProps = ({ paymentoptions }) => ({
 class PaymentForm extends Component {
   static propTypes = {
     data: PropTypes.object,
-    error: PropTypes.array
+    error: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -55,7 +55,9 @@ class PaymentForm extends Component {
           action={action}
           encType="application/x-www-form-urlencoded"
         >
-          {formFields.map(field => <input key={field[0]} type="hidden" name={field[0]} value={field[1]} />)}
+          {formFields.map(field => (
+            <input key={field[0]} type="hidden" name={field[0]} value={field[1]} />
+          ))}
         </form>
       );
     }
