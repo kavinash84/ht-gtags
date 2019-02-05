@@ -96,12 +96,15 @@ class CardForm extends Component {
       easyEmiConfig && Object.keys(easyEmiConfig).length > 0 ? JSON.parse(easyEmiConfig.emiOptions)[0] : {};
     return (
       <Div className={styles.paymentBlock} p={padding}>
+        <Div col="8" pr="1rem" className={styles.cardFieldWrapper}>
+          Bajaj Finance Easy Emi
+        </Div>
         {/* otp sending form */}
         {easyEmiVerified && (
           <Fragment>
             <Div col="6" pr="1rem" className={styles.cardFieldWrapper}>
               <FormInput
-                label="Bajaj Finance Easy Emi Step 2 of 2"
+                label="Step 2 of 2"
                 type="text"
                 placeholder="Enter OTP number"
                 name="otpNumber"
@@ -119,8 +122,8 @@ class CardForm extends Component {
           easyEmiProcessResponse.RSPCODE.toString() === '0' && (
           <Fragment>
             <Div col="12" mb="0" p="0">
-              <Text mt="1rem" fontSize="0.875rem" color="rgba(0,0,0,0.5)">
-                {easyEmiProcessResponse.status === 'success'
+              <Text mt="0" fontSize="0.875rem" color="rgba(0,0,0,0.5)">
+                {easyEmiProcessResponse.sttaus === 'success'
                   ? 'OTP verification successfull. Please click on PLACE ORDER to place your order'
                   : easyEmiProcessResponse.ERRDESC}
               </Text>
@@ -137,9 +140,9 @@ class CardForm extends Component {
         {/* card form */}
         {!easyEmiVerified && !easyEmiProcessed && (
           <Fragment>
-            <Div col="6" pr="1rem" className={styles.cardFieldWrapper}>
+            <Div col="8" pr="1rem" className={styles.cardFieldWrapper}>
               <FormInput
-                label="Bajaj Finance Easy Emi Step 1 of 2"
+                label="Step 1 of 2"
                 type="text"
                 placeholder="Enter Card Number"
                 name="cardNumber"
@@ -155,7 +158,8 @@ class CardForm extends Component {
               {cardType === 'diners' && <Img src={dcIcon} alt="Diners Club" />}
               {cardType === 'other' && <Img src={cardIcon} alt="Others" />}
             </Div>
-            <Div col="3" pr="1rem">
+            <Div col="12" />
+            <Div col="8">
               {cardNumber !== '' && (
                 <Button
                   size="block"
@@ -163,7 +167,7 @@ class CardForm extends Component {
                   height="42px"
                   mt="0"
                   fontFamily="Light"
-                  fontSize="1.125rem"
+                  fontSize="13px"
                   ls="1px"
                   onClick={onVerify(verify, cardNumber, sessionId)}
                   hide={cardNumber !== ''}
@@ -184,52 +188,10 @@ class CardForm extends Component {
           !easyEmiProcessed && (
           <Fragment>
             <Div col="12" mb="0" p="0">
-              <Text mt="1rem" fontSize="0.875rem" color="rgba(0,0,0,0.5)">
+              <Text mt="0" fontSize="0.75rem" color="#28a745">
                 {easyEmiVerifyResponse.ERRDESC}
               </Text>
             </Div>
-            {easyEmiConfig && Object.keys(easyEmiConfig).length > 0 && (
-              <Div col="12" mb="0" p="0">
-                <Text mt="1rem" fontSize="0.875rem" color="rgba(0,0,0,0.5)">
-                  {`Processing Fees of Rs. ${easyEmiConfig.processingFees} 
-                    will be be applicable with payment from Bajaj Finserv.`}
-                </Text>
-                <Text mt="1rem" fontSize="0.875rem" color="rgba(0,0,0,0.5)">
-                  {JSON.parse(easyEmiConfig.emiOptions).map(option => (
-                    <ul key={option.value}>
-                      <li>
-                        <span>Tenure: </span>
-                        {option.tenure}
-                      </li>
-                      <li>
-                        <span>Annual Interest Rate: </span>
-                        {option.annual_interest_rate}
-                      </li>
-                      <li>
-                        {/* eslint-disable max-len */}
-                        <span>Emi Interest: </span>
-                        {Math.round(parseFloat(cartSummary.total * (option.annual_interest_rate / 100)).toFixed())}
-                        {/* eslint-enable */}
-                      </li>
-                      <li>
-                        <span>Instant Cashback: </span>
-                        {option.cashback}
-                      </li>
-                      <li>
-                        <span>Total Cost: </span>
-                        {cartSummary.total}
-                      </li>
-                      <li>
-                        {/* eslint-disable max-len */}
-                        <span>Monthly Instalments: </span>
-                        {Math.round(parseFloat(cartSummary.total / option.tenure).toFixed(2))}
-                        {/* eslint-enable */}
-                      </li>
-                    </ul>
-                  ))}
-                </Text>
-              </Div>
-            )}
             <Div col="3" pr="1rem">
               {otp !== '' && (
                 <Button
@@ -259,6 +221,38 @@ class CardForm extends Component {
                 </Button>
               )}
             </Div>
+            {easyEmiConfig && Object.keys(easyEmiConfig).length > 0 && (
+              <Div col="12" mb="0" p="0">
+                <Text mt="1rem" fontSize="0.875rem" color="rgba(0,0,0,0.5)">
+                  {`Processing Fees of Rs. ${easyEmiConfig.processingFees} 
+                      will be be applicable with payment from Bajaj Finserv.`}
+                </Text>
+                <table border="1" className={`table table-border ${styles.emiTable}`}>
+                  <tbody>
+                    <tr>
+                      <th>Tenure</th>
+                      <th>Annual Interest Rate</th>
+                      <th>Emi Interest</th>
+                      <th>Instant Cashback</th>
+                      <th>Total Cost</th>
+                      <th>Monthly Instalments</th>
+                    </tr>
+                    {JSON.parse(easyEmiConfig.emiOptions).map(option => (
+                      <tr key={option.value}>
+                        <td>{option.tenure}</td>
+                        <td>{option.annual_interest_rate}</td>
+                        <td>
+                          {Math.round(parseFloat(cartSummary.total * (option.annual_interest_rate / 100)).toFixed())}
+                        </td>
+                        <td>{option.cashback}</td>
+                        <td>{cartSummary.total}</td>
+                        <td>{Math.round(parseFloat(cartSummary.total / option.tenure).toFixed(2))}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </Div>
+            )}
           </Fragment>
         )}
         {easyEmiVerifyError !== undefined && easyEmiVerifyError !== null && (
@@ -269,7 +263,7 @@ class CardForm extends Component {
           </Div>
         )}
         <Div col="12" mb="0" p="0">
-          <Text mt="1rem" fontSize="0.875rem" color="rgba(0,0,0,0.5)">
+          <Text mt="1rem" fontSize="0.875rem" color="#dc3545">
             Only Bajaj Finance Easy Emi Cards are accepted.
           </Text>
         </Div>

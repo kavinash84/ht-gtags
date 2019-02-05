@@ -2,8 +2,7 @@ import {
   setSelectedGatewayInSession,
   setWalletType,
   setEmiOption,
-  setSelectedPaymentDetails,
-  submitCheckoutFinishPayment
+  setSelectedPaymentDetails
 } from '../modules/paymentoptions';
 import { PAYMENT_SUCCESS, PAYMENT_FAILURE } from '../../helpers/Constants';
 
@@ -62,28 +61,30 @@ export default function paymentsMiddleware() {
       }));
     }
     if (type === 'paymentOptions/SUBMIT_PAYMENT_DETAILS_SUCCESS') {
-      const { data } = action;
+      const { result, data } = action;
       if (data && data.EasyEmi) {
         if (Object.keys(data.EasyEmi).length > 0) {
-          dispatch(submitCheckoutFinishPayment({
-            data: {
-              newWebsite: 1,
-              transresponse: data.EasyEmi.easyemi_auth_response
-            }
-          }));
+          if (result && result.success) {
+            window.location.href = PAYMENT_SUCCESS;
+          } else if (result && result.orderId && result.orderId !== null) {
+            window.location.href = `${PAYMENT_FAILURE}/?order=${result.data.order_id}`;
+          } else {
+            window.location.href = PAYMENT_FAILURE;
+          }
         }
       }
     }
-    if (type === 'paymentOptions/SUBMIT_CHECKOUT_FINISH_PAYMENT_SUCCESS') {
-      const { result } = action;
-      if (result && result.success) {
-        window.location.href = PAYMENT_SUCCESS;
-      } else {
-        window.location.href = `${PAYMENT_FAILURE}/?order=${result.data.order_id}`;
+    if (type === 'paymentOptions/SUBMIT_PAYMENT_DETAILS_FAIL') {
+      const { data, result } = action;
+      if (data && data.EasyEmi) {
+        if (Object.keys(data.EasyEmi).length > 0) {
+          if (result && result.orderId && result.orderId !== null) {
+            window.location.href = `${PAYMENT_FAILURE}/?order=${result.data.order_id}`;
+          } else {
+            window.location.href = PAYMENT_FAILURE;
+          }
+        }
       }
-    }
-    if (type === 'paymentOptions/SUBMIT_CHECKOUT_FINISH_PAYMENT_FAIL') {
-      window.location.href = PAYMENT_FAILURE;
     }
     return next(action);
   };

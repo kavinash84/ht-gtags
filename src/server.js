@@ -171,56 +171,6 @@ app.use('/checkout/finish/payment/', async (req, res) => {
   }
 });
 
-app.use('/checkout/finish/payment/easyemi/', async (req, res) => {
-  try {
-    const cookies = getCookie(req.header('cookie'), 'persist:root');
-    const session = JSON.parse(JSON.parse(cookies).app).sessionId;
-    const data = req.body;
-    const source = req.headers['user-agent'];
-    let ua = { isMobile: false };
-    if (source) {
-      ua = useragent.parse(source);
-    }
-    let additionalParam = {};
-    if (ua.isMobile) {
-      additionalParam = {
-        ismsite: 1
-      };
-    }
-    const options = {
-      url: process.env.PAYMENT_URL,
-      method: 'POST',
-      headers: {
-        Cookie: `PHPSESSID=${session}; path=/; domain=.hometown.in`,
-        ContentType: 'application/x-www-form-urlencoded'
-      },
-      data: qs.stringify({
-        ...data,
-        ...additionalParam
-      })
-    };
-    const response = await axios(options);
-    if (response && response.data && response.data.status === 'success') {
-      res.json({
-        success: true,
-        response
-      });
-      return;
-    }
-    if (response && response.data) {
-      res.json({
-        success: false,
-        response
-      });
-    }
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      error: 'Sorry Cannot finish your Payment ! Please Try Again !'
-    });
-  }
-});
-
 /* Blanket Redirection for old urls Color Products */
 app.get(/\/color-/, (req, res) => {
   const { url } = req;

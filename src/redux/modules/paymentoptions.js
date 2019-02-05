@@ -1,5 +1,4 @@
 import { PAYMENT_OPTIONS } from 'helpers/apiUrls';
-import axios from 'axios';
 import { getCardType } from '../../utils/validation';
 
 const LOAD = 'paymentOptions/LOAD';
@@ -25,10 +24,6 @@ const SUBMIT_PAYMENT_DETAILS = 'paymentOptions/SUBMIT_PAYMENT_DETAILS';
 const SUBMIT_PAYMENT_DETAILS_SUCCESS = 'paymentOptions/SUBMIT_PAYMENT_DETAILS_SUCCESS';
 const SUBMIT_PAYMENT_DETAILS_FAIL = 'paymentOptions/SUBMIT_PAYMENT_DETAILS_FAIL';
 const SET_VALIDATION_ERROR = 'paymentOptions/SET_VALIDATION_ERROR';
-
-const SUBMIT_CHECKOUT_FINISH_PAYMENT = 'paymentOptions/SUBMIT_CHECKOUT_FINISH_PAYMENT';
-const SUBMIT_CHECKOUT_FINISH_PAYMENT_SUCCESS = 'paymentOptions/SUBMIT_CHECKOUT_FINISH_PAYMENT_SUCCESS';
-const SUBMIT_CHECKOUT_FINISH_PAYMENT_FAIL = 'paymentOptions/SUBMIT_CHECKOUT_FINISH_PAYMENT_FAIL';
 
 const SET_CARD_TYPE = 'paymentOptions/SET_CARD_TYPE';
 const SET_CARD_TYPE_SUCCESS = 'paymentOptions/SET_CARD_TYPE_SUCCESS';
@@ -404,31 +399,6 @@ export default function reducer(state = initialState, action = {}) {
         easyEmiProcessed: false,
         easyEmiProcessError: action.error
       };
-    case SUBMIT_CHECKOUT_FINISH_PAYMENT:
-      return {
-        ...state,
-        processingOrder: true,
-        submitting: true
-      };
-    case SUBMIT_CHECKOUT_FINISH_PAYMENT_SUCCESS:
-      return {
-        ...state,
-        processingOrder: false,
-        processedOrder: true,
-        processOrderError: null,
-        processOrderResult: action.result,
-        submitting: false,
-        submitted: true
-      };
-    case SUBMIT_CHECKOUT_FINISH_PAYMENT_FAIL:
-      return {
-        ...state,
-        processingOrder: false,
-        processedOrder: false,
-        processOrderError: action.error,
-        submitted: false,
-        submitting: false
-      };
     case RESET_EASY_EMI:
       return {
         ...state,
@@ -544,28 +514,6 @@ export const processEasyEmi = (data, session, gateway, processingFees) => ({
   data,
   gateway,
   processingFees
-});
-
-export const submitCheckoutFinishPayment = (data, gateway) => ({
-  types: [SUBMIT_CHECKOUT_FINISH_PAYMENT, SUBMIT_CHECKOUT_FINISH_PAYMENT_SUCCESS, SUBMIT_CHECKOUT_FINISH_PAYMENT_FAIL],
-  promise: async () => {
-    try {
-      const options = {
-        url: '/checkout/finish/payment/easyemi/',
-        method: 'POST',
-        data: {
-          ...data,
-          gateway
-        }
-      };
-      const response = await axios(options);
-      return response;
-    } catch (error) {
-      throw error;
-    }
-  },
-  data,
-  gateway
 });
 
 export const resetEasyEmiState = () => ({
