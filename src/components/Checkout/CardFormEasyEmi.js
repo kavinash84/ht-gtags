@@ -135,11 +135,11 @@ class CardForm extends Component {
                   <Text mt="1rem" fontSize="0.875rem" color="#dc3545">
                     {easyEmiVerifyResponse.ERRDESC}
                   </Text>
-                  <Text mt="1rem" fontSize="0.875rem" color="#969696">
+                  {/* <Text mt="1rem" fontSize="0.875rem" color="#969696">
                     Sorry we are having some issue processing this Payment Option.
                     <br />
                     Please try other Payment Options or Please Try Again
-                  </Text>
+                  </Text> */}
                 </Div>
               )}
               <Div col="12" />
@@ -276,10 +276,10 @@ class CardForm extends Component {
           <Div col="12" mb="0" p="0">
             <Text mt="1rem" fontSize="0.875rem" color="#dc3545">
               {easyEmiProcessResponse.ERRDESC}
-              <Text mt="1rem" fontSize="0.875rem" color="#969696">
+              {/* <Text mt="1rem" fontSize="0.875rem" color="#969696">
                 Sorry we are having some issue in verifying your OTP .<br />
                 Please try other Payment Options or Please Try Again
-              </Text>
+              </Text> */}
             </Text>
           </Div>
         )}
