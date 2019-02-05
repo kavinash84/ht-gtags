@@ -96,175 +96,196 @@ class CardForm extends Component {
       easyEmiConfig && Object.keys(easyEmiConfig).length > 0 ? JSON.parse(easyEmiConfig.emiOptions)[0] : {};
     return (
       <Div className={styles.paymentBlock} p={padding}>
+        {/* eslint-disable */}
         <Div col="8" pr="1rem" className={styles.cardFieldWrapper}>
           Bajaj Finance Easy Emi
         </Div>
-        {/* otp sending form */}
-        {easyEmiVerified && (
-          <Fragment>
-            <Div col="6" pr="1rem" className={styles.cardFieldWrapper}>
-              <FormInput
-                label="Step 2 of 2"
-                type="text"
-                placeholder="Enter OTP number"
-                name="otpNumber"
-                value={otp}
-                onChange={this.handleChange}
-                onBlur={this.handleBlur}
-              />
-            </Div>
-          </Fragment>
-        )}
-        {/* on otp process success response */}
-        {easyEmiProcessed &&
-          easyEmiProcessResponse !== undefined &&
-          easyEmiProcessResponse !== null &&
-          easyEmiProcessResponse.RSPCODE.toString() === '0' && (
-          <Fragment>
-            <Div col="12" mb="0" p="0">
-              <Text mt="0" fontSize="0.875rem" color="rgba(0,0,0,0.5)">
-                {easyEmiProcessResponse.sttaus === 'success'
-                  ? 'OTP verification successfull. Please click on PLACE ORDER to place your order'
-                  : easyEmiProcessResponse.ERRDESC}
-              </Text>
-            </Div>
-          </Fragment>
-        )}
-        {easyEmiProcessError !== undefined && easyEmiProcessError !== null && (
-          <Div col="12" mb="0" p="0">
-            <Text mt="1rem" fontSize="0.875rem" color="rgba(0,0,0,0.5)">
-              Error Occurred
-            </Text>
-          </Div>
-        )}
         {/* card form */}
-        {!easyEmiVerified && !easyEmiProcessed && (
-          <Fragment>
-            <Div col="8" pr="1rem" className={styles.cardFieldWrapper}>
-              <FormInput
-                label="Step 1 of 2"
-                type="text"
-                placeholder="Enter Card Number"
-                name="cardNumber"
-                value={cardNumber}
-                onChange={onChangeDetails(setPaymentDetails, gateway)}
-                onBlur={onGetCardType(getCardType, sessionId, gateway)}
-              />
-              {cardType === 'visa' && <Img src={visaIcon} alt="visaCard" />}
-              {cardType === 'mast' && <Img src={mastercardIcon} alt="Master Card" />}
-              {cardType === 'maestro' && <Img src={maestroIcon} alt="Maestro" />}
-              {cardType === 'amex' && <Img src={aeIcon} alt="Amex" />}
-              {cardType === 'discover' && <Img src={discoverIcon} alt="Discover Card" />}
-              {cardType === 'diners' && <Img src={dcIcon} alt="Diners Club" />}
-              {cardType === 'other' && <Img src={cardIcon} alt="Others" />}
-            </Div>
-            <Div col="12" />
-            <Div col="8">
-              {cardNumber !== '' && (
-                <Button
-                  size="block"
-                  btnType="primary"
-                  height="42px"
-                  mt="0"
-                  fontFamily="Light"
-                  fontSize="13px"
-                  ls="1px"
-                  onClick={onVerify(verify, cardNumber, sessionId)}
-                  hide={cardNumber !== ''}
-                  borderRadius="0"
-                  disabled={cardNumber === '' || easyEmiVerifying}
-                >
-                  {easyEmiVerifying !== undefined && easyEmiVerifying ? 'Please wait...' : 'REQUEST FOR OTP'}
-                </Button>
-              )}
-            </Div>
-          </Fragment>
-        )}
-        {/* on card form success */}
-        {easyEmiVerified &&
-          easyEmiVerifyResponse !== undefined &&
-          easyEmiVerifyResponse !== null &&
-          easyEmiVerifyResponse.RSPCODE.toString() === '0' &&
-          !easyEmiProcessed && (
-          <Fragment>
-            <Div col="12" mb="0" p="0">
-              <Text mt="0" fontSize="0.75rem" color="#28a745">
-                {easyEmiVerifyResponse.ERRDESC}
-              </Text>
-            </Div>
-            <Div col="3" pr="1rem">
-              {otp !== '' && (
-                <Button
-                  size="block"
-                  btnType="primary"
-                  height="42px"
-                  mt="0"
-                  fontFamily="Light"
-                  fontSize="1.125rem"
-                  ls="1px"
-                  onClick={onProcess(
-                    processEmi,
-                    cardNumber,
-                    sessionId,
-                    otp,
-                    easyEmiVerifyResponse.ORDERNO,
-                    easyEmiConfigJson.emi_code,
-                    easyEmiConfigJson.tenure,
-                    gateway,
-                    easyEmiConfig.processingFees
-                  )}
-                  hide={otp !== ''}
-                  borderRadius="0"
-                  disabled={otp === '' || easyEmiProcessing}
-                >
-                  {easyEmiProcessing !== undefined && easyEmiProcessing ? 'Please wait...' : 'SUBMIT'}
-                </Button>
-              )}
-            </Div>
-            {easyEmiConfig && Object.keys(easyEmiConfig).length > 0 && (
-              <Div col="12" mb="0" p="0">
-                <Text mt="1rem" fontSize="0.875rem" color="rgba(0,0,0,0.5)">
-                  {`Processing Fees of Rs. ${easyEmiConfig.processingFees} 
-                      will be be applicable with payment from Bajaj Finserv.`}
-                </Text>
-                <table border="1" className={`table table-border ${styles.emiTable}`}>
-                  <tbody>
-                    <tr>
-                      <th>Tenure</th>
-                      <th>Annual Interest Rate</th>
-                      <th>Emi Interest</th>
-                      <th>Instant Cashback</th>
-                      <th>Total Cost</th>
-                      <th>Monthly Instalments</th>
-                    </tr>
-                    {JSON.parse(easyEmiConfig.emiOptions).map(option => (
-                      <tr key={option.value}>
-                        <td>{option.tenure}</td>
-                        <td>{option.annual_interest_rate}</td>
-                        <td>
-                          {Math.round(parseFloat(cartSummary.total * (option.annual_interest_rate / 100)).toFixed())}
-                        </td>
-                        <td>{option.cashback}</td>
-                        <td>{cartSummary.total}</td>
-                        <td>{Math.round(parseFloat(cartSummary.total / option.tenure).toFixed(2))}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+        <Div col="12" />
+        <Fragment>
+          {((easyEmiVerifyResponse !== undefined &&
+            easyEmiVerifyResponse !== null &&
+            easyEmiVerifyResponse.RSPCODE.toString() !== '0') ||
+            (!easyEmiProcessed && !easyEmiVerified)) && (
+            <Fragment>
+              <Div col="8" pr="1rem" className={styles.cardFieldWrapper}>
+                <FormInput
+                  label="STEP 1 of 2"
+                  type="text"
+                  placeholder="Enter Card Number"
+                  name="cardNumber"
+                  value={cardNumber}
+                  onChange={onChangeDetails(setPaymentDetails, gateway)}
+                  onBlur={onGetCardType(getCardType, sessionId, gateway)}
+                />
+                {cardType === 'visa' && <Img src={visaIcon} alt="visaCard" />}
+                {cardType === 'mast' && <Img src={mastercardIcon} alt="Master Card" />}
+                {cardType === 'maestro' && <Img src={maestroIcon} alt="Maestro" />}
+                {cardType === 'amex' && <Img src={aeIcon} alt="Amex" />}
+                {cardType === 'discover' && <Img src={discoverIcon} alt="Discover Card" />}
+                {cardType === 'diners' && <Img src={dcIcon} alt="Diners Club" />}
+                {cardType === 'other' && <Img src={cardIcon} alt="Others" />}
               </Div>
+              {/* card form error */}
+              {((easyEmiVerifyError !== undefined && easyEmiVerifyError !== null) ||
+                (easyEmiVerifyResponse !== undefined &&
+                  easyEmiVerifyResponse !== null &&
+                  easyEmiVerifyResponse.RSPCODE.toString() !== '0')) && (
+                <Div col="12" mb="0" p="0">
+                  <Text mt="1rem" fontSize="0.875rem" color="#dc3545">
+                    {easyEmiVerifyResponse.ERRDESC}
+                  </Text>
+                  <Text mt="1rem" fontSize="0.875rem" color="#969696">
+                    Sorry we are having some issue processing this Payment Option.
+                    <br />
+                    Please try other Payment Options or Please Try Again
+                  </Text>
+                </Div>
+              )}
+              <Div col="12" />
+              <Div col="8">
+                {cardNumber !== '' && (
+                  <Button
+                    size="block"
+                    btnType="primary"
+                    height="42px"
+                    mt="0"
+                    fontFamily="Light"
+                    fontSize="13px"
+                    ls="1px"
+                    onClick={onVerify(verify, cardNumber, sessionId)}
+                    hide={cardNumber !== ''}
+                    borderRadius="0"
+                    disabled={cardNumber === '' || easyEmiVerifying}
+                  >
+                    {easyEmiVerifying !== undefined && easyEmiVerifying ? 'Please wait...' : 'REQUEST FOR OTP'}
+                  </Button>
+                )}
+              </Div>
+            </Fragment>
+          )}
+        </Fragment>
+        {/* otp form */}
+        <Fragment>
+          {easyEmiVerifyResponse !== undefined &&
+            easyEmiVerifyResponse !== null &&
+            easyEmiVerifyResponse.RSPCODE.toString() === '0' &&
+            easyEmiVerified && (
+              <Fragment>
+                <Div col="6" pr="1rem" className={styles.cardFieldWrapper}>
+                  <FormInput
+                    label="STEP 2 of 2"
+                    type="text"
+                    placeholder="Enter OTP number"
+                    name="otpNumber"
+                    value={otp}
+                    onChange={this.handleChange}
+                    onBlur={this.handleBlur}
+                  />
+                </Div>
+                <Div col="3" pr="1rem">
+                  {otp !== '' && (
+                    <Button
+                      size="block"
+                      btnType="primary"
+                      height="42px"
+                      mt="0"
+                      fontFamily="Light"
+                      fontSize="1.125rem"
+                      ls="1px"
+                      onClick={onProcess(
+                        processEmi,
+                        cardNumber,
+                        sessionId,
+                        otp,
+                        easyEmiVerifyResponse.ORDERNO,
+                        easyEmiConfigJson.emi_code,
+                        easyEmiConfigJson.tenure,
+                        gateway,
+                        easyEmiConfig.processingFees
+                      )}
+                      hide={otp !== ''}
+                      borderRadius="0"
+                      disabled={otp === '' || easyEmiProcessing}
+                    >
+                      {easyEmiProcessing !== undefined && easyEmiProcessing ? 'Please wait...' : 'SUBMIT'}
+                    </Button>
+                  )}
+                  {easyEmiProcessResponse !== undefined &&
+                    easyEmiProcessResponse !== null &&
+                    easyEmiProcessResponse.RSPCODE.toString() === '0' &&
+                    easyEmiProcessed && (
+                      <Div col="12" mb="0" p="0">
+                        <Text mt="0" fontSize="0.875rem" color="rgba(0,0,0,0.5)">
+                          {easyEmiProcessResponse.status === 'success'
+                            ? 'OTP verification successfull. Please click on PLACE ORDER to place your order'
+                            : easyEmiProcessResponse.ERRDESC}
+                        </Text>
+                      </Div>
+                    )}
+                  {easyEmiProcessResponse !== undefined &&
+                    easyEmiProcessResponse !== null &&
+                    easyEmiProcessResponse.RSPCODE.toString() === '0' &&
+                    easyEmiProcessed &&
+                    easyEmiConfig &&
+                    Object.keys(easyEmiConfig).length > 0 && (
+                      <Div col="12" mb="0" p="0">
+                        <Text mt="1rem" fontSize="0.875rem" color="rgba(0,0,0,0.5)">
+                          {`Processing Fees of Rs. ${easyEmiConfig.processingFees} 
+                          will be be applicable with payment from Bajaj Finserv.`}
+                        </Text>
+                        <table border="1" className={`table table-border ${styles.emiTable}`}>
+                          <tbody>
+                            <tr>
+                              <th>Tenure</th>
+                              <th>Annual Interest Rate</th>
+                              <th>Emi Interest</th>
+                              <th>Instant Cashback</th>
+                              <th>Total Cost</th>
+                              <th>Monthly Instalments</th>
+                            </tr>
+                            {JSON.parse(easyEmiConfig.emiOptions).map(option => (
+                              <tr key={option.value}>
+                                <td>{option.tenure}</td>
+                                <td>{option.annual_interest_rate}</td>
+                                <td>
+                                  {/* eslint-disable max-len */}
+                                  {Math.round(
+                                    parseFloat(cartSummary.total * (option.annual_interest_rate / 100)).toFixed()
+                                  )}
+                                  {/* eslint-disable max-len */}
+                                </td>
+                                <td>{option.cashback}</td>
+                                <td>{cartSummary.total}</td>
+                                <td>{Math.round(parseFloat(cartSummary.total / option.tenure).toFixed(2))}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </Div>
+                    )}
+                </Div>
+              </Fragment>
             )}
-          </Fragment>
-        )}
-        {easyEmiVerifyError !== undefined && easyEmiVerifyError !== null && (
+        </Fragment>
+        {/* otp form error */}
+        {((easyEmiProcessError !== undefined && easyEmiProcessError !== null) ||
+          (easyEmiProcessResponse !== undefined &&
+            easyEmiProcessResponse !== null &&
+            easyEmiProcessResponse.RSPCODE.toString() !== '0')) && (
           <Div col="12" mb="0" p="0">
-            <Text mt="1rem" fontSize="0.875rem" color="rgba(0,0,0,0.5)">
-              Error Occurred
+            <Text mt="1rem" fontSize="0.875rem" color="#dc3545">
+              {easyEmiProcessResponse.ERRDESC}
+              <Text mt="1rem" fontSize="0.875rem" color="#969696">
+                Sorry we are having some issue in verifying your OTP .<br />
+                Please try other Payment Options or Please Try Again
+              </Text>
             </Text>
           </Div>
         )}
         <Div col="12" mb="0" p="0">
-          <Text mt="1rem" fontSize="0.875rem" color="#dc3545">
-            Only Bajaj Finance Easy Emi Cards are accepted.
+          <Text mt="1rem" fontSize="0.875rem" color="#969696">
+            {'Only Bajaj Finance Easy Emi Cards are accepted.'}
           </Text>
         </Div>
       </Div>

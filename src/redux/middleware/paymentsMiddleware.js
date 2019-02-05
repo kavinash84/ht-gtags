@@ -45,11 +45,15 @@ export default function paymentsMiddleware() {
       const {
         cardNumber, otp, orderNumber, emiCode, emiTenure
       } = data;
+      const successStatus =
+        authResponse !== undefined && authResponse.length > 0
+          ? authResponse[0].RSPCODE && authResponse[0].RSPCODE.toString() === '0'
+          : false;
       dispatch(setSelectedPaymentDetails({
         gateway,
         data: {
           cardNumber,
-          is_success: true,
+          is_success: successStatus ? authResponse[0].RSPCODE : '',
           easyemi_otp_code: otp,
           easyemi_emi_code: emiCode,
           easyemi_order_number: orderNumber,
