@@ -70,7 +70,7 @@ export default function paymentsMiddleware() {
         if (Object.keys(data.EasyEmi).length > 0) {
           if (result && result.success) {
             window.location.href = PAYMENT_SUCCESS;
-          } else if (result && result.orderId && result.orderId !== null) {
+          } else if (result && !result.success && result.orderId && result.orderId !== null) {
             window.location.href = `${PAYMENT_FAILURE}/?order=${result.data.order_id}`;
           } else {
             window.location.href = PAYMENT_FAILURE;
@@ -82,7 +82,7 @@ export default function paymentsMiddleware() {
       const { data, result } = action;
       if (data && data.EasyEmi) {
         if (Object.keys(data.EasyEmi).length > 0) {
-          if (result && result.orderId && result.orderId !== null) {
+          if (result && !result.success && result.orderId && result.orderId !== null) {
             window.location.href = `${PAYMENT_FAILURE}/?order=${result.data.order_id}`;
           } else {
             window.location.href = PAYMENT_FAILURE;
