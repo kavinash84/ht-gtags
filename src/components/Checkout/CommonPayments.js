@@ -43,6 +43,19 @@ const initial = {
   },
   Wallet: {
     walletName: ''
+  },
+  EasyEmi: {
+    cardNumber: '',
+    type: 'other',
+    is_seamless: 1,
+    is_success: '',
+    easyemi_otp_code: '',
+    easyemi_emi_code: '',
+    easyemi_order_number: '',
+    easyemi_tenure: '',
+    easyemi_processingFees: '',
+    easyemi_downpayment: 0,
+    easyemi_auth_response: ''
   }
 };
 
@@ -50,7 +63,7 @@ const onChangeGateway = (dispatcher, value, session) => () => {
   dispatcher(value, initial[value], session);
 };
 
-const CommonPayments = (paymentType, onChange, selectedGateway, session) => {
+const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEasyEmi) => {
   switch (paymentType) {
     case 'CreditCard':
       return (
@@ -209,6 +222,44 @@ const CommonPayments = (paymentType, onChange, selectedGateway, session) => {
               alt="Wallet"
             />
             Wallet
+          </Label>
+        </Div>
+      );
+    case 'EasyEmi':
+      return (
+        <Div col="12" key={paymentType} className={styles.paymentOptions}>
+          <input
+            type="radio"
+            name="paymentOption"
+            value="EasyEmi"
+            checked={selectedGateway === paymentType}
+            onChange={() => {
+              resetEasyEmi();
+              onChangeGateway(onChange, paymentType, session)();
+            }}
+          />
+          <Label
+            htmlFor="paymentEasyEmi"
+            pl="0"
+            color="textLight"
+            mt="0"
+            mb="0"
+            onClick={() => {
+              resetEasyEmi();
+              onChangeGateway(onChange, paymentType, session)();
+            }}
+          >
+            <Img
+              height="20px"
+              width="auto"
+              float="left"
+              mr="10px"
+              top="-2px"
+              position="relative"
+              src={emiIcon}
+              alt="EASYEMI"
+            />
+            EASY EMI
           </Label>
         </Div>
       );

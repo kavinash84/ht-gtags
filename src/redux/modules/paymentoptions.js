@@ -12,6 +12,14 @@ const SET_PAYMENT_METHOD = 'paymentOptions/SET_PAYMENT_METHOD';
 const SET_PAYMENT_METHOD_SUCCESS = 'paymentOptions/SET_PAYMENT_METHOD_SUCCESS';
 const SET_PAYMENT_METHOD_FAIL = 'paymentOptions/SET_PAYMENT_METHOD_FAIL';
 
+const SUBMIT_EASY_EMI_PAYMENT_VERIFY = 'paymentOptions/SUBMIT_EASY_EMI_PAYMENT_VERIFY';
+const SUBMIT_EASY_EMI_PAYMENT_VERIFY_SUCCESS = 'paymentOptions/SUBMIT_EASY_EMI_PAYMENT_VERIFY_SUCCESS';
+const SUBMIT_EASY_EMI_PAYMENT_VERIFY_FAIL = 'paymentOptions/SUBMIT_EASY_EMI_PAYMENT_VERIFY_FAIL';
+
+const SUBMIT_EASY_EMI_PAYMENT_PROCESS = 'paymentOptions/SUBMIT_EASY_EMI_PAYMENT_PROCESS';
+const SUBMIT_EASY_EMI_PAYMENT_PROCESS_SUCCESS = 'paymentOptions/SUBMIT_EASY_EMI_PAYMENT_PROCESS_SUCCESS';
+const SUBMIT_EASY_EMI_PAYMENT_PROCESS_FAIL = 'paymentOptions/SUBMIT_EASY_EMI_PAYMENT_PROCESS_FAIL';
+
 const SUBMIT_PAYMENT_DETAILS = 'paymentOptions/SUBMIT_PAYMENT_DETAILS';
 const SUBMIT_PAYMENT_DETAILS_SUCCESS = 'paymentOptions/SUBMIT_PAYMENT_DETAILS_SUCCESS';
 const SUBMIT_PAYMENT_DETAILS_FAIL = 'paymentOptions/SUBMIT_PAYMENT_DETAILS_FAIL';
@@ -22,6 +30,8 @@ const SET_CARD_TYPE_SUCCESS = 'paymentOptions/SET_CARD_TYPE_SUCCESS';
 const SET_CARD_TYPE_FAIL = 'paymentOptions/SET_CARD_TYPE_FAIL';
 
 const SET_CARD_COMPANY = 'paymentOption/SET_CARD_COMPANY';
+
+const RESET_EASY_EMI = 'paymentOption/RESET_EASY_EMI';
 
 const paymentJSON = {
   session_id: '',
@@ -67,12 +77,21 @@ const paymentJSON = {
   partpay_dc_pg: '',
   partpay_netbanking_bankname: '',
   partpay_netbanking_pg: '',
-  wallet: ''
+  wallet: '',
+  easyemi_otp_code: '',
+  easyemi_emi_code: '',
+  easyemi_order_number: '',
+  easyemi_tenure: '',
+  easyemi_processingFees: '',
+  easyemi_auth_response: '[{}]',
+  easyemi_downpayment: 0
 };
 
 const getURL = gateway => {
   if (gateway === 'CreditCard' || gateway === 'DebitCard' || gateway === 'NetBanking') return `Payu/${gateway}`;
-  if (gateway === 'Emi' || gateway === 'Wallet' || gateway === 'CashOnDelivery') return `${gateway}/${gateway}`;
+  if (gateway === 'Emi' || gateway === 'EasyEmi' || gateway === 'Wallet' || gateway === 'CashOnDelivery') {
+    return `${gateway}/${gateway}`;
+  }
 };
 
 const paymentObject = (sessionId, selectedGateway, paymentData, cardType = 'visa') => {
@@ -146,6 +165,31 @@ const paymentObject = (sessionId, selectedGateway, paymentData, cardType = 'visa
       emi_cc_exp_month: expMonth,
       emi_cc_exp_year: expYear,
       emi_cc_security_code: cvv
+    };
+  } else if (selectedGateway === 'EasyEmi') {
+    const {
+      is_seamless: isSeamless,
+      easyemi_otp_code: otp,
+      easyemi_emi_code: emiCode,
+      easyemi_order_number: orderNumber,
+      easyemi_tenure: emiTenure,
+      easyemi_processingFees: processingFees,
+      easyemi_auth_response: easyEmiAuthResponse,
+      easyemi_downpayment: easyEmiDownPayment
+    } = paymentData;
+    return {
+      ...paymentJSON,
+      session_id: sessionId,
+      payment_method_type: selectedGateway,
+      payment_method: 'EasyEmi',
+      is_seamless: isSeamless,
+      easyemi_otp_code: otp,
+      easyemi_emi_code: emiCode,
+      easyemi_order_number: orderNumber,
+      easyemi_tenure: emiTenure,
+      easyemi_processingFees: processingFees,
+      easyemi_auth_response: easyEmiAuthResponse,
+      easyemi_downpayment: easyEmiDownPayment
     };
   }
 };
@@ -311,6 +355,62 @@ export default function reducer(state = initialState, action = {}) {
         submitted: false,
         error: action.error && action.error.error_message
       };
+    case SUBMIT_EASY_EMI_PAYMENT_VERIFY:
+      return {
+        ...state,
+        easyEmiVerifying: true,
+        easyEmiVerified: false,
+        easyEmiVerifyError: null
+      };
+    case SUBMIT_EASY_EMI_PAYMENT_VERIFY_SUCCESS:
+      return {
+        ...state,
+        easyEmiVerifying: false,
+        easyEmiVerified: true,
+        easyEmiVerifyError: null,
+        easyEmiVerifyResponse: action.result
+      };
+    case SUBMIT_EASY_EMI_PAYMENT_VERIFY_FAIL:
+      return {
+        ...state,
+        easyEmiVerifying: false,
+        easyEmiVerified: false,
+        easyEmiVerifyError: action.error
+      };
+    case SUBMIT_EASY_EMI_PAYMENT_PROCESS:
+      return {
+        ...state,
+        easyEmiProcessing: true,
+        easyEmiProcessed: false,
+        easyEmiProcessError: null
+      };
+    case SUBMIT_EASY_EMI_PAYMENT_PROCESS_SUCCESS:
+      return {
+        ...state,
+        easyEmiProcessing: false,
+        easyEmiProcessed: true,
+        easyEmiProcessError: null,
+        easyEmiProcessResponse: action.result
+      };
+    case SUBMIT_EASY_EMI_PAYMENT_PROCESS_FAIL:
+      return {
+        ...state,
+        easyEmiProcessing: false,
+        easyEmiProcessed: false,
+        easyEmiProcessError: action.error
+      };
+    case RESET_EASY_EMI:
+      return {
+        ...state,
+        easyEmiVerifying: false,
+        easyEmiVerified: false,
+        easyEmiVerifyError: null,
+        easyEmiVerifyResponse: null,
+        easyEmiProcessing: false,
+        easyEmiProcessed: false,
+        easyEmiProcessError: null,
+        easyEmiProcessResponse: null
+      };
     default:
       return state;
   }
@@ -381,5 +481,41 @@ export const submitPaymentDetails = (sessionId, data, cardType) => ({
     } catch (error) {
       throw error;
     }
+  },
+  data
+});
+
+export const verifyEasyEmi = (data, session) => ({
+  types: [SUBMIT_EASY_EMI_PAYMENT_VERIFY, SUBMIT_EASY_EMI_PAYMENT_VERIFY_SUCCESS, SUBMIT_EASY_EMI_PAYMENT_VERIFY_FAIL],
+  promise: async ({ client }) => {
+    try {
+      const response = await client.post(`${PAYMENT_OPTIONS}/easy-emi/verify/${session}`, data);
+      return response;
+    } catch (error) {
+      throw error;
+    }
   }
+});
+
+export const processEasyEmi = (data, session, gateway, processingFees) => ({
+  types: [
+    SUBMIT_EASY_EMI_PAYMENT_PROCESS,
+    SUBMIT_EASY_EMI_PAYMENT_PROCESS_SUCCESS,
+    SUBMIT_EASY_EMI_PAYMENT_PROCESS_FAIL
+  ],
+  promise: async ({ client }) => {
+    try {
+      const response = await client.post(`${PAYMENT_OPTIONS}/easy-emi/process/${session}`, data);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  },
+  data,
+  gateway,
+  processingFees
+});
+
+export const resetEasyEmiState = () => ({
+  type: RESET_EASY_EMI
 });

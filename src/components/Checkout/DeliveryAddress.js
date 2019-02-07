@@ -402,7 +402,7 @@ DeliveryAddress.propTypes = {
   sessionId: PropTypes.string.isRequired,
   history: PropTypes.object,
   addresses: PropTypes.array,
-  nextstep: PropTypes.bool.isRequired,
+  nextstep: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
   // location: PropTypes.object,
   currentaddressindex: PropTypes.number,
   address: PropTypes.object.isRequired,

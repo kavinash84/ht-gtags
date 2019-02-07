@@ -69,6 +69,7 @@
     "cookies-js": "^1.2.3",
     "express": "^4.15.4",
     "express-session": "^1.15.5",
+    "express-useragent": "^1.0.12",
     "history": "^4.7.2",
     "hometown-components": "1.0.32",
     "http-proxy": "^1.16.2",

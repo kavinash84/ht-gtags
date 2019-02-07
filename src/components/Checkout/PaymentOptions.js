@@ -23,7 +23,8 @@ import {
   setSelectedPaymentDetails,
   submitPaymentDetails,
   checkPaymentDetails,
-  setValidationError
+  setValidationError,
+  resetEasyEmiState
 } from 'redux/modules/paymentoptions';
 import { getCartList, getNotDelivered, getStockOutProducts } from 'selectors/cart';
 
@@ -35,6 +36,7 @@ import CommonPayments from './CommonPayments';
 import { validatePaymentDetails } from '../../utils/validation';
 import BankCard from './BankCard';
 import CardForm from './CardForm';
+import CardFormEasyEmi from './CardFormEasyEmi';
 import Emi from './Emi';
 import PaymentMethods from '../PaymentMethods/';
 import PaymentForm from './PaymentForm';
@@ -60,42 +62,6 @@ const onChangeDetails = (dispatcher, gateway) => e => {
   dispatcher({ gateway, data: { [name]: value } });
 };
 
-const mapStateToProps = ({
-  app,
-  paymentoptions,
-  cart: { checkingCart, cartChecked, summary },
-  app: { sessionId },
-  cart
-}) => ({
-  selectedGateway: paymentoptions.selectedGateway,
-  isFormValid: paymentoptions.isFormValid,
-  paymentDetails: paymentoptions.paymentMethodDetails,
-  error: paymentoptions.error,
-  submitting: paymentoptions.submitting,
-  submitted: paymentoptions.submitted,
-  session: app.sessionId,
-  paymentFormData: paymentoptions.formData,
-  cardType: paymentoptions.cardType,
-  results: getCartList(cart),
-  outOfStockList: getStockOutProducts(cart),
-  undelivered: getNotDelivered(cart),
-  checkingCart,
-  cartChecked,
-  summary,
-  sessionId
-});
-
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      toggleGateway: setSelectedGateway,
-      setPaymentDetails: setSelectedPaymentDetails,
-      validateForm: checkPaymentDetails,
-      submitDetails: submitPaymentDetails,
-      setError: setValidationError
-    },
-    dispatch
-  );
 @withRouter
 class PaymentOptions extends Component {
   static contextTypes = {
@@ -117,12 +83,12 @@ class PaymentOptions extends Component {
       paymentFormData,
       cardType,
       submitDetails,
-      undelivered
+      undelivered,
+      resetEasyEmi
     } = this.props;
     const [netBankingData] = data.filter(bank => bank.paymentType === 'NetBanking');
     const [WalletData] = data.filter(bank => bank.paymentType === 'Wallet');
     const isProductOutofStock = sku => outOfStockList.includes(sku);
-
     return (
       <Div type="block">
         <MenuCheckout history={history} page="payment" />
@@ -134,8 +100,8 @@ class PaymentOptions extends Component {
                   <Container type="container" pr="0" pl="0">
                     <Row display="block" mr="0" ml="0">
                       <Div col="12" pr="0" pt="0">
-                        {results.map(item => (
-                          <div>
+                        {results.map((item, index) => (
+                          <div key={String(index)}>
                             {(!item.product_info.is_deliverable || isProductOutofStock(item.configurable_sku)) && (
                               <Row
                                 className={cartStyles.cartItem}
@@ -277,8 +243,11 @@ class PaymentOptions extends Component {
                 </Row>
                 <Row display="block" mr="0" ml="0" mt="5px">
                   <Div col="3">
-                    {data.map(paymentType =>
-                      CommonPayments(paymentType.paymentType, toggleGateway, selectedGateway, session))}
+                    {data.map((paymentType, index) => (
+                      <div key={String(`${paymentType}${index}`)}>
+                        {CommonPayments(paymentType.paymentType, toggleGateway, selectedGateway, session, resetEasyEmi)}
+                      </div>
+                    ))}
                   </Div>
                   <Div col="9">
                     <div className={styles.paymentFormOptions}>
@@ -365,12 +334,20 @@ class PaymentOptions extends Component {
                           currentSelection={paymentDetails.Emi.emiBank}
                         />
                       )}
-                      {WalletData &&
-                        selectedGateway === 'Wallet' && (
+                      {selectedGateway === 'EasyEmi' && (
+                        <Div col="12">
+                          <CardFormEasyEmi
+                            setPaymentDetails={setPaymentDetails}
+                            gateway={selectedGateway}
+                            padding="3rem 2rem"
+                          />
+                        </Div>
+                      )}
+                      {WalletData && selectedGateway === 'Wallet' && (
                         <Div col="12" className={styles.paymentBlock} p="3rem 2rem">
                           <Div col="12" mb="1rem">
                             <Label htmlFor="bankOptions1" color="textLight">
-                                Select From your preferred Wallet
+                              Select From your preferred Wallet
                             </Label>
                           </Div>
 
@@ -486,8 +463,47 @@ PaymentOptions.propTypes = {
   paymentFormData: PropTypes.object,
   cardType: PropTypes.string,
   undelivered: PropTypes.array,
-  submitDetails: PropTypes.func.isRequired
+  submitDetails: PropTypes.func.isRequired,
+  resetEasyEmi: PropTypes.func.isRequired
 };
+
+const mapStateToProps = ({
+  app,
+  paymentoptions,
+  cart: { checkingCart, cartChecked, summary },
+  app: { sessionId },
+  cart
+}) => ({
+  selectedGateway: paymentoptions.selectedGateway,
+  isFormValid: paymentoptions.isFormValid,
+  paymentDetails: paymentoptions.paymentMethodDetails,
+  error: paymentoptions.error,
+  submitting: paymentoptions.submitting,
+  submitted: paymentoptions.submitted,
+  session: app.sessionId,
+  paymentFormData: paymentoptions.formData,
+  cardType: paymentoptions.cardType,
+  results: getCartList(cart),
+  outOfStockList: getStockOutProducts(cart),
+  undelivered: getNotDelivered(cart),
+  checkingCart,
+  cartChecked,
+  summary,
+  sessionId
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      toggleGateway: setSelectedGateway,
+      setPaymentDetails: setSelectedPaymentDetails,
+      validateForm: checkPaymentDetails,
+      submitDetails: submitPaymentDetails,
+      setError: setValidationError,
+      resetEasyEmi: resetEasyEmiState
+    },
+    dispatch
+  );
 
 export default connect(
   mapStateToProps,
