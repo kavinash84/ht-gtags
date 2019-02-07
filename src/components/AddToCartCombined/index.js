@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -11,14 +11,32 @@ import * as actionCreators from 'redux/modules/cart';
 import { getCartListSKU } from 'selectors/cart';
 import { PINCODE, CART_URL } from 'helpers/Constants';
 
-const checkSKUInCart = (list, sku) => list.includes(sku);
-const styles = require('./AddToCart.scss');
-const LoaderIcon = require('../../../static/refresh.svg');
+const checkSKUInCart = (list, sku) => {
+  // list.includes(sku)
+  let isAlreadyAdded = false;
+  const simpleSKUS = sku.skus || [];
+  const skusList = [];
+  simpleSKUS.forEach(item => {
+    const simpleSKUItem = item.sku || '';
+    const skuItem = simpleSKUItem.split('-')[0];
+    if (skuItem) {
+      skusList.push(skuItem);
+    }
+  });
+  if (list.length && skusList.length) {
+    isAlreadyAdded = skusList.every(val => list.includes(val));
+  }
+  return isAlreadyAdded;
+};
+const styles = require('../AddToCart/AddToCart.scss');
+const LoaderIcon = require('../../../static/refresh-black.svg');
 const CheckedIcon = require('../../../static/added-to-cart-icon.png');
 
-const onClick = (key, skuId, simpleSku, session, pincode) => dispatcher => e => {
+const onClick = (item, session, pincode) => dispatcher => e => {
   e.preventDefault();
-  dispatcher(key, skuId, simpleSku, session, pincode);
+  const { id_catalog_buildyourset: setId, skus } = item;
+  const simpleSKUS = skus.map(val => ({ simple_sku: val.sku, qty: Number(val.qty) }));
+  dispatcher(setId, simpleSKUS, session, pincode);
 };
 
 const mapStateToProps = ({
@@ -27,52 +45,34 @@ const mapStateToProps = ({
   session: sessionId,
   pincode: pincode.selectedPincode ? pincode.selectedPincode : PINCODE,
   addingToCart,
-  addedToCart,
   stateId: key,
+  addedToCart,
   cartSKUs: getCartListSKU(cart)
 });
 
-const AddToCart = ({
+const AddToCartCombined = ({
   session,
-  simpleSku,
-  sku,
-  addToCart,
+  addToCartCombined,
   pincode,
-  cartSKUs,
   addingToCart,
-  itemId,
+  skusData,
+  products,
+  cartSKUs,
   stateId,
   size,
-  isSoldOut,
   height,
   btnColor,
   btnType,
-  ta,
   fontSize
 }) => {
-  const checkStatus = checkSKUInCart(cartSKUs, sku);
+  const checkStatus = checkSKUInCart(cartSKUs, skusData);
+  // const { skus } = skusData;
+  const { id_catalog_buildyourset: itemId } = skusData;
   const addLoading = addingToCart && stateId === itemId;
   return (
-    <Div ta={ta}>
-      {isSoldOut ? (
-        <div>
-          <Button
-            btnType="custom"
-            border="1px solid"
-            bc="white"
-            color="red"
-            p="4px 8px"
-            size={size}
-            height={height}
-            lh="1.5"
-          >
-            <Span fontSize="12px" fontFamily="regular" color="red" va="text-top">
-              {'Out of Stock'}
-            </Span>
-          </Button>
-        </div>
-      ) : (
-        <div>
+    <Fragment>
+      {
+        <Fragment>
           {!checkStatus ? (
             <Button
               btnType={btnType}
@@ -80,11 +80,11 @@ const AddToCart = ({
               bc={btnColor === 'transparent' ? '#f98d29' : btnColor}
               color={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
               bg={btnColor === 'transparent' ? 'transparent' : btnColor}
-              p="4px 8px"
+              p="4px 20px"
               lh="1.5"
               size={size}
               disabled={addLoading}
-              onClick={onClick(itemId, sku, simpleSku, session, pincode)(addToCart)}
+              onClick={onClick(skusData, session, pincode)(addToCartCombined)}
               className={styles.addToCartBtn}
               height={height}
             >
@@ -105,7 +105,9 @@ const AddToCart = ({
                 va="middle"
                 lh="1.8"
               >
-                {addLoading ? 'Adding..' : 'Add to Cart'}
+                {addLoading
+                  ? 'Adding..'
+                  : `Add ${products && products.length ? `${products.length} items` : ''} to Cart`}
               </Span>
             </Button>
           ) : (
@@ -121,46 +123,42 @@ const AddToCart = ({
               </Link>
             </Div>
           )}
-        </div>
-      )}
-    </Div>
+        </Fragment>
+      }
+    </Fragment>
   );
 };
 
-AddToCart.defaultProps = {
-  cartSKUs: [],
+AddToCartCombined.defaultProps = {
   addingToCart: false,
-  itemId: '',
+  cartSKUs: [],
+  skusData: {},
+  products: [],
   stateId: '',
   size: 'default',
-  isSoldOut: false,
   height: 'auto',
   btnColor: '#f98d29',
   btnType: 'custom',
-  ta: 'center',
   fontSize: '16px'
 };
 
-AddToCart.propTypes = {
-  simpleSku: PropTypes.string.isRequired,
-  cartSKUs: PropTypes.array,
-  sku: PropTypes.string.isRequired,
+AddToCartCombined.propTypes = {
   session: PropTypes.string.isRequired,
   pincode: PropTypes.string.isRequired,
-  addToCart: PropTypes.func.isRequired,
-  addingToCart: PropTypes.bool,
-  itemId: PropTypes.string,
+  addToCartCombined: PropTypes.func.isRequired,
   stateId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  addingToCart: PropTypes.bool,
+  skusData: PropTypes.object,
+  products: PropTypes.array,
+  cartSKUs: PropTypes.array,
   size: PropTypes.string,
   height: PropTypes.string,
   btnColor: PropTypes.string,
   btnType: PropTypes.string,
-  ta: PropTypes.string,
-  fontSize: PropTypes.string,
-  isSoldOut: PropTypes.bool
+  fontSize: PropTypes.string
 };
 
 export default connect(
   mapStateToProps,
   { ...actionCreators }
-)(AddToCart);
+)(AddToCartCombined);

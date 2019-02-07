@@ -25,7 +25,7 @@
   z-index: 0;
   position: relative;
   background: #fff;
-  padding-bottom: 4rem;
+  padding-bottom: 0;
 }
 .imgSliderContainer {
   background: #FFF;
@@ -71,4 +71,7 @@
   svg {
     vertical-align: middle;
   }
+}
+.seeAllCombine {
+  text-decoration: underline;
 }

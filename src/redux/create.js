@@ -48,7 +48,9 @@ export default function createStore({
     /* Check userAuthentication */
     const authToken = (data.userLogin.isLoggedIn && data.userLogin.accessToken) || '';
     if (data && data.userLogin.meta) {
-      const { userLogin: { meta } } = data;
+      const {
+        userLogin: { meta }
+      } = data;
       const [xId] = Object.keys(meta).filter(key => key !== 'customerId');
       helpers.client.setCustomerInfo('customerId', meta.customerId);
       helpers.client.setXId(xId, meta[xId]);
