@@ -254,14 +254,10 @@ class CardForm extends Component {
                   easyEmiProcessed && (
                     <Div col="12" mb="0" p="0">
                       <Text mt="0" fontSize="0.875rem" color="rgba(0,0,0,0.5)">
-                        {easyEmiProcessResponse.status === 'success' ? (
-                          <Fragment>
-                            OTP verification successfull. <br />
-                            Please click on PLACE ORDER to place your order
-                          </Fragment>
-                        ) : (
-                          easyEmiProcessResponse.ERRDESC
-                        )}
+                        <Fragment>
+                          OTP verification successfull. <br />
+                          Please click on PLACE ORDER to place your order
+                        </Fragment>
                       </Text>
                     </Div>
                   )}
