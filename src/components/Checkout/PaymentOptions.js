@@ -84,7 +84,9 @@ class PaymentOptions extends Component {
       cardType,
       submitDetails,
       undelivered,
-      resetEasyEmi
+      resetEasyEmi,
+      submitted,
+      error
     } = this.props;
     const [netBankingData] = data.filter(bank => bank.paymentType === 'NetBanking');
     const [WalletData] = data.filter(bank => bank.paymentType === 'Wallet');
@@ -415,7 +417,8 @@ class PaymentOptions extends Component {
                         validatePaymentDetails(paymentDetails) ||
                         undelivered.length > 0 ||
                         outOfStockList.length > 0 ||
-                        submitting
+                        submitting ||
+                        (submitted && error === null)
                       }
                     >
                       {submitting ? 'Please wait...' : 'Place Order'}
@@ -445,7 +448,9 @@ PaymentOptions.defaultProps = {
   outOfStockList: [],
   paymentFormData: {},
   cardType: 'other',
-  undelivered: []
+  undelivered: [],
+  submitted: false,
+  error: null
 };
 
 PaymentOptions.propTypes = {
@@ -464,7 +469,9 @@ PaymentOptions.propTypes = {
   cardType: PropTypes.string,
   undelivered: PropTypes.array,
   submitDetails: PropTypes.func.isRequired,
-  resetEasyEmi: PropTypes.func.isRequired
+  resetEasyEmi: PropTypes.func.isRequired,
+  submitted: PropTypes.bool,
+  error: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.array])
 };
 
 const mapStateToProps = ({
