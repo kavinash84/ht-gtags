@@ -53,7 +53,7 @@ export default function paymentsMiddleware() {
         gateway,
         data: {
           cardNumber,
-          is_success: successStatus ? authResponse[0].RSPCODE : '',
+          is_success: !successStatus ? authResponse[0].RSPCODE : '',
           easyemi_otp_code: otp,
           easyemi_emi_code: emiCode,
           easyemi_order_number: orderNumber,
