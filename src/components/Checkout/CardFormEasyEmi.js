@@ -70,6 +70,7 @@ class CardForm extends Component {
   handleBlur = () => {};
 
   render() {
+    // const styles = require('./CardFormEasyEmi.scss');
     const {
       gateway,
       setPaymentDetails,
@@ -101,10 +102,11 @@ class CardForm extends Component {
           Bajaj Finance Easy Emi
         </Div>
         {/* card form */}
-        <Div col="12" />
+        <Div col="12" m="1rem" />
         <Fragment>
           {((easyEmiVerifyResponse !== undefined &&
             easyEmiVerifyResponse !== null &&
+            easyEmiVerifyResponse.RSPCODE !== undefined &&
             easyEmiVerifyResponse.RSPCODE.toString() !== '0') ||
             (!easyEmiProcessed && !easyEmiVerified)) && (
             <Fragment>
@@ -130,15 +132,17 @@ class CardForm extends Component {
               {((easyEmiVerifyError !== undefined && easyEmiVerifyError !== null) ||
                 (easyEmiVerifyResponse !== undefined &&
                   easyEmiVerifyResponse !== null &&
+                  easyEmiVerifyResponse.RSPCODE !== undefined &&
                   easyEmiVerifyResponse.RSPCODE.toString() !== '0')) && (
-                <Div col="12" mb="0" p="0">
+                <Div col="12" mb="0" p="0" mt="-20px">
                   <Text mt="1rem" fontSize="0.875rem" color="#dc3545">
                     {easyEmiVerifyResponse.ERRDESC}
                   </Text>
                 </Div>
               )}
               <Div col="12" />
-              <Div col="8">
+              <Div col="12" />
+              <Div col="8" mt="1rem">
                 {cardNumber !== '' && (
                   <Button
                     size="block"
@@ -164,6 +168,7 @@ class CardForm extends Component {
         <Fragment>
           {easyEmiVerifyResponse !== undefined &&
             easyEmiVerifyResponse !== null &&
+            easyEmiVerifyResponse.RSPCODE !== undefined &&
             easyEmiVerifyResponse.RSPCODE.toString() === '0' &&
             easyEmiVerified && (
               <Fragment>
@@ -178,105 +183,146 @@ class CardForm extends Component {
                     onBlur={this.handleBlur}
                   />
                 </Div>
+                {((easyEmiProcessError !== undefined && easyEmiProcessError !== null) ||
+                  (easyEmiProcessResponse !== undefined &&
+                    easyEmiProcessResponse !== null &&
+                    easyEmiProcessResponse.RSPCODE !== undefined &&
+                    easyEmiProcessResponse.RSPCODE.toString() !== '0')) && (
+                  <Div col="12" mb="0" p="0" mt="-10px">
+                    <Text mt="1rem" fontSize="0.875rem" color="#dc3545">
+                      {easyEmiProcessResponse.ERRDESC}
+                    </Text>
+                  </Div>
+                )}
                 <Div col="12" mb="0" p="0">
-                  {otp !== '' && (
-                    <Button
-                      size="block"
-                      btnType="primary"
-                      height="42px"
-                      mt="0"
-                      fontFamily="Light"
-                      fontSize="1.125rem"
-                      ls="1px"
-                      onClick={onProcess(
-                        processEmi,
-                        cardNumber,
-                        sessionId,
-                        otp,
-                        easyEmiVerifyResponse.ORDERNO,
-                        easyEmiConfigJson.emi_code,
-                        easyEmiConfigJson.tenure,
-                        gateway,
-                        easyEmiConfig.processingFees
+                  <Div col="6" mb="0" p="0" mt="1rem">
+                    {otp !== '' &&
+                      !(
+                        easyEmiProcessResponse !== undefined &&
+                        easyEmiProcessResponse !== null &&
+                        easyEmiProcessResponse.RSPCODE !== undefined &&
+                        easyEmiProcessResponse.RSPCODE.toString() === '0'
+                      ) && (
+                        <Button
+                          size="block"
+                          btnType="primary"
+                          height="42px"
+                          mt="0"
+                          fontFamily="Light"
+                          fontSize="1.125rem"
+                          ls="1px"
+                          onClick={onProcess(
+                            processEmi,
+                            cardNumber,
+                            sessionId,
+                            otp,
+                            easyEmiVerifyResponse.ORDERNO,
+                            easyEmiConfigJson.emi_code,
+                            easyEmiConfigJson.tenure,
+                            gateway,
+                            easyEmiConfig.processingFees
+                          )}
+                          hide={
+                            otp !== '' &&
+                            !(
+                              easyEmiProcessResponse !== undefined &&
+                              easyEmiProcessResponse !== null &&
+                              easyEmiProcessResponse.RSPCODE !== undefined &&
+                              easyEmiProcessResponse.RSPCODE.toString() === '0'
+                            )
+                          }
+                          borderRadius="0"
+                          disabled={
+                            otp === '' ||
+                            easyEmiProcessing ||
+                            (easyEmiProcessResponse !== undefined &&
+                              easyEmiProcessResponse !== null &&
+                              easyEmiProcessResponse.RSPCODE !== undefined &&
+                              easyEmiProcessResponse.RSPCODE.toString() === '0')
+                          }
+                        >
+                          {easyEmiProcessing !== undefined && easyEmiProcessing ? 'Please wait...' : 'SUBMIT'}
+                        </Button>
                       )}
-                      hide={otp !== ''}
-                      borderRadius="0"
-                      disabled={otp === '' || easyEmiProcessing}
-                    >
-                      {easyEmiProcessing !== undefined && easyEmiProcessing ? 'Please wait...' : 'SUBMIT'}
-                    </Button>
-                  )}
-                  {easyEmiProcessResponse !== undefined &&
-                    easyEmiProcessResponse !== null &&
-                    easyEmiProcessResponse.RSPCODE.toString() === '0' &&
-                    easyEmiProcessed && (
-                      <Div col="12" mb="0" p="0">
-                        <Text mt="0" fontSize="0.875rem" color="rgba(0,0,0,0.5)">
-                          {easyEmiProcessResponse.status === 'success'
-                            ? 'OTP verification successfull. Please click on PLACE ORDER to place your order'
-                            : easyEmiProcessResponse.ERRDESC}
-                        </Text>
-                      </Div>
-                    )}
-                  {easyEmiProcessResponse !== undefined &&
-                    easyEmiProcessResponse !== null &&
-                    easyEmiProcessResponse.RSPCODE.toString() === '0' &&
-                    easyEmiProcessed &&
-                    easyEmiConfig &&
-                    Object.keys(easyEmiConfig).length > 0 && (
-                      <Div col="12" mb="0" p="0">
-                        <Text mt="1rem" fontSize="0.875rem" color="rgba(0,0,0,0.5)">
-                          {`Processing Fees of Rs. ${easyEmiConfig.processingFees} 
-                          will be be applicable with payment from Bajaj Finserv.`}
-                        </Text>
-                        <table border="1" className={`table table-border ${styles.emiTable}`}>
-                          <tbody>
-                            <tr>
-                              <th>Tenure</th>
-                              <th>Annual Interest Rate</th>
-                              <th>Emi Interest</th>
-                              <th>Instant Cashback</th>
-                              <th>Total Cost</th>
-                              <th>Monthly Instalments</th>
-                            </tr>
-                            {JSON.parse(easyEmiConfig.emiOptions).map(option => (
-                              <tr key={option.value}>
-                                <td>{option.tenure}</td>
-                                <td>{option.annual_interest_rate}</td>
-                                <td>
-                                  {/* eslint-disable max-len */}
-                                  {Math.round(
-                                    parseFloat(cartSummary.total * (option.annual_interest_rate / 100)).toFixed()
-                                  )}
-                                  {/* eslint-disable max-len */}
-                                </td>
-                                <td>{option.cashback}</td>
-                                <td>{cartSummary.total}</td>
-                                <td>{Math.round(parseFloat(cartSummary.total / option.tenure).toFixed(2))}</td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </Div>
-                    )}
+                  </Div>
                 </Div>
+                {/* otp form error */}
+                {easyEmiProcessResponse !== undefined &&
+                  easyEmiProcessResponse !== null &&
+                  easyEmiProcessResponse.RSPCODE !== undefined &&
+                  easyEmiProcessResponse.RSPCODE.toString() === '0' &&
+                  easyEmiProcessed && (
+                    <Div col="12" mb="0" p="0">
+                      <Text mt="0" fontSize="0.875rem" color="rgba(0,0,0,0.5)">
+                        {easyEmiProcessResponse.status === 'success' ? (
+                          <Fragment>
+                            OTP verification successfull. <br />
+                            Please click on PLACE ORDER to place your order
+                          </Fragment>
+                        ) : (
+                          easyEmiProcessResponse.ERRDESC
+                        )}
+                      </Text>
+                    </Div>
+                  )}
+                {easyEmiProcessResponse !== undefined &&
+                  easyEmiProcessResponse !== null &&
+                  easyEmiProcessResponse.RSPCODE !== undefined &&
+                  easyEmiProcessResponse.RSPCODE.toString() === '0' &&
+                  easyEmiProcessed &&
+                  easyEmiConfig &&
+                  Object.keys(easyEmiConfig).length > 0 && (
+                    <Div col="12" mb="0" p="0" mt="2rem">
+                      <table border="1" className={`table table-border ${styles.emiTable}`}>
+                        <tbody>
+                          <tr>
+                            <th>Tenure</th>
+                            <th>Annual Interest Rate</th>
+                            <th>Emi Interest</th>
+                            <th>Instant Cashback</th>
+                            <th>Total Cost</th>
+                            <th>Monthly Instalments</th>
+                          </tr>
+                          {JSON.parse(easyEmiConfig.emiOptions).map(option => (
+                            <tr key={option.value}>
+                              <td>{option.tenure}</td>
+                              <td>{option.annual_interest_rate}</td>
+                              <td>
+                                {/* eslint-disable max-len */}
+                                {parseFloat(cartSummary.total * (option.annual_interest_rate / 100)).toFixed()}
+                                {/* eslint-disable max-len */}
+                              </td>
+                              <td>{option.cashback}</td>
+                              <td>{cartSummary.total}</td>
+                              <td>{`${parseFloat(cartSummary.total / option.tenure).toFixed(2)} *`}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </Div>
+                  )}
+                {easyEmiProcessResponse !== undefined &&
+                  easyEmiProcessResponse !== null &&
+                  easyEmiProcessResponse.RSPCODE !== undefined &&
+                  easyEmiProcessResponse.RSPCODE.toString() === '0' &&
+                  easyEmiProcessed &&
+                  easyEmiConfig && (
+                    <Div col="12" mb="0" p="0">
+                      <Text mt="1rem" fontSize="0.875rem" color="rgba(0,0,0,0.5)">
+                        {/* eslint-disable */}
+                        {`* Processing Fees of Rs. ${
+                          easyEmiConfig.processingFees
+                        } will be added in First EMI Installment.`}
+                        {/* eslint-disable */}
+                      </Text>
+                    </Div>
+                  )}
               </Fragment>
             )}
         </Fragment>
-        {/* otp form error */}
-        {((easyEmiProcessError !== undefined && easyEmiProcessError !== null) ||
-          (easyEmiProcessResponse !== undefined &&
-            easyEmiProcessResponse !== null &&
-            easyEmiProcessResponse.RSPCODE.toString() !== '0')) && (
-          <Div col="12" mb="0" p="0">
-            <Text mt="1rem" fontSize="0.875rem" color="#dc3545">
-              {easyEmiProcessResponse.ERRDESC}
-            </Text>
-          </Div>
-        )}
-        <Div col="12" mb="0" p="0">
+        <Div col="12" mb="0" p="0" className={styles.easyEmiImpNote}>
           <Text mt="1rem" fontSize="0.875rem" color="#969696">
-            {'Only Bajaj Finance Easy Emi Cards are accepted.'}
+            {'* Only Bajaj Finance Easy Emi Cards are accepted.'}
           </Text>
         </Div>
       </Div>
