@@ -106,6 +106,7 @@ class CardForm extends Component {
         <Fragment>
           {((easyEmiVerifyResponse !== undefined &&
             easyEmiVerifyResponse !== null &&
+            easyEmiVerifyResponse.RSPCODE !== undefined &&
             easyEmiVerifyResponse.RSPCODE.toString() !== '0') ||
             (!easyEmiProcessed && !easyEmiVerified)) && (
             <Fragment>
@@ -131,6 +132,7 @@ class CardForm extends Component {
               {((easyEmiVerifyError !== undefined && easyEmiVerifyError !== null) ||
                 (easyEmiVerifyResponse !== undefined &&
                   easyEmiVerifyResponse !== null &&
+                  easyEmiVerifyResponse.RSPCODE !== undefined &&
                   easyEmiVerifyResponse.RSPCODE.toString() !== '0')) && (
                 <Div col="12" mb="0" p="0" mt="-20px">
                   <Text mt="1rem" fontSize="0.875rem" color="#dc3545">
@@ -166,6 +168,7 @@ class CardForm extends Component {
         <Fragment>
           {easyEmiVerifyResponse !== undefined &&
             easyEmiVerifyResponse !== null &&
+            easyEmiVerifyResponse.RSPCODE !== undefined &&
             easyEmiVerifyResponse.RSPCODE.toString() === '0' &&
             easyEmiVerified && (
               <Fragment>
@@ -183,6 +186,7 @@ class CardForm extends Component {
                 {((easyEmiProcessError !== undefined && easyEmiProcessError !== null) ||
                   (easyEmiProcessResponse !== undefined &&
                     easyEmiProcessResponse !== null &&
+                    easyEmiProcessResponse.RSPCODE !== undefined &&
                     easyEmiProcessResponse.RSPCODE.toString() !== '0')) && (
                   <Div col="12" mb="0" p="0" mt="-10px">
                     <Text mt="1rem" fontSize="0.875rem" color="#dc3545">
@@ -196,6 +200,7 @@ class CardForm extends Component {
                       !(
                         easyEmiProcessResponse !== undefined &&
                         easyEmiProcessResponse !== null &&
+                        easyEmiProcessResponse.RSPCODE !== undefined &&
                         easyEmiProcessResponse.RSPCODE.toString() === '0'
                       ) && (
                         <Button
@@ -222,6 +227,7 @@ class CardForm extends Component {
                             !(
                               easyEmiProcessResponse !== undefined &&
                               easyEmiProcessResponse !== null &&
+                              easyEmiProcessResponse.RSPCODE !== undefined &&
                               easyEmiProcessResponse.RSPCODE.toString() === '0'
                             )
                           }
@@ -231,6 +237,7 @@ class CardForm extends Component {
                             easyEmiProcessing ||
                             (easyEmiProcessResponse !== undefined &&
                               easyEmiProcessResponse !== null &&
+                              easyEmiProcessResponse.RSPCODE !== undefined &&
                               easyEmiProcessResponse.RSPCODE.toString() === '0')
                           }
                         >
@@ -242,6 +249,7 @@ class CardForm extends Component {
                 {/* otp form error */}
                 {easyEmiProcessResponse !== undefined &&
                   easyEmiProcessResponse !== null &&
+                  easyEmiProcessResponse.RSPCODE !== undefined &&
                   easyEmiProcessResponse.RSPCODE.toString() === '0' &&
                   easyEmiProcessed && (
                     <Div col="12" mb="0" p="0">
@@ -259,6 +267,7 @@ class CardForm extends Component {
                   )}
                 {easyEmiProcessResponse !== undefined &&
                   easyEmiProcessResponse !== null &&
+                  easyEmiProcessResponse.RSPCODE !== undefined &&
                   easyEmiProcessResponse.RSPCODE.toString() === '0' &&
                   easyEmiProcessed &&
                   easyEmiConfig &&
@@ -294,6 +303,7 @@ class CardForm extends Component {
                   )}
                 {easyEmiProcessResponse !== undefined &&
                   easyEmiProcessResponse !== null &&
+                  easyEmiProcessResponse.RSPCODE !== undefined &&
                   easyEmiProcessResponse.RSPCODE.toString() === '0' &&
                   easyEmiProcessed &&
                   easyEmiConfig && (
