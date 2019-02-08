@@ -370,6 +370,7 @@ class DeliveryAddress extends Component {
             <Div col="3" mt="0" pl="0.625rem">
               <OrderSummary
                 itemsTotal={summary.items}
+                setDiscount={summary.combined_set_discount}
                 savings={summary.savings}
                 shipping={summary.shipping_charges}
                 totalCart={summary.total}

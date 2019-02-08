@@ -222,6 +222,7 @@ const Cart = ({
               <OrderSummary
                 itemsTotal={summary.items}
                 savings={summary.savings}
+                setDiscount={summary.combined_set_discount}
                 shipping={summary.shipping_charges}
                 totalCart={summary.total}
                 loadingnextstep={checkingCart}
