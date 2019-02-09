@@ -48,14 +48,10 @@ const initial = {
     cardNumber: '',
     type: 'other',
     is_seamless: 1,
-    is_success: '',
+    session: '',
     easyemi_otp_code: '',
-    easyemi_emi_code: '',
-    easyemi_order_number: '',
-    easyemi_tenure: '',
-    easyemi_processingFees: '',
-    easyemi_downpayment: 0,
-    easyemi_auth_response: ''
+    easyEmiConfig: '',
+    gateway: ''
   }
 };
 

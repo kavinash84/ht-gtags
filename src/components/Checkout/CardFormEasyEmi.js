@@ -3,7 +3,7 @@ import Div from 'hometown-components/lib/Div';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
-import { setCardType, verifyEasyEmi, processEasyEmi } from 'redux/modules/paymentoptions';
+import { setCardType, verifyEasyEmi } from 'redux/modules/paymentoptions';
 import { getEasyEmiConfig } from 'selectors/payments';
 import Img from 'hometown-components/lib/Img';
 import Text from 'hometown-components/lib/Text';
@@ -21,38 +21,24 @@ const mastercardIcon = require('../../../static/mastercard.svg');
 const visaIcon = require('../../../static/visa.svg');
 const cardIcon = require('../../../static/cardDefault.svg');
 
-const onChangeDetails = (dispatcher, gateway) => e => {
+const onChangeDetails = (dispatcher, gateway, sessionId, easyEmiConfig) => e => {
   const { name, value } = e.target;
-  dispatcher({ gateway, data: { [name]: value } });
+  let data = {
+    [name]: value,
+    session: sessionId,
+    gateway
+  };
+  if (easyEmiConfig !== undefined) {
+    data = { ...data, easyEmiConfig };
+  }
+  dispatcher({
+    gateway,
+    data
+  });
 };
 
 const onVerify = (dispatcher, cardNumber, sessionId) => () => {
   dispatcher({ cardNumber }, sessionId);
-};
-
-const onProcess = (
-  dispatcher,
-  cardNumber,
-  sessionId,
-  otp,
-  orderNumber,
-  emiCode,
-  emiTenure,
-  gateway,
-  processingFees
-) => () => {
-  dispatcher(
-    {
-      cardNumber,
-      otp,
-      orderNumber,
-      emiCode,
-      emiTenure
-    },
-    sessionId,
-    gateway,
-    processingFees
-  );
 };
 
 const onGetCardType = (dispatcher, sessionId, gateway) => e => {
@@ -61,10 +47,9 @@ const onGetCardType = (dispatcher, sessionId, gateway) => e => {
 };
 
 class CardForm extends Component {
-  state = { otp: '' };
-
   handleChange = e => {
-    this.setState({ otp: e.target.value });
+    const { setPaymentDetails, gateway, sessionId } = this.props;
+    onChangeDetails(setPaymentDetails, gateway, sessionId)(e);
   };
 
   handleBlur = () => {};
@@ -74,7 +59,7 @@ class CardForm extends Component {
     const {
       gateway,
       setPaymentDetails,
-      details: { cardNumber },
+      details: { cardNumber, easyemi_otp_code: otp },
       getCardType,
       cardType,
       sessionId,
@@ -84,17 +69,14 @@ class CardForm extends Component {
       easyEmiVerifyError,
       easyEmiVerified,
       easyEmiVerifyResponse,
-      processEmi,
       easyEmiProcessing,
       easyEmiProcessError,
       easyEmiProcessed,
       easyEmiProcessResponse,
       easyEmiConfig,
-      cartSummary
+      cartSummary,
+      submitting
     } = this.props;
-    const { otp } = this.state;
-    const easyEmiConfigJson =
-      easyEmiConfig && Object.keys(easyEmiConfig).length > 0 ? JSON.parse(easyEmiConfig.emiOptions)[0] : {};
     return (
       <Div className={styles.paymentBlock} p={padding}>
         {/* eslint-disable */}
@@ -117,7 +99,7 @@ class CardForm extends Component {
                   placeholder="Enter Card Number"
                   name="cardNumber"
                   value={cardNumber}
-                  onChange={onChangeDetails(setPaymentDetails, gateway)}
+                  onChange={onChangeDetails(setPaymentDetails, gateway, sessionId, easyEmiConfig)}
                   onBlur={onGetCardType(getCardType, sessionId, gateway)}
                 />
                 {cardType === 'visa' && <Img src={visaIcon} alt="visaCard" />}
@@ -140,8 +122,6 @@ class CardForm extends Component {
                   </Text>
                 </Div>
               )}
-              <Div col="12" />
-              <Div col="12" />
               <Div col="8" mt="1rem">
                 {cardNumber !== '' && (
                   <Button
@@ -177,12 +157,19 @@ class CardForm extends Component {
                     label="STEP 2 of 2"
                     type="text"
                     placeholder="Enter OTP number"
-                    name="otpNumber"
+                    name="easyemi_otp_code"
                     value={otp}
                     onChange={this.handleChange}
                     onBlur={this.handleBlur}
                   />
                 </Div>
+                {easyEmiProcessing && (
+                  <Div col="12" mb="0" p="0" mt="-10px">
+                    <Text mt="1rem" fontSize="0.875rem" color="#dc3545">
+                      {'Please wait verifying OTP.....'}
+                    </Text>
+                  </Div>
+                )}
                 {((easyEmiProcessError !== undefined && easyEmiProcessError !== null) ||
                   (easyEmiProcessResponse !== undefined &&
                     easyEmiProcessResponse !== null &&
@@ -194,69 +181,18 @@ class CardForm extends Component {
                     </Text>
                   </Div>
                 )}
-                <Div col="12" mb="0" p="0">
-                  <Div col="6" mb="0" p="0" mt="1rem">
-                    {otp !== '' &&
-                      !(
-                        easyEmiProcessResponse !== undefined &&
-                        easyEmiProcessResponse !== null &&
-                        easyEmiProcessResponse.RSPCODE !== undefined &&
-                        easyEmiProcessResponse.RSPCODE.toString() === '0'
-                      ) && (
-                        <Button
-                          size="block"
-                          btnType="primary"
-                          height="42px"
-                          mt="0"
-                          fontFamily="Light"
-                          fontSize="1.125rem"
-                          ls="1px"
-                          onClick={onProcess(
-                            processEmi,
-                            cardNumber,
-                            sessionId,
-                            otp,
-                            easyEmiVerifyResponse.ORDERNO,
-                            easyEmiConfigJson.emi_code,
-                            easyEmiConfigJson.tenure,
-                            gateway,
-                            easyEmiConfig.processingFees
-                          )}
-                          hide={
-                            otp !== '' &&
-                            !(
-                              easyEmiProcessResponse !== undefined &&
-                              easyEmiProcessResponse !== null &&
-                              easyEmiProcessResponse.RSPCODE !== undefined &&
-                              easyEmiProcessResponse.RSPCODE.toString() === '0'
-                            )
-                          }
-                          borderRadius="0"
-                          disabled={
-                            otp === '' ||
-                            easyEmiProcessing ||
-                            (easyEmiProcessResponse !== undefined &&
-                              easyEmiProcessResponse !== null &&
-                              easyEmiProcessResponse.RSPCODE !== undefined &&
-                              easyEmiProcessResponse.RSPCODE.toString() === '0')
-                          }
-                        >
-                          {easyEmiProcessing !== undefined && easyEmiProcessing ? 'Please wait...' : 'SUBMIT'}
-                        </Button>
-                      )}
-                  </Div>
-                </Div>
                 {/* otp form error */}
                 {easyEmiProcessResponse !== undefined &&
                   easyEmiProcessResponse !== null &&
                   easyEmiProcessResponse.RSPCODE !== undefined &&
                   easyEmiProcessResponse.RSPCODE.toString() === '0' &&
-                  easyEmiProcessed && (
+                  easyEmiProcessed &&
+                  submitting && (
                     <Div col="12" mb="0" p="0">
                       <Text mt="0" fontSize="0.875rem" color="rgba(0,0,0,0.5)">
                         <Fragment>
                           OTP verification successfull. <br />
-                          Please click on PLACE ORDER to place your order
+                          Please wait while we are processing your order......
                         </Fragment>
                       </Text>
                     </Div>
@@ -266,53 +202,50 @@ class CardForm extends Component {
                   easyEmiProcessResponse.RSPCODE !== undefined &&
                   easyEmiProcessResponse.RSPCODE.toString() === '0' &&
                   easyEmiProcessed &&
-                  easyEmiConfig &&
-                  Object.keys(easyEmiConfig).length > 0 && (
-                    <Div col="12" mb="0" p="0" mt="2rem">
-                      <table border="1" className={`table table-border ${styles.emiTable}`}>
-                        <tbody>
-                          <tr>
-                            <th>Tenure</th>
-                            <th>Annual Interest Rate</th>
-                            <th>Emi Interest</th>
-                            <th>Instant Cashback</th>
-                            <th>Total Cost</th>
-                            <th>Monthly Instalments</th>
-                          </tr>
-                          {JSON.parse(easyEmiConfig.emiOptions).map(option => (
-                            <tr key={option.value}>
-                              <td>{option.tenure}</td>
-                              <td>{option.annual_interest_rate}</td>
-                              <td>
-                                {/* eslint-disable max-len */}
-                                {parseFloat(cartSummary.total * (option.annual_interest_rate / 100)).toFixed()}
-                                {/* eslint-disable max-len */}
-                              </td>
-                              <td>{option.cashback}</td>
-                              <td>{cartSummary.total}</td>
-                              <td>{`${parseFloat(cartSummary.total / option.tenure).toFixed(2)} *`}</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </Div>
-                  )}
-                {easyEmiProcessResponse !== undefined &&
-                  easyEmiProcessResponse !== null &&
-                  easyEmiProcessResponse.RSPCODE !== undefined &&
-                  easyEmiProcessResponse.RSPCODE.toString() === '0' &&
-                  easyEmiProcessed &&
-                  easyEmiConfig && (
+                  !submitting && (
                     <Div col="12" mb="0" p="0">
-                      <Text mt="1rem" fontSize="0.875rem" color="rgba(0,0,0,0.5)">
-                        {/* eslint-disable */}
-                        {`* Processing Fees of Rs. ${
-                          easyEmiConfig.processingFees
-                        } will be added in First EMI Installment.`}
-                        {/* eslint-disable */}
+                      <Text mt="0" fontSize="0.875rem" color="rgba(0,0,0,0.5)">
+                        <Fragment>Thank you. Your Order has been placed....</Fragment>
                       </Text>
                     </Div>
                   )}
+                {Object.keys(easyEmiConfig).length > 0 && (
+                  <Div col="12" mb="0" p="0" mt="2rem">
+                    <table border="1" className={`table table-border ${styles.emiTable}`}>
+                      <tbody>
+                        <tr>
+                          <th>Tenure</th>
+                          <th>Annual Interest Rate</th>
+                          <th>Emi Interest</th>
+                          <th>Instant Cashback</th>
+                          <th>Total Cost</th>
+                          <th>Monthly Instalments</th>
+                        </tr>
+                        {JSON.parse(easyEmiConfig.emiOptions).map(option => (
+                          <tr key={option.value}>
+                            <td>{option.tenure}</td>
+                            <td>{option.annual_interest_rate}</td>
+                            <td>
+                              {/* eslint-disable max-len */}
+                              {parseFloat(cartSummary.total * (option.annual_interest_rate / 100)).toFixed()}
+                              {/* eslint-disable max-len */}
+                            </td>
+                            <td>{option.cashback}</td>
+                            <td>{cartSummary.total}</td>
+                            <td>{`${parseFloat(cartSummary.total / option.tenure).toFixed(2)} *`}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </Div>
+                )}
+                <Div col="12" mb="0" p="0">
+                  <Text mt="1rem" fontSize="0.875rem" color="rgba(0,0,0,0.5)">
+                    {/* eslint-disable */}
+                    {`* Processing Fees of Rs. ${easyEmiConfig.processingFees} will be added in First EMI Installment.`}
+                    {/* eslint-disable */}
+                  </Text>
+                </Div>
               </Fragment>
             )}
         </Fragment>
@@ -341,6 +274,7 @@ const mapStateToProps = ({ paymentoptions, app, cart }, ownProps) => ({
   easyEmiProcessResponse: paymentoptions.easyEmiProcessResponse,
   easyEmiConfig: getEasyEmiConfig(paymentoptions),
   cartSummary: getCartSummary(cart),
+  submitting: paymentoptions.submitting,
   ...ownProps
 });
 
@@ -348,8 +282,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       getCardType: setCardType,
-      verify: verifyEasyEmi,
-      processEmi: processEasyEmi
+      verify: verifyEasyEmi
     },
     dispatch
   );
@@ -366,7 +299,8 @@ CardForm.defaultProps = {
   easyEmiProcessed: false,
   easyEmiProcessError: null,
   easyEmiProcessResponse: null,
-  easyEmiConfig: {}
+  easyEmiConfig: {},
+  submitting: false
 };
 
 CardForm.propTypes = {
@@ -385,7 +319,6 @@ CardForm.propTypes = {
     PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any))
   ]),
   easyEmiVerifyResponse: PropTypes.objectOf(PropTypes.any),
-  processEmi: PropTypes.func.isRequired,
   easyEmiProcessing: PropTypes.bool,
   easyEmiProcessed: PropTypes.bool,
   easyEmiProcessError: PropTypes.oneOfType([
@@ -394,7 +327,8 @@ CardForm.propTypes = {
   ]),
   easyEmiProcessResponse: PropTypes.objectOf(PropTypes.any),
   easyEmiConfig: PropTypes.objectOf(PropTypes.any),
-  cartSummary: PropTypes.objectOf(PropTypes.any).isRequired
+  cartSummary: PropTypes.objectOf(PropTypes.any).isRequired,
+  submitting: PropTypes.bool
 };
 
 export default connect(

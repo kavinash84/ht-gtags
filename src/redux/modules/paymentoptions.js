@@ -32,6 +32,7 @@ const SET_CARD_TYPE_FAIL = 'paymentOptions/SET_CARD_TYPE_FAIL';
 const SET_CARD_COMPANY = 'paymentOption/SET_CARD_COMPANY';
 
 const RESET_EASY_EMI = 'paymentOption/RESET_EASY_EMI';
+const SUBMIT_PAYMENT_DETAILS_EASY_EMI = 'paymentOptions/SUBMIT_PAYMENT_DETAILS_EASY_EMI';
 
 const paymentJSON = {
   session_id: '',
@@ -409,7 +410,14 @@ export default function reducer(state = initialState, action = {}) {
         easyEmiProcessing: false,
         easyEmiProcessed: false,
         easyEmiProcessError: null,
-        easyEmiProcessResponse: null
+        easyEmiProcessResponse: null,
+        paymentMethodDetails: {
+          ...state.paymentMethodDetails,
+          EasyEmi: {
+            ...state.paymentMethodDetails.EasyEmi,
+            easyemi_otp_code: ''
+          }
+        }
       };
     default:
       return state;
@@ -471,19 +479,32 @@ export const setValidationError = () => ({
   type: SET_VALIDATION_ERROR
 });
 
-export const submitPaymentDetails = (sessionId, data, cardType) => ({
-  types: [SUBMIT_PAYMENT_DETAILS, SUBMIT_PAYMENT_DETAILS_SUCCESS, SUBMIT_PAYMENT_DETAILS_FAIL],
-  promise: async ({ client }) => {
-    try {
-      const postData = paymentObject(sessionId, Object.keys(data)[0], Object.values(data)[0], cardType);
-      const response = await client.post('tesla/orders', postData);
-      return response;
-    } catch (error) {
-      throw error;
-    }
-  },
-  data
+const submitPaymentDetailsEasyEmi = (sessionId, data, cardType) => ({
+  type: SUBMIT_PAYMENT_DETAILS_EASY_EMI,
+  sessionId,
+  data,
+  cardType
 });
+
+export const submitPaymentDetails = (sessionId, data, cardType, success) => {
+  if (data && 'EasyEmi' in data && (!success || success === undefined)) {
+    return submitPaymentDetailsEasyEmi(sessionId, data, cardType);
+  }
+  return {
+    types: [SUBMIT_PAYMENT_DETAILS, SUBMIT_PAYMENT_DETAILS_SUCCESS, SUBMIT_PAYMENT_DETAILS_FAIL],
+    promise: async ({ client }) => {
+      try {
+        const postData = paymentObject(sessionId, Object.keys(data)[0], Object.values(data)[0], cardType);
+        const response = await client.post('tesla/orders', postData);
+        return response;
+      } catch (error) {
+        throw error;
+      }
+    },
+    data,
+    cardType
+  };
+};
 
 export const verifyEasyEmi = (data, session) => ({
   types: [SUBMIT_EASY_EMI_PAYMENT_VERIFY, SUBMIT_EASY_EMI_PAYMENT_VERIFY_SUCCESS, SUBMIT_EASY_EMI_PAYMENT_VERIFY_FAIL],
@@ -497,7 +518,7 @@ export const verifyEasyEmi = (data, session) => ({
   }
 });
 
-export const processEasyEmi = (data, session, gateway, processingFees) => ({
+export const processEasyEmi = (data, session, gateway, processingFees, cardType) => ({
   types: [
     SUBMIT_EASY_EMI_PAYMENT_PROCESS,
     SUBMIT_EASY_EMI_PAYMENT_PROCESS_SUCCESS,
@@ -513,7 +534,8 @@ export const processEasyEmi = (data, session, gateway, processingFees) => ({
   },
   data,
   gateway,
-  processingFees
+  processingFees,
+  cardType
 });
 
 export const resetEasyEmiState = () => ({
