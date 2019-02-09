@@ -14,7 +14,15 @@ import AddToCartCombined from '../AddToCartCombined';
 const styles = require('./Slider.scss');
 
 const ProductCarousel = ({
-  data, item, length, pt, pb, height, price, discountedPrice
+  data,
+  item,
+  length,
+  pt,
+  pb,
+  height,
+  price,
+  discountedPrice
+  // setDiscount
 }) => (
   <Section p="0" pt={pt} pb={pb} mt="0" mb="0" display="flex" className="prodCarousel">
     <Container pr="0" pl="0" className={styles.combinedProductsWrapper}>
@@ -62,10 +70,13 @@ const ProductCarousel = ({
             Total
             <br />
             <Span ml="0px" color="rgba(0,0,0,0.8)" fontSize="1.25rem">
-              {formatAmount(discountedPrice)}
+              {discountedPrice ? formatAmount(discountedPrice) : ''}
             </Span>
             <Span ml="10px" color="rgba(0,0,0,0.5)" fontSize="0.875rem">
-              <s>{formatAmount(price)}</s>
+              <s>{price ? formatAmount(price) : ''}</s>
+            </Span>
+            <Span ml="0px" color="rgba(0,0,0,0.8)" fontSize="0.875rem">
+              {/* setDiscount ? `Set Discount - ${formatAmount(setDiscount)}` : '' */}
             </Span>
           </Label>
           <Label mt="0" mb="0" va="bottom" ml="1rem">
@@ -94,7 +105,9 @@ ProductCarousel.defaultProps = {
   length: 3,
   pt: '0',
   pb: '0',
-  height: '245px'
+  height: '245px',
+  discountedPrice: 0
+  // setDiscount: 0
 };
 
 ProductCarousel.propTypes = {
@@ -105,7 +118,8 @@ ProductCarousel.propTypes = {
   pb: PropTypes.string,
   height: PropTypes.string,
   price: PropTypes.number.isRequired,
-  discountedPrice: PropTypes.number.isRequired
+  discountedPrice: PropTypes.number
+  // setDiscount: PropTypes.number
 };
 
 export default ProductCarousel;

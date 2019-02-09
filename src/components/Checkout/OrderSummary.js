@@ -40,14 +40,6 @@ const OrderSummary = ({
           Rs. {itemsTotal ? formatAmount(itemsTotal) : null}
         </Span>
       </Text>
-      {setDiscount > 0 && (
-        <Text color="#6e6e6e">
-          Set Discount
-          <Span float="right" color={Theme.colors.text}>
-            Rs. {` -${formatAmount(Number(setDiscount))}`}
-          </Span>
-        </Text>
-      )}
       <Text color="#6e6e6e">
         Savings
         <Span float="right" color={Theme.colors.text}>
@@ -64,7 +56,15 @@ const OrderSummary = ({
         <Text color="#6e6e6e">
           Discount
           <Span float="right" color={Theme.colors.text}>
-            Rs. {` -${formatAmount(Number(discount))}`}
+            Rs. {` ${formatAmount(Number(discount))}`}
+          </Span>
+        </Text>
+      )}
+      {setDiscount > 0 && (
+        <Text color="#6e6e6e">
+          Set Discount
+          <Span float="right" color={Theme.colors.text}>
+            Rs. {` ${formatAmount(Number(setDiscount))}`}
           </Span>
         </Text>
       )}
