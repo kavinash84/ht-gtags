@@ -149,6 +149,7 @@ PaymentSuccess.defaultProps = {
     sub_total_amount: 0,
     shipping_charges: 0,
     discount_coupon_value: 0,
+    set_discount: 0,
     net_order_amount: 0,
     cart_products: []
   },
@@ -172,6 +173,7 @@ PaymentSuccess.propTypes = {
     sub_total_amount: PropTypes.number,
     shipping_charges: PropTypes.number,
     discount_coupon_value: PropTypes.number,
+    set_discount: PropTypes.number,
     net_order_amount: PropTypes.number
   }),
   loaded: PropTypes.bool,
