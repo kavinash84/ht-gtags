@@ -14,7 +14,7 @@ import AddToCartCombined from '../AddToCartCombined';
 const styles = require('./Slider.scss');
 
 const ProductCarousel = ({
-  data, item, length, pt, pb, height, price, discountedPrice
+  data, item, length, pt, pb, height, price, discountedPrice, setDiscount
 }) => (
   <Section p="0" pt={pt} pb={pb} mt="0" mb="0" display="flex" className="prodCarousel">
     <Container pr="0" pl="0" className={styles.combinedProductsWrapper}>
@@ -54,18 +54,36 @@ const ProductCarousel = ({
                 </Span>
               </Label>
               <Label mb="0" color="black" fontSize="1rem" ml="1rem" mr="1rem">
-                {index < data.length - 1 ? '+' : '='}
+                {index < data.length - 1 ? '+' : ''}
               </Label>
             </Fragment>
           ))}
+          {setDiscount && setDiscount > 0 ? (
+            <Fragment>
+              <Label mb="0" color="black" fontSize="1rem" ml="1rem" mr="1rem">
+                {'-'}
+              </Label>
+              <Label mb="0" color="textExtraLight">
+                {'Set Discount'} <br />
+                <Span fontSize="1.125rem" mt="5px" display="block" color="rgba(0,0,0,0.8)">
+                  {formatAmount(setDiscount)}
+                </Span>
+              </Label>
+              <Label mb="0" color="black" fontSize="1rem" ml="1rem" mr="1rem">
+                {'='}
+              </Label>
+            </Fragment>
+          ) : (
+            '='
+          )}
           <Label mb="0" mr="1rem" fontSize="1.25rem" color="textExtraLight">
             Total
             <br />
             <Span ml="0px" color="rgba(0,0,0,0.8)" fontSize="1.25rem">
-              {formatAmount(discountedPrice)}
+              {discountedPrice ? formatAmount(discountedPrice) : ''}
             </Span>
             <Span ml="10px" color="rgba(0,0,0,0.5)" fontSize="0.875rem">
-              <s>{formatAmount(price)}</s>
+              <s>{price ? formatAmount(price) : ''}</s>
             </Span>
           </Label>
           <Label mt="0" mb="0" va="bottom" ml="1rem">
@@ -94,7 +112,9 @@ ProductCarousel.defaultProps = {
   length: 3,
   pt: '0',
   pb: '0',
-  height: '245px'
+  height: '245px',
+  discountedPrice: 0,
+  setDiscount: 0
 };
 
 ProductCarousel.propTypes = {
@@ -105,7 +125,8 @@ ProductCarousel.propTypes = {
   pb: PropTypes.string,
   height: PropTypes.string,
   price: PropTypes.number.isRequired,
-  discountedPrice: PropTypes.number.isRequired
+  discountedPrice: PropTypes.number,
+  setDiscount: PropTypes.number
 };
 
 export default ProductCarousel;

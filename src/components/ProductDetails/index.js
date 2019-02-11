@@ -424,6 +424,7 @@ class ProductDetails extends React.Component {
                   data={getProductsList(item.products || [])}
                   length={item.products.length}
                   price={item.total_price}
+                  setDiscount={item.discount}
                   discountedPrice={item.total_price_after_discount}
                   handleCombinedBuy={() => this.handleCombinedBuy(item, pincode, session)}
                 />
