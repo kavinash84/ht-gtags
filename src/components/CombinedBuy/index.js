@@ -54,10 +54,28 @@ const ProductCarousel = ({
                 </Span>
               </Label>
               <Label mb="0" color="black" fontSize="1rem" ml="1rem" mr="1rem">
-                {index < data.length - 1 ? '+' : '='}
+                {index < data.length - 1 ? '+' : ''}
               </Label>
             </Fragment>
           ))}
+          {setDiscount && setDiscount > 0 ? (
+            <Fragment>
+              <Label mb="0" color="black" fontSize="1rem" ml="1rem" mr="1rem">
+                {'-'}
+              </Label>
+              <Label mb="0" color="textExtraLight">
+                {'Set Discount'} <br />
+                <Span fontSize="1.125rem" mt="5px" display="block" color="rgba(0,0,0,0.8)">
+                  {formatAmount(setDiscount)}
+                </Span>
+              </Label>
+              <Label mb="0" color="black" fontSize="1rem" ml="1rem" mr="1rem">
+                {'='}
+              </Label>
+            </Fragment>
+          ) : (
+            '='
+          )}
           <Label mb="0" mr="1rem" fontSize="1.25rem" color="textExtraLight">
             Total
             <br />
@@ -66,9 +84,6 @@ const ProductCarousel = ({
             </Span>
             <Span ml="10px" color="rgba(0,0,0,0.5)" fontSize="0.875rem">
               <s>{price ? formatAmount(price) : ''}</s>
-            </Span>
-            <Span ml="0px" color="rgba(0,0,0,0.8)" fontSize="0.875rem">
-              {setDiscount ? `Set Discount - ${formatAmount(setDiscount)}` : ''}
             </Span>
           </Label>
           <Label mt="0" mb="0" va="bottom" ml="1rem">

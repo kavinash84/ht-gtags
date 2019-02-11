@@ -26,7 +26,8 @@ const PaymentSuccess = ({
     sub_total_amount,
     shipping_charges,
     discount_coupon_value,
-    net_order_amount
+    net_order_amount,
+    set_discount
   },
   loaded,
   error
@@ -112,6 +113,13 @@ const PaymentSuccess = ({
                     <Div className={styles.totalAmountRow}>
                       Discount / Coupon Value : Rs. <b>{formatAmount(discount_coupon_value)}</b>
                     </Div>
+                    {set_discount ? (
+                      <Div className={styles.totalAmountRow}>
+                        Set Discount : Rs. <b>{formatAmount(Math.abs(set_discount))}</b>
+                      </Div>
+                    ) : (
+                      ''
+                    )}
                     <Div className={styles.totalAmountRow}>
                       Net Order Amount : Rs. <b>{formatAmount(net_order_amount)}</b>
                     </Div>
