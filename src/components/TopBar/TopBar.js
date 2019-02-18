@@ -77,9 +77,6 @@ export default class MenuSidebar extends Component {
   };
   onClosePincodeModal = () => {
     this.setState({ openPincode: false });
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
   };
   onOpenLoginModal = () => {
     this.setState({ openLogin: true });
