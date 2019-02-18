@@ -474,11 +474,24 @@ export default function gaMiddleware() {
         }
       }
       if (type === 'signUp/SIGNUP_SUCCESS') {
+        const {
+          result: { origin }
+        } = action;
         const signUpEvent = {
           event: 'event register',
           category: 'New User Sign Up',
           action: 'Register',
-          label: 'Success'
+          label: origin
+        };
+        window.dataLayer.push(signUpEvent);
+      }
+      if (type === 'checkout/SEND_DELIVERY_ADDRESS_SUCCESS') {
+        const origin = 'Guest Sign up';
+        const signUpEvent = {
+          event: 'event register',
+          category: 'New User Sign Up',
+          action: 'Register',
+          label: origin
         };
         window.dataLayer.push(signUpEvent);
       }
