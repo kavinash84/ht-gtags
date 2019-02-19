@@ -482,6 +482,16 @@ export default function gaMiddleware() {
         };
         window.dataLayer.push(signUpEvent);
       }
+      if (type === 'cart/ADD_TO_CART_COMBINED_SUCCESS') {
+        const {
+          result: { uniqueSetName }
+        } = action;
+        const addToCarCombinedEvent = {
+          event: 'Combo_offer',
+          Combo_Offer: uniqueSetName
+        };
+        window.dataLayer.push(addToCarCombinedEvent);
+      }
     }
     return next(action);
   };
