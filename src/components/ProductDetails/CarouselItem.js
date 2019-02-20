@@ -7,7 +7,7 @@ import ImageShimmer from 'hometown-components/lib/ImageShimmer';
 const getLowResolution = url => url.replace('.jpg', '-product_500.jpg');
 
 const CategoryItem = ({ image, name }) => (
-  <ImageShimmer src={image} height="545px">
+  <ImageShimmer src={image} height="545px" overflow="hidden">
     {(imageURL, error) => {
       if (error) return <Img alt={name} src={imageURL} height="545px" />;
       return (
