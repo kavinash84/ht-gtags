@@ -82,7 +82,9 @@ const PaymentSuccess = ({
                           <th colSpan="2">Product</th>
                           <th>Delivery</th>
                           <th width="100px">Quantity</th>
-                          <th align="right">Cost</th>
+                          <th width="150px" align="right">
+                            Cost
+                          </th>
                         </tr>
                         {cart_products.map((product, index) => (
                           <tr key={String(index)}>
