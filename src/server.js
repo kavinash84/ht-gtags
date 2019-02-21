@@ -101,11 +101,8 @@ app.use('/dist/service-worker.js', (req, res, next) => {
 });
 
 app.use('/dist/dlls/:dllName.js', (req, res, next) => {
-  fs.access(
-    path.join(__dirname, '..', 'static', 'dist', 'dlls', `${req.params.dllName}.js`),
-    fs.constants.R_OK,
-    err => (err ? res.send(`console.log('No dll file found (${req.originalUrl})')`) : next())
-  );
+  fs.access(path.join(__dirname, '..', 'static', 'dist', 'dlls', `${req.params.dllName}.js`), fs.constants.R_OK, err =>
+    err ? res.send(`console.log('No dll file found (${req.originalUrl})')`) : next());
 });
 
 app.use(express.static(path.join(__dirname, '..', 'static')));
@@ -237,10 +234,29 @@ app.use(async (req, res) => {
   };
 
   let preloadedState;
+  const { pwa_mobile: pwaMobile } = req.query;
   try {
     preloadedState = await getStoredState(persistConfig);
+    if (preloadedState === undefined) {
+      preloadedState = {
+        app: {
+          pwaMobile
+        }
+      };
+    }
+    preloadedState = {
+      ...preloadedState,
+      app: {
+        ...preloadedState.app,
+        pwaMobile
+      }
+    };
   } catch (e) {
-    preloadedState = {};
+    preloadedState = {
+      app: {
+        pwaMobile
+      }
+    };
   }
 
   const store = createStore({
@@ -275,7 +291,7 @@ app.use(async (req, res) => {
       <StyleSheetManager sheet={sheet.instance}>
         <Loadable.Capture report={moduleName => modules.push(moduleName)}>
           <Provider store={store} {...providers}>
-            <ConnectedRouter history={history}>
+            <ConnectedRouter history={history} forceRefresh>
               <ReduxAsyncConnect routes={routes} store={store} helpers={providers}>
                 {renderRoutes(routes)}
               </ReduxAsyncConnect>
