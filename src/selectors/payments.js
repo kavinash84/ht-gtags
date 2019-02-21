@@ -16,6 +16,12 @@ export const getPaymentConfig =
     options => options.paymentOSCConfig
   ) || {};
 
+export const getMethodPaymentGateways =
+  createSelector(
+    [getPaymentState],
+    options => options.methodPaymentGateways
+  ) || {};
+
 export const getPaymentConfigNew =
   createSelector(
     [getPaymentState],
@@ -23,12 +29,12 @@ export const getPaymentConfigNew =
   ) || {};
 
 export const getPaymentOptions = createSelector(
-  [getPaymentConfig, allowedOptions],
-  (options, allowed) => {
+  [getPaymentConfig, allowedOptions, getMethodPaymentGateways],
+  (options, allowed, gateways) => {
     if (options) {
       return allowed
         .map(allow => ({ paymentType: allow, ...options[allow] }))
-        .filter(payOption => payOption.isEnable === true);
+        .filter(payOption => payOption.isEnable === true && gateways[payOption.paymentType]);
     }
     return [];
   }
