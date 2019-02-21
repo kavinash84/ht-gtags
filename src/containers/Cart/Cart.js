@@ -62,7 +62,8 @@ export default class CartContainer extends Component {
   state = {
     openPincode: false
   };
-  componentWillMount() {
+
+  componentDidMount() {
     window.scroll(0, 0);
   }
   componentWillReceiveProps(nextProps) {
@@ -106,8 +107,7 @@ export default class CartContainer extends Component {
           {!loading && (results && results.length !== 0) ? (
             <div>
               <TitleBar title="Shopping Cart" />
-              {outOfStockList &&
-                outOfStockList.length > 0 && (
+              {outOfStockList && outOfStockList.length > 0 && (
                 <Notifications
                   msg="One or more items in your cart are out of stock. Please remove to continue"
                   type="error"

@@ -222,6 +222,7 @@ const ReviewOrder = ({
             <Div col="3">
               <OrderSummary
                 itemsTotal={summary.items}
+                setDiscount={summary.combined_set_discount}
                 savings={summary.savings}
                 shipping={summary.shipping_charges}
                 totalCart={summary.total}

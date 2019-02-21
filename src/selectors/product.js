@@ -8,6 +8,8 @@ export const groupedAttributes = createSelector([productDescription], attributes
 
 export const meta = createSelector([productDescription], attributes => attributes.meta);
 
+export const simples = createSelector([productDescription], attributes => attributes.simples);
+
 export const categoryDetails = createSelector([meta], list => list.category_data || null);
 
 export const category = createSelector([meta], list => list.category_details.slice(-1)[0] || []);
@@ -23,3 +25,5 @@ export const getBreadCrumbs = state => {
     return breadcrumbs;
   }
 };
+
+export const getSimpleSku = createSelector([simples], x => Object.keys(x)[0]);

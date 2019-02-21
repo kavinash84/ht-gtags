@@ -14,6 +14,7 @@ const styles = require('./OrderSummary.scss');
 const OrderSummary = ({
   itemsTotal,
   savings,
+  setDiscount,
   shipping,
   totalCart,
   onClick,
@@ -55,7 +56,15 @@ const OrderSummary = ({
         <Text color="#6e6e6e">
           Discount
           <Span float="right" color={Theme.colors.text}>
-            Rs. {` -${formatAmount(Number(discount))}`}
+            Rs. {` ${formatAmount(Number(discount))}`}
+          </Span>
+        </Text>
+      )}
+      {setDiscount > 0 && (
+        <Text color="#6e6e6e">
+          Combo Discount
+          <Span float="right" color={Theme.colors.text}>
+            Rs. {` ${formatAmount(Number(setDiscount))}`}
           </Span>
         </Text>
       )}
@@ -100,12 +109,14 @@ OrderSummary.defaultProps = {
   disabled: false,
   discount: 0,
   btnText: 'Place Order',
-  hidecoupon: false
+  hidecoupon: false,
+  setDiscount: 0
 };
 
 OrderSummary.propTypes = {
   itemsTotal: PropTypes.number.isRequired,
   savings: PropTypes.number.isRequired,
+  setDiscount: PropTypes.number,
   shipping: PropTypes.number.isRequired,
   totalCart: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired,

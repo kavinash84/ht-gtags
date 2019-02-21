@@ -30,6 +30,7 @@ export const PRODUCT_DELIVERY_DETAILS = 'tesla/product/delivery-detail';
 export const RELATED_PRODUCTS = 'tesla/product/related-products';
 export const RECENTLY_VEIWED = 'tesla/recently-viewed';
 export const EMI_OPTIONS = 'tesla/bank-emi';
+export const COMBINED_BUY = 'tesla/product/combined-set-products';
 /* Category Page */
 
 export const CATEGORY_PAGE = 'tesla/categories';
@@ -39,6 +40,7 @@ export const WISHLIST = 'tesla/wishlist';
 
 /* Cart */
 export const ADDTOCART = 'tesla/cart';
+export const ADDTOCARTCOMBINED = 'tesla/cart/combined-set-products';
 export const SYNCCART = 'tesla/cart/sync';
 export const CHECKCART = 'tesla/checkout';
 export const CUSTOMER_REGISTRATION = 'tesla/checkout/customer-registration';

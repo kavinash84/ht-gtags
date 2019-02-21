@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import serialize from 'serialize-javascript';
 import Helmet from 'react-helmet';
@@ -81,18 +81,20 @@ export default class Html extends Component {
           {assets.styles && Object.keys(assets.styles).length === 0 ? (
             <style dangerouslySetInnerHTML={{ __html: '#content{display:none}' }} />
           ) : null}
-          <script dangerouslySetInnerHTML={{ __html: newRelic }} />
+          {process.env.NODE_ENV !== 'development' && <script dangerouslySetInnerHTML={{ __html: newRelic }} />}
         </head>
         <body>
-          <noscript>
-            <iframe
-              src="https://www.googletagmanager.com/ns.html?id=GTM-T5VV7MZ"
-              height="0"
-              width="0"
-              style={{ display: 'none', visibility: 'hidden' }}
-              title="gaTag"
-            />
-          </noscript>
+          {process.env.NODE_ENV !== 'development' && (
+            <noscript>
+              <iframe
+                src="https://www.googletagmanager.com/ns.html?id=GTM-T5VV7MZ"
+                height="0"
+                width="0"
+                style={{ display: 'none', visibility: 'hidden' }}
+                title="gaTag"
+              />
+            </noscript>
+          )}
           <div id="content" dangerouslySetInnerHTML={{ __html: content }} />
           {store && (
             <script
@@ -109,16 +111,18 @@ export default class Html extends Component {
             <script dangerouslySetInnerHTML={{ __html: 'document.getElementById("content").style.display="block";' }} />
           ) : null}
           <Helmet>
-            <script src="https://cdn.ravenjs.com/3.24.0/raven.min.js" crossOrigin="anonymous" />
             {process.env.NODE_ENV !== 'development' ? (
-              <script>
-                {`
-                Raven.config('https://e072a281afc44732a8976d0615f0e310@sentry.io/1254610', {
-                release: '${version.replace(/\./g, '-')}',
-                environment: 'production',
-                }).install()
-              `}
-              </script>
+              <Fragment>
+                <script src="https://cdn.ravenjs.com/3.24.0/raven.min.js" crossOrigin="anonymous" />
+                <script>
+                  {`
+                  Raven.config('https://e072a281afc44732a8976d0615f0e310@sentry.io/1254610', {
+                  release: '${version.replace(/\./g, '-')}',
+                  environment: 'production',
+                  }).install()
+                `}
+                </script>
+              </Fragment>
             ) : null}
           </Helmet>
         </body>

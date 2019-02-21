@@ -34,6 +34,7 @@ import axios from 'axios';
 import getCookie from 'utils/cookies';
 import { redirectionHelper } from 'utils/helper';
 import { PAYMENT_SUCCESS, PAYMENT_FAILURE } from 'helpers/Constants';
+import useragent from 'express-useragent';
 
 const WHITELIST_TO_REDIRECT = new Set([
   'localhost',
@@ -101,11 +102,8 @@ app.use('/dist/service-worker.js', (req, res, next) => {
 });
 
 app.use('/dist/dlls/:dllName.js', (req, res, next) => {
-  fs.access(
-    path.join(__dirname, '..', 'static', 'dist', 'dlls', `${req.params.dllName}.js`),
-    fs.constants.R_OK,
-    err => (err ? res.send(`console.log('No dll file found (${req.originalUrl})')`) : next())
-  );
+  fs.access(path.join(__dirname, '..', 'static', 'dist', 'dlls', `${req.params.dllName}.js`), fs.constants.R_OK, err =>
+    err ? res.send(`console.log('No dll file found (${req.originalUrl})')`) : next());
 });
 
 app.use(express.static(path.join(__dirname, '..', 'static')));
@@ -139,6 +137,17 @@ app.use('/checkout/finish/payment/', async (req, res) => {
     const cookies = getCookie(req.header('cookie'), 'persist:root');
     const session = JSON.parse(JSON.parse(cookies).app).sessionId;
     const data = req.body;
+    const source = req.headers['user-agent'];
+    let ua = { isMobile: false };
+    if (source) {
+      ua = useragent.parse(source);
+    }
+    let additionalParam = {};
+    if (ua.isMobile) {
+      additionalParam = {
+        ismsite: 1
+      };
+    }
     const options = {
       url: process.env.PAYMENT_URL,
       method: 'POST',
@@ -146,7 +155,10 @@ app.use('/checkout/finish/payment/', async (req, res) => {
         Cookie: `PHPSESSID=${session}; path=/; domain=.hometown.in`,
         ContentType: 'application/x-www-form-urlencoded'
       },
-      data: qs.stringify(data)
+      data: qs.stringify({
+        ...data,
+        ...additionalParam
+      })
     };
     const response = await axios(options);
     if (response && response.data && response.data.status === 'success') return res.redirect(PAYMENT_SUCCESS);
@@ -223,6 +235,7 @@ app.use(async (req, res) => {
     client: apiClient(req)
   };
   const history = createMemoryHistory({ initialEntries: [req.originalUrl] });
+
   const cookieJar = new NodeCookiesWrapper(new Cookies(req, res));
 
   const persistConfig = {
@@ -237,14 +250,47 @@ app.use(async (req, res) => {
   };
 
   let preloadedState;
+  let pwaMobile = false;
+  if (req.query) {
+    const { pwa_mobile: isPwaMobile } = req.query;
+    pwaMobile = isPwaMobile !== undefined && isPwaMobile;
+  }
   try {
     preloadedState = await getStoredState(persistConfig);
+    if (preloadedState === undefined) {
+      preloadedState = {
+        app: {
+          pwaMobile
+        }
+      };
+    }
+    if (preloadedState && preloadedState.app) {
+      preloadedState = {
+        ...preloadedState,
+        app: {
+          ...preloadedState.app,
+          pwaMobile
+        }
+      };
+    } else {
+      preloadedState = {
+        ...preloadedState,
+        app: {
+          pwaMobile
+        }
+      };
+    }
   } catch (e) {
-    preloadedState = {};
+    preloadedState = {
+      app: {
+        pwaMobile
+      }
+    };
   }
 
+  const historyToPush = history;
   const store = createStore({
-    history,
+    historyToPush,
     helpers: providers,
     data: preloadedState
   });
@@ -265,8 +311,8 @@ app.use(async (req, res) => {
       store,
       match,
       params,
-      history,
-      location: history.location
+      historyToPush,
+      location: historyToPush.location
     });
     const sheet = new ServerStyleSheet();
     const modules = [];
@@ -275,7 +321,7 @@ app.use(async (req, res) => {
       <StyleSheetManager sheet={sheet.instance}>
         <Loadable.Capture report={moduleName => modules.push(moduleName)}>
           <Provider store={store} {...providers}>
-            <ConnectedRouter history={history}>
+            <ConnectedRouter history={historyToPush} forceRefresh>
               <ReduxAsyncConnect routes={routes} store={store} helpers={providers}>
                 {renderRoutes(routes)}
               </ReduxAsyncConnect>
