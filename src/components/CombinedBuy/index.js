@@ -50,7 +50,9 @@ const ProductCarousel = ({
               <Label mb="0" color="textExtraLight">
                 {`${index + 1} Item`} <br />
                 <Span fontSize="1.125rem" mt="5px" display="block" color="rgba(0,0,0,0.8)">
-                  {skuItem.meta.max_special_price || skuItem.meta.max_price || skuItem.meta.max_original_price || ''}
+                  {skuItem.meta.max_special_price
+                    ? formatAmount(skuItem.meta.max_special_price)
+                    : formatAmount(skuItem.meta.max_price)}
                 </Span>
               </Label>
               <Label mb="0" color="black" fontSize="1rem" ml="1rem" mr="1rem">
@@ -64,7 +66,7 @@ const ProductCarousel = ({
                 {'-'}
               </Label>
               <Label mb="0" color="textExtraLight">
-                {'Set Discount'} <br />
+                {'Combo Discount'} <br />
                 <Span fontSize="1.125rem" mt="5px" display="block" color="rgba(0,0,0,0.8)">
                   {formatAmount(setDiscount)}
                 </Span>

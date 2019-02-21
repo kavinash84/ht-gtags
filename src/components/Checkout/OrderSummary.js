@@ -62,7 +62,7 @@ const OrderSummary = ({
       )}
       {setDiscount > 0 && (
         <Text color="#6e6e6e">
-          Set Discount
+          Combo Discount
           <Span float="right" color={Theme.colors.text}>
             Rs. {` ${formatAmount(Number(setDiscount))}`}
           </Span>

@@ -235,6 +235,7 @@ app.use(async (req, res) => {
     client: apiClient(req)
   };
   const history = createMemoryHistory({ initialEntries: [req.originalUrl] });
+
   const cookieJar = new NodeCookiesWrapper(new Cookies(req, res));
 
   const persistConfig = {
@@ -249,14 +250,34 @@ app.use(async (req, res) => {
   };
 
   let preloadedState;
+  const { pwa_mobile: pwaMobile } = req.query;
   try {
     preloadedState = await getStoredState(persistConfig);
+    if (preloadedState === undefined) {
+      preloadedState = {
+        app: {
+          pwaMobile
+        }
+      };
+    }
+    preloadedState = {
+      ...preloadedState,
+      app: {
+        ...preloadedState.app,
+        pwaMobile
+      }
+    };
   } catch (e) {
-    preloadedState = {};
+    preloadedState = {
+      app: {
+        pwaMobile
+      }
+    };
   }
 
+  const historyToPush = history;
   const store = createStore({
-    history,
+    historyToPush,
     helpers: providers,
     data: preloadedState
   });
@@ -277,8 +298,8 @@ app.use(async (req, res) => {
       store,
       match,
       params,
-      history,
-      location: history.location
+      historyToPush,
+      location: historyToPush.location
     });
     const sheet = new ServerStyleSheet();
     const modules = [];
@@ -287,7 +308,7 @@ app.use(async (req, res) => {
       <StyleSheetManager sheet={sheet.instance}>
         <Loadable.Capture report={moduleName => modules.push(moduleName)}>
           <Provider store={store} {...providers}>
-            <ConnectedRouter history={history}>
+            <ConnectedRouter history={historyToPush} forceRefresh>
               <ReduxAsyncConnect routes={routes} store={store} helpers={providers}>
                 {renderRoutes(routes)}
               </ReduxAsyncConnect>

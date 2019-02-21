@@ -85,6 +85,11 @@ export default class SignupFormContainer extends Component {
   };
   onSubmitSignup = e => {
     e.preventDefault();
+    const {
+      target: { action }
+    } = e;
+    const isRedirect = action ? action.indexOf('redirect') !== -1 : false;
+    const signupOrigin = isRedirect ? 'Top Nav' : 'Pop-up';
     const { email, password, phone } = this.state;
     const checkEmail = !validateEmail(email);
     const checkPhone = phone ? !validateMobile(phone) : false;
@@ -98,7 +103,7 @@ export default class SignupFormContainer extends Component {
     }
     const { dispatch } = this.context.store;
     const { session } = this.props;
-    dispatch(signUp(this.state, session));
+    dispatch(signUp(this.state, session, signupOrigin));
   };
   render() {
     const styles = require('./index.scss');
@@ -149,7 +154,8 @@ export default class SignupFormContainer extends Component {
               <Row display="block" mt="0" mr="0" ml="0">
                 <Div col="12" ta="center">
                   <Heading color="#000" mt="0" mb="0" fontWeight="400" fontSize="2rem" ta="center" fontFamily="light">
-                    Sign up now<br />
+                    Sign up now
+                    <br />
                     and get Rs. 500 off*
                   </Heading>
                   <Text color="#676767" ta="center" fontSize="1rem" mt="0">

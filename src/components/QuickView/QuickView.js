@@ -203,34 +203,30 @@ export default class QuickView extends Component {
                 <Span color={Theme.colors.primary} fontFamily="medium" fontSize="1.325rem" mr="0.625rem">
                   ₹ {(discPrice && formatAmount(discPrice)) || (price && formatAmount(price))}
                 </Span>
-                {price !== discPrice &&
-                  discPrice && (
+                {price !== discPrice && discPrice && (
                   <Span fontFamily="regular" color="rgba(0, 0, 0, 0.6)" fontSize="0.875rem">
                     <s>₹ {formatAmount(price)}</s>
                   </Span>
                 )}
               </Text>
-              {saving &&
-                saving > 0 && (
+              {saving && saving > 0 && (
                 <Text color="rgba(0, 0, 0, 0.6)" fontFamily="medium" fontSize="0.857rem" mb="0.3125rem" mt="0">
-                    Savings:{' '}
+                  Savings:{' '}
                   <Span color="rgba(0, 0, 0, 0.6)" fontSize="0.857rem" va="bottom">
-                      ₹
-                    {` ${formatAmount(calculateSavings(price, discPrice))}`} ({calculateDiscount(price, discPrice)}
-                      %)
+                    ₹{` ${formatAmount(calculateSavings(price, discPrice))}`} ({calculateDiscount(price, discPrice)}
+                    %)
                   </Span>
                 </Text>
               )}
-              {deliveredBy &&
-                deliveredBy.indexOf('out') === -1 && (
+              {deliveredBy && deliveredBy.indexOf('out') === -1 && (
                 <Text
-                  color={deliveredBy.indexOf('Sorry') === -1 ? 'green' : 'red'}
+                  color={deliveredBy.indexOf('Currently') === -1 ? 'green' : 'red'}
                   fontFamily="700"
                   fontSize="0.857rem"
                   mt="0.3125rem"
                   mb="1.5rem"
                 >
-                  {deliveredBy.indexOf('Sorry') === 0 ? (
+                  {deliveredBy.indexOf('Currently') === 0 ? (
                     <Img width="initial" height="1.5em" mr="0.625rem" float="left" src={calendarImageRed} />
                   ) : (
                     <Img width="initial" height="1.5em" mr="0.625rem" float="left" src={calendarImageGreen} />

@@ -53,7 +53,7 @@ export function isLoaded(globalState) {
   return globalState.signup && globalState.signup.loaded;
 }
 
-export const signUp = (data, session) => ({
+export const signUp = (data, session, signupOrigin) => ({
   types: [SIGNUP, SIGNUP_SUCCESS, SIGNUP_FAIL],
   promise: async ({ client }) => {
     try {
@@ -65,6 +65,7 @@ export const signUp = (data, session) => ({
       };
       const response = await client.post(SIGNUP_API, postData);
       await setToken({ client })(response);
+      response.origin = signupOrigin || 'unknown';
       return response;
     } catch (error) {
       throw error;

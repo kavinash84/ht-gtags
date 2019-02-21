@@ -117,7 +117,7 @@ const PaymentSuccess = ({
                     </Div>
                     {set_discount ? (
                       <Div className={styles.totalAmountRow}>
-                        Set Discount : Rs. <b>{formatAmount(Math.abs(set_discount))}</b>
+                        Combo Discount : Rs. <b>{formatAmount(Math.abs(set_discount))}</b>
                       </Div>
                     ) : (
                       ''

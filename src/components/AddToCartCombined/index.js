@@ -34,9 +34,9 @@ const CheckedIcon = require('../../../static/added-to-cart-icon.png');
 
 const onClick = (item, session, pincode) => dispatcher => e => {
   e.preventDefault();
-  const { id_catalog_buildyourset: setId, skus } = item;
+  const { id_catalog_buildyourset: setId, skus, unique_set_name: uniqueSetName = 'unknown' } = item;
   const simpleSKUS = skus.map(val => ({ simple_sku: val.sku, qty: Number(val.qty) }));
-  dispatcher(setId, simpleSKUS, session, pincode);
+  dispatcher(setId, simpleSKUS, session, pincode, uniqueSetName);
 };
 
 const mapStateToProps = ({

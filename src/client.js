@@ -45,13 +45,27 @@ const providers = { app: {}, restApp: {}, client };
   /* setting cookie for phpstorm debug */
   cookie.set('XDEBUG_SESSION', 'PHPSTORM');
 
-  const history = createBrowserHistory();
+  // merge state
+  const mergedState = {
+    ...preloadedState,
+    ...window.__data
+  };
+
+  const { app } = preloadedState;
+  let isPwaMobile = false;
+  if (app) {
+    const { pwaMobile } = app;
+    isPwaMobile = pwaMobile === undefined ? false : pwaMobile;
+  }
+  const history = createBrowserHistory({
+    basename: '/',
+    forceRefresh: isPwaMobile
+  });
 
   const store = createStore({
     history,
     data: {
-      ...preloadedState,
-      ...window.__data,
+      ...mergedState,
       online
     },
     helpers: providers,

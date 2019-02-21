@@ -276,7 +276,7 @@ export const addToCart = (key, sku, simpleSku, session, pincode) => dispatch => 
   });
 };
 
-export const addToCartCombined = (setId, skus, sessionId, pincode) => dispatch => {
+export const addToCartCombined = (setId, skus, sessionId, pincode, uniqueSetName) => dispatch => {
   dispatch(setCurrentKey(setId));
   return dispatch({
     types: [ADD_TO_CART_COMBINED, ADD_TO_CART_COMBINED_SUCCESS, ADD_TO_CART_COMBINED_FAIL],
@@ -289,6 +289,7 @@ export const addToCartCombined = (setId, skus, sessionId, pincode) => dispatch =
           pincode
         };
         const response = await client.post(ADDTOCARTCOMBINED_API, postData);
+        response.uniqueSetName = uniqueSetName;
         return response;
       } catch (error) {
         throw error;
