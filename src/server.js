@@ -250,7 +250,11 @@ app.use(async (req, res) => {
   };
 
   let preloadedState;
-  const { pwa_mobile: pwaMobile } = req.query;
+  let pwaMobile = false;
+  if (req.query) {
+    const { pwa_mobile: isPwaMobile } = req.query;
+    pwaMobile = isPwaMobile !== undefined && isPwaMobile;
+  }
   try {
     preloadedState = await getStoredState(persistConfig);
     if (preloadedState === undefined) {
@@ -260,13 +264,22 @@ app.use(async (req, res) => {
         }
       };
     }
-    preloadedState = {
-      ...preloadedState,
-      app: {
-        ...preloadedState.app,
-        pwaMobile
-      }
-    };
+    if (preloadedState && preloadedState.app) {
+      preloadedState = {
+        ...preloadedState,
+        app: {
+          ...preloadedState.app,
+          pwaMobile
+        }
+      };
+    } else {
+      preloadedState = {
+        ...preloadedState,
+        app: {
+          pwaMobile
+        }
+      };
+    }
   } catch (e) {
     preloadedState = {
       app: {

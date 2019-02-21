@@ -51,12 +51,14 @@ const providers = { app: {}, restApp: {}, client };
     ...window.__data
   };
 
-  const { app } = preloadedState;
+  let appState = {};
   let isPwaMobile = false;
-  if (app) {
-    const { pwaMobile } = app;
-    isPwaMobile = pwaMobile === undefined ? false : pwaMobile;
+  if (preloadedState && preloadedState.app) {
+    const { app: appSt } = preloadedState;
+    appState = appSt;
   }
+  const { pwaMobile } = appState;
+  isPwaMobile = pwaMobile !== undefined && pwaMobile;
   const history = createBrowserHistory({
     basename: '/',
     forceRefresh: isPwaMobile
