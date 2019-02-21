@@ -163,49 +163,52 @@ export default class App extends Component {
     return (
       <ThemeProvider theme={Theme}>
         <div className={styles.app}>
-          <Helmet {...config.app.head}>
-            <script type="text/javascript">
-              {`
-                  var dataLayer = [];
-                  (function(w, d, s, l, i) {
-                      w[l] = w[l] || [];
-                      w[l].push({
-                          'gtm.start': new Date().getTime(),
-                          event: 'gtm.js'
+          <Helmet {...config.app.head} />
+          {process.env.NODE_ENV !== 'development' && (
+            <Helmet {...config.app.head}>
+              <script type="text/javascript">
+                {`
+                    var dataLayer = [];
+                    (function(w, d, s, l, i) {
+                        w[l] = w[l] || [];
+                        w[l].push({
+                            'gtm.start': new Date().getTime(),
+                            event: 'gtm.js'
+                        });
+                        var f = d.getElementsByTagName(s)[0],
+                            j = d.createElement(s),
+                            dl = l != 'dataLayer' ? '&l=' + l : '';
+                        j.async = true;
+                        j.src =
+                            'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+                        f.parentNode.insertBefore(j, f);
+                    })(window, document, 'script', 'dataLayer', 'GTM-T5VV7MZ');
+                  `}
+              </script>
+              <script type="text/javascript">
+                {`
+                  var google_tag_params={
+                      ecomm_pagetype: '',
+                      ecomm_prodid: [],
+                      ecomm_totalvalue: '',
+                    };
+                  `}
+              </script>
+              <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async="" />
+              <script>
+                {`
+                  var OneSignal = window.OneSignal || [];
+                    OneSignal.push(function() {
+                      OneSignal.init({
+                        appId: "b2f22db2-b562-4530-8888-516550bfbe6d",
                       });
-                      var f = d.getElementsByTagName(s)[0],
-                          j = d.createElement(s),
-                          dl = l != 'dataLayer' ? '&l=' + l : '';
-                      j.async = true;
-                      j.src =
-                          'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-                      f.parentNode.insertBefore(j, f);
-                  })(window, document, 'script', 'dataLayer', 'GTM-T5VV7MZ');
-                `}
-            </script>
-            <script type="text/javascript">
-              {`
-                var google_tag_params={
-                    ecomm_pagetype: '',
-                    ecomm_prodid: [],
-                    ecomm_totalvalue: '',
-                  };
-                `}
-            </script>
-            <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async="" />
-            <script>
-              {`
-                var OneSignal = window.OneSignal || [];
-                  OneSignal.push(function() {
-                    OneSignal.init({
-                      appId: "b2f22db2-b562-4530-8888-516550bfbe6d",
                     });
-                  });
-              `}
-            </script>
-            <link rel="alternate" media="only screen and (max-width:640px)" href={`https://m.hometown.in${pathname}`} />
-            <link rel="canonical" href={`${SITE_URL}${pathname}`} />
-          </Helmet>
+                `}
+              </script>
+            </Helmet>
+          )}
+          <link rel="alternate" media="only screen and (max-width:640px)" href={`https://m.hometown.in${pathname}`} />
+          <link rel="canonical" href={`${SITE_URL}${pathname}`} />
           <main className={styles.appContent}>
             <div className="container">
               <Notifs namespace="global" NotifComponent={props => <Alert {...props} show={notifs.global.length} />} />

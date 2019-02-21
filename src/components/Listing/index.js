@@ -318,4 +318,7 @@ Listing.propTypes = {
   selectedPincode: PropTypes.string.isRequired
 };
 
-export default connect(null, mapDispatchToProps)(Listing);
+export default connect(
+  null,
+  mapDispatchToProps
+)(Listing);

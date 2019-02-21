@@ -114,7 +114,7 @@ const Cart = ({
                         Delivery Details
                       </Text>
                       <Text
-                        color={item.product_info.delivery_time_text.indexOf('Sorry') === -1 ? 'green' : 'red'}
+                        color={item.product_info.delivery_time_text.indexOf('Currently') === -1 ? 'green' : 'red'}
                         fontSize="0.875rem"
                         mt="0"
                       >
@@ -222,6 +222,7 @@ const Cart = ({
               <OrderSummary
                 itemsTotal={summary.items}
                 savings={summary.savings}
+                setDiscount={summary.combined_set_discount}
                 shipping={summary.shipping_charges}
                 totalCart={summary.total}
                 loadingnextstep={checkingCart}

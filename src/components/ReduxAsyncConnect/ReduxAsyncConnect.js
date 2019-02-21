@@ -11,7 +11,9 @@ export default class ReduxAsyncConnect extends Component {
     children: PropTypes.node.isRequired,
     history: PropTypes.objectOf(PropTypes.any).isRequired,
     location: PropTypes.objectOf(PropTypes.any).isRequired,
-    store: PropTypes.object.isRequired
+    store: PropTypes.object.isRequired,
+    routes: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)).isRequired,
+    helpers: PropTypes.objectOf(PropTypes.any).isRequired
   };
 
   state = {

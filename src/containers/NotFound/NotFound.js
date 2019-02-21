@@ -38,7 +38,7 @@ class NotFound extends Component {
         <MenuFooter pageTitle="404 - Not Found">
           <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
             <Empty
-              title="Sorry no results found"
+              title="Sorry! No Results Found"
               subTitle="Please check the Spelling or by a different search"
               btnName="Go Back Home"
               url="/"

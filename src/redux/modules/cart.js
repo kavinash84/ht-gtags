@@ -1,4 +1,9 @@
-import { ADDTOCART as ADDTOCART_API, SYNCCART as SYNCCART_API, CHECKCART as CHECKCART_API } from 'helpers/apiUrls';
+import {
+  ADDTOCARTCOMBINED as ADDTOCARTCOMBINED_API,
+  ADDTOCART as ADDTOCART_API,
+  SYNCCART as SYNCCART_API,
+  CHECKCART as CHECKCART_API
+} from 'helpers/apiUrls';
 import { PINCODE } from '../../helpers/Constants';
 
 const LOAD_CART = 'cart/LOAD_CART';
@@ -7,6 +12,9 @@ const LOAD_CART_FAIL = 'cart/LOAD_CART_FAIL';
 const ADD_TO_CART = 'cart/ADD_TO_CART';
 const ADD_TO_CART_SUCCESS = 'cart/ADD_TO_CART_SUCCESS';
 const ADD_TO_CART_FAIL = 'cart/ADD_TO_CART_FAIL';
+const ADD_TO_CART_COMBINED = 'cart/ADD_TO_CART_COMBINED';
+const ADD_TO_CART_COMBINED_SUCCESS = 'cart/ADD_TO_CART_COMBINED_SUCCESS';
+const ADD_TO_CART_COMBINED_FAIL = 'cart/ADD_TO_CART_COMBINED_FAIL';
 const UPDATE_CART = 'cart/UPDATE_CART';
 const UPDATE_CART_SUCCESS = 'cart/UPDATE_CART_SUCCESS';
 const UPDATE_CART_FAIL = 'cart/UPDATE_CART_FAIL';
@@ -81,6 +89,28 @@ export default function reducer(state = initialState, action = {}) {
         summary: action.result && 'cart' in action.result ? action.result.cart.summary : {}
       };
     case ADD_TO_CART_FAIL:
+      return {
+        ...state,
+        addingToCart: false,
+        addedToCart: false,
+        error: action.error
+      };
+    case ADD_TO_CART_COMBINED:
+      return {
+        ...state,
+        addingToCart: true,
+        addedToCart: false
+      };
+    case ADD_TO_CART_COMBINED_SUCCESS:
+      return {
+        ...state,
+        addingToCart: false,
+        addedToCart: true,
+        couponlistToggle: false,
+        data: action.result && 'cart' in action.result ? action.result.cart : [],
+        summary: action.result && 'cart' in action.result ? action.result.summary : {}
+      };
+    case ADD_TO_CART_COMBINED_FAIL:
       return {
         ...state,
         addingToCart: false,
@@ -238,6 +268,28 @@ export const addToCart = (key, sku, simpleSku, session, pincode) => dispatch => 
           qty: 1
         };
         const response = await client.post(ADDTOCART_API, postData);
+        return response;
+      } catch (error) {
+        throw error;
+      }
+    }
+  });
+};
+
+export const addToCartCombined = (setId, skus, sessionId, pincode, uniqueSetName) => dispatch => {
+  dispatch(setCurrentKey(setId));
+  return dispatch({
+    types: [ADD_TO_CART_COMBINED, ADD_TO_CART_COMBINED_SUCCESS, ADD_TO_CART_COMBINED_FAIL],
+    promise: async ({ client }) => {
+      try {
+        const postData = {
+          set_id: setId,
+          skus,
+          session_id: sessionId,
+          pincode
+        };
+        const response = await client.post(ADDTOCARTCOMBINED_API, postData);
+        response.uniqueSetName = uniqueSetName;
         return response;
       } catch (error) {
         throw error;

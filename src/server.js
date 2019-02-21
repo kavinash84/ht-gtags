@@ -34,6 +34,7 @@ import axios from 'axios';
 import getCookie from 'utils/cookies';
 import { redirectionHelper } from 'utils/helper';
 import { PAYMENT_SUCCESS, PAYMENT_FAILURE } from 'helpers/Constants';
+import useragent from 'express-useragent';
 
 const WHITELIST_TO_REDIRECT = new Set([
   'localhost',
@@ -136,6 +137,17 @@ app.use('/checkout/finish/payment/', async (req, res) => {
     const cookies = getCookie(req.header('cookie'), 'persist:root');
     const session = JSON.parse(JSON.parse(cookies).app).sessionId;
     const data = req.body;
+    const source = req.headers['user-agent'];
+    let ua = { isMobile: false };
+    if (source) {
+      ua = useragent.parse(source);
+    }
+    let additionalParam = {};
+    if (ua.isMobile) {
+      additionalParam = {
+        ismsite: 1
+      };
+    }
     const options = {
       url: process.env.PAYMENT_URL,
       method: 'POST',
@@ -143,7 +155,10 @@ app.use('/checkout/finish/payment/', async (req, res) => {
         Cookie: `PHPSESSID=${session}; path=/; domain=.hometown.in`,
         ContentType: 'application/x-www-form-urlencoded'
       },
-      data: qs.stringify(data)
+      data: qs.stringify({
+        ...data,
+        ...additionalParam
+      })
     };
     const response = await axios(options);
     if (response && response.data && response.data.status === 'success') return res.redirect(PAYMENT_SUCCESS);
