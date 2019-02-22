@@ -128,7 +128,7 @@ class Footer extends React.Component {
                 )}
               </Div>
               <Div col="3">
-                <HeadingH4 color="footerHeading" fontFamily="regular" fontSize="1rem" mt="0">
+                <HeadingH4 color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="0">
                   CONTACT US
                 </HeadingH4>
                 <ul>
@@ -141,7 +141,7 @@ class Footer extends React.Component {
                 </ul>
               </Div>
               <Div col="3">
-                <HeadingH4 color="footerHeading" fontFamily="regular" fontSize="1em" mt="0">
+                <HeadingH4 color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="0">
                   FOLLOW US
                 </HeadingH4>
                 <ul className={styles.socials}>
@@ -186,7 +186,7 @@ class Footer extends React.Component {
                 menu.children &&
                   menu.visibility === 'on' && (
                   <Div key={menu.name} display="flexEqual">
-                    <HeadingH4 color="footerHeading" fontFamily="regular" fontSize="1rem" mt="1rem" pb="2px">
+                    <HeadingH4 color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
                       {menu.name}
                     </HeadingH4>
                     <ul>
@@ -207,7 +207,7 @@ class Footer extends React.Component {
             </Row>
             <Row m="0" flexWrap="nowrap">
               <Div display="flexEqual" col="2">
-                <HeadingH4 color="footerHeading" fontFamily="regular" fontSize="1rem" mt="1rem" pb="2px">
+                <HeadingH4 color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
                   ABOUT US
                 </HeadingH4>
                 <ul>
@@ -225,7 +225,7 @@ class Footer extends React.Component {
                 </ul>
               </Div>
               <Div display="flexEqual" col="2">
-                <HeadingH4 color="footerHeading" fontFamily="regular" fontSize="1rem" mt="1rem" pb="2px">
+                <HeadingH4 color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
                   CUSTOMER SERVICE
                 </HeadingH4>
                 <ul>
@@ -250,7 +250,7 @@ class Footer extends React.Component {
                 </ul>
               </Div>
               <Div display="flexEqual" col="2">
-                <HeadingH4 color="footerHeading" fontFamily="regular" fontSize="1rem" mt="1rem" pb="2px">
+                <HeadingH4 color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
                   USEFUL LINKS
                 </HeadingH4>
                 <ul>
@@ -265,7 +265,7 @@ class Footer extends React.Component {
                 </ul>
               </Div>
               <Div display="flexEqual" col="3">
-                <HeadingH4 color="footerHeading" fontFamily="regular" fontSize="1rem" mt="1rem" pb="2px">
+                <HeadingH4 color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
                   OUR APP
                 </HeadingH4>
                 <a
@@ -277,7 +277,7 @@ class Footer extends React.Component {
                 </a>
               </Div>
               <Div display="flexEqual" col="3">
-                <HeadingH4 color="footerHeading" fontFamily="regular" fontSize="1rem" mt="1rem" pb="2px">
+                <HeadingH4 color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
                   PAYMENT METHODS
                 </HeadingH4>
                 <Row ml="0" mr="0" className={styles.paymentWrapper}>
