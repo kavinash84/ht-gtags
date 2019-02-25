@@ -250,14 +250,16 @@ export const titleCase = str => {
 };
 export const urlKeyResults = results => {
   if (results && typeof results === 'object' && results.constructor === Object) return [];
-  const searchResults = results.filter(result => result.url_key !== '').map(x => {
-    const { url_key: urlKey } = x;
-    if (urlKey.indexOf('/') !== 0) return x;
-    return {
-      ...x,
-      url_key: urlKey.slice(1)
-    };
-  });
+  const searchResults = results
+    .filter(result => result.url_key !== '')
+    .map(x => {
+      const { url_key: urlKey } = x;
+      if (urlKey.indexOf('/') !== 0) return x;
+      return {
+        ...x,
+        url_key: urlKey.slice(1)
+      };
+    });
   return searchResults;
 };
 
@@ -337,10 +339,10 @@ export const redirectionHelper = url => {
   return '';
 };
 
-export const getVideoID = url => {
-  if (url.indexOf('youtube') >= 1 || url.indexOf('youtu') >= 1) {
-    const [, id] = url.split('?v=');
-    return id;
-  }
-  return url;
-};
+// export const getVideoID = url => {
+//   if (url.indexOf('youtube') >= 1 || url.indexOf('youtu') >= 1) {
+//     const [, id] = url.split('?v=');
+//     return id;
+//   }
+// };
+export const getVideoID = url => url;
