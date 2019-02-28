@@ -496,14 +496,52 @@ export default function gaMiddleware() {
         window.dataLayer.push(signUpEvent);
       }
       if (type === 'cart/ADD_TO_CART_COMBINED_SUCCESS') {
+        console.log('check');
+        // single push
         const {
           result: { uniqueSetName }
         } = action;
-        const addToCarCombinedEvent = {
-          event: 'Combo_offer',
-          Combo_Offer: uniqueSetName
-        };
-        window.dataLayer.push(addToCarCombinedEvent);
+        const {
+          summary: { total }
+        } = action.result;
+        const items = action.result && action.result.cart ? action.result.cart : [];
+        const products = [];
+        items.forEach(item => {
+          const {
+            name, net_price: netprice, color, brand, category_details: categoryDetails
+          } = item.product_info;
+          const category = categoryDetails ? categoryDetails.join('/') : null;
+          const event = {
+            name,
+            price: netprice,
+            variant: color,
+            brand,
+            category,
+            list: 'Listing',
+            id: item.configurable_sku,
+            quantity: item.qty
+          };
+          products.push(event);
+        });
+        window.dataLayer.push(
+          {
+            event: 'Combo_offer',
+            Combo_Offer: uniqueSetName
+          },
+          {
+            event: 'addToCart',
+            ecommerce: {
+              currencyCode: 'INR',
+              add: {
+                products
+              }
+            }
+          },
+          {
+            event: 'cart change',
+            cart_total: total
+          }
+        );
       }
     }
     return next(action);
