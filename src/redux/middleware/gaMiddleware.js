@@ -496,8 +496,6 @@ export default function gaMiddleware() {
         window.dataLayer.push(signUpEvent);
       }
       if (type === 'cart/ADD_TO_CART_COMBINED_SUCCESS') {
-        console.log('check');
-        // single push
         const {
           result: { uniqueSetName }
         } = action;
