@@ -126,6 +126,7 @@ export default function userMiddleware() {
           msg:
               (action.error.error_message === 'invalid_grant' && 'Incorrect Email or Password') ||
               action.error.error_message ||
+              action.error.error_description ||
               SOME_ERROR,
           dismissAfter: 4000
         }));
