@@ -15,17 +15,22 @@ const NavBar = ({
   <div className={styles.navBar} onMouseLeave={handleLeave}>
     <Container pr="0" pl="0">
       <div className={styles.navBarSlider}>
-        {menuItems.filter(menu => menu.visibility === 'on' && menu.name !== 'Festive Gifts').map(menuItem => (
-          <Link
-            onClick={exitOnClick}
-            title={menuItem.name}
-            to={`/${menuItem.url_key}`}
-            key={menuItem.id}
-            onMouseEnter={handleEnter(menuItem.id)}
-          >
-            {menuItem.name}
-          </Link>
-        ))}
+        {menuItems
+          .filter(menu => {
+            console.log(menu);
+            return menu.visibility === 'on' && menu.name !== 'Festive Gifts' && menu.name !== 'Electronics';
+          })
+          .map(menuItem => (
+            <Link
+              onClick={exitOnClick}
+              title={menuItem.name}
+              to={`/${menuItem.url_key}`}
+              key={menuItem.id}
+              onMouseEnter={handleEnter(menuItem.id)}
+            >
+              {menuItem.name}
+            </Link>
+          ))}
         <a
           href={`${SITE_URL}/modular-kitchens`}
           title="Modular Kitchens"
@@ -68,8 +73,8 @@ const NavBar = ({
               </li>
               <li>
                 <Label htmlFor="checkbox" fontSize="0.75em" ml="0.625rem" className="dropdownValue">
-                  <Link onClick={exitOnClick} to="/gifts" onMouseEnter={handleEnter('')} title="Festive Gifts">
-                    Festive Gifts
+                  <Link onClick={exitOnClick} to="/electronics" onMouseEnter={handleEnter('')} title="Festive Gifts">
+                    Electronics
                   </Link>
                 </Label>
               </li>
@@ -89,7 +94,7 @@ const NavBar = ({
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Festive Catalogue
+                    Gifting Catalogue
                   </a>
                 </Label>
               </li>
