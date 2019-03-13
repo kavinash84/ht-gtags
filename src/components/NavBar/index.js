@@ -16,10 +16,7 @@ const NavBar = ({
     <Container pr="0" pl="0">
       <div className={styles.navBarSlider}>
         {menuItems
-          .filter(menu => {
-            console.log(menu);
-            return menu.visibility === 'on' && menu.name !== 'Festive Gifts' && menu.name !== 'Electronics';
-          })
+          .filter(menu => menu.visibility === 'on' && menu.name !== 'Festive Gifts' && menu.name !== 'Electronics')
           .map(menuItem => (
             <Link
               onClick={exitOnClick}
