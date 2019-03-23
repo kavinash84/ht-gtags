@@ -246,13 +246,13 @@ module.exports = {
       basePath: `dist/${version}`,
       // s3Options are required
       s3Options: {
-        accessKeyId: 'AKIAJOKALHUAXUWJF2SQ',
-        secretAccessKey: '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',
+        accessKeyId: 'AKIAIYG6XMY3GJOM6BKQ',
+        secretAccessKey: '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',
         region: 'ap-south-1',
         signatureVersion: 'v4'
       },
       s3UploadOptions: {
-        Bucket: 'hometown-preprod-v1',
+        Bucket: 'ht-beta',
         Expires: 86400
       }
     }),
