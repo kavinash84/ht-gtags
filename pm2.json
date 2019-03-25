@@ -32,7 +32,7 @@
         "NODE_PATH": "src",
         "APIHOST": "stage-api.hometown.in/api/",
         "APIPORT": 443,
-        "SITE_URL": "https://beta.hometown.in",
+        "SITE_URL": "https://stage.hometown.in",
         "PAYMENT_URL": "https://stage-alice.hometown.in/checkout/finish/payment/",
         "TZ": "Asia/Kolkata"
       }
