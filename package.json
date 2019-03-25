@@ -26,7 +26,7 @@
     "build": "cross-env NODE_ENV=production PAYMENT_URL=https://alice.hometown.in/checkout/finish/payment/ webpack --colors --display-error-details --config=webpack/prod.config.js",
     "start-beta": "cross-env NODE_PATH=src NODE_ENV=production PORT=8084 SITE_URL=https://beta.hometown.in APIHOST=beta-api.hometown.in/api/ APIPORT=443 PAYMENT_URL=https://beta-alice.hometown.in/checkout/finish/payment/ node ./bin/server.js",
     "build-beta": "cross-env NODE_ENV=production PAYMENT_URL=https://beta-alice.hometown.in/checkout/finish/payment/ webpack --colors --display-error-details --config=webpack/beta.config.js",
-    "start-stage": "cross-env NODE_PATH=src NODE_ENV=production PORT=8084 SITE_URL=https://beta.hometown.in APIHOST=stage-api.hometown.in/api/ APIPORT=443 PAYMENT_URL=https://stage-alice.hometown.in/checkout/finish/payment/ node ./bin/server.js",
+    "start-stage": "cross-env NODE_PATH=src NODE_ENV=production PORT=8084 SITE_URL=https://stage.hometown.in APIHOST=stage-api.hometown.in/api/ APIPORT=443 PAYMENT_URL=https://stage-alice.hometown.in/checkout/finish/payment/ node ./bin/server.js",
     "build-stage": "cross-env NODE_ENV=production PAYMENT_URL=https://stage-alice.hometown.in/checkout/finish/payment/ webpack --colors --display-error-details --config=webpack/stage.config.js",
     "dev": "concurrently --kill-others \"npm run watch-client\" \"npm run start-dev\"",
     "start-dev": "cross-env SITE_URL=localhost:3000 NODE_PATH=src NODE_ENV=development PORT=3000 APIHOST=stage-api.hometown.in/api/ APIPORT=443 PAYMENT_URL=https://stage-alice.hometown.in/checkout/finish/payment/ WEBPACK_DLLS=1 node ./bin/server.js",
