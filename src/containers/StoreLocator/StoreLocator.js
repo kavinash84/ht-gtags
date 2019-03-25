@@ -10,7 +10,7 @@ const mapStateToProps = ({ storelocator }) => ({
 
 const StoreLocator = ({ storelocator }) => (
   <MenuFooter
-    pageTitle="Store Locator"
+    pageTitle="Furniture Shop Near You: Locate Nearby HomeTown Furniture Stores"
     seoDescription="Visit HomeTown, a Homeware & Furniture store near you.
      Buy Furniture at sale prices at nearby HomeTown store.
       Get best discounts & offers on Home Decor, Home Furnishings,
