@@ -200,7 +200,7 @@ export default function gaMiddleware() {
                       category,
                       list: 'Listing',
                       id: product.configurable_sku,
-                      quantity: product.qty
+                      quantity: 1
                     }
                   ]
                 }
@@ -517,7 +517,7 @@ export default function gaMiddleware() {
             category,
             list: 'Listing',
             id: item.configurable_sku,
-            quantity: item.qty
+            quantity: 1
           };
           products.push(event);
         });
