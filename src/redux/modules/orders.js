@@ -35,7 +35,7 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-export const loadMyOrders = () => ({
+export const loadMyOrders = contactNumber => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-  promise: ({ client }) => client.get(MY_ORDERS_API)
+  promise: ({ client }) => client.get(`${MY_ORDERS_API}?contact=${contactNumber}`)
 });
