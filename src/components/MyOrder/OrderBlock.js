@@ -36,13 +36,15 @@ const OrderBlock = ({ order }) => (
             SHIPPING ADDRESS
           </Text>
           <Text mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
-            {`${order.customer_first_name} ${order.customer_last_name !== null ? order.customer_last_name : ''}`}
+            {`
+              ${order.s_customer_first_name || ''} 
+              ${order.s_customer_last_name !== null ? order.s_customer_last_name : ''}`}
             <br />
-            {order.s_address_1}
+            {order.s_address_1 || ''}
             <br />
-            {order.s_city}, {order.s_pincode}
+            {order.s_city || ''}, {order.s_pincode || ''}
             <br />
-            {order.s_region}
+            {order.s_region || ''}
             <br />
           </Text>
         </Div>
@@ -51,13 +53,15 @@ const OrderBlock = ({ order }) => (
             BILLING ADDRESS
           </Text>
           <Text mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
-            {`${order.customer_first_name} ${order.customer_last_name !== null ? order.customer_last_name : ''}`}
+            {`
+              ${order.b_customer_first_name || ''} 
+              ${order.b_customer_last_name !== null ? order.b_customer_last_name : ''}`}
             <br />
-            {order.b_address_1}
+            {order.b_address_1 || ''}
             <br />
-            {order.b_city}, {order.b_pincode}
+            {order.b_city || ''}, {order.b_pincode || ''}
             <br />
-            {order.b_region}
+            {order.b_region || ''}
             <br />
           </Text>
         </Div>
@@ -81,8 +85,8 @@ const OrderBlock = ({ order }) => (
                 {/* <th>Carrier</th>
                 <th>Tracking ID</th> */}
               </tr>
-              {order.order_items.map(item => (
-                <tr key={item.order_item_id}>
+              {order.order_items.map((item, i) => (
+                <tr key={String(i)}>
                   <td width="70px">
                     <ImageShimmer src={getImageURL(item.image, 'catalog_360')} height="60px">
                       {imageURL => <Img src={imageURL} alt={item.product_name} />}
