@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 const styles = require('./NavBar.scss');
 
-const { SITE_URL } = process.env;
+// const { SITE_URL } = process.env;
 
 const NavBar = ({
   menuItems, handleEnter, handleLeave, exitOnClick
@@ -28,15 +28,15 @@ const NavBar = ({
               {menuItem.name}
             </Link>
           ))}
-        <a
-          href={`${SITE_URL}/modular-kitchens`}
+        <Link
+          to="/modular-kitchens"
           title="Modular Kitchens"
           target="_blank"
           rel="noopener noreferrer"
           onClick={exitOnClick}
         >
           Modular Kitchens
-        </a>
+        </Link>
         <div className={`${styles.moreDropdownWrapper} dropdownWrapper`}>
           <Button
             btnType="custom"
@@ -57,15 +57,15 @@ const NavBar = ({
             <ul>
               <li>
                 <Label htmlFor="checkbox" fontSize="0.75em" ml="0.625rem" className="dropdownValue">
-                  <a
-                    href={`${SITE_URL}/design-build`}
+                  <Link
+                    to="/design-build"
                     title="Design & Build"
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={exitOnClick}
                   >
                     Design & Build
-                  </a>
+                  </Link>
                 </Label>
               </li>
               <li>
