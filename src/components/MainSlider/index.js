@@ -1,50 +1,38 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { triggerImpression, triggerClick } from 'redux/modules/analytics';
-import SliderItem from './SliderItem';
-import SlickSlider from '../SlickSlider';
+import Img from 'hometown-components/lib/Img';
 
-const settings = {
-  slidesToShow: 1,
-  slidesToScroll: 1
-};
-
-class MainSlider extends Component {
-  render() {
-    const {
-      data, triggerSlideChange, triggerSlideClick, reference, newSettings
-    } = this.props;
-    const finalSettings = { ...settings, ...newSettings };
+/* TO DO Add ProgressiveImage */
+const SliderItem = ({
+  title, image, url, onClick, target
+}) => {
+  if (target) {
     return (
-      <SlickSlider settings={finalSettings} afterChange={e => triggerSlideChange(e)} ref={reference}>
-        {data.map((slide, index) => (
-          <div key={String(index)}>
-            <SliderItem
-              image={slide.image}
-              url={slide.url_key}
-              title={slide.title || ''}
-              onClick={() => triggerSlideClick(index)}
-            />
-          </div>
-        ))}
-      </SlickSlider>
+      <a href={url} title={title} target={target} rel="noopener noreferrer" onClick={onClick}>
+        <Img src={image} alt={title} width="100%" />
+      </a>
     );
   }
-}
-
-MainSlider.defaultProps = {
-  data: [],
-  reference: null,
-  newSettings: {}
+  return (
+    <Link to={url} onClick={onClick}>
+      <Img src={image} alt={title} width="100%" />
+    </Link>
+  );
 };
 
-MainSlider.propTypes = {
-  data: PropTypes.array,
-  triggerSlideChange: PropTypes.func.isRequired,
-  triggerSlideClick: PropTypes.func.isRequired,
-  reference: PropTypes.object,
-  newSettings: PropTypes.object
+SliderItem.defaultProps = {
+  title: '',
+  image: '',
+  target: ''
 };
 
-export default connect(null, { triggerSlideChange: triggerImpression, triggerSlideClick: triggerClick })(MainSlider);
+SliderItem.propTypes = {
+  title: PropTypes.string,
+  image: PropTypes.string,
+  url: PropTypes.string.isRequired,
+  target: PropTypes.string,
+  onClick: PropTypes.func.isRequired
+};
+
+export default SliderItem;
