@@ -23,6 +23,8 @@ import { isEmpty } from 'utils/validation';
 // import { LOGIN_URL } from 'helpers/Constants';
 // import { signUp } from 'redux/modules/signUp';
 import { sendData } from 'redux/modules/cases';
+import categories from '../../data/case-category';
+import subCategories from '../../data/case-sub-category';
 // import { allowNChar, allowTypeOf } from 'utils/helper';
 // import CasesFilters from '../Filters/CasesFilters';
 const styles = require('./CasesForm.scss');
@@ -57,8 +59,22 @@ class CasesFormContainer extends Component {
       type: '', //eslint-disable-line
       category: '', //eslint-disable-line
       subCategory: '', //eslint-disable-line
-      open: false
+      open: false,
+      resetSubCategory: false
     };
+  }
+  componentWillReceiveProps(nextProps) {
+    const { loaded, loading } = nextProps.cases;
+    if (loaded && !loading) {
+      this.setState({
+        open: true,
+        subject: '',
+        description: '',
+        type: '',
+        category: '',
+        subCategory: ''
+      });
+    }
   }
   onChangeSubject = e => {
     const {
@@ -85,7 +101,8 @@ class CasesFormContainer extends Component {
       target: { value }
     } = e;
     this.setState({
-      type: value
+      type: value,
+      resetSubCategory: true
     });
   };
   onChangeCategory = e => {
@@ -93,7 +110,8 @@ class CasesFormContainer extends Component {
       target: { value }
     } = e;
     this.setState({
-      category: value
+      category: value,
+      resetSubCategory: false
     });
   };
   onChangeSubCategory = e => {
@@ -131,8 +149,35 @@ class CasesFormContainer extends Component {
     sendFormData(CASE_ORDER_API, data, 'ordercase');
     console.log(data);
   };
+  getCategoryOptions = () => {
+    const { type } = this.state;
+    const catList = type ? categories[type] : [];
+    const UI = catList.map((item, i) => (
+      <option value={item.value} key={String(i)}>
+        {item.label}
+      </option>
+    ));
+    return UI;
+  };
+  getSubCategoryOptions = () => {
+    const { category, resetSubCategory } = this.state;
+    const subCatList = category && !resetSubCategory ? subCategories[category] : [];
+    const UI = subCatList.map((item, i) => (
+      <option value={item.value} key={String(i)}>
+        {item.label}
+      </option>
+    ));
+    return UI;
+  };
   handleModal = () => {
+    //eslint-disable-line
     this.setState({ open: !this.state.open });
+  };
+  isDisabled = () => {
+    const {
+      subject, description, type, category, subCategory
+    } = this.state;
+    return !(subject && description && type && category && subCategory);
   };
   render() {
     const correctIcon = require('../../../static/correct.svg');
@@ -169,7 +214,7 @@ class CasesFormContainer extends Component {
                 <Row>
                   <Div col="6" pl="10px" pr="10px">
                     <FormInput
-                      label="Subject"
+                      label="Subject *"
                       type="text"
                       placeholder=""
                       onChange={this.onChangeSubject}
@@ -180,7 +225,7 @@ class CasesFormContainer extends Component {
                   </Div>
                   <Div col="6" pl="10px" pr="10px">
                     <FormInput
-                      label="Description"
+                      label="Description *"
                       type="text"
                       placeholder=""
                       onChange={this.onChangeDescription}
@@ -194,33 +239,39 @@ class CasesFormContainer extends Component {
                   <Div col="12" pl="10px" pr="10px">
                     <InputField mb="0.625rem">
                       <Label fontSize="0.875em" mb="0.625rem">
-                        Type
+                        Type *
                       </Label>
                       <select onChange={this.onChangeType} className="form-control" name="caseType">
-                        <option value="null">None</option>
-                        <option value="query">Query</option>
+                        <option value={null}>None</option>
+                        <option value="Query">Query</option>
+                        <option value="Complaint">Complaint</option>
+                        <option value="Request">Request</option>
                       </select>
                     </InputField>
                   </Div>
                   <Div col="12" pl="10px" pr="10px">
                     <InputField mb="0.625rem">
                       <Label fontSize="0.875em" mb="0.625rem">
-                        Category
+                        Category *
                       </Label>
                       <select onChange={this.onChangeCategory} className="form-control" name="caseCategory">
-                        <option value="null">None</option>
-                        <option value="lead">Lead</option>
+                        <option value={null} key="categories">
+                          None
+                        </option>
+                        {this.getCategoryOptions()}
                       </select>
                     </InputField>
                   </Div>
                   <Div col="12" pl="10px" pr="10px">
                     <InputField mb="0.625rem">
                       <Label fontSize="0.875em" mb="0.625rem">
-                        Sub Category
+                        Sub Category *
                       </Label>
                       <select onChange={this.onChangeSubCategory} className="form-control" name="caseSubCategory">
-                        <option value="null">None</option>
-                        <option value="hot">Hot</option>
+                        <option value={null} key="subcategories">
+                          None
+                        </option>
+                        {this.getSubCategoryOptions()}
                       </select>
                     </InputField>
                   </Div>
@@ -228,7 +279,14 @@ class CasesFormContainer extends Component {
                 <Row>
                   <Div col="6" pl="10px" pr="10px">
                     <div className="buttons-set">
-                      <Button onClick={this.onSubmitForm} btnType="primary" mt="0.625rem" title="Submit" type="submit">
+                      <Button
+                        disabled={this.isDisabled()}
+                        onClick={this.onSubmitForm}
+                        btnType="primary"
+                        mt="0.625rem"
+                        title="Submit"
+                        type="submit"
+                      >
                         Submit
                       </Button>
                     </div>
@@ -250,6 +308,13 @@ class CasesFormContainer extends Component {
     );
   }
 }
+
+CasesFormContainer.defaultProps = {
+  cases: {}
+};
+CasesFormContainer.propTypes = {
+  cases: PropTypes.object
+};
 export default connect(
   mapStateToProps,
   mapDispatchToProps

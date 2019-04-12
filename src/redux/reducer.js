@@ -25,6 +25,7 @@ import checkout from './modules/checkout';
 import colorproducts from './modules/colorproducts';
 import coupon from './modules/coupon';
 import myaddress from './modules/myaddress';
+import mycases from './modules/mycases';
 import relatedproducts from './modules/relatedproducts';
 import paymentstatus from './modules/paymentstatus';
 import recentlyviewed from './modules/recentlyviewed';
@@ -85,6 +86,7 @@ export default function createReducers(asyncReducers) {
     analytics,
     services,
     cases,
+    mycases,
     ...asyncReducers
   };
 }

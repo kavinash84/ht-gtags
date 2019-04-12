@@ -8,6 +8,7 @@ export const MY_ORDER_URL = '/my-orders';
 export const MY_PROFILE_URL = '/profile';
 export const MY_WISHLIST_URL = '/wishlist';
 export const MY_ADDRESS_URL = '/my-address';
+export const MY_CASES_URL = '/my-cases';
 export const FORGOT_PASSWORD_URL = '/forgot-password';
 
 export const PAYMENT_SUCCESS = '/payment-success';

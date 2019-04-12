@@ -6,7 +6,7 @@ import Div from 'hometown-components/lib/Div';
 import Heading from 'hometown-components/lib/Heading';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
-import { MY_ORDER_URL, MY_PROFILE_URL, MY_WISHLIST_URL, MY_ADDRESS_URL } from 'helpers/Constants';
+import { MY_ORDER_URL, MY_PROFILE_URL, MY_WISHLIST_URL, MY_ADDRESS_URL, MY_CASES_URL } from 'helpers/Constants';
 
 const styles = require('./MyMenu.scss');
 
@@ -19,7 +19,7 @@ const MyOrder = ({ page }) => (
         </Heading>
       </Row>
       <Row display="block" mr="0" ml="0">
-        <Div col="8">
+        <Div col="10">
           <Div col="2">
             <Link to={MY_ORDER_URL} className={`${styles.headerLink} ${page === 'order' ? styles.active : ''}`}>
               My Orders
@@ -38,6 +38,11 @@ const MyOrder = ({ page }) => (
           <Div col="2">
             <Link to={MY_ADDRESS_URL} className={`${styles.headerLink} ${page === 'address' ? styles.active : ''}`}>
               My Address
+            </Link>
+          </Div>
+          <Div col="2">
+            <Link to={MY_CASES_URL} className={`${styles.headerLink} ${page === 'cases' ? styles.active : ''}`}>
+              My Cases
             </Link>
           </Div>
           {/*  <Div col="2">

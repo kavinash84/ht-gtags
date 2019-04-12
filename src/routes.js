@@ -38,6 +38,7 @@ import ServiceSignUpContainer from 'components/ServiceSignUp';
 import Profile from 'containers/Profile';
 import MyOrder from 'containers/MyOrder';
 import MyAddress from 'containers/MyAddress';
+import MyCases from 'containers/MyCases';
 import Wishlist from 'containers/Wishlist';
 import TrackOrder from 'containers/TrackOrder';
 
@@ -94,6 +95,7 @@ const routes = [
       { path: '/checkout/cart', exact: true, component: Cart },
       { path: '/my-orders', exact: true, component: isAuthenticated(MyOrder) },
       { path: '/my-address', exact: true, component: isAuthenticated(MyAddress) },
+      { path: '/my-cases', exact: true, component: isAuthenticated(MyCases) },
       { path: '/profile', exact: true, component: isAuthenticated(Profile) },
       { path: '/:productname?/sku/:skuId', exact: true, component: ProductDetails },
       { path: '/checkout/delivery-address', exact: true, component: DeliveryAddress },

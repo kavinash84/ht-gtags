@@ -53,6 +53,7 @@ export const TRACK_ORDER = 'tesla/orders/track';
 /* Profile Details */
 export const MY_ORDERS = 'tesla/orders';
 export const MY_ADDRESS = 'tesla/users/address';
+export const MY_CASES = 'tesla/users/cases';
 
 /* Payments */
 export const PAYMENT_OPTIONS = 'tesla/payments';
