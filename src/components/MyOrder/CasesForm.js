@@ -30,20 +30,23 @@ import subCategories from '../../data/case-sub-category';
 const styles = require('./CasesForm.scss');
 
 const mapDispatchToProps = dispatch => bindActionCreators({ sendData }, dispatch);
-const mapStateToProps = ({ services }) => ({
-  serviceRequest: services.bulkorder || {}
+const mapStateToProps = ({ services, profile }) => ({
+  serviceRequest: services.bulkorder || {},
+  sfid: profile.data.salesforce_product_interest_id || ''
 });
 
 class CasesFormContainer extends Component {
   static propTypes = {
     sendData: PropTypes.func.isRequired,
     session: PropTypes.string.isRequired, //eslint-disable-line
-    loading: PropTypes.bool //eslint-disable-line
+    loading: PropTypes.bool, //eslint-disable-line
+    sfid: PropTypes.string
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
   static defaultProps = {
+    sfid: '',
     loading: false
   };
   constructor() {
@@ -128,7 +131,7 @@ class CasesFormContainer extends Component {
     const {
       subject, description, type, category, subCategory, origin
     } = this.state;
-    const { sendData: sendFormData } = this.props;
+    const { sendData: sendFormData, sfid } = this.props;
     const subjectError = isEmpty(subject);
     const descriptionError = isEmpty(description);
     if (subjectError || descriptionError) {
@@ -144,7 +147,8 @@ class CasesFormContainer extends Component {
       description,
       type,
       category,
-      sub_category: subCategory
+      sub_category: subCategory,
+      account_id: sfid
     };
     sendFormData(CASE_ORDER_API, data, 'ordercase');
     console.log(data);

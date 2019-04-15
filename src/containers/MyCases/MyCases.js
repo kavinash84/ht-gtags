@@ -5,8 +5,13 @@ import MenuFooter from 'containers/MenuFooter';
 import { loadMyCases } from 'redux/modules/mycases';
 
 const hooks = {
-  fetch: async ({ store: { dispatch } }) => {
-    await dispatch(loadMyCases());
+  fetch: async ({ store: { dispatch, getState } }) => {
+    const {
+      profile: {
+        data: { salesforce_product_interest_id: sfid }
+      }
+    } = getState();
+    await dispatch(loadMyCases(sfid));
   }
 };
 const MyCases = () => (
