@@ -132,15 +132,15 @@ export default function gaMiddleware() {
           } else {
             window.google_tag_params.ecomm_pagetype = 'category';
           }
-          const eventObject = {
-            event: 'impression',
-            ecommerce: {
-              currencyCode: 'INR',
-              impressions: []
-            }
-          };
-          const skus = [];
-          let totalValue = 0;
+          // const eventObject = {
+          //   event: 'impression',
+          //   ecommerce: {
+          //     currencyCode: 'INR',
+          //     impressions: []
+          //   }
+          // };
+          // const skus = [];
+          // let totalValue = 0;
           const checkKey = isKeyExists(data, 'metadata.category_details');
           const category = checkKey
             ? checkKey
@@ -148,28 +148,63 @@ export default function gaMiddleware() {
               .map(item => item.url_key)
               .join('/')
             : '';
-          eventObject.ecommerce.impressions = results.map((item, position) => {
-            const {
-              name, sku, price, brand, color, special_price: netprice
-            } = item.data;
-            skus.push(sku);
-            totalValue += parseInt(netprice, 10) || parseInt(price, 10);
-            return {
-              name,
-              price,
-              brand,
-              category,
-              position: position + 1,
-              id: sku,
-              variant: color,
-              list: location.pathname === '/search/' ? 'Search Result' : ' category listing page'
+          const PACKET_SIZE = 10;
+
+          for (let i = 0; i < results.length; i += PACKET_SIZE) {
+            const packet = results.slice(i, i + PACKET_SIZE);
+            const eventObject = {
+              event: 'impression',
+              ecommerce: {
+                currencyCode: 'INR',
+                impressions: []
+              }
             };
-          });
+            const skus = [];
+            let totalValue = 0;
+            eventObject.ecommerce.impressions = packet.map((item, position) => {
+              const {
+                name, sku, price, brand, color, special_price: netprice
+              } = item.data;
+              skus.push(sku);
+              totalValue += parseInt(netprice, 10) || parseInt(price, 10);
+              return {
+                name,
+                price,
+                brand,
+                category,
+                position: position + 1,
+                id: sku,
+                variant: color,
+                list: location.pathname === '/search/' ? 'Search Result' : ' category listing page'
+              };
+            });
+            window.google_tag_params.ecomm_prodid = skus;
+            window.google_tag_params.ecomm_totalvalue = String(totalValue);
+            window.dataLayer.push(eventObject);
+          }
 
-          window.google_tag_params.ecomm_prodid = skus;
-          window.google_tag_params.ecomm_totalvalue = String(totalValue);
+          // eventObject.ecommerce.impressions = results.map((item, position) => {
+          //   const {
+          //     name, sku, price, brand, color, special_price: netprice
+          //   } = item.data;
+          //   skus.push(sku);
+          //   totalValue += parseInt(netprice, 10) || parseInt(price, 10);
+          //   return {
+          //     name,
+          //     price,
+          //     brand,
+          //     category,
+          //     position: position + 1,
+          //     id: sku,
+          //     variant: color,
+          //     list: location.pathname === '/search/' ? 'Search Result' : ' category listing page'
+          //   };
+          // });
 
-          window.dataLayer.push(eventObject);
+          // window.google_tag_params.ecomm_prodid = skus;
+          // window.google_tag_params.ecomm_totalvalue = String(totalValue);
+
+          // window.dataLayer.push(eventObject);
         }
         /* Cart Tracking */
         if (type === 'cart/ADD_TO_CART_SUCCESS') {
