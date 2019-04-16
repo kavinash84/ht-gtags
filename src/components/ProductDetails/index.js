@@ -293,7 +293,9 @@ class ProductDetails extends React.Component {
                   <Row display="block" mt="0.3125rem" mb="0" mr="0.9375rem" ml="0.9375rem">
                     <ServiceDetails
                       deliverBy={
-                        (deliveryInfo && deliveryInfo[0].value) || (deliveryDetails[0] && deliveryDetails[0].value)
+                        (deliveryInfo && deliveryInfo[0].value) ||
+                        (deliveryDetails[0] && deliveryDetails[0].value) ||
+                        ''
                       }
                       emiStarting={formatAmount(calculateLowestEmi(emidata, price))}
                       shipping={checkSpecialPrice}
