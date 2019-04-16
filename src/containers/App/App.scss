@@ -884,6 +884,17 @@
 	.promotion {
 		margin: 2rem 0;
 	}
+	.react-datepicker-wrapper, .react-datepicker__input-container {
+		display: block !important;
+		input {
+			width: 100%;
+			height: 38px;
+			border-radius: 5px;
+			background-color: #FFF;
+			border: solid 1px rgba(151,151,151,0.47);
+			padding: 0 10px;
+		}
+	}
 }
 
 /* Wishlist Animation Key Frames */

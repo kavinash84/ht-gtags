@@ -12,6 +12,7 @@ import ResponsiveModal from 'components/Modal';
 import { formatAmount } from 'utils/formatters';
 import { getImageURL } from 'utils/helper';
 
+const PinIcon = require('../../../static/map-icon-white.svg');
 const styles = require('./MyOrder.scss');
 
 class OrderBlock extends Component {
@@ -27,22 +28,51 @@ class OrderBlock extends Component {
   render() {
     const { order } = this.props;
     return (
-      <Div mb="2.5rem">
-        <Row type="block" m="0" mb="1rem">
-          <Div col="4">
+      <Div mb="2.5rem" className={styles.blockWrapper}>
+        <Row type="block" m="0" mb="1rem" className={styles.blockHeading}>
+          <Div col="6" pt="5px">
             <Heading fontSize="1.25rem" color="textLight" mb="0px" mt="0px" fontFamily="light">
               Order No. {order.order_number}
             </Heading>
           </Div>
-          <Div col="8">
+          <Div col="6" ta="right">
             <Heading fontSize="1.25rem" color="textLight" mb="0px" mt="0px" fontFamily="light">
-              <Button fontSize="0.75rem" color="#3cc0dc" btnType="link" p="0" onClick={this.handleModal}>
+              <Button
+                fontSize="0.875rem"
+                color="#ae8873"
+                hoverColor="white"
+                bc="transparent"
+                btnType="primary"
+                p="5px 10px"
+                mr="10px"
+                onClick={this.handleModal}
+              >
+                <Img
+                  src={PinIcon}
+                  alt="Track"
+                  height="16px"
+                  position="relative"
+                  top="2px"
+                  mr="0.3125rem"
+                  float="left"
+                />
+                Track
+              </Button>
+              <Button
+                fontSize="0.875rem"
+                hoverColor="white"
+                color="rgba(0,0,0,0.5)"
+                bc="rgba(0,0,0,0.5)"
+                btnType="btnOutline"
+                p="5px 20px"
+                onClick={this.handleModal}
+              >
                 Help
               </Button>
             </Heading>
           </Div>
         </Row>
-        <Div className={styles.blockWrapper}>
+        <Div className={styles.blockBody}>
           <Row type="block" m="0" mb="0.5rem">
             <Div col="2">
               <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
