@@ -82,7 +82,6 @@ export const sendData = (API, data, formType) => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
   promise: async ({ client }) => {
     try {
-      console.log('debug');
       const response = await client.post(API, data);
       return response;
     } catch (error) {

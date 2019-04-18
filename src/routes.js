@@ -32,6 +32,7 @@ import BulkOrder from 'containers/BulkOrder';
 import ContactUs from 'containers/ContactUs';
 import Feedback from 'containers/Feedback';
 import ServiceRequest from 'containers/ServiceRequest';
+import CaseRequest from 'containers/CaseRequest';
 import ServiceSignUpContainer from 'components/ServiceSignUp';
 
 /* user */
@@ -114,6 +115,7 @@ const routes = [
       { path: '/contact-us', exact: true, component: ContactUs },
       { path: '/feedback', exact: true, component: Feedback },
       { path: '/service-request', exact: true, component: ServiceRequest },
+      { path: '/case-request', exact: true, component: CaseRequest },
       { path: '/grievance', exact: true, component: Grievance },
       { path: '/modular-kitchens', exact: true, component: ModularKitchen },
       { path: '/plan-your-kitchen', exact: true, component: PlanYourKitchen },

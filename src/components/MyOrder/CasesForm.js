@@ -151,7 +151,6 @@ class CasesFormContainer extends Component {
       account_id: sfid
     };
     sendFormData(CASE_ORDER_API, data, 'ordercase');
-    console.log(data);
   };
   getCategoryOptions = () => {
     const { type } = this.state;
