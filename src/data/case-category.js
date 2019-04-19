@@ -6,7 +6,7 @@ const caseCategories = {
     },
     {
       value: 'BILLING_ISSUE',
-      lable: 'BILLING ISSUE'
+      label: 'BILLING ISSUE'
     },
     {
       value: 'DAMAGED_MATERIAL_DELIVERED',

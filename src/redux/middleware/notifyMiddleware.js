@@ -261,7 +261,13 @@ export default function userMiddleware() {
           dismissAfter: 4000
         }));
         break;
-
+      case 'cases/LOAD_SUCCESS':
+        dispatch(notifSend({
+          type: 'success',
+          msg: 'Case Registered Successfully !',
+          dismissAfter: 4000
+        }));
+        break;
       default:
         break;
     }

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
+import Select from 'react-select';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 // import { withRouter } from 'react-router';
 import Button from 'hometown-components/lib/Buttons';
-import Img from 'hometown-components/lib/Img';
-import Text from 'hometown-components/lib/Text';
 import InputField from 'hometown-components/lib/InputField';
 // import SignupForm from 'hometown-components/lib/Forms/SignupForm';
 import FormInput from 'hometown-components/lib/Forms/FormInput';
@@ -14,7 +13,6 @@ import Heading from 'hometown-components/lib/Heading';
 import Div from 'hometown-components/lib/Div';
 import Theme from 'hometown-components/lib/Theme';
 import { Label } from 'hometown-components/lib/Label';
-import ResponsiveModal from 'components/Modal';
 import { CASE_ORDER as CASE_ORDER_API } from 'helpers/apiUrls';
 // import Img from 'hometown-components/lib/Img';
 // import ImageShimmer from 'hometown-components/lib/ImageShimmer';
@@ -30,8 +28,8 @@ import subCategories from '../../data/case-sub-category';
 const styles = require('./CasesForm.scss');
 
 const mapDispatchToProps = dispatch => bindActionCreators({ sendData }, dispatch);
-const mapStateToProps = ({ services, profile }) => ({
-  serviceRequest: services.bulkorder || {},
+const mapStateToProps = ({ cases, profile }) => ({
+  ordercase: cases.ordercase || {},
   sfid: profile.data.salesforce_product_interest_id || ''
 });
 
@@ -39,13 +37,15 @@ class CasesFormContainer extends Component {
   static propTypes = {
     sendData: PropTypes.func.isRequired,
     session: PropTypes.string.isRequired, //eslint-disable-line
-    loading: PropTypes.bool, //eslint-disable-line
-    sfid: PropTypes.string
+    loading: PropTypes.bool,
+    sfid: PropTypes.string,
+    ordercase: PropTypes.object
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
   static defaultProps = {
+    ordercase: {},
     sfid: '',
     loading: false
   };
@@ -59,23 +59,26 @@ class CasesFormContainer extends Component {
       description: '',
       descriptionError: '',
       descriptionErrorMessage: 'Description should Not Be Left Blank ',
-      type: '', //eslint-disable-line
-      category: '', //eslint-disable-line
-      subCategory: '', //eslint-disable-line
-      open: false,
-      resetSubCategory: false
+      type: { value: null, label: 'None' }, //eslint-disable-line
+      category: { value: null, label: 'None' }, //eslint-disable-line
+      subcategory: { value: null, label: 'None' } //eslint-disable-line
     };
+    this.TypeOptions = [
+      { value: null, label: 'None' },
+      { value: 'Query', label: 'Query' },
+      { value: 'Complaint', label: 'Complaint' },
+      { value: 'Request', label: 'Request' }
+    ];
   }
   componentWillReceiveProps(nextProps) {
-    const { loaded, loading } = nextProps.cases;
+    const { loaded, loading } = nextProps.ordercase;
     if (loaded && !loading) {
       this.setState({
-        open: true,
         subject: '',
         description: '',
         type: '',
         category: '',
-        subCategory: ''
+        subcategory: ''
       });
     }
   }
@@ -99,37 +102,46 @@ class CasesFormContainer extends Component {
       descriptionError: checkError
     });
   };
-  onChangeType = e => {
-    const {
-      target: { value }
-    } = e;
-    this.setState({
-      type: value,
-      resetSubCategory: true
-    });
+  onChangeType = type => {
+    this.setState(
+      {
+        type
+      },
+      () => {
+        this.resetDropDown({
+          category: { value: null, label: 'None' },
+          subcategory: { value: null, label: 'None' }
+        });
+      }
+    );
   };
-  onChangeCategory = e => {
-    const {
-      target: { value }
-    } = e;
-    this.setState({
-      category: value,
-      resetSubCategory: false
-    });
+  onChangeCategory = category => {
+    this.setState(
+      {
+        category
+      },
+      () => {
+        this.resetDropDown({
+          subcategory: { value: null, label: 'None' }
+        });
+      }
+    );
   };
-  onChangeSubCategory = e => {
-    const {
-      target: { value }
-    } = e;
+  onChangeSubCategory = subcategory => {
     this.setState({
-      subCategory: value
+      subcategory
     });
   };
   onSubmitForm = e => {
     e.preventDefault();
     // const { sendFormData } = this.props;
     const {
-      subject, description, type, category, subCategory, origin
+      subject,
+      description,
+      type: { value: type },
+      category: { value: category },
+      subcategory: { value: subCategory },
+      origin
     } = this.state;
     const { sendData: sendFormData, sfid } = this.props;
     const subjectError = isEmpty(subject);
@@ -153,37 +165,33 @@ class CasesFormContainer extends Component {
     sendFormData(CASE_ORDER_API, data, 'ordercase');
   };
   getCategoryOptions = () => {
-    const { type } = this.state;
-    const catList = type ? categories[type] : [];
-    const UI = catList.map((item, i) => (
-      <option value={item.value} key={String(i)}>
-        {item.label}
-      </option>
-    ));
-    return UI;
+    const {
+      type: { value }
+    } = this.state;
+    const catList = value ? categories[value] : [];
+    return catList;
   };
   getSubCategoryOptions = () => {
-    const { category, resetSubCategory } = this.state;
-    const subCatList = category && !resetSubCategory ? subCategories[category] : [];
-    const UI = subCatList.map((item, i) => (
-      <option value={item.value} key={String(i)}>
-        {item.label}
-      </option>
-    ));
-    return UI;
+    const {
+      category: { value }
+    } = this.state;
+    const subCatList = value ? subCategories[value] : [];
+    return subCatList;
   };
-  handleModal = () => {
-    //eslint-disable-line
-    this.setState({ open: !this.state.open });
+  resetDropDown = state => {
+    this.setState(state);
   };
   isDisabled = () => {
     const {
-      subject, description, type, category, subCategory
+      subject,
+      description,
+      type: { value: type },
+      category: { value: category },
+      subcategory: { value: subCategory }
     } = this.state;
     return !(subject && description && type && category && subCategory);
   };
   render() {
-    const correctIcon = require('../../../static/correct.svg');
     const stylesModal = require('./index.scss');
     const {
       subject,
@@ -191,10 +199,9 @@ class CasesFormContainer extends Component {
       subjectErrorMessage,
       description,
       descriptionError,
-      descriptionErrorMessage,
-      open
+      descriptionErrorMessage
     } = this.state;
-    // const { loading } = this.props;
+    const { loading } = this.props;
     return (
       <div className={stylesModal.signupWrapper}>
         <Row display="block" mr="0" ml="0">
@@ -240,29 +247,27 @@ class CasesFormContainer extends Component {
                 </Row>
                 <Row>
                   <Div col="12" pl="10px" pr="10px">
-                    <InputField mb="0.625rem">
-                      <Label fontSize="0.875em" mb="0.625rem">
-                        Type *
-                      </Label>
-                      <select onChange={this.onChangeType} className="form-control" name="caseType">
-                        <option value={null}>None</option>
-                        <option value="Query">Query</option>
-                        <option value="Complaint">Complaint</option>
-                        <option value="Request">Request</option>
-                      </select>
-                    </InputField>
+                    <Label fontSize="0.875em" mb="0.625rem">
+                      Type *
+                    </Label>
+                    <Select
+                      defaultValue={null}
+                      value={this.state.type}
+                      onChange={this.onChangeType}
+                      options={this.TypeOptions}
+                    />
                   </Div>
                   <Div col="12" pl="10px" pr="10px">
                     <InputField mb="0.625rem">
                       <Label fontSize="0.875em" mb="0.625rem">
                         Category *
                       </Label>
-                      <select onChange={this.onChangeCategory} className="form-control" name="caseCategory">
-                        <option value={null} key="categories">
-                          None
-                        </option>
-                        {this.getCategoryOptions()}
-                      </select>
+                      <Select
+                        defaultValue={null}
+                        value={this.state.category}
+                        onChange={this.onChangeCategory}
+                        options={this.getCategoryOptions()}
+                      />
                     </InputField>
                   </Div>
                   <Div col="12" pl="10px" pr="10px">
@@ -270,12 +275,12 @@ class CasesFormContainer extends Component {
                       <Label fontSize="0.875em" mb="0.625rem">
                         Sub Category *
                       </Label>
-                      <select onChange={this.onChangeSubCategory} className="form-control" name="caseSubCategory">
-                        <option value={null} key="subcategories">
-                          None
-                        </option>
-                        {this.getSubCategoryOptions()}
-                      </select>
+                      <Select
+                        defaultValue={null}
+                        value={this.state.subcategory}
+                        onChange={this.onChangeSubCategory}
+                        options={this.getSubCategoryOptions()}
+                      />
                     </InputField>
                   </Div>
                 </Row>
@@ -283,14 +288,14 @@ class CasesFormContainer extends Component {
                   <Div col="6" pl="10px" pr="10px">
                     <div className="buttons-set">
                       <Button
-                        disabled={this.isDisabled()}
+                        disabled={this.isDisabled() || loading}
                         onClick={this.onSubmitForm}
                         btnType="primary"
                         mt="0.625rem"
                         title="Submit"
                         type="submit"
                       >
-                        Submit
+                        {loading ? 'Please Wait ...' : 'SUBMIT'}
                       </Button>
                     </div>
                   </Div>
@@ -299,25 +304,11 @@ class CasesFormContainer extends Component {
             </form>
           </Div>
         </Row>
-        <ResponsiveModal onCloseModal={this.handleModal} open={open}>
-          <Div ta="center" className={styles.serviceThankYouWrapper}>
-            <Img m="0 auto 5px" width="100px" src={correctIcon} alt="Reload Page" />
-            <Text ta="center" fontSize="1.25rem" mb="0.625rem" mt="0" color="rgba(51, 51, 51, 0.85)">
-              Thank you !<br /> Your query is saved, We will get back to you soon.
-            </Text>
-          </Div>
-        </ResponsiveModal>
       </div>
     );
   }
 }
 
-CasesFormContainer.defaultProps = {
-  cases: {}
-};
-CasesFormContainer.propTypes = {
-  cases: PropTypes.object
-};
 export default connect(
   mapStateToProps,
   mapDispatchToProps

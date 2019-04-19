@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Div from 'hometown-components/lib/Div';
 import Heading from 'hometown-components/lib/Heading';
 import Row from 'hometown-components/lib/Row';
@@ -15,18 +16,35 @@ import { getImageURL } from 'utils/helper';
 const PinIcon = require('../../../static/map-icon-white.svg');
 const styles = require('./MyOrder.scss');
 
+@connect(({ cases }) => ({
+  ordercase: cases.ordercase || {}
+}))
 class OrderBlock extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      openSignup: false
+      openCaseModal: false
     };
   }
-  handleModal = () => {
-    this.setState({ openSignup: !this.state.openSignup });
+  componentWillReceiveProps(nextProps) {
+    const { loaded, loading } = nextProps.ordercase;
+    if (loaded && !loading) {
+      this.setState({
+        openCaseModal: false
+      });
+    }
+  }
+  handleChange = key => {
+    const newState = {};
+    newState[key] = !this.state[key];
+    this.setState(newState);
   };
   render() {
-    const { order } = this.props;
+    const {
+      order,
+      ordercase: { loaded, loading }
+    } = this.props;
+    // const { openSuccessModal } = this.state;
     return (
       <Div mb="2.5rem" className={styles.blockWrapper}>
         <Row type="block" m="0" mb="1rem" className={styles.blockHeading}>
@@ -45,7 +63,7 @@ class OrderBlock extends Component {
                 btnType="primary"
                 p="5px 10px"
                 mr="10px"
-                onClick={this.handleModal}
+                onClick={() => {}}
               >
                 <Img
                   src={PinIcon}
@@ -65,7 +83,10 @@ class OrderBlock extends Component {
                 bc="rgba(0,0,0,0.5)"
                 btnType="btnOutline"
                 p="5px 20px"
-                onClick={this.handleModal}
+                onClick={e => {
+                  e.preventDefault();
+                  this.handleChange('openCaseModal');
+                }}
               >
                 Help
               </Button>
@@ -154,16 +175,23 @@ class OrderBlock extends Component {
         </Div>
         <ResponsiveModal
           classNames={{ modal: 'signupModal' }}
-          onCloseModal={this.handleModal}
-          open={this.state.openSignup}
+          onCloseModal={e => {
+            e.preventDefault();
+            this.handleChange('openCaseModal');
+          }}
+          open={this.state.openCaseModal}
         >
-          <CasesForm />
+          <CasesForm loading={loading} loaded={loaded} />
         </ResponsiveModal>
       </Div>
     );
   }
 }
+OrderBlock.defaultProps = {
+  ordercase: {}
+};
 OrderBlock.propTypes = {
-  order: PropTypes.object.isRequired
+  order: PropTypes.object.isRequired,
+  ordercase: PropTypes.object
 };
 export default OrderBlock;
