@@ -10,10 +10,13 @@ import { Label } from 'hometown-components/lib/Label';
 import Section from 'hometown-components/lib/Section';
 import Button from 'hometown-components/lib/Buttons';
 // import { isEmpty } from 'utils/validation';
-// import Text from 'hometown-components/lib/Text';
+import Heading from 'hometown-components/lib/Heading';
+import Text from 'hometown-components/lib/Text';
 // import FormInput from 'hometown-components/lib/Forms/FormInput';
 import MyMenu from 'components/MyMenu';
 import 'react-datepicker/dist/react-datepicker.css';
+
+const styles = require('../MyOrder/MyOrder.scss');
 
 @connect(({ mycases, profile }) => ({
   ...mycases,
@@ -115,55 +118,66 @@ export default class MyCases extends Component {
                     border="1px solid rgba(151, 151, 151, 0.47)"
                     bc="rgba(151, 151, 151, 0.47)"
                     btnType="btnOutline"
+                    p="0"
                     onClick={() => this.handleClick(index)}
                   >
-                    <Row m="0">
+                    <Row type="block" m="0" mb="1rem" className={styles.blockHeading} p="15px 15px !important">
+                      <Div col="6">
+                        <Heading fontSize="1.25rem" color="textLight" mb="0px" mt="0px" fontFamily="light">
+                          Case No. 1
+                        </Heading>
+                      </Div>
+                      <Div col="6" ta="right">
+                        <b>Status:</b> {item.status || ''}
+                      </Div>
+                    </Row>
+                    <Row m="0" p="15px 15px 0">
                       <Div>
                         <Label fontSize="1.25em" mb="5px">
                           <b>{item.category || ''}</b>
                         </Label>
                       </Div>
                     </Row>
-                    <Row m="0">
-                      <Div>
-                        <Label fontSize="0.875rem" mb="5px">
-                          <b>Description:</b> {item.description || ''}
-                        </Label>
+                    <Row p="15px 15px" type="block" m="0" mb="0.5rem">
+                      <Div col="4">
+                        <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
+                          Description
+                        </Text>
+                        <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
+                          {item.description || ''}
+                        </Text>
                       </Div>
-                    </Row>
-                    <Row m="0">
-                      <Div>
-                        <Label fontSize="0.875rem" mb="5px">
-                          <b>Origin:</b> {item.origin || ''}
-                        </Label>
+                      <Div col="2">
+                        <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
+                          Origin
+                        </Text>
+                        <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
+                          {item.origin || ''}
+                        </Text>
                       </Div>
-                    </Row>
-                    <Row m="0">
-                      <Div>
-                        <Label fontSize="0.875rem" mb="5px">
-                          <b>Status:</b> {item.status || ''}
-                        </Label>
+                      <Div col="2">
+                        <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
+                          SubCategory
+                        </Text>
+                        <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
+                          {item.subcategory || ''}
+                        </Text>
                       </Div>
-                    </Row>
-                    <Row m="0">
-                      <Div>
-                        <Label fontSize="0.875rem" mb="5px">
-                          <b>SubCategory:</b> {item.subcategory || ''}
-                        </Label>
+                      <Div col="2">
+                        <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
+                          Subject
+                        </Text>
+                        <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
+                          {item.subject || ''}
+                        </Text>
                       </Div>
-                    </Row>
-                    <Row m="0">
-                      <Div>
-                        <Label fontSize="0.875rem" mb="5px">
-                          <b>Subject:</b> {item.subject || ''}
-                        </Label>
-                      </Div>
-                    </Row>
-                    <Row m="0">
-                      <Div>
-                        <Label fontSize="0.875rem" mb="5px">
-                          <b>Type:</b> {item.type || ''}
-                        </Label>
+                      <Div col="2">
+                        <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
+                          Type
+                        </Text>
+                        <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
+                          {item.type || ''}
+                        </Text>
                       </Div>
                     </Row>
                   </Button>

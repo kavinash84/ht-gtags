@@ -328,6 +328,7 @@
 		text-align: left;
 		display: table;
 		font-size: 0.875rem;
+		border: 1px solid #f0f0f0;
 		.thumb {
 			width: 60px;
 			margin: 0;
@@ -336,24 +337,25 @@
 			position: relative;
 			display: flex;
 		}
-		.th {
+		.th, th {
 			padding: 1rem 0;
 			font-size: 0.875rem;
 			color: rgba(0, 0, 0, 1);
-			padding: 0.625rem 0.325rem;
+			padding: 0.625rem 0.625rem;
 			text-transform: uppercase;
 			display: table-cell;
-			    align-self: center;
+			align-self: center;
 		}
-		.td {
+		.td, td {
 			color: rgba(0, 0, 0, 0.7);
 			font-size: 0.875rem;
 			padding: 0.25rem 0.325rem;
 			display: table-cell;
 	    align-self: center;
 			line-height: 1.5;
+			border-bottom: 1px solid #f0f0f0;
 			button {
-				font-size: 1rem;
+				font-size: 14px !important;
 				font-family: regular;
 				&.close {
 					float: right;
@@ -372,7 +374,7 @@
 			padding: 1rem 0;
 			font-size: 0.875rem;
 			color: rgba(0, 0, 0, 0.7);
-			padding: 0.625rem 0.325rem;
+			padding: 0.625rem 0.625rem;
 			text-transform: uppercase;
 			display: table-cell;
 			line-height: 1.6;
