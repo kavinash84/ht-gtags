@@ -38,7 +38,8 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-export const loadMyCases = sfid => ({
+export const loadMyCases = (sfid, fromDate = '', toDate = '', status = '') => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-  promise: ({ client }) => client.get(`${MY_CASES_API}?sfid=${sfid}`)
+  promise: ({ client }) =>
+    client.get(`${MY_CASES_API}?sfid=${sfid}&fromDate=${fromDate}&toDate=${toDate}&status=${status}`)
 });

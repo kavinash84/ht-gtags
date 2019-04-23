@@ -148,7 +148,7 @@ class OrderBlock extends Component {
                 <tbody>
                   <tr className={styles.tableHeading}>
                     <th style={{ minWidth: '70px' }} colSpan="2">
-                      PRODUCT
+                      PRODUCTS
                     </th>
                     <th style={{ minWidth: '150px' }}>Order Status</th>
                     <th style={{ minWidth: '200px' }}>Delivery Estimate</th>
@@ -156,56 +156,59 @@ class OrderBlock extends Component {
                     {/* <th>Carrier</th>
                     <th>Tracking ID</th> */}
                   </tr>
-                  {order.order_items.map(item => (
-                    <tr key={item.order_item_id}>
-                      <td style={{ minWidth: '70px' }}>
-                        <ImageShimmer src={getImageURL(item.image, 'catalog_360')} height="49px">
-                          {imageURL => <Img src={imageURL} alt={item.product_name} />}
-                        </ImageShimmer>
-                      </td>
-                      <td width="50%">{item.product_name || 'NOT AVAILABLE'}</td>
-                      <td>{item.order_item_status_display_name || 'NOT AVAILABLE'}</td>
-                      <td>{item.order_item_status_display_name !== 'Cancelled' ? item.delivery_date_text : '--'}</td>
-                      <td>
-                        <Div>
-                          <Button
-                            fontSize="14px !important"
-                            color="#ae8873"
-                            hoverColor="white"
-                            bc="transparent"
-                            btnType="primary"
-                            p="5px 10px"
-                            mr="10px"
-                            onClick={this.handleModal}
-                          >
-                            <Img
-                              src={PinIcon}
-                              alt="Track"
-                              height="16px"
-                              position="relative"
-                              top="4px"
-                              mr="0.3125rem"
-                              float="left"
-                            />
-                            Track
-                          </Button>
-                          <Button
-                            fontSize="14px !important"
-                            hoverColor="white"
-                            color="rgba(0,0,0,0.5)"
-                            bc="rgba(0,0,0,0.5)"
-                            btnType="btnOutline"
-                            p="5px 20px"
-                            onClick={this.handleModal}
-                          >
-                            Help
-                          </Button>
-                        </Div>
-                      </td>
-                      {/* <td>{item.carrier_name || 'NOT AVAILABLE'}</td>
+                  {order.order_items &&
+                    order.order_items.map(item => (
+                      <tr key={item.order_item_id}>
+                        <td style={{ minWidth: '70px' }}>
+                          <ImageShimmer src={getImageURL(item.image, 'catalog_360')} height="49px">
+                            {imageURL => <Img src={imageURL} alt={item.product_name} />}
+                          </ImageShimmer>
+                        </td>
+                        <td width="50%">{item.product_name || 'NOT AVAILABLE'}</td>
+                        <td>{item.order_item_status_display_name || 'NOT AVAILABLE'}</td>
+                        <td>{item.order_item_status_display_name !== 'Cancelled' ? item.delivery_date_text : '--'}</td>
+                        <td>
+                          <Div>
+                            <Button
+                              fontSize="14px !important"
+                              color="#ae8873"
+                              hoverColor="white"
+                              bc="transparent"
+                              btnType="primary"
+                              p="5px 10px"
+                              mr="10px"
+                              onClick={this.handleModal}
+                            >
+                              <Img
+                                src={PinIcon}
+                                alt="Track"
+                                height="16px"
+                                position="relative"
+                                top="4px"
+                                mr="0.3125rem"
+                                float="left"
+                              />
+                              Track
+                            </Button>
+                            <Button
+                              fontSize="14px !important"
+                              hoverColor="white"
+                              color="rgba(0,0,0,0.5)"
+                              bc="rgba(0,0,0,0.5)"
+                              btnType="btnOutline"
+                              p="5px 20px"
+                              onClick={() => {
+                                this.handleChange('openCaseModal');
+                              }}
+                            >
+                              Help
+                            </Button>
+                          </Div>
+                        </td>
+                        {/* <td>{item.carrier_name || 'NOT AVAILABLE'}</td>
                       <td>{item.tracking_id || 'NOT AVAILABLE'}</td> */}
-                    </tr>
-                  ))}
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </Div>

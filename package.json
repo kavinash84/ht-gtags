@@ -85,7 +85,6 @@
     "prop-types": "^15.5.8",
     "react": "^16.4.2",
     "react-autosuggest": "^9.4.0",
-    "react-datepicker": "^2.4.0",
     "react-dom": "^16.4.2",
     "react-google-login": "^3.2.1",
     "react-google-maps": "^9.4.5",
