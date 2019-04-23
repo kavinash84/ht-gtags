@@ -222,7 +222,7 @@ class CasesFormContainer extends Component {
             >
               <div className={styles.formList}>
                 <Row>
-                  <Div col="6" pl="10px" pr="10px">
+                  <Div col="12" pl="10px" pr="10px">
                     <FormInput
                       label="Subject *"
                       type="text"
@@ -231,17 +231,6 @@ class CasesFormContainer extends Component {
                       value={subject}
                       feedBackError={subjectError}
                       feedBackMessage={subjectErrorMessage}
-                    />
-                  </Div>
-                  <Div col="6" pl="10px" pr="10px">
-                    <FormInput
-                      label="Description *"
-                      type="text"
-                      placeholder=""
-                      onChange={this.onChangeDescription}
-                      value={description}
-                      feedBackError={descriptionError}
-                      feedBackMessage={descriptionErrorMessage}
                     />
                   </Div>
                 </Row>
@@ -282,6 +271,18 @@ class CasesFormContainer extends Component {
                         options={this.getSubCategoryOptions()}
                       />
                     </InputField>
+                  </Div>
+                  <Div col="6" pl="10px" pr="10px">
+                    <FormInput
+                      label="Description *"
+                      type="textarea"
+                      rows={5}
+                      placeholder=""
+                      onChange={this.onChangeDescription}
+                      value={description}
+                      feedBackError={descriptionError}
+                      feedBackMessage={descriptionErrorMessage}
+                    />
                   </Div>
                 </Row>
                 <Row>
