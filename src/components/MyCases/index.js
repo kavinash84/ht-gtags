@@ -97,11 +97,6 @@ class MyCases extends Component {
         <Section display="flex" pt="1.25rem" mb="0" height="auto">
           <Container type="container" pr="0" pl="0">
             <Row display="block" mr="0" ml="0" mb="1.5rem">
-              <Div col="1">
-                <Text fontSize="1rem" style={{ fontWeight: '200' }}>
-                  Filter By -
-                </Text>
-              </Div>
               <Div col="3" mr="1rem">
                 <Select
                   placeholder="Select From Date"

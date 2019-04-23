@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import Container from 'hometown-components/lib/Container';
-import Text from 'hometown-components/lib/Text';
+// import Text from 'hometown-components/lib/Text';
 import Div from 'hometown-components/lib/Div';
 import Section from 'hometown-components/lib/Section';
 import Row from 'hometown-components/lib/Row';
@@ -85,11 +85,6 @@ class MyOrder extends Component {
         <Section display="flex" pt="1.25rem" mb="0" height="auto">
           <Container type="container" pr="0.5rem" pl="0.5rem">
             <Row display="block" mr="0" ml="0" mb="1.5rem">
-              <Div col="1">
-                <Text fontSize="1rem" style={{ fontWeight: '200' }}>
-                  Filter By -
-                </Text>
-              </Div>
               <Div col="3" mr="1rem">
                 <Select
                   placeholder="Select From Date"
