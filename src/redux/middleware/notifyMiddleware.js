@@ -262,11 +262,23 @@ export default function userMiddleware() {
         }));
         break;
       case 'cases/LOAD_SUCCESS':
-        dispatch(notifSend({
-          type: 'success',
-          msg: 'Case Registered Successfully !',
-          dismissAfter: 4000
-        }));
+        console.log(action);
+        const {
+          result: { success, errors }
+        } = action;
+        if (success === true) {
+          dispatch(notifSend({
+            type: 'success',
+            msg: 'Case Registered Successfully !',
+            dismissAfter: 4000
+          }));
+        } else {
+          dispatch(notifSend({
+            type: 'warning',
+            msg: `${errors}`,
+            dismissAfter: 4000
+          }));
+        }
         break;
       default:
         break;
