@@ -4,11 +4,13 @@ const LOAD = 'loadStores/LOAD';
 const LOAD_SUCCESS = 'loadStores/LOAD_SUCCESS';
 const LOAD_FAIL = 'loadStores/LOAD_FAIL';
 const SET_SELECTED_CITY = 'loadStores/SET_SELECTED_CITY';
+const SET_SELECTED_STORE = 'loadStores/SET_SELECTED_STORE';
 
 const initialState = {
   loaded: false,
   data: null,
-  selectedCity: 'AHMEDABAD'
+  selectedCity: 'AHMEDABAD',
+  selectedStore: ''
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -47,6 +49,11 @@ export const isLoaded = globalState => globalState.stores && globalState.stores.
 export const loadStores = () => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
   promise: ({ client }) => client.get(`${STATIC_BLOCK}/store_react`)
+});
+
+export const gaVisitEvent = storeDetails => ({
+  type: SET_SELECTED_STORE,
+  storeDetails
 });
 
 export const setCity = city => ({

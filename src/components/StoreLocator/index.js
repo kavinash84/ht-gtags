@@ -1,15 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
 import Heading from 'hometown-components/lib/Heading';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
 import { Label } from 'hometown-components/lib/Label';
+import { gaVisitEvent } from 'redux/modules/stores';
 import PropTypes from 'prop-types';
 import Map from './Map';
 
 const styles = require('./StoreLocator.scss');
 
+const mapDispatchToProps = dispatch => bindActionCreators({ gaVisitEvent }, dispatch);
 class StoreLocator extends React.Component {
   static propTypes = {
     data: PropTypes.object
@@ -34,13 +38,20 @@ class StoreLocator extends React.Component {
     }
   }
 
-  handleClick = (value, mapData) => {
-    const details = mapData.filter(item => item.store === value)[0];
+  handleClick = (store = '', mapData, city = '') => {
+    const details = mapData.filter(item => item.store === store)[0];
     const { position } = details;
     this.setState({
       position,
       open: true,
       zoomlevel: 16
+    });
+    const { gaVisitEvent: recordStoreVisit } = this.props;
+    recordStoreVisit({
+      city,
+      store,
+      event: 'event storelocator',
+      category: 'Storelocator'
     });
   };
 
@@ -154,7 +165,7 @@ class StoreLocator extends React.Component {
                   <ul>
                     {currentList.map((item, index) => (
                       <li key={String(index)}>
-                        <button onClick={() => this.handleClick(item.store, mapData)}>
+                        <button onClick={() => this.handleClick(item.store, mapData, item.city)}>
                           <Label fontSize="1rem" mt="0" ml="0">
                             {item.store}
                           </Label>
@@ -172,5 +183,11 @@ class StoreLocator extends React.Component {
     );
   }
 }
+StoreLocator.propTypes = {
+  gaVisitEvent: PropTypes.func.isRequired
+};
 
-export default StoreLocator;
+export default connect(
+  null,
+  mapDispatchToProps
+)(StoreLocator);

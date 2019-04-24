@@ -10,10 +10,21 @@ import Heading from 'hometown-components/lib/Heading';
 const styles = require('./Stores.scss');
 
 const StoreListItem = ({
-  city, store, address, pincode, state, phone, url
+  city, store, address, pincode, state, phone, url, visitHandler
 }) => (
   <Div col={4}>
-    <div className={styles.storeBlock}>
+    <div //eslint-disable-line
+      onClick={e => {
+        e.preventDefault();
+        visitHandler({
+          city,
+          store,
+          event: 'event storelocator-hmpg',
+          category: 'Storelocator- HMPG'
+        });
+      }}
+      className={styles.storeBlock}
+    >
       <Link to={url}>
         {/* <Img src="https://static.hometown.in/media/cms/hometownv2/compressed/New-Delhi.jpg" alt="" /> */}
         <Row type="block" m="0">
@@ -54,7 +65,8 @@ StoreListItem.propTypes = {
   pincode: PropTypes.string,
   state: PropTypes.string,
   phone: PropTypes.string,
-  url: PropTypes.string
+  url: PropTypes.string,
+  visitHandler: PropTypes.func.isRequired
 };
 
 export default StoreListItem;

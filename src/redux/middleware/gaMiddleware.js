@@ -576,6 +576,20 @@ export default function gaMiddleware() {
           }
         );
       }
+      if (type === 'loadStores/SET_SELECTED_STORE') {
+        const {
+          storeDetails: {
+            city, store, event, category
+          }
+        } = action;
+        const storeVisitEvent = {
+          event,
+          category,
+          action: city,
+          label: store
+        };
+        window.dataLayer.push(storeVisitEvent);
+      }
     }
     return next(action);
   };
