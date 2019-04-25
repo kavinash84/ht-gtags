@@ -94,7 +94,7 @@ class MyOrder extends Component {
                   options={getDateFilters(this.FILTER_CONFIG)}
                 />
               </Div>
-              <Div col="3" mr="1rem">
+              <Div col="3" mr="1rem" hide>
                 <Select
                   placeholder="Select Case Status"
                   defaultValue={null}

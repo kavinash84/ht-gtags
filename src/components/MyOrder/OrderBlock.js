@@ -150,7 +150,7 @@ class OrderBlock extends Component {
                     <th style={{ minWidth: '70px' }} colSpan="2">
                       PRODUCTS
                     </th>
-                    <th style={{ minWidth: '150px' }}>Order Status</th>
+                    {/* <th style={{ minWidth: '150px' }}>Order Status</th> */}
                     <th style={{ minWidth: '200px' }}>Delivery Estimate</th>
                     <th style={{ minWidth: '180px' }} />
                     {/* <th>Carrier</th>
@@ -165,7 +165,7 @@ class OrderBlock extends Component {
                           </ImageShimmer>
                         </td>
                         <td width="50%">{item.product_name || 'NOT AVAILABLE'}</td>
-                        <td>{item.order_item_status_display_name || 'NOT AVAILABLE'}</td>
+                        {/* <td>{item.order_item_status_display_name || 'NOT AVAILABLE'}</td> */}
                         <td>{item.order_item_status_display_name !== 'Cancelled' ? item.delivery_date_text : '--'}</td>
                         <td>
                           <Div>
