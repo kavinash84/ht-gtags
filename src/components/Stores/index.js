@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Title from 'components/Title';
 import Section from 'hometown-components/lib/Section';
 import Container from 'hometown-components/lib/Container';
@@ -8,6 +9,7 @@ import Row from 'hometown-components/lib/Row';
 import Div from 'hometown-components/lib/Div';
 import { hyphenedString } from 'utils/helper';
 import { filterStoreList } from 'selectors/homepage';
+import { gaVisitEvent } from 'redux/modules/stores';
 import StoresCarouselItem from './StoresCarouselItem';
 import StoreListItem from './StoreListItem';
 import SlickSlider from '../SlickSlider';
@@ -18,13 +20,13 @@ const settings = {
   autoplay: false,
   infinite: false
 };
-
-@connect(({ stores }) => ({
+const mapDispatchToProps = dispatch => bindActionCreators({ gaVisitEvent }, dispatch);
+const mapStateToProps = ({ stores }) => ({
   filteredStores: filterStoreList(stores)
-}))
-export default class StoresCarousel extends Component {
+});
+class StoresCarousel extends Component {
   render() {
-    const { cities, filteredStores } = this.props;
+    const { cities, filteredStores, gaVisitEvent: recordStoreVisit } = this.props;
     return (
       <Section p="0" pt="2.5rem" pb="2rem" mb="0" className="storeCarousel">
         <Container pr="0" pl="0">
@@ -58,6 +60,7 @@ export default class StoresCarousel extends Component {
                   state={store.state}
                   phone={store.phone}
                   url={url}
+                  visitHandler={recordStoreVisit}
                 />
               );
             })}
@@ -75,5 +78,10 @@ StoresCarousel.defaultProps = {
 
 StoresCarousel.propTypes = {
   cities: PropTypes.array,
-  filteredStores: PropTypes.array
+  filteredStores: PropTypes.array,
+  gaVisitEvent: PropTypes.func.isRequired
 };
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(StoresCarousel);

@@ -41,6 +41,10 @@ const Cancellation = () => (
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
               Cancellation by the Customer shall be valid only if made within 24 hours of placing the order.
             </Text>
+            <Text>
+              * We are not taking any cancellation request for the Homeware products(Home Furnishings , Home Décor,
+              Tableware and Kitchenware) once order placed.
+            </Text>
           </Div>
           <Div>
             <Heading fontFamily="700" fontSize="1rem" color="text">
