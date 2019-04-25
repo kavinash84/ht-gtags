@@ -1,6 +1,6 @@
 // Validators
 import { isEmpty, pincode as pincodeIsValid, validateMobile } from 'utils/validation';
-import { allowNChar, allowTypeOf } from 'utils/helper';
+import { allowNChar, allowTypeOf, isGSTNumber } from 'utils/helper';
 import { PINCODE_INFO } from 'helpers/apiUrls';
 import { loadCart } from './cart';
 import { setPincodeDetails } from './pincode';
@@ -17,6 +17,7 @@ const SET_ADDRESS = 'deliveryaddress/SET_ADDRESS';
 const SET_STATE = 'deliveryaddress/SET_STATE';
 const SET_PHONE = 'deliveryaddress/SET_PHONE';
 const SET_PINCODE = 'deliveryaddress/SET_PINCODE';
+const SET_GST = 'deliveryaddress/SET_GST';
 
 const SET_NAME_ERROR = 'deliveryaddress/SET_NAME_ERROR';
 const SET_PINCODE_ERROR = 'deliveryaddress/SET_PINCODE_ERROR';
@@ -67,6 +68,9 @@ const initialState = {
     state: '',
     stateFeedBackError: false,
     stateFeedBackMessage: 'State cannot be Empty',
+    gst: '',
+    gstFeedBackError: false,
+    gstFeedBackMessage: 'Please enter correct GST number !',
     index: -1
   },
   billing: {
@@ -90,7 +94,10 @@ const initialState = {
     pincodeFeedBackMessage: 'Pincode is Invalid !',
     state: '',
     stateFeedBackError: false,
-    stateFeedBackMessage: 'State cannot be Empty'
+    stateFeedBackMessage: 'State cannot be Empty',
+    gst: '',
+    gstFeedBackError: false,
+    gstFeedBackMessage: 'Please enter correct GST number !'
     // error: true,
     // formData: null
   },
@@ -156,6 +163,16 @@ export default function reducer(state = initialState, action = {}) {
           phoneFeedBackError: !validateMobile(action.phone),
           phoneFeedBackMessage:
             action.phone[0] === '0' ? 'Mobile number must not start with 0' : 'Enter 10 Digits Valid Mobile Number !'
+        }
+      };
+    case SET_GST:
+      return {
+        ...state,
+        [action.formType]: {
+          ...state[action.formType],
+          gst: action.gst,
+          gstFeedBackError: !isGSTNumber(action.gst),
+          gstFeedBackMessage: 'GST Number is not valid'
         }
       };
     case SET_PINCODE:
@@ -411,6 +428,11 @@ export const onChangeEmail = (formType, email) => ({
   type: SET_EMAIL,
   formType,
   email
+});
+export const onChangeGST = (formType, gst) => ({
+  type: SET_GST,
+  formType,
+  gst
 });
 
 // Set Error

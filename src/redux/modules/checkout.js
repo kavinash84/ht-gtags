@@ -65,7 +65,8 @@ export const sendDeliveryAddress = (sessionId, data, isLoggedIn) => (dispatch, g
               fullname: shippingAddress.fullName,
               mobile: shippingAddress.phone,
               pincode: shippingAddress.pincode,
-              address: shippingAddress.address
+              address: shippingAddress.address,
+              gst: shippingAddress.gst
             },
             is_billing_address_same: shippingIsBilling,
             billing_info: {
@@ -73,11 +74,16 @@ export const sendDeliveryAddress = (sessionId, data, isLoggedIn) => (dispatch, g
               fullname: billingAddress.fullName,
               mobile: billingAddress.phone,
               pincode: billingAddress.pincode,
-              address: billingAddress.address
+              address: billingAddress.address,
+              gst: billingAddress.gst
             }
           };
         } else {
-          const { address: { shipping: { address_id: addressId } } } = getState();
+          const {
+            address: {
+              shipping: { address_id: addressId }
+            }
+          } = getState();
           postData = {
             session_id: sessionId,
             email: shippingAddress.email,
@@ -89,6 +95,7 @@ export const sendDeliveryAddress = (sessionId, data, isLoggedIn) => (dispatch, g
               mobile: shippingAddress.phone,
               pincode: shippingAddress.pincode,
               address: shippingAddress.address,
+              gst: shippingAddress.gst,
               address_id: addressId
             },
             is_billing_address_same: shippingIsBilling,
@@ -98,6 +105,7 @@ export const sendDeliveryAddress = (sessionId, data, isLoggedIn) => (dispatch, g
               mobile: shippingAddress.phone,
               pincode: shippingAddress.pincode,
               address: shippingAddress.address,
+              gst: shippingAddress.gst,
               address_id: addressId
             }
           };

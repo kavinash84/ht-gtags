@@ -34,10 +34,13 @@ const AddressForm = props => {
     pincodeFeedBackMessage,
     state,
     stateFeedBackError,
-    stateFeedBackMessage
+    stateFeedBackMessage,
+    gst,
+    gstFeedBackError,
+    gstFeedBackMessage
   } = props;
   const {
-    onChangeEmail, onChangePhone, onChangeAddress, onChangeFullName, onChangePincode
+    onChangeEmail, onChangePhone, onChangeAddress, onChangeFullName, onChangePincode, onChangeGST
   } = props;
   const { formType, isLoggedIn, userEmail } = props;
   return (
@@ -104,6 +107,15 @@ const AddressForm = props => {
         feedBackMessage={stateFeedBackMessage}
         readOnly
       />
+      <FormInput
+        label="GST"
+        type="text"
+        placeholder=""
+        onChange={e => onChangeGST(formType, e.target.value)}
+        value={gst}
+        feedBackError={gstFeedBackError}
+        feedBackMessage={gstFeedBackMessage}
+      />
     </div>
   );
 };
@@ -141,8 +153,12 @@ AddressForm.propTypes = {
   onChangeAddress: PropTypes.func.isRequired,
   onChangeFullName: PropTypes.func.isRequired,
   onChangePincode: PropTypes.func.isRequired,
+  onChangeGST: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool,
-  userEmail: PropTypes.string.isRequired
+  userEmail: PropTypes.string.isRequired,
+  gst: PropTypes.string.isRequired,
+  gstFeedBackError: PropTypes.bool.isRequired,
+  gstFeedBackMessage: PropTypes.string.isRequired
 };
 
 export default connect(

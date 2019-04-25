@@ -13,7 +13,7 @@ import MyMenu from 'components/MyMenu';
 import { addAddress, updateAddress } from 'redux/modules/myaddress';
 // Validators
 import { isEmpty, pincode as validatePincode, validateEmail, validateMobile } from 'utils/validation';
-import { allowNChar, allowTypeOf } from 'utils/helper';
+import { allowNChar, allowTypeOf, isGSTNumber } from 'utils/helper';
 
 const addIcon = require('../../../static/round-add_circle_outline.svg');
 const styles = require('./MyAddress.scss');
@@ -37,7 +37,10 @@ const initialState = {
   addressError: false,
   addressErrorMessage: 'Address not Valid',
   nameError: false,
-  nameErrorMessage: 'Name cannot be left Empty'
+  nameErrorMessage: 'Name cannot be left Empty',
+  gst: '',
+  gstError: false,
+  gstErrorMessage: 'GST Number not valid'
 };
 @connect(({ myaddress, profile }) => ({
   ...myaddress,
@@ -67,7 +70,10 @@ export default class DeliveryAddress extends Component {
     addressError: false,
     addressErrorMessage: 'Address cannot be left Empty',
     nameError: false,
-    nameErrorMessage: 'Name cannot be left Empty'
+    nameErrorMessage: 'Name cannot be left Empty',
+    gst: '',
+    gstError: false,
+    gstErrorMessage: 'GST Number not valid'
   };
   componentWillMount() {
     const { useremail } = this.props;
@@ -151,6 +157,16 @@ export default class DeliveryAddress extends Component {
       pincodeError: checkError
     });
   };
+  onChangeGST = e => {
+    const {
+      target: { value }
+    } = e;
+    const checkError = isGSTNumber(value);
+    this.setState({
+      gst: value,
+      gstError: !checkError
+    });
+  };
   onChangeEmail = e => {
     const {
       target: { value }
@@ -217,10 +233,12 @@ export default class DeliveryAddress extends Component {
       addressError,
       addressErrorMessage,
       nameError,
-      nameErrorMessage
+      nameErrorMessage,
+      gstError,
+      gstErrorMessage
     } = this.state;
     const {
-      name, phone, address, pincode, editForm, addForm, currentaddressindex
+      name, phone, address, pincode, editForm, addForm, currentaddressindex, gst
     } = this.state;
     const { data, useremail } = this.props;
     const { loading } = this.props;
@@ -306,6 +324,15 @@ export default class DeliveryAddress extends Component {
                       feedBackError={emailError}
                       feedBackMessage={emailErrorMessage}
                     />
+                    <FormInput
+                      label="GST Number "
+                      type="text"
+                      placeholder=""
+                      onChange={this.onChangeGST}
+                      value={gst}
+                      feedBackError={gstError}
+                      feedBackMessage={gstErrorMessage}
+                    />
                   </Div>
                 </Row>
                 <Row display="block" mr="0" ml="0">
@@ -372,6 +399,15 @@ export default class DeliveryAddress extends Component {
                       value={useremail}
                       feedBackError={emailError}
                       feedBackMessage={emailErrorMessage}
+                    />
+                    <FormInput
+                      label="GST Number "
+                      type="text"
+                      placeholder=""
+                      onChange={this.onChangeGST}
+                      value={gst}
+                      feedBackError={gstError}
+                      feedBackMessage={gstErrorMessage}
                     />
                   </Div>
                 </Row>
