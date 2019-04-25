@@ -146,12 +146,12 @@ class MyCases extends Component {
                   >
                     <Row type="block" m="0" mb="1rem" className={styles.blockHeading} p="15px 15px !important">
                       <Div col="6">
-                        <Heading fontSize="1.25rem" color="textLight" mb="0px" mt="0px" fontFamily="light">
-                          Case No. 1
+                        <Heading fontSize="1rem" color="textLight" mb="0px" mt="0px" fontFamily="light">
+                          {`Case No - ${item.caseNumber || 'NA'}`}
                         </Heading>
                       </Div>
                       <Div col="6" ta="right">
-                        <b>Status:</b> {item.status || ''}
+                        {`Status - ${item.status || 'NA'}`}
                       </Div>
                     </Row>
                     <Row p="15px 15px" type="block" m="0" mb="0.5rem">
@@ -179,7 +179,7 @@ class MyCases extends Component {
                           {item.category || ''}
                         </Text>
                       </Div>
-                      <Div col="2" style={{ wordWrap: 'break-word' }}>
+                      <Div col="2">
                         <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                           SubCategory
                         </Text>
@@ -187,7 +187,7 @@ class MyCases extends Component {
                           {item.subcategory || ''}
                         </Text>
                       </Div>
-                      <Div col="4" style={{ wordWrap: 'break-word' }}>
+                      <Div col="4">
                         <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                           Description
                         </Text>

@@ -50,7 +50,7 @@ const ContactUs = () => (
               </Section>
               <Section boxShadow="1px 2px 5px 0px rgba(0,0,0,0.1)" bg="white" mb="1rem" p="1.25rem" mr="2rem">
                 <Row display="block">
-                  <Div pl="0.75rem" pr="0.75rem" p="0.3125rem">
+                  {/* <Div pl="0.75rem" pr="0.75rem" p="0.3125rem">
                     <Link to="/case-request" className="text-primary">
                       RAISE A CASE REQUEST
                       <Span color="#757575" fontSize="1rem" va="top" ml="0.625rem">
@@ -58,7 +58,7 @@ const ContactUs = () => (
                       </Span>
                     </Link>
                   </Div>
-                  {/* <Div pl="0.75rem" pr="0.75rem" p="0.3125rem">
+                   <Div pl="0.75rem" pr="0.75rem" p="0.3125rem">
                     <Link to="/service-request" className="text-primary">
                       RAISE A SERVICE REQUEST
                       <Span color="#757575" fontSize="1rem" va="top" ml="0.625rem">
@@ -73,7 +73,7 @@ const ContactUs = () => (
                         ❯
                       </Span>
                     </Link>
-                  </Div>
+                  </Div> */}
                   <Div pl="0.75rem" pr="0.75rem" p="0.3125rem">
                     <Link to="/grievance" className="text-primary">
                       GRIEVANCE
@@ -81,7 +81,7 @@ const ContactUs = () => (
                         ❯
                       </Span>
                     </Link>
-                  </Div> */}
+                  </Div>
                 </Row>
               </Section>
             </Div>
