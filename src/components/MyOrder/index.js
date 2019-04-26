@@ -66,7 +66,7 @@ class MyOrder extends Component {
       endDate: end
     });
   };
-  getFilteredCases = e => {
+  getFilteredOrders = e => {
     e.preventDefault();
     const {
       startDate,
@@ -106,7 +106,7 @@ class MyOrder extends Component {
               <Div col="2" mr="1rem">
                 <Button
                   disabled={loading}
-                  onClick={this.getFilteredCases}
+                  onClick={this.getFilteredOrders}
                   border="1px solid"
                   color="red"
                   lh="1.5"

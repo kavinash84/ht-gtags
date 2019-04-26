@@ -78,16 +78,6 @@ class MyCases extends Component {
     const { salesforce_product_interest_id: sfid } = this.props;
     this.props.loadMyCases(sfid, startDate, endDate, caseStatus);
   };
-  startDateHandler = date => {
-    this.setState({
-      startDate: date
-    });
-  };
-  endDateHandler = date => {
-    this.setState({
-      endDate: date
-    });
-  };
   render() {
     const { data } = this.props;
     const { loading } = this.props;
