@@ -233,12 +233,19 @@ export default class DeliveryAddress extends Component {
       addressError,
       addressErrorMessage,
       nameError,
-      nameErrorMessage,
-      gstError,
-      gstErrorMessage
+      nameErrorMessage
+      // gstError,
+      // gstErrorMessage
     } = this.state;
     const {
-      name, phone, address, pincode, editForm, addForm, currentaddressindex, gst
+      name,
+      phone,
+      address,
+      pincode,
+      editForm,
+      addForm,
+      currentaddressindex
+      // gst
     } = this.state;
     const { data, useremail } = this.props;
     const { loading } = this.props;
@@ -324,7 +331,8 @@ export default class DeliveryAddress extends Component {
                       feedBackError={emailError}
                       feedBackMessage={emailErrorMessage}
                     />
-                    <FormInput
+                    {/* <FormInput
+                      hide
                       label="GST Number "
                       type="text"
                       placeholder=""
@@ -332,7 +340,7 @@ export default class DeliveryAddress extends Component {
                       value={gst}
                       feedBackError={gstError}
                       feedBackMessage={gstErrorMessage}
-                    />
+                    /> */}
                   </Div>
                 </Row>
                 <Row display="block" mr="0" ml="0">
@@ -400,7 +408,7 @@ export default class DeliveryAddress extends Component {
                       feedBackError={emailError}
                       feedBackMessage={emailErrorMessage}
                     />
-                    <FormInput
+                    {/* <FormInput
                       label="GST Number "
                       type="text"
                       placeholder=""
@@ -408,7 +416,7 @@ export default class DeliveryAddress extends Component {
                       value={gst}
                       feedBackError={gstError}
                       feedBackMessage={gstErrorMessage}
-                    />
+                    /> */}
                   </Div>
                 </Row>
                 <Row display="block" mr="0" ml="0">
