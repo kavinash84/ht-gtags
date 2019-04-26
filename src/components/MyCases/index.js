@@ -205,7 +205,7 @@ MyCases.defaultProps = {
 };
 
 MyCases.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.array,
   loading: PropTypes.bool,
   updated: PropTypes.bool, //eslint-disable-line
   salesforce_product_interest_id: PropTypes.string,
