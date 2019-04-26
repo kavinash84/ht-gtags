@@ -107,15 +107,17 @@ const AddressForm = props => {
         feedBackMessage={stateFeedBackMessage}
         readOnly
       />
-      <FormInput
-        label="GST"
-        type="text"
-        placeholder=""
-        onChange={e => onChangeGST(formType, e.target.value)}
-        value={gst}
-        feedBackError={gstFeedBackError}
-        feedBackMessage={gstFeedBackMessage}
-      />
+      {formType !== 'billing' && (
+        <FormInput
+          label="GST"
+          type="text"
+          placeholder=""
+          onChange={e => onChangeGST(formType, e.target.value)}
+          value={gst}
+          feedBackError={gstFeedBackError}
+          feedBackMessage={gstFeedBackMessage}
+        />
+      )}
     </div>
   );
 };
