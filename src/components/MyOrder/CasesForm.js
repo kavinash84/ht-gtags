@@ -61,7 +61,12 @@ class CasesFormContainer extends Component {
       descriptionErrorMessage: 'Description should Not Be Left Blank ',
       type: { value: null, label: 'None' }, //eslint-disable-line
       category: { value: null, label: 'None' }, //eslint-disable-line
-      subcategory: { value: null, label: 'None' } //eslint-disable-line
+      subcategory: { value: null, label: 'None' }, //eslint-disable-line
+      crm: {
+        type: null,
+        category: null,
+        subcategory: null
+      }
     };
     this.TypeOptions = [
       { value: null, label: 'None' },
@@ -115,9 +120,11 @@ class CasesFormContainer extends Component {
     );
   };
   onChangeCategory = category => {
+    const { crm = null } = category;
     this.setState(
       {
-        category
+        category,
+        crm: crm || { type: null, category: null, subcategory: null }
       },
       () => {
         this.resetDropDown({
@@ -127,8 +134,10 @@ class CasesFormContainer extends Component {
     );
   };
   onChangeSubCategory = subcategory => {
+    const { crm = null } = subcategory;
     this.setState({
-      subcategory
+      subcategory,
+      crm: crm || { type: null, category: null, subcategory: null }
     });
   };
   onSubmitForm = e => {
@@ -137,9 +146,9 @@ class CasesFormContainer extends Component {
     const {
       subject,
       description,
-      type: { value: type },
-      category: { value: category },
-      subcategory: { value: subCategory },
+      crm: { type },
+      crm: { category },
+      crm: { subcategory },
       origin
     } = this.state;
     const { sendData: sendFormData, sfid } = this.props;
@@ -158,7 +167,7 @@ class CasesFormContainer extends Component {
       description,
       type,
       category,
-      sub_category: subCategory,
+      sub_category: subcategory,
       account_id: sfid
     };
     sendFormData(CASE_ORDER_API, data, 'ordercase');
@@ -184,11 +193,11 @@ class CasesFormContainer extends Component {
     const {
       subject,
       description,
-      type: { value: type },
-      category: { value: category },
-      subcategory: { value: subCategory }
+      crm: { type },
+      crm: { category },
+      crm: { subcategory }
     } = this.state;
-    return !(subject && description && type && category && subCategory);
+    return !(subject && description && type && category && subcategory);
   };
   render() {
     const stylesModal = require('./index.scss');
@@ -258,19 +267,23 @@ class CasesFormContainer extends Component {
                       />
                     </InputField>
                   </Div>
-                  <Div col="12" pl="10px" pr="10px">
-                    <InputField mb="0.625rem">
-                      <Label fontSize="0.875em" mb="0.625rem">
-                        Sub Category *
-                      </Label>
-                      <Select
-                        defaultValue={null}
-                        value={this.state.subcategory}
-                        onChange={this.onChangeSubCategory}
-                        options={this.getSubCategoryOptions()}
-                      />
-                    </InputField>
-                  </Div>
+                  {this.getSubCategoryOptions().length ? (
+                    <Div col="12" pl="10px" pr="10px">
+                      <InputField mb="0.625rem">
+                        <Label fontSize="0.875em" mb="0.625rem">
+                          Sub Category *
+                        </Label>
+                        <Select
+                          defaultValue={null}
+                          value={this.state.subcategory}
+                          onChange={this.onChangeSubCategory}
+                          options={this.getSubCategoryOptions()}
+                        />
+                      </InputField>
+                    </Div>
+                  ) : (
+                    ''
+                  )}
                   <Div col="6" pl="10px" pr="10px">
                     <FormInput
                       label="Description *"
