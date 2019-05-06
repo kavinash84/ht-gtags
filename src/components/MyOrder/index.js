@@ -121,7 +121,7 @@ class MyOrder extends Component {
               </Div>
             </Row>
             {results.map(item => (
-              <OrderBlock key={item.order_id} order={item} />
+              <OrderBlock key={item.order_item_id} order={item} />
             ))}
           </Container>
         </Section>

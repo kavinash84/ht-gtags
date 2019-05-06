@@ -36,7 +36,6 @@ const mapStateToProps = ({ cases, profile }) => ({
 class CasesFormContainer extends Component {
   static propTypes = {
     sendData: PropTypes.func.isRequired,
-    session: PropTypes.string.isRequired, //eslint-disable-line
     loading: PropTypes.bool,
     sfid: PropTypes.string,
     ordercase: PropTypes.object
