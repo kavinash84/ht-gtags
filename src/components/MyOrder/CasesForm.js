@@ -65,9 +65,8 @@ class CasesFormContainer extends Component {
     };
     this.TypeOptions = [
       { value: null, label: 'None' },
-      { value: 'Query', label: 'Query' },
-      { value: 'Complaint', label: 'Complaint' },
-      { value: 'Request', label: 'Request' }
+      { value: 'Request', label: 'Raise a Request' },
+      { value: 'Complaint', label: 'Raise a Complaint/Grievance' }
     ];
   }
   componentWillReceiveProps(nextProps) {

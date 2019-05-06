@@ -1,124 +1,86 @@
 const caseCategories = {
-  Complaint: [
+  Request: [
     {
-      value: 'BEHAVIOUR_ISSUE',
-      label: 'BEHAVIOUR ISSUE'
+      value: 'INVOICE_COPY',
+      label: 'Invoice Copy'
     },
     {
-      value: 'BILLING_ISSUE',
-      label: 'BILLING ISSUE'
+      value: 'ABOUT_CASHBACK_FINANCE_EMI',
+      label: 'About Cashback/Finance/EMI'
     },
     {
-      value: 'DAMAGED_MATERIAL_DELIVERED',
-      label: 'DAMAGED MATERIAL DELIVERED'
+      value: 'VOUCHER_COUPON_SUPPORT',
+      label: 'Voucher/Coupon support'
     },
     {
-      value: 'DEFECTIVE_MATERIAL_DELIVERED',
-      label: 'DEFECTIVE MATERIAL DELIVERED'
+      value: 'SERVICE_STAFF_PRODUCT_FEEDBACK',
+      label: 'Service/Staff/Product Feedback'
     },
     {
-      value: 'DELIVERY_DATE_CHANGE',
-      label: 'DELIVERY DATE CHANGE - DISAGREE'
-    },
-    {
-      value: 'DELIVERY_DATE_ELAPSED',
-      label: 'DELIVERY DATE ELAPSED – SN'
-    },
-    {
-      value: 'DELIVERY_DATE_SY',
-      label: 'DELIVERY DATE SY'
-    },
-    {
-      value: 'PARTS_ HARDWARE_MISSING',
-      label: 'PARTS/HARDWARE MISSING'
+      value: 'SERVICE_REQUEST_WITHIN_WARRANTY',
+      label: 'Service Request-Within Warranty'
     },
     {
       value: 'SERVICE_REQUEST_AFTER_WARRANTY',
-      label: 'SERVICE REQUEST - AFTER WARRANTY'
+      label: 'Service Request-After Warranty'
     },
     {
-      value: 'SERVICE_REQUEST_UNDER_WARRANTY',
-      label: 'SERVICE REQUEST - UNDER WARRANTY'
+      value: 'PRODUCT_DISMANTLING_RE_ASSEMBLY_SUPPORT',
+      label: 'Product Dismantling/Re-Assembly support'
     },
     {
-      value: 'IMPROPER_FIMENT',
-      label: 'IMPROPER FIMENT'
+      value: 'FREE_SERVICE_CAMP_REGISTRATION',
+      label: 'Free Service camp registration'
     },
     {
-      value: 'INSTALLATION_FITMENT_DATE_TIME_ELAPSED',
-      label: 'INSTALLATION/FITMENT DATE TIME ELAPSED'
+      value: 'CHANGE_DELIVERY_DATE',
+      label: 'Change delivery date'
     },
     {
-      value: 'PICKUP_DATE_ELAPSED',
-      label: 'PICKUP DATE ELAPSED'
-    },
-    {
-      value: 'WORK_NOT_COMPLETED',
-      label: 'WORK NOT COMPLETED'
-    },
-    {
-      value: 'WRONG_MATERIAL_DELIVERED',
-      label: 'WRONG MATERIAL DELIVERED'
+      value: 'CHANGE_INSTALLATION_DATE',
+      label: 'Change Installation date'
     }
   ],
-  Query: [
+  Complaint: [
     {
-      value: 'BLANK_CALL',
-      label: 'BLANK CALL'
+      value: 'DELIVERY_OF_PRODUCT_DELAYED',
+      label: 'Delivery of product delayed'
     },
     {
-      value: 'FEEDBACK',
-      label: 'FEEDBACK'
+      value: 'INSTALLATION_OF_PRODUCT_DELAYED',
+      label: 'Installation of product delayed'
     },
     {
-      value: 'GENERAL_ENQUIRY',
-      label: 'GENERAL ENQUIRY'
+      value: 'DELIVERED_PRODUCT_DOES_NOT_MATCH',
+      label: 'Delivered product doesn’t match with the specification'
     },
     {
-      value: 'ORDER_RELATED',
-      label: 'ORDER RELATED'
+      value: 'MISSING_COMPONANT',
+      label: 'Missing componant in the product'
     },
     {
-      value: 'OUTBOUND_CALL',
-      label: 'OUTBOUND CALL'
+      value: 'RECEIVED_PRODUCT_WITH_DAMAGE',
+      label: 'Received product with damage'
     },
     {
-      value: 'LEAD',
-      label: 'LEAD'
+      value: 'RECEIVED_PRODUCT_WITH_DEFECT',
+      label: 'Received product with defect'
     },
     {
-      value: 'REQUEST_FOLLOWUP',
-      label: 'REQUEST FOLLOWUP'
+      value: 'PICKUP_DURING_EXCHANGE_OFFER_DELAYED',
+      label: 'Pickup during exchange offer delayed'
     },
     {
-      value: 'COMPLAINT_FOLLOWUP',
-      label: 'COMPLAINT FOLLOWUP'
-    }
-  ],
-  Request: [
-    {
-      value: 'CHANGE_IN_ADDRESS',
-      label: 'CHANGE IN ADDRESS'
+      value: 'RETURN_PICKUP',
+      label: 'Return pickup'
     },
     {
-      value: 'CALL_BACK_REQUESTED',
-      label: 'CALL BACK REQUESTED'
+      value: 'INCORRECT_PRICE_BILLED',
+      label: 'Incorrect price billed'
     },
     {
-      value: 'CUSTOMER_REQUEST',
-      label: 'CUSTOMER REQUEST'
-    },
-    {
-      value: 'REGISTRATION_FOR_SERVICE_CAMP',
-      label: 'REGISTRATION FOR SERVICE CAMP'
-    },
-    {
-      value: 'KITCHEN_SERVICE_ORDER',
-      label: 'KITCHEN SERVICE ORDER'
-    },
-    {
-      value: 'GIFT_VOUCHER',
-      label: 'GIFT VOUCHER'
+      value: 'PENDING_REFUND',
+      label: 'Pending Refund'
     }
   ]
 };
