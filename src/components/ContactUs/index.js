@@ -39,13 +39,17 @@ const ContactUs = () => (
                   Registered and Corporate Office :
                 </Heading>
                 <Text color="#8d8d8d" fontSize="0.875rem" mb="0" mt="0.625rem">
-                  Praxis Home Retail Private Limited (“PHRPL”),
+                  Praxis Home Retail Limited (“PHRL”),
+                  <br />
+                  (f/k/a Praxis Home Retail Private Limited),
                   <br />
                   iThink Techno Campus,
                   <br />
                   Jolly Board Tower D, Ground Floor,
                   <br />
-                  Kanjurmarg (East), Mumbai 400042 CIN - L52100MH2011PLC212866SS
+                  Kanjurmarg (East), Mumbai 400042,
+                  <br />
+                  CIN - L52100MH2011PLC212866SS
                 </Text>
               </Section>
               <Section boxShadow="1px 2px 5px 0px rgba(0,0,0,0.1)" bg="white" mb="1rem" mr="2rem" p="1.25rem">
