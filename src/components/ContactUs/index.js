@@ -49,7 +49,7 @@ const ContactUs = () => (
                   <br />
                   Kanjurmarg (East), Mumbai 400042,
                   <br />
-                  CIN - L52100MH2011PLC212866SS
+                  CIN - L52100MH2011PLC212866
                 </Text>
               </Section>
               <Section boxShadow="1px 2px 5px 0px rgba(0,0,0,0.1)" bg="white" mb="1rem" mr="2rem" p="1.25rem">
