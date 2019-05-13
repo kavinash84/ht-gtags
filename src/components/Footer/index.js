@@ -138,6 +138,42 @@ class Footer extends React.Component {
                   <li>
                     <a href="mailto:care@hometown.in">Email: care@hometown.in</a>
                   </li>
+                  <li>
+                    <Img
+                      id="liveagent_button_online_573N000000000Ub"
+                      style={{
+                        display: 'none',
+                        border: '0px none',
+                        cursor: 'pointer',
+                        height: '75px',
+                        width: '200px'
+                      }}
+                      onClick={() => {
+                        if (window.liveagent) {
+                          window.liveagent.startChat('573N000000000Ub');
+                        }
+                      }}
+                      src="https://devbox-praxisretail.cs6.force.com/LiveAgent/resource/1550482657000/Online_Chat_Button" //eslint-disable-line
+                      alt=""
+                    />
+                    <Img
+                      id="liveagent_button_offline_573N000000000Ub"
+                      style={{
+                        display: 'none',
+                        border: '0px none',
+                        cursor: 'pointer',
+                        height: '75px',
+                        width: '200px'
+                      }}
+                      onClick={() => {
+                        if (window.liveagent) {
+                          window.liveagent.startChat('573N000000000Ub');
+                        }
+                      }}
+                      src="https://devbox-praxisretail.cs6.force.com/LiveAgent/resource/1550482682000/Offline_Chat_Button" //eslint-disable-line
+                      alt=""
+                    />
+                  </li>
                 </ul>
               </Div>
               <Div col="3">
