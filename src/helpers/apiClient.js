@@ -6,7 +6,8 @@ import getCookie from '../utils/cookies';
 export default function apiClient(req) {
   const instance = axios.create({
     baseURL: `https://${config.apiHost}`,
-    rejectUnauthorized: false
+    rejectUnauthorized: false,
+    devicePlatform: 'desktop'
   });
 
   let token;
