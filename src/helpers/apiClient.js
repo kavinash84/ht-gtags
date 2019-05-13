@@ -7,7 +7,9 @@ export default function apiClient(req) {
   const instance = axios.create({
     baseURL: `https://${config.apiHost}`,
     rejectUnauthorized: false,
-    devicePlatform: 'desktop'
+    params: {
+      devicePlatform: 'desktop' // when ios app ready remove it & get the os from native code and pass here
+    }
   });
 
   let token;
