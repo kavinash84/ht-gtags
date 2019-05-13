@@ -17,6 +17,7 @@ import Text from 'hometown-components/lib/Text';
 import MyMenu from 'components/MyMenu';
 import { getDateFilters } from 'utils/helper';
 import { loadMyCases } from 'redux/modules/mycases';
+import caseMapping from '../../data/case-reverse-mapping';
 
 const styles = require('../MyOrder/MyOrder.scss');
 
@@ -77,6 +78,12 @@ class MyCases extends Component {
     } = this.state;
     const { salesforce_product_interest_id: sfid } = this.props;
     this.props.loadMyCases(sfid, startDate, endDate, caseStatus);
+  };
+  getMapping = (cat = '', subcat = '', type = '') => {
+    const key = `${cat}-${subcat}`;
+    const item = caseMapping[key];
+    const value = item[type];
+    return value;
   };
   render() {
     const { data } = this.props;
@@ -166,7 +173,7 @@ class MyCases extends Component {
                           Category
                         </Text>
                         <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
-                          {item.category || ''}
+                          {this.getMapping(item.category, item.subcategory, 'cat')}
                         </Text>
                       </Div>
                       <Div col="2">
@@ -174,7 +181,7 @@ class MyCases extends Component {
                           SubCategory
                         </Text>
                         <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
-                          {item.subcategory || ''}
+                          {this.getMapping(item.category, item.subcategory, 'subcat')}
                         </Text>
                       </Div>
                       <Div col="4">

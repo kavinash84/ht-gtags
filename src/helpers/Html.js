@@ -36,7 +36,6 @@ export default class Html extends Component {
     content: '',
     styleTags: []
   };
-
   render() {
     const {
       assets, store, content, bundles, styleTags
@@ -110,6 +109,47 @@ export default class Html extends Component {
           {assets.styles && Object.keys(assets.styles).length === 0 ? (
             <script dangerouslySetInnerHTML={{ __html: 'document.getElementById("content").style.display="block";' }} />
           ) : null}
+          <img
+            id="liveagent_button_online_573N000000000Ub"
+            style={{ display: 'none', border: '0px none', cursor: 'pointer' }}
+            onClick={() => {
+              console.log('ok');
+              if (liveagent) {
+                liveagent.startChat('573N000000000Ub');
+              }
+            }}
+            src="https://devbox-praxisretail.cs6.force.com/LiveAgent/resource/1550482657000/Online_Chat_Button"
+          />
+          <img
+            id="liveagent_button_offline_573N000000000Ub"
+            style={{ display: 'none', border: '0px none', cursor: 'pointer' }}
+            onClick={() => {
+              console.log('ok');
+              if (liveagent) {
+                liveagent.startChat('573N000000000Ub');
+              }
+            }}
+            src="https://devbox-praxisretail.cs6.force.com/LiveAgent/resource/1550482682000/Offline_Chat_Button"
+          />
+          <script
+            type="text/javascript"
+            src="https://c.la1-c2cs-hnd.salesforceliveagent.com/content/g/js/45.0/deployment.js"
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+            if (!window._laq) { window._laq = []; }
+            window._laq.push(function(){
+              liveagent.showWhenOnline('573N000000000Ub', document.getElementById('liveagent_button_online_573N000000000Ub'));
+              liveagent.showWhenOffline('573N000000000Ub', document.getElementById('liveagent_button_offline_573N000000000Ub'));
+            });
+            var emailId ='';
+            //Example : liveagent.addCustomDetail('Contact_ID', test@gmail.com); 
+            liveagent.addCustomDetail('Contact_ID', emailId); 
+            liveagent.init('https://d.la1-c2cs-hnd.salesforceliveagent.com/chat', '572N000000000PC', '00DN0000000Qxcj');
+          `
+            }}
+          />
           <Helmet>
             {process.env.NODE_ENV !== 'development' ? (
               <Fragment>
