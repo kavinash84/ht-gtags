@@ -40,9 +40,9 @@ const formValdiator = (props, data, formType) => {
     address1,
     addressFeedBackError1,
     address2,
-    addressFeedBackError2,
+    // addressFeedBackError2,
     address3,
-    addressFeedBackError3,
+    // addressFeedBackError3,
     city,
     pincode,
     pincodeFeedBackError,
@@ -54,8 +54,8 @@ const formValdiator = (props, data, formType) => {
     setPhoneError,
     setEmailError,
     setAddressError1,
-    setAddressError2,
-    setAddressError3,
+    // setAddressError2,
+    // setAddressError3,
     setPincodeError
   } = props;
   const fullNameError = isBlank(fullName) || fullNameFeedBackError;
@@ -63,16 +63,16 @@ const formValdiator = (props, data, formType) => {
   const phoneError = isBlank(phone) || phoneFeedBackError;
   const pincodeError = isBlank(pincode) || pincodeFeedBackError;
   const addressError1 = isBlank(address1) || addressFeedBackError1;
-  const addressError2 = isBlank(address2) || addressFeedBackError2;
-  const addressError3 = isBlank(address3) || addressFeedBackError3;
-  if (fullNameError || emailError || pincodeError || phoneError || addressError1 || addressError2 || addressError3) {
+  // const addressError2 = isBlank(address2) || addressFeedBackError2;
+  // const addressError3 = isBlank(address3) || addressFeedBackError3;
+  if (fullNameError || emailError || pincodeError || phoneError || addressError1) {
     setNameError(formType, fullNameError);
     setEmailError(formType, emailError);
     setPincodeError(formType, pincodeError);
     setPhoneError(formType, phoneError);
     setAddressError1(formType, addressError1);
-    setAddressError2(formType, addressError2);
-    setAddressError3(formType, addressError3);
+    // setAddressError2(formType, addressError2);
+    // setAddressError3(formType, addressError3);
     return {
       error: true,
       data: null

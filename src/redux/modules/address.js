@@ -97,11 +97,11 @@ const initialState = {
     addressFeedBackError1: false,
     addressFeedBackMessage1: 'Address1 Cannot be Left Empty !',
     address2: '',
-    addressFeedBackError2: false,
-    addressFeedBackMessage2: 'Address2 Cannot be Left Empty !',
+    // addressFeedBackError2: false,
+    // addressFeedBackMessage2: 'Address2 Cannot be Left Empty !',
     address3: '',
-    addressFeedBackError3: false,
-    addressFeedBackMessage3: 'Address3 Cannot be Left Empty !',
+    // addressFeedBackError3: false,
+    // addressFeedBackMessage3: 'Address3 Cannot be Left Empty !',
     city: '',
     cityFeedBackError: false,
     cityFeedBackMessage: 'City cannot be Empty',
@@ -163,8 +163,8 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         [action.formType]: {
           ...state[action.formType],
-          address2: action.address2,
-          addressFeedBackError2: isEmpty(action.address2)
+          address2: action.address2
+          // addressFeedBackError2: isEmpty(action.address2)
         }
       };
     case SET_ADDRESS3:
@@ -172,8 +172,8 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         [action.formType]: {
           ...state[action.formType],
-          address3: action.address3,
-          addressFeedBackError3: isEmpty(action.address3)
+          address3: action.address3
+          // addressFeedBackError3: isEmpty(action.address3)
         }
       };
     case SET_STATE:
@@ -261,16 +261,16 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         [action.formType]: {
-          ...state[action.formType],
-          addressFeedBackError2: action.payLoad
+          ...state[action.formType]
+          // addressFeedBackError2: action.payLoad
         }
       };
     case SET_ADDRESS_ERROR3:
       return {
         ...state,
         [action.formType]: {
-          ...state[action.formType],
-          addressFeedBackError3: action.payLoad
+          ...state[action.formType]
+          // addressFeedBackError3: action.payLoad
         }
       };
     case SET_STATE_ERROR:
@@ -314,10 +314,10 @@ export default function reducer(state = initialState, action = {}) {
           phoneFeedBackError: false,
           address1: action.data.address1,
           addressFeedBackError1: false,
-          address2: action.data.address2,
-          addressFeedBackError2: false,
-          address3: action.data.address3,
-          addressFeedBackError3: false,
+          // address2: action.data.address2,
+          // addressFeedBackError2: false,
+          // address3: action.data.address3,
+          // addressFeedBackError3: false,
           city: action.data.city,
           cityFeedBackError: false,
           state: action.data.state,

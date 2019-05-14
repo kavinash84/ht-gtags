@@ -28,10 +28,10 @@ const AddressForm = props => {
     address3,
     addressFeedBackError1,
     addressFeedBackMessage1,
-    addressFeedBackError2,
-    addressFeedBackMessage2,
-    addressFeedBackError3,
-    addressFeedBackMessage3,
+    // addressFeedBackError2,
+    // addressFeedBackMessage2,
+    // addressFeedBackError3,
+    // addressFeedBackMessage3,
     city,
     cityFeedBackError,
     cityFeedBackMessage,
@@ -101,8 +101,8 @@ const AddressForm = props => {
         placeholder=""
         onChange={e => onChangeAddress2(formType, e.target.value.replace(/#/g, ''))}
         value={address2}
-        feedBackError={addressFeedBackError2}
-        feedBackMessage={addressFeedBackMessage2}
+        // feedBackError={addressFeedBackError2}
+        // feedBackMessage={addressFeedBackMessage2}
       />
       <FormInput
         label="Address3"
@@ -110,8 +110,8 @@ const AddressForm = props => {
         placeholder=""
         onChange={e => onChangeAddress3(formType, e.target.value.replace(/#/g, ''))}
         value={address3}
-        feedBackError={addressFeedBackError3}
-        feedBackMessage={addressFeedBackMessage3}
+        // feedBackError={addressFeedBackError3}
+        // feedBackMessage={addressFeedBackMessage3}
       />
       <Pincode
         pincode={pincode}
@@ -176,10 +176,10 @@ AddressForm.propTypes = {
   address3: PropTypes.string,
   addressFeedBackError1: PropTypes.bool.isRequired,
   addressFeedBackMessage1: PropTypes.string.isRequired,
-  addressFeedBackError2: PropTypes.bool.isRequired,
-  addressFeedBackMessage2: PropTypes.string.isRequired,
-  addressFeedBackError3: PropTypes.bool.isRequired,
-  addressFeedBackMessage3: PropTypes.string.isRequired,
+  // addressFeedBackError2: PropTypes.bool.isRequired,
+  // addressFeedBackMessage2: PropTypes.string.isRequired,
+  // addressFeedBackError3: PropTypes.bool.isRequired,
+  // addressFeedBackMessage3: PropTypes.string.isRequired,
   city: PropTypes.string.isRequired,
   cityFeedBackError: PropTypes.bool.isRequired,
   cityFeedBackMessage: PropTypes.string.isRequired,
