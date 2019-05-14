@@ -23,9 +23,15 @@ const AddressForm = props => {
     phone,
     phoneFeedBackError,
     phoneFeedBackMessage,
-    address,
-    addressFeedBackError,
-    addressFeedBackMessage,
+    address1,
+    address2,
+    address3,
+    addressFeedBackError1,
+    addressFeedBackMessage1,
+    addressFeedBackError2,
+    addressFeedBackMessage2,
+    addressFeedBackError3,
+    addressFeedBackMessage3,
     city,
     cityFeedBackError,
     cityFeedBackMessage,
@@ -40,7 +46,14 @@ const AddressForm = props => {
     gstFeedBackMessage
   } = props;
   const {
-    onChangeEmail, onChangePhone, onChangeAddress, onChangeFullName, onChangePincode, onChangeGST
+    onChangeEmail,
+    onChangePhone,
+    onChangeAddress1,
+    onChangeAddress2,
+    onChangeAddress3,
+    onChangeFullName,
+    onChangePincode,
+    onChangeGST
   } = props;
   const { formType, isLoggedIn, userEmail } = props;
   return (
@@ -74,13 +87,31 @@ const AddressForm = props => {
         feedBackMessage={phoneFeedBackMessage}
       />
       <FormInput
-        label="Address"
+        label="Address1"
         type="textarea"
         placeholder=""
-        onChange={e => onChangeAddress(formType, e.target.value.replace(/#/g, ''))}
-        value={address}
-        feedBackError={addressFeedBackError}
-        feedBackMessage={addressFeedBackMessage}
+        onChange={e => onChangeAddress1(formType, e.target.value.replace(/#/g, ''))}
+        value={address1}
+        feedBackError={addressFeedBackError1}
+        feedBackMessage={addressFeedBackMessage1}
+      />
+      <FormInput
+        label="Address2"
+        type="textarea"
+        placeholder=""
+        onChange={e => onChangeAddress2(formType, e.target.value.replace(/#/g, ''))}
+        value={address2}
+        feedBackError={addressFeedBackError2}
+        feedBackMessage={addressFeedBackMessage2}
+      />
+      <FormInput
+        label="Address3"
+        type="textarea"
+        placeholder=""
+        onChange={e => onChangeAddress3(formType, e.target.value.replace(/#/g, ''))}
+        value={address3}
+        feedBackError={addressFeedBackError3}
+        feedBackMessage={addressFeedBackMessage3}
       />
       <Pincode
         pincode={pincode}
@@ -138,9 +169,15 @@ AddressForm.propTypes = {
   phone: PropTypes.string.isRequired,
   phoneFeedBackError: PropTypes.bool.isRequired,
   phoneFeedBackMessage: PropTypes.string.isRequired,
-  address: PropTypes.string.isRequired,
-  addressFeedBackError: PropTypes.bool.isRequired,
-  addressFeedBackMessage: PropTypes.string.isRequired,
+  address1: PropTypes.string.isRequired,
+  address2: PropTypes.string.isRequired,
+  address3: PropTypes.string.isRequired,
+  addressFeedBackError1: PropTypes.bool.isRequired,
+  addressFeedBackMessage1: PropTypes.string.isRequired,
+  addressFeedBackError2: PropTypes.bool.isRequired,
+  addressFeedBackMessage2: PropTypes.string.isRequired,
+  addressFeedBackError3: PropTypes.bool.isRequired,
+  addressFeedBackMessage3: PropTypes.string.isRequired,
   city: PropTypes.string.isRequired,
   cityFeedBackError: PropTypes.bool.isRequired,
   cityFeedBackMessage: PropTypes.string.isRequired,
@@ -152,7 +189,9 @@ AddressForm.propTypes = {
   stateFeedBackMessage: PropTypes.string.isRequired,
   onChangeEmail: PropTypes.func.isRequired,
   onChangePhone: PropTypes.func.isRequired,
-  onChangeAddress: PropTypes.func.isRequired,
+  onChangeAddress1: PropTypes.func.isRequired,
+  onChangeAddress2: PropTypes.func.isRequired,
+  onChangeAddress3: PropTypes.func.isRequired,
   onChangeFullName: PropTypes.func.isRequired,
   onChangePincode: PropTypes.func.isRequired,
   onChangeGST: PropTypes.func.isRequired,
