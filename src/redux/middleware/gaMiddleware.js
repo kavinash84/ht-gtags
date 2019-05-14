@@ -103,7 +103,7 @@ export default function gaMiddleware() {
           const eventObject = {
             event: 'productDetail',
             ecommerce: {
-              click: {
+              detail: {
                 actionField: { list: 'Listing' },
                 products: [
                   {
