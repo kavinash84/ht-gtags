@@ -155,7 +155,9 @@ const AddressForm = props => {
 
 AddressForm.defaultProps = {
   formType: '',
-  isLoggedIn: false
+  isLoggedIn: false,
+  address2: '',
+  address3: ''
 };
 
 AddressForm.propTypes = {
@@ -170,8 +172,8 @@ AddressForm.propTypes = {
   phoneFeedBackError: PropTypes.bool.isRequired,
   phoneFeedBackMessage: PropTypes.string.isRequired,
   address1: PropTypes.string.isRequired,
-  address2: PropTypes.string.isRequired,
-  address3: PropTypes.string.isRequired,
+  address2: PropTypes.string,
+  address3: PropTypes.string,
   addressFeedBackError1: PropTypes.bool.isRequired,
   addressFeedBackMessage1: PropTypes.string.isRequired,
   addressFeedBackError2: PropTypes.bool.isRequired,
