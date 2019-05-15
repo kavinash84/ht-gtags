@@ -307,7 +307,7 @@ class DeliveryAddress extends Component {
 
                   <Row display="block" mr="0" ml="0">
                     {addresses.map((item, index) => (
-                      <Div className={styles.addressBlock} col="6" pr="0.625rem" key={item.id_customer_address}>
+                      <Div className={styles.addressBlock} col="4" pr="0.625rem" key={item.id_customer_address}>
                         <button
                           className={`${styles.addressBtn} ${index === currentaddressindex ? styles.active : null}`}
                           onClick={() => this.handleClick(index)}
@@ -327,7 +327,7 @@ class DeliveryAddress extends Component {
                       </Div>
                     ))}
 
-                    <Div col="6" pr="0.625rem">
+                    <Div col="4" pr="0.625rem">
                       <button className={styles.addAddressBtn} onClick={this.toggleAddAddress}>
                         <img src={addIcon} alt="Add another address" />
                         <Text color="rgba(0, 0, 0, 0.6)" ta="center">
@@ -342,14 +342,14 @@ class DeliveryAddress extends Component {
                 <form onSubmit={this.handleSubmit}>
                   <Row display="block" mr="0" ml="0">
                     {(addressform || !isLoggedIn) && (
-                      <Div col="6" pr="2rem" mt="1rem">
+                      <Div col="12" pr="0" mt="1rem">
                         <Label fontSize="1.125rem" mb="0.875rem">
                           Shipping Address
                         </Label>
                         <AddressForm formType="shipping" isLoggedIn={isLoggedIn} userEmail={userEmail} />
                       </Div>
                     )}
-                    <Div col="6" pr="2rem" mt="1.5rem">
+                    <Div col="12" pr="0" mt="1.5rem">
                       <div className="checkbox">
                         <input
                           type="checkbox"

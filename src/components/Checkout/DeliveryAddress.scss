@@ -11,7 +11,7 @@
   line-height: 1.6;
   font-size: 14px;
   width: 100%;
-  min-height: 135px;
+  min-height: 157px;
   margin-bottom: 10px;
   &.active, &:hover {
     background-color: #ffffff;
@@ -23,7 +23,7 @@
   text-align: center;
 }
 .addressBlock {
-  &:nth-child(2n+1) {
+  &:nth-child(3n+1) {
     clear: both;
   }
 }

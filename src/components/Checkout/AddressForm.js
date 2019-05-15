@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from 'redux/modules/address';
 import FormInput from 'hometown-components/lib/Forms/FormInput';
+import Div from 'hometown-components/lib/Div';
+import Row from 'hometown-components/lib/Row';
 import Pincode from './Pincode';
 
 const mapStateToProps = ({ address }, props) => ({
@@ -58,97 +60,129 @@ const AddressForm = props => {
   const { formType, isLoggedIn, userEmail } = props;
   return (
     <div>
-      <FormInput
-        label="Full Name"
-        type="text"
-        placeholder=""
-        onChange={e => onChangeFullName(formType, e.target.value)}
-        value={fullName}
-        feedBackError={fullNameFeedBackError}
-        feedBackMessage={fullNameFeedBackMessage}
-      />
-      <FormInput
-        label="Email ID"
-        type={isLoggedIn ? 'hidden' : 'text'}
-        placeholder=""
-        onChange={e => onChangeEmail(formType, e.target.value)}
-        value={isLoggedIn ? userEmail : email}
-        feedBackError={isLoggedIn ? false : emailFeedBackError}
-        feedBackMessage={emailFeedBackMessage}
-        readOnly={isLoggedIn}
-      />
-      <FormInput
-        label="Phone"
-        type="text"
-        placeholder=""
-        onChange={e => onChangePhone(formType, e.target.value)}
-        value={phone}
-        feedBackError={phoneFeedBackError}
-        feedBackMessage={phoneFeedBackMessage}
-      />
-      <FormInput
-        label="Address1"
-        type="textarea"
-        placeholder=""
-        onChange={e => onChangeAddress1(formType, e.target.value.replace(/#/g, ''))}
-        value={address1}
-        feedBackError={addressFeedBackError1}
-        feedBackMessage={addressFeedBackMessage1}
-      />
-      <FormInput
-        label="Address2"
-        type="textarea"
-        placeholder=""
-        onChange={e => onChangeAddress2(formType, e.target.value.replace(/#/g, ''))}
-        value={address2}
-        // feedBackError={addressFeedBackError2}
-        // feedBackMessage={addressFeedBackMessage2}
-      />
-      <FormInput
-        label="Address3"
-        type="textarea"
-        placeholder=""
-        onChange={e => onChangeAddress3(formType, e.target.value.replace(/#/g, ''))}
-        value={address3}
-        // feedBackError={addressFeedBackError3}
-        // feedBackMessage={addressFeedBackMessage3}
-      />
-      <Pincode
-        pincode={pincode}
-        formType={formType}
-        feedBackError={pincodeFeedBackError}
-        onChangePincode={onChangePincode}
-        feedBackMessage={pincodeFeedBackMessage}
-      />
-      <FormInput
-        label="City"
-        type="text"
-        placeholder=""
-        value={city}
-        feedBackError={cityFeedBackError}
-        feedBackMessage={cityFeedBackMessage}
-        readOnly
-      />
-      <FormInput
-        label="State"
-        type="text"
-        placeholder=""
-        value={state}
-        feedBackError={stateFeedBackError}
-        feedBackMessage={stateFeedBackMessage}
-        readOnly
-      />
-      {formType !== 'billing' && (
-        <FormInput
-          label="GST"
-          type="text"
-          placeholder=""
-          onChange={e => onChangeGST(formType, e.target.value)}
-          value={gst}
-          feedBackError={gstFeedBackError}
-          feedBackMessage={gstFeedBackMessage}
-        />
-      )}
+      <Row display="block" mr="0" ml="0">
+        <Div col="12">
+          <FormInput
+            label="Full Name"
+            type="text"
+            placeholder=""
+            onChange={e => onChangeFullName(formType, e.target.value)}
+            value={fullName}
+            feedBackError={fullNameFeedBackError}
+            feedBackMessage={fullNameFeedBackMessage}
+          />
+        </Div>
+      </Row>
+      <Row display="block" mr="0" ml="0">
+        {!isLoggedIn && (
+          <Div col="6" pr="10px">
+            <FormInput
+              label="Email ID"
+              type={isLoggedIn ? 'hidden' : 'text'}
+              placeholder=""
+              onChange={e => onChangeEmail(formType, e.target.value)}
+              value={isLoggedIn ? userEmail : email}
+              feedBackError={isLoggedIn ? false : emailFeedBackError}
+              feedBackMessage={emailFeedBackMessage}
+              readOnly={isLoggedIn}
+            />
+          </Div>
+        )}
+        <Div col={!isLoggedIn ? '6' : '12'} pl={!isLoggedIn ? '10px' : '0'}>
+          <FormInput
+            label="Phone"
+            type="text"
+            placeholder=""
+            onChange={e => onChangePhone(formType, e.target.value)}
+            value={phone}
+            feedBackError={phoneFeedBackError}
+            feedBackMessage={phoneFeedBackMessage}
+          />
+        </Div>
+      </Row>
+      <Row display="block" mr="0" ml="0">
+        <Div col="4" pr="10px">
+          <FormInput
+            label="Address 1"
+            type="textarea"
+            placeholder=""
+            onChange={e => onChangeAddress1(formType, e.target.value.replace(/#/g, ''))}
+            value={address1}
+            feedBackError={addressFeedBackError1}
+            feedBackMessage={addressFeedBackMessage1}
+          />
+        </Div>
+        <Div col="4" pr="10px" pl="10px">
+          <FormInput
+            label="Address 2"
+            type="textarea"
+            placeholder=""
+            onChange={e => onChangeAddress2(formType, e.target.value.replace(/#/g, ''))}
+            value={address2}
+            // feedBackError={addressFeedBackError2}
+            // feedBackMessage={addressFeedBackMessage2}
+          />
+        </Div>
+        <Div col="4" pl="10px">
+          <FormInput
+            label="Address 3"
+            type="textarea"
+            placeholder=""
+            onChange={e => onChangeAddress3(formType, e.target.value.replace(/#/g, ''))}
+            value={address3}
+            // feedBackError={addressFeedBackError3}
+            // feedBackMessage={addressFeedBackMessage3}
+          />
+        </Div>
+      </Row>
+      <Row display="block" mr="0" ml="0">
+        <Div col="6" pr="10px">
+          <Pincode
+            pincode={pincode}
+            formType={formType}
+            feedBackError={pincodeFeedBackError}
+            onChangePincode={onChangePincode}
+            feedBackMessage={pincodeFeedBackMessage}
+          />
+        </Div>
+        <Div col="6" pr="10px">
+          <FormInput
+            label="City"
+            type="text"
+            placeholder=""
+            value={city}
+            feedBackError={cityFeedBackError}
+            feedBackMessage={cityFeedBackMessage}
+            readOnly
+          />
+        </Div>
+      </Row>
+      <Row display="block" mr="0" ml="0">
+        <Div col="6" pr="10px">
+          <FormInput
+            label="State"
+            type="text"
+            placeholder=""
+            value={state}
+            feedBackError={stateFeedBackError}
+            feedBackMessage={stateFeedBackMessage}
+            readOnly
+          />
+        </Div>
+        {formType !== 'billing' && (
+          <Div col="6" pr="10px">
+            <FormInput
+              label="GST"
+              type="text"
+              placeholder=""
+              onChange={e => onChangeGST(formType, e.target.value)}
+              value={gst}
+              feedBackError={gstFeedBackError}
+              feedBackMessage={gstFeedBackMessage}
+            />
+          </Div>
+        )}
+      </Row>
     </div>
   );
 };
