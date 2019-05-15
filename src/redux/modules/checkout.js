@@ -110,7 +110,9 @@ export const sendDeliveryAddress = (sessionId, data, isLoggedIn) => (dispatch, g
               fullname: shippingAddress.fullName,
               mobile: shippingAddress.phone,
               pincode: shippingAddress.pincode,
-              address: shippingAddress.address,
+              address1: shippingAddress.address1,
+              address2: shippingAddress.address2,
+              address3: shippingAddress.address3,
               gst: shippingAddress.gst,
               address_id: addressId
             }
