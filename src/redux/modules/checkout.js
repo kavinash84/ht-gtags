@@ -77,8 +77,8 @@ export const sendDeliveryAddress = (sessionId, data, isLoggedIn) => (dispatch, g
               mobile: billingAddress.phone,
               pincode: billingAddress.pincode,
               address1: billingAddress.address1,
-              address2: billingAddress.address1,
-              address3: billingAddress.address1,
+              address2: billingAddress.address2,
+              address3: billingAddress.address3,
               gst: billingAddress.gst
             }
           };
