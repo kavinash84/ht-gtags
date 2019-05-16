@@ -170,7 +170,19 @@ app.use('/checkout/finish/payment/', async (req, res) => {
     return res.redirect(PAYMENT_FAILURE);
   }
 });
-
+/* eslint-disable max-len */
+app.get(
+  /\/(hi-tech|kavi|curators|brands|design-build|study-office|laopala-diva|libbey--bergner--hometown--milton|living-essence--spaces|orange-tree|ratan-jaipur|treo--lyra--prestige--corelle|arth-art--deco-window|big50-sale|Bosco-Wall-Unit-Wengebrands|chhota-bheem|cultural-concepts--kara--hi|dhoomdhaam-sale|gardenia|gibson|tech|homehq|hometown--machi--hi-tech|incrizma|living-essence--hometown|lyra|marvel|Mondo-Queen-Size-bed-in-rubber-wood-with-Box-Storage|monsoon-sale|nayasa|new-products|portico|prestige--living-essence|rajasthan-decor|search|sharp|shree-sam|storelocator|stories|support|treo--lyra--prestige--corelle|dkw--spaces|hometown--fns|hometown--gibson|hometown--treo|ocean|ocean--tangerine|spaces--lyra--bohemia|wonderchef--bonita|dealoftheday|\/)/,
+  (req, res, next) => {
+    const data = require('./data/other-urls.json');
+    const requestURL = redirectionHelper(req.path);
+    if (data && data[requestURL.toLowerCase()]) {
+      const redirect = data[requestURL.toLowerCase()];
+      return res.redirect(301, redirect || '/');
+    }
+    return next();
+  }
+);
 /* Blanket Redirection for old urls Color Products */
 app.get(/\/color-/, (req, res) => {
   const { url } = req;
@@ -201,7 +213,7 @@ app.get(/\/(.*)-(\d+).html/, async (req, res) => {
 /* eslint-disable max-len */
 /* Category url redirection */
 app.get(
-  /^\/(festive-gifts|support|exclusive|tables|buying-guides|bedding|bedroom_furniture|all-products|catalog|categories|furniture|home-decor|homefurnishings|tableware|kitchenware|home-improvement|clearance-sale-offer|clearance_sale|design|design-inspiration|gifts|appliances|lighting|solidwood|test_bed|exclusive|invisible|luggage-bags|bed-bath|home-fashion|curators|glossary|kitchen-dining|solid-wood|buying-guides|products|exchange-offer)\//,
+  /^\/(festive-gifts|support|exclusive|tables|buying-guides|bedding|bedroom_furniture|all-products|categories|furniture|home-decor|homefurnishings|tableware|kitchenware|home-improvement|clearance-sale-offer|clearance_sale|design|design-inspiration|gifts|appliances|lighting|solidwood|test_bed|exclusive|invisible|luggage-bags|bed-bath|home-fashion|glossary|kitchen-dining|solid-wood|buying-guides|products|Products|exchange-offer|catalog|)\//,
   async (req, res, next) => {
     const data = require('./data/category-urls.json');
     const requestURL = redirectionHelper(req.path);
