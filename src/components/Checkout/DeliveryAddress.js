@@ -38,11 +38,11 @@ const formValdiator = (props, data, formType) => {
     phone,
     phoneFeedBackError,
     address1,
-    addressFeedBackError1,
+    address1FeedBackError1,
     address2,
-    // addressFeedBackError2,
+    // address2FeedBackError2,
     address3,
-    // addressFeedBackError3,
+    // address3FeedBackError3,
     city,
     pincode,
     pincodeFeedBackError,
@@ -62,7 +62,7 @@ const formValdiator = (props, data, formType) => {
   const emailError = isBlank(email) || emailFeedBackError;
   const phoneError = isBlank(phone) || phoneFeedBackError;
   const pincodeError = isBlank(pincode) || pincodeFeedBackError;
-  const addressError1 = isBlank(address1) || addressFeedBackError1;
+  const addressError1 = isBlank(address1) || address1FeedBackError1;
   // const addressError2 = isBlank(address2) || addressFeedBackError2;
   // const addressError3 = isBlank(address3) || addressFeedBackError3;
   if (fullNameError || emailError || pincodeError || phoneError || addressError1) {
@@ -313,9 +313,13 @@ class DeliveryAddress extends Component {
                           onClick={() => this.handleClick(index)}
                         >
                           <b>{item.full_name}</b>
-                          <br />
-                          {item.address}
-                          <br />
+                          <hr />
+                          {item.address1}
+                          {item.address2 && <hr />}
+                          {item.address2}
+                          {item.address3 && <hr />}
+                          {item.address3}
+                          <hr />
                           {item.city}, {item.pincode}
                           <br />
                           {item.state}

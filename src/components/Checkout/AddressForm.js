@@ -63,7 +63,7 @@ const AddressForm = props => {
       <Row display="block" mr="0" ml="0">
         <Div col="12">
           <FormInput
-            label="Full Name"
+            label="Full Name *"
             type="text"
             placeholder=""
             onChange={e => onChangeFullName(formType, e.target.value)}
@@ -77,7 +77,7 @@ const AddressForm = props => {
         {!isLoggedIn && (
           <Div col="6" pr="10px">
             <FormInput
-              label="Email ID"
+              label="Email ID *"
               type={isLoggedIn ? 'hidden' : 'text'}
               placeholder=""
               onChange={e => onChangeEmail(formType, e.target.value)}
@@ -90,7 +90,7 @@ const AddressForm = props => {
         )}
         <Div col={!isLoggedIn ? '6' : '12'} pl={!isLoggedIn ? '10px' : '0'}>
           <FormInput
-            label="Phone"
+            label="Phone *"
             type="text"
             placeholder=""
             onChange={e => onChangePhone(formType, e.target.value)}
@@ -103,7 +103,7 @@ const AddressForm = props => {
       <Row display="block" mr="0" ml="0">
         <Div col="4" pr="10px">
           <FormInput
-            label="Address 1"
+            label="Address 1 *"
             type="textarea"
             placeholder=""
             onChange={e => onChangeAddress1(formType, e.target.value.replace(/#/g, ''))}
@@ -147,7 +147,7 @@ const AddressForm = props => {
         </Div>
         <Div col="6" pr="10px">
           <FormInput
-            label="City"
+            label="City *"
             type="text"
             placeholder=""
             value={city}
@@ -160,7 +160,7 @@ const AddressForm = props => {
       <Row display="block" mr="0" ml="0">
         <Div col="6" pr="10px">
           <FormInput
-            label="State"
+            label="State *"
             type="text"
             placeholder=""
             value={state}

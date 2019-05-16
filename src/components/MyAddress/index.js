@@ -20,7 +20,9 @@ const styles = require('./MyAddress.scss');
 
 const initialState = {
   name: '',
-  address: '',
+  address1: '',
+  address2: '',
+  address3: '',
   pincode: '',
   phone: '',
   email: '',
@@ -34,8 +36,12 @@ const initialState = {
   phoneErrorMessage: 'Phone number not Valid',
   pincodeError: false,
   pincodeErrorMessage: 'PinCode not Valid',
-  addressError: false,
-  addressErrorMessage: 'Address not Valid',
+  address1Error: false,
+  address1ErrorMessage: 'Address1 not Valid',
+  address2Error: false,
+  address2ErrorMessage: 'Address2 not Valid',
+  address3Error: false,
+  address3ErrorMessage: 'Address3 not Valid',
   nameError: false,
   nameErrorMessage: 'Name cannot be left Empty',
   gst: '',
@@ -54,7 +60,9 @@ export default class DeliveryAddress extends Component {
   };
   state = {
     name: '',
-    address: '',
+    address1: '',
+    address2: '',
+    address3: '',
     pincode: '',
     phone: '',
     addressId: '',
@@ -63,12 +71,16 @@ export default class DeliveryAddress extends Component {
     addForm: false,
     emailError: false,
     emailErrorMessage: 'Email not Valid',
+    address1Error: false,
+    address1ErrorMessage: 'Address 1 is Required !',
+    address2Error: false,
+    address2ErrorMessage: '',
+    address3Error: false,
+    address3ErrorMessage: '',
     phoneError: false,
     phoneErrorMessage: 'Enter 10 Digits Valid Mobile Number',
     pincodeError: false,
     pincodeErrorMessage: 'Pincode is not Valid',
-    addressError: false,
-    addressErrorMessage: 'Address cannot be left Empty',
     nameError: false,
     nameErrorMessage: 'Name cannot be left Empty',
     gst: '',
@@ -88,23 +100,23 @@ export default class DeliveryAddress extends Component {
   }
   onSubmitValidator = () => {
     const {
-      email, name, pincode, address, phone
+      email, name, pincode, address1, phone
     } = this.state;
 
     const nameError = isEmpty(name);
     const emailError = isEmpty(email) || !validateEmail(email);
     const phoneError = isEmpty(phone) || validateMobile(phone).error;
     const pincodeError = isEmpty(pincode) || validatePincode(pincode);
-    const addressError = isEmpty(address);
+    const address1Error = isEmpty(address1);
     this.setState({
       nameError,
       emailError,
       phoneError,
       pincodeError,
-      addressError
+      address1Error
     });
 
-    if (nameError || emailError || phoneError || pincodeError || addressError) {
+    if (nameError || emailError || phoneError || pincodeError || address1Error) {
       return false;
     }
     return true;
@@ -119,14 +131,19 @@ export default class DeliveryAddress extends Component {
       nameError: checkError
     });
   };
-  onChangeAddress = e => {
+  onChangeAddress = (e, key) => {
     const {
       target: { value }
     } = e;
     const checkError = isEmpty(value);
+    const addressValue = {};
+    const addressErrorValue = {};
+    const errorKey = `${key}Error`;
+    addressValue[key] = value;
+    addressErrorValue[errorKey] = checkError;
     this.setState({
-      address: value,
-      addressError: checkError
+      ...addressValue,
+      ...addressErrorValue
     });
   };
   onChangePhone = e => {
@@ -186,14 +203,23 @@ export default class DeliveryAddress extends Component {
   handleClick = index => {
     const { data } = this.props;
     const {
-      full_name: name, address, pincode, mobile: phone, email, id_customer_address: addressId
+      full_name: name,
+      address1,
+      address2,
+      address3,
+      pincode,
+      mobile: phone,
+      email,
+      id_customer_address: addressId
     } = data[index];
     this.setState({
       addForm: false,
       editForm: true,
       currentaddressindex: index,
       email,
-      address,
+      address1,
+      address2,
+      address3,
       pincode,
       phone,
       name,
@@ -230,8 +256,12 @@ export default class DeliveryAddress extends Component {
       phoneErrorMessage,
       pincodeError,
       pincodeErrorMessage,
-      addressError,
-      addressErrorMessage,
+      address1Error,
+      address1ErrorMessage,
+      address2Error,
+      address2ErrorMessage,
+      address3Error,
+      address3ErrorMessage,
       nameError,
       nameErrorMessage
       // gstError,
@@ -240,7 +270,9 @@ export default class DeliveryAddress extends Component {
     const {
       name,
       phone,
-      address,
+      address1,
+      address2,
+      address3,
       pincode,
       editForm,
       addForm,
@@ -263,11 +295,15 @@ export default class DeliveryAddress extends Component {
                   >
                     <b>{item.full_name}</b>
                     <br />
-                    {item.address}
+                    {item.address1 || ''}
+                    {item.address2 && <hr />}
+                    {item.address2 || ''}
+                    {item.address3 && <hr />}
+                    {item.address3 || ''}
+                    <hr />
+                    {item.city || ''}, {item.pincode || ''}
                     <br />
-                    {item.city}, {item.pincode}
-                    <br />
-                    {item.state}
+                    {item.state || ''}
                     <br />
                   </button>
                 </Div>
@@ -296,13 +332,37 @@ export default class DeliveryAddress extends Component {
                       feedBackMessage={nameErrorMessage}
                     />
                     <FormInput
-                      label="Street Address *"
+                      label="Address1 *"
                       type="text"
                       placeholder=""
-                      onChange={this.onChangeAddress}
-                      value={address}
-                      feedBackError={addressError}
-                      feedBackMessage={addressErrorMessage}
+                      onChange={e => {
+                        this.onChangeAddress(e, 'address1');
+                      }}
+                      value={address1}
+                      feedBackError={address1Error}
+                      feedBackMessage={address1ErrorMessage}
+                    />
+                    <FormInput
+                      label="Address2 *"
+                      type="text"
+                      placeholder=""
+                      onChange={e => {
+                        this.onChangeAddress(e, 'address2');
+                      }}
+                      value={address2}
+                      feedBackError={address2Error}
+                      feedBackMessage={address2ErrorMessage}
+                    />
+                    <FormInput
+                      label="Address3 *"
+                      type="text"
+                      placeholder=""
+                      onChange={e => {
+                        this.onChangeAddress(e, 'address3');
+                      }}
+                      value={address3}
+                      feedBackError={address3Error}
+                      feedBackMessage={address3ErrorMessage}
                     />
                     <FormInput
                       label="Phone *"
@@ -373,13 +433,37 @@ export default class DeliveryAddress extends Component {
                       feedBackMessage={nameErrorMessage}
                     />
                     <FormInput
-                      label="Street Address *"
+                      label="Address1 *"
                       type="text"
                       placeholder=""
-                      onChange={this.onChangeAddress}
-                      value={address}
-                      feedBackError={addressError}
-                      feedBackMessage={addressErrorMessage}
+                      onChange={e => {
+                        this.onChangeAddress(e, 'address1');
+                      }}
+                      value={address1}
+                      feedBackError={address1Error}
+                      feedBackMessage={address1ErrorMessage}
+                    />
+                    <FormInput
+                      label="Address2 *"
+                      type="text"
+                      placeholder=""
+                      onChange={e => {
+                        this.onChangeAddress(e, 'address2');
+                      }}
+                      value={address2}
+                      feedBackError={address2Error}
+                      feedBackMessage={address2ErrorMessage}
+                    />
+                    <FormInput
+                      label="Address3 *"
+                      type="text"
+                      placeholder=""
+                      onChange={e => {
+                        this.onChangeAddress(e, 'address3');
+                      }}
+                      value={address3}
+                      feedBackError={address3Error}
+                      feedBackMessage={address3ErrorMessage}
                     />
                     <FormInput
                       label="Phone *"
@@ -450,7 +534,7 @@ DeliveryAddress.defaultProps = {
 };
 
 DeliveryAddress.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.array,
   useremail: PropTypes.string,
   loading: PropTypes.bool,
   updated: PropTypes.bool
