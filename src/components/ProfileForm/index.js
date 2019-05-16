@@ -9,7 +9,7 @@ import Div from 'hometown-components/lib/Div';
 import { validateEmail, isBlank } from 'js-utility-functions';
 import { validateMobile } from 'utils/validation';
 import { updateUserProfile } from 'redux/modules/profile';
-import { allowNChar, allowTypeOf } from 'utils/helper';
+import { allowNChar, allowTypeOf, isGSTNumber } from 'utils/helper';
 
 @connect(({ profile }) => ({
   profile: profile.data,
@@ -20,7 +20,8 @@ export default class ProfileForm extends Component {
     profile: PropTypes.shape({
       contact_number: PropTypes.string,
       email: PropTypes.string,
-      full_name: PropTypes.string
+      full_name: PropTypes.string,
+      gst: PropTypes.string
     }),
     response: PropTypes.object
   };
@@ -41,17 +42,23 @@ export default class ProfileForm extends Component {
     phoneErrorMessage: 'Enter 10 Digits Valid Mobile Number',
     fullName: '',
     fullNameError: false,
-    fullNameErrorMessage: ''
+    fullNameErrorMessage: '',
+    gst: '',
+    gstError: false,
+    gstErrorMessage: 'Enter a valid GST Number'
   };
 
   componentWillMount() {
     const {
-      profile: { full_name: fullName, email, contact_number: phone }
+      profile: {
+        full_name: fullName, email, contact_number: phone, gst
+      }
     } = this.props;
     this.setState({
       fullName: (fullName && fullName.trim()) || '',
       email,
-      phone: phone || ''
+      phone: phone || '',
+      gst
     });
   }
   onChangePhone = e => {
@@ -69,6 +76,17 @@ export default class ProfileForm extends Component {
         value[0] === '0' ? 'Mobile number must not start with 0' : 'Enter 10 Digits Valid Mobile Number'
     });
   };
+  onChangeGST = e => {
+    const {
+      target: { value }
+    } = e;
+    const checkError = !isGSTNumber(value);
+    this.setState({
+      gst: value,
+      gstError: checkError,
+      gstErrorMessage: 'Invalid GST Number !'
+    });
+  };
   onChangeFullName = e => {
     const {
       target: { value }
@@ -82,17 +100,22 @@ export default class ProfileForm extends Component {
   };
   onSubmitProfile = e => {
     e.preventDefault();
-    const { email, fullName, phone } = this.state;
+    const {
+      email, fullName, phone, gst
+    } = this.state;
     const checkEmail = validateEmail(email, 'Invalid Email');
     const phoneError = !validateMobile(phone);
     const checkFullName = isBlank(fullName);
-    if (checkEmail.error || checkFullName || phoneError) {
+    const isGSTError = !isGSTNumber(gst);
+    if (checkEmail.error || checkFullName || phoneError || isGSTError) {
       return this.setState({
         emailError: checkEmail.error,
         emailErrorMessage: checkEmail.errorMessage,
         fullNameError: checkFullName,
         fullNameErrorMessage: checkFullName ? "Name can't be blank" : '',
-        phoneError
+        phoneError,
+        gstError: isGSTError,
+        gstErrorMessage: 'Please enter a valid GST number !'
       });
     }
     const { dispatch } = this.context.store;
@@ -105,6 +128,9 @@ export default class ProfileForm extends Component {
       email,
       phone,
       fullName,
+      gst,
+      gstError,
+      gstErrorMessage,
       emailError,
       emailErrorMessage,
       phoneError,
@@ -131,6 +157,10 @@ export default class ProfileForm extends Component {
                   onChangeEmail={() => {}}
                   emailFeedBackError={emailError}
                   emailFeedBackMessage={emailErrorMessage}
+                  gst={gst}
+                  onChangeGST={this.onChangeGST}
+                  gstFeedBackError={gstError}
+                  gstFeedBackMessage={gstErrorMessage}
                   phone={phone}
                   onChangePhone={this.onChangePhone}
                   phoneFeedBackError={phoneError}

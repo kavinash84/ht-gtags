@@ -101,7 +101,7 @@ export const updateAddress = data => ({
     try {
       /* eslint-disable max-len */
       const {
-        addressId, name, address, pincode, phone, email, isBilling, isShipping
+        addressId, name, address, pincode, phone, email, isBilling, isShipping, gst
       } = data;
       const postData = {
         full_name: name,
@@ -110,7 +110,8 @@ export const updateAddress = data => ({
         is_shipping: isShipping || false,
         pincode,
         email,
-        mobile: phone
+        mobile: phone,
+        gst
       };
       return await client.put(`${MY_ADDRESS_API}/${addressId}`, postData);
     } catch (error) {
@@ -123,7 +124,7 @@ export const addAddress = data => ({
   types: [ADD_ADDRESS, ADD_ADDRESS_SUCCESS, ADD_ADDRESS_FAIL],
   promise: async ({ client }) => {
     const {
-      name, address, pincode, phone, email, isBilling, isShipping
+      name, address, pincode, phone, email, isBilling, isShipping, gst
     } = data;
     try {
       /* eslint-disable max-len */
@@ -134,7 +135,8 @@ export const addAddress = data => ({
         is_shipping: isShipping || false,
         pincode,
         email,
-        mobile: phone
+        mobile: phone,
+        gst
       };
       return await client.post(MY_ADDRESS_API, postData);
     } catch (error) {

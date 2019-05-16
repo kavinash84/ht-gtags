@@ -42,7 +42,8 @@ const formValdiator = (props, data, formType) => {
     city,
     pincode,
     pincodeFeedBackError,
-    state
+    state,
+    gst
   } = data;
   const {
     setNameError, setPhoneError, setEmailError, setAddressError, setPincodeError
@@ -72,7 +73,8 @@ const formValdiator = (props, data, formType) => {
       pincode,
       address,
       city,
-      state
+      state,
+      gst
     }
   };
 };
@@ -300,6 +302,9 @@ class DeliveryAddress extends Component {
                           <br />
                           {item.state}
                           <br />
+                          <br />
+                          {item.gst || ''}
+                          <br />
                         </button>
                       </Div>
                     ))}
@@ -326,7 +331,7 @@ class DeliveryAddress extends Component {
                         <AddressForm formType="shipping" isLoggedIn={isLoggedIn} userEmail={userEmail} />
                       </Div>
                     )}
-                    <Div col="6" pr="2rem" mt="1.5rem" hide>
+                    <Div col="6" pr="2rem" mt="1.5rem">
                       <div className="checkbox">
                         <input
                           type="checkbox"
