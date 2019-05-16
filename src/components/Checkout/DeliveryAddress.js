@@ -313,13 +313,13 @@ class DeliveryAddress extends Component {
                           onClick={() => this.handleClick(index)}
                         >
                           <b>{item.full_name}</b>
-                          <hr />
+                          <br />
                           {item.address1}
-                          {item.address2 && <hr />}
+                          {item.address2 && <br />}
                           {item.address2}
-                          {item.address3 && <hr />}
+                          {item.address3 && <br />}
                           {item.address3}
-                          <hr />
+                          <br />
                           {item.city}, {item.pincode}
                           <br />
                           {item.state}
