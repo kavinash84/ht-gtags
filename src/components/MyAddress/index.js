@@ -242,7 +242,9 @@ export default class DeliveryAddress extends Component {
     this.setState({
       addForm: true,
       editForm: false,
-      address: '',
+      address1: '',
+      address2: '',
+      address3: '',
       pincode: '',
       phone: '',
       name: ''
