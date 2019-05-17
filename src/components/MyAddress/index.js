@@ -12,7 +12,7 @@ import FormInput from 'hometown-components/lib/Forms/FormInput';
 import MyMenu from 'components/MyMenu';
 import { addAddress, updateAddress } from 'redux/modules/myaddress';
 // Validators
-import { isEmpty, pincode as validatePincode, validateEmail, validateMobile } from 'utils/validation';
+import { isEmpty, pincode as validatePincode, validateEmail, validateMobile, validateAddress } from 'utils/validation';
 import { allowNChar, allowTypeOf, isGSTNumber } from 'utils/helper';
 
 const addIcon = require('../../../static/round-add_circle_outline.svg');
@@ -94,29 +94,45 @@ export default class DeliveryAddress extends Component {
     });
   }
   componentWillReceiveProps(nextProps) {
+    const { useremail } = this.props;
     if (nextProps.updated) {
-      this.setState(initialState);
+      this.setState({
+        ...initialState,
+        email: useremail
+      });
     }
   }
   onSubmitValidator = () => {
     const {
-      email, name, pincode, address1, phone
+      email, name, pincode, address1, address2, address3, phone
     } = this.state;
 
     const nameError = isEmpty(name);
     const emailError = isEmpty(email) || !validateEmail(email);
     const phoneError = isEmpty(phone) || validateMobile(phone).error;
     const pincodeError = isEmpty(pincode) || validatePincode(pincode);
-    const address1Error = isEmpty(address1);
+    const address1Error = validateAddress(address1, 'address1');
+    const address2Error = validateAddress(address2, 'address2');
+    const address3Error = validateAddress(address3, 'address3');
     this.setState({
       nameError,
       emailError,
       phoneError,
       pincodeError,
-      address1Error
+      address1Error: address1Error.error,
+      address2Error: address2Error.error,
+      address3Error: address3Error.error
     });
 
-    if (nameError || emailError || phoneError || pincodeError || address1Error) {
+    if (
+      nameError ||
+      emailError ||
+      phoneError ||
+      pincodeError ||
+      address1Error.error ||
+      address2Error.error ||
+      address3Error.error
+    ) {
       return false;
     }
     return true;
@@ -135,15 +151,19 @@ export default class DeliveryAddress extends Component {
     const {
       target: { value }
     } = e;
-    const checkError = isEmpty(value);
+    const checkError = validateAddress(value, key);
     const addressValue = {};
     const addressErrorValue = {};
+    const addressErrorMsg = {};
     const errorKey = `${key}Error`;
+    const errorMsgKey = `${key}ErrorMessage`;
     addressValue[key] = value;
-    addressErrorValue[errorKey] = checkError;
+    addressErrorValue[errorKey] = checkError.error;
+    addressErrorMsg[errorMsgKey] = checkError.errorMessage;
     this.setState({
       ...addressValue,
-      ...addressErrorValue
+      ...addressErrorValue,
+      ...addressErrorMsg
     });
   };
   onChangePhone = e => {
@@ -345,7 +365,7 @@ export default class DeliveryAddress extends Component {
                       feedBackMessage={address1ErrorMessage}
                     />
                     <FormInput
-                      label="Address2 *"
+                      label="Address2"
                       type="text"
                       placeholder=""
                       onChange={e => {
@@ -356,7 +376,7 @@ export default class DeliveryAddress extends Component {
                       feedBackMessage={address2ErrorMessage}
                     />
                     <FormInput
-                      label="Address3 *"
+                      label="Address3"
                       type="text"
                       placeholder=""
                       onChange={e => {
@@ -386,7 +406,7 @@ export default class DeliveryAddress extends Component {
                     />
                     <FormInput
                       label="Email ID *"
-                      type="hidden"
+                      type="text"
                       placeholder=""
                       onChange={this.onChangeEmail}
                       value={useremail}
@@ -446,7 +466,7 @@ export default class DeliveryAddress extends Component {
                       feedBackMessage={address1ErrorMessage}
                     />
                     <FormInput
-                      label="Address2 *"
+                      label="Address2"
                       type="text"
                       placeholder=""
                       onChange={e => {
@@ -457,7 +477,7 @@ export default class DeliveryAddress extends Component {
                       feedBackMessage={address2ErrorMessage}
                     />
                     <FormInput
-                      label="Address3 *"
+                      label="Address3"
                       type="text"
                       placeholder=""
                       onChange={e => {
@@ -487,7 +507,7 @@ export default class DeliveryAddress extends Component {
                     />
                     <FormInput
                       label="Email ID *"
-                      type="hidden"
+                      type="text"
                       placeholder=""
                       onChange={this.onChangeEmail}
                       value={useremail}

@@ -19,6 +19,7 @@ import { bindActionCreators } from 'redux';
 import * as actionCreators from 'redux/modules/address';
 import { notifSend } from 'redux/modules/notifs';
 import { isBlank } from 'js-utility-functions';
+import { validateAddress } from 'utils/validation';
 import MenuCheckout from './MenuCheckout';
 import AddressForm from './AddressForm';
 import OrderSummary from './OrderSummary';
@@ -40,9 +41,9 @@ const formValdiator = (props, data, formType) => {
     address1,
     address1FeedBackError1,
     address2,
-    // address2FeedBackError2,
+    addressFeedBackError2,
     address3,
-    // address3FeedBackError3,
+    addressFeedBackError3,
     city,
     pincode,
     pincodeFeedBackError,
@@ -54,25 +55,25 @@ const formValdiator = (props, data, formType) => {
     setPhoneError,
     setEmailError,
     setAddressError1,
-    // setAddressError2,
-    // setAddressError3,
+    setAddressError2,
+    setAddressError3,
     setPincodeError
   } = props;
   const fullNameError = isBlank(fullName) || fullNameFeedBackError;
   const emailError = isBlank(email) || emailFeedBackError;
   const phoneError = isBlank(phone) || phoneFeedBackError;
   const pincodeError = isBlank(pincode) || pincodeFeedBackError;
-  const addressError1 = isBlank(address1) || address1FeedBackError1;
-  // const addressError2 = isBlank(address2) || addressFeedBackError2;
-  // const addressError3 = isBlank(address3) || addressFeedBackError3;
-  if (fullNameError || emailError || pincodeError || phoneError || addressError1) {
+  const addressError1 = validateAddress(address1, 'address1').error || address1FeedBackError1;
+  const addressError2 = validateAddress(address2, 'address2').error || addressFeedBackError2;
+  const addressError3 = validateAddress(address3, 'address3').error || addressFeedBackError3;
+  if (fullNameError || emailError || pincodeError || phoneError || addressError1 || addressError2 || addressError3) {
     setNameError(formType, fullNameError);
     setEmailError(formType, emailError);
     setPincodeError(formType, pincodeError);
     setPhoneError(formType, phoneError);
     setAddressError1(formType, addressError1);
-    // setAddressError2(formType, addressError2);
-    // setAddressError3(formType, addressError3);
+    setAddressError2(formType, addressError2);
+    setAddressError3(formType, addressError3);
     return {
       error: true,
       data: null

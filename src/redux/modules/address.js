@@ -1,5 +1,5 @@
 // Validators
-import { isEmpty, pincode as pincodeIsValid, validateMobile } from 'utils/validation';
+import { isEmpty, pincode as pincodeIsValid, validateMobile, validateAddress } from 'utils/validation';
 import { allowNChar, allowTypeOf, isGSTNumber } from 'utils/helper';
 import { PINCODE_INFO } from 'helpers/apiUrls';
 import { loadCart } from './cart';
@@ -14,7 +14,9 @@ const SET_NAME = 'deliveryaddress/SET_NAME';
 const SET_CITY = 'deliveryaddress/SET_CITY';
 const SET_EMAIL = 'deliveryaddress/SET_EMAIL';
 const SET_ADDRESS1 = 'deliveryaddress/SET_ADDRESS1';
+const SET_ADDRESS1_ADDRESS2 = 'delivery/SET_ADDRESS1_ADDRESS2';
 const SET_ADDRESS2 = 'deliveryaddress/SET_ADDRESS2';
+const SET_ADDRESS2_ADDRESS3 = 'deliveryaddress/SET_ADDRESS2_ADDRESS3';
 const SET_ADDRESS3 = 'deliveryaddress/SET_ADDRESS3';
 const SET_STATE = 'deliveryaddress/SET_STATE';
 const SET_PHONE = 'deliveryaddress/SET_PHONE';
@@ -62,13 +64,13 @@ const initialState = {
     phoneFeedBackMessage: 'Enter 10 Digits Valid Mobile Number !',
     address1: '',
     addressFeedBackError1: false,
-    addressFeedBackMessage1: 'Address Cannot be Left Empty !',
+    addressFeedBackMessage1: '',
     address2: '',
     addressFeedBackError2: false,
-    addressFeedBackMessage2: 'Address2 Cannot be Left Empty !',
+    addressFeedBackMessage2: '',
     address3: '',
     addressFeedBackError3: false,
-    addressFeedBackMessage3: 'Address3 Cannot be Left Empty !',
+    addressFeedBackMessage3: '',
     city: '',
     cityFeedBackError: false,
     cityFeedBackMessage: 'City cannot be Empty',
@@ -95,13 +97,13 @@ const initialState = {
     phoneFeedBackMessage: 'Enter 10 Digits Valid Mobile Number !',
     address1: '',
     addressFeedBackError1: false,
-    addressFeedBackMessage1: 'Address1 Cannot be Left Empty !',
+    addressFeedBackMessage1: '',
     address2: '',
-    // addressFeedBackError2: false,
-    // addressFeedBackMessage2: 'Address2 Cannot be Left Empty !',
+    addressFeedBackError2: false,
+    addressFeedBackMessage2: '',
     address3: '',
-    // addressFeedBackError3: false,
-    // addressFeedBackMessage3: 'Address3 Cannot be Left Empty !',
+    addressFeedBackError3: false,
+    addressFeedBackMessage3: '',
     city: '',
     cityFeedBackError: false,
     cityFeedBackMessage: 'City cannot be Empty',
@@ -155,7 +157,21 @@ export default function reducer(state = initialState, action = {}) {
         [action.formType]: {
           ...state[action.formType],
           address1: action.address1,
-          addressFeedBackError1: isEmpty(action.address1)
+          addressFeedBackError1: validateAddress(action.address1, 'address1').error,
+          addressFeedBackMessage1: validateAddress(action.address1, 'address1').errorMessage
+        }
+      };
+    case SET_ADDRESS1_ADDRESS2:
+      return {
+        ...state,
+        [action.formType]: {
+          ...state[action.formType],
+          address1: action.address1,
+          addressFeedBackError1: validateAddress(action.address1, 'address1').error,
+          addressFeedBackMessage1: validateAddress(action.address1, 'address1').errorMessage,
+          address2: action.address2,
+          addressFeedBackError2: validateAddress(action.address2, 'address2').error,
+          addressFeedBackMessage2: validateAddress(action.address1, 'address2').errorMessage
         }
       };
     case SET_ADDRESS2:
@@ -163,8 +179,22 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         [action.formType]: {
           ...state[action.formType],
-          address2: action.address2
-          // addressFeedBackError2: isEmpty(action.address2)
+          address2: action.address2,
+          addressFeedBackError2: validateAddress(action.address2, 'address2').error,
+          addressFeedBackMessage2: validateAddress(action.address1, 'address2').errorMessage
+        }
+      };
+    case SET_ADDRESS2_ADDRESS3:
+      return {
+        ...state,
+        [action.formType]: {
+          ...state[action.formType],
+          address2: action.address2,
+          addressFeedBackError2: validateAddress(action.address2, 'address2').error,
+          addressFeedBackMessage2: validateAddress(action.address1, 'address2').errorMessage,
+          address3: action.address3,
+          addressFeedBackError3: validateAddress(action.address3, 'address3').error,
+          addressFeedBackMessage3: validateAddress(action.address3, 'address3').errorMessage
         }
       };
     case SET_ADDRESS3:
@@ -172,8 +202,9 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         [action.formType]: {
           ...state[action.formType],
-          address3: action.address3
-          // addressFeedBackError3: isEmpty(action.address3)
+          address3: action.address3,
+          addressFeedBackError3: validateAddress(action.address3, 'address3').error,
+          addressFeedBackMessage3: validateAddress(action.address3, 'address3').error
         }
       };
     case SET_STATE:
@@ -261,16 +292,16 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         [action.formType]: {
-          ...state[action.formType]
-          // addressFeedBackError2: action.payLoad
+          ...state[action.formType],
+          addressFeedBackError2: action.payLoad
         }
       };
     case SET_ADDRESS_ERROR3:
       return {
         ...state,
         [action.formType]: {
-          ...state[action.formType]
-          // addressFeedBackError3: action.payLoad
+          ...state[action.formType],
+          addressFeedBackError3: action.payLoad
         }
       };
     case SET_STATE_ERROR:
@@ -458,21 +489,58 @@ export const onChangeCity = (formType, city) => ({
   formType,
   city
 });
-export const onChangeAddress1 = (formType, address1) => ({
-  type: SET_ADDRESS1,
-  formType,
-  address1
-});
-export const onChangeAddress2 = (formType, address2) => ({
-  type: SET_ADDRESS2,
-  formType,
-  address2
-});
-export const onChangeAddress3 = (formType, address3) => ({
-  type: SET_ADDRESS3,
-  formType,
-  address3
-});
+export const onChangeAddress2 = (formType, address2) => {
+  if (address2.length > 40) {
+    const add2Value = address2.slice(0, 39);
+    const add3Value = address2.slice(40);
+    document.getElementById('add3').focus();
+    return {
+      type: SET_ADDRESS2_ADDRESS3,
+      formType,
+      address2: add2Value,
+      address3: add3Value
+    };
+  }
+  return {
+    type: SET_ADDRESS2,
+    formType,
+    address2
+  };
+};
+export const onChangeAddress1 = (formType, address1) => {
+  if (address1.length > 40) {
+    const add1Value = address1.slice(0, 39);
+    const add2Value = address1.slice(40);
+    document.getElementById('add2').focus();
+    return {
+      type: SET_ADDRESS1_ADDRESS2,
+      formType,
+      address1: add1Value,
+      address2: add2Value
+    };
+  }
+  return {
+    type: SET_ADDRESS1,
+    formType,
+    address1
+  };
+};
+export const onChangeAddress3 = (formType, address3) => {
+  if (address3.length > 40) {
+    const add3Value = address3.slice(0, 39);
+    document.getElementById('pincodeId').focus();
+    return {
+      type: SET_ADDRESS3,
+      formType,
+      address3: add3Value
+    };
+  }
+  return {
+    type: SET_ADDRESS3,
+    formType,
+    address3
+  };
+};
 export const onChangePincode = (formType, pincode) => ({
   type: SET_PINCODE,
   formType,
