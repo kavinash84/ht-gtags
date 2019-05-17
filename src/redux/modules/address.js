@@ -168,10 +168,10 @@ export default function reducer(state = initialState, action = {}) {
           ...state[action.formType],
           address1: action.address1,
           addressFeedBackError1: validateAddress(action.address1, 'address1').error,
-          addressFeedBackMessage1: validateAddress(action.address1, 'address1').errorMessage,
-          address2: action.address2,
-          addressFeedBackError2: validateAddress(action.address2, 'address2').error,
-          addressFeedBackMessage2: validateAddress(action.address1, 'address2').errorMessage
+          addressFeedBackMessage1: validateAddress(action.address1, 'address1').errorMessage
+          // address2: action.address2,
+          // addressFeedBackError2: validateAddress(action.address2, 'address2').error,
+          // addressFeedBackMessage2: validateAddress(action.address1, 'address2').errorMessage
         }
       };
     case SET_ADDRESS2:
@@ -191,10 +191,10 @@ export default function reducer(state = initialState, action = {}) {
           ...state[action.formType],
           address2: action.address2,
           addressFeedBackError2: validateAddress(action.address2, 'address2').error,
-          addressFeedBackMessage2: validateAddress(action.address1, 'address2').errorMessage,
-          address3: action.address3,
-          addressFeedBackError3: validateAddress(action.address3, 'address3').error,
-          addressFeedBackMessage3: validateAddress(action.address3, 'address3').errorMessage
+          addressFeedBackMessage2: validateAddress(action.address1, 'address2').errorMessage
+          // address3: action.address3,
+          // addressFeedBackError3: validateAddress(action.address3, 'address3').error,
+          // addressFeedBackMessage3: validateAddress(action.address3, 'address3').errorMessage
         }
       };
     case SET_ADDRESS3:
@@ -204,7 +204,7 @@ export default function reducer(state = initialState, action = {}) {
           ...state[action.formType],
           address3: action.address3,
           addressFeedBackError3: validateAddress(action.address3, 'address3').error,
-          addressFeedBackMessage3: validateAddress(action.address3, 'address3').error
+          addressFeedBackMessage3: validateAddress(action.address3, 'address3').errorMessage
         }
       };
     case SET_STATE:
@@ -491,14 +491,14 @@ export const onChangeCity = (formType, city) => ({
 });
 export const onChangeAddress2 = (formType, address2) => {
   if (address2.length > 40) {
-    const add2Value = address2.slice(0, 40);
-    const add3Value = address2.slice(40);
-    document.getElementById('add3').focus();
+    const add2Value = address2.slice(0, 41);
+    // const add3Value = address2.slice(40);
+    // document.getElementById('add3').focus();
     return {
       type: SET_ADDRESS2_ADDRESS3,
       formType,
-      address2: add2Value,
-      address3: add3Value
+      address2: add2Value
+      // address3: add3Value
     };
   }
   return {
@@ -509,14 +509,14 @@ export const onChangeAddress2 = (formType, address2) => {
 };
 export const onChangeAddress1 = (formType, address1) => {
   if (address1.length > 40) {
-    const add1Value = address1.slice(0, 40);
-    const add2Value = address1.slice(40);
-    document.getElementById('add2').focus();
+    const add1Value = address1.slice(0, 41);
+    // const add2Value = address1.slice(40);
+    // document.getElementById('add2').focus();
     return {
       type: SET_ADDRESS1_ADDRESS2,
       formType,
-      address1: add1Value,
-      address2: add2Value
+      address1: add1Value
+      // address2: add2Value
     };
   }
   return {
@@ -527,8 +527,8 @@ export const onChangeAddress1 = (formType, address1) => {
 };
 export const onChangeAddress3 = (formType, address3) => {
   if (address3.length > 40) {
-    const add3Value = address3.slice(0, 40);
-    document.getElementById('pincodeId').focus();
+    const add3Value = address3.slice(0, 41);
+    // document.getElementById('pincodeId').focus();
     return {
       type: SET_ADDRESS3,
       formType,

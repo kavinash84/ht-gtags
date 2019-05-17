@@ -157,7 +157,7 @@ export default class DeliveryAddress extends Component {
     const addressErrorMsg = {};
     const errorKey = `${key}Error`;
     const errorMsgKey = `${key}ErrorMessage`;
-    addressValue[key] = value;
+    addressValue[key] = value.slice(0, 41);
     addressErrorValue[errorKey] = checkError.error;
     addressErrorMsg[errorMsgKey] = checkError.errorMessage;
     this.setState({
@@ -354,7 +354,7 @@ export default class DeliveryAddress extends Component {
                       feedBackMessage={nameErrorMessage}
                     />
                     <FormInput
-                      label="Address1 *"
+                      label="Flat, House no., Building, Apartment: *"
                       type="text"
                       placeholder=""
                       onChange={e => {
@@ -365,7 +365,7 @@ export default class DeliveryAddress extends Component {
                       feedBackMessage={address1ErrorMessage}
                     />
                     <FormInput
-                      label="Address2"
+                      label="Area, Colony, Street, Sector: "
                       type="text"
                       placeholder=""
                       onChange={e => {
@@ -376,7 +376,7 @@ export default class DeliveryAddress extends Component {
                       feedBackMessage={address2ErrorMessage}
                     />
                     <FormInput
-                      label="Address3"
+                      label="Landmark,Village: "
                       type="text"
                       placeholder=""
                       onChange={e => {
