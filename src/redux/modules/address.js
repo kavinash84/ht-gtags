@@ -491,7 +491,7 @@ export const onChangeCity = (formType, city) => ({
 });
 export const onChangeAddress2 = (formType, address2) => {
   if (address2.length > 40) {
-    const add2Value = address2.slice(0, 39);
+    const add2Value = address2.slice(0, 40);
     const add3Value = address2.slice(40);
     document.getElementById('add3').focus();
     return {
@@ -509,7 +509,7 @@ export const onChangeAddress2 = (formType, address2) => {
 };
 export const onChangeAddress1 = (formType, address1) => {
   if (address1.length > 40) {
-    const add1Value = address1.slice(0, 39);
+    const add1Value = address1.slice(0, 40);
     const add2Value = address1.slice(40);
     document.getElementById('add2').focus();
     return {
@@ -527,7 +527,7 @@ export const onChangeAddress1 = (formType, address1) => {
 };
 export const onChangeAddress3 = (formType, address3) => {
   if (address3.length > 40) {
-    const add3Value = address3.slice(0, 39);
+    const add3Value = address3.slice(0, 40);
     document.getElementById('pincodeId').focus();
     return {
       type: SET_ADDRESS3,
