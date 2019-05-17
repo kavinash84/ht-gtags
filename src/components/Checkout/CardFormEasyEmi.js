@@ -96,7 +96,7 @@ class CardForm extends Component {
                 <FormInput
                   label="STEP 1 of 2"
                   type="text"
-                  placeholder="Enter Card Number"
+                  placeholder="Enter Card Number / Mobile Number"
                   name="cardNumber"
                   value={cardNumber}
                   onChange={onChangeDetails(setPaymentDetails, gateway, sessionId, easyEmiConfig)}

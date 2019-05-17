@@ -255,7 +255,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEa
               src={emiIcon}
               alt="EASYEMI"
             />
-            EASY EMI
+            Bajaj Finance EMI
           </Label>
         </Div>
       );

@@ -125,7 +125,7 @@ export default class Home extends Component {
               <CategoryCarousel categoryName={category.title} subTitle={category.sub_title} data={category.values} />
             </LazyLoad>
           ))}
-          <OfferBanner image={middleBanner.image_url} url={middleBanner.url_key} />
+          <OfferBanner image={middleBanner.image_url} url={middleBanner.url_key} target={middleBanner.target || ''} />
           {homepageProducts.map((products, index) => (
             <LazyLoad height={200} offset={100} key={String(index)}>
               <ProductCarousel

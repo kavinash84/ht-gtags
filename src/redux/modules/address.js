@@ -13,7 +13,9 @@ const TOGGLE_SHIPPING_IS_BILING = 'deliveryaddress/TOGGLE_SHIPPING_IS_BILING';
 const SET_NAME = 'deliveryaddress/SET_NAME';
 const SET_CITY = 'deliveryaddress/SET_CITY';
 const SET_EMAIL = 'deliveryaddress/SET_EMAIL';
-const SET_ADDRESS = 'deliveryaddress/SET_ADDRESS';
+const SET_ADDRESS1 = 'deliveryaddress/SET_ADDRESS1';
+const SET_ADDRESS2 = 'deliveryaddress/SET_ADDRESS2';
+const SET_ADDRESS3 = 'deliveryaddress/SET_ADDRESS3';
 const SET_STATE = 'deliveryaddress/SET_STATE';
 const SET_PHONE = 'deliveryaddress/SET_PHONE';
 const SET_PINCODE = 'deliveryaddress/SET_PINCODE';
@@ -22,7 +24,9 @@ const SET_GST = 'deliveryaddress/SET_GST';
 const SET_NAME_ERROR = 'deliveryaddress/SET_NAME_ERROR';
 const SET_PINCODE_ERROR = 'deliveryaddress/SET_PINCODE_ERROR';
 const SET_PHONE_ERROR = 'deliveryaddress/SET_PHONE_ERROR';
-const SET_ADDRESS_ERROR = 'deliveryaddress/SET_ADDRESS_ERROR';
+const SET_ADDRESS_ERROR1 = 'deliveryaddress/SET_ADDRESS_ERROR1';
+const SET_ADDRESS_ERROR2 = 'deliveryaddress/SET_ADDRESS_ERROR2';
+const SET_ADDRESS_ERROR3 = 'deliveryaddress/SET_ADDRESS_ERROR3';
 const SET_CITY_ERROR = 'deliveryaddress/SET_CITY_ERROR';
 const SET_STATE_ERROR = 'deliveryaddress/SET_STATE_ERROR';
 const SET_EMAIL_ERROR = 'deliveryaddress/SET_EMAIL_ERROR';
@@ -56,9 +60,15 @@ const initialState = {
     phone: '',
     phoneFeedBackError: false,
     phoneFeedBackMessage: 'Enter 10 Digits Valid Mobile Number !',
-    address: '',
-    addressFeedBackError: false,
-    addressFeedBackMessage: 'Address Cannot be Left Empty !',
+    address1: '',
+    addressFeedBackError1: false,
+    addressFeedBackMessage1: 'Address Cannot be Left Empty !',
+    address2: '',
+    addressFeedBackError2: false,
+    addressFeedBackMessage2: 'Address2 Cannot be Left Empty !',
+    address3: '',
+    addressFeedBackError3: false,
+    addressFeedBackMessage3: 'Address3 Cannot be Left Empty !',
     city: '',
     cityFeedBackError: false,
     cityFeedBackMessage: 'City cannot be Empty',
@@ -83,9 +93,15 @@ const initialState = {
     phone: '',
     phoneFeedBackError: false,
     phoneFeedBackMessage: 'Enter 10 Digits Valid Mobile Number !',
-    address: '',
-    addressFeedBackError: false,
-    addressFeedBackMessage: 'Address Cannot be Left Empty !',
+    address1: '',
+    addressFeedBackError1: false,
+    addressFeedBackMessage1: 'Address1 Cannot be Left Empty !',
+    address2: '',
+    // addressFeedBackError2: false,
+    // addressFeedBackMessage2: 'Address2 Cannot be Left Empty !',
+    address3: '',
+    // addressFeedBackError3: false,
+    // addressFeedBackMessage3: 'Address3 Cannot be Left Empty !',
     city: '',
     cityFeedBackError: false,
     cityFeedBackMessage: 'City cannot be Empty',
@@ -133,13 +149,31 @@ export default function reducer(state = initialState, action = {}) {
           emailFeedBackError: !emailIsValid(action.email)
         }
       };
-    case SET_ADDRESS:
+    case SET_ADDRESS1:
       return {
         ...state,
         [action.formType]: {
           ...state[action.formType],
-          address: action.address,
-          addressFeedBackError: isEmpty(action.address)
+          address1: action.address1,
+          addressFeedBackError1: isEmpty(action.address1)
+        }
+      };
+    case SET_ADDRESS2:
+      return {
+        ...state,
+        [action.formType]: {
+          ...state[action.formType],
+          address2: action.address2
+          // addressFeedBackError2: isEmpty(action.address2)
+        }
+      };
+    case SET_ADDRESS3:
+      return {
+        ...state,
+        [action.formType]: {
+          ...state[action.formType],
+          address3: action.address3
+          // addressFeedBackError3: isEmpty(action.address3)
         }
       };
     case SET_STATE:
@@ -215,12 +249,28 @@ export default function reducer(state = initialState, action = {}) {
           cityFeedBackError: action.payLoad
         }
       };
-    case SET_ADDRESS_ERROR:
+    case SET_ADDRESS_ERROR1:
       return {
         ...state,
         [action.formType]: {
           ...state[action.formType],
-          addressFeedBackError: action.payLoad
+          addressFeedBackError1: action.payLoad
+        }
+      };
+    case SET_ADDRESS_ERROR2:
+      return {
+        ...state,
+        [action.formType]: {
+          ...state[action.formType]
+          // addressFeedBackError2: action.payLoad
+        }
+      };
+    case SET_ADDRESS_ERROR3:
+      return {
+        ...state,
+        [action.formType]: {
+          ...state[action.formType]
+          // addressFeedBackError3: action.payLoad
         }
       };
     case SET_STATE_ERROR:
@@ -262,8 +312,12 @@ export default function reducer(state = initialState, action = {}) {
           emailFeedBackError: false,
           phone: action.data.mobile,
           phoneFeedBackError: false,
-          address: action.data.address,
-          addressFeedBackError: false,
+          address1: action.data.address1,
+          addressFeedBackError1: false,
+          address2: action.data.address2,
+          // addressFeedBackError2: false,
+          address3: action.data.address3,
+          // addressFeedBackError3: false,
           city: action.data.city,
           cityFeedBackError: false,
           state: action.data.state,
@@ -404,10 +458,20 @@ export const onChangeCity = (formType, city) => ({
   formType,
   city
 });
-export const onChangeAddress = (formType, address) => ({
-  type: SET_ADDRESS,
+export const onChangeAddress1 = (formType, address1) => ({
+  type: SET_ADDRESS1,
   formType,
-  address
+  address1
+});
+export const onChangeAddress2 = (formType, address2) => ({
+  type: SET_ADDRESS2,
+  formType,
+  address2
+});
+export const onChangeAddress3 = (formType, address3) => ({
+  type: SET_ADDRESS3,
+  formType,
+  address3
 });
 export const onChangePincode = (formType, pincode) => ({
   type: SET_PINCODE,
@@ -434,7 +498,6 @@ export const onChangeGST = (formType, gst) => ({
   formType,
   gst
 });
-
 // Set Error
 export const setPhoneError = (formType, payLoad) => ({
   type: SET_PHONE_ERROR,
@@ -466,12 +529,21 @@ export const setCityError = (formType, payLoad) => ({
   formType,
   payLoad
 });
-export const setAddressError = (formType, payLoad) => ({
-  type: SET_ADDRESS_ERROR,
+export const setAddressError1 = (formType, payLoad) => ({
+  type: SET_ADDRESS_ERROR1,
   formType,
   payLoad
 });
-
+export const setAddressError2 = (formType, payLoad) => ({
+  type: SET_ADDRESS_ERROR2,
+  formType,
+  payLoad
+});
+export const setAddressError3 = (formType, payLoad) => ({
+  type: SET_ADDRESS_ERROR3,
+  formType,
+  payLoad
+});
 // Pincodes Methods
 
 export const load = (formType, query) => ({
