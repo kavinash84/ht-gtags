@@ -30,10 +30,10 @@ const AddressForm = props => {
     address3,
     addressFeedBackError1,
     addressFeedBackMessage1,
-    // addressFeedBackError2,
-    // addressFeedBackMessage2,
-    // addressFeedBackError3,
-    // addressFeedBackMessage3,
+    addressFeedBackError2,
+    addressFeedBackMessage2,
+    addressFeedBackError3,
+    addressFeedBackMessage3,
     city,
     cityFeedBackError,
     cityFeedBackMessage,
@@ -103,7 +103,8 @@ const AddressForm = props => {
       <Row display="block" mr="0" ml="0">
         <Div col="4" pr="10px">
           <FormInput
-            label="Address 1 *"
+            id="add1"
+            label="Flat, House no., Building, Apartment: *"
             type="textarea"
             placeholder=""
             onChange={e => onChangeAddress1(formType, e.target.value.replace(/#/g, ''))}
@@ -114,30 +115,33 @@ const AddressForm = props => {
         </Div>
         <Div col="4" pr="10px" pl="10px">
           <FormInput
-            label="Address 2"
+            id="add2"
+            label="Area, Colony, Street, Sector:"
             type="textarea"
             placeholder=""
             onChange={e => onChangeAddress2(formType, e.target.value.replace(/#/g, ''))}
             value={address2}
-            // feedBackError={addressFeedBackError2}
-            // feedBackMessage={addressFeedBackMessage2}
+            feedBackError={addressFeedBackError2}
+            feedBackMessage={addressFeedBackMessage2}
           />
         </Div>
         <Div col="4" pl="10px">
           <FormInput
-            label="Address 3"
+            id="add3"
+            label="Landmark,Village:"
             type="textarea"
             placeholder=""
             onChange={e => onChangeAddress3(formType, e.target.value.replace(/#/g, ''))}
             value={address3}
-            // feedBackError={addressFeedBackError3}
-            // feedBackMessage={addressFeedBackMessage3}
+            feedBackError={addressFeedBackError3}
+            feedBackMessage={addressFeedBackMessage3}
           />
         </Div>
       </Row>
       <Row display="block" mr="0" ml="0">
         <Div col="6" pr="10px">
           <Pincode
+            id="pincodeId"
             pincode={pincode}
             formType={formType}
             feedBackError={pincodeFeedBackError}
@@ -210,10 +214,10 @@ AddressForm.propTypes = {
   address3: PropTypes.string,
   addressFeedBackError1: PropTypes.bool.isRequired,
   addressFeedBackMessage1: PropTypes.string.isRequired,
-  // addressFeedBackError2: PropTypes.bool.isRequired,
-  // addressFeedBackMessage2: PropTypes.string.isRequired,
-  // addressFeedBackError3: PropTypes.bool.isRequired,
-  // addressFeedBackMessage3: PropTypes.string.isRequired,
+  addressFeedBackError2: PropTypes.bool.isRequired,
+  addressFeedBackMessage2: PropTypes.string.isRequired,
+  addressFeedBackError3: PropTypes.bool.isRequired,
+  addressFeedBackMessage3: PropTypes.string.isRequired,
   city: PropTypes.string.isRequired,
   cityFeedBackError: PropTypes.bool.isRequired,
   cityFeedBackMessage: PropTypes.string.isRequired,

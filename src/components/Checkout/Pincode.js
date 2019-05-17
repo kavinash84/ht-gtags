@@ -24,6 +24,7 @@ const Pincode = ({
   loadPincodeDetails,
   setPincodeQuery,
   pincode,
+  id,
   feedBackError,
   feedBackMessage,
   formType
@@ -40,12 +41,14 @@ const Pincode = ({
       value={pincode}
       feedBackError={feedBackError}
       feedBackMessage={feedBackMessage}
+      id={id}
     />
   </Div>
 );
 
 Pincode.defaultProps = {
-  pincode: ''
+  pincode: '',
+  id: ''
 };
 
 Pincode.propTypes = {
@@ -55,7 +58,8 @@ Pincode.propTypes = {
   pincode: PropTypes.string,
   feedBackError: PropTypes.bool.isRequired,
   feedBackMessage: PropTypes.string.isRequired,
-  formType: PropTypes.string.isRequired
+  formType: PropTypes.string.isRequired,
+  id: PropTypes.string
 };
 
 export default connect(
