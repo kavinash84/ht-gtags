@@ -316,7 +316,7 @@ export const allowNChar = (value, n) => {
 // ex - 29 ABCD E 1234 F 2Z5
 
 export const isGSTNumber = value => {
-  const isGST = /^([0-9]){2}([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}([0-9]){1}([a-zA-Z]){1}([0-9]){1}?$/.test(value);
+  const isGST = /^([0-9]){2}([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}([0-9]){1}([a-zA-Z]){1}([a-zA-Z0-9]){1}?$/.test(value);
   if (isGST) {
     return true;
   }
