@@ -378,7 +378,7 @@ export default class DeliveryAddress extends Component {
                       onChange={e => {
                         this.onChangeAddress(e, 'address1');
                       }}
-                      value={address1}
+                      value={address1 || ''}
                       feedBackError={address1Error}
                       feedBackMessage={address1ErrorMessage}
                     />
@@ -389,7 +389,7 @@ export default class DeliveryAddress extends Component {
                       onChange={e => {
                         this.onChangeAddress(e, 'address2');
                       }}
-                      value={address2}
+                      value={address2 || ''}
                       feedBackError={address2Error}
                       feedBackMessage={address2ErrorMessage}
                     />
@@ -400,7 +400,7 @@ export default class DeliveryAddress extends Component {
                       onChange={e => {
                         this.onChangeAddress(e, 'address3');
                       }}
-                      value={address3}
+                      value={address3 || ''}
                       feedBackError={address3Error}
                       feedBackMessage={address3ErrorMessage}
                     />
