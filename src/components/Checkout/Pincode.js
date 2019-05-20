@@ -31,7 +31,7 @@ const Pincode = ({
 }) => (
   <Div className={styles.checkoutPincode} pt="0" pb="0.3125rem">
     <FormInput
-      label="Pincode"
+      label="Pincode *"
       type="text"
       placeholder=""
       backgroundColor="#fff"
