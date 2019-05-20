@@ -30,71 +30,6 @@ import PaymentMethods from '../PaymentMethods/';
 const addIcon = require('../../../static/round-add_circle_outline.svg');
 const styles = require('./DeliveryAddress.scss');
 
-const formValdiator = (props, data, formType) => {
-  const {
-    fullName,
-    fullNameFeedBackError,
-    email,
-    emailFeedBackError,
-    phone,
-    phoneFeedBackError,
-    address1,
-    address1FeedBackError1,
-    address2,
-    addressFeedBackError2,
-    address3,
-    addressFeedBackError3,
-    city,
-    pincode,
-    pincodeFeedBackError,
-    state,
-    gst
-  } = data;
-  const {
-    setNameError,
-    setPhoneError,
-    setEmailError,
-    setAddressError1,
-    setAddressError2,
-    setAddressError3,
-    setPincodeError
-  } = props;
-  const fullNameError = isBlank(fullName) || fullNameFeedBackError;
-  const emailError = isBlank(email) || emailFeedBackError;
-  const phoneError = isBlank(phone) || phoneFeedBackError;
-  const pincodeError = isBlank(pincode) || pincodeFeedBackError;
-  const addressError1 = validateAddress(address1, 'address1').error || address1FeedBackError1;
-  const addressError2 = validateAddress(address2, 'address2').error || addressFeedBackError2;
-  const addressError3 = validateAddress(address3, 'address3').error || addressFeedBackError3;
-  if (fullNameError || emailError || pincodeError || phoneError || addressError1 || addressError2 || addressError3) {
-    setNameError(formType, fullNameError);
-    setEmailError(formType, emailError);
-    setPincodeError(formType, pincodeError);
-    setPhoneError(formType, phoneError);
-    setAddressError1(formType, addressError1);
-    setAddressError2(formType, addressError2);
-    setAddressError3(formType, addressError3);
-    return {
-      error: true,
-      data: null
-    };
-  }
-  return {
-    error: false,
-    data: {
-      fullName,
-      phone,
-      email,
-      pincode,
-      address1,
-      address2,
-      address3,
-      city,
-      state,
-      gst
-    }
-  };
-};
 const mapStateToProps = ({
   userLogin, app, checkout, myaddress, address, profile, cart
 }) => ({
@@ -121,7 +56,6 @@ class DeliveryAddress extends Component {
     openLogin: false,
     addressform: false
   };
-
   componentDidMount() {
     const { dispatch } = this.context.store;
     const { cart, history } = this.props;
@@ -169,6 +103,72 @@ class DeliveryAddress extends Component {
       history.push('/checkout/payment-options');
     }
   }
+  formValdiator = (props, data, formType) => {
+    const {
+      fullName,
+      fullNameFeedBackError,
+      email,
+      emailFeedBackError,
+      phone,
+      phoneFeedBackError,
+      address1,
+      address1FeedBackError1,
+      address2,
+      addressFeedBackError2,
+      address3,
+      addressFeedBackError3,
+      city,
+      pincode,
+      pincodeFeedBackError,
+      state,
+      gst
+    } = data;
+    const {
+      setNameError,
+      setPhoneError,
+      setEmailError,
+      setAddressError1,
+      setAddressError2,
+      setAddressError3,
+      setPincodeError
+    } = props;
+    const { addressform } = this.state;
+    const fullNameError = isBlank(fullName) || fullNameFeedBackError;
+    const emailError = isBlank(email) || emailFeedBackError;
+    const phoneError = isBlank(phone) || phoneFeedBackError;
+    const pincodeError = isBlank(pincode) || pincodeFeedBackError;
+    const addressError1 = addressform ? validateAddress(address1, 'address1').error || address1FeedBackError1 : false;
+    const addressError2 = addressform ? validateAddress(address2, 'address2').error || addressFeedBackError2 : false;
+    const addressError3 = addressform ? validateAddress(address3, 'address3').error || addressFeedBackError3 : false;
+    if (fullNameError || emailError || pincodeError || phoneError || addressError1 || addressError2 || addressError3) {
+      setNameError(formType, fullNameError);
+      setEmailError(formType, emailError);
+      setPincodeError(formType, pincodeError);
+      setPhoneError(formType, phoneError);
+      setAddressError1(formType, addressError1);
+      setAddressError2(formType, addressError2);
+      setAddressError3(formType, addressError3);
+      return {
+        error: true,
+        data: null
+      };
+    }
+    return {
+      error: false,
+      data: {
+        fullName,
+        phone,
+        email,
+        pincode,
+        address1,
+        address2,
+        address3,
+        city,
+        state,
+        gst
+      }
+    };
+  };
   handleLoginModal = () => {
     this.setState({ openLogin: !this.state.openLogin });
   };
@@ -182,7 +182,7 @@ class DeliveryAddress extends Component {
     const { isLoggedIn } = this.props;
     const { addressform } = this.state;
     if (shippingIsBilling) {
-      const shippingForm = formValdiator(this.props, shipping, 'shipping');
+      const shippingForm = this.formValdiator(this.props, shipping, 'shipping');
       if (shippingForm.error) {
         const message =
           isLoggedIn && !addressform
@@ -206,8 +206,8 @@ class DeliveryAddress extends Component {
         ));
       }
     } else {
-      const shippingForm = formValdiator(this.props, shipping, 'shipping');
-      const billingForm = formValdiator(this.props, billing, 'billing');
+      const shippingForm = this.formValdiator(this.props, shipping, 'shipping');
+      const billingForm = this.formValdiator(this.props, billing, 'billing');
       if (shippingForm.error || billingForm.error) {
         dispatch(notifSend({
           type: 'warning',
