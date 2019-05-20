@@ -107,7 +107,7 @@ export default class ProfileForm extends Component {
     const phoneError = !validateMobile(phone);
     const checkFullName = isBlank(fullName);
     const isGSTError = !isGSTNumber(gst);
-    if (checkEmail.error || checkFullName || phoneError || isGSTError) {
+    if (checkEmail.error || checkFullName || phoneError) {
       return this.setState({
         emailError: checkEmail.error,
         emailErrorMessage: checkEmail.errorMessage,

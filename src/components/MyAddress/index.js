@@ -58,35 +58,38 @@ export default class DeliveryAddress extends Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
-  state = {
-    name: '',
-    address1: '',
-    address2: '',
-    address3: '',
-    pincode: '',
-    phone: '',
-    addressId: '',
-    selectedAddress: '',
-    editForm: false,
-    addForm: false,
-    emailError: false,
-    emailErrorMessage: 'Email not Valid',
-    address1Error: false,
-    address1ErrorMessage: 'Address 1 is Required !',
-    address2Error: false,
-    address2ErrorMessage: '',
-    address3Error: false,
-    address3ErrorMessage: '',
-    phoneError: false,
-    phoneErrorMessage: 'Enter 10 Digits Valid Mobile Number',
-    pincodeError: false,
-    pincodeErrorMessage: 'Pincode is not Valid',
-    nameError: false,
-    nameErrorMessage: 'Name cannot be left Empty',
-    gst: '',
-    gstError: false,
-    gstErrorMessage: 'GST Number not valid'
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      address1: '',
+      address2: '',
+      address3: '',
+      pincode: '',
+      phone: '',
+      addressId: '',
+      selectedAddress: '',
+      editForm: false,
+      addForm: false,
+      emailError: false,
+      emailErrorMessage: 'Email not Valid',
+      address1Error: false,
+      address1ErrorMessage: 'Address 1 is Required !',
+      address2Error: false,
+      address2ErrorMessage: '',
+      address3Error: false,
+      address3ErrorMessage: '',
+      phoneError: false,
+      phoneErrorMessage: 'Enter 10 Digits Valid Mobile Number',
+      pincodeError: false,
+      pincodeErrorMessage: 'Pincode is not Valid',
+      nameError: false,
+      nameErrorMessage: 'Name cannot be left Empty',
+      gst: '',
+      gstError: false,
+      gstErrorMessage: 'GST Number not valid'
+    };
+  }
   componentWillMount() {
     const { useremail } = this.props;
     this.setState({
@@ -325,7 +328,7 @@ export default class DeliveryAddress extends Component {
           <Container type="container" pr="0" pl="0">
             <Row display="block" mr="0" ml="0">
               {data.map((item, index) => (
-                <Div col="4" pr="0.625rem" key={String(index)}>
+                <Div col="4" pr="0.625rem" key={`${item.id_address_customer || '_'}_${String(index)}`}>
                   <button
                     className={`${styles.addressBtn} ${index === currentaddressindex && styles.active}`}
                     onClick={() => this.handleClick(index)}
