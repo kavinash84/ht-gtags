@@ -232,14 +232,29 @@ export default class DeliveryAddress extends Component {
       email,
       id_customer_address: addressId
     } = data[index];
+    const address1Data = validateAddress(address1, 'address1');
+    const address2Data = validateAddress(address2, 'address2');
+    const address3Data = validateAddress(address3, 'address3');
+    const address1Error = address1Data.error;
+    const address1ErrorMessage = address1Data.errorMessage;
+    const address2Error = address2Data.error;
+    const address2ErrorMessage = address2Data.errorMessage;
+    const address3Error = address3Data.error;
+    const address3ErrorMessage = address3Data.errorMessage;
     this.setState({
+      address1,
+      address2,
+      address3,
+      address1Error,
+      address1ErrorMessage,
+      address2Error,
+      address2ErrorMessage,
+      address3Error,
+      address3ErrorMessage,
       addForm: false,
       editForm: true,
       currentaddressindex: index,
       email,
-      address1,
-      address2,
-      address3,
       pincode,
       phone,
       name,
