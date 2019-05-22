@@ -107,7 +107,7 @@ class OrderBlock extends Component {
               <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                 SHIPPING ADDRESS
               </Text>
-              <Text mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
+              <Text mt="0" mb="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
                 {`${order.customer_first_name} ${order.customer_last_name !== null ? order.customer_last_name : ''}`}
                 <br />
                 {order.s_address_1}
@@ -122,7 +122,7 @@ class OrderBlock extends Component {
               <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                 BILLING ADDRESS
               </Text>
-              <Text mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
+              <Text mt="0" mb="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
                 {`${order.customer_first_name} ${order.customer_last_name !== null ? order.customer_last_name : ''}`}
                 <br />
                 {order.b_address_1}
@@ -147,28 +147,26 @@ class OrderBlock extends Component {
               <table className="ordersTable table">
                 <tbody>
                   <tr className={styles.tableHeading}>
-                    <th style={{ minWidth: '70px' }} colSpan="2">
-                      PRODUCTS
-                    </th>
+                    <th colSpan="2">PRODUCTS</th>
                     {/* <th style={{ minWidth: '150px' }}>Order Status</th> */}
-                    <th style={{ minWidth: '200px' }}>Delivery Estimate</th>
-                    <th style={{ minWidth: '180px' }} />
+                    <th>Delivery Estimate</th>
+                    <th />
                     {/* <th>Carrier</th>
                     <th>Tracking ID</th> */}
                   </tr>
                   {order.order_items &&
                     order.order_items.map(item => (
                       <tr key={item.order_item_id}>
-                        <td style={{ minWidth: '70px' }}>
-                          <ImageShimmer src={getImageURL(item.image, 'catalog_360')} height="49px">
-                            {imageURL => <Img src={imageURL} alt={item.product_name} />}
+                        <td width="81px">
+                          <ImageShimmer src={getImageURL(item.image, 'catalog_360')} height="60px">
+                            {imageURL => <Img src={imageURL} alt={item.product_name} width="60px" height="60px" />}
                           </ImageShimmer>
                         </td>
                         <td width="50%">{item.product_name || 'NOT AVAILABLE'}</td>
                         {/* <td>{item.order_item_status_display_name || 'NOT AVAILABLE'}</td> */}
                         <td>{item.order_item_status_display_name !== 'Cancelled' ? item.delivery_date_text : '--'}</td>
                         <td>
-                          <Div>
+                          <Div ta="right">
                             <Button
                               fontSize="14px !important"
                               color="#ae8873"
