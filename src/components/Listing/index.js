@@ -197,6 +197,7 @@ class Listing extends React.Component {
                     cutprice={item.cutprice}
                     saving={item.saving}
                     moneyBackOffer={item.data.money_back_offer}
+                    comboOffer={item.data.combo_offer}
                     /* eslint-disable max-len */
                     image={getProductImage(item.images)}
                     sku={item.data.sku}
