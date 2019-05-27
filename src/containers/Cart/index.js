@@ -1,7 +1,7 @@
 import { provideHooks } from 'redial';
 import HomeTownLoader from 'containers/Loader';
 import { PINCODE } from 'helpers/Constants';
-import { loadCart, isLoaded as isCartLoaded } from 'redux/modules/cart';
+import { loadCart } from 'redux/modules/cart';
 
 const hooks = {
   fetch: async ({ store: { dispatch, getState } }) => {
@@ -9,7 +9,7 @@ const hooks = {
       app: { sessionId },
       pincode: { selectedPincode }
     } = getState();
-    if (sessionId && !isCartLoaded(getState())) {
+    if (sessionId) {
       const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
       dispatch(loadCart(sessionId, pincode)).catch(error => console.log(error));
     }
