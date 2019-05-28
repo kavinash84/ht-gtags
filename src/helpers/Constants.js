@@ -33,4 +33,11 @@ export const categoryRoutes = [
   'bath'
 ];
 
-export const listingRoutes = [...categoryRoutes, 'gifts', 'electronics', 'clearance-sale', 'mothers-day'];
+export const listingRoutes = [
+  ...categoryRoutes,
+  'gifts',
+  'electronics',
+  'clearance-sale',
+  'mothers-day',
+  'be-school-ready'
+];
