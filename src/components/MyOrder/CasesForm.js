@@ -152,6 +152,7 @@ class CasesFormContainer extends Component {
       crm: { subcategory },
       origin
     } = this.state;
+    const { article_code: code = '' } = this.props.caseItem;
     const { sendData: sendFormData, sfid } = this.props;
     const subjectError = isEmpty(subject);
     const descriptionError = isEmpty(description);
@@ -169,7 +170,8 @@ class CasesFormContainer extends Component {
       type,
       category,
       sub_category: subcategory,
-      account_id: sfid
+      account_id: sfid,
+      code
     };
     sendFormData(CASE_ORDER_API, data, 'ordercase');
   };

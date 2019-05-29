@@ -170,42 +170,46 @@ class OrderBlock extends Component {
                         {/* <td>{item.order_item_status_display_name || 'NOT AVAILABLE'}</td> */}
                         <td>{item.order_item_status_display_name !== 'Cancelled' ? item.delivery_date_text : '--'}</td>
                         <td>
-                          <Div ta="right">
-                            <Button
-                              fontSize="14px !important"
-                              color="#ae8873"
-                              hoverColor="white"
-                              bc="transparent"
-                              btnType="primary"
-                              p="5px 10px"
-                              mr="10px"
-                              onClick={this.handleModal}
-                            >
-                              <Img
-                                src={PinIcon}
-                                alt="Track"
-                                height="16px"
-                                position="relative"
-                                top="4px"
-                                mr="0.3125rem"
-                                float="left"
-                              />
-                              Track
-                            </Button>
-                            <Button
-                              fontSize="14px !important"
-                              hoverColor="white"
-                              color="rgba(0,0,0,0.5)"
-                              bc="rgba(0,0,0,0.5)"
-                              btnType="btnOutline"
-                              p="5px 20px"
-                              onClick={() => {
-                                this.handleChange('openCaseModal', item);
-                              }}
-                            >
-                              Help
-                            </Button>
-                          </Div>
+                          {item.bob_order && item.bob_order !== '1' ? (
+                            <Div ta="right">
+                              <Button
+                                fontSize="14px !important"
+                                color="#ae8873"
+                                hoverColor="white"
+                                bc="transparent"
+                                btnType="primary"
+                                p="5px 10px"
+                                mr="10px"
+                                onClick={this.handleModal}
+                              >
+                                <Img
+                                  src={PinIcon}
+                                  alt="Track"
+                                  height="16px"
+                                  position="relative"
+                                  top="4px"
+                                  mr="0.3125rem"
+                                  float="left"
+                                />
+                                Track
+                              </Button>
+                              <Button
+                                fontSize="14px !important"
+                                hoverColor="white"
+                                color="rgba(0,0,0,0.5)"
+                                bc="rgba(0,0,0,0.5)"
+                                btnType="btnOutline"
+                                p="5px 20px"
+                                onClick={() => {
+                                  this.handleChange('openCaseModal', item);
+                                }}
+                              >
+                                Help
+                              </Button>
+                            </Div>
+                          ) : (
+                            ''
+                          )}
                         </td>
                         {/* <td>{item.carrier_name || 'NOT AVAILABLE'}</td>
                       <td>{item.tracking_id || 'NOT AVAILABLE'}</td> */}
