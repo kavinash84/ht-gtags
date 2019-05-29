@@ -38,13 +38,15 @@ class CasesFormContainer extends Component {
     sendData: PropTypes.func.isRequired,
     loading: PropTypes.bool,
     sfid: PropTypes.string,
-    ordercase: PropTypes.object
+    ordercase: PropTypes.object,
+    caseItem: PropTypes.object
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
   static defaultProps = {
     ordercase: {},
+    caseItem: {},
     sfid: '',
     loading: false
   };
@@ -208,7 +210,8 @@ class CasesFormContainer extends Component {
       descriptionError,
       descriptionErrorMessage
     } = this.state;
-    const { loading } = this.props;
+    const { loading, caseItem } = this.props;
+    console.log(caseItem);
     return (
       <div className={stylesModal.signupWrapper}>
         <Row display="block" mr="0" ml="0">

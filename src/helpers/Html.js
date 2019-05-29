@@ -36,6 +36,7 @@ export default class Html extends Component {
     content: '',
     styleTags: []
   };
+
   render() {
     const {
       assets, store, content, bundles, styleTags
@@ -54,7 +55,7 @@ export default class Html extends Component {
           <link rel="shortcut icon" href="/favicon.ico" />
           <meta charSet="utf-8" />
           <meta httpEquiv="x-ua-compatible" content="ie=edge" />
-          <meta name="viewport" content="width=device-width, initial-scale=1 minimum-scale=1" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="application-name" content="HomeTown Web" />
@@ -109,118 +110,6 @@ export default class Html extends Component {
           {assets.styles && Object.keys(assets.styles).length === 0 ? (
             <script dangerouslySetInnerHTML={{ __html: 'document.getElementById("content").style.display="block";' }} />
           ) : null}
-          <script
-            type="text/javascript"
-            src="https://c.la1-c2cs-hnd.salesforceliveagent.com/content/g/js/45.0/deployment.js"
-          />
-          <script type="text/javascript" src="https://service.force.com/embeddedservice/5.0/esw.min.js" />
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-                var initESW = function(gslbBaseURL) {
-                  var emailId ='';
-                  //var emailId ='divya.jain@comprotechnologies.com';
-                  embedded_svc.settings.displayHelpButton = true; //Or false
-                  embedded_svc.settings.language = ''; //For example, enter 'en' or 'en-US'
-            
-                  embedded_svc.settings.defaultMinimizedText = 'Chat With Us'; //(Defaults to Chat with an Expert)
-                  //embedded_svc.settings.disabledMinimizedText = '...'; //(Defaults to Agent Offline)
-                  
-                  //embedded_svc.settings.loadingText = 'Chat started'; //(Defaults to Loading)
-                  //embedded_svc.settings.storageDomain = 'yourdomain.com'; //(Sets the domain for your deployment so that visitors can navigate subdomains during a chat session)
-                  
-                  // Settings for Live Agent
-                  //embedded_svc.settings.directToButtonRouting = function(prechatFormData) {
-                  // Dynamically changes the button ID based on what the visitor enters in the pre-chat form.
-                  // Returns a valid button ID.
-                  //};
-            
-                  embedded_svc.settings.prepopulatedPrechatFields = {
-                  Email : emailId
-                }; //Sets the auto-population of pre-chat form fields
-                //embedded_svc.settings.fallbackRouting = []; //An array of button IDs, user IDs, or userId_buttonId
-                //embedded_svc.settings.offlineSupportMinimizedText = '...'; //(Defaults to Contact Us)
-            
-                embedded_svc.settings.extraPrechatInfo = [{
-                  "entityFieldMaps": [{
-                      "doCreate":false,
-                      "doFind":true,
-                      "fieldName":"PersonEmail",
-                      "isExactMatch":true,
-                      "label":"Email"
-                  }],
-                  "entityName": "Account",
-                  "linkToEntityName": "Case",
-                  "linkToEntityField": "AccountId"
-                },{
-                  "entityName": "Case",
-                  "showOnCreate": true,
-                  "saveToTranscript": "CaseId",
-                  "entityFieldMaps": [{
-                    "isExactMatch": false,
-                    "fieldName": "Subject",
-                    "doCreate": true,
-                    "doFind": false,
-                    "label": "CaseSubject"
-                  }, {
-                    "isExactMatch": false,
-                    "fieldName": "Status",
-                    "doCreate": true,
-                    "doFind": false,
-                    "label": "CaseStatus"
-                  }, {
-                    "isExactMatch": false,
-                    "fieldName": "Origin",
-                    "doCreate": true,
-                    "doFind": false,
-                    "label": "CaseOrigin"
-                  }]
-                }];
-                embedded_svc.settings.extraPrechatFormDetails = [{
-                  "label": "CaseSubject",
-                  "value": "Live Chat",
-                  "displayToAgent": true
-                }, {
-                  "label": "CaseStatus",
-                  "value": "Open",
-                  "displayToAgent": false
-                }, {
-                  "label": "CaseOrigin",
-                  "value": "Chat",
-                  "displayToAgent": true
-                }];
-            
-                embedded_svc.settings.enabledFeatures = ['LiveAgent'];
-                embedded_svc.settings.entryFeature = 'LiveAgent';
-            
-                embedded_svc.init(
-                  'https://praxisretail--devbox.cs6.my.salesforce.com',
-                  'https://devbox-praxisretail.cs6.force.com/LiveAgent',
-                  gslbBaseURL,
-                  '00DN0000000Qxcj',
-                  'Chat_Deployment',
-                  {
-                    baseLiveAgentContentURL: 'https://c.la1-c2cs-hnd.salesforceliveagent.com/content',
-                    deploymentId: '572N000000000PC',
-                    buttonId: '573N000000000Ub',
-                    baseLiveAgentURL: 'https://d.la1-c2cs-hnd.salesforceliveagent.com/chat',
-                    eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04IN0000000002MMAQ_168ff82d2a7',
-                    isOfflineSupportEnabled: true
-                  }
-                );
-              };
-              if (!window.embedded_svc) {
-                  var s = document.createElement('script');
-                  s.setAttribute('src', 'https://praxisretail--devbox.cs6.my.salesforce.com/embeddedservice/5.0/esw.min.js');
-                  s.onload = function() {
-                      initESW(null);
-                  };
-                  document.body.appendChild(s);
-              } else {
-                  initESW('https://service.force.com');
-              }`
-            }}
-          />
           <Helmet>
             {process.env.NODE_ENV !== 'development' ? (
               <Fragment>

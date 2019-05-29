@@ -23,7 +23,8 @@ class OrderBlock extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      openCaseModal: false
+      openCaseModal: false,
+      caseItem: {}
     };
   }
   componentWillReceiveProps(nextProps) {
@@ -34,10 +35,13 @@ class OrderBlock extends Component {
       });
     }
   }
-  handleChange = key => {
+  handleChange = (key, caseItem = {}) => {
     const newState = {};
     newState[key] = !this.state[key];
-    this.setState(newState);
+    this.setState({
+      ...newState,
+      caseItem
+    });
   };
   render() {
     const {
@@ -196,7 +200,7 @@ class OrderBlock extends Component {
                               btnType="btnOutline"
                               p="5px 20px"
                               onClick={() => {
-                                this.handleChange('openCaseModal');
+                                this.handleChange('openCaseModal', item);
                               }}
                             >
                               Help
@@ -220,7 +224,7 @@ class OrderBlock extends Component {
           }}
           open={this.state.openCaseModal}
         >
-          <CasesForm loading={loading} loaded={loaded} />
+          <CasesForm loading={loading} loaded={loaded} caseItem={this.state.caseItem} />
         </ResponsiveModal>
       </Div>
     );

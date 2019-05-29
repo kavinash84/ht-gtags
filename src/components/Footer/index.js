@@ -47,25 +47,29 @@ class Footer extends React.Component {
     emailErrorMessage: 'Please Enter a Valid Email',
     already: false
   };
-  componentDidMount() {
-    if (!window._laq) {
-      window._laq = [];
-    }
-    window._laq.push(() => {
-      window.liveagent.showWhenOnline(
-        '573N000000000Ub',
-        document.getElementById('liveagent_button_online_573N000000000Ub')
-      ); //eslint-disable-line
-      window.liveagent.showWhenOffline(
-        '573N000000000Ub',
-        document.getElementById('liveagent_button_offline_573N000000000Ub')
-      ); //eslint-disable-line
-    });
-    const emailId = '';
-    // Example : liveagent.addCustomDetail('Contact_ID', test@gmail.com);
-    window.liveagent.addCustomDetail('Contact_ID', emailId);
-    window.liveagent.init('https://d.la1-c2cs-hnd.salesforceliveagent.com/chat', '572N000000000PC', '00DN0000000Qxcj');
-  }
+  // componentDidMount() {
+  //   if (!window._laq) {
+  //     window._laq = [];
+  //   }
+  //   window._laq.push(() => {
+  //     window.liveagent.showWhenOnline(
+  //       '573N000000000Ub',
+  //       document.getElementById('liveagent_button_online_573N000000000Ub')
+  //     ); //eslint-disable-line
+  //     window.liveagent.showWhenOffline(
+  //       '573N000000000Ub',
+  //       document.getElementById('liveagent_button_offline_573N000000000Ub')
+  //     ); //eslint-disable-line
+  //   });
+  //   const emailId = '';
+  //   // Example : liveagent.addCustomDetail('Contact_ID', test@gmail.com);
+  //   window.liveagent.addCustomDetail('Contact_ID', emailId);
+  //   window.liveagent.init(
+  // 'https://d.la1-c2cs-hnd.salesforceliveagent.com/chat',
+  // '572N000000000PC',
+  // '00DN0000000Qxcj'
+  // );
+  // }
   componentWillReceiveProps(nextProps) {
     const { loaded, loading } = nextProps.subscribe;
     const { already } = this.state;
