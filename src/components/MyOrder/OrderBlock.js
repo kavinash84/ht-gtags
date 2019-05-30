@@ -112,13 +112,13 @@ class OrderBlock extends Component {
                 SHIPPING ADDRESS
               </Text>
               <Text mt="0" mb="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
-                {`${order.customer_first_name} ${order.customer_last_name !== null ? order.customer_last_name : ''}`}
+                {`${order.s_customer_first_name || ''} ${order.s_customer_last_name || ''}`}
                 <br />
-                {order.s_address_1}
+                {order.s_address_1 || ''}
                 <br />
-                {order.s_city}, {order.s_pincode}
+                {order.s_city || ''}, {order.s_pincode || ''}
                 <br />
-                {order.s_region}
+                {order.s_region || ''}
                 <br />
               </Text>
             </Div>
@@ -127,13 +127,13 @@ class OrderBlock extends Component {
                 BILLING ADDRESS
               </Text>
               <Text mt="0" mb="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
-                {`${order.customer_first_name} ${order.customer_last_name !== null ? order.customer_last_name : ''}`}
+                {`${order.b_customer_first_name || ''} ${order.b_customer_last_name || ''}`}
                 <br />
-                {order.b_address_1}
+                {order.b_address_1 || ''}
                 <br />
-                {order.b_city}, {order.b_pincode}
+                {order.b_city || ''}, {order.b_pincode || ''}
                 <br />
-                {order.b_region}
+                {order.b_region || ''}
                 <br />
               </Text>
             </Div>
