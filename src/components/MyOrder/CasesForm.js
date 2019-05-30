@@ -39,7 +39,8 @@ class CasesFormContainer extends Component {
     loading: PropTypes.bool,
     sfid: PropTypes.string,
     ordercase: PropTypes.object,
-    caseItem: PropTypes.object
+    caseItem: PropTypes.object,
+    orderItem: PropTypes.object
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -47,6 +48,7 @@ class CasesFormContainer extends Component {
   static defaultProps = {
     ordercase: {},
     caseItem: {},
+    orderItem: {},
     sfid: '',
     loading: false
   };
@@ -153,6 +155,7 @@ class CasesFormContainer extends Component {
       origin
     } = this.state;
     const { article_code: code = '' } = this.props.caseItem;
+    const { sforder_id: order_id = '' } = this.props.orderItem;
     const { sendData: sendFormData, sfid } = this.props;
     const subjectError = isEmpty(subject);
     const descriptionError = isEmpty(description);
@@ -171,7 +174,8 @@ class CasesFormContainer extends Component {
       category,
       sub_category: subcategory,
       account_id: sfid,
-      code
+      code,
+      order_id
     };
     sendFormData(CASE_ORDER_API, data, 'ordercase');
   };
@@ -212,8 +216,7 @@ class CasesFormContainer extends Component {
       descriptionError,
       descriptionErrorMessage
     } = this.state;
-    const { loading, caseItem } = this.props;
-    console.log(caseItem);
+    const { loading } = this.props;
     return (
       <div className={stylesModal.signupWrapper}>
         <Row display="block" mr="0" ml="0">

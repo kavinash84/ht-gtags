@@ -8,7 +8,7 @@ const hooks = {
   fetch: async ({ store: { dispatch, getState } }) => {
     const {
       profile: {
-        data: { salesforce_product_interest_id: sfid }
+        data: { salesforce_account_id: sfid }
       }
     } = getState();
     await dispatch(loadMyCases(sfid));
