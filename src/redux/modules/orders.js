@@ -37,5 +37,5 @@ export default function reducer(state = initialState, action = {}) {
 
 export const loadMyOrders = (contactNumber = '', fromDate = '', toDate = '') => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-  promise: ({ client }) => client.get(`${MY_ORDERS_API}?contact=${contactNumber}&fromDate=${fromDate}&toDate=${toDate}`)
+  promise: ({ client }) => client.get(`${MY_ORDERS_API}?mobile=${contactNumber}&fromDate=${fromDate}&toDate=${toDate}`)
 });

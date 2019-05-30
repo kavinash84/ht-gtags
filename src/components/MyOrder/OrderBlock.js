@@ -170,7 +170,7 @@ class OrderBlock extends Component {
                         {/* <td>{item.order_item_status_display_name || 'NOT AVAILABLE'}</td> */}
                         <td>{item.order_item_status_display_name !== 'Cancelled' ? item.delivery_date_text : '--'}</td>
                         <td>
-                          {item.bob_order && item.bob_order !== '1' ? (
+                          {order.bob_order === 0 || order.bob_order === '0' ? (
                             <Div ta="right">
                               <Button
                                 fontSize="14px !important"
