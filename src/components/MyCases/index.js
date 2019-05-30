@@ -80,9 +80,12 @@ class MyCases extends Component {
     this.props.loadMyCases(sfid, startDate, endDate, caseStatus);
   };
   getMapping = (cat = '', subcat = '', type = '') => {
-    const key = `${cat}-${subcat}`;
-    const item = caseMapping[key];
-    const value = item[type];
+    let value = '';
+    if (cat && subcat) {
+      const key = `${cat}-${subcat}`;
+      const item = caseMapping[key] || {};
+      value = item[type] || '';
+    }
     return value;
   };
   render() {
