@@ -1,13 +1,15 @@
-import { MY_ORDERS as MY_ORDERS_API } from 'helpers/apiUrls';
+import { MY_CASES as MY_CASES_API } from 'helpers/apiUrls';
 
-const LOAD = 'orders/LOAD';
-const LOAD_SUCCESS = 'orders/LOAD_SUCCESS';
-const LOAD_FAIL = 'orders/LOAD_FAIL';
+const LOAD = 'mycases/LOAD';
+const LOAD_SUCCESS = 'mycases/LOAD_SUCCESS';
+const LOAD_FAIL = 'mycases/LOAD_FAIL';
 
 const initialState = {
   loading: false,
   loaded: false,
-  data: []
+  data: [],
+  toggleForm: false,
+  updated: false
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -15,7 +17,8 @@ export default function reducer(state = initialState, action = {}) {
     case LOAD:
       return {
         ...state,
-        loading: true
+        loading: true,
+        loaded: false
       };
     case LOAD_SUCCESS:
       return {
@@ -35,7 +38,8 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-export const loadMyOrders = (contactNumber = '', fromDate = '', toDate = '') => ({
+export const loadMyCases = (sfid, fromDate = '', toDate = '', status = '') => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-  promise: ({ client }) => client.get(`${MY_ORDERS_API}?mobile=${contactNumber}&fromDate=${fromDate}&toDate=${toDate}`)
+  promise: ({ client }) =>
+    client.get(`${MY_CASES_API}?sfid=${sfid}&fromDate=${fromDate}&toDate=${toDate}&status=${status}`)
 });

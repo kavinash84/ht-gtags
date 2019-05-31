@@ -53,6 +53,7 @@ export const TRACK_ORDER = 'tesla/orders/track';
 /* Profile Details */
 export const MY_ORDERS = 'tesla/orders';
 export const MY_ADDRESS = 'tesla/users/address';
+export const MY_CASES = 'tesla/users/cases';
 
 /* Payments */
 export const PAYMENT_OPTIONS = 'tesla/payments';
@@ -72,7 +73,9 @@ export const SEARCH = 'tesla/search/find';
 export const SERVICE_SIGNUPS = 'tesla/campaign-signups';
 export const FEEDBACK = 'tesla/users/feedback';
 export const SERVICE_REQUEST = 'tesla/contact-us';
+export const CASE_REQUEST = 'tesla/case-request';
 export const BULK_ORDER = 'tesla/bulk-order';
+export const CASE_ORDER = 'tesla/users/insertcase';
 export const SUBSCRIPTION = 'tesla/users/subscribe-us';
 export const PROMOTIONS = 'tesla/static/text/promotions_react';
 export const CALL_BACK = 'tesla/call-back';
