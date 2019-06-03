@@ -169,7 +169,7 @@ class CasesFormContainer extends Component {
     const data = {
       origin,
       subject,
-      description,
+      desc: description,
       type,
       category,
       sub_category: subcategory,
