@@ -30,7 +30,7 @@ const styles = require('./CasesForm.scss');
 const mapDispatchToProps = dispatch => bindActionCreators({ sendData }, dispatch);
 const mapStateToProps = ({ cases, profile }) => ({
   ordercase: cases.ordercase || {},
-  sfid: profile.data.salesforce_product_interest_id || ''
+  sfid: profile.data.salesforce_account_id || ''
 });
 
 class CasesFormContainer extends Component {

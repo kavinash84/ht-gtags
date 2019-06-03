@@ -170,9 +170,16 @@ class OrderBlock extends Component {
                         </td>
                         <td width="50%">{item.product_name || 'NOT AVAILABLE'}</td>
                         {/* <td>{item.order_item_status_display_name || 'NOT AVAILABLE'}</td> */}
-                        <td>{item.order_item_status_display_name !== 'Cancelled' ? item.delivery_date_text : '--'}</td>
-                        <td>
-                          {order.bob_order === 0 || order.bob_order === '0' ? (
+                        <td>{item.status !== 'canceled' ? item.delivery_date_text : '--'}</td>
+                        {item.status === 'canceled' ? (
+                          <td>
+                            <span style={{ color: 'red' }}> Cancelled </span>
+                          </td>
+                        ) : (
+                          ''
+                        )}
+                        {order.bob_order === 0 || order.bob_order === '0' ? (
+                          <td>
                             <Div ta="right">
                               <Button
                                 fontSize="14px !important"
@@ -209,10 +216,10 @@ class OrderBlock extends Component {
                                 Help
                               </Button>
                             </Div>
-                          ) : (
-                            ''
-                          )}
-                        </td>
+                          </td>
+                        ) : (
+                          ''
+                        )}
                         {/* <td>{item.carrier_name || 'NOT AVAILABLE'}</td>
                       <td>{item.tracking_id || 'NOT AVAILABLE'}</td> */}
                       </tr>
