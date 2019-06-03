@@ -3,9 +3,16 @@ import { provideHooks } from 'redial';
 import MyCasesContainer from 'components/MyCases';
 import MenuFooter from 'containers/MenuFooter';
 import { loadMyCases } from 'redux/modules/mycases';
+import { loadUserProfile } from 'redux/modules/profile';
 
 const hooks = {
   fetch: async ({ store: { dispatch, getState } }) => {
+    const {
+      profile: { loaded }
+    } = getState();
+    if (!loaded) {
+      await dispatch(loadUserProfile());
+    }
     const {
       profile: {
         data: { salesforce_account_id: sfid }
