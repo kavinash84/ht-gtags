@@ -1,5 +1,5 @@
 const caseReverseMapping = {
-  'Customer Request Wants-Duplicate Bill': {
+  'Customer Request-Wants Duplicate Bill': {
     cat: 'Invoice Copy',
     subcat: ''
   },
