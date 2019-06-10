@@ -17,7 +17,7 @@ import Text from 'hometown-components/lib/Text';
 import MyMenu from 'components/MyMenu';
 import { getDateFilters } from 'utils/helper';
 import { loadMyCases } from 'redux/modules/mycases';
-import caseMapping from '../../data/case-reverse-mapping';
+import { caseMapping } from '../../data/case-reverse-mapping';
 
 const styles = require('../MyOrder/MyOrder.scss');
 
