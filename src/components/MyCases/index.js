@@ -28,7 +28,7 @@ const mapStateToProps = ({ mycases, profile }) => ({
   useremail: profile.data.email,
   mycases,
   contactNumber: profile.data.contact_number,
-  salesforce_product_interest_id: profile.data.salesforce_product_interest_id
+  salesforce_account_id: profile.data.salesforce_account_id
 });
 class MyCases extends Component {
   static contextTypes = {
@@ -77,7 +77,7 @@ class MyCases extends Component {
       endDate,
       caseStatus: { value: caseStatus }
     } = this.state;
-    const { salesforce_product_interest_id: sfid } = this.props;
+    const { salesforce_account_id: sfid } = this.props;
     this.props.loadMyCases(sfid, startDate, endDate, caseStatus);
   };
   getMapping = (cat = '', subcat = '', type = '') => {
@@ -212,14 +212,14 @@ MyCases.defaultProps = {
   data: [],
   loading: false,
   updated: false,
-  salesforce_product_interest_id: ''
+  salesforce_account_id: ''
 };
 
 MyCases.propTypes = {
   data: PropTypes.array,
   loading: PropTypes.bool,
   updated: PropTypes.bool, //eslint-disable-line
-  salesforce_product_interest_id: PropTypes.string,
+  salesforce_account_id: PropTypes.string,
   loadMyCases: PropTypes.func.isRequired
 };
 export default connect(
