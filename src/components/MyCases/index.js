@@ -50,7 +50,7 @@ class MyCases extends Component {
     this.STATUS_FILTER = [
       { value: 'Open', label: 'Open' },
       { value: 'In-Process', label: 'In-Process' },
-      { value: 'Resolved', label: 'Resolved' }
+      { value: 'Completed', label: 'Resolved' }
     ];
   }
   onStatusChange = status => {
@@ -62,8 +62,8 @@ class MyCases extends Component {
     const { label } = dateFilter;
     const startDate = dateFilter.start ? new Date(dateFilter.start) : '';
     const endDate = dateFilter.end ? new Date(dateFilter.end) : '';
-    const start = `${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate()}`;
-    const end = `${endDate.getFullYear()}-${endDate.getMonth() + 1}-${endDate.getDate()}`;
+    const start = this.formatDate(startDate);
+    const end = this.formatDate(endDate);
     this.setState({
       dateFilter: { value: label, label },
       startDate: start,
@@ -87,6 +87,15 @@ class MyCases extends Component {
       const item = caseMapping[`${key}`] ? caseMapping[`${key}`] : {};
       value = item[`${type}`] || '';
     }
+    return value;
+  };
+  formatDate = inputDate => {
+    const yearValue = inputDate.getFullYear();
+    const monthInput = inputDate.getMonth() + 1;
+    const monthValue = monthInput <= 9 ? `0${monthInput}` : monthInput;
+    const dayInput = inputDate.getDate();
+    const dayValue = dayInput <= 9 ? `0${dayInput}` : dayInput;
+    const value = `${yearValue}-${monthValue}-${dayValue}`;
     return value;
   };
   render() {
@@ -158,6 +167,14 @@ class MyCases extends Component {
                     <Row p="15px 15px" type="block" m="0" mb="0.5rem">
                       <Div col="2">
                         <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
+                          Created Date
+                        </Text>
+                        <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
+                          {item.CreatedDate || ''}
+                        </Text>
+                      </Div>
+                      <Div col="2">
+                        <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                           Subject
                         </Text>
                         <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
@@ -180,20 +197,12 @@ class MyCases extends Component {
                           {this.getMapping(item.category, item.subcategory, 'cat')}
                         </Text>
                       </Div>
-                      <Div col="2">
+                      <Div col="4">
                         <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                           SubCategory
                         </Text>
                         <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
                           {this.getMapping(item.category, item.subcategory, 'subcat')}
-                        </Text>
-                      </Div>
-                      <Div col="4">
-                        <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
-                          Description
-                        </Text>
-                        <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
-                          {item.description || ''}
                         </Text>
                       </Div>
                     </Row>
