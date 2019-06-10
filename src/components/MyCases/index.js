@@ -17,7 +17,8 @@ import Text from 'hometown-components/lib/Text';
 import MyMenu from 'components/MyMenu';
 import { getDateFilters } from 'utils/helper';
 import { loadMyCases } from 'redux/modules/mycases';
-import { caseMapping } from '../../data/case-reverse-mapping';
+
+const caseMapping = require('../../data/case-reverse-mapping');
 
 const styles = require('../MyOrder/MyOrder.scss');
 
@@ -83,8 +84,8 @@ class MyCases extends Component {
     let value = '';
     if (cat && subcat) {
       const key = `${cat}-${subcat}`;
-      const item = caseMapping[key] || {};
-      value = item[type] || '';
+      const item = caseMapping[`${key}`] ? caseMapping[`${key}`] : {};
+      value = item[`${type}`] || '';
     }
     return value;
   };
