@@ -37,8 +37,8 @@ class MyCases extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      startDate: new Date(),
-      endDate: new Date(),
+      startDate: '',
+      endDate: '',
       caseStatus: '',
       dateFilter: ''
     };
