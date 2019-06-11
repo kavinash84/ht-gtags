@@ -53,6 +53,8 @@
     ul {
       padding-left: 0;
       li {
+        border: 2px solid #f98d2929;
+        margin-bottom: 5px;
         list-style: none;
         button {
           background: transparent;
@@ -71,4 +73,20 @@
       }
     }
   }
+}
+.directionBtn {
+  border: 2px solid black !important;
+  background-color: white !important;
+  color: black !important;
+  padding: 5px 5px !important;
+  font-size: 10px !important;
+  cursor: pointer !important;
+  border-color: #2196F3 !important;
+  color: dodgerblue !important;
+  margin-top: 5px;
+  width: 60px !important;
+}
+.directionBtn:hover {
+  background: #2196F3 !important;
+  color: white !important;
 }

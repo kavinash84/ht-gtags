@@ -37,7 +37,13 @@ class StoreLocator extends React.Component {
       });
     }
   }
-
+  getURL = storeAddress => {
+    const baseUrl = 'https://www.google.com/maps/dir/?api=1';
+    const origin = '&origin=';
+    const destination = `&destination=${storeAddress}`;
+    const mapURL = `${baseUrl}${origin}${destination}`;
+    return mapURL;
+  };
   handleClick = (store = '', mapData, city = '') => {
     const details = mapData.filter(item => item.store === store)[0];
     const { position } = details;
@@ -54,7 +60,6 @@ class StoreLocator extends React.Component {
       category: 'Storelocator'
     });
   };
-
   handleSelectState = (state, mapData) => {
     const currentList = mapData.filter(item => item.state === state);
     let lat = 0;
@@ -169,7 +174,15 @@ class StoreLocator extends React.Component {
                           <Label fontSize="1rem" mt="0" ml="0">
                             {item.store}
                           </Label>
-                          <address>{item.address}</address>
+                          <address style={{ color: 'black', fontStyle: 'normal' }}>{item.address}</address>
+                          <a
+                            title="Hometown Store Locator Direction"
+                            href={this.getURL(item.address)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <button className={styles.directionBtn}>Direction</button>
+                          </a>
                         </button>
                       </li>
                     ))}

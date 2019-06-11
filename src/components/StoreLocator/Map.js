@@ -6,22 +6,41 @@ import { Shimmer } from 'hometown-components/lib/Shimmer';
 import { mapKey } from 'helpers/Constants';
 import MapMarker from './MapMarker';
 
+// const styles = require('./StoreLocator.scss');
+
 const { MarkerWithLabel } = require('react-google-maps/lib/components/addons/MarkerWithLabel');
 
+const openLocationWindow = storeAddress => {
+  const baseUrl = 'https://www.google.com/maps/dir/?api=1';
+  const origin = '&origin=';
+  const destination = `&destination=${storeAddress}`;
+  const mapURL = `${baseUrl}${origin}${destination}`;
+  window.open(mapURL, '_blank');
+};
 const Map = ({
   mapData, zoom, position, open
 }) => (
   <GoogleMap zoom={parseInt(zoom, 10) || 16} center={position}>
     {mapData.map((item, index) => (
       <MarkerWithLabel
+        clickable
+        onClick={() => {
+          openLocationWindow(item.address);
+        }}
+        cursor="pointer"
+        draggable
         position={item.position}
         containerElement={<div style={{ width: '400px' }} />}
-        labelAnchor={new window.google.maps.Point(0, 0)}
+        labelAnchor={new window.google.maps.Point(120, 0)}
         labelStyle={{ backgroundColor: 'white', fontSize: '14px', top: '30px' }}
         key={String(index)}
       >
         <div className="testtest">
-          {open && <MapMarker store={item.store} address={item.address} phone={item.phone} position={item.position} />}
+          {open && (
+            <div>
+              <MapMarker store={item.store} address={item.address} phone={item.phone} position={item.position} />
+            </div>
+          )}
         </div>
       </MarkerWithLabel>
     ))}
