@@ -26,7 +26,8 @@ class StoreLocator extends React.Component {
     zoomlevel: 5,
     open: false,
     currentList: [],
-    currentState: null
+    currentState: null,
+    selectedStore: ''
   };
   componentWillMount() {
     const { data } = this.props;
@@ -37,20 +38,22 @@ class StoreLocator extends React.Component {
       });
     }
   }
-  getURL = storeAddress => {
-    const baseUrl = 'https://www.google.com/maps/dir/?api=1';
-    const origin = '&origin=';
-    const destination = `&destination=${storeAddress}`;
+  getURL = position => {
+    const baseUrl = 'http://maps.google.com/?';
+    const origin = 'saddr=';
+    const destination = `&daddr=${position.lat || ''},${position.lng || ''}`;
     const mapURL = `${baseUrl}${origin}${destination}`;
     return mapURL;
   };
   handleClick = (store = '', mapData, city = '') => {
     const details = mapData.filter(item => item.store === store)[0];
     const { position } = details;
+    // const { open } = this.state;
     this.setState({
       position,
       open: true,
-      zoomlevel: 16
+      zoomlevel: 16,
+      selectedStore: store
     });
     const { gaVisitEvent: recordStoreVisit } = this.props;
     recordStoreVisit({
@@ -104,12 +107,11 @@ class StoreLocator extends React.Component {
       open: false
     });
   };
-
   render() {
     const { data } = this.props;
     const mapData = data.items.text;
     const {
-      position, zoomlevel, open, currentList, currentState
+      position, zoomlevel, open, currentList, currentState, selectedStore
     } = this.state;
     //
     let stateList = mapData.map(item => item.state);
@@ -140,6 +142,8 @@ class StoreLocator extends React.Component {
                 zoom={zoomlevel}
                 mapData={mapData}
                 open={open}
+                handleClick={this.handleClick}
+                selectedStore={selectedStore}
               />
               <Div className={styles.filterWrapper}>
                 <select onChange={e => this.handleSelectState(e.target.value, mapData)}>
@@ -177,7 +181,7 @@ class StoreLocator extends React.Component {
                           <address style={{ color: 'black', fontStyle: 'normal' }}>{item.address}</address>
                           <a
                             title="Hometown Store Locator Direction"
-                            href={this.getURL(item.address)}
+                            href={this.getURL(item.position)}
                             target="_blank"
                             rel="noopener noreferrer"
                           >
