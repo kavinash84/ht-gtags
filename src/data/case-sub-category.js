@@ -55,7 +55,7 @@ const caseSubCategories = {
       label: 'Product Alignment / Loosening /  Shaking',
       crm: {
         type: 'Complaint',
-        category: 'Service Request - Under warranty',
+        category: 'Service Request-Under Warranty',
         subcategory: 'Loose / Align / Laser / Polish'
       }
     },
@@ -64,8 +64,8 @@ const caseSubCategories = {
       label: 'Stitches coming out / Sagging / Peel off',
       crm: {
         type: 'Complaint',
-        category: 'Service Request - Under warranty',
-        subcategory: 'Fabric - Sagging / Stitches coming out /Peel off'
+        category: 'Service Request-Under Warranty',
+        subcategory: 'Fabric -Sagging/Stitches coming out /Peel off'
       }
     },
     {
@@ -73,7 +73,7 @@ const caseSubCategories = {
       label: 'Fungus / Termite',
       crm: {
         type: 'Complaint',
-        category: 'Service Request - Under warranty',
+        category: 'Service Request-Under Warranty',
         subcategory: 'Fungus / Termite'
       }
     },
@@ -82,7 +82,7 @@ const caseSubCategories = {
       label: 'Crack / Bend / Breakage',
       crm: {
         type: 'Complaint',
-        category: 'Service Request - Under warranty',
+        category: 'Service Request-Under Warranty',
         subcategory: 'Crack / Bend / Breakage / Peel Off'
       }
     },
@@ -91,7 +91,7 @@ const caseSubCategories = {
       label: 'Rusting',
       crm: {
         type: 'Complaint',
-        category: 'Service Request - Under warranty',
+        category: 'Service Request-Under Warranty',
         subcategory: 'Rusting'
       }
     },
@@ -100,7 +100,7 @@ const caseSubCategories = {
       label: 'Part / Componant / Mechanism Not Working',
       crm: {
         type: 'Complaint',
-        category: 'Service Request - Under warranty',
+        category: 'Service Request-Under Warranty',
         subcategory: 'Part Not Working'
       }
     }
@@ -111,7 +111,7 @@ const caseSubCategories = {
       label: 'Product Alignment / Loosening /  Shaking',
       crm: {
         type: 'Complaint',
-        category: 'Service Request - After warranty',
+        category: 'Service Request-After Warranty',
         subcategory: 'Loose / Align / Laser / Polish'
       }
     },
@@ -184,7 +184,7 @@ const caseSubCategories = {
       crm: {
         type: 'Complaint',
         category: 'Wrong Material Delivered',
-        subcategory: 'Wrong product delivered'
+        subcategory: 'Wrong Product delivered'
       }
     },
     {
@@ -193,7 +193,7 @@ const caseSubCategories = {
       crm: {
         type: 'Complaint',
         category: 'Wrong Material Delivered',
-        subcategory: 'Incorrect / Incomplete package'
+        subcategory: 'Incorrect / Incomplete Package'
       }
     }
   ],
@@ -270,7 +270,7 @@ const caseSubCategories = {
       crm: {
         type: 'Complaint',
         category: 'Defective Material Delivered',
-        subcategory: 'chromium plating / lamination / lazer issue'
+        subcategory: 'chromium Plating / Lamination /Lazer issue'
       }
     },
     {
@@ -279,7 +279,7 @@ const caseSubCategories = {
       crm: {
         type: 'Complaint',
         category: 'Defective Material Delivered',
-        subcategory: 'other manufacturing defect'
+        subcategory: 'Other Manufacturing Defect'
       }
     },
     {
@@ -288,7 +288,7 @@ const caseSubCategories = {
       crm: {
         type: 'Complaint',
         category: 'Defective Material Delivered',
-        subcategory: 'colour variance in product'
+        subcategory: 'Color variance in product'
       }
     },
     {
