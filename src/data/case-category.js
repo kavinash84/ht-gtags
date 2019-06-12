@@ -14,8 +14,8 @@ const caseCategories = {
       label: 'About Cashback/Finance/EMI',
       crm: {
         type: 'Complaint',
-        category: 'Billing',
-        subcategory: 'Cashback/Processing fees / Finance'
+        category: 'BILLING',
+        subcategory: 'Cash Back / Processing Fee / Finance'
       }
     },
     {
@@ -45,7 +45,7 @@ const caseCategories = {
       crm: {
         type: 'Request',
         category: 'Customer Request',
-        subcategory: 'Wants assembly / dismantling'
+        subcategory: 'Wants assembly/Dismantling'
       }
     },
     {
@@ -63,7 +63,7 @@ const caseCategories = {
       crm: {
         type: 'Request',
         category: 'Customer Request',
-        subcategory: 'Wants to reschedule Delivery'
+        subcategory: 'Wants to Reschedule Delivery'
       }
     },
     {
@@ -72,7 +72,7 @@ const caseCategories = {
       crm: {
         type: 'Request',
         category: 'Customer Request',
-        subcategory: 'Wants to reschedule Fitment'
+        subcategory: 'Wants to Reschedule Fitment'
       }
     }
   ],
@@ -82,8 +82,8 @@ const caseCategories = {
       label: 'Delivery of product delayed',
       crm: {
         type: 'Complaint',
-        category: 'Delivery date change - Disagree',
-        subcategory: 'Stock not committed'
+        category: 'Delivery date Change-Disagree',
+        subcategory: 'Stock Not Committed'
       }
     },
     {
@@ -92,7 +92,7 @@ const caseCategories = {
       crm: {
         type: 'Complaint',
         category: 'Installation / Fitment Date elapsed',
-        subcategory: '48hrs elapsed'
+        subcategory: '48 hour elapsed'
       }
     },
     {
@@ -105,7 +105,7 @@ const caseCategories = {
       crm: {
         type: 'Complaint',
         category: 'Hardware parts missing',
-        subcategory: 'Some Componant / part missing'
+        subcategory: 'Some Component / Part Missing'
       }
     },
     {
@@ -121,8 +121,8 @@ const caseCategories = {
       label: 'Pickup during exchange offer delayed',
       crm: {
         type: 'Complaint',
-        category: 'pickup date elapsed',
-        subcategory: 'old product under exchange'
+        category: 'Pickup Date Elapsed',
+        subcategory: 'Old Product Under Exchange'
       }
     },
     {
@@ -140,7 +140,7 @@ const caseCategories = {
       crm: {
         type: 'Complaint',
         category: 'BILLING',
-        subcategory: 'excess charged / price issue'
+        subcategory: 'Excess Charged / Price Issue'
       }
     },
     {
@@ -149,7 +149,7 @@ const caseCategories = {
       crm: {
         type: 'Complaint',
         category: 'BILLING',
-        subcategory: 'pending refund'
+        subcategory: 'Pending Refund'
       }
     }
   ]
