@@ -53,13 +53,16 @@ export const sendDeliveryAddress = (sessionId, data, isLoggedIn) => (dispatch, g
     promise: async ({ client }) => {
       try {
         let postData;
-        const { shippingAddress, billingAddress, shippingIsBilling } = data;
+        const {
+          shippingAddress, billingAddress, shippingIsBilling, cartTotal = 0
+        } = data;
         if (!isLoggedIn) {
           postData = {
             session_id: sessionId,
             email: shippingAddress.email,
             fullname: shippingAddress.fullName,
             mobile: shippingAddress.phone,
+            cartTotal,
             shipping_info: {
               email: shippingAddress.email,
               fullname: shippingAddress.fullName,
@@ -93,6 +96,7 @@ export const sendDeliveryAddress = (sessionId, data, isLoggedIn) => (dispatch, g
             email: shippingAddress.email,
             fullname: shippingAddress.fullName,
             mobile: shippingAddress.phone,
+            cartTotal,
             shipping_info: {
               email: shippingAddress.email,
               fullname: shippingAddress.fullName,

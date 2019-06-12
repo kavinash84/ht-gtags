@@ -176,7 +176,10 @@ class DeliveryAddress extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const {
-      address: { shipping, billing, shippingIsBilling }
+      address: { shipping, billing, shippingIsBilling },
+      cart: {
+        summary: { total: cartTotal }
+      }
     } = this.props;
     const { dispatch } = this.context.store;
     const { isLoggedIn } = this.props;
@@ -200,7 +203,8 @@ class DeliveryAddress extends Component {
           {
             shippingIsBilling,
             shippingAddress: shippingForm.data,
-            billingAddress: shippingForm.data
+            billingAddress: shippingForm.data,
+            cartTotal
           },
           isLoggedIn
         ));
