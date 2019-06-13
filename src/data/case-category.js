@@ -15,7 +15,7 @@ const caseCategories = {
       crm: {
         type: 'Complaint',
         category: 'BILLING',
-        subcategory: 'Cash Back / Processing Fee / Finance'
+        subcategory: 'Cash Back / Procession Fee / Finance'
       }
     },
     {
@@ -82,7 +82,7 @@ const caseCategories = {
       label: 'Delivery of product delayed',
       crm: {
         type: 'Complaint',
-        category: 'Delivery date Change-Disagree',
+        category: 'Delivery date Change - Disagree',
         subcategory: 'Stock Not Committed'
       }
     },
@@ -130,7 +130,7 @@ const caseCategories = {
       label: 'Return pickup',
       crm: {
         type: 'Complaint',
-        category: 'pickup date elapsed',
+        category: 'Pickup Date Elapsed',
         subcategory: 'Return pickup'
       }
     },

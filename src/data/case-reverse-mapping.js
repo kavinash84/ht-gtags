@@ -3,7 +3,7 @@ const caseReverseMapping = {
     cat: 'Invoice Copy',
     subcat: ''
   },
-  'Billing-Cashback/Processing fees / Finance': {
+  'BILLING-Cash Back / Procession Fee / Finance': {
     cat: 'About Cashback/ Finance / EMI ',
     subcat: ''
   },
@@ -31,27 +31,27 @@ const caseReverseMapping = {
     cat: 'Service / Staff / Product Feedback',
     subcat: 'Website Feedback'
   },
-  'Service Request - Under warranty-Loose / Align / Laser / Polish': {
+  'Service Request - Under Warranty-Loose / Align / Laser / Polish': {
     cat: 'Service Request - Within Warranty',
     subcat: 'Product Alignment / Loosening /  Shaking'
   },
-  'Service Request - Under warranty-Fabric - Sagging / Stitches coming out /Peel off': {
+  'Service Request - Under Warranty-Fabric - Sagging / Stitches coming out /Peel off': {
     cat: 'Service Request - Within Warranty',
     subcat: 'Stitches coming out / Sagging / Peel off'
   },
-  'Service Request - Under warranty-Fungus / Termite': {
+  'Service Request - Under Warranty-Fungus / Termite': {
     cat: 'Service Request - Within Warranty',
     subcat: 'Fungus / Termite'
   },
-  'Service Request - Under warranty-Crack / Bend / Breakage / Peel Off': {
+  'Service Request - Under Warranty-Crack / Bend / Breakage / Peel Off': {
     cat: 'Service Request - Within Warranty',
     subcat: 'Crack / Bend / Breakage'
   },
-  'Service Request - Under warranty-Rusting': {
+  'Service Request - Under Warranty-Rusting': {
     cat: 'Service Request - Within Warranty',
     subcat: 'Rusting'
   },
-  'Service Request - Under warranty-Part Not Working': {
+  'Service Request - Under Warranty-Part Not Working': {
     cat: 'Service Request - Within Warranty',
     subcat: 'Part / Componant / Mechanism Not Working'
   },
@@ -81,7 +81,7 @@ const caseReverseMapping = {
     subcat: 'Part / Componant / Mechanism Not Working'
   },
 
-  'Customer Request-Wants assembly / dismantling': {
+  'Customer Request-Wants assembly/Dismantling': {
     cat: 'Product Dismantling / Re-Assembly support',
     subcat: ''
   },
@@ -89,37 +89,37 @@ const caseReverseMapping = {
     cat: 'Free Service camp registration',
     subcat: ''
   },
-  'Customer Request-Wants to reschedule Delivery': {
+  'Customer Request-Wants to Reschedule Delivery': {
     cat: 'Change delivery date',
     subcat: ''
   },
-  'Customer Request-Wants to reschedule Fitment': {
+  'Customer Request-Wants to Reschedule Fitment': {
     cat: 'Change Installation date',
     subcat: ''
   },
-  'Delivery date change - Disagree-Stock not committed': {
+  'Delivery date Change - Disagree-Stock not committed': {
     cat: 'Delivery of product delayed',
     subcat: ''
   },
-  'Installation / Fitment Date elapsed-48hrs elapsed': {
+  'Installation / Fitment Date elapsed-48 hour elapsed': {
     cat: 'Installation of product delayed',
     subcat: ''
   },
 
-  'Wrong Material Delivered-Wrong Colour / Specification': {
+  'Wrong Material Delivered-Wrong Color / Specification': {
     cat: 'Delivered product doesn’t match with the specification',
     subcat: 'Incorrect Colour / Specification'
   },
-  'Wrong Material Delivered-Wrong product delivered': {
+  'Wrong Material Delivered-Wrong Product delivered': {
     cat: 'Delivered product doesn’t match with the specification',
     subcat: 'Incorrect product'
   },
-  'Wrong Material Delivered-Incorrect / Incomplete package': {
+  'Wrong Material Delivered-Incorrect / Incomplete Package': {
     cat: 'Delivered product doesn’t match with the specification',
     subcat: 'Incorrect package'
   },
 
-  'Hardware parts missing-Some Componant / part missing': {
+  'Hardware parts missing-Some Component / Part Missing ': {
     cat: 'Missing componant in the product',
     subcat: ''
   },
@@ -153,15 +153,15 @@ const caseReverseMapping = {
     cat: 'Received product with defect',
     subcat: 'Mechanism not working'
   },
-  'Defective Material Delivered-chromium plating / lamination / lazer issue': {
+  'Defective Material Delivered-chromium Plating / Lamination /Lazar issue': {
     cat: 'Received product with defect',
     subcat: 'Lamination issue'
   },
-  'Defective Material Delivered-other manufacturing defect': {
+  'Defective Material Delivered-Other Manufacturing Defect': {
     cat: 'Received product with defect',
     subcat: 'other manufacturing defect'
   },
-  'Defective Material Delivered-colour variance in product': {
+  'Defective Material Delivered-Color variance in product': {
     cat: 'Received product with defect',
     subcat: 'Color variance in product'
   },
@@ -170,16 +170,16 @@ const caseReverseMapping = {
     subcat: 'Unable to complete assembly'
   },
 
-  'pickup date elapsed-old product under exchange': {
+  'Pickup Date Elapsed-Old Product Under Exchange': {
     cat: 'Pickup during exchange offer delayed',
     subcat: ''
   },
 
-  'pickup date elapsed-Return pickup': {
+  'Pickup Date Elapsed-Return pickup': {
     cat: 'Return pickup',
     subcat: ''
   },
-  'BILLING-excess charged / price issue': {
+  'BILLING-Excess Charged / Price Issue': {
     cat: 'Incorrect price billed',
     subcat: ''
   },
