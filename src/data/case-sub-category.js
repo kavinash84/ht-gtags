@@ -65,7 +65,7 @@ const caseSubCategories = {
       crm: {
         type: 'Complaint',
         category: 'Service Request - Under Warranty',
-        subcategory: 'Fabric -Sagging/Stitches coming out /Peel off'
+        subcategory: 'Fabric - Sagging / Stitches coming out /Peel off'
       }
     },
     {
@@ -121,7 +121,7 @@ const caseSubCategories = {
       crm: {
         type: 'Complaint',
         category: 'Service Request - After Warranty',
-        subcategory: 'Fabric - Sagging / Stitches coming out /Peel off'
+        subcategory: 'Sagging / Stitches coming out /Peel off'
       }
     },
     {

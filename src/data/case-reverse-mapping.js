@@ -56,27 +56,27 @@ const caseReverseMapping = {
     subcat: 'Part / Componant / Mechanism Not Working'
   },
 
-  'Service Request - After warranty-Loose / Align / Laser / Polish': {
+  'Service Request - After Warranty-Loose / Align / Laser / Polish': {
     cat: 'Service Request - After Warranty',
     subcat: 'Product Alignment / Loosening /  Shaking'
   },
-  'Service Request - After warranty-Fabric - Sagging / Stitches coming out /Peel off': {
+  'Service Request - After Warranty-Sagging / Stitches coming out /Peel off': {
     cat: 'Service Request - After Warranty',
     subcat: 'Stitches coming out / Sagging / Peel off'
   },
-  'Service Request - After warranty-Fungus / Termite': {
+  'Service Request - After Warranty-Fungus / Termite': {
     cat: 'Service Request - After Warranty',
     subcat: 'Fungus / Termite'
   },
-  'Service Request - After warranty-Crack / Bend / Breakage / Peel Off': {
+  'Service Request - After Warranty-Crack / Bend / Breakage / Peel Off': {
     cat: 'Service Request - After Warranty',
     subcat: 'Crack / Bend / Breakage'
   },
-  'Service Request - After warranty-Rusting': {
+  'Service Request - After Warranty-Rusting': {
     cat: 'Service Request - After Warranty',
     subcat: 'Rusting'
   },
-  'Service Request - After warranty-Part Not Working': {
+  'Service Request - After Warranty-Part Not Working': {
     cat: 'Service Request - After Warranty',
     subcat: 'Part / Componant / Mechanism Not Working'
   },
@@ -97,7 +97,7 @@ const caseReverseMapping = {
     cat: 'Change Installation date',
     subcat: ''
   },
-  'Delivery date Change - Disagree-Stock not committed': {
+  'Delivery date Change - Disagree-Stock Not Committed': {
     cat: 'Delivery of product delayed',
     subcat: ''
   },
@@ -119,7 +119,7 @@ const caseReverseMapping = {
     subcat: 'Incorrect package'
   },
 
-  'Hardware parts missing-Some Component / Part Missing ': {
+  'Hardware parts missing-Some Component / Part Missing': {
     cat: 'Missing componant in the product',
     subcat: ''
   },
@@ -183,7 +183,7 @@ const caseReverseMapping = {
     cat: 'Incorrect price billed',
     subcat: ''
   },
-  'BILLING-pending refund': {
+  'BILLING-Pending Refund': {
     cat: 'Pending Refund',
     subcat: ''
   }
