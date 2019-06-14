@@ -68,7 +68,7 @@ const NavBar = ({
               </li>
               <li>
                 <Label htmlFor="checkbox" fontSize="0.75em" ml="0.625rem" className="dropdownValue">
-                  <Link onClick={exitOnClick} to="/electronics" onMouseEnter={handleEnter('')} title="Festive Gifts">
+                  <Link onClick={exitOnClick} to="/electronics" onMouseEnter={handleEnter('')} title="Electronics">
                     Electronics
                   </Link>
                 </Label>
