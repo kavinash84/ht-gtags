@@ -15,6 +15,7 @@ import LoginModal from 'containers/Login/LoginForm';
 import Footer from 'components/Footer';
 import { sendDeliveryAddress, resetGuestRegisterFlag } from 'redux/modules/checkout';
 import { loadCoupons } from 'redux/modules/coupon';
+import { load } from 'redux/modules/paymentoptions';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from 'redux/modules/address';
 import { notifSend } from 'redux/modules/notifs';
@@ -36,6 +37,7 @@ const mapStateToProps = ({
   isLoggedIn: userLogin.isLoggedIn,
   sessionId: app.sessionId,
   nextstep: checkout.nextstep,
+  paymentData: checkout.paymentData,
   loading: checkout.loading,
   addresses: myaddress.data,
   currentaddressindex: address.shipping.index,
@@ -81,7 +83,13 @@ class DeliveryAddress extends Component {
       isLoggedIn, nextstep, clearShippingAddress, onChangeEmail, userEmail, couponlistToggle
     } = this.props;
     const { dispatch } = this.context.store;
-
+    if (nextProps.nextstep !== nextstep && nextProps.paymentData) {
+      console.log(nextProps.paymentData);
+      const { paymentData = {} } = nextProps;
+      dispatch(load({
+        paymentData
+      }));
+    }
     if (isLoggedIn && nextProps.userEmail !== userEmail) {
       onChangeEmail('shipping', nextProps.userEmail);
       onChangeEmail('billing', nextProps.userEmail);
@@ -436,6 +444,7 @@ DeliveryAddress.propTypes = {
   history: PropTypes.object,
   addresses: PropTypes.array,
   nextstep: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
+  paymentData: PropTypes.object.isRequired,
   // location: PropTypes.object,
   currentaddressindex: PropTypes.number,
   address: PropTypes.object.isRequired,

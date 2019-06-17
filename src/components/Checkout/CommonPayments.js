@@ -11,54 +11,54 @@ const intBankingIcon = require('../../../static/net-banking-icon.png');
 const emiIcon = require('../../../static/emi.png');
 const walletIcon = require('../../../static/wallet.png');
 
-// const initial = {
-//   CreditCard: {
-//     nameOnCard: '',
-//     cardNumber: '',
-//     cvv: '',
-//     expMonth: '',
-//     expYear: '',
-//     type: 'other'
-//   },
-//   DebitCard: {
-//     nameOnCard: '',
-//     cardNumber: '',
-//     cvv: '',
-//     expMonth: '',
-//     expYear: '',
-//     type: 'other'
-//   },
-//   Emi: {
-//     nameOnCard: '',
-//     cardNumber: '',
-//     type: 'other',
-//     cvv: '',
-//     expMonth: '',
-//     expYear: '',
-//     emiBank: '',
-//     emiCode: ''
-//   },
-//   NetBanking: {
-//     bankCode: ''
-//   },
-//   Wallet: {
-//     walletName: ''
-//   },
-//   EasyEmi: {
-//     cardNumber: '',
-//     type: 'other',
-//     is_seamless: 1,
-//     session: '',
-//     easyemi_otp_code: '',
-//     easyEmiConfig: '',
-//     gateway: ''
-//   }
-// };
+const initial = {
+  CreditCard: {
+    nameOnCard: '',
+    cardNumber: '',
+    cvv: '',
+    expMonth: '',
+    expYear: '',
+    type: 'other'
+  },
+  DebitCard: {
+    nameOnCard: '',
+    cardNumber: '',
+    cvv: '',
+    expMonth: '',
+    expYear: '',
+    type: 'other'
+  },
+  Emi: {
+    nameOnCard: '',
+    cardNumber: '',
+    type: 'other',
+    cvv: '',
+    expMonth: '',
+    expYear: '',
+    emiBank: '',
+    emiCode: ''
+  },
+  NetBanking: {
+    bankCode: ''
+  },
+  Wallet: {
+    walletName: ''
+  },
+  EasyEmi: {
+    cardNumber: '',
+    type: 'other',
+    is_seamless: 1,
+    session: '',
+    easyemi_otp_code: '',
+    easyEmiConfig: '',
+    gateway: ''
+  }
+};
 
-// const onChangeGateway = (dispatcher, value, session) => () => {
-//    //Disabling this api call under api migration as this api has no use in backend
-//   dispatcher(value, initial[value], session);
-// };
+const onChangeGateway = (dispatcher, value, session) => () => {
+  // Disabling this api call under api migration as this api has no use in backend
+  dispatcher(value, initial[value], session);
+};
 
 const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEasyEmi) => {
   switch (paymentType) {
@@ -70,7 +70,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEa
             name="paymentOption"
             value="CreditCard"
             checked={selectedGateway === paymentType}
-            // onChange={onChangeGateway(onChange, paymentType, session)}
+            onChange={onChangeGateway(onChange, paymentType, session)}
           />
           <Label
             htmlFor="CreditCard"
@@ -78,7 +78,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEa
             color="textLight"
             mt="0"
             mb="0"
-            // onClick={onChangeGateway(onChange, paymentType, session)}
+            onClick={onChangeGateway(onChange, paymentType, session)}
           >
             <Img
               height="20px"
@@ -102,7 +102,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEa
             name="paymentOption"
             value="DebitCard"
             checked={selectedGateway === paymentType}
-            // onChange={onChangeGateway(onChange, paymentType, session)}
+            onChange={onChangeGateway(onChange, paymentType, session)}
           />
           <Label
             htmlFor="DebitCard"
@@ -110,7 +110,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEa
             color="textLight"
             mt="0"
             mb="0"
-            // onClick={onChangeGateway(onChange, paymentType, session)}
+            onClick={onChangeGateway(onChange, paymentType, session)}
           >
             <Img
               height="20px"
@@ -134,7 +134,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEa
             name="paymentOption"
             value="NetBanking"
             checked={selectedGateway === paymentType}
-            // onChange={onChangeGateway(onChange, paymentType, session)}
+            onChange={onChangeGateway(onChange, paymentType, session)}
           />
           <Label
             htmlFor="paymentIB"
@@ -142,7 +142,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEa
             color="textLight"
             mt="0"
             mb="0"
-            // onClick={onChangeGateway(onChange, paymentType, session)}
+            onClick={onChangeGateway(onChange, paymentType, session)}
           >
             <Img
               height="20px"
@@ -166,7 +166,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEa
             name="paymentOption"
             value="Emi"
             checked={selectedGateway === paymentType}
-            // onChange={onChangeGateway(onChange, paymentType, session)}
+            onChange={onChangeGateway(onChange, paymentType, session)}
           />
           <Label
             htmlFor="paymentEmi"
@@ -174,7 +174,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEa
             color="textLight"
             mt="0"
             mb="0"
-            // onClick={onChangeGateway(onChange, paymentType, session)}
+            onClick={onChangeGateway(onChange, paymentType, session)}
           >
             <Img
               height="20px"
@@ -198,7 +198,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEa
             name="paymentOption"
             value="Wallet"
             checked={selectedGateway === paymentType}
-            // onChange={onChangeGateway(onChange, paymentType, session)}
+            onChange={onChangeGateway(onChange, paymentType, session)}
           />
           <Label
             htmlFor="paymentWallet"
@@ -206,7 +206,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEa
             color="textLight"
             mt="0"
             mb="0"
-            // onClick={onChangeGateway(onChange, paymentType, session)}
+            onClick={onChangeGateway(onChange, paymentType, session)}
           >
             <Img
               height="20px"
@@ -232,7 +232,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEa
             checked={selectedGateway === paymentType}
             onChange={() => {
               resetEasyEmi();
-              // onChangeGateway(onChange, paymentType, session)();
+              onChangeGateway(onChange, paymentType, session)();
             }}
           />
           <Label
@@ -243,7 +243,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEa
             mb="0"
             onClick={() => {
               resetEasyEmi();
-              // onChangeGateway(onChange, paymentType, session)();
+              onChangeGateway(onChange, paymentType, session)();
             }}
           >
             <Img

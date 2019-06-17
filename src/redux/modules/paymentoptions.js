@@ -428,9 +428,9 @@ export default function reducer(state = initialState, action = {}) {
 //   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
 //   promise: ({ client }) => client.get(`${PAYMENT_OPTIONS}/${session}`)
 // });
-export const load = payload => ({
-  types: LOAD_SUCCESS,
-  payload
+export const load = result => ({
+  type: LOAD_SUCCESS,
+  result
 });
 
 export const setSelectedGateway = (gateway, initial, session) => ({

@@ -1,5 +1,5 @@
 import { CUSTOMER_REGISTRATION } from 'helpers/apiUrls';
-import { load } from './paymentoptions';
+// import { load } from './paymentoptions';
 
 const SEND_DELIVERY_ADDRESS = 'checkout/SEND_DELIVERY_ADDRESS';
 const SEND_DELIVERY_ADDRESS_SUCCESS = 'checkout/SEND_DELIVERY_ADDRESS_SUCCESS';
@@ -11,7 +11,8 @@ const initialState = {
   loading: false,
   loaded: false,
   error: '',
-  nextstep: false
+  nextstep: false,
+  paymentData: {}
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -29,6 +30,7 @@ export default function reducer(state = initialState, action = {}) {
         loading: false,
         loaded: true,
         nextstep: action.result,
+        paymentData: action.result.paymentData,
         error: ''
       };
     case SEND_DELIVERY_ADDRESS_FAIL:
@@ -124,8 +126,8 @@ export const sendDeliveryAddress = (sessionId, data, isLoggedIn) => (dispatch, g
           };
         }
         const resp = client.post(CUSTOMER_REGISTRATION, postData);
-        const { paymentOptions } = resp;
-        await load(paymentOptions);
+        // const { paymentData } = resp;
+        // await load(paymentData);
         return resp;
       } catch (error) {
         throw error;
