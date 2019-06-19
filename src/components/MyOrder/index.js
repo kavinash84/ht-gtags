@@ -33,7 +33,7 @@ const mapStateToProps = ({
     data: { contact_number: contactNumber }
   }
 }) => ({
-  results: orders.data,
+  results: orders.data || [],
   loading: orders.loading,
   loaded: orders.loaded,
   contactNumber
