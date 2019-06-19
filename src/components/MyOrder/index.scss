@@ -1,8 +1,10 @@
 @import "../../theme/_variables";
 @import "../../theme/_mixins";
 
-.signupWrapper {
-  width: 900px;
+.trackingWrapper {
+  // width: 1170px;
+  max-height: 90vh;
+  padding: 15px 15px 3px;
   margin: 0 auto;
   border-radius: 1px;
   background-color: $white;
@@ -46,4 +48,42 @@
 }
 .loginModal {
   min-height: 599px;
+}
+/* Timeline */
+.timeline {
+  .trackBlock {
+    .round {
+      transition: background .25s ease-in;
+      border-radius: 50%;
+      width: 12px;
+      height: 12px;
+      position: relative;
+      cursor: pointer;
+      background: #e0e0e0;
+    }
+    .line {
+      width: calc(100% - 10px);
+      margin-left: 11px;
+      margin-top: -8px;
+      height: 3px;
+      background: #e0e0e0;
+    }
+    .stepText {
+      transform: translateX(-45%) translateY(0);
+      text-align: center;
+    }
+    &.active {
+      .round {
+        background: #388e3c;
+      }
+      .line {
+        background: #388e3c;
+      }
+    }
+    &:last-child {
+      .line {
+        display: none;
+      }
+    }
+  }
 }

@@ -12,7 +12,7 @@ import CasesForm from 'components/MyOrder/CasesForm';
 import ResponsiveModal from 'components/Modal';
 import { formatAmount } from 'utils/formatters';
 import { getImageURL } from 'utils/helper';
-import TackingTimeline from './TrackingTimeline';
+import TrackingTimeline from './TrackingTimeline';
 
 const PinIcon = require('../../../static/map-icon-white.svg');
 const styles = require('./MyOrder.scss');
@@ -271,14 +271,14 @@ class OrderBlock extends Component {
           />
         </ResponsiveModal>
         <ResponsiveModal
-          classNames={{ modal: 'signupModal' }}
+          classNames={{ modal: 'trackingModal' }}
           onCloseModal={e => {
             e.preventDefault();
             closeModal();
           }}
           open={trackingLoaded && currentOrder === order.order_number}
         >
-          <TackingTimeline data={items} />
+          <TrackingTimeline data={items} />
         </ResponsiveModal>
       </Div>
     );
