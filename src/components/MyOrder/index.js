@@ -13,8 +13,10 @@ import { loadMyOrders } from 'redux/modules/orders';
 import { loadOrdersTracking, closeModal } from 'redux/modules/tracking';
 // import { Label } from 'hometown-components/lib/Label';
 import MyMenu from 'components/MyMenu';
+// import ResponsiveModal from 'components/Modal';
 import Button from 'hometown-components/lib/Buttons';
 import OrderBlock from './OrderBlock';
+// import TackingTimeline from './TrackingTimeline';
 
 // import ProductItems from '../../data/RecentlyViewedProducts.js';
 const mapDispatchToProps = dispatch =>
@@ -141,6 +143,13 @@ class MyOrder extends Component {
             ))}
           </Container>
         </Section>
+        {/* <ResponsiveModal
+          classNames={{ modal: 'trackingModal' }}
+          onCloseModal={closeTrackingModal}
+          open
+        >
+          <TackingTimeline />
+        </ResponsiveModal> */}
       </Div>
     );
   }

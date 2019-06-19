@@ -267,7 +267,7 @@ class OrderBlock extends Component {
           />
         </ResponsiveModal>
         <ResponsiveModal
-          classNames={{ modal: 'signupModal' }}
+          classNames={{ modal: 'trackingModal' }}
           onCloseModal={e => {
             e.preventDefault();
             closeModal();
