@@ -2,22 +2,28 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class TrackingDetails extends Component {
-  // renderDetails = () => {
-  //   const { data } = this.props;
-  //   data.map(itemObject => {
-  //     const { status = [] } = itemObject;
-  //     const lines = status.map(({ text }) => <p>{text}</p>);
-  //     return lines;
-  //   });
-  // }
   render() {
     const stylesModal = require('./index.scss');
-    console.log(this.props.data);
+    const { data } = this.props;
     return (
       <div className={stylesModal.signupWrapper}>
-        <p>ksjdfsdhfkjsdhf</p>
-        <p>sdfsdfdsfds</p>
-        <p>sdfsdfdsfsd</p>
+        {data.map(item => {
+          const { image, product_name: name, status } = item;
+          return (
+            <div>
+              <div>
+                <img src={image || ''} alt="" />
+              </div>
+              <div>{name}</div>
+              <div>
+                {status.map(statusDetails => {
+                  const { status: StatusKey } = statusDetails;
+                  return <p> {StatusKey || 'NA'} </p>;
+                })}
+              </div>
+            </div>
+          );
+        })}
       </div>
     );
   }
