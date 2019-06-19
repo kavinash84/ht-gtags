@@ -10,13 +10,11 @@ import Section from 'hometown-components/lib/Section';
 import Row from 'hometown-components/lib/Row';
 import { getDateFilters } from 'utils/helper';
 import { loadMyOrders } from 'redux/modules/orders';
-import { loadOrdersTracking, closeModal } from 'redux/modules/tracking';
+import { loadOrdersTracking, closeModal, setCurrentOrder } from 'redux/modules/tracking';
 // import { Label } from 'hometown-components/lib/Label';
 import MyMenu from 'components/MyMenu';
-// import ResponsiveModal from 'components/Modal';
 import Button from 'hometown-components/lib/Buttons';
 import OrderBlock from './OrderBlock';
-// import TackingTimeline from './TrackingTimeline';
 
 // import ProductItems from '../../data/RecentlyViewedProducts.js';
 const mapDispatchToProps = dispatch =>
@@ -24,7 +22,8 @@ const mapDispatchToProps = dispatch =>
     {
       loadMyOrders,
       loadOrdersTracking,
-      closeModal
+      closeModal,
+      setCurrentOrder
     },
     dispatch
   );
@@ -44,8 +43,8 @@ class MyOrder extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      startDate: new Date(),
-      endDate: new Date(),
+      startDate: '',
+      endDate: '',
       orderStatus: '',
       dateFilter: ''
     };
@@ -90,7 +89,11 @@ class MyOrder extends Component {
   };
   render() {
     const {
-      results, loading, loadOrdersTracking: loadTrackingDetails, closeModal: closeTrackingModal
+      results,
+      loading,
+      loadOrdersTracking: loadTrackingDetails,
+      closeModal: closeTrackingModal,
+      setCurrentOrder: setOrderNumber
     } = this.props;
     return (
       <Div type="block">
@@ -133,23 +136,17 @@ class MyOrder extends Component {
                 </Button>
               </Div>
             </Row>
-            {results.map(item => (
+            {results.map((item, index) => (
               <OrderBlock
-                key={item.order_item_id}
+                key={`${item.order_item_id}_${String(index)}`}
                 order={item}
                 loadOrdersTracking={loadTrackingDetails}
+                setCurrentOrder={setOrderNumber}
                 closeModal={closeTrackingModal}
               />
             ))}
           </Container>
         </Section>
-        {/* <ResponsiveModal
-          classNames={{ modal: 'trackingModal' }}
-          onCloseModal={closeTrackingModal}
-          open
-        >
-          <TackingTimeline />
-        </ResponsiveModal> */}
       </Div>
     );
   }
@@ -165,6 +162,7 @@ MyOrder.propTypes = {
   loading: PropTypes.bool,
   loadMyOrders: PropTypes.func.isRequired,
   loadOrdersTracking: PropTypes.func.isRequired,
+  setCurrentOrder: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired
 };
 export default connect(
