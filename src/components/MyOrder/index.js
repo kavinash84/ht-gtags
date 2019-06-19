@@ -42,8 +42,8 @@ class MyOrder extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      startDate: new Date(),
-      endDate: new Date(),
+      startDate: '',
+      endDate: '',
       orderStatus: '',
       dateFilter: ''
     };
