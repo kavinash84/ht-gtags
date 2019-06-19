@@ -12,12 +12,16 @@ import CasesForm from 'components/MyOrder/CasesForm';
 import ResponsiveModal from 'components/Modal';
 import { formatAmount } from 'utils/formatters';
 import { getImageURL } from 'utils/helper';
+import TackingTimeline from './TrackingTimeline';
 
 const PinIcon = require('../../../static/map-icon-white.svg');
 const styles = require('./MyOrder.scss');
 
-@connect(({ cases }) => ({
-  ordercase: cases.ordercase || {}
+@connect(({ cases, tracking }) => ({
+  ordercase: cases.ordercase || {},
+  loading: tracking.loading,
+  loaded: tracking.loaded,
+  data: tracking.data
 }))
 class OrderBlock extends Component {
   constructor(props) {
@@ -45,12 +49,22 @@ class OrderBlock extends Component {
       orderItem
     });
   };
+  loadTrackingData = order => {
+    const { loadOrdersTracking } = this.props;
+    const { order_number: orderNumber = '' } = order;
+    loadOrdersTracking(orderNumber);
+  };
   render() {
     const {
       order,
-      ordercase: { loaded, loading }
+      ordercase: { loaded, loading },
+      loading: trackingLoading,
+      loaded: trackingLoaded,
+      data,
+      closeModal
     } = this.props;
     // const { openSuccessModal } = this.state;
+    const items = data.order_items || [];
     return (
       <Div mb="2.5rem" className={styles.blockWrapper}>
         <Row type="block" m="0" mb="1rem" className={styles.blockHeading}>
@@ -59,6 +73,35 @@ class OrderBlock extends Component {
               Order No. {order.order_number}
             </Heading>
           </Div>
+          {order.bob_order === 0 || order.bob_order === '0' ? (
+            <Div ta="right" col="6" pr="5px">
+              <Button
+                fontSize="14px !important"
+                color="#ae8873"
+                hoverColor="white"
+                bc="transparent"
+                btnType="primary"
+                p="5px 10px"
+                mr="10px"
+                onClick={() => {
+                  this.loadTrackingData(order);
+                }}
+              >
+                <Img
+                  src={PinIcon}
+                  alt="Track"
+                  height="16px"
+                  position="relative"
+                  top="4px"
+                  mr="0.3125rem"
+                  float="left"
+                />
+                {trackingLoading ? 'Please Wait' : 'Track'}
+              </Button>
+            </Div>
+          ) : (
+            ''
+          )}
           {/* <Div col="6" ta="right">
             <Heading fontSize="1.25rem" color="textLight" mb="0px" mt="0px" fontFamily="light">
               <Button
@@ -183,27 +226,6 @@ class OrderBlock extends Component {
                             <Div ta="right">
                               <Button
                                 fontSize="14px !important"
-                                color="#ae8873"
-                                hoverColor="white"
-                                bc="transparent"
-                                btnType="primary"
-                                p="5px 10px"
-                                mr="10px"
-                                onClick={this.handleModal}
-                              >
-                                <Img
-                                  src={PinIcon}
-                                  alt="Track"
-                                  height="16px"
-                                  position="relative"
-                                  top="4px"
-                                  mr="0.3125rem"
-                                  float="left"
-                                />
-                                Track
-                              </Button>
-                              <Button
-                                fontSize="14px !important"
                                 hoverColor="white"
                                 color="rgba(0,0,0,0.5)"
                                 bc="rgba(0,0,0,0.5)"
@@ -244,6 +266,16 @@ class OrderBlock extends Component {
             orderItem={this.state.orderItem}
           />
         </ResponsiveModal>
+        <ResponsiveModal
+          classNames={{ modal: 'signupModal' }}
+          onCloseModal={e => {
+            e.preventDefault();
+            closeModal();
+          }}
+          open={trackingLoaded}
+        >
+          <TackingTimeline data={items} />
+        </ResponsiveModal>
       </Div>
     );
   }
@@ -253,6 +285,11 @@ OrderBlock.defaultProps = {
 };
 OrderBlock.propTypes = {
   order: PropTypes.object.isRequired,
-  ordercase: PropTypes.object
+  ordercase: PropTypes.object,
+  loadOrdersTracking: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  loaded: PropTypes.bool.isRequired,
+  data: PropTypes.array.isRequired
 };
 export default OrderBlock;

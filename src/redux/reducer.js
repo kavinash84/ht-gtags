@@ -19,6 +19,7 @@ import productdetails from './modules/productdetails';
 import reviews from './modules/reviews';
 import trackorder from './modules/trackorder';
 import orders from './modules/orders';
+import tracking from './modules/tracking';
 import pagination from './modules/pagination';
 import paymentoptions from './modules/paymentoptions';
 import checkout from './modules/checkout';
@@ -69,6 +70,7 @@ export default function createReducers(asyncReducers) {
     reviews,
     trackorder,
     orders,
+    tracking,
     pagination,
     paymentoptions,
     checkout,

@@ -10,13 +10,22 @@ import Section from 'hometown-components/lib/Section';
 import Row from 'hometown-components/lib/Row';
 import { getDateFilters } from 'utils/helper';
 import { loadMyOrders } from 'redux/modules/orders';
+import { loadOrdersTracking, closeModal } from 'redux/modules/tracking';
 // import { Label } from 'hometown-components/lib/Label';
 import MyMenu from 'components/MyMenu';
 import Button from 'hometown-components/lib/Buttons';
 import OrderBlock from './OrderBlock';
 
 // import ProductItems from '../../data/RecentlyViewedProducts.js';
-const mapDispatchToProps = dispatch => bindActionCreators({ loadMyOrders }, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      loadMyOrders,
+      loadOrdersTracking,
+      closeModal
+    },
+    dispatch
+  );
 const mapStateToProps = ({
   orders,
   profile: {
@@ -78,7 +87,9 @@ class MyOrder extends Component {
     this.props.loadMyOrders(contactNumber, startDate, endDate);
   };
   render() {
-    const { results, loading } = this.props;
+    const {
+      results, loading, loadOrdersTracking: loadTrackingDetails, closeModal: closeTrackingModal
+    } = this.props;
     return (
       <Div type="block">
         <MyMenu page="order" />
@@ -121,7 +132,12 @@ class MyOrder extends Component {
               </Div>
             </Row>
             {results.map(item => (
-              <OrderBlock key={item.order_item_id} order={item} />
+              <OrderBlock
+                key={item.order_item_id}
+                order={item}
+                loadOrdersTracking={loadTrackingDetails}
+                closeModal={closeTrackingModal}
+              />
             ))}
           </Container>
         </Section>
@@ -138,7 +154,9 @@ MyOrder.propTypes = {
   results: PropTypes.array,
   contactNumber: PropTypes.string,
   loading: PropTypes.bool,
-  loadMyOrders: PropTypes.func.isRequired
+  loadMyOrders: PropTypes.func.isRequired,
+  loadOrdersTracking: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired
 };
 export default connect(
   mapStateToProps,

@@ -49,6 +49,7 @@ export const CUSTOMER_REGISTRATION = 'tesla/checkout/customer-registration';
 export const SESSION = 'tesla/session';
 
 export const TRACK_ORDER = 'tesla/orders/track';
+export const ORDERS_TRACKING_API = 'tesla/orders/tracking';
 
 /* Profile Details */
 export const MY_ORDERS = 'tesla/orders';
