@@ -7,18 +7,18 @@ class TrackingDetails extends Component {
     const { data } = this.props;
     return (
       <div className={stylesModal.signupWrapper}>
-        {data.map(item => {
+        {data.map((item, index) => {
           const { image, product_name: name, status } = item;
           return (
-            <div>
+            <div key={String(index)}>
               <div>
                 <img src={image || ''} alt="" />
               </div>
               <div>{name}</div>
               <div>
-                {status.map(statusDetails => {
+                {status.map((statusDetails, i) => {
                   const { status: StatusKey } = statusDetails;
-                  return <p> {StatusKey || 'NA'} </p>;
+                  return <p key={String(i)}> {StatusKey || 'NA'} </p>;
                 })}
               </div>
             </div>

@@ -17,12 +17,13 @@ import TackingTimeline from './TrackingTimeline';
 const PinIcon = require('../../../static/map-icon-white.svg');
 const styles = require('./MyOrder.scss');
 
-@connect(({ cases, tracking }) => ({
+const mapStateToProps = ({ cases, tracking }) => ({
   ordercase: cases.ordercase || {},
-  loading: tracking.loading,
-  loaded: tracking.loaded,
+  trackingLoading: tracking.trackingLoading,
+  trackingLoaded: tracking.trackingLoaded,
+  currentOrder: tracking.currentOrder,
   data: tracking.data
-}))
+});
 class OrderBlock extends Component {
   constructor(props) {
     super(props);
@@ -50,18 +51,20 @@ class OrderBlock extends Component {
     });
   };
   loadTrackingData = order => {
-    const { loadOrdersTracking } = this.props;
+    const { loadOrdersTracking, setCurrentOrder } = this.props;
     const { order_number: orderNumber = '' } = order;
+    setCurrentOrder(orderNumber);
     loadOrdersTracking(orderNumber);
   };
   render() {
     const {
       order,
       ordercase: { loaded, loading },
-      loading: trackingLoading,
-      loaded: trackingLoaded,
+      trackingLoading,
+      trackingLoaded,
       data,
-      closeModal
+      closeModal,
+      currentOrder
     } = this.props;
     // const { openSuccessModal } = this.state;
     const items = data.order_items || [];
@@ -76,6 +79,7 @@ class OrderBlock extends Component {
           {order.bob_order === 0 || order.bob_order === '0' ? (
             <Div ta="right" col="6" pr="5px">
               <Button
+                disabled={trackingLoading && currentOrder === order.order_number}
                 fontSize="14px !important"
                 color="#ae8873"
                 hoverColor="white"
@@ -96,7 +100,7 @@ class OrderBlock extends Component {
                   mr="0.3125rem"
                   float="left"
                 />
-                {trackingLoading ? 'Please Wait' : 'Track'}
+                {trackingLoading && currentOrder === order.order_number ? 'Please Wait' : 'Track'}
               </Button>
             </Div>
           ) : (
@@ -272,7 +276,7 @@ class OrderBlock extends Component {
             e.preventDefault();
             closeModal();
           }}
-          open={trackingLoaded}
+          open={trackingLoaded && currentOrder === order.order_number}
         >
           <TackingTimeline data={items} />
         </ResponsiveModal>
@@ -287,9 +291,14 @@ OrderBlock.propTypes = {
   order: PropTypes.object.isRequired,
   ordercase: PropTypes.object,
   loadOrdersTracking: PropTypes.func.isRequired,
+  setCurrentOrder: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
-  loaded: PropTypes.bool.isRequired,
-  data: PropTypes.array.isRequired
+  trackingLoading: PropTypes.bool.isRequired,
+  trackingLoaded: PropTypes.bool.isRequired,
+  data: PropTypes.object.isRequired,
+  currentOrder: PropTypes.string.isRequired
 };
-export default OrderBlock;
+export default connect(
+  mapStateToProps,
+  null
+)(OrderBlock);
