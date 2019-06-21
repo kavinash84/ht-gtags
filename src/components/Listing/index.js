@@ -141,6 +141,7 @@ class Listing extends React.Component {
       categoryBar,
       selectedPincode
     } = this.props;
+    const uniqueFilters = {};
     return (
       <Div type="block">
         <TitleBar title={categoryName} productCount={productCount}>
@@ -153,16 +154,23 @@ class Listing extends React.Component {
               <Row display="block" mr="0" ml="0">
                 <Div col="9">
                   <Label display="inline-block">Filter By</Label>
-                  {filters.map((item, index) => (
-                    <Dropdown
-                      key={String(index)}
-                      checkbox
-                      title={item.name === 'Product main material' ? 'Material' : item.name}
-                      onclick={this.setFilter}
-                      data={item.attributes}
-                      history={history}
-                    />
-                  ))}
+                  {filters.map((item, index) => {
+                    const filterName = item.name || '';
+                    if (!uniqueFilters[filterName]) {
+                      uniqueFilters[filterName] = true;
+                      return (
+                        <Dropdown
+                          key={String(index)}
+                          checkbox
+                          title={item.name === 'Product main material' ? 'Material' : item.name}
+                          onclick={this.setFilter}
+                          data={item.attributes}
+                          history={history}
+                        />
+                      );
+                    }
+                    return '';
+                  })}
                 </Div>
                 <Div col="3" ta="right">
                   <Label>Sort By</Label>
