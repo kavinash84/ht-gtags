@@ -50,7 +50,7 @@ export default class ProductDetailSlider extends Component {
           </Slider>
         </Div>
         <Div col="10" pl="0.625rem" pr="0" pb="1rem">
-          <img className="hide" itemProp="image" src={(data && `${data[0].url}.jpg`) || ''} alt={title} />
+          <img className="hide" itemProp="image" src={(data && `${data[0].url}-zoom.jpg`) || ''} alt={title} />
           <Slider asNavFor={this.state.nav2} ref={slider => (this.slider1 = slider)}>
             {data.map(slide => (
               <CarouselItem key={slide.id_catalog_product_image} image={`${slide.url}.jpg`} name={title} />
