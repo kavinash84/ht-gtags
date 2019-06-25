@@ -946,6 +946,28 @@
 		-webkit-transform:scale(1);
 	}
 }
+.embeddedServiceHelpButton .helpButton .uiButton {
+  background-color: #555555;
+  font-family: "Salesforce Sans", sans-serif;
+  box-sizing: content-box;
+  font-weight: bold;
+  font-size: 16px;
+}
+.embeddedServiceHelpButton .helpButton .uiButton:focus {
+  outline: 1px solid #555555;
+}
+.message {
+	background-color: #555555;
+	border-style: hidden; 
+	border-width: 1px;
+	color: white;
+	padding: 6px 8px 6px 6px;
+	margin: 4px 20px;
+}
+@font-face {
+  font-family: 'Salesforce Sans';
+  src: url('https://www.sfdcstatic.com/system/shared/common/assets/fonts/SalesforceSans/SalesforceSans-Regular.ttf') format('truetype');
+}
 @keyframes animateHeartOut{
 	0%{
 		transform:scale(1.4);
