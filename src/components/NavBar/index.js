@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Container from 'hometown-components/lib/Container';
 import { Link } from 'react-router-dom';
 import Button from 'hometown-components/lib/Buttons';
@@ -29,8 +29,14 @@ const NavBar = ({
               key={menuItem.id}
               onMouseEnter={handleEnter(menuItem.id)}
             >
-              <Label className={styles.newLabel}>New</Label>
-              {menuItem.name}
+              {menuItem.name === 'Hot Deals' ? (
+                <Fragment>
+                  <Label className={styles.newLabel}>New</Label>
+                  {menuItem.name}
+                </Fragment>
+              ) : (
+                menuItem.name
+              )}
             </Link>
           ))}
         <Link
