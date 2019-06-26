@@ -42,7 +42,7 @@ export default class ProductDetailSlider extends Component {
           >
             {data.map(slide => (
               <div className={styles.pdpThumbSliderItem} key={slide.id_catalog_product_image}>
-                <ImageShimmer src={`${slide.url}-catalog_360.jpg`} style={{ width: '105px' }} height="105px">
+                <ImageShimmer src={`${slide.url}-top_sel_100.jpg`} style={{ width: '105px' }} height="105px">
                   {imageURL => <Img alt={title} src={imageURL} width="105px" />}
                 </ImageShimmer>
               </div>
