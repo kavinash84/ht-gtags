@@ -29,6 +29,7 @@ const NavBar = ({
               key={menuItem.id}
               onMouseEnter={handleEnter(menuItem.id)}
             >
+              <Label className={styles.newLabel}>New</Label>
               {menuItem.name}
             </Link>
           ))}
@@ -60,28 +61,28 @@ const NavBar = ({
           <div className="dropDown blockRight">
             <ul>
               <li>
-                <Label htmlFor="checkbox" fontSize="0.75em" ml="0.625rem" className="dropdownValue">
+                <Label htmlFor="checkbox" fontSize="0.75em" className="dropdownValue">
                   <Link onClick={exitOnClick} to="/bath" onMouseEnter={handleEnter('')} title="Bath">
                     Bath
                   </Link>
                 </Label>
               </li>
               <li>
-                <Label htmlFor="checkbox" fontSize="0.75em" ml="0.625rem" className="dropdownValue">
+                <Label htmlFor="checkbox" fontSize="0.75em" className="dropdownValue">
                   <Link onClick={exitOnClick} to="/electronics" onMouseEnter={handleEnter('')} title="Electronics">
                     Electronics
                   </Link>
                 </Label>
               </li>
               <li>
-                <Label htmlFor="checkbox" fontSize="0.75em" ml="0.625rem" className="dropdownValue">
+                <Label htmlFor="checkbox" fontSize="0.75em" className="dropdownValue">
                   <Link onClick={exitOnClick} to="/bulk-order" onMouseEnter={handleEnter('')} title="Bulk Order">
                     Bulk Order
                   </Link>
                 </Label>
               </li>
               <li>
-                <Label htmlFor="checkbox" fontSize="0.75em" ml="0.625rem" className="dropdownValue">
+                <Label htmlFor="checkbox" fontSize="0.75em" className="dropdownValue">
                   <Link
                     to="/design-build"
                     title="Design & Build"
@@ -94,7 +95,7 @@ const NavBar = ({
                 </Label>
               </li>
               <li>
-                <Label htmlFor="checkbox" fontSize="0.75em" ml="0.625rem" className="dropdownValue">
+                <Label htmlFor="checkbox" fontSize="0.75em" className="dropdownValue">
                   <a
                     href="https://static.hometown.in/media/Institutional+Catalogue.pdf"
                     title="Festive Catalogue"

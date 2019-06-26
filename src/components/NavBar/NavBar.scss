@@ -49,6 +49,7 @@
     line-height: 2;
     font-family: light;
     text-transform: uppercase;
+    position: relative;
     &:hover {
       color: #FFF;
       opacity: 0.8;
@@ -62,4 +63,17 @@
 }
 .moreDropdownWrapper {
   top: -2px;
+}
+.newLabel {
+  position: absolute;
+  top: 2px;
+  background: #f98d29;
+  border-radius: 10px;
+  color: #FFF;
+  font-size: 8px;
+  padding: 4px 5px 2px;
+  margin: 0;
+  line-height: 1;
+  right: 0;
+  font-family: regular;
 }
