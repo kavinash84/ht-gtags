@@ -217,14 +217,13 @@ class OrderBlock extends Component {
                         </td>
                         <td width="50%">{item.product_name || 'NOT AVAILABLE'}</td>
                         {/* <td>{item.order_item_status_display_name || 'NOT AVAILABLE'}</td> */}
-                        <td>{item.status !== 'canceled' ? item.delivery_date_text : '--'}</td>
-                        {item.status === 'canceled' ? (
-                          <td>
+                        <td>
+                          {item.status !== 'canceled' ? (
+                            item.delivery_date_text
+                          ) : (
                             <span style={{ color: 'red' }}> Cancelled </span>
-                          </td>
-                        ) : (
-                          ''
-                        )}
+                          )}
+                        </td>
                         {order.bob_order === 0 || order.bob_order === '0' ? (
                           <td>
                             <Div ta="right">
