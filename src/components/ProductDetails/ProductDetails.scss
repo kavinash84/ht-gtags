@@ -72,10 +72,12 @@
     vertical-align: middle;
   }
 }
-.seeAllCombine, a{
-  color: #f98d29;
-  text-decoration: underline;
-}
-.seeAllCombine, a:hover {
-  color: blue;
+.seeAllCombine {
+  a {
+    color: #f98d29;
+    text-decoration: underline;
+    &:hover {
+      color: blue;
+    }
+  }
 }
