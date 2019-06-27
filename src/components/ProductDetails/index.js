@@ -317,7 +317,9 @@ class ProductDetails extends React.Component {
                           fontSize="1rem"
                           color={Theme.colors.primary}
                         >
-                          <a href="#combined_buy_offers">{`See ${combinedbuy.length} Combined Offers`}</a>
+                          <a href="#combined_buy_offers">
+                            {`See ${combinedbuy.length} Combined ${combinedbuy.length > 1 ? 'Offers' : 'Offer'}`}
+                          </a>
                         </Button>
                       </Div>
                     </Row>
