@@ -48,7 +48,7 @@ const NavBar = ({
         >
           Modular Kitchens
         </Link>
-        <div className={`${styles.moreDropdownWrapper} dropdownWrapper`}>
+        <div className={`${styles.moreDropdownWrapper} dropdownWrapper moreDropdownWrapper`}>
           <Button
             btnType="custom"
             bg="transparent"

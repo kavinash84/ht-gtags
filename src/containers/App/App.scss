@@ -680,7 +680,7 @@
 			padding: 5px 0;
 			li {
 				text-align: left;
-				padding: 0.125rem 0;
+				padding: 0.125rem 10px;
 				list-style: none;
 				label {
 					cursor: pointer;
@@ -706,13 +706,34 @@
 			display: block !important;
 		}
 		.dropdownValue {
-			width: 100%;
-			margin: 0;
-			padding: 1px 15px;
+			width: 83%;
 			vertical-align: middle !important;
 			// white-space: nowrap !important;
 			// overflow: hidden !important;
 			// text-overflow: ellipsis !important;
+		}
+	}
+	.moreDropdownWrapper {
+		.dropDown {
+			ul {
+				li {
+					padding: 0.125rem 0;
+				}
+			}
+		}
+		.dropdownValue {
+			width: 100%;
+			margin: 0;
+			padding: 0;
+			vertical-align: middle !important;
+			// white-space: nowrap !important;
+			// overflow: hidden !important;
+			// text-overflow: ellipsis !important;
+			a {
+				width: 100% !important;
+				text-align: left !important;
+				padding: 1px 15px !important;
+			}
 		}
 	}
 
