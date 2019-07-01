@@ -7,6 +7,7 @@ import Heading from 'hometown-components/lib/Heading';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
 import { Label } from 'hometown-components/lib/Label';
+import { getCurrentCity } from 'selectors/location';
 import { gaVisitEvent } from 'redux/modules/stores';
 import PropTypes from 'prop-types';
 import Map from './Map';
@@ -14,6 +15,11 @@ import Map from './Map';
 const styles = require('./StoreLocator.scss');
 
 const mapDispatchToProps = dispatch => bindActionCreators({ gaVisitEvent }, dispatch);
+
+const mapStateToProps = ({ storelocator: { locationData } }) => ({
+  city: getCurrentCity(locationData)
+});
+
 class StoreLocator extends React.Component {
   static propTypes = {
     data: PropTypes.object
@@ -108,7 +114,8 @@ class StoreLocator extends React.Component {
     });
   };
   render() {
-    const { data } = this.props;
+    const { data, city } = this.props;
+    console.log(city);
     const mapData = data.items.text;
     const {
       position, zoomlevel, open, currentList, currentState, selectedStore
@@ -201,10 +208,11 @@ class StoreLocator extends React.Component {
   }
 }
 StoreLocator.propTypes = {
-  gaVisitEvent: PropTypes.func.isRequired
+  gaVisitEvent: PropTypes.func.isRequired,
+  city: PropTypes.string.isRequired
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(StoreLocator);

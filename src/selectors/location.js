@@ -1,11 +1,12 @@
 import { createSelector } from 'reselect';
 
-export const getLocationComponents = locationObject => {
-  const { results = [] } = locationObject;
-  const item = results.length ? results[0] : {};
-  const components = item.address_components || [];
-  return components;
-};
+export const items = locationObject =>
+  locationObject.results && locationObject.results.length ? locationObject.results[0] : [];
+
+export const getLocationComponents = createSelector(
+  [items],
+  itemList => itemList.address_components || []
+);
 
 export const getCurrentCity = createSelector(
   [getLocationComponents],

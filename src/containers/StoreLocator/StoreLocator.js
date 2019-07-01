@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { setCurrentLocation } from 'redux/modules/storelocator';
 import StoreLocatorContainer from 'components/StoreLocator';
@@ -8,15 +9,15 @@ import MenuFooter from 'containers/MenuFooter';
 const mapStateToProps = ({ storelocator }) => ({
   storelocator
 });
-
+const mapDispatchToProps = dispatch => bindActionCreators({ setCurrentLocation }, dispatch);
 class StoreLocator extends Component {
   componentDidMount() {
-    const { dispatch } = this.context.store;
+    const { setCurrentLocation: setLocation } = this.props;
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         const lat = position.coords.latitude || '';
         const lng = position.coords.longitude || '';
-        dispatch(setCurrentLocation(lat, lng));
+        setLocation(lat, lng);
       });
     }
   }
@@ -39,6 +40,10 @@ class StoreLocator extends Component {
 }
 
 StoreLocator.propTypes = {
-  storelocator: PropTypes.object.isRequired
+  storelocator: PropTypes.object.isRequired,
+  setCurrentLocation: PropTypes.func.isRequired
 };
-export default connect(mapStateToProps)(StoreLocator);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(StoreLocator);
