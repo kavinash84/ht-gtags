@@ -7,6 +7,7 @@ import Heading from 'hometown-components/lib/Heading';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
 import { Label } from 'hometown-components/lib/Label';
+import { setCurrentLocation } from 'redux/modules/storelocator';
 import { getCurrentCity } from 'selectors/location';
 import { gaVisitEvent } from 'redux/modules/stores';
 import PropTypes from 'prop-types';
@@ -14,10 +15,11 @@ import Map from './Map';
 
 const styles = require('./StoreLocator.scss');
 
-const mapDispatchToProps = dispatch => bindActionCreators({ gaVisitEvent }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ gaVisitEvent, setCurrentLocation }, dispatch);
 
-const mapStateToProps = ({ storelocator: { locationData } }) => ({
-  city: getCurrentCity(locationData)
+const mapStateToProps = ({ storelocator: { locationData, locationLoaded } }) => ({
+  city: getCurrentCity(locationData),
+  locationLoaded
 });
 
 class StoreLocator extends React.Component {
@@ -33,7 +35,8 @@ class StoreLocator extends React.Component {
     open: false,
     currentList: [],
     currentState: null,
-    selectedStore: ''
+    selectedStore: '',
+    selectCity: false
   };
   componentWillMount() {
     const { data } = this.props;
@@ -42,6 +45,13 @@ class StoreLocator extends React.Component {
       this.setState({
         currentList: mapData
       });
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    const { locationLoaded, data, city } = nextProps;
+    if (data && data.items && data.items.text && locationLoaded && city) {
+      const mapData = data.items.text;
+      this.handleSelectCity(city, mapData);
     }
   }
   getURL = position => {
@@ -93,7 +103,7 @@ class StoreLocator extends React.Component {
   };
 
   handleSelectCity = (city, list) => {
-    const currentList = list.filter(item => item.city === city);
+    const currentList = list.filter(item => item.city.toUpperCase() === city.toUpperCase());
     let lat = 0;
     currentList.map(item => {
       lat += item.position.lat;
@@ -113,12 +123,21 @@ class StoreLocator extends React.Component {
       open: false
     });
   };
+  detectUserLocation = () => {
+    const { setCurrentLocation: setLocation } = this.props;
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        const lat = position.coords.latitude || '';
+        const lng = position.coords.longitude || '';
+        setLocation(lat, lng);
+      });
+    }
+  };
   render() {
-    const { data, city } = this.props;
-    console.log(city);
+    const { data } = this.props;
     const mapData = data.items.text;
     const {
-      position, zoomlevel, open, currentList, currentState, selectedStore
+      position, zoomlevel, open, currentList, currentState, selectedStore, selectCity
     } = this.state;
     //
     let stateList = mapData.map(item => item.state);
@@ -153,18 +172,31 @@ class StoreLocator extends React.Component {
                 selectedStore={selectedStore}
               />
               <Div className={styles.filterWrapper}>
-                <select onChange={e => this.handleSelectState(e.target.value, mapData)}>
-                  <option value={null} key="state">
-                    SELECT STATE
-                  </option>
-                  {stateList.map(item => (
-                    <option value={item} key={item}>
-                      {item}
+                {selectCity && (
+                  <button
+                    onClick={e => {
+                      e.preventDefault();
+                      this.detectUserLocation();
+                    }}
+                    className="selectLocation"
+                  >
+                    Detect location
+                  </button>
+                )}
+                {selectCity && (
+                  <select onChange={e => this.handleSelectState(e.target.value, mapData)}>
+                    <option value={null} key="state">
+                      SELECT STATE
                     </option>
-                  ))}
-                </select>
+                    {stateList.map(item => (
+                      <option value={item} key={item}>
+                        {item}
+                      </option>
+                    ))}
+                  </select>
+                )}
 
-                {currentState && (
+                {selectCity && currentState && (
                   <select onChange={e => this.handleSelectCity(e.target.value, mapData)}>
                     <option value={null} key="state">
                       SELECT CITY
@@ -176,6 +208,17 @@ class StoreLocator extends React.Component {
                     ))}
                   </select>
                 )}
+                {!selectCity && (
+                  <button
+                    onClick={e => {
+                      e.preventDefault();
+                      this.setState({ selectCity: true });
+                    }}
+                    className="selectLocation"
+                  >
+                    Select location
+                  </button>
+                )}
 
                 <div className={styles.cistList}>
                   <ul>
@@ -183,7 +226,7 @@ class StoreLocator extends React.Component {
                       <li key={String(index)}>
                         <button onClick={() => this.handleClick(item.store, mapData, item.city)}>
                           <Label fontSize="1rem" mt="0" ml="0">
-                            {item.store}
+                            {item.store.toUpperCase()}
                           </Label>
                           <address style={{ color: 'black', fontStyle: 'normal' }}>{item.address}</address>
                           <a
@@ -209,7 +252,9 @@ class StoreLocator extends React.Component {
 }
 StoreLocator.propTypes = {
   gaVisitEvent: PropTypes.func.isRequired,
-  city: PropTypes.string.isRequired
+  city: PropTypes.string.isRequired,
+  locationLoaded: PropTypes.bool.isRequired,
+  setCurrentLocation: PropTypes.func.isRequired
 };
 
 export default connect(

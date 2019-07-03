@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { STATIC_BLOCK } from 'helpers/apiUrls';
 import { mapKey } from 'helpers/Constants';
 
@@ -48,7 +49,7 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         locationLoading: false,
         locationLoaded: true,
-        locationData: action.result
+        locationData: action.result.data || {}
       };
     case LOAD_LOCATION_DATA_FAIL:
       return {
@@ -69,5 +70,5 @@ export const loadStoresData = () => ({
 
 export const setCurrentLocation = (lat, lng) => ({
   types: [LOAD_LOCATION_DATA, LOAD_LOCATION_DATA_SUCCESS, LOAD_LOCATION_DATA_FAIL],
-  promise: ({ client }) => client.get(`${MAP_URL}?latlng=${lat},${lng}&key=${mapKey}`)
+  promise: ({ client }) => axios.get(`${MAP_URL}?latlng=${lat},${lng}&key=${mapKey}`) //eslint-disable-line
 });
