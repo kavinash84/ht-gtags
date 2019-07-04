@@ -8,7 +8,7 @@ import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
 import { Label } from 'hometown-components/lib/Label';
 import { setCurrentLocation } from 'redux/modules/storelocator';
-import { getCurrentCity } from 'selectors/location';
+import { getCurrentCity, getCurrentLocation } from 'selectors/location';
 import { gaVisitEvent } from 'redux/modules/stores';
 import PropTypes from 'prop-types';
 import Map from './Map';
@@ -19,6 +19,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({ gaVisitEvent, setCur
 
 const mapStateToProps = ({ storelocator: { locationData, locationLoaded } }) => ({
   city: getCurrentCity(locationData),
+  location: getCurrentLocation(locationData),
   locationLoaded
 });
 
@@ -54,11 +55,11 @@ class StoreLocator extends React.Component {
       this.handleSelectCity(city, mapData);
     }
   }
-  getURL = position => {
+  getURL = (origin, dest) => {
     const baseUrl = 'http://maps.google.com/?';
-    const origin = 'saddr=';
-    const destination = `&daddr=${position.lat || ''},${position.lng || ''}`;
-    const mapURL = `${baseUrl}${origin}${destination}`;
+    const start = `saddr=${origin.lat || ''},${origin.lng || ''}`;
+    const destination = `&daddr=${dest.lat || ''},${dest.lng || ''}`;
+    const mapURL = `${baseUrl}${start}${destination}`;
     return mapURL;
   };
   handleClick = (store = '', mapData, city = '') => {
@@ -134,7 +135,7 @@ class StoreLocator extends React.Component {
     }
   };
   render() {
-    const { data } = this.props;
+    const { data, location, locationLoaded } = this.props;
     const mapData = data.items.text;
     const {
       position, zoomlevel, open, currentList, currentState, selectedStore, selectCity
@@ -178,9 +179,9 @@ class StoreLocator extends React.Component {
                       e.preventDefault();
                       this.detectUserLocation();
                     }}
-                    className="selectLocation"
+                    className={styles.selectLocation}
                   >
-                    Detect location
+                    Detect My Location
                   </button>
                 )}
                 {selectCity && (
@@ -214,14 +215,35 @@ class StoreLocator extends React.Component {
                       e.preventDefault();
                       this.setState({ selectCity: true });
                     }}
-                    className="selectLocation"
+                    className={styles.selectLocation}
                   >
-                    Select location
+                    Select City
                   </button>
                 )}
 
                 <div className={styles.cistList}>
                   <ul>
+                    {locationLoaded && (
+                      <div
+                        style={{
+                          margin: '0 0 5px 0',
+                          padding: '4px',
+                          border: '2px solid red',
+                          borderRadius: '4px'
+                        }}
+                      >
+                        <h4
+                          style={{
+                            fontSize: '1rem',
+                            margin: 0,
+                            padding: 0
+                          }}
+                        >
+                          {' '}
+                          Nearest Hometown Stores
+                        </h4>
+                      </div>
+                    )}
                     {currentList.map((item, index) => (
                       <li key={String(index)}>
                         <button onClick={() => this.handleClick(item.store, mapData, item.city)}>
@@ -231,7 +253,7 @@ class StoreLocator extends React.Component {
                           <address style={{ color: 'black', fontStyle: 'normal' }}>{item.address}</address>
                           <a
                             title="Hometown Store Locator Direction"
-                            href={this.getURL(item.position)}
+                            href={this.getURL(location, item.position)}
                             target="_blank"
                             rel="noopener noreferrer"
                           >
@@ -253,6 +275,7 @@ class StoreLocator extends React.Component {
 StoreLocator.propTypes = {
   gaVisitEvent: PropTypes.func.isRequired,
   city: PropTypes.string.isRequired,
+  location: PropTypes.object.isRequired,
   locationLoaded: PropTypes.bool.isRequired,
   setCurrentLocation: PropTypes.func.isRequired
 };

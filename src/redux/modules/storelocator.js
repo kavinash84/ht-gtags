@@ -49,7 +49,7 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         locationLoading: false,
         locationLoaded: true,
-        locationData: action.result.data || {}
+        locationData: action.result.data.results[0] || {}
       };
     case LOAD_LOCATION_DATA_FAIL:
       return {

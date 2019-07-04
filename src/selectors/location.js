@@ -1,15 +1,12 @@
 import { createSelector } from 'reselect';
 
 export const items = locationObject =>
-  locationObject.results && locationObject.results.length ? locationObject.results[0] : [];
-
-export const getLocationComponents = createSelector(
-  [items],
-  itemList => itemList.address_components || []
-);
+  locationObject.address_components && locationObject.address_components.length
+    ? locationObject.address_components
+    : [];
 
 export const getCurrentCity = createSelector(
-  [getLocationComponents],
+  [items],
   components => {
     let city = '';
     components.forEach(value => {
@@ -20,4 +17,11 @@ export const getCurrentCity = createSelector(
     });
     return city;
   }
+);
+export const location = locationObject =>
+  locationObject.geometry && locationObject.geometry.location ? locationObject.geometry.location : {};
+
+export const getCurrentLocation = createSelector(
+  [location],
+  currentPosition => currentPosition
 );
