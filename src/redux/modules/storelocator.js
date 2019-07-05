@@ -42,7 +42,7 @@ export default function reducer(state = initialState, action = {}) {
     case LOAD_LOCATION_DATA:
       return {
         ...state,
-        loading: true
+        locationLoading: true
       };
     case LOAD_LOCATION_DATA_SUCCESS:
       return {

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
+import Img from 'hometown-components/lib/Img';
 import Heading from 'hometown-components/lib/Heading';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
@@ -13,14 +14,16 @@ import { gaVisitEvent } from 'redux/modules/stores';
 import PropTypes from 'prop-types';
 import Map from './Map';
 
+const LoaderIcon = require('../../../static/refresh.svg');
 const styles = require('./StoreLocator.scss');
 
 const mapDispatchToProps = dispatch => bindActionCreators({ gaVisitEvent, setCurrentLocation }, dispatch);
 
-const mapStateToProps = ({ storelocator: { locationData, locationLoaded } }) => ({
+const mapStateToProps = ({ storelocator: { locationData, locationLoaded, locationLoading } }) => ({
   city: getCurrentCity(locationData),
   location: getCurrentLocation(locationData),
-  locationLoaded
+  locationLoaded,
+  locationLoading
 });
 
 class StoreLocator extends React.Component {
@@ -135,7 +138,9 @@ class StoreLocator extends React.Component {
     }
   };
   render() {
-    const { data, location, locationLoaded } = this.props;
+    const {
+      data, location, locationLoaded, locationLoading
+    } = this.props;
     const mapData = data.items.text;
     const {
       position, zoomlevel, open, currentList, currentState, selectedStore, selectCity
@@ -175,13 +180,29 @@ class StoreLocator extends React.Component {
               <Div className={styles.filterWrapper}>
                 {selectCity && (
                   <button
+                    style={{ marginBottom: '4px' }}
                     onClick={e => {
                       e.preventDefault();
                       this.detectUserLocation();
                     }}
                     className={styles.selectLocation}
                   >
+                    {locationLoading && (
+                      <Img className="spin" src={LoaderIcon} display="inline" width="20px" va="sub" />
+                    )}
                     Detect My Location
+                  </button>
+                )}
+                {!selectCity && (
+                  <button
+                    style={{ marginBottom: '4px' }}
+                    onClick={e => {
+                      e.preventDefault();
+                      this.setState({ selectCity: true });
+                    }}
+                    className={styles.selectLocation}
+                  >
+                    Select Store
                   </button>
                 )}
                 {selectCity && (
@@ -209,40 +230,57 @@ class StoreLocator extends React.Component {
                     ))}
                   </select>
                 )}
-                {!selectCity && (
-                  <button
-                    onClick={e => {
-                      e.preventDefault();
-                      this.setState({ selectCity: true });
-                    }}
-                    className={styles.selectLocation}
-                  >
-                    Select City
-                  </button>
-                )}
-
                 <div className={styles.cistList}>
                   <ul>
-                    {locationLoaded && (
+                    {locationLoaded && currentList.length ? (
                       <div
                         style={{
                           margin: '0 0 5px 0',
                           padding: '4px',
-                          border: '2px solid red',
-                          borderRadius: '4px'
+                          border: '2px solid f98d2936',
+                          borderRadius: '4px',
+                          backgroundColor: '#ffa500'
                         }}
                       >
                         <h4
                           style={{
                             fontSize: '1rem',
                             margin: 0,
-                            padding: 0
+                            padding: 0,
+                            color: '#ffffff'
                           }}
                         >
                           {' '}
                           Nearest Hometown Stores
                         </h4>
                       </div>
+                    ) : (
+                      ''
+                    )}
+                    {currentList && !currentList.length ? (
+                      <div
+                        style={{
+                          margin: '0 0 5px 0',
+                          padding: '4px',
+                          border: '2px solid f98d2936',
+                          borderRadius: '4px',
+                          backgroundColor: '#000000cc'
+                        }}
+                      >
+                        <h4
+                          style={{
+                            fontSize: '1rem',
+                            margin: 0,
+                            padding: 0,
+                            color: '#ffffff'
+                          }}
+                        >
+                          {' '}
+                          We will be in your town very soon..
+                        </h4>
+                      </div>
+                    ) : (
+                      ''
                     )}
                     {currentList.map((item, index) => (
                       <li key={String(index)}>
@@ -277,6 +315,7 @@ StoreLocator.propTypes = {
   city: PropTypes.string.isRequired,
   location: PropTypes.object.isRequired,
   locationLoaded: PropTypes.bool.isRequired,
+  locationLoading: PropTypes.bool.isRequired,
   setCurrentLocation: PropTypes.func.isRequired
 };
 
