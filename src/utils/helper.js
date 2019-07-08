@@ -289,13 +289,7 @@ export const isKeyExists = (obj, nesting) => {
 
 export const getImageURL = (url, size) => {
   if (!url) return null;
-  const [first] = url.split('.jpg');
-  if (first) {
-    const rp = first.replace(/(-product_500|-catalog_360|-catalog|-zoom)/, '');
-    const imageurl = `${rp}-${size}.jpg`;
-    return imageurl;
-  }
-  return null;
+  return url.replace(/(-product_500.jpg|-catalog_360.jpg|-catalog.jpg|-zoom.jpg)/, `-${size}.jpg`);
 };
 
 export const allowNChar = (value, n) => {
