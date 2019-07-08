@@ -19,12 +19,14 @@ import productdetails from './modules/productdetails';
 import reviews from './modules/reviews';
 import trackorder from './modules/trackorder';
 import orders from './modules/orders';
+import tracking from './modules/tracking';
 import pagination from './modules/pagination';
 import paymentoptions from './modules/paymentoptions';
 import checkout from './modules/checkout';
 import colorproducts from './modules/colorproducts';
 import coupon from './modules/coupon';
 import myaddress from './modules/myaddress';
+import mycases from './modules/mycases';
 import relatedproducts from './modules/relatedproducts';
 import paymentstatus from './modules/paymentstatus';
 import recentlyviewed from './modules/recentlyviewed';
@@ -34,6 +36,7 @@ import notifs from './modules/notifs';
 import address from './modules/address';
 import analytics from './modules/analytics';
 import services from './modules/services';
+import cases from './modules/cases';
 import combinedbuy from './modules/combinedbuy';
 
 export default function createReducers(asyncReducers) {
@@ -67,6 +70,7 @@ export default function createReducers(asyncReducers) {
     reviews,
     trackorder,
     orders,
+    tracking,
     pagination,
     paymentoptions,
     checkout,
@@ -83,6 +87,8 @@ export default function createReducers(asyncReducers) {
     address,
     analytics,
     services,
+    cases,
+    mycases,
     ...asyncReducers
   };
 }

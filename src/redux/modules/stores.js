@@ -50,9 +50,8 @@ export const loadStores = () => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
   promise: ({ client }) => client.get(`${STATIC_BLOCK}/store_react`)
 });
-
 export const gaVisitEvent = storeDetails => ({
-  type: SET_SELECTED_STORE,
+  types: SET_SELECTED_STORE,
   storeDetails
 });
 

@@ -867,6 +867,12 @@
 		max-width: inherit !important;
 		padding: 0;
 	}
+	.trackingModal {
+		max-width: inherit !important;
+		padding: 0;
+		max-height: 90vh;
+    overflow: auto;
+	}
 
 	// collopseContent
 	.collposeBlock {
@@ -908,6 +914,40 @@
 		margin: 2rem 0;
 	}
 }
+@media only screen and (min-width: 1100px) {
+  .cd-horizontal-timeline {
+    margin: 6em auto;
+  }
+  .cd-horizontal-timeline::before {
+    /* never visible - this is used in jQuery to check the current MQ */
+    content: 'desktop';
+  }
+}
+.cd-timeline-navigation a {
+  /* these are the left/right arrows to navigate the timeline */
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  bottom: auto;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  height: 34px;
+  width: 34px;
+  border-radius: 50%;
+  border: 2px solid #dfdfdf;
+  /* replace text with an icon */
+  overflow: hidden;
+  color: transparent;
+  text-indent: 100%;
+  white-space: nowrap;
+  -webkit-transition: border-color 0.3s;
+  -moz-transition: border-color 0.3s;
+  transition: border-color 0.3s;
+}
+/* /Timeline */
 
 /* Wishlist Animation Key Frames */
 @keyframes animateCircle{

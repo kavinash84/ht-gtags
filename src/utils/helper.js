@@ -364,3 +364,66 @@ export const redirectionHelper = url => {
 //   }
 // };
 export const getVideoID = url => url;
+export const getDateFilters = config => {
+  const days = config.days || [];
+  const months = config.months || [];
+  const years = config.years || 0;
+  const currentDate = new Date();
+  const daysFilters = days.map(val => {
+    const dateNow = new Date();
+    dateNow.setDate(dateNow.getDate() - val);
+    const pastDate = new Date(dateNow);
+    pastDate.setHours(0);
+    pastDate.setMinutes(0);
+    pastDate.setSeconds(0);
+    return {
+      value: `Last ${val} Days`,
+      label: `Last ${val} Days`,
+      start: pastDate.toString(),
+      end: currentDate.toString()
+    };
+  });
+  const monthsFilters = months.map(val => {
+    const dateNow = new Date();
+    dateNow.setMonth(dateNow.getMonth() - val);
+    const pastDate = new Date(dateNow);
+    pastDate.setHours(0);
+    pastDate.setMinutes(0);
+    pastDate.setSeconds(0);
+    return {
+      value: `Last ${val} Months`,
+      label: `Last ${val} Months`,
+      start: pastDate.toString(),
+      end: currentDate.toString()
+    };
+  });
+  const yearsFilter = [];
+  for (let i = 0; i < years; i += 1) {
+    const latest = new Date();
+    const val = latest.getFullYear() - i;
+    latest.setFullYear(latest.getFullYear() - i);
+    const lastDate = new Date(latest);
+    lastDate.setMonth(0);
+    lastDate.setDate(1);
+    lastDate.setHours(0);
+    lastDate.setMinutes(0);
+    lastDate.setSeconds(0);
+    const tillDate = new Date();
+    tillDate.setFullYear(tillDate.getFullYear() - i);
+    if (i) {
+      tillDate.setMonth(11);
+      tillDate.setDate(31);
+      tillDate.setHours(23);
+      tillDate.setMinutes(59);
+      tillDate.setSeconds(59);
+    }
+    yearsFilter.push({
+      value: val,
+      label: val,
+      start: lastDate.toString(),
+      end: tillDate.toString()
+    });
+  }
+  const allFilters = [...daysFilters, ...monthsFilters, ...yearsFilter];
+  return allFilters;
+};
