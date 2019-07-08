@@ -164,16 +164,16 @@ class MyCases extends Component {
                         {`Status - ${item.status || 'NA'}`}
                       </Div>
                     </Row>
-                    <Row p="15px 15px" type="block" m="0" mb="0.5rem">
-                      <Div col="2">
-                        <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
+                    <Row p="15px 15px" type="block" m="0" mb="0.5rem" className={styles.blockBody}>
+                      <Div col="2" pr="10px">
+                        <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                           Created Date
                         </Text>
-                        <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
+                        <Text mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
                           {item.CreatedDate || ''}
                         </Text>
                       </Div>
-                      <Div col="2">
+                      <Div col="2" pr="10px">
                         <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                           Subject
                         </Text>
@@ -181,7 +181,7 @@ class MyCases extends Component {
                           {item.subject || ''}
                         </Text>
                       </Div>
-                      <Div col="2">
+                      <Div col="2" pr="10px">
                         <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                           Type
                         </Text>
@@ -189,7 +189,7 @@ class MyCases extends Component {
                           {item.type || ''}
                         </Text>
                       </Div>
-                      <Div col="2">
+                      <Div col="3" pr="10px">
                         <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                           Category
                         </Text>
@@ -197,7 +197,7 @@ class MyCases extends Component {
                           {this.getMapping(item.category, item.subcategory, 'cat')}
                         </Text>
                       </Div>
-                      <Div col="4">
+                      <Div col="3" pr="10px">
                         <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                           SubCategory
                         </Text>

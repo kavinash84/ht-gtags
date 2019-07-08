@@ -148,7 +148,7 @@ class OrderBlock extends Component {
         </Row>
         <Div className={styles.blockBody}>
           <Row type="block" m="0" mb="0.5rem">
-            <Div col="2">
+            <Div col="3" pr="15px">
               <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                 ORDER DATE
               </Text>
@@ -156,7 +156,7 @@ class OrderBlock extends Component {
                 {order.order_date}
               </Text>
             </Div>
-            <Div col="3">
+            <Div col="3" pr="15px">
               <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                 SHIPPING ADDRESS
               </Text>
@@ -171,7 +171,7 @@ class OrderBlock extends Component {
                 <br />
               </Text>
             </Div>
-            <Div col="3">
+            <Div col="3" pr="15px">
               <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                 BILLING ADDRESS
               </Text>
@@ -186,7 +186,7 @@ class OrderBlock extends Component {
                 <br />
               </Text>
             </Div>
-            <Div col="2">
+            <Div col="3" pr="15px">
               <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                 ORDER AMOUNT
               </Text>
@@ -217,14 +217,13 @@ class OrderBlock extends Component {
                         </td>
                         <td width="50%">{item.product_name || 'NOT AVAILABLE'}</td>
                         {/* <td>{item.order_item_status_display_name || 'NOT AVAILABLE'}</td> */}
-                        <td>{item.status !== 'canceled' ? item.delivery_date_text : '--'}</td>
-                        {item.status === 'canceled' ? (
-                          <td>
+                        <td>
+                          {item.status !== 'canceled' ? (
+                            item.delivery_date_text
+                          ) : (
                             <span style={{ color: 'red' }}> Cancelled </span>
-                          </td>
-                        ) : (
-                          ''
-                        )}
+                          )}
+                        </td>
                         {order.bob_order === 0 || order.bob_order === '0' ? (
                           <td>
                             <Div ta="right">
