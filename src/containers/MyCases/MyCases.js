@@ -15,10 +15,10 @@ const hooks = {
     }
     const {
       profile: {
-        data: { salesforce_account_id: sfid }
+        data: { salesforce_account_id: sfid, contact_number: cn }
       }
     } = getState();
-    await dispatch(loadMyCases(sfid));
+    await dispatch(loadMyCases(sfid, '', '', '', cn));
   }
 };
 const MyCases = () => (
