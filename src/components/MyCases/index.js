@@ -77,8 +77,8 @@ class MyCases extends Component {
       endDate,
       caseStatus: { value: caseStatus }
     } = this.state;
-    const { salesforce_account_id: sfid } = this.props;
-    this.props.loadMyCases(sfid, startDate, endDate, caseStatus);
+    const { salesforce_account_id: sfid, contactNumber: cn } = this.props;
+    this.props.loadMyCases(sfid, startDate, endDate, caseStatus, cn);
   };
   getMapping = (cat = '', subcat = '', type = '') => {
     let value = '';
@@ -221,7 +221,8 @@ MyCases.defaultProps = {
   data: [],
   loading: false,
   updated: false,
-  salesforce_account_id: ''
+  salesforce_account_id: '',
+  contactNumber: ''
 };
 
 MyCases.propTypes = {
@@ -229,6 +230,7 @@ MyCases.propTypes = {
   loading: PropTypes.bool,
   updated: PropTypes.bool, //eslint-disable-line
   salesforce_account_id: PropTypes.string,
+  contactNumber: PropTypes.string,
   loadMyCases: PropTypes.func.isRequired
 };
 export default connect(
