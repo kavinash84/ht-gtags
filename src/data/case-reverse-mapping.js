@@ -104,8 +104,7 @@ const caseReverseMapping = {
   'Installation / Fitment Date elapsed-48 hour elapsed': {
     cat: 'Installation of product delayed',
     subcat: ''
-  },
-
+  }, // reverse mapping for salesforce crm only
   'Wrong Material Delivered-Wrong Color / Specification': {
     cat: 'Delivered product doesn’t match with the specification',
     subcat: 'Incorrect Colour / Specification'
@@ -186,6 +185,123 @@ const caseReverseMapping = {
   'BILLING-Pending Refund': {
     cat: 'Pending Refund',
     subcat: ''
+  },
+
+  'BEHAVIOUR-Tips asked': {
+    cat: '',
+    subcat: 'Service / Staff / Product Feedback'
+  },
+  'Call back requested-Same day delivery - SN': {
+    cat: '',
+    subcat: 'Request to Change delivery date'
+  },
+  'Call back requested-Same day delivery - SY': {
+    cat: '',
+    subcat: 'Request to Change delivery date'
+  },
+  'Call back requested-Same day installation': {
+    cat: '',
+    subcat: 'Request to Change Installation date'
+  },
+  'Customer Request-Payback Points not received': {
+    cat: '',
+    subcat: 'About Cashback/ Finance / EMI'
+  },
+  'Customer Request-RL visit Required after fresh fitment': {
+    cat: '',
+    subcat: 'Service Request - Within Warranty'
+  },
+  'Damaged Material Delivered-Delivery Returned as damaged': {
+    cat: '',
+    subcat: 'Received product with damage'
+  },
+  'Defective Material Delivered-solid wood joint open / Crack': {
+    cat: '',
+    subcat: 'Received product with defect'
+  },
+  'Delivery date Change - Disagree-Stock Committed': {
+    cat: '',
+    subcat: 'Delivery of product delayed'
+  },
+  'Delivery Date Elapsed - SN-Delivery pending - stock not committed': {
+    cat: '',
+    subcat: 'Delivery of product delayed'
+  },
+  'DELIVERY_DATE_SY-Found Damaged / Defective at WH': {
+    cat: '',
+    subcat: 'Delivery of product delayed'
+  },
+  'DELIVERY_DATE_SY-Invoiced': {
+    cat: '',
+    subcat: 'Delivery of product delayed'
+  },
+  'DELIVERY_DATE_SY-Not Invoiced': {
+    cat: '',
+    subcat: 'Delivery of product delayed'
+  },
+  'DELIVERY_DATE_SY-Physical product not traceable': {
+    cat: '',
+    subcat: 'Delivery of product delayed'
+  },
+  'Hardware parts missing-Full Hardware Missing': {
+    cat: '',
+    subcat: 'Missing componant in the product'
+  },
+  'Hardware parts missing-Some Hardware Missing': {
+    cat: '',
+    subcat: 'Missing componant in the product'
+  },
+  'Improper fiment-Loose fitment within 1 week of usage': {
+    cat: '',
+    subcat: 'Service Request - Within Warranty'
+  },
+  'Improper fiment-Part /Product damage during fitment': {
+    cat: '',
+    subcat: 'Service Request - Within Warranty'
+  },
+  'Kitchen Service Order-Additional order as per customer demand (unpaid)': {
+    cat: '',
+    subcat: 'Service Request - Within Warranty'
+  },
+  'Kitchen Service Order-Additional order as per customer request (paid)': {
+    cat: '',
+    subcat: 'Service Request - Within Warranty'
+  },
+  'Kitchen Service Order-Hardware/parts missing from the site': {
+    cat: '',
+    subcat: 'Service Request - Within Warranty'
+  },
+  'Kitchen Service Order-Order under warranty terms': {
+    cat: '',
+    subcat: 'Service Request - Within Warranty'
+  },
+  'Kitchen Service Order-Short supply from vendor': {
+    cat: '',
+    subcat: 'Service Request - Within Warranty'
+  },
+  'Kitchen Service Order-Transit damage': {
+    cat: '',
+    subcat: 'Service Request - Within Warranty'
+  },
+  'Kitchen Service Order-Wrong ordering from the store': {
+    cat: '',
+    subcat: 'Service Request - Within Warranty'
+  },
+  'Kitchen Service Order-Wrong supply from vendor': {
+    cat: '',
+    subcat: 'Service Request - Within Warranty'
+  },
+  'Gift Voucher-Expired - Extend Validity': {
+    cat: '',
+    subcat: 'Voucher / Coupon support'
+  },
+  'Work not completed-Work not completed (DnB/Kitchen)': {
+    cat: '',
+    subcat: 'Modular Kitchen / Design and Build Project'
+  },
+  'Wrong Material Delivered-Wrong Booking by Store': {
+    cat: '',
+    subcat: 'Delivered product doesn’t match with the specification'
   }
 };
 export default caseReverseMapping;
