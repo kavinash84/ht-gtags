@@ -33,7 +33,7 @@ class TrackingDetails extends Component {
                     alt={image || ''}
                   />
                 </Div>
-                <Div col="2" pl="10px" pr="10px">
+                <Div col="2" pl="10px" pr="55px">
                   <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
                     {name}
                   </Text>
@@ -41,12 +41,12 @@ class TrackingDetails extends Component {
                 <Div col="9">
                   <Row ml="0" mr="0" flexWrap="nowrap" className={stylesModal.timeline}>
                     {status.map((statusDetails, i) => {
-                      const { status: StatusKey } = statusDetails;
+                      const { status: StatusKey, display: active } = statusDetails;
                       return (
                         <Div
                           key={String(i)}
                           display="flexEqual"
-                          className={`${stylesModal.trackBlock} ${stylesModal.active}`}
+                          className={`${stylesModal.trackBlock} ${active === 1 ? stylesModal.active : ''}`}
                         >
                           <Text className={stylesModal.stepText} fontSize="12px">
                             {StatusKey || 'NA'}
