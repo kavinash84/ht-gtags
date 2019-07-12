@@ -22,9 +22,26 @@ class TrackingDetails extends Component {
         </Row>
         <Div p="25px 25px 13px">
           {data.map((item, index) => {
-            const { image, product_name: name, status } = item;
+            const {
+              image,
+              product_name: name,
+              status,
+              bill_of_landing: AWB,
+              transport_id: transportId,
+              quantity
+            } = item;
             return (
               <Row type="block" ml="0" mr="0" mb="1rem" key={String(index)}>
+                <Div col="12">
+                  <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
+                    {`Delivery Partner - ${transportId || 'NA'}`}
+                  </Text>
+                </Div>
+                <Div col="12">
+                  <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
+                    {`AWB Number - ${AWB || 'NA'}`}
+                  </Text>
+                </Div>
                 <Div col="1">
                   <Img
                     width="100%"
@@ -36,6 +53,9 @@ class TrackingDetails extends Component {
                 <Div col="2" pl="10px" pr="55px">
                   <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
                     {name}
+                  </Text>
+                  <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
+                    {`Qty-${quantity}`}
                   </Text>
                 </Div>
                 <Div col="9">
