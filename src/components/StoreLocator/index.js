@@ -178,7 +178,19 @@ class StoreLocator extends React.Component {
                 selectedStore={selectedStore}
               />
               <Div className={styles.filterWrapper}>
-                {selectCity && (
+                {true && (
+                  <button
+                    style={{ marginBottom: '4px', marginRight: '10px' }}
+                    onClick={e => {
+                      e.preventDefault();
+                      this.setState({ selectCity: true });
+                    }}
+                    className={styles.selectLocation}
+                  >
+                    Select Store
+                  </button>
+                )}
+                {true && (
                   <button
                     style={{ marginBottom: '4px' }}
                     onClick={e => {
@@ -190,19 +202,7 @@ class StoreLocator extends React.Component {
                     {locationLoading && (
                       <Img className="spin" src={LoaderIcon} display="inline" width="20px" va="sub" />
                     )}
-                    Detect My Location
-                  </button>
-                )}
-                {!selectCity && (
-                  <button
-                    style={{ marginBottom: '4px' }}
-                    onClick={e => {
-                      e.preventDefault();
-                      this.setState({ selectCity: true });
-                    }}
-                    className={styles.selectLocation}
-                  >
-                    Select Store
+                    Store Near Me
                   </button>
                 )}
                 {selectCity && (

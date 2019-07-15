@@ -11,16 +11,16 @@ const mapStateToProps = ({ storelocator }) => ({
 });
 const mapDispatchToProps = dispatch => bindActionCreators({ setCurrentLocation }, dispatch);
 class StoreLocator extends Component {
-  componentDidMount() {
-    const { setCurrentLocation: setLocation } = this.props;
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        const lat = position.coords.latitude || '';
-        const lng = position.coords.longitude || '';
-        setLocation(lat, lng);
-      });
-    }
-  }
+  // componentDidMount() {
+  //   const { setCurrentLocation: setLocation } = this.props;
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(position => {
+  //       const lat = position.coords.latitude || '';
+  //       const lng = position.coords.longitude || '';
+  //       setLocation(lat, lng);
+  //     });
+  //   }
+  // }
   render() {
     const { storelocator } = this.props;
     return (
