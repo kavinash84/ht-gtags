@@ -200,7 +200,7 @@ class OrderBlock extends Component {
               <table className="ordersTable table">
                 <tbody>
                   <tr className={styles.tableHeading}>
-                    <th colSpan="2">PRODUCTS</th>
+                    <th colSpan="2">Products</th>
                     {<th style={{ minWidth: '150px' }}>Qty</th>}
                     <th>Delivery Estimate</th>
                     <th />
