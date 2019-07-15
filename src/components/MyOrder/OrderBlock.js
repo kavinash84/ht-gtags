@@ -201,7 +201,7 @@ class OrderBlock extends Component {
                 <tbody>
                   <tr className={styles.tableHeading}>
                     <th colSpan="2">PRODUCTS</th>
-                    {/* <th style={{ minWidth: '150px' }}>Order Status</th> */}
+                    {<th style={{ minWidth: '150px' }}>Qty</th>}
                     <th>Delivery Estimate</th>
                     <th />
                     {/* <th>Carrier</th>
@@ -215,8 +215,8 @@ class OrderBlock extends Component {
                             {imageURL => <Img src={imageURL} alt={item.product_name} width="60px" height="60px" />}
                           </ImageShimmer>
                         </td>
-                        <td width="50%">{item.product_name || 'NOT AVAILABLE'}</td>
-                        {/* <td>{item.order_item_status_display_name || 'NOT AVAILABLE'}</td> */}
+                        <td width="50%">{item.product_name || '--'}</td>
+                        {<td>{item.quantity || '--'}</td>}
                         <td>
                           {item.status !== 'canceled' ? (
                             item.delivery_date_text
