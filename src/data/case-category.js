@@ -58,8 +58,8 @@ const caseCategories = {
       }
     },
     {
-      value: 'CHANGE_DELIVERY_DATE',
-      label: 'Change delivery date',
+      value: 'REQUEST_TO_CHANGE_DELIVERY_DATE',
+      label: 'Request to Change delivery date',
       crm: {
         type: 'Request',
         category: 'Customer Request',
@@ -67,12 +67,21 @@ const caseCategories = {
       }
     },
     {
-      value: 'CHANGE_INSTALLATION_DATE',
-      label: 'Change Installation date',
+      value: 'REQUEST_TO_CHANGE_INSTALLATION_DATE',
+      label: 'Request to Change Installation date',
       crm: {
         type: 'Request',
         category: 'Customer Request',
         subcategory: 'Wants to Reschedule Fitment'
+      }
+    },
+    {
+      value: 'REQUEST_FOR_MOBILE_ADDRESS_CHANGE',
+      label: 'Request for Mobile / Address change',
+      crm: {
+        type: 'Request',
+        category: 'Customer Request',
+        subcategory: 'Update Mobile Number'
       }
     }
   ],
@@ -150,6 +159,15 @@ const caseCategories = {
         type: 'Complaint',
         category: 'BILLING',
         subcategory: 'Pending Refund'
+      }
+    },
+    {
+      value: 'MODULAR_KITCHEN_DESIGN_AND_BUILD_PROJECT',
+      label: 'Modular Kitchen / Design and Build Project',
+      crm: {
+        type: 'Complaint',
+        category: 'Work not completed',
+        subcategory: 'Work not completed (DnB/Kitchen)'
       }
     }
   ]
