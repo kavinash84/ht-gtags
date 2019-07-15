@@ -321,6 +321,10 @@ const caseReverseMapping = {
     cat: 'Service Request - Within Warranty',
     subcat: ''
   },
+  'Kitchen Service Order-Kitchen Service Order': {
+    cat: 'Service Request - Within Warranty',
+    subcat: ''
+  },
   'Gift Voucher-Expired - Extend Validity': {
     cat: 'Voucher / Coupon support',
     subcat: ''
@@ -435,6 +439,22 @@ const caseReverseMapping = {
   },
   'E-Services-Smart Assurance': {
     cat: 'Service Request - Within Warranty',
+    subcat: ''
+  },
+  'E-Services-Smart Tech': {
+    cat: 'Service Request - Within Warranty',
+    subcat: ''
+  },
+  'E-Services-Software Issue': {
+    cat: 'Service Request - Within Warranty',
+    subcat: ''
+  },
+  'E-Services-Sound Issue': {
+    cat: 'Service Request - Within Warranty',
+    subcat: ''
+  },
+  'Gift Voucher-Corporate Order': {
+    cat: 'Voucher / Coupon support',
     subcat: ''
   }
 };
