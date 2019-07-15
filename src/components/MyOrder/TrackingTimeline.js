@@ -32,16 +32,20 @@ class TrackingDetails extends Component {
             } = item;
             return (
               <Row type="block" ml="0" mr="0" mb="1rem" key={String(index)}>
-                <Div col="12">
-                  <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
-                    {`Delivery Partner - ${transportId || 'NA'}`}
-                  </Text>
-                </Div>
-                <Div col="12">
-                  <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
-                    {`AWB Number - ${AWB || 'NA'}`}
-                  </Text>
-                </Div>
+                {transportId && (
+                  <Div col="12">
+                    <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
+                      {`Delivery Partner - ${transportId || '--'}`}
+                    </Text>
+                  </Div>
+                )}
+                {AWB && (
+                  <Div col="12">
+                    <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
+                      {`AWB Number - ${AWB || '--'}`}
+                    </Text>
+                  </Div>
+                )}
                 <Div col="1">
                   <Img
                     width="100%"
