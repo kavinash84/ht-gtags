@@ -15,6 +15,7 @@ import { getImageURL } from 'utils/helper';
 import TrackingTimeline from './TrackingTimeline';
 
 const PinIcon = require('../../../static/map-icon-white.svg');
+const LoaderIcon = require('../../../static/refresh-black.svg');
 const styles = require('./MyOrder.scss');
 
 const mapStateToProps = ({ cases, tracking }) => ({
@@ -100,7 +101,14 @@ class OrderBlock extends Component {
                   mr="0.3125rem"
                   float="left"
                 />
-                {trackingLoading && currentOrder === order.order_number ? 'Please Wait' : 'Track'}
+                {trackingLoading && currentOrder === order.order_number ? (
+                  <span>
+                    Please Wait
+                    <Img className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />
+                  </span>
+                ) : (
+                  'Track'
+                )}
               </Button>
             </Div>
           ) : (
