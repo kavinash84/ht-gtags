@@ -50,7 +50,7 @@ export const SESSION = 'tesla/session';
 
 export const TRACK_ORDER = 'tesla/orders/track';
 export const ORDERS_TRACKING_API = 'tesla/orders/tracking';
-
+export const ORDERS_STATUS_API = 'tesla/orders/order-status';
 /* Profile Details */
 export const MY_ORDERS = 'tesla/orders';
 export const MY_ADDRESS = 'tesla/users/address';
