@@ -77,7 +77,7 @@ class OrderBlock extends Component {
               Order No. {order.order_number}
             </Heading>
           </Div>
-          {order.bob_order === 0 || order.bob_order === '0' ? (
+          {(order.bob_order === 0 || order.bob_order === '0') && order.status !== 'canceled' ? (
             <Div ta="right" col="6" pr="5px">
               <Button
                 disabled={trackingLoading && currentOrder === order.order_number}
