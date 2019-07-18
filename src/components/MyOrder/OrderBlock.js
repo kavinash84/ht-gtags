@@ -226,8 +226,8 @@ class OrderBlock extends Component {
                         <td width="50%">{item.product_name || '--'}</td>
                         {<td>{item.quantity || '--'}</td>}
                         <td>
-                          {item.status !== 'canceled' ? (
-                            item.delivery_date_text
+                          {order.status !== 'canceled' ? (
+                            item.delivery_date_text || '--'
                           ) : (
                             <span style={{ color: 'red' }}> Cancelled </span>
                           )}
