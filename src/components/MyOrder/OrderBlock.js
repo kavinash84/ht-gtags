@@ -232,7 +232,7 @@ class OrderBlock extends Component {
                             <span style={{ color: 'red' }}> Cancelled </span>
                           )}
                         </td>
-                        {order.bob_order === 0 || order.bob_order === '0' ? (
+                        {item.bob_order_item === 0 || item.bob_order_item === '0' ? (
                           <td>
                             <Div ta="right">
                               <Button
