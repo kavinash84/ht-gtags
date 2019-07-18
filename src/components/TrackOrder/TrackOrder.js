@@ -77,7 +77,11 @@ class TrackOrder extends Component {
               ) : (
                 <Label fontSize="0.75rem" lh="1.8" mb="1.125rem">
                   {loaded && orderId ? (
-                    <b style={{ color: 'red' }}>Sorry, No Products Found, Please Check the Order Number</b>
+                    <b style={{ color: 'red' }}>
+                      {data.status === 'canceled'
+                        ? 'This Order is Cancelled !'
+                        : 'Sorry, No Products Found, Please Check the Order Number'}
+                    </b>
                   ) : (
                     ''
                   )}
