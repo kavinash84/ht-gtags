@@ -243,8 +243,10 @@ const setCurrentKey = key => ({
 });
 const setAppAuth = ({ client }) => async response => {
   const { csrfToken, session } = response;
-  await client.setCSRFToken(csrfToken);
-  await client.setSessionId(session);
+  if (csrfToken && session) {
+    await client.setCSRFToken(csrfToken);
+    await client.setSessionId(session);
+  }
 };
 export const loadCart = (session, pincode) => ({
   types: [LOAD_CART, LOAD_CART_SUCCESS, LOAD_CART_FAIL],
