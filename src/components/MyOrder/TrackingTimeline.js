@@ -75,8 +75,8 @@ class TrackingDetails extends Component {
                           <Text className={stylesModal.stepText} fontSize="12px">
                             {StatusKey || 'NA'}
                           </Text>
-                          <Div className={stylesModal.round} />
                           <Div className={stylesModal.line} />
+                          <Div className={stylesModal.round} />
                         </Div>
                       );
                     })}
