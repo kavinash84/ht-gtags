@@ -29,7 +29,7 @@ const EMI = ({
     <Div col="12" p="3rem 2rem">
       <Div col="12" mb="1rem">
         <Label for="bankOptions1" color="textLight">
-          Choose From Preferred Bank
+          Choose From Preferred Bank (Only for credit card users)
         </Label>
       </Div>
       {emiBankDetails.map(bank => (
