@@ -50,22 +50,27 @@
   min-height: 599px;
 }
 /* Timeline */
+.blockWrapper {
+  border-bottom: 1px solid #ddd;
+}
 .timeline {
   .trackBlock {
     .round {
       transition: background .25s ease-in;
       border-radius: 50%;
-      width: 12px;
-      height: 12px;
+      width: 16px;
+      height: 16px;
       position: relative;
+      z-index: 2;
       cursor: pointer;
-      background: #e0e0e0;
+      // background: #e0e0e0;
     }
     .line {
-      width: calc(100% - 10px);
-      margin-left: 11px;
-      margin-top: -8px;
+      width: calc(100% - 16px);
+      margin-left: calc(-100% + 16px);
+      margin-top: 6px;
       height: 3px;
+      z-index: 1;
       background: #e0e0e0;
     }
     .stepText {
@@ -73,14 +78,14 @@
       text-align: center;
     }
     &.active {
-      .round {
-        background: #388e3c;
-      }
+      // .round {
+      //   background: #388e3c;
+      // }
       .line {
         background: #388e3c;
       }
     }
-    &:last-child {
+    &:first-child {
       .line {
         display: none;
       }

@@ -6,6 +6,9 @@ import Row from 'hometown-components/lib/Row';
 import Text from 'hometown-components/lib/Text';
 import Heading from 'hometown-components/lib/Heading';
 
+const statusIcon = require('../../../static/status-pending.svg');
+const statusActiveIcon = require('../../../static/status-active.svg');
+
 class TrackingDetails extends Component {
   render() {
     const stylesModal = require('./index.scss');
@@ -31,7 +34,15 @@ class TrackingDetails extends Component {
               quantity
             } = item;
             return (
-              <Row type="block" ml="0" mr="0" mb="1rem" key={String(index)}>
+              <Row
+                className={stylesModal.blockWrapper}
+                type="block"
+                ml="0"
+                mr="0"
+                mb="1rem"
+                pb="15px"
+                key={String(index)}
+              >
                 {transportId && (
                   <Div col="12">
                     <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
@@ -55,10 +66,10 @@ class TrackingDetails extends Component {
                   />
                 </Div>
                 <Div col="2" pl="10px" pr="55px">
-                  <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
+                  <Text fontSize="12px" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
                     {name}
                   </Text>
-                  <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
+                  <Text fontSize="12px" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
                     {`Qty-${quantity}`}
                   </Text>
                 </Div>
@@ -76,7 +87,9 @@ class TrackingDetails extends Component {
                             {StatusKey || 'NA'}
                           </Text>
                           <Div className={stylesModal.line} />
-                          <Div className={stylesModal.round} />
+                          <Div className={stylesModal.round}>
+                            <Img width="16px" height="16px" src={active === 1 ? statusActiveIcon : statusIcon} />
+                          </Div>
                         </Div>
                       );
                     })}
