@@ -8,7 +8,7 @@ import * as actionCreators from 'redux/modules/pincode';
 
 const styles = require('./Pincode.scss');
 
-const NO_RELOAD = ['/checkout/cart'];
+// const NO_RELOAD = ['/checkout/cart'];
 
 const onChange = (dispatcher, load) => e => {
   const {
@@ -23,10 +23,7 @@ const setPincodeInStore = (dispatcher, pincode, closeModal) => e => {
   closeModal();
   dispatcher(pincode);
   setTimeout(() => {
-    const path = window && window.location ? window.location.pathname : '';
-    if (NO_RELOAD.indexOf(path) < 0) {
-      window.location.reload();
-    }
+    window.location.reload();
   }, 1000);
 };
 
