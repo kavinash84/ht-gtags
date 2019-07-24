@@ -5,6 +5,8 @@ import Img from 'hometown-components/lib/Img';
 import Row from 'hometown-components/lib/Row';
 import Text from 'hometown-components/lib/Text';
 import Heading from 'hometown-components/lib/Heading';
+import { getImageURL } from 'utils/helper';
+import ImageShimmer from 'hometown-components/lib/ImageShimmer';
 
 const statusIcon = require('../../../static/status-pending.svg');
 const statusActiveIcon = require('../../../static/status-active.svg');
@@ -58,12 +60,9 @@ class TrackingDetails extends Component {
                   </Div>
                 )}
                 <Div col="1">
-                  <Img
-                    width="100%"
-                    // src={image || ''}
-                    src="https://www.hometown.in/media/product/03/8153/50423/1-product_500.jpg"
-                    alt={image || ''}
-                  />
+                  <ImageShimmer src={getImageURL(image, 'catalog_360')} height="60px">
+                    {imageURL => <Img src={imageURL} alt="" width="60px" height="60px" />}
+                  </ImageShimmer>
                 </Div>
                 <Div col="2" pl="10px" pr="55px">
                   <Text fontSize="12px" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
