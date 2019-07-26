@@ -84,7 +84,7 @@ const CardForm = ({
     <Div col="3" pr="1rem">
       <FormInput
         label="CVV"
-        type="text"
+        type="password"
         placeholder=""
         name="cvv"
         value={cvv}
@@ -106,7 +106,9 @@ const CardForm = ({
         <option key="month" value="">
           MM
         </option>
-        {MONTHS.map(month => <option key={month}>{month}</option>)}
+        {MONTHS.map(month => (
+          <option key={month}>{month}</option>
+        ))}
       </select>
       <select
         className={styles.dropDown}
@@ -117,7 +119,9 @@ const CardForm = ({
         <option key="year" value="">
           YYYY
         </option>
-        {YEARS.map((v, i) => <option key={String(i)}>{new Date().getFullYear() + i}</option>)}
+        {YEARS.map((v, i) => (
+          <option key={String(i)}>{new Date().getFullYear() + i}</option>
+        ))}
       </select>
     </Div>
     <Div col="12" mb="0" p="0">
@@ -143,4 +147,7 @@ CardForm.propTypes = {
   cardType: PropTypes.string,
   padding: PropTypes.string
 };
-export default connect(mapStateToProps, mapDispatchToProps)(CardForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CardForm);
