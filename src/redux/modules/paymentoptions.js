@@ -217,7 +217,8 @@ const initialState = {
 
 const appendData = (gateway, state, data) => {
   if (data.cvv) {
-    if (data.cvv.length > 4 || !Number(data.cvv)) {
+    if (data.cvv.length > 4) {
+      // || !Number(data.cvv) removed
       return {
         [gateway]: {
           ...state.paymentMethodDetails[gateway]
@@ -226,7 +227,8 @@ const appendData = (gateway, state, data) => {
     }
   }
   if (data.cardNumber) {
-    if (data.cardNumber.length > 19 || !Number(data.cardNumber)) {
+    if (data.cardNumber.length > 19) {
+      // || !Number(data.cardNumber) removed
       return {
         [gateway]: {
           ...state.paymentMethodDetails[gateway]
