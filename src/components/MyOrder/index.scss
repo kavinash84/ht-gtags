@@ -73,6 +73,8 @@
     .stepText {
       transform: translateX(-45%) translateY(0);
       text-align: center;
+      height: 28px;
+      line-height: 1.4;
     }
     &.active {
       // .round {
