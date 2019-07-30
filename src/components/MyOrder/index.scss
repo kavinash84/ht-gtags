@@ -49,8 +49,14 @@
 /* Timeline */
 .blockWrapper {
   border-bottom: 1px solid #ddd;
+  &:last-child {
+    border-bottom: none;
+  }
 }
 .timeline {
+  &.homewareProduct {
+    width: 137.4%;
+  }
   .trackBlock {
     .round {
       transition: background .25s ease-in;

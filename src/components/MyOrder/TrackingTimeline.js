@@ -45,20 +45,6 @@ class TrackingDetails extends Component {
                 pb="15px"
                 key={String(index)}
               >
-                {transportId && (
-                  <Div col="12">
-                    <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
-                      {`Delivery Partner - ${transportId || '--'}`}
-                    </Text>
-                  </Div>
-                )}
-                {AWB && (
-                  <Div col="12">
-                    <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
-                      {`AWB Number - ${AWB || '--'}`}
-                    </Text>
-                  </Div>
-                )}
                 <Div col="1">
                   <ImageShimmer src={getImageURL(image, 'catalog_360')} height="60px">
                     {imageURL => <Img src={imageURL} alt="" width="60px" height="60px" />}
@@ -71,11 +57,28 @@ class TrackingDetails extends Component {
                   <Text fontSize="12px" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
                     {`Qty-${quantity}`}
                   </Text>
+                  {transportId && (
+                    <Text mt="3px" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
+                      {`Delivery Partner - ${transportId || '--'}`}
+                    </Text>
+                  )}
+                  {AWB && (
+                    <Text mt="3px" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
+                      {`AWB Number - ${AWB || '--'}`}
+                    </Text>
+                  )}
                 </Div>
                 <Div col="9">
-                  <Row ml="0" mr="0" flexWrap="nowrap" className={stylesModal.timeline}>
+                  <Row
+                    ml="0"
+                    mr="-7%"
+                    flexWrap="nowrap"
+                    className={`${stylesModal.timeline} ${status.length === 3 ? stylesModal.homewareProduct : ''}`}
+                  >
                     {status.map((statusDetails, i) => {
                       const { status: StatusKey, display: active } = statusDetails;
+                      console.log(status.length);
+
                       return (
                         <Div
                           key={String(i)}
