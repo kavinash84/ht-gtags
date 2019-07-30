@@ -20,6 +20,7 @@ const NavBar = ({
             menu.visibility === 'on' &&
               menu.name !== 'Festive Gifts' &&
               menu.name !== 'Electronics' &&
+              menu.name !== 'Deals of the Week' &&
               menu.name !== 'Bath')
           .map(menuItem => (
             <Link
@@ -66,6 +67,13 @@ const NavBar = ({
           </Button>
           <div className="dropDown blockRight">
             <ul>
+              <li>
+                <Label htmlFor="checkbox" fontSize="0.75em" className="dropdownValue">
+                  <Link onClick={exitOnClick} to="/deals-of-the-week" onMouseEnter={handleEnter('')} title="Bath">
+                    Deals of the Week
+                  </Link>
+                </Label>
+              </li>
               <li>
                 <Label htmlFor="checkbox" fontSize="0.75em" className="dropdownValue">
                   <Link onClick={exitOnClick} to="/bath" onMouseEnter={handleEnter('')} title="Bath">
