@@ -50,35 +50,33 @@ class TrackingDetails extends Component {
                     {imageURL => <Img src={imageURL} alt="" width="60px" height="60px" />}
                   </ImageShimmer>
                 </Div>
-                <Div col="2" pl="10px" pr="55px">
-                  <Text fontSize="12px" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
+                <Div col="3" pl="10px" pr="55px">
+                  <Text fontSize="14px" mt="0" mb="5px" color="rgba(0, 0, 0, 0.9)" fontFamily="regular">
                     {name}
                   </Text>
-                  <Text fontSize="12px" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
+                  <Text fontSize="13px" mt="0" mb="3px" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
                     {`Qty-${quantity}`}
                   </Text>
                   {transportId && (
-                    <Text mt="3px" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
+                    <Text mt="0" mb="3px" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
                       {`Delivery Partner - ${transportId || '--'}`}
                     </Text>
                   )}
                   {AWB && (
-                    <Text mt="3px" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
+                    <Text mt="0" mb="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
                       {`AWB Number - ${AWB || '--'}`}
                     </Text>
                   )}
                 </Div>
-                <Div col="9">
+                <Div col="8">
                   <Row
-                    ml="0"
+                    ml="-2%"
                     mr="-7%"
                     flexWrap="nowrap"
                     className={`${stylesModal.timeline} ${status.length === 3 ? stylesModal.homewareProduct : ''}`}
                   >
                     {status.map((statusDetails, i) => {
                       const { status: StatusKey, display: active } = statusDetails;
-                      console.log(status.length);
-
                       return (
                         <Div
                           key={String(i)}
