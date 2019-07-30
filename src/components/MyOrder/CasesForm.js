@@ -3,10 +3,8 @@ import Select from 'react-select';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-// import { withRouter } from 'react-router';
 import Button from 'hometown-components/lib/Buttons';
 import InputField from 'hometown-components/lib/InputField';
-// import SignupForm from 'hometown-components/lib/Forms/SignupForm';
 import FormInput from 'hometown-components/lib/Forms/FormInput';
 import Row from 'hometown-components/lib/Row';
 import Heading from 'hometown-components/lib/Heading';
@@ -14,17 +12,11 @@ import Div from 'hometown-components/lib/Div';
 import Theme from 'hometown-components/lib/Theme';
 import { Label } from 'hometown-components/lib/Label';
 import { CASE_ORDER as CASE_ORDER_API } from 'helpers/apiUrls';
-// import Img from 'hometown-components/lib/Img';
-// import ImageShimmer from 'hometown-components/lib/ImageShimmer';
-// import { validateMobile, validatePassword, validateEmail } from 'utils/validation';
 import { isEmpty } from 'utils/validation';
-// import { LOGIN_URL } from 'helpers/Constants';
-// import { signUp } from 'redux/modules/signUp';
 import { sendData } from 'redux/modules/cases';
 import categories from '../../data/case-category';
 import subCategories from '../../data/case-sub-category';
-// import { allowNChar, allowTypeOf } from 'utils/helper';
-// import CasesFilters from '../Filters/CasesFilters';
+
 const styles = require('./CasesForm.scss');
 
 const mapDispatchToProps = dispatch => bindActionCreators({ sendData }, dispatch);
@@ -208,7 +200,6 @@ class CasesFormContainer extends Component {
     return !(subject && description && type && category && subcategory);
   };
   render() {
-    const stylesModal = require('./index.scss');
     const {
       subject,
       subjectError,
@@ -219,16 +210,16 @@ class CasesFormContainer extends Component {
     } = this.state;
     const { loading } = this.props;
     return (
-      <div className={stylesModal.signupWrapper}>
+      <div className={styles.caseFormWrapper}>
         <Row display="block" mr="0" ml="0">
-          <Div col="12" bg={Theme.colors.colora39994} pt="0.625rem" pb="0.625rem">
-            <Heading color="white" mt="0" mb="0" fontWeight="100" fontSize="1rem" ta="center" fontFamily="light" lh="1">
+          <Div col="12" bg={Theme.colors.colora39994} pt="20px" pb="18px">
+            <Heading color="white" mt="0" mb="0" fontSize="18px" ta="center" fontFamily="regular" lh="1">
               Register New Case
             </Heading>
           </Div>
         </Row>
         <Row display="block" mr="0" ml="0">
-          <Div col="12" mt="0.5rem">
+          <Div col="12">
             <form
               onSubmit={this.onSubmitForm}
               id="custom_form"
@@ -237,90 +228,84 @@ class CasesFormContainer extends Component {
               className="bulk-order-form"
             >
               <div className={styles.formList}>
-                <Row>
-                  <Div col="12" pl="10px" pr="10px">
-                    <FormInput
-                      label="Subject *"
-                      type="text"
-                      placeholder=""
-                      onChange={this.onChangeSubject}
-                      value={subject}
-                      feedBackError={subjectError}
-                      feedBackMessage={subjectErrorMessage}
-                    />
-                  </Div>
-                </Row>
-                <Row>
-                  <Div col="12" pl="10px" pr="10px">
+                <Div col="12">
+                  <FormInput
+                    label="Subject *"
+                    type="text"
+                    placeholder=""
+                    onChange={this.onChangeSubject}
+                    value={subject}
+                    feedBackError={subjectError}
+                    feedBackMessage={subjectErrorMessage}
+                  />
+                </Div>
+                <Div col="12" mb="0.625rem">
+                  <Label fontSize="0.875em" mb="0.625rem">
+                    Type *
+                  </Label>
+                  <Select
+                    defaultValue={null}
+                    value={this.state.type}
+                    onChange={this.onChangeType}
+                    options={this.TypeOptions}
+                  />
+                </Div>
+                <Div col="12">
+                  <InputField mb="0.625rem">
                     <Label fontSize="0.875em" mb="0.625rem">
-                      Type *
+                      Category *
                     </Label>
                     <Select
                       defaultValue={null}
-                      value={this.state.type}
-                      onChange={this.onChangeType}
-                      options={this.TypeOptions}
+                      value={this.state.category}
+                      onChange={this.onChangeCategory}
+                      options={this.getCategoryOptions()}
                     />
-                  </Div>
-                  <Div col="12" pl="10px" pr="10px">
+                  </InputField>
+                </Div>
+                {this.getSubCategoryOptions().length ? (
+                  <Div col="12">
                     <InputField mb="0.625rem">
                       <Label fontSize="0.875em" mb="0.625rem">
-                        Category *
+                        Sub Category *
                       </Label>
                       <Select
                         defaultValue={null}
-                        value={this.state.category}
-                        onChange={this.onChangeCategory}
-                        options={this.getCategoryOptions()}
+                        value={this.state.subcategory}
+                        onChange={this.onChangeSubCategory}
+                        options={this.getSubCategoryOptions()}
                       />
                     </InputField>
                   </Div>
-                  {this.getSubCategoryOptions().length ? (
-                    <Div col="12" pl="10px" pr="10px">
-                      <InputField mb="0.625rem">
-                        <Label fontSize="0.875em" mb="0.625rem">
-                          Sub Category *
-                        </Label>
-                        <Select
-                          defaultValue={null}
-                          value={this.state.subcategory}
-                          onChange={this.onChangeSubCategory}
-                          options={this.getSubCategoryOptions()}
-                        />
-                      </InputField>
-                    </Div>
-                  ) : (
-                    ''
-                  )}
-                  <Div col="6" pl="10px" pr="10px">
-                    <FormInput
-                      label="Description *"
-                      type="textarea"
-                      rows={5}
-                      placeholder=""
-                      onChange={this.onChangeDescription}
-                      value={description}
-                      feedBackError={descriptionError}
-                      feedBackMessage={descriptionErrorMessage}
-                    />
-                  </Div>
-                </Row>
-                <Row>
-                  <Div col="6" pl="10px" pr="10px">
-                    <div className="buttons-set">
-                      <Button
-                        disabled={this.isDisabled() || loading}
-                        onClick={this.onSubmitForm}
-                        btnType="primary"
-                        mt="0.625rem"
-                        title="Submit"
-                        type="submit"
-                      >
-                        {loading ? 'Please Wait ...' : 'SUBMIT'}
-                      </Button>
-                    </div>
-                  </Div>
-                </Row>
+                ) : (
+                  ''
+                )}
+                <Div col="12">
+                  <FormInput
+                    label="Description *"
+                    type="textarea"
+                    rows={5}
+                    placeholder=""
+                    onChange={this.onChangeDescription}
+                    value={description}
+                    feedBackError={descriptionError}
+                    feedBackMessage={descriptionErrorMessage}
+                  />
+                </Div>
+                <Div col="12">
+                  <div className="buttons-set">
+                    <Button
+                      disabled={this.isDisabled() || loading}
+                      onClick={this.onSubmitForm}
+                      btnType="primary"
+                      mt="0.625rem"
+                      title="Submit"
+                      type="submit"
+                    >
+                      {loading ? 'Please Wait ...' : 'SUBMIT'}
+                    </Button>
+                  </div>
+                </Div>
               </div>
             </form>
           </Div>

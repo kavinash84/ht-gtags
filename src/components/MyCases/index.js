@@ -165,7 +165,7 @@ class MyCases extends Component {
                       </Div>
                     </Row>
                     <Row p="15px 15px" type="block" m="0" mb="0.5rem" className={styles.blockBody}>
-                      <Div col="2" pr="10px">
+                      <Div col="3" pr="10px">
                         <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                           Created Date
                         </Text>
@@ -173,7 +173,7 @@ class MyCases extends Component {
                           {item.CreatedDate || ''}
                         </Text>
                       </Div>
-                      <Div col="2" pr="10px">
+                      <Div col="4" pr="10px">
                         <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                           Subject
                         </Text>
@@ -197,14 +197,14 @@ class MyCases extends Component {
                           {this.getMapping(item.category, item.subcategory, 'cat')}
                         </Text>
                       </Div>
-                      <Div col="3" pr="10px">
+                      {/* <Div col="3" pr="10px">
                         <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                           SubCategory
                         </Text>
                         <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
                           {this.getMapping(item.category, item.subcategory, 'subcat')}
                         </Text>
-                      </Div>
+                      </Div> */}
                     </Row>
                   </Button>
                 </Div>

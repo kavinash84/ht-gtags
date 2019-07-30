@@ -160,7 +160,7 @@ class OrderBlock extends Component {
               <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                 ORDER DATE
               </Text>
-              <Text mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
+              <Text mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
                 {order.order_date}
               </Text>
             </Div>
@@ -168,7 +168,7 @@ class OrderBlock extends Component {
               <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                 SHIPPING ADDRESS
               </Text>
-              <Text mt="0" mb="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
+              <Text mt="0" mb="0" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
                 {`${order.s_customer_first_name || ''} ${order.s_customer_last_name || ''}`}
                 <br />
                 {order.s_address_1 || ''}
@@ -183,7 +183,7 @@ class OrderBlock extends Component {
               <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                 BILLING ADDRESS
               </Text>
-              <Text mt="0" mb="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
+              <Text mt="0" mb="0" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
                 {`${order.b_customer_first_name || ''} ${order.b_customer_last_name || ''}`}
                 <br />
                 {order.b_address_1 || ''}
@@ -198,7 +198,7 @@ class OrderBlock extends Component {
               <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                 ORDER AMOUNT
               </Text>
-              <Text mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
+              <Text mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
                 Rs. {formatAmount(order.grand_total)}
               </Text>
             </Div>
@@ -223,8 +223,18 @@ class OrderBlock extends Component {
                             {imageURL => <Img src={imageURL} alt={item.product_name} width="60px" height="60px" />}
                           </ImageShimmer>
                         </td>
-                        <td width="50%">{item.product_name || '--'}</td>
-                        {<td>{item.quantity || '--'}</td>}
+                        <td width="50%">
+                          <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
+                            {item.product_name || '--'}
+                          </Text>
+                        </td>
+                        {
+                          <td>
+                            <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
+                              {item.quantity || '--'}
+                            </Text>
+                          </td>
+                        }
                         <td>
                           {order.status !== 'canceled' ? (
                             item.delivery_date_text || '--'
@@ -263,7 +273,7 @@ class OrderBlock extends Component {
           </Row>
         </Div>
         <ResponsiveModal
-          classNames={{ modal: 'signupModal' }}
+          classNames={{ modal: 'casesModal' }}
           onCloseModal={e => {
             e.preventDefault();
             this.handleChange('openCaseModal');
