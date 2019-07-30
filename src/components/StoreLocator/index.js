@@ -3,17 +3,29 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Container from 'hometown-components/lib/Container';
 import Div from 'hometown-components/lib/Div';
+import Img from 'hometown-components/lib/Img';
 import Heading from 'hometown-components/lib/Heading';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
 import { Label } from 'hometown-components/lib/Label';
+import { setCurrentLocation } from 'redux/modules/storelocator';
+import { getCurrentCity, getCurrentLocation } from 'selectors/location';
 import { gaVisitEvent } from 'redux/modules/stores';
 import PropTypes from 'prop-types';
 import Map from './Map';
 
+const LoaderIcon = require('../../../static/refresh.svg');
 const styles = require('./StoreLocator.scss');
 
-const mapDispatchToProps = dispatch => bindActionCreators({ gaVisitEvent }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ gaVisitEvent, setCurrentLocation }, dispatch);
+
+const mapStateToProps = ({ storelocator: { locationData, locationLoaded, locationLoading } }) => ({
+  city: getCurrentCity(locationData),
+  location: getCurrentLocation(locationData),
+  locationLoaded,
+  locationLoading
+});
+
 class StoreLocator extends React.Component {
   static propTypes = {
     data: PropTypes.object
@@ -26,7 +38,9 @@ class StoreLocator extends React.Component {
     zoomlevel: 5,
     open: false,
     currentList: [],
-    currentState: null
+    currentState: null,
+    selectedStore: '',
+    selectCity: false
   };
   componentWillMount() {
     const { data } = this.props;
@@ -37,14 +51,29 @@ class StoreLocator extends React.Component {
       });
     }
   }
-
+  componentWillReceiveProps(nextProps) {
+    const { locationLoaded, data, city } = nextProps;
+    if (data && data.items && data.items.text && locationLoaded && city) {
+      const mapData = data.items.text;
+      this.handleSelectCity(city, mapData);
+    }
+  }
+  getURL = (origin, dest) => {
+    const baseUrl = 'http://maps.google.com/?';
+    const start = `saddr=${origin.lat || ''},${origin.lng || ''}`;
+    const destination = `&daddr=${dest.lat || ''},${dest.lng || ''}`;
+    const mapURL = `${baseUrl}${start}${destination}`;
+    return mapURL;
+  };
   handleClick = (store = '', mapData, city = '') => {
     const details = mapData.filter(item => item.store === store)[0];
     const { position } = details;
+    // const { open } = this.state;
     this.setState({
       position,
       open: true,
-      zoomlevel: 16
+      zoomlevel: 16,
+      selectedStore: store
     });
     const { gaVisitEvent: recordStoreVisit } = this.props;
     recordStoreVisit({
@@ -54,7 +83,6 @@ class StoreLocator extends React.Component {
       category: 'Storelocator'
     });
   };
-
   handleSelectState = (state, mapData) => {
     const currentList = mapData.filter(item => item.state === state);
     let lat = 0;
@@ -79,7 +107,7 @@ class StoreLocator extends React.Component {
   };
 
   handleSelectCity = (city, list) => {
-    const currentList = list.filter(item => item.city === city);
+    const currentList = list.filter(item => item.city.toUpperCase() === city.toUpperCase());
     let lat = 0;
     currentList.map(item => {
       lat += item.position.lat;
@@ -99,12 +127,23 @@ class StoreLocator extends React.Component {
       open: false
     });
   };
-
+  detectUserLocation = () => {
+    const { setCurrentLocation: setLocation } = this.props;
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        const lat = position.coords.latitude || '';
+        const lng = position.coords.longitude || '';
+        setLocation(lat, lng);
+      });
+    }
+  };
   render() {
-    const { data } = this.props;
+    const {
+      data, location, locationLoaded, locationLoading
+    } = this.props;
     const mapData = data.items.text;
     const {
-      position, zoomlevel, open, currentList, currentState
+      position, zoomlevel, open, currentList, currentState, selectedStore, selectCity
     } = this.state;
     //
     let stateList = mapData.map(item => item.state);
@@ -135,20 +174,51 @@ class StoreLocator extends React.Component {
                 zoom={zoomlevel}
                 mapData={mapData}
                 open={open}
+                handleClick={this.handleClick}
+                selectedStore={selectedStore}
               />
               <Div className={styles.filterWrapper}>
-                <select onChange={e => this.handleSelectState(e.target.value, mapData)}>
-                  <option value={null} key="state">
-                    SELECT STATE
-                  </option>
-                  {stateList.map(item => (
-                    <option value={item} key={item}>
-                      {item}
+                {true && (
+                  <button
+                    style={{ marginBottom: '4px', marginRight: '10px' }}
+                    onClick={e => {
+                      e.preventDefault();
+                      this.setState({ selectCity: true });
+                    }}
+                    className={styles.selectLocation}
+                  >
+                    Select Store
+                  </button>
+                )}
+                {true && (
+                  <button
+                    style={{ marginBottom: '4px' }}
+                    onClick={e => {
+                      e.preventDefault();
+                      this.detectUserLocation();
+                    }}
+                    className={styles.selectLocation}
+                  >
+                    {locationLoading && (
+                      <Img className="spin" src={LoaderIcon} display="inline" width="20px" va="sub" />
+                    )}
+                    Store Near Me
+                  </button>
+                )}
+                {selectCity && (
+                  <select onChange={e => this.handleSelectState(e.target.value, mapData)}>
+                    <option value={null} key="state">
+                      SELECT STATE
                     </option>
-                  ))}
-                </select>
+                    {stateList.map(item => (
+                      <option value={item} key={item}>
+                        {item}
+                      </option>
+                    ))}
+                  </select>
+                )}
 
-                {currentState && (
+                {selectCity && currentState && (
                   <select onChange={e => this.handleSelectCity(e.target.value, mapData)}>
                     <option value={null} key="state">
                       SELECT CITY
@@ -160,16 +230,73 @@ class StoreLocator extends React.Component {
                     ))}
                   </select>
                 )}
-
                 <div className={styles.cistList}>
                   <ul>
+                    {locationLoaded && currentList.length ? (
+                      <div
+                        style={{
+                          margin: '0 0 5px 0',
+                          padding: '4px',
+                          border: '2px solid f98d2936',
+                          borderRadius: '4px',
+                          backgroundColor: '#ffa500'
+                        }}
+                      >
+                        <h4
+                          style={{
+                            fontSize: '1rem',
+                            margin: 0,
+                            padding: 0,
+                            color: '#ffffff'
+                          }}
+                        >
+                          {' '}
+                          Nearest Hometown Stores
+                        </h4>
+                      </div>
+                    ) : (
+                      ''
+                    )}
+                    {currentList && !currentList.length ? (
+                      <div
+                        style={{
+                          margin: '0 0 5px 0',
+                          padding: '4px',
+                          border: '2px solid f98d2936',
+                          borderRadius: '4px',
+                          backgroundColor: '#000000cc'
+                        }}
+                      >
+                        <h4
+                          style={{
+                            fontSize: '1rem',
+                            margin: 0,
+                            padding: 0,
+                            color: '#ffffff'
+                          }}
+                        >
+                          {' '}
+                          We will be in your town very soon..
+                        </h4>
+                      </div>
+                    ) : (
+                      ''
+                    )}
                     {currentList.map((item, index) => (
                       <li key={String(index)}>
                         <button onClick={() => this.handleClick(item.store, mapData, item.city)}>
                           <Label fontSize="1rem" mt="0" ml="0">
-                            {item.store}
+                            {item.store.toUpperCase()}
                           </Label>
-                          <address>{item.address}</address>
+                          <address style={{ color: 'black', fontStyle: 'normal' }}>{item.address}</address>
+                          <a
+                            title="Hometown Store Locator Direction"
+                            href={this.getURL(location, item.position)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <button className={styles.directionBtn}>Direction</button>
+                          </a>
                         </button>
                       </li>
                     ))}
@@ -184,10 +311,15 @@ class StoreLocator extends React.Component {
   }
 }
 StoreLocator.propTypes = {
-  gaVisitEvent: PropTypes.func.isRequired
+  gaVisitEvent: PropTypes.func.isRequired,
+  city: PropTypes.string.isRequired,
+  location: PropTypes.object.isRequired,
+  locationLoaded: PropTypes.bool.isRequired,
+  locationLoading: PropTypes.bool.isRequired,
+  setCurrentLocation: PropTypes.func.isRequired
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(StoreLocator);
