@@ -8,7 +8,8 @@ const LOAD_STORES_DATA_FAIL = 'storelocator/LOAD_STORES_DATA_FAIL';
 const LOAD_LOCATION_DATA = 'storelocator/LOAD_LOCATION_DATA';
 const LOAD_LOCATION_DATA_SUCCESS = 'storelocator/LOAD_LOCATION_DATA_SUCCESS';
 const LOAD_LOCATION_DATA_FAIL = 'storelocator/LOAD_LOCATION_DATA_FAIL';
-const MAP_URL = 'https://maps.googleapis.com/maps/api/geocode/json';
+const MAP_URL = 'http://maps.googleapis.com/maps/api/distancematrix/json?units=imperial';
+const DIESTINATIONS = `40.6905615,-73.9976592 | 40.6905615,-73.9976592 | 40.6905615,-73.9976592 | 40.6905615,-73.9976592 | 40.6905615,-73.9976592 | 40.6905615,-73.9976592&key=${mapKey}`; // eslint-disable-line
 
 const initialState = {
   loading: false,
@@ -70,5 +71,5 @@ export const loadStoresData = () => ({
 
 export const setCurrentLocation = (lat, lng) => ({
   types: [LOAD_LOCATION_DATA, LOAD_LOCATION_DATA_SUCCESS, LOAD_LOCATION_DATA_FAIL],
-  promise: ({ client }) => axios.get(`${MAP_URL}?latlng=${lat},${lng}&key=${mapKey}`) //eslint-disable-line
+  promise: ({ client }) => axios.get(`${MAP_URL}&origins=${lat},${lng}&destinations=${DIESTINATIONS}`) //eslint-disable-line
 });

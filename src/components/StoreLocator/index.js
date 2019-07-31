@@ -52,10 +52,10 @@ class StoreLocator extends React.Component {
     }
   }
   componentWillReceiveProps(nextProps) {
-    const { locationLoaded, data, city } = nextProps;
-    if (data && data.items && data.items.text && locationLoaded && city) {
+    const { locationLoaded, data, loc } = nextProps;
+    if (data && data.items && data.items.text && locationLoaded && loc.lat && loc.lng) {
       const mapData = data.items.text;
-      this.handleSelectCity(city, mapData);
+      this.handleNearestLocation(loc, mapData);
     }
   }
   getURL = (origin, dest) => {
@@ -126,6 +126,10 @@ class StoreLocator extends React.Component {
       zoomlevel: 11,
       open: false
     });
+  };
+  handleNearestLocation = (loc, list) => {
+    console.log(loc);
+    console.log(list);
   };
   detectUserLocation = () => {
     const { setCurrentLocation: setLocation } = this.props;
@@ -312,7 +316,7 @@ class StoreLocator extends React.Component {
 }
 StoreLocator.propTypes = {
   gaVisitEvent: PropTypes.func.isRequired,
-  city: PropTypes.string.isRequired,
+  loc: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   locationLoaded: PropTypes.bool.isRequired,
   locationLoading: PropTypes.bool.isRequired,
