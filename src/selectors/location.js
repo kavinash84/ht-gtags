@@ -25,3 +25,19 @@ export const getCurrentLocation = createSelector(
   [location],
   currentPosition => currentPosition
 );
+export const getStores = stores => (stores.items && stores.items.text ? stores.items.text : []);
+export const getDestination = createSelector(
+  [getStores],
+  stores => {
+    const latlng = [];
+    stores.forEach(item => {
+      if (item.position) {
+        latlng.push({
+          position: item.position,
+          id: item.id || ''
+        });
+      }
+    });
+    return latlng;
+  }
+);
