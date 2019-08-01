@@ -12,7 +12,7 @@ import MapMarker from './MapMarker';
 const { InfoBox } = require('react-google-maps/lib/components/addons/InfoBox');
 
 const Map = ({
-  mapData, zoom, position, open, handleClick, selectedStore
+  mapData, zoom, position, open, handleClick, selectedStore, currentLocation
 }) => (
   <GoogleMap zoom={parseInt(zoom, 10) || 16} center={position} options={{ mapTypeControl: false }}>
     {mapData.map(item => {
@@ -37,7 +37,13 @@ const Map = ({
                   alignBottom: true
                 }}
               >
-                <MapMarker store={item.store} address={item.address} phone={item.phone} position={item.position} />
+                <MapMarker
+                  store={item.store}
+                  address={item.address}
+                  phone={item.phone}
+                  position={item.position}
+                  currentLocation={currentLocation}
+                />
               </InfoBox>
             )}
           </div>
@@ -50,7 +56,8 @@ const Map = ({
 Map.defaultProps = {
   position: {},
   mapData: [],
-  selectedStore: ''
+  selectedStore: '',
+  currentLocation: {}
 };
 Map.propTypes = {
   position: PropTypes.object,
@@ -58,7 +65,8 @@ Map.propTypes = {
   mapData: PropTypes.array,
   open: PropTypes.bool.isRequired,
   handleClick: PropTypes.func.isRequired,
-  selectedStore: PropTypes.string
+  selectedStore: PropTypes.string,
+  currentLocation: PropTypes.object
 };
 
 const MapContainer = compose(
