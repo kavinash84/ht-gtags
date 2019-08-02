@@ -19,13 +19,15 @@ class TrackOrder extends React.Component {
   };
   state = {
     status: false,
-    orderId: ''
+    orderId: '',
+    onChange: false
   };
   handleSubmit = e => {
     const { dispatch } = this.context.store;
     e.preventDefault();
     this.setState({
-      status: true
+      status: true,
+      onChange: false
     });
     dispatch(trackOrder(this.state.orderId));
   };
@@ -33,7 +35,8 @@ class TrackOrder extends React.Component {
     e.preventDefault();
     const { value } = e.target;
     this.setState({
-      orderId: value
+      orderId: value,
+      onChange: true
     });
   };
 
@@ -54,6 +57,7 @@ class TrackOrder extends React.Component {
               handleSubmit={this.handleSubmit}
               loading={false}
               orderId={this.state.orderId}
+              onChange={this.state.onChange}
               closeStatusModal={closeModal}
             />
           </div>

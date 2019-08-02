@@ -112,7 +112,7 @@ class MyOrder extends Component {
               </Div>
               <Div col="3" mr="1rem" hide>
                 <Select
-                  placeholder="Select Case Status"
+                  placeholder="Select Order Status"
                   defaultValue={null}
                   value={this.state.caseStatus}
                   onChange={this.onStatusChange}

@@ -25,7 +25,7 @@ const mapStateToProps = ({ trackorder }) => ({
 class TrackOrder extends Component {
   render() {
     const {
-      handleSubmit, handleChange, loaded, loading, data, orderId, closeStatusModal
+      handleSubmit, handleChange, loaded, loading, data, orderId, closeStatusModal, onChange
     } = this.props;
     const orders = data.order_items || [];
     return (
@@ -76,7 +76,7 @@ class TrackOrder extends Component {
                 </ResponsiveModal>
               ) : (
                 <Label fontSize="0.75rem" lh="1.8" mb="1.125rem">
-                  {loaded && orderId ? (
+                  {loaded && orderId && !onChange ? (
                     <b style={{ color: 'red' }}>
                       {data.status === 'canceled'
                         ? 'This Order is Cancelled !'
@@ -114,6 +114,7 @@ TrackOrder.propTypes = {
   data: PropTypes.object.isRequired,
   // error: PropTypes.bool.isRequired,
   orderId: PropTypes.string.isRequired,
+  onChange: PropTypes.bool.isRequired,
   // errorMessage: PropTypes.string.isRequired,
   closeStatusModal: PropTypes.func.isRequired
 };
