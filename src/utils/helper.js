@@ -289,14 +289,7 @@ export const isKeyExists = (obj, nesting) => {
 
 export const getImageURL = (url, size) => {
   if (!url) return null;
-  const urlCheck = url.replace(/(beta.|stage.)/, 'static.');
-  const [first] = urlCheck.split('.jpg');
-  if (first) {
-    const rp = first.replace(/(-product_500|-catalog|-catalog_360|-zoom)/, '');
-    const imageurl = `${rp}-${size}.jpg`;
-    return imageurl;
-  }
-  return null;
+  return url.replace(/(-product_500.jpg|-catalog_360.jpg|-catalog.jpg|-zoom.jpg)/, `-${size}.jpg`);
 };
 
 export const allowNChar = (value, n) => {
@@ -375,3 +368,66 @@ export const getDistanceBetweenPoints = (lat1, lon1, lat2, lon2) => {
 //   }
 // };
 export const getVideoID = url => url;
+export const getDateFilters = config => {
+  const days = config.days || [];
+  const months = config.months || [];
+  const years = config.years || 0;
+  const currentDate = new Date();
+  const daysFilters = days.map(val => {
+    const dateNow = new Date();
+    dateNow.setDate(dateNow.getDate() - val);
+    const pastDate = new Date(dateNow);
+    pastDate.setHours(0);
+    pastDate.setMinutes(0);
+    pastDate.setSeconds(0);
+    return {
+      value: `Last ${val} Days`,
+      label: `Last ${val} Days`,
+      start: pastDate.toString(),
+      end: currentDate.toString()
+    };
+  });
+  const monthsFilters = months.map(val => {
+    const dateNow = new Date();
+    dateNow.setMonth(dateNow.getMonth() - val);
+    const pastDate = new Date(dateNow);
+    pastDate.setHours(0);
+    pastDate.setMinutes(0);
+    pastDate.setSeconds(0);
+    return {
+      value: `Last ${val} Months`,
+      label: `Last ${val} Months`,
+      start: pastDate.toString(),
+      end: currentDate.toString()
+    };
+  });
+  const yearsFilter = [];
+  for (let i = 0; i < years; i += 1) {
+    const latest = new Date();
+    const val = latest.getFullYear() - i;
+    latest.setFullYear(latest.getFullYear() - i);
+    const lastDate = new Date(latest);
+    lastDate.setMonth(0);
+    lastDate.setDate(1);
+    lastDate.setHours(0);
+    lastDate.setMinutes(0);
+    lastDate.setSeconds(0);
+    const tillDate = new Date();
+    tillDate.setFullYear(tillDate.getFullYear() - i);
+    if (i) {
+      tillDate.setMonth(11);
+      tillDate.setDate(31);
+      tillDate.setHours(23);
+      tillDate.setMinutes(59);
+      tillDate.setSeconds(59);
+    }
+    yearsFilter.push({
+      value: val,
+      label: val,
+      start: lastDate.toString(),
+      end: tillDate.toString()
+    });
+  }
+  const allFilters = [...daysFilters, ...monthsFilters, ...yearsFilter];
+  return allFilters;
+};

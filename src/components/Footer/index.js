@@ -47,6 +47,29 @@ class Footer extends React.Component {
     emailErrorMessage: 'Please Enter a Valid Email',
     already: false
   };
+  // componentDidMount() {
+  //   if (!window._laq) {
+  //     window._laq = [];
+  //   }
+  //   window._laq.push(() => {
+  //     window.liveagent.showWhenOnline(
+  //       '573N000000000Ub',
+  //       document.getElementById('liveagent_button_online_573N000000000Ub')
+  //     ); //eslint-disable-line
+  //     window.liveagent.showWhenOffline(
+  //       '573N000000000Ub',
+  //       document.getElementById('liveagent_button_offline_573N000000000Ub')
+  //     ); //eslint-disable-line
+  //   });
+  //   const emailId = '';
+  //   // Example : liveagent.addCustomDetail('Contact_ID', test@gmail.com);
+  //   window.liveagent.addCustomDetail('Contact_ID', emailId);
+  //   window.liveagent.init(
+  // 'https://d.la1-c2cs-hnd.salesforceliveagent.com/chat',
+  // '572N000000000PC',
+  // '00DN0000000Qxcj'
+  // );
+  // }
   componentWillReceiveProps(nextProps) {
     const { loaded, loading } = nextProps.subscribe;
     const { already } = this.state;
@@ -137,6 +160,42 @@ class Footer extends React.Component {
                   </li>
                   <li>
                     <a href="mailto:care@hometown.in">Email: care@hometown.in</a>
+                  </li>
+                  <li>
+                    <Img
+                      id="liveagent_button_online_573N000000000Ub"
+                      style={{
+                        display: 'none',
+                        border: '0px none',
+                        cursor: 'pointer',
+                        height: '75px',
+                        width: '200px'
+                      }}
+                      onClick={() => {
+                        if (window.liveagent) {
+                          window.liveagent.startChat('573N000000000Ub');
+                        }
+                      }}
+                      src="https://devbox-praxisretail.cs6.force.com/LiveAgent/resource/1550482657000/Online_Chat_Button" //eslint-disable-line
+                      alt=""
+                    />
+                    <Img
+                      id="liveagent_button_offline_573N000000000Ub"
+                      style={{
+                        display: 'none',
+                        border: '0px none',
+                        cursor: 'pointer',
+                        height: '75px',
+                        width: '200px'
+                      }}
+                      onClick={() => {
+                        if (window.liveagent) {
+                          window.liveagent.startChat('573N000000000Ub');
+                        }
+                      }}
+                      src="https://devbox-praxisretail.cs6.force.com/LiveAgent/resource/1550482682000/Offline_Chat_Button" //eslint-disable-line
+                      alt=""
+                    />
                   </li>
                 </ul>
               </Div>

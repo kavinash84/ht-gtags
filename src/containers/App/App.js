@@ -67,7 +67,8 @@ const { SITE_URL } = process.env;
     signUp: state.userSignUp,
     pincode: state.pincode,
     app: state.app,
-    notifs: state.notifs
+    notifs: state.notifs,
+    profile: state.profile
   }),
   {
     pushState: push,
@@ -99,7 +100,8 @@ export default class App extends Component {
     notifs: PropTypes.shape({
       global: PropTypes.array
     }).isRequired,
-    notifSend: PropTypes.func.isRequired
+    notifSend: PropTypes.func.isRequired,
+    profile: PropTypes.object.isRequired
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -150,7 +152,17 @@ export default class App extends Component {
     /* Split Test Cookie */
     Cookie.set('split_test', 'A', { expires: 365 });
   }
-
+  componentWillReceiveProps(nextProps) {
+    if (window) {
+      const { profile } = nextProps;
+      const { data = {} } = profile;
+      const { email = '' } = data;
+      // window.userEmail = email;
+      window.embedded_svc.settings.prepopulatedPrechatFields = {
+        Email: email
+      };
+    }
+  }
   componentDidUpdate(prevProps) {
     if (this.props.location !== prevProps.location) {
       window.scrollTo(0, 0);

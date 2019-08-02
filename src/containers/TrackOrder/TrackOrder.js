@@ -1,9 +1,18 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import MenuFooter from 'containers/MenuFooter';
 import TrackOrderContainer from 'components/TrackOrder/TrackOrder';
-import { trackOrder } from 'redux/modules/trackorder';
+import { trackOrder, closeStatusModal } from 'redux/modules/trackorder';
 
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      closeStatusModal
+    },
+    dispatch
+  );
 class TrackOrder extends React.Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -29,6 +38,7 @@ class TrackOrder extends React.Component {
   };
 
   render() {
+    const { closeStatusModal: closeModal } = this.props;
     return (
       <div>
         <MenuFooter
@@ -44,6 +54,7 @@ class TrackOrder extends React.Component {
               handleSubmit={this.handleSubmit}
               loading={false}
               orderId={this.state.orderId}
+              closeStatusModal={closeModal}
             />
           </div>
         </MenuFooter>
@@ -51,5 +62,11 @@ class TrackOrder extends React.Component {
     );
   }
 }
+TrackOrder.propTypes = {
+  closeStatusModal: PropTypes.func.isRequired
+};
 
-export default TrackOrder;
+export default connect(
+  null,
+  mapDispatchToProps
+)(TrackOrder);

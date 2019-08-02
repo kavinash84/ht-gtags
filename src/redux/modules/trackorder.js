@@ -1,8 +1,9 @@
-import { TRACK_ORDER as TRACK_ORDER_API } from 'helpers/apiUrls';
+import { ORDERS_STATUS_API } from 'helpers/apiUrls';
 
 const LOAD = 'trackorder/LOAD';
 const LOAD_SUCCESS = 'trackorder/LOAD_SUCCESS';
 const LOAD_FAIL = 'trackorder/LOAD_FAIL';
+const CLOSE_STATUS_MODAL = 'tracking/CLOSE_MODAL';
 
 const initialState = {
   loading: false,
@@ -36,12 +37,24 @@ export default function reducer(state = initialState, action = {}) {
         error: true,
         errorMessage: action.error.error_message
       };
+    case CLOSE_STATUS_MODAL:
+      return {
+        ...state,
+        loading: false,
+        loaded: false,
+        data: {},
+        error: false,
+        errorMessage: ''
+      };
     default:
       return state;
   }
 }
-
+export const closeStatusModal = () => ({
+  type: CLOSE_STATUS_MODAL,
+  loaded: false
+});
 export const trackOrder = orderid => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-  promise: ({ client }) => client.get(`${TRACK_ORDER_API}/${orderid}`)
+  promise: ({ client }) => client.get(`${ORDERS_STATUS_API}?order=${orderid}`)
 });

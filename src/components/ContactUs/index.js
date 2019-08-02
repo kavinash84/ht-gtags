@@ -76,7 +76,15 @@ const ContactUs = () => (
             <Div col="6">
               <Section boxShadow="1px 2px 5px 0px rgba(0,0,0,0.1)" bg="white" mb="1rem" p="1.25rem 1.5rem">
                 <Row display="block">
-                  <Div pl="0.75rem" pr="0.75rem" p="0.3125rem">
+                  {/* <Div pl="0.75rem" pr="0.75rem" p="0.3125rem">
+                    <Link to="/case-request" className="text-primary">
+                      RAISE A CASE REQUEST
+                      <Span color="#757575" fontSize="1rem" va="top" ml="0.625rem">
+                        ❯
+                      </Span>
+                    </Link>
+                  </Div>
+                   <Div pl="0.75rem" pr="0.75rem" p="0.3125rem">
                     <Link to="/service-request" className="text-primary">
                       RAISE A SERVICE REQUEST
                       <Span color="#757575" fontSize="1rem" va="top" ml="0.625rem">
@@ -91,7 +99,7 @@ const ContactUs = () => (
                         ❯
                       </Span>
                     </Link>
-                  </Div>
+                  </Div> */}
                   <Div pl="0.75rem" pr="0.75rem" p="0.3125rem">
                     <Link to="/grievance" className="text-primary">
                       GRIEVANCE
@@ -101,6 +109,28 @@ const ContactUs = () => (
                     </Link>
                   </Div>
                 </Row>
+              </Section>
+            </Div>
+            <Div col="6">
+              <Section boxShadow="1px 2px 5px 0px rgba(0,0,0,0.1)" bg="white" mb="1rem" mr="2rem" p="1.25rem">
+                <Heading mt="0" mb="0" color="primary" fontSize="1.125rem" fontFamily="medium">
+                  <Img display="inline-block" va="bottom" mr="0.3125rem" src={phoneIcon} alt="Phone" width="22px" />
+                  Call Us
+                </Heading>
+                <Text color="#8d8d8d" fontSize="0.875rem" mb="0" mt="0.625rem">
+                  TollFree – 1800-210-0004 <br />
+                  10.00 a.m. to 8.00 p.m., 365days
+                </Text>
+              </Section>
+              <Section boxShadow="1px 2px 5px 0px rgba(0,0,0,0.1)" bg="white" mb="1rem" mr="2rem" p="1.25rem">
+                <Heading mt="0" mb="0" color="primary" fontSize="1.125rem" fontFamily="medium">
+                  <Img display="inline-block" va="bottom" mr="0.3125rem" src={mailIcon} alt="Phone" width="22px" />
+                  E-mail Us
+                </Heading>
+                <Text color="#8d8d8d" fontSize="0.875rem" mb="0" mt="0.625rem">
+                  <a href="mailto:Care@hometown.in">Care@hometown.in</a> <br />
+                  We shall respond in 24working hours.
+                </Text>
               </Section>
             </Div>
           </Row>
