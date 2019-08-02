@@ -261,7 +261,6 @@ export default function userMiddleware() {
           dismissAfter: 4000
         }));
         break;
-
       default:
         break;
     }

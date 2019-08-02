@@ -53,6 +53,8 @@
     ul {
       padding-left: 0;
       li {
+        border: 2px solid #f98d2929;
+        margin-bottom: 5px;
         list-style: none;
         button {
           background: transparent;
@@ -70,5 +72,36 @@
         }
       }
     }
+  }
+}
+.directionBtn {
+  border: 2px solid black !important;
+  background-color: #f98d296b !important;
+  color: black !important;
+  padding: 5px 5px !important;
+  font-size: 10px !important;
+  cursor: pointer !important;
+  border-color: #f98d293b !important;
+  color: black !important;
+  margin-top: 5px;
+  width: 60px !important;
+}
+.selectLocation {
+  background-color: white;
+  border: 2px solid #008CBA;
+  color: black;
+  padding: 5px 10px 5px 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 0px;
+  -webkit-transition-duration: 0.4s;
+  /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  &:hover {
+    background-color: #008CBA;
+    color: white;
   }
 }
