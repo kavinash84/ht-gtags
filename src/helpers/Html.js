@@ -82,34 +82,34 @@ export default class Html extends Component {
             <style dangerouslySetInnerHTML={{ __html: '#content{display:none}' }} />
           ) : null}
           {process.env.NODE_ENV !== 'development' && <script dangerouslySetInnerHTML={{ __html: newRelic }} />}
-          <style
-            dangerouslySetInnerHTML={{
-              __html: `
-            .embeddedServiceHelpButton .helpButton .uiButton {
-              background-color: #555555;
-              font-family: "Salesforce Sans", sans-serif;
-              box-sizing: content-box;
-              font-weight: bold;
-              font-size: 16px;
-            }
-            .embeddedServiceHelpButton .helpButton .uiButton:focus {
-              outline: 1px solid #555555;
-            }
-            .message {
-              background-color: #555555;
-               border-style: hidden; 
-              border-width: 1px;
-              color: white;
-              padding: 6px 8px 6px 6px;
-              margin: 4px 20px;
-            }
-            @font-face {
-              font-family: 'Salesforce Sans';
-              src: url('https://www.sfdcstatic.com/system/shared/common/assets/fonts/SalesforceSans/SalesforceSans-Regular.woff') format('woff'),
-              url('https://www.sfdcstatic.com/system/shared/common/assets/fonts/SalesforceSans/SalesforceSans-Regular.ttf') format('truetype');
-            }`
-            }}
-          />
+          {/*<style
+                      dangerouslySetInnerHTML={{
+                        __html: `
+                      .embeddedServiceHelpButton .helpButton .uiButton {
+                        background-color: #555555;
+                        font-family: "Salesforce Sans", sans-serif;
+                        box-sizing: content-box;
+                        font-weight: bold;
+                        font-size: 16px;
+                      }
+                      .embeddedServiceHelpButton .helpButton .uiButton:focus {
+                        outline: 1px solid #555555;
+                      }
+                      .message {
+                        background-color: #555555;
+                         border-style: hidden; 
+                        border-width: 1px;
+                        color: white;
+                        padding: 6px 8px 6px 6px;
+                        margin: 4px 20px;
+                      }
+                      @font-face {
+                        font-family: 'Salesforce Sans';
+                        src: url('https://www.sfdcstatic.com/system/shared/common/assets/fonts/SalesforceSans/SalesforceSans-Regular.woff') format('woff'),
+                        url('https://www.sfdcstatic.com/system/shared/common/assets/fonts/SalesforceSans/SalesforceSans-Regular.ttf') format('truetype');
+                      }`
+                      }}
+                    />*/}
         </head>
         <body>
           <script
@@ -117,7 +117,7 @@ export default class Html extends Component {
             src="https://c.la1-c2cs-hnd.salesforceliveagent.com/content/g/js/45.0/deployment.js"
           />
           <script type="text/javascript" src="https://service.force.com/embeddedservice/5.0/esw.min.js" />
-          <script
+          {/* <script
             dangerouslySetInnerHTML={{
               __html: `
                 var emailId ='';
@@ -223,7 +223,7 @@ export default class Html extends Component {
               }`
             }}
             charSet="UTF-8"
-          />
+          /> */}
           {process.env.NODE_ENV !== 'development' && (
             <noscript>
               <iframe
