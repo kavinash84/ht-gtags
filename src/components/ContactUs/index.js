@@ -111,7 +111,7 @@ const ContactUs = () => (
                 </Row>
               </Section>
             </Div>
-            <Div col="6">
+            {/* <Div col="6">
               <Section boxShadow="1px 2px 5px 0px rgba(0,0,0,0.1)" bg="white" mb="1rem" mr="2rem" p="1.25rem">
                 <Heading mt="0" mb="0" color="primary" fontSize="1.125rem" fontFamily="medium">
                   <Img display="inline-block" va="bottom" mr="0.3125rem" src={phoneIcon} alt="Phone" width="22px" />
@@ -132,7 +132,7 @@ const ContactUs = () => (
                   We shall respond in 24working hours.
                 </Text>
               </Section>
-            </Div>
+            </Div> */}
           </Row>
         </Section>
       </Container>
