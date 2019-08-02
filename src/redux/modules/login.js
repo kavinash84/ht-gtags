@@ -26,6 +26,7 @@ const initialState = {
   isLoggedIn: false,
   loggingOut: false,
   isLoggedOut: false,
+  askContact: false,
   otp: '',
   error: false,
   errorMessage: ''
@@ -55,7 +56,8 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         loggingIn: false,
-        loginError: action.error
+        loginError: action.error,
+        askContact: true
       };
     case LOGIN_AFTER_SIGNUP:
       return {
@@ -154,7 +156,7 @@ export const login = data => ({
   }
 });
 
-export const googleLogin = (token, session) => ({
+export const googleLogin = (token, session, phone) => ({
   types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
   promise: async ({ client }) => {
     try {
@@ -163,7 +165,8 @@ export const googleLogin = (token, session) => ({
         client_secret: clientSecret,
         client_id: clientId,
         grant_type: 'password',
-        session_id: session
+        session_id: session,
+        phone
       };
       const response = await client.post(GOOGLE_LOGIN_API, postData);
       await setToken({ client })(response);
