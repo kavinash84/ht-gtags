@@ -110,7 +110,7 @@ class MyOrder extends Component {
                   options={getDateFilters(this.FILTER_CONFIG)}
                 />
               </Div>
-              <Div col="3" mr="1rem" hide>
+              {/* <Div col="3" mr="1rem" hide>
                 <Select
                   placeholder="Select Order Status"
                   defaultValue={null}
@@ -118,7 +118,7 @@ class MyOrder extends Component {
                   onChange={this.onStatusChange}
                   options={this.STATUS_FILTER}
                 />
-              </Div>
+              </Div> */}
               <Div col="2" mr="1rem">
                 <Button
                   disabled={loading}
