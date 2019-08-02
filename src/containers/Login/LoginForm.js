@@ -28,7 +28,8 @@ const EmailIcon = require('../../../static/email-primary.svg');
   otpSent: state.userLogin.otpSent,
   loaded: state.userLogin.loaded,
   loading: state.userLogin.loading,
-  loggingIn: state.userLogin.loggingIn
+  loggingIn: state.userLogin.loggingIn,
+  askContact: state.userLogin.askContact
 }))
 export default class LoginFormContainer extends Component {
   static propTypes = {
@@ -37,7 +38,8 @@ export default class LoginFormContainer extends Component {
     otpSent: PropTypes.bool,
     loaded: PropTypes.bool,
     loading: PropTypes.bool,
-    loggingIn: PropTypes.bool
+    loggingIn: PropTypes.bool,
+    askContact: PropTypes.bool
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -48,7 +50,8 @@ export default class LoginFormContainer extends Component {
     getotpErrorMessage: '',
     loaded: false,
     loading: false,
-    loggingIn: false
+    loggingIn: false,
+    askContact: false
   };
 
   state = {
@@ -148,7 +151,9 @@ export default class LoginFormContainer extends Component {
       mobilesubmitted,
       resend
     } = this.state;
-    const { loaded, loading, loggingIn } = this.props;
+    const {
+      loaded, loading, loggingIn, askContact
+    } = this.props;
     const styles = require('./index.scss');
     return (
       <div className={styles.userWrapper}>
@@ -239,7 +244,7 @@ export default class LoginFormContainer extends Component {
                   </Button>
                 </Div>
                 <Div col="6" ta="center" mb="0" pl="0.625rem">
-                  <GoogleLoginBtn />
+                  <GoogleLoginBtn askContact={askContact} />
                 </Div>
               </Row>
             </div>
