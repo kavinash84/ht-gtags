@@ -57,7 +57,7 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loggingIn: false,
         loginError: action.error,
-        askContact: true
+        askContact: action.error.askContact || false
       };
     case LOGIN_AFTER_SIGNUP:
       return {
