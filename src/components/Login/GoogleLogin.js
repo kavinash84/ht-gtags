@@ -91,7 +91,7 @@ class GoogleLogin extends Component {
                 className="bulk-order-form"
               >
                 <FormInput
-                  label="Please enter your mobile no -"
+                  label="Please update your mobile number !"
                   type="text"
                   placeholder=""
                   onChange={this.onChangePhone}
@@ -101,6 +101,7 @@ class GoogleLogin extends Component {
                 />
               </form>
               <GoogleLoginBtn
+                style={{ backgroundColor: '#f98d29' }}
                 disabled={this.isValid()}
                 className="socialBtn"
                 clientId="663311547699-jersj1hfflbl8gfukgsuvug8u1gc88nm.apps.googleusercontent.com"
