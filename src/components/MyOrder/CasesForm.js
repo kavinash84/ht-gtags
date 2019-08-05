@@ -20,16 +20,19 @@ import subCategories from '../../data/case-sub-category';
 const styles = require('./CasesForm.scss');
 
 const mapDispatchToProps = dispatch => bindActionCreators({ sendData }, dispatch);
-const mapStateToProps = ({ cases, profile }) => ({
-  ordercase: cases.ordercase || {},
-  sfid: profile.data.salesforce_account_id || ''
+const mapStateToProps = ({
+  cases
+  // profile
+}) => ({
+  ordercase: cases.ordercase || {}
+  // sfid: profile.data.salesforce_account_id || ''
 });
 
 class CasesFormContainer extends Component {
   static propTypes = {
     sendData: PropTypes.func.isRequired,
     loading: PropTypes.bool,
-    sfid: PropTypes.string,
+    // sfid: PropTypes.string,
     ordercase: PropTypes.object,
     caseItem: PropTypes.object,
     orderItem: PropTypes.object
@@ -41,7 +44,7 @@ class CasesFormContainer extends Component {
     ordercase: {},
     caseItem: {},
     orderItem: {},
-    sfid: '',
+    // sfid: '',
     loading: false
   };
   constructor() {
@@ -147,8 +150,8 @@ class CasesFormContainer extends Component {
       origin
     } = this.state;
     const { article_code: code = '', order_item_id: itemId = '' } = this.props.caseItem;
-    const { sforder_id: order_id = '' } = this.props.orderItem;
-    const { sendData: sendFormData, sfid } = this.props;
+    const { sforder_id: order_id = '', sforder_id: sfid = '' } = this.props.orderItem;
+    const { sendData: sendFormData } = this.props;
     const subjectError = isEmpty(subject);
     const descriptionError = isEmpty(description);
     if (subjectError || descriptionError) {
