@@ -65,16 +65,40 @@ class MyOrder extends Component {
     });
   };
   onChangeDate = dateFilter => {
+    // const { label } = dateFilter;
+    // const startDate = dateFilter.start ? new Date(dateFilter.start) : '';
+    // const endDate = dateFilter.end ? new Date(dateFilter.end) : '';
+    // const start = `${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate()}`;
+    // const end = `${endDate.getFullYear()}-${endDate.getMonth() + 1}-${endDate.getDate()}`;
+    // this.setState({
+    //   dateFilter: { value: label, label },
+    //   startDate: start,
+    //   endDate: end
+    // });
     const { label } = dateFilter;
-    const startDate = dateFilter.start ? new Date(dateFilter.start) : '';
-    const endDate = dateFilter.end ? new Date(dateFilter.end) : '';
-    const start = `${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate()}`;
-    const end = `${endDate.getFullYear()}-${endDate.getMonth() + 1}-${endDate.getDate()}`;
-    this.setState({
-      dateFilter: { value: label, label },
-      startDate: start,
-      endDate: end
-    });
+    if (dateFilter.start && dateFilter.end) {
+      const startDate = new Date(dateFilter.start);
+      const startYear = startDate.getFullYear();
+      const startMonth = startDate.getMonth() + 1 <= 9 ? `0${startDate.getMonth() + 1}` : startDate.getMonth() + 1;
+      const startDay = startDate.getDate() <= 9 ? `0${startDate.getDate()}` : startDate.getDate();
+      const endDate = new Date(dateFilter.end);
+      const endYear = endDate.getFullYear();
+      const endMonth = endDate.getMonth() + 1 <= 9 ? `0${endDate.getMonth() + 1}` : endDate.getMonth() + 1;
+      const endDay = endDate.getDate() <= 9 ? `0${endDate.getDate()}` : endDate.getDate();
+      const start = `${startYear}-${startMonth}-${startDay}`;
+      const end = `${endYear}-${endMonth}-${endDay}`;
+      this.setState({
+        dateFilter: { value: label, label },
+        startDate: start,
+        endDate: end
+      });
+    } else {
+      this.setState({
+        dateFilter: { value: label, label },
+        startDate: '',
+        endDate: ''
+      });
+    }
   };
   getFilteredOrders = e => {
     e.preventDefault();
