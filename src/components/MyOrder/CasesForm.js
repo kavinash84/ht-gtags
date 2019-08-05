@@ -150,7 +150,7 @@ class CasesFormContainer extends Component {
       origin
     } = this.state;
     const { article_code: code = '', order_item_id: itemId = '' } = this.props.caseItem;
-    const { sforder_id: order_id = '', sforder_id: sfid = '' } = this.props.orderItem;
+    const { sforder_id: order_id = '', sfaccount_id: sfid = '' } = this.props.orderItem;
     const { sendData: sendFormData } = this.props;
     const subjectError = isEmpty(subject);
     const descriptionError = isEmpty(description);
