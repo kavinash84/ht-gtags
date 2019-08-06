@@ -274,7 +274,7 @@ class Footer extends React.Component {
                     <Link to="/who-we-are">Who We Are</Link>
                   </li>
                   <li>
-                    <a href="http://praxisretail.in/careers.html" rel="noreferrer noopener" target="_blank">
+                    <a href="https://www.praxisretail.in/careers.html" rel="noreferrer noopener" target="_blank">
                       Careers
                     </a>
                   </li>
