@@ -70,6 +70,7 @@ class OrderBlock extends Component {
     // const { openSuccessModal } = this.state;
     const { show_track_order: show = '', bob_order: isBob = '', status } = order;
     const items = data.order_items || [];
+    const error = data.error || '';
     return (
       <Div mb="2.5rem" className={styles.blockWrapper}>
         <Row type="block" m="0" mb="1rem" className={styles.blockHeading}>
@@ -296,7 +297,7 @@ class OrderBlock extends Component {
           }}
           open={trackingLoaded && currentOrder === order.order_number}
         >
-          <TrackingTimeline data={items} />
+          <TrackingTimeline error={error} data={items} />
         </ResponsiveModal>
       </Div>
     );

@@ -28,6 +28,7 @@ class TrackOrder extends Component {
       handleSubmit, handleChange, loaded, loading, data, orderId, closeStatusModal, onChange
     } = this.props;
     const orders = data.order_items || [];
+    const error = data.error || '';
     return (
       <Div>
         <TitleBar title="Track Order(s)" />
@@ -72,7 +73,7 @@ class TrackOrder extends Component {
                   }}
                   open={loaded}
                 >
-                  <TrackingTimeline data={orders} />
+                  <TrackingTimeline data={orders} error={error} />
                 </ResponsiveModal>
               ) : (
                 <Label fontSize="0.75rem" lh="1.8" mb="1.125rem">
@@ -80,7 +81,7 @@ class TrackOrder extends Component {
                     <b style={{ color: 'red' }}>
                       {data.status === 'canceled'
                         ? 'This Order is Cancelled !'
-                        : 'Sorry, No Products Found, Please Check the Order Number'}
+                        : error || 'Sorry, No Products Found, Please Check the Order Number'}
                     </b>
                   ) : (
                     ''
