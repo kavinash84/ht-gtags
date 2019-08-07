@@ -81,7 +81,7 @@ class TrackOrder extends Component {
                     <b style={{ color: 'red' }}>
                       {data.status === 'canceled'
                         ? 'This Order is Cancelled !'
-                        : error || 'Sorry, No Products Found, Please Check the Order Number'}
+                        : error || 'Sorry, no products found, please call customer care for further assistance !'}
                     </b>
                   ) : (
                     ''
