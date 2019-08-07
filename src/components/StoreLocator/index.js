@@ -276,7 +276,8 @@ class StoreLocator extends React.Component {
     const { code } = error;
     switch (code) {
       case 1:
-        this.setError('We need location permission, to fetch your near by stores ! Please unblock the hometown.in !');
+        this.setError(`We need location permission, to fetch stores near you !
+          Please provide permission by visiting Settings>location`);
         break;
       case 2:
         this.setError('Not able to detect current location, please select from the drop down!');

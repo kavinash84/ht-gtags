@@ -68,6 +68,7 @@ class OrderBlock extends Component {
       currentOrder
     } = this.props;
     // const { openSuccessModal } = this.state;
+    const { show_track_order: show = '', bob_order: isBob = '', status } = order;
     const items = data.order_items || [];
     return (
       <Div mb="2.5rem" className={styles.blockWrapper}>
@@ -77,7 +78,7 @@ class OrderBlock extends Component {
               Order No. {order.order_number}
             </Heading>
           </Div>
-          {(order.bob_order === 0 || order.bob_order === '0') && order.status !== 'canceled' ? (
+          {show && (isBob === 0 || isBob === '0') && status !== 'canceled' ? (
             <Div ta="right" col="6" pr="5px">
               <Button
                 disabled={trackingLoading && currentOrder === order.order_number}
