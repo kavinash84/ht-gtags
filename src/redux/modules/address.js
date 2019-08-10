@@ -509,7 +509,7 @@ export const onChangeAddress2 = (formType, address2) => {
 };
 export const onChangeAddress1 = (formType, address1) => {
   if (address1.length > 40) {
-    const add1Value = address1.slice(0, 40);
+    const add1Value = address1.slice(0, 41);
     // const add2Value = address1.slice(40);
     // document.getElementById('add2').focus();
     return {
