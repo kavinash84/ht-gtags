@@ -178,7 +178,11 @@ export const setFiltersInState = payLoad => ({
 /* eslint-disable max-len */
 
 export const applyFilter = ({
-  query, pincode, city, filters, searchquery
+  query,
+  pincode,
+  city,
+  filters
+  // searchquery
 }) => dispatch =>
   dispatch({
     types: [LOAD_FILTER, LOAD_FILTER_SUCCESS, LOAD_FILTER_FAIL],
@@ -188,9 +192,9 @@ export const applyFilter = ({
         price, discount, material, modifiedQuery, sortby, pageno
       } = params;
       dispatch(setFiltersInState(params));
-      if (searchquery) {
-        return client.get(`${SEARCH_API}/?q=${searchquery}&maxitems=32&pincode=${pincode}&city=${city}${price}${discount}${material}${sortby}${pageno}`);
-      }
+      // if (searchquery) {
+      //   return client.get(`${SEARCH_API}/?q=${searchquery}&maxitems=32&pincode=${pincode}&city=${city}${price}${discount}${material}${sortby}${pageno}`);
+      // }
       const fetchURL = `${PRODUCTS_API}/${modifiedQuery}/?&maxitems=32&pincode=${pincode}&city=${city}${price}${discount}${material}${sortby}${pageno}`;
       return client.get(fetchURL.replace(/null/, '').trim());
     }
