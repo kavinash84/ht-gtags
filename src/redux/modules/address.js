@@ -236,7 +236,7 @@ export default function reducer(state = initialState, action = {}) {
         [action.formType]: {
           ...state[action.formType],
           gst: action.gst,
-          gstFeedBackError: !isGSTNumber(action.gst),
+          gstFeedBackError: action.gst && !isGSTNumber(action.gst),
           gstFeedBackMessage: 'GST Number is not valid'
         }
       };

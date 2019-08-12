@@ -9,7 +9,11 @@ import Div from 'hometown-components/lib/Div';
 import { validateEmail, isBlank } from 'js-utility-functions';
 import { validateMobile } from 'utils/validation';
 import { updateUserProfile } from 'redux/modules/profile';
-import { allowNChar, allowTypeOf, isGSTNumber } from 'utils/helper';
+import {
+  // allowNChar,
+  // allowTypeOf,
+  isGSTNumber
+} from 'utils/helper';
 
 @connect(({ profile }) => ({
   profile: profile.data,
@@ -61,26 +65,26 @@ export default class ProfileForm extends Component {
       gst
     });
   }
-  onChangePhone = e => {
-    const {
-      target: { value }
-    } = e;
-    const checkError = !validateMobile(value);
-    if (!allowNChar(value, 10) || (!allowTypeOf(value, 'number') && value.length > 0)) {
-      return;
-    }
-    this.setState({
-      phone: value,
-      phoneError: checkError,
-      phoneErrorMessage:
-        value[0] === '0' ? 'Mobile number must not start with 0' : 'Enter 10 Digits Valid Mobile Number'
-    });
-  };
+  // onChangePhone = e => {
+  //   const {
+  //     target: { value }
+  //   } = e;
+  //   const checkError = !validateMobile(value);
+  //   if (!allowNChar(value, 10) || (!allowTypeOf(value, 'number') && value.length > 0)) {
+  //     return;
+  //   }
+  //   this.setState({
+  //     phone: value,
+  //     phoneError: checkError,
+  //     phoneErrorMessage:
+  //       value[0] === '0' ? 'Mobile number must not start with 0' : 'Enter 10 Digits Valid Mobile Number'
+  //   });
+  // };
   onChangeGST = e => {
     const {
       target: { value }
     } = e;
-    const checkError = !isGSTNumber(value);
+    const checkError = value && !isGSTNumber(value);
     this.setState({
       gst: value,
       gstError: checkError,
@@ -162,7 +166,7 @@ export default class ProfileForm extends Component {
                   gstFeedBackError={gstError}
                   gstFeedBackMessage={gstErrorMessage}
                   phone={phone}
-                  onChangePhone={this.onChangePhone}
+                  onChangePhone={() => {}}
                   phoneFeedBackError={phoneError}
                   phoneFeedBackMessage={phoneErrorMessage}
                   fullName={fullName}
