@@ -551,11 +551,23 @@ export const onChangeState = (formType, state) => ({
   formType,
   state
 });
-export const onChangePhone = (formType, phone) => ({
-  type: SET_PHONE,
-  formType,
-  phone
-});
+// export const onChangePhone = (formType, phone) => ({
+//   type: SET_PHONE,
+//   formType,
+//   phone
+// });
+export const onChangePhone = (formType, phone) => {
+  let phoneNumber = phone;
+  if (phoneNumber.length === 11 && phoneNumber[0] === '0') {
+    const i = phoneNumber.length - 10;
+    phoneNumber = phoneNumber.substring(i);
+  }
+  return {
+    type: SET_PHONE,
+    formType,
+    phone: phoneNumber
+  };
+};
 export const onChangeEmail = (formType, email) => ({
   type: SET_EMAIL,
   formType,
