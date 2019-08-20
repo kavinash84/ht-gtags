@@ -148,6 +148,17 @@ export const validateAddress = (value, key) => {
   return errorObject;
 };
 
+export const trimSpecialChar = text => {
+  const newText = text.replace(/[^a-zA-Z ]/g, '');
+  return newText;
+};
+
+export const checkSpecialChar = text => {
+  const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/; //eslint-disable-line
+  const check = format.test(text);
+  return check;
+};
+
 /*eslint-disable*/
 export const validateEmail = email =>
   /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(

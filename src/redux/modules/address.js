@@ -1,5 +1,12 @@
 // Validators
-import { isEmpty, pincode as pincodeIsValid, validateMobile, validateAddress } from 'utils/validation';
+import {
+  isEmpty,
+  pincode as pincodeIsValid,
+  validateMobile,
+  validateAddress,
+  trimSpecialChar,
+  checkSpecialChar
+} from 'utils/validation';
 import { allowNChar, allowTypeOf, isGSTNumber } from 'utils/helper';
 import { PINCODE_INFO } from 'helpers/apiUrls';
 import { loadCart } from './cart';
@@ -129,8 +136,11 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         [action.formType]: {
           ...state[action.formType],
-          fullName: action.name,
-          fullNameFeedBackError: isEmpty(action.name)
+          fullName: trimSpecialChar(action.name),
+          fullNameFeedBackError: isEmpty(action.name) || checkSpecialChar(action.name),
+          fullNameFeedBackMessage: checkSpecialChar(action.name)
+            ? 'Special Characters Not Allowed !'
+            : 'Name Cannot be Left Empty !'
         }
       };
     case SET_CITY:
