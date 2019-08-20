@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 const allowedOptions = () => ['CreditCard', 'DebitCard', 'NetBanking', 'Emi', 'CashOnDelivery', 'Wallet', 'EasyEmi'];
 
 export const getPaymentState = options =>
-  options.data.paymentData
+  options.data && options.data.paymentData
     ? options.data.paymentData
     : {
       paymentOSCConfig: {},

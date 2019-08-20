@@ -8,6 +8,8 @@ import * as actionCreators from 'redux/modules/pincode';
 
 const styles = require('./Pincode.scss');
 
+// const NO_RELOAD = ['/checkout/cart'];
+
 const onChange = (dispatcher, load) => e => {
   const {
     target: { value }

@@ -32,6 +32,13 @@ export default class PaymentSuccessContainer extends Component {
     const {
       error, data, history, isLoggedIn
     } = this.props;
+    const { error_message = '' } = data; //eslint-disable-line
+    if (error_message.indexOf('Order Success details not found') >= 0) {
+      if (isLoggedIn) {
+        return history.push('/my-orders');
+      }
+      return history.push('/');
+    }
     if (data === 'An internal server error occurred' || data.error_message === 'details not found') {
       if (isLoggedIn) {
         return history.push('/my-orders');
