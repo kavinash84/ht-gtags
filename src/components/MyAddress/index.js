@@ -12,7 +12,15 @@ import FormInput from 'hometown-components/lib/Forms/FormInput';
 import MyMenu from 'components/MyMenu';
 import { addAddress, updateAddress } from 'redux/modules/myaddress';
 // Validators
-import { isEmpty, pincode as validatePincode, validateEmail, validateMobile, validateAddress } from 'utils/validation';
+import {
+  isEmpty,
+  pincode as validatePincode,
+  validateEmail,
+  validateMobile,
+  validateAddress,
+  trimSpecialChar,
+  checkSpecialChar
+} from 'utils/validation';
 import { allowNChar, allowTypeOf, isGSTNumber } from 'utils/helper';
 
 const addIcon = require('../../../static/round-add_circle_outline.svg');
@@ -144,10 +152,13 @@ export default class DeliveryAddress extends Component {
     const {
       target: { value }
     } = e;
+    const { nameErrorMessage } = this.state;
     const checkError = isEmpty(value);
+    const check = checkSpecialChar(value);
     this.setState({
-      name: value,
-      nameError: checkError
+      name: trimSpecialChar(value),
+      nameError: checkError || check,
+      nameErrorMessage: check ? 'Special character not allowed !' : nameErrorMessage
     });
   };
   onChangeAddress = (e, key) => {
@@ -287,6 +298,14 @@ export default class DeliveryAddress extends Component {
       phone: '',
       name: ''
     });
+  };
+  checkDisabled = () => {
+    const {
+      address1Error, address2Error, address3Error, phoneError, pincodeError, nameError, gstError
+    } = this.state;
+    const check =
+      address1Error || address2Error || address3Error || phoneError || pincodeError || nameError || gstError;
+    return check;
   };
   render() {
     const {
@@ -552,6 +571,7 @@ export default class DeliveryAddress extends Component {
                       height="42px"
                       mt="1.5rem"
                       onClick={this.handleSubmit}
+                      disabled={this.checkDisabled()}
                     >
                       {loading ? 'Please wait ...' : 'Save'}
                     </Button>
