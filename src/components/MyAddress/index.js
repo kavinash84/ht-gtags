@@ -18,7 +18,7 @@ import {
   validateEmail,
   validateMobile,
   validateAddress,
-  trimSpecialChar,
+  // trimSpecialChar,
   checkSpecialChar
 } from 'utils/validation';
 import { allowNChar, allowTypeOf, isGSTNumber } from 'utils/helper';
@@ -156,7 +156,7 @@ export default class DeliveryAddress extends Component {
     const checkError = isEmpty(value);
     const check = checkSpecialChar(value);
     this.setState({
-      name: trimSpecialChar(value),
+      name: value,
       nameError: checkError || check,
       nameErrorMessage: check ? 'Special character not allowed !' : nameErrorMessage
     });
@@ -471,6 +471,7 @@ export default class DeliveryAddress extends Component {
                       height="42px"
                       mt="1.5rem"
                       onClick={this.handleSubmit}
+                      disabled={this.checkDisabled()}
                     >
                       {loading ? 'Please wait ...' : 'Save'}
                     </Button>

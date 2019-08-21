@@ -4,7 +4,7 @@ import {
   pincode as pincodeIsValid,
   validateMobile,
   validateAddress,
-  trimSpecialChar,
+  // trimSpecialChar,
   checkSpecialChar
 } from 'utils/validation';
 import { allowNChar, allowTypeOf, isGSTNumber } from 'utils/helper';
@@ -136,7 +136,7 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         [action.formType]: {
           ...state[action.formType],
-          fullName: trimSpecialChar(action.name),
+          fullName: action.name,
           fullNameFeedBackError: isEmpty(action.name) || checkSpecialChar(action.name),
           fullNameFeedBackMessage: checkSpecialChar(action.name)
             ? 'Special Characters Not Allowed !'
