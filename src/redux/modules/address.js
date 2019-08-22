@@ -466,7 +466,8 @@ export default function reducer(state = initialState, action = {}) {
     case TOGGLE_SHIPPING_IS_BILING:
       return {
         ...state,
-        shippingIsBilling: !state.shippingIsBilling
+        shippingIsBilling: !state.shippingIsBilling,
+        billing: !state.shippingIsBilling ? initialState.billing : state.billing
       };
 
     case CLEAR_SHIPPING:
