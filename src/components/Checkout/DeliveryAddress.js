@@ -412,7 +412,7 @@ class DeliveryAddress extends Component {
                         <AddressForm formType="shipping" isLoggedIn={isLoggedIn} userEmail={userEmail} />
                       </Div>
                     )}
-                    <Div col="12" pr="0" mt="1.5rem" hide>
+                    <Div col="12" pr="0" mt="1.5rem">
                       <div className="checkbox">
                         <input
                           type="checkbox"
