@@ -2,8 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LoginForm from 'hometown-components/lib/Forms/LoginForm';
+import Div from 'hometown-components/lib/Div';
+import Text from 'hometown-components/lib/Text';
+import FormInput from 'hometown-components/lib/Forms/FormInput';
+import ResponsiveModal from 'components/Modal';
 import { validateEmail, isBlank } from 'js-utility-functions';
-import { login } from 'redux/modules/login';
+import { validateMobile } from 'utils/validation';
+import { allowNChar, allowTypeOf } from 'utils/helper';
+import { login, clearLoginState } from 'redux/modules/login';
 import { SIGNUP_URL, FORGOT_PASSWORD_URL } from 'helpers/Constants';
 
 @connect(state => ({
@@ -13,7 +19,9 @@ export default class LoginFormContainer extends Component {
   static propTypes = {
     loginResponse: PropTypes.shape({
       isLoggedIn: PropTypes.bool.isRequired
-    }).isRequired
+    }).isRequired,
+    askContact: PropTypes.bool.isRequired,
+    loginType: PropTypes.string.isRequired
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -25,7 +33,10 @@ export default class LoginFormContainer extends Component {
     emailErrorMessage: '',
     password: '',
     passwordError: false,
-    passwordErrorMessage: ''
+    passwordErrorMessage: '',
+    phone: '',
+    phoneError: false,
+    phoneErrorMessage: 'Enter Valid 10 Digit Phone Number'
   };
 
   onChangeEmail = e => {
@@ -52,10 +63,11 @@ export default class LoginFormContainer extends Component {
   };
   onSubmitLogin = e => {
     e.preventDefault();
-    const { email, password } = this.state;
+    const { email, password, phone } = this.state;
     const checkEmail = validateEmail(email, 'Invalid Email');
+    const checkMobile = phone ? !validateMobile(phone) : false;
     const checkPassword = isBlank(password);
-    if (checkEmail.error || checkPassword) {
+    if (checkEmail.error || checkPassword || checkMobile) {
       return this.setState({
         emailError: checkEmail.error,
         emailErrorMessage: checkEmail.errorMessage,
@@ -66,26 +78,92 @@ export default class LoginFormContainer extends Component {
     const { dispatch } = this.context.store;
     dispatch(login(this.state));
   };
+  onChangePhone = e => {
+    const {
+      target: { value }
+    } = e;
+    const checkError = !validateMobile(value);
+    if (!allowNChar(value, 10) || (!allowTypeOf(value, 'number') && value.length > 0)) {
+      return;
+    }
+    this.setState({
+      phone: value,
+      phoneError: checkError,
+      phoneErrorMessage:
+        value[0] === '0' ? 'Mobile Number Must Not Start With 0' : 'Enter 10 Digits Valid Mobile Number'
+    });
+  };
+  isValid = () => {
+    const value = this.state.phone;
+    const valid = !validateMobile(value);
+    return valid;
+  };
+  handleModal = () => {
+    const { dispatch } = this.context.store;
+    dispatch(clearLoginState());
+  };
   render() {
     const {
-      email, password, emailError, emailErrorMessage, passwordError, passwordErrorMessage
+      email,
+      password,
+      emailError,
+      emailErrorMessage,
+      passwordError,
+      passwordErrorMessage,
+      phone,
+      phoneError,
+      phoneErrorMessage
     } = this.state;
-    const { loginResponse } = this.props;
+    const { loginResponse, askContact, loginType } = this.props;
+    const open = askContact && loginType && loginType === 'hometown';
     return (
-      <LoginForm
-        email={email}
-        onChangeEmail={this.onChangeEmail}
-        emailFeedBackError={emailError}
-        emailFeedBackMessage={emailErrorMessage}
-        password={password}
-        onChangePassword={this.onChangePassword}
-        passwordFeedBackError={passwordError}
-        passwordFeedBackMessage={passwordErrorMessage}
-        onSubmitLogin={this.onSubmitLogin}
-        loginResponse={loginResponse}
-        signupUrl={SIGNUP_URL}
-        forgotUrl={FORGOT_PASSWORD_URL}
-      />
+      <div>
+        <LoginForm
+          email={email}
+          onChangeEmail={this.onChangeEmail}
+          emailFeedBackError={emailError}
+          emailFeedBackMessage={emailErrorMessage}
+          password={password}
+          onChangePassword={this.onChangePassword}
+          passwordFeedBackError={passwordError}
+          passwordFeedBackMessage={passwordErrorMessage}
+          onSubmitLogin={this.onSubmitLogin}
+          loginResponse={loginResponse}
+          signupUrl={SIGNUP_URL}
+          forgotUrl={FORGOT_PASSWORD_URL}
+        />
+        <ResponsiveModal onCloseModal={this.handleModal} open={open}>
+          <Div ta="center">
+            <Text ta="center" fontSize="1.25rem" mb="0.625rem" mt="0" color="rgba(51, 51, 51, 0.85)">
+              <form
+                onSubmit={this.onSubmitForm}
+                id="custom_form"
+                name="custom_form"
+                encType="multipart/form-data"
+                className="bulk-order-form"
+              >
+                <FormInput
+                  label="Please update your mobile number !"
+                  type="text"
+                  placeholder=""
+                  onChange={this.onChangePhone}
+                  value={phone}
+                  feedBackError={phoneError}
+                  feedBackMessage={phoneErrorMessage}
+                />
+              </form>
+              <button
+                style={{ backgroundColor: '#f98d29' }}
+                disabled={this.isValid()}
+                className="socialBtn"
+                onClick={this.onSubmitLogin}
+              >
+                Update Contact Number
+              </button>
+            </Text>
+          </Div>
+        </ResponsiveModal>
+      </div>
     );
   }
 }

@@ -68,8 +68,11 @@ class GoogleLogin extends Component {
     return valid;
   };
   render() {
-    const { loginViaLogin, session, askContact } = this.props;
+    const {
+      loginViaLogin, session, askContact, loginType
+    } = this.props;
     const { phone, phoneError, phoneErrorMessage } = this.state;
+    const open = askContact && loginType && loginType === 'google';
     return (
       <div>
         <GoogleLoginBtn
@@ -80,7 +83,7 @@ class GoogleLogin extends Component {
         >
           <Img display="inline-block" src={GoogleIcon} alt="Google" va="sub" width="18px" mr="10px" /> GOOGLE
         </GoogleLoginBtn>
-        <ResponsiveModal onCloseModal={this.handleModal} open={askContact}>
+        <ResponsiveModal onCloseModal={this.handleModal} open={open}>
           <Div ta="center">
             <Text ta="center" fontSize="1.25rem" mb="0.625rem" mt="0" color="rgba(51, 51, 51, 0.85)">
               <form
@@ -108,7 +111,7 @@ class GoogleLogin extends Component {
                 onSuccess={onSuccess(loginViaLogin, session, phone)}
                 onFailure={onError}
               >
-                Update
+                Update Contact Number
               </GoogleLoginBtn>
             </Text>
           </Div>
@@ -122,7 +125,8 @@ GoogleLogin.propTypes = {
   loginViaLogin: PropTypes.func.isRequired,
   clearLogin: PropTypes.func.isRequired,
   session: PropTypes.string.isRequired,
-  askContact: PropTypes.bool.isRequired
+  askContact: PropTypes.bool.isRequired,
+  loginType: PropTypes.string.isRequired
 };
 
 export default connect(

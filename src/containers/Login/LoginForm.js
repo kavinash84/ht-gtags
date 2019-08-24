@@ -29,7 +29,8 @@ const EmailIcon = require('../../../static/email-primary.svg');
   loaded: state.userLogin.loaded,
   loading: state.userLogin.loading,
   loggingIn: state.userLogin.loggingIn,
-  askContact: state.userLogin.askContact
+  askContact: state.userLogin.askContact,
+  loginType: state.userLogin.loginType
 }))
 export default class LoginFormContainer extends Component {
   static propTypes = {
@@ -39,7 +40,8 @@ export default class LoginFormContainer extends Component {
     loaded: PropTypes.bool,
     loading: PropTypes.bool,
     loggingIn: PropTypes.bool,
-    askContact: PropTypes.bool
+    askContact: PropTypes.bool,
+    loginType: PropTypes.string
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -51,7 +53,8 @@ export default class LoginFormContainer extends Component {
     loaded: false,
     loading: false,
     loggingIn: false,
-    askContact: false
+    askContact: false,
+    loginType: ''
   };
 
   state = {
@@ -152,7 +155,7 @@ export default class LoginFormContainer extends Component {
       resend
     } = this.state;
     const {
-      loaded, loading, loggingIn, askContact
+      loaded, loading, loggingIn, askContact, loginType
     } = this.props;
     const styles = require('./index.scss');
     return (
@@ -191,7 +194,7 @@ export default class LoginFormContainer extends Component {
               <Row display="block" mr="0" ml="0" pb="0">
                 <Div mt="0.675rem">
                   {!this.state.loginviaotp ? (
-                    <LoginForm />
+                    <LoginForm askContact={askContact} loginType={loginType} />
                   ) : (
                     <LoginViaOtp
                       onChangeMobile={this.onChangeMobile}
@@ -244,7 +247,7 @@ export default class LoginFormContainer extends Component {
                   </Button>
                 </Div>
                 <Div col="6" ta="center" mb="0" pl="0.625rem">
-                  <GoogleLoginBtn askContact={askContact} />
+                  <GoogleLoginBtn askContact={askContact} loginType={loginType} />
                 </Div>
               </Row>
             </div>

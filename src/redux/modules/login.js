@@ -29,7 +29,8 @@ const initialState = {
   askContact: false,
   otp: '',
   error: false,
-  errorMessage: ''
+  errorMessage: '',
+  loginType: ''
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -57,7 +58,8 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loggingIn: false,
         loginError: action.error,
-        askContact: action.error.askContact || false
+        askContact: action.error.askContact || false,
+        loginType: action.error.loginType || ''
       };
     case LOGIN_AFTER_SIGNUP:
       return {
@@ -142,15 +144,21 @@ export const login = data => ({
   promise: async ({ client }) => {
     try {
       /* eslint-disable max-len */
-      const username = data.otp ? data.mobile : data.email;
+      const username = data.otp ? `mobile=${data.mobile}` : `email=${data.email}`;
       const type = data.otp ? 'mobile' : 'email';
       const password = data.otp ? data.otp : data.password;
       const method = data.otp ? 'otp' : 'password';
-      const postData = `username=${username}&password=${password}&type=${type}&method=${method}&grant_type=password&client_id=${clientId}&client_secret=${clientSecret}`;
+      const mobile = data.phone || '';
+      const postData = `${username}&password=${password}&type=${type}&method=${method}&grant_type=password&client_id=${clientId}&client_secret=${clientSecret}&mobile=${mobile}`;
       const response = await client.post(LOGIN_API, postData);
       setToken({ client })(response);
       return response;
-    } catch (error) {
+      // throw { askContact: true };
+    } catch (err) {
+      const error = {
+        ...err,
+        loginType: 'hometown'
+      };
       throw error;
     }
   }
@@ -171,7 +179,12 @@ export const googleLogin = (token, session, phone) => ({
       const response = await client.post(GOOGLE_LOGIN_API, postData);
       await setToken({ client })(response);
       return response;
-    } catch (error) {
+      // throw { askContact: true };
+    } catch (err) {
+      const error = {
+        ...err,
+        loginType: 'google'
+      };
       throw error;
     }
   }
