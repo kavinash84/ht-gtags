@@ -148,8 +148,8 @@ export const login = data => ({
       const type = data.otp ? 'mobile' : 'email';
       const password = data.otp ? data.otp : data.password;
       const method = data.otp ? 'otp' : 'password';
-      const mobile = data.phone || '';
-      const postData = `${username}&password=${password}&type=${type}&method=${method}&grant_type=password&client_id=${clientId}&client_secret=${clientSecret}&mobile=${mobile}`;
+      const mobile = data.otp ? '' : `&mobile=${data.phone}`;
+      const postData = `${username}&password=${password}&type=${type}&method=${method}&grant_type=password&client_id=${clientId}&client_secret=${clientSecret}${mobile}`;
       const response = await client.post(LOGIN_API, postData);
       setToken({ client })(response);
       return response;

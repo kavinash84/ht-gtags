@@ -12,6 +12,8 @@ import { allowNChar, allowTypeOf } from 'utils/helper';
 import GoogleLoginBtn from 'react-google-login';
 import { googleLogin, clearLoginState } from 'redux/modules/login';
 
+const LoaderIcon = require('../../../static/refresh-black.svg');
+
 const mapStateToProps = ({ app }) => ({
   session: app.sessionId
 });
@@ -69,7 +71,7 @@ class GoogleLogin extends Component {
   };
   render() {
     const {
-      loginViaLogin, session, askContact, loginType
+      loginViaLogin, session, askContact, loginType, loading
     } = this.props;
     const { phone, phoneError, phoneErrorMessage } = this.state;
     const open = askContact && loginType && loginType === 'google';
@@ -111,7 +113,14 @@ class GoogleLogin extends Component {
                 onSuccess={onSuccess(loginViaLogin, session, phone)}
                 onFailure={onError}
               >
-                Update Contact Number
+                {loading ? (
+                  <span>
+                    Please Wait
+                    <Img className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />
+                  </span>
+                ) : (
+                  'Update Contact Number'
+                )}
               </GoogleLoginBtn>
             </Text>
           </Div>
@@ -126,7 +135,8 @@ GoogleLogin.propTypes = {
   clearLogin: PropTypes.func.isRequired,
   session: PropTypes.string.isRequired,
   askContact: PropTypes.bool.isRequired,
-  loginType: PropTypes.string.isRequired
+  loginType: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired
 };
 
 export default connect(

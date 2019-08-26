@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LoginForm from 'hometown-components/lib/Forms/LoginForm';
+import Img from 'hometown-components/lib/Img';
 import Div from 'hometown-components/lib/Div';
 import Text from 'hometown-components/lib/Text';
 import FormInput from 'hometown-components/lib/Forms/FormInput';
@@ -12,6 +13,8 @@ import { allowNChar, allowTypeOf } from 'utils/helper';
 import { login, clearLoginState } from 'redux/modules/login';
 import { SIGNUP_URL, FORGOT_PASSWORD_URL } from 'helpers/Constants';
 
+const LoaderIcon = require('../../../static/refresh-black.svg');
+
 @connect(state => ({
   loginResponse: state.userLogin
 }))
@@ -21,7 +24,8 @@ export default class LoginFormContainer extends Component {
       isLoggedIn: PropTypes.bool.isRequired
     }).isRequired,
     askContact: PropTypes.bool.isRequired,
-    loginType: PropTypes.string.isRequired
+    loginType: PropTypes.string.isRequired,
+    loading: PropTypes.bool.isRequired
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -114,7 +118,9 @@ export default class LoginFormContainer extends Component {
       phoneError,
       phoneErrorMessage
     } = this.state;
-    const { loginResponse, askContact, loginType } = this.props;
+    const {
+      loginResponse, askContact, loginType, loading
+    } = this.props;
     const open = askContact && loginType && loginType === 'hometown';
     return (
       <div>
@@ -158,7 +164,14 @@ export default class LoginFormContainer extends Component {
                 className="socialBtn"
                 onClick={this.onSubmitLogin}
               >
-                Update Contact Number
+                {loading ? (
+                  <span>
+                    Please Wait
+                    <Img className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />
+                  </span>
+                ) : (
+                  'Update Contact Number'
+                )}
               </button>
             </Text>
           </Div>
