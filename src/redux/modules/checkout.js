@@ -47,14 +47,23 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-export const sendDeliveryAddress = (sessionId, data, isLoggedIn) => (dispatch, getState) =>
+export const sendDeliveryAddress = (
+  sessionId,
+  data
+  // isLoggedIn
+) => (dispatch, getState) =>
   dispatch({
     types: [SEND_DELIVERY_ADDRESS, SEND_DELIVERY_ADDRESS_SUCCESS, SEND_DELIVERY_ADDRESS_FAIL],
     promise: async ({ client }) => {
       try {
         let postData;
         const { shippingAddress, billingAddress, shippingIsBilling } = data;
-        if (!isLoggedIn) {
+        const {
+          address: {
+            shipping: { address_id: addressId }
+          }
+        } = getState();
+        if (!shippingIsBilling) {
           postData = {
             session_id: sessionId,
             email: shippingAddress.email,
@@ -68,7 +77,8 @@ export const sendDeliveryAddress = (sessionId, data, isLoggedIn) => (dispatch, g
               address1: shippingAddress.address1,
               address2: shippingAddress.address2,
               address3: shippingAddress.address3,
-              gst: shippingAddress.gst
+              gst: shippingAddress.gst,
+              address_id: addressId || ''
             },
             is_billing_address_same: shippingIsBilling,
             billing_info: {
@@ -79,46 +89,11 @@ export const sendDeliveryAddress = (sessionId, data, isLoggedIn) => (dispatch, g
               address1: billingAddress.address1,
               address2: billingAddress.address2,
               address3: billingAddress.address3,
-              gst: billingAddress.gst
-            }
-          };
-        } else {
-          const {
-            address: {
-              shipping: { address_id: addressId }
-            }
-          } = getState();
-          postData = {
-            session_id: sessionId,
-            email: shippingAddress.email,
-            fullname: shippingAddress.fullName,
-            mobile: shippingAddress.phone,
-            shipping_info: {
-              email: shippingAddress.email,
-              fullname: shippingAddress.fullName,
-              mobile: shippingAddress.phone,
-              pincode: shippingAddress.pincode,
-              address1: shippingAddress.address1,
-              address2: shippingAddress.address2,
-              address3: shippingAddress.address3,
-              gst: shippingAddress.gst,
-              address_id: addressId
-            },
-            is_billing_address_same: shippingIsBilling,
-            billing_form: {
-              email: shippingAddress.email,
-              fullname: shippingAddress.fullName,
-              mobile: shippingAddress.phone,
-              pincode: shippingAddress.pincode,
-              address1: shippingAddress.address1,
-              address2: shippingAddress.address2,
-              address3: shippingAddress.address3,
-              gst: shippingAddress.gst,
-              address_id: addressId
+              gst: billingAddress.gst,
+              address_id: addressId || ''
             }
           };
         }
-
         return client.post(CUSTOMER_REGISTRATION, postData);
       } catch (error) {
         throw error;
