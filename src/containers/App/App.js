@@ -175,7 +175,10 @@ export default class App extends Component {
     return (
       <ThemeProvider theme={Theme}>
         <div className={styles.app}>
-          <Helmet {...config.app.head} />
+          <Helmet {...config.app.head}>
+            <link rel="alternate" media="only screen and (max-width:640px)" href={`https://m.hometown.in${pathname}`} />
+            <link rel="canonical" href={`${SITE_URL}${pathname}`} />
+          </Helmet>
           {process.env.NODE_ENV !== 'development' && (
             <Helmet {...config.app.head}>
               <script type="text/javascript">
@@ -219,8 +222,6 @@ export default class App extends Component {
               </script>
             </Helmet>
           )}
-          <link rel="alternate" media="only screen and (max-width:640px)" href={`https://m.hometown.in${pathname}`} />
-          <link rel="canonical" href={`${SITE_URL}${pathname}`} />
           <main className={styles.appContent}>
             <div className="container">
               <Notifs namespace="global" NotifComponent={props => <Alert {...props} show={notifs.global.length} />} />

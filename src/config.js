@@ -36,8 +36,8 @@ module.exports = Object.assign(
           { property: 'og:creator', content: 'HomeTown-Tech' },
           { property: 'og:image:width', content: '200' },
           { property: 'og:image:height', content: '200' }
-        ],
-        link: [{ rel: 'alternate', media: 'only screen and (max-width:640px)', href: 'https://m.hometown.in' }]
+        ]
+        // link: [{ rel: 'alternate', media: 'only screen and (max-width:640px)', href: 'https://m.hometown.in' }]
       }
     }
   },
