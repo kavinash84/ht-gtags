@@ -93,6 +93,36 @@ export const sendDeliveryAddress = (
               address_id: addressId || ''
             }
           };
+        } else {
+          postData = {
+            session_id: sessionId,
+            email: shippingAddress.email,
+            fullname: shippingAddress.fullName,
+            mobile: shippingAddress.phone,
+            shipping_info: {
+              email: shippingAddress.email,
+              fullname: shippingAddress.fullName,
+              mobile: shippingAddress.phone,
+              pincode: shippingAddress.pincode,
+              address1: shippingAddress.address1,
+              address2: shippingAddress.address2,
+              address3: shippingAddress.address3,
+              gst: shippingAddress.gst,
+              address_id: addressId || ''
+            },
+            is_billing_address_same: shippingIsBilling,
+            billing_info: {
+              email: shippingAddress.email,
+              fullname: shippingAddress.fullName,
+              mobile: shippingAddress.phone,
+              pincode: shippingAddress.pincode,
+              address1: shippingAddress.address1,
+              address2: shippingAddress.address2,
+              address3: shippingAddress.address3,
+              gst: shippingAddress.gst,
+              address_id: addressId || ''
+            }
+          };
         }
         return client.post(CUSTOMER_REGISTRATION, postData);
       } catch (error) {
