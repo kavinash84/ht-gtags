@@ -268,11 +268,15 @@ class DeliveryAddress extends Component {
         }));
       } else {
         const { sessionId } = this.props;
-        dispatch(sendDeliveryAddress(sessionId, {
-          shippingIsBilling,
-          shippingAddress: shippingForm.data,
-          billingAddress: billingForm.data
-        }));
+        dispatch(sendDeliveryAddress(
+          sessionId,
+          {
+            shippingIsBilling,
+            shippingAddress: shippingForm.data,
+            billingAddress: billingForm.data
+          },
+          isLoggedIn
+        ));
       }
     }
   };
