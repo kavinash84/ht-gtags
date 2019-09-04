@@ -1,4 +1,5 @@
 import { CUSTOMER_REGISTRATION } from 'helpers/apiUrls';
+// import { load } from './paymentoptions';
 
 const SEND_DELIVERY_ADDRESS = 'checkout/SEND_DELIVERY_ADDRESS';
 const SEND_DELIVERY_ADDRESS_SUCCESS = 'checkout/SEND_DELIVERY_ADDRESS_SUCCESS';
@@ -10,7 +11,8 @@ const initialState = {
   loading: false,
   loaded: false,
   error: '',
-  nextstep: false
+  nextstep: false,
+  paymentData: {}
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -28,6 +30,7 @@ export default function reducer(state = initialState, action = {}) {
         loading: false,
         loaded: true,
         nextstep: action.result,
+        paymentData: action.result.paymentData,
         error: ''
       };
     case SEND_DELIVERY_ADDRESS_FAIL:
@@ -57,7 +60,9 @@ export const sendDeliveryAddress = (
     promise: async ({ client }) => {
       try {
         let postData;
-        const { shippingAddress, billingAddress, shippingIsBilling } = data;
+        const {
+          shippingAddress, billingAddress, shippingIsBilling, cartTotal = 0
+        } = data;
         const {
           address: {
             shipping: { address_id: addressId }
@@ -69,6 +74,7 @@ export const sendDeliveryAddress = (
             email: shippingAddress.email,
             fullname: shippingAddress.fullName,
             mobile: shippingAddress.phone,
+            cartTotal,
             shipping_info: {
               email: shippingAddress.email,
               fullname: shippingAddress.fullName,
@@ -99,6 +105,7 @@ export const sendDeliveryAddress = (
             email: shippingAddress.email,
             fullname: shippingAddress.fullName,
             mobile: shippingAddress.phone,
+            cartTotal,
             shipping_info: {
               email: shippingAddress.email,
               fullname: shippingAddress.fullName,
