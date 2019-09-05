@@ -18,7 +18,22 @@ const adjustSlides = () => ({
   autoplay: false,
   infinite: false
 });
-
+const cleanTail = url => {
+  if (url[url.length - 1] === '/') {
+    return url.substring(0, url.length - 1);
+  }
+  return url;
+};
+const formatLink = url => {
+  const paramLink = url.split('/').filter(z => z !== '');
+  if (paramLink.length >= 4) {
+    paramLink.splice(1, 1);
+  }
+  const newLink = paramLink.join('/');
+  const sanitizedUrl = cleanTail(newLink);
+  const newURL = sanitizedUrl.replace('catalog/', '');
+  return newURL;
+};
 const CategoryBar = ({ categoryBar, pathname }) => {
   if (pathname[pathname.length - 1] === '/') {
     pathname = pathname.slice(0, -1);
@@ -29,25 +44,27 @@ const CategoryBar = ({ categoryBar, pathname }) => {
         <Row justifyContent="center" className="categoryBarCarousel" mt="0" mb="-1rem">
           <SlickSlider settings={adjustSlides()}>
             {categoryBar &&
-              categoryBar.filter(list => list.show_l4 === '1').map((item, index) => (
-                <Div
-                  key={String(index)}
-                  className={`${styles.categoryBlock} ${pathname === `/${item.url_key}` ? styles.active : ''}`}
-                  col="12"
-                  display="flex"
-                  pb="0.625rem"
-                  pt="0.625rem"
-                >
-                  <Link to={`/${item.url_key}`} key={item.name}>
-                    <ImageShimmer src={item.icon_url} height="80px">
-                      {imageURL => <Img width="80px" m="auto" src={imageURL} alt={item.name} />}
-                    </ImageShimmer>
-                    <Label mt="0" mb="0" display="block" ta="center">
-                      {item.name}
-                    </Label>
-                  </Link>
-                </Div>
-              ))}
+              categoryBar
+                .filter(list => list.show_l4 === '1')
+                .map((item, index) => (
+                  <Div
+                    key={String(index)}
+                    className={`${styles.categoryBlock} ${pathname === `/${item.url_key}` ? styles.active : ''}`}
+                    col="12"
+                    display="flex"
+                    pb="0.625rem"
+                    pt="0.625rem"
+                  >
+                    <Link to={`/${formatLink(item.url_key)}`} key={item.name}>
+                      <ImageShimmer src={item.icon_url} height="80px">
+                        {imageURL => <Img width="80px" m="auto" src={imageURL} alt={item.name} />}
+                      </ImageShimmer>
+                      <Label mt="0" mb="0" display="block" ta="center">
+                        {item.name}
+                      </Label>
+                    </Link>
+                  </Div>
+                ))}
           </SlickSlider>
         </Row>
       </Container>

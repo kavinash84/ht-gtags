@@ -168,10 +168,18 @@ export default class App extends Component {
       window.scrollTo(0, 0);
     }
   }
+  checkIfSlash = path => {
+    let url = path;
+    if (path.length && path[path.length - 1] !== '/') {
+      url = url.concat('/');
+    }
+    return url;
+  };
   render() {
     const styles = require('./App.scss');
     const { location, route, notifs } = this.props;
     const pathname = (location && location.pathname) || '/';
+    const url = this.checkIfSlash(pathname);
     return (
       <ThemeProvider theme={Theme}>
         <div className={styles.app}>
@@ -182,7 +190,7 @@ export default class App extends Component {
                 media="only screen and (max-width:640px)"
                 href={`https://m.hometown.in${pathname}`}
               />
-              <link rel="canonical" href={`${SITE_URL}${pathname}`} />
+              <link rel="canonical" href={`${SITE_URL}${url}`} />
               <script type="text/javascript">
                 {`
                     var dataLayer = [];
