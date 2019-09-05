@@ -170,8 +170,8 @@ export default class App extends Component {
   }
   checkIfSlash = path => {
     let url = path;
-    if (path.length && path[path.length - 1] !== '/') {
-      url = url.concat('/');
+    if (path.length && path[path.length - 1] === '/') {
+      url = path.slice(0, path.length - 1);
     }
     return url;
   };
