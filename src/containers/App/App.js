@@ -188,7 +188,7 @@ export default class App extends Component {
               <link
                 rel="alternate"
                 media="only screen and (max-width:640px)"
-                href={`https://m.hometown.in${pathname}`}
+                href={`https://m.hometown.in${pathname !== '/' ? pathname : ''}`}
               />
               <link rel="canonical" href={`${SITE_URL}${url}`} />
               <script type="text/javascript">
