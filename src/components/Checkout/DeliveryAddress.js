@@ -285,7 +285,8 @@ class DeliveryAddress extends Component {
           {
             shippingIsBilling,
             shippingAddress: shippingForm.data,
-            billingAddress: billingForm.data
+            billingAddress: billingForm.data,
+            cartTotal
           },
           isLoggedIn
         ));
