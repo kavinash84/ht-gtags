@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Row from 'hometown-components/lib/Row';
+import Heading from 'hometown-components/lib/Heading';
 import Img from 'hometown-components/lib/Img';
 import Div from 'hometown-components/lib/Div';
 import Text from 'hometown-components/lib/Text';
@@ -85,7 +87,25 @@ class GoogleLogin extends Component {
         >
           <Img display="inline-block" src={GoogleIcon} alt="Google" va="sub" width="18px" mr="10px" /> GOOGLE
         </GoogleLoginBtn>
-        <ResponsiveModal onCloseModal={this.handleModal} open={open}>
+        <ResponsiveModal classNames={{ modal: 'updateProfileModal' }} onCloseModal={this.handleModal} open={open}>
+          <Row display="block" mr="0" ml="0" mb="10px">
+            <Div col="12" ta="center">
+              <Heading
+                color="color676767"
+                mt="0"
+                mb="0"
+                fontWeight="400"
+                fontSize="26px"
+                ta="center"
+                fontFamily="light"
+              >
+                {'Update Profile'}
+              </Heading>
+              <Text color="color676767" ta="center">
+                {'Mobile number is required to login'}
+              </Text>
+            </Div>
+          </Row>
           <Div ta="center">
             <Text ta="center" fontSize="1.25rem" mb="0.625rem" mt="0" color="rgba(51, 51, 51, 0.85)">
               <form
@@ -96,7 +116,7 @@ class GoogleLogin extends Component {
                 className="bulk-order-form"
               >
                 <FormInput
-                  label="Please update your mobile number !"
+                  label=""
                   type="text"
                   placeholder=""
                   onChange={this.onChangePhone}
@@ -106,9 +126,8 @@ class GoogleLogin extends Component {
                 />
               </form>
               <GoogleLoginBtn
-                style={{ backgroundColor: '#f98d29' }}
                 disabled={this.isValid()}
-                className="socialBtn"
+                className="google-login-btn"
                 clientId="663311547699-jersj1hfflbl8gfukgsuvug8u1gc88nm.apps.googleusercontent.com"
                 onSuccess={onSuccess(loginViaLogin, session, phone)}
                 onFailure={onError}
