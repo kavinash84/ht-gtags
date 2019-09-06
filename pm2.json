@@ -30,7 +30,7 @@
         "NODE_ENV": "production",
         "PORT": 8084,
         "NODE_PATH": "src",
-        "APIHOST": "api.hometown.in/api/",
+        "APIHOST": "stage-api.hometown.in/api/",
         "APIPORT": 443,
         "SITE_URL": "https://stage.hometown.in",
         "PAYMENT_URL": "https://stage-alice.hometown.in/checkout/finish/payment/",
