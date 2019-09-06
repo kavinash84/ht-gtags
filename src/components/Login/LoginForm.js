@@ -140,7 +140,7 @@ export default class LoginFormContainer extends Component {
           signupUrl={SIGNUP_URL}
           forgotUrl={FORGOT_PASSWORD_URL}
         />
-        <ResponsiveModal onCloseModal={this.handleModal} open={open}>
+        <ResponsiveModal classNames={{ modal: 'updateProfileModal' }} onCloseModal={this.handleModal} open={open}>
           <Row display="block" mr="0" ml="0" mb="10px">
             <Div col="12" ta="center">
               <Heading
