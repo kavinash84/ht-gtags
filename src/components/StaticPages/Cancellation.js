@@ -63,7 +63,7 @@ const Cancellation = () => (
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
               In the event that a product is listed at an incorrect price or with incorrect information due to an system
               error product information/Pricing , HomeTown shall have the right, at our sole discretion, to refuse or
-              cancel any orders placed for that product, unless the product has already been dispatched.
+              cancel any orders placed for that product.
             </Text>
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
               HomeTown reserves the right to cancel any order with due intimation to the concerned person, under
@@ -75,7 +75,7 @@ const Cancellation = () => (
             <Text color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
               In the event that a product is ordered is not serviceable to customers location (pin code) and an order
               gets placed due to system errors , HomeTown shall have the right, at our sole discretion, to refuse or
-              cancel any orders placed for that product, unless the product has already been dispatched.
+              cancel any orders placed for that product.
             </Text>
           </Div>
           <Div>
