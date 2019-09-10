@@ -56,6 +56,7 @@ const initial = {
 };
 
 const onChangeGateway = (dispatcher, value, session) => () => {
+  // Disabling this api call under api migration as this api has no use in backend
   dispatcher(value, initial[value], session);
 };
 

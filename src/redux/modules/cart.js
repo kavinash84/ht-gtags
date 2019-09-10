@@ -241,12 +241,19 @@ const setCurrentKey = key => ({
   type: SET_CURRENT_KEY,
   payLoad: key
 });
-
+const setAppAuth = ({ client }) => async response => {
+  const { csrfToken, session } = response;
+  if (csrfToken && session) {
+    await client.setCSRFToken(csrfToken);
+    await client.setSessionId(session);
+  }
+};
 export const loadCart = (session, pincode) => ({
   types: [LOAD_CART, LOAD_CART_SUCCESS, LOAD_CART_FAIL],
   promise: async ({ client }) => {
     try {
       const response = await client.get(`${ADDTOCART_API}/${session}/${pincode}`);
+      await setAppAuth({ client })(response);
       return response;
     } catch (error) {
       throw error;
