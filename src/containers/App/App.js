@@ -42,6 +42,12 @@ const SITE_URL_MOBILE = 'https://m.hometown.in';
     if (!isSectionLoaded(getState(), 'banners')) {
       await wrapDispatch(dispatch, 'banners')(loadBanners()).catch(error => console.log(error));
     }
+    if (!isSectionLoaded(getState(), 'categories')) {
+      await wrapDispatch(dispatch, 'categories')(loadCategories()).catch(error => console.log(error));
+    }
+    if (getState().userLogin.isLoggedIn && !isProfileLoaded(getState())) {
+      await dispatch(loadUserProfile()).catch(error => console.log(error));
+    }
     if (sessionId && !isCartLoaded(getState())) {
       await dispatch(loadCart(sessionId, defaultPincode)).catch(error => console.log(error));
     }
@@ -50,9 +56,9 @@ const SITE_URL_MOBILE = 'https://m.hometown.in';
     const {
       userLogin: { isLoggedIn, loggingOut }
     } = getState();
-    if (!isSectionLoaded(getState(), 'categories')) {
-      wrapDispatch(dispatch, 'categories')(loadCategories()).catch(error => error);
-    }
+    // if (!isSectionLoaded(getState(), 'categories')) {
+    //   wrapDispatch(dispatch, 'categories')(loadCategories()).catch(error => error);
+    // }
     if (isLoggedIn && !loggingOut && !isWishListLoaded(getState())) {
       dispatch(loadWishlist());
     }
