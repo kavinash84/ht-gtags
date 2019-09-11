@@ -24,6 +24,7 @@ import Notifs from 'components/Notifs';
 import { isKeyExists } from 'utils/helper';
 
 const { SITE_URL } = process.env;
+const SITE_URL_MOBILE = 'https://m.hometown.in';
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState } }) => {
@@ -185,11 +186,7 @@ export default class App extends Component {
         <div className={styles.app}>
           {process.env.NODE_ENV !== 'development' && (
             <Helmet {...config.app.head}>
-              <link
-                rel="alternate"
-                media="only screen and (max-width:640px)"
-                href={`https://m.hometown.in${pathname !== '/' ? pathname : ''}`}
-              />
+              <link rel="alternate" media="only screen and (max-width:640px)" href={`${SITE_URL_MOBILE}${url}`} />
               <link rel="canonical" href={`${SITE_URL}${url}`} />
               <script type="text/javascript">
                 {`
