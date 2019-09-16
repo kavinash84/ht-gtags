@@ -30,7 +30,8 @@ const initialState = {
   otp: '',
   error: false,
   errorMessage: '',
-  loginType: ''
+  loginType: '',
+  prevToken: ''
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -51,7 +52,8 @@ export default function reducer(state = initialState, action = {}) {
         accessToken: action.result.access_token,
         refreshToken: action.result.refresh_token,
         meta: action.result.meta,
-        loginError: ''
+        loginError: '',
+        prevToken: ''
       };
     case LOGIN_FAIL:
       return {
@@ -59,7 +61,8 @@ export default function reducer(state = initialState, action = {}) {
         loggingIn: false,
         loginError: action.error,
         askContact: action.error.askContact || false,
-        loginType: action.error.loginType || ''
+        loginType: action.error.loginType || '',
+        prevToken: action.error.askContact && action.error.token ? action.error.token : ''
       };
     case LOGIN_AFTER_SIGNUP:
       return {
@@ -164,31 +167,36 @@ export const login = data => ({
   }
 });
 
-export const googleLogin = (token, session, phone) => ({
-  types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
-  promise: async ({ client }) => {
-    try {
-      const postData = {
-        token,
-        client_secret: clientSecret,
-        client_id: clientId,
-        grant_type: 'password',
-        session_id: session,
-        phone
-      };
-      const response = await client.post(GOOGLE_LOGIN_API, postData);
-      await setToken({ client })(response);
-      return response;
-      // throw { askContact: true };
-    } catch (err) {
-      const error = {
-        ...err,
-        loginType: 'google'
-      };
-      throw error;
+export const googleLogin = (newToken, session, phone) => (dispatch, getState) =>
+  dispatch({
+    types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
+    promise: async ({ client }) => {
+      const {
+        userLogin: { prevToken }
+      } = getState();
+      try {
+        const postData = {
+          token: phone && prevToken ? prevToken : newToken,
+          client_secret: clientSecret,
+          client_id: clientId,
+          grant_type: 'password',
+          session_id: session,
+          phone
+        };
+        const response = await client.post(GOOGLE_LOGIN_API, postData);
+        await setToken({ client })(response);
+        return response;
+        // throw { askContact: true };
+      } catch (err) {
+        const error = {
+          ...err,
+          loginType: 'google',
+          token: newToken
+        };
+        throw error;
+      }
     }
-  }
-});
+  });
 
 export const loginUserAfterSignUp = data => ({
   type: LOGIN_AFTER_SIGNUP,
