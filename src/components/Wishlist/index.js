@@ -22,7 +22,9 @@ const getProductImage = images => {
 };
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ ...actionCreators, productPosition: setProductPosition }, dispatch);
-
+const mapStateToProps = ({ pincode }) => ({
+  selectedPincode: pincode.selectedPincode
+});
 const onClick = (list, dispatcher) => sku => e => {
   e.preventDefault();
   dispatcher(list, sku);
@@ -57,7 +59,7 @@ class Wishlist extends React.Component {
 
   render() {
     const {
-      list, toggleWishList, wishList, loadingList, productPosition
+      list, toggleWishList, wishList, loadingList, productPosition, selectedPincode
     } = this.props;
     const { quickViewSku, openQuickView, simpleSku } = this.state;
     return (
@@ -93,6 +95,8 @@ class Wishlist extends React.Component {
                     ? formatAmount(Number(item.product_info.data.max_price) - Number(item.product_info.data.max_special_price))
                     : 0
                 }
+                deliveredBy={item.wishlist_info.delivery_details && item.wishlist_info.delivery_details[0].value}
+                pincode={selectedPincode}
                 setProductPosition={productPosition}
                 productURL={formatProductURL(item.product_info.data.name, item.product_info.data.sku)}
               />
@@ -131,7 +135,8 @@ class Wishlist extends React.Component {
 Wishlist.defaultProps = {
   wishList: [],
   list: [],
-  loadingList: []
+  loadingList: [],
+  selectedPincode: ''
 };
 
 Wishlist.propTypes = {
@@ -139,10 +144,11 @@ Wishlist.propTypes = {
   productPosition: PropTypes.func.isRequired,
   wishList: PropTypes.array,
   list: PropTypes.array,
-  loadingList: PropTypes.array
+  loadingList: PropTypes.array,
+  selectedPincode: PropTypes.string
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Wishlist);

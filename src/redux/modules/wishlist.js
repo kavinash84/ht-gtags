@@ -127,7 +127,7 @@ const isSKUWishlisted = (list, skuId) => list.find(sku => sku.wishlist_info.conf
 
 export const isLoaded = globalState => globalState.wishlist && globalState.wishlist.loaded;
 
-export const toggleWishList = (list, sku, simpleSku) => dispatch => {
+export const toggleWishList = (list, sku, simpleSku, selectedPincode) => dispatch => {
   const checkList = isSKUWishlisted(list, sku);
   if (checkList) {
     const wishListID = checkList.wishlist_info.id_customer_wishlist;
@@ -154,7 +154,8 @@ export const toggleWishList = (list, sku, simpleSku) => dispatch => {
         const postData = {
           comment: '',
           configurable_sku: sku,
-          simple_sku: simpleSku
+          simple_sku: simpleSku,
+          pincode: selectedPincode
         };
         const response = await client.post(WISHLIST, postData);
         await dispatch(removeLoadingState(sku));
@@ -168,7 +169,9 @@ export const toggleWishList = (list, sku, simpleSku) => dispatch => {
 };
 
 export const loadWishlist = () => (dispatch, getState) => {
-  const { pincode: { selectedPincode } } = getState();
+  const {
+    pincode: { selectedPincode }
+  } = getState();
   try {
     return dispatch({
       types: [LOAD_WISHLIST, LOAD_WISHLIST_SUCCESS, LOAD_WISHLIST_FAIL],
@@ -191,7 +194,12 @@ export const wishListWaitList = (sku, simpleSku) => ({
 
 export const syncWishList = () => async (dispatch, getState) => {
   await dispatch(loadWishlist());
-  const { wishlist: { data: list, waitlist: { sku, simpleSku } } } = getState();
+  const {
+    wishlist: {
+      data: list,
+      waitlist: { sku, simpleSku }
+    }
+  } = getState();
   const checkList = isSKUWishlisted(list, sku);
   if (!checkList) {
     dispatch(setLoadingState(sku));
