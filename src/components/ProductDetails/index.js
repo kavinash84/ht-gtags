@@ -46,9 +46,18 @@ const styles = require('./ProductDetails.scss');
 
 const { SITE_URL } = process.env;
 
-const onClickWishList = (sku, list, dispatcher, isUserLoggedIn, onOpenLoginModal, addToWaitList, simpleSku) => e => {
+const onClickWishList = (
+  sku,
+  list,
+  dispatcher,
+  isUserLoggedIn,
+  onOpenLoginModal,
+  addToWaitList,
+  simpleSku,
+  selectedPincode
+) => e => {
   e.preventDefault();
-  if (isUserLoggedIn) return dispatcher(list, sku, simpleSku);
+  if (isUserLoggedIn) return dispatcher(list, sku, simpleSku, selectedPincode);
   addToWaitList(sku, simpleSku);
   return onOpenLoginModal();
 };
@@ -267,7 +276,8 @@ class ProductDetails extends React.Component {
                           isLoggedIn,
                           this.handleLoginModal,
                           addToWaitList,
-                          simpleSku
+                          simpleSku,
+                          pincode.selectedPincode
                         )}
                         isWishList={isInWishList(wishList, sku)}
                         wishlistLoading={isInWishList(loadingList, sku)}
