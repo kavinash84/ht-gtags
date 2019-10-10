@@ -101,7 +101,8 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         waitlist: {
           sku: action.sku,
-          simpleSku: action.simpleSku
+          simpleSku: action.simpleSku,
+          selectedPincode: action.selectedPincode
         }
       };
     case CLEAR_WISHLIST:
@@ -186,10 +187,11 @@ export const clearWishList = () => ({
   type: CLEAR_WISHLIST
 });
 
-export const wishListWaitList = (sku, simpleSku) => ({
+export const wishListWaitList = (sku, simpleSku, selectedPincode) => ({
   type: ADD_TO_WISHLIST_WAITLIST,
   sku,
-  simpleSku
+  simpleSku,
+  selectedPincode
 });
 
 export const syncWishList = () => async (dispatch, getState) => {
@@ -197,7 +199,7 @@ export const syncWishList = () => async (dispatch, getState) => {
   const {
     wishlist: {
       data: list,
-      waitlist: { sku, simpleSku }
+      waitlist: { sku, simpleSku, selectedPincode }
     }
   } = getState();
   const checkList = isSKUWishlisted(list, sku);
@@ -210,7 +212,8 @@ export const syncWishList = () => async (dispatch, getState) => {
           const postData = {
             comment: '',
             configurable_sku: sku,
-            simple_sku: simpleSku
+            simple_sku: simpleSku,
+            pincode: selectedPincode
           };
           const response = await client.post(WISHLIST, postData);
           await dispatch(removeLoadingState(sku));
