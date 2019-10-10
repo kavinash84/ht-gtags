@@ -58,7 +58,7 @@ const onClickWishList = (
 ) => e => {
   e.preventDefault();
   if (isUserLoggedIn) return dispatcher(list, sku, simpleSku, selectedPincode);
-  addToWaitList(sku, simpleSku);
+  addToWaitList(sku, simpleSku, selectedPincode);
   return onOpenLoginModal();
 };
 
