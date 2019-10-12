@@ -65,8 +65,13 @@ class Wishlist extends React.Component {
     return (
       <Section display="flex" p="0" pt="2.5rem" mb="2rem">
         <Container type="container" pr="0" pl="0">
-          {list.map(item => (
-            <div key={item.product_info.id} className={styles.productWrapper}>
+          {list.map((item, i) => (
+            <div
+              key={`${
+                item.wishlist_info && item.wishlist_info.configurable_sku ? item.wishlist_info.configurable_sku : ''
+              }_${String(i)}`}
+              className={styles.productWrapper}
+            >
               <Product
                 key={item.product_info.id}
                 name={item.product_info.data.name}
