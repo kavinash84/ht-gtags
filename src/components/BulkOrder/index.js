@@ -194,11 +194,11 @@ class BulkOrder extends React.Component {
                   className="bulk-order-form"
                 >
                   <div className={styles.formList}>
-                    <Text ta="center" mt="0" mb="15px" fontSize="26px">
+                    <Text ta="center" mt="0" mb="15px" fontSize="36px">
                       {'Corporate Gifting'}
                     </Text>
-                    <Row>
-                      <Div col="12">
+                    <Row ml="-15px" mr="-15px">
+                      <Div col="6" pl="15px" pr="15px">
                         <FormInput
                           label="Name*"
                           type="text"
@@ -209,7 +209,7 @@ class BulkOrder extends React.Component {
                           feedBackMessage={nameErrorMessage}
                         />
                       </Div>
-                      <Div col="12">
+                      <Div col="6" pl="15px" pr="15px">
                         <FormInput
                           label="Email*"
                           type="text"
@@ -220,7 +220,7 @@ class BulkOrder extends React.Component {
                           feedBackMessage={emailErrorMessage}
                         />
                       </Div>
-                      <Div col="12">
+                      <Div col="6" pl="15px" pr="15px">
                         <FormInput
                           label="Mobile No.*"
                           type="text"
@@ -231,7 +231,7 @@ class BulkOrder extends React.Component {
                           feedBackMessage={phoneErrorMessage}
                         />
                       </Div>
-                      <Div col="12">
+                      <Div col="6" pl="15px" pr="15px">
                         <InputField mb="0.625rem">
                           <Label fontSize="0.875em" mb="0.625rem">
                             {'Category*'}
@@ -248,7 +248,7 @@ class BulkOrder extends React.Component {
                           </select>
                         </InputField>
                       </Div>
-                      <Div col="12">
+                      <Div col="6" pl="15px" pr="15px">
                         <FormInput
                           label="Budget*"
                           type="text"
@@ -259,7 +259,7 @@ class BulkOrder extends React.Component {
                           feedBackMessage={budgetErrorMessage}
                         />
                       </Div>
-                      <Div col="12">
+                      <Div col="6" pl="15px" pr="15px">
                         <FormInput
                           label="Quantity*"
                           type="text"
@@ -271,17 +271,17 @@ class BulkOrder extends React.Component {
                         />
                       </Div>
                     </Row>
-                    <Row>
-                      <Div col="12">
+                    <Row ml="-15px" mr="-15px" mb="20px">
+                      <Div col="12" pl="15px" pr="15px" ta="center">
                         <div className="buttons-set">
                           <Button
                             onClick={this.onSubmitForm}
-                            btnType="primary"
+                            btnType="bulkOrderSubmit"
                             mt="0.625rem"
                             title="Submit"
                             type="submit"
                           >
-                            {'Submit'}
+                            {'REQUEST A CALLBACK'}
                           </Button>
                         </div>
                       </Div>
@@ -295,7 +295,7 @@ class BulkOrder extends React.Component {
             <Div className={styles.divider} />
           </Row>
           <Div ta="center">
-            <HeadingH4 fontSize="20px" color="black">
+            <HeadingH4 fontSize="30px" color="black">
               WHY CHOOSE HOMETOWN FORGIFTS?
             </HeadingH4>
           </Div>
@@ -348,7 +348,7 @@ class BulkOrder extends React.Component {
             </Row>
           </Section>
           <Div mt="0px" ta="center">
-            <HeadingH4 fontSize="20px" color="black">
+            <HeadingH4 fontSize="30px" color="black">
               CHOOSE FROM OUR WIDE RANGE GIFTING HOMETOWN PRODUCTS
             </HeadingH4>
           </Div>
