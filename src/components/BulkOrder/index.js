@@ -354,7 +354,7 @@ class BulkOrder extends React.Component {
             </Row>
           </Section>
           <Div mt="0px" ta="center">
-            <HeadingH4 fontSize="30px" color="black">
+            <HeadingH4 fontSize="30px" color="black" style={{ marginBottom: '20px' }}>
               CHOOSE FROM OUR WIDE RANGE OF GIFTING HOMEWARE PRODUCTS
             </HeadingH4>
           </Div>
