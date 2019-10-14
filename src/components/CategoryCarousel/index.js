@@ -12,9 +12,12 @@ const adjustSlides = length => ({
   autoplaySpeed: 5000
 });
 
+const OFFER_ID = 5;
 export default class CategoryCarousel extends Component {
   render() {
-    const { data, categoryName, subTitle } = this.props;
+    const {
+      data, categoryName, subTitle, id
+    } = this.props;
     return (
       <Section p="0" pt="1.5rem" mb="0" className="catCarousel">
         <Container pr="0" pl="0">
@@ -22,7 +25,11 @@ export default class CategoryCarousel extends Component {
           <SlickSlider settings={adjustSlides(data.length)}>
             {data.map(slide => (
               <div key={slide.category_id}>
-                <CategoryCarouselItem image={slide.image_url} name={slide.info.name} url={slide.info.url_key} />
+                <CategoryCarouselItem
+                  image={slide.image_url}
+                  name={slide.info.name}
+                  url={OFFER_ID === id || OFFER_ID === parseInt(id, 10) ? '' : slide.info.url_key}
+                />
               </div>
             ))}
           </SlickSlider>
@@ -35,11 +42,13 @@ export default class CategoryCarousel extends Component {
 CategoryCarousel.defaultProps = {
   data: [],
   categoryName: '',
-  subTitle: ''
+  subTitle: '',
+  id: ''
 };
 
 CategoryCarousel.propTypes = {
   data: PropTypes.array,
   categoryName: PropTypes.string,
-  subTitle: PropTypes.string
+  subTitle: PropTypes.string,
+  id: PropTypes.string
 };

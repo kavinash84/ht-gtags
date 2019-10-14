@@ -2,6 +2,7 @@ import React from 'react';
 import Container from 'hometown-components/lib/Container';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import LazyLoad from 'react-lazyload';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
@@ -13,6 +14,7 @@ import Text from 'hometown-components/lib/Text';
 import HeadingH4 from 'hometown-components/lib/HeadingH4';
 import Button from 'hometown-components/lib/Buttons';
 import ResponsiveModal from 'components/Modal';
+import CategoryCarousel from 'components/CategoryCarousel';
 import { validateMobile, validateEmail, isEmpty } from 'utils/validation';
 import { allowNChar, allowTypeOf } from 'utils/helper';
 import { sendData } from 'redux/modules/services';
@@ -20,8 +22,11 @@ import { BULK_ORDER as BULK_ORDER_API } from 'helpers/apiUrls';
 
 const styles = require('./BulkOrder.scss');
 
-const mapStateToProps = ({ services }) => ({
-  serviceRequest: services.bulkorder || {}
+const OFFER_ID = 5;
+
+const mapStateToProps = ({ services, homepage }) => ({
+  serviceRequest: services.bulkorder || {},
+  homepageCategories: homepage.categories.data || []
 });
 
 class BulkOrder extends React.Component {
@@ -32,7 +37,7 @@ class BulkOrder extends React.Component {
     phoneErrorMessage: 'Enter Valid 10 Digit Phone Number',
     email: '',
     emailErrorMessage: 'Please Enter Valid Email ',
-    category: 'Furniture',
+    category: 'Home Decor',
     budget: '',
     budgetErrorMessage: 'Enter Your Budget',
     quantity: '',
@@ -175,6 +180,7 @@ class BulkOrder extends React.Component {
       quantityErrorMessage,
       open
     } = this.state;
+    const { homepageCategories } = this.props;
     return (
       <Div type="block">
         <Row display="block" mr="0" ml="0">
@@ -237,9 +243,9 @@ class BulkOrder extends React.Component {
                             {'Category*'}
                           </Label>
                           <select onChange={this.onChangeCategory} className="form-control" name="bulkOrderCategory">
+                            <option value="Home Decor">Home Decor</option>
                             <option value="Furniture">Furniture</option>
                             <option value="Home Furnishings">Home Furnishings</option>
-                            <option value="Home Decor">Home Decor</option>
                             <option value="Tableware">Tableware</option>
                             <option value="Tableware">Kitchenware</option>
                             <option value="Home Improvement">Home Improvement</option>
@@ -296,7 +302,7 @@ class BulkOrder extends React.Component {
           </Row>
           <Div ta="center">
             <HeadingH4 fontSize="30px" color="black">
-              WHY CHOOSE HOMETOWN FORGIFTS?
+              WHY CHOOSE HOMETOWN FOR GIFTS?
             </HeadingH4>
           </Div>
           <Section bg="bulkorderUspBg" p="0px 30px">
@@ -308,7 +314,7 @@ class BulkOrder extends React.Component {
                   m="auto"
                   width="130px"
                 />
-                <Text fontSize="14px" mt="0" color="white" ta="center">
+                <Text fontSize="16px" mt="0" color="white" ta="center">
                   Flexible Order Size
                 </Text>
               </Div>
@@ -319,7 +325,7 @@ class BulkOrder extends React.Component {
                   m="auto"
                   width="130px"
                 />
-                <Text fontSize="14px" mt="0" color="white" ta="center">
+                <Text fontSize="16px" mt="0" color="white" ta="center">
                   Unmatched Price Points
                 </Text>
               </Div>
@@ -330,7 +336,7 @@ class BulkOrder extends React.Component {
                   m="auto"
                   width="130px"
                 />
-                <Text fontSize="14px" mt="0" color="white" ta="center">
+                <Text fontSize="16px" mt="0" color="white" ta="center">
                   Assured Quality
                 </Text>
               </Div>
@@ -341,7 +347,7 @@ class BulkOrder extends React.Component {
                   m="auto"
                   width="130px"
                 />
-                <Text fontSize="14px" mt="0" color="white" ta="center">
+                <Text fontSize="16px" mt="0" color="white" ta="center">
                   OneYear Waranty
                 </Text>
               </Div>
@@ -349,12 +355,24 @@ class BulkOrder extends React.Component {
           </Section>
           <Div mt="0px" ta="center">
             <HeadingH4 fontSize="30px" color="black">
-              CHOOSE FROM OUR WIDE RANGE GIFTING HOMETOWN PRODUCTS
+              CHOOSE FROM OUR WIDE RANGE OF GIFTING HOMEWARE PRODUCTS
             </HeadingH4>
           </Div>
           <Section mb="40px">
             <Container type="container" pr="0" pl="0">
-              <Div col="12">Add Slider Here...</Div>
+              {homepageCategories.map((category, index) => {
+                const {
+                  title, id, sub_title: subTitle, values
+                } = category;
+                if (id && (OFFER_ID === id || OFFER_ID === parseInt(id, 10))) {
+                  return (
+                    <LazyLoad height={200} offset={100} key={String(index)}>
+                      <CategoryCarousel categoryName={title} subTitle={subTitle} data={values} id={id} />
+                    </LazyLoad>
+                  );
+                }
+                return '';
+              })}
             </Container>
           </Section>
         </Div>
@@ -371,11 +389,13 @@ class BulkOrder extends React.Component {
   }
 }
 BulkOrder.defaultProps = {
-  serviceRequest: {}
+  serviceRequest: {},
+  homepageCategories: []
 };
 BulkOrder.propTypes = {
   serviceRequest: PropTypes.object,
-  sendFormData: PropTypes.func.isRequired
+  sendFormData: PropTypes.func.isRequired,
+  homepageCategories: PropTypes.array
 };
 export default connect(
   mapStateToProps,

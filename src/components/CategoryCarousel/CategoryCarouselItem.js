@@ -6,18 +6,32 @@ import { Link } from 'react-router-dom';
 
 const styles = require('./Slider.scss');
 
-const CategoryItem = ({ image, name, url }) => (
-  <Div className={styles.catSliderItem}>
-    <Link className={styles.link} to={url || '/'}>
+const CategoryItem = ({ image, name, url }) => {
+  if (url) {
+    return (
+      <Div className={styles.catSliderItem}>
+        <Link className={styles.link} to={url || '/'}>
+          <ImageShimmer src={image} height="283px">
+            {imageURL => <img src={imageURL} alt={name} />}
+          </ImageShimmer>
+          <div className={styles.content} ta="center">
+            <p className={styles.title}>{name}</p>
+          </div>
+        </Link>
+      </Div>
+    );
+  }
+  return (
+    <Div className={styles.catSliderItem}>
       <ImageShimmer src={image} height="283px">
         {imageURL => <img src={imageURL} alt={name} />}
       </ImageShimmer>
       <div className={styles.content} ta="center">
         <p className={styles.title}>{name}</p>
       </div>
-    </Link>
-  </Div>
-);
+    </Div>
+  );
+};
 
 CategoryItem.defaultProps = {
   image: '',
