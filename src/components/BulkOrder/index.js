@@ -302,10 +302,10 @@ class BulkOrder extends React.Component {
           </Row>
           <Div ta="center">
             <HeadingH4 fontSize="30px" color="black">
-              WHY CHOOSE HOMETOWN FOR GIFTS?
+              {'WHY CHOOSE HOMETOWN FOR GIFTS?'}
             </HeadingH4>
           </Div>
-          <Section bg="bulkorderUspBg" p="0px 30px">
+          <Section bg="bulkorderUspBg" p="20px 30px">
             <Row>
               <Div col="3">
                 <Img
@@ -315,7 +315,7 @@ class BulkOrder extends React.Component {
                   width="130px"
                 />
                 <Text fontSize="16px" mt="0" color="white" ta="center">
-                  Flexible Order Size
+                  {'Flexible Order Size'}
                 </Text>
               </Div>
               <Div col="3">
@@ -326,7 +326,7 @@ class BulkOrder extends React.Component {
                   width="130px"
                 />
                 <Text fontSize="16px" mt="0" color="white" ta="center">
-                  Unmatched Price Points
+                  {'Unmatched Price Points'}
                 </Text>
               </Div>
               <Div col="3">
@@ -337,7 +337,7 @@ class BulkOrder extends React.Component {
                   width="130px"
                 />
                 <Text fontSize="16px" mt="0" color="white" ta="center">
-                  Assured Quality
+                  {'Assured Quality'}
                 </Text>
               </Div>
               <Div col="3">
@@ -348,14 +348,14 @@ class BulkOrder extends React.Component {
                   width="130px"
                 />
                 <Text fontSize="16px" mt="0" color="white" ta="center">
-                  OneYear Waranty
+                  {'One Year Waranty'}
                 </Text>
               </Div>
             </Row>
           </Section>
           <Div mt="0px" ta="center">
-            <HeadingH4 fontSize="30px" color="black" style={{ marginBottom: '20px' }}>
-              CHOOSE FROM OUR WIDE RANGE OF GIFTING HOMEWARE PRODUCTS
+            <HeadingH4 fontSize="30px" color="black" mb="0px">
+              {'CHOOSE FROM OUR WIDE RANGE OF GIFTING HOMEWARE PRODUCTS'}
             </HeadingH4>
           </Div>
           <Section mb="40px">

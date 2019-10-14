@@ -21,7 +21,7 @@ export default class CategoryCarousel extends Component {
     return (
       <Section p="0" pt="1.5rem" mb="0" className="catCarousel">
         <Container pr="0" pl="0">
-          <Title title={categoryName} subTitle={subTitle} />
+          {(categoryName !== '' || categoryName !== null) && <Title title={categoryName} subTitle={subTitle} />}
           <SlickSlider settings={adjustSlides(data.length)}>
             {data.map(slide => (
               <div key={slide.category_id}>
