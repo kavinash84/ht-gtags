@@ -180,12 +180,15 @@ class BulkOrder extends React.Component {
       quantityErrorMessage,
       open
     } = this.state;
-    const { homepageCategories } = this.props;
+    const { homepageCategories = [] } = this.props;
+    const {
+      banner_image_desktop: bannerImage = 'https://static.hometown.in/media/cms/hometownv2/best-sellers/111.jpg'
+    } = homepageCategories.find(obj => OFFER_ID === obj.id || OFFER_ID === parseInt(obj.id, 10));
     return (
       <Div type="block">
         <Row display="block" mr="0" ml="0">
           <Div col="12">
-            <Img src="https://static.hometown.in/media/cms/hometownv2/best-sellers/111.jpg" alt="" />
+            <Img src={bannerImage} alt="" />
           </Div>
         </Row>
         <Div mt="-150px">
