@@ -2,27 +2,31 @@ import React from 'react';
 import Container from 'hometown-components/lib/Container';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import LazyLoad from 'react-lazyload';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
 import Section from 'hometown-components/lib/Section';
 import Img from 'hometown-components/lib/Img';
-import Heading from 'hometown-components/lib/Heading';
 import FormInput from 'hometown-components/lib/Forms/FormInput';
 import { Label } from 'hometown-components/lib/Label';
 import InputField from 'hometown-components/lib/InputField';
 import Text from 'hometown-components/lib/Text';
+import HeadingH4 from 'hometown-components/lib/HeadingH4';
 import Button from 'hometown-components/lib/Buttons';
 import ResponsiveModal from 'components/Modal';
+import CategoryCarousel from 'components/CategoryCarousel';
 import { validateMobile, validateEmail, isEmpty } from 'utils/validation';
 import { allowNChar, allowTypeOf } from 'utils/helper';
 import { sendData } from 'redux/modules/services';
 import { BULK_ORDER as BULK_ORDER_API } from 'helpers/apiUrls';
-import TitleBar from '../TitleBar';
 
 const styles = require('./BulkOrder.scss');
 
-const mapStateToProps = ({ services }) => ({
-  serviceRequest: services.bulkorder || {}
+const OFFER_ID = 5;
+
+const mapStateToProps = ({ services, homepage }) => ({
+  serviceRequest: services.bulkorder || {},
+  homepageCategories: homepage.categories.data || []
 });
 
 class BulkOrder extends React.Component {
@@ -33,7 +37,7 @@ class BulkOrder extends React.Component {
     phoneErrorMessage: 'Enter Valid 10 Digit Phone Number',
     email: '',
     emailErrorMessage: 'Please Enter Valid Email ',
-    category: 'Furniture',
+    category: 'Home Decor',
     budget: '',
     budgetErrorMessage: 'Enter Your Budget',
     quantity: '',
@@ -88,7 +92,6 @@ class BulkOrder extends React.Component {
         value[0] === '0' ? 'Mobile Number Must Not Start With 0' : 'Enter 10 Digits Valid Mobile Number'
     });
   };
-
   onChangeCategory = e => {
     const {
       target: { value }
@@ -177,153 +180,205 @@ class BulkOrder extends React.Component {
       quantityErrorMessage,
       open
     } = this.state;
+    const { homepageCategories = [] } = this.props;
+    const {
+      banner_image_desktop: bannerImage = 'https://static.hometown.in/media/cms/hometownv2/best-sellers/111.jpg'
+    } = homepageCategories.find(obj => OFFER_ID === obj.id || OFFER_ID === parseInt(obj.id, 10));
     return (
       <Div type="block">
-        <TitleBar title="Bulk Order" />
-        <Section display="flex" pt="2rem" pb="2.5rem" mb="0" height="auto">
-          <Container type="container" pr="0" pl="0">
-            <Row display="block" mr="0" ml="0">
+        <Row display="block" mr="0" ml="0">
+          <Div col="12">
+            <Img src={bannerImage} alt="" />
+          </Div>
+        </Row>
+        <Div mt="-150px">
+          <Section display="flex" mb="0" height="auto">
+            <Container type="container" pr="0" pl="0">
               <Div col="12">
-                <Img src="https://static.hometown.in/media/cms/hometownv2/best-sellers/111.jpg" alt="" />
+                <form
+                  onSubmit={this.onSubmitForm}
+                  id="custom_form"
+                  name="custom_form"
+                  encType="multipart/form-data"
+                  className="bulk-order-form"
+                >
+                  <div className={styles.formList}>
+                    <Text ta="center" mt="0" mb="15px" fontSize="36px">
+                      {'Corporate Gifting'}
+                    </Text>
+                    <Row ml="-15px" mr="-15px">
+                      <Div col="6" pl="15px" pr="15px">
+                        <FormInput
+                          label="Name*"
+                          type="text"
+                          placeholder=""
+                          onChange={this.onChangeName}
+                          value={name}
+                          feedBackError={nameError}
+                          feedBackMessage={nameErrorMessage}
+                        />
+                      </Div>
+                      <Div col="6" pl="15px" pr="15px">
+                        <FormInput
+                          label="Email*"
+                          type="text"
+                          placeholder=""
+                          onChange={this.onChangeEmail}
+                          value={email}
+                          feedBackError={emailError}
+                          feedBackMessage={emailErrorMessage}
+                        />
+                      </Div>
+                      <Div col="6" pl="15px" pr="15px">
+                        <FormInput
+                          label="Mobile No.*"
+                          type="text"
+                          placeholder=""
+                          onChange={this.onChangePhone}
+                          value={phone}
+                          feedBackError={phoneError}
+                          feedBackMessage={phoneErrorMessage}
+                        />
+                      </Div>
+                      <Div col="6" pl="15px" pr="15px">
+                        <InputField mb="0.625rem">
+                          <Label fontSize="0.875em" mb="0.625rem">
+                            {'Category*'}
+                          </Label>
+                          <select onChange={this.onChangeCategory} className="form-control" name="bulkOrderCategory">
+                            <option value="Home Decor">Home Decor</option>
+                            <option value="Furniture">Furniture</option>
+                            <option value="Home Furnishings">Home Furnishings</option>
+                            <option value="Tableware">Tableware</option>
+                            <option value="Tableware">Kitchenware</option>
+                            <option value="Home Improvement">Home Improvement</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Home Appliances">Home Appliances</option>
+                          </select>
+                        </InputField>
+                      </Div>
+                      <Div col="6" pl="15px" pr="15px">
+                        <FormInput
+                          label="Budget*"
+                          type="text"
+                          placeholder=""
+                          onChange={this.onChangeBudget}
+                          value={budget}
+                          feedBackError={budgetError}
+                          feedBackMessage={budgetErrorMessage}
+                        />
+                      </Div>
+                      <Div col="6" pl="15px" pr="15px">
+                        <FormInput
+                          label="Quantity*"
+                          type="text"
+                          placeholder=""
+                          onChange={this.onChangeQuantity}
+                          value={quantity}
+                          feedBackError={quantityError}
+                          feedBackMessage={quantityErrorMessage}
+                        />
+                      </Div>
+                    </Row>
+                    <Row ml="-15px" mr="-15px" mb="20px">
+                      <Div col="12" pl="15px" pr="15px" ta="center">
+                        <div className="buttons-set">
+                          <Button
+                            onClick={this.onSubmitForm}
+                            btnType="bulkOrderSubmit"
+                            mt="0.625rem"
+                            title="Submit"
+                            type="submit"
+                          >
+                            {'REQUEST A CALLBACK'}
+                          </Button>
+                        </div>
+                      </Div>
+                    </Row>
+                  </div>
+                </form>
               </Div>
-            </Row>
-            <Row display="block" mr="0" ml="0">
-              <Div col="12" className={styles.headerContent}>
-                <Heading mt="0">Bulk Order</Heading>
-                <Text fontSize="1rem">
-                  In this gifting season select the most appropriate gift for your Friends/Teams
+            </Container>
+          </Section>
+          <Row ta="center">
+            <Div className={styles.divider} />
+          </Row>
+          <Div ta="center">
+            <HeadingH4 fontSize="30px" color="black">
+              {'WHY CHOOSE HOMETOWN FOR GIFTS?'}
+            </HeadingH4>
+          </Div>
+          <Section bg="bulkorderUspBg" p="20px 30px">
+            <Row>
+              <Div col="3">
+                <Img
+                  src="https://www.hometown.in/media/cms/hometownv2/hometownnew/cart-icon.png"
+                  alt=""
+                  m="auto"
+                  width="130px"
+                />
+                <Text fontSize="16px" mt="0" color="white" ta="center">
+                  {'Flexible Order Size'}
                 </Text>
-                <ul>
-                  <li>1. A bulk order can be placed from anywhere in India and will be delivered there </li>
-                  <li>
-                    2. You may also request HomeTown products which are not featured on webstores and we can arrange to
-                    send you images and possible samples{' '}
-                  </li>
-                  <li>3. we can make personalized products for you depending on the quantity </li>
-                  <li>4. Rest assured to get volume discounts </li>
-                  <li>
-                    5. Once registered with us as a bulk buyer customer, enjoy special promotions and offer only for you{' '}
-                  </li>
-                  <li>6. we will revert within 1 working day on an enquiry</li>
-                </ul>
-                <Div col="12" mt="2rem">
-                  <form
-                    onSubmit={this.onSubmitForm}
-                    id="custom_form"
-                    name="custom_form"
-                    encType="multipart/form-data"
-                    className="bulk-order-form"
-                  >
-                    <div className={styles.formList}>
-                      <Text ta="center" mt="0" mb="0.3125rem" fontSize="0.875rem">
-                        To know more, call us at 18002100004
-                      </Text>
-                      <Text fontSize="0.875rem" ta="center" mt="0" mb="0.3125rem">
-                        Or
-                      </Text>
-                      <Text fontSize="0.875rem" ta="center" mt="0" mb="1.5rem">
-                        Drop in your Requirement.
-                      </Text>
-                      <Row>
-                        <Div col="6" pl="10px" pr="10px">
-                          <FormInput
-                            label="Name*"
-                            type="text"
-                            placeholder=""
-                            onChange={this.onChangeName}
-                            value={name}
-                            feedBackError={nameError}
-                            feedBackMessage={nameErrorMessage}
-                          />
-                        </Div>
-                        <Div col="6" pl="10px" pr="10px">
-                          <FormInput
-                            label="Email*"
-                            type="text"
-                            placeholder=""
-                            onChange={this.onChangeEmail}
-                            value={email}
-                            feedBackError={emailError}
-                            feedBackMessage={emailErrorMessage}
-                          />
-                        </Div>
-                      </Row>
-                      <Row>
-                        <Div col="6" pl="10px" pr="10px">
-                          <FormInput
-                            label="Mobile No.*"
-                            type="text"
-                            placeholder=""
-                            onChange={this.onChangePhone}
-                            value={phone}
-                            feedBackError={phoneError}
-                            feedBackMessage={phoneErrorMessage}
-                          />
-                        </Div>
-                        <Div col="6" pl="10px" pr="10px">
-                          <InputField mb="0.625rem">
-                            <Label fontSize="0.875em" mb="0.625rem">
-                              Category*
-                            </Label>
-                            <select onChange={this.onChangeCategory} className="form-control" name="bulkOrderCategory">
-                              <option value="Furniture">Furniture</option>
-                              <option value="Home Furnishings">Home Furnishings</option>
-                              <option value="Home Decor">Home Decor</option>
-                              <option value="Tableware">Tableware</option>
-                              <option value="Tableware">Kitchenware</option>
-                              <option value="Home Improvement">Home Improvement</option>
-                              <option value="Electronics">Electronics</option>
-                              <option value="Home Appliances">Home Appliances</option>
-                            </select>
-                          </InputField>
-                        </Div>
-                      </Row>
-                      <Row>
-                        <Div col="6" pl="10px" pr="10px">
-                          <FormInput
-                            label="Budget*"
-                            type="text"
-                            placeholder=""
-                            onChange={this.onChangeBudget}
-                            value={budget}
-                            feedBackError={budgetError}
-                            feedBackMessage={budgetErrorMessage}
-                          />
-                        </Div>
-                        <Div col="6" pl="10px" pr="10px">
-                          <FormInput
-                            label="Quantity*"
-                            type="text"
-                            placeholder=""
-                            onChange={this.onChangeQuantity}
-                            value={quantity}
-                            feedBackError={quantityError}
-                            feedBackMessage={quantityErrorMessage}
-                          />
-                        </Div>
-                      </Row>
-                      <Row>
-                        <Div col="6" pl="10px" pr="10px">
-                          <div className="buttons-set">
-                            <Button
-                              onClick={this.onSubmitForm}
-                              btnType="primary"
-                              mt="0.625rem"
-                              title="Submit"
-                              type="submit"
-                            >
-                              Submit
-                            </Button>
-                          </div>
-                        </Div>
-                      </Row>
-                    </div>
-                  </form>
-                </Div>
+              </Div>
+              <Div col="3">
+                <Img
+                  src="https://www.hometown.in/media/cms/hometownv2/hometownnew/price-points-icon.png"
+                  alt=""
+                  m="auto"
+                  width="130px"
+                />
+                <Text fontSize="16px" mt="0" color="white" ta="center">
+                  {'Unmatched Price Points'}
+                </Text>
+              </Div>
+              <Div col="3">
+                <Img
+                  src="https://www.hometown.in/media/cms/hometownv2/hometownnew/quality-icon.png"
+                  alt=""
+                  m="auto"
+                  width="130px"
+                />
+                <Text fontSize="16px" mt="0" color="white" ta="center">
+                  {'Assured Quality'}
+                </Text>
+              </Div>
+              <Div col="3">
+                <Img
+                  src="https://www.hometown.in/media/cms/hometownv2/hometownnew/year-warranty-icon.png"
+                  alt=""
+                  m="auto"
+                  width="130px"
+                />
+                <Text fontSize="16px" mt="0" color="white" ta="center">
+                  {'One Year Waranty'}
+                </Text>
               </Div>
             </Row>
-          </Container>
-        </Section>
+          </Section>
+          <Div mt="0px" ta="center">
+            <HeadingH4 fontSize="30px" color="black" mb="0px">
+              {'CHOOSE FROM OUR WIDE RANGE OF GIFTING HOMEWARE PRODUCTS'}
+            </HeadingH4>
+          </Div>
+          <Section mb="40px">
+            <Container type="container" pr="0" pl="0">
+              {homepageCategories.map((category, index) => {
+                const {
+                  title, id, sub_title: subTitle, values
+                } = category;
+                if (id && (OFFER_ID === id || OFFER_ID === parseInt(id, 10))) {
+                  return (
+                    <LazyLoad height={200} offset={100} key={String(index)}>
+                      <CategoryCarousel categoryName={title} subTitle={subTitle} data={values} id={id} />
+                    </LazyLoad>
+                  );
+                }
+                return '';
+              })}
+            </Container>
+          </Section>
+        </Div>
         <ResponsiveModal onCloseModal={this.handleModal} open={open}>
           <Div ta="center" className={styles.serviceThankYouWrapper}>
             <Img m="0 auto 5px" width="100px" src={correctIcon} alt="Reload Page" />
@@ -337,11 +392,13 @@ class BulkOrder extends React.Component {
   }
 }
 BulkOrder.defaultProps = {
-  serviceRequest: {}
+  serviceRequest: {},
+  homepageCategories: []
 };
 BulkOrder.propTypes = {
   serviceRequest: PropTypes.object,
-  sendFormData: PropTypes.func.isRequired
+  sendFormData: PropTypes.func.isRequired,
+  homepageCategories: PropTypes.array
 };
 export default connect(
   mapStateToProps,

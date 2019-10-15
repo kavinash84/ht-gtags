@@ -1,32 +1,15 @@
 @import "../../theme/_variables";
 @import "../../theme/_mixins";
 
-.headerContent {
-  border: 1px solid #dddddd;
-  padding: 3rem;
-  margin: -8px 8px 3rem;
-  background: rgba(247, 247, 247, 0.28);
-  position: relative;
-  border-top: none;
-  ul {
-    margin-bottom: 0px;
-    li {
-      list-style: none;
-      padding-bottom: 13px;
-      font-size: 16px;
-    }
-  }
-}
 .formList {
-  width: 80%;
-  display: table;
+  width: 100%;
+  max-width: 800px;
   margin: auto;
   box-shadow: 2px 2px 10px 0 rgba(0, 0, 0, 0.1);
-  padding: 3rem 3rem;
+  padding: 1rem 3rem;
   border: 1px solid #e0e0e0;
-  background: #f7f7f7;
+  background: #FFF;
 }
-
 .serviceThankYouWrapper {
   min-width: 300px;
   padding: 40px 0;
@@ -45,4 +28,10 @@
     position: relative;
     top: calc(50% - 18px);
   }
+}
+.divider {
+  width: 200px !important;
+  height: 1px;
+  background-color: #000;
+  margin: 20px auto;
 }

@@ -18,7 +18,7 @@ export default class MenuFooter extends Component {
         </Helmet>
         <Menu />
         {children}
-        <Footer />
+        {pageTitle && pageTitle === 'Bulk Order' ? '' : <Footer />}
       </div>
     );
   }
