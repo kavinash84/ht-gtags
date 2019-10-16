@@ -19,6 +19,8 @@ import cookie from 'js-cookie';
 import LazyLoad from 'react-lazyload';
 import { getCities, getOfferStripData, getMiddleBannerData } from 'selectors/homepage';
 
+const OFFER_ID = 5;
+
 @connect(({
   homepage: {
     categories, banners, products, hashtags, offers, recentlyviewed
@@ -120,11 +122,21 @@ export default class Home extends Component {
           <Menu />
           <MainSlider data={banners} />
           <Usp />
-          {homepageCategories.map((category, index) => (
-            <LazyLoad height={200} offset={100} key={String(index)}>
-              <CategoryCarousel categoryName={category.title} subTitle={category.sub_title} data={category.values} />
-            </LazyLoad>
-          ))}
+          {homepageCategories.map((category, index) => {
+            const { id } = category;
+            if (id && OFFER_ID !== id && OFFER_ID !== parseInt(id, 10)) {
+              return (
+                <LazyLoad height={200} offset={100} key={String(index)}>
+                  <CategoryCarousel
+                    categoryName={category.title}
+                    subTitle={category.sub_title}
+                    data={category.values}
+                  />
+                </LazyLoad>
+              );
+            }
+            return '';
+          })}
           <OfferBanner image={middleBanner.image_url} url={middleBanner.url_key} target={middleBanner.target || ''} />
           {homepageProducts.map((products, index) => (
             <LazyLoad height={200} offset={100} key={String(index)}>
