@@ -590,6 +590,21 @@ export default function gaMiddleware() {
         };
         window.dataLayer.push(storeVisitEvent);
       }
+      if (type === 'services/LOAD_SUCCESS') {
+        const {
+          formType,
+          result: { category }
+        } = action;
+        if (category && formType === 'bulkorder') {
+          const bulkOrderLeadEvent = {
+            event: 'Submit',
+            category,
+            action: 'FormSubmit',
+            label: 'RequestCallBack'
+          };
+          window.dataLayer.push(bulkOrderLeadEvent);
+        }
+      }
     }
     return next(action);
   };
