@@ -109,8 +109,8 @@ class NavBar extends Component {
                   <li>
                     <Label htmlFor="checkbox" fontSize="0.75em" className="dropdownValue">
                       <a
-                        href="https://static.hometown.in/media/Institutional+Catalogue.pdf"
-                        title="Festive Catalogue"
+                        href="https://hometown.in/media/Institutional+Catalogue.pdf"
+                        title="Festive Gifts Catalogue"
                         download
                         target="_blank"
                         rel="noopener noreferrer"
