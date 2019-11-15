@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { renderRoutes } from 'react-router-config';
 import { withRouter } from 'react-router';
 import { provideHooks } from 'redial';
-import { ThemeProvider } from 'styled-components';
 import Helmet from 'react-helmet';
 import { wrapDispatch } from 'multireducer';
 import { loadCategories, loadMainMenu, loadBanners, isLoaded as isSectionLoaded } from 'redux/modules/homepage';
@@ -17,11 +16,13 @@ import { loadCart, isLoaded as isCartLoaded } from 'redux/modules/cart';
 import { PINCODE } from 'helpers/Constants';
 import config from 'config';
 import Cookie from 'js-cookie';
-import Theme from 'hometown-components/lib/Theme';
-import Alert from 'hometown-components/lib/Alert';
 import * as notifActions from 'redux/modules/notifs';
 import Notifs from 'components/Notifs';
 import { isKeyExists } from 'utils/helper';
+
+/* ====== Components ====== */
+import Alert from 'hometown-components/lib/Alert';
+import ThemeProvider from 'hometown-components/lib/ThemeProviderHtV1';
 
 const { SITE_URL } = process.env;
 const SITE_URL_MOBILE = 'https://m.hometown.in';
@@ -188,43 +189,42 @@ export default class App extends Component {
     const pathname = (location && location.pathname) || '/';
     const url = this.checkIfSlash(pathname);
     return (
-      <ThemeProvider theme={Theme}>
-        <div className={styles.app}>
-          {process.env.NODE_ENV !== 'development' && (
-            <Helmet {...config.app.head}>
-              <link rel="alternate" media="only screen and (max-width:640px)" href={`${SITE_URL_MOBILE}${url}`} />
-              <link rel="canonical" href={`${SITE_URL}${url}`} />
-              <script type="text/javascript">
-                {`
-                    var dataLayer = [];
-                    (function(w, d, s, l, i) {
-                        w[l] = w[l] || [];
-                        w[l].push({
-                            'gtm.start': new Date().getTime(),
-                            event: 'gtm.js'
-                        });
-                        var f = d.getElementsByTagName(s)[0],
-                            j = d.createElement(s),
-                            dl = l != 'dataLayer' ? '&l=' + l : '';
-                        j.async = true;
-                        j.src =
-                            'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-                        f.parentNode.insertBefore(j, f);
-                    })(window, document, 'script', 'dataLayer', 'GTM-T5VV7MZ');
-                  `}
-              </script>
-              <script type="text/javascript">
-                {`
+      <ThemeProvider>
+        {process.env.NODE_ENV !== 'development' && (
+          <Helmet {...config.app.head}>
+            <link rel="alternate" media="only screen and (max-width:640px)" href={`${SITE_URL_MOBILE}${url}`} />
+            <link rel="canonical" href={`${SITE_URL}${url}`} />
+            <script type="text/javascript">
+              {`
+                  var dataLayer = [];
+                  (function(w, d, s, l, i) {
+                      w[l] = w[l] || [];
+                      w[l].push({
+                          'gtm.start': new Date().getTime(),
+                          event: 'gtm.js'
+                      });
+                      var f = d.getElementsByTagName(s)[0],
+                          j = d.createElement(s),
+                          dl = l != 'dataLayer' ? '&l=' + l : '';
+                      j.async = true;
+                      j.src =
+                          'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+                      f.parentNode.insertBefore(j, f);
+                  })(window, document, 'script', 'dataLayer', 'GTM-T5VV7MZ');
+                `}
+            </script>
+            <script type="text/javascript">
+              {`
                   var google_tag_params={
                       ecomm_pagetype: '',
                       ecomm_prodid: [],
                       ecomm_totalvalue: '',
                     };
                   `}
-              </script>
-              <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async="" />
-              <script>
-                {`
+            </script>
+            <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async="" />
+            <script>
+              {`
                   var OneSignal = window.OneSignal || [];
                     OneSignal.push(function() {
                       OneSignal.init({
@@ -232,16 +232,15 @@ export default class App extends Component {
                       });
                     });
                 `}
-              </script>
-            </Helmet>
-          )}
-          <main className={styles.appContent}>
-            <div className="container">
-              <Notifs namespace="global" NotifComponent={props => <Alert {...props} show={notifs.global.length} />} />
-            </div>
-            {renderRoutes(route.routes)}
-          </main>
-        </div>
+            </script>
+          </Helmet>
+        )}
+        <main className={styles.appContent}>
+          <div className="container">
+            <Notifs namespace="global" NotifComponent={props => <Alert {...props} show={notifs.global.length} />} />
+          </div>
+          {renderRoutes(route.routes)}
+        </main>
       </ThemeProvider>
     );
   }

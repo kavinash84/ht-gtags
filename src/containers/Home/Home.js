@@ -1,25 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-import Menu from 'containers/MenuNew/index';
-import MainSlider from 'components/MainSlider';
-// import OfferRibbon from 'components/OfferRibbon';
-// import ReloadNotification from 'components/ReloadNotification';
-import CategoryCarousel from 'components/CategoryCarousel';
-import ProductCarousel from 'components/ProductCarousel';
-import Section from 'hometown-components/lib/Section';
 import { connect } from 'react-redux';
-import OfferBanner from 'components/Home/OfferBanner';
-import Usp from 'components/Home/Usp';
-import StoresCarousel from 'components/Stores';
-import Footer from 'components/Footer';
-import SignupModal from 'containers/Signup/SignupForm';
-import ResponsiveModal from 'components/Modal';
 import cookie from 'js-cookie';
-import LazyLoad from 'react-lazyload';
 import { getCities, getOfferStripData, getMiddleBannerData } from 'selectors/homepage';
 
-const OFFER_ID = 5;
+/* ====== Components ====== */
+import BodyHtV1 from 'hometown-components/lib/BodyHtV1';
+import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
+import ColHtV1 from 'hometown-components/lib/ColHtV1';
+import RowHtV1 from 'hometown-components/lib/RowHtV1';
+import WrapperHtV1 from 'hometown-components/lib/WrapperHtV1';
 
 @connect(({
   homepage: {
@@ -71,20 +62,11 @@ export default class Home extends Component {
       showRibbon: !this.state.showRibbon
     });
   };
+
   render() {
-    const {
-      homepageCategories,
-      homepageProducts,
-      banners,
-      cities,
-      // offerStrip,
-      middleBanner,
-      recentlyviewed
-    } = this.props;
-    // const { showRibbon } = this.state;
     return (
       /* eslint-disable max-len */
-      <Section p="0" mb="0">
+      <WrapperHtV1>
         <Helmet title="Online Furniture Shopping, Buy Decor Items in India - HomeTown.in">
           <meta
             name="description"
@@ -94,107 +76,42 @@ export default class Home extends Component {
           <meta name="robots" content="index, follow" />
           <script type="application/ld+json">
             {`
-                {
-                  "@context": "http://schema.org",
-                  "@type": "WebSite",
-                  "url": "https://www.hometown.in/",
-                  "potentialAction": {
-                    "@type": "SearchAction",
-                    "target": "https://www.hometown.in/search/?q={search_term_string}",
-                    "query-input": "required name=search_term_string"
-                  }
+              {
+                "@context": "http://schema.org",
+                "@type": "WebSite",
+                "url": "https://www.hometown.in/",
+                "potentialAction": {
+                  "@type": "SearchAction",
+                  "target": "https://www.hometown.in/search/?q={search_term_string}",
+                  "query-input": "required name=search_term_string"
                 }
-              `}
+              }
+            `}
           </script>
         </Helmet>
-        <div className="wrapper">
-          {/* {offerStrip &&
-            offerStrip.description !== '' && (
-            <OfferRibbon
-              title={offerStrip.description}
-              showRibbon={showRibbon}
-              onClick={this.handleRibbon}
-              url={offerStrip.url_key}
-            />
-          )} */}
-          {/* <ReloadNotification title="A new version available." showRibbon onClick={this.handleRibbon} /> */}
-
-          <Menu />
-          <MainSlider data={banners} />
-          <Usp />
-          {homepageCategories.map((category, index) => {
-            const { id } = category;
-            if (id && OFFER_ID !== id && OFFER_ID !== parseInt(id, 10)) {
-              return (
-                <LazyLoad height={200} offset={100} key={String(index)}>
-                  <CategoryCarousel
-                    categoryName={category.title}
-                    subTitle={category.sub_title}
-                    data={category.values}
-                  />
-                </LazyLoad>
-              );
-            }
-            return '';
-          })}
-          <OfferBanner image={middleBanner.image_url} url={middleBanner.url_key} target={middleBanner.target || ''} />
-          {homepageProducts.map((products, index) => (
-            <LazyLoad height={200} offset={100} key={String(index)}>
-              <ProductCarousel
-                title={products.title}
-                subTitle={products.sub_title}
-                data={products.values}
-                pt="1.5rem"
-                height="281px"
-              />
-            </LazyLoad>
-          ))}
-          <LazyLoad height={200} offset={100}>
-            {recentlyviewed.length > 0 && (
-              <ProductCarousel
-                title="Recently Viewed"
-                data={recentlyviewed}
-                length={recentlyviewed.length}
-                pt="1.5rem"
-                height="281px"
-              />
-            )}
-          </LazyLoad>
-          <LazyLoad height={200} offset={100}>
-            <StoresCarousel cities={cities} />
-          </LazyLoad>
-        </div>
-        <ResponsiveModal
-          classNames={{ modal: 'signupModal' }}
-          onCloseModal={this.handleModal}
-          open={this.state.openSignup}
-        >
-          <SignupModal />
-        </ResponsiveModal>
-        <Footer />
-      </Section>
+        <BodyHtV1>
+          <RowHtV1>
+            <ColHtV1 width={[1, 1, 1 / 2]}>
+              <BoxHtV1 fontSize={16} width={1} color="white" bg="primary">
+                Column
+              </BoxHtV1>
+            </ColHtV1>
+            <ColHtV1 width={[1, 1, 1 / 2]}>
+              <BoxHtV1 fontSize={16} width={1} color="white" bg="primary">
+                Column
+              </BoxHtV1>
+            </ColHtV1>
+          </RowHtV1>
+        </BodyHtV1>
+      </WrapperHtV1>
     );
   }
 }
 
 Home.defaultProps = {
-  homepageCategories: [],
-  homepageProducts: [],
-  banners: [],
-  cities: [],
-  // offerStrip: {},
-  recentlyviewed: [],
-  middleBanner: {},
   isLoggedIn: false
 };
 
 Home.propTypes = {
-  homepageCategories: PropTypes.array,
-  homepageProducts: PropTypes.array,
-  banners: PropTypes.array,
-  cities: PropTypes.array,
-  // offerStrip: PropTypes.object,
-  recentlyviewed: PropTypes.array,
-  middleBanner: PropTypes.object,
   isLoggedIn: PropTypes.bool
 };
