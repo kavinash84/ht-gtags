@@ -7,9 +7,9 @@ import { getCities, getOfferStripData, getMiddleBannerData } from 'selectors/hom
 
 /* ====== Components ====== */
 import BodyHtV1 from 'hometown-components/lib/BodyHtV1';
-import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
-import ColHtV1 from 'hometown-components/lib/ColHtV1';
-import RowHtV1 from 'hometown-components/lib/RowHtV1';
+// import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
+// import ColHtV1 from 'hometown-components/lib/ColHtV1';
+// import RowHtV1 from 'hometown-components/lib/RowHtV1';
 import WrapperHtV1 from 'hometown-components/lib/WrapperHtV1';
 
 @connect(({
@@ -89,20 +89,7 @@ export default class Home extends Component {
             `}
           </script>
         </Helmet>
-        <BodyHtV1>
-          <RowHtV1>
-            <ColHtV1 width={[1, 1, 1 / 2]}>
-              <BoxHtV1 fontSize={16} width={1} color="white" bg="primary">
-                Column
-              </BoxHtV1>
-            </ColHtV1>
-            <ColHtV1 width={[1, 1, 1 / 2]}>
-              <BoxHtV1 fontSize={16} width={1} color="white" bg="primary">
-                Column
-              </BoxHtV1>
-            </ColHtV1>
-          </RowHtV1>
-        </BodyHtV1>
+        <BodyHtV1>Start from heree.....</BodyHtV1>
       </WrapperHtV1>
     );
   }
