@@ -11,6 +11,7 @@ import BodyHtV1 from 'hometown-components/lib/BodyHtV1';
 // import ColHtV1 from 'hometown-components/lib/ColHtV1';
 // import RowHtV1 from 'hometown-components/lib/RowHtV1';
 import WrapperHtV1 from 'hometown-components/lib/WrapperHtV1';
+import Header from 'containers/Header';
 
 @connect(({
   homepage: {
@@ -89,7 +90,9 @@ export default class Home extends Component {
             `}
           </script>
         </Helmet>
-        <BodyHtV1>Start from heree.....</BodyHtV1>
+        <BodyHtV1>
+          <Header />
+        </BodyHtV1>
       </WrapperHtV1>
     );
   }
