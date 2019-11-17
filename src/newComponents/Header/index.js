@@ -10,7 +10,7 @@ import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
 // import HoverMenuBox from 'components/HoverBox/HoverMenuBox';
 
 /* ====== Page Components ====== */
-import HeaderTop from 'containers/Header/HeaderTop';
+import HeaderTop from 'newComponents/Header/HeaderTop';
 // import NavBar from 'components/NavBar';
 
 @connect(({ homepage }) => ({

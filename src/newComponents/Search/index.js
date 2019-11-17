@@ -19,8 +19,8 @@ import ButtonHtV1 from 'hometown-components/lib/ButtonHtV1';
 /* ====== Page Components ====== */
 
 const styles = require('./Search.scss');
-const SearchIcon = require('../../../../static/search-icon.svg');
-const CloseIcon = require('../../../../static/close-icon.svg');
+const SearchIcon = require('../../../static/search-icon.svg');
+const CloseIcon = require('../../../static/close-icon.svg');
 
 const onClick = setFilterState => e => {
   e.preventDefault();

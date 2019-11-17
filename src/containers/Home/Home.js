@@ -10,13 +10,13 @@ import BodyHtV1 from 'hometown-components/lib/BodyHtV1';
 import ColHtV1 from 'hometown-components/lib/ColHtV1';
 import RowHtV1 from 'hometown-components/lib/RowHtV1';
 import WrapperHtV1 from 'hometown-components/lib/WrapperHtV1';
-import Header from 'containers/Header';
 import ImageHtV1 from 'hometown-components/lib/ImageHtV1';
 import TextHtV1 from 'hometown-components/lib/TextHtV1';
 import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
 import SectionHtV1 from 'hometown-components/lib/SectionHtV1';
 import MainSlider from 'newComponents/MainSlider';
 import CategoryCarousel from 'newComponents/CategoryCarousel';
+import Header from 'newComponents/Header';
 
 const banner = 'https://www.hometown.in/media/cms/hometownnew/banner/hotdeals-midbanner_1.jpg';
 const sliderImage = require('../../static/slider.png');

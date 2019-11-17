@@ -20,25 +20,23 @@ import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
 import ButtonHtV1 from 'hometown-components/lib/ButtonHtV1';
 import ColHtV1 from 'hometown-components/lib/ColHtV1';
 import Fav from 'hometown-components/lib/Icons/FavHtV1';
-// import HeadingHtV1 from 'hometown-components/lib/HeadingHtV1';
+import HeadingHtV1 from 'hometown-components/lib/HeadingHtV1';
 import ImageHtV1 from 'hometown-components/lib/ImageHtV1';
 import LabelHtV1 from 'hometown-components/lib/LabelHtV1';
 import RowHtV1 from 'hometown-components/lib/RowHtV1';
 
 /* ====== Page Components ====== */
-import Search from 'containers/Header/Search';
-// import ResponsiveModal from 'components/Modal';
-// import Pincode from 'components/Pincode';
-// import LoginModal from 'containers/Login/LoginForm';
-// import SignupModal from 'containers/Signup/SignupForm';
+import Search from 'newComponents/Search';
+import ResponsiveModal from 'newComponents/Modal';
+import PinCode from 'newComponents/PinCode';
+import LoginForm from 'newComponents/Login/LoginForm';
+import SignupForm from 'newComponents/Signup/SignupForm';
 
 const LogoIcon = require('../../../static/logo@2x.png');
 const CartIcon = require('../../../static/cart-icon.svg');
 const PinIcon = require('../../../static/map-icon.svg');
-// const MapIcon = require('../../../static/map.svg');
-// const PhoneIcon = require('../../../static/phone-icon.svg');
 const UserIcon = require('../../../static/user-icon.svg');
-// const PincodeModalIcon = require('../../../static/map-placeholder.svg');
+const PincodeModalIcon = require('../../../static/map-placeholder.svg');
 
 const onClick = history => e => {
   e.preventDefault();
@@ -67,11 +65,11 @@ const onClickLogout = dispatcher => e => {
     logoutUser: logout
   }
 )
-export default class MenuSidebar extends Component {
+export default class HeaderTop extends Component {
   state = {
-    // openPincode: false,
-    // openLogin: false,
-    // openSignup: false,
+    openPincode: false,
+    openLogin: false,
+    openSignup: false,
     userPopOver: false
   };
   componentWillReceiveProps(nextProps) {
@@ -81,24 +79,24 @@ export default class MenuSidebar extends Component {
       });
     }
   }
-  // onOpenPincodeModal = () => {
-  //   this.setState({ openPincode: true });
-  // };
-  // onClosePincodeModal = () => {
-  //   this.setState({ openPincode: false });
-  // };
-  // onOpenLoginModal = () => {
-  //   this.setState({ openLogin: true });
-  // };
-  // onCloseLoginModal = () => {
-  //   this.setState({ openLogin: false });
-  // };
-  // onOpenSignupModal = () => {
-  //   this.setState({ openSignup: true });
-  // };
-  // onCloseSignupModal = () => {
-  //   this.setState({ openSignup: false });
-  // };
+  onOpenPincodeModal = () => {
+    this.setState({ openPincode: true });
+  };
+  onClosePincodeModal = () => {
+    this.setState({ openPincode: false });
+  };
+  onOpenLoginModal = () => {
+    this.setState({ openLogin: true });
+  };
+  onCloseLoginModal = () => {
+    this.setState({ openLogin: false });
+  };
+  onOpenSignupModal = () => {
+    this.setState({ openSignup: true });
+  };
+  onCloseSignupModal = () => {
+    this.setState({ openSignup: false });
+  };
   handleClick = URL => e => {
     e.preventDefault();
     const { history, router } = this.props;
@@ -112,7 +110,6 @@ export default class MenuSidebar extends Component {
   };
 
   render() {
-    const styles = require('./HeaderTop.scss');
     const { userPopOver } = this.state;
     const {
       selectedPincode, isLoggedIn, history, wishListCount, cartCount, logoutUser, name
@@ -134,22 +131,19 @@ export default class MenuSidebar extends Component {
               <ImageHtV1 src={PinIcon} alt="Hometown" height="24px" mr="0.3125rem" float="left" />
               {selectedPincode !== '' ? selectedPincode : 'Pincode'}
             </ButtonHtV1>
-            <Link className={styles.cart} to="/store-locator">
+            <Link to="/store-locator">
               <ImageHtV1 src={PinIcon} alt="Hometown" height="24px" mr="0.3125rem" float="left" />
               Store Locator
             </Link>
-            <ButtonHtV1 className={styles.heartBtn} onClick={isLoggedIn ? onClick(history) : this.onOpenLoginModal}>
+            <ButtonHtV1 onClick={isLoggedIn ? onClick(history) : this.onOpenLoginModal}>
               <Fav />
-              <span className={styles.count}>{isLoggedIn ? wishListCount : 0}</span>
+              <span >{isLoggedIn ? wishListCount : 0}</span>
             </ButtonHtV1>
-            <Link className={styles.cart} to={CART_URL}>
+            <Link to={CART_URL}>
               <ImageHtV1 src={CartIcon} alt="Hometown" height="24px" />
-              <span className={styles.count}>{cartCount}</span>
+              <span >{cartCount}</span>
             </Link>
             <ButtonHtV1
-              p="0"
-              className={styles.userBtn}
-              ml="0.625rem"
               onFocus={this.handleUserPopIn}
               onBlur={this.handleUserPopOver}
               onMouseOver={this.handleUserPopIn}
@@ -161,7 +155,7 @@ export default class MenuSidebar extends Component {
                 <ImageHtV1 src={UserIcon} alt="Account" height="24px" mr="0" float="left" />
               )}
             </ButtonHtV1>
-            <div className={`${styles.yourAccount} ${userPopOver ? '' : styles.hide}`}>
+            <div display={userPopOver ? 'block' : 'none'}>
               <RowHtV1 display="block" mr="0" ml="0">
                 <ColHtV1 variant="col-12">
                   <LabelHtV1>{isLoggedIn ? 'Your Account' : 'My Account'}</LabelHtV1>
@@ -169,7 +163,7 @@ export default class MenuSidebar extends Component {
               </RowHtV1>
               <RowHtV1 display="block" mr="0" ml="0">
                 {!isLoggedIn && (
-                  <div className={styles.yourAccountWrapper}>
+                  <div >
                     <ColHtV1 variant="col-6">
                       <Link to={SIGNUP_URL} onClick={this.handleClick(SIGNUP_URL)}>
                         Sign Up
@@ -183,7 +177,7 @@ export default class MenuSidebar extends Component {
                   </div>
                 )}
                 {isLoggedIn && (
-                  <div className={styles.yourAccountWrapper}>
+                  <div >
                     <ColHtV1 variant="col-6">
                       <Link to={MY_PROFILE_URL}>Profile</Link>
                     </ColHtV1>
@@ -196,8 +190,9 @@ export default class MenuSidebar extends Component {
             </div>
           </ColHtV1>
         </RowHtV1>
+
         {/* Pincode Modal */}
-        {/* <ResponsiveModal
+        <ResponsiveModal
           classNames={{ modal: 'pincodeModal' }}
           onCloseModal={this.onClosePincodeModal}
           open={this.state.openPincode}
@@ -207,15 +202,33 @@ export default class MenuSidebar extends Component {
             <HeadingHtV1 fontSize="1.375rem" mb="1rem">
               Please enter your Pincode to serve you better
             </HeadingHtV1>
-            <Pincode color="#f2f2f2" onCloseModal={this.onClosePincodeModal} />
+            <PinCode color="#f2f2f2" onCloseModal={this.onClosePincodeModal} />
           </BoxHtV1>
-        </ResponsiveModal> */}
+        </ResponsiveModal>
+
+        {/* Login Modal */}
+        <ResponsiveModal
+          classNames={{ modal: 'loginModal' }}
+          onCloseModal={this.onCloseLoginModal}
+          open={this.state.openLogin}
+        >
+          <LoginForm />
+        </ResponsiveModal>
+
+        {/* Signup Modal */}
+        <ResponsiveModal
+          classNames={{ modal: 'signupModal' }}
+          onCloseModal={this.onCloseSignupModal}
+          open={this.state.openSignup}
+        >
+          <SignupForm />
+        </ResponsiveModal>
       </BoxHtV1>
     );
   }
 }
 
-MenuSidebar.defaultProps = {
+HeaderTop.defaultProps = {
   selectedPincode: '',
   wishListCount: 0,
   cartCount: 0,
@@ -226,7 +239,7 @@ MenuSidebar.defaultProps = {
   logoutUser: () => {}
 };
 
-MenuSidebar.propTypes = {
+HeaderTop.propTypes = {
   selectedPincode: PropTypes.string,
   isLoggedIn: PropTypes.bool,
   history: PropTypes.object,
