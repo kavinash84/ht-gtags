@@ -19,21 +19,19 @@ export default class CategoryCarousel extends Component {
       data, categoryName, subTitle, id
     } = this.props;
     return (
-      <BoxHtV1 variant="section.categorycarousel">
-        <div>
-          {(categoryName !== '' || categoryName !== null) && <Title title={categoryName} subTitle={subTitle} />}
-          <SlickSlider settings={adjustSlides(data.length)}>
-            {data.map(slide => (
-              <div key={slide.category_id}>
-                <CategoryCarouselItem
-                  image={slide.image_url}
-                  name={slide.info.name}
-                  url={OFFER_ID === id || OFFER_ID === parseInt(id, 10) ? '' : slide.info.url_key}
-                />
-              </div>
-            ))}
-          </SlickSlider>
-        </div>
+      <BoxHtV1>
+        {(categoryName !== '' || categoryName !== null) && <Title title={categoryName} subTitle={subTitle} />}
+        <SlickSlider settings={adjustSlides(data.length)}>
+          {data.map(slide => (
+            <div key={slide.category_id}>
+              <CategoryCarouselItem
+                image={slide.image_url}
+                name={slide.info.name}
+                url={OFFER_ID === id || OFFER_ID === parseInt(id, 10) ? '' : slide.info.url_key}
+              />
+            </div>
+          ))}
+        </SlickSlider>
       </BoxHtV1>
     );
   }
