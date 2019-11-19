@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import NavBar from 'newComponents/NavBar';
-import ContainerHtV1 from 'hometown-components/lib/ContainerHtV1';
-import SectionHtV1 from 'hometown-components/lib/SectionHtV1';
-import HoverMenuBox from 'newComponents/HoverBox/HoverMenuBox';
+import NavBar from 'components/NavBar';
+import TopBar from 'components/TopBar/TopBar';
+import Container from 'hometown-components/lib/Container';
+import Section from 'hometown-components/lib/Section';
+import HoverMenuBox from 'components/HoverBox/HoverMenuBox';
 
 @connect(({ homepage }) => ({
   menuItems: homepage.menu.data
@@ -75,16 +76,20 @@ export default class Menu extends Component {
   render() {
     const { hoverBox, currentMenuData } = this.state;
     const { menuItems } = this.props;
+    const styles = require('./Menu.scss');
 
     return (
-      <SectionHtV1 mb="0" p="0" pt="15px" of="initial" variant="section.menuContainer">
+      <Section mb="0" p="0" pt="15px" of="initial" className={styles.menuContainer}>
+        <Container pr="0" pl="0">
+          <TopBar />
+        </Container>
         <NavBar
           exitOnClick={this.exitOnClick}
           handleEnter={this.enterMenu}
           handleLeave={this.leaveMenu}
           menuItems={menuItems}
         />
-        <ContainerHtV1 pr="0" pl="0">
+        <Container pr="0" pl="0">
           {hoverBox && (
             <HoverMenuBox
               handleEnter={this.enterHoverBox}
@@ -93,11 +98,12 @@ export default class Menu extends Component {
               exitOnClick={this.exitOnClick}
             />
           )}
-        </ContainerHtV1>
-      </SectionHtV1>
+        </Container>
+      </Section>
     );
   }
 }
+
 Menu.defaultProps = {
   menuItems: []
 };
