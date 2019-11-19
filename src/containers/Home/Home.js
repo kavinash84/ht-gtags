@@ -5,10 +5,14 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import cookie from 'js-cookie';
 import { getCities, getOfferStripData, getMiddleBannerData } from 'selectors/homepage';
+import Select from 'react-select';
 
 /* ====== Components ====== */
+import AbsoluteHtV1 from 'hometown-components/lib/AbsoluteHtV1';
 import BodyHtV1 from 'hometown-components/lib/BodyHtV1';
 import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
+import ButtonHtV1 from 'hometown-components/lib/ButtonHtV1';
+import CardHtV1 from 'hometown-components/lib/CardHtV1';
 import ContainerHtV1 from 'hometown-components/lib/ContainerHtV1';
 import ColHtV1 from 'hometown-components/lib/ColHtV1';
 import HeadingHtV1 from 'hometown-components/lib/HeadingHtV1';
@@ -30,6 +34,36 @@ const bannerImage = require('../../static/banner.png');
 const designBuildLogo = require('../../static/designBuildLogo.png');
 
 const OFFER_ID = 5;
+
+const storeLocatorOptions = [
+  { value: 'Mumbai', label: 'Mumbai' },
+  { value: 'Ahmedabad', label: 'Ahmedabad' },
+  { value: 'Vadodara', label: 'Vadodara' }
+];
+
+const customDropdownStyles = {
+  container: provided => ({
+    ...provided,
+    width: 275
+  }),
+  control: provided => ({
+    ...provided,
+    height: 48,
+    borderRadius: 0,
+    border: 'none',
+    backgroundColor: 'rgba(255,255,255, 0.8)'
+  }),
+  placeholder: provided => ({
+    ...provided,
+    color: '#4a4949'
+  }),
+  indicatorsContainer: provided => ({
+    ...provided,
+    path: {
+      fill: '#4a4949'
+    }
+  })
+};
 
 @connect(({
   homepage: {
@@ -187,6 +221,42 @@ export default class Home extends Component {
                   </HeadingHtV1>
                 </ColHtV1>
               </RowHtV1>
+            </ContainerHtV1>
+          </SectionHtV1>
+
+          {/* Store Locator */}
+          <SectionHtV1 variant="section.primary">
+            <ContainerHtV1>
+              <CardHtV1
+                sx={{
+                  backgroundImage: 'url(https://static.hometown.in/media/cms/hometownnew/compressed/furniture.jpg)',
+                  backgroundSize: 'cover',
+                  position: 'relative'
+                }}
+              >
+                <AbsoluteHtV1 height="100%" width={1} bg="rgba(0,0,0,0.5)" top={0} left={0} right={0} bottom={0} />
+                <RowHtV1 height={380} variant="row.contentCenter" sx={{ position: 'relative' }} flexDirection="column">
+                  <BoxHtV1 textAlign="center" mb={30}>
+                    <HeadingHtV1 variant="largeHeading" color="white" mb={10}>
+                      FIND A STORE NEAR YOU
+                    </HeadingHtV1>
+                    <TextHtV1 variant="regular" color="white">
+                      lorem ipsum doler sit lorem ipsum doler sit
+                    </TextHtV1>
+                  </BoxHtV1>
+                  <RowHtV1>
+                    <Select
+                      placeholder="Select your city"
+                      defaultValue={null}
+                      options={storeLocatorOptions}
+                      styles={customDropdownStyles}
+                    />
+                    <ButtonHtV1 width={275} ml={30} variant="primary.large">
+                      LOCATE A STORE
+                    </ButtonHtV1>
+                  </RowHtV1>
+                </RowHtV1>
+              </CardHtV1>
             </ContainerHtV1>
           </SectionHtV1>
         </BodyHtV1>
