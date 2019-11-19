@@ -5,9 +5,11 @@ import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
 // import Text from 'hometown-components/lib/Text';
 // import Div from 'hometown-components/lib/Div';
 
-const Title = ({ title, subTitle }) => (
-  <BoxHtV1 mb="1rem">
-    <TextHtV1 variant="text.catSliderHeading">{title}</TextHtV1>
+const Title = ({ title, subTitle, ...rest }) => (
+  <BoxHtV1 mb="24px" {...rest}>
+    <TextHtV1 variant="heading" textAlign="center" mb={subTitle && 10}>
+      {title}
+    </TextHtV1>
     {subTitle !== '' && <TextHtV1 textAlign="center">{subTitle}</TextHtV1>}
   </BoxHtV1>
 );

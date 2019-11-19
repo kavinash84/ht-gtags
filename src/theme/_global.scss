@@ -22,26 +22,6 @@ body {
 	overflow-x: hidden;
 }
 
-h1,h2,h3,h4,h5,h6,a,span {
-	color: $text;
-}
-@for $i from 1 through 6 {
-	h#{$i} {
-		@if $i == 1 {
-			@include font-size($h1-font-size);
-		} @else if $i == 2 {
-			@include font-size($h2-font-size);
-		} @else if $i == 3 {
-			@include font-size($h3-font-size);
-		} @else if $i == 4 {
-			@include font-size($h4-font-size);
-		} @else if $i == 5 {
-			@include font-size($h5-font-size);
-		} @else if $i == 6 {
-			@include font-size($h6-font-size);
-		}
-	}
-}
 a {
 	transition: 0.5s all ease;
 	label {
@@ -49,16 +29,3 @@ a {
 	}
 }
 /* ----- End of Typography ----- */
-
-/* Global Classed */
-:global {
-	.noPadding {
-		padding: 0;
-	}
-	.pull-right {
-		float: right
-	}
-	.pull-left {
-		float: left
-	}
-}

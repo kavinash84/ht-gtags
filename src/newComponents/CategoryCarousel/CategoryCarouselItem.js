@@ -11,7 +11,7 @@ const CategoryItem = ({ image, name, url }) => {
       <BoxHtV1 variant="section.catSliderItem">
         <Link to={url || '/'}>
           {image && <ImageHtV1 src={image} alt={name} />}
-          <TextHtV1 variant="text.catSliderTitle" mt={6} mb={6}>
+          <TextHtV1 variant="catSliderTitle" mt={12}>
             {name}
           </TextHtV1>
         </Link>
@@ -21,7 +21,7 @@ const CategoryItem = ({ image, name, url }) => {
   return (
     <BoxHtV1 variant="section.catSliderItem">
       {image && <ImageHtV1 src={image} alt={name} />}
-      <TextHtV1 variant="text.catSliderTitle" mt={6} mb={6}>
+      <TextHtV1 variant="catSliderTitle" mt={20}>
         {name}
       </TextHtV1>
     </BoxHtV1>

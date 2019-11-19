@@ -27,6 +27,7 @@ import CategoryCarousel from 'newComponents/CategoryCarousel';
 import Header from 'newComponents/Header';
 import MainSlider from 'newComponents/MainSlider';
 import GridView from 'newComponents/Home/GridView';
+import Usp from 'newComponents/Home/Usp';
 
 const banner = 'https://www.hometown.in/media/cms/hometownnew/banner/hotdeals-midbanner_1.jpg';
 const sliderImage = require('../../static/slider.png');
@@ -150,6 +151,9 @@ export default class Home extends Component {
 
           {/* Main Slider */}
           <MainSlider data={banners} />
+
+          {/* USPs */}
+          <Usp />
 
           {/* Grid View */}
           <SectionHtV1 variant="section.primary">

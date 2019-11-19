@@ -126,7 +126,7 @@ export default class HeaderTop extends Component {
           <ColHtV1 variant="col-5">
             <Search />
           </ColHtV1>
-          <ColHtV1 variant="col-4">
+          <ColHtV1 variant="col-4" flexDirection="row">
             <ButtonHtV1 onClick={this.onOpenPincodeModal}>
               <ImageHtV1 src={PinIcon} alt="Hometown" height="24px" mr="0.3125rem" float="left" />
               {selectedPincode !== '' ? selectedPincode : 'Pincode'}
@@ -137,11 +137,11 @@ export default class HeaderTop extends Component {
             </Link>
             <ButtonHtV1 onClick={isLoggedIn ? onClick(history) : this.onOpenLoginModal}>
               <Fav />
-              <span >{isLoggedIn ? wishListCount : 0}</span>
+              <span>{isLoggedIn ? wishListCount : 0}</span>
             </ButtonHtV1>
             <Link to={CART_URL}>
               <ImageHtV1 src={CartIcon} alt="Hometown" height="24px" />
-              <span >{cartCount}</span>
+              <span>{cartCount}</span>
             </Link>
             <ButtonHtV1
               onFocus={this.handleUserPopIn}
@@ -163,7 +163,7 @@ export default class HeaderTop extends Component {
               </RowHtV1>
               <RowHtV1 display="block" mr="0" ml="0">
                 {!isLoggedIn && (
-                  <div >
+                  <div>
                     <ColHtV1 variant="col-6">
                       <Link to={SIGNUP_URL} onClick={this.handleClick(SIGNUP_URL)}>
                         Sign Up
@@ -177,7 +177,7 @@ export default class HeaderTop extends Component {
                   </div>
                 )}
                 {isLoggedIn && (
-                  <div >
+                  <div>
                     <ColHtV1 variant="col-6">
                       <Link to={MY_PROFILE_URL}>Profile</Link>
                     </ColHtV1>
