@@ -6,12 +6,10 @@ import { connect } from 'react-redux';
 import ContainerHtV1 from 'hometown-components/lib/ContainerHtV1';
 import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
 
-// import Section from 'hometown-components/lib/Section';
-// import HoverMenuBox from 'components/HoverBox/HoverMenuBox';
-
 /* ====== Page Components ====== */
 import HeaderTop from 'newComponents/Header/HeaderTop';
-// import NavBar from 'components/NavBar';
+import HoverMenuBox from 'newComponents/HoverBox/HoverMenuBox';
+import NavBar from 'newComponents/NavBar';
 
 @connect(({ homepage }) => ({
   menuItems: homepage.menu.data
@@ -90,13 +88,13 @@ export default class Header extends Component {
         <ContainerHtV1 pr="0" pl="0">
           <HeaderTop />
         </ContainerHtV1>
-        {/* <NavBar
+        <NavBar
           exitOnClick={this.exitOnClick}
           handleEnter={this.enterMenu}
           handleLeave={this.leaveMenu}
           menuItems={menuItems}
         />
-        <Container pr="0" pl="0">
+        <ContainerHtV1 pr="0" pl="0">
           {hoverBox && (
             <HoverMenuBox
               handleEnter={this.enterHoverBox}
@@ -105,7 +103,7 @@ export default class Header extends Component {
               exitOnClick={this.exitOnClick}
             />
           )}
-        </Container> */}
+        </ContainerHtV1>
       </BoxHtV1>
     );
   }

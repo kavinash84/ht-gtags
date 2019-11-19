@@ -21,7 +21,6 @@ import RowHtV1 from 'hometown-components/lib/RowHtV1';
 import SectionHtV1 from 'hometown-components/lib/SectionHtV1';
 import TextHtV1 from 'hometown-components/lib/TextHtV1';
 import WrapperHtV1 from 'hometown-components/lib/WrapperHtV1';
-import Menu from 'containers/MenuNew/index';
 
 /* ====== Page Components ====== */
 import CategoryCarousel from 'newComponents/CategoryCarousel';
@@ -149,7 +148,8 @@ export default class Home extends Component {
         <BodyHtV1>
           {/* Header */}
           <Header />
-          <Menu />
+
+          {/* <Menu /> */}
           {/* Main Slider */}
           <MainSlider data={banners} />
 

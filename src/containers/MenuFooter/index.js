@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
-import Menu from 'containers/MenuNew/index';
 import Footer from 'components/Footer';
+import Header from 'newComponents/Header';
 
 export default class MenuFooter extends Component {
   render() {
@@ -16,7 +16,7 @@ export default class MenuFooter extends Component {
           {seoDescription && <meta name="description" content={seoDescription} />}
           {seoKeywords && <meta name="keywords" content={seoKeywords} />}
         </Helmet>
-        <Menu />
+        <Header />
         {children}
         {pageTitle && pageTitle === 'Bulk Order' ? '' : <Footer />}
       </div>
