@@ -1,30 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
-
-/* ====== Modules ====== */
+import LoginForm from 'components/Login/LoginForm';
+import GoogleLoginBtn from 'components/Login/GoogleLogin';
+import Row from 'hometown-components/lib/Row';
+import Heading from 'hometown-components/lib/Heading';
+import Div from 'hometown-components/lib/Div';
+import Text from 'hometown-components/lib/Text';
+import { Label } from 'hometown-components/lib/Label';
+import Img from 'hometown-components/lib/Img';
+import Button from 'hometown-components/lib/Buttons';
+import ImageShimmer from 'hometown-components/lib/ImageShimmer';
 import { login, getOtp, resendOtp } from 'redux/modules/login';
-
-/* ====== Helpers ====== */
+import { validateMobile } from 'utils/validation';
 import { allowNChar, allowTypeOf } from 'utils/helper';
 
-/* ====== Validations ====== */
-import { validateMobile } from 'utils/validation';
-
-/* ====== Components ====== */
-import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
-import RowHtV1 from 'hometown-components/lib/RowHtV1';
-import TextHtV1 from 'hometown-components/lib/TextHtV1';
-import ImageHtV1 from 'hometown-components/lib/ImageHtV1';
-import ButtonHtV1 from 'hometown-components/lib/ButtonHtV1';
-import LabelHtV1 from 'hometown-components/lib/LabelHtV1';
-import HeadingHtV1 from 'hometown-components/lib/HeadingHtV1';
-import ImageShimmer from 'hometown-components/lib/ImageShimmer';
-
-/* ====== Page Components ====== */
-import LoginForm from 'newComponents/LoginForms/LoginForm';
-// import GoogleLoginBtn from 'newComponents/Login/GoogleLogin';
-// import LoginViaOtp from 'newComponents/Login/LoginViaOtp';
+import LoginViaOtp from './LoginViaOtp';
 
 const OTPIcon = require('../../../static/otp.svg');
 const EmailIcon = require('../../../static/email-primary.svg');
@@ -46,7 +37,9 @@ export default class LoginFormContainer extends Component {
     getotpError: PropTypes.bool,
     getotpErrorMessage: PropTypes.string,
     otpSent: PropTypes.bool,
+    loaded: PropTypes.bool,
     loading: PropTypes.bool,
+    loggingIn: PropTypes.bool,
     askContact: PropTypes.bool,
     loginType: PropTypes.string
   };
@@ -57,7 +50,9 @@ export default class LoginFormContainer extends Component {
     otpSent: false,
     getotpError: false,
     getotpErrorMessage: '',
+    loaded: false,
     loading: false,
+    loggingIn: false,
     askContact: false,
     loginType: ''
   };
@@ -149,24 +144,38 @@ export default class LoginFormContainer extends Component {
   };
 
   render() {
-    const { loading, askContact, loginType } = this.props;
-
+    const {
+      mobile,
+      mobileError,
+      mobileErrorMessage,
+      otp,
+      otpError,
+      otpErrorMessage,
+      mobilesubmitted,
+      resend
+    } = this.state;
+    const {
+      loaded, loading, loggingIn, askContact, loginType
+    } = this.props;
+    const styles = require('./index.scss');
     return (
-      <BoxHtV1>
-        <RowHtV1 display="block" mr="0" ml="0">
-          <BoxHtV1 variant="col-5">
-            <ImageShimmer
-              src="https://static.hometown.in/media/cms/hometownnew/compressed/signup-sidebar-bg.jpg"
-              height="520px"
-            >
-              {imageURL => <ImageHtV1 height="520px" src={imageURL} alt="" />}
-            </ImageShimmer>
-          </BoxHtV1>
-          <BoxHtV1 variant="col-7" p="1.5rem 2.5rem 0.5rem 2.5rem">
-            <RowHtV1>
-              <RowHtV1 display="block" mt="rem" mr="0" ml="0">
-                <BoxHtV1 variant="col-12" ta="center">
-                  <HeadingHtV1
+      <div className={styles.userWrapper}>
+        <Row display="block" mr="0" ml="0">
+          <Div col={5}>
+            <div className={styles.imgWrapper}>
+              <ImageShimmer
+                src="https://static.hometown.in/media/cms/hometownnew/compressed/signup-sidebar-bg.jpg"
+                height="520px"
+              >
+                {imageURL => <Img height="520px" src={imageURL} alt="" />}
+              </ImageShimmer>
+            </div>
+          </Div>
+          <Div col={7} p="1.5rem 2.5rem 0.5rem 2.5rem">
+            <div className={styles.formBlock}>
+              <Row display="block" mt="rem" mr="0" ml="0">
+                <Div col="12" ta="center">
+                  <Heading
                     color="color676767"
                     mt="0"
                     mb="0"
@@ -176,19 +185,18 @@ export default class LoginFormContainer extends Component {
                     fontFamily="light"
                   >
                     Sign in to your account
-                  </HeadingHtV1>
-                  <TextHtV1 color="color676767" ta="center">
+                  </Heading>
+                  <Text color="color676767" ta="center">
                     To track your orders, manage your account and more.
-                  </TextHtV1>
-                </BoxHtV1>
-              </RowHtV1>
-              <RowHtV1 display="block" mr="0" ml="0" pb="0">
-                <BoxHtV1 mt="0.675rem">
+                  </Text>
+                </Div>
+              </Row>
+              <Row display="block" mr="0" ml="0" pb="0">
+                <Div mt="0.675rem">
                   {!this.state.loginviaotp ? (
                     <LoginForm askContact={askContact} loginType={loginType} loading={loading} />
                   ) : (
-                    {
-                      /* <LoginViaOtp
+                    <LoginViaOtp
                       onChangeMobile={this.onChangeMobile}
                       onChangeOtp={this.onChangeOtp}
                       onSubmitMobileNumber={this.onSubmitMobileNumber}
@@ -205,19 +213,18 @@ export default class LoginFormContainer extends Component {
                       loggingIn={loggingIn}
                       handleResend={this.handleResend}
                       resend={resend}
-                    /> */
-                    }
+                    />
                   )}
-                </BoxHtV1>
-              </RowHtV1>
-              <RowHtV1 display="block" mr="0" ml="0" pt="1.25rem">
-                <BoxHtV1 variant="col-12" ta="center" mb="0.625rem">
-                  <LabelHtV1 fontFamily="regular" ta="center" color="color79716c" fontSize="1rem" va="middle">
+                </Div>
+              </Row>
+              <Row className={styles.socialLogin} display="block" mr="0" ml="0" pt="1.25rem">
+                <Div col="12" ta="center" mb="0.625rem">
+                  <Label fontFamily="regular" ta="center" color="color79716c" fontSize="1rem" va="middle">
                     Or continue with
-                  </LabelHtV1>
-                </BoxHtV1>
-                <BoxHtV1 variant="col-6" ta="center" mb="0" pr="0.625rem">
-                  <ButtonHtV1
+                  </Label>
+                </Div>
+                <Div col="6" ta="center" mb="0" pr="0.625rem">
+                  <Button
                     btnType="custom"
                     fontFamily="regular"
                     ta="center"
@@ -232,28 +239,28 @@ export default class LoginFormContainer extends Component {
                     onClick={this.toggleLoginForm}
                   >
                     {!this.state.loginviaotp ? (
-                      <ImageHtV1 display="inline-block" src={OTPIcon} alt="OTP" va="sub" width="18px" mr="10px" />
+                      <Img display="inline-block" src={OTPIcon} alt="OTP" va="sub" width="18px" mr="10px" />
                     ) : (
-                      <ImageHtV1 display="inline-block" src={EmailIcon} alt="OTP" va="sub" width="18px" mr="10px" />
+                      <Img display="inline-block" src={EmailIcon} alt="OTP" va="sub" width="18px" mr="10px" />
                     )}
                     {!this.state.loginviaotp ? 'OTP' : 'Login Via Email Id'}
-                  </ButtonHtV1>
-                </BoxHtV1>
-                <BoxHtV1 variant="col-6" ta="center" mb="0" pl="0.625rem">
-                  {/* <GoogleLoginBtn askContact={askContact} loginType={loginType} loading={loading} /> */}
-                </BoxHtV1>
-              </RowHtV1>
-            </RowHtV1>
-            {/* <RowHtV1 display="block" mr="0" ml="0" pt="0.3125rem">
-              <BoxHtV1 variant="col-12">
-                <LabelHtV1 fontFamily="medium" color="error" display="block" ta="center">
+                  </Button>
+                </Div>
+                <Div col="6" ta="center" mb="0" pl="0.625rem">
+                  <GoogleLoginBtn askContact={askContact} loginType={loginType} loading={loading} />
+                </Div>
+              </Row>
+            </div>
+            {/* <Row display="block" mr="0" ml="0" pt="0.3125rem">
+              <Div col="12">
+                <Label fontFamily="medium" color="error" display="block" ta="center">
                   Message
-                </LabelHtV1>
-              </BoxHtV1>
-            </RowHtV1> */}
-          </BoxHtV1>
-        </RowHtV1>
-      </BoxHtV1>
+                </Label>
+              </Div>
+            </Row> */}
+          </Div>
+        </Row>
+      </div>
     );
   }
 }

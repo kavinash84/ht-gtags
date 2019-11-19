@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
-// import Footer from 'components/Footer';
+import Footer from 'components/Footer';
 import Header from 'newComponents/Header';
 
 export default class MenuFooter extends Component {
@@ -18,7 +18,7 @@ export default class MenuFooter extends Component {
         </Helmet>
         <Header />
         {children}
-        {/* {pageTitle && pageTitle === 'Bulk Order' ? '' : <Footer />} */}
+        {pageTitle && pageTitle === 'Bulk Order' ? '' : <Footer />}
       </div>
     );
   }

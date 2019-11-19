@@ -2,26 +2,18 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-
-/* ====== Modules ====== */
-import { signUp } from 'redux/modules/signUp';
-
-/* ====== Helpers ====== */
-import { allowNChar, allowTypeOf } from 'utils/helper';
-import { LOGIN_URL } from 'helpers/Constants';
-
-/* ====== Validations ====== */
-import { validateMobile, validatePassword, validateEmail } from 'utils/validation';
-
-/* ====== Components ====== */
-import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
-import ColHtV1 from 'hometown-components/lib/ColHtV1';
-import RowHtV1 from 'hometown-components/lib/RowHtV1';
-import TextHtV1 from 'hometown-components/lib/TextHtV1';
-import ImageHtV1 from 'hometown-components/lib/ImageHtV1';
-import HeadingHtV1 from 'hometown-components/lib/HeadingHtV1';
+import SignupForm from 'hometown-components/lib/Forms/SignupForm';
+import Text from 'hometown-components/lib/Text';
+import Row from 'hometown-components/lib/Row';
+import Heading from 'hometown-components/lib/Heading';
+import Div from 'hometown-components/lib/Div';
+import Theme from 'hometown-components/lib/Theme';
+import Img from 'hometown-components/lib/Img';
 import ImageShimmer from 'hometown-components/lib/ImageShimmer';
-import SignUpFormHtV1 from 'hometown-components/lib/FormsHtV1/SignUpFormHtV1';
+import { validateMobile, validatePassword, validateEmail } from 'utils/validation';
+import { LOGIN_URL } from 'helpers/Constants';
+import { signUp } from 'redux/modules/signUp';
+import { allowNChar, allowTypeOf } from 'utils/helper';
 
 @connect(({ userSignUp, app }) => ({
   loading: userSignUp.loading,
@@ -114,6 +106,8 @@ export default class SignupFormContainer extends Component {
     dispatch(signUp(this.state, session, signupOrigin));
   };
   render() {
+    const styles = require('./index.scss');
+
     const {
       email,
       phone,
@@ -126,38 +120,52 @@ export default class SignupFormContainer extends Component {
       passwordErrorMessage
     } = this.state;
     const { loading } = this.props;
-
     return (
-      <BoxHtV1>
-        <RowHtV1>
-          <ColHtV1 variant="col-12">
-            <HeadingHtV1>Be the first!</HeadingHtV1>
-            <TextHtV1>to get regular updates on new product launches, exclusive previews and specials offers.</TextHtV1>
-          </ColHtV1>
-        </RowHtV1>
-        <RowHtV1>
-          <ColHtV1 variant="col-6">
-            <BoxHtV1>
+      <div className={styles.signupWrapper}>
+        <Row display="block" mr="0" ml="0">
+          <Div col={12} bg={Theme.colors.colora39994} pt="0.625rem" pb="0.625rem">
+            <Heading
+              color="white"
+              mt="0"
+              mb="0"
+              fontWeight="400"
+              fontSize="2.75rem"
+              ta="center"
+              fontFamily="light"
+              lh="1"
+            >
+              Be the first!
+            </Heading>
+            <Text color="white" ta="center" mb="0" mt="0" fontSize="1rem">
+              to get regular updates on new product launches, exclusive previews and specials offers.
+            </Text>
+          </Div>
+        </Row>
+        <Row display="block" mr="0" ml="0">
+          <Div col={6}>
+            <div className={styles.imgWrapper}>
               <ImageShimmer src="https://static.hometown.in/media/cms/hometownnew/compressed/login.jpg" height="514px">
-                {imageURL => <ImageHtV1 src={imageURL} alt="" />}
+                {imageURL => <Img src={imageURL} alt="" />}
               </ImageShimmer>
-            </BoxHtV1>
-          </ColHtV1>
-          <ColHtV1 variant="col-6">
-            <BoxHtV1>
-              <RowHtV1>
-                <ColHtV1 variant="col-12" ta="center">
-                  <HeadingHtV1>
+            </div>
+          </Div>
+          <Div col={6} p="1.25rem 3.5rem">
+            <div className={styles.formBlock}>
+              <Row display="block" mt="0" mr="0" ml="0">
+                <Div col="12" ta="center">
+                  <Heading color="#000" mt="0" mb="0" fontWeight="400" fontSize="2rem" ta="center" fontFamily="light">
                     Sign up now
                     <br />
                     and get Rs. 500 off*
-                  </HeadingHtV1>
-                  <TextHtV1>on your first purchase</TextHtV1>
-                </ColHtV1>
-              </RowHtV1>
-              <RowHtV1>
-                <ColHtV1>
-                  <SignUpFormHtV1
+                  </Heading>
+                  <Text color="#676767" ta="center" fontSize="1rem" mt="0">
+                    on your first purchase
+                  </Text>
+                </Div>
+              </Row>
+              <Row display="block" mr="0" ml="0">
+                <Div mt="0">
+                  <SignupForm
                     email={email}
                     onChangeEmail={this.onChangeEmail}
                     emailFeedBackError={emailError}
@@ -174,12 +182,12 @@ export default class SignupFormContainer extends Component {
                     loading={loading}
                     loginUrl={LOGIN_URL}
                   />
-                </ColHtV1>
-              </RowHtV1>
-            </BoxHtV1>
-          </ColHtV1>
-        </RowHtV1>
-      </BoxHtV1>
+                </Div>
+              </Row>
+            </div>
+          </Div>
+        </Row>
+      </div>
     );
   }
 }
