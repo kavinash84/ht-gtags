@@ -149,7 +149,6 @@ export default class Home extends Component {
           {/* Header */}
           <Header />
 
-          {/* <Menu /> */}
           {/* Main Slider */}
           <MainSlider data={banners} />
 

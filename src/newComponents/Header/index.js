@@ -80,12 +80,10 @@ export default class Header extends Component {
   render() {
     const { hoverBox, currentMenuData } = this.state;
     const { menuItems } = this.props;
-    const styles = require('./Header.scss');
-    console.log(hoverBox, currentMenuData, menuItems);
 
     return (
-      <BoxHtV1 className={styles.menuContainer}>
-        <ContainerHtV1 pr="0" pl="0">
+      <BoxHtV1 mt={15}>
+        <ContainerHtV1 pr="0" pl="0" mb={10}>
           <HeaderTop />
         </ContainerHtV1>
         <NavBar

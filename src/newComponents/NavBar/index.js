@@ -1,12 +1,18 @@
 import React, { Fragment, Component } from 'react';
-import Container from 'hometown-components/lib/Container';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+/* ====== Components ====== */
+import AbsoluteHtV1 from 'hometown-components/lib/AbsoluteHtV1';
 import ButtonHtV1 from 'hometown-components/lib/ButtonHtV1';
-import LabelHtV1 from 'hometown-components/lib/Label';
-import PropTypes from 'prop-types';
-
-const styles = require('./NavBar.scss');
+import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
+import ContainerHtV1 from 'hometown-components/lib/ContainerHtV1';
+import LabelHtV1 from 'hometown-components/lib/LabelHtV1';
+import LiHtV1 from 'hometown-components/lib/LiHtV1';
+import LinkRedirectHtV1 from 'hometown-components/lib/LinkRedirectHtV1';
+import RowHtV1 from 'hometown-components/lib/RowHtV1';
+import TextHtV1 from 'hometown-components/lib/TextHtV1';
+import UlHtV1 from 'hometown-components/lib/UlHtV1';
 
 // const { SITE_URL } = process.env;
 
@@ -24,12 +30,15 @@ class NavBar extends Component {
       });
     const main = cats.length ? cats.slice(0, 7) : [];
     const more = cats.length && cats.length > 7 ? cats.slice(7) : [];
+
     return (
-      <div className={styles.navBar} onMouseLeave={handleLeave}>
-        <Container pr="0" pl="0">
-          <div className={styles.navBarSlider}>
+      <BoxHtV1 onMouseLeave={handleLeave}>
+        <ContainerHtV1 pr="0" pl="0">
+          <RowHtV1 variant="row.nav">
             {main.map((menuItem, i) => (
-              <Link
+              <TextHtV1
+                as={Link}
+                variant="menu"
                 onClick={exitOnClick}
                 title={menuItem.name}
                 to={`/${menuItem.url_key}`}
@@ -38,32 +47,36 @@ class NavBar extends Component {
               >
                 {menuItem.name === 'Hot Deals' ? (
                   <Fragment>
-                    <LabelHtV1>New</LabelHtV1>
+                    <LabelHtV1 as={AbsoluteHtV1} variant="menuNew">
+                      New
+                    </LabelHtV1>
                     {menuItem.name}
                   </Fragment>
                 ) : (
                   menuItem.name
                 )}
-              </Link>
+              </TextHtV1>
             ))}
-            <Link
+            <TextHtV1
+              as={Link}
+              variant="menu"
               to="/modular-kitchens"
               title="Modular Kitchens"
               target="_blank"
               rel="noopener noreferrer"
               onClick={exitOnClick}
             >
-              Modular Kitchens
-            </Link>
-            <div mt={-2}>
+              {'Modular Kitchens'}
+            </TextHtV1>
+            <BoxHtV1 sx={{ position: 'relative' }}>
               <ButtonHtV1 padding="10px 15px 10px 0px" variant="buttons.outline">
                 More
               </ButtonHtV1>
-              <div>
-                <ul>
+              <AbsoluteHtV1 zIndex={2} bg="white" border="dropdown">
+                <UlHtV1 pl={0}>
                   {more &&
                     more.map((menuItem, i) => (
-                      <li key={`${menuItem.id}_${String(i)}`}>
+                      <LiHtV1 key={`${menuItem.id}_${String(i)}`}>
                         <Link
                           onClick={exitOnClick}
                           onMouseEnter={handleEnter('')}
@@ -72,14 +85,14 @@ class NavBar extends Component {
                         >
                           {menuItem.name || 'Hometown'}
                         </Link>
-                      </li>
+                      </LiHtV1>
                     ))}
-                  <li>
+                  <LiHtV1>
                     <Link onClick={exitOnClick} to="/bulk-order" onMouseEnter={handleEnter('')} title="Bulk Order">
                       Bulk Order
                     </Link>
-                  </li>
-                  <li>
+                  </LiHtV1>
+                  <LiHtV1>
                     <Link
                       to="/design-build"
                       title="Design & Build"
@@ -89,9 +102,9 @@ class NavBar extends Component {
                     >
                       Design & Build
                     </Link>
-                  </li>
-                  <li>
-                    <a
+                  </LiHtV1>
+                  <LiHtV1>
+                    <LinkRedirectHtV1
                       href="https://hometown.in/media/Institutional+Catalogue.pdf"
                       title="Festive Gifts Catalogue"
                       download
@@ -99,14 +112,14 @@ class NavBar extends Component {
                       rel="noopener noreferrer"
                     >
                       Gifting Catalogue
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </div>
+                    </LinkRedirectHtV1>
+                  </LiHtV1>
+                </UlHtV1>
+              </AbsoluteHtV1>
+            </BoxHtV1>
+          </RowHtV1>
+        </ContainerHtV1>
+      </BoxHtV1>
     );
   }
 }

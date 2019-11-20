@@ -18,12 +18,17 @@ import { titleCase, checkRedirection } from 'utils/helper';
 /* ====== Components ====== */
 import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
 import ButtonHtV1 from 'hometown-components/lib/ButtonHtV1';
+import CartIcon from 'hometown-components/lib/Icons/CartHtV1';
 import ColHtV1 from 'hometown-components/lib/ColHtV1';
-import Fav from 'hometown-components/lib/Icons/FavHtV1';
+import FlexHtV1 from 'hometown-components/lib/FlexHtV1';
+import FavIcon from 'hometown-components/lib/Icons/FavHtV1';
 import HeadingHtV1 from 'hometown-components/lib/HeadingHtV1';
 import ImageHtV1 from 'hometown-components/lib/ImageHtV1';
 import LabelHtV1 from 'hometown-components/lib/LabelHtV1';
+import LocationIcon from 'hometown-components/lib/Icons/LocationHtV1';
 import RowHtV1 from 'hometown-components/lib/RowHtV1';
+import UserIcon from 'hometown-components/lib/Icons/UserHtV1';
+import TextHtV1 from 'hometown-components/lib/TextHtV1';
 
 /* ====== Page Components ====== */
 import Search from 'newComponents/Search';
@@ -33,9 +38,6 @@ import LoginForm from 'newComponents/Login/LoginForm';
 import SignupForm from 'newComponents/Signup/SignupForm';
 
 const LogoIcon = require('../../../static/logo@2x.png');
-const CartIcon = require('../../../static/cart-icon.svg');
-const PinIcon = require('../../../static/map-icon.svg');
-const UserIcon = require('../../../static/user-icon.svg');
 const PincodeModalIcon = require('../../../static/map-placeholder.svg');
 
 const onClick = history => e => {
@@ -116,46 +118,52 @@ export default class HeaderTop extends Component {
     } = this.props;
 
     return (
-      <BoxHtV1 my={15}>
+      <BoxHtV1>
         <RowHtV1 alignItems="center">
           <ColHtV1 variant="col-3">
             <Link to={HOME_URL}>
-              <ImageHtV1 src={LogoIcon} alt="Hometown" />
+              <ImageHtV1 height={28} src={LogoIcon} alt="Hometown" />
             </Link>
           </ColHtV1>
-          <ColHtV1 variant="col-5">
+          <ColHtV1 variant="col-4">
             <Search />
           </ColHtV1>
-          <ColHtV1 variant="col-4" flexDirection="row">
-            <ButtonHtV1 onClick={this.onOpenPincodeModal}>
-              <ImageHtV1 src={PinIcon} alt="Hometown" height="24px" mr="0.3125rem" float="left" />
-              {selectedPincode !== '' ? selectedPincode : 'Pincode'}
+          <ColHtV1 variant="col-5" flexDirection="row" justifyContent="flex-end">
+            <ButtonHtV1 variant="link" onClick={this.onOpenPincodeModal}>
+              <FlexHtV1 variant="row.alignCenter">
+                <LocationIcon />
+                <TextHtV1 variant="headerLabel">{selectedPincode !== '' ? selectedPincode : 'Pincode'}</TextHtV1>
+              </FlexHtV1>
             </ButtonHtV1>
             <Link to="/store-locator">
-              <ImageHtV1 src={PinIcon} alt="Hometown" height="24px" mr="0.3125rem" float="left" />
-              Store Locator
+              <FlexHtV1 variant="row.alignCenter" ml={20}>
+                <LocationIcon />
+                <TextHtV1 variant="headerLabel">Store Locator</TextHtV1>
+              </FlexHtV1>
             </Link>
-            <ButtonHtV1 onClick={isLoggedIn ? onClick(history) : this.onOpenLoginModal}>
-              <Fav />
-              <span>{isLoggedIn ? wishListCount : 0}</span>
+            <ButtonHtV1 variant="link" ml={20} onClick={isLoggedIn ? onClick(history) : this.onOpenLoginModal}>
+              <FlexHtV1 variant="row.alignCenter">
+                <FavIcon />
+                <TextHtV1 variant="headerLabel">{isLoggedIn ? wishListCount : 0}</TextHtV1>
+              </FlexHtV1>
             </ButtonHtV1>
             <Link to={CART_URL}>
-              <ImageHtV1 src={CartIcon} alt="Hometown" height="24px" />
-              <span>{cartCount}</span>
+              <FlexHtV1 variant="row.alignCenter" ml={20}>
+                <CartIcon />
+                <TextHtV1 variant="headerLabel">{cartCount}</TextHtV1>
+              </FlexHtV1>
             </Link>
             <ButtonHtV1
+              variant="link"
               onFocus={this.handleUserPopIn}
               onBlur={this.handleUserPopOver}
               onMouseOver={this.handleUserPopIn}
               onMouseOut={this.handleUserPopOver}
+              ml={20}
             >
-              {isLoggedIn ? (
-                `Hi ${titleCase(name)} `
-              ) : (
-                <ImageHtV1 src={UserIcon} alt="Account" height="24px" mr="0" float="left" />
-              )}
+              {isLoggedIn ? <TextHtV1 variant="headerLabel">Hi ${titleCase(name)}</TextHtV1> : <UserIcon />}
             </ButtonHtV1>
-            <div display={userPopOver ? 'block' : 'none'}>
+            <BoxHtV1 display={userPopOver ? 'block' : 'none'}>
               <RowHtV1 display="block" mr="0" ml="0">
                 <ColHtV1 variant="col-12">
                   <LabelHtV1>{isLoggedIn ? 'Your Account' : 'My Account'}</LabelHtV1>
@@ -187,7 +195,7 @@ export default class HeaderTop extends Component {
                   </div>
                 )}
               </RowHtV1>
-            </div>
+            </BoxHtV1>
           </ColHtV1>
         </RowHtV1>
 
