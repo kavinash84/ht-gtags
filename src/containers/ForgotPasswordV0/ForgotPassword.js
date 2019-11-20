@@ -2,18 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import Header from 'newComponents/Header';
-
-// import Footer from 'components/Footer';
-import ForgotPasswordFormHtV1 from 'hometown-components/lib/FormsHtV1/ForgotPasswordFormHtV1';
-import ContainerHtV1 from 'hometown-components/lib/ContainerHtV1';
-import SectionHtV1 from 'hometown-components/lib/SectionHtV1';
-import RowHtV1 from 'hometown-components/lib/RowHtV1';
-import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
-import ImageHtV1 from 'hometown-components/lib/ImageHtV1';
-import ImageShimmerHtV1 from 'hometown-components/lib/ImageShimmerHtV1';
-import HeadingHtV1 from 'hometown-components/lib/HeadingHtV1';
-import TextHtV1 from 'hometown-components/lib/TextHtV1';
+import Menu from 'containers/MenuNew/index';
+import Footer from 'components/Footer';
+import ForgotPasswordForm from 'hometown-components/lib/Forms/ForgotPasswordForm';
+import Container from 'hometown-components/lib/Container';
+import Section from 'hometown-components/lib/Section';
+import Row from 'hometown-components/lib/Row';
+import Div from 'hometown-components/lib/Div';
+import Img from 'hometown-components/lib/Img';
+import ImageShimmer from 'hometown-components/lib/ImageShimmer';
+import Heading from 'hometown-components/lib/Heading';
+import Text from 'hometown-components/lib/Text';
 import { LOGIN_URL } from 'helpers/Constants';
 import { validateEmail } from 'js-utility-functions';
 import { forgotPassword } from 'redux/modules/forgotpassword';
@@ -76,46 +75,46 @@ export default class ForgotPasswordContainer extends Component {
     const { response } = this.props;
     const { loaded, error } = response;
     return (
-      <SectionHtV1 p="0" mb="0">
-        <Header />
-        <BoxHtV1>
-          <ContainerHtV1 pr="0" pl="0">
-            <BoxHtV1 p="3rem 0 3rem">
-              <BoxHtV1 className={styles.userWrapper}>
-                <RowHtV1 display="block" mr="0" ml="0">
-                  <BoxHtV1 col={6}>
-                    <BoxHtV1 className={styles.imgWrapper}>
+      <Section p="0" mb="0">
+        <Menu />
+        <div className="wrapper">
+          <Container pr="0" pl="0">
+            <Div p="3rem 0 3rem">
+              <div className={styles.userWrapper}>
+                <Row display="block" mr="0" ml="0">
+                  <Div col={6}>
+                    <div className={styles.imgWrapper}>
                       {/*eslint-disable*/}
-                      <ImageShimmerHtV1
+                      <ImageShimmer
                         src="https://static.hometown.in/media/cms/hometownnew/compressed/forgotpassword-sidebar-bg.jpg"
                         height="596px"
                       >
-                        {imageURL => <ImageHtV1 src={imageURL} alt="" />}
-                      </ImageShimmerHtV1>
+                        {imageURL => <Img src={imageURL} alt="" />}
+                      </ImageShimmer>
                       {/* eslint-enable */}
-                    </BoxHtV1>
-                  </BoxHtV1>
-                  <BoxHtV1 col={6} p="1.25rem 3.5rem">
+                    </div>
+                  </Div>
+                  <Div col={6} p="1.25rem 3.5rem">
                     {loaded && !error && submitted ? (
-                      <BoxHtV1 className={`${styles.responseBlock}`}>
-                        <ImageHtV1 src={ForgotPasswordImg} alt="" />
-                        <RowHtV1 display="block" mr="0" ml="0">
-                          <BoxHtV1 mt="0">
-                            <BoxHtV1 className={styles.content}>
+                      <div className={`${styles.responseBlock}`}>
+                        <img src={ForgotPasswordImg} alt="" />
+                        <Row display="block" mr="0" ml="0">
+                          <Div mt="0">
+                            <div className={styles.content}>
                               <p>
                                 An email has been sent to <br />
                                 <b>{email}</b>
                               </p>
                               <p>Please follow the instructions to reset your password</p>
-                            </BoxHtV1>
-                          </BoxHtV1>
-                        </RowHtV1>
-                      </BoxHtV1>
+                            </div>
+                          </Div>
+                        </Row>
+                      </div>
                     ) : (
-                      <BoxHtV1 className={`${styles.formBlock} ${styles.forgotForm}`}>
-                        <RowHtV1 display="block" mt="1.5rem" mr="0" ml="0">
-                          <BoxHtV1 col="12" ta="center">
-                            <HeadingHtV1
+                      <div className={`${styles.formBlock} ${styles.forgotForm}`}>
+                        <Row display="block" mt="1.5rem" mr="0" ml="0">
+                          <Div col="12" ta="center">
+                            <Heading
                               color="color676767"
                               mt="0"
                               mb="0"
@@ -125,16 +124,16 @@ export default class ForgotPasswordContainer extends Component {
                               fontFamily="light"
                             >
                               Forgot password?
-                            </HeadingHtV1>
-                            <TextHtV1 color="color676767" ta="center" lh="1.6">
+                            </Heading>
+                            <Text color="color676767" ta="center" lh="1.6">
                               Enter the e-mail address associated with your account <br />
                               Click submit to have your password e-mailed to you.
-                            </TextHtV1>
-                          </BoxHtV1>
-                        </RowHtV1>
-                        <RowHtV1 display="block" mr="0" ml="0">
-                          <BoxHtV1 mt="0">
-                            <ForgotPasswordFormHtV1
+                            </Text>
+                          </Div>
+                        </Row>
+                        <Row display="block" mr="0" ml="0">
+                          <Div mt="0">
+                            <ForgotPasswordForm
                               email={email}
                               onChangeEmail={this.onChangeEmail}
                               emailFeedBackError={emailError}
@@ -143,18 +142,18 @@ export default class ForgotPasswordContainer extends Component {
                               forgotResponse={response}
                               loginUrl={LOGIN_URL}
                             />
-                          </BoxHtV1>
-                        </RowHtV1>
-                      </BoxHtV1>
+                          </Div>
+                        </Row>
+                      </div>
                     )}
-                  </BoxHtV1>
-                </RowHtV1>
-              </BoxHtV1>
-            </BoxHtV1>
-          </ContainerHtV1>
-        </BoxHtV1>
-        {/* <Footer /> */}
-      </SectionHtV1>
+                  </Div>
+                </Row>
+              </div>
+            </Div>
+          </Container>
+        </div>
+        <Footer />
+      </Section>
     );
   }
 }
