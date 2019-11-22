@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import LazyLoad from 'react-lazyload';
 import Helmet from 'react-helmet';
@@ -29,7 +29,6 @@ import MainSlider from 'newComponents/MainSlider';
 import GridView from 'newComponents/Home/GridView';
 import Usp from 'newComponents/Home/Usp';
 
-const banner = 'https://www.hometown.in/media/cms/hometownnew/banner/hotdeals-midbanner_1.jpg';
 const sliderImage = require('../../static/slider.png');
 const bannerImage = require('../../static/banner.png');
 const designBuildLogo = require('../../static/designBuildLogo.png');
@@ -163,32 +162,37 @@ export default class Home extends Component {
           </SectionHtV1>
 
           {/* Category Carousel */}
-          <SectionHtV1 variant="section.primary">
-            <ContainerHtV1>
-              {homepageCategories.map((category, index) => {
-                const { id } = category;
-                if (id && OFFER_ID !== id && OFFER_ID !== parseInt(id, 10)) {
-                  return (
-                    <LazyLoad height={200} offset={100} key={String(index)}>
-                      <CategoryCarousel
-                        categoryName={category.title}
-                        subTitle={category.sub_title}
-                        data={category.values}
-                      />
-                    </LazyLoad>
-                  );
-                }
-                return '';
-              })}
-            </ContainerHtV1>
-          </SectionHtV1>
+          <Fragment>
+            {homepageCategories.map((category, index) => {
+              const { id } = category;
+              if (id && OFFER_ID !== id && OFFER_ID !== parseInt(id, 10)) {
+                return (
+                  <SectionHtV1 variant="section.primary">
+                    <ContainerHtV1>
+                      <LazyLoad height={200} offset={100} key={String(index)}>
+                        <CategoryCarousel
+                          categoryName={category.title}
+                          subTitle={category.sub_title}
+                          data={category.values}
+                        />
+                      </LazyLoad>
+                    </ContainerHtV1>
+                  </SectionHtV1>
+                );
+              }
+              return '';
+            })}
+          </Fragment>
 
           {/* Offer Banner */}
           <SectionHtV1 variant="section.primary">
             <ContainerHtV1>
               <RowHtV1>
                 <ColHtV1>
-                  <ImageHtV1 src={banner} variant="image" />
+                  <ImageHtV1
+                    src="https://www.hometown.in/media/cms/hometownnew/banner/hotdeals-midbanner_1.jpg"
+                    variant="image"
+                  />
                 </ColHtV1>
               </RowHtV1>
             </ContainerHtV1>
