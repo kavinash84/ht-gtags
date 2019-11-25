@@ -1,24 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-import Menu from 'containers/MenuNew/index';
-import MainSlider from 'components/MainSlider';
-import CategoryFilters from 'components/Category/CategoryFilters';
-import Section from 'hometown-components/lib/Section';
-import Div from 'hometown-components/lib/Div';
-import Row from 'hometown-components/lib/Row';
-import Title from 'components/Title';
-import Container from 'hometown-components/lib/Container';
+// import Menu from 'containers/MenuNew/index';
+import Header from 'newComponents/Header';
+import MainSlider from 'newComponents/MainSlider';
+// import CategoryFilters from 'components/Category/CategoryFilters';
+import SectionHtV1 from 'hometown-components/lib/SectionHtV1';
+import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
+import RowHtV1 from 'hometown-components/lib/RowHtV1';
+// import Title from 'components/Title';
+import ContainerHtV1 from 'hometown-components/lib/ContainerHtV1';
 import { connect } from 'react-redux';
-import Footer from 'components/Footer';
-import SeoContent from 'components/SeoContent';
-import CommonLayout from 'components/Category/CommonLayout';
+// import Footer from 'components/Footer';
+// import SeoContent from 'components/SeoContent';
+import CommonLayout from 'newComponents/Category/CommonLayout';
 
-const getSubMenu = (categories, key) =>
-  categories && categories.filter(category => category.url_key === key)[0].children;
+// const getSubMenu = (categories, key) =>
+//   categories && categories.filter(category => category.url_key === key)[0].children;
 
-@connect(({ homepage: { menu }, category: { data } }) => ({
-  menu: menu.data,
+@connect(({ homepage: { banners }, category: { data } }) => ({
+  // menu: menu.data,
+  banners: banners.data,
   category: data && data.items && data.items.text,
   seoInfo: data && data.seo && data.seo.items
 }))
@@ -27,52 +29,53 @@ export default class Category extends Component {
     const {
       category,
       seoInfo,
-      menu,
+      banners,
       match: {
         params: { category: currentCategory }
       }
     } = this.props;
+
     /* eslint-disable react/no-danger */
     return (
-      <Section p="0" mb="0">
+      <SectionHtV1>
         <Helmet title={`${(seoInfo && seoInfo.page_title) || (currentCategory && currentCategory.toUpperCase())}`}>
           <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
           <meta name="description" content={seoInfo && seoInfo.meta_description} />
         </Helmet>
-        <div className="wrapper">
-          <Menu />
-          {category && <MainSlider data={category.main} />}
-          <Container pr="0" pl="0">
-            <Row display="block" pt="2.25rem" ml="0" mr="0">
-              <Div col={2}>
-                <Title title="Categories" subTitle="" ta="left" titleColor="#424242" />
-                <CategoryFilters data={getSubMenu(menu, currentCategory)} />
-              </Div>
-              <Div col={10} pl="3rem">
+        <BoxHtV1>
+          <Header />
+          {banners && <MainSlider data={banners} />}
+          <ContainerHtV1 pr="0" pl="0">
+            <RowHtV1 display="block" pt="2.25rem" ml="0" mr="0">
+              {/* <BoxHtV1 col={2}> */}
+              {/* <Title title="Categories" subTitle="" ta="left" titleColor="#424242" /> */}
+              {/* <CategoryFilters data={getSubMenu(menu, currentCategory)} /> */}
+              {/* </BoxHtV1> */}
+              <BoxHtV1 pl="3rem">
                 {category &&
-                  category.sections &&
+                  category.HtV1s &&
                   category.sections.map((cat, index) => (
-                    <div key={String(index)}>{CommonLayout(cat.component, cat.title, cat.data, cat.grid)}</div>
+                    <BoxHtV1 key={String(index)}>{CommonLayout(cat.component, cat.title, cat.data, cat.grid)}</BoxHtV1>
                   ))}
-              </Div>
-            </Row>
-          </Container>
-        </div>
-        {seoInfo &&
+              </BoxHtV1>
+            </RowHtV1>
+          </ContainerHtV1>
+        </BoxHtV1>
+        {/* {seoInfo &&
           seoInfo.seo_text && (
           <SeoContent>
-            <div dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }} />
+            <BoxHtV1 dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }} />
           </SeoContent>
-        )}
-        <Footer />
-      </Section>
+        )} */}
+        {/* <Footer /> */}
+      </SectionHtV1>
     );
   }
 }
 
 Category.defaultProps = {
   category: [],
-  menu: [],
+  banners: [],
   seoInfo: {
     seo_text: ''
   }
@@ -80,7 +83,7 @@ Category.defaultProps = {
 
 Category.propTypes = {
   category: PropTypes.array,
-  menu: PropTypes.array,
+  banners: PropTypes.array,
   match: PropTypes.shape({
     params: PropTypes.object.isRequired
   }).isRequired,
