@@ -155,7 +155,7 @@ export default class Home extends Component {
           <Usp />
 
           {/* Grid View */}
-          <SectionHtV1 variant="section.primary">
+          <SectionHtV1>
             <ContainerHtV1>
               <GridView />
             </ContainerHtV1>
@@ -185,7 +185,7 @@ export default class Home extends Component {
           </Fragment>
 
           {/* Offer Banner */}
-          <SectionHtV1 variant="section.primary">
+          <SectionHtV1>
             <ContainerHtV1>
               <RowHtV1>
                 <ColHtV1>
@@ -199,7 +199,7 @@ export default class Home extends Component {
           </SectionHtV1>
 
           {/* LET US DESIGN FOR YOU */}
-          <SectionHtV1 variant="section.primary">
+          <SectionHtV1>
             <ContainerHtV1>
               <RowHtV1 mb={24}>
                 <ColHtV1 justifyContent="center">
@@ -233,7 +233,7 @@ export default class Home extends Component {
           </SectionHtV1>
 
           {/* Store Locator */}
-          <SectionHtV1 variant="section.primary">
+          <SectionHtV1>
             <ContainerHtV1>
               <CardHtV1
                 sx={{

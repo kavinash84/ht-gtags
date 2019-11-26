@@ -1,7 +1,10 @@
 import React from 'react';
-import FormInput from 'hometown-components/lib/Forms/FormInput';
-import Button from 'hometown-components/lib/Buttons';
 import PropTypes from 'prop-types';
+
+/* ====== Components ====== */
+import Button from 'hometown-components/lib/ButtonHtV1';
+import Box from 'hometown-components/lib/BoxHtV1';
+import FormInputHtV1 from 'hometown-components/lib/FormsHtV1/FormInputHtV1';
 
 export default class LoginViaOtp extends React.Component {
   state = {
@@ -42,11 +45,12 @@ export default class LoginViaOtp extends React.Component {
       onSubmitMobileNumber, onSubmitOtp, onChangeMobile, onChangeOtp, handleResend
     } = this.props;
     const { resendtimer } = this.state;
+
     return (
-      <div>
+      <Box>
         {!mobilesubmitted ? (
           <form onSubmit={onSubmitMobileNumber}>
-            <FormInput
+            <FormInputHtV1
               label="Mobile Number"
               onChange={onChangeMobile}
               value={mobile}
@@ -55,24 +59,14 @@ export default class LoginViaOtp extends React.Component {
               feedBackError={mobileError}
               feedBackMessage={mobileErrorMessage}
             />
-            <Button
-              btnType="primary"
-              size="block"
-              boder="solid 1px rgba(151,151,151,0.47)"
-              fontFamily="regular"
-              height="38px"
-              mt="0"
-              ml="-1px"
-              onClick={this.onSubmitMobileNumber}
-              disabled={loading}
-            >
+            <Button onClick={this.onSubmitMobileNumber} disabled={loading}>
               GET OTP
             </Button>
           </form>
         ) : (
-          <div>
+          <Box>
             <form onSubmit={onSubmitOtp}>
-              <FormInput
+              <FormInputHtV1
                 label="OTP"
                 onChange={onChangeOtp}
                 value={otp}
@@ -81,38 +75,18 @@ export default class LoginViaOtp extends React.Component {
                 feedBackError={otpError}
                 feedBackMessage={otpErrorMessage}
               />
-              <Button
-                btnType="primary"
-                size="block"
-                boder="solid 1px rgba(151,151,151,0.47)"
-                fontFamily="regular"
-                height="38px"
-                mt="0"
-                ml="-1px"
-                onClick={this.onSubmitOtp}
-                disabled={loggingIn}
-              >
+              <Button onClick={this.onSubmitOtp} disabled={loggingIn}>
                 SUBMIT
               </Button>
             </form>
             {!resend && (
-              <Button
-                boder="solid 1px rgba(151,151,151,0.47)"
-                fontFamily="regular"
-                fontSize="14px"
-                mt="5px"
-                ml="-1px"
-                px="0"
-                btnType="link"
-                onClick={handleResend}
-                disabled={resendtimer > 0}
-              >
+              <Button onClick={handleResend} disabled={resendtimer > 0}>
                 RESEND OTP {resendtimer > 0 ? resendtimer : ''}
               </Button>
             )}
-          </div>
+          </Box>
         )}
-      </div>
+      </Box>
     );
   }
 }

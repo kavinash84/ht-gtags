@@ -23,8 +23,8 @@ import ImageShimmer from 'hometown-components/lib/ImageShimmer';
 
 /* ====== Page Components ====== */
 import LoginForm from 'newComponents/LoginForms/LoginForm';
-// import GoogleLoginBtn from 'newComponents/Login/GoogleLogin';
-// import LoginViaOtp from 'newComponents/Login/LoginViaOtp';
+import GoogleLoginBtn from 'newComponents/LoginForms/GoogleLogin';
+import LoginViaOtp from 'newComponents/LoginForms/LoginViaOtp';
 
 const OTPIcon = require('../../../static/otp.svg');
 const EmailIcon = require('../../../static/email-primary.svg');
@@ -48,7 +48,9 @@ export default class LoginFormContainer extends Component {
     otpSent: PropTypes.bool,
     loading: PropTypes.bool,
     askContact: PropTypes.bool,
-    loginType: PropTypes.string
+    loginType: PropTypes.string,
+    loaded: PropTypes.bool.isRequired,
+    loggingIn: PropTypes.bool.isRequired
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -149,7 +151,19 @@ export default class LoginFormContainer extends Component {
   };
 
   render() {
-    const { loading, askContact, loginType } = this.props;
+    const {
+      mobile,
+      mobileError,
+      mobileErrorMessage,
+      otp,
+      otpError,
+      otpErrorMessage,
+      mobilesubmitted,
+      resend
+    } = this.state;
+    const {
+      loaded, loading, loggingIn, askContact, loginType
+    } = this.props;
 
     return (
       <BoxHtV1>
@@ -187,8 +201,7 @@ export default class LoginFormContainer extends Component {
                   {!this.state.loginviaotp ? (
                     <LoginForm askContact={askContact} loginType={loginType} loading={loading} />
                   ) : (
-                    {
-                      /* <LoginViaOtp
+                    <LoginViaOtp
                       onChangeMobile={this.onChangeMobile}
                       onChangeOtp={this.onChangeOtp}
                       onSubmitMobileNumber={this.onSubmitMobileNumber}
@@ -205,8 +218,7 @@ export default class LoginFormContainer extends Component {
                       loggingIn={loggingIn}
                       handleResend={this.handleResend}
                       resend={resend}
-                    /> */
-                    }
+                    />
                   )}
                 </BoxHtV1>
               </RowHtV1>
@@ -240,7 +252,7 @@ export default class LoginFormContainer extends Component {
                   </ButtonHtV1>
                 </BoxHtV1>
                 <BoxHtV1 variant="col-6" ta="center" mb="0" pl="0.625rem">
-                  {/* <GoogleLoginBtn askContact={askContact} loginType={loginType} loading={loading} /> */}
+                  <GoogleLoginBtn askContact={askContact} loginType={loginType} loading={loading} />
                 </BoxHtV1>
               </RowHtV1>
             </RowHtV1>
