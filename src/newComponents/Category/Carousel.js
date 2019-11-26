@@ -1,49 +1,43 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Section from 'hometown-components/lib/Section';
-import Container from 'hometown-components/lib/Container';
-import Row from 'hometown-components/lib/Row';
-import Title from 'components/Title';
-import SquareCatItem from './SquareCatItem';
-import RoundCatItem from './RoundCatItem';
-import SlickSlider from '../SlickSlider';
+
+/* ====== Components ====== */
+import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
+
+/* ====== Page Components ====== */
+import Title from 'newComponents/Title';
+import SlickSlider from 'newComponents/SlickSlider';
+import CategoryCarouselItem from 'newComponents/CategoryCarousel/CategoryCarouselItem';
 
 const adjustSlides = length => ({
   slidesToShow: length >= 4 ? 4 : length,
-  slidesToScroll: 3
+  slidesToScroll: 3,
+  autoplaySpeed: 5000
 });
 
-const CategoryCarousel = ({ data, categoryName, layout }) => (
-  <Section p="0" pt="0" mb="1.5rem" className="catCarousel">
-    <Container pr="0" pl="0">
-      <Title title={categoryName} subTitle="" ta="center" />
-      <Row display="block" pt="0" ml="0" mr="0">
-        <SlickSlider settings={adjustSlides(data.length)}>
-          {data.map((slide, index) => (
-            <div key={String(index)}>
-              {layout === 'round' ? (
-                <SquareCatItem image={slide.image} name={slide.title} url={slide.url_key} layout={layout} />
-              ) : (
-                <RoundCatItem image={slide.image} name={slide.title} url={slide.url_key} layout={layout} />
-              )}
-            </div>
-          ))}
-        </SlickSlider>
-      </Row>
-    </Container>
-  </Section>
+const CategoryCarousel = ({ data, categoryName }) => (
+  <BoxHtV1>
+    <Title title={categoryName} subTitle="" ta="center" />
+    <SlickSlider settings={adjustSlides(data.length)}>
+      {data.map((slide, index) => (
+        <div key={String(index)}>
+          <CategoryCarouselItem image={slide.image} name={slide.title} url={slide.url_key} />
+        </div>
+      ))}
+    </SlickSlider>
+  </BoxHtV1>
 );
 
 CategoryCarousel.defaultProps = {
   data: [],
-  categoryName: '',
-  layout: 'square'
+  categoryName: ''
+  // layout: 'square'
 };
 
 CategoryCarousel.propTypes = {
   data: PropTypes.array,
-  categoryName: PropTypes.string,
-  layout: PropTypes.string
+  categoryName: PropTypes.string
+  // layout: PropTypes.string
 };
 
 export default CategoryCarousel;

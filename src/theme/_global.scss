@@ -13,19 +13,3 @@
     src:url("../../../static/fonts/05f47e74-d17c-45af-86c3-8ab878fd4ec7.eot?#iefix");
     src:url("../../../static/fonts/05f47e74-d17c-45af-86c3-8ab878fd4ec7.eot?#iefix") format("eot"),url("../../../static/fonts/7ce0a2f5-eb00-46aa-919c-5b3f3667646c.woff2") format("woff2"),url("../../../static/fonts/8ebb9b04-d12d-488e-aa96-0bb6e6777336.ttf") format("truetype");
 }
-
-/* ----- Base/Global Styles ----- */
-body {
-	font-family: regular;
-	font-display: swap;
-	color: $text;
-	overflow-x: hidden;
-}
-
-a {
-	transition: 0.5s all ease;
-	label {
-		cursor: pointer !important;
-	}
-}
-/* ----- End of Typography ----- */

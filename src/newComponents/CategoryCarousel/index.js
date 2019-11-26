@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
-import Title from '../Title';
-import CategoryCarouselItem from './CategoryCarouselItem';
-import SlickSlider from '../SlickSlider';
+import Title from 'newComponents/Title';
+import SlickSlider from 'newComponents/SlickSlider';
+import CategoryCarouselItem from 'newComponents/CategoryCarousel/CategoryCarouselItem';
 
 const adjustSlides = length => ({
   slidesToShow: length >= 4 ? 4 : length,
