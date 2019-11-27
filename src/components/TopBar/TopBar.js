@@ -118,10 +118,10 @@ export default class MenuSidebar extends Component {
               </Link>
             </div>
           </Div>
-          <Div col="5">
+          <Div col="4">
             <Search />
           </Div>
-          <Div col="5" ta="right" pt="0.3125rem">
+          <Div col="6" ta="right" pt="0.3125rem">
             <Link className={styles.cart} to="/track-order">
               <Img src={orderTrackIcon} alt="Hometown" height="24px" mr="8px" float="left" />
               <Span fontFamily="light" fontSize="0.875em">
