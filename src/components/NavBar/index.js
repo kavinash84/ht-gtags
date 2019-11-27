@@ -27,12 +27,12 @@ class NavBar extends Component {
       <div className={styles.navBar} onMouseLeave={handleLeave}>
         <Container pr="0" pl="0">
           <div className={styles.navBarSlider}>
-            {main.map(menuItem => (
+            {main.map((menuItem, i) => (
               <Link
                 onClick={exitOnClick}
                 title={menuItem.name}
                 to={`/${menuItem.url_key}`}
-                key={menuItem.id}
+                key={`${menuItem.id}_${String(i)}`}
                 onMouseEnter={handleEnter(menuItem.id)}
               >
                 {menuItem.name === 'Hot Deals' ? (
@@ -72,15 +72,14 @@ class NavBar extends Component {
               </Button>
               <div className="dropDown blockRight">
                 <ul>
-                  {more.map(menuItem => (
-                    <li>
+                  {more.map((menuItem, i) => (
+                    <li key={`${menuItem.id}_${String(i)}`}>
                       <Label htmlFor="checkbox" fontSize="0.75em" className="dropdownValue">
                         <Link
                           onClick={exitOnClick}
                           onMouseEnter={handleEnter('')}
                           title={menuItem.name}
                           to={`/${menuItem.url_key}`}
-                          key={menuItem.id}
                         >
                           {menuItem.name || 'Hometown'}
                         </Link>
@@ -110,8 +109,8 @@ class NavBar extends Component {
                   <li>
                     <Label htmlFor="checkbox" fontSize="0.75em" className="dropdownValue">
                       <a
-                        href="https://static.hometown.in/media/Institutional+Catalogue.pdf"
-                        title="Festive Catalogue"
+                        href="https://hometown.in/media/Institutional+Catalogue.pdf"
+                        title="Festive Gifts Catalogue"
                         download
                         target="_blank"
                         rel="noopener noreferrer"

@@ -33,13 +33,18 @@ const getProductImage = images => {
   return `${image.path && image.path.split('-')[0]}-catalog_255.jpg`;
 };
 
-const onClickWishList = (list, dispatcher, isUserLoggedIn, history, onOpenLoginModal, addToWaitList) => (
-  sku,
-  simpleSku
-) => e => {
+const onClickWishList = (
+  list,
+  dispatcher,
+  isUserLoggedIn,
+  history,
+  onOpenLoginModal,
+  addToWaitList,
+  selectedPincode
+) => (sku, simpleSku) => e => {
   e.preventDefault();
-  if (isUserLoggedIn) return dispatcher(list, sku, simpleSku);
-  addToWaitList(sku, simpleSku);
+  if (isUserLoggedIn) return dispatcher(list, sku, simpleSku, selectedPincode);
+  addToWaitList(sku, simpleSku, selectedPincode);
   return onOpenLoginModal();
 };
 
@@ -216,7 +221,8 @@ class Listing extends React.Component {
                       isLoggedIn,
                       history,
                       this.handleLoginModal,
-                      addToWaitList
+                      addToWaitList,
+                      selectedPincode
                     )}
                     onOpenQuickViewModal={() => {
                       this.onOpenQuickViewModal(
