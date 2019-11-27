@@ -190,6 +190,17 @@ class StoreLocator extends React.Component {
       category: 'Storelocator'
     });
   };
+  directionHandler = (store = '', city = '') => {
+    const { gaVisitEvent: recordStoreVisit } = this.props;
+    if (store && city) {
+      recordStoreVisit({
+        city,
+        store,
+        event: 'event storelocator',
+        category: 'Storelocator - Location'
+      });
+    }
+  };
   handleSelectState = (state, mapData) => {
     const currentList = mapData.filter(item => item.state === state);
     let lat = 0;
@@ -450,6 +461,10 @@ class StoreLocator extends React.Component {
                           </Label>
                           <address style={{ color: 'black', fontStyle: 'normal' }}>{item.address}</address>
                           <a
+                            onClick={e => {
+                              e.stopPropagation();
+                              this.directionHandler(item.store, item.city);
+                            }}
                             title="Hometown Store Locator Direction"
                             href={this.getURL(currentLocation, item.position)}
                             target="_blank"
