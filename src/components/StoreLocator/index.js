@@ -308,7 +308,7 @@ class StoreLocator extends React.Component {
     }
   };
   render() {
-    const { data, locationLoaded } = this.props;
+    const { data, locationLoaded, gaVisitEvent: recordStoreDirection } = this.props;
     const mapData = data.items.text;
     const {
       position,
@@ -353,6 +353,7 @@ class StoreLocator extends React.Component {
                 handleClick={this.handleClick}
                 selectedStore={selectedStore}
                 currentLocation={currentLocation}
+                recordStoreDirection={recordStoreDirection}
               />
               <Div className={styles.filterWrapper}>
                 <button
