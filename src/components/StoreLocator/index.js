@@ -54,7 +54,7 @@ class StoreLocator extends React.Component {
       currentList: [],
       currentState: null,
       selectedStore: '',
-      selectCity: false,
+      // selectCity: false,
       nearMe: [],
       isLoading: false,
       currentLocation: {}
@@ -306,13 +306,14 @@ class StoreLocator extends React.Component {
       currentList,
       currentState,
       selectedStore,
-      selectCity,
+      // selectCity,
       isLoading,
       currentLocation
     } = this.state;
     //
     let stateList = mapData.map(item => item.state);
     let cityList = mapData.filter(item => item.state === currentState).map(item => item.city);
+    const cities = Array.from(new Set(mapData.filter(item => item.city).map(item => item.city)));
     cityList = cityList.filter((item, pos) => cityList.indexOf(item) === pos);
     stateList = stateList.filter((item, pos) => stateList.indexOf(item) === pos);
     //
@@ -344,16 +345,16 @@ class StoreLocator extends React.Component {
                 currentLocation={currentLocation}
               />
               <Div className={styles.filterWrapper}>
-                <button
-                  style={{ marginBottom: '4px', marginRight: '10px' }}
-                  onClick={e => {
-                    e.preventDefault();
-                    this.setState({ selectCity: true });
-                  }}
-                  className={styles.selectLocation}
-                >
-                  Select Store
-                </button>
+                <select onChange={e => this.handleSelectState(e.target.value, mapData)}>
+                  <option value={null} key="state">
+                    Select City
+                  </option>
+                  {cities.map(item => (
+                    <option value={item} key={item}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
                 <button
                   style={{ marginBottom: '4px' }}
                   onClick={e => {
@@ -365,20 +366,7 @@ class StoreLocator extends React.Component {
                   {isLoading && <Img className="spin" src={LoaderIcon} display="inline" width="20px" va="sub" />}
                   Store Near Me
                 </button>
-                {selectCity && (
-                  <select onChange={e => this.handleSelectState(e.target.value, mapData)}>
-                    <option value={null} key="state">
-                      SELECT STATE
-                    </option>
-                    {stateList.map(item => (
-                      <option value={item} key={item}>
-                        {item}
-                      </option>
-                    ))}
-                  </select>
-                )}
-
-                {selectCity && currentState && (
+                {/* selectCity && currentState && (
                   <select onChange={e => this.handleSelectCity(e.target.value, mapData)}>
                     <option value={null} key="state">
                       SELECT CITY
@@ -389,7 +377,7 @@ class StoreLocator extends React.Component {
                       </option>
                     ))}
                   </select>
-                )}
+                ) */}
                 <div className={styles.cistList}>
                   <ul>
                     {locationLoaded && currentList.length ? (
