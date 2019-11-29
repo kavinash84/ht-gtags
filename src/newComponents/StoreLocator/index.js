@@ -88,11 +88,13 @@ class StoreLocator extends React.Component {
   // }
   setError = msg => {
     const { dispatch } = this.context.store;
-    dispatch(notifSend({
-      type: 'error',
-      msg,
-      dismissAfter: 4000
-    }));
+    this.setState({ isLoading: false }, () => {
+      dispatch(notifSend({
+        type: 'error',
+        msg,
+        dismissAfter: 4000
+      }));
+    });
   };
   getURL = (origin, dest) => {
     const baseUrl = 'http://maps.google.com/?';
@@ -319,6 +321,7 @@ class StoreLocator extends React.Component {
     //
     let stateList = mapData.map(item => item.state);
     let cityList = mapData.filter(item => item.state === currentState).map(item => item.city);
+    const cities = Array.from(new Set(mapData.filter(item => item.city).map(item => item.city)));
     cityList = cityList.filter((item, pos) => cityList.indexOf(item) === pos);
     stateList = stateList.filter((item, pos) => stateList.indexOf(item) === pos);
     //
@@ -331,9 +334,21 @@ class StoreLocator extends React.Component {
             </Row>
           </Container>
         </Section>
-        <Section pt="0" p="0" mb="0">
-          <Row display="block" mr="0" ml="0" mb="0">
-            <BoxHtV1 className={styles.googleMapWrapper}>
+        <div
+          style={{
+            paddingTop: 0,
+            marginBottom: 0
+          }}
+        >
+          <div
+            style={{
+              display: 'block',
+              marginRight: 0,
+              marginLeft: 0,
+              marginBottom: 0
+            }}
+          >
+            <div className={styles.googleMapWrapper}>
               <Map
                 googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
                 loadingElement={<div style={{ height: '100%' }} />}
@@ -348,16 +363,16 @@ class StoreLocator extends React.Component {
                 currentLocation={currentLocation}
               />
               <BoxHtV1 className={styles.filterWrapper}>
-                <button
-                  style={{ marginBottom: '4px', marginRight: '10px' }}
-                  onClick={e => {
-                    e.preventDefault();
-                    this.setState({ selectCity: true });
-                  }}
-                  className={styles.selectLocation}
-                >
-                  Select Store
-                </button>
+                <select onChange={e => this.handleSelectCity(e.target.value, mapData)}>
+                  <option value={null} key="state">
+                    Select City
+                  </option>
+                  {cities.map(item => (
+                    <option value={item} key={item}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
                 <button
                   style={{ marginBottom: '4px' }}
                   onClick={e => {
@@ -367,26 +382,12 @@ class StoreLocator extends React.Component {
                   className={styles.selectLocation}
                 >
                   {isLoading && <Image className="spin" src={LoaderIcon} display="inline" width="20px" va="sub" />}
-                  Store Near Me
+                  Locate Near Me
                 </button>
-                {selectCity && (
-                  <select onChange={e => this.handleSelectState(e.target.value, mapData)}>
-                    <option value={null} key="state">
-                      SELECT STATE
-                    </option>
-                    {stateList.map(item => (
-                      <option value={item} key={item}>
-                        {item}
-                      </option>
-                    ))}
-                  </select>
-                )}
-
-                {selectCity &&
-                  currentState && (
+                {selectCity && currentState && (
                   <select onChange={e => this.handleSelectCity(e.target.value, mapData)}>
                     <option value={null} key="state">
-                        SELECT CITY
+                      SELECT CITY
                     </option>
                     {cityList.map(item => (
                       <option value={item} key={item}>
@@ -469,9 +470,9 @@ class StoreLocator extends React.Component {
                   </ul>
                 </div>
               </BoxHtV1>
-            </BoxHtV1>
-          </Row>
-        </Section>
+            </div>
+          </div>
+        </div>
       </BoxHtV1>
     );
   }

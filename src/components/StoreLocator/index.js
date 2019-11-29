@@ -72,14 +72,6 @@ class StoreLocator extends React.Component {
       });
     }
   }
-  // componentWillReceiveProps(nextProps) {
-  //   const { locationLoaded, data, loc } = nextProps;
-  //   if (data && data.items && data.items.text && locationLoaded && loc.lat && loc.lng) {
-  //     const mapData = data.items.text;
-  //     console.log(mapData);
-  //     // this.handleNearestLocation(loc, mapData);
-  //   }
-  // }
   setError = msg => {
     const { dispatch } = this.context.store;
     dispatch(notifSend({
@@ -310,13 +302,11 @@ class StoreLocator extends React.Component {
       isLoading,
       currentLocation
     } = this.state;
-    //
     let stateList = mapData.map(item => item.state);
     let cityList = mapData.filter(item => item.state === currentState).map(item => item.city);
     const cities = Array.from(new Set(mapData.filter(item => item.city).map(item => item.city)));
     cityList = cityList.filter((item, pos) => cityList.indexOf(item) === pos);
     stateList = stateList.filter((item, pos) => stateList.indexOf(item) === pos);
-    //
     return (
       <Div type="block">
         <Section mb="0" p="1.375rem 0.5rem" bg="bg" boxShadow="0 2px 8px 0 rgba(0, 0, 0, 0.17)">
@@ -359,7 +349,9 @@ class StoreLocator extends React.Component {
                   style={{ marginBottom: '4px' }}
                   onClick={e => {
                     e.preventDefault();
-                    this.detectUserLocation();
+                    this.setState({ isLoading: true }, () => {
+                      this.detectUserLocation();
+                    });
                   }}
                   className={styles.selectLocation}
                 >
