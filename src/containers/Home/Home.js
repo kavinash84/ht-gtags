@@ -167,9 +167,9 @@ export default class Home extends Component {
               const { id } = category;
               if (id && OFFER_ID !== id && OFFER_ID !== parseInt(id, 10)) {
                 return (
-                  <SectionHtV1 variant="section.primary">
+                  <SectionHtV1 variant="section.primary" key={String(index)}>
                     <ContainerHtV1>
-                      <LazyLoad height={200} offset={100} key={String(index)}>
+                      <LazyLoad height={200} offset={100}>
                         <CategoryCarousel
                           categoryName={category.title}
                           subTitle={category.sub_title}

@@ -8,11 +8,9 @@ import ButtonHtV1 from 'hometown-components/lib/ButtonHtV1';
 import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
 import ContainerHtV1 from 'hometown-components/lib/ContainerHtV1';
 import LabelHtV1 from 'hometown-components/lib/LabelHtV1';
-import LiHtV1 from 'hometown-components/lib/LiHtV1';
 import LinkRedirectHtV1 from 'hometown-components/lib/LinkRedirectHtV1';
 import RowHtV1 from 'hometown-components/lib/RowHtV1';
 import TextHtV1 from 'hometown-components/lib/TextHtV1';
-import UlHtV1 from 'hometown-components/lib/UlHtV1';
 
 // const { SITE_URL } = process.env;
 
@@ -68,31 +66,32 @@ class NavBar extends Component {
             >
               {'Modular Kitchens'}
             </TextHtV1>
-            <BoxHtV1 sx={{ position: 'relative' }}>
-              <ButtonHtV1 padding="10px 15px 10px 0px" variant="buttons.outline">
+            <BoxHtV1>
+              <ButtonHtV1
+                padding="10px 15px 10px 0px"
+                variant="buttons.outline"
+                className="moreButton"
+                sx={{ position: 'relative' }}
+              >
                 More
-              </ButtonHtV1>
-              <AbsoluteHtV1 zIndex={2} bg="white" border="dropdown">
-                <UlHtV1 pl={0}>
-                  {more &&
-                    more.map((menuItem, i) => (
-                      <LiHtV1 key={`${menuItem.id}_${String(i)}`}>
+                <AbsoluteHtV1 display="none" zIndex={2} bg="white" border="dropdown" right={0} top={35}>
+                  <BoxHtV1 mx={0} my={0} py={5}>
+                    {more &&
+                      more.map((menuItem, i) => (
                         <Link
                           onClick={exitOnClick}
                           onMouseEnter={handleEnter('')}
                           title={menuItem.name}
                           to={`/${menuItem.url_key}`}
                         >
-                          {menuItem.name || 'Hometown'}
+                          <BoxHtV1 variant="menuItem" key={`${menuItem.id}_${String(i)}`}>
+                            {menuItem.name || 'Hometown'}
+                          </BoxHtV1>
                         </Link>
-                      </LiHtV1>
-                    ))}
-                  <LiHtV1>
+                      ))}
                     <Link onClick={exitOnClick} to="/bulk-order" onMouseEnter={handleEnter('')} title="Bulk Order">
-                      Bulk Order
+                      <BoxHtV1 variant="menuItem">Bulk Order</BoxHtV1>
                     </Link>
-                  </LiHtV1>
-                  <LiHtV1>
                     <Link
                       to="/design-build"
                       title="Design & Build"
@@ -100,10 +99,8 @@ class NavBar extends Component {
                       rel="noopener noreferrer"
                       onClick={exitOnClick}
                     >
-                      Design & Build
+                      <BoxHtV1 variant="menuItem">Design & Build</BoxHtV1>
                     </Link>
-                  </LiHtV1>
-                  <LiHtV1>
                     <LinkRedirectHtV1
                       href="https://hometown.in/media/Institutional+Catalogue.pdf"
                       title="Festive Gifts Catalogue"
@@ -111,11 +108,11 @@ class NavBar extends Component {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      Gifting Catalogue
+                      <BoxHtV1 variant="menuItem">Gifting Catalogue</BoxHtV1>
                     </LinkRedirectHtV1>
-                  </LiHtV1>
-                </UlHtV1>
-              </AbsoluteHtV1>
+                  </BoxHtV1>
+                </AbsoluteHtV1>
+              </ButtonHtV1>
             </BoxHtV1>
           </RowHtV1>
         </ContainerHtV1>
