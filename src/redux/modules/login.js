@@ -164,17 +164,22 @@ export const login = data => ({
   }
 });
 
-export const googleLogin = (token, session, phone) => ({
+export const googleLogin = (result, session, phone) => ({
   types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
   promise: async ({ client }) => {
     try {
+      const {
+        tokenId,
+        profileObj: { name = '' }
+      } = result;
       const postData = {
-        token,
+        token: tokenId,
         client_secret: clientSecret,
         client_id: clientId,
         grant_type: 'password',
         session_id: session,
-        phone
+        phone,
+        full_name: name
       };
       const response = await client.post(GOOGLE_LOGIN_API, postData);
       await setToken({ client })(response);
