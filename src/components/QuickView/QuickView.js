@@ -201,7 +201,7 @@ export default class QuickView extends Component {
               </Heading>
               <Text mt="0" mb="0.3125rem">
                 <Span color={Theme.colors.primary} fontFamily="medium" fontSize="1.325rem" mr="0.625rem">
-                  ₹ {(discPrice && formatAmount(discPrice)) || (price && formatAmount(price))}
+                  ₹ {(Number(discPrice) && formatAmount(discPrice)) || (price && formatAmount(price))}
                 </Span>
                 {price !== discPrice && discPrice && (
                   <Span fontFamily="regular" color="rgba(0, 0, 0, 0.6)" fontSize="0.875rem">
