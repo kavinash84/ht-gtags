@@ -206,7 +206,7 @@ class Listing extends React.Component {
                     position={index}
                     key={item.id}
                     name={item.data.name}
-                    price={item.netprice}
+                    price={parseInt(item.netprice, 10) ? item.netprice : item.cutprice}
                     cutprice={item.cutprice}
                     saving={item.saving}
                     moneyBackOffer={item.data.money_back_offer}

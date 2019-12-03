@@ -22,10 +22,8 @@ export default class ProductDetails extends Component {
           <Menu />
           {loading && !loaded && <ProductDetailsShimmer />}
           {!loading && loaded && productDescription && productDescription.error_message && <ProductNotFoundContainer />}
-          {!loading &&
-            !productDescription.error_message &&
-            loaded && (
-            <div itemScope itemType="http://schema.org/Product">
+          {!loading && !productDescription.error_message && loaded && (
+            <div>
               <ProductDetailsContainer history={history} />
             </div>
           )}
