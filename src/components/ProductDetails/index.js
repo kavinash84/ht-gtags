@@ -219,7 +219,7 @@ class ProductDetails extends React.Component {
     const { description } = attributes;
     const simpleSku = Object.keys(simples)[0];
     const { name, price, special_price: specialPrice } = meta;
-    const checkSpecialPrice = Number(specialPrice || price);
+    const checkSpecialPrice = Number(specialPrice) || Number(price);
     const { adding, added } = reviews;
     const offerImage = simples[simpleSku].groupedattributes.offer_image || null;
     const offerImageRedirect = simples[simpleSku].groupedattributes.offer_image_click_url || null;
