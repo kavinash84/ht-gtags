@@ -55,7 +55,7 @@ export default class Html extends Component {
           <link rel="shortcut icon" href="/favicon.ico" />
           <meta charSet="utf-8" />
           <meta httpEquiv="x-ua-compatible" content="ie=edge" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta name="viewport" content="width=device-width, initial-scale=1 minimum-scale=1" />
           <meta name="mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="application-name" content="HomeTown Web" />
@@ -82,55 +82,93 @@ export default class Html extends Component {
             <style dangerouslySetInnerHTML={{ __html: '#content{display:none}' }} />
           ) : null}
           {process.env.NODE_ENV !== 'development' && <script dangerouslySetInnerHTML={{ __html: newRelic }} />}
-          {/*<style
-                      dangerouslySetInnerHTML={{
-                        __html: `
-                      .embeddedServiceHelpButton .helpButton .uiButton {
-                        background-color: #555555;
-                        font-family: "Salesforce Sans", sans-serif;
-                        box-sizing: content-box;
-                        font-weight: bold;
-                        font-size: 16px;
-                      }
-                      .embeddedServiceHelpButton .helpButton .uiButton:focus {
-                        outline: 1px solid #555555;
-                      }
-                      .message {
-                        background-color: #555555;
-                         border-style: hidden; 
-                        border-width: 1px;
-                        color: white;
-                        padding: 6px 8px 6px 6px;
-                        margin: 4px 20px;
-                      }
-                      @font-face {
-                        font-family: 'Salesforce Sans';
-                        src: url('https://www.sfdcstatic.com/system/shared/common/assets/fonts/SalesforceSans/SalesforceSans-Regular.woff') format('woff'),
-                        url('https://www.sfdcstatic.com/system/shared/common/assets/fonts/SalesforceSans/SalesforceSans-Regular.ttf') format('truetype');
-                      }`
-                      }}
-                    />*/}
+          <style
+            dangerouslySetInnerHTML={{
+              __html: `
+                .embeddedServiceHelpButton .helpButton .uiButton {
+                  background-color: #555555;
+                  font-family: "Salesforce Sans", sans-serif;
+                  box-sizing: content-box;
+                  font-weight: bold;
+                  font-size: 16px;
+                }
+                .embeddedServiceHelpButton .helpButton .uiButton:focus {
+                  outline: 1px solid #555555;
+                }
+                .message {
+                  background-color: #555555;
+                  border-style: hidden; 
+                  border-width: 1px;
+                  color: white;
+                  padding: 6px 8px 6px 6px;
+                  margin: 4px 20px;
+                }
+                @font-face {
+                  font-family: 'Salesforce Sans';
+                  src: url('https://www.sfdcstatic.com/system/shared/common/assets/fonts/SalesforceSans/SalesforceSans-Regular.woff') format('woff'),
+                  url('https://www.sfdcstatic.com/system/shared/common/assets/fonts/SalesforceSans/SalesforceSans-Regular.ttf') format('truetype');
+                }`
+            }}
+          />
         </head>
         <body>
+          {process.env.NODE_ENV !== 'development' && (
+            <noscript>
+              <iframe
+                src="https://www.googletagmanager.com/ns.html?id=GTM-T5VV7MZ"
+                height="0"
+                width="0"
+                style={{ display: 'none', visibility: 'hidden' }}
+                title="gaTag"
+              />
+            </noscript>
+          )}
+          <div id="content" dangerouslySetInnerHTML={{ __html: content }} />
+          {store && (
+            <script
+              dangerouslySetInnerHTML={{ __html: `window.__data=${serialize(store.getState())};` }}
+              charSet="UTF-8"
+            />
+          )}
+          {__DLLS__ && <script key="dlls__vendor" src="/dist/dlls/dll__vendor.js" charSet="UTF-8" />}
+          {assets.javascript && <script src={assets.javascript.main} charSet="UTF-8" />}
+          {bundles.map(bundle => bundle && <script src={config.assetsPath + bundle.file} key={bundle.id} />)}
+
+          {/* (will be present only in development mode) */}
+          {assets.styles && Object.keys(assets.styles).length === 0 ? (
+            <script dangerouslySetInnerHTML={{ __html: 'document.getElementById("content").style.display="block";' }} />
+          ) : null}
+          <Helmet>
+            {process.env.NODE_ENV !== 'development' ? (
+              <Fragment>
+                <script src="https://cdn.ravenjs.com/3.24.0/raven.min.js" crossOrigin="anonymous" />
+                <script>
+                  {`
+                  Raven.config('https://e072a281afc44732a8976d0615f0e310@sentry.io/1254610', {
+                  release: '${version.replace(/\./g, '-')}',
+                  environment: 'production',
+                  }).install()
+                `}
+                </script>
+              </Fragment>
+            ) : null}
+          </Helmet>
+          <script type="text/javascript" src="https://service.force.com/embeddedservice/5.0/esw.min.js" />
           <script
             type="text/javascript"
             src="https://c.la1-c2cs-hnd.salesforceliveagent.com/content/g/js/45.0/deployment.js"
           />
-          <script type="text/javascript" src="https://service.force.com/embeddedservice/5.0/esw.min.js" />
-          {/* <script
+          <script
             dangerouslySetInnerHTML={{
               __html: `
                 var emailId ='';
                 var initESW = function(gslbBaseURL) {
-                  embedded_svc.settings.displayHelpButton = true; //Or false
-                  embedded_svc.settings.language = ''; //For example, enter 'en' or 'en-US'
-            
-                  embedded_svc.settings.defaultMinimizedText = 'Chat With Us'; //(Defaults to Chat with an Expert)
+                  embedded_svc.settings.displayHelpButton = true;
+                  embedded_svc.settings.language = '';
+                  embedded_svc.settings.defaultMinimizedText = 'Chat With Us';
                   //embedded_svc.settings.disabledMinimizedText = '...'; //(Defaults to Agent Offline)
-                  
                   //embedded_svc.settings.loadingText = 'Chat started'; //(Defaults to Loading)
                   //embedded_svc.settings.storageDomain = 'yourdomain.com'; //(Sets the domain for your deployment so that visitors can navigate subdomains during a chat session)
-                  
                   // Settings for Live Agent
                   //embedded_svc.settings.directToButtonRouting = function(prechatFormData) {
                   // Dynamically changes the button ID based on what the visitor enters in the pre-chat form.
@@ -223,48 +261,7 @@ export default class Html extends Component {
               }`
             }}
             charSet="UTF-8"
-          /> */}
-          {process.env.NODE_ENV !== 'development' && (
-            <noscript>
-              <iframe
-                src="https://www.googletagmanager.com/ns.html?id=GTM-T5VV7MZ"
-                height="0"
-                width="0"
-                style={{ display: 'none', visibility: 'hidden' }}
-                title="gaTag"
-              />
-            </noscript>
-          )}
-          <div id="content" dangerouslySetInnerHTML={{ __html: content }} />
-          {store && (
-            <script
-              dangerouslySetInnerHTML={{ __html: `window.__data=${serialize(store.getState())};` }}
-              charSet="UTF-8"
-            />
-          )}
-          {__DLLS__ && <script key="dlls__vendor" src="/dist/dlls/dll__vendor.js" charSet="UTF-8" />}
-          {assets.javascript && <script src={assets.javascript.main} charSet="UTF-8" />}
-          {bundles.map(bundle => bundle && <script src={config.assetsPath + bundle.file} key={bundle.id} />)}
-
-          {/* (will be present only in development mode) */}
-          {assets.styles && Object.keys(assets.styles).length === 0 ? (
-            <script dangerouslySetInnerHTML={{ __html: 'document.getElementById("content").style.display="block";' }} />
-          ) : null}
-          <Helmet>
-            {process.env.NODE_ENV !== 'development' ? (
-              <Fragment>
-                <script src="https://cdn.ravenjs.com/3.24.0/raven.min.js" crossOrigin="anonymous" />
-                <script>
-                  {`
-                  Raven.config('https://e072a281afc44732a8976d0615f0e310@sentry.io/1254610', {
-                  release: '${version.replace(/\./g, '-')}',
-                  environment: 'production',
-                  }).install()
-                `}
-                </script>
-              </Fragment>
-            ) : null}
-          </Helmet>
+          />
         </body>
       </html>
     );
