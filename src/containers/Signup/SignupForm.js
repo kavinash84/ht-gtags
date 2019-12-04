@@ -36,7 +36,7 @@ export default class SignupFormContainer extends Component {
     this.state = {
       name: '',
       nameError: false,
-      nameErrorMessage: 'Enter Space Seperated Full Name',
+      nameErrorMessage: 'Special Characters Not Allowed !',
       email: '',
       emailError: false,
       emailErrorMessage: 'Enter Valid Email Id',
