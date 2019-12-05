@@ -43,7 +43,7 @@ const Cancellation = () => (
             </Text>
             <Text>
               * We are not taking any cancellation request for the Homeware products(Home Furnishings , Home Décor,
-              Tableware and Kitchenware) once order placed.
+              Tableware, Kitchenware, luggage, electronics(large & small appliances) ) once order placed.
             </Text>
           </Div>
           <Div>

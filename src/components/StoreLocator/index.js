@@ -182,6 +182,17 @@ class StoreLocator extends React.Component {
       category: 'Storelocator'
     });
   };
+  directionHandler = (store = '', city = '') => {
+    const { gaVisitEvent: recordStoreVisit } = this.props;
+    if (store && city) {
+      recordStoreVisit({
+        city,
+        store,
+        event: 'event storelocator',
+        category: 'Storelocator - Location'
+      });
+    }
+  };
   handleSelectState = (state, mapData) => {
     const currentList = mapData.filter(item => item.state === state);
     let lat = 0;
@@ -289,7 +300,7 @@ class StoreLocator extends React.Component {
     }
   };
   render() {
-    const { data, locationLoaded } = this.props;
+    const { data, locationLoaded, gaVisitEvent: recordStoreDirection } = this.props;
     const mapData = data.items.text;
     const {
       position,
@@ -333,6 +344,7 @@ class StoreLocator extends React.Component {
                 handleClick={this.handleClick}
                 selectedStore={selectedStore}
                 currentLocation={currentLocation}
+                recordStoreDirection={recordStoreDirection}
               />
               <Div className={styles.filterWrapper}>
                 <select onChange={e => this.handleSelectState(e.target.value, mapData)}>
@@ -430,6 +442,10 @@ class StoreLocator extends React.Component {
                           </Label>
                           <address style={{ color: 'black', fontStyle: 'normal' }}>{item.address}</address>
                           <a
+                            onClick={e => {
+                              e.stopPropagation();
+                              this.directionHandler(item.store, item.city);
+                            }}
                             title="Hometown Store Locator Direction"
                             href={this.getURL(currentLocation, item.position)}
                             target="_blank"

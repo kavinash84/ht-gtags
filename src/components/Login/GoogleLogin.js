@@ -21,7 +21,7 @@ const mapStateToProps = ({ app }) => ({
 });
 
 const onSuccess = (dispatcher, session, phone) => result => {
-  dispatcher(result.tokenId, session, phone);
+  dispatcher(result, session, phone);
 };
 
 const onError = error => e => {

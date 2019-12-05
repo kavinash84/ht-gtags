@@ -30,6 +30,7 @@ const PinIcon = require('../../../static/map-icon.svg');
 // const PhoneIcon = require('../../../static/phone-icon.svg');
 const UserIcon = require('../../../static/user-icon.svg');
 const PincodeModalIcon = require('../../../static/map-placeholder.svg');
+const orderTrackIcon = require('../../../static/tracking.svg');
 
 const onClick = history => e => {
   e.preventDefault();
@@ -117,10 +118,16 @@ export default class MenuSidebar extends Component {
               </Link>
             </div>
           </Div>
-          <Div col="5">
+          <Div col="4">
             <Search />
           </Div>
-          <Div col="5" ta="right" pt="0.3125rem">
+          <Div col="6" ta="right" pt="0.3125rem">
+            <Link className={styles.cart} to="/track-order">
+              <Img src={orderTrackIcon} alt="Hometown" height="24px" mr="8px" float="left" />
+              <Span fontFamily="light" fontSize="0.875em">
+                Track Order
+              </Span>
+            </Link>
             <button onClick={this.onOpenPincodeModal}>
               <Img src={PinIcon} alt="Hometown" height="24px" mr="0.3125rem" float="left" />
               <Span fontSize="0.875rem" lh="2" fontFamily="light">

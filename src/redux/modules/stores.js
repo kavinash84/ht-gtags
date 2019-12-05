@@ -51,7 +51,7 @@ export const loadStores = () => ({
   promise: ({ client }) => client.get(`${STATIC_BLOCK}/store_react`)
 });
 export const gaVisitEvent = storeDetails => ({
-  types: SET_SELECTED_STORE,
+  type: SET_SELECTED_STORE,
   storeDetails
 });
 
