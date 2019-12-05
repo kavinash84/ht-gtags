@@ -35,12 +35,6 @@ const designBuildLogo = require('../../static/designBuildLogo.png');
 
 const OFFER_ID = 5;
 
-const storeLocatorOptions = [
-  { value: 'Mumbai', label: 'Mumbai' },
-  { value: 'Ahmedabad', label: 'Ahmedabad' },
-  { value: 'Vadodara', label: 'Vadodara' }
-];
-
 const customDropdownStyles = {
   container: provided => ({
     ...provided,
@@ -117,7 +111,8 @@ export default class Home extends Component {
   };
 
   render() {
-    const { banners, homepageCategories } = this.props;
+    const { banners, homepageCategories, cities } = this.props;
+    const citiesList = cities.map(item => ({ value: item, label: item }));
 
     return (
       /* eslint-disable max-len */
@@ -254,10 +249,16 @@ export default class Home extends Component {
                   </BoxHtV1>
                   <RowHtV1>
                     <Select
-                      placeholder="Select your city"
+                      placeholder="Select City"
                       defaultValue={null}
-                      options={storeLocatorOptions}
+                      options={citiesList}
                       styles={customDropdownStyles}
+                      onChange={({ value }) => {
+                        this.props.history.push({
+                          pathname: '/store-locator',
+                          state: { city: value }
+                        });
+                      }}
                     />
                     <ButtonHtV1 width={275} ml={30} variant="primary.large">
                       LOCATE A STORE
@@ -276,11 +277,14 @@ export default class Home extends Component {
 Home.defaultProps = {
   isLoggedIn: false,
   banners: [],
-  homepageCategories: []
+  homepageCategories: [],
+  cities: []
 };
 
 Home.propTypes = {
   isLoggedIn: PropTypes.bool,
   banners: PropTypes.array,
-  homepageCategories: PropTypes.array
+  homepageCategories: PropTypes.array,
+  cities: PropTypes.array,
+  history: PropTypes.object.isRequired
 };

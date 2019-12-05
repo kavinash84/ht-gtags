@@ -15,10 +15,11 @@ const Map = ({
   mapData, zoom, position, open, handleClick, selectedStore, currentLocation
 }) => (
   <GoogleMap zoom={parseInt(zoom, 10) || 16} center={position} options={{ mapTypeControl: false }}>
-    {mapData.map(item => {
+    {mapData.map((item, i) => {
       const pos = item.position;
       return (
         <Marker
+          key={String(i)}
           position={pos}
           onClick={() => {
             handleClick(item.store, mapData, item.city);
