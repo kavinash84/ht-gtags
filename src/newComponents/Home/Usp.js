@@ -1,10 +1,10 @@
 import React from 'react';
 
 /* ====== Components ====== */
-import ColHtV1 from 'hometown-components/lib/ColHtV1';
-import ContainerHtV1 from 'hometown-components/lib/ContainerHtV1';
-import RowHtV1 from 'hometown-components/lib/RowHtV1';
-import SectionHtV1 from 'hometown-components/lib/SectionHtV1';
+import ColHtV1 from 'hometown-components-dev/lib/ColHtV1';
+import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
+import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
+import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
 
 /* ====== Page Components ====== */
 import UspItem from 'newComponents/Home/UspItem';
@@ -27,22 +27,28 @@ const Usp = () => (
       </RowHtV1>
       <RowHtV1>
         <UspItem src={usp1Icon}>
-          Free Delivery <br />Above Rs.499
+          Free Delivery <br />
+          Above Rs.499
         </UspItem>
         <UspItem src={usp2Icon}>
-          Assured <br />Quality
+          Assured <br />
+          Quality
         </UspItem>
         <UspItem src={usp3Icon}>
-          Easy <br />Finance
+          Easy <br />
+          Finance
         </UspItem>
         <UspItem src={usp4Icon}>
-          1 Year <br />Warranty*
+          1 Year <br />
+          Warranty*
         </UspItem>
         <UspItem src={usp5Icon}>
-          Free Assembly <br />within 48 Hours
+          Free Assembly <br />
+          within 48 Hours
         </UspItem>
         <UspItem src={usp6Icon}>
-          Lifetime <br />Service
+          Lifetime <br />
+          Service
         </UspItem>
       </RowHtV1>
     </ContainerHtV1>

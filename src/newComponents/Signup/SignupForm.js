@@ -14,14 +14,14 @@ import { LOGIN_URL } from 'helpers/Constants';
 import { validateMobile, validatePassword, validateEmail } from 'utils/validation';
 
 /* ====== Components ====== */
-import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
-import ColHtV1 from 'hometown-components/lib/ColHtV1';
-import RowHtV1 from 'hometown-components/lib/RowHtV1';
-import TextHtV1 from 'hometown-components/lib/TextHtV1';
-import ImageHtV1 from 'hometown-components/lib/ImageHtV1';
-import HeadingHtV1 from 'hometown-components/lib/HeadingHtV1';
-import ImageShimmer from 'hometown-components/lib/ImageShimmer';
-import SignupForm from 'hometown-components/lib/Forms/SignupForm';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import ColHtV1 from 'hometown-components-dev/lib/ColHtV1';
+import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
+import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
+import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
+import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
+import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
+import SignupForm from 'hometown-components-dev/lib/Forms/SignupForm';
 
 @connect(({ userSignUp, app }) => ({
   loading: userSignUp.loading,

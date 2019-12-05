@@ -1,6 +1,6 @@
 import React from 'react';
-import Div from 'hometown-components/lib/Div';
-import { Label } from 'hometown-components/lib/Label';
+import Div from 'hometown-components-dev/lib/Div';
+import { Label } from 'hometown-components-dev/lib/Label';
 import { connect } from 'react-redux';
 import { getEmiBanks } from 'selectors/payments';
 import PropTypes from 'prop-types';

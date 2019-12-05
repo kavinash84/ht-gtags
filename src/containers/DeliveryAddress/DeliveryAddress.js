@@ -5,7 +5,7 @@ import { withRouter } from 'react-router';
 import Helmet from 'react-helmet';
 import DeliveryAddress from 'components/Checkout/DeliveryAddress';
 import Menu from 'components/MenuWithLogoOnly';
-import Section from 'hometown-components/lib/Section';
+import Section from 'hometown-components-dev/lib/Section';
 import { loadMyAddress } from 'redux/modules/myaddress';
 import { getCartList } from 'selectors/cart';
 import { CART_URL } from 'helpers/Constants';

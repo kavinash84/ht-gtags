@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Div from 'hometown-components/lib/Div';
-import Row from 'hometown-components/lib/Row';
-import Img from 'hometown-components/lib/Img';
-import Section from 'hometown-components/lib/Section';
-import Container from 'hometown-components/lib/Container';
-import { Label } from 'hometown-components/lib/Label';
-import ImageShimmer from 'hometown-components/lib/ImageShimmer';
+import Div from 'hometown-components-dev/lib/Div';
+import Row from 'hometown-components-dev/lib/Row';
+import Img from 'hometown-components-dev/lib/Img';
+import Section from 'hometown-components-dev/lib/Section';
+import Container from 'hometown-components-dev/lib/Container';
+import { Label } from 'hometown-components-dev/lib/Label';
+import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
 import SlickSlider from '../SlickSlider';
 
 const styles = require('./CategoryBar.scss');

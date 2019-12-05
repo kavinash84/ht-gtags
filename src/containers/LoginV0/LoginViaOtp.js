@@ -1,6 +1,6 @@
 import React from 'react';
-import FormInput from 'hometown-components/lib/Forms/FormInput';
-import Button from 'hometown-components/lib/Buttons';
+import FormInput from 'hometown-components-dev/lib/Forms/FormInput';
+import Button from 'hometown-components-dev/lib/Buttons';
 import PropTypes from 'prop-types';
 
 export default class LoginViaOtp extends React.Component {

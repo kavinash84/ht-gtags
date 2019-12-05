@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import NavBar from 'components/NavBar';
 import TopBar from 'components/TopBar/TopBar';
-import Container from 'hometown-components/lib/Container';
-import Section from 'hometown-components/lib/Section';
+import Container from 'hometown-components-dev/lib/Container';
+import Section from 'hometown-components-dev/lib/Section';
 import HoverMenuBox from 'components/HoverBox/HoverMenuBox';
 
 @connect(({ homepage }) => ({

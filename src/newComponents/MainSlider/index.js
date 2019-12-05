@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { triggerImpression, triggerClick } from 'redux/modules/analytics';
-import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
 import SliderItem from './SliderItem';
 import SlickSlider from '../SlickSlider';
 

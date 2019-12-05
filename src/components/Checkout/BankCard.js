@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Div from 'hometown-components/lib/Div';
-import { Label } from 'hometown-components/lib/Label';
+import Div from 'hometown-components-dev/lib/Div';
+import { Label } from 'hometown-components-dev/lib/Label';
 
 const styles = require('./Checkout.scss');
 

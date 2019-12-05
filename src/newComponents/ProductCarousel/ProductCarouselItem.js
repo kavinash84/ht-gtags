@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 /* ====== Components ====== */
-import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
-import Image from 'hometown-components/lib/ImageHtV1';
-import Heading from 'hometown-components/lib/HeadingHtV1';
-import Text from 'hometown-components/lib/TextHtV1';
-import Rating from 'hometown-components/lib/RatingHtV1';
-// import ImageShimmer from 'hometown-components/lib/ImageShimmer';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
+import Rating from 'hometown-components-dev/lib/RatingHtV1';
+// import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
 
 const judgeColor = rating => {
   if (!rating) {

@@ -7,7 +7,7 @@ import MainSlider from 'components/MainSlider';
 // import ReloadNotification from 'components/ReloadNotification';
 import CategoryCarousel from 'components/CategoryCarousel';
 import ProductCarousel from 'components/ProductCarousel';
-import Section from 'hometown-components/lib/Section';
+import Section from 'hometown-components-dev/lib/Section';
 import { connect } from 'react-redux';
 import OfferBanner from 'components/Home/OfferBanner';
 import Usp from 'components/Home/Usp';

@@ -2,9 +2,9 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 
 /* ====== Components ====== */
-import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
-import GridItem from 'hometown-components/lib/MasonryGrid/Item';
-import MasonryGrid from 'hometown-components/lib/MasonryGrid';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import GridItem from 'hometown-components-dev/lib/MasonryGrid/Item';
+import MasonryGrid from 'hometown-components-dev/lib/MasonryGrid';
 
 const HomeGridView = () => (
   <BoxHtV1>

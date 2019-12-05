@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from 'hometown-components/lib/Buttons';
-import { Label } from 'hometown-components/lib/Label';
-import Row from 'hometown-components/lib/Row';
-import Div from 'hometown-components/lib/Div';
-import Img from 'hometown-components/lib/Img';
+import Button from 'hometown-components-dev/lib/Buttons';
+import { Label } from 'hometown-components-dev/lib/Label';
+import Row from 'hometown-components-dev/lib/Row';
+import Div from 'hometown-components-dev/lib/Div';
+import Img from 'hometown-components-dev/lib/Img';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from 'redux/modules/cart';
@@ -74,4 +74,7 @@ ProductQuantityCounter.propTypes = {
   addToCart: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductQuantityCounter);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductQuantityCounter);

@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Row from 'hometown-components/lib/Row';
-import Div from 'hometown-components/lib/Div';
-import Text from 'hometown-components/lib/Text';
-import Heading from 'hometown-components/lib/Heading';
-// import Img from 'hometown-components/lib/Img';
+import Row from 'hometown-components-dev/lib/Row';
+import Div from 'hometown-components-dev/lib/Div';
+import Text from 'hometown-components-dev/lib/Text';
+import Heading from 'hometown-components-dev/lib/Heading';
+// import Img from 'hometown-components-dev/lib/Img';
 
 const styles = require('./Stores.scss');
 

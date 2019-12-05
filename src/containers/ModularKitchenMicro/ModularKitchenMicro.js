@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Wrapper from 'hometown-components/lib/Wrapper';
+import Wrapper from 'hometown-components-dev/lib/Wrapper';
 import ModularKitchenMicroContainer from 'components/ModularKitchenMicro';
 // import Header from 'components/ModularKitchenMicro/Header';
 // import Footer from 'components/ModularKitchenMicro/Footer';

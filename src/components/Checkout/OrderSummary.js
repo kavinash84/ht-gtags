@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Div from 'hometown-components/lib/Div';
-import Row from 'hometown-components/lib/Row';
-import Text from 'hometown-components/lib/Text';
-import Span from 'hometown-components/lib/Span';
-import Button from 'hometown-components/lib/Buttons';
-import Theme from 'hometown-components/lib/Theme';
+import Div from 'hometown-components-dev/lib/Div';
+import Row from 'hometown-components-dev/lib/Row';
+import Text from 'hometown-components-dev/lib/Text';
+import Span from 'hometown-components-dev/lib/Span';
+import Button from 'hometown-components-dev/lib/Buttons';
+import Theme from 'hometown-components-dev/lib/Theme';
 import { formatAmount } from 'utils/formatters';
 import Coupon from './Coupon';
 

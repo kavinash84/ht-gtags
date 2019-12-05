@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import Helmet from 'react-helmet';
-import Empty from 'hometown-components/lib/Empty';
-import Img from 'hometown-components/lib/Img';
-import Section from 'hometown-components/lib/Section';
+import Empty from 'hometown-components-dev/lib/Empty';
+import Img from 'hometown-components-dev/lib/Img';
+import Section from 'hometown-components-dev/lib/Section';
 import ListingContainer from 'components/Listing';
 import ListingShimmer from 'components/Listing/ListingShimmer';
 import { connect } from 'react-redux';
@@ -160,15 +160,15 @@ export default class Listing extends Component {
           <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
           <meta name="description" content={seoInfo && seoInfo.meta_description} />
           {CANONICALS[pathname] && <link rel="canonical" href={`${SITE_URL}${CANONICALS[pathname]}`} />}
-          {previousPage !== '' &&
-            Number(page) !== 2 && <link rel="prev" href={`${SITE_URL}${pathname}${previousPage}`} />}
+          {previousPage !== '' && Number(page) !== 2 && (
+            <link rel="prev" href={`${SITE_URL}${pathname}${previousPage}`} />
+          )}
           {Number(page) === 2 && <link rel="prev" href={`${SITE_URL}${pathname}`} />}
           {productCount / 32 / Number(page) > 1 && <link rel="next" href={`${SITE_URL}${pathname}${NextPage}`} />}
         </Helmet>
         <div className="wrapper">
           <Menu />
-          {!loading &&
-            products.length === 0 && (
+          {!loading && products.length === 0 && (
             <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
               <Empty
                 title="Sorry! No Results Found"
@@ -216,8 +216,7 @@ export default class Listing extends Component {
             shimmer && <ListingShimmer />
           )}
         </div>
-        {seoInfo &&
-          seoInfo.seo_text && (
+        {seoInfo && seoInfo.seo_text && (
           <SeoContent>
             <div dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }} />
           </SeoContent>

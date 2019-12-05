@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Container from 'hometown-components/lib/Container';
-import Div from 'hometown-components/lib/Div';
-import Heading from 'hometown-components/lib/Heading';
-import Row from 'hometown-components/lib/Row';
-import Section from 'hometown-components/lib/Section';
+import Container from 'hometown-components-dev/lib/Container';
+import Div from 'hometown-components-dev/lib/Div';
+import Heading from 'hometown-components-dev/lib/Heading';
+import Row from 'hometown-components-dev/lib/Row';
+import Section from 'hometown-components-dev/lib/Section';
 import { MY_ORDER_URL, MY_PROFILE_URL, MY_WISHLIST_URL, MY_ADDRESS_URL, MY_CASES_URL } from 'helpers/Constants';
 
 const styles = require('./MyMenu.scss');

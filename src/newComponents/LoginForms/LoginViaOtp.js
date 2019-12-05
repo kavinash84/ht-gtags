@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 /* ====== Components ====== */
-import Button from 'hometown-components/lib/ButtonHtV1';
-import Box from 'hometown-components/lib/BoxHtV1';
-import FormInputHtV1 from 'hometown-components/lib/FormsHtV1/FormInputHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import FormInputHtV1 from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
 
 export default class LoginViaOtp extends React.Component {
   state = {

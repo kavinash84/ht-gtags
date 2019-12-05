@@ -7,10 +7,10 @@ import { connect } from 'react-redux';
 import * as actionCreators from 'redux/modules/pincode';
 
 /* ====== Components ====== */
-import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
-import UlHtV1 from 'hometown-components/lib/UlHtV1';
-import LiHtV1 from 'hometown-components/lib/LiHtV1';
-import InputFieldHtV1 from 'hometown-components/lib/InputFieldHtV1';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import UlHtV1 from 'hometown-components-dev/lib/UlHtV1';
+import LiHtV1 from 'hometown-components-dev/lib/LiHtV1';
+import InputFieldHtV1 from 'hometown-components-dev/lib/InputFieldHtV1';
 
 const styles = require('./Pincode.scss');
 
@@ -67,9 +67,7 @@ const PinCode = ({
           <LiHtV1> Searching.... </LiHtV1>
         </UlHtV1>
       )}
-      {loaded &&
-        showResults &&
-        results.length > 0 && (
+      {loaded && showResults && results.length > 0 && (
         <UlHtV1>
           {results.map((item, index) => (
             <LiHtV1 key={String(index)}>

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Div from 'hometown-components/lib/Div';
-import Img from 'hometown-components/lib/Img';
-import Row from 'hometown-components/lib/Row';
-import Text from 'hometown-components/lib/Text';
-import Heading from 'hometown-components/lib/Heading';
+import Div from 'hometown-components-dev/lib/Div';
+import Img from 'hometown-components-dev/lib/Img';
+import Row from 'hometown-components-dev/lib/Row';
+import Text from 'hometown-components-dev/lib/Text';
+import Heading from 'hometown-components-dev/lib/Heading';
 import { getImageURL } from 'utils/helper';
-import ImageShimmer from 'hometown-components/lib/ImageShimmer';
+import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
 
 const statusIcon = require('../../../static/status-pending.svg');
 const statusActiveIcon = require('../../../static/status-active.svg');

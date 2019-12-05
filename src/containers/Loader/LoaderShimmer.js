@@ -1,6 +1,6 @@
 import React from 'react';
-import Div from 'hometown-components/lib/Div';
-import { Shimmer, BackgroundMasker } from 'hometown-components/lib/Shimmer';
+import Div from 'hometown-components-dev/lib/Div';
+import { Shimmer, BackgroundMasker } from 'hometown-components-dev/lib/Shimmer';
 
 const LoaderShimmer = () => (
   <Div type="block">

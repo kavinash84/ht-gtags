@@ -1,7 +1,7 @@
 import React from 'react';
-import Div from 'hometown-components/lib/Div';
-import Img from 'hometown-components/lib/Img';
-import { Label } from 'hometown-components/lib/Label';
+import Div from 'hometown-components-dev/lib/Div';
+import Img from 'hometown-components-dev/lib/Img';
+import { Label } from 'hometown-components-dev/lib/Label';
 
 const styles = require('./CommonPayments.scss');
 

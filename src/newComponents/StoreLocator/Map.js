@@ -2,7 +2,7 @@ import React from 'react';
 import { compose, withProps } from 'recompose';
 import PropTypes from 'prop-types';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
-import { Shimmer } from 'hometown-components/lib/Shimmer';
+import { Shimmer } from 'hometown-components-dev/lib/Shimmer';
 import { mapKey } from 'helpers/Constants';
 import MapMarker from './MapMarker';
 
@@ -25,8 +25,7 @@ const Map = ({
           }}
         >
           <div>
-            {open &&
-              selectedStore === item.store && (
+            {open && selectedStore === item.store && (
               <InfoBox
                 onCloseClick={() => {
                   handleClick(item.store, mapData, item.city);

@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import TitleBar from 'components/TitleBar';
-import Container from 'hometown-components/lib/Container';
-import Section from 'hometown-components/lib/Section';
+import Container from 'hometown-components-dev/lib/Container';
+import Section from 'hometown-components-dev/lib/Section';
 
 const mapStateToProps = ({ services }) => ({
   ...services.promotions
@@ -14,8 +14,7 @@ const Promotions = ({ data }) => (
   <Section display="block" p="0" mb="0" height="auto">
     <TitleBar title="Promotions" />
     <Container type="container" pr="0.5rem" pl="0.5rem">
-      {data.items &&
-        data.items.text && (
+      {data.items && data.items.text && (
         <div
           color="rgba(0,0,0,0.5)"
           fontSize="0.875rem"

@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TitleBar from 'components/TitleBar';
-import Container from 'hometown-components/lib/Container';
-import Div from 'hometown-components/lib/Div';
-import Row from 'hometown-components/lib/Row';
-import Section from 'hometown-components/lib/Section';
-import Img from 'hometown-components/lib/Img';
-// import Span from 'hometown-components/lib/Span';
-import { Label } from 'hometown-components/lib/Label';
-import FormInput from 'hometown-components/lib/Forms/FormInput';
-import Button from 'hometown-components/lib/Buttons';
+import Container from 'hometown-components-dev/lib/Container';
+import Div from 'hometown-components-dev/lib/Div';
+import Row from 'hometown-components-dev/lib/Row';
+import Section from 'hometown-components-dev/lib/Section';
+import Img from 'hometown-components-dev/lib/Img';
+// import Span from 'hometown-components-dev/lib/Span';
+import { Label } from 'hometown-components-dev/lib/Label';
+import FormInput from 'hometown-components-dev/lib/Forms/FormInput';
+import Button from 'hometown-components-dev/lib/Buttons';
 import { connect } from 'react-redux';
 // import { formatDate } from 'utils/formatters';
-// import ImageShimmer from 'hometown-components/lib/ImageShimmer';
+// import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
 import ResponsiveModal from 'components/Modal';
 import TrackingTimeline from '../MyOrder/TrackingTimeline';
 

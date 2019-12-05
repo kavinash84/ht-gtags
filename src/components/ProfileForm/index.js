@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import ProfileFormContainer from 'hometown-components/lib/Forms/ProfileForm';
-import Section from 'hometown-components/lib/Section';
-import Row from 'hometown-components/lib/Row';
-import Heading from 'hometown-components/lib/Heading';
-import Div from 'hometown-components/lib/Div';
+import ProfileFormContainer from 'hometown-components-dev/lib/Forms/ProfileForm';
+import Section from 'hometown-components-dev/lib/Section';
+import Row from 'hometown-components-dev/lib/Row';
+import Heading from 'hometown-components-dev/lib/Heading';
+import Div from 'hometown-components-dev/lib/Div';
 import { validateEmail, isBlank } from 'js-utility-functions';
 import { validateMobile } from 'utils/validation';
 import { updateUserProfile } from 'redux/modules/profile';

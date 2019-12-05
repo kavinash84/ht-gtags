@@ -5,7 +5,7 @@ import Helmet from 'react-helmet';
 import { validatePaymentDetails } from 'utils/validation';
 import ReviewOrder from 'components/Checkout/ReviewOrder';
 import Menu from 'components/MenuWithLogoOnly';
-import Section from 'hometown-components/lib/Section';
+import Section from 'hometown-components-dev/lib/Section';
 
 @connect(({ paymentoptions }) => ({
   paymentDetails: paymentoptions.paymentMethodDetails

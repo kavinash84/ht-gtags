@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Text from 'hometown-components/lib/Text';
-import Div from 'hometown-components/lib/Div';
+import Text from 'hometown-components-dev/lib/Text';
+import Div from 'hometown-components-dev/lib/Div';
 
 const Title = ({
   title, subTitle, ta, titleColor

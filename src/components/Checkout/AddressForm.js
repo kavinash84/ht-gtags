@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from 'redux/modules/address';
-import FormInput from 'hometown-components/lib/Forms/FormInput';
-import Div from 'hometown-components/lib/Div';
-import Row from 'hometown-components/lib/Row';
+import FormInput from 'hometown-components-dev/lib/Forms/FormInput';
+import Div from 'hometown-components-dev/lib/Div';
+import Row from 'hometown-components-dev/lib/Row';
 import Pincode from './Pincode';
 
 const mapStateToProps = ({ address }, props) => ({

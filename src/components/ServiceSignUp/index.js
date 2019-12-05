@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ServiceSignUpForm from 'hometown-components/lib/Forms/ServiceSignUpForm';
-import Row from 'hometown-components/lib/Row';
-import Div from 'hometown-components/lib/Div';
+import ServiceSignUpForm from 'hometown-components-dev/lib/Forms/ServiceSignUpForm';
+import Row from 'hometown-components-dev/lib/Row';
+import Div from 'hometown-components-dev/lib/Div';
 import ResponsiveModal from 'components/Modal';
-import Button from 'hometown-components/lib/Buttons';
-import Img from 'hometown-components/lib/Img';
-import Text from 'hometown-components/lib/Text';
+import Button from 'hometown-components-dev/lib/Buttons';
+import Img from 'hometown-components-dev/lib/Img';
+import Text from 'hometown-components-dev/lib/Text';
 import { sendData } from 'redux/modules/services';
 import { SERVICE_SIGNUPS } from 'helpers/apiUrls';
 import { validateMobile, validateEmail, isEmpty, pincode as validatePincode } from 'utils/validation';
@@ -233,12 +233,11 @@ class ServiceSignUpModal extends Component {
                     onSubmitForm={this.onSubmitForm}
                   />
                 )}
-                {loaded &&
-                  !loading && (
+                {loaded && !loading && (
                   <Div ta="center" className={styles.serviceThankYouWrapper}>
                     <Img m="0 auto 5px" width="100px" src={correctIcon} alt="Reload Page" />
                     <Text ta="center" fontSize="1.25rem" mb="0.625rem" mt="0" color="rgba(51, 51, 51, 0.85)">
-                        Thank you !
+                      Thank you !
                     </Text>
                   </Div>
                 )}

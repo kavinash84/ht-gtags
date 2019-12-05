@@ -1,14 +1,14 @@
 import React, { Component, Fragment } from 'react';
-import Div from 'hometown-components/lib/Div';
+import Div from 'hometown-components-dev/lib/Div';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { setCardType, verifyEasyEmi } from 'redux/modules/paymentoptions';
 import { getEasyEmiConfig } from 'selectors/payments';
-import Img from 'hometown-components/lib/Img';
-import Text from 'hometown-components/lib/Text';
-import Button from 'hometown-components/lib/Buttons';
-import FormInput from 'hometown-components/lib/Forms/FormInput';
+import Img from 'hometown-components-dev/lib/Img';
+import Text from 'hometown-components-dev/lib/Text';
+import Button from 'hometown-components-dev/lib/Buttons';
+import FormInput from 'hometown-components-dev/lib/Forms/FormInput';
 import { getCartSummary } from 'selectors/cart';
 
 const styles = require('./Checkout.scss');

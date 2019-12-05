@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import FormInput from 'hometown-components/lib/Forms/FormInput';
-import Div from 'hometown-components/lib/Div';
+import FormInput from 'hometown-components-dev/lib/Forms/FormInput';
+import Div from 'hometown-components-dev/lib/Div';
 import * as actionCreators from 'redux/modules/address';
 
 const styles = require('./Pincode.scss');

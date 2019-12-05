@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Section from 'hometown-components/lib/Section';
-import Text from 'hometown-components/lib/Text';
-import Div from 'hometown-components/lib/Div';
-import Button from 'hometown-components/lib/Buttons';
-import Span from 'hometown-components/lib/Span';
-import Refresh from 'hometown-components/lib/Icons/Refresh';
+import Section from 'hometown-components-dev/lib/Section';
+import Text from 'hometown-components-dev/lib/Text';
+import Div from 'hometown-components-dev/lib/Div';
+import Button from 'hometown-components-dev/lib/Buttons';
+import Span from 'hometown-components-dev/lib/Span';
+import Refresh from 'hometown-components-dev/lib/Icons/Refresh';
 
 const styles = require('./index.scss');
 

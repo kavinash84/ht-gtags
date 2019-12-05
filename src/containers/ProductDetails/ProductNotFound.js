@@ -1,7 +1,7 @@
 import React from 'react';
-import Empty from 'hometown-components/lib/Empty';
-import Img from 'hometown-components/lib/Img';
-import Section from 'hometown-components/lib/Section';
+import Empty from 'hometown-components-dev/lib/Empty';
+import Img from 'hometown-components-dev/lib/Img';
+import Section from 'hometown-components-dev/lib/Section';
 
 const ProductNotFoundIcon = require('../../../static/product-empty.jpg');
 

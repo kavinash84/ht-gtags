@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Container from 'hometown-components/lib/Container';
-import Row from 'hometown-components/lib/Row';
-import Div from 'hometown-components/lib/Div';
-import Heading from 'hometown-components/lib/Heading';
-import Text from 'hometown-components/lib/Text';
-import Section from 'hometown-components/lib/Section';
-import Img from 'hometown-components/lib/Img';
+import Container from 'hometown-components-dev/lib/Container';
+import Row from 'hometown-components-dev/lib/Row';
+import Div from 'hometown-components-dev/lib/Div';
+import Heading from 'hometown-components-dev/lib/Heading';
+import Text from 'hometown-components-dev/lib/Text';
+import Section from 'hometown-components-dev/lib/Section';
+import Img from 'hometown-components-dev/lib/Img';
 import ResponsiveModal from 'components/Modal';
 import TitleBar from 'components/TitleBar';
-import ServiceRequestForm from 'hometown-components/lib/Forms/ServiceRequestForm';
+import ServiceRequestForm from 'hometown-components-dev/lib/Forms/ServiceRequestForm';
 import { validateMobile, isEmpty, validateEmail } from 'utils/validation';
 import { notifSend } from 'redux/modules/notifs';
 import { sendData } from 'redux/modules/services';
@@ -140,14 +140,18 @@ class ServiceRequest extends React.Component {
     }
   };
   handleChange = e => {
-    const { target: { value, name } } = e;
+    const {
+      target: { value, name }
+    } = e;
     this.setState({
       [name]: value,
       [`${name}FeedBackError`]: false
     });
   };
   handleCheckBoxChange = e => {
-    const { target: { name } } = e;
+    const {
+      target: { name }
+    } = e;
     this.setState({
       [name]: !this.state[name]
     });

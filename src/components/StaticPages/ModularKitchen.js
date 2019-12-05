@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import MainSlider from 'components/MainSlider';
-import Section from 'hometown-components/lib/Section';
-import Container from 'hometown-components/lib/Container';
-import Heading from 'hometown-components/lib/Heading';
-import Div from 'hometown-components/lib/Div';
-import Row from 'hometown-components/lib/Row';
-import Text from 'hometown-components/lib/Text';
-import Img from 'hometown-components/lib/Img';
+import Section from 'hometown-components-dev/lib/Section';
+import Container from 'hometown-components-dev/lib/Container';
+import Heading from 'hometown-components-dev/lib/Heading';
+import Div from 'hometown-components-dev/lib/Div';
+import Row from 'hometown-components-dev/lib/Row';
+import Text from 'hometown-components-dev/lib/Text';
+import Img from 'hometown-components-dev/lib/Img';
 import ServiceSignUp from 'components/ServiceSignUp';
 
 export default class ModularKitchen extends Component {
@@ -80,9 +80,12 @@ export default class ModularKitchen extends Component {
                   WHY HOMETOWN KITCHENS
                 </Heading>
                 <Text fontSize="1rem" mt="0.3125rem" ta="center" color="textLight">
-                  Kitchen Delivery within 45 Days<br />
-                  Highest Quality Fitting And Accessories<br />
-                  100% Customized Designs Created Only For You<br />
+                  Kitchen Delivery within 45 Days
+                  <br />
+                  Highest Quality Fitting And Accessories
+                  <br />
+                  100% Customized Designs Created Only For You
+                  <br />
                   On Time, On Budget. Project Handover Gurantee
                 </Text>
               </Div>

@@ -8,19 +8,19 @@ import { getCities, getOfferStripData, getMiddleBannerData } from 'selectors/hom
 import Select from 'react-select';
 
 /* ====== Components ====== */
-import AbsoluteHtV1 from 'hometown-components/lib/AbsoluteHtV1';
-import BodyHtV1 from 'hometown-components/lib/BodyHtV1';
-import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
-import ButtonHtV1 from 'hometown-components/lib/ButtonHtV1';
-import CardHtV1 from 'hometown-components/lib/CardHtV1';
-import ContainerHtV1 from 'hometown-components/lib/ContainerHtV1';
-import ColHtV1 from 'hometown-components/lib/ColHtV1';
-import HeadingHtV1 from 'hometown-components/lib/HeadingHtV1';
-import ImageHtV1 from 'hometown-components/lib/ImageHtV1';
-import RowHtV1 from 'hometown-components/lib/RowHtV1';
-import SectionHtV1 from 'hometown-components/lib/SectionHtV1';
-import TextHtV1 from 'hometown-components/lib/TextHtV1';
-import WrapperHtV1 from 'hometown-components/lib/WrapperHtV1';
+import AbsoluteHtV1 from 'hometown-components-dev/lib/AbsoluteHtV1';
+import BodyHtV1 from 'hometown-components-dev/lib/BodyHtV1';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
+import CardHtV1 from 'hometown-components-dev/lib/CardHtV1';
+import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
+import ColHtV1 from 'hometown-components-dev/lib/ColHtV1';
+import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
+import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
+import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
+import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
+import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
+import WrapperHtV1 from 'hometown-components-dev/lib/WrapperHtV1';
 
 /* ====== Page Components ====== */
 import CategoryCarousel from 'newComponents/CategoryCarousel';

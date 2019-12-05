@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Container from 'hometown-components/lib/Container';
-import Div from 'hometown-components/lib/Div';
-import Row from 'hometown-components/lib/Row';
-import { Label } from 'hometown-components/lib/Label';
-import Section from 'hometown-components/lib/Section';
+import Container from 'hometown-components-dev/lib/Container';
+import Div from 'hometown-components-dev/lib/Div';
+import Row from 'hometown-components-dev/lib/Row';
+import { Label } from 'hometown-components-dev/lib/Label';
+import Section from 'hometown-components-dev/lib/Section';
 
 const styles = require('./Notifications.scss');
 

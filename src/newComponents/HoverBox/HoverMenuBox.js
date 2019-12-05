@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import ImageHtV1 from 'hometown-components/lib/ImageHtV1';
-import ImageShimmerHtV1 from 'hometown-components/lib/ImageShimmerHtV1';
+import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
+import ImageShimmerHtV1 from 'hometown-components-dev/lib/ImageShimmerHtV1';
 
 const styles = require('./HoverMenuBox.scss');
 

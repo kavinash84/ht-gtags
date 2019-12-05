@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Div from 'hometown-components/lib/Div';
-import Row from 'hometown-components/lib/Row';
-import Button from 'hometown-components/lib/Buttons';
-import Img from 'hometown-components/lib/Img';
+import Div from 'hometown-components-dev/lib/Div';
+import Row from 'hometown-components-dev/lib/Row';
+import Button from 'hometown-components-dev/lib/Buttons';
+import Img from 'hometown-components-dev/lib/Img';
 import { Link } from 'react-router-dom';
-import { Label } from 'hometown-components/lib/Label';
+import { Label } from 'hometown-components-dev/lib/Label';
 
 const styles = require('./CategoryFilters.scss');
 const showLessIcon = require('../../../static/chevron_right.svg');
@@ -33,8 +33,7 @@ class CategoryFilterItem extends Component {
             {sub.name}
           </Label>
         </Link>
-        {sub &&
-          sub.children && (
+        {sub && sub.children && (
           <Button p="4px 0" lh="0.5" fontSize="1.25rem" btnType="link" onClick={this.handleClick}>
             <Img src={showLessIcon} alt={show ? 'more' : 'less'} className={show ? styles.open : styles.close} />
           </Button>

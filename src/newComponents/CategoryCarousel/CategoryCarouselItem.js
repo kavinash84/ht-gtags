@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
-import ImageHtV1 from 'hometown-components/lib/ImageHtV1';
-import TextHtV1 from 'hometown-components/lib/TextHtV1';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
+import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
 
 const CategoryItem = ({ image, name, url }) => {
   if (url) {

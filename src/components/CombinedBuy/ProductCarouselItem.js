@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Div from 'hometown-components/lib/Div';
-import Span from 'hometown-components/lib/Span';
-import Heading from 'hometown-components/lib/Heading';
-import ImageShimmer from 'hometown-components/lib/ImageShimmer';
-import Img from 'hometown-components/lib/Img';
-import Theme from 'hometown-components/lib/Theme';
+import Div from 'hometown-components-dev/lib/Div';
+import Span from 'hometown-components-dev/lib/Span';
+import Heading from 'hometown-components-dev/lib/Heading';
+import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
+import Img from 'hometown-components-dev/lib/Img';
+import Theme from 'hometown-components-dev/lib/Theme';
 import { Link } from 'react-router-dom';
 
 const styles = require('./Slider.scss');

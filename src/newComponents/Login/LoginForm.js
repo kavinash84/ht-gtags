@@ -12,14 +12,14 @@ import { allowNChar, allowTypeOf } from 'utils/helper';
 import { validateMobile } from 'utils/validation';
 
 /* ====== Components ====== */
-import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
-import RowHtV1 from 'hometown-components/lib/RowHtV1';
-import TextHtV1 from 'hometown-components/lib/TextHtV1';
-import ImageHtV1 from 'hometown-components/lib/ImageHtV1';
-import ButtonHtV1 from 'hometown-components/lib/ButtonHtV1';
-import LabelHtV1 from 'hometown-components/lib/LabelHtV1';
-import HeadingHtV1 from 'hometown-components/lib/HeadingHtV1';
-import ImageShimmer from 'hometown-components/lib/ImageShimmer';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
+import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
+import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
+import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
+import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
+import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
+import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
 
 /* ====== Page Components ====== */
 import LoginForm from 'newComponents/Login/LoginForm';

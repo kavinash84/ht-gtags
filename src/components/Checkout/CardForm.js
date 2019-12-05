@@ -1,13 +1,13 @@
 import React from 'react';
-import Div from 'hometown-components/lib/Div';
+import Div from 'hometown-components-dev/lib/Div';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { setCardType } from 'redux/modules/paymentoptions';
-import Img from 'hometown-components/lib/Img';
-import Text from 'hometown-components/lib/Text';
-import { Label } from 'hometown-components/lib/Label';
-import FormInput from 'hometown-components/lib/Forms/FormInput';
+import Img from 'hometown-components-dev/lib/Img';
+import Text from 'hometown-components-dev/lib/Text';
+import { Label } from 'hometown-components-dev/lib/Label';
+import FormInput from 'hometown-components-dev/lib/Forms/FormInput';
 
 const styles = require('./Checkout.scss');
 

@@ -1,10 +1,10 @@
 import React from 'react';
 import LoginForm from 'components/Login/LoginForm';
 import GoogleLoginBtn from 'components/Login/GoogleLogin';
-import Fav from 'hometown-components/lib/Icons/Fav';
-import Row from 'hometown-components/lib/Row';
-import Div from 'hometown-components/lib/Div';
-import { Label } from 'hometown-components/lib/Label';
+import Fav from 'hometown-components-dev/lib/Icons/Fav';
+import Row from 'hometown-components-dev/lib/Row';
+import Div from 'hometown-components-dev/lib/Div';
+import { Label } from 'hometown-components-dev/lib/Label';
 
 const styles = require('./LoginModal.scss');
 

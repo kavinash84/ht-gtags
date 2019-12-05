@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Container from 'hometown-components/lib/Container';
-import Section from 'hometown-components/lib/Section';
-import Div from 'hometown-components/lib/Div';
+import Container from 'hometown-components-dev/lib/Container';
+import Section from 'hometown-components-dev/lib/Section';
+import Div from 'hometown-components-dev/lib/Div';
 import MenuFooter from 'containers/MenuFooter';
 import SignupFormContainer from './SignupForm';
 

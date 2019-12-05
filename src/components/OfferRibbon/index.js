@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Section from 'hometown-components/lib/Section';
-import Text from 'hometown-components/lib/Text';
+import Section from 'hometown-components-dev/lib/Section';
+import Text from 'hometown-components-dev/lib/Text';
 
 const styles = require('./index.scss');
 

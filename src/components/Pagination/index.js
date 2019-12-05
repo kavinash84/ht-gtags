@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Pager from 'react-js-pagination';
 import PropTypes from 'prop-types';
-import Row from 'hometown-components/lib/Row';
-import Div from 'hometown-components/lib/Div';
-import Container from 'hometown-components/lib/Container';
-import Section from 'hometown-components/lib/Section';
+import Row from 'hometown-components-dev/lib/Row';
+import Div from 'hometown-components-dev/lib/Div';
+import Container from 'hometown-components-dev/lib/Container';
+import Section from 'hometown-components-dev/lib/Section';
 import { connect } from 'react-redux';
 import { getProductCount } from 'selectors/products';
 import { formFilterLink2 } from 'utils/helper';

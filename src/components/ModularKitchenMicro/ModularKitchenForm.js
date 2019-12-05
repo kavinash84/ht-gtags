@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ResponsiveModal from 'components/Modal';
-import Heading from 'hometown-components/lib/Heading';
-import ModularKitchenForm from 'hometown-components/lib/Forms/ModularKitchenForm';
-import Div from 'hometown-components/lib/Div';
-import Row from 'hometown-components/lib/Row';
-import Text from 'hometown-components/lib/Text';
-import Img from 'hometown-components/lib/Img';
+import Heading from 'hometown-components-dev/lib/Heading';
+import ModularKitchenForm from 'hometown-components-dev/lib/Forms/ModularKitchenForm';
+import Div from 'hometown-components-dev/lib/Div';
+import Row from 'hometown-components-dev/lib/Row';
+import Text from 'hometown-components-dev/lib/Text';
+import Img from 'hometown-components-dev/lib/Img';
 import { allowNChar, allowTypeOf } from 'utils/helper';
 import { SERVICE_SIGNUPS, PINCODE as PINCODE_API } from 'helpers/apiUrls';
 import { sendData, getData } from 'redux/modules/services';
@@ -56,7 +56,9 @@ export default class ModularKitchen extends Component {
   }
 
   onChangeName = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = isEmpty(value);
     this.setState({
       name: value,
@@ -64,7 +66,9 @@ export default class ModularKitchen extends Component {
     });
   };
   onChangeEmail = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = !validateEmail(value);
     this.setState({
       email: value,
@@ -72,7 +76,9 @@ export default class ModularKitchen extends Component {
     });
   };
   onChangePhone = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = !validateMobile(value);
     if (!allowNChar(value, 10) || (!allowTypeOf(value, 'number') && value.length > 0)) {
       return;
@@ -85,7 +91,9 @@ export default class ModularKitchen extends Component {
     });
   };
   onChangeAddress = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = isEmpty(value);
     this.setState({
       address: value,
@@ -93,7 +101,9 @@ export default class ModularKitchen extends Component {
     });
   };
   onChangePincode = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     const checkError = validatePincode(value);
     if (!allowNChar(value, 6) || (!allowTypeOf(value, 'number') && value.length > 0)) {
       // Dispatch the load state and city api
@@ -109,7 +119,9 @@ export default class ModularKitchen extends Component {
     });
   };
   onChangeService = e => {
-    const { target: { value } } = e;
+    const {
+      target: { value }
+    } = e;
     this.setState({
       service: value
     });
@@ -229,8 +241,7 @@ export default class ModularKitchen extends Component {
             />
           }
         </Div>
-        {loaded &&
-          !loading && (
+        {loaded && !loading && (
           <ResponsiveModal
             classNames={{ modal: 'responsiveModal' }}
             onCloseModal={this.handleModal}
@@ -239,7 +250,7 @@ export default class ModularKitchen extends Component {
             <Div ta="center" className={styles.serviceThankYouWrapper}>
               <Img m="0 auto 5px" width="100px" src={correctIcon} alt="Reload Page" />
               <Text ta="center" fontSize="1.25rem" mb="0.625rem" mt="0" color="rgba(51, 51, 51, 0.85)">
-                  Thank you !
+                Thank you !
               </Text>
             </Div>
           </ResponsiveModal>

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-// import Img from 'hometown-components/lib/Img';
-import Div from 'hometown-components/lib/Div';
-import { Label } from 'hometown-components/lib/Label';
-import Row from 'hometown-components/lib/Row';
-import Span from 'hometown-components/lib/Span';
-import Button from 'hometown-components/lib/Buttons';
-import Heading from 'hometown-components/lib/Heading';
-import Theme from 'hometown-components/lib/Theme';
-import Img from 'hometown-components/lib/Img';
-// import { Label } from 'hometown-components/lib/Label';
+// import Img from 'hometown-components-dev/lib/Img';
+import Div from 'hometown-components-dev/lib/Div';
+import { Label } from 'hometown-components-dev/lib/Label';
+import Row from 'hometown-components-dev/lib/Row';
+import Span from 'hometown-components-dev/lib/Span';
+import Button from 'hometown-components-dev/lib/Buttons';
+import Heading from 'hometown-components-dev/lib/Heading';
+import Theme from 'hometown-components-dev/lib/Theme';
+import Img from 'hometown-components-dev/lib/Img';
+// import { Label } from 'hometown-components-dev/lib/Label';
 import ResponsiveModal from 'components/Modal';
 
 const Step1Icon = require('../../../static/basket.png');

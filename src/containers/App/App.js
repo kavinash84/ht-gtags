@@ -21,8 +21,8 @@ import Notifs from 'components/Notifs';
 import { isKeyExists } from 'utils/helper';
 
 /* ====== Components ====== */
-import Alert from 'hometown-components/lib/Alert';
-import ThemeProvider from 'hometown-components/lib/ThemeProviderHtV1';
+import Alert from 'hometown-components-dev/lib/Alert';
+import ThemeProvider from 'hometown-components-dev/lib/ThemeProviderHtV1';
 
 const { SITE_URL } = process.env;
 const SITE_URL_MOBILE = 'https://m.hometown.in';

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TextHtV1 from 'hometown-components/lib/TextHtV1';
-import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
-// import Text from 'hometown-components/lib/Text';
-// import Div from 'hometown-components/lib/Div';
+import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+// import Text from 'hometown-components-dev/lib/Text';
+// import Div from 'hometown-components-dev/lib/Div';
 
 const Title = ({ title, subTitle, ...rest }) => (
   <BoxHtV1 mb="24px" {...rest}>

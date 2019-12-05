@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 /* ====== Components ====== */
-import ContainerHtV1 from 'hometown-components/lib/ContainerHtV1';
-import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
+import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
 
 /* ====== Page Components ====== */
 import HeaderTop from 'newComponents/Header/HeaderTop';

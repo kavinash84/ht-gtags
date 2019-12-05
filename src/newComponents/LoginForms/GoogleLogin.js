@@ -15,12 +15,12 @@ import { allowNChar, allowTypeOf } from 'utils/helper';
 import { googleLogin, clearLoginState } from 'redux/modules/login';
 
 /* ====== Components ====== */
-import FormInputHtV1 from 'hometown-components/lib/FormsHtV1/FormInputHtV1';
-import Box from 'hometown-components/lib/BoxHtV1';
-import Row from 'hometown-components/lib/RowHtV1';
-import Heading from 'hometown-components/lib/HeadingHtV1';
-import Text from 'hometown-components/lib/TextHtV1';
-import Image from 'hometown-components/lib/ImageHtV1';
+import FormInputHtV1 from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
 
 const LoaderIcon = require('../../../static/refresh-black.svg');
 

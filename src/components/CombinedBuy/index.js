@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import Section from 'hometown-components/lib/Section';
-import Container from 'hometown-components/lib/Container';
-import Row from 'hometown-components/lib/Row';
-import Div from 'hometown-components/lib/Div';
-import Span from 'hometown-components/lib/Span';
-import { Label } from 'hometown-components/lib/Label';
+import Section from 'hometown-components-dev/lib/Section';
+import Container from 'hometown-components-dev/lib/Container';
+import Row from 'hometown-components-dev/lib/Row';
+import Div from 'hometown-components-dev/lib/Div';
+import Span from 'hometown-components-dev/lib/Span';
+import { Label } from 'hometown-components-dev/lib/Label';
 import { formatAmount } from 'utils/formatters';
 import { formatProductURL } from 'utils/helper';
 import ProductCarouselItem from './ProductCarouselItem';

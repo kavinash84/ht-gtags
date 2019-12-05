@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Container from 'hometown-components/lib/Container';
-import Div from 'hometown-components/lib/Div';
-import Text from 'hometown-components/lib/Text';
-import Img from 'hometown-components/lib/Img';
-import Section from 'hometown-components/lib/Section';
+import Container from 'hometown-components-dev/lib/Container';
+import Div from 'hometown-components-dev/lib/Div';
+import Text from 'hometown-components-dev/lib/Text';
+import Img from 'hometown-components-dev/lib/Img';
+import Section from 'hometown-components-dev/lib/Section';
 import TitleBar from 'components/TitleBar';
 import ResponsiveModal from 'components/Modal';
-import FeedBackForm from 'hometown-components/lib/Forms/FeedBackForm';
+import FeedBackForm from 'hometown-components-dev/lib/Forms/FeedBackForm';
 import { validateMobile, isEmpty, validateEmail } from 'utils/validation';
 import { notifSend } from 'redux/modules/notifs';
 import { sendData } from 'redux/modules/services';
@@ -140,14 +140,18 @@ class Feedback extends React.Component {
     }
   };
   handleChange = e => {
-    const { target: { value, name } } = e;
+    const {
+      target: { value, name }
+    } = e;
     this.setState({
       [name]: value,
       [`${name}FeedBackError`]: false
     });
   };
   handleCheckBoxChange = e => {
-    const { target: { name } } = e;
+    const {
+      target: { name }
+    } = e;
     this.setState({
       [name]: !this.state[name]
     });

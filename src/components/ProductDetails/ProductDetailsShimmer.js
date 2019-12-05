@@ -1,9 +1,9 @@
 import React from 'react';
-import Container from 'hometown-components/lib/Container';
-import Div from 'hometown-components/lib/Div';
-import Row from 'hometown-components/lib/Row';
-import Section from 'hometown-components/lib/Section';
-import { Shimmer, BackgroundMasker } from 'hometown-components/lib/Shimmer';
+import Container from 'hometown-components-dev/lib/Container';
+import Div from 'hometown-components-dev/lib/Div';
+import Row from 'hometown-components-dev/lib/Row';
+import Section from 'hometown-components-dev/lib/Section';
+import { Shimmer, BackgroundMasker } from 'hometown-components-dev/lib/Shimmer';
 
 const ListingShimmer = () => (
   <Section pt="1rem" mb="0">

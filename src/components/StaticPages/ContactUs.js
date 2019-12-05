@@ -1,10 +1,10 @@
 import React from 'react';
-import Container from 'hometown-components/lib/Container';
-import Div from 'hometown-components/lib/Div';
-import Row from 'hometown-components/lib/Row';
-import Text from 'hometown-components/lib/Text';
-import Heading from 'hometown-components/lib/Heading';
-import Section from 'hometown-components/lib/Section';
+import Container from 'hometown-components-dev/lib/Container';
+import Div from 'hometown-components-dev/lib/Div';
+import Row from 'hometown-components-dev/lib/Row';
+import Text from 'hometown-components-dev/lib/Text';
+import Heading from 'hometown-components-dev/lib/Heading';
+import Section from 'hometown-components-dev/lib/Section';
 import TitleBar from 'components/TitleBar';
 
 const styles = require('./StaticPages.scss');

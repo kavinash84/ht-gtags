@@ -10,13 +10,13 @@ import { getCurrentCity, getCurrentLocation, getDestination, getStores } from 's
 import { gaVisitEvent } from 'redux/modules/stores';
 
 /* ====== Page Components ====== */
-import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
-import Container from 'hometown-components/lib/ContainerHtV1';
-import Image from 'hometown-components/lib/ImageHtV1';
-import Heading from 'hometown-components/lib/HeadingHtV1';
-import Row from 'hometown-components/lib/RowHtV1';
-import Section from 'hometown-components/lib/SectionHtV1';
-import Label from 'hometown-components/lib/LabelHtV1';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Section from 'hometown-components-dev/lib/SectionHtV1';
+import Label from 'hometown-components-dev/lib/LabelHtV1';
 
 /* ====== Page Components ====== */
 import { getDistanceBetweenPoints } from 'utils/helper';

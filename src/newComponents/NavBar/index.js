@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 /* ====== Components ====== */
-import AbsoluteHtV1 from 'hometown-components/lib/AbsoluteHtV1';
-import ButtonHtV1 from 'hometown-components/lib/ButtonHtV1';
-import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
-import ContainerHtV1 from 'hometown-components/lib/ContainerHtV1';
-import LabelHtV1 from 'hometown-components/lib/LabelHtV1';
-import LinkRedirectHtV1 from 'hometown-components/lib/LinkRedirectHtV1';
-import RowHtV1 from 'hometown-components/lib/RowHtV1';
-import TextHtV1 from 'hometown-components/lib/TextHtV1';
+import AbsoluteHtV1 from 'hometown-components-dev/lib/AbsoluteHtV1';
+import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
+import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
+import LinkRedirectHtV1 from 'hometown-components-dev/lib/LinkRedirectHtV1';
+import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
+import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
 
 // const { SITE_URL } = process.env;
 

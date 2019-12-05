@@ -1,8 +1,8 @@
 import React, { Fragment, Component } from 'react';
-import Container from 'hometown-components/lib/Container';
+import Container from 'hometown-components-dev/lib/Container';
 import { Link } from 'react-router-dom';
-import Button from 'hometown-components/lib/Buttons';
-import { Label } from 'hometown-components/lib/Label';
+import Button from 'hometown-components-dev/lib/Buttons';
+import { Label } from 'hometown-components-dev/lib/Label';
 import PropTypes from 'prop-types';
 
 const styles = require('./NavBar.scss');
