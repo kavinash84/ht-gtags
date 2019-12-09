@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from 'hometown-components/lib/Buttons';
-import Div from 'hometown-components/lib/Div';
-import { Label } from 'hometown-components/lib/Label';
+import Button from 'hometown-components-dev/lib/Buttons';
+import Div from 'hometown-components-dev/lib/Div';
+import { Label } from 'hometown-components-dev/lib/Label';
 import { loadCoupons } from 'redux/modules/coupon';
 
 import styles from './Coupon.scss';

@@ -58,6 +58,7 @@ export const signUp = (data, session, signupOrigin) => ({
   promise: async ({ client }) => {
     try {
       const postData = {
+        full_name: data.name,
         email: data.email,
         mobile: data.phone,
         password: data.password,

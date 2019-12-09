@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Img from 'hometown-components/lib/Img';
-import Div from 'hometown-components/lib/Div';
-import Row from 'hometown-components/lib/Row';
-import Button from 'hometown-components/lib/Buttons';
-import Span from 'hometown-components/lib/Span';
-import Heading from 'hometown-components/lib/Heading';
-import { Label } from 'hometown-components/lib/Label';
-import Fav from 'hometown-components/lib/Icons/Fav';
+import Img from 'hometown-components-dev/lib/Img';
+import Div from 'hometown-components-dev/lib/Div';
+import Row from 'hometown-components-dev/lib/Row';
+import Button from 'hometown-components-dev/lib/Buttons';
+import Span from 'hometown-components-dev/lib/Span';
+import Heading from 'hometown-components-dev/lib/Heading';
+import { Label } from 'hometown-components-dev/lib/Label';
+import Fav from 'hometown-components-dev/lib/Icons/Fav';
 import Search from 'components/Search';
 import ResponsiveModal from 'components/Modal';
 import Pincode from 'components/Pincode';
@@ -30,6 +30,7 @@ const PinIcon = require('../../../static/map-icon.svg');
 // const PhoneIcon = require('../../../static/phone-icon.svg');
 const UserIcon = require('../../../static/user-icon.svg');
 const PincodeModalIcon = require('../../../static/map-placeholder.svg');
+const orderTrackIcon = require('../../../static/tracking.svg');
 
 const onClick = history => e => {
   e.preventDefault();
@@ -117,10 +118,16 @@ export default class MenuSidebar extends Component {
               </Link>
             </div>
           </Div>
-          <Div col="5">
+          <Div col="4">
             <Search />
           </Div>
-          <Div col="5" ta="right" pt="0.3125rem">
+          <Div col="6" ta="right" pt="0.3125rem">
+            <Link className={styles.cart} to="/track-order">
+              <Img src={orderTrackIcon} alt="Hometown" height="24px" mr="8px" float="left" />
+              <Span fontFamily="light" fontSize="0.875em">
+                Track Order
+              </Span>
+            </Link>
             <button onClick={this.onOpenPincodeModal}>
               <Img src={PinIcon} alt="Hometown" height="24px" mr="0.3125rem" float="left" />
               <Span fontSize="0.875rem" lh="2" fontFamily="light">

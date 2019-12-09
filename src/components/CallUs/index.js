@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
-import Callus from 'hometown-components/lib/Callus';
+import Callus from 'hometown-components-dev/lib/Callus';
 import { sendData } from 'redux/modules/services';
 import { CALL_BACK as CALL_BACK_API } from 'helpers/apiUrls';
 import { allowNChar, allowTypeOf } from 'utils/helper';

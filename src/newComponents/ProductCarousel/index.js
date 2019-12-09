@@ -6,7 +6,7 @@ import { formatAmount } from 'utils/formatters';
 import { formatProductURL } from 'utils/helper';
 
 /* ====== Components ====== */
-import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
 
 /* ====== Page Components ====== */
 import Title from 'newComponents/Title';

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Div from 'hometown-components/lib/Div';
-import Img from 'hometown-components/lib/Img';
+import Div from 'hometown-components-dev/lib/Div';
+import Img from 'hometown-components-dev/lib/Img';
 
 const errorIcon = require('../../../static/warning.svg');
 

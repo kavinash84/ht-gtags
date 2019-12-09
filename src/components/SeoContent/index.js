@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Container from 'hometown-components/lib/Container';
-import SeoContentContainer from 'hometown-components/lib/SeoContent';
-import Div from 'hometown-components/lib/Div';
-import Row from 'hometown-components/lib/Row';
-import Section from 'hometown-components/lib/Section';
+import Container from 'hometown-components-dev/lib/Container';
+import SeoContentContainer from 'hometown-components-dev/lib/SeoContent';
+import Div from 'hometown-components-dev/lib/Div';
+import Row from 'hometown-components-dev/lib/Row';
+import Section from 'hometown-components-dev/lib/Section';
 
 const SeoContent = ({ children }) => (
   <Div type="block" pb="2rem" pt="0">

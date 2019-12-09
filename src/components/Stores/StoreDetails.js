@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Container from 'hometown-components/lib/Container';
+import Container from 'hometown-components-dev/lib/Container';
 import PropTypes from 'prop-types';
-import Div from 'hometown-components/lib/Div';
-import Row from 'hometown-components/lib/Row';
-import Section from 'hometown-components/lib/Section';
-import Heading from 'hometown-components/lib/Heading';
-import Text from 'hometown-components/lib/Text';
-import Img from 'hometown-components/lib/Img';
+import Div from 'hometown-components-dev/lib/Div';
+import Row from 'hometown-components-dev/lib/Row';
+import Section from 'hometown-components-dev/lib/Section';
+import Heading from 'hometown-components-dev/lib/Heading';
+import Text from 'hometown-components-dev/lib/Text';
+import Img from 'hometown-components-dev/lib/Img';
 import MenuWithBreadcrumb from 'components/MenuWithBreadcrumb';
 
 const storesImg = require('../../../static/storedemoimg.jpg');

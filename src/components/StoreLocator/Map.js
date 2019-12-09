@@ -2,7 +2,7 @@ import React from 'react';
 import { compose, withProps } from 'recompose';
 import PropTypes from 'prop-types';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
-// import { Shimmer } from 'hometown-components/lib/Shimmer';
+// import { Shimmer } from 'hometown-components-dev/lib/Shimmer';
 import { mapKey } from 'helpers/Constants';
 import MapMarker from './MapMarker';
 
@@ -12,7 +12,7 @@ import MapMarker from './MapMarker';
 const { InfoBox } = require('react-google-maps/lib/components/addons/InfoBox');
 
 const Map = ({
-  mapData, zoom, position, open, handleClick, selectedStore, currentLocation
+  mapData, zoom, position, open, handleClick, selectedStore, currentLocation, recordStoreDirection
 }) => (
   <GoogleMap zoom={parseInt(zoom, 10) || 16} center={position} options={{ mapTypeControl: false }}>
     {mapData.map(item => {
@@ -25,8 +25,7 @@ const Map = ({
           }}
         >
           <div>
-            {open &&
-              selectedStore === item.store && (
+            {open && selectedStore === item.store && (
               <InfoBox
                 onCloseClick={() => {
                   handleClick(item.store, mapData, item.city);
@@ -39,11 +38,13 @@ const Map = ({
                 }}
               >
                 <MapMarker
+                  city={item.city}
                   store={item.store}
                   address={item.address}
                   phone={item.phone}
                   position={item.position}
                   currentLocation={currentLocation}
+                  recordStoreDirection={recordStoreDirection}
                 />
               </InfoBox>
             )}
@@ -67,7 +68,8 @@ Map.propTypes = {
   open: PropTypes.bool.isRequired,
   handleClick: PropTypes.func.isRequired,
   selectedStore: PropTypes.string,
-  currentLocation: PropTypes.object
+  currentLocation: PropTypes.object,
+  recordStoreDirection: PropTypes.func.isRequired
 };
 
 const MapContainer = compose(

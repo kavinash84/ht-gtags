@@ -4,12 +4,12 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 
 /* ====== Components ====== */
-// import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
-import BodyHtV1 from 'hometown-components/lib/BodyHtV1';
-import ContainerHtV1 from 'hometown-components/lib/ContainerHtV1';
-// import RowHtV1 from 'hometown-components/lib/RowHtV1';
-import SectionHtV1 from 'hometown-components/lib/SectionHtV1';
-import WrapperHtV1 from 'hometown-components/lib/WrapperHtV1';
+// import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import BodyHtV1 from 'hometown-components-dev/lib/BodyHtV1';
+import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
+// import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
+import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
+import WrapperHtV1 from 'hometown-components-dev/lib/WrapperHtV1';
 
 /* ====== Page Components ====== */
 // import Menu from 'containers/MenuNew/index';

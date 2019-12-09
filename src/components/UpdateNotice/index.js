@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import ResponsiveModal from 'components/Modal';
-import Button from 'hometown-components/lib/Buttons';
-import Div from 'hometown-components/lib/Div';
-import Text from 'hometown-components/lib/Text';
-import Img from 'hometown-components/lib/Img';
+import Button from 'hometown-components-dev/lib/Buttons';
+import Div from 'hometown-components-dev/lib/Div';
+import Text from 'hometown-components-dev/lib/Text';
+import Img from 'hometown-components-dev/lib/Img';
 
 class UpdateNotification extends Component {
   state = {

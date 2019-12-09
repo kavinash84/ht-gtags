@@ -3,22 +3,22 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-import Container from 'hometown-components/lib/Container';
-import Div from 'hometown-components/lib/Div';
-import Row from 'hometown-components/lib/Row';
-import Section from 'hometown-components/lib/Section';
-import HeadingH6 from 'hometown-components/lib/HeadingH6';
-import TitlePrice from 'hometown-components/lib/ProductDetails/TitlePrice';
-import ColorOption from 'hometown-components/lib/ProductDetails/ColorOption';
-import ServiceDetails from 'hometown-components/lib/ProductDetails/ServiceDetails';
-import ProductDesc from 'hometown-components/lib/ProductDetails/ProductDesc';
-import Specs from 'hometown-components/lib/ProductDetails/Specs';
-import Reviews from 'hometown-components/lib/Reviews';
-import AddReview from 'hometown-components/lib/Reviews/WriteReview';
-import Img from 'hometown-components/lib/Img';
-import Button from 'hometown-components/lib/Buttons';
-import WishlistBtn from 'hometown-components/lib/WishlistBtn';
-import Theme from 'hometown-components/lib/Theme';
+import Container from 'hometown-components-dev/lib/Container';
+import Div from 'hometown-components-dev/lib/Div';
+import Row from 'hometown-components-dev/lib/Row';
+import Section from 'hometown-components-dev/lib/Section';
+import HeadingH6 from 'hometown-components-dev/lib/HeadingH6';
+import TitlePrice from 'hometown-components-dev/lib/ProductDetails/TitlePrice';
+import ColorOption from 'hometown-components-dev/lib/ProductDetails/ColorOption';
+import ServiceDetails from 'hometown-components-dev/lib/ProductDetails/ServiceDetails';
+import ProductDesc from 'hometown-components-dev/lib/ProductDetails/ProductDesc';
+import Specs from 'hometown-components-dev/lib/ProductDetails/Specs';
+import Reviews from 'hometown-components-dev/lib/Reviews';
+import AddReview from 'hometown-components-dev/lib/Reviews/WriteReview';
+import Img from 'hometown-components-dev/lib/Img';
+import Button from 'hometown-components-dev/lib/Buttons';
+import WishlistBtn from 'hometown-components-dev/lib/WishlistBtn';
+import Theme from 'hometown-components-dev/lib/Theme';
 import ProductCarousel from 'components/ProductCarousel';
 import CombinedBuy from 'components/CombinedBuy';
 import EmiModal from 'containers/EmiModal/EmiModal';
@@ -219,7 +219,7 @@ class ProductDetails extends React.Component {
     const { description } = attributes;
     const simpleSku = Object.keys(simples)[0];
     const { name, price, special_price: specialPrice } = meta;
-    const checkSpecialPrice = specialPrice || price;
+    const checkSpecialPrice = Number(specialPrice) || Number(price);
     const { adding, added } = reviews;
     const offerImage = simples[simpleSku].groupedattributes.offer_image || null;
     const offerImageRedirect = simples[simpleSku].groupedattributes.offer_image_click_url || null;
@@ -228,6 +228,7 @@ class ProductDetails extends React.Component {
     const { main_material: material, color, category_type: productType } = gattributes;
     const productURL = `${SITE_URL}${formatProductURL(name, sku)}`;
     const productDescription = productMetaDescription(name, productType, material, color);
+    console.log(productDescription);
     return (
       <Div type="block">
         <Section p="0" pb="2rem" mb="2.5rem" className={styles.pdpWrapper}>
@@ -240,6 +241,31 @@ class ProductDetails extends React.Component {
             <meta property="og:title" content={name} />
             <meta property="og:description" content={productDescription} />
             <meta property="og:image" content={images && images.length > 0 && `${images[0].url}.jpg`} />
+            <script type="application/ld+json">
+              {`
+                {
+                  "@context" : "http://schema.org",
+                  "@type" : "Product",
+                  "url": "${productURL || ''}",
+                  "name" : "${name || ''}",
+                  "image" : ${images && images.length && images[0].url ? `["${images[0].url}.jpg"]` : []},
+                  "description" : "${productDescription}",
+                  "sku": "${sku || ''}",
+                  "brand" : {
+                    "@type" : "Brand",
+                    "name" : "HomeTown",
+                    "logo" : "https://www.hometown.in/media/cms/icon/10f08290963c2827c55880f5f82bcc5b.png"
+                  },
+                  "offers" : {
+                    "@type" : "Offer",
+                    "url": "${productURL || ''}",
+                    "priceCurrency": "INR",
+                    "price": "${checkSpecialPrice || ''}",
+                    "availability": "https://schema.org/InStock"
+                  }
+                }
+              `}
+            </script>
           </Helmet>
           <Container type="container" pr="0" pl="0">
             <Row display="block" mt="0" mb="0" mr="0" ml="0">

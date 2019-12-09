@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Container from 'hometown-components/lib/Container';
-import Row from 'hometown-components/lib/Row';
-import Div from 'hometown-components/lib/Div';
-import Section from 'hometown-components/lib/Section';
-import Heading from 'hometown-components/lib/Heading';
-import Text from 'hometown-components/lib/Text';
-import Img from 'hometown-components/lib/Img';
-import Span from 'hometown-components/lib/Span';
+import Container from 'hometown-components-dev/lib/Container';
+import Row from 'hometown-components-dev/lib/Row';
+import Div from 'hometown-components-dev/lib/Div';
+import Section from 'hometown-components-dev/lib/Section';
+import Heading from 'hometown-components-dev/lib/Heading';
+import Text from 'hometown-components-dev/lib/Text';
+import Img from 'hometown-components-dev/lib/Img';
+import Span from 'hometown-components-dev/lib/Span';
 import TitleBar from 'components/TitleBar';
 
 const phoneIcon = require('../../../static/phone-icon-primary.svg');

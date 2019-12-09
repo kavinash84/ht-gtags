@@ -6,7 +6,7 @@ import { withRouter } from 'react-router';
 import { getPaymentOptions } from 'selectors/payments';
 import { getCartList } from 'selectors/cart';
 import Menu from 'components/MenuWithLogoOnly';
-import Section from 'hometown-components/lib/Section';
+import Section from 'hometown-components-dev/lib/Section';
 import PaymentOptions from 'components/Checkout/PaymentOptions';
 import { CART_URL } from 'helpers/Constants';
 
@@ -18,7 +18,11 @@ import { CART_URL } from 'helpers/Constants';
 }))
 export default class PaymentOptionsContainer extends Component {
   componentDidMount() {
-    const { cart, history, shipping: { pincode, fullName, phone } } = this.props;
+    const {
+      cart,
+      history,
+      shipping: { pincode, fullName, phone }
+    } = this.props;
     if ((cart && cart.length === 0) || (pincode === '' || fullName === '' || phone === '')) {
       history.push(CART_URL);
     }

@@ -1,8 +1,8 @@
 import React from 'react';
-import Container from 'hometown-components/lib/Container';
-import Div from 'hometown-components/lib/Div';
-import Section from 'hometown-components/lib/Section';
-import Text from 'hometown-components/lib/Text';
+import Container from 'hometown-components-dev/lib/Container';
+import Div from 'hometown-components-dev/lib/Div';
+import Section from 'hometown-components-dev/lib/Section';
+import Text from 'hometown-components-dev/lib/Text';
 import TitleBar from 'components/TitleBar';
 
 const Grievance = () => (

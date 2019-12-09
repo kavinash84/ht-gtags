@@ -1,9 +1,9 @@
 import React from 'react';
-import Container from 'hometown-components/lib/Container';
-import Div from 'hometown-components/lib/Div';
-import Section from 'hometown-components/lib/Section';
-import Img from 'hometown-components/lib/Img';
-import Empty from 'hometown-components/lib/Empty';
+import Container from 'hometown-components-dev/lib/Container';
+import Div from 'hometown-components-dev/lib/Div';
+import Section from 'hometown-components-dev/lib/Section';
+import Img from 'hometown-components-dev/lib/Img';
+import Empty from 'hometown-components-dev/lib/Empty';
 import { CART_URL } from 'helpers/Constants';
 import TitleBar from '../TitleBar';
 

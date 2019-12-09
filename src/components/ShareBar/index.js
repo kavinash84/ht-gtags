@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Div from 'hometown-components/lib/Div';
-import Button from 'hometown-components/lib/Buttons';
-import Img from 'hometown-components/lib/Img';
+import Div from 'hometown-components-dev/lib/Div';
+import Button from 'hometown-components-dev/lib/Buttons';
+import Img from 'hometown-components-dev/lib/Img';
 
 const fbIcon = require('../../../static/facebook-round.svg');
 const emailIcon = require('../../../static/closed-envelope-circle.svg');

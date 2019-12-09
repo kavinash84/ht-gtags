@@ -24,7 +24,14 @@ class StoreLocator extends Component {
   //   }
   // }
   render() {
-    const { storelocator } = this.props;
+    const {
+      location: { state = {} },
+      storelocator
+    } = this.props;
+    const pageProps = {
+      ...storelocator,
+      redirectCity: state.city || null
+    };
     return (
       <MenuFooter
         pageTitle="Furniture Shop Near You: Locate Nearby HomeTown Furniture Stores"
@@ -35,15 +42,19 @@ class StoreLocator extends Component {
         seoKeywords="furniture shop near me, furniture stores near me, online furniture stores,
          furniture near me, furniture stores nearby, furniture shop nearby"
       >
-        <StoreLocatorContainer {...storelocator} />
+        <StoreLocatorContainer {...pageProps} />
       </MenuFooter>
     );
   }
 }
+StoreLocator.defaultProps = {
+  location: {}
+};
 
 StoreLocator.propTypes = {
   storelocator: PropTypes.object.isRequired,
-  setCurrentLocation: PropTypes.func.isRequired
+  setCurrentLocation: PropTypes.func.isRequired,
+  location: PropTypes.object
 };
 export default connect(
   mapStateToProps,

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
-import Row from 'hometown-components/lib/Row';
-import Div from 'hometown-components/lib/Div';
-import Img from 'hometown-components/lib/Img';
-import ImageShimmer from 'hometown-components/lib/ImageShimmer';
+import Row from 'hometown-components-dev/lib/Row';
+import Div from 'hometown-components-dev/lib/Div';
+import Img from 'hometown-components-dev/lib/Img';
+import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
 import CarouselItem from './CarouselItem';
 
 const showSlides = data => (data && data.length >= 4 ? 4 : data.length || 0);

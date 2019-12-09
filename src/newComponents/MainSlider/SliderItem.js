@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import CardHtV1 from 'hometown-components/lib/CardHtV1';
-import ImageHtV1 from 'hometown-components/lib/ImageHtV1';
+import CardHtV1 from 'hometown-components-dev/lib/CardHtV1';
+import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
 
 /* TO DO Add ProgressiveImage */
 const SliderItem = ({

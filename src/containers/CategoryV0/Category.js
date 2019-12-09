@@ -4,11 +4,11 @@ import Helmet from 'react-helmet';
 import Menu from 'containers/MenuNew/index';
 import MainSlider from 'components/MainSlider';
 import CategoryFilters from 'components/Category/CategoryFilters';
-import Section from 'hometown-components/lib/Section';
-import Div from 'hometown-components/lib/Div';
-import Row from 'hometown-components/lib/Row';
+import Section from 'hometown-components-dev/lib/Section';
+import Div from 'hometown-components-dev/lib/Div';
+import Row from 'hometown-components-dev/lib/Row';
 import Title from 'components/Title';
-import Container from 'hometown-components/lib/Container';
+import Container from 'hometown-components-dev/lib/Container';
 import { connect } from 'react-redux';
 import Footer from 'components/Footer';
 import SeoContent from 'components/SeoContent';
@@ -59,8 +59,7 @@ export default class Category extends Component {
             </Row>
           </Container>
         </div>
-        {seoInfo &&
-          seoInfo.seo_text && (
+        {seoInfo && seoInfo.seo_text && (
           <SeoContent>
             <div dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }} />
           </SeoContent>

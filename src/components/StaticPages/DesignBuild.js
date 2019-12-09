@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import MainSlider from 'components/MainSlider';
-import Section from 'hometown-components/lib/Section';
-import Container from 'hometown-components/lib/Container';
-import Heading from 'hometown-components/lib/Heading';
-import Div from 'hometown-components/lib/Div';
-import Row from 'hometown-components/lib/Row';
-import Text from 'hometown-components/lib/Text';
-import Img from 'hometown-components/lib/Img';
+import Section from 'hometown-components-dev/lib/Section';
+import Container from 'hometown-components-dev/lib/Container';
+import Heading from 'hometown-components-dev/lib/Heading';
+import Div from 'hometown-components-dev/lib/Div';
+import Row from 'hometown-components-dev/lib/Row';
+import Text from 'hometown-components-dev/lib/Text';
+import Img from 'hometown-components-dev/lib/Img';
 import ServiceSignUp from 'components/ServiceSignUp';
 
 export default class ModularKitchen extends Component {
@@ -80,7 +80,8 @@ export default class ModularKitchen extends Component {
                 </Heading>
                 <Text fontSize="1rem" mt="0.3125rem" ta="center" color="textLight">
                   200+ Professional Interior Designers Over 4000 Happy Customers Across The <br />
-                  Country 100% Customized Designs Created Only for You on Time,<br />
+                  Country 100% Customized Designs Created Only for You on Time,
+                  <br />
                   On Budget, Project Handover Guarantee
                 </Text>
               </Div>

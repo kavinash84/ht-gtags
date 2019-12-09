@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Div from 'hometown-components/lib/Div';
-import ImageShimmer from 'hometown-components/lib/ImageShimmer';
+import Div from 'hometown-components-dev/lib/Div';
+import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
 import { Link } from 'react-router-dom';
 
 const styles = require('./Slider.scss');

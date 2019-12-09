@@ -16,19 +16,19 @@ import { SIGNUP_URL, HOME_URL, LOGIN_URL, MY_WISHLIST_URL, MY_PROFILE_URL, CART_
 import { titleCase, checkRedirection } from 'utils/helper';
 
 /* ====== Components ====== */
-import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
-import ButtonHtV1 from 'hometown-components/lib/ButtonHtV1';
-import CartIcon from 'hometown-components/lib/Icons/CartHtV1';
-import ColHtV1 from 'hometown-components/lib/ColHtV1';
-import FlexHtV1 from 'hometown-components/lib/FlexHtV1';
-import FavIcon from 'hometown-components/lib/Icons/FavHtV1';
-import HeadingHtV1 from 'hometown-components/lib/HeadingHtV1';
-import ImageHtV1 from 'hometown-components/lib/ImageHtV1';
-import LabelHtV1 from 'hometown-components/lib/LabelHtV1';
-import LocationIcon from 'hometown-components/lib/Icons/LocationHtV1';
-import RowHtV1 from 'hometown-components/lib/RowHtV1';
-import UserIcon from 'hometown-components/lib/Icons/UserHtV1';
-import TextHtV1 from 'hometown-components/lib/TextHtV1';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
+import CartIcon from 'hometown-components-dev/lib/Icons/CartHtV1';
+import ColHtV1 from 'hometown-components-dev/lib/ColHtV1';
+import FlexHtV1 from 'hometown-components-dev/lib/FlexHtV1';
+import FavIcon from 'hometown-components-dev/lib/Icons/FavHtV1';
+import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
+import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
+import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
+import LocationIcon from 'hometown-components-dev/lib/Icons/LocationHtV1';
+import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
+import UserIcon from 'hometown-components-dev/lib/Icons/UserHtV1';
+import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
 
 /* ====== Page Components ====== */
 import Search from 'newComponents/Search';

@@ -1,10 +1,10 @@
 import React from 'react';
-import Container from 'hometown-components/lib/Container';
-import Div from 'hometown-components/lib/Div';
-import Row from 'hometown-components/lib/Row';
-import Heading from 'hometown-components/lib/Heading';
-import Text from 'hometown-components/lib/Text';
-import Section from 'hometown-components/lib/Section';
+import Container from 'hometown-components-dev/lib/Container';
+import Div from 'hometown-components-dev/lib/Div';
+import Row from 'hometown-components-dev/lib/Row';
+import Heading from 'hometown-components-dev/lib/Heading';
+import Text from 'hometown-components-dev/lib/Text';
+import Section from 'hometown-components-dev/lib/Section';
 import TitleBar from 'components/TitleBar';
 
 const styles = require('./StaticPages.scss');
@@ -37,7 +37,7 @@ const ReturnPolicy = () => (
               against upstream suppliers can be asserted. You may return the product unused, and in the same (unused)
               condition as you have received it, in its original packaging along with original contents (with all
               accessories of polythene / charger / carton box / Manual, and such other contents depending on the product
-              ordered), labels or relevant seal, for a refund or an exchange, within 72hrs from the date on which these
+              ordered), labels or relevant seal, for a refund or an exchange, within 48hrs from the date on which these
               goods are delivered. Should you decide to exercise your right to return purchased products, HomeTown will
               not accept returned products that are returned without the relevant label or seal or that have been
               altered from their original status or damaged.

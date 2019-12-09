@@ -29,6 +29,6 @@
   },
   "ignore": [
     "node_modules",
-    "hometown-components"
+    "hometown-components-dev"
   ]
 }

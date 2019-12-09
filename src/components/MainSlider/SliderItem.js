@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Img from 'hometown-components/lib/Img';
+import Img from 'hometown-components-dev/lib/Img';
 
 /* TO DO Add ProgressiveImage */
 const SliderItem = ({

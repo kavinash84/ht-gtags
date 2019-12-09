@@ -1,8 +1,8 @@
 import React from 'react';
-import Div from 'hometown-components/lib/Div';
-import Row from 'hometown-components/lib/Row';
-import Heading from 'hometown-components/lib/Heading';
-import Img from 'hometown-components/lib/Img';
+import Div from 'hometown-components-dev/lib/Div';
+import Row from 'hometown-components-dev/lib/Row';
+import Heading from 'hometown-components-dev/lib/Heading';
+import Img from 'hometown-components-dev/lib/Img';
 
 const aeIcon = require('../../../static/american-express.svg');
 const maestroIcon = require('../../../static/maestro.svg');

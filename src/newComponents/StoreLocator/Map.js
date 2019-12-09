@@ -2,7 +2,7 @@ import React from 'react';
 import { compose, withProps } from 'recompose';
 import PropTypes from 'prop-types';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
-import { Shimmer } from 'hometown-components/lib/Shimmer';
+import { Shimmer } from 'hometown-components-dev/lib/Shimmer';
 import { mapKey } from 'helpers/Constants';
 import MapMarker from './MapMarker';
 
@@ -15,10 +15,11 @@ const Map = ({
   mapData, zoom, position, open, handleClick, selectedStore, currentLocation
 }) => (
   <GoogleMap zoom={parseInt(zoom, 10) || 16} center={position} options={{ mapTypeControl: false }}>
-    {mapData.map(item => {
+    {mapData.map((item, i) => {
       const pos = item.position;
       return (
         <Marker
+          key={String(i)}
           position={pos}
           onClick={() => {
             handleClick(item.store, mapData, item.city);

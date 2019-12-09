@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactImageMagnify from 'react-image-magnify';
-import Img from 'hometown-components/lib/Img';
-import ImageShimmer from 'hometown-components/lib/ImageShimmer';
+import Img from 'hometown-components-dev/lib/Img';
+import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
 
 const getLowResolution = url => url.replace('-zoom.jpg', '-product_500.jpg');
 const getHighResolution = url => url.replace('.jpg', '-zoom.jpg');

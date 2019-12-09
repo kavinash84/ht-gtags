@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
 /* ====== Modules ====== */
+
 import { signUp } from 'redux/modules/signUp';
 
 /* ====== Helpers ====== */
@@ -11,17 +12,17 @@ import { allowNChar, allowTypeOf } from 'utils/helper';
 import { LOGIN_URL } from 'helpers/Constants';
 
 /* ====== Validations ====== */
-import { validateMobile, validatePassword, validateEmail } from 'utils/validation';
+import { validateMobile, validatePassword, validateEmail, isEmpty, checkSpecialChar } from 'utils/validation';
 
 /* ====== Components ====== */
-import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
-import ColHtV1 from 'hometown-components/lib/ColHtV1';
-import RowHtV1 from 'hometown-components/lib/RowHtV1';
-import TextHtV1 from 'hometown-components/lib/TextHtV1';
-import ImageHtV1 from 'hometown-components/lib/ImageHtV1';
-import HeadingHtV1 from 'hometown-components/lib/HeadingHtV1';
-import ImageShimmer from 'hometown-components/lib/ImageShimmer';
-import SignUpFormHtV1 from 'hometown-components/lib/FormsHtV1/SignUpFormHtV1';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import ColHtV1 from 'hometown-components-dev/lib/ColHtV1';
+import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
+import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
+import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
+import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
+import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
+import SignUpFormHtV1 from 'hometown-components-dev/lib/FormsHtV1/SignUpFormHtV1';
 
 @connect(({ userSignUp, app }) => ({
   loading: userSignUp.loading,
@@ -42,6 +43,9 @@ export default class SignupFormContainer extends Component {
   constructor() {
     super();
     this.state = {
+      name: '',
+      nameError: false,
+      nameErrorMessage: 'Special Characters Not Allowed !',
       email: '',
       emailError: false,
       emailErrorMessage: 'Enter Valid Email Id',
@@ -61,6 +65,16 @@ export default class SignupFormContainer extends Component {
     this.setState({
       email: value,
       emailError: checkError
+    });
+  };
+  onChangeName = e => {
+    const {
+      target: { value }
+    } = e;
+    const checkError = isEmpty(value) || checkSpecialChar(value);
+    this.setState({
+      name: value,
+      nameError: checkError
     });
   };
   onChangePhone = e => {
@@ -98,12 +112,16 @@ export default class SignupFormContainer extends Component {
     } = e;
     const isRedirect = action ? action.indexOf('redirect') !== -1 : false;
     const signupOrigin = isRedirect ? 'Top Nav' : 'Pop-up';
-    const { email, password, phone } = this.state;
+    const {
+      name, email, password, phone
+    } = this.state;
+    const checkName = isEmpty(name) || checkSpecialChar(name);
     const checkEmail = !validateEmail(email);
     const checkPhone = phone ? !validateMobile(phone) : false;
     const checkPassword = validatePassword(password);
-    if (checkEmail || checkPassword.error || checkPhone) {
+    if (checkName || checkEmail || checkPassword.error || checkPhone) {
       return this.setState({
+        nameError: checkName,
         emailError: checkEmail,
         phoneError: checkPhone,
         passwordError: checkPassword.error
@@ -115,6 +133,9 @@ export default class SignupFormContainer extends Component {
   };
   render() {
     const {
+      name,
+      nameError,
+      nameErrorMessage,
       email,
       phone,
       password,
@@ -162,6 +183,10 @@ export default class SignupFormContainer extends Component {
                     onChangeEmail={this.onChangeEmail}
                     emailFeedBackError={emailError}
                     emailFeedBackMessage={emailErrorMessage}
+                    name={name}
+                    onChangeName={this.onChangeName}
+                    nameFeedBackError={nameError}
+                    nameFeedBackMessage={nameErrorMessage}
                     phone={phone}
                     onChangePhone={this.onChangePhone}
                     phoneFeedBackError={phoneError}

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 /* ====== Components ====== */
-import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
-import ContainerHtV1 from 'hometown-components/lib/ContainerHtV1';
-import SectionHtV1 from 'hometown-components/lib/SectionHtV1';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
+import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
 import MenuFooter from 'containers/MenuFooter';
 
 /* ====== Page Components ====== */

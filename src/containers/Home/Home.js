@@ -8,19 +8,19 @@ import { getCities, getOfferStripData, getMiddleBannerData } from 'selectors/hom
 import Select from 'react-select';
 
 /* ====== Components ====== */
-import AbsoluteHtV1 from 'hometown-components/lib/AbsoluteHtV1';
-import BodyHtV1 from 'hometown-components/lib/BodyHtV1';
-import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
-import ButtonHtV1 from 'hometown-components/lib/ButtonHtV1';
-import CardHtV1 from 'hometown-components/lib/CardHtV1';
-import ContainerHtV1 from 'hometown-components/lib/ContainerHtV1';
-import ColHtV1 from 'hometown-components/lib/ColHtV1';
-import HeadingHtV1 from 'hometown-components/lib/HeadingHtV1';
-import ImageHtV1 from 'hometown-components/lib/ImageHtV1';
-import RowHtV1 from 'hometown-components/lib/RowHtV1';
-import SectionHtV1 from 'hometown-components/lib/SectionHtV1';
-import TextHtV1 from 'hometown-components/lib/TextHtV1';
-import WrapperHtV1 from 'hometown-components/lib/WrapperHtV1';
+import AbsoluteHtV1 from 'hometown-components-dev/lib/AbsoluteHtV1';
+import BodyHtV1 from 'hometown-components-dev/lib/BodyHtV1';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
+import CardHtV1 from 'hometown-components-dev/lib/CardHtV1';
+import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
+import ColHtV1 from 'hometown-components-dev/lib/ColHtV1';
+import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
+import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
+import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
+import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
+import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
+import WrapperHtV1 from 'hometown-components-dev/lib/WrapperHtV1';
 
 /* ====== Page Components ====== */
 import CategoryCarousel from 'newComponents/CategoryCarousel';
@@ -34,12 +34,6 @@ const bannerImage = require('../../static/banner.png');
 const designBuildLogo = require('../../static/designBuildLogo.png');
 
 const OFFER_ID = 5;
-
-const storeLocatorOptions = [
-  { value: 'Mumbai', label: 'Mumbai' },
-  { value: 'Ahmedabad', label: 'Ahmedabad' },
-  { value: 'Vadodara', label: 'Vadodara' }
-];
 
 const customDropdownStyles = {
   container: provided => ({
@@ -117,7 +111,8 @@ export default class Home extends Component {
   };
 
   render() {
-    const { banners, homepageCategories } = this.props;
+    const { banners, homepageCategories, cities } = this.props;
+    const citiesList = cities.map(item => ({ value: item, label: item }));
 
     return (
       /* eslint-disable max-len */
@@ -254,10 +249,16 @@ export default class Home extends Component {
                   </BoxHtV1>
                   <RowHtV1>
                     <Select
-                      placeholder="Select your city"
+                      placeholder="Select City"
                       defaultValue={null}
-                      options={storeLocatorOptions}
+                      options={citiesList}
                       styles={customDropdownStyles}
+                      onChange={({ value }) => {
+                        this.props.history.push({
+                          pathname: '/store-locator',
+                          state: { city: value }
+                        });
+                      }}
                     />
                     <ButtonHtV1 width={275} ml={30} variant="primary.large">
                       LOCATE A STORE
@@ -276,11 +277,14 @@ export default class Home extends Component {
 Home.defaultProps = {
   isLoggedIn: false,
   banners: [],
-  homepageCategories: []
+  homepageCategories: [],
+  cities: []
 };
 
 Home.propTypes = {
   isLoggedIn: PropTypes.bool,
   banners: PropTypes.array,
-  homepageCategories: PropTypes.array
+  homepageCategories: PropTypes.array,
+  cities: PropTypes.array,
+  history: PropTypes.object.isRequired
 };

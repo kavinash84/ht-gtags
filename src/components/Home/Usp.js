@@ -1,9 +1,9 @@
 import React from 'react';
-import Section from 'hometown-components/lib/Section';
-import Row from 'hometown-components/lib/Row';
-import Div from 'hometown-components/lib/Div';
-import Heading from 'hometown-components/lib/HeadingH6';
-import Img from 'hometown-components/lib/Img';
+import Section from 'hometown-components-dev/lib/Section';
+import Row from 'hometown-components-dev/lib/Row';
+import Div from 'hometown-components-dev/lib/Div';
+import Heading from 'hometown-components-dev/lib/HeadingH6';
+import Img from 'hometown-components-dev/lib/Img';
 
 const styles = require('./Usp.scss');
 const usp1Icon = require('../../../static/usp-1.png');
@@ -37,7 +37,8 @@ const Usp = () => (
           tt="uppercase"
           mt="0"
         >
-          Free Delivery <br />Above Rs.499
+          Free Delivery <br />
+          Above Rs.499
         </Heading>
       </Div>
       <Div display="flexEqual" ta="center" className={styles.uspImg}>
@@ -61,7 +62,8 @@ const Usp = () => (
           tt="uppercase"
           mt="0"
         >
-          Assured <br />Quality
+          Assured <br />
+          Quality
         </Heading>
       </Div>
       <Div display="flexEqual" ta="center" className={styles.uspImg}>
@@ -77,7 +79,8 @@ const Usp = () => (
           tt="uppercase"
           mt="0"
         >
-          Easy <br />Finance
+          Easy <br />
+          Finance
         </Heading>
       </Div>
       <Div display="flexEqual" ta="center" className={styles.uspImg}>
@@ -101,7 +104,8 @@ const Usp = () => (
           tt="uppercase"
           mt="0"
         >
-          1 Year <br />Warranty*
+          1 Year <br />
+          Warranty*
         </Heading>
       </Div>
       <Div display="flexEqual" ta="center" className={styles.uspImg}>
@@ -125,7 +129,8 @@ const Usp = () => (
           tt="uppercase"
           mt="0"
         >
-          Free Assembly <br />within 48 Hours
+          Free Assembly <br />
+          within 48 Hours
         </Heading>
       </Div>
       <Div display="flexEqual" ta="center" className={styles.uspImg}>
@@ -149,7 +154,8 @@ const Usp = () => (
           tt="uppercase"
           mt="0"
         >
-          Lifetime <br />Service
+          Lifetime <br />
+          Service
         </Heading>
       </Div>
     </Row>

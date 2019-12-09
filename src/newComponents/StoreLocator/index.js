@@ -1,4 +1,5 @@
 import React from 'react';
+import Select from 'react-select';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -10,13 +11,13 @@ import { getCurrentCity, getCurrentLocation, getDestination, getStores } from 's
 import { gaVisitEvent } from 'redux/modules/stores';
 
 /* ====== Page Components ====== */
-import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
-import Container from 'hometown-components/lib/ContainerHtV1';
-import Image from 'hometown-components/lib/ImageHtV1';
-import Heading from 'hometown-components/lib/HeadingHtV1';
-import Row from 'hometown-components/lib/RowHtV1';
-import Section from 'hometown-components/lib/SectionHtV1';
-import Label from 'hometown-components/lib/LabelHtV1';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Section from 'hometown-components-dev/lib/SectionHtV1';
+import Label from 'hometown-components-dev/lib/LabelHtV1';
 
 /* ====== Page Components ====== */
 import { getDistanceBetweenPoints } from 'utils/helper';
@@ -60,39 +61,36 @@ class StoreLocator extends React.Component {
       currentList: [],
       currentState: null,
       selectedStore: '',
-      selectCity: false,
       nearMe: [],
       isLoading: false,
-      currentLocation: {}
+      currentLocation: {},
+      currentCity: null
     };
     this.setCurrentList = this.setCurrentList.bind(this);
     this.GEORADIUS_OFFLINE = 120;
     this.GEORADIUS_ONLINE = 100000;
   }
   componentWillMount() {
-    const { data } = this.props;
+    const { data, redirectCity } = this.props;
     if (data && data.items && data.items.text) {
       const mapData = data.items.text;
       this.setState({
         currentList: mapData
       });
     }
+    if (redirectCity) {
+      this.handleSelectCity(redirectCity);
+    }
   }
-  // componentWillReceiveProps(nextProps) {
-  //   const { locationLoaded, data, loc } = nextProps;
-  //   if (data && data.items && data.items.text && locationLoaded && loc.lat && loc.lng) {
-  //     const mapData = data.items.text;
-  //     console.log(mapData);
-  //     // this.handleNearestLocation(loc, mapData);
-  //   }
-  // }
   setError = msg => {
     const { dispatch } = this.context.store;
-    dispatch(notifSend({
-      type: 'error',
-      msg,
-      dismissAfter: 4000
-    }));
+    this.setState({ isLoading: false }, () => {
+      dispatch(notifSend({
+        type: 'error',
+        msg,
+        dismissAfter: 4000
+      }));
+    });
   };
   getURL = (origin, dest) => {
     const baseUrl = 'http://maps.google.com/?';
@@ -196,48 +194,56 @@ class StoreLocator extends React.Component {
       category: 'Storelocator'
     });
   };
-  handleSelectState = (state, mapData) => {
-    const currentList = mapData.filter(item => item.state === state);
-    let lat = 0;
-    currentList.map(item => {
-      lat += item.position.lat;
-      return 0;
-    });
-    lat /= currentList.length;
-    let lng = 0;
-    currentList.map(item => {
-      lng += item.position.lng;
-      return 0;
-    });
-    lng /= currentList.length;
-    this.setState({
-      currentList,
-      position: { lat, lng },
-      currentState: state,
-      zoomlevel: 8,
-      open: false
-    });
-  };
-  handleSelectCity = (city, list) => {
-    const currentList = list.filter(item => item.city.toUpperCase() === city.toUpperCase());
-    let lat = 0;
-    currentList.map(item => {
-      lat += item.position.lat;
-      return 0;
-    });
-    lat /= currentList.length;
-    let lng = 0;
-    currentList.map(item => {
-      lng += item.position.lng;
-      return 0;
-    });
-    lng /= currentList.length;
-    this.setState({
-      currentList,
-      position: { lat, lng },
-      zoomlevel: 11,
-      open: false
-    });
+  // handleSelectState = (state, mapData) => {
+  //   const currentList = mapData.filter(item => item.state === state);
+  //   let lat = 0;
+  //   currentList.map(item => {
+  //     lat += item.position.lat;
+  //     return 0;
+  //   });
+  //   lat /= currentList.length;
+  //   let lng = 0;
+  //   currentList.map(item => {
+  //     lng += item.position.lng;
+  //     return 0;
+  //   });
+  //   lng /= currentList.length;
+  //   this.setState({
+  //     currentList,
+  //     position: { lat, lng },
+  //     currentState: state,
+  //     zoomlevel: 8,
+  //     open: false
+  //   });
+  // };
+  handleSelectCity = city => {
+    if (city) {
+      const {
+        data: {
+          items: { text: list = [] }
+        }
+      } = this.props;
+      const currentList = list.filter(item => item.city.toUpperCase() === city.toUpperCase());
+      let lat = 0;
+      currentList.map(item => {
+        lat += item.position.lat;
+        return 0;
+      });
+      lat /= currentList.length;
+      let lng = 0;
+      currentList.map(item => {
+        lng += item.position.lng;
+        return 0;
+      });
+      lng /= currentList.length;
+      this.setState({
+        currentList,
+        position: { lat, lng },
+        zoomlevel: 11,
+        open: false,
+        currentCity: { value: city, label: city }
+      });
+    }
   };
   locationSuccess = position => {
     const lat = position.coords.latitude || '';
@@ -303,7 +309,7 @@ class StoreLocator extends React.Component {
     }
   };
   render() {
-    const { data, locationLoaded } = this.props;
+    const { data, locationLoaded, redirectCity } = this.props;
     const mapData = data.items.text;
     const {
       position,
@@ -312,13 +318,17 @@ class StoreLocator extends React.Component {
       currentList,
       currentState,
       selectedStore,
-      selectCity,
       isLoading,
-      currentLocation
+      currentLocation,
+      currentCity
     } = this.state;
-    //
+    const selectedCity = redirectCity ? { value: redirectCity, label: redirectCity } : currentCity;
     let stateList = mapData.map(item => item.state);
     let cityList = mapData.filter(item => item.state === currentState).map(item => item.city);
+    const cities = Array.from(new Set(mapData.filter(item => item.city).map(item => item.city))).map(item => ({
+      value: item.toUpperCase(),
+      label: item.toUpperCase()
+    }));
     cityList = cityList.filter((item, pos) => cityList.indexOf(item) === pos);
     stateList = stateList.filter((item, pos) => stateList.indexOf(item) === pos);
     //
@@ -331,9 +341,21 @@ class StoreLocator extends React.Component {
             </Row>
           </Container>
         </Section>
-        <Section pt="0" p="0" mb="0">
-          <Row display="block" mr="0" ml="0" mb="0">
-            <BoxHtV1 className={styles.googleMapWrapper}>
+        <div
+          style={{
+            paddingTop: 0,
+            marginBottom: 0
+          }}
+        >
+          <div
+            style={{
+              display: 'block',
+              marginRight: 0,
+              marginLeft: 0,
+              marginBottom: 0
+            }}
+          >
+            <div className={styles.googleMapWrapper}>
               <Map
                 googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
                 loadingElement={<div style={{ height: '100%' }} />}
@@ -348,16 +370,15 @@ class StoreLocator extends React.Component {
                 currentLocation={currentLocation}
               />
               <BoxHtV1 className={styles.filterWrapper}>
-                <button
-                  style={{ marginBottom: '4px', marginRight: '10px' }}
-                  onClick={e => {
-                    e.preventDefault();
-                    this.setState({ selectCity: true });
+                <Select
+                  placeholder="SELECT CITY"
+                  defaultValue={redirectCity || null}
+                  value={selectedCity}
+                  onChange={({ value }) => {
+                    this.handleSelectCity(value);
                   }}
-                  className={styles.selectLocation}
-                >
-                  Select Store
-                </button>
+                  options={cities}
+                />
                 <button
                   style={{ marginBottom: '4px' }}
                   onClick={e => {
@@ -367,34 +388,8 @@ class StoreLocator extends React.Component {
                   className={styles.selectLocation}
                 >
                   {isLoading && <Image className="spin" src={LoaderIcon} display="inline" width="20px" va="sub" />}
-                  Store Near Me
+                  Locate Near Me
                 </button>
-                {selectCity && (
-                  <select onChange={e => this.handleSelectState(e.target.value, mapData)}>
-                    <option value={null} key="state">
-                      SELECT STATE
-                    </option>
-                    {stateList.map(item => (
-                      <option value={item} key={item}>
-                        {item}
-                      </option>
-                    ))}
-                  </select>
-                )}
-
-                {selectCity &&
-                  currentState && (
-                  <select onChange={e => this.handleSelectCity(e.target.value, mapData)}>
-                    <option value={null} key="state">
-                        SELECT CITY
-                    </option>
-                    {cityList.map(item => (
-                      <option value={item} key={item}>
-                        {item}
-                      </option>
-                    ))}
-                  </select>
-                )}
                 <div className={styles.cistList}>
                   <ul>
                     {locationLoaded && currentList.length ? (
@@ -461,7 +456,9 @@ class StoreLocator extends React.Component {
                             rel="noopener noreferrer"
                           >
                             {item.disText && item.duration ? `${item.disText || ''} | ${item.duration || ''} ` : ''}
-                            <button className={styles.directionBtn}>Direction</button>
+                            <button href="#" className={styles.directionBtn}>
+                              Direction
+                            </button>
                           </a>
                         </button>
                       </li>
@@ -469,17 +466,21 @@ class StoreLocator extends React.Component {
                   </ul>
                 </div>
               </BoxHtV1>
-            </BoxHtV1>
-          </Row>
-        </Section>
+            </div>
+          </div>
+        </div>
       </BoxHtV1>
     );
   }
 }
+StoreLocator.defaultProps = {
+  redirectCity: ''
+};
 StoreLocator.propTypes = {
   data: PropTypes.object.isRequired,
   gaVisitEvent: PropTypes.func.isRequired,
-  locationLoaded: PropTypes.bool.isRequired
+  locationLoaded: PropTypes.bool.isRequired,
+  redirectCity: PropTypes.string
 };
 
 export default connect(

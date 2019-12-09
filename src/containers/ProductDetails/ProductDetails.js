@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import ProductDetailsContainer from 'components/ProductDetails';
 import Menu from 'containers/MenuNew/index';
 import Footer from 'components/Footer';
-import Section from 'hometown-components/lib/Section';
+import Section from 'hometown-components-dev/lib/Section';
 import ProductDetailsShimmer from 'components/ProductDetails/ProductDetailsShimmer';
 import ProductNotFoundContainer from './ProductNotFound';
 
@@ -25,7 +25,7 @@ export default class ProductDetails extends Component {
           {!loading &&
             !productDescription.error_message &&
             loaded && (
-            <div itemScope itemType="http://schema.org/Product">
+            <div>
               <ProductDetailsContainer history={history} />
             </div>
           )}

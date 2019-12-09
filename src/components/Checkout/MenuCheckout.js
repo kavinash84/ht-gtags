@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Heading from 'hometown-components/lib/Heading';
-import Container from 'hometown-components/lib/Container';
-import Div from 'hometown-components/lib/Div';
-import Section from 'hometown-components/lib/Section';
-import Row from 'hometown-components/lib/Row';
+import Heading from 'hometown-components-dev/lib/Heading';
+import Container from 'hometown-components-dev/lib/Container';
+import Div from 'hometown-components-dev/lib/Div';
+import Section from 'hometown-components-dev/lib/Section';
+import Row from 'hometown-components-dev/lib/Row';
 
 const Back = require('../../../static/arrow_back_black.svg');
 const styles = require('./Checkout.scss');

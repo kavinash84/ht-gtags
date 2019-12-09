@@ -4,16 +4,16 @@ import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import Container from 'hometown-components/lib/Container';
-import Div from 'hometown-components/lib/Div';
-import Row from 'hometown-components/lib/Row';
-import Img from 'hometown-components/lib/Img';
-import Text from 'hometown-components/lib/Text';
-import Section from 'hometown-components/lib/Section';
-import Button from 'hometown-components/lib/Buttons';
-import Heading from 'hometown-components/lib/Heading';
-import { Label } from 'hometown-components/lib/Label';
-import ImageShimmer from 'hometown-components/lib/ImageShimmer';
+import Container from 'hometown-components-dev/lib/Container';
+import Div from 'hometown-components-dev/lib/Div';
+import Row from 'hometown-components-dev/lib/Row';
+import Img from 'hometown-components-dev/lib/Img';
+import Text from 'hometown-components-dev/lib/Text';
+import Section from 'hometown-components-dev/lib/Section';
+import Button from 'hometown-components-dev/lib/Buttons';
+import Heading from 'hometown-components-dev/lib/Heading';
+import { Label } from 'hometown-components-dev/lib/Label';
+import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
 
 import Footer from 'components/Footer';
 

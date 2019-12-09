@@ -5,8 +5,8 @@ import { withRouter } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Autosuggest from 'react-autosuggest';
-import Button from 'hometown-components/lib/Buttons';
-import Div from 'hometown-components/lib/Div';
+import Button from 'hometown-components-dev/lib/Buttons';
+import Div from 'hometown-components-dev/lib/Div';
 import { setFilter } from 'redux/modules/products';
 import * as actionCreators from 'redux/modules/search';
 
@@ -170,4 +170,7 @@ Search.propTypes = {
   setFilterState: PropTypes.func.isRequired
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search));
+export default withRouter(connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Search));

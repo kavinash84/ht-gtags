@@ -87,6 +87,7 @@ const routes = [
   {
     component: App,
     routes: [
+      { path: '/', exact: true, component: Home },
       { path: '/login', exact: true, component: isNotAuthenticated(Login) },
       { path: '/signup', exact: true, component: isNotAuthenticated(Signup) },
       { path: '/forgot-password/verify/reset/:hash', exact: true, component: isNotAuthenticated(ResetPassword) },
@@ -135,9 +136,6 @@ const routes = [
         exact: true,
         component: Listing
       },
-
-      // New routes
-      { path: '/', exact: true, component: Home },
 
       { component: NotFound }
     ]

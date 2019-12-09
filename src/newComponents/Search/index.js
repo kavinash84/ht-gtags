@@ -13,8 +13,8 @@ import * as actionCreators from 'redux/modules/search';
 /* ====== selectors ====== */
 
 /* ====== Components ====== */
-import BoxHtV1 from 'hometown-components/lib/BoxHtV1';
-import ButtonHtV1 from 'hometown-components/lib/ButtonHtV1';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
 
 /* ====== Page Components ====== */
 

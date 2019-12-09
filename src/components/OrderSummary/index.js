@@ -1,14 +1,14 @@
 import React from 'react';
-import Container from 'hometown-components/lib/Container';
-import Div from 'hometown-components/lib/Div';
-import Heading from 'hometown-components/lib/Heading';
-import ProductInlineWithQuantity from 'hometown-components/lib/ProductInlineWithQuantity';
-import Row from 'hometown-components/lib/Row';
-import Button from 'hometown-components/lib/Buttons';
-import { Label } from 'hometown-components/lib/Label';
-import Section from 'hometown-components/lib/Section';
-import ShippedTo from 'hometown-components/lib/ShippedTo';
-import PaymentMethod from 'hometown-components/lib/PaymentMethod';
+import Container from 'hometown-components-dev/lib/Container';
+import Div from 'hometown-components-dev/lib/Div';
+import Heading from 'hometown-components-dev/lib/Heading';
+import ProductInlineWithQuantity from 'hometown-components-dev/lib/ProductInlineWithQuantity';
+import Row from 'hometown-components-dev/lib/Row';
+import Button from 'hometown-components-dev/lib/Buttons';
+import { Label } from 'hometown-components-dev/lib/Label';
+import Section from 'hometown-components-dev/lib/Section';
+import ShippedTo from 'hometown-components-dev/lib/ShippedTo';
+import PaymentMethod from 'hometown-components-dev/lib/PaymentMethod';
 
 import orderData from '../../data/OrderDetails.js';
 

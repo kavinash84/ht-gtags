@@ -1,10 +1,10 @@
 import React from 'react';
-import Container from 'hometown-components/lib/Container';
-import Div from 'hometown-components/lib/Div';
-import Row from 'hometown-components/lib/Row';
-import Heading from 'hometown-components/lib/Heading';
-import Text from 'hometown-components/lib/Text';
-import Section from 'hometown-components/lib/Section';
+import Container from 'hometown-components-dev/lib/Container';
+import Div from 'hometown-components-dev/lib/Div';
+import Row from 'hometown-components-dev/lib/Row';
+import Heading from 'hometown-components-dev/lib/Heading';
+import Text from 'hometown-components-dev/lib/Text';
+import Section from 'hometown-components-dev/lib/Section';
 import TitleBar from 'components/TitleBar';
 
 const styles = require('./StaticPages.scss');
@@ -43,7 +43,7 @@ const Cancellation = () => (
             </Text>
             <Text>
               * We are not taking any cancellation request for the Homeware products(Home Furnishings , Home Décor,
-              Tableware and Kitchenware) once order placed.
+              Tableware, Kitchenware, luggage, electronics(large & small appliances) ) once order placed.
             </Text>
           </Div>
           <Div>

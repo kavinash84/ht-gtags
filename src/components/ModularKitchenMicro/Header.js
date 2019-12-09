@@ -2,13 +2,13 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { HOME_URL, MK_URL, PYK_URL } from 'helpers/Constants';
-import Container from 'hometown-components/lib/Container';
-import Section from 'hometown-components/lib/Section';
-import Row from 'hometown-components/lib/Row';
-import Img from 'hometown-components/lib/Img';
-import Span from 'hometown-components/lib/Span';
-import Div from 'hometown-components/lib/Div';
-import Text from 'hometown-components/lib/Text';
+import Container from 'hometown-components-dev/lib/Container';
+import Section from 'hometown-components-dev/lib/Section';
+import Row from 'hometown-components-dev/lib/Row';
+import Img from 'hometown-components-dev/lib/Img';
+import Span from 'hometown-components-dev/lib/Span';
+import Div from 'hometown-components-dev/lib/Div';
+import Text from 'hometown-components-dev/lib/Text';
 
 const styles = require('./ModularKitchen.scss');
 

@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import MainSlider from 'components/MainSlider';
 import Footer from 'components/Footer';
-import Section from 'hometown-components/lib/Section';
-import Container from 'hometown-components/lib/Container';
-import Heading from 'hometown-components/lib/Heading';
-import Div from 'hometown-components/lib/Div';
-import Row from 'hometown-components/lib/Row';
-import Text from 'hometown-components/lib/Text';
-import Theme from 'hometown-components/lib/Theme';
-import Button from 'hometown-components/lib/Buttons';
+import Section from 'hometown-components-dev/lib/Section';
+import Container from 'hometown-components-dev/lib/Container';
+import Heading from 'hometown-components-dev/lib/Heading';
+import Div from 'hometown-components-dev/lib/Div';
+import Row from 'hometown-components-dev/lib/Row';
+import Text from 'hometown-components-dev/lib/Text';
+import Theme from 'hometown-components-dev/lib/Theme';
+import Button from 'hometown-components-dev/lib/Buttons';
 import { smoothScroll } from 'utils/helper';
 import Header from '../ModularKitchenMicro/Header';
 
@@ -29,7 +29,11 @@ export default class PlanYourKitchen extends Component {
     super(props);
     const { data } = props;
     if (data && data.items) {
-      const { items: { text: { sections } } } = data;
+      const {
+        items: {
+          text: { sections }
+        }
+      } = data;
       sections.map(item => {
         this[item.name] = React.createRef();
         return null;
@@ -89,8 +93,7 @@ export default class PlanYourKitchen extends Component {
                               }}
                             >
                               {list.title}
-                              {list.description &&
-                                list.description.length > 0 && (
+                              {list.description && list.description.length > 0 && (
                                 <Text
                                   mt="0"
                                   pt="0.3125rem"

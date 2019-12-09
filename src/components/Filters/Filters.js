@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Button from 'hometown-components/lib/Buttons';
-import Span from 'hometown-components/lib/Span';
-import { Label } from 'hometown-components/lib/Label';
+import Button from 'hometown-components-dev/lib/Buttons';
+import Span from 'hometown-components-dev/lib/Span';
+import { Label } from 'hometown-components-dev/lib/Label';
 
 const styles = require('./Dropdown.scss');
 

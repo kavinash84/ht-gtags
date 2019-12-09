@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Container from 'hometown-components/lib/Container';
-import Div from 'hometown-components/lib/Div';
-import Heading from 'hometown-components/lib/Heading';
-import Row from 'hometown-components/lib/Row';
-import Section from 'hometown-components/lib/Section';
-// import Button from 'hometown-components/lib/Buttons';
-import { Label } from 'hometown-components/lib/Label';
-// import Img from 'hometown-components/lib/Img';
+import Container from 'hometown-components-dev/lib/Container';
+import Div from 'hometown-components-dev/lib/Div';
+import Heading from 'hometown-components-dev/lib/Heading';
+import Row from 'hometown-components-dev/lib/Row';
+import Section from 'hometown-components-dev/lib/Section';
+// import Button from 'hometown-components-dev/lib/Buttons';
+import { Label } from 'hometown-components-dev/lib/Label';
+// import Img from 'hometown-components-dev/lib/Img';
 import { Link } from 'react-router-dom';
 
 // const view360Icon = require('../../../static/360-icon.svg');

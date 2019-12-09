@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Section from 'hometown-components/lib/Section';
-import Container from 'hometown-components/lib/Container';
+import Section from 'hometown-components-dev/lib/Section';
+import Container from 'hometown-components-dev/lib/Container';
 import Title from 'components/Title';
 import CategoryCarouselItem from './CategoryCarouselItem';
 import SlickSlider from '../SlickSlider';
