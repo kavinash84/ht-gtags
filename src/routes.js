@@ -7,7 +7,6 @@ import locationHelperBuilder from 'redux-auth-wrapper/history4/locationHelper';
 import Category from 'containers/Category';
 
 /* Home */
-import HomeV0 from 'containers/HomeV0';
 import Home from 'containers/Home';
 
 /* store */
@@ -88,7 +87,6 @@ const routes = [
   {
     component: App,
     routes: [
-      { path: '/Home-v0', exact: true, component: HomeV0 },
       { path: '/login', exact: true, component: isNotAuthenticated(Login) },
       { path: '/signup', exact: true, component: isNotAuthenticated(Signup) },
       { path: '/forgot-password/verify/reset/:hash', exact: true, component: isNotAuthenticated(ResetPassword) },
