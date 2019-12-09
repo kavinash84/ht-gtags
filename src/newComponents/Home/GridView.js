@@ -2,11 +2,11 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 
 /* ====== Components ====== */
-import BoxHtV1 from 'hometown-components-dev/Lib/BoxHtV1';
-import ColHtV1 from 'hometown-components-dev/Lib/ColHtV1';
-import RowHtV1 from 'hometown-components-dev/Lib/RowHtV1';
-// import GridItem from 'hometown-components-dev/Lib/MasonryGrid/Item';
-// import MasonryGrid from 'hometown-components-dev/Lib/MasonryGrid';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import ColHtV1 from 'hometown-components-dev/lib/ColHtV1';
+import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
+// import GridItem from 'hometown-components-dev/lib/MasonryGrid/Item';
+// import MasonryGrid from 'hometown-components-dev/lib/MasonryGrid';
 
 const HomeGridView = () => (
   <BoxHtV1>
