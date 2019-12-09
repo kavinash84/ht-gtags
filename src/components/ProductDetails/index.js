@@ -247,9 +247,9 @@ class ProductDetails extends React.Component {
                   "@context" : "http://schema.org",
                   "@type" : "Product",
                   "url": "${productURL || ''}",
-                  "name" : "${name || ''}",
+                  "name" : "${name.replace(/['"]+/g, '')}",
                   "image" : ${images && images.length && images[0].url ? `["${images[0].url}.jpg"]` : []},
-                  "description" : "${productDescription}",
+                  "description" : "${productDescription.replace(/['"]+/g, '')}",
                   "sku": "${sku || ''}",
                   "brand" : {
                     "@type" : "Brand",
