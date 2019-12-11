@@ -204,7 +204,7 @@ export default class LoginFormContainer extends Component {
                   <FormInput
                     label=""
                     type="text"
-                    placeholder=""
+                    placeholder="Enter your name"
                     onChange={this.onChangeName}
                     value={name}
                     feedBackError={nameError}
@@ -215,7 +215,7 @@ export default class LoginFormContainer extends Component {
                   <FormInput
                     label=""
                     type="text"
-                    placeholder=""
+                    placeholder="Enter your contact number!"
                     onChange={this.onChangePhone}
                     value={phone}
                     feedBackError={phoneError}
