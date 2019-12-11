@@ -10,7 +10,7 @@ import Text from 'hometown-components/lib/Text';
 import FormInput from 'hometown-components/lib/Forms/FormInput';
 import ResponsiveModal from 'components/Modal';
 import { validateEmail, isBlank } from 'js-utility-functions';
-import { validateMobile } from 'utils/validation';
+import { validateMobile, isEmpty, checkSpecialChar } from 'utils/validation';
 import { allowNChar, allowTypeOf } from 'utils/helper';
 import { login, clearLoginState } from 'redux/modules/login';
 import { SIGNUP_URL, FORGOT_PASSWORD_URL } from 'helpers/Constants';
@@ -26,6 +26,7 @@ export default class LoginFormContainer extends Component {
       isLoggedIn: PropTypes.bool.isRequired
     }).isRequired,
     askContact: PropTypes.bool.isRequired,
+    askName: PropTypes.bool.isRequired,
     loginType: PropTypes.string.isRequired,
     loading: PropTypes.bool.isRequired
   };
@@ -42,14 +43,17 @@ export default class LoginFormContainer extends Component {
     passwordErrorMessage: '',
     phone: '',
     phoneError: false,
-    phoneErrorMessage: 'Enter Valid 10 Digit Phone Number'
+    phoneErrorMessage: 'Please enter valid 10 digit phone number',
+    name: '',
+    nameError: false,
+    nameErrorMessage: 'Please enter a name without special characters'
   };
 
   onChangeEmail = e => {
     const {
       target: { value }
     } = e;
-    const checkError = validateEmail(value, 'Enter valid email');
+    const checkError = validateEmail(value, 'Please enter a valid email');
     this.setState({
       email: value,
       emailError: checkError.error,
@@ -69,12 +73,16 @@ export default class LoginFormContainer extends Component {
   };
   onSubmitLogin = e => {
     e.preventDefault();
-    const { email, password, phone } = this.state;
+    const {
+      email, password, phone, name
+    } = this.state;
     const checkEmail = validateEmail(email, 'Invalid Email');
     const checkMobile = phone ? !validateMobile(phone) : false;
+    const checkName = isEmpty(name) || checkSpecialChar(name);
     const checkPassword = isBlank(password);
-    if (checkEmail.error || checkPassword || checkMobile) {
+    if (checkEmail.error || checkPassword || checkMobile || checkName) {
       return this.setState({
+        nameError: checkName,
         emailError: checkEmail.error,
         emailErrorMessage: checkEmail.errorMessage,
         passwordError: checkPassword,
@@ -99,6 +107,16 @@ export default class LoginFormContainer extends Component {
         value[0] === '0' ? 'Mobile Number Must Not Start With 0' : 'Enter 10 Digits Valid Mobile Number'
     });
   };
+  onChangeName = e => {
+    const {
+      target: { value }
+    } = e;
+    const checkError = isEmpty(value) || checkSpecialChar(value);
+    this.setState({
+      name: value,
+      nameError: checkError
+    });
+  };
   isValid = () => {
     const value = this.state.phone;
     const valid = !validateMobile(value);
@@ -118,12 +136,15 @@ export default class LoginFormContainer extends Component {
       passwordErrorMessage,
       phone,
       phoneError,
-      phoneErrorMessage
+      phoneErrorMessage,
+      name,
+      nameError,
+      nameErrorMessage
     } = this.state;
     const {
-      loginResponse, askContact, loginType, loading
+      loginResponse, askContact, askName, loginType, loading
     } = this.props;
-    const open = askContact && loginType && loginType === 'hometown';
+    const open = (askContact || askName) && loginType && loginType === 'hometown';
     return (
       <div>
         <LoginForm
@@ -155,7 +176,7 @@ export default class LoginFormContainer extends Component {
                 {'Update Profile'}
               </Heading>
               <Text color="color676767" ta="center">
-                {'Mobile number is required to login'}
+                {'Please Update These Fileds !'}
               </Text>
             </Div>
           </Row>
@@ -168,15 +189,28 @@ export default class LoginFormContainer extends Component {
                 encType="multipart/form-data"
                 className="bulk-order-form"
               >
-                <FormInput
-                  label=""
-                  type="text"
-                  placeholder=""
-                  onChange={this.onChangePhone}
-                  value={phone}
-                  feedBackError={phoneError}
-                  feedBackMessage={phoneErrorMessage}
-                />
+                {askName && (
+                  <FormInput
+                    label=""
+                    type="text"
+                    placeholder=""
+                    onChange={this.onChangeName}
+                    value={name}
+                    feedBackError={nameError}
+                    feedBackMessage={nameErrorMessage}
+                  />
+                )}
+                {askContact && (
+                  <FormInput
+                    label=""
+                    type="text"
+                    placeholder=""
+                    onChange={this.onChangePhone}
+                    value={phone}
+                    feedBackError={phoneError}
+                    feedBackMessage={phoneErrorMessage}
+                  />
+                )}
               </form>
               <button
                 style={{ backgroundColor: '#f98d29' }}
@@ -190,7 +224,7 @@ export default class LoginFormContainer extends Component {
                     <Img className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />
                   </span>
                 ) : (
-                  'Update Contact Number'
+                  'Update'
                 )}
               </button>
             </Text>

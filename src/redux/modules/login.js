@@ -61,6 +61,7 @@ export default function reducer(state = initialState, action = {}) {
         loggingIn: false,
         loginError: action.error,
         askContact: action.error.askContact || false,
+        askName: action.error.askName || false,
         loginType: action.error.loginType || '',
         prevToken: action.error.askContact && action.error.token ? action.error.token : ''
       };
@@ -152,7 +153,8 @@ export const login = data => ({
       const password = data.otp ? data.otp : data.password;
       const method = data.otp ? 'otp' : 'password';
       const mobile = data.otp ? '' : `&mobile=${data.phone}`;
-      const postData = `${username}&password=${password}&type=${type}&method=${method}&grant_type=password&client_id=${clientId}&client_secret=${clientSecret}${mobile}`;
+      const name = data.name ? `&full_name=${data.name}` : '';
+      const postData = `${username}&password=${password}&type=${type}&method=${method}&grant_type=password&client_id=${clientId}&client_secret=${clientSecret}${mobile}${name}`;
       const response = await client.post(LOGIN_API, postData);
       setToken({ client })(response);
       return response;
