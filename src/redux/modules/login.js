@@ -27,12 +27,28 @@ const initialState = {
   loggingOut: false,
   isLoggedOut: false,
   askContact: false,
+  askName: false,
   otp: '',
   error: false,
   errorMessage: '',
   loginType: '',
   prevToken: ''
 };
+// {
+//   "loaded": false,
+//   "isLoggedIn": false,
+//   "loggingOut": false,
+//   "isLoggedOut": false,
+//   "askContact": false,
+//   "otp": "",
+//   "error": false,
+//   "errorMessage": "",
+//   "loginType": "",
+//   "prevToken": "",
+//   "accessToken": null,
+//   "refreshToken": null,
+//   "loggingIn": true
+// }
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {

@@ -118,9 +118,12 @@ export default class LoginFormContainer extends Component {
     });
   };
   isValid = () => {
-    const value = this.state.phone;
-    const valid = !validateMobile(value);
-    return valid;
+    const { askContact, askName } = this.props;
+    const { phone, name } = this.state;
+    const isInvalidPhone = askContact && !validateMobile(phone);
+    const isInvalidName = askName && (isEmpty(name) || checkSpecialChar(name));
+    const disabled = isInvalidPhone || isInvalidName;
+    return disabled;
   };
   handleModal = () => {
     const { dispatch } = this.context.store;
@@ -145,6 +148,7 @@ export default class LoginFormContainer extends Component {
       loginResponse, askContact, askName, loginType, loading
     } = this.props;
     const open = (askContact || askName) && loginType && loginType === 'hometown';
+    const isValidField = this.isValid();
     return (
       <div>
         <LoginForm
@@ -176,14 +180,21 @@ export default class LoginFormContainer extends Component {
                 {'Update Profile'}
               </Heading>
               <Text color="color676767" ta="center">
-                {'Please Update These Fileds !'}
+                {/* eslint-disable */}
+                {askName && askContact
+                  ? 'Please update your contact number and name!'
+                  : askName
+                  ? 'Please update your name !'
+                  : askContact
+                  ? 'Please update your contact number!'
+                  : ''}
               </Text>
             </Div>
           </Row>
           <Div ta="center">
             <Text ta="center" fontSize="1.25rem" mb="0.625rem" mt="0" color="rgba(51, 51, 51, 0.85)">
               <form
-                onSubmit={this.onSubmitForm}
+                onSubmit={this.onSubmitLogin}
                 id="custom_form"
                 name="custom_form"
                 encType="multipart/form-data"
@@ -213,10 +224,13 @@ export default class LoginFormContainer extends Component {
                 )}
               </form>
               <button
-                style={{ backgroundColor: '#f98d29' }}
-                disabled={this.isValid()}
+                style={isValidField ? { backgroundColor: 'grey' } : { backgroundColor: '#f98d29' }}
+                disabled={isValidField}
                 className="google-login-btn"
-                onClick={this.onSubmitLogin}
+                onClick={e => {
+                  console.log('ok');
+                  this.onSubmitLogin(e);
+                }}
               >
                 {loading ? (
                   <span>

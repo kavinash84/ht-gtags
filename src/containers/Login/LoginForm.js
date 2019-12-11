@@ -30,6 +30,7 @@ const EmailIcon = require('../../../static/email-primary.svg');
   loading: state.userLogin.loading,
   loggingIn: state.userLogin.loggingIn,
   askContact: state.userLogin.askContact,
+  askName: state.userLogin.askName,
   loginType: state.userLogin.loginType
 }))
 export default class LoginFormContainer extends Component {
@@ -41,6 +42,7 @@ export default class LoginFormContainer extends Component {
     loading: PropTypes.bool,
     loggingIn: PropTypes.bool,
     askContact: PropTypes.bool,
+    askName: PropTypes.bool,
     loginType: PropTypes.string
   };
   static contextTypes = {
@@ -54,6 +56,7 @@ export default class LoginFormContainer extends Component {
     loading: false,
     loggingIn: false,
     askContact: false,
+    askName: false,
     loginType: ''
   };
 
@@ -155,7 +158,7 @@ export default class LoginFormContainer extends Component {
       resend
     } = this.state;
     const {
-      loaded, loading, loggingIn, askContact, loginType
+      loaded, loading, loggingIn, askContact, askName, loginType
     } = this.props;
     const styles = require('./index.scss');
     return (
@@ -194,7 +197,7 @@ export default class LoginFormContainer extends Component {
               <Row display="block" mr="0" ml="0" pb="0">
                 <Div mt="0.675rem">
                   {!this.state.loginviaotp ? (
-                    <LoginForm askContact={askContact} loginType={loginType} loading={loading} />
+                    <LoginForm askName={askName} askContact={askContact} loginType={loginType} loading={loading} />
                   ) : (
                     <LoginViaOtp
                       onChangeMobile={this.onChangeMobile}
