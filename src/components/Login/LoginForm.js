@@ -78,7 +78,7 @@ export default class LoginFormContainer extends Component {
     } = this.state;
     const checkEmail = validateEmail(email, 'Invalid Email');
     const checkMobile = phone ? !validateMobile(phone) : false;
-    const checkName = isEmpty(name) || checkSpecialChar(name);
+    const checkName = !isEmpty(name) ? checkSpecialChar(name) : false;
     const checkPassword = isBlank(password);
     if (checkEmail.error || checkPassword || checkMobile || checkName) {
       return this.setState({
