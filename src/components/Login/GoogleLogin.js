@@ -23,7 +23,6 @@ const mapStateToProps = ({ app }) => ({
 const onSuccess = (dispatcher, session, phone) => result => {
   dispatcher(result, session, phone);
 };
-
 const onError = error => e => {
   console.log(error, e);
 };
@@ -125,12 +124,13 @@ class GoogleLogin extends Component {
                   feedBackMessage={phoneErrorMessage}
                 />
               </form>
-              <GoogleLoginBtn
+              <button
                 disabled={this.isValid()}
                 className="google-login-btn"
-                clientId="663311547699-jersj1hfflbl8gfukgsuvug8u1gc88nm.apps.googleusercontent.com"
-                onSuccess={onSuccess(loginViaLogin, session, phone)}
-                onFailure={onError}
+                onClick={e => {
+                  e.preventDefault();
+                  loginViaLogin('', session, phone);
+                }}
               >
                 {loading ? (
                   <span>
@@ -140,7 +140,7 @@ class GoogleLogin extends Component {
                 ) : (
                   'Update Contact Number'
                 )}
-              </GoogleLoginBtn>
+              </button>
             </Text>
           </Div>
         </ResponsiveModal>
