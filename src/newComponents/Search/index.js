@@ -115,8 +115,8 @@ class Search extends React.Component {
 
   render() {
     const {
-      searchQuery, load, loading, loaded, results, hideResultsOnSubmit, history, setFilterState
-    } = this.props;
+ searchQuery, load, loading, loaded, results, hideResultsOnSubmit, history, setFilterState
+} = this.props;
     const { value, suggestions } = this.state;
 
     // Autosuggest will pass through all these props to the input.
@@ -180,7 +180,4 @@ Search.propTypes = {
   setFilterState: PropTypes.func.isRequired
 };
 
-export default withRouter(connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Search));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search));

@@ -115,8 +115,8 @@ class ServiceSignUpModal extends Component {
     e.preventDefault();
     const { sendFormData, formType } = this.props;
     const {
-      name, phone, email, location, pincode, address, service
-    } = this.state;
+ name, phone, email, location, pincode, address, service
+} = this.state;
     const nameError = isEmpty(name);
     const phoneError = !validateMobile(phone);
     const emailError = !validateEmail(email);
@@ -155,8 +155,8 @@ class ServiceSignUpModal extends Component {
   };
   render() {
     const {
-      name, email, phone, address, location, pincode, service
-    } = this.state;
+ name, email, phone, address, location, pincode, service
+} = this.state;
     const styles = require('./ServiceSignUpModal.scss');
     const correctIcon = require('../../../static/correct.svg');
     const refreshIcon = require('../../../static/refresh-primary.svg');
@@ -263,7 +263,4 @@ ServiceSignUpModal.propTypes = {
   sendFormData: PropTypes.func.isRequired
 };
 
-export default connect(
-  mapStateToProps,
-  { sendFormData: sendData }
-)(ServiceSignUpModal);
+export default connect(mapStateToProps, { sendFormData: sendData })(ServiceSignUpModal);

@@ -17,7 +17,7 @@ const LoaderIcon = require('../../../static/refresh.svg');
 const buyNowIcon = require('../../../static/buynow-icon.png');
 
 const mapStateToProps = ({
-  app: { sessionId }, pincode, cart, cart: { addingToCart, addedToCart, key }
+ app: { sessionId }, pincode, cart, cart: { addingToCart, addedToCart, key }
 }) => ({
   session: sessionId,
   pincode: pincode.selectedPincode ? pincode.selectedPincode : PINCODE,
@@ -127,7 +127,4 @@ BuyNow.propTypes = {
   history: PropTypes.object
 };
 
-export default connect(
-  mapStateToProps,
-  { ...actionCreators }
-)(BuyNow);
+export default connect(mapStateToProps, { ...actionCreators })(BuyNow);

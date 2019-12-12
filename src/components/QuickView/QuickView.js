@@ -150,36 +150,34 @@ export default class QuickView extends Component {
     const { images, data } = this.state.product;
     const { currentImage } = this.state;
     const {
-      sku, simpleSku, soldOut, rating, deliveredBy
-    } = this.props;
+ sku, simpleSku, soldOut, rating, deliveredBy
+} = this.props;
     // const { emidata } = this.props;
     // console.log(getImageURL(images[currentImage].path, 'product_500'));
     const {
-      name, price, special_price: discPrice, max_saving_percentage: saving
-    } = data;
+ name, price, special_price: discPrice, max_saving_percentage: saving
+} = data;
     const color = judgeColor(rating);
     // const lowestEmi = calculateLowestEmi(emidata, discPrice);
     return (
       <div className={styles.quickView}>
         <Row ml="0" mr="0">
           <Div col="7">
-            {
-              <div className={styles.imgSliderContainer}>
-                {images && (
-                  <button name="previous" className={styles.previous} onClick={this.changeImage}>
-                    &#8249;
-                  </button>
-                )}
-                <div className={styles.imageContainer}>
-                  <img src={images && images[currentImage] && images[currentImage].zoom_image} alt="" />
-                </div>
-                {images && (
-                  <button name="next" className={styles.next} onClick={this.changeImage}>
-                    &#8250;
-                  </button>
-                )}
+            <div className={styles.imgSliderContainer}>
+              {images && (
+                <button name="previous" className={styles.previous} onClick={this.changeImage}>
+                  &#8249;
+                </button>
+              )}
+              <div className={styles.imageContainer}>
+                <img src={images && images[currentImage] && images[currentImage].zoom_image} alt="" />
               </div>
-            }
+              {images && (
+                <button name="next" className={styles.next} onClick={this.changeImage}>
+                  &#8250;
+                </button>
+              )}
+            </div>
           </Div>
           <Div col="5" pl="1.5rem" pr="1rem">
             <Div pt="1rem" className={styles.content}>

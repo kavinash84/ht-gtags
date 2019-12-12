@@ -29,10 +29,10 @@ class CallUs extends React.Component {
     if ((nextProps.loaded && !nextProps.error) !== (this.props.loaded && !this.props.error)) {
       const { dispatch } = this.context.store;
       dispatch(notifSend({
-        type: 'success',
-        msg: "Thank you! We'll Contact You soon.",
-        dismissAfter: 2000
-      }));
+          type: 'success',
+          msg: "Thank you! We'll Contact You soon.",
+          dismissAfter: 2000
+        }));
     }
   }
   onSubmitCallUs = e => {

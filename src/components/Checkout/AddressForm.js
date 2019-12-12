@@ -242,7 +242,4 @@ AddressForm.propTypes = {
   gstFeedBackMessage: PropTypes.string.isRequired
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AddressForm);
+export default connect(mapStateToProps, mapDispatchToProps)(AddressForm);

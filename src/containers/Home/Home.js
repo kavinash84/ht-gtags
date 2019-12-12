@@ -60,9 +60,9 @@ const customDropdownStyles = {
 };
 
 @connect(({
-  homepage: {
-    categories, banners, products, hashtags, offers, recentlyviewed
-  }, stores, userLogin
+ homepage: {
+ categories, banners, products, hashtags, offers, recentlyviewed
+}, stores, userLogin
 }) => ({
   banners: banners.data,
   homepageCategories: categories.data,

@@ -130,8 +130,8 @@ class BulkOrder extends React.Component {
     e.preventDefault();
     const { sendFormData } = this.props;
     const {
-      name, phone, email, budget, quantity, category
-    } = this.state;
+ name, phone, email, budget, quantity, category
+} = this.state;
     const nameError = isEmpty(name);
     const phoneError = !validateMobile(phone);
     const emailError = !validateEmail(email);
@@ -204,7 +204,7 @@ class BulkOrder extends React.Component {
                 >
                   <div className={styles.formList}>
                     <Text ta="center" mt="0" mb="15px" fontSize="36px">
-                      {'Corporate Gifting'}
+                      Corporate Gifting
                     </Text>
                     <Row ml="-15px" mr="-15px">
                       <Div col="6" pl="15px" pr="15px">
@@ -243,7 +243,7 @@ class BulkOrder extends React.Component {
                       <Div col="6" pl="15px" pr="15px">
                         <InputField mb="0.625rem">
                           <Label fontSize="0.875em" mb="0.625rem">
-                            {'Category*'}
+                            Category*
                           </Label>
                           <select onChange={this.onChangeCategory} className="form-control" name="bulkOrderCategory">
                             <option value="Home Decor">Home Decor</option>
@@ -290,7 +290,7 @@ class BulkOrder extends React.Component {
                             title="Submit"
                             type="submit"
                           >
-                            {'REQUEST A CALLBACK'}
+                            REQUEST A CALLBACK
                           </Button>
                         </div>
                       </Div>
@@ -305,7 +305,7 @@ class BulkOrder extends React.Component {
           </Row>
           <Div ta="center">
             <HeadingH4 fontSize="30px" color="black">
-              {'WHY CHOOSE HOMETOWN FOR GIFTS?'}
+              WHY CHOOSE HOMETOWN FOR GIFTS?
             </HeadingH4>
           </Div>
           <Section bg="bulkorderUspBg" p="20px 30px">
@@ -318,7 +318,7 @@ class BulkOrder extends React.Component {
                   width="130px"
                 />
                 <Text fontSize="16px" mt="0" color="white" ta="center">
-                  {'Flexible Order Size'}
+                  Flexible Order Size
                 </Text>
               </Div>
               <Div col="3">
@@ -329,7 +329,7 @@ class BulkOrder extends React.Component {
                   width="130px"
                 />
                 <Text fontSize="16px" mt="0" color="white" ta="center">
-                  {'Unmatched Price Points'}
+                  Unmatched Price Points
                 </Text>
               </Div>
               <Div col="3">
@@ -340,7 +340,7 @@ class BulkOrder extends React.Component {
                   width="130px"
                 />
                 <Text fontSize="16px" mt="0" color="white" ta="center">
-                  {'Assured Quality'}
+                  Assured Quality
                 </Text>
               </Div>
               <Div col="3">
@@ -351,22 +351,22 @@ class BulkOrder extends React.Component {
                   width="130px"
                 />
                 <Text fontSize="16px" mt="0" color="white" ta="center">
-                  {'One Year Waranty'}
+                  One Year Waranty
                 </Text>
               </Div>
             </Row>
           </Section>
           <Div mt="0px" ta="center">
             <HeadingH4 fontSize="30px" color="black" mb="0px">
-              {'CHOOSE FROM OUR WIDE RANGE OF GIFTING HOMEWARE PRODUCTS'}
+              CHOOSE FROM OUR WIDE RANGE OF GIFTING HOMEWARE PRODUCTS
             </HeadingH4>
           </Div>
           <Section mb="40px">
             <Container type="container" pr="0" pl="0">
               {homepageCategories.map((category, index) => {
                 const {
-                  title, id, sub_title: subTitle, values
-                } = category;
+ title, id, sub_title: subTitle, values
+} = category;
                 if (id && (OFFER_ID === id || OFFER_ID === parseInt(id, 10))) {
                   return (
                     <LazyLoad height={200} offset={100} key={String(index)}>
@@ -400,7 +400,4 @@ BulkOrder.propTypes = {
   sendFormData: PropTypes.func.isRequired,
   homepageCategories: PropTypes.array
 };
-export default connect(
-  mapStateToProps,
-  { sendFormData: sendData }
-)(BulkOrder);
+export default connect(mapStateToProps, { sendFormData: sendData })(BulkOrder);

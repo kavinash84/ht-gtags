@@ -70,8 +70,8 @@ export default class ForgotPasswordContainer extends Component {
     const styles = require('../Login/index.scss');
 
     const {
-      email, emailError, emailErrorMessage, submitted
-    } = this.state;
+ email, emailError, emailErrorMessage, submitted
+} = this.state;
     const { response } = this.props;
     const { loaded, error } = response;
     return (

@@ -22,7 +22,7 @@ const onClick = (key, skuId, simpleSku, session, pincode) => dispatcher => e => 
 };
 
 const mapStateToProps = ({
-  app: { sessionId }, pincode, cart, cart: { addingToCart, addedToCart, key }
+ app: { sessionId }, pincode, cart, cart: { addingToCart, addedToCart, key }
 }) => ({
   session: sessionId,
   pincode: pincode.selectedPincode ? pincode.selectedPincode : PINCODE,
@@ -67,7 +67,7 @@ const AddToCart = ({
             lh="1.5"
           >
             <Span fontSize="12px" fontFamily="regular" color="red" va="text-top">
-              {'Out of Stock'}
+              Out of Stock
             </Span>
           </Button>
         </div>
@@ -160,7 +160,4 @@ AddToCart.propTypes = {
   isSoldOut: PropTypes.bool
 };
 
-export default connect(
-  mapStateToProps,
-  { ...actionCreators }
-)(AddToCart);
+export default connect(mapStateToProps, { ...actionCreators })(AddToCart);

@@ -6,7 +6,7 @@ import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
 
 /* TO DO Add ProgressiveImage */
 const SliderItem = ({
-  title, image, url, onClick, target
+ title, image, url, onClick, target
 }) => {
   if (target) {
     return (

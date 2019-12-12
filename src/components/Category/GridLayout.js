@@ -11,7 +11,7 @@ import RoundCatItem from './RoundCatItem';
 const styles = require('./Grid.scss');
 
 const GridLayout = ({
-  data, categoryName, layout, layoutStyle, col
+ data, categoryName, layout, layoutStyle, col
 }) => (
   <Section p="0" pt="0" mb="1.5rem" className="catCarousel">
     <Container pr="0" pl="0">

@@ -4,7 +4,9 @@ import { load, isLoaded as isPaymentStatusLoaded } from 'redux/modules/paymentst
 
 const hooks = {
   fetch: async ({ store: { dispatch, getState } }) => {
-    const { app: { sessionId } } = getState();
+    const {
+      app: { sessionId }
+    } = getState();
     if (sessionId && !isPaymentStatusLoaded(getState())) {
       await dispatch(load(sessionId));
     }

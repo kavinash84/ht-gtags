@@ -211,7 +211,7 @@ class OrderBlock extends Component {
                 <tbody>
                   <tr className={styles.tableHeading}>
                     <th colSpan="2">Products</th>
-                    {<th style={{ minWidth: '150px' }}>Qty</th>}
+                    <th style={{ minWidth: '150px' }}>Qty</th>
                     <th>Delivery Estimate</th>
                     <th />
                     {/* <th>Carrier</th>
@@ -230,13 +230,11 @@ class OrderBlock extends Component {
                             {item.product_name || '--'}
                           </Text>
                         </td>
-                        {
-                          <td>
-                            <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
-                              {item.quantity || '--'}
-                            </Text>
-                          </td>
-                        }
+                        <td>
+                          <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
+                            {item.quantity || '--'}
+                          </Text>
+                        </td>
                         <td>
                           {order.status !== 'canceled' ? (
                             item.delivery_date_text || '--'
@@ -317,7 +315,4 @@ OrderBlock.propTypes = {
   data: PropTypes.object.isRequired,
   currentOrder: PropTypes.string.isRequired
 };
-export default connect(
-  mapStateToProps,
-  null
-)(OrderBlock);
+export default connect(mapStateToProps, null)(OrderBlock);

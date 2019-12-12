@@ -34,7 +34,7 @@ const nextStep = (dispatcher, sessionId, paymentData, cardType) => e => {
 };
 
 const mapStateToProps = ({
-  cart, cart: { summary, error }, address: { shipping }, paymentoptions, app
+ cart, cart: { summary, error }, address: { shipping }, paymentoptions, app
 }) => ({
   results: getCartList(cart),
   summary,
@@ -167,10 +167,10 @@ const ReviewOrder = ({
                     <br />
                     {item.product_info.unit_price !== item.product_info.special_price &&
                       item.product_info.special_price !== 0 && (
-                      <Label color="black" fontSize="0.875rem" mt="0.625rem">
-                        <s>Rs. {formatAmount(item.product_info.unit_price)}</s>
-                      </Label>
-                    )}
+                        <Label color="black" fontSize="0.875rem" mt="0.625rem">
+                          <s>Rs. {formatAmount(item.product_info.unit_price)}</s>
+                        </Label>
+                      )}
                     <br />
                     <Label color="primary" fontSize="1.25rem" mt="0">
                       Rs.{' '}
@@ -267,7 +267,4 @@ ReviewOrder.propTypes = {
   undelivered: PropTypes.array,
   outOfStockList: PropTypes.array
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ReviewOrder);
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewOrder);

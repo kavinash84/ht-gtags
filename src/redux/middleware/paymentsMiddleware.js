@@ -41,30 +41,30 @@ export default function paymentsMiddleware() {
     }
     if (type === 'paymentOptions/SUBMIT_EASY_EMI_PAYMENT_PROCESS_SUCCESS') {
       const {
-        gateway, data, processingFees, result, cardType
-      } = action;
+ gateway, data, processingFees, result, cardType
+} = action;
       const authResponse = [result];
       const successStatus =
         authResponse !== undefined && authResponse.length > 0
           ? authResponse[0].RSPCODE !== undefined && authResponse[0].RSPCODE.toString() === '0'
           : false;
       const {
-        cardNumber, otp, orderNumber, emiCode, emiTenure
-      } = data;
+ cardNumber, otp, orderNumber, emiCode, emiTenure
+} = data;
       dispatch(setSelectedPaymentDetails({
-        gateway,
-        data: {
-          cardNumber,
-          is_success: successStatus ? authResponse[0].RSPCODE : '',
-          easyemi_otp_code: otp,
-          easyemi_emi_code: emiCode,
-          easyemi_order_number: orderNumber,
-          easyemi_tenure: emiTenure,
-          easyemi_processingFees: processingFees,
-          easyemi_auth_response: JSON.stringify(authResponse),
-          easyemi_downpayment: 0
-        }
-      }));
+          gateway,
+          data: {
+            cardNumber,
+            is_success: successStatus ? authResponse[0].RSPCODE : '',
+            easyemi_otp_code: otp,
+            easyemi_emi_code: emiCode,
+            easyemi_order_number: orderNumber,
+            easyemi_tenure: emiTenure,
+            easyemi_processingFees: processingFees,
+            easyemi_auth_response: JSON.stringify(authResponse),
+            easyemi_downpayment: 0
+          }
+        }));
       const {
         paymentoptions: { paymentMethodDetails }
       } = getState();
@@ -83,26 +83,26 @@ export default function paymentsMiddleware() {
           } = getState();
           const {
             EasyEmi: {
-              cardNumber, easyemi_otp_code: otp, easyEmiConfig, gateway
-            }
+ cardNumber, easyemi_otp_code: otp, easyEmiConfig, gateway
+}
           } = data;
           const easyEmiConfigJson =
             easyEmiConfig && Object.keys(easyEmiConfig).length > 0 ? JSON.parse(easyEmiConfig.emiOptions)[0] : {};
           const { emi_code: emiCode, tenure: emiTenure } = easyEmiConfigJson;
           // calling process easy emi in between
           dispatch(processEasyEmi(
-            {
-              cardNumber,
-              otp,
-              orderNumber,
-              emiCode,
-              emiTenure
-            },
-            sessionId,
-            gateway === undefined || gateway !== '' ? 'EasyEmi' : gateway,
-            easyEmiConfig.processingFees,
-            cardType
-          ));
+              {
+                cardNumber,
+                otp,
+                orderNumber,
+                emiCode,
+                emiTenure
+              },
+              sessionId,
+              gateway === undefined || gateway !== '' ? 'EasyEmi' : gateway,
+              easyEmiConfig.processingFees,
+              cardType
+            ));
         }
       }
     }

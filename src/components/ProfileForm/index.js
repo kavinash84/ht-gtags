@@ -55,8 +55,8 @@ export default class ProfileForm extends Component {
   componentWillMount() {
     const {
       profile: {
-        full_name: fullName, email, contact_number: phone, gst
-      }
+ full_name: fullName, email, contact_number: phone, gst
+}
     } = this.props;
     this.setState({
       fullName: (fullName && fullName.trim()) || '',
@@ -105,8 +105,8 @@ export default class ProfileForm extends Component {
   onSubmitProfile = e => {
     e.preventDefault();
     const {
-      email, fullName, phone, gst
-    } = this.state;
+ email, fullName, phone, gst
+} = this.state;
     const checkEmail = validateEmail(email, 'Invalid Email');
     const phoneError = !validateMobile(phone);
     const checkFullName = isBlank(fullName);

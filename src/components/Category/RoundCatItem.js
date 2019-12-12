@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 const styles = require('./Slider.scss');
 
 const RoundCatItem = ({
-  image, name, url, layout, layoutStyle
+ image, name, url, layout, layoutStyle
 }) => (
   <Div
     className={`${styles.sliderItem}

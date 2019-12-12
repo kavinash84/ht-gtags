@@ -28,7 +28,7 @@ const judgeColor = rating => {
 };
 
 const ProductItem = ({
-  image, name, url, discPrice, price, rating, reviewsCount, percentage, height
+ image, name, url, discPrice, price, rating, reviewsCount, percentage, height
 }) => (
   <Div className={styles.prodSliderItem}>
     <Link className={styles.link} to={url}>

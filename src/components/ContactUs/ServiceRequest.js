@@ -111,10 +111,10 @@ class ServiceRequest extends React.Component {
         reviewFeedBackError
       });
       dispatch(notifSend({
-        type: 'warning',
-        msg: 'Please Fill All Details Correctly',
-        dismissAfter: 3000
-      }));
+          type: 'warning',
+          msg: 'Please Fill All Details Correctly',
+          dismissAfter: 3000
+        }));
     } else {
       let services = {
         assembly_dismatling,

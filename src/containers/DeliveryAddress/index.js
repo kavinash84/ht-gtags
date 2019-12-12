@@ -4,7 +4,9 @@ import { loadMyAddress } from 'redux/modules/myaddress';
 
 const hooks = {
   defer: async ({ store: { dispatch, getState } }) => {
-    const { userLogin: { isLoggedIn } } = getState();
+    const {
+      userLogin: { isLoggedIn }
+    } = getState();
     if (isLoggedIn) {
       await dispatch(loadMyAddress());
     }

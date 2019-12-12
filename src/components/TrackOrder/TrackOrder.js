@@ -25,8 +25,8 @@ const mapStateToProps = ({ trackorder }) => ({
 class TrackOrder extends Component {
   render() {
     const {
-      handleSubmit, handleChange, loaded, loading, data, orderId, closeStatusModal, onChange
-    } = this.props;
+ handleSubmit, handleChange, loaded, loading, data, orderId, closeStatusModal, onChange
+} = this.props;
     const orders = data.order_items || [];
     const error = data.error || '';
     return (
@@ -119,7 +119,4 @@ TrackOrder.propTypes = {
   // errorMessage: PropTypes.string.isRequired,
   closeStatusModal: PropTypes.func.isRequired
 };
-export default connect(
-  mapStateToProps,
-  null
-)(TrackOrder);
+export default connect(mapStateToProps, null)(TrackOrder);

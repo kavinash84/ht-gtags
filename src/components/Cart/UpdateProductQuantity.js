@@ -87,7 +87,4 @@ ProductQuantity.propTypes = {
   cartItemLoading: PropTypes.func
 };
 
-export default connect(
-  mapStateToProps,
-  { updateQuantity: updateCart }
-)(ProductQuantity);
+export default connect(mapStateToProps, { updateQuantity: updateCart })(ProductQuantity);

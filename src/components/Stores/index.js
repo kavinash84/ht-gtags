@@ -81,7 +81,4 @@ StoresCarousel.propTypes = {
   filteredStores: PropTypes.array,
   gaVisitEvent: PropTypes.func.isRequired
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(StoresCarousel);
+export default connect(mapStateToProps, mapDispatchToProps)(StoresCarousel);

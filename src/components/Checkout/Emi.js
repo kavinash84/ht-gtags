@@ -22,7 +22,7 @@ const onChangeDetails = (dispatcher, gateway) => e => {
 };
 
 const EMI = ({
-  selectedGateway, setPaymentDetails, emiBankDetails, details, currentSelection
+ selectedGateway, setPaymentDetails, emiBankDetails, details, currentSelection
 }) => {
   const currentBankDetails = emiBankDetails.filter(item => item.bank === details.emiBank)[0];
   return (
@@ -93,10 +93,7 @@ const EMI = ({
   );
 };
 
-export default connect(
-  mapStateToProps,
-  null
-)(EMI);
+export default connect(mapStateToProps, null)(EMI);
 
 EMI.propTypes = {
   selectedGateway: PropTypes.string.isRequired,

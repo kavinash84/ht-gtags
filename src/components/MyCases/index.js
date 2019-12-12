@@ -233,7 +233,4 @@ MyCases.propTypes = {
   contactNumber: PropTypes.string,
   loadMyCases: PropTypes.func.isRequired
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MyCases);
+export default connect(mapStateToProps, mapDispatchToProps)(MyCases);

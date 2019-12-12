@@ -59,8 +59,8 @@ class Wishlist extends React.Component {
 
   render() {
     const {
-      list, toggleWishList, wishList, loadingList, productPosition, selectedPincode
-    } = this.props;
+ list, toggleWishList, wishList, loadingList, productPosition, selectedPincode
+} = this.props;
     const { quickViewSku, openQuickView, simpleSku } = this.state;
     return (
       <Section display="flex" p="0" pt="2.5rem" mb="2rem">
@@ -153,7 +153,4 @@ Wishlist.propTypes = {
   selectedPincode: PropTypes.string
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Wishlist);
+export default connect(mapStateToProps, mapDispatchToProps)(Wishlist);

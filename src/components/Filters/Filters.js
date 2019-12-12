@@ -13,8 +13,8 @@ export default class Filters extends Component {
 
   render() {
     const {
-      title, checkbox, display, data, onclick
-    } = this.props;
+ title, checkbox, display, data, onclick
+} = this.props;
 
     try {
       let lastselected;

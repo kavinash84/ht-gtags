@@ -98,8 +98,8 @@ const getURL = gateway => {
 const paymentObject = (sessionId, selectedGateway, paymentData, cardType = 'visa') => {
   if (selectedGateway === 'CreditCard') {
     const {
-      cardNumber, cvv, expMonth, expYear, nameOnCard
-    } = paymentData;
+ cardNumber, cvv, expMonth, expYear, nameOnCard
+} = paymentData;
     return {
       ...paymentJSON,
       session_id: sessionId,
@@ -115,8 +115,8 @@ const paymentObject = (sessionId, selectedGateway, paymentData, cardType = 'visa
     };
   } else if (selectedGateway === 'DebitCard') {
     const {
-      cardNumber, cvv, expMonth, expYear, nameOnCard
-    } = paymentData;
+ cardNumber, cvv, expMonth, expYear, nameOnCard
+} = paymentData;
     return {
       ...paymentJSON,
       session_id: sessionId,
@@ -151,8 +151,8 @@ const paymentObject = (sessionId, selectedGateway, paymentData, cardType = 'visa
     };
   } else if (selectedGateway === 'Emi') {
     const {
-      emiBank, emiCode, nameOnCard, cardNumber, cvv, expMonth, expYear
-    } = paymentData;
+ emiBank, emiCode, nameOnCard, cardNumber, cvv, expMonth, expYear
+} = paymentData;
     return {
       ...paymentJSON,
       session_id: sessionId,

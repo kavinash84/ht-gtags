@@ -33,8 +33,8 @@ export default class ReduxAsyncConnect extends Component {
   }
   async componentWillReceiveProps(nextProps) {
     const {
-      history, location, routes, store, helpers
-    } = this.props;
+ history, location, routes, store, helpers
+} = this.props;
     const nextLocation = `${nextProps.location.pathname}${nextProps.location.search}`;
     const lastLocation = `${location.pathname}${location.search}`;
 

@@ -113,8 +113,8 @@ export default class SignupFormContainer extends Component {
     const isRedirect = action ? action.indexOf('redirect') !== -1 : false;
     const signupOrigin = isRedirect ? 'Top Nav' : 'Pop-up';
     const {
-      name, email, password, phone
-    } = this.state;
+ name, email, password, phone
+} = this.state;
     const checkName = isEmpty(name) || checkSpecialChar(name);
     const checkEmail = !validateEmail(email);
     const checkPhone = phone ? !validateMobile(phone) : false;

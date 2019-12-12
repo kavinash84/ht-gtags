@@ -56,7 +56,4 @@ StoreLocator.propTypes = {
   setCurrentLocation: PropTypes.func.isRequired,
   location: PropTypes.object
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(StoreLocator);
+export default connect(mapStateToProps, mapDispatchToProps)(StoreLocator);

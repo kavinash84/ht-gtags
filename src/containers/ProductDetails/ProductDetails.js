@@ -14,17 +14,15 @@ import ProductNotFoundContainer from './ProductNotFound';
 export default class ProductDetails extends Component {
   render() {
     const {
-      loading, loaded, history, productDescription
-    } = this.props;
+ loading, loaded, history, productDescription
+} = this.props;
     return (
       <Section p="0" mb="0">
         <div className="wrapper">
           <Menu />
           {loading && !loaded && <ProductDetailsShimmer />}
           {!loading && loaded && productDescription && productDescription.error_message && <ProductNotFoundContainer />}
-          {!loading &&
-            !productDescription.error_message &&
-            loaded && (
+          {!loading && !productDescription.error_message && loaded && (
             <div>
               <ProductDetailsContainer history={history} />
             </div>

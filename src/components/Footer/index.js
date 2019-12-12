@@ -109,8 +109,8 @@ class Footer extends React.Component {
     let { menuItems } = this.props;
     menuItems = menuItems.filter(item => FooterLinks.includes(item.name));
     const {
-      email, emailError, emailErrorMessage, already
-    } = this.state;
+ email, emailError, emailErrorMessage, already
+} = this.state;
     return (
       <Div mb="0" p="0" pt="15px" pb="0" className={styles.footer}>
         <Section bg="footerTop" mb="0" p="2.5rem 0 0">
@@ -242,14 +242,14 @@ class Footer extends React.Component {
           <Container pr="0" pl="0">
             <Row m="0" mb="1rem" flexWrap="nowrap">
               {menuItems.map(menu =>
-                menu.children &&
+                  menu.children &&
                   menu.visibility === 'on' && (
-                  <Div key={menu.name} display="flexEqual">
-                    <HeadingH4 color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
-                      {menu.name}
-                    </HeadingH4>
-                    <ul>
-                      {/*eslint-disable*/}
+                    <Div key={menu.name} display="flexEqual">
+                      <HeadingH4 color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
+                        {menu.name}
+                      </HeadingH4>
+                      <ul>
+                        {/*eslint-disable*/}
                         {menu.children.map(
                           (subMenu, index) =>
                             subMenu.visibility === 'on' &&
@@ -260,9 +260,9 @@ class Footer extends React.Component {
                             )
                         )}
                         {/* eslint-enable */}
-                    </ul>
-                  </Div>
-                ))}
+                      </ul>
+                    </Div>
+                  ))}
             </Row>
             <Row m="0" flexWrap="nowrap">
               <Div display="flexEqual" col="2">
@@ -404,7 +404,4 @@ Footer.propTypes = {
   sendFormData: PropTypes.func.isRequired,
   subscribe: PropTypes.object
 };
-export default connect(
-  mapStateToProps,
-  { sendFormData: sendData }
-)(Footer);
+export default connect(mapStateToProps, { sendFormData: sendData })(Footer);

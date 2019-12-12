@@ -28,7 +28,7 @@ const getCount = (cartList, skuId) => {
 };
 
 const ProductQuantityCounter = ({
-  skuId, cartList, reduceQuantity, addToCart
+ skuId, cartList, reduceQuantity, addToCart
 }) => {
   const count = getCount(cartList, skuId);
   return (
@@ -74,7 +74,4 @@ ProductQuantityCounter.propTypes = {
   addToCart: PropTypes.func.isRequired
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductQuantityCounter);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductQuantityCounter);

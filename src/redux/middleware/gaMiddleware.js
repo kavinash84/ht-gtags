@@ -58,14 +58,14 @@ export default function gaMiddleware() {
             const checkKey = isKeyExists(products, 'data.metadata.category_details');
             const category = checkKey
               ? checkKey
-                .filter(x => x !== null)
-                .map(item => item.url_key)
-                .join('/')
+                  .filter(x => x !== null)
+                  .map(item => item.url_key)
+                  .join('/')
               : '';
             if (product) {
               const {
-                name, sku, price, brand, color
-              } = product.data;
+ name, sku, price, brand, color
+} = product.data;
               eventObject = {
                 event: 'productClick',
                 ecommerce: {
@@ -95,8 +95,8 @@ export default function gaMiddleware() {
           window.google_tag_params.ecomm_totalvalue =
             productDescription.meta.special_price || productDescription.meta.price;
           const {
-            name, sku, price, brand, category_details: categoryDetails, color
-          } = productDescription.meta;
+ name, sku, price, brand, category_details: categoryDetails, color
+} = productDescription.meta;
           const category = filterCategoryDetails(categoryDetails)
             .map(item => item.url_key)
             .join('/');
@@ -144,9 +144,9 @@ export default function gaMiddleware() {
           const checkKey = isKeyExists(data, 'metadata.category_details');
           const category = checkKey
             ? checkKey
-              .filter(x => x !== null)
-              .map(item => item.url_key)
-              .join('/')
+                .filter(x => x !== null)
+                .map(item => item.url_key)
+                .join('/')
             : '';
           const PACKET_SIZE = 10;
 
@@ -163,8 +163,8 @@ export default function gaMiddleware() {
             let totalValue = 0;
             eventObject.ecommerce.impressions = packet.map((item, position) => {
               const {
-                name, sku, price, brand, color, special_price: netprice
-              } = item.data;
+ name, sku, price, brand, color, special_price: netprice
+} = item.data;
               skus.push(sku);
               totalValue += parseInt(netprice, 10) || parseInt(price, 10);
               return {
@@ -217,8 +217,8 @@ export default function gaMiddleware() {
           const [product] =
             action.result && action.result.cart.cart.filter(item => item.id_customer_cart === idcustomerCart);
           const {
-            name, net_price: netprice, color, brand, category_details: categoryDetails
-          } = product.product_info;
+ name, net_price: netprice, color, brand, category_details: categoryDetails
+} = product.product_info;
           const category = categoryDetails ? categoryDetails.join('/') : null;
           window.dataLayer.push(
             {
@@ -257,8 +257,8 @@ export default function gaMiddleware() {
           const [product] =
             action.result && action.result.cart.cart.filter(item => item.id_customer_cart === idcustomerCart);
           const {
-            name, net_price: netprice, color, brand, category_details: categoryDetails
-          } = product.product_info;
+ name, net_price: netprice, color, brand, category_details: categoryDetails
+} = product.product_info;
           const category = categoryDetails ? categoryDetails.join('/') : null;
           const { updateType } = action.result;
           window.dataLayer.push(
@@ -300,13 +300,13 @@ export default function gaMiddleware() {
             const checkKey = isKeyExists(product.product_info, 'category_details');
             const category = checkKey
               ? checkKey
-                .filter(x => x !== null)
-                .map(item => item.url_key)
-                .join('/')
+                  .filter(x => x !== null)
+                  .map(item => item.url_key)
+                  .join('/')
               : '';
             const {
-              name, net_price: netprice, color, brand
-            } = product.product_info;
+ name, net_price: netprice, color, brand
+} = product.product_info;
             if (action.result) {
               window.google_tag_params.ecomm_totalvalue = action.result.cart.summary.total;
               window.google_tag_params.ecomm_prodid = getCartListSKUFromResult(action.result.cart);
@@ -541,8 +541,8 @@ export default function gaMiddleware() {
         const products = [];
         items.forEach(item => {
           const {
-            name, net_price: netprice, color, brand, category_details: categoryDetails
-          } = item.product_info;
+ name, net_price: netprice, color, brand, category_details: categoryDetails
+} = item.product_info;
           const category = categoryDetails ? categoryDetails.join('/') : null;
           const event = {
             name,
@@ -579,8 +579,8 @@ export default function gaMiddleware() {
       if (type === 'loadStores/SET_SELECTED_STORE') {
         const {
           storeDetails: {
-            city, store, event, category
-          }
+ city, store, event, category
+}
         } = action;
         const storeVisitEvent = {
           event,

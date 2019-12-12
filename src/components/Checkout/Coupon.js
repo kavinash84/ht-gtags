@@ -21,7 +21,7 @@ const DiscountSuccessIcon = require('../../../static/percentage-green.svg');
 const styles = require('./Coupon.scss');
 
 @connect(({
-  pincode, app, coupon, cart, notifs
+ pincode, app, coupon, cart, notifs
 }) => ({
   pincode: pincode.selectedPincode,
   sessionId: app.sessionId,
@@ -84,8 +84,8 @@ class Coupon extends React.Component {
       cart,
       notifs,
       coupon: {
-        loading, coupons, getingcoupon, unapplicablecoupons
-      },
+ loading, coupons, getingcoupon, unapplicablecoupons
+},
       pincode,
       sessionId
     } = this.props;

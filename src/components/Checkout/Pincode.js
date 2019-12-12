@@ -62,7 +62,4 @@ Pincode.propTypes = {
   id: PropTypes.string
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Pincode);
+export default connect(null, mapDispatchToProps)(Pincode);

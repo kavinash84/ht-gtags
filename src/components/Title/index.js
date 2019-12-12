@@ -4,7 +4,7 @@ import Text from 'hometown-components-dev/lib/Text';
 import Div from 'hometown-components-dev/lib/Div';
 
 const Title = ({
-  title, subTitle, ta, titleColor
+ title, subTitle, ta, titleColor
 }) => (
   <Div mb="1rem">
     <Text fontSize="1.5rem" color={titleColor} mt="0" mb="0.3125rem" lh="1.4" ta={ta} fontFamily="light">

@@ -138,8 +138,8 @@ export const addAddress = data => ({
   types: [ADD_ADDRESS, ADD_ADDRESS_SUCCESS, ADD_ADDRESS_FAIL],
   promise: async ({ client }) => {
     const {
-      name, address, address1, address2, address3, pincode, phone, email, isBilling, isShipping, gst
-    } = data;
+ name, address, address1, address2, address3, pincode, phone, email, isBilling, isShipping, gst
+} = data;
     try {
       /* eslint-disable max-len */
       const postData = {

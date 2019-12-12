@@ -188,10 +188,10 @@ class PaymentOptions extends Component {
                                   <br />
                                   {item.product_info.unit_price !== item.product_info.special_price &&
                                     item.product_info.special_price !== 0 && (
-                                    <Label color="black" fontSize="0.875rem" mt="0.625rem">
-                                      <s>Rs. {formatAmount(item.product_info.unit_price)}</s>
-                                    </Label>
-                                  )}
+                                      <Label color="black" fontSize="0.875rem" mt="0.625rem">
+                                        <s>Rs. {formatAmount(item.product_info.unit_price)}</s>
+                                      </Label>
+                                    )}
                                   <br />
                                   <Label color="primary" fontSize="1.25rem" mt="0">
                                     Rs.{' '}
@@ -513,7 +513,4 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PaymentOptions);
+export default connect(mapStateToProps, mapDispatchToProps)(PaymentOptions);

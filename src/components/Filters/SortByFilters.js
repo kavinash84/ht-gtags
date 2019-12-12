@@ -7,7 +7,7 @@ import { Label } from 'hometown-components-dev/lib/Label';
 const styles = require('./Dropdown.scss');
 
 const Dropdown = ({
-  title, display, data, onclick
+ title, display, data, onclick
 }) => (
   <div className={`${styles.filterBlock} dropdownWrapper`}>
     <Button btnType="custom" bg="#FFF" color="#656565" border="none" fontSize="0.75em" tt="uppercase">

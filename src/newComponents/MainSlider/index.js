@@ -14,8 +14,8 @@ const settings = {
 class MainSlider extends Component {
   render() {
     const {
-      data, triggerSlideChange, triggerSlideClick, reference, newSettings
-    } = this.props;
+ data, triggerSlideChange, triggerSlideClick, reference, newSettings
+} = this.props;
     const finalSettings = { ...settings, ...newSettings };
 
     return (
@@ -50,10 +50,7 @@ MainSlider.propTypes = {
   newSettings: PropTypes.object
 };
 
-export default connect(
-  null,
-  {
-    triggerSlideChange: triggerImpression,
-    triggerSlideClick: triggerClick
-  }
-)(MainSlider);
+export default connect(null, {
+  triggerSlideChange: triggerImpression,
+  triggerSlideClick: triggerClick
+})(MainSlider);

@@ -73,8 +73,8 @@ export default class ResetPasswordContainer extends Component {
   onSubmitUpdatePassword = e => {
     e.preventDefault();
     const {
-      confirmPwd, newPwd, newPwdError, confirmPwdError
-    } = this.state;
+ confirmPwd, newPwd, newPwdError, confirmPwdError
+} = this.state;
     const checkNewPwd = isBlank(newPwd) || newPwdError;
     const checkConfirmPwd = isBlank(confirmPwd) || confirmPwdError;
     if (newPwd !== confirmPwd) {
@@ -108,8 +108,8 @@ export default class ResetPasswordContainer extends Component {
   render() {
     const styles = require('../Login/index.scss');
     const {
-      newPwd, confirmPwd, newPwdError, newPwdErrorMessage, confirmPwdError, confirmPwdErrorMessage
-    } = this.state;
+ newPwd, confirmPwd, newPwdError, newPwdErrorMessage, confirmPwdError, confirmPwdErrorMessage
+} = this.state;
     const { response } = this.props;
     const {
       checkHash: { is_valid: isValid }

@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 const styles = require('./Slider.scss');
 
 const ProductItem = ({
-  image, name, url, discPrice, price, height
+ image, name, url, discPrice, price, height
 }) => (
   <Div col="11" className={styles.combineItem} p="0 15px">
     <Link className={styles.link} to={url}>

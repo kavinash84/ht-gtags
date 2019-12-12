@@ -168,10 +168,10 @@ const Cart = ({
                     <Div mt="0.3125rem">
                       {item.product_info.unit_price !== item.product_info.special_price &&
                         item.product_info.special_price !== 0 && (
-                        <Label color="black" fontSize="0.875rem" mt="0">
-                          <s>Rs. {formatAmount(Number(item.product_info.unit_price) * Number(item.qty))}</s>
-                        </Label>
-                      )}
+                          <Label color="black" fontSize="0.875rem" mt="0">
+                            <s>Rs. {formatAmount(Number(item.product_info.unit_price) * Number(item.qty))}</s>
+                          </Label>
+                        )}
                       <br />
                       <Label color="primary" fontSize="1.25rem" mt="3px">
                         Rs.{' '}
@@ -265,7 +265,4 @@ Cart.defaultProps = {
   outOfStockList: []
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

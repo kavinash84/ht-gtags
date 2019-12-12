@@ -16,7 +16,7 @@ const adjustSlides = length => ({
 });
 
 const ProductCarousel = ({
-  data, title, length, pt, pb, height
+ data, title, length, pt, pb, height
 }) => (
   <Section p="0" pt={pt} pb={pb} mt="0" mb="0" display="flex" className="prodCarousel">
     <Container pr="0" pl="0">

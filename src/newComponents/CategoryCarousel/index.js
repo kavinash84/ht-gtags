@@ -16,8 +16,8 @@ const OFFER_ID = 5;
 export default class CategoryCarousel extends Component {
   render() {
     const {
-      data, categoryName, subTitle, id
-    } = this.props;
+ data, categoryName, subTitle, id
+} = this.props;
     return (
       <BoxHtV1>
         {(categoryName !== '' || categoryName !== null) && <Title title={categoryName} subTitle={subTitle} />}

@@ -14,7 +14,7 @@ import AddToCartCombined from '../AddToCartCombined';
 const styles = require('./Slider.scss');
 
 const ProductCarousel = ({
-  data, item, length, pt, pb, height, price, discountedPrice, setDiscount
+ data, item, length, pt, pb, height, price, discountedPrice, setDiscount
 }) => (
   <Section p="0" pt={pt} pb={pb} mt="0" mb="0" display="flex" className="prodCarousel">
     <Container pr="0" pl="0" className={styles.combinedProductsWrapper}>
@@ -63,16 +63,16 @@ const ProductCarousel = ({
           {setDiscount && setDiscount > 0 ? (
             <Fragment>
               <Label mb="0" color="black" fontSize="1rem" ml="1rem" mr="1rem">
-                {'-'}
+                -
               </Label>
               <Label mb="0" color="textExtraLight">
-                {'Combo Discount'} <br />
+                Combo Discount <br />
                 <Span fontSize="1.125rem" mt="5px" display="block" color="rgba(0,0,0,0.8)">
                   {formatAmount(setDiscount)}
                 </Span>
               </Label>
               <Label mb="0" color="black" fontSize="1rem" ml="1rem" mr="1rem">
-                {'='}
+                =
               </Label>
             </Fragment>
           ) : (
@@ -89,18 +89,16 @@ const ProductCarousel = ({
             </Span>
           </Label>
           <Label mt="0" mb="0" va="bottom" ml="1rem">
-            {
-              <AddToCartCombined
-                skusData={item}
-                products={data}
-                size="block"
-                btnType="primary"
-                btnColor="#515151"
-                height="50px"
-                fontSize="14px"
-                isSoldOut={false}
-              />
-            }
+            <AddToCartCombined
+              skusData={item}
+              products={data}
+              size="block"
+              btnType="primary"
+              btnColor="#515151"
+              height="50px"
+              fontSize="14px"
+              isSoldOut={false}
+            />
           </Label>
         </Div>
       </Row>

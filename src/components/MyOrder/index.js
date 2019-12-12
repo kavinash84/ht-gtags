@@ -189,7 +189,4 @@ MyOrder.propTypes = {
   setCurrentOrder: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MyOrder);
+export default connect(mapStateToProps, mapDispatchToProps)(MyOrder);

@@ -6,7 +6,9 @@ import { loadStores, isLoaded as isStoresLoaded } from 'redux/modules/stores';
 
 const hooks = {
   defer: ({ store: { dispatch, getState } }) => {
-    const { userLogin: { loggingOut } } = getState();
+    const {
+      userLogin: { loggingOut }
+    } = getState();
     if (!isSectionLoaded(getState(), 'products')) {
       wrapDispatch(dispatch, 'products')(loadTopSelling()).catch(error => console.log(error));
     }

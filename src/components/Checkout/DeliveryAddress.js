@@ -32,7 +32,7 @@ const addIcon = require('../../../static/round-add_circle_outline.svg');
 const styles = require('./DeliveryAddress.scss');
 
 const mapStateToProps = ({
-  userLogin, app, checkout, myaddress, address, profile, cart
+ userLogin, app, checkout, myaddress, address, profile, cart
 }) => ({
   isLoggedIn: userLogin.isLoggedIn,
   sessionId: app.sessionId,
@@ -62,8 +62,8 @@ class DeliveryAddress extends Component {
     const { dispatch } = this.context.store;
     const { cart, history } = this.props;
     const {
-      nextstep, isLoggedIn, onChangeEmail, userEmail
-    } = this.props;
+ nextstep, isLoggedIn, onChangeEmail, userEmail
+} = this.props;
     if (isLoggedIn) {
       onChangeEmail('shipping', userEmail);
       onChangeEmail('billing', userEmail);
@@ -80,15 +80,15 @@ class DeliveryAddress extends Component {
   }
   componentWillReceiveProps(nextProps) {
     const {
-      isLoggedIn, nextstep, clearShippingAddress, onChangeEmail, userEmail, couponlistToggle
-    } = this.props;
+ isLoggedIn, nextstep, clearShippingAddress, onChangeEmail, userEmail, couponlistToggle
+} = this.props;
     const { dispatch } = this.context.store;
     if (nextProps.nextstep !== nextstep && nextProps.paymentData) {
       console.log(nextProps.paymentData);
       const { paymentData = {} } = nextProps;
       dispatch(load({
-        paymentData
-      }));
+          paymentData
+        }));
     }
     if (isLoggedIn && nextProps.userEmail !== userEmail) {
       onChangeEmail('shipping', nextProps.userEmail);
@@ -252,44 +252,44 @@ class DeliveryAddress extends Component {
             ? 'Please Add new Address  /  Select delivery Address '
             : 'Please Fill All Details Correctly !';
         dispatch(notifSend({
-          type: 'warning',
-          msg: message,
-          dismissAfter: 2000
-        }));
+            type: 'warning',
+            msg: message,
+            dismissAfter: 2000
+          }));
       } else {
         const { sessionId } = this.props;
         dispatch(sendDeliveryAddress(
-          sessionId,
-          {
-            shippingIsBilling,
-            shippingAddress: shippingForm.data,
-            billingAddress: shippingForm.data,
-            cartTotal
-          },
-          isLoggedIn
-        ));
+            sessionId,
+            {
+              shippingIsBilling,
+              shippingAddress: shippingForm.data,
+              billingAddress: shippingForm.data,
+              cartTotal
+            },
+            isLoggedIn
+          ));
       }
     } else {
       const shippingForm = this.formValdiator(this.props, shipping, 'shipping');
       const billingForm = this.formValdiator(this.props, billing, 'billing');
       if (shippingForm.error || billingForm.error) {
         dispatch(notifSend({
-          type: 'warning',
-          msg: 'Fill All Details Correctly',
-          dismissAfter: 2000
-        }));
+            type: 'warning',
+            msg: 'Fill All Details Correctly',
+            dismissAfter: 2000
+          }));
       } else {
         const { sessionId } = this.props;
         dispatch(sendDeliveryAddress(
-          sessionId,
-          {
-            shippingIsBilling,
-            shippingAddress: shippingForm.data,
-            billingAddress: billingForm.data,
-            cartTotal
-          },
-          isLoggedIn
-        ));
+            sessionId,
+            {
+              shippingIsBilling,
+              shippingAddress: shippingForm.data,
+              billingAddress: billingForm.data,
+              cartTotal
+            },
+            isLoggedIn
+          ));
       }
     }
   };
@@ -522,7 +522,4 @@ DeliveryAddress.propTypes = {
   summary: PropTypes.object,
   couponlistToggle: PropTypes.bool
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DeliveryAddress);
+export default connect(mapStateToProps, mapDispatchToProps)(DeliveryAddress);

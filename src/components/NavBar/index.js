@@ -12,8 +12,8 @@ const styles = require('./NavBar.scss');
 class NavBar extends Component {
   render() {
     const {
-      menuItems, handleEnter, handleLeave, exitOnClick
-    } = this.props;
+ menuItems, handleEnter, handleLeave, exitOnClick
+} = this.props;
     const cats = menuItems
       .filter(menu => menu.visibility === 'on' && menu.sort_order && !Number.isNaN(parseInt(menu.sort_order, 10)))
       .sort((i1, i2) => {

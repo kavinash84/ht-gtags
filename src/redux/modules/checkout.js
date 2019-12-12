@@ -61,8 +61,8 @@ export const sendDeliveryAddress = (
       try {
         let postData;
         const {
-          shippingAddress, billingAddress, shippingIsBilling, cartTotal = 0
-        } = data;
+ shippingAddress, billingAddress, shippingIsBilling, cartTotal = 0
+} = data;
         const {
           address: {
             shipping: { address_id: addressId }

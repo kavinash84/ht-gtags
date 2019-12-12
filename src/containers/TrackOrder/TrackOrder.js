@@ -70,7 +70,4 @@ TrackOrder.propTypes = {
   closeStatusModal: PropTypes.func.isRequired
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(TrackOrder);
+export default connect(null, mapDispatchToProps)(TrackOrder);

@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 
 export const productName = ({
-  family = '', material = '', category = '', color = '', brand = 'HomeTown'
+ family = '', material = '', category = '', color = '', brand = 'HomeTown'
 }) =>
   `${family} ${material} ${category} in ${color} Color By ${brand}`;
 

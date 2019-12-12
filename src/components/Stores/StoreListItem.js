@@ -10,7 +10,7 @@ import Heading from 'hometown-components-dev/lib/Heading';
 const styles = require('./Stores.scss');
 
 const StoreListItem = ({
-  city, store, address, pincode, state, phone, url, visitHandler
+ city, store, address, pincode, state, phone, url, visitHandler
 }) => (
   <Div col={4}>
     <div //eslint-disable-line

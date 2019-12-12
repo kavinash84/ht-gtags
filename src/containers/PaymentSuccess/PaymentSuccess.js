@@ -30,8 +30,8 @@ export default class PaymentSuccessContainer extends Component {
   };
   componentDidMount() {
     const {
-      error, data, history, isLoggedIn
-    } = this.props;
+ error, data, history, isLoggedIn
+} = this.props;
     const { error_message = '' } = data; //eslint-disable-line
     if (error_message.indexOf('Order Success details not found') >= 0) {
       if (isLoggedIn) {

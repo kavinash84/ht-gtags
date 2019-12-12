@@ -155,8 +155,8 @@ export default class LoginFormContainer extends Component {
       resend
     } = this.state;
     const {
-      loaded, loading, loggingIn, askContact, loginType
-    } = this.props;
+ loaded, loading, loggingIn, askContact, loginType
+} = this.props;
     const styles = require('./index.scss');
     return (
       <div className={styles.userWrapper}>

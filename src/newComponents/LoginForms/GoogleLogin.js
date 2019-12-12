@@ -81,8 +81,8 @@ class GoogleLogin extends Component {
   };
   render() {
     const {
-      loginViaLogin, session, askContact, loginType, loading
-    } = this.props;
+ loginViaLogin, session, askContact, loginType, loading
+} = this.props;
     const { phone, phoneError, phoneErrorMessage } = this.state;
     const open = askContact && loginType && loginType === 'google';
 
@@ -154,7 +154,4 @@ GoogleLogin.propTypes = {
   loading: PropTypes.bool.isRequired
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(GoogleLogin);
+export default connect(mapStateToProps, mapDispatchToProps)(GoogleLogin);

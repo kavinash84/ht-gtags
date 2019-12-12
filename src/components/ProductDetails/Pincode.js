@@ -96,7 +96,4 @@ Pincode.propTypes = {
   simpleSku: PropTypes.string
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Pincode);
+export default connect(mapStateToProps, mapDispatchToProps)(Pincode);

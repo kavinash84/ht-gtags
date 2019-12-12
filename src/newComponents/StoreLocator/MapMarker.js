@@ -13,7 +13,7 @@ const openLocationWindow = (position, currentLocation) => {
   window.open(mapURL, '_blank');
 };
 const MapMarker = ({
-  store, address, phone, position, currentLocation
+ store, address, phone, position, currentLocation
 }) => (
   <div>
     <div className={styles.mapMarker} style={{ top: `${position}` }}>

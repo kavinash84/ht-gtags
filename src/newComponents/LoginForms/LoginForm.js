@@ -121,8 +121,8 @@ export default class LoginForm extends Component {
       phoneErrorMessage
     } = this.state;
     const {
-      loginResponse, askContact, loginType, loading
-    } = this.props;
+ loginResponse, askContact, loginType, loading
+} = this.props;
     const open = askContact && loginType && loginType === 'hometown';
     return (
       <BoxHtV1>

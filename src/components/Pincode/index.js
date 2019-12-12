@@ -96,7 +96,4 @@ Pincode.propTypes = {
   color: PropTypes.string
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Pincode);
+export default connect(mapStateToProps, mapDispatchToProps)(Pincode);

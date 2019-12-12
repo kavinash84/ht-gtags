@@ -51,22 +51,22 @@ class NotFound extends Component {
             <Container pr="0" pl="0">
               <Row m="0">
                 {menuItems.map(menu =>
-                  menu.children &&
+                    menu.children &&
                     menu.visibility === 'on' && (
-                    <Div col={2} key={menu.name}>
-                      <Heading fontSize="1rem" mt="1rem" fontFamily="medium">
-                        {menu.name}
-                      </Heading>
-                      <ul className={styles.catList}>
-                        {menu.children.map(subMenu =>
-                          subMenu.visibility === 'on' && (
-                            <li key={subMenu.name}>
-                              <Link to={`/${subMenu.url_key}`}>{subMenu.name}</Link>
-                            </li>
-                          ))}
-                      </ul>
-                    </Div>
-                  ))}
+                      <Div col={2} key={menu.name}>
+                        <Heading fontSize="1rem" mt="1rem" fontFamily="medium">
+                          {menu.name}
+                        </Heading>
+                        <ul className={styles.catList}>
+                          {menu.children.map(subMenu =>
+                              subMenu.visibility === 'on' && (
+                                <li key={subMenu.name}>
+                                  <Link to={`/${subMenu.url_key}`}>{subMenu.name}</Link>
+                                </li>
+                              ))}
+                        </ul>
+                      </Div>
+                    ))}
               </Row>
             </Container>
           </Section>

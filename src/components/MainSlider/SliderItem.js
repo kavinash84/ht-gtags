@@ -5,7 +5,7 @@ import Img from 'hometown-components-dev/lib/Img';
 
 /* TO DO Add ProgressiveImage */
 const SliderItem = ({
-  title, image, url, onClick, target
+ title, image, url, onClick, target
 }) => {
   if (target) {
     return (

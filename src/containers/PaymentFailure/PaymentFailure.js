@@ -5,7 +5,11 @@ import MenuFooter from 'containers/MenuFooter';
 
 export default class PaymentFailureContainer extends Component {
   render() {
-    const { match: { params: { orderId } } } = this.props;
+    const {
+      match: {
+        params: { orderId }
+      }
+    } = this.props;
     return (
       <MenuFooter pageTitle="Payment Failed">
         <PaymentFailure orderId={orderId} />

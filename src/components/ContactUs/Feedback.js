@@ -109,10 +109,10 @@ class Feedback extends React.Component {
         storeNameFeedBackError
       });
       dispatch(notifSend({
-        type: 'warning',
-        msg: 'Please Fill All Details Correctly',
-        dismissAfter: 3000
-      }));
+          type: 'warning',
+          msg: 'Please Fill All Details Correctly',
+          dismissAfter: 3000
+        }));
     } else {
       let services = {
         aftersale,

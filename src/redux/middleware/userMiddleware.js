@@ -11,7 +11,11 @@ import { clearAddresses } from '../modules/address';
 export default function userMiddleware() {
   return ({ dispatch, getState }) => next => action => {
     const { type } = action;
-    const { pincode: { selectedPincode }, app: { sessionId }, wishlist: { waitlist } } = getState();
+    const {
+      pincode: { selectedPincode },
+      app: { sessionId },
+      wishlist: { waitlist }
+    } = getState();
     const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
     if (
       (action.error && action.error.error === 'invalid_token') ||
@@ -26,7 +30,9 @@ export default function userMiddleware() {
       dispatch(clearCart());
     }
     if (type === 'signUp/SIGNUP_SUCCESS') {
-      const { result: { token, token_error: tokenError } } = action;
+      const {
+        result: { token, token_error: tokenError }
+      } = action;
       if (!tokenError) {
         dispatch(loginUserAfterSignUp(token));
         dispatch(synCart(sessionId, pincode));
@@ -34,10 +40,10 @@ export default function userMiddleware() {
         if (waitlist !== '') dispatch(syncWishList());
       } else {
         dispatch(notifSend({
-          type: 'warning',
-          msg: 'Unable to singUp at the moment. Please try later !',
-          dismissAfter: 4000
-        }));
+            type: 'warning',
+            msg: 'Unable to singUp at the moment. Please try later !',
+            dismissAfter: 4000
+          }));
       }
     }
     if (type === 'login/LOGIN_SUCCESS') {

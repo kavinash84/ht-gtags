@@ -22,9 +22,9 @@ import { getCities, getOfferStripData, getMiddleBannerData } from 'selectors/hom
 const OFFER_ID = 5;
 
 @connect(({
-  homepage: {
-    categories, banners, products, hashtags, offers, recentlyviewed
-  }, stores, userLogin
+ homepage: {
+ categories, banners, products, hashtags, offers, recentlyviewed
+}, stores, userLogin
 }) => ({
   banners: banners.data,
   homepageCategories: categories.data,

@@ -77,8 +77,8 @@ export default class UpdatePasswordFormContainer extends Component {
   onSubmitUpdatePassword = e => {
     e.preventDefault();
     const {
-      oldPwd, confirmPwd, newPwd, oldPwdError, newPwdError, confirmPwdError
-    } = this.state;
+ oldPwd, confirmPwd, newPwd, oldPwdError, newPwdError, confirmPwdError
+} = this.state;
     const checkOldPwd = isBlank(oldPwd) || oldPwdError;
     const checkNewPwd = isBlank(newPwd) || newPwdError;
     const checkConfirmPwd = isBlank(confirmPwd) || confirmPwdError;

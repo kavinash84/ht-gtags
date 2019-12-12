@@ -35,7 +35,7 @@ function getNoopReducers(reducers, data) {
 }
 
 export default function createStore({
-  history, data, helpers, persistConfig
+ history, data, helpers, persistConfig
 }) {
   if (data && data.app && data.app.csrfToken) {
     /* add csrf token */

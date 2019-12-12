@@ -45,8 +45,8 @@ const CardForm = ({
   gateway,
   setPaymentDetails,
   details: {
-    nameOnCard, cardNumber, cvv, expMonth, expYear
-  },
+ nameOnCard, cardNumber, cvv, expMonth, expYear
+},
   getCardType,
   cardType,
   sessionId,
@@ -147,7 +147,4 @@ CardForm.propTypes = {
   cardType: PropTypes.string,
   padding: PropTypes.string
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CardForm);
+export default connect(mapStateToProps, mapDispatchToProps)(CardForm);

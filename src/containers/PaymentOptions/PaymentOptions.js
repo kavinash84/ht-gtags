@@ -23,7 +23,7 @@ export default class PaymentOptionsContainer extends Component {
       history,
       shipping: { pincode, fullName, phone }
     } = this.props;
-    if ((cart && cart.length === 0) || (pincode === '' || fullName === '' || phone === '')) {
+    if ((cart && cart.length === 0) || pincode === '' || fullName === '' || phone === '') {
       history.push(CART_URL);
     }
   }
@@ -59,6 +59,6 @@ PaymentOptionsContainer.propTypes = {
   shipping: PropTypes.shape({
     fullName: PropTypes.string,
     pincode: PropTypes.string,
-    phon: PropTypes.string
+    phone: PropTypes.string
   })
 };

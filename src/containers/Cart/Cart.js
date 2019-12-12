@@ -21,10 +21,10 @@ const PincodeModalIcon = require('../../../static/map-placeholder.svg');
 
 @connect(
   ({
-    cart, cart: {
-      cartChecked, summary, error, loading, loaded
-    }
-  }) => ({
+ cart, cart: {
+ cartChecked, summary, error, loading, loaded
+}
+}) => ({
     results: getCartList(cart),
     outOfStockList: getStockOutProducts(cart),
     isCartChecked: cartChecked,
@@ -84,8 +84,8 @@ export default class CartContainer extends Component {
   };
   render() {
     const {
-      results, summary, loading, loaded, outOfStockList
-    } = this.props;
+ results, summary, loading, loaded, outOfStockList
+} = this.props;
     return (
       <div className="wrapper">
         <MenuFooter pageTitle="Shopping Cart">
@@ -104,7 +104,7 @@ export default class CartContainer extends Component {
               </Empty>
             </Section>
           ) : null}
-          {!loading && (results && results.length !== 0) ? (
+          {!loading && results && results.length !== 0 ? (
             <div>
               <TitleBar title="Shopping Cart" />
               {outOfStockList && outOfStockList.length > 0 && (

@@ -143,7 +143,9 @@ export const stopLoading = () => ({
 });
 
 export const load = query => (dispatch, getState) => {
-  const { pincode: { loading } } = getState();
+  const {
+    pincode: { loading }
+  } = getState();
   if (loading) {
     dispatch(stopLoading());
     cancel('user cancelled request');

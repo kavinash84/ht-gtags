@@ -10,7 +10,7 @@ const changeDetails = (dispatcher, gateway, name, detailkey) => () => {
 };
 
 const BankCard = ({
-  name, img, setPaymentDetails, gateway, detailkey, currentSelection
+ name, img, setPaymentDetails, gateway, detailkey, currentSelection
 }) => (
   <Div col="4" pr="1rem" onClick={changeDetails(setPaymentDetails, gateway, name, detailkey)}>
     <Div className={styles.bankCard}>

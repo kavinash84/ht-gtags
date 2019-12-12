@@ -16,8 +16,8 @@ const OFFER_ID = 5;
 export default class CategoryCarousel extends Component {
   render() {
     const {
-      data, categoryName, subTitle, id
-    } = this.props;
+ data, categoryName, subTitle, id
+} = this.props;
     return (
       <Section p="0" pt="1.5rem" mb="0" className="catCarousel">
         <Container pr="0" pl="0">

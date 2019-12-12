@@ -73,8 +73,8 @@ class GoogleLogin extends Component {
   };
   render() {
     const {
-      loginViaLogin, session, askContact, loginType, loading
-    } = this.props;
+ loginViaLogin, session, askContact, loginType, loading
+} = this.props;
     const { phone, phoneError, phoneErrorMessage } = this.state;
     const open = askContact && loginType && loginType === 'google';
     return (
@@ -99,10 +99,10 @@ class GoogleLogin extends Component {
                 ta="center"
                 fontFamily="light"
               >
-                {'Update Profile'}
+                Update Profile
               </Heading>
               <Text color="color676767" ta="center">
-                {'Mobile number is required to login'}
+                Mobile number is required to login
               </Text>
             </Div>
           </Row>
@@ -158,7 +158,4 @@ GoogleLogin.propTypes = {
   loading: PropTypes.bool.isRequired
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(GoogleLogin);
+export default connect(mapStateToProps, mapDispatchToProps)(GoogleLogin);

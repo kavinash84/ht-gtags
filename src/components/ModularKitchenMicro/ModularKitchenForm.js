@@ -130,8 +130,8 @@ export default class ModularKitchen extends Component {
     e.preventDefault();
     const { sendFormData } = this.props;
     const {
-      name, phone, email, pincode, address, city, state
-    } = this.state;
+ name, phone, email, pincode, address, city, state
+} = this.state;
     const nameError = isEmpty(name);
     const phoneError = !validateMobile(phone);
     const emailError = !validateEmail(email);
@@ -184,8 +184,8 @@ export default class ModularKitchen extends Component {
   render() {
     const { loading, loaded } = this.props;
     const {
-      name, email, phone, address, pincode, service
-    } = this.state;
+ name, email, phone, address, pincode, service
+} = this.state;
     const correctIcon = require('../../../static/correct.svg');
     const {
       nameError,
@@ -211,35 +211,33 @@ export default class ModularKitchen extends Component {
               </Heading>
             </Div>
           </Row>
-          {
-            <ModularKitchenForm
-              name={name}
-              nameError={nameError}
-              nameErrorMessage={nameErrorMessage}
-              email={email}
-              emailError={emailError}
-              emailErrorMessage={emailErrorMessage}
-              phone={phone}
-              phoneError={phoneError}
-              phoneErrorMessage={phoneErrorMessage}
-              address={address}
-              addressError={addressError}
-              addressErrorMessage={addressErrorMessage}
-              pincode={pincode}
-              pincodeError={pincodeError}
-              pincodeErrorMessage={pincodeErrorMessage}
-              service={service}
-              serviceError={serviceError}
-              serviceErrorMessage={serviceErrorMessage}
-              onChangeName={this.onChangeName}
-              onChangeEmail={this.onChangeEmail}
-              onChangePhone={this.onChangePhone}
-              onChangeAddress={this.onChangeAddress}
-              onChangePincode={this.onChangePincode}
-              onChangeService={this.onChangeService}
-              onSubmitForm={this.onSubmitForm}
-            />
-          }
+          <ModularKitchenForm
+            name={name}
+            nameError={nameError}
+            nameErrorMessage={nameErrorMessage}
+            email={email}
+            emailError={emailError}
+            emailErrorMessage={emailErrorMessage}
+            phone={phone}
+            phoneError={phoneError}
+            phoneErrorMessage={phoneErrorMessage}
+            address={address}
+            addressError={addressError}
+            addressErrorMessage={addressErrorMessage}
+            pincode={pincode}
+            pincodeError={pincodeError}
+            pincodeErrorMessage={pincodeErrorMessage}
+            service={service}
+            serviceError={serviceError}
+            serviceErrorMessage={serviceErrorMessage}
+            onChangeName={this.onChangeName}
+            onChangeEmail={this.onChangeEmail}
+            onChangePhone={this.onChangePhone}
+            onChangeAddress={this.onChangeAddress}
+            onChangePincode={this.onChangePincode}
+            onChangeService={this.onChangeService}
+            onSubmitForm={this.onSubmitForm}
+          />
         </Div>
         {loaded && !loading && (
           <ResponsiveModal

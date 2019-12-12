@@ -37,9 +37,9 @@ const mapDispatchToProps = dispatch =>
   );
 
 const mapStateToProps = ({
-  storelocator: {
-    locationData, locationLoaded, locationLoading, data
-  }
+ storelocator: {
+ locationData, locationLoaded, locationLoading, data
+}
 }) => ({
   city: getCurrentCity(locationData),
   location: getCurrentLocation(locationData),
@@ -86,10 +86,10 @@ class StoreLocator extends React.Component {
     const { dispatch } = this.context.store;
     this.setState({ isLoading: false }, () => {
       dispatch(notifSend({
-        type: 'error',
-        msg,
-        dismissAfter: 4000
-      }));
+          type: 'error',
+          msg,
+          dismissAfter: 4000
+        }));
     });
   };
   getURL = (origin, dest) => {
@@ -483,7 +483,4 @@ StoreLocator.propTypes = {
   redirectCity: PropTypes.string
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(StoreLocator);
+export default connect(mapStateToProps, mapDispatchToProps)(StoreLocator);

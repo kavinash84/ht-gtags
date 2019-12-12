@@ -20,8 +20,8 @@ class CategoryFilter extends React.Component {
 
   render() {
     const {
-      title, checkbox, display, data, history
-    } = this.props;
+ title, checkbox, display, data, history
+} = this.props;
     return (
       <div className={`${styles.filterBlock} dropdownWrapper`}>
         <Button btnType="custom" bg="#FFF" color="#656565" border="none" fontSize="0.75em" tt="uppercase">

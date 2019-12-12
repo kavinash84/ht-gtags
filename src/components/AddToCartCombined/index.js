@@ -40,7 +40,7 @@ const onClick = (item, session, pincode) => dispatcher => e => {
 };
 
 const mapStateToProps = ({
-  app: { sessionId }, pincode, cart, cart: { addingToCart, addedToCart, key }
+ app: { sessionId }, pincode, cart, cart: { addingToCart, addedToCart, key }
 }) => ({
   session: sessionId,
   pincode: pincode.selectedPincode ? pincode.selectedPincode : PINCODE,
@@ -71,60 +71,51 @@ const AddToCartCombined = ({
   const addLoading = addingToCart && stateId === itemId;
   return (
     <Fragment>
-      {
-        <Fragment>
-          {!checkStatus ? (
-            <Button
-              btnType={btnType}
-              border="1px solid"
-              bc={btnColor === 'transparent' ? '#f98d29' : btnColor}
+      <Fragment>
+        {!checkStatus ? (
+          <Button
+            btnType={btnType}
+            border="1px solid"
+            bc={btnColor === 'transparent' ? '#f98d29' : btnColor}
+            color={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
+            bg={btnColor === 'transparent' ? 'transparent' : btnColor}
+            p="4px 20px"
+            lh="1.5"
+            size={size}
+            disabled={addLoading}
+            onClick={onClick(skusData, session, pincode)(addToCartCombined)}
+            className={styles.addToCartBtn}
+            height={height}
+          >
+            {!addLoading && (
+              <AddCart width="18px" height="18px" va="middle" fill={btnColor === 'transparent' ? '#f98d29' : '#FFF'} />
+            )}
+            {addLoading && <Img className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />}
+            <Span
+              ml="2px"
+              fontSize={fontSize}
+              fontFamily="regular"
               color={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
-              bg={btnColor === 'transparent' ? 'transparent' : btnColor}
-              p="4px 20px"
-              lh="1.5"
-              size={size}
-              disabled={addLoading}
-              onClick={onClick(skusData, session, pincode)(addToCartCombined)}
-              className={styles.addToCartBtn}
-              height={height}
+              va="middle"
+              lh="1.8"
             >
-              {!addLoading && (
-                <AddCart
-                  width="18px"
-                  height="18px"
-                  va="middle"
-                  fill={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
-                />
-              )}
-              {addLoading && <Img className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />}
-              <Span
-                ml="2px"
-                fontSize={fontSize}
-                fontFamily="regular"
-                color={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
-                va="middle"
-                lh="1.8"
-              >
-                {addLoading
-                  ? 'Adding..'
-                  : `Add ${products && products.length ? `${products.length} items` : ''} to Cart`}
+              {addLoading ? 'Adding..' : `Add ${products && products.length ? `${products.length} items` : ''} to Cart`}
+            </Span>
+          </Button>
+        ) : (
+          <Div display="block" mb="0">
+            <span className={styles.addedToCart}>
+              <Img width="22px" src={CheckedIcon} display="inline" va="middle" mr="8px" />
+              Added to Cart
+            </span>
+            <Link className={`${styles.goToCart} ${height !== 'auto' && styles.heightFix} `} to={CART_URL}>
+              <Span ml="0" fontSize="12px" fontFamily="regular" color="#FFF" va="text-bottom" lh="1.5">
+                Go to Cart
               </Span>
-            </Button>
-          ) : (
-            <Div display="block" mb="0">
-              <span className={styles.addedToCart}>
-                <Img width="22px" src={CheckedIcon} display="inline" va="middle" mr="8px" />
-                Added to Cart
-              </span>
-              <Link className={`${styles.goToCart} ${height !== 'auto' && styles.heightFix} `} to={CART_URL}>
-                <Span ml="0" fontSize="12px" fontFamily="regular" color="#FFF" va="text-bottom" lh="1.5">
-                  Go to Cart
-                </Span>
-              </Link>
-            </Div>
-          )}
-        </Fragment>
-      }
+            </Link>
+          </Div>
+        )}
+      </Fragment>
     </Fragment>
   );
 };
@@ -158,7 +149,4 @@ AddToCartCombined.propTypes = {
   fontSize: PropTypes.string
 };
 
-export default connect(
-  mapStateToProps,
-  { ...actionCreators }
-)(AddToCartCombined);
+export default connect(mapStateToProps, { ...actionCreators })(AddToCartCombined);

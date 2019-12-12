@@ -533,7 +533,4 @@ ProductDetails.propTypes = {
   combinedbuy: PropTypes.array,
   session: PropTypes.string
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

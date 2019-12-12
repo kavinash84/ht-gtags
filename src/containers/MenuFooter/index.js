@@ -7,8 +7,8 @@ import Header from 'newComponents/Header';
 export default class MenuFooter extends Component {
   render() {
     const {
-      children, pageTitle, seoDescription, seoKeywords
-    } = this.props;
+ children, pageTitle, seoDescription, seoKeywords
+} = this.props;
     return (
       <div>
         {pageTitle && <Helmet title={pageTitle} />}

@@ -121,8 +121,8 @@ export default class LoginFormContainer extends Component {
       phoneErrorMessage
     } = this.state;
     const {
-      loginResponse, askContact, loginType, loading
-    } = this.props;
+ loginResponse, askContact, loginType, loading
+} = this.props;
     const open = askContact && loginType && loginType === 'hometown';
     return (
       <div>
@@ -152,10 +152,10 @@ export default class LoginFormContainer extends Component {
                 ta="center"
                 fontFamily="light"
               >
-                {'Update Profile'}
+                Update Profile
               </Heading>
               <Text color="color676767" ta="center">
-                {'Mobile number is required to login'}
+                Mobile number is required to login
               </Text>
             </Div>
           </Row>

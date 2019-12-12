@@ -30,9 +30,9 @@ const mapDispatchToProps = dispatch =>
   );
 
 const mapStateToProps = ({
-  storelocator: {
-    locationData, locationLoaded, locationLoading, data
-  }
+ storelocator: {
+ locationData, locationLoaded, locationLoading, data
+}
 }) => ({
   city: getCurrentCity(locationData),
   location: getCurrentLocation(locationData),
@@ -75,10 +75,10 @@ class StoreLocator extends React.Component {
   setError = msg => {
     const { dispatch } = this.context.store;
     dispatch(notifSend({
-      type: 'error',
-      msg,
-      dismissAfter: 4000
-    }));
+        type: 'error',
+        msg,
+        dismissAfter: 4000
+      }));
   };
   getURL = (origin, dest) => {
     const baseUrl = 'http://maps.google.com/?';
@@ -473,7 +473,4 @@ StoreLocator.propTypes = {
   locationLoaded: PropTypes.bool.isRequired
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(StoreLocator);
+export default connect(mapStateToProps, mapDispatchToProps)(StoreLocator);

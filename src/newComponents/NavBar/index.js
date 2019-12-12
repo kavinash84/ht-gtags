@@ -17,8 +17,8 @@ import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
 class NavBar extends Component {
   render() {
     const {
-      menuItems, handleEnter, handleLeave, exitOnClick
-    } = this.props;
+ menuItems, handleEnter, handleLeave, exitOnClick
+} = this.props;
     const cats = menuItems
       .filter(menu => menu.visibility === 'on' && menu.sort_order && !Number.isNaN(parseInt(menu.sort_order, 10)))
       .sort((i1, i2) => {
@@ -64,7 +64,7 @@ class NavBar extends Component {
               rel="noopener noreferrer"
               onClick={exitOnClick}
             >
-              {'Modular Kitchens'}
+              Modular Kitchens
             </TextHtV1>
             <BoxHtV1>
               <ButtonHtV1

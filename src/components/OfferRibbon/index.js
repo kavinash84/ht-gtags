@@ -9,7 +9,7 @@ const styles = require('./index.scss');
 const CloseIcon = require('../../../static/close-icon.svg');
 
 const OfferRibbon = ({
-  title, url, onClick, showRibbon
+ title, url, onClick, showRibbon
 }) => (
   <Section bg="offerRibbon" className={showRibbon ? '' : styles.hide} mb="0.3125rem" pt="4px" pb="4px">
     {url === '' ? (

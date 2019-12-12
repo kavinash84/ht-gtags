@@ -67,9 +67,7 @@ const PinCode = ({
           <LiHtV1> Searching.... </LiHtV1>
         </UlHtV1>
       )}
-      {loaded &&
-        showResults &&
-        results.length > 0 && (
+      {loaded && showResults && results.length > 0 && (
         <UlHtV1>
           {results.map((item, index) => (
             <LiHtV1 key={String(index)}>
@@ -104,7 +102,4 @@ PinCode.propTypes = {
   color: PropTypes.string
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PinCode);
+export default connect(mapStateToProps, mapDispatchToProps)(PinCode);

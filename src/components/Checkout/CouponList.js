@@ -18,8 +18,8 @@ class CouponList extends React.Component {
   }
   render() {
     const {
-      coupons, appliedCoupon, handleClick, loading, unapplicablecoupons
-    } = this.props;
+ coupons, appliedCoupon, handleClick, loading, unapplicablecoupons
+} = this.props;
     return (
       <div className={`${styles.offerList} `}>
         {loading && (

@@ -331,7 +331,4 @@ CardForm.propTypes = {
   submitting: PropTypes.bool
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CardForm);
+export default connect(mapStateToProps, mapDispatchToProps)(CardForm);

@@ -29,8 +29,8 @@ export const formFilterLink = (key, selected) => {
     query = paramLink.filter(param => param !== paramLink[1]);
   } else query = paramLink;
   const encode = btoa(JSON.stringify({
-    params: query
-  }));
+      params: query
+    }));
   return `${encode}/?${splitLink[1]}`;
 };
 
@@ -199,8 +199,8 @@ export const getParamsDetailFromLink = (query, filter) => {
   }
 
   const {
-    urlquery, material, price, discount, sortby, sortBy, pageno
-  } = x;
+ urlquery, material, price, discount, sortby, sortBy, pageno
+} = x;
   return {
     query,
     modifiedQuery,

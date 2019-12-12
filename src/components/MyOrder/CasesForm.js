@@ -318,7 +318,4 @@ class CasesFormContainer extends Component {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CasesFormContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(CasesFormContainer);

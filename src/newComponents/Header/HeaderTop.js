@@ -53,8 +53,8 @@ const onClickLogout = dispatcher => e => {
 @withRouter
 @connect(
   ({
-    pincode, userLogin, wishlist, cart, router, profile
-  }) => ({
+ pincode, userLogin, wishlist, cart, router, profile
+}) => ({
     selectedPincode: pincode.selectedPincode,
     isLoggedIn: userLogin.isLoggedIn,
     name: profile.data.first_name,
@@ -114,8 +114,8 @@ export default class HeaderTop extends Component {
   render() {
     const { userPopOver } = this.state;
     const {
-      selectedPincode, isLoggedIn, history, wishListCount, cartCount, logoutUser, name
-    } = this.props;
+ selectedPincode, isLoggedIn, history, wishListCount, cartCount, logoutUser, name
+} = this.props;
 
     return (
       <BoxHtV1>

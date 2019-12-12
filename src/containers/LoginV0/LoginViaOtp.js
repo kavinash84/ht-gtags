@@ -39,8 +39,8 @@ export default class LoginViaOtp extends React.Component {
       resend
     } = this.props;
     const {
-      onSubmitMobileNumber, onSubmitOtp, onChangeMobile, onChangeOtp, handleResend
-    } = this.props;
+ onSubmitMobileNumber, onSubmitOtp, onChangeMobile, onChangeOtp, handleResend
+} = this.props;
     const { resendtimer } = this.state;
     return (
       <div>
