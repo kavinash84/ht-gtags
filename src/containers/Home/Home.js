@@ -24,9 +24,10 @@ import WrapperHtV1 from 'hometown-components-dev/lib/WrapperHtV1';
 
 /* ====== Page Components ====== */
 import CategoryCarousel from 'newComponents/CategoryCarousel';
+import Footer from 'newComponents/Footer';
 import Header from 'newComponents/Header';
-import MainSlider from 'newComponents/MainSlider';
 import GridView from 'newComponents/Home/GridView';
+import MainSlider from 'newComponents/MainSlider';
 import Usp from 'newComponents/Home/Usp';
 
 const sliderImage = require('../../static/slider.png');
@@ -237,10 +238,20 @@ export default class Home extends Component {
                   position: 'relative'
                 }}
               >
-                <AbsoluteHtV1 height="100%" width={1} bg="rgba(0,0,0,0.5)" top={0} left={0} right={0} bottom={0} />
+                <AbsoluteHtV1
+                  height="100%"
+                  width={1}
+                  bg="rgba(0,0,0,0.5)"
+                  sx={{
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0
+                  }}
+                />
                 <RowHtV1 height={380} variant="row.contentCenter" sx={{ position: 'relative' }} flexDirection="column">
                   <BoxHtV1 textAlign="center" mb={30}>
-                    <HeadingHtV1 variant="largeHeading" color="white" mb={10}>
+                    <HeadingHtV1 variant="heading.large" color="white" mb={10}>
                       FIND A STORE NEAR YOU
                     </HeadingHtV1>
                     <TextHtV1 variant="regular" color="white">
@@ -268,6 +279,9 @@ export default class Home extends Component {
               </CardHtV1>
             </ContainerHtV1>
           </SectionHtV1>
+
+          {/* Footer */}
+          <Footer />
         </BodyHtV1>
       </WrapperHtV1>
     );

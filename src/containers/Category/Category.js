@@ -16,6 +16,7 @@ import WrapperHtV1 from 'hometown-components-dev/lib/WrapperHtV1';
 import CommonLayout from 'newComponents/Category/CommonLayout';
 import Header from 'newComponents/Header';
 import MainSlider from 'newComponents/MainSlider';
+import GridView from 'newComponents/Home/GridView';
 // import CategoryFilters from 'components/Category/CategoryFilters';
 // import Title from 'components/Title';
 // import Footer from 'components/Footer';
@@ -53,6 +54,13 @@ export default class Category extends Component {
 
           {/* Main Slider */}
           {category && <MainSlider data={category.main} />}
+
+          {/* Grid View */}
+          <SectionHtV1>
+            <ContainerHtV1>
+              <GridView />
+            </ContainerHtV1>
+          </SectionHtV1>
 
           {/* Category Carousel */}
           {category &&

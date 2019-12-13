@@ -74,7 +74,16 @@ class NavBar extends Component {
                 sx={{ position: 'relative' }}
               >
                 More
-                <AbsoluteHtV1 display="none" zIndex={2} bg="white" border="dropdown" right={0} top={35}>
+                <AbsoluteHtV1
+                  display="none"
+                  bg="white"
+                  border="dropdown"
+                  sx={{
+                    right: 0,
+                    top: 35,
+                    zIndex: 2
+                  }}
+                >
                   <BoxHtV1 mx={0} my={0} py={5}>
                     {more &&
                       more.map((menuItem, i) => (

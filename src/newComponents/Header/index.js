@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -8,6 +8,7 @@ import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
 
 /* ====== Page Components ====== */
 import HeaderTop from 'newComponents/Header/HeaderTop';
+import TopBar from 'newComponents/Header/TopBar';
 import HoverMenuBox from 'newComponents/HoverBox/HoverMenuBox';
 import NavBar from 'newComponents/NavBar';
 
@@ -82,27 +83,30 @@ export default class Header extends Component {
     const { menuItems } = this.props;
 
     return (
-      <BoxHtV1 mt={15}>
-        <ContainerHtV1 pr="0" pl="0" mb={10}>
-          <HeaderTop />
-        </ContainerHtV1>
-        <NavBar
-          exitOnClick={this.exitOnClick}
-          handleEnter={this.enterMenu}
-          handleLeave={this.leaveMenu}
-          menuItems={menuItems}
-        />
-        <ContainerHtV1 pr="0" pl="0">
-          {hoverBox && (
-            <HoverMenuBox
-              handleEnter={this.enterHoverBox}
-              handleLeave={this.leaveHoverBox}
-              menuData={currentMenuData}
-              exitOnClick={this.exitOnClick}
-            />
-          )}
-        </ContainerHtV1>
-      </BoxHtV1>
+      <Fragment>
+        <TopBar />
+        <BoxHtV1 pt={15} sx={{ borderBottom: 'solid 1px #727070' }}>
+          <ContainerHtV1 pr="0" pl="0" mb={10}>
+            <HeaderTop />
+          </ContainerHtV1>
+          <NavBar
+            exitOnClick={this.exitOnClick}
+            handleEnter={this.enterMenu}
+            handleLeave={this.leaveMenu}
+            menuItems={menuItems}
+          />
+          <ContainerHtV1 pr="0" pl="0">
+            {hoverBox && (
+              <HoverMenuBox
+                handleEnter={this.enterHoverBox}
+                handleLeave={this.leaveHoverBox}
+                menuData={currentMenuData}
+                exitOnClick={this.exitOnClick}
+              />
+            )}
+          </ContainerHtV1>
+        </BoxHtV1>
+      </Fragment>
     );
   }
 }
