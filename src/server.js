@@ -213,7 +213,7 @@ app.get(/\/(.*)-(\d+).html/, async (req, res) => {
 /* eslint-disable max-len */
 /* Category url redirection */
 app.get(
-  /^\/(festive-gifts|support|exclusive|tables|buying-guides|bedding|bedroom_furniture|all-products|categories|furniture|home-decor|homefurnishings|tableware|kitchenware|home-improvement|clearance-sale-offer|clearance_sale|design|design-inspiration|gifts|appliances|lighting|solidwood|test_bed|exclusive|invisible|luggage-bags|bed-bath|home-fashion|glossary|kitchen-dining|solid-wood|buying-guides|products|Products|exchange-offer|catalog|)\//,
+  /^\/(hot-deals|festive-gifts|support|exclusive|tables|buying-guides|bedding|bedroom_furniture|all-products|categories|furniture|home-decor|homefurnishings|tableware|kitchenware|home-improvement|clearance-sale-offer|clearance_sale|design|design-inspiration|gifts|appliances|lighting|solidwood|test_bed|exclusive|invisible|luggage-bags|bed-bath|home-fashion|glossary|kitchen-dining|solid-wood|buying-guides|products|Products|exchange-offer|catalog|)\//,
   async (req, res, next) => {
     const data = require('./data/category-urls.json');
     const requestURL = redirectionHelper(req.path);
