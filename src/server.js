@@ -172,7 +172,7 @@ app.use('/checkout/finish/payment/', async (req, res) => {
 });
 /* eslint-disable max-len */
 app.get(
-  /\/(hi-tech|kavi|curators|brands|design-build|bosco-wall-unit-wenge-|mondo-queen-size-bed-in-rubber-wood-with-box-storage|study-office|laopala-diva|libbey--bergner--hometown--milton|living-essence--spaces|orange-tree|ratan-jaipur|treo--lyra--prestige--corelle|arth-art--deco-window|big50-sale|Bosco-Wall-Unit-Wengebrands|chhota-bheem|cultural-concepts--kara--hi|dhoomdhaam-sale|gardenia|gibson|tech|homehq|hometown--machi--hi-tech|incrizma|living-essence--hometown|lyra|marvel|Mondo-Queen-Size-bed-in-rubber-wood-with-Box-Storage|monsoon-sale|nayasa|new-products|portico|prestige--living-essence|rajasthan-decor|sharp|shree-sam|storelocator|stories|support|treo--lyra--prestige--corelle|dkw--spaces|hometown--fns|hometown--gibson|hometown--treo|ocean|ocean--tangerine|spaces--lyra--bohemia|wonderchef--bonita|dealoftheday|\/)/,
+  /\/(hot-deals|hi-tech|kavi|curators|brands|design-build|bosco-wall-unit-wenge-|mondo-queen-size-bed-in-rubber-wood-with-box-storage|study-office|laopala-diva|libbey--bergner--hometown--milton|living-essence--spaces|orange-tree|ratan-jaipur|treo--lyra--prestige--corelle|arth-art--deco-window|big50-sale|Bosco-Wall-Unit-Wengebrands|chhota-bheem|cultural-concepts--kara--hi|dhoomdhaam-sale|gardenia|gibson|tech|homehq|hometown--machi--hi-tech|incrizma|living-essence--hometown|lyra|marvel|Mondo-Queen-Size-bed-in-rubber-wood-with-Box-Storage|monsoon-sale|nayasa|new-products|portico|prestige--living-essence|rajasthan-decor|sharp|shree-sam|storelocator|stories|support|treo--lyra--prestige--corelle|dkw--spaces|hometown--fns|hometown--gibson|hometown--treo|ocean|ocean--tangerine|spaces--lyra--bohemia|wonderchef--bonita|dealoftheday|\/)/,
   (req, res, next) => {
     const data = require('./data/other-urls.json');
     const requestURL = redirectionHelper(req.path);
@@ -213,7 +213,7 @@ app.get(/\/(.*)-(\d+).html/, async (req, res) => {
 /* eslint-disable max-len */
 /* Category url redirection */
 app.get(
-  /^\/(hot-deals|festive-gifts|support|exclusive|tables|buying-guides|bedding|bedroom_furniture|all-products|categories|furniture|home-decor|homefurnishings|tableware|kitchenware|home-improvement|clearance-sale-offer|clearance_sale|design|design-inspiration|gifts|appliances|lighting|solidwood|test_bed|exclusive|invisible|luggage-bags|bed-bath|home-fashion|glossary|kitchen-dining|solid-wood|buying-guides|products|Products|exchange-offer|catalog|)\//,
+  /^\/(festive-gifts|support|exclusive|tables|buying-guides|bedding|bedroom_furniture|all-products|categories|furniture|home-decor|homefurnishings|tableware|kitchenware|home-improvement|clearance-sale-offer|clearance_sale|design|design-inspiration|gifts|appliances|lighting|solidwood|test_bed|exclusive|invisible|luggage-bags|bed-bath|home-fashion|glossary|kitchen-dining|solid-wood|buying-guides|products|Products|exchange-offer|catalog|)\//,
   async (req, res, next) => {
     const data = require('./data/category-urls.json');
     const requestURL = redirectionHelper(req.path);
