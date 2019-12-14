@@ -24,6 +24,7 @@ import WrapperHtV1 from 'hometown-components-dev/lib/WrapperHtV1';
 
 /* ====== Page Components ====== */
 import CategoryCarousel from 'newComponents/CategoryCarousel';
+import Carousel from 'newComponents/Carousel';
 import Footer from 'newComponents/Footer';
 import Header from 'newComponents/Header';
 import GridView from 'newComponents/Home/GridView';
@@ -35,6 +36,37 @@ const bannerImage = require('../../static/banner.png');
 const designBuildLogo = require('../../static/designBuildLogo.png');
 
 const OFFER_ID = 5;
+
+const shareInspireData = [
+  {
+    image_url: 'https://www.hometown.in/media/cms/hometownnew/compressed/1-min-furniture-compressed.jpg',
+    url_key: '/furniture'
+  },
+  {
+    image_url: 'https://www.hometown.in/media/cms/hometownnew/compressed/1-min-furniture-compressed.jpg',
+    url_key: '/furniture'
+  },
+  {
+    image_url: 'https://www.hometown.in/media/cms/hometownnew/compressed/1-min-furniture-compressed.jpg',
+    url_key: '/furniture'
+  },
+  {
+    image_url: 'https://www.hometown.in/media/cms/hometownnew/compressed/1-min-furniture-compressed.jpg',
+    url_key: '/furniture'
+  },
+  {
+    image_url: 'https://www.hometown.in/media/cms/hometownnew/compressed/1-min-furniture-compressed.jpg',
+    url_key: '/furniture'
+  },
+  {
+    image_url: 'https://www.hometown.in/media/cms/hometownnew/compressed/1-min-furniture-compressed.jpg',
+    url_key: '/furniture'
+  },
+  {
+    image_url: 'https://www.hometown.in/media/cms/hometownnew/compressed/1-min-furniture-compressed.jpg',
+    url_key: '/furniture'
+  }
+];
 
 const customDropdownStyles = {
   container: provided => ({
@@ -275,6 +307,15 @@ export default class Home extends Component {
                   </RowHtV1>
                 </RowHtV1>
               </CardHtV1>
+            </ContainerHtV1>
+          </SectionHtV1>
+
+          {/* Share and Inspire */}
+          <SectionHtV1 variant="section.primary">
+            <ContainerHtV1>
+              <LazyLoad height={200} offset={100}>
+                <Carousel title="SHARE AND INSPIRE" data={shareInspireData} />
+              </LazyLoad>
             </ContainerHtV1>
           </SectionHtV1>
 

@@ -15,13 +15,16 @@ import { SUBSCRIPTION as SUBSCRIPTION_API } from 'helpers/apiUrls';
  */
 import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import CallIcon from 'hometown-components-dev/lib/Icons/CallHtV1';
 import Col from 'hometown-components-dev/lib/ColHtV1';
 import Container from 'hometown-components-dev/lib/ContainerHtV1';
 import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
+import EmailIcon from 'hometown-components-dev/lib/Icons/EmailHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
-// import Image from 'hometown-components-dev/lib/ImageHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Li from 'hometown-components-dev/lib/LiHtV1';
-// import LinkRedirect from 'hometown-components-dev/lib/LinkRedirectHtV1';
+import LocationIcon from 'hometown-components-dev/lib/Icons/LocationHtV1';
+import LinkRedirect from 'hometown-components-dev/lib/LinkRedirectHtV1';
 import Row from 'hometown-components-dev/lib/RowHtV1';
 import Section from 'hometown-components-dev/lib/SectionHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
@@ -30,11 +33,12 @@ import Ul from 'hometown-components-dev/lib/UlHtV1';
 /**
  * Icons
  */
-// const fbIcon = require('../../../static/facebook.svg');
-// const twIcon = require('../../../static/twitter.svg');
-// const youtubeIcon = require('../../../static/youtube.svg');
-// const instaIcon = require('../../../static/instagram.svg');
-// const pinIcon = require('../../../static/pinterest.svg');
+const fbIcon = require('../../../static/facebook.svg');
+const twIcon = require('../../../static/twitter.svg');
+const youtubeIcon = require('../../../static/youtube.svg');
+const instaIcon = require('../../../static/instagram.svg');
+const pinIcon = require('../../../static/pinterest.svg');
+const bajajFinserveIcon = require('../../../static/bajaj-finserv.png');
 
 const mapStateToProps = ({ services, homepage, notifs }) => ({
   menuItems: homepage.menu.data,
@@ -49,6 +53,8 @@ const FooterMenuLink = ({ to, title }) => (
     </Link>
   </Li>
 );
+
+const SocialLink = props => <LinkRedirect mr={15} {...props} />;
 
 FooterMenuLink.propTypes = {
   to: PropTypes.string.isRequired,
@@ -187,6 +193,7 @@ class Footer extends React.Component {
                     </a>
                   </Li>
                 </Ul>
+                <Image src={bajajFinserveIcon} alt="Bajaj Finserv" mt={20} />
               </Box>
             </Col>
             <Col width={[1, 2 / 3, 3 / 12]}>
@@ -195,17 +202,25 @@ class Footer extends React.Component {
                 <Ul>
                   <Li>
                     <a href="tel:1800-210-0004" rel="noreferrer noopener" target="_blank">
-                      <Text variant="footerLink">1800-210-0004</Text>
+                      <Text variant="footerLink">
+                        <CallIcon mr={10} /> 1800-210-0004
+                      </Text>
                     </a>
                   </Li>
                   <Li>
                     <a href="mailto:care@hometown.in" rel="noreferrer noopener" target="_blank">
-                      <Text variant="footerLink">care@hometown.in</Text>
+                      <Text variant="footerLink">
+                        <EmailIcon mr={10} />
+                        care@hometown.in
+                      </Text>
                     </a>
                   </Li>
                   <Li>
                     <Link to="/store-locator">
-                      <Text variant="footerLink">Store Locator</Text>
+                      <Text variant="footerLink">
+                        <LocationIcon mr={10} />
+                        Store Locator
+                      </Text>
                     </Link>
                   </Li>
                 </Ul>
@@ -239,11 +254,23 @@ class Footer extends React.Component {
                   </Text>
                 </Row>
               )}
-              {/* <Row>
-                <LinkRedirect>
-                  <Image src={youtubeIcon} />
-                </LinkRedirect>
-              </Row> */}
+              <Row mt={15}>
+                <SocialLink target="_blank" href="https://www.facebook.com/hometown.in/">
+                  <Image src={fbIcon} alt="Facebook" />
+                </SocialLink>
+                <SocialLink target="_blank" href="https://twitter.com/HomeTown_In/">
+                  <Image src={twIcon} alt="Twitter" />
+                </SocialLink>
+                <SocialLink target="_blank" href="https://www.youtube.com/channel/UCBZGArWnKT6MYYwOsPCNjiw">
+                  <Image src={youtubeIcon} alt="Youtube" />
+                </SocialLink>
+                <SocialLink target="_blank" href="https://www.instagram.com/hometownindia/">
+                  <Image src={instaIcon} alt="Instagram" />
+                </SocialLink>
+                <SocialLink target="_blank" href="https://in.pinterest.com/hometownstore/">
+                  <Image src={pinIcon} alt="Pinterest" />
+                </SocialLink>
+              </Row>
             </Col>
           </Row>
           <Row variant="row.contentCenter" mt={30}>
