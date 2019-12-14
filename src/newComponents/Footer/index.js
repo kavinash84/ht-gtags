@@ -20,18 +20,19 @@ import Container from 'hometown-components-dev/lib/ContainerHtV1';
 import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 // import Image from 'hometown-components-dev/lib/ImageHtV1';
+import Li from 'hometown-components-dev/lib/LiHtV1';
+// import LinkRedirect from 'hometown-components-dev/lib/LinkRedirectHtV1';
 import Row from 'hometown-components-dev/lib/RowHtV1';
 import Section from 'hometown-components-dev/lib/SectionHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Ul from 'hometown-components-dev/lib/UlHtV1';
-import Li from 'hometown-components-dev/lib/LiHtV1';
 
 /**
  * Icons
  */
 // const fbIcon = require('../../../static/facebook.svg');
 // const twIcon = require('../../../static/twitter.svg');
-// const ytIcon = require('../../../static/youtube.svg');
+// const youtubeIcon = require('../../../static/youtube.svg');
 // const instaIcon = require('../../../static/instagram.svg');
 // const pinIcon = require('../../../static/pinterest.svg');
 
@@ -132,7 +133,7 @@ class Footer extends React.Component {
  email, emailError, emailErrorMessage, already
 } = this.state;
     return (
-      <Section bg="bgFooter" pt={30} pb={10}>
+      <Section bg="bgFooter" pt={30} pb={10} mb={0}>
         <Container variant="container">
           <Row>
             <Col width={[1, 2 / 3, 2 / 12]}>
@@ -210,39 +211,39 @@ class Footer extends React.Component {
                 </Ul>
               </Box>
             </Col>
-            <Col width={[1, 1, 5 / 12]}>
+            <Col width={[1, 1, 5 / 12]} pl={[0, 0, 50]}>
               {!already ? (
                 <form onSubmit={this.handleSubmit}>
-                  <Box col="9">
-                    <FormInput
-                      label=""
-                      onChange={this.onChangeEmail}
-                      value={email}
-                      type="text"
-                      placeholder=""
-                      feedBackError={emailError}
-                      feedBackMessage={emailErrorMessage}
-                    />
-                  </Box>
-                  <Box col="3">
-                    <Button
-                      btnType="primary"
-                      boder="solid 1px rgba(151,151,151,0.47)"
-                      fontFamily="regular"
-                      height="38px"
-                      mt="0"
-                      ml="-1px"
-                      onClick={this.handleSubmit}
-                    >
-                      Subscribe
-                    </Button>
-                  </Box>
+                  <Row>
+                    <Box width={9 / 12}>
+                      <FormInput
+                        label=""
+                        onChange={this.onChangeEmail}
+                        value={email}
+                        type="text"
+                        feedBackError={emailError}
+                        feedBackMessage={emailErrorMessage}
+                        variant="inputSearch"
+                        placeholder="Enter your email address"
+                      />
+                    </Box>
+                    <Box width={3 / 12}>
+                      <Button onClick={this.handleSubmit}>Subscribe</Button>
+                    </Box>
+                  </Row>
                 </form>
               ) : (
-                <Text color="green" fontSize="0.955rem" mt="0" mb="0" lh="2" ta="left">
-                  You have been successfully subscribed to the Newsletter
-                </Text>
+                <Row>
+                  <Text color="green" fontSize="0.955rem" mt="0" mb="0" lh="2" ta="left">
+                    You have been successfully subscribed to the Newsletter
+                  </Text>
+                </Row>
               )}
+              {/* <Row>
+                <LinkRedirect>
+                  <Image src={youtubeIcon} />
+                </LinkRedirect>
+              </Row> */}
             </Col>
           </Row>
           <Row variant="row.contentCenter" mt={30}>

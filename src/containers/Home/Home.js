@@ -197,13 +197,11 @@ export default class Home extends Component {
           {/* LET US DESIGN FOR YOU */}
           <SectionHtV1>
             <ContainerHtV1>
-              <RowHtV1 mb={24}>
-                <ColHtV1 justifyContent="center">
-                  <TextHtV1 variant="text.catSliderTitle">LET US DESIGN FOR YOU</TextHtV1>
-                </ColHtV1>
+              <RowHtV1 mb={24} justifyContent="center">
+                <TextHtV1 variant="text.catSliderTitle">LET US DESIGN FOR YOU</TextHtV1>
               </RowHtV1>
               <RowHtV1>
-                <ColHtV1 flexDirection="column">
+                <ColHtV1 variant="colBasis" flexDirection="column">
                   <BoxHtV1 position="relative" mb={20}>
                     <ImageHtV1 src={sliderImage} />
                     <ImageHtV1 src={designBuildLogo} variant="image.logoHomeTown" />
@@ -212,7 +210,7 @@ export default class Home extends Component {
                     Design and Build
                   </HeadingHtV1>
                 </ColHtV1>
-                <ColHtV1 flexDirection="column">
+                <ColHtV1 variant="colBasis" flexDirection="column">
                   <BoxHtV1 position="relative" mb={20}>
                     <ImageHtV1 src={bannerImage} />
                     <ImageHtV1

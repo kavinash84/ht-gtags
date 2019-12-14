@@ -120,15 +120,15 @@ export default class HeaderTop extends Component {
     return (
       <BoxHtV1>
         <RowHtV1 alignItems="center">
-          <ColHtV1 variant="col-3">
+          <ColHtV1 width={3 / 12}>
             <Link to={HOME_URL}>
               <ImageHtV1 height={28} src={LogoIcon} alt="Hometown" />
             </Link>
           </ColHtV1>
-          <ColHtV1 variant="col-4">
+          <ColHtV1 width={4 / 12}>
             <Search />
           </ColHtV1>
-          <ColHtV1 variant="col-5" flexDirection="row" justifyContent="flex-end">
+          <ColHtV1 width={5 / 12} flexDirection="row" justifyContent="flex-end">
             <ButtonHtV1 variant="link" onClick={this.onOpenPincodeModal}>
               <FlexHtV1 variant="row.alignCenter">
                 <LocationIcon />
