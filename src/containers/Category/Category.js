@@ -4,17 +4,20 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 
 /* ====== Components ====== */
-// import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import BodyHtV1 from 'hometown-components-dev/lib/BodyHtV1';
-import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
-// import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
-import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
-import WrapperHtV1 from 'hometown-components-dev/lib/WrapperHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Body from 'hometown-components-dev/lib/BodyHtV1';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
+import Section from 'hometown-components-dev/lib/SectionHtV1';
+import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 
 /* ====== Page Components ====== */
-// import Menu from 'containers/MenuNew/index';
 import CommonLayout from 'newComponents/Category/CommonLayout';
 import Header from 'newComponents/Header';
+import Footer from 'newComponents/Footer';
 import MainSlider from 'newComponents/MainSlider';
 import GridView from 'newComponents/Home/GridView';
 // import CategoryFilters from 'components/Category/CategoryFilters';
@@ -43,35 +46,74 @@ export default class Category extends Component {
 
     /* eslint-disable react/no-danger */
     return (
-      <WrapperHtV1>
+      <Wrapper>
         <Helmet title={`${(seoInfo && seoInfo.page_title) || (currentCategory && currentCategory.toUpperCase())}`}>
           <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
           <meta name="description" content={seoInfo && seoInfo.meta_description} />
         </Helmet>
-        <BodyHtV1>
+        <Body>
           {/* Header */}
           <Header />
+
+          {/* Offer Bar */}
+          <Box bg="heading" pt={30} pb={20}>
+            <Container>
+              <Row justifyContent="center">
+                <Col
+                  variant="col-4"
+                  textAlign="center"
+                  sx={{
+                    borderRight: 'whiteMedium'
+                  }}
+                >
+                  <Text variant="textLight" color="white">
+                    Limited time offer
+                  </Text>
+                  <Heading variant="heading.medium" color="white" py={6}>
+                    Up to 35% off
+                  </Heading>
+                  <Heading fontSize={16} color="white">
+                    Coupon Code: SUPER35
+                  </Heading>
+                </Col>
+                <Col variant="col-4" textAlign="center">
+                  <Text variant="textLight" color="white">
+                    Limited time offer
+                  </Text>
+                  <Heading variant="heading.medium" color="white" py={6}>
+                    Up to 35% off
+                  </Heading>
+                  <Heading fontSize={16} color="white">
+                    Coupon Code: SUPER35
+                  </Heading>
+                </Col>
+              </Row>
+            </Container>
+          </Box>
 
           {/* Main Slider */}
           {category && <MainSlider data={category.main} />}
 
           {/* Grid View */}
-          <SectionHtV1>
-            <ContainerHtV1>
+          <Section>
+            <Container>
               <GridView />
-            </ContainerHtV1>
-          </SectionHtV1>
+            </Container>
+          </Section>
 
           {/* Category Carousel */}
           {category &&
             category.sections &&
             category.sections.map((cat, index) => (
-              <SectionHtV1 key={String(index)}>
-                <ContainerHtV1>{CommonLayout(cat.component, cat.title, cat.data, cat.grid)}</ContainerHtV1>
-              </SectionHtV1>
+              <Section key={String(index)}>
+                <Container>{CommonLayout(cat.component, cat.title, cat.data, cat.grid)}</Container>
+              </Section>
             ))}
-        </BodyHtV1>
-      </WrapperHtV1>
+
+          {/* Footer */}
+          <Footer />
+        </Body>
+      </Wrapper>
     );
   }
 }
