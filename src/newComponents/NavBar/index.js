@@ -46,7 +46,7 @@ class NavBar extends Component {
               >
                 {menuItem.name === 'Hot Deals' ? (
                   <Fragment>
-                    <Label as={Absolute} variant="menuNewHtAbsolute">
+                    <Label as={Absolute} variant="menuNew">
                       New
                     </Label>
                     {menuItem.name}
