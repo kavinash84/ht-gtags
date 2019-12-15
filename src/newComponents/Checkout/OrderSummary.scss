@@ -1,0 +1,15 @@
+@import "../../theme/_variables";
+@import "../../theme/_mixins";
+
+.orderSummary {
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid #ededed;
+  // box-shadow: 0 5px 14px 0 rgba(0, 0, 0, 0.09);
+  padding: 1rem;
+}
+.questions {
+  margin-top: 0.625rem;
+}
+.totalWrapper {
+  border-top: 1px solid #ebebeb;
+}
