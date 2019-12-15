@@ -6,7 +6,7 @@ import { formatAmount } from 'utils/formatters';
 import { formatProductURL } from 'utils/helper';
 
 /* ====== Components ====== */
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
 
 /* ====== Page Components ====== */
 import Title from 'newComponents/Title';
@@ -25,7 +25,7 @@ const ProductCarousel = ({
   length
   // height
 }) => (
-  <BoxHtV1>
+  <Box>
     <Title title={title} />
     <SlickSlider settings={adjustSlides(length)}>
       {data.map((item, index) => (
@@ -45,7 +45,7 @@ const ProductCarousel = ({
         </div>
       ))}
     </SlickSlider>
-  </BoxHtV1>
+  </Box>
 );
 
 ProductCarousel.defaultProps = {

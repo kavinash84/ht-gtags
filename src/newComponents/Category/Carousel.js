@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 /* ====== Components ====== */
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
 
 /* ====== Page Components ====== */
 import Title from 'newComponents/Title';
@@ -16,8 +16,8 @@ const adjustSlides = length => ({
 });
 
 const CategoryCarousel = ({ data, categoryName }) => (
-  <BoxHtV1>
-    <Title title={categoryName} subTitle="" ta="center" />
+  <Box>
+    {categoryName !== null && <Title title={categoryName} subTitle="" textAlign="center" />}
     <SlickSlider settings={adjustSlides(data.length)}>
       {data.map((slide, index) => (
         <div key={String(index)}>
@@ -25,19 +25,17 @@ const CategoryCarousel = ({ data, categoryName }) => (
         </div>
       ))}
     </SlickSlider>
-  </BoxHtV1>
+  </Box>
 );
 
 CategoryCarousel.defaultProps = {
   data: [],
   categoryName: ''
-  // layout: 'square'
 };
 
 CategoryCarousel.propTypes = {
   data: PropTypes.array,
   categoryName: PropTypes.string
-  // layout: PropTypes.string
 };
 
 export default CategoryCarousel;

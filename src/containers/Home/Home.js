@@ -28,6 +28,7 @@ import Footer from 'newComponents/Footer';
 import Header from 'newComponents/Header';
 import GridView from 'newComponents/Home/GridView';
 import MainSlider from 'newComponents/MainSlider';
+import Title from 'newComponents/Title';
 import Usp from 'newComponents/Home/Usp';
 
 const sliderImage = require('../../static/slider.png');
@@ -225,8 +226,8 @@ export default class Home extends Component {
           {/* LET US DESIGN FOR YOU */}
           <Section>
             <Container>
-              <Row mb={24} justifyContent="center">
-                <Text variant="text.catSliderTitle">LET US DESIGN FOR YOU</Text>
+              <Row justifyContent="center">
+                <Title title="LET US DESIGN FOR YOU" />
               </Row>
               <Row>
                 <Col variant="colBasis" flexDirection="column">

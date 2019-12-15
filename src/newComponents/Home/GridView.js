@@ -1,111 +1,123 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 /* ====== Components ====== */
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import ColHtV1 from 'hometown-components-dev/lib/ColHtV1';
-import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
-// import GridItem from 'hometown-components-dev/lib/MasonryGrid/Item';
-// import MasonryGrid from 'hometown-components-dev/lib/MasonryGrid';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Section from 'hometown-components-dev/lib/SectionHtV1';
 
-const HomeGridView = () => (
-  <BoxHtV1>
-    <RowHtV1>
-      <ColHtV1 variant="col-8" px={10}>
-        <RowHtV1>
-          <ColHtV1 variant="col-8" px={10} mt={20}>
-            <BoxHtV1
-              sx={{
-                height: '330px',
-                backgroundImage: 'url(https://www.hometown.in/media/cms/hometown201920/group-4.jpg)',
-                backgroundSize: 'cover',
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'center',
-                bg: 'filterBg'
-              }}
-            />
-          </ColHtV1>
-          <ColHtV1 variant="col-4" px={10}>
-            <BoxHtV1
-              sx={{
-                height: '400px',
-                backgroundImage: 'url(https://www.hometown.in/media/cms/hometown201920/plates.jpg)',
-                backgroundSize: 'cover',
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'center',
-                bg: 'filterBg'
-              }}
-            />
-          </ColHtV1>
-          <ColHtV1 variant="col-5" px={10} mt={-30}>
-            <BoxHtV1
-              sx={{
-                height: '400px',
-                backgroundImage: 'url(https://www.hometown.in/media/cms/hometown201920/group-2.jpg)',
-                backgroundSize: 'cover',
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'center',
-                bg: 'filterBg'
-              }}
-            />
-          </ColHtV1>
-          <ColHtV1 variant="col-7" px={10} mt={20}>
-            <BoxHtV1
-              sx={{
-                height: '400px',
-                backgroundImage: 'url(https://www.hometown.in/media/cms/hometown201920/group-7.jpg)',
-                backgroundSize: 'cover',
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'center',
-                bg: 'filterBg'
-              }}
-            />
-          </ColHtV1>
-        </RowHtV1>
-      </ColHtV1>
-      <ColHtV1 variant="col-4" px={10}>
-        <BoxHtV1
-          mt={20}
-          sx={{
-            height: '300px',
-            backgroundImage: 'url(https://www.hometown.in/media/cms/hometown201920/group-8.jpg)',
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center',
-            bg: 'filterBg'
-          }}
-        />
-        <BoxHtV1
-          mt={20}
-          sx={{
-            height: '450px',
-            backgroundImage: 'url(https://www.hometown.in/media/cms/hometown201920/group-3.jpg)',
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center',
-            bg: 'filterBg'
-          }}
-        />
-      </ColHtV1>
-    </RowHtV1>
-    {/* <MasonryGrid>
-      <GridItem
-        to="/home-furnishings/bedding/bed-sheets"
-        src="https://www.hometown.in/media/cms/hometown201920/group-4.jpg"
-      />
-      <GridItem to="/home-furnishings" src="https://www.hometown.in/media/cms/hometown201920/group-8.jpg" />
-      <GridItem to="/home-decor" src="https://www.hometown.in/media/cms/hometown201920/plates.jpg" />
-      <GridItem to="/tableware" src="https://www.hometown.in/media/cms/hometown201920/group-7.jpg" />
-      <GridItem to="/home-furnishings" src="https://www.hometown.in/media/cms/hometown201920/group-2.jpg" />
-      <GridItem to="/home-decor" src="https://www.hometown.in/media/cms/hometown201920/group-3.jpg" />
-      <GridItem to="/tableware" src="https://www.hometown.in/media/cms/hometown201920/group-4.jpg" />
-      <GridItem to="/home-decor" src="https://www.hometown.in/media/cms/hometown201920/group-8.jpg" />
-    </MasonryGrid> */}
-  </BoxHtV1>
+/* ====== Page Components ====== */
+import Title from 'newComponents/Title';
+
+const GridView = ({
+  categoryName
+  // data
+}) => (
+  <Section>
+    <Container>
+      {categoryName !== null && (
+        <Row justifyContent="center">
+          <Title title={categoryName} />
+        </Row>
+      )}
+      <Row>
+        <Col variant="col-8" pl={10} pr={16}>
+          <Row>
+            <Col variant="col-8" px={10} mt={20}>
+              <Box
+                sx={{
+                  height: '330px',
+                  backgroundImage: 'url(https://www.hometown.in/media/cms/hometown201920/group-4.jpg)',
+                  backgroundSize: 'cover',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'center',
+                  bg: 'filterBg'
+                }}
+              />
+            </Col>
+            <Col variant="col-4" px={10}>
+              <Box
+                sx={{
+                  height: '400px',
+                  backgroundImage: 'url(https://www.hometown.in/media/cms/hometown201920/plates.jpg)',
+                  backgroundSize: 'cover',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'center',
+                  bg: 'filterBg'
+                }}
+              />
+            </Col>
+            <Col variant="col-5" px={10} mt={-30}>
+              <Box
+                sx={{
+                  height: '400px',
+                  backgroundImage: 'url(https://www.hometown.in/media/cms/hometown201920/group-2.jpg)',
+                  backgroundSize: 'cover',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'center',
+                  bg: 'filterBg'
+                }}
+              />
+            </Col>
+            <Col variant="col-7" px={10} mt={20}>
+              <Box
+                sx={{
+                  height: '400px',
+                  backgroundImage: 'url(https://www.hometown.in/media/cms/hometown201920/group-7.jpg)',
+                  backgroundSize: 'cover',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'center',
+                  bg: 'filterBg'
+                }}
+              />
+            </Col>
+          </Row>
+        </Col>
+        <Col variant="col-4" px={10}>
+          <Box
+            mt={20}
+            sx={{
+              height: '300px',
+              backgroundImage: 'url(https://www.hometown.in/media/cms/hometown201920/group-8.jpg)',
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center',
+              bg: 'filterBg'
+            }}
+          />
+          <Box
+            mt={20}
+            sx={{
+              height: '400px',
+              backgroundImage: 'url(https://www.hometown.in/media/cms/hometown201920/group-3.jpg)',
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center',
+              bg: 'filterBg'
+            }}
+          />
+          <Box mt={20}>
+            <Button width={1} type="button" fontSize={20} height={50}>
+              See All
+            </Button>
+          </Box>
+        </Col>
+      </Row>
+    </Container>
+  </Section>
 );
 
-HomeGridView.defaultProps = {};
+GridView.defaultProps = {
+  // data: [],
+  categoryName: ''
+};
 
-HomeGridView.propTypes = {};
+GridView.propTypes = {
+  // data: PropTypes.array,
+  categoryName: PropTypes.string
+};
 
-export default HomeGridView;
+export default GridView;

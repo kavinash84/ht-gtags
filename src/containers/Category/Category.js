@@ -19,10 +19,6 @@ import CommonLayout from 'newComponents/Category/CommonLayout';
 import Header from 'newComponents/Header';
 import Footer from 'newComponents/Footer';
 import MainSlider from 'newComponents/MainSlider';
-import GridView from 'newComponents/Home/GridView';
-// import CategoryFilters from 'components/Category/CategoryFilters';
-// import Title from 'components/Title';
-// import Footer from 'components/Footer';
 // import SeoContent from 'components/SeoContent';
 
 // const getSubMenu = (categories, key) =>
@@ -81,10 +77,10 @@ export default class Category extends Component {
                     Limited time offer
                   </Text>
                   <Heading variant="heading.medium" color="white" py={6}>
-                    Up to 35% off
+                    Up to 15% off
                   </Heading>
                   <Heading fontSize={16} color="white">
-                    Coupon Code: SUPER35
+                    Selected range of home decor.
                   </Heading>
                 </Col>
               </Row>
@@ -93,13 +89,6 @@ export default class Category extends Component {
 
           {/* Main Slider */}
           {category && <MainSlider data={category.main} />}
-
-          {/* Grid View */}
-          <Section>
-            <Container>
-              <GridView />
-            </Container>
-          </Section>
 
           {/* Category Carousel */}
           {category &&
