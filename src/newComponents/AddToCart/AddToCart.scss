@@ -1,0 +1,53 @@
+@import "../../theme/_variables";
+@import "../../theme/_mixins";
+
+.addedToCart {
+  line-height: 1.5;
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  font-size: 0.75rem;
+  color: $textFull;
+  background-color: transparent;
+  border: none;
+  padding: 0px 5px 0 0;
+  margin: 0 0 0 0;
+}
+.goToCart {
+  line-height: 1.8;
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  padding: .375rem .75rem;
+  font-size: 14px;
+  color: #515151;
+  background-color: #515151;
+  border-color: #515151;
+  border: 1px solid;
+  padding: 4px 10px 3px;
+  margin: 0 0 0 5px;
+  border-radius: 3px;
+  &.heightFix {
+    height: 50px;
+    padding: 8px 15px;
+    line-height: 2.6;
+    span {
+      font-size: 14px;
+    }
+  }
+  &:hover {
+    opacity: 0.85;
+    color: #515151;
+  }
+}
+.addToCartBtn {
+  transition: 0.75s all ease;
+  border-radius: 3px;
+  &:hover {
+    opacity: 0.85;
+  }
+}
