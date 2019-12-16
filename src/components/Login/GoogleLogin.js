@@ -129,7 +129,7 @@ class GoogleLogin extends Component {
                 className="google-login-btn"
                 onClick={e => {
                   e.preventDefault();
-                  loginViaLogin('', session, phone);
+                  loginViaLogin({}, session, phone);
                 }}
               >
                 {loading ? (
@@ -158,7 +158,4 @@ GoogleLogin.propTypes = {
   loading: PropTypes.bool.isRequired
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(GoogleLogin);
+export default connect(mapStateToProps, mapDispatchToProps)(GoogleLogin);

@@ -32,7 +32,7 @@ const initialState = {
   error: false,
   errorMessage: '',
   loginType: '',
-  prevToken: ''
+  tokenData: {}
 };
 // {
 //   "loaded": false,
@@ -68,8 +68,10 @@ export default function reducer(state = initialState, action = {}) {
         accessToken: action.result.access_token,
         refreshToken: action.result.refresh_token,
         meta: action.result.meta,
+        askContact: false,
+        askName: false,
         loginError: '',
-        prevToken: ''
+        tokenData: {}
       };
     case LOGIN_FAIL:
       return {
@@ -79,7 +81,8 @@ export default function reducer(state = initialState, action = {}) {
         askContact: action.error.askContact || false,
         askName: action.error.askName || false,
         loginType: action.error.loginType || '',
-        prevToken: action.error.askContact && action.error.token ? action.error.token : ''
+        tokenData:
+          (action.error.askContact || action.error.askName) && action.error.tokenData ? action.error.tokenData : {}
       };
     case LOGIN_AFTER_SIGNUP:
       return {
@@ -184,21 +187,31 @@ export const login = data => ({
     }
   }
 });
-export const googleLogin = (newToken, session, phone) => (dispatch, getState) =>
+export const googleLogin = (result, session, phone) => (dispatch, getState) =>
   dispatch({
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
     promise: async ({ client }) => {
       const {
-        userLogin: { prevToken }
+        userLogin: { tokenData }
       } = getState();
+      console.log('oj');
+      const data = phone && tokenData.tokenId ? tokenData : result;
+      /* eslint-disable */
+      const {
+        tokenId,
+        profileObj: { name }
+      } = data;
+      /* eslint-disable */
+      console.log('failed');
       try {
         const postData = {
-          token: phone && prevToken ? prevToken : newToken,
+          token: tokenId,
           client_secret: clientSecret,
           client_id: clientId,
           grant_type: 'password',
           session_id: session,
-          phone
+          phone,
+          full_name: name
         };
         const response = await client.post(GOOGLE_LOGIN_API, postData);
         await setToken({ client })(response);
@@ -208,7 +221,7 @@ export const googleLogin = (newToken, session, phone) => (dispatch, getState) =>
         const error = {
           ...err,
           loginType: 'google',
-          token: newToken
+          tokenData: result
         };
         throw error;
       }

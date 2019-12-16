@@ -12,7 +12,7 @@ import Img from 'hometown-components/lib/Img';
 import Button from 'hometown-components/lib/Buttons';
 import ImageShimmer from 'hometown-components/lib/ImageShimmer';
 import { login, getOtp, resendOtp } from 'redux/modules/login';
-import { validateMobile } from 'utils/validation';
+import { validateMobile, isEmpty, checkSpecialChar } from 'utils/validation';
 import { allowNChar, allowTypeOf } from 'utils/helper';
 
 import LoginViaOtp from './LoginViaOtp';
@@ -64,6 +64,10 @@ export default class LoginFormContainer extends Component {
     loginviaotp: false,
     mobile: '',
     otp: '',
+    otpError: false,
+    name: '',
+    nameError: false,
+    nameErrorMessage: 'Enter a valid name, without special characters !',
     otpErrorMessage: 'OTP Should be 6 Characters',
     mobilesubmitted: false,
     resend: false
@@ -105,6 +109,18 @@ export default class LoginFormContainer extends Component {
       otpError: false
     });
   };
+
+  onChangeName = e => {
+    const { value } = e.target;
+    const nameCheck = isEmpty(value) || checkSpecialChar(value);
+    if (nameCheck) {
+      return;
+    }
+    this.setState({
+      name: value,
+      nameError: false
+    });
+  };
   onSubmitMobileNumber = e => {
     e.preventDefault();
     const { mobile, resend } = this.state;
@@ -126,7 +142,19 @@ export default class LoginFormContainer extends Component {
     const { otp } = this.state;
     if (otp.length < 6) {
       return this.setState({
-        otpError: true
+        nameError: true
+      });
+    }
+    const { dispatch } = this.context.store;
+    dispatch(login(this.state));
+  };
+  onSubmitName = e => {
+    e.preventDefault();
+    const { name } = this.state;
+    const isInvalid = isEmpty(name) || checkSpecialChar(name);
+    if (isInvalid) {
+      return this.setState({
+        nameError: true
       });
     }
     const { dispatch } = this.context.store;
@@ -152,6 +180,9 @@ export default class LoginFormContainer extends Component {
       mobileError,
       mobileErrorMessage,
       otp,
+      name,
+      nameError,
+      nameErrorMessage,
       otpError,
       otpErrorMessage,
       mobilesubmitted,
@@ -201,12 +232,17 @@ export default class LoginFormContainer extends Component {
                   ) : (
                     <LoginViaOtp
                       onChangeMobile={this.onChangeMobile}
-                      onChangeOtp={this.onChangeOtp}
                       onSubmitMobileNumber={this.onSubmitMobileNumber}
+                      onChangeOtp={this.onChangeOtp}
                       onSubmitOtp={this.onSubmitOtp}
                       otp={otp}
                       otpError={otpError}
                       otpErrorMessage={otpErrorMessage}
+                      onChangeName={this.onChangeName}
+                      onSubmitName={this.onSubmitName}
+                      name={name}
+                      nameError={nameError}
+                      nameErrorMessage={nameErrorMessage}
                       mobile={mobile}
                       mobileError={mobileError}
                       mobileErrorMessage={mobileErrorMessage}
@@ -216,6 +252,7 @@ export default class LoginFormContainer extends Component {
                       loggingIn={loggingIn}
                       handleResend={this.handleResend}
                       resend={resend}
+                      askName={askName}
                     />
                   )}
                 </Div>

@@ -2,6 +2,7 @@ import React from 'react';
 import FormInput from 'hometown-components/lib/Forms/FormInput';
 import Button from 'hometown-components/lib/Buttons';
 import PropTypes from 'prop-types';
+/* eslint-disable */
 
 export default class LoginViaOtp extends React.Component {
   state = {
@@ -36,10 +37,20 @@ export default class LoginViaOtp extends React.Component {
       mobilesubmitted,
       loading,
       loggingIn,
-      resend
+      resend,
+      askName,
+      name,
+      nameError,
+      nameErrorMessage
     } = this.props;
     const {
-      onSubmitMobileNumber, onSubmitOtp, onChangeMobile, onChangeOtp, handleResend
+      onSubmitMobileNumber,
+      onSubmitOtp,
+      onChangeMobile,
+      onChangeOtp,
+      handleResend,
+      onChangeName,
+      onSubmitName
     } = this.props;
     const { resendtimer } = this.state;
     return (
@@ -67,6 +78,31 @@ export default class LoginViaOtp extends React.Component {
               disabled={loading}
             >
               GET OTP
+            </Button>
+          </form>
+        ) : askName ? (
+          <form onSubmit={onSubmitName}>
+            <FormInput
+              label="Name"
+              onChange={onChangeName}
+              value={name}
+              type="text"
+              placeholder="Please enter your name!"
+              feedBackError={nameError}
+              feedBackMessage={nameErrorMessage}
+            />
+            <Button
+              btnType="primary"
+              size="block"
+              boder="solid 1px rgba(151,151,151,0.47)"
+              fontFamily="regular"
+              height="38px"
+              mt="0"
+              ml="-1px"
+              onClick={this.onSubmitName}
+              disabled={loggingIn}
+            >
+              Update & Login
             </Button>
           </form>
         ) : (
@@ -124,7 +160,11 @@ LoginViaOtp.defaultProps = {
   mobileErrorMessage: '',
   otp: '',
   otpError: false,
-  otpErrorMessage: ''
+  otpErrorMessage: '',
+  name: '',
+  nameError: false,
+  nameErrorMessage: '',
+  askName: false
 };
 LoginViaOtp.propTypes = {
   mobilesubmitted: PropTypes.bool,
@@ -141,5 +181,11 @@ LoginViaOtp.propTypes = {
   onSubmitOtp: PropTypes.func.isRequired,
   onChangeMobile: PropTypes.func.isRequired,
   onChangeOtp: PropTypes.func.isRequired,
-  handleResend: PropTypes.func.isRequired
+  handleResend: PropTypes.func.isRequired,
+  askName: PropTypes.bool,
+  name: PropTypes.string,
+  nameError: PropTypes.bool,
+  nameErrorMessage: PropTypes.string,
+  onSubmitName: PropTypes.func.isRequired,
+  onChangeName: PropTypes.func.isRequired
 };
