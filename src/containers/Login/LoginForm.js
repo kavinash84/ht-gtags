@@ -11,7 +11,7 @@ import { Label } from 'hometown-components/lib/Label';
 import Img from 'hometown-components/lib/Img';
 import Button from 'hometown-components/lib/Buttons';
 import ImageShimmer from 'hometown-components/lib/ImageShimmer';
-import { login, getOtp, resendOtp } from 'redux/modules/login';
+import { login, getOtp, resendOtp, clearLoginState } from 'redux/modules/login';
 import { validateMobile, isEmpty, checkSpecialChar } from 'utils/validation';
 import { allowNChar, allowTypeOf } from 'utils/helper';
 
@@ -167,11 +167,13 @@ export default class LoginFormContainer extends Component {
     });
   };
   toggleLoginForm = () => {
+    const { dispatch } = this.context.store;
     this.setState({
       loginviaotp: !this.state.loginviaotp,
       resend: false,
       mobilesubmitted: false
     });
+    dispatch(clearLoginState());
   };
 
   render() {
