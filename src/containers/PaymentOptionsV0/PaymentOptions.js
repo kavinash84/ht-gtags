@@ -5,10 +5,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { getPaymentOptions } from 'selectors/payments';
 import { getCartList } from 'selectors/cart';
-import Menu from 'newComponents/MenuWithLogoOnly';
-import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import PaymentOptions from 'newComponents/Checkout/PaymentOptions';
+import Menu from 'components/MenuWithLogoOnly';
+import Section from 'hometown-components-dev/lib/Section';
+import PaymentOptions from 'components/Checkout/PaymentOptions';
 import { CART_URL } from 'helpers/Constants';
 
 @withRouter
@@ -31,13 +30,13 @@ export default class PaymentOptionsContainer extends Component {
   render() {
     const { availableOptions } = this.props;
     return (
-      <SectionHtV1 padding="0rem" marginBottom="0">
+      <Section p="0rem" mb="0">
         <Helmet title="Payment Options" />
-        <BoxHtV1 className="wrapper">
+        <div className="wrapper">
           <Menu />
           <PaymentOptions data={availableOptions} />
-        </BoxHtV1>
-      </SectionHtV1>
+        </div>
+      </Section>
     );
   }
 }
