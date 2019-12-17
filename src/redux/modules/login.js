@@ -182,11 +182,11 @@ export const googleLogin = (result, session, phone) => (dispatch, getState) =>
   dispatch({
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
     promise: async ({ client }) => {
+      const {
+        userLogin: { tokenData }
+      } = getState();
+      const data = phone && tokenData.tokenId ? tokenData : result;
       try {
-        const {
-          userLogin: { tokenData }
-        } = getState();
-        const data = phone && tokenData.tokenId ? tokenData : result;
         const {
           tokenId,
           profileObj: { name }
@@ -208,7 +208,7 @@ export const googleLogin = (result, session, phone) => (dispatch, getState) =>
         const error = {
           ...err,
           loginType: 'google',
-          tokenData: result
+          tokenData: data
         };
         throw error;
       }
