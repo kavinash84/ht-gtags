@@ -34,21 +34,6 @@ const initialState = {
   loginType: '',
   tokenData: {}
 };
-// {
-//   "loaded": false,
-//   "isLoggedIn": false,
-//   "loggingOut": false,
-//   "isLoggedOut": false,
-//   "askContact": false,
-//   "otp": "",
-//   "error": false,
-//   "errorMessage": "",
-//   "loginType": "",
-//   "prevToken": "",
-//   "accessToken": null,
-//   "refreshToken": null,
-//   "loggingIn": true
-// }
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
@@ -93,7 +78,10 @@ export default function reducer(state = initialState, action = {}) {
         accessToken: action.data.access_token,
         refreshToken: action.data.refresh_token,
         meta: action.data.meta,
-        loginError: ''
+        loginError: '',
+        askContact: false,
+        askName: false,
+        tokenData: {}
       };
     case LOGOUT:
       return {
@@ -107,7 +95,10 @@ export default function reducer(state = initialState, action = {}) {
         isLoggedIn: false,
         accessToken: null,
         refreshToken: null,
-        isLoggedOut: action.result.success
+        isLoggedOut: action.result.success,
+        askContact: false,
+        askName: false,
+        tokenData: {}
       };
     case LOGOUT_FAIL:
       return {
@@ -191,19 +182,15 @@ export const googleLogin = (result, session, phone) => (dispatch, getState) =>
   dispatch({
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
     promise: async ({ client }) => {
-      const {
-        userLogin: { tokenData }
-      } = getState();
-      console.log('oj');
-      const data = phone && tokenData.tokenId ? tokenData : result;
-      /* eslint-disable */
-      const {
-        tokenId,
-        profileObj: { name }
-      } = data;
-      /* eslint-disable */
-      console.log('failed');
       try {
+        const {
+          userLogin: { tokenData }
+        } = getState();
+        const data = phone && tokenData.tokenId ? tokenData : result;
+        const {
+          tokenId,
+          profileObj: { name }
+        } = data;
         const postData = {
           token: tokenId,
           client_secret: clientSecret,

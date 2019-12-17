@@ -87,7 +87,7 @@ export default class LoginViaOtp extends React.Component {
               onChange={onChangeName}
               value={name}
               type="text"
-              placeholder="Please enter your name!"
+              placeholder="Please enter your name"
               feedBackError={nameError}
               feedBackMessage={nameErrorMessage}
             />
