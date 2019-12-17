@@ -19,7 +19,7 @@ import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
 import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
 import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
 import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
-import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
+// import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
 
 /* ====== Page Components ====== */
 import LoginForm from 'newComponents/LoginForms/LoginForm';
@@ -168,94 +168,109 @@ export default class LoginFormContainer extends Component {
     return (
       <BoxHtV1>
         <RowHtV1 display="block" mr="0" ml="0">
-          <BoxHtV1 variant="col-5">
+          {/* <BoxHtV1 variant="col-5">
             <ImageShimmer
               src="https://static.hometown.in/media/cms/hometownnew/compressed/signup-sidebar-bg.jpg"
               height="520px"
             >
               {imageURL => <ImageHtV1 height="520px" src={imageURL} alt="" />}
             </ImageShimmer>
-          </BoxHtV1>
-          <BoxHtV1 variant="col-7" p="1.5rem 2.5rem 0.5rem 2.5rem">
-            <RowHtV1>
-              <RowHtV1 display="block" mt="rem" mr="0" ml="0">
-                <BoxHtV1 variant="col-12" ta="center">
-                  <HeadingHtV1
-                    color="color676767"
-                    mt="0"
-                    mb="0"
-                    fontWeight="400"
-                    fontSize="26px"
-                    ta="center"
-                    fontFamily="light"
-                  >
-                    Sign in to your account
-                  </HeadingHtV1>
-                  <TextHtV1 color="color676767" ta="center">
-                    To track your orders, manage your account and more.
-                  </TextHtV1>
-                </BoxHtV1>
-              </RowHtV1>
-              <RowHtV1 display="block" mr="0" ml="0" pb="0">
-                <BoxHtV1 mt="0.675rem">
-                  {!this.state.loginviaotp ? (
-                    <LoginForm askContact={askContact} loginType={loginType} loading={loading} />
-                  ) : (
-                    <LoginViaOtp
-                      onChangeMobile={this.onChangeMobile}
-                      onChangeOtp={this.onChangeOtp}
-                      onSubmitMobileNumber={this.onSubmitMobileNumber}
-                      onSubmitOtp={this.onSubmitOtp}
-                      otp={otp}
-                      otpError={otpError}
-                      otpErrorMessage={otpErrorMessage}
-                      mobile={mobile}
-                      mobileError={mobileError}
-                      mobileErrorMessage={mobileErrorMessage}
-                      mobilesubmitted={mobilesubmitted}
-                      loaded={loaded}
-                      loading={loading}
-                      loggingIn={loggingIn}
-                      handleResend={this.handleResend}
-                      resend={resend}
-                    />
-                  )}
-                </BoxHtV1>
-              </RowHtV1>
-              <RowHtV1 display="block" mr="0" ml="0" pt="1.25rem">
-                <BoxHtV1 variant="col-12" ta="center" mb="0.625rem">
-                  <LabelHtV1 fontFamily="regular" ta="center" color="color79716c" fontSize="1rem" va="middle">
-                    Or continue with
-                  </LabelHtV1>
-                </BoxHtV1>
-                <BoxHtV1 variant="col-6" ta="center" mb="0" pr="0.625rem">
-                  <ButtonHtV1
-                    btnType="custom"
-                    fontFamily="regular"
-                    ta="center"
-                    color="black"
-                    mr="0.3125rem"
-                    fontSize="0.825rem"
-                    va="middle"
-                    border="1px solid #e6e6e6"
-                    size="block"
-                    height="42px"
-                    bg="#FFF"
-                    onClick={this.toggleLoginForm}
-                  >
-                    {!this.state.loginviaotp ? (
-                      <ImageHtV1 display="inline-block" src={OTPIcon} alt="OTP" va="sub" width="18px" mr="10px" />
-                    ) : (
-                      <ImageHtV1 display="inline-block" src={EmailIcon} alt="OTP" va="sub" width="18px" mr="10px" />
-                    )}
-                    {!this.state.loginviaotp ? 'OTP' : 'Login Via Email Id'}
-                  </ButtonHtV1>
-                </BoxHtV1>
-                <BoxHtV1 variant="col-6" ta="center" mb="0" pl="0.625rem">
-                  <GoogleLoginBtn askContact={askContact} loginType={loginType} loading={loading} />
-                </BoxHtV1>
-              </RowHtV1>
+          </BoxHtV1> */}
+          <BoxHtV1 variant="col-4" p="1.5rem 2.5rem 0.5rem 2.5rem">
+            <RowHtV1 display="block" mt="rem" mr="0" ml="0">
+              <BoxHtV1 variant="col-12" ta="center" px="0">
+                <HeadingHtV1
+                  color="#1b2125"
+                  mt="0"
+                  mb="0"
+                  fontWeight="700"
+                  fontSize="23px"
+                  ta="center"
+                  fontFamily="HelveticaNeue"
+                >
+                  SIGN IN
+                </HeadingHtV1>
+              </BoxHtV1>
+              <BoxHtV1 variant="col-12" ta="center" px="0">
+                <hr
+                  sx={{
+                    color: '#000000',
+                    backgroundColor: '#000000',
+                    height: 0.5,
+                    borderColor: '#000000',
+                    mx: '0',
+                    width: '100%'
+                  }}
+                />
+              </BoxHtV1>
+              <BoxHtV1 variant="col-12" ta="center" px="0">
+                <TextHtV1 color="textPrimary" ta="center" fontSize="10px">
+                  *Required
+                </TextHtV1>
+              </BoxHtV1>
             </RowHtV1>
+            <RowHtV1 display="block" mr="0" ml="0" pb="0">
+              <BoxHtV1 mt="0.675rem" variant="col-12" ta="center">
+                {!this.state.loginviaotp ? (
+                  <LoginForm askContact={askContact} loginType={loginType} loading={loading} />
+                ) : (
+                  <LoginViaOtp
+                    onChangeMobile={this.onChangeMobile}
+                    onChangeOtp={this.onChangeOtp}
+                    onSubmitMobileNumber={this.onSubmitMobileNumber}
+                    onSubmitOtp={this.onSubmitOtp}
+                    otp={otp}
+                    otpError={otpError}
+                    otpErrorMessage={otpErrorMessage}
+                    mobile={mobile}
+                    mobileError={mobileError}
+                    mobileErrorMessage={mobileErrorMessage}
+                    mobilesubmitted={mobilesubmitted}
+                    loaded={loaded}
+                    loading={loading}
+                    loggingIn={loggingIn}
+                    handleResend={this.handleResend}
+                    resend={resend}
+                  />
+                )}
+              </BoxHtV1>
+            </RowHtV1>
+            <RowHtV1 display="block" mr="0" ml="0" pt="1.25rem">
+              <BoxHtV1 variant="col-12" ta="center" mb="0.625rem">
+                <LabelHtV1 fontFamily="regular" ta="center" color="color79716c" fontSize="12px" va="middle">
+                  Or continue with
+                </LabelHtV1>
+              </BoxHtV1>
+              <BoxHtV1 variant="col-6" ta="center" mb="0" pr="0.625rem">
+                <ButtonHtV1
+                  btnType="custom"
+                  fontFamily="regular"
+                  ta="center"
+                  color="black"
+                  mr="0.3125rem"
+                  p=".375rem .75rem"
+                  fontSize="0.825rem"
+                  va="middle"
+                  borderWidth="1px"
+                  borderColor="#e6e6e6"
+                  size="block"
+                  height="42px"
+                  bg="#FFF"
+                  onClick={this.toggleLoginForm}
+                >
+                  {!this.state.loginviaotp ? (
+                    <ImageHtV1 display="inline-block" src={OTPIcon} alt="OTP Login" va="sub" width="18px" mr="10px" />
+                  ) : (
+                    <ImageHtV1 display="inline-block" src={EmailIcon} alt="OTP Login" va="sub" width="18px" mr="10px" />
+                  )}
+                  {!this.state.loginviaotp ? 'OTP Login' : 'Login Via Email Id'}
+                </ButtonHtV1>
+              </BoxHtV1>
+              <BoxHtV1 variant="col-6" ta="center" mb="0" pl="0.625rem">
+                <GoogleLoginBtn askContact={askContact} loginType={loginType} loading={loading} />
+              </BoxHtV1>
+            </RowHtV1>
+
             {/* <RowHtV1 display="block" mr="0" ml="0" pt="0.3125rem">
               <BoxHtV1 variant="col-12">
                 <LabelHtV1 fontFamily="medium" color="error" display="block" ta="center">
@@ -263,6 +278,43 @@ export default class LoginFormContainer extends Component {
                 </LabelHtV1>
               </BoxHtV1>
             </RowHtV1> */}
+          </BoxHtV1>
+          <BoxHtV1 variant="col-8" p="1.5rem 2.5rem 0.5rem 2.5rem">
+            <RowHtV1 display="block" mt="rem" mr="0" ml="0">
+              <BoxHtV1 variant="col-12" ta="center" px="0">
+                <HeadingHtV1
+                  color="#1b2125"
+                  mt="0"
+                  mb="0"
+                  fontWeight="700"
+                  fontSize="23px"
+                  ta="center"
+                  fontFamily="HelveticaNeue"
+                >
+                  CREATE AN ACCOUNT
+                </HeadingHtV1>
+              </BoxHtV1>
+              <BoxHtV1 variant="col-12" ta="center" px="0">
+                <hr
+                  sx={{
+                    color: '#000000',
+                    backgroundColor: '#000000',
+                    height: 0.5,
+                    borderColor: '#000000',
+                    mx: '0',
+                    width: '100%'
+                  }}
+                />
+              </BoxHtV1>
+              <BoxHtV1 variant="col-12" ta="center" px="0">
+                <TextHtV1 color="black" ta="center" mt="1em" sx={{ fontSize: '10' }}>
+                  If you don't yet have HomeTown account, please register.
+                </TextHtV1>
+              </BoxHtV1>
+              <ButtonHtV1 px="2.5em" mt="2em">
+                Register
+              </ButtonHtV1>
+            </RowHtV1>
           </BoxHtV1>
         </RowHtV1>
       </BoxHtV1>
