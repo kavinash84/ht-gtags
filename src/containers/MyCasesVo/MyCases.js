@@ -1,6 +1,6 @@
 import React from 'react';
 import { provideHooks } from 'redial';
-import MyCasesContainer from 'newComponents/MyCases';
+import MyCasesContainer from 'components/MyCases';
 import MenuFooter from 'containers/MenuFooter';
 import { loadMyCases } from 'redux/modules/mycases';
 import { loadUserProfile } from 'redux/modules/profile';

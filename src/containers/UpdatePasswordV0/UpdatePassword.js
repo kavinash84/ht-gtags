@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import UpdatePasswordForm from 'hometown-components-dev/lib/FormsHtV1/UpdatePasswordFormHtV1';
-import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
-import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
-import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import UpdatePasswordForm from 'hometown-components-dev/lib/Forms/UpdatePasswordForm';
+import Section from 'hometown-components-dev/lib/Section';
+import Row from 'hometown-components-dev/lib/Row';
+import Heading from 'hometown-components-dev/lib/Heading';
+import Div from 'hometown-components-dev/lib/Div';
 import { isBlank } from 'js-utility-functions';
 import { validatePassword } from 'utils/validation';
 import { updateUserPassword } from 'redux/modules/updatepassword';
@@ -124,18 +124,18 @@ export default class UpdatePasswordFormContainer extends Component {
     } = this.state;
     const { response } = this.props;
     return (
-      <BoxHtV1 className={styles.formContainer}>
-        <SectionHtV1 mb="0.3125rem" pr="0.5rem" pl="0.5rem">
-          <RowHtV1 display="block" mr="0" ml="0">
-            <HeadingHtV1 fontSize="1.25rem" color="textDark" mb="0px" mt="0px" fontFamily="light">
+      <div className={styles.formContainer}>
+        <Section mb="0.3125rem" pr="0.5rem" pl="0.5rem">
+          <Row display="block" mr="0" ml="0">
+            <Heading fontSize="1.25rem" color="textDark" mb="0px" mt="0px" fontFamily="light">
               Update Password
-            </HeadingHtV1>
-          </RowHtV1>
-        </SectionHtV1>
-        <BoxHtV1 className={styles.formWrapper}>
-          <SectionHtV1 p="0.5rem" mb="0">
-            <RowHtV1 display="block" mr="0" ml="0">
-              <BoxHtV1>
+            </Heading>
+          </Row>
+        </Section>
+        <div className={styles.formWrapper}>
+          <Section p="0.5rem" mb="0">
+            <Row display="block" mr="0" ml="0">
+              <Div>
                 <UpdatePasswordForm
                   oldPwd={oldPwd}
                   onChangeOldPwd={this.onChangeOldPwd}
@@ -152,11 +152,11 @@ export default class UpdatePasswordFormContainer extends Component {
                   onSubmitUpdatePassword={this.onSubmitUpdatePassword}
                   response={response}
                 />
-              </BoxHtV1>
-            </RowHtV1>
-          </SectionHtV1>
-        </BoxHtV1>
-      </BoxHtV1>
+              </Div>
+            </Row>
+          </Section>
+        </div>
+      </div>
     );
   }
 }
