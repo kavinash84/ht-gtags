@@ -8,10 +8,10 @@ import ImageShimmerHtV1 from 'hometown-components-dev/lib/ImageShimmerHtV1';
 const getLowResolution = url => url.replace('-zoom.jpg', '-product_500.jpg');
 // const getHighResolution = url => url.replace('.jpg', '-zoom.jpg');
 
-const CategoryItem = ({ image, name }) => (
+// const CategoryItem = ({ image, name }) => (
+const CategoryItem = ({ name }) => (
   <ImageShimmerHtV1
     // src={getHighResolution(image)}
-    src={image}
     height="545px"
     overflow="hidden"
   >
