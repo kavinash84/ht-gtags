@@ -1,8 +1,11 @@
 import React, { Fragment, Component } from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-/* ====== Components ====== */
+/**
+ * Components
+ */
 import Absolute from 'hometown-components-dev/lib/AbsoluteHtV1';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
@@ -14,6 +17,22 @@ import Row from 'hometown-components-dev/lib/RowHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 
 // const { SITE_URL } = process.env;
+
+const MoreButton = styled(Button)`
+  ~ ${Card} {
+    display: none;
+    &:hover,
+    &:focus {
+      display: block;
+    }
+  }
+  &:hover,
+  &:focus {
+    ~ ${Card} {
+      display: block;
+    }
+  }
+`;
 
 class NavBar extends Component {
   render() {
@@ -70,9 +89,9 @@ class NavBar extends Component {
 
             {/* More Button */}
             <Box sx={{ position: 'relative' }}>
-              <Button variant="link">
+              <MoreButton variant="link">
                 <Text variant="menu">More</Text>
-              </Button>
+              </MoreButton>
               <Card variant="card.moreDropdown" px={0} py={0}>
                 {more &&
                   more.map((menuItem, i) => (
