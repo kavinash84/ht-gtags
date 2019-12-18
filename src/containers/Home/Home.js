@@ -110,7 +110,10 @@ const customDropdownStyles = {
 export default class Home extends Component {
   state = {
     showRibbon: true,
-    openSignup: false
+    openSignup: false,
+    selectedCity: '',
+    citySelectError: false,
+    cityErrorMessage: 'Please select your nearest city'
   };
   componentDidMount() {
     const { isLoggedIn } = this.props;
@@ -130,6 +133,20 @@ export default class Home extends Component {
       clearTimeout(this.signupmodalreference);
     }
   }
+  mapHandler = e => {
+    e.preventDefault();
+    const { selectedCity } = this.state;
+    if (selectedCity) {
+      this.props.history.push({
+        pathname: '/store-locator',
+        state: { city: selectedCity }
+      });
+    } else {
+      this.setState({
+        citySelectError: true
+      });
+    }
+  };
   handleModal = () => {
     this.setState({ openSignup: !this.state.openSignup }, () => {
       if (!this.state.openSignup) {
@@ -146,6 +163,7 @@ export default class Home extends Component {
   render() {
     const { banners, homepageCategories, cities } = this.props;
     const citiesList = cities.map(item => ({ value: item, label: item }));
+    const { citySelectError, cityErrorMessage } = this.state;
 
     return (
       /* eslint-disable max-len */
@@ -282,8 +300,8 @@ export default class Home extends Component {
                     <Heading variant="heading.large" color="white" mb={10}>
                       FIND A STORE NEAR YOU
                     </Heading>
-                    <Text variant="regular" color="white">
-                      lorem ipsum doler sit lorem ipsum doler sit
+                    <Text variant="regular" color={citySelectError ? 'red' : 'white'}>
+                      {citySelectError ? cityErrorMessage : ''}
                     </Text>
                   </Box>
                   <Row>
@@ -293,13 +311,13 @@ export default class Home extends Component {
                       options={citiesList}
                       styles={customDropdownStyles}
                       onChange={({ value }) => {
-                        this.props.history.push({
-                          pathname: '/store-locator',
-                          state: { city: value }
+                        this.setState({
+                          selectedCity: value,
+                          citySelectError: false
                         });
                       }}
                     />
-                    <Button width={275} ml={30} variant="primary.large">
+                    <Button onClick={this.mapHandler} width={275} ml={30} variant="primary.large">
                       LOCATE A STORE
                     </Button>
                   </Row>
