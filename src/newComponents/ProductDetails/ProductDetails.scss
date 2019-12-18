@@ -1,0 +1,83 @@
+@import "../../theme/_variables";
+@import "../../theme/_mixins";
+
+.sizeDD {
+  width: 100%;
+}
+.titleWrapper {
+  font-size: 18px;
+}
+.variationWrapper {
+  font-size: 14px;
+}
+.breadCrumbWrapper {
+  font-size: 18px;
+  background: #FFF;
+}
+.pdpWrapper {
+  border-bottom: 1px solid #f1f1f1;
+}
+.pdpLeftWrapper {
+  position: sticky !important;
+  top: 0;
+}
+.pdpRightWrapper {
+  z-index: 0;
+  position: relative;
+  background: #fff;
+  padding-bottom: 0;
+}
+.imgSliderContainer {
+  background: #FFF;
+  .imageContainer{
+    width: 450px;
+    height: 450px;
+    img {
+      position: absolute;
+      max-height: 100%;
+      max-width: 100%;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      margin: auto;
+    }
+  }
+  .previous {
+    left: 0;
+  }
+  .next {
+    right: 0;
+  }
+  button {
+    position: absolute;
+    background: transparent;
+    border: none;
+    font-size: 3rem;
+    line-height: 0;
+    width: 30px;
+    padding-bottom: 10px;
+    height: 50px;
+    top: calc(50% - 25px);
+    z-index: 1;
+  }
+}
+.addToWishlist {
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  &:hover {
+    background-color: transparent !important;
+    color: $primary !important;
+  }
+  svg {
+    vertical-align: middle;
+  }
+}
+.seeAllCombine {
+  a {
+    color: #f98d29;
+    text-decoration: underline;
+    &:hover {
+      color: blue;
+    }
+  }
+}
