@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -16,19 +16,20 @@ import { SIGNUP_URL, HOME_URL, LOGIN_URL, MY_WISHLIST_URL, MY_PROFILE_URL, CART_
 import { titleCase, checkRedirection } from 'utils/helper';
 
 /* ====== Components ====== */
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import CartIcon from 'hometown-components-dev/lib/Icons/CartHtV1';
-import ColHtV1 from 'hometown-components-dev/lib/ColHtV1';
-import FlexHtV1 from 'hometown-components-dev/lib/FlexHtV1';
+import Card from 'hometown-components-dev/lib/CardHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
+import Flex from 'hometown-components-dev/lib/FlexHtV1';
 import FavIcon from 'hometown-components-dev/lib/Icons/FavHtV1';
-import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
-import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
-import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+// import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
 import LocationIcon from 'hometown-components-dev/lib/Icons/LocationHtV1';
-import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
 import UserIcon from 'hometown-components-dev/lib/Icons/UserHtV1';
-import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
 
 /* ====== Page Components ====== */
 import Search from 'newComponents/Search';
@@ -118,86 +119,82 @@ export default class HeaderTop extends Component {
 } = this.props;
 
     return (
-      <BoxHtV1>
-        <RowHtV1 alignItems="center">
-          <ColHtV1 variant="col-3">
+      <Box>
+        <Row alignItems="center">
+          <Col width={3 / 12}>
             <Link to={HOME_URL}>
-              <ImageHtV1 height={28} src={LogoIcon} alt="Hometown" />
+              <Image height={28} src={LogoIcon} alt="Hometown" HtV1 />
             </Link>
-          </ColHtV1>
-          <ColHtV1 variant="col-4">
+          </Col>
+          <Col width={4 / 12}>
             <Search />
-          </ColHtV1>
-          <ColHtV1 variant="col-5" flexDirection="row" justifyContent="flex-end">
-            <ButtonHtV1 variant="link" onClick={this.onOpenPincodeModal}>
-              <FlexHtV1 variant="row.alignCenter">
+          </Col>
+          <Col width={5 / 12} flexDirection="row" justifyContent="flex-end">
+            <Button variant="link" onClick={this.onOpenPincodeModal}>
+              <Flex variant="row.alignCenter">
                 <LocationIcon />
-                <TextHtV1 variant="headerLabel">{selectedPincode !== '' ? selectedPincode : 'Pincode'}</TextHtV1>
-              </FlexHtV1>
-            </ButtonHtV1>
+                <Text variant="headerLabel">{selectedPincode !== '' ? selectedPincode : 'Pincode'}</Text>
+              </Flex>
+            </Button>
             <Link to="/store-locator">
-              <FlexHtV1 variant="row.alignCenter" ml={20}>
+              <Flex variant="row.alignCenter" pl={20}>
                 <LocationIcon />
-                <TextHtV1 variant="headerLabel">Store Locator</TextHtV1>
-              </FlexHtV1>
+                <Text variant="headerLabel">Store Locator</Text>
+              </Flex>
             </Link>
-            <ButtonHtV1 variant="link" ml={20} onClick={isLoggedIn ? onClick(history) : this.onOpenLoginModal}>
-              <FlexHtV1 variant="row.alignCenter">
+            <Button variant="link" pl={20} onClick={isLoggedIn ? onClick(history) : this.onOpenLoginModal}>
+              <Flex variant="row.alignCenter">
                 <FavIcon />
-                <TextHtV1 variant="headerLabel">{isLoggedIn ? wishListCount : 0}</TextHtV1>
-              </FlexHtV1>
-            </ButtonHtV1>
+                <Text variant="headerLabel">{isLoggedIn ? wishListCount : 0}</Text>
+              </Flex>
+            </Button>
             <Link to={CART_URL}>
-              <FlexHtV1 variant="row.alignCenter" ml={20}>
+              <Flex variant="row.alignCenter" pl={20}>
                 <CartIcon />
-                <TextHtV1 variant="headerLabel">{cartCount}</TextHtV1>
-              </FlexHtV1>
+                <Text variant="headerLabel">{cartCount}</Text>
+              </Flex>
             </Link>
-            <ButtonHtV1
+            <Button
               variant="link"
               onFocus={this.handleUserPopIn}
-              onBlur={this.handleUserPopOver}
               onMouseOver={this.handleUserPopIn}
-              onMouseOut={this.handleUserPopOver}
-              ml={20}
+              // onBlur={this.handleUserPopOver}
+              // onMouseOut={this.handleUserPopOver}
+              pl={20}
             >
-              {isLoggedIn ? <TextHtV1 variant="headerLabel">Hi ${titleCase(name)}</TextHtV1> : <UserIcon />}
-            </ButtonHtV1>
-            <BoxHtV1 display={userPopOver ? 'block' : 'none'}>
-              <RowHtV1 display="block" mr="0" ml="0">
-                <ColHtV1 variant="col-12">
-                  <LabelHtV1>{isLoggedIn ? 'Your Account' : 'My Account'}</LabelHtV1>
-                </ColHtV1>
-              </RowHtV1>
-              <RowHtV1 display="block" mr="0" ml="0">
+              {isLoggedIn ? <Text variant="headerLabel">Hi ${titleCase(name)}</Text> : <UserIcon />}
+            </Button>
+            <Box display={userPopOver ? 'block' : 'none'} pt={20}>
+              <Card variant="card.profileMore">
                 {!isLoggedIn && (
-                  <div>
-                    <ColHtV1 variant="col-6">
-                      <Link to={SIGNUP_URL} onClick={this.handleClick(SIGNUP_URL)}>
-                        Sign Up
-                      </Link>
-                    </ColHtV1>
-                    <ColHtV1 variant="col-6">
-                      <Link to={LOGIN_URL} onClick={this.handleClick(LOGIN_URL)}>
-                        Log In
-                      </Link>
-                    </ColHtV1>
-                  </div>
+                  <Fragment>
+                    <Button as={Link} to={SIGNUP_URL} onClick={this.handleClick(SIGNUP_URL)} mb={15} width={175}>
+                      Sign Up
+                    </Button>
+                    <Text mb={6} textAlign="center">
+                      Not a member yet?
+                    </Text>
+                    <Button
+                      as={Link}
+                      variant="outline"
+                      to={LOGIN_URL}
+                      onClick={this.handleClick(LOGIN_URL)}
+                      width={175}
+                    >
+                      Log In
+                    </Button>
+                  </Fragment>
                 )}
                 {isLoggedIn && (
-                  <div>
-                    <ColHtV1 variant="col-6">
-                      <Link to={MY_PROFILE_URL}>Profile</Link>
-                    </ColHtV1>
-                    <ColHtV1 variant="col-6">
-                      <ButtonHtV1 onClick={onClickLogout(logoutUser)}>Logout !</ButtonHtV1>
-                    </ColHtV1>
-                  </div>
+                  <Fragment>
+                    <Link to={MY_PROFILE_URL}>Profile</Link>
+                    <Button onClick={onClickLogout(logoutUser)}>Logout !</Button>
+                  </Fragment>
                 )}
-              </RowHtV1>
-            </BoxHtV1>
-          </ColHtV1>
-        </RowHtV1>
+              </Card>
+            </Box>
+          </Col>
+        </Row>
 
         {/* Pincode Modal */}
         <ResponsiveModal
@@ -205,13 +202,13 @@ export default class HeaderTop extends Component {
           onCloseModal={this.onClosePincodeModal}
           open={this.state.openPincode}
         >
-          <BoxHtV1>
-            <ImageHtV1 width="100px" m="auto" mb="1.5rem" src={PincodeModalIcon} alt="Pincode" />
-            <HeadingHtV1 fontSize="1.375rem" mb="1rem">
+          <Box>
+            <Image width="100px" m="auto" mb="1.5rem" src={PincodeModalIcon} alt="Pincode" />
+            <Heading fontSize="1.375rem" mb="1remHtV1">
               Please enter your Pincode to serve you better
-            </HeadingHtV1>
+            </Heading>
             <PinCode color="#f2f2f2" onCloseModal={this.onClosePincodeModal} />
-          </BoxHtV1>
+          </Box>
         </ResponsiveModal>
 
         {/* Login Modal */}
@@ -231,7 +228,7 @@ export default class HeaderTop extends Component {
         >
           <SignupForm />
         </ResponsiveModal>
-      </BoxHtV1>
+      </Box>
     );
   }
 }

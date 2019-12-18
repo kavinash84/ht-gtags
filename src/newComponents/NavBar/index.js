@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 /* ====== Components ====== */
-import AbsoluteHtV1 from 'hometown-components-dev/lib/AbsoluteHtV1';
-import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
-import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
-import LinkRedirectHtV1 from 'hometown-components-dev/lib/LinkRedirectHtV1';
-import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
-import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
+import Absolute from 'hometown-components-dev/lib/AbsoluteHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Card from 'hometown-components-dev/lib/CardHtV1';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import Label from 'hometown-components-dev/lib/LabelHtV1';
+import LinkRedirect from 'hometown-components-dev/lib/LinkRedirectHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
 
 // const { SITE_URL } = process.env;
 
@@ -30,11 +31,11 @@ class NavBar extends Component {
     const more = cats.length && cats.length > 7 ? cats.slice(7) : [];
 
     return (
-      <BoxHtV1 onMouseLeave={handleLeave}>
-        <ContainerHtV1 pr="0" pl="0">
-          <RowHtV1 variant="row.nav">
+      <Box onMouseLeave={handleLeave}>
+        <Container pr="0" pl="0">
+          <Row variant="row.nav">
             {main.map((menuItem, i) => (
-              <TextHtV1
+              <Text
                 as={Link}
                 variant="menu"
                 onClick={exitOnClick}
@@ -45,17 +46,17 @@ class NavBar extends Component {
               >
                 {menuItem.name === 'Hot Deals' ? (
                   <Fragment>
-                    <LabelHtV1 as={AbsoluteHtV1} variant="menuNew">
+                    <Label as={Absolute} variant="menuNew">
                       New
-                    </LabelHtV1>
+                    </Label>
                     {menuItem.name}
                   </Fragment>
                 ) : (
                   menuItem.name
                 )}
-              </TextHtV1>
+              </Text>
             ))}
-            <TextHtV1
+            <Text
               as={Link}
               variant="menu"
               to="/modular-kitchens"
@@ -65,67 +66,73 @@ class NavBar extends Component {
               onClick={exitOnClick}
             >
               Modular Kitchens
-            </TextHtV1>
-            <BoxHtV1>
-              <ButtonHtV1
-                padding="10px 15px 10px 0px"
-                variant="buttons.outline"
-                className="moreButton"
-                sx={{ position: 'relative' }}
-              >
-                More
-                <AbsoluteHtV1
-                  display="none"
-                  bg="white"
-                  border="dropdown"
-                  sx={{
-                    right: 0,
-                    top: 35,
-                    zIndex: 2
-                  }}
-                >
-                  <BoxHtV1 mx={0} my={0} py={5}>
-                    {more &&
-                      more.map((menuItem, i) => (
-                        <Link
-                          onClick={exitOnClick}
-                          onMouseEnter={handleEnter('')}
-                          title={menuItem.name}
-                          to={`/${menuItem.url_key}`}
-                        >
-                          <BoxHtV1 variant="menuItem" key={`${menuItem.id}_${String(i)}`}>
-                            {menuItem.name || 'Hometown'}
-                          </BoxHtV1>
-                        </Link>
-                      ))}
-                    <Link onClick={exitOnClick} to="/bulk-order" onMouseEnter={handleEnter('')} title="Bulk Order">
-                      <BoxHtV1 variant="menuItem">Bulk Order</BoxHtV1>
-                    </Link>
-                    <Link
-                      to="/design-build"
-                      title="Design & Build"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={exitOnClick}
-                    >
-                      <BoxHtV1 variant="menuItem">Design & Build</BoxHtV1>
-                    </Link>
-                    <LinkRedirectHtV1
-                      href="https://hometown.in/media/Institutional+Catalogue.pdf"
-                      title="Festive Gifts Catalogue"
-                      download
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <BoxHtV1 variant="menuItem">Gifting Catalogue</BoxHtV1>
-                    </LinkRedirectHtV1>
-                  </BoxHtV1>
-                </AbsoluteHtV1>
-              </ButtonHtV1>
-            </BoxHtV1>
-          </RowHtV1>
-        </ContainerHtV1>
-      </BoxHtV1>
+            </Text>
+
+            {/* More Button */}
+            <Box sx={{ position: 'relative' }}>
+              <Button variant="link">
+                <Text variant="menu">More</Text>
+              </Button>
+              <Card variant="card.moreDropdown" px={0} py={0}>
+                {more &&
+                  more.map((menuItem, i) => (
+                    <Box>
+                      <Text
+                        as={Link}
+                        variant="menuLight"
+                        onClick={exitOnClick}
+                        onMouseEnter={handleEnter('')}
+                        title={menuItem.name}
+                        to={`/${menuItem.url_key}`}
+                        key={`${menuItem.id}_${String(i)}`}
+                      >
+                        {menuItem.name || 'Hometown'}
+                      </Text>
+                    </Box>
+                  ))}
+                <Box>
+                  <Text
+                    as={Link}
+                    variant="menuLight"
+                    onClick={exitOnClick}
+                    to="/bulk-order"
+                    onMouseEnter={handleEnter('')}
+                    title="Bulk Order"
+                  >
+                    Bulk Order
+                  </Text>
+                </Box>
+                <Box>
+                  <Text
+                    as={Link}
+                    variant="menuLight"
+                    to="/design-build"
+                    title="Design & Build"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={exitOnClick}
+                  >
+                    Design & Build
+                  </Text>
+                </Box>
+                <Box>
+                  <Text
+                    as={LinkRedirect}
+                    variant="menuLight"
+                    href="https://hometown.in/media/Institutional+Catalogue.pdf"
+                    title="Festive Gifts Catalogue"
+                    download
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Gifting Catalogue
+                  </Text>
+                </Box>
+              </Card>
+            </Box>
+          </Row>
+        </Container>
+      </Box>
     );
   }
 }

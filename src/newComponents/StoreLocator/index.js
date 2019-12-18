@@ -13,6 +13,7 @@ import { gaVisitEvent } from 'redux/modules/stores';
 /* ====== Page Components ====== */
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Flex from 'hometown-components-dev/lib/FlexHtV1';
 import Col from 'hometown-components-dev/lib/ColHtV1';
 import Container from 'hometown-components-dev/lib/ContainerHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
@@ -30,7 +31,21 @@ import { getDistanceBetweenPoints } from 'utils/helper';
 import Map from './Map';
 
 const LoaderIcon = require('../../../static/refresh.svg');
+const DirectionIcon = require('../../../static/direction.svg');
 const styles = require('./StoreLocator.scss');
+
+const customStyles = {
+  control: () => ({
+    backgroundColor: '#6d7377',
+    display: 'flex'
+  }),
+  placeholder: () => ({
+    color: 'white'
+  }),
+  singleValue: () => ({
+    color: 'white'
+  })
+};
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -371,13 +386,14 @@ class StoreLocator extends React.Component {
             >
               <Row
                 mb={10}
+                mx={-10}
                 sx={{
                   position: 'sticky',
                   top: 0,
                   zIndex: 1
                 }}
               >
-                <Col>
+                <Col width={1 / 2} px={10}>
                   <Select
                     placeholder="SELECT CITY"
                     defaultValue={redirectCity || null}
@@ -386,23 +402,22 @@ class StoreLocator extends React.Component {
                       this.handleSelectCity(value);
                     }}
                     options={cities}
+                    styles={customStyles}
                   />
                 </Col>
-                <Col>
+                <Col width={1 / 2} px={10}>
                   <Button
-                    height={38}
                     onClick={e => {
                       e.preventDefault();
                       this.detectUserLocation();
                     }}
-                    // className={styles.selectLocation}
                   >
                     {isLoading && <Image className="spin" src={LoaderIcon} display="inline" width="20px" va="sub" />}
                     Locate Near Me
                   </Button>
                 </Col>
               </Row>
-              <Box height={522} overflow="auto" bg="#474747" px={20}>
+              <Box height={522} overflow="auto" bg="bgSecondary" px={20}>
                 <Ul mt={0}>
                   {locationLoaded && currentList.length ? (
                     <Box
@@ -447,31 +462,58 @@ class StoreLocator extends React.Component {
                     ''
                   )}
                   {currentList.map((item, index) => (
-                    <Li key={String(index)}>
-                      <Box
-                        py={20}
-                        onClick={() => this.handleClick(item.store, mapData, item.city)}
-                        sx={{
-                          borderBottom: '1px solid #FFF'
-                        }}
-                      >
-                        <Heading variant="heading" fontSize={16} color="#FFF" mb={5}>
-                          <LocationIcon color="#FFF" /> {item.store.toUpperCase()}
+                    <Li
+                      key={String(index)}
+                      py={20}
+                      sx={{
+                        display: 'flex',
+                        borderBottom: '1px solid #FFF',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      <Box width="calc(100% - 134px)" onClick={() => this.handleClick(item.store, mapData, item.city)}>
+                        <Heading
+                          variant="heading"
+                          fontSize={16}
+                          color="#FFF"
+                          mb={8}
+                          sx={{
+                            display: 'flex',
+                            alignItems: 'center'
+                          }}
+                        >
+                          <LocationIcon color="#FFF" sx={{ flexShrink: 0 }} /> {item.store.toUpperCase()}
                         </Heading>
-                        <Text color="#FFF" fontSize={16}>
+                        <Text color="#FFF" fontSize={14} pl={5} lineHeight={1.4}>
                           {item.address}
                         </Text>
-                        <LinkRedirect
-                          title="Hometown Store Locator Direction"
-                          href={this.getURL(currentLocation, item.position)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {item.disText && item.duration ? `${item.disText || ''} | ${item.duration || ''} ` : ''}
-                          <button href="#" className={styles.directionBtn}>
-                            Get Direction
-                          </button>
-                        </LinkRedirect>
+                        <Flex sx={{ alignItems: 'center' }} mt={8} pl={5}>
+                          <Text color="white" fontSize={14} mr={10}>
+                            9am | 30mins
+                          </Text>
+                          <LinkRedirect
+                            title="Hometown Store Locator Direction"
+                            href={this.getURL(currentLocation, item.position)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {item.disText && item.duration ? `${item.disText || ''} | ${item.duration || ''} ` : ''}
+                            <Button
+                              variant="link"
+                              color="white"
+                              sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                cursor: 'pointer'
+                              }}
+                            >
+                              <Image src={DirectionIcon} mr={10} /> Get Direction
+                            </Button>
+                          </LinkRedirect>
+                        </Flex>
+                      </Box>
+                      <Box width={110} pl={20}>
+                        <Image src="https://via.placeholder.com/110x110" />
                       </Box>
                     </Li>
                   ))}

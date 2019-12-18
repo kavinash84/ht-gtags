@@ -27,6 +27,7 @@ export default class CategoryCarousel extends Component {
               <CategoryCarouselItem
                 image={slide.image_url}
                 name={slide.info.name}
+                discount={slide.info.name}
                 url={OFFER_ID === id || OFFER_ID === parseInt(id, 10) ? '' : slide.info.url_key}
               />
             </div>

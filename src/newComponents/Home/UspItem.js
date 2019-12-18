@@ -7,7 +7,7 @@ import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
 import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
 
 const UspItem = ({ src, children }) => (
-  <ColHtV1 flexDirection="column">
+  <ColHtV1 variant="colBasis" flexDirection="column">
     <ImageHtV1 src={src} height="60px" alt="Free Delivery" />
     <TextHtV1 variant="uspTitle" mt={16}>
       {children}

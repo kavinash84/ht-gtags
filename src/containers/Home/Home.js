@@ -8,26 +8,27 @@ import { getCities, getOfferStripData, getMiddleBannerData } from 'selectors/hom
 import Select from 'react-select';
 
 /* ====== Components ====== */
-import AbsoluteHtV1 from 'hometown-components-dev/lib/AbsoluteHtV1';
-import BodyHtV1 from 'hometown-components-dev/lib/BodyHtV1';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
-import CardHtV1 from 'hometown-components-dev/lib/CardHtV1';
-import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
-import ColHtV1 from 'hometown-components-dev/lib/ColHtV1';
-import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
-import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
-import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
-import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
-import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
-import WrapperHtV1 from 'hometown-components-dev/lib/WrapperHtV1';
+import Body from 'hometown-components-dev/lib/BodyHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Card from 'hometown-components-dev/lib/CardHtV1';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Section from 'hometown-components-dev/lib/SectionHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
+import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 
 /* ====== Page Components ====== */
 import CategoryCarousel from 'newComponents/CategoryCarousel';
+import Carousel from 'newComponents/Carousel';
 import Footer from 'newComponents/Footer';
 import Header from 'newComponents/Header';
 import GridView from 'newComponents/Home/GridView';
 import MainSlider from 'newComponents/MainSlider';
+import Title from 'newComponents/Title';
 import Usp from 'newComponents/Home/Usp';
 
 const sliderImage = require('../../static/slider.png');
@@ -35,6 +36,37 @@ const bannerImage = require('../../static/banner.png');
 const designBuildLogo = require('../../static/designBuildLogo.png');
 
 const OFFER_ID = 5;
+
+const shareInspireData = [
+  {
+    image_url: 'https://www.hometown.in/media/cms/hometownnew/compressed/1-min-furniture-compressed.jpg',
+    url_key: '/furniture'
+  },
+  {
+    image_url: 'https://www.hometown.in/media/cms/hometownnew/compressed/1-min-furniture-compressed.jpg',
+    url_key: '/furniture'
+  },
+  {
+    image_url: 'https://www.hometown.in/media/cms/hometownnew/compressed/1-min-furniture-compressed.jpg',
+    url_key: '/furniture'
+  },
+  {
+    image_url: 'https://www.hometown.in/media/cms/hometownnew/compressed/1-min-furniture-compressed.jpg',
+    url_key: '/furniture'
+  },
+  {
+    image_url: 'https://www.hometown.in/media/cms/hometownnew/compressed/1-min-furniture-compressed.jpg',
+    url_key: '/furniture'
+  },
+  {
+    image_url: 'https://www.hometown.in/media/cms/hometownnew/compressed/1-min-furniture-compressed.jpg',
+    url_key: '/furniture'
+  },
+  {
+    image_url: 'https://www.hometown.in/media/cms/hometownnew/compressed/1-min-furniture-compressed.jpg',
+    url_key: '/furniture'
+  }
+];
 
 const customDropdownStyles = {
   container: provided => ({
@@ -117,7 +149,7 @@ export default class Home extends Component {
 
     return (
       /* eslint-disable max-len */
-      <WrapperHtV1>
+      <Wrapper>
         <Helmet title="Online Furniture Shopping, Buy Decor Items in India - HomeTown.in">
           <meta
             name="description"
@@ -140,7 +172,7 @@ export default class Home extends Component {
             `}
           </script>
         </Helmet>
-        <BodyHtV1>
+        <Body>
           {/* Header */}
           <Header />
 
@@ -151,11 +183,11 @@ export default class Home extends Component {
           <Usp />
 
           {/* Grid View */}
-          <SectionHtV1>
-            <ContainerHtV1>
+          <Section>
+            <Container>
               <GridView />
-            </ContainerHtV1>
-          </SectionHtV1>
+            </Container>
+          </Section>
 
           {/* Category Carousel */}
           <Fragment>
@@ -163,8 +195,8 @@ export default class Home extends Component {
               const { id } = category;
               if (id && OFFER_ID !== id && OFFER_ID !== parseInt(id, 10)) {
                 return (
-                  <SectionHtV1 variant="section.primary" key={String(index)}>
-                    <ContainerHtV1>
+                  <Section variant="section.primary" key={String(index)}>
+                    <Container>
                       <LazyLoad height={200} offset={100}>
                         <CategoryCarousel
                           categoryName={category.title}
@@ -172,8 +204,8 @@ export default class Home extends Component {
                           data={category.values}
                         />
                       </LazyLoad>
-                    </ContainerHtV1>
-                  </SectionHtV1>
+                    </Container>
+                  </Section>
                 );
               }
               return '';
@@ -181,84 +213,80 @@ export default class Home extends Component {
           </Fragment>
 
           {/* Offer Banner */}
-          <SectionHtV1>
-            <ContainerHtV1>
-              <RowHtV1>
-                <ColHtV1>
-                  <ImageHtV1
-                    src="https://www.hometown.in/media/cms/hometownnew/banner/hotdeals-midbanner_1.jpg"
-                    variant="image"
-                  />
-                </ColHtV1>
-              </RowHtV1>
-            </ContainerHtV1>
-          </SectionHtV1>
+          <Section>
+            <Container>
+              <Row>
+                <Col>
+                  <Image src="https://www.hometown.in/media/cms/hometown201920/homepage-banner.png" variant="image" />
+                </Col>
+              </Row>
+            </Container>
+          </Section>
 
           {/* LET US DESIGN FOR YOU */}
-          <SectionHtV1>
-            <ContainerHtV1>
-              <RowHtV1 mb={24}>
-                <ColHtV1 justifyContent="center">
-                  <TextHtV1 variant="text.catSliderTitle">LET US DESIGN FOR YOU</TextHtV1>
-                </ColHtV1>
-              </RowHtV1>
-              <RowHtV1>
-                <ColHtV1 flexDirection="column">
-                  <BoxHtV1 position="relative" mb={20}>
-                    <ImageHtV1 src={sliderImage} />
-                    <ImageHtV1 src={designBuildLogo} variant="image.logoHomeTown" />
-                  </BoxHtV1>
-                  <HeadingHtV1 variant="heading" textAlign="center">
+          <Section>
+            <Container>
+              <Row justifyContent="center">
+                <Title title="LET US DESIGN FOR YOU" />
+              </Row>
+              <Row>
+                <Col variant="colBasis" flexDirection="column">
+                  <Box mb={20} sx={{ position: 'relative' }}>
+                    <Image src={sliderImage} />
+                    <Image src={designBuildLogo} variant="image.logoHomeTown" />
+                  </Box>
+                  <Heading variant="heading" textAlign="center">
                     Design and Build
-                  </HeadingHtV1>
-                </ColHtV1>
-                <ColHtV1 flexDirection="column">
-                  <BoxHtV1 position="relative" mb={20}>
-                    <ImageHtV1 src={bannerImage} />
-                    <ImageHtV1
+                  </Heading>
+                </Col>
+                <Col variant="colBasis" flexDirection="column">
+                  <Box mb={20} sx={{ position: 'relative' }}>
+                    <Image src={bannerImage} />
+                    <Image
                       src="https://www.hometown.in/design-build/static/mkLogo.ae5caa06.png"
                       variant="image.logoHomeTown"
                     />
-                  </BoxHtV1>
-                  <HeadingHtV1 variant="heading" textAlign="center">
+                  </Box>
+                  <Heading variant="heading" textAlign="center">
                     Modular Kitchen
-                  </HeadingHtV1>
-                </ColHtV1>
-              </RowHtV1>
-            </ContainerHtV1>
-          </SectionHtV1>
+                  </Heading>
+                </Col>
+              </Row>
+            </Container>
+          </Section>
 
           {/* Store Locator */}
-          <SectionHtV1>
-            <ContainerHtV1>
-              <CardHtV1
+          <Section>
+            <Container>
+              <Card
                 sx={{
                   backgroundImage: 'url(https://static.hometown.in/media/cms/hometownnew/compressed/furniture.jpg)',
                   backgroundSize: 'cover',
                   position: 'relative'
                 }}
               >
-                <AbsoluteHtV1
+                <Box
                   height="100%"
                   width={1}
                   bg="rgba(0,0,0,0.5)"
                   sx={{
+                    position: 'absolute',
                     top: 0,
                     left: 0,
                     right: 0,
                     bottom: 0
                   }}
                 />
-                <RowHtV1 height={380} variant="row.contentCenter" sx={{ position: 'relative' }} flexDirection="column">
-                  <BoxHtV1 textAlign="center" mb={30}>
-                    <HeadingHtV1 variant="heading.large" color="white" mb={10}>
+                <Row height={380} variant="row.contentCenter" sx={{ position: 'relative' }} flexDirection="column">
+                  <Box textAlign="center" mb={30}>
+                    <Heading variant="heading.large" color="white" mb={10}>
                       FIND A STORE NEAR YOU
-                    </HeadingHtV1>
-                    <TextHtV1 variant="regular" color="white">
+                    </Heading>
+                    <Text variant="regular" color="white">
                       lorem ipsum doler sit lorem ipsum doler sit
-                    </TextHtV1>
-                  </BoxHtV1>
-                  <RowHtV1>
+                    </Text>
+                  </Box>
+                  <Row>
                     <Select
                       placeholder="Select City"
                       defaultValue={null}
@@ -271,19 +299,41 @@ export default class Home extends Component {
                         });
                       }}
                     />
-                    <ButtonHtV1 width={275} ml={30} variant="primary.large">
+                    <Button width={275} ml={30} variant="primary.large">
                       LOCATE A STORE
-                    </ButtonHtV1>
-                  </RowHtV1>
-                </RowHtV1>
-              </CardHtV1>
-            </ContainerHtV1>
-          </SectionHtV1>
+                    </Button>
+                  </Row>
+                </Row>
+              </Card>
+            </Container>
+          </Section>
+
+          {/* Share and Inspire */}
+          <Section variant="section.primary">
+            <Container>
+              <LazyLoad height={200} offset={100}>
+                <Carousel title="SHARE AND INSPIRE" data={shareInspireData} />
+              </LazyLoad>
+              <Row justifyContent="center" mt={40}>
+                <Button
+                  type="button"
+                  height={56}
+                  px={40}
+                  fontSize={20}
+                  sx={{
+                    textTransform: 'inherit'
+                  }}
+                >
+                  @HomeTownIndia
+                </Button>
+              </Row>
+            </Container>
+          </Section>
 
           {/* Footer */}
           <Footer />
-        </BodyHtV1>
-      </WrapperHtV1>
+        </Body>
+      </Wrapper>
     );
   }
 }
