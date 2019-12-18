@@ -230,7 +230,13 @@ export default class LoginFormContainer extends Component {
               <Row display="block" mr="0" ml="0" pb="0">
                 <Div mt="0.675rem">
                   {!this.state.loginviaotp ? (
-                    <LoginForm askName={askName} askContact={askContact} loginType={loginType} loading={loading} />
+                    <LoginForm
+                      askName={askName}
+                      askContact={askContact}
+                      loginType={loginType}
+                      loading={loading}
+                      loggingIn={loggingIn}
+                    />
                   ) : (
                     <LoginViaOtp
                       onChangeMobile={this.onChangeMobile}
@@ -289,7 +295,12 @@ export default class LoginFormContainer extends Component {
                   </Button>
                 </Div>
                 <Div col="6" ta="center" mb="0" pl="0.625rem">
-                  <GoogleLoginBtn askContact={askContact} loginType={loginType} loading={loading} />
+                  <GoogleLoginBtn
+                    askContact={askContact}
+                    loginType={loginType}
+                    loading={loading}
+                    loggingIn={loggingIn}
+                  />
                 </Div>
               </Row>
             </div>

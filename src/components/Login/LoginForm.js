@@ -28,7 +28,7 @@ export default class LoginFormContainer extends Component {
     askContact: PropTypes.bool.isRequired,
     askName: PropTypes.bool.isRequired,
     loginType: PropTypes.string.isRequired,
-    loading: PropTypes.bool.isRequired
+    loggingIn: PropTypes.bool.isRequired
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -145,7 +145,7 @@ export default class LoginFormContainer extends Component {
       nameErrorMessage
     } = this.state;
     const {
-      loginResponse, askContact, askName, loginType, loading
+      loginResponse, askContact, askName, loginType, loggingIn
     } = this.props;
     const open = (askContact || askName) && loginType && loginType === 'hometown';
     const isValidField = this.isValid();
@@ -232,7 +232,7 @@ export default class LoginFormContainer extends Component {
                   this.onSubmitLogin(e);
                 }}
               >
-                {loading ? (
+                {loggingIn ? (
                   <span>
                     Please Wait
                     <Img className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />

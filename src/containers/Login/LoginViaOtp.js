@@ -102,7 +102,7 @@ export default class LoginViaOtp extends React.Component {
               onClick={this.onSubmitName}
               disabled={loggingIn}
             >
-              Update & Login
+              {loggingIn ? 'Please Wait..' : 'Update & Login'}
             </Button>
           </form>
         ) : (
