@@ -1,8 +1,8 @@
 import React from 'react';
 import { provideHooks } from 'redial';
-import MyCasesContainer from 'newComponents/MyCases';
+import MyOrderContainer from 'components/MyOrder';
 import MenuFooter from 'containers/MenuFooter';
-import { loadMyCases } from 'redux/modules/mycases';
+import { loadMyOrders } from 'redux/modules/orders';
 import { loadUserProfile } from 'redux/modules/profile';
 
 const hooks = {
@@ -15,16 +15,16 @@ const hooks = {
     }
     const {
       profile: {
-        data: { salesforce_account_id: sfid, contact_number: cn }
+        data: { contact_number: contactNumber }
       }
     } = getState();
-    await dispatch(loadMyCases(sfid, '', '', '', cn));
+    await dispatch(loadMyOrders(contactNumber));
   }
 };
-const MyCases = () => (
-  <MenuFooter pageTitle="Profile - My Address">
-    <MyCasesContainer />
+const MyAddress = () => (
+  <MenuFooter pageTitle="Profile - My Orders">
+    <MyOrderContainer />
   </MenuFooter>
 );
 
-export default provideHooks(hooks)(MyCases);
+export default provideHooks(hooks)(MyAddress);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { provideHooks } from 'redial';
-import MyOrderContainer from 'components/MyOrder';
+import MyOrderContainer from 'newComponents/MyOrder';
 import MenuFooter from 'containers/MenuFooter';
 import { loadMyOrders } from 'redux/modules/orders';
 import { loadUserProfile } from 'redux/modules/profile';
