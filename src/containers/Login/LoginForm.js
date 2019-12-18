@@ -168,14 +168,6 @@ export default class LoginFormContainer extends Component {
     return (
       <BoxHtV1>
         <RowHtV1 display="block" mr="0" ml="0">
-          {/* <BoxHtV1 variant="col-5">
-            <ImageShimmer
-              src="https://static.hometown.in/media/cms/hometownnew/compressed/signup-sidebar-bg.jpg"
-              height="520px"
-            >
-              {imageURL => <ImageHtV1 height="520px" src={imageURL} alt="" />}
-            </ImageShimmer>
-          </BoxHtV1> */}
           <BoxHtV1 variant="col-4" p="1.5rem 2.5rem 0.5rem 2.5rem">
             <RowHtV1 display="block" mt="rem" mr="0" ml="0">
               <BoxHtV1 variant="col-12" ta="center" px="0">
@@ -236,7 +228,7 @@ export default class LoginFormContainer extends Component {
               </BoxHtV1>
             </RowHtV1>
             <RowHtV1 display="block" mr="0" ml="0" pt="1.25rem">
-              <BoxHtV1 variant="col-12" ta="center" mb="0.625rem">
+              <BoxHtV1 variant="col-12" ta="center" mb="0.625rem" textAlign="center">
                 <LabelHtV1 fontFamily="regular" ta="center" color="color79716c" fontSize="12px" va="middle">
                   Or continue with
                 </LabelHtV1>
@@ -251,19 +243,24 @@ export default class LoginFormContainer extends Component {
                   p=".375rem .75rem"
                   fontSize="0.825rem"
                   va="middle"
-                  borderWidth="1px"
-                  borderColor="#e6e6e6"
                   size="block"
                   height="42px"
+                  width="100%"
                   bg="#FFF"
+                  font="400 0.825rem system-ui"
                   onClick={this.toggleLoginForm}
+                  sx={{
+                    borderWidth: '1px',
+                    borderStyle: 'solid',
+                    borderColor: '#e6e6e6'
+                  }}
                 >
                   {!this.state.loginviaotp ? (
                     <ImageHtV1 display="inline-block" src={OTPIcon} alt="OTP Login" va="sub" width="18px" mr="10px" />
                   ) : (
                     <ImageHtV1 display="inline-block" src={EmailIcon} alt="OTP Login" va="sub" width="18px" mr="10px" />
                   )}
-                  {!this.state.loginviaotp ? 'OTP Login' : 'Login Via Email Id'}
+                  {!this.state.loginviaotp ? 'OTP Login' : 'Email'}
                 </ButtonHtV1>
               </BoxHtV1>
               <BoxHtV1 variant="col-6" ta="center" mb="0" pl="0.625rem">
@@ -307,7 +304,7 @@ export default class LoginFormContainer extends Component {
                 />
               </BoxHtV1>
               <BoxHtV1 variant="col-12" ta="center" px="0">
-                <TextHtV1 color="black" ta="center" mt="1em" sx={{ fontSize: '10' }}>
+                <TextHtV1 color="textPrimary" ta="center" mt="1em" fontSize="12px" fontWeight="600">
                   If you don't yet have HomeTown account, please register.
                 </TextHtV1>
               </BoxHtV1>

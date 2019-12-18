@@ -19,10 +19,21 @@ import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
 import ColHtV1 from 'hometown-components-dev/lib/ColHtV1';
 import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
 import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
+import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
+import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
 import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
+// import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
 import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
-import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
+
 import SignUpFormHtV1 from 'hometown-components-dev/lib/FormsHtV1/SignUpFormHtV1';
+
+/* ====== Page Components ====== */
+import LoginForm from 'newComponents/LoginForms/LoginForm';
+import GoogleLoginBtn from 'newComponents/LoginForms/GoogleLogin';
+import LoginViaOtp from 'newComponents/LoginForms/LoginViaOtp';
+
+const OTPIcon = require('../../../static/otp.svg');
+const EmailIcon = require('../../../static/email-primary.svg');
 
 @connect(({ userSignUp, app }) => ({
   loading: userSignUp.loading,
@@ -151,32 +162,137 @@ export default class SignupFormContainer extends Component {
     return (
       <BoxHtV1>
         <RowHtV1>
-          <ColHtV1 variant="col-12">
-            <HeadingHtV1>Be the first!</HeadingHtV1>
-            <TextHtV1>to get regular updates on new product launches, exclusive previews and specials offers.</TextHtV1>
-          </ColHtV1>
-        </RowHtV1>
-        <RowHtV1>
-          <ColHtV1 variant="col-6">
+          <ColHtV1 variant="col-4">
             <BoxHtV1>
-              <ImageShimmer src="https://static.hometown.in/media/cms/hometownnew/compressed/login.jpg" height="514px">
-                {imageURL => <ImageHtV1 src={imageURL} alt="" />}
-              </ImageShimmer>
+              <HeadingHtV1
+                color="#1b2125"
+                mt="0"
+                mb="0"
+                fontWeight="700"
+                fontSize="23px"
+                ta="center"
+                fontFamily="HelveticaNeue"
+              >
+                SIGN IN
+              </HeadingHtV1>
             </BoxHtV1>
+            <BoxHtV1>
+              <hr
+                sx={{
+                  color: '#000000',
+                  backgroundColor: '#000000',
+                  height: 0.5,
+                  borderColor: '#000000',
+                  mx: '0',
+                  width: '100%'
+                }}
+              />
+            </BoxHtV1>
+            <BoxHtV1>
+              <TextHtV1 fontSize="10px"> *Register</TextHtV1>
+            </BoxHtV1>
+            <RowHtV1 display="block" mr="0" ml="0" pb="0" mt=".4em">
+              <BoxHtV1 mt="0.675rem" variant="col-12" ta="center" px="0">
+                {!this.state.loginviaotp ? (
+                  <LoginForm />
+                ) : (
+                  <LoginViaOtp
+                    onChangeMobile={this.onChangeMobile}
+                    onChangeOtp={this.onChangeOtp}
+                    onSubmitMobileNumber={this.onSubmitMobileNumber}
+                    onSubmitOtp={this.onSubmitOtp}
+                  />
+                )}
+              </BoxHtV1>
+            </RowHtV1>
+            <RowHtV1 display="block" mr="0" ml="0" pt="1.25rem">
+              <BoxHtV1 variant="col-12" ta="center" mb="0.625rem" textAlign="center">
+                <LabelHtV1 fontFamily="regular" ta="center" color="color79716c" fontSize="12px" va="middle">
+                  Or continue with
+                </LabelHtV1>
+              </BoxHtV1>
+              <BoxHtV1 variant="col-6" ta="center" mb="0" pr="0.625rem">
+                <ButtonHtV1
+                  btnType="custom"
+                  fontFamily="regular"
+                  ta="center"
+                  color="black"
+                  mr="0.3125rem"
+                  p=".375rem .75rem"
+                  fontSize="0.825rem"
+                  va="middle"
+                  size="block"
+                  height="42px"
+                  width="100%"
+                  bg="#FFF"
+                  font="400 0.825rem system-ui"
+                  onClick={this.toggleLoginForm}
+                  sx={{
+                    borderWidth: '1px',
+                    borderStyle: 'solid',
+                    borderColor: '#e6e6e6'
+                  }}
+                >
+                  {!this.state.loginviaotp ? (
+                    <ImageHtV1
+                      display="inline-block"
+                      src={OTPIcon}
+                      alt="OTP Login"
+                      va="sub"
+                      width="18px"
+                      mr="0.625rem"
+                    />
+                  ) : (
+                    <ImageHtV1
+                      display="inline-block"
+                      src={EmailIcon}
+                      alt="OTP Login"
+                      va="sub"
+                      width="18px"
+                      mr="0.625rem"
+                    />
+                  )}
+                  {!this.state.loginviaotp ? 'OTP Login' : 'Email'}
+                </ButtonHtV1>
+              </BoxHtV1>
+              <BoxHtV1 variant="col-6" ta="center" mb="0" pl="0.625rem">
+                <GoogleLoginBtn loading={loading} />
+              </BoxHtV1>
+            </RowHtV1>
           </ColHtV1>
-          <ColHtV1 variant="col-6">
+          <ColHtV1 variant="col-8">
             <BoxHtV1>
               <RowHtV1>
                 <ColHtV1 variant="col-12" ta="center">
-                  <HeadingHtV1>
-                    Sign up now
-                    <br />
-                    and get Rs. 500 off*
-                  </HeadingHtV1>
-                  <TextHtV1>on your first purchase</TextHtV1>
+                  <BoxHtV1 variant="col-12" ta="center" px="0">
+                    <HeadingHtV1
+                      color="#1b2125"
+                      mt="0"
+                      mb="0"
+                      fontWeight="700"
+                      fontSize="23px"
+                      ta="center"
+                      fontFamily="HelveticaNeue"
+                    >
+                      CREATE AN ACCOUNT
+                    </HeadingHtV1>
+                  </BoxHtV1>
+                  <BoxHtV1 variant="col-12" ta="center" px="0">
+                    <hr
+                      sx={{
+                        color: '#000000',
+                        backgroundColor: '#000000',
+                        height: 0.5,
+                        borderColor: '#000000',
+                        mx: '0',
+                        width: '100%'
+                      }}
+                    />
+                  </BoxHtV1>
+                  <TextHtV1 fontSize="10px"> *Register</TextHtV1>
                 </ColHtV1>
               </RowHtV1>
-              <RowHtV1>
+              <RowHtV1 mt="1em">
                 <ColHtV1>
                   <SignUpFormHtV1
                     email={email}
@@ -199,6 +315,22 @@ export default class SignupFormContainer extends Component {
                     loading={loading}
                     loginUrl={LOGIN_URL}
                   />
+                </ColHtV1>
+              </RowHtV1>
+              <RowHtV1>
+                <ColHtV1>
+                  {/* <BoxHtV1>
+                    <Label>
+                      <Checkbox
+                        id="remember"
+                        name="remember"
+                      />
+                      I have read and agree to <TextHtV1>HomeTown Policy.</TextHtV1>
+                    </Label>
+                  </BoxHtV1> */}
+                  <ButtonHtV1 px="2.5em" mt="2em">
+                    Register
+                  </ButtonHtV1>
                 </ColHtV1>
               </RowHtV1>
             </BoxHtV1>
