@@ -11,12 +11,12 @@ const ProfileContainer = () => (
   <BoxHtV1>
     <MenuFooter pageTitle="My Profile">
       <MyMenu page="profile" />
-      <ContainerHtV1 type="container" pr="0" pl="0">
-        <RowHtV1 display="block" mr="0" ml="0" p="2rem 0">
-          <BoxHtV1 col="6" pr="3rem">
+      <ContainerHtV1 type="container" pr={0} pl={0}>
+        <RowHtV1 display="block" mr={0} ml={0} padding="2rem 0">
+          <BoxHtV1 col="6" paddingRight="3rem" width="49.8%">
             <ProfileForm />
           </BoxHtV1>
-          <BoxHtV1 col="6" pl="3rem">
+          <BoxHtV1 col="6" paddingLeft="3rem" width="49.8%">
             <UpdatePasswordForm />
           </BoxHtV1>
         </RowHtV1>

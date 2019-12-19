@@ -6,8 +6,9 @@ import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
 import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
 import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
 import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
-import ButtonHtV1 from 'hometown-components-dev/lib/Buttons';
+import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
 import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
+import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
 import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
 import MyMenu from 'newComponents/MyMenu';
 import { addAddress, updateAddress } from 'redux/modules/myaddress';
@@ -343,13 +344,42 @@ export default class DeliveryAddress extends Component {
     return (
       <BoxHtV1 type="block" mb="2rem">
         <MyMenu page="address" />
-        <SectionHtV1 display="flex" pt="1.25rem" mb="0" height="auto">
+        <SectionHtV1
+          sx={{
+            display: 'flex',
+            boxShadow: 'none',
+            height: 'auto',
+            position: 'relative',
+            marginBottom: '0',
+            boxSizing: 'border-box',
+            padding: '1.25rem 0.9375rem 0.9375rem'
+          }}
+        >
           <ContainerHtV1 type="container" pr="0" pl="0">
             <RowHtV1 display="block" mr="0" ml="0">
               {data.map((item, index) => (
-                <BoxHtV1 col="4" pr="0.625rem" key={`${item.id_address_customer || '_'}_${String(index)}`}>
-                  <button
+                <BoxHtV1
+                  col="4"
+                  pr="0.625rem"
+                  width="33.24%"
+                  float="left"
+                  key={`${item.id_address_customer || '_'}_${String(index)}`}
+                >
+                  <ButtonHtV1
                     className={`${styles.addressBtn} ${index === currentaddressindex && styles.active}`}
+                    sx={{
+                      borderRadius: '4px',
+                      bg: '#ffffff',
+                      border: 'solid 2px #efefef',
+                      padding: '0.625rem 1rem',
+                      color: 'rgba(0, 0, 0, 0.6)',
+                      textAlign: 'left',
+                      lineHeight: '1.6',
+                      fontSize: '14px',
+                      width: '100%',
+                      minHeight: '135px',
+                      marginBottom: '10px'
+                    }}
                     onClick={() => this.handleClick(index)}
                   >
                     <b>{item.full_name}</b>
@@ -364,17 +394,17 @@ export default class DeliveryAddress extends Component {
                     <br />
                     {item.state || ''}
                     <br />
-                  </button>
+                  </ButtonHtV1>
                 </BoxHtV1>
               ))}
 
               <BoxHtV1 col="2">
-                <button className={styles.addAddressBtn} onClick={this.toggleAddAddresForm}>
-                  <img src={addIcon} alt="Add another address" />
+                <ButtonHtV1 className={styles.addAddressBtn} onClick={this.toggleAddAddresForm}>
+                  <ImageHtV1 src={addIcon} alt="Add another address" />
                   <TextHtV1 color="rgba(0, 0, 0, 0.6)" ta="center">
                     Add address
                   </TextHtV1>
-                </button>
+                </ButtonHtV1>
               </BoxHtV1>
             </RowHtV1>
             {editForm && (
@@ -470,6 +500,7 @@ export default class DeliveryAddress extends Component {
                       fontFamily="regular"
                       height="42px"
                       mt="1.5rem"
+                      width="100%"
                       onClick={this.handleSubmit}
                       disabled={this.checkDisabled()}
                     >
