@@ -2,7 +2,9 @@ import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-/* ====== Components ====== */
+/**
+ * Components
+ */
 import Absolute from 'hometown-components-dev/lib/AbsoluteHtV1';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
@@ -12,8 +14,6 @@ import Label from 'hometown-components-dev/lib/LabelHtV1';
 import LinkRedirect from 'hometown-components-dev/lib/LinkRedirectHtV1';
 import Row from 'hometown-components-dev/lib/RowHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
-
-// const { SITE_URL } = process.env;
 
 class NavBar extends Component {
   render() {
@@ -70,7 +70,22 @@ class NavBar extends Component {
 
             {/* More Button */}
             <Box sx={{ position: 'relative' }}>
-              <Button variant="link">
+              <Button
+                variant="link"
+                sx={{
+                  '& ~ div': {
+                    display: 'none',
+                    '&:hover': {
+                      display: 'block'
+                    }
+                  },
+                  '&:hover': {
+                    '& ~ div': {
+                      display: 'block'
+                    }
+                  }
+                }}
+              >
                 <Text variant="menu">More</Text>
               </Button>
               <Card variant="card.moreDropdown" px={0} py={0}>

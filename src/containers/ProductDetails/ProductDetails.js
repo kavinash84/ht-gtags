@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ProductDetailsContainer from 'components/ProductDetails';
-import Menu from 'containers/MenuNew/index';
-import Footer from 'components/Footer';
-import Section from 'hometown-components-dev/lib/Section';
-import ProductDetailsShimmer from 'components/ProductDetails/ProductDetailsShimmer';
+import ProductDetailsContainer from 'newComponents/ProductDetails';
+// import Footer from 'components/Footer';
+import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
+import Header from 'newComponents/Header';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import ProductDetailsShimmer from 'newComponents/ProductDetails/ProductDetailsShimmer';
 import ProductNotFoundContainer from './ProductNotFound';
 
 @connect(({ productdetails }) => ({
@@ -17,19 +18,20 @@ export default class ProductDetails extends Component {
  loading, loaded, history, productDescription
 } = this.props;
     return (
-      <Section p="0" mb="0">
-        <div className="wrapper">
-          <Menu />
+      <SectionHtV1 p={0} mb={0}>
+        <BoxHtV1>
+          {/* <Menu /> */}
+          <Header />
           {loading && !loaded && <ProductDetailsShimmer />}
           {!loading && loaded && productDescription && productDescription.error_message && <ProductNotFoundContainer />}
           {!loading && !productDescription.error_message && loaded && (
-            <div>
+            <BoxHtV1>
               <ProductDetailsContainer history={history} />
-            </div>
+            </BoxHtV1>
           )}
-        </div>
-        <Footer />
-      </Section>
+        </BoxHtV1>
+        {/* <Footer /> */}
+      </SectionHtV1>
     );
   }
 }

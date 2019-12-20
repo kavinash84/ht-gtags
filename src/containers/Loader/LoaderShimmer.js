@@ -1,9 +1,9 @@
 import React from 'react';
-import Div from 'hometown-components-dev/lib/Div';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
 import { Shimmer, BackgroundMasker } from 'hometown-components-dev/lib/Shimmer';
 
 const LoaderShimmer = () => (
-  <Div type="block">
+  <BoxHtV1 type="block">
     <Shimmer height="800px">
       <BackgroundMasker width="100%" height="15px" top="30px" />
       <BackgroundMasker width="calc((100% - 1170px) / 2)" height="calc(15px + 40px + 10px)" top="30px" />
@@ -48,7 +48,7 @@ const LoaderShimmer = () => (
       <BackgroundMasker width="30%" height="50px" top="calc(30px + 15px + 40px + 50px + 550px)" left="0" />
       <BackgroundMasker width="100%" height="50px" top="calc(30px + 15px + 40px + 50px + 500px + 90px)" />
     </Shimmer>
-  </Div>
+  </BoxHtV1>
 );
 
 export default LoaderShimmer;
