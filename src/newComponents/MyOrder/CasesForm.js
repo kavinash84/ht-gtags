@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
-import InputFieldHtV1 from 'hometown-components-dev/lib/InputFieldHtV1';
 import FormInputHtV1 from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
 import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
 import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
@@ -212,10 +211,10 @@ class CasesFormContainer extends Component {
     } = this.state;
     const { loading } = this.props;
     return (
-      <div className={styles.caseFormWrapper}>
+      <BoxHtV1 className={styles.caseFormWrapper}>
         <RowHtV1 display="block" mr="0" ml="0">
-          <BoxHtV1 col="12" bg="#a39994" pt="20px" pb="18px">
-            <HeadingHtV1 color="white" mt="0" mb="0" fontSize="18px" ta="center" fontFamily="regular" lh="1">
+          <BoxHtV1 col="12" bg="#a39994" pt="20px" pb="18px" width="100%">
+            <HeadingHtV1 color="white" mt="0" mb="0" fontSize="18px" textAlign="center" fontFamily="regular" lh="1">
               Register New Case
             </HeadingHtV1>
           </BoxHtV1>
@@ -229,7 +228,7 @@ class CasesFormContainer extends Component {
               encType="multipart/form-data"
               className="bulk-order-form"
             >
-              <div className={styles.formList}>
+              <BoxHtV1 className={styles.formList}>
                 <BoxHtV1 col="12">
                   <FormInputHtV1
                     label="Subject *"
@@ -241,8 +240,8 @@ class CasesFormContainer extends Component {
                     feedBackMessage={subjectErrorMessage}
                   />
                 </BoxHtV1>
-                <BoxHtV1 col="12" mb="0.625rem">
-                  <LabelHtV1 fontSize="0.875em" mb="0.625rem">
+                <BoxHtV1 col="12" mb={20}>
+                  <LabelHtV1 fontSize="0.875em" mb={20}>
                     Type *
                   </LabelHtV1>
                   <Select
@@ -252,32 +251,28 @@ class CasesFormContainer extends Component {
                     options={this.TypeOptions}
                   />
                 </BoxHtV1>
-                <BoxHtV1 col="12">
-                  <InputFieldHtV1 mb="0.625rem">
+                <BoxHtV1 col="12" mb={20}>
+                  <LabelHtV1 fontSize="0.875em" mb={20}>
+                    Category *
+                  </LabelHtV1>
+                  <Select
+                    defaultValue={null}
+                    value={this.state.category}
+                    onChange={this.onChangeCategory}
+                    options={this.getCategoryOptions()}
+                  />
+                </BoxHtV1>
+                {this.getSubCategoryOptions().length ? (
+                  <BoxHtV1 col="12" mb="0.625rem">
                     <LabelHtV1 fontSize="0.875em" mb="0.625rem">
-                      Category *
+                      Sub Category *
                     </LabelHtV1>
                     <Select
                       defaultValue={null}
-                      value={this.state.category}
-                      onChange={this.onChangeCategory}
-                      options={this.getCategoryOptions()}
+                      value={this.state.subcategory}
+                      onChange={this.onChangeSubCategory}
+                      options={this.getSubCategoryOptions()}
                     />
-                  </InputFieldHtV1>
-                </BoxHtV1>
-                {this.getSubCategoryOptions().length ? (
-                  <BoxHtV1 col="12">
-                    <InputFieldHtV1 mb="0.625rem">
-                      <LabelHtV1 fontSize="0.875em" mb="0.625rem">
-                        Sub Category *
-                      </LabelHtV1>
-                      <Select
-                        defaultValue={null}
-                        value={this.state.subcategory}
-                        onChange={this.onChangeSubCategory}
-                        options={this.getSubCategoryOptions()}
-                      />
-                    </InputFieldHtV1>
                   </BoxHtV1>
                 ) : (
                   ''
@@ -295,7 +290,7 @@ class CasesFormContainer extends Component {
                   />
                 </BoxHtV1>
                 <BoxHtV1 col="12">
-                  <div className="buttons-set">
+                  <BoxHtV1 className="buttons-set">
                     <ButtonHtV1
                       disabled={this.isDisabled() || loading}
                       onClick={this.onSubmitForm}
@@ -306,13 +301,13 @@ class CasesFormContainer extends Component {
                     >
                       {loading ? 'Please Wait ...' : 'SUBMIT'}
                     </ButtonHtV1>
-                  </div>
+                  </BoxHtV1>
                 </BoxHtV1>
-              </div>
+              </BoxHtV1>
             </form>
           </BoxHtV1>
         </RowHtV1>
-      </div>
+      </BoxHtV1>
     );
   }
 }

@@ -105,9 +105,9 @@ class MyCasesContainer extends Component {
       <BoxHtV1 type="block" mb="2rem">
         <MyMenu page="address" />
         <SectionHtV1 display="flex" pt="1.25rem" mb="0" height="auto">
-          <ContainerHtV1 type="container" pr="0" pl="0">
+          <ContainerHtV1 type="container" pr="0" pl="0" width="100%">
             <RowHtV1 display="block" mr="0" ml="0" mb="1.5rem">
-              <BoxHtV1 col="3" mr="1rem">
+              <BoxHtV1 col="3" mr="1rem" width="25%" float="left">
                 <Select
                   placeholder="Select From Date"
                   defaultValue={null}
@@ -116,7 +116,7 @@ class MyCasesContainer extends Component {
                   options={getDateFilters(this.FILTER_CONFIG)}
                 />
               </BoxHtV1>
-              <BoxHtV1 col="3" mr="1rem">
+              <BoxHtV1 col="3" mr="1rem" width="25%" float="left">
                 <Select
                   placeholder="Select Case Status"
                   defaultValue={null}
@@ -125,16 +125,16 @@ class MyCasesContainer extends Component {
                   options={this.STATUS_FILTER}
                 />
               </BoxHtV1>
-              <BoxHtV1 col="1" mr="1rem">
+              <BoxHtV1 col="1" mr="1rem" width="8.33%" float="left">
                 <ButtonHtV1
                   disabled={loading}
                   onClick={this.getFilteredCases}
                   border="1px solid"
-                  color="red"
+                  color="colors.white"
                   lh="1.5"
                   size="block"
                   btnType="primary"
-                  btnColor="#515151"
+                  bg="rgb(249, 141, 41)"
                   height="38px"
                   fontSize="16px"
                 >
