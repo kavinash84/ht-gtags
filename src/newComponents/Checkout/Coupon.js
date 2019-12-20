@@ -93,6 +93,31 @@ class Coupon extends React.Component {
     } = cart;
     return (
       <BoxHtV1>
+        <BoxHtV1 variant="col-12" ta="center" px="0">
+          <HeadingHtV1
+            color="#1b2125"
+            mt="0"
+            mb="0"
+            fontWeight="700"
+            fontSize="23px"
+            ta="center"
+            fontFamily="HelveticaNeue"
+          >
+            Order Summary
+          </HeadingHtV1>
+        </BoxHtV1>
+        <BoxHtV1 variant="col-12" ta="center" px="0">
+          <hr
+            sx={{
+              color: '#000000',
+              backgroundColor: '#000000',
+              height: 0.5,
+              borderColor: '#000000',
+              mx: '0',
+              width: '100%'
+            }}
+          />
+        </BoxHtV1>
         <BoxHtV1 className={styles.applyCoupon}>
           {appliedCoupon ? (
             <BoxHtV1>
@@ -139,7 +164,7 @@ class Coupon extends React.Component {
             </BoxHtV1>
           ) : (
             <BoxHtV1>
-              <HeadingHtV1 fontSize="0.875em" mb="0.625rem" color="secondary">
+              <HeadingHtV1 fontSize="0.775em" mb="0.225rem" mt="1em" color="primary">
                 Have a Coupon Code?
               </HeadingHtV1>
               <BoxHtV1 className={`${styles.applyCouponWrapper}`}>
@@ -149,7 +174,7 @@ class Coupon extends React.Component {
                     type="text"
                     onChange={this.handleChange}
                     value={this.state.coupon.toUpperCase()}
-                    placeholder="Enter coupon code"
+                    placeholder="Enter here"
                   />
                   <ButtonHtV1
                     className={styles.applyCouponBtn}
@@ -170,14 +195,20 @@ class Coupon extends React.Component {
                 )}
               </BoxHtV1>
 
-              <LabelHtV1 textAlign="center" color="#3cc0dc" display="block" mt="5px" mb="0.9375rem">
+              <LabelHtV1 textAlign="right" color="primary" display="block">
                 <ButtonHtV1
                   onClick={this.toggleMoreCoupons}
                   p="0"
-                  color="#3cc0dc"
+                  color="primary"
                   size="block"
                   btnType="link"
-                  textAlign="right"
+                  bg="transparent"
+                  fontSize="12px"
+                  borderColor="primary"
+                  borderBottom="1px"
+                  height="100%"
+                  textTransform="capitalize"
+                  textDecoration="underline"
                 >
                   {couponlistToggle ? 'Hide Coupons' : ' View Applicable Coupons'}
                 </ButtonHtV1>

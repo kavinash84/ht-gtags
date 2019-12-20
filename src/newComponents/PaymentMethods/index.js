@@ -13,27 +13,29 @@ const walletIcon = require('../../../static/wallet-icon.png');
 
 const PaymentMethods = () => (
   <BoxHtV1 mt="1rem" pl="0.625rem" pr="0.625rem">
-    <HeadingHtV1 fontSize="1em" mb="0.625rem" color="secondary">
-      We Accept
-    </HeadingHtV1>
+    <BoxHtV1 variant="col-12" p="0">
+      <HeadingHtV1 fontSize="1em" mb="0.625rem" color="menuItem">
+        Accepted Payment Options
+      </HeadingHtV1>
+    </BoxHtV1>
     <RowHtV1 ml="0" mr="0">
-      <BoxHtV1 col="2" mb="0" p="0 5px">
+      <BoxHtV1 variant="col-2" mb="0" p="0 5px">
         <ImageHtV1 src={visaIcon} alt="visaCard" width="100%" />
       </BoxHtV1>
-      <BoxHtV1 col="2" mb="0" p="0 5px">
+      <BoxHtV1 variant="col-2" mb="0" p="0 5px">
         <ImageHtV1 src={mastercardIcon} alt="Master Card" width="100%" />
       </BoxHtV1>
-      <BoxHtV1 col="2" mb="0" p="0 5px">
+      <BoxHtV1 variant="col-2" mb="0" p="0 5px">
         <ImageHtV1 src={maestroIcon} alt="Maestro" width="100%" />
       </BoxHtV1>
-      <BoxHtV1 col="2" mb="0" p="0 5px">
+      <BoxHtV1 variant="col-2" mb="0" p="0 5px">
         <ImageHtV1 src={aeIcon} alt="Amex" width="100%" />
       </BoxHtV1>
-      <BoxHtV1 col="2" mb="0" p="6px 5px">
+      <BoxHtV1 variant="col-2" mb="0" p="6px 5px">
         <ImageHtV1 src={intBankingIcon} alt="Diners Club" width="100%" />
       </BoxHtV1>
-      <BoxHtV1 col="2" mb="0" p="5px 5px">
-        <ImageHtV1 height="24px" src={walletIcon} alt="Wallet" width="100%" />
+      <BoxHtV1 variant="col-2" mb="0" p="5px 5px">
+        <ImageHtV1 src={walletIcon} alt="Wallet" width="100%" />
       </BoxHtV1>
     </RowHtV1>
   </BoxHtV1>

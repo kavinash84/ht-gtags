@@ -100,6 +100,7 @@ export default class CartContainer extends Component {
                 url="/"
                 bg="#fafafa"
                 subTitleWidth="43%"
+                p="10"
               >
                 <ImageHtV1 src={CartEmptyIcon} width="initial" m="auto" alt="Sorry no results found" />
               </EmptyHtV1>
