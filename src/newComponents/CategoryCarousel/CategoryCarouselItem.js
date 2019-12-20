@@ -11,16 +11,18 @@ const CategoryItem = ({
   if (url) {
     return (
       <Box variant="section.catSliderItem">
-        <Link to={url || '/'}>
+        <Link to={url}>
           {image && <Image src={image} alt={name} />}
-          {discount !== null && (
+          {discount && (
             <Text variant="catSliderDiscount" mt={16}>
               {discount}
             </Text>
           )}
-          <Text variant="catSliderTitle" mt={12}>
-            {name}
-          </Text>
+          {name && (
+            <Text variant="catSliderTitle" mt={12}>
+              {name}
+            </Text>
+          )}
         </Link>
       </Box>
     );
@@ -28,9 +30,16 @@ const CategoryItem = ({
   return (
     <Box variant="section.catSliderItem">
       {image && <Image src={image} alt={name} />}
-      <Text variant="catSliderTitle" mt={20}>
-        {name}
-      </Text>
+      {discount && (
+        <Text variant="catSliderDiscount" mt={16}>
+          {discount}
+        </Text>
+      )}
+      {name && (
+        <Text variant="catSliderTitle" mt={12}>
+          {name}
+        </Text>
+      )}
     </Box>
   );
 };

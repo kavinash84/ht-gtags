@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import LazyLoad from 'react-lazyload';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
@@ -23,6 +24,7 @@ import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 
 /* ====== Page Components ====== */
 import CategoryCarousel from 'newComponents/CategoryCarousel';
+import OfferBanner from 'newComponents/Home/OfferBanner';
 import Carousel from 'newComponents/Carousel';
 import Footer from 'newComponents/Footer';
 import Header from 'newComponents/Header';
@@ -35,7 +37,7 @@ const sliderImage = require('../../static/slider.png');
 const bannerImage = require('../../static/banner.png');
 const designBuildLogo = require('../../static/designBuildLogo.png');
 
-const OFFER_ID = 5;
+// const OFFER_ID = 5;
 
 const shareInspireData = [
   {
@@ -161,10 +163,11 @@ export default class Home extends Component {
   };
 
   render() {
-    const { banners, homepageCategories, cities } = this.props;
+    const {
+ banners, middleBanner, homepageCategories, cities
+} = this.props;
     const citiesList = cities.map(item => ({ value: item, label: item }));
     const { citySelectError, cityErrorMessage } = this.state;
-
     return (
       /* eslint-disable max-len */
       <Wrapper>
@@ -200,46 +203,36 @@ export default class Home extends Component {
           {/* USPs */}
           <Usp />
 
-          {/* Grid View */}
-          <Section>
-            <Container>
-              <GridView />
-            </Container>
-          </Section>
-
           {/* Category Carousel */}
           <Fragment>
             {homepageCategories.map((category, index) => {
-              const { id } = category;
-              if (id && OFFER_ID !== id && OFFER_ID !== parseInt(id, 10)) {
+              if (category.view && category.view === 'list') {
                 return (
-                  <Section variant="section.primary" key={String(index)}>
+                  <Section>
                     <Container>
-                      <LazyLoad height={200} offset={100}>
-                        <CategoryCarousel
-                          categoryName={category.title}
-                          subTitle={category.sub_title}
-                          data={category.values}
-                        />
-                      </LazyLoad>
+                      <GridView data={category.values || []} />
                     </Container>
                   </Section>
                 );
               }
-              return '';
+              return (
+                <Section variant="section.primary" key={String(index)}>
+                  <Container>
+                    <LazyLoad height={200} offset={100}>
+                      <CategoryCarousel
+                        categoryName={category.title}
+                        subTitle={category.sub_title}
+                        data={category.values}
+                      />
+                    </LazyLoad>
+                  </Container>
+                </Section>
+              );
             })}
           </Fragment>
 
           {/* Offer Banner */}
-          <Section>
-            <Container>
-              <Row>
-                <Col>
-                  <Image src="https://www.hometown.in/media/cms/hometown201920/homepage-banner.png" variant="image" />
-                </Col>
-              </Row>
-            </Container>
-          </Section>
+          <OfferBanner image={middleBanner.image_url} url={middleBanner.url_key} target={middleBanner.target || ''} />
 
           {/* LET US DESIGN FOR YOU */}
           <Section>
@@ -249,25 +242,29 @@ export default class Home extends Component {
               </Row>
               <Row>
                 <Col variant="colBasis" flexDirection="column">
-                  <Box mb={20} sx={{ position: 'relative' }}>
-                    <Image src={sliderImage} />
-                    <Image src={designBuildLogo} variant="image.logoHomeTown" />
-                  </Box>
-                  <Heading variant="heading" textAlign="center">
-                    Design and Build
-                  </Heading>
+                  <Link to="/design-build">
+                    <Box mb={20} sx={{ position: 'relative' }}>
+                      <Image src={sliderImage} />
+                      <Image src={designBuildLogo} variant="image.logoHomeTown" />
+                    </Box>
+                    <Heading variant="heading" textAlign="center">
+                      Design and Build
+                    </Heading>
+                  </Link>
                 </Col>
                 <Col variant="colBasis" flexDirection="column">
-                  <Box mb={20} sx={{ position: 'relative' }}>
-                    <Image src={bannerImage} />
-                    <Image
-                      src="https://www.hometown.in/design-build/static/mkLogo.ae5caa06.png"
-                      variant="image.logoHomeTown"
-                    />
-                  </Box>
-                  <Heading variant="heading" textAlign="center">
-                    Modular Kitchen
-                  </Heading>
+                  <Link to="/modular-kitchens">
+                    <Box mb={20} sx={{ position: 'relative' }}>
+                      <Image src={bannerImage} />
+                      <Image
+                        src="https://www.hometown.in/design-build/static/mkLogo.ae5caa06.png"
+                        variant="image.logoHomeTown"
+                      />
+                    </Box>
+                    <Heading variant="heading" textAlign="center">
+                      Modular Kitchen
+                    </Heading>
+                  </Link>
                 </Col>
               </Row>
             </Container>
@@ -360,7 +357,8 @@ Home.defaultProps = {
   isLoggedIn: false,
   banners: [],
   homepageCategories: [],
-  cities: []
+  cities: [],
+  middleBanner: {}
 };
 
 Home.propTypes = {
@@ -368,5 +366,6 @@ Home.propTypes = {
   banners: PropTypes.array,
   homepageCategories: PropTypes.array,
   cities: PropTypes.array,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  middleBanner: PropTypes.object
 };
