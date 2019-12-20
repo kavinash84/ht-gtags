@@ -26,6 +26,12 @@ const styles = require('./Cart.scss');
 const deleteIcon = require('../../../static/delete.svg');
 const location = require('../../../static/map-icon.svg');
 const orderTrack = require('../../../static/order-track.svg');
+const aeIcon = require('../../../static/american-express.svg');
+const maestroIcon = require('../../../static/maestro.svg');
+const mastercardIcon = require('../../../static/mastercard.svg');
+const visaIcon = require('../../../static/visa.svg');
+const intBankingIcon = require('../../../static/net-banking.png');
+const walletIcon = require('../../../static/wallet-icon.png');
 
 const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
 
@@ -70,13 +76,33 @@ const Cart = ({
           <RowHtV1 display="block" mr="0" ml="0">
             <BoxHtV1 variant="col-8" pl="0" pt="0">
               <RowHtV1 type="block" m="0" mb="5" mt="0">
-                <HeadingHtV1 mb="1.5rem">
-                  My Shopping Cart:{' '}
-                  <LabelHtV1 fontSize="1.3rem" fontWeight="300">
-                    {' '}
-                    X Items
-                  </LabelHtV1>
-                </HeadingHtV1>
+                <BoxHtV1 variant="col-8" pl="0">
+                  <HeadingHtV1 mb="1.5rem">
+                    My Shopping Cart:{' '}
+                    <LabelHtV1 fontSize="1.3rem" fontWeight="300">
+                      {' '}
+                      X Items
+                    </LabelHtV1>
+                  </HeadingHtV1>
+                </BoxHtV1>
+
+                <BoxHtV1 variant="col-4" pl="0">
+                  <ButtonHtV1
+                    size="block"
+                    btnType="primary"
+                    height="42px"
+                    mt="0"
+                    fontWeight="700"
+                    fontSize="16px"
+                    ls="1px"
+                    pt="9px"
+                    width="100%"
+                    borderRadius="0"
+                  >
+                    <ImageHtV1 src={deleteIcon} alt="Delete" height="18px" mr="0.625rem" />
+                    SECURE CHECKOUT
+                  </ButtonHtV1>
+                </BoxHtV1>
                 <BoxHtV1 variant="col-12" pl="0" verticalAlign="middle" display="flex" lineHeight="2">
                   <ImageHtV1 width="initial" height="25px" mr="1rem" mt="3px" float="left" src={location} />
                   <LabelHtV1 color="filterTitle" mt="0" mb="0">
@@ -297,8 +323,10 @@ const Cart = ({
                     pt="5px"
                     fontSize="12px"
                     fontWeight="600"
-                    borderBottom="1px"
-                    borderColor="#232324"
+                    sx={{
+                      borderBottom: '1px',
+                      borderColor: '#232324'
+                    }}
                   >
                     Read More
                   </LabelHtV1>
@@ -321,6 +349,53 @@ const Cart = ({
                     Read More
                   </LabelHtV1>
                 </BoxHtV1>
+                <RowHtV1
+                  sx={{
+                    borderWidth: '1px',
+                    borderStyle: 'solid',
+                    borderColor: 'border',
+                    mx: '0',
+                    mt: '2em'
+                  }}
+                >
+                  <BoxHtV1
+                    variant="col-12"
+                    textAlign="center"
+                    sx={{
+                      position: 'relative',
+                      top: '-9px',
+                      mb: '0',
+                      p: '0'
+                    }}
+                  >
+                    <TextHtV1
+                      textAlign="center"
+                      sx={{
+                        background: '#f3f3f3'
+                      }}
+                    >
+                      Gauranteed Secure Checkout
+                    </TextHtV1>
+                  </BoxHtV1>
+                  <BoxHtV1 variant="col-2" mb="0" p="0 5px">
+                    <ImageHtV1 src={visaIcon} alt="visaCard" width="100%" />
+                  </BoxHtV1>
+                  <BoxHtV1 variant="col-2" mb="0" p="0 5px">
+                    <ImageHtV1 src={mastercardIcon} alt="Master Card" width="100%" />
+                  </BoxHtV1>
+                  <BoxHtV1 variant="col-2" mb="0" p="0 5px">
+                    <ImageHtV1 src={maestroIcon} alt="Maestro" width="100%" />
+                  </BoxHtV1>
+                  <BoxHtV1 variant="col-2" mb="0" p="0 5px">
+                    <ImageHtV1 src={aeIcon} alt="Amex" width="100%" />
+                  </BoxHtV1>
+                  <BoxHtV1 variant="col-2" mb="0" p="6px 5px">
+                    <ImageHtV1 src={intBankingIcon} alt="Diners Club" width="100%" />
+                  </BoxHtV1>
+                  <BoxHtV1 variant="col-2" mb="0" p="5px 5px">
+                    <ImageHtV1 src={walletIcon} alt="Wallet" width="100%" />
+                  </BoxHtV1>
+                </RowHtV1>
               </BoxHtV1>
             </BoxHtV1>
           </RowHtV1>

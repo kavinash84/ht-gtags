@@ -4,10 +4,12 @@ import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
 import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
 import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
 import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
+import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
 import { formatAmount } from 'utils/formatters';
 import Coupon from './Coupon';
 
 const styles = require('./OrderSummary.scss');
+const deleteIcon = require('../../../static/delete.svg');
 
 const OrderSummary = ({
   itemsTotal,
@@ -110,15 +112,18 @@ const OrderSummary = ({
           btnType="primary"
           height="42px"
           mt="0"
-          fontFamily="Light"
-          fontSize="1.125rem"
+          fontWeight="700"
+          fontSize="16px"
           ls="1px"
+          pt="9px"
           width="100%"
           onClick={onClick}
           hide={hidebutton}
           borderRadius="0"
           disabled={loadingnextstep || isSubmitted || (outOfStockList && outOfStockList.length > 0) || disabled}
         >
+          <ImageHtV1 src={deleteIcon} alt="Delete" height="20px" mr="0.625rem" />
+
           {loadingnextstep || isSubmitted ? 'Please wait...' : btnText}
         </ButtonHtV1>
       )}
