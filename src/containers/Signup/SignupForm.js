@@ -293,7 +293,7 @@ export default class SignupFormContainer extends Component {
                 </ColHtV1>
               </RowHtV1>
               <RowHtV1 mt="1em">
-                <ColHtV1>
+                <ColHtV1 variant="col-6" ta="center">
                   <SignUpFormHtV1
                     email={email}
                     onChangeEmail={this.onChangeEmail}
