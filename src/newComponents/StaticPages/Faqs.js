@@ -1,0 +1,63 @@
+import React from 'react';
+import Container from 'hometown-components-dev/lib/Container';
+import Div from 'hometown-components-dev/lib/Div';
+import Row from 'hometown-components-dev/lib/Row';
+import Heading from 'hometown-components-dev/lib/Heading';
+import Text from 'hometown-components-dev/lib/Text';
+import Img from 'hometown-components-dev/lib/Img';
+import Section from 'hometown-components-dev/lib/Section';
+import TitleBar from 'components/TitleBar';
+
+const faqData = require('../../data/FAQ');
+
+const styles = require('./StaticPages.scss');
+const CloseIcon = require('../../../static/minus-round.svg');
+const OpenIcon = require('../../../static/plus-round.svg');
+
+const FAQ = () => (
+  <Section display="block" p="0" mb="0" height="auto">
+    <TitleBar title="FAQs" />
+    <Container type="container" pr="0.5rem" pl="0.5rem">
+      <Div className={styles.staticPageWrapper} type="block" pt="2rem" pb="2.5rem">
+        {/* eslint-disable */}
+        <Row ml="0" mr="0">
+          {faqData.map((faqItem, index) => (
+            <Div mb="1rem" key={faqItem.key}>
+              <Heading fontFamily="400" fontSize="0.825rem" color="textLight">
+                {faqItem.key}
+              </Heading>
+              {faqItem.data.map((faqContent, index) => (
+                <Div className={styles.collposeBlock} key={String(index)}>
+                  <Heading
+                    className={styles.collopseHeading}
+                    fontFamily="regular"
+                    fontSize="1rem"
+                    color="secondary"
+                    lh="1.5"
+                    ellipsis={false}
+                  >
+                    <button>
+                      <Img className={styles.close} src={CloseIcon} alt="Close" float="left" mr="0.625rem" />
+                      <Img className={styles.open} src={OpenIcon} alt="Open" float="left" mr="0.625rem" />
+                      {faqContent.que}
+                    </button>
+                    <Text
+                      className={styles.collopseContent}
+                      color="rgba(0,0,0,0.5)"
+                      fontSize="0.875rem"
+                      mb="1rem"
+                      ml="2.125rem"
+                      dangerouslySetInnerHTML={{ __html: faqContent.ans }}
+                    />
+                  </Heading>
+                </Div>
+              ))}
+            </Div>
+          ))}
+        </Row>
+      </Div>
+    </Container>
+  </Section>
+);
+
+export default FAQ;
