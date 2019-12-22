@@ -53,26 +53,30 @@ const CardForm = ({
   padding
 }) => (
   <BoxHtV1 className={styles.paymentBlock} p={padding}>
-    <BoxHtV1 col="6" pr="1rem">
-      <FormInput
-        label="Name on card"
-        type="text"
-        placeholder=""
-        value={nameOnCard}
-        name="nameOnCard"
-        onChange={onChangeDetails(setPaymentDetails, gateway)}
-      />
+    <BoxHtV1 display="flex" width="56px">
+      <ImageHtV1 src={visaIcon} alt="visaCard" pr={16} minWidth="56px" />
+      <ImageHtV1 src={maestroIcon} alt="Maestro" pr={16} minWidth="56px" />
+      <ImageHtV1 src={mastercardIcon} alt="Master Card" pr={16} minWidth="56px" />
+      <ImageHtV1 src={aeIcon} alt="Amex" pr={16} minWidth="56px" />
     </BoxHtV1>
-    <BoxHtV1 col="6" pr="1rem" className={styles.cardFieldWrapper}>
+    <BoxHtV1 col="12" mb={18} p="0">
+      <TextHtV1 mt="1rem" fontSize="0.875rem" color="rgba(0,0,0,0.5)" variant="cardsTitle">
+        All Domestic & International cards accepted.
+      </TextHtV1>
+    </BoxHtV1>
+    <BoxHtV1 col="6" pr="1rem" mb={19} sx={{ position: 'relative' }}>
       <FormInput
         label="Card number"
         type="text"
         placeholder=""
         name="cardNumber"
         value={cardNumber}
+        variant="personalDetailsField"
         onChange={onChangeDetails(setPaymentDetails, gateway)}
         onBlur={onGetCardType(getCardType, sessionId, gateway)}
       />
+    </BoxHtV1>
+    <BoxHtV1 className={styles.cardFieldWrapper}>
       {cardType === 'visa' && <ImageHtV1 src={visaIcon} alt="visaCard" />}
       {cardType === 'mast' && <ImageHtV1 src={mastercardIcon} alt="Master Card" />}
       {cardType === 'maestro' && <ImageHtV1 src={maestroIcon} alt="Maestro" />}
@@ -81,53 +85,63 @@ const CardForm = ({
       {cardType === 'diners' && <ImageHtV1 src={dcIcon} alt="Diners Club" />}
       {cardType === 'other' && <ImageHtV1 src={cardIcon} alt="Others" />}
     </BoxHtV1>
-    <BoxHtV1 col="3" pr="1rem">
-      <FormInput
-        label="CVV"
-        type="password"
-        placeholder=""
-        name="cvv"
-        value={cvv}
-        onChange={onChangeDetails(setPaymentDetails, gateway)}
-      />
-    </BoxHtV1>
-    <BoxHtV1 col="9">
-      <LabelHtV1 color="secondary" mb="0.625rem">
-        Expiry Date
-      </LabelHtV1>
-    </BoxHtV1>
-    <BoxHtV1 col="7">
-      <select
-        className={styles.dropDown}
-        name="expMonth"
-        onChange={onChangeDetails(setPaymentDetails, gateway)}
-        value={expMonth}
-      >
-        <option key="month" value="">
-          MM
-        </option>
-        {MONTHS.map(month => (
-          <option key={month}>{month}</option>
-        ))}
-      </select>
-      <select
-        className={styles.dropDown}
-        name="expYear"
-        onChange={onChangeDetails(setPaymentDetails, gateway)}
-        value={expYear}
-      >
-        <option key="year" value="">
-          YYYY
-        </option>
-        {YEARS.map((v, i) => (
-          <option key={String(i)}>{new Date().getFullYear() + i}</option>
-        ))}
-      </select>
-    </BoxHtV1>
-    <BoxHtV1 col="12" mb="0" p="0">
-      <TextHtV1 mt="1rem" fontSize="0.875rem" color="rgba(0,0,0,0.5)">
-        International cards are also accepted.
-      </TextHtV1>
+    <BoxHtV1 display="flex">
+      <BoxHtV1 col="6" pr="1rem">
+        <FormInput
+          label="Name on card"
+          type="text"
+          placeholder=""
+          value={nameOnCard}
+          name="nameOnCard"
+          variant="personalDetailsField"
+          onChange={onChangeDetails(setPaymentDetails, gateway)}
+        />
+      </BoxHtV1>
+      <BoxHtV1 col="9">
+        <LabelHtV1 color="secondary" mb="0.625rem">
+          Expiry Date
+        </LabelHtV1>
+
+        <BoxHtV1 col="7" display="flex" mt={7} pr={16}>
+          <select
+            className={styles.dropDown}
+            name="expMonth"
+            onChange={onChangeDetails(setPaymentDetails, gateway)}
+            value={expMonth}
+          >
+            <option key="month" value="">
+              MM
+            </option>
+            {MONTHS.map(month => (
+              <option key={month}>{month}</option>
+            ))}
+          </select>
+          <select
+            className={styles.dropDown}
+            name="expYear"
+            onChange={onChangeDetails(setPaymentDetails, gateway)}
+            value={expYear}
+          >
+            <option key="year" value="">
+              YYYY
+            </option>
+            {YEARS.map((v, i) => (
+              <option key={String(i)}>{new Date().getFullYear() + i}</option>
+            ))}
+          </select>
+        </BoxHtV1>
+      </BoxHtV1>
+      <BoxHtV1 col="3" pr="1rem">
+        <FormInput
+          label="CVV"
+          type="password"
+          placeholder=""
+          name="cvv"
+          value={cvv}
+          variant="personalDetailsField"
+          onChange={onChangeDetails(setPaymentDetails, gateway)}
+        />
+      </BoxHtV1>
     </BoxHtV1>
   </BoxHtV1>
 );

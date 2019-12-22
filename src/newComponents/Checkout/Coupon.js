@@ -93,7 +93,7 @@ class Coupon extends React.Component {
     } = cart;
     return (
       <BoxHtV1>
-        <BoxHtV1 variant="col-12" ta="center" px="0">
+        <BoxHtV1 variant="col-12" ta="center" px="0" mt={20}>
           <HeadingHtV1
             color="#1b2125"
             mt="0"
