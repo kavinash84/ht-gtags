@@ -39,8 +39,8 @@ export default class Html extends Component {
 
   render() {
     const {
-      assets, store, content, bundles, styleTags
-    } = this.props;
+ assets, store, content, bundles, styleTags
+} = this.props;
     const head = Helmet.renderStatic();
     /* eslint-disable */
     return (
@@ -95,9 +95,14 @@ export default class Html extends Component {
                 .embeddedServiceHelpButton .helpButton .uiButton:focus {
                   outline: 1px solid #555555;
                 }
+                .embeddedServiceSidebarForm .backgroundImg, .embeddedServiceSidebarForm .backgroundImgColorMask {
+                  height: 35px!important;
+                }
+                span#headerTextLabel {
+                  color: #ffffff;
+                }
                 .message {
-                  background-color: #555555;
-                  border-style: hidden; 
+                  border-style: hidden;
                   border-width: 1px;
                   color: white;
                   padding: 6px 8px 6px 6px;
@@ -176,7 +181,7 @@ export default class Html extends Component {
                   //};
                   embedded_svc.settings.prepopulatedPrechatFields = {
                     Email : emailId
-                  }; 
+                  };
                   //Sets the auto-population of pre-chat form fields
                   //embedded_svc.settings.fallbackRouting = []; //An array of button IDs, user IDs, or userId_buttonId
                   //embedded_svc.settings.offlineSupportMinimizedText = '...'; //(Defaults to Contact Us)
@@ -202,7 +207,7 @@ export default class Html extends Component {
                       "doCreate": true,
                       "doFind": false,
                       "label": "CaseSubject"
-                    }, 
+                    },
                     {
                       "isExactMatch": false,
                       "fieldName": "Status",
