@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ProductDetailsContainer from 'newComponents/ProductDetails';
-// import Footer from 'components/Footer';
-import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
+
+/**
+ * Components
+ */
+import Body from 'hometown-components-dev/lib/BodyHtV1';
+import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
+
+/**
+ * Page Components
+ */
+import Footer from 'newComponents/Footer';
 import Header from 'newComponents/Header';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import ProductDetailsContainer from 'newComponents/ProductDetails';
 import ProductDetailsShimmer from 'newComponents/ProductDetails/ProductDetailsShimmer';
-import ProductNotFoundContainer from './ProductNotFound';
+import ProductNotFound from './ProductNotFound';
 
 @connect(({ productdetails }) => ({
   ...productdetails
@@ -18,20 +26,20 @@ export default class ProductDetails extends Component {
  loading, loaded, history, productDescription
 } = this.props;
     return (
-      <SectionHtV1 p={0} mb={0}>
-        <BoxHtV1>
-          {/* <Menu /> */}
+      <Wrapper>
+        <Body>
+          {/* Header */}
           <Header />
+
+          {/* PDP Content */}
           {loading && !loaded && <ProductDetailsShimmer />}
-          {!loading && loaded && productDescription && productDescription.error_message && <ProductNotFoundContainer />}
-          {!loading && !productDescription.error_message && loaded && (
-            <BoxHtV1>
-              <ProductDetailsContainer history={history} />
-            </BoxHtV1>
-          )}
-        </BoxHtV1>
-        {/* <Footer /> */}
-      </SectionHtV1>
+          {!loading && loaded && productDescription && productDescription.error_message && <ProductNotFound />}
+          {!loading && !productDescription.error_message && loaded && <ProductDetailsContainer history={history} />}
+
+          {/* Footer */}
+          <Footer />
+        </Body>
+      </Wrapper>
     );
   }
 }
