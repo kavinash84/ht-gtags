@@ -22,14 +22,14 @@ const MenuCheckout = ({ page, history }) => (
           CHECKOUT
         </HeadingHtV1>
       </RowHtV1>
-      <RowHtV1 display="block" mr="0" ml="0">
-        <BoxHtV1 col="9">
-          <BoxHtV1 col="3">
+      <RowHtV1 display="block" mr="0" ml="0" position="relative">
+        <BoxHtV1 col="9" width="75%" position="relative">
+          <BoxHtV1 col="3" width="25%" position="relative">
             <BoxHtV1 className={`${styles.headerLink} ${page === 'delivery' ? styles.active : ''}`}>
               Delivery Address
             </BoxHtV1>
           </BoxHtV1>
-          <BoxHtV1 col="3">
+          <BoxHtV1 col="3" width="25%" position="relative">
             <BoxHtV1 className={`${styles.headerLink} ${styles.hideArrow} ${page === 'payment' ? styles.active : ''}`}>
               Payment Options
             </BoxHtV1>

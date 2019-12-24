@@ -125,7 +125,7 @@ class MyOrderContainer extends Component {
         <SectionHtV1 display="flex" pt="1.25rem" mb="0" height="auto">
           <ContainerHtV1 type="container" pr="0.5rem" pl="0.5rem">
             <RowHtV1 display="block" mr="0" ml="0" mb="1.5rem">
-              <BoxHtV1 col="3" mr="1rem">
+              <BoxHtV1 col="3" mr="1rem" width="25%">
                 <Select
                   placeholder="Select From Date"
                   defaultValue={null}
@@ -143,17 +143,19 @@ class MyOrderContainer extends Component {
                   options={this.STATUS_FILTER}
                 />
               </Div> */}
-              <BoxHtV1 col="2" mr="1rem">
+              <BoxHtV1 col="2" mr="1rem" width="16.65%">
                 <ButtonHtV1
                   disabled={loading}
                   onClick={this.getFilteredOrders}
                   border="1px solid"
-                  color="red"
                   lh="1.5"
                   size="block"
                   btnType="primary"
                   btnColor="#515151"
                   height="38px"
+                  width="100%"
+                  color="colors.white"
+                  bg="rgb(249, 141, 41)"
                   fontSize="16px"
                 >
                   {loading ? 'Please Wait ...' : 'Find'}
