@@ -123,29 +123,27 @@ export default class HeaderTop extends Component {
           </Col>
           <Col width={5 / 12} flexDirection="row" justifyContent="flex-end">
             <Button variant="link" onClick={this.onOpenPincodeModal}>
-              <Flex variant="row.alignCenter">
+              <Flex alignItems="center">
                 <LocationIcon />
                 <Text variant="headerLabel">{selectedPincode !== '' ? selectedPincode : 'Pincode'}</Text>
               </Flex>
             </Button>
             <Link to="/store-locator">
-              <Flex variant="row.alignCenter" pl={20}>
+              <Flex alignItems="center" pl={20}>
                 <LocationIcon />
                 <Text variant="headerLabel">Store Locator</Text>
               </Flex>
             </Link>
             <Button variant="link" pl={20} onClick={isLoggedIn ? onClick(history) : this.onOpenLoginModal}>
-              <Flex variant="row.alignCenter">
+              <Flex alignItems="center">
                 <FavIcon />
                 <Text variant="headerLabel">{isLoggedIn ? wishListCount : 0}</Text>
               </Flex>
             </Button>
-            <Link to={CART_URL}>
-              <Flex variant="row.alignCenter" pl={20}>
-                <CartIcon />
-                <Text variant="headerLabel">{cartCount}</Text>
-              </Flex>
-            </Link>
+            <Flex as={Link} to={CART_URL} alignItems="center" pl={20}>
+              <CartIcon />
+              <Text variant="headerLabel">{cartCount}</Text>
+            </Flex>
             <Button
               variant="link"
               pl={20}

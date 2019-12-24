@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -327,20 +327,18 @@ class ProductDetails extends React.Component {
               {/* <ShareBar title={name} url={productURL} mt={10} /> */}
 
               {/* Color Options */}
-              <Box py={30}>
-                {colorproducts.length > 0 && (
-                  <Fragment>
-                    <Heading fontSize="1em" color="textDark" fontFamily="medium" mb={15}>
-                      Color Options
-                    </Heading>
-                    <ColorOption
-                      data={colorproducts}
-                      showmorecolorproducts={showmorecolorproducts}
-                      toggleShowMoreColorProducts={this.toggleShowMoreColorProducts}
-                    />
-                  </Fragment>
-                )}
-              </Box>
+              {colorproducts.length > 0 && (
+                <Box py={30}>
+                  <Heading fontSize="1em" color="textDark" fontFamily="medium" mb={15}>
+                    Color Options
+                  </Heading>
+                  <ColorOption
+                    data={colorproducts}
+                    showmorecolorproducts={showmorecolorproducts}
+                    toggleShowMoreColorProducts={this.toggleShowMoreColorProducts}
+                  />
+                </Box>
+              )}
 
               {/* Pincode and EMI options */}
               <ServiceDetails
@@ -360,9 +358,9 @@ class ProductDetails extends React.Component {
               </ServiceDetails>
 
               {/* Offers */}
-              <Box>
+              <Box mb={30}>
                 {combinedbuy.length ? (
-                  <Button className={styles.seeAllCombine} btnType="link" p={0} fontSize="1rem" color="#f98d29">
+                  <Button variant="link">
                     <a href="#combined_buy_offers">
                       {`See ${combinedbuy.length} Combined ${combinedbuy.length > 1 ? 'Offers' : 'Offer'}`}
                     </a>
@@ -372,17 +370,15 @@ class ProductDetails extends React.Component {
                 )}
                 {offerImage && offerImageRedirect && (
                   <a target="_blank" rel="noopener noreferrer" href={offerImageRedirect}>
-                    <Image src={offerImage} alt="" width="100%" mt={0} marginBottom="0.625rem" />
+                    <Image src={offerImage} alt="" width="100%" />
                   </a>
                 )}
-                {offerImage && !offerImageRedirect && (
-                  <Image src={offerImage} alt="" width="100%" mt={0} marginBottom="0.625rem" />
-                )}
+                {offerImage && !offerImageRedirect && <Image src={offerImage} alt="" width="100%" />}
               </Box>
 
               {/* Add to cart and Buy now buttons */}
-              <Row>
-                <Col variant="col-6">
+              <Row mx={-10}>
+                <Col variant="col-6" px={10}>
                   <AddToCart
                     simpleSku={simpleSku}
                     sku={sku}
@@ -392,12 +388,10 @@ class ProductDetails extends React.Component {
                     }
                   />
                 </Col>
-                <Col variant="col-6">
+                <Col variant="col-6" px={10}>
                   <BuyNow
                     simpleSku={simpleSku}
                     sku={sku}
-                    size="block"
-                    btnType="primary"
                     isSoldOut={
                       !(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)
                     }

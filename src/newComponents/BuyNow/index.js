@@ -8,7 +8,7 @@ import { withRouter } from 'react-router';
  * Components
  */
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
-import Image from 'hometown-components-dev/lib/ImageHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
 
 /**
  * Modules / selectors / helpers
@@ -18,9 +18,6 @@ import { getCartListSKU } from 'selectors/cart';
 import { PINCODE, CART_URL } from 'helpers/Constants';
 
 const checkSKUInCart = (list, sku) => list.includes(sku);
-const styles = require('./BuyNow.scss');
-// const LoaderIcon = require('../../../static/refresh.svg');
-const buyNowIcon = require('../../../static/buynow-icon.png');
 
 const mapStateToProps = ({
  app: { sessionId }, pincode, cart, cart: { addingToCart, addedToCart, key }
@@ -61,9 +58,7 @@ class BuyNow extends React.Component {
       addingToCart,
       itemId,
       stateId,
-      // size,
       isSoldOut
-      // btnType
     } = this.props;
     const checkStatus = checkSKUInCart(cartSKUs, sku);
     const addLoading = addingToCart && stateId === itemId;
@@ -73,16 +68,18 @@ class BuyNow extends React.Component {
           <Fragment>
             {!checkStatus ? (
               <Button
+                variant="primary.large"
                 disabled={addLoading}
                 onClick={this.handleClick(itemId, sku, simpleSku, session, pincode)(addToCart)}
-                className={styles.buyNowBtn}
               >
-                Buy Now
+                BUY NOW
               </Button>
             ) : (
-              <Link className={styles.buyNowBtn} to={CART_URL}>
-                <Image width="24px" src={buyNowIcon} /> Buy Now
-              </Link>
+              <Box as={Link} variant="primary.large" to={CART_URL}>
+                <Button variant="primary.large" width={1}>
+                  BUY NOW
+                </Button>
+              </Box>
             )}
           </Fragment>
         )}
@@ -96,8 +93,6 @@ BuyNow.defaultProps = {
   addingToCart: false,
   itemId: '',
   stateId: '',
-  // size: 'default',
-  // btnType: 'default',
   isSoldOut: false,
   history: {}
 };
@@ -112,8 +107,6 @@ BuyNow.propTypes = {
   addingToCart: PropTypes.bool,
   itemId: PropTypes.string,
   stateId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  // size: PropTypes.string,
-  // btnType: PropTypes.string,
   isSoldOut: PropTypes.bool,
   addedToCart: PropTypes.bool.isRequired,
   history: PropTypes.object
