@@ -72,7 +72,7 @@ export const loadTopSelling = () => ({
 
 export const loadOffers = () => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-  promise: ({ client }) => client.get(`${STATIC_BLOCK}/home_page_offerstrip_react`)
+  promise: ({ client }) => client.get(`${STATIC_BLOCK}/home_page_offerstrip_react_2`)
 });
 
 export const loadFooter = () => ({

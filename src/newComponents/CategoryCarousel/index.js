@@ -11,13 +11,9 @@ const adjustSlides = length => ({
   autoplaySpeed: 5000
 });
 
-const OFFER_ID = 5;
-
 export default class CategoryCarousel extends Component {
   render() {
-    const {
- data, categoryName, subTitle, id
-} = this.props;
+    const { data, categoryName, subTitle } = this.props;
     return (
       <BoxHtV1>
         {(categoryName !== '' || categoryName !== null) && <Title title={categoryName} subTitle={subTitle} />}
@@ -26,9 +22,9 @@ export default class CategoryCarousel extends Component {
             <div key={slide.category_id}>
               <CategoryCarouselItem
                 image={slide.image_url}
-                name={slide.info.name}
-                discount={slide.info.name}
-                url={OFFER_ID === id || OFFER_ID === parseInt(id, 10) ? '' : slide.info.url_key}
+                name={slide.offer_description || ''}
+                discount={slide.offer || slide.info.name}
+                url={slide.info.url_key}
               />
             </div>
           ))}
@@ -41,13 +37,11 @@ export default class CategoryCarousel extends Component {
 CategoryCarousel.defaultProps = {
   data: [],
   categoryName: '',
-  subTitle: '',
-  id: ''
+  subTitle: ''
 };
 
 CategoryCarousel.propTypes = {
   data: PropTypes.array,
   categoryName: PropTypes.string,
-  subTitle: PropTypes.string,
-  id: PropTypes.string
+  subTitle: PropTypes.string
 };

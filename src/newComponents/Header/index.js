@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 /* ====== Components ====== */
-import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
 
 /* ====== Page Components ====== */
 import HeaderTop from 'newComponents/Header/HeaderTop';
@@ -85,17 +85,17 @@ export default class Header extends Component {
     return (
       <Fragment>
         <TopBar />
-        <BoxHtV1 pt={15} sx={{ borderBottom: 'solid 1px #727070' }}>
-          <ContainerHtV1 pr="0" pl="0" mb={10}>
+        <Box pt={15} sx={{ borderBottom: 'solid 1px #727070' }}>
+          <Container pr="0" pl="0" mb={10}>
             <HeaderTop />
-          </ContainerHtV1>
+          </Container>
           <NavBar
             exitOnClick={this.exitOnClick}
             handleEnter={this.enterMenu}
             handleLeave={this.leaveMenu}
             menuItems={menuItems}
           />
-          <ContainerHtV1 pr="0" pl="0">
+          <Container pr="0" pl="0">
             {hoverBox && (
               <HoverMenuBox
                 handleEnter={this.enterHoverBox}
@@ -104,8 +104,8 @@ export default class Header extends Component {
                 exitOnClick={this.exitOnClick}
               />
             )}
-          </ContainerHtV1>
-        </BoxHtV1>
+          </Container>
+        </Box>
       </Fragment>
     );
   }

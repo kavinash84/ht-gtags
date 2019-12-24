@@ -97,8 +97,8 @@ class PaymentOptions extends Component {
         <SectionHtV1 display="flex" pt="1.25rem" pb="3.5rem" mb="0" height="auto">
           <ContainerHtV1 type="container" pr="2rem" pl="2rem">
             <RowHtV1 display="block" mr="0" ml="0">
-              <BoxHtV1 col="9" pr="1rem">
-                <SectionHtV1 display="flex" p="0" pt="0" pb="1.5rem" mb="0" height="auto">
+              <BoxHtV1 col="9" pr="1rem" width="714px">
+                <SectionHtV1 display="flex" p="0" pt="0" margin="0" height="auto">
                   <ContainerHtV1 type="container" pr="0" pl="0">
                     <RowHtV1 display="block" mr="0" ml="0">
                       <BoxHtV1 col="12" pr="0" pt="0">
@@ -243,36 +243,28 @@ class PaymentOptions extends Component {
                   </ContainerHtV1>
                 </SectionHtV1>
                 <RowHtV1 display="block" mr={0} ml={0}>
-                  <BoxHtV1 col="12" bg="#969696">
-                    <HeadingHtV1
-                      fontSize="1rem"
-                      ls="1px"
-                      mt="0.3125rem"
-                      mb="0.3125rem"
-                      color="white"
-                      p="10px 20px"
-                      pb="10px"
-                    >
-                      Select Payment Method
+                  <BoxHtV1 col="12">
+                    <HeadingHtV1 pb="10px" variant="formHeading">
+                      Payment Method
                     </HeadingHtV1>
                   </BoxHtV1>
                 </RowHtV1>
                 <RowHtV1 display="block" mr={0} ml={0} mt={5}>
-                  <BoxHtV1 col="3">
+                  <BoxHtV1 col="3" display="flex">
                     {data.map((paymentType, index) => (
                       <BoxHtV1 key={String(`${paymentType}${index}`)}>
                         {CommonPayments(paymentType.paymentType, toggleGateway, selectedGateway, session, resetEasyEmi)}
                       </BoxHtV1>
                     ))}
                   </BoxHtV1>
-                  <BoxHtV1 col="9">
+                  <BoxHtV1 col="9" width="100%" mt={36}>
                     <BoxHtV1 className={styles.paymentFormOptions}>
                       {selectedGateway === 'CreditCard' && (
                         <BoxHtV1 col="12">
                           <CardForm
                             setPaymentDetails={setPaymentDetails}
                             gateway={selectedGateway}
-                            padding="3rem 2rem"
+                            padding="2rem 2.5rem 1.5rem"
                           />
                         </BoxHtV1>
                       )}
@@ -281,49 +273,51 @@ class PaymentOptions extends Component {
                           <CardForm
                             setPaymentDetails={setPaymentDetails}
                             gateway={selectedGateway}
-                            padding="3rem 2rem"
+                            padding="2rem 2.5rem 1.5rem"
                           />
                         </BoxHtV1>
                       )}
                       {selectedGateway === 'NetBanking' && (
-                        <BoxHtV1 col="12" className={styles.paymentBlock} p="3rem 2rem">
+                        <BoxHtV1 col="12" className={styles.paymentBlock} p="2rem 2.5rem 1.5rem">
                           <BoxHtV1 col="12" mb="1rem">
                             <LabelHtV1 htmlFor="bankOptions1" color="textLight">
                               Choose From Preferred Bank
                             </LabelHtV1>
                           </BoxHtV1>
-                          <BankCard
-                            setPaymentDetails={setPaymentDetails}
-                            gateway={selectedGateway}
-                            name="HDFB"
-                            detailkey="bankCode"
-                            img="https://static.hometown.in/media/cms/BankLOGO/hdfc.gif"
-                            currentSelection={paymentDetails.NetBanking.bankCode}
-                          />
-                          <BankCard
-                            setPaymentDetails={setPaymentDetails}
-                            gateway={selectedGateway}
-                            name="ICIB"
-                            detailkey="bankCode"
-                            img="https://static.hometown.in/media/cms/BankLOGO/icici.gif"
-                            currentSelection={paymentDetails.NetBanking.bankCode}
-                          />
-                          <BankCard
-                            setPaymentDetails={setPaymentDetails}
-                            gateway={selectedGateway}
-                            name="AXIB"
-                            detailkey="bankCode"
-                            img="https://static.hometown.in/media/cms/BankLOGO/axis.gif"
-                            currentSelection={paymentDetails.NetBanking.bankCode}
-                          />
-                          <BankCard
-                            setPaymentDetails={setPaymentDetails}
-                            gateway={selectedGateway}
-                            name="SBIB"
-                            detailkey="bankCode"
-                            img="https://static.hometown.in/media/cms/BankLOGO/sbi.gif"
-                            currentSelection={paymentDetails.NetBanking.bankCode}
-                          />
+                          <RowHtV1>
+                            <BankCard
+                              setPaymentDetails={setPaymentDetails}
+                              gateway={selectedGateway}
+                              name="HDFB"
+                              detailkey="bankCode"
+                              img="https://static.hometown.in/media/cms/BankLOGO/hdfc.gif"
+                              currentSelection={paymentDetails.NetBanking.bankCode}
+                            />
+                            <BankCard
+                              setPaymentDetails={setPaymentDetails}
+                              gateway={selectedGateway}
+                              name="ICIB"
+                              detailkey="bankCode"
+                              img="https://static.hometown.in/media/cms/BankLOGO/icici.gif"
+                              currentSelection={paymentDetails.NetBanking.bankCode}
+                            />
+                            <BankCard
+                              setPaymentDetails={setPaymentDetails}
+                              gateway={selectedGateway}
+                              name="AXIB"
+                              detailkey="bankCode"
+                              img="https://static.hometown.in/media/cms/BankLOGO/axis.gif"
+                              currentSelection={paymentDetails.NetBanking.bankCode}
+                            />
+                            <BankCard
+                              setPaymentDetails={setPaymentDetails}
+                              gateway={selectedGateway}
+                              name="SBIB"
+                              detailkey="bankCode"
+                              img="https://static.hometown.in/media/cms/BankLOGO/sbi.gif"
+                              currentSelection={paymentDetails.NetBanking.bankCode}
+                            />
+                          </RowHtV1>
                           <BoxHtV1 col="12" mt="1rem">
                             <select
                               className={`${styles.dropDown} ${styles.selectBank}`}
@@ -355,55 +349,68 @@ class PaymentOptions extends Component {
                           <CardFormEasyEmi
                             setPaymentDetails={setPaymentDetails}
                             gateway={selectedGateway}
-                            padding="3rem 2rem"
+                            padding="2rem 2.5rem 1.5rem"
                           />
                         </BoxHtV1>
                       )}
                       {WalletData && selectedGateway === 'Wallet' && (
-                        <BoxHtV1 col="12" className={styles.paymentBlock} p="3rem 2rem">
+                        <BoxHtV1 col="12" className={styles.paymentBlock} p="2rem 2.5rem 1.5rem">
                           <BoxHtV1 col="12" mb="1rem">
                             <LabelHtV1 htmlFor="bankOptions1" color="textLight">
                               Select From your preferred Wallet
                             </LabelHtV1>
                           </BoxHtV1>
-
-                          {WalletData.isPaytmWalletEnable && (
-                            <BankCard
-                              setPaymentDetails={setPaymentDetails}
-                              gateway={selectedGateway}
-                              name="Paytm"
-                              detailkey="walletName"
-                              currentSelection={paymentDetails.Wallet.walletName}
-                              img="https://static.hometown.in/images/local_v2/onestepcheckout/logo/paytm.jpg"
-                            />
-                          )}
-                          {WalletData.isPayuWalletEnable && (
-                            <BankCard
-                              setPaymentDetails={setPaymentDetails}
-                              gateway={selectedGateway}
-                              name="Payu"
-                              detailkey="walletName"
-                              currentSelection={paymentDetails.Wallet.walletName}
-                              img="https://static.hometown.in/images/local_v2/onestepcheckout/logo/payu.jpg"
-                            />
-                          )}
-                          {WalletData.isMobikwikWalletEnable && (
-                            <BankCard
-                              setPaymentDetails={setPaymentDetails}
-                              gateway={selectedGateway}
-                              name="Mobikwik"
-                              detailkey="walletName"
-                              currentSelection={paymentDetails.Wallet.walletName}
-                              img="https://static.hometown.in/images/local_v2/onestepcheckout/logo/mobikwik.jpg"
-                            />
-                          )}
+                          <RowHtV1>
+                            {WalletData.isPaytmWalletEnable && (
+                              <BankCard
+                                setPaymentDetails={setPaymentDetails}
+                                gateway={selectedGateway}
+                                name="Paytm"
+                                detailkey="walletName"
+                                currentSelection={paymentDetails.Wallet.walletName}
+                                img="https://static.hometown.in/images/local_v2/onestepcheckout/logo/paytm.jpg"
+                              />
+                            )}
+                            {WalletData.isPayuWalletEnable && (
+                              <BankCard
+                                setPaymentDetails={setPaymentDetails}
+                                gateway={selectedGateway}
+                                name="Payu"
+                                detailkey="walletName"
+                                currentSelection={paymentDetails.Wallet.walletName}
+                                img="https://static.hometown.in/images/local_v2/onestepcheckout/logo/payu.jpg"
+                              />
+                            )}
+                            {WalletData.isMobikwikWalletEnable && (
+                              <BankCard
+                                setPaymentDetails={setPaymentDetails}
+                                gateway={selectedGateway}
+                                name="Mobikwik"
+                                detailkey="walletName"
+                                currentSelection={paymentDetails.Wallet.walletName}
+                                img="https://static.hometown.in/images/local_v2/onestepcheckout/logo/mobikwik.jpg"
+                              />
+                            )}
+                          </RowHtV1>
                         </BoxHtV1>
                       )}
                     </BoxHtV1>
                   </BoxHtV1>
                 </RowHtV1>
               </BoxHtV1>
-              <BoxHtV1 col="3">
+              <BoxHtV1 col="3" width="390px" bg="#f5f5f5">
+                <BoxHtV1 variant="col-12" textAlign="center" px="0" mt={20}>
+                  <HeadingHtV1
+                    color="#1b2125"
+                    mt="0"
+                    mb="0"
+                    fontWeight="700"
+                    fontSize="23px"
+                    fontFamily="HelveticaNeue"
+                  >
+                    Order Summary
+                  </HeadingHtV1>
+                </BoxHtV1>
                 <OrderSummary
                   itemsTotal={summary.items}
                   setDiscount={summary.combined_set_discount}

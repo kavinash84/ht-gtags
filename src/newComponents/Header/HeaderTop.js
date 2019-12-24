@@ -72,8 +72,7 @@ export default class HeaderTop extends Component {
   state = {
     openPincode: false,
     openLogin: false,
-    openSignup: false,
-    userPopOver: false
+    openSignup: false
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.isLoggedIn) {
@@ -105,15 +104,8 @@ export default class HeaderTop extends Component {
     const { history, router } = this.props;
     history.push(`${URL}/?redirect=${checkRedirection(router.location.pathname)}`);
   };
-  handleUserPopOver = () => {
-    setTimeout(() => this.setState({ userPopOver: false }), 300);
-  };
-  handleUserPopIn = () => {
-    this.setState({ userPopOver: true });
-  };
 
   render() {
-    const { userPopOver } = this.state;
     const {
  selectedPincode, isLoggedIn, history, wishListCount, cartCount, logoutUser, name
 } = this.props;
@@ -156,15 +148,24 @@ export default class HeaderTop extends Component {
             </Link>
             <Button
               variant="link"
-              onFocus={this.handleUserPopIn}
-              onMouseOver={this.handleUserPopIn}
-              // onBlur={this.handleUserPopOver}
-              // onMouseOut={this.handleUserPopOver}
               pl={20}
+              sx={{
+                '& ~ div': {
+                  display: 'none',
+                  '&:hover': {
+                    display: 'block'
+                  }
+                },
+                '&:hover': {
+                  '& ~ div': {
+                    display: 'block'
+                  }
+                }
+              }}
             >
               {isLoggedIn ? <Text variant="headerLabel">Hi ${titleCase(name)}</Text> : <UserIcon />}
             </Button>
-            <Box display={userPopOver ? 'block' : 'none'} pt={20}>
+            <Box pt={20}>
               <Card variant="card.profileMore">
                 {!isLoggedIn && (
                   <Fragment>
@@ -180,6 +181,7 @@ export default class HeaderTop extends Component {
                       to={LOGIN_URL}
                       onClick={this.handleClick(LOGIN_URL)}
                       width={175}
+                      sx={{ display: 'block' }}
                     >
                       Log In
                     </Button>
@@ -187,8 +189,12 @@ export default class HeaderTop extends Component {
                 )}
                 {isLoggedIn && (
                   <Fragment>
-                    <Link to={MY_PROFILE_URL}>Profile</Link>
-                    <Button onClick={onClickLogout(logoutUser)}>Logout !</Button>
+                    <Button as={Link} to={MY_PROFILE_URL} mb={15} width={175}>
+                      Profile
+                    </Button>
+                    <Button variant="outline" onClick={onClickLogout(logoutUser)} width={175} sx={{ display: 'block' }}>
+                      Logout !
+                    </Button>
                   </Fragment>
                 )}
               </Card>

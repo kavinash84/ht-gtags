@@ -405,7 +405,7 @@
 		}
 	}
 	.slick-next {
-		right: -35px !important;
+		right: 15px !important;
 		z-index: 1 !important;
 		&:before {
       content: url('../../../static/right-arrow.png') !important;
@@ -415,7 +415,7 @@
     }
 	}
 	.slick-prev {
-		left: -35px !important;
+		left: 15px !important;
 		z-index: 1 !important;
 		&:before {
       content: url('../../../static/left-arrow.png') !important;
@@ -471,33 +471,28 @@
 		}
 	}
 	.pdpThumbSlider {
-		min-height: 360px;
-		padding-top: 50px;
-		padding-bottom: 50px;
+		padding-top: 20px;
 		.slick-prev {
-			left: calc(50% - 22px) !important;
-    	top: 0 !important;
-    	transform: rotate(90deg);
+			left: -44px !important;
+    	top: 78px !important;
 		}
 		.slick-next {
-			left: calc(50% - 22px) !important;
-			bottom: 0 !important;
-			transform: rotate(90deg);
-			top: initial !important;
+			right: -44px !important;
+			top: 78px !important;
+			// transform: rotate(90deg);
 		}
 		.pdpThumbSliderItem {
 			padding: 2px 0;
 		}
 		.slick-slide {
 			border: 3px solid #fff;
-			height: 111px;
 		}
 		.slick-current {
 			border: 3px solid $primary;
     	opacity: 0.8;
 		}
 		.slick-track {
-			height: 560px !important;
+			// height: 560px !important;
 		}
 	}
 	.prodCarousel {

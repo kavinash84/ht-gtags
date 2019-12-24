@@ -25,16 +25,8 @@ export default class Emi extends Component {
     data = data && data.sort((a, b) => Number(a.bank_code) - Number(b.bank_code));
     return (
       <BoxHtV1>
-        <ButtonHtV1
-          p={0}
-          marginLeft="0.3125rem"
-          btnType="link"
-          fontSize="0.75rem"
-          color="#29d"
-          onClick={this.onOpenModal}
-          marginTop="-5px"
-        >
-          View Plans
+        <ButtonHtV1 px={10} variant="link" color="primary" onClick={this.onOpenModal}>
+          Know more >
         </ButtonHtV1>
         <ResponsiveModal
           classNames={{ modal: styles.emiModal }}
@@ -51,7 +43,7 @@ export default class Emi extends Component {
               </BoxHtV1>
             </RowHtV1>
             <RowHtV1 mr={16} ml={16} pl={0} pr={0}>
-              <BoxHtV1 col="12" ppaddingTop="1.25rem" paddingBottom="1.25rem" className={styles.tableWrapper}>
+              <BoxHtV1 col="12" pt="1.25rem" paddingBottom="1.25rem" className={styles.tableWrapper}>
                 <table cellSpacing="0" cellPadding="5">
                   <tbody>
                     <tr className={styles.tableHead}>

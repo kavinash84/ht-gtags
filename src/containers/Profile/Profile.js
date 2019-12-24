@@ -1,28 +1,28 @@
 import React from 'react';
-import Container from 'hometown-components-dev/lib/Container';
-import Row from 'hometown-components-dev/lib/Row';
-import Div from 'hometown-components-dev/lib/Div';
-import MyMenu from 'components/MyMenu';
-import ProfileForm from 'components/ProfileForm';
+import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
+import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import MyMenu from 'newComponents/MyMenu';
+import ProfileForm from 'newComponents/ProfileForm';
 import UpdatePasswordForm from 'containers/UpdatePassword';
 import MenuFooter from 'containers/MenuFooter';
 
 const ProfileContainer = () => (
-  <Div>
+  <BoxHtV1>
     <MenuFooter pageTitle="My Profile">
       <MyMenu page="profile" />
-      <Container type="container" pr="0" pl="0">
-        <Row display="block" mr="0" ml="0" p="2rem 0">
-          <Div col="6" pr="3rem">
+      <ContainerHtV1 type="container" pr={0} pl={0}>
+        <RowHtV1 display="block" mr={0} ml={0} padding="2rem 0">
+          <BoxHtV1 col="6" paddingRight="3rem" width="49.8%">
             <ProfileForm />
-          </Div>
-          <Div col="6" pl="3rem">
+          </BoxHtV1>
+          <BoxHtV1 col="6" paddingLeft="3rem" width="49.8%">
             <UpdatePasswordForm />
-          </Div>
-        </Row>
-      </Container>
+          </BoxHtV1>
+        </RowHtV1>
+      </ContainerHtV1>
     </MenuFooter>
-  </Div>
+  </BoxHtV1>
 );
 
 export default ProfileContainer;
