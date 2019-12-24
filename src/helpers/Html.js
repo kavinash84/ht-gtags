@@ -114,7 +114,13 @@ export default class Html extends Component {
                   border-width: 1px;
                   color: white;
                   padding: 6px 8px 6px 6px;
-                  margin: 4px 20px;
+                  margin: 0px !important;
+                }
+                .embeddedServiceLiveAgentStateChatHeader:not(.alert) .message {
+                  white-space: normal !important;
+                }
+                .embeddedServiceLiveAgentStateChatHeader .content {
+                  height: 168px !important;
                 }
                 @font-face {
                   font-family: 'Salesforce Sans';
