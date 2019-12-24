@@ -23,7 +23,6 @@ const mapStateToProps = ({ app }) => ({
 const onSuccess = (dispatcher, session, phone) => result => {
   dispatcher(result, session, phone);
 };
-
 const onError = error => e => {
   console.log(error, e);
 };
@@ -73,7 +72,7 @@ class GoogleLogin extends Component {
   };
   render() {
     const {
-      loginViaLogin, session, askContact, loginType, loading
+      loginViaLogin, session, askContact, loginType, loggingIn
     } = this.props;
     const { phone, phoneError, phoneErrorMessage } = this.state;
     const open = askContact && loginType && loginType === 'google';
@@ -125,14 +124,15 @@ class GoogleLogin extends Component {
                   feedBackMessage={phoneErrorMessage}
                 />
               </form>
-              <GoogleLoginBtn
+              <button
                 disabled={this.isValid()}
                 className="google-login-btn"
-                clientId="663311547699-jersj1hfflbl8gfukgsuvug8u1gc88nm.apps.googleusercontent.com"
-                onSuccess={onSuccess(loginViaLogin, session, phone)}
-                onFailure={onError}
+                onClick={e => {
+                  e.preventDefault();
+                  loginViaLogin({}, session, phone);
+                }}
               >
-                {loading ? (
+                {loggingIn ? (
                   <span>
                     Please Wait
                     <Img className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />
@@ -140,7 +140,7 @@ class GoogleLogin extends Component {
                 ) : (
                   'Update Contact Number'
                 )}
-              </GoogleLoginBtn>
+              </button>
             </Text>
           </Div>
         </ResponsiveModal>
@@ -155,10 +155,7 @@ GoogleLogin.propTypes = {
   session: PropTypes.string.isRequired,
   askContact: PropTypes.bool.isRequired,
   loginType: PropTypes.string.isRequired,
-  loading: PropTypes.bool.isRequired
+  loggingIn: PropTypes.bool.isRequired
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(GoogleLogin);
+export default connect(mapStateToProps, mapDispatchToProps)(GoogleLogin);

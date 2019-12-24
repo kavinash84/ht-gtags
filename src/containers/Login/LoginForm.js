@@ -11,8 +11,8 @@ import { Label } from 'hometown-components/lib/Label';
 import Img from 'hometown-components/lib/Img';
 import Button from 'hometown-components/lib/Buttons';
 import ImageShimmer from 'hometown-components/lib/ImageShimmer';
-import { login, getOtp, resendOtp } from 'redux/modules/login';
-import { validateMobile } from 'utils/validation';
+import { login, getOtp, resendOtp, clearLoginState } from 'redux/modules/login';
+import { validateMobile, isEmpty, checkSpecialChar } from 'utils/validation';
 import { allowNChar, allowTypeOf } from 'utils/helper';
 
 import LoginViaOtp from './LoginViaOtp';
@@ -30,6 +30,7 @@ const EmailIcon = require('../../../static/email-primary.svg');
   loading: state.userLogin.loading,
   loggingIn: state.userLogin.loggingIn,
   askContact: state.userLogin.askContact,
+  askName: state.userLogin.askName,
   loginType: state.userLogin.loginType
 }))
 export default class LoginFormContainer extends Component {
@@ -41,6 +42,7 @@ export default class LoginFormContainer extends Component {
     loading: PropTypes.bool,
     loggingIn: PropTypes.bool,
     askContact: PropTypes.bool,
+    askName: PropTypes.bool,
     loginType: PropTypes.string
   };
   static contextTypes = {
@@ -54,6 +56,7 @@ export default class LoginFormContainer extends Component {
     loading: false,
     loggingIn: false,
     askContact: false,
+    askName: false,
     loginType: ''
   };
 
@@ -61,6 +64,10 @@ export default class LoginFormContainer extends Component {
     loginviaotp: false,
     mobile: '',
     otp: '',
+    otpError: false,
+    name: '',
+    nameError: false,
+    nameErrorMessage: 'Enter a valid name, without special characters !',
     otpErrorMessage: 'OTP Should be 6 Characters',
     mobilesubmitted: false,
     resend: false
@@ -102,6 +109,18 @@ export default class LoginFormContainer extends Component {
       otpError: false
     });
   };
+
+  onChangeName = e => {
+    const { value } = e.target;
+    const nameCheck = isEmpty(value) || checkSpecialChar(value);
+    if (nameCheck) {
+      return;
+    }
+    this.setState({
+      name: value,
+      nameError: false
+    });
+  };
   onSubmitMobileNumber = e => {
     e.preventDefault();
     const { mobile, resend } = this.state;
@@ -123,7 +142,19 @@ export default class LoginFormContainer extends Component {
     const { otp } = this.state;
     if (otp.length < 6) {
       return this.setState({
-        otpError: true
+        nameError: true
+      });
+    }
+    const { dispatch } = this.context.store;
+    dispatch(login(this.state));
+  };
+  onSubmitName = e => {
+    e.preventDefault();
+    const { name } = this.state;
+    const isInvalid = isEmpty(name) || checkSpecialChar(name);
+    if (isInvalid) {
+      return this.setState({
+        nameError: true
       });
     }
     const { dispatch } = this.context.store;
@@ -136,11 +167,13 @@ export default class LoginFormContainer extends Component {
     });
   };
   toggleLoginForm = () => {
+    const { dispatch } = this.context.store;
     this.setState({
       loginviaotp: !this.state.loginviaotp,
       resend: false,
       mobilesubmitted: false
     });
+    dispatch(clearLoginState());
   };
 
   render() {
@@ -149,13 +182,16 @@ export default class LoginFormContainer extends Component {
       mobileError,
       mobileErrorMessage,
       otp,
+      name,
+      nameError,
+      nameErrorMessage,
       otpError,
       otpErrorMessage,
       mobilesubmitted,
       resend
     } = this.state;
     const {
-      loaded, loading, loggingIn, askContact, loginType
+      loaded, loading, loggingIn, askContact, askName, loginType
     } = this.props;
     const styles = require('./index.scss');
     return (
@@ -194,16 +230,27 @@ export default class LoginFormContainer extends Component {
               <Row display="block" mr="0" ml="0" pb="0">
                 <Div mt="0.675rem">
                   {!this.state.loginviaotp ? (
-                    <LoginForm askContact={askContact} loginType={loginType} loading={loading} />
+                    <LoginForm
+                      askName={askName}
+                      askContact={askContact}
+                      loginType={loginType}
+                      loading={loading}
+                      loggingIn={loggingIn}
+                    />
                   ) : (
                     <LoginViaOtp
                       onChangeMobile={this.onChangeMobile}
-                      onChangeOtp={this.onChangeOtp}
                       onSubmitMobileNumber={this.onSubmitMobileNumber}
+                      onChangeOtp={this.onChangeOtp}
                       onSubmitOtp={this.onSubmitOtp}
                       otp={otp}
                       otpError={otpError}
                       otpErrorMessage={otpErrorMessage}
+                      onChangeName={this.onChangeName}
+                      onSubmitName={this.onSubmitName}
+                      name={name}
+                      nameError={nameError}
+                      nameErrorMessage={nameErrorMessage}
                       mobile={mobile}
                       mobileError={mobileError}
                       mobileErrorMessage={mobileErrorMessage}
@@ -213,6 +260,7 @@ export default class LoginFormContainer extends Component {
                       loggingIn={loggingIn}
                       handleResend={this.handleResend}
                       resend={resend}
+                      askName={askName}
                     />
                   )}
                 </Div>
@@ -247,7 +295,12 @@ export default class LoginFormContainer extends Component {
                   </Button>
                 </Div>
                 <Div col="6" ta="center" mb="0" pl="0.625rem">
-                  <GoogleLoginBtn askContact={askContact} loginType={loginType} loading={loading} />
+                  <GoogleLoginBtn
+                    askContact={askContact}
+                    loginType={loginType}
+                    loading={loading}
+                    loggingIn={loggingIn}
+                  />
                 </Div>
               </Row>
             </div>
