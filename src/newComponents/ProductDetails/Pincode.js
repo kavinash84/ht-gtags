@@ -2,14 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import InputFieldHtV1 from 'hometown-components-dev/lib/InputFieldHtV1';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
+
+/**
+ * Components
+ */
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import InputField from 'hometown-components-dev/lib/InputFieldHtV1';
+
+/**
+ * Modules / Utils
+ */
 import * as actionCreators from 'redux/modules/pincode';
 import { pincode as pincodeCheck } from 'utils/validation';
 import { getDelieveryInfo } from 'redux/modules/productdetails';
 
-const styles = require('./Pincode.scss');
 const location = require('../../../static/map-icon.svg');
 
 const onChange = dispatcher => e => {
@@ -53,32 +61,51 @@ class Pincode extends React.Component {
     const { setPincodeQuery, setPincode, pincodeQuery } = this.props;
     const { validationError, validationErrorMessage } = this.state;
     return (
-      <BoxHtV1 className={styles.pdpPincode} padding="0 0 0.3125rem">
+      <Box
+        sx={{
+          position: 'relative'
+        }}
+      >
         <form onSubmit={this.setPincodeInStore(setPincode, pincodeQuery)}>
-          <ImageHtV1
-            width="initial"
-            height="1.5em"
-            marginRight="0.625rem"
-            marginTop="0"
+          <Image
             float="left"
             src={location}
-            className={styles.pincodeIcon}
+            sx={{
+              position: 'absolute',
+              top: 10,
+              left: 8
+            }}
           />
-          <InputFieldHtV1
+          <InputField
             type="text"
             placeholder="Enter Pincode"
             backgroundColor="transparent"
             borderColor="rgb(202, 202, 202)"
-            height="2.5rem"
+            height={44}
+            my={0}
+            pl={40}
+            borderRadius={0}
+            color="primary"
+            fontSize={16}
             onChange={onChange(setPincodeQuery, this.setPincodeInStore(setPincode, pincodeQuery))}
             value={pincodeQuery}
           />
-          <button className={styles.pincodeCheckBtn} onClick={this.setPincodeInStore(setPincode, pincodeQuery)}>
+          <Button
+            variant="secondary"
+            fontFamily="medium"
+            height={44}
+            onClick={this.setPincodeInStore(setPincode, pincodeQuery)}
+            sx={{
+              position: 'absolute',
+              top: 0,
+              right: 0
+            }}
+          >
             Go
-          </button>
+          </Button>
         </form>
-        {validationError && <BoxHtV1>{validationErrorMessage}</BoxHtV1>}
-      </BoxHtV1>
+        {validationError && <Box>{validationErrorMessage}</Box>}
+      </Box>
     );
   }
 }

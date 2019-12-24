@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
-import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
-import ImageShimmerHtV1 from 'hometown-components-dev/lib/ImageShimmerHtV1';
+
+/**
+ * Components
+ */
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import ImageShimmer from 'hometown-components-dev/lib/ImageShimmerHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+
+/**
+ * Page Components
+ */
 import CarouselItem from './CarouselItem';
 
-const showSlides = data => (data && data.length >= 4 ? 4 : data.length || 0);
+const showSlides = data => (data && data.length >= 5 ? 5 : data.length || 0);
 
 /* eslint-disable */
 export default class ProductDetailSlider extends Component {
@@ -28,36 +37,34 @@ export default class ProductDetailSlider extends Component {
     const styles = require('./Carousel.scss');
 
     return (
-      <RowHtV1 display="block" m={0}>
-        <BoxHtV1 col="2">
+      <Row>
+        <Col>
+          <img className="hide" itemProp="image" src={(data && `${data[0].url}-zoom.jpg`) || ''} alt={title} />
+          <Slider asNavFor={this.state.nav2} ref={slider => (this.slider1 = slider)}>
+            {data.map(slide => (
+              <CarouselItem key={slide.id_catalog_product_image} image={`${slide.url}.jpg`} name={title} />
+            ))}
+          </Slider>
           <Slider
             asNavFor={this.state.nav1}
             ref={slider => (this.slider2 = slider)}
             slidesToShow={showSlides(data)}
             swipeToSlide
             focusOnSelect
-            vertical
-            verticalSwiping
-            // className="pdpThumbSlider"
+            className="pdpThumbSlider"
+            centerPadding="30px"
+            variableWidth={true}
           >
             {data.map(slide => (
-              <BoxHtV1 className={styles.pdpThumbSliderItem} key={slide.id_catalog_product_image}>
-                <ImageShimmerHtV1 src={`${slide.url}-top_sel_100.jpg`} width="105px" height="105px">
-                  {imageURL => <ImageHtV1 alt={title} src={imageURL} width="105px" />}
-                </ImageShimmerHtV1>
-              </BoxHtV1>
+              <Box className={styles.pdpThumbSliderItem} key={slide.id_catalog_product_image}>
+                <ImageShimmer src={`${slide.url}-top_sel_100.jpg`} width="100px" height="100px">
+                  {imageURL => <Image alt={title} src={imageURL} />}
+                </ImageShimmer>
+              </Box>
             ))}
           </Slider>
-        </BoxHtV1>
-        <BoxHtV1 col="10" padding="0 0 1rem 0.625rem">
-          <ImageHtV1 className="hide" itemProp="image" src={(data && `${data[0].url}-zoom.jpg`) || ''} alt={title} />
-          <Slider asNavFor={this.state.nav2} ref={slider => (this.slider1 = slider)}>
-            {data.map(slide => (
-              <CarouselItem key={slide.id_catalog_product_image} image={`${slide.url}.jpg`} name={title} />
-            ))}
-          </Slider>
-        </BoxHtV1>
-      </RowHtV1>
+        </Col>
+      </Row>
     );
   }
 }

@@ -18,7 +18,7 @@ class TrackingDetails extends Component {
     const { data, error } = this.props;
     return (
       <div className={stylesModal.trackingModal}>
-        <RowHtV1 type="block" m="0" mb="1rem" className={styles.blockHeading}>
+        <RowHtV1 type="block" margin="0px 0px 1rem" className={styles.blockHeading}>
           <BoxHtV1 col="6" pt="5px">
             <HeadingHtV1 fontSize="1.25rem" color="textLight" mb="0px" mt="0px" fontFamily="light">
               {error ? 'Error' : 'Order Tracking'}
@@ -48,13 +48,20 @@ class TrackingDetails extends Component {
                   pb="15px"
                   key={String(index)}
                 >
-                  <BoxHtV1 col="1">
-                    <ImageShimmerHtV1 src={getImageURL(image, 'catalog_360')} height="60px">
+                  <BoxHtV1 col="1" width="8.33%" float="left">
+                    <ImageShimmerHtV1 src={getImageURL(image, 'catalog_360')}>
                       {imageURL => <ImageHtV1 src={imageURL} alt="" width="60px" height="60px" />}
                     </ImageShimmerHtV1>
                   </BoxHtV1>
-                  <BoxHtV1 col="3" pl="10px" pr="55px">
-                    <TextHtV1 fontSize="14px" mt="0" mb="5px" color="rgba(0, 0, 0, 0.9)" fontFamily="regular">
+                  <BoxHtV1 col="3" pl="10px" pr="55px" width="25%" float="left">
+                    <TextHtV1
+                      fontSize="14px"
+                      mt="0"
+                      mb="5px"
+                      lineHeight="1.6"
+                      color="rgba(0, 0, 0, 0.9)"
+                      fontFamily="regular"
+                    >
                       {name}
                     </TextHtV1>
                     <TextHtV1 fontSize="13px" mt="0" mb="3px" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
@@ -71,7 +78,7 @@ class TrackingDetails extends Component {
                       </TextHtV1>
                     )}
                   </BoxHtV1>
-                  <BoxHtV1 col="8">
+                  <BoxHtV1 col="8" width="66.66%" float="left">
                     <RowHtV1
                       ml="-2%"
                       mr="-7%"
@@ -84,6 +91,7 @@ class TrackingDetails extends Component {
                           <BoxHtV1
                             key={String(i)}
                             display="flexEqual"
+                            flexGrow="1"
                             className={`${stylesModal.trackBlock} ${active === 1 ? stylesModal.active : ''}`}
                           >
                             <TextHtV1 className={stylesModal.stepText} fontSize="12px">

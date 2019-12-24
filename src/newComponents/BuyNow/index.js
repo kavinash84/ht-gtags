@@ -1,18 +1,25 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
-import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import { withRouter } from 'react-router';
+
+/**
+ * Components
+ */
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+
+/**
+ * Modules / selectors / helpers
+ */
 import * as actionCreators from 'redux/modules/cart';
 import { getCartListSKU } from 'selectors/cart';
 import { PINCODE, CART_URL } from 'helpers/Constants';
-import { withRouter } from 'react-router';
 
 const checkSKUInCart = (list, sku) => list.includes(sku);
 const styles = require('./BuyNow.scss');
-const LoaderIcon = require('../../../static/refresh.svg');
+// const LoaderIcon = require('../../../static/refresh.svg');
 const buyNowIcon = require('../../../static/buynow-icon.png');
 
 const mapStateToProps = ({
@@ -54,52 +61,32 @@ class BuyNow extends React.Component {
       addingToCart,
       itemId,
       stateId,
-      size,
-      isSoldOut,
-      btnType
+      // size,
+      isSoldOut
+      // btnType
     } = this.props;
     const checkStatus = checkSKUInCart(cartSKUs, sku);
     const addLoading = addingToCart && stateId === itemId;
     return (
-      <BoxHtV1>
+      <Fragment>
         {!isSoldOut && (
-          <BoxHtV1>
+          <Fragment>
             {!checkStatus ? (
-              <ButtonHtV1
-                btnType={btnType}
-                border="1px solid"
-                bg="#f98d29"
-                color="#FFF"
-                padding="7px 15px 2px"
-                size={size}
+              <Button
                 disabled={addLoading}
                 onClick={this.handleClick(itemId, sku, simpleSku, session, pincode)(addToCart)}
                 className={styles.buyNowBtn}
               >
-                {!addLoading && <ImageHtV1 width="24px" verticalAlign="middle" src={buyNowIcon} display="inline" />}
-                {addLoading && <ImageHtV1 width="24px" className="spin" src={LoaderIcon} display="inline" />}
-                <BoxHtV1 marginLeft="0.625rem" fontSize="16px" fontFamily="regular" color="#FFF" verticalAlign="top">
-                  Buy Now
-                </BoxHtV1>
-              </ButtonHtV1>
+                Buy Now
+              </Button>
             ) : (
-              <BoxHtV1 display="block" marginBottom="0.625rem">
-                <Link className={styles.buyNowBtn} to={CART_URL}>
-                  <BoxHtV1
-                    marginLeft="0.625rem"
-                    fontSize="14px"
-                    fontFamily="regular"
-                    color="#FFF"
-                    verticalAlign="middle"
-                  >
-                    <ImageHtV1 width="24px" verticalAlign="middle" src={buyNowIcon} display="inline" /> Buy Now
-                  </BoxHtV1>
-                </Link>
-              </BoxHtV1>
+              <Link className={styles.buyNowBtn} to={CART_URL}>
+                <Image width="24px" src={buyNowIcon} /> Buy Now
+              </Link>
             )}
-          </BoxHtV1>
+          </Fragment>
         )}
-      </BoxHtV1>
+      </Fragment>
     );
   }
 }
@@ -109,8 +96,8 @@ BuyNow.defaultProps = {
   addingToCart: false,
   itemId: '',
   stateId: '',
-  size: 'default',
-  btnType: 'default',
+  // size: 'default',
+  // btnType: 'default',
   isSoldOut: false,
   history: {}
 };
@@ -125,8 +112,8 @@ BuyNow.propTypes = {
   addingToCart: PropTypes.bool,
   itemId: PropTypes.string,
   stateId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  size: PropTypes.string,
-  btnType: PropTypes.string,
+  // size: PropTypes.string,
+  // btnType: PropTypes.string,
   isSoldOut: PropTypes.bool,
   addedToCart: PropTypes.bool.isRequired,
   history: PropTypes.object

@@ -45,6 +45,11 @@ const ProductQuantity = ({
         va="middle"
         onClick={onClick(cartId, skuId, simpleSku, sessionId, pincode, -1)(updateQuantity)}
         disabled={cartItemLoading(cartId) || quantity <= 1}
+        sx={{
+          borderRadius: '50%',
+          boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.31)',
+          height: 'auto'
+        }}
       >
         <ImageHtV1 src={ReductIcon} alt="" float="left" height="22px" />
       </ButtonHtV1>
@@ -65,6 +70,11 @@ const ProductQuantity = ({
         va="middle"
         onClick={onClick(cartId, skuId, simpleSku, sessionId, pincode, 1)(updateQuantity)}
         disabled={cartItemLoading(cartId)}
+        sx={{
+          borderRadius: '50%',
+          boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.31)',
+          height: 'auto'
+        }}
       >
         <ImageHtV1 src={IncreaseIcon} alt="" float="left" height="22px" />
       </ButtonHtV1>
