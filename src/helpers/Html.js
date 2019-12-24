@@ -106,8 +106,8 @@ export default class Html extends Component {
                   color: #FFF !important;
                 }
                 .embeddedServiceSidebarExtendedHeader {
-                  margin: 0 12px !important;
-                  border-radius: 0 0 6px 6px;
+                  margin: 0 18px !important;
+                  border-radius: 0 0 8px 8px;
                 }
                 .message {
                   border-style: hidden;
