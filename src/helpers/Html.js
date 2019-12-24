@@ -156,7 +156,7 @@ export default class Html extends Component {
           <script type="text/javascript" src="https://service.force.com/embeddedservice/5.0/esw.min.js" />
           <script
             type="text/javascript"
-            src="https://c.la1-c2cs-hnd.salesforceliveagent.com/content/g/js/45.0/deployment.js"
+            src="https://c.la1-c1-hnd.salesforceliveagent.com/content/g/js/46.0/deployment.js"
           />
           <script
             dangerouslySetInnerHTML={{
@@ -233,25 +233,25 @@ export default class Html extends Component {
                   }];
                   embedded_svc.settings.enabledFeatures = ['LiveAgent'];
                   embedded_svc.settings.entryFeature = 'LiveAgent';
-                embedded_svc.init(
-                  'https://praxisretail--devbox.cs6.my.salesforce.com',
-                  'https://devbox-praxisretail.cs6.force.com/LiveAgent',
-                  gslbBaseURL,
-                  '00DN0000000Qxcj',
-                  'Chat_Deployment',
-                  {
-                    baseLiveAgentContentURL: 'https://c.la1-c2cs-hnd.salesforceliveagent.com/content',
-                    deploymentId: '572N000000000PC',
-                    buttonId: '573N000000000Ub',
-                    baseLiveAgentURL: 'https://d.la1-c2cs-hnd.salesforceliveagent.com/chat',
-                    eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04IN0000000002MMAQ_168ff82d2a7',
-                    isOfflineSupportEnabled: true
-                  }
+                embedded_svc.init(  
+                  'https://praxisretail.my.salesforce.com', 
+                  'https://praxisretail.secure.force.com/LiveAgent',  
+                  gslbBaseURL,  
+                  '00D7F000006O16S',  
+                  'Chat_Deployment',  
+                  { 
+                    baseLiveAgentContentURL: 'https://c.la1-c1-hnd.salesforceliveagent.com/content',  
+                    deploymentId: '5727F0000009ARB',  
+                    buttonId: '5737F00000093Ue',  
+                    baseLiveAgentURL: 'https://d.la1-c1-hnd.salesforceliveagent.com/chat',  
+                    eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I7F0000004DjiUAE_16c51bfeb82', 
+                    isOfflineSupportEnabled: true 
+                  } 
                 );
               };
               if (!window.embedded_svc) {
                 var s = document.createElement('script');
-                s.setAttribute('src', 'https://praxisretail--devbox.cs6.my.salesforce.com/embeddedservice/5.0/esw.min.js');
+                s.setAttribute('src', 'https://praxisretail.my.salesforce.com/embeddedservice/5.0/esw.min.js');
                 s.onload = function() {
                   initESW(null);
                 };
