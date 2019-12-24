@@ -287,8 +287,12 @@ class ProductDetails extends React.Component {
             </Col>
           </Row>
           <Row>
+            {/* Left Column */}
             <Col width={[1, 1, 7 / 12]}>
+              {/* Product Slider */}
               {images && <ProductDetailsCarousel data={images} title={meta.name} />}
+
+              {/* Wishlist Button */}
               <WishListButton
                 onClick={onClickWishList(
                   sku,
@@ -304,8 +308,10 @@ class ProductDetails extends React.Component {
                 wishlistLoading={isInWishList(loadingList, sku)}
               />
             </Col>
+            {/* Right Column */}
             <Col width={[1, 1, 5 / 12]}>
               <div id="portal" className="portal" />
+              {/* Product title and price */}
               <TitlePrice
                 name={name}
                 price={formatAmount(price)}
@@ -317,7 +323,10 @@ class ProductDetails extends React.Component {
                 marginTop="1rem"
                 onClickReviews={this.onClickReviews}
               />
+              {/* Product Share */}
               {/* <ShareBar title={name} url={productURL} mt={10} /> */}
+
+              {/* Color Options */}
               <Box py={30}>
                 {colorproducts.length > 0 && (
                   <Fragment>
@@ -332,6 +341,8 @@ class ProductDetails extends React.Component {
                   </Fragment>
                 )}
               </Box>
+
+              {/* Pincode and EMI options */}
               <ServiceDetails
                 deliverBy={
                   (deliveryInfo && deliveryInfo[0] && deliveryInfo[0].value) ||
@@ -347,6 +358,8 @@ class ProductDetails extends React.Component {
                 <Pincode key="pincode" />
                 <EmiModal price={formatAmount(checkSpecialPrice)} data={emidata} key="emi" />
               </ServiceDetails>
+
+              {/* Offers */}
               <Box>
                 {combinedbuy.length ? (
                   <Button className={styles.seeAllCombine} btnType="link" p={0} fontSize="1rem" color="#f98d29">
@@ -366,6 +379,8 @@ class ProductDetails extends React.Component {
                   <Image src={offerImage} alt="" width="100%" mt={0} marginBottom="0.625rem" />
                 )}
               </Box>
+
+              {/* Add to cart and Buy now buttons */}
               <Row>
                 <Col variant="col-6">
                   <AddToCart
@@ -389,11 +404,17 @@ class ProductDetails extends React.Component {
                   />
                 </Col>
               </Row>
+
               <Row>
+                {/* Description */}
                 {description && (
                   <ProductDesc desc={description || ''} showmore={showmore} toggleShowMore={this.toggleShowMore} />
                 )}
+
+                {/* Specifications */}
                 <Specs specs={groupedAttributes} pincode={pincode.selectedPincode} />
+
+                {/* Video */}
                 {groupedattributes && groupedattributes.youtubeid && (
                   <Row>
                     <Col variant="col-12">
@@ -401,6 +422,8 @@ class ProductDetails extends React.Component {
                     </Col>
                   </Row>
                 )}
+
+                {/* Review List and Add review */}
                 <Box ref={this.reviewsRef}>
                   <Reviews variant="col-12" reviewItems={reviews.data} pr="2.5rem" />
                   <AddReview
@@ -416,6 +439,8 @@ class ProductDetails extends React.Component {
               </Row>
             </Col>
           </Row>
+
+          {/* Combined Offers */}
           <Row>
             <Col variant="col-12">
               {combinedbuy.length > 0 && (
@@ -452,6 +477,7 @@ class ProductDetails extends React.Component {
                 </Section>
               )}
 
+              {/* Related Products List */}
               {relatedproductsList.length > 0 && (
                 <Row display="block" paddingTop="0.5rem" marginTop="2.5rem" mb={0} mr={0}>
                   <ProductCarousel
@@ -463,6 +489,7 @@ class ProductDetails extends React.Component {
                 </Row>
               )}
 
+              {/* Login modal */}
               <ResponsiveModal
                 classNames={{ modal: 'loginModal' }}
                 onCloseModal={this.handleLoginModal}
