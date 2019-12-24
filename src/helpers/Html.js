@@ -39,8 +39,8 @@ export default class Html extends Component {
 
   render() {
     const {
- assets, store, content, bundles, styleTags
-} = this.props;
+      assets, store, content, bundles, styleTags
+    } = this.props;
     const head = Helmet.renderStatic();
     /* eslint-disable */
     return (
@@ -104,6 +104,9 @@ export default class Html extends Component {
                 }
                 .embeddedServiceHelpButton .embeddedServiceIcon::before {
                   color: #FFF !important;
+                }
+                .embeddedServiceSidebarExtendedHeader {
+                  margin: 0 12px !important;
                 }
                 .message {
                   border-style: hidden;
