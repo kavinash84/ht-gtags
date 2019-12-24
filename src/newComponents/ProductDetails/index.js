@@ -306,186 +306,170 @@ class ProductDetails extends React.Component {
             </Col>
             <Col width={[1, 1, 5 / 12]}>
               <div id="portal" className="portal" />
+              <TitlePrice
+                name={name}
+                price={formatAmount(price)}
+                discPrice={formatAmount(checkSpecialPrice)}
+                savingsRs={formatAmount(calculateSavings(price, checkSpecialPrice) || '')}
+                savingsPercentage={calculateDiscount(price, checkSpecialPrice)}
+                ratings={rating}
+                count={count}
+                marginTop="1rem"
+                onClickReviews={this.onClickReviews}
+              />
+              {/* <ShareBar title={name} url={productURL} mt={10} /> */}
+              <Box py={30}>
+                {colorproducts.length > 0 && (
+                  <Fragment>
+                    <Heading fontSize="1em" color="textDark" fontFamily="medium" mb={15}>
+                      Color Options
+                    </Heading>
+                    <ColorOption
+                      data={colorproducts}
+                      showmorecolorproducts={showmorecolorproducts}
+                      toggleShowMoreColorProducts={this.toggleShowMoreColorProducts}
+                    />
+                  </Fragment>
+                )}
+              </Box>
+              <ServiceDetails
+                deliverBy={
+                  (deliveryInfo && deliveryInfo[0] && deliveryInfo[0].value) ||
+                  (deliveryDetails[0] && deliveryDetails[0] && deliveryDetails[0].value) ||
+                  ''
+                }
+                emiStarting={formatAmount(calculateLowestEmi(emidata, price))}
+                shipping={checkSpecialPrice}
+                isEmiAvailable={isEmiAvailable}
+                pincode={pincode.selectedPincode}
+                loading={deliveryDateLoading}
+              >
+                <Pincode key="pincode" />
+                <EmiModal price={formatAmount(checkSpecialPrice)} data={emidata} key="emi" />
+              </ServiceDetails>
               <Box>
-                <TitlePrice
-                  name={name}
-                  price={formatAmount(price)}
-                  discPrice={formatAmount(checkSpecialPrice)}
-                  savingsRs={formatAmount(calculateSavings(price, checkSpecialPrice) || '')}
-                  savingsPercentage={calculateDiscount(price, checkSpecialPrice)}
-                  ratings={rating}
-                  count={count}
-                  marginTop="1rem"
-                  onClickReviews={this.onClickReviews}
-                />
-                {/* <ShareBar title={name} url={productURL} mt={10} /> */}
-                <Box py={30}>
-                  {colorproducts.length > 0 && (
-                    <Fragment>
-                      <Heading fontSize="1em" color="textDark" fontFamily="medium" mb={15}>
-                        Color Options
-                      </Heading>
-                      <ColorOption
-                        data={colorproducts}
-                        showmorecolorproducts={showmorecolorproducts}
-                        toggleShowMoreColorProducts={this.toggleShowMoreColorProducts}
-                      />
-                    </Fragment>
-                  )}
-                </Box>
-                <Box>
-                  <ServiceDetails
-                    deliverBy={
-                      (deliveryInfo && deliveryInfo[0] && deliveryInfo[0].value) ||
-                      (deliveryDetails[0] && deliveryDetails[0] && deliveryDetails[0].value) ||
-                      ''
-                    }
-                    emiStarting={formatAmount(calculateLowestEmi(emidata, price))}
-                    shipping={checkSpecialPrice}
-                    isEmiAvailable={isEmiAvailable}
-                    pincode={pincode.selectedPincode}
-                    loading={deliveryDateLoading}
-                  >
-                    <Pincode key="pincode" />
-                    <EmiModal price={formatAmount(checkSpecialPrice)} data={emidata} key="emi" />
-                  </ServiceDetails>
-                </Box>
                 {combinedbuy.length ? (
-                  <Row display="block" margin="-0.625rem 0 1.25rem 0.9375rem">
-                    <Box col="12" pl={0} pr={0}>
-                      <Button className={styles.seeAllCombine} btnType="link" p={0} fontSize="1rem" color="#f98d29">
-                        <a href="#combined_buy_offers">
-                          {`See ${combinedbuy.length} Combined ${combinedbuy.length > 1 ? 'Offers' : 'Offer'}`}
-                        </a>
-                      </Button>
-                    </Box>
-                  </Row>
+                  <Button className={styles.seeAllCombine} btnType="link" p={0} fontSize="1rem" color="#f98d29">
+                    <a href="#combined_buy_offers">
+                      {`See ${combinedbuy.length} Combined ${combinedbuy.length > 1 ? 'Offers' : 'Offer'}`}
+                    </a>
+                  </Button>
                 ) : (
                   ''
                 )}
                 {offerImage && offerImageRedirect && (
-                  <Row display="block" margin="0 0.9375rem 0 0.9375rem">
-                    <Box col="12" mt={0} paddingRight="0.3125rem">
-                      <a target="_blank" rel="noopener noreferrer" href={offerImageRedirect}>
-                        <Image src={offerImage} alt="" width="100%" mt={0} marginBottom="0.625rem" />
-                      </a>
-                    </Box>
-                  </Row>
+                  <a target="_blank" rel="noopener noreferrer" href={offerImageRedirect}>
+                    <Image src={offerImage} alt="" width="100%" mt={0} marginBottom="0.625rem" />
+                  </a>
                 )}
                 {offerImage && !offerImageRedirect && (
-                  <Row display="block" margin="0 0.9375rem 0 0.9375rem">
-                    <Box col="12" mt={0} paddingRight="0.3125rem">
-                      <Image src={offerImage} alt="" width="100%" mt={0} marginBottom="0.625rem" />
-                    </Box>
-                  </Row>
+                  <Image src={offerImage} alt="" width="100%" mt={0} marginBottom="0.625rem" />
                 )}
-                <Row display="block" margin="0.625rem 0.9375rem 0.625rem 0.9375rem">
-                  <Box col="6" mt={1} paddingRight="0.3125rem">
-                    <AddToCart
-                      simpleSku={simpleSku}
-                      sku={sku}
-                      itemId={sku}
-                      size="block"
-                      btnType="custom"
-                      btnColor="#515151"
-                      height="50px"
-                      fontSize="16px"
-                      isSoldOut={
-                        !(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)
-                      }
-                    />
-                  </Box>
-                  <Box col="6" mt={0} paddingRight="0.3125rem">
-                    <BuyNow
-                      simpleSku={simpleSku}
-                      sku={sku}
-                      size="block"
-                      btnType="primary"
-                      isSoldOut={
-                        !(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)
-                      }
-                    />
-                  </Box>
-                </Row>
-                <Row display="block" margin="0 0.9375rem 0.625rem 0.9375rem">
-                  {description && (
-                    <ProductDesc desc={description || ''} showmore={showmore} toggleShowMore={this.toggleShowMore} />
-                  )}
-                  <Specs specs={groupedAttributes} pincode={pincode.selectedPincode} />
-                  {groupedattributes && groupedattributes.youtubeid && (
-                    <Row display="block" margin="0 0.9375rem 0">
-                      <Box col="12" mt={0} paddingRight="0.3125rem">
-                        <Video id={getVideoID(groupedattributes.youtubeid)} />
-                      </Box>
-                    </Row>
-                  )}
-                  <Box ref={this.reviewsRef}>
-                    <Reviews col="12" reviewItems={reviews.data} paddingRight="2.5rem" />
-                    <AddReview
-                      col="8"
-                      catalogId={groupedattributes.id_catalog_config}
-                      loaded
-                      onClickSubmit={this.addReview}
-                      adding={adding}
-                      added={added}
-                      toggleReview={toggleReviewBox}
-                    />
-                  </Box>
-                </Row>
-
-                {combinedbuy.length > 0 && (
-                  <Section mb={0}>
-                    <Row id="combined_buy_offers">
-                      <Container pr="0" pl="0" className={styles.combinedProductsWrapper}>
-                        <Heading
-                          textAlign="left"
-                          fontSize="20px"
-                          marginTop="0 !important"
-                          marginBottom="5px !important"
-                          color="primary"
-                          fontFamily="light"
-                        >
-                          Combined Offers
-                        </Heading>
-                      </Container>
-                    </Row>
-                    {combinedbuy.map((item, index) => (
-                      <Row key={String(index)} display="block" pt={0} mt={0} mb={0}>
-                        <CombinedBuy
-                          pb={32}
-                          title={item.name}
-                          item={item}
-                          data={getProductsList(item.products || [])}
-                          length={item.products.length}
-                          price={item.total_price}
-                          setDiscount={item.discount ? Number(item.discount) : 0}
-                          discountedPrice={item.total_price_after_discount}
-                          handleCombinedBuy={() => this.handleCombinedBuy(item, pincode, session)}
-                        />
-                      </Row>
-                    ))}
-                  </Section>
-                )}
-
-                {relatedproductsList.length > 0 && (
-                  <Row display="block" paddingTop="0.5rem" marginTop="2.5rem" mb={0} mr={0}>
-                    <ProductCarousel
-                      paddingTop="2.5rem"
-                      title="Related Products"
-                      data={relatedproductsList}
-                      length={relatedproductsList.length}
-                    />
-                  </Row>
-                )}
-
-                <ResponsiveModal
-                  classNames={{ modal: 'loginModal' }}
-                  onCloseModal={this.handleLoginModal}
-                  open={this.state.openLogin}
-                >
-                  <LoginModal />
-                </ResponsiveModal>
               </Box>
+              <Row>
+                <Col variant="col-6">
+                  <AddToCart
+                    simpleSku={simpleSku}
+                    sku={sku}
+                    itemId={sku}
+                    isSoldOut={
+                      !(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)
+                    }
+                  />
+                </Col>
+                <Col variant="col-6">
+                  <BuyNow
+                    simpleSku={simpleSku}
+                    sku={sku}
+                    size="block"
+                    btnType="primary"
+                    isSoldOut={
+                      !(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)
+                    }
+                  />
+                </Col>
+              </Row>
+              <Row>
+                {description && (
+                  <ProductDesc desc={description || ''} showmore={showmore} toggleShowMore={this.toggleShowMore} />
+                )}
+                <Specs specs={groupedAttributes} pincode={pincode.selectedPincode} />
+                {groupedattributes && groupedattributes.youtubeid && (
+                  <Row>
+                    <Col variant="col-12">
+                      <Video id={getVideoID(groupedattributes.youtubeid)} />
+                    </Col>
+                  </Row>
+                )}
+                <Box ref={this.reviewsRef}>
+                  <Reviews variant="col-12" reviewItems={reviews.data} pr="2.5rem" />
+                  <AddReview
+                    variant="col-8"
+                    catalogId={groupedattributes.id_catalog_config}
+                    loaded
+                    onClickSubmit={this.addReview}
+                    adding={adding}
+                    added={added}
+                    toggleReview={toggleReviewBox}
+                  />
+                </Box>
+              </Row>
+            </Col>
+          </Row>
+          <Row>
+            <Col variant="col-12">
+              {combinedbuy.length > 0 && (
+                <Section mb={0}>
+                  <Row id="combined_buy_offers">
+                    <Container pr="0" pl="0" className={styles.combinedProductsWrapper}>
+                      <Heading
+                        textAlign="left"
+                        fontSize="20px"
+                        marginTop="0 !important"
+                        marginBottom="5px !important"
+                        color="primary"
+                        fontFamily="light"
+                      >
+                        Combined Offers
+                      </Heading>
+                    </Container>
+                  </Row>
+                  {combinedbuy.map((item, index) => (
+                    <Row key={String(index)} display="block" pt={0} mt={0} mb={0}>
+                      <CombinedBuy
+                        pb={32}
+                        title={item.name}
+                        item={item}
+                        data={getProductsList(item.products || [])}
+                        length={item.products.length}
+                        price={item.total_price}
+                        setDiscount={item.discount ? Number(item.discount) : 0}
+                        discountedPrice={item.total_price_after_discount}
+                        handleCombinedBuy={() => this.handleCombinedBuy(item, pincode, session)}
+                      />
+                    </Row>
+                  ))}
+                </Section>
+              )}
+
+              {relatedproductsList.length > 0 && (
+                <Row display="block" paddingTop="0.5rem" marginTop="2.5rem" mb={0} mr={0}>
+                  <ProductCarousel
+                    paddingTop="2.5rem"
+                    title="Related Products"
+                    data={relatedproductsList}
+                    length={relatedproductsList.length}
+                  />
+                </Row>
+              )}
+
+              <ResponsiveModal
+                classNames={{ modal: 'loginModal' }}
+                onCloseModal={this.handleLoginModal}
+                open={this.state.openLogin}
+              >
+                <LoginModal />
+              </ResponsiveModal>
             </Col>
           </Row>
         </Container>
