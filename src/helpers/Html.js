@@ -86,7 +86,7 @@ export default class Html extends Component {
             dangerouslySetInnerHTML={{
               __html: `
                 .embeddedServiceHelpButton .helpButton .uiButton {
-                  background-color: #555555;
+                  background-color: #515151
                   font-family: "Salesforce Sans", sans-serif;
                   box-sizing: content-box;
                   font-weight: bold;
@@ -238,20 +238,20 @@ export default class Html extends Component {
                   }];
                   embedded_svc.settings.enabledFeatures = ['LiveAgent'];
                   embedded_svc.settings.entryFeature = 'LiveAgent';
-                embedded_svc.init(  
-                  'https://praxisretail.my.salesforce.com', 
-                  'https://praxisretail.secure.force.com/LiveAgent',  
-                  gslbBaseURL,  
-                  '00D7F000006O16S',  
-                  'Chat_Deployment',  
-                  { 
-                    baseLiveAgentContentURL: 'https://c.la1-c1-hnd.salesforceliveagent.com/content',  
-                    deploymentId: '5727F0000009ARB',  
-                    buttonId: '5737F00000093Ue',  
-                    baseLiveAgentURL: 'https://d.la1-c1-hnd.salesforceliveagent.com/chat',  
-                    eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I7F0000004DjiUAE_16c51bfeb82', 
-                    isOfflineSupportEnabled: true 
-                  } 
+                embedded_svc.init(
+                  'https://praxisretail.my.salesforce.com',
+                  'https://praxisretail.secure.force.com/LiveAgent',
+                  gslbBaseURL,
+                  '00D7F000006O16S',
+                  'Chat_Deployment',
+                  {
+                    baseLiveAgentContentURL: 'https://c.la1-c1-hnd.salesforceliveagent.com/content',
+                    deploymentId: '5727F0000009ARB',
+                    buttonId: '5737F00000093Ue',
+                    baseLiveAgentURL: 'https://d.la1-c1-hnd.salesforceliveagent.com/chat',
+                    eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I7F0000004DjiUAE_16c51bfeb82',
+                    isOfflineSupportEnabled: true
+                  }
                 );
               };
               if (!window.embedded_svc) {
