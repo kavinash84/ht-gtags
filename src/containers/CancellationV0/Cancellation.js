@@ -1,5 +1,5 @@
 import React from 'react';
-import CancellationContainer from 'newComponents/StaticPages/Cancellation';
+import CancellationContainer from 'components/StaticPages/Cancellation';
 import MenuFooter from 'containers/MenuFooter';
 
 export default () => (
