@@ -86,7 +86,8 @@ export default class Html extends Component {
             dangerouslySetInnerHTML={{
               __html: `
                 .embeddedServiceHelpButton .helpButton .uiButton {
-                  background-color: #515151
+                  background-color: #515151;
+                  background: #515151!important;
                   font-family: "Salesforce Sans", sans-serif;
                   box-sizing: content-box;
                   font-weight: bold;
@@ -100,6 +101,9 @@ export default class Html extends Component {
                 }
                 span#headerTextLabel {
                   color: #ffffff;
+                }
+                .embeddedServiceHelpButton .embeddedServiceIcon::before {
+                  color: #FFF !important;
                 }
                 .message {
                   border-style: hidden;
