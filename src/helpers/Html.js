@@ -27,22 +27,21 @@ export default class Html extends Component {
     store: PropTypes.shape({
       getState: PropTypes.func
     }).isRequired,
-    styleTags: PropTypes.array,
-    salesForce: PropTypes.object
+    styleTags: PropTypes.array
   };
 
   static defaultProps = {
     assets: {},
     bundles: [],
     content: '',
-    styleTags: [],
-    salesForce: {}
+    styleTags: []
   };
 
   render() {
     const {
- assets, store, content, bundles, styleTags, salesForce
+ assets, store, content, bundles, styleTags
 } = this.props;
+    const salesForce = process.env.SF_CHAT || {};
     console.log('sales-force-test', salesForce);
     const head = Helmet.renderStatic();
     /* eslint-disable */
