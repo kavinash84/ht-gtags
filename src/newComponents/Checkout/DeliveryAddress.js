@@ -340,11 +340,11 @@ class DeliveryAddress extends Component {
     } = this.props;
     const { addressform } = this.state;
     return (
-      <BoxHtV1 type="block">
+      <BoxHtV1 type="block" width={1}>
         <MenuCheckout page="delivery" history={history} />
-        <SectionHtV1 display="flex" pt="2.25rem" pb="2rem" mb="1rem" height="auto">
-          <ContainerHtV1 type="container" pr="2rem" pl="2rem">
-            <BoxHtV1 col="9" mt="0" pr="1rem">
+        <SectionHtV1 display="flex" pb="2rem" mb="1rem" height="auto">
+          <ContainerHtV1 type="container" display="flex" pr="2rem" pl="2rem" width={1}>
+            <BoxHtV1 col="9" mt="0" width="656px">
               {!isLoggedIn && (
                 <BoxHtV1 col="12" className={styles.isLoggedIn}>
                   <LabelHtV1 fontSize="1rem" mt="0" mb="0" color="textLight">
@@ -424,9 +424,16 @@ class DeliveryAddress extends Component {
                   <RowHtV1 display="block" mr="0" ml="0">
                     {(addressform || !isLoggedIn) && (
                       <BoxHtV1 col="12" pr="0" mt="1rem">
-                        <LabelHtV1 fontSize="1.125rem" mb="0.875rem">
-                          Shipping Address
-                        </LabelHtV1>
+                        <LabelHtV1 variant="formHeading">Personal Details</LabelHtV1>
+                        <BoxHtV1
+                          sx={{
+                            mt: '22px',
+                            mb: '18px',
+                            width: '100%',
+                            height: '2px',
+                            borderBottom: '1px solid #878686'
+                          }}
+                        />
                         <AddressForm formType="shipping" isLoggedIn={isLoggedIn} userEmail={userEmail} />
                       </BoxHtV1>
                     )}
@@ -471,7 +478,7 @@ class DeliveryAddress extends Component {
                 </form>
               </BoxHtV1>
             </BoxHtV1>
-            <BoxHtV1 col="3" mt="0" pl="0.625rem">
+            <BoxHtV1 col="3" mt="0" pl="0.625rem" ml={59} width="390px" bg="#f5f5f5">
               <OrderSummary
                 itemsTotal={summary.items}
                 setDiscount={summary.combined_set_discount}

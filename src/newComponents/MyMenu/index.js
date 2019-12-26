@@ -12,7 +12,7 @@ import { MY_ORDER_URL, MY_PROFILE_URL, MY_ADDRESS_URL, MY_CASES_URL } from 'help
 const styles = require('./MyMenu.scss');
 
 const MyOrder = ({ page }) => (
-  <SectionHtV1 mb="0.625rem" p="1.375rem 0.5rem" bg="bg">
+  <SectionHtV1 mb="0.625rem" p="1.375rem 0.5rem" bg="bg" mt={0}>
     <ContainerHtV1 type="container" pr="0.5rem" pl="0.5rem">
       <RowHtV1 display="block" mr="0" ml="0" mb="0.625rem">
         <HeadingHtV1 fontSize="1.25rem" color="text" mt="0" mb="0" pb="2px" fontFamily="regular">
@@ -20,7 +20,7 @@ const MyOrder = ({ page }) => (
         </HeadingHtV1>
       </RowHtV1>
       <RowHtV1 display="block" mr="0" ml="0">
-        <BoxHtV1 col="10">
+        <BoxHtV1 col="10" display="flex" width="62%" justifyContent="space-between">
           <BoxHtV1 col="2">
             <Link to={MY_ORDER_URL} className={`${styles.headerLink} ${page === 'order' ? styles.active : ''}`}>
               My Orders

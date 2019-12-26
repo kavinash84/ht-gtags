@@ -1,6 +1,7 @@
 import React from 'react';
 import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
 import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
+import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
 import { connect } from 'react-redux';
 import { getEmiBanks } from 'selectors/payments';
 import PropTypes from 'prop-types';
@@ -32,17 +33,19 @@ const EMI = ({
           Choose From Preferred Bank (Available On Credit Cards Only)
         </LabelHtV1>
       </BoxHtV1>
-      {emiBankDetails.map(bank => (
-        <BankCard
-          setPaymentDetails={setPaymentDetails}
-          gateway={selectedGateway}
-          detailkey="emiBank"
-          name={bank.bank}
-          img={`https://static.hometown.in/media/cms/BankLOGO/${bank.bank}.gif`}
-          currentSelection={currentSelection}
-          key={bank.bank}
-        />
-      ))}
+      <RowHtV1>
+        {emiBankDetails.map(bank => (
+          <BankCard
+            setPaymentDetails={setPaymentDetails}
+            gateway={selectedGateway}
+            detailkey="emiBank"
+            name={bank.bank}
+            img={`https://static.hometown.in/media/cms/BankLOGO/${bank.bank}.gif`}
+            currentSelection={currentSelection}
+            key={bank.bank}
+          />
+        ))}
+      </RowHtV1>
       {currentBankDetails && (
         <BoxHtV1 col="12" mb="0" mt="1rem">
           <table border="1" className={`table table-border ${styles.emiTable}`}>

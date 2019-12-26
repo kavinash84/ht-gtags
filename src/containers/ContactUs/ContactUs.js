@@ -1,5 +1,5 @@
 import React from 'react';
-import ContactUsContainer from 'components/ContactUs';
+import ContactUsContainer from 'newComponents/ContactUs';
 import MenuFooter from 'containers/MenuFooter';
 
 export default () => (

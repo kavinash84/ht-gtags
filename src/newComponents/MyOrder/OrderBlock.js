@@ -8,7 +8,7 @@ import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
 import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
 import ImageShimmerHtV1 from 'hometown-components-dev/lib/ImageShimmerHtV1';
 import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
-import CasesForm from 'newComponents/MyOrder/CasesForm';
+import CasesFormContainer from 'newComponents/MyOrder/CasesForm';
 import ResponsiveModal from 'newComponents/Modal';
 import { formatAmount } from 'utils/formatters';
 import { getImageURL } from 'utils/helper';
@@ -73,22 +73,23 @@ class OrderBlock extends Component {
     const error = data.error || '';
     return (
       <BoxHtV1 mb="2.5rem" className={styles.blockWrapper}>
-        <RowHtV1 type="block" m="0" mb="1rem" className={styles.blockHeading}>
-          <BoxHtV1 col="6" pt="5px">
-            <HeadingHtV1 fontSize="1.25rem" color="textLight" mb="0px" mt="0px" fontFamily="light">
+        <RowHtV1 type="block" margin="0px 0px 1rem" className={styles.blockHeading}>
+          <BoxHtV1 col="6" pt="5px" width="49.8%">
+            <HeadingHtV1 fontSize="1.25rem" color="textLight" mb="0px" mt="0px" pb="2px" fontFamily="light">
               Order No. {order.order_number}
             </HeadingHtV1>
           </BoxHtV1>
           {show && (isBob === 0 || isBob === '0') && status !== 'canceled' ? (
-            <BoxHtV1 ta="right" col="6" pr="5px">
+            <BoxHtV1 textAlign="right" col="6" pr="5px" width="49.8%">
               <ButtonHtV1
                 disabled={trackingLoading && currentOrder === order.order_number}
                 fontSize="14px !important"
-                color="#ae8873"
                 hoverColor="white"
                 bc="transparent"
                 btnType="primary"
                 p="5px 10px"
+                color="colors.white"
+                bg="rgb(249, 141, 41)"
                 mr="10px"
                 onClick={() => {
                   this.loadTrackingData(order);
@@ -158,55 +159,59 @@ class OrderBlock extends Component {
         </RowHtV1>
         <BoxHtV1 className={styles.blockBody}>
           <RowHtV1 type="block" m="0" mb="0.5rem">
-            <BoxHtV1 col="3" pr="15px">
-              <TextHtV1 mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
+            <BoxHtV1 col="3" pr="15px" width="25%">
+              <TextHtV1 mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium" mb="0.625rem">
                 ORDER DATE
               </TextHtV1>
-              <TextHtV1 mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
+              <TextHtV1 mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="regular" mb="0.625rem">
                 {order.order_date}
               </TextHtV1>
             </BoxHtV1>
-            <BoxHtV1 col="3" pr="15px">
-              <TextHtV1 mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
+            <BoxHtV1 col="3" pr="15px" width="25%">
+              <TextHtV1 mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium" mb="0.625rem">
                 SHIPPING ADDRESS
               </TextHtV1>
-              <TextHtV1 mt="0" mb="0" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
+              <TextHtV1 mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
                 {`${order.s_customer_first_name || ''} ${order.s_customer_last_name || ''}`}
-                <br />
+              </TextHtV1>
+              <TextHtV1 mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
                 {order.s_address_1 || ''}
-                <br />
+              </TextHtV1>
+              <TextHtV1 mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
                 {order.s_city || ''}, {order.s_pincode || ''}
-                <br />
+              </TextHtV1>
+              <TextHtV1 mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
                 {order.s_region || ''}
-                <br />
               </TextHtV1>
             </BoxHtV1>
-            <BoxHtV1 col="3" pr="15px">
-              <TextHtV1 mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
+            <BoxHtV1 col="3" pr="15px" width="25%">
+              <TextHtV1 mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                 BILLING ADDRESS
               </TextHtV1>
-              <TextHtV1 mt="0" mb="0" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
+              <TextHtV1 mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
                 {`${order.b_customer_first_name || ''} ${order.b_customer_last_name || ''}`}
-                <br />
+              </TextHtV1>
+              <TextHtV1 mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
                 {order.b_address_1 || ''}
-                <br />
+              </TextHtV1>
+              <TextHtV1 mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
                 {order.b_city || ''}, {order.b_pincode || ''}
-                <br />
+              </TextHtV1>
+              <TextHtV1 mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
                 {order.b_region || ''}
-                <br />
               </TextHtV1>
             </BoxHtV1>
-            <BoxHtV1 col="3" pr="15px">
-              <TextHtV1 mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
+            <BoxHtV1 col="3" pr="15px" width="25%">
+              <TextHtV1 mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                 ORDER AMOUNT
               </TextHtV1>
-              <TextHtV1 mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
+              <TextHtV1 mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
                 Rs. {formatAmount(order.grand_total)}
               </TextHtV1>
             </BoxHtV1>
           </RowHtV1>
           <RowHtV1 type="block" m="0">
-            <BoxHtV1 col="12">
+            <BoxHtV1 col="12" width="100%">
               <table className="ordersTable table">
                 <tbody>
                   <tr className={styles.tableHeading}>
@@ -221,7 +226,7 @@ class OrderBlock extends Component {
                     order.order_items.map(item => (
                       <tr key={item.order_item_id}>
                         <td width="81px">
-                          <ImageShimmerHtV1 src={getImageURL(item.image, 'catalog_360')} height="60px">
+                          <ImageShimmerHtV1 src={getImageURL(item.image, 'catalog_360')}>
                             {imageURL => (
                               <ImageHtV1 src={imageURL} alt={item.product_name} width="60px" height="60px" />
                             )}
@@ -248,12 +253,19 @@ class OrderBlock extends Component {
                           <td>
                             <BoxHtV1 ta="right">
                               <ButtonHtV1
-                                fontSize="14px !important"
-                                hoverColor="white"
-                                color="rgba(0,0,0,0.5)"
-                                bc="rgba(0,0,0,0.5)"
-                                btnType="btnOutline"
-                                p="5px 20px"
+                                sx={{
+                                  ':hover': {
+                                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                                    color: 'white'
+                                  },
+                                  fontSize: '14px !important',
+                                  color: 'rgba(0,0,0,0.5)',
+                                  p: '5px 20px',
+                                  borderRadius: '3px',
+                                  border: '1px solid',
+                                  bg: 'white',
+                                  btnType: 'btnOutline'
+                                }}
                                 onClick={() => {
                                   this.handleChange('openCaseModal', item, order);
                                 }}
@@ -282,7 +294,7 @@ class OrderBlock extends Component {
           }}
           open={this.state.openCaseModal}
         >
-          <CasesForm
+          <CasesFormContainer
             loading={loading}
             loaded={loaded}
             caseItem={this.state.caseItem}
