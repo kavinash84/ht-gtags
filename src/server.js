@@ -355,6 +355,7 @@ app.use(async (req, res) => {
     const styleTags = sheet.getStyleElement();
     const bundles = getBundles(getChunks(), modules);
     const salesForce = process.env.SF_CHAT;
+    console.log('sf-test', salesForce);
 
     const html = (
       <Html

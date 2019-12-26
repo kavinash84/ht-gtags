@@ -43,6 +43,7 @@ export default class Html extends Component {
     const {
  assets, store, content, bundles, styleTags, salesForce
 } = this.props;
+    console.log('sales-force-test', salesForce);
     const head = Helmet.renderStatic();
     /* eslint-disable */
     return (
@@ -256,7 +257,7 @@ export default class Html extends Component {
                   embedded_svc.settings.entryFeature = 'LiveAgent';
                 embedded_svc.init(
                   ${salesForce.url},
-                  ${salesForce.liveAgentUrl},
+                  ${salesForce.lUrl},
                   gslbBaseURL,
                    ${salesForce.version},
                   'Chat_Deployment',
@@ -272,7 +273,7 @@ export default class Html extends Component {
               };
               if (!window.embedded_svc) {
                 var s = document.createElement('script');
-               s.setAttribute('src', ${salesForce.url}/embeddedservice/5.0/esw.min.js');
+               s.setAttribute('src', ${salesForce.jsUrl});
                 s.onload = function() {
                   initESW(null);
                 };
