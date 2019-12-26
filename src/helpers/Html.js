@@ -106,15 +106,21 @@ export default class Html extends Component {
                   color: #FFF !important;
                 }
                 .embeddedServiceSidebarExtendedHeader {
-                  margin: 0 12px !important;
-                  border-radius: 0 0 6px 6px;
+                  margin: 0 18px !important;
+                  border-radius: 0 0 8px 8px;
                 }
                 .message {
                   border-style: hidden;
                   border-width: 1px;
                   color: white;
                   padding: 6px 8px 6px 6px;
-                  margin: 4px 20px;
+                  margin: 0px !important;
+                }
+                .embeddedServiceLiveAgentStateChatHeader:not(.alert) .message {
+                  white-space: normal !important;
+                }
+                .embeddedServiceLiveAgentStateChatHeader .content {
+                  height: 168px !important;
                 }
                 @font-face {
                   font-family: 'Salesforce Sans';
