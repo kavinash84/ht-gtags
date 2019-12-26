@@ -257,7 +257,7 @@ export default class Html extends Component {
                   embedded_svc.settings.entryFeature = 'LiveAgent';
                 embedded_svc.init(
                   ${salesForce.url},
-                  ${salesForce.lUrl},
+                  ${salesForce.liveAgentUrl},
                   gslbBaseURL,
                    ${salesForce.version},
                   'Chat_Deployment',
