@@ -354,6 +354,8 @@ app.use(async (req, res) => {
     }
     const styleTags = sheet.getStyleElement();
     const bundles = getBundles(getChunks(), modules);
+    const salesForce = process.env.SF_CHAT;
+
     const html = (
       <Html
         styleTags={styleTags}
@@ -361,6 +363,7 @@ app.use(async (req, res) => {
         bundles={bundles}
         content={content}
         store={store}
+        salesForce={salesForce}
       />
     );
     res.status(200).send(`<!doctype html>${ReactDOM.renderToString(html)}`);

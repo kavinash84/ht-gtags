@@ -27,19 +27,21 @@ export default class Html extends Component {
     store: PropTypes.shape({
       getState: PropTypes.func
     }).isRequired,
-    styleTags: PropTypes.array
+    styleTags: PropTypes.array,
+    salesForce: PropTypes.object
   };
 
   static defaultProps = {
     assets: {},
     bundles: [],
     content: '',
-    styleTags: []
+    styleTags: [],
+    salesForce: {}
   };
 
   render() {
     const {
- assets, store, content, bundles, styleTags
+ assets, store, content, bundles, styleTags, salesForce
 } = this.props;
     const head = Helmet.renderStatic();
     /* eslint-disable */
@@ -253,24 +255,24 @@ export default class Html extends Component {
                   embedded_svc.settings.enabledFeatures = ['LiveAgent'];
                   embedded_svc.settings.entryFeature = 'LiveAgent';
                 embedded_svc.init(
-                  'https://praxisretail--devbox.cs6.my.salesforce.com',
-                  'https://devbox-praxisretail.cs6.force.com/LiveAgent',
+                  ${salesForce.url},
+                  ${salesForce.liveAgentUrl},
                   gslbBaseURL,
-                  '00DN0000000Qxcj',
+                   ${salesForce.version},
                   'Chat_Deployment',
                   {
-                    baseLiveAgentContentURL: 'https://c.la1-c2cs-hnd.salesforceliveagent.com/content',
-                    deploymentId: '572N000000000PC',
-                    buttonId: '573N000000000Ub',
-                    baseLiveAgentURL: 'https://d.la1-c2cs-hnd.salesforceliveagent.com/chat',
-                    eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04IN0000000002MMAQ_168ff82d2a7',
+                    baseLiveAgentContentURL: ${salesForce.baseLiveAgentContentURL},
+                    deploymentId: ${salesForce.deploymentId},
+                    buttonId: ${salesForce.buttonId},
+                    baseLiveAgentURL: ${salesForce.baseLiveAgentURL},
+                    eswLiveAgentDevName: ${salesForce.eswLiveAgentDevName},
                     isOfflineSupportEnabled: true
                   }
                 );
               };
               if (!window.embedded_svc) {
                 var s = document.createElement('script');
-               s.setAttribute('src', 'https://praxisretail--devbox.cs6.my.salesforce.com/embeddedservice/5.0/esw.min.js');
+               s.setAttribute('src', ${salesForce.url}/embeddedservice/5.0/esw.min.js');
                 s.onload = function() {
                   initESW(null);
                 };
