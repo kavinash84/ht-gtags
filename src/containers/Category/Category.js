@@ -30,6 +30,30 @@ import MainSlider from 'newComponents/MainSlider';
   seoInfo: data && data.seo && data.seo.items
 }))
 export default class Category extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  renderOffers = offers =>
+    offers.map(item => (
+      <Col
+        variant="col-4"
+        textAlign="center"
+        sx={{
+          borderRight: 'whiteMedium'
+        }}
+      >
+        <Text variant="textLight" color="white">
+          {item.offer || ''}
+        </Text>
+        <Heading variant="heading.medium" color="white" py={6}>
+          {item.title || ''}
+        </Heading>
+        <Heading fontSize={16} color="white">
+          {item.description || ''}
+        </Heading>
+      </Col>
+    ));
   render() {
     const {
       category,
@@ -54,36 +78,7 @@ export default class Category extends Component {
           {/* Offer Bar */}
           <Box bg="heading" pt={30} pb={20}>
             <Container>
-              <Row justifyContent="center">
-                <Col
-                  variant="col-4"
-                  textAlign="center"
-                  sx={{
-                    borderRight: 'whiteMedium'
-                  }}
-                >
-                  <Text variant="textLight" color="white">
-                    Limited time offer
-                  </Text>
-                  <Heading variant="heading.medium" color="white" py={6}>
-                    Up to 35% off
-                  </Heading>
-                  <Heading fontSize={16} color="white">
-                    Coupon Code: SUPER35
-                  </Heading>
-                </Col>
-                <Col variant="col-4" textAlign="center">
-                  <Text variant="textLight" color="white">
-                    Limited time offer
-                  </Text>
-                  <Heading variant="heading.medium" color="white" py={6}>
-                    Up to 15% off
-                  </Heading>
-                  <Heading fontSize={16} color="white">
-                    Selected range of home decor.
-                  </Heading>
-                </Col>
-              </Row>
+              <Row justifyContent="center">{this.renderOffers(category.offers || [])}</Row>
             </Container>
           </Box>
 
@@ -95,9 +90,9 @@ export default class Category extends Component {
             category.sections &&
             category.sections.map((cat, index) => (
               <Section key={String(index)}>
-                <Container>{CommonLayout(cat.component, cat.title, cat.data, cat.grid)}</Container>
+                <Container>{CommonLayout(cat.component, cat.title, cat.data, cat.is_product)}</Container>
               </Section>
-            ))}
+              ))}
 
           {/* Footer */}
           <Footer />
