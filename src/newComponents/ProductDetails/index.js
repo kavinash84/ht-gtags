@@ -1,7 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
 /**
@@ -29,8 +29,8 @@ import Col from 'hometown-components-dev/lib/ColHtV1';
 import Container from 'hometown-components-dev/lib/ContainerHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
 import Row from 'hometown-components-dev/lib/RowHtV1';
-import Section from 'hometown-components-dev/lib/SectionHtV1';
 
 /**
  * Page Components
@@ -56,7 +56,53 @@ import Pincode from './Pincode';
 import ProductDetailsCarousel from './Carousel';
 import Video from './Video';
 
-const styles = require('./ProductDetails.scss');
+/**
+ * Images / Icons
+ */
+const freeShippingIcon = require('../../../static/free-shipping.svg');
+const warrentyIcon = require('../../../static/warrenty.svg');
+const emiIcon = require('../../../static/emi.svg');
+
+/**
+ * Common Components
+ */
+const DescriptionButton = props => (
+  <Col>
+    <Button
+      variant="link"
+      fontWeight={500}
+      fontSize={16}
+      py={20}
+      textTransform="uppercase"
+      sx={{ textTransform: 'uppercase' }}
+      {...props}
+    />
+  </Col>
+);
+
+const UspCol = ({ src, text, ...props }) => (
+  <Col {...props}>
+    <Image src={src} alt={text} height={70} />
+    <Text variant="primary.medium" pt={15} fontFamily="medium">
+      {text}
+    </Text>
+  </Col>
+);
+
+UspCol.propTypes = {
+  src: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired
+};
+
+const CompleteTheLookCol = ({ src, ...props }) => (
+  <Col width={1 / 3} my={16} {...props}>
+    <Image src={src} alt="" />
+  </Col>
+);
+
+CompleteTheLookCol.propTypes = {
+  src: PropTypes.string.isRequired
+};
 
 const { SITE_URL } = process.env;
 
@@ -286,7 +332,7 @@ class ProductDetails extends React.Component {
               <BreadCrumb breadcrumbs={breadcrumbs} />
             </Col>
           </Row>
-          <Row>
+          <Row mb={70}>
             {/* Left Column */}
             <Col width={[1, 1, 7 / 12]}>
               {/* Product Slider */}
@@ -360,7 +406,7 @@ class ProductDetails extends React.Component {
               {/* Offers */}
               <Box mb={30}>
                 {combinedbuy.length ? (
-                  <Button variant="link">
+                  <Button variant="link" fontFamily="medium" fontSize={18}>
                     <a href="#combined_buy_offers">
                       {`See ${combinedbuy.length} Combined ${combinedbuy.length > 1 ? 'Offers' : 'Offer'}`}
                     </a>
@@ -398,101 +444,139 @@ class ProductDetails extends React.Component {
                   />
                 </Col>
               </Row>
-
-              <Row>
-                {/* Description */}
-                {description && (
-                  <ProductDesc desc={description || ''} showmore={showmore} toggleShowMore={this.toggleShowMore} />
-                )}
-
-                {/* Specifications */}
-                <Specs specs={groupedAttributes} pincode={pincode.selectedPincode} />
-
-                {/* Video */}
-                {groupedattributes && groupedattributes.youtubeid && (
-                  <Row>
-                    <Col variant="col-12">
-                      <Video id={getVideoID(groupedattributes.youtubeid)} />
-                    </Col>
-                  </Row>
-                )}
-
-                {/* Review List and Add review */}
-                <Box ref={this.reviewsRef}>
-                  <Reviews variant="col-12" reviewItems={reviews.data} pr="2.5rem" />
-                  <AddReview
-                    variant="col-8"
-                    catalogId={groupedattributes.id_catalog_config}
-                    loaded
-                    onClickSubmit={this.addReview}
-                    adding={adding}
-                    added={added}
-                    toggleReview={toggleReviewBox}
-                  />
-                </Box>
-              </Row>
             </Col>
           </Row>
+          <Box>
+            <Row
+              variant="row.contentCenter"
+              sx={{
+                borderTop: 'dividerBold',
+                borderBottom: 'dividerBold'
+              }}
+            >
+              <DescriptionButton>DESCRIPTION</DescriptionButton>
+              <DescriptionButton>Care Instructions</DescriptionButton>
+              <DescriptionButton>Service Assurance / Warranty</DescriptionButton>
+              <DescriptionButton>Returns / Cancellation</DescriptionButton>
+              <DescriptionButton>Note</DescriptionButton>
+              <DescriptionButton>REVIEWS</DescriptionButton>
+            </Row>
+
+            {/* Description */}
+            <Box px="10%">
+              {description && (
+                <ProductDesc desc={description || ''} showmore={showmore} toggleShowMore={this.toggleShowMore} />
+              )}
+            </Box>
+
+            {/* Specifications */}
+            <Specs specs={groupedAttributes} pincode={pincode.selectedPincode} />
+
+            {/* Video */}
+            {groupedattributes && groupedattributes.youtubeid && (
+              <Row my={30}>
+                <Col variant="col-12">
+                  <Video id={getVideoID(groupedattributes.youtubeid)} />
+                </Col>
+              </Row>
+            )}
+
+            {/* Usps */}
+            <Row mb={50} width="60%" justifyContent="space-between" mx="auto">
+              <UspCol src={freeShippingIcon} text="Free Shipping" />
+              <UspCol src={emiIcon} text="EMI Options" />
+              <UspCol src={warrentyIcon} text="1 Year Warranty" />
+            </Row>
+
+            {/* DIMENSIONS */}
+            <Box py={20} sx={{ borderTop: 'dividerLight' }}>
+              <Box textAlign="center" mb={30}>
+                <Text variant="regular" fontSize={16} pb={5}>
+                  DIMENSIONS
+                </Text>
+                <Heading variant="heading">Will it fit in your room?</Heading>
+              </Box>
+              <Box p={15} textAlign="center" sx={{ border: 'dividerLight' }}>
+                <Image src="https://www.hometown.in/media/product/89/2453/3-zoom.jpg" alt="" />
+              </Box>
+            </Box>
+
+            {/* Complete the look */}
+            <Box py={20}>
+              <Box textAlign="center" mb={20}>
+                <Heading variant="heading">Complete the look</Heading>
+              </Box>
+              <Row textAlign="center" flexWrap="wrap">
+                <CompleteTheLookCol src="https://www.hometown.in/media/product/89/2453/71787/1-zoom.jpg" />
+                <CompleteTheLookCol src="https://www.hometown.in/media/product/89/2453/71787/1-zoom.jpg" />
+                <CompleteTheLookCol src="https://www.hometown.in/media/product/89/2453/71787/1-zoom.jpg" />
+                <CompleteTheLookCol src="https://www.hometown.in/media/product/89/2453/71787/1-zoom.jpg" />
+                <CompleteTheLookCol src="https://www.hometown.in/media/product/89/2453/71787/1-zoom.jpg" />
+                <CompleteTheLookCol src="https://www.hometown.in/media/product/89/2453/71787/1-zoom.jpg" />
+              </Row>
+            </Box>
+
+            {/* Review List and Add review */}
+            <Box ref={this.reviewsRef}>
+              <Reviews variant="col-12" reviewItems={reviews.data} pr="2.5rem" />
+              <AddReview
+                variant="col-8"
+                catalogId={groupedattributes.id_catalog_config}
+                loaded
+                onClickSubmit={this.addReview}
+                adding={adding}
+                added={added}
+                toggleReview={toggleReviewBox}
+              />
+            </Box>
+          </Box>
 
           {/* Combined Offers */}
-          <Row>
-            <Col variant="col-12">
-              {combinedbuy.length > 0 && (
-                <Section mb={0}>
-                  <Row id="combined_buy_offers">
-                    <Container pr="0" pl="0" className={styles.combinedProductsWrapper}>
-                      <Heading
-                        textAlign="left"
-                        fontSize="20px"
-                        marginTop="0 !important"
-                        marginBottom="5px !important"
-                        color="primary"
-                        fontFamily="light"
-                      >
-                        Combined Offers
-                      </Heading>
-                    </Container>
-                  </Row>
-                  {combinedbuy.map((item, index) => (
-                    <Row key={String(index)} display="block" pt={0} mt={0} mb={0}>
-                      <CombinedBuy
-                        pb={32}
-                        title={item.name}
-                        item={item}
-                        data={getProductsList(item.products || [])}
-                        length={item.products.length}
-                        price={item.total_price}
-                        setDiscount={item.discount ? Number(item.discount) : 0}
-                        discountedPrice={item.total_price_after_discount}
-                        handleCombinedBuy={() => this.handleCombinedBuy(item, pincode, session)}
-                      />
-                    </Row>
-                  ))}
-                </Section>
-              )}
-
-              {/* Related Products List */}
-              {relatedproductsList.length > 0 && (
-                <Row display="block" paddingTop="0.5rem" marginTop="2.5rem" mb={0} mr={0}>
-                  <ProductCarousel
-                    paddingTop="2.5rem"
-                    title="Related Products"
-                    data={relatedproductsList}
-                    length={relatedproductsList.length}
+          {combinedbuy.length > 0 && (
+            <Box>
+              <Row id="combined_buy_offers">
+                <Container>
+                  <Heading variant="heading.medium">Combined Offers</Heading>
+                </Container>
+              </Row>
+              {combinedbuy.map((item, index) => (
+                <Row key={String(index)}>
+                  <CombinedBuy
+                    pb={32}
+                    title={item.name}
+                    item={item}
+                    data={getProductsList(item.products || [])}
+                    length={item.products.length}
+                    price={item.total_price}
+                    setDiscount={item.discount ? Number(item.discount) : 0}
+                    discountedPrice={item.total_price_after_discount}
+                    handleCombinedBuy={() => this.handleCombinedBuy(item, pincode, session)}
                   />
                 </Row>
-              )}
+              ))}
+            </Box>
+          )}
 
-              {/* Login modal */}
-              <ResponsiveModal
-                classNames={{ modal: 'loginModal' }}
-                onCloseModal={this.handleLoginModal}
-                open={this.state.openLogin}
-              >
-                <LoginModal />
-              </ResponsiveModal>
-            </Col>
-          </Row>
+          {/* Related Products List */}
+          {relatedproductsList.length > 0 && (
+            <Row my={20}>
+              <ProductCarousel
+                paddingTop="2.5rem"
+                title="Related Products"
+                data={relatedproductsList}
+                length={relatedproductsList.length}
+              />
+            </Row>
+          )}
+
+          {/* Login modal */}
+          <ResponsiveModal
+            classNames={{ modal: 'loginModal' }}
+            onCloseModal={this.handleLoginModal}
+            open={this.state.openLogin}
+          >
+            <LoginModal />
+          </ResponsiveModal>
         </Container>
       </Box>
     );
