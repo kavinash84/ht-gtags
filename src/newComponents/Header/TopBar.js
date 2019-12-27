@@ -18,11 +18,11 @@ const TopBar = () => (
             Track Order
           </Text>
         </Link>
-        <Link to="/blog">
+        <a href="https://blog.hometown.in" rel="noreferrer noopener" target="_balnk">
           <Text variant="heading.small" color="white">
             Blog
           </Text>
-        </Link>
+        </a>
       </Row>
     </Container>
   </Box>
