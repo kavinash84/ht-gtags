@@ -354,6 +354,7 @@ app.use(async (req, res) => {
     }
     const styleTags = sheet.getStyleElement();
     const bundles = getBundles(getChunks(), modules);
+
     const html = (
       <Html
         styleTags={styleTags}
