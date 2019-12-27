@@ -37,6 +37,8 @@ const styles = require('./StoreLocator.scss');
 const customStyles = {
   control: () => ({
     backgroundColor: '#6d7377',
+    borderRadius: '6px',
+    color: 'white',
     display: 'flex'
   }),
   placeholder: () => ({
@@ -279,8 +281,7 @@ class StoreLocator extends React.Component {
       this.setState(
         {
           currentLocation: { lat, lng },
-          nearMe: nearByDestinations,
-          isLoading: true
+          nearMe: nearByDestinations
         },
         () => {
           matrix.getDistanceMatrix(
@@ -303,6 +304,8 @@ class StoreLocator extends React.Component {
           );
         }
       );
+    } else {
+      this.setError('Error in getting near by stores, please try again !');
     }
   };
   locationError = error => {
@@ -324,7 +327,9 @@ class StoreLocator extends React.Component {
   detectUserLocation = () => {
     // const { setCurrentLocation: setLocation } = this.props;
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.locationSuccess, this.locationError);
+      this.setState({ isLoading: true }, () => {
+        navigator.geolocation.getCurrentPosition(this.locationSuccess, this.locationError);
+      });
     } else {
       this.setError('Unable to detect the current location !');
     }
@@ -407,6 +412,7 @@ class StoreLocator extends React.Component {
                 </Col>
                 <Col width={1 / 2} px={10}>
                   <Button
+                    sx={{ cursor: 'pointer' }}
                     onClick={e => {
                       e.preventDefault();
                       this.detectUserLocation();
@@ -489,31 +495,32 @@ class StoreLocator extends React.Component {
                         </Text>
                         <Flex sx={{ alignItems: 'center' }} mt={8} pl={5}>
                           <Text color="white" fontSize={14} mr={10}>
-                            9am | 30mins
-                          </Text>
-                          <LinkRedirect
-                            title="Hometown Store Locator Direction"
-                            href={this.getURL(currentLocation, item.position)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
                             {item.disText && item.duration ? `${item.disText || ''} | ${item.duration || ''} ` : ''}
-                            <Button
-                              variant="link"
-                              color="white"
-                              sx={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                cursor: 'pointer'
-                              }}
+                          </Text>
+                          {item.disText && (
+                            <LinkRedirect
+                              title="Hometown Store Locator Direction"
+                              href={this.getURL(currentLocation, item.position)}
+                              target="_blank"
+                              rel="noopener noreferrer"
                             >
-                              <Image src={DirectionIcon} mr={10} /> Get Direction
-                            </Button>
-                          </LinkRedirect>
+                              <Button
+                                variant="link"
+                                color="white"
+                                sx={{
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  cursor: 'pointer'
+                                }}
+                              >
+                                <Image src={DirectionIcon} mr={10} /> Get Direction
+                              </Button>
+                            </LinkRedirect>
+                          )}
                         </Flex>
                       </Box>
                       <Box width={110} pl={20}>
-                        <Image src="https://via.placeholder.com/110x110" />
+                        <Image src={item.image_url || 'https://via.placeholder.com/110x110'} />
                       </Box>
                     </Li>
                   ))}
