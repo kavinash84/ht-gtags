@@ -6,8 +6,9 @@ import { connect } from 'react-redux';
 /**
  * Components
  */
-import AddCartIcon from 'hometown-components-dev/lib/Icons/AddCart';
+// import AddCartIcon from 'hometown-components-dev/lib/Icons/AddCart';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 
@@ -19,9 +20,8 @@ import { getCartListSKU } from 'selectors/cart';
 import { PINCODE, CART_URL } from 'helpers/Constants';
 
 const checkSKUInCart = (list, sku) => list.includes(sku);
-const styles = require('./AddToCart.scss');
 const LoaderIcon = require('../../../static/refresh.svg');
-const CheckedIcon = require('../../../static/added-to-cart-icon.png');
+// const CheckedIcon = require('../../../static/added-to-cart-icon.png');
 
 const onClick = (key, skuId, simpleSku, session, pincode) => dispatcher => e => {
   e.preventDefault();
@@ -49,51 +49,39 @@ const AddToCart = ({
   addingToCart,
   itemId,
   stateId,
-  isSoldOut,
-  height,
-  btnColor
+  isSoldOut
 }) => {
   const checkStatus = checkSKUInCart(cartSKUs, sku);
   const addLoading = addingToCart && stateId === itemId;
   return (
     <Fragment>
       {isSoldOut ? (
-        <Button btnType="custom" border="1px solid" bg="white" color="red">
-          <Box fontSize="12px" fontFamily="regular" color="red" verticalAlign="text-top">
-            Out of Stock
-          </Box>
-        </Button>
+        <Button variant="outline.error.large">Out of Stock</Button>
       ) : (
         <Fragment>
           {!checkStatus ? (
             <Button
-              variant="outline"
+              variant="outline.primary.large"
+              width={1}
               disabled={addLoading}
               onClick={onClick(itemId, sku, simpleSku, session, pincode)(addToCart)}
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
             >
-              {!addLoading && (
-                <AddCartIcon
-                  width="18px"
-                  height="18px"
-                  verticalAlign="middle"
-                  fill={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
-                />
-              )}
-              {addLoading && <Image className="spin" src={LoaderIcon} width="18px" />}
+              {addLoading && <Image className="spin" src={LoaderIcon} width="18px" mr={10} />}
               {addLoading ? 'Adding...' : 'Add to Cart'}
             </Button>
           ) : (
-            <Box>
-              <Box className={styles.addedToCart}>
-                <Image width="22px" src={CheckedIcon} display="inline" verticalAlign="middle" mr={8} />
-                Added to Cart
+            <Row mx={0} alignItems="center">
+              <Box as={Link} to={CART_URL} width={1}>
+                <Button variant="outline.primary.large" width={1}>
+                  Added to Cart
+                </Button>
               </Box>
-              <Link className={`${styles.goToCart} ${height !== 'auto' && styles.heightFix} `} to={CART_URL}>
-                <Box ml={0} fontSize="12px" fontFamily="regular" color="#FFF" verticalAlign="text-bottom" lh="1.5">
-                  Go to Cart
-                </Box>
-              </Link>
-            </Box>
+            </Row>
           )}
         </Fragment>
       )}
@@ -106,9 +94,7 @@ AddToCart.defaultProps = {
   addingToCart: false,
   itemId: '',
   stateId: '',
-  isSoldOut: false,
-  height: 'auto',
-  btnColor: '#f98d29'
+  isSoldOut: false
 };
 
 AddToCart.propTypes = {
@@ -121,8 +107,6 @@ AddToCart.propTypes = {
   addingToCart: PropTypes.bool,
   itemId: PropTypes.string,
   stateId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  height: PropTypes.string,
-  btnColor: PropTypes.string,
   isSoldOut: PropTypes.bool
 };
 
