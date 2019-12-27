@@ -29,7 +29,7 @@ let SF_CHAT = {
   jsUrl: 'https://praxisretail--devbox.cs6.my.salesforce.com/embeddedservice/5.0/esw.min.js'
 };
 
-if (process.env.NODE_ENV !== 'development') {
+if (process.env.SF_ENV && process.env.SF_ENV === 'production') {
   SF_CHAT = {
     url: 'https://praxisretail.my.salesforce.com',
     liveAgentUrl: 'https://praxisretail.secure.force.com/LiveAgent',
