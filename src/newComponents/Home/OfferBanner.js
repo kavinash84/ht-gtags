@@ -7,40 +7,36 @@ import Row from 'hometown-components-dev/lib/RowHtV1';
 import Col from 'hometown-components-dev/lib/ColHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 
-const OfferBanner = ({
- image, url, target, variant
-}) => (
+const OfferBanner = ({ image, url, target }) => (
   <Section>
     <Container>
       <Row>
         <Col>
           {target ? (
             <a href={url} target={target} rel="noopener noreferrer">
-              <Image src={image} variant={variant} />
-            </a>
-          ) : (
-            <Link to={url}>
               <Image src={image} variant="image" />
-            </Link>
-          )}
+            </a>
+            ) : (
+              <Link to={url}>
+                <Image src={image} variant="image" />
+              </Link>
+            )}
         </Col>
       </Row>
     </Container>
   </Section>
-);
+  );
 
 OfferBanner.defaultProps = {
   image: '',
   url: '',
-  target: '',
-  variant: ''
+  target: ''
 };
 
 OfferBanner.propTypes = {
   image: PropTypes.string,
   url: PropTypes.string,
-  target: PropTypes.string,
-  variant: PropTypes.string
+  target: PropTypes.string
 };
 
 export default OfferBanner;
