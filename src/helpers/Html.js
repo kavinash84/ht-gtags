@@ -66,8 +66,8 @@ export default class Html extends Component {
 
   render() {
     const {
- assets, store, content, bundles, styleTags
-} = this.props;
+      assets, store, content, bundles, styleTags
+    } = this.props;
 
     const head = Helmet.renderStatic();
     /* eslint-disable */
