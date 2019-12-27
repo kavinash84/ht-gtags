@@ -5,7 +5,7 @@ import getCookie from '../utils/cookies';
 
 export default function apiClient(req) {
   const instance = axios.create({
-    baseURL: `http://${config.apiHost}`,
+    baseURL: `https://${config.apiHost}`,
     rejectUnauthorized: false,
     params: {
       devicePlatform: 'desktop' // when ios app ready remove it & get the os from native code and pass here
