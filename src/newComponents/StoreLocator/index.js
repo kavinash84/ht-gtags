@@ -348,7 +348,7 @@ class StoreLocator extends React.Component {
       currentLocation,
       currentCity
     } = this.state;
-    const selectedCity = redirectCity ? { value: redirectCity, label: redirectCity } : currentCity;
+    const selectedCity = currentCity;
     let stateList = mapData.map(item => item.state);
     let cityList = mapData.filter(item => item.state === currentState).map(item => item.city);
     const cities = Array.from(new Set(mapData.filter(item => item.city).map(item => item.city))).map(item => ({
