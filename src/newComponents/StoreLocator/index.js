@@ -473,7 +473,7 @@ class StoreLocator extends React.Component {
                     >
                       <Box width="calc(100% - 134px)" onClick={() => this.handleClick(item.store, mapData, item.city)}>
                         <Heading
-                          variant="heading"
+                          variant="heading.regular"
                           fontSize={16}
                           color="#FFF"
                           mb={8}

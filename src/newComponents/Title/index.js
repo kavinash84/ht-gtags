@@ -7,7 +7,7 @@ import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
 
 const Title = ({ title, subTitle, ...rest }) => (
   <BoxHtV1 mb="24px" {...rest}>
-    <TextHtV1 variant="heading" textAlign="center" mb={subTitle && 10}>
+    <TextHtV1 variant="heading.regular" textAlign="center" mb={subTitle && 10}>
       {title}
     </TextHtV1>
     {subTitle !== '' && <TextHtV1 textAlign="center">{subTitle}</TextHtV1>}

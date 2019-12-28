@@ -247,7 +247,7 @@ export default class Home extends Component {
                       <Image src={sliderImage} />
                       <Image src={designBuildLogo} variant="image.logoHomeTown" />
                     </Box>
-                    <Heading variant="heading" textAlign="center">
+                    <Heading variant="heading.regular" textAlign="center">
                       Design and Build
                     </Heading>
                   </Link>
@@ -261,7 +261,7 @@ export default class Home extends Component {
                         variant="image.logoHomeTown"
                       />
                     </Box>
-                    <Heading variant="heading" textAlign="center">
+                    <Heading variant="heading.regular" textAlign="center">
                       Modular Kitchen
                     </Heading>
                   </Link>

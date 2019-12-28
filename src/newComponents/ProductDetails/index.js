@@ -37,9 +37,7 @@ import Row from 'hometown-components-dev/lib/RowHtV1';
  */
 import AddReview from 'hometown-components-dev/lib/ReviewsHtV1/WriteReview';
 import ColorOption from 'hometown-components-dev/lib/ProductDetailsHtV1/ColorOption';
-import CombinedBuy from 'newComponents/CombinedBuy';
-import EmiModal from 'containers/EmiModal/EmiModal';
-import LoginModal from 'containers/Login/LoginForm';
+// import CombinedBuy from 'newComponents/CombinedBuy';
 import ProductDesc from 'hometown-components-dev/lib/ProductDetailsHtV1/ProductDesc';
 import ProductCarousel from 'newComponents/ProductCarousel';
 import ResponsiveModal from 'components/Modal';
@@ -49,9 +47,11 @@ import ServiceDetails from 'hometown-components-dev/lib/ProductDetailsHtV1/Servi
 import Specs from 'hometown-components-dev/lib/ProductDetailsHtV1/Specs';
 import TitlePrice from 'hometown-components-dev/lib/ProductDetailsHtV1/TitlePrice';
 import WishListButton from 'hometown-components-dev/lib/WishlistButtonHtV1';
+import LoginModal from 'containers/Login/LoginForm';
 import AddToCart from '../AddToCart';
 import BreadCrumb from './BreadCrumb';
 import BuyNow from '../BuyNow';
+import EmiModal from '../EmiModal';
 import Pincode from './Pincode';
 import ProductDetailsCarousel from './Carousel';
 import Video from './Video';
@@ -62,6 +62,11 @@ import Video from './Video';
 const freeShippingIcon = require('../../../static/free-shipping.svg');
 const warrentyIcon = require('../../../static/warrenty.svg');
 const emiIcon = require('../../../static/emi.svg');
+const fbIcon = require('../../../static/facebook.svg');
+const twIcon = require('../../../static/twitter.svg');
+const youtubeIcon = require('../../../static/youtube.svg');
+const instaIcon = require('../../../static/instagram.svg');
+const pinIcon = require('../../../static/pinterest.svg');
 
 /**
  * Common Components
@@ -79,6 +84,8 @@ const DescriptionButton = props => (
     />
   </Col>
 );
+
+const SocialButton = props => <Button variant="link" mr={15} {...props} />;
 
 const UspCol = ({ src, text, ...props }) => (
   <Col {...props}>
@@ -134,16 +141,17 @@ const mapDispatchToProps = dispatch =>
     },
     dispatch
   );
-const getProductsList = products => {
-  const items = [];
-  products.forEach(item => {
-    const { set_qty: qty = 0 } = item;
-    for (let i = 0; i < qty; i += 1) {
-      items.push(item);
-    }
-  });
-  return items;
-};
+
+// const getProductsList = products => {
+//   const items = [];
+//   products.forEach(item => {
+//     const { set_qty: qty = 0 } = item;
+//     for (let i = 0; i < qty; i += 1) {
+//       items.push(item);
+//     }
+//   });
+//   return items;
+// };
 
 const mapStateToProps = ({
   app: { sessionId },
@@ -247,7 +255,7 @@ class ProductDetails extends React.Component {
     const {
       product,
       pincode,
-      session,
+      // session,
       reviews,
       colorproducts,
       relatedproductsList,
@@ -290,7 +298,7 @@ class ProductDetails extends React.Component {
     const productDescription = productMetaDescription(name, productType, material, color);
 
     return (
-      <Box py={30}>
+      <Box pt={30}>
         <Helmet>
           <title>{productPageTitle(name)}</title>
           <meta name="keywords" content={productMetaKeywords(productType, material)} />
@@ -334,25 +342,27 @@ class ProductDetails extends React.Component {
           </Row>
           <Row mb={70}>
             {/* Left Column */}
-            <Col width={[1, 1, 7 / 12]}>
-              {/* Product Slider */}
-              {images && <ProductDetailsCarousel data={images} title={meta.name} />}
+            <Col width={[1, 1, 7 / 12]} pr={40}>
+              <Box sx={{ position: 'relative' }}>
+                {/* Product Slider */}
+                {images && <ProductDetailsCarousel data={images} title={meta.name} />}
 
-              {/* Wishlist Button */}
-              <WishListButton
-                onClick={onClickWishList(
-                  sku,
-                  wishListData,
-                  wishlistToggle,
-                  isLoggedIn,
-                  this.handleLoginModal,
-                  addToWaitList,
-                  simpleSku,
-                  pincode.selectedPincode
-                )}
-                isWishList={isInWishList(wishList, sku)}
-                wishlistLoading={isInWishList(loadingList, sku)}
-              />
+                {/* Wishlist Button */}
+                <WishListButton
+                  onClick={onClickWishList(
+                    sku,
+                    wishListData,
+                    wishlistToggle,
+                    isLoggedIn,
+                    this.handleLoginModal,
+                    addToWaitList,
+                    simpleSku,
+                    pincode.selectedPincode
+                  )}
+                  isWishList={isInWishList(wishList, sku)}
+                  wishlistLoading={isInWishList(loadingList, sku)}
+                />
+              </Box>
             </Col>
             {/* Right Column */}
             <Col width={[1, 1, 5 / 12]}>
@@ -369,12 +379,13 @@ class ProductDetails extends React.Component {
                 marginTop="1rem"
                 onClickReviews={this.onClickReviews}
               />
+
               {/* Product Share */}
               {/* <ShareBar title={name} url={productURL} mt={10} /> */}
 
               {/* Color Options */}
               {colorproducts.length > 0 && (
-                <Box py={30}>
+                <Box py={15}>
                   <Heading fontSize="1em" color="textDark" fontFamily="medium" mb={15}>
                     Color Options
                   </Heading>
@@ -444,11 +455,31 @@ class ProductDetails extends React.Component {
                   />
                 </Col>
               </Row>
+
+              {/* Share on social media */}
+              <Row mt={30} mx={0}>
+                <SocialButton>
+                  <Image src={fbIcon} alt="Facebook" />
+                </SocialButton>
+                <SocialButton>
+                  <Image src={twIcon} alt="Twitter" />
+                </SocialButton>
+                <SocialButton>
+                  <Image src={youtubeIcon} alt="Youtube" />
+                </SocialButton>
+                <SocialButton>
+                  <Image src={instaIcon} alt="Instagram" />
+                </SocialButton>
+                <SocialButton>
+                  <Image src={pinIcon} alt="Pinterest" />
+                </SocialButton>
+              </Row>
             </Col>
           </Row>
           <Box>
             <Row
               variant="row.contentCenter"
+              mx={0}
               sx={{
                 borderTop: 'dividerBold',
                 borderBottom: 'dividerBold'
@@ -482,7 +513,7 @@ class ProductDetails extends React.Component {
             )}
 
             {/* Usps */}
-            <Row mb={50} width="60%" justifyContent="space-between" mx="auto">
+            <Row mb={40} width="60%" justifyContent="space-between" mx="auto">
               <UspCol src={freeShippingIcon} text="Free Shipping" />
               <UspCol src={emiIcon} text="EMI Options" />
               <UspCol src={warrentyIcon} text="1 Year Warranty" />
@@ -494,7 +525,7 @@ class ProductDetails extends React.Component {
                 <Text variant="regular" fontSize={16} pb={5}>
                   DIMENSIONS
                 </Text>
-                <Heading variant="heading">Will it fit in your room?</Heading>
+                <Heading variant="heading.regular">Will it fit in your room?</Heading>
               </Box>
               <Box p={15} textAlign="center" sx={{ border: 'dividerLight' }}>
                 <Image src="https://www.hometown.in/media/product/89/2453/3-zoom.jpg" alt="" />
@@ -504,7 +535,7 @@ class ProductDetails extends React.Component {
             {/* Complete the look */}
             <Box py={20}>
               <Box textAlign="center" mb={20}>
-                <Heading variant="heading">Complete the look</Heading>
+                <Heading variant="heading.regular">Complete the look</Heading>
               </Box>
               <Row textAlign="center" flexWrap="wrap">
                 <CompleteTheLookCol src="https://www.hometown.in/media/product/89/2453/71787/1-zoom.jpg" />
@@ -517,8 +548,10 @@ class ProductDetails extends React.Component {
             </Box>
 
             {/* Review List and Add review */}
-            <Box ref={this.reviewsRef}>
-              <Reviews variant="col-12" reviewItems={reviews.data} pr="2.5rem" />
+            <Box pt={30} sx={{ borderBottom: 'dividerLight' }}>
+              <Box textAlign="center" mb={30}>
+                <Heading variant="heading.regular">Reviews</Heading>
+              </Box>
               <AddReview
                 variant="col-8"
                 catalogId={groupedattributes.id_catalog_config}
@@ -528,11 +561,12 @@ class ProductDetails extends React.Component {
                 added={added}
                 toggleReview={toggleReviewBox}
               />
+              <Reviews variant="col-12" reviewItems={reviews.data} />
             </Box>
           </Box>
 
           {/* Combined Offers */}
-          {combinedbuy.length > 0 && (
+          {/* {combinedbuy.length > 0 && (
             <Box>
               <Row id="combined_buy_offers">
                 <Container>
@@ -555,14 +589,14 @@ class ProductDetails extends React.Component {
                 </Row>
               ))}
             </Box>
-          )}
+          )} */}
 
           {/* Related Products List */}
           {relatedproductsList.length > 0 && (
-            <Row my={20}>
+            <Row py={20}>
               <ProductCarousel
                 paddingTop="2.5rem"
-                title="Related Products"
+                title="Recommended for you"
                 data={relatedproductsList}
                 length={relatedproductsList.length}
               />
@@ -596,8 +630,8 @@ ProductDetails.defaultProps = {
   deliveryDateLoading: false,
   loadingList: [],
   combinedbuy: [],
-  simpleSku: '',
-  session: ''
+  simpleSku: ''
+  // session: ''
 };
 ProductDetails.propTypes = {
   product: PropTypes.object,
@@ -618,7 +652,7 @@ ProductDetails.propTypes = {
   gattributes: PropTypes.object.isRequired,
   loadingList: PropTypes.array,
   simpleSku: PropTypes.string,
-  combinedbuy: PropTypes.array,
-  session: PropTypes.string
+  combinedbuy: PropTypes.array
+  // session: PropTypes.string
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

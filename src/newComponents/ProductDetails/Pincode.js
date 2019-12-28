@@ -8,8 +8,10 @@ import { connect } from 'react-redux';
  */
 import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
-import Image from 'hometown-components-dev/lib/ImageHtV1';
 import InputField from 'hometown-components-dev/lib/InputFieldHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import LocationIcon from 'hometown-components-dev/lib/Icons/LocationHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
 
 /**
  * Modules / Utils
@@ -17,8 +19,6 @@ import InputField from 'hometown-components-dev/lib/InputFieldHtV1';
 import * as actionCreators from 'redux/modules/pincode';
 import { pincode as pincodeCheck } from 'utils/validation';
 import { getDelieveryInfo } from 'redux/modules/productdetails';
-
-const location = require('../../../static/map-icon.svg');
 
 const onChange = dispatcher => e => {
   const {
@@ -61,48 +61,39 @@ class Pincode extends React.Component {
     const { setPincodeQuery, setPincode, pincodeQuery } = this.props;
     const { validationError, validationErrorMessage } = this.state;
     return (
-      <Box
-        sx={{
-          position: 'relative'
-        }}
-      >
+      <Box width={1}>
         <form onSubmit={this.setPincodeInStore(setPincode, pincodeQuery)}>
-          <Image
-            float="left"
-            src={location}
-            sx={{
-              position: 'absolute',
-              top: 10,
-              left: 8
-            }}
-          />
-          <InputField
-            type="text"
-            placeholder="Enter Pincode"
-            backgroundColor="transparent"
-            borderColor="rgb(202, 202, 202)"
-            height={44}
-            my={0}
-            pl={40}
-            borderRadius={0}
-            color="primary"
-            fontSize={16}
-            onChange={onChange(setPincodeQuery, this.setPincodeInStore(setPincode, pincodeQuery))}
-            value={pincodeQuery}
-          />
-          <Button
-            variant="secondary"
-            fontFamily="medium"
-            height={44}
-            onClick={this.setPincodeInStore(setPincode, pincodeQuery)}
-            sx={{
-              position: 'absolute',
-              top: 0,
-              right: 0
-            }}
-          >
-            Go
-          </Button>
+          <Row alignItems="center" mx={0} width={1}>
+            <Text color="textFilter" fontSize={16} sx={{ display: 'flex', alignItems: 'center' }} pr={10}>
+              <LocationIcon color="bgPrimary" height={28} width={28} mr={5} ml={-7} />
+              For delivery details
+            </Text>
+            <Box width="55%" sx={{ position: 'relative' }}>
+              <InputField
+                type="text"
+                variant="input"
+                placeholder="Enter Pincode"
+                height={44}
+                my={0}
+                onChange={onChange(setPincodeQuery, this.setPincodeInStore(setPincode, pincodeQuery))}
+                value={pincodeQuery}
+                sx={{ borderRadius: 0 }}
+              />
+              <Button
+                variant="secondary"
+                fontFamily="medium"
+                height={44}
+                onClick={this.setPincodeInStore(setPincode, pincodeQuery)}
+                sx={{
+                  position: 'absolute',
+                  top: 0,
+                  right: 0
+                }}
+              >
+                Go
+              </Button>
+            </Box>
+          </Row>
         </form>
         {validationError && <Box>{validationErrorMessage}</Box>}
       </Box>
