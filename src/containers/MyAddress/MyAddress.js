@@ -6,7 +6,7 @@ import { loadMyAddress } from 'redux/modules/myaddress';
 
 const hooks = {
   fetch: async ({ store: { dispatch } }) => {
-    await dispatch(loadMyAddress());
+    await dispatch(loadMyAddress()).catch(error => console.log(error));
   }
 };
 const MyAddress = () => (

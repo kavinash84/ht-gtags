@@ -11,14 +11,14 @@ const hooks = {
       profile: { loaded }
     } = getState();
     if (!loaded) {
-      await dispatch(loadUserProfile());
+      await dispatch(loadUserProfile()).catch(error => console.log(error));
     }
     const {
       profile: {
         data: { salesforce_account_id: sfid, contact_number: cn }
       }
     } = getState();
-    await dispatch(loadMyCases(sfid, '', '', '', cn));
+    await dispatch(loadMyCases(sfid, '', '', '', cn)).catch(error => console.log(error));
   }
 };
 const MyCases = () => (
