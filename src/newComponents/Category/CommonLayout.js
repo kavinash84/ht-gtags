@@ -9,7 +9,7 @@ const CommonLayout = (component, categoryName, data, isProduct = false) => {
     case 1:
       return <Carousel categoryName={categoryName} data={data} />;
     case 2:
-      return <GridLayout categoryName={categoryName} data={data} isProduct={isProduct} />;
+      return <GridLayout categoryName={categoryName} data={data} isProduct={isProduct} showList />;
     case 3:
       return (
         <OfferBanner
