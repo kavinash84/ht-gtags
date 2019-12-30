@@ -160,7 +160,7 @@ export default class App extends Component {
     Cookie.set('split_test', 'A', { expires: 365 });
   }
   componentWillReceiveProps(nextProps) {
-    if (window) {
+    if (window && window.embedded_svc) {
       const { profile } = nextProps;
       const { data = {} } = profile;
       const { email = '' } = data;
