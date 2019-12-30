@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
-import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
-import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
+/**
+ * Components
+ */
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
 import ResponsiveModal from 'newComponents/Modal';
+
+/**
+ * Utils
+ */
 import { formatAmount } from 'utils/formatters';
 
 const styles = require('./EmiModal.scss');
@@ -24,49 +31,49 @@ export default class Emi extends Component {
     let { data } = this.props;
     data = data && data.sort((a, b) => Number(a.bank_code) - Number(b.bank_code));
     return (
-      <BoxHtV1>
-        <ButtonHtV1 px={10} variant="link" color="primary" onClick={this.onOpenModal}>
+      <Box>
+        <Button variant="link" color="primary" fontSize={16} fontFamily="medium" onClick={this.onOpenModal} mt={3}>
           Know more >
-        </ButtonHtV1>
+        </Button>
         <ResponsiveModal
           classNames={{ modal: styles.emiModal }}
           onCloseModal={this.onCloseModal}
           open={this.state.open}
         >
-          <BoxHtV1 className={styles.emiModalWrapper}>
-            <RowHtV1 ml={16} mr={16}>
-              <BoxHtV1 col="12" textAlign="center">
-                <HeadingHtV1 color="text" margin="0.9375em 0 0.3125em" fontFamily="700" textAlign="left">
+          <Box className={styles.emiModalWrapper}>
+            <Row ml={16} mr={16}>
+              <Box col="12" textAlign="center">
+                <Heading color="text" margin="0.9375em 0 0.3125em" fontFamily="700" textAlign="left">
                   EMI Options For Rs.
-                  {` ${price}`} <BoxHtV1 fontSize="0.875rem">(Including shipping charge)</BoxHtV1>
-                </HeadingHtV1>
-              </BoxHtV1>
-            </RowHtV1>
-            <RowHtV1 mr={16} ml={16} pl={0} pr={0}>
-              <BoxHtV1 col="12" pt="1.25rem" paddingBottom="1.25rem" className={styles.tableWrapper}>
+                  {` ${price}`} <Box fontSize="0.875rem">(Including shipping charge)</Box>
+                </Heading>
+              </Box>
+            </Row>
+            <Row mr={16} ml={16} pl={0} pr={0}>
+              <Box col="12" pt="1.25rem" paddingBottom="1.25rem" className={styles.tableWrapper}>
                 <table cellSpacing="0" cellPadding="5">
                   <tbody>
                     <tr className={styles.tableHead}>
                       <th>
-                        <BoxHtV1 />
+                        <Box />
                       </th>
                       <th>
-                        <BoxHtV1>3 Months</BoxHtV1>
+                        <Box>3 Months</Box>
                       </th>
                       <th>
-                        <BoxHtV1>6 Months</BoxHtV1>
+                        <Box>6 Months</Box>
                       </th>
                       <th>
-                        <BoxHtV1>9 Months</BoxHtV1>
+                        <Box>9 Months</Box>
                       </th>
                       <th>
-                        <BoxHtV1>12 Months</BoxHtV1>
+                        <Box>12 Months</Box>
                       </th>
                       <th>
-                        <BoxHtV1>18 Months</BoxHtV1>
+                        <Box>18 Months</Box>
                       </th>
                       <th>
-                        <BoxHtV1>24 Months</BoxHtV1>
+                        <Box>24 Months</Box>
                       </th>
                     </tr>
 
@@ -74,18 +81,18 @@ export default class Emi extends Component {
                       data.map((bank, index) => (
                         <tr key={String(index)} className={styles.coloumn}>
                           <td>
-                            <BoxHtV1 className={styles.bankImgWrapper}>
+                            <Box className={styles.bankImgWrapper}>
                               <img src={bank.bank_logo_url} alt={bank.gateway_type} />
-                            </BoxHtV1>
+                            </Box>
                           </td>
                           {bank.slabs.map((slab, i) => {
                             const values = Object.values(slab.slab_keys);
                             return (
                               <td className="" key={String(i)}>
-                                <BoxHtV1>
+                                <Box>
                                   {values[3] && <p>Rs. {formatAmount(values[3])} p.m.</p>}
                                   {values[3] && <p>Interest Rate {values[0]}%</p>}
-                                </BoxHtV1>
+                                </Box>
                               </td>
                             );
                           })}
@@ -93,11 +100,11 @@ export default class Emi extends Component {
                       ))}
                   </tbody>
                 </table>
-              </BoxHtV1>
-            </RowHtV1>
-          </BoxHtV1>
+              </Box>
+            </Row>
+          </Box>
         </ResponsiveModal>
-      </BoxHtV1>
+      </Box>
     );
   }
 }
