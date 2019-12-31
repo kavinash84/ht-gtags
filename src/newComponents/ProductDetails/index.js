@@ -191,12 +191,13 @@ class ProductDetails extends React.Component {
   constructor(props) {
     super(props);
     this.reviewsRef = React.createRef();
+    this.state = {
+      openLogin: false,
+      showmore: true,
+      showmorecolorproducts: true,
+      activeSpec: 'description'
+    };
   }
-  state = {
-    openLogin: false,
-    showmore: true,
-    showmorecolorproducts: true
-  };
   componentDidMount() {
     const { dispatch } = this.context.store;
     const {
@@ -250,7 +251,18 @@ class ProductDetails extends React.Component {
       showmorecolorproducts: !this.state.showmorecolorproducts
     });
   };
-
+  renderAttributes = items =>
+    items.map((item, i) =>
+      Object.keys(item).map(key => (
+        <DescriptionButton
+          onClick={e => {
+            e.preventDefault();
+            this.setState({ activeSpec: i });
+          }}
+        >
+          {key}
+        </DescriptionButton>
+      )));
   render() {
     const {
       product,
@@ -273,6 +285,7 @@ class ProductDetails extends React.Component {
       combinedbuy,
       loadingList
     } = this.props;
+    const { activeSpec } = this.state;
     const {
       meta,
       images,
@@ -289,8 +302,8 @@ class ProductDetails extends React.Component {
     const { name, price, special_price: specialPrice } = meta;
     const checkSpecialPrice = Number(specialPrice) || Number(price);
     const { adding, added } = reviews;
-    const offerImage = simples[simpleSku].groupedattributes.offer_image || null;
-    const offerImageRedirect = simples[simpleSku].groupedattributes.offer_image_click_url || null;
+    // const offerImage = simples[simpleSku].groupedattributes.offer_image || null;
+    // const offerImageRedirect = simples[simpleSku].groupedattributes.offer_image_click_url || null;
     const { showmore, showmorecolorproducts } = this.state;
     const isEmiAvailable = Number(checkSpecialPrice) >= 3000;
     const { main_material: material, color, category_type: productType } = gattributes;
@@ -383,20 +396,6 @@ class ProductDetails extends React.Component {
               {/* Product Share */}
               {/* <ShareBar title={name} url={productURL} mt={10} /> */}
 
-              {/* Color Options */}
-              {colorproducts.length > 0 && (
-                <Box py={15}>
-                  <Heading fontSize="1em" color="textDark" fontFamily="medium" mb={15}>
-                    Color Options
-                  </Heading>
-                  <ColorOption
-                    data={colorproducts}
-                    showmorecolorproducts={showmorecolorproducts}
-                    toggleShowMoreColorProducts={this.toggleShowMoreColorProducts}
-                  />
-                </Box>
-              )}
-
               {/* Pincode and EMI options */}
               <ServiceDetails
                 deliverBy={
@@ -413,25 +412,41 @@ class ProductDetails extends React.Component {
                 <Pincode key="pincode" />
                 <EmiModal price={formatAmount(checkSpecialPrice)} data={emidata} key="emi" />
               </ServiceDetails>
+              {colorproducts.length > 0 && (
+                <Box py={15}>
+                  <Heading fontSize="1em" color="textDark" fontFamily="medium" mb={15}>
+                    Color Options
+                  </Heading>
+                  <ColorOption
+                    data={colorproducts}
+                    showmorecolorproducts={showmorecolorproducts}
+                    toggleShowMoreColorProducts={this.toggleShowMoreColorProducts}
+                  />
+                </Box>
+              )}
 
               {/* Offers */}
-              <Box mb={30}>
-                {combinedbuy.length ? (
-                  <Button variant="link" fontFamily="medium" fontSize={18}>
-                    <a href="#combined_buy_offers">
-                      {`See ${combinedbuy.length} Combined ${combinedbuy.length > 1 ? 'Offers' : 'Offer'}`}
-                    </a>
-                  </Button>
-                ) : (
-                  ''
-                )}
+              {
+                <Box mb={30}>
+                  {combinedbuy.length ? (
+                    <Button variant="link" fontFamily="medium" fontSize={18}>
+                      <a href="#combined_buy_offers">
+                        {`See ${combinedbuy.length} Combined ${combinedbuy.length > 1 ? 'Offers' : 'Offer'}`}
+                      </a>
+                    </Button>
+                  ) : (
+                    ''
+                  )}
+                  {/*
                 {offerImage && offerImageRedirect && (
                   <a target="_blank" rel="noopener noreferrer" href={offerImageRedirect}>
                     <Image src={offerImage} alt="" width="100%" />
                   </a>
                 )}
                 {offerImage && !offerImageRedirect && <Image src={offerImage} alt="" width="100%" />}
-              </Box>
+                */}
+                </Box>
+              }
 
               {/* Add to cart and Buy now buttons */}
               <Row mx={-10}>
@@ -485,23 +500,26 @@ class ProductDetails extends React.Component {
                 borderBottom: 'dividerBold'
               }}
             >
-              <DescriptionButton>DESCRIPTION</DescriptionButton>
-              <DescriptionButton>Care Instructions</DescriptionButton>
-              <DescriptionButton>Service Assurance / Warranty</DescriptionButton>
-              <DescriptionButton>Returns / Cancellation</DescriptionButton>
-              <DescriptionButton>Note</DescriptionButton>
-              <DescriptionButton>REVIEWS</DescriptionButton>
+              <DescriptionButton
+                onClick={e => {
+                  e.preventDefault();
+                  this.setState({ activeSpec: 'description' });
+                }}
+              >
+                DESCRIPTION
+              </DescriptionButton>
+              {this.renderAttributes(groupedAttributes)}
             </Row>
 
             {/* Description */}
-            <Box px="10%">
+            <Box sx={activeSpec !== 'description' ? { display: 'none' } : {}} px="10%">
               {description && (
                 <ProductDesc desc={description || ''} showmore={showmore} toggleShowMore={this.toggleShowMore} />
               )}
             </Box>
 
             {/* Specifications */}
-            <Specs specs={groupedAttributes} pincode={pincode.selectedPincode} />
+            <Specs activeSpec={activeSpec} specs={groupedAttributes} pincode={pincode.selectedPincode} />
 
             {/* Video */}
             {groupedattributes && groupedattributes.youtubeid && (
