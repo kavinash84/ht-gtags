@@ -4,28 +4,26 @@ import { Link } from 'react-router-dom';
 import Container from 'hometown-components-dev/lib/ContainerHtV1';
 import Section from 'hometown-components-dev/lib/SectionHtV1';
 import Row from 'hometown-components-dev/lib/RowHtV1';
-import Col from 'hometown-components-dev/lib/ColHtV1';
+// import Col from 'hometown-components-dev/lib/ColHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 
 const OfferBanner = ({ image, url, target }) => (
   <Section>
     <Container>
       <Row>
-        <Col>
-          {target ? (
-            <a href={url} target={target} rel="noopener noreferrer">
-              <Image src={image} variant="image" />
-            </a>
-            ) : (
-              <Link to={url}>
-                <Image src={image} variant="image" />
-              </Link>
-            )}
-        </Col>
+        {target ? (
+          <a style={{ width: '100%', height: 'auto' }} href={url} target={target} rel="noopener noreferrer">
+            <Image src={image} variant="image" />
+          </a>
+        ) : (
+          <Link style={{ width: '100%', height: 'auto' }} to={url}>
+            <Image sx={{ width: '100%', height: 'auto' }} src={image} variant="image" />
+          </Link>
+        )}
       </Row>
     </Container>
   </Section>
-  );
+);
 
 OfferBanner.defaultProps = {
   image: '',
