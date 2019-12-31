@@ -195,7 +195,8 @@ class ProductDetails extends React.Component {
       openLogin: false,
       showmore: true,
       showmorecolorproducts: true,
-      activeSpec: 'description'
+      activeSpec: 'description',
+      showReviews: 2
     };
   }
   componentDidMount() {
@@ -251,6 +252,10 @@ class ProductDetails extends React.Component {
       showmorecolorproducts: !this.state.showmorecolorproducts
     });
   };
+  showMoreReviews = () => {
+    const { showReviews } = this.state;
+    this.setState({ showReviews: showReviews + 4 });
+  };
   renderAttributes = items =>
     items.map((item, i) =>
       Object.keys(item).map(key => (
@@ -285,7 +290,7 @@ class ProductDetails extends React.Component {
       combinedbuy,
       loadingList
     } = this.props;
-    const { activeSpec } = this.state;
+    const { activeSpec, showReviews } = this.state;
     const {
       meta,
       images,
@@ -556,12 +561,12 @@ class ProductDetails extends React.Component {
                 <Heading variant="heading.regular">Complete the look</Heading>
               </Box>
               <Row textAlign="center" flexWrap="wrap">
-                <CompleteTheLookCol src="https://www.hometown.in/media/product/89/2453/71787/1-zoom.jpg" />
-                <CompleteTheLookCol src="https://www.hometown.in/media/product/89/2453/71787/1-zoom.jpg" />
-                <CompleteTheLookCol src="https://www.hometown.in/media/product/89/2453/71787/1-zoom.jpg" />
-                <CompleteTheLookCol src="https://www.hometown.in/media/product/89/2453/71787/1-zoom.jpg" />
-                <CompleteTheLookCol src="https://www.hometown.in/media/product/89/2453/71787/1-zoom.jpg" />
-                <CompleteTheLookCol src="https://www.hometown.in/media/product/89/2453/71787/1-zoom.jpg" />
+                <CompleteTheLookCol src="https://www.hometown.in/media/cms/banner/cabinet.png" />
+                <CompleteTheLookCol src="https://www.hometown.in/media/cms/banner/chair.png" />
+                <CompleteTheLookCol src="https://www.hometown.in/media/cms/banner/curtain.png" />
+                <CompleteTheLookCol src="https://www.hometown.in/media/cms/banner/painting.png" />
+                <CompleteTheLookCol src="https://www.hometown.in/media/cms/banner/pillow.png" />
+                <CompleteTheLookCol src="https://www.hometown.in/media/cms/banner/table.png" />
               </Row>
             </Box>
 
@@ -579,7 +584,12 @@ class ProductDetails extends React.Component {
                 added={added}
                 toggleReview={toggleReviewBox}
               />
-              <Reviews variant="col-12" reviewItems={reviews.data} />
+              <Reviews
+                variant="col-12"
+                reviewItems={reviews.data}
+                showReviews={showReviews}
+                showMoreReviews={this.showMoreReviews}
+              />
             </Box>
           </Box>
 
