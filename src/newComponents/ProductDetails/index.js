@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Helmet from 'react-helmet';
+import Select from 'react-select';
 
 /**
  * Modules / Utils / Reducers
@@ -27,6 +28,7 @@ import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import Col from 'hometown-components-dev/lib/ColHtV1';
 import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import Flex from 'hometown-components-dev/lib/FlexHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
@@ -42,7 +44,9 @@ import ProductDesc from 'hometown-components-dev/lib/ProductDetailsHtV1/ProductD
 import ProductCarousel from 'newComponents/ProductCarousel';
 import ResponsiveModal from 'components/Modal';
 import Reviews from 'hometown-components-dev/lib/ReviewsHtV1';
+import ReviewDisplay from 'hometown-components-dev/lib/ReviewsHtV1/ReviewDisplay';
 import ServiceDetails from 'hometown-components-dev/lib/ProductDetailsHtV1/ServiceDetails';
+import EmiOptions from 'hometown-components-dev/lib/ProductDetailsHtV1/EmiOptions';
 // import ShareBar from 'newComponents/ShareBar';
 import Specs from 'hometown-components-dev/lib/ProductDetailsHtV1/Specs';
 import TitlePrice from 'hometown-components-dev/lib/ProductDetailsHtV1/TitlePrice';
@@ -67,6 +71,21 @@ const twIcon = require('../../../static/twitter.svg');
 const youtubeIcon = require('../../../static/youtube.svg');
 const instaIcon = require('../../../static/instagram.svg');
 const pinIcon = require('../../../static/pinterest.svg');
+
+const qtyOptions = [
+  { value: '1', label: '1' },
+  { value: '2', label: '2' },
+  { value: '3', label: '3' }
+];
+
+const customStyles = {
+  control: () => ({
+    width: '75px',
+    display: 'flex',
+    borderRadius: '2px',
+    border: '1px solid rgba(0, 0, 0, 0.25)'
+  })
+};
 
 /**
  * Common Components
@@ -415,10 +434,26 @@ class ProductDetails extends React.Component {
                 loading={deliveryDateLoading}
               >
                 <Pincode key="pincode" />
-                <EmiModal price={formatAmount(checkSpecialPrice)} data={emidata} key="emi" />
               </ServiceDetails>
+
+              {/* Reviews */}
+              <ReviewDisplay pb={30} justifyContent="flex-start" sx={{ borderBottom: 'none' }}>
+                <Button
+                  variant="linkPrimary"
+                  onClick={this.toggleAddReview}
+                  pl={10}
+                  ml={10}
+                  sx={{
+                    borderLeft: 'primary'
+                  }}
+                >
+                  Write a Review
+                </Button>
+              </ReviewDisplay>
+
+              {/* Color Options */}
               {colorproducts.length > 0 && (
-                <Box py={15}>
+                <Box pb={30}>
                   <Heading fontSize="1em" color="textDark" fontFamily="medium" mb={15}>
                     Color Options
                   </Heading>
@@ -429,6 +464,22 @@ class ProductDetails extends React.Component {
                   />
                 </Box>
               )}
+
+              {/* Quantity */}
+              <Flex alignItems="center">
+                <Text fontFamily="regular" mr={10}>
+                  Qty.
+                </Text>
+                <Select placeholder="" options={qtyOptions} defaultValue={1} styles={customStyles} />
+              </Flex>
+
+              {/* EMI Options */}
+              <EmiOptions
+                emiStarting={formatAmount(calculateLowestEmi(emidata, price))}
+                isEmiAvailable={isEmiAvailable}
+              >
+                <EmiModal price={formatAmount(checkSpecialPrice)} data={emidata} key="emi" />
+              </EmiOptions>
 
               {/* Offers */}
               {
