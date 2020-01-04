@@ -6,7 +6,6 @@ import React from 'react';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Flex from 'hometown-components-dev/lib/FlexHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
-import Text from 'hometown-components-dev/lib/TextHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 
 /**
@@ -19,25 +18,12 @@ const visaIcon = require('../../../static/visa.svg');
 const intBankingIcon = require('../../../static/net-banking.png');
 const walletIcon = require('../../../static/wallet-icon.png');
 
-const PaymentMethods = () => (
-  <Box textAlign="center" py={10} sx={{ border: '2px solid #979797', position: 'relative' }}>
-    <Heading
-      sx={{
-        position: 'absolute',
-        fontSize: 14,
-        top: '-7px',
-        zIndex: 1,
-        left: 40,
-        color: '#474747',
-        bg: '#f5f5f5'
-      }}
-    >
-      Guaranteed Secure Checkout
+const AcceptedPaymentOptions = () => (
+  <Box py={20}>
+    <Heading color="textSecondary" fontSize={18} pb={10}>
+      Accepted Payment Options
     </Heading>
-    <Text variant="smallSecondary" py={5}>
-      verified by
-    </Text>
-    <Flex justifyContent="space-between" px={15}>
+    <Flex justifyContent="space-between">
       <Image src={visaIcon} alt="visaCard" height={30} />
       <Image src={mastercardIcon} alt="Master Card" height={30} />
       <Image src={maestroIcon} alt="Maestro" height={30} />
@@ -48,4 +34,4 @@ const PaymentMethods = () => (
   </Box>
 );
 
-export default PaymentMethods;
+export default AcceptedPaymentOptions;

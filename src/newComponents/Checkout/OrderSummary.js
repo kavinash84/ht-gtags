@@ -1,15 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
-import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
-import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
-import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
+
+/**
+ * formatters
+ */
 import { formatAmount } from 'utils/formatters';
+
+/**
+ * Components
+ */
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Flex from 'hometown-components-dev/lib/FlexHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Coupon from './Coupon';
+import AcceptedPaymentOptions from '../AcceptedPaymentOptions';
+
+/**
+ * Icons
+ */
+const checkoutIcon = require('../../../static/checkout.svg');
 
 const styles = require('./OrderSummary.scss');
-const deleteIcon = require('../../../static/delete.svg');
 
 const OrderSummary = ({
   itemsTotal,
@@ -28,107 +42,75 @@ const OrderSummary = ({
   btnText,
   hidecoupon
 }) => (
-  <RowHtV1 ml="0" mr="0">
-    <BoxHtV1 variant="col-12" mb="1.25rem">
+  <Row>
+    <Box variant="col-12" mb="1.25rem">
       {!hidecoupon && <Coupon />}
-    </BoxHtV1>
-    <BoxHtV1 variant="col-12" className={styles.orderSummary}>
-      <RowHtV1 m="0" mb="1.5em">
-        <BoxHtV1 variant="col-6" p="0">
-          <TextHtV1 color="heading" mt="0">
-            Total Price ({itemsCount} item
-            {itemsCount === 1 ? '' : 's'})
-          </TextHtV1>
-        </BoxHtV1>
-        <BoxHtV1 variant="col-6" p="0" textAlign="right">
-          <TextHtV1 color="heading">Rs. {itemsTotal ? formatAmount(itemsTotal) : null}</TextHtV1>
-        </BoxHtV1>
-      </RowHtV1>
-      <RowHtV1 m="0" mb="1.5em">
-        <BoxHtV1 variant="col-6" p="0">
-          <TextHtV1 color="heading" mt="0">
-            Savings
-          </TextHtV1>
-        </BoxHtV1>
-        <BoxHtV1 variant="col-6" p="0" textAlign="right">
-          <TextHtV1 color="heading">Rs. {savings ? formatAmount(savings) : 0}</TextHtV1>
-        </BoxHtV1>
-      </RowHtV1>
-      <RowHtV1 m="0" mb="1.5em">
-        <BoxHtV1 variant="col-6" p="0">
-          <TextHtV1 color="heading" mt="0">
-            Shipping
-          </TextHtV1>
-        </BoxHtV1>
-        <BoxHtV1 variant="col-6" p="0" textAlign="right">
-          <TextHtV1 color="heading">{shipping === 0 ? 'Free' : `Rs. ${shipping}`}</TextHtV1>
-        </BoxHtV1>
-      </RowHtV1>
-
+    </Box>
+    <Box variant="col-12">
+      <Flex mb={20} justifyContent="space-between">
+        <Text>
+          Total Price ({itemsCount} item
+          {itemsCount === 1 ? '' : 's'})
+        </Text>
+        <Text>Rs. {itemsTotal ? formatAmount(itemsTotal) : null}</Text>
+      </Flex>
+      <Flex mb={20} justifyContent="space-between">
+        <Text>Savings</Text>
+        <Text>Rs. {savings ? formatAmount(savings) : 0}</Text>
+      </Flex>
+      <Flex mb={20} justifyContent="space-between">
+        <Text>Shipping</Text>
+        <Text>{shipping === 0 ? 'Free' : `Rs. ${shipping}`}</Text>
+      </Flex>
       {discount > 0 && (
-        <RowHtV1 m="0" mb="1.5em">
-          <BoxHtV1 variant="col-6" p="0">
-            <TextHtV1 color="heading" mt="0">
-              Discount
-            </TextHtV1>
-          </BoxHtV1>
-          <BoxHtV1 variant="col-6" p="0" textAlign="right">
-            <TextHtV1 color="heading">Rs. {` ${formatAmount(Number(discount))}`}</TextHtV1>
-          </BoxHtV1>
-        </RowHtV1>
+        <Flex mb={20} justifyContent="space-between">
+          <Text>Discount</Text>
+          <Text>Rs. {` ${formatAmount(Number(discount))}`}</Text>
+        </Flex>
       )}
       {setDiscount > 0 && (
-        <RowHtV1 m="0" mb="1.5em">
-          <BoxHtV1 variant="col-6" p="0">
-            <TextHtV1 color="heading" mt="0">
-              Combo Discount
-            </TextHtV1>
-          </BoxHtV1>
-          <BoxHtV1 variant="col-6" p="0" textAlign="right">
-            <TextHtV1 color="heading">Rs. {` ${formatAmount(Number(setDiscount))}`}</TextHtV1>
-          </BoxHtV1>
-        </RowHtV1>
+        <Flex mb={20} justifyContent="space-between">
+          <Text>Combo Discount</Text>
+          <Text>Rs. {` ${formatAmount(Number(setDiscount))}`}</Text>
+        </Flex>
       )}
-      <RowHtV1 m="0" py="1em" className={styles.totalWrapper}>
-        <BoxHtV1 variant="col-6" p="0">
-          <TextHtV1 color="menuItem" mb="0" fontSize="19px" fontWeight="600" fontFamily="light">
+      <Row m="0" py="1em" className={styles.totalWrapper}>
+        <Box variant="col-6" p="0">
+          <Text color="menuItem" mb="0" fontSize="19px" fontWeight="600" fontFamily="light">
             Total
-          </TextHtV1>
-        </BoxHtV1>
-        <BoxHtV1 variant="col-6" p="0" textAlign="right">
-          <TextHtV1 color="menuItem" fontSize="19px" fontWeight="600">
+          </Text>
+        </Box>
+        <Box variant="col-6" p="0" textAlign="right">
+          <Text color="menuItem" fontSize="19px" fontWeight="600">
             Rs. {totalCart ? formatAmount(totalCart) : null}
-          </TextHtV1>
-        </BoxHtV1>
-      </RowHtV1>
-      <TextHtV1 color="rgba(0,0,0,0.4)" mt="-5px" mb="0.3125rem">
+          </Text>
+        </Box>
+      </Row>
+      <Text color="rgba(0,0,0,0.4)" mt="-5px" mb="0.3125rem">
         (inclusive of all taxes)
-      </TextHtV1>
-    </BoxHtV1>
-    <BoxHtV1 variant="col-12" mt="0">
+      </Text>
+    </Box>
+    <Box variant="col-12">
+      <AcceptedPaymentOptions />
+    </Box>
+    <Box variant="col-12">
       {!hidebutton && (
-        <ButtonHtV1
-          size="block"
-          btnType="primary"
-          height="42px"
-          mt="0"
-          fontWeight="700"
-          fontSize="16px"
-          ls="1px"
-          pt="9px"
-          width="100%"
+        <Button
+          width={1}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          height="auto"
           onClick={onClick}
           hide={hidebutton}
-          borderRadius="0"
           disabled={loadingnextstep || isSubmitted || (outOfStockList && outOfStockList.length > 0) || disabled}
         >
-          <ImageHtV1 src={deleteIcon} alt="Delete" height="20px" mr="0.625rem" />
-
+          <Image src={checkoutIcon} alt="Delete" height="20px" mr="0.625rem" />
           {loadingnextstep || isSubmitted ? 'Please wait...' : btnText}
-        </ButtonHtV1>
+        </Button>
       )}
-    </BoxHtV1>
-  </RowHtV1>
+    </Box>
+  </Row>
 );
 
 OrderSummary.defaultProps = {

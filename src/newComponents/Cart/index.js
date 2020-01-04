@@ -31,7 +31,7 @@ import CloseIcon from 'hometown-components-dev/lib/Icons/Close';
  */
 import ProductQuantity from './UpdateProductQuantity';
 import OrderSummary from '../Checkout/OrderSummary';
-import PaymentMethods from '../PaymentMethods/';
+import PaymentMethods from '../PaymentMethods';
 
 const styles = require('./Cart.scss');
 
@@ -42,12 +42,6 @@ const checkoutIcon = require('../../../static/checkout.svg');
 const location = require('../../../static/map-icon.svg');
 const orderTrackIcon = require('../../../static/shipped.svg');
 const saveForLaterIcon = require('../../../static/save-for-later.svg');
-const aeIcon = require('../../../static/american-express.svg');
-const maestroIcon = require('../../../static/maestro.svg');
-const mastercardIcon = require('../../../static/mastercard.svg');
-const visaIcon = require('../../../static/visa.svg');
-const intBankingIcon = require('../../../static/net-banking.png');
-const walletIcon = require('../../../static/wallet-icon.png');
 
 const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
 
@@ -94,8 +88,8 @@ const Cart = ({
             <Box variant="col-8">
               <Heading>My Shopping Cart : {results.length} Items</Heading>
             </Box>
-            <Box variant="col-4">
-              <Button height="auto" display="flex" alignItems="center">
+            <Box variant="col-4" textAlign="right">
+              <Button height="auto" display="flex" alignItems="center" ml="auto">
                 <Image src={checkoutIcon} alt="Delete" height="18px" mr="0.625rem" />
                 SECURE CHECKOUT
               </Button>
@@ -115,16 +109,17 @@ const Cart = ({
           </Row>
           <Row
             mt={30}
+            mb={10}
+            mx={0}
             pb={5}
             sx={{
               borderBottom: 'heading'
             }}
-            mb={10}
           >
-            <Box variant="col-8">
+            <Box variant="col-8" pl={0}>
               <Text fontFamily="medium">Product Details</Text>
             </Box>
-            <Box variant="col-2">
+            <Box variant="col-2" pl={8}>
               <Text fontFamily="medium">Qty</Text>
             </Box>
             <Box variant="col-2">
@@ -142,7 +137,16 @@ const Cart = ({
                       boxShadow: '0 1px 2px 0 #0000033'
                     }}
                   >
-                    {imageURL => <Image width={1} src={imageURL} alt="" />}
+                    {imageURL => (
+                      <Image
+                        width={1}
+                        src={imageURL}
+                        alt=""
+                        sx={{
+                          boxShadow: 'productThumb'
+                        }}
+                      />
+                    )}
                   </ImageShimmer>
                 </Link>
               </Box>
@@ -162,7 +166,7 @@ const Cart = ({
                     <Image width="initial" height={20} mr={10} src={orderTrackIcon} />
                     <Text
                       color={item.product_info.delivery_time_text.indexOf('Currently') === -1 ? '#090909' : 'red'}
-                      fontSize="12px"
+                      fontSize={12}
                     >
                       {item.product_info.delivery_time_text}
                     </Text>
@@ -263,7 +267,7 @@ const Cart = ({
         </Box>
         {/* Pricing Sidebar */}
         <Box variant="col-4">
-          <Box bg="grey" p="1.5em">
+          <Box bg="sidebar" px={40} py={30}>
             <OrderSummary
               itemsTotal={summary.items}
               savings={summary.savings}
@@ -277,19 +281,17 @@ const Cart = ({
               discount={summary.coupon_discount}
               btnText="SECURE CHECKOUT"
             />
-            <PaymentMethods />
-            <Box variant="col-12" mt="1em">
-              <Heading fontSize="17px" mb="5px" color="menuItem">
+            <Box py={20}>
+              <Heading fontSize={16} mb={5} color="#2c2e3f">
                 Exchange & Return Policy
               </Heading>
-              <Text fontSize="16px" fontWeight="300">
+              <Text fontSize={14} lineHeight={1.3} fontFamily="light" color="#2c2e3f" pb={5}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.
               </Text>
               <Label
-                color="menuItem"
-                pt="5px"
-                fontSize="12px"
-                fontWeight="600"
+                color="#232324"
+                fontSize={12}
+                fontFamily="medium"
                 sx={{
                   borderBottom: '1px',
                   borderColor: '#232324'
@@ -298,71 +300,18 @@ const Cart = ({
                 Read More
               </Label>
             </Box>
-            <Box variant="col-12" mt="1em">
-              <Heading fontSize="17px" mb="5px" color="menuItem">
+            <Box pb={24}>
+              <Heading fontSize={16} mb={5} color="#2c2e3f">
                 Terms & Conditions
               </Heading>
-              <Text fontSize="16px" fontWeight="300">
+              <Text fontSize={14} lineHeight={1.3} fontFamily="light" color="#2c2e3f" pb={5}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.
               </Text>
-              <Label
-                color="menuItem"
-                pt="5px"
-                fontSize="12px"
-                fontWeight="600"
-                borderBottom="1px"
-                borderColor="#232324"
-              >
+              <Label color="#232324" fontSize={12} fontFamily="medium" borderBottom="1px" borderColor="#232324">
                 Read More
               </Label>
             </Box>
-            <Row
-              sx={{
-                borderWidth: '1px',
-                borderStyle: 'solid',
-                borderColor: 'border',
-                mx: '0',
-                mt: '2em'
-              }}
-            >
-              <Box
-                variant="col-12"
-                textAlign="center"
-                sx={{
-                  position: 'relative',
-                  top: '-9px',
-                  mb: '0',
-                  p: '0'
-                }}
-              >
-                <Text
-                  textAlign="center"
-                  sx={{
-                    background: '#f3f3f3'
-                  }}
-                >
-                  Gauranteed Secure Checkout
-                </Text>
-              </Box>
-              <Box variant="col-2" mb="0" p="0 5px">
-                <Image src={visaIcon} alt="visaCard" width="100%" />
-              </Box>
-              <Box variant="col-2" mb="0" p="0 5px">
-                <Image src={mastercardIcon} alt="Master Card" width="100%" />
-              </Box>
-              <Box variant="col-2" mb="0" p="0 5px">
-                <Image src={maestroIcon} alt="Maestro" width="100%" />
-              </Box>
-              <Box variant="col-2" mb="0" p="0 5px">
-                <Image src={aeIcon} alt="Amex" width="100%" />
-              </Box>
-              <Box variant="col-2" mb="0" p="6px 5px">
-                <Image src={intBankingIcon} alt="Diners Club" width="100%" />
-              </Box>
-              <Box variant="col-2" mb="0" p="5px 5px">
-                <Image src={walletIcon} alt="Wallet" width="100%" />
-              </Box>
-            </Row>
+            <PaymentMethods />
           </Box>
         </Box>
       </Row>

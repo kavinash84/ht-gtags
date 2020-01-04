@@ -1,18 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
-import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
-import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
-import LocalInlineNotification from 'newComponents/LocalInlineNotification';
+
+/**
+ * modules / formatters
+ */
 import { applyCoupon, removeCoupon } from 'redux/modules/coupon';
 import { toggleCouponList, hideCouponList } from 'redux/modules/cart';
 import { formatAmount } from 'utils/formatters';
-import Notifs from '../../newComponents/Notifs';
-import CouponList from './CouponList';
 
+/**
+ * Components
+ */
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Flex from 'hometown-components-dev/lib/FlexHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
+import InputField from 'hometown-components-dev/lib/InputFieldHtV1';
+import LocalInlineNotification from '../../newComponents/LocalInlineNotification';
+import CouponList from './CouponList';
+import Notifs from '../../newComponents/Notifs';
+
+/**
+ * Icons
+ */
 const EditCouponIcon = require('../../../static/edit.svg');
 const DiscountSuccessIcon = require('../../../static/percentage-green.svg');
 
@@ -45,7 +58,6 @@ class Coupon extends React.Component {
     // this.toggleMoreCoupons();
     this.hideMoreCoupons();
   };
-
   removeCoupon = coupon => {
     const { pincode, sessionId } = this.props;
     const { dispatch } = this.context.store;
@@ -60,7 +72,6 @@ class Coupon extends React.Component {
       () => this.handleApply()
     );
   };
-
   handleChange = e => {
     this.setState({
       coupon: e.target.value
@@ -92,53 +103,31 @@ class Coupon extends React.Component {
       couponlistToggle
     } = cart;
     return (
-      <BoxHtV1>
-        <BoxHtV1 variant="col-12" ta="center" px="0" mt={20}>
-          <HeadingHtV1
-            color="#1b2125"
-            mt="0"
-            mb="0"
-            fontWeight="700"
-            fontSize="23px"
-            ta="center"
-            fontFamily="HelveticaNeue"
-          >
-            Order Summary
-          </HeadingHtV1>
-        </BoxHtV1>
-        <BoxHtV1 variant="col-12" ta="center" px="0">
-          <hr
-            sx={{
-              color: '#000000',
-              backgroundColor: '#000000',
-              height: 0.5,
-              borderColor: '#000000',
-              mx: '0',
-              width: '100%'
-            }}
-          />
-        </BoxHtV1>
-        <BoxHtV1 className={styles.applyCoupon}>
+      <Box>
+        <Heading
+          variant="heading.regular"
+          color="#1c1c1c"
+          pb={10}
+          sx={{
+            borderBottom: 'divider'
+          }}
+        >
+          Order Summary
+        </Heading>
+        <Box className={styles.applyCoupon}>
           {appliedCoupon ? (
-            <BoxHtV1>
-              <BoxHtV1 className={styles.appliedCouponWrapper}>
-                <ButtonHtV1
-                  display="block"
-                  btnType="link"
-                  fontFamily="Light"
-                  pl="5px"
-                  pr="20px"
-                  fontSize="1rem"
-                  textAlign="left"
-                  color="#f98d29"
-                  onClick={() => this.removeCoupon(appliedCoupon)}
-                >
-                  <ImageHtV1 src={DiscountSuccessIcon} float="left" mr="0.625rem" mb="1rem" mt="3px" alt="" />
-                  Applied: <b>{appliedCoupon}</b> <br />
-                  <BoxHtV1 fontSize="0.875em" color="#f98d29">
-                    Save <b>Rs. {formatAmount(couponDiscount)}</b>
-                  </BoxHtV1>
-                  <ImageHtV1
+            <Box py={15}>
+              <Button variant="link" onClick={() => this.removeCoupon(appliedCoupon)}>
+                <Text display="flex" alignItems="center">
+                  <Image src={DiscountSuccessIcon} alt={appliedCoupon} mr={8} />
+                  Applied:{' '}
+                  <Text as="b" pl={4}>
+                    {appliedCoupon}
+                  </Text>
+                </Text>
+                <Text color="primary" display="flex" alignItems="center" pl={28} pt={5}>
+                  Save <b>Rs. {formatAmount(couponDiscount)}</b>
+                  <Image
                     src={EditCouponIcon}
                     display="inline"
                     float="none"
@@ -147,74 +136,50 @@ class Coupon extends React.Component {
                     ml="0.625rem"
                     alt="Change"
                   />
-                </ButtonHtV1>
-              </BoxHtV1>
-              <LabelHtV1 textAlign="center" color="#3cc0dc" display="block" mt="5px" mb="0.9375rem">
-                <ButtonHtV1
-                  onClick={this.toggleMoreCoupons}
-                  p="0"
-                  color="#3cc0dc"
-                  size="block"
-                  btnType="link"
-                  textAlign="right"
-                >
-                  {couponlistToggle ? 'Hide Coupons' : ' View Applicable Coupons'}
-                </ButtonHtV1>
-              </LabelHtV1>
-            </BoxHtV1>
+                </Text>
+              </Button>
+            </Box>
           ) : (
-            <BoxHtV1>
-              <HeadingHtV1 fontSize="0.775em" mb="0.225rem" mt="1em" color="primary">
+            <Box pt={20}>
+              <Heading fontSize={14} mb={4} color="primary">
                 Have a Coupon Code?
-              </HeadingHtV1>
-              <BoxHtV1 className={`${styles.applyCouponWrapper}`}>
+              </Heading>
+              <Box>
                 <form onSubmit={this.handleApply}>
-                  <input
-                    className={styles.applyCopupnField}
-                    type="text"
-                    onChange={this.handleChange}
-                    value={this.state.coupon.toUpperCase()}
-                    placeholder="Enter here"
-                  />
-                  <ButtonHtV1
-                    className={styles.applyCouponBtn}
-                    btnType="primary"
-                    color="#f98d29"
-                    p="9px 20px"
-                    fontSize="0.75rem"
-                    disabled={loading || (notifs.coupon && notifs.coupon.length > 0)}
-                    fontFamily="regular"
-                    borderRadius="0"
-                    onClick={this.handleApply}
-                  >
-                    Apply
-                  </ButtonHtV1>
+                  <Flex alignItems="center">
+                    <InputField
+                      type="text"
+                      onChange={this.handleChange}
+                      value={this.state.coupon.toUpperCase()}
+                      placeholder="Enter here"
+                      height={36}
+                      width="80%"
+                    />
+                    <Button
+                      disabled={loading || (notifs.coupon && notifs.coupon.length > 0)}
+                      onClick={this.handleApply}
+                    >
+                      Apply
+                    </Button>
+                  </Flex>
                 </form>
                 {notifs.coupon && (
                   <Notifs namespace="coupon" NotifComponent={props => <LocalInlineNotification {...props} />} />
                 )}
-              </BoxHtV1>
-
-              <LabelHtV1 textAlign="right" color="primary" display="block">
-                <ButtonHtV1
-                  onClick={this.toggleMoreCoupons}
-                  p="0"
-                  color="primary"
-                  size="block"
-                  btnType="link"
-                  bg="transparent"
-                  fontSize="12px"
-                  borderColor="primary"
-                  borderBottom="1px"
-                  height="100%"
-                  textTransform="capitalize"
-                  textDecoration="underline"
-                >
-                  {couponlistToggle ? 'Hide Coupons' : ' View Applicable Coupons'}
-                </ButtonHtV1>
-              </LabelHtV1>
-            </BoxHtV1>
+              </Box>
+            </Box>
           )}
+          <Box textAlign="right" pb={10}>
+            <Button
+              onClick={this.toggleMoreCoupons}
+              p="0"
+              color="primary"
+              variant="link"
+              sx={{ textDecoration: 'underline' }}
+            >
+              {couponlistToggle ? 'Hide Coupons' : ' View Applicable Coupons'}
+            </Button>
+          </Box>
           {couponlistToggle && (
             <CouponList
               coupons={coupons}
@@ -226,8 +191,8 @@ class Coupon extends React.Component {
               unapplicablecoupons={unapplicablecoupons}
             />
           )}
-        </BoxHtV1>
-      </BoxHtV1>
+        </Box>
+      </Box>
     );
   }
 }

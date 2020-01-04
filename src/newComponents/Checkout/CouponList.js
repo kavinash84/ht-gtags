@@ -1,11 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
+
+/**
+ * Components
+ */
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Flex from 'hometown-components-dev/lib/FlexHtV1';
+import Label from 'hometown-components-dev/lib/LabelHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
 import { loadCoupons } from 'redux/modules/coupon';
 
 import styles from './Coupon.scss';
+
+const NotificationText = props => (
+  <Box px={10} py={10} bg="#fff7f0" sx={{ border: 'primary' }}>
+    <Text variant="heading.small" {...props} />
+  </Box>
+);
+
+NotificationText.propTypes = {
+  text: PropTypes.string.isRequired
+};
 
 class CouponList extends React.Component {
   static contextTypes = {
@@ -21,168 +36,133 @@ class CouponList extends React.Component {
  coupons, appliedCoupon, handleClick, loading, unapplicablecoupons
 } = this.props;
     return (
-      <BoxHtV1 className={`${styles.offerList} `}>
-        {loading && (
-          <LabelHtV1
-            color="label"
-            fontSize="0.875rem"
-            fontFamily="medium"
-            display="block"
-            mt="0"
-            mb="0.625rem"
-            textAlign="left"
-          >
-            Loading......
-          </LabelHtV1>
-        )}
+      <Box py={10}>
+        {loading && <NotificationText>Coupons Loading......</NotificationText>}
         {!loading && coupons.length === 0 && unapplicablecoupons.length !== 0 && (
-          <BoxHtV1 className={styles.couponMessage} mb="1rem">
-            <LabelHtV1
-              color="label"
-              fontSize="0.875rem"
-              fontFamily="medium"
-              display="block"
-              mt="0"
-              mb="0"
-              textAlign="left"
-            >
-              No Coupons applicable for this order.
-            </LabelHtV1>
-          </BoxHtV1>
+          <NotificationText>No Coupons applicable for this order.</NotificationText>
         )}
         {!loading && coupons.length === 0 && unapplicablecoupons.length === 0 && (
-          <BoxHtV1 className={styles.couponMessage} mb="1rem">
-            <LabelHtV1
-              color="label"
-              fontSize="0.875rem"
-              fontFamily="medium"
-              display="block"
-              mt="0"
-              mb="0"
-              textAlign="left"
-            >
-              No Coupons Valid for this order
-            </LabelHtV1>
-          </BoxHtV1>
+          <NotificationText>No Coupons Valid for this order</NotificationText>
         )}
         {!loading && coupons.length > 0 && (
-          <BoxHtV1 className={styles.applicableCouponsWrapper}>
-            <LabelHtV1
-              color="label"
-              fontSize="0.75rem"
-              fontFamily="medium"
-              display="block"
-              mt="0"
-              mb="0.625rem"
-              textAlign="left"
-            >
+          <Box>
+            <Text fontSize={14} fontFamily="medium" mb={10}>
               Choose a Valid Coupon
-            </LabelHtV1>
-            <ul className={styles.applicableCoupons}>
+            </Text>
+            <Box sx={{ border: 'dividerLight' }}>
               {coupons.map((item, index) => (
-                <li className={`${item.couponCode === appliedCoupon ? styles.active : ''}`} key={item.couponCode}>
-                  <LabelHtV1 display="block" mt="0" mb="0" htmlFor={`coupon-${String(index)}`}>
-                    <ButtonHtV1
-                      onClick={() => {
-                        handleClick(item.couponCode);
-                      }}
-                      btnType="link"
-                      size="block"
-                      p="0"
-                      textAlign="left"
-                    >
-                      <BoxHtV1 className={styles.couponWrapper}>
-                        <LabelHtV1 display="block" mt="0" mb="0">
-                          <BoxHtV1 className={styles.coupon}>
-                            <input
-                              checked={item.couponCode.toLowerCase() === appliedCoupon.toLowerCase()}
-                              type="radio"
-                              name="coupons"
-                              id={`coupon-${String(index)}`}
-                            />
-                            <LabelHtV1 className={styles.couponCode} ml="0.625rem">
-                              {item.couponCode}
-                            </LabelHtV1>
-                            {item.discount_type === 'fixed' ? (
-                              <LabelHtV1 className={styles.saveRs}>
-                                Flat{' '}
-                                <BoxHtV1>
-                                  <b>Rs. {parseInt(item.discount_amount, 10)}</b>
-                                </BoxHtV1>{' '}
-                                OFF
-                              </LabelHtV1>
-                            ) : (
-                              <LabelHtV1 className={styles.saveRs}>
-                                Flat{' '}
-                                <BoxHtV1>
-                                  <b>{parseInt(item.discount_percentage, 10)} %</b>
-                                </BoxHtV1>{' '}
-                                Off
-                              </LabelHtV1>
-                            )}
-                            <p className={styles.offerDetails}>{item.description}</p>
-                          </BoxHtV1>
-                        </LabelHtV1>
-                      </BoxHtV1>
-                    </ButtonHtV1>
-                  </LabelHtV1>
-                </li>
+                <Box
+                  className={`${item.couponCode === appliedCoupon ? styles.active : ''}`}
+                  key={item.couponCode}
+                  px={10}
+                  py={10}
+                  sx={{ orderBottom: 'dividerLight' }}
+                >
+                  <Label
+                    htmlFor={`coupon-${String(index)}`}
+                    onClick={() => {
+                      handleClick(item.couponCode);
+                    }}
+                  >
+                    <Flex alignItems="center">
+                      <input
+                        checked={item.couponCode.toLowerCase() === appliedCoupon.toLowerCase()}
+                        type="radio"
+                        name="coupons"
+                        id={`coupon-${String(index)}`}
+                      />
+                      <Text
+                        variant="small"
+                        as="span"
+                        mx={10}
+                        px={8}
+                        py={8}
+                        sx={{
+                          border: '1px dashed #d5d5d5',
+                          textTransform: 'uppercase'
+                        }}
+                      >
+                        {item.couponCode}
+                      </Text>
+                      <Text as="span" variant="small">
+                        Flat{' '}
+                        <b>
+                          {item.discount_type === 'fixed'
+                            ? `Rs. ${parseInt(item.discount_amount, 10)}`
+                            : `${parseInt(item.discount_percentage, 10)} %`}
+                        </b>{' '}
+                        OFF
+                      </Text>
+                    </Flex>
+                    <Text pt={10} pl={28}>
+                      {item.description}
+                    </Text>
+                  </Label>
+                </Box>
               ))}
-            </ul>
-          </BoxHtV1>
+            </Box>
+          </Box>
         )}
         {!loading && unapplicablecoupons.length > 0 && (
-          <BoxHtV1 className={styles.unapplicableCouponsWrapper}>
-            <LabelHtV1
-              color="primary"
-              fontSize="0.75rem"
-              fontFamily="medium"
-              display="block"
-              mt="0"
-              mb="0.625rem"
-              textAlign="left"
-            >
+          <Box>
+            <Text fontSize={14} fontFamily="medium" mb={10}>
               Other Offers
-            </LabelHtV1>
-            <ul className={styles.unapplicableCoupons}>
-              {unapplicablecoupons.map(item => (
-                <li className={`${item.couponCode === appliedCoupon ? styles.active : ''}`} key={item.couponCode}>
-                  <BoxHtV1 className={styles.couponWrapper}>
-                    <BoxHtV1 className={styles.coupon}>
-                      <LabelHtV1 htmlFor={item.couponCode} className={styles.couponCode} ml="0.625rem">
+            </Text>
+            <Box sx={{ border: 'dividerLight' }}>
+              {unapplicablecoupons.map((item, index) => (
+                <Box
+                  className={`${item.couponCode === appliedCoupon ? styles.active : ''}`}
+                  key={item.couponCode}
+                  px={10}
+                  py={10}
+                  sx={{ orderBottom: 'dividerLight' }}
+                >
+                  <Label
+                    htmlFor={`coupon-${String(index)}`}
+                    onClick={() => {
+                      handleClick(item.couponCode);
+                    }}
+                  >
+                    <Flex alignItems="center">
+                      <input
+                        checked={item.couponCode.toLowerCase() === appliedCoupon.toLowerCase()}
+                        type="radio"
+                        name="coupons"
+                        id={`coupon-${String(index)}`}
+                      />
+                      <Text
+                        variant="small"
+                        as="span"
+                        mx={10}
+                        px={8}
+                        py={8}
+                        sx={{
+                          border: '1px dashed #d5d5d5',
+                          textTransform: 'uppercase'
+                        }}
+                      >
                         {item.couponCode}
-                      </LabelHtV1>
-                      {item.discount_type === 'fixed' ? (
-                        <LabelHtV1 htmlFor={item.couponCode} className={styles.saveRs}>
-                          Flat{' '}
-                          <BoxHtV1>
-                            <b>
-                              Rs.
-                              {parseInt(item.discount_amount, 10)}
-                            </b>
-                          </BoxHtV1>{' '}
-                          OFF
-                        </LabelHtV1>
-                      ) : (
-                        <LabelHtV1 htmlFor={item.couponCode} className={styles.saveRs}>
-                          Flat{' '}
-                          <BoxHtV1>
-                            <b>{parseInt(item.discount_percentage, 10)} %</b>
-                          </BoxHtV1>{' '}
-                          Off
-                        </LabelHtV1>
-                      )}
-                    </BoxHtV1>
-                    <p htmlFor={item.couponCode} className={styles.offerDetails}>
+                      </Text>
+                      <Text as="span" variant="small">
+                        Flat{' '}
+                        <b>
+                          {item.discount_type === 'fixed'
+                            ? `Rs. ${parseInt(item.discount_amount, 10)}`
+                            : `${parseInt(item.discount_percentage, 10)} %`}
+                        </b>{' '}
+                        OFF
+                      </Text>
+                    </Flex>
+                    <Text pt={10} pl={28}>
                       {item.description}
-                    </p>
-                  </BoxHtV1>
-                </li>
+                    </Text>
+                  </Label>
+                </Box>
               ))}
-            </ul>
-          </BoxHtV1>
+            </Box>
+          </Box>
         )}
-      </BoxHtV1>
+      </Box>
     );
   }
 }
