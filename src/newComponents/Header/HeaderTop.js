@@ -175,7 +175,7 @@ export default class HeaderTop extends Component {
                     </Text>
                     <Button
                       as={Link}
-                      variant="outline"
+                      variant="outline.primary"
                       to={LOGIN_URL}
                       onClick={this.handleClick(LOGIN_URL)}
                       width={175}
@@ -190,7 +190,12 @@ export default class HeaderTop extends Component {
                     <Button as={Link} to={MY_PROFILE_URL} mb={15} width={175}>
                       Profile
                     </Button>
-                    <Button variant="outline" onClick={onClickLogout(logoutUser)} width={175} sx={{ display: 'block' }}>
+                    <Button
+                      variant="outline.primary"
+                      onClick={onClickLogout(logoutUser)}
+                      width={175}
+                      sx={{ display: 'block' }}
+                    >
                       Logout !
                     </Button>
                   </Fragment>
