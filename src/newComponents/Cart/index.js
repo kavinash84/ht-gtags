@@ -3,29 +3,45 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
-import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
-import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
-import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
-import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
-import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
+
+/**
+ * Helper / modules
+ */
 import { formatProductURL } from 'utils/helper';
-import ImageShimmerHtV1 from 'hometown-components-dev/lib/ImageShimmerHtV1';
-import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
 import * as actionCreators from 'redux/modules/cart';
 import { formatAmount } from 'utils/formatters';
+
+/**
+ * Components
+ */
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Flex from 'hometown-components-dev/lib/FlexHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Label from 'hometown-components-dev/lib/LabelHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import ImageShimmer from 'hometown-components-dev/lib/ImageShimmerHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
+import CloseIcon from 'hometown-components-dev/lib/Icons/Close';
+
+/**
+ * Page Components
+ */
 import ProductQuantity from './UpdateProductQuantity';
 import OrderSummary from '../Checkout/OrderSummary';
 import PaymentMethods from '../PaymentMethods/';
 
 const styles = require('./Cart.scss');
 
-// const assemblyIcon = require('../../../static/cube-of-notes-stack.svg');
-const deleteIcon = require('../../../static/delete.svg');
+/**
+ * Images
+ */
+const checkoutIcon = require('../../../static/checkout.svg');
 const location = require('../../../static/map-icon.svg');
-const orderTrack = require('../../../static/order-track.svg');
+const orderTrackIcon = require('../../../static/shipped.svg');
+const saveForLaterIcon = require('../../../static/save-for-later.svg');
 const aeIcon = require('../../../static/american-express.svg');
 const maestroIcon = require('../../../static/maestro.svg');
 const mastercardIcon = require('../../../static/mastercard.svg');
@@ -70,338 +86,287 @@ const Cart = ({
   const cartItemLoading = customerCardId => cartUpdating && currentId === customerCardId;
   const isProductOutofStock = sku => outOfStockList.includes(sku);
   return (
-    <BoxHtV1 type="block">
-      <SectionHtV1 display="flex" pt="1rem" pb="2.5rem" mb="0" height="auto">
-        <ContainerHtV1 type="container" pr="0" pl="0">
-          <RowHtV1 display="block" mr="0" ml="0">
-            <BoxHtV1 variant="col-8" pl="0" pt="0">
-              <RowHtV1 type="block" m="0" mb="5" mt="0">
-                <BoxHtV1 variant="col-8" pl="0">
-                  <HeadingHtV1 mb="1.5rem">
-                    My Shopping Cart:{' '}
-                    <LabelHtV1 fontSize="1.3rem" fontWeight="300">
-                      {' '}
-                      X Items
-                    </LabelHtV1>
-                  </HeadingHtV1>
-                </BoxHtV1>
-
-                <BoxHtV1 variant="col-4" pl="0">
-                  <ButtonHtV1
-                    size="block"
-                    btnType="primary"
-                    height="42px"
-                    mt="0"
-                    fontWeight="700"
-                    fontSize="16px"
-                    ls="1px"
-                    pt="9px"
-                    width="100%"
-                    borderRadius="0"
-                  >
-                    <ImageHtV1 src={deleteIcon} alt="Delete" height="18px" mr="0.625rem" />
-                    SECURE CHECKOUT
-                  </ButtonHtV1>
-                </BoxHtV1>
-                <BoxHtV1 variant="col-12" pl="0" verticalAlign="middle" display="flex" lineHeight="2">
-                  <ImageHtV1 width="initial" height="25px" mr="1rem" mt="3px" float="left" src={location} />
-                  <LabelHtV1 color="filterTitle" mt="0" mb="0">
-                    For delivery details
-                  </LabelHtV1>
-                  <LabelHtV1
-                    className={styles.borderBottom}
-                    color="black"
-                    mt="0"
-                    ml="1rem"
-                    mb="0"
-                    mr="1rem"
-                    onClick={handlePincodeModal}
-                  >
-                    {pincode}
-                  </LabelHtV1>
-                  <ButtonHtV1 fontSize="0.75rem" color="white" btnType="link" onClick={handlePincodeModal}>
-                    change
-                  </ButtonHtV1>
-                </BoxHtV1>
-              </RowHtV1>
-              <RowHtV1 type="block" m="0" my="1em">
-                <BoxHtV1 className="td" variant="col-8" pl="0" px="0">
-                  <TextHtV1>Product Details</TextHtV1>
-                </BoxHtV1>
-                <BoxHtV1 className="td" variant="col-2">
-                  Qty
-                </BoxHtV1>
-                <BoxHtV1 className="td" variant="col-2">
-                  Price
-                </BoxHtV1>
-              </RowHtV1>
-              {results.map(item => (
-                <RowHtV1 className={styles.cartItem} type="block" m="0" mb="0" mt="0" key={item.id_customer_cart}>
-                  <BoxHtV1 className="td" variant="col-2" pl="0" px="0">
-                    <Link to={formatProductURL(item.product_info.name, item.configurable_sku)}>
-                      <ImageShimmerHtV1
-                        src={item.product_info.image}
-                        height="100%"
-                        sx={{
-                          boxShadow: '0 1px 2px 0 #00000033'
-                        }}
-                      >
-                        {imageURL => <ImageHtV1 src={imageURL} alt="" />}
-                      </ImageShimmerHtV1>
-                    </Link>
-                  </BoxHtV1>
-                  <BoxHtV1 className="td" variant="col-6">
-                    <Link to={formatProductURL(item.product_info.name, item.configurable_sku)}>
-                      <BoxHtV1 mb="10px" mt="0.4rem">
-                        <LabelHtV1 color="text" mt="0" fontWeight="600" lineSpacing="1px" lineHeight="1.5">
-                          {item.product_info.name}
-                        </LabelHtV1>
-                      </BoxHtV1>
-                      <BoxHtV1 mb="15px">
-                        <TextHtV1 color="#575757" fontSize="1rem" fontWeight="300" mt="0" mb="0">
-                          Lorem Ipsum
-                        </TextHtV1>
-                      </BoxHtV1>
-                    </Link>
-                    <BoxHtV1>
-                      <TextHtV1
-                        color={item.product_info.delivery_time_text.indexOf('Currently') === -1 ? '#090909' : 'red'}
-                        fontSize="12px"
-                        mt="0"
-                        verticalAlign="middle"
-                        display="flex"
-                        lineHeight="2.5"
-                      >
-                        <ImageHtV1 width="initial" height="23px" mr="0.625rem" mt="3px" float="left" src={orderTrack} />
-                        {item.product_info.delivery_time_text}
-                      </TextHtV1>
-                    </BoxHtV1>
-                    <BoxHtV1 className="td" pr="0.625rem">
-                      <TextHtV1
-                        color="#090909"
-                        fontSize="12px"
-                        mt="0"
-                        verticalAlign="middle"
-                        display="flex"
-                        lineHeight="2.5"
-                      >
-                        <ImageHtV1 width="initial" height="23px" mr="0.625rem" mt="3px" float="left" src={orderTrack} />
-                        Save for later
-                        <LabelHtV1 mx="0.8em" fontSize="1.8em" lineHeight="1.3">
-                          {' '}
-                          |{' '}
-                        </LabelHtV1>
-                        <ButtonHtV1
-                          color="#090909"
-                          fontSize="12px"
-                          mt="0"
-                          verticalAlign="middle"
-                          display="flex"
-                          lineHeight="2.5"
-                          btnType="link"
-                          p="0"
-                          bg="white"
-                          className="close"
-                          disabled={cartItemLoading(item.id_customer_cart)}
-                          onClick={onClick(item.id_customer_cart, sessionId, pincode)(removeFromCart)}
-                        >
-                          <ImageHtV1 src={deleteIcon} alt="Delete" height="20px" mt="3px" mr="0.625rem" />
-                          Remove
-                        </ButtonHtV1>
-                      </TextHtV1>
-                    </BoxHtV1>
-                    {/* {item.product_info.assembly_service && (
-                      <BoxHtV1 color="uspTitle" fontSize="0.75rem">
-                        <ImageHtV1
-                          width="initial"
-                          height="20px"
-                          mr="0.625rem"
-                          mt="4px"
-                          mb="50px"
-                          float="left"
-                          src={assemblyIcon}
-                        />
-                        <TextHtV1 color="#575757" fontSize="0.75rem" mt="0" mb="0">
-                          Assembly
-                        </TextHtV1>
-                        <TextHtV1 fontSize="0.875rem" mt="0" mb="0">
-                          Offered By Hometown
-                        </TextHtV1>
-                        <TextHtV1 fontSize="0.875rem" mt="0">
-                          <ButtonHtV1
-                            className={styles.popoverBtn}
-                            fontSize="0.875rem"
-                            color="#3cc0dc"
-                            btnType="link"
-                            p="0"
-                          >
-                            Details
-                          </ButtonHtV1>
-                          <BoxHtV1 className={styles.popover}>
-                            <TextHtV1 fontSize="0.875rem" mt="0" mb="0" textAlign="center">
-                              Assembly will be done within 48hrs of Delivery & applicable within serviceable limits
-                            </TextHtV1>
-                          </BoxHtV1>
-                        </TextHtV1>
-                      </BoxHtV1>
-                    )} */}
-                  </BoxHtV1>
-                  <BoxHtV1 className="td" variant="col-2" textAlign="center">
-                    <ProductQuantity
-                      cartItemLoading={cartItemLoading}
-                      cartId={item.id_customer_cart}
-                      quantity={item.qty}
-                      simpleSku={item.simple_sku}
-                      skuId={item.configurable_sku}
-                    />
-                  </BoxHtV1>
-                  <BoxHtV1 className="td" variant="col-2" textAlign="center">
-                    <BoxHtV1 mt="0.3125rem">
-                      {/* {item.product_info.unit_price !== item.product_info.special_price &&
-                        item.product_info.special_price !== 0 && (
-                          <LabelHtV1 color="heading" fontSize="0.875rem" mt="0">
-                            <s>₹ {formatAmount(Number(item.product_info.unit_price) * Number(item.qty))}</s>
-                          </LabelHtV1>
-                        )}
-                      <br /> */}
-                      <LabelHtV1 color="heading" fontSize="19px" mt="3px">
-                        ₹{' '}
-                        {item.product_info.special_price === 0
-                          ? formatAmount(Number(item.product_info.unit_price) * Number(item.qty))
-                          : formatAmount(Number(item.product_info.special_price) * Number(item.qty))}
-                      </LabelHtV1>
-                    </BoxHtV1>
-                  </BoxHtV1>
-
-                  {isProductOutofStock(item.configurable_sku) && (
-                    <BoxHtV1 className={styles.loadingCart}>
-                      <HeadingHtV1>
-                        This product is out of stock please remove before proceed.
-                        <br />
-                        <ButtonHtV1
-                          fontSize="1rem"
-                          fontFamily="light"
-                          color="#f98d29"
-                          btnType="link"
-                          p="0"
-                          mt="8px"
-                          onClick={onClick(item.id_customer_cart, sessionId, pincode)(removeFromCart)}
-                        >
-                          Remove
-                        </ButtonHtV1>
-                      </HeadingHtV1>
-                    </BoxHtV1>
-                  )}
-                </RowHtV1>
-              ))}
-            </BoxHtV1>
-            <BoxHtV1 variant="col-4">
-              <BoxHtV1 bg="grey" p="1.5em">
-                <OrderSummary
-                  itemsTotal={summary.items}
-                  savings={summary.savings}
-                  setDiscount={summary.combined_set_discount}
-                  shipping={summary.shipping_charges}
-                  totalCart={summary.total}
-                  loadingnextstep={checkingCart}
-                  onClick={checkCartBeforeCheckout(checkCart, sessionId)}
-                  itemsCount={summary.items_count}
-                  outOfStockList={outOfStockList}
-                  discount={summary.coupon_discount}
-                  btnText="SECURE CHECKOUT"
-                />
-                <PaymentMethods />
-                <BoxHtV1 variant="col-12" mt="1em">
-                  <HeadingHtV1 fontSize="17px" mb="5px" color="menuItem">
-                    Exchange & Return Policy
-                  </HeadingHtV1>
-                  <TextHtV1 fontSize="16px" fontWeight="300">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.
-                  </TextHtV1>
-                  <LabelHtV1
-                    color="menuItem"
-                    pt="5px"
-                    fontSize="12px"
-                    fontWeight="600"
+    <Container my={60}>
+      <Row>
+        {/* Product List */}
+        <Box variant="col-8">
+          <Row alignItems="center">
+            <Box variant="col-8">
+              <Heading>My Shopping Cart : {results.length} Items</Heading>
+            </Box>
+            <Box variant="col-4">
+              <Button height="auto" display="flex" alignItems="center">
+                <Image src={checkoutIcon} alt="Delete" height="18px" mr="0.625rem" />
+                SECURE CHECKOUT
+              </Button>
+            </Box>
+            <Row alignItems="center" variant="col-12" mt={20}>
+              <Image height="25px" mr={5} src={location} />
+              <Label color="textFilter" mr={5}>
+                For delivery details
+              </Label>
+              <Label color="textFilter" onClick={handlePincodeModal} mr={10}>
+                {pincode}
+              </Label>
+              <Button fontSize="16" color="white" onClick={handlePincodeModal}>
+                change
+              </Button>
+            </Row>
+          </Row>
+          <Row
+            mt={30}
+            pb={5}
+            sx={{
+              borderBottom: 'heading'
+            }}
+            mb={10}
+          >
+            <Box variant="col-8">
+              <Text fontFamily="medium">Product Details</Text>
+            </Box>
+            <Box variant="col-2">
+              <Text fontFamily="medium">Qty</Text>
+            </Box>
+            <Box variant="col-2">
+              <Text fontFamily="medium">Price</Text>
+            </Box>
+          </Row>
+          {results.map(item => (
+            <Row key={item.id_customer_cart} py={20} alignItems="center">
+              <Box variant="col-3" pr={0}>
+                <Link to={formatProductURL(item.product_info.name, item.configurable_sku)}>
+                  <ImageShimmer
+                    src={item.product_info.image}
+                    height="100%"
                     sx={{
-                      borderBottom: '1px',
-                      borderColor: '#232324'
+                      boxShadow: '0 1px 2px 0 #0000033'
                     }}
                   >
-                    Read More
-                  </LabelHtV1>
-                </BoxHtV1>
-                <BoxHtV1 variant="col-12" mt="1em">
-                  <HeadingHtV1 fontSize="17px" mb="5px" color="menuItem">
-                    Terms & Conditions
-                  </HeadingHtV1>
-                  <TextHtV1 fontSize="16px" fontWeight="300">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.
-                  </TextHtV1>
-                  <LabelHtV1
-                    color="menuItem"
-                    pt="5px"
-                    fontSize="12px"
-                    fontWeight="600"
-                    borderBottom="1px"
-                    borderColor="#232324"
+                    {imageURL => <Image width={1} src={imageURL} alt="" />}
+                  </ImageShimmer>
+                </Link>
+              </Box>
+              <Box variant="col-5" pl={30}>
+                <Link to={formatProductURL(item.product_info.name, item.configurable_sku)}>
+                  <Box mb="10px">
+                    <Heading color="heading" fontSize={18} lineHeight={1.4}>
+                      {item.product_info.name}
+                    </Heading>
+                  </Box>
+                  <Box mb="15px">
+                    <Text color="#575757">Lorem Ipsum</Text>
+                  </Box>
+                </Link>
+                <Box pb={20}>
+                  <Flex alignItems="center">
+                    <Image width="initial" height={20} mr={10} src={orderTrackIcon} />
+                    <Text
+                      color={item.product_info.delivery_time_text.indexOf('Currently') === -1 ? '#090909' : 'red'}
+                      fontSize="12px"
+                    >
+                      {item.product_info.delivery_time_text}
+                    </Text>
+                  </Flex>
+                </Box>
+                <Flex alignItems="center">
+                  <Button variant="link" fontSize={12} display="flex" alignItems="center">
+                    <Image height={16} mr={10} src={saveForLaterIcon} />
+                    <Text fontSize={12}>Save for later</Text>
+                  </Button>
+                  <Text mx={8} fontSize={16}>
+                    {' '}
+                    |{' '}
+                  </Text>
+                  <Button
+                    variant="link"
+                    fontSize={12}
+                    display="flex"
+                    alignItems="center"
+                    disabled={cartItemLoading(item.id_customer_cart)}
+                    onClick={onClick(item.id_customer_cart, sessionId, pincode)(removeFromCart)}
                   >
-                    Read More
-                  </LabelHtV1>
-                </BoxHtV1>
-                <RowHtV1
+                    <CloseIcon width={14} height={14} mr={10} /> Remove
+                  </Button>
+                </Flex>
+                {/* {item.product_info.assembly_service && (
+                    <Box color="uspTitle" fontSize="0.75rem">
+                      <Image
+                        width="initial"
+                        height="20px"
+                        mr="0.625rem"
+                        mt="4px"
+                        mb="50px"
+                        float="left"
+                        src={assemblyIcon}
+                      />
+                      <Text color="#575757" fontSize="0.75rem" mt="0" mb="0">
+                        Assembly
+                      </Text>
+                      <Text fontSize="0.875rem" mt="0" mb="0">
+                        Offered By Hometown
+                      </Text>
+                      <Text fontSize="0.875rem" mt="0">
+                        <Button
+                          className={styles.popoverBtn}
+                          fontSize="0.875rem"
+                          color="#3cc0dc"
+                          btnType="link"
+                          p="0"
+                        >
+                          Details
+                        </Button>
+                        <Box className={styles.popover}>
+                          <Text fontSize="0.875rem" mt="0" mb="0" textAlign="center">
+                            Assembly will be done within 48hrs of Delivery & applicable within serviceable limits
+                          </Text>
+                        </Box>
+                      </Text>
+                    </Box>
+                  )} */}
+              </Box>
+              <Box className="td" variant="col-2" textAlign="center">
+                <ProductQuantity
+                  cartItemLoading={cartItemLoading}
+                  cartId={item.id_customer_cart}
+                  quantity={item.qty}
+                  simpleSku={item.simple_sku}
+                  skuId={item.configurable_sku}
+                />
+              </Box>
+              <Box variant="col-2">
+                {/* {item.product_info.unit_price !== item.product_info.special_price &&
+                      item.product_info.special_price !== 0 && (
+                        <Label color="heading" fontSize="0.875rem" mt="0">
+                          <s>₹ {formatAmount(Number(item.product_info.unit_price) * Number(item.qty))}</s>
+                        </Label>
+                      )}
+                    <br /> */}
+                <Label color="heading" fontSize={18}>
+                  ₹{' '}
+                  {item.product_info.special_price === 0
+                    ? formatAmount(Number(item.product_info.unit_price) * Number(item.qty))
+                    : formatAmount(Number(item.product_info.special_price) * Number(item.qty))}
+                </Label>
+              </Box>
+
+              {isProductOutofStock(item.configurable_sku) && (
+                <Box className={styles.loadingCart}>
+                  <Heading>
+                    This product is out of stock please remove before proceed.
+                    <br />
+                    <Button onClick={onClick(item.id_customer_cart, sessionId, pincode)(removeFromCart)}>Remove</Button>
+                  </Heading>
+                </Box>
+              )}
+            </Row>
+          ))}
+        </Box>
+        {/* Pricing Sidebar */}
+        <Box variant="col-4">
+          <Box bg="grey" p="1.5em">
+            <OrderSummary
+              itemsTotal={summary.items}
+              savings={summary.savings}
+              setDiscount={summary.combined_set_discount}
+              shipping={summary.shipping_charges}
+              totalCart={summary.total}
+              loadingnextstep={checkingCart}
+              onClick={checkCartBeforeCheckout(checkCart, sessionId)}
+              itemsCount={summary.items_count}
+              outOfStockList={outOfStockList}
+              discount={summary.coupon_discount}
+              btnText="SECURE CHECKOUT"
+            />
+            <PaymentMethods />
+            <Box variant="col-12" mt="1em">
+              <Heading fontSize="17px" mb="5px" color="menuItem">
+                Exchange & Return Policy
+              </Heading>
+              <Text fontSize="16px" fontWeight="300">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.
+              </Text>
+              <Label
+                color="menuItem"
+                pt="5px"
+                fontSize="12px"
+                fontWeight="600"
+                sx={{
+                  borderBottom: '1px',
+                  borderColor: '#232324'
+                }}
+              >
+                Read More
+              </Label>
+            </Box>
+            <Box variant="col-12" mt="1em">
+              <Heading fontSize="17px" mb="5px" color="menuItem">
+                Terms & Conditions
+              </Heading>
+              <Text fontSize="16px" fontWeight="300">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.
+              </Text>
+              <Label
+                color="menuItem"
+                pt="5px"
+                fontSize="12px"
+                fontWeight="600"
+                borderBottom="1px"
+                borderColor="#232324"
+              >
+                Read More
+              </Label>
+            </Box>
+            <Row
+              sx={{
+                borderWidth: '1px',
+                borderStyle: 'solid',
+                borderColor: 'border',
+                mx: '0',
+                mt: '2em'
+              }}
+            >
+              <Box
+                variant="col-12"
+                textAlign="center"
+                sx={{
+                  position: 'relative',
+                  top: '-9px',
+                  mb: '0',
+                  p: '0'
+                }}
+              >
+                <Text
+                  textAlign="center"
                   sx={{
-                    borderWidth: '1px',
-                    borderStyle: 'solid',
-                    borderColor: 'border',
-                    mx: '0',
-                    mt: '2em'
+                    background: '#f3f3f3'
                   }}
                 >
-                  <BoxHtV1
-                    variant="col-12"
-                    textAlign="center"
-                    sx={{
-                      position: 'relative',
-                      top: '-9px',
-                      mb: '0',
-                      p: '0'
-                    }}
-                  >
-                    <TextHtV1
-                      textAlign="center"
-                      sx={{
-                        background: '#f3f3f3'
-                      }}
-                    >
-                      Gauranteed Secure Checkout
-                    </TextHtV1>
-                  </BoxHtV1>
-                  <BoxHtV1 variant="col-2" mb="0" p="0 5px">
-                    <ImageHtV1 src={visaIcon} alt="visaCard" width="100%" />
-                  </BoxHtV1>
-                  <BoxHtV1 variant="col-2" mb="0" p="0 5px">
-                    <ImageHtV1 src={mastercardIcon} alt="Master Card" width="100%" />
-                  </BoxHtV1>
-                  <BoxHtV1 variant="col-2" mb="0" p="0 5px">
-                    <ImageHtV1 src={maestroIcon} alt="Maestro" width="100%" />
-                  </BoxHtV1>
-                  <BoxHtV1 variant="col-2" mb="0" p="0 5px">
-                    <ImageHtV1 src={aeIcon} alt="Amex" width="100%" />
-                  </BoxHtV1>
-                  <BoxHtV1 variant="col-2" mb="0" p="6px 5px">
-                    <ImageHtV1 src={intBankingIcon} alt="Diners Club" width="100%" />
-                  </BoxHtV1>
-                  <BoxHtV1 variant="col-2" mb="0" p="5px 5px">
-                    <ImageHtV1 src={walletIcon} alt="Wallet" width="100%" />
-                  </BoxHtV1>
-                </RowHtV1>
-              </BoxHtV1>
-            </BoxHtV1>
-          </RowHtV1>
-        </ContainerHtV1>
-      </SectionHtV1>
-    </BoxHtV1>
+                  Gauranteed Secure Checkout
+                </Text>
+              </Box>
+              <Box variant="col-2" mb="0" p="0 5px">
+                <Image src={visaIcon} alt="visaCard" width="100%" />
+              </Box>
+              <Box variant="col-2" mb="0" p="0 5px">
+                <Image src={mastercardIcon} alt="Master Card" width="100%" />
+              </Box>
+              <Box variant="col-2" mb="0" p="0 5px">
+                <Image src={maestroIcon} alt="Maestro" width="100%" />
+              </Box>
+              <Box variant="col-2" mb="0" p="0 5px">
+                <Image src={aeIcon} alt="Amex" width="100%" />
+              </Box>
+              <Box variant="col-2" mb="0" p="6px 5px">
+                <Image src={intBankingIcon} alt="Diners Club" width="100%" />
+              </Box>
+              <Box variant="col-2" mb="0" p="5px 5px">
+                <Image src={walletIcon} alt="Wallet" width="100%" />
+              </Box>
+            </Row>
+          </Box>
+        </Box>
+      </Row>
+    </Container>
   );
 };
 

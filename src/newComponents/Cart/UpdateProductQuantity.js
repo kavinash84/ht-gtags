@@ -1,16 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
-import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
-import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
 import { connect } from 'react-redux';
+
+/**
+ * Components
+ */
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Label from 'hometown-components-dev/lib/LabelHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+
+/**
+ * modules / helpers
+ */
 import { updateCart } from 'redux/modules/cart';
 import { PINCODE } from 'helpers/Constants';
 
-const ReductIcon = require('../../../static/remove_circle_outline.svg');
-const IncreaseIcon = require('../../../static/add_circle_outline.svg');
+/**
+ * Icons
+ */
+const reductIcon = require('../../../static/reduct.svg');
+const increaseIcon = require('../../../static/increase.svg');
 const LoaderIcon = require('../../../static/refresh-primary.svg');
 
 const mapStateToProps = ({ pincode, app }) => ({
@@ -33,53 +43,27 @@ const ProductQuantity = ({
   sessionId,
   cartItemLoading
 }) => (
-  <RowHtV1 display="block" m="0">
-    <BoxHtV1 col="12" textAlign="left">
-      <ButtonHtV1
-        type="custom"
-        color="textDark"
-        border="none"
-        bg="white"
-        bc="transparent"
-        p="0"
-        va="middle"
-        onClick={onClick(cartId, skuId, simpleSku, sessionId, pincode, -1)(updateQuantity)}
-        disabled={cartItemLoading(cartId) || quantity <= 1}
-        sx={{
-          borderRadius: '50%',
-          boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.31)',
-          height: 'auto'
-        }}
-      >
-        <ImageHtV1 src={ReductIcon} alt="" float="left" height="22px" />
-      </ButtonHtV1>
-      <LabelHtV1 color="textLight" mb="0" mt="0" p="0 10px" position="relative" top="2px">
-        {cartItemLoading(cartId) ? (
-          <ImageHtV1 width="19px" className="spin" va="bottom" src={LoaderIcon} display="inline" />
-        ) : (
-          quantity
-        )}
-      </LabelHtV1>
-      <ButtonHtV1
-        type="custom"
-        color="textDark"
-        border="none"
-        bg="white"
-        bc="transparent"
-        p="0"
-        va="middle"
-        onClick={onClick(cartId, skuId, simpleSku, sessionId, pincode, 1)(updateQuantity)}
-        disabled={cartItemLoading(cartId)}
-        sx={{
-          borderRadius: '50%',
-          boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.31)',
-          height: 'auto'
-        }}
-      >
-        <ImageHtV1 src={IncreaseIcon} alt="" float="left" height="22px" />
-      </ButtonHtV1>
-    </BoxHtV1>
-  </RowHtV1>
+  <Row alignItems="center">
+    <Button
+      variant="link"
+      color="textDark"
+      onClick={onClick(cartId, skuId, simpleSku, sessionId, pincode, -1)(updateQuantity)}
+      disabled={cartItemLoading(cartId) || quantity <= 1}
+    >
+      <Image src={reductIcon} alt="" height={22} />
+    </Button>
+    <Label color="textLight" px={10}>
+      {cartItemLoading(cartId) ? <Image width={20} className="spin" src={LoaderIcon} /> : quantity}
+    </Label>
+    <Button
+      variant="link"
+      color="textDark"
+      onClick={onClick(cartId, skuId, simpleSku, sessionId, pincode, 1)(updateQuantity)}
+      disabled={cartItemLoading(cartId)}
+    >
+      <Image src={increaseIcon} alt="" height={22} />
+    </Button>
+  </Row>
 );
 
 ProductQuantity.defaultProps = {

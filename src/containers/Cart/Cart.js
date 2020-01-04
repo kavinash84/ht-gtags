@@ -1,21 +1,38 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
+/**
+ * Modules / Selectors
+ */
+import { resetCheck } from 'redux/modules/cart';
+import { getCartList, getStockOutProducts } from 'selectors/cart';
+
+/**
+ * Components
+ */
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Body from 'hometown-components-dev/lib/BodyHtV1';
+import Empty from 'hometown-components-dev/lib/EmptyHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Section from 'hometown-components-dev/lib/SectionHtV1';
+import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
+
+/**
+ * Page Components
+ */
 import Cart from 'newComponents/Cart';
-import EmptyHtV1 from 'hometown-components-dev/lib/EmptyHtV1';
-import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
-import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
+import Footer from 'newComponents/Footer';
+import Header from 'newComponents/Header';
 import CartShimmer from 'newComponents/Cart/CartShimmer';
 import PinCode from 'newComponents/PinCode';
 import ResponsiveModal from 'newComponents/Modal';
-import TitleBar from 'newComponents/TitleBar';
-import { resetCheck } from 'redux/modules/cart';
-import { getCartList, getStockOutProducts } from 'selectors/cart';
 import Notifications from 'newComponents/Notifications';
-import MenuFooter from 'containers/MenuFooter';
 
+/**
+ * Icons / Images
+ */
 const CartEmptyIcon = require('../../../static/cart-empty.png');
 const PincodeModalIcon = require('../../../static/map-placeholder.svg');
 
@@ -86,14 +103,18 @@ export default class CartContainer extends Component {
     const {
  results, summary, loading, loaded, outOfStockList
 } = this.props;
+    console.log(loaded);
+
     return (
-      // <BoxHtV1 className="wrapper">
-      <BoxHtV1>
-        <MenuFooter pageTitle="Shopping Cart">
-          {loading && !loaded && <CartShimmer />}
+      <Wrapper>
+        <Body>
+          {/* Header */}
+          <Header />
+
+          {/* {loading && !loaded && <CartShimmer />} */}
           {results && results.length === 0 ? (
-            <SectionHtV1 display="flex" padding="0.625rem" paddingTop="1.25rem" mb={0}>
-              <EmptyHtV1
+            <Section display="flex" padding="0.625rem" paddingTop="1.25rem" mb={0}>
+              <Empty
                 title="Your cart is currently empty!"
                 subTitle="Add items to cart"
                 btnName="Shop Now"
@@ -102,13 +123,12 @@ export default class CartContainer extends Component {
                 subTitleWidth="43%"
                 p="10"
               >
-                <ImageHtV1 src={CartEmptyIcon} width="initial" m="auto" alt="Sorry no results found" />
-              </EmptyHtV1>
-            </SectionHtV1>
+                <Image src={CartEmptyIcon} width="initial" m="auto" alt="Sorry no results found" />
+              </Empty>
+            </Section>
           ) : null}
           {!loading && results && results.length !== 0 ? (
-            <BoxHtV1>
-              <TitleBar title="Shopping Cart" />
+            <Box>
               {outOfStockList && outOfStockList.length > 0 && (
                 <Notifications
                   msg="One or more items in your cart are out of stock. Please remove to continue"
@@ -121,18 +141,20 @@ export default class CartContainer extends Component {
                 outOfStockList={outOfStockList}
                 handlePincodeModal={this.handlePincodeModal}
               />
-            </BoxHtV1>
+            </Box>
           ) : (
             loading && <CartShimmer />
           )}
+
+          {/* Pincode Modal */}
           <ResponsiveModal
             classNames={{ modal: 'pincodeModal' }}
             onCloseModal={this.handlePincodeModal}
             open={this.state.openPincode}
           >
-            <BoxHtV1>
-              <ImageHtV1 width="100px" m="auto" mb="1.5rem" src={PincodeModalIcon} alt="Pincode" />
-              <HeadingHtV1
+            <Box>
+              <Image width="100px" m="auto" mb="1.5rem" src={PincodeModalIcon} alt="Pincode" />
+              <Heading
                 ellipsis={false}
                 color="rgba(0.0.0.0.8)"
                 textAlign="center"
@@ -141,12 +163,15 @@ export default class CartContainer extends Component {
                 fontFamily="light"
               >
                 Please enter your Pincode to serve you better
-              </HeadingHtV1>
+              </Heading>
               <PinCode color="#f2f2f2" onCloseModal={this.handlePincodeModal} />
-            </BoxHtV1>
+            </Box>
           </ResponsiveModal>
-        </MenuFooter>
-      </BoxHtV1>
+
+          {/* Footer */}
+          <Footer />
+        </Body>
+      </Wrapper>
     );
   }
 }
