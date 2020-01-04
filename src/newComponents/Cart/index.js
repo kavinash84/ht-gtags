@@ -33,8 +33,6 @@ import ProductQuantity from './UpdateProductQuantity';
 import OrderSummary from '../Checkout/OrderSummary';
 import PaymentMethods from '../PaymentMethods';
 
-const styles = require('./Cart.scss');
-
 /**
  * Images
  */
@@ -127,7 +125,7 @@ const Cart = ({
             </Box>
           </Row>
           {results.map(item => (
-            <Row key={item.id_customer_cart} py={20} alignItems="center">
+            <Row key={item.id_customer_cart} py={20} alignItems="center" sx={{ position: 'relative' }}>
               <Box variant="col-3" pr={0}>
                 <Link to={formatProductURL(item.product_info.name, item.configurable_sku)}>
                   <ImageShimmer
@@ -228,7 +226,7 @@ const Cart = ({
                     </Box>
                   )} */}
               </Box>
-              <Box className="td" variant="col-2" textAlign="center">
+              <Box variant="col-2" textAlign="center">
                 <ProductQuantity
                   cartItemLoading={cartItemLoading}
                   cartId={item.id_customer_cart}
@@ -254,17 +252,35 @@ const Cart = ({
               </Box>
 
               {isProductOutofStock(item.configurable_sku) && (
-                <Box className={styles.loadingCart}>
-                  <Heading>
+                <Flex
+                  alignItems="center"
+                  justifyContent="center"
+                  bg="overlayLight"
+                  flexDirection="column"
+                  sx={{
+                    position: 'absolute',
+                    width: 'calc(100% - 32px)',
+                    height: 'calc(100% - 40px)',
+                    zIndex: 1,
+                    left: 16,
+                    top: 20
+                  }}
+                >
+                  <Heading fontSize={20} pb={10}>
                     This product is out of stock please remove before proceed.
-                    <br />
-                    <Button onClick={onClick(item.id_customer_cart, sessionId, pincode)(removeFromCart)}>Remove</Button>
                   </Heading>
-                </Box>
+                  <Button
+                    variant="outline.primary"
+                    onClick={onClick(item.id_customer_cart, sessionId, pincode)(removeFromCart)}
+                  >
+                    Remove
+                  </Button>
+                </Flex>
               )}
             </Row>
           ))}
         </Box>
+
         {/* Pricing Sidebar */}
         <Box variant="col-4">
           <Box bg="sidebar" px={40} py={30}>
