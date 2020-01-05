@@ -1,22 +1,27 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
-import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
-import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
-import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
-import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
-import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
-import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
-import ImageShimmerHtV1 from 'hometown-components-dev/lib/ImageShimmerHtV1';
 
-import Footer from 'newComponents/Footer';
+/**
+ * Components
+ */
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import ImageShimmer from 'hometown-components-dev/lib/ImageShimmerHtV1';
+import Label from 'hometown-components-dev/lib/LabelHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
 
+/**
+ * modules / selectors / helpers
+ */
 import { formatAmount } from 'utils/formatters';
 import {
   setSelectedGateway,
@@ -28,29 +33,31 @@ import {
 } from 'redux/modules/paymentoptions';
 import { getCartList, getNotDelivered, getStockOutProducts } from 'selectors/cart';
 
-// import BankCard from './BankCard';
-// import CardForm from './CardForm';
-import MenuCheckout from './MenuCheckout';
+/**
+ * Page Components
+ */
 import OrderSummary from './OrderSummary';
 import CommonPayments from './CommonPayments';
-import { validatePaymentDetails } from '../../utils/validation';
 import BankCard from './BankCard';
 import CardForm from './CardForm';
 import CardFormEasyEmi from './CardFormEasyEmi';
 import Emi from './Emi';
 import PaymentMethods from '../PaymentMethods/';
 import PaymentForm from './PaymentForm';
+import { validatePaymentDetails } from '../../utils/validation';
 
-const styles = require('./Checkout.scss');
+/**
+ * Icon
+ */
+const calendarImage = require('../../../static/calendar.svg');
+const assemblyIcon = require('../../../static/cube-of-notes-stack.svg');
+
 const cartStyles = require('../Cart/Cart.scss');
 
 // const nextStep = history => e => {
 //   e.preventDefault();
 //   history.push('/checkout/review-order');
 // };
-
-const calendarImage = require('../../../static/calendar.svg');
-const assemblyIcon = require('../../../static/cube-of-notes-stack.svg');
 
 const nextStep = (dispatcher, sessionId, paymentData, cardType) => e => {
   e.preventDefault();
@@ -75,7 +82,7 @@ class PaymentOptions extends Component {
       setPaymentDetails,
       summary,
       submitting,
-      history,
+      // history,
       session,
       paymentDetails,
       results,
@@ -91,370 +98,315 @@ class PaymentOptions extends Component {
     const [netBankingData] = data.filter(bank => bank.paymentType === 'NetBanking');
     const [WalletData] = data.filter(bank => bank.paymentType === 'Wallet');
     const isProductOutofStock = sku => outOfStockList.includes(sku);
+
     return (
-      <BoxHtV1>
-        <MenuCheckout history={history} page="payment" />
-        <SectionHtV1 display="flex" pt="1.25rem" pb="3.5rem" mb="0" height="auto">
-          <ContainerHtV1 type="container" pr="2rem" pl="2rem">
-            <RowHtV1 display="block" mr="0" ml="0">
-              <BoxHtV1 col="9" pr="1rem" width="714px">
-                <SectionHtV1 display="flex" p="0" pt="0" margin="0" height="auto">
-                  <ContainerHtV1 type="container" pr="0" pl="0">
-                    <RowHtV1 display="block" mr="0" ml="0">
-                      <BoxHtV1 col="12" pr="0" pt="0">
-                        {results.map((item, index) => (
-                          <BoxHtV1 key={String(index)}>
-                            {(!item.product_info.is_deliverable || isProductOutofStock(item.configurable_sku)) && (
-                              <RowHtV1
-                                className={cartStyles.cartItem}
-                                type="block"
-                                m="0"
-                                mb="0"
-                                mt="0"
-                                key={item.id_customer_cart}
-                              >
-                                <BoxHtV1 className="td" col="2" pr="0.625rem">
-                                  <ImageShimmerHtV1 src={item.product_info.image} height="131px">
-                                    {imageURL => <ImageHtV1 src={imageURL} alt="" />}
-                                  </ImageShimmerHtV1>
-                                </BoxHtV1>
-                                <BoxHtV1 className="td" col="6" pr="2rem" pl="0.3125rem">
-                                  <BoxHtV1 mb="10px">
-                                    <LabelHtV1 color="text" mt="0">
-                                      {item.product_info.name}
-                                    </LabelHtV1>
-                                  </BoxHtV1>
-                                  <BoxHtV1>
-                                    <ImageHtV1
-                                      width="initial"
-                                      height="20px"
-                                      mr="0.625rem"
-                                      mt="3px"
-                                      float="left"
-                                      src={calendarImage}
-                                    />
-                                    <TextHtV1 color="#575757" fontSize="0.75rem" mt="0" mb="0">
-                                      Delivery Details
-                                    </TextHtV1>
-                                    <TextHtV1
-                                      color={
-                                        item.product_info.delivery_time_text.indexOf('Sorry') === -1 ? 'green' : 'red'
-                                      }
-                                      fontSize="0.875rem"
-                                      mt="0"
-                                    >
-                                      {item.product_info.delivery_time_text}
-                                    </TextHtV1>
-                                  </BoxHtV1>
-                                  {item.product_info.assembly_service && (
-                                    <BoxHtV1 color="uspTitle" fontSize="0.75rem">
-                                      <ImageHtV1
-                                        width="initial"
-                                        height="20px"
-                                        mr="0.625rem"
-                                        mt="4px"
-                                        mb="50px"
-                                        float="left"
-                                        src={assemblyIcon}
-                                      />
-                                      <TextHtV1 color="#575757" fontSize="0.75rem" mt="0" mb="0">
-                                        Assembly
-                                      </TextHtV1>
-                                      <TextHtV1 fontSize="0.875rem" mt="0" mb="0">
-                                        Offered By Hometown
-                                      </TextHtV1>
-                                      <TextHtV1 fontSize="0.875rem" mt="0">
-                                        <ButtonHtV1
-                                          className={cartStyles.popoverBtn}
-                                          fontSize="0.875rem"
-                                          color="#3cc0dc"
-                                          btnType="link"
-                                          p="0"
-                                        >
-                                          Details
-                                        </ButtonHtV1>
-                                        <BoxHtV1 className={cartStyles.popover}>
-                                          <TextHtV1 fontSize="0.875rem" mt="0" mb="0" ta="center">
-                                            Assembly will be done within 48hrs of Delivery & applicable within
-                                            serviceable limits
-                                          </TextHtV1>
-                                        </BoxHtV1>
-                                      </TextHtV1>
-                                    </BoxHtV1>
-                                  )}
-                                </BoxHtV1>
-                                <BoxHtV1 className="td" col="3" pr="0.625rem">
-                                  Quantity: {item.qty}
-                                  <br />
-                                  {item.product_info.unit_price !== item.product_info.special_price &&
-                                    item.product_info.special_price !== 0 && (
-                                      <LabelHtV1 color="black" fontSize="0.875rem" mt="0.625rem">
-                                        <s>Rs. {formatAmount(item.product_info.unit_price)}</s>
-                                      </LabelHtV1>
-                                    )}
-                                  <br />
-                                  <LabelHtV1 color="primary" fontSize="1.25rem" mt="0">
-                                    Rs.{' '}
-                                    {item.product_info.special_price === 0
-                                      ? formatAmount(item.product_info.unit_price)
-                                      : formatAmount(item.product_info.special_price)}
-                                  </LabelHtV1>
-                                </BoxHtV1>
-                                <BoxHtV1 className={cartStyles.loadingCart}>
-                                  <HeadingHtV1>
-                                    {/* eslint-disable*/}
-                                    {isProductOutofStock(item.configurable_sku)
-                                      ? 'This product is out of stock please remove before proceed.'
-                                      : "Sorry, this product isn't deliverable to selected pincode."}
-                                    <br />
-                                    {/* eslint-enable */}
-                                    <Link to="/checkout/delivery-address">
-                                      <LabelHtV1
-                                        fontSize="1rem"
-                                        fontFamily="light"
-                                        color="primary"
-                                        p="0"
-                                        mt="10px"
-                                        mb="0"
-                                      >
-                                        Edit Address
-                                      </LabelHtV1>
-                                    </Link>
-                                    <Link to="/checkout/cart">
-                                      <LabelHtV1
-                                        fontSize="1rem"
-                                        fontFamily="light"
-                                        color="primary"
-                                        p="0"
-                                        mt="10px"
-                                        mb="0"
-                                      >
-                                        / Edit Cart
-                                      </LabelHtV1>
-                                    </Link>
-                                  </HeadingHtV1>
-                                </BoxHtV1>
-                              </RowHtV1>
-                            )}
-                          </BoxHtV1>
-                        ))}
-                      </BoxHtV1>
-                    </RowHtV1>
-                  </ContainerHtV1>
-                </SectionHtV1>
-                <RowHtV1 display="block" mr={0} ml={0}>
-                  <BoxHtV1 col="12">
-                    <HeadingHtV1 pb="10px" variant="formHeading">
-                      Payment Method
-                    </HeadingHtV1>
-                  </BoxHtV1>
-                </RowHtV1>
-                <RowHtV1 display="block" mr={0} ml={0} mt={5}>
-                  <BoxHtV1 col="3" display="flex">
-                    {data.map((paymentType, index) => (
-                      <BoxHtV1 key={String(`${paymentType}${index}`)}>
-                        {CommonPayments(paymentType.paymentType, toggleGateway, selectedGateway, session, resetEasyEmi)}
-                      </BoxHtV1>
-                    ))}
-                  </BoxHtV1>
-                  <BoxHtV1 col="9" width="100%" mt={36}>
-                    <BoxHtV1 className={styles.paymentFormOptions}>
-                      {selectedGateway === 'CreditCard' && (
-                        <BoxHtV1 col="12">
-                          <CardForm
-                            setPaymentDetails={setPaymentDetails}
-                            gateway={selectedGateway}
-                            padding="2rem 2.5rem 1.5rem"
-                          />
-                        </BoxHtV1>
-                      )}
-                      {selectedGateway === 'DebitCard' && (
-                        <BoxHtV1 col="12">
-                          <CardForm
-                            setPaymentDetails={setPaymentDetails}
-                            gateway={selectedGateway}
-                            padding="2rem 2.5rem 1.5rem"
-                          />
-                        </BoxHtV1>
-                      )}
-                      {selectedGateway === 'NetBanking' && (
-                        <BoxHtV1 col="12" className={styles.paymentBlock} p="2rem 2.5rem 1.5rem">
-                          <BoxHtV1 col="12" mb="1rem">
-                            <LabelHtV1 htmlFor="bankOptions1" color="textLight">
-                              Choose From Preferred Bank
-                            </LabelHtV1>
-                          </BoxHtV1>
-                          <RowHtV1>
-                            <BankCard
-                              setPaymentDetails={setPaymentDetails}
-                              gateway={selectedGateway}
-                              name="HDFB"
-                              detailkey="bankCode"
-                              img="https://static.hometown.in/media/cms/BankLOGO/hdfc.gif"
-                              currentSelection={paymentDetails.NetBanking.bankCode}
+      <Container my={60} px={0}>
+        <Row>
+          <Col variant="col-8">
+            {/* Product not deliverable */}
+            <Row mr="0" ml="0">
+              <Box>
+                {results.map((item, index) => (
+                  <Box key={String(index)}>
+                    {(!item.product_info.is_deliverable || isProductOutofStock(item.configurable_sku)) && (
+                      <Row className={cartStyles.cartItem} type="block" m="0" mb="0" mt="0" key={item.id_customer_cart}>
+                        <Box className="td" col="2" pr="0.625rem">
+                          <ImageShimmer src={item.product_info.image} height="131px">
+                            {imageURL => <Image src={imageURL} alt="" />}
+                          </ImageShimmer>
+                        </Box>
+                        <Box className="td" col="6" pr="2rem" pl="0.3125rem">
+                          <Box mb="10px">
+                            <Label color="text" mt="0">
+                              {item.product_info.name}
+                            </Label>
+                          </Box>
+                          <Box>
+                            <Image
+                              width="initial"
+                              height="20px"
+                              mr="0.625rem"
+                              mt="3px"
+                              float="left"
+                              src={calendarImage}
                             />
-                            <BankCard
-                              setPaymentDetails={setPaymentDetails}
-                              gateway={selectedGateway}
-                              name="ICIB"
-                              detailkey="bankCode"
-                              img="https://static.hometown.in/media/cms/BankLOGO/icici.gif"
-                              currentSelection={paymentDetails.NetBanking.bankCode}
-                            />
-                            <BankCard
-                              setPaymentDetails={setPaymentDetails}
-                              gateway={selectedGateway}
-                              name="AXIB"
-                              detailkey="bankCode"
-                              img="https://static.hometown.in/media/cms/BankLOGO/axis.gif"
-                              currentSelection={paymentDetails.NetBanking.bankCode}
-                            />
-                            <BankCard
-                              setPaymentDetails={setPaymentDetails}
-                              gateway={selectedGateway}
-                              name="SBIB"
-                              detailkey="bankCode"
-                              img="https://static.hometown.in/media/cms/BankLOGO/sbi.gif"
-                              currentSelection={paymentDetails.NetBanking.bankCode}
-                            />
-                          </RowHtV1>
-                          <BoxHtV1 col="12" mt="1rem">
-                            <select
-                              className={`${styles.dropDown} ${styles.selectBank}`}
-                              name="bankCode"
-                              onChange={onChangeDetails(setPaymentDetails, selectedGateway)}
-                              value={paymentDetails.NetBanking.bankCode}
+                            <Text color="#575757" fontSize="0.75rem" mt="0" mb="0">
+                              Delivery Details
+                            </Text>
+                            <Text
+                              color={item.product_info.delivery_time_text.indexOf('Sorry') === -1 ? 'green' : 'red'}
+                              fontSize="0.875rem"
+                              mt="0"
                             >
-                              <option value="">Select Bank</option>
-                              {netBankingData &&
-                                netBankingData.netBankingBanks &&
-                                Object.keys(netBankingData.netBankingBanks).map((k, i) => (
-                                  <option value={k} key={k}>
-                                    {Object.values(netBankingData.netBankingBanks)[i]}
-                                  </option>
-                                ))}
-                            </select>
-                          </BoxHtV1>
-                        </BoxHtV1>
-                      )}
-                      {selectedGateway === 'Emi' && (
-                        <Emi
-                          selectedGateway={selectedGateway}
-                          setPaymentDetails={setPaymentDetails}
-                          currentSelection={paymentDetails.Emi.emiBank}
-                        />
-                      )}
-                      {selectedGateway === 'EasyEmi' && (
-                        <BoxHtV1 col="12">
-                          <CardFormEasyEmi
-                            setPaymentDetails={setPaymentDetails}
-                            gateway={selectedGateway}
-                            padding="2rem 2.5rem 1.5rem"
-                          />
-                        </BoxHtV1>
-                      )}
-                      {WalletData && selectedGateway === 'Wallet' && (
-                        <BoxHtV1 col="12" className={styles.paymentBlock} p="2rem 2.5rem 1.5rem">
-                          <BoxHtV1 col="12" mb="1rem">
-                            <LabelHtV1 htmlFor="bankOptions1" color="textLight">
-                              Select From your preferred Wallet
-                            </LabelHtV1>
-                          </BoxHtV1>
-                          <RowHtV1>
-                            {WalletData.isPaytmWalletEnable && (
-                              <BankCard
-                                setPaymentDetails={setPaymentDetails}
-                                gateway={selectedGateway}
-                                name="Paytm"
-                                detailkey="walletName"
-                                currentSelection={paymentDetails.Wallet.walletName}
-                                img="https://static.hometown.in/images/local_v2/onestepcheckout/logo/paytm.jpg"
+                              {item.product_info.delivery_time_text}
+                            </Text>
+                          </Box>
+                          {item.product_info.assembly_service && (
+                            <Box color="uspTitle" fontSize="0.75rem">
+                              <Image
+                                width="initial"
+                                height="20px"
+                                mr="0.625rem"
+                                mt="4px"
+                                mb="50px"
+                                float="left"
+                                src={assemblyIcon}
                               />
+                              <Text color="#575757" fontSize="0.75rem" mt="0" mb="0">
+                                Assembly
+                              </Text>
+                              <Text fontSize="0.875rem" mt="0" mb="0">
+                                Offered By Hometown
+                              </Text>
+                              <Text fontSize="0.875rem" mt="0">
+                                <Button
+                                  className={cartStyles.popoverBtn}
+                                  fontSize="0.875rem"
+                                  color="#3cc0dc"
+                                  btnType="link"
+                                  p="0"
+                                >
+                                  Details
+                                </Button>
+                                <Box className={cartStyles.popover}>
+                                  <Text fontSize="0.875rem" mt="0" mb="0" ta="center">
+                                    Assembly will be done within 48hrs of Delivery & applicable within serviceable
+                                    limits
+                                  </Text>
+                                </Box>
+                              </Text>
+                            </Box>
+                          )}
+                        </Box>
+                        <Box className="td" col="3" pr="0.625rem">
+                          Quantity: {item.qty}
+                          <br />
+                          {item.product_info.unit_price !== item.product_info.special_price &&
+                            item.product_info.special_price !== 0 && (
+                              <Label color="black" fontSize="0.875rem" mt="0.625rem">
+                                <s>Rs. {formatAmount(item.product_info.unit_price)}</s>
+                              </Label>
                             )}
-                            {WalletData.isPayuWalletEnable && (
-                              <BankCard
-                                setPaymentDetails={setPaymentDetails}
-                                gateway={selectedGateway}
-                                name="Payu"
-                                detailkey="walletName"
-                                currentSelection={paymentDetails.Wallet.walletName}
-                                img="https://static.hometown.in/images/local_v2/onestepcheckout/logo/payu.jpg"
-                              />
-                            )}
-                            {WalletData.isMobikwikWalletEnable && (
-                              <BankCard
-                                setPaymentDetails={setPaymentDetails}
-                                gateway={selectedGateway}
-                                name="Mobikwik"
-                                detailkey="walletName"
-                                currentSelection={paymentDetails.Wallet.walletName}
-                                img="https://static.hometown.in/images/local_v2/onestepcheckout/logo/mobikwik.jpg"
-                              />
-                            )}
-                          </RowHtV1>
-                        </BoxHtV1>
-                      )}
-                    </BoxHtV1>
-                  </BoxHtV1>
-                </RowHtV1>
-              </BoxHtV1>
-              <BoxHtV1 col="3" width="390px" bg="#f5f5f5">
-                <BoxHtV1 variant="col-12" textAlign="center" px="0" mt={20}>
-                  <HeadingHtV1
-                    color="#1b2125"
-                    mt="0"
-                    mb="0"
-                    fontWeight="700"
-                    fontSize="23px"
-                    fontFamily="HelveticaNeue"
-                  >
-                    Order Summary
-                  </HeadingHtV1>
-                </BoxHtV1>
-                <OrderSummary
-                  itemsTotal={summary.items}
-                  setDiscount={summary.combined_set_discount}
-                  savings={summary.savings}
-                  shipping={summary.shipping_charges}
-                  totalCart={summary.total}
-                  onClick={() => null}
-                  discount={summary.coupon_discount}
-                  itemsCount={summary.items_count}
-                  hidebutton
-                  hidecoupon
+                          <br />
+                          <Label color="primary" fontSize="1.25rem" mt="0">
+                            Rs.{' '}
+                            {item.product_info.special_price === 0
+                              ? formatAmount(item.product_info.unit_price)
+                              : formatAmount(item.product_info.special_price)}
+                          </Label>
+                        </Box>
+                        <Box className={cartStyles.loadingCart}>
+                          <Heading>
+                            {/* eslint-disable*/}
+                            {isProductOutofStock(item.configurable_sku)
+                              ? 'This product is out of stock please remove before proceed.'
+                              : "Sorry, this product isn't deliverable to selected pincode."}
+                            <br />
+                            {/* eslint-enable */}
+                            <Link to="/checkout/delivery-address">
+                              <Label fontSize="1rem" fontFamily="light" color="primary" p="0" mt="10px" mb="0">
+                                Edit Address
+                              </Label>
+                            </Link>
+                            <Link to="/checkout/cart">
+                              <Label fontSize="1rem" fontFamily="light" color="primary" p="0" mt="10px" mb="0">
+                                / Edit Cart
+                              </Label>
+                            </Link>
+                          </Heading>
+                        </Box>
+                      </Row>
+                    )}
+                  </Box>
+                ))}
+              </Box>
+            </Row>
+            <Row mr="0" ml="0" mb={20}>
+              <Box>
+                <Heading variant="heading.medium">Payment Method</Heading>
+              </Box>
+            </Row>
+            <Row
+              mx={0}
+              mb={20}
+              justifyContent="space-between"
+              sx={{
+                borderBottom: 'heading'
+              }}
+            >
+              {data.map((paymentType, index) => (
+                <Col key={String(`${paymentType}${index}`)} px={0}>
+                  {CommonPayments(paymentType.paymentType, toggleGateway, selectedGateway, session, resetEasyEmi)}
+                </Col>
+              ))}
+            </Row>
+            {/* Payment options form */}
+            <Box px={40} pt={30} pb={20} sx={{ border: 'secondary' }}>
+              {selectedGateway === 'CreditCard' && (
+                <CardForm
+                  setPaymentDetails={setPaymentDetails}
+                  gateway={selectedGateway}
+                  padding="2rem 2.5rem 1.5rem"
                 />
-                <RowHtV1 display="block" mr="0" ml="0">
-                  <BoxHtV1 col="12">
-                    <ButtonHtV1
-                      size="block"
-                      btnType="primary"
-                      fontFamily="regular"
-                      height="42px"
-                      fontSize="1.125rem"
-                      lh="1"
-                      borderRadius="0"
-                      // onClick={nextStep(history)}
-                      onClick={nextStep(submitDetails, session, paymentDetails, cardType)}
-                      disabled={
-                        validatePaymentDetails(paymentDetails) ||
-                        undelivered.length > 0 ||
-                        outOfStockList.length > 0 ||
-                        submitting ||
-                        (submitted && error === null)
-                      }
-                    >
-                      {submitting ? 'Please wait...' : 'Place Order'}
-                    </ButtonHtV1>
-                  </BoxHtV1>
-                </RowHtV1>
-                <PaymentMethods />
-              </BoxHtV1>
-            </RowHtV1>
-          </ContainerHtV1>
-        </SectionHtV1>
-        <Footer />
+              )}
+              {selectedGateway === 'DebitCard' && (
+                <CardForm
+                  setPaymentDetails={setPaymentDetails}
+                  gateway={selectedGateway}
+                  padding="2rem 2.5rem 1.5rem"
+                />
+              )}
+              {selectedGateway === 'NetBanking' && (
+                <Fragment>
+                  <Box pb={20}>
+                    <Label>Choose From Preferred Bank</Label>
+                  </Box>
+                  <Row>
+                    <BankCard
+                      setPaymentDetails={setPaymentDetails}
+                      gateway={selectedGateway}
+                      name="HDFB"
+                      detailkey="bankCode"
+                      img="https://static.hometown.in/media/cms/BankLOGO/hdfc.gif"
+                      currentSelection={paymentDetails.NetBanking.bankCode}
+                    />
+                    <BankCard
+                      setPaymentDetails={setPaymentDetails}
+                      gateway={selectedGateway}
+                      name="ICIB"
+                      detailkey="bankCode"
+                      img="https://static.hometown.in/media/cms/BankLOGO/icici.gif"
+                      currentSelection={paymentDetails.NetBanking.bankCode}
+                    />
+                    <BankCard
+                      setPaymentDetails={setPaymentDetails}
+                      gateway={selectedGateway}
+                      name="AXIB"
+                      detailkey="bankCode"
+                      img="https://static.hometown.in/media/cms/BankLOGO/axis.gif"
+                      currentSelection={paymentDetails.NetBanking.bankCode}
+                    />
+                    <BankCard
+                      setPaymentDetails={setPaymentDetails}
+                      gateway={selectedGateway}
+                      name="SBIB"
+                      detailkey="bankCode"
+                      img="https://static.hometown.in/media/cms/BankLOGO/sbi.gif"
+                      currentSelection={paymentDetails.NetBanking.bankCode}
+                    />
+                  </Row>
+                  <Box
+                    as="select"
+                    variant="input"
+                    name="bankCode"
+                    onChange={onChangeDetails(setPaymentDetails, selectedGateway)}
+                    value={paymentDetails.NetBanking.bankCode}
+                  >
+                    <option value="">Select Bank</option>
+                    {netBankingData &&
+                      netBankingData.netBankingBanks &&
+                      Object.keys(netBankingData.netBankingBanks).map((k, i) => (
+                        <option value={k} key={k}>
+                          {Object.values(netBankingData.netBankingBanks)[i]}
+                        </option>
+                      ))}
+                  </Box>
+                </Fragment>
+              )}
+              {selectedGateway === 'Emi' && (
+                <Emi
+                  selectedGateway={selectedGateway}
+                  setPaymentDetails={setPaymentDetails}
+                  currentSelection={paymentDetails.Emi.emiBank}
+                />
+              )}
+              {selectedGateway === 'EasyEmi' && (
+                <CardFormEasyEmi
+                  setPaymentDetails={setPaymentDetails}
+                  gateway={selectedGateway}
+                  padding="2rem 2.5rem 1.5rem"
+                />
+              )}
+              {WalletData && selectedGateway === 'Wallet' && (
+                <Fragment>
+                  <Box pb={20}>
+                    <Label htmlFor="bankOptions1">Select From your preferred Wallet</Label>
+                  </Box>
+                  <Row>
+                    {WalletData.isPaytmWalletEnable && (
+                      <BankCard
+                        setPaymentDetails={setPaymentDetails}
+                        gateway={selectedGateway}
+                        name="Paytm"
+                        detailkey="walletName"
+                        currentSelection={paymentDetails.Wallet.walletName}
+                        img="https://static.hometown.in/images/local_v2/onestepcheckout/logo/paytm.jpg"
+                      />
+                    )}
+                    {WalletData.isPayuWalletEnable && (
+                      <BankCard
+                        setPaymentDetails={setPaymentDetails}
+                        gateway={selectedGateway}
+                        name="Payu"
+                        detailkey="walletName"
+                        currentSelection={paymentDetails.Wallet.walletName}
+                        img="https://static.hometown.in/images/local_v2/onestepcheckout/logo/payu.jpg"
+                      />
+                    )}
+                    {WalletData.isMobikwikWalletEnable && (
+                      <BankCard
+                        setPaymentDetails={setPaymentDetails}
+                        gateway={selectedGateway}
+                        name="Mobikwik"
+                        detailkey="walletName"
+                        currentSelection={paymentDetails.Wallet.walletName}
+                        img="https://static.hometown.in/images/local_v2/onestepcheckout/logo/mobikwik.jpg"
+                      />
+                    )}
+                  </Row>
+                </Fragment>
+              )}
+            </Box>
+          </Col>
+
+          {/* Order Summary */}
+          <Col variant="col-4">
+            <Box bg="sidebar" px={40} py={30}>
+              <OrderSummary
+                itemsTotal={summary.items}
+                setDiscount={summary.combined_set_discount}
+                savings={summary.savings}
+                shipping={summary.shipping_charges}
+                totalCart={summary.total}
+                onClick={() => null}
+                discount={summary.coupon_discount}
+                itemsCount={summary.items_count}
+                hidebutton
+                hidecoupon
+              />
+              <Box width={1} pb={30}>
+                <Button
+                  height={48}
+                  fontSize={18}
+                  width={1}
+                  onClick={nextStep(submitDetails, session, paymentDetails, cardType)}
+                  disabled={
+                    validatePaymentDetails(paymentDetails) ||
+                    undelivered.length > 0 ||
+                    outOfStockList.length > 0 ||
+                    submitting ||
+                    (submitted && error === null)
+                  }
+                >
+                  {submitting ? 'Please wait...' : 'Place Order'}
+                </Button>
+              </Box>
+              <PaymentMethods />
+            </Box>
+          </Col>
+        </Row>
         {paymentFormData && <PaymentForm />}
-      </BoxHtV1>
+      </Container>
     );
   }
 }
@@ -465,7 +417,7 @@ PaymentOptions.defaultProps = {
   summary: null,
   submitting: false,
   session: '',
-  history: {},
+  // history: {},
   results: [],
   outOfStockList: [],
   paymentFormData: {},
@@ -481,7 +433,7 @@ PaymentOptions.propTypes = {
   toggleGateway: PropTypes.func.isRequired,
   setPaymentDetails: PropTypes.func.isRequired,
   summary: PropTypes.object,
-  history: PropTypes.object,
+  // history: PropTypes.object,
   session: PropTypes.string,
   paymentDetails: PropTypes.object.isRequired,
   submitting: PropTypes.bool,

@@ -1,15 +1,20 @@
 import React from 'react';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
-import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
-import { connect } from 'react-redux';
-import { getEmiBanks } from 'selectors/payments';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+/**
+ * Components
+ */
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Label from 'hometown-components-dev/lib/LabelHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+
+/**
+ * Page Components
+ */
+import { getEmiBanks } from 'selectors/payments';
 import BankCard from './BankCard';
-
 import CardForm from './CardForm';
-
-const styles = require('./Checkout.scss');
 
 const mapStateToProps = ({ paymentoptions }) => ({
   selectedGateway: paymentoptions.selectedGateway,
@@ -27,13 +32,11 @@ const EMI = ({
 }) => {
   const currentBankDetails = emiBankDetails.filter(item => item.bank === details.emiBank)[0];
   return (
-    <BoxHtV1 col="12" p="3rem 2rem">
-      <BoxHtV1 col="12" mb="1rem">
-        <LabelHtV1 for="bankOptions1" color="textLight">
-          Choose From Preferred Bank (Available On Credit Cards Only)
-        </LabelHtV1>
-      </BoxHtV1>
-      <RowHtV1>
+    <Box>
+      <Box pb={20}>
+        <Label>Choose From Preferred Bank (Available On Credit Cards Only)</Label>
+      </Box>
+      <Row pb={20}>
         {emiBankDetails.map(bank => (
           <BankCard
             setPaymentDetails={setPaymentDetails}
@@ -45,10 +48,31 @@ const EMI = ({
             key={bank.bank}
           />
         ))}
-      </RowHtV1>
+      </Row>
       {currentBankDetails && (
-        <BoxHtV1 col="12" mb="0" mt="1rem">
-          <table border="1" className={`table table-border ${styles.emiTable}`}>
+        <Box>
+          <Box
+            as="table"
+            width={1}
+            mb={20}
+            sx={{
+              borderCollapse: 'collapse',
+              border: 'secondary',
+              '& tr': {
+                border: 'secondary'
+              },
+              '& td': {
+                border: 'secondary',
+                p: '5px 10px',
+                fontSize: 14
+              },
+              '& th': {
+                border: 'secondary',
+                p: '10px 10px',
+                fontSize: 14
+              }
+            }}
+          >
             <tbody>
               <tr>
                 <th />
@@ -86,13 +110,13 @@ const EMI = ({
                 </tr>
               ))}
             </tbody>
-          </table>
-          <BoxHtV1 col="12" mb="1rem" mt="1rem">
+          </Box>
+          <Box>
             <CardForm setPaymentDetails={setPaymentDetails} gateway={selectedGateway} padding="1rem 0rem 0" />
-          </BoxHtV1>
-        </BoxHtV1>
+          </Box>
+        </Box>
       )}
-    </BoxHtV1>
+    </Box>
   );
 };
 

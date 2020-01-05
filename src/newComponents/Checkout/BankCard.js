@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
-import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
-import InputFieldHtV1 from 'hometown-components-dev/lib/InputFieldHtV1';
 
-const styles = require('./Checkout.scss');
+/**
+ * Components
+ */
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
+import Flex from 'hometown-components-dev/lib/FlexHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import Label from 'hometown-components-dev/lib/LabelHtV1';
 
 const changeDetails = (dispatcher, gateway, name, detailkey) => () => {
   dispatcher({ gateway, data: { [detailkey]: name } });
@@ -14,14 +17,21 @@ const changeDetails = (dispatcher, gateway, name, detailkey) => () => {
 const BankCard = ({
  name, img, setPaymentDetails, gateway, detailkey, currentSelection
 }) => (
-  <BoxHtV1 col="4" pr="1rem" onClick={changeDetails(setPaymentDetails, gateway, name, detailkey)}>
-    <BoxHtV1 className={styles.bankCard}>
-      <InputFieldHtV1 type="radio" name="bankOptions" id={`bankOptions${name}`} checked={currentSelection === name} />
-      <LabelHtV1 for={`bankOptions${name}`} bg="#FFF" mb="15px">
-        <ImageHtV1 src={img} alt={name} />
-      </LabelHtV1>
-    </BoxHtV1>
-  </BoxHtV1>
+  <Col variant="col-4" onClick={changeDetails(setPaymentDetails, gateway, name, detailkey)} py={10}>
+    <Flex alignItems="center">
+      <Box
+        as="input"
+        type="radio"
+        name="bankOptions"
+        id={`bankOptions${name}`}
+        checked={currentSelection === name}
+        mr={10}
+      />
+      <Label for={`bankOptions${name}`} bg="white">
+        <Image src={img} alt={name} maxHeight={30} />
+      </Label>
+    </Flex>
+  </Col>
 );
 
 BankCard.defaultProps = {

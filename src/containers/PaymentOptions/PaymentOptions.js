@@ -3,13 +3,25 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+
+/**
+ * Components
+ */
+import Body from 'hometown-components-dev/lib/BodyHtV1';
+import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
+
+/**
+ * Page Components
+ */
+import PaymentOptions from 'newComponents/Checkout/PaymentOptions';
+import HeaderSecondary from 'newComponents/HeaderSecondary';
+
+/**
+ * modules / selectors / helpers
+ */
+import { CART_URL } from 'helpers/Constants';
 import { getPaymentOptions } from 'selectors/payments';
 import { getCartList } from 'selectors/cart';
-import Menu from 'newComponents/MenuWithLogoOnly';
-import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import PaymentOptions from 'newComponents/Checkout/PaymentOptions';
-import { CART_URL } from 'helpers/Constants';
 
 @withRouter
 @connect(({ paymentoptions, cart, address: { shipping } }) => ({
@@ -31,13 +43,14 @@ export default class PaymentOptionsContainer extends Component {
   render() {
     const { availableOptions } = this.props;
     return (
-      <SectionHtV1 padding="0rem" marginBottom="0">
-        <Helmet title="Payment Options" />
-        <BoxHtV1 className="wrapper">
-          <Menu />
+      <Wrapper>
+        <Helmet title="Delivery Address" />
+        <Body>
+          {/* HeaderSecondary */}
+          <HeaderSecondary />
           <PaymentOptions data={availableOptions} />
-        </BoxHtV1>
-      </SectionHtV1>
+        </Body>
+      </Wrapper>
     );
   }
 }

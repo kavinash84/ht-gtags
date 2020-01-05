@@ -379,8 +379,8 @@ class DeliveryAddress extends Component {
             {/* For not logged in */}
             {isLoggedIn && (
               <Box>
-                <Row display="block" mr="0" ml="0" mb={20}>
-                  <Box col="12">
+                <Row mr="0" ml="0" mb={20}>
+                  <Box>
                     <Heading variant="heading.medium">Confirm Address</Heading>
                   </Box>
                 </Row>
