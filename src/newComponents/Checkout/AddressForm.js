@@ -83,7 +83,7 @@ const AddressForm = props => {
           />
         </Col>
         {!isLoggedIn && (
-          <Col variant="col-6" pr={10}>
+          <Col variant="col-6">
             <FormInput
               label="Email ID *"
               type={isLoggedIn ? 'hidden' : 'text'}
@@ -111,7 +111,7 @@ const AddressForm = props => {
         </Col>
       </Row>
       <Box mb={20} pb={20} mt={30} sx={{ borderBottom: 'divider' }}>
-        <Label variant="formHeading">Shipping Address</Label>
+        <Label variant="formHeading">{formType === 'billing' ? 'Billing' : 'Shipping'} Address</Label>
       </Box>
       <Row>
         <Col variant="col-6">
@@ -155,7 +155,7 @@ const AddressForm = props => {
         </Col> */}
       </Row>
       <Row>
-        <Col variant="col-6" pr={10}>
+        <Col variant="col-6">
           <FormInput
             label="State *"
             type="text"
@@ -181,7 +181,7 @@ const AddressForm = props => {
         </Col>
       </Row>
       <Row>
-        <Col variant="col-6" pr={10}>
+        <Col variant="col-6">
           <Pincode
             id="pincodeId"
             pincode={pincode}

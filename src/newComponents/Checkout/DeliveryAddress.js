@@ -363,17 +363,7 @@ class DeliveryAddress extends Component {
                 <Label fontSize="1rem" mt="0" mb="0" color="textLight">
                   Already have an account?
                 </Label>
-                <Button
-                  btnType="link"
-                  fontFamily="regular"
-                  height="18px"
-                  mt="-5px"
-                  fontSize="1rem"
-                  p="0 0.625rem"
-                  color="#f98d29"
-                  onClick={this.handleLoginModal}
-                  lh="1"
-                >
+                <Button variant="linkPrimary" fontSize={16} onClick={this.handleLoginModal} ml={10}>
                   Login
                 </Button>
                 <ResponsiveModal
@@ -441,60 +431,48 @@ class DeliveryAddress extends Component {
             )}
 
             {/* Address Form */}
-            <Box>
-              <form onSubmit={this.handleSubmit}>
-                <Row display="block" mr="0" ml="0">
-                  {(addressform || !isLoggedIn) && (
-                    <Box col="12" pr="0" mt="1rem">
-                      <Label variant="formHeading">Personal Details</Label>
+            <form onSubmit={this.handleSubmit}>
+              <Row display="block" mr="0" ml="0">
+                {(addressform || !isLoggedIn) && (
+                  <Box variant="col-12" px={0} mt="1rem">
+                    <AddressForm formType="shipping" isLoggedIn={isLoggedIn} userEmail={userEmail} />
+                  </Box>
+                )}
+                <Box mt={15} width={1}>
+                  <Flex px={15} py={15} alignItems="center" sx={{ border: 'secondary' }}>
+                    <Box className="checkbox" mr={10}>
                       <Box
-                        sx={{
-                          mt: '22px',
-                          mb: '18px',
-                          width: '100%',
-                          height: '2px',
-                          borderBottom: '1px solid #878686'
-                        }}
+                        as="input"
+                        type="checkbox"
+                        id="checkbox"
+                        checked={!shippingIsBilling}
+                        onChange={this.toggleBillingForm}
                       />
-                      <AddressForm formType="shipping" isLoggedIn={isLoggedIn} userEmail={userEmail} />
+                      {/* eslint-disable */}
+                      <Label htmlFor="checkbox" />
+                      {/* eslint-enable */}
+                    </Box>
+                    <Text fontSize={14} htmlFor="checkbox">
+                      Different Billing Address ?
+                    </Text>
+                  </Flex>
+
+                  {/* Billing Address */}
+                  {!shippingIsBilling && (
+                    <Box>
+                      <AddressForm formType="billing" isLoggedIn={isLoggedIn} userEmail={userEmail} />
                     </Box>
                   )}
-                  <Box mt={15} width={1}>
-                    <Flex px={15} py={15} alignItems="center" sx={{ border: 'secondary' }}>
-                      <Box className="checkbox" mr={10}>
-                        <Box
-                          as="input"
-                          type="checkbox"
-                          id="checkbox"
-                          checked={!shippingIsBilling}
-                          onChange={this.toggleBillingForm}
-                        />
-                        {/* eslint-disable */}
-                        <Label htmlFor="checkbox" />
-                        {/* eslint-enable */}
-                      </Box>
-                      <Text fontSize={14} htmlFor="checkbox">
-                        Different Billing Address ?
-                      </Text>
-                    </Flex>
-
-                    {/* Billing Address */}
-                    {!shippingIsBilling && (
-                      <Box>
-                        <AddressForm formType="billing" isLoggedIn={isLoggedIn} userEmail={userEmail} />
-                      </Box>
-                    )}
-                  </Box>
-                </Row>
-                <Row justifyContent="flex-end" mt={40}>
-                  <Col>
-                    <Button type="submit" disabled={loading || this.checkParams()}>
-                      {loading ? 'Loading...' : 'Save and Continue'}
-                    </Button>
-                  </Col>
-                </Row>
-              </form>
-            </Box>
+                </Box>
+              </Row>
+              <Row justifyContent="flex-end" mt={40}>
+                <Col>
+                  <Button type="submit" disabled={loading || this.checkParams()}>
+                    {loading ? 'Loading...' : 'Save and Continue'}
+                  </Button>
+                </Col>
+              </Row>
+            </form>
           </Col>
 
           {/* Order Summary */}
