@@ -19,7 +19,7 @@ const intBankingIcon = require('../../../static/net-banking.png');
 const walletIcon = require('../../../static/wallet-icon.png');
 
 const AcceptedPaymentOptions = () => (
-  <Box py={20}>
+  <Box variant="col-12" pb={20}>
     <Heading color="textSecondary" fontSize={18} pb={10}>
       Accepted Payment Options
     </Heading>

@@ -3,10 +3,15 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from 'redux/modules/address';
+
+/**
+ * Components
+ */
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
 import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
-import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
+import Label from 'hometown-components-dev/lib/LabelHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
 import Pincode from './Pincode';
 
 const mapStateToProps = ({ address }, props) => ({
@@ -60,9 +65,12 @@ const AddressForm = props => {
   } = props;
   const { formType, isLoggedIn, userEmail } = props;
   return (
-    <BoxHtV1 mt={22}>
-      <RowHtV1 display="block" mr="0" ml="0">
-        <BoxHtV1 col="12" width="100%">
+    <Box pt={30}>
+      <Box mb={20} pb={20} sx={{ borderBottom: 'divider' }}>
+        <Label variant="formHeading">Personal Details</Label>
+      </Box>
+      <Row>
+        <Col variant="col-12">
           <FormInput
             label="Full Name *"
             type="text"
@@ -73,11 +81,9 @@ const AddressForm = props => {
             feedBackMessage={fullNameFeedBackMessage}
             variant="personalDetailsField"
           />
-        </BoxHtV1>
-      </RowHtV1>
-      <RowHtV1 display="block" mr="0" ml="0">
+        </Col>
         {!isLoggedIn && (
-          <BoxHtV1 col="6" pr={10}>
+          <Col variant="col-6" pr={10}>
             <FormInput
               label="Email ID *"
               type={isLoggedIn ? 'hidden' : 'text'}
@@ -88,11 +94,10 @@ const AddressForm = props => {
               feedBackMessage={emailFeedBackMessage}
               readOnly={isLoggedIn}
               variant="personalDetailsField"
-              width="291px"
             />
-          </BoxHtV1>
+          </Col>
         )}
-        <BoxHtV1 col={!isLoggedIn ? '6' : '12'}>
+        <Col variant={!isLoggedIn ? 'col-6' : 'col-12'}>
           <FormInput
             label="Phone *"
             type="text"
@@ -102,26 +107,14 @@ const AddressForm = props => {
             feedBackError={phoneFeedBackError}
             feedBackMessage={phoneFeedBackMessage}
             variant="personalDetailsField"
-            width="291px"
           />
-        </BoxHtV1>
-      </RowHtV1>
-      <BoxHtV1 col="12" pr="0" mt={25} mb={22}>
-        <LabelHtV1 variant="formHeading" mb="0.875rem">
-          Shipping Address
-        </LabelHtV1>
-      </BoxHtV1>
-      <BoxHtV1
-        sx={{
-          mt: '22px',
-          mb: '18px',
-          height: '2px',
-          width: '100%',
-          borderBottom: '1px solid #878686'
-        }}
-      />
-      <RowHtV1 display="block" mr="0" ml="0">
-        <BoxHtV1 col="4" width="100%">
+        </Col>
+      </Row>
+      <Box mb={20} pb={20} mt={30} sx={{ borderBottom: 'divider' }}>
+        <Label variant="formHeading">Shipping Address</Label>
+      </Box>
+      <Row>
+        <Col variant="col-6">
           <FormInput
             id="add1"
             label="Address line 1*"
@@ -133,8 +126,8 @@ const AddressForm = props => {
             feedBackMessage={addressFeedBackMessage1}
             variant="personalDetailsField"
           />
-        </BoxHtV1>
-        <BoxHtV1 col="4" width="100%">
+        </Col>
+        <Col variant="col-6">
           <FormInput
             id="add2"
             label="Address line 2"
@@ -146,8 +139,8 @@ const AddressForm = props => {
             feedBackMessage={addressFeedBackMessage2}
             variant="personalDetailsField"
           />
-        </BoxHtV1>
-        {/* <BoxHtV1 col="4" pl="10px">
+        </Col>
+        {/* <Col variant="col-4" pl="10px">
           <FormInput
             id="add3"
             label="Landmark,Village:"
@@ -158,12 +151,11 @@ const AddressForm = props => {
             feedBackError={addressFeedBackError3}
             feedBackMessage={addressFeedBackMessage3}
             variant="personalDetailsField"
-            width="291px"
           />
-        </BoxHtV1> */}
-      </RowHtV1>
-      <RowHtV1 display="block" mr="0" ml="0">
-        <BoxHtV1 col="6" pr={10}>
+        </Col> */}
+      </Row>
+      <Row>
+        <Col variant="col-6" pr={10}>
           <FormInput
             label="State *"
             type="text"
@@ -173,10 +165,9 @@ const AddressForm = props => {
             feedBackMessage={stateFeedBackMessage}
             readOnly
             variant="personalDetailsField"
-            width="291px"
           />
-        </BoxHtV1>
-        <BoxHtV1 col="6">
+        </Col>
+        <Col variant="col-6">
           <FormInput
             label="City *"
             type="text"
@@ -186,12 +177,11 @@ const AddressForm = props => {
             feedBackMessage={cityFeedBackMessage}
             readOnly
             variant="personalDetailsField"
-            width="291px"
           />
-        </BoxHtV1>
-      </RowHtV1>
-      <RowHtV1 display="block" mr="0" ml="0">
-        <BoxHtV1 col="6" pr={10}>
+        </Col>
+      </Row>
+      <Row>
+        <Col variant="col-6" pr={10}>
           <Pincode
             id="pincodeId"
             pincode={pincode}
@@ -199,11 +189,10 @@ const AddressForm = props => {
             feedBackError={pincodeFeedBackError}
             onChangePincode={onChangePincode}
             feedBackMessage={pincodeFeedBackMessage}
-            width="291px"
           />
-        </BoxHtV1>
+        </Col>
         {formType !== 'billing' && (
-          <BoxHtV1 col="6">
+          <Col variant="col-6">
             <FormInput
               label="GST"
               type="text"
@@ -213,12 +202,11 @@ const AddressForm = props => {
               feedBackError={gstFeedBackError}
               feedBackMessage={gstFeedBackMessage}
               variant="personalDetailsField"
-              width="291px"
             />
-          </BoxHtV1>
+          </Col>
         )}
-      </RowHtV1>
-    </BoxHtV1>
+      </Row>
+    </Box>
   );
 };
 

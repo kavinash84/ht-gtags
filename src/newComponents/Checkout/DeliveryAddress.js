@@ -2,18 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
-import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
-import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
-import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
-import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
-import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
-import InputFieldHtV1 from 'hometown-components-dev/lib/InputFieldHtV1';
-import ResponsiveModal from 'newComponents/Modal';
-import LoginModal from 'containers/Login/LoginForm';
-// import Footer from 'components/Footer';
+
+/**
+ * modules / selectors / helpers
+ */
 import { sendDeliveryAddress, resetGuestRegisterFlag } from 'redux/modules/checkout';
 import { loadCoupons } from 'redux/modules/coupon';
 import { load } from 'redux/modules/paymentoptions';
@@ -22,14 +14,36 @@ import * as actionCreators from 'redux/modules/address';
 import { notifSend } from 'redux/modules/notifs';
 import { isBlank } from 'js-utility-functions';
 import { validateAddress } from 'utils/validation';
-import MenuCheckout from './MenuCheckout';
+
+/**
+ * Components
+ */
+import Flex from 'hometown-components-dev/lib/FlexHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import Label from 'hometown-components-dev/lib/LabelHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+
+/**
+ * Page Components
+ */
+import ResponsiveModal from 'newComponents/Modal';
+import LoginModal from 'containers/Login/LoginForm';
 import AddressForm from './AddressForm';
 import OrderSummary from './OrderSummary';
-import PaymentMethods from '../PaymentMethods/';
+import PaymentMethods from '../PaymentMethods';
 
 // import { getNotDelivered } from 'selectors/cart';
 
-const addIcon = require('../../../static/round-add_circle_outline.svg');
+/**
+ * Icons
+ */
+const addIcon = require('../../../static/increase.svg');
 const styles = require('./DeliveryAddress.scss');
 
 const mapStateToProps = ({
@@ -330,7 +344,7 @@ class DeliveryAddress extends Component {
   render() {
     const {
       isLoggedIn,
-      history,
+      // history,
       loading,
       addresses,
       currentaddressindex,
@@ -340,55 +354,64 @@ class DeliveryAddress extends Component {
     } = this.props;
     const { addressform } = this.state;
     return (
-      <BoxHtV1 type="block" width={1}>
-        <MenuCheckout page="delivery" history={history} />
-        <SectionHtV1 display="flex" pb="2rem" mb="1rem" height="auto">
-          <ContainerHtV1 type="container" display="flex" pr="2rem" pl="2rem" width={1}>
-            <BoxHtV1 col="9" mt="0" width="656px">
-              {!isLoggedIn && (
-                <BoxHtV1 col="12" className={styles.isLoggedIn}>
-                  <LabelHtV1 fontSize="1rem" mt="0" mb="0" color="textLight">
-                    Already have an account?
-                  </LabelHtV1>
-                  <ButtonHtV1
-                    btnType="link"
-                    fontFamily="regular"
-                    height="18px"
-                    mt="-5px"
-                    fontSize="1rem"
-                    p="0 0.625rem"
-                    color="#f98d29"
-                    onClick={this.handleLoginModal}
-                    lh="1"
-                  >
-                    Login
-                  </ButtonHtV1>
-                  <ResponsiveModal
-                    classNames={{ modal: 'loginModal' }}
-                    onCloseModal={this.handleLoginModal}
-                    open={this.state.openLogin}
-                  >
-                    <LoginModal />
-                  </ResponsiveModal>
-                </BoxHtV1>
-              )}
-              {isLoggedIn && (
-                <BoxHtV1>
-                  <RowHtV1 display="block" mr="0" ml="0">
-                    <BoxHtV1 col="12">
-                      <LabelHtV1 fontSize="1.125rem" mb="0.875rem">
-                        Select Shipping Address
-                      </LabelHtV1>
-                    </BoxHtV1>
-                  </RowHtV1>
+      <Container my={60} px={0}>
+        <Row>
+          <Col variant="col-8">
+            {/* For logged in */}
+            {!isLoggedIn && (
+              <Box col="12" className={styles.isLoggedIn}>
+                <Label fontSize="1rem" mt="0" mb="0" color="textLight">
+                  Already have an account?
+                </Label>
+                <Button
+                  btnType="link"
+                  fontFamily="regular"
+                  height="18px"
+                  mt="-5px"
+                  fontSize="1rem"
+                  p="0 0.625rem"
+                  color="#f98d29"
+                  onClick={this.handleLoginModal}
+                  lh="1"
+                >
+                  Login
+                </Button>
+                <ResponsiveModal
+                  classNames={{ modal: 'loginModal' }}
+                  onCloseModal={this.handleLoginModal}
+                  open={this.state.openLogin}
+                >
+                  <LoginModal />
+                </ResponsiveModal>
+              </Box>
+            )}
 
-                  <RowHtV1 display="block" mr="0" ml="0">
-                    {addresses.map((item, index) => (
-                      <BoxHtV1 className={styles.addressBlock} col="4" pr="0.625rem" key={item.id_customer_address}>
-                        <ButtonHtV1
-                          className={`${styles.addressBtn} ${index === currentaddressindex ? styles.active : null}`}
-                          onClick={() => this.handleClick(index)}
-                        >
+            {/* For not logged in */}
+            {isLoggedIn && (
+              <Box>
+                <Row display="block" mr="0" ml="0" mb={20}>
+                  <Box col="12">
+                    <Heading variant="heading.medium">Confirm Address</Heading>
+                  </Box>
+                </Row>
+                <Row mx={-10}>
+                  {addresses.map((item, index) => (
+                    <Col variant="col-6" px={10} mb={20} key={item.id_customer_address}>
+                      <Button
+                        variant="link"
+                        textAlign="left"
+                        px={15}
+                        py={15}
+                        height="100%"
+                        lineHeight={1.25}
+                        className={`${index === currentaddressindex ? styles.active : null}`}
+                        onClick={() => this.handleClick(index)}
+                        sx={{
+                          border: 'secondary',
+                          borderRadius: 3
+                        }}
+                      >
+                        <Text>
                           <b>{item.full_name}</b>
                           <br />
                           {item.address1}
@@ -401,84 +424,82 @@ class DeliveryAddress extends Component {
                           <br />
                           {item.state}
                           <br />
-                          <br />
                           {item.gst || ''}
-                          <br />
-                        </ButtonHtV1>
-                      </BoxHtV1>
-                    ))}
+                        </Text>
+                      </Button>
+                    </Col>
+                  ))}
 
-                    <BoxHtV1 col="4" pr="0.625rem">
-                      <ButtonHtV1 className={styles.addAddressBtn} onClick={this.toggleAddAddress}>
-                        <ImageHtV1 src={addIcon} alt="Add another address" />
-                        <TextHtV1 color="rgba(0, 0, 0, 0.6)" ta="center">
-                          {addresses.length > 0 ? 'Add another address' : 'Add Address'}
-                        </TextHtV1>
-                      </ButtonHtV1>
-                    </BoxHtV1>
-                  </RowHtV1>
-                </BoxHtV1>
-              )}
-              <BoxHtV1 col="12" mt="0">
-                <form onSubmit={this.handleSubmit}>
-                  <RowHtV1 display="block" mr="0" ml="0">
-                    {(addressform || !isLoggedIn) && (
-                      <BoxHtV1 col="12" pr="0" mt="1rem">
-                        <LabelHtV1 variant="formHeading">Personal Details</LabelHtV1>
-                        <BoxHtV1
-                          sx={{
-                            mt: '22px',
-                            mb: '18px',
-                            width: '100%',
-                            height: '2px',
-                            borderBottom: '1px solid #878686'
-                          }}
-                        />
-                        <AddressForm formType="shipping" isLoggedIn={isLoggedIn} userEmail={userEmail} />
-                      </BoxHtV1>
-                    )}
-                    <BoxHtV1 col="12" pr="0" mt="1.5rem">
-                      <BoxHtV1 className="checkbox">
-                        <InputFieldHtV1
+                  <Col variant="col-12">
+                    <Button variant="link" onClick={this.toggleAddAddress} display="flex" alignItems="center">
+                      <Image src={addIcon} alt="Add new address" mr={10} />
+                      <Text variant="small">Add new address</Text>
+                    </Button>
+                  </Col>
+                </Row>
+              </Box>
+            )}
+
+            {/* Address Form */}
+            <Box>
+              <form onSubmit={this.handleSubmit}>
+                <Row display="block" mr="0" ml="0">
+                  {(addressform || !isLoggedIn) && (
+                    <Box col="12" pr="0" mt="1rem">
+                      <Label variant="formHeading">Personal Details</Label>
+                      <Box
+                        sx={{
+                          mt: '22px',
+                          mb: '18px',
+                          width: '100%',
+                          height: '2px',
+                          borderBottom: '1px solid #878686'
+                        }}
+                      />
+                      <AddressForm formType="shipping" isLoggedIn={isLoggedIn} userEmail={userEmail} />
+                    </Box>
+                  )}
+                  <Box mt={15} width={1}>
+                    <Flex px={15} py={15} alignItems="center" sx={{ border: 'secondary' }}>
+                      <Box className="checkbox" mr={10}>
+                        <Box
+                          as="input"
                           type="checkbox"
                           id="checkbox"
                           checked={!shippingIsBilling}
                           onChange={this.toggleBillingForm}
                         />
                         {/* eslint-disable */}
-                        <LabelHtV1 htmlFor="checkbox" />
+                        <Label htmlFor="checkbox" />
                         {/* eslint-enable */}
-                      </BoxHtV1>
-                      <LabelHtV1 fontSize="0.875em" mt="0" mb="0" ml="0.625rem" htmlFor="checkbox">
+                      </Box>
+                      <Text fontSize={14} htmlFor="checkbox">
                         Different Billing Address ?
-                      </LabelHtV1>
-                      {!shippingIsBilling && (
-                        <BoxHtV1 col="12" mt="11px">
-                          <AddressForm formType="billing" isLoggedIn={isLoggedIn} userEmail={userEmail} />
-                        </BoxHtV1>
-                      )}
-                    </BoxHtV1>
-                  </RowHtV1>
-                  <RowHtV1 display="block" mr="0" ml="0">
-                    <BoxHtV1 col="5" mt="1.5rem">
-                      <ButtonHtV1
-                        type="submit"
-                        size="block"
-                        btnType="primary"
-                        fontFamily="regular"
-                        height="42px"
-                        mt="0.5rem"
-                        disabled={loading || this.checkParams()}
-                        fontSize="1.125rem"
-                      >
-                        {loading ? 'Loading...' : 'Save and Continue'}
-                      </ButtonHtV1>
-                    </BoxHtV1>
-                  </RowHtV1>
-                </form>
-              </BoxHtV1>
-            </BoxHtV1>
-            <BoxHtV1 col="3" mt="0" pl="0.625rem" ml={59} width="390px" bg="#f5f5f5">
+                      </Text>
+                    </Flex>
+
+                    {/* Billing Address */}
+                    {!shippingIsBilling && (
+                      <Box>
+                        <AddressForm formType="billing" isLoggedIn={isLoggedIn} userEmail={userEmail} />
+                      </Box>
+                    )}
+                  </Box>
+                </Row>
+                <Row justifyContent="flex-end" mt={40}>
+                  <Col>
+                    <Button type="submit" disabled={loading || this.checkParams()}>
+                      {loading ? 'Loading...' : 'Save and Continue'}
+                    </Button>
+                  </Col>
+                </Row>
+              </form>
+            </Box>
+          </Col>
+
+          {/* Order Summary */}
+          <Col variant="col-4">
+            <Box bg="sidebar" px={40} py={30}>
               <OrderSummary
                 itemsTotal={summary.items}
                 setDiscount={summary.combined_set_discount}
@@ -489,13 +510,13 @@ class DeliveryAddress extends Component {
                 itemsCount={summary.items_count}
                 discount={summary.coupon_discount}
                 hidebutton
+                hidecoupon
               />
               <PaymentMethods />
-            </BoxHtV1>
-          </ContainerHtV1>
-        </SectionHtV1>
-        {/* <Footer /> */}
-      </BoxHtV1>
+            </Box>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

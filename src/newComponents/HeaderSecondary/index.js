@@ -7,10 +7,10 @@ import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Container from 'hometown-components-dev/lib/ContainerHtV1';
 
 /* ====== Page Components ====== */
-import HeaderTopSecondary from '../HeaderSecondary';
+import HeaderTopSecondary from './HeaderTopSecondary';
 import TopBar from '../Header/TopBar';
 
-export default class MenuWithLogoOnly extends Component {
+export default class HeaderSecondary extends Component {
   render() {
     return (
       <Fragment>

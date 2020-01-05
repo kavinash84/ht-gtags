@@ -103,95 +103,80 @@ class Coupon extends React.Component {
       couponlistToggle
     } = cart;
     return (
-      <Box>
-        <Heading
-          variant="heading.regular"
-          color="#1c1c1c"
-          pb={10}
-          sx={{
-            borderBottom: 'divider'
-          }}
-        >
-          Order Summary
-        </Heading>
-        <Box className={styles.applyCoupon}>
-          {appliedCoupon ? (
-            <Box py={15}>
-              <Button variant="link" onClick={() => this.removeCoupon(appliedCoupon)}>
-                <Text display="flex" alignItems="center">
-                  <Image src={DiscountSuccessIcon} alt={appliedCoupon} mr={8} />
-                  Applied:{' '}
-                  <Text as="b" pl={4}>
-                    {appliedCoupon}
-                  </Text>
+      <Box className={styles.applyCoupon}>
+        {appliedCoupon ? (
+          <Box py={15}>
+            <Button variant="link" onClick={() => this.removeCoupon(appliedCoupon)}>
+              <Text display="flex" alignItems="center">
+                <Image src={DiscountSuccessIcon} alt={appliedCoupon} mr={8} />
+                Applied:{' '}
+                <Text as="b" pl={4}>
+                  {appliedCoupon}
                 </Text>
-                <Text color="primary" display="flex" alignItems="center" pl={28} pt={5}>
-                  Save <b>Rs. {formatAmount(couponDiscount)}</b>
-                  <Image
-                    src={EditCouponIcon}
-                    display="inline"
-                    float="none"
-                    va="sub"
-                    width="18px"
-                    ml="0.625rem"
-                    alt="Change"
-                  />
-                </Text>
-              </Button>
-            </Box>
-          ) : (
-            <Box pt={20}>
-              <Heading fontSize={14} mb={4} color="primary">
-                Have a Coupon Code?
-              </Heading>
-              <Box>
-                <form onSubmit={this.handleApply}>
-                  <Flex alignItems="center">
-                    <InputField
-                      type="text"
-                      onChange={this.handleChange}
-                      value={this.state.coupon.toUpperCase()}
-                      placeholder="Enter here"
-                      height={36}
-                      width="80%"
-                    />
-                    <Button
-                      disabled={loading || (notifs.coupon && notifs.coupon.length > 0)}
-                      onClick={this.handleApply}
-                    >
-                      Apply
-                    </Button>
-                  </Flex>
-                </form>
-                {notifs.coupon && (
-                  <Notifs namespace="coupon" NotifComponent={props => <LocalInlineNotification {...props} />} />
-                )}
-              </Box>
-            </Box>
-          )}
-          <Box textAlign="right" pb={10}>
-            <Button
-              onClick={this.toggleMoreCoupons}
-              p="0"
-              color="primary"
-              variant="link"
-              sx={{ textDecoration: 'underline' }}
-            >
-              {couponlistToggle ? 'Hide Coupons' : ' View Applicable Coupons'}
+              </Text>
+              <Text color="primary" display="flex" alignItems="center" pl={28} pt={5}>
+                Save <b>Rs. {formatAmount(couponDiscount)}</b>
+                <Image
+                  src={EditCouponIcon}
+                  display="inline"
+                  float="none"
+                  va="sub"
+                  width="18px"
+                  ml="0.625rem"
+                  alt="Change"
+                />
+              </Text>
             </Button>
           </Box>
-          {couponlistToggle && (
-            <CouponList
-              coupons={coupons}
-              appliedCoupon={appliedCoupon}
-              pincode={pincode}
-              sessionId={sessionId}
-              handleClick={this.handleClick}
-              loading={getingcoupon}
-              unapplicablecoupons={unapplicablecoupons}
-            />
-          )}
+        ) : (
+          <Box pt={20}>
+            <Heading fontSize={14} mb={4} color="primary">
+              Have a Coupon Code?
+            </Heading>
+            <Box>
+              <form onSubmit={this.handleApply}>
+                <Flex alignItems="center">
+                  <InputField
+                    type="text"
+                    onChange={this.handleChange}
+                    value={this.state.coupon.toUpperCase()}
+                    placeholder="Enter here"
+                    height={36}
+                    width="80%"
+                  />
+                  <Button disabled={loading || (notifs.coupon && notifs.coupon.length > 0)} onClick={this.handleApply}>
+                    Apply
+                  </Button>
+                </Flex>
+              </form>
+              {notifs.coupon && (
+                <Notifs namespace="coupon" NotifComponent={props => <LocalInlineNotification {...props} />} />
+              )}
+            </Box>
+          </Box>
+        )}
+        <Box textAlign="right" pb={10}>
+          <Button
+            onClick={this.toggleMoreCoupons}
+            p="0"
+            color="primary"
+            variant="link"
+            sx={{ textDecoration: 'underline' }}
+          >
+            {couponlistToggle ? 'Hide Coupons' : ' View Applicable Coupons'}
+          </Button>
         </Box>
+        {couponlistToggle && (
+          <CouponList
+            coupons={coupons}
+            appliedCoupon={appliedCoupon}
+            pincode={pincode}
+            sessionId={sessionId}
+            handleClick={this.handleClick}
+            loading={getingcoupon}
+            unapplicablecoupons={unapplicablecoupons}
+          />
+        )}
       </Box>
     );
   }

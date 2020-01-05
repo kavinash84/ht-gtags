@@ -10,18 +10,22 @@ import { formatAmount } from 'utils/formatters';
  * Components
  */
 import Box from 'hometown-components-dev/lib/BoxHtV1';
-import Row from 'hometown-components-dev/lib/RowHtV1';
-import Flex from 'hometown-components-dev/lib/FlexHtV1';
-import Text from 'hometown-components-dev/lib/TextHtV1';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
+import Flex from 'hometown-components-dev/lib/FlexHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
 import Coupon from './Coupon';
 import AcceptedPaymentOptions from '../AcceptedPaymentOptions';
+import ProductSummaryList from './ProductSummaryList';
 
 /**
  * Icons
  */
 const checkoutIcon = require('../../../static/checkout.svg');
+const editIcon = require('../../../static/edit-round.svg');
 
 const styles = require('./OrderSummary.scss');
 
@@ -40,13 +44,42 @@ const OrderSummary = ({
   outOfStockList,
   discount,
   btnText,
-  hidecoupon
+  hidecoupon,
+  hideProductSummary
 }) => (
   <Row>
+    <Col width={1}>
+      <Box
+        pb={10}
+        sx={{
+          borderBottom: 'divider'
+        }}
+      >
+        <Heading variant="heading.regular" color="#1c1c1c" display="flex" justifyContent="space-between">
+          Order Summary
+          <Image src={editIcon} alt="edit" />
+        </Heading>
+        <Text>Total Items : 3</Text>
+      </Box>
+    </Col>
+    {/* Coupons / List */}
     <Box variant="col-12" mb="1.25rem">
       {!hidecoupon && <Coupon />}
     </Box>
-    <Box variant="col-12">
+    {/* Products */}
+    {!hideProductSummary && (
+      <Box
+        mb={20}
+        sx={{
+          borderBottom: 'divider'
+        }}
+      >
+        <ProductSummaryList />
+        <ProductSummaryList />
+        <ProductSummaryList />
+      </Box>
+    )}
+    <Box variant="col-12" pb={20}>
       <Flex mb={20} justifyContent="space-between">
         <Text>
           Total Price ({itemsCount} item
@@ -90,11 +123,9 @@ const OrderSummary = ({
         (inclusive of all taxes)
       </Text>
     </Box>
-    <Box variant="col-12">
-      <AcceptedPaymentOptions />
-    </Box>
-    <Box variant="col-12">
-      {!hidebutton && (
+    {!hidebutton && <AcceptedPaymentOptions />}
+    {!hidebutton && (
+      <Box variant="col-12" pb={20}>
         <Button
           width={1}
           display="flex"
@@ -108,8 +139,8 @@ const OrderSummary = ({
           <Image src={checkoutIcon} alt="Delete" height="20px" mr="0.625rem" />
           {loadingnextstep || isSubmitted ? 'Please wait...' : btnText}
         </Button>
-      )}
-    </Box>
+      </Box>
+    )}
   </Row>
 );
 
@@ -123,6 +154,7 @@ OrderSummary.defaultProps = {
   discount: 0,
   btnText: 'Place Order',
   hidecoupon: false,
+  hideProductSummary: false,
   setDiscount: 0
 };
 
@@ -141,7 +173,8 @@ OrderSummary.propTypes = {
   disabled: PropTypes.bool,
   discount: PropTypes.number,
   btnText: PropTypes.string,
-  hidecoupon: PropTypes.bool
+  hidecoupon: PropTypes.bool,
+  hideProductSummary: PropTypes.bool
 };
 
 export default OrderSummary;

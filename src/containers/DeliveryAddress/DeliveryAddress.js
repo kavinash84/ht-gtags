@@ -3,10 +3,22 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import Helmet from 'react-helmet';
+
+/**
+ * Components
+ */
+import Body from 'hometown-components-dev/lib/BodyHtV1';
+import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
+
+/**
+ * Page Components
+ */
 import DeliveryAddress from 'newComponents/Checkout/DeliveryAddress';
-import Menu from 'newComponents/MenuWithLogoOnly';
-import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import HeaderSecondary from 'newComponents/HeaderSecondary';
+
+/**
+ * modules / selectors / helpers
+ */
 import { loadMyAddress } from 'redux/modules/myaddress';
 import { getCartList } from 'selectors/cart';
 import { CART_URL } from 'helpers/Constants';
@@ -34,13 +46,14 @@ export default class DeliveryAddressContainer extends Component {
   }
   render() {
     return (
-      <SectionHtV1 p="0rem" mb="0">
+      <Wrapper>
         <Helmet title="Delivery Address" />
-        <BoxHtV1 className="wrapper">
-          <Menu />
+        <Body>
+          {/* HeaderSecondary */}
+          <HeaderSecondary />
           <DeliveryAddress />
-        </BoxHtV1>
-      </SectionHtV1>
+        </Body>
+      </Wrapper>
     );
   }
 }

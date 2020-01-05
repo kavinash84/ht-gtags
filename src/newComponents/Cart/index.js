@@ -296,8 +296,9 @@ const Cart = ({
               outOfStockList={outOfStockList}
               discount={summary.coupon_discount}
               btnText="SECURE CHECKOUT"
+              hideProductSummary
             />
-            <Box py={20}>
+            <Box pb={20}>
               <Heading fontSize={16} mb={5} color="#2c2e3f">
                 Exchange & Return Policy
               </Heading>
