@@ -465,8 +465,11 @@ class DeliveryAddress extends Component {
                   )}
                 </Box>
               </Row>
-              <Row justifyContent="flex-end" mt={40}>
-                <Col>
+              <Row justifyContent="flex-end" mt={20}>
+                <Col textAlign="right">
+                  <Text pb={15} fontSize={14}>
+                    *Required
+                  </Text>
                   <Button type="submit" disabled={loading || this.checkParams()}>
                     {loading ? 'Loading...' : 'Save and Continue'}
                   </Button>

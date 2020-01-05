@@ -79,7 +79,7 @@ const AddressForm = props => {
             value={fullName}
             feedBackError={fullNameFeedBackError}
             feedBackMessage={fullNameFeedBackMessage}
-            variant="personalDetailsField"
+            variant="input"
           />
         </Col>
         {!isLoggedIn && (
@@ -93,7 +93,7 @@ const AddressForm = props => {
               feedBackError={isLoggedIn ? false : emailFeedBackError}
               feedBackMessage={emailFeedBackMessage}
               readOnly={isLoggedIn}
-              variant="personalDetailsField"
+              variant="input"
             />
           </Col>
         )}
@@ -106,7 +106,7 @@ const AddressForm = props => {
             value={phone}
             feedBackError={phoneFeedBackError}
             feedBackMessage={phoneFeedBackMessage}
-            variant="personalDetailsField"
+            variant="input"
           />
         </Col>
       </Row>
@@ -119,12 +119,12 @@ const AddressForm = props => {
             id="add1"
             label="Address line 1*"
             type="textarea"
-            placeholder=""
             onChange={e => onChangeAddress1(formType, e.target.value.replace(/#/g, ''))}
             value={address1}
             feedBackError={addressFeedBackError1}
             feedBackMessage={addressFeedBackMessage1}
-            variant="personalDetailsField"
+            variant="input"
+            height="auto"
           />
         </Col>
         <Col variant="col-6">
@@ -132,12 +132,12 @@ const AddressForm = props => {
             id="add2"
             label="Address line 2"
             type="textarea"
-            placeholder=""
             onChange={e => onChangeAddress2(formType, e.target.value.replace(/#/g, ''))}
             value={address2}
             feedBackError={addressFeedBackError2}
             feedBackMessage={addressFeedBackMessage2}
-            variant="personalDetailsField"
+            variant="input"
+            height="auto"
           />
         </Col>
         {/* <Col variant="col-4" pl="10px">
@@ -150,7 +150,7 @@ const AddressForm = props => {
             value={address3}
             feedBackError={addressFeedBackError3}
             feedBackMessage={addressFeedBackMessage3}
-            variant="personalDetailsField"
+            variant="input"
           />
         </Col> */}
       </Row>
@@ -164,7 +164,7 @@ const AddressForm = props => {
             feedBackError={stateFeedBackError}
             feedBackMessage={stateFeedBackMessage}
             readOnly
-            variant="personalDetailsField"
+            variant="input"
           />
         </Col>
         <Col variant="col-6">
@@ -176,7 +176,7 @@ const AddressForm = props => {
             feedBackError={cityFeedBackError}
             feedBackMessage={cityFeedBackMessage}
             readOnly
-            variant="personalDetailsField"
+            variant="input"
           />
         </Col>
       </Row>
@@ -201,7 +201,7 @@ const AddressForm = props => {
               value={gst}
               feedBackError={gstFeedBackError}
               feedBackMessage={gstFeedBackMessage}
-              variant="personalDetailsField"
+              variant="input"
             />
           </Col>
         )}

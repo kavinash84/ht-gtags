@@ -35,7 +35,7 @@ const Pincode = ({
     feedBackError={feedBackError}
     feedBackMessage={feedBackMessage}
     id={id}
-    variant="personalDetailsField"
+    variant="input"
   />
 );
 
