@@ -296,33 +296,35 @@ export default class Home extends Component {
           </Section>
 
           {/* Share and Inspire */}
-          <Section variant="section.primary">
-            <Container>
-              <LazyLoad height={200} offset={100}>
-                <Carousel title="SHARE AND INSPIRE" data={instafeeds} />
-              </LazyLoad>
-              <Row justifyContent="center" mt={40}>
-                <Button
-                  type="button"
-                  height={56}
-                  px={40}
-                  fontSize={20}
-                  sx={{
-                    textTransform: 'inherit'
-                  }}
-                >
-                  <a
-                    style={{ color: '#fff' }}
-                    target="_blank"
-                    href="https://www.instagram.com/hometownindia/"
-                    rel="noreferrer noopener"
+          {instafeeds && instafeeds.length && (
+            <Section variant="section.primary">
+              <Container>
+                <LazyLoad height={200} offset={100}>
+                  <Carousel title="SHARE AND INSPIRE" data={instafeeds} />
+                </LazyLoad>
+                <Row justifyContent="center" mt={40}>
+                  <Button
+                    type="button"
+                    height={56}
+                    px={40}
+                    fontSize={20}
+                    sx={{
+                      textTransform: 'inherit'
+                    }}
                   >
-                    @HomeTownIndia
-                  </a>
-                </Button>
-              </Row>
-            </Container>
-          </Section>
+                    <a
+                      style={{ color: '#fff' }}
+                      target="_blank"
+                      href="https://www.instagram.com/hometownindia/"
+                      rel="noreferrer noopener"
+                    >
+                      @HomeTownIndia
+                    </a>
+                  </Button>
+                </Row>
+              </Container>
+            </Section>
+          )}
 
           {/* Footer */}
           <Footer />
