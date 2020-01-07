@@ -4,11 +4,21 @@ import { Link } from 'react-router-dom';
 import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
 import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
 
-const CategoryItem = ({ image, url }) => (
-  <BoxHtV1 variant="section.catSliderItem">
-    <Link to={url || '/'}>{image && <ImageHtV1 src={image} alt="" />}</Link>
-  </BoxHtV1>
-);
+const CategoryItem = ({ image, url }) => {
+  if (url && image) {
+    return (
+      <BoxHtV1 variant="section.catSliderItem">
+        <Link to={url}>{image && <ImageHtV1 src={image} alt="" />}</Link>
+      </BoxHtV1>
+    );
+  } else if (image) {
+    return (
+      <BoxHtV1 variant="section.catSliderItem">
+        <ImageHtV1 src={image} alt="" />
+      </BoxHtV1>
+    );
+  }
+};
 
 CategoryItem.defaultProps = {
   image: '',

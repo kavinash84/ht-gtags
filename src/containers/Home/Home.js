@@ -39,37 +39,6 @@ const designBuildLogo = require('../../static/designBuildLogo.png');
 
 // const OFFER_ID = 5;
 
-const shareInspireData = [
-  {
-    image_url: 'https://www.hometown.in/media/cms/hometownnew/compressed/1-min-furniture-compressed.jpg',
-    url_key: '/furniture'
-  },
-  {
-    image_url: 'https://www.hometown.in/media/cms/hometownnew/compressed/1-min-furniture-compressed.jpg',
-    url_key: '/furniture'
-  },
-  {
-    image_url: 'https://www.hometown.in/media/cms/hometownnew/compressed/1-min-furniture-compressed.jpg',
-    url_key: '/furniture'
-  },
-  {
-    image_url: 'https://www.hometown.in/media/cms/hometownnew/compressed/1-min-furniture-compressed.jpg',
-    url_key: '/furniture'
-  },
-  {
-    image_url: 'https://www.hometown.in/media/cms/hometownnew/compressed/1-min-furniture-compressed.jpg',
-    url_key: '/furniture'
-  },
-  {
-    image_url: 'https://www.hometown.in/media/cms/hometownnew/compressed/1-min-furniture-compressed.jpg',
-    url_key: '/furniture'
-  },
-  {
-    image_url: 'https://www.hometown.in/media/cms/hometownnew/compressed/1-min-furniture-compressed.jpg',
-    url_key: '/furniture'
-  }
-];
-
 const customDropdownStyles = {
   container: provided => ({
     ...provided,
@@ -95,20 +64,23 @@ const customDropdownStyles = {
 };
 
 @connect(({
- homepage: {
- categories, banners, products, hashtags, offers, recentlyviewed
-}, stores, userLogin
-}) => ({
-  banners: banners.data,
-  homepageCategories: categories.data,
-  homepageProducts: products.data,
-  cities: getCities(stores),
-  hashtags: hashtags.data,
-  offerStrip: getOfferStripData(offers),
-  middleBanner: getMiddleBannerData(offers),
-  recentlyviewed: recentlyviewed.data,
-  isLoggedIn: userLogin.isLoggedIn
-}))
+    homepage: {
+ categories, banners, products, hashtags, offers, recentlyviewed, instafeeds
+},
+    stores,
+    userLogin
+  }) => ({
+    instafeeds: instafeeds.data,
+    banners: banners.data,
+    homepageCategories: categories.data,
+    homepageProducts: products.data,
+    cities: getCities(stores),
+    hashtags: hashtags.data,
+    offerStrip: getOfferStripData(offers),
+    middleBanner: getMiddleBannerData(offers),
+    recentlyviewed: recentlyviewed.data,
+    isLoggedIn: userLogin.isLoggedIn
+  }))
 export default class Home extends Component {
   state = {
     showRibbon: true,
@@ -164,7 +136,7 @@ export default class Home extends Component {
 
   render() {
     const {
- banners, middleBanner, homepageCategories, cities
+ instafeeds, banners, middleBanner, homepageCategories, cities
 } = this.props;
     const citiesList = cities.map(item => ({ value: item, label: item }));
     const { citySelectError, cityErrorMessage } = this.state;
@@ -327,7 +299,7 @@ export default class Home extends Component {
           <Section variant="section.primary">
             <Container>
               <LazyLoad height={200} offset={100}>
-                <Carousel title="SHARE AND INSPIRE" data={shareInspireData} />
+                <Carousel title="SHARE AND INSPIRE" data={instafeeds} />
               </LazyLoad>
               <Row justifyContent="center" mt={40}>
                 <Button
@@ -356,6 +328,7 @@ export default class Home extends Component {
 Home.defaultProps = {
   isLoggedIn: false,
   banners: [],
+  instafeeds: [],
   homepageCategories: [],
   cities: [],
   middleBanner: {}
@@ -364,6 +337,7 @@ Home.defaultProps = {
 Home.propTypes = {
   isLoggedIn: PropTypes.bool,
   banners: PropTypes.array,
+  instafeeds: PropTypes.array,
   homepageCategories: PropTypes.array,
   cities: PropTypes.array,
   history: PropTypes.object.isRequired,

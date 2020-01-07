@@ -20,7 +20,7 @@ export default class Carousel extends Component {
         <SlickSlider settings={adjustSlides(data.length)}>
           {data.map(slide => (
             <div key={slide.id}>
-              <CarouselItem image={slide.image_url} url={slide.url_key} />
+              <CarouselItem image={slide.image_url || slide.media_url || ''} url={slide.url_key || ''} />
             </div>
           ))}
         </SlickSlider>

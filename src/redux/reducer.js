@@ -57,7 +57,8 @@ export default function createReducers(asyncReducers) {
       products: homepage,
       offers: homepage,
       footer: homepage,
-      recentlyviewed: homepage
+      recentlyviewed: homepage,
+      instafeeds: homepage
     }),
     category,
     stores,

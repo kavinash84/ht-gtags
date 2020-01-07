@@ -1,7 +1,13 @@
 import { provideHooks } from 'redial';
 import { wrapDispatch } from 'multireducer';
 import HomeTownLoader from 'containers/Loader';
-import { loadTopSelling, loadOffers, loadRecentlyViewed, isLoaded as isSectionLoaded } from 'redux/modules/homepage';
+import {
+  loadInstafeeds,
+  loadTopSelling,
+  loadOffers,
+  loadRecentlyViewed,
+  isLoaded as isSectionLoaded
+} from 'redux/modules/homepage';
 import { loadStores, isLoaded as isStoresLoaded } from 'redux/modules/stores';
 
 const hooks = {
@@ -17,6 +23,9 @@ const hooks = {
     }
     if (!isSectionLoaded(getState(), 'offers')) {
       wrapDispatch(dispatch, 'offers')(loadOffers()).catch(error => console.log(error));
+    }
+    if (!isSectionLoaded(getState(), 'instafeeds')) {
+      wrapDispatch(dispatch, 'instafeeds')(loadInstafeeds()).catch(error => console.log(error));
     }
     if (!loggingOut) {
       wrapDispatch(dispatch, 'recentlyviewed')(loadRecentlyViewed()).catch(error => console.log(error));
