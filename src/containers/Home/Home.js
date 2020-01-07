@@ -311,7 +311,14 @@ export default class Home extends Component {
                     textTransform: 'inherit'
                   }}
                 >
-                  @HomeTownIndia
+                  <a
+                    style={{ color: '#fff' }}
+                    target="_blank"
+                    href="https://www.instagram.com/hometownindia/"
+                    rel="noreferrer noopener"
+                  >
+                    @HomeTownIndia
+                  </a>
                 </Button>
               </Row>
             </Container>
