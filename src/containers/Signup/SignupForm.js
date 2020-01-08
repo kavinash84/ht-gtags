@@ -159,169 +159,102 @@ export default class SignupFormContainer extends Component {
     const { loading } = this.props;
 
     return (
-      <Box>
-        <Row>
-          <Col variant="col-4">
-            <Box>
-              <Heading
-                color="#1b2125"
-                mt="0"
-                mb="0"
-                fontWeight="700"
-                fontSize="23px"
-                ta="center"
-                fontFamily="HelveticaNeue"
-              >
-                SIGN IN
-              </Heading>
-            </Box>
-            <Box>
-              <hr
-                sx={{
-                  color: '#000000',
-                  backgroundColor: '#000000',
-                  height: 0.5,
-                  borderColor: '#000000',
-                  mx: '0',
-                  width: '100%'
-                }}
+      <Row>
+        <Col variant="col-4">
+          <Box
+            mb={10}
+            sx={{
+              borderBottom: 'divider'
+            }}
+          >
+            <Heading color="#1b2125" pb={20}>
+              SIGN IN
+            </Heading>
+          </Box>
+          <Box pb={20}>
+            <Text fontSize={12}>*Required</Text>
+          </Box>
+          <Box>
+            {!this.state.loginviaotp ? (
+              <LoginForm />
+            ) : (
+              <LoginViaOtp
+                onChangeMobile={this.onChangeMobile}
+                onChangeOtp={this.onChangeOtp}
+                onSubmitMobileNumber={this.onSubmitMobileNumber}
+                onSubmitOtp={this.onSubmitOtp}
               />
+            )}
+          </Box>
+          <Row mx={0}>
+            <Box variant="col-12" textAlign="center" mb={16}>
+              <Label color="textLight" fontSize={15}>
+                Or Continue with
+              </Label>
             </Box>
-            <Box>
-              <Text fontSize="10px"> *Register</Text>
-            </Box>
-            <Row display="block" mr="0" ml="0" pb="0" mt=".4em">
-              <Box mt="0.675rem" variant="col-12" ta="center" px="0">
+            <Box variant="col-6">
+              <Button
+                variant="outline.secondary"
+                onClick={this.toggleLoginForm}
+                height={42}
+                justifyContent="center"
+                alignItems="center"
+                display="flex"
+                width={1}
+                sx={{
+                  border: 'divider',
+                  borderRadius: 3
+                }}
+              >
                 {!this.state.loginviaotp ? (
-                  <LoginForm />
+                  <Image src={OTPIcon} alt="OTP Login" width={18} mr={10} />
                 ) : (
-                  <LoginViaOtp
-                    onChangeMobile={this.onChangeMobile}
-                    onChangeOtp={this.onChangeOtp}
-                    onSubmitMobileNumber={this.onSubmitMobileNumber}
-                    onSubmitOtp={this.onSubmitOtp}
-                  />
+                  <Image src={EmailIcon} alt="OTP Login" width={18} mr={10} />
                 )}
-              </Box>
-            </Row>
-            <Row display="block" mr="0" ml="0" pt="1.25rem">
-              <Box variant="col-12" ta="center" mb="0.625rem" textAlign="center">
-                <Label fontFamily="regular" ta="center" color="color79716c" fontSize="12px" va="middle">
-                  Or continue with
-                </Label>
-              </Box>
-              <Box variant="col-6" ta="center" mb="0" pr="0.625rem">
-                <Button
-                  btnType="custom"
-                  fontFamily="regular"
-                  ta="center"
-                  color="black"
-                  mr="0.3125rem"
-                  p=".375rem .75rem"
-                  fontSize="0.825rem"
-                  va="middle"
-                  size="block"
-                  height="42px"
-                  width="100%"
-                  bg="#FFF"
-                  font="400 0.825rem system-ui"
-                  onClick={this.toggleLoginForm}
-                  sx={{
-                    borderWidth: '1px',
-                    borderStyle: 'solid',
-                    borderColor: '#e6e6e6'
-                  }}
-                >
-                  {!this.state.loginviaotp ? (
-                    <Image display="inline-block" src={OTPIcon} alt="OTP Login" va="sub" width="18px" mr="0.625rem" />
-                  ) : (
-                    <Image display="inline-block" src={EmailIcon} alt="OTP Login" va="sub" width="18px" mr="0.625rem" />
-                  )}
-                  {!this.state.loginviaotp ? 'OTP Login' : 'Email'}
-                </Button>
-              </Box>
-              <Box variant="col-6" ta="center" mb="0" pl="0.625rem">
-                <GoogleLoginBtn loading={loading} />
-              </Box>
-            </Row>
-          </Col>
-          <Col variant="col-8">
-            <Box>
-              <Row>
-                <Col variant="col-12" ta="center">
-                  <Box variant="col-12" ta="center" px="0">
-                    <Heading
-                      color="#1b2125"
-                      mt="0"
-                      mb="0"
-                      fontWeight="700"
-                      fontSize="23px"
-                      ta="center"
-                      fontFamily="HelveticaNeue"
-                    >
-                      CREATE AN ACCOUNT
-                    </Heading>
-                  </Box>
-                  <Box variant="col-12" ta="center" px="0">
-                    <hr
-                      sx={{
-                        color: '#000000',
-                        backgroundColor: '#000000',
-                        height: 0.5,
-                        borderColor: '#000000',
-                        mx: '0',
-                        width: '100%'
-                      }}
-                    />
-                  </Box>
-                  <Text fontSize="10px"> *Register</Text>
-                </Col>
-              </Row>
-              <Row mt="1em">
-                <Col variant="col-6" ta="center">
-                  <SignUpForm
-                    email={email}
-                    onChangeEmail={this.onChangeEmail}
-                    emailFeedBackError={emailError}
-                    emailFeedBackMessage={emailErrorMessage}
-                    name={name}
-                    onChangeName={this.onChangeName}
-                    nameFeedBackError={nameError}
-                    nameFeedBackMessage={nameErrorMessage}
-                    phone={phone}
-                    onChangePhone={this.onChangePhone}
-                    phoneFeedBackError={phoneError}
-                    phoneFeedBackMessage={phoneErrorMessage}
-                    password={password}
-                    onChangePassword={this.onChangePassword}
-                    passwordFeedBackError={passwordError}
-                    passwordFeedBackMessage={passwordErrorMessage}
-                    onSubmitSignup={this.onSubmitSignup}
-                    loading={loading}
-                    loginUrl={LOGIN_URL}
-                  />
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  {/* <Box>
-                    <Label>
-                      <Checkbox
-                        id="remember"
-                        name="remember"
-                      />
-                      I have read and agree to <Text>HomeTown Policy.</Text>
-                    </Label>
-                  </Box> */}
-                  <Button px="2.5em" mt="2em">
-                    Register
-                  </Button>
-                </Col>
-              </Row>
+                {!this.state.loginviaotp ? 'OTP Login' : 'Email'}
+              </Button>
             </Box>
-          </Col>
-        </Row>
-      </Box>
+            <Box variant="col-6">
+              <GoogleLoginBtn loading={loading} />
+            </Box>
+          </Row>
+        </Col>
+        <Box variant="col-8" pl={40}>
+          <Box mb={10} sx={{ borderBottom: 'divider' }}>
+            <Heading color="#1b2125" pb={20}>
+              CREATE AN ACCOUNT
+            </Heading>
+          </Box>
+          <Box pb={20}>
+            <Text fontSize={12}>*Required</Text>
+          </Box>
+          <Row mt="1em">
+            <Col variant="col-6">
+              <SignUpForm
+                email={email}
+                onChangeEmail={this.onChangeEmail}
+                emailFeedBackError={emailError}
+                emailFeedBackMessage={emailErrorMessage}
+                name={name}
+                onChangeName={this.onChangeName}
+                nameFeedBackError={nameError}
+                nameFeedBackMessage={nameErrorMessage}
+                phone={phone}
+                onChangePhone={this.onChangePhone}
+                phoneFeedBackError={phoneError}
+                phoneFeedBackMessage={phoneErrorMessage}
+                password={password}
+                onChangePassword={this.onChangePassword}
+                passwordFeedBackError={passwordError}
+                passwordFeedBackMessage={passwordErrorMessage}
+                onSubmitSignup={this.onSubmitSignup}
+                loading={loading}
+                loginUrl={LOGIN_URL}
+              />
+            </Col>
+          </Row>
+        </Box>
+      </Row>
     );
   }
 }

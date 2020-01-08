@@ -1,27 +1,32 @@
 import React, { Component } from 'react';
+
 /* ====== Components ====== */
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
-import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
-import MenuFooter from 'containers/MenuFooter';
+import Body from 'hometown-components-dev/lib/BodyHtV1';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 
 /* ====== Page Components ====== */
+import Footer from 'newComponents/Footer';
+import Header from 'newComponents/Header';
 import SignupFormContainer from './SignupForm';
 
 export default class Signup extends Component {
   render() {
     return (
-      <SectionHtV1 p="0" mb="0">
-        <MenuFooter pageTitle="Signup and get Rs.500 coupon">
-          <div>
-            <ContainerHtV1 pr="0" pl="0">
-              <BoxHtV1 p="3rem 0">
-                <SignupFormContainer />
-              </BoxHtV1>
-            </ContainerHtV1>
-          </div>
-        </MenuFooter>
-      </SectionHtV1>
+      <Wrapper>
+        <Body>
+          {/* Header */}
+          <Header />
+
+          {/* Container */}
+          <Container mt={80}>
+            <SignupFormContainer />
+          </Container>
+
+          {/* Footer */}
+          <Footer />
+        </Body>
+      </Wrapper>
     );
   }
 }
