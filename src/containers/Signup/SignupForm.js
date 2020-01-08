@@ -15,22 +15,21 @@ import { LOGIN_URL } from 'helpers/Constants';
 import { validateMobile, validatePassword, validateEmail, isEmpty, checkSpecialChar } from 'utils/validation';
 
 /* ====== Components ====== */
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import ColHtV1 from 'hometown-components-dev/lib/ColHtV1';
-import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
-import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
-import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
-import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
-import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
-// import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
-import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
-
-import SignUpFormHtV1 from 'hometown-components-dev/lib/FormsHtV1/SignUpFormHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
+import Label from 'hometown-components-dev/lib/LabelHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+// import ImageShimmer from 'hometown-components-dev/lib/ImageShimmerHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
 
 /* ====== Page Components ====== */
-import LoginForm from 'newComponents/LoginForms/LoginForm';
 import GoogleLoginBtn from 'newComponents/LoginForms/GoogleLogin';
+import LoginForm from 'newComponents/LoginForms';
 import LoginViaOtp from 'newComponents/LoginForms/LoginViaOtp';
+import SignUpForm from 'hometown-components-dev/lib/FormsHtV1/SignUpFormHtV1';
 
 const OTPIcon = require('../../../static/otp.svg');
 const EmailIcon = require('../../../static/email-primary.svg');
@@ -160,11 +159,11 @@ export default class SignupFormContainer extends Component {
     const { loading } = this.props;
 
     return (
-      <BoxHtV1>
-        <RowHtV1>
-          <ColHtV1 variant="col-4">
-            <BoxHtV1>
-              <HeadingHtV1
+      <Box>
+        <Row>
+          <Col variant="col-4">
+            <Box>
+              <Heading
                 color="#1b2125"
                 mt="0"
                 mb="0"
@@ -174,9 +173,9 @@ export default class SignupFormContainer extends Component {
                 fontFamily="HelveticaNeue"
               >
                 SIGN IN
-              </HeadingHtV1>
-            </BoxHtV1>
-            <BoxHtV1>
+              </Heading>
+            </Box>
+            <Box>
               <hr
                 sx={{
                   color: '#000000',
@@ -187,12 +186,12 @@ export default class SignupFormContainer extends Component {
                   width: '100%'
                 }}
               />
-            </BoxHtV1>
-            <BoxHtV1>
-              <TextHtV1 fontSize="10px"> *Register</TextHtV1>
-            </BoxHtV1>
-            <RowHtV1 display="block" mr="0" ml="0" pb="0" mt=".4em">
-              <BoxHtV1 mt="0.675rem" variant="col-12" ta="center" px="0">
+            </Box>
+            <Box>
+              <Text fontSize="10px"> *Register</Text>
+            </Box>
+            <Row display="block" mr="0" ml="0" pb="0" mt=".4em">
+              <Box mt="0.675rem" variant="col-12" ta="center" px="0">
                 {!this.state.loginviaotp ? (
                   <LoginForm />
                 ) : (
@@ -203,16 +202,16 @@ export default class SignupFormContainer extends Component {
                     onSubmitOtp={this.onSubmitOtp}
                   />
                 )}
-              </BoxHtV1>
-            </RowHtV1>
-            <RowHtV1 display="block" mr="0" ml="0" pt="1.25rem">
-              <BoxHtV1 variant="col-12" ta="center" mb="0.625rem" textAlign="center">
-                <LabelHtV1 fontFamily="regular" ta="center" color="color79716c" fontSize="12px" va="middle">
+              </Box>
+            </Row>
+            <Row display="block" mr="0" ml="0" pt="1.25rem">
+              <Box variant="col-12" ta="center" mb="0.625rem" textAlign="center">
+                <Label fontFamily="regular" ta="center" color="color79716c" fontSize="12px" va="middle">
                   Or continue with
-                </LabelHtV1>
-              </BoxHtV1>
-              <BoxHtV1 variant="col-6" ta="center" mb="0" pr="0.625rem">
-                <ButtonHtV1
+                </Label>
+              </Box>
+              <Box variant="col-6" ta="center" mb="0" pr="0.625rem">
+                <Button
                   btnType="custom"
                   fontFamily="regular"
                   ta="center"
@@ -234,38 +233,24 @@ export default class SignupFormContainer extends Component {
                   }}
                 >
                   {!this.state.loginviaotp ? (
-                    <ImageHtV1
-                      display="inline-block"
-                      src={OTPIcon}
-                      alt="OTP Login"
-                      va="sub"
-                      width="18px"
-                      mr="0.625rem"
-                    />
+                    <Image display="inline-block" src={OTPIcon} alt="OTP Login" va="sub" width="18px" mr="0.625rem" />
                   ) : (
-                    <ImageHtV1
-                      display="inline-block"
-                      src={EmailIcon}
-                      alt="OTP Login"
-                      va="sub"
-                      width="18px"
-                      mr="0.625rem"
-                    />
+                    <Image display="inline-block" src={EmailIcon} alt="OTP Login" va="sub" width="18px" mr="0.625rem" />
                   )}
                   {!this.state.loginviaotp ? 'OTP Login' : 'Email'}
-                </ButtonHtV1>
-              </BoxHtV1>
-              <BoxHtV1 variant="col-6" ta="center" mb="0" pl="0.625rem">
+                </Button>
+              </Box>
+              <Box variant="col-6" ta="center" mb="0" pl="0.625rem">
                 <GoogleLoginBtn loading={loading} />
-              </BoxHtV1>
-            </RowHtV1>
-          </ColHtV1>
-          <ColHtV1 variant="col-8">
-            <BoxHtV1>
-              <RowHtV1>
-                <ColHtV1 variant="col-12" ta="center">
-                  <BoxHtV1 variant="col-12" ta="center" px="0">
-                    <HeadingHtV1
+              </Box>
+            </Row>
+          </Col>
+          <Col variant="col-8">
+            <Box>
+              <Row>
+                <Col variant="col-12" ta="center">
+                  <Box variant="col-12" ta="center" px="0">
+                    <Heading
                       color="#1b2125"
                       mt="0"
                       mb="0"
@@ -275,9 +260,9 @@ export default class SignupFormContainer extends Component {
                       fontFamily="HelveticaNeue"
                     >
                       CREATE AN ACCOUNT
-                    </HeadingHtV1>
-                  </BoxHtV1>
-                  <BoxHtV1 variant="col-12" ta="center" px="0">
+                    </Heading>
+                  </Box>
+                  <Box variant="col-12" ta="center" px="0">
                     <hr
                       sx={{
                         color: '#000000',
@@ -288,13 +273,13 @@ export default class SignupFormContainer extends Component {
                         width: '100%'
                       }}
                     />
-                  </BoxHtV1>
-                  <TextHtV1 fontSize="10px"> *Register</TextHtV1>
-                </ColHtV1>
-              </RowHtV1>
-              <RowHtV1 mt="1em">
-                <ColHtV1 variant="col-6" ta="center">
-                  <SignUpFormHtV1
+                  </Box>
+                  <Text fontSize="10px"> *Register</Text>
+                </Col>
+              </Row>
+              <Row mt="1em">
+                <Col variant="col-6" ta="center">
+                  <SignUpForm
                     email={email}
                     onChangeEmail={this.onChangeEmail}
                     emailFeedBackError={emailError}
@@ -315,28 +300,28 @@ export default class SignupFormContainer extends Component {
                     loading={loading}
                     loginUrl={LOGIN_URL}
                   />
-                </ColHtV1>
-              </RowHtV1>
-              <RowHtV1>
-                <ColHtV1>
-                  {/* <BoxHtV1>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  {/* <Box>
                     <Label>
                       <Checkbox
                         id="remember"
                         name="remember"
                       />
-                      I have read and agree to <TextHtV1>HomeTown Policy.</TextHtV1>
+                      I have read and agree to <Text>HomeTown Policy.</Text>
                     </Label>
-                  </BoxHtV1> */}
-                  <ButtonHtV1 px="2.5em" mt="2em">
+                  </Box> */}
+                  <Button px="2.5em" mt="2em">
                     Register
-                  </ButtonHtV1>
-                </ColHtV1>
-              </RowHtV1>
-            </BoxHtV1>
-          </ColHtV1>
-        </RowHtV1>
-      </BoxHtV1>
+                  </Button>
+                </Col>
+              </Row>
+            </Box>
+          </Col>
+        </Row>
+      </Box>
     );
   }
 }

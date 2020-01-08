@@ -88,15 +88,28 @@ class GoogleLogin extends Component {
 
     return (
       <Box>
-        <GoogleLoginBtn
-          className="socialBtn"
+        <Box
+          as={GoogleLoginBtn}
           clientId="663311547699-jersj1hfflbl8gfukgsuvug8u1gc88nm.apps.googleusercontent.com"
           onSuccess={onSuccess(loginViaLogin, session)}
           onFailure={onError}
+          variant="outline.secondary"
+          height={42}
+          width={1}
+          alignItems="center"
+          display="flex"
+          justifyContent="center"
+          color="#7a7d7d"
+          fontSize={14}
+          fontWeight={500}
+          sx={{
+            border: 'divider',
+            borderRadius: 3
+          }}
         >
-          <Image display="inline-block" src={GoogleIcon} alt="Google" va="sub" width="18px" mr="10px" />
+          <Image src={GoogleIcon} alt="Google" width={18} mr={10} />
           GOOGLE
-        </GoogleLoginBtn>
+        </Box>
         <ResponsiveModal classNames={{ modal: 'updateProfileModal' }} onCloseModal={this.handleModal} open={open}>
           <Row>
             <Box variant="col-12">

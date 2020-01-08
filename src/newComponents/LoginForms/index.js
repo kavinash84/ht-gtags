@@ -1,20 +1,35 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import LoginFormHtV1 from 'hometown-components-dev/lib/FormsHtV1/LoginFormHtV1';
-import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
-import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
-import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
-import FormInputHtV1 from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
+
+/**
+ * Components
+ */
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
+
+/**
+ * Page Components
+ */
+import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
+import LoginFormWrapper from 'hometown-components-dev/lib/FormsHtV1/LoginFormHtV1';
 import ResponsiveModal from 'newComponents/Modal';
+
+/**
+ * utility / modules / helper / validation
+ */
 import { validateEmail, isBlank } from 'js-utility-functions';
 import { validateMobile } from 'utils/validation';
 import { allowNChar, allowTypeOf } from 'utils/helper';
 import { login, clearLoginState } from 'redux/modules/login';
 import { SIGNUP_URL, FORGOT_PASSWORD_URL } from 'helpers/Constants';
 
+/**
+ * Icons
+ */
 const LoaderIcon = require('../../../static/refresh-black.svg');
 
 @connect(state => ({
@@ -125,8 +140,8 @@ export default class LoginForm extends Component {
 } = this.props;
     const open = askContact && loginType && loginType === 'hometown';
     return (
-      <BoxHtV1>
-        <LoginFormHtV1
+      <Box>
+        <LoginFormWrapper
           email={email}
           onChangeEmail={this.onChangeEmail}
           emailFeedBackError={emailError}
@@ -141,9 +156,9 @@ export default class LoginForm extends Component {
           forgotUrl={FORGOT_PASSWORD_URL}
         />
         <ResponsiveModal classNames={{ modal: 'updateProfileModal' }} onCloseModal={this.handleModal} open={open}>
-          <RowHtV1 display="block" mr="0" ml="0" mb="10px">
-            <BoxHtV1 textAlign="center">
-              <HeadingHtV1
+          <Row display="block" mr="0" ml="0" mb="10px">
+            <Box textAlign="center">
+              <Heading
                 color="color676767"
                 mt="0"
                 mb="0"
@@ -153,14 +168,14 @@ export default class LoginForm extends Component {
                 fontFamily="light"
               >
                 Update Profile
-              </HeadingHtV1>
-              <TextHtV1 color="color676767" ta="center">
+              </Heading>
+              <Text color="color676767" ta="center">
                 Mobile number is required to login
-              </TextHtV1>
-            </BoxHtV1>
-          </RowHtV1>
-          <BoxHtV1 textAlign="center">
-            <TextHtV1 textAlign="center" fontSize="1.25rem" mb="0.625rem" mt="0" color="rgba(51, 51, 51, 0.85)">
+              </Text>
+            </Box>
+          </Row>
+          <Box textAlign="center">
+            <Text textAlign="center" fontSize="1.25rem" mb="0.625rem" mt="0" color="rgba(51, 51, 51, 0.85)">
               <form
                 onSubmit={this.onSubmitForm}
                 id="custom_form"
@@ -168,7 +183,7 @@ export default class LoginForm extends Component {
                 encType="multipart/form-data"
                 className="bulk-order-form"
               >
-                <FormInputHtV1
+                <FormInput
                   label=""
                   type="text"
                   placeholder=""
@@ -187,16 +202,16 @@ export default class LoginForm extends Component {
                 {loading ? (
                   <span>
                     Please Wait
-                    <ImageHtV1 src={LoaderIcon} display="inline" width="18px" />
+                    <Image src={LoaderIcon} display="inline" width="18px" />
                   </span>
                 ) : (
                   'Update Contact Number'
                 )}
               </button>
-            </TextHtV1>
-          </BoxHtV1>
+            </Text>
+          </Box>
         </ResponsiveModal>
-      </BoxHtV1>
+      </Box>
     );
   }
 }

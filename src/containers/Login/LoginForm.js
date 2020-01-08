@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
+import { Link } from 'react-router-dom';
 
 /* ====== Modules ====== */
 import { login, getOtp, resendOtp } from 'redux/modules/login';
@@ -10,19 +11,20 @@ import { allowNChar, allowTypeOf } from 'utils/helper';
 
 /* ====== Validations ====== */
 import { validateMobile } from 'utils/validation';
+import { SIGNUP_URL } from 'helpers/Constants';
 
 /* ====== Components ====== */
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
-import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
-import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
-import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
-import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
-import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
-// import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Label from 'hometown-components-dev/lib/LabelHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
+// import ImageShimmer from 'hometown-components-dev/lib/ImageShimmerHtV1';
 
 /* ====== Page Components ====== */
-import LoginForm from 'newComponents/LoginForms/LoginForm';
+import LoginForm from 'newComponents/LoginForms';
 import GoogleLoginBtn from 'newComponents/LoginForms/GoogleLogin';
 import LoginViaOtp from 'newComponents/LoginForms/LoginViaOtp';
 
@@ -98,7 +100,6 @@ export default class LoginFormContainer extends Component {
         value[0] === '0' ? 'Mobile Number Must Not Start With 0' : 'Enter 10 Digits Valid Mobile Number'
     });
   };
-
   onChangeOtp = e => {
     const { value } = e.target;
     if (!allowNChar(value, 6) || (!allowTypeOf(value, 'number') && value.length > 0)) {
@@ -166,155 +167,96 @@ export default class LoginFormContainer extends Component {
 } = this.props;
 
     return (
-      <BoxHtV1>
-        <RowHtV1 display="block" mr="0" ml="0">
-          <BoxHtV1 variant="col-4" p="1.5rem 2.5rem 0.5rem 2.5rem">
-            <RowHtV1 display="block" mt="rem" mr="0" ml="0">
-              <BoxHtV1 variant="col-12" ta="center" px="0">
-                <HeadingHtV1
-                  color="#1b2125"
-                  mt="0"
-                  mb="0"
-                  fontWeight="700"
-                  fontSize="23px"
-                  ta="center"
-                  fontFamily="HelveticaNeue"
-                >
-                  SIGN IN
-                </HeadingHtV1>
-              </BoxHtV1>
-              <BoxHtV1 variant="col-12" ta="center" px="0">
-                <hr
-                  sx={{
-                    color: '#000000',
-                    backgroundColor: '#000000',
-                    height: 0.5,
-                    borderColor: '#000000',
-                    mx: '0',
-                    width: '100%'
-                  }}
-                />
-              </BoxHtV1>
-              <BoxHtV1 variant="col-12" ta="center" px="0">
-                <TextHtV1 color="textPrimary" ta="center" fontSize="10px">
-                  *Required
-                </TextHtV1>
-              </BoxHtV1>
-            </RowHtV1>
-            <RowHtV1 display="block" mr="0" ml="0" pb="0">
-              <BoxHtV1 mt="0.675rem" variant="col-12" ta="center">
+      <Row>
+        <Box variant="col-4">
+          <Box
+            mb={10}
+            sx={{
+              borderBottom: 'divider'
+            }}
+          >
+            <Heading color="#1b2125" pb={20}>
+              SIGN IN
+            </Heading>
+          </Box>
+          <Box pb={20}>
+            <Text fontSize={12}>*Required</Text>
+          </Box>
+          <Box>
+            {!this.state.loginviaotp ? (
+              <LoginForm askContact={askContact} loginType={loginType} loading={loading} />
+            ) : (
+              <LoginViaOtp
+                onChangeMobile={this.onChangeMobile}
+                onChangeOtp={this.onChangeOtp}
+                onSubmitMobileNumber={this.onSubmitMobileNumber}
+                onSubmitOtp={this.onSubmitOtp}
+                otp={otp}
+                otpError={otpError}
+                otpErrorMessage={otpErrorMessage}
+                mobile={mobile}
+                mobileError={mobileError}
+                mobileErrorMessage={mobileErrorMessage}
+                mobilesubmitted={mobilesubmitted}
+                loaded={loaded}
+                loading={loading}
+                loggingIn={loggingIn}
+                handleResend={this.handleResend}
+                resend={resend}
+              />
+            )}
+          </Box>
+          <Row mx={0}>
+            <Box variant="col-12" textAlign="center" mb={16}>
+              <Label color="textLight" fontSize={15}>
+                Or Continue with
+              </Label>
+            </Box>
+            <Box variant="col-6">
+              <Button
+                variant="outline.secondary"
+                onClick={this.toggleLoginForm}
+                height={42}
+                justifyContent="center"
+                alignItems="center"
+                display="flex"
+                width={1}
+                sx={{
+                  border: 'divider',
+                  borderRadius: 3
+                }}
+              >
                 {!this.state.loginviaotp ? (
-                  <LoginForm askContact={askContact} loginType={loginType} loading={loading} />
+                  <Image src={OTPIcon} alt="OTP Login" width={18} mr={10} />
                 ) : (
-                  <LoginViaOtp
-                    onChangeMobile={this.onChangeMobile}
-                    onChangeOtp={this.onChangeOtp}
-                    onSubmitMobileNumber={this.onSubmitMobileNumber}
-                    onSubmitOtp={this.onSubmitOtp}
-                    otp={otp}
-                    otpError={otpError}
-                    otpErrorMessage={otpErrorMessage}
-                    mobile={mobile}
-                    mobileError={mobileError}
-                    mobileErrorMessage={mobileErrorMessage}
-                    mobilesubmitted={mobilesubmitted}
-                    loaded={loaded}
-                    loading={loading}
-                    loggingIn={loggingIn}
-                    handleResend={this.handleResend}
-                    resend={resend}
-                  />
+                  <Image src={EmailIcon} alt="OTP Login" width={18} mr={10} />
                 )}
-              </BoxHtV1>
-            </RowHtV1>
-            <RowHtV1 display="block" mr="0" ml="0" pt="1.25rem">
-              <BoxHtV1 variant="col-12" ta="center" mb="0.625rem" textAlign="center">
-                <LabelHtV1 fontFamily="regular" ta="center" color="color79716c" fontSize="12px" va="middle">
-                  Or continue with
-                </LabelHtV1>
-              </BoxHtV1>
-              <BoxHtV1 variant="col-6" ta="center" mb="0" pr="0.625rem">
-                <ButtonHtV1
-                  btnType="custom"
-                  fontFamily="regular"
-                  ta="center"
-                  color="black"
-                  mr="0.3125rem"
-                  p=".375rem .75rem"
-                  fontSize="0.825rem"
-                  va="middle"
-                  size="block"
-                  height="42px"
-                  width="100%"
-                  bg="#FFF"
-                  font="400 0.825rem system-ui"
-                  onClick={this.toggleLoginForm}
-                  sx={{
-                    borderWidth: '1px',
-                    borderStyle: 'solid',
-                    borderColor: '#e6e6e6'
-                  }}
-                >
-                  {!this.state.loginviaotp ? (
-                    <ImageHtV1 display="inline-block" src={OTPIcon} alt="OTP Login" va="sub" width="18px" mr="10px" />
-                  ) : (
-                    <ImageHtV1 display="inline-block" src={EmailIcon} alt="OTP Login" va="sub" width="18px" mr="10px" />
-                  )}
-                  {!this.state.loginviaotp ? 'OTP Login' : 'Email'}
-                </ButtonHtV1>
-              </BoxHtV1>
-              <BoxHtV1 variant="col-6" ta="center" mb="0" pl="0.625rem">
-                <GoogleLoginBtn askContact={askContact} loginType={loginType} loading={loading} />
-              </BoxHtV1>
-            </RowHtV1>
-
-            {/* <RowHtV1 display="block" mr="0" ml="0" pt="0.3125rem">
-              <BoxHtV1 variant="col-12">
-                <LabelHtV1 fontFamily="medium" color="error" display="block" ta="center">
-                  Message
-                </LabelHtV1>
-              </BoxHtV1>
-            </RowHtV1> */}
-          </BoxHtV1>
-          <BoxHtV1 variant="col-8" p="1.5rem 2.5rem 0.5rem 2.5rem">
-            <RowHtV1 display="block" mt="rem" mr="0" ml="0">
-              <BoxHtV1 variant="col-12" ta="center" px="0">
-                <HeadingHtV1
-                  color="#1b2125"
-                  mt="0"
-                  mb="0"
-                  fontWeight="700"
-                  fontSize="23px"
-                  ta="center"
-                  fontFamily="HelveticaNeue"
-                >
-                  CREATE AN ACCOUNT
-                </HeadingHtV1>
-              </BoxHtV1>
-              <BoxHtV1 variant="col-12" ta="center" px="0">
-                <hr
-                  sx={{
-                    color: '#000000',
-                    backgroundColor: '#000000',
-                    height: 0.5,
-                    borderColor: '#000000',
-                    mx: '0',
-                    width: '100%'
-                  }}
-                />
-              </BoxHtV1>
-              <BoxHtV1 variant="col-12" ta="center" px="0">
-                <TextHtV1 color="textPrimary" ta="center" mt="1em" fontSize="12px" fontWeight="600">
-                  If you don't yet have HomeTown account, please register.
-                </TextHtV1>
-              </BoxHtV1>
-              <ButtonHtV1 px="2.5em" mt="2em">
-                Register
-              </ButtonHtV1>
-            </RowHtV1>
-          </BoxHtV1>
-        </RowHtV1>
-      </BoxHtV1>
+                {!this.state.loginviaotp ? 'OTP Login' : 'Email'}
+              </Button>
+            </Box>
+            <Box variant="col-6">
+              <GoogleLoginBtn askContact={askContact} loginType={loginType} loading={loading} />
+            </Box>
+          </Row>
+        </Box>
+        <Box variant="col-8" pl={40}>
+          <Box
+            width={1}
+            mb={40}
+            sx={{
+              borderBottom: 'divider'
+            }}
+          >
+            <Heading color="#1b2125" pb={20}>
+              CREATE AN ACCOUNT
+            </Heading>
+          </Box>
+          <Heading fontSize={14}>If you don't yet have HomeTown account, please register.</Heading>
+          <Button px={80} mt={30} height={42} lineHeight={1.7} fontWeight={600} as={Link} to={SIGNUP_URL}>
+            Register
+          </Button>
+        </Box>
+      </Row>
     );
   }
 }
