@@ -2,18 +2,22 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import Helmet from 'react-helmet';
-import Empty from 'hometown-components-dev/lib/Empty';
-import Img from 'hometown-components-dev/lib/Img';
-import Section from 'hometown-components-dev/lib/Section';
-import ListingContainer from 'components/Listing';
-import ListingShimmer from 'components/Listing/ListingShimmer';
 import { connect } from 'react-redux';
-import Menu from 'containers/MenuNew/index';
-import Footer from 'components/Footer';
 import { getSKUList } from 'selectors/wishlist';
 import { setReloadListing } from 'redux/modules/products';
-import Pagination from 'components/Pagination';
-import SeoContent from 'components/SeoContent';
+
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+// import Img from 'hometown-components-dev/lib/ImageHtV1';
+// import Section from 'hometown-components-dev/lib/SectionHtV1';
+import ListingContainer from 'newComponents/Listing';
+// import ListingShimmer from 'newComponents/Listing/ListingShimmer';
+import Footer from 'newComponents/Footer';
+import Header from 'newComponents/Header';
+// import Pagination from 'newComponents/Pagination';
+// import SeoContent from 'newComponents/SeoContent';
+import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
+import Body from 'hometown-components-dev/lib/BodyHtV1';
+
 import {
   getProducts,
   getCategoryName,
@@ -26,7 +30,7 @@ import {
 import { SITE_URL } from 'helpers/Constants';
 import CANONICALS from 'data/canonical';
 
-const SearchEmptyIcon = require('../../../static/search-empty.png');
+// const SearchEmptyIcon = require('../../../static/search-empty.png');
 
 @connect(state => ({
   loading: state.products.loading,
@@ -56,7 +60,7 @@ const SearchEmptyIcon = require('../../../static/search-empty.png');
 @withRouter
 export default class Listing extends Component {
   static propTypes = {
-    loading: PropTypes.bool,
+    // loading: PropTypes.bool,
     loaded: PropTypes.bool,
     shimmer: PropTypes.bool,
     products: PropTypes.array,
@@ -84,7 +88,7 @@ export default class Listing extends Component {
     store: PropTypes.object.isRequired
   };
   static defaultProps = {
-    loading: false,
+    // loading: false,
     loaded: true,
     shimmer: false,
     products: [],
@@ -119,7 +123,7 @@ export default class Listing extends Component {
   }
   render() {
     const {
-      loading,
+      // loading,
       loaded,
       shimmer,
       products,
@@ -154,7 +158,7 @@ export default class Listing extends Component {
     const NextPage = !page ? '?page=2' : `?page=${Number(page) + 1}`;
     /* eslint-disable react/no-danger */
     return (
-      <Section p="0rem" mb="0">
+      <Wrapper>
         <Helmet>
           <title>{seoInfo && seoInfo.page_title}</title>
           <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
@@ -166,24 +170,24 @@ export default class Listing extends Component {
           {Number(page) === 2 && <link rel="prev" href={`${SITE_URL}${pathname}`} />}
           {productCount / 32 / Number(page) > 1 && <link rel="next" href={`${SITE_URL}${pathname}${NextPage}`} />}
         </Helmet>
-        <div className="wrapper">
-          <Menu />
-          {!loading && products.length === 0 && (
+        <Body>
+          <Header />
+          {/* {!loading && products.length === 0 && (
             <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
-              <Empty
+              <Box
                 title="Sorry! No Results Found"
                 subTitle="Please check the Spelling or by a different search"
                 url="/"
                 bg="#fafafa"
               >
                 <Img src={SearchEmptyIcon} width="initial" m="auto" alt="Sorry no results found" />
-              </Empty>
+              </Box>
             </Section>
-          )}
-          {!loaded && loading && !products.length && <ListingShimmer />}
+          )} */}
+          {/* {!loaded && loading && !products.length && <ListingShimmer />} */}
 
           {loaded && products.length && !shimmer ? (
-            <div>
+            <Box>
               <ListingContainer
                 wishList={wishListedSKUs}
                 wishListData={wishListData}
@@ -204,25 +208,27 @@ export default class Listing extends Component {
                 categoryBar={categoryBar}
                 selectedPincode={selectedPincode}
               />
-              <Pagination
+              {/* <Pagination
                 loading={loading}
                 loaded={loaded}
                 history={history}
                 categoryquery={categoryquery}
                 pageRangeDisplayed={9}
-              />
-            </div>
+              /> */}
+            </Box>
           ) : (
-            shimmer && <ListingShimmer />
+            {
+              /* shimmer && () */
+            }
           )}
-        </div>
-        {seoInfo && seoInfo.seo_text && (
+          {/* {seoInfo && seoInfo.seo_text && (
           <SeoContent>
-            <div dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }} />
+            <Box dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }} />
           </SeoContent>
-        )}
-        <Footer />
-      </Section>
+        )} */}
+          <Footer />
+        </Body>
+      </Wrapper>
     );
   }
 }
