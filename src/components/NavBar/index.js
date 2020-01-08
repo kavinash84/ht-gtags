@@ -119,6 +119,18 @@ class NavBar extends Component {
                       </a>
                     </Label>
                   </li>
+                  <li>
+                    <Label htmlFor="checkbox" fontSize="0.75em" className="dropdownValue">
+                      <a
+                        href="https://blog.hometown.in"
+                        title="Hometown Blog"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Blog
+                      </a>
+                    </Label>
+                  </li>
                 </ul>
               </div>
             </div>
