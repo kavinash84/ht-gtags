@@ -170,6 +170,7 @@ export default class LoginFormContainer extends Component {
       <Row>
         <Box variant="col-4">
           <Box
+            width={1}
             mb={10}
             sx={{
               borderBottom: 'divider'
@@ -214,8 +215,8 @@ export default class LoginFormContainer extends Component {
             </Box>
             <Box variant="col-6">
               <Button
-                variant="outline.secondary"
                 onClick={this.toggleLoginForm}
+                variant="outline.secondary"
                 height={42}
                 justifyContent="center"
                 alignItems="center"
@@ -242,7 +243,7 @@ export default class LoginFormContainer extends Component {
         <Box variant="col-8" pl={40}>
           <Box
             width={1}
-            mb={40}
+            mb={20}
             sx={{
               borderBottom: 'divider'
             }}
