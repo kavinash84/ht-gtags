@@ -169,15 +169,9 @@ export default class LoginFormContainer extends Component {
     return (
       <Row>
         <Box variant="col-4">
-          <Box
-            width={1}
-            mb={10}
-            sx={{
-              borderBottom: 'divider'
-            }}
-          >
+          <Box width={1} mb={10} sx={{ borderBottom: 'divider' }}>
             <Heading color="#1b2125" pb={20}>
-              SIGN IN
+              {!this.state.loginviaotp ? 'SIGN IN' : 'LOGIN VIA OTP'}
             </Heading>
           </Box>
           <Box pb={20}>
@@ -207,7 +201,7 @@ export default class LoginFormContainer extends Component {
               />
             )}
           </Box>
-          <Row mx={0}>
+          <Row mx={0} pt={40}>
             <Box variant="col-12" textAlign="center" mb={16}>
               <Label color="textLight" fontSize={15}>
                 Or Continue with
@@ -230,7 +224,7 @@ export default class LoginFormContainer extends Component {
                 {!this.state.loginviaotp ? (
                   <Image src={OTPIcon} alt="OTP Login" width={18} mr={10} />
                 ) : (
-                  <Image src={EmailIcon} alt="OTP Login" width={18} mr={10} />
+                  <Image src={EmailIcon} alt="Email Login" width={18} mr={10} />
                 )}
                 {!this.state.loginviaotp ? 'OTP Login' : 'Email'}
               </Button>

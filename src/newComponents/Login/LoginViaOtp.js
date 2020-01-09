@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 /* ====== Components ====== */
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
-import FormInputHtV1 from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
+import Flex from 'hometown-components-dev/lib/FlexHtV1';
+import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
 
 export default class LoginViaOtp extends React.Component {
   state = {
@@ -50,7 +51,7 @@ export default class LoginViaOtp extends React.Component {
       <Box>
         {!mobilesubmitted ? (
           <form onSubmit={onSubmitMobileNumber}>
-            <FormInputHtV1
+            <FormInput
               label="Mobile Number"
               onChange={onChangeMobile}
               value={mobile}
@@ -59,14 +60,16 @@ export default class LoginViaOtp extends React.Component {
               feedBackError={mobileError}
               feedBackMessage={mobileErrorMessage}
             />
-            <Button onClick={this.onSubmitMobileNumber} disabled={loading}>
-              GET OTP
-            </Button>
+            <Flex justifyContent="center">
+              <Button width={180} height={42} fontWeight={600} onClick={this.onSubmitMobileNumber} disabled={loading}>
+                GET OTP
+              </Button>
+            </Flex>
           </form>
         ) : (
-          <Box>
+          <Fragment>
             <form onSubmit={onSubmitOtp}>
-              <FormInputHtV1
+              <FormInput
                 label="OTP"
                 onChange={onChangeOtp}
                 value={otp}
@@ -75,16 +78,18 @@ export default class LoginViaOtp extends React.Component {
                 feedBackError={otpError}
                 feedBackMessage={otpErrorMessage}
               />
-              <Button onClick={this.onSubmitOtp} disabled={loggingIn}>
-                SUBMIT
-              </Button>
+              <Flex justifyContent="center">
+                <Button width={180} height={42} fontWeight={600} onClick={this.onSubmitOtp} disabled={loggingIn}>
+                  SUBMIT
+                </Button>
+              </Flex>
             </form>
             {!resend && (
-              <Button onClick={handleResend} disabled={resendtimer > 0}>
+              <Button width={150} height={42} fontWeight={600} onClick={handleResend} disabled={resendtimer > 0}>
                 RESEND OTP {resendtimer > 0 ? resendtimer : ''}
               </Button>
             )}
-          </Box>
+          </Fragment>
         )}
       </Box>
     );

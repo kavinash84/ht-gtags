@@ -121,7 +121,7 @@ export default class ForgotPasswordContainer extends Component {
                 <Fragment>
                   <Box width={1} mb={10} sx={{ borderBottom: 'divider' }}>
                     <Heading color="#1b2125" pb={20}>
-                      Forgot password?
+                      FORGOT PASSWORD?
                     </Heading>
                   </Box>
                   <Box pt={20} pb={30}>
