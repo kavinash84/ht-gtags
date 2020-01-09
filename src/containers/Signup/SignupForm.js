@@ -161,12 +161,7 @@ export default class SignupFormContainer extends Component {
     return (
       <Row>
         <Col variant="col-4">
-          <Box
-            mb={10}
-            sx={{
-              borderBottom: 'divider'
-            }}
-          >
+          <Box mb={10} sx={{ borderBottom: 'divider' }}>
             <Heading color="#1b2125" pb={20}>
               SIGN IN
             </Heading>
@@ -174,7 +169,7 @@ export default class SignupFormContainer extends Component {
           <Box pb={20}>
             <Text fontSize={12}>*Required</Text>
           </Box>
-          <Box>
+          <Box pb={40}>
             {!this.state.loginviaotp ? (
               <LoginForm />
             ) : (
