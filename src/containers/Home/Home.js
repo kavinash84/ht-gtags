@@ -137,7 +137,9 @@ export default class Home extends Component {
             }
             return '';
           })}
-          <OfferBanner image={middleBanner.image_url} url={middleBanner.url_key} target={middleBanner.target || ''} />
+          <LazyLoad>
+            <OfferBanner image={middleBanner.image_url} url={middleBanner.url_key} target={middleBanner.target || ''} />
+          </LazyLoad>
           {homepageProducts.map((products, index) => (
             <LazyLoad height={200} offset={100} key={String(index)}>
               <ProductCarousel
