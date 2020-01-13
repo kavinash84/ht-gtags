@@ -1,11 +1,11 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import serialize from 'serialize-javascript';
 import Helmet from 'react-helmet';
 import config from 'config';
 import { newRelic } from 'utils/tracking';
 
-const { version } = require('../../package.json');
+// const { version } = require('../../package.json');
 
 /**
  * Wrapper component containing HTML metadata and boilerplate tags.
@@ -89,6 +89,26 @@ export default class Html extends Component {
           <meta name="apple-mobile-web-app-title" content="HomeTown Web" />
           <meta name="theme-color" content="#3677dd" />
           <link rel="manifest" href="/manifest.json" />
+          {/* eslint-disable */}
+          <link rel="preconnect" href="https://connect.facebook.net" crossOrigin="" />
+          <link rel="preconnect" href="https://bid.g.doubleclick.net" crossOrigin="" />
+          <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossOrigin="" />
+          <link rel="preconnect" href="https://api.hometown.in" crossOrigin="" />
+          <link rel="preconnect" href="https://www.google-analytics.com" crossOrigin="" />
+          <link rel="preconnect" href="https://www.googleadservices.com" crossOrigin="" />
+          <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="" />
+          <link rel="preconnect" href="https://www.google.com" crossOrigin="" />
+          <link rel="preconnect" href="https://www.google.co.in" crossOrigin="" />
+          <link rel="preconnect" href="https://cdn.onesignal.com" crossOrigin="" />
+          <link rel="preconnect" href="https://onesignal.com" crossOrigin="" />
+          <link rel="preconnect" href="https://service.force.com" crossOrigin="" />
+          <link rel="preconnect" href="https://c.la1-c1-hnd.salesforceliveagent.com" crossOrigin="" />
+          <link rel="preconnect" href="https://d.la1-c1-hnd.salesforceliveagent.com" crossOrigin="" />
+          <link rel="preconnect" href="https://bat.bing.com" crossOrigin="" />
+          <link rel="preconnect" href="https://static.criteo.net" crossOrigin="" />
+          <link rel="preconnect" href="http://static.criteo.net" crossOrigin="" />
+          <link rel="preconnect" href="http://m.hometown.in" crossOrigin="" />
+          {/* eslint-disable */}
           {styleTags}
           {/* styles (will be present only in production with webpack extract text plugin) */}
           {assets.styles &&
@@ -183,7 +203,7 @@ export default class Html extends Component {
           {assets.styles && Object.keys(assets.styles).length === 0 ? (
             <script dangerouslySetInnerHTML={{ __html: 'document.getElementById("content").style.display="block";' }} />
           ) : null}
-          <Helmet>
+          {/* <Helmet>
             {process.env.NODE_ENV !== 'development' ? (
               <Fragment>
                 <script src="https://cdn.ravenjs.com/3.24.0/raven.min.js" crossOrigin="anonymous" />
@@ -197,7 +217,7 @@ export default class Html extends Component {
                 </script>
               </Fragment>
             ) : null}
-          </Helmet>
+          </Helmet> */}
           <script type="text/javascript" src="https://service.force.com/embeddedservice/5.0/esw.min.js" />
           <script
             type="text/javascript"
@@ -307,6 +327,17 @@ export default class Html extends Component {
             }}
             charSet="UTF-8"
           />
+          <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async="" />
+          <script>
+            {`
+              var OneSignal = window.OneSignal || [];
+                OneSignal.push(function() {
+                  OneSignal.init({
+                    appId: "b2f22db2-b562-4530-8888-516550bfbe6d",
+                  });
+                });
+            `}
+          </script>
         </body>
       </html>
     );

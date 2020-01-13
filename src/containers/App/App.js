@@ -23,6 +23,8 @@ import * as notifActions from 'redux/modules/notifs';
 import Notifs from 'components/Notifs';
 import { isKeyExists } from 'utils/helper';
 
+const styles = require('./App.scss');
+
 const { SITE_URL } = process.env;
 const SITE_URL_MOBILE = 'https://m.hometown.in';
 
@@ -183,7 +185,6 @@ export default class App extends Component {
     return url;
   };
   render() {
-    const styles = require('./App.scss');
     const { location, route, notifs } = this.props;
     const pathname = (location && location.pathname) || '/';
     const url = this.checkIfSlash(pathname);
@@ -221,17 +222,6 @@ export default class App extends Component {
                       ecomm_totalvalue: '',
                     };
                   `}
-              </script>
-              <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async="" />
-              <script>
-                {`
-                  var OneSignal = window.OneSignal || [];
-                    OneSignal.push(function() {
-                      OneSignal.init({
-                        appId: "b2f22db2-b562-4530-8888-516550bfbe6d",
-                      });
-                    });
-                `}
               </script>
             </Helmet>
           )}
