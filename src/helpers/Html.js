@@ -5,6 +5,7 @@ import Helmet from 'react-helmet';
 import config from 'config';
 import { newRelic } from 'utils/tracking';
 
+const ONESIGNALID = 'b2f22db2-b562-4530-8888-516550bfbe6d';
 // const { version } = require('../../package.json');
 
 /**
@@ -328,16 +329,19 @@ export default class Html extends Component {
             charSet="UTF-8"
           />
           <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async="" />
-          <script>
-            {`
-              var OneSignal = window.OneSignal || [];
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                var OneSignal = window.OneSignal || [];
                 OneSignal.push(function() {
                   OneSignal.init({
-                    appId: "b2f22db2-b562-4530-8888-516550bfbe6d",
+                    appId: '${ONESIGNALID}',
                   });
-                });
-            `}
-          </script>
+                })
+              `
+            }}
+            charSet="UTF-8"
+          />
         </body>
       </html>
     );
