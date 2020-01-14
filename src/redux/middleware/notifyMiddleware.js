@@ -36,7 +36,13 @@ export default function userMiddleware() {
             dismissAfter: 2000
           }));
         break;
-
+      case 'cart/UPDATE_CART_SUCCESS':
+        dispatch(notifSend({
+            type: 'success',
+            msg: 'cart updated!',
+            dismissAfter: 2000
+          }));
+        break;
       case 'cart/UPDATE_CART_FAIL':
         dispatch(notifSend({
             type: 'warning',

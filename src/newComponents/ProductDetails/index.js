@@ -12,13 +12,12 @@ import { addReview, toggleReview } from 'redux/modules/reviews';
 import { toggleWishList, wishListWaitList } from 'redux/modules/wishlist';
 import { setProductPosition } from 'redux/modules/productdetails';
 import { getCombinedBuy } from 'redux/modules/combinedbuy';
-import { addToCartCombined } from 'redux/modules/cart';
-
+import { addToCartCombined, setQuantityFlag } from 'redux/modules/cart';
 import { formatAmount } from 'utils/formatters';
 import { calculateDiscount, calculateSavings, calculateLowestEmi, getVideoID, formatProductURL } from 'utils/helper';
 import { productPageTitle, productMetaDescription, productMetaKeywords } from 'utils/seo';
-
 import { groupedAttributes as getgroupedAttributes, getBreadCrumbs, getSimpleSku } from 'selectors/product';
+import { getCartSKU } from 'selectors/cart';
 import { getSKUList } from 'selectors/wishlist';
 
 /**
@@ -158,7 +157,8 @@ const mapDispatchToProps = dispatch =>
       wishlistToggle: toggleWishList,
       productPosition: setProductPosition,
       addToWaitList: wishListWaitList,
-      toggleReviewBox: toggleReview
+      toggleReviewBox: toggleReview,
+      updateQuantityFlag: setQuantityFlag
     },
     dispatch
   );
@@ -184,7 +184,8 @@ const mapStateToProps = ({
   emioptions,
   wishlist,
   userLogin,
-  combinedbuy
+  combinedbuy,
+  cart
 }) => ({
   session: sessionId,
   product: productdetails.productDescription,
@@ -202,7 +203,9 @@ const mapStateToProps = ({
   loadingList: wishlist.loadingList,
   gattributes: getgroupedAttributes(productdetails),
   breadcrumbs: getBreadCrumbs(productdetails),
-  simpleSku: getSimpleSku(productdetails)
+  simpleSku: getSimpleSku(productdetails),
+  quantityChange: cart.quantityChange,
+  skuItem: getCartSKU(cart, productdetails.productDescription.sku)
 });
 
 class ProductDetails extends React.Component {
@@ -279,7 +282,10 @@ class ProductDetails extends React.Component {
     this.setState({ showReviews: showReviews + 4 });
   };
   handleSelectQty = qty => {
-    this.setState({ productQty: { value: qty, label: qty } });
+    this.setState({ productQty: { value: qty, label: qty } }, () => {
+      const { updateQuantityFlag } = this.props;
+      updateQuantityFlag(true);
+    });
   };
   renderAttributes = items =>
     items.map((item, i) =>
@@ -313,7 +319,9 @@ class ProductDetails extends React.Component {
       gattributes,
       breadcrumbs,
       combinedbuy,
-      loadingList
+      loadingList,
+      quantityChange,
+      skuItem
     } = this.props;
     const { activeSpec, showReviews, productQty } = this.state;
     const {
@@ -523,6 +531,8 @@ class ProductDetails extends React.Component {
               <Row mx={-10}>
                 <Col variant="col-6" px={10}>
                   <AddToCart
+                    skuItem={skuItem}
+                    quantityChange={quantityChange}
                     quantity={productQty.value || 1}
                     simpleSku={simpleSku}
                     sku={sku}
@@ -725,7 +735,9 @@ ProductDetails.defaultProps = {
   deliveryDateLoading: false,
   loadingList: [],
   combinedbuy: [],
-  simpleSku: ''
+  simpleSku: '',
+  quantityChange: false,
+  skuItem: {}
   // session: ''
 };
 ProductDetails.propTypes = {
@@ -742,12 +754,15 @@ ProductDetails.propTypes = {
   wishlistToggle: PropTypes.func.isRequired,
   addToWaitList: PropTypes.func.isRequired,
   toggleReviewBox: PropTypes.func.isRequired,
+  updateQuantityFlag: PropTypes.func.isRequired,
   deliveryDateLoading: PropTypes.bool,
   breadcrumbs: PropTypes.array.isRequired,
   gattributes: PropTypes.object.isRequired,
   loadingList: PropTypes.array,
   simpleSku: PropTypes.string,
-  combinedbuy: PropTypes.array
+  combinedbuy: PropTypes.array,
+  quantityChange: PropTypes.bool,
+  skuItem: PropTypes.object
   // session: PropTypes.string
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
