@@ -73,9 +73,11 @@ const instaIcon = require('../../../static/instagram.svg');
 const pinIcon = require('../../../static/pinterest.svg');
 
 const qtyOptions = [
-  { value: '1', label: '1' },
-  { value: '2', label: '2' },
-  { value: '3', label: '3' }
+  { value: 1, label: '1' },
+  { value: 2, label: '2' },
+  { value: 3, label: '3' },
+  { value: 4, label: '4' },
+  { value: 5, label: '5' }
 ];
 
 const customStyles = {
@@ -215,7 +217,8 @@ class ProductDetails extends React.Component {
       showmore: true,
       showmorecolorproducts: true,
       activeSpec: 'description',
-      showReviews: 2
+      showReviews: 2,
+      productQty: { value: 1, label: '1' }
     };
   }
   componentDidMount() {
@@ -275,6 +278,9 @@ class ProductDetails extends React.Component {
     const { showReviews } = this.state;
     this.setState({ showReviews: showReviews + 4 });
   };
+  handleSelectQty = qty => {
+    this.setState({ productQty: { value: qty, label: qty } });
+  };
   renderAttributes = items =>
     items.map((item, i) =>
       Object.keys(item).map(key => (
@@ -309,7 +315,7 @@ class ProductDetails extends React.Component {
       combinedbuy,
       loadingList
     } = this.props;
-    const { activeSpec, showReviews } = this.state;
+    const { activeSpec, showReviews, productQty } = this.state;
     const {
       meta,
       images,
@@ -470,7 +476,16 @@ class ProductDetails extends React.Component {
                 <Text fontFamily="regular" mr={10}>
                   Qty.
                 </Text>
-                <Select placeholder="" options={qtyOptions} defaultValue={1} styles={customStyles} />
+                <Select
+                  placeholder=""
+                  options={qtyOptions}
+                  value={productQty}
+                  defaultValue={1}
+                  styles={customStyles}
+                  onChange={({ value }) => {
+                    this.handleSelectQty(value);
+                  }}
+                />
               </Flex>
 
               {/* EMI Options */}
@@ -508,6 +523,7 @@ class ProductDetails extends React.Component {
               <Row mx={-10}>
                 <Col variant="col-6" px={10}>
                   <AddToCart
+                    quantity={productQty.value || 1}
                     simpleSku={simpleSku}
                     sku={sku}
                     itemId={sku}

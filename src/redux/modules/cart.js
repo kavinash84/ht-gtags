@@ -261,7 +261,7 @@ export const loadCart = (session, pincode) => ({
   }
 });
 
-export const addToCart = (key, sku, simpleSku, session, pincode) => dispatch => {
+export const addToCart = (key, sku, simpleSku, session, pincode, quantity) => dispatch => {
   dispatch(setCurrentKey(key));
   return dispatch({
     types: [ADD_TO_CART, ADD_TO_CART_SUCCESS, ADD_TO_CART_FAIL],
@@ -272,7 +272,7 @@ export const addToCart = (key, sku, simpleSku, session, pincode) => dispatch => 
           simple_sku: simpleSku,
           session_id: session,
           pincode,
-          qty: 1
+          qty: quantity
         };
         const response = await client.post(ADDTOCART_API, postData);
         return response;

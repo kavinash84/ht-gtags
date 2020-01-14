@@ -23,9 +23,9 @@ const checkSKUInCart = (list, sku) => list.includes(sku);
 const LoaderIcon = require('../../../static/refresh.svg');
 // const CheckedIcon = require('../../../static/added-to-cart-icon.png');
 
-const onClick = (key, skuId, simpleSku, session, pincode) => dispatcher => e => {
+const onClick = (key, skuId, simpleSku, session, pincode, quantity) => dispatcher => e => {
   e.preventDefault();
-  dispatcher(key, skuId, simpleSku, session, pincode);
+  dispatcher(key, skuId, simpleSku, session, pincode, quantity);
 };
 
 const mapStateToProps = ({
@@ -49,7 +49,8 @@ const AddToCart = ({
   addingToCart,
   itemId,
   stateId,
-  isSoldOut
+  isSoldOut,
+  quantity
 }) => {
   const checkStatus = checkSKUInCart(cartSKUs, sku);
   const addLoading = addingToCart && stateId === itemId;
@@ -64,7 +65,7 @@ const AddToCart = ({
               variant="outline.primary.large"
               width={1}
               disabled={addLoading}
-              onClick={onClick(itemId, sku, simpleSku, session, pincode)(addToCart)}
+              onClick={onClick(itemId, sku, simpleSku, session, pincode, quantity)(addToCart)}
               sx={{
                 display: 'flex',
                 alignItems: 'center',
@@ -94,7 +95,8 @@ AddToCart.defaultProps = {
   addingToCart: false,
   itemId: '',
   stateId: '',
-  isSoldOut: false
+  isSoldOut: false,
+  quantity: 1
 };
 
 AddToCart.propTypes = {
@@ -107,7 +109,8 @@ AddToCart.propTypes = {
   addingToCart: PropTypes.bool,
   itemId: PropTypes.string,
   stateId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  isSoldOut: PropTypes.bool
+  isSoldOut: PropTypes.bool,
+  quantity: PropTypes.number
 };
 
 export default connect(mapStateToProps, { ...actionCreators })(AddToCart);
