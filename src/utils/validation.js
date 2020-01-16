@@ -157,7 +157,7 @@ export const trimSpecialChar = text => {
 };
 
 export const checkSpecialChar = text => {
-  const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/; //eslint-disable-line
+  const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,<>\/?0-9]/; //eslint-disable-line
   const check = format.test(text);
   return check;
 };

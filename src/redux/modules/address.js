@@ -139,7 +139,7 @@ export default function reducer(state = initialState, action = {}) {
           fullName: action.name,
           fullNameFeedBackError: isEmpty(action.name) || checkSpecialChar(action.name),
           fullNameFeedBackMessage: checkSpecialChar(action.name)
-            ? 'Special Characters Not Allowed !'
+            ? 'Numbers and special characters are not allowed !'
             : 'Name Cannot be Left Empty !'
         }
       };

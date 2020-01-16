@@ -36,7 +36,7 @@ export default class SignupFormContainer extends Component {
     this.state = {
       name: '',
       nameError: false,
-      nameErrorMessage: 'Special Characters Not Allowed !',
+      nameErrorMessage: 'Numbers and special characters are not allowed !',
       email: '',
       emailError: false,
       emailErrorMessage: 'Enter Valid Email Id',
@@ -104,8 +104,8 @@ export default class SignupFormContainer extends Component {
     const isRedirect = action ? action.indexOf('redirect') !== -1 : false;
     const signupOrigin = isRedirect ? 'Top Nav' : 'Pop-up';
     const {
-      name, email, password, phone
-    } = this.state;
+ name, email, password, phone
+} = this.state;
     const checkName = isEmpty(name) || checkSpecialChar(name);
     const checkEmail = !validateEmail(email);
     const checkPhone = phone ? !validateMobile(phone) : false;
