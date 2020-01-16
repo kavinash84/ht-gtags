@@ -327,7 +327,9 @@ class ProductDetails extends React.Component {
       groupedattributes,
       reviews: { count, rating }
     } = product;
-    const { description } = attributes;
+    const {
+ description, product_height: height, product_width: width, product_depth: depth
+} = attributes;
     const simpleSku = Object.keys(simples)[0];
     const { name, price, special_price: specialPrice } = meta;
     const checkSpecialPrice = Number(specialPrice) || Number(price);
@@ -619,6 +621,18 @@ class ProductDetails extends React.Component {
               </Box>
               <Box p={15} textAlign="center" sx={{ border: 'dividerLight' }}>
                 <Image src="https://www.hometown.in/media/product/89/2453/3-zoom.jpg" alt="" />
+              </Box>
+              <Box>
+                <Text variant="regular" fontSize={16} pb={5}>
+                  {height || width || depth
+                    ? `
+                    Overall Dimension (inches) :
+                    ${width && `Width : ${width} `}
+                    ${depth && `Depth : ${depth} `} 
+                    ${height && `Height : ${height} `}
+                  `
+                    : ''}
+                </Text>
               </Box>
             </Box>
 
