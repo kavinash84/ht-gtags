@@ -23,9 +23,9 @@ const checkSKUInCart = (list, sku) => list.includes(sku);
 const LoaderIcon = require('../../../static/refresh.svg');
 // const CheckedIcon = require('../../../static/added-to-cart-icon.png');
 
-const onClick = (key, skuId, simpleSku, session, pincode) => dispatcher => e => {
+const onClick = (key, skuId, simpleSku, session, pincode, quantity) => dispatcher => e => {
   e.preventDefault();
-  dispatcher(key, skuId, simpleSku, session, pincode);
+  dispatcher(key, skuId, simpleSku, session, pincode, quantity);
 };
 
 const mapStateToProps = ({
@@ -44,27 +44,41 @@ const AddToCart = ({
   simpleSku,
   sku,
   addToCart,
+  updateCart,
   pincode,
   cartSKUs,
   addingToCart,
   itemId,
   stateId,
-  isSoldOut
+  isSoldOut,
+  quantity,
+  quantityChange,
+  skuItem
 }) => {
   const checkStatus = checkSKUInCart(cartSKUs, sku);
   const addLoading = addingToCart && stateId === itemId;
+  const { id_customer_cart: cartId = '', qty } = skuItem;
+  const updateQty = qty ? quantity - qty : quantity;
   return (
     <Fragment>
       {isSoldOut ? (
         <Button variant="outline.error.large">Out of Stock</Button>
       ) : (
         <Fragment>
-          {!checkStatus ? (
+          {!checkStatus || quantityChange ? (
             <Button
               variant="outline.primary.large"
               width={1}
               disabled={addLoading}
-              onClick={onClick(itemId, sku, simpleSku, session, pincode)(addToCart)}
+              onClick={e => {
+                if (quantityChange && updateQty !== 0 && checkStatus) {
+                  const handler = onClick(cartId, sku, simpleSku, session, pincode, updateQty)(updateCart);
+                  handler(e);
+                } else {
+                  const handler = onClick(itemId, sku, simpleSku, session, pincode, quantity)(addToCart);
+                  handler(e);
+                }
+              }}
               sx={{
                 display: 'flex',
                 alignItems: 'center',
@@ -78,7 +92,7 @@ const AddToCart = ({
             <Row mx={0} alignItems="center">
               <Box as={Link} to={CART_URL} width={1}>
                 <Button variant="outline.primary.large" width={1}>
-                  Added to Cart
+                  GO TO CART
                 </Button>
               </Box>
             </Row>
@@ -94,7 +108,10 @@ AddToCart.defaultProps = {
   addingToCart: false,
   itemId: '',
   stateId: '',
-  isSoldOut: false
+  isSoldOut: false,
+  quantity: 1,
+  quantityChange: false,
+  skuItem: {}
 };
 
 AddToCart.propTypes = {
@@ -104,10 +121,14 @@ AddToCart.propTypes = {
   session: PropTypes.string.isRequired,
   pincode: PropTypes.string.isRequired,
   addToCart: PropTypes.func.isRequired,
+  updateCart: PropTypes.func.isRequired,
   addingToCart: PropTypes.bool,
   itemId: PropTypes.string,
   stateId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  isSoldOut: PropTypes.bool
+  isSoldOut: PropTypes.bool,
+  quantity: PropTypes.number,
+  quantityChange: PropTypes.bool,
+  skuItem: PropTypes.object
 };
 
 export default connect(mapStateToProps, { ...actionCreators })(AddToCart);

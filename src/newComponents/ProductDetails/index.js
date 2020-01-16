@@ -12,13 +12,12 @@ import { addReview, toggleReview } from 'redux/modules/reviews';
 import { toggleWishList, wishListWaitList } from 'redux/modules/wishlist';
 import { setProductPosition } from 'redux/modules/productdetails';
 import { getCombinedBuy } from 'redux/modules/combinedbuy';
-import { addToCartCombined } from 'redux/modules/cart';
-
+import { addToCartCombined, setQuantityFlag } from 'redux/modules/cart';
 import { formatAmount } from 'utils/formatters';
 import { calculateDiscount, calculateSavings, calculateLowestEmi, getVideoID, formatProductURL } from 'utils/helper';
 import { productPageTitle, productMetaDescription, productMetaKeywords } from 'utils/seo';
-
 import { groupedAttributes as getgroupedAttributes, getBreadCrumbs, getSimpleSku } from 'selectors/product';
+import { getCartSKU } from 'selectors/cart';
 import { getSKUList } from 'selectors/wishlist';
 
 /**
@@ -73,9 +72,11 @@ const instaIcon = require('../../../static/instagram.svg');
 const pinIcon = require('../../../static/pinterest.svg');
 
 const qtyOptions = [
-  { value: '1', label: '1' },
-  { value: '2', label: '2' },
-  { value: '3', label: '3' }
+  { value: 1, label: '1' },
+  { value: 2, label: '2' },
+  { value: 3, label: '3' },
+  { value: 4, label: '4' },
+  { value: 5, label: '5' }
 ];
 
 const customStyles = {
@@ -156,7 +157,8 @@ const mapDispatchToProps = dispatch =>
       wishlistToggle: toggleWishList,
       productPosition: setProductPosition,
       addToWaitList: wishListWaitList,
-      toggleReviewBox: toggleReview
+      toggleReviewBox: toggleReview,
+      updateQuantityFlag: setQuantityFlag
     },
     dispatch
   );
@@ -182,7 +184,8 @@ const mapStateToProps = ({
   emioptions,
   wishlist,
   userLogin,
-  combinedbuy
+  combinedbuy,
+  cart
 }) => ({
   session: sessionId,
   product: productdetails.productDescription,
@@ -200,7 +203,9 @@ const mapStateToProps = ({
   loadingList: wishlist.loadingList,
   gattributes: getgroupedAttributes(productdetails),
   breadcrumbs: getBreadCrumbs(productdetails),
-  simpleSku: getSimpleSku(productdetails)
+  simpleSku: getSimpleSku(productdetails),
+  quantityChange: cart.quantityChange,
+  skuItem: getCartSKU(cart, productdetails.productDescription.sku)
 });
 
 class ProductDetails extends React.Component {
@@ -215,7 +220,8 @@ class ProductDetails extends React.Component {
       showmore: true,
       showmorecolorproducts: true,
       activeSpec: 'description',
-      showReviews: 2
+      showReviews: 2,
+      productQty: { value: 1, label: '1' }
     };
   }
   componentDidMount() {
@@ -275,6 +281,12 @@ class ProductDetails extends React.Component {
     const { showReviews } = this.state;
     this.setState({ showReviews: showReviews + 4 });
   };
+  handleSelectQty = qty => {
+    this.setState({ productQty: { value: qty, label: qty } }, () => {
+      const { updateQuantityFlag } = this.props;
+      updateQuantityFlag(true);
+    });
+  };
   renderAttributes = items =>
     items.map((item, i) =>
       Object.keys(item).map(key => (
@@ -307,9 +319,11 @@ class ProductDetails extends React.Component {
       gattributes,
       breadcrumbs,
       combinedbuy,
-      loadingList
+      loadingList,
+      quantityChange,
+      skuItem
     } = this.props;
-    const { activeSpec, showReviews } = this.state;
+    const { activeSpec, showReviews, productQty } = this.state;
     const {
       meta,
       images,
@@ -321,7 +335,9 @@ class ProductDetails extends React.Component {
       groupedattributes,
       reviews: { count, rating }
     } = product;
-    const { description } = attributes;
+    const {
+ description, product_height: height, product_width: width, product_depth: depth
+} = attributes;
     const simpleSku = Object.keys(simples)[0];
     const { name, price, special_price: specialPrice } = meta;
     const checkSpecialPrice = Number(specialPrice) || Number(price);
@@ -470,7 +486,16 @@ class ProductDetails extends React.Component {
                 <Text fontFamily="regular" mr={10}>
                   Qty.
                 </Text>
-                <Select placeholder="" options={qtyOptions} defaultValue={1} styles={customStyles} />
+                <Select
+                  placeholder=""
+                  options={qtyOptions}
+                  value={productQty}
+                  defaultValue={1}
+                  styles={customStyles}
+                  onChange={({ value }) => {
+                    this.handleSelectQty(value);
+                  }}
+                />
               </Flex>
 
               {/* EMI Options */}
@@ -508,6 +533,9 @@ class ProductDetails extends React.Component {
               <Row mx={-10}>
                 <Col variant="col-6" px={10}>
                   <AddToCart
+                    skuItem={skuItem}
+                    quantityChange={quantityChange}
+                    quantity={productQty.value || 1}
                     simpleSku={simpleSku}
                     sku={sku}
                     itemId={sku}
@@ -518,6 +546,7 @@ class ProductDetails extends React.Component {
                 </Col>
                 <Col variant="col-6" px={10}>
                   <BuyNow
+                    quantity={productQty.value || 1}
                     simpleSku={simpleSku}
                     sku={sku}
                     isSoldOut={
@@ -603,6 +632,18 @@ class ProductDetails extends React.Component {
               </Box>
               <Box p={15} textAlign="center" sx={{ border: 'dividerLight' }}>
                 <Image src="https://www.hometown.in/media/product/89/2453/3-zoom.jpg" alt="" />
+              </Box>
+              <Box>
+                <Text variant="regular" fontSize={16} pb={5}>
+                  {height || width || depth
+                    ? `
+                    Overall Dimension (inches) :
+                    ${width && `Width : ${width} `}
+                    ${depth && `Depth : ${depth} `} 
+                    ${height && `Height : ${height} `}
+                  `
+                    : ''}
+                </Text>
               </Box>
             </Box>
 
@@ -709,7 +750,9 @@ ProductDetails.defaultProps = {
   deliveryDateLoading: false,
   loadingList: [],
   combinedbuy: [],
-  simpleSku: ''
+  simpleSku: '',
+  quantityChange: false,
+  skuItem: {}
   // session: ''
 };
 ProductDetails.propTypes = {
@@ -726,12 +769,15 @@ ProductDetails.propTypes = {
   wishlistToggle: PropTypes.func.isRequired,
   addToWaitList: PropTypes.func.isRequired,
   toggleReviewBox: PropTypes.func.isRequired,
+  updateQuantityFlag: PropTypes.func.isRequired,
   deliveryDateLoading: PropTypes.bool,
   breadcrumbs: PropTypes.array.isRequired,
   gattributes: PropTypes.object.isRequired,
   loadingList: PropTypes.array,
   simpleSku: PropTypes.string,
-  combinedbuy: PropTypes.array
+  combinedbuy: PropTypes.array,
+  quantityChange: PropTypes.bool,
+  skuItem: PropTypes.object
   // session: PropTypes.string
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

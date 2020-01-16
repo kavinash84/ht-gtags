@@ -29,6 +29,7 @@ const CHECKCART_SUCCESS = 'cart/CHECKCART_SUCCESS';
 const CHECKCART_FAIL = 'cart/CHECKCART_FAIL';
 const RESET_CART_CHECK = 'cart/RESET_CART_CHECK';
 const SET_CURRENT_KEY = 'cart/SET_CURRENT_KEY';
+const SET_QUANTITY_FLAG = 'cart/SET_QUANTITY_FLAG';
 
 const UPDATE_CART_SUMMARY_AFTER_COUPON = 'cart/UPDATE_CART_SUMMARY_AFTER_COUPON';
 
@@ -48,7 +49,8 @@ const initialState = {
   checkingCart: false,
   cartChecked: false,
   key: '',
-  couponlistToggle: false
+  couponlistToggle: false,
+  quantityChange: false
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -84,6 +86,7 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         addingToCart: false,
         addedToCart: true,
+        quantityChange: false,
         couponlistToggle: false,
         data: action.result && 'cart' in action.result ? action.result.cart.cart : [],
         summary: action.result && 'cart' in action.result ? action.result.cart.summary : {}
@@ -128,6 +131,7 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         cartUpdating: false,
         cartUpdated: true,
+        quantityChange: false,
         data: action.result && 'cart' in action.result ? action.result.cart.cart : [],
         summary: action.result && 'cart' in action.result ? action.result.cart.summary : {},
         couponlistToggle: false
@@ -226,6 +230,11 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         couponlistToggle: false
       };
+    case SET_QUANTITY_FLAG:
+      return {
+        ...state,
+        quantityChange: action.value
+      };
     case CLEAR_CART:
       return {
         ...initialState
@@ -261,7 +270,7 @@ export const loadCart = (session, pincode) => ({
   }
 });
 
-export const addToCart = (key, sku, simpleSku, session, pincode) => dispatch => {
+export const addToCart = (key, sku, simpleSku, session, pincode, quantity) => dispatch => {
   dispatch(setCurrentKey(key));
   return dispatch({
     types: [ADD_TO_CART, ADD_TO_CART_SUCCESS, ADD_TO_CART_FAIL],
@@ -272,7 +281,7 @@ export const addToCart = (key, sku, simpleSku, session, pincode) => dispatch => 
           simple_sku: simpleSku,
           session_id: session,
           pincode,
-          qty: 1
+          qty: quantity
         };
         const response = await client.post(ADDTOCART_API, postData);
         return response;
@@ -385,4 +394,8 @@ export const toggleCouponList = () => ({
 });
 export const hideCouponList = () => ({
   type: HIDE_COUPON_LIST
+});
+export const setQuantityFlag = value => ({
+  type: SET_QUANTITY_FLAG,
+  value
 });
