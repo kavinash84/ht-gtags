@@ -546,6 +546,7 @@ class ProductDetails extends React.Component {
                 </Col>
                 <Col variant="col-6" px={10}>
                   <BuyNow
+                    quantity={productQty.value || 1}
                     simpleSku={simpleSku}
                     sku={sku}
                     isSoldOut={
