@@ -42,10 +42,10 @@ class BuyNow extends React.Component {
     }
   }
 
-  handleClick = (key, skuId, simpleSku, session, pincode) => dispatcher => e => {
+  handleClick = (key, skuId, simpleSku, session, pincode, quantity) => dispatcher => e => {
     e.preventDefault();
     this.setState({ buynow: true });
-    dispatcher(key, skuId, simpleSku, session, pincode);
+    dispatcher(key, skuId, simpleSku, session, pincode, quantity);
   };
   render() {
     const {
@@ -58,7 +58,8 @@ class BuyNow extends React.Component {
       addingToCart,
       itemId,
       stateId,
-      isSoldOut
+      isSoldOut,
+      quantity
     } = this.props;
     const checkStatus = checkSKUInCart(cartSKUs, sku);
     const addLoading = addingToCart && stateId === itemId;
@@ -70,7 +71,7 @@ class BuyNow extends React.Component {
               <Button
                 variant="primary.large"
                 disabled={addLoading}
-                onClick={this.handleClick(itemId, sku, simpleSku, session, pincode)(addToCart)}
+                onClick={this.handleClick(itemId, sku, simpleSku, session, pincode, quantity)(addToCart)}
               >
                 BUY NOW
               </Button>
@@ -94,7 +95,8 @@ BuyNow.defaultProps = {
   itemId: '',
   stateId: '',
   isSoldOut: false,
-  history: {}
+  history: {},
+  quantity: 1
 };
 
 BuyNow.propTypes = {
@@ -109,7 +111,8 @@ BuyNow.propTypes = {
   stateId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   isSoldOut: PropTypes.bool,
   addedToCart: PropTypes.bool.isRequired,
-  history: PropTypes.object
+  history: PropTypes.object,
+  quantity: PropTypes.number
 };
 
 export default connect(mapStateToProps, { ...actionCreators })(BuyNow);
