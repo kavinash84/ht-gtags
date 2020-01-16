@@ -298,36 +298,40 @@ const Cart = ({
               btnText="SECURE CHECKOUT"
               hideProductSummary
             />
-            <Box pb={20}>
-              <Heading fontSize={16} mb={5} color="#2c2e3f">
-                Exchange & Return Policy
-              </Heading>
-              <Text fontSize={14} lineHeight={1.3} fontFamily="light" color="#2c2e3f" pb={5}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.
-              </Text>
-              <Label
-                color="#232324"
-                fontSize={12}
-                fontFamily="medium"
-                sx={{
-                  borderBottom: '1px',
-                  borderColor: '#232324'
-                }}
-              >
-                Read More
-              </Label>
-            </Box>
-            <Box pb={24}>
-              <Heading fontSize={16} mb={5} color="#2c2e3f">
-                Terms & Conditions
-              </Heading>
-              <Text fontSize={14} lineHeight={1.3} fontFamily="light" color="#2c2e3f" pb={5}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.
-              </Text>
-              <Label color="#232324" fontSize={12} fontFamily="medium" borderBottom="1px" borderColor="#232324">
-                Read More
-              </Label>
-            </Box>
+            {summary.return_policy && (
+              <Box pb={20}>
+                <Heading fontSize={16} mb={5} color="#2c2e3f">
+                  Exchange & Return Policy
+                </Heading>
+                <Text fontSize={14} lineHeight={1.3} fontFamily="light" color="#2c2e3f" pb={5}>
+                  {summary.return_policy}
+                </Text>
+                <Label
+                  color="#232324"
+                  fontSize={12}
+                  fontFamily="medium"
+                  sx={{
+                    borderBottom: '1px',
+                    borderColor: '#232324'
+                  }}
+                >
+                  <Link to="/return-policy">Read More</Link>
+                </Label>
+              </Box>
+            )}
+            {summary.terms_conditions && (
+              <Box pb={24}>
+                <Heading fontSize={16} mb={5} color="#2c2e3f">
+                  Terms & Conditions
+                </Heading>
+                <Text fontSize={14} lineHeight={1.3} fontFamily="light" color="#2c2e3f" pb={5}>
+                  {summary.terms_conditions}
+                </Text>
+                <Label color="#232324" fontSize={12} fontFamily="medium" borderBottom="1px" borderColor="#232324">
+                  <Link to="/terms-and-conditions">Read More</Link>
+                </Label>
+              </Box>
+            )}
             <PaymentMethods />
           </Box>
         </Box>
