@@ -10,19 +10,21 @@ import { formatAmount } from 'utils/formatters';
  * Components
  */
 import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import Col from 'hometown-components-dev/lib/ColHtV1';
 import Flex from 'hometown-components-dev/lib/FlexHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Row from 'hometown-components-dev/lib/RowHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
-import ProductSummaryList from './ProductSummaryList';
+import Coupon from '../Checkout/Coupon';
+import AcceptedPaymentOptions from '../AcceptedPaymentOptions';
+/**
+ * Icons
+ */
+const checkoutIcon = require('../../../static/checkout.svg');
 
-const editIcon = require('../../../static/edit-round.svg');
-
-const styles = require('./OrderSummary.scss');
-
-const editItems = history => history.push('/checkout/cart');
+const styles = require('../Checkout/OrderSummary.scss');
 
 const OrderSummary = ({
   itemsTotal,
@@ -30,10 +32,14 @@ const OrderSummary = ({
   setDiscount,
   shipping,
   totalCart,
-  itemsCount,
+  onClick,
+  loadingnextstep,
+  hidebutton,
+  isSubmitted,
+  disabled,
+  outOfStockList,
   discount,
-  results,
-  history
+  btnText
 }) => (
   <Row>
     <Col width={1}>
@@ -45,30 +51,12 @@ const OrderSummary = ({
       >
         <Heading variant="heading.regular" color="#1c1c1c" display="flex" justifyContent="space-between">
           Order Summary
-          <Image
-            sx={{ cursor: 'pointer' }}
-            src={editIcon}
-            onClick={e => {
-              e.preventDefault();
-              editItems(history);
-            }}
-            alt="edit"
-          />
         </Heading>
-        <Text>{`Total Items: ${itemsCount}`}</Text>
       </Box>
     </Col>
-    {/* Products */}
-    <Box
-      mb={20}
-      mt={20}
-      sx={{
-        borderBottom: 'divider'
-      }}
-    >
-      {results.map(item => (
-        <ProductSummaryList qty={item.qty} productItem={item.product_info || {}} />
-      ))}
+    {/* Coupons / List */}
+    <Box variant="col-12" mb="1.25rem">
+      <Coupon />
     </Box>
     <Box variant="col-12" pb={20}>
       <Flex mb={20} justifyContent="space-between">
@@ -111,14 +99,34 @@ const OrderSummary = ({
         (inclusive of all taxes)
       </Text>
     </Box>
+    <AcceptedPaymentOptions />
+    <Box variant="col-12" pb={20}>
+      <Button
+        width={1}
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        height="auto"
+        onClick={onClick}
+        hide={hidebutton}
+        disabled={loadingnextstep || isSubmitted || (outOfStockList && outOfStockList.length > 0) || disabled}
+      >
+        <Image src={checkoutIcon} alt="Delete" height="20px" mr="0.625rem" />
+        {loadingnextstep || isSubmitted ? 'Please wait...' : btnText}
+      </Button>
+    </Box>
   </Row>
 );
 
 OrderSummary.defaultProps = {
-  itemsCount: 0,
+  loadingnextstep: false,
+  hidebutton: false,
+  isSubmitted: false,
+  outOfStockList: [],
+  disabled: false,
   discount: 0,
-  setDiscount: 0,
-  results: []
+  btnText: 'Place Order',
+  setDiscount: 0
 };
 
 OrderSummary.propTypes = {
@@ -127,10 +135,14 @@ OrderSummary.propTypes = {
   setDiscount: PropTypes.number,
   shipping: PropTypes.number.isRequired,
   totalCart: PropTypes.number.isRequired,
-  itemsCount: PropTypes.number,
+  onClick: PropTypes.func.isRequired,
+  loadingnextstep: PropTypes.bool,
+  hidebutton: PropTypes.bool,
+  isSubmitted: PropTypes.bool,
+  outOfStockList: PropTypes.array,
+  disabled: PropTypes.bool,
   discount: PropTypes.number,
-  results: PropTypes.array,
-  history: PropTypes.object.isRequired
+  btnText: PropTypes.string
 };
 
 export default OrderSummary;

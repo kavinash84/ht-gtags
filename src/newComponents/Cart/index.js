@@ -30,7 +30,7 @@ import CloseIcon from 'hometown-components-dev/lib/Icons/Close';
  * Page Components
  */
 import ProductQuantity from './UpdateProductQuantity';
-import OrderSummary from '../Checkout/OrderSummary';
+import OrderSummary from './OrderSummary';
 import PaymentMethods from '../PaymentMethods';
 
 /**
@@ -155,9 +155,11 @@ const Cart = ({
                       {item.product_info.name}
                     </Heading>
                   </Box>
-                  <Box mb="15px">
-                    <Text color="#575757">Lorem Ipsum</Text>
-                  </Box>
+                  {item.product_info.color && (
+                    <Box mb="15px">
+                      <Text color="#575757">{item.product_info.color}</Text>
+                    </Box>
+                  )}
                 </Link>
                 <Box pb={20}>
                   <Flex alignItems="center">
@@ -292,46 +294,41 @@ const Cart = ({
               totalCart={summary.total}
               loadingnextstep={checkingCart}
               onClick={checkCartBeforeCheckout(checkCart, sessionId)}
-              itemsCount={summary.items_count}
               outOfStockList={outOfStockList}
               discount={summary.coupon_discount}
               btnText="SECURE CHECKOUT"
-              hideProductSummary
             />
-            {summary.return_policy && (
-              <Box pb={20}>
-                <Heading fontSize={16} mb={5} color="#2c2e3f">
-                  Exchange & Return Policy
-                </Heading>
-                <Text fontSize={14} lineHeight={1.3} fontFamily="light" color="#2c2e3f" pb={5}>
-                  {summary.return_policy}
-                </Text>
-                <Label
-                  color="#232324"
-                  fontSize={12}
-                  fontFamily="medium"
-                  sx={{
-                    borderBottom: '1px',
-                    borderColor: '#232324'
-                  }}
-                >
-                  <Link to="/return-policy">Read More</Link>
-                </Label>
-              </Box>
-            )}
-            {summary.terms_conditions && (
-              <Box pb={24}>
-                <Heading fontSize={16} mb={5} color="#2c2e3f">
-                  Terms & Conditions
-                </Heading>
-                <Text fontSize={14} lineHeight={1.3} fontFamily="light" color="#2c2e3f" pb={5}>
-                  {summary.terms_conditions}
-                </Text>
-                <Label color="#232324" fontSize={12} fontFamily="medium" borderBottom="1px" borderColor="#232324">
-                  <Link to="/terms-and-conditions">Read More</Link>
-                </Label>
-              </Box>
-            )}
+            <Box pb={20}>
+              <Heading fontSize={16} mb={5} color="#2c2e3f">
+                Exchange & Return Policy
+              </Heading>
+              <Text fontSize={14} lineHeight={1.3} fontFamily="light" color="#2c2e3f" pb={5}>
+                We are committed to ensuring your satisfaction with any product you have ordered from us...
+              </Text>
+              <Label
+                color="#232324"
+                fontSize={12}
+                fontFamily="medium"
+                sx={{
+                  borderBottom: '1px',
+                  borderColor: '#232324'
+                }}
+              >
+                <Link to="/return-policy">Read More</Link>
+              </Label>
+            </Box>
+            <Box pb={24}>
+              <Heading fontSize={16} mb={5} color="#2c2e3f">
+                Terms & Conditions
+              </Heading>
+              <Text fontSize={14} lineHeight={1.3} fontFamily="light" color="#2c2e3f" pb={5}>
+                In using the HomeTown.in service, of Praxis Home Retail Ltd. you are deemed to have accepted the terms
+                and conditions..
+              </Text>
+              <Label color="#232324" fontSize={12} fontFamily="medium" borderBottom="1px" borderColor="#232324">
+                <Link to="/terms-and-conditions">Read More</Link>
+              </Label>
+            </Box>
             <PaymentMethods />
           </Box>
         </Box>

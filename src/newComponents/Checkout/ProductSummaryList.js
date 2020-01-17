@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
+import { formatAmount } from 'utils/formatters';
 /**
  * Components
  */
@@ -10,34 +11,41 @@ import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 
-const ProductSummaryList = () => (
+const ProductSummaryList = ({ productItem, qty }) => (
   <Flex pb={20}>
     <Box variant="col-4" pr={0}>
-      <Link to="/">
-        <Image
-          width={1}
-          src="https://www.hometown.in/media/product/59/2453/51165/1-top_sel_160.jpg"
-          alt=""
-          sx={{
-            boxShadow: 'productThumb'
-          }}
-        />
-      </Link>
+      <Image
+        width={1}
+        src={productItem.image || ''}
+        alt=""
+        sx={{
+          boxShadow: 'productThumb'
+        }}
+      />
     </Box>
     <Box variant="col-8" pl={20}>
-      <Link to="/">
-        <Box mb="10px">
-          <Heading color="heading" fontSize={16} lineHeight={1.4} pb={10}>
-            Product Name
-          </Heading>
-          <Text fontSize={14} pb={10}>
-            Beige
-          </Text>
-          <Heading variant="heading.small">₹ 10,000</Heading>
-        </Box>
-      </Link>
+      <Box mb="10px">
+        <Heading color="heading" fontSize={16} lineHeight={1.4} pb={10}>
+          {productItem.name ? `${productItem.name.slice(0, 20)}..` : ''}
+        </Heading>
+        <Text fontSize={14} pb={10}>
+          {productItem.color}
+        </Text>
+        <Heading variant="heading.small">
+          ₹{' '}
+          {productItem.special_price === 0
+            ? formatAmount(Number(productItem.unit_price) * Number(qty))
+            : formatAmount(Number(productItem.special_price) * Number(qty))}
+        </Heading>
+      </Box>
     </Box>
   </Flex>
 );
-
+ProductSummaryList.defaultProps = {
+  productItem: {}
+};
+ProductSummaryList.propTypes = {
+  productItem: PropTypes.object,
+  qty: PropTypes.number.isRequired
+};
 export default ProductSummaryList;

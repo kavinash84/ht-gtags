@@ -29,6 +29,7 @@ import Row from 'hometown-components-dev/lib/RowHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 
+import { getCartList } from 'selectors/cart';
 /**
  * Page Components
  */
@@ -37,8 +38,6 @@ import LoginModal from 'containers/Login/LoginForm';
 import AddressForm from './AddressForm';
 import OrderSummary from './OrderSummary';
 import PaymentMethods from '../PaymentMethods';
-
-// import { getNotDelivered } from 'selectors/cart';
 
 /**
  * Icons
@@ -49,6 +48,7 @@ const styles = require('./DeliveryAddress.scss');
 const mapStateToProps = ({
  userLogin, app, checkout, myaddress, address, profile, cart
 }) => ({
+  results: getCartList(cart),
   isLoggedIn: userLogin.isLoggedIn,
   sessionId: app.sessionId,
   nextstep: checkout.nextstep,
@@ -344,13 +344,14 @@ class DeliveryAddress extends Component {
   render() {
     const {
       isLoggedIn,
-      // history,
+      history,
       loading,
       addresses,
       currentaddressindex,
       shippingIsBilling,
       userEmail,
-      summary
+      summary,
+      results
     } = this.props;
     const { addressform } = this.state;
     return (
@@ -482,16 +483,15 @@ class DeliveryAddress extends Component {
           <Col variant="col-4">
             <Box bg="sidebar" px={40} py={30}>
               <OrderSummary
+                history={history}
+                results={results}
                 itemsTotal={summary.items}
                 setDiscount={summary.combined_set_discount}
                 savings={summary.savings}
                 shipping={summary.shipping_charges}
                 totalCart={summary.total}
-                onClick={() => null}
                 itemsCount={summary.items_count}
                 discount={summary.coupon_discount}
-                hidebutton
-                hidecoupon
               />
               <PaymentMethods />
             </Box>
@@ -508,7 +508,8 @@ DeliveryAddress.defaultProps = {
   currentaddressindex: -1,
   userEmail: '',
   summary: null,
-  couponlistToggle: false
+  couponlistToggle: false,
+  results: []
 };
 DeliveryAddress.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
@@ -530,6 +531,7 @@ DeliveryAddress.propTypes = {
   loadPincodeDetails: PropTypes.func.isRequired,
   cart: PropTypes.object.isRequired,
   summary: PropTypes.object,
-  couponlistToggle: PropTypes.bool
+  couponlistToggle: PropTypes.bool,
+  results: PropTypes.array
 };
 export default connect(mapStateToProps, mapDispatchToProps)(DeliveryAddress);
