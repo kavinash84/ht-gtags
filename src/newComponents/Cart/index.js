@@ -87,7 +87,13 @@ const Cart = ({
               <Heading>My Shopping Cart : {results.length} Items</Heading>
             </Box>
             <Box variant="col-4" textAlign="right">
-              <Button height="auto" display="flex" alignItems="center" ml="auto">
+              <Button
+                height="auto"
+                display="flex"
+                alignItems="center"
+                ml="auto"
+                onClick={checkCartBeforeCheckout(checkCart, sessionId)}
+              >
                 <Image src={checkoutIcon} alt="Delete" height="18px" mr="0.625rem" />
                 SECURE CHECKOUT
               </Button>
