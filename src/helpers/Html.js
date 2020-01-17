@@ -41,8 +41,8 @@ export default class Html extends Component {
 
   render() {
     const {
-      assets, store, content, bundles, styleTags
-    } = this.props;
+ assets, store, content, bundles, styleTags
+} = this.props;
     let SF_CHAT = {
       url: 'https://praxisretail.my.salesforce.com',
       liveAgentUrl: 'https://praxisretail.secure.force.com/LiveAgent',
@@ -222,7 +222,15 @@ export default class Html extends Component {
           <script type="text/javascript" src="https://service.force.com/embeddedservice/5.0/esw.min.js" />
           <script
             type="text/javascript"
-            src="https://c.la1-c1-hnd.salesforceliveagent.com/content/g/js/46.0/deployment.js"
+            src="https://c.la1-c1-hnd.salesforceliveagent.com/content/g/js/47.0/deployment.js"
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+               liveagent.init('${SF_CHAT.baseLiveAgentURL}, '${SF_CHAT.deploymentId}', '${SF_CHAT.version}');
+             `
+            }}
+            charSet="UTF-8"
           />
           <script
             dangerouslySetInnerHTML={{
