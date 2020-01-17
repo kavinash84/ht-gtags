@@ -1,28 +1,46 @@
 import React from 'react';
-import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
-import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+
+/* ====== Components ====== */
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Body from 'hometown-components-dev/lib/BodyHtV1';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
+
+/* ====== Page Components ====== */
+import Footer from 'newComponents/Footer';
+import Header from 'newComponents/Header';
 import MyMenu from 'newComponents/MyMenu';
 import ProfileForm from 'newComponents/ProfileForm';
 import UpdatePasswordForm from 'containers/UpdatePassword';
-import MenuFooter from 'containers/MenuFooter';
 
 const ProfileContainer = () => (
-  <BoxHtV1>
-    <MenuFooter pageTitle="My Profile">
-      <MyMenu page="profile" />
-      <ContainerHtV1 type="container" pr={0} pl={0}>
-        <RowHtV1 display="block" mr={0} ml={0} padding="2rem 0">
-          <BoxHtV1 col="6" paddingRight="3rem" width="49.8%">
+  <Wrapper>
+    <Body>
+      {/* Header */}
+      <Header />
+
+      {/* Container */}
+      <Container mt={80}>
+        <Row>
+          <Heading>Hello Matthew</Heading>
+        </Row>
+        <Row>
+          <Box variant="col-2" pr={30}>
+            <MyMenu page="profile" />
+          </Box>
+          <Box variant="col-10" pl={30} sx={{ borderLeft: 'divider' }}>
             <ProfileForm />
-          </BoxHtV1>
-          <BoxHtV1 col="6" paddingLeft="3rem" width="49.8%">
             <UpdatePasswordForm />
-          </BoxHtV1>
-        </RowHtV1>
-      </ContainerHtV1>
-    </MenuFooter>
-  </BoxHtV1>
+          </Box>
+        </Row>
+      </Container>
+
+      {/* Footer */}
+      <Footer />
+    </Body>
+  </Wrapper>
 );
 
 export default ProfileContainer;
