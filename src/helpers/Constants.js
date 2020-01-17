@@ -10,6 +10,7 @@ export const MY_WISHLIST_URL = '/wishlist';
 export const MY_ADDRESS_URL = '/my-address';
 export const MY_CASES_URL = '/my-cases';
 export const FORGOT_PASSWORD_URL = '/forgot-password';
+export const MY_DASHBOARD_URL = '/my-dashboard';
 
 export const PAYMENT_SUCCESS = '/payment-success';
 export const PAYMENT_FAILURE = '/payment-failed';

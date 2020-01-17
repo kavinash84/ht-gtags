@@ -11,7 +11,7 @@ import Text from 'hometown-components-dev/lib/TextHtV1';
 /**
  * helpers
  */
-import { MY_ORDER_URL, MY_PROFILE_URL, MY_ADDRESS_URL, MY_CASES_URL } from 'helpers/Constants';
+import { MY_ORDER_URL, MY_PROFILE_URL, MY_ADDRESS_URL, MY_CASES_URL, MY_DASHBOARD_URL } from 'helpers/Constants';
 
 const MenuItem = ({ text, to, ...props }) => (
   <Box pb={10} {...props}>
@@ -42,7 +42,7 @@ const MyOrder = ({ page }) => (
       }}
     >
       <MenuItem
-        to={MY_ORDER_URL}
+        to={MY_DASHBOARD_URL}
         pb={0}
         text="Dashboard"
         fontFamily="medium"

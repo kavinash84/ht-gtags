@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import ProfileFormContainer from 'hometown-components-dev/lib/FormsHtV1/ProfileFormHtV1';
 import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
 import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
+import ColHtV1 from 'hometown-components-dev/lib/ColHtV1';
 import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
+import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
 import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
 import { validateEmail, isBlank } from 'js-utility-functions';
 import { validateMobile } from 'utils/validation';
@@ -145,12 +147,62 @@ export default class ProfileForm extends Component {
     const { response } = this.props;
     return (
       <BoxHtV1 className={styles.formContainer}>
-        <SectionHtV1 mb="0.3125rem" pr="0.5rem" pl="0.5rem">
-          <RowHtV1 display="block" mr="0" ml="0">
+        <SectionHtV1 mb="0.3125rem" pr="0.5rem">
+          <ColHtV1 display="block" mr="0" ml="0">
             <HeadingHtV1 fontSize="1.25rem" color="textDark" mb="0px" mt="0px" fontFamily="light">
-              Profile Information
+              Profile Details
             </HeadingHtV1>
-          </RowHtV1>
+            <SectionHtV1 mb="0.3125rem" pr="0.5rem">
+              <RowHtV1 display="block" mr="0" ml="0" mb={16}>
+                <LabelHtV1 variant="profileDetails">
+                  Full Name
+                </LabelHtV1>
+                <BoxHtV1 variant="profileDetails">
+                  {fullName}
+                </BoxHtV1>
+              </RowHtV1>
+              <RowHtV1 display="block" mr="0" ml="0" mb={16}>
+                <LabelHtV1 variant="profileDetails">
+                  E-mail-ID
+                </LabelHtV1>
+                <BoxHtV1 variant="profileDetails">
+                  {email}
+                </BoxHtV1>
+              </RowHtV1>
+              <RowHtV1 display="block" mr="0" ml="0" mb={16}>
+                <LabelHtV1 variant="profileDetails">
+                  Phone
+                </LabelHtV1>
+                <BoxHtV1 variant="profileDetails">
+                  {phone}
+                </BoxHtV1>
+              </RowHtV1>
+              <RowHtV1 display="block" mr="0" ml="0" mb={16}>
+                <LabelHtV1 variant="profileDetails">
+                  Gender
+                </LabelHtV1>
+                <BoxHtV1 variant="profileDetails">
+                  Male
+                </BoxHtV1>
+              </RowHtV1>
+              <RowHtV1 display="block" mr="0" ml="0" mb={16}>
+                <LabelHtV1 variant="profileDetails">
+                  Date of Birth
+                </LabelHtV1>
+                <BoxHtV1 variant="profileDetails">
+                  01/01/1993
+                </BoxHtV1>
+              </RowHtV1>
+              <RowHtV1 display="block" mr="0" ml="0" mb={16}>
+                <LabelHtV1 variant="profileDetails">
+                  Location
+                </LabelHtV1>
+                <BoxHtV1 variant="profileDetails">
+                  Mumbai
+                </BoxHtV1>
+              </RowHtV1>
+            </SectionHtV1>
+          </ColHtV1>
         </SectionHtV1>
         <BoxHtV1 className={styles.formWrapper}>
           <SectionHtV1 p="0.5rem" mb="0">
