@@ -36,7 +36,8 @@ MenuItem.propTypes = {
 const MyOrder = ({ page }) => (
   <Fragment>
     <Box
-      py={20}
+      pt={30}
+      pb={10}
       sx={{
         borderBottom: 'divider'
       }}
@@ -71,14 +72,13 @@ const MyOrder = ({ page }) => (
       </Text>
       <MenuItem to={MY_ORDER_URL} text="My Orders" color={page === 'order' ? 'primary' : 'textPrimary'} />
       <MenuItem to={MY_PROFILE_URL} text="My Profile" color={page === 'profile' ? 'primary' : 'textPrimary'} />
-      <MenuItem to={MY_ADDRESS_URL} text="My Address" color={page === 'address' ? 'primary' : 'textPrimary'} />
-      <MenuItem to={MY_CASES_URL} pb={0} text="My Cases" color={page === 'cases' ? 'primary' : 'textPrimary'} />
+      <MenuItem to={MY_ADDRESS_URL} text="My Address" color={page === 'address' ? 'primary' : 'textPrimary'} pb={0} />
     </Box>
     <Box py={20}>
       <Text variant="small" color="textLight" fontSize={12} fontFamily="light" pb={12}>
         COMPLAINTS
       </Text>
-      <MenuItem to={MY_CASES_URL} pb={0} text="My Cases" color={page === 'cases' ? 'primary' : 'textPrimary'} />
+      <MenuItem to={MY_CASES_URL} text="My Cases" color={page === 'cases' ? 'primary' : 'textPrimary'} pb={0} />
     </Box>
   </Fragment>
 );

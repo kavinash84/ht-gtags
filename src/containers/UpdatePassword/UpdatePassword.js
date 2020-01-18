@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import UpdatePasswordForm from 'hometown-components-dev/lib/FormsHtV1/UpdatePasswordFormHtV1';
-import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
-import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
-import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
 import { isBlank } from 'js-utility-functions';
 import { validatePassword } from 'utils/validation';
 import { updateUserPassword } from 'redux/modules/updatepassword';
@@ -109,8 +107,6 @@ export default class UpdatePasswordFormContainer extends Component {
   };
 
   render() {
-    const styles = require('./index.scss');
-
     const {
       oldPwd,
       newPwd,
@@ -124,39 +120,37 @@ export default class UpdatePasswordFormContainer extends Component {
     } = this.state;
     const { response } = this.props;
     return (
-      <BoxHtV1 className={styles.formContainer}>
-        <SectionHtV1 mb="0.3125rem" pr="0.5rem" pl="0.5rem">
-          <RowHtV1 display="block" mr="0" ml="0">
-            <HeadingHtV1 fontSize="1.25rem" color="textDark" mb="0px" mt="0px" fontFamily="light">
-              Update Password
-            </HeadingHtV1>
-          </RowHtV1>
-        </SectionHtV1>
-        <BoxHtV1 className={styles.formWrapper}>
-          <SectionHtV1 p="0.5rem" mb="0">
-            <RowHtV1 display="block" mr="0" ml="0">
-              <BoxHtV1>
-                <UpdatePasswordForm
-                  oldPwd={oldPwd}
-                  onChangeOldPwd={this.onChangeOldPwd}
-                  oldPwdFeedBackError={oldPwdError}
-                  oldPwdFeedBackMessage={oldPwdErrorMessage}
-                  newPwd={newPwd}
-                  onChangeNewPwd={this.onChangeNewPwd}
-                  newPwdFeedBackError={newPwdError}
-                  newPwdFeedBackMessage={newPwdErrorMessage}
-                  confirmPwd={confirmPwd}
-                  onChangeConfirmPwd={this.onChangeConfirmPwd}
-                  confirmPwdFeedBackError={confirmPwdError}
-                  confirmPwdFeedBackMessage={confirmPwdErrorMessage}
-                  onSubmitUpdatePassword={this.onSubmitUpdatePassword}
-                  response={response}
-                />
-              </BoxHtV1>
-            </RowHtV1>
-          </SectionHtV1>
-        </BoxHtV1>
-      </BoxHtV1>
+      <Box mt={50}>
+        <Heading
+          fontSize={20}
+          color="textDark"
+          pb={16}
+          mb={30}
+          sx={{
+            borderBottom: 'divider'
+          }}
+        >
+          Update Password
+        </Heading>
+        <Box>
+          <UpdatePasswordForm
+            oldPwd={oldPwd}
+            onChangeOldPwd={this.onChangeOldPwd}
+            oldPwdFeedBackError={oldPwdError}
+            oldPwdFeedBackMessage={oldPwdErrorMessage}
+            newPwd={newPwd}
+            onChangeNewPwd={this.onChangeNewPwd}
+            newPwdFeedBackError={newPwdError}
+            newPwdFeedBackMessage={newPwdErrorMessage}
+            confirmPwd={confirmPwd}
+            onChangeConfirmPwd={this.onChangeConfirmPwd}
+            confirmPwdFeedBackError={confirmPwdError}
+            confirmPwdFeedBackMessage={confirmPwdErrorMessage}
+            onSubmitUpdatePassword={this.onSubmitUpdatePassword}
+            response={response}
+          />
+        </Box>
+      </Box>
     );
   }
 }

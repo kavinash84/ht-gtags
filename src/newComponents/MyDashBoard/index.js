@@ -1,12 +1,20 @@
 import React, { Component } from 'react';
-import MyMenu from 'newComponents/MyMenu';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import CardHtV1 from 'hometown-components-dev/lib/CardHtV1';
-import ColHtV1 from 'hometown-components-dev/lib/ColHtV1';
-import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
-import Image from 'hometown-components-dev/lib/ImageHtV1';
-import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
+/**
+ * Components
+ */
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Flex from 'hometown-components-dev/lib/FlexHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
+import Label from 'hometown-components-dev/lib/LabelHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+
+/**
+ * Icons
+ */
 const EditProfileIcon = require('../../../static/editIconTwo.svg');
 const ordersIcon = require('../../../static/orders.png');
 const favouriteIcon = require('../../../static/favourite.svg');
@@ -15,137 +23,92 @@ const groupIcon = require('../../../static/group.svg');
 const creditCardIcon = require('../../../static/creditCard.svg');
 const descriptionIcon = require('../../../static/description.svg');
 
-class MyDashBoardContainer extends Component {
+const ProfileBlock = ({
+ title, subTitle, src, url
+}) => (
+  <Col width={1 / 3} px={10}>
+    <Link to={url}>
+      <Flex
+        px={10}
+        py={15}
+        mb={20}
+        justifyContent="center"
+        flexDirection="column"
+        alignItems="center"
+        sx={{
+          border: 'divider'
+        }}
+      >
+        <Image src={src} height={40} alt="orders" />
+        <Label mt={10} mb={4} fontSize={14} fontFamily="medium" textAlign="center">
+          {title}
+        </Label>
+        <Label fontSize={12} fontFamily="light" textAlign="center">
+          {subTitle}
+        </Label>
+      </Flex>
+    </Link>
+  </Col>
+);
+
+ProfileBlock.propTypes = {
+  title: PropTypes.string.isRequired,
+  subTitle: PropTypes.string.isRequired,
+  src: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired
+};
+
+class MyDashBoard extends Component {
   render() {
     return (
-      <BoxHtV1 type="block" margin="32px" width="564px">
-        <MyMenu page="address" />
-        <RowHtV1
-          py={20}
+      <Box width={7 / 10} px={10}>
+        <Row
+          mx={0}
+          pb={20}
+          mb={30}
+          alignItems="center"
           sx={{
-        borderBottom: 'divider'
-      }}>
-          <BoxHtV1 sx={{
-            width: '108px',
-            height: '108px',
-            borderRadius: '8px',
-            backgroundColor: '#595858',
-            marginRight: '34px',
+            borderBottom: 'divider'
           }}
+        >
+          <Col
+            width={100}
+            height={100}
+            bg="bgPrimary"
+            mr={15}
+            sx={{
+              borderRadius: 8
+            }}
           />
-          <ColHtV1>
-            <LabelHtV1 mb={7} fontSize="18px" fontWeight="bold" variant="profileDashBoard">
+          <Col>
+            <Label mb={10} fontSize={18} fontWeight="bold" variant="profileDashBoard">
               Matthew xyz
-            </LabelHtV1>
-            <LabelHtV1 mb={7} fontSize="17px" fontWeight="300"variant="profileDashBoard">
-            matthew.xyz@gmail.com
-            </LabelHtV1>
-            <LabelHtV1 mb={7} fontSize="17px" fontWeight="300" variant="profileDashBoard">
-            +91974209765
-            </LabelHtV1>
-          </ColHtV1>
-          <Image
-            src={EditProfileIcon}
-            width="34px"
-            height="34px"
-            alt="profileEdit"
+            </Label>
+            <Label mb={8} fontSize={16} fontWeight={300} variant="profileDashBoard">
+              matthew.xyz@gmail.com
+            </Label>
+            <Label fontSize={16} fontWeight={300} variant="profileDashBoard">
+              +91974209765
+            </Label>
+          </Col>
+          <Image src={EditProfileIcon} width="34px" height="34px" alt="profileEdit" />
+        </Row>
+        <Row mx={-10}>
+          <ProfileBlock url="/my-orders" title="Orders" subTitle="Check your order status" src={ordersIcon} />
+          <ProfileBlock url="/wishlist" title="Wishlist" subTitle="Check saved for later items" src={favouriteIcon} />
+          <ProfileBlock url="/cart" title="Cart" subTitle="Check your shopping cart" src={shoppingCartIcon} />
+          <ProfileBlock url="/" title="Coupons" subTitle="Check available coupons" src={groupIcon} />
+          <ProfileBlock url="/" title="Saved Cards" subTitle="Check saved for later items" src={creditCardIcon} />
+          <ProfileBlock
+            url="/profile"
+            title="Profile Details"
+            subTitle="Update your profile details"
+            src={descriptionIcon}
           />
-        </RowHtV1>
-        <RowHtV1>
-          <CardHtV1 variant="card.rectangle" mt={32} display="flex" justifyContent="center" flexDirection="column">
-            <Image
-              src={ordersIcon}
-              width="45px"
-              height="42px"
-              mt={10}
-              alt="orders"
-            />
-            <LabelHtV1 mt={11} mb={3} fontSize="15px" fontWeight="bold" variant="profileDashBoard" flexDirection="column">
-              Orders
-            </LabelHtV1>
-            <LabelHtV1 fontSize="12px" fontWeight="100" variant="profileDashBoard" flexDirection="column">
-            Check your order status
-            </LabelHtV1>
-          </CardHtV1>
-          <CardHtV1 variant="card.rectangle" mt={32} display="flex" justifyContent="center" flexDirection="column">
-            <Image
-              src={favouriteIcon}
-              width="42px"
-              height="37px"
-              mt={10}
-              alt="wishlist"
-            />
-            <LabelHtV1 mt={11} mb={3} fontSize="15px" fontWeight="bold" variant="profileDashBoard" flexDirection="column">
-            Wishlist
-            </LabelHtV1>
-            <LabelHtV1 fontSize="12px" fontWeight="100" variant="profileDashBoard" flexDirection="column">
-            Check saved for later items
-            </LabelHtV1>
-          </CardHtV1>
-          <CardHtV1 variant="card.rectangle" mt={32} display="flex" justifyContent="center" flexDirection="column">
-            <Image
-              src={shoppingCartIcon}
-              width="40px"
-              height="40px"
-              mt={10}
-              alt="shoppingCart"
-            />
-            <LabelHtV1 mt={11} mb={3} fontSize="15px" fontWeight="bold" variant="profileDashBoard" flexDirection="column">
-            Cart
-            </LabelHtV1>
-            <LabelHtV1 fontSize="12px" fontWeight="100" variant="profileDashBoard" flexDirection="column">
-            Check your shopping cart
-            </LabelHtV1>
-          </CardHtV1>
-          <CardHtV1 variant="card.rectangle" mt={32} display="flex" justifyContent="center" flexDirection="column">
-            <Image
-              src={groupIcon}
-              width="52px"
-              height="52px"
-              mt={10}
-              alt="coupons"
-            />
-            <LabelHtV1 mt={11} mb={3} fontSize="15px" fontWeight="bold" variant="profileDashBoard" flexDirection="column">
-            Coupons
-            </LabelHtV1>
-            <LabelHtV1 fontSize="12px" fontWeight="100" variant="profileDashBoard" flexDirection="column">
-            Check available coupons
-            </LabelHtV1>
-          </CardHtV1>
-          <CardHtV1 variant="card.rectangle" mt={32} display="flex" justifyContent="center" flexDirection="column">
-            <Image
-              src={creditCardIcon}
-              width="46px"
-              height="37px"
-              mt={10}
-              alt="savedCards"
-            />
-            <LabelHtV1 mt={11} mb={3} fontSize="15px" fontWeight="bold" variant="profileDashBoard" flexDirection="column">
-            Saved Cards
-            </LabelHtV1>
-            <LabelHtV1 fontSize="12px" fontWeight="100" variant="profileDashBoard" flexDirection="column">
-            Check saved for later items
-            </LabelHtV1>
-          </CardHtV1>
-          <CardHtV1 variant="card.rectangle" mt={32} display="flex" justifyContent="center" flexDirection="column">
-            <Image
-              src={descriptionIcon}
-              width="31px"
-              height="39px"
-              mt={10}
-              alt="profileDetails"
-            />
-            <LabelHtV1 mt={11} mb={3} fontSize="15px" fontWeight="bold" variant="profileDashBoard" flexDirection="column">
-            Profile Details
-            </LabelHtV1>
-            <LabelHtV1 fontSize="12px" fontWeight="100" variant="profileDashBoard" flexDirection="column">
-            Update your profile details
-            </LabelHtV1>
-          </CardHtV1>
-        </RowHtV1>
-      </BoxHtV1>
+        </Row>
+      </Box>
     );
   }
 }
 
-export default MyDashBoardContainer;
+export default MyDashBoard;

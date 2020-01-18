@@ -22,17 +22,30 @@ const ProfileContainer = () => (
       <Header />
 
       {/* Container */}
-      <Container mt={80}>
-        <Row>
-          <Heading>Hello Matthew</Heading>
+      <Container pt={80}>
+        <Row width={1} sx={{ borderBottom: 'divider' }} mx={0}>
+          <Heading fontSize={20} pb={10}>
+            Hello Matthew
+          </Heading>
         </Row>
         <Row>
           <Box variant="col-2" pr={30}>
             <MyMenu page="profile" />
           </Box>
           <Box variant="col-10" pl={30} sx={{ borderLeft: 'divider' }}>
-            <ProfileForm />
-            <UpdatePasswordForm />
+            <Box
+              px={30}
+              py={30}
+              mt={30}
+              width={7 / 10}
+              sx={{
+                boxShadow: 'profile',
+                border: 'divider'
+              }}
+            >
+              <ProfileForm />
+              <UpdatePasswordForm />
+            </Box>
           </Box>
         </Row>
       </Container>

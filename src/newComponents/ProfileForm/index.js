@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import ProfileFormContainer from 'hometown-components-dev/lib/FormsHtV1/ProfileFormHtV1';
-import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
-import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
-import ColHtV1 from 'hometown-components-dev/lib/ColHtV1';
-import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
-import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
 import { validateEmail, isBlank } from 'js-utility-functions';
+
+/**
+ * Components
+ */
+import ProfileFormContainer from 'hometown-components-dev/lib/FormsHtV1/ProfileFormHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Label from 'hometown-components-dev/lib/LabelHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+
+/**
+ * modules / utils
+ */
 import { validateMobile } from 'utils/validation';
 import { updateUserProfile } from 'redux/modules/profile';
 import {
@@ -16,6 +24,22 @@ import {
   // allowTypeOf,
   isGSTNumber
 } from 'utils/helper';
+
+const ProfileViewRow = ({ title, value }) => (
+  <Row mb={20}>
+    <Col variant="col-3">
+      <Label fontFamily="light">{title}</Label>
+    </Col>
+    <Col variant="col-7">
+      <Label>{value}</Label>
+    </Col>
+  </Row>
+);
+
+ProfileViewRow.propTypes = {
+  title: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired
+};
 
 @connect(({ profile }) => ({
   profile: profile.data,
@@ -129,7 +153,6 @@ export default class ProfileForm extends Component {
   };
 
   render() {
-    const styles = require('./index.scss');
     const {
       email,
       phone,
@@ -146,93 +169,56 @@ export default class ProfileForm extends Component {
     } = this.state;
     const { response } = this.props;
     return (
-      <BoxHtV1 className={styles.formContainer}>
-        <SectionHtV1 mb="0.3125rem" pr="0.5rem">
-          <ColHtV1 display="block" mr="0" ml="0">
-            <HeadingHtV1 fontSize="1.25rem" color="textDark" mb="0px" mt="0px" fontFamily="light">
-              Profile Details
-            </HeadingHtV1>
-            <SectionHtV1 mb="0.3125rem" pr="0.5rem">
-              <RowHtV1 display="block" mr="0" ml="0" mb={16}>
-                <LabelHtV1 variant="profileDetails">
-                  Full Name
-                </LabelHtV1>
-                <BoxHtV1 variant="profileDetails">
-                  {fullName}
-                </BoxHtV1>
-              </RowHtV1>
-              <RowHtV1 display="block" mr="0" ml="0" mb={16}>
-                <LabelHtV1 variant="profileDetails">
-                  E-mail-ID
-                </LabelHtV1>
-                <BoxHtV1 variant="profileDetails">
-                  {email}
-                </BoxHtV1>
-              </RowHtV1>
-              <RowHtV1 display="block" mr="0" ml="0" mb={16}>
-                <LabelHtV1 variant="profileDetails">
-                  Phone
-                </LabelHtV1>
-                <BoxHtV1 variant="profileDetails">
-                  {phone}
-                </BoxHtV1>
-              </RowHtV1>
-              <RowHtV1 display="block" mr="0" ml="0" mb={16}>
-                <LabelHtV1 variant="profileDetails">
-                  Gender
-                </LabelHtV1>
-                <BoxHtV1 variant="profileDetails">
-                  Male
-                </BoxHtV1>
-              </RowHtV1>
-              <RowHtV1 display="block" mr="0" ml="0" mb={16}>
-                <LabelHtV1 variant="profileDetails">
-                  Date of Birth
-                </LabelHtV1>
-                <BoxHtV1 variant="profileDetails">
-                  01/01/1993
-                </BoxHtV1>
-              </RowHtV1>
-              <RowHtV1 display="block" mr="0" ml="0" mb={16}>
-                <LabelHtV1 variant="profileDetails">
-                  Location
-                </LabelHtV1>
-                <BoxHtV1 variant="profileDetails">
-                  Mumbai
-                </BoxHtV1>
-              </RowHtV1>
-            </SectionHtV1>
-          </ColHtV1>
-        </SectionHtV1>
-        <BoxHtV1 className={styles.formWrapper}>
-          <SectionHtV1 p="0.5rem" mb="0">
-            <RowHtV1 display="block" mr="0" ml="0">
-              <BoxHtV1>
-                <ProfileFormContainer
-                  email={email}
-                  onChangeEmail={() => {}}
-                  emailFeedBackError={emailError}
-                  emailFeedBackMessage={emailErrorMessage}
-                  gst={gst}
-                  onChangeGST={this.onChangeGST}
-                  gstFeedBackError={gstError}
-                  gstFeedBackMessage={gstErrorMessage}
-                  phone={phone}
-                  onChangePhone={() => {}}
-                  phoneFeedBackError={phoneError}
-                  phoneFeedBackMessage={phoneErrorMessage}
-                  fullName={fullName}
-                  onChangeFullName={this.onChangeFullName}
-                  fullNameFeedBackError={fullNameError}
-                  fullNameFeedBackMessage={fullNameErrorMessage}
-                  onSubmitProfile={this.onSubmitProfile}
-                  response={response}
-                />
-              </BoxHtV1>
-            </RowHtV1>
-          </SectionHtV1>
-        </BoxHtV1>
-      </BoxHtV1>
+      <Box>
+        <Box>
+          <Heading
+            fontSize={20}
+            color="textDark"
+            pb={16}
+            mb={30}
+            sx={{
+              borderBottom: 'divider'
+            }}
+          >
+            Profile Details
+          </Heading>
+          <Box>
+            <ProfileViewRow title="Full Name" value={fullName} />
+            <ProfileViewRow title="E-mail-ID" value={email} />
+            <ProfileViewRow title="Phone" value={phone} />
+            <ProfileViewRow title="Gender" value="Male" />
+            <ProfileViewRow title="Date of Birth" value="01/01/1993" />
+            <ProfileViewRow title="Location" value="Mumbai" />
+          </Box>
+        </Box>
+        <Box pt={50} pb={20}>
+          <Button variant="outline.primary" width={180}>
+            Edit
+          </Button>
+        </Box>
+        <Box>
+          <ProfileFormContainer
+            email={email}
+            onChangeEmail={() => {}}
+            emailFeedBackError={emailError}
+            emailFeedBackMessage={emailErrorMessage}
+            gst={gst}
+            onChangeGST={this.onChangeGST}
+            gstFeedBackError={gstError}
+            gstFeedBackMessage={gstErrorMessage}
+            phone={phone}
+            onChangePhone={() => {}}
+            phoneFeedBackError={phoneError}
+            phoneFeedBackMessage={phoneErrorMessage}
+            fullName={fullName}
+            onChangeFullName={this.onChangeFullName}
+            fullNameFeedBackError={fullNameError}
+            fullNameFeedBackMessage={fullNameErrorMessage}
+            onSubmitProfile={this.onSubmitProfile}
+            response={response}
+          />
+        </Box>
+      </Box>
     );
   }
 }
