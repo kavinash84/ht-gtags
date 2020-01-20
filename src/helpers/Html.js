@@ -41,8 +41,8 @@ export default class Html extends Component {
 
   render() {
     const {
- assets, store, content, bundles, styleTags
-} = this.props;
+      assets, store, content, bundles, styleTags
+    } = this.props;
     let SF_CHAT = {
       url: 'https://praxisretail.my.salesforce.com',
       liveAgentUrl: 'https://praxisretail.secure.force.com/LiveAgent',
