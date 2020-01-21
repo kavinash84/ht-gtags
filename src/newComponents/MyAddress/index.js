@@ -5,12 +5,13 @@ import { withRouter } from 'react-router';
 import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
 import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
 import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
+import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
+import ColHtV1 from 'hometown-components-dev/lib/ColHtV1';
 import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
 import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
 import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
 import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
 import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
-import MyMenu from 'newComponents/MyMenu';
 import { addAddress, updateAddress } from 'redux/modules/myaddress';
 // Validators
 import {
@@ -24,7 +25,9 @@ import {
 } from 'utils/validation';
 import { allowNChar, allowTypeOf, isGSTNumber } from 'utils/helper';
 
-const addIcon = require('../../../static/round-add_circle_outline.svg');
+const addIcon = require('../../../static/addressAddIcon.svg');
+const editIcon = require('../../../static/addressEdit.svg');
+const removeIcon = require('../../../static/addressRemove.svg');
 const styles = require('./MyAddress.scss');
 
 const initialState = {
@@ -342,8 +345,18 @@ export default class DeliveryAddress extends Component {
     const { data, useremail } = this.props;
     const { loading } = this.props;
     return (
-      <BoxHtV1 type="block" mb="2rem">
-        <MyMenu page="address" />
+      <BoxHtV1 type="block" mb="2rem" width="868px">
+        <RowHtV1 justifyContent="space-between" ml={0} mr={0} width={1}>
+          <LabelHtV1 fontSize={20} fontWeight="500" color="#474747" variant="profileDashBoard">
+          Saved Addresses
+          </LabelHtV1>
+          <ButtonHtV1 bg="#fff" onClick={this.toggleAddAddresForm}>
+          <ImageHtV1 src={addIcon} alt="Add another address" />
+          <LabelHtV1 fontSize={14} fontWeight="bold" color="#f15a22" variant="profileDashBoard">
+            ADD NEW ADDRESS
+          </LabelHtV1>
+          </ButtonHtV1>
+          </RowHtV1>
         <SectionHtV1
           sx={{
             display: 'flex',
@@ -352,16 +365,15 @@ export default class DeliveryAddress extends Component {
             position: 'relative',
             marginBottom: '0',
             boxSizing: 'border-box',
-            padding: '1.25rem 0.9375rem 0.9375rem'
           }}
         >
-          <ContainerHtV1 type="container" pr="0" pl="0">
-            <RowHtV1 display="block" mr="0" ml="0">
+          <ContainerHtV1 type="container" pr={0} pl={0} width={1}>
+            <ColHtV1 display="block" mr="0" ml="0" pl={0} pr={0}>
               {data.map((item, index) => (
                 <BoxHtV1
                   col="4"
                   pr="0.625rem"
-                  width="33.24%"
+                  width={1}
                   float="left"
                   key={`${item.id_address_customer || '_'}_${String(index)}`}
                 >
@@ -371,14 +383,15 @@ export default class DeliveryAddress extends Component {
                       borderRadius: '4px',
                       bg: '#ffffff',
                       border: 'solid 2px #efefef',
-                      padding: '0.625rem 1rem',
+                      padding: '12.7px 12.7px 12.3px 14px ',
                       color: 'rgba(0, 0, 0, 0.6)',
                       textAlign: 'left',
                       lineHeight: '1.6',
                       fontSize: '14px',
                       width: '100%',
                       minHeight: '135px',
-                      marginBottom: '10px'
+                      marginBottom: '10px',
+                      height: '100%'
                     }}
                     onClick={() => this.handleClick(index)}
                   >
@@ -394,19 +407,36 @@ export default class DeliveryAddress extends Component {
                     <br />
                     {item.state || ''}
                     <br />
+                    <RowHtV1 sx={{
+                      borderTop: 'divider',
+                      marginTop: '12px'
+                    }}>
+                      <ButtonHtV1 bg="#fff" width="50%">
+                        <LabelHtV1 fontSize={21} color="#f15a22" variant="profileDashBoard">
+                          <ImageHtV1 src={editIcon} height="14px" width="14px" mr={12} />
+                            Edit
+                        </LabelHtV1>
+                      </ButtonHtV1>
+                      <ButtonHtV1 bg="#fff" width="50%">
+                        <LabelHtV1 fontSize={21} color="#f15a22" variant="profileDashBoard">
+                          <ImageHtV1 src={removeIcon} height="18px" width="18px" mr={12} />
+                           Remove
+                        </LabelHtV1>
+                      </ButtonHtV1>
+                    </RowHtV1>
                   </ButtonHtV1>
                 </BoxHtV1>
               ))}
 
-              <BoxHtV1 col="2">
+              {/* <BoxHtV1 col="2">
                 <ButtonHtV1 className={styles.addAddressBtn} onClick={this.toggleAddAddresForm}>
                   <ImageHtV1 src={addIcon} alt="Add another address" />
                   <TextHtV1 color="rgba(0, 0, 0, 0.6)" ta="center">
                     Add address
                   </TextHtV1>
                 </ButtonHtV1>
-              </BoxHtV1>
-            </RowHtV1>
+              </BoxHtV1> */}
+            </ColHtV1>
             {editForm && (
               <form onSubmit={this.handleSubmit}>
                 <RowHtV1 display="block" mr="0" ml="0" mt="1rem">
@@ -500,7 +530,7 @@ export default class DeliveryAddress extends Component {
                       fontFamily="regular"
                       height="42px"
                       mt="1.5rem"
-                      width="100%"
+                      width={1}
                       onClick={this.handleSubmit}
                       disabled={this.checkDisabled()}
                     >

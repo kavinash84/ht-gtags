@@ -12,9 +12,9 @@ import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 import Footer from 'newComponents/Footer';
 import Header from 'newComponents/Header';
 import MyMenu from 'newComponents/MyMenu';
-import MyDashBoardContainer from 'newComponents/MyDashBoard';
+import CoupensContainer from 'newComponents/Coupens';
 
-const MyDashBoard = () => (
+const Coupens = () => (
   <Wrapper>
     <Body>
       {/* Header */}
@@ -29,10 +29,10 @@ const MyDashBoard = () => (
         </Row>
         <Row>
           <Col variant="col-2" pr={30}>
-            <MyMenu page="my dashboard" />
+            <MyMenu page="coupens" />
           </Col>
           <Col variant="col-10" px={30} py={30} sx={{ borderLeft: 'divider' }}>
-            <MyDashBoardContainer />
+            <CoupensContainer />
           </Col>
         </Row>
       </Container>
@@ -43,4 +43,4 @@ const MyDashBoard = () => (
   </Wrapper>
 );
 
-export default MyDashBoard;
+export default Coupens;

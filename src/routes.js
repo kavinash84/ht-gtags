@@ -41,6 +41,7 @@ import MyOrder from 'containers/MyOrder';
 import MyAddress from 'containers/MyAddress';
 import MyCases from 'containers/MyCases';
 import MyDashBoard from 'containers/MyDashBoard';
+import Coupens from 'containers/Coupens';
 import Wishlist from 'containers/Wishlist';
 import TrackOrder from 'containers/TrackOrder';
 
@@ -100,6 +101,7 @@ const routes = [
       { path: '/my-cases', exact: true, component: isAuthenticated(MyCases) },
       { path: '/profile', exact: true, component: isAuthenticated(Profile) },
       { path: '/my-dashboard', exact: true, component: isAuthenticated(MyDashBoard) },
+      { path: '/coupens', exact: true, component: isAuthenticated(Coupens) },
       { path: '/:productname?/sku/:skuId', exact: true, component: ProductDetails },
       { path: '/checkout/delivery-address', exact: true, component: DeliveryAddress },
       { path: '/checkout/payment-options', exact: true, component: PaymentOptions },
