@@ -157,7 +157,7 @@ export default class DeliveryAddress extends Component {
     this.setState({
       name: value,
       nameError: checkError || check,
-      nameErrorMessage: check ? 'Special character not allowed !' : nameErrorMessage
+      nameErrorMessage: check ? 'Numbers and special characters are not allowed !' : nameErrorMessage
     });
   };
   onChangeAddress = (e, key) => {

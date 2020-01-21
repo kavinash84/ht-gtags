@@ -222,7 +222,15 @@ export default class Html extends Component {
           <script type="text/javascript" src="https://service.force.com/embeddedservice/5.0/esw.min.js" />
           <script
             type="text/javascript"
-            src="https://c.la1-c1-hnd.salesforceliveagent.com/content/g/js/46.0/deployment.js"
+            src="https://c.la1-c1-hnd.salesforceliveagent.com/content/g/js/47.0/deployment.js"
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+               liveagent.init('${SF_CHAT.baseLiveAgentURL}, '${SF_CHAT.deploymentId}', '${SF_CHAT.version}');
+             `
+            }}
+            charSet="UTF-8"
           />
           <script
             dangerouslySetInnerHTML={{
