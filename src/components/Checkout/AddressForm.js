@@ -176,7 +176,7 @@ const AddressForm = props => {
         {formType !== 'billing' && (
           <Div col="6" pr="10px">
             <FormInput
-              label="GST"
+              label="GST(optional)"
               type="text"
               placeholder=""
               onChange={e => onChangeGST(formType, e.target.value)}
