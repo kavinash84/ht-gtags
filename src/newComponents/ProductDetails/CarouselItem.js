@@ -1,22 +1,16 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-// import ReactImageMagnify from 'react-image-magnify';
+import ReactImageMagnify from 'react-image-magnify';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 // import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-// import ImageShimmer from 'hometown-components-dev/lib/ImageShimmerHtV1';
+import ImageShimmer from 'hometown-components-dev/lib/ImageShimmerHtV1';
 
-// const getLowResolution = url => url.replace('-zoom.jpg', '-product_500.jpg');
+const getLowResolution = url => url.replace('-zoom.jpg', '-product_500.jpg');
 const getHighResolution = url => url.replace('.jpg', '-zoom.jpg');
 
 const CategoryItem = ({ image, name }) => (
-  <Fragment>
-    <Image alt={name} src={getHighResolution(image)} />
-    {/* <ImageShimmer
-      src={getHighResolution(image)}
-      height="545px"
-      overflow="hidden"
-    >
-      {(imageURL, error) => {
+  <ImageShimmer src={getHighResolution(image)} height="545px" overflow="hidden">
+    {(imageURL, error) => {
       if (error) return <Image alt={name} src={imageURL} height="545px" />;
       return (
         <ReactImageMagnify
@@ -42,8 +36,7 @@ const CategoryItem = ({ image, name }) => (
         />
       );
     }}
-    </ImageShimmer> */}
-  </Fragment>
+  </ImageShimmer>
 );
 
 CategoryItem.defaultProps = {

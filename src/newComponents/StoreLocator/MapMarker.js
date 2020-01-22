@@ -13,7 +13,7 @@ const openLocationWindow = (position, currentLocation) => {
   window.open(mapURL, '_blank');
 };
 const MapMarker = ({
- store, address, phone, position, currentLocation
+ city, store, address, phone, position, currentLocation, recordStoreDirection
 }) => (
   <div>
     <div className={styles.mapMarker} style={{ top: `${position}` }}>
@@ -21,7 +21,14 @@ const MapMarker = ({
       <div>{address}</div>
       <div>{phone}</div>
       <button
-        onClick={() => {
+        onClick={e => {
+          e.stopPropagation();
+          recordStoreDirection({
+            city,
+            store,
+            event: 'event storelocator',
+            category: 'Storelocator - Location'
+          });
           openLocationWindow(position, currentLocation);
         }}
         className={storeStyle.directionBtn}
@@ -32,13 +39,17 @@ const MapMarker = ({
   </div>
 );
 MapMarker.defaultProps = {
-  currentLocation: {}
+  currentLocation: {},
+  store: '',
+  city: ''
 };
 MapMarker.propTypes = {
-  store: PropTypes.string.isRequired,
+  store: PropTypes.string,
+  city: PropTypes.string,
   address: PropTypes.string.isRequired,
   phone: PropTypes.string.isRequired,
   position: PropTypes.object.isRequired,
-  currentLocation: PropTypes.object
+  currentLocation: PropTypes.object,
+  recordStoreDirection: PropTypes.func.isRequired
 };
 export default MapMarker;

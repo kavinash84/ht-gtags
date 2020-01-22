@@ -40,7 +40,16 @@ export default class ProductDetailSlider extends Component {
       <Row>
         <Col>
           <img className="hide" itemProp="image" src={(data && `${data[0].url}-zoom.jpg`) || ''} alt={title} />
-          <Slider asNavFor={this.state.nav2} ref={slider => (this.slider1 = slider)}>
+          <Slider
+            asNavFor={this.state.nav2}
+            ref={slider => (this.slider1 = slider)}
+            beforeChange={(currentSlide, nextSlide) => {
+              console.log('before in slider1', currentSlide, nextSlide);
+            }}
+            afterChange={currentSlide => {
+              console.log('after in slider1', currentSlide);
+            }}
+          >
             {data.map(slide => (
               <CarouselItem key={slide.id_catalog_product_image} image={`${slide.url}.jpg`} name={title} />
             ))}
@@ -54,6 +63,12 @@ export default class ProductDetailSlider extends Component {
             className="pdpThumbSlider"
             centerPadding="30px"
             variableWidth={true}
+            beforeChange={(currentSlide, nextSlide) => {
+              console.log('before in slider2', currentSlide, nextSlide);
+            }}
+            afterChange={currentSlide => {
+              console.log('after in slider2', currentSlide);
+            }}
           >
             {data.map(slide => (
               <Box className={styles.pdpThumbSliderItem} key={slide.id_catalog_product_image}>

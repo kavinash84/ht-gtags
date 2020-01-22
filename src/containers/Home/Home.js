@@ -296,7 +296,7 @@ export default class Home extends Component {
           </Section>
 
           {/* Share and Inspire */}
-          {instafeeds && instafeeds.length && (
+          {instafeeds && !!instafeeds.length && (
             <Section variant="section.primary">
               <Container>
                 <LazyLoad height={200} offset={100}>
