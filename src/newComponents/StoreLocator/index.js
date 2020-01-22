@@ -217,6 +217,17 @@ class StoreLocator extends React.Component {
       category: 'Storelocator'
     });
   };
+  directionHandler = (store = '', city = '') => {
+    const { gaVisitEvent: recordStoreVisit } = this.props;
+    if (store && city) {
+      recordStoreVisit({
+        city,
+        store,
+        event: 'event storelocator',
+        category: 'Storelocator - Location'
+      });
+    }
+  };
   // handleSelectState = (state, mapData) => {
   //   const currentList = mapData.filter(item => item.state === state);
   //   let lat = 0;
@@ -335,7 +346,9 @@ class StoreLocator extends React.Component {
     }
   };
   render() {
-    const { data, locationLoaded, redirectCity } = this.props;
+    const {
+ data, locationLoaded, redirectCity, gaVisitEvent: recordStoreDirection
+} = this.props;
     const mapData = data.items.text;
     const {
       position,
@@ -379,6 +392,7 @@ class StoreLocator extends React.Component {
               handleClick={this.handleClick}
               selectedStore={selectedStore}
               currentLocation={currentLocation}
+              recordStoreDirection={recordStoreDirection}
             />
             <Box
               pt={30}
@@ -511,6 +525,10 @@ class StoreLocator extends React.Component {
                                   display: 'flex',
                                   alignItems: 'center',
                                   cursor: 'pointer'
+                                }}
+                                onClick={e => {
+                                  e.stopPropagation();
+                                  this.directionHandler(item.store, item.city);
                                 }}
                               >
                                 <Image src={DirectionIcon} mr={10} /> Get Direction
