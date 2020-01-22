@@ -227,7 +227,7 @@ export default class Html extends Component {
           <script
             dangerouslySetInnerHTML={{
               __html: `
-               liveagent.init('${SF_CHAT.baseLiveAgentURL}, '${SF_CHAT.deploymentId}', '${SF_CHAT.version}');
+               liveagent.init('${SF_CHAT.baseLiveAgentURL}', '${SF_CHAT.deploymentId}', '${SF_CHAT.version}');
              `
             }}
             charSet="UTF-8"
