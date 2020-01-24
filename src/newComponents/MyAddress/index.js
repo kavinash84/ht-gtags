@@ -348,15 +348,15 @@ export default class DeliveryAddress extends Component {
       <BoxHtV1 type="block" mb="2rem" width="868px">
         <RowHtV1 justifyContent="space-between" ml={0} mr={0} width={1}>
           <LabelHtV1 fontSize={20} fontWeight="500" color="#474747" variant="profileDashBoard">
-          Saved Addresses
+            Saved Addresses
           </LabelHtV1>
           <ButtonHtV1 bg="#fff" onClick={this.toggleAddAddresForm}>
-          <ImageHtV1 src={addIcon} alt="Add another address" />
-          <LabelHtV1 fontSize={14} fontWeight="bold" color="#f15a22" variant="profileDashBoard">
-            ADD NEW ADDRESS
-          </LabelHtV1>
+            <ImageHtV1 src={addIcon} alt="Add another address" />
+            <LabelHtV1 fontSize={14} fontWeight="bold" color="#f15a22" variant="profileDashBoard">
+              ADD NEW ADDRESS
+            </LabelHtV1>
           </ButtonHtV1>
-          </RowHtV1>
+        </RowHtV1>
         <SectionHtV1
           sx={{
             display: 'flex',
@@ -410,7 +410,8 @@ export default class DeliveryAddress extends Component {
                     <RowHtV1 sx={{
                       borderTop: 'divider',
                       marginTop: '12px'
-                    }}>
+                    }}
+                    >
                       <ButtonHtV1 bg="#fff" width="50%">
                         <LabelHtV1 fontSize={21} color="#f15a22" variant="profileDashBoard">
                           <ImageHtV1 src={editIcon} height="14px" width="14px" mr={12} />

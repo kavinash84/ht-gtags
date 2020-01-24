@@ -7,14 +7,15 @@ import { bindActionCreators } from 'redux';
 import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
 import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
 import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
+import ColHtV1 from 'hometown-components-dev/lib/ColHtV1';
 // import { Label } from 'hometown-components-dev/lib/Label';
 import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
 import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
+import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
 // import { isEmpty } from 'utils/validation';
 import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
 import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
 // import FormInput from 'hometown-components-dev/lib/Forms/FormInput';
-import MyMenu from 'newComponents/MyMenu';
 import { getDateFilters } from 'utils/helper';
 import { loadMyCases } from 'redux/modules/mycases';
 
@@ -103,7 +104,6 @@ class MyCasesContainer extends Component {
     const { loading } = this.props;
     return (
       <BoxHtV1 type="block" mb="2rem">
-        <MyMenu page="address" />
         <SectionHtV1 display="flex" pt="1.25rem" mb="0" height="auto">
           <ContainerHtV1 type="container" pr="0" pl="0" width="100%">
             <RowHtV1 display="block" mr="0" ml="0" mb="1.5rem">
@@ -129,12 +129,12 @@ class MyCasesContainer extends Component {
                 <ButtonHtV1
                   disabled={loading}
                   onClick={this.getFilteredCases}
-                  border="1px solid"
-                  color="colors.white"
+                  border="1px solid #f15a22"
+                  color="#f15a22"
                   lh="1.5"
                   size="block"
                   btnType="primary"
-                  bg="rgb(249, 141, 41)"
+                  bg="#fff"
                   height="38px"
                   fontSize="16px"
                 >
@@ -142,70 +142,71 @@ class MyCasesContainer extends Component {
                 </ButtonHtV1>
               </BoxHtV1>
             </RowHtV1>
-            <RowHtV1 display="block" mr="0" ml="0">
+            <RowHtV1 display="block" mr="0" ml="0" mb="32px" width="972px" bg="colors.white">
               {data.map((item, index) => (
-                <BoxHtV1 col="12" key={String(index)} mb="20px">
+                <BoxHtV1
+                  col="12"
+                  key={String(index)}
+                  width={1}
+                  height="124px"
+                  mb={32}
+                  sx={{
+                    boxShadow: '3px 3px 4px 0 rgba(0, 0, 0, 0.13)',
+                    border: '0.2px solid #595858',
+                  }}
+                >
                   <ButtonHtV1
                     ta="left"
                     size="block"
-                    border="1px solid rgba(151, 151, 151, 0.47)"
-                    bc="rgba(151, 151, 151, 0.47)"
-                    btnType="btnOutline"
                     p="0"
+                    bg="#fff"
+                    margin="16px 25px 28px 40px"
                     onClick={() => this.handleClick(index)}
                   >
-                    <RowHtV1 type="block" m="0" mb="1rem" className={styles.blockHeading} p="15px 15px !important">
-                      <BoxHtV1 col="6">
-                        <HeadingHtV1 fontSize="1rem" color="textLight" mb="0px" mt="0px" fontFamily="light">
-                          {`Case No - ${item.caseNumber || 'NA'}`}
+                    <ColHtV1>
+                      <RowHtV1
+                        justifyContent="space-between"
+                        pb={9}
+                        sx={{
+                          borderBottom: 'divider'
+                        }}
+                      >
+                        <HeadingHtV1 color="#474747" fontSize={16} fontWeight="bold" variant="profileDashBoard">
+                          {`Case No . ${item.caseNumber || 'NA'}`}
                         </HeadingHtV1>
-                      </BoxHtV1>
-                      <BoxHtV1 col="6" ta="right">
-                        {`Status - ${item.status || 'NA'}`}
-                      </BoxHtV1>
-                    </RowHtV1>
-                    <RowHtV1 p="15px 15px" type="block" m="0" mb="0.5rem" className={styles.blockBody}>
-                      <BoxHtV1 col="3" pr="10px">
-                        <TextHtV1 mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
-                          Created Date
+                        <BoxHtV1 color="#474747" fontSize={16} fontWeight="bold" variant="profileDashBoard">
+                          {`${item.status || 'NA'}`}
+                        </BoxHtV1>
+                      </RowHtV1>
+                      <RowHtV1 justifyContent="space-between" pt={17} pb={15}>
+                        <TextHtV1 color="#474747" fontSize={14} fontWeight="bold" variant="profileDashBoard">
+                          DATE CREATED
                         </TextHtV1>
-                        <TextHtV1 mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
+                        <TextHtV1 color="#474747" fontSize={14} fontWeight="bold" variant="profileDashBoard">
+                          SUBJECT
+                        </TextHtV1>
+                        <TextHtV1 color="#474747" fontSize={14} fontWeight="bold" variant="profileDashBoard">
+                          TYPE
+                        </TextHtV1>
+                        <TextHtV1 color="#474747" fontSize={14} fontWeight="bold" variant="profileDashBoard">
+                          CATEGORY
+                        </TextHtV1>
+                      </RowHtV1>
+                      <RowHtV1 justifyContent="space-between" mb={32}>
+                        <TextHtV1 color="#474747" fontSize={16} variant="profileDashBoard">
                           {item.CreatedDate || ''}
                         </TextHtV1>
-                      </BoxHtV1>
-                      <BoxHtV1 col="4" pr="10px">
-                        <TextHtV1 whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
-                          Subject
-                        </TextHtV1>
-                        <TextHtV1 whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
+                        <TextHtV1 color="#474747" fontSize={16} variant="profileDashBoard">
                           {item.subject || ''}
                         </TextHtV1>
-                      </BoxHtV1>
-                      <BoxHtV1 col="2" pr="10px">
-                        <TextHtV1 whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
-                          Type
-                        </TextHtV1>
-                        <TextHtV1 whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
+                        <TextHtV1 color="#474747" fontSize={16} variant="profileDashBoard">
                           {item.type || ''}
                         </TextHtV1>
-                      </BoxHtV1>
-                      <BoxHtV1 col="3" pr="10px">
-                        <TextHtV1 whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
-                          Category
-                        </TextHtV1>
-                        <TextHtV1 whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
+                        <TextHtV1 color="#474747" fontSize={16} variant="profileDashBoard">
                           {this.getMapping(item.category, item.subcategory, 'cat')}
                         </TextHtV1>
-                      </BoxHtV1>
-                      {/* <Div col="3" pr="10px">
-                        <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
-                          SubCategory
-                        </Text>
-                        <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
-                          {this.getMapping(item.category, item.subcategory, 'subcat')}
-                        </Text>
-                      </Div> */}
-                    </RowHtV1>
+                      </RowHtV1>
+                    </ColHtV1>
                   </ButtonHtV1>
                 </BoxHtV1>
               ))}
