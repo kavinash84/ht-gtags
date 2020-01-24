@@ -7,10 +7,10 @@ import Container from 'hometown-components-dev/lib/ContainerHtV1';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
 
 /* ====== Page Components ====== */
-import HeaderTop from 'newComponents/Header/HeaderTop';
-import TopBar from 'newComponents/Header/TopBar';
-import HoverMenuBox from 'newComponents/HoverBox/HoverMenuBox';
-import NavBar from 'newComponents/NavBar';
+import HeaderTop from 'components/Header/HeaderTop';
+import TopBar from 'components/Header/TopBar';
+import HoverMenuBox from 'components/HoverBox/HoverMenuBox';
+import NavBar from 'components/NavBar';
 
 @connect(({ homepage }) => ({
   menuItems: homepage.menu.data

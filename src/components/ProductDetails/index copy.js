@@ -37,13 +37,13 @@ import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
  */
 import AddReview from 'hometown-components-dev/lib/ReviewsHtV1/WriteReview';
 import ColorOptionHtV1 from 'hometown-components-dev/lib/ProductDetailsHtV1/ColorOption';
-import CombinedBuy from 'newComponents/CombinedBuy';
+import CombinedBuy from 'components/CombinedBuy';
 import EmiModal from 'containers/EmiModal/EmiModal';
 import ProductDesc from 'hometown-components-dev/lib/ProductDetailsHtV1/ProductDesc';
-import ProductCarousel from 'newComponents/ProductCarousel';
+import ProductCarousel from 'components/ProductCarousel';
 import Reviews from 'hometown-components-dev/lib/ReviewsHtV1';
 import ServiceDetails from 'hometown-components-dev/lib/ProductDetailsHtV1/ServiceDetails';
-import ShareBar from 'newComponents/ShareBar';
+import ShareBar from 'components/ShareBar';
 import Specs from 'hometown-components-dev/lib/ProductDetailsHtV1/Specs';
 import TitlePrice from 'hometown-components-dev/lib/ProductDetailsHtV1/TitlePrice';
 import WishListButtonHtV1 from 'hometown-components-dev/lib/WishlistButtonHtV1';

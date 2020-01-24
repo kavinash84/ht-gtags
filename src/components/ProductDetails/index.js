@@ -38,15 +38,15 @@ import Row from 'hometown-components-dev/lib/RowHtV1';
  */
 import AddReview from 'hometown-components-dev/lib/ReviewsHtV1/WriteReview';
 import ColorOption from 'hometown-components-dev/lib/ProductDetailsHtV1/ColorOption';
-// import CombinedBuy from 'newComponents/CombinedBuy';
+// import CombinedBuy from 'components/CombinedBuy';
 import ProductDesc from 'hometown-components-dev/lib/ProductDetailsHtV1/ProductDesc';
-import ProductCarousel from 'newComponents/ProductCarousel';
+import ProductCarousel from 'components/ProductCarousel';
 import ResponsiveModal from 'components/Modal';
 import Reviews from 'hometown-components-dev/lib/ReviewsHtV1';
 import ReviewDisplay from 'hometown-components-dev/lib/ReviewsHtV1/ReviewDisplay';
 import ServiceDetails from 'hometown-components-dev/lib/ProductDetailsHtV1/ServiceDetails';
 import EmiOptions from 'hometown-components-dev/lib/ProductDetailsHtV1/EmiOptions';
-// import ShareBar from 'newComponents/ShareBar';
+// import ShareBar from 'components/ShareBar';
 import Specs from 'hometown-components-dev/lib/ProductDetailsHtV1/Specs';
 import TitlePrice from 'hometown-components-dev/lib/ProductDetailsHtV1/TitlePrice';
 import WishListButton from 'hometown-components-dev/lib/WishlistButtonHtV1';

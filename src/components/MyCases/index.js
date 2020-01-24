@@ -14,7 +14,7 @@ import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
 import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
 import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
 // import FormInput from 'hometown-components-dev/lib/Forms/FormInput';
-import MyMenu from 'newComponents/MyMenu';
+import MyMenu from 'components/MyMenu';
 import { getDateFilters } from 'utils/helper';
 import { loadMyCases } from 'redux/modules/mycases';
 

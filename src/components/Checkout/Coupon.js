@@ -19,9 +19,9 @@ import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import InputField from 'hometown-components-dev/lib/InputFieldHtV1';
-import LocalInlineNotification from '../../newComponents/LocalInlineNotification';
+import LocalInlineNotification from '../../components/LocalInlineNotification';
 import CouponList from './CouponList';
-import Notifs from '../../newComponents/Notifs';
+import Notifs from '../../components/Notifs';
 
 /**
  * Icons

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import TitleBar from 'newComponents/TitleBar';
+import TitleBar from 'components/TitleBar';
 import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
 import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
 import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
@@ -13,7 +13,7 @@ import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
 import { connect } from 'react-redux';
 // import { formatDate } from 'utils/formatters';
 // import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
-import ResponsiveModal from 'newComponents/Modal';
+import ResponsiveModal from 'components/Modal';
 import TrackingTimeline from '../MyOrder/TrackingTimeline';
 
 const LoaderIcon = require('../../../static/refresh-black.svg');

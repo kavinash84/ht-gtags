@@ -7,7 +7,7 @@ import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import Row from 'hometown-components-dev/lib/RowHtV1';
-import ResponsiveModal from 'newComponents/Modal';
+import ResponsiveModal from 'components/Modal';
 
 /**
  * Utils

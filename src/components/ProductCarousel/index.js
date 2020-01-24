@@ -9,7 +9,7 @@ import { formatProductURL } from 'utils/helper';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
 
 /* ====== Page Components ====== */
-import Title from 'newComponents/Title';
+import Title from 'components/Title';
 
 import ProductCarouselItem from './ProductCarouselItem';
 import SlickSlider from '../SlickSlider';

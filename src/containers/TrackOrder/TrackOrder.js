@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import MenuFooter from 'containers/MenuFooter';
-import TrackOrderContainer from 'newComponents/TrackOrder/TrackOrder';
+import TrackOrderContainer from 'components/TrackOrder/TrackOrder';
 import { trackOrder, closeStatusModal } from 'redux/modules/trackorder';
 
 const mapDispatchToProps = dispatch =>

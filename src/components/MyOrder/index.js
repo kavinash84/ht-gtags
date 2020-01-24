@@ -12,7 +12,7 @@ import { getDateFilters } from 'utils/helper';
 import { loadMyOrders } from 'redux/modules/orders';
 import { loadOrdersTracking, closeModal, setCurrentOrder } from 'redux/modules/tracking';
 // import { Label } from 'hometown-components-dev/lib/Label';
-import MyMenu from 'newComponents/MyMenu';
+import MyMenu from 'components/MyMenu';
 import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
 import OrderBlock from './OrderBlock';
 

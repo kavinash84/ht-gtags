@@ -5,7 +5,7 @@ import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
 import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
 import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
 import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
-import ResponsiveModal from 'newComponents/Modal';
+import ResponsiveModal from 'components/Modal';
 
 const Step1Icon = require('../../../static/basket.png');
 const Step2Icon = require('../../../static/checked.png');

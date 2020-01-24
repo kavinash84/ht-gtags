@@ -7,7 +7,7 @@ import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
 import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
 import { Link } from 'react-router-dom';
 
-const styles = require('newComponents/Listing/BreadCrumb.scss');
+const styles = require('components/Listing/BreadCrumb.scss');
 
 const TitleBar = ({ title, productCount }) => (
   <SectionHtV1 mb="0.625rem" p="1.25rem 0.5rem" bg="bg">

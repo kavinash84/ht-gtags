@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
 
 /* ====== Page Components ====== */
-import Title from 'newComponents/Title';
-import SlickSlider from 'newComponents/SlickSlider';
-import CategoryCarouselItem from 'newComponents/CategoryCarousel/CategoryCarouselItem';
+import Title from 'components/Title';
+import SlickSlider from 'components/SlickSlider';
+import CategoryCarouselItem from 'components/CategoryCarousel/CategoryCarouselItem';
 
 const adjustSlides = length => ({
   slidesToShow: length >= 4 ? 4 : length,

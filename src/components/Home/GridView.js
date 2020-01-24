@@ -12,7 +12,7 @@ import Section from 'hometown-components-dev/lib/SectionHtV1';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
 
 /* ====== Page Components ====== */
-import Title from 'newComponents/Title';
+import Title from 'components/Title';
 
 const renderGrid = (data, isProduct, showList) => (
   <Row>

@@ -11,10 +11,10 @@ import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 /**
  * Page Components
  */
-import Footer from 'newComponents/Footer';
-import Header from 'newComponents/Header';
-import ProductDetailsContainer from 'newComponents/ProductDetails';
-import ProductDetailsShimmer from 'newComponents/ProductDetails/ProductDetailsShimmer';
+import Footer from 'components/Footer';
+import Header from 'components/Header';
+import ProductDetailsContainer from 'components/ProductDetails';
+import ProductDetailsShimmer from 'components/ProductDetails/ProductDetailsShimmer';
 import ProductNotFound from './ProductNotFound';
 
 @connect(({ productdetails }) => ({

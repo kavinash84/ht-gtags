@@ -32,11 +32,11 @@ import UserIcon from 'hometown-components-dev/lib/Icons/UserHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 
 /* ====== Page Components ====== */
-import Search from 'newComponents/Search';
-import ResponsiveModal from 'newComponents/Modal';
-import PinCode from 'newComponents/PinCode';
-import LoginForm from 'newComponents/Login/LoginForm';
-import SignupForm from 'newComponents/Signup/SignupForm';
+import Search from 'components/Search';
+import ResponsiveModal from 'components/Modal';
+import PinCode from 'components/PinCode';
+import LoginForm from 'components/Login/LoginForm';
+import SignupForm from 'components/Signup/SignupForm';
 
 const LogoIcon = require('../../../static/logo@2x.png');
 const PincodeModalIcon = require('../../../static/map-placeholder.svg');

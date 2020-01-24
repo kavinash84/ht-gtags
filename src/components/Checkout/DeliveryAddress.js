@@ -33,7 +33,7 @@ import { getCartList } from 'selectors/cart';
 /**
  * Page Components
  */
-import ResponsiveModal from 'newComponents/Modal';
+import ResponsiveModal from 'components/Modal';
 import LoginModal from 'containers/Login/LoginForm';
 import AddressForm from './AddressForm';
 import OrderSummary from './OrderSummary';

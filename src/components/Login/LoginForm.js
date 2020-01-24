@@ -22,9 +22,9 @@ import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
 import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
 
 /* ====== Page Components ====== */
-import LoginForm from 'newComponents/Login/LoginForm';
-import GoogleLoginBtn from 'newComponents/Login/GoogleLogin';
-import LoginViaOtp from 'newComponents/Login/LoginViaOtp';
+import LoginForm from 'components/Login/LoginForm';
+import GoogleLoginBtn from 'components/Login/GoogleLogin';
+import LoginViaOtp from 'components/Login/LoginViaOtp';
 
 const OTPIcon = require('../../../static/otp.svg');
 const EmailIcon = require('../../../static/email-primary.svg');

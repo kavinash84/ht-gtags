@@ -7,8 +7,8 @@ import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
 import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
 
 /* ====== Page Components ====== */
-import UspItem from 'newComponents/Home/UspItem';
-import Title from 'newComponents/Title';
+import UspItem from 'components/Home/UspItem';
+import Title from 'components/Title';
 
 const usp1Icon = require('../../../static/usp-1.svg');
 const usp2Icon = require('../../../static/usp-2.svg');

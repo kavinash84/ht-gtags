@@ -23,15 +23,15 @@ import Text from 'hometown-components-dev/lib/TextHtV1';
 import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 
 /* ====== Page Components ====== */
-import CategoryCarousel from 'newComponents/CategoryCarousel';
-import OfferBanner from 'newComponents/Home/OfferBanner';
-import Carousel from 'newComponents/Carousel';
-import Footer from 'newComponents/Footer';
-import Header from 'newComponents/Header';
-import GridView from 'newComponents/Home/GridView';
-import MainSlider from 'newComponents/MainSlider';
-import Title from 'newComponents/Title';
-import Usp from 'newComponents/Home/Usp';
+import CategoryCarousel from 'components/CategoryCarousel';
+import OfferBanner from 'components/Home/OfferBanner';
+import Carousel from 'components/Carousel';
+import Footer from 'components/Footer';
+import Header from 'components/Header';
+import GridView from 'components/Home/GridView';
+import MainSlider from 'components/MainSlider';
+import Title from 'components/Title';
+import Usp from 'components/Home/Usp';
 
 const sliderImage = require('../../static/slider.png');
 const bannerImage = require('../../static/banner.png');

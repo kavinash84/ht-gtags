@@ -15,10 +15,10 @@ import Section from 'hometown-components-dev/lib/SectionHtV1';
 import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 
 /* ====== Page Components ====== */
-import CommonLayout from 'newComponents/Category/CommonLayout';
-import Header from 'newComponents/Header';
-import Footer from 'newComponents/Footer';
-import MainSlider from 'newComponents/MainSlider';
+import CommonLayout from 'components/Category/CommonLayout';
+import Header from 'components/Header';
+import Footer from 'components/Footer';
+import MainSlider from 'components/MainSlider';
 // import SeoContent from 'components/SeoContent';
 
 // const getSubMenu = (categories, key) =>
@@ -92,7 +92,7 @@ export default class Category extends Component {
               <Section key={String(index)}>
                 <Container>{CommonLayout(cat.component, cat.title, cat.data, cat.is_product)}</Container>
               </Section>
-              ))}
+            ))}
 
           {/* Footer */}
           <Footer />

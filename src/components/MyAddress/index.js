@@ -10,7 +10,7 @@ import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
 import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
 import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
 import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
-import MyMenu from 'newComponents/MyMenu';
+import MyMenu from 'components/MyMenu';
 import { addAddress, updateAddress } from 'redux/modules/myaddress';
 // Validators
 import {

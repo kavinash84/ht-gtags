@@ -22,13 +22,13 @@ import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 /**
  * Page Components
  */
-import Cart from 'newComponents/Cart';
-import Footer from 'newComponents/Footer';
-import Header from 'newComponents/Header';
-import CartShimmer from 'newComponents/Cart/CartShimmer';
-import PinCode from 'newComponents/PinCode';
-import ResponsiveModal from 'newComponents/Modal';
-import Notifications from 'newComponents/Notifications';
+import Cart from 'components/Cart';
+import Footer from 'components/Footer';
+import Header from 'components/Header';
+import CartShimmer from 'components/Cart/CartShimmer';
+import PinCode from 'components/PinCode';
+import ResponsiveModal from 'components/Modal';
+import Notifications from 'components/Notifications';
 
 /**
  * Icons / Images

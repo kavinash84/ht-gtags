@@ -19,10 +19,10 @@ import Row from 'hometown-components-dev/lib/RowHtV1';
 /**
  * Page Components
  */
-import Footer from 'newComponents/Footer';
+import Footer from 'components/Footer';
 import ForgotPasswordForm from 'hometown-components-dev/lib/FormsHtV1/ForgotPasswordFormHtV1';
-import GoogleLoginBtn from 'newComponents/LoginForms/GoogleLogin';
-import Header from 'newComponents/Header';
+import GoogleLoginBtn from 'components/LoginForms/GoogleLogin';
+import Header from 'components/Header';
 
 /**
  * helpers / modules

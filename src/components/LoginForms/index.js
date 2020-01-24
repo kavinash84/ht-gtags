@@ -16,7 +16,7 @@ import Text from 'hometown-components-dev/lib/TextHtV1';
  */
 import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
 import LoginFormWrapper from 'hometown-components-dev/lib/FormsHtV1/LoginFormHtV1';
-import ResponsiveModal from 'newComponents/Modal';
+import ResponsiveModal from 'components/Modal';
 
 /**
  * utility / modules / helper / validation

@@ -1,6 +1,6 @@
 import React from 'react';
 import { provideHooks } from 'redial';
-import MyAddressContainer from 'newComponents/MyAddress';
+import MyAddressContainer from 'components/MyAddress';
 import MenuFooter from 'containers/MenuFooter';
 import { loadMyAddress } from 'redux/modules/myaddress';
 

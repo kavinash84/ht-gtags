@@ -13,8 +13,8 @@ import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 /**
  * Page Components
  */
-import DeliveryAddress from 'newComponents/Checkout/DeliveryAddress';
-import HeaderSecondary from 'newComponents/HeaderSecondary';
+import DeliveryAddress from 'components/Checkout/DeliveryAddress';
+import HeaderSecondary from 'components/HeaderSecondary';
 
 /**
  * modules / selectors / helpers
