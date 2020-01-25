@@ -365,7 +365,7 @@ class ProductDetails extends React.Component {
                   {offerImage && offerImageRedirect && (
                     <Row display="block" mt="0" mb="0" mr="0.9375rem" ml="0.9375rem">
                       <Div col="12" mt="0" pr="0.3125rem">
-                        <a target="_blank" rel="noopener noreferrer" href={offerImageRedirect}>
+                        <a rel="noopener noreferrer" href={offerImageRedirect}>
                           <Img src={offerImage} alt="" width="100%" mt="0" mb="0.625rem" />
                         </a>
                       </Div>
@@ -533,7 +533,4 @@ ProductDetails.propTypes = {
   combinedbuy: PropTypes.array,
   session: PropTypes.string
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
