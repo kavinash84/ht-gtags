@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MainSlider from 'components/MainSlider';
+import ServiceSignUp from 'components/ServiceSignUp';
 import Section from 'hometown-components-dev/lib/Section';
 import Container from 'hometown-components-dev/lib/Container';
 import Heading from 'hometown-components-dev/lib/Heading';
@@ -7,7 +8,6 @@ import Div from 'hometown-components-dev/lib/Div';
 import Row from 'hometown-components-dev/lib/Row';
 import Text from 'hometown-components-dev/lib/Text';
 import Img from 'hometown-components-dev/lib/Img';
-import ServiceSignUp from 'components/ServiceSignUp';
 
 export default class ModularKitchen extends Component {
   render() {
