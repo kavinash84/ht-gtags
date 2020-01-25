@@ -81,11 +81,27 @@ class OrderBlock extends Component {
             <LabelHtV1 fontSize={20} fontWeight="500" color="#474747" variant="profileDashBoard">
               Order No. {order.order_number}
             </LabelHtV1>
-            <ButtonHtV1 bg="#fff">
-              <LabelHtV1 fontSize={14} fontWeight="bold" color="#f15a22" variant="profileDashBoard">
-                TRACK ORDER
-              </LabelHtV1>
-            </ButtonHtV1>
+            {show && (isBob === 0 || isBob === '0') && status !== 'canceled' ? (
+              <ButtonHtV1
+                bg="#fff"
+                onClick={() => { this.loadTrackingData(order); }}
+                disabled={trackingLoading && currentOrder === order.order_number}
+              >
+                <LabelHtV1 fontSize={14} fontWeight="bold" color="#f15a22" variant="profileDashBoard">
+
+                  {trackingLoading && currentOrder === order.order_number ? (
+                    <span>
+                    Please Wait
+                      <ImageHtV1 className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />
+                    </span>
+                ) : (
+                  'TRACK ORDER'
+                )}
+                </LabelHtV1>
+              </ButtonHtV1>
+            ) : (
+              ''
+            )}
           </RowHtV1>
         </ColHtV1>
         <ColHtV1
@@ -242,7 +258,7 @@ class OrderBlock extends Component {
         </ColHtV1>
         <BoxHtV1 mb="2.5rem" className={styles.blockWrapper}>
           <RowHtV1 type="block" margin="0px 0px 1rem" className={styles.blockHeading}>
-            {show && (isBob === 0 || isBob === '0') && status !== 'canceled' ? (
+            {/* {show && (isBob === 0 || isBob === '0') && status !== 'canceled' ? (
               <BoxHtV1 textAlign="right" col="6" pr="5px" width="49.8%">
                 <ButtonHtV1
                   disabled={trackingLoading && currentOrder === order.order_number}
@@ -279,7 +295,7 @@ class OrderBlock extends Component {
               </BoxHtV1>
           ) : (
             ''
-          )}
+          )} */}
             {/* <Div col="6" ta="right">
             <Heading fontSize="1.25rem" color="textLight" mb="0px" mt="0px" fontFamily="light">
               <Button
