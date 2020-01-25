@@ -22,12 +22,12 @@ class SavedCardsContainer extends Component {
       <Box>
         <Row justifyContent="space-between" ml={0} mr={0} width={1}>
           <Label fontSize={20} fontWeight="500" color="#474747" variant="profileDashBoard">
-          Saved Cards
+            Saved Cards
           </Label>
-          <ButtonHtV1 bg="#fff" onClick={this.toggleAddAddresForm}>
+          <ButtonHtV1 bg="#fff">
             <Image src={addIcon} alt="Add another address" />
             <Label fontSize={14} fontWeight="bold" color="#f15a22" variant="profileDashBoard">
-            ADD NEW CARD
+              ADD NEW CARD
             </Label>
           </ButtonHtV1>
         </Row>

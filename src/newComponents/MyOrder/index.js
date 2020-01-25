@@ -121,8 +121,7 @@ class MyOrderContainer extends Component {
     } = this.props;
     return (
       <BoxHtV1 type="block">
-        <MyMenu page="order" />
-        <SectionHtV1 display="flex" pt="1.25rem" mb="0" height="auto">
+        <SectionHtV1 display="flex" mb="0" height="auto">
           <ContainerHtV1 type="container" pr="0.5rem" pl="0.5rem">
             <RowHtV1 display="block" mr="0" ml="0" mb="1.5rem">
               <BoxHtV1 col="3" mr="1rem" width="25%">

@@ -38,6 +38,7 @@ import ServiceSignUpContainer from 'components/ServiceSignUp';
 /* user */
 import Profile from 'containers/Profile';
 import MyOrder from 'containers/MyOrder';
+import OrderAndReturn from 'containers/OrderAndReturn';
 import MyAddress from 'containers/MyAddress';
 import MyCases from 'containers/MyCases';
 import MyDashBoard from 'containers/MyDashBoard';
@@ -98,6 +99,7 @@ const routes = [
       { path: '/wishlist', exact: true, component: isAuthenticated(Wishlist) },
       { path: '/checkout/cart', exact: true, component: Cart },
       { path: '/my-orders', exact: true, component: isAuthenticated(MyOrder) },
+      { path: '/order&return', exact: true, component: isAuthenticated(OrderAndReturn) },
       { path: '/my-address', exact: true, component: isAuthenticated(MyAddress) },
       { path: '/my-cases', exact: true, component: isAuthenticated(MyCases) },
       { path: '/profile', exact: true, component: isAuthenticated(Profile) },

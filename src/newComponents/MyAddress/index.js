@@ -9,7 +9,6 @@ import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
 import ColHtV1 from 'hometown-components-dev/lib/ColHtV1';
 import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
 import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
-import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
 import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
 import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
 import { addAddress, updateAddress } from 'redux/modules/myaddress';
