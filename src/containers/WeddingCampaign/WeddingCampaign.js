@@ -78,7 +78,7 @@ const WeddingCampaign = () => (
           <Text ta="center" color="#434341" fontSize="18px" mt="5px" fontFamily="light">
             Our combo offers on furniture and modular kitchens
           </Text>
-          <Link to="/">
+          <Link to="https://www.hometown.in/hot-deals">
             <Text mt="50px" ta="center" fontSize="30px" fontFamily="light" style={{ textDecoration: 'underline' }}>
               SHOP NOW
             </Text>
@@ -98,40 +98,52 @@ const WeddingCampaign = () => (
       </Row>
       <Row ml="-8px" mr="-8px">
         <Div col="4" p="8px">
-          <Img width="100%" src={category1} />
-          <Heading ta="center" color="black" fontFamily="light">
-            FURNITURE ESSENTIALS
-          </Heading>
+          <Link to="/furniture">
+            <Img width="100%" src={category1} />
+            <Heading ta="center" color="black" fontFamily="light">
+              FURNITURE ESSENTIALS
+            </Heading>
+          </Link>
         </Div>
         <Div col="4" p="8px">
-          <Img width="100%" src={category2} />
-          <Heading ta="center" color="black" fontFamily="light">
-            BEDDING ESSENTIALS
-          </Heading>
+          <Link to="/home-furnishings/bedding">
+            <Img width="100%" src={category2} />
+            <Heading ta="center" color="black" fontFamily="light">
+              BEDDING ESSENTIALS
+            </Heading>
+          </Link>
         </Div>
         <Div col="4" p="8px">
-          <Img width="100%" src={category3} />
-          <Heading ta="center" color="black" fontFamily="light">
-            DINNING ESSENTIALS
-          </Heading>
+          <Link to="/tableware">
+            <Img width="100%" src={category3} />
+            <Heading ta="center" color="black" fontFamily="light">
+              DINNING ESSENTIALS
+            </Heading>
+          </Link>
         </Div>
         <Div col="4" p="8px">
-          <Img width="100%" src={category4} />
-          <Heading ta="center" color="black" fontFamily="light">
-            KITCHEN ESSENTIALS
-          </Heading>
+          <Link to="/kitchenware">
+            <Img width="100%" src={category4} />
+            <Heading ta="center" color="black" fontFamily="light">
+              KITCHEN ESSENTIALS
+            </Heading>
+          </Link>
         </Div>
         <Div col="4" p="8px">
-          <Img width="100%" src={category5} />
-          <Heading ta="center" color="black" fontFamily="light">
-            BATH ESSENTIALS
-          </Heading>
+          <Link to="/home-furnishings/bath-accessory">
+            <Img width="100%" src={category5} />
+            <Heading ta="center" color="black" fontFamily="light">
+              BATH ESSENTIALS
+            </Heading>
+          </Link>
         </Div>
         <Div col="4" p="8px">
-          <Img width="100%" src={category6} />
-          <Heading ta="center" color="black" fontFamily="light">
-            TRAVEL ESSENTIALS
-          </Heading>
+          <Link to="/luggage">
+            <Img width="100%" src={category6} />
+            <Heading ta="center" color="black" fontFamily="light">
+              TRAVEL ESSENTIALS
+            </Heading>
+          </Link>
         </Div>
       </Row>
       <Row pb="40px">
@@ -149,7 +161,7 @@ const WeddingCampaign = () => (
           <Text ta="center" color="white" fontSize="24px" mt="5px" fontFamily="light">
             1000+ MODULES | 200+ FINISHES
           </Text>
-          <Link to="/">
+          <Link to="/modular-kitchens/">
             <Text
               mt="50px"
               mb="0"
@@ -178,7 +190,7 @@ const WeddingCampaign = () => (
           <Text ta="center" color="white" fontSize="20px" mt="5px" fontFamily="light">
             FULL HOUSE INTERIORS | PART HOUSE RENOVATION
           </Text>
-          <Link to="/">
+          <Link to="/design-build/">
             <Text
               mt="50px"
               mb="0"
