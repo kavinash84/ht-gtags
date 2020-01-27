@@ -64,6 +64,7 @@ import Terms from 'containers/Terms';
 import WhoWeAre from 'containers/WhoWeAre';
 import LoaderShimmer from 'containers/Loader/LoaderShimmer';
 import Promotions from 'containers/Promotions';
+import Gratification from 'containers/Gratification';
 
 import { categoryRoutes, listingRoutes } from 'helpers/Constants';
 
@@ -106,6 +107,7 @@ const routes = [
       { path: '/my-dashboard', exact: true, component: isAuthenticated(MyDashBoard) },
       { path: '/coupens', exact: true, component: isAuthenticated(Coupens) },
       { path: '/saved-cards', exact: true, component: isAuthenticated(SavedCards) },
+      { path: '/gratification', exact: true, component: isAuthenticated(Gratification) },
       { path: '/:productname?/sku/:skuId', exact: true, component: ProductDetails },
       { path: '/checkout/delivery-address', exact: true, component: DeliveryAddress },
       { path: '/checkout/payment-options', exact: true, component: PaymentOptions },
