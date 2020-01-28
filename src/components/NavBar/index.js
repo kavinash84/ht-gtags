@@ -143,6 +143,19 @@ class NavBar extends Component {
                     Gifting Catalogue
                   </Text>
                 </Box>
+                <Box>
+                  <Text
+                    as={LinkRedirect}
+                    variant="menuLight"
+                    href="https://blog.hometown.in"
+                    title="Hometown Blog"
+                    download
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Blog
+                  </Text>
+                </Box>
               </Card>
             </Box>
           </Row>

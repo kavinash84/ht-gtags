@@ -367,9 +367,9 @@ class ProductDetails extends React.Component {
                   "@context" : "http://schema.org",
                   "@type" : "Product",
                   "url": "${productURL || ''}",
-                  "name" : "${name || ''}",
+                  "name" : "${name.replace(/['"]+/g, '')}",
                   "image" : ${images && images.length && images[0].url ? `["${images[0].url}.jpg"]` : []},
-                  "description" : "${productDescription}",
+                  "description" : "${productDescription.replace(/['"]+/g, '')}",
                   "sku": "${sku || ''}",
                   "brand" : {
                     "@type" : "Brand",
@@ -520,7 +520,7 @@ class ProductDetails extends React.Component {
                   )}
                   {/*
                 {offerImage && offerImageRedirect && (
-                  <a target="_blank" rel="noopener noreferrer" href={offerImageRedirect}>
+                  <a rel="noopener noreferrer" href={offerImageRedirect}>
                     <Image src={offerImage} alt="" width="100%" />
                   </a>
                 )}

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -115,10 +116,7 @@ export default class DeliveryAddress extends Component {
     }
   }
   onSubmitValidator = () => {
-    const {
- email, name, pincode, address1, address2, address3, phone
-} = this.state;
-
+    const { email, name, pincode, address1, address2, address3, phone } = this.state;
     const nameError = isEmpty(name);
     const emailError = isEmpty(email) || !validateEmail(email);
     const phoneError = isEmpty(phone) || validateMobile(phone).error;
@@ -159,7 +157,7 @@ export default class DeliveryAddress extends Component {
     this.setState({
       name: value,
       nameError: checkError || check,
-      nameErrorMessage: check ? 'Special character not allowed !' : nameErrorMessage
+      nameErrorMessage: check ? 'Numbers and special characters are not allowed !' : nameErrorMessage
     });
   };
   onChangeAddress = (e, key) => {
@@ -301,9 +299,7 @@ export default class DeliveryAddress extends Component {
     });
   };
   checkDisabled = () => {
-    const {
- address1Error, address2Error, address3Error, phoneError, pincodeError, nameError, gstError
-} = this.state;
+    const { address1Error, address2Error, address3Error, phoneError, pincodeError, nameError, gstError } = this.state;
     const check =
       address1Error || address2Error || address3Error || phoneError || pincodeError || nameError || gstError;
     return check;
@@ -471,15 +467,17 @@ export default class DeliveryAddress extends Component {
                       feedBackError={pincodeError}
                       feedBackMessage={pincodeErrorMessage}
                     />
-                    <FormInput
+                    {/* <FormInput
+                      style={{ background: '#80808026' }}
+                      readonly
                       label="Email ID *"
                       type="text"
                       placeholder=""
-                      onChange={this.onChangeEmail}
+                      onChange={() => {}}
                       value={useremail}
                       feedBackError={emailError}
                       feedBackMessage={emailErrorMessage}
-                    />
+                    /> */}
                     {/* <FormInput
                       hide
                       label="GST Number "
@@ -574,7 +572,7 @@ export default class DeliveryAddress extends Component {
                       feedBackError={pincodeError}
                       feedBackMessage={pincodeErrorMessage}
                     />
-                    <FormInput
+                    {/* <FormInput
                       label="Email ID *"
                       type="text"
                       placeholder=""
@@ -582,7 +580,7 @@ export default class DeliveryAddress extends Component {
                       value={useremail}
                       feedBackError={emailError}
                       feedBackMessage={emailErrorMessage}
-                    />
+                    />}
                     {/* <FormInput
                       label="GST Number "
                       type="text"

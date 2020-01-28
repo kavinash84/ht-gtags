@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { validateEmail, isBlank } from 'js-utility-functions';
-
 /**
  * Components
  */
@@ -17,7 +16,7 @@ import Box from 'hometown-components-dev/lib/BoxHtV1';
 /**
  * modules / utils
  */
-import { validateMobile } from 'utils/validation';
+import { validateMobile, checkSpecialChar } from 'utils/validation';
 import { updateUserProfile } from 'redux/modules/profile';
 import {
   // allowNChar,
@@ -121,11 +120,13 @@ export default class ProfileForm extends Component {
     const {
       target: { value }
     } = e;
-    const checkError = isBlank(value);
+    const checkError = isBlank(value) || checkSpecialChar(value);
     this.setState({
       fullName: value,
       fullNameError: checkError,
-      fullNameErrorMessage: checkError ? "Name can't be blank" : ''
+      fullNameErrorMessage: checkSpecialChar(value)
+        ? 'Numbers and special characters are not allowed !'
+        : 'Name Cannot be Left Empty !'
     });
   };
   onSubmitProfile = e => {
@@ -135,14 +136,16 @@ export default class ProfileForm extends Component {
 } = this.state;
     const checkEmail = validateEmail(email, 'Invalid Email');
     const phoneError = !validateMobile(phone);
-    const checkFullName = isBlank(fullName);
+    const checkFullName = isBlank(fullName) || checkSpecialChar(fullName);
     const isGSTError = !isGSTNumber(gst);
     if (checkEmail.error || checkFullName || phoneError) {
       return this.setState({
         emailError: checkEmail.error,
         emailErrorMessage: checkEmail.errorMessage,
         fullNameError: checkFullName,
-        fullNameErrorMessage: checkFullName ? "Name can't be blank" : '',
+        fullNameErrorMessage: checkSpecialChar(fullName)
+          ? 'Numbers and special characters are not allowed !'
+          : 'Name Cannot be Left Empty !',
         phoneError,
         gstError: isGSTError,
         gstErrorMessage: 'Please enter a valid GST number !'

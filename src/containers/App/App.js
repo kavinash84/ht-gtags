@@ -24,6 +24,8 @@ import { isKeyExists } from 'utils/helper';
 import Alert from 'hometown-components-dev/lib/Alert';
 import ThemeProvider from 'hometown-components-dev/lib/ThemeProviderHtV1';
 
+const styles = require('./App.scss');
+
 const { SITE_URL } = process.env;
 const SITE_URL_MOBILE = 'https://m.hometown.in';
 
@@ -161,7 +163,7 @@ export default class App extends Component {
     Cookie.set('split_test', 'A', { expires: 365 });
   }
   componentWillReceiveProps(nextProps) {
-    if (window) {
+    if (window && window.embedded_svc) {
       const { profile } = nextProps;
       const { data = {} } = profile;
       const { email = '' } = data;
@@ -184,7 +186,6 @@ export default class App extends Component {
     return url;
   };
   render() {
-    const styles = require('./App.scss');
     const { location, route, notifs } = this.props;
     const pathname = (location && location.pathname) || '/';
     const url = this.checkIfSlash(pathname);
@@ -221,17 +222,6 @@ export default class App extends Component {
                       ecomm_totalvalue: '',
                     };
                   `}
-            </script>
-            <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async="" />
-            <script>
-              {`
-                  var OneSignal = window.OneSignal || [];
-                    OneSignal.push(function() {
-                      OneSignal.init({
-                        appId: "b2f22db2-b562-4530-8888-516550bfbe6d",
-                      });
-                    });
-                `}
             </script>
           </Helmet>
         )}

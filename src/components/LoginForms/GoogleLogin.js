@@ -81,7 +81,7 @@ class GoogleLogin extends Component {
   };
   render() {
     const {
- loginViaLogin, session, askContact, loginType, loading
+ loginViaLogin, session, askContact, loginType, loggingIn
 } = this.props;
     const { phone, phoneError, phoneErrorMessage } = this.state;
     const open = askContact && loginType && loginType === 'google';
@@ -142,7 +142,7 @@ class GoogleLogin extends Component {
               onSuccess={onSuccess(loginViaLogin, session, phone)}
               onFailure={onError}
             >
-              {loading ? (
+              {loggingIn ? (
                 <span>
                   Please Wait
                   <Image className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />
@@ -164,7 +164,7 @@ GoogleLogin.propTypes = {
   session: PropTypes.string.isRequired,
   askContact: PropTypes.bool.isRequired,
   loginType: PropTypes.string.isRequired,
-  loading: PropTypes.bool.isRequired
+  loggingIn: PropTypes.bool.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GoogleLogin);

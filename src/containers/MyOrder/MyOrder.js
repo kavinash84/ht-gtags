@@ -11,14 +11,14 @@ const hooks = {
       profile: { loaded }
     } = getState();
     if (!loaded) {
-      await dispatch(loadUserProfile());
+      await dispatch(loadUserProfile()).catch(error => console.log(error));
     }
     const {
       profile: {
-        data: { contact_number: contactNumber }
+        data: { contact_number: contactNumber = '' }
       }
     } = getState();
-    await dispatch(loadMyOrders(contactNumber));
+    await dispatch(loadMyOrders(contactNumber)).catch(error => console.log(error));
   }
 };
 const MyAddress = () => (
