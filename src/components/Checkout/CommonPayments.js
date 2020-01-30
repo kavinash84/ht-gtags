@@ -10,6 +10,7 @@ const debitcardIcon = require('../../../static/debit-card.png');
 const intBankingIcon = require('../../../static/net-banking-icon.png');
 const emiIcon = require('../../../static/emi.png');
 const walletIcon = require('../../../static/wallet.png');
+const upiIcon = require('../../../static/upi-logo.svg');
 
 const initial = {
   CreditCard: {
@@ -257,6 +258,39 @@ const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEa
               alt="EASYEMI"
             />
             Bajaj Finance EMI
+          </Label>
+        </Div>
+      );
+    case 'Upi':
+      return (
+        <Div col="12" key={paymentType} className={styles.paymentOptions}>
+          <input
+            type="radio"
+            name="paymentOption"
+            value="Upi"
+            checked={selectedGateway === paymentType}
+            onChange={onChangeGateway(onChange, paymentType, session)}
+          />
+          <Label
+            htmlFor="Upi"
+            pl="0"
+            color="textLight"
+            mt="0"
+            mb="0"
+            onClick={onChangeGateway(onChange, paymentType, session)}
+          >
+            <Img
+              height="20px"
+              width="auto"
+              float="left"
+              mr="10px"
+              top="-2px"
+              position="relative"
+              src={upiIcon}
+              alt="UPI"
+              style={{ backgroundColor: '#f5f5f5' }}
+            />
+            UPI
           </Label>
         </Div>
       );

@@ -40,6 +40,7 @@ import CardFormEasyEmi from './CardFormEasyEmi';
 import Emi from './Emi';
 import PaymentMethods from '../PaymentMethods/';
 import PaymentForm from './PaymentForm';
+import UpiForm from './UpiForm';
 
 const styles = require('./Checkout.scss');
 const cartStyles = require('../Cart/Cart.scss');
@@ -250,6 +251,7 @@ class PaymentOptions extends Component {
                         {CommonPayments(paymentType.paymentType, toggleGateway, selectedGateway, session, resetEasyEmi)}
                       </div>
                     ))}
+                    {CommonPayments('Upi', toggleGateway, selectedGateway, session, resetEasyEmi)}
                   </Div>
                   <Div col="9">
                     <div className={styles.paymentFormOptions}>
@@ -385,6 +387,16 @@ class PaymentOptions extends Component {
                           )}
                         </Div>
                       )}
+                      {/* UPI Form */}
+                      {selectedGateway === 'Upi' && (
+                        <Div col="12">
+                          <UpiForm
+                            setPaymentDetails={setPaymentDetails}
+                            gateway={selectedGateway}
+                            padding="3rem 2rem"
+                          />
+                        </Div>
+                      )}
                     </div>
                   </Div>
                 </Row>
@@ -513,7 +525,4 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PaymentOptions);
+export default connect(mapStateToProps, mapDispatchToProps)(PaymentOptions);
