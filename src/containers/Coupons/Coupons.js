@@ -12,16 +12,16 @@ import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 import Footer from 'newComponents/Footer';
 import Header from 'newComponents/Header';
 import MyMenu from 'newComponents/MyMenu';
-import CoupensContainer from 'newComponents/Coupens';
+import CouponsContainer from 'newComponents/Coupons';
 
-const Coupens = () => (
+const Coupons = () => (
   <Wrapper>
     <Body>
       {/* Header */}
       <Header />
 
       {/* Container */}
-      <Container>
+      <Container pt={80}>
         <Row width={1} sx={{ borderBottom: 'divider' }} mx={0}>
           <Heading fontSize={20} pb={10}>
             Hello Matthew
@@ -32,7 +32,7 @@ const Coupens = () => (
             <MyMenu page="coupens" />
           </Col>
           <Col variant="col-10" px={30} py={30} sx={{ borderLeft: 'divider' }}>
-            <CoupensContainer />
+            <CouponsContainer />
           </Col>
         </Row>
       </Container>
@@ -43,4 +43,4 @@ const Coupens = () => (
   </Wrapper>
 );
 
-export default Coupens;
+export default Coupons;
