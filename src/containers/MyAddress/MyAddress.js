@@ -36,10 +36,8 @@ const MyAddress = () => (
           <Box variant="col-2" pr={30}>
             <MyMenu page="my address" />
           </Box>
-          <Box variant="col-10" pl={30} sx={{ borderLeft: 'divider' }}>
-            <Box px={30} py={30} mt={30} width={7 / 10} sx={{}}>
-              <MyAddressContainer />
-            </Box>
+          <Box variant="col-10" px={30} py={20} sx={{ borderLeft: 'divider' }}>
+            <MyAddressContainer />
           </Box>
         </Row>
       </Container>

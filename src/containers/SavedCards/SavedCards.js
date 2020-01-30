@@ -31,7 +31,7 @@ const SavedCards = () => (
           <Col variant="col-2" pr={30}>
             <MyMenu page="my dashboard" />
           </Col>
-          <Col variant="col-10" px={30} py={30} sx={{ borderLeft: 'divider' }}>
+          <Col variant="col-10" px={30} py={20} sx={{ borderLeft: 'divider' }}>
             <SavedCardsContainer />
           </Col>
         </Row>

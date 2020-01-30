@@ -4,15 +4,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
-// import Text from 'hometown-components-dev/lib/Text';
 import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
 import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
 import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
 import { getDateFilters } from 'utils/helper';
 import { loadMyOrders } from 'redux/modules/orders';
 import { loadOrdersTracking, closeModal, setCurrentOrder } from 'redux/modules/tracking';
-// import { Label } from 'hometown-components-dev/lib/Label';
-import MyMenu from 'newComponents/MyMenu';
 import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
 import OrderBlock from './OrderBlock';
 
