@@ -12,7 +12,7 @@ export const MY_ADDRESS_URL = '/my-address';
 export const MY_CASES_URL = '/my-cases';
 export const FORGOT_PASSWORD_URL = '/forgot-password';
 export const MY_DASHBOARD_URL = '/my-dashboard';
-export const COUPENS = '/coupens';
+export const COUPONS = '/coupons';
 export const SAVED_CARDS = '/saved-cards';
 
 export const PAYMENT_SUCCESS = '/payment-success';

@@ -17,7 +17,7 @@ import {
   MY_ADDRESS_URL,
   MY_CASES_URL,
   MY_DASHBOARD_URL,
-  COUPENS,
+  COUPONS,
   SAVED_CARDS,
   ORDER_RETURN
 } from 'helpers/Constants';
@@ -88,7 +88,7 @@ const MyOrder = ({ page }) => (
       <Text variant="small" color="textLight" fontSize={12} fontFamily="light" pb={12}>
         OFFERS
       </Text>
-      <MenuItem to={COUPENS} text="Coupens" color={page === 'coupens' ? 'primary' : 'textPrimary'} pb={0} />
+      <MenuItem to={COUPONS} text="Coupons" color={page === 'coupons' ? 'primary' : 'textPrimary'} pb={0} />
     </Box>
     <Box py={20}>
       <Text variant="small" color="textLight" fontSize={12} fontFamily="light" pb={12}>
