@@ -29,7 +29,7 @@ const MyAddress = () => (
       <Container pt={80}>
         <Row width={1} sx={{ borderBottom: 'divider' }} mx={0}>
           <Heading fontSize={20} pb={10}>
-          Hello Matthew
+            Hello Matthew
           </Heading>
         </Row>
         <Row>
@@ -37,14 +37,7 @@ const MyAddress = () => (
             <MyMenu page="my address" />
           </Box>
           <Box variant="col-10" pl={30} sx={{ borderLeft: 'divider' }}>
-            <Box
-              px={30}
-              py={30}
-              mt={30}
-              width={7 / 10}
-              sx={{
-            }}
-          >
+            <Box px={30} py={30} mt={30} width={7 / 10} sx={{}}>
               <MyAddressContainer />
             </Box>
           </Box>
