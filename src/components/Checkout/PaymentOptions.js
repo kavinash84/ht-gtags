@@ -251,7 +251,6 @@ class PaymentOptions extends Component {
                         {CommonPayments(paymentType.paymentType, toggleGateway, selectedGateway, session, resetEasyEmi)}
                       </div>
                     ))}
-                    {CommonPayments('Upi', toggleGateway, selectedGateway, session, resetEasyEmi)}
                   </Div>
                   <Div col="9">
                     <div className={styles.paymentFormOptions}>

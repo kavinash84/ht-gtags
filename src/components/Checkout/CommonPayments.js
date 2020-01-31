@@ -53,6 +53,13 @@ const initial = {
     easyemi_otp_code: '',
     easyEmiConfig: '',
     gateway: ''
+  },
+  Upi: {
+    payment_method_type: 'Upi',
+    payment_method: 'Payu',
+    pg_upi: 'UPI',
+    upi_bank_code: 'UPI',
+    upi_vpa: ''
   }
 };
 
