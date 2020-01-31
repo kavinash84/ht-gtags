@@ -10,7 +10,7 @@ import { getImageURL } from 'utils/helper';
 import ImageShimmerHtV1 from 'hometown-components-dev/lib/ImageShimmerHtV1';
 
 // const statusIcon = require('../../../static/status-pending.svg');
-const statusActiveIcon = require('../../../static/status-active.svg');
+// const statusActiveIcon = require('../../../static/status-active.svg');
 const rectangleIcon = require('../../../static/rectangle.svg');
 const OvalIcon = require('../../../static/oval.svg');
 const statusIcon = require('../../../static/rightIcon.svg');
@@ -65,22 +65,22 @@ class TrackingDetails extends Component {
                         lineHeight="1.6"
                         color="rgba(0, 0, 0, 0.9)"
                         fontFamily="regular"
-                    >
+                      >
                         {name}
                       </TextHtV1>
                       <TextHtV1 fontSize="13px" mt="0" mb="3px" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
                         {`Qty-${quantity}`}
                       </TextHtV1>
                       {transportId && (
-                      <TextHtV1 mt="0" mb="3px" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
-                        {`Delivery Partner - ${transportId || '--'}`}
-                      </TextHtV1>
-                    )}
+                        <TextHtV1 mt="0" mb="3px" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
+                          {`Delivery Partner - ${transportId || '--'}`}
+                        </TextHtV1>
+                      )}
                       {AWB && (
-                      <TextHtV1 mt="0" mb="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
-                        {`AWB Number - ${AWB || '--'}`}
-                      </TextHtV1>
-                    )}
+                        <TextHtV1 mt="0" mb="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
+                          {`AWB Number - ${AWB || '--'}`}
+                        </TextHtV1>
+                      )}
                     </BoxHtV1>
                   </ColHtV1>
                   <BoxHtV1 col="8" width="66.66%" float="left">
@@ -113,26 +113,40 @@ class TrackingDetails extends Component {
                           </BoxHtV1>
                         );
                       })} */}
-                      
-                      <ImageHtV1 src={rectangleIcon} sx={{ position: "relative" }}/>
-                      <BoxHtV1 sx={{ position: "absolute" }}>
-                        <ImageHtV1 src={filledRectangleIcon} sx={{ position: "relative" }} />
-                        <ImageHtV1 ml={-21} mt={4} width="16px" height="16px" src={OvalIcon} sx={{ position: "absolute" }}/>
-                        <ImageHtV1 ml={-18} mt={9} src={statusIcon} sx={{ position: "absolute" }}/>
+
+                      <ImageHtV1 src={rectangleIcon} sx={{ position: 'relative' }} />
+                      <BoxHtV1 sx={{ position: 'absolute' }}>
+                        <ImageHtV1 src={filledRectangleIcon} sx={{ position: 'relative' }} />
+                        <ImageHtV1
+                          ml={-21}
+                          mt={4}
+                          width="16px"
+                          height="16px"
+                          src={OvalIcon}
+                          sx={{ position: 'absolute' }}
+                        />
+                        <ImageHtV1 ml={-18} mt={9} src={statusIcon} sx={{ position: 'absolute' }} />
                       </BoxHtV1>
                     </ColHtV1>
                     <RowHtV1 pt={14}>
-                    {status.map((statusDetails, i) => {
-                       const { status: StatusKey, display: active } = statusDetails;
-                       return (
-                         <RowHtV1>
-                      <TextHtV1 pr={50} fontSize={15} width={1} fontWeight="500" color="#474747" variant="profileDashBoard">
-                        {StatusKey || 'NA'}
-                      </TextHtV1>
-                      </RowHtV1>
-                       )
+                      {status.map((statusDetails, i) => {
+                        const { status: StatusKey } = statusDetails;
+                        return (
+                          <RowHtV1 key={String(i)}>
+                            <TextHtV1
+                              pr={50}
+                              fontSize={15}
+                              width={1}
+                              fontWeight="500"
+                              color="#474747"
+                              variant="profileDashBoard"
+                            >
+                              {StatusKey || 'NA'}
+                            </TextHtV1>
+                          </RowHtV1>
+                        );
                       })}
-                      </RowHtV1>
+                    </RowHtV1>
                   </BoxHtV1>
                 </RowHtV1>
               );

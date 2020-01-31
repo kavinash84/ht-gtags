@@ -38,7 +38,7 @@ import ServiceSignUpContainer from 'components/ServiceSignUp';
 /* user */
 import Profile from 'containers/Profile';
 import MyOrder from 'containers/MyOrder';
-import OrderAndReturn from 'containers/OrderAndReturn';
+import OrderAndReturns from 'containers/OrderAndReturns';
 import MyAddress from 'containers/MyAddress';
 import MyCases from 'containers/MyCases';
 import MyDashBoard from 'containers/MyDashBoard';
@@ -100,14 +100,13 @@ const routes = [
       { path: '/wishlist', exact: true, component: isAuthenticated(Wishlist) },
       { path: '/checkout/cart', exact: true, component: Cart },
       { path: '/my-orders', exact: true, component: isAuthenticated(MyOrder) },
-      { path: '/order&return', exact: true, component: isAuthenticated(OrderAndReturn) },
+      { path: '/order-returns', exact: true, component: isAuthenticated(OrderAndReturns) },
       { path: '/my-address', exact: true, component: isAuthenticated(MyAddress) },
       { path: '/my-cases', exact: true, component: isAuthenticated(MyCases) },
       { path: '/profile', exact: true, component: isAuthenticated(Profile) },
       { path: '/my-dashboard', exact: true, component: isAuthenticated(MyDashBoard) },
       { path: '/coupons', exact: true, component: isAuthenticated(Coupons) },
       { path: '/saved-cards', exact: true, component: isAuthenticated(SavedCards) },
-      { path: '/gratification', exact: true, component: isAuthenticated(Gratification) },
       { path: '/:productname?/sku/:skuId', exact: true, component: ProductDetails },
       { path: '/checkout/delivery-address', exact: true, component: DeliveryAddress },
       { path: '/checkout/payment-options', exact: true, component: PaymentOptions },
@@ -136,6 +135,7 @@ const routes = [
       { path: '/service-signup', exact: true, component: ServiceSignUpContainer },
       { path: '/loader-shimmer', exact: true, component: LoaderShimmer },
       { path: '/promotions', exact: true, component: Promotions },
+      { path: '/gratification', exact: true, component: isAuthenticated(Gratification) },
       {
         path: `/:category(${createRegex(categoryRoutes)})`,
         exact: true,

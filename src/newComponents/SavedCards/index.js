@@ -1,5 +1,4 @@
-import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 
 /**
  * Components
@@ -9,29 +8,12 @@ import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Label from 'hometown-components-dev/lib/LabelHtV1';
 import Row from 'hometown-components-dev/lib/RowHtV1';
-import Text from 'hometown-components-dev/lib/TextHtV1';
 import SavedCard from './Card';
 
 /**
  * Icons
  */
 const addIcon = require('../../../static/address-add-icon.svg');
-
-const CardDetails = ({ name, value }) => (
-  <Fragment>
-    <Label fontFamily="light" variant="xSmall" pb={5}>
-      {name}
-    </Label>
-    <Text color="label" fontSize={18}>
-      {value}
-    </Text>
-  </Fragment>
-);
-
-CardDetails.propTypes = {
-  name: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired
-};
 
 const SavedCards = () => (
   <Box>

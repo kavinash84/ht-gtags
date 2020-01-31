@@ -34,7 +34,7 @@ const MyAddress = () => (
         </Row>
         <Row>
           <Box variant="col-2" pr={30}>
-            <MyMenu page="my address" />
+            <MyMenu page="My Addresses" />
           </Box>
           <Box variant="col-10" px={30} py={20} sx={{ borderLeft: 'divider' }}>
             <MyAddressContainer />
