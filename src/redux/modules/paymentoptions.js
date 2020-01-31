@@ -195,13 +195,11 @@ const paymentObject = (sessionId, selectedGateway, paymentData, cardType = 'visa
       easyemi_downpayment: easyEmiDownPayment
     };
   } else if (selectedGateway === 'Upi') {
-    const { is_seamless: isSeamless } = paymentData;
     return {
       ...paymentJSON,
       session_id: sessionId,
       payment_method_type: selectedGateway,
       payment_method: 'Upi',
-      is_seamless: isSeamless,
       ...paymentData
     };
   }
