@@ -70,13 +70,13 @@ const WeddingCampaign = () => (
       <Row ml="0" mr="0" bg="#dedede" alignItems="center">
         <Div col="6" ta="center">
           <Heading color="#3d3d3b" fontSize="40px" mt="0" mb="20px">
-            HOT DEALS
+            Exciting Offers
           </Heading>
           <Text ta="center" color="#434341" fontSize="18px" mb="0" fontFamily="light">
-            Style up your space into a cosy and comfortable abode with.
+            Style up your space into a cosy and comfortable abode with
           </Text>
           <Text ta="center" color="#434341" fontSize="18px" mt="5px" fontFamily="light">
-            Our combo offers on furniture and modular kitchens
+            our incredible offers on wide range of furniture essentials.
           </Text>
           <Link to="/hot-deals">
             <Text mt="50px" ta="center" fontSize="30px" fontFamily="light" style={{ textDecoration: 'underline' }}>
