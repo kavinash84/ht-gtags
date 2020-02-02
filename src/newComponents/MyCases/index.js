@@ -10,7 +10,6 @@ import { bindActionCreators } from 'redux';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import Col from 'hometown-components-dev/lib/ColHtV1';
-import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import Row from 'hometown-components-dev/lib/RowHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 
@@ -103,8 +102,8 @@ class MyCasesContainer extends Component {
     const { loading } = this.props;
     return (
       <Box>
-        <Row display="block" mr="0" ml="0" mb="1.5rem">
-          <Box col="3" mr="1rem" width="25%" float="left">
+        <Row mb="1.5rem">
+          <Col variant="col-3">
             <Select
               placeholder="Select From Date"
               defaultValue={null}
@@ -112,8 +111,8 @@ class MyCasesContainer extends Component {
               onChange={this.onChangeDate}
               options={getDateFilters(this.FILTER_CONFIG)}
             />
-          </Box>
-          <Box col="3" mr="1rem" width="25%" float="left">
+          </Col>
+          <Col variant="col-3">
             <Select
               placeholder="Select Case Status"
               defaultValue={null}
@@ -121,93 +120,65 @@ class MyCasesContainer extends Component {
               onChange={this.onStatusChange}
               options={this.STATUS_FILTER}
             />
-          </Box>
-          <Box col="1" mr="1rem" width="8.33%" float="left">
-            <Button
-              disabled={loading}
-              onClick={this.getFilteredCases}
-              border="1px solid #f15a22"
-              color="#f15a22"
-              lh="1.5"
-              size="block"
-              btnType="primary"
-              bg="#fff"
-              height="38px"
-              fontSize="16px"
-            >
-              {loading ? 'Please Wait ...' : 'Find'}
+          </Col>
+          <Col variant="col-3">
+            <Button disabled={loading} onClick={this.getFilteredCases} variant="outline.primary">
+              {loading ? 'Please Wait...' : 'Find'}
             </Button>
-          </Box>
+          </Col>
         </Row>
-        <Row display="block" mr="0" ml="0" mb="32px" width="972px" bg="colors.white">
-          {data.map((item, index) => (
-            <Box
-              col="12"
-              key={String(index)}
-              width={1}
-              height="124px"
-              mb={32}
-              sx={{
-                boxShadow: '3px 3px 4px 0 rgba(0, 0, 0, 0.13)',
-                border: '0.2px solid #595858'
-              }}
-            >
-              <Button
-                ta="left"
-                size="block"
-                p="0"
-                bg="#fff"
-                margin="16px 25px 28px 40px"
-                onClick={() => this.handleClick(index)}
-              >
-                <Col>
-                  <Row
-                    justifyContent="space-between"
-                    pb={9}
-                    sx={{
-                      borderBottom: 'divider'
-                    }}
-                  >
-                    <Heading color="#474747" fontSize={16} fontWeight="bold" variant="profileDashBoard">
-                      {`Case No . ${item.caseNumber || 'NA'}`}
-                    </Heading>
-                    <Box color="#474747" fontSize={16} fontWeight="bold" variant="profileDashBoard">
-                      {`${item.status || 'NA'}`}
-                    </Box>
-                  </Row>
-                  <Row justifyContent="space-between" pt={17} pb={15}>
-                    <Text color="#474747" fontSize={14} fontWeight="bold" variant="profileDashBoard">
-                      DATE CREATED
-                    </Text>
-                    <Text color="#474747" fontSize={14} fontWeight="bold" variant="profileDashBoard">
-                      SUBJECT
-                    </Text>
-                    <Text color="#474747" fontSize={14} fontWeight="bold" variant="profileDashBoard">
-                      TYPE
-                    </Text>
-                    <Text color="#474747" fontSize={14} fontWeight="bold" variant="profileDashBoard">
-                      CATEGORY
-                    </Text>
-                  </Row>
-                  <Row justifyContent="space-between" mb={32}>
-                    <Text color="#474747" fontSize={16} variant="profileDashBoard">
-                      {item.CreatedDate || ''}
-                    </Text>
-                    <Text color="#474747" fontSize={16} variant="profileDashBoard">
-                      {item.subject || ''}
-                    </Text>
-                    <Text color="#474747" fontSize={16} variant="profileDashBoard">
-                      {item.type || ''}
-                    </Text>
-                    <Text color="#474747" fontSize={16} variant="profileDashBoard">
-                      {this.getMapping(item.category, item.subcategory, 'cat')}
-                    </Text>
-                  </Row>
+        {data.map((item, index) => (
+          <Box
+            key={String(index)}
+            width={1}
+            px={20}
+            mb={32}
+            sx={{
+              boxShadow: 'profile',
+              border: 'light'
+            }}
+            onClick={() => this.handleClick(index)}
+          >
+            <Row mx={0} py={16} justifyContent="space-between" sx={{ borderBottom: 'light' }}>
+              <Col>
+                <Text variant="text.regular">{`Case No . ${item.caseNumber || 'NA'}`}</Text>
+              </Col>
+              <Col>
+                <Text variant="text.regular">{`${item.status || 'NA'}`}</Text>
+              </Col>
+            </Row>
+            <Box py={16}>
+              <Row mx={0} mb={16}>
+                <Col variant="col-2">
+                  <Text variant="heading.small">DATE CREATED</Text>
                 </Col>
-              </Button>
+                <Col variant="col-3">
+                  <Text variant="heading.small">SUBJECT</Text>
+                </Col>
+                <Col variant="col-3">
+                  <Text variant="heading.small">TYPE</Text>
+                </Col>
+                <Col variant="col-4">
+                  <Text variant="heading.small">CATEGORY</Text>
+                </Col>
+              </Row>
+              <Row mx={0}>
+                <Col variant="col-2">
+                  <Text variant="text.regular">{item.CreatedDate || ''}</Text>
+                </Col>
+                <Col variant="col-3">
+                  <Text variant="text.regular">{item.subject || ''}</Text>
+                </Col>
+                <Col variant="col-3">
+                  <Text variant="text.regular">{item.type || ''}</Text>
+                </Col>
+                <Col variant="col-4">
+                  <Text variant="text.regular">{this.getMapping(item.category, item.subcategory, 'cat')}</Text>
+                </Col>
+              </Row>
             </Box>
-          ))}
-        </Row>
+          </Box>
+        ))}
       </Box>
     );
   }

@@ -152,6 +152,7 @@ class OrderBlock extends Component {
                     <Text pb={10} variant="regular" color="label">
                       Qty: {item.quantity || '--'}
                     </Text>
+                    {/* TODO: @sanjeev replace static value */}
                     <Row pb={10} ml={0} mr={0}>
                       <Text pr={10} color="label">
                         ₹12,999

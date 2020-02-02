@@ -33,34 +33,41 @@ class Gratification extends Component {
             >
               Lorem ipsum !
             </Label>
-            <Label mb={44} mt={10} color="#7a7d7d" textAlign="center" width={1} fontSize={21} fontWeight="500" variant="profileDashBoard">
+            <Label
+              mb={44}
+              mt={10}
+              color="#7a7d7d"
+              textAlign="center"
+              width={1}
+              fontSize={21}
+              fontWeight="500"
+              variant="profileDashBoard"
+            >
               Your order has been placed successfully.
             </Label>
           </Col>
           <Box pl={0} pr={0} sx={{ position: 'relative' }}>
             <Image src={gratificationRectangleIcon} height="300px" width={1} />
-            <Col sx={{
-              position: 'absolute', top: '42px', alignItems: 'center', width: '100%'
-            }}
+            <Col
+              sx={{
+                position: 'absolute',
+                top: '42px',
+                alignItems: 'center',
+                width: '100%'
+              }}
             >
-              <Label width={1} textAlign="center" color="#474747" fontSize={17} fontWeight="bold" variant="profileDashBoard">
+              <Label
+                width={1}
+                textAlign="center"
+                color="#474747"
+                fontSize={17}
+                fontWeight="bold"
+                variant="profileDashBoard"
+              >
                 Set password & save your details for future
               </Label>
-              <FormInputHtV1
-                label=""
-                type="text"
-                placeholder="Type Password *"
-                mt={18}
-                mb={11}
-                width="368px"
-              />
-              <FormInputHtV1
-                label=""
-                type="text"
-                placeholder="Confirm Password *"
-                mb={14}
-                width="368px"
-              />
+              <FormInputHtV1 label="" type="text" placeholder="Type Password *" mt={18} mb={11} width="368px" />
+              <FormInputHtV1 label="" type="text" placeholder="Confirm Password *" mb={14} width="368px" />
               <ButtonHtV1
                 btnType="custom"
                 fontFamily="HelveticaNeue"
@@ -72,7 +79,7 @@ class Gratification extends Component {
                 bg="#f15a22"
                 width="368px"
               >
-                    SET PASSWORD
+                SET PASSWORD
               </ButtonHtV1>
             </Col>
           </Box>
