@@ -1,6 +1,5 @@
 import React from 'react';
 import { provideHooks } from 'redial';
-import MyOrderContainer from 'newComponents/MyOrder';
 import { loadMyOrders } from 'redux/modules/orders';
 import { loadUserProfile } from 'redux/modules/profile';
 
@@ -13,6 +12,7 @@ import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 
 /* ====== Page Components ====== */
+import MyOrderContainer from 'newComponents/MyOrder';
 import Footer from 'newComponents/Footer';
 import Header from 'newComponents/Header';
 import MyMenu from 'newComponents/MyMenu';
