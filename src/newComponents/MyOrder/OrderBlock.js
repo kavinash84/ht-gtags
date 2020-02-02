@@ -12,13 +12,14 @@ import { getImageURL } from 'utils/helper';
  * Components
  */
 import Box from 'hometown-components-dev/lib/BoxHtV1';
-import Row from 'hometown-components-dev/lib/RowHtV1';
-import Text from 'hometown-components-dev/lib/TextHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import Col from 'hometown-components-dev/lib/ColHtV1';
+import Flex from 'hometown-components-dev/lib/FlexHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 import ImageShimmer from 'hometown-components-dev/lib/ImageShimmerHtV1';
-import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
 
 /**
  * Page Components
@@ -30,8 +31,13 @@ import TrackingTimeline from './TrackingTimeline';
 /**
  * Icons
  */
-const LoaderIcon = require('../../../static/refresh-black.svg');
+const loaderIcon = require('../../../static/refresh.svg');
 const rightArrowIcon = require('../../../static/rightArrow.svg');
+const expendIcon = require('../../../static/expand_more_primary.svg');
+
+const DetailTab = props => (
+  <Button variant="linkPrimaryBold" height={30} display="flex" justifyContent="center" alignItems="center" {...props} />
+);
 
 const mapStateToProps = ({ cases, tracking }) => ({
   ordercase: cases.ordercase || {},
@@ -100,10 +106,10 @@ class OrderBlock extends Component {
               disabled={trackingLoading && currentOrder === order.order_number}
             >
               {trackingLoading && currentOrder === order.order_number ? (
-                <span>
+                <Flex alignItems="center">
                   Please Wait
-                  <Image className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />
-                </span>
+                  <Image className="spin" src={loaderIcon} width="18px" ml={5} />
+                </Flex>
               ) : (
                 'TRACK ORDER'
               )}
@@ -111,11 +117,10 @@ class OrderBlock extends Component {
           )}
         </Row>
         {/* Order Box */}
-        <Box mb={40} sx={{ boxShadow: 'profile', border: 'light' }}>
+        <Box px={20} mb={40} sx={{ boxShadow: 'profile', border: 'light' }}>
           {order.order_items &&
             order.order_items.map(item => (
               <Box
-                px={20}
                 py={20}
                 sx={{
                   borderBottom: 'light',
@@ -127,7 +132,17 @@ class OrderBlock extends Component {
                 <Row key={item.order_item_id} alignItems="center">
                   <Col width={150}>
                     <ImageShimmer src={getImageURL(item.image, 'catalog_360')} height="120px">
-                      {imageURL => <Image src={imageURL} alt={item.product_name} width="120px" height="120px" />}
+                      {imageURL => (
+                        <Image
+                          src={imageURL}
+                          alt={item.product_name}
+                          width="120px"
+                          height="120px"
+                          sx={{
+                            boxShadow: 'productThumb'
+                          }}
+                        />
+                      )}
                     </ImageShimmer>
                   </Col>
                   <Col pl={0} width="calc(100% - 190px)">
@@ -160,27 +175,24 @@ class OrderBlock extends Component {
                   {/* <td>{item.carrier_name || 'NOT AVAILABLE'}</td>
                         <td>{item.tracking_id || 'NOT AVAILABLE'}</td> */}
                 </Row>
-                {/* <Row justifyContent="space-between" margin="14px 0 14px" width={1}>
-                {item.bob_order_item === 0 || item.bob_order_item === '0' && (
-                  <Label
-                    fontSize={14}
-                    fontWeight="bold"
-                    color="#f15a22"
-                    variant="profileDashBoard"
-                    onClick={() => { this.handleChange('openCaseModal', item, order); }}
-                  >Help</Label>
-                )}
-                <Button bg="#fff">
-                  <Label
-                    fontSize={14}
-                    fontWeight="bold"
-                    color="#f15a22"
-                    variant="profileDashBoard"
-                  >ORDER DETAILS</Label>
-                </Button>
-              </Row> */}
               </Box>
             ))}
+          <Row mx={0} py={5} px={5}>
+            <Col flexGrow={1} sx={{ borderRight: 'light' }}>
+              <DetailTab
+                onClick={() => {
+                  this.handleChange('openCaseModal', items, order);
+                }}
+              >
+                HELP
+              </DetailTab>
+            </Col>
+            <Col flexGrow={1}>
+              <DetailTab alignItems="flex-end">
+                ORDER DETAILS <Image src={expendIcon} alt="Expend Order Details" ml={5} height="18px" />
+              </DetailTab>
+            </Col>
+          </Row>
           <Row sx={{ borderTop: 'light' }} mx={0} px={20} py={15}>
             <Box width={1.5 / 10}>
               <Heading color="label" variant="heading.small" mb={10}>

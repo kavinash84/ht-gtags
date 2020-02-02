@@ -1,123 +1,162 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
-import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
-import ColHtV1 from 'hometown-components-dev/lib/ColHtV1';
-import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
-import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
-import { getImageURL } from 'utils/helper';
-import ImageShimmerHtV1 from 'hometown-components-dev/lib/ImageShimmerHtV1';
 
+/**
+ * Components
+ */
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Flex from 'hometown-components-dev/lib/FlexHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import ImageShimmer from 'hometown-components-dev/lib/ImageShimmerHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
+
+/**
+ * helper
+ */
+import { getImageURL } from 'utils/helper';
+
+/**
+ * Icons
+ */
 // const statusIcon = require('../../../static/status-pending.svg');
 // const statusActiveIcon = require('../../../static/status-active.svg');
-const rectangleIcon = require('../../../static/rectangle.svg');
-const OvalIcon = require('../../../static/oval.svg');
-const statusIcon = require('../../../static/rightIcon.svg');
-const filledRectangleIcon = require('../../../static/filledRectangleIcon.svg');
+// const rectangleIcon = require('../../../static/rectangle.svg');
+const statusIcon = require('../../../static/oval.svg');
+const statusActiveIcon = require('../../../static/rightIcon.svg');
+// const filledRectangleIcon = require('../../../static/filledRectangleIcon.svg');
+
+const activeCircle = {
+  bg: 'white',
+  px: 3,
+  py: 0.75
+};
+
+const firstStep = {
+  left: 0
+};
+
+const otherSteps = {
+  left: -21
+};
 
 class TrackingDetails extends Component {
   render() {
     const stylesModal = require('./index.scss');
-    const styles = require('./MyOrder.scss');
     const { data, error } = this.props;
     return (
-      <div className={stylesModal.trackingModal}>
-        <RowHtV1 type="block" margin="0px 0px 1rem" className={styles.blockHeading}>
-          <BoxHtV1 col="6" pt="5px">
-            <HeadingHtV1 fontSize={21} fontWeight="bold" color="#474747" variant="profileDashBoard">
-              {error ? 'Error' : 'Track Order'}
-            </HeadingHtV1>
-          </BoxHtV1>
-        </RowHtV1>
-        <BoxHtV1 p="25px 25px 13px">
-          {error ? (
-            <span style={{ color: 'red', padding: '10px' }}>{error}</span>
-          ) : (
-            data.map((item, index) => {
-              const {
-                image,
-                product_name: name,
-                status,
-                bill_of_landing: AWB,
-                transport_id: transportId,
-                quantity
-              } = item;
-              return (
-                <RowHtV1
-                  className={stylesModal.blockWrapper}
-                  type="block"
-                  ml="0"
-                  mr="0"
-                  mb="1rem"
-                  pb="15px"
-                  key={String(index)}
-                >
-                  <ColHtV1 col="1" width="26.33%" float="left">
-                    <ImageShimmerHtV1 src={getImageURL(image, 'catalog_360')}>
-                      {imageURL => <ImageHtV1 src={imageURL} alt="" width="60px" height="60px" />}
-                    </ImageShimmerHtV1>
-                    <BoxHtV1 col="3" pr="55px" pt="9px" float="left">
-                      <TextHtV1
-                        fontSize="14px"
-                        mt="0"
-                        mb="5px"
-                        lineHeight="1.6"
-                        color="rgba(0, 0, 0, 0.9)"
-                        fontFamily="regular"
-                      >
-                        {name}
-                      </TextHtV1>
-                      <TextHtV1 fontSize="13px" mt="0" mb="3px" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
-                        {`Qty-${quantity}`}
-                      </TextHtV1>
-                      {transportId && (
-                        <TextHtV1 mt="0" mb="3px" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
-                          {`Delivery Partner - ${transportId || '--'}`}
-                        </TextHtV1>
+      <Box
+        px={40}
+        py={20}
+        className={stylesModal.trackingModal}
+        sx={{ boxShadow: 'profile', border: 'light', overflow: 'hidden' }}
+      >
+        <Row mx={0} justifyContent="center" mb={15}>
+          <Heading fontSize={30} fontWeight="bold" color="#474747" variant="profileDashBoard">
+            {error ? 'Error' : 'Track Order'}
+          </Heading>
+        </Row>
+        {error ? (
+          <Text style={{ color: 'red', padding: '10px' }}>{error}</Text>
+        ) : (
+          data.map((item, index) => {
+            const {
+              image,
+              product_name: name,
+              status,
+              bill_of_landing: AWB,
+              transport_id: transportId,
+              quantity
+            } = item;
+            return (
+              <Box
+                py={15}
+                sx={{
+                  borderBottom: 'light',
+                  ':last-child': {
+                    borderBottom: 'none'
+                  }
+                }}
+              >
+                <Row key={String(index)} flexWrap="nowrap" alignItems="center">
+                  <Col width={200}>
+                    <ImageShimmer src={getImageURL(image, 'catalog_360')} height={120}>
+                      {imageURL => (
+                        <Image
+                          src={imageURL}
+                          alt={name}
+                          width={120}
+                          height={120}
+                          sx={{
+                            boxShadow: 'productThumb'
+                          }}
+                        />
                       )}
-                      {AWB && (
-                        <TextHtV1 mt="0" mb="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
-                          {`AWB Number - ${AWB || '--'}`}
-                        </TextHtV1>
-                      )}
-                    </BoxHtV1>
-                  </ColHtV1>
-                  <BoxHtV1 col="8" width="66.66%" float="left">
-                    <ColHtV1
-                      ml="-2%"
-                      mr="-7%"
-                      flexWrap="nowrap"
-                      className={`${stylesModal.timeline} ${status.length === 3 ? stylesModal.homewareProduct : ''}`}
-                    >
-                      {/* {status.map((statusDetails, i) => {
-                        const { status: StatusKey, display: active } = statusDetails;
-                        return (
-                          <BoxHtV1
-                            key={String(i)}
-                            display="flexEqual"
-                            flexGrow="1"
-                            className={`${stylesModal.trackBlock} ${active === 1 ? stylesModal.active : ''}`}
+                    </ImageShimmer>
+                  </Col>
+                  <Flex
+                    width="130%"
+                    mr="-10%"
+                    pl={30}
+                    pr={10}
+                    flexWrap="nowrap"
+                    className={`${stylesModal.timeline} ${status.length === 3 ? stylesModal.homewareProduct : ''}`}
+                  >
+                    {status.map((statusDetails, i) => {
+                      const { status: StatusKey, display: active } = statusDetails;
+                      return (
+                        <Flex
+                          key={String(i)}
+                          flexGrow="1"
+                          className={`${stylesModal.trackBlock} ${active === 1 ? stylesModal.active : ''}`}
+                        >
+                          <Box
+                            className={stylesModal.line}
+                            sx={{
+                              zIndex: active === 1 ? 2 : 1
+                            }}
+                          />
+                          <Box
+                            className={stylesModal.round}
+                            sx={{
+                              ...(active === 1 && activeCircle),
+                              ...(i === 0 ? firstStep : otherSteps),
+                              zIndex: 5
+                            }}
                           >
-                            <TextHtV1 className={stylesModal.stepText} fontSize="12px">
-                              {StatusKey || 'NA'}
-                            </TextHtV1>
-                            <BoxHtV1 className={stylesModal.line} />
-                            <BoxHtV1 className={stylesModal.round}>
-                              <ImageHtV1
-                                width="16px"
-                                height="16px"
-                                src={active === 1 ? statusActiveIcon : statusIcon}
-                              />
-                            </BoxHtV1>
-                          </BoxHtV1>
-                        );
-                      })} */}
+                            <Image width="16px" height="16px" src={active === 1 ? statusActiveIcon : statusIcon} />
+                          </Box>
+                          <Text
+                            variant="small"
+                            color="label"
+                            maxWidth={75}
+                            textAlign="center"
+                            pt={22}
+                            sx={{
+                              wordBreak: 'break-word',
+                              lineHeight: 1.4,
+                              transform: 'translateX(-62%) translateY(0)'
+                            }}
+                          >
+                            {StatusKey || 'NA'}
+                          </Text>
+                        </Flex>
+                      );
+                    })}
 
-                      <ImageHtV1 src={rectangleIcon} sx={{ position: 'relative' }} />
-                      <BoxHtV1 sx={{ position: 'absolute' }}>
-                        <ImageHtV1 src={filledRectangleIcon} sx={{ position: 'relative' }} />
-                        <ImageHtV1
+                    {/* <Image
+                        width={1}
+                        src={rectangleIcon}
+                        sx={{ position: 'relative' }}
+                      />
+                      <Box sx={{ position: 'absolute' }}>
+                        <Image
+                          src={filledRectangleIcon}
+                          sx={{ position: 'relative' }}
+                        />
+                        <Image
                           ml={-21}
                           mt={4}
                           width="16px"
@@ -125,15 +164,20 @@ class TrackingDetails extends Component {
                           src={OvalIcon}
                           sx={{ position: 'absolute' }}
                         />
-                        <ImageHtV1 ml={-18} mt={9} src={statusIcon} sx={{ position: 'absolute' }} />
-                      </BoxHtV1>
-                    </ColHtV1>
-                    <RowHtV1 pt={14}>
+                        <Image
+                          ml={-18}
+                          mt={9}
+                          src={statusIcon}
+                          sx={{ position: 'absolute' }}
+                        />
+                      </Box> */}
+                  </Flex>
+                  {/* <Row pt={14}>
                       {status.map((statusDetails, i) => {
                         const { status: StatusKey } = statusDetails;
                         return (
-                          <RowHtV1 key={String(i)}>
-                            <TextHtV1
+                          <Row key={String(i)}>
+                            <Text
                               pr={50}
                               fontSize={15}
                               width={1}
@@ -142,18 +186,37 @@ class TrackingDetails extends Component {
                               variant="profileDashBoard"
                             >
                               {StatusKey || 'NA'}
-                            </TextHtV1>
-                          </RowHtV1>
+                            </Text>
+                          </Row>
                         );
                       })}
-                    </RowHtV1>
-                  </BoxHtV1>
-                </RowHtV1>
-              );
-            })
-          )}
-        </BoxHtV1>
-      </div>
+                    </Row> */}
+                </Row>
+                <Row pt={10}>
+                  <Col>
+                    <Text color="label" variant="small" lineHeight={1.2} pb={5}>
+                      {name}
+                    </Text>
+                    <Text variant="small" color="label">
+                      {`Qty-${quantity}`}
+                    </Text>
+                    {transportId && (
+                      <Text variant="small" color="label">
+                        {`Delivery Partner - ${transportId || '--'}`}
+                      </Text>
+                    )}
+                    {AWB && (
+                      <Text variant="small" color="label">
+                        {`AWB Number - ${AWB || '--'}`}
+                      </Text>
+                    )}
+                  </Col>
+                </Row>
+              </Box>
+            );
+          })
+        )}
+      </Box>
     );
   }
 }
