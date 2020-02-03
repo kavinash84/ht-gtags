@@ -33,7 +33,7 @@ import { getCartList, getNotDelivered, getStockOutProducts } from 'selectors/car
 import MenuCheckout from './MenuCheckout';
 import OrderSummary from './OrderSummary';
 import CommonPayments from './CommonPayments';
-import { validatePaymentDetails } from '../../utils/validation';
+import { validatePaymentDetails, validateVPA } from '../../utils/validation';
 import BankCard from './BankCard';
 import CardForm from './CardForm';
 import CardFormEasyEmi from './CardFormEasyEmi';
@@ -62,7 +62,15 @@ const onChangeDetails = (dispatcher, gateway) => e => {
   const { name, value } = e.target;
   dispatcher({ gateway, data: { [name]: value } });
 };
-
+const validateInput = details => {
+  if (details.Upi) {
+    const {
+      Upi: { upi_vpa: vpa }
+    } = details;
+    return !validateVPA(vpa);
+  }
+  return false;
+};
 @withRouter
 class PaymentOptions extends Component {
   static contextTypes = {
@@ -426,6 +434,7 @@ class PaymentOptions extends Component {
                       // onClick={nextStep(history)}
                       onClick={nextStep(submitDetails, session, paymentDetails, cardType)}
                       disabled={
+                        validateInput(paymentDetails) ||
                         validatePaymentDetails(paymentDetails) ||
                         undelivered.length > 0 ||
                         outOfStockList.length > 0 ||
