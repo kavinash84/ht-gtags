@@ -23,16 +23,13 @@ class UpiForm extends Component {
     };
   }
   onChangeDetails = (dispatcher, gateway) => e => {
+    e.preventDefault();
     const { name, value } = e.target;
     const isValid = !validateVPA(value);
-    this.setState(
-      {
-        vpaError: isValid
-      },
-      () => {
-        dispatcher({ gateway, data: { [name]: value } });
-      }
-    );
+    this.setState({
+      vpaError: isValid
+    });
+    dispatcher({ gateway, data: { [name]: value } });
   };
   render() {
     const {
