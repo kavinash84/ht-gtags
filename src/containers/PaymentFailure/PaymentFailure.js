@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import PaymentFailure from 'components/PaymentFailure';
 
 /* ====== Components ====== */
 import Body from 'hometown-components-dev/lib/BodyHtV1';
@@ -10,6 +9,7 @@ import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 /* ====== Page Components ====== */
 import Footer from 'newComponents/Footer';
 import Header from 'newComponents/Header';
+import PaymentFailure from 'newComponents/PaymentFailure';
 
 export default class PaymentFailureContainer extends Component {
   render() {
