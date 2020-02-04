@@ -161,7 +161,7 @@ const WeddingCampaign = () => (
           <Text ta="center" color="white" fontSize="24px" mt="5px" fontFamily="light">
             1000+ MODULES | 200+ FINISHES
           </Text>
-          <Link to="/modular-kitchens/">
+          <Link to="/modular-kitchens/" target="_blank" rel="noopener noreferrer">
             <Text
               mt="50px"
               mb="0"
@@ -190,7 +190,7 @@ const WeddingCampaign = () => (
           <Text ta="center" color="white" fontSize="20px" mt="5px" fontFamily="light">
             FULL HOUSE INTERIORS | PART HOUSE RENOVATION
           </Text>
-          <Link to="/design-build/">
+          <Link target="_blank" rel="noopener noreferrer" to="/design-build/">
             <Text
               mt="50px"
               mb="0"
