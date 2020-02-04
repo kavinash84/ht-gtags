@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import PaymentSuccess from 'components/PaymentSuccess';
-import MenuFooter from 'containers/MenuFooter';
 import { connect } from 'react-redux';
-import Oops from 'components/PaymentSuccess/Oops';
+
+/* ====== Components ====== */
+import Body from 'hometown-components-dev/lib/BodyHtV1';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
+
+/* ====== Page Components ====== */
+import Footer from 'newComponents/Footer';
+import Header from 'newComponents/Header';
+import PaymentSuccess from 'newComponents/PaymentSuccess';
+import Oops from 'newComponents/PaymentSuccess/Oops';
 
 @connect(({ paymentstatus: { data, loaded, error }, userLogin: { isLoggedIn } }) => ({
   data,
@@ -55,13 +63,24 @@ export default class PaymentSuccessContainer extends Component {
   render() {
     const { data, error, loaded } = this.props;
     return (
-      <MenuFooter pageTitle="Payment Success">
-        {data !== 'An internal server error occurred' ? (
-          <PaymentSuccess data={data} error={error} loaded={loaded} />
-        ) : (
-          <Oops />
-        )}
-      </MenuFooter>
+      <Wrapper>
+        <Body>
+          {/* Header */}
+          <Header />
+
+          {/* Container */}
+          <Container mt={60}>
+            {data !== 'An internal server error occurred' ? (
+              <PaymentSuccess data={data} error={error} loaded={loaded} />
+            ) : (
+              <Oops />
+            )}
+          </Container>
+
+          {/* Footer */}
+          <Footer />
+        </Body>
+      </Wrapper>
     );
   }
 }
