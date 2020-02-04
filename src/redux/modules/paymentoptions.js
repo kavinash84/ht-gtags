@@ -89,7 +89,9 @@ const paymentJSON = {
 };
 
 const getURL = gateway => {
-  if (gateway === 'CreditCard' || gateway === 'DebitCard' || gateway === 'NetBanking') return `Payu/${gateway}`;
+  if (gateway === 'CreditCard' || gateway === 'DebitCard' || gateway === 'NetBanking' || gateway === 'Upi') {
+    return `Payu/${gateway}`;
+  }
   if (gateway === 'Emi' || gateway === 'EasyEmi' || gateway === 'Wallet' || gateway === 'CashOnDelivery') {
     return `${gateway}/${gateway}`;
   }
@@ -192,6 +194,14 @@ const paymentObject = (sessionId, selectedGateway, paymentData, cardType = 'visa
       easyemi_auth_response: easyEmiAuthResponse,
       easyemi_downpayment: easyEmiDownPayment
     };
+  } else if (selectedGateway === 'Upi') {
+    return {
+      ...paymentJSON,
+      session_id: sessionId,
+      payment_method_type: selectedGateway,
+      payment_method: 'Upi',
+      ...paymentData
+    };
   }
 };
 
@@ -236,7 +246,16 @@ const appendData = (gateway, state, data) => {
       };
     }
   }
-
+  if (data.Upi) {
+    // if (data.cardNumber.length > 19) {
+    // || !Number(data.cardNumber) removed
+    return {
+      [gateway]: {
+        ...state.paymentMethodDetails[gateway]
+      }
+    };
+    // }
+  }
   return {
     [gateway]: {
       ...state.paymentMethodDetails[gateway],

@@ -33,13 +33,14 @@ import { getCartList, getNotDelivered, getStockOutProducts } from 'selectors/car
 import MenuCheckout from './MenuCheckout';
 import OrderSummary from './OrderSummary';
 import CommonPayments from './CommonPayments';
-import { validatePaymentDetails } from '../../utils/validation';
+import { validatePaymentDetails, validateVPA } from '../../utils/validation';
 import BankCard from './BankCard';
 import CardForm from './CardForm';
 import CardFormEasyEmi from './CardFormEasyEmi';
 import Emi from './Emi';
 import PaymentMethods from '../PaymentMethods/';
 import PaymentForm from './PaymentForm';
+import UpiForm from './UpiForm';
 
 const styles = require('./Checkout.scss');
 const cartStyles = require('../Cart/Cart.scss');
@@ -61,7 +62,15 @@ const onChangeDetails = (dispatcher, gateway) => e => {
   const { name, value } = e.target;
   dispatcher({ gateway, data: { [name]: value } });
 };
-
+const validateInput = details => {
+  if (details.Upi) {
+    const {
+      Upi: { upi_vpa: vpa }
+    } = details;
+    return !validateVPA(vpa);
+  }
+  return false;
+};
 @withRouter
 class PaymentOptions extends Component {
   static contextTypes = {
@@ -385,6 +394,16 @@ class PaymentOptions extends Component {
                           )}
                         </Div>
                       )}
+                      {/* UPI Form */}
+                      {selectedGateway === 'Upi' && (
+                        <Div col="12">
+                          <UpiForm
+                            setPaymentDetails={setPaymentDetails}
+                            gateway={selectedGateway}
+                            padding="3rem 2rem"
+                          />
+                        </Div>
+                      )}
                     </div>
                   </Div>
                 </Row>
@@ -415,6 +434,7 @@ class PaymentOptions extends Component {
                       // onClick={nextStep(history)}
                       onClick={nextStep(submitDetails, session, paymentDetails, cardType)}
                       disabled={
+                        validateInput(paymentDetails) ||
                         validatePaymentDetails(paymentDetails) ||
                         undelivered.length > 0 ||
                         outOfStockList.length > 0 ||
@@ -513,7 +533,4 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PaymentOptions);
+export default connect(mapStateToProps, mapDispatchToProps)(PaymentOptions);

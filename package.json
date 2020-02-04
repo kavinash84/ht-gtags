@@ -6,7 +6,7 @@
     "Amar Pathak <amar.pathak@hometown.in"
   ],
   "license": "MIT",
-  "version": "1.3.58",
+  "version": "1.3.60",
   "repository": {
     "type": "git",
     "url": "https://bitbucket.org/hometown-tech/frontend/"
@@ -71,7 +71,7 @@
     "express-session": "^1.15.5",
     "express-useragent": "^1.0.12",
     "history": "^4.7.2",
-    "hometown-components": "1.0.57",
+    "hometown-components": "1.0.58",
     "http-proxy": "^1.16.2",
     "is-promise": "^2.1.0",
     "js-cookie": "^2.1.3",

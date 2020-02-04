@@ -402,7 +402,7 @@ class StoreLocator extends React.Component {
                     ))}
                   </select>
                 )}
-                <div className={styles.cistList}>
+                <Div className={styles.cistList} height={selectCity ? 'calc(100% - 130px)' : 'calc(100% - 32px)'}>
                   <ul>
                     {locationLoaded && currentList.length ? (
                       <div
@@ -478,7 +478,7 @@ class StoreLocator extends React.Component {
                       </li>
                     ))}
                   </ul>
-                </div>
+                </Div>
               </Div>
             </Div>
           </Row>
@@ -493,7 +493,4 @@ StoreLocator.propTypes = {
   locationLoaded: PropTypes.bool.isRequired
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(StoreLocator);
+export default connect(mapStateToProps, mapDispatchToProps)(StoreLocator);

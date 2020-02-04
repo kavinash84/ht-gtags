@@ -1,6 +1,15 @@
 import { createSelector } from 'reselect';
 
-const allowedOptions = () => ['CreditCard', 'DebitCard', 'NetBanking', 'Emi', 'CashOnDelivery', 'Wallet', 'EasyEmi'];
+const allowedOptions = () => [
+  'CreditCard',
+  'DebitCard',
+  'NetBanking',
+  'Emi',
+  'CashOnDelivery',
+  'Wallet',
+  'EasyEmi',
+  'Upi'
+];
 
 export const getPaymentState = options =>
   options.data && options.data.paymentData
@@ -10,23 +19,12 @@ export const getPaymentState = options =>
       paymentConfig: {}
     };
 
-export const getPaymentConfig =
-  createSelector(
-    [getPaymentState],
-    options => options.paymentOSCConfig
-  ) || {};
+export const getPaymentConfig = createSelector([getPaymentState], options => options.paymentOSCConfig) || {};
 
 export const getMethodPaymentGateways =
-  createSelector(
-    [getPaymentState],
-    options => options.methodPaymentGateways
-  ) || {};
+  createSelector([getPaymentState], options => options.methodPaymentGateways) || {};
 
-export const getPaymentConfigNew =
-  createSelector(
-    [getPaymentState],
-    options => options.paymentConfig
-  ) || {};
+export const getPaymentConfigNew = createSelector([getPaymentState], options => options.paymentConfig) || {};
 
 export const getPaymentOptions = createSelector(
   [getPaymentConfig, allowedOptions, getMethodPaymentGateways],
@@ -50,7 +48,5 @@ export const getEasyEmiConfig = createSelector(
   items => items.filter(item => item.paymentType === 'EasyEmi')[0] || {}
 );
 
-export const getEmiBanks = createSelector(
-  [getAllEMIBanks],
-  banks => Object.values(banks.bankDetails).map(x => ({ bank: x.bank, values: Object.values(x.emiOptions) }))
-);
+export const getEmiBanks = createSelector([getAllEMIBanks], banks =>
+  Object.values(banks.bankDetails).map(x => ({ bank: x.bank, values: Object.values(x.emiOptions) })));
