@@ -45,7 +45,7 @@ class UpiForm extends Component {
           <FormInput
             label="Enter your VPA"
             type="text"
-            placeholder=""
+            placeholder="Ex: MobileNumber@upi"
             value={vpa}
             name="upi_vpa"
             onChange={this.onChangeDetails(setPaymentDetails, gateway)}
