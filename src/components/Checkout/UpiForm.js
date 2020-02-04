@@ -43,7 +43,7 @@ class UpiForm extends Component {
       <Div className={styles.paymentBlock} p={padding}>
         <Div col="9" pr="1rem">
           <FormInput
-            label="Enter your VPA"
+            label="Please enter your UPI ID"
             type="text"
             placeholder="Ex: MobileNumber@upi"
             value={vpa}
