@@ -15,7 +15,7 @@ import Text from 'hometown-components-dev/lib/TextHtV1';
 
 const ProductSummaryList = ({ productItem, qty, sku }) => (
   <Flex pb={20}>
-    <Box variant="col-4" pr={0}>
+    <Box variant="col-4" pr={0} pl={0}>
       <Link to={formatProductURL(productItem.name, sku)}>
         <Image
           width={1}

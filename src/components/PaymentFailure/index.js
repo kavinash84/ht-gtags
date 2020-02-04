@@ -1,31 +1,31 @@
 import React from 'react';
-import Container from 'hometown-components-dev/lib/Container';
-import Div from 'hometown-components-dev/lib/Div';
-import Section from 'hometown-components-dev/lib/Section';
-import Img from 'hometown-components-dev/lib/Img';
-import Empty from 'hometown-components-dev/lib/Empty';
+import { Link } from 'react-router-dom';
+/**
+ * Components
+ */
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import { CART_URL } from 'helpers/Constants';
-import TitleBar from '../TitleBar';
 
 const PaymentFailedIcon = require('../../../static/failed.svg');
 
 const PaymentFailure = () => (
-  <Div type="block">
-    <TitleBar title="Payment Failed" />
-    <Container type="container" pr="0" pl="0">
-      <Section display="flex" p="0.625rem" pt="2.5rem" pb="1.25rem" mb="0">
-        <Empty
-          title="Dear Customer,The Payment for your order was not successful."
-          subTitle="Please try again later !"
-          btnName="Try Again"
-          url={CART_URL}
-          bg="#fafafa"
-        >
-          <Img width="100px" src={PaymentFailedIcon} m="auto" alt="Error During Payment" />
-        </Empty>
-      </Section>
-    </Container>
-  </Div>
+  <Box textAlign="center" py={30}>
+    <Image width="100px" src={PaymentFailedIcon} alt="Error During Payment" mb={20} />
+    <Text color="primary" fontSize={40} textAlign="center" pb={15}>
+      Please try again later !
+    </Text>
+    <Text color="textLight" textAlign="center" width={1} fontSize={20} fontWeight={500} pb={40}>
+      Dear Customer,The Payment for your order was not successful.
+    </Text>
+    <Link to={CART_URL}>
+      <Button fontSize={16} py={15} px={40} height="auto">
+        Try again
+      </Button>
+    </Link>
+  </Box>
 );
 
 export default PaymentFailure;

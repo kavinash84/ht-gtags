@@ -59,18 +59,19 @@ const OrderSummary = ({
       </Box>
     </Col>
     {/* Products */}
-    <Box
-      mb={20}
-      mt={20}
-      sx={{
-        borderBottom: 'divider'
-      }}
-    >
-      {results.map(item => (
-        <ProductSummaryList sku={item.configurable_sku} qty={item.qty} productItem={item.product_info || {}} />
-      ))}
-    </Box>
-    <Box variant="col-12" pb={20}>
+    {results.map(item => (
+      <Col width={1}>
+        <Box
+          mt={20}
+          sx={{
+            borderBottom: 'divider'
+          }}
+        >
+          <ProductSummaryList sku={item.configurable_sku} qty={item.qty} productItem={item.product_info || {}} />
+        </Box>
+      </Col>
+    ))}
+    <Box variant="col-12" pt={20} pb={20}>
       <Flex mb={20} justifyContent="space-between">
         <Text>Subtotal</Text>
         <Text>Rs. {itemsTotal ? formatAmount(itemsTotal) : null}</Text>

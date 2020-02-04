@@ -1,42 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Heading from 'hometown-components-dev/lib/Heading';
-import Container from 'hometown-components-dev/lib/Container';
-import Div from 'hometown-components-dev/lib/Div';
-import Section from 'hometown-components-dev/lib/Section';
-import Row from 'hometown-components-dev/lib/Row';
-import { Link } from 'react-router-dom';
 
-const styles = require('../Listing/BreadCrumb.scss');
+/**
+ * Components
+ */
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
 
 const TitleBar = ({ title, productCount }) => (
-  <Section mb="0.625rem" p="1.25rem 0.5rem" bg="bg">
-    <Container type="container" pr="0" pl="0">
-      <Row display="block" mr="0" ml="0" mb="0">
-        <Div col="9">
-          <ul itemScope itemType="http://schema.org/BreadcrumbList" className={styles.breadCrumbList}>
-            <li itemProp="itemListElement" itemType="http://schema.org/ListItem" itemScope>
-              <Link itemProp="item" to="/">
-                <span itemProp="name">Home</span>
-                <meta itemProp="position" content="1" />
-              </Link>
-            </li>
-            <li itemProp="itemListElement" itemType="http://schema.org/ListItem" itemScope>
-              <Link itemProp="item" to="/" onClick={e => e.preventDefault()}>
-                <span itemProp="name">{title}</span>
-                <meta itemProp="position" content="2" />
-              </Link>
-            </li>
-          </ul>
-        </Div>
-      </Row>
-      <Row display="block" mr="0" ml="0" mb="0">
-        <Heading fontSize="1.5rem" color="text" mt="0" mb="0" pb="2px" fontFamily="regular">
-          {title} {productCount && `(${productCount})`}
-        </Heading>
-      </Row>
-    </Container>
-  </Section>
+  <Row>
+    <Heading>
+      {title} {productCount && `(${productCount})`}
+    </Heading>
+  </Row>
 );
 
 TitleBar.defaultProps = {

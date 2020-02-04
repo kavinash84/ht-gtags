@@ -33,7 +33,7 @@ const hooks = {
     await dispatch(loadMyOrders(contactNumber));
   }
 };
-const MyAddress = () => (
+const OrderAndReturns = () => (
   <Wrapper>
     <Body>
       {/* Header */}
@@ -62,4 +62,4 @@ const MyAddress = () => (
   </Wrapper>
 );
 
-export default provideHooks(hooks)(MyAddress);
+export default provideHooks(hooks)(OrderAndReturns);
