@@ -28,7 +28,7 @@ const Gratification = () => (
       <Container pt={60}>
         <Box variant="col-10" mx="auto">
           <Box sx={{ boxShadow: 'profile', border: 'light' }}>
-            <GratificationBody />
+            <GratificationBody subTitle="Your order has been placed successfully." />
           </Box>
           <Row mx={0} mb={40} mt={60} justifyContent="center">
             <Text fontFamily="medium" fontSize={28}>

@@ -254,7 +254,7 @@ class Footer extends React.Component {
                   </Text>
                 </Row>
               )}
-              <Row mt={15}>
+              <Row mt={20}>
                 <SocialLink target="_blank" href="https://www.facebook.com/hometown.in/">
                   <Image src={fbIcon} alt="Facebook" />
                 </SocialLink>
