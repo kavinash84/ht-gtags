@@ -375,7 +375,18 @@ class StoreLocator extends React.Component {
       <Section>
         <Container variant="container-fluid">
           <Row justifyContent="center">
-            <Heading fontSize={42} lineHeight={1.53}>
+            <Heading
+              lineHeight={1.57}
+              sx={{
+                fontWeight: 'bold',
+                fontFamily: 'HelveticaNeue',
+                fontSize: '42px',
+                color: '#474747',
+                fontStretch: 'normal',
+                fontStyle: 'normal',
+                letterSpacing: '0.84px'
+              }}
+            >
               Locate a store
             </Heading>
           </Row>
@@ -493,13 +504,14 @@ class StoreLocator extends React.Component {
                     >
                       <Box width="calc(100% - 134px)" onClick={() => this.handleClick(item.store, mapData, item.city)}>
                         <Heading
-                          variant="heading.regular"
-                          fontSize={16}
+                          variant="profileDashBoard"
+                          fontSize={17}
                           color="#FFF"
                           mb={8}
                           sx={{
                             display: 'flex',
-                            alignItems: 'center'
+                            alignItems: 'center',
+                            fontWeight: 'bold'
                           }}
                         >
                           <LocationIcon color="#FFF" sx={{ flexShrink: 0 }} /> {item.store.toUpperCase()}

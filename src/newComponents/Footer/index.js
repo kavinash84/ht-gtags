@@ -21,6 +21,7 @@ import Container from 'hometown-components-dev/lib/ContainerHtV1';
 import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
 import EmailIcon from 'hometown-components-dev/lib/Icons/EmailHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Li from 'hometown-components-dev/lib/LiHtV1';
 import LocationIcon from 'hometown-components-dev/lib/Icons/LocationHtV1';
@@ -229,7 +230,29 @@ class Footer extends React.Component {
             <Col width={[1, 1, 5 / 12]} pl={[0, 0, 50]}>
               {!already ? (
                 <form onSubmit={this.handleSubmit}>
-                  <Row>
+                  <Box
+                    width="75%"
+                    sx={{
+                      textAlign: 'center',
+                      position: 'absolute',
+                      top: '-8px',
+                      backgrounColor: '#FFF'
+                    }}
+                  >
+                    <LabelHtV1
+                      sx={{
+                        fontFamily: 'HelveticaNeue',
+                        fontSize: '12px',
+                        fontWeight: '500',
+                        letterSpacing: '0.51px',
+                        color: '#1d1d1d'
+                      }}
+                    >
+                      {' '}
+                      Lorem ipsum{' '}
+                    </LabelHtV1>
+                  </Box>
+                  <Row sx={{ borderTop: 'divider', paddingTop: '17px' }}>
                     <Box width={9 / 12}>
                       <FormInput
                         label=""

@@ -115,7 +115,7 @@ export default class HeaderTop extends Component {
         <Row alignItems="center">
           <Col width={3 / 12}>
             <Link to={HOME_URL}>
-              <Image height={28} src={LogoIcon} alt="Hometown" HtV1 />
+              <Image height={54} src={LogoIcon} alt="Hometown" HtV1 />
             </Link>
           </Col>
           <Col width={4 / 12}>
@@ -212,7 +212,7 @@ export default class HeaderTop extends Component {
           open={this.state.openPincode}
         >
           <Box>
-            <Image width="100px" m="auto" mb="1.5rem" src={PincodeModalIcon} alt="Pincode" />
+            <Image display="flex" width="100px" m="auto" mb="1.5rem" src={PincodeModalIcon} alt="Pincode" />
             <Heading fontSize="1.375rem" mb="1remHtV1">
               Please enter your Pincode to serve you better
             </Heading>
