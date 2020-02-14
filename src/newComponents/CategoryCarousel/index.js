@@ -8,7 +8,8 @@ import CategoryCarouselItem from 'newComponents/CategoryCarousel/CategoryCarouse
 const adjustSlides = length => ({
   slidesToShow: length >= 4 ? 4 : length,
   slidesToScroll: 3,
-  autoplaySpeed: 5000
+  autoplaySpeed: 5000,
+  infinite: false
 });
 
 export default class CategoryCarousel extends Component {

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -83,7 +83,7 @@ export default class Header extends Component {
     const { menuItems } = this.props;
 
     return (
-      <Fragment>
+      <Box bg="white" sx={{ position: 'sticky', top: 0, zIndex: 2 }}>
         <TopBar />
         <Box pt={15} sx={{ borderBottom: 'solid 1px #727070' }}>
           <Container pr="0" pl="0" mb={10}>
@@ -106,7 +106,7 @@ export default class Header extends Component {
             )}
           </Container>
         </Box>
-      </Fragment>
+      </Box>
     );
   }
 }

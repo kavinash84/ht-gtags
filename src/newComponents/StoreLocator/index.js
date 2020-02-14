@@ -374,8 +374,8 @@ class StoreLocator extends React.Component {
     return (
       <Section>
         <Container variant="container-fluid">
-          <Row justifyContent="center">
-            <Heading fontSize={42} lineHeight={1.53}>
+          <Row justifyContent="center" mb={10}>
+            <Heading fontSize={36} lineHeight={1.53}>
               Locate a store
             </Heading>
           </Row>
