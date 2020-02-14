@@ -78,9 +78,9 @@ const WeddingCampaign = () => (
           <Text ta="center" color="#434341" fontSize="18px" mt="5px" fontFamily="light">
             our incredible offers on wide range of furniture essentials.
           </Text>
-          <Link to="/hot-deals">
+          <Link to="/store-locator">
             <Text mt="50px" ta="center" fontSize="30px" fontFamily="light" style={{ textDecoration: 'underline' }}>
-              SHOP NOW
+              VISIT NOW
             </Text>
           </Link>
         </Div>
