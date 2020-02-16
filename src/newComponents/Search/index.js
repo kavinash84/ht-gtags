@@ -13,13 +13,14 @@ import * as actionCreators from 'redux/modules/search';
 /* ====== selectors ====== */
 
 /* ====== Components ====== */
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import InputField from 'hometown-components-dev/lib/InputFieldHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
 
 /* ====== Page Components ====== */
 
-const styles = require('./Search.scss');
-const SearchIcon = require('../../../static/search-icon.svg');
+const SearchIcon = require('../../../static/search.svg');
 const CloseIcon = require('../../../static/close-icon.svg');
 
 const onClick = setFilterState => e => {
@@ -55,17 +56,17 @@ const renderSuggestion = setFilterState => suggestion => (
 );
 
 const renderInputComponent = inputProps => (
-  <input type="text" placeholder="Search" {...inputProps} className={styles.inputSearch} />
+  <InputField variant="inputSearch" type="text" placeholder="Search" {...inputProps} />
 );
 /* eslint react/prop-types: 0 */
 const renderSuggestionsContainer = ({ loaded }) => ({ containerProps, children }) => (
-  <BoxHtV1>
+  <Box>
     {loaded && (
-      <BoxHtV1 {...containerProps} p="0" className={`${styles.searchList} ${styles.active}`}>
+      <Box {...containerProps} p="0">
         {children}
-      </BoxHtV1>
+      </Box>
     )}
-  </BoxHtV1>
+  </Box>
 );
 
 class Search extends React.Component {
@@ -96,9 +97,11 @@ class Search extends React.Component {
       });
     }
   };
+
   onSuggestionsClearRequested = () => {
     // Implement Suggesion Clear Reuest if needed here
   };
+
   onSuggestionsClear = async () => {
     const { dispatch } = this.context.store;
     const { clearSearchQuery } = this.props;
@@ -107,6 +110,7 @@ class Search extends React.Component {
       value: ''
     });
   };
+
   onSuggestionSelected = (e, { suggestion }) => {
     e.preventDefault();
     const { history } = this.props;
@@ -127,7 +131,7 @@ class Search extends React.Component {
     };
 
     return (
-      <BoxHtV1 width={1} className={styles.search}>
+      <Box width={1}>
         <form onSubmit={onSubmit(searchQuery, history, hideResultsOnSubmit, results, setFilterState)}>
           <Autosuggest
             suggestions={suggestions}
@@ -141,21 +145,22 @@ class Search extends React.Component {
             onSuggestionSelected={this.onSuggestionSelected}
           />
         </form>
-        {searchQuery === '' ? (
-          <img src={SearchIcon} className={styles.searchIcon} alt="Search" />
-        ) : (
-          <ButtonHtV1
-            className={styles.closeBtn}
-            onClick={this.onSuggestionsClear}
-            btnType="custom"
-            bg="transparent"
-            border="none"
-            p="0"
-          >
-            <img src={CloseIcon} alt="Close" />
-          </ButtonHtV1>
-        )}
-      </BoxHtV1>
+        <Box
+          sx={{
+            position: 'absolute',
+            right: 25,
+            top: 10
+          }}
+        >
+          {searchQuery === '' ? (
+            <Image height={16} src={SearchIcon} alt="Search" />
+          ) : (
+            <Button variant="link" onClick={this.onSuggestionsClear}>
+              <Image height={16} src={CloseIcon} alt="Close" />
+            </Button>
+          )}
+        </Box>
+      </Box>
     );
   }
 }
