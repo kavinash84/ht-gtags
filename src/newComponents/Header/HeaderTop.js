@@ -211,9 +211,9 @@ export default class HeaderTop extends Component {
           onCloseModal={this.onClosePincodeModal}
           open={this.state.openPincode}
         >
-          <Box>
+          <Box textAlign="center">
             <Image width="100px" m="auto" mb="1.5rem" src={PincodeModalIcon} alt="Pincode" />
-            <Heading fontSize="1.375rem" mb="1remHtV1">
+            <Heading fontSize={20} lineHeight={1.3} mb="1rem">
               Please enter your Pincode to serve you better
             </Heading>
             <PinCode color="#f2f2f2" onCloseModal={this.onClosePincodeModal} />
