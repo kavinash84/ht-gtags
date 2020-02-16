@@ -134,16 +134,6 @@ export default class HeaderTop extends Component {
                 <Text variant="headerLabel">Store Locator</Text>
               </Flex>
             </Link>
-            <Button variant="link" pl={20} onClick={isLoggedIn ? onClick(history) : this.onOpenLoginModal}>
-              <Flex alignItems="center">
-                <FavIcon />
-                <Text variant="headerLabel">{isLoggedIn ? wishListCount : 0}</Text>
-              </Flex>
-            </Button>
-            <Flex as={Link} to={CART_URL} alignItems="center" pl={20}>
-              <CartIcon />
-              <Text variant="headerLabel">{cartCount}</Text>
-            </Flex>
             <Button
               variant="link"
               pl={20}
@@ -163,7 +153,7 @@ export default class HeaderTop extends Component {
             >
               {isLoggedIn ? <Text variant="headerLabel">Hi ${titleCase(name)}</Text> : <UserIcon />}
             </Button>
-            <Box pt={20}>
+            <Box pt={20} sx={{ position: 'relative' }}>
               <Card variant="card.profileMore">
                 {!isLoggedIn && (
                   <Fragment>
@@ -202,6 +192,16 @@ export default class HeaderTop extends Component {
                 )}
               </Card>
             </Box>
+            <Button variant="link" pl={20} onClick={isLoggedIn ? onClick(history) : this.onOpenLoginModal}>
+              <Flex alignItems="center">
+                <FavIcon />
+                <Text variant="headerLabel">{isLoggedIn ? wishListCount : 0}</Text>
+              </Flex>
+            </Button>
+            <Flex as={Link} to={CART_URL} alignItems="center" pl={20}>
+              <CartIcon />
+              <Text variant="headerLabel">{cartCount}</Text>
+            </Flex>
           </Col>
         </Row>
 

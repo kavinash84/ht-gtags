@@ -142,7 +142,7 @@ class Footer extends React.Component {
       <Section bg="bgFooter" pt={30} pb={10} mb={0}>
         <Container variant="container">
           <Row>
-            <Col width={[1, 2 / 3, 2 / 12]}>
+            <Col width={[1, 2 / 3, 2.5 / 12]}>
               <Box mb={24}>
                 <Heading variant="footerTitle">CUSTOMER SERVICE</Heading>
                 <Ul>
@@ -167,7 +167,7 @@ class Footer extends React.Component {
                 </Ul>
               </Box>
             </Col>
-            <Col width={[1, 2 / 3, 2 / 12]}>
+            <Col width={[1, 2 / 3, 2.5 / 12]}>
               <Box mb={24}>
                 <Heading variant="footerTitle">USEFUL LINKS</Heading>
                 <Ul>
@@ -226,7 +226,7 @@ class Footer extends React.Component {
                 </Ul>
               </Box>
             </Col>
-            <Col width={[1, 1, 5 / 12]} pl={[0, 0, 50]}>
+            <Col width={[1, 1, 4 / 12]} pl={[0, 0, 50]}>
               {!already ? (
                 <form onSubmit={this.handleSubmit}>
                   <Row>
@@ -240,6 +240,7 @@ class Footer extends React.Component {
                         feedBackMessage={emailErrorMessage}
                         variant="inputSearch"
                         placeholder="Enter your email address"
+                        sx={{ borderRight: 'none' }}
                       />
                     </Box>
                     <Box width={3 / 12}>
@@ -254,7 +255,7 @@ class Footer extends React.Component {
                   </Text>
                 </Row>
               )}
-              <Row mt={20}>
+              <Row mt={20} justifyContent="space-between">
                 <SocialLink target="_blank" href="https://www.facebook.com/hometown.in/">
                   <Image src={fbIcon} alt="Facebook" />
                 </SocialLink>
@@ -273,7 +274,7 @@ class Footer extends React.Component {
               </Row>
             </Col>
           </Row>
-          <Row variant="row.contentCenter" mt={30}>
+          <Row variant="row.contentCenter" mt={40}>
             <Text variant="footerLink" fontSize={16}>
               © {new Date().getFullYear()} Praxis Home Retail Limited
             </Text>
