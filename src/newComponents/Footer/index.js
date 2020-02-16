@@ -229,6 +229,26 @@ class Footer extends React.Component {
             <Col width={[1, 1, 4 / 12]} pl={[0, 0, 50]}>
               {!already ? (
                 <form onSubmit={this.handleSubmit}>
+                  <Row
+                    justifyContent="center"
+                    sx={{
+                      position: 'relative',
+                      '&:after': {
+                        content: "''",
+                        width: 200,
+                        height: 2,
+                        bg: 'border',
+                        position: 'absolute',
+                        top: 4
+                      }
+                    }}
+                  >
+                    <Box bg="rgb(226, 225, 221)" px={10} mb={15} sx={{ zIndex: 1 }}>
+                      <Heading variant="footerTitle" mb={0}>
+                        SUBSCRIBE
+                      </Heading>
+                    </Box>
+                  </Row>
                   <Row>
                     <Box width={9 / 12}>
                       <FormInput
@@ -244,7 +264,7 @@ class Footer extends React.Component {
                       />
                     </Box>
                     <Box width={3 / 12}>
-                      <Button onClick={this.handleSubmit}>Subscribe</Button>
+                      <Button onClick={this.handleSubmit}>Submit</Button>
                     </Box>
                   </Row>
                 </form>
