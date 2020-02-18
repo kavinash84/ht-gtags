@@ -69,18 +69,21 @@ const WeddingCampaign = () => (
       </Row>
       <Row ml="0" mr="0" bg="#dedede" alignItems="center">
         <Div col="6" ta="center">
-          <Heading color="#3d3d3b" fontSize="40px" mt="0" mb="20px">
-            Exciting Offers
+          <Heading color="#3d3d3b" fontSize="30px" mt="0" mb="20px">
+            Every After Product Combos
+          </Heading>
+          <Heading color="#3d3d3b" fontSize="20px" mt="0" mb="20px">
+            Starting at Rs. 69,900/-
           </Heading>
           <Text ta="center" color="#434341" fontSize="18px" mb="0" fontFamily="light">
             Style up your space into a cosy and comfortable abode with
           </Text>
           <Text ta="center" color="#434341" fontSize="18px" mt="5px" fontFamily="light">
-            our incredible offers on wide range of furniture essentials.
+            our room combo offers on furniture and electronics.
           </Text>
           <Link to="/store-locator">
             <Text mt="50px" ta="center" fontSize="30px" fontFamily="light" style={{ textDecoration: 'underline' }}>
-              VISIT NOW
+              KNOW MORE
             </Text>
           </Link>
         </Div>
