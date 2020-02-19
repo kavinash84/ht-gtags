@@ -159,7 +159,7 @@ const WeddingCampaign = () => (
         <Div col="6" ta="center" bg="#9d9696" pt="50px" pb="30px" style={{ width: '45%' }}>
           <Img src={duracucineLogo} alt="" width="auto" m="auto" mb="50px" height="150px" />
           <Text ta="center" color="white" fontSize="24px" mb="0" fontFamily="light">
-            Modular kitchens starting
+            Modular Kitchens Starting
           </Text>
           <Text ta="center" color="white" fontSize="20px" mt="5px" fontFamily="light">
             at Rs. 99,900/-
