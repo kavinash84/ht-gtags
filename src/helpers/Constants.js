@@ -44,5 +44,6 @@ export const listingRoutes = [
   'hot-deals',
   'deals-of-the-week',
   'luggage',
-  'christmas-sale'
+  'christmas-sale',
+  'exchange-and-upgrade'
 ];
