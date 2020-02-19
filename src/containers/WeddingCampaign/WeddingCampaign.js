@@ -159,18 +159,21 @@ const WeddingCampaign = () => (
         <Div col="6" ta="center" bg="#9d9696" pt="50px" pb="30px" style={{ width: '45%' }}>
           <Img src={duracucineLogo} alt="" width="auto" m="auto" mb="50px" height="150px" />
           <Text ta="center" color="white" fontSize="24px" mb="0" fontFamily="light">
-            50000+ CUSTOMERS | 1000+ DESIGNS
+            Modular kitchens starting
           </Text>
-          <Text ta="center" color="white" fontSize="24px" mt="5px" fontFamily="light">
-            1000+ MODULES | 200+ FINISHES
+          <Text ta="center" color="white" fontSize="20px" mt="5px" fontFamily="light">
+            at Rs. 99,900/-
+          </Text>
+          <Text ta="center" color="white" fontSize="15px" mt="30px" fontFamily="light">
+            50000 CUSTOMERS | 1000 MODULES | 200 FINISHES
           </Text>
           <Link to="/modular-kitchens/" target="_blank" rel="noopener noreferrer">
             <Text
-              mt="50px"
+              mt="20px"
               mb="0"
               ta="center"
               color="white"
-              fontSize="30px"
+              fontSize="20px"
               fontFamily="light"
               style={{ textDecoration: 'underline' }}
             >
