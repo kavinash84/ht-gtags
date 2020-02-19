@@ -73,14 +73,17 @@ const WeddingCampaign = () => (
             Exciting Offers
           </Heading>
           <Text ta="center" color="#434341" fontSize="18px" mb="0" fontFamily="light">
-            Style up your space into a cosy and comfortable abode with
+            Style up your space into a cosy and comfortable abode
           </Text>
           <Text ta="center" color="#434341" fontSize="18px" mt="5px" fontFamily="light">
-            our incredible offers on wide range of furniture essentials.
+            with our room combo offer on furniture
           </Text>
-          <Link to="https://www.hometown.in/hot-deals">
+          <Text ta="center" color="#434341" fontSize="18px" mt="5px" fontFamily="light">
+            and electronics
+          </Text>
+          <Link to="/combo-offer">
             <Text mt="50px" ta="center" fontSize="30px" fontFamily="light" style={{ textDecoration: 'underline' }}>
-              SHOP NOW
+              KNOW MORE
             </Text>
           </Link>
         </Div>

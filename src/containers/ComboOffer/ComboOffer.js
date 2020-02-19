@@ -64,7 +64,7 @@ TagText.propTypes = {
   text: PropTypes.string.isRequired
 };
 
-const WeddingCampaign = () => (
+const ComboOffer = () => (
   <MenuFooter pageTitle="Promotions and Offers">
     <Div pl="15px" pr="15px">
       <Div mb="-100px">
@@ -165,4 +165,4 @@ const WeddingCampaign = () => (
   </MenuFooter>
 );
 
-export default WeddingCampaign;
+export default ComboOffer;
