@@ -144,7 +144,11 @@ class Coupon extends React.Component {
                     height={36}
                     width="80%"
                   />
-                  <Button disabled={loading || (notifs.coupon && notifs.coupon.length > 0)} onClick={this.handleApply}>
+                  <Button
+                    p={['10px 20px 10px 10px', '10px 20px 10px 10px', '10px 15px 10px']}
+                    disabled={loading || (notifs.coupon && notifs.coupon.length > 0)}
+                    onClick={this.handleApply}
+                  >
                     Apply
                   </Button>
                 </Flex>

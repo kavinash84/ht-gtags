@@ -112,7 +112,7 @@ export default class HeaderTop extends Component {
 
     return (
       <Box>
-        <Row alignItems="center">
+        <Row alignItems="center" marginRight={['0', '0 ', '-16px']} marginLeft={['0', '0 ', '-16px']}>
           <Col width={3 / 12}>
             <Link to={HOME_URL}>
               <Image height={28} src={LogoIcon} alt="Hometown" HtV1 />

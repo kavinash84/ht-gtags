@@ -31,13 +31,15 @@ class NavBar extends Component {
     const more = cats.length && cats.length > 7 ? cats.slice(7) : [];
 
     return (
-      <Box onMouseLeave={handleLeave}>
+      <Box onMouseLeave={handleLeave} margin={['0 16px', '0 16px', '0']} overflowX={['scroll', 'scroll', 'inherit']}>
         <Container pr="0" pl="0">
           <Row variant="row.nav">
             {main.map((menuItem, i) => (
               <Text
                 as={Link}
                 variant="menu"
+                p={['0 74px', '0 74px', '0 10px']}
+                minWidth="0"
                 onClick={exitOnClick}
                 title={menuItem.name}
                 to={`/${menuItem.url_key}`}
@@ -59,6 +61,8 @@ class NavBar extends Component {
             <Text
               as={Link}
               variant="menu"
+              p={['0 74px', '0 74px', '0 10px']}
+              minWidth="0"
               to="/modular-kitchens"
               title="Modular Kitchens"
               target="_blank"
@@ -72,6 +76,8 @@ class NavBar extends Component {
             <Box sx={{ position: 'relative' }}>
               <Button
                 variant="link"
+                pl={[74, 74, 10]}
+                minWidth="0"
                 sx={{
                   '& ~ div': {
                     display: 'none',

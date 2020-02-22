@@ -305,7 +305,7 @@ const Cart = ({
               btnText="SECURE CHECKOUT"
             />
             <Box pb={20}>
-              <Heading fontSize={16} mb={5} color="#2c2e3f">
+              <Heading fontSize={[15, 15, 16]} mb={5} color="#2c2e3f">
                 Exchange & Return Policy
               </Heading>
               <Text fontSize={14} lineHeight={1.3} fontFamily="light" color="#2c2e3f" pb={5}>
@@ -324,7 +324,7 @@ const Cart = ({
               </Label>
             </Box>
             <Box pb={24}>
-              <Heading fontSize={16} mb={5} color="#2c2e3f">
+              <Heading fontSize={[15, 15, 16]} mb={5} color="#2c2e3f">
                 Terms & Conditions
               </Heading>
               <Text fontSize={14} lineHeight={1.3} fontFamily="light" color="#2c2e3f" pb={5}>

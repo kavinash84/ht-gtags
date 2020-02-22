@@ -356,7 +356,7 @@ class DeliveryAddress extends Component {
     const { addressform } = this.state;
     return (
       <Container my={60} px={0}>
-        <Row>
+        <Row mr={[0, 0, -16]} ml={[0, 0, -16]}>
           <Col variant="col-8">
             {/* For logged in */}
             {!isLoggedIn && (
@@ -387,7 +387,13 @@ class DeliveryAddress extends Component {
                 </Row>
                 <Row mx={-10}>
                   {addresses.map((item, index) => (
-                    <Col variant="col-6" px={10} mb={20} key={item.id_customer_address}>
+                    <Col
+                      variant="col-6"
+                      style={{ wordWrap: 'break-word' }}
+                      px={10}
+                      mb={20}
+                      key={item.id_customer_address}
+                    >
                       <Button
                         variant="link"
                         textAlign="left"
@@ -481,7 +487,7 @@ class DeliveryAddress extends Component {
 
           {/* Order Summary */}
           <Col variant="col-4">
-            <Box bg="sidebar" px={40} py={30}>
+            <Box bg="sidebar" px={[20, 20, 40]} py={30}>
               <OrderSummary
                 history={history}
                 results={results}

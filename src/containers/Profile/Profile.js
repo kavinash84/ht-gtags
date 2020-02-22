@@ -28,7 +28,7 @@ const ProfileContainer = () => (
             Hello Matthew
           </Heading>
         </Row>
-        <Row>
+        <Row mr={[0, 0, -16]} ml={[0, 0, -16]}>
           <Box variant="col-2" pr={30}>
             <MyMenu page="profile" />
           </Box>

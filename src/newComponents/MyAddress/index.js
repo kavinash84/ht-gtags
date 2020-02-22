@@ -350,7 +350,7 @@ export default class DeliveryAddress extends Component {
     const { data, useremail } = this.props;
     const { loading } = this.props;
     return (
-      <Box type="block" mb="2rem" width="868px">
+      <Box type="block" mb="2rem" width={['560px', '560px', '868px']}>
         <Row justifyContent="space-between" alignItems="center" mx={0} width={1} mb={20}>
           <Label variant="heading.medium">Saved Addresses</Label>
           <Button variant="outline.primary" height={42} sx={{ border: 'divider' }} onClick={this.toggleAddAddressForm}>

@@ -14,7 +14,7 @@ const LogoIcon = require('../../../static/logo@2x.png');
 
 const HeaderTopSecondary = () => (
   <Box>
-    <Row alignItems="center">
+    <Row alignItems="center" mr={[0, 0, -16]} ml={[0, 0, -16]}>
       <Col width={3 / 12}>
         <Link to={HOME_URL}>
           <Image height={28} src={LogoIcon} alt="Hometown" HtV1 />

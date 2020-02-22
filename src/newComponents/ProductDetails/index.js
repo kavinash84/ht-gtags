@@ -582,6 +582,7 @@ class ProductDetails extends React.Component {
             <Row
               variant="row.contentCenter"
               mx={0}
+              mb={10}
               sx={{
                 borderTop: 'dividerBold',
                 borderBottom: 'dividerBold'
@@ -606,8 +607,9 @@ class ProductDetails extends React.Component {
             </Box>
 
             {/* Specifications */}
-            <Specs activeSpec={activeSpec} specs={groupedAttributes} pincode={pincode.selectedPincode} />
-
+            <Box mt={20}>
+              <Specs activeSpec={activeSpec} specs={groupedAttributes} pincode={pincode.selectedPincode} />
+            </Box>
             {/* Video */}
             {groupedattributes && groupedattributes.youtubeid && (
               <Row my={30}>
@@ -618,7 +620,7 @@ class ProductDetails extends React.Component {
             )}
 
             {/* Usps */}
-            <Row mb={40} width="60%" justifyContent="space-between" mx="auto">
+            <Row mb={40} width={['65%', '65%', '60%']} justifyContent="space-between" mx="auto">
               <UspCol src={freeShippingIcon} text="Free Shipping" />
               <UspCol src={emiIcon} text="EMI Options" />
               <UspCol src={warrentyIcon} text="1 Year Warranty" />

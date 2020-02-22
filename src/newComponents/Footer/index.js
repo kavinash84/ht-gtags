@@ -142,7 +142,7 @@ class Footer extends React.Component {
       <Section bg="bgFooter" pt={30} pb={10} mb={0}>
         <Container variant="container">
           <Row>
-            <Col width={[1, 2 / 3, 2.5 / 12]}>
+            <Col width={[1 / 3, 1 / 3, 2.5 / 12]}>
               <Box mb={24}>
                 <Heading variant="footerTitle">CUSTOMER SERVICE</Heading>
                 <Ul>
@@ -167,7 +167,7 @@ class Footer extends React.Component {
                 </Ul>
               </Box>
             </Col>
-            <Col width={[1, 2 / 3, 2.5 / 12]}>
+            <Col width={[1 / 3, 1 / 3, 2.5 / 12]}>
               <Box mb={24}>
                 <Heading variant="footerTitle">USEFUL LINKS</Heading>
                 <Ul>
@@ -196,7 +196,7 @@ class Footer extends React.Component {
                 <Image src={bajajFinserveIcon} alt="Bajaj Finserv" mt={20} />
               </Box>
             </Col>
-            <Col width={[1, 2 / 3, 3 / 12]}>
+            <Col width={[1 / 3, 1 / 3, 3 / 12]}>
               <Box mb={24}>
                 <Heading variant="footerTitle">CONTACT US</Heading>
                 <Ul>
@@ -226,7 +226,7 @@ class Footer extends React.Component {
                 </Ul>
               </Box>
             </Col>
-            <Col width={[1, 1, 4 / 12]} pl={[0, 0, 50]}>
+            <Col width={[1 / 2, 1 / 2, 4 / 12]} pl={[0, 0, 50]} pt={['18px', '18px', '0']} ml={['32px', '32px', '0']}>
               {!already ? (
                 <form onSubmit={this.handleSubmit}>
                   <Row

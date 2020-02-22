@@ -24,13 +24,13 @@ const PaymentMethods = () => (
     <Heading
       sx={{
         position: 'absolute',
-        fontSize: 14,
         top: '-7px',
         zIndex: 1,
-        left: 40,
         color: '#474747',
         bg: '#f5f5f5'
       }}
+      fontSize={[11, 11, 14]}
+      ml={[5, 5, 40]}
     >
       Guaranteed Secure Checkout
     </Heading>

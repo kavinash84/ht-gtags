@@ -57,7 +57,7 @@ const SavedCard = ({ cardName, cardNo, validity }) => (
           <Col width={2 / 3}>
             <CardDetails name="NAME ON CARD" value={cardName} />
           </Col>
-          <Col width={1 / 3} textAlign="right">
+          <Col width={1 / 3} textAlign="right" pl={[0, 0, 16]}>
             <CardDetails name="VALIDITY" value={validity} />
           </Col>
         </Row>

@@ -101,7 +101,7 @@ class PaymentOptions extends Component {
 
     return (
       <Container my={60} px={0}>
-        <Row>
+        <Row mr={[0, 0, -16]} ml={[0, 0, -16]}>
           <Col variant="col-8">
             {/* Product not deliverable */}
             <Row mr="0" ml="0">
@@ -371,7 +371,7 @@ class PaymentOptions extends Component {
 
           {/* Order Summary */}
           <Col variant="col-4">
-            <Box bg="sidebar" px={40} py={30}>
+            <Box bg="sidebar" px={[20, 20, 40]} py={30}>
               <OrderSummary
                 itemsTotal={summary.items}
                 setDiscount={summary.combined_set_discount}

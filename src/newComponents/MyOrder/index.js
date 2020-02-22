@@ -129,7 +129,7 @@ class MyOrderContainer extends Component {
     return (
       <Box>
         <Row display="block" mr="0" ml="0" mb="1.5rem">
-          <Box col="3" mr="1rem" width="25%">
+          <Box col="3" mr="1rem" width={[1 / 3, 1 / 3, 1 / 4]}>
             <Select
               placeholder="Select From Date"
               defaultValue={null}

@@ -20,7 +20,7 @@ const walletIcon = require('../../../static/wallet-icon.png');
 
 const AcceptedPaymentOptions = () => (
   <Box variant="col-12" pb={20}>
-    <Heading color="textSecondary" fontSize={18} pb={10}>
+    <Heading color="textSecondary" fontSize={[15, 15, 18]} pb={10}>
       Accepted Payment Options
     </Heading>
     <Flex justifyContent="space-between">

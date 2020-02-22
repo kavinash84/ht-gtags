@@ -11,7 +11,7 @@ import CouponsCard from './Card';
 class CouponsContainer extends Component {
   render() {
     return (
-      <Box width={4 / 5} px={10}>
+      <Box width={[1, 1, 4 / 5]} px={10}>
         <Row
           mb={40}
           sx={{

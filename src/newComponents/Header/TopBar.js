@@ -12,7 +12,7 @@ import Text from 'hometown-components-dev/lib/TextHtV1';
 const TopBar = () => (
   <Box bg="bgPrimary">
     <Container>
-      <Row height={35} variant="row.alignCenter" justifyContent="flex-end">
+      <Row height={35} variant="row.alignCenter" justifyContent="flex-end" pr={[18, 18, 0]}>
         <Link to="/track-order">
           <Text variant="heading.small" color="white" pr={30}>
             Track Order

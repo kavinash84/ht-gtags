@@ -103,7 +103,7 @@ class MyCasesContainer extends Component {
     return (
       <Box>
         <Row mb="1.5rem">
-          <Col variant="col-3">
+          <Col variant="col-5">
             <Select
               placeholder="Select From Date"
               defaultValue={null}
@@ -112,7 +112,7 @@ class MyCasesContainer extends Component {
               options={getDateFilters(this.FILTER_CONFIG)}
             />
           </Col>
-          <Col variant="col-3">
+          <Col variant="col-5">
             <Select
               placeholder="Select Case Status"
               defaultValue={null}
@@ -121,7 +121,7 @@ class MyCasesContainer extends Component {
               options={this.STATUS_FILTER}
             />
           </Col>
-          <Col variant="col-3">
+          <Col variant="col-5" pt={10}>
             <Button disabled={loading} onClick={this.getFilteredCases} variant="outline.primary">
               {loading ? 'Please Wait...' : 'Find'}
             </Button>
