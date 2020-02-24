@@ -113,14 +113,30 @@ const ComboOffer = () => (
         </Div>
       </Row>
       <Row justifyContent="center" bg="#84cac8" pt="10px" pb="10px">
-        <TagText text="FURNITURE" />
-        <TagText text="Furnishing" />
-        <TagText text="DECOR" />
-        <TagText text="tableware" />
-        <TagText text="kitchenware" />
-        <TagText text="luggage" />
-        <TagText text="ELECTRONICS" />
-        <TagText style={{ borderRight: 'none', textTransform: 'uppercase' }} text="MODULAR KITCHEN" />
+        <Link to="/furniture">
+          <TagText text="FURNITURE" />
+        </Link>
+        <Link to="/home-furnishings">
+          <TagText text="HOME FURNISHING" />
+        </Link>
+        <Link to="/home-decor">
+          <TagText text="DECOR" />
+        </Link>
+        <Link to="/tableware">
+          <TagText text="TABLEWARE" />
+        </Link>
+        <Link to="/kitchenware">
+          <TagText text="KITCHENWAR" />
+        </Link>
+        <Link to="/luggage">
+          <TagText text="LUGGAGE" />
+        </Link>
+        <Link to="/electronics">
+          <TagText text="ELECTRONICS" />
+        </Link>
+        <Link to="/modular-kitchen">
+          <TagText style={{ borderRight: 'none', textTransform: 'uppercase' }} text="MODULAR KITCHEN" />
+        </Link>
       </Row>
       <Div pt="30px" pb="30px">
         {/* eslint-disable */}
