@@ -76,12 +76,15 @@ const WeddingCampaign = () => (
             Starting at Rs. 69,900/-
           </Heading>
           <Text ta="center" color="#434341" fontSize="18px" mb="0" fontFamily="light">
-            Style up your space into a cosy and comfortable abode with
+            Style up your space into a cosy and comfortable abode
           </Text>
           <Text ta="center" color="#434341" fontSize="18px" mt="5px" fontFamily="light">
-            our room combo offers on furniture and electronics.
+            with our room combo offer on furniture
           </Text>
-          <Link to="/store-locator">
+          <Text ta="center" color="#434341" fontSize="18px" mt="5px" fontFamily="light">
+            and electronics
+          </Text>
+          <Link to="/combo-offer">
             <Text mt="50px" ta="center" fontSize="30px" fontFamily="light" style={{ textDecoration: 'underline' }}>
               KNOW MORE
             </Text>
