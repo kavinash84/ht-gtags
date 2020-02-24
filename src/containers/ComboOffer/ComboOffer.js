@@ -124,7 +124,7 @@ const ComboOffer = () => (
         <TagText url="/luggage" text="LUGGAGE" />
         <TagText url="/electronics" text="ELECTRONICS" />
         <TagText
-          url="/modular-kitchen"
+          url="/modular-kitchens"
           style={{ borderRight: 'none', textTransform: 'uppercase' }}
           text="MODULAR KITCHEN"
         />
