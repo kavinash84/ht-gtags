@@ -120,7 +120,7 @@ const ComboOffer = () => (
         <TagText url="home-furnishings" text="HOME FURNISHING" />
         <TagText url="/home-decor" text="DECOR" />
         <TagText url="/tableware" text="TABLEWARE" />
-        <TagText url="/kitchenware" text="KITCHENWAR" />
+        <TagText url="/kitchenware" text="KITCHENWARE" />
         <TagText url="/luggage" text="LUGGAGE" />
         <TagText url="/electronics" text="ELECTRONICS" />
         <TagText
