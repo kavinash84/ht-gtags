@@ -46,23 +46,26 @@ ContentSection.propTypes = {
   title: PropTypes.string
 };
 
-const TagText = ({ text, ...rest }) => (
-  <Text
-    fontSize="20px"
-    fontFamily="regular"
-    color="white"
-    pl="10px"
-    pr="10px"
-    lh="1"
-    style={{ borderRight: '2px solid #FFF', textTransform: 'uppercase' }}
-    {...rest}
-  >
-    {text}
-  </Text>
+const TagText = ({ text, url, ...rest }) => (
+  <Link to={url}>
+    <Text
+      fontSize="20px"
+      fontFamily="regular"
+      color="white"
+      pl="10px"
+      pr="10px"
+      lh="1"
+      style={{ borderRight: '2px solid #FFF', textTransform: 'uppercase' }}
+      {...rest}
+    >
+      {text}
+    </Text>
+  </Link>
 );
 
 TagText.propTypes = {
-  text: PropTypes.string.isRequired
+  text: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired
 };
 
 const ComboOffer = () => (
@@ -113,30 +116,18 @@ const ComboOffer = () => (
         </Div>
       </Row>
       <Row justifyContent="center" bg="#84cac8" pt="10px" pb="10px">
-        <Link to="/furniture">
-          <TagText text="FURNITURE" />
-        </Link>
-        <Link to="/home-furnishings">
-          <TagText text="HOME FURNISHING" />
-        </Link>
-        <Link to="/home-decor">
-          <TagText text="DECOR" />
-        </Link>
-        <Link to="/tableware">
-          <TagText text="TABLEWARE" />
-        </Link>
-        <Link to="/kitchenware">
-          <TagText text="KITCHENWAR" />
-        </Link>
-        <Link to="/luggage">
-          <TagText text="LUGGAGE" />
-        </Link>
-        <Link to="/electronics">
-          <TagText text="ELECTRONICS" />
-        </Link>
-        <Link to="/modular-kitchen">
-          <TagText style={{ borderRight: 'none', textTransform: 'uppercase' }} text="MODULAR KITCHEN" />
-        </Link>
+        <TagText url="/furniture" text="FURNITURE" />
+        <TagText url="home-furnishings" text="HOME FURNISHING" />
+        <TagText url="/home-decor" text="DECOR" />
+        <TagText url="/tableware" text="TABLEWARE" />
+        <TagText url="/kitchenware" text="KITCHENWAR" />
+        <TagText url="/luggage" text="LUGGAGE" />
+        <TagText url="/electronics" text="ELECTRONICS" />
+        <TagText
+          url="/modular-kitchen"
+          style={{ borderRight: 'none', textTransform: 'uppercase' }}
+          text="MODULAR KITCHEN"
+        />
       </Row>
       <Div pt="30px" pb="30px">
         {/* eslint-disable */}
