@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import MenuFooter from 'containers/MenuFooter';
 import Div from 'hometown-components/lib/Div';
 import Row from 'hometown-components/lib/Row';
@@ -82,23 +83,33 @@ const ComboOffer = () => (
       </Row>
       <Row ml="0" mr="0" mb="20px" alignItems="center">
         <Div col="12">
-          <Img width="100%" src={completeHomePackage} />
+          <Link to="/store-locator">
+            <Img width="100%" src={completeHomePackage} />
+          </Link>
         </Div>
       </Row>
       <Row ml="-10px" mr="-10px">
         <Div col="6" p="10px">
-          <Img width="100%" src={livingRoom} />
+          <Link to="/store-locator">
+            <Img width="100%" src={livingRoom} />
+          </Link>
         </Div>
         <Div col="6" p="10px">
-          <Img width="100%" src={bedRoom} />
+          <Link to="/store-locator">
+            <Img width="100%" src={bedRoom} />
+          </Link>
         </Div>
       </Row>
       <Row ml="-10px" mr="-10px" mb="20px">
         <Div col="6" p="10px">
-          <Img width="100%" src={livingDiningRoom} />
+          <Link to="/store-locator">
+            <Img width="100%" src={livingDiningRoom} />
+          </Link>
         </Div>
         <Div col="6" p="10px">
-          <Img width="100%" src={modularKitchen} />
+          <Link to="/store-locator">
+            <Img width="100%" src={modularKitchen} />
+          </Link>
         </Div>
       </Row>
       <Row justifyContent="center" bg="#84cac8" pt="10px" pb="10px">
