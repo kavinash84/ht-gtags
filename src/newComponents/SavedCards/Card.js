@@ -36,7 +36,7 @@ CardDetails.propTypes = {
 };
 
 const SavedCard = ({ cardName, cardNo, validity }) => (
-  <Col width={1 / 3} mb={30}>
+  <Col width={[1 / 2, 1 / 2, 1 / 3]} mb={30}>
     <Box sx={{ boxShadow: 'primary', border: 'light' }}>
       <Box p={15}>
         <Flex justifyContent="space-between" pb={5}>

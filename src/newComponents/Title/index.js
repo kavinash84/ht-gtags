@@ -1,17 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-// import Text from 'hometown-components-dev/lib/Text';
-// import Div from 'hometown-components-dev/lib/Div';
+import Text from 'hometown-components-dev/lib/TextHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
 
 const Title = ({ title, subTitle, ...rest }) => (
-  <BoxHtV1 mb="24px" {...rest}>
-    <TextHtV1 variant="heading.regular" textAlign="center" mb={subTitle && 10}>
+  <Box mb="24px" {...rest}>
+    <Text variant="heading.regular" textAlign="center" mb={subTitle && 10}>
       {title}
-    </TextHtV1>
-    {subTitle !== '' && <TextHtV1 textAlign="center">{subTitle}</TextHtV1>}
-  </BoxHtV1>
+    </Text>
+    {subTitle !== '' && <Text textAlign="center">{subTitle}</Text>}
+  </Box>
 );
 
 Title.defaultProps = {

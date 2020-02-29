@@ -194,14 +194,14 @@ class OrderBlock extends Component {
               </DetailTab>
             </Col>
           </Row>
-          <Row sx={{ borderTop: 'light' }} mx={0} px={20} py={15}>
-            <Box width={1.5 / 10}>
+          <Row sx={{ borderTop: 'light' }} mx={0} px={[0, 0, 0, 20]} py={15}>
+            <Box width={1.5 / 10} pr={[10, 10, 10, 0]}>
               <Heading color="label" variant="heading.small" mb={10}>
                 ORDER DATE
               </Heading>
               <Text color="label">{order.order_date}</Text>
             </Box>
-            <Box width={3 / 10}>
+            <Box width={3 / 10} pr={[10, 10, 10, 0]}>
               <Heading color="label" variant="heading.small" mb={10}>
                 SHIPPING ADDRESS
               </Heading>
@@ -215,7 +215,7 @@ class OrderBlock extends Component {
                 {order.s_region || ''}
               </Text>
             </Box>
-            <Box width={3 / 10}>
+            <Box width={3 / 10} pr={[10, 10, 10, 0]}>
               <Heading color="label" variant="heading.small" mb={10}>
                 BILLING ADDRESS
               </Heading>

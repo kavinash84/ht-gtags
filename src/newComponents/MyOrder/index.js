@@ -129,7 +129,7 @@ class MyOrderContainer extends Component {
     return (
       <Box>
         <Row display="block" mr="0" ml="0" mb="1.5rem">
-          <Box col="3" mr="1rem" width={[1 / 3, 1 / 3, 1 / 4]}>
+          <Box pr="1rem" width={[2 / 3, 2 / 3, 1 / 3, 1 / 4]}>
             <Select
               placeholder="Select From Date"
               defaultValue={null}
@@ -138,30 +138,8 @@ class MyOrderContainer extends Component {
               options={getDateFilters(this.FILTER_CONFIG)}
             />
           </Box>
-          {/* <Div col="3" mr="1rem" hide>
-                <Select
-                  placeholder="Select Order Status"
-                  defaultValue={null}
-                  value={this.state.caseStatus}
-                  onChange={this.onStatusChange}
-                  options={this.STATUS_FILTER}
-                />
-              </Div> */}
-          <Box col="2" mr="1rem" width="16.65%">
-            <Button
-              disabled={loading}
-              onClick={this.getFilteredOrders}
-              border="1px solid"
-              lh="1.5"
-              size="block"
-              btnType="primary"
-              btnColor="#515151"
-              height="38px"
-              width="100%"
-              color="colors.white"
-              bg="rgb(249, 141, 41)"
-              fontSize="16px"
-            >
+          <Box width={[1 / 3, 1 / 3, 1 / 3, 1 / 4]}>
+            <Button disabled={loading} onClick={this.getFilteredOrders} height={38}>
               {loading ? 'Please Wait ...' : 'Find'}
             </Button>
           </Box>

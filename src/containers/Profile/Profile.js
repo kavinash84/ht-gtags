@@ -22,22 +22,22 @@ const ProfileContainer = () => (
       <Header />
 
       {/* Container */}
-      <Container pt={80}>
+      <Container pt={[40, 40, 40, 60]}>
         <Row width={1} sx={{ borderBottom: 'divider' }} mx={0}>
           <Heading fontSize={20} pb={10}>
             Hello Matthew
           </Heading>
         </Row>
-        <Row mr={[0, 0, -16]} ml={[0, 0, -16]}>
-          <Box variant="col-2" pr={30}>
+        <Row mr={0} ml={0}>
+          <Box width={[3 / 12, 3 / 12, 2 / 12]} pr={30}>
             <MyMenu page="profile" />
           </Box>
-          <Box variant="col-10" pl={30} sx={{ borderLeft: 'divider' }}>
+          <Box width={[9 / 12, 9 / 12, 10 / 12]} pl={30} sx={{ borderLeft: 'divider' }}>
             <Box
               px={30}
               py={30}
               mt={30}
-              width={7 / 10}
+              width={[1, 1, 8 / 10, 7 / 10]}
               sx={{
                 boxShadow: 'profile',
                 border: 'divider'

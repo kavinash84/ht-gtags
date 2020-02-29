@@ -21,17 +21,17 @@ const SavedCards = () => (
       <Header />
 
       {/* Container */}
-      <Container mt={80}>
+      <Container pt={[40, 40, 40, 60]}>
         <Row width={1} sx={{ borderBottom: 'divider' }} mx={0}>
           <Heading fontSize={20} pb={10}>
             Hello Matthew
           </Heading>
         </Row>
         <Row>
-          <Col variant="col-2" pr={30}>
+          <Col width={[3 / 12, 3 / 12, 2 / 12]} pr={30}>
             <MyMenu page="my dashboard" />
           </Col>
-          <Col variant="col-10" px={30} py={20} sx={{ borderLeft: 'divider' }}>
+          <Col width={[9 / 12, 9 / 12, 10 / 12]} px={30} py={20} sx={{ borderLeft: 'divider' }}>
             <SavedCardsContainer />
           </Col>
         </Row>
