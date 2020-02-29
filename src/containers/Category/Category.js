@@ -76,11 +76,13 @@ export default class Category extends Component {
           <Header />
 
           {/* Offer Bar */}
-          <Box bg="heading" pt={30} pb={20}>
-            <Container>
-              <Row justifyContent="center">{this.renderOffers(category.offers || [])}</Row>
-            </Container>
-          </Box>
+          {category.offers && (
+            <Box bg="heading" pt={30} pb={20}>
+              <Container>
+                <Row justifyContent="center">{this.renderOffers(category.offers || [])}</Row>
+              </Container>
+            </Box>
+          )}
 
           {/* Main Slider */}
           {category && <MainSlider data={category.main} />}
