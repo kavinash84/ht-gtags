@@ -2,17 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 /* ====== Components ====== */
-import ColHtV1 from 'hometown-components-dev/lib/ColHtV1';
-import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
-import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
 
 const UspItem = ({ src, children }) => (
-  <ColHtV1 variant="colBasis" flexDirection="column">
-    <ImageHtV1 src={src} height="60px" alt="Free Delivery" />
-    <TextHtV1 variant="uspTitle" mt={16}>
+  <Col variant="colBasis" flexDirection="column">
+    <Image src={src} height={[40, 40, 50, 60]} alt={children} />
+    <Text variant="uspTitle" mt={16}>
       {children}
-    </TextHtV1>
-  </ColHtV1>
+    </Text>
+  </Col>
 );
 
 UspItem.defaultProps = {};

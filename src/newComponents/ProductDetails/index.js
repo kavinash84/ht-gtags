@@ -109,7 +109,7 @@ const SocialButton = props => <Button variant="link" mr={15} {...props} />;
 
 const UspCol = ({ src, text, ...props }) => (
   <Col {...props}>
-    <Image src={src} alt={text} height={70} />
+    <Image src={src} alt={text} height={[50, 50, 70]} />
     <Text variant="primary.medium" pt={15} fontFamily="medium">
       {text}
     </Text>
@@ -393,9 +393,9 @@ class ProductDetails extends React.Component {
               <BreadCrumb breadcrumbs={breadcrumbs} />
             </Col>
           </Row>
-          <Row mb={70}>
+          <Row mb={[40, 40, 70]}>
             {/* Left Column */}
-            <Col width={[1, 1, 7 / 12]} pr={40}>
+            <Col width={[1, 1, 7 / 12]} pr={[16, 16, 40]}>
               <Box sx={{ position: 'relative' }}>
                 {/* Product Slider */}
                 {images && <ProductDetailsCarousel data={images} title={meta.name} />}
@@ -431,6 +431,7 @@ class ProductDetails extends React.Component {
                 count={count}
                 marginTop="1rem"
                 onClickReviews={this.onClickReviews}
+                mt={[25, 25, 0]}
               />
 
               {/* Product Share */}
@@ -610,6 +611,7 @@ class ProductDetails extends React.Component {
             <Box mt={20}>
               <Specs activeSpec={activeSpec} specs={groupedAttributes} pincode={pincode.selectedPincode} />
             </Box>
+
             {/* Video */}
             {groupedattributes && groupedattributes.youtubeid && (
               <Row my={30}>
@@ -620,15 +622,15 @@ class ProductDetails extends React.Component {
             )}
 
             {/* Usps */}
-            <Row mb={40} width={['65%', '65%', '60%']} justifyContent="space-between" mx="auto">
+            <Row mb={40} width={['70%', '70%', '60%']} justifyContent="space-between" mx="auto">
               <UspCol src={freeShippingIcon} text="Free Shipping" />
               <UspCol src={emiIcon} text="EMI Options" />
               <UspCol src={warrentyIcon} text="1 Year Warranty" />
             </Row>
 
             {/* DIMENSIONS */}
-            <Box py={20} sx={{ borderTop: 'dividerLight' }}>
-              <Box textAlign="center" mb={30}>
+            <Box pt={40} pb={20} sx={{ borderTop: 'dividerLight' }}>
+              <Box textAlign="center" mb={20}>
                 <Text variant="regular" fontSize={16} pb={5}>
                   DIMENSIONS
                 </Text>
@@ -637,8 +639,8 @@ class ProductDetails extends React.Component {
               <Box p={15} textAlign="center" sx={{ border: 'dividerLight' }}>
                 <Image src="https://www.hometown.in/media/product/89/2453/3-zoom.jpg" alt="" />
               </Box>
-              <Box>
-                <Text variant="regular" fontSize={16} pb={5}>
+              <Box pt={20}>
+                <Text variant="regular" fontSize={16}>
                   {height || width || depth
                     ? `
                     Overall Dimension (inches) :
@@ -652,7 +654,7 @@ class ProductDetails extends React.Component {
             </Box>
 
             {/* Complete the look */}
-            <Box py={20}>
+            <Box pt={20}>
               <Box textAlign="center" mb={20}>
                 <Heading variant="heading.regular">Complete the look</Heading>
               </Box>
@@ -717,7 +719,7 @@ class ProductDetails extends React.Component {
 
           {/* Related Products List */}
           {relatedproductsList.length > 0 && (
-            <Row py={20}>
+            <Row pt={30}>
               <ProductCarousel
                 paddingTop="2.5rem"
                 title="Recommended for you"

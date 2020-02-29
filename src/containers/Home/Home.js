@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import LazyLoad from 'react-lazyload';
@@ -176,32 +176,30 @@ export default class Home extends Component {
           <Usp />
 
           {/* Category Carousel */}
-          <Fragment>
-            {homepageCategories.map((category, index) => {
-              if (category.view && category.view === 'list') {
-                return (
-                  <Section>
-                    <Container>
-                      <GridView data={category.values || []} />
-                    </Container>
-                  </Section>
-                );
-              }
+          {homepageCategories.map((category, index) => {
+            if (category.view && category.view === 'list') {
               return (
-                <Section variant="section.primary" key={String(index)}>
+                <Section>
                   <Container>
-                    <LazyLoad height={200} offset={100}>
-                      <CategoryCarousel
-                        categoryName={category.title}
-                        subTitle={category.sub_title}
-                        data={category.values}
-                      />
-                    </LazyLoad>
+                    <GridView data={category.values || []} />
                   </Container>
                 </Section>
               );
-            })}
-          </Fragment>
+            }
+            return (
+              <Section variant="section.primary" key={String(index)}>
+                <Container>
+                  <LazyLoad height={200} offset={100}>
+                    <CategoryCarousel
+                      categoryName={category.title}
+                      subTitle={category.sub_title}
+                      data={category.values}
+                    />
+                  </LazyLoad>
+                </Container>
+              </Section>
+            );
+          })}
 
           {/* Offer Banner */}
           <OfferBanner image={middleBanner.image_url} url={middleBanner.url_key} target={middleBanner.target || ''} />

@@ -25,7 +25,6 @@ import Flex from 'hometown-components-dev/lib/FlexHtV1';
 import FavIcon from 'hometown-components-dev/lib/Icons/FavHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
-// import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
 import LocationIcon from 'hometown-components-dev/lib/Icons/LocationHtV1';
 import Row from 'hometown-components-dev/lib/RowHtV1';
 import UserIcon from 'hometown-components-dev/lib/Icons/UserHtV1';
@@ -112,10 +111,10 @@ export default class HeaderTop extends Component {
 
     return (
       <Box>
-        <Row alignItems="center" marginRight={['0', '0 ', '-16px']} marginLeft={['0', '0 ', '-16px']}>
+        <Row alignItems="center" mx={[0, 0, 0, -16]}>
           <Col width={3 / 12}>
             <Link to={HOME_URL}>
-              <Image height={28} src={LogoIcon} alt="Hometown" HtV1 />
+              <Image height={['auto', 'auto', 28]} src={LogoIcon} alt="Hometown" />
             </Link>
           </Col>
           <Col width={4 / 12}>

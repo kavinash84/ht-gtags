@@ -226,10 +226,11 @@ class Footer extends React.Component {
                 </Ul>
               </Box>
             </Col>
-            <Col width={[1 / 2, 1 / 2, 4 / 12]} pl={[0, 0, 50]} pt={['18px', '18px', '0']} ml={['32px', '32px', '0']}>
+            <Col width={[2 / 3, 2 / 3, 4 / 12]} pt={[20, 20, '0']}>
               {!already ? (
                 <form onSubmit={this.handleSubmit}>
                   <Row
+                    mx={[0, 0, 0, -16]}
                     justifyContent="center"
                     sx={{
                       position: 'relative',
@@ -249,7 +250,7 @@ class Footer extends React.Component {
                       </Heading>
                     </Box>
                   </Row>
-                  <Row>
+                  <Row mx={[0, 0, 0, -16]}>
                     <Box width={9 / 12}>
                       <FormInput
                         label=""
@@ -269,13 +270,13 @@ class Footer extends React.Component {
                   </Row>
                 </form>
               ) : (
-                <Row>
+                <Row mx={[0, 0, 0, -16]}>
                   <Text color="green" fontSize="0.955rem" mt="0" mb="0" lh="2" ta="left">
                     You have been successfully subscribed to the Newsletter
                   </Text>
                 </Row>
               )}
-              <Row mt={20} justifyContent="space-between">
+              <Row mx={[0, 0, 0, -16]} mt={20} justifyContent="space-between">
                 <SocialLink target="_blank" href="https://www.facebook.com/hometown.in/">
                   <Image src={fbIcon} alt="Facebook" />
                 </SocialLink>

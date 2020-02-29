@@ -16,7 +16,7 @@ import Title from 'newComponents/Title';
 
 const renderGrid = (data, isProduct, showList) => (
   <Row>
-    <Col variant="col-8" pl={10} pr={16}>
+    <Col width={[1, 1, 8 / 12]} pl={10} pr={16}>
       <Row>
         {data.map(item => {
           if (item.grid && item.grid === 1) {
@@ -48,7 +48,7 @@ const renderGrid = (data, isProduct, showList) => (
         })}
       </Row>
     </Col>
-    <Col variant="col-4" px={10}>
+    <Col width={4 / 12} px={10} display={['none', 'none', 'block']}>
       {data.map(item => {
         if (item.grid && item.grid === 2) {
           let link = '';

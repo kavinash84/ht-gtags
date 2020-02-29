@@ -1,14 +1,13 @@
 import React from 'react';
 
 /* ====== Components ====== */
-// import ColHtV1 from 'hometown-components-dev/lib/ColHtV1';
-import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
-import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
-import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Section from 'hometown-components-dev/lib/SectionHtV1';
 
 /* ====== Page Components ====== */
-import UspItem from 'newComponents/Home/UspItem';
 import Title from 'newComponents/Title';
+import UspItem from './UspItem';
 
 const usp1Icon = require('../../../static/usp-1.svg');
 const usp2Icon = require('../../../static/usp-2.svg');
@@ -18,12 +17,12 @@ const usp5Icon = require('../../../static/usp-5.svg');
 const usp6Icon = require('../../../static/usp-6.svg');
 
 const Usp = () => (
-  <SectionHtV1 variant="section.primary">
-    <ContainerHtV1>
-      <RowHtV1 justifyContent="center">
+  <Section variant="section.primary">
+    <Container>
+      <Row justifyContent="center">
         <Title title="WHAT MAKES US UNIQUE" />
-      </RowHtV1>
-      <RowHtV1>
+      </Row>
+      <Row>
         <UspItem src={usp1Icon}>
           Free Delivery <br />
           Above Rs.499
@@ -48,9 +47,9 @@ const Usp = () => (
           Lifetime <br />
           Service
         </UspItem>
-      </RowHtV1>
-    </ContainerHtV1>
-  </SectionHtV1>
+      </Row>
+    </Container>
+  </Section>
 );
 
 export default Usp;

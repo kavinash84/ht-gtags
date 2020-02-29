@@ -31,52 +31,51 @@ class NavBar extends Component {
     const more = cats.length && cats.length > 7 ? cats.slice(7) : [];
 
     return (
-      <Box onMouseLeave={handleLeave} margin={['0 16px', '0 16px', '0']} overflowX={['scroll', 'scroll', 'inherit']}>
+      <Box
+        onMouseLeave={handleLeave}
+        margin={['0 16px', '0 16px', '0 16px', '0']}
+        overflowX={['scroll', 'scroll', 'scroll', 'inherit']}
+      >
         <Container pr="0" pl="0">
           <Row variant="row.nav">
             {main.map((menuItem, i) => (
-              <Text
-                as={Link}
-                variant="menu"
-                p={['0 74px', '0 74px', '0 10px']}
-                minWidth="0"
+              <Link
                 onClick={exitOnClick}
                 title={menuItem.name}
                 to={`/${menuItem.url_key}`}
                 key={`${menuItem.id}_${String(i)}`}
                 onMouseEnter={handleEnter(menuItem.id)}
               >
-                {menuItem.name === 'Hot Deals' ? (
-                  <Fragment>
-                    <Label as={Absolute} variant="menuNew">
-                      New
-                    </Label>
-                    {menuItem.name}
-                  </Fragment>
-                ) : (
-                  menuItem.name
-                )}
-              </Text>
+                <Text variant="menu" p="0 10px" minWidth="0" mr={[20, 20, 20, 0]}>
+                  {menuItem.name === 'Hot Deals' ? (
+                    <Fragment>
+                      <Label as={Absolute} variant="menuNew">
+                        New
+                      </Label>
+                      {menuItem.name}
+                    </Fragment>
+                  ) : (
+                    menuItem.name
+                  )}
+                </Text>
+              </Link>
             ))}
-            <Text
-              as={Link}
-              variant="menu"
-              p={['0 74px', '0 74px', '0 10px']}
-              minWidth="0"
+            <Link
               to="/modular-kitchens"
               title="Modular Kitchens"
               target="_blank"
               rel="noopener noreferrer"
               onClick={exitOnClick}
             >
-              Modular Kitchens
-            </Text>
+              <Text variant="menu" p="0 10px" minWidth="0">
+                Modular Kitchens
+              </Text>
+            </Link>
 
             {/* More Button */}
             <Box sx={{ position: 'relative' }}>
               <Button
                 variant="link"
-                pl={[74, 74, 10]}
                 minWidth="0"
                 sx={{
                   '& ~ div': {

@@ -37,7 +37,7 @@ export default class Category extends Component {
   renderOffers = offers =>
     offers.map(item => (
       <Col
-        variant="col-4"
+        width={[1 / 2, 1 / 2, 1 / 4]}
         textAlign="center"
         sx={{
           borderRight: 'whiteMedium'
@@ -92,7 +92,7 @@ export default class Category extends Component {
               <Section key={String(index)}>
                 <Container>{CommonLayout(cat.component, cat.title, cat.data, cat.is_product)}</Container>
               </Section>
-              ))}
+            ))}
 
           {/* Footer */}
           <Footer />
