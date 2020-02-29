@@ -24,6 +24,8 @@ const styles = require('./OrderSummary.scss');
 
 const editItems = history => history.push('/checkout/cart');
 
+const TextRegular = props => <Text fontSize={[14, 14, 14, 16]} {...props} />;
+
 const OrderSummary = ({
   itemsTotal,
   savings,
@@ -43,7 +45,13 @@ const OrderSummary = ({
           borderBottom: 'divider'
         }}
       >
-        <Heading variant="heading.regular" color="#1c1c1c" display="flex" justifyContent="space-between">
+        <Heading
+          variant="heading.regular"
+          fontSize={[18, 18, 20, 24]}
+          color="#1c1c1c"
+          display="flex"
+          justifyContent="space-between"
+        >
           Order Summary
           <Image
             sx={{ cursor: 'pointer' }}
@@ -55,7 +63,7 @@ const OrderSummary = ({
             alt="edit"
           />
         </Heading>
-        <Text>{`Total Items: ${itemsCount}`}</Text>
+        <TextRegular>{`Total Items: ${itemsCount}`}</TextRegular>
       </Box>
     </Col>
     {/* Products */}
@@ -73,44 +81,44 @@ const OrderSummary = ({
     ))}
     <Box variant="col-12" pt={20} pb={20}>
       <Flex mb={20} justifyContent="space-between">
-        <Text>Subtotal</Text>
-        <Text>Rs. {itemsTotal ? formatAmount(itemsTotal) : null}</Text>
+        <TextRegular>Subtotal</TextRegular>
+        <TextRegular>Rs. {itemsTotal ? formatAmount(itemsTotal) : null}</TextRegular>
       </Flex>
       <Flex mb={20} justifyContent="space-between">
-        <Text>Savings</Text>
-        <Text>Rs. {savings ? formatAmount(savings) : 0}</Text>
+        <TextRegular>Savings</TextRegular>
+        <TextRegular>Rs. {savings ? formatAmount(savings) : 0}</TextRegular>
       </Flex>
       <Flex mb={20} justifyContent="space-between">
-        <Text>Shipping</Text>
-        <Text>{shipping === 0 ? 'Free' : `Rs. ${shipping}`}</Text>
+        <TextRegular>Shipping</TextRegular>
+        <TextRegular>{shipping === 0 ? 'Free' : `Rs. ${shipping}`}</TextRegular>
       </Flex>
       {discount > 0 && (
         <Flex mb={20} justifyContent="space-between">
-          <Text>Discount</Text>
-          <Text>Rs. {` ${formatAmount(Number(discount))}`}</Text>
+          <TextRegular>Discount</TextRegular>
+          <TextRegular>Rs. {` ${formatAmount(Number(discount))}`}</TextRegular>
         </Flex>
       )}
       {setDiscount > 0 && (
         <Flex mb={20} justifyContent="space-between">
-          <Text>Combo Discount</Text>
-          <Text>Rs. {` ${formatAmount(Number(setDiscount))}`}</Text>
+          <TextRegular>Combo Discount</TextRegular>
+          <TextRegular>Rs. {` ${formatAmount(Number(setDiscount))}`}</TextRegular>
         </Flex>
       )}
       <Row m="0" py="1em" className={styles.totalWrapper}>
         <Box variant="col-6" p="0">
-          <Text color="menuItem" mb="0" fontSize="19px" fontWeight="600" fontFamily="light">
+          <Text color="menuItem" mb="0" fontSize={[16, 16, 16, 18]} fontWeight={600} fontFamily="light">
             Total Price
           </Text>
         </Box>
         <Box variant="col-6" p="0" textAlign="right">
-          <Text color="menuItem" fontSize="19px" fontWeight="600">
+          <Text color="menuItem" fontSize={[16, 16, 16, 18]} fontWeight={600}>
             Rs. {totalCart ? formatAmount(totalCart) : null}
           </Text>
         </Box>
       </Row>
-      <Text color="rgba(0,0,0,0.4)" mt="-5px" mb="0.3125rem">
+      <TextRegular color="rgba(0,0,0,0.4)" mt="-5px" mb="0.3125rem">
         (inclusive of all taxes)
-      </Text>
+      </TextRegular>
     </Box>
   </Row>
 );

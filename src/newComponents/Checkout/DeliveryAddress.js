@@ -93,6 +93,7 @@ class DeliveryAddress extends Component {
       history.push('/checkout/cart');
     }
   }
+
   componentWillReceiveProps(nextProps) {
     const {
  isLoggedIn, nextstep, clearShippingAddress, onChangeEmail, userEmail, couponlistToggle
@@ -126,6 +127,7 @@ class DeliveryAddress extends Component {
       history.push('/checkout/payment-options');
     }
   }
+
   checkParams = () => {
     const {
       address: {
@@ -178,6 +180,7 @@ class DeliveryAddress extends Component {
       Sstate;
     return check;
   };
+
   formValdiator = (props, data, formType) => {
     const {
       fullName,
@@ -244,6 +247,7 @@ class DeliveryAddress extends Component {
       }
     };
   };
+
   handleLoginModal = () => {
     this.setState({ openLogin: !this.state.openLogin });
   };
@@ -313,6 +317,7 @@ class DeliveryAddress extends Component {
     const { toggleShippingIsBilling } = this.props;
     toggleShippingIsBilling();
   };
+
   handleClick = index => {
     const { addresses, setAddress, loadPincodeDetails } = this.props;
     this.setState({
@@ -321,6 +326,7 @@ class DeliveryAddress extends Component {
     setAddress('shipping', addresses[index], index);
     loadPincodeDetails('shipping', addresses[index].pincode);
   };
+
   toggleAddAddress = e => {
     const { setAddress, isLoggedIn, userEmail } = this.props;
     e.preventDefault();
@@ -341,6 +347,7 @@ class DeliveryAddress extends Component {
     };
     setAddress('shipping', data, null);
   };
+
   render() {
     const {
       isLoggedIn,
@@ -355,8 +362,8 @@ class DeliveryAddress extends Component {
     } = this.props;
     const { addressform } = this.state;
     return (
-      <Container my={60} px={0}>
-        <Row mr={[0, 0, -16]} ml={[0, 0, -16]}>
+      <Container my={[40, 40, 40, 60]} px={0}>
+        <Row mr={[0, 0, 0, -16]} ml={[0, 0, 0, -16]}>
           <Col variant="col-8">
             {/* For logged in */}
             {!isLoggedIn && (
@@ -401,14 +408,13 @@ class DeliveryAddress extends Component {
                         py={15}
                         height="100%"
                         lineHeight={1.25}
-                        className={`${index === currentaddressindex ? styles.active : null}`}
                         onClick={() => this.handleClick(index)}
                         sx={{
-                          border: 'secondary',
+                          border: `${index === currentaddressindex ? 'primary' : 'secondary'}`,
                           borderRadius: 3
                         }}
                       >
-                        <Text>
+                        <Text fontSize={[14, 14, 14, 16]}>
                           <b>{item.full_name}</b>
                           <br />
                           {item.address1}
@@ -487,7 +493,7 @@ class DeliveryAddress extends Component {
 
           {/* Order Summary */}
           <Col variant="col-4">
-            <Box bg="sidebar" px={[20, 20, 40]} py={30}>
+            <Box bg="sidebar" px={[15, 15, 15, 40]} py={[15, 15, 15, 30]}>
               <OrderSummary
                 history={history}
                 results={results}

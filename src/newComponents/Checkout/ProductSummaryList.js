@@ -29,7 +29,7 @@ const ProductSummaryList = ({ productItem, qty, sku }) => (
     </Box>
     <Box variant="col-8" pl={20}>
       <Box mb="10px">
-        <Heading color="heading" fontSize={16} lineHeight={1.4} pb={10}>
+        <Heading color="heading" fontSize={[14, 14, 14, 16]} lineHeight={1.4} pb={10}>
           {productItem.name ? `${productItem.name.slice(0, 20)}..` : ''}
         </Heading>
         <Text fontSize={14} pb={10}>

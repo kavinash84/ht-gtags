@@ -100,8 +100,8 @@ class PaymentOptions extends Component {
     const isProductOutofStock = sku => outOfStockList.includes(sku);
 
     return (
-      <Container my={60} px={0}>
-        <Row mr={[0, 0, -16]} ml={[0, 0, -16]}>
+      <Container my={[40, 40, 40, 60]} px={0}>
+        <Row mr={[0, 0, 0, -16]} ml={[0, 0, 0, -16]}>
           <Col variant="col-8">
             {/* Product not deliverable */}
             <Row mr="0" ml="0">

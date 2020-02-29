@@ -126,6 +126,7 @@ const CardForm = ({
               as="select"
               variant="input"
               name="expMonth"
+              bg="white"
               onChange={onChangeDetails(setPaymentDetails, gateway)}
               value={expMonth}
             >
@@ -142,6 +143,7 @@ const CardForm = ({
               as="select"
               variant="input"
               name="expYear"
+              bg="white"
               onChange={onChangeDetails(setPaymentDetails, gateway)}
               value={expYear}
             >
