@@ -49,7 +49,13 @@ const OrderSummary = ({
           borderBottom: 'divider'
         }}
       >
-        <Heading variant="heading.regular" color="#1c1c1c" display="flex" justifyContent="space-between">
+        <Heading
+          variant="heading.regular"
+          color="#1c1c1c"
+          fontSize={[18, 18, 20, 24]}
+          display="flex"
+          justifyContent="space-between"
+        >
           Order Summary
         </Heading>
       </Box>

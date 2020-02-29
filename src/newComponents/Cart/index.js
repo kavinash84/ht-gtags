@@ -78,13 +78,13 @@ const Cart = ({
   const cartItemLoading = customerCardId => cartUpdating && currentId === customerCardId;
   const isProductOutofStock = sku => outOfStockList.includes(sku);
   return (
-    <Container my={60}>
+    <Container my={[30, 30, 40, 60]}>
       <Row>
         {/* Product List */}
         <Box variant="col-8">
           <Row alignItems="center">
             <Box variant="col-8">
-              <Heading>My Shopping Cart : {results.length} Items</Heading>
+              <Heading fontSize={[18, 18, 18, 24]}>My Shopping Cart : {results.length} Items</Heading>
             </Box>
             <Box variant="col-4" textAlign="right">
               <Button
@@ -157,13 +157,15 @@ const Cart = ({
               <Box variant="col-5" pl={30}>
                 <Link to={formatProductURL(item.product_info.name, item.configurable_sku)}>
                   <Box mb="10px">
-                    <Heading color="heading" fontSize={16} lineHeight={1.4}>
+                    <Heading color="heading" fontSize={[14, 14, 14, 16]} lineHeight={1.4}>
                       {item.product_info.name}
                     </Heading>
                   </Box>
                   {item.product_info.color && (
                     <Box mb="15px">
-                      <Text color="#575757">{item.product_info.color}</Text>
+                      <Text color="#575757" fontSize={[14, 14, 14, 16]}>
+                        {item.product_info.color}
+                      </Text>
                     </Box>
                   )}
                 </Link>
@@ -180,7 +182,7 @@ const Cart = ({
                 </Box>
                 <Flex alignItems="center">
                   <Button variant="link" fontSize={12} display="flex" alignItems="center">
-                    <Image height={16} mr={10} src={saveForLaterIcon} />
+                    <Image height={[14, 14, 14, 16]} mr={10} src={saveForLaterIcon} sx={{ flexShrink: 0 }} />
                     <Text fontSize={12}>Save for later</Text>
                   </Button>
                   <Text mx={8} fontSize={16}>
@@ -195,7 +197,7 @@ const Cart = ({
                     disabled={cartItemLoading(item.id_customer_cart)}
                     onClick={onClick(item.id_customer_cart, sessionId, pincode)(removeFromCart)}
                   >
-                    <CloseIcon width={14} height={14} mr={10} /> Remove
+                    <CloseIcon width={14} height={14} mr={10} sx={{ flexShrink: 0 }} /> Remove
                   </Button>
                 </Flex>
                 {/* {item.product_info.assembly_service && (
@@ -251,7 +253,7 @@ const Cart = ({
                         </Label>
                       )}
                     <br /> */}
-                <Label color="heading" fontSize={18}>
+                <Label color="heading" fontSize={[14, 14, 14, 18]}>
                   ₹{' '}
                   {item.product_info.special_price === 0
                     ? formatAmount(Number(item.product_info.unit_price) * Number(item.qty))
@@ -291,7 +293,7 @@ const Cart = ({
 
         {/* Pricing Sidebar */}
         <Box variant="col-4">
-          <Box bg="sidebar" px={40} py={30}>
+          <Box bg="sidebar" px={[16, 16, 16, 30]} py={[16, 16, 16, 30]}>
             <OrderSummary
               itemsTotal={summary.items}
               savings={summary.savings}
