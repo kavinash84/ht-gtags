@@ -15,6 +15,7 @@ import { allowNChar, allowTypeOf } from 'utils/helper';
 import { login, clearLoginState } from 'redux/modules/login';
 import { SIGNUP_URL, FORGOT_PASSWORD_URL } from 'helpers/Constants';
 
+// icons
 const LoaderIcon = require('../../../static/refresh-black.svg');
 
 @connect(state => ({
@@ -53,7 +54,7 @@ export default class LoginFormContainer extends Component {
     const {
       target: { value }
     } = e;
-    const checkError = validateEmail(value, 'Please enter a valid email');
+    const checkError = validateEmail(value, 'Please enter a valid email id');
     this.setState({
       email: value,
       emailError: checkError.error,
@@ -182,11 +183,11 @@ export default class LoginFormContainer extends Component {
               <Text color="color676767" ta="center">
                 {/* eslint-disable */}
                 {askName && askContact
-                  ? 'Please update your contact number and name!'
+                  ? 'Please update contact number and name!'
                   : askName
-                  ? 'Please update your name !'
+                  ? 'Please update name !'
                   : askContact
-                  ? 'Please update your contact number!'
+                  ? 'Please update contact number!'
                   : ''}
               </Text>
             </Div>
