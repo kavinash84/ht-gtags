@@ -101,6 +101,31 @@ export default class LoginViaOtp extends React.Component {
               {loggingIn ? 'Please Wait..' : 'Update & Login'}
             </Button>
           </form>
+        ) : askName ? (
+          <form onSubmit={onSubmitName}>
+            <FormInput
+              label="Name"
+              onChange={onChangeName}
+              value={name}
+              type="text"
+              placeholder="Please enter your name"
+              feedBackError={nameError}
+              feedBackMessage={nameErrorMessage}
+            />
+            <Button
+              btnType="primary"
+              size="block"
+              boder="solid 1px rgba(151,151,151,0.47)"
+              fontFamily="regular"
+              height="38px"
+              mt="0"
+              ml="-1px"
+              onClick={this.onSubmitName}
+              disabled={loggingIn}
+            >
+              {loggingIn ? 'Please Wait..' : 'Update & Login'}
+            </Button>
+          </form>
         ) : (
           <Fragment>
             <form onSubmit={onSubmitOtp}>

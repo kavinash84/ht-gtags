@@ -62,6 +62,10 @@ import WhoWeAre from 'containers/WhoWeAre';
 import LoaderShimmer from 'containers/Loader/LoaderShimmer';
 import Promotions from 'containers/Promotions';
 
+// Landing Pages
+import WeddingCampaign from 'containers/WeddingCampaign';
+import ComboOffer from 'containers/ComboOffer';
+
 import { categoryRoutes, listingRoutes } from 'helpers/Constants';
 
 const createRegex = data => data.join('|');
@@ -128,6 +132,8 @@ const routes = [
       { path: '/service-signup', exact: true, component: ServiceSignUpContainer },
       { path: '/loader-shimmer', exact: true, component: LoaderShimmer },
       { path: '/promotions', exact: true, component: Promotions },
+      { path: '/wedding-campaign', exact: true, component: WeddingCampaign },
+      { path: '/combo-offer', exact: true, component: ComboOffer },
       {
         path: `/:category(${createRegex(categoryRoutes)})`,
         exact: true,

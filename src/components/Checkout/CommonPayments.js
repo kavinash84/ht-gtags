@@ -12,11 +12,14 @@ import Image from 'hometown-components-dev/lib/ImageHtV1';
 /**
  * Icons
  */
+const styles = require('./CommonPayments.scss');
+
 const creditcardIcon = require('../../../static/credit-card.png');
 const debitcardIcon = require('../../../static/debit-card.png');
 const intBankingIcon = require('../../../static/net-banking-icon.png');
 const emiIcon = require('../../../static/emi.png');
 const walletIcon = require('../../../static/wallet.png');
+const upiIcon = require('../../../static/upi-logo.svg');
 
 const initial = {
   CreditCard: {
@@ -59,6 +62,13 @@ const initial = {
     easyemi_otp_code: '',
     easyEmiConfig: '',
     gateway: ''
+  },
+  Upi: {
+    payment_method_type: 'Upi',
+    payment_method: 'Payu',
+    pg_upi: 'UPI',
+    upi_bank_code: 'UPI',
+    upi_vpa: ''
   }
 };
 
@@ -213,6 +223,39 @@ const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEa
             onClick={onChangeGateway(onChange, paymentType, session)}
           />
         </Fragment>
+      );
+    case 'Upi':
+      return (
+        <Box col="12" key={paymentType} className={styles.paymentOptions}>
+          <input
+            type="radio"
+            name="paymentOption"
+            value="Upi"
+            checked={selectedGateway === paymentType}
+            onChange={onChangeGateway(onChange, paymentType, session)}
+          />
+          <Label
+            htmlFor="Upi"
+            pl="0"
+            color="textLight"
+            mt="0"
+            mb="0"
+            onClick={onChangeGateway(onChange, paymentType, session)}
+          >
+            <Image
+              height="20px"
+              width="auto"
+              float="left"
+              mr="10px"
+              top="-2px"
+              position="relative"
+              src={upiIcon}
+              alt="UPI"
+              style={{ backgroundColor: '#f5f5f5' }}
+            />
+            UPI
+          </Label>
+        </Box>
       );
     default:
       return null;

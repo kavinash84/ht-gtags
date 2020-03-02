@@ -24,6 +24,7 @@
     "prefer-template": "warn",
     "react/forbid-prop-types": "off",
     "react/jsx-closing-tag-location": "off",
+    "react/jsx-curly-brace-presence": "off",
     "react/jsx-filename-extension": "off",
     "react/jsx-no-target-blank": "warn",
     "react/no-multi-comp": ["error", {"ignoreStateless": true}],

@@ -38,13 +38,14 @@ import { getCartList, getNotDelivered, getStockOutProducts } from 'selectors/car
  */
 import OrderSummary from './OrderSummary';
 import CommonPayments from './CommonPayments';
+import { validatePaymentDetails, validateVPA } from '../../utils/validation';
 import BankCard from './BankCard';
 import CardForm from './CardForm';
 import CardFormEasyEmi from './CardFormEasyEmi';
 import Emi from './Emi';
 import PaymentMethods from '../PaymentMethods/';
 import PaymentForm from './PaymentForm';
-import { validatePaymentDetails } from '../../utils/validation';
+import UpiForm from './UpiForm';
 
 /**
  * Icon
@@ -68,7 +69,15 @@ const onChangeDetails = (dispatcher, gateway) => e => {
   const { name, value } = e.target;
   dispatcher({ gateway, data: { [name]: value } });
 };
-
+const validateInput = details => {
+  if (details.Upi) {
+    const {
+      Upi: { upi_vpa: vpa }
+    } = details;
+    return !validateVPA(vpa);
+  }
+  return false;
+};
 @withRouter
 class PaymentOptions extends Component {
   static contextTypes = {
@@ -242,6 +251,12 @@ class PaymentOptions extends Component {
             </Row>
             {/* Payment options form */}
             <Box px={40} pt={30} pb={20} sx={{ border: 'secondary' }}>
+              {/* UPI Form */}
+              {selectedGateway === 'Upi' && (
+                <div col="12">
+                  <UpiForm setPaymentDetails={setPaymentDetails} gateway={selectedGateway} padding="3rem 2rem" />
+                </div>
+              )}
               {selectedGateway === 'CreditCard' && (
                 <CardForm
                   setPaymentDetails={setPaymentDetails}
@@ -391,6 +406,7 @@ class PaymentOptions extends Component {
                   width={1}
                   onClick={nextStep(submitDetails, session, paymentDetails, cardType)}
                   disabled={
+                    validateInput(paymentDetails) ||
                     validatePaymentDetails(paymentDetails) ||
                     undelivered.length > 0 ||
                     outOfStockList.length > 0 ||

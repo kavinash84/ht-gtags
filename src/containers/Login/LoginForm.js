@@ -28,6 +28,8 @@ import LoginForm from 'components/LoginForms';
 import GoogleLoginBtn from 'components/LoginForms/GoogleLogin';
 import LoginViaOtp from 'components/LoginForms/LoginViaOtp';
 
+// const styles = require('./index.scss');
+
 const OTPIcon = require('../../../static/otp.svg');
 const EmailIcon = require('../../../static/email-primary.svg');
 
@@ -76,10 +78,10 @@ export default class LoginFormContainer extends Component {
     mobile: '',
     otp: '',
     otpError: false,
-    otpErrorMessage: 'OTP Should be 6 Characters',
     name: '',
     nameError: false,
     nameErrorMessage: 'Enter a valid name, without special characters !',
+    otpErrorMessage: 'OTP Should be 6 Characters',
     mobilesubmitted: false,
     resend: false
   };
@@ -151,7 +153,19 @@ export default class LoginFormContainer extends Component {
     const { otp } = this.state;
     if (otp.length < 6) {
       return this.setState({
-        otpError: true
+        nameError: true
+      });
+    }
+    const { dispatch } = this.context.store;
+    dispatch(login(this.state));
+  };
+  onSubmitName = e => {
+    e.preventDefault();
+    const { name } = this.state;
+    const isInvalid = isEmpty(name) || checkSpecialChar(name);
+    if (isInvalid) {
+      return this.setState({
+        nameError: true
       });
     }
     const { dispatch } = this.context.store;
@@ -191,18 +205,17 @@ export default class LoginFormContainer extends Component {
       mobileError,
       mobileErrorMessage,
       otp,
-      otpError,
-      otpErrorMessage,
       name,
       nameError,
       nameErrorMessage,
+      otpError,
+      otpErrorMessage,
       mobilesubmitted,
       resend
     } = this.state;
     const {
  loaded, loading, loggingIn, askContact, askName, loginType
 } = this.props;
-
     return (
       <Row>
         <Box variant="col-4">
