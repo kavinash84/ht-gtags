@@ -639,7 +639,15 @@ class ProductDetails extends React.Component {
               <Box p={15} textAlign="center" sx={{ border: 'dividerLight' }}>
                 <Image src="https://www.hometown.in/media/product/89/2453/3-zoom.jpg" alt="" />
               </Box>
-              <Box pt={20}>
+              <Box
+                pt={20}
+                pb={20}
+                mt={30}
+                sx={{
+                  borderTop: 'dividerBold',
+                  borderBottom: 'dividerBold'
+                }}
+              >
                 <Text variant="regular" fontSize={16}>
                   {height || width || depth
                     ? `
@@ -654,7 +662,7 @@ class ProductDetails extends React.Component {
             </Box>
 
             {/* Complete the look */}
-            <Box pt={20}>
+            <Box pt={30}>
               <Box textAlign="center" mb={20}>
                 <Heading variant="heading.regular">Complete the look</Heading>
               </Box>
