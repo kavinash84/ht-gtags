@@ -14,7 +14,7 @@ export default class HeaderSecondary extends Component {
     return (
       <Box py={15} sx={{ borderBottom: 'solid 1px #727070' }}>
         <Container pr="0" pl="0">
-          <HeaderTopSecondary />
+          <HeaderTopSecondary {...this.props} />
         </Container>
       </Box>
     );

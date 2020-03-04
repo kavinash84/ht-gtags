@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 /* ====== Helpers ====== */
 import { HOME_URL } from 'helpers/Constants';
@@ -13,7 +14,7 @@ import Step from './Step';
 
 const LogoIcon = require('../../../static/logo@2x.png');
 
-const HeaderTopSecondary = () => (
+const HeaderTopSecondary = ({ shippingStep, paymentStep }) => (
   <Row alignItems="center" mr={[0, 0, 0, -16]} ml={[0, 0, 0, -16]}>
     <Col width={3 / 12}>
       <Link to={HOME_URL}>
@@ -21,12 +22,28 @@ const HeaderTopSecondary = () => (
       </Link>
     </Col>
     <Col width={6 / 12}>
-      <Flex justifyContent="center" alignItems="center">
-        <Step value={1} variant="active" />
-        <Step value={2} sxContainer={{ right: 0 }} sx={{ ml: 'auto' }} />
+      <Flex justifyContent="space-between" alignItems="center" width={200} mx="auto">
+        <Step value={1} variant={shippingStep} text="Shipping Details" />
+        <Step
+          value={2}
+          variant={paymentStep}
+          text="Payment Details"
+          sxContainer={{ right: 40, left: 'unset' }}
+          sx={{ ml: 'auto' }}
+        />
       </Flex>
     </Col>
   </Row>
 );
+
+HeaderTopSecondary.defaultProps = {
+  shippingStep: 'active',
+  paymentStep: 'default'
+};
+
+HeaderTopSecondary.propTypes = {
+  shippingStep: PropTypes.string,
+  paymentStep: PropTypes.string
+};
 
 export default HeaderTopSecondary;

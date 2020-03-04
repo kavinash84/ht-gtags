@@ -47,7 +47,7 @@ export default class PaymentOptionsContainer extends Component {
         <Helmet title="Delivery Address" />
         <Body>
           {/* HeaderSecondary */}
-          <HeaderSecondary />
+          <HeaderSecondary shippingStep="active" paymentStep="active" />
           <PaymentOptions data={availableOptions} />
         </Body>
       </Wrapper>
