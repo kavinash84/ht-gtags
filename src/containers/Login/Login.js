@@ -7,8 +7,8 @@ import Container from 'hometown-components-dev/lib/ContainerHtV1';
 import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 
 /* ====== Page Components ====== */
-import Footer from 'newComponents/Footer';
-import Header from 'newComponents/Header';
+import Footer from 'components/Footer';
+import Header from 'components/Header';
 import LoginFormContainer from './LoginForm';
 
 @withRouter

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import TrackOrderModalContainer from 'newComponents/TrackOrder/TrackOrderModal';
+import TrackOrderModalContainer from 'components/TrackOrder/TrackOrderModal';
 
 export default class TrackOrderModal extends Component {
   render() {

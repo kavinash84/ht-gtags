@@ -1,18 +1,29 @@
 import React, { Component, Fragment } from 'react';
-import Div from 'hometown-components-dev/lib/Div';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
+
+/**
+ * modules / selectors / helpers
+ */
 import { setCardType, verifyEasyEmi } from 'redux/modules/paymentoptions';
 import { getEasyEmiConfig } from 'selectors/payments';
-import Img from 'hometown-components-dev/lib/Img';
-import Text from 'hometown-components-dev/lib/Text';
-import Button from 'hometown-components-dev/lib/Buttons';
-import FormInput from 'hometown-components-dev/lib/Forms/FormInput';
 import { getCartSummary } from 'selectors/cart';
+
+/**
+ * Components
+ */
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
 
 const styles = require('./Checkout.scss');
 
+/**
+ * Icons
+ */
 const aeIcon = require('../../../static/american-express.svg');
 const dcIcon = require('../../../static/diners-club.svg');
 const discoverIcon = require('../../../static/discover.svg');
@@ -78,13 +89,13 @@ class CardForm extends Component {
       submitting
     } = this.props;
     return (
-      <Div className={styles.paymentBlock} p={padding}>
+      <Box className={styles.paymentBlock} p={padding}>
         {/* eslint-disable */}
-        <Div col="8" pr="1rem" className={styles.cardFieldWrapper}>
+        <Box col="8" pr="1rem" className={styles.cardFieldWrapper}>
           Bajaj Finance Easy Emi
-        </Div>
+        </Box>
         {/* card form */}
-        <Div col="12" m="1rem" />
+        <Box col="12" m="1rem" />
         <Fragment>
           {((easyEmiVerifyResponse !== undefined &&
             easyEmiVerifyResponse !== null &&
@@ -92,7 +103,7 @@ class CardForm extends Component {
             easyEmiVerifyResponse.RSPCODE.toString() !== '0') ||
             (!easyEmiProcessed && !easyEmiVerified)) && (
             <Fragment>
-              <Div col="8" pr="1rem" className={styles.cardFieldWrapper}>
+              <Box col="8" pr="1rem" className={styles.cardFieldWrapper}>
                 <FormInput
                   label="STEP 1 of 2"
                   type="text"
@@ -102,27 +113,27 @@ class CardForm extends Component {
                   onChange={onChangeDetails(setPaymentDetails, gateway, sessionId, easyEmiConfig)}
                   onBlur={onGetCardType(getCardType, sessionId, gateway)}
                 />
-                {cardType === 'visa' && <Img src={visaIcon} alt="visaCard" />}
-                {cardType === 'mast' && <Img src={mastercardIcon} alt="Master Card" />}
-                {cardType === 'maestro' && <Img src={maestroIcon} alt="Maestro" />}
-                {cardType === 'amex' && <Img src={aeIcon} alt="Amex" />}
-                {cardType === 'discover' && <Img src={discoverIcon} alt="Discover Card" />}
-                {cardType === 'diners' && <Img src={dcIcon} alt="Diners Club" />}
-                {cardType === 'other' && <Img src={cardIcon} alt="Others" />}
-              </Div>
+                {cardType === 'visa' && <Image src={visaIcon} alt="visaCard" />}
+                {cardType === 'mast' && <Image src={mastercardIcon} alt="Master Card" />}
+                {cardType === 'maestro' && <Image src={maestroIcon} alt="Maestro" />}
+                {cardType === 'amex' && <Image src={aeIcon} alt="Amex" />}
+                {cardType === 'discover' && <Image src={discoverIcon} alt="Discover Card" />}
+                {cardType === 'diners' && <Image src={dcIcon} alt="Diners Club" />}
+                {cardType === 'other' && <Image src={cardIcon} alt="Others" />}
+              </Box>
               {/* card form error */}
               {((easyEmiVerifyError !== undefined && easyEmiVerifyError !== null) ||
                 (easyEmiVerifyResponse !== undefined &&
                   easyEmiVerifyResponse !== null &&
                   easyEmiVerifyResponse.RSPCODE !== undefined &&
                   easyEmiVerifyResponse.RSPCODE.toString() !== '0')) && (
-                <Div col="12" mb="0" p="0" mt="-20px">
+                <Box col="12" mb="0" p="0" mt="-20px">
                   <Text mt="1rem" fontSize="0.875rem" color="#dc3545">
                     {easyEmiVerifyResponse.ERRDESC}
                   </Text>
-                </Div>
+                </Box>
               )}
-              <Div col="8" mt="1rem">
+              <Box col="8" mt="1rem">
                 {cardNumber !== '' && (
                   <Button
                     size="block"
@@ -140,7 +151,7 @@ class CardForm extends Component {
                     {easyEmiVerifying !== undefined && easyEmiVerifying ? 'Please wait...' : 'REQUEST FOR OTP'}
                   </Button>
                 )}
-              </Div>
+              </Box>
             </Fragment>
           )}
         </Fragment>
@@ -152,7 +163,7 @@ class CardForm extends Component {
             easyEmiVerifyResponse.RSPCODE.toString() === '0' &&
             easyEmiVerified && (
               <Fragment>
-                <Div col="6" pr="1rem" className={styles.cardFieldWrapper}>
+                <Box col="6" pr="1rem" className={styles.cardFieldWrapper}>
                   <FormInput
                     label="STEP 2 of 2"
                     type="text"
@@ -162,24 +173,24 @@ class CardForm extends Component {
                     onChange={this.handleChange}
                     onBlur={this.handleBlur}
                   />
-                </Div>
+                </Box>
                 {easyEmiProcessing && (
-                  <Div col="12" mb="0" p="0" mt="-10px">
+                  <Box col="12" mb="0" p="0" mt="-10px">
                     <Text mt="1rem" fontSize="0.875rem" color="#dc3545">
                       {'Please wait verifying OTP.....'}
                     </Text>
-                  </Div>
+                  </Box>
                 )}
                 {((easyEmiProcessError !== undefined && easyEmiProcessError !== null) ||
                   (easyEmiProcessResponse !== undefined &&
                     easyEmiProcessResponse !== null &&
                     easyEmiProcessResponse.RSPCODE !== undefined &&
                     easyEmiProcessResponse.RSPCODE.toString() !== '0')) && (
-                  <Div col="12" mb="0" p="0" mt="-10px">
+                  <Box col="12" mb="0" p="0" mt="-10px">
                     <Text mt="1rem" fontSize="0.875rem" color="#dc3545">
                       {easyEmiProcessResponse.ERRDESC}
                     </Text>
-                  </Div>
+                  </Box>
                 )}
                 {/* otp form error */}
                 {easyEmiProcessResponse !== undefined &&
@@ -188,14 +199,14 @@ class CardForm extends Component {
                   easyEmiProcessResponse.RSPCODE.toString() === '0' &&
                   easyEmiProcessed &&
                   submitting && (
-                    <Div col="12" mb="0" p="0">
+                    <Box col="12" mb="0" p="0">
                       <Text mt="0" fontSize="0.875rem" color="rgba(0,0,0,0.5)">
                         <Fragment>
                           OTP verification successfull. <br />
                           Please wait while we are processing your order......
                         </Fragment>
                       </Text>
-                    </Div>
+                    </Box>
                   )}
                 {easyEmiProcessResponse !== undefined &&
                   easyEmiProcessResponse !== null &&
@@ -203,14 +214,14 @@ class CardForm extends Component {
                   easyEmiProcessResponse.RSPCODE.toString() === '0' &&
                   easyEmiProcessed &&
                   !submitting && (
-                    <Div col="12" mb="0" p="0">
+                    <Box col="12" mb="0" p="0">
                       <Text mt="0" fontSize="0.875rem" color="rgba(0,0,0,0.5)">
                         <Fragment>Thank you. Your Order has been placed....</Fragment>
                       </Text>
-                    </Div>
+                    </Box>
                   )}
                 {Object.keys(easyEmiConfig).length > 0 && (
-                  <Div col="12" mb="0" p="0" mt="2rem">
+                  <Box col="12" mb="0" p="0" mt="2rem">
                     <table border="1" className={`table table-border ${styles.emiTable}`}>
                       <tbody>
                         <tr>
@@ -237,24 +248,24 @@ class CardForm extends Component {
                         ))}
                       </tbody>
                     </table>
-                  </Div>
+                  </Box>
                 )}
-                <Div col="12" mb="0" p="0">
+                <Box col="12" mb="0" p="0">
                   <Text mt="1rem" fontSize="0.875rem" color="rgba(0,0,0,0.5)">
                     {/* eslint-disable */}
                     {`* Processing Fees of Rs. ${easyEmiConfig.processingFees} will be added in First EMI Installment.`}
                     {/* eslint-disable */}
                   </Text>
-                </Div>
+                </Box>
               </Fragment>
             )}
         </Fragment>
-        <Div col="12" mb="0" p="0" className={styles.easyEmiImpNote}>
+        <Box col="12" mb="0" p="0" className={styles.easyEmiImpNote}>
           <Text mt="1rem" fontSize="0.875rem" color="#969696">
             {'* Only Bajaj Finance Easy Emi Cards are accepted.'}
           </Text>
-        </Div>
-      </Div>
+        </Box>
+      </Box>
     );
   }
 }

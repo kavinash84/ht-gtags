@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Section from 'hometown-components-dev/lib/Section';
-import Container from 'hometown-components-dev/lib/Container';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
 import Title from 'components/Title';
-import CategoryCarouselItem from './CategoryCarouselItem';
-import SlickSlider from '../SlickSlider';
+import SlickSlider from 'components/SlickSlider';
+import CategoryCarouselItem from 'components/CategoryCarousel/CategoryCarouselItem';
 
 const adjustSlides = length => ({
   slidesToShow: length >= 4 ? 4 : length,
@@ -12,29 +11,25 @@ const adjustSlides = length => ({
   autoplaySpeed: 5000
 });
 
-const OFFER_ID = 5;
 export default class CategoryCarousel extends Component {
   render() {
-    const {
- data, categoryName, subTitle, id
-} = this.props;
+    const { data, categoryName, subTitle } = this.props;
     return (
-      <Section p="0" pt="1.5rem" mb="0" className="catCarousel">
-        <Container pr="0" pl="0">
-          {(categoryName !== '' || categoryName !== null) && <Title title={categoryName} subTitle={subTitle} />}
-          <SlickSlider settings={adjustSlides(data.length)}>
-            {data.map(slide => (
-              <div key={slide.category_id}>
-                <CategoryCarouselItem
-                  image={slide.image_url}
-                  name={slide.info.name}
-                  url={OFFER_ID === id || OFFER_ID === parseInt(id, 10) ? '' : slide.info.url_key}
-                />
-              </div>
-            ))}
-          </SlickSlider>
-        </Container>
-      </Section>
+      <BoxHtV1>
+        {(categoryName !== '' || categoryName !== null) && <Title title={categoryName} subTitle={subTitle} />}
+        <SlickSlider settings={adjustSlides(data.length)}>
+          {data.map(slide => (
+            <div key={slide.category_id}>
+              <CategoryCarouselItem
+                image={slide.image_url}
+                name={slide.offer_description || ''}
+                discount={slide.offer || slide.info.name}
+                url={slide.info.url_key}
+              />
+            </div>
+          ))}
+        </SlickSlider>
+      </BoxHtV1>
     );
   }
 }
@@ -42,13 +37,11 @@ export default class CategoryCarousel extends Component {
 CategoryCarousel.defaultProps = {
   data: [],
   categoryName: '',
-  subTitle: '',
-  id: ''
+  subTitle: ''
 };
 
 CategoryCarousel.propTypes = {
   data: PropTypes.array,
   categoryName: PropTypes.string,
-  subTitle: PropTypes.string,
-  id: PropTypes.string
+  subTitle: PropTypes.string
 };

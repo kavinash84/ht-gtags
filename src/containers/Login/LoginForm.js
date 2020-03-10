@@ -4,13 +4,13 @@ import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
 
 /* ====== Modules ====== */
-import { login, getOtp, resendOtp } from 'redux/modules/login';
+import { login, getOtp, resendOtp, clearLoginState } from 'redux/modules/login';
 
 /* ====== Helpers ====== */
 import { allowNChar, allowTypeOf } from 'utils/helper';
 
 /* ====== Validations ====== */
-import { validateMobile } from 'utils/validation';
+import { validateMobile, isEmpty, checkSpecialChar } from 'utils/validation';
 import { SIGNUP_URL } from 'helpers/Constants';
 
 /* ====== Components ====== */
@@ -24,9 +24,11 @@ import Text from 'hometown-components-dev/lib/TextHtV1';
 // import ImageShimmer from 'hometown-components-dev/lib/ImageShimmerHtV1';
 
 /* ====== Page Components ====== */
-import LoginForm from 'newComponents/LoginForms';
-import GoogleLoginBtn from 'newComponents/LoginForms/GoogleLogin';
-import LoginViaOtp from 'newComponents/LoginForms/LoginViaOtp';
+import LoginForm from 'components/LoginForms';
+import GoogleLoginBtn from 'components/LoginForms/GoogleLogin';
+import LoginViaOtp from 'components/LoginForms/LoginViaOtp';
+
+// const styles = require('./index.scss');
 
 const OTPIcon = require('../../../static/otp.svg');
 const EmailIcon = require('../../../static/email-primary.svg');
@@ -41,6 +43,7 @@ const EmailIcon = require('../../../static/email-primary.svg');
   loading: state.userLogin.loading,
   loggingIn: state.userLogin.loggingIn,
   askContact: state.userLogin.askContact,
+  askName: state.userLogin.askName,
   loginType: state.userLogin.loginType
 }))
 export default class LoginFormContainer extends Component {
@@ -49,10 +52,11 @@ export default class LoginFormContainer extends Component {
     getotpErrorMessage: PropTypes.string,
     otpSent: PropTypes.bool,
     loading: PropTypes.bool,
-    askContact: PropTypes.bool,
     loginType: PropTypes.string,
-    loaded: PropTypes.bool.isRequired,
-    loggingIn: PropTypes.bool.isRequired
+    loaded: PropTypes.bool,
+    loggingIn: PropTypes.bool,
+    askContact: PropTypes.bool,
+    askName: PropTypes.bool
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -61,8 +65,11 @@ export default class LoginFormContainer extends Component {
     otpSent: false,
     getotpError: false,
     getotpErrorMessage: '',
+    loaded: false,
     loading: false,
+    loggingIn: false,
     askContact: false,
+    askName: false,
     loginType: ''
   };
 
@@ -70,6 +77,10 @@ export default class LoginFormContainer extends Component {
     loginviaotp: false,
     mobile: '',
     otp: '',
+    otpError: false,
+    name: '',
+    nameError: false,
+    nameErrorMessage: 'Enter a valid name, without special characters !',
     otpErrorMessage: 'OTP Should be 6 Characters',
     mobilesubmitted: false,
     resend: false
@@ -110,6 +121,17 @@ export default class LoginFormContainer extends Component {
       otpError: false
     });
   };
+  onChangeName = e => {
+    const { value } = e.target;
+    const nameCheck = isEmpty(value) || checkSpecialChar(value);
+    if (nameCheck) {
+      return;
+    }
+    this.setState({
+      name: value,
+      nameError: false
+    });
+  };
   onSubmitMobileNumber = e => {
     e.preventDefault();
     const { mobile, resend } = this.state;
@@ -131,7 +153,31 @@ export default class LoginFormContainer extends Component {
     const { otp } = this.state;
     if (otp.length < 6) {
       return this.setState({
-        otpError: true
+        nameError: true
+      });
+    }
+    const { dispatch } = this.context.store;
+    dispatch(login(this.state));
+  };
+  onSubmitName = e => {
+    e.preventDefault();
+    const { name } = this.state;
+    const isInvalid = isEmpty(name) || checkSpecialChar(name);
+    if (isInvalid) {
+      return this.setState({
+        nameError: true
+      });
+    }
+    const { dispatch } = this.context.store;
+    dispatch(login(this.state));
+  };
+  onSubmitName = e => {
+    e.preventDefault();
+    const { name } = this.state;
+    const isInvalid = isEmpty(name) || checkSpecialChar(name);
+    if (isInvalid) {
+      return this.setState({
+        nameError: true
       });
     }
     const { dispatch } = this.context.store;
@@ -144,11 +190,13 @@ export default class LoginFormContainer extends Component {
     });
   };
   toggleLoginForm = () => {
+    const { dispatch } = this.context.store;
     this.setState({
       loginviaotp: !this.state.loginviaotp,
       resend: false,
       mobilesubmitted: false
     });
+    dispatch(clearLoginState());
   };
 
   render() {
@@ -157,15 +205,17 @@ export default class LoginFormContainer extends Component {
       mobileError,
       mobileErrorMessage,
       otp,
+      name,
+      nameError,
+      nameErrorMessage,
       otpError,
       otpErrorMessage,
       mobilesubmitted,
       resend
     } = this.state;
     const {
- loaded, loading, loggingIn, askContact, loginType
+ loaded, loading, loggingIn, askContact, askName, loginType
 } = this.props;
-
     return (
       <Row>
         <Box variant="col-4">
@@ -179,7 +229,13 @@ export default class LoginFormContainer extends Component {
           </Box>
           <Box>
             {!this.state.loginviaotp ? (
-              <LoginForm askContact={askContact} loginType={loginType} loading={loading} />
+              <LoginForm
+                askName={askName}
+                askContact={askContact}
+                loginType={loginType}
+                loading={loading}
+                loggingIn={loggingIn}
+              />
             ) : (
               <LoginViaOtp
                 onChangeMobile={this.onChangeMobile}
@@ -189,6 +245,11 @@ export default class LoginFormContainer extends Component {
                 otp={otp}
                 otpError={otpError}
                 otpErrorMessage={otpErrorMessage}
+                onChangeName={this.onChangeName}
+                onSubmitName={this.onSubmitName}
+                name={name}
+                nameError={nameError}
+                nameErrorMessage={nameErrorMessage}
                 mobile={mobile}
                 mobileError={mobileError}
                 mobileErrorMessage={mobileErrorMessage}
@@ -198,6 +259,7 @@ export default class LoginFormContainer extends Component {
                 loggingIn={loggingIn}
                 handleResend={this.handleResend}
                 resend={resend}
+                askName={askName}
               />
             )}
           </Box>
@@ -230,7 +292,7 @@ export default class LoginFormContainer extends Component {
               </Button>
             </Box>
             <Box variant="col-6">
-              <GoogleLoginBtn askContact={askContact} loginType={loginType} loading={loading} />
+              <GoogleLoginBtn askContact={askContact} loginType={loginType} loading={loading} loggingIn={loggingIn} />
             </Box>
           </Row>
         </Box>

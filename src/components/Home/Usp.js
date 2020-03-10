@@ -1,165 +1,56 @@
 import React from 'react';
-import Section from 'hometown-components-dev/lib/Section';
-import Row from 'hometown-components-dev/lib/Row';
-import Div from 'hometown-components-dev/lib/Div';
-import Heading from 'hometown-components-dev/lib/HeadingH6';
-import Img from 'hometown-components-dev/lib/Img';
 
-const styles = require('./Usp.scss');
-const usp1Icon = require('../../../static/usp-1.png');
-const usp2Icon = require('../../../static/usp-2.png');
-const usp3Icon = require('../../../static/usp-3.png');
-const usp4Icon = require('../../../static/usp-4.png');
-const usp5Icon = require('../../../static/usp-5.png');
-const usp6Icon = require('../../../static/usp-6.png');
+/* ====== Components ====== */
+// import ColHtV1 from 'hometown-components-dev/lib/ColHtV1';
+import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
+import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
+import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
+
+/* ====== Page Components ====== */
+import UspItem from 'components/Home/UspItem';
+import Title from 'components/Title';
+
+const usp1Icon = require('../../../static/usp-1.svg');
+const usp2Icon = require('../../../static/usp-2.svg');
+const usp3Icon = require('../../../static/usp-3.svg');
+const usp4Icon = require('../../../static/usp-4.svg');
+const usp5Icon = require('../../../static/usp-5.svg');
+const usp6Icon = require('../../../static/usp-6.svg');
 
 const Usp = () => (
-  <Section p="1rem" mt="0" mb="0rem" top="-15px">
-    <Row>
-      <Div display="flexEqual" ta="center" className={styles.uspImg}>
-        <Img
-          src={usp1Icon}
-          height="45px"
-          width="auto"
-          m="auto"
-          alt="Free Delivery"
-          display="inline-block"
-          va="bottom"
-        />
-        <Heading
-          ta="left"
-          color="uspTitle"
-          fontSize="0.75rem"
-          fontFamily="light"
-          lh="1.4"
-          mb="0"
-          display="inline-block"
-          tt="uppercase"
-          mt="0"
-        >
+  <SectionHtV1 variant="section.primary">
+    <ContainerHtV1>
+      <RowHtV1 justifyContent="center">
+        <Title title="WHAT MAKES US UNIQUE" />
+      </RowHtV1>
+      <RowHtV1>
+        <UspItem src={usp1Icon}>
           Free Delivery <br />
           Above Rs.499
-        </Heading>
-      </Div>
-      <Div display="flexEqual" ta="center" className={styles.uspImg}>
-        <Img
-          src={usp2Icon}
-          height="45px"
-          width="auto"
-          m="auto"
-          alt="Assured Quality"
-          display="inline-block"
-          va="bottom"
-        />
-        <Heading
-          ta="left"
-          color="uspTitle"
-          fontSize="0.75rem"
-          fontFamily="light"
-          lh="1.4"
-          mb="0"
-          display="inline-block"
-          tt="uppercase"
-          mt="0"
-        >
+        </UspItem>
+        <UspItem src={usp2Icon}>
           Assured <br />
           Quality
-        </Heading>
-      </Div>
-      <Div display="flexEqual" ta="center" className={styles.uspImg}>
-        <Img src={usp3Icon} height="45px" width="auto" m="auto" alt="Easy Finance" display="inline-block" va="bottom" />
-        <Heading
-          ta="left"
-          color="uspTitle"
-          fontSize="0.75rem"
-          fontFamily="light"
-          lh="1.4"
-          mb="0"
-          display="inline-block"
-          tt="uppercase"
-          mt="0"
-        >
+        </UspItem>
+        <UspItem src={usp3Icon}>
           Easy <br />
           Finance
-        </Heading>
-      </Div>
-      <Div display="flexEqual" ta="center" className={styles.uspImg}>
-        <Img
-          src={usp4Icon}
-          height="45px"
-          width="auto"
-          m="auto"
-          alt="1 Year Warranty*"
-          display="inline-block"
-          va="bottom"
-        />
-        <Heading
-          ta="left"
-          color="uspTitle"
-          fontSize="0.75rem"
-          fontFamily="light"
-          lh="1.4"
-          mb="0"
-          display="inline-block"
-          tt="uppercase"
-          mt="0"
-        >
+        </UspItem>
+        <UspItem src={usp4Icon}>
           1 Year <br />
           Warranty*
-        </Heading>
-      </Div>
-      <Div display="flexEqual" ta="center" className={styles.uspImg}>
-        <Img
-          src={usp5Icon}
-          height="45px"
-          width="auto"
-          m="auto"
-          alt="Free Assembly"
-          display="inline-block"
-          va="bottom"
-        />
-        <Heading
-          ta="left"
-          color="uspTitle"
-          fontSize="0.75rem"
-          fontFamily="light"
-          lh="1.4"
-          mb="0"
-          display="inline-block"
-          tt="uppercase"
-          mt="0"
-        >
+        </UspItem>
+        <UspItem src={usp5Icon}>
           Free Assembly <br />
           within 48 Hours
-        </Heading>
-      </Div>
-      <Div display="flexEqual" ta="center" className={styles.uspImg}>
-        <Img
-          src={usp6Icon}
-          height="45px"
-          width="auto"
-          m="auto"
-          alt="Free Service Support"
-          display="inline-block"
-          va="bottom"
-        />
-        <Heading
-          ta="left"
-          color="uspTitle"
-          fontSize="0.75rem"
-          fontFamily="light"
-          lh="1.4"
-          mb="0"
-          display="inline-block"
-          tt="uppercase"
-          mt="0"
-        >
+        </UspItem>
+        <UspItem src={usp6Icon}>
           Lifetime <br />
           Service
-        </Heading>
-      </Div>
-    </Row>
-  </Section>
+        </UspItem>
+      </RowHtV1>
+    </ContainerHtV1>
+  </SectionHtV1>
 );
 
 export default Usp;

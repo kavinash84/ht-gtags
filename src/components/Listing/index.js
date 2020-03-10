@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Container from 'hometown-components-dev/lib/Container';
-import Div from 'hometown-components-dev/lib/Div';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Product from 'hometown-components-dev/lib/Product';
-import Row from 'hometown-components-dev/lib/Row';
-import Section from 'hometown-components-dev/lib/Section';
-import { Label } from 'hometown-components-dev/lib/Label';
-import ResponsiveModal from 'components/Modal';
-import QuickView from 'components/QuickView/QuickView';
-import LoginModal from 'containers/Login/LoginForm';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Section from 'hometown-components-dev/lib/SectionHtV1';
+// import Label from 'hometown-components-dev/lib/LabelHtV1';
+// import ResponsiveModal from 'components/Modal';
+// import QuickView from 'components/QuickView/QuickView';
+// import LoginModal from 'containers/Login/LoginForm';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { toggleWishList, wishListWaitList } from 'redux/modules/wishlist';
@@ -16,16 +16,15 @@ import { setFilter } from 'redux/modules/products';
 import { setProductPosition } from 'redux/modules/productdetails';
 import { formFilterLink2, formatProductURL } from 'utils/helper';
 import { formatAmount } from 'utils/formatters';
-import TitleBar from './TitleBar';
-import Dropdown from '../Filters/Filters';
-import SortByFilters from '../Filters/SortByFilters';
+// import TitleBar from './TitleBar';
+// import Dropdown from '../Filters/Filters';
+// import SortByFilters from '../Filters/SortByFilters';
 import AddToCart from '../AddToCart';
-import AppliedFilters from '../Filters/AppliedFilters';
-import ScrollToTop from '../ScrollToTop';
-import BreadCrumb from './BreadCrumb';
-import CategoryBar from './CategoryBar';
+// import ScrollToTop from '../ScrollToTop';
+// import BreadCrumb from './BreadCrumb';
+// import CategoryBar from './CategoryBar';
 
-const sortByList = require('data/sortby');
+// const sortByList = require('data/sortby');
 
 const getProductImage = images => {
   const image = images && images.length > 0 && (images.filter(i => i.main === '1')[0] || images[0]);
@@ -67,9 +66,9 @@ class Listing extends React.Component {
     store: PropTypes.object.isRequired
   };
   state = {
-    openQuickView: false,
-    quickViewSku: '',
-    simpleSku: '',
+    // openQuickView: false,
+    // quickViewSku: '',
+    // simpleSku: '',
     openLogin: false
   };
   componentWillReceiveProps(nextProps) {
@@ -79,19 +78,19 @@ class Listing extends React.Component {
       });
     }
   }
-  onOpenQuickViewModal = (sku, simpleSku, soldOut, deliveredBy, rating) => {
-    this.setState({
-      openQuickView: true,
-      quickViewSku: sku,
-      simpleSku,
-      soldOut,
-      deliveredBy,
-      rating
-    });
-  };
-  onCloseQuickViewModal = () => {
-    this.setState({ openQuickView: false });
-  };
+  // onOpenQuickViewModal = (sku, simpleSku, soldOut, deliveredBy, rating) => {
+  //   this.setState({
+  //     openQuickView: true,
+  //     quickViewSku: sku,
+  //     simpleSku,
+  //     soldOut,
+  //     deliveredBy,
+  //     rating
+  //   });
+  // };
+  // onCloseQuickViewModal = () => {
+  //   this.setState({ openQuickView: false });
+  // };
 
   setFilter = (key, name, value, selected) => e => {
     e.preventDefault();
@@ -130,34 +129,34 @@ class Listing extends React.Component {
       wishlistToggle,
       productPosition,
       products,
-      categoryName,
-      productCount,
+      // categoryName,
+      // productCount,
       wishList,
       wishListData,
       loadingList,
-      filters,
+      // filters,
       history,
       isLoggedIn,
       metaResults,
-      appliedFilters,
-      sortBy,
+      // appliedFilters,
+      // sortBy,
       addToWaitList,
-      breadCrumbs,
-      categoryBar,
+      // breadCrumbs,
+      // categoryBar,
       selectedPincode
     } = this.props;
-    const uniqueFilters = {};
+    // const uniqueFilters = {};
     return (
-      <Div type="block">
-        <TitleBar title={categoryName} productCount={productCount}>
+      <Box type="block">
+        {/* <TitleBar title={categoryName} productCount={productCount}>
           <BreadCrumb categoryDetails={breadCrumbs} />
-        </TitleBar>
-        <CategoryBar pathname={history.location.pathname} categoryBar={categoryBar} />
-        <Section pt="1rem" mb="0">
+        </TitleBar> */}
+        {/* <CategoryBar pathname={history.location.pathname} categoryBar={categoryBar} /> */}
+        {/* <Section pt="1rem" mb="0">
           <Container pr="0" pl="0">
-            <div className={styles.filterBar}>
+            <Box className={styles.filterBar}>
               <Row display="block" mr="0" ml="0">
-                <Div col="9">
+                <Box variant="col-9">
                   <Label display="inline-block">Filter By</Label>
                   {filters.map((item, index) => {
                     const filterName = item.name || '';
@@ -176,32 +175,32 @@ class Listing extends React.Component {
                     }
                     return '';
                   })}
-                </Div>
-                <Div col="3" ta="right">
+                </Box>
+                <Box variant="col-3" ta="right">
                   <Label>Sort By</Label>
                   <SortByFilters display="rtl" title={sortBy} onclick={this.setFilter} data={sortByList} />
-                </Div>
+                </Box>
               </Row>
-            </div>
+            </Box>
           </Container>
-        </Section>
-        <Section pt="0.3125rem" pb="0.3125rem" mb="0">
+        </Section> */}
+        {/* <Section pt="0.3125rem" pb="0.3125rem" mb="0">
           <Container pr="0" pl="0">
             <Row display="block" mr="0" ml="0">
-              <Div col="12">
+              <Box variant="col-12">
                 <Label fontFamily="medium" display="inline-block">
                   Applied Filters
                 </Label>
                 <AppliedFilters data={appliedFilters} onClickClearFilter={this.clearFilters} />
-              </Div>
+              </Box>
             </Row>
           </Container>
-        </Section>
+        </Section> */}
         <Section pt="1rem" mb="0">
           <Container pr="0" pl="0">
             <Row display="block" mr="-15px" ml="-15px">
               {products.map((item, index) => (
-                <div className={styles.productWrapper} key={item.id}>
+                <Box className={styles.productWrapper} key={item.id}>
                   <Product
                     position={index}
                     key={item.id}
@@ -211,7 +210,6 @@ class Listing extends React.Component {
                     saving={item.saving}
                     moneyBackOffer={item.data.money_back_offer}
                     comboOffer={item.data.combo_offer}
-                    /* eslint-disable max-len */
                     image={getProductImage(item.images)}
                     sku={item.data.sku}
                     simpleSku={Object.keys(item.data.simples)[0]}
@@ -251,7 +249,7 @@ class Listing extends React.Component {
                     productURL={formatProductURL(item.data.name, item.data.sku)}
                     pincode={selectedPincode}
                   />
-                  <Div mt="0" p="12px 0.125rem 0.5rem 0.125rem">
+                  <Box mt="0" p="12px 0.125rem 0.5rem 0.125rem">
                     <AddToCart
                       simpleSku={Object.keys(item.data.simples)[0]}
                       sku={item.data.sku}
@@ -262,10 +260,10 @@ class Listing extends React.Component {
                       ta="left"
                       fontSize="12px"
                     />
-                  </Div>
-                </div>
+                  </Box>
+                </Box>
               ))}
-              <ResponsiveModal
+              {/* <ResponsiveModal
                 onCloseModal={this.onCloseQuickViewModal}
                 open={this.state.openQuickView}
                 classNames={{ overlay: styles.customModal, modal: styles.quickViewModal }}
@@ -280,18 +278,18 @@ class Listing extends React.Component {
                   rating={this.state.rating}
                 />
               </ResponsiveModal>
-              <ScrollToTop />
+              <ScrollToTop /> */}
             </Row>
-            <ResponsiveModal
+            {/* <ResponsiveModal
               classNames={{ modal: 'loginModal' }}
               onCloseModal={this.handleLoginModal}
               open={this.state.openLogin}
             >
               <LoginModal />
-            </ResponsiveModal>
+            </ResponsiveModal> */}
           </Container>
         </Section>
-      </Div>
+      </Box>
     );
   }
 }
@@ -299,17 +297,17 @@ class Listing extends React.Component {
 Listing.defaultProps = {
   wishList: [],
   wishListData: [],
-  categoryName: '',
-  productCount: '',
-  // category: '',
-  filters: [],
-  appliedFilters: [],
+  // categoryName: '',
+  // productCount: '',
+  // // category: '',
+  // filters: [],
+  // appliedFilters: [],
   // pincode: '',
   metaResults: [],
   loadingList: [],
   isLoggedIn: false,
-  categoryquery: '',
-  categoryBar: []
+  categoryquery: ''
+  // categoryBar: []
 };
 
 Listing.propTypes = {
@@ -318,19 +316,19 @@ Listing.propTypes = {
   products: PropTypes.array.isRequired,
   wishList: PropTypes.array,
   wishListData: PropTypes.array,
-  categoryName: PropTypes.string,
-  productCount: PropTypes.string,
-  filters: PropTypes.array,
-  sortBy: PropTypes.string.isRequired,
-  appliedFilters: PropTypes.array,
+  // categoryName: PropTypes.string,
+  // productCount: PropTypes.string,
+  // filters: PropTypes.array,
+  // sortBy: PropTypes.string.isRequired,
+  // appliedFilters: PropTypes.array,
   history: PropTypes.object.isRequired,
   loadingList: PropTypes.array,
   isLoggedIn: PropTypes.bool,
   metaResults: PropTypes.array,
   categoryquery: PropTypes.string,
   addToWaitList: PropTypes.func.isRequired,
-  breadCrumbs: PropTypes.array.isRequired,
-  categoryBar: PropTypes.array,
+  // breadCrumbs: PropTypes.array.isRequired,
+  // categoryBar: PropTypes.array,
   selectedPincode: PropTypes.string.isRequired
 };
 

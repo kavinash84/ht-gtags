@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Heading from 'hometown-components-dev/lib/Heading';
-import Container from 'hometown-components-dev/lib/Container';
-import Section from 'hometown-components-dev/lib/Section';
-import Row from 'hometown-components-dev/lib/Row';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import Section from 'hometown-components-dev/lib/SectionHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
 
 const TitleBar = ({ children, title, productCount }) => (
   <Section mb="0.625rem" p="1.25rem 0.5rem" bg="bg">

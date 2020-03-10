@@ -1,14 +1,16 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import Container from 'hometown-components-dev/lib/Container';
-import Div from 'hometown-components-dev/lib/Div';
-import Row from 'hometown-components-dev/lib/Row';
-import Section from 'hometown-components-dev/lib/Section';
-import Button from 'hometown-components-dev/lib/Buttons';
-import Text from 'hometown-components-dev/lib/Text';
-import FormInput from 'hometown-components-dev/lib/Forms/FormInput';
+import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
+import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
+import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
+import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
+import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
+import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
 import MyMenu from 'components/MyMenu';
 import { addAddress, updateAddress } from 'redux/modules/myaddress';
 // Validators
@@ -114,10 +116,7 @@ export default class DeliveryAddress extends Component {
     }
   }
   onSubmitValidator = () => {
-    const {
- email, name, pincode, address1, address2, address3, phone
-} = this.state;
-
+    const { email, name, pincode, address1, address2, address3, phone } = this.state;
     const nameError = isEmpty(name);
     const emailError = isEmpty(email) || !validateEmail(email);
     const phoneError = isEmpty(phone) || validateMobile(phone).error;
@@ -158,7 +157,7 @@ export default class DeliveryAddress extends Component {
     this.setState({
       name: value,
       nameError: checkError || check,
-      nameErrorMessage: check ? 'Special character not allowed !' : nameErrorMessage
+      nameErrorMessage: check ? 'Numbers and special characters are not allowed !' : nameErrorMessage
     });
   };
   onChangeAddress = (e, key) => {
@@ -300,9 +299,7 @@ export default class DeliveryAddress extends Component {
     });
   };
   checkDisabled = () => {
-    const {
- address1Error, address2Error, address3Error, phoneError, pincodeError, nameError, gstError
-} = this.state;
+    const { address1Error, address2Error, address3Error, phoneError, pincodeError, nameError, gstError } = this.state;
     const check =
       address1Error || address2Error || address3Error || phoneError || pincodeError || nameError || gstError;
     return check;
@@ -341,15 +338,44 @@ export default class DeliveryAddress extends Component {
     const { data, useremail } = this.props;
     const { loading } = this.props;
     return (
-      <Div type="block" mb="2rem">
+      <BoxHtV1 type="block" mb="2rem">
         <MyMenu page="address" />
-        <Section display="flex" pt="1.25rem" mb="0" height="auto">
-          <Container type="container" pr="0" pl="0">
-            <Row display="block" mr="0" ml="0">
+        <SectionHtV1
+          sx={{
+            display: 'flex',
+            boxShadow: 'none',
+            height: 'auto',
+            position: 'relative',
+            marginBottom: '0',
+            boxSizing: 'border-box',
+            padding: '1.25rem 0.9375rem 0.9375rem'
+          }}
+        >
+          <ContainerHtV1 type="container" pr="0" pl="0">
+            <RowHtV1 display="block" mr="0" ml="0">
               {data.map((item, index) => (
-                <Div col="4" pr="0.625rem" key={`${item.id_address_customer || '_'}_${String(index)}`}>
-                  <button
+                <BoxHtV1
+                  col="4"
+                  pr="0.625rem"
+                  width="33.24%"
+                  float="left"
+                  key={`${item.id_address_customer || '_'}_${String(index)}`}
+                >
+                  <ButtonHtV1
                     className={`${styles.addressBtn} ${index === currentaddressindex && styles.active}`}
+                    sx={{
+                      borderRadius: '4px',
+                      bg: '#ffffff',
+                      border: 'solid 2px #efefef',
+                      padding: '0.625rem 1rem',
+                      color: 'rgba(0, 0, 0, 0.6)',
+                      textAlign: 'left',
+                      lineHeight: '1.6',
+                      fontSize: '14px',
+                      width: '100%',
+                      minHeight: '135px',
+                      marginBottom: '10px'
+                    }}
                     onClick={() => this.handleClick(index)}
                   >
                     <b>{item.full_name}</b>
@@ -364,23 +390,23 @@ export default class DeliveryAddress extends Component {
                     <br />
                     {item.state || ''}
                     <br />
-                  </button>
-                </Div>
+                  </ButtonHtV1>
+                </BoxHtV1>
               ))}
 
-              <Div col="2">
-                <button className={styles.addAddressBtn} onClick={this.toggleAddAddresForm}>
-                  <img src={addIcon} alt="Add another address" />
-                  <Text color="rgba(0, 0, 0, 0.6)" ta="center">
+              <BoxHtV1 col="2">
+                <ButtonHtV1 className={styles.addAddressBtn} onClick={this.toggleAddAddresForm}>
+                  <ImageHtV1 src={addIcon} alt="Add another address" />
+                  <TextHtV1 color="rgba(0, 0, 0, 0.6)" ta="center">
                     Add address
-                  </Text>
-                </button>
-              </Div>
-            </Row>
+                  </TextHtV1>
+                </ButtonHtV1>
+              </BoxHtV1>
+            </RowHtV1>
             {editForm && (
               <form onSubmit={this.handleSubmit}>
-                <Row display="block" mr="0" ml="0" mt="1rem">
-                  <Div col="5">
+                <RowHtV1 display="block" mr="0" ml="0" mt="1rem">
+                  <BoxHtV1 col="5">
                     <FormInput
                       label="Full Name *"
                       type="text"
@@ -441,15 +467,17 @@ export default class DeliveryAddress extends Component {
                       feedBackError={pincodeError}
                       feedBackMessage={pincodeErrorMessage}
                     />
-                    <FormInput
+                    {/* <FormInput
+                      style={{ background: '#80808026' }}
+                      readonly
                       label="Email ID *"
                       type="text"
                       placeholder=""
-                      onChange={this.onChangeEmail}
+                      onChange={() => {}}
                       value={useremail}
                       feedBackError={emailError}
                       feedBackMessage={emailErrorMessage}
-                    />
+                    /> */}
                     {/* <FormInput
                       hide
                       label="GST Number "
@@ -460,29 +488,30 @@ export default class DeliveryAddress extends Component {
                       feedBackError={gstError}
                       feedBackMessage={gstErrorMessage}
                     /> */}
-                  </Div>
-                </Row>
-                <Row display="block" mr="0" ml="0">
-                  <Div col="2">
-                    <Button
+                  </BoxHtV1>
+                </RowHtV1>
+                <RowHtV1 display="block" mr="0" ml="0">
+                  <BoxHtV1 col="2">
+                    <ButtonHtV1
                       size="block"
                       btnType="primary"
                       fontFamily="regular"
                       height="42px"
                       mt="1.5rem"
+                      width="100%"
                       onClick={this.handleSubmit}
                       disabled={this.checkDisabled()}
                     >
                       {loading ? 'Please wait ...' : 'Save'}
-                    </Button>
-                  </Div>
-                </Row>
+                    </ButtonHtV1>
+                  </BoxHtV1>
+                </RowHtV1>
               </form>
             )}
             {addForm && (
               <form onSubmit={this.handleSubmit}>
-                <Row display="block" mr="0" ml="0" mt="1rem">
-                  <Div col="5">
+                <RowHtV1 display="block" mr="0" ml="0" mt="1rem">
+                  <BoxHtV1 col="5">
                     <FormInput
                       label="Full Name *"
                       type="text"
@@ -543,7 +572,7 @@ export default class DeliveryAddress extends Component {
                       feedBackError={pincodeError}
                       feedBackMessage={pincodeErrorMessage}
                     />
-                    <FormInput
+                    {/* <FormInput
                       label="Email ID *"
                       type="text"
                       placeholder=""
@@ -551,7 +580,7 @@ export default class DeliveryAddress extends Component {
                       value={useremail}
                       feedBackError={emailError}
                       feedBackMessage={emailErrorMessage}
-                    />
+                    />}
                     {/* <FormInput
                       label="GST Number "
                       type="text"
@@ -561,28 +590,29 @@ export default class DeliveryAddress extends Component {
                       feedBackError={gstError}
                       feedBackMessage={gstErrorMessage}
                     /> */}
-                  </Div>
-                </Row>
-                <Row display="block" mr="0" ml="0">
-                  <Div col="2">
-                    <Button
+                  </BoxHtV1>
+                </RowHtV1>
+                <RowHtV1 display="block" mr="0" ml="0">
+                  <BoxHtV1 col="2">
+                    <ButtonHtV1
                       size="block"
                       btnType="primary"
                       fontFamily="regular"
                       height="42px"
                       mt="1.5rem"
+                      bg="rgb(249, 141, 41)"
                       onClick={this.handleSubmit}
                       disabled={this.checkDisabled()}
                     >
                       {loading ? 'Please wait ...' : 'Save'}
-                    </Button>
-                  </Div>
-                </Row>
+                    </ButtonHtV1>
+                  </BoxHtV1>
+                </RowHtV1>
               </form>
             )}
-          </Container>
-        </Section>
-      </Div>
+          </ContainerHtV1>
+        </SectionHtV1>
+      </BoxHtV1>
     );
   }
 }

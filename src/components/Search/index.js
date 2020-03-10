@@ -5,10 +5,18 @@ import { withRouter } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Autosuggest from 'react-autosuggest';
-import Button from 'hometown-components-dev/lib/Buttons';
-import Div from 'hometown-components-dev/lib/Div';
+
+/* ====== Modules ====== */
 import { setFilter } from 'redux/modules/products';
 import * as actionCreators from 'redux/modules/search';
+
+/* ====== selectors ====== */
+
+/* ====== Components ====== */
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
+
+/* ====== Page Components ====== */
 
 const styles = require('./Search.scss');
 const SearchIcon = require('../../../static/search-icon.svg');
@@ -51,13 +59,13 @@ const renderInputComponent = inputProps => (
 );
 /* eslint react/prop-types: 0 */
 const renderSuggestionsContainer = ({ loaded }) => ({ containerProps, children }) => (
-  <div>
+  <BoxHtV1>
     {loaded && (
-      <Div {...containerProps} p="0" className={`${styles.searchList} ${styles.active}`}>
+      <BoxHtV1 {...containerProps} p="0" className={`${styles.searchList} ${styles.active}`}>
         {children}
-      </Div>
+      </BoxHtV1>
     )}
-  </div>
+  </BoxHtV1>
 );
 
 class Search extends React.Component {
@@ -75,6 +83,7 @@ class Search extends React.Component {
       value: newValue
     });
   };
+
   onSuggestionsFetchRequested = async ({ value }) => {
     const { load, setSearchQuery } = this.props;
     const { dispatch } = this.context.store;
@@ -116,8 +125,9 @@ class Search extends React.Component {
       onChange: this.onChange,
       value
     };
+
     return (
-      <Div className={styles.search} pt="0" pb="0.3125rem">
+      <BoxHtV1 width={1} className={styles.search}>
         <form onSubmit={onSubmit(searchQuery, history, hideResultsOnSubmit, results, setFilterState)}>
           <Autosuggest
             suggestions={suggestions}
@@ -134,7 +144,7 @@ class Search extends React.Component {
         {searchQuery === '' ? (
           <img src={SearchIcon} className={styles.searchIcon} alt="Search" />
         ) : (
-          <Button
+          <ButtonHtV1
             className={styles.closeBtn}
             onClick={this.onSuggestionsClear}
             btnType="custom"
@@ -143,9 +153,9 @@ class Search extends React.Component {
             p="0"
           >
             <img src={CloseIcon} alt="Close" />
-          </Button>
+          </ButtonHtV1>
         )}
-      </Div>
+      </BoxHtV1>
     );
   }
 }

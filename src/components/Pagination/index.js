@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Pager from 'react-js-pagination';
 import PropTypes from 'prop-types';
-import Row from 'hometown-components-dev/lib/Row';
-import Div from 'hometown-components-dev/lib/Div';
-import Container from 'hometown-components-dev/lib/Container';
-import Section from 'hometown-components-dev/lib/Section';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import Section from 'hometown-components-dev/lib/SectionHtV1';
 import { connect } from 'react-redux';
 import { getProductCount } from 'selectors/products';
 import { formFilterLink2 } from 'utils/helper';
@@ -40,7 +40,7 @@ export default class Pagination extends Component {
       <Section className="paginationWrapper" mb="0" pt="0" pb="0">
         <Container pr="0" pl="0">
           <Row display="block" mr="0" ml="0">
-            <Div ta="center">
+            <Box ta="center">
               <Pager
                 activePage={parseInt(pageno, 10)}
                 itemsCountPerPage={32}
@@ -48,7 +48,7 @@ export default class Pagination extends Component {
                 pageRangeDisplayed={pageRangeDisplayed}
                 onChange={this.handleClick}
               />
-            </Div>
+            </Box>
           </Row>
         </Container>
       </Section>

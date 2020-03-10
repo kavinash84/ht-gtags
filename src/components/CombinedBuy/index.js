@@ -1,11 +1,10 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import Section from 'hometown-components-dev/lib/Section';
-import Container from 'hometown-components-dev/lib/Container';
-import Row from 'hometown-components-dev/lib/Row';
-import Div from 'hometown-components-dev/lib/Div';
-import Span from 'hometown-components-dev/lib/Span';
-import { Label } from 'hometown-components-dev/lib/Label';
+import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
+import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
+import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
 import { formatAmount } from 'utils/formatters';
 import { formatProductURL } from 'utils/helper';
 import ProductCarouselItem from './ProductCarouselItem';
@@ -16,12 +15,12 @@ const styles = require('./Slider.scss');
 const ProductCarousel = ({
  data, item, length, pt, pb, height, price, discountedPrice, setDiscount
 }) => (
-  <Section p="0" pt={pt} pb={pb} mt="0" mb="0" display="flex" className="prodCarousel">
-    <Container pr="0" pl="0" className={styles.combinedProductsWrapper}>
-      <Row>
+  <SectionHtV1 p={0} pt={pt} pb={pb} mt={0} mb={0} display="flex" className="prodCarousel">
+    <ContainerHtV1 pr={0} pl={0} className={styles.combinedProductsWrapper}>
+      <RowHtV1>
         {data.map((skuItem, index) => (
-          <Div col="3" className={styles.combineItemWrapper} key={`${skuItem.meta.sku}_${String(index)}`}>
-            <Row key={String(index)}>
+          <BoxHtV1 col="3" className={styles.combineItemWrapper} key={`${skuItem.meta.sku}_${String(index)}`}>
+            <RowHtV1 key={String(index)}>
               <ProductCarouselItem
                 name={skuItem.meta.name}
                 discPrice={skuItem.meta.max_special_price && formatAmount(skuItem.meta.max_special_price)}
@@ -34,61 +33,61 @@ const ProductCarousel = ({
                 url={`${formatProductURL(skuItem.meta.name, skuItem.meta.sku)}`}
                 height={length <= 3 ? height : '245px'}
               />
-              <Div col="1" alignSelf="center" ta="center">
-                <Label color="plusIcon" fontSize="2rem">
+              <BoxHtV1 col="1" alignSelf="center" textAlign="center">
+                <LabelHtV1 color="plusIcon" fontSize="2rem">
                   {index < data.length - 1 ? '+' : ''}
-                </Label>
-              </Div>
-            </Row>
-          </Div>
+                </LabelHtV1>
+              </BoxHtV1>
+            </RowHtV1>
+          </BoxHtV1>
         ))}
-      </Row>
-      <Row mr="0" ml="0" className={styles.combineBottom} pt="10px">
-        <Div col="12" alignSelf="center">
+      </RowHtV1>
+      <RowHtV1 mr={0} ml={0} className={styles.combineBottom} pt={10}>
+        <BoxHtV1 col="12" alignSelf="center">
           {data.map((skuItem, index) => (
             <Fragment key={String(index)}>
-              <Label mb="0" color="textExtraLight">
+              <LabelHtV1 mb={0} color="textExtraLight">
                 {`${index + 1} Item`} <br />
-                <Span fontSize="1.125rem" mt="5px" display="block" color="rgba(0,0,0,0.8)">
+                <BoxHtV1 fontSize="1.125rem" mt="5px" display="block" color="rgba(0,0,0,0.8)">
                   {skuItem.meta.max_special_price
                     ? formatAmount(skuItem.meta.max_special_price)
                     : formatAmount(skuItem.meta.max_price)}
-                </Span>
-              </Label>
-              <Label mb="0" color="black" fontSize="1rem" ml="1rem" mr="1rem">
+                </BoxHtV1>
+              </LabelHtV1>
+              <LabelHtV1 mb={0} color="black" fontSize="1rem" ml={16} mr={16}>
                 {index < data.length - 1 ? '+' : ''}
-              </Label>
+              </LabelHtV1>
             </Fragment>
           ))}
           {setDiscount && setDiscount > 0 ? (
             <Fragment>
-              <Label mb="0" color="black" fontSize="1rem" ml="1rem" mr="1rem">
+              <LabelHtV1 mb={1} color="black" fontSize="1rem" ml={16} mr={16}>
                 -
-              </Label>
-              <Label mb="0" color="textExtraLight">
+              </LabelHtV1>
+              <LabelHtV1 mb={0} color="textExtraLight">
                 Combo Discount <br />
-                <Span fontSize="1.125rem" mt="5px" display="block" color="rgba(0,0,0,0.8)">
+                <BoxHtV1 fontSize="1.125rem" mt={5} display="block" color="rgba(0,0,0,0.8)">
                   {formatAmount(setDiscount)}
-                </Span>
-              </Label>
-              <Label mb="0" color="black" fontSize="1rem" ml="1rem" mr="1rem">
+                </BoxHtV1>
+              </LabelHtV1>
+              <LabelHtV1 mb={0} color="black" fontSize="1rem" ml={16} mr={16}>
                 =
-              </Label>
+              </LabelHtV1>
             </Fragment>
           ) : (
             '='
           )}
-          <Label mb="0" mr="1rem" fontSize="1.25rem" color="textExtraLight">
+          <LabelHtV1 mb={0} mr={16} fontSize="1.25rem" color="textExtraLight">
             Total
             <br />
-            <Span ml="0px" color="rgba(0,0,0,0.8)" fontSize="1.25rem">
+            <BoxHtV1 ml={0} color="rgba(0,0,0,0.8)" fontSize="1.25rem">
               {discountedPrice ? formatAmount(discountedPrice) : ''}
-            </Span>
-            <Span ml="10px" color="rgba(0,0,0,0.5)" fontSize="0.875rem">
+            </BoxHtV1>
+            <BoxHtV1 ml={10} color="rgba(0,0,0,0.5)" fontSize="0.875rem">
               <s>{price ? formatAmount(price) : ''}</s>
-            </Span>
-          </Label>
-          <Label mt="0" mb="0" va="bottom" ml="1rem">
+            </BoxHtV1>
+          </LabelHtV1>
+          <LabelHtV1 mt={0} mb={0} verticalAlign="bottom" ml={16}>
             <AddToCartCombined
               skusData={item}
               products={data}
@@ -99,11 +98,11 @@ const ProductCarousel = ({
               fontSize="14px"
               isSoldOut={false}
             />
-          </Label>
-        </Div>
-      </Row>
-    </Container>
-  </Section>
+          </LabelHtV1>
+        </BoxHtV1>
+      </RowHtV1>
+    </ContainerHtV1>
+  </SectionHtV1>
 );
 
 ProductCarousel.defaultProps = {

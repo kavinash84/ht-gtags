@@ -9,12 +9,12 @@ import { setReloadListing } from 'redux/modules/products';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
 // import Img from 'hometown-components-dev/lib/ImageHtV1';
 // import Section from 'hometown-components-dev/lib/SectionHtV1';
-import ListingContainer from 'newComponents/Listing';
-// import ListingShimmer from 'newComponents/Listing/ListingShimmer';
-import Footer from 'newComponents/Footer';
-import Header from 'newComponents/Header';
-// import Pagination from 'newComponents/Pagination';
-// import SeoContent from 'newComponents/SeoContent';
+import ListingContainer from 'components/Listing';
+// import ListingShimmer from 'components/Listing/ListingShimmer';
+import Footer from 'components/Footer';
+import Header from 'components/Header';
+// import Pagination from 'components/Pagination';
+// import SeoContent from 'components/SeoContent';
 import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 import Body from 'hometown-components-dev/lib/BodyHtV1';
 

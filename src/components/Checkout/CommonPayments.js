@@ -1,8 +1,17 @@
-import React from 'react';
-import Div from 'hometown-components-dev/lib/Div';
-import Img from 'hometown-components-dev/lib/Img';
-import { Label } from 'hometown-components-dev/lib/Label';
+import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
+// import styled from 'styled-components';
 
+/**
+ * Components
+ */
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Label from 'hometown-components-dev/lib/LabelHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+
+/**
+ * Icons
+ */
 const styles = require('./CommonPayments.scss');
 
 const creditcardIcon = require('../../../static/credit-card.png');
@@ -10,6 +19,7 @@ const debitcardIcon = require('../../../static/debit-card.png');
 const intBankingIcon = require('../../../static/net-banking-icon.png');
 const emiIcon = require('../../../static/emi.png');
 const walletIcon = require('../../../static/wallet.png');
+const upiIcon = require('../../../static/upi-logo.svg');
 
 const initial = {
   CreditCard: {
@@ -52,7 +62,60 @@ const initial = {
     easyemi_otp_code: '',
     easyEmiConfig: '',
     gateway: ''
+  },
+  Upi: {
+    payment_method_type: 'Upi',
+    payment_method: 'Payu',
+    pg_upi: 'UPI',
+    upi_bank_code: 'UPI',
+    upi_vpa: ''
   }
+};
+
+const PaymentInputRadio = props => (
+  <Box
+    as="input"
+    type="radio"
+    name="paymentOption"
+    display="none"
+    sx={{
+      '&:checked + label': {
+        color: 'primary',
+        boxShadow: '0px 1px #fff',
+        borderTop: 'heading',
+        borderLeft: 'heading',
+        borderRight: 'heading'
+      }
+    }}
+    {...props}
+  />
+);
+
+const PaymentTab = ({ title, imageUrl, ...props }) => (
+  <Label
+    htmlFor="CreditCard"
+    alignItems="center"
+    display="flex"
+    variant="small"
+    py={12}
+    px={16}
+    sx={{
+      textTransform: 'uppercase',
+      cursor: 'pointer',
+      borderTop: 'transparent',
+      borderLeft: 'transparent',
+      borderRight: 'transparent'
+    }}
+    {...props}
+  >
+    <Image height="20px" mr="10px" src={imageUrl} alt={title} />
+    {title}
+  </Label>
+);
+
+PaymentTab.propTypes = {
+  title: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string.isRequired
 };
 
 const onChangeGateway = (dispatcher, value, session) => () => {
@@ -64,170 +127,88 @@ const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEa
   switch (paymentType) {
     case 'CreditCard':
       return (
-        <Div col="12" key={paymentType} className={styles.paymentOptions}>
-          <input
-            type="radio"
-            name="paymentOption"
+        <Fragment key={paymentType}>
+          <PaymentInputRadio
             value="CreditCard"
             checked={selectedGateway === paymentType}
             onChange={onChangeGateway(onChange, paymentType, session)}
           />
-          <Label
+          <PaymentTab
+            title="Credit Card"
+            imageUrl={creditcardIcon}
             htmlFor="CreditCard"
-            pl="0"
-            color="textLight"
-            mt="0"
-            mb="0"
             onClick={onChangeGateway(onChange, paymentType, session)}
-          >
-            <Img
-              height="20px"
-              width="auto"
-              float="left"
-              mr="10px"
-              top="-2px"
-              position="relative"
-              src={creditcardIcon}
-              alt="Credit Card"
-            />
-            Credit Card
-          </Label>
-        </Div>
+          />
+        </Fragment>
       );
     case 'DebitCard':
       return (
-        <Div col="12" key={paymentType} className={styles.paymentOptions}>
-          <input
-            type="radio"
-            name="paymentOption"
+        <Fragment key={paymentType}>
+          <PaymentInputRadio
             value="DebitCard"
             checked={selectedGateway === paymentType}
             onChange={onChangeGateway(onChange, paymentType, session)}
           />
-          <Label
+          <PaymentTab
+            title="Debit Card"
+            imageUrl={debitcardIcon}
             htmlFor="DebitCard"
-            pl="0"
-            color="textLight"
-            mt="0"
-            mb="0"
             onClick={onChangeGateway(onChange, paymentType, session)}
-          >
-            <Img
-              height="20px"
-              width="auto"
-              float="left"
-              mr="10px"
-              top="-2px"
-              position="relative"
-              src={debitcardIcon}
-              alt="Debit Card"
-            />
-            Debit Card
-          </Label>
-        </Div>
+          />
+        </Fragment>
       );
     case 'NetBanking':
       return (
-        <Div col="12" key={paymentType} className={styles.paymentOptions}>
-          <input
-            type="radio"
-            name="paymentOption"
+        <Fragment key={paymentType}>
+          <PaymentInputRadio
             value="NetBanking"
             checked={selectedGateway === paymentType}
             onChange={onChangeGateway(onChange, paymentType, session)}
           />
-          <Label
+          <PaymentTab
+            title="Internet Banking"
+            imageUrl={intBankingIcon}
             htmlFor="paymentIB"
-            pl="0"
-            color="textLight"
-            mt="0"
-            mb="0"
             onClick={onChangeGateway(onChange, paymentType, session)}
-          >
-            <Img
-              height="20px"
-              width="auto"
-              float="left"
-              mr="10px"
-              top="-2px"
-              position="relative"
-              src={intBankingIcon}
-              alt="Internet Banking"
-            />
-            Internet Banking
-          </Label>
-        </Div>
+          />
+        </Fragment>
       );
     case 'Emi':
       return (
-        <Div col="12" key={paymentType} className={styles.paymentOptions}>
-          <input
-            type="radio"
-            name="paymentOption"
+        <Fragment key={paymentType}>
+          <PaymentInputRadio
             value="Emi"
             checked={selectedGateway === paymentType}
             onChange={onChangeGateway(onChange, paymentType, session)}
           />
-          <Label
+          <PaymentTab
+            title="EMI"
+            imageUrl={emiIcon}
             htmlFor="paymentEmi"
-            pl="0"
-            color="textLight"
-            mt="0"
-            mb="0"
             onClick={onChangeGateway(onChange, paymentType, session)}
-          >
-            <Img
-              height="20px"
-              width="auto"
-              float="left"
-              mr="10px"
-              top="-2px"
-              position="relative"
-              src={emiIcon}
-              alt="EMI"
-            />
-            EMI
-          </Label>
-        </Div>
+          />
+        </Fragment>
       );
     case 'Wallet':
       return (
-        <Div col="12" key={paymentType} className={styles.paymentOptions}>
-          <input
-            type="radio"
-            name="paymentOption"
+        <Fragment key={paymentType}>
+          <PaymentInputRadio
             value="Wallet"
             checked={selectedGateway === paymentType}
             onChange={onChangeGateway(onChange, paymentType, session)}
           />
-          <Label
+          <PaymentTab
+            title="Wallet"
+            imageUrl={walletIcon}
             htmlFor="paymentWallet"
-            pl="0"
-            color="textLight"
-            mt="0"
-            mb="0"
             onClick={onChangeGateway(onChange, paymentType, session)}
-          >
-            <Img
-              height="20px"
-              width="auto"
-              float="left"
-              mr="10px"
-              top="-2px"
-              position="relative"
-              src={walletIcon}
-              alt="Wallet"
-            />
-            Wallet
-          </Label>
-        </Div>
+          />
+        </Fragment>
       );
     case 'EasyEmi':
       return (
-        <Div col="12" key={paymentType} className={styles.paymentOptions}>
-          <input
-            type="radio"
-            name="paymentOption"
+        <Fragment key={paymentType}>
+          <PaymentInputRadio
             value="EasyEmi"
             checked={selectedGateway === paymentType}
             onChange={() => {
@@ -235,30 +216,46 @@ const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEa
               onChangeGateway(onChange, paymentType, session)();
             }}
           />
-          <Label
+          <PaymentTab
+            title="Bajaj Finance EMI"
+            imageUrl={emiIcon}
             htmlFor="paymentEasyEmi"
+            onClick={onChangeGateway(onChange, paymentType, session)}
+          />
+        </Fragment>
+      );
+    case 'Upi':
+      return (
+        <Box col="12" key={paymentType} className={styles.paymentOptions}>
+          <input
+            type="radio"
+            name="paymentOption"
+            value="Upi"
+            checked={selectedGateway === paymentType}
+            onChange={onChangeGateway(onChange, paymentType, session)}
+          />
+          <Label
+            htmlFor="Upi"
             pl="0"
             color="textLight"
             mt="0"
             mb="0"
-            onClick={() => {
-              resetEasyEmi();
-              onChangeGateway(onChange, paymentType, session)();
-            }}
+            onClick={onChangeGateway(onChange, paymentType, session)}
           >
-            <Img
+            <Image
               height="20px"
               width="auto"
               float="left"
               mr="10px"
               top="-2px"
               position="relative"
-              src={emiIcon}
-              alt="EASYEMI"
+              src={upiIcon}
+              alt="UPI"
+              style={{ backgroundColor: '#f5f5f5' }}
             />
-            Bajaj Finance EMI
+            UPI
           </Label>
-        </Div>
+        </Box>
       );
     default:
       return null;

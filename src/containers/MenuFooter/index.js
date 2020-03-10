@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
-import Header from 'newComponents/Header';
-import Footer from 'newComponents/Footer';
+import Header from 'components/Header';
+import Footer from 'components/Footer';
 
 export default class MenuFooter extends Component {
   render() {

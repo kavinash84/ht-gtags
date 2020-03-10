@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
-import Row from 'hometown-components-dev/lib/Row';
-import Div from 'hometown-components-dev/lib/Div';
-import Img from 'hometown-components-dev/lib/Img';
-import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
+
+/**
+ * Components
+ */
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import ImageShimmer from 'hometown-components-dev/lib/ImageShimmerHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+
+/**
+ * Page Components
+ */
 import CarouselItem from './CarouselItem';
 
-const showSlides = data => (data && data.length >= 4 ? 4 : data.length || 0);
+const showSlides = data => (data && data.length >= 5 ? 5 : data.length || 0);
 
 /* eslint-disable */
 export default class ProductDetailSlider extends Component {
@@ -28,35 +37,48 @@ export default class ProductDetailSlider extends Component {
     const styles = require('./Carousel.scss');
 
     return (
-      <Row display="block" mt="0" mb="0" mr="0" ml="0">
-        <Div col="2">
+      <Row>
+        <Col>
+          <img className="hide" itemProp="image" src={(data && `${data[0].url}-zoom.jpg`) || ''} alt={title} />
+          <Slider
+            asNavFor={this.state.nav2}
+            ref={slider => (this.slider1 = slider)}
+            beforeChange={(currentSlide, nextSlide) => {
+              console.log('before in slider1', currentSlide, nextSlide);
+            }}
+            afterChange={currentSlide => {
+              console.log('after in slider1', currentSlide);
+            }}
+          >
+            {data.map(slide => (
+              <CarouselItem key={slide.id_catalog_product_image} image={`${slide.url}.jpg`} name={title} />
+            ))}
+          </Slider>
           <Slider
             asNavFor={this.state.nav1}
             ref={slider => (this.slider2 = slider)}
             slidesToShow={showSlides(data)}
             swipeToSlide
             focusOnSelect
-            vertical
-            verticalSwiping
             className="pdpThumbSlider"
+            centerPadding="30px"
+            variableWidth={true}
+            beforeChange={(currentSlide, nextSlide) => {
+              console.log('before in slider2', currentSlide, nextSlide);
+            }}
+            afterChange={currentSlide => {
+              console.log('after in slider2', currentSlide);
+            }}
           >
             {data.map(slide => (
-              <div className={styles.pdpThumbSliderItem} key={slide.id_catalog_product_image}>
-                <ImageShimmer src={`${slide.url}-top_sel_100.jpg`} style={{ width: '105px' }} height="105px">
-                  {imageURL => <Img alt={title} src={imageURL} width="105px" />}
+              <Box className={styles.pdpThumbSliderItem} key={slide.id_catalog_product_image}>
+                <ImageShimmer src={`${slide.url}-top_sel_100.jpg`} width="100px" height="100px">
+                  {imageURL => <Image alt={title} src={imageURL} />}
                 </ImageShimmer>
-              </div>
+              </Box>
             ))}
           </Slider>
-        </Div>
-        <Div col="10" pl="0.625rem" pr="0" pb="1rem">
-          <img className="hide" itemProp="image" src={(data && `${data[0].url}-zoom.jpg`) || ''} alt={title} />
-          <Slider asNavFor={this.state.nav2} ref={slider => (this.slider1 = slider)}>
-            {data.map(slide => (
-              <CarouselItem key={slide.id_catalog_product_image} image={`${slide.url}.jpg`} name={title} />
-            ))}
-          </Slider>
-        </Div>
+        </Col>
       </Row>
     );
   }

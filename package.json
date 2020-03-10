@@ -7,7 +7,7 @@
     "Ankit <ankit.patel@hometown.in>"
   ],
   "license": "MIT",
-  "version": "1.3.40",
+  "version": "2.0.1",
   "repository": {
     "type": "git",
     "url": "https://bitbucket.org/hometown-tech/frontend/"
@@ -23,7 +23,7 @@
   "main": "bin/server.js",
   "scripts": {
     "start": "concurrently --kill-others \"npm run start-prod\"",
-    "start-prod": "cross-env NODE_PATH=src NODE_ENV=production PORT=8084 SITE_URL=https://www.hometown.in APIHOST=api.hometown.in/api/ APIPORT=443 PAYMENT_URL=https://alice.hometown.in/checkout/finish/payment/ node ./bin/server.js",
+    "start-prod": "cross-env NODE_PATH=src SF_ENV=production NODE_ENV=production PORT=8084 SITE_URL=https://www.hometown.in APIHOST=api.hometown.in/api/ APIPORT=443 PAYMENT_URL=https://alice.hometown.in/checkout/finish/payment/ node ./bin/server.js",
     "build": "cross-env NODE_ENV=production PAYMENT_URL=https://alice.hometown.in/checkout/finish/payment/ webpack --colors --display-error-details --config=webpack/prod.config.js",
     "start-beta": "cross-env NODE_PATH=src NODE_ENV=production PORT=8084 SITE_URL=https://beta.hometown.in APIHOST=api.hometown.in/api/ APIPORT=443 PAYMENT_URL=https://beta-alice.hometown.in/checkout/finish/payment/ node ./bin/server.js",
     "build-beta": "cross-env NODE_ENV=production PAYMENT_URL=https://beta-alice.hometown.in/checkout/finish/payment/ webpack --colors --display-error-details --config=webpack/beta.config.js",
@@ -119,8 +119,9 @@
     "verror": "^1.10.0"
   },
   "devDependencies": {
+    "@babel/traverse": "7.0.0-beta.52",
     "autoprefixer": "^8.2.0",
-    "babel-eslint": "^8.0.1",
+    "babel-eslint": "^8.2.2",
     "babel-jest": "^21.0.2",
     "babel-loader": "^7.0.0",
     "babel-plugin-styled-components": "^1.5.1",

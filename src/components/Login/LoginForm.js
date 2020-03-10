@@ -15,6 +15,7 @@ import { allowNChar, allowTypeOf } from 'utils/helper';
 import { login, clearLoginState } from 'redux/modules/login';
 import { SIGNUP_URL, FORGOT_PASSWORD_URL } from 'helpers/Constants';
 
+// icons
 const LoaderIcon = require('../../../static/refresh-black.svg');
 
 @connect(state => ({

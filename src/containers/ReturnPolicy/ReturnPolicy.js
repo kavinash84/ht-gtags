@@ -1,5 +1,5 @@
 import React from 'react';
-import ReturnPolicyContainer from 'newComponents/StaticPages/ReturnPolicy';
+import ReturnPolicyContainer from 'components/StaticPages/ReturnPolicy';
 import MenuFooter from 'containers/MenuFooter';
 
 export default () => (

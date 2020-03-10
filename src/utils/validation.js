@@ -1,6 +1,9 @@
 // import { isBlank } from 'js-utility-functions';
 
-export const isEmpty = value => value === undefined || value === null || value === '';
+export const isEmpty = rawValue => {
+  const value = rawValue ? rawValue.trim() : '';
+  return value === undefined || value === null || value === '';
+};
 const join = rules => (value, data, params) => rules.map(rule => rule(value, data, params)).filter(error => !!error)[0];
 
 export function email(value) {
@@ -154,7 +157,7 @@ export const trimSpecialChar = text => {
 };
 
 export const checkSpecialChar = text => {
-  const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/; //eslint-disable-line
+  const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`0-9]/; //eslint-disable-line
   const check = format.test(text);
   return check;
 };
@@ -164,6 +167,7 @@ export const validateEmail = email =>
   /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
     email
   );
+export const validateVPA = vpa => /^[.a-zA-Z0-9\-_]{3,}@[A-Za-z0-9]+$/.test(vpa);
 // export const validateFullName = name =>
 //   /^[a-zA-Z]+ [a-zA-Z]+$/.test(
 //     name

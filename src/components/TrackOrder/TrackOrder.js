@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TitleBar from 'components/TitleBar';
-import Container from 'hometown-components-dev/lib/Container';
-import Div from 'hometown-components-dev/lib/Div';
-import Row from 'hometown-components-dev/lib/Row';
-import Section from 'hometown-components-dev/lib/Section';
-import Img from 'hometown-components-dev/lib/Img';
+import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
+import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
+import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
 // import Span from 'hometown-components-dev/lib/Span';
-import { Label } from 'hometown-components-dev/lib/Label';
-import FormInput from 'hometown-components-dev/lib/Forms/FormInput';
-import Button from 'hometown-components-dev/lib/Buttons';
+import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
+import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
+import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
 import { connect } from 'react-redux';
 // import { formatDate } from 'utils/formatters';
 // import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
@@ -30,14 +30,14 @@ class TrackOrder extends Component {
     const orders = data.order_items || [];
     const error = data.error || '';
     return (
-      <Div>
+      <BoxHtV1>
         <TitleBar title="Track Order(s)" />
-        <Section display="block" p="0" pb="1rem" mb="0" height="auto">
-          <Container type="container" pr="0.5rem" pl="0.5rem">
-            <Div type="block" pt="2rem" pb="2.5rem">
-              <Row display="block" mr="0" ml="0">
+        <SectionHtV1 display="block" p="0" pb="1rem" mb="0" height="auto">
+          <ContainerHtV1 type="container" pr="0.5rem" pl="0.5rem">
+            <BoxHtV1 type="block" pt="2rem" pb="2.5rem">
+              <RowHtV1 display="block" mr="0" ml="0">
                 <form onSubmit={handleSubmit}>
-                  <Div col="5">
+                  <BoxHtV1 col="5">
                     <FormInput
                       size="default"
                       label="Order Number"
@@ -47,23 +47,23 @@ class TrackOrder extends Component {
                       value={orderId}
                       required
                     />
-                  </Div>
-                  <Div col="5" pt="0.875rem" pl="1rem">
+                  </BoxHtV1>
+                  <BoxHtV1 col="5" pt="0.875rem" pl="1rem">
                     {loading ? (
-                      <Button btnType="primary" fontFamily="regular" height="38px" mt="1rem" type="submit">
+                      <ButtonHtV1 btnType="primary" fontFamily="regular" height="38px" mt="1rem" type="submit">
                         <span>
                           PLEASE WAIT
-                          <Img className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />
+                          <ImageHtV1 className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />
                         </span>
-                      </Button>
+                      </ButtonHtV1>
                     ) : (
-                      <Button btnType="primary" fontFamily="regular" height="38px" mt="1rem" type="submit">
+                      <ButtonHtV1 btnType="primary" fontFamily="regular" height="38px" mt="1rem" type="submit">
                         SUBMIT
-                      </Button>
+                      </ButtonHtV1>
                     )}
-                  </Div>
+                  </BoxHtV1>
                 </form>
-              </Row>
+              </RowHtV1>
               {orders.length ? (
                 <ResponsiveModal
                   classNames={{ modal: 'trackingModal' }}
@@ -76,7 +76,7 @@ class TrackOrder extends Component {
                   <TrackingTimeline data={orders} error={error} />
                 </ResponsiveModal>
               ) : (
-                <Label fontSize="0.75rem" lh="1.8" mb="1.125rem">
+                <LabelHtV1 fontSize="0.75rem" lh="1.8" mb="1.125rem">
                   {loaded && orderId && !onChange ? (
                     <b style={{ color: 'red' }}>
                       {data.status === 'canceled'
@@ -86,22 +86,22 @@ class TrackOrder extends Component {
                   ) : (
                     ''
                   )}
-                </Label>
+                </LabelHtV1>
               )}
-              <Row display="block" mr="0" ml="0" mt="1rem">
-                <Div>
-                  <Label fontSize="0.75rem" lh="1.8" mb="1.125rem">
+              <RowHtV1 display="block" mr="0" ml="0" mt="1rem">
+                <BoxHtV1>
+                  <LabelHtV1 fontSize="0.75rem" lh="1.8" mb="1.125rem">
                     <b>Note:</b> Products with different delivery times may be shipped separately.
                     <br />
                     For any queries please call 18002100004 (10AM - 8PM) or mail us at
                     <a href="mailto:care@homwtown.in"> care@hometown.in</a>
-                  </Label>
-                </Div>
-              </Row>
-            </Div>
-          </Container>
-        </Section>
-      </Div>
+                  </LabelHtV1>
+                </BoxHtV1>
+              </RowHtV1>
+            </BoxHtV1>
+          </ContainerHtV1>
+        </SectionHtV1>
+      </BoxHtV1>
     );
   }
 }

@@ -1,23 +1,53 @@
 import React from 'react';
+import Select from 'react-select';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Container from 'hometown-components-dev/lib/Container';
-import Div from 'hometown-components-dev/lib/Div';
-import Img from 'hometown-components-dev/lib/Img';
-import Heading from 'hometown-components-dev/lib/Heading';
-import Row from 'hometown-components-dev/lib/Row';
-import Section from 'hometown-components-dev/lib/Section';
-import { Label } from 'hometown-components-dev/lib/Label';
+
+/* ====== Modules / Selectors ====== */
 import { setCurrentLocation, setError } from 'redux/modules/storelocator';
 import { notifSend } from 'redux/modules/notifs';
 import { getCurrentCity, getCurrentLocation, getDestination, getStores } from 'selectors/location';
 import { gaVisitEvent } from 'redux/modules/stores';
-import PropTypes from 'prop-types';
+
+/* ====== Page Components ====== */
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Flex from 'hometown-components-dev/lib/FlexHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import LocationIcon from 'hometown-components-dev/lib/Icons/LocationHtV1';
+import Li from 'hometown-components-dev/lib/LiHtV1';
+import LinkRedirect from 'hometown-components-dev/lib/LinkRedirectHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Section from 'hometown-components-dev/lib/SectionHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
+import Ul from 'hometown-components-dev/lib/UlHtV1';
+
+/* ====== Page Components ====== */
 import { getDistanceBetweenPoints } from 'utils/helper';
 import Map from './Map';
 
 const LoaderIcon = require('../../../static/refresh.svg');
+const DirectionIcon = require('../../../static/direction.svg');
 const styles = require('./StoreLocator.scss');
+
+const customStyles = {
+  control: () => ({
+    backgroundColor: '#6d7377',
+    borderRadius: '6px',
+    color: 'white',
+    display: 'flex'
+  }),
+  placeholder: () => ({
+    color: 'white'
+  }),
+  singleValue: () => ({
+    color: 'white'
+  })
+};
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -54,31 +84,36 @@ class StoreLocator extends React.Component {
       currentList: [],
       currentState: null,
       selectedStore: '',
-      // selectCity: false,
       nearMe: [],
       isLoading: false,
-      currentLocation: {}
+      currentLocation: {},
+      currentCity: null
     };
     this.setCurrentList = this.setCurrentList.bind(this);
     this.GEORADIUS_OFFLINE = 120;
     this.GEORADIUS_ONLINE = 100000;
   }
   componentWillMount() {
-    const { data } = this.props;
+    const { data, redirectCity } = this.props;
     if (data && data.items && data.items.text) {
       const mapData = data.items.text;
       this.setState({
         currentList: mapData
       });
     }
+    if (redirectCity) {
+      this.handleSelectCity(redirectCity);
+    }
   }
   setError = msg => {
     const { dispatch } = this.context.store;
-    dispatch(notifSend({
-        type: 'error',
-        msg,
-        dismissAfter: 4000
-      }));
+    this.setState({ isLoading: false }, () => {
+      dispatch(notifSend({
+          type: 'error',
+          msg,
+          dismissAfter: 4000
+        }));
+    });
   };
   getURL = (origin, dest) => {
     const baseUrl = 'http://maps.google.com/?';
@@ -193,48 +228,56 @@ class StoreLocator extends React.Component {
       });
     }
   };
-  handleSelectState = (state, mapData) => {
-    const currentList = mapData.filter(item => item.state === state);
-    let lat = 0;
-    currentList.map(item => {
-      lat += item.position.lat;
-      return 0;
-    });
-    lat /= currentList.length;
-    let lng = 0;
-    currentList.map(item => {
-      lng += item.position.lng;
-      return 0;
-    });
-    lng /= currentList.length;
-    this.setState({
-      currentList,
-      position: { lat, lng },
-      currentState: state,
-      zoomlevel: 8,
-      open: false
-    });
-  };
-  handleSelectCity = (city, list) => {
-    const currentList = list.filter(item => item.city.toUpperCase() === city.toUpperCase());
-    let lat = 0;
-    currentList.map(item => {
-      lat += item.position.lat;
-      return 0;
-    });
-    lat /= currentList.length;
-    let lng = 0;
-    currentList.map(item => {
-      lng += item.position.lng;
-      return 0;
-    });
-    lng /= currentList.length;
-    this.setState({
-      currentList,
-      position: { lat, lng },
-      zoomlevel: 11,
-      open: false
-    });
+  // handleSelectState = (state, mapData) => {
+  //   const currentList = mapData.filter(item => item.state === state);
+  //   let lat = 0;
+  //   currentList.map(item => {
+  //     lat += item.position.lat;
+  //     return 0;
+  //   });
+  //   lat /= currentList.length;
+  //   let lng = 0;
+  //   currentList.map(item => {
+  //     lng += item.position.lng;
+  //     return 0;
+  //   });
+  //   lng /= currentList.length;
+  //   this.setState({
+  //     currentList,
+  //     position: { lat, lng },
+  //     currentState: state,
+  //     zoomlevel: 8,
+  //     open: false
+  //   });
+  // };
+  handleSelectCity = city => {
+    if (city) {
+      const {
+        data: {
+          items: { text: list = [] }
+        }
+      } = this.props;
+      const currentList = list.filter(item => item.city.toUpperCase() === city.toUpperCase());
+      let lat = 0;
+      currentList.map(item => {
+        lat += item.position.lat;
+        return 0;
+      });
+      lat /= currentList.length;
+      let lng = 0;
+      currentList.map(item => {
+        lng += item.position.lng;
+        return 0;
+      });
+      lng /= currentList.length;
+      this.setState({
+        currentList,
+        position: { lat, lng },
+        zoomlevel: 11,
+        open: false,
+        currentCity: { value: city, label: city }
+      });
+    }
   };
   locationSuccess = position => {
     const lat = position.coords.latitude || '';
@@ -249,8 +292,7 @@ class StoreLocator extends React.Component {
       this.setState(
         {
           currentLocation: { lat, lng },
-          nearMe: nearByDestinations,
-          isLoading: true
+          nearMe: nearByDestinations
         },
         () => {
           matrix.getDistanceMatrix(
@@ -273,6 +315,8 @@ class StoreLocator extends React.Component {
           );
         }
       );
+    } else {
+      this.setError('Error in getting near by stores, please try again !');
     }
   };
   locationError = error => {
@@ -294,13 +338,17 @@ class StoreLocator extends React.Component {
   detectUserLocation = () => {
     // const { setCurrentLocation: setLocation } = this.props;
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.locationSuccess, this.locationError);
+      this.setState({ isLoading: true }, () => {
+        navigator.geolocation.getCurrentPosition(this.locationSuccess, this.locationError);
+      });
     } else {
       this.setError('Unable to detect the current location !');
     }
   };
   render() {
-    const { data, locationLoaded, gaVisitEvent: recordStoreDirection } = this.props;
+    const {
+ data, locationLoaded, redirectCity, gaVisitEvent: recordStoreDirection
+} = this.props;
     const mapData = data.items.text;
     const {
       position,
@@ -309,168 +357,208 @@ class StoreLocator extends React.Component {
       currentList,
       currentState,
       selectedStore,
-      // selectCity,
       isLoading,
-      currentLocation
+      currentLocation,
+      currentCity
     } = this.state;
+    const selectedCity = currentCity;
     let stateList = mapData.map(item => item.state);
     let cityList = mapData.filter(item => item.state === currentState).map(item => item.city);
-    const cities = Array.from(new Set(mapData.filter(item => item.city).map(item => item.city)));
+    const cities = Array.from(new Set(mapData.filter(item => item.city).map(item => item.city))).map(item => ({
+      value: item.toUpperCase(),
+      label: item.toUpperCase()
+    }));
     cityList = cityList.filter((item, pos) => cityList.indexOf(item) === pos);
     stateList = stateList.filter((item, pos) => stateList.indexOf(item) === pos);
+    //
     return (
-      <Div type="block">
-        <Section mb="0" p="1.375rem 0.5rem" bg="bg" boxShadow="0 2px 8px 0 rgba(0, 0, 0, 0.17)">
-          <Container type="container" pr="0.5rem" pl="0.5rem">
-            <Row display="block" mr="0" ml="0" mb="0">
-              <Heading fontSize="1.75rem" color="text" mt="0" mb="0" fontFamily="regular">
-                Store Locator
-              </Heading>
-            </Row>
-          </Container>
-        </Section>
-        <Section pt="0" p="0" mb="0">
-          <Row display="block" mr="0" ml="0" mb="0">
-            <Div className={styles.googleMapWrapper}>
-              <Map
-                googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-                loadingElement={<div style={{ height: '100%' }} />}
-                containerElement={<div style={{ height: '400px' }} />}
-                mapElement={<div style={{ height: '100%' }} />}
-                position={position}
-                zoom={zoomlevel}
-                mapData={mapData}
-                open={open}
-                handleClick={this.handleClick}
-                selectedStore={selectedStore}
-                currentLocation={currentLocation}
-                recordStoreDirection={recordStoreDirection}
-              />
-              <Div className={styles.filterWrapper}>
-                <select onChange={e => this.handleSelectState(e.target.value, mapData)}>
-                  <option value={null} key="state">
-                    Select City
-                  </option>
-                  {cities.map(item => (
-                    <option value={item} key={item}>
-                      {item}
-                    </option>
-                  ))}
-                </select>
-                <button
-                  style={{ marginBottom: '4px' }}
-                  onClick={e => {
-                    e.preventDefault();
-                    this.setState({ isLoading: true }, () => {
-                      this.detectUserLocation();
-                    });
-                  }}
-                  className={styles.selectLocation}
-                >
-                  {isLoading && <Img className="spin" src={LoaderIcon} display="inline" width="20px" va="sub" />}
-                  Store Near Me
-                </button>
-                {/* selectCity && currentState && (
-                  <select onChange={e => this.handleSelectCity(e.target.value, mapData)}>
-                    <option value={null} key="state">
-                      SELECT CITY
-                    </option>
-                    {cityList.map(item => (
-                      <option value={item} key={item}>
-                        {item}
-                      </option>
-                    ))}
-                  </select>
-                ) */}
-                <div className={styles.cistList}>
-                  <ul>
-                    {locationLoaded && currentList.length ? (
-                      <div
-                        style={{
-                          margin: '0 0 5px 0',
-                          padding: '4px',
-                          border: '2px solid f98d2936',
-                          borderRadius: '4px',
-                          backgroundColor: '#ffa500'
-                        }}
-                      >
-                        <h4
-                          style={{
-                            fontSize: '1rem',
-                            margin: 0,
-                            padding: 0,
-                            color: '#ffffff'
-                          }}
-                        >
-                          {' '}
-                          Nearest Hometown Stores
-                        </h4>
-                      </div>
-                    ) : (
-                      ''
-                    )}
-                    {currentList && !currentList.length ? (
-                      <div
-                        style={{
-                          margin: '0 0 5px 0',
-                          padding: '4px',
-                          border: '2px solid f98d2936',
-                          borderRadius: '4px',
-                          backgroundColor: '#000000cc'
-                        }}
-                      >
-                        <h4
-                          style={{
-                            fontSize: '1rem',
-                            margin: 0,
-                            padding: 0,
-                            color: '#ffffff'
-                          }}
-                        >
-                          {' '}
-                          We will be in your town very soon..
-                        </h4>
-                      </div>
-                    ) : (
-                      ''
-                    )}
-                    {currentList.map((item, index) => (
-                      <li key={String(index)}>
-                        <button onClick={() => this.handleClick(item.store, mapData, item.city)}>
-                          <Label fontSize="1rem" mt="0" ml="0">
-                            {item.store.toUpperCase()}
-                          </Label>
-                          <address style={{ color: 'black', fontStyle: 'normal' }}>{item.address}</address>
-                          <a
-                            onClick={e => {
-                              e.stopPropagation();
-                              this.directionHandler(item.store, item.city);
-                            }}
-                            title="Hometown Store Locator Direction"
-                            href={this.getURL(currentLocation, item.position)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            {item.disText && item.duration ? `${item.disText || ''} | ${item.duration || ''} ` : ''}
-                            <button className={styles.directionBtn}>Direction</button>
-                          </a>
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </Div>
-            </Div>
+      <Section>
+        <Container variant="container-fluid">
+          <Row justifyContent="center">
+            <Heading fontSize={42} lineHeight={1.53}>
+              Locate a store
+            </Heading>
           </Row>
-        </Section>
-      </Div>
+          <Box className={styles.googleMapWrapper}>
+            <Map
+              googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+              loadingElement={<div style={{ height: '100%' }} />}
+              containerElement={<div style={{ height: '400px' }} />}
+              mapElement={<div style={{ height: '100%' }} />}
+              position={position}
+              zoom={zoomlevel}
+              mapData={mapData}
+              open={open}
+              handleClick={this.handleClick}
+              selectedStore={selectedStore}
+              currentLocation={currentLocation}
+              recordStoreDirection={recordStoreDirection}
+            />
+            <Box
+              pt={30}
+              width={450}
+              sx={{
+                position: 'absolute',
+                left: 30,
+                top: 0
+              }}
+            >
+              <Row
+                mb={10}
+                mx={-10}
+                sx={{
+                  position: 'sticky',
+                  top: 0,
+                  zIndex: 1
+                }}
+              >
+                <Col width={1 / 2} px={10}>
+                  <Select
+                    placeholder="SELECT CITY"
+                    defaultValue={redirectCity || null}
+                    value={selectedCity}
+                    onChange={({ value }) => {
+                      this.handleSelectCity(value);
+                    }}
+                    options={cities}
+                    styles={customStyles}
+                  />
+                </Col>
+                <Col width={1 / 2} px={10}>
+                  <Button
+                    sx={{ cursor: 'pointer' }}
+                    onClick={e => {
+                      e.preventDefault();
+                      this.detectUserLocation();
+                    }}
+                  >
+                    {isLoading && <Image className="spin" src={LoaderIcon} display="inline" width="20px" va="sub" />}
+                    Locate Near Me
+                  </Button>
+                </Col>
+              </Row>
+              <Box height={522} overflow="auto" bg="bgSecondary" px={20}>
+                <Ul mt={0}>
+                  {locationLoaded && currentList.length ? (
+                    <Box
+                      style={{
+                        margin: '0 0 5px 0',
+                        padding: '4px',
+                        border: '2px solid f98d2936',
+                        borderRadius: '4px',
+                        backgroundColor: '#ffa500'
+                      }}
+                    >
+                      <h4
+                        style={{
+                          fontSize: '1rem',
+                          margin: 0,
+                          padding: 0,
+                          color: '#ffffff'
+                        }}
+                      >
+                        {' '}
+                        Nearest Hometown Stores
+                      </h4>
+                    </Box>
+                  ) : (
+                    ''
+                  )}
+                  {currentList && !currentList.length ? (
+                    <Box py={20}>
+                      <h4
+                        style={{
+                          fontSize: '1rem',
+                          margin: 0,
+                          padding: 0,
+                          color: '#ffffff'
+                        }}
+                      >
+                        {' '}
+                        {'We will be in your town very soon..'}
+                      </h4>
+                    </Box>
+                  ) : (
+                    ''
+                  )}
+                  {currentList.map((item, index) => (
+                    <Li
+                      key={String(index)}
+                      py={20}
+                      sx={{
+                        display: 'flex',
+                        borderBottom: '1px solid #FFF',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      <Box width="calc(100% - 134px)" onClick={() => this.handleClick(item.store, mapData, item.city)}>
+                        <Heading
+                          variant="heading.regular"
+                          fontSize={16}
+                          color="#FFF"
+                          mb={8}
+                          sx={{
+                            display: 'flex',
+                            alignItems: 'center'
+                          }}
+                        >
+                          <LocationIcon color="#FFF" sx={{ flexShrink: 0 }} /> {item.store.toUpperCase()}
+                        </Heading>
+                        <Text color="#FFF" fontSize={14} pl={5} lineHeight={1.4}>
+                          {item.address}
+                        </Text>
+                        <Flex sx={{ alignItems: 'center' }} mt={8} pl={5}>
+                          <Text color="white" fontSize={14} mr={10}>
+                            {item.disText && item.duration ? `${item.disText || ''} | ${item.duration || ''} ` : ''}
+                          </Text>
+                          {item.disText && (
+                            <LinkRedirect
+                              title="Hometown Store Locator Direction"
+                              href={this.getURL(currentLocation, item.position)}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              <Button
+                                variant="link"
+                                color="white"
+                                sx={{
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  cursor: 'pointer'
+                                }}
+                                onClick={e => {
+                                  e.stopPropagation();
+                                  this.directionHandler(item.store, item.city);
+                                }}
+                              >
+                                <Image src={DirectionIcon} mr={10} /> Get Direction
+                              </Button>
+                            </LinkRedirect>
+                          )}
+                        </Flex>
+                      </Box>
+                      <Box width={110} pl={20}>
+                        <Image src={item.image_url || 'https://via.placeholder.com/110x110'} />
+                      </Box>
+                    </Li>
+                  ))}
+                </Ul>
+              </Box>
+            </Box>
+          </Box>
+        </Container>
+      </Section>
     );
   }
 }
+StoreLocator.defaultProps = {
+  redirectCity: ''
+};
 StoreLocator.propTypes = {
   data: PropTypes.object.isRequired,
   gaVisitEvent: PropTypes.func.isRequired,
-  locationLoaded: PropTypes.bool.isRequired
+  locationLoaded: PropTypes.bool.isRequired,
+  redirectCity: PropTypes.string
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StoreLocator);

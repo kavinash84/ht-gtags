@@ -2,17 +2,25 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Row from 'hometown-components-dev/lib/Row';
-import Heading from 'hometown-components-dev/lib/Heading';
-import Img from 'hometown-components-dev/lib/Img';
-import Div from 'hometown-components-dev/lib/Div';
-import Text from 'hometown-components-dev/lib/Text';
-import FormInput from 'hometown-components-dev/lib/Forms/FormInput';
 import ResponsiveModal from 'components/Modal';
-import { validateMobile } from 'utils/validation';
-import { allowNChar, allowTypeOf } from 'utils/helper';
 import GoogleLoginBtn from 'react-google-login';
+
+/* ====== Validations ====== */
+import { validateMobile } from 'utils/validation';
+
+/* ====== Helpers ====== */
+import { allowNChar, allowTypeOf } from 'utils/helper';
+
+/* ====== Modules ====== */
 import { googleLogin, clearLoginState } from 'redux/modules/login';
+
+/* ====== Components ====== */
+import FormInputHtV1 from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
 
 const LoaderIcon = require('../../../static/refresh-black.svg');
 
@@ -21,9 +29,8 @@ const mapStateToProps = ({ app }) => ({
 });
 
 const onSuccess = (dispatcher, session, phone) => result => {
-  dispatcher(result, session, phone);
+  dispatcher(result.tokenId, session, phone);
 };
-
 const onError = error => e => {
   console.log(error, e);
 };
@@ -73,78 +80,67 @@ class GoogleLogin extends Component {
   };
   render() {
     const {
- loginViaLogin, session, askContact, loginType, loading
+ loginViaLogin, session, askContact, loginType, loggingIn
 } = this.props;
     const { phone, phoneError, phoneErrorMessage } = this.state;
     const open = askContact && loginType && loginType === 'google';
+
     return (
-      <div>
+      <Box>
         <GoogleLoginBtn
           className="socialBtn"
           clientId="663311547699-jersj1hfflbl8gfukgsuvug8u1gc88nm.apps.googleusercontent.com"
           onSuccess={onSuccess(loginViaLogin, session)}
           onFailure={onError}
         >
-          <Img display="inline-block" src={GoogleIcon} alt="Google" va="sub" width="18px" mr="10px" /> GOOGLE
+          <Image display="inline-block" src={GoogleIcon} alt="Google" va="sub" width="18px" mr="10px" />
+          GOOGLE
         </GoogleLoginBtn>
         <ResponsiveModal classNames={{ modal: 'updateProfileModal' }} onCloseModal={this.handleModal} open={open}>
-          <Row display="block" mr="0" ml="0" mb="10px">
-            <Div col="12" ta="center">
-              <Heading
-                color="color676767"
-                mt="0"
-                mb="0"
-                fontWeight="400"
-                fontSize="26px"
-                ta="center"
-                fontFamily="light"
-              >
-                Update Profile
-              </Heading>
-              <Text color="color676767" ta="center">
-                Mobile number is required to login
-              </Text>
-            </Div>
+          <Row>
+            <Box variant="col-12">
+              <Heading>Update Profile</Heading>
+              <Text>Mobile number is required to login</Text>
+            </Box>
           </Row>
-          <Div ta="center">
-            <Text ta="center" fontSize="1.25rem" mb="0.625rem" mt="0" color="rgba(51, 51, 51, 0.85)">
-              <form
-                onSubmit={this.onSubmitForm}
-                id="custom_form"
-                name="custom_form"
-                encType="multipart/form-data"
-                className="bulk-order-form"
-              >
-                <FormInput
-                  label=""
-                  type="text"
-                  placeholder=""
-                  onChange={this.onChangePhone}
-                  value={phone}
-                  feedBackError={phoneError}
-                  feedBackMessage={phoneErrorMessage}
-                />
-              </form>
-              <GoogleLoginBtn
-                disabled={this.isValid()}
-                className="google-login-btn"
-                clientId="663311547699-jersj1hfflbl8gfukgsuvug8u1gc88nm.apps.googleusercontent.com"
-                onSuccess={onSuccess(loginViaLogin, session, phone)}
-                onFailure={onError}
-              >
-                {loading ? (
-                  <span>
-                    Please Wait
-                    <Img className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />
-                  </span>
-                ) : (
-                  'Update Contact Number'
-                )}
-              </GoogleLoginBtn>
-            </Text>
-          </Div>
+          <Text>
+            <form
+              onSubmit={this.onSubmitForm}
+              id="custom_form"
+              name="custom_form"
+              encType="multipart/form-data"
+              className="bulk-order-form"
+            >
+              <FormInputHtV1
+                label=""
+                type="text"
+                placeholder=""
+                onChange={this.onChangePhone}
+                value={phone}
+                feedBackError={phoneError}
+                feedBackMessage={phoneErrorMessage}
+              />
+            </form>
+            <button
+              disabled={this.isValid()}
+              className="google-login-btn"
+              onClick={e => {
+                e.preventDefault();
+                loginViaLogin({}, session, phone);
+              }}
+            >
+              {loggingIn ? (
+                <span>
+                  Please Wait
+                  <Image className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />
+                </span>
+              ) : (
+                'Update Contact Number'
+              )}
+            </button>
+          </Text>
         </ResponsiveModal>
-      </div>
+      </Box>
     );
   }
 }
@@ -155,7 +151,7 @@ GoogleLogin.propTypes = {
   session: PropTypes.string.isRequired,
   askContact: PropTypes.bool.isRequired,
   loginType: PropTypes.string.isRequired,
-  loading: PropTypes.bool.isRequired
+  loggingIn: PropTypes.bool.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GoogleLogin);

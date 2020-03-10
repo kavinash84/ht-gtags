@@ -26,9 +26,9 @@ import Row from 'hometown-components-dev/lib/RowHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 
 /* ====== Page Components ====== */
-import GoogleLoginBtn from 'newComponents/LoginForms/GoogleLogin';
-import LoginForm from 'newComponents/LoginForms';
-import LoginViaOtp from 'newComponents/LoginForms/LoginViaOtp';
+import GoogleLoginBtn from 'components/LoginForms/GoogleLogin';
+import LoginForm from 'components/LoginForms';
+import LoginViaOtp from 'components/LoginForms/LoginViaOtp';
 import SignUpForm from 'hometown-components-dev/lib/FormsHtV1/SignUpFormHtV1';
 
 const OTPIcon = require('../../../static/otp.svg');
@@ -55,7 +55,7 @@ export default class SignupFormContainer extends Component {
     this.state = {
       name: '',
       nameError: false,
-      nameErrorMessage: 'Special Characters Not Allowed !',
+      nameErrorMessage: 'Numbers and special characters are not allowed !',
       email: '',
       emailError: false,
       emailErrorMessage: 'Enter Valid Email Id',

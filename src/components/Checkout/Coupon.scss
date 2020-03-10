@@ -4,7 +4,7 @@
 .applyCoupon {
   position: relative;
   .applyCopupnField {
-    border: 1px solid #ededed;
+    border: solid 0.5px #434343;;
     width: 100%;
     color: rgba(0,0,0,0.5);
     font-size: 14px;
@@ -12,12 +12,16 @@
     padding-top: 5px;
     outline: none !important;
     padding: 10px;
+    background: transparent;
   }
   .applyCouponBtn {
     position: absolute !important;
     right: 0;
     top: 0;
-    padding: 9px 20px 8px !important;
+    padding: 10px 21px 10px !important;
+    height: 100%;
+    color: #fff;
+    font-weight: 500;
   }
 }
 .offerList {
@@ -146,7 +150,7 @@
   }
 }
 .applyCouponWrapper {
-  margin-bottom: 0.625rem;
+  margin-bottom: 0.425rem;
   position: relative;
 }
 .applyClose {

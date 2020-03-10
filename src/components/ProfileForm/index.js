@@ -1,19 +1,44 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import ProfileFormContainer from 'hometown-components-dev/lib/Forms/ProfileForm';
-import Section from 'hometown-components-dev/lib/Section';
-import Row from 'hometown-components-dev/lib/Row';
-import Heading from 'hometown-components-dev/lib/Heading';
-import Div from 'hometown-components-dev/lib/Div';
 import { validateEmail, isBlank } from 'js-utility-functions';
-import { validateMobile } from 'utils/validation';
+/**
+ * Components
+ */
+import ProfileFormContainer from 'hometown-components-dev/lib/FormsHtV1/ProfileFormHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Label from 'hometown-components-dev/lib/LabelHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+
+/**
+ * modules / utils
+ */
+import { validateMobile, checkSpecialChar } from 'utils/validation';
 import { updateUserProfile } from 'redux/modules/profile';
 import {
   // allowNChar,
   // allowTypeOf,
   isGSTNumber
 } from 'utils/helper';
+
+const ProfileViewRow = ({ title, value }) => (
+  <Row mb={20}>
+    <Col variant="col-3">
+      <Label fontFamily="light">{title}</Label>
+    </Col>
+    <Col variant="col-7">
+      <Label>{value}</Label>
+    </Col>
+  </Row>
+);
+
+ProfileViewRow.propTypes = {
+  title: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired
+};
 
 @connect(({ profile }) => ({
   profile: profile.data,
@@ -95,11 +120,13 @@ export default class ProfileForm extends Component {
     const {
       target: { value }
     } = e;
-    const checkError = isBlank(value);
+    const checkError = isBlank(value) || checkSpecialChar(value);
     this.setState({
       fullName: value,
       fullNameError: checkError,
-      fullNameErrorMessage: checkError ? "Name can't be blank" : ''
+      fullNameErrorMessage: checkSpecialChar(value)
+        ? 'Numbers and special characters are not allowed !'
+        : 'Name Cannot be Left Empty !'
     });
   };
   onSubmitProfile = e => {
@@ -109,14 +136,16 @@ export default class ProfileForm extends Component {
 } = this.state;
     const checkEmail = validateEmail(email, 'Invalid Email');
     const phoneError = !validateMobile(phone);
-    const checkFullName = isBlank(fullName);
+    const checkFullName = isBlank(fullName) || checkSpecialChar(fullName);
     const isGSTError = !isGSTNumber(gst);
     if (checkEmail.error || checkFullName || phoneError) {
       return this.setState({
         emailError: checkEmail.error,
         emailErrorMessage: checkEmail.errorMessage,
         fullNameError: checkFullName,
-        fullNameErrorMessage: checkFullName ? "Name can't be blank" : '',
+        fullNameErrorMessage: checkSpecialChar(fullName)
+          ? 'Numbers and special characters are not allowed !'
+          : 'Name Cannot be Left Empty !',
         phoneError,
         gstError: isGSTError,
         gstErrorMessage: 'Please enter a valid GST number !'
@@ -127,7 +156,6 @@ export default class ProfileForm extends Component {
   };
 
   render() {
-    const styles = require('./index.scss');
     const {
       email,
       phone,
@@ -144,43 +172,56 @@ export default class ProfileForm extends Component {
     } = this.state;
     const { response } = this.props;
     return (
-      <div className={styles.formContainer}>
-        <Section mb="0.3125rem" pr="0.5rem" pl="0.5rem">
-          <Row display="block" mr="0" ml="0">
-            <Heading fontSize="1.25rem" color="textDark" mb="0px" mt="0px" fontFamily="light">
-              Profile Information
-            </Heading>
-          </Row>
-        </Section>
-        <div className={styles.formWrapper}>
-          <Section p="0.5rem" mb="0">
-            <Row display="block" mr="0" ml="0">
-              <Div>
-                <ProfileFormContainer
-                  email={email}
-                  onChangeEmail={() => {}}
-                  emailFeedBackError={emailError}
-                  emailFeedBackMessage={emailErrorMessage}
-                  gst={gst}
-                  onChangeGST={this.onChangeGST}
-                  gstFeedBackError={gstError}
-                  gstFeedBackMessage={gstErrorMessage}
-                  phone={phone}
-                  onChangePhone={() => {}}
-                  phoneFeedBackError={phoneError}
-                  phoneFeedBackMessage={phoneErrorMessage}
-                  fullName={fullName}
-                  onChangeFullName={this.onChangeFullName}
-                  fullNameFeedBackError={fullNameError}
-                  fullNameFeedBackMessage={fullNameErrorMessage}
-                  onSubmitProfile={this.onSubmitProfile}
-                  response={response}
-                />
-              </Div>
-            </Row>
-          </Section>
-        </div>
-      </div>
+      <Box>
+        <Box>
+          <Heading
+            fontSize={20}
+            color="textDark"
+            pb={16}
+            mb={30}
+            sx={{
+              borderBottom: 'divider'
+            }}
+          >
+            Profile Details
+          </Heading>
+          <Box>
+            <ProfileViewRow title="Full Name" value={fullName} />
+            <ProfileViewRow title="E-mail-ID" value={email} />
+            <ProfileViewRow title="Phone" value={phone} />
+            <ProfileViewRow title="Gender" value="Male" />
+            <ProfileViewRow title="Date of Birth" value="01/01/1993" />
+            <ProfileViewRow title="Location" value="Mumbai" />
+          </Box>
+        </Box>
+        <Box pt={50} pb={20}>
+          <Button variant="outline.primary" width={180}>
+            Edit
+          </Button>
+        </Box>
+        <Box>
+          <ProfileFormContainer
+            email={email}
+            onChangeEmail={() => {}}
+            emailFeedBackError={emailError}
+            emailFeedBackMessage={emailErrorMessage}
+            gst={gst}
+            onChangeGST={this.onChangeGST}
+            gstFeedBackError={gstError}
+            gstFeedBackMessage={gstErrorMessage}
+            phone={phone}
+            onChangePhone={() => {}}
+            phoneFeedBackError={phoneError}
+            phoneFeedBackMessage={phoneErrorMessage}
+            fullName={fullName}
+            onChangeFullName={this.onChangeFullName}
+            fullNameFeedBackError={fullNameError}
+            fullNameFeedBackMessage={fullNameErrorMessage}
+            onSubmitProfile={this.onSubmitProfile}
+            response={response}
+          />
+        </Box>
+      </Box>
     );
   }
 }

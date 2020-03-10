@@ -1,15 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Div from 'hometown-components-dev/lib/Div';
-import Row from 'hometown-components-dev/lib/Row';
-import Text from 'hometown-components-dev/lib/Text';
-import Span from 'hometown-components-dev/lib/Span';
-import Button from 'hometown-components-dev/lib/Buttons';
-import Theme from 'hometown-components-dev/lib/Theme';
+
+/**
+ * formatters
+ */
 import { formatAmount } from 'utils/formatters';
-import Coupon from './Coupon';
+
+/**
+ * Components
+ */
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
+import Flex from 'hometown-components-dev/lib/FlexHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
+import ProductSummaryList from './ProductSummaryList';
+
+const editIcon = require('../../../static/edit-round.svg');
 
 const styles = require('./OrderSummary.scss');
+
+const editItems = history => history.push('/checkout/cart');
 
 const OrderSummary = ({
   itemsTotal,
@@ -17,100 +30,95 @@ const OrderSummary = ({
   setDiscount,
   shipping,
   totalCart,
-  onClick,
-  loadingnextstep,
-  hidebutton,
   itemsCount,
-  isSubmitted,
-  disabled,
-  outOfStockList,
   discount,
-  btnText,
-  hidecoupon
+  results,
+  history
 }) => (
-  <Row ml="0" mr="0">
-    <Div col="12" mb="1.25rem">
-      {!hidecoupon && <Coupon />}
-    </Div>
-    <Div col="12" className={styles.orderSummary}>
-      <Text color="#6e6e6e" mt="0">
-        Total Price ({itemsCount} item
-        {itemsCount === 1 ? '' : 's'})
-        <Span float="right" color={Theme.colors.text}>
-          Rs. {itemsTotal ? formatAmount(itemsTotal) : null}
-        </Span>
-      </Text>
-      <Text color="#6e6e6e">
-        Savings
-        <Span float="right" color={Theme.colors.text}>
-          Rs. {savings ? formatAmount(savings) : 0}
-        </Span>
-      </Text>
-      <Text color="#6e6e6e">
-        Shipping
-        <Span float="right" color={Theme.colors.text}>
-          {shipping === 0 ? 'Free' : `Rs. ${shipping}`}
-        </Span>
-      </Text>
+  <Row>
+    <Col width={1}>
+      <Box
+        pb={10}
+        sx={{
+          borderBottom: 'divider'
+        }}
+      >
+        <Heading variant="heading.regular" color="#1c1c1c" display="flex" justifyContent="space-between">
+          Order Summary
+          <Image
+            sx={{ cursor: 'pointer' }}
+            src={editIcon}
+            onClick={e => {
+              e.preventDefault();
+              editItems(history);
+            }}
+            alt="edit"
+          />
+        </Heading>
+        <Text>{`Total Items: ${itemsCount}`}</Text>
+      </Box>
+    </Col>
+    {/* Products */}
+    <Box
+      mb={20}
+      mt={20}
+      sx={{
+        borderBottom: 'divider'
+      }}
+    >
+      {results.map(item => (
+        <ProductSummaryList sku={item.configurable_sku} qty={item.qty} productItem={item.product_info || {}} />
+      ))}
+    </Box>
+    <Box variant="col-12" pb={20}>
+      <Flex mb={20} justifyContent="space-between">
+        <Text>Subtotal</Text>
+        <Text>Rs. {itemsTotal ? formatAmount(itemsTotal) : null}</Text>
+      </Flex>
+      <Flex mb={20} justifyContent="space-between">
+        <Text>Savings</Text>
+        <Text>Rs. {savings ? formatAmount(savings) : 0}</Text>
+      </Flex>
+      <Flex mb={20} justifyContent="space-between">
+        <Text>Shipping</Text>
+        <Text>{shipping === 0 ? 'Free' : `Rs. ${shipping}`}</Text>
+      </Flex>
       {discount > 0 && (
-        <Text color="#6e6e6e">
-          Discount
-          <Span float="right" color={Theme.colors.text}>
-            Rs. {` ${formatAmount(Number(discount))}`}
-          </Span>
-        </Text>
+        <Flex mb={20} justifyContent="space-between">
+          <Text>Discount</Text>
+          <Text>Rs. {` ${formatAmount(Number(discount))}`}</Text>
+        </Flex>
       )}
       {setDiscount > 0 && (
-        <Text color="#6e6e6e">
-          Combo Discount
-          <Span float="right" color={Theme.colors.text}>
-            Rs. {` ${formatAmount(Number(setDiscount))}`}
-          </Span>
-        </Text>
+        <Flex mb={20} justifyContent="space-between">
+          <Text>Combo Discount</Text>
+          <Text>Rs. {` ${formatAmount(Number(setDiscount))}`}</Text>
+        </Flex>
       )}
-      <Text color="#6e6e6e" mb="0" fontSize="2rem" className={styles.totalWrapper} fontFamily="light">
-        Total
-        <Span float="right" color={Theme.colors.text} mt="10px" fontSize="1.25rem">
-          Rs. {totalCart ? formatAmount(totalCart) : null}
-        </Span>
-      </Text>
+      <Row m="0" py="1em" className={styles.totalWrapper}>
+        <Box variant="col-6" p="0">
+          <Text color="menuItem" mb="0" fontSize="19px" fontWeight="600" fontFamily="light">
+            Total Price
+          </Text>
+        </Box>
+        <Box variant="col-6" p="0" textAlign="right">
+          <Text color="menuItem" fontSize="19px" fontWeight="600">
+            Rs. {totalCart ? formatAmount(totalCart) : null}
+          </Text>
+        </Box>
+      </Row>
       <Text color="rgba(0,0,0,0.4)" mt="-5px" mb="0.3125rem">
         (inclusive of all taxes)
       </Text>
-    </Div>
-    <Div col="12" mt="0">
-      {!hidebutton && (
-        <Button
-          size="block"
-          btnType="primary"
-          height="42px"
-          mt="0"
-          fontFamily="Light"
-          fontSize="1.125rem"
-          ls="1px"
-          onClick={onClick}
-          hide={hidebutton}
-          borderRadius="0"
-          disabled={loadingnextstep || isSubmitted || (outOfStockList && outOfStockList.length > 0) || disabled}
-        >
-          {loadingnextstep || isSubmitted ? 'Please wait...' : btnText}
-        </Button>
-      )}
-    </Div>
+    </Box>
   </Row>
 );
 
 OrderSummary.defaultProps = {
-  loadingnextstep: false,
-  hidebutton: false,
   itemsCount: 0,
-  isSubmitted: false,
-  outOfStockList: [],
-  disabled: false,
   discount: 0,
-  btnText: 'Place Order',
-  hidecoupon: false,
-  setDiscount: 0
+  setDiscount: 0,
+  results: []
 };
 
 OrderSummary.propTypes = {
@@ -119,16 +127,10 @@ OrderSummary.propTypes = {
   setDiscount: PropTypes.number,
   shipping: PropTypes.number.isRequired,
   totalCart: PropTypes.number.isRequired,
-  onClick: PropTypes.func.isRequired,
-  loadingnextstep: PropTypes.bool,
-  hidebutton: PropTypes.bool,
   itemsCount: PropTypes.number,
-  isSubmitted: PropTypes.bool,
-  outOfStockList: PropTypes.array,
-  disabled: PropTypes.bool,
   discount: PropTypes.number,
-  btnText: PropTypes.string,
-  hidecoupon: PropTypes.bool
+  results: PropTypes.array,
+  history: PropTypes.object.isRequired
 };
 
 export default OrderSummary;

@@ -139,7 +139,7 @@ export default function reducer(state = initialState, action = {}) {
           fullName: action.name,
           fullNameFeedBackError: isEmpty(action.name) || checkSpecialChar(action.name),
           fullNameFeedBackMessage: checkSpecialChar(action.name)
-            ? 'Special Characters Not Allowed !'
+            ? 'Numbers and special characters are not allowed !'
             : 'Name Cannot be Left Empty !'
         }
       };
@@ -191,7 +191,7 @@ export default function reducer(state = initialState, action = {}) {
           ...state[action.formType],
           address2: action.address2,
           addressFeedBackError2: validateAddress(action.address2, 'address2').error,
-          addressFeedBackMessage2: validateAddress(action.address1, 'address2').errorMessage
+          addressFeedBackMessage2: validateAddress(action.address2, 'address2').errorMessage
         }
       };
     case SET_ADDRESS2_ADDRESS3:
@@ -201,7 +201,7 @@ export default function reducer(state = initialState, action = {}) {
           ...state[action.formType],
           address2: action.address2,
           addressFeedBackError2: validateAddress(action.address2, 'address2').error,
-          addressFeedBackMessage2: validateAddress(action.address1, 'address2').errorMessage
+          addressFeedBackMessage2: validateAddress(action.address2, 'address2').errorMessage
           // address3: action.address3,
           // addressFeedBackError3: validateAddress(action.address3, 'address3').error,
           // addressFeedBackMessage3: validateAddress(action.address3, 'address3').errorMessage

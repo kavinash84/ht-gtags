@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Div from 'hometown-components-dev/lib/Div';
-import Img from 'hometown-components-dev/lib/Img';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
 
 const errorIcon = require('../../../static/warning.svg');
 
 const LocalInlineNotification = ({ msg }) => (
-  <Div mt="0.3125rem" className="error">
-    <Img width="15px" float="left" mr="0.625rem" src={errorIcon} alt="" />
+  <BoxHtV1 mt="0.3125rem" className="error">
+    <ImageHtV1 width="15px" float="left" mr="0.625rem" src={errorIcon} alt="" />
     {msg}
-  </Div>
+  </BoxHtV1>
 );
 export default LocalInlineNotification;
 

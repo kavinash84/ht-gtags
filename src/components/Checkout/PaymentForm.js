@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import InputFieldHtV1 from 'hometown-components-dev/lib/InputFieldHtV1';
 
 const mapStateToProps = ({ paymentoptions }) => ({
   data: paymentoptions.formData,
@@ -56,7 +57,7 @@ class PaymentForm extends Component {
           encType="application/x-www-form-urlencoded"
         >
           {formFields.map(field => (
-            <input key={field[0]} type="hidden" name={field[0]} value={field[1]} />
+            <InputFieldHtV1 key={field[0]} type="hidden" name={field[0]} value={field[1]} />
           ))}
         </form>
       );

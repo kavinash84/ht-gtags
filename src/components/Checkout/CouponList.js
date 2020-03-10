@@ -1,11 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from 'hometown-components-dev/lib/Buttons';
-import Div from 'hometown-components-dev/lib/Div';
-import { Label } from 'hometown-components-dev/lib/Label';
+
+/**
+ * Components
+ */
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Flex from 'hometown-components-dev/lib/FlexHtV1';
+import Label from 'hometown-components-dev/lib/LabelHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
 import { loadCoupons } from 'redux/modules/coupon';
 
 import styles from './Coupon.scss';
+
+const NotificationText = props => (
+  <Box px={10} py={10} bg="#fff7f0" sx={{ border: 'primary' }}>
+    <Text variant="heading.small" {...props} />
+  </Box>
+);
+
+NotificationText.propTypes = {
+  text: PropTypes.string.isRequired
+};
 
 class CouponList extends React.Component {
   static contextTypes = {
@@ -21,136 +36,133 @@ class CouponList extends React.Component {
  coupons, appliedCoupon, handleClick, loading, unapplicablecoupons
 } = this.props;
     return (
-      <div className={`${styles.offerList} `}>
-        {loading && (
-          <Label color="label" fontSize="0.875rem" fontFamily="medium" display="block" mt="0" mb="0.625rem" ta="left">
-            Loading......
-          </Label>
-        )}
+      <Box py={10}>
+        {loading && <NotificationText>Coupons Loading......</NotificationText>}
         {!loading && coupons.length === 0 && unapplicablecoupons.length !== 0 && (
-          <Div className={styles.couponMessage} mb="1rem">
-            <Label color="label" fontSize="0.875rem" fontFamily="medium" display="block" mt="0" mb="0" ta="left">
-              No Coupons applicable for this order.
-            </Label>
-          </Div>
+          <NotificationText>No Coupons applicable for this order.</NotificationText>
         )}
         {!loading && coupons.length === 0 && unapplicablecoupons.length === 0 && (
-          <Div className={styles.couponMessage} mb="1rem">
-            <Label color="label" fontSize="0.875rem" fontFamily="medium" display="block" mt="0" mb="0" ta="left">
-              No Coupons Valid for this order
-            </Label>
-          </Div>
+          <NotificationText>No Coupons Valid for this order</NotificationText>
         )}
         {!loading && coupons.length > 0 && (
-          <Div className={styles.applicableCouponsWrapper}>
-            <Label color="label" fontSize="0.75rem" fontFamily="medium" display="block" mt="0" mb="0.625rem" ta="left">
+          <Box>
+            <Text fontSize={14} fontFamily="medium" mb={10}>
               Choose a Valid Coupon
-            </Label>
-            <ul className={styles.applicableCoupons}>
+            </Text>
+            <Box sx={{ border: 'dividerLight' }}>
               {coupons.map((item, index) => (
-                <li className={`${item.couponCode === appliedCoupon ? styles.active : ''}`} key={item.couponCode}>
-                  <Label display="block" mt="0" mb="0" htmlFor={`coupon-${String(index)}`}>
-                    <Button
-                      onClick={() => {
-                        handleClick(item.couponCode);
-                      }}
-                      btnType="link"
-                      size="block"
-                      p="0"
-                      ta="left"
-                    >
-                      <div className={styles.couponWrapper}>
-                        <Label display="block" mt="0" mb="0">
-                          <div className={styles.coupon}>
-                            <input
-                              checked={item.couponCode.toLowerCase() === appliedCoupon.toLowerCase()}
-                              type="radio"
-                              name="coupons"
-                              id={`coupon-${String(index)}`}
-                            />
-                            <Label className={styles.couponCode} ml="0.625rem">
-                              {item.couponCode}
-                            </Label>
-                            {item.discount_type === 'fixed' ? (
-                              <Label className={styles.saveRs}>
-                                Flat{' '}
-                                <span>
-                                  <b>Rs. {parseInt(item.discount_amount, 10)}</b>
-                                </span>{' '}
-                                OFF
-                              </Label>
-                            ) : (
-                              <Label className={styles.saveRs}>
-                                Flat{' '}
-                                <span>
-                                  <b>{parseInt(item.discount_percentage, 10)} %</b>
-                                </span>{' '}
-                                Off
-                              </Label>
-                            )}
-                            <p className={styles.offerDetails}>{item.description}</p>
-                          </div>
-                        </Label>
-                      </div>
-                    </Button>
+                <Box
+                  className={`${item.couponCode === appliedCoupon ? styles.active : ''}`}
+                  key={item.couponCode}
+                  px={10}
+                  py={10}
+                  sx={{ orderBottom: 'dividerLight' }}
+                >
+                  <Label
+                    htmlFor={`coupon-${String(index)}`}
+                    onClick={() => {
+                      handleClick(item.couponCode);
+                    }}
+                  >
+                    <Flex alignItems="center">
+                      <input
+                        checked={item.couponCode.toLowerCase() === appliedCoupon.toLowerCase()}
+                        type="radio"
+                        name="coupons"
+                        id={`coupon-${String(index)}`}
+                      />
+                      <Text
+                        variant="small"
+                        as="span"
+                        mx={10}
+                        px={8}
+                        py={8}
+                        sx={{
+                          border: '1px dashed #d5d5d5',
+                          textTransform: 'uppercase'
+                        }}
+                      >
+                        {item.couponCode}
+                      </Text>
+                      <Text as="span" variant="small">
+                        Flat{' '}
+                        <b>
+                          {item.discount_type === 'fixed'
+                            ? `Rs. ${parseInt(item.discount_amount, 10)}`
+                            : `${parseInt(item.discount_percentage, 10)} %`}
+                        </b>{' '}
+                        OFF
+                      </Text>
+                    </Flex>
+                    <Text pt={10} pl={28}>
+                      {item.description}
+                    </Text>
                   </Label>
-                </li>
+                </Box>
               ))}
-            </ul>
-          </Div>
+            </Box>
+          </Box>
         )}
         {!loading && unapplicablecoupons.length > 0 && (
-          <Div className={styles.unapplicableCouponsWrapper}>
-            <Label
-              color="primary"
-              fontSize="0.75rem"
-              fontFamily="medium"
-              display="block"
-              mt="0"
-              mb="0.625rem"
-              ta="left"
-            >
+          <Box>
+            <Text fontSize={14} fontFamily="medium" mb={10}>
               Other Offers
-            </Label>
-            <ul className={styles.unapplicableCoupons}>
-              {unapplicablecoupons.map(item => (
-                <li className={`${item.couponCode === appliedCoupon ? styles.active : ''}`} key={item.couponCode}>
-                  <div className={styles.couponWrapper}>
-                    <div className={styles.coupon}>
-                      <Label htmlFor={item.couponCode} className={styles.couponCode} ml="0.625rem">
+            </Text>
+            <Box sx={{ border: 'dividerLight' }}>
+              {unapplicablecoupons.map((item, index) => (
+                <Box
+                  className={`${item.couponCode === appliedCoupon ? styles.active : ''}`}
+                  key={item.couponCode}
+                  px={10}
+                  py={10}
+                  sx={{ orderBottom: 'dividerLight' }}
+                >
+                  <Label
+                    htmlFor={`coupon-${String(index)}`}
+                    onClick={() => {
+                      handleClick(item.couponCode);
+                    }}
+                  >
+                    <Flex alignItems="center">
+                      <input
+                        checked={item.couponCode.toLowerCase() === appliedCoupon.toLowerCase()}
+                        type="radio"
+                        name="coupons"
+                        id={`coupon-${String(index)}`}
+                      />
+                      <Text
+                        variant="small"
+                        as="span"
+                        mx={10}
+                        px={8}
+                        py={8}
+                        sx={{
+                          border: '1px dashed #d5d5d5',
+                          textTransform: 'uppercase'
+                        }}
+                      >
                         {item.couponCode}
-                      </Label>
-                      {item.discount_type === 'fixed' ? (
-                        <Label htmlFor={item.couponCode} className={styles.saveRs}>
-                          Flat{' '}
-                          <span>
-                            <b>
-                              Rs.
-                              {parseInt(item.discount_amount, 10)}
-                            </b>
-                          </span>{' '}
-                          OFF
-                        </Label>
-                      ) : (
-                        <Label htmlFor={item.couponCode} className={styles.saveRs}>
-                          Flat{' '}
-                          <span>
-                            <b>{parseInt(item.discount_percentage, 10)} %</b>
-                          </span>{' '}
-                          Off
-                        </Label>
-                      )}
-                    </div>
-                    <p htmlFor={item.couponCode} className={styles.offerDetails}>
+                      </Text>
+                      <Text as="span" variant="small">
+                        Flat{' '}
+                        <b>
+                          {item.discount_type === 'fixed'
+                            ? `Rs. ${parseInt(item.discount_amount, 10)}`
+                            : `${parseInt(item.discount_percentage, 10)} %`}
+                        </b>{' '}
+                        OFF
+                      </Text>
+                    </Flex>
+                    <Text pt={10} pl={28}>
                       {item.description}
-                    </p>
-                  </div>
-                </li>
+                    </Text>
+                  </Label>
+                </Box>
               ))}
-            </ul>
-          </Div>
+            </Box>
+          </Box>
         )}
-      </div>
+      </Box>
     );
   }
 }

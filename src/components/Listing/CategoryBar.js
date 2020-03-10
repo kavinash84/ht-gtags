@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Div from 'hometown-components-dev/lib/Div';
-import Row from 'hometown-components-dev/lib/Row';
-import Img from 'hometown-components-dev/lib/Img';
-import Section from 'hometown-components-dev/lib/Section';
-import Container from 'hometown-components-dev/lib/Container';
-import { Label } from 'hometown-components-dev/lib/Label';
-import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Img from 'hometown-components-dev/lib/ImgHtV1';
+import Section from 'hometown-components-dev/lib/SectionHtV1';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import Label from 'hometown-components-dev/lib/LabelHtV1';
+import ImageShimmer from 'hometown-components-dev/lib/ImageShimmerHtV1';
 import SlickSlider from '../SlickSlider';
 
 const styles = require('./CategoryBar.scss');
@@ -47,7 +47,7 @@ const CategoryBar = ({ categoryBar, pathname }) => {
               categoryBar
                 .filter(list => list.show_l4 === '1')
                 .map((item, index) => (
-                  <Div
+                  <Box
                     key={String(index)}
                     className={`${styles.categoryBlock} ${pathname === `/${item.url_key}` ? styles.active : ''}`}
                     col="12"
@@ -63,7 +63,7 @@ const CategoryBar = ({ categoryBar, pathname }) => {
                         {item.name}
                       </Label>
                     </Link>
-                  </Div>
+                  </Box>
                 ))}
           </SlickSlider>
         </Row>

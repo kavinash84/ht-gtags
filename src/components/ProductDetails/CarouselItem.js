@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactImageMagnify from 'react-image-magnify';
-import Img from 'hometown-components-dev/lib/Img';
-import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+// import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import ImageShimmer from 'hometown-components-dev/lib/ImageShimmerHtV1';
 
 const getLowResolution = url => url.replace('-zoom.jpg', '-product_500.jpg');
 const getHighResolution = url => url.replace('.jpg', '-zoom.jpg');
@@ -10,7 +11,7 @@ const getHighResolution = url => url.replace('.jpg', '-zoom.jpg');
 const CategoryItem = ({ image, name }) => (
   <ImageShimmer src={getHighResolution(image)} height="545px" overflow="hidden">
     {(imageURL, error) => {
-      if (error) return <Img alt={name} src={imageURL} height="545px" />;
+      if (error) return <Image alt={name} src={imageURL} height="545px" />;
       return (
         <ReactImageMagnify
           {...{

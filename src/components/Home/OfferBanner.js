@@ -1,27 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Container from 'hometown-components-dev/lib/Container';
-import Section from 'hometown-components-dev/lib/Section';
-import Row from 'hometown-components-dev/lib/Row';
-import Img from 'hometown-components-dev/lib/Img';
-import Div from 'hometown-components-dev/lib/Div';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import Section from 'hometown-components-dev/lib/SectionHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+// import Col from 'hometown-components-dev/lib/ColHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
 
 const OfferBanner = ({ image, url, target }) => (
-  <Section mt="1.5rem" mb="0.5rem">
-    <Container pr="0" pl="0">
-      <Row ml="0.3125rem" mr="0.3125rem">
-        <Div>
-          {target ? (
-            <a href={url} target={target} rel="noopener noreferrer">
-              <Img src={image} alt="" />
-            </a>
-          ) : (
-            <Link to={url}>
-              <Img src={image} alt="" />
-            </Link>
-          )}
-        </Div>
+  <Section>
+    <Container>
+      <Row>
+        {target ? (
+          <a style={{ width: '100%', height: 'auto' }} href={url} target={target} rel="noopener noreferrer">
+            <Image src={image} variant="image" />
+          </a>
+        ) : (
+          <Link style={{ width: '100%', height: 'auto' }} to={url}>
+            <Image sx={{ width: '100%', height: 'auto' }} src={image} variant="image" />
+          </Link>
+        )}
       </Row>
     </Container>
   </Section>

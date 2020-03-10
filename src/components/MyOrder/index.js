@@ -3,17 +3,17 @@ import Select from 'react-select';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import Container from 'hometown-components-dev/lib/Container';
+import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
 // import Text from 'hometown-components-dev/lib/Text';
-import Div from 'hometown-components-dev/lib/Div';
-import Section from 'hometown-components-dev/lib/Section';
-import Row from 'hometown-components-dev/lib/Row';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
+import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
 import { getDateFilters } from 'utils/helper';
 import { loadMyOrders } from 'redux/modules/orders';
 import { loadOrdersTracking, closeModal, setCurrentOrder } from 'redux/modules/tracking';
 // import { Label } from 'hometown-components-dev/lib/Label';
 import MyMenu from 'components/MyMenu';
-import Button from 'hometown-components-dev/lib/Buttons';
+import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
 import OrderBlock from './OrderBlock';
 
 // import ProductItems from '../../data/RecentlyViewedProducts.js';
@@ -39,7 +39,7 @@ const mapStateToProps = ({
   contactNumber
 });
 
-class MyOrder extends Component {
+class MyOrderContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -120,12 +120,12 @@ class MyOrder extends Component {
       setCurrentOrder: setOrderNumber
     } = this.props;
     return (
-      <Div type="block">
+      <BoxHtV1 type="block">
         <MyMenu page="order" />
-        <Section display="flex" pt="1.25rem" mb="0" height="auto">
-          <Container type="container" pr="0.5rem" pl="0.5rem">
-            <Row display="block" mr="0" ml="0" mb="1.5rem">
-              <Div col="3" mr="1rem">
+        <SectionHtV1 display="flex" pt="1.25rem" mb="0" height="auto">
+          <ContainerHtV1 type="container" pr="0.5rem" pl="0.5rem">
+            <RowHtV1 display="block" mr="0" ml="0" mb="1.5rem">
+              <BoxHtV1 col="3" mr="1rem" width="25%">
                 <Select
                   placeholder="Select From Date"
                   defaultValue={null}
@@ -133,7 +133,7 @@ class MyOrder extends Component {
                   onChange={this.onChangeDate}
                   options={getDateFilters(this.FILTER_CONFIG)}
                 />
-              </Div>
+              </BoxHtV1>
               {/* <Div col="3" mr="1rem" hide>
                 <Select
                   placeholder="Select Order Status"
@@ -143,23 +143,25 @@ class MyOrder extends Component {
                   options={this.STATUS_FILTER}
                 />
               </Div> */}
-              <Div col="2" mr="1rem">
-                <Button
+              <BoxHtV1 col="2" mr="1rem" width="16.65%">
+                <ButtonHtV1
                   disabled={loading}
                   onClick={this.getFilteredOrders}
                   border="1px solid"
-                  color="red"
                   lh="1.5"
                   size="block"
                   btnType="primary"
                   btnColor="#515151"
                   height="38px"
+                  width="100%"
+                  color="colors.white"
+                  bg="rgb(249, 141, 41)"
                   fontSize="16px"
                 >
                   {loading ? 'Please Wait ...' : 'Find'}
-                </Button>
-              </Div>
-            </Row>
+                </ButtonHtV1>
+              </BoxHtV1>
+            </RowHtV1>
             {results.map((item, index) => (
               <OrderBlock
                 key={`${item.order_item_id}_${String(index)}`}
@@ -169,18 +171,18 @@ class MyOrder extends Component {
                 closeModal={closeTrackingModal}
               />
             ))}
-          </Container>
-        </Section>
-      </Div>
+          </ContainerHtV1>
+        </SectionHtV1>
+      </BoxHtV1>
     );
   }
 }
-MyOrder.defaultProps = {
+MyOrderContainer.defaultProps = {
   results: [],
   loading: false,
   contactNumber: ''
 };
-MyOrder.propTypes = {
+MyOrderContainer.propTypes = {
   results: PropTypes.array,
   contactNumber: PropTypes.string,
   loading: PropTypes.bool,
@@ -189,4 +191,4 @@ MyOrder.propTypes = {
   setCurrentOrder: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired
 };
-export default connect(mapStateToProps, mapDispatchToProps)(MyOrder);
+export default connect(mapStateToProps, mapDispatchToProps)(MyOrderContainer);

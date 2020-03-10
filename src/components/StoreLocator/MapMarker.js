@@ -44,8 +44,8 @@ MapMarker.defaultProps = {
   city: ''
 };
 MapMarker.propTypes = {
-  city: PropTypes.string,
   store: PropTypes.string,
+  city: PropTypes.string,
   address: PropTypes.string.isRequired,
   phone: PropTypes.string.isRequired,
   position: PropTypes.object.isRequired,
