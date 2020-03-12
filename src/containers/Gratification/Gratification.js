@@ -14,8 +14,8 @@ import Text from 'hometown-components-dev/lib/TextHtV1';
 import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 
 /* ====== Page Components ====== */
-import Footer from 'newComponents/Footer';
-import Header from 'newComponents/Header';
+import Footer from 'components/Footer';
+import Header from 'components/Header';
 import GratificationBody from 'newComponents/Gratification';
 
 const Gratification = () => (

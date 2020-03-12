@@ -8,10 +8,10 @@ import Row from 'hometown-components-dev/lib/RowHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 
-import Footer from 'newComponents/Footer';
-import Header from 'newComponents/Header';
-import MyMenu from 'newComponents/MyMenu';
-import MyAddressContainer from 'newComponents/MyAddress';
+import Footer from 'components/Footer';
+import Header from 'components/Header';
+import MyMenu from 'components/MyMenu';
+import MyAddressContainer from 'components/MyAddress';
 import { loadMyAddress } from 'redux/modules/myaddress';
 
 const hooks = {

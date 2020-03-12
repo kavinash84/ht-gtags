@@ -10,9 +10,9 @@ import Container from 'hometown-components-dev/lib/ContainerHtV1';
 import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 
 /* ====== Page Components ====== */
-import Footer from 'newComponents/Footer';
-import Header from 'newComponents/Header';
-import TrackOrderContainer from 'newComponents/TrackOrder/TrackOrder';
+import Footer from 'components/Footer';
+import Header from 'components/Header';
+import TrackOrderContainer from 'components/TrackOrder';
 import { trackOrder, closeStatusModal } from 'redux/modules/trackorder';
 
 const mapDispatchToProps = dispatch =>

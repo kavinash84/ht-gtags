@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Div from 'hometown-components/lib/Div';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 // import Button from 'hometown-components/lib/Buttons';
-import FormInput from 'hometown-components/lib/Forms/FormInput';
+import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
 import { validateVPA } from 'utils/validation';
 
 const styles = require('./Checkout.scss');
@@ -40,8 +40,8 @@ class UpiForm extends Component {
     } = this.props;
     const { vpaError, vpaErrorMsg } = this.state;
     return (
-      <Div className={styles.paymentBlock} p={padding}>
-        <Div col="9" pr="1rem">
+      <Box className={styles.paymentBlock} p={padding}>
+        <Box width={9 / 12} pr="1rem">
           <FormInput
             label="Please enter your UPI ID"
             type="text"
@@ -51,8 +51,8 @@ class UpiForm extends Component {
             onChange={this.onChangeDetails(setPaymentDetails, gateway)}
           />
           {vpaError && <p style={{ color: 'red' }}> {vpaErrorMsg} </p>}
-        </Div>
-        {/* <Div col="12">
+        </Box>
+        {/* <Box col="12">
           <Button
             btnType="primary"
             fontFamily="regular"
@@ -64,8 +64,8 @@ class UpiForm extends Component {
           >
             Pay Now
           </Button>
-        </Div> */}
-      </Div>
+        </Box> */}
+      </Box>
     );
   }
 }
