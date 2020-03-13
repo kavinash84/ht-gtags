@@ -68,7 +68,7 @@ const emiIcon = require('../../../static/emi.svg');
 const fbIcon = require('../../../static/facebook.svg');
 const twIcon = require('../../../static/twitter.svg');
 const youtubeIcon = require('../../../static/youtube.svg');
-const instaIcon = require('../../../static/instagram.svg');
+const email = require('../../../static/email-primary.svg');
 const pinIcon = require('../../../static/pinterest.svg');
 
 const qtyOptions = [
@@ -558,21 +558,51 @@ class ProductDetails extends React.Component {
 
               {/* Share on social media */}
               <Row mt={30} mx={0}>
-                <SocialButton>
-                  <Image src={fbIcon} alt="Facebook" />
-                </SocialButton>
-                <SocialButton>
-                  <Image src={twIcon} alt="Twitter" />
-                </SocialButton>
-                <SocialButton>
-                  <Image src={youtubeIcon} alt="Youtube" />
-                </SocialButton>
-                <SocialButton>
-                  <Image src={instaIcon} alt="Instagram" />
-                </SocialButton>
-                <SocialButton>
-                  <Image src={pinIcon} alt="Pinterest" />
-                </SocialButton>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={`http://www.facebook.com/sharer.php?u=${productURL}`}
+                >
+                  <SocialButton>
+                    <Image src={fbIcon} alt="Facebook" />
+                  </SocialButton>
+                </a>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={`https://twitter.com/intent/tweet?text=${productDescription.slice(0, 150)}..`}
+                >
+                  <SocialButton>
+                    <Image src={twIcon} alt="Twitter" />
+                  </SocialButton>
+                </a>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://www.youtube.com/channel/UCBZGArWnKT6MYYwOsPCNjiw?sub_confirmation=1"
+                >
+                  <SocialButton>
+                    <Image src={youtubeIcon} alt="Youtube" />
+                  </SocialButton>
+                </a>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={`http://pinterest.com/pin/create/button/?url=${productURL}&description=${name}`}
+                >
+                  <SocialButton>
+                    <Image src={pinIcon} alt="Pinterest" />
+                  </SocialButton>
+                </a>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={`mailto:?subject=${productPageTitle(name)}&body=${productURL}`}
+                >
+                  <SocialButton>
+                    <Image src={email} alt="Mail" />
+                  </SocialButton>
+                </a>
               </Row>
             </Col>
           </Row>
