@@ -172,18 +172,6 @@ export default class Listing extends Component {
         </Helmet>
         <Body>
           <Header />
-          {/* {!loading && products.length === 0 && (
-            <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
-              <Box
-                title="Sorry! No Results Found"
-                subTitle="Please check the Spelling or by a different search"
-                url="/"
-                bg="#fafafa"
-              >
-                <Img src={SearchEmptyIcon} width="initial" m="auto" alt="Sorry no results found" />
-              </Box>
-            </Section>
-          )} */}
           {/* {!loaded && loading && !products.length && <ListingShimmer />} */}
 
           {loaded && products.length && !shimmer ? (
@@ -217,9 +205,9 @@ export default class Listing extends Component {
               /> */}
             </Box>
           ) : (
-            {
-              /* shimmer && () */
-            }
+            <Box display="flex" p="0.625rem" pt="1.25rem" mb="0">
+              <h1> No Items Found </h1>
+            </Box>
           )}
           {/* {seoInfo && seoInfo.seo_text && (
           <SeoContent>

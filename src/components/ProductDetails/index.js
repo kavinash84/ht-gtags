@@ -653,29 +653,29 @@ class ProductDetails extends React.Component {
             </Row>
 
             {/* DIMENSIONS */}
-            <Box py={20} sx={{ borderTop: 'dividerLight' }}>
-              <Box textAlign="center" mb={30}>
-                <Text variant="regular" fontSize={16} pb={5}>
-                  DIMENSIONS
-                </Text>
-                <Heading variant="heading.regular">Will it fit in your room?</Heading>
-              </Box>
-              <Box p={15} textAlign="center" sx={{ border: 'dividerLight' }}>
-                <Image src="https://www.hometown.in/media/product/89/2453/3-zoom.jpg" alt="" />
-              </Box>
-              <Box>
-                <Text variant="regular" fontSize={16} pb={5}>
-                  {height || width || depth
-                    ? `
+            {(height || width || depth) && (
+              <Box py={20} sx={{ borderTop: 'dividerLight' }}>
+                <Box textAlign="center" mb={30}>
+                  <Text variant="regular" fontSize={16} pb={5}>
+                    DIMENSIONS
+                  </Text>
+                  <Heading variant="heading.regular">Will it fit in your room?</Heading>
+                </Box>
+                <Box p={15} textAlign="center" sx={{ border: 'dividerLight' }}>
+                  <Image src="https://www.hometown.in/media/product/89/2453/3-zoom.jpg" alt="" />
+                </Box>
+                <Box>
+                  <Text variant="regular" fontSize={16} pb={5}>
+                    {`
                     Overall Dimension (inches) :
                     ${width && `Width : ${width} `}
                     ${depth && `Depth : ${depth} `} 
                     ${height && `Height : ${height} `}
-                  `
-                    : ''}
-                </Text>
+                  `}
+                  </Text>
+                </Box>
               </Box>
-            </Box>
+            )}
 
             {/* Complete the look */}
             <Box py={20}>
