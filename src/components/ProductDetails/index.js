@@ -250,6 +250,30 @@ class ProductDetails extends React.Component {
       window.scroll(0, this.reviewsRef.current.offsetTop);
     }
   };
+  getWeightedAverageRatings = () => {
+    const {
+      reviews: { data = [] }
+    } = this.props;
+    let ans = 0;
+    if (data.length) {
+      const newData = data.reduce((m, obj) => {
+        const item = obj.options && obj.options.length ? obj.options[0] : {};
+        const rating = item.option_value ? Number(item.option_value) : 0;
+        if (rating && rating <= 5) {
+          m[rating] = m[rating] ? m[rating] + 1 : 1;
+        }
+        return m;
+      }, {});
+      let total = 0;
+      let weight = 0;
+      Object.keys(newData).forEach(k => {
+        total += newData[k];
+        weight += Number(k) * newData[k];
+      });
+      ans = total && weight ? (weight / total).toFixed(1) : 0;
+    }
+    return Number(ans);
+  };
   handleLoginModal = () => {
     this.setState({ openLogin: !this.state.openLogin });
   };
@@ -341,7 +365,7 @@ class ProductDetails extends React.Component {
     const simpleSku = Object.keys(simples)[0];
     const { name, price, special_price: specialPrice } = meta;
     const checkSpecialPrice = Number(specialPrice) || Number(price);
-    const { adding, added } = reviews;
+    const { adding, added, data: reviewsData = [] } = reviews;
     // const offerImage = simples[simpleSku].groupedattributes.offer_image || null;
     // const offerImageRedirect = simples[simpleSku].groupedattributes.offer_image_click_url || null;
     const { showmore, showmorecolorproducts } = this.state;
@@ -349,7 +373,7 @@ class ProductDetails extends React.Component {
     const { main_material: material, color, category_type: productType } = gattributes;
     const productURL = `${SITE_URL}${formatProductURL(name, sku)}`;
     const productDescription = productMetaDescription(name, productType, material, color);
-
+    const weightedRating = this.getWeightedAverageRatings();
     return (
       <Box pt={30}>
         <Helmet>
@@ -453,19 +477,28 @@ class ProductDetails extends React.Component {
               </ServiceDetails>
 
               {/* Reviews */}
-              <ReviewDisplay pb={30} justifyContent="flex-start" sx={{ borderBottom: 'none' }}>
-                <Button
-                  variant="linkPrimary"
-                  onClick={this.toggleAddReview}
-                  pl={10}
-                  ml={10}
-                  sx={{
-                    borderLeft: 'primary'
-                  }}
+              {!!weightedRating && reviewsData.length && (
+                <ReviewDisplay
+                  ratings={weightedRating}
+                  reviews={reviewsData.length}
+                  count={5}
+                  pb={30}
+                  justifyContent="flex-start"
+                  sx={{ borderBottom: 'none' }}
                 >
-                  Write a Review
-                </Button>
-              </ReviewDisplay>
+                  <a
+                    variant="linkPrimary"
+                    href="#review-section"
+                    pl={10}
+                    ml={10}
+                    sx={{
+                      borderLeft: 'primary'
+                    }}
+                  >
+                    Write a Review
+                  </a>
+                </ReviewDisplay>
+              )}
 
               {/* Color Options */}
               {colorproducts.length > 0 && (
@@ -693,11 +726,14 @@ class ProductDetails extends React.Component {
             </Box>
 
             {/* Review List and Add review */}
-            <Box pt={30} sx={{ borderBottom: 'dividerLight' }}>
+            <Box id="review-section" pt={30} sx={{ borderBottom: 'dividerLight' }}>
               <Box textAlign="center" mb={30}>
                 <Heading variant="heading.regular">Reviews</Heading>
               </Box>
               <AddReview
+                ratings={weightedRating}
+                reviews={reviewsData.length}
+                count={5}
                 variant="col-8"
                 catalogId={groupedattributes.id_catalog_config}
                 loaded
@@ -706,12 +742,14 @@ class ProductDetails extends React.Component {
                 added={added}
                 toggleReview={toggleReviewBox}
               />
-              <Reviews
-                variant="col-12"
-                reviewItems={reviews.data}
-                showReviews={showReviews}
-                showMoreReviews={this.showMoreReviews}
-              />
+              {!!reviewsData.length && (
+                <Reviews
+                  variant="col-12"
+                  reviewItems={reviews.data}
+                  showReviews={showReviews}
+                  showMoreReviews={this.showMoreReviews}
+                />
+              )}
             </Box>
           </Box>
 
