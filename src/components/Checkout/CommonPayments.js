@@ -12,7 +12,7 @@ import Image from 'hometown-components-dev/lib/ImageHtV1';
 /**
  * Icons
  */
-const styles = require('./CommonPayments.scss');
+const styles = require('./commonPayments.scss');
 
 const creditcardIcon = require('../../../static/credit-card.png');
 const debitcardIcon = require('../../../static/debit-card.png');
