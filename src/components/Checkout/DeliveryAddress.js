@@ -492,6 +492,7 @@ class DeliveryAddress extends Component {
                 totalCart={summary.total}
                 itemsCount={summary.items_count}
                 discount={summary.coupon_discount}
+                coupon={summary.coupon}
               />
               <PaymentMethods />
             </Box>
