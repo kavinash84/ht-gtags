@@ -30,6 +30,7 @@ import GoogleLoginBtn from 'components/LoginForms/GoogleLogin';
 import LoginForm from 'components/LoginForms';
 import LoginViaOtp from 'components/LoginForms/LoginViaOtp';
 import SignUpForm from 'hometown-components-dev/lib/FormsHtV1/SignUpFormHtV1';
+import InputForm from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
 
 const OTPIcon = require('../../../static/otp.svg');
 const EmailIcon = require('../../../static/email-primary.svg');
@@ -223,17 +224,27 @@ export default class SignupFormContainer extends Component {
           <Box pb={20}>
             <Text fontSize={12}>*Required</Text>
           </Box>
-          <Row mt="1em">
+          <Row>
             <Col variant="col-6">
+              <InputForm
+                label="Full Name *"
+                type="text"
+                placeholder=""
+                onChange={this.onChangeName}
+                value={name}
+                feedBackError={nameError}
+                feedBackMessage={nameErrorMessage}
+                variant="input"
+              />
               <SignUpForm
                 email={email}
                 onChangeEmail={this.onChangeEmail}
                 emailFeedBackError={emailError}
                 emailFeedBackMessage={emailErrorMessage}
-                name={name}
-                onChangeName={this.onChangeName}
-                nameFeedBackError={nameError}
-                nameFeedBackMessage={nameErrorMessage}
+                // name={name}
+                // onChangeName={this.onChangeName}
+                // nameFeedBackError={nameError}
+                // nameFeedBackMessage={nameErrorMessage}
                 phone={phone}
                 onChangePhone={this.onChangePhone}
                 phoneFeedBackError={phoneError}
