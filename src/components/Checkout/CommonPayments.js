@@ -226,7 +226,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEa
       );
     case 'Upi':
       return (
-        <Box col="12" key={paymentType} className={styles.paymentOptions}>
+        <Box col="12" p={15} key={paymentType} className={styles.paymentOptions}>
           <input
             type="radio"
             name="paymentOption"
