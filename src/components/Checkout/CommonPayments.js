@@ -14,12 +14,12 @@ import Image from 'hometown-components-dev/lib/ImageHtV1';
  */
 const styles = require('./commonPayments.scss');
 
-const creditcardIcon = require('../../../static/credit-card.png');
-const debitcardIcon = require('../../../static/debit-card.png');
-const intBankingIcon = require('../../../static/net-banking-icon.png');
-const emiIcon = require('../../../static/emi.png');
-const walletIcon = require('../../../static/wallet.png');
-const upiIcon = require('../../../static/upi-logo.svg');
+const creditcardIcon = require('../../../static/credit-card-one.svg');
+const debitcardIcon = require('../../../static/debit-card-one.svg');
+const intBankingIcon = require('../../../static/net-banking-one.svg');
+const emiIcon = require('../../../static/emi-one.svg');
+const walletIcon = require('../../../static/wallet-one.svg');
+const upiIcon = require('../../../static/upi-logo-one.svg');
 
 const initial = {
   CreditCard: {
