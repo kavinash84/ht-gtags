@@ -33,14 +33,13 @@ class UpiForm extends Component {
   };
   render() {
     const {
-      padding,
       setPaymentDetails,
       gateway,
       details: { upi_vpa: vpa }
     } = this.props;
     const { vpaError, vpaErrorMsg } = this.state;
     return (
-      <Box className={styles.paymentBlock} p={padding}>
+      <Box className={styles.paymentBlock}>
         <Box width={9 / 12} pr="1rem">
           <FormInput
             label="Please enter your UPI ID"
@@ -70,12 +69,9 @@ class UpiForm extends Component {
   }
 }
 
-UpiForm.defaultProps = {
-  padding: '3.5rem 2rem'
-};
+UpiForm.defaultProps = {};
 
 UpiForm.propTypes = {
-  padding: PropTypes.string,
   gateway: PropTypes.string.isRequired,
   setPaymentDetails: PropTypes.func.isRequired,
   details: PropTypes.object.isRequired

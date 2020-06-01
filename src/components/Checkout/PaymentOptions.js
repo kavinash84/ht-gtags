@@ -244,12 +244,10 @@ class PaymentOptions extends Component {
                 ))}
               </Row>
               {/* Payment options form */}
-              <Box px={40} pt={30} ml={8} pb={20} sx={{ border: 'secondary', maxWidth: '588px' }}>
+              <Box px={40} pt={30} ml={-1} pb={20} sx={{ border: 'secondary', maxWidth: '588px' }}>
                 {/* UPI Form */}
                 {selectedGateway === 'Upi' && (
-                  <div col="12">
-                    <UpiForm setPaymentDetails={setPaymentDetails} gateway={selectedGateway} padding="3rem 2rem" />
-                  </div>
+                  <UpiForm setPaymentDetails={setPaymentDetails} gateway={selectedGateway} padding="3rem 2rem" />
                 )}
                 {selectedGateway === 'CreditCard' && (
                   <CardForm
