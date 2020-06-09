@@ -71,22 +71,19 @@ const youtubeIcon = require('../../../static/youtube.svg');
 const email = require('../../../static/email-primary.svg');
 const pinIcon = require('../../../static/pinterest.svg');
 
-const qtyOptions = qty => {
-  const options = [];
-  if (qty > 5) qty = 5;
+const qtyOptions = sku => {
+  console.log('qtyOptions', sku);
+  if (sku.meta) {
+    let qty = sku.meta.quantity;
+    const options = [];
+    if (qty > 5) qty = 5;
 
-  for (let i = 1; i <= qty; i += 1) {
-    options.push({ value: i, label: i });
+    for (let i = 1; i <= qty; i += 1) {
+      options.push({ value: i, label: i });
+    }
+    // console.log('QtyOption', options, qty);
+    return options;
   }
-  // console.log('QtyOption', options, qty);
-  return options;
-  // [
-  //   { value: 1, label: '1' },
-  //   { value: 2, label: '2' },
-  //   { value: 3, label: '3' },
-  //   { value: 4, label: '4' },
-  //   { value: 5, label: '5' }
-  // ]
 };
 
 const customStyles = {
@@ -531,7 +528,7 @@ class ProductDetails extends React.Component {
                 </Text>
                 <Select
                   placeholder=""
-                  options={qtyOptions(simples[simpleSku].meta.quantity)}
+                  options={qtyOptions(simples[simpleSku])}
                   value={productQty}
                   defaultValue={1}
                   styles={customStyles}
