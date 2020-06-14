@@ -53,9 +53,8 @@ const onClickLogout = dispatcher => e => {
 @withRouter
 @connect(
   ({
- pincode, userLogin, wishlist, cart, router, profile
+ userLogin, wishlist, cart, router, profile
 }) => ({
-    selectedPincode: pincode.selectedPincode,
     isLoggedIn: userLogin.isLoggedIn,
     name: profile.data.first_name,
     wishListCount: getWishListCount(wishlist),
@@ -106,7 +105,7 @@ export default class HeaderTop extends Component {
 
   render() {
     const {
- selectedPincode, isLoggedIn, history, wishListCount, cartCount, logoutUser, name
+ isLoggedIn, history, wishListCount, cartCount, logoutUser, name
 } = this.props;
 
     return (
@@ -121,12 +120,12 @@ export default class HeaderTop extends Component {
             <Search />
           </Col>
           <Col width={5 / 12} flexDirection="row" justifyContent="flex-end">
-            <Button variant="link" onClick={this.onOpenPincodeModal}>
+            {/* <Button variant="link" onClick={this.onOpenPincodeModal}>
               <Flex alignItems="center">
                 <LocationIcon />
                 <Text variant="headerLabel">{selectedPincode !== '' ? selectedPincode : 'Pincode'}</Text>
               </Flex>
-            </Button>
+            </Button> */}
             <Link to="/store-locator">
               <Flex alignItems="center" pl={20}>
                 <LocationIcon />
@@ -150,7 +149,7 @@ export default class HeaderTop extends Component {
                 }
               }}
             >
-              {isLoggedIn ? <Text variant="headerLabel">Hi ${titleCase(name)}</Text> : <UserIcon />}
+              {isLoggedIn ? <Text variant="headerLabel">Hi {titleCase(name)}</Text> : <UserIcon />}
             </Button>
             <Box pt={20} sx={{ position: 'relative' }}>
               <Card variant="card.profileMore">
@@ -242,7 +241,6 @@ export default class HeaderTop extends Component {
 }
 
 HeaderTop.defaultProps = {
-  selectedPincode: '',
   wishListCount: 0,
   cartCount: 0,
   isLoggedIn: false,
@@ -253,7 +251,6 @@ HeaderTop.defaultProps = {
 };
 
 HeaderTop.propTypes = {
-  selectedPincode: PropTypes.string,
   isLoggedIn: PropTypes.bool,
   history: PropTypes.object,
   wishListCount: PropTypes.number,

@@ -227,6 +227,18 @@ class Footer extends React.Component {
               </Box>
             </Col>
             <Col width={[1, 1, 5 / 12]} pl={[0, 0, 50]}>
+              <Box
+                mb={17}
+                sx={{
+                  borderBottom: 'divider',
+                  display: 'flex',
+                  justifyContent: 'center'
+                }}
+              >
+                <Text variant="footerLink" mt={-5} sx={{ position: 'absolute' }}>
+                  Lorem ipsum doler
+                </Text>
+              </Box>
               {!already ? (
                 <form onSubmit={this.handleSubmit}>
                   <Row>

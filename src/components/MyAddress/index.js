@@ -11,7 +11,6 @@ import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
 import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
 import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
 import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
-import MyMenu from 'components/MyMenu';
 import { addAddress, updateAddress } from 'redux/modules/myaddress';
 // Validators
 import {
@@ -339,7 +338,6 @@ export default class DeliveryAddress extends Component {
     const { loading } = this.props;
     return (
       <BoxHtV1 type="block" mb="2rem">
-        <MyMenu page="address" />
         <SectionHtV1
           sx={{
             display: 'flex',
@@ -374,7 +372,8 @@ export default class DeliveryAddress extends Component {
                       fontSize: '14px',
                       width: '100%',
                       minHeight: '135px',
-                      marginBottom: '10px'
+                      marginBottom: '10px',
+                      textTransform: 'none'
                     }}
                     onClick={() => this.handleClick(index)}
                   >

@@ -454,6 +454,7 @@ class ProductDetails extends React.Component {
                 ratings={rating}
                 count={count}
                 marginTop="1rem"
+                mb={8}
                 onClickReviews={this.onClickReviews}
               />
 

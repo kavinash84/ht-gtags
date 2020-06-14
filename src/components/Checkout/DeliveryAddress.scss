@@ -1,26 +1,12 @@
 @import "../../theme/_variables";
 @import "../../theme/_mixins";
 
-.addressBtn, .addAddressBtn {
-  border-radius: 4px;
-  background-color: #ffffff;
-  border: solid 2px #efefef;
-  padding: 0.625rem 1rem;
-  color: rgba(0, 0, 0, 0.6);
-  text-align: left;
-  line-height: 1.6;
-  font-size: 14px;
-  width: 100%;
-  min-height: 157px;
-  margin-bottom: 10px;
+ .addAddressBtn {
   &.active, &:hover {
-    background-color: #ffffff;
+    background-color: #f3f3f3;
     border: solid 2px $primary;
     outline: none;
   }
-}
-.addAddressBtn {
-  text-align: center;
 }
 .addressBlock {
   &:nth-child(3n+1) {

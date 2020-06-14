@@ -124,7 +124,7 @@ const Cart = ({
               <Text fontFamily="medium">Product Details</Text>
             </Box>
             <Box variant="col-2" pl={8}>
-              <Text fontFamily="medium">Qty</Text>
+              <Text fontFamily="medium">Qty.</Text>
             </Box>
             <Box variant="col-2">
               <Text fontFamily="medium">Price</Text>

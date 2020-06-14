@@ -55,7 +55,7 @@ const mapStateToProps = ({
   paymentData: checkout.paymentData,
   loading: checkout.loading,
   addresses: myaddress.data,
-  currentaddressindex: address.shipping.index,
+  // currentaddressindex: address.shipping.index,
   shippingIsBilling: address.shippingIsBilling,
   userEmail: profile.data.email,
   address,
@@ -347,7 +347,7 @@ class DeliveryAddress extends Component {
       history,
       loading,
       addresses,
-      currentaddressindex,
+      // currentaddressindex,
       shippingIsBilling,
       userEmail,
       summary,
@@ -389,13 +389,15 @@ class DeliveryAddress extends Component {
                   {addresses.map((item, index) => (
                     <Col variant="col-6" px={10} mb={20} key={item.id_customer_address}>
                       <Button
+                        className={styles.addAddressBtn}
+                        hoverColor="grey"
                         variant="link"
                         textAlign="left"
                         px={15}
                         py={15}
                         height="100%"
                         lineHeight={1.25}
-                        className={`${index === currentaddressindex ? styles.active : null}`}
+                        // className={`${index === currentaddressindex ? styles.addAddressBtn : null}`}
                         onClick={() => this.handleClick(index)}
                         sx={{
                           border: 'secondary',
@@ -453,7 +455,7 @@ class DeliveryAddress extends Component {
                       <Label htmlFor="checkbox" />
                       {/* eslint-enable */}
                     </Box>
-                    <Text fontSize={14} htmlFor="checkbox">
+                    <Text sx={{ cursor: 'pointer' }} fontSize={14} htmlFor="checkbox" onClick={this.toggleBillingForm}>
                       Different Billing Address ?
                     </Text>
                   </Flex>
@@ -505,7 +507,7 @@ DeliveryAddress.defaultProps = {
   history: {},
   // location: {},
   addresses: [],
-  currentaddressindex: -1,
+  // currentaddressindex: -1,
   userEmail: '',
   summary: null,
   couponlistToggle: false,
@@ -520,7 +522,7 @@ DeliveryAddress.propTypes = {
   nextstep: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
   paymentData: PropTypes.object.isRequired,
   // location: PropTypes.object,
-  currentaddressindex: PropTypes.number,
+  // currentaddressindex: PropTypes.number,
   address: PropTypes.object.isRequired,
   shippingIsBilling: PropTypes.bool.isRequired,
   setAddress: PropTypes.func.isRequired,
