@@ -178,7 +178,7 @@ export default class ForgotPasswordContainer extends Component {
                   CREATE AN ACCOUNT
                 </Heading>
               </Box>
-              <Heading fontSize={14}>If you don't yet have HomeTown account, please register.</Heading>
+              <Heading fontSize={16}>If you don't yet have HomeTown account, please register.</Heading>
               <Button px={80} mt={30} height={42} lineHeight={1.7} fontWeight={600} as={Link} to={SIGNUP_URL}>
                 Register
               </Button>

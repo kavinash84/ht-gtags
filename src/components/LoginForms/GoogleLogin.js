@@ -107,7 +107,15 @@ class GoogleLogin extends Component {
             borderRadius: 3
           }}
         >
-          <Image src={GoogleIcon} alt="Google" width={18} mr={10} />
+          <Image
+            src={GoogleIcon}
+            sx={{
+              cursor: 'pointer'
+            }}
+            alt="Google"
+            width={18}
+            mr={10}
+          />
           GOOGLE
         </Box>
         <ResponsiveModal classNames={{ modal: 'updateProfileModal' }} onCloseModal={this.handleModal} open={open}>

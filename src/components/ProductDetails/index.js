@@ -65,11 +65,9 @@ import Video from './Video';
 const freeShippingIcon = require('../../../static/free-shipping.svg');
 const warrentyIcon = require('../../../static/warrenty.svg');
 const emiIcon = require('../../../static/emi.svg');
-const fbIcon = require('../../../static/facebook.svg');
-const twIcon = require('../../../static/twitter.svg');
-const youtubeIcon = require('../../../static/youtube.svg');
-const email = require('../../../static/email-primary.svg');
-const pinIcon = require('../../../static/pinterest.svg');
+const fbIcon = require('../../../static/fb-pdp.svg');
+const email = require('../../../static/email-pdp.svg');
+const pinIcon = require('../../../static/pinterest-pdp.svg');
 
 const qtyOptions = [
   { value: 1, label: '1' },
@@ -599,24 +597,6 @@ class ProductDetails extends React.Component {
                 >
                   <SocialButton>
                     <Image src={fbIcon} alt="Facebook" />
-                  </SocialButton>
-                </a>
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={`https://twitter.com/intent/tweet?text=${productDescription.slice(0, 150)}..`}
-                >
-                  <SocialButton>
-                    <Image src={twIcon} alt="Twitter" />
-                  </SocialButton>
-                </a>
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://www.youtube.com/channel/UCBZGArWnKT6MYYwOsPCNjiw?sub_confirmation=1"
-                >
-                  <SocialButton>
-                    <Image src={youtubeIcon} alt="Youtube" />
                   </SocialButton>
                 </a>
                 <a
