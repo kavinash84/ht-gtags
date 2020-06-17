@@ -92,30 +92,32 @@ export default class LoginViaOtp extends React.Component {
             </Button>
           </form>
         ) : (
-          <Fragment>
-            <form onSubmit={onSubmitOtp}>
-              <FormInputHtV1
-                label="OTP"
-                onChange={onChangeOtp}
-                value={otp}
-                type="text"
-                placeholder="******"
-                feedBackError={otpError}
-                feedBackMessage={otpErrorMessage}
-              />
-              <Flex justifyContent="center">
-                <Button width={180} height={42} fontWeight={600} onClick={this.onSubmitOtp} disabled={loggingIn}>
-                  SUBMIT
+              <Fragment>
+                <form onSubmit={onSubmitOtp}>
+                  <FormInputHtV1
+                    label="OTP"
+                    onChange={onChangeOtp}
+                    value={otp}
+                    type="text"
+                    placeholder="******"
+                    feedBackError={otpError}
+                    feedBackMessage={otpErrorMessage}
+                  />
+                  <Flex justifyContent="center">
+                    <Button width={180} height={42} fontWeight={600} onClick={this.onSubmitOtp} disabled={loggingIn}>
+                      SUBMIT
                 </Button>
-              </Flex>
-            </form>
-            {!resend && (
-              <Button onClick={handleResend} disabled={resendtimer > 0}>
-                RESEND OTP {resendtimer > 0 ? resendtimer : ''}
-              </Button>
+                  </Flex>
+                </form>
+                {!resend && (
+                  <Flex marginTop="1.3em" justifyContent="center">
+                    <Button onClick={handleResend} disabled={resendtimer > 0}>
+                      RESEND OTP {resendtimer > 0 ? resendtimer : ''}
+                    </Button>
+                  </Flex>
+                )}
+              </Fragment>
             )}
-          </Fragment>
-        )}
       </Box>
     );
   }
