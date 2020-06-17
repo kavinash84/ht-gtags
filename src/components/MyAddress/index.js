@@ -8,6 +8,7 @@ import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
 import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
 import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
 import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
+import CardHtV1 from 'hometown-components-dev/lib/CardHtV1';
 import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
 import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
 import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
@@ -361,7 +362,7 @@ export default class DeliveryAddress extends Component {
                   float="left"
                   key={`${item.id_address_customer || '_'}_${String(index)}`}
                 >
-                  <ButtonHtV1
+                  <CardHtV1
                     className={`${styles.addressBtn} ${index === currentaddressindex && styles.active}`}
                     sx={{
                       borderRadius: '4px',
@@ -390,7 +391,7 @@ export default class DeliveryAddress extends Component {
                     <br />
                     {item.state || ''}
                     <br />
-                  </ButtonHtV1>
+                  </CardHtV1>
                 </BoxHtV1>
               ))}
 
