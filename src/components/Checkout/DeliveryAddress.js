@@ -455,7 +455,7 @@ class DeliveryAddress extends Component {
                       <Label htmlFor="checkbox" />
                       {/* eslint-enable */}
                     </Box>
-                    <Text fontSize={14} htmlFor="checkbox">
+                    <Text fontSize={14} htmlFor="checkbox" onClick={this.toggleBillingForm}>
                       Different Billing Address ?
                     </Text>
                   </Flex>
