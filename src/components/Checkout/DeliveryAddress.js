@@ -20,7 +20,9 @@ import { validateAddress } from 'utils/validation';
  */
 import Flex from 'hometown-components-dev/lib/FlexHtV1';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Select from 'hometown-components-dev/lib/Select';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Card from 'hometown-components-dev/lib/CardHtV1';
 import Col from 'hometown-components-dev/lib/ColHtV1';
 import Container from 'hometown-components-dev/lib/ContainerHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
@@ -46,7 +48,7 @@ const addIcon = require('../../../static/increase.svg');
 const styles = require('./DeliveryAddress.scss');
 
 const mapStateToProps = ({
- userLogin, app, checkout, myaddress, address, profile, cart
+  userLogin, app, checkout, myaddress, address, profile, cart
 }) => ({
   results: getCartList(cart),
   isLoggedIn: userLogin.isLoggedIn,
@@ -77,8 +79,8 @@ class DeliveryAddress extends Component {
     const { dispatch } = this.context.store;
     const { cart, history } = this.props;
     const {
- nextstep, isLoggedIn, onChangeEmail, userEmail
-} = this.props;
+      nextstep, isLoggedIn, onChangeEmail, userEmail
+    } = this.props;
     if (isLoggedIn) {
       onChangeEmail('shipping', userEmail);
       onChangeEmail('billing', userEmail);
@@ -95,15 +97,15 @@ class DeliveryAddress extends Component {
   }
   componentWillReceiveProps(nextProps) {
     const {
- isLoggedIn, nextstep, clearShippingAddress, onChangeEmail, userEmail, couponlistToggle
-} = this.props;
+      isLoggedIn, nextstep, clearShippingAddress, onChangeEmail, userEmail, couponlistToggle
+    } = this.props;
     const { dispatch } = this.context.store;
     if (nextProps.nextstep !== nextstep && nextProps.paymentData) {
       console.log(nextProps.paymentData);
       const { paymentData = {} } = nextProps;
       dispatch(load({
-          paymentData
-        }));
+        paymentData
+      }));
     }
     if (isLoggedIn && nextProps.userEmail !== userEmail) {
       onChangeEmail('shipping', nextProps.userEmail);
@@ -267,44 +269,44 @@ class DeliveryAddress extends Component {
             ? 'Please Add new Address  /  Select delivery Address '
             : 'Please Fill All Details Correctly !';
         dispatch(notifSend({
-            type: 'warning',
-            msg: message,
-            dismissAfter: 2000
-          }));
+          type: 'warning',
+          msg: message,
+          dismissAfter: 2000
+        }));
       } else {
         const { sessionId } = this.props;
         dispatch(sendDeliveryAddress(
-            sessionId,
-            {
-              shippingIsBilling,
-              shippingAddress: shippingForm.data,
-              billingAddress: shippingForm.data,
-              cartTotal
-            },
-            isLoggedIn
-          ));
+          sessionId,
+          {
+            shippingIsBilling,
+            shippingAddress: shippingForm.data,
+            billingAddress: shippingForm.data,
+            cartTotal
+          },
+          isLoggedIn
+        ));
       }
     } else {
       const shippingForm = this.formValdiator(this.props, shipping, 'shipping');
       const billingForm = this.formValdiator(this.props, billing, 'billing');
       if (shippingForm.error || billingForm.error) {
         dispatch(notifSend({
-            type: 'warning',
-            msg: 'Fill All Details Correctly',
-            dismissAfter: 2000
-          }));
+          type: 'warning',
+          msg: 'Fill All Details Correctly',
+          dismissAfter: 2000
+        }));
       } else {
         const { sessionId } = this.props;
         dispatch(sendDeliveryAddress(
-            sessionId,
-            {
-              shippingIsBilling,
-              shippingAddress: shippingForm.data,
-              billingAddress: billingForm.data,
-              cartTotal
-            },
-            isLoggedIn
-          ));
+          sessionId,
+          {
+            shippingIsBilling,
+            shippingAddress: shippingForm.data,
+            billingAddress: billingForm.data,
+            cartTotal
+          },
+          isLoggedIn
+        ));
       }
     }
   };
@@ -388,7 +390,7 @@ class DeliveryAddress extends Component {
                 <Row mx={-10}>
                   {addresses.map((item, index) => (
                     <Col variant="col-6" px={10} mb={20} key={item.id_customer_address}>
-                      <Button
+                      <Card
                         variant="link"
                         textAlign="left"
                         px={15}
@@ -417,7 +419,7 @@ class DeliveryAddress extends Component {
                           <br />
                           {item.gst || ''}
                         </Text>
-                      </Button>
+                      </Card>
                     </Col>
                   ))}
 
@@ -453,7 +455,7 @@ class DeliveryAddress extends Component {
                       <Label htmlFor="checkbox" />
                       {/* eslint-enable */}
                     </Box>
-                    <Text fontSize={14} htmlFor="checkbox">
+                    <Text fontSize={14} htmlFor="checkbox" onClick={this.toggleBillingForm}>
                       Different Billing Address ?
                     </Text>
                   </Flex>
