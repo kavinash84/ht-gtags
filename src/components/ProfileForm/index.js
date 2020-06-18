@@ -74,14 +74,15 @@ export default class ProfileForm extends Component {
     fullNameErrorMessage: '',
     gst: '',
     gstError: false,
-    gstErrorMessage: 'Enter a valid GST Number'
+    gstErrorMessage: 'Enter a valid GST Number',
+    showEditForm: false
   };
 
   componentWillMount() {
     const {
       profile: {
- full_name: fullName, email, contact_number: phone, gst
-}
+        full_name: fullName, email, contact_number: phone, gst
+      }
     } = this.props;
     this.setState({
       fullName: (fullName && fullName.trim()) || '',
@@ -132,8 +133,8 @@ export default class ProfileForm extends Component {
   onSubmitProfile = e => {
     e.preventDefault();
     const {
- email, fullName, phone, gst
-} = this.state;
+      email, fullName, phone, gst
+    } = this.state;
     const checkEmail = validateEmail(email, 'Invalid Email');
     const phoneError = !validateMobile(phone);
     const checkFullName = isBlank(fullName) || checkSpecialChar(fullName);
@@ -168,7 +169,8 @@ export default class ProfileForm extends Component {
       phoneError,
       phoneErrorMessage,
       fullNameError,
-      fullNameErrorMessage
+      fullNameErrorMessage,
+      showEditForm
     } = this.state;
     const { response } = this.props;
     return (
@@ -195,32 +197,35 @@ export default class ProfileForm extends Component {
           </Box>
         </Box>
         <Box pt={50} pb={20}>
-          <Button variant="outline.primary" width={180}>
+          <Button variant="outline.primary" width={180}
+            onClick={() => this.setState({ showEditForm: !showEditForm })}
+          >
             Edit
           </Button>
         </Box>
-        <Box>
-          <ProfileFormContainer
-            email={email}
-            onChangeEmail={() => {}}
-            emailFeedBackError={emailError}
-            emailFeedBackMessage={emailErrorMessage}
-            gst={gst}
-            onChangeGST={this.onChangeGST}
-            gstFeedBackError={gstError}
-            gstFeedBackMessage={gstErrorMessage}
-            phone={phone}
-            onChangePhone={() => {}}
-            phoneFeedBackError={phoneError}
-            phoneFeedBackMessage={phoneErrorMessage}
-            fullName={fullName}
-            onChangeFullName={this.onChangeFullName}
-            fullNameFeedBackError={fullNameError}
-            fullNameFeedBackMessage={fullNameErrorMessage}
-            onSubmitProfile={this.onSubmitProfile}
-            response={response}
-          />
-        </Box>
+        {showEditForm ?
+          <Box>
+            <ProfileFormContainer
+              email={email}
+              onChangeEmail={() => { }}
+              emailFeedBackError={emailError}
+              emailFeedBackMessage={emailErrorMessage}
+              gst={gst}
+              onChangeGST={this.onChangeGST}
+              gstFeedBackError={gstError}
+              gstFeedBackMessage={gstErrorMessage}
+              phone={phone}
+              onChangePhone={() => { }}
+              phoneFeedBackError={phoneError}
+              phoneFeedBackMessage={phoneErrorMessage}
+              fullName={fullName}
+              onChangeFullName={this.onChangeFullName}
+              fullNameFeedBackError={fullNameError}
+              fullNameFeedBackMessage={fullNameErrorMessage}
+              onSubmitProfile={this.onSubmitProfile}
+              response={response}
+            />
+          </Box> : null}
       </Box>
     );
   }
