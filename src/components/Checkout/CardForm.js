@@ -84,7 +84,7 @@ const CardForm = ({
       </Text>
     </Box>
     <Row>
-      <Col variant="col-6" sx={{ position: 'relative' }}>
+      <Col sx={{ position: 'relative' }} width={1}>
         <FormInput
           label="Card number"
           type="text"
@@ -103,7 +103,9 @@ const CardForm = ({
         {cardType === 'diners' && <CardImage src={dcIcon} alt="Diners Club" />}
         {cardType === 'other' && <CardImage src={cardIcon} alt="Others" />}
       </Col>
-      <Col variant="col-6">
+    </Row>
+    <Row>
+      <Col variant="col-6" maxWidth="43%">
         <FormInput
           label="Name on card"
           type="text"
@@ -114,14 +116,12 @@ const CardForm = ({
           onChange={onChangeDetails(setPaymentDetails, gateway)}
         />
       </Col>
-    </Row>
-    <Row>
-      <Col variant="col-9">
+      <Col>
         <Label fontSize={14} mb={2}>
           Expiry Date
         </Label>
         <Row>
-          <Col variant="col-6">
+          <Col>
             <Box
               as="select"
               variant="input"
@@ -137,7 +137,7 @@ const CardForm = ({
               ))}
             </Box>
           </Col>
-          <Col variant="col-6">
+          <Col>
             <Box
               as="select"
               variant="input"
@@ -155,7 +155,7 @@ const CardForm = ({
           </Col>
         </Row>
       </Col>
-      <Col variant="col-3">
+      <Col width="18%">
         <FormInput
           label="CVV"
           type="password"

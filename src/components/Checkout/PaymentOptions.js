@@ -381,6 +381,7 @@ class PaymentOptions extends Component {
           <Col variant="col-4">
             <Box bg="sidebar" px={40} py={30}>
               <OrderSummary
+                results={results}
                 itemsTotal={summary.items}
                 setDiscount={summary.combined_set_discount}
                 savings={summary.savings}

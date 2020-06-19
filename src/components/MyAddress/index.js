@@ -371,6 +371,7 @@ export default class DeliveryAddress extends Component {
                       lineHeight: '1.6',
                       fontSize: '14px',
                       width: '100%',
+                      height: '100%',
                       minHeight: '135px',
                       marginBottom: '10px',
                       textTransform: 'none'

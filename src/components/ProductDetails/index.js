@@ -485,17 +485,20 @@ class ProductDetails extends React.Component {
                   justifyContent="flex-start"
                   sx={{ borderBottom: 'none' }}
                 >
-                  <a
-                    variant="linkPrimary"
-                    href="#review-section"
-                    pl={10}
-                    ml={10}
-                    sx={{
-                      borderLeft: 'primary'
-                    }}
-                  >
-                    Write a Review
-                  </a>
+                  <Box pl={4}>
+                    <a
+                      variant="linkPrimary"
+                      href="#review-section"
+                      pl={10}
+                      ml={10}
+                      sx={{
+                        borderLeft: 'primary'
+                      }}
+                      style={{ color: '#f15a22' }}
+                    >
+                      | Write a Review
+                    </a>
+                  </Box>
                 </ReviewDisplay>
               )}
 
@@ -678,8 +681,14 @@ class ProductDetails extends React.Component {
                 <Box p={15} textAlign="center" sx={{ border: 'dividerLight' }}>
                   <Image src="https://www.hometown.in/media/product/89/2453/3-zoom.jpg" alt="" />
                 </Box>
-                <Box>
-                  <Text variant="regular" fontSize={16} pb={5}>
+                <Box mt={36}>
+                  <Text
+                    variant="regular"
+                    fontSize={16}
+                    pb={20}
+                    pt={20}
+                    sx={{ borderTop: 'divider', borderBottom: 'divider' }}
+                  >
                     {`
                     Overall Dimension (inches) :
                     ${width && `Width : ${width} `}
