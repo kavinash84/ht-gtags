@@ -91,7 +91,7 @@ class PaymentOptions extends Component {
       setPaymentDetails,
       summary,
       submitting,
-      // history,
+      history,
       session,
       paymentDetails,
       results,
@@ -389,6 +389,7 @@ class PaymentOptions extends Component {
             <Box bg="sidebar" px={40} py={30}>
               <OrderSummary
                 itemsTotal={summary.items}
+                history={history}
                 setDiscount={summary.combined_set_discount}
                 savings={summary.savings}
                 shipping={summary.shipping_charges}
@@ -433,7 +434,7 @@ PaymentOptions.defaultProps = {
   summary: null,
   submitting: false,
   session: '',
-  // history: {},
+  history: {},
   results: [],
   outOfStockList: [],
   paymentFormData: {},
