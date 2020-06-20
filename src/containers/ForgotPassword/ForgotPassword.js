@@ -20,7 +20,7 @@ import Row from 'hometown-components-dev/lib/RowHtV1';
  * Page Components
  */
 import Footer from 'components/Footer';
-import ForgotPasswordForm from 'hometown-components-dev/lib/FormsHtV1/ForgotPasswordFormHtV1';
+import ForgotPasswordForm from 'components/ForgotPasswordForm';
 import GoogleLoginBtn from 'components/LoginForms/GoogleLogin';
 import Header from 'components/Header';
 
@@ -101,7 +101,7 @@ export default class ForgotPasswordContainer extends Component {
         {/* Container */}
         <Container mt={80}>
           <Row>
-            <Box variant="col-4">
+            <Box maxWidth="50%" pl={16} pr={16}>
               {loaded && !error && submitted ? (
                 <Box className={`${styles.responseBlock}`}>
                   <Image src={ForgotPasswordImg} alt="" />
@@ -119,12 +119,7 @@ export default class ForgotPasswordContainer extends Component {
                 </Box>
               ) : (
                 <Fragment>
-                  <Box width={1} mb={10} sx={{ borderBottom: 'divider' }}>
-                    <Heading color="#1b2125" pb={20}>
-                      FORGOT PASSWORD?
-                    </Heading>
-                  </Box>
-                  <Box pt={20} pb={30}>
+                  <Box pb={30}>
                     <ForgotPasswordForm
                       email={email}
                       onChangeEmail={this.onChangeEmail}
@@ -166,7 +161,7 @@ export default class ForgotPasswordContainer extends Component {
                 </Fragment>
               )}
             </Box>
-            <Box variant="col-8" pl={40}>
+            <Box maxWidth="50%" pr={16} pl={40}>
               <Box
                 width={1}
                 mb={20}
