@@ -71,6 +71,7 @@ export default class DeliveryAddress extends Component {
   };
   constructor(props) {
     super(props);
+    this.formRef = React.createRef();
     this.state = {
       name: '',
       address1: '',
@@ -234,6 +235,9 @@ export default class DeliveryAddress extends Component {
       [name]: value
     });
   };
+  scrollToFormRef() {
+    window.scrollTo(0, this.formRef.current.offsetTop + (window.innerHeight / 1.5));
+  }
   handleClick = index => {
     const { data } = this.props;
     const {
@@ -274,6 +278,7 @@ export default class DeliveryAddress extends Component {
       name,
       addressId
     });
+    this.scrollToFormRef()
   };
   handleSubmit = e => {
     const { dispatch } = this.context.store;
@@ -298,6 +303,7 @@ export default class DeliveryAddress extends Component {
       phone: '',
       name: ''
     });
+    this.scrollToFormRef()
   };
   checkDisabled = () => {
     const { address1Error, address2Error, address3Error, phoneError, pincodeError, nameError, gstError } = this.state;
@@ -404,71 +410,72 @@ export default class DeliveryAddress extends Component {
                 </ButtonHtV1>
               </BoxHtV1>
             </RowHtV1>
-            {editForm && (
-              <form onSubmit={this.handleSubmit}>
-                <RowHtV1 display="block" mr="0" ml="0" mt="1rem">
-                  <BoxHtV1 col="5">
-                    <FormInput
-                      label="Full Name *"
-                      type="text"
-                      placeholder=""
-                      onChange={this.onChangeName}
-                      value={name}
-                      feedBackError={nameError}
-                      feedBackMessage={nameErrorMessage}
-                    />
-                    <FormInput
-                      label="Flat, House no., Building, Apartment: *"
-                      type="text"
-                      placeholder=""
-                      onChange={e => {
-                        this.onChangeAddress(e, 'address1');
-                      }}
-                      value={address1 || ''}
-                      feedBackError={address1Error}
-                      feedBackMessage={address1ErrorMessage}
-                    />
-                    <FormInput
-                      label="Area, Colony, Street, Sector: "
-                      type="text"
-                      placeholder=""
-                      onChange={e => {
-                        this.onChangeAddress(e, 'address2');
-                      }}
-                      value={address2 || ''}
-                      feedBackError={address2Error}
-                      feedBackMessage={address2ErrorMessage}
-                    />
-                    <FormInput
-                      label="Landmark,Village: "
-                      type="text"
-                      placeholder=""
-                      onChange={e => {
-                        this.onChangeAddress(e, 'address3');
-                      }}
-                      value={address3 || ''}
-                      feedBackError={address3Error}
-                      feedBackMessage={address3ErrorMessage}
-                    />
-                    <FormInput
-                      label="Phone *"
-                      type="text"
-                      placeholder=""
-                      onChange={this.onChangePhone}
-                      value={phone}
-                      feedBackError={phoneError}
-                      feedBackMessage={phoneErrorMessage}
-                    />
-                    <FormInput
-                      label="PIN Code *"
-                      type="text"
-                      placeholder=""
-                      onChange={this.onChangePincode}
-                      value={pincode}
-                      feedBackError={pincodeError}
-                      feedBackMessage={pincodeErrorMessage}
-                    />
-                    {/* <FormInput
+            <div ref={this.formRef}>
+              {editForm && (
+                <form onSubmit={this.handleSubmit}>
+                  <RowHtV1 display="block" mr="0" ml="0" mt="1rem">
+                    <BoxHtV1 col="5">
+                      <FormInput
+                        label="Full Name *"
+                        type="text"
+                        placeholder=""
+                        onChange={this.onChangeName}
+                        value={name}
+                        feedBackError={nameError}
+                        feedBackMessage={nameErrorMessage}
+                      />
+                      <FormInput
+                        label="Flat, House no., Building, Apartment: *"
+                        type="text"
+                        placeholder=""
+                        onChange={e => {
+                          this.onChangeAddress(e, 'address1');
+                        }}
+                        value={address1 || ''}
+                        feedBackError={address1Error}
+                        feedBackMessage={address1ErrorMessage}
+                      />
+                      <FormInput
+                        label="Area, Colony, Street, Sector: "
+                        type="text"
+                        placeholder=""
+                        onChange={e => {
+                          this.onChangeAddress(e, 'address2');
+                        }}
+                        value={address2 || ''}
+                        feedBackError={address2Error}
+                        feedBackMessage={address2ErrorMessage}
+                      />
+                      <FormInput
+                        label="Landmark,Village: "
+                        type="text"
+                        placeholder=""
+                        onChange={e => {
+                          this.onChangeAddress(e, 'address3');
+                        }}
+                        value={address3 || ''}
+                        feedBackError={address3Error}
+                        feedBackMessage={address3ErrorMessage}
+                      />
+                      <FormInput
+                        label="Phone *"
+                        type="text"
+                        placeholder=""
+                        onChange={this.onChangePhone}
+                        value={phone}
+                        feedBackError={phoneError}
+                        feedBackMessage={phoneErrorMessage}
+                      />
+                      <FormInput
+                        label="PIN Code *"
+                        type="text"
+                        placeholder=""
+                        onChange={this.onChangePincode}
+                        value={pincode}
+                        feedBackError={pincodeError}
+                        feedBackMessage={pincodeErrorMessage}
+                      />
+                      {/* <FormInput
                       style={{ background: '#80808026' }}
                       readonly
                       label="Email ID *"
@@ -479,7 +486,7 @@ export default class DeliveryAddress extends Component {
                       feedBackError={emailError}
                       feedBackMessage={emailErrorMessage}
                     /> */}
-                    {/* <FormInput
+                      {/* <FormInput
                       hide
                       label="GST Number "
                       type="text"
@@ -489,91 +496,91 @@ export default class DeliveryAddress extends Component {
                       feedBackError={gstError}
                       feedBackMessage={gstErrorMessage}
                     /> */}
-                  </BoxHtV1>
-                </RowHtV1>
-                <RowHtV1 display="block" mr="0" ml="0">
-                  <BoxHtV1 col="2">
-                    <ButtonHtV1
-                      size="block"
-                      btnType="primary"
-                      fontFamily="regular"
-                      height="42px"
-                      mt="1.5rem"
-                      width="100%"
-                      onClick={this.handleSubmit}
-                      disabled={this.checkDisabled()}
-                    >
-                      {loading ? 'Please wait ...' : 'Save'}
-                    </ButtonHtV1>
-                  </BoxHtV1>
-                </RowHtV1>
-              </form>
-            )}
-            {addForm && (
-              <form onSubmit={this.handleSubmit}>
-                <RowHtV1 display="block" mr="0" ml="0" mt="1rem">
-                  <BoxHtV1 col="5">
-                    <FormInput
-                      label="Full Name *"
-                      type="text"
-                      placeholder=""
-                      onChange={this.onChangeName}
-                      value={name}
-                      feedBackError={nameError}
-                      feedBackMessage={nameErrorMessage}
-                    />
-                    <FormInput
-                      label="Flat, House no., Building, Apartment: *"
-                      type="text"
-                      placeholder=""
-                      onChange={e => {
-                        this.onChangeAddress(e, 'address1');
-                      }}
-                      value={address1}
-                      feedBackError={address1Error}
-                      feedBackMessage={address1ErrorMessage}
-                    />
-                    <FormInput
-                      label="Area, Colony, Street, Sector: "
-                      type="text"
-                      placeholder=""
-                      onChange={e => {
-                        this.onChangeAddress(e, 'address2');
-                      }}
-                      value={address2}
-                      feedBackError={address2Error}
-                      feedBackMessage={address2ErrorMessage}
-                    />
-                    <FormInput
-                      label="Landmark,Village: "
-                      type="text"
-                      placeholder=""
-                      onChange={e => {
-                        this.onChangeAddress(e, 'address3');
-                      }}
-                      value={address3}
-                      feedBackError={address3Error}
-                      feedBackMessage={address3ErrorMessage}
-                    />
-                    <FormInput
-                      label="Phone *"
-                      type="text"
-                      placeholder=""
-                      onChange={this.onChangePhone}
-                      value={phone}
-                      feedBackError={phoneError}
-                      feedBackMessage={phoneErrorMessage}
-                    />
-                    <FormInput
-                      label="PIN Code *"
-                      type="text"
-                      placeholder=""
-                      onChange={this.onChangePincode}
-                      value={pincode}
-                      feedBackError={pincodeError}
-                      feedBackMessage={pincodeErrorMessage}
-                    />
-                    {/* <FormInput
+                    </BoxHtV1>
+                  </RowHtV1>
+                  <RowHtV1 display="block" mr="0" ml="0">
+                    <BoxHtV1 col="2">
+                      <ButtonHtV1
+                        size="block"
+                        btnType="primary"
+                        fontFamily="regular"
+                        height="42px"
+                        mt="1.5rem"
+                        width="100%"
+                        onClick={this.handleSubmit}
+                        disabled={this.checkDisabled()}
+                      >
+                        {loading ? 'Please wait ...' : 'Save'}
+                      </ButtonHtV1>
+                    </BoxHtV1>
+                  </RowHtV1>
+                </form>
+              )}
+              {addForm && (
+                <form onSubmit={this.handleSubmit}>
+                  <RowHtV1 display="block" mr="0" ml="0" mt="1rem">
+                    <BoxHtV1 col="5">
+                      <FormInput
+                        label="Full Name *"
+                        type="text"
+                        placeholder=""
+                        onChange={this.onChangeName}
+                        value={name}
+                        feedBackError={nameError}
+                        feedBackMessage={nameErrorMessage}
+                      />
+                      <FormInput
+                        label="Flat, House no., Building, Apartment: *"
+                        type="text"
+                        placeholder=""
+                        onChange={e => {
+                          this.onChangeAddress(e, 'address1');
+                        }}
+                        value={address1}
+                        feedBackError={address1Error}
+                        feedBackMessage={address1ErrorMessage}
+                      />
+                      <FormInput
+                        label="Area, Colony, Street, Sector: "
+                        type="text"
+                        placeholder=""
+                        onChange={e => {
+                          this.onChangeAddress(e, 'address2');
+                        }}
+                        value={address2}
+                        feedBackError={address2Error}
+                        feedBackMessage={address2ErrorMessage}
+                      />
+                      <FormInput
+                        label="Landmark,Village: "
+                        type="text"
+                        placeholder=""
+                        onChange={e => {
+                          this.onChangeAddress(e, 'address3');
+                        }}
+                        value={address3}
+                        feedBackError={address3Error}
+                        feedBackMessage={address3ErrorMessage}
+                      />
+                      <FormInput
+                        label="Phone *"
+                        type="text"
+                        placeholder=""
+                        onChange={this.onChangePhone}
+                        value={phone}
+                        feedBackError={phoneError}
+                        feedBackMessage={phoneErrorMessage}
+                      />
+                      <FormInput
+                        label="PIN Code *"
+                        type="text"
+                        placeholder=""
+                        onChange={this.onChangePincode}
+                        value={pincode}
+                        feedBackError={pincodeError}
+                        feedBackMessage={pincodeErrorMessage}
+                      />
+                      {/* <FormInput
                       label="Email ID *"
                       type="text"
                       placeholder=""
@@ -591,26 +598,27 @@ export default class DeliveryAddress extends Component {
                       feedBackError={gstError}
                       feedBackMessage={gstErrorMessage}
                     /> */}
-                  </BoxHtV1>
-                </RowHtV1>
-                <RowHtV1 display="block" mr="0" ml="0">
-                  <BoxHtV1 col="2">
-                    <ButtonHtV1
-                      size="block"
-                      btnType="primary"
-                      fontFamily="regular"
-                      height="42px"
-                      mt="1.5rem"
-                      bg="rgb(249, 141, 41)"
-                      onClick={this.handleSubmit}
-                      disabled={this.checkDisabled()}
-                    >
-                      {loading ? 'Please wait ...' : 'Save'}
-                    </ButtonHtV1>
-                  </BoxHtV1>
-                </RowHtV1>
-              </form>
-            )}
+                    </BoxHtV1>
+                  </RowHtV1>
+                  <RowHtV1 display="block" mr="0" ml="0">
+                    <BoxHtV1 col="2">
+                      <ButtonHtV1
+                        size="block"
+                        btnType="primary"
+                        fontFamily="regular"
+                        height="42px"
+                        mt="1.5rem"
+                        bg="rgb(249, 141, 41)"
+                        onClick={this.handleSubmit}
+                        disabled={this.checkDisabled()}
+                      >
+                        {loading ? 'Please wait ...' : 'Save'}
+                      </ButtonHtV1>
+                    </BoxHtV1>
+                  </RowHtV1>
+                </form>
+              )}
+            </div>
           </ContainerHtV1>
         </SectionHtV1>
       </BoxHtV1>
