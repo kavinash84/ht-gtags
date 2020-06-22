@@ -397,7 +397,7 @@ class DeliveryAddress extends Component {
                         py={15}
                         height="100%"
                         lineHeight={1.25}
-                        className={`${index === currentaddressindex ? styles.active : null}`}
+                        className={`${index === currentaddressindex ? styles.active : styles.deliveryAddress}`}
                         onClick={() => this.handleClick(index)}
                         sx={{
                           border: 'secondary',
@@ -455,7 +455,7 @@ class DeliveryAddress extends Component {
                       <Label htmlFor="checkbox" />
                       {/* eslint-enable */}
                     </Box>
-                    <Text fontSize={14} htmlFor="checkbox" onClick={this.toggleBillingForm}>
+                    <Text variant="link" fontSize={14} htmlFor="checkbox" onClick={this.toggleBillingForm}>
                       Different Billing Address ?
                     </Text>
                   </Flex>
