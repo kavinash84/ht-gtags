@@ -15,6 +15,7 @@ import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
  */
 import DeliveryAddress from 'components/Checkout/DeliveryAddress';
 import HeaderSecondary from 'components/HeaderSecondary';
+import Footer from 'components/Footer';
 
 /**
  * modules / selectors / helpers
@@ -52,6 +53,7 @@ export default class DeliveryAddressContainer extends Component {
           {/* HeaderSecondary */}
           <HeaderSecondary />
           <DeliveryAddress />
+          <Footer />
         </Body>
       </Wrapper>
     );
