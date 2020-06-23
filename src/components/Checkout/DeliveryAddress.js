@@ -74,7 +74,7 @@ class DeliveryAddress extends Component {
   state = {
     openLogin: false,
     addressform: false,
-    addressSelected: false
+
   };
   componentDidMount() {
     const { dispatch } = this.context.store;
@@ -320,7 +320,6 @@ class DeliveryAddress extends Component {
     const { addresses, setAddress, loadPincodeDetails } = this.props;
     this.setState({
       addressform: false,
-      addressSelected: true
     });
     setAddress('shipping', addresses[index], index);
     loadPincodeDetails('shipping', addresses[index].pincode);
@@ -357,7 +356,7 @@ class DeliveryAddress extends Component {
       summary,
       results
     } = this.props;
-    const { addressform, addressSelected } = this.state;
+    const { addressform } = this.state;
     return (
       <Container my={60} px={0}>
         <Row>
@@ -477,15 +476,9 @@ class DeliveryAddress extends Component {
                   </Text>
                   {/* {isLoggedIn ? addressSelected ? !this.checkParams() ? "selected, form satisfying" : "Selected, not satisfying" : "not selected address" : !this.checkParams() ? "newuser satisfying" : "newuser Not satisfying"} */}
 
-                  {isLoggedIn ?
-                    <Button type="submit" disabled={loading || this.checkParams() || !addressSelected}>
-                      {loading ? 'Loading...' : 'Save and Continue'}
-                    </Button>
-                    :
-                    <Button type="submit" disabled={loading || this.checkParams()}>
-                      {loading ? 'Loading...' : 'Save and Continue'}
-                    </Button>
-                  }
+                  <Button type="submit" disabled={loading || this.checkParams()}>
+                    {loading ? 'Loading...' : 'Save and Continue'}
+                  </Button>
                 </Col>
               </Row>
             </form>
