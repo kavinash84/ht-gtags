@@ -458,7 +458,7 @@ class DeliveryAddress extends Component {
                       {/* eslint-enable */}
                     </Box>
                     <Text variant="link" fontSize={14} htmlFor="checkbox" onClick={this.toggleBillingForm}>
-                      Different Billing Address ?
+                      <p style={{ cursor: "pointer" }}> Different Billing Address ?</p>
                     </Text>
                   </Flex>
 
