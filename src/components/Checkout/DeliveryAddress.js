@@ -458,7 +458,7 @@ class DeliveryAddress extends Component {
                       {/* eslint-enable */}
                     </Box>
                     <Text variant="link" fontSize={14} htmlFor="checkbox" onClick={this.toggleBillingForm}>
-                      <p style={{ cursor: "pointer" }}> Different Billing Address ?</p>
+                      <p className={styles.difBillingAddress}> Different Billing Address ?</p>
                     </Text>
                   </Flex>
 
@@ -509,7 +509,7 @@ class DeliveryAddress extends Component {
             </Box>
           </Col>
         </Row>
-      </Container>
+      </Container >
     );
   }
 }
