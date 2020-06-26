@@ -1,0 +1,23 @@
+@import "../../theme/_variables";
+@import "../../theme/_mixins";
+
+.dimensionSpans {
+margin-right: 50px;
+font-size: 16px;
+font-weight: bolder;
+  }
+  .overolDimension{
+      font-size: 16px;
+      font-weight: bolder;
+      margin-right: 50px;
+  }
+  .dimensionUnit{
+    font-size: 16px;
+    font-weight: lighter;
+  }
+  .dimensionContainer{
+      border-bottom: 1px solid black;
+      border-top: 1px solid black;
+      padding: 20px 0;
+      margin-top: 30px;
+  }

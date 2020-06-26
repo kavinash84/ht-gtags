@@ -71,6 +71,11 @@ const youtubeIcon = require('../../../static/youtube.svg');
 const email = require('../../../static/email-primary.svg');
 const pinIcon = require('../../../static/pinterest.svg');
 
+/**
+ * styles
+ */
+const styles = require('./productIndex.scss');
+
 const qtyOptions = [
   { value: 1, label: '1' },
   { value: 2, label: '2' },
@@ -323,6 +328,9 @@ class ProductDetails extends React.Component {
           {key}
         </DescriptionButton>
       )));
+  mmToInchConvert(value) {
+    return Math.round(value / 25.4)
+  }
   render() {
     const {
       product,
@@ -347,6 +355,7 @@ class ProductDetails extends React.Component {
       quantityChange,
       skuItem
     } = this.props;
+    console.log(product.sku, "SkuOfProduct")
     const { activeSpec, showReviews, productQty } = this.state;
     const {
       meta,
@@ -360,8 +369,8 @@ class ProductDetails extends React.Component {
       reviews: { count, rating }
     } = product;
     const {
- description, product_height: height, product_width: width, product_depth: depth
-} = attributes;
+      description, product_height: height, product_width: width, product_depth: depth
+    } = attributes;
     const simpleSku = Object.keys(simples)[0];
     const { name, price, special_price: specialPrice } = meta;
     const checkSpecialPrice = Number(specialPrice) || Number(price);
@@ -510,6 +519,7 @@ class ProductDetails extends React.Component {
                     data={colorproducts}
                     showmorecolorproducts={showmorecolorproducts}
                     toggleShowMoreColorProducts={this.toggleShowMoreColorProducts}
+                    currentlySelectedProductSku={product.sku}
                   />
                 </Box>
               )}
@@ -549,8 +559,8 @@ class ProductDetails extends React.Component {
                       </a>
                     </Button>
                   ) : (
-                    ''
-                  )}
+                      ''
+                    )}
                   {/*
                 {offerImage && offerImageRedirect && (
                   <a rel="noopener noreferrer" href={offerImageRedirect}>
@@ -698,14 +708,31 @@ class ProductDetails extends React.Component {
                   <Image src="https://www.hometown.in/media/product/89/2453/3-zoom.jpg" alt="" />
                 </Box>
                 <Box>
-                  <Text variant="regular" fontSize={16} pb={5}>
-                    {`
-                    Overall Dimension (inches) :
-                    ${width && `Width : ${width} `}
-                    ${depth && `Depth : ${depth} `} 
-                    ${height && `Height : ${height} `}
-                  `}
-                  </Text>
+
+                  <Row
+                    variant="row.contentCenter"
+                    mx={0}
+                    sx={{
+                      borderTop: 'dividerBold',
+                      borderBottom: 'dividerBold',
+                      padding: "20px 0",
+                      marginTop: "30px",
+                      justifyContent: "flex-start",
+                    }}
+                  >
+                    <span className={styles.overolDimension}>
+                      Overall Dimension <span className={styles.dimensionUnit}>(Inches)</span>
+                    </span>
+                    <span className={styles.dimensionSpans}>
+                      {width && `Width : ${this.mmToInchConvert(width)} `}
+                    </span>
+                    <span className={styles.dimensionSpans}>
+                      {depth && `Depth : ${this.mmToInchConvert(depth)} `}
+                    </span>
+                    <span className={styles.dimensionSpans}>
+                      {height && `Height : ${this.mmToInchConvert(height)} `}
+                    </span>
+                  </Row>
                 </Box>
               </Box>
             )}
