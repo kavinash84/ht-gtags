@@ -713,7 +713,14 @@ class ProductDetails extends React.Component {
                 <CompleteTheLookCol src="https://www.hometown.in/media/cms/banner/chair.png" />
                 <CompleteTheLookCol src="https://www.hometown.in/media/cms/banner/curtain.png" />
                 <CompleteTheLookCol src="https://www.hometown.in/media/cms/banner/painting.png" />
-                <CompleteTheLookCol src="https://www.hometown.in/media/cms/banner/pillow.png" />
+                <CompleteTheLookCol
+                  width="190px"
+                  height="190px"
+                  marginTop="53px"
+                  marginRight="104px"
+                  marginLeft="93px"
+                  src="https://www.hometown.in/media/cms/banner/pillow.png"
+                />
                 <CompleteTheLookCol src="https://www.hometown.in/media/cms/banner/table.png" />
               </Row>
             </Box>
