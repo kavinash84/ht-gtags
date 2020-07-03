@@ -202,14 +202,14 @@ class Footer extends React.Component {
                 <Ul>
                   <Li>
                     <a href="tel:1800-210-0004" rel="noreferrer noopener" target="_blank">
-                      <Text variant="footerLink">
+                      <Text variant="footerLink" fontSize={16}>
                         <CallIcon mr={10} /> 1800-210-0004
                       </Text>
                     </a>
                   </Li>
                   <Li>
                     <a href="mailto:care@hometown.in" rel="noreferrer noopener" target="_blank">
-                      <Text variant="footerLink">
+                      <Text variant="footerLink" fontSize={16}>
                         <EmailIcon mr={10} />
                         care@hometown.in
                       </Text>
@@ -217,7 +217,7 @@ class Footer extends React.Component {
                   </Li>
                   <Li>
                     <Link to="/store-locator">
-                      <Text variant="footerLink">
+                      <Text variant="footerLink" fontSize={16}>
                         <LocationIcon mr={10} />
                         Store Locator
                       </Text>

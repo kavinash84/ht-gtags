@@ -96,6 +96,7 @@ const DescriptionButton = props => (
       fontWeight={500}
       fontSize={16}
       py={20}
+      color={props.active && '#fa6400'}
       textTransform="uppercase"
       sx={{ textTransform: 'uppercase' }}
       {...props}
@@ -317,6 +318,7 @@ class ProductDetails extends React.Component {
             e.preventDefault();
             this.setState({ activeSpec: i });
           }}
+          active={i === this.state.activeSpec}
         >
           {key}
         </DescriptionButton>
@@ -637,6 +639,7 @@ class ProductDetails extends React.Component {
                   e.preventDefault();
                   this.setState({ activeSpec: 'description' });
                 }}
+                active={activeSpec === 'description'}
               >
                 DESCRIPTION
               </DescriptionButton>
@@ -812,6 +815,10 @@ ProductDetails.defaultProps = {
   quantityChange: false,
   skuItem: {}
   // session: ''
+};
+DescriptionButton.propTypes = {
+  // eslint-disable-next-line react/require-default-props
+  active: PropTypes.string
 };
 ProductDetails.propTypes = {
   product: PropTypes.object,
