@@ -100,7 +100,7 @@ class TrackingDetails extends Component {
                             <BoxHtV1 className={stylesModal.line} />
                             <BoxHtV1
                               className={stylesModal.round}
-                              sx={{ position: 'absolute', marginTop: '-10px', width: '121px' }}
+                              sx={{ marginTop: '-10px', width: '121px !important' }}
                             >
                               <ImageHtV1
                                 width="16px"
