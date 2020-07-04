@@ -98,10 +98,14 @@ class TrackingDetails extends Component {
                               {StatusKey || 'NA'}
                             </TextHtV1>
                             <BoxHtV1 className={stylesModal.line} />
-                            <BoxHtV1 className={stylesModal.round}>
+                            <BoxHtV1
+                              className={stylesModal.round}
+                              sx={{ position: 'absolute', marginTop: '-10px', width: '121px' }}
+                            >
                               <ImageHtV1
                                 width="16px"
                                 height="16px"
+                                marginTop={StatusKey === 'Payment Pending' && '8px'}
                                 src={active === 1 ? statusActiveIcon : statusIcon}
                               />
                             </BoxHtV1>
