@@ -19,7 +19,7 @@ const CategoryItem = ({
             </Text>
           )}
           {name && (
-            <Text variant="catSliderTitle" mt={12}>
+            <Text variant="catSliderTitle" mt={12} pb={5}>
               {name}
             </Text>
           )}
@@ -36,7 +36,7 @@ const CategoryItem = ({
         </Text>
       )}
       {name && (
-        <Text variant="catSliderTitle" mt={12}>
+        <Text variant="catSliderTitle" mt={12} pb={5}>
           {name}
         </Text>
       )}
