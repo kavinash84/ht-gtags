@@ -55,7 +55,7 @@ const FooterMenuLink = ({ to, title }) => (
   </Li>
 );
 
-const SocialLink = props => <LinkRedirect mr={15} {...props} />;
+const SocialLink = props => <LinkRedirect {...props} />;
 
 FooterMenuLink.propTypes = {
   to: PropTypes.string.isRequired,
@@ -277,7 +277,7 @@ class Footer extends React.Component {
                   </Text>
                 </Row>
               )}
-              <Row mt={20}>
+              <Row mt={20} sx={{ justifyContent: 'space-between' }}>
                 <SocialLink target="_blank" href="https://www.facebook.com/hometown.in/">
                   <Image src={fbIcon} alt="Facebook" />
                 </SocialLink>
