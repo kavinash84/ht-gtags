@@ -153,41 +153,43 @@ export default class HeaderTop extends Component {
             </Button>
             <Box pt={20} sx={{ position: 'relative' }}>
               <Card variant="card.profileMore">
-                {!isLoggedIn && (
-                  <Fragment>
-                    <Button as={Link} to={SIGNUP_URL} onClick={this.handleClick(SIGNUP_URL)} mb={15} width={175}>
-                      Sign Up
-                    </Button>
-                    <Text mb={6} textAlign="center">
-                      Not a member yet?
-                    </Text>
-                    <Button
-                      as={Link}
-                      variant="outline.primary"
-                      to={LOGIN_URL}
-                      onClick={this.handleClick(LOGIN_URL)}
-                      width={175}
-                      sx={{ display: 'block' }}
-                    >
-                      Log In
-                    </Button>
-                  </Fragment>
-                )}
-                {isLoggedIn && (
-                  <Fragment>
-                    <Button as={Link} to={MY_PROFILE_URL} mb={15} width={175}>
-                      Profile
-                    </Button>
-                    <Button
-                      variant="outline.primary"
-                      onClick={onClickLogout(logoutUser)}
-                      width={175}
-                      sx={{ display: 'block' }}
-                    >
-                      Logout !
-                    </Button>
-                  </Fragment>
-                )}
+                <Box variant="card.profileMoreWrapper">
+                  {!isLoggedIn && (
+                    <Fragment>
+                      <Button as={Link} to={SIGNUP_URL} onClick={this.handleClick(SIGNUP_URL)} mb={15} width={175}>
+                        Sign Up
+                      </Button>
+                      <Text mb={6} textAlign="center">
+                        Not a member yet?
+                      </Text>
+                      <Button
+                        as={Link}
+                        variant="outline.primary"
+                        to={LOGIN_URL}
+                        onClick={this.handleClick(LOGIN_URL)}
+                        width={175}
+                        sx={{ display: 'block' }}
+                      >
+                        Log In
+                      </Button>
+                    </Fragment>
+                  )}
+                  {isLoggedIn && (
+                    <Fragment>
+                      <Button as={Link} to={MY_PROFILE_URL} mb={15} width={175}>
+                        Profile
+                      </Button>
+                      <Button
+                        variant="outline.primary"
+                        onClick={onClickLogout(logoutUser)}
+                        width={175}
+                        sx={{ display: 'block' }}
+                      >
+                        Logout !
+                      </Button>
+                    </Fragment>
+                  )}
+                </Box>
               </Card>
             </Box>
             <Button variant="link" pl={20} onClick={isLoggedIn ? onClick(history) : this.onOpenLoginModal}>

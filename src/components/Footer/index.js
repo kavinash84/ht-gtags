@@ -142,7 +142,7 @@ class Footer extends React.Component {
       <Section bg="bgFooter" pt={30} pb={10} mb={0}>
         <Container variant="container">
           <Row>
-            <Col width={[1, 2 / 3, 2 / 12]}>
+            <Col width={[1, 2 / 3, 3 / 12]}>
               <Box mb={24}>
                 <Heading variant="footerTitle">CUSTOMER SERVICE</Heading>
                 <Ul>
@@ -193,7 +193,7 @@ class Footer extends React.Component {
                     </a>
                   </Li>
                 </Ul>
-                <Image src={bajajFinserveIcon} alt="Bajaj Finserv" mt={20} />
+                <Image src={bajajFinserveIcon} alt="Bajaj Finserv" mt={20} sx={{ height: 60 }} />
               </Box>
             </Col>
             <Col width={[1, 2 / 3, 3 / 12]}>
@@ -226,7 +226,7 @@ class Footer extends React.Component {
                 </Ul>
               </Box>
             </Col>
-            <Col width={[1, 1, 5 / 12]} pl={[0, 0, 50]}>
+            <Col width={[1, 1, 4 / 12]} pl={[0, 0, 50]}>
               <Box
                 mb={17}
                 sx={{
@@ -235,7 +235,7 @@ class Footer extends React.Component {
                   justifyContent: 'center'
                 }}
               >
-                <Text variant="footerLink" mt={-5} sx={{ position: 'absolute' }}>
+                <Text variant="footerLink" mt={-7} px={30} sx={{ position: 'absolute', bg: 'bgFooter' }}>
                   Lorem ipsum doler
                 </Text>
               </Box>

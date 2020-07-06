@@ -119,10 +119,10 @@ class MyOrderContainer extends Component {
       setCurrentOrder: setOrderNumber
     } = this.props;
     return (
-      <BoxHtV1 type="block">
-        <SectionHtV1 display="flex" pt="1.25rem" mb="0" height="auto">
-          <ContainerHtV1 type="container" pr="0.5rem" pl="0.5rem">
-            <RowHtV1 display="block" mr="0" ml="0" mb="1.5rem">
+      <BoxHtV1>
+        <SectionHtV1 mt={0} pt="1.25rem" mb="0" height="auto">
+          <ContainerHtV1 pr="0.5rem" pl="0.5rem">
+            <RowHtV1 mr="0" ml="0" mb="1.5rem">
               <BoxHtV1 col="3" mr="1rem" width="25%">
                 <Select
                   placeholder="Select From Date"
