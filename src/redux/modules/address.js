@@ -71,7 +71,7 @@ const initialState = {
     phoneFeedBackMessage: 'Enter 10 Digits Valid Mobile Number !',
     address1: '',
     addressFeedBackError1: false,
-    addressFeedBackMessage1: '',
+    addressFeedBackMessage1: 'Address line 1 Cannot be Left Empty !',
     address2: '',
     addressFeedBackError2: false,
     addressFeedBackMessage2: '',
@@ -95,7 +95,7 @@ const initialState = {
   billing: {
     fullName: '',
     fullNameFeedBackError: false,
-    fullNameFeedBackMessage: 'Name Cannot be Left Empty !',
+    fullNameFeedBackMessage: 'Name Cannot be Left Empty YO !',
     email: '',
     emailFeedBackError: false,
     emailFeedBackMessage: 'Email is Not Valid  !',
@@ -104,7 +104,7 @@ const initialState = {
     phoneFeedBackMessage: 'Enter 10 Digits Valid Mobile Number !',
     address1: '',
     addressFeedBackError1: false,
-    addressFeedBackMessage1: '',
+    addressFeedBackMessage1: 'Address line 1 Cannot be Left Empty !fghj',
     address2: '',
     addressFeedBackError2: false,
     addressFeedBackMessage2: '',
@@ -140,7 +140,7 @@ export default function reducer(state = initialState, action = {}) {
           fullNameFeedBackError: isEmpty(action.name) || checkSpecialChar(action.name),
           fullNameFeedBackMessage: checkSpecialChar(action.name)
             ? 'Numbers and special characters are not allowed !'
-            : 'Name Cannot be Left Empty !'
+            : 'Name Cannot be Left Empty!'
         }
       };
     case SET_CITY:
@@ -167,7 +167,7 @@ export default function reducer(state = initialState, action = {}) {
         [action.formType]: {
           ...state[action.formType],
           address1: action.address1,
-          addressFeedBackError1: validateAddress(action.address1, 'address1').error,
+          addressFeedBackError1: isEmpty(action.address1) || validateAddress(action.address1, 'address1').error,
           addressFeedBackMessage1: validateAddress(action.address1, 'address1').errorMessage
         }
       };
