@@ -92,6 +92,8 @@ const Cart = ({
                 display="flex"
                 alignItems="center"
                 ml="auto"
+                justifyContent="center"
+                width={1}
                 onClick={checkCartBeforeCheckout(checkCart, sessionId)}
               >
                 <Image src={checkoutIcon} alt="Delete" height="18px" mr="0.625rem" />
