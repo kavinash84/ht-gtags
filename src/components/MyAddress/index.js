@@ -346,7 +346,7 @@ export default class DeliveryAddress extends Component {
     const { loading } = this.props;
     return (
       <BoxHtV1 type="block" mb="2rem">
-        <MyMenu page="address" />
+        {/* <MyMenu page="address" /> */}
         <SectionHtV1
           sx={{
             display: 'flex',
@@ -380,23 +380,27 @@ export default class DeliveryAddress extends Component {
                       lineHeight: '1.6',
                       fontSize: '14px',
                       width: '100%',
-                      minHeight: '135px',
-                      marginBottom: '10px'
+                      height: '135px',
+                      marginBottom: '10px',
                     }}
                     onClick={() => this.handleClick(index)}
                   >
-                    <b>{item.full_name}</b>
-                    <br />
-                    {item.address1 || ''}
-                    {item.address2 && <br />}
-                    {item.address2 || ''}
-                    {item.address3 && <br />}
-                    {item.address3 || ''}
-                    <br />
-                    {item.city || ''}, {item.pincode || ''}
-                    <br />
-                    {item.state || ''}
-                    <br />
+                    <div className={styles.addressOuter} >
+                      <div className={styles.addressInner}>
+                        <b>{item.full_name}</b>
+                        <br />
+                        {item.address1 || ''}
+                        {item.address2 && <br />}
+                        {item.address2 || ''}
+                        {item.address3 && <br />}
+                        {item.address3 || ''}
+                        <br />
+                        {item.city || ''}, {item.pincode || ''}
+                        <br />
+                        {item.state || ''}
+                        <br />
+                      </div>
+                    </div>
                   </CardHtV1>
                 </BoxHtV1>
               ))}
@@ -515,7 +519,9 @@ export default class DeliveryAddress extends Component {
                     </BoxHtV1>
                   </RowHtV1>
                 </form>
+
               )}
+
               {addForm && (
                 <form onSubmit={this.handleSubmit}>
                   <RowHtV1 display="block" mr="0" ml="0" mt="1rem">
