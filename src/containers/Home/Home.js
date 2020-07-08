@@ -64,23 +64,23 @@ const customDropdownStyles = {
 };
 
 @connect(({
-    homepage: {
- categories, banners, products, hashtags, offers, recentlyviewed, instafeeds
-},
-    stores,
-    userLogin
-  }) => ({
-    instafeeds: instafeeds.data,
-    banners: banners.data,
-    homepageCategories: categories.data,
-    homepageProducts: products.data,
-    cities: getCities(stores),
-    hashtags: hashtags.data,
-    offerStrip: getOfferStripData(offers),
-    middleBanner: getMiddleBannerData(offers),
-    recentlyviewed: recentlyviewed.data,
-    isLoggedIn: userLogin.isLoggedIn
-  }))
+  homepage: {
+    categories, banners, products, hashtags, offers, recentlyviewed, instafeeds
+  },
+  stores,
+  userLogin
+}) => ({
+  instafeeds: instafeeds.data,
+  banners: banners.data,
+  homepageCategories: categories.data,
+  homepageProducts: products.data,
+  cities: getCities(stores),
+  hashtags: hashtags.data,
+  offerStrip: getOfferStripData(offers),
+  middleBanner: getMiddleBannerData(offers),
+  recentlyviewed: recentlyviewed.data,
+  isLoggedIn: userLogin.isLoggedIn
+}))
 export default class Home extends Component {
   state = {
     showRibbon: true,
@@ -136,8 +136,8 @@ export default class Home extends Component {
 
   render() {
     const {
- instafeeds, banners, middleBanner, homepageCategories, cities
-} = this.props;
+      instafeeds, banners, middleBanner, homepageCategories, cities
+    } = this.props;
     const citiesList = cities.map(item => ({ value: item, label: item }));
     const { citySelectError, cityErrorMessage } = this.state;
     return (
@@ -213,7 +213,7 @@ export default class Home extends Component {
               </Row>
               <Row>
                 <Col variant="colBasis" flexDirection="column">
-                  <Link to="/design-build">
+                  <a href="https://beta.hometown.in/modular-kitchens/">
                     <Box mb={20} sx={{ position: 'relative' }}>
                       <Image src={sliderImage} />
                       <Image src={designBuildLogo} variant="image.logoHomeTown" />
@@ -221,10 +221,10 @@ export default class Home extends Component {
                     <Heading variant="heading.regular" textAlign="center">
                       Design and Build
                     </Heading>
-                  </Link>
+                  </a>
                 </Col>
                 <Col variant="colBasis" flexDirection="column">
-                  <Link to="/modular-kitchens">
+                  <a href="https://beta.hometown.in/design-build/">
                     <Box mb={20} sx={{ position: 'relative' }}>
                       <Image src={bannerImage} />
                       <Image
@@ -235,7 +235,7 @@ export default class Home extends Component {
                     <Heading variant="heading.regular" textAlign="center">
                       Modular Kitchen
                     </Heading>
-                  </Link>
+                  </a>
                 </Col>
               </Row>
             </Container>
