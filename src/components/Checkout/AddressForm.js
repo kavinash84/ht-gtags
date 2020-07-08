@@ -141,20 +141,31 @@ const AddressForm = props => {
           />
         </Col>
         {/* <Col variant="col-4" pl="10px">
-          <FormInput
-            id="add3"
-            label="Landmark,Village:"
-            type="textarea"
-            placeholder=""
-            onChange={e => onChangeAddress3(formType, e.target.value.replace(/#/g, ''))}
-            value={address3}
-            feedBackError={addressFeedBackError3}
-            feedBackMessage={addressFeedBackMessage3}
-            variant="input"
-          />
-        </Col> */}
+        <FormInput
+          id="add3"
+          label="Landmark,Village:"
+          type="textarea"
+          placeholder=""
+          onChange={e => onChangeAddress3(formType, e.target.value.replace(/#/g, ''))}
+          value={address3}
+          feedBackError={addressFeedBackError3}
+          feedBackMessage={addressFeedBackMessage3}
+          variant="input"
+        // height="auto"
+        />
+         </Col> */}
       </Row>
       <Row>
+        <Col variant="col-6">
+          <Pincode
+            id="pincodeId"
+            pincode={pincode}
+            formType={formType}
+            feedBackError={pincodeFeedBackError}
+            onChangePincode={onChangePincode}
+            feedBackMessage={pincodeFeedBackMessage}
+          />
+        </Col>
         <Col variant="col-6">
           <FormInput
             label="State *"
@@ -167,6 +178,8 @@ const AddressForm = props => {
             variant="input"
           />
         </Col>
+      </Row>
+      <Row>
         <Col variant="col-6">
           <FormInput
             label="City *"
@@ -177,18 +190,6 @@ const AddressForm = props => {
             feedBackMessage={cityFeedBackMessage}
             readOnly
             variant="input"
-          />
-        </Col>
-      </Row>
-      <Row>
-        <Col variant="col-6">
-          <Pincode
-            id="pincodeId"
-            pincode={pincode}
-            formType={formType}
-            feedBackError={pincodeFeedBackError}
-            onChangePincode={onChangePincode}
-            feedBackMessage={pincodeFeedBackMessage}
           />
         </Col>
         {formType !== 'billing' && (
