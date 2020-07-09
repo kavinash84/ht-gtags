@@ -23,6 +23,7 @@ import Footer from 'components/Footer';
 import ForgotPasswordForm from 'components/ForgotPasswordForm';
 import GoogleLoginBtn from 'components/LoginForms/GoogleLogin';
 import Header from 'components/Header';
+import ResponsiveModal from 'components/Modal';
 
 /**
  * helpers / modules
@@ -55,7 +56,8 @@ export default class ForgotPasswordContainer extends Component {
       email: '',
       emailError: false,
       emailErrorMessage: '',
-      submitted: false
+      submitted: false,
+      showLoginModal: true
     };
   }
 
@@ -85,6 +87,13 @@ export default class ForgotPasswordContainer extends Component {
     const { dispatch } = this.context.store;
     dispatch(forgotPassword(email));
   };
+
+  handleForgotPasswordModal = () => {
+    const { history } = this.props;
+    this.setState({ showLoginModal: !this.state.showLoginModal });
+    history.push('/login');
+  };
+
   render() {
     const styles = require('../Login/index.scss');
 
@@ -119,17 +128,23 @@ export default class ForgotPasswordContainer extends Component {
                 </Box>
               ) : (
                 <Fragment>
-                  <Box pb={30}>
-                    <ForgotPasswordForm
-                      email={email}
-                      onChangeEmail={this.onChangeEmail}
-                      emailFeedBackError={emailError}
-                      emailFeedBackMessage={emailErrorMessage}
-                      onSubmitForgot={this.onSubmitForgot}
-                      forgotResponse={response}
-                      loginUrl={LOGIN_URL}
-                    />
-                  </Box>
+                  <ResponsiveModal
+                    classNames={{ modal: 'forgotPasswordModal' }}
+                    onCloseModal={this.handleForgotPasswordModal}
+                    open={this.state.showLoginModal}
+                  >
+                    <Box pb={30}>
+                      <ForgotPasswordForm
+                        email={email}
+                        onChangeEmail={this.onChangeEmail}
+                        emailFeedBackError={emailError}
+                        emailFeedBackMessage={emailErrorMessage}
+                        onSubmitForgot={this.onSubmitForgot}
+                        forgotResponse={response}
+                        loginUrl={LOGIN_URL}
+                      />
+                    </Box>
+                  </ResponsiveModal>
                   <Row mx={0}>
                     <Box variant="col-12" textAlign="center" mb={16}>
                       <Label color="textLight" fontSize={15}>
@@ -187,3 +202,7 @@ export default class ForgotPasswordContainer extends Component {
     );
   }
 }
+
+ForgotPasswordContainer.propTypes = {
+  history: PropTypes.object.isRequired
+};

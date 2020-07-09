@@ -26,8 +26,6 @@ export default class ForgotPasswordForm extends Component {
         <BoxHtV1
           sx={{
             backgroundColor: '#FFFFFF',
-            border: '1px solid #979797',
-            boxShadow: '3px 3px 5px 1px rgba(0, 0, 0, 0.29)',
             minHeight: '420px',
             height: '100%',
             display: 'flex',
