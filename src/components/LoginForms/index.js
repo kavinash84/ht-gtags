@@ -17,6 +17,7 @@ import Text from 'hometown-components-dev/lib/TextHtV1';
 import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
 import LoginFormWrapper from 'hometown-components-dev/lib/FormsHtV1/LoginFormHtV1';
 import ResponsiveModal from 'components/Modal';
+import ForgotPasswordModal from 'components/ForgotPasswordModal';
 
 /**
  * utility / modules / helper / validation
@@ -25,7 +26,7 @@ import { validateEmail, isBlank } from 'js-utility-functions';
 import { validateMobile, isEmpty, checkSpecialChar } from 'utils/validation';
 import { allowNChar, allowTypeOf } from 'utils/helper';
 import { login, clearLoginState } from 'redux/modules/login';
-import { SIGNUP_URL, FORGOT_PASSWORD_URL } from 'helpers/Constants';
+import { SIGNUP_URL } from 'helpers/Constants';
 
 /**
  * Icons
@@ -61,7 +62,12 @@ export default class LoginForm extends Component {
     phoneErrorMessage: 'Enter Valid 10 Digit Phone Number',
     name: '',
     nameError: false,
-    nameErrorMessage: 'Please enter a name without special characters'
+    nameErrorMessage: 'Please enter a name without special characters',
+    showForgotPasswordModal: false
+  };
+
+  onForgotPasswordClick = () => {
+    this.setState({ showForgotPasswordModal: !this.state.showForgotPasswordModal });
   };
 
   onChangeEmail = e => {
@@ -132,6 +138,10 @@ export default class LoginForm extends Component {
       nameError: checkError
     });
   };
+  handleModal = () => {
+    const { dispatch } = this.context.store;
+    dispatch(clearLoginState());
+  };
   isValid = () => {
     const { askContact, askName } = this.props;
     const { phone, name } = this.state;
@@ -139,10 +149,6 @@ export default class LoginForm extends Component {
     const isInvalidName = askName && (isEmpty(name) || checkSpecialChar(name));
     const disabled = isInvalidPhone || isInvalidName;
     return disabled;
-  };
-  handleModal = () => {
-    const { dispatch } = this.context.store;
-    dispatch(clearLoginState());
   };
   render() {
     const {
@@ -178,7 +184,7 @@ export default class LoginForm extends Component {
           onSubmitLogin={this.onSubmitLogin}
           loginResponse={loginResponse}
           signupUrl={SIGNUP_URL}
-          forgotUrl={FORGOT_PASSWORD_URL}
+          onForgotPasswordClick={this.onForgotPasswordClick}
         />
         <ResponsiveModal classNames={{ modal: 'updateProfileModal' }} onCloseModal={this.handleModal} open={open}>
           <Row display="block" mr="0" ml="0" mb="10px">
@@ -259,6 +265,10 @@ export default class LoginForm extends Component {
             </Text>
           </Box>
         </ResponsiveModal>
+        <ForgotPasswordModal
+          showForgotPasswordModal={this.state.showForgotPasswordModal}
+          onCloseModal={this.onForgotPasswordClick}
+        />
       </Box>
     );
   }
