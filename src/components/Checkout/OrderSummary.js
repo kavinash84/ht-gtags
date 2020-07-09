@@ -32,6 +32,7 @@ const OrderSummary = ({
   totalCart,
   itemsCount,
   discount,
+  coupon,
   results,
   history
 }) => (
@@ -71,6 +72,11 @@ const OrderSummary = ({
       ))}
     </Box>
     <Box variant="col-12" pb={20}>
+      {coupon && (
+        <Flex mb={20} justifyContent="space-between">
+          <Text color="red">Promo code {coupon.toUpperCase()} applied</Text>
+        </Flex>
+      )}
       <Flex mb={20} justifyContent="space-between">
         <Text>Subtotal</Text>
         <Text>Rs. {itemsTotal ? formatAmount(itemsTotal) : null}</Text>
@@ -129,6 +135,7 @@ OrderSummary.propTypes = {
   totalCart: PropTypes.number.isRequired,
   itemsCount: PropTypes.number,
   discount: PropTypes.number,
+  coupon: PropTypes.string.isRequired,
   results: PropTypes.array,
   history: PropTypes.object.isRequired
 };

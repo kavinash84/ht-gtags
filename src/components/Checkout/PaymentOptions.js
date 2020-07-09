@@ -208,11 +208,12 @@ class PaymentOptions extends Component {
                           <Row
                             variant="row.contentCenter"
                             sx={{
-                              padding: "50px"
-                            }} >
+                              padding: '50px'
+                            }}
+                          >
                             <Heading
                               sx={{
-                                color: "white"
+                                color: 'white'
                               }}
                             >
                               {/* eslint-disable*/}
@@ -224,12 +225,12 @@ class PaymentOptions extends Component {
                               <Link to="/checkout/delivery-address">
                                 <Label fontSize="1rem" fontFamily="light" color="primary" p="0" mt="10px" mb="0">
                                   Edit Address
-                              </Label>
+                                </Label>
                               </Link>
                               <Link to="/checkout/cart">
                                 <Label fontSize="1rem" fontFamily="light" color="primary" p="0" mt="10px" mb="0">
                                   / Edit Cart
-                              </Label>
+                                </Label>
                               </Link>
                             </Heading>
                           </Row>
@@ -413,9 +414,7 @@ class PaymentOptions extends Component {
                     hidecoupon
                   />
                 </Box>
-                <Box className={cartStyles.orderSummaryOverly}>
-
-                </Box>
+                <Box className={cartStyles.orderSummaryOverly} />
               </Row>
               <Box width={1} pb={30}>
                 <Button
