@@ -100,7 +100,6 @@ const Cart = ({
   const isAnyProductOutofStoc = checkIsAnyProductOutofStoc(results, outOfStockList);
   const cartItemsNumber = countCartItemNumbers(results);
 
-  console.log(isAnyProductOutofStoc, "isAnyProductOutofStoc")
   return (
     <Container my={60}>
       <Row>
