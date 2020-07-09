@@ -23,7 +23,7 @@ const Usp = () => (
       <RowHtV1 justifyContent="center">
         <Title title="WHAT MAKES US UNIQUE" />
       </RowHtV1>
-      <RowHtV1>
+      <RowHtV1 justifyContent="space-around">
         <UspItem src={usp1Icon}>
           Free Delivery <br />
           Above Rs.499

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
-import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
-import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
-import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
-import ImageShimmerHtV1 from 'hometown-components-dev/lib/ImageShimmerHtV1';
-import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
+import Flex from 'hometown-components-dev/lib/FlexHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import ImageShimmer from 'hometown-components-dev/lib/ImageShimmerHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import CasesFormContainer from 'components/MyOrder/CasesForm';
 import ResponsiveModal from 'components/Modal';
 import { formatAmount } from 'utils/formatters';
@@ -72,30 +73,27 @@ class OrderBlock extends Component {
     const items = data.order_items || [];
     const error = data.error || '';
     return (
-      <BoxHtV1 mb="2.5rem" className={styles.blockWrapper}>
-        <RowHtV1 type="block" margin="0px 0px 1rem" className={styles.blockHeading}>
-          <BoxHtV1 col="6" pt="5px" width="49.8%">
-            <HeadingHtV1 fontSize="1.25rem" color="textLight" mb="0px" mt="0px" pb="2px" fontFamily="light">
+      <Box mb="2.5rem" className={styles.blockWrapper}>
+        <Row type="block" margin="0px 0px 1rem" className={styles.blockHeading}>
+          <Box col="6" pt="5px" width="49.8%">
+            <Heading fontSize="1.25rem" color="textLight" mb="0px" mt="0px" pb="2px" fontFamily="light">
               Order No. {order.order_number}
-            </HeadingHtV1>
-          </BoxHtV1>
+            </Heading>
+          </Box>
           {show && (isBob === 0 || isBob === '0') && status !== 'canceled' ? (
-            <BoxHtV1 textAlign="right" col="6" pr="5px" width="49.8%">
-              <ButtonHtV1
+            <Box textAlign="right" col="6" width="49.8%">
+              <Button
                 disabled={trackingLoading && currentOrder === order.order_number}
-                fontSize="14px !important"
-                hoverColor="white"
-                bc="transparent"
-                btnType="primary"
-                p="5px 10px"
-                color="colors.white"
-                bg="rgb(249, 141, 41)"
-                mr="10px"
                 onClick={() => {
                   this.loadTrackingData(order);
                 }}
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                  marginLeft: 'auto'
+                }}
               >
-                <ImageHtV1
+                <Image
                   src={PinIcon}
                   alt="Track"
                   height="16px"
@@ -107,13 +105,13 @@ class OrderBlock extends Component {
                 {trackingLoading && currentOrder === order.order_number ? (
                   <span>
                     Please Wait
-                    <ImageHtV1 className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />
+                    <Image className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />
                   </span>
                 ) : (
                   'Track'
                 )}
-              </ButtonHtV1>
-            </BoxHtV1>
+              </Button>
+            </Box>
           ) : (
             ''
           )}
@@ -156,62 +154,82 @@ class OrderBlock extends Component {
               </Button>
             </Heading>
           </Div> */}
-        </RowHtV1>
-        <BoxHtV1 className={styles.blockBody}>
-          <RowHtV1 type="block" m="0" mb="0.5rem">
-            <BoxHtV1 col="3" pr="15px" width="25%">
-              <TextHtV1 mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium" mb="0.625rem">
+        </Row>
+        <Box className={styles.blockBody}>
+          <Row type="block" m="0" mb="0.5rem">
+            <Box col="3" pr="15px" width="25%">
+              <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium" mb="0.625rem">
                 ORDER DATE
-              </TextHtV1>
-              <TextHtV1 mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="regular" mb="0.625rem">
+              </Text>
+              <Text mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="regular" mb="0.625rem">
                 {order.order_date}
-              </TextHtV1>
-            </BoxHtV1>
-            <BoxHtV1 col="3" pr="15px" width="25%">
-              <TextHtV1 mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium" mb="0.625rem">
+              </Text>
+            </Box>
+            <Box col="3" pr="15px" width="25%">
+              <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium" mb="0.625rem">
                 SHIPPING ADDRESS
-              </TextHtV1>
-              <TextHtV1 mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
+              </Text>
+              <Text mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
                 {`${order.s_customer_first_name || ''} ${order.s_customer_last_name || ''}`}
-              </TextHtV1>
-              <TextHtV1 mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
+              </Text>
+              <Text mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
                 {order.s_address_1 || ''}
-              </TextHtV1>
-              <TextHtV1 mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
+              </Text>
+              <Text mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
                 {order.s_city || ''}, {order.s_pincode || ''}
-              </TextHtV1>
-              <TextHtV1 mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
+              </Text>
+              <Text mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
                 {order.s_region || ''}
-              </TextHtV1>
-            </BoxHtV1>
-            <BoxHtV1 col="3" pr="15px" width="25%">
-              <TextHtV1 mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
+              </Text>
+            </Box>
+            <Box col="3" pr="15px" width="25%">
+              <Text mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                 BILLING ADDRESS
-              </TextHtV1>
-              <TextHtV1 mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
+              </Text>
+              <Text mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
                 {`${order.b_customer_first_name || ''} ${order.b_customer_last_name || ''}`}
-              </TextHtV1>
-              <TextHtV1 mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
+              </Text>
+              <Text mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
                 {order.b_address_1 || ''}
-              </TextHtV1>
-              <TextHtV1 mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
+              </Text>
+              <Text mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
                 {order.b_city || ''}, {order.b_pincode || ''}
-              </TextHtV1>
-              <TextHtV1 mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
+              </Text>
+              <Text mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
                 {order.b_region || ''}
-              </TextHtV1>
-            </BoxHtV1>
-            <BoxHtV1 col="3" pr="15px" width="25%">
-              <TextHtV1 mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
+              </Text>
+            </Box>
+            <Box col="3" pr="15px" width="25%">
+              <Text mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                 ORDER AMOUNT
-              </TextHtV1>
-              <TextHtV1 mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
+              </Text>
+              <Text mt="0" mb="0.625rem" color="rgba(0, 0, 0, 0.6)" fontFamily="regular">
                 Rs. {formatAmount(order.grand_total)}
-              </TextHtV1>
-            </BoxHtV1>
-          </RowHtV1>
-          <RowHtV1 type="block" m="0">
-            <BoxHtV1 col="12" width="100%">
+              </Text>
+            </Box>
+          </Row>
+          {order.order_items &&
+            order.order_items.map(item => (
+              <Flex pb={20}>
+                <Box variant="col-4" pr={0} pl={0}>
+                  <ImageShimmer src={getImageURL(item.image, 'catalog_360')}>
+                    {imageURL => <Image src={imageURL} alt={item.product_name} width="60px" height="60px" />}
+                  </ImageShimmer>
+                </Box>
+                <Box variant="col-8" pl={20}>
+                  <Box mb="10px">
+                    <Heading color="heading" fontSize={[14, 14, 14, 16]} lineHeight={1.4} pb={10}>
+                      {item.product_name || '--'}
+                    </Heading>
+                    <Text fontSize={14} pb={10}>
+                      {item.quantity || '--'}
+                    </Text>
+                  </Box>
+                </Box>
+              </Flex>
+            ))}
+          <Row type="block" m="0">
+            <Box col="12" width="100%">
               <table className="ordersTable table">
                 <tbody>
                   <tr className={styles.tableHeading}>
@@ -226,21 +244,19 @@ class OrderBlock extends Component {
                     order.order_items.map(item => (
                       <tr key={item.order_item_id}>
                         <td width="81px">
-                          <ImageShimmerHtV1 src={getImageURL(item.image, 'catalog_360')}>
-                            {imageURL => (
-                              <ImageHtV1 src={imageURL} alt={item.product_name} width="60px" height="60px" />
-                            )}
-                          </ImageShimmerHtV1>
+                          <ImageShimmer src={getImageURL(item.image, 'catalog_360')}>
+                            {imageURL => <Image src={imageURL} alt={item.product_name} width="60px" height="60px" />}
+                          </ImageShimmer>
                         </td>
                         <td width="50%">
-                          <TextHtV1 mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
+                          <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
                             {item.product_name || '--'}
-                          </TextHtV1>
+                          </Text>
                         </td>
                         <td>
-                          <TextHtV1 mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
+                          <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="regular">
                             {item.quantity || '--'}
-                          </TextHtV1>
+                          </Text>
                         </td>
                         <td>
                           {order.status !== 'canceled' ? (
@@ -251,8 +267,8 @@ class OrderBlock extends Component {
                         </td>
                         {item.bob_order_item === 0 || item.bob_order_item === '0' ? (
                           <td>
-                            <BoxHtV1 ta="right">
-                              <ButtonHtV1
+                            <Box ta="right">
+                              <Button
                                 sx={{
                                   ':hover': {
                                     backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -271,8 +287,8 @@ class OrderBlock extends Component {
                                 }}
                               >
                                 Help
-                              </ButtonHtV1>
-                            </BoxHtV1>
+                              </Button>
+                            </Box>
                           </td>
                         ) : (
                           ''
@@ -283,9 +299,9 @@ class OrderBlock extends Component {
                     ))}
                 </tbody>
               </table>
-            </BoxHtV1>
-          </RowHtV1>
-        </BoxHtV1>
+            </Box>
+          </Row>
+        </Box>
         <ResponsiveModal
           classNames={{ modal: 'casesModal' }}
           onCloseModal={e => {
@@ -311,7 +327,7 @@ class OrderBlock extends Component {
         >
           <TrackingTimeline error={error} data={items} />
         </ResponsiveModal>
-      </BoxHtV1>
+      </Box>
     );
   }
 }
