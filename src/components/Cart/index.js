@@ -52,15 +52,33 @@ const onClick = (cartId, sessionId, pincode) => dispatcher => e => {
   e.preventDefault();
   dispatcher(cartId, sessionId, pincode);
 };
+const countCartItemNumbers = (results) => {
+  let cartItemsNumber = 0;
+  results.map((result) => {
+    cartItemsNumber += result.qty
+  })
+  return cartItemsNumber;
+}
+const checkIsAnyProductOutofStoc = (results, outOfStockList) => {
+  let isAnyProductOutofStoc = false
+  results.map((result) => {
+    if (outOfStockList.includes(result.configurable_sku) === true) {
+      isAnyProductOutofStoc = true
+    }
+  })
+  return isAnyProductOutofStoc;
+}
 
-const mapStateToProps = ({ pincode, cart, app }) => ({
+const mapStateToProps = ({ pincode, cart, app, relatedproducts }) => ({
   currentId: cart.key,
   cartChecked: cart.cartChecked,
   checkingCart: cart.checkingCart,
   cartUpdating: cart.cartUpdating,
   pincode: pincode.selectedPincode,
-  sessionId: app.sessionId
+  sessionId: app.sessionId,
+  relatedproductsList: relatedproducts.data,
 });
+
 
 const Cart = ({
   results,
@@ -73,10 +91,16 @@ const Cart = ({
   checkCart,
   checkingCart,
   outOfStockList,
-  handlePincodeModal
+  handlePincodeModal,
+  relatedproductsList,
+
 }) => {
   const cartItemLoading = customerCardId => cartUpdating && currentId === customerCardId;
   const isProductOutofStock = sku => outOfStockList.includes(sku);
+  const isAnyProductOutofStoc = checkIsAnyProductOutofStoc(results, outOfStockList);
+  const cartItemsNumber = countCartItemNumbers(results);
+
+  console.log(isAnyProductOutofStoc, "isAnyProductOutofStoc")
   return (
     <Container my={60}>
       <Row>
@@ -84,7 +108,7 @@ const Cart = ({
         <Box variant="col-8">
           <Row alignItems="center">
             <Box variant="col-8">
-              <Heading>My Shopping Cart : {results.length} Items</Heading>
+              <Heading>My Shopping Cart : {cartItemsNumber} Items</Heading>
             </Box>
             <Box variant="col-4" textAlign="right">
               <Button
@@ -92,6 +116,7 @@ const Cart = ({
                 display="flex"
                 alignItems="center"
                 ml="auto"
+                disabled={isAnyProductOutofStoc}
                 onClick={checkCartBeforeCheckout(checkCart, sessionId)}
               >
                 <Image src={checkoutIcon} alt="Delete" height="18px" mr="0.625rem" />
@@ -354,7 +379,8 @@ Cart.propTypes = {
   checkCart: PropTypes.func.isRequired,
   checkingCart: PropTypes.bool,
   outOfStockList: PropTypes.array,
-  handlePincodeModal: PropTypes.func.isRequired
+  handlePincodeModal: PropTypes.func.isRequired,
+  relatedproductsList: PropTypes.array,
 };
 
 Cart.defaultProps = {
@@ -364,7 +390,8 @@ Cart.defaultProps = {
   cartUpdating: false,
   currentId: '',
   checkingCart: false,
-  outOfStockList: []
+  outOfStockList: [],
+  relatedproductsList: [],
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
