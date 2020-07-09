@@ -38,12 +38,12 @@ const PaymentMethods = () => (
       verified by
     </Text>
     <Flex justifyContent="space-between" px={15}>
-      <Image src={visaIcon} alt="visaCard" height={30} />
-      <Image src={mastercardIcon} alt="Master Card" height={30} />
-      <Image src={maestroIcon} alt="Maestro" height={30} />
-      <Image src={aeIcon} alt="Amex" height={30} />
-      <Image src={intBankingIcon} alt="Diners Club" height={30} />
-      <Image src={walletIcon} alt="Wallet" height={30} />
+      <Image src={visaIcon} alt="visaCard" height={30} sx={{ flexShrink: 0 }} />
+      <Image src={mastercardIcon} alt="Master Card" height={30} sx={{ flexShrink: 0 }} />
+      <Image src={maestroIcon} alt="Maestro" height={30} sx={{ flexShrink: 0 }} />
+      <Image src={aeIcon} alt="Amex" height={30} sx={{ flexShrink: 0 }} />
+      <Image src={intBankingIcon} alt="Diners Club" height={30} sx={{ flexShrink: 0 }} />
+      <Image src={walletIcon} alt="Wallet" height={30} sx={{ flexShrink: 0 }} />
     </Flex>
   </Box>
 );
