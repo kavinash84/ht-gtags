@@ -666,7 +666,7 @@ class ProductDetails extends React.Component {
             )}
 
             {/* Usps */}
-            <Row mb={40} width="60%" justifyContent="space-between" mx="auto">
+            <Row mb={40} width="60%" justifyContent="space-between" mx="auto" flexWrap="nowrap">
               <UspCol src={freeShippingIcon} text="Free Shipping" />
               <UspCol src={emiIcon} text="EMI Options" />
               <UspCol src={warrentyIcon} text="1 Year Warranty" />
