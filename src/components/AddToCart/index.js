@@ -20,6 +20,15 @@ import { getCartListSKU } from 'selectors/cart';
 import { PINCODE, CART_URL } from 'helpers/Constants';
 
 const checkSKUInCart = (list, sku) => list.includes(sku);
+const checkSKUItemsInCart = (list, sku, quantity) => {
+  let numberIsSame = false;
+  list.map((item) => {
+    if (item.configurable_sku === sku && item.qty === quantity) {
+      numberIsSame = true;
+    }
+  })
+  return numberIsSame;
+}
 const LoaderIcon = require('../../../static/refresh.svg');
 // const CheckedIcon = require('../../../static/added-to-cart-icon.png');
 
@@ -29,14 +38,16 @@ const onClick = (key, skuId, simpleSku, session, pincode, quantity) => dispatche
 };
 
 const mapStateToProps = ({
- app: { sessionId }, pincode, cart, cart: { addingToCart, addedToCart, key }
+  app: { sessionId }, pincode, cart, cart: { addingToCart, addedToCart, key, data }
 }) => ({
   session: sessionId,
   pincode: pincode.selectedPincode ? pincode.selectedPincode : PINCODE,
   addingToCart,
   addedToCart,
   stateId: key,
-  cartSKUs: getCartListSKU(cart)
+  cartSKUs: getCartListSKU(cart),
+  cart,
+  cartData: data
 });
 
 const AddToCart = ({
@@ -53,52 +64,55 @@ const AddToCart = ({
   isSoldOut,
   quantity,
   quantityChange,
-  skuItem
+  skuItem,
+  cartData
 }) => {
   const checkStatus = checkSKUInCart(cartSKUs, sku);
+  const checkSKUItem = checkSKUItemsInCart(cartData, sku, quantity);
   const addLoading = addingToCart && stateId === itemId;
   const { id_customer_cart: cartId = '', qty } = skuItem;
   const updateQty = qty ? quantity - qty : quantity;
+  // console.log(checkSKUItem, "$$$", quantity, "&&", updateQty, "&&", checkStatus, "quantiy inadd to cart")
   return (
     <Fragment>
       {isSoldOut ? (
         <Button variant="outline.error.large">Out of Stock</Button>
       ) : (
-        <Fragment>
-          {!checkStatus || quantityChange ? (
-            <Button
-              variant="outline.primary.large"
-              width={1}
-              disabled={addLoading}
-              onClick={e => {
-                if (quantityChange && updateQty !== 0 && checkStatus) {
-                  const handler = onClick(cartId, sku, simpleSku, session, pincode, updateQty)(updateCart);
-                  handler(e);
-                } else {
-                  const handler = onClick(itemId, sku, simpleSku, session, pincode, quantity)(addToCart);
-                  handler(e);
-                }
-              }}
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-            >
-              {addLoading && <Image className="spin" src={LoaderIcon} width="18px" mr={10} />}
-              {addLoading ? 'Adding...' : 'Add to Cart'}
-            </Button>
-          ) : (
-            <Row mx={0} alignItems="center">
-              <Box as={Link} to={CART_URL} width={1}>
-                <Button variant="outline.primary.large" width={1}>
-                  GO TO CART
+          <Fragment>
+            {!checkStatus || !checkSKUItem ? (
+              <Button
+                variant="outline.primary.large"
+                width={1}
+                disabled={addLoading}
+                onClick={e => {
+                  if (quantityChange && updateQty !== 0 && checkStatus) {
+                    const handler = onClick(cartId, sku, simpleSku, session, pincode, updateQty)(updateCart);
+                    handler(e);
+                  } else {
+                    const handler = onClick(itemId, sku, simpleSku, session, pincode, quantity)(addToCart);
+                    handler(e);
+                  }
+                }}
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                {addLoading && <Image className="spin" src={LoaderIcon} width="18px" mr={10} />}
+                {addLoading ? 'Adding...' : 'Add to Cart'}
+              </Button>
+            ) : (
+                <Row mx={0} alignItems="center">
+                  <Box as={Link} to={CART_URL} width={1}>
+                    <Button variant="outline.primary.large" width={1}>
+                      GO TO CART
                 </Button>
-              </Box>
-            </Row>
-          )}
-        </Fragment>
-      )}
+                  </Box>
+                </Row>
+              )}
+          </Fragment>
+        )}
     </Fragment>
   );
 };
