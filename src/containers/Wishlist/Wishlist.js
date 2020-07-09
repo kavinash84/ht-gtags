@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Wishlist from 'components/Wishlist';
-import Div from 'hometown-components-dev/lib/Div';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Empty from 'hometown-components-dev/lib/Empty';
 import Img from 'hometown-components-dev/lib/Img';
 import Section from 'hometown-components-dev/lib/Section';
@@ -30,27 +30,31 @@ export default class WishlistContainer extends Component {
   };
   render() {
     const { wishlistData, wishListedSKUs, loadingList } = this.props;
+    console.log(wishlistData, "@#$%^&*&^%$#@#$%^&*")
     return (
-      <Div>
+      <Box>
         <MenuFooter pageTitle="Wishlist">
           <MyMenu page="wishlist" />
           {wishlistData && wishlistData.length ? (
             <Wishlist list={wishlistData} wishList={wishListedSKUs} loadingList={loadingList} />
+
           ) : (
-            <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
-              <Empty
-                title="No wishlisted products yet !!"
-                subTitle="Add items to it"
-                btnName="Continue Shopping"
-                url="/"
-                bg="#fafafa"
-              >
-                <Img src={WishListIcon} width="initial" m="auto" alt="No items yet !!" />
-              </Empty>
-            </Section>
-          )}
+              <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
+                <Empty
+                  title="No wishlisted products yet !!"
+                  subTitle="Add items to it"
+                  btnName="Continue Shopping"
+                  url="/"
+                  bg="#fafafa"
+                >
+
+                  <Img src={WishListIcon} width="initial" m="auto" alt="No items yet !!" />
+                </Empty>
+              </Section>
+            )
+          }
         </MenuFooter>
-      </Div>
+      </Box >
     );
   }
 }
