@@ -72,7 +72,6 @@ const AddToCart = ({
   const addLoading = addingToCart && stateId === itemId;
   const { id_customer_cart: cartId = '', qty } = skuItem;
   const updateQty = qty ? quantity - qty : quantity;
-  // console.log(checkSKUItem, "$$$", quantity, "&&", updateQty, "&&", checkStatus, "quantiy inadd to cart")
   return (
     <Fragment>
       {isSoldOut ? (
