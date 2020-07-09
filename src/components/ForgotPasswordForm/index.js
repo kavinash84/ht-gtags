@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
 import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
 import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
@@ -17,16 +16,15 @@ export default class ForgotPasswordForm extends Component {
       emailFeedBackError,
       emailFeedBackMessage,
       onSubmitForgot,
-      forgotResponse,
-      loginUrl
+      forgotResponse
     } = this.props;
     const { loading } = forgotResponse;
     return (
       <form onSubmit={onSubmitForgot}>
         <BoxHtV1
           sx={{
-            backgroundColor: '#FFFFFF',
-            minHeight: '420px',
+            backgroundColor: 'white',
+            minHeight: 320,
             height: '100%',
             display: 'flex',
             flexDirection: 'column',
@@ -36,13 +34,13 @@ export default class ForgotPasswordForm extends Component {
         >
           <BoxHtV1>
             <Heading
+              mb={20}
               sx={{
-                color: '#474747',
+                color: 'textPrimary',
                 fontFamily: 'HelveticaNeue',
                 fontSize: '24px',
                 lineHeight: '29px',
-                textAlign: 'center',
-                margin: '40px 0 20px'
+                textAlign: 'center'
               }}
             >
               Forgot your password?
@@ -51,7 +49,7 @@ export default class ForgotPasswordForm extends Component {
           <LabelHtV1
             mb={40}
             sx={{
-              color: '#474747',
+              color: 'textPrimary',
               fontFamily: 'HelveticaNeue',
               fontSize: '17px',
               lineHeight: '20px',
@@ -88,14 +86,6 @@ export default class ForgotPasswordForm extends Component {
             </BoxHtV1>
           </RowHtV1>
         </BoxHtV1>
-        <BoxHtV1 col="8" mt={20}>
-          <LabelHtV1 fontSize={14} color="textDark" mr={10}>
-            Continue to
-          </LabelHtV1>
-          <Link to={loginUrl}>
-            <LabelHtV1 color="primary">Sign in</LabelHtV1>
-          </Link>
-        </BoxHtV1>
       </form>
     );
   }
@@ -107,8 +97,7 @@ ForgotPasswordForm.defaultProps = {
   emailFeedBackMessage: '',
   forgotResponse: {},
   onChangeEmail: () => {},
-  onSubmitForgot: () => {},
-  loginUrl: ''
+  onSubmitForgot: () => {}
 };
 
 ForgotPasswordForm.propTypes = {
@@ -117,6 +106,5 @@ ForgotPasswordForm.propTypes = {
   email: PropTypes.string,
   emailFeedBackError: PropTypes.bool,
   emailFeedBackMessage: PropTypes.string,
-  forgotResponse: PropTypes.object,
-  loginUrl: PropTypes.string
+  forgotResponse: PropTypes.object
 };

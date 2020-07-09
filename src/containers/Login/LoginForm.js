@@ -217,7 +217,7 @@ export default class LoginFormContainer extends Component {
  loaded, loading, loggingIn, askContact, askName, loginType
 } = this.props;
     return (
-      <Row padding="58px">
+      <Row>
         <Box variant="col-4">
           <Box width={1} mb={10} sx={{ borderBottom: 'divider' }}>
             <Heading color="#1b2125" pb={20}>

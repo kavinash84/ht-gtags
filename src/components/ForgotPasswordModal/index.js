@@ -4,11 +4,6 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 
 /**
- * Components
- */
-import Box from 'hometown-components-dev/lib/BoxHtV1';
-
-/**
  * Page Components
  */
 import ForgotPasswordForm from 'components/ForgotPasswordForm';
@@ -65,6 +60,9 @@ export default class ForgotPasswordModal extends Component {
     }
     const { dispatch } = this.context.store;
     dispatch(forgotPassword(email));
+    setTimeout(() => {
+      this.props.onCloseModal();
+    }, 2500);
   };
 
   render() {
@@ -77,17 +75,15 @@ export default class ForgotPasswordModal extends Component {
         onCloseModal={onCloseModal}
         open={showForgotPasswordModal}
       >
-        <Box pb={30}>
-          <ForgotPasswordForm
-            email={email}
-            onChangeEmail={this.onChangeEmail}
-            emailFeedBackError={emailError}
-            emailFeedBackMessage={emailErrorMessage}
-            onSubmitForgot={this.onSubmitForgot}
-            forgotResponse={response}
-            loginUrl={LOGIN_URL}
-          />
-        </Box>
+        <ForgotPasswordForm
+          email={email}
+          onChangeEmail={this.onChangeEmail}
+          emailFeedBackError={emailError}
+          emailFeedBackMessage={emailErrorMessage}
+          onSubmitForgot={this.onSubmitForgot}
+          forgotResponse={response}
+          loginUrl={LOGIN_URL}
+        />
       </ResponsiveModal>
     );
   }
