@@ -235,8 +235,8 @@ class Footer extends React.Component {
                   justifyContent: 'center'
                 }}
               >
-                <Text variant="footerLink" mt={-7} px={30} sx={{ position: 'absolute', bg: 'bgFooter' }}>
-                  Lorem ipsum doler
+                <Text variant="footerLink" mt={-7} px={24} sx={{ position: 'absolute', bg: 'bgFooter' }}>
+                  Subscribe Newsletter
                 </Text>
               </Box>
               {!already ? (
