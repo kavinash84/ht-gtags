@@ -429,13 +429,21 @@
 		font-size: 26px !important;
 	}
 	.homeCarouselSlider {
-		.slick-prev, .slick-next {
+		.slick-prev {
+			top: 40% !important;
+			right: -50px !important;
+		}
+		.slick-next {
 			top: 40% !important;
 			left: -50px !important;
 		}
 	}
 	.categoryCarousel {
-		.slick-prev, .slick-next {
+		.slick-prev {
+			top: 44% !important;
+			right: -50px !important;
+		}
+		.slick-next {
 			top: 44% !important;
 			left: -50px !important;
 		}
