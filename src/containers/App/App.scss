@@ -429,19 +429,15 @@
 		font-size: 26px !important;
 	}
 	.homeCarouselSlider {
-		.slick-prev {
+		.slick-prev, .slick-next {
 			top: 40% !important;
-		}
-		.slick-next {
-			top: 40% !important;
+			left: -50px !important;
 		}
 	}
 	.categoryCarousel {
-		.slick-prev {
+		.slick-prev, .slick-next {
 			top: 44% !important;
-		}
-		.slick-next {
-			top: 44% !important;
+			left: -50px !important;
 		}
 	}
 	.prodDetailsCarousel {
