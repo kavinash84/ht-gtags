@@ -398,7 +398,6 @@
 	.slick-prev, .slick-next {
 		height: 44px !important;
 		width: 44px !important;
-		top: 40% !important;
 	}
 	.slick-slide, .slick-slide img, .slick-slide div {
 		&:focus {
@@ -429,7 +428,22 @@
 		color: #000 !important;
 		font-size: 26px !important;
 	}
-
+	.homeCarouselSlider {
+		.slick-prev {
+			top: 40% !important;
+		}
+		.slick-next {
+			top: 40% !important;
+		}
+	}
+	.categoryCarousel {
+		.slick-prev {
+			top: 44% !important;
+		}
+		.slick-next {
+			top: 44% !important;
+		}
+	}
 	.prodDetailsCarousel {
 		padding-left: 80px;
 		.slick-next {

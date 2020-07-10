@@ -205,6 +205,7 @@ export default class Home extends Component {
           <LazyLoad>
             <OfferBanner image={middleBanner.image_url} url={middleBanner.url_key} target={middleBanner.target || ''} />
           </LazyLoad>
+
           {/* LET US DESIGN FOR YOU */}
           <Section>
             <Container>
