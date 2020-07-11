@@ -92,6 +92,8 @@ const Cart = ({
                 display="flex"
                 alignItems="center"
                 ml="auto"
+                justifyContent="center"
+                width={1}
                 onClick={checkCartBeforeCheckout(checkCart, sessionId)}
               >
                 <Image src={checkoutIcon} alt="Delete" height="18px" mr="0.625rem" />
@@ -124,7 +126,7 @@ const Cart = ({
               <Text fontFamily="medium">Product Details</Text>
             </Box>
             <Box variant="col-2" pl={8}>
-              <Text fontFamily="medium">Qty</Text>
+              <Text fontFamily="medium">Qty.</Text>
             </Box>
             <Box variant="col-2">
               <Text fontFamily="medium">Price</Text>
@@ -157,7 +159,7 @@ const Cart = ({
               <Box variant="col-5" pl={30}>
                 <Link to={formatProductURL(item.product_info.name, item.configurable_sku)}>
                   <Box mb="10px">
-                    <Heading color="heading" fontSize={18} lineHeight={1.4}>
+                    <Heading color="heading" fontSize={16} lineHeight={1.4}>
                       {item.product_info.name}
                     </Heading>
                   </Box>

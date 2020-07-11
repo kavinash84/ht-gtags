@@ -33,7 +33,7 @@ import Notifications from 'components/Notifications';
 /**
  * Icons / Images
  */
-const CartEmptyIcon = require('../../../static/cart-empty.png');
+const CartEmptyIcon = require('../../../static/emptyCart.png');
 const PincodeModalIcon = require('../../../static/map-placeholder.svg');
 
 @connect(
@@ -115,8 +115,8 @@ export default class CartContainer extends Component {
           {results && results.length === 0 ? (
             <Section display="flex" padding="0.625rem" paddingTop="1.25rem" mb={0}>
               <Empty
-                title="Your cart is currently empty!"
-                subTitle="Add items to cart"
+                title="Your Cart is Empty!"
+                subTitle="Looks like you haven’t made your choice yet."
                 btnName="Shop Now"
                 url="/"
                 bg="#fafafa"

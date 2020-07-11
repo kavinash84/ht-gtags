@@ -53,9 +53,8 @@ const onClickLogout = dispatcher => e => {
 @withRouter
 @connect(
   ({
-    pincode, userLogin, wishlist, cart, router, profile
-  }) => ({
-    selectedPincode: pincode.selectedPincode,
+ userLogin, wishlist, cart, router, profile
+}) => ({
     isLoggedIn: userLogin.isLoggedIn,
     name: profile.data.first_name,
     wishListCount: getWishListCount(wishlist),
@@ -106,8 +105,8 @@ export default class HeaderTop extends Component {
 
   render() {
     const {
-      selectedPincode, isLoggedIn, history, wishListCount, cartCount, logoutUser, name
-    } = this.props;
+ isLoggedIn, history, wishListCount, cartCount, logoutUser, name
+} = this.props;
 
     return (
       <Box>
@@ -121,12 +120,12 @@ export default class HeaderTop extends Component {
             <Search />
           </Col>
           <Col width={5 / 12} flexDirection="row" justifyContent="flex-end">
-            <Button variant="link" onClick={this.onOpenPincodeModal}>
+            {/* <Button variant="link" onClick={this.onOpenPincodeModal}>
               <Flex alignItems="center">
                 <LocationIcon />
                 <Text variant="headerLabel">{selectedPincode !== '' ? selectedPincode : 'Pincode'}</Text>
               </Flex>
-            </Button>
+            </Button> */}
             <Link to="/store-locator">
               <Flex alignItems="center" pl={20}>
                 <LocationIcon />
@@ -154,41 +153,43 @@ export default class HeaderTop extends Component {
             </Button>
             <Box pt={20} sx={{ position: 'relative' }}>
               <Card variant="card.profileMore">
-                {!isLoggedIn && (
-                  <Fragment>
-                    <Button as={Link} to={SIGNUP_URL} onClick={this.handleClick(SIGNUP_URL)} mb={15} width={175}>
-                      Sign Up
-                    </Button>
-                    <Text mb={6} textAlign="center">
-                      Not a member yet?
-                    </Text>
-                    <Button
-                      as={Link}
-                      variant="outline.primary"
-                      to={LOGIN_URL}
-                      onClick={this.handleClick(LOGIN_URL)}
-                      width={175}
-                      sx={{ display: 'block' }}
-                    >
-                      Log In
-                    </Button>
-                  </Fragment>
-                )}
-                {isLoggedIn && (
-                  <Fragment>
-                    <Button as={Link} to={MY_PROFILE_URL} mb={15} width={175}>
-                      Profile
-                    </Button>
-                    <Button
-                      variant="outline.primary"
-                      onClick={onClickLogout(logoutUser)}
-                      width={175}
-                      sx={{ display: 'block' }}
-                    >
-                      Logout !
-                    </Button>
-                  </Fragment>
-                )}
+                <Box variant="card.profileMoreWrapper">
+                  {!isLoggedIn && (
+                    <Fragment>
+                      <Button as={Link} to={SIGNUP_URL} onClick={this.handleClick(SIGNUP_URL)} mb={15} width={175}>
+                        Sign Up
+                      </Button>
+                      <Text mb={6} textAlign="center">
+                        Not a member yet?
+                      </Text>
+                      <Button
+                        as={Link}
+                        variant="outline.primary"
+                        to={LOGIN_URL}
+                        onClick={this.handleClick(LOGIN_URL)}
+                        width={175}
+                        sx={{ display: 'block' }}
+                      >
+                        Log In
+                      </Button>
+                    </Fragment>
+                  )}
+                  {isLoggedIn && (
+                    <Fragment>
+                      <Button as={Link} to={MY_PROFILE_URL} mb={15} width={175}>
+                        Profile
+                      </Button>
+                      <Button
+                        variant="outline.primary"
+                        onClick={onClickLogout(logoutUser)}
+                        width={175}
+                        sx={{ display: 'block' }}
+                      >
+                        Logout !
+                      </Button>
+                    </Fragment>
+                  )}
+                </Box>
               </Card>
             </Box>
             <Button variant="link" pl={20} onClick={isLoggedIn ? onClick(history) : this.onOpenLoginModal}>
@@ -242,7 +243,6 @@ export default class HeaderTop extends Component {
 }
 
 HeaderTop.defaultProps = {
-  selectedPincode: '',
   wishListCount: 0,
   cartCount: 0,
   isLoggedIn: false,
@@ -253,7 +253,6 @@ HeaderTop.defaultProps = {
 };
 
 HeaderTop.propTypes = {
-  selectedPincode: PropTypes.string,
   isLoggedIn: PropTypes.bool,
   history: PropTypes.object,
   wishListCount: PropTypes.number,

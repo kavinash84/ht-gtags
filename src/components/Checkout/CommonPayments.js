@@ -12,14 +12,12 @@ import Image from 'hometown-components-dev/lib/ImageHtV1';
 /**
  * Icons
  */
-const styles = require('./commonPayments.scss');
-
-const creditcardIcon = require('../../../static/credit-card.png');
-const debitcardIcon = require('../../../static/debit-card.png');
-const intBankingIcon = require('../../../static/net-banking-icon.png');
-const emiIcon = require('../../../static/emi.png');
-const walletIcon = require('../../../static/wallet.png');
-const upiIcon = require('../../../static/upi-logo.svg');
+const creditcardIcon = require('../../../static/credit-card-one.svg');
+const debitcardIcon = require('../../../static/debit-card-one.svg');
+const intBankingIcon = require('../../../static/net-banking-one.svg');
+const emiIcon = require('../../../static/emi-one.svg');
+const walletIcon = require('../../../static/wallet-one.svg');
+const upiIcon = require('../../../static/upi-logo-one.svg');
 
 const initial = {
   CreditCard: {
@@ -81,10 +79,10 @@ const PaymentInputRadio = props => (
     sx={{
       '&:checked + label': {
         color: 'primary',
-        boxShadow: '0px 1px #fff',
-        borderTop: 'heading',
-        borderLeft: 'heading',
-        borderRight: 'heading'
+        borderTop: 'secondary',
+        borderLeft: 'secondary',
+        borderBottom: 'secondary',
+        borderRight: '1px solid white'
       }
     }}
     {...props}
@@ -108,7 +106,7 @@ const PaymentTab = ({ title, imageUrl, ...props }) => (
     }}
     {...props}
   >
-    <Image height="20px" mr="10px" src={imageUrl} alt={title} />
+    <Image height={20} mr={10} src={imageUrl} alt={title} />
     {title}
   </Label>
 );
@@ -226,36 +224,20 @@ const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEa
       );
     case 'Upi':
       return (
-        <Box col="12" key={paymentType} className={styles.paymentOptions}>
-          <input
-            type="radio"
-            name="paymentOption"
+        <Fragment key={paymentType}>
+          <PaymentInputRadio
             value="Upi"
+            name="paymentOption"
             checked={selectedGateway === paymentType}
             onChange={onChangeGateway(onChange, paymentType, session)}
           />
-          <Label
+          <PaymentTab
+            title="Upi"
+            imageUrl={upiIcon}
             htmlFor="Upi"
-            pl="0"
-            color="textLight"
-            mt="0"
-            mb="0"
             onClick={onChangeGateway(onChange, paymentType, session)}
-          >
-            <Image
-              height="20px"
-              width="auto"
-              float="left"
-              mr="10px"
-              top="-2px"
-              position="relative"
-              src={upiIcon}
-              alt="UPI"
-              style={{ backgroundColor: '#f5f5f5' }}
-            />
-            UPI
-          </Label>
-        </Box>
+          />
+        </Fragment>
       );
     default:
       return null;

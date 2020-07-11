@@ -9,7 +9,7 @@ import Row from 'hometown-components-dev/lib/RowHtV1';
 
 const TitleBar = ({ title, productCount }) => (
   <Row>
-    <Heading>
+    <Heading ml={120} mt={30}>
       {title} {productCount && `(${productCount})`}
     </Heading>
   </Row>

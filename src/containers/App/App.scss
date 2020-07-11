@@ -428,7 +428,26 @@
 		color: #000 !important;
 		font-size: 26px !important;
 	}
-
+	.homeCarouselSlider {
+		.slick-prev {
+			top: 40% !important;
+			left: -50px !important;
+		}
+		.slick-next {
+			top: 40% !important;
+			right: -50px !important;
+		}
+	}
+	.categoryCarousel {
+		.slick-prev {
+			top: 44% !important;
+			left: -50px !important;
+		}
+		.slick-next {
+			top: 44% !important;
+			right: -50px !important;
+		}
+	}
 	.prodDetailsCarousel {
 		padding-left: 80px;
 		.slick-next {
@@ -891,6 +910,10 @@
 	}
 	.updateProfileModal {
     width: 25rem;
+    padding: 2rem 2.5rem;
+	}
+	.forgotPasswordModal {
+    width: 600px;
     padding: 2rem 2.5rem;
 	}
 	.google-login-btn {

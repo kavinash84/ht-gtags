@@ -63,6 +63,7 @@ const OrderSummary = ({
     <Box
       mb={20}
       mt={20}
+      width={1}
       sx={{
         borderBottom: 'divider'
       }}

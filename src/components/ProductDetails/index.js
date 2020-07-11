@@ -65,11 +65,9 @@ import Video from './Video';
 const freeShippingIcon = require('../../../static/free-shipping.svg');
 const warrentyIcon = require('../../../static/warrenty.svg');
 const emiIcon = require('../../../static/emi.svg');
-const fbIcon = require('../../../static/facebook.svg');
-const twIcon = require('../../../static/twitter.svg');
-const youtubeIcon = require('../../../static/youtube.svg');
-const email = require('../../../static/email-primary.svg');
-const pinIcon = require('../../../static/pinterest.svg');
+const fbIcon = require('../../../static/fb-pdp.svg');
+const email = require('../../../static/email-pdp.svg');
+const pinIcon = require('../../../static/pinterest-pdp.svg');
 
 /**
  * styles
@@ -110,6 +108,7 @@ const DescriptionButton = props => (
       fontWeight={500}
       fontSize={16}
       py={20}
+      color={props.active && '#fa6400'}
       textTransform="uppercase"
       sx={{ textTransform: 'uppercase' }}
       {...props}
@@ -331,6 +330,7 @@ class ProductDetails extends React.Component {
             e.preventDefault();
             this.setState({ activeSpec: i });
           }}
+          active={i === this.state.activeSpec}
         >
           {key}
         </DescriptionButton>
@@ -435,7 +435,7 @@ class ProductDetails extends React.Component {
           </Row>
           <Row mb={70}>
             {/* Left Column */}
-            <Col width={[1, 1, 7 / 12]} pr={40}>
+            <Col width={[1, 6 / 12, 6 / 12, 7 / 12]} pr={40}>
               <Box sx={{ position: 'relative' }}>
                 {/* Product Slider */}
                 {images && <ProductDetailsCarousel data={images} title={meta.name} />}
@@ -458,7 +458,7 @@ class ProductDetails extends React.Component {
               </Box>
             </Col>
             {/* Right Column */}
-            <Col width={[1, 1, 5 / 12]}>
+            <Col width={[1, 6 / 12, 6 / 12, 5 / 12]}>
               <div id="portal" className="portal" />
               {/* Product title and price */}
               <TitlePrice
@@ -470,6 +470,7 @@ class ProductDetails extends React.Component {
                 ratings={rating}
                 count={count}
                 marginTop="1rem"
+                mb={8}
                 onClickReviews={this.onClickReviews}
               />
 
@@ -502,17 +503,20 @@ class ProductDetails extends React.Component {
                   justifyContent="flex-start"
                   sx={{ borderBottom: 'none' }}
                 >
-                  <a
-                    variant="linkPrimary"
-                    href="#review-section"
-                    pl={10}
-                    ml={10}
-                    sx={{
-                      borderLeft: 'primary'
-                    }}
-                  >
-                    Write a Review
-                  </a>
+                  <Box pl={4}>
+                    <a
+                      variant="linkPrimary"
+                      href="#review-section"
+                      pl={10}
+                      ml={10}
+                      sx={{
+                        borderLeft: 'primary'
+                      }}
+                      style={{ color: '#f15a22' }}
+                    >
+                      | Write a Review
+                    </a>
+                  </Box>
                 </ReviewDisplay>
               )}
 
@@ -620,24 +624,6 @@ class ProductDetails extends React.Component {
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
-                  href={`https://twitter.com/intent/tweet?text=${productDescription.slice(0, 150)}..`}
-                >
-                  <SocialButton>
-                    <Image src={twIcon} alt="Twitter" />
-                  </SocialButton>
-                </a>
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://www.youtube.com/channel/UCBZGArWnKT6MYYwOsPCNjiw?sub_confirmation=1"
-                >
-                  <SocialButton>
-                    <Image src={youtubeIcon} alt="Youtube" />
-                  </SocialButton>
-                </a>
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
                   href={`http://pinterest.com/pin/create/button/?url=${productURL}&description=${name}`}
                 >
                   <SocialButton>
@@ -670,6 +656,7 @@ class ProductDetails extends React.Component {
                   e.preventDefault();
                   this.setState({ activeSpec: 'description' });
                 }}
+                active={activeSpec === 'description'}
               >
                 DESCRIPTION
               </DescriptionButton>
@@ -696,7 +683,7 @@ class ProductDetails extends React.Component {
             )}
 
             {/* Usps */}
-            <Row mb={40} width="60%" justifyContent="space-between" mx="auto">
+            <Row mb={40} width="60%" justifyContent="space-between" mx="auto" flexWrap="nowrap">
               <UspCol src={freeShippingIcon} text="Free Shipping" />
               <UspCol src={emiIcon} text="EMI Options" />
               <UspCol src={warrentyIcon} text="1 Year Warranty" />
@@ -749,37 +736,44 @@ class ProductDetails extends React.Component {
                 <CompleteTheLookCol src="https://www.hometown.in/media/cms/banner/chair.png" />
                 <CompleteTheLookCol src="https://www.hometown.in/media/cms/banner/curtain.png" />
                 <CompleteTheLookCol src="https://www.hometown.in/media/cms/banner/painting.png" />
-                <CompleteTheLookCol src="https://www.hometown.in/media/cms/banner/pillow.png" />
+                <CompleteTheLookCol
+                  width="190px"
+                  height="190px"
+                  marginTop="53px"
+                  marginRight="104px"
+                  marginLeft="93px"
+                  src="https://www.hometown.in/media/cms/banner/pillow.png"
+                />
                 <CompleteTheLookCol src="https://www.hometown.in/media/cms/banner/table.png" />
               </Row>
             </Box>
 
             {/* Review List and Add review */}
-            <Box id="review-section" pt={30} sx={{ borderBottom: 'dividerLight' }}>
-              <Box textAlign="center" mb={30}>
-                <Heading variant="heading.regular">Reviews</Heading>
-              </Box>
-              <AddReview
-                ratings={weightedRating}
-                reviews={reviewsData.length}
-                count={5}
-                variant="col-8"
-                catalogId={groupedattributes.id_catalog_config}
-                loaded
-                onClickSubmit={this.addReview}
-                adding={adding}
-                added={added}
-                toggleReview={toggleReviewBox}
-              />
-              {!!reviewsData.length && (
+            {!!reviewsData.length && (
+              <Box id="review-section" pt={30}>
+                <Box textAlign="center" mb={30}>
+                  <Heading variant="heading.regular">Reviews</Heading>
+                </Box>
+                <AddReview
+                  ratings={weightedRating}
+                  reviews={reviewsData.length}
+                  count={5}
+                  variant="col-8"
+                  catalogId={groupedattributes.id_catalog_config}
+                  loaded
+                  onClickSubmit={this.addReview}
+                  adding={adding}
+                  added={added}
+                  toggleReview={toggleReviewBox}
+                />
                 <Reviews
                   variant="col-12"
                   reviewItems={reviews.data}
                   showReviews={showReviews}
                   showMoreReviews={this.showMoreReviews}
                 />
-              )}
-            </Box>
+              </Box>
+            )}
           </Box>
 
           {/* Combined Offers */}
@@ -851,6 +845,10 @@ ProductDetails.defaultProps = {
   quantityChange: false,
   skuItem: {}
   // session: ''
+};
+DescriptionButton.propTypes = {
+  // eslint-disable-next-line react/require-default-props
+  active: PropTypes.string
 };
 ProductDetails.propTypes = {
   product: PropTypes.object,

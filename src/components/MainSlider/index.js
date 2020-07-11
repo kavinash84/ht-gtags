@@ -19,7 +19,12 @@ class MainSlider extends Component {
     const finalSettings = { ...settings, ...newSettings };
 
     return (
-      <SlickSlider settings={finalSettings} afterChange={e => triggerSlideChange(e)} ref={reference}>
+      <SlickSlider
+        settings={finalSettings}
+        afterChange={e => triggerSlideChange(e)}
+        ref={reference}
+        className="mainSlider"
+      >
         {data.map((slide, index) => (
           <BoxHtV1 key={String(index)}>
             <SliderItem
