@@ -52,33 +52,34 @@ const onClick = (cartId, sessionId, pincode) => dispatcher => e => {
   e.preventDefault();
   dispatcher(cartId, sessionId, pincode);
 };
-const countCartItemNumbers = (results) => {
+const countCartItemNumbers = results => {
   let cartItemsNumber = 0;
-  results.map((result) => {
-    cartItemsNumber += result.qty
-  })
+  results.map(result => {
+    cartItemsNumber += result.qty;
+  });
   return cartItemsNumber;
-}
+};
 const checkIsAnyProductOutofStoc = (results, outOfStockList) => {
-  let isAnyProductOutofStoc = false
-  results.map((result) => {
+  let isAnyProductOutofStoc = false;
+  results.map(result => {
     if (outOfStockList.includes(result.configurable_sku) === true) {
-      isAnyProductOutofStoc = true
+      isAnyProductOutofStoc = true;
     }
-  })
+  });
   return isAnyProductOutofStoc;
-}
+};
 
-const mapStateToProps = ({ pincode, cart, app, relatedproducts }) => ({
+const mapStateToProps = ({
+ pincode, cart, app, relatedproducts
+}) => ({
   currentId: cart.key,
   cartChecked: cart.cartChecked,
   checkingCart: cart.checkingCart,
   cartUpdating: cart.cartUpdating,
   pincode: pincode.selectedPincode,
   sessionId: app.sessionId,
-  relatedproductsList: relatedproducts.data,
+  relatedproductsList: relatedproducts.data
 });
-
 
 const Cart = ({
   results,
@@ -92,8 +93,7 @@ const Cart = ({
   checkingCart,
   outOfStockList,
   handlePincodeModal,
-  relatedproductsList,
-
+  relatedproductsList
 }) => {
   const cartItemLoading = customerCardId => cartUpdating && currentId === customerCardId;
   const isProductOutofStock = sku => outOfStockList.includes(sku);
@@ -381,7 +381,7 @@ Cart.propTypes = {
   checkingCart: PropTypes.bool,
   outOfStockList: PropTypes.array,
   handlePincodeModal: PropTypes.func.isRequired,
-  relatedproductsList: PropTypes.array,
+  relatedproductsList: PropTypes.array
 };
 
 Cart.defaultProps = {
@@ -392,7 +392,7 @@ Cart.defaultProps = {
   currentId: '',
   checkingCart: false,
   outOfStockList: [],
-  relatedproductsList: [],
+  relatedproductsList: []
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

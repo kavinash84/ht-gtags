@@ -236,7 +236,7 @@ export default class DeliveryAddress extends Component {
     });
   };
   scrollToFormRef() {
-    window.scrollTo(0, this.formRef.current.offsetTop + (window.innerHeight / 1.5));
+    window.scrollTo(0, this.formRef.current.offsetTop + window.innerHeight / 1.5);
   }
   handleClick = index => {
     const { data } = this.props;
@@ -278,7 +278,7 @@ export default class DeliveryAddress extends Component {
       name,
       addressId
     });
-    this.scrollToFormRef()
+    this.scrollToFormRef();
   };
   handleSubmit = e => {
     const { dispatch } = this.context.store;
@@ -303,7 +303,7 @@ export default class DeliveryAddress extends Component {
       phone: '',
       name: ''
     });
-    this.scrollToFormRef()
+    this.scrollToFormRef();
   };
   checkDisabled = () => {
     const {
@@ -381,11 +381,11 @@ export default class DeliveryAddress extends Component {
                       fontSize: '14px',
                       width: '100%',
                       height: '135px',
-                      marginBottom: '10px',
+                      marginBottom: '10px'
                     }}
                     onClick={() => this.handleClick(index)}
                   >
-                    <div className={styles.addressOuter} >
+                    <div className={styles.addressOuter}>
                       <div className={styles.addressInner}>
                         <b>{item.full_name}</b>
                         <br />
@@ -519,7 +519,6 @@ export default class DeliveryAddress extends Component {
                     </BoxHtV1>
                   </RowHtV1>
                 </form>
-
               )}
 
               {addForm && (

@@ -249,7 +249,7 @@ HeaderTop.defaultProps = {
   name: '',
   history: {},
   router: {},
-  logoutUser: () => { }
+  logoutUser: () => {}
 };
 
 HeaderTop.propTypes = {

@@ -136,8 +136,8 @@ class Footer extends React.Component {
     // menuItems = menuItems.filter(item => FooterLinks.includes(item.name));
 
     const {
-      email, emailError, emailErrorMessage, already
-    } = this.state;
+ email, emailError, emailErrorMessage, already
+} = this.state;
     return (
       <Section bg="bgFooter" pt={30} pb={10} mb={0}>
         <Container variant="container">
@@ -260,12 +260,12 @@ class Footer extends React.Component {
                   </Row>
                 </form>
               ) : (
-                  <Row>
-                    <Text color="green" fontSize="0.955rem" mt="0" mb="0" lh="2" ta="left">
-                      You have been successfully subscribed to the Newsletter
+                <Row>
+                  <Text color="green" fontSize="0.955rem" mt="0" mb="0" lh="2" ta="left">
+                    You have been successfully subscribed to the Newsletter
                   </Text>
-                  </Row>
-                )}
+                </Row>
+              )}
               <Row mt={15} sx={{ justifyContent: 'space-between' }}>
                 <SocialLink target="_blank" href="https://www.facebook.com/hometown.in/">
                   <Image src={fbIcon} alt="Facebook" />
