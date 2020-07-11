@@ -6,21 +6,24 @@
   }
 }
 .collposeBlock {
+  .collopseContent {
+    display: none;
+  }
   .close {
     display: none;
   }
   .open {
     display: block;
   }
-  .collopseHeading {
-    cursor: pointer;
+ 
     button {
       background: transparent;
       border: none;
       padding: 0;
+      text-align: left;
       &:focus, &:active {
         //outline: none;
-        & + .collopseContent {
+       .collopseContent {
           display: block;
         }
         .open {
@@ -31,8 +34,6 @@
         }
       }
     }
-  }
-  .collopseContent {
-    display: none;
-  }
+  
+ 
 }
