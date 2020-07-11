@@ -20,9 +20,10 @@ import Row from 'hometown-components-dev/lib/RowHtV1';
  * Page Components
  */
 import Footer from 'components/Footer';
-import ForgotPasswordForm from 'hometown-components-dev/lib/FormsHtV1/ForgotPasswordFormHtV1';
+import ForgotPasswordForm from 'components/ForgotPasswordForm';
 import GoogleLoginBtn from 'components/LoginForms/GoogleLogin';
 import Header from 'components/Header';
+import ResponsiveModal from 'components/Modal';
 
 /**
  * helpers / modules
@@ -55,7 +56,8 @@ export default class ForgotPasswordContainer extends Component {
       email: '',
       emailError: false,
       emailErrorMessage: '',
-      submitted: false
+      submitted: false,
+      showLoginModal: true
     };
   }
 
@@ -85,6 +87,13 @@ export default class ForgotPasswordContainer extends Component {
     const { dispatch } = this.context.store;
     dispatch(forgotPassword(email));
   };
+
+  handleForgotPasswordModal = () => {
+    const { history } = this.props;
+    this.setState({ showLoginModal: !this.state.showLoginModal });
+    history.push('/login');
+  };
+
   render() {
     const styles = require('../Login/index.scss');
 
@@ -101,7 +110,7 @@ export default class ForgotPasswordContainer extends Component {
         {/* Container */}
         <Container mt={80}>
           <Row>
-            <Box variant="col-4">
+            <Box maxWidth="50%" pl={16} pr={16}>
               {loaded && !error && submitted ? (
                 <Box className={`${styles.responseBlock}`}>
                   <Image src={ForgotPasswordImg} alt="" />
@@ -119,22 +128,23 @@ export default class ForgotPasswordContainer extends Component {
                 </Box>
               ) : (
                 <Fragment>
-                  <Box width={1} mb={10} sx={{ borderBottom: 'divider' }}>
-                    <Heading color="#1b2125" pb={20}>
-                      FORGOT PASSWORD?
-                    </Heading>
-                  </Box>
-                  <Box pt={20} pb={30}>
-                    <ForgotPasswordForm
-                      email={email}
-                      onChangeEmail={this.onChangeEmail}
-                      emailFeedBackError={emailError}
-                      emailFeedBackMessage={emailErrorMessage}
-                      onSubmitForgot={this.onSubmitForgot}
-                      forgotResponse={response}
-                      loginUrl={LOGIN_URL}
-                    />
-                  </Box>
+                  <ResponsiveModal
+                    classNames={{ modal: 'forgotPasswordModal' }}
+                    onCloseModal={this.handleForgotPasswordModal}
+                    open={this.state.showLoginModal}
+                  >
+                    <Box pb={30}>
+                      <ForgotPasswordForm
+                        email={email}
+                        onChangeEmail={this.onChangeEmail}
+                        emailFeedBackError={emailError}
+                        emailFeedBackMessage={emailErrorMessage}
+                        onSubmitForgot={this.onSubmitForgot}
+                        forgotResponse={response}
+                        loginUrl={LOGIN_URL}
+                      />
+                    </Box>
+                  </ResponsiveModal>
                   <Row mx={0}>
                     <Box variant="col-12" textAlign="center" mb={16}>
                       <Label color="textLight" fontSize={15}>
@@ -166,7 +176,7 @@ export default class ForgotPasswordContainer extends Component {
                 </Fragment>
               )}
             </Box>
-            <Box variant="col-8" pl={40}>
+            <Box maxWidth="50%" pr={16} pl={40}>
               <Box
                 width={1}
                 mb={20}
@@ -178,7 +188,7 @@ export default class ForgotPasswordContainer extends Component {
                   CREATE AN ACCOUNT
                 </Heading>
               </Box>
-              <Heading fontSize={14}>If you don't yet have HomeTown account, please register.</Heading>
+              <Heading fontSize={16}>If you don't yet have HomeTown account, please register.</Heading>
               <Button px={80} mt={30} height={42} lineHeight={1.7} fontWeight={600} as={Link} to={SIGNUP_URL}>
                 Register
               </Button>
@@ -192,3 +202,7 @@ export default class ForgotPasswordContainer extends Component {
     );
   }
 }
+
+ForgotPasswordContainer.propTypes = {
+  history: PropTypes.object.isRequired
+};

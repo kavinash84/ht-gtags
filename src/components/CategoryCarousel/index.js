@@ -17,7 +17,7 @@ export default class CategoryCarousel extends Component {
     return (
       <BoxHtV1>
         {(categoryName !== '' || categoryName !== null) && <Title title={categoryName} subTitle={subTitle} />}
-        <SlickSlider settings={adjustSlides(data.length)}>
+        <SlickSlider settings={adjustSlides(data.length)} className="homeCarouselSlider">
           {data.map(slide => (
             <div key={slide.category_id}>
               <CategoryCarouselItem

@@ -88,7 +88,7 @@ class NavBar extends Component {
               >
                 <Text variant="menu">More</Text>
               </Button>
-              <Card variant="card.moreDropdown" px={0} py={0}>
+              <Card sx={{ position: 'absolute', zIndex: '1111' }} variant="card.moreDropdown" px={0} py={0}>
                 {more &&
                   more.map((menuItem, i) => (
                     <Box>

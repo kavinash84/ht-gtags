@@ -77,7 +77,12 @@ class Pincode extends React.Component {
                 my={0}
                 onChange={onChange(setPincodeQuery, this.setPincodeInStore(setPincode, pincodeQuery))}
                 value={pincodeQuery}
-                sx={{ borderRadius: 0 }}
+                sx={{
+                  borderRadius: 0,
+                  '&::-webkit-input-placeholder': {
+                    color: '#f15a22'
+                  }
+                }}
               />
               <Button
                 variant="secondary"

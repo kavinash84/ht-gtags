@@ -62,13 +62,14 @@ export default class LoginViaOtp extends React.Component {
         {!mobilesubmitted ? (
           <form onSubmit={onSubmitMobileNumber}>
             <FormInputHtV1
-              label="Mobile Number"
+              label="Phone no.*"
               onChange={onChangeMobile}
               value={mobile}
               type="text"
               placeholder="Enter your 10 digits number"
               feedBackError={mobileError}
               feedBackMessage={mobileErrorMessage}
+              fontSize="16px"
             />
             <Flex justifyContent="center">
               <Button width={180} height={42} fontWeight={600} onClick={this.onSubmitMobileNumber} disabled={loading}>

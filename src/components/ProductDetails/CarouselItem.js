@@ -9,9 +9,9 @@ const getLowResolution = url => url.replace('-zoom.jpg', '-product_500.jpg');
 const getHighResolution = url => url.replace('.jpg', '-zoom.jpg');
 
 const CategoryItem = ({ image, name }) => (
-  <ImageShimmer src={getHighResolution(image)} height="545px" overflow="hidden">
+  <ImageShimmer src={getHighResolution(image)} height={[300, 300, 400, 545]} overflow="hidden">
     {(imageURL, error) => {
-      if (error) return <Image alt={name} src={imageURL} height="545px" />;
+      if (error) return <Image alt={name} src={imageURL} height={[300, 300, 400, 545]} />;
       return (
         <ReactImageMagnify
           {...{

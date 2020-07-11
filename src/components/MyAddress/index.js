@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -12,7 +11,6 @@ import CardHtV1 from 'hometown-components-dev/lib/CardHtV1';
 import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
 import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
 import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
-import MyMenu from 'components/MyMenu';
 import { addAddress, updateAddress } from 'redux/modules/myaddress';
 // Validators
 import {
@@ -118,7 +116,9 @@ export default class DeliveryAddress extends Component {
     }
   }
   onSubmitValidator = () => {
-    const { email, name, pincode, address1, address2, address3, phone } = this.state;
+    const {
+ email, name, pincode, address1, address2, address3, phone
+} = this.state;
     const nameError = isEmpty(name);
     const emailError = isEmpty(email) || !validateEmail(email);
     const phoneError = isEmpty(phone) || validateMobile(phone).error;
@@ -306,15 +306,15 @@ export default class DeliveryAddress extends Component {
     this.scrollToFormRef()
   };
   checkDisabled = () => {
-    const { address1Error, address2Error, address3Error, phoneError, pincodeError, nameError, gstError } = this.state;
+    const {
+ address1Error, address2Error, address3Error, phoneError, pincodeError, nameError, gstError
+} = this.state;
     const check =
       address1Error || address2Error || address3Error || phoneError || pincodeError || nameError || gstError;
     return check;
   };
   render() {
     const {
-      emailError,
-      emailErrorMessage,
       phoneError,
       phoneErrorMessage,
       pincodeError,
@@ -342,7 +342,7 @@ export default class DeliveryAddress extends Component {
       currentaddressindex
       // gst
     } = this.state;
-    const { data, useremail } = this.props;
+    const { data } = this.props;
     const { loading } = this.props;
     return (
       <BoxHtV1 type="block" mb="2rem">

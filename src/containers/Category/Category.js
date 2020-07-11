@@ -40,7 +40,10 @@ export default class Category extends Component {
         width={[1 / 2, 1 / 2, 1 / 4]}
         textAlign="center"
         sx={{
-          borderRight: 'whiteMedium'
+          borderRight: 'whiteMedium',
+          '&:last-child': {
+            borderRight: 'none'
+          }
         }}
       >
         <Text variant="textLight" color="white">

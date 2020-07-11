@@ -21,6 +21,7 @@ import Container from 'hometown-components-dev/lib/ContainerHtV1';
 import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
 import EmailIcon from 'hometown-components-dev/lib/Icons/EmailHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Li from 'hometown-components-dev/lib/LiHtV1';
 import LocationIcon from 'hometown-components-dev/lib/Icons/LocationHtV1';
@@ -136,13 +137,13 @@ class Footer extends React.Component {
     // menuItems = menuItems.filter(item => FooterLinks.includes(item.name));
 
     const {
-      email, emailError, emailErrorMessage, already
-    } = this.state;
+ email, emailError, emailErrorMessage, already
+} = this.state;
     return (
       <Section bg="bgFooter" pt={30} pb={10} mb={0}>
         <Container variant="container">
           <Row>
-            <Col width={[1, 2 / 3, 3 / 12]}>
+            <Col width={[1, 2 / 3, 2 / 12]}>
               <Box mb={24}>
                 <Heading variant="footerTitle">CUSTOMER SERVICE</Heading>
                 <Ul>
@@ -179,7 +180,7 @@ class Footer extends React.Component {
                   <FooterMenuLink to="/promotions" title="Promotions" />
                 </Ul>
               </Box>
-              {/* <Box>
+              <Box>
                 <Heading variant="footerTitle">CATALOG</Heading>
                 <Ul>
                   <Li>
@@ -194,7 +195,7 @@ class Footer extends React.Component {
                   </Li>
                 </Ul>
                 <Image src={bajajFinserveIcon} alt="Bajaj Finserv" mt={20} />
-              </Box> */}
+              </Box>
             </Col>
             <Col width={[1, 2 / 3, 3 / 12]}>
               <Box mb={24}>
@@ -202,14 +203,14 @@ class Footer extends React.Component {
                 <Ul>
                   <Li>
                     <a href="tel:1800-210-0004" rel="noreferrer noopener" target="_blank">
-                      <Text variant="footerLink" fontSize={16}>
+                      <Text variant="footerLink">
                         <CallIcon mr={10} /> 1800-210-0004
                       </Text>
                     </a>
                   </Li>
                   <Li>
                     <a href="mailto:care@hometown.in" rel="noreferrer noopener" target="_blank">
-                      <Text variant="footerLink" fontSize={16}>
+                      <Text variant="footerLink">
                         <EmailIcon mr={10} />
                         care@hometown.in
                       </Text>
@@ -217,7 +218,7 @@ class Footer extends React.Component {
                   </Li>
                   <Li>
                     <Link to="/store-locator">
-                      <Text variant="footerLink" fontSize={16}>
+                      <Text variant="footerLink">
                         <LocationIcon mr={10} />
                         Store Locator
                       </Text>
@@ -226,22 +227,32 @@ class Footer extends React.Component {
                 </Ul>
               </Box>
             </Col>
-            <Col width={[1, 1, 4 / 12]} pl={[0, 0, 50]}>
-              <Box
-                mb={17}
-                sx={{
-                  borderBottom: 'divider',
-                  display: 'flex',
-                  justifyContent: 'center'
-                }}
-              >
-                <Text variant="footerLink" mt={-7} px={24} sx={{ position: 'absolute', bg: 'bgFooter' }}>
-                  Subscribe Newsletter
-                </Text>
-              </Box>
+            <Col width={[1, 1, 5 / 12]} pl={[0, 0, 50]}>
               {!already ? (
                 <form onSubmit={this.handleSubmit}>
-                  <Row>
+                  <Box
+                    width="75%"
+                    sx={{
+                      textAlign: 'center',
+                      position: 'absolute',
+                      top: '-8px',
+                      backgrounColor: '#FFF'
+                    }}
+                  >
+                    <LabelHtV1
+                      sx={{
+                        fontFamily: 'HelveticaNeue',
+                        fontSize: '12px',
+                        fontWeight: '500',
+                        letterSpacing: '0.51px',
+                        color: '#1d1d1d'
+                      }}
+                    >
+                      {' '}
+                      Lorem ipsum{' '}
+                    </LabelHtV1>
+                  </Box>
+                  <Row sx={{ borderTop: 'divider', paddingTop: '17px' }}>
                     <Box width={9 / 12}>
                       <FormInput
                         label=""
@@ -260,13 +271,13 @@ class Footer extends React.Component {
                   </Row>
                 </form>
               ) : (
-                  <Row>
-                    <Text color="green" fontSize="0.955rem" mt="0" mb="0" lh="2" ta="left">
-                      You have been successfully subscribed to the Newsletter
+                <Row>
+                  <Text color="green" fontSize="0.955rem" mt="0" mb="0" lh="2" ta="left">
+                    You have been successfully subscribed to the Newsletter
                   </Text>
-                  </Row>
-                )}
-              <Row mt={15} sx={{ justifyContent: 'space-between' }}>
+                </Row>
+              )}
+              <Row mt={20} sx={{ justifyContent: 'space-between' }}>
                 <SocialLink target="_blank" href="https://www.facebook.com/hometown.in/">
                   <Image src={fbIcon} alt="Facebook" />
                 </SocialLink>

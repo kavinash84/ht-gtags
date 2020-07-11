@@ -50,7 +50,7 @@ const ProductQuantity = ({
       onClick={onClick(cartId, skuId, simpleSku, sessionId, pincode, -1)(updateQuantity)}
       disabled={cartItemLoading(cartId) || quantity <= 1}
     >
-      <Image src={reductIcon} alt="" height={22} />
+      <Image src={reductIcon} alt="" height={24} />
     </Button>
     <Label color="textLight" px={10}>
       {cartItemLoading(cartId) ? <Image width={20} className="spin" src={LoaderIcon} /> : quantity}
@@ -61,7 +61,7 @@ const ProductQuantity = ({
       onClick={onClick(cartId, skuId, simpleSku, sessionId, pincode, 1)(updateQuantity)}
       disabled={cartItemLoading(cartId)}
     >
-      <Image src={increaseIcon} alt="" height={22} />
+      <Image src={increaseIcon} alt="" height={24} />
     </Button>
   </Row>
 );

@@ -14,7 +14,6 @@ import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
 import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
 import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
 // import FormInput from 'hometown-components-dev/lib/Forms/FormInput';
-import MyMenu from 'components/MyMenu';
 import { getDateFilters } from 'utils/helper';
 import { loadMyCases } from 'redux/modules/mycases';
 
@@ -103,7 +102,6 @@ class MyCasesContainer extends Component {
     const { loading } = this.props;
     return (
       <BoxHtV1 type="block" mb="2rem">
-        <MyMenu page="address" />
         <SectionHtV1 display="flex" pt="1.25rem" mb="0" height="auto">
           <ContainerHtV1 type="container" pr="0" pl="0" width="100%">
             <RowHtV1 display="block" mr="0" ml="0" mb="1.5rem">

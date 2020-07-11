@@ -3,17 +3,13 @@ import Select from 'react-select';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
-// import Text from 'hometown-components-dev/lib/Text';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
-import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Section from 'hometown-components-dev/lib/SectionHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
 import { getDateFilters } from 'utils/helper';
 import { loadMyOrders } from 'redux/modules/orders';
 import { loadOrdersTracking, closeModal, setCurrentOrder } from 'redux/modules/tracking';
-// import { Label } from 'hometown-components-dev/lib/Label';
-import MyMenu from 'components/MyMenu';
-import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import OrderBlock from './OrderBlock';
 
 // import ProductItems from '../../data/RecentlyViewedProducts.js';
@@ -120,12 +116,11 @@ class MyOrderContainer extends Component {
       setCurrentOrder: setOrderNumber
     } = this.props;
     return (
-      <BoxHtV1 type="block">
-        <MyMenu page="order" />
-        <SectionHtV1 display="flex" pt="1.25rem" mb="0" height="auto">
-          <ContainerHtV1 type="container" pr="0.5rem" pl="0.5rem">
-            <RowHtV1 display="block" mr="0" ml="0" mb="1.5rem">
-              <BoxHtV1 col="3" mr="1rem" width="25%">
+      <Box>
+        <Section mt={0} pt="1.25rem" mb="0" height="auto">
+          <Box pr="0.5rem" pl="0.5rem" width={1}>
+            <Row mr="0" ml="0" mb="1.5rem">
+              <Box col="3" mr="1rem" width="25%">
                 <Select
                   placeholder="Select From Date"
                   defaultValue={null}
@@ -133,7 +128,7 @@ class MyOrderContainer extends Component {
                   onChange={this.onChangeDate}
                   options={getDateFilters(this.FILTER_CONFIG)}
                 />
-              </BoxHtV1>
+              </Box>
               {/* <Div col="3" mr="1rem" hide>
                 <Select
                   placeholder="Select Order Status"
@@ -143,8 +138,8 @@ class MyOrderContainer extends Component {
                   options={this.STATUS_FILTER}
                 />
               </Div> */}
-              <BoxHtV1 col="2" mr="1rem" width="16.65%">
-                <ButtonHtV1
+              <Box col="2" mr="1rem" width="16.65%">
+                <Button
                   disabled={loading}
                   onClick={this.getFilteredOrders}
                   border="1px solid"
@@ -159,9 +154,9 @@ class MyOrderContainer extends Component {
                   fontSize="16px"
                 >
                   {loading ? 'Please Wait ...' : 'Find'}
-                </ButtonHtV1>
-              </BoxHtV1>
-            </RowHtV1>
+                </Button>
+              </Box>
+            </Row>
             {results.map((item, index) => (
               <OrderBlock
                 key={`${item.order_item_id}_${String(index)}`}
@@ -171,9 +166,9 @@ class MyOrderContainer extends Component {
                 closeModal={closeTrackingModal}
               />
             ))}
-          </ContainerHtV1>
-        </SectionHtV1>
-      </BoxHtV1>
+          </Box>
+        </Section>
+      </Box>
     );
   }
 }

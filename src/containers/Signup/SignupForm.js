@@ -223,8 +223,8 @@ export default class SignupFormContainer extends Component {
           <Box pb={20}>
             <Text fontSize={12}>*Required</Text>
           </Box>
-          <Row mt="1em">
-            <Col variant="col-6">
+          <Row>
+            <Col width={1}>
               <SignUpForm
                 email={email}
                 onChangeEmail={this.onChangeEmail}

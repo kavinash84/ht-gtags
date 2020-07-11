@@ -18,7 +18,7 @@ const adjustSlides = length => ({
 const CategoryCarousel = ({ data, categoryName }) => (
   <Box>
     {categoryName !== null && <Title title={categoryName} subTitle="" textAlign="center" />}
-    <SlickSlider settings={adjustSlides(data.length)}>
+    <SlickSlider settings={adjustSlides(data.length)} className="categoryCarousel">
       {data.map((slide, index) => (
         <div key={String(index)}>
           <CategoryCarouselItem image={slide.image} name={slide.title} url={slide.url_key} />
