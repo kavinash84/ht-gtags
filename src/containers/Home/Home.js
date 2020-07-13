@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import LazyLoad from 'react-lazyload';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
@@ -64,23 +63,23 @@ const customDropdownStyles = {
 };
 
 @connect(({
-    homepage: {
- categories, banners, products, hashtags, offers, recentlyviewed, instafeeds
-},
-    stores,
-    userLogin
-  }) => ({
-    instafeeds: instafeeds.data,
-    banners: banners.data,
-    homepageCategories: categories.data,
-    homepageProducts: products.data,
-    cities: getCities(stores),
-    hashtags: hashtags.data,
-    offerStrip: getOfferStripData(offers),
-    middleBanner: getMiddleBannerData(offers),
-    recentlyviewed: recentlyviewed.data,
-    isLoggedIn: userLogin.isLoggedIn
-  }))
+  homepage: {
+    categories, banners, products, hashtags, offers, recentlyviewed, instafeeds
+  },
+  stores,
+  userLogin
+}) => ({
+  instafeeds: instafeeds.data,
+  banners: banners.data,
+  homepageCategories: categories.data,
+  homepageProducts: products.data,
+  cities: getCities(stores),
+  hashtags: hashtags.data,
+  offerStrip: getOfferStripData(offers),
+  middleBanner: getMiddleBannerData(offers),
+  recentlyviewed: recentlyviewed.data,
+  isLoggedIn: userLogin.isLoggedIn
+}))
 export default class Home extends Component {
   state = {
     showRibbon: true,
@@ -136,8 +135,8 @@ export default class Home extends Component {
 
   render() {
     const {
- instafeeds, banners, middleBanner, homepageCategories, cities
-} = this.props;
+      instafeeds, banners, middleBanner, homepageCategories, cities
+    } = this.props;
     const citiesList = cities.map(item => ({ value: item, label: item }));
     const { citySelectError, cityErrorMessage } = this.state;
     return (

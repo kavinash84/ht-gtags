@@ -34,23 +34,25 @@ const isInWishList = (list, id) => list.includes(id);
 
 const styles = require('../Listing/Listing.scss');
 
-const sanitizeWishList = list => list.map(item => item.product_info);
+// const sanitizeWishList = list => list.map(item => item.product_info);
 
 class Wishlist extends React.Component {
   state = {
     openQuickView: false,
-    quickViewSku: '',
-    simpleSku: '',
-    deliveredBy: ''
+    // quickViewSku: '',
+    // simpleSku: '',
+    // deliveredBy: ''
   };
-  onOpenQuickViewModal = (sku, simpleSku, soldOut, rating, deliveredBy) => {
+  // |bottom
+  // onOpenQuickViewModal = (sku, simpleSku, soldOut, rating, deliveredBy) => {
+  onOpenQuickViewModal = () => {
     this.setState({
       openQuickView: true,
-      quickViewSku: sku,
-      simpleSku,
-      soldOut,
-      rating,
-      deliveredBy
+      // quickViewSku: sku,
+      // simpleSku,
+      // soldOut,
+      // rating,
+      // deliveredBy
     });
   };
   onCloseQuickViewModal = () => {
@@ -61,7 +63,11 @@ class Wishlist extends React.Component {
     const {
  list, toggleWishList, wishList, loadingList, productPosition, selectedPincode
 } = this.props;
-    const { quickViewSku, openQuickView, simpleSku } = this.state;
+      const {
+      // quickViewSku,
+       openQuickView,
+      // simpleSku
+      } = this.state;
     return (
       <Section display="flex" p="0" pt="2.5rem" mb="2rem">
         <Container type="container" pr="0" pl="0">

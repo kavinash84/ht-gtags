@@ -376,8 +376,8 @@ class ProductDetails extends React.Component {
       reviews: { count, rating }
     } = product;
     const {
- description, product_height: height, product_width: width, product_depth: depth
-} = attributes;
+      description, product_height: height, product_width: width, product_depth: depth
+    } = attributes;
     const simpleSku = Object.keys(simples)[0];
     const { name, price, special_price: specialPrice } = meta;
     const checkSpecialPrice = Number(specialPrice) || Number(price);
@@ -503,23 +503,23 @@ class ProductDetails extends React.Component {
                   justifyContent="flex-start"
                   sx={{ borderBottom: 'none' }}
                 >
-                  <Box pl={4}>
-                    <a
-                      variant="linkPrimary"
-                      href="#review-section"
-                      pl={10}
-                      ml={10}
-                      sx={{
-                        borderLeft: 'primary'
-                      }}
-                      style={{ color: '#f15a22' }}
-                    >
-                      | Write a Review
-                    </a>
-                  </Box>
+
                 </ReviewDisplay>
               )}
-
+              <Box pl={4}>
+                <a
+                  variant="linkPrimary"
+                  href="#review-section"
+                  pl={10}
+                  ml={10}
+                  sx={{
+                    borderLeft: 'primary'
+                  }}
+                  style={{ color: '#f15a22' }}
+                >
+                  | Write a Review
+                    </a>
+              </Box>
               {/* Color Options */}
               {colorproducts.length > 0 && (
                 <Box pb={30}>
@@ -570,8 +570,8 @@ class ProductDetails extends React.Component {
                       </a>
                     </Button>
                   ) : (
-                    ''
-                  )}
+                      ''
+                    )}
                   {/*
                 {offerImage && offerImageRedirect && (
                   <a rel="noopener noreferrer" href={offerImageRedirect}>

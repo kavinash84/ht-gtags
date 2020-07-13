@@ -117,8 +117,8 @@ export default class DeliveryAddress extends Component {
   }
   onSubmitValidator = () => {
     const {
- email, name, pincode, address1, address2, address3, phone
-} = this.state;
+      email, name, pincode, address1, address2, address3, phone
+    } = this.state;
     const nameError = isEmpty(name);
     const emailError = isEmpty(email) || !validateEmail(email);
     const phoneError = isEmpty(phone) || validateMobile(phone).error;
@@ -307,8 +307,8 @@ export default class DeliveryAddress extends Component {
   };
   checkDisabled = () => {
     const {
- address1Error, address2Error, address3Error, phoneError, pincodeError, nameError, gstError
-} = this.state;
+      address1Error, address2Error, address3Error, phoneError, pincodeError, nameError, gstError
+    } = this.state;
     const check =
       address1Error || address2Error || address3Error || phoneError || pincodeError || nameError || gstError;
     return check;

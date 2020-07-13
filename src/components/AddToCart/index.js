@@ -38,9 +38,9 @@ const onClick = (key, skuId, simpleSku, session, pincode, quantity) => dispatche
 };
 
 const mapStateToProps = ({
- app: { sessionId }, pincode, cart, cart: {
- addingToCart, addedToCart, key, data
-}
+  app: { sessionId }, pincode, cart, cart: {
+    addingToCart, addedToCart, key, data
+  }
 }) => ({
   session: sessionId,
   pincode: pincode.selectedPincode ? pincode.selectedPincode : PINCODE,
@@ -86,34 +86,34 @@ const AddToCart = ({
               width={1}
               disabled={addLoading}
               onClick={e => {
-                if (quantityChange && updateQty !== 0 && checkStatus) {
-                  const handler = onClick(cartId, sku, simpleSku, session, pincode, updateQty)(updateCart);
-                  handler(e);
-                } else {
-                  const handler = onClick(itemId, sku, simpleSku, session, pincode, quantity)(addToCart);
-                  handler(e);
-                }
-              }}
+                  if (quantityChange && updateQty !== 0 && checkStatus) {
+                    const handler = onClick(cartId, sku, simpleSku, session, pincode, updateQty)(updateCart);
+                    handler(e);
+                  } else {
+                    const handler = onClick(itemId, sku, simpleSku, session, pincode, quantity)(addToCart);
+                    handler(e);
+                  }
+                }}
               sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
             >
               {addLoading && <Image className="spin" src={LoaderIcon} width="18px" mr={10} />}
               {addLoading ? 'Adding...' : 'Add to Cart'}
             </Button>
-          ) : (
-            <Row mx={0} alignItems="center">
-              <Box as={Link} to={CART_URL} width={1}>
-                <Button variant="outline.primary.large" width={1}>
-                  GO TO CART
-                </Button>
-              </Box>
-            </Row>
-          )}
+            ) : (
+              <Row mx={0} alignItems="center">
+                <Box as={Link} to={CART_URL} width={1}>
+                  <Button variant="outline.primary.large" width={1}>
+                    GO TO CART
+                  </Button>
+                </Box>
+              </Row>
+              )}
         </Fragment>
-      )}
+        )}
     </Fragment>
   );
 };

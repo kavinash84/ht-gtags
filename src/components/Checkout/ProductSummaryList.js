@@ -11,7 +11,7 @@ import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 
-const ProductSummaryList = ({ productItem, qty, sku }) => (
+const ProductSummaryList = ({ productItem, qty }) => (
   <Flex pb={20}>
     <Box variant="col-4" pr={0} pl={0}>
       <Image
