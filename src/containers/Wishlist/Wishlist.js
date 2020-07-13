@@ -30,7 +30,7 @@ export default class WishlistContainer extends Component {
   };
   render() {
     const { wishlistData, wishListedSKUs, loadingList } = this.props;
-    console.log(wishlistData, "@#$%^&*&^%$#@#$%^&*")
+    console.log(wishlistData, '@#$%^&*&^%$#@#$%^&*');
     return (
       <Box>
         <MenuFooter pageTitle="Wishlist">
@@ -39,18 +39,18 @@ export default class WishlistContainer extends Component {
             <Wishlist list={wishlistData} wishList={wishListedSKUs} loadingList={loadingList} />
 
           ) : (
-              <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
-                <Empty
-                  title="No wishlisted products yet !!"
-                  subTitle="Add items to it"
-                  btnName="Continue Shopping"
-                  url="/"
-                  bg="#fafafa"
-                >
+            <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
+              <Empty
+                title="No wishlisted products yet !!"
+                subTitle="Add items to it"
+                btnName="Continue Shopping"
+                url="/"
+                bg="#fafafa"
+              >
 
-                  <Img src={WishListIcon} width="initial" m="auto" alt="No items yet !!" />
-                </Empty>
-              </Section>
+                <Img src={WishListIcon} width="initial" m="auto" alt="No items yet !!" />
+              </Empty>
+            </Section>
             )
           }
         </MenuFooter>

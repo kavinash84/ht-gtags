@@ -28,29 +28,29 @@ const descriptionIcon = require('../../../static/description.svg');
 const ProfileBlock = ({
   title, subTitle, src, url
 }) => (
-    <Col width={1 / 3} px={10}>
-      <Link to={url}>
-        <Flex
-          px={10}
-          py={15}
-          mb={20}
-          justifyContent="center"
-          flexDirection="column"
-          alignItems="center"
-          sx={{
+  <Col width={1 / 3} px={10}>
+    <Link to={url}>
+      <Flex
+        px={10}
+        py={15}
+        mb={20}
+        justifyContent="center"
+        flexDirection="column"
+        alignItems="center"
+        sx={{
             border: 'divider'
           }}
-        >
-          <Image src={src} height={40} alt="orders" />
-          <Label mt={10} mb={4} fontSize={14} fontFamily="medium" textAlign="center">
-            {title}
-          </Label>
-          <Label fontSize={12} fontFamily="light" textAlign="center">
-            {subTitle}
-          </Label>
-        </Flex>
-      </Link>
-    </Col>
+      >
+        <Image src={src} height={40} alt="orders" />
+        <Label mt={10} mb={4} fontSize={14} fontFamily="medium" textAlign="center">
+          {title}
+        </Label>
+        <Label fontSize={12} fontFamily="light" textAlign="center">
+          {subTitle}
+        </Label>
+      </Flex>
+    </Link>
+  </Col>
   );
 
 
@@ -97,7 +97,7 @@ class MyDashBoard extends Component {
     });
   }
   render() {
-    console.log(this.state, "This.state34567890")
+    console.log(this.state, 'This.state34567890');
     const { fullName, email, phone } = this.state;
     return (
       <Box width={7 / 10} px={10}>

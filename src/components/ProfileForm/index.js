@@ -197,7 +197,9 @@ export default class ProfileForm extends Component {
           </Box>
         </Box>
         <Box pt={50} pb={20}>
-          <Button variant="outline.primary" width={180}
+          <Button
+            variant="outline.primary"
+            width={180}
             onClick={() => this.setState({ showEditForm: !showEditForm })}
           >
             Edit

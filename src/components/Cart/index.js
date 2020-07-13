@@ -70,7 +70,7 @@ const checkIsAnyProductOutofStoc = (results, outOfStockList) => {
 };
 
 const mapStateToProps = ({
- pincode, cart, app, relatedproducts
+  pincode, cart, app, relatedproducts
 }) => ({
   currentId: cart.key,
   cartChecked: cart.cartChecked,

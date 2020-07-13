@@ -23,13 +23,13 @@ import ThankYou from 'newComponents/ThankYou';
 /**
  * Modules / Utils / Reducers
  */
-import { formatAmount } from 'utils/formatters';
+// import { formatAmount } from 'utils/formatters';
 
 const mapStateToProps = ({ paymentstatus }) => ({
   cartProducts: paymentstatus.data.cart_products,
-  subTotal: paymentstatus.data.sub_total_amount,
-  discount: paymentstatus.data.discount_coupon_value,
-  totalAmount: paymentstatus.data.net_order_amount
+  // subTotal: paymentstatus.data.sub_total_amount,
+  // discount: paymentstatus.data.discount_coupon_value,
+  // totalAmount: paymentstatus.data.net_order_amount
 });
 class PaymentSuccess extends Component {
   constructor(props) {
@@ -64,7 +64,7 @@ class PaymentSuccess extends Component {
     this.setState({ products });
   };
   render() {
-    const { subTotal, discount, totalAmount } = this.props;
+    // const { subTotal, discount, totalAmount } = this.props;
     const { products } = this.state;
     return (
       <Wrapper>
@@ -132,9 +132,9 @@ class PaymentSuccess extends Component {
                     </Label>
                   </Box>
                   <Box variant="col-2">
-                    <Label color="heading" fontSize={18}>
+                    {/* <Label color="heading" fontSize={18}>
                       ₹ {formatAmount(product.price)}
-                    </Label>
+                    </Label> */}
                   </Box>
                 </Row>
               ))}
@@ -143,7 +143,7 @@ class PaymentSuccess extends Component {
                 <Box variant="col-9" pt={20} pb={20}>
                   <Flex mb={20} justifyContent="space-between">
                     <Text>Subtotal : </Text>
-                    <Text>Rs {formatAmount(subTotal)}</Text>
+                    {/* <Text>Rs {formatAmount(subTotal)}</Text> */}
                   </Flex>
                   {/* <Flex mb={20} justifyContent="space-between">
                 <Text>Savings : </Text>
@@ -151,7 +151,7 @@ class PaymentSuccess extends Component {
               </Flex> */}
                   <Flex mb={20} justifyContent="space-between">
                     <Text>Discount : </Text>
-                    <Text>Rs {formatAmount(discount)}</Text>
+                    {/* <Text>Rs {formatAmount(discount)}</Text> */}
                   </Flex>
                   <Row m="0" py="1em" sx={{ borderTop: 'divider' }}>
                     <Box variant="col-6" p="0">
@@ -161,7 +161,7 @@ class PaymentSuccess extends Component {
                     </Box>
                     <Box variant="col-6" p="0" textAlign="right">
                       <Text color="menuItem" fontSize={18} fontFamily="medium">
-                        Rs {formatAmount(totalAmount)}
+                        {/* Rs {formatAmount(totalAmount)} */}
                       </Text>
                     </Box>
                   </Row>
@@ -180,9 +180,9 @@ class PaymentSuccess extends Component {
 
 PaymentSuccess.propTypes = {
   cartProducts: PropTypes.array.isRequired,
-  subTotal: PropTypes.number.isRequired,
-  totalAmount: PropTypes.number.isRequired,
-  discount: PropTypes.number.isRequired
+  // subTotal: PropTypes.number.isRequired,
+  // totalAmount: PropTypes.number.isRequired,
+  // discount: PropTypes.number.isRequired
 };
 
 export default connect(mapStateToProps, null)(PaymentSuccess);
