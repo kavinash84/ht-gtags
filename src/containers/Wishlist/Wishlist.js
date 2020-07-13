@@ -37,7 +37,6 @@ export default class WishlistContainer extends Component {
           <MyMenu page="wishlist" />
           {wishlistData && wishlistData.length ? (
             <Wishlist list={wishlistData} wishList={wishListedSKUs} loadingList={loadingList} />
-
           ) : (
             <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
               <Empty
@@ -47,14 +46,12 @@ export default class WishlistContainer extends Component {
                 url="/"
                 bg="#fafafa"
               >
-
                 <Img src={WishListIcon} width="initial" m="auto" alt="No items yet !!" />
               </Empty>
             </Section>
-            )
-          }
+          )}
         </MenuFooter>
-      </Box >
+      </Box>
     );
   }
 }

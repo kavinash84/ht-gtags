@@ -26,7 +26,7 @@ import ThankYou from 'newComponents/ThankYou';
 // import { formatAmount } from 'utils/formatters';
 
 const mapStateToProps = ({ paymentstatus }) => ({
-  cartProducts: paymentstatus.data.cart_products,
+  cartProducts: paymentstatus.data.cart_products
   // subTotal: paymentstatus.data.sub_total_amount,
   // discount: paymentstatus.data.discount_coupon_value,
   // totalAmount: paymentstatus.data.net_order_amount
@@ -179,7 +179,7 @@ class PaymentSuccess extends Component {
 }
 
 PaymentSuccess.propTypes = {
-  cartProducts: PropTypes.array.isRequired,
+  cartProducts: PropTypes.array.isRequired
   // subTotal: PropTypes.number.isRequired,
   // totalAmount: PropTypes.number.isRequired,
   // discount: PropTypes.number.isRequired

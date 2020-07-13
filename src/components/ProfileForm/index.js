@@ -81,8 +81,8 @@ export default class ProfileForm extends Component {
   componentWillMount() {
     const {
       profile: {
-        full_name: fullName, email, contact_number: phone, gst
-      }
+ full_name: fullName, email, contact_number: phone, gst
+}
     } = this.props;
     this.setState({
       fullName: (fullName && fullName.trim()) || '',
@@ -133,8 +133,8 @@ export default class ProfileForm extends Component {
   onSubmitProfile = e => {
     e.preventDefault();
     const {
-      email, fullName, phone, gst
-    } = this.state;
+ email, fullName, phone, gst
+} = this.state;
     const checkEmail = validateEmail(email, 'Invalid Email');
     const phoneError = !validateMobile(phone);
     const checkFullName = isBlank(fullName) || checkSpecialChar(fullName);
@@ -197,19 +197,15 @@ export default class ProfileForm extends Component {
           </Box>
         </Box>
         <Box pt={50} pb={20}>
-          <Button
-            variant="outline.primary"
-            width={180}
-            onClick={() => this.setState({ showEditForm: !showEditForm })}
-          >
+          <Button variant="outline.primary" width={180} onClick={() => this.setState({ showEditForm: !showEditForm })}>
             Edit
           </Button>
         </Box>
-        {showEditForm ?
+        {showEditForm ? (
           <Box>
             <ProfileFormContainer
               email={email}
-              onChangeEmail={() => { }}
+              onChangeEmail={() => {}}
               emailFeedBackError={emailError}
               emailFeedBackMessage={emailErrorMessage}
               gst={gst}
@@ -217,7 +213,7 @@ export default class ProfileForm extends Component {
               gstFeedBackError={gstError}
               gstFeedBackMessage={gstErrorMessage}
               phone={phone}
-              onChangePhone={() => { }}
+              onChangePhone={() => {}}
               phoneFeedBackError={phoneError}
               phoneFeedBackMessage={phoneErrorMessage}
               fullName={fullName}
@@ -227,7 +223,8 @@ export default class ProfileForm extends Component {
               onSubmitProfile={this.onSubmitProfile}
               response={response}
             />
-          </Box> : null}
+          </Box>
+        ) : null}
       </Box>
     );
   }

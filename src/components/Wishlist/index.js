@@ -15,19 +15,19 @@ import { formatProductURL } from 'utils/helper';
 import AddToCart from '../AddToCart';
 
 const getProductImage = images => {
-    const image = images && images.length > 0 && (images.filter(i => i.main === '1')[0] || images[0]);
-    if (!image || !image.path) return '';
-    const pp = `${image.path.split('/').slice(-1)}`;
-    return image.path.replace(pp, '1-product_500.jpg');
+  const image = images && images.length > 0 && (images.filter(i => i.main === '1')[0] || images[0]);
+  if (!image || !image.path) return '';
+  const pp = `${image.path.split('/').slice(-1)}`;
+  return image.path.replace(pp, '1-product_500.jpg');
 };
 const mapDispatchToProps = dispatch =>
-    bindActionCreators({ ...actionCreators, productPosition: setProductPosition }, dispatch);
+  bindActionCreators({ ...actionCreators, productPosition: setProductPosition }, dispatch);
 const mapStateToProps = ({ pincode }) => ({
-    selectedPincode: pincode.selectedPincode
+  selectedPincode: pincode.selectedPincode
 });
 const onClick = (list, dispatcher) => sku => e => {
-    e.preventDefault();
-    dispatcher(list, sku);
+  e.preventDefault();
+  dispatcher(list, sku);
 };
 
 const isInWishList = (list, id) => list.includes(id);
@@ -37,91 +37,91 @@ const styles = require('../Listing/Listing.scss');
 const sanitizeWishList = list => list.map(item => item.product_info);
 
 class Wishlist extends React.Component {
-    state = {
-        openQuickView: false,
-        quickViewSku: '',
-        simpleSku: '',
-        deliveredBy: ''
-    };
-    onOpenQuickViewModal = (sku, simpleSku, soldOut, rating, deliveredBy) => {
-        this.setState({
-            openQuickView: true,
-            quickViewSku: sku,
-            simpleSku,
-            soldOut,
-            rating,
-            deliveredBy
-        });
-    };
-    onCloseQuickViewModal = () => {
-        this.setState({ openQuickView: false });
-    };
+  state = {
+    openQuickView: false,
+    quickViewSku: '',
+    simpleSku: '',
+    deliveredBy: ''
+  };
+  onOpenQuickViewModal = (sku, simpleSku, soldOut, rating, deliveredBy) => {
+    this.setState({
+      openQuickView: true,
+      quickViewSku: sku,
+      simpleSku,
+      soldOut,
+      rating,
+      deliveredBy
+    });
+  };
+  onCloseQuickViewModal = () => {
+    this.setState({ openQuickView: false });
+  };
 
-    render() {
-        const {
-            list, toggleWishList, wishList, loadingList, productPosition, selectedPincode
-        } = this.props;
-        const { quickViewSku, openQuickView, simpleSku } = this.state;
-        return (
-          <Section display="flex" p="0" pt="2.5rem" mb="2rem">
-            <Container type="container" pr="0" pl="0">
-              {list.map((item, i) => (
-                <Box
-                  key={`${
-                                item.wishlist_info && item.wishlist_info.configurable_sku ? item.wishlist_info.configurable_sku : ''
-                                }_${String(i)}`}
-                  className={styles.productWrapper}
-                >
-                  <Product
-                    key={item.product_info.id}
-                    name={item.product_info.data.name}
-                    price={item.product_info.netprice}
-                    cutprice={item.product_info.cutprice}
-                    saving={item.product_info.saving}
-                    image={getProductImage(item.product_info.images)}
-                    sku={item.product_info.data.sku}
-                    onClick={onClick(list, toggleWishList)}
-                    onOpenQuickViewModal={() => {
-                                    this.onOpenQuickViewModal(
-                                        item.product_info.data.sku,
-                                        Object.keys(item.product_info.data.simples)[0],
-                                        item.product_info.soldout,
-                                        item.product_info.data.reviews.rating.toFixed(1),
-                                        item.wishlist_info.delivery_details && item.wishlist_info.delivery_details[0].value
-                                    );
-                                }}
-                    isWishList={isInWishList(wishList, item.product_info.data.sku)}
-                    skuLoading={isInWishList(loadingList, item.product_info.data.sku)}
-                    rating={item.product_info.data.reviews.rating.toFixed(1)}
-                    reviewsCount={item.product_info.data.reviews.count}
-                                /* eslint-disable max-len */
-                    savingAmount={
-                                    item.product_info.data.max_special_price
-                                        ? formatAmount(Number(item.product_info.data.max_price) - Number(item.product_info.data.max_special_price))
-                                        : 0
-                                }
-                    deliveredBy={item.wishlist_info.delivery_details && item.wishlist_info.delivery_details[0].value}
-                    pincode={selectedPincode}
-                    setProductPosition={productPosition}
-                    productURL={formatProductURL(item.product_info.data.name, item.product_info.data.sku)}
-                  />
-                  <Box mt="0" p="0.25rem 0.125rem 0.5rem">
-                    <AddToCart
-                      simpleSku={Object.keys(item.product_info.data.simples)[0]}
-                      sku={item.product_info.data.sku}
-                      itemId={item.product_info.id}
-                      isSoldOut={item.product_info.soldout}
-                      btnType="btnOutline"
-                      btnColor="transparent"
-                      ta="left"
-                      fontSize="12px"
-                    />
-                  </Box>
-                </Box>
-                    ))}
-              {list && (
-                <ResponsiveModal onCloseModal={this.onCloseQuickViewModal} open={openQuickView}>
-                  {/* <QuickView
+  render() {
+    const {
+ list, toggleWishList, wishList, loadingList, productPosition, selectedPincode
+} = this.props;
+    const { quickViewSku, openQuickView, simpleSku } = this.state;
+    return (
+      <Section display="flex" p="0" pt="2.5rem" mb="2rem">
+        <Container type="container" pr="0" pl="0">
+          {list.map((item, i) => (
+            <Box
+              key={`${
+                item.wishlist_info && item.wishlist_info.configurable_sku ? item.wishlist_info.configurable_sku : ''
+              }_${String(i)}`}
+              className={styles.productWrapper}
+            >
+              <Product
+                key={item.product_info.id}
+                name={item.product_info.data.name}
+                price={item.product_info.netprice}
+                cutprice={item.product_info.cutprice}
+                saving={item.product_info.saving}
+                image={getProductImage(item.product_info.images)}
+                sku={item.product_info.data.sku}
+                onClick={onClick(list, toggleWishList)}
+                onOpenQuickViewModal={() => {
+                  this.onOpenQuickViewModal(
+                    item.product_info.data.sku,
+                    Object.keys(item.product_info.data.simples)[0],
+                    item.product_info.soldout,
+                    item.product_info.data.reviews.rating.toFixed(1),
+                    item.wishlist_info.delivery_details && item.wishlist_info.delivery_details[0].value
+                  );
+                }}
+                isWishList={isInWishList(wishList, item.product_info.data.sku)}
+                skuLoading={isInWishList(loadingList, item.product_info.data.sku)}
+                rating={item.product_info.data.reviews.rating.toFixed(1)}
+                reviewsCount={item.product_info.data.reviews.count}
+                /* eslint-disable max-len */
+                savingAmount={
+                  item.product_info.data.max_special_price
+                    ? formatAmount(Number(item.product_info.data.max_price) - Number(item.product_info.data.max_special_price))
+                    : 0
+                }
+                deliveredBy={item.wishlist_info.delivery_details && item.wishlist_info.delivery_details[0].value}
+                pincode={selectedPincode}
+                setProductPosition={productPosition}
+                productURL={formatProductURL(item.product_info.data.name, item.product_info.data.sku)}
+              />
+              <Box mt="0" p="0.25rem 0.125rem 0.5rem">
+                <AddToCart
+                  simpleSku={Object.keys(item.product_info.data.simples)[0]}
+                  sku={item.product_info.data.sku}
+                  itemId={item.product_info.id}
+                  isSoldOut={item.product_info.soldout}
+                  btnType="btnOutline"
+                  btnColor="transparent"
+                  ta="left"
+                  fontSize="12px"
+                />
+              </Box>
+            </Box>
+          ))}
+          {list && (
+            <ResponsiveModal onCloseModal={this.onCloseQuickViewModal} open={openQuickView}>
+              {/* <QuickView
                                 onCloseModal={this.onCloseQuickViewModal}
                                 sku={quickViewSku}
                                 simpleSku={simpleSku}
@@ -130,33 +130,30 @@ class Wishlist extends React.Component {
                                 deliveredBy={this.state.deliveredBy}
                                 rating={this.state.rating}
                             /> */}
-                </ResponsiveModal>
-                    )}
-            </Container>
-          </Section>
-        );
-    }
+            </ResponsiveModal>
+          )}
+        </Container>
+      </Section>
+    );
+  }
 }
 Wishlist.defaultProps = {
-    wishList: [],
-    list: [],
-    loadingList: [],
-    selectedPincode: ''
+  wishList: [],
+  list: [],
+  loadingList: [],
+  selectedPincode: ''
 };
 
 Wishlist.propTypes = {
-    toggleWishList: PropTypes.func.isRequired,
-    productPosition: PropTypes.func.isRequired,
-    wishList: PropTypes.array,
-    list: PropTypes.array,
-    loadingList: PropTypes.array,
-    selectedPincode: PropTypes.string
+  toggleWishList: PropTypes.func.isRequired,
+  productPosition: PropTypes.func.isRequired,
+  wishList: PropTypes.array,
+  list: PropTypes.array,
+  loadingList: PropTypes.array,
+  selectedPincode: PropTypes.string
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Wishlist);
+export default connect(mapStateToProps, mapDispatchToProps)(Wishlist);
 
 // const Wishlist = () => <div type="block">Wishlist Page Is Under Development</div>;
 // export default Wishlist;

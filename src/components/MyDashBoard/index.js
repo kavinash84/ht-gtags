@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-
 /**
  * Components
  */
@@ -26,7 +25,7 @@ const creditCardIcon = require('../../../static/creditCard.svg');
 const descriptionIcon = require('../../../static/description.svg');
 
 const ProfileBlock = ({
-  title, subTitle, src, url
+ title, subTitle, src, url
 }) => (
   <Col width={1 / 3} px={10}>
     <Link to={url}>
@@ -38,8 +37,8 @@ const ProfileBlock = ({
         flexDirection="column"
         alignItems="center"
         sx={{
-            border: 'divider'
-          }}
+          border: 'divider'
+        }}
       >
         <Image src={src} height={40} alt="orders" />
         <Label mt={10} mb={4} fontSize={14} fontFamily="medium" textAlign="center">
@@ -51,8 +50,7 @@ const ProfileBlock = ({
       </Flex>
     </Link>
   </Col>
-  );
-
+);
 
 ProfileBlock.propTypes = {
   title: PropTypes.string.isRequired,
@@ -64,7 +62,6 @@ ProfileBlock.propTypes = {
   profile: profile.data,
   response: profile
 }))
-
 class MyDashBoard extends Component {
   static propTypes = {
     profile: PropTypes.shape({
@@ -86,8 +83,8 @@ class MyDashBoard extends Component {
   componentWillMount() {
     const {
       profile: {
-        full_name: fullName, email, contact_number: phone, gst
-      }
+ full_name: fullName, email, contact_number: phone, gst
+}
     } = this.props;
     this.setState({
       fullName: (fullName && fullName.trim()) || '',
@@ -118,7 +115,9 @@ class MyDashBoard extends Component {
             sx={{
               borderRadius: 8
             }}
-          >Math</Col>
+          >
+            Math
+          </Col>
           <Col>
             <Label mb={10} fontSize={18} fontWeight="bold" variant="profileDashBoard">
               {fullName}
@@ -139,8 +138,18 @@ class MyDashBoard extends Component {
           <ProfileBlock url="/wishlist" title="Wishlist" subTitle="Check saved for later items" src={favouriteIcon} />
           <ProfileBlock url="/checkout/cart" title="Cart" subTitle="Check your shopping cart" src={shoppingCartIcon} />
           <ProfileBlock url="/coupons" title="Coupons" subTitle="Check available coupons" src={groupIcon} />
-          <ProfileBlock url="/saved-cards" title="Saved Cards" subTitle="Check saved for later items" src={creditCardIcon} />
-          <ProfileBlock url="/profile" title="Profile Details" subTitle="Update your profile details" src={descriptionIcon} />
+          <ProfileBlock
+            url="/saved-cards"
+            title="Saved Cards"
+            subTitle="Check saved for later items"
+            src={creditCardIcon}
+          />
+          <ProfileBlock
+            url="/profile"
+            title="Profile Details"
+            subTitle="Update your profile details"
+            src={descriptionIcon}
+          />
         </Row>
       </Box>
     );
