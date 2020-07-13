@@ -179,8 +179,8 @@ class Footer extends React.Component {
                   <FooterMenuLink to="/promotions" title="Promotions" />
                 </Ul>
               </Box>
-              {/* <Box>
-                <Heading variant="footerTitle">CATALOG</Heading>
+              <Box>
+                {/* <Heading variant="footerTitle">CATALOG</Heading>
                 <Ul>
                   <Li>
                     <a href="/" rel="noreferrer noopener" target="_blank">
@@ -192,9 +192,9 @@ class Footer extends React.Component {
                       <Text variant="footerLink">eCatalogs</Text>
                     </a>
                   </Li>
-                </Ul>
+                </Ul> */}
                 <Image src={bajajFinserveIcon} alt="Bajaj Finserv" mt={20} />
-              </Box> */}
+              </Box>
             </Col>
             <Col width={[1, 2 / 3, 3 / 12]}>
               <Box mb={24}>
