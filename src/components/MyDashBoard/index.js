@@ -115,9 +115,7 @@ class MyDashBoard extends Component {
             sx={{
               borderRadius: 8
             }}
-          >
-            Math
-          </Col>
+          />
           <Col>
             <Label mb={10} fontSize={18} fontWeight="bold" variant="profileDashBoard">
               {fullName}
@@ -134,7 +132,7 @@ class MyDashBoard extends Component {
           </Link>
         </Row>
         <Row mx={-10}>
-          <ProfileBlock url="/my-orders" subTitle="Check your order status" src={ordersIcon} />
+          <ProfileBlock url="/my-orders" title="Orders" subTitle="Check your order status" src={ordersIcon} />
           <ProfileBlock url="/wishlist" title="Wishlist" subTitle="Check saved for later items" src={favouriteIcon} />
           <ProfileBlock url="/checkout/cart" title="Cart" subTitle="Check your shopping cart" src={shoppingCartIcon} />
           <ProfileBlock url="/coupons" title="Coupons" subTitle="Check available coupons" src={groupIcon} />
