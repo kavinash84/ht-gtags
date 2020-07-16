@@ -494,7 +494,7 @@ class ProductDetails extends React.Component {
               </ServiceDetails>
 
               {/* Reviews */}
-              {!!weightedRating && reviewsData.length && (
+              {!!weightedRating && reviewsData.length ? (
                 <ReviewDisplay
                   ratings={weightedRating}
                   reviews={reviewsData.length}
@@ -503,10 +503,22 @@ class ProductDetails extends React.Component {
                   justifyContent="flex-start"
                   sx={{ borderBottom: 'none' }}
                 >
-
+                  <Box pl={4}>
+                    <a
+                      variant="linkPrimary"
+                      href="#review-section"
+                      pl={10}
+                      ml={10}
+                      sx={{
+                        borderLeft: 'primary'
+                      }}
+                      style={{ color: '#f15a22' }}
+                    >
+                      | Write a Review
+                    </a>
+                  </Box>
                 </ReviewDisplay>
-              )}
-              <Box pl={4}>
+              ) : (<Box pl={4} pb={30}>
                 <a
                   variant="linkPrimary"
                   href="#review-section"
@@ -517,9 +529,12 @@ class ProductDetails extends React.Component {
                   }}
                   style={{ color: '#f15a22' }}
                 >
-                  | Write a Review
-                    </a>
-              </Box>
+                  Write a Review
+                </a>
+              </Box>)
+              }
+
+
               {/* Color Options */}
               {colorproducts.length > 0 && (
                 <Box pb={30}>
