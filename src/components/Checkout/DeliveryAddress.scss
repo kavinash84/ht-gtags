@@ -1,13 +1,14 @@
 @import "../../theme/_variables";
 @import "../../theme/_mixins";
 
- .addAddressBtn {
-  &.active, &:hover {
-    background-color: #f3f3f3;
-    border: solid 2px $primary;
-    outline: none;
-  }
-}
+//  .addAddressBtn {
+//   &.active, 
+//   &:hover {
+//     background-color: #f3f3f3;
+//     border: solid 2px $primary;
+//     outline: none;
+//   }
+// }
 .addressBlock {
   &:nth-child(3n+1) {
     clear: both;
@@ -18,11 +19,19 @@
   padding-bottom: 20px;
   margin-bottom: 10px;
 }
-.active{
-  background-color: #f3f3f3;
+
+.deliveryAddress  {
+  .active, 
+  &:hover{
+    background-color: #ffffff;
+      border: solid 2px $primary;
+      outline: none;
+  }
 }
-.deliveryAddress:hover  {
-  background-color: #f3f3f3;
+.active{
+  background-color: #ffffff;
+    border: solid 2px $primary;
+    outline: none;
 }
 .difBillingAddress{
   cursor: pointer;
