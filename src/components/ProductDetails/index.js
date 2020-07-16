@@ -731,10 +731,10 @@ class ProductDetails extends React.Component {
                     <span className={styles.overolDimension}>
                       Overall Dimension <span className={styles.dimensionUnit}>(Inches)</span>
                     </span>
-                    <span className={styles.dimensionSpans}>{width && `Width : ${this.mmToInchConvert(width)} `}</span>
-                    <span className={styles.dimensionSpans}>{depth && `Depth : ${this.mmToInchConvert(depth)} `}</span>
+                    <span className={styles.dimensionSpans}>{width && `Width : ${this.mmToInchConvert(width)}" `}</span>
+                    <span className={styles.dimensionSpans}>{depth && `Depth : ${this.mmToInchConvert(depth)}" `}</span>
                     <span className={styles.dimensionSpans}>
-                      {height && `Height : ${this.mmToInchConvert(height)} `}
+                      {height && `Height : ${this.mmToInchConvert(height)}" `}
                     </span>
                   </Row>
                 </Box>
