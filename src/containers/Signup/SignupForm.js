@@ -64,7 +64,8 @@ export default class SignupFormContainer extends Component {
       phoneErrorMessage: 'Enter 10 Digits Valid Mobile Number',
       password: '',
       passwordError: false,
-      passwordErrorMessage: 'Password must contain atleast 6 and max 15 characters'
+      passwordErrorMessage: 'Password must contain atleast 6 and max 15 characters',
+      policyAccepted: false
     };
   }
   onChangeEmail = e => {
@@ -115,6 +116,13 @@ export default class SignupFormContainer extends Component {
       passwordError: checkError.error
     });
   };
+  onChangePolicy = e => {
+    const {
+      target: { value }
+    } = e;
+    console.log(value, '$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$');
+    this.setState({ policyAccepted: !this.state.policyAccepted });
+  }
   onSubmitSignup = e => {
     e.preventDefault();
     const {
@@ -123,8 +131,8 @@ export default class SignupFormContainer extends Component {
     const isRedirect = action ? action.indexOf('redirect') !== -1 : false;
     const signupOrigin = isRedirect ? 'Top Nav' : 'Pop-up';
     const {
- name, email, password, phone
-} = this.state;
+      name, email, password, phone
+    } = this.state;
     const checkName = isEmpty(name) || checkSpecialChar(name);
     const checkEmail = !validateEmail(email);
     const checkPhone = phone ? !validateMobile(phone) : false;
@@ -154,7 +162,8 @@ export default class SignupFormContainer extends Component {
       phoneError,
       phoneErrorMessage,
       passwordError,
-      passwordErrorMessage
+      passwordErrorMessage,
+      policyAccepted
     } = this.state;
     const { loading } = this.props;
 
@@ -173,13 +182,13 @@ export default class SignupFormContainer extends Component {
             {!this.state.loginviaotp ? (
               <LoginForm />
             ) : (
-              <LoginViaOtp
-                onChangeMobile={this.onChangeMobile}
-                onChangeOtp={this.onChangeOtp}
-                onSubmitMobileNumber={this.onSubmitMobileNumber}
-                onSubmitOtp={this.onSubmitOtp}
-              />
-            )}
+                <LoginViaOtp
+                  onChangeMobile={this.onChangeMobile}
+                  onChangeOtp={this.onChangeOtp}
+                  onSubmitMobileNumber={this.onSubmitMobileNumber}
+                  onSubmitOtp={this.onSubmitOtp}
+                />
+              )}
           </Box>
           <Row mx={0}>
             <Box variant="col-12" textAlign="center" mb={16}>
@@ -204,8 +213,8 @@ export default class SignupFormContainer extends Component {
                 {!this.state.loginviaotp ? (
                   <Image src={OTPIcon} alt="OTP Login" width={18} mr={10} />
                 ) : (
-                  <Image src={EmailIcon} alt="OTP Login" width={18} mr={10} />
-                )}
+                    <Image src={EmailIcon} alt="OTP Login" width={18} mr={10} />
+                  )}
                 {!this.state.loginviaotp ? 'OTP Login' : 'Email'}
               </Button>
             </Box>
@@ -242,6 +251,8 @@ export default class SignupFormContainer extends Component {
                 onChangePassword={this.onChangePassword}
                 passwordFeedBackError={passwordError}
                 passwordFeedBackMessage={passwordErrorMessage}
+                onChangePolicy={this.onChangePolicy}
+                policyAccepted={policyAccepted}
                 onSubmitSignup={this.onSubmitSignup}
                 loading={loading}
                 loginUrl={LOGIN_URL}
