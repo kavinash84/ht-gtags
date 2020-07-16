@@ -38,7 +38,7 @@ import Row from 'hometown-components-dev/lib/RowHtV1';
  */
 import AddReview from 'hometown-components-dev/lib/ReviewsHtV1/WriteReview';
 import ColorOption from 'hometown-components-dev/lib/ProductDetailsHtV1/ColorOption';
-// import CombinedBuy from 'components/CombinedBuy';
+import CombinedBuy from 'components/CombinedBuy';
 import ProductDesc from 'hometown-components-dev/lib/ProductDetailsHtV1/ProductDesc';
 import ProductCarousel from 'components/ProductCarousel';
 import ResponsiveModal from 'components/Modal';
@@ -162,16 +162,16 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-// const getProductsList = products => {
-//   const items = [];
-//   products.forEach(item => {
-//     const { set_qty: qty = 0 } = item;
-//     for (let i = 0; i < qty; i += 1) {
-//       items.push(item);
-//     }
-//   });
-//   return items;
-// };
+const getProductsList = products => {
+  const items = [];
+  products.forEach(item => {
+    const { set_qty: qty = 0 } = item;
+    for (let i = 0; i < qty; i += 1) {
+      items.push(item);
+    }
+  });
+  return items;
+};
 
 const mapStateToProps = ({
   app: { sessionId },
@@ -327,7 +327,7 @@ class ProductDetails extends React.Component {
     const {
       product,
       pincode,
-      // session,
+      session,
       reviews,
       colorproducts,
       relatedproductsList,
@@ -548,7 +548,7 @@ class ProductDetails extends React.Component {
                 <Box mb={30}>
                   {combinedbuy.length ? (
                     <Button variant="link" fontFamily="medium" fontSize={18}>
-                      <a href="#combined_buy_offers">
+                      <a href="#combined_buy_offers" style={{ color: '#F15A22' }}>
                         {`See ${combinedbuy.length} Combined ${combinedbuy.length > 1 ? 'Offers' : 'Offer'}`}
                       </a>
                     </Button>
@@ -754,10 +754,17 @@ class ProductDetails extends React.Component {
           </Box>
 
           {/* Combined Offers */}
-          {/* {combinedbuy.length > 0 && (
+          {combinedbuy.length > 0 && (
             <Box>
               <Row id="combined_buy_offers">
-                <Container>
+                <Container
+                  pl={0}
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    width: '100%'
+                  }}
+                >
                   <Heading variant="heading.medium">Combined Offers</Heading>
                 </Container>
               </Row>
@@ -777,7 +784,7 @@ class ProductDetails extends React.Component {
                 </Row>
               ))}
             </Box>
-          )} */}
+          )}
 
           {/* Related Products List */}
           {relatedproductsList.length > 0 && (
@@ -820,8 +827,8 @@ ProductDetails.defaultProps = {
   combinedbuy: [],
   simpleSku: '',
   quantityChange: false,
-  skuItem: {}
-  // session: ''
+  skuItem: {},
+  session: ''
 };
 DescriptionButton.propTypes = {
   // eslint-disable-next-line react/require-default-props
@@ -849,7 +856,7 @@ ProductDetails.propTypes = {
   simpleSku: PropTypes.string,
   combinedbuy: PropTypes.array,
   quantityChange: PropTypes.bool,
-  skuItem: PropTypes.object
-  // session: PropTypes.string
+  skuItem: PropTypes.object,
+  session: PropTypes.string
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
