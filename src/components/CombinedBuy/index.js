@@ -63,16 +63,38 @@ const ProductCarousel = ({
           ))}
           {setDiscount && setDiscount > 0 ? (
             <Fragment>
-              <LabelHtV1 mb={1} color="black" fontSize="1rem" ml={16} mr={16}>
+              <LabelHtV1
+                mb={13}
+                color="black"
+                fontSize="1rem"
+                ml={16}
+                mr={16}
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                  flexDirection: 'column'
+                }}
+              >
                 -
               </LabelHtV1>
-              <LabelHtV1 mb={0} color="textExtraLight">
+              <LabelHtV1 mb={0} color="textExtraLight" width={175}>
                 Combo Discount <br />
                 <BoxHtV1 fontSize="1.125rem" mt={5} display="block" color="rgba(0,0,0,0.8)">
                   {formatAmount(setDiscount)}
                 </BoxHtV1>
               </LabelHtV1>
-              <LabelHtV1 mb={0} color="black" fontSize="1rem" ml={16} mr={16}>
+              <LabelHtV1
+                mb={13}
+                color="black"
+                fontSize="1rem"
+                ml={16}
+                mr={16}
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                  flexDirection: 'column'
+                }}
+              >
                 =
               </LabelHtV1>
             </Fragment>
@@ -84,9 +106,9 @@ const ProductCarousel = ({
             <br />
             <BoxHtV1 ml={0} color="rgba(0,0,0,0.8)" fontSize="1.25rem">
               {discountedPrice ? formatAmount(discountedPrice) : ''}
-            </BoxHtV1>
-            <BoxHtV1 ml={10} color="rgba(0,0,0,0.5)" fontSize="0.875rem">
-              <s>{price ? formatAmount(price) : ''}</s>
+              <BoxHtV1 display="inline" mr={28} ml={10} color="rgba(0,0,0,0.5)" fontSize="0.875rem">
+                <s>{price ? formatAmount(price) : ''}</s>
+              </BoxHtV1>
             </BoxHtV1>
           </LabelHtV1>
           <LabelHtV1 mt={0} mb={0} verticalAlign="bottom" ml={16}>
