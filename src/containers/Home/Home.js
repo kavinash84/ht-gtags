@@ -213,7 +213,7 @@ export default class Home extends Component {
               </Row>
               <Row>
                 <Col variant="colBasis" flexDirection="column">
-                  <a href="https://beta.hometown.in/modular-kitchens/">
+                  <a href="https://beta.hometown.in/design-build/">
                     <Box mb={20} sx={{ position: 'relative' }}>
                       <Image src={sliderImage} />
                       <Image src={designBuildLogo} variant="image.logoHomeTown" />
@@ -224,7 +224,7 @@ export default class Home extends Component {
                   </a>
                 </Col>
                 <Col variant="colBasis" flexDirection="column">
-                  <a href="https://beta.hometown.in/design-build/">
+                  <a href="https://beta.hometown.in/modular-kitchens/">
                     <Box mb={20} sx={{ position: 'relative' }}>
                       <Image src={bannerImage} />
                       <Image
