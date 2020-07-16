@@ -135,16 +135,16 @@ export const validateAddress = (value, key) => {
   };
   switch (key) {
     case 'address1':
-      errorObject.error = isEmpty(value) || value.length > 40;
-      errorObject.errorMessage = isEmpty(value) ? 'Address 1 can not be empty' : 'Max 40 characters allowed';
+      errorObject.error = isEmpty(value) || value.length > 60;
+      errorObject.errorMessage = isEmpty(value) ? 'Address line 1 can not be empty' : 'Max 60 characters allowed';
       break;
     case 'address2':
-      errorObject.error = !isEmpty(value) && value.length > 40;
-      errorObject.errorMessage = 'Max 40 characters allowed';
+      errorObject.error = value.length > 60;
+      errorObject.errorMessage = 'Max 60 characters allowed';
       break;
     case 'address3':
-      errorObject.error = !isEmpty(value) && value.length > 40;
-      errorObject.errorMessage = 'Max 40 characters allowed';
+      errorObject.error = !isEmpty(value) && value.length > 60;
+      errorObject.errorMessage = 'Max 60 characters allowed';
       break;
     default:
   }

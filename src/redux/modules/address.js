@@ -95,7 +95,7 @@ const initialState = {
   billing: {
     fullName: '',
     fullNameFeedBackError: false,
-    fullNameFeedBackMessage: 'Name Cannot be Left Empty YO !',
+    fullNameFeedBackMessage: 'Name Cannot be Left Empty !',
     email: '',
     emailFeedBackError: false,
     emailFeedBackMessage: 'Email is Not Valid  !',
@@ -104,7 +104,7 @@ const initialState = {
     phoneFeedBackMessage: 'Enter 10 Digits Valid Mobile Number !',
     address1: '',
     addressFeedBackError1: false,
-    addressFeedBackMessage1: 'Address line 1 Cannot be Left Empty !fghj',
+    addressFeedBackMessage1: 'Address line 1 Cannot be Left Empty !',
     address2: '',
     addressFeedBackError2: false,
     addressFeedBackMessage2: '',
@@ -178,10 +178,10 @@ export default function reducer(state = initialState, action = {}) {
           ...state[action.formType],
           address1: action.address1,
           addressFeedBackError1: validateAddress(action.address1, 'address1').error,
-          addressFeedBackMessage1: validateAddress(action.address1, 'address1').errorMessage
+          addressFeedBackMessage1: validateAddress(action.address1, 'address1').errorMessage,
           // address2: action.address2,
           // addressFeedBackError2: validateAddress(action.address2, 'address2').error,
-          // addressFeedBackMessage2: validateAddress(action.address1, 'address2').errorMessage
+          // addressFeedBackMessage2: validateAddress(action.address2, 'address2').errorMessage
         }
       };
     case SET_ADDRESS2:
@@ -501,10 +501,10 @@ export const onChangeCity = (formType, city) => ({
   city
 });
 export const onChangeAddress2 = (formType, address2) => {
-  if (address2.length > 40) {
-    const add2Value = address2.slice(0, 41);
+  if (address2.length > 60) {
+    const add2Value = address2.slice(0, 61);
     // const add3Value = address2.slice(40);
-    // document.getElementById('add3').focus();
+    // document.getElementById('add3').focus();address2
     return {
       type: SET_ADDRESS2_ADDRESS3,
       formType,
@@ -519,8 +519,8 @@ export const onChangeAddress2 = (formType, address2) => {
   };
 };
 export const onChangeAddress1 = (formType, address1) => {
-  if (address1.length > 40) {
-    const add1Value = address1.slice(0, 41);
+  if (address1.length > 60) {
+    const add1Value = address1.slice(0, 61);
     // const add2Value = address1.slice(40);
     // document.getElementById('add2').focus();
     return {
@@ -537,8 +537,8 @@ export const onChangeAddress1 = (formType, address1) => {
   };
 };
 export const onChangeAddress3 = (formType, address3) => {
-  if (address3.length > 40) {
-    const add3Value = address3.slice(0, 41);
+  if (address3.length > 60) {
+    const add3Value = address3.slice(0, 61);
     // document.getElementById('pincodeId').focus();
     return {
       type: SET_ADDRESS3,
