@@ -223,12 +223,12 @@ class PaymentOptions extends Component {
                               <br />
                               {/* eslint-enable */}
                               <Link to="/checkout/delivery-address">
-                                <Label fontSize="1rem" fontFamily="light" color="primary" p="0" mt="10px" mb="0">
+                                <Label className={cartStyles.editOption} fontSize="1rem" fontFamily="light" color="primary" p="0" mt="10px" mb="0">
                                   Edit Address
                                 </Label>
                               </Link>
                               <Link to="/checkout/cart">
-                                <Label fontSize="1rem" fontFamily="light" color="primary" p="0" mt="10px" mb="0">
+                                <Label className={cartStyles.editOption} fontSize="1rem" fontFamily="light" color="primary" p="0" mt="10px" mb="0">
                                   / Edit Cart
                                 </Label>
                               </Link>
@@ -241,7 +241,7 @@ class PaymentOptions extends Component {
                 ))}
               </Box>
             </Row>
-            <Row mr="0" ml="0" mb={20}>
+            <Row mr="0" ml="0" mb={20} mt={20}>
               <Box>
                 <Heading variant="heading.medium">Payment Method</Heading>
               </Box>
