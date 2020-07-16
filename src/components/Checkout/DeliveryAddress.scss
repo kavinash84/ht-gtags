@@ -1,14 +1,14 @@
 @import "../../theme/_variables";
 @import "../../theme/_mixins";
 
-//  .addAddressBtn {
-//   &.active, 
-//   &:hover {
-//     background-color: #f3f3f3;
-//     border: solid 2px $primary;
-//     outline: none;
-//   }
-// }
+ .addAddressBtn {
+  &.active, 
+  &:hover {
+    background-color: #f3f3f3;
+    border: solid 2px $primary;
+    outline: none;
+  }
+}
 .addressBlock {
   &:nth-child(3n+1) {
     clear: both;
