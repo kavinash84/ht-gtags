@@ -33,7 +33,7 @@ const ProductCarousel = ({
                 url={`${formatProductURL(skuItem.meta.name, skuItem.meta.sku)}`}
                 height={length <= 3 ? height : '245px'}
               />
-              <BoxHtV1 col="1" alignSelf="center" textAlign="center">
+              <BoxHtV1 col="1" alignSelf="center" textAlign="center" sx={{ position: 'absolute', width: '51%' }}>
                 <LabelHtV1 color="plusIcon" fontSize="2rem">
                   {index < data.length - 1 ? '+' : ''}
                 </LabelHtV1>
@@ -43,34 +43,58 @@ const ProductCarousel = ({
         ))}
       </RowHtV1>
       <RowHtV1 mr={0} ml={0} className={styles.combineBottom} pt={10}>
-        <BoxHtV1 col="12" alignSelf="center">
+        <BoxHtV1 col="12" alignSelf="center" display="flex">
           {data.map((skuItem, index) => (
             <Fragment key={String(index)}>
-              <LabelHtV1 mb={0} color="textExtraLight">
-                {`${index + 1} Item`} <br />
-                <BoxHtV1 fontSize="1.125rem" mt="5px" display="block" color="rgba(0,0,0,0.8)">
-                  {skuItem.meta.max_special_price
-                    ? formatAmount(skuItem.meta.max_special_price)
-                    : formatAmount(skuItem.meta.max_price)}
-                </BoxHtV1>
-              </LabelHtV1>
-              <LabelHtV1 mb={0} color="black" fontSize="1rem" ml={16} mr={16}>
-                {index < data.length - 1 ? '+' : ''}
-              </LabelHtV1>
+              <BoxHtV1 width="25%">
+                <LabelHtV1 mb={0} color="textExtraLight">
+                  {`${index + 1} Item`} <br />
+                  <BoxHtV1 fontSize="1.125rem" mt="5px" display="block" color="rgba(0,0,0,0.8)">
+                    {skuItem.meta.max_special_price
+                      ? formatAmount(skuItem.meta.max_special_price)
+                      : formatAmount(skuItem.meta.max_price)}
+                  </BoxHtV1>
+                </LabelHtV1>
+                <LabelHtV1 mb={0} color="black" fontSize="1rem" margin="-16px 84px 0" sx={{ position: 'absolute' }}>
+                  {index < data.length - 1 ? '+' : ''}
+                </LabelHtV1>
+              </BoxHtV1>
             </Fragment>
           ))}
           {setDiscount && setDiscount > 0 ? (
             <Fragment>
-              <LabelHtV1 mb={1} color="black" fontSize="1rem" ml={16} mr={16}>
+              <LabelHtV1
+                mb={13}
+                color="black"
+                fontSize="1rem"
+                ml={16}
+                mr={16}
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                  flexDirection: 'column'
+                }}
+              >
                 -
               </LabelHtV1>
-              <LabelHtV1 mb={0} color="textExtraLight">
+              <LabelHtV1 mb={0} color="textExtraLight" width={175}>
                 Combo Discount <br />
                 <BoxHtV1 fontSize="1.125rem" mt={5} display="block" color="rgba(0,0,0,0.8)">
                   {formatAmount(setDiscount)}
                 </BoxHtV1>
               </LabelHtV1>
-              <LabelHtV1 mb={0} color="black" fontSize="1rem" ml={16} mr={16}>
+              <LabelHtV1
+                mb={13}
+                color="black"
+                fontSize="1rem"
+                ml={16}
+                mr={16}
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                  flexDirection: 'column'
+                }}
+              >
                 =
               </LabelHtV1>
             </Fragment>
@@ -82,9 +106,9 @@ const ProductCarousel = ({
             <br />
             <BoxHtV1 ml={0} color="rgba(0,0,0,0.8)" fontSize="1.25rem">
               {discountedPrice ? formatAmount(discountedPrice) : ''}
-            </BoxHtV1>
-            <BoxHtV1 ml={10} color="rgba(0,0,0,0.5)" fontSize="0.875rem">
-              <s>{price ? formatAmount(price) : ''}</s>
+              <BoxHtV1 display="inline" mr={28} ml={10} color="rgba(0,0,0,0.5)" fontSize="0.875rem">
+                <s>{price ? formatAmount(price) : ''}</s>
+              </BoxHtV1>
             </BoxHtV1>
           </LabelHtV1>
           <LabelHtV1 mt={0} mb={0} verticalAlign="bottom" ml={16}>

@@ -236,7 +236,7 @@ class PaymentOptions extends Component {
               </Box>
             </Row>
             <Row sx={{ display: 'flex' }}>
-              <Row mx={0} mb={20} justifyContent="space-between" flexDirection="column">
+              <Row mx={0} mb={20} justifyContent="space-between" flexDirection="column" maxHeight="360px">
                 {data.map((paymentType, index) => (
                   <Col key={String(`${paymentType}${index}`)} px={0}>
                     {CommonPayments(paymentType.paymentType, toggleGateway, selectedGateway, session, resetEasyEmi)}
