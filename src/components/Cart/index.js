@@ -158,13 +158,13 @@ const Cart = ({
               </Box>
               <Box variant="col-5" pl={30}>
                 <Link to={formatProductURL(item.product_info.name, item.configurable_sku)}>
-                  <Box mb="10px">
+                  <Box mb={10}>
                     <Heading color="heading" fontSize={16} lineHeight={1.4}>
                       {item.product_info.name}
                     </Heading>
                   </Box>
                   {item.product_info.color && (
-                    <Box mb="15px">
+                    <Box mb={15}>
                       <Text color="#575757">{item.product_info.color}</Text>
                     </Box>
                   )}
