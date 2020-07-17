@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Flex from 'hometown-components-dev/lib/FlexHtV1';
@@ -90,15 +90,16 @@ class OrderBlock extends Component {
                 sx={{
                   display: 'flex',
                   justifyContent: 'flex-end',
+                  alignItems: 'center',
                   marginLeft: 'auto'
                 }}
               >
                 <Image src={PinIcon} alt="Track" height={16} position="relative" top={4} mr={5} float="left" />
                 {trackingLoading && currentOrder === order.order_number ? (
-                  <span>
+                  <Fragment>
                     Please Wait
-                    <Image className="spin" src={LoaderIcon} display="inline" width={18} />
-                  </span>
+                    <Image className="spin" ml={5} src={LoaderIcon} display="inline" width={18} />
+                  </Fragment>
                 ) : (
                   'Track'
                 )}
