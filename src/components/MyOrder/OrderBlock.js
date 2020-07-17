@@ -197,13 +197,26 @@ class OrderBlock extends Component {
                     </ImageShimmer>
                   </Box>
                   <Box variant="col-5" pl={30}>
-                    <Box mb={10}>
+                    <Box mb={4}>
                       <Heading color="heading" fontSize={16} lineHeight={1.4}>
                         {item.product_name || '--'}
                       </Heading>
                     </Box>
-                    <Box mb={15}>
-                      <Text color="#575757">Qty. {item.quantity || '--'}</Text>
+                    <Box mb={6}>
+                      <Text as="span" fontSize={14} mr={10} color="heading">
+                        ₹ 19,920
+                      </Text>
+                      <Text as="span" fontSize={14} mr={10} sx={{ textDecoration: 'line-through' }}>
+                        ₹ 19,920
+                      </Text>
+                      <Text as="span" fontSize={14} mr={10} color="primary">
+                        Saved ₹ 19,920
+                      </Text>
+                    </Box>
+                    <Box mb={8}>
+                      <Text color="#575757" fontSize={14}>
+                        Qty. {item.quantity || '--'}
+                      </Text>
                     </Box>
                     <Text fontSize={14} pb={10}>
                       {order.status !== 'canceled' ? (
