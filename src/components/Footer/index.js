@@ -143,7 +143,7 @@ class Footer extends React.Component {
     return (
       <Section bg="bgFooter" pt={30} pb={10} mb={0}>
         <Container variant="container">
-          <Row m="0" mb="1rem" flexWrap="nowrap" justifyContent="space-between">
+          <Row m="0" mb="2rem" flexWrap="nowrap" justifyContent="space-between">
             {menuItems.map(menu =>
                 menu.children &&
                 menu.visibility === 'on' && (
