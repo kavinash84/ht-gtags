@@ -269,7 +269,7 @@ export default class LoginFormContainer extends Component {
                 Or Continue with
               </Label>
             </Box>
-            <Box variant="col-6">
+            <Box variant="col-6" px={5}>
               <Button
                 onClick={this.toggleLoginForm}
                 variant="outline.secondary"
@@ -291,7 +291,7 @@ export default class LoginFormContainer extends Component {
                 {!this.state.loginviaotp ? 'OTP Login' : 'Email'}
               </Button>
             </Box>
-            <Box variant="col-6">
+            <Box variant="col-6" px={5}>
               <GoogleLoginBtn askContact={askContact} loginType={loginType} loading={loading} loggingIn={loggingIn} />
             </Box>
           </Row>

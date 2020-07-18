@@ -72,7 +72,7 @@ class Pincode extends React.Component {
               <InputField
                 type="text"
                 variant="input"
-                placeholder="Enter Pincode"
+                placeholder="Enter your pincode"
                 height={44}
                 my={0}
                 onChange={onChange(setPincodeQuery, this.setPincodeInStore(setPincode, pincodeQuery))}

@@ -372,7 +372,9 @@ class DeliveryAddress extends Component {
                   onCloseModal={this.handleLoginModal}
                   open={this.state.openLogin}
                 >
-                  <LoginModal />
+                  <Box px={24} py={20}>
+                    <LoginModal />
+                  </Box>
                 </ResponsiveModal>
               </Box>
             )}
