@@ -115,32 +115,6 @@ const AddressForm = props => {
       </Box>
       <Row>
         <Col variant="col-6">
-          <Pincode
-            id="pincodeId"
-            pincode={pincode}
-            formType={formType}
-            feedBackError={pincodeFeedBackError}
-            onChangePincode={onChangePincode}
-            feedBackMessage={pincodeFeedBackMessage}
-          />
-        </Col>
-        {formType !== 'billing' && (
-          <Col variant="col-6">
-            <FormInput
-              label="GST(optional)"
-              type="text"
-              placeholder=""
-              onChange={e => onChangeGST(formType, e.target.value)}
-              value={gst}
-              feedBackError={gstFeedBackError}
-              feedBackMessage={gstFeedBackMessage}
-              variant="input"
-            />
-          </Col>
-        )}
-      </Row>
-      <Row>
-        <Col variant="col-6">
           <FormInput
             id="add1"
             label="Address line 1*"
@@ -182,6 +156,16 @@ const AddressForm = props => {
       </Row>
       <Row>
         <Col variant="col-6">
+          <Pincode
+            id="pincodeId"
+            pincode={pincode}
+            formType={formType}
+            feedBackError={pincodeFeedBackError}
+            onChangePincode={onChangePincode}
+            feedBackMessage={pincodeFeedBackMessage}
+          />
+        </Col>
+        <Col variant="col-6">
           <FormInput
             label="State *"
             type="text"
@@ -193,6 +177,8 @@ const AddressForm = props => {
             variant="input"
           />
         </Col>
+      </Row>
+      <Row>
         <Col variant="col-6">
           <FormInput
             label="City *"
@@ -205,6 +191,20 @@ const AddressForm = props => {
             variant="input"
           />
         </Col>
+        {formType !== 'billing' && (
+          <Col variant="col-6">
+            <FormInput
+              label="GST(optional)"
+              type="text"
+              placeholder=""
+              onChange={e => onChangeGST(formType, e.target.value)}
+              value={gst}
+              feedBackError={gstFeedBackError}
+              feedBackMessage={gstFeedBackMessage}
+              variant="input"
+            />
+          </Col>
+        )}
       </Row>
     </Box>
   );
