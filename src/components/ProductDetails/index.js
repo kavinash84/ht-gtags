@@ -545,7 +545,7 @@ class ProductDetails extends React.Component {
 
               {/* Offers */}
               {
-                <Box mb={30}>
+                <Box mb={20} mt={10}>
                   {combinedbuy.length ? (
                     <Button variant="link" fontFamily="medium" fontSize={18}>
                       <a href="#combined_buy_offers" style={{ color: '#F15A22' }}>
@@ -755,23 +755,13 @@ class ProductDetails extends React.Component {
 
           {/* Combined Offers */}
           {combinedbuy.length > 0 && (
-            <Box>
-              <Row id="combined_buy_offers">
-                <Container
-                  pl={0}
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    width: '100%'
-                  }}
-                >
-                  <Heading variant="heading.medium">Combined Offers</Heading>
-                </Container>
-              </Row>
+            <Box id="combined_buy_offers" pt={36}>
+              <Box textAlign="center" mb={20}>
+                <Heading variant="heading.regular">Combined Offers</Heading>
+              </Box>
               {combinedbuy.map((item, index) => (
-                <Row key={String(index)}>
+                <Row key={String(index)} mx={0}>
                   <CombinedBuy
-                    pb={32}
                     title={item.name}
                     item={item}
                     data={getProductsList(item.products || [])}
