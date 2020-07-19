@@ -1,164 +1,164 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
-// import { bindActionCreators } from 'redux';
-// import { connect } from 'react-redux';
-// import * as actionCreators from 'redux/modules/wishlist';
-// import Product from 'hometown-components/lib/Product';
-// import Container from 'hometown-components/lib/Container';
-// import Section from 'hometown-components/lib/Section';
+import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as actionCreators from 'redux/modules/wishlist';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import Section from 'hometown-components-dev/lib/SectionHtV1';
 // import ResponsiveModal from 'components/Modal';
-// import Div from 'hometown-components/lib/Div';
-// import QuickView from 'components/QuickView/QuickView';
-// import { formatAmount } from 'utils/formatters';
-// import { setProductPosition } from 'redux/modules/productdetails';
-// import { formatProductURL } from 'utils/helper';
-// import AddToCart from '../AddToCart';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+// import QuickView from 'hometown-components-dev/lib/Product/QuickView';
+import { formatAmount } from 'utils/formatters';
+import { setProductPosition } from 'redux/modules/productdetails';
+import { formatProductURL } from 'utils/helper';
+import Product from './Product';
+import AddToCart from '../AddToCart';
 
-// const getProductImage = images => {
-//   const image = images && images.length > 0 && (images.filter(i => i.main === '1')[0] || images[0]);
-//   if (!image || !image.path) return '';
-//   const pp = `${image.path.split('/').slice(-1)}`;
-//   return image.path.replace(pp, '1-product_500.jpg');
-// };
-// const mapDispatchToProps = dispatch =>
-//   bindActionCreators({ ...actionCreators, productPosition: setProductPosition }, dispatch);
-// const mapStateToProps = ({ pincode }) => ({
-//   selectedPincode: pincode.selectedPincode
-// });
-// const onClick = (list, dispatcher) => sku => e => {
-//   e.preventDefault();
-//   dispatcher(list, sku);
-// };
+const getProductImage = images => {
+  const image = images && images.length > 0 && (images.filter(i => i.main === '1')[0] || images[0]);
+  if (!image || !image.path) return '';
+  const pp = `${image.path.split('/').slice(-1)}`;
+  return image.path.replace(pp, '1-product_500.jpg');
+};
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ ...actionCreators, productPosition: setProductPosition }, dispatch);
+const mapStateToProps = ({ pincode }) => ({
+  selectedPincode: pincode.selectedPincode
+});
+const onClick = (list, dispatcher) => sku => e => {
+  e.preventDefault();
+  dispatcher(list, sku);
+};
 
-// const isInWishList = (list, id) => list.includes(id);
+const isInWishList = (list, id) => list.includes(id);
 
-// const styles = require('../Listing/Listing.scss');
+const styles = require('../Listing/Listing.scss');
 
-// const sanitizeWishList = list => list.map(item => item.product_info);
+class Wishlist extends React.Component {
+  // state = {
+  //   openQuickView: false,
+  //   quickViewSku: '',
+  //   simpleSku: '',
+  // };
+  // onOpenQuickViewModal = (sku, simpleSku, soldOut, rating, deliveredBy) => {
+  //   this.setState({
+  //     openQuickView: true,
+  //     quickViewSku: sku,
+  //     simpleSku,
+  //   });
+  // };
+  // onCloseQuickViewModal = () => {
+  //   this.setState({ openQuickView: false });
+  // };
 
-// class Wishlist extends React.Component {
-//   state = {
-//     openQuickView: false,
-//     quickViewSku: '',
-//     simpleSku: '',
-//     deliveredBy: ''
-//   };
-//   onOpenQuickViewModal = (sku, simpleSku, soldOut, rating, deliveredBy) => {
-//     this.setState({
-//       openQuickView: true,
-//       quickViewSku: sku,
-//       simpleSku,
-//       soldOut,
-//       rating,
-//       deliveredBy
-//     });
-//   };
-//   onCloseQuickViewModal = () => {
-//     this.setState({ openQuickView: false });
-//   };
+  render() {
+    const {
+ list, toggleWishList, wishList, loadingList, productPosition, selectedPincode
+} = this.props;
 
-//   render() {
-//     const {
-//       list, toggleWishList, wishList, loadingList, productPosition, selectedPincode
-//     } = this.props;
-//     const { quickViewSku, openQuickView, simpleSku } = this.state;
-//     return (
-//       <Section display="flex" p="0" pt="2.5rem" mb="2rem">
-//         <Container type="container" pr="0" pl="0">
-//           {list.map((item, i) => (
-//             <div
-//               key={`${
-//                 item.wishlist_info && item.wishlist_info.configurable_sku ? item.wishlist_info.configurable_sku : ''
-//               }_${String(i)}`}
-//               className={styles.productWrapper}
-//             >
-//               <Product
-//                 key={item.product_info.id}
-//                 name={item.product_info.data.name}
-//                 price={item.product_info.netprice}
-//                 cutprice={item.product_info.cutprice}
-//                 saving={item.product_info.saving}
-//                 image={getProductImage(item.product_info.images)}
-//                 sku={item.product_info.data.sku}
-//                 onClick={onClick(list, toggleWishList)}
-//                 onOpenQuickViewModal={() => {
-//                   this.onOpenQuickViewModal(
-//                     item.product_info.data.sku,
-//                     Object.keys(item.product_info.data.simples)[0],
-//                     item.product_info.soldout,
-//                     item.product_info.data.reviews.rating.toFixed(1),
-//                     item.wishlist_info.delivery_details && item.wishlist_info.delivery_details[0].value
-//                   );
-//                 }}
-//                 isWishList={isInWishList(wishList, item.product_info.data.sku)}
-//                 skuLoading={isInWishList(loadingList, item.product_info.data.sku)}
-//                 rating={item.product_info.data.reviews.rating.toFixed(1)}
-//                 reviewsCount={item.product_info.data.reviews.count}
-//                 /* eslint-disable max-len */
-//                 savingAmount={
-//                   item.product_info.data.max_special_price
-//                     ? formatAmount(
-// Number(item.product_info.data.max_price) - Number(item.product_info.data.max_special_price))
-//                     : 0
-//                 }
-//                 deliveredBy={item.wishlist_info.delivery_details && item.wishlist_info.delivery_details[0].value}
-//                 pincode={selectedPincode}
-//                 setProductPosition={productPosition}
-//                 productURL={formatProductURL(item.product_info.data.name, item.product_info.data.sku)}
-//               />
-//               <Div mt="0" p="0.25rem 0.125rem 0.5rem">
-//                 <AddToCart
-//                   simpleSku={Object.keys(item.product_info.data.simples)[0]}
-//                   sku={item.product_info.data.sku}
-//                   itemId={item.product_info.id}
-//                   isSoldOut={item.product_info.soldout}
-//                   btnType="btnOutline"
-//                   btnColor="transparent"
-//                   ta="left"
-//                   fontSize="12px"
-//                 />
-//               </Div>
-//             </div>
-//           ))}
-//           {list && (
-//             <ResponsiveModal onCloseModal={this.onCloseQuickViewModal} open={openQuickView}>
-//               <QuickView
-//                 onCloseModal={this.onCloseQuickViewModal}
-//                 sku={quickViewSku}
-//                 simpleSku={simpleSku}
-//                 products={sanitizeWishList(list)}
-//                 soldOut={this.state.soldOut}
-//                 deliveredBy={this.state.deliveredBy}
-//                 rating={this.state.rating}
-//               />
-//             </ResponsiveModal>
-//           )}
-//         </Container>
-//       </Section>
-//     );
-//   }
-// }
-// Wishlist.defaultProps = {
-//   wishList: [],
-//   list: [],
-//   loadingList: [],
-//   selectedPincode: ''
-// };
+    return (
+      <Section display="flex" p="0" pt="2.5rem" mb="2rem">
+        <Container type="container" pr="0" pl="0">
+          <Heading
+            mb={31}
+            pb={10}
+            sx={{
+              fontFamily: 'HelveticaNeue',
+              fontSize: '21px',
+              fontWeight: 'bold',
+              color: '#474747',
+              borderBottom: 'divider'
+            }}
+          >
+            My Wishlist: 2 items
+          </Heading>
+          {list.map((item, i) => (
+            <BoxHtV1
+              key={`${
+                item.wishlist_info && item.wishlist_info.configurable_sku ? item.wishlist_info.configurable_sku : ''
+              }_${String(i)}`}
+              className={styles.productWrapper}
+            >
+              <Product
+                key={item.product_info.id}
+                name={item.product_info.data.name}
+                price={item.product_info.netprice}
+                cutprice={item.product_info.cutprice}
+                saving={item.product_info.saving}
+                image={getProductImage(item.product_info.images)}
+                sku={item.product_info.data.sku}
+                onClick={onClick(list, toggleWishList)}
+                onOpenQuickViewModal={() => {
+                  this.onOpenQuickViewModal(
+                    item.product_info.data.sku,
+                    Object.keys(item.product_info.data.simples)[0],
+                    item.product_info.soldout,
+                    item.product_info.data.reviews.rating.toFixed(1),
+                    item.wishlist_info.delivery_details && item.wishlist_info.delivery_details[0].value
+                  );
+                }}
+                isWishList={isInWishList(wishList, item.product_info.data.sku)}
+                skuLoading={isInWishList(loadingList, item.product_info.data.sku)}
+                rating={item.product_info.data.reviews.rating.toFixed(1)}
+                reviewsCount={item.product_info.data.reviews.count}
+                /* eslint-disable max-len */
+                savingAmount={
+                  item.product_info.data.max_special_price
+                    ? formatAmount(Number(item.product_info.data.max_price) - Number(item.product_info.data.max_special_price))
+                    : 0
+                }
+                deliveredBy={item.wishlist_info.delivery_details && item.wishlist_info.delivery_details[0].value}
+                pincode={selectedPincode}
+                setProductPosition={productPosition}
+                productURL={formatProductURL(item.product_info.data.name, item.product_info.data.sku)}
+              />
+              <BoxHtV1 mt="0" p="0.25rem 0.125rem 0.5rem">
+                <AddToCart
+                  simpleSku={Object.keys(item.product_info.data.simples)[0]}
+                  sku={item.product_info.data.sku}
+                  itemId={item.product_info.id}
+                  isSoldOut={item.product_info.soldout}
+                  btnType="btnOutline"
+                  btnColor="transparent"
+                  ta="left"
+                  fontSize="12px"
+                />
+              </BoxHtV1>
+            </BoxHtV1>
+          ))}
+          {/* {list && (
+            <ResponsiveModal onCloseModal={this.onCloseQuickViewModal} open={openQuickView}>
+              <QuickView
+                onCloseModal={this.onCloseQuickViewModal}
+                sku={quickViewSku}
+                simpleSku={simpleSku}
+                products={sanitizeWishList(list)}
+                soldOut={this.state.soldOut}
+                deliveredBy={this.state.deliveredBy}
+                rating={this.state.rating}
+              />
+            </ResponsiveModal>
+          )} */}
+        </Container>
+      </Section>
+    );
+  }
+}
+Wishlist.defaultProps = {
+  wishList: [],
+  list: [],
+  loadingList: [],
+  selectedPincode: ''
+};
 
-// Wishlist.propTypes = {
-//   toggleWishList: PropTypes.func.isRequired,
-//   productPosition: PropTypes.func.isRequired,
-//   wishList: PropTypes.array,
-//   list: PropTypes.array,
-//   loadingList: PropTypes.array,
-//   selectedPincode: PropTypes.string
-// };
+Wishlist.propTypes = {
+  toggleWishList: PropTypes.func.isRequired,
+  productPosition: PropTypes.func.isRequired,
+  wishList: PropTypes.array,
+  list: PropTypes.array,
+  loadingList: PropTypes.array,
+  selectedPincode: PropTypes.string
+};
 
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(Wishlist);
-
-const Wishlist = () => <div type="block">Wishlist Page Is Under Development</div>;
-
-export default Wishlist;
+export default connect(mapStateToProps, mapDispatchToProps)(Wishlist);

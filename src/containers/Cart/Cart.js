@@ -13,7 +13,6 @@ import { getCartList, getStockOutProducts } from 'selectors/cart';
  */
 import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Body from 'hometown-components-dev/lib/BodyHtV1';
-import Empty from 'hometown-components-dev/lib/EmptyHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import Section from 'hometown-components-dev/lib/SectionHtV1';
@@ -29,6 +28,7 @@ import CartShimmer from 'components/Cart/CartShimmer';
 import PinCode from 'components/PinCode';
 import ResponsiveModal from 'components/Modal';
 import Notifications from 'components/Notifications';
+import Empty from './Empty';
 
 /**
  * Icons / Images
@@ -119,7 +119,6 @@ export default class CartContainer extends Component {
                 subTitle="Looks like you haven’t made your choice yet."
                 btnName="Shop Now"
                 url="/"
-                bg="#fafafa"
                 subTitleWidth="43%"
                 p="10"
               >

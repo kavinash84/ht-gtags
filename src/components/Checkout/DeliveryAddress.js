@@ -390,12 +390,19 @@ class DeliveryAddress extends Component {
                 <Row mx={-10}>
                   {addresses.map((item, index) => (
                     <Col variant="col-6" px={10} mb={20} key={item.id_customer_address}>
+                      <Box
+                        as="input"
+                        type="radio"
+                        name="type"
+                        mr={10}
+                        sx={{ position: 'absolute', top: '21px', left: '17px' }}
+                      />
                       <Button
                         className={styles.addAddressBtn}
                         hoverColor="grey"
                         variant="link"
                         textAlign="left"
-                        px={15}
+                        px={27}
                         py={15}
                         height="100%"
                         lineHeight={1.25}
