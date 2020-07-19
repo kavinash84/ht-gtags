@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Wishlist from 'components/Wishlist';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import Footer from 'components/Footer';
+import Header from 'components/Header';
+import Body from 'hometown-components-dev/lib/BodyHtV1';
 import Empty from 'hometown-components-dev/lib/EmptyHtV1';
 import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
 import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
-import MenuFooter from 'containers/MenuFooter';
+import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 import { getSKUList, getWishList } from '../../selectors/wishlist';
 
 const WishListIcon = require('../../../static/wishlist-empty.jpg');
@@ -30,8 +32,10 @@ export default class WishlistContainer extends Component {
   render() {
     const { wishlistData, wishListedSKUs, loadingList } = this.props;
     return (
-      <BoxHtV1>
-        <MenuFooter pageTitle="Wishlist">
+      <Wrapper>
+        <Body>
+          {/* Header */}
+          <Header />
           {wishlistData && wishlistData.length ? (
             <Wishlist list={wishlistData} wishList={wishListedSKUs} loadingList={loadingList} />
           ) : (
@@ -47,8 +51,10 @@ export default class WishlistContainer extends Component {
               </Empty>
             </SectionHtV1>
           )}
-        </MenuFooter>
-      </BoxHtV1>
+          {/* Footer */}
+          <Footer />
+        </Body>
+      </Wrapper>
     );
   }
 }

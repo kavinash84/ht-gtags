@@ -5,6 +5,7 @@ import Box from 'hometown-components-dev/lib/BoxHtV1';
 import ImageShimmer from 'hometown-components-dev/lib/ImageShimmerHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 
 const wishListIcon = require('../../../static/wishListIcon.png');
 
@@ -16,50 +17,36 @@ const Product = props => {
  name, image, price, cutprice, imgHeight, position, setProductPosition, productURL
 } = props;
   return (
-    <Box variant="col-12">
+    <Box>
       <Link onClick={handleClick(setProductPosition, position)} to={productURL}>
         <Box>
           <ImageShimmer src={image} height={imgHeight}>
             {imageURL => <Image alt={name} src={imageURL} width="100%" />}
           </ImageShimmer>
         </Box>
-        <Box p="0.25rem 0.3125rem 0.25rem" sx={{ display: 'flex', flexDirection: 'column' }}>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Text
-              textAlign="left"
-              sx={{
-                fontFamily: 'HelveticaNeue',
-                fontSize: '18px',
-                fontWeight: '500',
-                color: '#000000'
-              }}
-            >
-              {name}
-            </Text>
+        <Box mt={10}>
+          <Heading
+            pb={8}
+            color="rgba(51, 51, 51, 0.85)"
+            fontFamily="light"
+            fontSize={14}
+            textAlign="left"
+            sx={{
+              whiteSpace: 'nowrap',
+              textOverflow: 'ellipsis',
+              overflow: 'hidden'
+            }}
+          >
+            {name}
             <Image alt={''} src={wishListIcon} width="51px" height="23px" />
-          </Box>
-          <Box mb="2px" textAlign="left" sx={{ display: 'flex' }} pt={10}>
-            <Text
-              mr="5px"
-              sx={{
-                fontFamily: 'HelveticaNeue',
-                fontSize: '17px',
-                fontWeight: '500',
-                color: '#cc1e05'
-              }}
-            >
-              {price}
+          </Heading>
+          <Box mb={6} textAlign="left">
+            <Text as="span" fontSize={14} mr={10} color="heading" fontFamily="medium">
+              ₹ {price}
             </Text>
             {price !== cutprice && (
-              <Text
-                mr="0"
-                sx={{
-                  fontFamily: 'HelveticaNeue',
-                  fontSize: '17px',
-                  color: '#da0202'
-                }}
-              >
-                <s>{cutprice}</s>
+              <Text as="span" fontSize={14} sx={{ textDecoration: 'line-through' }}>
+                ₹ {cutprice}
               </Text>
             )}
           </Box>
@@ -68,8 +55,9 @@ const Product = props => {
     </Box>
   );
 };
+
 Product.defaultProps = {
-  imgHeight: '270px'
+  imgHeight: '240px'
 };
 
 Product.propTypes = {

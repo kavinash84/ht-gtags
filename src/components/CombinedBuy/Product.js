@@ -12,7 +12,7 @@ const styles = require('./Slider.scss');
 const ProductItem = ({
  image, name, url, discPrice, price, height
 }) => (
-  <Box padding="0 15px">
+  <Box>
     <Link className={styles.link} to={url}>
       <ImageShimmer src={image} height={height} width="100%" sx={{ position: 'relative' }}>
         {imageURL => <Image alt={name} src={imageURL} width="100%" className={styles.prodImage} />}

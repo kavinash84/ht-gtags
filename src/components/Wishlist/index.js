@@ -4,11 +4,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actionCreators from 'redux/modules/wishlist';
 import Container from 'hometown-components-dev/lib/ContainerHtV1';
-import Section from 'hometown-components-dev/lib/SectionHtV1';
-// import ResponsiveModal from 'components/Modal';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import Flex from 'hometown-components-dev/lib/FlexHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
-// import QuickView from 'hometown-components-dev/lib/Product/QuickView';
 import { formatAmount } from 'utils/formatters';
 import { setProductPosition } from 'redux/modules/productdetails';
 import { formatProductURL } from 'utils/helper';
@@ -36,45 +34,29 @@ const isInWishList = (list, id) => list.includes(id);
 const styles = require('../Listing/Listing.scss');
 
 class Wishlist extends React.Component {
-  // state = {
-  //   openQuickView: false,
-  //   quickViewSku: '',
-  //   simpleSku: '',
-  // };
-  // onOpenQuickViewModal = (sku, simpleSku, soldOut, rating, deliveredBy) => {
-  //   this.setState({
-  //     openQuickView: true,
-  //     quickViewSku: sku,
-  //     simpleSku,
-  //   });
-  // };
-  // onCloseQuickViewModal = () => {
-  //   this.setState({ openQuickView: false });
-  // };
-
   render() {
     const {
  list, toggleWishList, wishList, loadingList, productPosition, selectedPincode
 } = this.props;
 
     return (
-      <Section display="flex" p="0" pt="2.5rem" mb="2rem">
-        <Container type="container" pr="0" pl="0">
-          <Heading
-            mb={31}
-            pb={10}
-            sx={{
-              fontFamily: 'HelveticaNeue',
-              fontSize: '21px',
-              fontWeight: 'bold',
-              color: '#474747',
-              borderBottom: 'divider'
-            }}
-          >
-            My Wishlist: 2 items
-          </Heading>
+      <Container px={0} my={50}>
+        <Heading
+          pb={10}
+          mb={30}
+          sx={{
+            fontFamily: 'HelveticaNeue',
+            fontSize: '21px',
+            fontWeight: 'bold',
+            color: '#474747',
+            borderBottom: 'divider'
+          }}
+        >
+          My Wishlist: 2 items
+        </Heading>
+        <Flex mx={-16}>
           {list.map((item, i) => (
-            <BoxHtV1
+            <Box
               key={`${
                 item.wishlist_info && item.wishlist_info.configurable_sku ? item.wishlist_info.configurable_sku : ''
               }_${String(i)}`}
@@ -113,7 +95,7 @@ class Wishlist extends React.Component {
                 setProductPosition={productPosition}
                 productURL={formatProductURL(item.product_info.data.name, item.product_info.data.sku)}
               />
-              <BoxHtV1 mt="0" p="0.25rem 0.125rem 0.5rem">
+              <Box mt={15} width="65%">
                 <AddToCart
                   simpleSku={Object.keys(item.product_info.data.simples)[0]}
                   sku={item.product_info.data.sku}
@@ -124,24 +106,11 @@ class Wishlist extends React.Component {
                   ta="left"
                   fontSize="12px"
                 />
-              </BoxHtV1>
-            </BoxHtV1>
+              </Box>
+            </Box>
           ))}
-          {/* {list && (
-            <ResponsiveModal onCloseModal={this.onCloseQuickViewModal} open={openQuickView}>
-              <QuickView
-                onCloseModal={this.onCloseQuickViewModal}
-                sku={quickViewSku}
-                simpleSku={simpleSku}
-                products={sanitizeWishList(list)}
-                soldOut={this.state.soldOut}
-                deliveredBy={this.state.deliveredBy}
-                rating={this.state.rating}
-              />
-            </ResponsiveModal>
-          )} */}
-        </Container>
-      </Section>
+        </Flex>
+      </Container>
     );
   }
 }
