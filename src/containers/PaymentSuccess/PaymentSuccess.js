@@ -15,6 +15,7 @@ import Row from 'hometown-components-dev/lib/RowHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 
+
 /* ====== Page Components ====== */
 import Footer from 'components/Footer';
 import Header from 'components/Header';
@@ -24,6 +25,7 @@ import ThankYou from 'newComponents/ThankYou';
  * Modules / Utils / Reducers
  */
 import { formatAmount } from 'utils/formatters';
+import { formatProductURL } from 'utils/helper';
 
 const mapStateToProps = ({ paymentstatus }) => ({
   cartProducts: paymentstatus.data.cart_products,
@@ -50,6 +52,7 @@ class PaymentSuccess extends Component {
       } else {
         products[arr.sku] = {
           sku: arr.sku,
+          confSku: arr.details.groupedattributes.sku,
           name: arr.name,
           image: arr.details.image,
           deliveryTime: arr.delivery_text,
@@ -82,6 +85,7 @@ class PaymentSuccess extends Component {
                   Here’s what you ordered
                 </Text>
               </Row>
+
               <Row sx={{ borderBottom: 'heading' }} mx={0} pb={5}>
                 <Box variant="col-6" pl={0}>
                   <Text fontSize={16}>Product Details</Text>
@@ -99,24 +103,28 @@ class PaymentSuccess extends Component {
               {products.map(product => (
                 <Row py={20} mx={0} alignItems="center" sx={{ position: 'relative', borderBottom: 'light' }}>
                   <Box variant="col-2" pl={0}>
-                    <Image
-                      width={1}
-                      src={`${product.image}-top_sel_160.jpg`}
-                      alt=""
-                      sx={{ boxShadow: 'productThumb' }}
-                    />
+                    <Link to={formatProductURL(product.name, product.confSku)}>
+                      <Image
+                        width={1}
+                        src={`${product.image}-top_sel_160.jpg`}
+                        alt=""
+                        sx={{ boxShadow: 'productThumb' }}
+                      />
+                    </Link>
                   </Box>
                   <Box variant="col-4" pl={15}>
-                    <Link to="/">
-                      <Box mb="10px">
+                    {/* <Link to="/"> */}
+                    <Box mb="10px">
+                      <Link to={formatProductURL(product.name, product.confSku)}>
                         <Heading color="heading" fontSize={16} lineHeight={1.4}>
                           {product.name}
                         </Heading>
-                      </Box>
-                      <Box mb="15px">
-                        <Text color="#575757">{product.color}</Text>
-                      </Box>
-                    </Link>
+                      </Link>
+                    </Box>
+                    <Box mb="15px">
+                      <Text color="#575757">{product.color}</Text>
+                    </Box>
+                    {/* </Link> */}
                   </Box>
                   <Box variant="col-2">
                     <Label color="heading" fontSize={18}>
