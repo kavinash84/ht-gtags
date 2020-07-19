@@ -52,7 +52,7 @@ class Wishlist extends React.Component {
             borderBottom: 'divider'
           }}
         >
-          My Wishlist: 2 items
+          My Wishlist: {list.length} items
         </Heading>
         <Flex mx={-16}>
           {list.map((item, i) => (
