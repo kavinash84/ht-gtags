@@ -55,7 +55,7 @@ const mapStateToProps = ({
   paymentData: checkout.paymentData,
   loading: checkout.loading,
   addresses: myaddress.data,
-  // currentaddressindex: address.shipping.index,
+  currentaddressindex: address.shipping.index,
   shippingIsBilling: address.shippingIsBilling,
   userEmail: profile.data.email,
   address,
@@ -347,7 +347,7 @@ class DeliveryAddress extends Component {
       history,
       loading,
       addresses,
-      // currentaddressindex,
+      currentaddressindex,
       shippingIsBilling,
       userEmail,
       summary,
@@ -355,12 +355,12 @@ class DeliveryAddress extends Component {
     } = this.props;
     const { addressform } = this.state;
     return (
-      <Container my={60} px={0}>
+      <Container my={[60, 40, 60]} px={[24, 24, 0]}>
         <Row>
           <Col variant="col-8">
             {/* For logged in */}
             {!isLoggedIn && (
-              <Box col="12" className={styles.isLoggedIn}>
+              <Box className={styles.isLoggedIn}>
                 <Label fontSize="1rem" mt="0" mb="0" color="textLight">
                   Already have an account?
                 </Label>
@@ -382,38 +382,43 @@ class DeliveryAddress extends Component {
             {/* For not logged in */}
             {isLoggedIn && (
               <Box>
-                <Row mr="0" ml="0" mb={20}>
-                  <Box>
-                    <Heading variant="heading.medium">Confirm Address</Heading>
-                  </Box>
+                <Row mx={0} mb={20}>
+                  <Heading variant="heading.medium">Confirm Address</Heading>
                 </Row>
                 <Row mx={-10}>
                   {addresses.map((item, index) => (
                     <Col variant="col-6" px={10} mb={20} key={item.id_customer_address}>
-                      <Box
-                        as="input"
-                        type="radio"
-                        name="type"
-                        mr={10}
-                        sx={{ position: 'absolute', top: '21px', left: '17px' }}
-                      />
                       <Button
                         className={styles.addAddressBtn}
                         hoverColor="grey"
                         variant="link"
                         textAlign="left"
-                        px={27}
-                        py={15}
+                        px={0}
+                        py={0}
                         height="100%"
                         lineHeight={1.25}
-                        // className={`${index === currentaddressindex ? styles.addAddressBtn : null}`}
                         onClick={() => this.handleClick(index)}
                         sx={{
-                          border: 'secondary',
+                          border: index === currentaddressindex ? 'primaryLarge' : 'secondaryLarge',
                           borderRadius: 3
                         }}
                       >
-                        <Text>
+                        <Box
+                          as="input"
+                          type="radio"
+                          name="address"
+                          id={`address${item.id_customer_address}`}
+                          mr={10}
+                          sx={{ position: 'absolute', top: 18, left: 22 }}
+                        />
+                        <Text
+                          as="label"
+                          htmlFor={`address${item.id_customer_address}`}
+                          width={1}
+                          px={32}
+                          py={15}
+                          display="block"
+                        >
                           <b>{item.full_name}</b>
                           <br />
                           {item.address1}
@@ -446,7 +451,7 @@ class DeliveryAddress extends Component {
             <form onSubmit={this.handleSubmit}>
               <Row display="block" mr="0" ml="0">
                 {(addressform || !isLoggedIn) && (
-                  <Box variant="col-12" px={0} mt="1rem">
+                  <Box variant="col-12" px={0}>
                     <AddressForm formType="shipping" isLoggedIn={isLoggedIn} userEmail={userEmail} />
                   </Box>
                 )}
@@ -492,7 +497,7 @@ class DeliveryAddress extends Component {
 
           {/* Order Summary */}
           <Col variant="col-4">
-            <Box bg="sidebar" px={40} py={30}>
+            <Box bg="sidebar" px={[30, 30, 40]} py={[20, 20, 30]}>
               <OrderSummary
                 history={history}
                 results={results}
@@ -516,7 +521,7 @@ DeliveryAddress.defaultProps = {
   history: {},
   // location: {},
   addresses: [],
-  // currentaddressindex: -1,
+  currentaddressindex: -1,
   userEmail: '',
   summary: null,
   couponlistToggle: false,
@@ -531,7 +536,7 @@ DeliveryAddress.propTypes = {
   nextstep: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
   paymentData: PropTypes.object.isRequired,
   // location: PropTypes.object,
-  // currentaddressindex: PropTypes.number,
+  currentaddressindex: PropTypes.number,
   address: PropTypes.object.isRequired,
   shippingIsBilling: PropTypes.bool.isRequired,
   setAddress: PropTypes.func.isRequired,

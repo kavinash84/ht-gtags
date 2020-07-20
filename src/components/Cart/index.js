@@ -293,7 +293,7 @@ const Cart = ({
 
         {/* Pricing Sidebar */}
         <Box variant="col-4">
-          <Box bg="sidebar" px={40} py={30}>
+          <Box bg="sidebar" px={[15, 15, 40]} py={[20, 20, 30]}>
             <OrderSummary
               itemsTotal={summary.items}
               savings={summary.savings}
@@ -337,7 +337,7 @@ const Cart = ({
                 <Link to="/terms-and-conditions">Read More</Link>
               </Label>
             </Box>
-            <PaymentMethods />
+            <PaymentMethods m={0} />
           </Box>
         </Box>
       </Row>
