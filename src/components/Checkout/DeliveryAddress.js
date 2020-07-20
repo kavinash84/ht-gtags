@@ -48,7 +48,7 @@ const addIcon = require('../../../static/increase.svg');
 const styles = require('./DeliveryAddress.scss');
 
 const mapStateToProps = ({
-  userLogin, app, checkout, myaddress, address, profile, cart
+ userLogin, app, checkout, myaddress, address, profile, cart
 }) => ({
   results: getCartList(cart),
   isLoggedIn: userLogin.isLoggedIn,
@@ -80,8 +80,8 @@ class DeliveryAddress extends Component {
     const { dispatch } = this.context.store;
     const { cart, history } = this.props;
     const {
-      nextstep, isLoggedIn, onChangeEmail, userEmail
-    } = this.props;
+ nextstep, isLoggedIn, onChangeEmail, userEmail
+} = this.props;
     if (isLoggedIn) {
       onChangeEmail('shipping', userEmail);
       onChangeEmail('billing', userEmail);
@@ -98,15 +98,15 @@ class DeliveryAddress extends Component {
   }
   componentWillReceiveProps(nextProps) {
     const {
-      isLoggedIn, nextstep, clearShippingAddress, onChangeEmail, userEmail, couponlistToggle
-    } = this.props;
+ isLoggedIn, nextstep, clearShippingAddress, onChangeEmail, userEmail, couponlistToggle
+} = this.props;
     const { dispatch } = this.context.store;
     if (nextProps.nextstep !== nextstep && nextProps.paymentData) {
       console.log(nextProps.paymentData);
       const { paymentData = {} } = nextProps;
       dispatch(load({
-        paymentData
-      }));
+          paymentData
+        }));
     }
     if (isLoggedIn && nextProps.userEmail !== userEmail) {
       onChangeEmail('shipping', nextProps.userEmail);
@@ -271,44 +271,44 @@ class DeliveryAddress extends Component {
             ? 'Please Add new Address  /  Select delivery Address '
             : 'Please Fill All Details Correctly !';
         dispatch(notifSend({
-          type: 'warning',
-          msg: message,
-          dismissAfter: 2000
-        }));
+            type: 'warning',
+            msg: message,
+            dismissAfter: 2000
+          }));
       } else {
         const { sessionId } = this.props;
         dispatch(sendDeliveryAddress(
-          sessionId,
-          {
-            shippingIsBilling,
-            shippingAddress: shippingForm.data,
-            billingAddress: shippingForm.data,
-            cartTotal
-          },
-          isLoggedIn
-        ));
+            sessionId,
+            {
+              shippingIsBilling,
+              shippingAddress: shippingForm.data,
+              billingAddress: shippingForm.data,
+              cartTotal
+            },
+            isLoggedIn
+          ));
       }
     } else {
       const shippingForm = this.formValdiator(this.props, shipping, 'shipping');
       const billingForm = this.formValdiator(this.props, billing, 'billing');
       if (shippingForm.error || billingForm.error) {
         dispatch(notifSend({
-          type: 'warning',
-          msg: 'Fill All Details Correctly',
-          dismissAfter: 2000
-        }));
+            type: 'warning',
+            msg: 'Fill All Details Correctly',
+            dismissAfter: 2000
+          }));
       } else {
         const { sessionId } = this.props;
         dispatch(sendDeliveryAddress(
-          sessionId,
-          {
-            shippingIsBilling,
-            shippingAddress: shippingForm.data,
-            billingAddress: billingForm.data,
-            cartTotal
-          },
-          isLoggedIn
-        ));
+            sessionId,
+            {
+              shippingIsBilling,
+              shippingAddress: shippingForm.data,
+              billingAddress: billingForm.data,
+              cartTotal
+            },
+            isLoggedIn
+          ));
       }
     }
   };
@@ -360,12 +360,12 @@ class DeliveryAddress extends Component {
     } = this.props;
     const { addressform, addressSelected } = this.state;
     return (
-      <Container my={60} px={0}>
+      <Container my={[60, 40, 60]} px={[24, 24, 0]}>
         <Row>
           <Col variant="col-8">
             {/* For logged in */}
             {!isLoggedIn && (
-              <Box col="12" className={styles.isLoggedIn}>
+              <Box className={styles.isLoggedIn}>
                 <Label fontSize="1rem" mt="0" mb="0" color="textLight">
                   Already have an account?
                 </Label>
@@ -377,7 +377,9 @@ class DeliveryAddress extends Component {
                   onCloseModal={this.handleLoginModal}
                   open={this.state.openLogin}
                 >
-                  <LoginModal />
+                  <Box px={24} py={20}>
+                    <LoginModal />
+                  </Box>
                 </ResponsiveModal>
               </Box>
             )}
@@ -385,10 +387,8 @@ class DeliveryAddress extends Component {
             {/* For not logged in */}
             {isLoggedIn && (
               <Box>
-                <Row mr="0" ml="0" mb={20}>
-                  <Box>
-                    <Heading variant="heading.medium">Confirm Address</Heading>
-                  </Box>
+                <Row mx={0} mb={20}>
+                  <Heading variant="heading.medium">Confirm Address</Heading>
                 </Row>
                 <Row mx={-10}>
                   {addresses.map((item, index) => (
@@ -396,18 +396,35 @@ class DeliveryAddress extends Component {
                       <Card
                         variant="link"
                         textAlign="left"
-                        px={15}
-                        py={15}
+                        px={0}
+                        py={0}
                         height="100%"
                         lineHeight={1.25}
-                        className={` ${styles.addressBtn} ${index === currentaddressindex ? styles.active : styles.deliveryAddress}`}
+                        className={` ${styles.addressBtn} ${
+                          index === currentaddressindex ? styles.active : styles.deliveryAddress
+                        }`}
                         onClick={() => this.handleClick(index)}
                         sx={{
-                          border: 'secondary',
+                          border: index === currentaddressindex ? 'primaryLarge' : 'secondaryLarge',
                           borderRadius: 3
                         }}
                       >
-                        <Text>
+                        <Box
+                          as="input"
+                          type="radio"
+                          name="address"
+                          id={`address${item.id_customer_address}`}
+                          mr={10}
+                          sx={{ position: 'absolute', top: 18, left: 22 }}
+                        />
+                        <Text
+                          as="label"
+                          htmlFor={`address${item.id_customer_address}`}
+                          width={1}
+                          px={32}
+                          py={15}
+                          display="block"
+                        >
                           <b>{item.full_name}</b>
                           <br />
                           {item.address1}
@@ -440,7 +457,7 @@ class DeliveryAddress extends Component {
             <form onSubmit={this.handleSubmit}>
               <Row display="block" mr="0" ml="0">
                 {(addressform || !isLoggedIn) && (
-                  <Box variant="col-12" px={0} mt="1rem">
+                  <Box variant="col-12" px={0}>
                     <AddressForm formType="shipping" isLoggedIn={isLoggedIn} userEmail={userEmail} />
                   </Box>
                 )}
@@ -486,7 +503,7 @@ class DeliveryAddress extends Component {
 
           {/* Order Summary */}
           <Col variant="col-4">
-            <Box bg="sidebar" px={40} py={30}>
+            <Box bg="sidebar" px={[30, 30, 40]} py={[20, 20, 30]}>
               <OrderSummary
                 history={history}
                 results={results}

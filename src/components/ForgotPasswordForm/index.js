@@ -60,12 +60,12 @@ export default class ForgotPasswordForm extends Component {
           </LabelHtV1>
           <RowHtV1 mb={20}>
             <Flex mr={60}>
-              <BoxHtV1 as="input" type="radio" mr={10} />
+              <BoxHtV1 as="input" type="radio" name="type" mr={10} />
               <LabelHtV1>E-mail</LabelHtV1>
             </Flex>
             <Flex>
-              <BoxHtV1 as="input" type="radio" mr={10} />
-              <LabelHtV1>Phone no.</LabelHtV1>
+              <BoxHtV1 as="input" type="radio" name="type" mr={10} />
+              <LabelHtV1>Phone no</LabelHtV1>
             </Flex>
           </RowHtV1>
           <BoxHtV1 width={1}>

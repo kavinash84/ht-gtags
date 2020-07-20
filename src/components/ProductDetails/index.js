@@ -38,7 +38,7 @@ import Row from 'hometown-components-dev/lib/RowHtV1';
  */
 import AddReview from 'hometown-components-dev/lib/ReviewsHtV1/WriteReview';
 import ColorOption from 'hometown-components-dev/lib/ProductDetailsHtV1/ColorOption';
-// import CombinedBuy from 'components/CombinedBuy';
+import CombinedBuy from 'components/CombinedBuy';
 import ProductDesc from 'hometown-components-dev/lib/ProductDetailsHtV1/ProductDesc';
 import ProductCarousel from 'components/ProductCarousel';
 import ResponsiveModal from 'components/Modal';
@@ -174,16 +174,16 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-// const getProductsList = products => {
-//   const items = [];
-//   products.forEach(item => {
-//     const { set_qty: qty = 0 } = item;
-//     for (let i = 0; i < qty; i += 1) {
-//       items.push(item);
-//     }
-//   });
-//   return items;
-// };
+const getProductsList = products => {
+  const items = [];
+  products.forEach(item => {
+    const { set_qty: qty = 0 } = item;
+    for (let i = 0; i < qty; i += 1) {
+      items.push(item);
+    }
+  });
+  return items;
+};
 
 const mapStateToProps = ({
   app: { sessionId },
@@ -342,7 +342,7 @@ class ProductDetails extends React.Component {
     const {
       product,
       pincode,
-      // session,
+      session,
       reviews,
       colorproducts,
       relatedproductsList,
@@ -376,8 +376,8 @@ class ProductDetails extends React.Component {
       reviews: { count, rating }
     } = product;
     const {
-      description, product_height: height, product_width: width, product_depth: depth
-    } = attributes;
+ description, product_height: height, product_width: width, product_depth: depth
+} = attributes;
     const simpleSku = Object.keys(simples)[0];
     const { name, price, special_price: specialPrice } = meta;
     const checkSpecialPrice = Number(specialPrice) || Number(price);
@@ -518,22 +518,22 @@ class ProductDetails extends React.Component {
                     </a>
                   </Box>
                 </ReviewDisplay>
-              ) : (<Box pl={4} pb={30}>
-                <a
-                  variant="linkPrimary"
-                  href="#review-section"
-                  pl={10}
-                  ml={10}
-                  sx={{
-                    borderLeft: 'primary'
-                  }}
-                  style={{ color: '#f15a22' }}
-                >
-                  Write a Review
-                </a>
-              </Box>)
-              }
-
+              ) : (
+                <Box pl={4} pb={30}>
+                  <a
+                    variant="linkPrimary"
+                    href="#review-section"
+                    pl={10}
+                    ml={10}
+                    sx={{
+                      borderLeft: 'primary'
+                    }}
+                    style={{ color: '#f15a22' }}
+                  >
+                    Write a Review
+                  </a>
+                </Box>
+              )}
 
               {/* Color Options */}
               {colorproducts.length > 0 && (
@@ -577,16 +577,16 @@ class ProductDetails extends React.Component {
 
               {/* Offers */}
               {
-                <Box mb={30}>
+                <Box mb={20} mt={10}>
                   {combinedbuy.length ? (
                     <Button variant="link" fontFamily="medium" fontSize={18}>
-                      <a href="#combined_buy_offers">
+                      <a href="#combined_buy_offers" style={{ color: '#F15A22' }}>
                         {`See ${combinedbuy.length} Combined ${combinedbuy.length > 1 ? 'Offers' : 'Offer'}`}
                       </a>
                     </Button>
                   ) : (
-                      ''
-                    )}
+                    ''
+                  )}
                   {/*
                 {offerImage && offerImageRedirect && (
                   <a rel="noopener noreferrer" href={offerImageRedirect}>
@@ -792,17 +792,14 @@ class ProductDetails extends React.Component {
           </Box>
 
           {/* Combined Offers */}
-          {/* {combinedbuy.length > 0 && (
-            <Box>
-              <Row id="combined_buy_offers">
-                <Container>
-                  <Heading variant="heading.medium">Combined Offers</Heading>
-                </Container>
-              </Row>
+          {combinedbuy.length > 0 && (
+            <Box id="combined_buy_offers" pt={36}>
+              <Box textAlign="center" mb={20}>
+                <Heading variant="heading.regular">Combined Offers</Heading>
+              </Box>
               {combinedbuy.map((item, index) => (
-                <Row key={String(index)}>
+                <Row key={String(index)} mx={0}>
                   <CombinedBuy
-                    pb={32}
                     title={item.name}
                     item={item}
                     data={getProductsList(item.products || [])}
@@ -815,11 +812,11 @@ class ProductDetails extends React.Component {
                 </Row>
               ))}
             </Box>
-          )} */}
+          )}
 
           {/* Related Products List */}
           {relatedproductsList.length > 0 && (
-            <Row py={20}>
+            <Row py={36}>
               <ProductCarousel
                 paddingTop="2.5rem"
                 title="Recommended for you"
@@ -858,8 +855,8 @@ ProductDetails.defaultProps = {
   combinedbuy: [],
   simpleSku: '',
   quantityChange: false,
-  skuItem: {}
-  // session: ''
+  skuItem: {},
+  session: ''
 };
 DescriptionButton.propTypes = {
   // eslint-disable-next-line react/require-default-props
@@ -887,7 +884,7 @@ ProductDetails.propTypes = {
   simpleSku: PropTypes.string,
   combinedbuy: PropTypes.array,
   quantityChange: PropTypes.bool,
-  skuItem: PropTypes.object
-  // session: PropTypes.string
+  skuItem: PropTypes.object,
+  session: PropTypes.string
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

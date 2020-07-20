@@ -182,13 +182,13 @@ const Cart = ({
               </Box>
               <Box variant="col-5" pl={30}>
                 <Link to={formatProductURL(item.product_info.name, item.configurable_sku)}>
-                  <Box mb="10px">
+                  <Box mb={10}>
                     <Heading color="heading" fontSize={16} lineHeight={1.4}>
                       {item.product_info.name}
                     </Heading>
                   </Box>
                   {item.product_info.color && (
-                    <Box mb="15px">
+                    <Box mb={15}>
                       <Text color="#575757">{item.product_info.color}</Text>
                     </Box>
                   )}
@@ -317,7 +317,7 @@ const Cart = ({
 
         {/* Pricing Sidebar */}
         <Box variant="col-4">
-          <Box bg="sidebar" px={40} py={30}>
+          <Box bg="sidebar" px={[15, 15, 40]} py={[20, 20, 30]}>
             <OrderSummary
               itemsTotal={summary.items}
               savings={summary.savings}
@@ -361,7 +361,7 @@ const Cart = ({
                 <Link to="/terms-and-conditions">Read More</Link>
               </Label>
             </Box>
-            <PaymentMethods />
+            <PaymentMethods m={0} />
           </Box>
         </Box>
       </Row>

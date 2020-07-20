@@ -223,12 +223,28 @@ class PaymentOptions extends Component {
                               <br />
                               {/* eslint-enable */}
                               <Link to="/checkout/delivery-address">
-                                <Label className={cartStyles.editOption} fontSize="1rem" fontFamily="light" color="primary" p="0" mt="10px" mb="0">
+                                <Label
+                                  className={cartStyles.editOption}
+                                  fontSize="1rem"
+                                  fontFamily="light"
+                                  color="primary"
+                                  p="0"
+                                  mt="10px"
+                                  mb="0"
+                                >
                                   Edit Address
                                 </Label>
                               </Link>
                               <Link to="/checkout/cart">
-                                <Label className={cartStyles.editOption} fontSize="1rem" fontFamily="light" color="primary" p="0" mt="10px" mb="0">
+                                <Label
+                                  className={cartStyles.editOption}
+                                  fontSize="1rem"
+                                  fontFamily="light"
+                                  color="primary"
+                                  p="0"
+                                  mt="10px"
+                                  mb="0"
+                                >
                                   / Edit Cart
                                 </Label>
                               </Link>
@@ -247,7 +263,7 @@ class PaymentOptions extends Component {
               </Box>
             </Row>
             <Row sx={{ display: 'flex' }}>
-              <Row mx={0} mb={20} justifyContent="space-between" flexDirection="column">
+              <Row mx={0} mb={20} justifyContent="space-between" flexDirection="column" maxHeight="360px">
                 {data.map((paymentType, index) => (
                   <Col key={String(`${paymentType}${index}`)} px={0}>
                     {CommonPayments(paymentType.paymentType, toggleGateway, selectedGateway, session, resetEasyEmi)}

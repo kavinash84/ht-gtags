@@ -37,7 +37,7 @@ const OrderSummary = ({
   history
 }) => (
   <Row>
-    <Col width={1}>
+    <Col width={1} px={[0, 0, 15]}>
       <Box
         pb={10}
         sx={{
@@ -72,7 +72,7 @@ const OrderSummary = ({
         <ProductSummaryList sku={item.configurable_sku} qty={item.qty} productItem={item.product_info || {}} />
       ))}
     </Box>
-    <Box variant="col-12" pb={20}>
+    <Box variant="col-12" pb={20} px={[0, 0, 16]}>
       {coupon && (
         <Flex mb={20} justifyContent="space-between">
           <Text color="red">Promo code {coupon.toUpperCase()} applied</Text>
@@ -82,11 +82,11 @@ const OrderSummary = ({
         <Text>Subtotal</Text>
         <Text>Rs. {itemsTotal ? formatAmount(itemsTotal) : null}</Text>
       </Flex>
-      <Flex mb={20} justifyContent="space-between">
+      <Flex mb={[10, 10, 20]} justifyContent="space-between">
         <Text>Savings</Text>
         <Text>Rs. {savings ? formatAmount(savings) : 0}</Text>
       </Flex>
-      <Flex mb={20} justifyContent="space-between">
+      <Flex mb={[10, 10, 20]} justifyContent="space-between">
         <Text>Shipping</Text>
         <Text>{shipping === 0 ? 'Free' : `Rs. ${shipping}`}</Text>
       </Flex>
@@ -104,12 +104,12 @@ const OrderSummary = ({
       )}
       <Row m="0" py="1em" className={styles.totalWrapper}>
         <Box variant="col-6" p="0">
-          <Text color="menuItem" mb="0" fontSize="19px" fontWeight="600" fontFamily="light">
+          <Text color="menuItem" mb="0" fontSize={[16, 16, 18]} fontWeight="600" fontFamily="light">
             Total Price
           </Text>
         </Box>
         <Box variant="col-6" p="0" textAlign="right">
-          <Text color="menuItem" fontSize="19px" fontWeight="600">
+          <Text color="menuItem" fontSize={[16, 16, 18]} fontWeight="600">
             Rs. {totalCart ? formatAmount(totalCart) : null}
           </Text>
         </Box>

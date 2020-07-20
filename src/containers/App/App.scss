@@ -531,6 +531,12 @@
 			left: -20px !important;
 		}
 	}
+	.recommendedSlider {
+		.slick-track {
+			margin-left: 0 !important;
+    	margin-right: auto !important;
+		}
+	}
 	.customModal {
 		padding: 3rem;
 	}
