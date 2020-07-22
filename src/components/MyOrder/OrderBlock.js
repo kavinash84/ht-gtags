@@ -108,13 +108,13 @@ class OrderBlock extends Component {
                     <Image className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />
                   </span>
                 ) : (
-                  'Track'
-                )}
+                    'Track'
+                  )}
               </Button>
             </Box>
           ) : (
-            ''
-          )}
+              ''
+            )}
           {/* <Div col="6" ta="right">
             <Heading fontSize="1.25rem" color="textLight" mb="0px" mt="0px" fontFamily="light">
               <Button
@@ -208,7 +208,7 @@ class OrderBlock extends Component {
               </Text>
             </Box>
           </Row>
-          {order.order_items &&
+          {/* {order.order_items &&
             order.order_items.map(item => (
               <Flex pb={20}>
                 <Box variant="col-4" pr={0} pl={0}>
@@ -227,7 +227,7 @@ class OrderBlock extends Component {
                   </Box>
                 </Box>
               </Flex>
-            ))}
+            ))} */}
           <Row type="block" m="0">
             <Box col="12" width="100%">
               <table className="ordersTable table">
@@ -262,8 +262,8 @@ class OrderBlock extends Component {
                           {order.status !== 'canceled' ? (
                             item.delivery_date_text || '--'
                           ) : (
-                            <span style={{ color: 'red' }}> Cancelled </span>
-                          )}
+                              <span style={{ color: 'red' }}> Cancelled </span>
+                            )}
                         </td>
                         {item.bob_order_item === 0 || item.bob_order_item === '0' ? (
                           <td>
@@ -291,8 +291,8 @@ class OrderBlock extends Component {
                             </Box>
                           </td>
                         ) : (
-                          ''
-                        )}
+                            ''
+                          )}
                         {/* <td>{item.carrier_name || 'NOT AVAILABLE'}</td>
                       <td>{item.tracking_id || 'NOT AVAILABLE'}</td> */}
                       </tr>
