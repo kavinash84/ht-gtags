@@ -58,6 +58,7 @@ import EmiModal from '../EmiModal';
 import Pincode from './Pincode';
 import ProductDetailsCarousel from './Carousel';
 import Video from './Video';
+import ReviewFilter from './ReviewFilter';
 
 /**
  * Images / Icons
@@ -232,7 +233,10 @@ class ProductDetails extends React.Component {
       showmorecolorproducts: true,
       activeSpec: 'description',
       showReviews: 2,
-      productQty: { value: 1, label: '1' }
+      productQty: { value: 1, label: '1' },
+      ReviewDataSet: [],
+      selectedFilter: null,
+      filterChanged: false
     };
   }
   componentDidMount() {
@@ -250,6 +254,32 @@ class ProductDetails extends React.Component {
       });
     }
   }
+  onFilterChange = Filter => {
+    const { reviews } = this.props;
+    const filterdData = [];
+    reviews.data.map(review => {
+      review.options.map(options => {
+        if (Filter.value === '1-Star' && options.option_value == '1') {
+          filterdData.push(review);
+        } else if (Filter.value === '2-Star' && options.option_value == '2') {
+          filterdData.push(review);
+        } else if (Filter.value === '3-Star' && options.option_value == '3') {
+          filterdData.push(review);
+        } else if (Filter.value === '4-Star' && options.option_value == '4') {
+          filterdData.push(review);
+        } else if (Filter.value === '5-Star' && options.option_value == '5') {
+          filterdData.push(review);
+        } else if (Filter.value === 'All-ratings') {
+          filterdData.push(review);
+        }
+      });
+    });
+    this.setState({
+      filterChanged: true,
+      selectedFilter: Filter,
+      ReviewDataSet: filterdData
+    });
+  };
   onClickReviews = () => {
     try {
       const { top } = this.reviewsRef.current.getBoundingClientRect();
@@ -362,7 +392,7 @@ class ProductDetails extends React.Component {
       quantityChange,
       skuItem
     } = this.props;
-    console.log(product.sku, 'SkuOfProduct');
+    const { selectedFilter, filterChanged } = this.state;
     const { activeSpec, showReviews, productQty } = this.state;
     const {
       meta,
@@ -781,9 +811,12 @@ class ProductDetails extends React.Component {
                   added={added}
                   toggleReview={toggleReviewBox}
                 />
+                <Box mb={30}>
+                  <ReviewFilter selectedFilterProp={selectedFilter} onFilterChange={this.onFilterChange} />
+                </Box>
                 <Reviews
                   variant="col-12"
-                  reviewItems={reviews.data}
+                  reviewItems={filterChanged ? this.state.ReviewDataSet : reviews.data}
                   showReviews={showReviews}
                   showMoreReviews={this.showMoreReviews}
                 />
