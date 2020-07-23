@@ -58,7 +58,7 @@ import EmiModal from '../EmiModal';
 import Pincode from './Pincode';
 import ProductDetailsCarousel from './Carousel';
 import Video from './Video';
-import ReviewFilter from './ReviewFilter'
+import ReviewFilter from './ReviewFilter';
 
 /**
  * Images / Icons
@@ -257,9 +257,9 @@ class ProductDetails extends React.Component {
   onFilterChange = Filter => {
     const { reviews } = this.props;
     const filterdData = [];
-    reviews.data.map((review) => {
-      review.options.map((options) => {
-        if (Filter.value === "1-Star" && options.option_value == "1") {
+    reviews.data.map(review => {
+      review.options.map(options => {
+        if (Filter.value === '1-Star' && options.option_value == "1") {
           filterdData.push(review)
         } else if (Filter.value === "2-Star" && options.option_value == "2") {
           filterdData.push(review)
@@ -406,8 +406,8 @@ class ProductDetails extends React.Component {
       reviews: { count, rating }
     } = product;
     const {
- description, product_height: height, product_width: width, product_depth: depth
-} = attributes;
+      description, product_height: height, product_width: width, product_depth: depth
+    } = attributes;
     const simpleSku = Object.keys(simples)[0];
     const { name, price, special_price: specialPrice } = meta;
     const checkSpecialPrice = Number(specialPrice) || Number(price);
@@ -549,21 +549,21 @@ class ProductDetails extends React.Component {
                   </Box>
                 </ReviewDisplay>
               ) : (
-                <Box pl={4} pb={30}>
-                  <a
-                    variant="linkPrimary"
-                    href="#review-section"
-                    pl={10}
-                    ml={10}
-                    sx={{
-                      borderLeft: 'primary'
-                    }}
-                    style={{ color: '#f15a22' }}
-                  >
-                    Write a Review
-                  </a>
-                </Box>
-              )}
+                  <Box pl={4} pb={30}>
+                    <a
+                      variant="linkPrimary"
+                      href="#review-section"
+                      pl={10}
+                      ml={10}
+                      sx={{
+                        borderLeft: 'primary'
+                      }}
+                      style={{ color: '#f15a22' }}
+                    >
+                      Write a Review
+                    </a>
+                  </Box>
+                )}
 
               {/* Color Options */}
               {colorproducts.length > 0 && (
@@ -615,8 +615,8 @@ class ProductDetails extends React.Component {
                       </a>
                     </Button>
                   ) : (
-                    ''
-                  )}
+                      ''
+                    )}
                   {/*
                 {offerImage && offerImageRedirect && (
                   <a rel="noopener noreferrer" href={offerImageRedirect}>
@@ -794,36 +794,33 @@ class ProductDetails extends React.Component {
             </Box>
 
             {/* Review List and Add review */}
-            {!!reviewsData.length && (
-              <Box id="review-section" pt={30}>
-                <Box textAlign="center" mb={30}>
-                  <Heading variant="heading.regular">Reviews</Heading>
-                </Box>
-                <AddReview
-                  ratings={weightedRating}
-                  reviews={reviewsData.length}
-                  count={5}
-                  variant="col-8"
-                  catalogId={groupedattributes.id_catalog_config}
-                  loaded
-                  onClickSubmit={this.addReview}
-                  adding={adding}
-                  added={added}
-                  toggleReview={toggleReviewBox}
-                />
-                <Box mb={30}>
-                  <ReviewFilter selectedFilterProp={selectedFilter} onFilterChange={this.onFilterChange} />
-                </Box>
-                <Reviews
-                  variant="col-12"
-                  reviewItems={filterChanged ? this.state.ReviewDataSet : reviews.data}
-                  showReviews={showReviews}
-                  showMoreReviews={this.showMoreReviews}
-                />
+            <Box id="review-section" pt={30}>
+              <Box textAlign="center" mb={30}>
+                <Heading variant="heading.regular">Reviews</Heading>
               </Box>
-            )}
+              <AddReview
+                ratings={weightedRating}
+                reviews={reviewsData.length}
+                count={5}
+                variant="col-8"
+                catalogId={groupedattributes.id_catalog_config}
+                loaded
+                onClickSubmit={this.addReview}
+                adding={adding}
+                added={added}
+                toggleReview={toggleReviewBox}
+              />
+              <Box mb={30}>
+                <ReviewFilter selectedFilterProp={selectedFilter} onFilterChange={this.onFilterChange} />
+              </Box>
+              <Reviews
+                variant="col-12"
+                reviewItems={filterChanged ? this.state.ReviewDataSet : reviews.data}
+                showReviews={showReviews}
+                showMoreReviews={this.showMoreReviews}
+              />
+            </Box>
           </Box>
-
           {/* Combined Offers */}
           {combinedbuy.length > 0 && (
             <Box id="combined_buy_offers" pt={36}>
