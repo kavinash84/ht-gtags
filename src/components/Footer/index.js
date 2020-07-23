@@ -40,6 +40,8 @@ const instaIcon = require('../../../static/instagram.svg');
 const pinIcon = require('../../../static/pinterest.svg');
 const bajajFinserveIcon = require('../../../static/bajaj-finserv.png');
 
+const FooterLinks = ['Furniture', 'Home Furnishings', 'Home Décor', 'Home Decor', 'Tableware', 'Kitchenware', 'Bath'];
+
 const mapStateToProps = ({ services, homepage, notifs }) => ({
   menuItems: homepage.menu.data,
   subscribe: services.footer,
@@ -132,8 +134,8 @@ class Footer extends React.Component {
   };
 
   render() {
-    // let { menuItems } = this.props;
-    // menuItems = menuItems.filter(item => FooterLinks.includes(item.name));
+    let { menuItems } = this.props;
+    menuItems = menuItems.filter(item => FooterLinks.includes(item.name));
 
     const {
  email, emailError, emailErrorMessage, already
@@ -141,6 +143,32 @@ class Footer extends React.Component {
     return (
       <Section bg="bgFooter" pt={30} pb={10} mb={0}>
         <Container variant="container">
+          <Row m="0" mb="2rem" flexWrap="nowrap" justifyContent="space-between">
+            {menuItems.map(menu =>
+                menu.children &&
+                menu.visibility === 'on' && (
+                  <Box key={menu.name} display="flexEqual">
+                    <Heading color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="18px">
+                      {menu.name}
+                    </Heading>
+                    <Ul>
+                      {/*eslint-disable*/}
+                      {menu.children.map(
+                        (subMenu, index) =>
+                          subMenu.visibility === 'on' &&
+                          index < 11 && (
+                            <Li key={subMenu.name}>
+                              <Link to={`/${subMenu.url_key}`}>
+                                <Text variant="footerLink"> {subMenu.name}</Text>
+                              </Link>
+                            </Li>
+                          )
+                      )}
+                      {/* eslint-enable */}
+                    </Ul>
+                  </Box>
+                ))}
+          </Row>
           <Row>
             <Col width={[1, 2 / 3, 3 / 12]}>
               <Box mb={24}>
@@ -297,10 +325,12 @@ class Footer extends React.Component {
 }
 
 Footer.defaultProps = {
+  menuItems: [],
   subscribe: {}
 };
 
 Footer.propTypes = {
+  menuItems: PropTypes.array,
   sendFormData: PropTypes.func.isRequired,
   subscribe: PropTypes.object
 };

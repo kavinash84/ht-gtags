@@ -63,7 +63,7 @@ const EMI = ({
               },
               '& td': {
                 border: 'secondary',
-                p: '5px 10px',
+                p: '5px 8px',
                 fontSize: 14
               },
               '& th': {

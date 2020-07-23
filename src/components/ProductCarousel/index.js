@@ -15,8 +15,9 @@ import ProductCarouselItem from './ProductCarouselItem';
 import SlickSlider from '../SlickSlider';
 
 const adjustSlides = length => ({
-  slidesToShow: length >= 4 ? 4 : length,
-  slidesToScroll: length === 1 ? 0 : 1
+  slidesToShow: length >= 4 ? 4 : 4,
+  slidesToScroll: length === 1 ? 0 : 1,
+  infinite: !(length < 4)
 });
 
 const ProductCarousel = ({
@@ -25,9 +26,9 @@ const ProductCarousel = ({
   length
   // height
 }) => (
-  <Box>
+  <Box width={1}>
     <Title title={title} />
-    <SlickSlider settings={adjustSlides(length)}>
+    <SlickSlider settings={adjustSlides(length)} className="recommendedSlider">
       {data.map((item, index) => (
         <div key={String(index)}>
           <ProductCarouselItem

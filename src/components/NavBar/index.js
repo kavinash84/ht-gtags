@@ -91,7 +91,7 @@ class NavBar extends Component {
               <Card sx={{ position: 'absolute', zIndex: '1111' }} variant="card.moreDropdown" px={0} py={0}>
                 {more &&
                   more.map((menuItem, i) => (
-                    <Box>
+                    <Box key={`${menuItem.id}_${String(i)}`}>
                       <Text
                         as={Link}
                         variant="menuLight"
@@ -99,7 +99,6 @@ class NavBar extends Component {
                         onMouseEnter={handleEnter('')}
                         title={menuItem.name}
                         to={`/${menuItem.url_key}`}
-                        key={`${menuItem.id}_${String(i)}`}
                       >
                         {menuItem.name || 'Hometown'}
                       </Text>

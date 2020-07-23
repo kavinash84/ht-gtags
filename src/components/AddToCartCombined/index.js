@@ -72,27 +72,26 @@ const AddToCartCombined = ({
   const addLoading = addingToCart && stateId === itemId;
   return (
     <Fragment>
-      <Fragment>
-        {!checkStatus ? (
-          <Button
-            variant="outline.primary.large"
-            width={1}
-            disabled={addLoading}
-            onClick={onClick(skusData, session, pincode)(addToCartCombined)}
-          >
-            {addLoading && <Image className="spin" src={LoaderIcon} width="18px" mr={10} />}
-            {addLoading ? 'Adding..' : `Add ${products && products.length ? `${products.length} items` : ''} to Cart`}
-          </Button>
-        ) : (
-          <Row mx={0} alignItems="center">
-            <Box as={Link} to={CART_URL} width={1}>
-              <Button variant="outline.primary.large" width={1}>
-                Added to Cart
-              </Button>
-            </Box>
-          </Row>
-        )}
-      </Fragment>
+      {!checkStatus ? (
+        <Button
+          variant="outline.primary.large"
+          width={240}
+          disabled={addLoading}
+          onClick={onClick(skusData, session, pincode)(addToCartCombined)}
+          sx={{ fontSize: 14 }}
+        >
+          {addLoading && <Image className="spin" src={LoaderIcon} width="18px" mr={10} />}
+          {addLoading ? 'Adding..' : `Add ${products && products.length ? `${products.length} items` : ''} to Cart`}
+        </Button>
+      ) : (
+        <Row mx={0} alignItems="center">
+          <Box as={Link} to={CART_URL} width={1}>
+            <Button variant="outline.primary.large" width={240} sx={{ fontSize: 14 }}>
+              Added to Cart
+            </Button>
+          </Box>
+        </Row>
+      )}
     </Fragment>
   );
 };
