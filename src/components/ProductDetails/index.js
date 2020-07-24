@@ -794,36 +794,33 @@ class ProductDetails extends React.Component {
             </Box>
 
             {/* Review List and Add review */}
-            {!!reviewsData.length && (
-              <Box id="review-section" pt={30}>
-                <Box textAlign="center" mb={30}>
-                  <Heading variant="heading.regular">Reviews</Heading>
-                </Box>
-                <AddReview
-                  ratings={weightedRating}
-                  reviews={reviewsData.length}
-                  count={5}
-                  variant="col-8"
-                  catalogId={groupedattributes.id_catalog_config}
-                  loaded
-                  onClickSubmit={this.addReview}
-                  adding={adding}
-                  added={added}
-                  toggleReview={toggleReviewBox}
-                />
-                <Box mb={30}>
-                  <ReviewFilter selectedFilterProp={selectedFilter} onFilterChange={this.onFilterChange} />
-                </Box>
-                <Reviews
-                  variant="col-12"
-                  reviewItems={filterChanged ? this.state.ReviewDataSet : reviews.data}
-                  showReviews={showReviews}
-                  showMoreReviews={this.showMoreReviews}
-                />
+            <Box id="review-section" pt={30}>
+              <Box textAlign="center" mb={30}>
+                <Heading variant="heading.regular">Reviews</Heading>
               </Box>
-            )}
+              <AddReview
+                ratings={weightedRating}
+                reviews={reviewsData.length}
+                count={5}
+                variant="col-8"
+                catalogId={groupedattributes.id_catalog_config}
+                loaded
+                onClickSubmit={this.addReview}
+                adding={adding}
+                added={added}
+                toggleReview={toggleReviewBox}
+              />
+              <Box mb={30}>
+                <ReviewFilter selectedFilterProp={selectedFilter} onFilterChange={this.onFilterChange} />
+              </Box>
+              <Reviews
+                variant="col-12"
+                reviewItems={filterChanged ? this.state.ReviewDataSet : reviews.data}
+                showReviews={showReviews}
+                showMoreReviews={this.showMoreReviews}
+              />
+            </Box>
           </Box>
-
           {/* Combined Offers */}
           {combinedbuy.length > 0 && (
             <Box id="combined_buy_offers" pt={36}>
