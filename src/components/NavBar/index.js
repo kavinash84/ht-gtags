@@ -14,6 +14,9 @@ import Label from 'hometown-components-dev/lib/LabelHtV1';
 import LinkRedirect from 'hometown-components-dev/lib/LinkRedirectHtV1';
 import Row from 'hometown-components-dev/lib/RowHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+
+const dropdown = require('../../../static/dropdown_arrow.svg');
 
 class NavBar extends Component {
   render() {
@@ -35,26 +38,38 @@ class NavBar extends Component {
         <Container pr="0" pl="0">
           <Row variant="row.nav">
             {main.map((menuItem, i) => (
-              <Text
-                as={Link}
-                variant="menu"
-                onClick={exitOnClick}
-                title={menuItem.name}
-                to={`/${menuItem.url_key}`}
-                key={`${menuItem.id}_${String(i)}`}
-                onMouseEnter={handleEnter(menuItem.id)}
-              >
-                {menuItem.name === 'Hot Deals' ? (
-                  <Fragment>
-                    <Label as={Absolute} variant="menuNew">
-                      New
-                    </Label>
-                    {menuItem.name}
-                  </Fragment>
-                ) : (
-                  menuItem.name
-                )}
-              </Text>
+              <Fragment>
+                <Text
+                  as={Link}
+                  variant="menu"
+                  onClick={exitOnClick}
+                  title={menuItem.name}
+                  to={`/${menuItem.url_key}`}
+                  key={`${menuItem.id}_${String(i)}`}
+                  onMouseEnter={handleEnter(menuItem.id)}
+                >
+                  {menuItem.name === 'Hot Deals' ? (
+                    <Fragment>
+                      <Label as={Absolute} variant="menuNew">
+                        New
+                      </Label>
+                      {menuItem.name}
+                    </Fragment>
+                  ) : (
+                    menuItem.name
+                  )}
+                </Text>
+                <Image
+                  sx={{ cursor: 'pointer' }}
+                  display={['block', 'block', 'none']}
+                  width={12}
+                  ml={4}
+                  mb={-2}
+                  src={dropdown}
+                  alt=""
+                  onMouseEnter={handleEnter(menuItem.id)}
+                />
+              </Fragment>
             ))}
             <Text
               as={Link}
@@ -88,6 +103,28 @@ class NavBar extends Component {
               >
                 <Text variant="menu">More</Text>
               </Button>
+              <Image
+                sx={{
+                  '& ~ div': {
+                    display: 'none',
+                    '&:hover': {
+                      display: 'block'
+                    }
+                  },
+                  '&:hover': {
+                    '& ~ div': {
+                      display: 'block'
+                    }
+                  },
+                  cursor: 'pointer'
+                }}
+                display={['block', 'block', 'none']}
+                width={12}
+                ml={4}
+                mb={-2}
+                src={dropdown}
+                alt=""
+              />
               <Card sx={{ position: 'absolute', zIndex: '1111' }} variant="card.moreDropdown" px={0} py={0}>
                 {more &&
                   more.map((menuItem, i) => (

@@ -31,37 +31,39 @@ class TrackOrder extends Component {
     const error = data.error || '';
     return (
       <BoxHtV1>
-        <TitleBar title="Track Order(s)" />
+        <TitleBar marginLeft={20} title="Track Order(s)" />
         <SectionHtV1 display="block" p="0" pb="1rem" mb="0" height="auto">
           <ContainerHtV1 type="container" pr="0.5rem" pl="0.5rem">
             <BoxHtV1 type="block" pt="2rem" pb="2.5rem">
               <RowHtV1 display="block" mr="0" ml="0">
                 <form onSubmit={handleSubmit}>
-                  <BoxHtV1 col="5">
-                    <FormInput
-                      size="default"
-                      label="Order Number"
-                      type="text"
-                      placeholder=""
-                      onChange={handleChange}
-                      value={orderId}
-                      required
-                    />
-                  </BoxHtV1>
-                  <BoxHtV1 col="5" pt="0.875rem" pl="1rem">
-                    {loading ? (
-                      <ButtonHtV1 btnType="primary" fontFamily="regular" height="38px" mt="1rem" type="submit">
-                        <span>
-                          PLEASE WAIT
-                          <ImageHtV1 className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />
-                        </span>
-                      </ButtonHtV1>
-                    ) : (
-                      <ButtonHtV1 btnType="primary" fontFamily="regular" height="38px" mt="1rem" type="submit">
-                        SUBMIT
-                      </ButtonHtV1>
-                    )}
-                  </BoxHtV1>
+                  <RowHtV1 ml={0}>
+                    <BoxHtV1 col="5">
+                      <FormInput
+                        size="default"
+                        label="Order Number"
+                        type="text"
+                        placeholder=""
+                        onChange={handleChange}
+                        value={orderId}
+                        required
+                      />
+                    </BoxHtV1>
+                    <BoxHtV1 col="5" pt="0.875rem" pl="1rem">
+                      {loading ? (
+                        <ButtonHtV1 btnType="primary" fontFamily="regular" height="38px" mt="1rem" type="submit">
+                          <span>
+                            PLEASE WAIT
+                            <ImageHtV1 className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />
+                          </span>
+                        </ButtonHtV1>
+                      ) : (
+                        <ButtonHtV1 btnType="primary" fontFamily="regular" height="38px" mt="1rem" type="submit">
+                          SUBMIT
+                        </ButtonHtV1>
+                      )}
+                    </BoxHtV1>
+                  </RowHtV1>
                 </form>
               </RowHtV1>
               {orders.length ? (
