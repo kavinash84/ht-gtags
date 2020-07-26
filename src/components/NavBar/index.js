@@ -21,7 +21,7 @@ const dropdown = require('../../../static/dropdown_arrow.svg');
 class NavBar extends Component {
   render() {
     const {
- menuItems, handleEnter, handleLeave, exitOnClick
+ menuItems, handleEnter, handleLeave, handleClick, exitOnClick
 } = this.props;
     const cats = menuItems
       .filter(menu => menu.visibility === 'on' && menu.sort_order && !Number.isNaN(parseInt(menu.sort_order, 10)))
@@ -60,14 +60,13 @@ class NavBar extends Component {
                   )}
                 </Text>
                 <Image
-                  sx={{ cursor: 'pointer' }}
                   display={['block', 'block', 'none']}
                   width={12}
                   ml={4}
                   mb={-2}
                   src={dropdown}
                   alt=""
-                  onMouseEnter={handleEnter(menuItem.id)}
+                  onClick={handleClick(menuItem.id)}
                 />
               </Fragment>
             ))}
@@ -106,17 +105,13 @@ class NavBar extends Component {
               <Image
                 sx={{
                   '& ~ div': {
-                    display: 'none',
-                    '&:hover': {
-                      display: 'block'
-                    }
+                    display: 'none'
                   },
-                  '&:hover': {
+                  '&:click': {
                     '& ~ div': {
                       display: 'block'
                     }
-                  },
-                  cursor: 'pointer'
+                  }
                 }}
                 display={['block', 'block', 'none']}
                 width={12}
@@ -208,6 +203,7 @@ NavBar.defaultProps = {
 NavBar.propTypes = {
   menuItems: PropTypes.array,
   handleEnter: PropTypes.func.isRequired,
+  handleClick: PropTypes.func.isRequired,
   handleLeave: PropTypes.func.isRequired,
   exitOnClick: PropTypes.func.isRequired
 };
