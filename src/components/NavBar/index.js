@@ -35,8 +35,8 @@ class NavBar extends Component {
 
     return (
       <Box onMouseLeave={handleLeave}>
-        <Container pr="0" pl="0">
-          <Row variant="row.nav">
+        <Container pr="0" pl="0" sx={{ overflowX: ['auto', 'auto', 'inherit'] }}>
+          <Row variant="row.nav" pt={[8, 8, 0]}>
             {main.map((menuItem, i) => (
               <Fragment>
                 <Text
@@ -47,6 +47,7 @@ class NavBar extends Component {
                   to={`/${menuItem.url_key}`}
                   key={`${menuItem.id}_${String(i)}`}
                   onMouseEnter={handleEnter(menuItem.id)}
+                  minWidth="auto"
                 >
                   {menuItem.name === 'Hot Deals' ? (
                     <Fragment>
@@ -67,6 +68,7 @@ class NavBar extends Component {
                   src={dropdown}
                   alt=""
                   onClick={handleClick(menuItem.id)}
+                  sx={{ flexShrink: 0 }}
                 />
               </Fragment>
             ))}
@@ -78,6 +80,7 @@ class NavBar extends Component {
               target="_blank"
               rel="noopener noreferrer"
               onClick={exitOnClick}
+              minWidth="auto"
             >
               Modular Kitchens
             </Text>
@@ -86,6 +89,7 @@ class NavBar extends Component {
             <Box sx={{ position: 'relative' }}>
               <Button
                 variant="link"
+                minWidth="auto"
                 sx={{
                   '& ~ div': {
                     display: 'none',

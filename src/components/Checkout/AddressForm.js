@@ -167,12 +167,12 @@ const AddressForm = props => {
         </Col>
         <Col variant="col-6">
           <FormInput
-            label="City *"
+            label="State *"
             type="text"
             placeholder=""
-            value={city}
-            feedBackError={cityFeedBackError}
-            feedBackMessage={cityFeedBackMessage}
+            value={state}
+            feedBackError={stateFeedBackError}
+            feedBackMessage={stateFeedBackMessage}
             readOnly
             variant="input"
           />
@@ -181,12 +181,12 @@ const AddressForm = props => {
       <Row>
         <Col variant="col-6">
           <FormInput
-            label="State *"
+            label="City *"
             type="text"
             placeholder=""
-            value={state}
-            feedBackError={stateFeedBackError}
-            feedBackMessage={stateFeedBackMessage}
+            value={city}
+            feedBackError={cityFeedBackError}
+            feedBackMessage={cityFeedBackMessage}
             readOnly
             variant="input"
           />

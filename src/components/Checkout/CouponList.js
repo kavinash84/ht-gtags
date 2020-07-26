@@ -56,7 +56,7 @@ class CouponList extends React.Component {
                   key={item.couponCode}
                   px={10}
                   py={10}
-                  sx={{ orderBottom: 'dividerLight' }}
+                  sx={{ borderBottom: 'dividerLight' }}
                 >
                   <Label
                     htmlFor={`coupon-${String(index)}`}
@@ -64,20 +64,21 @@ class CouponList extends React.Component {
                       handleClick(item.couponCode);
                     }}
                   >
-                    <Flex alignItems="center">
-                      <input
+                    <Flex>
+                      <Box
+                        as="input"
                         checked={item.couponCode.toLowerCase() === appliedCoupon.toLowerCase()}
                         type="radio"
                         name="coupons"
                         id={`coupon-${String(index)}`}
+                        sx={{ marginTop: 10 }}
                       />
                       <Flex flexDirection="column">
                         <Text
                           variant="small"
                           as="span"
                           mx={10}
-                          mt={20}
-                          px={8}
+                          px={10}
                           py={8}
                           sx={{
                             border: '1px dashed #d5d5d5',
@@ -86,7 +87,7 @@ class CouponList extends React.Component {
                         >
                           {item.couponCode}
                         </Text>
-                        <Text as="span" variant="small" pt={8} pl={8}>
+                        <Text as="span" variant="small" px={10} pt={5}>
                           Flat{' '}
                           <b>
                             {item.discount_type === 'fixed'
@@ -97,7 +98,7 @@ class CouponList extends React.Component {
                         </Text>
                       </Flex>
                     </Flex>
-                    <Text fontSize={14} pt={10} pl={28}>
+                    <Text fontSize={14} pt={10} pl={24}>
                       {item.description}
                     </Text>
                   </Label>
