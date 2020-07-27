@@ -57,9 +57,9 @@ class NavBar extends Component {
               </Text>
             ))}
             <Text
-              as={Link}
+              as={LinkRedirect}
               variant="menu"
-              to="/modular-kitchens"
+              href="https://beta.hometown.in/modular-kitchens/"
               title="Modular Kitchens"
               target="_blank"
               rel="noopener noreferrer"
@@ -118,9 +118,9 @@ class NavBar extends Component {
                 </Box>
                 <Box>
                   <Text
-                    as={Link}
+                    as={LinkRedirect}
                     variant="menuLight"
-                    to="/design-build"
+                    href="https://beta.hometown.in/design-build/"
                     title="Design & Build"
                     target="_blank"
                     rel="noopener noreferrer"
