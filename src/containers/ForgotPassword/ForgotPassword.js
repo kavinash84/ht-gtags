@@ -108,7 +108,7 @@ export default class ForgotPasswordContainer extends Component {
         <Header />
 
         {/* Container */}
-        <Container mt={80}>
+        <Container mt={[40, 40, 80]}>
           <Row>
             <Box maxWidth="50%" pl={16} pr={16}>
               {loaded && !error && submitted ? (

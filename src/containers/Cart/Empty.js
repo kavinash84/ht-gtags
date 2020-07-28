@@ -8,42 +8,42 @@ import Text from 'hometown-components-dev/lib/TextHtV1';
 import Container from 'hometown-components-dev/lib/ContainerHtV1';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import Flex from 'hometown-components-dev/lib/FlexHtV1';
-import CategoryCarouselItem from 'components/CategoryCarousel/CategoryCarouselItem';
-import SlickSlider from 'components/SlickSlider';
+// import CategoryCarouselItem from 'components/CategoryCarousel/CategoryCarouselItem';
+// import SlickSlider from 'components/SlickSlider';
 
-const popularCategories = [
-  {
-    image: 'https://www.hometown.in/media/product/14/1153/43705/1',
-    title: 'Lorem ipsum',
-    url_key: 'https://www.hometown.in/media/product/14/1153/43705/1'
-  },
-  {
-    image: 'https://www.hometown.in/media/product/14/1153/43705/1',
-    title: 'Lorem ipsum',
-    url_key: 'https://www.hometown.in/media/product/14/1153/43705/1'
-  },
-  {
-    image: 'https://www.hometown.in/media/product/14/1153/43705/1',
-    title: 'Lorem ipsum',
-    url_key: 'https://www.hometown.in/media/product/14/1153/43705/1'
-  },
-  {
-    image: 'https://www.hometown.in/media/product/14/1153/43705/1',
-    title: 'Lorem ipsum',
-    url_key: 'https://www.hometown.in/media/product/14/1153/43705/1'
-  },
-  {
-    image: 'https://www.hometown.in/media/product/14/1153/43705/1',
-    title: 'Lorem ipsum',
-    url_key: 'https://www.hometown.in/media/product/14/1153/43705/1'
-  }
-];
+// const popularCategories = [
+//   {
+//     image: 'https://www.hometown.in/media/product/14/1153/43705/1',
+//     title: 'Lorem ipsum',
+//     url_key: 'https://www.hometown.in/media/product/14/1153/43705/1'
+//   },
+//   {
+//     image: 'https://www.hometown.in/media/product/14/1153/43705/1',
+//     title: 'Lorem ipsum',
+//     url_key: 'https://www.hometown.in/media/product/14/1153/43705/1'
+//   },
+//   {
+//     image: 'https://www.hometown.in/media/product/14/1153/43705/1',
+//     title: 'Lorem ipsum',
+//     url_key: 'https://www.hometown.in/media/product/14/1153/43705/1'
+//   },
+//   {
+//     image: 'https://www.hometown.in/media/product/14/1153/43705/1',
+//     title: 'Lorem ipsum',
+//     url_key: 'https://www.hometown.in/media/product/14/1153/43705/1'
+//   },
+//   {
+//     image: 'https://www.hometown.in/media/product/14/1153/43705/1',
+//     title: 'Lorem ipsum',
+//     url_key: 'https://www.hometown.in/media/product/14/1153/43705/1'
+//   }
+// ];
 
-const adjustSlides = length => ({
-  slidesToShow: length >= 4 ? 4 : length,
-  slidesToScroll: 3,
-  autoplaySpeed: 5000
-});
+// const adjustSlides = length => ({
+//   slidesToShow: length >= 4 ? 4 : length,
+//   slidesToScroll: 3,
+//   autoplaySpeed: 5000
+// });
 
 const Empty = ({
  title, subTitle, btnName, url, children, subTitleWidth, ...props
@@ -92,7 +92,7 @@ const Empty = ({
         </Button>
       </Box>
     </Flex>
-    <Box>
+    {/* <Box>
       <Heading
         mt={66}
         mb={17}
@@ -113,7 +113,7 @@ const Empty = ({
           </div>
         ))}
       </SlickSlider>
-    </Box>
+    </Box> */}
   </Container>
 );
 

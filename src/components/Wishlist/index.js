@@ -31,8 +31,6 @@ const onClick = (list, dispatcher) => sku => e => {
 
 const isInWishList = (list, id) => list.includes(id);
 
-const styles = require('../Listing/Listing.scss');
-
 class Wishlist extends React.Component {
   render() {
     const {
@@ -54,13 +52,15 @@ class Wishlist extends React.Component {
         >
           My Wishlist: {list.length} items
         </Heading>
-        <Flex mx={-16}>
+        <Flex mx={-8}>
           {list.map((item, i) => (
             <Box
               key={`${
                 item.wishlist_info && item.wishlist_info.configurable_sku ? item.wishlist_info.configurable_sku : ''
               }_${String(i)}`}
-              className={styles.productWrapper}
+              width={1 / 4}
+              px={8}
+              // className={styles.productWrapper}
             >
               <Product
                 key={item.product_info.id}
@@ -95,16 +95,14 @@ class Wishlist extends React.Component {
                 setProductPosition={productPosition}
                 productURL={formatProductURL(item.product_info.data.name, item.product_info.data.sku)}
               />
-              <Box mt={15} width="65%">
+              <Box mt={10} width="65%">
                 <AddToCart
                   simpleSku={Object.keys(item.product_info.data.simples)[0]}
                   sku={item.product_info.data.sku}
                   itemId={item.product_info.id}
                   isSoldOut={item.product_info.soldout}
-                  btnType="btnOutline"
-                  btnColor="transparent"
-                  ta="left"
-                  fontSize="12px"
+                  size="medium"
+                  height={36}
                 />
               </Box>
             </Box>

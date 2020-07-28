@@ -24,7 +24,7 @@ const Product = props => {
             {imageURL => <Image alt={name} src={imageURL} width="100%" />}
           </ImageShimmer>
         </Box>
-        <Box mt={10}>
+        <Box>
           <Heading
             pb={8}
             color="rgba(51, 51, 51, 0.85)"

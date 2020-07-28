@@ -103,7 +103,7 @@ const customStyles = {
  * Common Components
  */
 const DescriptionButton = props => (
-  <Col>
+  <Col minWidth="auto">
     <Button
       variant="link"
       fontWeight={500}
@@ -111,7 +111,7 @@ const DescriptionButton = props => (
       py={20}
       color={props.active && '#fa6400'}
       textTransform="uppercase"
-      sx={{ textTransform: 'uppercase' }}
+      sx={{ textTransform: 'uppercase', whiteSpace: 'nowrap' }}
       {...props}
     />
   </Col>
@@ -358,11 +358,11 @@ class ProductDetails extends React.Component {
     items.map((item, i) =>
       Object.keys(item).map(key => (
         <DescriptionButton
+          key={String(i)}
           onClick={e => {
             e.preventDefault();
             this.setState({ activeSpec: i });
           }}
-          key={String(i)}
           active={i === this.state.activeSpec}
         >
           {key}
@@ -459,12 +459,12 @@ class ProductDetails extends React.Component {
           </script>
         </Helmet>
         <Container>
-          <Row mb={30}>
+          <Row mb={15}>
             <Col>
               <BreadCrumb breadcrumbs={breadcrumbs} />
             </Col>
           </Row>
-          <Row mb={70}>
+          <Row mb={40}>
             {/* Left Column */}
             <Col width={[1, 6 / 12, 6 / 12, 7 / 12]} pr={40}>
               <Box sx={{ position: 'relative' }}>
@@ -694,7 +694,10 @@ class ProductDetails extends React.Component {
               mx={0}
               sx={{
                 borderTop: 'dividerBold',
-                borderBottom: 'dividerBold'
+                borderBottom: 'dividerBold',
+                overflow: 'auto',
+                flexWrap: 'nowrap',
+                justifyContent: 'flex-start'
               }}
             >
               <DescriptionButton
@@ -729,7 +732,7 @@ class ProductDetails extends React.Component {
             )}
 
             {/* Usps */}
-            <Row mb={40} width="60%" justifyContent="space-between" mx="auto" flexWrap="nowrap">
+            <Row mb={40} width={['80%', '80%', '60%']} justifyContent="space-between" mx="auto" flexWrap="nowrap">
               <UspCol src={freeShippingIcon} text="Free Shipping" />
               <UspCol src={emiIcon} text="EMI Options" />
               <UspCol src={warrentyIcon} text="1 Year Warranty" />
