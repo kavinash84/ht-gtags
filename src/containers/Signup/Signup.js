@@ -19,7 +19,7 @@ export default class Signup extends Component {
           <Header />
 
           {/* Container */}
-          <Container mt={80}>
+          <Container mt={[40, 40, 80]}>
             <SignupFormContainer />
           </Container>
 

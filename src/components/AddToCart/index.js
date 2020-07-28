@@ -67,7 +67,9 @@ const AddToCart = ({
   quantity,
   quantityChange,
   skuItem,
-  cartData
+  cartData,
+  size,
+  height
 }) => {
   const checkStatus = checkSKUInCart(cartSKUs, sku);
   const checkSKUItem = checkSKUItemsInCart(cartData, sku, quantity);
@@ -77,13 +79,16 @@ const AddToCart = ({
   return (
     <Fragment>
       {isSoldOut ? (
-        <Button variant="outline.error.large">Out of Stock</Button>
+        <Button variant={`outline.error.${size}`} height={height}>
+          Out of Stock
+        </Button>
       ) : (
         <Fragment>
           {!checkStatus || !checkSKUItem ? (
             <Button
-              variant="outline.primary.large"
+              variant={`outline.primary.${size}`}
               width={1}
+              height={height}
               disabled={addLoading}
               onClick={e => {
                 if (quantityChange && updateQty !== 0 && checkStatus) {
@@ -127,7 +132,9 @@ AddToCart.defaultProps = {
   quantity: 1,
   quantityChange: false,
   skuItem: {},
-  cartData: {}
+  cartData: {},
+  size: 'large',
+  height: 44
 };
 
 AddToCart.propTypes = {
@@ -145,7 +152,9 @@ AddToCart.propTypes = {
   quantity: PropTypes.number,
   quantityChange: PropTypes.bool,
   skuItem: PropTypes.object,
-  cartData: PropTypes.object
+  cartData: PropTypes.object,
+  size: PropTypes.string,
+  height: PropTypes.number
 };
 
 export default connect(mapStateToProps, { ...actionCreators })(AddToCart);

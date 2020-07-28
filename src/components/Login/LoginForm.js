@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import LoginForm from 'hometown-components-dev/lib/Forms/LoginForm';
-import Row from 'hometown-components-dev/lib/Row';
-import Heading from 'hometown-components-dev/lib/Heading';
-import Img from 'hometown-components-dev/lib/Img';
-import Div from 'hometown-components-dev/lib/Div';
-import Text from 'hometown-components-dev/lib/Text';
-import FormInput from 'hometown-components-dev/lib/Forms/FormInput';
+import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
+import LoginFormWrapper from 'hometown-components-dev/lib/FormsHtV1/LoginFormHtV1';
 import ResponsiveModal from 'components/Modal';
+import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
+import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
+import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
 import { validateEmail, isBlank } from 'js-utility-functions';
 import { validateMobile } from 'utils/validation';
 import { allowNChar, allowTypeOf } from 'utils/helper';
@@ -126,8 +126,8 @@ export default class LoginFormContainer extends Component {
 } = this.props;
     const open = askContact && loginType && loginType === 'hometown';
     return (
-      <div>
-        <LoginForm
+      <BoxHtV1 padding={50}>
+        <LoginFormWrapper
           email={email}
           onChangeEmail={this.onChangeEmail}
           emailFeedBackError={emailError}
@@ -142,9 +142,9 @@ export default class LoginFormContainer extends Component {
           forgotUrl={FORGOT_PASSWORD_URL}
         />
         <ResponsiveModal classNames={{ modal: 'updateProfileModal' }} onCloseModal={this.handleModal} open={open}>
-          <Row display="block" mr="0" ml="0" mb="10px">
-            <Div col="12" ta="center">
-              <Heading
+          <RowHtV1 display="block" mr="0" ml="0" mb="10px">
+            <BoxHtV1 col="12" ta="center">
+              <HeadingHtV1
                 color="color676767"
                 mt="0"
                 mb="0"
@@ -154,13 +154,13 @@ export default class LoginFormContainer extends Component {
                 fontFamily="light"
               >
                 Update Profile
-              </Heading>
+              </HeadingHtV1>
               <Text color="color676767" ta="center">
                 Mobile number is required to login
               </Text>
-            </Div>
-          </Row>
-          <Div ta="center">
+            </BoxHtV1>
+          </RowHtV1>
+          <BoxHtV1 ta="center">
             <Text ta="center" fontSize="1.25rem" mb="0.625rem" mt="0" color="rgba(51, 51, 51, 0.85)">
               <form
                 onSubmit={this.onSubmitForm}
@@ -188,16 +188,16 @@ export default class LoginFormContainer extends Component {
                 {loading ? (
                   <span>
                     Please Wait
-                    <Img className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />
+                    <ImageHtV1 className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />
                   </span>
                 ) : (
                   'Update Contact Number'
                 )}
               </button>
             </Text>
-          </Div>
+          </BoxHtV1>
         </ResponsiveModal>
-      </div>
+      </BoxHtV1>
     );
   }
 }

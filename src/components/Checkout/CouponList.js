@@ -49,14 +49,14 @@ class CouponList extends React.Component {
             <Text fontSize={14} fontFamily="medium" mb={10}>
               Choose a Valid Coupon
             </Text>
-            <Box sx={{ border: 'dividerLight' }}>
+            <Box sx={{ border: 'dividerLight', overflow: 'auto', height: '250px' }}>
               {coupons.map((item, index) => (
                 <Box
                   className={`${item.couponCode === appliedCoupon ? styles.active : ''}`}
                   key={item.couponCode}
                   px={10}
                   py={10}
-                  sx={{ orderBottom: 'dividerLight' }}
+                  sx={{ borderBottom: 'dividerLight' }}
                 >
                   <Label
                     htmlFor={`coupon-${String(index)}`}
@@ -64,37 +64,41 @@ class CouponList extends React.Component {
                       handleClick(item.couponCode);
                     }}
                   >
-                    <Flex alignItems="center">
-                      <input
+                    <Flex>
+                      <Box
+                        as="input"
                         checked={item.couponCode.toLowerCase() === appliedCoupon.toLowerCase()}
                         type="radio"
                         name="coupons"
                         id={`coupon-${String(index)}`}
+                        sx={{ marginTop: 10 }}
                       />
-                      <Text
-                        variant="small"
-                        as="span"
-                        mx={10}
-                        px={8}
-                        py={8}
-                        sx={{
-                          border: '1px dashed #d5d5d5',
-                          textTransform: 'uppercase'
-                        }}
-                      >
-                        {item.couponCode}
-                      </Text>
-                      <Text as="span" variant="small">
-                        Flat{' '}
-                        <b>
-                          {item.discount_type === 'fixed'
-                            ? `Rs. ${parseInt(item.discount_amount, 10)}`
-                            : `${parseInt(item.discount_percentage, 10)} %`}
-                        </b>{' '}
-                        OFF
-                      </Text>
+                      <Flex flexDirection="column">
+                        <Text
+                          variant="small"
+                          as="span"
+                          mx={10}
+                          px={10}
+                          py={8}
+                          sx={{
+                            border: '1px dashed #d5d5d5',
+                            textTransform: 'uppercase'
+                          }}
+                        >
+                          {item.couponCode}
+                        </Text>
+                        <Text as="span" variant="small" px={10} pt={5}>
+                          Flat{' '}
+                          <b>
+                            {item.discount_type === 'fixed'
+                              ? `Rs. ${parseInt(item.discount_amount, 10)}`
+                              : `${parseInt(item.discount_percentage, 10)} %`}
+                          </b>{' '}
+                          OFF
+                        </Text>
+                      </Flex>
                     </Flex>
-                    <Text pt={10} pl={28}>
+                    <Text fontSize={14} pt={10} pl={24}>
                       {item.description}
                     </Text>
                   </Label>

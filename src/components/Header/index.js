@@ -59,6 +59,25 @@ export default class Header extends Component {
     );
   };
 
+  clickMenu = id => () => {
+    const { currentMenu } = this.state;
+    if (currentMenu === id) {
+      this.setState(
+        {
+          currentMenu: ''
+        },
+        this.setCurrentMenuData
+      );
+    } else {
+      this.setState(
+        {
+          currentMenu: id
+        },
+        this.setCurrentMenuData
+      );
+    }
+  };
+
   leaveMenu = () => {
     this.setState({
       hoverBox: false,
@@ -92,6 +111,7 @@ export default class Header extends Component {
           <NavBar
             exitOnClick={this.exitOnClick}
             handleEnter={this.enterMenu}
+            handleClick={this.clickMenu}
             handleLeave={this.leaveMenu}
             menuItems={menuItems}
           />

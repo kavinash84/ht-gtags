@@ -68,7 +68,7 @@ class Pincode extends React.Component {
               <LocationIcon color="bgPrimary" height={28} width={28} mr={5} ml={-7} />
               For delivery details
             </Text>
-            <Box width="55%" sx={{ position: 'relative' }}>
+            <Box width={['50%', '50%', '55%']} sx={{ position: 'relative' }}>
               <InputField
                 type="text"
                 variant="input"
