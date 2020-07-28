@@ -236,7 +236,8 @@ class ProductDetails extends React.Component {
       productQty: { value: 1, label: '1' },
       ReviewDataSet: [],
       selectedFilter: null,
-      filterChanged: false
+      filterChanged: false,
+      colorProducts: []
     };
   }
   componentDidMount() {
@@ -248,10 +249,14 @@ class ProductDetails extends React.Component {
     dispatch(getCombinedBuy(simpleSku, selectedPincode));
   }
   componentWillReceiveProps(nextProps) {
+    const { colorproducts } = this.props;
     if (nextProps.isLoggedIn) {
       this.setState({
         openLogin: false
       });
+    }
+    if (nextProps.colorproducts !== colorproducts) {
+      this.addProductToColorProduct(nextProps.colorproducts);
     }
   }
   onFilterChange = Filter => {
@@ -322,6 +327,11 @@ class ProductDetails extends React.Component {
     const { dispatch } = this.context.store;
     dispatch(addReview(sku, data));
   };
+  addProductToColorProduct = colorProducts => {
+    const { product } = this.props;
+    colorProducts.push(product);
+    this.setState({ colorProducts }, () => console.log(colorProducts, 'colorProducts'));
+  };
   toggleShowMore = () => {
     this.setState({
       showmore: !this.state.showmore
@@ -375,7 +385,6 @@ class ProductDetails extends React.Component {
       pincode,
       session,
       reviews,
-      colorproducts,
       relatedproductsList,
       deliveryInfo,
       emidata,
@@ -393,8 +402,9 @@ class ProductDetails extends React.Component {
       quantityChange,
       skuItem
     } = this.props;
-    const { selectedFilter, filterChanged } = this.state;
-    const { activeSpec, showReviews, productQty } = this.state;
+    const {
+ activeSpec, showReviews, productQty, colorProducts, selectedFilter, filterChanged
+} = this.state;
     const {
       meta,
       images,
@@ -567,13 +577,13 @@ class ProductDetails extends React.Component {
               )}
 
               {/* Color Options */}
-              {colorproducts.length > 0 && (
+              {colorProducts.length > 0 && (
                 <Box pb={30}>
                   <Heading fontSize="1em" color="textDark" fontFamily="medium" mb={15}>
                     Color Options
                   </Heading>
                   <ColorOption
-                    data={colorproducts}
+                    data={colorProducts}
                     showmorecolorproducts={showmorecolorproducts}
                     toggleShowMoreColorProducts={this.toggleShowMoreColorProducts}
                     currentlySelectedProductSku={product.sku}
