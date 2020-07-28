@@ -20,7 +20,6 @@ import { validateAddress } from 'utils/validation';
  */
 import Flex from 'hometown-components-dev/lib/FlexHtV1';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
-import Select from 'hometown-components-dev/lib/Select';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import Card from 'hometown-components-dev/lib/CardHtV1';
 import Col from 'hometown-components-dev/lib/ColHtV1';
@@ -73,8 +72,7 @@ class DeliveryAddress extends Component {
   };
   state = {
     openLogin: false,
-    addressform: false,
-    addressSelected: false
+    addressform: false
   };
   componentDidMount() {
     const { dispatch } = this.context.store;
@@ -320,8 +318,7 @@ class DeliveryAddress extends Component {
   handleClick = index => {
     const { addresses, setAddress, loadPincodeDetails } = this.props;
     this.setState({
-      addressform: false,
-      addressSelected: true
+      addressform: false
     });
     setAddress('shipping', addresses[index], index);
     loadPincodeDetails('shipping', addresses[index].pincode);
@@ -358,7 +355,7 @@ class DeliveryAddress extends Component {
       summary,
       results
     } = this.props;
-    const { addressform, addressSelected } = this.state;
+    const { addressform } = this.state;
     return (
       <Container my={[60, 40, 60]} px={[24, 24, 0]}>
         <Row>

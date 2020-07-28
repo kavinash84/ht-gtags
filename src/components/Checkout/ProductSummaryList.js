@@ -46,7 +46,6 @@ ProductSummaryList.defaultProps = {
 };
 ProductSummaryList.propTypes = {
   productItem: PropTypes.object,
-  qty: PropTypes.number.isRequired,
-  sku: PropTypes.string.isRequired
+  qty: PropTypes.number.isRequired
 };
 export default ProductSummaryList;

@@ -79,10 +79,10 @@ const renderGrid = (data, isProduct, showList) => (
       })}
       {showList && (
         <Box mt={20}>
-          <Link to={"/furniture/living-room-furniture/sofas/"}>
+          <Link to={'/furniture/living-room-furniture/sofas/'}>
             <Button width={1} type="button" fontSize={20} height={50}>
               See All
-          </Button>
+            </Button>
           </Link>
         </Box>
       )}
@@ -90,19 +90,19 @@ const renderGrid = (data, isProduct, showList) => (
   </Row>
 );
 const GridView = ({
-  data, isProduct, categoryName, showList
+ data, isProduct, categoryName, showList
 }) => (
-    <Section>
-      <Container>
-        {categoryName !== null && (
-          <Row justifyContent="center">
-            <Title title={categoryName} />
-          </Row>
-        )}
-        {renderGrid(data, isProduct, showList)}
-      </Container>
-    </Section>
-  );
+  <Section>
+    <Container>
+      {categoryName !== null && (
+        <Row justifyContent="center">
+          <Title title={categoryName} />
+        </Row>
+      )}
+      {renderGrid(data, isProduct, showList)}
+    </Container>
+  </Section>
+);
 
 GridView.defaultProps = {
   data: [],

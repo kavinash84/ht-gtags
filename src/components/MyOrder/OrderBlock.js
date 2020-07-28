@@ -101,13 +101,13 @@ class OrderBlock extends Component {
                     <Image className="spin" ml={5} src={LoaderIcon} display="inline" width={18} />
                   </Fragment>
                 ) : (
-                    'Track'
-                  )}
+                  'Track'
+                )}
               </Button>
             </Box>
           ) : (
-              ''
-            )}
+            ''
+          )}
         </Row>
         <Box className={styles.blockBody}>
           <Row m={0} mb="0.5rem">
@@ -223,8 +223,8 @@ class OrderBlock extends Component {
                       {order.status !== 'canceled' ? (
                         item.delivery_date_text || '--'
                       ) : (
-                          <span style={{ color: 'red' }}> Cancelled </span>
-                        )}
+                        <span style={{ color: 'red' }}> Cancelled </span>
+                      )}
                     </Text>
                   </Box>
                 </Flex>

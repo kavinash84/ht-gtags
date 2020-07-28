@@ -257,23 +257,23 @@ class ProductDetails extends React.Component {
   onFilterChange = Filter => {
     const { reviews } = this.props;
     const filterdData = [];
-    reviews.data.map(review => {
-      review.options.map(options => {
-        if (Filter.value === '1-Star' && options.option_value == "1") {
-          filterdData.push(review)
-        } else if (Filter.value === "2-Star" && options.option_value == "2") {
-          filterdData.push(review)
-        } else if (Filter.value === "3-Star" && options.option_value == "3") {
-          filterdData.push(review)
-        } else if (Filter.value === "4-Star" && options.option_value == "4") {
-          filterdData.push(review)
-        } else if (Filter.value === "5-Star" && options.option_value == "5") {
-          filterdData.push(review)
-        } else if (Filter.value === "All-ratings") {
-          filterdData.push(review)
+    reviews.data.forEach(review => {
+      review.options.forEach(options => {
+        if (Filter.value === '1-Star' && options.option_value === '1') {
+          filterdData.push(review);
+        } else if (Filter.value === '2-Star' && options.option_value === '2') {
+          filterdData.push(review);
+        } else if (Filter.value === '3-Star' && options.option_value === '3') {
+          filterdData.push(review);
+        } else if (Filter.value === '4-Star' && options.option_value === '4') {
+          filterdData.push(review);
+        } else if (Filter.value === '5-Star' && options.option_value === '5') {
+          filterdData.push(review);
+        } else if (Filter.value === 'All-ratings') {
+          filterdData.push(review);
         }
-      })
-    })
+      });
+    });
     this.setState({
       filterChanged: true,
       selectedFilter: Filter,
@@ -352,7 +352,9 @@ class ProductDetails extends React.Component {
       updateQuantityFlag(true);
     });
   };
-  renderAttributes = items =>
+  mmToInchConvert = value => Math.round(value / 25.4);
+
+  renderAttributes = items => {
     items.map((item, i) =>
       Object.keys(item).map(key => (
         <DescriptionButton
@@ -360,14 +362,13 @@ class ProductDetails extends React.Component {
             e.preventDefault();
             this.setState({ activeSpec: i });
           }}
+          key={String(i)}
           active={i === this.state.activeSpec}
         >
           {key}
         </DescriptionButton>
       )));
-  mmToInchConvert(value) {
-    return Math.round(value / 25.4);
-  }
+  };
   render() {
     const {
       product,
@@ -406,8 +407,8 @@ class ProductDetails extends React.Component {
       reviews: { count, rating }
     } = product;
     const {
-      description, product_height: height, product_width: width, product_depth: depth
-    } = attributes;
+ description, product_height: height, product_width: width, product_depth: depth
+} = attributes;
     const simpleSku = Object.keys(simples)[0];
     const { name, price, special_price: specialPrice } = meta;
     const checkSpecialPrice = Number(specialPrice) || Number(price);
@@ -549,21 +550,21 @@ class ProductDetails extends React.Component {
                   </Box>
                 </ReviewDisplay>
               ) : (
-                  <Box pl={4} pb={30}>
-                    <a
-                      variant="linkPrimary"
-                      href="#review-section"
-                      pl={10}
-                      ml={10}
-                      sx={{
-                        borderLeft: 'primary'
-                      }}
-                      style={{ color: '#f15a22' }}
-                    >
-                      Write a Review
-                    </a>
-                  </Box>
-                )}
+                <Box pl={4} pb={30}>
+                  <a
+                    variant="linkPrimary"
+                    href="#review-section"
+                    pl={10}
+                    ml={10}
+                    sx={{
+                      borderLeft: 'primary'
+                    }}
+                    style={{ color: '#f15a22' }}
+                  >
+                    Write a Review
+                  </a>
+                </Box>
+              )}
 
               {/* Color Options */}
               {colorproducts.length > 0 && (
@@ -615,8 +616,8 @@ class ProductDetails extends React.Component {
                       </a>
                     </Button>
                   ) : (
-                      ''
-                    )}
+                    ''
+                  )}
                   {/*
                 {offerImage && offerImageRedirect && (
                   <a rel="noopener noreferrer" href={offerImageRedirect}>
