@@ -59,8 +59,8 @@ ProfileBlock.propTypes = {
   url: PropTypes.string.isRequired
 };
 @connect(({ profile }) => ({
-  profile: profile.data,
-  response: profile
+  profile: profile.data
+  // response: profile
 }))
 class MyDashBoard extends Component {
   static propTypes = {
@@ -69,8 +69,8 @@ class MyDashBoard extends Component {
       email: PropTypes.string,
       full_name: PropTypes.string,
       gst: PropTypes.string
-    }),
-    response: PropTypes.object
+    })
+    // response: PropTypes.object
   };
   state = {
     email: '',
@@ -153,6 +153,11 @@ class MyDashBoard extends Component {
     );
   }
 }
-
+MyDashBoard.defaultProps = {
+  profile: {}
+};
+MyDashBoard.propTypes = {
+  profile: PropTypes.object
+};
 export default MyDashBoard;
 // export default connect(mapStateToProps, mapDispatchToProps)(MyDashBoard);

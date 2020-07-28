@@ -54,14 +54,14 @@ const onClick = (cartId, sessionId, pincode) => dispatcher => e => {
 };
 const countCartItemNumbers = results => {
   let cartItemsNumber = 0;
-  results.map(result => {
+  results.forEach(result => {
     cartItemsNumber += result.qty;
   });
   return cartItemsNumber;
 };
 const checkIsAnyProductOutofStoc = (results, outOfStockList) => {
   let isAnyProductOutofStoc = false;
-  results.map(result => {
+  results.forEach(result => {
     if (outOfStockList.includes(result.configurable_sku) === true) {
       isAnyProductOutofStoc = true;
     }
@@ -69,16 +69,13 @@ const checkIsAnyProductOutofStoc = (results, outOfStockList) => {
   return isAnyProductOutofStoc;
 };
 
-const mapStateToProps = ({
- pincode, cart, app, relatedproducts
-}) => ({
+const mapStateToProps = ({ pincode, cart, app }) => ({
   currentId: cart.key,
   cartChecked: cart.cartChecked,
   checkingCart: cart.checkingCart,
   cartUpdating: cart.cartUpdating,
   pincode: pincode.selectedPincode,
-  sessionId: app.sessionId,
-  relatedproductsList: relatedproducts.data
+  sessionId: app.sessionId
 });
 
 const Cart = ({
@@ -92,8 +89,7 @@ const Cart = ({
   checkCart,
   checkingCart,
   outOfStockList,
-  handlePincodeModal,
-  relatedproductsList
+  handlePincodeModal
 }) => {
   const cartItemLoading = customerCardId => cartUpdating && currentId === customerCardId;
   const isProductOutofStock = sku => outOfStockList.includes(sku);
@@ -380,8 +376,7 @@ Cart.propTypes = {
   checkCart: PropTypes.func.isRequired,
   checkingCart: PropTypes.bool,
   outOfStockList: PropTypes.array,
-  handlePincodeModal: PropTypes.func.isRequired,
-  relatedproductsList: PropTypes.array
+  handlePincodeModal: PropTypes.func.isRequired
 };
 
 Cart.defaultProps = {
@@ -391,8 +386,7 @@ Cart.defaultProps = {
   cartUpdating: false,
   currentId: '',
   checkingCart: false,
-  outOfStockList: [],
-  relatedproductsList: []
+  outOfStockList: []
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

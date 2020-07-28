@@ -476,7 +476,7 @@ PaymentOptions.propTypes = {
   toggleGateway: PropTypes.func.isRequired,
   setPaymentDetails: PropTypes.func.isRequired,
   summary: PropTypes.object,
-  // history: PropTypes.object,
+  history: PropTypes.object,
   session: PropTypes.string,
   paymentDetails: PropTypes.object.isRequired,
   submitting: PropTypes.bool,
