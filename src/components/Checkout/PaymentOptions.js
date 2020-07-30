@@ -91,7 +91,7 @@ class PaymentOptions extends Component {
       setPaymentDetails,
       summary,
       submitting,
-      // history,
+      history,
       session,
       paymentDetails,
       results,
@@ -205,24 +205,51 @@ class PaymentOptions extends Component {
                           </Label>
                         </Box>
                         <Box className={cartStyles.loadingCart}>
-                          <Heading>
-                            {/* eslint-disable*/}
-                            {isProductOutofStock(item.configurable_sku)
-                              ? 'This product is out of stock please remove before proceed.'
-                              : "Sorry, this product isn't deliverable to selected pincode."}
-                            <br />
-                            {/* eslint-enable */}
-                            <Link to="/checkout/delivery-address">
-                              <Label fontSize="1rem" fontFamily="light" color="primary" p="0" mt="10px" mb="0">
-                                Edit Address
-                              </Label>
-                            </Link>
-                            <Link to="/checkout/cart">
-                              <Label fontSize="1rem" fontFamily="light" color="primary" p="0" mt="10px" mb="0">
-                                / Edit Cart
-                              </Label>
-                            </Link>
-                          </Heading>
+                          <Row
+                            variant="row.contentCenter"
+                            sx={{
+                              padding: '50px'
+                            }}
+                          >
+                            <Heading
+                              sx={{
+                                color: 'white'
+                              }}
+                            >
+                              {/* eslint-disable*/}
+                              {isProductOutofStock(item.configurable_sku)
+                                ? 'This product is out of stock please remove before proceed.'
+                                : "Sorry, this product isn't deliverable to selected pincode."}
+                              <br />
+                              {/* eslint-enable */}
+                              <Link to="/checkout/delivery-address">
+                                <Label
+                                  className={cartStyles.editOption}
+                                  fontSize="1rem"
+                                  fontFamily="light"
+                                  color="primary"
+                                  p="0"
+                                  mt="10px"
+                                  mb="0"
+                                >
+                                  Edit Address
+                                </Label>
+                              </Link>
+                              <Link to="/checkout/cart">
+                                <Label
+                                  className={cartStyles.editOption}
+                                  fontSize="1rem"
+                                  fontFamily="light"
+                                  color="primary"
+                                  p="0"
+                                  mt="10px"
+                                  mb="0"
+                                >
+                                  / Edit Cart
+                                </Label>
+                              </Link>
+                            </Heading>
+                          </Row>
                         </Box>
                       </Row>
                     )}
@@ -230,7 +257,7 @@ class PaymentOptions extends Component {
                 ))}
               </Box>
             </Row>
-            <Row mr="0" ml="0" mb={20}>
+            <Row mr="0" ml="0" mb={20} mt={20}>
               <Box>
                 <Heading variant="heading.medium">Payment Method</Heading>
               </Box>
@@ -380,21 +407,27 @@ class PaymentOptions extends Component {
           {/* Order Summary */}
           <Col variant="col-4">
             <Box bg="sidebar" px={40} py={30}>
-              <OrderSummary
-                results={results}
-                itemsTotal={summary.items}
-                setDiscount={summary.combined_set_discount}
-                savings={summary.savings}
-                shipping={summary.shipping_charges}
-                totalCart={summary.total}
-                onClick={() => null}
-                discount={summary.coupon_discount}
-                itemsCount={summary.items_count}
-                hidebutton
-                hidecoupon
-              />
+              <Row className={cartStyles.orderSummaryCon}>
+                <Box>
+                  <OrderSummary
+                    history={history}
+                    itemsTotal={summary.items}
+                    setDiscount={summary.combined_set_discount}
+                    savings={summary.savings}
+                    shipping={summary.shipping_charges}
+                    totalCart={summary.total}
+                    onClick={() => null}
+                    discount={summary.coupon_discount}
+                    itemsCount={summary.items_count}
+                    hidebutton
+                    hidecoupon
+                  />
+                </Box>
+                <Box className={cartStyles.orderSummaryOverly} />
+              </Row>
               <Box width={1} pb={30}>
                 <Button
+                  type="default"
                   height={48}
                   fontSize={18}
                   width={1}
@@ -427,7 +460,7 @@ PaymentOptions.defaultProps = {
   summary: null,
   submitting: false,
   session: '',
-  // history: {},
+  history: {},
   results: [],
   outOfStockList: [],
   paymentFormData: {},
@@ -443,7 +476,7 @@ PaymentOptions.propTypes = {
   toggleGateway: PropTypes.func.isRequired,
   setPaymentDetails: PropTypes.func.isRequired,
   summary: PropTypes.object,
-  // history: PropTypes.object,
+  history: PropTypes.object,
   session: PropTypes.string,
   paymentDetails: PropTypes.object.isRequired,
   submitting: PropTypes.bool,

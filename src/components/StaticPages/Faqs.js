@@ -28,30 +28,34 @@ const FAQ = () => (
               </HeadingHtV1>
               {faqItem.data.map((faqContent, index) => (
                 <BoxHtV1 className={styles.collposeBlock} key={String(index)}>
-                  <HeadingHtV1
-                    className={styles.collopseHeadingHtV1}
-                    fontFamily="regular"
-                    fontSize="1rem"
-                    color="secondary"
-                    lineHeight="2"
-                    mb="1em"
-                    ellipsis={false}
-                  >
-                    <BoxHtV1 display="flex">
-                      <ImageHtV1 className={styles.close} src={CloseIcon} alt="Close" float="left" mr="0.625rem" />
-                      <ImageHtV1 className={styles.open} src={OpenIcon} alt="Open" float="left" mr="0.625rem" />
-                      {faqContent.que}
-                    </BoxHtV1>
-                    <TextHtV1
-                      className={styles.collopseContent}
-                      color="rgba(0,0,0,0.5)"
-                      fontSize="0.875rem"
-                      mb="1rem"
-                      ml="2.125rem"
-                      lh="1.5"
-                      dangerouslySetInnerHTML={{ __html: faqContent.ans }}
-                    />
-                  </HeadingHtV1>
+                  <button>
+                    <HeadingHtV1
+                      className={styles.collopseHeadingHtV1}
+                      fontFamily="regular"
+                      fontSize="1rem"
+                      color="secondary"
+                      lineHeight="2"
+                      mb="1em"
+                      ellipsis={false}
+                    >
+                      <BoxHtV1 display="flex">
+
+                        <ImageHtV1 className={styles.close} src={CloseIcon} alt="Close" float="left" mr="0.625rem" />
+                        <ImageHtV1 className={styles.open} src={OpenIcon} alt="Open" float="left" mr="0.625rem" />
+                        {faqContent.que}
+
+                      </BoxHtV1>
+                      <TextHtV1
+                        className={styles.collopseContent}
+                        color="rgba(0,0,0,0.5)"
+                        fontSize="0.875rem"
+                        mb="1rem"
+                        ml="2.125rem"
+                        lh="1.5"
+                        dangerouslySetInnerHTML={{ __html: faqContent.ans }}
+                      />
+                    </HeadingHtV1>
+                  </button>
                 </BoxHtV1>
               ))}
             </BoxHtV1>

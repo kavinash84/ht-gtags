@@ -70,7 +70,7 @@ const MyOrder = ({ page }) => (
       <Text variant="small" color="textLight" fontSize={12} fontFamily="light" pb={12}>
         ACCOUNT
       </Text>
-      <MenuItem to={MY_ORDER_URL} text="My Orders" color={page === 'order' ? 'primary' : 'textPrimary'} />
+      {/* <MenuItem to={MY_ORDER_URL} text="My Orders" color={page === 'order' ? 'primary' : 'textPrimary'} /> */}
       <MenuItem to={MY_PROFILE_URL} text="My Profile" color={page === 'profile' ? 'primary' : 'textPrimary'} />
       <MenuItem to={MY_ADDRESS_URL} text="My Address" color={page === 'address' ? 'primary' : 'textPrimary'} pb={0} />
     </Box>

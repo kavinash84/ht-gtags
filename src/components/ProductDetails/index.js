@@ -58,6 +58,7 @@ import EmiModal from '../EmiModal';
 import Pincode from './Pincode';
 import ProductDetailsCarousel from './Carousel';
 import Video from './Video';
+import ReviewFilter from './ReviewFilter';
 
 /**
  * Images / Icons
@@ -69,13 +70,25 @@ const fbIcon = require('../../../static/fb-pdp.svg');
 const email = require('../../../static/email-pdp.svg');
 const pinIcon = require('../../../static/pinterest-pdp.svg');
 
-const qtyOptions = [
-  { value: 1, label: '1' },
-  { value: 2, label: '2' },
-  { value: 3, label: '3' },
-  { value: 4, label: '4' },
-  { value: 5, label: '5' }
-];
+/**
+ * styles
+ */
+const styles = require('./productIndex.scss');
+
+const qtyOptions = sku => {
+  console.log('qtyOptions', sku);
+  if (sku.meta) {
+    let qty = sku.meta.quantity;
+    const options = [];
+    if (qty > 5) qty = 5;
+
+    for (let i = 1; i <= qty; i += 1) {
+      options.push({ value: i, label: i });
+    }
+    // console.log('QtyOption', options, qty);
+    return options;
+  }
+};
 
 const customStyles = {
   control: () => ({
@@ -220,7 +233,11 @@ class ProductDetails extends React.Component {
       showmorecolorproducts: true,
       activeSpec: 'description',
       showReviews: 2,
-      productQty: { value: 1, label: '1' }
+      productQty: { value: 1, label: '1' },
+      ReviewDataSet: [],
+      selectedFilter: null,
+      filterChanged: false,
+      colorProducts: []
     };
   }
   componentDidMount() {
@@ -232,12 +249,42 @@ class ProductDetails extends React.Component {
     dispatch(getCombinedBuy(simpleSku, selectedPincode));
   }
   componentWillReceiveProps(nextProps) {
+    const { colorproducts } = this.props;
     if (nextProps.isLoggedIn) {
       this.setState({
         openLogin: false
       });
     }
+    if (nextProps.colorproducts !== colorproducts) {
+      this.addProductToColorProduct(nextProps.colorproducts);
+    }
   }
+  onFilterChange = Filter => {
+    const { reviews } = this.props;
+    const filterdData = [];
+    reviews.data.forEach(review => {
+      review.options.forEach(options => {
+        if (Filter.value === '1-Star' && options.option_value === '1') {
+          filterdData.push(review);
+        } else if (Filter.value === '2-Star' && options.option_value === '2') {
+          filterdData.push(review);
+        } else if (Filter.value === '3-Star' && options.option_value === '3') {
+          filterdData.push(review);
+        } else if (Filter.value === '4-Star' && options.option_value === '4') {
+          filterdData.push(review);
+        } else if (Filter.value === '5-Star' && options.option_value === '5') {
+          filterdData.push(review);
+        } else if (Filter.value === 'All-ratings') {
+          filterdData.push(review);
+        }
+      });
+    });
+    this.setState({
+      filterChanged: true,
+      selectedFilter: Filter,
+      ReviewDataSet: filterdData
+    });
+  };
   onClickReviews = () => {
     try {
       const { top } = this.reviewsRef.current.getBoundingClientRect();
@@ -280,6 +327,11 @@ class ProductDetails extends React.Component {
     const { dispatch } = this.context.store;
     dispatch(addReview(sku, data));
   };
+  addProductToColorProduct = colorProducts => {
+    const { product } = this.props;
+    colorProducts.push(product);
+    this.setState({ colorProducts }, () => console.log(colorProducts, 'colorProducts'));
+  };
   toggleShowMore = () => {
     this.setState({
       showmore: !this.state.showmore
@@ -310,7 +362,9 @@ class ProductDetails extends React.Component {
       updateQuantityFlag(true);
     });
   };
-  renderAttributes = items =>
+  mmToInchConvert = value => Math.round(value / 25.4);
+
+  renderAttributes = items => {
     items.map((item, i) =>
       Object.keys(item).map(key => (
         <DescriptionButton
@@ -324,13 +378,13 @@ class ProductDetails extends React.Component {
           {key}
         </DescriptionButton>
       )));
+  };
   render() {
     const {
       product,
       pincode,
       session,
       reviews,
-      colorproducts,
       relatedproductsList,
       deliveryInfo,
       emidata,
@@ -348,7 +402,9 @@ class ProductDetails extends React.Component {
       quantityChange,
       skuItem
     } = this.props;
-    const { activeSpec, showReviews, productQty } = this.state;
+    const {
+ activeSpec, showReviews, productQty, colorProducts, selectedFilter, filterChanged
+} = this.state;
     const {
       meta,
       images,
@@ -479,7 +535,7 @@ class ProductDetails extends React.Component {
               </ServiceDetails>
 
               {/* Reviews */}
-              {!!weightedRating && reviewsData.length && (
+              {!!weightedRating && reviewsData.length ? (
                 <ReviewDisplay
                   ratings={weightedRating}
                   reviews={reviewsData.length}
@@ -503,18 +559,34 @@ class ProductDetails extends React.Component {
                     </a>
                   </Box>
                 </ReviewDisplay>
+              ) : (
+                <Box pl={4} pb={30}>
+                  <a
+                    variant="linkPrimary"
+                    href="#review-section"
+                    pl={10}
+                    ml={10}
+                    sx={{
+                      borderLeft: 'primary'
+                    }}
+                    style={{ color: '#f15a22' }}
+                  >
+                    Write a Review
+                  </a>
+                </Box>
               )}
 
               {/* Color Options */}
-              {colorproducts.length > 0 && (
+              {colorProducts.length > 0 && (
                 <Box pb={30}>
                   <Heading fontSize="1em" color="textDark" fontFamily="medium" mb={15}>
                     Color Options
                   </Heading>
                   <ColorOption
-                    data={colorproducts}
+                    data={colorProducts}
                     showmorecolorproducts={showmorecolorproducts}
                     toggleShowMoreColorProducts={this.toggleShowMoreColorProducts}
+                    currentlySelectedProductSku={product.sku}
                   />
                 </Box>
               )}
@@ -526,7 +598,7 @@ class ProductDetails extends React.Component {
                 </Text>
                 <Select
                   placeholder=""
-                  options={qtyOptions}
+                  options={qtyOptions(simples[simpleSku])}
                   value={productQty}
                   defaultValue={1}
                   styles={customStyles}
@@ -688,21 +760,27 @@ class ProductDetails extends React.Component {
                 <Box p={15} textAlign="center" sx={{ border: 'dividerLight' }}>
                   <Image src="https://www.hometown.in/media/product/89/2453/3-zoom.jpg" alt="" />
                 </Box>
-                <Box mt={36}>
-                  <Text
-                    variant="regular"
-                    fontSize={16}
-                    pb={20}
-                    pt={20}
-                    sx={{ borderTop: 'divider', borderBottom: 'divider' }}
+                <Box>
+                  <Row
+                    variant="row.contentCenter"
+                    mx={0}
+                    sx={{
+                      borderTop: 'dividerBold',
+                      borderBottom: 'dividerBold',
+                      padding: '20px 0',
+                      marginTop: '30px',
+                      justifyContent: 'flex-start'
+                    }}
                   >
-                    {`
-                    Overall Dimension (inches) :
-                    ${width && `Width : ${width} `}
-                    ${depth && `Depth : ${depth} `} 
-                    ${height && `Height : ${height} `}
-                  `}
-                  </Text>
+                    <span className={styles.overolDimension}>
+                      Overall Dimension <span className={styles.dimensionUnit}>(Inches)</span>
+                    </span>
+                    <span className={styles.dimensionSpans}>{width && `Width : ${this.mmToInchConvert(width)}" `}</span>
+                    <span className={styles.dimensionSpans}>{depth && `Depth : ${this.mmToInchConvert(depth)}" `}</span>
+                    <span className={styles.dimensionSpans}>
+                      {height && `Height : ${this.mmToInchConvert(height)}" `}
+                    </span>
+                  </Row>
                 </Box>
               </Box>
             )}
@@ -730,33 +808,33 @@ class ProductDetails extends React.Component {
             </Box>
 
             {/* Review List and Add review */}
-            {!!reviewsData.length && (
-              <Box id="review-section" pt={30}>
-                <Box textAlign="center" mb={30}>
-                  <Heading variant="heading.regular">Reviews</Heading>
-                </Box>
-                <AddReview
-                  ratings={weightedRating}
-                  reviews={reviewsData.length}
-                  count={5}
-                  variant="col-8"
-                  catalogId={groupedattributes.id_catalog_config}
-                  loaded
-                  onClickSubmit={this.addReview}
-                  adding={adding}
-                  added={added}
-                  toggleReview={toggleReviewBox}
-                />
-                <Reviews
-                  variant="col-12"
-                  reviewItems={reviews.data}
-                  showReviews={showReviews}
-                  showMoreReviews={this.showMoreReviews}
-                />
+            <Box id="review-section" pt={30}>
+              <Box textAlign="center" mb={30}>
+                <Heading variant="heading.regular">Reviews</Heading>
               </Box>
-            )}
+              <AddReview
+                ratings={weightedRating}
+                reviews={reviewsData.length}
+                count={5}
+                variant="col-8"
+                catalogId={groupedattributes.id_catalog_config}
+                loaded
+                onClickSubmit={this.addReview}
+                adding={adding}
+                added={added}
+                toggleReview={toggleReviewBox}
+              />
+              <Box mb={30}>
+                <ReviewFilter selectedFilterProp={selectedFilter} onFilterChange={this.onFilterChange} />
+              </Box>
+              <Reviews
+                variant="col-12"
+                reviewItems={filterChanged ? this.state.ReviewDataSet : reviews.data}
+                showReviews={showReviews}
+                showMoreReviews={this.showMoreReviews}
+              />
+            </Box>
           </Box>
-
           {/* Combined Offers */}
           {combinedbuy.length > 0 && (
             <Box id="combined_buy_offers" pt={36}>

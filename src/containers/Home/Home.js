@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import LazyLoad from 'react-lazyload';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
@@ -214,7 +213,7 @@ export default class Home extends Component {
               </Row>
               <Row>
                 <Col variant="colBasis" flexDirection="column">
-                  <Link to="/design-build">
+                  <a href="https://beta.hometown.in/design-build/" target="_blank0">
                     <Box mb={20} sx={{ position: 'relative' }}>
                       <Image src={sliderImage} />
                       <Image src={designBuildLogo} variant="image.logoHomeTown" />
@@ -222,10 +221,10 @@ export default class Home extends Component {
                     <Heading variant="heading.regular" textAlign="center">
                       Design and Build
                     </Heading>
-                  </Link>
+                  </a>
                 </Col>
                 <Col variant="colBasis" flexDirection="column">
-                  <Link to="/modular-kitchens">
+                  <a href="https://beta.hometown.in/modular-kitchens/" target="_blank1">
                     <Box mb={20} sx={{ position: 'relative' }}>
                       <Image src={bannerImage} />
                       <Image
@@ -236,7 +235,7 @@ export default class Home extends Component {
                     <Heading variant="heading.regular" textAlign="center">
                       Modular Kitchen
                     </Heading>
-                  </Link>
+                  </a>
                 </Col>
               </Row>
             </Container>

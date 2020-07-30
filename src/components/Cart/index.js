@@ -52,6 +52,22 @@ const onClick = (cartId, sessionId, pincode) => dispatcher => e => {
   e.preventDefault();
   dispatcher(cartId, sessionId, pincode);
 };
+const countCartItemNumbers = results => {
+  let cartItemsNumber = 0;
+  results.forEach(result => {
+    cartItemsNumber += result.qty;
+  });
+  return cartItemsNumber;
+};
+const checkIsAnyProductOutofStoc = (results, outOfStockList) => {
+  let isAnyProductOutofStoc = false;
+  results.forEach(result => {
+    if (outOfStockList.includes(result.configurable_sku) === true) {
+      isAnyProductOutofStoc = true;
+    }
+  });
+  return isAnyProductOutofStoc;
+};
 
 const mapStateToProps = ({ pincode, cart, app }) => ({
   currentId: cart.key,
@@ -77,6 +93,9 @@ const Cart = ({
 }) => {
   const cartItemLoading = customerCardId => cartUpdating && currentId === customerCardId;
   const isProductOutofStock = sku => outOfStockList.includes(sku);
+  const isAnyProductOutofStoc = checkIsAnyProductOutofStoc(results, outOfStockList);
+  const cartItemsNumber = countCartItemNumbers(results);
+
   return (
     <Container my={60}>
       <Row>
@@ -84,7 +103,7 @@ const Cart = ({
         <Box variant="col-8">
           <Row alignItems="center">
             <Box variant="col-8">
-              <Heading>My Shopping Cart : {results.length} Items</Heading>
+              <Heading>My Shopping Cart : {cartItemsNumber} Items</Heading>
             </Box>
             <Box variant="col-4" textAlign="right">
               <Button
@@ -92,6 +111,7 @@ const Cart = ({
                 display="flex"
                 alignItems="center"
                 ml="auto"
+                disabled={isAnyProductOutofStoc}
                 justifyContent="center"
                 width={1}
                 onClick={checkCartBeforeCheckout(checkCart, sessionId)}

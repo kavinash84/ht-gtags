@@ -394,6 +394,7 @@ export default function gaMiddleware() {
         if (type === 'PUSH_TO_DATALAYER' && pathname && pathname === '/payment-success') {
           const { data } = getState().paymentstatus;
           if (data) {
+            console.log(data, 'Data@#$%^&$$$$$$$$$$$$$');
             const {
               cart_products: products,
               net_order_amount,

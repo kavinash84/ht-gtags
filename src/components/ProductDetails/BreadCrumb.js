@@ -27,7 +27,7 @@ const BreadCrumb = ({ breadcrumbs }) => {
         return (
           <Li key={String(index)} itemProp="itemListElement" itemType="http://schema.org/ListItem" itemScope>
             <Link itemProp="item" to={`${link}`}>
-              <Text itemProp="name">{item.name}</Text>
+              <Text itemProp="name">{breadcrumbs.length - 1 !== index ? item.name : <strong>{item.name}</strong>}</Text>
               <meta itemProp="position" content={index + 2} />
             </Link>
           </Li>

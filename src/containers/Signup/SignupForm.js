@@ -64,7 +64,8 @@ export default class SignupFormContainer extends Component {
       phoneErrorMessage: 'Enter 10 Digits Valid Mobile Number',
       password: '',
       passwordError: false,
-      passwordErrorMessage: 'Password must contain atleast 6 and max 15 characters'
+      passwordErrorMessage: 'Password must contain atleast 6 and max 15 characters',
+      policyAccepted: false
     };
   }
   onChangeEmail = e => {
@@ -115,6 +116,13 @@ export default class SignupFormContainer extends Component {
       passwordError: checkError.error
     });
   };
+  onChangePolicy = e => {
+    const {
+      target: { value }
+    } = e;
+    console.log(value, '$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$');
+    this.setState({ policyAccepted: !this.state.policyAccepted });
+  };
   onSubmitSignup = e => {
     e.preventDefault();
     const {
@@ -154,7 +162,8 @@ export default class SignupFormContainer extends Component {
       phoneError,
       phoneErrorMessage,
       passwordError,
-      passwordErrorMessage
+      passwordErrorMessage,
+      policyAccepted
     } = this.state;
     const { loading } = this.props;
 
@@ -242,6 +251,8 @@ export default class SignupFormContainer extends Component {
                 onChangePassword={this.onChangePassword}
                 passwordFeedBackError={passwordError}
                 passwordFeedBackMessage={passwordErrorMessage}
+                onChangePolicy={this.onChangePolicy}
+                policyAccepted={policyAccepted}
                 onSubmitSignup={this.onSubmitSignup}
                 loading={loading}
                 loginUrl={LOGIN_URL}

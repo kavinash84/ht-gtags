@@ -111,9 +111,11 @@ export default class LoginViaOtp extends React.Component {
               </Flex>
             </form>
             {!resend && (
-              <Button onClick={handleResend} disabled={resendtimer > 0}>
-                RESEND OTP {resendtimer > 0 ? resendtimer : ''}
-              </Button>
+              <Flex marginTop="1.3em" justifyContent="center">
+                <Button onClick={handleResend} disabled={resendtimer > 0}>
+                  RESEND OTP {resendtimer > 0 ? resendtimer : ''}
+                </Button>
+              </Flex>
             )}
           </Fragment>
         )}

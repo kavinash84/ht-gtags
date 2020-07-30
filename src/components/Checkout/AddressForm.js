@@ -141,18 +141,19 @@ const AddressForm = props => {
           />
         </Col>
         {/* <Col variant="col-4" pl="10px">
-          <FormInput
-            id="add3"
-            label="Landmark,Village:"
-            type="textarea"
-            placeholder=""
-            onChange={e => onChangeAddress3(formType, e.target.value.replace(/#/g, ''))}
-            value={address3}
-            feedBackError={addressFeedBackError3}
-            feedBackMessage={addressFeedBackMessage3}
-            variant="input"
-          />
-        </Col> */}
+        <FormInput
+          id="add3"
+          label="Landmark,Village:"
+          type="textarea"
+          placeholder=""
+          onChange={e => onChangeAddress3(formType, e.target.value.replace(/#/g, ''))}
+          value={address3}
+          feedBackError={addressFeedBackError3}
+          feedBackMessage={addressFeedBackMessage3}
+          variant="input"
+        // height="auto"
+        />
+         </Col> */}
       </Row>
       <Row>
         <Col variant="col-6">

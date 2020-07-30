@@ -28,8 +28,9 @@
   }
 }
 .cartItem {
-  border: 1px solid #ededed;
+  border: 2px solid #ededed;
   padding: 1.5rem 1rem;
+  position: relative;
 }
 .pincodeCheck {
   border: 1px solid #ededed;
@@ -70,3 +71,5 @@
     left: 43px;
   }
 }
+.editOption:hover{
+cursor: pointer;}

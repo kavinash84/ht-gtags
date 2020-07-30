@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import Box from 'hometown-components-dev/lib/BoxHtV1';
-import Row from 'hometown-components-dev/lib/RowHtV1';
-import Button from 'hometown-components-dev/lib/ButtonHtV1';
-import Text from 'hometown-components-dev/lib/TextHtV1';
-import Image from 'hometown-components-dev/lib/ImageHtV1';
+import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
+import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
+import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
+import CardHtV1 from 'hometown-components-dev/lib/CardHtV1';
+import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
+import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
 import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
 import { addAddress, updateAddress } from 'redux/modules/myaddress';
 // Validators
@@ -66,6 +69,7 @@ export default class DeliveryAddress extends Component {
   };
   constructor(props) {
     super(props);
+    this.formRef = React.createRef();
     this.state = {
       name: '',
       address1: '',
@@ -231,6 +235,11 @@ export default class DeliveryAddress extends Component {
       [name]: value
     });
   };
+  scrollToFormRef = () => {
+    const heightQt = window.innerHeight / 1.5;
+    const currentOffsetQt = this.formRef.current.offsetTop;
+    window.scrollTo(0, currentOffsetQt + heightQt);
+  };
   handleClick = index => {
     const { data } = this.props;
     const {
@@ -271,6 +280,7 @@ export default class DeliveryAddress extends Component {
       name,
       addressId
     });
+    this.scrollToFormRef();
   };
   handleSubmit = e => {
     const { dispatch } = this.context.store;
@@ -295,6 +305,7 @@ export default class DeliveryAddress extends Component {
       phone: '',
       name: ''
     });
+    this.scrollToFormRef();
   };
   checkDisabled = () => {
     const {
@@ -336,125 +347,141 @@ export default class DeliveryAddress extends Component {
     const { data } = this.props;
     const { loading } = this.props;
     return (
-      <Box py={30}>
-        <Row mr="0" ml="0">
-          {data.map((item, index) => (
-            <Box
-              col="4"
-              pr="0.625rem"
-              width="33.24%"
-              float="left"
-              key={`${item.id_address_customer || '_'}_${String(index)}`}
-            >
-              <Button
-                className={`${styles.addressBtn} ${index === currentaddressindex && styles.active}`}
-                sx={{
-                  borderRadius: '4px',
-                  bg: '#ffffff',
-                  border: 'solid 2px #efefef',
-                  padding: '0.625rem 1rem',
-                  color: 'rgba(0, 0, 0, 0.6)',
-                  textAlign: 'left',
-                  lineHeight: '1.6',
-                  fontSize: '14px',
-                  width: '100%',
-                  height: '100%',
-                  minHeight: '135px',
-                  marginBottom: '10px',
-                  textTransform: 'none'
-                }}
-                onClick={() => this.handleClick(index)}
-              >
-                <b>{item.full_name}</b>
-                <br />
-                {item.address1 || ''}
-                {item.address2 && <br />}
-                {item.address2 || ''}
-                {item.address3 && <br />}
-                {item.address3 || ''}
-                <br />
-                {item.city || ''}, {item.pincode || ''}
-                <br />
-                {item.state || ''}
-                <br />
-              </Button>
-            </Box>
-          ))}
+      <BoxHtV1 type="block" mb="2rem">
+        {/* <MyMenu page="address" /> */}
+        <SectionHtV1
+          sx={{
+            display: 'flex',
+            boxShadow: 'none',
+            height: 'auto',
+            position: 'relative',
+            marginBottom: '0',
+            boxSizing: 'border-box',
+            padding: '1.25rem 0.9375rem 0.9375rem'
+          }}
+        >
+          <ContainerHtV1 type="container" pr="0" pl="0">
+            <RowHtV1 display="block" mr="0" ml="0">
+              {data.map((item, index) => (
+                <BoxHtV1
+                  col="4"
+                  pr="0.625rem"
+                  width="33.24%"
+                  float="left"
+                  key={`${item.id_address_customer || '_'}_${String(index)}`}
+                >
+                  <CardHtV1
+                    className={`${styles.addressBtn} ${index === currentaddressindex && styles.active}`}
+                    sx={{
+                      borderRadius: '4px',
+                      bg: '#ffffff',
+                      border: 'solid 2px #efefef',
+                      padding: '0.625rem 1rem',
+                      color: 'rgba(0, 0, 0, 0.6)',
+                      textAlign: 'left',
+                      lineHeight: '1.6',
+                      fontSize: '14px',
+                      width: '100%',
+                      height: '135px',
+                      marginBottom: '10px'
+                    }}
+                    onClick={() => this.handleClick(index)}
+                  >
+                    <div className={styles.addressOuter}>
+                      <div className={styles.addressInner}>
+                        <b>{item.full_name}</b>
+                        <br />
+                        {item.address1 || ''}
+                        {item.address2 && <br />}
+                        {item.address2 || ''}
+                        {item.address3 && <br />}
+                        {item.address3 || ''}
+                        <br />
+                        {item.city || ''}, {item.pincode || ''}
+                        <br />
+                        {item.state || ''}
+                        <br />
+                      </div>
+                    </div>
+                  </CardHtV1>
+                </BoxHtV1>
+              ))}
 
-          <Box col="2">
-            <Button className={styles.addAddressBtn} onClick={this.toggleAddAddresForm}>
-              <Image src={addIcon} alt="Add another address" />
-              <Text color="rgba(0, 0, 0, 0.6)" ta="center">
-                Add address
-              </Text>
-            </Button>
-          </Box>
-        </Row>
-        {editForm && (
-          <form onSubmit={this.handleSubmit}>
-            <Row display="block" mr="0" ml="0" mt="1rem">
-              <Box col="5">
-                <FormInput
-                  label="Full Name *"
-                  type="text"
-                  placeholder=""
-                  onChange={this.onChangeName}
-                  value={name}
-                  feedBackError={nameError}
-                  feedBackMessage={nameErrorMessage}
-                />
-                <FormInput
-                  label="Flat, House no., Building, Apartment: *"
-                  type="text"
-                  placeholder=""
-                  onChange={e => {
-                    this.onChangeAddress(e, 'address1');
-                  }}
-                  value={address1 || ''}
-                  feedBackError={address1Error}
-                  feedBackMessage={address1ErrorMessage}
-                />
-                <FormInput
-                  label="Area, Colony, Street, Sector: "
-                  type="text"
-                  placeholder=""
-                  onChange={e => {
-                    this.onChangeAddress(e, 'address2');
-                  }}
-                  value={address2 || ''}
-                  feedBackError={address2Error}
-                  feedBackMessage={address2ErrorMessage}
-                />
-                <FormInput
-                  label="Landmark,Village: "
-                  type="text"
-                  placeholder=""
-                  onChange={e => {
-                    this.onChangeAddress(e, 'address3');
-                  }}
-                  value={address3 || ''}
-                  feedBackError={address3Error}
-                  feedBackMessage={address3ErrorMessage}
-                />
-                <FormInput
-                  label="Phone *"
-                  type="text"
-                  placeholder=""
-                  onChange={this.onChangePhone}
-                  value={phone}
-                  feedBackError={phoneError}
-                  feedBackMessage={phoneErrorMessage}
-                />
-                <FormInput
-                  label="PIN Code *"
-                  type="text"
-                  placeholder=""
-                  onChange={this.onChangePincode}
-                  value={pincode}
-                  feedBackError={pincodeError}
-                  feedBackMessage={pincodeErrorMessage}
-                />
-                {/* <FormInput
+              <BoxHtV1 col="2">
+                <ButtonHtV1 className={styles.addAddressBtn} onClick={this.toggleAddAddresForm}>
+                  <ImageHtV1 src={addIcon} alt="Add another address" />
+                  <TextHtV1 color="rgba(0, 0, 0, 0.6)" ta="center">
+                    Add address
+                  </TextHtV1>
+                </ButtonHtV1>
+              </BoxHtV1>
+            </RowHtV1>
+            <div ref={this.formRef}>
+              {editForm && (
+                <form onSubmit={this.handleSubmit}>
+                  <RowHtV1 display="block" mr="0" ml="0" mt="1rem">
+                    <BoxHtV1 col="5">
+                      <FormInput
+                        label="Full Name *"
+                        type="text"
+                        placeholder=""
+                        onChange={this.onChangeName}
+                        value={name}
+                        feedBackError={nameError}
+                        feedBackMessage={nameErrorMessage}
+                      />
+                      <FormInput
+                        label="Flat, House no., Building, Apartment: *"
+                        type="text"
+                        placeholder=""
+                        onChange={e => {
+                          this.onChangeAddress(e, 'address1');
+                        }}
+                        value={address1 || ''}
+                        feedBackError={address1Error}
+                        feedBackMessage={address1ErrorMessage}
+                      />
+                      <FormInput
+                        label="Area, Colony, Street, Sector: "
+                        type="text"
+                        placeholder=""
+                        onChange={e => {
+                          this.onChangeAddress(e, 'address2');
+                        }}
+                        value={address2 || ''}
+                        feedBackError={address2Error}
+                        feedBackMessage={address2ErrorMessage}
+                      />
+                      <FormInput
+                        label="Landmark,Village: "
+                        type="text"
+                        placeholder=""
+                        onChange={e => {
+                          this.onChangeAddress(e, 'address3');
+                        }}
+                        value={address3 || ''}
+                        feedBackError={address3Error}
+                        feedBackMessage={address3ErrorMessage}
+                      />
+                      <FormInput
+                        label="Phone *"
+                        type="text"
+                        placeholder=""
+                        onChange={this.onChangePhone}
+                        value={phone}
+                        feedBackError={phoneError}
+                        feedBackMessage={phoneErrorMessage}
+                      />
+                      <FormInput
+                        label="PIN Code *"
+                        type="text"
+                        placeholder=""
+                        onChange={this.onChangePincode}
+                        value={pincode}
+                        feedBackError={pincodeError}
+                        feedBackMessage={pincodeErrorMessage}
+                      />
+                      {/* <FormInput
                       style={{ background: '#80808026' }}
                       readonly
                       label="Email ID *"
@@ -465,7 +492,7 @@ export default class DeliveryAddress extends Component {
                       feedBackError={emailError}
                       feedBackMessage={emailErrorMessage}
                     /> */}
-                {/* <FormInput
+                      {/* <FormInput
                       hide
                       label="GST Number "
                       type="text"
@@ -475,91 +502,92 @@ export default class DeliveryAddress extends Component {
                       feedBackError={gstError}
                       feedBackMessage={gstErrorMessage}
                     /> */}
-              </Box>
-            </Row>
-            <Row display="block" mr="0" ml="0">
-              <Box col="2">
-                <Button
-                  size="block"
-                  btnType="primary"
-                  fontFamily="regular"
-                  height="42px"
-                  mt="1.5rem"
-                  width="100%"
-                  onClick={this.handleSubmit}
-                  disabled={this.checkDisabled()}
-                >
-                  {loading ? 'Please wait ...' : 'Save'}
-                </Button>
-              </Box>
-            </Row>
-          </form>
-        )}
-        {addForm && (
-          <form onSubmit={this.handleSubmit}>
-            <Row display="block" mr="0" ml="0" mt="1rem">
-              <Box col="5">
-                <FormInput
-                  label="Full Name *"
-                  type="text"
-                  placeholder=""
-                  onChange={this.onChangeName}
-                  value={name}
-                  feedBackError={nameError}
-                  feedBackMessage={nameErrorMessage}
-                />
-                <FormInput
-                  label="Flat, House no., Building, Apartment: *"
-                  type="text"
-                  placeholder=""
-                  onChange={e => {
-                    this.onChangeAddress(e, 'address1');
-                  }}
-                  value={address1}
-                  feedBackError={address1Error}
-                  feedBackMessage={address1ErrorMessage}
-                />
-                <FormInput
-                  label="Area, Colony, Street, Sector: "
-                  type="text"
-                  placeholder=""
-                  onChange={e => {
-                    this.onChangeAddress(e, 'address2');
-                  }}
-                  value={address2}
-                  feedBackError={address2Error}
-                  feedBackMessage={address2ErrorMessage}
-                />
-                <FormInput
-                  label="Landmark,Village: "
-                  type="text"
-                  placeholder=""
-                  onChange={e => {
-                    this.onChangeAddress(e, 'address3');
-                  }}
-                  value={address3}
-                  feedBackError={address3Error}
-                  feedBackMessage={address3ErrorMessage}
-                />
-                <FormInput
-                  label="Phone *"
-                  type="text"
-                  placeholder=""
-                  onChange={this.onChangePhone}
-                  value={phone}
-                  feedBackError={phoneError}
-                  feedBackMessage={phoneErrorMessage}
-                />
-                <FormInput
-                  label="PIN Code *"
-                  type="text"
-                  placeholder=""
-                  onChange={this.onChangePincode}
-                  value={pincode}
-                  feedBackError={pincodeError}
-                  feedBackMessage={pincodeErrorMessage}
-                />
-                {/* <FormInput
+                    </BoxHtV1>
+                  </RowHtV1>
+                  <RowHtV1 display="block" mr="0" ml="0">
+                    <BoxHtV1 col="2">
+                      <ButtonHtV1
+                        size="block"
+                        btnType="primary"
+                        fontFamily="regular"
+                        height="42px"
+                        mt="1.5rem"
+                        width="100%"
+                        onClick={this.handleSubmit}
+                        disabled={this.checkDisabled()}
+                      >
+                        {loading ? 'Please wait ...' : 'Save'}
+                      </ButtonHtV1>
+                    </BoxHtV1>
+                  </RowHtV1>
+                </form>
+              )}
+
+              {addForm && (
+                <form onSubmit={this.handleSubmit}>
+                  <RowHtV1 display="block" mr="0" ml="0" mt="1rem">
+                    <BoxHtV1 col="5">
+                      <FormInput
+                        label="Full Name *"
+                        type="text"
+                        placeholder=""
+                        onChange={this.onChangeName}
+                        value={name}
+                        feedBackError={nameError}
+                        feedBackMessage={nameErrorMessage}
+                      />
+                      <FormInput
+                        label="Flat, House no., Building, Apartment: *"
+                        type="text"
+                        placeholder=""
+                        onChange={e => {
+                          this.onChangeAddress(e, 'address1');
+                        }}
+                        value={address1}
+                        feedBackError={address1Error}
+                        feedBackMessage={address1ErrorMessage}
+                      />
+                      <FormInput
+                        label="Area, Colony, Street, Sector: "
+                        type="text"
+                        placeholder=""
+                        onChange={e => {
+                          this.onChangeAddress(e, 'address2');
+                        }}
+                        value={address2}
+                        feedBackError={address2Error}
+                        feedBackMessage={address2ErrorMessage}
+                      />
+                      <FormInput
+                        label="Landmark,Village: "
+                        type="text"
+                        placeholder=""
+                        onChange={e => {
+                          this.onChangeAddress(e, 'address3');
+                        }}
+                        value={address3}
+                        feedBackError={address3Error}
+                        feedBackMessage={address3ErrorMessage}
+                      />
+                      <FormInput
+                        label="Phone *"
+                        type="text"
+                        placeholder=""
+                        onChange={this.onChangePhone}
+                        value={phone}
+                        feedBackError={phoneError}
+                        feedBackMessage={phoneErrorMessage}
+                      />
+                      <FormInput
+                        label="PIN Code *"
+                        type="text"
+                        placeholder=""
+                        onChange={this.onChangePincode}
+                        value={pincode}
+                        feedBackError={pincodeError}
+                        feedBackMessage={pincodeErrorMessage}
+                      />
+                      {/* <FormInput
                       label="Email ID *"
                       type="text"
                       placeholder=""
@@ -577,27 +605,30 @@ export default class DeliveryAddress extends Component {
                       feedBackError={gstError}
                       feedBackMessage={gstErrorMessage}
                     /> */}
-              </Box>
-            </Row>
-            <Row display="block" mr="0" ml="0">
-              <Box col="2">
-                <Button
-                  size="block"
-                  btnType="primary"
-                  fontFamily="regular"
-                  height="42px"
-                  mt="1.5rem"
-                  bg="rgb(249, 141, 41)"
-                  onClick={this.handleSubmit}
-                  disabled={this.checkDisabled()}
-                >
-                  {loading ? 'Please wait ...' : 'Save'}
-                </Button>
-              </Box>
-            </Row>
-          </form>
-        )}
-      </Box>
+                    </BoxHtV1>
+                  </RowHtV1>
+                  <RowHtV1 display="block" mr="0" ml="0">
+                    <BoxHtV1 col="2">
+                      <ButtonHtV1
+                        size="block"
+                        btnType="primary"
+                        fontFamily="regular"
+                        height="42px"
+                        mt="1.5rem"
+                        bg="rgb(249, 141, 41)"
+                        onClick={this.handleSubmit}
+                        disabled={this.checkDisabled()}
+                      >
+                        {loading ? 'Please wait ...' : 'Save'}
+                      </ButtonHtV1>
+                    </BoxHtV1>
+                  </RowHtV1>
+                </form>
+              )}
+            </div>
+          </ContainerHtV1>
+        </SectionHtV1>
+      </BoxHtV1>
     );
   }
 }

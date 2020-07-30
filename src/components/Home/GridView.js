@@ -79,9 +79,11 @@ const renderGrid = (data, isProduct, showList) => (
       })}
       {showList && (
         <Box mt={20}>
-          <Button width={1} type="button" fontSize={20} height={50}>
-            See All
-          </Button>
+          <Link to={'/furniture/living-room-furniture/sofas/'}>
+            <Button width={1} type="button" fontSize={20} height={50}>
+              See All
+            </Button>
+          </Link>
         </Box>
       )}
     </Col>

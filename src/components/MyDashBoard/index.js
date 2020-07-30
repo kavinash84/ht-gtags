@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 /**
  * Components
@@ -57,9 +58,44 @@ ProfileBlock.propTypes = {
   src: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired
 };
-
+@connect(({ profile }) => ({
+  profile: profile.data
+  // response: profile
+}))
 class MyDashBoard extends Component {
+  static propTypes = {
+    profile: PropTypes.shape({
+      contact_number: PropTypes.string,
+      email: PropTypes.string,
+      full_name: PropTypes.string,
+      gst: PropTypes.string
+    })
+    // response: PropTypes.object
+  };
+  state = {
+    email: '',
+    phone: '',
+    fullName: '',
+    gst: '',
+    showEditForm: false
+  };
+
+  componentWillMount() {
+    const {
+      profile: {
+ full_name: fullName, email, contact_number: phone, gst
+}
+    } = this.props;
+    this.setState({
+      fullName: (fullName && fullName.trim()) || '',
+      email,
+      phone: phone || '',
+      gst
+    });
+  }
   render() {
+    console.log(this.state, 'This.state34567890');
+    const { fullName, email, phone } = this.state;
     return (
       <Box width={7 / 10} px={10}>
         <Row
@@ -82,23 +118,30 @@ class MyDashBoard extends Component {
           />
           <Col>
             <Label mb={10} fontSize={18} fontWeight="bold" variant="profileDashBoard">
-              Matthew xyz
+              {fullName}
             </Label>
             <Label mb={8} fontSize={16} fontWeight={300} variant="profileDashBoard">
-              matthew.xyz@gmail.com
+              {email}
             </Label>
             <Label fontSize={16} fontWeight={300} variant="profileDashBoard">
-              +91974209765
+              {phone}
             </Label>
           </Col>
-          <Image src={EditProfileIcon} width="34px" height="34px" alt="profileEdit" />
+          <Link to={{ pathname: '/profile', fromEditIcon: true }}>
+            <Image src={EditProfileIcon} width="34px" height="34px" alt="profileEdit" />
+          </Link>
         </Row>
         <Row mx={-10}>
           <ProfileBlock url="/my-orders" title="Orders" subTitle="Check your order status" src={ordersIcon} />
           <ProfileBlock url="/wishlist" title="Wishlist" subTitle="Check saved for later items" src={favouriteIcon} />
-          <ProfileBlock url="/cart" title="Cart" subTitle="Check your shopping cart" src={shoppingCartIcon} />
-          <ProfileBlock url="/" title="Coupons" subTitle="Check available coupons" src={groupIcon} />
-          <ProfileBlock url="/" title="Saved Cards" subTitle="Check saved for later items" src={creditCardIcon} />
+          <ProfileBlock url="/checkout/cart" title="Cart" subTitle="Check your shopping cart" src={shoppingCartIcon} />
+          <ProfileBlock url="/coupons" title="Coupons" subTitle="Check available coupons" src={groupIcon} />
+          <ProfileBlock
+            url="/saved-cards"
+            title="Saved Cards"
+            subTitle="Check saved for later items"
+            src={creditCardIcon}
+          />
           <ProfileBlock
             url="/profile"
             title="Profile Details"
@@ -110,5 +153,11 @@ class MyDashBoard extends Component {
     );
   }
 }
-
+MyDashBoard.defaultProps = {
+  profile: {}
+};
+MyDashBoard.propTypes = {
+  profile: PropTypes.object
+};
 export default MyDashBoard;
+// export default connect(mapStateToProps, mapDispatchToProps)(MyDashBoard);

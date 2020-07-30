@@ -20,6 +20,15 @@ import { getCartListSKU } from 'selectors/cart';
 import { PINCODE, CART_URL } from 'helpers/Constants';
 
 const checkSKUInCart = (list, sku) => list.includes(sku);
+const checkSKUItemsInCart = (list, sku, quantity) => {
+  let numberIsSame = false;
+  list.forEach(item => {
+    if (item.configurable_sku === sku && item.qty === quantity) {
+      numberIsSame = true;
+    }
+  });
+  return numberIsSame;
+};
 const LoaderIcon = require('../../../static/refresh.svg');
 // const CheckedIcon = require('../../../static/added-to-cart-icon.png');
 
@@ -29,14 +38,18 @@ const onClick = (key, skuId, simpleSku, session, pincode, quantity) => dispatche
 };
 
 const mapStateToProps = ({
- app: { sessionId }, pincode, cart, cart: { addingToCart, addedToCart, key }
+ app: { sessionId }, pincode, cart, cart: {
+ addingToCart, addedToCart, key, data
+}
 }) => ({
   session: sessionId,
   pincode: pincode.selectedPincode ? pincode.selectedPincode : PINCODE,
   addingToCart,
   addedToCart,
   stateId: key,
-  cartSKUs: getCartListSKU(cart)
+  cartSKUs: getCartListSKU(cart),
+  cart,
+  cartData: data
 });
 
 const AddToCart = ({
@@ -54,10 +67,12 @@ const AddToCart = ({
   quantity,
   quantityChange,
   skuItem,
+  cartData,
   size,
   height
 }) => {
   const checkStatus = checkSKUInCart(cartSKUs, sku);
+  const checkSKUItem = checkSKUItemsInCart(cartData, sku, quantity);
   const addLoading = addingToCart && stateId === itemId;
   const { id_customer_cart: cartId = '', qty } = skuItem;
   const updateQty = qty ? quantity - qty : quantity;
@@ -69,7 +84,7 @@ const AddToCart = ({
         </Button>
       ) : (
         <Fragment>
-          {!checkStatus || quantityChange ? (
+          {!checkStatus || !checkSKUItem ? (
             <Button
               variant={`outline.primary.${size}`}
               width={1}
@@ -117,6 +132,7 @@ AddToCart.defaultProps = {
   quantity: 1,
   quantityChange: false,
   skuItem: {},
+  cartData: {},
   size: 'large',
   height: 44
 };
@@ -136,6 +152,7 @@ AddToCart.propTypes = {
   quantity: PropTypes.number,
   quantityChange: PropTypes.bool,
   skuItem: PropTypes.object,
+  cartData: PropTypes.object,
   size: PropTypes.string,
   height: PropTypes.number
 };

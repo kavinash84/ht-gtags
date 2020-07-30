@@ -21,6 +21,7 @@ import { validateAddress } from 'utils/validation';
 import Flex from 'hometown-components-dev/lib/FlexHtV1';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Card from 'hometown-components-dev/lib/CardHtV1';
 import Col from 'hometown-components-dev/lib/ColHtV1';
 import Container from 'hometown-components-dev/lib/ContainerHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
@@ -118,9 +119,9 @@ class DeliveryAddress extends Component {
         dispatch(loadCoupons());
       }
     }
-    // if (nextProps.addresses.length > 0 && nextProps.addresses.length !== this.props.addresses.length) {
-    //   this.handleClick(0);
-    // }
+    if (nextProps.addresses.length > 0 && nextProps.addresses.length !== this.props.addresses.length) {
+      this.handleClick(0);
+    }
     if (nextProps.nextstep.success && nextProps.nextstep.success !== nextstep.success) {
       const { history } = this.props;
       history.push('/checkout/payment-options');
@@ -212,7 +213,8 @@ class DeliveryAddress extends Component {
     const emailError = isBlank(email) || emailFeedBackError;
     const phoneError = isBlank(phone) || phoneFeedBackError;
     const pincodeError = isBlank(pincode) || pincodeFeedBackError;
-    const addressError1 = addressform ? validateAddress(address1, 'address1').error || address1FeedBackError1 : false;
+    const addressError1 = isBlank(address1) || address1FeedBackError1;
+    // addressform ? validateAddress(address1, 'address1').error || address1FeedBackError1 : false;
     const addressError2 = addressform ? validateAddress(address2, 'address2').error || addressFeedBackError2 : false;
     const addressError3 = addressform ? validateAddress(address3, 'address3').error || addressFeedBackError3 : false;
     if (fullNameError || emailError || pincodeError || phoneError || addressError1 || addressError2 || addressError3) {
@@ -388,15 +390,16 @@ class DeliveryAddress extends Component {
                 <Row mx={-10}>
                   {addresses.map((item, index) => (
                     <Col variant="col-6" px={10} mb={20} key={item.id_customer_address}>
-                      <Button
-                        className={styles.addAddressBtn}
-                        hoverColor="grey"
+                      <Card
                         variant="link"
                         textAlign="left"
                         px={0}
                         py={0}
                         height="100%"
                         lineHeight={1.25}
+                        className={` ${styles.addressBtn} ${
+                          index === currentaddressindex ? styles.active : styles.deliveryAddress
+                        }`}
                         onClick={() => this.handleClick(index)}
                         sx={{
                           border: index === currentaddressindex ? 'primaryLarge' : 'secondaryLarge',
@@ -433,7 +436,7 @@ class DeliveryAddress extends Component {
                           <br />
                           {item.gst || ''}
                         </Text>
-                      </Button>
+                      </Card>
                     </Col>
                   ))}
 
@@ -469,8 +472,8 @@ class DeliveryAddress extends Component {
                       <Label htmlFor="checkbox" />
                       {/* eslint-enable */}
                     </Box>
-                    <Text sx={{ cursor: 'pointer' }} fontSize={14} htmlFor="checkbox" onClick={this.toggleBillingForm}>
-                      Different Billing Address ?
+                    <Text variant="link" fontSize={14} htmlFor="checkbox" onClick={this.toggleBillingForm}>
+                      <p className={styles.difBillingAddress}> Different Billing Address ?</p>
                     </Text>
                   </Flex>
 
@@ -508,6 +511,7 @@ class DeliveryAddress extends Component {
                 totalCart={summary.total}
                 itemsCount={summary.items_count}
                 discount={summary.coupon_discount}
+                coupon={summary.coupon}
               />
               <PaymentMethods />
             </Box>

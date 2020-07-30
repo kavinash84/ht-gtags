@@ -31,6 +31,7 @@ export default class WishlistContainer extends Component {
   };
   render() {
     const { wishlistData, wishListedSKUs, loadingList } = this.props;
+    console.log(wishlistData, '@#$%^&*&^%$#@#$%^&*');
     return (
       <Wrapper>
         <Body>

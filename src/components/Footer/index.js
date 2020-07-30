@@ -208,7 +208,7 @@ class Footer extends React.Component {
                 </Ul>
               </Box>
               <Box>
-                <Heading variant="footerTitle">CATALOG</Heading>
+                {/* <Heading variant="footerTitle">CATALOG</Heading>
                 <Ul>
                   <Li>
                     <a href="/" rel="noreferrer noopener" target="_blank">
@@ -220,8 +220,8 @@ class Footer extends React.Component {
                       <Text variant="footerLink">eCatalogs</Text>
                     </a>
                   </Li>
-                </Ul>
-                <Image src={bajajFinserveIcon} alt="Bajaj Finserv" mt={20} sx={{ height: 60 }} />
+                </Ul> */}
+                <Image src={bajajFinserveIcon} alt="Bajaj Finserv" mt={20} />
               </Box>
             </Col>
             <Col width={[1, 2 / 3, 3 / 12]}>
