@@ -808,7 +808,7 @@ class ProductDetails extends React.Component {
             </Box>
 
             {/* Review List and Add review */}
-            <Box id="review-section" pt={30}>
+            <Box id="review-section" pt={30} className={styles.reviewSection}>
               <Box textAlign="center" mb={30}>
                 <Heading variant="heading.regular">Reviews</Heading>
               </Box>
