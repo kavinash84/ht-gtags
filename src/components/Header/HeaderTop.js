@@ -75,7 +75,7 @@ export default class HeaderTop extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.isLoggedIn) {
       this.setState({
-        // openLogin: false
+        openLogin: false
       });
     }
   }
