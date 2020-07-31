@@ -50,7 +50,10 @@ export default class ProfileForm extends Component {
       contact_number: PropTypes.string,
       email: PropTypes.string,
       full_name: PropTypes.string,
-      gst: PropTypes.string
+      gst: PropTypes.string,
+      dob: PropTypes.string,
+      city: PropTypes.string,
+      gender: PropTypes.string
     }),
     response: PropTypes.object
   };
@@ -75,20 +78,36 @@ export default class ProfileForm extends Component {
     gst: '',
     gstError: false,
     gstErrorMessage: 'Enter a valid GST Number',
+    dob: '1992-08-02',
+    dobError: false,
+    dobErrorMessage: 'Enter a valid DOB',
+    gender: 'male',
+    genderError: false,
+    genderErrorMessage: 'Enter a valid Gender',
+    city: '',
+    cityError: false,
+    cityErrorMessage: 'Enter a valid City',
     showEditForm: false
   };
 
   componentWillMount() {
     const {
       profile: {
- full_name: fullName, email, contact_number: phone, gst
-}
+        full_name: fullName,
+        email,
+        contact_number: phone,
+        gst
+        // dob, city, gender
+      }
     } = this.props;
     this.setState({
       fullName: (fullName && fullName.trim()) || '',
       email,
       phone: phone || '',
       gst
+      // dob,
+      // city,
+      // gender
     });
   }
   // onChangePhone = e => {
@@ -130,6 +149,33 @@ export default class ProfileForm extends Component {
         : 'Name Cannot be Left Empty !'
     });
   };
+  onChangeGender = e => {
+    const {
+      target: { value }
+    } = e;
+    this.setState({
+      gender: value
+    });
+  };
+  onChangeCity = e => {
+    const {
+      target: { value }
+    } = e;
+    const checkError = checkSpecialChar(value);
+    this.setState({
+      city: value,
+      cityError: checkError,
+      cityErrorMessage: 'Numbers and special characters are not allowed !'
+    });
+  };
+  onChangeDob = e => {
+    const {
+      target: { value }
+    } = e;
+    this.setState({
+      dob: value
+    });
+  };
   onSubmitProfile = e => {
     e.preventDefault();
     const {
@@ -162,6 +208,9 @@ export default class ProfileForm extends Component {
       phone,
       fullName,
       gst,
+      dob,
+      gender,
+      city,
       gstError,
       gstErrorMessage,
       emailError,
@@ -170,6 +219,12 @@ export default class ProfileForm extends Component {
       phoneErrorMessage,
       fullNameError,
       fullNameErrorMessage,
+      dobError,
+      dobErrorMessage,
+      genderError,
+      genderErrorMessage,
+      cityError,
+      cityErrorMessage,
       showEditForm
     } = this.state;
     const { response } = this.props;
@@ -220,6 +275,19 @@ export default class ProfileForm extends Component {
               onChangeFullName={this.onChangeFullName}
               fullNameFeedBackError={fullNameError}
               fullNameFeedBackMessage={fullNameErrorMessage}
+              dob={dob}
+              dobFeedBackError={dobError}
+              dobFeedBackMessage={dobErrorMessage}
+              gender={gender}
+              genderFeedBackError={genderError}
+              genderFeedBackMessage={genderErrorMessage}
+              city={city}
+              cityFeedBackError={cityError}
+              cityFeedBackMessage={cityErrorMessage}
+              onChangeGender={this.onChangeGender}
+              onChangeCity={this.onChangeCity}
+              onChangeDob={this.onChangeDob}
+              onCancelSubmit={() => this.setState({ showEditForm: !showEditForm })}
               onSubmitProfile={this.onSubmitProfile}
               response={response}
             />

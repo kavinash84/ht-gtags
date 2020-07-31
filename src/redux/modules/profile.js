@@ -76,7 +76,10 @@ export const updateUserProfile = data => ({
         email: data.email,
         mobile: data.phone,
         full_name: data.fullName,
-        gst: data.gst
+        gst: data.gst,
+        dob: data.dob,
+        city: data.city,
+        gender: data.gender
       };
       const response = await client.put(UPDATEPROFILE_API, postData);
       return response;
