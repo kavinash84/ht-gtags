@@ -329,7 +329,8 @@ class ProductDetails extends React.Component {
   };
   addProductToColorProduct = colorProducts => {
     const { product } = this.props;
-    colorProducts.push(product);
+    colorProducts = colorProducts.map(arr => ({ ...arr, activeColor: false }));
+    colorProducts.push({ ...product, activeColor: true });
     this.setState({ colorProducts }, () => console.log(colorProducts, 'colorProducts'));
   };
   toggleShowMore = () => {

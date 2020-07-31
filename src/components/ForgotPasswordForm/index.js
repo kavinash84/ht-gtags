@@ -4,7 +4,6 @@ import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
 import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
 import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
 import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
-import Flex from 'hometown-components-dev/lib/FlexHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import FormInputHtV1 from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
 
@@ -58,16 +57,6 @@ export default class ForgotPasswordForm extends Component {
           >
             Enter your email address or phone number below and we will send you OTP to reset your password.
           </LabelHtV1>
-          <RowHtV1 mb={20}>
-            <Flex mr={60}>
-              <BoxHtV1 as="input" type="radio" name="type" mr={10} />
-              <LabelHtV1>E-mail</LabelHtV1>
-            </Flex>
-            <Flex>
-              <BoxHtV1 as="input" type="radio" name="type" mr={10} />
-              <LabelHtV1>Phone no</LabelHtV1>
-            </Flex>
-          </RowHtV1>
           <BoxHtV1 width={1}>
             <FormInputHtV1
               type="text"
