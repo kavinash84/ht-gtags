@@ -232,6 +232,7 @@ class ProductDetails extends React.Component {
       showmore: true,
       showmorecolorproducts: true,
       activeSpec: 'description',
+      activeDescription: null,
       showReviews: 2,
       productQty: { value: 1, label: '1' },
       ReviewDataSet: [],
@@ -404,8 +405,14 @@ class ProductDetails extends React.Component {
       skuItem
     } = this.props;
     const {
- activeSpec, showReviews, productQty, colorProducts, selectedFilter, filterChanged
-} = this.state;
+      activeSpec,
+      showReviews,
+      productQty,
+      colorProducts,
+      selectedFilter,
+      filterChanged,
+      activeDescription
+    } = this.state;
     const {
       meta,
       images,
@@ -417,9 +424,25 @@ class ProductDetails extends React.Component {
       groupedattributes,
       reviews: { count, rating }
     } = product;
+    const { brand: ProductBrand } = meta;
     const {
- description, product_height: height, product_width: width, product_depth: depth
-} = attributes;
+      color: ProductColor,
+      description,
+      main_material: productMainMaterial,
+      return: returnAndCancel,
+      product_height: height,
+      product_width: width,
+      product_depth: depth,
+      care_label: careLabel,
+      product_warranty: productWarranty,
+
+      family_name: familyName,
+      product_depth: productDepth,
+      product_height: productHeight,
+      product_weight: productWeight,
+      product_width: productWidth,
+      sku_supplier_config: skuSupplierConfig
+    } = attributes;
     const simpleSku = Object.keys(simples)[0];
     const { name, price, special_price: specialPrice } = meta;
     const checkSpecialPrice = Number(specialPrice) || Number(price);
@@ -714,25 +737,129 @@ class ProductDetails extends React.Component {
               <DescriptionButton
                 onClick={e => {
                   e.preventDefault();
-                  this.setState({ activeSpec: 'description' });
+                  this.setState({ activeSpec: 'description', activeDescription: description });
                 }}
                 active={activeSpec === 'description'}
               >
                 DESCRIPTION
               </DescriptionButton>
+              <DescriptionButton
+                onClick={e => {
+                  e.preventDefault();
+                  this.setState({ activeSpec: 'details', activeDescription: description });
+                }}
+                active={activeSpec === 'details'}
+              >
+                DETAILS
+              </DescriptionButton>
+              <DescriptionButton
+                onClick={e => {
+                  e.preventDefault();
+                  this.setState({ activeSpec: 'care', activeDescription: careLabel });
+                }}
+                active={activeSpec === 'care'}
+              >
+                PRODUCT CARE INSTRUCTIONS
+              </DescriptionButton>
+              <DescriptionButton
+                onClick={e => {
+                  e.preventDefault();
+                  this.setState({ activeSpec: 'warranty', activeDescription: productWarranty });
+                }}
+                active={activeSpec === 'warranty'}
+              >
+                SERVICE ASSURANCE / WARRANTY
+              </DescriptionButton>
+              <DescriptionButton
+                onClick={e => {
+                  e.preventDefault();
+                  this.setState({ activeSpec: 'return', activeDescription: returnAndCancel });
+                }}
+                active={activeSpec === 'return'}
+              >
+                RETURN / CANCELLATION
+              </DescriptionButton>
               {this.renderAttributes(groupedAttributes)}
             </Row>
 
             {/* Description */}
-            <Box sx={activeSpec !== 'description' ? { display: 'none' } : {}} px="10%">
-              {description && (
-                <ProductDesc desc={description || ''} showmore={showmore} toggleShowMore={this.toggleShowMore} />
-              )}
-            </Box>
+            {activeSpec === 'details' ? (
+              <Box px="10%">
+                <Row>
+                  <Col>
+                    <Row>
+                      <Col>Brand</Col>
+                      <Col>{ProductBrand}</Col>
+                    </Row>
+                  </Col>
+                  <Col>
+                    <Row>
+                      <Col>Family Name</Col>
+                      <Col>{familyName}</Col>
+                    </Row>
+                  </Col>
+                  <Col>
+                    <Row>
+                      <Col>Colour</Col>
+                      <Col>{ProductColor}</Col>
+                    </Row>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <Row>
+                      <Col>Depth (mm)</Col>
+                      <Col>{productDepth}</Col>
+                    </Row>
+                  </Col>
+                  <Col>
+                    <Row>
+                      <Col>Width (mm)</Col>
+                      <Col>{productWidth}</Col>
+                    </Row>
+                  </Col>
+                  <Col>
+                    <Row>
+                      <Col>Height (mm)</Col>
+                      <Col>{productHeight}</Col>
+                    </Row>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <Row>
+                      <Col>Product Weight</Col>
+                      <Col>{productWeight}</Col>
+                    </Row>
+                  </Col>
+                  <Col>
+                    <Row>
+                      <Col>Product main Material</Col>
+                      <Col>{productMainMaterial}</Col>
+                    </Row>
+                  </Col>
+                  <Col>
+                    <Row>
+                      <Col>SKU</Col>
+                      <Col>{skuSupplierConfig}</Col>
+                    </Row>
+                  </Col>
+                </Row>
+              </Box>
+            ) : (
+              <Box px="10%">
+                {description && (
+                  <ProductDesc
+                    desc={activeDescription || ''}
+                    showmore={showmore}
+                    toggleShowMore={this.toggleShowMore}
+                  />
+                )}
+              </Box>
+            )}
 
             {/* Specifications */}
             <Specs activeSpec={activeSpec} specs={groupedAttributes} pincode={pincode.selectedPincode} />
-
             {/* Video */}
             {groupedattributes && groupedattributes.youtubeid && (
               <Row my={30}>
@@ -741,7 +868,6 @@ class ProductDetails extends React.Component {
                 </Col>
               </Row>
             )}
-
             {/* Usps */}
             <Row mb={40} width={['80%', '80%', '60%']} justifyContent="space-between" mx="auto" flexWrap="nowrap">
               <UspCol src={freeShippingIcon} text="Free Shipping" />
