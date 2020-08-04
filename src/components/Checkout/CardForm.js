@@ -105,7 +105,7 @@ const CardForm = ({
       </Col>
     </Row>
     <Row>
-      <Col variant="col-6" maxWidth="43%">
+      <Col width={['100%', '100%', '43%']}>
         <FormInput
           label="Name on card"
           type="text"
@@ -155,7 +155,7 @@ const CardForm = ({
           </Col>
         </Row>
       </Col>
-      <Col width="18%">
+      <Col width={['25%', '25%', '18%']}>
         <FormInput
           label="CVV"
           type="password"

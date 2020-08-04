@@ -96,7 +96,7 @@ const PaymentTab = ({ title, imageUrl, ...props }) => (
     display="flex"
     variant="small"
     py={12}
-    px={16}
+    px={[8, 8, 16]}
     sx={{
       textTransform: 'uppercase',
       cursor: 'pointer',
