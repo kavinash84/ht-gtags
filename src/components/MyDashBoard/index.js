@@ -21,7 +21,6 @@ const ordersIcon = require('../../../static/orders.png');
 const favouriteIcon = require('../../../static/favourite.svg');
 const shoppingCartIcon = require('../../../static/shoppingCart.svg');
 const groupIcon = require('../../../static/group.svg');
-const creditCardIcon = require('../../../static/creditCard.svg');
 const descriptionIcon = require('../../../static/description.svg');
 
 const ProfileBlock = ({
@@ -136,12 +135,6 @@ class MyDashBoard extends Component {
           <ProfileBlock url="/wishlist" title="Wishlist" subTitle="Check saved for later items" src={favouriteIcon} />
           <ProfileBlock url="/checkout/cart" title="Cart" subTitle="Check your shopping cart" src={shoppingCartIcon} />
           <ProfileBlock url="/coupons" title="Coupons" subTitle="Check available coupons" src={groupIcon} />
-          <ProfileBlock
-            url="/saved-cards"
-            title="Saved Cards"
-            subTitle="Check saved for later items"
-            src={creditCardIcon}
-          />
           <ProfileBlock
             url="/profile"
             title="Profile Details"
