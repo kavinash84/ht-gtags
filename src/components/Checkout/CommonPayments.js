@@ -106,7 +106,7 @@ const PaymentTab = ({ title, imageUrl, ...props }) => (
     }}
     {...props}
   >
-    <Image height={20} mr={10} src={imageUrl} alt={title} />
+    <Image height={20} mr={10} src={imageUrl} alt={title} sx={{ flexBasis: 0 }} />
     {title}
   </Label>
 );

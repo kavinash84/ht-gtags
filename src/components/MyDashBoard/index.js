@@ -96,7 +96,7 @@ class MyDashBoard extends Component {
     console.log(this.state, 'This.state34567890');
     const { fullName, email, phone } = this.state;
     return (
-      <Box width={7 / 10} px={10}>
+      <Box width={[1, 1, 7 / 10]} px={10}>
         <Row
           mx={0}
           pb={20}
