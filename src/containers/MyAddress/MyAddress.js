@@ -5,7 +5,7 @@ import Body from 'hometown-components-dev/lib/BodyHtV1';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Container from 'hometown-components-dev/lib/ContainerHtV1';
 import Row from 'hometown-components-dev/lib/RowHtV1';
-import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+// import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 
 import Footer from 'components/Footer';
@@ -13,6 +13,7 @@ import Header from 'components/Header';
 import MyMenu from 'components/MyMenu';
 import MyAddressContainer from 'components/MyAddress';
 import { loadMyAddress } from 'redux/modules/myaddress';
+import DashboardHeader from './../DashbordHeader/Header';
 
 const hooks = {
   fetch: async ({ store: { dispatch } }) => {
@@ -27,11 +28,7 @@ const MyAddress = () => (
 
       {/* Container */}
       <Container pt={80}>
-        <Row width={1} sx={{ borderBottom: 'divider' }} mx={0}>
-          <Heading fontSize={20} pb={10}>
-            Hello Matthew
-          </Heading>
-        </Row>
+        <DashboardHeader />
         <Row>
           <Box variant="col-2" pr={30}>
             <MyMenu page="My Addresses" />
