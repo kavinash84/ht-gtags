@@ -33,13 +33,13 @@ const AddressForm = props => {
     phoneFeedBackMessage,
     address1,
     address2,
-    // address3,
+    address3,
     addressFeedBackError1,
     addressFeedBackMessage1,
     addressFeedBackError2,
     addressFeedBackMessage2,
-    // addressFeedBackError3,
-    // addressFeedBackMessage3,
+    addressFeedBackError3,
+    addressFeedBackMessage3,
     city,
     cityFeedBackError,
     cityFeedBackMessage,
@@ -58,7 +58,7 @@ const AddressForm = props => {
     onChangePhone,
     onChangeAddress1,
     onChangeAddress2,
-    // onChangeAddress3,
+    onChangeAddress3,
     onChangeFullName,
     onChangePincode,
     onChangeGST
@@ -114,10 +114,10 @@ const AddressForm = props => {
         <Label variant="formHeading">{formType === 'billing' ? 'Billing' : 'Shipping'} Address</Label>
       </Box>
       <Row>
-        <Col variant="col-6">
+        <Col variant="col-4">
           <FormInput
             id="add1"
-            label="Address line 1*"
+            label="Flat, House no., Building, Apartment*"
             type="textarea"
             onChange={e => onChangeAddress1(formType, e.target.value.replace(/#/g, ''))}
             value={address1}
@@ -127,10 +127,10 @@ const AddressForm = props => {
             height="auto"
           />
         </Col>
-        <Col variant="col-6">
+        <Col variant="col-4">
           <FormInput
             id="add2"
-            label="Address line 2"
+            label="Area, Colony, Street, Sector"
             type="textarea"
             onChange={e => onChangeAddress2(formType, e.target.value.replace(/#/g, ''))}
             value={address2}
@@ -140,20 +140,20 @@ const AddressForm = props => {
             height="auto"
           />
         </Col>
-        {/* <Col variant="col-4" pl="10px">
-        <FormInput
-          id="add3"
-          label="Landmark,Village:"
-          type="textarea"
-          placeholder=""
-          onChange={e => onChangeAddress3(formType, e.target.value.replace(/#/g, ''))}
-          value={address3}
-          feedBackError={addressFeedBackError3}
-          feedBackMessage={addressFeedBackMessage3}
-          variant="input"
-        // height="auto"
-        />
-         </Col> */}
+        <Col variant="col-4">
+          <FormInput
+            id="add3"
+            label="Landmark,Village"
+            type="textarea"
+            placeholder=""
+            onChange={e => onChangeAddress3(formType, e.target.value.replace(/#/g, ''))}
+            value={address3}
+            feedBackError={addressFeedBackError3}
+            feedBackMessage={addressFeedBackMessage3}
+            variant="input"
+            height="auto"
+          />
+        </Col>
       </Row>
       <Row>
         <Col variant="col-6">
@@ -214,8 +214,8 @@ const AddressForm = props => {
 AddressForm.defaultProps = {
   formType: '',
   isLoggedIn: false,
-  address2: ''
-  // address3: ''
+  address2: '',
+  address3: ''
 };
 
 AddressForm.propTypes = {
@@ -231,13 +231,13 @@ AddressForm.propTypes = {
   phoneFeedBackMessage: PropTypes.string.isRequired,
   address1: PropTypes.string.isRequired,
   address2: PropTypes.string,
-  // address3: PropTypes.string,
+  address3: PropTypes.string,
   addressFeedBackError1: PropTypes.bool.isRequired,
   addressFeedBackMessage1: PropTypes.string.isRequired,
   addressFeedBackError2: PropTypes.bool.isRequired,
   addressFeedBackMessage2: PropTypes.string.isRequired,
-  // addressFeedBackError3: PropTypes.bool.isRequired,
-  // addressFeedBackMessage3: PropTypes.string.isRequired,
+  addressFeedBackError3: PropTypes.bool.isRequired,
+  addressFeedBackMessage3: PropTypes.string.isRequired,
   city: PropTypes.string.isRequired,
   cityFeedBackError: PropTypes.bool.isRequired,
   cityFeedBackMessage: PropTypes.string.isRequired,
@@ -251,7 +251,7 @@ AddressForm.propTypes = {
   onChangePhone: PropTypes.func.isRequired,
   onChangeAddress1: PropTypes.func.isRequired,
   onChangeAddress2: PropTypes.func.isRequired,
-  // onChangeAddress3: PropTypes.func.isRequired,
+  onChangeAddress3: PropTypes.func.isRequired,
   onChangeFullName: PropTypes.func.isRequired,
   onChangePincode: PropTypes.func.isRequired,
   onChangeGST: PropTypes.func.isRequired,

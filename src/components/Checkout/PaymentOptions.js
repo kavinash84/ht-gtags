@@ -109,7 +109,7 @@ class PaymentOptions extends Component {
     const isProductOutofStock = sku => outOfStockList.includes(sku);
 
     return (
-      <Container my={60} px={0}>
+      <Container my={[30, 30, 60]} px={[15, 15, 0]}>
         <Row>
           <Col variant="col-8">
             {/* Product not deliverable */}
@@ -262,8 +262,15 @@ class PaymentOptions extends Component {
                 <Heading variant="heading.medium">Payment Method</Heading>
               </Box>
             </Row>
-            <Row sx={{ display: 'flex' }}>
-              <Row mx={0} mb={20} justifyContent="space-between" flexDirection="column" maxHeight="360px">
+            <Row flexWrap="nowrap" ml={[0, 0, -16]} mr={-16}>
+              <Row
+                mx={0}
+                mb={20}
+                justifyContent="space-between"
+                flexDirection="column"
+                maxHeight="360px"
+                minWidth={140}
+              >
                 {data.map((paymentType, index) => (
                   <Col key={String(`${paymentType}${index}`)} px={0}>
                     {CommonPayments(paymentType.paymentType, toggleGateway, selectedGateway, session, resetEasyEmi)}

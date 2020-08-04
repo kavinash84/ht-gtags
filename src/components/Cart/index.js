@@ -97,7 +97,7 @@ const Cart = ({
   const cartItemsNumber = countCartItemNumbers(results);
 
   return (
-    <Container my={60}>
+    <Container my={[30, 30, 60]}>
       <Row>
         {/* Product List */}
         <Box variant="col-8">
