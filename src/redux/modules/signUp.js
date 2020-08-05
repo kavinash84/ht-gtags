@@ -61,6 +61,9 @@ export const signUp = (data, session, signupOrigin) => ({
         full_name: data.name,
         email: data.email,
         mobile: data.phone,
+        dob: data.dob,
+        gender: data.gender,
+        city: data.city,
         password: data.password,
         session_id: session
       };

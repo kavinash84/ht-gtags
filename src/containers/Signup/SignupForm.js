@@ -65,6 +65,17 @@ export default class SignupFormContainer extends Component {
       password: '',
       passwordError: false,
       passwordErrorMessage: 'Password must contain atleast 6 and max 15 characters',
+
+      dob: '',
+      dobError: false,
+      dobErrorMessage: 'global err message',
+      gender: '',
+      genderError: false,
+      genderErrorMessage: 'global err message',
+      city: '',
+      cityError: false,
+      cityErrorMessage: 'global err message',
+
       policyAccepted: false
     };
   }
@@ -101,6 +112,33 @@ export default class SignupFormContainer extends Component {
       phoneError: checkError,
       phoneErrorMessage:
         value[0] === '0' ? 'Mobile number must not start with 0' : 'Enter 10 Digits Valid Mobile Number'
+    });
+  };
+  onChangeGender = e => {
+    const {
+      target: { value }
+    } = e;
+    this.setState({
+      gender: value
+    });
+  };
+  onChangeCity = e => {
+    const {
+      target: { value }
+    } = e;
+    const checkError = checkSpecialChar(value);
+    this.setState({
+      city: value,
+      cityError: checkError,
+      cityErrorMessage: 'Numbers and special characters are not allowed !'
+    });
+  };
+  onChangeDob = e => {
+    const {
+      target: { value }
+    } = e;
+    this.setState({
+      dob: value
     });
   };
   onChangePassword = e => {
@@ -163,6 +201,17 @@ export default class SignupFormContainer extends Component {
       phoneErrorMessage,
       passwordError,
       passwordErrorMessage,
+
+      dob,
+      dobError,
+      dobErrorMessage,
+      gender,
+      genderError,
+      genderErrorMessage,
+      city,
+      cityError,
+      cityErrorMessage,
+
       policyAccepted
     } = this.state;
     const { loading } = this.props;
@@ -251,6 +300,18 @@ export default class SignupFormContainer extends Component {
                 onChangePassword={this.onChangePassword}
                 passwordFeedBackError={passwordError}
                 passwordFeedBackMessage={passwordErrorMessage}
+                dob={dob}
+                dobFeedBackError={dobError}
+                dobFeedBackMessage={dobErrorMessage}
+                gender={gender}
+                genderFeedBackError={genderError}
+                genderFeedBackMessage={genderErrorMessage}
+                city={city}
+                cityFeedBackError={cityError}
+                cityFeedBackMessage={cityErrorMessage}
+                onChangeGender={this.onChangeGender}
+                onChangeCity={this.onChangeCity}
+                onChangeDob={this.onChangeDob}
                 onChangePolicy={this.onChangePolicy}
                 policyAccepted={policyAccepted}
                 onSubmitSignup={this.onSubmitSignup}

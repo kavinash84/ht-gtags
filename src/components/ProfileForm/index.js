@@ -48,6 +48,7 @@ export default class ProfileForm extends Component {
   static propTypes = {
     profile: PropTypes.shape({
       contact_number: PropTypes.string,
+      customer_city: PropTypes.string,
       email: PropTypes.string,
       full_name: PropTypes.string,
       gst: PropTypes.string,
@@ -78,7 +79,7 @@ export default class ProfileForm extends Component {
     gst: '',
     gstError: false,
     gstErrorMessage: 'Enter a valid GST Number',
-    dob: '1992-08-02',
+    dob: '',
     dobError: false,
     dobErrorMessage: 'Enter a valid DOB',
     gender: 'male',
@@ -93,21 +94,17 @@ export default class ProfileForm extends Component {
   componentWillMount() {
     const {
       profile: {
-        full_name: fullName,
-        email,
-        contact_number: phone,
-        gst
-        // dob, city, gender
-      }
+ full_name: fullName, email, contact_number: phone, customer_city: city, gst, dob, gender
+}
     } = this.props;
     this.setState({
       fullName: (fullName && fullName.trim()) || '',
       email,
       phone: phone || '',
-      gst
-      // dob,
-      // city,
-      // gender
+      gst,
+      dob,
+      city,
+      gender
     });
   }
   // onChangePhone = e => {
@@ -246,9 +243,9 @@ export default class ProfileForm extends Component {
             <ProfileViewRow title="Full Name" value={fullName} />
             <ProfileViewRow title="E-mail-ID" value={email} />
             <ProfileViewRow title="Phone" value={phone} />
-            <ProfileViewRow title="Gender" value="Male" />
-            <ProfileViewRow title="Date of Birth" value="01/01/1993" />
-            <ProfileViewRow title="Location" value="Mumbai" />
+            <ProfileViewRow title="Gender" value={gender} />
+            <ProfileViewRow title="Date of Birth" value={dob} />
+            <ProfileViewRow title="Location" value={city} />
           </Box>
         </Box>
         <Box pt={50} pb={20}>
