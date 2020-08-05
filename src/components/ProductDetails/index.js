@@ -14,7 +14,7 @@ import { setProductPosition } from 'redux/modules/productdetails';
 import { getCombinedBuy } from 'redux/modules/combinedbuy';
 import { addToCartCombined, setQuantityFlag } from 'redux/modules/cart';
 import { formatAmount } from 'utils/formatters';
-import { calculateDiscount, calculateSavings, calculateLowestEmi, getVideoID, formatProductURL } from 'utils/helper';
+import { calculateLowestEmi, getVideoID, formatProductURL } from 'utils/helper';
 import { productPageTitle, productMetaDescription, productMetaKeywords } from 'utils/seo';
 import { groupedAttributes as getgroupedAttributes, getBreadCrumbs, getSimpleSku } from 'selectors/product';
 import { getCartSKU } from 'selectors/cart';
@@ -418,6 +418,7 @@ class ProductDetails extends React.Component {
       images,
       simples,
       attributes,
+      pricing_details: pricingDetails,
       delivery_details: deliveryDetails,
       grouped_attributes: groupedAttributes,
       sku,
@@ -444,7 +445,19 @@ class ProductDetails extends React.Component {
       sku_supplier_config: skuSupplierConfig
     } = attributes;
     const simpleSku = Object.keys(simples)[0];
-    const { name, price, special_price: specialPrice } = meta;
+    const {
+ name, price, special_price: specialPrice, offer_details: offerDetails
+} = meta;
+    const { coupon_code: couponCode, offer_price: couponOfferPrice } = offerDetails;
+    const {
+      offer_price: offerPrice,
+      retail_discount: retailDiscount,
+      total_savings: totalSavings,
+      limited_time_coupon_discount: limitedTimeCouponDiscount,
+      total_discount_percentage: totalDiscountPercentage,
+      mrp: maxPrice
+    } = pricingDetails;
+
     const checkSpecialPrice = Number(specialPrice) || Number(price);
     const { adding, added, data: reviewsData = [] } = reviews;
     // const offerImage = simples[simpleSku].groupedattributes.offer_image || null;
@@ -528,10 +541,15 @@ class ProductDetails extends React.Component {
               {/* Product title and price */}
               <TitlePrice
                 name={name}
-                price={formatAmount(price)}
+                price={offerPrice}
                 discPrice={formatAmount(checkSpecialPrice)}
-                savingsRs={formatAmount(calculateSavings(price, checkSpecialPrice) || '')}
-                savingsPercentage={calculateDiscount(price, checkSpecialPrice)}
+                maxPrice={maxPrice}
+                couponCode={couponCode}
+                couponOfferPrice={couponOfferPrice}
+                totalDiscountPercentage={totalDiscountPercentage}
+                retailDiscount={retailDiscount}
+                totalSavings={totalSavings}
+                limitedTimeCouponDiscount={limitedTimeCouponDiscount}
                 ratings={rating}
                 count={count}
                 marginTop="1rem"
