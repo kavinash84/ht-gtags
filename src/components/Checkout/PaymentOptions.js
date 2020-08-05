@@ -103,6 +103,7 @@ class PaymentOptions extends Component {
       submitted,
       error
     } = this.props;
+
     const [netBankingData] = data.filter(bank => bank.paymentType === 'NetBanking');
     const [WalletData] = data.filter(bank => bank.paymentType === 'Wallet');
     const isProductOutofStock = sku => outOfStockList.includes(sku);
@@ -406,6 +407,7 @@ class PaymentOptions extends Component {
               <Box>
                 <OrderSummary
                   history={history}
+                  results={results}
                   itemsTotal={summary.items}
                   setDiscount={summary.combined_set_discount}
                   savings={summary.savings}

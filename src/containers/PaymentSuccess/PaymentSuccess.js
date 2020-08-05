@@ -15,7 +15,6 @@ import Row from 'hometown-components-dev/lib/RowHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 
-
 /* ====== Page Components ====== */
 import Footer from 'components/Footer';
 import Header from 'components/Header';
@@ -31,7 +30,9 @@ const mapStateToProps = ({ paymentstatus }) => ({
   cartProducts: paymentstatus.data.cart_products,
   subTotal: paymentstatus.data.sub_total_amount,
   discount: paymentstatus.data.discount_coupon_value,
-  totalAmount: paymentstatus.data.net_order_amount
+  totalAmount: paymentstatus.data.net_order_amount,
+  shippingCharges: paymentstatus.data.shipping_charges,
+  setDiscount: paymentstatus.data.set_discount
 });
 class PaymentSuccess extends Component {
   constructor(props) {
@@ -66,7 +67,9 @@ class PaymentSuccess extends Component {
     this.setState({ products });
   };
   render() {
-    const { subTotal, discount, totalAmount } = this.props;
+    const {
+ subTotal, discount, totalAmount, shippingCharges, setDiscount
+} = this.props;
     const { products } = this.state;
     return (
       <Wrapper>
@@ -150,14 +153,20 @@ class PaymentSuccess extends Component {
                     <Text>Subtotal : </Text>
                     <Text>Rs {formatAmount(subTotal)}</Text>
                   </Flex>
-                  {/* <Flex mb={20} justifyContent="space-between">
-                <Text>Savings : </Text>
-                <Text>Rs. 400</Text>
-              </Flex> */}
+                  <Flex mb={20} justifyContent="space-between">
+                    <Text>Shipping charges : </Text>
+                    <Text>Rs {formatAmount(shippingCharges)}</Text>
+                  </Flex>
                   <Flex mb={20} justifyContent="space-between">
                     <Text>Discount : </Text>
                     <Text>Rs {formatAmount(discount)}</Text>
                   </Flex>
+                  {setDiscount && (
+                    <Flex mb={20} justifyContent="space-between">
+                      <Text>Combo Discount : </Text>
+                      <Text>Rs {formatAmount(Math.abs(setDiscount))}</Text>
+                    </Flex>
+                  )}
                   <Row m="0" py="1em" sx={{ borderTop: 'divider' }}>
                     <Box variant="col-6" p="0">
                       <Text color="menuItem" fontSize={18} fontFamily="medium">
@@ -182,12 +191,21 @@ class PaymentSuccess extends Component {
     );
   }
 }
+PaymentSuccess.defaultProps = {
+  subTotal: 0,
+  totalAmount: 0,
+  discount: 0,
+  shippingCharges: 0,
+  setDiscount: 0
+};
 
 PaymentSuccess.propTypes = {
   cartProducts: PropTypes.array.isRequired,
-  subTotal: PropTypes.number.isRequired,
-  totalAmount: PropTypes.number.isRequired,
-  discount: PropTypes.number.isRequired
+  subTotal: PropTypes.number,
+  totalAmount: PropTypes.number,
+  discount: PropTypes.number,
+  shippingCharges: PropTypes.number,
+  setDiscount: PropTypes.number
 };
 
 export default connect(mapStateToProps, null)(PaymentSuccess);
