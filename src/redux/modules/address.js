@@ -178,7 +178,7 @@ export default function reducer(state = initialState, action = {}) {
           ...state[action.formType],
           address1: action.address1,
           addressFeedBackError1: validateAddress(action.address1, 'address1').error,
-          addressFeedBackMessage1: validateAddress(action.address1, 'address1').errorMessage,
+          addressFeedBackMessage1: validateAddress(action.address1, 'address1').errorMessage
           // address2: action.address2,
           // addressFeedBackError2: validateAddress(action.address2, 'address2').error,
           // addressFeedBackMessage2: validateAddress(action.address2, 'address2').errorMessage
@@ -356,9 +356,9 @@ export default function reducer(state = initialState, action = {}) {
           address1: action.data.address1,
           addressFeedBackError1: false,
           address2: action.data.address2,
-          // addressFeedBackError2: false,
+          addressFeedBackError2: false,
           address3: action.data.address3,
-          // addressFeedBackError3: false,
+          addressFeedBackError3: false,
           city: action.data.city,
           cityFeedBackError: false,
           state: action.data.state,
@@ -501,8 +501,8 @@ export const onChangeCity = (formType, city) => ({
   city
 });
 export const onChangeAddress2 = (formType, address2) => {
-  if (address2.length > 60) {
-    const add2Value = address2.slice(0, 61);
+  if (address2.length > 40) {
+    const add2Value = address2.slice(0, 41);
     // const add3Value = address2.slice(40);
     // document.getElementById('add3').focus();address2
     return {
@@ -519,8 +519,8 @@ export const onChangeAddress2 = (formType, address2) => {
   };
 };
 export const onChangeAddress1 = (formType, address1) => {
-  if (address1.length > 60) {
-    const add1Value = address1.slice(0, 61);
+  if (address1.length > 40) {
+    const add1Value = address1.slice(0, 41);
     // const add2Value = address1.slice(40);
     // document.getElementById('add2').focus();
     return {
@@ -537,8 +537,8 @@ export const onChangeAddress1 = (formType, address1) => {
   };
 };
 export const onChangeAddress3 = (formType, address3) => {
-  if (address3.length > 60) {
-    const add3Value = address3.slice(0, 61);
+  if (address3.length > 40) {
+    const add3Value = address3.slice(0, 41);
     // document.getElementById('pincodeId').focus();
     return {
       type: SET_ADDRESS3,
