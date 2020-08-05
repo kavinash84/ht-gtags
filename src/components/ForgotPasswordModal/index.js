@@ -8,13 +8,17 @@ import { connect } from 'react-redux';
  */
 import ForgotPasswordForm from 'components/ForgotPasswordForm';
 import ResponsiveModal from 'components/Modal';
-
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
 /**
  * helpers / modules
  */
 import { LOGIN_URL } from 'helpers/Constants';
 import { validateEmail } from 'js-utility-functions';
 import { forgotPassword } from 'redux/modules/forgotpassword';
+
+const ForgotPasswordImg = require('../../../static/forgot-password-icon.png');
 
 @connect(({ forgotpassword }) => ({
   response: forgotpassword
@@ -32,7 +36,8 @@ export default class ForgotPasswordModal extends Component {
     this.state = {
       email: '',
       emailError: false,
-      emailErrorMessage: ''
+      emailErrorMessage: '',
+      submitted: false
     };
   }
 
@@ -58,32 +63,48 @@ export default class ForgotPasswordModal extends Component {
         emailErrorMessage: checkEmail.errorMessage
       });
     }
+    this.setState({ submitted: true });
     const { dispatch } = this.context.store;
     dispatch(forgotPassword(email));
-    setTimeout(() => {
-      this.props.onCloseModal();
-    }, 2500);
+    // setTimeout(() => {
+    //   this.props.onCloseModal();
+    // }, 2500);
   };
 
   render() {
-    const { email, emailError, emailErrorMessage } = this.state;
+    const {
+ email, emailError, emailErrorMessage, submitted
+} = this.state;
     const { response, showForgotPasswordModal, onCloseModal } = this.props;
-
+    const { loaded, error } = response;
     return (
       <ResponsiveModal
         classNames={{ modal: 'forgotPasswordModal' }}
         onCloseModal={onCloseModal}
         open={showForgotPasswordModal}
       >
-        <ForgotPasswordForm
-          email={email}
-          onChangeEmail={this.onChangeEmail}
-          emailFeedBackError={emailError}
-          emailFeedBackMessage={emailErrorMessage}
-          onSubmitForgot={this.onSubmitForgot}
-          forgotResponse={response}
-          loginUrl={LOGIN_URL}
-        />
+        {loaded && !error && submitted ? (
+          <Box sx={{ textAlign: 'center' }} py={20}>
+            <Image src={ForgotPasswordImg} alt="" height={150} mb={30} />
+            <Box>
+              <Text mb={5}>An email has been sent to</Text>
+              <Text mb={15}>
+                <b>{email}</b>
+              </Text>
+              <Text>Please follow the instructions to reset your password</Text>
+            </Box>
+          </Box>
+        ) : (
+          <ForgotPasswordForm
+            email={email}
+            onChangeEmail={this.onChangeEmail}
+            emailFeedBackError={emailError}
+            emailFeedBackMessage={emailErrorMessage}
+            onSubmitForgot={this.onSubmitForgot}
+            forgotResponse={response}
+            loginUrl={LOGIN_URL}
+          />
+        )}
       </ResponsiveModal>
     );
   }

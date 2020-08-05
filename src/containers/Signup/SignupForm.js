@@ -149,6 +149,15 @@ export default class SignupFormContainer extends Component {
     const { session } = this.props;
     dispatch(signUp(this.state, session, signupOrigin));
   };
+
+  toggleLoginForm = () => {
+    this.setState({
+      loginviaotp: !this.state.loginviaotp,
+      resend: false,
+      mobilesubmitted: false
+    });
+  };
+
   render() {
     const {
       name,
