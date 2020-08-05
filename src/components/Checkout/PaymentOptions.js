@@ -421,6 +421,7 @@ class PaymentOptions extends Component {
                     onClick={() => null}
                     discount={summary.coupon_discount}
                     itemsCount={summary.items_count}
+                    coupon={summary.coupon}
                     hidebutton
                     hidecoupon
                   />
