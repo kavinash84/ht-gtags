@@ -410,6 +410,7 @@ class DeliveryAddress extends Component {
                           as="input"
                           type="radio"
                           name="address"
+                          checked={index === currentaddressindex}
                           id={`address${item.id_customer_address}`}
                           mr={10}
                           sx={{ position: 'absolute', top: 18, left: 22 }}
