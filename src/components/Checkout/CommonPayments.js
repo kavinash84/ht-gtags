@@ -96,7 +96,7 @@ const PaymentTab = ({ title, imageUrl, ...props }) => (
     display="flex"
     variant="small"
     py={12}
-    px={16}
+    px={[8, 8, 16]}
     sx={{
       textTransform: 'uppercase',
       cursor: 'pointer',
@@ -106,7 +106,7 @@ const PaymentTab = ({ title, imageUrl, ...props }) => (
     }}
     {...props}
   >
-    <Image height={20} mr={10} src={imageUrl} alt={title} />
+    <Image height={20} mr={10} src={imageUrl} alt={title} sx={{ flexBasis: 0 }} />
     {title}
   </Label>
 );

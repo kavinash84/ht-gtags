@@ -110,7 +110,7 @@ export default class HeaderTop extends Component {
 
     return (
       <Box>
-        <Row alignItems="center" mx={[0, 0, 0, -16]}>
+        <Row sx={{ alignItems: 'center' }} mx={[0, 0, 0, -16]}>
           <Col width={3 / 12}>
             <Link to={HOME_URL}>
               <Image height={['auto', 'auto', 28]} src={LogoIcon} alt="Hometown" />
@@ -198,7 +198,7 @@ export default class HeaderTop extends Component {
                 <Text variant="headerLabel">{isLoggedIn ? wishListCount : 0}</Text>
               </Flex>
             </Button>
-            <Flex as={Link} to={CART_URL} alignItems="center" pl={20}>
+            <Flex as={Link} to={CART_URL} sx={{ alignItems: 'center' }} pl={20}>
               <CartIcon />
               <Text variant="headerLabel">{cartCount}</Text>
             </Flex>

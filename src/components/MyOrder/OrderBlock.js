@@ -163,73 +163,70 @@ class OrderBlock extends Component {
             </Box>
           </Row>
           {order.order_items &&
-            order.order_items.map(item => {
-              console.log(item);
-              return (
-                <Flex
-                  py={16}
-                  alignItems="center"
-                  sx={{
-                    position: 'relative',
-                    borderBottom: 'secondary',
-                    '&:last-child': {
-                      borderBottom: 'none'
-                    }
-                  }}
-                >
-                  <Box variant="col-2" pr={0} pl={0}>
-                    <ImageShimmer
-                      src={getImageURL(item.image, 'catalog_360')}
-                      height="100%"
-                      sx={{
-                        boxShadow: '0 1px 2px 0 #0000033'
-                      }}
-                    >
-                      {imageURL => (
-                        <Image
-                          width={1}
-                          src={imageURL}
-                          alt=""
-                          sx={{
-                            boxShadow: 'productThumb'
-                          }}
-                        />
-                      )}
-                    </ImageShimmer>
+            order.order_items.map(item => (
+              <Flex
+                py={16}
+                alignItems="center"
+                sx={{
+                  position: 'relative',
+                  borderBottom: 'secondary',
+                  '&:last-child': {
+                    borderBottom: 'none'
+                  }
+                }}
+              >
+                <Box variant="col-2" pr={0} pl={0}>
+                  <ImageShimmer
+                    src={getImageURL(item.image, 'catalog_360')}
+                    height="100%"
+                    sx={{
+                      boxShadow: '0 1px 2px 0 #0000033'
+                    }}
+                  >
+                    {imageURL => (
+                      <Image
+                        width={1}
+                        src={imageURL}
+                        alt=""
+                        sx={{
+                          boxShadow: 'productThumb'
+                        }}
+                      />
+                    )}
+                  </ImageShimmer>
+                </Box>
+                <Box variant="col-5" pl={30}>
+                  <Box mb={4}>
+                    <Heading color="heading" fontSize={16} lineHeight={1.4}>
+                      {item.product_name || '--'}
+                    </Heading>
                   </Box>
-                  <Box variant="col-5" pl={30}>
-                    <Box mb={4}>
-                      <Heading color="heading" fontSize={16} lineHeight={1.4}>
-                        {item.product_name || '--'}
-                      </Heading>
-                    </Box>
-                    <Box mb={6}>
-                      <Text as="span" fontSize={14} mr={10} color="heading">
-                        ₹ 19,920
-                      </Text>
-                      <Text as="span" fontSize={14} mr={10} sx={{ textDecoration: 'line-through' }}>
-                        ₹ 19,920
-                      </Text>
-                      <Text as="span" fontSize={14} mr={10} color="primary">
-                        Saved ₹ 19,920
-                      </Text>
-                    </Box>
-                    <Box mb={8}>
-                      <Text color="#575757" fontSize={14}>
-                        Qty. {item.quantity || '--'}
-                      </Text>
-                    </Box>
-                    <Text fontSize={14} pb={10}>
-                      {order.status !== 'canceled' ? (
-                        item.delivery_date_text || '--'
-                      ) : (
-                        <span style={{ color: 'red' }}> Cancelled </span>
-                      )}
+                  <Box mb={6}>
+                    <Text as="span" fontSize={14} mr={10} color="heading">
+                      ₹ 19,920
+                    </Text>
+                    {/* <Text as="span" fontSize={14} mr={10} sx={{ textDecoration: 'line-through' }}>
+                      ₹ 19,920
+                    </Text>
+                    <Text as="span" fontSize={14} mr={10} color="primary">
+                      Saved ₹ 19,920
+                    </Text> */}
+                  </Box>
+                  <Box mb={8}>
+                    <Text color="#575757" fontSize={14}>
+                      Qty. {item.quantity || '--'}
                     </Text>
                   </Box>
-                </Flex>
-              );
-            })}
+                  <Text fontSize={14} pb={10}>
+                    {order.status !== 'canceled' ? (
+                      item.delivery_date_text || '--'
+                    ) : (
+                      <span style={{ color: 'red' }}> Cancelled </span>
+                    )}
+                  </Text>
+                </Box>
+              </Flex>
+            ))}
         </Box>
         <ResponsiveModal
           classNames={{ modal: 'casesModal' }}

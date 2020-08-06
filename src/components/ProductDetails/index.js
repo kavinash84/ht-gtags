@@ -553,7 +553,6 @@ class ProductDetails extends React.Component {
                 ratings={rating}
                 count={count}
                 marginTop="1rem"
-                mb={8}
                 onClickReviews={this.onClickReviews}
               />
 
@@ -582,15 +581,14 @@ class ProductDetails extends React.Component {
                   ratings={weightedRating}
                   reviews={reviewsData.length}
                   count={5}
-                  pb={30}
+                  pb={20}
                   justifyContent="flex-start"
                   sx={{ borderBottom: 'none' }}
                 >
-                  <Box pl={4}>
+                  <Box>
                     <a
                       variant="linkPrimary"
                       href="#review-section"
-                      pl={10}
                       ml={10}
                       sx={{
                         borderLeft: 'primary'
@@ -602,12 +600,10 @@ class ProductDetails extends React.Component {
                   </Box>
                 </ReviewDisplay>
               ) : (
-                <Box pl={4} pb={30}>
+                <Box pb={20}>
                   <a
                     variant="linkPrimary"
                     href="#review-section"
-                    pl={10}
-                    ml={10}
                     sx={{
                       borderLeft: 'primary'
                     }}
@@ -620,9 +616,10 @@ class ProductDetails extends React.Component {
 
               {/* Color Options */}
               {colorProducts.length > 0 && (
-                <Box pb={30}>
+                <Box pb={15}>
                   <Heading fontSize="1em" color="textDark" fontFamily="medium" mb={15}>
-                    Color Options
+                    {/* TODO: @nikhil replace static color */}
+                    Color Options: Green (Static right now)
                   </Heading>
                   <ColorOption
                     data={colorProducts}
@@ -1021,7 +1018,9 @@ class ProductDetails extends React.Component {
             onCloseModal={this.handleLoginModal}
             open={this.state.openLogin}
           >
-            <LoginModal />
+            <Box py={32} px={32}>
+              <LoginModal />
+            </Box>
           </ResponsiveModal>
         </Container>
       </Box>

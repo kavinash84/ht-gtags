@@ -51,65 +51,67 @@ const EMI = ({
       </Row>
       {currentBankDetails && (
         <Box>
-          <Box
-            as="table"
-            width={1}
-            mb={20}
-            sx={{
-              borderCollapse: 'collapse',
-              border: 'secondary',
-              '& tr': {
-                border: 'secondary'
-              },
-              '& td': {
+          <Box sx={{ overflow: 'auto' }}>
+            <Box
+              as="table"
+              width={1}
+              mb={20}
+              sx={{
+                borderCollapse: 'collapse',
                 border: 'secondary',
-                p: '5px 8px',
-                fontSize: 14
-              },
-              '& th': {
-                border: 'secondary',
-                p: '10px 10px',
-                fontSize: 14
-              }
-            }}
-          >
-            <tbody>
-              <tr>
-                <th />
-                <th width="85px">Tenure</th>
-                <th>Annual Interest Rate</th>
-                <th>EMI Interest</th>
-                <th>Total Cost</th>
-                <th>Monthly Instalments</th>
-              </tr>
-
-              {currentBankDetails.values.map((item, index) => (
-                <tr key={String(index)}>
-                  <td align="center">
-                    <input
-                      type="radio"
-                      onChange={onChangeDetails(setPaymentDetails, selectedGateway)}
-                      name="emiCode"
-                      value={item.emiCode}
-                    />
-                  </td>
-                  <td>{item.value} Months</td>
-                  <td>{item.interestRate}%</td>
-                  <td>
-                    Rs.
-                    {Math.round(item.emiInterest)}
-                  </td>
-                  <td>
-                    Rs.
-                    {Math.round(item.totalAmount)}
-                  </td>
-                  <td>
-                    Rs.
-                    {Math.round(item.EMI)}
-                  </td>
+                '& tr': {
+                  border: 'secondary'
+                },
+                '& td': {
+                  border: 'secondary',
+                  p: '5px 8px',
+                  fontSize: 14
+                },
+                '& th': {
+                  border: 'secondary',
+                  p: '10px 10px',
+                  fontSize: 14
+                }
+              }}
+            >
+              <tbody>
+                <tr>
+                  <th />
+                  <th width="85px">Tenure</th>
+                  <th>Annual Interest Rate</th>
+                  <th>EMI Interest</th>
+                  <th>Total Cost</th>
+                  <th>Monthly Instalments</th>
                 </tr>
-              ))}
-            </tbody>
+
+                {currentBankDetails.values.map((item, index) => (
+                  <tr key={String(index)}>
+                    <td align="center">
+                      <input
+                        type="radio"
+                        onChange={onChangeDetails(setPaymentDetails, selectedGateway)}
+                        name="emiCode"
+                        value={item.emiCode}
+                      />
+                    </td>
+                    <td>{item.value} Months</td>
+                    <td>{item.interestRate}%</td>
+                    <td>
+                      Rs.
+                      {Math.round(item.emiInterest)}
+                    </td>
+                    <td>
+                      Rs.
+                      {Math.round(item.totalAmount)}
+                    </td>
+                    <td>
+                      Rs.
+                      {Math.round(item.EMI)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Box>
           </Box>
           <Box>
             <CardForm setPaymentDetails={setPaymentDetails} gateway={selectedGateway} padding="1rem 0rem 0" />

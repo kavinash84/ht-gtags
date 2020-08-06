@@ -55,7 +55,7 @@ export default class ForgotPasswordForm extends Component {
               textAlign: 'center'
             }}
           >
-            Enter your email address or phone number below and we will send you OTP to reset your password.
+            Enter your email address below and we will send you link to reset your password.
           </LabelHtV1>
           <BoxHtV1 width={1}>
             <FormInputHtV1
