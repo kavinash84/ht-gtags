@@ -220,6 +220,16 @@ const mapStateToProps = ({
   skuItem: getCartSKU(cart, productdetails.productDescription.sku)
 });
 
+const getSelectedColor = colors => {
+  let activeColorName = '';
+  colors.forEach(color => {
+    if (color.activeColor === true) {
+      activeColorName = color.meta.color_family;
+    }
+  });
+  return activeColorName;
+};
+
 class ProductDetails extends React.Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -231,11 +241,12 @@ class ProductDetails extends React.Component {
       openLogin: false,
       showmore: true,
       showmorecolorproducts: true,
+      showmorecolorproductsCount: 5,
       activeSpec: 'description',
       activeDescription: null,
       showReviews: 2,
       productQty: { value: 1, label: '1' },
-      ReviewDataSet: [],
+      reviewDataSet: [],
       selectedFilter: null,
       filterChanged: false,
       colorProducts: []
@@ -283,7 +294,7 @@ class ProductDetails extends React.Component {
     this.setState({
       filterChanged: true,
       selectedFilter: Filter,
-      ReviewDataSet: filterdData
+      reviewDataSet: filterdData
     });
   };
   onClickReviews = () => {
@@ -350,8 +361,11 @@ class ProductDetails extends React.Component {
     dispatch(addToCartCombined(setId, simpleSKUS, session, selectedPincode));
   };
   toggleShowMoreColorProducts = () => {
+    const { colorProducts } = this.state;
+    const { showmorecolorproductsCount } = this.state;
     this.setState({
-      showmorecolorproducts: !this.state.showmorecolorproducts
+      showmorecolorproducts: !this.state.showmorecolorproducts,
+      showmorecolorproductsCount: showmorecolorproductsCount > 5 ? 5 : showmorecolorproductsCount + colorProducts.length
     });
   };
   showMoreReviews = () => {
@@ -411,8 +425,11 @@ class ProductDetails extends React.Component {
       colorProducts,
       selectedFilter,
       filterChanged,
-      activeDescription
+      activeDescription,
+      reviewDataSet,
+      showmorecolorproductsCount
     } = this.state;
+    console.log(colorProducts, 'colorProducts');
     const {
       meta,
       images,
@@ -619,13 +636,14 @@ class ProductDetails extends React.Component {
                 <Box pb={15}>
                   <Heading fontSize="1em" color="textDark" fontFamily="medium" mb={15}>
                     {/* TODO: @nikhil replace static color */}
-                    Color Options: Green (Static right now)
+                    Color Options: {getSelectedColor(colorProducts)}
                   </Heading>
                   <ColorOption
                     data={colorProducts}
                     showmorecolorproducts={showmorecolorproducts}
                     toggleShowMoreColorProducts={this.toggleShowMoreColorProducts}
                     currentlySelectedProductSku={product.sku}
+                    showmorecolorproductsCount={showmorecolorproductsCount}
                   />
                 </Box>
               )}
@@ -966,12 +984,14 @@ class ProductDetails extends React.Component {
                 added={added}
                 toggleReview={toggleReviewBox}
               />
-              <Box mb={30}>
-                <ReviewFilter selectedFilterProp={selectedFilter} onFilterChange={this.onFilterChange} />
-              </Box>
+              {reviewsData.length > 0 && (
+                <Box mb={30}>
+                  <ReviewFilter selectedFilterProp={selectedFilter} onFilterChange={this.onFilterChange} />
+                </Box>
+              )}
               <Reviews
                 variant="col-12"
-                reviewItems={filterChanged ? this.state.ReviewDataSet : reviews.data}
+                reviewItems={filterChanged ? reviewDataSet : reviews.data}
                 showReviews={showReviews}
                 showMoreReviews={this.showMoreReviews}
               />
