@@ -55,7 +55,7 @@ export default class SignupFormContainer extends Component {
     this.state = {
       name: '',
       nameError: false,
-      nameErrorMessage: 'Numbers and special characters are not allowed !',
+      nameErrorMessage: 'Numbers and special characters are not allowed ! Sign Up Form',
       email: '',
       emailError: false,
       emailErrorMessage: 'Enter Valid Email Id',
@@ -83,7 +83,7 @@ export default class SignupFormContainer extends Component {
     const {
       target: { value }
     } = e;
-    const checkError = !validateEmail(value);
+    const checkError = isEmpty(value) || !validateEmail(value);
     this.setState({
       email: value,
       emailError: checkError
@@ -96,14 +96,17 @@ export default class SignupFormContainer extends Component {
     const checkError = isEmpty(value) || checkSpecialChar(value);
     this.setState({
       name: value,
-      nameError: checkError
+      nameError: checkError,
+      nameErrorMessage: checkSpecialChar(value)
+        ? 'Numbers and special characters are not allowed !'
+        : 'Name Cannot be Left Empty !'
     });
   };
   onChangePhone = e => {
     const {
       target: { value }
     } = e;
-    const checkError = !validateMobile(value);
+    const checkError = isEmpty(value) || !validateMobile(value);
     if (!allowNChar(value, 10) || (!allowTypeOf(value, 'number') && value.length > 0)) {
       return;
     }
@@ -169,18 +172,29 @@ export default class SignupFormContainer extends Component {
     const isRedirect = action ? action.indexOf('redirect') !== -1 : false;
     const signupOrigin = isRedirect ? 'Top Nav' : 'Pop-up';
     const {
- name, email, password, phone
-} = this.state;
+      name,
+      email,
+      password,
+      phone,
+      city
+      //  dob,
+      //  gender,
+    } = this.state;
     const checkName = isEmpty(name) || checkSpecialChar(name);
-    const checkEmail = !validateEmail(email);
-    const checkPhone = phone ? !validateMobile(phone) : false;
+    const checkEmail = validateEmail(email);
+    const checkPhone = isEmpty(phone) || validateMobile(phone);
     const checkPassword = validatePassword(password);
+    const checkCity = checkSpecialChar(city);
     if (checkName || checkEmail || checkPassword.error || checkPhone) {
       return this.setState({
         nameError: checkName,
+        nameErrorMessage: checkSpecialChar(name)
+          ? 'Numbers and special characters are not allowed !'
+          : 'Name Cannot be Left Empty !',
         emailError: checkEmail,
         phoneError: checkPhone,
-        passwordError: checkPassword.error
+        passwordError: checkPassword.error,
+        cityError: checkCity
       });
     }
     const { dispatch } = this.context.store;
