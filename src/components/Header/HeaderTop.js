@@ -34,7 +34,7 @@ import Text from 'hometown-components-dev/lib/TextHtV1';
 import Search from 'components/Search';
 import ResponsiveModal from 'components/Modal';
 import PinCode from 'components/PinCode';
-import LoginForm from 'components/Login/LoginForm';
+import LoginForm from 'components/LoginForms';
 import SignupForm from 'components/Signup/SignupForm';
 
 const LogoIcon = require('../../../static/logo@2x.png');
