@@ -120,7 +120,7 @@ class DeliveryAddress extends Component {
       }
     }
     if (nextProps.addresses.length > 0 && nextProps.addresses.length !== this.props.addresses.length) {
-      this.handleClick(0);
+      this.handleClick(0, nextProps.addresses);
     }
     if (nextProps.nextstep.success && nextProps.nextstep.success !== nextstep.success) {
       const { history } = this.props;
@@ -315,8 +315,8 @@ class DeliveryAddress extends Component {
     const { toggleShippingIsBilling } = this.props;
     toggleShippingIsBilling();
   };
-  handleClick = index => {
-    const { addresses, setAddress, loadPincodeDetails } = this.props;
+  handleClick = (index, addresses) => {
+    const { setAddress, loadPincodeDetails } = this.props;
     this.setState({
       addressform: false
     });
@@ -400,7 +400,7 @@ class DeliveryAddress extends Component {
                         className={` ${styles.addressBtn} ${
                           index === currentaddressindex ? styles.active : styles.deliveryAddress
                         }`}
-                        onClick={() => this.handleClick(index)}
+                        onClick={() => this.handleClick(index, addresses)}
                         sx={{
                           border: index === currentaddressindex ? 'primaryLarge' : 'secondaryLarge',
                           borderRadius: 3
