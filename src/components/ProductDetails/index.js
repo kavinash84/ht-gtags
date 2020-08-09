@@ -918,7 +918,7 @@ class ProductDetails extends React.Component {
                   <Heading variant="heading.regular">Will it fit in your room?</Heading>
                 </Box>
                 <Box p={15} textAlign="center" sx={{ border: 'dividerLight' }}>
-                  <Image src="https://www.hometown.in/media/product/89/2453/3-zoom.jpg" alt="" />
+                  <Image src={`${images[2].url}-zoom.jpg`} alt="" />
                 </Box>
                 <Box>
                   <Row
