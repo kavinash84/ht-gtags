@@ -6,11 +6,10 @@ import Container from 'hometown-components-dev/lib/ContainerHtV1';
 import Section from 'hometown-components-dev/lib/SectionHtV1';
 import Row from 'hometown-components-dev/lib/RowHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
-// import Div from 'hometown-components-dev/lib/Div';
-// import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Img from 'hometown-components-dev/lib/Img';
-import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
-import Empty from 'hometown-components-dev/lib/Empty';
+import ImageShimmer from 'hometown-components-dev/lib/ImageShimmerHtV1';
+import Empty from 'hometown-components-dev/lib/EmptyHtV1';
 import { isBlank } from 'js-utility-functions';
 import { validatePassword } from 'utils/validation';
 import { resetPassword } from 'redux/modules/forgotpassword';
@@ -118,14 +117,14 @@ export default class ResetPasswordContainer extends Component {
     return (
       <Section p="0" mb="0">
         <MenuFooter pageTitle="Reset Password">
-          <div className="wrapper">
+          <Box className="wrapper">
             {isValid ? (
               <Container pr="0" pl="0">
-                <div p="3rem 0 3rem">
-                  <div className={styles.userWrapper}>
+                <Box p="3rem 0 3rem">
+                  <Box className={styles.userWrapper}>
                     <Row display="block" mr="0" ml="0">
-                      <div col={6}>
-                        <div className={styles.imgWrapper}>
+                      <Box col={6}>
+                        <Box className={styles.imgWrapper}>
                           {/*eslint-disable*/}
                           <ImageShimmer
                             src="https://static.hometown.in/media/cms/hometownnew/compressed/forgotpassword-sidebar-bg.jpg"
@@ -134,12 +133,12 @@ export default class ResetPasswordContainer extends Component {
                             {imageURL => <Img src={imageURL} alt="" />}
                           </ImageShimmer>
                           {/* eslint-enable */}
-                        </div>
-                      </div>
-                      <div col={6} p="4rem 3.5rem">
-                        <div className={`${styles.formBlock} ${styles.resetForm}`}>
+                        </Box>
+                      </Box>
+                      <Box col={6} p="4rem 3.5rem">
+                        <Box className={`${styles.formBlock} ${styles.resetForm}`}>
                           <Row display="block" mt="1.5rem" mr="0" ml="0">
-                            <div col="12" ta="center">
+                            <Box col="12" ta="center">
                               <Heading
                                 color="#676767"
                                 mt="0"
@@ -151,10 +150,10 @@ export default class ResetPasswordContainer extends Component {
                               >
                                 Reset Password
                               </Heading>
-                            </div>
+                            </Box>
                           </Row>
                           <Row display="block" mr="0" ml="0">
-                            <div mt="0">
+                            <Box mt="0">
                               <ResetPasswordForm
                                 newPwd={newPwd}
                                 onChangeNewPwd={this.onChangeNewPwd}
@@ -167,13 +166,13 @@ export default class ResetPasswordContainer extends Component {
                                 onSubmitUpdatePassword={this.onSubmitUpdatePassword}
                                 resetResponse={response}
                               />
-                            </div>
+                            </Box>
                           </Row>
-                        </div>
-                      </div>
+                        </Box>
+                      </Box>
                     </Row>
-                  </div>
-                </div>
+                  </Box>
+                </Box>
               </Container>
             ) : (
               <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
@@ -188,7 +187,7 @@ export default class ResetPasswordContainer extends Component {
                 </Empty>
               </Section>
             )}
-          </div>
+          </Box>
         </MenuFooter>
       </Section>
     );
