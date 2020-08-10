@@ -117,7 +117,6 @@ export default class ResetPasswordContainer extends Component {
     } = response;
     return (
       <Section p="0" mb="0">
-        Akhil Test
         <MenuFooter pageTitle="Reset Password">
           <div className="wrapper">
             {isValid ? (
@@ -135,7 +134,6 @@ export default class ResetPasswordContainer extends Component {
                             {imageURL => <Img src={imageURL} alt="" />}
                           </ImageShimmer>
                           {/* eslint-enable */}
-                          Akhil Aaromal
                         </div>
                       </div>
                       <div col={6} p="4rem 3.5rem">
@@ -189,7 +187,6 @@ export default class ResetPasswordContainer extends Component {
                   <Img src={PasswordExpiredIcon} width="initial" m="auto" alt="Password link is expired !!" />
                 </Empty>
               </Section>
-              // <div>show somethind</div>
             )}
           </div>
         </MenuFooter>
