@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import ResetPasswordForm from 'hometown-components-dev/lib/Forms/ResetPasswordForm';
-import Container from 'hometown-components-dev/lib/Container';
-import Section from 'hometown-components-dev/lib/Section';
-import Row from 'hometown-components-dev/lib/Row';
-import Heading from 'hometown-components-dev/lib/Heading';
-import Div from 'hometown-components-dev/lib/Div';
+import ResetPasswordForm from 'hometown-components-dev/lib/FormsHtV1/ResetPasswordFormHtV1';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import Section from 'hometown-components-dev/lib/SectionHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+// import Div from 'hometown-components-dev/lib/Div';
+// import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Img from 'hometown-components-dev/lib/Img';
 import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
 import Empty from 'hometown-components-dev/lib/Empty';
@@ -116,14 +117,15 @@ export default class ResetPasswordContainer extends Component {
     } = response;
     return (
       <Section p="0" mb="0">
+        Akhil Test
         <MenuFooter pageTitle="Reset Password">
           <div className="wrapper">
             {isValid ? (
               <Container pr="0" pl="0">
-                <Div p="3rem 0 3rem">
+                <div p="3rem 0 3rem">
                   <div className={styles.userWrapper}>
                     <Row display="block" mr="0" ml="0">
-                      <Div col={6}>
+                      <div col={6}>
                         <div className={styles.imgWrapper}>
                           {/*eslint-disable*/}
                           <ImageShimmer
@@ -133,14 +135,15 @@ export default class ResetPasswordContainer extends Component {
                             {imageURL => <Img src={imageURL} alt="" />}
                           </ImageShimmer>
                           {/* eslint-enable */}
+                          Akhil Aaromal
                         </div>
-                      </Div>
-                      <Div col={6} p="4rem 3.5rem">
+                      </div>
+                      <div col={6} p="4rem 3.5rem">
                         <div className={`${styles.formBlock} ${styles.resetForm}`}>
                           <Row display="block" mt="1.5rem" mr="0" ml="0">
-                            <Div col="12" ta="center">
+                            <div col="12" ta="center">
                               <Heading
-                                color="color676767"
+                                color="#676767"
                                 mt="0"
                                 mb="0"
                                 fontWeight="400"
@@ -150,10 +153,10 @@ export default class ResetPasswordContainer extends Component {
                               >
                                 Reset Password
                               </Heading>
-                            </Div>
+                            </div>
                           </Row>
                           <Row display="block" mr="0" ml="0">
-                            <Div mt="0">
+                            <div mt="0">
                               <ResetPasswordForm
                                 newPwd={newPwd}
                                 onChangeNewPwd={this.onChangeNewPwd}
@@ -166,13 +169,13 @@ export default class ResetPasswordContainer extends Component {
                                 onSubmitUpdatePassword={this.onSubmitUpdatePassword}
                                 resetResponse={response}
                               />
-                            </Div>
+                            </div>
                           </Row>
                         </div>
-                      </Div>
+                      </div>
                     </Row>
                   </div>
-                </Div>
+                </div>
               </Container>
             ) : (
               <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
@@ -186,6 +189,7 @@ export default class ResetPasswordContainer extends Component {
                   <Img src={PasswordExpiredIcon} width="initial" m="auto" alt="Password link is expired !!" />
                 </Empty>
               </Section>
+              // <div>show somethind</div>
             )}
           </div>
         </MenuFooter>
