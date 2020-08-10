@@ -39,7 +39,7 @@ import PaymentMethods from '../PaymentMethods';
 const checkoutIcon = require('../../../static/checkout.svg');
 const location = require('../../../static/map-icon.svg');
 const orderTrackIcon = require('../../../static/shipped.svg');
-const saveForLaterIcon = require('../../../static/save-for-later.svg');
+// const saveForLaterIcon = require('../../../static/save-for-later.svg');
 
 const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
 
@@ -201,14 +201,14 @@ const Cart = ({
                   </Flex>
                 </Box>
                 <Flex alignItems="center">
-                  <Button variant="link" fontSize={12} display="flex" alignItems="center">
+                  {/* <Button variant="link" fontSize={12} display="flex" alignItems="center">
                     <Image height={16} mr={10} src={saveForLaterIcon} />
                     <Text fontSize={12}>Save for later</Text>
                   </Button>
                   <Text mx={8} fontSize={16}>
                     {' '}
                     |{' '}
-                  </Text>
+                  </Text> */}
                   <Button
                     variant="link"
                     fontSize={12}
