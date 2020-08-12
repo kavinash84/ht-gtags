@@ -161,12 +161,12 @@ class PaymentSuccess extends Component {
                     <Text>Discount : </Text>
                     <Text>Rs {formatAmount(discount)}</Text>
                   </Flex>
-                  {setDiscount && (
+                  {setDiscount ? (
                     <Flex mb={20} justifyContent="space-between">
                       <Text>Combo Discount : </Text>
                       <Text>Rs {formatAmount(Math.abs(setDiscount))}</Text>
                     </Flex>
-                  )}
+                  ) : null}
                   <Row m="0" py="1em" sx={{ borderTop: 'divider' }}>
                     <Box variant="col-6" p="0">
                       <Text color="menuItem" fontSize={18} fontFamily="medium">
