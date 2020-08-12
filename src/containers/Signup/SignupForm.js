@@ -12,7 +12,14 @@ import { allowNChar, allowTypeOf } from 'utils/helper';
 import { LOGIN_URL } from 'helpers/Constants';
 
 /* ====== Validations ====== */
-import { validateMobile, validatePassword, validateEmail, isEmpty, checkSpecialChar } from 'utils/validation';
+import {
+  validateMobile,
+  validatePassword,
+  validateEmail,
+  isEmpty,
+  checkSpecialChar,
+  checkDateOfBirth
+} from 'utils/validation';
 
 /* ====== Components ====== */
 import Box from 'hometown-components-dev/lib/BoxHtV1';
@@ -68,7 +75,7 @@ export default class SignupFormContainer extends Component {
 
       dob: '',
       dobError: false,
-      dobErrorMessage: 'global err message',
+      dobErrorMessage: 'can not select a date in the future!',
       gender: '',
       genderError: false,
       genderErrorMessage: 'global err message',
@@ -140,8 +147,10 @@ export default class SignupFormContainer extends Component {
     const {
       target: { value }
     } = e;
+    const checkError = checkDateOfBirth(value);
     this.setState({
-      dob: value
+      dob: value,
+      dobError: checkError
     });
   };
   onChangePassword = e => {
@@ -176,8 +185,8 @@ export default class SignupFormContainer extends Component {
       email,
       password,
       phone,
-      city
-      //  dob,
+      city,
+      dob
       //  gender,
     } = this.state;
     const checkName = isEmpty(name) || checkSpecialChar(name);
@@ -185,7 +194,8 @@ export default class SignupFormContainer extends Component {
     const checkPhone = isEmpty(phone) || validateMobile(phone);
     const checkPassword = validatePassword(password);
     const checkCity = checkSpecialChar(city);
-    if (checkName || checkEmail || checkPassword.error || checkPhone) {
+    const checkDob = checkDateOfBirth(dob);
+    if (checkName || checkEmail || checkPassword.error || checkPhone || checkDob) {
       return this.setState({
         nameError: checkName,
         nameErrorMessage: checkSpecialChar(name)
@@ -194,7 +204,8 @@ export default class SignupFormContainer extends Component {
         emailError: checkEmail,
         phoneError: checkPhone,
         passwordError: checkPassword.error,
-        cityError: checkCity
+        cityError: checkCity,
+        dobError: checkDob
       });
     }
     const { dispatch } = this.context.store;

@@ -15,6 +15,7 @@ import { validatePassword } from 'utils/validation';
 import { resetPassword } from 'redux/modules/forgotpassword';
 import { allowNChar } from 'utils/helper';
 import MenuFooter from 'containers/MenuFooter';
+import ForgotPasswordModal from 'components/ForgotPasswordModal';
 
 const PasswordExpiredIcon = require('../../../static/password-expired-icon.png');
 
@@ -38,13 +39,17 @@ export default class ResetPasswordContainer extends Component {
     newPwdErrorMessage: '',
     confirmPwd: '',
     confirmPwdError: false,
-    confirmPwdErrorMessage: ''
+    confirmPwdErrorMessage: '',
+    showForgotPasswordModal: false
   };
   componentWillReceiveProps(nextProps) {
     if (window && nextProps.response.passwordUpdated) {
       window.setTimeout(() => nextProps.history.push('/login'), 2000);
     }
   }
+  onForgotPasswordClick = () => {
+    this.setState({ showForgotPasswordModal: !this.state.showForgotPasswordModal });
+  };
   onChangeNewPwd = e => {
     const {
       target: { value }
@@ -180,7 +185,7 @@ export default class ResetPasswordContainer extends Component {
                   title="Password link is expired !!"
                   subTitle=""
                   btnName="Resend Link"
-                  url="/forgot-password"
+                  onBtnClick={this.onForgotPasswordClick}
                   bg="#fafafa"
                 >
                   <Img src={PasswordExpiredIcon} width="initial" m="auto" alt="Password link is expired !!" />
@@ -188,6 +193,10 @@ export default class ResetPasswordContainer extends Component {
               </Section>
             )}
           </Box>
+          <ForgotPasswordModal
+            showForgotPasswordModal={this.state.showForgotPasswordModal}
+            onCloseModal={this.onForgotPasswordClick}
+          />
         </MenuFooter>
       </Section>
     );

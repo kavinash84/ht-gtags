@@ -16,7 +16,7 @@ import Box from 'hometown-components-dev/lib/BoxHtV1';
 /**
  * modules / utils
  */
-import { validateMobile, checkSpecialChar } from 'utils/validation';
+import { validateMobile, checkSpecialChar, checkDateOfBirth } from 'utils/validation';
 import { updateUserProfile } from 'redux/modules/profile';
 import {
   // allowNChar,
@@ -81,7 +81,7 @@ export default class ProfileForm extends Component {
     gstErrorMessage: 'Enter a valid GST Number',
     dob: '',
     dobError: false,
-    dobErrorMessage: 'Enter a valid DOB',
+    dobErrorMessage: 'can not select a date in the future!',
     gender: 'male',
     genderError: false,
     genderErrorMessage: 'Enter a valid Gender',
@@ -169,20 +169,23 @@ export default class ProfileForm extends Component {
     const {
       target: { value }
     } = e;
+    const checkError = checkDateOfBirth(value);
     this.setState({
-      dob: value
+      dob: value,
+      dobError: checkError
     });
   };
   onSubmitProfile = e => {
     e.preventDefault();
     const {
- email, fullName, phone, gst
+ email, fullName, phone, gst, dob
 } = this.state;
     const checkEmail = validateEmail(email, 'Invalid Email');
     const phoneError = !validateMobile(phone);
     const checkFullName = isBlank(fullName) || checkSpecialChar(fullName);
     const isGSTError = !isGSTNumber(gst);
-    if (checkEmail.error || checkFullName || phoneError) {
+    const checkDob = checkDateOfBirth(dob);
+    if (checkEmail.error || checkFullName || phoneError || checkDob) {
       return this.setState({
         emailError: checkEmail.error,
         emailErrorMessage: checkEmail.errorMessage,
@@ -192,7 +195,8 @@ export default class ProfileForm extends Component {
           : 'Name Cannot be Left Empty !',
         phoneError,
         gstError: isGSTError,
-        gstErrorMessage: 'Please enter a valid GST number !'
+        gstErrorMessage: 'Please enter a valid GST number !',
+        dobError: checkDob
       });
     }
     const { dispatch } = this.context.store;
