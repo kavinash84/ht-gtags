@@ -268,6 +268,7 @@ class ProductDetails extends React.Component {
       });
     }
     if (nextProps.colorproducts !== colorproducts) {
+      console.log('componentWillReceiveProps', nextProps.colorproducts);
       this.addProductToColorProduct(nextProps.colorproducts);
     }
   }
@@ -341,9 +342,12 @@ class ProductDetails extends React.Component {
   };
   addProductToColorProduct = colorProducts => {
     const { product } = this.props;
-    colorProducts = colorProducts.map(arr => ({ ...arr, activeColor: false }));
-    colorProducts.push({ ...product, activeColor: true });
-    this.setState({ colorProducts }, () => console.log(colorProducts, 'colorProducts'));
+    console.log('colorProducts', colorProducts);
+    if (colorProducts.length > 0) {
+      colorProducts = colorProducts.map(arr => ({ ...arr, activeColor: false }));
+      colorProducts.push({ ...product, activeColor: true });
+      this.setState({ colorProducts });
+    }
   };
   toggleShowMore = () => {
     this.setState({
