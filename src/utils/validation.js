@@ -162,6 +162,12 @@ export const checkSpecialChar = text => {
   return check;
 };
 
+export const checkDateOfBirth = picDate => {
+  const today = new Date().getTime();
+  let idate = picDate.split('-');
+  idate = new Date(idate[0], idate[1] - 1, idate[2]).getTime();
+  return today - idate < 0;
+};
 /*eslint-disable*/
 export const validateEmail = email =>
   /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
