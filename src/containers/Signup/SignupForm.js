@@ -72,7 +72,6 @@ export default class SignupFormContainer extends Component {
       password: '',
       passwordError: false,
       passwordErrorMessage: 'Password must contain atleast 6 and max 15 characters',
-
       dob: '',
       dobError: false,
       dobErrorMessage: 'can not select a date in the future!',
@@ -82,7 +81,6 @@ export default class SignupFormContainer extends Component {
       city: '',
       cityError: false,
       cityErrorMessage: 'global err message',
-
       policyAccepted: false
     };
   }
@@ -190,8 +188,8 @@ export default class SignupFormContainer extends Component {
       //  gender,
     } = this.state;
     const checkName = isEmpty(name) || checkSpecialChar(name);
-    const checkEmail = validateEmail(email);
-    const checkPhone = isEmpty(phone) || validateMobile(phone);
+    const checkEmail = !validateEmail(email);
+    const checkPhone = isEmpty(phone) || !validateMobile(phone);
     const checkPassword = validatePassword(password);
     const checkCity = checkSpecialChar(city);
     const checkDob = checkDateOfBirth(dob);
@@ -235,7 +233,6 @@ export default class SignupFormContainer extends Component {
       phoneErrorMessage,
       passwordError,
       passwordErrorMessage,
-
       dob,
       dobError,
       dobErrorMessage,
@@ -245,7 +242,6 @@ export default class SignupFormContainer extends Component {
       city,
       cityError,
       cityErrorMessage,
-
       policyAccepted
     } = this.state;
     const { loading } = this.props;
