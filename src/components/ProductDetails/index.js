@@ -255,13 +255,16 @@ class ProductDetails extends React.Component {
   componentDidMount() {
     const { dispatch } = this.context.store;
     const {
+      product,
       simpleSku,
       pincode: { selectedPincode }
     } = this.props;
     dispatch(getCombinedBuy(simpleSku, selectedPincode));
+    this.setDescriptionActive(product);
   }
   componentWillReceiveProps(nextProps) {
-    const { colorproducts } = this.props;
+    const { colorproducts, product } = this.props;
+    console.log('sddfsdfsdfs', product);
     if (nextProps.isLoggedIn) {
       this.setState({
         openLogin: false
@@ -308,6 +311,13 @@ class ProductDetails extends React.Component {
     } catch (e) {
       window.scroll(0, this.reviewsRef.current.offsetTop);
     }
+  };
+  setDescriptionActive = product => {
+    console.log('setDescriptionActive', product);
+    const {
+      attributes: { description }
+    } = product;
+    this.setState({ activeDescription: description });
   };
   getWeightedAverageRatings = () => {
     const {
