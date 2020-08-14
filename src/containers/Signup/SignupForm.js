@@ -74,7 +74,7 @@ export default class SignupFormContainer extends Component {
       passwordErrorMessage: 'Password must contain atleast 6 and max 15 characters',
       dob: '',
       dobError: false,
-      dobErrorMessage: 'can not select a date in the future!',
+      dobErrorMessage: 'Invalid date of birth',
       gender: '',
       genderError: false,
       genderErrorMessage: 'global err message',
