@@ -831,36 +831,36 @@ class ProductDetails extends React.Component {
 
             {/* Description */}
             {activeSpec === 'details' ? (
-              <Box px="10%">
+              <Box px="10%" py="2%" sx={{ display: 'flex' }}>
                 <Row>
                   <Col>
-                    <Row>
-                      <Col>Brand</Col>
+                    <Row pb={10}>
+                      <Col width={125}>Brand</Col>
                       <Col>{ProductBrand}</Col>
                     </Row>
                   </Col>
                   <Col>
-                    <Row>
+                    <Row pb={10}>
                       <Col>Family Name</Col>
                       <Col>{familyName}</Col>
                     </Row>
                   </Col>
                   <Col>
                     <Row>
-                      <Col>Colour</Col>
+                      <Col width={125}>Colour</Col>
                       <Col>{ProductColor}</Col>
                     </Row>
                   </Col>
                 </Row>
                 <Row>
                   <Col>
-                    <Row>
+                    <Row pb={10}>
                       <Col>Depth (mm)</Col>
                       <Col>{productDepth}</Col>
                     </Row>
                   </Col>
                   <Col>
-                    <Row>
+                    <Row pb={10}>
                       <Col>Width (mm)</Col>
                       <Col>{productWidth}</Col>
                     </Row>
@@ -874,20 +874,20 @@ class ProductDetails extends React.Component {
                 </Row>
                 <Row>
                   <Col>
-                    <Row>
-                      <Col>Product Weight</Col>
+                    <Row pb={10}>
+                      <Col width={188}>Product Weight</Col>
                       <Col>{productWeight}</Col>
                     </Row>
                   </Col>
                   <Col>
-                    <Row>
+                    <Row pb={10}>
                       <Col>Product main Material</Col>
                       <Col>{productMainMaterial}</Col>
                     </Row>
                   </Col>
                   <Col>
                     <Row>
-                      <Col>SKU</Col>
+                      <Col width={188}>SKU</Col>
                       <Col>{skuSupplierConfig}</Col>
                     </Row>
                   </Col>

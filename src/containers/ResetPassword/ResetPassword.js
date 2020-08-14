@@ -127,7 +127,7 @@ export default class ResetPasswordContainer extends Component {
               <Container pr="0" pl="0">
                 <Box p="3rem 0 3rem">
                   <Box className={styles.userWrapper}>
-                    <Row display="block" mr="0" ml="0">
+                    <Row display="block" mr="0" ml="0" justifyContent="center">
                       <Box col={6}>
                         <Box className={styles.imgWrapper}>
                           {/*eslint-disable*/}
@@ -140,7 +140,7 @@ export default class ResetPasswordContainer extends Component {
                           {/* eslint-enable */}
                         </Box>
                       </Box>
-                      <Box col={6} p="4rem 3.5rem">
+                      <Box col={6} p="5rem 3.5rem">
                         <Box className={`${styles.formBlock} ${styles.resetForm}`}>
                           <Row display="block" mt="1.5rem" mr="0" ml="0">
                             <Box col="12" ta="center">

@@ -104,7 +104,20 @@ class NavBar extends Component {
                   }
                 }}
               >
-                <Text variant="menu">More</Text>
+                <Box display="flex">
+                  <Text variant="menu">More</Text>
+                  <Image
+                    display={['block', 'block', 'none']}
+                    width={12}
+                    ml={12}
+                    mr={9}
+                    mb={-2}
+                    src={dropdown}
+                    alt=""
+                    onClick={handleClick('10')}
+                    sx={{ flexShrink: 0 }}
+                  />
+                </Box>
               </Button>
               <Image
                 sx={{

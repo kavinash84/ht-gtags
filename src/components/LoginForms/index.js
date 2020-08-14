@@ -171,7 +171,7 @@ export default class LoginForm extends Component {
     const open = (askContact || askName) && loginType && loginType === 'hometown';
     const isValidField = this.isValid();
     return (
-      <Box>
+      <Box p={24}>
         <LoginFormWrapper
           email={email}
           onChangeEmail={this.onChangeEmail}
