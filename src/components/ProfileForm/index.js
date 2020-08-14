@@ -54,7 +54,9 @@ export default class ProfileForm extends Component {
       gst: PropTypes.string,
       dob: PropTypes.string,
       city: PropTypes.string,
-      gender: PropTypes.string
+      gender: PropTypes.string,
+      birthday: PropTypes.string,
+      today: PropTypes.string
     }),
     response: PropTypes.object
   };
@@ -80,8 +82,9 @@ export default class ProfileForm extends Component {
     gstError: false,
     gstErrorMessage: 'Enter a valid GST Number',
     dob: '',
+    today: '',
     dobError: false,
-    dobErrorMessage: 'can not select a date in the future!',
+    dobErrorMessage: 'Invalid date of birth',
     gender: 'male',
     genderError: false,
     genderErrorMessage: 'Enter a valid Gender',
@@ -94,7 +97,7 @@ export default class ProfileForm extends Component {
   componentWillMount() {
     const {
       profile: {
- full_name: fullName, email, contact_number: phone, customer_city: city, gst, dob, gender
+ full_name: fullName, email, contact_number: phone, city, gst, dob, gender
 }
     } = this.props;
     this.setState({
@@ -202,7 +205,20 @@ export default class ProfileForm extends Component {
     const { dispatch } = this.context.store;
     dispatch(updateUserProfile(this.state));
   };
-
+  convertDate = date => {
+    const utcDate = new Date(date);
+    let dd = utcDate.getDate();
+    let mm = utcDate.getMonth() + 1;
+    const yyyy = utcDate.getFullYear();
+    if (dd < 10) {
+      dd = `0${dd}`;
+    }
+    if (mm < 10) {
+      mm = `0${mm}`;
+    }
+    const newdate = `${yyyy}-${mm}-${dd}`;
+    return newdate;
+  };
   render() {
     const {
       email,
