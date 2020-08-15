@@ -648,7 +648,7 @@ class ProductDetails extends React.Component {
               {/* Color Options */}
               {colorProducts.length > 0 && (
                 <Box pb={15}>
-                  <Heading fontSize="1em" color="textDark" fontFamily="medium" mb={15}>
+                  <Heading fontSize="1em" color="textDark" fontFamily="medium" fontWeight="normal" mb={15}>
                     {/* TODO: @nikhil replace static color */}
                     Color Options: {getSelectedColor(colorProducts)}
                   </Heading>
@@ -835,19 +835,23 @@ class ProductDetails extends React.Component {
                 <Row>
                   <Col>
                     <Row pb={10}>
-                      <Col width={125}>Brand</Col>
+                      <Col width={125} fontWeight="bold">
+                        Brand
+                      </Col>
                       <Col>{ProductBrand}</Col>
                     </Row>
                   </Col>
                   <Col>
                     <Row pb={10}>
-                      <Col>Family Name</Col>
+                      <Col fontWeight="bold">Family Name</Col>
                       <Col>{familyName}</Col>
                     </Row>
                   </Col>
                   <Col>
                     <Row>
-                      <Col width={125}>Colour</Col>
+                      <Col width={125} fontWeight="bold">
+                        Colour
+                      </Col>
                       <Col>{ProductColor}</Col>
                     </Row>
                   </Col>
@@ -855,19 +859,19 @@ class ProductDetails extends React.Component {
                 <Row>
                   <Col>
                     <Row pb={10}>
-                      <Col>Depth (mm)</Col>
+                      <Col fontWeight="bold">Depth (mm)</Col>
                       <Col>{productDepth}</Col>
                     </Row>
                   </Col>
                   <Col>
                     <Row pb={10}>
-                      <Col>Width (mm)</Col>
+                      <Col fontWeight="bold">Width (mm)</Col>
                       <Col>{productWidth}</Col>
                     </Row>
                   </Col>
                   <Col>
                     <Row>
-                      <Col>Height (mm)</Col>
+                      <Col fontWeight="bold">Height (mm)</Col>
                       <Col>{productHeight}</Col>
                     </Row>
                   </Col>
@@ -875,19 +879,23 @@ class ProductDetails extends React.Component {
                 <Row>
                   <Col>
                     <Row pb={10}>
-                      <Col width={188}>Product Weight</Col>
+                      <Col width={188} fontWeight="bold">
+                        Product Weight
+                      </Col>
                       <Col>{productWeight}</Col>
                     </Row>
                   </Col>
                   <Col>
                     <Row pb={10}>
-                      <Col>Product main Material</Col>
+                      <Col fontWeight="bold">Product main Material</Col>
                       <Col>{productMainMaterial}</Col>
                     </Row>
                   </Col>
                   <Col>
                     <Row>
-                      <Col width={188}>SKU</Col>
+                      <Col width={188} fontWeight="bold">
+                        SKU
+                      </Col>
                       <Col>{skuSupplierConfig}</Col>
                     </Row>
                   </Col>
@@ -1015,7 +1023,9 @@ class ProductDetails extends React.Component {
           {combinedbuy.length > 0 && (
             <Box id="combined_buy_offers" pt={36}>
               <Box textAlign="center" mb={20}>
-                <Heading variant="heading.regular">Combined Offers</Heading>
+                <Heading variant="heading.regular" fontWeight="normal">
+                  Combined Offers
+                </Heading>
               </Box>
               {combinedbuy.map((item, index) => (
                 <Row key={String(index)} mx={0}>
