@@ -476,12 +476,12 @@ class ProductDetails extends React.Component {
       sku_supplier_config: skuSupplierConfig
     } = attributes;
     const simpleSku = Object.keys(simples)[0];
+    const { name, price } = meta;
     const {
- name, price, special_price: specialPrice, offer_details: offerDetails
-} = meta;
-    const { coupon_code: couponCode, offer_price: couponOfferPrice } = offerDetails;
-    const {
+      offer_discount_percentage: offerDiscountPercentage,
+      coupon_code: couponCode,
       offer_price: offerPrice,
+      special_price: specialPrice,
       retail_discount: retailDiscount,
       total_savings: totalSavings,
       limited_time_coupon_discount: limitedTimeCouponDiscount,
@@ -572,15 +572,15 @@ class ProductDetails extends React.Component {
               {/* Product title and price */}
               <TitlePrice
                 name={name}
-                price={offerPrice}
-                discPrice={formatAmount(checkSpecialPrice)}
-                maxPrice={maxPrice}
                 couponCode={couponCode}
-                couponOfferPrice={couponOfferPrice}
+                offerDiscountPercentage={offerDiscountPercentage}
+                limitedTimeCouponDiscount={limitedTimeCouponDiscount}
+                maxPrice={maxPrice}
+                offerPrice={offerPrice}
+                totalSavings={totalSavings}
+                specialPrice={specialPrice}
                 totalDiscountPercentage={totalDiscountPercentage}
                 retailDiscount={retailDiscount}
-                totalSavings={totalSavings}
-                limitedTimeCouponDiscount={limitedTimeCouponDiscount}
                 ratings={rating}
                 count={count}
                 marginTop="1rem"
