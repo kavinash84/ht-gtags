@@ -15,8 +15,16 @@ import { getCombinedBuy } from 'redux/modules/combinedbuy';
 import { addToCartCombined, setQuantityFlag } from 'redux/modules/cart';
 import { formatAmount } from 'utils/formatters';
 import { calculateLowestEmi, getVideoID, formatProductURL } from 'utils/helper';
-import { productPageTitle, productMetaDescription, productMetaKeywords } from 'utils/seo';
-import { groupedAttributes as getgroupedAttributes, getBreadCrumbs, getSimpleSku } from 'selectors/product';
+import {
+  productPageTitle,
+  productMetaDescription,
+  productMetaKeywords
+} from 'utils/seo';
+import {
+  groupedAttributes as getgroupedAttributes,
+  getBreadCrumbs,
+  getSimpleSku
+} from 'selectors/product';
 import { getCartSKU } from 'selectors/cart';
 import { getSKUList } from 'selectors/wishlist';
 
@@ -76,7 +84,6 @@ const pinIcon = require('../../../static/pinterest-pdp.svg');
 const styles = require('./productIndex.scss');
 
 const qtyOptions = sku => {
-  console.log('qtyOptions', sku);
   if (sku.meta) {
     let qty = sku.meta.quantity;
     const options = [];
@@ -85,7 +92,6 @@ const qtyOptions = sku => {
     for (let i = 1; i <= qty; i += 1) {
       options.push({ value: i, label: i });
     }
-    // console.log('QtyOption', options, qty);
     return options;
   }
 };
@@ -264,14 +270,13 @@ class ProductDetails extends React.Component {
   }
   componentWillReceiveProps(nextProps) {
     const { colorproducts, product } = this.props;
-    console.log('sddfsdfsdfs', product);
+    console.log('product', product);
     if (nextProps.isLoggedIn) {
       this.setState({
         openLogin: false
       });
     }
     if (nextProps.colorproducts !== colorproducts) {
-      console.log('componentWillReceiveProps', nextProps.colorproducts);
       this.addProductToColorProduct(nextProps.colorproducts);
     }
   }
@@ -313,7 +318,6 @@ class ProductDetails extends React.Component {
     }
   };
   setDescriptionActive = product => {
-    console.log('setDescriptionActive', product);
     const {
       attributes: { description }
     } = product;
@@ -352,9 +356,11 @@ class ProductDetails extends React.Component {
   };
   addProductToColorProduct = colorProducts => {
     const { product } = this.props;
-    console.log('colorProducts', colorProducts);
     if (colorProducts.length > 0) {
-      colorProducts = colorProducts.map(arr => ({ ...arr, activeColor: false }));
+      colorProducts = colorProducts.map(arr => ({
+        ...arr,
+        activeColor: false
+      }));
       colorProducts.push({ ...product, activeColor: true });
       this.setState({ colorProducts });
     }
@@ -367,10 +373,11 @@ class ProductDetails extends React.Component {
   handleCombinedBuy = (item, pincode, session) => {
     const { id_catalog_buildyourset: setId, skus } = item;
     const { selectedPincode } = pincode;
-    const simpleSKUS = skus.map(val => ({ simple_sku: val.sku, qty: Number(val.qty) }));
+    const simpleSKUS = skus.map(val => ({
+      simple_sku: val.sku,
+      qty: Number(val.qty)
+    }));
     // set_id, skus, session_id, pincode
-    // console.log(name);
-    // console.log(skus);
     const { dispatch } = this.context.store;
     dispatch(addToCartCombined(setId, simpleSKUS, session, selectedPincode));
   };
@@ -379,7 +386,10 @@ class ProductDetails extends React.Component {
     const { showmorecolorproductsCount } = this.state;
     this.setState({
       showmorecolorproducts: !this.state.showmorecolorproducts,
-      showmorecolorproductsCount: showmorecolorproductsCount > 5 ? 5 : showmorecolorproductsCount + colorProducts.length
+      showmorecolorproductsCount:
+        showmorecolorproductsCount > 5
+          ? 5
+          : showmorecolorproductsCount + colorProducts.length
     });
   };
   showMoreReviews = () => {
@@ -443,7 +453,6 @@ class ProductDetails extends React.Component {
       reviewDataSet,
       showmorecolorproductsCount
     } = this.state;
-    console.log(colorProducts, 'colorProducts');
     const {
       meta,
       images,
@@ -477,9 +486,15 @@ class ProductDetails extends React.Component {
     } = attributes;
     const simpleSku = Object.keys(simples)[0];
     const {
- name, price, special_price: specialPrice, offer_details: offerDetails
-} = meta;
-    const { coupon_code: couponCode, offer_price: couponOfferPrice } = offerDetails;
+      name,
+      price,
+      special_price: specialPrice,
+      offer_details: offerDetails
+    } = meta;
+    const {
+      coupon_code: couponCode,
+      offer_price: couponOfferPrice
+    } = offerDetails;
     const {
       offer_price: offerPrice,
       retail_discount: retailDiscount,
@@ -495,21 +510,36 @@ class ProductDetails extends React.Component {
     // const offerImageRedirect = simples[simpleSku].groupedattributes.offer_image_click_url || null;
     const { showmore, showmorecolorproducts } = this.state;
     const isEmiAvailable = Number(checkSpecialPrice) >= 3000;
-    const { main_material: material, color, category_type: productType } = gattributes;
+    const {
+      main_material: material,
+      color,
+      category_type: productType
+    } = gattributes;
     const productURL = `${SITE_URL}${formatProductURL(name, sku)}`;
-    const productDescription = productMetaDescription(name, productType, material, color);
+    const productDescription = productMetaDescription(
+      name,
+      productType,
+      material,
+      color
+    );
     const weightedRating = this.getWeightedAverageRatings();
     return (
       <Box pt={30}>
         <Helmet>
           <title>{productPageTitle(name)}</title>
-          <meta name="keywords" content={productMetaKeywords(productType, material)} />
+          <meta
+            name="keywords"
+            content={productMetaKeywords(productType, material)}
+          />
           <meta name="description" content={productDescription} />
           <meta property="og:url" content={productURL} />
           <meta property="og:type" content="website" />
           <meta property="og:title" content={name} />
           <meta property="og:description" content={productDescription} />
-          <meta property="og:image" content={images && images.length > 0 && `${images[0].url}.jpg`} />
+          <meta
+            property="og:image"
+            content={images && images.length > 0 && `${images[0].url}.jpg`}
+          />
           <script type="application/ld+json">
             {`
                 {
@@ -517,7 +547,11 @@ class ProductDetails extends React.Component {
                   "@type" : "Product",
                   "url": "${productURL || ''}",
                   "name" : "${name.replace(/['"]+/g, '')}",
-                  "image" : ${images && images.length && images[0].url ? `["${images[0].url}.jpg"]` : []},
+                  "image" : ${
+                    images && images.length && images[0].url
+                      ? `["${images[0].url}.jpg"]`
+                      : []
+                  },
                   "description" : "${productDescription.replace(/['"]+/g, '')}",
                   "sku": "${sku || ''}",
                   "brand" : {
@@ -547,7 +581,9 @@ class ProductDetails extends React.Component {
             <Col width={[1, 6 / 12, 6 / 12, 7 / 12]} pr={40}>
               <Box sx={{ position: 'relative' }}>
                 {/* Product Slider */}
-                {images && <ProductDetailsCarousel data={images} title={meta.name} />}
+                {images && (
+                  <ProductDetailsCarousel data={images} title={meta.name} />
+                )}
 
                 {/* Wishlist Button */}
                 <WishListButton
@@ -594,7 +630,9 @@ class ProductDetails extends React.Component {
               <ServiceDetails
                 deliverBy={
                   (deliveryInfo && deliveryInfo[0] && deliveryInfo[0].value) ||
-                  (deliveryDetails[0] && deliveryDetails[0] && deliveryDetails[0].value) ||
+                  (deliveryDetails[0] &&
+                    deliveryDetails[0] &&
+                    deliveryDetails[0].value) ||
                   ''
                 }
                 emiStarting={formatAmount(calculateLowestEmi(emidata, price))}
@@ -648,14 +686,22 @@ class ProductDetails extends React.Component {
               {/* Color Options */}
               {colorProducts.length > 0 && (
                 <Box pb={15}>
-                  <Heading fontSize="1em" color="textDark" fontFamily="medium" fontWeight="normal" mb={15}>
+                  <Heading
+                    fontSize="1em"
+                    color="textDark"
+                    fontFamily="medium"
+                    fontWeight="normal"
+                    mb={15}
+                  >
                     {/* TODO: @nikhil replace static color */}
                     Color Options: {getSelectedColor(colorProducts)}
                   </Heading>
                   <ColorOption
                     data={colorProducts}
                     showmorecolorproducts={showmorecolorproducts}
-                    toggleShowMoreColorProducts={this.toggleShowMoreColorProducts}
+                    toggleShowMoreColorProducts={
+                      this.toggleShowMoreColorProducts
+                    }
                     currentlySelectedProductSku={product.sku}
                     showmorecolorproductsCount={showmorecolorproductsCount}
                   />
@@ -684,7 +730,11 @@ class ProductDetails extends React.Component {
                 emiStarting={formatAmount(calculateLowestEmi(emidata, price))}
                 isEmiAvailable={isEmiAvailable}
               >
-                <EmiModal price={formatAmount(checkSpecialPrice)} data={emidata} key="emi" />
+                <EmiModal
+                  price={formatAmount(checkSpecialPrice)}
+                  data={emidata}
+                  key="emi"
+                />
               </EmiOptions>
 
               {/* Offers */}
@@ -692,8 +742,13 @@ class ProductDetails extends React.Component {
                 <Box mb={20} mt={10}>
                   {combinedbuy.length ? (
                     <Button variant="link" fontFamily="medium" fontSize={18}>
-                      <a href="#combined_buy_offers" style={{ color: '#F15A22' }}>
-                        {`See ${combinedbuy.length} Combined ${combinedbuy.length > 1 ? 'Offers' : 'Offer'}`}
+                      <a
+                        href="#combined_buy_offers"
+                        style={{ color: '#F15A22' }}
+                      >
+                        {`See ${combinedbuy.length} Combined ${
+                          combinedbuy.length > 1 ? 'Offers' : 'Offer'
+                        }`}
                       </a>
                     </Button>
                   ) : (
@@ -721,7 +776,10 @@ class ProductDetails extends React.Component {
                     sku={sku}
                     itemId={sku}
                     isSoldOut={
-                      !(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)
+                      !(
+                        simples[simpleSku].meta.quantity &&
+                        parseInt(simples[simpleSku].meta.quantity, 10) > 0
+                      )
                     }
                   />
                 </Col>
@@ -731,7 +789,10 @@ class ProductDetails extends React.Component {
                     simpleSku={simpleSku}
                     sku={sku}
                     isSoldOut={
-                      !(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)
+                      !(
+                        simples[simpleSku].meta.quantity &&
+                        parseInt(simples[simpleSku].meta.quantity, 10) > 0
+                      )
                     }
                   />
                 </Col>
@@ -784,7 +845,10 @@ class ProductDetails extends React.Component {
               <DescriptionButton
                 onClick={e => {
                   e.preventDefault();
-                  this.setState({ activeSpec: 'description', activeDescription: description });
+                  this.setState({
+                    activeSpec: 'description',
+                    activeDescription: description
+                  });
                 }}
                 active={activeSpec === 'description'}
               >
@@ -793,7 +857,10 @@ class ProductDetails extends React.Component {
               <DescriptionButton
                 onClick={e => {
                   e.preventDefault();
-                  this.setState({ activeSpec: 'details', activeDescription: description });
+                  this.setState({
+                    activeSpec: 'details',
+                    activeDescription: description
+                  });
                 }}
                 active={activeSpec === 'details'}
               >
@@ -802,7 +869,10 @@ class ProductDetails extends React.Component {
               <DescriptionButton
                 onClick={e => {
                   e.preventDefault();
-                  this.setState({ activeSpec: 'care', activeDescription: careLabel });
+                  this.setState({
+                    activeSpec: 'care',
+                    activeDescription: careLabel
+                  });
                 }}
                 active={activeSpec === 'care'}
               >
@@ -811,7 +881,10 @@ class ProductDetails extends React.Component {
               <DescriptionButton
                 onClick={e => {
                   e.preventDefault();
-                  this.setState({ activeSpec: 'warranty', activeDescription: productWarranty });
+                  this.setState({
+                    activeSpec: 'warranty',
+                    activeDescription: productWarranty
+                  });
                 }}
                 active={activeSpec === 'warranty'}
               >
@@ -820,7 +893,10 @@ class ProductDetails extends React.Component {
               <DescriptionButton
                 onClick={e => {
                   e.preventDefault();
-                  this.setState({ activeSpec: 'return', activeDescription: returnAndCancel });
+                  this.setState({
+                    activeSpec: 'return',
+                    activeDescription: returnAndCancel
+                  });
                 }}
                 active={activeSpec === 'return'}
               >
@@ -914,7 +990,11 @@ class ProductDetails extends React.Component {
             )}
 
             {/* Specifications */}
-            <Specs activeSpec={activeSpec} specs={groupedAttributes} pincode={pincode.selectedPincode} />
+            <Specs
+              activeSpec={activeSpec}
+              specs={groupedAttributes}
+              pincode={pincode.selectedPincode}
+            />
             {/* Video */}
             {groupedattributes && groupedattributes.youtubeid && (
               <Row my={30}>
@@ -924,7 +1004,13 @@ class ProductDetails extends React.Component {
               </Row>
             )}
             {/* Usps */}
-            <Row mb={40} width={['80%', '80%', '60%']} justifyContent="space-between" mx="auto" flexWrap="nowrap">
+            <Row
+              my={40}
+              width={['80%', '80%', '60%']}
+              justifyContent="space-between"
+              mx="auto"
+              flexWrap="nowrap"
+            >
               <UspCol src={freeShippingIcon} text="Free Shipping" />
               <UspCol src={emiIcon} text="EMI Options" />
               <UspCol src={warrentyIcon} text="1 Year Warranty" />
@@ -937,7 +1023,9 @@ class ProductDetails extends React.Component {
                   <Text variant="regular" fontSize={16} pb={5}>
                     DIMENSIONS
                   </Text>
-                  <Heading variant="heading.regular">Will it fit in your room?</Heading>
+                  <Heading variant="heading.regular">
+                    Will it fit in your room?
+                  </Heading>
                 </Box>
                 <Box p={15} textAlign="center" sx={{ border: 'dividerLight' }}>
                   <Image src={`${images[2].url}-zoom.jpg`} alt="" />
@@ -955,10 +1043,15 @@ class ProductDetails extends React.Component {
                     }}
                   >
                     <span className={styles.overolDimension}>
-                      Overall Dimension <span className={styles.dimensionUnit}>(Inches)</span>
+                      Overall Dimension{' '}
+                      <span className={styles.dimensionUnit}>(Inches)</span>
                     </span>
-                    <span className={styles.dimensionSpans}>{width && `Width : ${this.mmToInchConvert(width)}" `}</span>
-                    <span className={styles.dimensionSpans}>{depth && `Depth : ${this.mmToInchConvert(depth)}" `}</span>
+                    <span className={styles.dimensionSpans}>
+                      {width && `Width : ${this.mmToInchConvert(width)}" `}
+                    </span>
+                    <span className={styles.dimensionSpans}>
+                      {depth && `Depth : ${this.mmToInchConvert(depth)}" `}
+                    </span>
                     <span className={styles.dimensionSpans}>
                       {height && `Height : ${this.mmToInchConvert(height)}" `}
                     </span>
@@ -1008,7 +1101,10 @@ class ProductDetails extends React.Component {
               />
               {reviewsData.length > 0 && (
                 <Box mb={30}>
-                  <ReviewFilter selectedFilterProp={selectedFilter} onFilterChange={this.onFilterChange} />
+                  <ReviewFilter
+                    selectedFilterProp={selectedFilter}
+                    onFilterChange={this.onFilterChange}
+                  />
                 </Box>
               )}
               <Reviews
@@ -1023,7 +1119,7 @@ class ProductDetails extends React.Component {
           {combinedbuy.length > 0 && (
             <Box id="combined_buy_offers" pt={36}>
               <Box textAlign="center" mb={20}>
-                <Heading variant="heading.regular" fontWeight="normal">
+                <Heading variant="heading.regular" sx={{ fontWeight: 400 }}>
                   Combined Offers
                 </Heading>
               </Box>
@@ -1037,7 +1133,9 @@ class ProductDetails extends React.Component {
                     price={item.total_price}
                     setDiscount={item.discount ? Number(item.discount) : 0}
                     discountedPrice={item.total_price_after_discount}
-                    handleCombinedBuy={() => this.handleCombinedBuy(item, pincode, session)}
+                    handleCombinedBuy={() =>
+                      this.handleCombinedBuy(item, pincode, session)
+                    }
                   />
                 </Row>
               ))}
