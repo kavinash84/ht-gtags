@@ -172,9 +172,12 @@ export default class ProfileForm extends Component {
     const {
       target: { value }
     } = e;
+    console.log(this.convertDate(value), 'date on saving');
     const checkError = checkDateOfBirth(value);
+    const newDate = this.convertDate(value);
+    console.log(newDate, 'new date');
     this.setState({
-      dob: value,
+      dob: newDate,
       dobError: checkError
     });
   };
@@ -203,20 +206,18 @@ export default class ProfileForm extends Component {
       });
     }
     const { dispatch } = this.context.store;
+    console.log(dob, 'Dob on submit%%%%%%');
     dispatch(updateUserProfile(this.state));
   };
   convertDate = date => {
-    const utcDate = new Date(date);
-    let dd = utcDate.getDate();
-    let mm = utcDate.getMonth() + 1;
-    const yyyy = utcDate.getFullYear();
-    if (dd < 10) {
-      dd = `0${dd}`;
+    let newdate = '';
+    if (date !== '' || date !== 'undefined' || date !== 'Invalid date') {
+      newdate = date
+        .split('-')
+        .reverse()
+        .join('-');
+      console.log(`Date:>>${newdate}`); // Date:>> "2013-05-03"
     }
-    if (mm < 10) {
-      mm = `0${mm}`;
-    }
-    const newdate = `${yyyy}-${mm}-${dd}`;
     return newdate;
   };
   render() {
@@ -245,6 +246,7 @@ export default class ProfileForm extends Component {
       showEditForm
     } = this.state;
     const { response } = this.props;
+    console.log(dob, 'dob');
     return (
       <Box>
         <Box>
@@ -292,7 +294,7 @@ export default class ProfileForm extends Component {
               onChangeFullName={this.onChangeFullName}
               fullNameFeedBackError={fullNameError}
               fullNameFeedBackMessage={fullNameErrorMessage}
-              dob={dob}
+              dob={this.convertDate(dob)}
               dobFeedBackError={dobError}
               dobFeedBackMessage={dobErrorMessage}
               gender={gender}
