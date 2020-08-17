@@ -49,7 +49,14 @@ class CouponList extends React.Component {
             <Text fontSize={14} fontFamily="medium" mb={10}>
               Choose a Valid Coupon
             </Text>
-            <Box sx={{ border: 'dividerLight', overflow: 'auto', height: '250px' }}>
+            <Box
+              sx={{
+                border: 'dividerLight',
+                overflow: 'auto',
+                maxHeight: '250px',
+                borderBottom: 'none'
+              }}
+            >
               {coupons.map((item, index) => (
                 <Box
                   className={`${item.couponCode === appliedCoupon ? styles.active : ''}`}

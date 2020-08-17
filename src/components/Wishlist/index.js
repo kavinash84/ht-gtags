@@ -52,13 +52,14 @@ class Wishlist extends React.Component {
         >
           My Wishlist: {list.length} items
         </Heading>
-        <Flex mx={-8}>
+        <Flex mx={-8} sx={{ flexWrap: 'wrap' }}>
           {list.map((item, i) => (
             <Box
               key={`${
                 item.wishlist_info && item.wishlist_info.configurable_sku ? item.wishlist_info.configurable_sku : ''
               }_${String(i)}`}
               width={1 / 4}
+              mb={40}
               px={8}
               // className={styles.productWrapper}
             >

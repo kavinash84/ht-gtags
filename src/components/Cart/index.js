@@ -179,7 +179,7 @@ const Cart = ({
               <Box variant="col-5" pl={30}>
                 <Link to={formatProductURL(item.product_info.name, item.configurable_sku)}>
                   <Box mb={10}>
-                    <Heading color="heading" fontSize={16} lineHeight={1.4}>
+                    <Heading color="heading" fontSize={16} lineHeight={1.4} fontWeight="normal">
                       {item.product_info.name}
                     </Heading>
                   </Box>

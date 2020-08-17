@@ -27,7 +27,7 @@ const MyAddress = () => (
       <Header />
 
       {/* Container */}
-      <Container pt={80}>
+      <Container pt={[[40, 40, 60]]}>
         <DashboardHeader />
         <Row>
           <Box variant="col-2" pr={30}>

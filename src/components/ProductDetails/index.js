@@ -76,7 +76,6 @@ const pinIcon = require('../../../static/pinterest-pdp.svg');
 const styles = require('./productIndex.scss');
 
 const qtyOptions = sku => {
-  console.log('qtyOptions', sku);
   if (sku.meta) {
     let qty = sku.meta.quantity;
     const options = [];
@@ -85,7 +84,6 @@ const qtyOptions = sku => {
     for (let i = 1; i <= qty; i += 1) {
       options.push({ value: i, label: i });
     }
-    // console.log('QtyOption', options, qty);
     return options;
   }
 };
@@ -264,14 +262,13 @@ class ProductDetails extends React.Component {
   }
   componentWillReceiveProps(nextProps) {
     const { colorproducts, product } = this.props;
-    console.log('sddfsdfsdfs', product);
+    console.log('product', product);
     if (nextProps.isLoggedIn) {
       this.setState({
         openLogin: false
       });
     }
     if (nextProps.colorproducts !== colorproducts) {
-      console.log('componentWillReceiveProps', nextProps.colorproducts);
       this.addProductToColorProduct(nextProps.colorproducts);
     }
   }
@@ -313,7 +310,6 @@ class ProductDetails extends React.Component {
     }
   };
   setDescriptionActive = product => {
-    console.log('setDescriptionActive', product);
     const {
       attributes: { description }
     } = product;
@@ -352,9 +348,11 @@ class ProductDetails extends React.Component {
   };
   addProductToColorProduct = colorProducts => {
     const { product } = this.props;
-    console.log('colorProducts', colorProducts);
     if (colorProducts.length > 0) {
-      colorProducts = colorProducts.map(arr => ({ ...arr, activeColor: false }));
+      colorProducts = colorProducts.map(arr => ({
+        ...arr,
+        activeColor: false
+      }));
       colorProducts.push({ ...product, activeColor: true });
       this.setState({ colorProducts });
     }
@@ -367,10 +365,11 @@ class ProductDetails extends React.Component {
   handleCombinedBuy = (item, pincode, session) => {
     const { id_catalog_buildyourset: setId, skus } = item;
     const { selectedPincode } = pincode;
-    const simpleSKUS = skus.map(val => ({ simple_sku: val.sku, qty: Number(val.qty) }));
+    const simpleSKUS = skus.map(val => ({
+      simple_sku: val.sku,
+      qty: Number(val.qty)
+    }));
     // set_id, skus, session_id, pincode
-    // console.log(name);
-    // console.log(skus);
     const { dispatch } = this.context.store;
     dispatch(addToCartCombined(setId, simpleSKUS, session, selectedPincode));
   };
@@ -443,7 +442,6 @@ class ProductDetails extends React.Component {
       reviewDataSet,
       showmorecolorproductsCount
     } = this.state;
-    console.log(colorProducts, 'colorProducts');
     const {
       meta,
       images,
@@ -648,7 +646,7 @@ class ProductDetails extends React.Component {
               {/* Color Options */}
               {colorProducts.length > 0 && (
                 <Box pb={15}>
-                  <Heading fontSize="1em" color="textDark" fontFamily="medium" mb={15}>
+                  <Heading fontSize="1em" color="textDark" fontFamily="medium" fontWeight="normal" mb={15}>
                     {/* TODO: @nikhil replace static color */}
                     Color Options: {getSelectedColor(colorProducts)}
                   </Heading>
@@ -784,7 +782,10 @@ class ProductDetails extends React.Component {
               <DescriptionButton
                 onClick={e => {
                   e.preventDefault();
-                  this.setState({ activeSpec: 'description', activeDescription: description });
+                  this.setState({
+                    activeSpec: 'description',
+                    activeDescription: description
+                  });
                 }}
                 active={activeSpec === 'description'}
               >
@@ -793,7 +794,10 @@ class ProductDetails extends React.Component {
               <DescriptionButton
                 onClick={e => {
                   e.preventDefault();
-                  this.setState({ activeSpec: 'details', activeDescription: description });
+                  this.setState({
+                    activeSpec: 'details',
+                    activeDescription: description
+                  });
                 }}
                 active={activeSpec === 'details'}
               >
@@ -802,7 +806,10 @@ class ProductDetails extends React.Component {
               <DescriptionButton
                 onClick={e => {
                   e.preventDefault();
-                  this.setState({ activeSpec: 'care', activeDescription: careLabel });
+                  this.setState({
+                    activeSpec: 'care',
+                    activeDescription: careLabel
+                  });
                 }}
                 active={activeSpec === 'care'}
               >
@@ -811,7 +818,10 @@ class ProductDetails extends React.Component {
               <DescriptionButton
                 onClick={e => {
                   e.preventDefault();
-                  this.setState({ activeSpec: 'warranty', activeDescription: productWarranty });
+                  this.setState({
+                    activeSpec: 'warranty',
+                    activeDescription: productWarranty
+                  });
                 }}
                 active={activeSpec === 'warranty'}
               >
@@ -820,7 +830,10 @@ class ProductDetails extends React.Component {
               <DescriptionButton
                 onClick={e => {
                   e.preventDefault();
-                  this.setState({ activeSpec: 'return', activeDescription: returnAndCancel });
+                  this.setState({
+                    activeSpec: 'return',
+                    activeDescription: returnAndCancel
+                  });
                 }}
                 active={activeSpec === 'return'}
               >
@@ -831,63 +844,71 @@ class ProductDetails extends React.Component {
 
             {/* Description */}
             {activeSpec === 'details' ? (
-              <Box px="10%">
+              <Box px="10%" py="2%" sx={{ display: 'flex' }}>
                 <Row>
                   <Col>
-                    <Row>
-                      <Col>Brand</Col>
+                    <Row pb={10}>
+                      <Col width={125} fontWeight="bold">
+                        Brand
+                      </Col>
                       <Col>{ProductBrand}</Col>
                     </Row>
                   </Col>
                   <Col>
-                    <Row>
-                      <Col>Family Name</Col>
+                    <Row pb={10}>
+                      <Col fontWeight="bold">Family Name</Col>
                       <Col>{familyName}</Col>
                     </Row>
                   </Col>
                   <Col>
                     <Row>
-                      <Col>Colour</Col>
+                      <Col width={125} fontWeight="bold">
+                        Colour
+                      </Col>
                       <Col>{ProductColor}</Col>
                     </Row>
                   </Col>
                 </Row>
                 <Row>
                   <Col>
-                    <Row>
-                      <Col>Depth (mm)</Col>
+                    <Row pb={10}>
+                      <Col fontWeight="bold">Depth (mm)</Col>
                       <Col>{productDepth}</Col>
                     </Row>
                   </Col>
                   <Col>
-                    <Row>
-                      <Col>Width (mm)</Col>
+                    <Row pb={10}>
+                      <Col fontWeight="bold">Width (mm)</Col>
                       <Col>{productWidth}</Col>
                     </Row>
                   </Col>
                   <Col>
                     <Row>
-                      <Col>Height (mm)</Col>
+                      <Col fontWeight="bold">Height (mm)</Col>
                       <Col>{productHeight}</Col>
                     </Row>
                   </Col>
                 </Row>
                 <Row>
                   <Col>
-                    <Row>
-                      <Col>Product Weight</Col>
+                    <Row pb={10}>
+                      <Col width={188} fontWeight="bold">
+                        Product Weight
+                      </Col>
                       <Col>{productWeight}</Col>
                     </Row>
                   </Col>
                   <Col>
-                    <Row>
-                      <Col>Product main Material</Col>
+                    <Row pb={10}>
+                      <Col fontWeight="bold">Product main Material</Col>
                       <Col>{productMainMaterial}</Col>
                     </Row>
                   </Col>
                   <Col>
                     <Row>
-                      <Col>SKU</Col>
+                      <Col width={188} fontWeight="bold">
+                        SKU
+                      </Col>
                       <Col>{skuSupplierConfig}</Col>
                     </Row>
                   </Col>
@@ -916,7 +937,7 @@ class ProductDetails extends React.Component {
               </Row>
             )}
             {/* Usps */}
-            <Row mb={40} width={['80%', '80%', '60%']} justifyContent="space-between" mx="auto" flexWrap="nowrap">
+            <Row my={40} width={['80%', '80%', '60%']} justifyContent="space-between" mx="auto" flexWrap="nowrap">
               <UspCol src={freeShippingIcon} text="Free Shipping" />
               <UspCol src={emiIcon} text="EMI Options" />
               <UspCol src={warrentyIcon} text="1 Year Warranty" />
@@ -1015,7 +1036,9 @@ class ProductDetails extends React.Component {
           {combinedbuy.length > 0 && (
             <Box id="combined_buy_offers" pt={36}>
               <Box textAlign="center" mb={20}>
-                <Heading variant="heading.regular">Combined Offers</Heading>
+                <Heading variant="heading.regular" sx={{ fontWeight: 400 }}>
+                  Combined Offers
+                </Heading>
               </Box>
               {combinedbuy.map((item, index) => (
                 <Row key={String(index)} mx={0}>
