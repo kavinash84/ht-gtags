@@ -172,10 +172,8 @@ export default class ProfileForm extends Component {
     const {
       target: { value }
     } = e;
-    console.log(this.convertDate(value), 'date on saving');
     const checkError = checkDateOfBirth(value);
-    const newDate = this.convertDate(value);
-    console.log(newDate, 'new date');
+    const newDate = value;
     this.setState({
       dob: newDate,
       dobError: checkError
@@ -212,11 +210,12 @@ export default class ProfileForm extends Component {
   convertDate = date => {
     let newdate = '';
     if (date !== '' || date !== 'undefined' || date !== 'Invalid date') {
-      newdate = date
-        .split('-')
-        .reverse()
-        .join('-');
-      console.log(`Date:>>${newdate}`); // Date:>> "2013-05-03"
+      newdate = date.split('-');
+      if (newdate[0].length === 4) {
+        newdate = newdate.reverse().join('-');
+      } else {
+        newdate = date;
+      }
     }
     return newdate;
   };
@@ -266,7 +265,7 @@ export default class ProfileForm extends Component {
             <ProfileViewRow title="E-mail-ID" value={email} />
             <ProfileViewRow title="Phone" value={phone} />
             <ProfileViewRow title="Gender" value={gender} />
-            <ProfileViewRow title="Date of Birth" value={dob} />
+            <ProfileViewRow title="Date of Birth" value={this.convertDate(dob)} />
             <ProfileViewRow title="Location" value={city} />
           </Box>
         </Box>
@@ -294,7 +293,7 @@ export default class ProfileForm extends Component {
               onChangeFullName={this.onChangeFullName}
               fullNameFeedBackError={fullNameError}
               fullNameFeedBackMessage={fullNameErrorMessage}
-              dob={this.convertDate(dob)}
+              dob={dob}
               dobFeedBackError={dobError}
               dobFeedBackMessage={dobErrorMessage}
               gender={gender}
