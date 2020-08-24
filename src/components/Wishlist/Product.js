@@ -44,7 +44,7 @@ const Product = props => {
             <Text as="span" fontSize={14} mr={10} color="heading" fontFamily="medium">
               ₹ {price}
             </Text>
-            {price !== cutprice && (
+            {cutprice && price !== cutprice && (
               <Text as="span" fontSize={14} sx={{ textDecoration: 'line-through' }}>
                 ₹ {cutprice}
               </Text>
