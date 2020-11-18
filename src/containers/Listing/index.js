@@ -3,7 +3,7 @@ import { provideHooks } from 'redial';
 import { encodeCategory } from 'utils/helper';
 import { setCurrentPage, resetPagination } from 'redux/modules/pagination';
 import {
-  isLoaded as isInitialListLoaded,
+  // isLoaded as isInitialListLoaded,
   setCategoryQuery,
   clearPreviousList,
   clearPreviousSort,
@@ -19,9 +19,9 @@ const hooks = {
   fetch: async ({ store: { dispatch, getState }, params, location }) => {
     const {
       pincode: { selectedPincode },
-      pagination: { page },
-      app: { city },
-      products: { filter: prevFilter, reloadListing }
+      // pagination: { page },
+      app: { city }
+      // products: { filter: prevFilter, reloadListing }
     } = getState();
     let query;
     let filters;
@@ -30,7 +30,7 @@ const hooks = {
     const { search } = location;
     const getPage = search.split('page=')[1];
     const currentPage = getPage || 1;
-    if (location.pathname === '/search/') {
+    if (location.pathname === '/search') {
       /* eslint prefer-destructuring: ["error", {AssignmentExpression: {array: false}}] */
       let searchquery;
       [, searchquery] = location.search.split('q=');
@@ -58,22 +58,32 @@ const hooks = {
       });
     }
     if (currentPage === 1) await dispatch(resetPagination());
-    if (
-      !isInitialListLoaded(getState(), query) ||
-      Number(currentPage) !== Number(page) ||
-      (filters && filters !== prevFilter) ||
-      prevFilter === 'clearAll' ||
-      reloadListing
-    ) {
-      await dispatch(clearPreviousList());
-      await dispatch(setCurrentPage(currentPage));
-      await dispatch(clearPreviousSort());
+    // if (
+    //   !isInitialListLoaded(getState(), query) ||
+    //   Number(currentPage) !== Number(page) ||
+    //   (filters && filters !== prevFilter) ||
+    //   prevFilter === 'clearAll' ||
+    //   reloadListing
+    // ) {
+    await dispatch(clearPreviousList());
+    await dispatch(setCurrentPage(currentPage));
+    await dispatch(clearPreviousSort());
+    if (location.pathname !== '/search') {
       await dispatch(loadResults).catch(() => null);
-      await dispatch(setCategoryQuery(query, pincode));
-      await dispatch(setCategory(query));
-      await dispatch(setFilter(filters));
-      dispatch(setReloadListing(false));
+    } else {
+      await dispatch(setReloadListing(true));
     }
+    // await dispatch(setReloadListing(false));
+    await dispatch(setCategoryQuery(query, pincode));
+    await dispatch(setCategory(query));
+    await dispatch(setFilter(filters));
+    // }
+    // if (location.pathname !== '/search') {
+    //   const query = encodeCategory(params);
+    //   await dispatch(getCategoryForUNBXD({ query })).catch(() => null);
+    // } else {
+    //   await dispatch(setReloadListing(true));
+    // }
   },
   done: ({ store: { dispatch } }) => dispatch(listingLoadTrack())
 };

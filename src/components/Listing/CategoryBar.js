@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Row from 'hometown-components-dev/lib/RowHtV1';
-import Img from 'hometown-components-dev/lib/ImgHtV1';
+import Img from 'hometown-components-dev/lib/ImageHtV1';
 import Section from 'hometown-components-dev/lib/SectionHtV1';
 import Container from 'hometown-components-dev/lib/ContainerHtV1';
 import Label from 'hometown-components-dev/lib/LabelHtV1';

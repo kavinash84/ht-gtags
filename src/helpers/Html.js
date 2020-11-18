@@ -68,6 +68,20 @@ export default class Html extends Component {
         jsUrl: 'https://praxisretail--devbox.cs6.my.salesforce.com/embeddedservice/5.0/esw.min.js'
       };
     }
+    let unbxdScripts = {
+      autosuggestJs: 'https://libraries.unbxdapi.com/prod-hometown808961566375586_autosuggest.js',
+      autosuggestCss: 'https://libraries.unbxdapi.com/prod-hometown808961566375586_autosuggest.css',
+      searchJs: 'https://libraries.unbxdapi.com/prod-hometown808961566375586_search.js',
+      searchCss: 'https://libraries.unbxdapi.com/prod-hometown808961566375586_search.css'
+    };
+    if (process.env.UNBXD && process.env.UNBXD !== 'production') {
+      unbxdScripts = {
+        autosuggestJs: 'https://sandbox.unbxd.io/dev-hometown808961566375617_autosuggest.js',
+        autosuggestCss: 'https://sandbox.unbxd.io/dev-hometown808961566375617_autosuggest.css',
+        searchJs: 'https://sandbox.unbxd.io/dev-hometown808961566375617_search.js',
+        searchCss: 'https://sandbox.unbxd.io/dev-hometown808961566375617_search.css'
+      };
+    }
     const head = Helmet.renderStatic();
     /* eslint-disable */
     return (
@@ -190,6 +204,29 @@ export default class Html extends Component {
             </noscript>
           )}
           <div id="content" dangerouslySetInnerHTML={{ __html: content }} />
+          <script src={unbxdScripts.autosuggestJs} async="" />
+          <link rel="stylesheet" type="text/css" href={unbxdScripts.autosuggestCss} />
+          <script src={unbxdScripts.searchJs} />
+          <link rel="stylesheet" type="text/css" href={unbxdScripts.searchCss} />
+          <script type="text/javascript" async="" src="https://d21gpk1vhmjuf5.cloudfront.net/embed.js" />
+          {/* <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.js"></script>
+          <script
+            type="text/javascript"
+            async=""
+            src="https://d21gpk1vhmjuf5.cloudfront.net/unbxdAnalytics.js"
+          ></script>
+
+          <script
+            type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"
+          ></script>
+
+          <script src="/js/_devkeys.js"></script>
+          <script src="/js/lib-autosuggest.js"></script>
+          <script src="/js/unbxd_autosuggest.js"></script>
+          <script type="text/javascript" src="/js/_lib-search.js"></script>
+          <script type="text/javascript" src="/js/base-search.js"></script>
+          <script type="text/javascript" src="/js/unbxd_search.js"></script> */}
           {store && (
             <script
               dangerouslySetInnerHTML={{ __html: `window.__data=${serialize(store.getState())};` }}

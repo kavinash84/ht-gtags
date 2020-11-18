@@ -21,6 +21,22 @@ import Footer from 'components/Footer';
 import MainSlider from 'components/MainSlider';
 // import SeoContent from 'components/SeoContent';
 
+const getFaqs = faqs => {
+  const seoFaq = faqs.map(({ qus, ans }) => {
+    if (qus && ans) {
+      return {
+        '@type': 'Question',
+        name: qus,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `<p>${ans}</p>`
+        }
+      };
+    }
+    return '';
+  });
+  return JSON.stringify(seoFaq);
+};
 // const getSubMenu = (categories, key) =>
 //   categories && categories.filter(category => category.url_key === key)[0].children;
 
@@ -66,6 +82,7 @@ export default class Category extends Component {
         params: { category: currentCategory }
       }
     } = this.props;
+    const { faq = [] } = category;
 
     /* eslint-disable react/no-danger */
     return (
@@ -73,6 +90,19 @@ export default class Category extends Component {
         <Helmet title={`${(seoInfo && seoInfo.page_title) || (currentCategory && currentCategory.toUpperCase())}`}>
           <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
           <meta name="description" content={seoInfo && seoInfo.meta_description} />
+          {faq.length ? (
+            <script type="application/ld+json">
+              {`
+              {
+                "@context" : "http://schema.org",
+                "@type" : "FAQPage",
+                "mainEntity": ${getFaqs(faq)}
+              }
+            `}
+            </script>
+          ) : (
+            ''
+          )}
         </Helmet>
         <Body>
           {/* Header */}

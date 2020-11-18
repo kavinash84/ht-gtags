@@ -20,6 +20,63 @@ export default function gaMiddleware() {
             vpv: `${pathname}${search}`.trim()
           });
         }
+        // if (
+        //   (type === 'wishList/REMOVE_FROM_WISHLIST_SUCCESS' ||
+        //   type === 'wishList/ADD_TO_WISHLIST_SUCCESS' ||
+        //   type === 'wishList/LOAD_WISHLIST_SUCCESS') &&
+        //   window.unbxd &&
+        //   !!window.unbxd.toggleWishList
+        // ) {
+        //   const { sku, simpleSku } = action;
+        //   window.unbxd.toggleWishList(sku, simpleSku);
+        //   console.log('unbxd toggleWishList callback invoked with - ', sku, simpleSku);
+        // }
+        // if (type === 'categoryPage/LOAD_SUCCESS') {
+        //   const {
+        //     location: { pathname }
+        //   } = window;
+        //   const { id } = action;
+        //   if (window && window.Unbxd && id && pathname) {
+        //     window.Unbxd.track('categoryPage', {
+        //       page: pathname,
+        //       page_type: 'BOOLEAN',
+        //       page_name: id
+        //     });
+        //   }
+        // }
+        if (type === 'wishList/ADD_TO_WISHLIST_SUCCESS') {
+          const { sku, simpleSku, unbxd } = action;
+          if (unbxd) {
+            if (window && !!window.unbxd && !!window.unbxd.toggleWishList) {
+              window.unbxd.toggleWishList(sku, simpleSku);
+              console.log('unbxd toggleWishList callback invoked with - ', sku, simpleSku);
+            } else {
+              console.log('error in calling unbxd toggleWishList callback !');
+            }
+          }
+        }
+        // if ((type === 'login/LOGIN_SUCCESS' || type === 'login/LOGOUT_SUCCESS') && window && window.unbxd) {
+        //   window.unbxd.handleUserSwitch();
+        //   console.log(`unbxd - window.unbxd.handleUserSwitch(); invoked on -${type}`);
+        // }
+        if (
+          (type === 'cart/ADD_TO_CART_SUCCESS' ||
+            type === 'cart/UPDATE_CART_SUCCESS' ||
+            type === 'cart/REMOVE_FROM_CART_SUCCESS') &&
+          window &&
+          window.unbxd
+        ) {
+          window.unbxd.renderCartItemsonSRP();
+          console.log(`unbxd - window.unbxd.renderCartItemsonSRP(); invoked on -${type}`);
+        }
+        if (
+          (type === 'wishList/ADD_TO_WISHLIST_SUCCESS' || type === 'wishList/REMOVE_FROM_WISHLIST_SUCCESS') &&
+          window &&
+          window.unbxd
+        ) {
+          window.unbxd.renderWishListItemsOnSRP();
+          console.log(`unbxd - window.unbxd.renderWishListItemsOnSRP() invoked on -${type}`);
+        }
         if (type === '@@router/LOCATION_CHANGE') {
           const {
             location: { hostname, pathname }
@@ -87,6 +144,16 @@ export default function gaMiddleware() {
               };
               window.dataLayer.push(eventObject);
             }
+          }
+        }
+        if (type === 'productdetails/LOAD_PRODUCT_DESCRIPTION_SUCCESS') {
+          const {
+            result: {
+              meta: { config_id: pid = '' }
+            }
+          } = action;
+          if (window && window.Unbxd && window.Unbxd.track && pid) {
+            window.Unbxd.track('product_view', { pid });
           }
         }
         if (type === 'productdetails/PRODUCT_DETAILS_TRACK') {
@@ -214,6 +281,21 @@ export default function gaMiddleware() {
               summary: { total }
             }
           } = action.result;
+          const {
+            result: { qty },
+            configId
+          } = action;
+          // if (!configId) {
+          //   window.unbxd.addToCart(key, sku, simpleSku, pincode);
+          //   console.log('unbxd addToCart callback invoked with - ', key, sku, simpleSku, pincode);
+          // }
+          if (window && window.Unbxd && window.Unbxd.track && configId && qty) {
+            window.Unbxd.track('addToCart', {
+              pid: configId,
+              variantId: '',
+              qty: `${qty}`
+            });
+          }
           const [product] =
             action.result && action.result.cart.cart.filter(item => item.id_customer_cart === idcustomerCart);
           const {
@@ -254,6 +336,17 @@ export default function gaMiddleware() {
               summary: { total }
             }
           } = action.result;
+          const {
+            result: { qty },
+            configId
+          } = action;
+          if (window && window.Unbxd && window.Unbxd.track && configId && qty) {
+            window.Unbxd.track('addToCart', {
+              pid: configId,
+              variantId: '',
+              qty: `${qty}`
+            });
+          }
           const [product] =
             action.result && action.result.cart.cart.filter(item => item.id_customer_cart === idcustomerCart);
           const {
@@ -295,6 +388,13 @@ export default function gaMiddleware() {
               summary: { total }
             }
           } = action.result;
+          const { qty, configId } = action;
+          if (window && window.Unbxd && window.Unbxd.track && configId && qty) {
+            window.Unbxd.track('cartRemoval', {
+              pid: configId,
+              qty: `${qty}`
+            });
+          }
           const [product] = data.filter(item => item.id_customer_cart === Number(action.result.cartId));
           if (product) {
             const checkKey = isKeyExists(product.product_info, 'category_details');
@@ -344,6 +444,7 @@ export default function gaMiddleware() {
           const location = payload.pathname;
           if (location === '/checkout/delivery-address' || '/checkout/payment-options' || '/checkout/review-order') {
             const { data } = getState().cart;
+            const { searchQuery = '' } = getState().search;
             let products;
             if (data) {
               products = data.map(item => {
@@ -369,6 +470,9 @@ export default function gaMiddleware() {
                 }
               }
             };
+            if (location === '/search/' && searchQuery && window.Unbxd && window.Unbxd.track) {
+              window.Unbxd.track('search', { query: searchQuery });
+            }
             if (location === '/checkout/delivery-address') {
               eventObject.ecommerce.checkout.actionField.step = 1;
               eventObject.ecommerce.checkout.actionField.option = 'Shipping and Login';
@@ -403,9 +507,11 @@ export default function gaMiddleware() {
               coupon_code,
               customer_type
             } = data;
+            const unbxdData = [];
             const skus = [];
             const cartList = products.map(x => {
               const {
+                product_info: { product_id },
                 sku,
                 name,
                 qty,
@@ -417,6 +523,12 @@ export default function gaMiddleware() {
                 }
               } = x;
               skus.push(sku);
+              unbxdData.push({
+                pid: product_id || '',
+                variantId: '',
+                qty,
+                price: price.toFixed(2)
+              });
               return {
                 id: sku,
                 name,
@@ -449,6 +561,11 @@ export default function gaMiddleware() {
             /* customer type */
             const cust_type = customer_type === 'returning customer' ? 'Repeat' : 'Fresh';
             window.dataLayer.push(paymentObj, { event: 'buyer_type', type: cust_type });
+            if (window && window.Unbxd && window.Unbxd.track && unbxdData.length) {
+              unbxdData.forEach(p => {
+                window.Unbxd.track('order', p);
+              });
+            }
           }
         }
         if (type === 'mainSlider/BANNER_IMPRESSION') {

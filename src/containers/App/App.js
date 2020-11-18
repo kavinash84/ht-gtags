@@ -78,7 +78,8 @@ const SITE_URL_MOBILE = 'https://m.hometown.in';
     pincode: state.pincode,
     app: state.app,
     notifs: state.notifs,
-    profile: state.profile
+    profile: state.profile,
+    cartSynced: state.cart.cartSynced
   }),
   {
     pushState: push,
@@ -111,7 +112,8 @@ export default class App extends Component {
       global: PropTypes.array
     }).isRequired,
     notifSend: PropTypes.func.isRequired,
-    profile: PropTypes.object.isRequired
+    profile: PropTypes.object.isRequired,
+    cartSynced: PropTypes.bool.isRequired
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -161,6 +163,9 @@ export default class App extends Component {
     }
     /* Split Test Cookie */
     Cookie.set('split_test', 'A', { expires: 365 });
+    if (window) {
+      window.getPincode = this.getSelectedPincode;
+    }
   }
   componentWillReceiveProps(nextProps) {
     if (window && window.embedded_svc) {
@@ -177,7 +182,17 @@ export default class App extends Component {
     if (this.props.location !== prevProps.location) {
       window.scrollTo(0, 0);
     }
+    if (this.props.cartSynced !== prevProps.cartSynced) {
+      window.unbxd.handleUserSwitch();
+      console.log('unbxd - window.unbxd.handleUserSwitch(); invoked on sync');
+    }
   }
+  getSelectedPincode = () => {
+    const {
+      pincode: { selectedPincode }
+    } = this.props;
+    return selectedPincode;
+  };
   checkIfSlash = path => {
     let url = path;
     if (path.length && path[path.length - 1] === '/') {

@@ -21,7 +21,7 @@ const LOAD_PINCODE_DATA = 'pincode/LOAD_PINCODE_DATA';
 const LOAD_PINCODE_DATA_SUCCESS = 'pincode/LOAD_PINCODE_DATA_SUCCESS';
 const LOAD_PINCODE_DATA_FAIL = 'pincode/LOAD_PINCODE_DATA_FAIL';
 const STOP_LOADING = 'pincode/STOP_LOADING';
-
+const SET_PINCODE_FILTER = 'pincode/SET_PINCODE_FILTER';
 const SET_PINCODE_DETAILS = 'pincode/SET_PINCODE_DETAILS';
 
 const initialState = {
@@ -31,6 +31,7 @@ const initialState = {
   pincodeQuery: '',
   showResults: false,
   selectedPincode: PINCODE,
+  isPincodeFilter: false,
   pincodeDetails: [],
   city: null
 };
@@ -124,6 +125,11 @@ export default function reducer(state = initialState, action = {}) {
         loading: false,
         loaded: false
       };
+    case SET_PINCODE_FILTER:
+      return {
+        ...state,
+        isPincodeFilter: action.isPincodeFilter
+      };
     case SET_PINCODE_DETAILS:
       return {
         ...state,
@@ -175,6 +181,10 @@ export const loadPincodeDetails = pincode => ({
 export const setPincodeQuery = query => ({
   type: SET_PINCODE_QUERY,
   query
+});
+export const setPincodeFilter = isPincodeFilter => ({
+  type: SET_PINCODE_FILTER,
+  isPincodeFilter
 });
 
 export const setPincodeOrCityQuery = query => ({

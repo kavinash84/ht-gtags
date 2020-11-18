@@ -270,7 +270,7 @@ export const loadCart = (session, pincode) => ({
   }
 });
 
-export const addToCart = (key, sku, simpleSku, session, pincode, quantity) => dispatch => {
+export const addToCart = (key, sku, simpleSku, session, pincode, quantity, configId) => dispatch => {
   dispatch(setCurrentKey(key));
   return dispatch({
     types: [ADD_TO_CART, ADD_TO_CART_SUCCESS, ADD_TO_CART_FAIL],
@@ -288,7 +288,12 @@ export const addToCart = (key, sku, simpleSku, session, pincode, quantity) => di
       } catch (error) {
         throw error;
       }
-    }
+    },
+    configId,
+    key,
+    sku,
+    simpleSku,
+    pincode
   });
 };
 
@@ -314,7 +319,7 @@ export const addToCartCombined = (setId, skus, sessionId, pincode, uniqueSetName
   });
 };
 
-export const updateCart = (cartId, sku, simpleSku, session, pincode, qty) => dispatch => {
+export const updateCart = (cartId, sku, simpleSku, session, pincode, qty, configId) => dispatch => {
   dispatch(setCurrentKey(cartId));
   return dispatch({
     types: [UPDATE_CART, UPDATE_CART_SUCCESS, UPDATE_CART_FAIL],
@@ -333,11 +338,12 @@ export const updateCart = (cartId, sku, simpleSku, session, pincode, qty) => dis
       } catch (error) {
         throw error;
       }
-    }
+    },
+    configId
   });
 };
 
-export const removeFromCart = (cartId, session, pincode = PINCODE) => dispatch => {
+export const removeFromCart = (cartId, session, pincode = PINCODE, qty = '', configId = '') => dispatch => {
   dispatch(setCurrentKey(cartId));
   return dispatch({
     types: [REMOVE_FROM_CART, REMOVE_FROM_CART_SUCCESS, REMOVE_FROM_CART_FAIL],
@@ -348,7 +354,9 @@ export const removeFromCart = (cartId, session, pincode = PINCODE) => dispatch =
       } catch (error) {
         throw error;
       }
-    }
+    },
+    qty,
+    configId
   });
 };
 

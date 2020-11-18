@@ -32,9 +32,9 @@ const checkSKUItemsInCart = (list, sku, quantity) => {
 const LoaderIcon = require('../../../static/refresh.svg');
 // const CheckedIcon = require('../../../static/added-to-cart-icon.png');
 
-const onClick = (key, skuId, simpleSku, session, pincode, quantity) => dispatcher => e => {
+const onClick = (key, skuId, simpleSku, session, pincode, quantity, configId) => dispatcher => e => {
   e.preventDefault();
-  dispatcher(key, skuId, simpleSku, session, pincode, quantity);
+  dispatcher(key, skuId, simpleSku, session, pincode, quantity, configId);
 };
 
 const mapStateToProps = ({
@@ -69,7 +69,8 @@ const AddToCart = ({
   skuItem,
   cartData,
   size,
-  height
+  height,
+  configId
 }) => {
   const checkStatus = checkSKUInCart(cartSKUs, sku);
   const checkSKUItem = checkSKUItemsInCart(cartData, sku, quantity);
@@ -92,10 +93,10 @@ const AddToCart = ({
               disabled={addLoading}
               onClick={e => {
                 if (quantityChange && updateQty !== 0 && checkStatus) {
-                  const handler = onClick(cartId, sku, simpleSku, session, pincode, updateQty)(updateCart);
+                  const handler = onClick(cartId, sku, simpleSku, session, pincode, updateQty, configId)(updateCart);
                   handler(e);
                 } else {
-                  const handler = onClick(itemId, sku, simpleSku, session, pincode, quantity)(addToCart);
+                  const handler = onClick(itemId, sku, simpleSku, session, pincode, quantity, configId)(addToCart);
                   handler(e);
                 }
               }}
@@ -134,7 +135,8 @@ AddToCart.defaultProps = {
   skuItem: {},
   cartData: {},
   size: 'large',
-  height: 44
+  height: 44,
+  configId: ''
 };
 
 AddToCart.propTypes = {
@@ -154,7 +156,8 @@ AddToCart.propTypes = {
   skuItem: PropTypes.object,
   cartData: PropTypes.object,
   size: PropTypes.string,
-  height: PropTypes.number
+  height: PropTypes.number,
+  configId: PropTypes.string
 };
 
 export default connect(mapStateToProps, { ...actionCreators })(AddToCart);

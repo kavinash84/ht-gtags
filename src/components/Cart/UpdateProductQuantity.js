@@ -28,9 +28,9 @@ const mapStateToProps = ({ pincode, app }) => ({
   sessionId: app.sessionId
 });
 
-const onClick = (cartId, skuId, simpleSku, session, pincode, qty) => dispatcher => e => {
+const onClick = (cartId, skuId, simpleSku, session, pincode, qty, configId) => dispatcher => e => {
   e.preventDefault();
-  dispatcher(cartId, skuId, simpleSku, session, pincode, qty);
+  dispatcher(cartId, skuId, simpleSku, session, pincode, qty, configId);
 };
 
 const ProductQuantity = ({
@@ -41,13 +41,14 @@ const ProductQuantity = ({
   skuId,
   pincode,
   sessionId,
-  cartItemLoading
+  cartItemLoading,
+  configId
 }) => (
   <Row alignItems="center">
     <Button
       variant="link"
       color="textDark"
-      onClick={onClick(cartId, skuId, simpleSku, sessionId, pincode, -1)(updateQuantity)}
+      onClick={onClick(cartId, skuId, simpleSku, sessionId, pincode, -1, configId)(updateQuantity)}
       disabled={cartItemLoading(cartId) || quantity <= 1}
     >
       <Image src={reductIcon} alt="" height={24} />
@@ -58,7 +59,7 @@ const ProductQuantity = ({
     <Button
       variant="link"
       color="textDark"
-      onClick={onClick(cartId, skuId, simpleSku, sessionId, pincode, 1)(updateQuantity)}
+      onClick={onClick(cartId, skuId, simpleSku, sessionId, pincode, 1, configId)(updateQuantity)}
       disabled={cartItemLoading(cartId)}
     >
       <Image src={increaseIcon} alt="" height={24} />
@@ -67,7 +68,8 @@ const ProductQuantity = ({
 );
 
 ProductQuantity.defaultProps = {
-  cartItemLoading: () => {}
+  cartItemLoading: () => {},
+  configId: ''
 };
 
 ProductQuantity.propTypes = {
@@ -78,7 +80,8 @@ ProductQuantity.propTypes = {
   simpleSku: PropTypes.string.isRequired,
   pincode: PropTypes.string.isRequired,
   sessionId: PropTypes.string.isRequired,
-  cartItemLoading: PropTypes.func
+  cartItemLoading: PropTypes.func,
+  configId: PropTypes.string
 };
 
 export default connect(mapStateToProps, { updateQuantity: updateCart })(ProductQuantity);

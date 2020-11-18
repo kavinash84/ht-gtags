@@ -474,7 +474,7 @@ class ProductDetails extends React.Component {
       sku_supplier_config: skuSupplierConfig
     } = attributes;
     const simpleSku = Object.keys(simples)[0];
-    const { name, price } = meta;
+    const { name, price, config_id: configId } = meta;
     const {
       offer_discount_percentage: offerDiscountPercentage,
       coupon_code: couponCode,
@@ -717,6 +717,7 @@ class ProductDetails extends React.Component {
                     quantity={productQty.value || 1}
                     simpleSku={simpleSku}
                     sku={sku}
+                    configId={configId}
                     itemId={sku}
                     isSoldOut={
                       !(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)

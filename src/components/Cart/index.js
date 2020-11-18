@@ -48,9 +48,9 @@ const checkCartBeforeCheckout = (dispatcher, session) => e => {
   dispatcher(session);
 };
 
-const onClick = (cartId, sessionId, pincode) => dispatcher => e => {
+const onClick = (cartId, sessionId, pincode, qty, configId) => dispatcher => e => {
   e.preventDefault();
-  dispatcher(cartId, sessionId, pincode);
+  dispatcher(cartId, sessionId, pincode, qty, configId);
 };
 const countCartItemNumbers = results => {
   let cartItemsNumber = 0;
@@ -263,6 +263,7 @@ const Cart = ({
                   quantity={item.qty}
                   simpleSku={item.simple_sku}
                   skuId={item.configurable_sku}
+                  configId={item.product_info && item.product_info.product_id ? item.product_info.product_id : ''}
                 />
               </Box>
               <Box variant="col-2">
@@ -301,7 +302,13 @@ const Cart = ({
                   </Heading>
                   <Button
                     variant="outline.primary"
-                    onClick={onClick(item.id_customer_cart, sessionId, pincode)(removeFromCart)}
+                    onClick={onClick(
+                      item.id_customer_cart,
+                      sessionId,
+                      pincode,
+                      item.qty,
+                      item.product_info.product_id
+                    )(removeFromCart)}
                   >
                     Remove
                   </Button>
