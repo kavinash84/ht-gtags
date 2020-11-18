@@ -36,6 +36,12 @@ import Empty from './Empty';
 const CartEmptyIcon = require('../../../static/emptyCart.png');
 const PincodeModalIcon = require('../../../static/map-placeholder.svg');
 
+const demoProductsBanner = cart => {
+  console.log('demoProducts function', cart);
+  console.log(cart.some(({ product_info: { demo_product: demoProduct } }) => demoProduct));
+  return cart.some(({ product_info: { demo_product: demoProduct } }) => demoProduct);
+};
+
 @connect(
   ({
  cart, cart: {
@@ -135,6 +141,7 @@ export default class CartContainer extends Component {
                 />
               )}
               <Cart
+                demoProductsBanner={demoProductsBanner(results)}
                 results={results}
                 summary={summary}
                 outOfStockList={outOfStockList}

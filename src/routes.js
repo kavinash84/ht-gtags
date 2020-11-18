@@ -88,8 +88,7 @@ const isAuthenticated = connectedReduxRedirect({
 });
 
 const isNotAuthenticated = connectedReduxRedirect({
-  redirectPath: (state, ownProps) =>
-    locationHelper.getRedirectQueryParam(ownProps) || '/profile',
+  redirectPath: (state, ownProps) => locationHelper.getRedirectQueryParam(ownProps) || '/profile',
   authenticatedSelector: state => !state.userLogin.isLoggedIn,
   redirectAction: routerActions.replace,
   wrapperDisplayName: 'UserIsAuthenticated',
@@ -191,7 +190,7 @@ const routes = [
       },
       { path: '/wedding-campaign', exact: true, component: WeddingCampaign },
       { path: '/combo-offer', exact: true, component: ComboOffer },
-      // { path: "/announcement", exact: true, component: Announcement },
+      // { path: '/announcement', exact: true, component: Announcement }
       { path: '/offer/:type', exact: true, component: Campaigns },
       {
         path: `/:category(${createRegex(categoryRoutes)})`,
