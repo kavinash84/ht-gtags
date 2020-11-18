@@ -1,7 +1,7 @@
-import HomeTownLoader from "containers/Loader";
-import { provideHooks } from "redial";
-import { getLandingData, getLandingCategoryData } from "redux/modules/landing";
-import { loadStoresData } from "redux/modules/storelocator";
+import HomeTownLoader from 'containers/Loader';
+import { provideHooks } from 'redial';
+import { getLandingData, getLandingCategoryData } from 'redux/modules/landing';
+import { loadStoresData } from 'redux/modules/storelocator';
 
 const hooks = {
   fetch: async ({ store: { dispatch }, params }) => {
@@ -12,7 +12,7 @@ const hooks = {
 };
 
 const Campaigns = HomeTownLoader({
-  loader: () => import("./CampaignOffer" /* webpackChunkName: comboOffer' */)
+  loader: () => import('./CampaignOffer' /* webpackChunkName: comboOffer' */)
 });
 
 export default provideHooks(hooks)(Campaigns);
