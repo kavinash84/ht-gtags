@@ -1,28 +1,32 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 /**
  * formatters
  */
-import { formatAmount } from 'utils/formatters';
+import { formatAmount } from "utils/formatters";
 
 /**
  * Components
  */
-import Box from 'hometown-components-dev/lib/BoxHtV1';
-import Col from 'hometown-components-dev/lib/ColHtV1';
-import Flex from 'hometown-components-dev/lib/FlexHtV1';
-import Heading from 'hometown-components-dev/lib/HeadingHtV1';
-import Image from 'hometown-components-dev/lib/ImageHtV1';
-import Row from 'hometown-components-dev/lib/RowHtV1';
-import Text from 'hometown-components-dev/lib/TextHtV1';
-import ProductSummaryList from './ProductSummaryList';
+import Box from "hometown-components-dev/lib/BoxHtV1";
+import Col from "hometown-components-dev/lib/ColHtV1";
+import Flex from "hometown-components-dev/lib/FlexHtV1";
+import Heading from "hometown-components-dev/lib/HeadingHtV1";
+import Image from "hometown-components-dev/lib/ImageHtV1";
+import Row from "hometown-components-dev/lib/RowHtV1";
+import Text from "hometown-components-dev/lib/TextHtV1";
+import ProductSummaryList from "./ProductSummaryList";
 
-const editIcon = require('../../../static/edit-round.svg');
+import Img from "hometown-components/lib/Img";
 
-const styles = require('./OrderSummary.scss');
+const editIcon = require("../../../static/edit-round.svg");
 
-const editItems = history => history.push('/checkout/cart');
+const styles = require("./OrderSummary.scss");
+
+const playButton = require("../../../static/play-button.svg");
+
+const editItems = history => history.push("/checkout/cart");
 
 const OrderSummary = ({
   itemsTotal,
@@ -34,20 +38,59 @@ const OrderSummary = ({
   discount,
   coupon,
   results,
-  history
+  history,
+  hidecoupon,
+  landingPageLink,
+  selectedForDemo
 }) => (
   <Row>
+    <Div col="12">{!hidecoupon && <Coupon />}</Div>
+    {selectedForDemo && (
+      <Row
+        ml="0"
+        mr="0"
+        mb="1rem"
+        alignItems="center"
+        flexWrap="no-wrap"
+        width="100%"
+      >
+        <Img
+          src={playButton}
+          alt="Schedule store demo for selected products"
+          height="32px"
+          mr="10px"
+          width="auto"
+        />
+        <Button
+          p="0"
+          color="#3cc0dc"
+          btnType="link"
+          lh="1.25"
+          whiteSpace="normal"
+          ta="left"
+        >
+          <a href={landingPageLink} target="1blank">
+            Schedule store demo for selected products
+          </a>
+        </Button>
+      </Row>
+    )}
     <Col width={1} px={[0, 0, 15]}>
       <Box
         pb={10}
         sx={{
-          borderBottom: 'divider'
+          borderBottom: "divider"
         }}
       >
-        <Heading variant="heading.regular" color="#1c1c1c" display="flex" justifyContent="space-between">
+        <Heading
+          variant="heading.regular"
+          color="#1c1c1c"
+          display="flex"
+          justifyContent="space-between"
+        >
           Order Summary
           <Image
-            sx={{ cursor: 'pointer' }}
+            sx={{ cursor: "pointer" }}
             src={editIcon}
             onClick={e => {
               e.preventDefault();
@@ -65,11 +108,15 @@ const OrderSummary = ({
       mt={20}
       width={1}
       sx={{
-        borderBottom: 'divider'
+        borderBottom: "divider"
       }}
     >
       {results.map(item => (
-        <ProductSummaryList sku={item.configurable_sku} qty={item.qty} productItem={item.product_info || {}} />
+        <ProductSummaryList
+          sku={item.configurable_sku}
+          qty={item.qty}
+          productItem={item.product_info || {}}
+        />
       ))}
     </Box>
     <Box variant="col-12" pb={20} px={[0, 0, 16]}>
@@ -88,7 +135,7 @@ const OrderSummary = ({
       </Flex>
       <Flex mb={[10, 10, 20]} justifyContent="space-between">
         <Text>Shipping</Text>
-        <Text>{shipping === 0 ? 'Free' : `Rs. ${shipping}`}</Text>
+        <Text>{shipping === 0 ? "Free" : `Rs. ${shipping}`}</Text>
       </Flex>
       {discount > 0 && (
         <Flex mb={20} justifyContent="space-between">
@@ -104,7 +151,13 @@ const OrderSummary = ({
       )}
       <Row m="0" py="1em" className={styles.totalWrapper}>
         <Box variant="col-6" p="0">
-          <Text color="menuItem" mb="0" fontSize={[16, 16, 18]} fontWeight="600" fontFamily="light">
+          <Text
+            color="menuItem"
+            mb="0"
+            fontSize={[16, 16, 18]}
+            fontWeight="600"
+            fontFamily="light"
+          >
             Total Price
           </Text>
         </Box>
@@ -125,7 +178,10 @@ OrderSummary.defaultProps = {
   itemsCount: 0,
   discount: 0,
   setDiscount: 0,
-  results: []
+  results: [],
+  setDiscount: 0,
+  landingPageLink: "",
+  selectedForDemo: false
 };
 
 OrderSummary.propTypes = {
@@ -138,7 +194,10 @@ OrderSummary.propTypes = {
   discount: PropTypes.number,
   coupon: PropTypes.string.isRequired,
   results: PropTypes.array,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  hidecoupon: PropTypes.bool,
+  landingPageLink: PropTypes.string,
+  selectedForDemo: PropTypes.bool
 };
 
 export default OrderSummary;

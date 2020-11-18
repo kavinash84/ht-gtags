@@ -38,6 +38,8 @@ import analytics from './modules/analytics';
 import services from './modules/services';
 import cases from './modules/cases';
 import combinedbuy from './modules/combinedbuy';
+import landing from './modules/landing';
+import selectForDemo from './modules/selectForDemo';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -90,6 +92,8 @@ export default function createReducers(asyncReducers) {
     services,
     cases,
     mycases,
+    landing,
+    selectForDemo,
     ...asyncReducers
   };
 }

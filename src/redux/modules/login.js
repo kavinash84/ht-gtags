@@ -1,25 +1,25 @@
-import cookie from 'js-cookie';
+import cookie from "js-cookie";
 import {
   LOGIN as LOGIN_API,
   GOOGLE_LOGIN as GOOGLE_LOGIN_API,
   LOGOUT as LOGOUT_API,
   OTP as OTP_API,
   RESEND_OTP as RESEND_OTP_API
-} from 'helpers/apiUrls';
-import { clientId, clientSecret } from 'helpers/Constants';
+} from "helpers/apiUrls";
+import { clientId, clientSecret } from "helpers/Constants";
 
-const LOGIN = 'login/LOGIN';
-const LOGIN_SUCCESS = 'login/LOGIN_SUCCESS';
-const LOGIN_FAIL = 'login/LOGIN_FAIL';
-const LOGIN_AFTER_SIGNUP = 'login/LOGIN_AFTER_SIGNUP';
-const LOGOUT = 'login/LOGOUT';
-const LOGOUT_SUCCESS = 'login/LOGOUT_SUCCESS';
-const LOGOUT_FAIL = 'login/LOGOUT_FAIL';
-const CLEAR_LOGIN_STATE = 'login/CLEAR_LOGIN_STATE';
+const LOGIN = "login/LOGIN";
+const LOGIN_SUCCESS = "login/LOGIN_SUCCESS";
+const LOGIN_FAIL = "login/LOGIN_FAIL";
+const LOGIN_AFTER_SIGNUP = "login/LOGIN_AFTER_SIGNUP";
+const LOGOUT = "login/LOGOUT";
+const LOGOUT_SUCCESS = "login/LOGOUT_SUCCESS";
+const LOGOUT_FAIL = "login/LOGOUT_FAIL";
+const CLEAR_LOGIN_STATE = "login/CLEAR_LOGIN_STATE";
 
-const GET_OTP = 'login/GET_OTP';
-const GET_OTP_SUCCESS = 'login/GET_OTP_SUCCESS';
-const GET_OTP_FAIL = 'login/GET_OTP_FAIL';
+const GET_OTP = "login/GET_OTP";
+const GET_OTP_SUCCESS = "login/GET_OTP_SUCCESS";
+const GET_OTP_FAIL = "login/GET_OTP_FAIL";
 
 const initialState = {
   loaded: false,
@@ -28,11 +28,12 @@ const initialState = {
   isLoggedOut: false,
   askContact: false,
   askName: false,
-  otp: '',
+  otp: "",
   error: false,
-  errorMessage: '',
-  loginType: '',
-  tokenData: {}
+  errorMessage: "",
+  loginType: "",
+  tokenData: {},
+  askEmail: false
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -55,7 +56,8 @@ export default function reducer(state = initialState, action = {}) {
         meta: action.result.meta,
         askContact: false,
         askName: false,
-        loginError: '',
+        askEmail: false,
+        loginError: "",
         tokenData: {}
       };
     case LOGIN_FAIL:
@@ -65,9 +67,13 @@ export default function reducer(state = initialState, action = {}) {
         loginError: action.error,
         askContact: action.error.askContact || false,
         askName: action.error.askName || false,
-        loginType: action.error.loginType || '',
+        askEmail: action.error.askEmail || false,
+        loginType: action.error.loginType || "",
         tokenData:
-          (action.error.askContact || action.error.askName) && action.error.tokenData ? action.error.tokenData : {}
+          (action.error.askContact || action.error.askName) &&
+          action.error.tokenData
+            ? action.error.tokenData
+            : {}
       };
     case LOGIN_AFTER_SIGNUP:
       return {
@@ -78,7 +84,7 @@ export default function reducer(state = initialState, action = {}) {
         accessToken: action.data.access_token,
         refreshToken: action.data.refresh_token,
         meta: action.data.meta,
-        loginError: '',
+        loginError: "",
         askContact: false,
         askName: false,
         tokenData: {}
@@ -140,31 +146,39 @@ export default function reducer(state = initialState, action = {}) {
 
 const setToken = ({ client }) => response => {
   if (response.access_token === null) {
-    cookie.remove('Authorization');
+    cookie.remove("Authorization");
     client.setJwtToken(null);
     client.setSessionId(null);
     client.setCSRFToken(null);
     return;
   }
   /* setting cookie for server call */
-  cookie.set('Authorization', `Bearer ${response.access_token}`, { expires: 8 / 24 });
+  cookie.set("Authorization", `Bearer ${response.access_token}`, {
+    expires: 8 / 24
+  });
   client.setJwtToken(response.access_token);
 };
 
-export const isLoaded = globalState => globalState.login && globalState.login.loaded;
+export const isLoaded = globalState =>
+  globalState.login && globalState.login.loaded;
 
 export const login = data => ({
   types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
   promise: async ({ client }) => {
     try {
       /* eslint-disable max-len */
-      const username = data.otp ? `mobile=${data.mobile}` : `email=${data.email}`;
-      const type = data.otp ? 'mobile' : 'email';
+      const username = data.otp
+        ? `mobile=${data.mobile}`
+        : `email=${data.email}`;
+      const type = data.otp ? "mobile" : "email";
       const password = data.otp ? data.otp : data.password;
-      const method = data.otp ? 'otp' : 'password';
-      const mobile = data.otp ? '' : `&mobile=${data.phone}`;
-      const name = data.name ? `&full_name=${data.name}` : '';
-      const postData = `${username}&password=${password}&type=${type}&method=${method}&grant_type=password&client_id=${clientId}&client_secret=${clientSecret}${mobile}${name}`;
+      const method = data.otp ? "otp" : "password";
+      const mobile = data.otp ? "" : `&mobile=${data.phone}`;
+      const name = data.name ? `&full_name=${data.name}` : "";
+      // const postData = `${username}&password=${password}&type=${type}&method=${method}&grant_type=password&client_id=${clientId}&client_secret=${clientSecret}${mobile}${name}`;
+      const email =
+        data.email && type === "mobile" ? `&email=${data.email}` : "";
+      const postData = `${username}&password=${password}&type=${type}&method=${method}&grant_type=password&client_id=${clientId}&client_secret=${clientSecret}${mobile}${name}${email}`;
       const response = await client.post(LOGIN_API, postData);
       setToken({ client })(response);
       return response;
@@ -172,7 +186,7 @@ export const login = data => ({
     } catch (err) {
       const error = {
         ...err,
-        loginType: 'hometown'
+        loginType: "hometown"
       };
       throw error;
     }
@@ -195,7 +209,7 @@ export const googleLogin = (result, session, phone) => (dispatch, getState) =>
           token: tokenId,
           client_secret: clientSecret,
           client_id: clientId,
-          grant_type: 'password',
+          grant_type: "password",
           session_id: session,
           phone,
           full_name: name
@@ -207,7 +221,7 @@ export const googleLogin = (result, session, phone) => (dispatch, getState) =>
       } catch (err) {
         const error = {
           ...err,
-          loginType: 'google',
+          loginType: "google",
           tokenData: data
         };
         throw error;

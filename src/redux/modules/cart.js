@@ -3,52 +3,54 @@ import {
   ADDTOCART as ADDTOCART_API,
   SYNCCART as SYNCCART_API,
   CHECKCART as CHECKCART_API
-} from 'helpers/apiUrls';
-import { PINCODE } from '../../helpers/Constants';
+} from "helpers/apiUrls";
+import { PINCODE } from "../../helpers/Constants";
 
-const LOAD_CART = 'cart/LOAD_CART';
-const LOAD_CART_SUCCESS = 'cart/LOAD_CART_SUCCESS';
-const LOAD_CART_FAIL = 'cart/LOAD_CART_FAIL';
-const ADD_TO_CART = 'cart/ADD_TO_CART';
-const ADD_TO_CART_SUCCESS = 'cart/ADD_TO_CART_SUCCESS';
-const ADD_TO_CART_FAIL = 'cart/ADD_TO_CART_FAIL';
-const ADD_TO_CART_COMBINED = 'cart/ADD_TO_CART_COMBINED';
-const ADD_TO_CART_COMBINED_SUCCESS = 'cart/ADD_TO_CART_COMBINED_SUCCESS';
-const ADD_TO_CART_COMBINED_FAIL = 'cart/ADD_TO_CART_COMBINED_FAIL';
-const UPDATE_CART = 'cart/UPDATE_CART';
-const UPDATE_CART_SUCCESS = 'cart/UPDATE_CART_SUCCESS';
-const UPDATE_CART_FAIL = 'cart/UPDATE_CART_FAIL';
-const REMOVE_FROM_CART = 'cart/REMOVE_FROM_CART';
-const REMOVE_FROM_CART_SUCCESS = 'cart/REMOVE_FROM_CART_SUCCESS';
-const REMOVE_FROM_CART_FAIL = 'cart/REMOVE_FROM_CART_FAIL';
-const SYNCING_CART = 'cart/SYNCING_CART';
-const SYNCING_CART_SUCCESS = 'cart/SYNCING_CART_SUCCESS';
-const SYNCING_CART_FAIL = 'cart/SYNCING_CART_FAIL';
-const CHECKCART = 'cart/CHECKCART';
-const CHECKCART_SUCCESS = 'cart/CHECKCART_SUCCESS';
-const CHECKCART_FAIL = 'cart/CHECKCART_FAIL';
-const RESET_CART_CHECK = 'cart/RESET_CART_CHECK';
-const SET_CURRENT_KEY = 'cart/SET_CURRENT_KEY';
-const SET_QUANTITY_FLAG = 'cart/SET_QUANTITY_FLAG';
+const LOAD_CART = "cart/LOAD_CART";
+const LOAD_CART_SUCCESS = "cart/LOAD_CART_SUCCESS";
+const LOAD_CART_FAIL = "cart/LOAD_CART_FAIL";
+const ADD_TO_CART = "cart/ADD_TO_CART";
+const ADD_TO_CART_SUCCESS = "cart/ADD_TO_CART_SUCCESS";
+const ADD_TO_CART_FAIL = "cart/ADD_TO_CART_FAIL";
+const ADD_TO_CART_COMBINED = "cart/ADD_TO_CART_COMBINED";
+const ADD_TO_CART_COMBINED_SUCCESS = "cart/ADD_TO_CART_COMBINED_SUCCESS";
+const ADD_TO_CART_COMBINED_FAIL = "cart/ADD_TO_CART_COMBINED_FAIL";
+const UPDATE_CART = "cart/UPDATE_CART";
+const UPDATE_CART_SUCCESS = "cart/UPDATE_CART_SUCCESS";
+const UPDATE_CART_FAIL = "cart/UPDATE_CART_FAIL";
+const REMOVE_FROM_CART = "cart/REMOVE_FROM_CART";
+const REMOVE_FROM_CART_SUCCESS = "cart/REMOVE_FROM_CART_SUCCESS";
+const REMOVE_FROM_CART_FAIL = "cart/REMOVE_FROM_CART_FAIL";
+const SYNCING_CART = "cart/SYNCING_CART";
+const SYNCING_CART_SUCCESS = "cart/SYNCING_CART_SUCCESS";
+const SYNCING_CART_FAIL = "cart/SYNCING_CART_FAIL";
+const CHECKCART = "cart/CHECKCART";
+const CHECKCART_SUCCESS = "cart/CHECKCART_SUCCESS";
+const CHECKCART_FAIL = "cart/CHECKCART_FAIL";
+const RESET_CART_CHECK = "cart/RESET_CART_CHECK";
+const SET_CURRENT_KEY = "cart/SET_CURRENT_KEY";
+const SET_QUANTITY_FLAG = "cart/SET_QUANTITY_FLAG";
 
-const UPDATE_CART_SUMMARY_AFTER_COUPON = 'cart/UPDATE_CART_SUMMARY_AFTER_COUPON';
+const UPDATE_CART_SUMMARY_AFTER_COUPON =
+  "cart/UPDATE_CART_SUMMARY_AFTER_COUPON";
 
-const CLEAR_CART = 'cart/CLEAR_CART';
+const CLEAR_CART = "cart/CLEAR_CART";
 
-const TOGGLE_COUPON_LIST = 'cart/TOGGLE_COUPON_LIST';
-const HIDE_COUPON_LIST = 'cart/HIDE_COUPON_LIST';
+const TOGGLE_COUPON_LIST = "cart/TOGGLE_COUPON_LIST";
+const HIDE_COUPON_LIST = "cart/HIDE_COUPON_LIST";
 
 const initialState = {
   loading: false,
   data: [],
   summary: {},
+  demo_landing_page_url: "",
   loaded: false,
   addedToCart: false,
   cartUpdated: false,
   cartSynced: false,
   checkingCart: false,
   cartChecked: false,
-  key: '',
+  key: "",
   couponlistToggle: false,
   quantityChange: false
 };
@@ -63,8 +65,16 @@ export default function reducer(state = initialState, action = {}) {
     case LOAD_CART_SUCCESS:
       return {
         ...state,
-        data: action.result && 'cart' in action.result ? action.result.cart : [],
-        summary: action.result && 'summary' in action.result ? action.result.summary : {},
+        data:
+          action.result && "cart" in action.result ? action.result.cart : [],
+        summary:
+          action.result && "summary" in action.result
+            ? action.result.summary
+            : {},
+        demo_landing_page_url:
+          action.result && "demo_landing_page_url" in action.result
+            ? action.result.demo_landing_page_url
+            : "",
         loading: false,
         loaded: true,
         couponlistToggle: false
@@ -88,8 +98,14 @@ export default function reducer(state = initialState, action = {}) {
         addedToCart: true,
         quantityChange: false,
         couponlistToggle: false,
-        data: action.result && 'cart' in action.result ? action.result.cart.cart : [],
-        summary: action.result && 'cart' in action.result ? action.result.cart.summary : {}
+        data:
+          action.result && "cart" in action.result
+            ? action.result.cart.cart
+            : [],
+        summary:
+          action.result && "cart" in action.result
+            ? action.result.cart.summary
+            : {}
       };
     case ADD_TO_CART_FAIL:
       return {
@@ -110,8 +126,10 @@ export default function reducer(state = initialState, action = {}) {
         addingToCart: false,
         addedToCart: true,
         couponlistToggle: false,
-        data: action.result && 'cart' in action.result ? action.result.cart : [],
-        summary: action.result && 'cart' in action.result ? action.result.summary : {}
+        data:
+          action.result && "cart" in action.result ? action.result.cart : [],
+        summary:
+          action.result && "cart" in action.result ? action.result.summary : {}
       };
     case ADD_TO_CART_COMBINED_FAIL:
       return {
@@ -132,8 +150,14 @@ export default function reducer(state = initialState, action = {}) {
         cartUpdating: false,
         cartUpdated: true,
         quantityChange: false,
-        data: action.result && 'cart' in action.result ? action.result.cart.cart : [],
-        summary: action.result && 'cart' in action.result ? action.result.cart.summary : {},
+        data:
+          action.result && "cart" in action.result
+            ? action.result.cart.cart
+            : [],
+        summary:
+          action.result && "cart" in action.result
+            ? action.result.cart.summary
+            : {},
         couponlistToggle: false
       };
     case UPDATE_CART_FAIL:
@@ -155,8 +179,14 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         cartUpdating: false,
         cartUpdated: true,
-        data: action.result && 'cart' in action.result ? action.result.cart.cart : [],
-        summary: action.result && 'cart' in action.result ? action.result.cart.summary : {},
+        data:
+          action.result && "cart" in action.result
+            ? action.result.cart.cart
+            : [],
+        summary:
+          action.result && "cart" in action.result
+            ? action.result.cart.summary
+            : {},
         couponlistToggle: false
       };
     case REMOVE_FROM_CART_FAIL:
@@ -176,8 +206,12 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         cartSyncing: false,
         cartSynced: true,
-        data: action.result && 'cart' in action.result ? action.result.cart : [],
-        summary: action.result && 'summary' in action.result ? action.result.summary : {}
+        data:
+          action.result && "cart" in action.result ? action.result.cart : [],
+        summary:
+          action.result && "summary" in action.result
+            ? action.result.summary
+            : {}
       };
     case SYNCING_CART_FAIL:
       return {
@@ -244,7 +278,8 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-export const isLoaded = globalState => globalState.cart && globalState.cart.loaded;
+export const isLoaded = globalState =>
+  globalState.cart && globalState.cart.loaded;
 
 const setCurrentKey = key => ({
   type: SET_CURRENT_KEY,
@@ -261,7 +296,9 @@ export const loadCart = (session, pincode) => ({
   types: [LOAD_CART, LOAD_CART_SUCCESS, LOAD_CART_FAIL],
   promise: async ({ client }) => {
     try {
-      const response = await client.get(`${ADDTOCART_API}/${session}/${pincode}`);
+      const response = await client.get(
+        `${ADDTOCART_API}/${session}/${pincode}`
+      );
       await setAppAuth({ client })(response);
       return response;
     } catch (error) {
@@ -297,10 +334,20 @@ export const addToCart = (key, sku, simpleSku, session, pincode, quantity, confi
   });
 };
 
-export const addToCartCombined = (setId, skus, sessionId, pincode, uniqueSetName) => dispatch => {
+export const addToCartCombined = (
+  setId,
+  skus,
+  sessionId,
+  pincode,
+  uniqueSetName
+) => dispatch => {
   dispatch(setCurrentKey(setId));
   return dispatch({
-    types: [ADD_TO_CART_COMBINED, ADD_TO_CART_COMBINED_SUCCESS, ADD_TO_CART_COMBINED_FAIL],
+    types: [
+      ADD_TO_CART_COMBINED,
+      ADD_TO_CART_COMBINED_SUCCESS,
+      ADD_TO_CART_COMBINED_FAIL
+    ],
     promise: async ({ client }) => {
       try {
         const postData = {
@@ -333,7 +380,7 @@ export const updateCart = (cartId, sku, simpleSku, session, pincode, qty, config
           qty
         };
         const response = await client.put(ADDTOCART_API, postData);
-        response.updateType = qty === 1 ? 'add' : 'remove';
+        response.updateType = qty === 1 ? "add" : "remove";
         return response;
       } catch (error) {
         throw error;
@@ -349,7 +396,9 @@ export const removeFromCart = (cartId, session, pincode = PINCODE, qty = '', con
     types: [REMOVE_FROM_CART, REMOVE_FROM_CART_SUCCESS, REMOVE_FROM_CART_FAIL],
     promise: async ({ client }) => {
       try {
-        const response = await client.delete(`${ADDTOCART_API}/${cartId}/${session}/${pincode}`);
+        const response = await client.delete(
+          `${ADDTOCART_API}/${cartId}/${session}/${pincode}`
+        );
         return response;
       } catch (error) {
         throw error;
@@ -364,7 +413,10 @@ export const synCart = (sessionId, pincode = PINCODE) => ({
   types: [SYNCING_CART, SYNCING_CART_SUCCESS, SYNCING_CART_FAIL],
   promise: async ({ client }) => {
     try {
-      const response = await client.put(`${SYNCCART_API}/${sessionId}/${pincode}`, {});
+      const response = await client.put(
+        `${SYNCCART_API}/${sessionId}/${pincode}`,
+        {}
+      );
       return response;
     } catch (error) {
       throw error;
@@ -376,7 +428,9 @@ export const checkCart = sessionId => ({
   types: [CHECKCART, CHECKCART_SUCCESS, CHECKCART_FAIL],
   promise: async ({ client }) => {
     try {
-      const response = await client.post(`${CHECKCART_API}`, { session_id: sessionId });
+      const response = await client.post(`${CHECKCART_API}`, {
+        session_id: sessionId
+      });
       return response;
     } catch (error) {
       throw error;
