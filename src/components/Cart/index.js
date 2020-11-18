@@ -1,55 +1,100 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React from "react";
+import PropTypes from "prop-types";
+// import { bindActionCreators } from 'redux';      //Old
+// import { bindActionCreators } from 'redux';      //New
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 /**
  * Helper / modules
  */
-import { formatProductURL } from 'utils/helper';
-import * as actionCreators from 'redux/modules/cart';
-import { formatAmount } from 'utils/formatters';
+import { formatProductURL } from "utils/helper";
+import * as actionCreators from "redux/modules/cart";
+import { formatAmount } from "utils/formatters";
 
 /**
  * Components
  */
-import Box from 'hometown-components-dev/lib/BoxHtV1';
-import Flex from 'hometown-components-dev/lib/FlexHtV1';
-import Button from 'hometown-components-dev/lib/ButtonHtV1';
-import Container from 'hometown-components-dev/lib/ContainerHtV1';
-import Heading from 'hometown-components-dev/lib/HeadingHtV1';
-import Label from 'hometown-components-dev/lib/LabelHtV1';
-import Image from 'hometown-components-dev/lib/ImageHtV1';
-import ImageShimmer from 'hometown-components-dev/lib/ImageShimmerHtV1';
-import Row from 'hometown-components-dev/lib/RowHtV1';
-import Text from 'hometown-components-dev/lib/TextHtV1';
-import CloseIcon from 'hometown-components-dev/lib/Icons/Close';
+import Box from "hometown-components-dev/lib/BoxHtV1";
+import Flex from "hometown-components-dev/lib/FlexHtV1";
+import Button from "hometown-components-dev/lib/ButtonHtV1";
+import Container from "hometown-components-dev/lib/ContainerHtV1";
+import Heading from "hometown-components-dev/lib/HeadingHtV1";
+import Label from "hometown-components-dev/lib/LabelHtV1";
+import Image from "hometown-components-dev/lib/ImageHtV1";
+import ImageShimmer from "hometown-components-dev/lib/ImageShimmerHtV1";
+import Row from "hometown-components-dev/lib/RowHtV1";
+import Text from "hometown-components-dev/lib/TextHtV1";
+import CloseIcon from "hometown-components-dev/lib/Icons/Close";
+import * as actionCreatorsForDemo from "redux/modules/selectForDemo"; //New
 
 /**
  * Page Components
  */
-import ProductQuantity from './UpdateProductQuantity';
-import OrderSummary from './OrderSummary';
-import PaymentMethods from '../PaymentMethods';
+import ProductQuantity from "./UpdateProductQuantity";
+import OrderSummary from "./OrderSummary";
+import PaymentMethods from "../PaymentMethods";
 
 /**
  * Images
  */
-const checkoutIcon = require('../../../static/checkout.svg');
-const location = require('../../../static/map-icon.svg');
-const orderTrackIcon = require('../../../static/shipped.svg');
+const checkoutIcon = require("../../../static/checkout.svg");
+const location = require("../../../static/map-icon.svg");
+const orderTrackIcon = require("../../../static/shipped.svg");
 // const saveForLaterIcon = require('../../../static/save-for-later.svg');
 
-const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
-
-const checkCartBeforeCheckout = (dispatcher, session) => e => {
-  e.preventDefault();
-  dispatcher(session);
+// const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);  //Old
+// const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators, addToSelectForDemo }, dispatch);    //New
+const despatchClearSelectForDemo = dispatcheroEmpty => {
+  //New
+  const state = [];
+  dispatcheroEmpty(state);
 };
 
-const onClick = (cartId, sessionId, pincode) => dispatcher => e => {
+// const checkCartBeforeCheckout = (dispatcher, session) => e => {    //Old
+const checkCartBeforeCheckout = (
+  dispatcher,
+  session
+) => dispatcheroEmpty => e => {
+  //New
   e.preventDefault();
+  dispatcher(session);
+  despatchClearSelectForDemo(dispatcheroEmpty); //New
+};
+
+// const onClick = (cartId, sessionId, pincode) => dispatcher => e => {   //Old
+const despatchSelectForDemo = (id, data, state, dispatchero) => {
+  //New
+  const skuExists = state.some(arr => arr.simpleSku === id);
+  const {
+    simple_sku: simpleSku,
+    product_info: { product_id: productId }
+  } = data;
+
+  if (skuExists) {
+    state = state.filter(arr => arr.simpleSku !== id);
+  } else {
+    state.push({ productId, simpleSku });
+  }
+
+  dispatchero([...state]);
+};
+
+// eslint-disable-next-line max-len
+const onClick = (
+  cartId,
+  sessionId,
+  pincode,
+  qty,
+  configId,
+  id,
+  data,
+  selectForDemo
+) => dispatcher => dispatchero => e => {
+  e.preventDefault();
+  if (selectForDemo && selectForDemo.length !== 0) {
+    despatchSelectForDemo(id, data, selectForDemo, dispatchero);
+  }
   dispatcher(cartId, sessionId, pincode);
 };
 const countCartItemNumbers = results => {
@@ -69,13 +114,24 @@ const checkIsAnyProductOutofStoc = (results, outOfStockList) => {
   return isAnyProductOutofStoc;
 };
 
-const mapStateToProps = ({ pincode, cart, app }) => ({
+// const mapStateToProps = ({ pincode, cart, app }) => ({   //Old
+const isSelected = (id, state) => state.some(arr => arr.simpleSku === id);
+
+const handleCheckboxClick = (id, data, state) => dispatchero => e => {
+  console.log(e.target.value);
+  despatchSelectForDemo(id, data, state, dispatchero);
+};
+
+const mapStateToProps = ({ pincode, cart, app, selectForDemo }) => ({
   currentId: cart.key,
   cartChecked: cart.cartChecked,
   checkingCart: cart.checkingCart,
   cartUpdating: cart.cartUpdating,
   pincode: pincode.selectedPincode,
-  sessionId: app.sessionId
+  // sessionId: app.sessionId   //Old
+  sessionId: app.sessionId, //New
+  demoLandingPageUrl: cart.demo_landing_page_url,
+  selectForDemo: selectForDemo.data
 });
 
 const Cart = ({
@@ -89,11 +145,21 @@ const Cart = ({
   checkCart,
   checkingCart,
   outOfStockList,
-  handlePincodeModal
+  // handlePincodeModal   //Old
+  handlePincodeModal,
+  demoLandingPageUrl,
+  // eslint-disable-next-line no-shadow
+  addToSelectForDemo,
+  selectForDemo
+  // demo_landing_page_url: demoLandingPageUrl
 }) => {
-  const cartItemLoading = customerCardId => cartUpdating && currentId === customerCardId;
+  const cartItemLoading = customerCardId =>
+    cartUpdating && currentId === customerCardId;
   const isProductOutofStock = sku => outOfStockList.includes(sku);
-  const isAnyProductOutofStoc = checkIsAnyProductOutofStoc(results, outOfStockList);
+  const isAnyProductOutofStoc = checkIsAnyProductOutofStoc(
+    results,
+    outOfStockList
+  );
   const cartItemsNumber = countCartItemNumbers(results);
 
   return (
@@ -116,7 +182,12 @@ const Cart = ({
                 width={1}
                 onClick={checkCartBeforeCheckout(checkCart, sessionId)}
               >
-                <Image src={checkoutIcon} alt="Delete" height="18px" mr="0.625rem" />
+                <Image
+                  src={checkoutIcon}
+                  alt="Delete"
+                  height="18px"
+                  mr="0.625rem"
+                />
                 SECURE CHECKOUT
               </Button>
             </Box>
@@ -139,7 +210,7 @@ const Cart = ({
             mx={0}
             pb={5}
             sx={{
-              borderBottom: 'heading'
+              borderBottom: "heading"
             }}
           >
             <Box variant="col-8" pl={0}>
@@ -151,16 +222,27 @@ const Cart = ({
             <Box variant="col-2">
               <Text fontFamily="medium">Price</Text>
             </Box>
+            {/* <button onClick={handleClickDemo} >TRIAL</button> */}
           </Row>
           {results.map(item => (
-            <Row key={item.id_customer_cart} py={20} alignItems="center" sx={{ position: 'relative' }}>
+            <Row
+              key={item.id_customer_cart}
+              py={20}
+              alignItems="center"
+              sx={{ position: "relative" }}
+            >
               <Box variant="col-3" pr={0}>
-                <Link to={formatProductURL(item.product_info.name, item.configurable_sku)}>
+                <Link
+                  to={formatProductURL(
+                    item.product_info.name,
+                    item.configurable_sku
+                  )}
+                >
                   <ImageShimmer
                     src={item.product_info.image}
                     height="100%"
                     sx={{
-                      boxShadow: '0 1px 2px 0 #0000033'
+                      boxShadow: "0 1px 2px 0 #0000033"
                     }}
                   >
                     {imageURL => (
@@ -169,7 +251,7 @@ const Cart = ({
                         src={imageURL}
                         alt=""
                         sx={{
-                          boxShadow: 'productThumb'
+                          boxShadow: "productThumb"
                         }}
                       />
                     )}
@@ -177,9 +259,19 @@ const Cart = ({
                 </Link>
               </Box>
               <Box variant="col-5" pl={30}>
-                <Link to={formatProductURL(item.product_info.name, item.configurable_sku)}>
+                <Link
+                  to={formatProductURL(
+                    item.product_info.name,
+                    item.configurable_sku
+                  )}
+                >
                   <Box mb={10}>
-                    <Heading color="heading" fontSize={16} lineHeight={1.4} fontWeight="normal">
+                    <Heading
+                      color="heading"
+                      fontSize={16}
+                      lineHeight={1.4}
+                      fontWeight="normal"
+                    >
                       {item.product_info.name}
                     </Heading>
                   </Box>
@@ -191,9 +283,20 @@ const Cart = ({
                 </Link>
                 <Box pb={20}>
                   <Flex alignItems="center">
-                    <Image width="initial" height={20} mr={10} src={orderTrackIcon} />
+                    <Image
+                      width="initial"
+                      height={20}
+                      mr={10}
+                      src={orderTrackIcon}
+                    />
                     <Text
-                      color={item.product_info.delivery_time_text.indexOf('Currently') === -1 ? '#090909' : 'red'}
+                      color={
+                        item.product_info.delivery_time_text.indexOf(
+                          "Currently"
+                        ) === -1
+                          ? "#090909"
+                          : "red"
+                      }
                       fontSize={12}
                     >
                       {item.product_info.delivery_time_text}
@@ -215,10 +318,40 @@ const Cart = ({
                     display="flex"
                     alignItems="center"
                     disabled={cartItemLoading(item.id_customer_cart)}
-                    onClick={onClick(item.id_customer_cart, sessionId, pincode)(removeFromCart)}
+                    onClick={onClick(
+                      item.id_customer_cart,
+                      sessionId,
+                      pincode,
+                      // )(removeFromCart)}
+                      item.product_info.product_id,
+                      item.simple_sku,
+                      item,
+                      selectForDemo
+                    )(removeFromCart)(addToSelectForDemo)}
                   >
                     <CloseIcon width={14} height={14} mr={10} /> Remove
                   </Button>
+                  {item.product_info.demo_product && (
+                    <Div mt="0.3125rem">
+                      <div className="checkbox">
+                        <input
+                          type="checkbox"
+                          id={item.simple_sku}
+                          onClick={handleCheckboxClick(
+                            item.simple_sku,
+                            item,
+                            selectForDemo
+                          )(addToSelectForDemo)}
+                          checked={isSelected(item.simple_sku, selectForDemo)}
+                        />
+                        {/* eslint-disable-next-line jsx-a11y/label-has-for */}
+                        <label htmlFor={item.simple_sku} />
+                      </div>
+                      <Label htmlFor="seeDemo" ml="10px">
+                        Select for Demo
+                      </Label>
+                    </Div>
+                  )}
                 </Flex>
                 {/* {item.product_info.assembly_service && (
                     <Box color="uspTitle" fontSize="0.75rem">
@@ -274,10 +407,15 @@ const Cart = ({
                       )}
                     <br /> */}
                 <Label color="heading" fontSize={18}>
-                  ₹{' '}
+                  ₹{" "}
                   {item.product_info.special_price === 0
-                    ? formatAmount(Number(item.product_info.unit_price) * Number(item.qty))
-                    : formatAmount(Number(item.product_info.special_price) * Number(item.qty))}
+                    ? formatAmount(
+                        Number(item.product_info.unit_price) * Number(item.qty)
+                      )
+                    : formatAmount(
+                        Number(item.product_info.special_price) *
+                          Number(item.qty)
+                      )}
                 </Label>
               </Box>
 
@@ -288,9 +426,9 @@ const Cart = ({
                   bg="overlayLight"
                   flexDirection="column"
                   sx={{
-                    position: 'absolute',
-                    width: 'calc(100% - 32px)',
-                    height: 'calc(100% - 40px)',
+                    position: "absolute",
+                    width: "calc(100% - 32px)",
+                    height: "calc(100% - 40px)",
                     zIndex: 1,
                     left: 16,
                     top: 20
@@ -301,7 +439,19 @@ const Cart = ({
                   </Heading>
                   <Button
                     variant="outline.primary"
-                    onClick={onClick(item.id_customer_cart, sessionId, pincode)(removeFromCart)}
+                    // onClick={onClick(
+                    //   item.id_customer_cart,
+                    //   sessionId,
+                    //   pincode
+                    // )(removeFromCart)}
+                    onClick={onClick(
+                      item.id_customer_cart,
+                      sessionId,
+                      pincode,
+                      item.simple_sku,
+                      item,
+                      selectForDemo
+                    )(removeFromCart)(addToSelectForDemo)}
                   >
                     Remove
                   </Button>
@@ -321,25 +471,39 @@ const Cart = ({
               shipping={summary.shipping_charges}
               totalCart={summary.total}
               loadingnextstep={checkingCart}
-              onClick={checkCartBeforeCheckout(checkCart, sessionId)}
+              // onClick={checkCartBeforeCheckout(checkCart, sessionId)}    //Old
+              onClick={checkCartBeforeCheckout(
+                //New
+                checkCart,
+                sessionId
+              )(addToSelectForDemo)}
               outOfStockList={outOfStockList}
               discount={summary.coupon_discount}
+              landingPageLink={demoLandingPageUrl}
+              selectedForDemo={selectForDemo.length !== 0}
               btnText="SECURE CHECKOUT"
             />
             <Box pb={20}>
               <Heading fontSize={16} mb={5} color="#2c2e3f">
                 Exchange & Return Policy
               </Heading>
-              <Text fontSize={14} lineHeight={1.3} fontFamily="light" color="#2c2e3f" pb={5}>
-                We are committed to ensuring your satisfaction with any product you have ordered from us...
+              <Text
+                fontSize={14}
+                lineHeight={1.3}
+                fontFamily="light"
+                color="#2c2e3f"
+                pb={5}
+              >
+                We are committed to ensuring your satisfaction with any product
+                you have ordered from us...
               </Text>
               <Label
                 color="#232324"
                 fontSize={12}
                 fontFamily="medium"
                 sx={{
-                  borderBottom: '1px',
-                  borderColor: '#232324'
+                  borderBottom: "1px",
+                  borderColor: "#232324"
                 }}
               >
                 <Link to="/return-policy">Read More</Link>
@@ -349,11 +513,23 @@ const Cart = ({
               <Heading fontSize={16} mb={5} color="#2c2e3f">
                 Terms & Conditions
               </Heading>
-              <Text fontSize={14} lineHeight={1.3} fontFamily="light" color="#2c2e3f" pb={5}>
-                In using the HomeTown.in service, of Praxis Home Retail Ltd. you are deemed to have accepted the terms
-                and conditions..
+              <Text
+                fontSize={14}
+                lineHeight={1.3}
+                fontFamily="light"
+                color="#2c2e3f"
+                pb={5}
+              >
+                In using the HomeTown.in service, of Praxis Home Retail Ltd. you
+                are deemed to have accepted the terms and conditions..
               </Text>
-              <Label color="#232324" fontSize={12} fontFamily="medium" borderBottom="1px" borderColor="#232324">
+              <Label
+                color="#232324"
+                fontSize={12}
+                fontFamily="medium"
+                borderBottom="1px"
+                borderColor="#232324"
+              >
                 <Link to="/terms-and-conditions">Read More</Link>
               </Label>
             </Box>
@@ -376,17 +552,31 @@ Cart.propTypes = {
   checkCart: PropTypes.func.isRequired,
   checkingCart: PropTypes.bool,
   outOfStockList: PropTypes.array,
-  handlePincodeModal: PropTypes.func.isRequired
+  // handlePincodeModal: PropTypes.func.isRequired    //Old
+  handlePincodeModal: PropTypes.func.isRequired, //New
+  demoLandingPageUrl: PropTypes.string,
+  addToSelectForDemo: PropTypes.func.isRequired,
+  selectForDemo: PropTypes.object
+  // store: PropTypes.object.isRequired
 };
 
 Cart.defaultProps = {
   results: [],
   summary: null,
-  pincode: '',
+  pincode: "",
   cartUpdating: false,
-  currentId: '',
+  currentId: "",
   checkingCart: false,
-  outOfStockList: []
+  // outOfStockList: []
+  demoLandingPageUrl: "",
+  selectForDemo: {}
+  // addToSelectForDemo: PropTypes.func.isRequired
+
+  // store: {}
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Cart); //Old
+export default connect(mapStateToProps, {
+  ...actionCreators,
+  ...actionCreatorsForDemo
+})(Cart); //New
