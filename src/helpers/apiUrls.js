@@ -64,7 +64,9 @@ export const PAYMENT_OPTIONS = "tesla/payments";
 export const COUPON = "tesla/cart/coupon";
 
 /* Payment Status */
-export const PAYMENT_STATUS = "tesla/orders/success";
+// export const PAYMENT_STATUS = "tesla/orders/success";
+export const PAYMENT_SUCCESS_URL = "tesla/orders/success";
+export const PAYMENT_FINISH_URL = "tesla/checkout/finishPayment";
 
 /* Search Suggestions */
 export const SUGGESTIONS = "tesla/search/suggestions";

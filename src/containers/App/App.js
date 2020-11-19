@@ -1,58 +1,93 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
-import PropTypes from 'prop-types';
-import { renderRoutes } from 'react-router-config';
-import { withRouter } from 'react-router';
-import { provideHooks } from 'redial';
-import Helmet from 'react-helmet';
-import { wrapDispatch } from 'multireducer';
-import { loadCategories, loadMainMenu, loadBanners, isLoaded as isSectionLoaded } from 'redux/modules/homepage';
-import { generateSession, isLoaded as isSessionSet } from 'redux/modules/app';
-import { loginUserAfterSignUp, login } from 'redux/modules/login';
-import { loadWishlist, isLoaded as isWishListLoaded } from 'redux/modules/wishlist';
-import { loadUserProfile, isLoaded as isProfileLoaded } from 'redux/modules/profile';
-import { loadCart, isLoaded as isCartLoaded } from 'redux/modules/cart';
-import { PINCODE } from 'helpers/Constants';
-import config from 'config';
-import Cookie from 'js-cookie';
-import * as notifActions from 'redux/modules/notifs';
-import Notifs from 'components/Notifs';
-import { isKeyExists } from 'utils/helper';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { push } from "react-router-redux";
+import PropTypes from "prop-types";
+import { renderRoutes } from "react-router-config";
+import { withRouter } from "react-router";
+import { provideHooks } from "redial";
+import Helmet from "react-helmet";
+import { wrapDispatch } from "multireducer";
+import {
+  loadCategories,
+  loadMainMenu,
+  loadBanners,
+  isLoaded as isSectionLoaded
+} from "redux/modules/homepage";
+import { generateSession, isLoaded as isSessionSet } from "redux/modules/app";
+import { loginUserAfterSignUp, login } from "redux/modules/login";
+import {
+  loadWishlist,
+  isLoaded as isWishListLoaded
+} from "redux/modules/wishlist";
+import {
+  loadUserProfile,
+  isLoaded as isProfileLoaded
+} from "redux/modules/profile";
+import { loadCart, isLoaded as isCartLoaded } from "redux/modules/cart";
+import { PINCODE } from "helpers/Constants";
+import config from "config";
+import Cookie from "js-cookie";
+import * as notifActions from "redux/modules/notifs";
+import Notifs from "components/Notifs";
+import { isKeyExists } from "utils/helper";
+
+import {
+  loadPaymentFinish,
+  isLoaded as isPaymentStatusLoaded
+} from "redux/modules/paymentstatus";
 
 /* ====== Components ====== */
-import Alert from 'hometown-components-dev/lib/Alert';
-import ThemeProvider from 'hometown-components-dev/lib/ThemeProviderHtV1';
+import Alert from "hometown-components-dev/lib/Alert";
+import ThemeProvider from "hometown-components-dev/lib/ThemeProviderHtV1";
 
-const styles = require('./App.scss');
+const styles = require("./App.scss");
 
 const { SITE_URL } = process.env;
-const SITE_URL_MOBILE = 'https://m.hometown.in';
+const SITE_URL_MOBILE = "https://m.hometown.in";
 
 @provideHooks({
   fetch: async ({ store: { dispatch, getState } }) => {
     const {
       pincode: { selectedPincode },
-      app: { sessionId, csrfToken }
+      // app: { sessionId, csrfToken }
+      app: { sessionId, csrfToken, orderId, walletName }
     } = getState();
-    const defaultPincode = selectedPincode === '' ? PINCODE : selectedPincode;
+    const defaultPincode = selectedPincode === "" ? PINCODE : selectedPincode;
     if (!isSessionSet(getState()) || !sessionId || !csrfToken) {
       await dispatch(generateSession(defaultPincode));
     }
-    if (!isSectionLoaded(getState(), 'menu')) {
-      await wrapDispatch(dispatch, 'menu')(loadMainMenu());
+    if (!isSectionLoaded(getState(), "menu")) {
+      await wrapDispatch(dispatch, "menu")(loadMainMenu());
     }
-    if (!isSectionLoaded(getState(), 'banners')) {
-      await wrapDispatch(dispatch, 'banners')(loadBanners()).catch(error => console.log(error));
+    if (!isSectionLoaded(getState(), "banners")) {
+      await wrapDispatch(
+        dispatch,
+        "banners"
+      )(loadBanners()).catch(error => console.log(error));
     }
-    if (!isSectionLoaded(getState(), 'categories')) {
-      await wrapDispatch(dispatch, 'categories')(loadCategories()).catch(error => console.log(error));
+    if (!isSectionLoaded(getState(), "categories")) {
+      await wrapDispatch(
+        dispatch,
+        "categories"
+      )(loadCategories()).catch(error => console.log(error));
     }
     if (getState().userLogin.isLoggedIn && !isProfileLoaded(getState())) {
       await dispatch(loadUserProfile()).catch(error => console.log(error));
     }
+    // console.log('App.js initisal', orderId, !walletName, !isPaymentStatusLoaded(getState()));
+    if (orderId && !walletName && !isPaymentStatusLoaded(getState())) {
+      console.log("Inside if block of app.js");
+      await dispatch(loadPaymentFinish(orderId)).catch(error =>
+        console.log(error)
+      );
+    }
+
+    console.log("cart data", sessionId, !isCartLoaded(getState()));
     if (sessionId && !isCartLoaded(getState())) {
-      await dispatch(loadCart(sessionId, defaultPincode)).catch(error => console.log(error));
+      console.log("Load cart success api call");
+      await dispatch(loadCart(sessionId, defaultPincode)).catch(error =>
+        console.log(error)
+      );
     }
   },
   defer: ({ store: { dispatch, getState } }) => {
@@ -127,7 +162,7 @@ export default class App extends Component {
       loaded: false
     },
     pincode: {
-      selectedPincode: ''
+      selectedPincode: ""
     }
   };
 
@@ -137,9 +172,13 @@ export default class App extends Component {
     } = this.props;
     const { dispatch } = this.context.store;
     /* get cookie of glogin for pop up */
-    const gCookie = Cookie.get('Glogin');
+    const gCookie = Cookie.get("Glogin");
     const gCookieVal = gCookie ? Number(gCookie) : 0;
-    if (gCookieVal === 0 && !isLoggedIn && isKeyExists(window.navigator, 'credentials.get')) {
+    if (
+      gCookieVal === 0 &&
+      !isLoggedIn &&
+      isKeyExists(window.navigator, "credentials.get")
+    ) {
       navigator.credentials
         .get({
           password: true
@@ -148,7 +187,7 @@ export default class App extends Component {
           user => {
             if (user) {
               const { id, password, type } = user;
-              if (type === 'password' && id && password) {
+              if (type === "password" && id && password) {
                 const data = {
                   email: id,
                   password
@@ -156,13 +195,13 @@ export default class App extends Component {
                 dispatch(login(data));
               }
             }
-            Cookie.set('Glogin', 1, { expires: 1 });
+            Cookie.set("Glogin", 1, { expires: 1 });
           },
           error => console.log(error)
         );
     }
     /* Split Test Cookie */
-    Cookie.set('split_test', 'A', { expires: 365 });
+    Cookie.set("split_test", "A", { expires: 365 });
     if (window) {
       window.getPincode = this.getSelectedPincode;
     }
@@ -171,7 +210,7 @@ export default class App extends Component {
     if (window && window.embedded_svc) {
       const { profile } = nextProps;
       const { data = {} } = profile;
-      const { email = '' } = data;
+      const { email = "" } = data;
       // window.userEmail = email;
       window.embedded_svc.settings.prepopulatedPrechatFields = {
         Email: email
@@ -184,7 +223,7 @@ export default class App extends Component {
     }
     if (this.props.cartSynced !== prevProps.cartSynced) {
       window.unbxd.handleUserSwitch();
-      console.log('unbxd - window.unbxd.handleUserSwitch(); invoked on sync');
+      console.log("unbxd - window.unbxd.handleUserSwitch(); invoked on sync");
     }
   }
   getSelectedPincode = () => {
@@ -195,20 +234,24 @@ export default class App extends Component {
   };
   checkIfSlash = path => {
     let url = path;
-    if (path.length && path[path.length - 1] === '/') {
+    if (path.length && path[path.length - 1] === "/") {
       url = path.slice(0, path.length - 1);
     }
     return url;
   };
   render() {
     const { location, route, notifs } = this.props;
-    const pathname = (location && location.pathname) || '/';
+    const pathname = (location && location.pathname) || "/";
     const url = this.checkIfSlash(pathname);
     return (
       <ThemeProvider>
-        {process.env.NODE_ENV !== 'development' && (
+        {process.env.NODE_ENV !== "development" && (
           <Helmet {...config.app.head}>
-            <link rel="alternate" media="only screen and (max-width:640px)" href={`${SITE_URL_MOBILE}${url}`} />
+            <link
+              rel="alternate"
+              media="only screen and (max-width:640px)"
+              href={`${SITE_URL_MOBILE}${url}`}
+            />
             <link rel="canonical" href={`${SITE_URL}${url}`} />
             <script type="text/javascript">
               {`
@@ -242,7 +285,12 @@ export default class App extends Component {
         )}
         <main className={styles.appContent}>
           <div className="container">
-            <Notifs namespace="global" NotifComponent={props => <Alert {...props} show={notifs.global.length} />} />
+            <Notifs
+              namespace="global"
+              NotifComponent={props => (
+                <Alert {...props} show={notifs.global.length} />
+              )}
+            />
           </div>
           {renderRoutes(route.routes)}
         </main>

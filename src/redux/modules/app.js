@@ -1,15 +1,19 @@
-import { SESSION as SESSION_API } from 'helpers/apiUrls';
-import { PINCODE } from 'helpers/Constants';
+import { SESSION as SESSION_API } from "helpers/apiUrls";
+import { PINCODE } from "helpers/Constants";
 
-const LOAD = 'app/LOAD';
-const LOAD_SUCCESS = 'app/LOAD_SUCCESS';
-const LOAD_FAIL = 'app/LOAD_FAIL';
+const LOAD = "app/LOAD";
+const LOAD_SUCCESS = "app/LOAD_SUCCESS";
+const LOAD_FAIL = "app/LOAD_FAIL";
 
-const SET_CITY = 'app/SET_CITY';
+const SET_CITY = "app/SET_CITY";
+const SET_ORDER_ID = "app/SET_ORDER_ID";
+const SET_WALLET_NAME = "app/SET_WALLET";
 const initialState = {
   loaded: false,
-  sessionId: '',
-  city: ''
+  sessionId: "",
+  city: "",
+  orderId: "",
+  walletName: ""
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -26,7 +30,8 @@ export default function reducer(state = initialState, action = {}) {
         loaded: true,
         sessionId: action.result.session,
         csrfToken: action.result.csrfToken,
-        city: action.result.pincode_details && action.result.pincode_details[0].city
+        city:
+          action.result.pincode_details && action.result.pincode_details[0].city
       };
     case LOAD_FAIL:
       return {
@@ -40,6 +45,11 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         city: action.query.city
       };
+    case SET_WALLET_NAME:
+      return {
+        ...state,
+        walletName: action.name
+      };
     default:
       return state;
   }
@@ -51,7 +61,8 @@ const setAppAuth = ({ client }) => async response => {
   await client.setSessionId(session);
 };
 
-export const isLoaded = globalState => globalState.app && globalState.app.loaded;
+export const isLoaded = globalState =>
+  globalState.app && globalState.app.loaded;
 
 export const generateSession = (pincode = PINCODE) => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
@@ -62,7 +73,7 @@ export const generateSession = (pincode = PINCODE) => ({
       return response;
     } catch (error) {
       console.log(error);
-      console.log('Unable to generate session');
+      console.log("Unable to generate session");
       return error;
     }
   }
@@ -71,4 +82,9 @@ export const generateSession = (pincode = PINCODE) => ({
 export const setCity = query => ({
   type: SET_CITY,
   query
+});
+
+export const setWalletName = name => ({
+  type: SET_WALLET_NAME,
+  name
 });

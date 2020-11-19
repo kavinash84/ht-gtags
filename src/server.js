@@ -1,80 +1,101 @@
-import fs from 'fs';
-import path from 'path';
-import qs from 'qs';
-import Url from 'url';
-import bodyParser from 'body-parser';
-import express from 'express';
-import React from 'react';
-import ReactDOM from 'react-dom/server';
-import morgan from 'morgan';
-import favicon from 'serve-favicon';
-import compression from 'compression';
-import cookieParser from 'cookie-parser';
-import PrettyError from 'pretty-error';
-import http from 'http';
-import { ConnectedRouter } from 'react-router-redux';
-import { renderRoutes } from 'react-router-config';
-import createMemoryHistory from 'history/createMemoryHistory';
-import Loadable from 'react-loadable';
-import { getBundles } from 'react-loadable/webpack';
-import { trigger } from 'redial';
-import { getStoredState } from 'redux-persist';
-import { CookieStorage, NodeCookiesWrapper } from 'redux-persist-cookie-storage';
-import Cookies from 'cookies';
-import config from 'config';
-import createStore from 'redux/create';
-import apiClient from 'helpers/apiClient';
-import Html from 'helpers/Html';
-import routes from 'routes';
-import { getChunks, waitChunks } from 'utils/chunks';
-import asyncMatchRoutes from 'utils/asyncMatchRoutes';
-import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
-import { ReduxAsyncConnect, Provider } from 'components';
-import axios from 'axios';
-import getCookie from 'utils/cookies';
-import { redirectionHelper } from 'utils/helper';
-import { PAYMENT_SUCCESS, PAYMENT_FAILURE } from 'helpers/Constants';
-import useragent from 'express-useragent';
+import fs from "fs";
+import path from "path";
+import qs from "qs";
+import Url from "url";
+import bodyParser from "body-parser";
+import express from "express";
+import React from "react";
+import ReactDOM from "react-dom/server";
+import morgan from "morgan";
+import favicon from "serve-favicon";
+import compression from "compression";
+import cookieParser from "cookie-parser";
+import PrettyError from "pretty-error";
+import http from "http";
+import { ConnectedRouter } from "react-router-redux";
+import { renderRoutes } from "react-router-config";
+import createMemoryHistory from "history/createMemoryHistory";
+import Loadable from "react-loadable";
+import { getBundles } from "react-loadable/webpack";
+import { trigger } from "redial";
+import { getStoredState } from "redux-persist";
+import {
+  CookieStorage,
+  NodeCookiesWrapper
+} from "redux-persist-cookie-storage";
+import Cookies from "cookies";
+import config from "config";
+import createStore from "redux/create";
+import apiClient from "helpers/apiClient";
+import Html from "helpers/Html";
+import routes from "routes";
+import { getChunks, waitChunks } from "utils/chunks";
+import asyncMatchRoutes from "utils/asyncMatchRoutes";
+import { ServerStyleSheet, StyleSheetManager } from "styled-components";
+import { ReduxAsyncConnect, Provider } from "components";
+import axios from "axios";
+import getCookie from "utils/cookies";
+import { redirectionHelper } from "utils/helper";
+// import { PAYMENT_SUCCESS, PAYMENT_FAILURE } from 'helpers/Constants';
+import {
+  PAYMENT_SUCCESS,
+  PAYMENT_FAILURE,
+  PAYMENT_PENDING
+} from "helpers/Constants";
+import useragent from "express-useragent";
 
 const WHITELIST_TO_REDIRECT = new Set([
-  'localhost',
-  'hometown.in',
-  'www.hometown.in',
-  'stage.hometown.in',
-  'beta.hometown.in'
+  "localhost",
+  "hometown.in",
+  "www.hometown.in",
+  "stage.hometown.in",
+  "beta.hometown.in"
 ]);
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 let chunksPath;
-if (process.env.NODE_ENV === 'development') {
-  chunksPath = path.join(__dirname, '..', 'static', 'dist', 'loadable-chunks.json');
+if (process.env.NODE_ENV === "development") {
+  chunksPath = path.join(
+    __dirname,
+    "..",
+    "static",
+    "dist",
+    "loadable-chunks.json"
+  );
 } else {
-  const ver = require('../version.json').version;
-  chunksPath = path.join(__dirname, '..', 'static', 'dist', ver, 'loadable-chunks.json');
+  const ver = require("../version.json").version;
+  chunksPath = path.join(
+    __dirname,
+    "..",
+    "static",
+    "dist",
+    ver,
+    "loadable-chunks.json"
+  );
 }
 
-process.on('unhandledRejection', error => console.error(error));
+process.on("unhandledRejection", error => console.error(error));
 
 const pretty = new PrettyError();
 const app = express();
 const server = new http.Server(app);
 
-app.get('/', (req, res, next) => {
+app.get("/", (req, res, next) => {
   const { redirect } = req.query;
   if (redirect) {
     const targetUrl = Url.parse(redirect);
-    console.log('req.hostname: [%s]', req.hostname);
-    console.log('url.host: [%s]', targetUrl.host);
+    console.log("req.hostname: [%s]", req.hostname);
+    console.log("url.host: [%s]", targetUrl.host);
     if (!WHITELIST_TO_REDIRECT.has(targetUrl.host)) {
-      return next(new Error('Open redirect attack detected'));
+      return next(new Error("Open redirect attack detected"));
     }
   }
   return next();
 });
 
 /* check letter case and redirect */
-app.get('*', (req, res, next) => {
-  if (req.path && req.path.indexOf('/sku/') < 0) {
+app.get("*", (req, res, next) => {
+  if (req.path && req.path.indexOf("/sku/") < 0) {
     if (req.path !== req.path.toLowerCase()) {
       const redirect = req.path.toLowerCase();
       return res.redirect(301, redirect);
@@ -84,33 +105,55 @@ app.get('*', (req, res, next) => {
 });
 
 app
-  .use(morgan('dev', { skip: req => req.originalUrl.indexOf('/ws') !== -1 }))
+  .use(morgan("dev", { skip: req => req.originalUrl.indexOf("/ws") !== -1 }))
   .use(cookieParser())
   .use(compression())
-  .use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')))
-  .use('/manifest.json', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'manifest.json')))
-  .use('/service-worker.js', (req, res) =>
-    res.sendFile(path.join(__dirname, '..', 'static', 'dist', 'service-worker.js')))
-  .use('/robots.txt', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'robots.txt')))
-  .use('/sitemap.html', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'sitemap.html')));
+  .use(favicon(path.join(__dirname, "..", "static", "favicon.ico")))
+  .use("/manifest.json", (req, res) =>
+    res.sendFile(path.join(__dirname, "..", "static", "manifest.json"))
+  )
+  .use("/service-worker.js", (req, res) =>
+    res.sendFile(
+      path.join(__dirname, "..", "static", "dist", "service-worker.js")
+    )
+  )
+  .use("/robots.txt", (req, res) =>
+    res.sendFile(path.join(__dirname, "..", "static", "robots.txt"))
+  )
+  .use("/sitemap.html", (req, res) =>
+    res.sendFile(path.join(__dirname, "..", "static", "sitemap.html"))
+  );
 // .use('/maintenance.html', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'maintenance.html')));
 
-app.use('/dist/service-worker.js', (req, res, next) => {
-  res.setHeader('Service-Worker-Allowed', '/');
-  res.setHeader('Cache-Control', 'no-store');
+app.use("/dist/service-worker.js", (req, res, next) => {
+  res.setHeader("Service-Worker-Allowed", "/");
+  res.setHeader("Cache-Control", "no-store");
   return next();
 });
 
-app.use('/dist/dlls/:dllName.js', (req, res, next) => {
-  fs.access(path.join(__dirname, '..', 'static', 'dist', 'dlls', `${req.params.dllName}.js`), fs.constants.R_OK, err =>
-    err ? res.send(`console.log('No dll file found (${req.originalUrl})')`) : next());
+app.use("/dist/dlls/:dllName.js", (req, res, next) => {
+  fs.access(
+    path.join(
+      __dirname,
+      "..",
+      "static",
+      "dist",
+      "dlls",
+      `${req.params.dllName}.js`
+    ),
+    fs.constants.R_OK,
+    err =>
+      err
+        ? res.send(`console.log('No dll file found (${req.originalUrl})')`)
+        : next()
+  );
 });
 
-app.use(express.static(path.join(__dirname, '..', 'static')));
+app.use(express.static(path.join(__dirname, "..", "static")));
 
 app.use((req, res, next) => {
-  res.setHeader('X-Forwarded-For', req.ip);
-  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  res.setHeader("X-Forwarded-For", req.ip);
+  res.setHeader("X-Frame-Options", "SAMEORIGIN");
   return next();
 });
 
@@ -132,12 +175,12 @@ app.use(bodyParser.json());
   }
 }); */
 
-app.use('/checkout/finish/payment/', async (req, res) => {
+app.use("/checkout/finish/payment/", async (req, res) => {
   try {
-    const cookies = getCookie(req.header('cookie'), 'persist:root');
+    const cookies = getCookie(req.header("cookie"), "persist:root");
     const session = JSON.parse(JSON.parse(cookies).app).sessionId;
     const data = req.body;
-    const source = req.headers['user-agent'];
+    const source = req.headers["user-agent"];
     let ua = { isMobile: false };
     if (source) {
       ua = useragent.parse(source);
@@ -150,10 +193,10 @@ app.use('/checkout/finish/payment/', async (req, res) => {
     }
     const options = {
       url: process.env.PAYMENT_URL,
-      method: 'POST',
+      method: "POST",
       headers: {
         Cookie: `PHPSESSID=${session}; path=/; domain=.hometown.in`,
-        ContentType: 'application/x-www-form-urlencoded'
+        ContentType: "application/x-www-form-urlencoded"
       },
       data: qs.stringify({
         ...data,
@@ -161,10 +204,13 @@ app.use('/checkout/finish/payment/', async (req, res) => {
       })
     };
     const response = await axios(options);
-    if (response && response.data && response.data.status === 'success') return res.redirect(PAYMENT_SUCCESS);
+    if (response && response.data && response.data.status === "success")
+      return res.redirect(PAYMENT_SUCCESS);
     if (response && response.data) {
-      return res.redirect(`${PAYMENT_FAILURE}/?order=${response.data.order_id}`);
-    }
+      return res.redirect(
+        `${PAYMENT_FAILURE}/?order=${response.data.order_id}`
+      );
+    } else return res.redirect(PAYMENT_PENDING);
   } catch (error) {
     console.log(error);
     return res.redirect(PAYMENT_FAILURE);
@@ -174,11 +220,11 @@ app.use('/checkout/finish/payment/', async (req, res) => {
 app.get(
   /\/(hi-tech|kavi|curators|brands|design-build|bosco-wall-unit-wenge-|mondo-queen-size-bed-in-rubber-wood-with-box-storage|study-office|laopala-diva|libbey--bergner--hometown--milton|living-essence--spaces|orange-tree|ratan-jaipur|treo--lyra--prestige--corelle|arth-art--deco-window|big50-sale|Bosco-Wall-Unit-Wengebrands|chhota-bheem|cultural-concepts--kara--hi|dhoomdhaam-sale|gardenia|gibson|tech|homehq|hometown--machi--hi-tech|incrizma|living-essence--hometown|lyra|marvel|Mondo-Queen-Size-bed-in-rubber-wood-with-Box-Storage|monsoon-sale|nayasa|new-products|portico|prestige--living-essence|rajasthan-decor|sharp|shree-sam|storelocator|stories|support|treo--lyra--prestige--corelle|dkw--spaces|hometown--fns|hometown--gibson|hometown--treo|ocean|ocean--tangerine|spaces--lyra--bohemia|wonderchef--bonita|dealoftheday|\/)/,
   (req, res, next) => {
-    const data = require('./data/other-urls.json');
+    const data = require("./data/other-urls.json");
     const requestURL = redirectionHelper(req.path);
     if (data && data[requestURL.toLowerCase()]) {
       const redirect = data[requestURL.toLowerCase()];
-      return res.redirect(301, redirect || '/');
+      return res.redirect(301, redirect || "/");
     }
     return next();
   }
@@ -186,28 +232,28 @@ app.get(
 /* Blanket Redirection for old urls Color Products */
 app.get(/\/color-/, (req, res) => {
   const { url } = req;
-  const [redirect] = url.split('/color-');
-  return res.redirect(301, redirect || '/');
+  const [redirect] = url.split("/color-");
+  return res.redirect(301, redirect || "/");
 });
 
 app.get(/\/(hometown|hometown\/)$/, async (req, res) => {
-  const data = require('./data/blanket-urls.json');
+  const data = require("./data/blanket-urls.json");
   const requestURL = redirectionHelper(req.path);
   if (data && data[requestURL.toLowerCase()]) {
     const redirect = data[requestURL.toLowerCase()];
     return res.redirect(301, redirect);
   }
-  return res.redirect(301, '/');
+  return res.redirect(301, "/");
 });
 
 /* Redirection from urls */
 app.get(/\/(.*)-(\d+).html/, async (req, res) => {
-  const data = require('./data/pdp-urls.json');
+  const data = require("./data/pdp-urls.json");
   if (data && data[req.path.toLowerCase()]) {
     const redirect = data[req.path.toLowerCase()];
-    return res.redirect(301, redirect || '/');
+    return res.redirect(301, redirect || "/");
   }
-  return res.redirect(301, '/');
+  return res.redirect(301, "/");
 });
 
 /* eslint-disable max-len */
@@ -215,11 +261,11 @@ app.get(/\/(.*)-(\d+).html/, async (req, res) => {
 app.get(
   /^\/(festive-gifts|support|exclusive|tables|buying-guides|bedding|bedroom_furniture|all-products|categories|furniture|home-decor|homefurnishings|tableware|kitchenware|home-improvement|clearance-sale-offer|clearance_sale|design|design-inspiration|gifts|appliances|lighting|solidwood|test_bed|exclusive|invisible|luggage-bags|bed-bath|home-fashion|glossary|kitchen-dining|solid-wood|buying-guides|products|Products|exchange-offer|catalog|)\//,
   async (req, res, next) => {
-    const data = require('./data/category-urls.json');
+    const data = require("./data/category-urls.json");
     const requestURL = redirectionHelper(req.path);
     if (data && data[requestURL.toLowerCase()]) {
       const redirect = data[requestURL.toLowerCase()];
-      return res.redirect(301, redirect || '/');
+      return res.redirect(301, redirect || "/");
     }
     return next();
   }
@@ -228,11 +274,11 @@ app.get(
 /* eslint-disable max-len */
 /* static pages redirection */
 app.get(/^\/(.*)\/$/, async (req, res, next) => {
-  const data = require('./data/static-urls.json');
+  const data = require("./data/static-urls.json");
   const requestURL = redirectionHelper(req.path);
   if (data && data[requestURL.toLowerCase()]) {
     const redirect = data[requestURL.toLowerCase()];
-    return res.redirect(301, redirect || '/');
+    return res.redirect(301, redirect || "/");
   }
   return next();
 });
@@ -251,14 +297,14 @@ app.use(async (req, res) => {
   const cookieJar = new NodeCookiesWrapper(new Cookies(req, res));
 
   const persistConfig = {
-    key: 'root',
+    key: "root",
     storage: new CookieStorage(cookieJar, {
       expiration: {
         default: 28800
       }
     }),
     stateReconciler: (inboundState, originalState) => originalState,
-    whitelist: ['app', 'userLogin', 'pincode']
+    whitelist: ["app", "userLogin", "pincode"]
   };
 
   let preloadedState;
@@ -308,8 +354,10 @@ app.use(async (req, res) => {
   });
 
   function hydrate() {
-    res.write('<!doctype html>');
-    ReactDOM.renderToNodeStream(<Html assets={webpackIsomorphicTools.assets()} store={store} />).pipe(res);
+    res.write("<!doctype html>");
+    ReactDOM.renderToNodeStream(
+      <Html assets={webpackIsomorphicTools.assets()} store={store} />
+    ).pipe(res);
   }
 
   if (__DISABLE_SSR__) {
@@ -317,8 +365,11 @@ app.use(async (req, res) => {
   }
 
   try {
-    const { components, match, params } = await asyncMatchRoutes(routes, req.path);
-    await trigger('fetch', components, {
+    const { components, match, params } = await asyncMatchRoutes(
+      routes,
+      req.path
+    );
+    await trigger("fetch", components, {
       ...providers,
       store,
       match,
@@ -334,7 +385,11 @@ app.use(async (req, res) => {
         <Loadable.Capture report={moduleName => modules.push(moduleName)}>
           <Provider store={store} {...providers}>
             <ConnectedRouter history={historyToPush} forceRefresh>
-              <ReduxAsyncConnect routes={routes} store={store} helpers={providers}>
+              <ReduxAsyncConnect
+                routes={routes}
+                store={store}
+                helpers={providers}
+              >
                 {renderRoutes(routes)}
               </ReduxAsyncConnect>
             </ConnectedRouter>
@@ -349,7 +404,10 @@ app.use(async (req, res) => {
     }
 
     const locationState = store.getState().router.location;
-    if (decodeURIComponent(req.originalUrl) !== decodeURIComponent(locationState.pathname + locationState.search)) {
+    if (
+      decodeURIComponent(req.originalUrl) !==
+      decodeURIComponent(locationState.pathname + locationState.search)
+    ) {
       return res.redirect(301, locationState.pathname);
     }
     const styleTags = sheet.getStyleElement();
@@ -367,7 +425,7 @@ app.use(async (req, res) => {
     res.status(200).send(`<!doctype html>${ReactDOM.renderToString(html)}`);
   } catch (mountError) {
     console.log(mountError);
-    console.error('MOUNT ERROR:', pretty.render(mountError));
+    console.error("MOUNT ERROR:", pretty.render(mountError));
     // res.status(500);
     hydrate();
   }
@@ -379,22 +437,28 @@ app.use(async (req, res) => {
       await Loadable.preloadAll();
       await waitChunks(chunksPath);
     } catch (error) {
-      console.log('Server preload error:', error);
+      console.log("Server preload error:", error);
     }
 
     server.listen(config.port, err => {
       if (err) {
         console.error(err);
       }
-      console.info('----\n==> ✅  %s is Running...', config.app.title);
-      console.info('==> 💻  Open http://%s:%s in a browser to view the app.', config.host, config.port);
-      if (process && typeof process.send === 'function') process.send('ready');
+      console.info("----\n==> ✅  %s is Running...", config.app.title);
+      console.info(
+        "==> 💻  Open http://%s:%s in a browser to view the app.",
+        config.host,
+        config.port
+      );
+      if (process && typeof process.send === "function") process.send("ready");
     });
   } else {
-    console.error('==>     ERROR: No PORT environment variable has been specified');
+    console.error(
+      "==>     ERROR: No PORT environment variable has been specified"
+    );
   }
 
-  process.on('SIGINT', () => {
+  process.on("SIGINT", () => {
     server.close(err => {
       process.exit(err ? 1 : 0);
     });
