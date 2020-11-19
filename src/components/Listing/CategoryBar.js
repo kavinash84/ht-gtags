@@ -34,7 +34,7 @@ const formatLink = url => {
   const newURL = sanitizedUrl.replace('catalog/', '');
   return newURL;
 };
-const CategoryBar = ({ categoryBar, pathname }) => {
+const CategoryBar = ({ categoryBar, pathname, handleCategoryClick }) => {
   if (pathname[pathname.length - 1] === '/') {
     pathname = pathname.slice(0, -1);
   }
@@ -55,7 +55,7 @@ const CategoryBar = ({ categoryBar, pathname }) => {
                     pb="0.625rem"
                     pt="0.625rem"
                   >
-                    <Link to={`/${formatLink(item.url_key)}`} key={item.name}>
+                    <Link to={`/${formatLink(item.url_key)}`} key={item.name} onClick={handleCategoryClick}>
                       <ImageShimmer src={item.icon_url} height="80px">
                         {imageURL => <Img width="80px" m="auto" src={imageURL} alt={item.name} />}
                       </ImageShimmer>
@@ -78,6 +78,7 @@ CategoryBar.defaultProps = {
 };
 CategoryBar.propTypes = {
   categoryBar: PropTypes.array,
-  pathname: PropTypes.string
+  pathname: PropTypes.string,
+  handleCategoryClick: PropTypes.func.isRequired
 };
 export default CategoryBar;

@@ -15,19 +15,25 @@ import Box from 'hometown-components-dev/lib/BoxHtV1';
  */
 import * as actionCreators from 'redux/modules/cart';
 import { getCartListSKU } from 'selectors/cart';
+import { meta as getMeta } from 'selectors/product';
 import { PINCODE, CART_URL } from 'helpers/Constants';
 
 const checkSKUInCart = (list, sku) => list.includes(sku);
 
 const mapStateToProps = ({
- app: { sessionId }, pincode, cart, cart: { addingToCart, addedToCart, key }
+  app: { sessionId },
+  pincode,
+  productdetails,
+  cart,
+  cart: { addingToCart, addedToCart, key }
 }) => ({
   session: sessionId,
   pincode: pincode.selectedPincode ? pincode.selectedPincode : PINCODE,
   addingToCart,
   addedToCart,
   stateId: key,
-  cartSKUs: getCartListSKU(cart)
+  cartSKUs: getCartListSKU(cart),
+  meta: getMeta(productdetails)
 });
 
 @withRouter
@@ -42,10 +48,10 @@ class BuyNow extends React.Component {
     }
   }
 
-  handleClick = (key, skuId, simpleSku, session, pincode, quantity) => dispatcher => e => {
+  handleClick = (key, skuId, simpleSku, session, pincode, quantity, configId) => dispatcher => e => {
     e.preventDefault();
     this.setState({ buynow: true });
-    dispatcher(key, skuId, simpleSku, session, pincode, quantity);
+    dispatcher(key, skuId, simpleSku, session, pincode, quantity, configId);
   };
   render() {
     const {
@@ -59,7 +65,8 @@ class BuyNow extends React.Component {
       itemId,
       stateId,
       isSoldOut,
-      quantity
+      quantity,
+      meta: { config_id: configId }
     } = this.props;
     const checkStatus = checkSKUInCart(cartSKUs, sku);
     const addLoading = addingToCart && stateId === itemId;
@@ -71,7 +78,7 @@ class BuyNow extends React.Component {
               <Button
                 variant="primary.large"
                 disabled={addLoading}
-                onClick={this.handleClick(itemId, sku, simpleSku, session, pincode, quantity)(addToCart)}
+                onClick={this.handleClick(itemId, sku, simpleSku, session, pincode, quantity, configId)(addToCart)}
               >
                 BUY NOW
               </Button>
@@ -94,6 +101,7 @@ BuyNow.defaultProps = {
   addingToCart: false,
   itemId: '',
   stateId: '',
+  meta: '',
   isSoldOut: false,
   history: {},
   quantity: 1
@@ -112,7 +120,8 @@ BuyNow.propTypes = {
   isSoldOut: PropTypes.bool,
   addedToCart: PropTypes.bool.isRequired,
   history: PropTypes.object,
-  quantity: PropTypes.number
+  quantity: PropTypes.number,
+  meta: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
 export default connect(mapStateToProps, { ...actionCreators })(BuyNow);

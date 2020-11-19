@@ -61,6 +61,10 @@ class Listing extends React.Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
+  constructor(props) {
+    super(props);
+    this.handleCategoryClick = this.handleCategoryClick.bind(this);
+  }
   state = {
     // openQuickView: false,
     // quickViewSku: '',

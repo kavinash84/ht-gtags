@@ -96,7 +96,7 @@ export default function gaMiddleware() {
               window.google_tag_params.ecomm_totalvalue = getState().cart.summary.total;
               window.google_tag_params.ecomm_prodid = getCartListSKU(getState().cart);
             }
-          } else if (location === '/search/') {
+          } else if (location === '/search') {
             window.google_tag_params.ecomm_pagetype = 'searchresults';
           } else if (location === '/payment-success') {
             window.google_tag_params.ecomm_pagetype = 'purchase';
@@ -337,14 +337,15 @@ export default function gaMiddleware() {
             }
           } = action.result;
           const {
-            result: { qty },
-            configId
+            result: { qty: productQty },
+            configId,
+            qty
           } = action;
-          if (window && window.Unbxd && window.Unbxd.track && configId && qty) {
+          if (window && window.Unbxd && window.Unbxd.track && configId && productQty) {
             window.Unbxd.track('addToCart', {
               pid: configId,
               variantId: '',
-              qty: `${qty}`
+              qty: `${productQty}`
             });
           }
           const [product] =
@@ -369,7 +370,7 @@ export default function gaMiddleware() {
                       category,
                       list: 'Listing',
                       id: product.configurable_sku,
-                      quantity: product.qty
+                      quantity: Math.abs(qty)
                     }
                   ]
                 }
@@ -398,12 +399,7 @@ export default function gaMiddleware() {
           const [product] = data.filter(item => item.id_customer_cart === Number(action.result.cartId));
           if (product) {
             const checkKey = isKeyExists(product.product_info, 'category_details');
-            const category = checkKey
-              ? checkKey
-                  .filter(x => x !== null)
-                  .map(item => item.url_key)
-                  .join('/')
-              : '';
+            const category = checkKey ? checkKey.filter(x => x !== null).join('/') : '';
             const {
  name, net_price: netprice, color, brand
 } = product.product_info;
@@ -448,15 +444,21 @@ export default function gaMiddleware() {
             let products;
             if (data) {
               products = data.map(item => {
-                const { name, net_price: netprice, category_details: categoryDetails } = item.product_info;
+                const {
+                  name,
+                  net_price: netprice,
+                  category_details: categoryDetails,
+                  brand,
+                  color
+                } = item.product_info;
                 const category = categoryDetails ? categoryDetails.filter(x => x !== null).join('/') : '';
                 return {
                   name,
                   price: netprice,
-                  brand: '',
+                  brand,
                   id: item.configurable_sku,
                   category,
-                  variant: '',
+                  variant: color,
                   quantity: item.qty
                 };
               });
@@ -503,13 +505,25 @@ export default function gaMiddleware() {
               cart_products: products,
               net_order_amount,
               shipping_charges,
-              transaction_id,
+              // transaction_id,
+              order_no,
               coupon_code,
               customer_type
             } = data;
             const unbxdData = [];
             const skus = [];
-            const cartList = products.map(x => {
+
+            let groupedProducts = [];
+            products.forEach(arr => {
+              if (groupedProducts[arr.sku] && groupedProducts[arr.sku].sku === arr.sku) {
+                groupedProducts[arr.sku].qty += 1;
+              } else {
+                groupedProducts[arr.sku] = arr;
+              }
+            });
+            groupedProducts = Object.values(groupedProducts);
+            console.log({ groupedProducts });
+            const cartList = groupedProducts.map(x => {
               const {
                 product_info: { product_id },
                 sku,
@@ -519,14 +533,15 @@ export default function gaMiddleware() {
                 brand,
                 categories,
                 details: {
-                  attributes: { color }
+                  attributes: { color },
+                  meta: { config_id }
                 }
               } = x;
               skus.push(sku);
               unbxdData.push({
-                pid: product_id || '',
+                pid: config_id || '',
                 variantId: '',
-                qty,
+                qty: `${qty}`,
                 price: price.toFixed(2)
               });
               return {
@@ -544,10 +559,10 @@ export default function gaMiddleware() {
               ecommerce: {
                 purchase: {
                   actionField: {
-                    id: transaction_id,
+                    id: order_no,
                     affiliation: 'Online Store',
                     revenue: net_order_amount,
-                    tax: '',
+                    tax: '0',
                     shipping: shipping_charges,
                     coupon: coupon_code || ''
                   },
@@ -650,13 +665,15 @@ export default function gaMiddleware() {
       }
       if (type === 'cart/ADD_TO_CART_COMBINED_SUCCESS') {
         const {
-          result: { uniqueSetName }
+          result: { uniqueSetName },
+          configId
         } = action;
         const {
           summary: { total }
         } = action.result;
         const items = action.result && action.result.cart ? action.result.cart : [];
         const products = [];
+        const unbxdData = [];
         items.forEach(item => {
           const {
  name, net_price: netprice, color, brand, category_details: categoryDetails
@@ -674,6 +691,14 @@ export default function gaMiddleware() {
           };
           products.push(event);
         });
+        configId.forEach(id => {
+          unbxdData.push({
+            pid: id || '',
+            variantId: '',
+            qty: '1'
+          });
+        });
+        console.log('Analytics for combined', unbxdData);
         window.dataLayer.push(
           {
             event: 'Combo_offer',
@@ -693,6 +718,12 @@ export default function gaMiddleware() {
             cart_total: total
           }
         );
+
+        if (window && window.Unbxd && window.Unbxd.track && unbxdData.length) {
+          unbxdData.forEach(p => {
+            window.Unbxd.track('addToCart', p);
+          });
+        }
       }
       if (type === 'loadStores/SET_SELECTED_STORE') {
         const {

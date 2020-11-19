@@ -16,6 +16,7 @@ import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 
 /* ====== Page Components ====== */
 import CommonLayout from 'components/Category/CommonLayout';
+import UnbxdTopSellers from 'components/Category/UnbxdTopSellers';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import MainSlider from 'components/MainSlider';
@@ -128,6 +129,7 @@ export default class Category extends Component {
                 <Container>{CommonLayout(cat.component, cat.title, cat.data, cat.is_product)}</Container>
               </Section>
             ))}
+          {category && <UnbxdTopSellers category={category.title} />}
 
           {/* Footer */}
           <Footer />

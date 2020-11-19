@@ -31,6 +31,7 @@ import GridView from 'components/Home/GridView';
 import MainSlider from 'components/MainSlider';
 import Title from 'components/Title';
 import Usp from 'components/Home/Usp';
+import UnbxdRecentlyViewed from 'components/Home/UnbxdRecentlyViewed';
 
 const sliderImage = require('../../static/slider.png');
 const bannerImage = require('../../static/banner.png');
@@ -240,6 +241,9 @@ export default class Home extends Component {
               </Row>
             </Container>
           </Section>
+
+          {/* Unbxd Recently Viewed */}
+          <UnbxdRecentlyViewed />
 
           {/* Store Locator */}
           <Section>

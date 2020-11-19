@@ -94,7 +94,8 @@ export default class App extends Component {
     pushState: PropTypes.func.isRequired,
     loginUser: PropTypes.func.isRequired,
     pincode: PropTypes.shape({
-      selectedPincode: PropTypes.string
+      selectedPincode: PropTypes.string,
+      isPincodeFilter: PropTypes.bool
     }),
     signUp: PropTypes.shape({
       response: PropTypes.object,
@@ -127,7 +128,8 @@ export default class App extends Component {
       loaded: false
     },
     pincode: {
-      selectedPincode: ''
+      selectedPincode: '',
+      isPincodeFilter: false
     }
   };
 
@@ -165,6 +167,7 @@ export default class App extends Component {
     Cookie.set('split_test', 'A', { expires: 365 });
     if (window) {
       window.getPincode = this.getSelectedPincode;
+      window.isPincodeFilter = this.getPincodeFilter;
     }
   }
   componentWillReceiveProps(nextProps) {
@@ -192,6 +195,12 @@ export default class App extends Component {
       pincode: { selectedPincode }
     } = this.props;
     return selectedPincode;
+  };
+  getPincodeFilter = () => {
+    const {
+      pincode: { isPincodeFilter }
+    } = this.props;
+    return isPincodeFilter;
   };
   checkIfSlash = path => {
     let url = path;

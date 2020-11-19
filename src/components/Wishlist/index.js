@@ -102,6 +102,7 @@ class Wishlist extends React.Component {
                   sku={item.product_info.data.sku}
                   itemId={item.product_info.id}
                   isSoldOut={item.product_info.soldout}
+                  configId={item.product_info.data.config_id}
                   size="medium"
                   height={36}
                 />

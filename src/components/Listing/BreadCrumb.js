@@ -21,7 +21,7 @@ const formatLink = url => {
   return newURL;
 };
 
-const BreadCrumb = ({ categoryDetails }) => {
+const BreadCrumb = ({ categoryDetails, handleCategoryClick }) => {
   let link = '';
   return (
     <ul itemScope itemType="http://schema.org/BreadcrumbList" className={styles.breadCrumbList}>
@@ -38,7 +38,7 @@ const BreadCrumb = ({ categoryDetails }) => {
             link = `/${item.url_key}`;
             return (
               <li key={item.id} itemProp="itemListElement" itemType="http://schema.org/ListItem" itemScope>
-                <Link itemProp="item" to={`/${formatLink(link)}`}>
+                <Link onClick={handleCategoryClick} itemProp="item" to={`/${formatLink(link)}`}>
                   <span itemProp="name">{item.name}</span>
                   <meta itemProp="position" content={index + 2} />
                 </Link>
@@ -52,6 +52,7 @@ const BreadCrumb = ({ categoryDetails }) => {
 };
 
 BreadCrumb.propTypes = {
-  categoryDetails: PropTypes.array.isRequired
+  categoryDetails: PropTypes.array.isRequired,
+  handleCategoryClick: PropTypes.func.isRequired
 };
 export default BreadCrumb;

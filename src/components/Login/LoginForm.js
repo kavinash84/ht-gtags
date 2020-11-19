@@ -10,7 +10,7 @@ import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
 import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import { validateEmail, isBlank } from 'js-utility-functions';
-import { validateMobile } from 'utils/validation';
+import { validateMobile, validateName } from 'utils/validation';
 import { allowNChar, allowTypeOf } from 'utils/helper';
 import { login, clearLoginState } from 'redux/modules/login';
 import { SIGNUP_URL, FORGOT_PASSWORD_URL } from 'helpers/Constants';

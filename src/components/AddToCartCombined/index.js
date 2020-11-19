@@ -40,9 +40,12 @@ const LoaderIcon = require('../../../static/refresh-black.svg');
 
 const onClick = (item, session, pincode) => dispatcher => e => {
   e.preventDefault();
-  const { id_catalog_buildyourset: setId, skus, unique_set_name: uniqueSetName = 'unknown' } = item;
+  const {
+ id_catalog_buildyourset: setId, skus, unique_set_name: uniqueSetName = 'unknown', products
+} = item;
+  const configId = products.map(val => val.meta.config_id);
   const simpleSKUS = skus.map(val => ({ simple_sku: val.sku, qty: Number(val.qty) }));
-  dispatcher(setId, simpleSKUS, session, pincode, uniqueSetName);
+  dispatcher(setId, simpleSKUS, session, pincode, configId, uniqueSetName);
 };
 
 const mapStateToProps = ({
