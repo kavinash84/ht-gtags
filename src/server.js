@@ -33,7 +33,8 @@ import { ReduxAsyncConnect, Provider } from 'components';
 import axios from 'axios';
 import getCookie from 'utils/cookies';
 import { redirectionHelper } from 'utils/helper';
-import { PAYMENT_SUCCESS, PAYMENT_FAILURE } from 'helpers/Constants';
+// import { PAYMENT_SUCCESS, PAYMENT_FAILURE } from 'helpers/Constants';
+import { PAYMENT_SUCCESS, PAYMENT_FAILURE, PAYMENT_PENDING } from 'helpers/Constants';
 import useragent from 'express-useragent';
 
 const WHITELIST_TO_REDIRECT = new Set([
@@ -164,7 +165,7 @@ app.use('/checkout/finish/payment/', async (req, res) => {
     if (response && response.data && response.data.status === 'success') return res.redirect(PAYMENT_SUCCESS);
     if (response && response.data) {
       return res.redirect(`${PAYMENT_FAILURE}/?order=${response.data.order_id}`);
-    }
+    } return res.redirect(PAYMENT_PENDING);
   } catch (error) {
     console.log(error);
     return res.redirect(PAYMENT_FAILURE);

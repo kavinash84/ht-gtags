@@ -1,6 +1,7 @@
+/* eslint-disable no-nested-ternary */
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-/* eslint-disable */
+
 /* ====== Components ====== */
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
@@ -18,7 +19,9 @@ export default class LoginViaOtp extends React.Component {
         if (this.state.resendtimer <= 1) {
           clearInterval(this.state.timerref);
         }
-        this.setState(prevstate => ({ resendtimer: prevstate.resendtimer - 1 }));
+        this.setState(prevstate => ({
+          resendtimer: prevstate.resendtimer - 1
+        }));
       }, 1000);
       this.setState({ timerref });
     }
@@ -42,6 +45,10 @@ export default class LoginViaOtp extends React.Component {
       loggingIn,
       resend,
       askName,
+      askEmail,
+      email,
+      emailError,
+      emailErrorMessage,
       name,
       nameError,
       nameErrorMessage
@@ -53,7 +60,10 @@ export default class LoginViaOtp extends React.Component {
       onChangeOtp,
       handleResend,
       onChangeName,
-      onSubmitName
+      onSubmitName,
+      onChangeEmail,
+      onSubmitEmail,
+      onSubmitNameAndEmail
     } = this.props;
     const { resendtimer } = this.state;
 
@@ -77,6 +87,40 @@ export default class LoginViaOtp extends React.Component {
               </Button>
             </Flex>
           </form>
+        ) : askName && askEmail ? (
+          <form onSubmit={onSubmitNameAndEmail}>
+            <FormInput
+              label="Name"
+              onChange={onChangeName}
+              value={name}
+              type="text"
+              placeholder="Please enter your name"
+              feedBackError={nameError}
+              feedBackMessage={nameErrorMessage}
+            />
+            <FormInput
+              label="Email"
+              onChange={onChangeEmail}
+              value={email}
+              type="text"
+              placeholder="Please enter your email"
+              feedBackError={emailError}
+              feedBackMessage={emailErrorMessage}
+            />
+            <Button
+              btnType="primary"
+              size="block"
+              boder="solid 1px rgba(151,151,151,0.47)"
+              fontFamily="regular"
+              height="38px"
+              mt="0"
+              ml="-1px"
+              onClick={this.onSubmitNameAndEmail}
+              disabled={loggingIn}
+            >
+              {loggingIn ? 'Please Wait..' : 'Update & Login'}
+            </Button>
+          </form>
         ) : askName ? (
           <form onSubmit={onSubmitName}>
             <FormInputHtV1
@@ -89,6 +133,31 @@ export default class LoginViaOtp extends React.Component {
               feedBackMessage={nameErrorMessage}
             />
             <Button width={180} height={42} fontWeight={600} onClick={this.onSubmitName} disabled={loggingIn}>
+              {loggingIn ? 'Please Wait..' : 'Update & Login'}
+            </Button>
+          </form>
+        ) : askEmail ? (
+          <form onSubmit={onSubmitEmail}>
+            <FormInput
+              label="Email"
+              onChange={onChangeEmail}
+              value={email}
+              type="text"
+              placeholder="Please enter your email"
+              feedBackError={emailError}
+              feedBackMessage={emailErrorMessage}
+            />
+            <Button
+              btnType="primary"
+              size="block"
+              boder="solid 1px rgba(151,151,151,0.47)"
+              fontFamily="regular"
+              height="38px"
+              mt="0"
+              ml="-1px"
+              onClick={this.onSubmitEmail}
+              disabled={loggingIn}
+            >
               {loggingIn ? 'Please Wait..' : 'Update & Login'}
             </Button>
           </form>
@@ -135,7 +204,11 @@ LoginViaOtp.defaultProps = {
   name: '',
   nameError: false,
   nameErrorMessage: '',
-  askName: false
+  email: '',
+  emailError: false,
+  emailErrorMessage: '',
+  askName: false,
+  askEmail: false
 };
 LoginViaOtp.propTypes = {
   mobilesubmitted: PropTypes.bool,
@@ -154,9 +227,16 @@ LoginViaOtp.propTypes = {
   onChangeOtp: PropTypes.func.isRequired,
   handleResend: PropTypes.func.isRequired,
   askName: PropTypes.bool,
+  askEmail: PropTypes.bool,
   name: PropTypes.string,
   nameError: PropTypes.bool,
   nameErrorMessage: PropTypes.string,
+  email: PropTypes.string,
+  emailError: PropTypes.bool,
+  emailErrorMessage: PropTypes.string,
   onSubmitName: PropTypes.func.isRequired,
-  onChangeName: PropTypes.func.isRequired
+  onChangeName: PropTypes.func.isRequired,
+  onChangeEmail: PropTypes.func.isRequired,
+  onSubmitEmail: PropTypes.func.isRequired,
+  onSubmitNameAndEmail: PropTypes.func.isRequired
 };

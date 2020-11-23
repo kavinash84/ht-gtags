@@ -24,8 +24,10 @@ export default class PaymentSuccessContainer extends Component {
     data: PropTypes.object,
     error: PropTypes.string,
     loaded: PropTypes.bool,
-    isLoggedIn: PropTypes.bool,
-    history: PropTypes.object.isRequired
+    // isLoggedIn: PropTypes.bool,
+    // history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    isLoggedIn: PropTypes.bool
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -33,31 +35,64 @@ export default class PaymentSuccessContainer extends Component {
   static defaultProps = {
     data: {},
     error: '',
+    // loaded: false,
+    // isLoggedIn: false
     loaded: false,
     isLoggedIn: false
   };
   componentDidMount() {
+    console.log('Inside component did mount of payment success', this.props);
     const {
  error, data, history, isLoggedIn
 } = this.props;
-    const { error_message = '' } = data; //eslint-disable-line
-    if (error_message.indexOf('Order Success details not found') >= 0) {
-      if (isLoggedIn) {
-        return history.push('/my-orders');
+    // const { error_message = "" } = data; //eslint-disable-line
+    if (data) {
+      // eslint-disable-next-line camelcase
+      const { error_message = '' } = data || {};
+
+      // if (error_message.indexOf("Order Success details not found") >= 0) {
+      //   if (isLoggedIn) {
+      //     return history.push("/my-orders");
+      //   }
+      //   return history.push("/");
+      // }
+      // if (
+      //   data === "An internal server error occurred" ||
+      //   data.error_message === "details not found"
+      // ) {
+      //   if (isLoggedIn) {
+      //     return history.push("/my-orders");
+      //   }
+      //   return history.push("/");
+      // }
+      // if (error === "") {
+      //   const { dispatch } = this.context.store;
+      //   dispatch({
+      //     type: "PUSH_TO_DATALAYER"
+      //   });
+      // }
+      // eslint-disable-next-line camelcase
+      if (error_message && error_message.indexOf('Order Success details not found') >= 0) {
+        if (isLoggedIn) {
+          return history.push('/my-orders');
+        }
+        return history.push('/');
       }
-      return history.push('/');
-    }
-    if (data === 'An internal server error occurred' || data.error_message === 'details not found') {
-      if (isLoggedIn) {
-        return history.push('/my-orders');
+      if (data === 'An internal server error occurred' || data.error_message === 'details not found') {
+        if (isLoggedIn) {
+          return history.push('/my-orders');
+        }
+        return history.push('/');
       }
-      return history.push('/');
-    }
-    if (error === '') {
-      const { dispatch } = this.context.store;
-      dispatch({
-        type: 'PUSH_TO_DATALAYER'
-      });
+
+      if (data && error === '') {
+        const { dispatch } = this.context.store;
+        dispatch({
+          type: 'PUSH_TO_DATALAYER'
+        });
+      }
+    } else {
+      history.push('/');
     }
   }
   render() {
