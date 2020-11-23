@@ -191,7 +191,7 @@ export const applyFilter = ({
       if (searchquery) {
         return client.get(`${SEARCH_API}/?q=${searchquery}&maxitems=32&pincode=${pincode}&city=${city}${price}${discount}${material}${sortby}${pageno}`);
       }
-      const fetchURL = `${PRODUCTS_API}/${modifiedQuery}/?&maxitems=0`&pincode=${pincode}&city=${city}${price}${discount}${material}${sortby}${pageno}`;
+      const fetchURL = `${PRODUCTS_API}/${modifiedQuery}/?&maxitems=0&pincode=${pincode}&city=${city}${price}${discount}${material}${sortby}${pageno}`;
       return client.get(fetchURL.replace(/null/g, '').trim());
     }
   });
