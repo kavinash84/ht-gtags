@@ -20,7 +20,7 @@ import * as notifActions from 'redux/modules/notifs';
 import Notifs from 'components/Notifs';
 import { isKeyExists } from 'utils/helper';
 
-import { loadPaymentFinish, isLoaded as isPaymentStatusLoaded } from 'redux/modules/paymentstatus';
+import { load, isLoaded as isPaymentStatusLoaded } from 'redux/modules/paymentstatus';
 
 /* ====== Components ====== */
 import Alert from 'hometown-components-dev/lib/Alert';
@@ -56,15 +56,12 @@ const SITE_URL_MOBILE = 'https://m.hometown.in';
     if (getState().userLogin.isLoggedIn && !isProfileLoaded(getState())) {
       await dispatch(loadUserProfile()).catch(error => console.log(error));
     }
-    // console.log('App.js initisal', orderId, !walletName, !isPaymentStatusLoaded(getState()));
+
     if (orderId && !walletName && !isPaymentStatusLoaded(getState())) {
-      console.log('Inside if block of app.js');
-      await dispatch(loadPaymentFinish(orderId)).catch(error => console.log(error));
+      await dispatch(load(orderId)).catch(error => console.log(error));
     }
 
-    console.log('cart data', sessionId, !isCartLoaded(getState()));
     if (sessionId && !isCartLoaded(getState())) {
-      console.log('Load cart success api call');
       await dispatch(loadCart(sessionId, defaultPincode)).catch(error => console.log(error));
     }
   },

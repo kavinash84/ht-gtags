@@ -1,5 +1,5 @@
 // import { PAYMENT_STATUS as PAYMENT_STATUS_API } from 'helpers/apiUrls';
-import { PAYMENT_FINISH_URL, PAYMENT_SUCCESS_URL } from 'helpers/apiUrls';
+import { PAYMENT_STATUS as PAYMENT_STATUS_API, TRACK_UNBXD_ANALYTICS as UNBXD_ANALYTICS_API } from 'helpers/apiUrls';
 
 const LOAD = 'paymentstatus/LOAD';
 const LOAD_SUCCESS = 'paymentstatus/LOAD_SUCCESS';
@@ -43,33 +43,13 @@ export function isLoaded(globalState) {
   return globalState.paymentstatus && globalState.paymentstatus.loaded;
 }
 
-// export const load = sessionId => ({
-export const loadPaymentFinish = orderId => ({
+export const load = orderId => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
   promise: async ({ client }) => {
     try {
-      // const response = await client.get(`${PAYMENT_STATUS_API}/${sessionId}`);
-      console.log('loadPaymentFinish function api');
-      const response = await client.get(`${PAYMENT_FINISH_URL}?orderNo=${orderId}`);
-      console.log('Response from api', response);
+      const response = await client.get(`${PAYMENT_STATUS_API}?orderNo=${orderId}`);
       return response;
     } catch (error) {
-      console.log('error in loadPaymentFinish', error);
-      return error;
-    }
-  }
-});
-
-export const loadPaymentSuccess = sessionId => ({
-  types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-  promise: async ({ client }) => {
-    try {
-      console.log('loadPaymentSuccess function api');
-      const response = await client.get(`${PAYMENT_SUCCESS_URL}/${sessionId}`);
-      console.log('Response from api', response);
-      return response;
-    } catch (error) {
-      console.log('error in loadPaymentSuccess', error);
       return error;
     }
   }

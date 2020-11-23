@@ -1,17 +1,19 @@
 import { provideHooks } from 'redial';
 import HomeTownLoader from 'containers/Loader';
-import { load, isLoaded as isPaymentStatusLoaded } from 'redux/modules/paymentstatus';
+import { setOrderId } from 'redux/modules/app';
+import { isLoaded as isPaymentStatusLoaded } from 'redux/modules/paymentstatus';
 
 const hooks = {
   fetch: async ({ store: { dispatch, getState } }) => {
     const {
-      app: { sessionId }
+      app: { orderId }
     } = getState();
-    if (sessionId && !isPaymentStatusLoaded(getState())) {
-      await dispatch(load(sessionId));
+    if (orderId && isPaymentStatusLoaded(getState())) {
+      await dispatch(setOrderId(''));
     }
   }
 };
+
 const PaymentSuccess = HomeTownLoader({
   loader: () => import('./PaymentSuccess' /* webpackChunkName: 'PaymentSuccess' */)
 });

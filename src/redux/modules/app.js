@@ -49,6 +49,12 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         walletName: action.name
       };
+    case SET_ORDER_ID:
+      return {
+        ...state,
+        orderId: action.id,
+        customerId: action.customerId
+      };
     default:
       return state;
   }
@@ -85,4 +91,10 @@ export const setCity = query => ({
 export const setWalletName = name => ({
   type: SET_WALLET_NAME,
   name
+});
+
+export const setOrderId = (id, customerId) => ({
+  type: SET_ORDER_ID,
+  id,
+  customerId
 });

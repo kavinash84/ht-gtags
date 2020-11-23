@@ -111,6 +111,13 @@ export default function paymentsMiddleware() {
     }
     if (type === 'paymentOptions/SUBMIT_PAYMENT_DETAILS_SUCCESS') {
       const { result, data } = action;
+      const {
+        form_data: { order_nr: orderNumber, customer_id: customerId }
+      } = result;
+      if (orderNumber) {
+        dispatch(setOrderId(orderNumber, customerId));
+      }
+
       if (data && data.EasyEmi) {
         if (Object.keys(data.EasyEmi).length > 0) {
           if (result && result.success) {

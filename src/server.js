@@ -134,41 +134,53 @@ app.use(bodyParser.json());
 }); */
 
 app.use('/checkout/finish/payment/', async (req, res) => {
+  console.log('inside /checkout/finish/payment/ route');
   try {
     const cookies = getCookie(req.header('cookie'), 'persist:root');
-    const session = JSON.parse(JSON.parse(cookies).app).sessionId;
+    const appData = JSON.parse(JSON.parse(cookies).app);
+    const { sessionId: session, customerId } = appData;
     const data = req.body;
     const source = req.headers['user-agent'];
     let ua = { isMobile: false };
-    if (source) {
-      ua = useragent.parse(source);
-    }
-    let additionalParam = {};
-    if (ua.isMobile) {
-      additionalParam = {
-        ismsite: 1
+    console.log('heres the app data', appData);
+    if (customerId !== '1529678') {
+      if (source) {
+        ua = useragent.parse(source);
+      }
+      let additionalParam = {};
+      if (ua.isMobile) {
+        additionalParam = {
+          ismsite: 1
+        };
+      }
+      const options = {
+        url: process.env.PAYMENT_URL,
+        method: 'POST',
+        headers: {
+          Cookie: `PHPSESSID=${session}; path=/; domain=.hometown.in`,
+          ContentType: 'application/x-www-form-urlencoded'
+        },
+        data: qs.stringify({
+          ...data,
+          ...additionalParam
+        })
       };
-    }
-    const options = {
-      url: process.env.PAYMENT_URL,
-      method: 'POST',
-      headers: {
-        Cookie: `PHPSESSID=${session}; path=/; domain=.hometown.in`,
-        ContentType: 'application/x-www-form-urlencoded'
-      },
-      data: qs.stringify({
-        ...data,
-        ...additionalParam
-      })
-    };
-    const response = await axios(options);
-    if (response && response.data && response.data.status === 'success') return res.redirect(PAYMENT_SUCCESS);
-    if (response && response.data) {
-      return res.redirect(`${PAYMENT_FAILURE}/?order=${response.data.order_id}`);
-    } return res.redirect(PAYMENT_PENDING);
+      const response = await axios(options);
+      if (response && response.data && response.data.status === 'success') {
+        console.log('Payment successfull inside the server');
+        console.log(response.data);
+        return res.redirect(PAYMENT_SUCCESS);
+      }
+      console.log('Getting inside failure');
+      console.log(response.data);
+      if (response && response.data) {
+        return res.redirect(`${PAYMENT_FAILURE}/?order=${response.data.order_id}`);
+      }
+    } else return res.redirect(PAYMENT_PENDING);
   } catch (error) {
+    console.log('Payment failed inside the server');
     console.log(error);
-    return res.redirect(PAYMENT_FAILURE);
+    return res.redirect(PAYMENT_PENDING);
   }
 });
 /* eslint-disable max-len */

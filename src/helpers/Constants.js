@@ -17,6 +17,7 @@ export const SAVED_CARDS = '/saved-cards';
 
 export const PAYMENT_SUCCESS = '/payment-success';
 export const PAYMENT_FAILURE = '/payment-failed';
+export const PAYMENT_PENDING = '/payment-pending';
 
 export const MK_URL = '/modular-kitchens';
 export const PYK_URL = '/plan-your-kitchen';
