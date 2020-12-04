@@ -20,7 +20,7 @@ import UnbxdTopSellers from 'components/Category/UnbxdTopSellers';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import MainSlider from 'components/MainSlider';
-// import SeoContent from 'components/SeoContent';
+import SeoContent from 'components/SeoContent';
 
 const getFaqs = faqs => {
   const seoFaq = faqs.map(({ qus, ans }) => {
@@ -130,6 +130,21 @@ export default class Category extends Component {
               </Section>
             ))}
           {category && <UnbxdTopSellers category={category.title} />}
+
+          <div>
+            {/* SEO Content */}
+            {seoInfo && seoInfo.seo_text && (
+              <SeoContent>
+                <div dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }} />
+              </SeoContent>
+            )}
+          </div>
+          {/* SEO Content */}
+          {/* {seoInfo && seoInfo.seo_text && (
+            <SeoContent>
+              <div dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }} />
+            </SeoContent>
+          )} */}
 
           {/* Footer */}
           <Footer />

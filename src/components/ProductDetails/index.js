@@ -247,7 +247,8 @@ class ProductDetails extends React.Component {
       reviewDataSet: [],
       selectedFilter: null,
       filterChanged: false,
-      colorProducts: []
+      colorProducts: [],
+      isFurniture: false
     };
   }
   componentDidMount() {
@@ -271,6 +272,7 @@ class ProductDetails extends React.Component {
     if (nextProps.colorproducts !== colorproducts) {
       this.addProductToColorProduct(nextProps.colorproducts);
     }
+    this.isFurnitureTrue();
   }
   onFilterChange = Filter => {
     const { reviews } = this.props;
@@ -392,6 +394,16 @@ class ProductDetails extends React.Component {
     });
   };
   mmToInchConvert = value => Math.round(value / 25.4);
+
+  isFurnitureTrue() {
+    this.props.product.meta.category_details.forEach(cat => {
+      console.log(cat.id, 'category');
+      if (cat.id === '131') {
+        console.log(cat.id, 'category 131');
+        this.setState({ isFurniture: true });
+      }
+    });
+  }
 
   renderAttributes = items => {
     items.map((item, i) =>
@@ -945,7 +957,8 @@ class ProductDetails extends React.Component {
             </Row>
 
             {/* DIMENSIONS */}
-            {(height || width || depth) && (
+            {/* { isFurnitureTrue()} */}
+            {this.state.isFurniture && (height || width || depth) && (
               <Box py={20} sx={{ borderTop: 'dividerLight' }}>
                 <Box textAlign="center" mb={30}>
                   <Text variant="regular" fontSize={16} pb={5}>
