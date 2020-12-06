@@ -33,8 +33,14 @@ export default class ProductDetails extends Component {
 
           {/* PDP Content */}
           {loading && !loaded && <ProductDetailsShimmer />}
-          {!loading && loaded && productDescription && productDescription.error_message && <ProductNotFound />}
-          {!loading && !productDescription.error_message && loaded && <ProductDetailsContainer history={history} />}
+          {!loading && loaded && productDescription && !productDescription.error_message ? (
+            <ProductDetailsContainer history={history} />
+          ) : (
+            <ProductNotFound />
+          )}
+          {/* {!loading &&
+            !productDescription.error_message && loaded &&
+            <ProductDetailsContainer history={history} />} */}
 
           {/* Footer */}
           <Footer />
