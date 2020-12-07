@@ -96,7 +96,7 @@ const AddToCart = ({
                   const handler = onClick(cartId, sku, simpleSku, session, pincode, updateQty, configId)(updateCart);
                   handler(e);
                 } else {
-                  const handler = onClick(itemId, sku, simpleSku, session, pincode, quantity, configId)(addToCart);
+                  const handler = onClick(itemId, sku, simpleSku, session, pincode, configId)(addToCart);
                   handler(e);
                 }
               }}

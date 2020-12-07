@@ -65,7 +65,6 @@ class BuyNow extends React.Component {
       itemId,
       stateId,
       isSoldOut,
-      quantity,
       meta: { config_id: configId }
     } = this.props;
     const checkStatus = checkSKUInCart(cartSKUs, sku);
@@ -78,7 +77,7 @@ class BuyNow extends React.Component {
               <Button
                 variant="primary.large"
                 disabled={addLoading}
-                onClick={this.handleClick(itemId, sku, simpleSku, session, pincode, quantity, configId)(addToCart)}
+                onClick={this.handleClick(itemId, sku, simpleSku, session, pincode, configId)(addToCart)}
               >
                 BUY NOW
               </Button>

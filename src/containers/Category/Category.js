@@ -129,22 +129,18 @@ export default class Category extends Component {
                 <Container>{CommonLayout(cat.component, cat.title, cat.data, cat.is_product)}</Container>
               </Section>
             ))}
-          {category && <UnbxdTopSellers category={category.title} />}
+          {category && (
+            <Section>
+              <UnbxdTopSellers category={category.title} />
+            </Section>
+          )}
 
-          <div>
-            {/* SEO Content */}
-            {seoInfo && seoInfo.seo_text && (
-              <SeoContent>
-                <div dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }} />
-              </SeoContent>
-            )}
-          </div>
           {/* SEO Content */}
-          {/* {seoInfo && seoInfo.seo_text && (
+          {seoInfo && seoInfo.seo_text && (
             <SeoContent>
               <div dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }} />
             </SeoContent>
-          )} */}
+          )}
 
           {/* Footer */}
           <Footer />

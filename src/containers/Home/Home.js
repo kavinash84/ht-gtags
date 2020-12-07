@@ -242,9 +242,6 @@ export default class Home extends Component {
             </Container>
           </Section>
 
-          {/* Unbxd Recently Viewed */}
-          <UnbxdRecentlyViewed />
-
           {/* Store Locator */}
           <Section>
             <Container>
@@ -298,8 +295,13 @@ export default class Home extends Component {
             </Container>
           </Section>
 
+          {/* Unbxd Recently Viewed */}
+          <Section>
+            <UnbxdRecentlyViewed />
+          </Section>
+
           {/* Share and Inspire */}
-          {instafeeds && !!instafeeds.length && (
+          {/* {instafeeds && !!instafeeds.length && (
             <Section variant="section.primary">
               <Container>
                 <LazyLoad height={200} offset={100}>
@@ -327,7 +329,7 @@ export default class Home extends Component {
                 </Row>
               </Container>
             </Section>
-          )}
+          )} */}
 
           {/* Footer */}
           <Footer />
