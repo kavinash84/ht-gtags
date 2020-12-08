@@ -10,7 +10,7 @@ const SeoContent = ({ children }) => (
     <Box>
       <Section pt="0.3125rem" pb="0.3125rem" mb="0.625rem">
         <Container pr="0" pl="0">
-          <Row display="block" mr="0" ml="0">
+          <Row display="block">
             <Box col="12">{children}</Box>
           </Row>
         </Container>

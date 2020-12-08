@@ -1,9 +1,3 @@
-import axios from 'axios';
-import { SUGGESTIONS as SUGGESTIONS_API } from 'helpers/apiUrls';
-import { urlKeyResults } from 'utils/helper';
-
-const { CancelToken } = axios;
-
 const LOAD = 'search/LOAD';
 const LOAD_SUCCESS = 'search/LOAD_SUCCESS';
 const LOAD_FAIL = 'search/LOAD_FAIL';

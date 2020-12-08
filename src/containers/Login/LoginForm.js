@@ -1,38 +1,38 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { PropTypes } from "prop-types";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { PropTypes } from 'prop-types';
+import { Link } from 'react-router-dom';
 
 /* ====== Modules ====== */
-import { login, getOtp, resendOtp, clearLoginState } from "redux/modules/login";
+import { login, getOtp, resendOtp, clearLoginState } from 'redux/modules/login';
 
 /* ====== Helpers ====== */
-import { allowNChar, allowTypeOf } from "utils/helper";
+import { allowNChar, allowTypeOf } from 'utils/helper';
 
 /* ====== Validations ====== */
 // import { validateMobile, isEmpty, checkSpecialChar } from 'utils/validation';
-import { validateMobile, validateName, validateEmail } from "utils/validation";
-import { SIGNUP_URL } from "helpers/Constants";
+import { validateMobile, validateName, validateEmail } from 'utils/validation';
+import { SIGNUP_URL } from 'helpers/Constants';
 
 /* ====== Components ====== */
-import Box from "hometown-components-dev/lib/BoxHtV1";
-import Button from "hometown-components-dev/lib/ButtonHtV1";
-import Image from "hometown-components-dev/lib/ImageHtV1";
-import Heading from "hometown-components-dev/lib/HeadingHtV1";
-import Label from "hometown-components-dev/lib/LabelHtV1";
-import Row from "hometown-components-dev/lib/RowHtV1";
-import Text from "hometown-components-dev/lib/TextHtV1";
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Label from 'hometown-components-dev/lib/LabelHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
 // import ImageShimmer from 'hometown-components-dev/lib/ImageShimmerHtV1';
 
 /* ====== Page Components ====== */
-import LoginForm from "components/LoginForms";
-import GoogleLoginBtn from "components/LoginForms/GoogleLogin";
-import LoginViaOtp from "components/LoginForms/LoginViaOtp";
+import LoginForm from 'components/LoginForms';
+import GoogleLoginBtn from 'components/LoginForms/GoogleLogin';
+import LoginViaOtp from 'components/LoginForms/LoginViaOtp';
 
 // const styles = require('./index.scss');
 
-const OTPIcon = require("../../../static/otp.svg");
-const EmailIcon = require("../../../static/email-primary.svg");
+const OTPIcon = require('../../../static/otp.svg');
+const EmailIcon = require('../../../static/email-primary.svg');
 
 @connect(state => ({
   loginResponse: state.userLogin,
@@ -67,28 +67,28 @@ export default class LoginFormContainer extends Component {
   static defaultProps = {
     otpSent: false,
     getotpError: false,
-    getotpErrorMessage: "",
+    getotpErrorMessage: '',
     loaded: false,
     loading: false,
     loggingIn: false,
     askContact: false,
     askEmail: false,
     askName: false,
-    loginType: ""
+    loginType: ''
   };
 
   state = {
     loginviaotp: false,
-    mobile: "",
-    otp: "",
+    mobile: '',
+    otp: '',
     otpError: false,
-    name: "",
+    name: '',
     nameError: false,
-    nameErrorMessage: "Enter a valid name, without special characters !",
-    otpErrorMessage: "OTP Should be 6 Characters",
-    email: "",
+    nameErrorMessage: 'Enter a valid name, without special characters !',
+    otpErrorMessage: 'OTP Should be 6 Characters',
+    email: '',
     emailError: false,
-    emailErrorMessage: "Please Enter Valid Email ",
+    emailErrorMessage: 'Please Enter Valid Email ',
     mobilesubmitted: false,
     resend: false
   };
@@ -97,7 +97,7 @@ export default class LoginFormContainer extends Component {
     if (
       !this.state.mobilesubmitted &&
       nextProps.getotpError &&
-      nextProps.getotpErrorMessage.includes("resend")
+      nextProps.getotpErrorMessage.includes('resend')
     ) {
       this.setState({
         mobilesubmitted: true
@@ -114,7 +114,7 @@ export default class LoginFormContainer extends Component {
     const checkError = !validateMobile(value);
     if (
       !allowNChar(value, 10) ||
-      (!allowTypeOf(value, "number") && value.length > 0)
+      (!allowTypeOf(value, 'number') && value.length > 0)
     ) {
       return;
     }
@@ -122,16 +122,16 @@ export default class LoginFormContainer extends Component {
       mobile: value,
       mobileError: checkError,
       mobileErrorMessage:
-        value[0] === "0"
-          ? "Mobile Number Must Not Start With 0"
-          : "Enter 10 Digits Valid Mobile Number"
+        value[0] === '0'
+          ? 'Mobile Number Must Not Start With 0'
+          : 'Enter 10 Digits Valid Mobile Number'
     });
   };
   onChangeOtp = e => {
     const { value } = e.target;
     if (
       !allowNChar(value, 6) ||
-      (!allowTypeOf(value, "number") && value.length > 0)
+      (!allowTypeOf(value, 'number') && value.length > 0)
     ) {
       return;
     }
@@ -167,7 +167,7 @@ export default class LoginFormContainer extends Component {
     if (checkmobile) {
       return this.setState({
         mobileError: true,
-        mobileErrorMessage: "Please Enter Valid Mobile Number"
+        mobileErrorMessage: 'Please Enter Valid Mobile Number'
       });
     }
     const { dispatch } = this.context.store;
@@ -290,9 +290,9 @@ export default class LoginFormContainer extends Component {
     return (
       <Row>
         <Box variant="col-4">
-          <Box width={1} mb={10} sx={{ borderBottom: "divider" }}>
+          <Box width={1} mb={10} sx={{ borderBottom: 'divider' }}>
             <Heading color="#1b2125" pb={20}>
-              {!this.state.loginviaotp ? "SIGN IN" : "LOGIN VIA OTP"}
+              {!this.state.loginviaotp ? 'SIGN IN' : 'LOGIN VIA OTP'}
             </Heading>
           </Box>
           <Box pb={20}>
@@ -357,7 +357,7 @@ export default class LoginFormContainer extends Component {
                 display="flex"
                 width={1}
                 sx={{
-                  border: "divider",
+                  border: 'divider',
                   borderRadius: 3
                 }}
               >
@@ -366,7 +366,7 @@ export default class LoginFormContainer extends Component {
                 ) : (
                   <Image src={EmailIcon} alt="Email Login" width={18} mr={10} />
                 )}
-                {!this.state.loginviaotp ? "OTP Login" : "Email"}
+                {!this.state.loginviaotp ? 'OTP Login' : 'Email'}
               </Button>
             </Box>
             <Box variant="col-6" px={5}>
@@ -384,7 +384,7 @@ export default class LoginFormContainer extends Component {
             width={1}
             mb={20}
             sx={{
-              borderBottom: "divider"
+              borderBottom: 'divider'
             }}
           >
             <Heading color="#1b2125" pb={20}>
