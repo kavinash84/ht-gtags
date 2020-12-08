@@ -244,5 +244,8 @@ PaymentSuccess.propTypes = {
   loaded: PropTypes.bool,
   history: PropTypes.object.isRequired
 };
+PaymentSuccess.contextTypes = {
+  store: PropTypes.object.isRequired
+};
 
 export default connect(mapStateToProps, null)(PaymentSuccess);
