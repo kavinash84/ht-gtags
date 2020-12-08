@@ -525,7 +525,7 @@ export default function gaMiddleware() {
             console.log({ groupedProducts });
             const cartList = groupedProducts.map(x => {
               const {
-                product_info: { product_id },
+                // product_info: { product_id }, 
                 sku,
                 name,
                 qty,
