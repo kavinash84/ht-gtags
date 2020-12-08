@@ -816,42 +816,49 @@ class ProductDetails extends React.Component {
               >
                 DETAILS
               </DescriptionButton>
-              <DescriptionButton
-                onClick={e => {
-                  e.preventDefault();
-                  this.setState({
-                    activeSpec: 'care',
-                    activeDescription: careLabel
-                  });
-                }}
-                active={activeSpec === 'care'}
-              >
-                PRODUCT CARE INSTRUCTIONS
-              </DescriptionButton>
-              <DescriptionButton
-                onClick={e => {
-                  e.preventDefault();
-                  this.setState({
-                    activeSpec: 'warranty',
-                    activeDescription: productWarranty
-                  });
-                }}
-                active={activeSpec === 'warranty'}
-              >
-                SERVICE ASSURANCE / WARRANTY
-              </DescriptionButton>
-              <DescriptionButton
-                onClick={e => {
-                  e.preventDefault();
-                  this.setState({
-                    activeSpec: 'return',
-                    activeDescription: returnAndCancel
-                  });
-                }}
-                active={activeSpec === 'return'}
-              >
-                RETURN / CANCELLATION
-              </DescriptionButton>
+              {careLabel && (
+                <DescriptionButton
+                  onClick={e => {
+                    e.preventDefault();
+                    this.setState({
+                      activeSpec: 'care',
+                      activeDescription: careLabel
+                    });
+                  }}
+                  active={activeSpec === 'care'}
+                >
+                  PRODUCT CARE INSTRUCTIONS
+                </DescriptionButton>
+              )}
+              {productWarranty && (
+                <DescriptionButton
+                  onClick={e => {
+                    e.preventDefault();
+                    this.setState({
+                      activeSpec: 'warranty',
+                      activeDescription: productWarranty
+                    });
+                  }}
+                  active={activeSpec === 'warranty'}
+                >
+                  SERVICE ASSURANCE / WARRANTY
+                </DescriptionButton>
+              )}
+              {returnAndCancel && (
+                <DescriptionButton
+                  onClick={e => {
+                    e.preventDefault();
+                    this.setState({
+                      activeSpec: 'return',
+                      activeDescription: returnAndCancel
+                    });
+                  }}
+                  active={activeSpec === 'return'}
+                >
+                  RETURN / CANCELLATION
+                </DescriptionButton>
+              )}
+
               {this.renderAttributes(groupedAttributes)}
             </Row>
 
