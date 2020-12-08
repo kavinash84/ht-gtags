@@ -16,8 +16,8 @@ import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Row from 'hometown-components-dev/lib/RowHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
-import ProductSummaryList from './ProductSummaryList';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import ProductSummaryList from './ProductSummaryList';
 import Coupon from './Coupon';
 // import Img from 'hometown-components/lib/Img';
 const editIcon = require('../../../static/edit-round.svg');
@@ -144,9 +144,9 @@ OrderSummary.defaultProps = {
   discount: 0,
   setDiscount: 0,
   results: [],
-  setDiscount: 0,
   landingPageLink: '',
-  selectedForDemo: false
+  selectedForDemo: false,
+  hidecoupon: false
 };
 
 OrderSummary.propTypes = {

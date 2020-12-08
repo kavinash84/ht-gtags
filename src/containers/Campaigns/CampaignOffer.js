@@ -122,7 +122,7 @@ const prefillLoginDetails = (profileData, isLoggedIn) => {
   }
 };
 
-const resetForm = (form, isLoggedIn, profileData) => {
+const resetForm = form => {
   const inputEle = document.querySelectorAll('select');
   form.reset();
   inputEle.forEach(arr => {

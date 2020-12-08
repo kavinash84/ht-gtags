@@ -24,7 +24,6 @@ import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 /* ====== Page Components ====== */
 import CategoryCarousel from 'components/CategoryCarousel';
 import OfferBanner from 'components/Home/OfferBanner';
-import Carousel from 'components/Carousel';
 import Footer from 'components/Footer';
 import Header from 'components/Header';
 import GridView from 'components/Home/GridView';
@@ -136,7 +135,7 @@ export default class Home extends Component {
 
   render() {
     const {
- instafeeds, banners, middleBanner, homepageCategories, cities
+ banners, middleBanner, homepageCategories, cities
 } = this.props;
     const citiesList = cities.map(item => ({ value: item, label: item }));
     const { citySelectError, cityErrorMessage } = this.state;
@@ -342,7 +341,6 @@ export default class Home extends Component {
 Home.defaultProps = {
   isLoggedIn: false,
   banners: [],
-  instafeeds: [],
   homepageCategories: [],
   cities: [],
   middleBanner: {}
@@ -351,7 +349,6 @@ Home.defaultProps = {
 Home.propTypes = {
   isLoggedIn: PropTypes.bool,
   banners: PropTypes.array,
-  instafeeds: PropTypes.array,
   homepageCategories: PropTypes.array,
   cities: PropTypes.array,
   history: PropTypes.object.isRequired,

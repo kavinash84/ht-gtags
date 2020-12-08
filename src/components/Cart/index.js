@@ -42,19 +42,13 @@ const checkoutIcon = require('../../../static/checkout.svg');
 const location = require('../../../static/map-icon.svg');
 const orderTrackIcon = require('../../../static/shipped.svg');
 const demoBanner = require('../../../static/campaign/select-for-demo-banner.jpg');
-// const saveForLaterIcon = require('../../../static/save-for-later.svg');
 
-// const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);  //Old
-// const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators, addToSelectForDemo }, dispatch);    //New
 const despatchClearSelectForDemo = dispatcheroEmpty => {
-  // New
   const state = [];
   dispatcheroEmpty(state);
 };
 
-// const checkCartBeforeCheckout = (dispatcher, session) => e => {    //Old
 const checkCartBeforeCheckout = (dispatcher, session) => dispatcheroEmpty => e => {
-  // New
   e.preventDefault();
   dispatcher(session);
   despatchClearSelectForDemo(dispatcheroEmpty); // New

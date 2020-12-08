@@ -1,19 +1,19 @@
 import {
   LANDING_INFO as LANDING_INFO_API,
   LANDING_CATEGORY as LANDING_CATEGORY_API
-} from "helpers/apiUrls";
+} from 'helpers/apiUrls';
 
-const LANDING_INFO = "landing/LANDING_INFO";
-const LANDING_INFO_SUCCESS = "landing/LANDING_INFO_SUCCESS";
-const LANDING_INFO_FAIL = "landing/LANDING_INFO_FAIL";
+const LANDING_INFO = 'landing/LANDING_INFO';
+const LANDING_INFO_SUCCESS = 'landing/LANDING_INFO_SUCCESS';
+const LANDING_INFO_FAIL = 'landing/LANDING_INFO_FAIL';
 
-const LANDING_CATEGORY = "landing/LANDING_CATEGORY";
-const LANDING_CATEGORY_SUCCESS = "landing/LANDING_CATEGORY_SUCCESS";
-const LANDING_CATEGORY_FAIL = "landing/LANDING_CATEGORY_FAIL";
+const LANDING_CATEGORY = 'landing/LANDING_CATEGORY';
+const LANDING_CATEGORY_SUCCESS = 'landing/LANDING_CATEGORY_SUCCESS';
+const LANDING_CATEGORY_FAIL = 'landing/LANDING_CATEGORY_FAIL';
 
-const LANDING_SUBMIT = "landing/LANDING_SUBMIT";
-const LANDING_SUBMIT_SUCCESS = "landing/LANDING_SUBMIT_SUCCESS";
-const LANDING_SUBMIT_FAIL = "landing/LANDING_SUBMIT_FAIL";
+const LANDING_SUBMIT = 'landing/LANDING_SUBMIT';
+const LANDING_SUBMIT_SUCCESS = 'landing/LANDING_SUBMIT_SUCCESS';
+const LANDING_SUBMIT_FAIL = 'landing/LANDING_SUBMIT_FAIL';
 
 const initialState = {
   infoLoading: false,
@@ -84,7 +84,7 @@ export default function reducer(state = initialState, action = {}) {
         loading: false,
         loaded: true,
         error: false,
-        submitErrorMessage: action.result.error || ""
+        submitErrorMessage: action.result.error || ''
       };
     case LANDING_SUBMIT_FAIL:
       return {
@@ -92,7 +92,7 @@ export default function reducer(state = initialState, action = {}) {
         loaded: true,
         loading: false,
         error: true,
-        submitErrorMessage: action.result.error || ""
+        submitErrorMessage: action.result.error || ''
       };
     default:
       return state;

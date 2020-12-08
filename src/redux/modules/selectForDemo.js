@@ -1,4 +1,4 @@
-const SELECT_FOR_DEMO = "selectForDemo/SELECT_FOR_DEMO";
+const SELECT_FOR_DEMO = 'selectForDemo/SELECT_FOR_DEMO';
 
 const initialState = {
   data: []

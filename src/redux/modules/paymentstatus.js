@@ -1,5 +1,5 @@
 // import { PAYMENT_STATUS as PAYMENT_STATUS_API } from 'helpers/apiUrls';
-import { PAYMENT_STATUS as PAYMENT_STATUS_API, TRACK_UNBXD_ANALYTICS as UNBXD_ANALYTICS_API } from 'helpers/apiUrls';
+import { PAYMENT_STATUS as PAYMENT_STATUS_API } from 'helpers/apiUrls';
 
 const LOAD = 'paymentstatus/LOAD';
 const LOAD_SUCCESS = 'paymentstatus/LOAD_SUCCESS';

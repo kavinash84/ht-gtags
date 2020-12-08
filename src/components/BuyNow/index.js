@@ -103,7 +103,6 @@ BuyNow.defaultProps = {
   meta: '',
   isSoldOut: false,
   history: {},
-  quantity: 1
 };
 
 BuyNow.propTypes = {
@@ -119,7 +118,6 @@ BuyNow.propTypes = {
   isSoldOut: PropTypes.bool,
   addedToCart: PropTypes.bool.isRequired,
   history: PropTypes.object,
-  quantity: PropTypes.number,
   meta: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 

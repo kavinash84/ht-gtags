@@ -235,13 +235,11 @@ class PaymentSuccess extends Component {
 PaymentSuccess.defaultProps = {
   data: '',
   error: '',
-  loaded: false
 };
 
 PaymentSuccess.propTypes = {
   data: PropTypes.object,
   error: PropTypes.string,
-  loaded: PropTypes.bool,
   history: PropTypes.object.isRequired
 };
 PaymentSuccess.contextTypes = {
