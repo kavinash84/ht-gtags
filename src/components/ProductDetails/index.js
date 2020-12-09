@@ -683,6 +683,7 @@ class ProductDetails extends React.Component {
                   value={productQty}
                   defaultValue={1}
                   styles={customStyles}
+                  isDisabled={!(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)}
                   onChange={({ value }) => {
                     this.handleSelectQty(value);
                   }}
