@@ -397,9 +397,7 @@ class ProductDetails extends React.Component {
 
   isFurnitureTrue() {
     this.props.product.meta.category_details.forEach(cat => {
-      console.log(cat.id, 'category');
       if (cat.id === '131') {
-        console.log(cat.id, 'category 131');
         this.setState({ isFurniture: true });
       }
     });
@@ -680,7 +678,7 @@ class ProductDetails extends React.Component {
                 <Select
                   placeholder=""
                   options={qtyOptions(simples[simpleSku])}
-                  value={productQty}
+                  value={qtyOptions(simples[simpleSku]).length > 0 ? productQty : { value: 0, label: '0' }}
                   defaultValue={1}
                   styles={customStyles}
                   isDisabled={!(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)}
