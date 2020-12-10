@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Empty from 'hometown-components-dev/lib/Empty';
+// import Empty from 'hometown-components-dev/lib/Empty';
+import EmptyHtV1 from 'hometown-components-dev/lib/EmptyHtV1';
 import Img from 'hometown-components-dev/lib/Img';
 import Section from 'hometown-components-dev/lib/Section';
 import Heading from 'hometown-components-dev/lib/Heading';
 import Container from 'hometown-components-dev/lib/Container';
 import Row from 'hometown-components-dev/lib/Row';
-import Div from 'hometown-components-dev/lib/Div';
+// import Div from 'hometown-components-dev/lib/Div';
 import MenuFooter from 'containers/MenuFooter';
 
 const SearchEmptyIcon = require('../../../static/404.png');
@@ -37,7 +38,7 @@ class NotFound extends Component {
       <div className="wrapper">
         <MenuFooter pageTitle="404 - Not Found">
           <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
-            <Empty
+            <EmptyHtV1
               title="Sorry! No Results Found"
               subTitle="Please check the Spelling or by a different search"
               btnName="Go Back Home"
@@ -45,7 +46,7 @@ class NotFound extends Component {
               bg="#fafafa"
             >
               <Img src={SearchEmptyIcon} width="initial" m="1.25rem auto" alt="Sorry no results found" />
-            </Empty>
+            </EmptyHtV1>
           </Section>
           <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
             <Container pr="0" pl="0">
@@ -53,7 +54,7 @@ class NotFound extends Component {
                 {menuItems.map(menu =>
                     menu.children &&
                     menu.visibility === 'on' && (
-                      <Div col={2} key={menu.name}>
+                      <Section col={2} key={menu.name}>
                         <Heading fontSize="1rem" mt="1rem" fontFamily="medium">
                           {menu.name}
                         </Heading>
@@ -65,7 +66,7 @@ class NotFound extends Component {
                                 </li>
                               ))}
                         </ul>
-                      </Div>
+                      </Section>
                     ))}
               </Row>
             </Container>
