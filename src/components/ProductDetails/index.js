@@ -59,6 +59,9 @@ import Pincode from './Pincode';
 import ProductDetailsCarousel from './Carousel';
 import Video from './Video';
 import ReviewFilter from './ReviewFilter';
+import Section from 'hometown-components-dev/lib/SectionHtV1';
+
+import UnbxdRecentlyViewed from 'components/UnbxdRecentlyViewed/UnbxdRecentlyViewed';
 
 /**
  * Images / Icons
@@ -1092,6 +1095,11 @@ class ProductDetails extends React.Component {
               />
             </Row>
           )}
+
+          {/* Unbxd Recently Viewed */}
+          <Section>
+            <UnbxdRecentlyViewed />
+          </Section>
 
           {/* Login modal */}
           <ResponsiveModal

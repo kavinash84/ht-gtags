@@ -30,7 +30,7 @@ import GridView from 'components/Home/GridView';
 import MainSlider from 'components/MainSlider';
 import Title from 'components/Title';
 import Usp from 'components/Home/Usp';
-import UnbxdRecentlyViewed from 'components/Home/UnbxdRecentlyViewed';
+import UnbxdRecentlyViewed from 'components/UnbxdRecentlyViewed/UnbxdRecentlyViewed';
 
 const sliderImage = require('../../static/slider.png');
 const bannerImage = require('../../static/banner.png');
