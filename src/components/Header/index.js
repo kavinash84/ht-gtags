@@ -102,7 +102,7 @@ export default class Header extends Component {
     const { menuItems } = this.props;
 
     return (
-      <Box bg="white" sx={{ position: 'sticky', top: 0, zIndex: 2 }}>
+      <Box bg="white" sx={{ position: 'sticky', top: 0, zIndex: 30 }}>
         <TopBar />
         <Box pt={15} sx={{ borderBottom: 'solid 1px #727070' }}>
           <Container pr="0" pl="0" mb={10}>

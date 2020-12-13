@@ -38,9 +38,6 @@ export default class ProductDetails extends Component {
           ) : (
             <ProductNotFound />
           )}
-          {/* {!loading &&
-            !productDescription.error_message && loaded &&
-            <ProductDetailsContainer history={history} />} */}
 
           {/* Footer */}
           <Footer />
