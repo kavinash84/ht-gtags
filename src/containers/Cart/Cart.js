@@ -29,6 +29,7 @@ import PinCode from 'components/PinCode';
 import ResponsiveModal from 'components/Modal';
 import Notifications from 'components/Notifications';
 import Empty from './Empty';
+import UnbxdRecommendedForYou from '../../components/Unbxd/unbxdRecommendedForYou';
 
 /**
  * Icons / Images
@@ -133,7 +134,7 @@ export default class CartContainer extends Component {
             </Section>
           ) : null}
           {!loading && results && results.length !== 0 ? (
-            <Box>
+            <Box className="asdfgh">
               {outOfStockList && outOfStockList.length > 0 && (
                 <Notifications
                   msg="One or more items in your cart are out of stock. Please remove to continue"
@@ -147,6 +148,10 @@ export default class CartContainer extends Component {
                 outOfStockList={outOfStockList}
                 handlePincodeModal={this.handlePincodeModal}
               />
+              <Section>
+                {/* Unbxd recommended for you */}
+                <UnbxdRecommendedForYou />
+              </Section>
             </Box>
           ) : (
             loading && <CartShimmer />
