@@ -22,7 +22,7 @@ class ReviewFilter extends Component {
     const { selectedFilterProp, onFilterChange } = this.props;
 
     return (
-      <Box width={1}>
+      <Box width={240} ml={16}>
         <Select
           placeholder="Select review"
           defaultValue={null}

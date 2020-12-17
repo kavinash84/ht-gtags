@@ -59,14 +59,14 @@ class TrackOrder extends React.Component {
       <Wrapper>
         <Helmet title="Track Order - Hometown.in" />
         <Helmet>
-          <meta name="description" content={seoDescription} />}
+          <meta name="description" content={seoDescription} />
         </Helmet>
         <Body>
           {/* Header */}
           <Header />
 
           {/* Container */}
-          <Container mt={80} mb={150}>
+          <Container>
             <TrackOrderContainer
               status={this.state.status}
               handleChange={this.handleChange}

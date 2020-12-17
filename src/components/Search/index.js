@@ -1,12 +1,11 @@
-/* ====== selectors ====== */
-/* ====== Components ====== */
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { bindActionCreators } from 'redux';
+/* ====== Components ====== */
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
 /* ====== Modules ====== */
 import { setFilter } from 'redux/modules/products';
 import * as actionCreators from 'redux/modules/search';
@@ -72,13 +71,13 @@ const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators, s
 
 /* eslint react/prop-types: 0 */
 // const renderSuggestionsContainer = ({ loaded }) => ({ containerProps, children }) => (
-//   <BoxHtV1>
+//   <Box>
 //     {loaded && (
-//       <BoxHtV1 {...containerProps} p="0" className={`${styles.searchList} ${styles.active}`}>
+//       <Box {...containerProps} p="0" className={`${styles.searchList} ${styles.active}`}>
 //         {children}
-//       </BoxHtV1>
+//       </Box>
 //     )}
-//   </BoxHtV1>
+//   </Box>
 // );
 
 class Search extends React.Component {
@@ -146,7 +145,7 @@ class Search extends React.Component {
     // Autosuggest will pass through all these props to the input.
 
     return (
-      <BoxHtV1 width={1} className={styles.search}>
+      <Box width={1} className={styles.search} sx={{ border: 'dividerBold' }}>
         {/* <form onSubmit={onSubmit(searchQuery, history, hideResultsOnSubmit, results, setFilterState)}>
           <Autosuggest
             suggestions={suggestions}
@@ -163,7 +162,7 @@ class Search extends React.Component {
         {searchQuery === '' ? (
           <img src={SearchIcon} className={styles.searchIcon} alt="Search" />
         ) : (
-          <ButtonHtV1
+          <Button
             className={styles.closeBtn}
             onClick={this.onSuggestionsClear}
             btnType="custom"
@@ -172,7 +171,7 @@ class Search extends React.Component {
             p="0"
           >
             <img src={CloseIcon} alt="Close" />
-          </ButtonHtV1>
+          </Button>
         )} */}
         <input
           id="ht_generic_search"
@@ -185,7 +184,7 @@ class Search extends React.Component {
         {searchQuery === '' ? (
           <img src={SearchIcon} className={styles.searchIcon} alt="Search" />
         ) : (
-          <ButtonHtV1
+          <Button
             className={styles.closeBtn}
             onClick={this.onSuggestionsClear}
             btnType="custom"
@@ -194,9 +193,9 @@ class Search extends React.Component {
             p="0"
           >
             <img src={CloseIcon} alt="Close" />
-          </ButtonHtV1>
+          </Button>
         )}
-      </BoxHtV1>
+      </Box>
     );
   }
 }

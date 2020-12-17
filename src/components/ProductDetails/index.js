@@ -1045,12 +1045,11 @@ class ProductDetails extends React.Component {
                 adding={adding}
                 added={added}
                 toggleReview={toggleReviewBox}
-              />
-              {reviewsData.length > 0 && (
-                <Box mb={30}>
+              >
+                {reviewsData.length > 0 && (
                   <ReviewFilter selectedFilterProp={selectedFilter} onFilterChange={this.onFilterChange} />
-                </Box>
-              )}
+                )}
+              </AddReview>
               <Reviews
                 variant="col-12"
                 reviewItems={filterChanged ? reviewDataSet : reviews.data}
@@ -1061,7 +1060,7 @@ class ProductDetails extends React.Component {
           </Box>
           {/* Combined Offers */}
           {combinedbuy.length > 0 && (
-            <Box id="combined_buy_offers" pt={36}>
+            <Box id="combined_buy_offers" pt={48}>
               <Box textAlign="center" mb={20}>
                 <Heading variant="heading.regular" sx={{ fontWeight: 400 }}>
                   Combined Offers
