@@ -48,8 +48,14 @@ const despatchClearSelectForDemo = dispatcheroEmpty => {
   dispatcheroEmpty(state);
 };
 
-const checkCartBeforeCheckout = (dispatcher, session) => dispatcheroEmpty => e => {
-  e.preventDefault();
+// const checkCartBeforeCheckoutTop = (dispatcher, session) => dispatcheroEmpty => {
+//   // e.preventDefault();
+//   dispatcher(session);
+//   despatchClearSelectForDemo(dispatcheroEmpty); // New
+// };
+
+const checkCartBeforeCheckout = (dispatcher, session) => dispatcheroEmpty => {
+  // e.preventDefault();
   dispatcher(session);
   despatchClearSelectForDemo(dispatcheroEmpty); // New
 };
@@ -173,7 +179,7 @@ const Cart = ({
                 disabled={isAnyProductOutofStoc}
                 justifyContent="center"
                 width={1}
-                onClick={checkCartBeforeCheckout(checkCart, sessionId)}
+                onClick={() => checkCartBeforeCheckout(checkCart, sessionId)(addToSelectForDemo)}
               >
                 <Image src={checkoutIcon} alt="Delete" height="18px" mr="0.625rem" />
                 SECURE CHECKOUT
