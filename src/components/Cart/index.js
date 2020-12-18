@@ -436,7 +436,7 @@ const Cart = ({
               shipping={summary.shipping_charges}
               totalCart={summary.total}
               loadingnextstep={checkingCart}
-              onClick={checkCartBeforeCheckout(checkCart, sessionId)(addToSelectForDemo)}
+              onClick={() => checkCartBeforeCheckout(checkCart, sessionId)(addToSelectForDemo)}
               outOfStockList={outOfStockList}
               discount={summary.coupon_discount}
               landingPageLink={demoLandingPageUrl}
