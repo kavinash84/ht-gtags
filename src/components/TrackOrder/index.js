@@ -31,7 +31,7 @@ class TrackOrder extends Component {
     const error = data.error || '';
     return (
       <BoxHtV1>
-        <TitleBar marginLeft={20} title="Track Order(s)" />
+        <TitleBar marginLeft={20} title="Track Your Order" />
         <SectionHtV1 display="block" p="0" pb="1rem" mb="0" height="auto">
           <ContainerHtV1 type="container" pr="0.5rem" pl="0.5rem">
             <BoxHtV1 type="block" pt="2rem" pb="2.5rem">
