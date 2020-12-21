@@ -151,6 +151,7 @@ class Listing extends React.Component {
       }
       const { dispatch } = this.context.store;
       await dispatch(setReloadListing(false));
+      console.log(state, state.path);
       if (state && state.path) {
         window.renderListing(false, state);
       }

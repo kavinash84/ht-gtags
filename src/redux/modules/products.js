@@ -105,6 +105,7 @@ export default function reducer(state = initialState, action = {}) {
     case LOAD_FILTER_SUCCESS:
       return {
         ...state,
+        reloadListing: true,
         loading: false,
         loaded: true,
         shimmer: false,

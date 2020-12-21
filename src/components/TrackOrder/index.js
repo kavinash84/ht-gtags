@@ -27,7 +27,7 @@ class TrackOrder extends Component {
     const error = data.error || '';
     return (
       <Box py={90}>
-        <TitleBar title="Track Order(s)" />
+        <TitleBar title="Track Your Order" />
         <Box mt={20}>
           <Container width={1}>
             <form onSubmit={handleSubmit}>
