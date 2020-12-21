@@ -7,7 +7,7 @@ import TitleBar from 'components/TitleBar';
 
 const Grievance = () => (
   <BoxHtV1 type="block">
-    <TitleBar title="GRIEVANCE" />
+    <TitleBar marginLeft="4rem" title="GRIEVANCE Dummy" />
     <SectionHtV1 mb="0" mt="-0.625rem" bg="sectionBgDark" boxShadow="0px 1px 6px 0px rgba(0,0,0,0.20)" display="flex">
       <ContainerHtV1 type="containerHtV1" pr="1.5rem" pl="1.5rem">
         <SectionHtV1 boxShadow="1px 2px 5px 0px rgba(0,0,0,0.1)" bg="white" display="flex" mb="1rem" p="1.5rem">
