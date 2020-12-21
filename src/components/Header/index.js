@@ -12,6 +12,18 @@ import NavBar from '../NavBar';
 import HeaderTop from './HeaderTop';
 import TopBar from './TopBar';
 
+const navigateToCategory = history => category => {
+  history.push({
+    pathname: `${category.pathname}`,
+    search: `${category.search}`,
+    state: {
+      query: `${category.search}`,
+      path: `${category.pathname}`,
+      pincode: window.getPincode(),
+      pinSetByUser: window.isPincodeFilter()
+    }
+  });
+};
 @connect(({ homepage }) => ({
   menuItems: homepage.menu.data
 }))
@@ -20,6 +32,13 @@ export default class Header extends Component {
     currentMenu: '',
     hoverBox: false
   };
+
+  componentDidMount() {
+    const { history } = this.props;
+
+    window.HTCATEGORY = {};
+    window.HTCATEGORY.navigateToCategory = navigateToCategory(history);
+  }
 
   setCurrentMenuData = () => {
     const menuData = this.props.menuItems.find(menu => menu.id === this.state.currentMenu);
@@ -135,5 +154,6 @@ Header.defaultProps = {
   menuItems: []
 };
 Header.propTypes = {
-  menuItems: PropTypes.array
+  menuItems: PropTypes.array,
+  history: PropTypes.object.isRequired
 };
