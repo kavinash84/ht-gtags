@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 
 /* ====== Components ====== */
 import Container from 'hometown-components-dev/lib/ContainerHtV1';
@@ -27,7 +28,7 @@ const navigateToCategory = history => category => {
 @connect(({ homepage }) => ({
   menuItems: homepage.menu.data
 }))
-export default class Header extends Component {
+class Header extends Component {
   state = {
     currentMenu: '',
     hoverBox: false
@@ -63,9 +64,14 @@ export default class Header extends Component {
     }
   };
 
-  exitOnClick = () => {
+  exitOnClick = event => {
     this.setState({
       hoverBox: false
+    });
+    event.preventDefault();
+    window.HTCATEGORY.navigateToCategory({
+      pathname: event.target.pathname,
+      search: event.target.search
     });
   };
 
@@ -157,3 +163,5 @@ Header.propTypes = {
   menuItems: PropTypes.array,
   history: PropTypes.object.isRequired
 };
+
+export default withRouter(Header);
