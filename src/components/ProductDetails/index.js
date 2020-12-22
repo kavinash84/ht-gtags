@@ -487,7 +487,9 @@ class ProductDetails extends React.Component {
       sku_supplier_config: skuSupplierConfig
     } = attributes;
     const simpleSku = Object.keys(simples)[0];
-    const { name, price, special_price: specialPriceEmi, config_id: configId } = meta;
+    const {
+ name, price, special_price: specialPriceEmi, config_id: configId
+} = meta;
     const {
       offer_discount_percentage: offerDiscountPercentage,
       coupon_code: couponCode,
