@@ -487,7 +487,7 @@ class ProductDetails extends React.Component {
       sku_supplier_config: skuSupplierConfig
     } = attributes;
     const simpleSku = Object.keys(simples)[0];
-    const { name, price, config_id: configId } = meta;
+    const { name, price, special_price: specialPriceEmi, config_id: configId } = meta;
     const {
       offer_discount_percentage: offerDiscountPercentage,
       coupon_code: couponCode,
@@ -500,7 +500,7 @@ class ProductDetails extends React.Component {
       mrp: maxPrice
     } = pricingDetails;
 
-    const checkSpecialPrice = Number(specialPrice) || Number(price);
+    const checkSpecialPrice = Number(specialPriceEmi) || Number(price);
     const { adding, added, data: reviewsData = [] } = reviews;
     // const offerImage = simples[simpleSku].groupedattributes.offer_image || null;
     // const offerImageRedirect = simples[simpleSku].groupedattributes.offer_image_click_url || null;
