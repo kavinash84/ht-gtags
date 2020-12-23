@@ -80,6 +80,7 @@ class PaymentSuccess extends Component {
       const {
         data,
         data: {
+          order_number: orderNo,
           sub_total_amount: subTotal,
           discount_coupon_value: discount,
           net_order_amount: totalAmount,
@@ -99,7 +100,7 @@ class PaymentSuccess extends Component {
               <Container pt={60}>
                 <Box variant="col-10" mx="auto">
                   <Box sx={{ boxShadow: 'profile', border: 'light' }}>
-                    <ThankYou />
+                    <ThankYou orderNo={orderNo} />
                   </Box>
                   <Row mx={0} mb={40} mt={60} justifyContent="center">
                     <Text fontFamily="medium" fontSize={28}>
@@ -122,16 +123,9 @@ class PaymentSuccess extends Component {
                     </Box>
                   </Row>
                   {products.map(product => (
-                    <Row
-                      py={20}
-                      mx={0}
-                      alignItems="center"
-                      sx={{ position: 'relative', borderBottom: 'light' }}
-                    >
+                    <Row py={20} mx={0} alignItems="center" sx={{ position: 'relative', borderBottom: 'light' }}>
                       <Box variant="col-2" pl={0}>
-                        <Link
-                          to={formatProductURL(product.name, product.confSku)}
-                        >
+                        <Link to={formatProductURL(product.name, product.confSku)}>
                           <Image
                             width={1}
                             src={`${product.image}-top_sel_160.jpg`}
@@ -143,14 +137,8 @@ class PaymentSuccess extends Component {
                       <Box variant="col-4" pl={15}>
                         {/* <Link to="/"> */}
                         <Box mb="10px">
-                          <Link
-                            to={formatProductURL(product.name, product.confSku)}
-                          >
-                            <Heading
-                              color="heading"
-                              fontSize={16}
-                              lineHeight={1.4}
-                            >
+                          <Link to={formatProductURL(product.name, product.confSku)}>
+                            <Heading color="heading" fontSize={16} lineHeight={1.4}>
                               {product.name}
                             </Heading>
                           </Link>
@@ -200,20 +188,12 @@ class PaymentSuccess extends Component {
                       ) : null}
                       <Row m="0" py="1em" sx={{ borderTop: 'divider' }}>
                         <Box variant="col-6" p="0">
-                          <Text
-                            color="menuItem"
-                            fontSize={18}
-                            fontFamily="medium"
-                          >
+                          <Text color="menuItem" fontSize={18} fontFamily="medium">
                             Total Price :
                           </Text>
                         </Box>
                         <Box variant="col-6" p="0" textAlign="right">
-                          <Text
-                            color="menuItem"
-                            fontSize={18}
-                            fontFamily="medium"
-                          >
+                          <Text color="menuItem" fontSize={18} fontFamily="medium">
                             Rs {formatAmount(totalAmount)}
                           </Text>
                         </Box>
@@ -234,7 +214,7 @@ class PaymentSuccess extends Component {
 }
 PaymentSuccess.defaultProps = {
   data: '',
-  error: '',
+  error: ''
 };
 
 PaymentSuccess.propTypes = {
