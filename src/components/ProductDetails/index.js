@@ -503,8 +503,8 @@ class ProductDetails extends React.Component {
 
     const checkSpecialPrice = Number(specialPriceEmi) || Number(price);
     const { adding, added, data: reviewsData = [] } = reviews;
-    // const offerImage = simples[simpleSku].groupedattributes.offer_image || null;
-    // const offerImageRedirect = simples[simpleSku].groupedattributes.offer_image_click_url || null;
+    const offerImage = simples[simpleSku].groupedattributes.offer_image || null;
+    const offerImageRedirect = simples[simpleSku].groupedattributes.offer_image_click_url || null;
     const { showmore, showmorecolorproducts } = this.state;
     const isEmiAvailable = Number(checkSpecialPrice) >= 3000;
     const { main_material: material, color, category_type: productType } = gattributes;
@@ -712,14 +712,13 @@ class ProductDetails extends React.Component {
                   ) : (
                     ''
                   )}
-                  {/*
-                {offerImage && offerImageRedirect && (
-                  <a rel="noopener noreferrer" href={offerImageRedirect}>
-                    <Image src={offerImage} alt="" width="100%" />
-                  </a>
-                )}
-                {offerImage && !offerImageRedirect && <Image src={offerImage} alt="" width="100%" />}
-                */}
+
+                  {offerImage && offerImageRedirect && (
+                    <a rel="noopener noreferrer" href={offerImageRedirect}>
+                      <Image src={offerImage} alt="" width="100%" />
+                    </a>
+                  )}
+                  {offerImage && !offerImageRedirect && <Image src={offerImage} alt="" width="100%" />}
                 </Box>
               }
 
