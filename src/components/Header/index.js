@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 
 /* ====== Components ====== */
 import Container from 'hometown-components-dev/lib/ContainerHtV1';
@@ -12,14 +13,33 @@ import NavBar from '../NavBar';
 import HeaderTop from './HeaderTop';
 import TopBar from './TopBar';
 
+const navigateToCategory = history => category => {
+  history.push({
+    pathname: `${category.pathname}`,
+    search: `${category.search}`,
+    state: {
+      query: `${category.search}`,
+      path: `${category.pathname}`,
+      pincode: window.getPincode(),
+      pinSetByUser: window.isPincodeFilter()
+    }
+  });
+};
 @connect(({ homepage }) => ({
   menuItems: homepage.menu.data
 }))
-export default class Header extends Component {
+class Header extends Component {
   state = {
     currentMenu: '',
     hoverBox: false
   };
+
+  componentDidMount() {
+    const { history } = this.props;
+
+    window.HTCATEGORY = {};
+    window.HTCATEGORY.navigateToCategory = navigateToCategory(history);
+  }
 
   setCurrentMenuData = () => {
     const menuData = this.props.menuItems.find(menu => menu.id === this.state.currentMenu);
@@ -44,9 +64,14 @@ export default class Header extends Component {
     }
   };
 
-  exitOnClick = () => {
+  exitOnClick = event => {
     this.setState({
       hoverBox: false
+    });
+    event.preventDefault();
+    window.HTCATEGORY.navigateToCategory({
+      pathname: event.target.pathname,
+      search: event.target.search
     });
   };
 
@@ -135,5 +160,8 @@ Header.defaultProps = {
   menuItems: []
 };
 Header.propTypes = {
-  menuItems: PropTypes.array
+  menuItems: PropTypes.array,
+  history: PropTypes.object.isRequired
 };
+
+export default withRouter(Header);
