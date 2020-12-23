@@ -36,6 +36,8 @@ import Row from 'hometown-components-dev/lib/RowHtV1';
 /**
  * Page Components
  */
+import Section from 'hometown-components-dev/lib/SectionHtV1';
+import UnbxdRecentlyViewed from 'components/UnbxdRecentlyViewed/UnbxdRecentlyViewed';
 import AddReview from 'hometown-components-dev/lib/ReviewsHtV1/WriteReview';
 import ColorOption from 'hometown-components-dev/lib/ProductDetailsHtV1/ColorOption';
 import CombinedBuy from 'components/CombinedBuy';
@@ -59,9 +61,6 @@ import Pincode from './Pincode';
 import ProductDetailsCarousel from './Carousel';
 import Video from './Video';
 import ReviewFilter from './ReviewFilter';
-import Section from 'hometown-components-dev/lib/SectionHtV1';
-
-import UnbxdRecentlyViewed from 'components/UnbxdRecentlyViewed/UnbxdRecentlyViewed';
 
 /**
  * Images / Icons
@@ -487,7 +486,9 @@ class ProductDetails extends React.Component {
       sku_supplier_config: skuSupplierConfig
     } = attributes;
     const simpleSku = Object.keys(simples)[0];
-    const { name, price, config_id: configId } = meta;
+    const {
+ name, price, special_price: specialPriceEmi, config_id: configId
+} = meta;
     const {
       offer_discount_percentage: offerDiscountPercentage,
       coupon_code: couponCode,
@@ -500,7 +501,7 @@ class ProductDetails extends React.Component {
       mrp: maxPrice
     } = pricingDetails;
 
-    const checkSpecialPrice = Number(specialPrice) || Number(price);
+    const checkSpecialPrice = Number(specialPriceEmi) || Number(price);
     const { adding, added, data: reviewsData = [] } = reviews;
     // const offerImage = simples[simpleSku].groupedattributes.offer_image || null;
     // const offerImageRedirect = simples[simpleSku].groupedattributes.offer_image_click_url || null;
@@ -868,51 +869,73 @@ class ProductDetails extends React.Component {
             {activeSpec === 'details' ? (
               <Box px="10%" py="2%" sx={{ display: 'flex' }}>
                 <Row>
-                  <Col>
-                    <Row pb={10}>
-                      <Col width={125} fontWeight="bold">
-                        Brand
-                      </Col>
-                      <Col>{ProductBrand}</Col>
-                    </Row>
-                  </Col>
-                  <Col>
-                    <Row pb={10}>
-                      <Col fontWeight="bold">Family Name</Col>
-                      <Col>{familyName}</Col>
-                    </Row>
-                  </Col>
-                  <Col>
-                    <Row>
-                      <Col width={125} fontWeight="bold">
-                        Colour
-                      </Col>
-                      <Col>{ProductColor}</Col>
-                    </Row>
-                  </Col>
+                  {ProductBrand && (
+                    <Col>
+                      <Row pb={10}>
+                        <Col width={125} fontWeight="bold">
+                          Brand
+                        </Col>
+                        <Col>{ProductBrand}</Col>
+                      </Row>
+                    </Col>
+                  )}
+                  {familyName && (
+                    <Col>
+                      <Row pb={10}>
+                        <Col fontWeight="bold">Family Name</Col>
+                        <Col>{familyName}</Col>
+                      </Row>
+                    </Col>
+                  )}
+                  {ProductColor && (
+                    <Col>
+                      <Row>
+                        <Col width={125} fontWeight="bold">
+                          Colour
+                        </Col>
+                        <Col>{ProductColor}</Col>
+                      </Row>
+                    </Col>
+                  )}
                 </Row>
                 <Row>
-                  <Col>
-                    <Row pb={10}>
-                      <Col fontWeight="bold">Depth (mm)</Col>
-                      <Col>{productDepth}</Col>
-                    </Row>
-                  </Col>
-                  <Col>
-                    <Row pb={10}>
-                      <Col fontWeight="bold">Width (mm)</Col>
-                      <Col>{productWidth}</Col>
-                    </Row>
-                  </Col>
-                  <Col>
-                    <Row>
-                      <Col fontWeight="bold">Height (mm)</Col>
-                      <Col>{productHeight}</Col>
-                    </Row>
-                  </Col>
+                  {productDepth && (
+                    <Col>
+                      <Row pb={10}>
+                        <Col fontWeight="bold">Depth (mm)</Col>
+                        <Col>{productDepth}</Col>
+                      </Row>
+                    </Col>
+                  )}
+                  {productWidth && (
+                    <Col>
+                      <Row pb={10}>
+                        <Col fontWeight="bold">Width (mm)</Col>
+                        <Col>{productWidth}</Col>
+                      </Row>
+                    </Col>
+                  )}
+                  {productHeight && (
+                    <Col>
+                      <Row>
+                        <Col fontWeight="bold">Height (mm)</Col>
+                        <Col>{productHeight}</Col>
+                      </Row>
+                    </Col>
+                  )}
                 </Row>
                 <Row>
-                  <Col>
+                  {productWeight && (
+                    <Col>
+                      <Row pb={10}>
+                        <Col width={188} fontWeight="bold">
+                          Product Weight
+                        </Col>
+                        <Col>{productWeight}</Col>
+                      </Row>
+                    </Col>
+                  )}
+                  {/* {productWeight && <Col>
                     <Row pb={10}>
                       <Col width={188} fontWeight="bold">
                         Product Weight
@@ -920,20 +943,25 @@ class ProductDetails extends React.Component {
                       <Col>{productWeight}</Col>
                     </Row>
                   </Col>
-                  <Col>
-                    <Row pb={10}>
-                      <Col fontWeight="bold">Product main Material</Col>
-                      <Col>{productMainMaterial}</Col>
-                    </Row>
-                  </Col>
-                  <Col>
-                    <Row>
-                      <Col width={188} fontWeight="bold">
-                        SKU
-                      </Col>
-                      <Col>{skuSupplierConfig}</Col>
-                    </Row>
-                  </Col>
+                  } */}
+                  {productMainMaterial && (
+                    <Col>
+                      <Row pb={10}>
+                        <Col fontWeight="bold">Product main Material</Col>
+                        <Col>{productMainMaterial}</Col>
+                      </Row>
+                    </Col>
+                  )}
+                  {skuSupplierConfig && (
+                    <Col>
+                      <Row>
+                        <Col width={188} fontWeight="bold">
+                          SKU
+                        </Col>
+                        <Col>{skuSupplierConfig}</Col>
+                      </Row>
+                    </Col>
+                  )}
                 </Row>
               </Box>
             ) : (

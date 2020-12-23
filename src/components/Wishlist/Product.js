@@ -7,6 +7,8 @@ import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 
+import truck from '../../static/truck.svg';
+
 const wishListIcon = require('../../../static/wishListIcon.png');
 
 const handleClick = (dispatcher, position = 0) => () => {
@@ -14,8 +16,17 @@ const handleClick = (dispatcher, position = 0) => () => {
 };
 const Product = props => {
   const {
- name, image, price, cutprice, imgHeight, position, setProductPosition, productURL
-} = props;
+    name,
+    image,
+    price,
+    cutprice,
+    imgHeight,
+    position,
+    setProductPosition,
+    productURL,
+    deliveredBy,
+    pincode
+  } = props;
   return (
     <Box>
       <Link onClick={handleClick(setProductPosition, position)} to={productURL}>
@@ -49,6 +60,47 @@ const Product = props => {
                 ₹ {cutprice}
               </Text>
             )}
+            {deliveredBy && (
+              <Box sx={{ display: 'flex' }} mt="8px">
+                {/* <Text
+              lh="0.1"
+              fontFamily="regular"
+              fontSize-
+            >
+              {deliveredBy.indexOf('Currently') !== 0 && <Image
+                width="initial"
+                height="18px"
+                mr="0.5rem"
+                position="relative"
+                top="4px"
+                display="inline-block"
+                float="none"
+                src={truck}
+              />}
+              {pincode && deliveredBy ? deliveredBy : ''}
+            </Text> */}
+                {deliveredBy.indexOf('Currently') !== 0 && (
+                  <Image
+                    width="initial"
+                    height="18px"
+                    mr="0.5rem"
+                    position="relative"
+                    top="4px"
+                    display="inline-block"
+                    float="none"
+                    src={truck}
+                  />
+                )}
+                <Text
+                  // lh="0.1"
+                  fontFamily="regular"
+                  fontSize="13px"
+                  mt="3px"
+                >
+                  {pincode && deliveredBy ? deliveredBy : ''}
+                </Text>
+              </Box>
+            )}
           </Box>
         </Box>
       </Link>
@@ -57,7 +109,8 @@ const Product = props => {
 };
 
 Product.defaultProps = {
-  imgHeight: '240px'
+  imgHeight: '240px',
+  pincode: null
 };
 
 Product.propTypes = {
@@ -68,7 +121,9 @@ Product.propTypes = {
   imgHeight: PropTypes.string,
   position: PropTypes.string.isRequired,
   setProductPosition: PropTypes.func.isRequired,
-  productURL: PropTypes.string.isRequired
+  productURL: PropTypes.string.isRequired,
+  deliveredBy: PropTypes.string.isRequired,
+  pincode: PropTypes.string
 };
 
 export default Product;
