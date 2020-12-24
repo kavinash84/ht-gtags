@@ -116,10 +116,10 @@ export default class HeaderTop extends Component {
               <Image height={['auto', 'auto', 28]} src={LogoIcon} alt="Hometown" />
             </Link>
           </Col>
-          <Col width={4 / 12}>
+          <Col width={5.5 / 12}>
             <Search />
           </Col>
-          <Col width={5 / 12} flexDirection="row" justifyContent="flex-end">
+          <Col width={3.5 / 12} flexDirection="row" justifyContent="flex-end">
             {/* <Button variant="link" onClick={this.onOpenPincodeModal}>
               <Flex alignItems="center">
                 <LocationIcon />

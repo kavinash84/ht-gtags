@@ -501,7 +501,7 @@ class DeliveryAddress extends Component {
 
           {/* Order Summary */}
           <Col variant="col-4">
-            <Box bg="sidebar" px={[30, 30, 40]} py={[20, 20, 30]}>
+            <Box bg="sidebar" px={[15, 15, 40]} py={[20, 20, 30]}>
               <OrderSummary
                 history={history}
                 results={results}

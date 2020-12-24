@@ -12,7 +12,7 @@ import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 
 const ProductSummaryList = ({ productItem, qty }) => (
-  <Flex pb={20}>
+  <Flex pb={10}>
     <Box variant="col-4" pr={0} pl={0}>
       <Image
         width={1}
@@ -23,12 +23,12 @@ const ProductSummaryList = ({ productItem, qty }) => (
         }}
       />
     </Box>
-    <Box variant="col-8" pl={20}>
+    <Box variant="col-8" pl={10} pr={0}>
       <Box mb="10px">
-        <Heading color="heading" fontSize={[14, 14, 14, 16]} lineHeight={1.4} pb={10}>
+        <Heading color="heading" fontSize={[12, 12, 12, 14]} lineHeight={1.4} pb={5}>
           {productItem.name ? `${productItem.name.slice(0, 20)}..` : ''}
         </Heading>
-        <Text fontSize={14} pb={10}>
+        <Text fontSize={12} pb={8}>
           {productItem.color}
         </Text>
         <Heading variant="heading.small">
