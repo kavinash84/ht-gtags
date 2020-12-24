@@ -12,7 +12,15 @@ import { getCartCount } from 'selectors/cart';
 import { getWishListCount } from 'selectors/wishlist';
 
 /* ====== Helpers ====== */
-import { SIGNUP_URL, HOME_URL, LOGIN_URL, MY_WISHLIST_URL, MY_PROFILE_URL, CART_URL } from 'helpers/Constants';
+import {
+  SIGNUP_URL,
+  HOME_URL,
+  LOGIN_URL,
+  MY_WISHLIST_URL,
+  MY_PROFILE_URL,
+  CART_URL,
+  DELIVERY_ADDRESS_URL
+} from 'helpers/Constants';
 import { titleCase, checkRedirection } from 'utils/helper';
 
 /* ====== Components ====== */
@@ -36,6 +44,7 @@ import ResponsiveModal from 'components/Modal';
 import PinCode from 'components/PinCode';
 import LoginForm from 'components/LoginForms';
 import SignupForm from 'components/Signup/SignupForm';
+import ProductSummaryList from 'components/checkout/ProductSummaryList';
 
 const LogoIcon = require('../../../static/logo@2x.png');
 const PincodeModalIcon = require('../../../static/map-placeholder.svg');
@@ -53,8 +62,7 @@ const onClickLogout = dispatcher => e => {
 @withRouter
 @connect(
   ({
- userLogin, wishlist, cart, router, profile
-}) => ({
+ userLogin, wishlist, cart, router, profile }) => ({
     isLoggedIn: userLogin.isLoggedIn,
     name: profile.data.first_name,
     wishListCount: getWishListCount(wishlist),
@@ -100,20 +108,31 @@ export default class HeaderTop extends Component {
   handleClick = URL => e => {
     e.preventDefault();
     const { history, router } = this.props;
-    history.push(`${URL}/?redirect=${checkRedirection(router.location.pathname)}`);
+    history.push(
+      `${URL}/?redirect=${checkRedirection(router.location.pathname)}`
+    );
   };
 
   render() {
     const {
- isLoggedIn, history, wishListCount, cartCount, logoutUser, name
-} = this.props;
+      isLoggedIn,
+      history,
+      wishListCount,
+      cartCount,
+      logoutUser,
+      name
+    } = this.props;
 
     return (
       <Box>
         <Row sx={{ alignItems: 'center' }} mx={[0, 0, 0, -16]}>
           <Col width={3 / 12}>
             <Link to={HOME_URL}>
-              <Image height={['auto', 'auto', 28]} src={LogoIcon} alt="Hometown" />
+              <Image
+                height={['auto', 'auto', 28]}
+                src={LogoIcon}
+                alt="Hometown"
+              />
             </Link>
           </Col>
           <Col width={5.5 / 12}>
@@ -136,27 +155,37 @@ export default class HeaderTop extends Component {
               variant="link"
               pl={20}
               sx={{
-                '& ~ div': {
+                '+ div': {
                   display: 'none',
                   '&:hover': {
                     display: 'block'
                   }
                 },
-                '&:hover': {
-                  '& ~ div': {
+                ':hover': {
+                  '& + div': {
                     display: 'block'
                   }
                 }
               }}
             >
-              {isLoggedIn ? <Text variant="headerLabel">Hi {titleCase(name)}</Text> : <UserIcon />}
+              {isLoggedIn ? (
+                <Text variant="headerLabel">Hi {titleCase(name)}</Text>
+              ) : (
+                <UserIcon />
+              )}
             </Button>
             <Box pt={20} sx={{ position: 'relative' }}>
               <Card variant="card.profileMore">
                 <Box variant="card.profileMoreWrapper">
                   {!isLoggedIn && (
                     <Fragment>
-                      <Button as={Link} to={SIGNUP_URL} onClick={this.handleClick(SIGNUP_URL)} mb={15} width={175}>
+                      <Button
+                        as={Link}
+                        to={SIGNUP_URL}
+                        onClick={this.handleClick(SIGNUP_URL)}
+                        mb={15}
+                        width={175}
+                      >
                         Sign Up
                       </Button>
                       <Text mb={6} textAlign="center">
@@ -192,16 +221,85 @@ export default class HeaderTop extends Component {
                 </Box>
               </Card>
             </Box>
-            <Button variant="link" pl={20} onClick={isLoggedIn ? onClick(history) : this.onOpenLoginModal}>
+            <Button
+              variant="link"
+              pl={20}
+              onClick={isLoggedIn ? onClick(history) : this.onOpenLoginModal}
+            >
               <Flex alignItems="center">
                 <FavIcon />
-                <Text variant="headerLabel">{isLoggedIn ? wishListCount : 0}</Text>
+                <Text variant="headerLabel">
+                  {isLoggedIn ? wishListCount : 0}
+                </Text>
               </Flex>
             </Button>
-            <Flex as={Link} to={CART_URL} sx={{ alignItems: 'center' }} pl={20}>
+            <Flex
+              as={Link}
+              to={CART_URL}
+              pl={20}
+              sx={{
+                '+ div': {
+                  display: 'none',
+                  '&:hover': {
+                    display: 'block'
+                  }
+                },
+                ':hover': {
+                  '& + div': {
+                    display: 'block'
+                  }
+                }
+              }}
+            >
               <CartIcon />
               <Text variant="headerLabel">{cartCount}</Text>
             </Flex>
+            <Box pt={20} className="cart-popover" sx={{ position: 'relative' }}>
+              <Card variant="card.profileMore">
+                <Box bg="bgOffer" px={20} py={8} sx={{ fontSize: 16, color: 'white' }}>3 items in your cart</Box>
+                <Box variant="card.profileMoreWrapper" px={0}>
+                  <Box
+                    mb={10}
+                    mx={15}
+                    width={300}
+                    sx={{
+                      borderBottom: 'divider'
+                    }}
+                  >
+                    <ProductSummaryList
+                      qty={2}
+                      productItem={{
+                        image: 'https://www.hometown.in/media/product/53/1253/12483/1-top_sel_160.jpg',
+                        unit_price: 2000,
+                        special_price: 2000,
+                        name: 'Logan Fabric Two Sea..',
+                        color: 'brown'
+                      }}
+                    />
+                    <ProductSummaryList
+                      qty={2}
+                      productItem={{
+                        image: 'https://www.hometown.in/media/product/53/1253/12483/1-top_sel_160.jpg',
+                        unit_price: 2000,
+                        special_price: 2000,
+                        name: 'Logan Fabric Two Sea..',
+                        color: 'brown'
+                      }}
+                    />
+                  </Box>
+                  <Box variant="col-12" pb={20} px={[0, 0, 16]}>
+                    <Flex justifyContent="space-between">
+                      <Text>Subtotal</Text>
+                      <Text>Rs. 1000</Text>
+                    </Flex>
+                  </Box>
+                  <Box px={16}>
+                    <Button width={1} as={Link} to={DELIVERY_ADDRESS_URL} mb={10}>CHECKOUT NOW</Button>
+                    <Button width={1} as={Link} to={CART_URL} variant="outline.primary">VIEW CART</Button>
+                  </Box>
+                </Box>
+              </Card>
+            </Box>
           </Col>
         </Row>
 
@@ -212,7 +310,13 @@ export default class HeaderTop extends Component {
           open={this.state.openPincode}
         >
           <Box textAlign="center">
-            <Image width="100px" m="auto" mb="1.5rem" src={PincodeModalIcon} alt="Pincode" />
+            <Image
+              width="100px"
+              m="auto"
+              mb="1.5rem"
+              src={PincodeModalIcon}
+              alt="Pincode"
+            />
             <Heading fontSize={20} lineHeight={1.3} mb="1rem">
               Please enter your Pincode to serve you better
             </Heading>
