@@ -13,6 +13,7 @@ import Row from 'hometown-components-dev/lib/RowHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Section from 'hometown-components-dev/lib/SectionHtV1';
 import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
+import SeoContent from 'hometown-components-dev/lib/SeoContent';
 
 /* ====== Page Components ====== */
 import CommonLayout from 'components/Category/CommonLayout';
@@ -20,7 +21,6 @@ import UnbxdTopSellers from 'components/Category/UnbxdTopSellers';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import MainSlider from 'components/MainSlider';
-import SeoContent from 'components/SeoContent';
 
 const getFaqs = faqs => {
   const seoFaq = faqs.map(({ qus, ans }) => {
@@ -130,15 +130,19 @@ export default class Category extends Component {
               </Section>
             ))}
           {category && (
-            <Section>
-              <UnbxdTopSellers category={category.title} />
-            </Section>
+            <Box display="inline-block" width="100%">
+              <Container>
+                <UnbxdTopSellers category={category.title} />
+              </Container>
+            </Box>
           )}
 
           {/* SEO Content */}
           {seoInfo && seoInfo.seo_text && (
             <SeoContent>
-              <div dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }} />
+              <Container>
+                <div dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }} />
+              </Container>
             </SeoContent>
           )}
 
