@@ -62,6 +62,8 @@ import ProductDetailsCarousel from './Carousel';
 import Video from './Video';
 import ReviewFilter from './ReviewFilter';
 
+import demoIcon from '../../../static/play-button.svg';
+
 /**
  * Images / Icons
  */
@@ -470,6 +472,7 @@ class ProductDetails extends React.Component {
     const {
       color: ProductColor,
       description,
+      demo_product: demoProduct = {},
       main_material: productMainMaterial,
       return: returnAndCancel,
       product_height: height,
@@ -721,6 +724,14 @@ class ProductDetails extends React.Component {
                   {offerImage && !offerImageRedirect && <Image src={offerImage} alt="" width="100%" />}
                 </Box>
               }
+              {demoProduct === '1' ? (
+                <Row ml="0" mr="0" mb="15px" mt="-10px" alignItems="center">
+                  <Image src={demoIcon} alt="Schedule you virtual live demo" width="24px" mr="10px" />
+                  <Text fontSize="14px" color="secondary" display="contents">
+                    Available for demo on the Cart page
+                  </Text>
+                </Row>
+              ) : null}
 
               {/* Add to cart and Buy now buttons */}
               <Row mx={-10}>
