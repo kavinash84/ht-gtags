@@ -208,15 +208,18 @@ class DeliveryAddress extends Component {
       setAddressError3,
       setPincodeError
     } = props;
-    const { addressform } = this.state;
+    // const { addressform } = this.state;
     const fullNameError = isBlank(fullName) || fullNameFeedBackError;
     const emailError = isBlank(email) || emailFeedBackError;
     const phoneError = isBlank(phone) || phoneFeedBackError;
     const pincodeError = isBlank(pincode) || pincodeFeedBackError;
-    const addressError1 = isBlank(address1) || address1FeedBackError1;
-    // addressform ? validateAddress(address1, 'address1').error || address1FeedBackError1 : false;
-    const addressError2 = addressform ? validateAddress(address2, 'address2').error || addressFeedBackError2 : false;
-    const addressError3 = addressform ? validateAddress(address3, 'address3').error || addressFeedBackError3 : false;
+    // const addressError1 = isBlank(address1) || address1FeedBackError1;
+    // // addressform ? validateAddress(address1, 'address1').error || address1FeedBackError1 : false;
+    // const addressError2 = addressform ? validateAddress(address2, 'address2').error || addressFeedBackError2 : false;
+    // const addressError3 = addressform ? validateAddress(address3, 'address3').error || addressFeedBackError3 : false;
+    const addressError1 = validateAddress(address1, 'address1').error || address1FeedBackError1;
+    const addressError2 = validateAddress(address2, 'address2').error || addressFeedBackError2;
+    const addressError3 = validateAddress(address3, 'address3').error || addressFeedBackError3;
     if (fullNameError || emailError || pincodeError || phoneError || addressError1 || addressError2 || addressError3) {
       setNameError(formType, fullNameError);
       setEmailError(formType, emailError);

@@ -130,7 +130,7 @@ const AddressForm = props => {
         <Col variant="col-4">
           <FormInput
             id="add2"
-            label="Area, Colony, Street, Sector"
+            label="Area, Colony, Street, Sector: *"
             type="textarea"
             onChange={e => onChangeAddress2(formType, e.target.value.replace(/#/g, ''))}
             value={address2}
