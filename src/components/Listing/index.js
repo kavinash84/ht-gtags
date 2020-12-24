@@ -281,7 +281,7 @@ class Listing extends React.Component {
 } = this.props;
     // const uniqueFilters = {};
     return (
-      <Box type="block">
+      <Box>
         <TitleBar title={categoryName} productCount={productCount}>
           <BreadCrumb categoryDetails={breadCrumbs} handleCategoryClick={this.handleCategoryClick} />
         </TitleBar>

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
-import Row from 'hometown-components-dev/lib/RowHtV1';
 import Img from 'hometown-components-dev/lib/ImageHtV1';
 import Section from 'hometown-components-dev/lib/SectionHtV1';
 import Container from 'hometown-components-dev/lib/ContainerHtV1';
@@ -39,34 +38,31 @@ const CategoryBar = ({ categoryBar, pathname, handleCategoryClick }) => {
     pathname = pathname.slice(0, -1);
   }
   return (
-    <Section mb="0" p="0">
-      <Container>
-        <Row justifyContent="center" className="categoryBarCarousel" mt="0" mb="-1rem">
-          <SlickSlider settings={adjustSlides()}>
-            {categoryBar &&
-              categoryBar
-                .filter(list => list.show_l4 === '1')
-                .map((item, index) => (
-                  <Box
-                    key={String(index)}
-                    className={`${styles.categoryBlock} ${pathname === `/${item.url_key}` ? styles.active : ''}`}
-                    col="12"
-                    display="flex"
-                    pb="0.625rem"
-                    pt="0.625rem"
-                  >
-                    <Link to={`/${formatLink(item.url_key)}`} key={item.name} onClick={handleCategoryClick}>
-                      <ImageShimmer src={item.icon_url} height="80px">
-                        {imageURL => <Img width="80px" m="auto" src={imageURL} alt={item.name} />}
-                      </ImageShimmer>
-                      <Label mt="0" mb="0" display="block" ta="center">
-                        {item.name}
-                      </Label>
-                    </Link>
-                  </Box>
-                ))}
-          </SlickSlider>
-        </Row>
+    <Section my={0} p={0}>
+      <Container className="categoryBarCarousel">
+        <SlickSlider settings={adjustSlides()}>
+          {categoryBar &&
+            categoryBar
+              .filter(list => list.show_l4 === '1')
+              .map((item, index) => (
+                <Box
+                  key={String(index)}
+                  className={`${styles.categoryBlock} ${pathname === `/${item.url_key}` ? styles.active : ''}`}
+                  py={10}
+                  px={20}
+                  sx={{ textAlign: 'center' }}
+                >
+                  <Link to={`/${formatLink(item.url_key)}`} key={item.name} onClick={handleCategoryClick}>
+                    <ImageShimmer src={item.icon_url} height="80px">
+                      {imageURL => <Img width="80px" m="auto" src={imageURL} alt={item.name} />}
+                    </ImageShimmer>
+                    <Label my={0} sx={{ textAlign: 'center', fontSize: 14, lineHeight: 1.3 }}>
+                      {item.name}
+                    </Label>
+                  </Link>
+                </Box>
+              ))}
+        </SlickSlider>
       </Container>
     </Section>
   );

@@ -6,7 +6,7 @@ import Section from 'hometown-components-dev/lib/SectionHtV1';
 // import Row from 'hometown-components-dev/lib/RowHtV1';
 
 const TitleBar = ({ children }) => (
-  <Section mb="0.625rem" p="1.25rem 0.5rem" bg="bg">
+  <Section my={0} p="24px 10px" bg="bg">
     <Container type="container" pr="0" pl="0">
       {children}
     </Container>
