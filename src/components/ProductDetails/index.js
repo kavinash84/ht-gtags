@@ -468,25 +468,25 @@ class ProductDetails extends React.Component {
       groupedattributes,
       reviews: { count, rating }
     } = product;
-    const { brand: ProductBrand } = meta;
+    // const { brand: ProductBrand } = meta;
     const {
-      color: ProductColor,
+      // color: ProductColor,
       description,
       demo_product: demoProduct = {},
-      main_material: productMainMaterial,
+      // main_material: productMainMaterial,
       return: returnAndCancel,
       product_height: height,
       product_width: width,
       product_depth: depth,
       care_label: careLabel,
-      product_warranty: productWarranty,
+      product_warranty: productWarranty
 
-      family_name: familyName,
-      product_depth: productDepth,
-      product_height: productHeight,
-      product_weight: productWeight,
-      product_width: productWidth,
-      sku_supplier_config: skuSupplierConfig
+      // family_name: familyName,
+      // product_depth: productDepth,
+      // product_height: productHeight,
+      // product_weight: productWeight,
+      // product_width: productWidth,
+      // sku_supplier_config: skuSupplierConfig
     } = attributes;
     const simpleSku = Object.keys(simples)[0];
     const {
@@ -876,7 +876,7 @@ class ProductDetails extends React.Component {
             </Row>
 
             {/* Description */}
-            {activeSpec === 'details' ? (
+            {/* {activeSpec === 'details' ? (
               <Box px="10%" py="2%" sx={{ display: 'flex' }}>
                 <Row>
                   {ProductBrand && (
@@ -945,7 +945,7 @@ class ProductDetails extends React.Component {
                       </Row>
                     </Col>
                   )}
-                  {/* {productWeight && <Col>
+                  {productWeight && <Col>
                     <Row pb={10}>
                       <Col width={188} fontWeight="bold">
                         Product Weight
@@ -953,7 +953,7 @@ class ProductDetails extends React.Component {
                       <Col>{productWeight}</Col>
                     </Row>
                   </Col>
-                  } */}
+                  }
                   {productMainMaterial && (
                     <Col>
                       <Row pb={10}>
@@ -973,6 +973,37 @@ class ProductDetails extends React.Component {
                     </Col>
                   )}
                 </Row>
+              </Box>
+            ) : (
+              <Box px="10%">
+                {description && (
+                  <ProductDesc
+                    desc={activeDescription || ''}
+                    showmore={showmore}
+                    toggleShowMore={this.toggleShowMore}
+                  />
+                )}
+              </Box>
+            )} */}
+            {activeSpec === 'details' ? (
+              <Box px="5%" py="2%" sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+                {groupedAttributes[0].Details.map(detail => {
+                  if (detail.label !== 'Note') {
+                    return (
+                      <Row width="33%">
+                        <Col>
+                          <Row pb={10}>
+                            <Col width={150} fontWeight="bold">
+                              {detail.label}
+                            </Col>
+                            <Col>{detail.value}</Col>
+                          </Row>
+                        </Col>
+                      </Row>
+                    );
+                  }
+                  return null;
+                })}
               </Box>
             ) : (
               <Box px="10%">
