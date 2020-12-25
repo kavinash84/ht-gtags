@@ -225,18 +225,68 @@ export default class HeaderTop extends Component {
               variant="link"
               pl={20}
               onClick={isLoggedIn ? onClick(history) : this.onOpenLoginModal}
+              sx={{
+                '+ div': {
+                  display: 'none',
+                  '&:hover': {
+                    display: 'block'
+                  }
+                },
+                ':hover': {
+                  '& + div': {
+                    display: 'block'
+                  }
+                }
+              }}
             >
               <Flex alignItems="center">
                 <FavIcon />
-                <Text variant="headerLabel">
+                <Text variant="headerLabel" ml={5}>
                   {isLoggedIn ? wishListCount : 0}
                 </Text>
               </Flex>
             </Button>
+            <Box pt={20} className="cart-popover" sx={{ position: 'relative' }}>
+              <Card variant="card.profileMore" width={244}>
+                <Box variant="card.profileMoreWrapper" px={15} py={15}>
+                  <Flex mx={-5} my={-5} sx={{ flexWrap: 'wrap' }}>
+                    <Box px={5} py={5}>
+                      <Image
+                        src="https://www.hometown.in/media/product/53/1253/12483/1-top_sel_160.jpg"
+                        alt=""
+                        width={64}
+                        height={64}
+                        sx={{ border: 'secondary' }}
+                      />
+                    </Box>
+                    <Box px={5} py={5}>
+                      <Image
+                        src="https://www.hometown.in/media/product/53/1253/12483/1-top_sel_160.jpg"
+                        alt=""
+                        width={64}
+                        height={64}
+                      />
+                    </Box>
+                  </Flex>
+                  <Box mt={10} mb={10}>
+                    <Text sx={{ fontSize: 14 }}>Already have a list?</Text>
+                  </Box>
+                  <Flex mx={-5}>
+                    <Box width={1 / 2} px={5}>
+                      <Button as={Link} to={DELIVERY_ADDRESS_URL} width={1}>SIGN IN</Button>
+                    </Box>
+                    <Box width={1 / 2} px={5}>
+                      <Button as={Link} to={CART_URL} variant="outline.primary" width={1}>VIEW ALL</Button>
+                    </Box>
+                  </Flex>
+                </Box>
+              </Card>
+            </Box>
             <Flex
               as={Link}
               to={CART_URL}
               pl={20}
+              alignItems="center"
               sx={{
                 '+ div': {
                   display: 'none',
@@ -252,7 +302,7 @@ export default class HeaderTop extends Component {
               }}
             >
               <CartIcon />
-              <Text variant="headerLabel">{cartCount}</Text>
+              <Text variant="headerLabel" ml={5}>{cartCount}</Text>
             </Flex>
             <Box pt={20} className="cart-popover" sx={{ position: 'relative' }}>
               <Card variant="card.profileMore">
