@@ -143,7 +143,7 @@ export const validateAddress = (value, key) => {
       errorObject.errorMessage = isEmpty(value) ? 'Address 2 can not be empty' : 'Max 40 characters allowed';
       break;
     case 'address3':
-      errorObject.error = value.length > 40;
+      errorObject.error = !isEmpty(value) && value.length > 40;
       errorObject.errorMessage = 'Max 40 characters allowed';
       break;
     default:

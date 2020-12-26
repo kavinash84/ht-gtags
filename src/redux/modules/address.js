@@ -107,7 +107,7 @@ const initialState = {
     addressFeedBackMessage1: 'Address line 1 Cannot be Left Empty !',
     address2: '',
     addressFeedBackError2: false,
-    addressFeedBackMessage2: 'Address 1 Cannot be left Empty !',
+    addressFeedBackMessage2: 'Address 2 Cannot be left Empty !',
     address3: '',
     addressFeedBackError3: false,
     addressFeedBackMessage3: '',
