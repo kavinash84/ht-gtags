@@ -33,8 +33,7 @@ import { ReduxAsyncConnect, Provider } from 'components';
 import axios from 'axios';
 import getCookie from 'utils/cookies';
 import { redirectionHelper } from 'utils/helper';
-// import { PAYMENT_SUCCESS, PAYMENT_FAILURE } from 'helpers/Constants';
-import { PAYMENT_SUCCESS, PAYMENT_FAILURE, PAYMENT_PENDING } from 'helpers/Constants';
+import { PAYMENT_SUCCESS, PAYMENT_FAILURE } from 'helpers/Constants';
 import useragent from 'express-useragent';
 
 const WHITELIST_TO_REDIRECT = new Set([
@@ -138,49 +137,50 @@ app.use('/checkout/finish/payment/', async (req, res) => {
   try {
     const cookies = getCookie(req.header('cookie'), 'persist:root');
     const appData = JSON.parse(JSON.parse(cookies).app);
-    const { sessionId: session, customerId } = appData;
-    const data = req.body;
+    const { sessionId: cookieSession, walletType } = appData;
+    const {
+      body: data,
+      body: { udf1 }
+    } = req;
     const source = req.headers['user-agent'];
     let ua = { isMobile: false };
-    console.log('heres the app data', appData);
-    if (customerId !== '1529678') {
-      if (source) {
-        ua = useragent.parse(source);
-      }
-      let additionalParam = {};
-      if (ua.isMobile) {
-        additionalParam = {
-          ismsite: 1
-        };
-      }
-      const options = {
-        url: process.env.PAYMENT_URL,
-        method: 'POST',
-        headers: {
-          Cookie: `PHPSESSID=${session}; path=/; domain=.hometown.in`,
-          ContentType: 'application/x-www-form-urlencoded'
-        },
-        data: qs.stringify({
-          ...data,
-          ...additionalParam
-        })
+    if (source) {
+      ua = useragent.parse(source);
+    }
+    let additionalParam = {};
+    if (ua.isMobile) {
+      additionalParam = {
+        ismsite: 1
       };
-      const response = await axios(options);
-      if (response && response.data && response.data.status === 'success') {
-        console.log('Payment successfull inside the server');
-        console.log(response.data);
-        return res.redirect(PAYMENT_SUCCESS);
-      }
-      console.log('Getting inside failure');
+    }
+    let session = '';
+    if (walletType) {
+      session = cookieSession;
+    } else session = udf1;
+    const options = {
+      url: process.env.PAYMENT_URL,
+      method: 'POST',
+      headers: {
+        Cookie: `PHPSESSID=${session}; path=/; domain=.hometown.in`,
+        ContentType: 'application/x-www-form-urlencoded'
+      },
+      data: qs.stringify({
+        ...data,
+        ...additionalParam
+      })
+    };
+    const response = await axios(options);
+
+    if (response && response.data && response.data.status === 'success') {
       console.log(response.data);
-      if (response && response.data) {
-        return res.redirect(`${PAYMENT_FAILURE}/?order=${response.data.order_id}`);
-      }
-    } else return res.redirect(PAYMENT_PENDING);
+      return res.redirect(PAYMENT_SUCCESS);
+    }
+
+    if (response && response.data) {
+      return res.redirect(`${PAYMENT_FAILURE}/?order=${response.data.order_id}`);
+    }
   } catch (error) {
-    console.log('Payment failed inside the server');
-    console.log(error);
-    return res.redirect(PAYMENT_PENDING);
+    return res.redirect(`${PAYMENT_FAILURE}`);
   }
 });
 /* eslint-disable max-len */
