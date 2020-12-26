@@ -8,12 +8,15 @@ const LOAD_FAIL = 'app/LOAD_FAIL';
 const SET_CITY = 'app/SET_CITY';
 const SET_ORDER_ID = 'app/SET_ORDER_ID';
 const SET_WALLET_NAME = 'app/SET_WALLET';
+const PAYMENT_LOADED = 'app/PAYMENT_LOADED';
 const initialState = {
   loaded: false,
   sessionId: '',
   city: '',
   orderId: '',
-  walletName: ''
+  walletName: '',
+  walletType: {},
+  paymentLoaded: false
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -30,7 +33,8 @@ export default function reducer(state = initialState, action = {}) {
         loaded: true,
         sessionId: action.result.session,
         csrfToken: action.result.csrfToken,
-        city: action.result.pincode_details && action.result.pincode_details[0].city
+        city:
+          action.result.pincode_details && action.result.pincode_details[0].city
       };
     case LOAD_FAIL:
       return {
@@ -53,7 +57,13 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         orderId: action.id,
-        customerId: action.customerId
+        customerId: action.customerId,
+        walletType: action.walletType
+      };
+    case PAYMENT_LOADED:
+      return {
+        ...state,
+        paymentLoaded: action.status
       };
     default:
       return state;
@@ -66,7 +76,8 @@ const setAppAuth = ({ client }) => async response => {
   await client.setSessionId(session);
 };
 
-export const isLoaded = globalState => globalState.app && globalState.app.loaded;
+export const isLoaded = globalState =>
+  globalState.app && globalState.app.loaded;
 
 export const generateSession = (pincode = PINCODE) => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
@@ -93,8 +104,14 @@ export const setWalletName = name => ({
   name
 });
 
-export const setOrderId = (id, customerId) => ({
+export const setOrderId = (id, customerId, walletType) => ({
   type: SET_ORDER_ID,
   id,
-  customerId
+  customerId,
+  walletType
+});
+
+export const paymentLoaded = status => ({
+  type: PAYMENT_LOADED,
+  status
 });
