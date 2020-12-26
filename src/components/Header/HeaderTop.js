@@ -44,7 +44,7 @@ import ResponsiveModal from 'components/Modal';
 import PinCode from 'components/PinCode';
 import LoginForm from 'components/LoginForms';
 import SignupForm from 'components/Signup/SignupForm';
-import ProductSummaryList from 'components/checkout/ProductSummaryList';
+import ProductSummaryList from 'components/Checkout/ProductSummaryList';
 
 const LogoIcon = require('../../../static/logo@2x.png');
 const PincodeModalIcon = require('../../../static/map-placeholder.svg');
@@ -62,7 +62,8 @@ const onClickLogout = dispatcher => e => {
 @withRouter
 @connect(
   ({
- userLogin, wishlist, cart, router, profile }) => ({
+ userLogin, wishlist, cart, router, profile
+}) => ({
     isLoggedIn: userLogin.isLoggedIn,
     name: profile.data.first_name,
     wishListCount: getWishListCount(wishlist),
@@ -108,31 +109,20 @@ export default class HeaderTop extends Component {
   handleClick = URL => e => {
     e.preventDefault();
     const { history, router } = this.props;
-    history.push(
-      `${URL}/?redirect=${checkRedirection(router.location.pathname)}`
-    );
+    history.push(`${URL}/?redirect=${checkRedirection(router.location.pathname)}`);
   };
 
   render() {
     const {
-      isLoggedIn,
-      history,
-      wishListCount,
-      cartCount,
-      logoutUser,
-      name
-    } = this.props;
+ isLoggedIn, history, wishListCount, cartCount, logoutUser, name
+} = this.props;
 
     return (
       <Box>
         <Row sx={{ alignItems: 'center' }} mx={[0, 0, 0, -16]}>
           <Col width={3 / 12}>
             <Link to={HOME_URL}>
-              <Image
-                height={['auto', 'auto', 28]}
-                src={LogoIcon}
-                alt="Hometown"
-              />
+              <Image height={['auto', 'auto', 28]} src={LogoIcon} alt="Hometown" />
             </Link>
           </Col>
           <Col width={5.5 / 12}>
@@ -168,24 +158,14 @@ export default class HeaderTop extends Component {
                 }
               }}
             >
-              {isLoggedIn ? (
-                <Text variant="headerLabel">Hi {titleCase(name)}</Text>
-              ) : (
-                <UserIcon />
-              )}
+              {isLoggedIn ? <Text variant="headerLabel">Hi {titleCase(name)}</Text> : <UserIcon />}
             </Button>
             <Box pt={20} sx={{ position: 'relative' }}>
               <Card variant="card.profileMore">
                 <Box variant="card.profileMoreWrapper">
                   {!isLoggedIn && (
                     <Fragment>
-                      <Button
-                        as={Link}
-                        to={SIGNUP_URL}
-                        onClick={this.handleClick(SIGNUP_URL)}
-                        mb={15}
-                        width={175}
-                      >
+                      <Button as={Link} to={SIGNUP_URL} onClick={this.handleClick(SIGNUP_URL)} mb={15} width={175}>
                         Sign Up
                       </Button>
                       <Text mb={6} textAlign="center">
@@ -273,10 +253,14 @@ export default class HeaderTop extends Component {
                   </Box>
                   <Flex mx={-5}>
                     <Box width={1 / 2} px={5}>
-                      <Button as={Link} to={DELIVERY_ADDRESS_URL} width={1}>SIGN IN</Button>
+                      <Button as={Link} to={DELIVERY_ADDRESS_URL} width={1}>
+                        SIGN IN
+                      </Button>
                     </Box>
                     <Box width={1 / 2} px={5}>
-                      <Button as={Link} to={CART_URL} variant="outline.primary" width={1}>VIEW ALL</Button>
+                      <Button as={Link} to={CART_URL} variant="outline.primary" width={1}>
+                        VIEW ALL
+                      </Button>
                     </Box>
                   </Flex>
                 </Box>
@@ -302,11 +286,15 @@ export default class HeaderTop extends Component {
               }}
             >
               <CartIcon />
-              <Text variant="headerLabel" ml={5}>{cartCount}</Text>
+              <Text variant="headerLabel" ml={5}>
+                {cartCount}
+              </Text>
             </Flex>
             <Box pt={20} className="cart-popover" sx={{ position: 'relative' }}>
               <Card variant="card.profileMore">
-                <Box bg="bgOffer" px={20} py={8} sx={{ fontSize: 16, color: 'white' }}>3 items in your cart</Box>
+                <Box bg="bgOffer" px={20} py={8} sx={{ fontSize: 16, color: 'white' }}>
+                  3 items in your cart
+                </Box>
                 <Box variant="card.profileMoreWrapper" px={0}>
                   <Box
                     mb={10}
@@ -344,8 +332,12 @@ export default class HeaderTop extends Component {
                     </Flex>
                   </Box>
                   <Box px={16}>
-                    <Button width={1} as={Link} to={DELIVERY_ADDRESS_URL} mb={10}>CHECKOUT NOW</Button>
-                    <Button width={1} as={Link} to={CART_URL} variant="outline.primary">VIEW CART</Button>
+                    <Button width={1} as={Link} to={DELIVERY_ADDRESS_URL} mb={10}>
+                      CHECKOUT NOW
+                    </Button>
+                    <Button width={1} as={Link} to={CART_URL} variant="outline.primary">
+                      VIEW CART
+                    </Button>
                   </Box>
                 </Box>
               </Card>
@@ -360,13 +352,7 @@ export default class HeaderTop extends Component {
           open={this.state.openPincode}
         >
           <Box textAlign="center">
-            <Image
-              width="100px"
-              m="auto"
-              mb="1.5rem"
-              src={PincodeModalIcon}
-              alt="Pincode"
-            />
+            <Image width="100px" m="auto" mb="1.5rem" src={PincodeModalIcon} alt="Pincode" />
             <Heading fontSize={20} lineHeight={1.3} mb="1rem">
               Please enter your Pincode to serve you better
             </Heading>
