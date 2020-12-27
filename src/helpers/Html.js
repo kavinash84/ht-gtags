@@ -47,25 +47,25 @@ export default class Html extends Component {
       url: 'https://praxisretail.my.salesforce.com',
       liveAgentUrl: 'https://praxisretail.secure.force.com/LiveAgent',
       version: '00D7F000006O16S',
-      baseLiveAgentContentURL: 'https://c.la1-c1-hnd.salesforceliveagent.com/content',
+      baseLiveAgentContentURL: 'https://c.la2-c2-hnd.salesforceliveagent.com/content',
       deploymentId: '5727F0000009ARB',
-      buttonId: '5737F00000093Ue',
-      baseLiveAgentURL: 'https://d.la1-c1-hnd.salesforceliveagent.com/chat',
+      buttonId: '5732y000000PHDP',
+      baseLiveAgentURL: 'https://d.la2-c2-hnd.salesforceliveagent.com/chat',
       eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I7F0000004DjiUAE_16c51bfeb82',
       jsUrl: 'https://praxisretail.my.salesforce.com/embeddedservice/5.0/esw.min.js'
     };
 
     if (process.env.SF_ENV && process.env.SF_ENV !== 'production') {
       SF_CHAT = {
-        url: 'https://praxisretail--devbox.cs6.my.salesforce.com',
+        url: 'https://praxisretail--devbox.my.salesforce.com',
         liveAgentUrl: 'https://devbox-praxisretail.cs6.force.com/LiveAgent',
         version: '00DN0000000Qxcj',
-        baseLiveAgentContentURL: 'https://c.la1-c2cs-hnd.salesforceliveagent.com/content',
-        deploymentId: '572N000000000PC',
-        buttonId: '573N000000000Ub',
-        baseLiveAgentURL: 'https://d.la1-c2cs-hnd.salesforceliveagent.com/chat',
+        baseLiveAgentContentURL: 'https://c.la1-c1cs-ukb.salesforceliveagent.com/content',
+        deploymentId: '572N000000000PH',
+        buttonId: '573N00000008PRm',
+        baseLiveAgentURL: 'https://d.la1-c1cs-ukb.salesforceliveagent.com/chat',
         eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04IN0000000002MMAQ_168ff82d2a7',
-        jsUrl: 'https://praxisretail--devbox.cs6.my.salesforce.com/embeddedservice/5.0/esw.min.js'
+        jsUrl: 'https://praxisretail--devbox.my.salesforce.com/embeddedservice/5.0/esw.min.js'
       };
     }
     let unbxdScripts = {
@@ -187,7 +187,157 @@ export default class Html extends Component {
                   font-family: 'Salesforce Sans';
                   src: url('https://www.sfdcstatic.com/system/shared/common/assets/fonts/SalesforceSans/SalesforceSans-Regular.woff') format('woff'),
                   url('https://www.sfdcstatic.com/system/shared/common/assets/fonts/SalesforceSans/SalesforceSans-Regular.ttf') format('truetype');
-                }`
+                }
+                #custom_snapins_invite {
+                  background-color: #FFFFFF;
+                  font-family: "Salesforce Sans", sans-serif;
+                  overflow: visible;
+                  border-radius: 8px;
+                  /* visibility: visible; */
+                  position: fixed;
+                  bottom: 60px;
+                  right: 15px;
+                }
+
+                .embeddedServiceInvitation {
+                  background-color: transparent;
+                  max-width: 290px;
+                  max-height: 210px;
+                  -webkit-box-shadow: 0 7px 12px rgba(0, 0, 0, 0.28);
+                  -moz-box-shadow: 0 7px 12px rgba(0, 0, 0, 0.28);
+                  box-shadow: 0 7px 12px rgba(0, 0, 0, 0.28);
+                }
+
+                @media only screen and (min-width: 48em) {
+
+                  /*mobile*/
+                  .embeddedServiceInvitation {
+                    max-width: 332px;
+                    max-height: 210px;
+                  }
+                }
+
+                .embeddedServiceInvitation>.embeddedServiceInvitationHeader {
+                  width: inherit;
+                  height: 50px;
+                  line-height: 32px;
+                  padding: 10px;
+                  color: #FFFFFF;
+                  background-color: #515151;
+                  overflow: initial;
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: stretch;
+                  border-top-left-radius: 8px;
+                  border-top-right-radius: 8px;
+                }
+
+                .embeddedServiceInvitationHeader #embeddedServiceAvatar {
+                  width: 32px;
+                  height: 32px;
+                  border-radius: 50%;
+                }
+
+                .embeddedServiceInvitationHeader .embeddedServiceTitleText {
+                  font-size: 18px;
+                  color: #FFFFFF;
+                  overflow: hidden;
+                  word-wrap: normal;
+                  white-space: nowrap;
+                  text-overflow: ellipsis;
+                  align-self: stretch;
+                  flex-grow: 1;
+                  max-width: 100%;
+                  margin: 0 12px;
+                }
+
+                .embeddedServiceInvitationHeader .embeddedServiceCloseIcon {
+                  border: none;
+                  border-radius: 3px;
+                  cursor: pointer;
+                  position: relative;
+                  bottom: 3%;
+                  background-color: transparent;
+                  width: 32px;
+                  height: 32px;
+                  font-size: 23px;
+                  color: #FFFFFF;
+                }
+
+                .embeddedServiceInvitationHeader .embeddedServiceCloseIcon:focus {
+                  outline: none;
+                }
+
+                .embeddedServiceInvitationHeader .embeddedServiceCloseIcon:focus::before {
+                  content: " ";
+                  position: absolute;
+                  top: 11%;
+                  left: 7%;
+                  width: 85%;
+                  height: 85%;
+                  background-color: rgba(255, 255, 255, 0.2);
+                  border-radius: 4px;
+                  pointer-events: visible;
+                }
+
+                .embeddedServiceInvitationHeader .embeddedServiceCloseIcon:active,
+                .embeddedServiceCloseIcon:hover {
+                  background-color: #FFFFFF;
+                  color: rgba(0, 0, 0, 0.7);
+                  opacity: 0.7;
+                }
+
+                .embeddedServiceInvitation>.embeddedServiceInvitationBody {
+                  background-color: #FFFFFF;
+                  max-height: 110px;
+                  min-width: 260px;
+                  margin: 0 8px;
+                  font-size: 14px;
+                  line-height: 20px;
+                  overflow: auto;
+                }
+
+                .embeddedServiceInvitationBody p {
+                  color: #333333;
+                  padding: 8px;
+                  margin: 12px 0;
+                }
+
+                .embeddedServiceInvitation>.embeddedServiceInvitationFooter {
+                  width: inherit;
+                  color: #FFFFFF;
+                  text-align: right;
+                  background-color: #FFFFFF;
+                  // padding: 10px;
+                  max-height: 50px;
+                  border-bottom-left-radius: 8px;
+                  border-bottom-right-radius: 8px;
+                }
+
+                .embeddedServiceInvitationFooter>.embeddedServiceActionButton {
+                  font-size: 14px;
+                  max-height: 40px;
+                  border: none;
+                  border-radius: 4px;
+                  padding: 10px;
+                  margin: 4px;
+                  text-align: center;
+                  text-decoration: none;
+                  display: inline-block;
+                  cursor: pointer;
+                  background-color: #515151;
+                }
+
+                .embeddedServiceInvitationFooter>#acceptInvite {
+                  background-color: #333333;
+                  color: #FFFFFF;
+                }
+
+                .embeddedServiceInvitationFooter>#rejectInvite {
+                  background-color: #FFFFFF;
+                  color: #333333;
+                }
+                `
             }}
           />
         </head>

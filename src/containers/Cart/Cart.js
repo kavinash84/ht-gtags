@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
  */
 import { resetCheck } from 'redux/modules/cart';
 import { getCartList, getStockOutProducts } from 'selectors/cart';
+import { togglePopUp } from 'redux/modules/webtochat';
 
 /**
  * Components
@@ -46,7 +47,7 @@ const demoProductsBanner = cart => {
   ({
  cart, cart: {
  cartChecked, summary, error, loading, loaded
-}
+}, webtochat: { dismiss, cartTimeout }
 }) => ({
     results: getCartList(cart),
     outOfStockList: getStockOutProducts(cart),
@@ -54,10 +55,13 @@ const demoProductsBanner = cart => {
     summary,
     error,
     loading,
-    loaded
+    loaded,
+    dismiss,
+    cartTimeout
   }),
   {
-    resetCheckKey: resetCheck
+    resetCheckKey: resetCheck,
+    toggleWebToChat: togglePopUp
   }
 )
 export default class CartContainer extends Component {
@@ -69,7 +73,10 @@ export default class CartContainer extends Component {
     history: PropTypes.object.isRequired,
     resetCheckKey: PropTypes.func.isRequired,
     loading: PropTypes.bool,
-    loaded: PropTypes.bool
+    loaded: PropTypes.bool,
+    dismiss: PropTypes.bool,
+    cartTimeout: PropTypes.number.isRequired,
+    toggleWebToChat: PropTypes.func.isRequired
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -80,14 +87,21 @@ export default class CartContainer extends Component {
     isCartChecked: false,
     outOfStockList: [],
     loading: false,
-    loaded: false
+    loaded: false,
+    dismiss: false
   };
   state = {
-    openPincode: false
+    openPincode: false,
+    popUpTimeoutId: null
   };
 
   componentDidMount() {
+    const { cartTimeout } = this.props;
     window.scroll(0, 0);
+    console.log(cartTimeout, 'cartTimeout');
+    const popUpTimeoutId = setTimeout(this.webToChat, cartTimeout);
+    // eslint-disable-next-line react/no-did-mount-set-state
+    this.setState({ popUpTimeoutId });
   }
   componentWillReceiveProps(nextProps) {
     const { isCartChecked, history, resetCheckKey } = this.props;
@@ -97,6 +111,13 @@ export default class CartContainer extends Component {
       return history.push('/checkout/delivery-address');
     }
   }
+  componentWillUnmount() {
+    console.log('componentWillUnmount function in cart');
+    const { toggleWebToChat } = this.props;
+    const { popUpTimeoutId } = this.state;
+    clearTimeout(popUpTimeoutId);
+    toggleWebToChat(false);
+  }
   handlePincodeModal = e => {
     if (e) {
       e.preventDefault();
@@ -104,6 +125,16 @@ export default class CartContainer extends Component {
     this.setState({
       openPincode: !this.state.openPincode
     });
+  };
+  webToChat = () => {
+    // const { dispatch } = this.context.store;
+    const { toggleWebToChat, dismiss } = this.props;
+
+    const {
+      embedded_svc: { liveAgentAPI: { inviteButton: { isAvailable } = {} } = {} }
+    } = window;
+    console.log(isAvailable, !dismiss, 'webToChat function');
+    if (isAvailable && !dismiss) toggleWebToChat(true);
   };
   render() {
     const {
