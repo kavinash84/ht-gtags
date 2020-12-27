@@ -185,6 +185,7 @@ export default class HeaderTop extends Component {
                         onClick={this.handleClick(SIGNUP_URL)}
                         mb={15}
                         width={175}
+                        lineHeight={1.25}
                       >
                         Sign Up
                       </Button>

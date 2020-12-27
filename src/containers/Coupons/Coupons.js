@@ -11,7 +11,7 @@ import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 import Footer from 'components/Footer';
 import Header from 'components/Header';
 import MyMenu from 'components/MyMenu';
-import CouponsContainer from 'newComponents/Coupons';
+import CouponsContainer from 'components/Coupons';
 import DashboardHeader from './../DashbordHeader/Header';
 
 const Coupons = () => (
@@ -21,7 +21,7 @@ const Coupons = () => (
       <Header />
 
       {/* Container */}
-      <Container pt={80}>
+      <Container pt={64}>
         <DashboardHeader />
         <Row>
           <Col variant="col-2" pr={30}>
