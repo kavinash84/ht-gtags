@@ -192,14 +192,15 @@ export const login = data => ({
     }
   }
 });
-export const googleLogin = (result, session, phone) => (dispatch, getState) =>
+export const googleLogin = (result, session, phone, username = null) => (dispatch, getState) =>
   dispatch({
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
     promise: async ({ client }) => {
       const {
         userLogin: { tokenData }
       } = getState();
-      const data = phone && tokenData.tokenId ? tokenData : result;
+      // const data = phone && tokenData.tokenId ? tokenData : result;
+      const data = (phone || username) && tokenData.tokenId ? tokenData : result;
       try {
         const {
           tokenId,
@@ -212,7 +213,8 @@ export const googleLogin = (result, session, phone) => (dispatch, getState) =>
           grant_type: 'password',
           session_id: session,
           phone,
-          full_name: name
+          full_name: name,
+          username
         };
         const response = await client.post(GOOGLE_LOGIN_API, postData);
         await setToken({ client })(response);

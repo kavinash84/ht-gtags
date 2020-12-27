@@ -373,6 +373,7 @@ export default class LoginFormContainer extends Component {
               <GoogleLoginBtn
                 askContact={askContact}
                 loginType={loginType}
+                askName={askName}
                 loading={loading}
                 loggingIn={loggingIn}
               />

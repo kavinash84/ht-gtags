@@ -179,3 +179,35 @@ export const validateVPA = vpa => /^[.a-zA-Z0-9\-_]{3,}@[A-Za-z0-9]+$/.test(vpa)
 //     name
 //   );
 /* eslint-enable */
+export const validateName = fullName => {
+  const nameSplit = fullName.trim().split(' ');
+  const firstName = nameSplit[0];
+  const lastName = nameSplit.splice(1).join(' ');
+
+  if (isEmpty(fullName)) {
+    return {
+      msg: 'Name Cannot be Left Empty !',
+      error: true
+    };
+  }
+  if (checkSpecialChar(fullName)) {
+    return {
+      msg: 'Numbers and special characters are not allowed !',
+      error: true
+    };
+  }
+  if (firstName.length > 50) {
+    return {
+      msg: 'First Name cannot be more than 50 characters',
+      error: true
+    };
+  }
+
+  if (lastName.length > 50) {
+    return {
+      msg: 'Last Name cannot be more than 50 characters',
+      error: true
+    };
+  }
+  return false;
+};

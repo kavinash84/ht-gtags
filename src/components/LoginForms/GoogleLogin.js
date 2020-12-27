@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -6,7 +7,7 @@ import ResponsiveModal from 'components/Modal';
 import GoogleLoginBtn from 'react-google-login';
 
 /* ====== Validations ====== */
-import { validateMobile } from 'utils/validation';
+import { validateMobile, validateName } from 'utils/validation';
 
 /* ====== Helpers ====== */
 import { allowNChar, allowTypeOf } from 'utils/helper';
@@ -22,10 +23,14 @@ import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 
+import UpdateName from './UpdateName';
+import UpdateContacts from './UpdateContacts';
+
 const LoaderIcon = require('../../../static/refresh-black.svg');
 
 const mapStateToProps = ({ app }) => ({
-  session: app.sessionId
+  session: app.sessionId,
+  userLogin: app.userLogin
 });
 
 const onSuccess = (dispatcher, session, phone) => result => {
@@ -33,6 +38,7 @@ const onSuccess = (dispatcher, session, phone) => result => {
 };
 
 const onError = error => e => {
+  console.log('Error occuried');
   console.log(error, e);
 };
 
@@ -53,7 +59,13 @@ class GoogleLogin extends Component {
     this.state = {
       phone: '',
       phoneError: false,
-      phoneErrorMessage: 'Enter Valid 10 Digit Phone Number'
+      phoneErrorMessage: 'Enter Valid 10 Digit Phone Number',
+      firstName: '',
+      firstNameError: false,
+      firstNameErrorMessage: 'Please enter a valid first name',
+      lastName: '',
+      lastNameError: false,
+      lastNameErrorMessage: 'Please enter a valid last name'
     };
   }
   onChangePhone = e => {
@@ -71,6 +83,34 @@ class GoogleLogin extends Component {
         value[0] === '0' ? 'Mobile Number Must Not Start With 0' : 'Enter 10 Digits Valid Mobile Number'
     });
   };
+
+  onChangeFirstName = e => {
+    const {
+      target: { value }
+    } = e;
+  
+    let isInvalid = validateName(value).error;
+    isInvalid = !isInvalid ? value.includes('customer') : true;
+    // if (isInvalid) {
+      return this.setState({
+        firstName: value,
+        firstNameError: isInvalid
+      });
+    // }
+    };
+    onChangeLastName = e => {
+      const {
+        target: { value }
+      } = e;
+    
+      let isInvalid = validateName(value).error;
+      isInvalid = !isInvalid ? value.includes('customer') : true;
+      this.setState({
+        lastName: value,
+        lastNameError: isInvalid
+      });
+    };
+
   handleModal = () => {
     this.props.clearLogin();
   };
@@ -81,10 +121,23 @@ class GoogleLogin extends Component {
   };
   render() {
     const {
- loginViaLogin, session, askContact, loginType, loggingIn
+ loginViaLogin, session, askContact, askName, loginType, loggingIn
 } = this.props;
-    const { phone, phoneError, phoneErrorMessage } = this.state;
-    const open = askContact && loginType && loginType === 'google';
+    // const { phone, phoneError, phoneErrorMessage } = this.state;
+    // const open = askContact && loginType && loginType === 'google';
+    const {
+      // eslint-disable-next-line max-len
+      phone,
+      phoneError,
+      phoneErrorMessage,
+      firstName,
+      firstNameError,
+      firstNameErrorMessage,
+      lastName,
+      lastNameError,
+      lastNameErrorMessage
+    } = this.state;
+    const open = (askContact || askName) && loginType && loginType === 'google';
 
     return (
       <Box>
@@ -112,47 +165,140 @@ class GoogleLogin extends Component {
           GOOGLE
         </Box>
         <ResponsiveModal classNames={{ modal: 'updateProfileModal' }} onCloseModal={this.handleModal} open={open}>
-          <Row>
+          {/* <Row>
             <Box variant="col-12">
               <Heading>Update Profile</Heading>
-              <Text>Mobile number is required to login</Text>
-            </Box>
-          </Row>
-          <Text>
-            <form
-              onSubmit={this.onSubmitForm}
-              id="custom_form"
-              name="custom_form"
-              encType="multipart/form-data"
-              className="bulk-order-form"
-            >
-              <FormInputHtV1
-                label=""
-                type="text"
-                placeholder=""
-                onChange={this.onChangePhone}
-                value={phone}
-                feedBackError={phoneError}
-                feedBackMessage={phoneErrorMessage}
+              <Text>Mobile number is required to login</Text> */}
+            {askName && askContact ? (
+              <UpdateContacts
+                session={session}
+                loggingIn={loggingIn}
+                LoaderIcon={LoaderIcon}
+                firstName={firstName}
+                firstNameError={firstNameError}
+                firstNameErrorMessage={firstNameErrorMessage}
+                lastName={lastName}
+                lastNameError={lastNameError}
+                lastNameErrorMessage={lastNameErrorMessage}
+                phone={phone}
+                phoneError={phoneError}
+                phoneErrorMessage={phoneErrorMessage}
+                onChangeFirstName={this.onChangeFirstName}
+                onChangeLastName={this.onChangeLastName}
+                onChangePhone={this.onChangePhone}
+                loginViaLogin={loginViaLogin}
               />
-            </form>
-            <GoogleLoginBtn
-              disabled={this.isValid()}
-              className="google-login-btn"
-              clientId="663311547699-jersj1hfflbl8gfukgsuvug8u1gc88nm.apps.googleusercontent.com"
-              onSuccess={onSuccess(loginViaLogin, session, phone)}
-              onFailure={onError}
-            >
-              {loggingIn ? (
-                <span>
-                  Please Wait
-                  <Image className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />
-                </span>
-              ) : (
-                'Update Contact Number'
-              )}
-            </GoogleLoginBtn>
-          </Text>
+            ) : askName ? (
+              <UpdateName
+                session={session}
+                loggingIn={loggingIn}
+                LoaderIcon={LoaderIcon}
+                firstName={firstName}
+                firstNameError={firstNameError}
+                firstNameErrorMessage={firstNameErrorMessage}
+                lastName={lastName}
+                lastNameError={lastNameError}
+                lastNameErrorMessage={lastNameErrorMessage}
+                onChangeFirstName={this.onChangeFirstName}
+                onChangeLastName={this.onChangeLastName}
+                loginViaLogin={loginViaLogin}
+                // onSubmitForm={this.onSubmitForm}
+              />
+            ) : askContact ? (
+              <Box>
+                <Row display="block" mr="0" ml="0" mb="10px">
+                  <Div col="12" ta="center">
+                    <Heading
+                      color="color676767"
+                      mt="0"
+                      mb="0"
+                      fontWeight="400"
+                      fontSize="26px"
+                      ta="center"
+                      fontFamily="light"
+                    >
+                      {'Update Profile'}
+                    </Heading>
+                    <Text color="color676767" ta="center">
+                      {'Mobile number is required to login'}
+                    </Text>
+                  </Div>
+                </Row>
+                <Div ta="center">
+                  <Text ta="center" fontSize="1.25rem" mb="0.625rem" mt="0" color="rgba(51, 51, 51, 0.85)">
+                    <form
+                      onSubmit={this.onSubmitForm}
+                      id="custom_form"
+                      name="custom_form"
+                      encType="multipart/form-data"
+                      className="bulk-order-form"
+                    >
+                      <FormInput
+                        label=""
+                        type="text"
+                        placeholder=""
+                        onChange={this.onChangePhone}
+                        value={phone}
+                        feedBackError={phoneError}
+                        feedBackMessage={phoneErrorMessage}
+                      />
+                    </form>
+                    <button
+                      disabled={this.isValid()}
+                      className="google-login-btn"
+                      onClick={e => {
+                        e.preventDefault();
+                        loginViaLogin({}, session, phone);
+                      }}
+                    >
+                      {loggingIn ? (
+                        <span>
+                          Please Wait
+                          <Img className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />
+                        </span>
+                      ) : (
+                        'Update Contact Number'
+                      )}
+                    </button>
+                  </Text>
+                </Div>
+              </Box>
+          //   </Row>  
+          //   <form
+          //     onSubmit={this.onSubmitForm}
+          //     id="custom_form"
+          //     name="custom_form"
+          //     encType="multipart/form-data"
+          //     className="bulk-order-form"
+          //   >
+          //     <FormInputHtV1
+          //       label=""
+          //       type="text"
+          //       placeholder=""
+          //       onChange={this.onChangePhone}
+          //       value={phone}
+          //       feedBackError={phoneError}
+          //       feedBackMessage={phoneErrorMessage}
+          //     />
+          //   </form>
+          //   <GoogleLoginBtn
+          //     disabled={this.isValid()}
+          //     className="google-login-btn"
+          //     clientId="663311547699-jersj1hfflbl8gfukgsuvug8u1gc88nm.apps.googleusercontent.com"
+          //     onSuccess={onSuccess(loginViaLogin, session, phone)}
+          //     onFailure={onError}
+          //   >
+          //     {loggingIn ? (
+          //       <span>
+          //         Please Wait
+          //         <Image className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />
+          //       </span>
+          //     ) : (
+          //       'Update Contact Number'
+          //     )}
+          //   </GoogleLoginBtn>
+          // </Text>
+          ) : null}
         </ResponsiveModal>
       </Box>
     );
@@ -164,6 +310,7 @@ GoogleLogin.propTypes = {
   clearLogin: PropTypes.func.isRequired,
   session: PropTypes.string.isRequired,
   askContact: PropTypes.bool.isRequired,
+  askName: PropTypes.bool.isRequired,
   loginType: PropTypes.string.isRequired,
   loggingIn: PropTypes.bool.isRequired
 };
