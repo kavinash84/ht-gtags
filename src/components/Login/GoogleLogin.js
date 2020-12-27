@@ -157,8 +157,8 @@ class GoogleLogin extends Component {
             <Box variant="col-12">
               <Heading>Update Profile</Heading>
               <Text>Mobile number is required to login</Text> */}
-              {askName && askContact ? (
-             <UpdateContacts
+          {askName && askContact ? (
+            <UpdateContacts
               session={session}
               loggingIn={loggingIn}
               LoaderIcon={LoaderIcon}
@@ -176,7 +176,7 @@ class GoogleLogin extends Component {
               onChangePhone={this.onChangePhone}
               loginViaLogin={loginViaLogin}
             />
-         ) : askName ? (
+          ) : askName ? (
             <UpdateName
               session={session}
               loggingIn={loggingIn}
@@ -196,12 +196,8 @@ class GoogleLogin extends Component {
             <Box>
               <Row>
                 <Box variant="col-12">
-                  <Heading>
-                    {'Update Profile'}
-                  </Heading>
-                  <Text>
-                    {'Mobile number is required to login'}
-                  </Text>
+                  <Heading>{'Update Profile'}</Heading>
+                  <Text>{'Mobile number is required to login'}</Text>
                 </Box>
               </Row>
               <Text>
@@ -248,7 +244,7 @@ class GoogleLogin extends Component {
                 </GoogleLoginBtn>
               </Text>
             </Box>
-          // </Row>
+          ) : // </Row>
           // <Text>
           //   <form
           //     onSubmit={this.onSubmitForm}
@@ -285,7 +281,7 @@ class GoogleLogin extends Component {
           //     )}
           //   </button>
           // </Text>
-          ) : null}
+          null}
         </ResponsiveModal>
       </Box>
     );

@@ -58,12 +58,8 @@ const LoginModal = props => {
     <div>
       <Row>
         <Box variant="col-12">
-          <Heading>
-            {'Update Profile'}
-          </Heading>
-          <Text>
-            {'Contact information is required to login'}
-          </Text>
+          <Heading>{'Update Profile'}</Heading>
+          <Text>{'Contact information is required to login'}</Text>
         </Box>
       </Row>
       <Text>
@@ -115,10 +111,10 @@ const LoginModal = props => {
           className="google-login-btn"
           clientId="663311547699-jersj1hfflbl8gfukgsuvug8u1gc88nm.apps.googleusercontent.com"
           onSuccess={() => {
-              const username = `${firstName} ${lastName}`;
-              console.log(!isValid(), session, phone, username);
-              loginViaLogin({}, session, phone, username);
-            }}
+            const username = `${firstName} ${lastName}`;
+            console.log(!isValid(), session, phone, username);
+            loginViaLogin({}, session, phone, username);
+          }}
           onFailure={onError}
         >
           {loggingIn ? (

@@ -52,12 +52,8 @@ const LoginModal = props => {
     <div>
       <Row>
         <Box variant="col-12">
-          <Heading>
-            {'Update Profile'}
-          </Heading>
-          <Text>
-            {'Name is required to login'}
-          </Text>
+          <Heading>{'Update Profile'}</Heading>
+          <Text>{'Name is required to login'}</Text>
         </Box>
       </Row>
       <Text>
@@ -102,8 +98,8 @@ const LoginModal = props => {
           onSuccess={() => {
             console.log(!isValid());
             const username = `${firstName} ${lastName}`;
-            loginViaLogin({}, session, null, username);}
-          }
+            loginViaLogin({}, session, null, username);
+          }}
           onFailure={onError}
         >
           {loggingIn ? (
