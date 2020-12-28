@@ -234,11 +234,7 @@ class GoogleLogin extends Component {
                   disabled={this.isValid()}
                   className="google-login-btn"
                   clientId="663311547699-jersj1hfflbl8gfukgsuvug8u1gc88nm.apps.googleusercontent.com"
-                  onSuccess={() => {
-                    console.log(!this.isValid());
-                    const username = `${firstName} ${lastName}`;
-                    loginViaLogin({}, session, null, username);
-                  }}
+                  onSuccess={onSuccess(loginViaLogin, session, phone)}
                   onFailure={onError}
                 >
                   {loggingIn ? (
