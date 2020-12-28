@@ -44,7 +44,9 @@ const OrderSummary = ({
   selectedForDemo
 }) => (
   <Row>
-    <Box col="12">{!hidecoupon && <Coupon />}</Box>
+    <Box variant="col-12" mb="1.25rem">
+      {!hidecoupon && <Coupon />}
+    </Box>
     {selectedForDemo && (
       <Row ml="0" mr="0" mb="1rem" alignItems="center" flexWrap="no-wrap" width="100%">
         <Image src={playButton} alt="Schedule store demo for selected products" height="32px" mr="10px" width="auto" />
@@ -81,6 +83,7 @@ const OrderSummary = ({
     <Box
       mb={20}
       mt={20}
+      mx={15}
       width={1}
       sx={{
         borderBottom: 'divider'

@@ -32,6 +32,7 @@ import {
   setValidationError,
   resetEasyEmiState
 } from 'redux/modules/paymentoptions';
+import { paymentLoaded } from 'redux/modules/app';
 import { getCartList, getNotDelivered, getStockOutProducts } from 'selectors/cart';
 
 /**
@@ -52,18 +53,23 @@ import UpiForm from './UpiForm';
  * Icon
  */
 const calendarImage = require('../../../static/calendar.svg');
-// const assemblyIcon = require('../../../static/cube-of-notes-stack.svg');
 
 const cartStyles = require('../Cart/Cart.scss');
 
-// const nextStep = history => e => {
-//   e.preventDefault();
-//   history.push('/checkout/review-order');
-// };
-
-const nextStep = (dispatcher, sessionId, paymentData, cardType) => e => {
+const nextStep = (
+  dispatcher,
+  paymentload,
+  sessionId,
+  paymentData,
+  cardType,
+  selectedGateway,
+  paymentMethodDetails
+) => e => {
   e.preventDefault();
-  dispatcher(sessionId, paymentData, cardType);
+  let walletType = '';
+  if (selectedGateway === 'Wallet') walletType = paymentMethodDetails[selectedGateway].walletName;
+  paymentload(false);
+  dispatcher(sessionId, paymentData, cardType, selectedGateway, walletType);
 };
 
 const onChangeDetails = (dispatcher, gateway) => e => {
@@ -90,6 +96,7 @@ class PaymentOptions extends Component {
       selectedGateway,
       toggleGateway,
       setPaymentDetails,
+      paymentLoadedStatus,
       summary,
       submitting,
       history,
@@ -432,7 +439,15 @@ class PaymentOptions extends Component {
                   height={48}
                   fontSize={18}
                   width={1}
-                  onClick={nextStep(submitDetails, session, paymentDetails, cardType)}
+                  onClick={nextStep(
+                    submitDetails,
+                    paymentLoadedStatus,
+                    session,
+                    paymentDetails,
+                    cardType,
+                    selectedGateway,
+                    paymentDetails
+                  )}
                   disabled={
                     validateInput(paymentDetails) ||
                     validatePaymentDetails(paymentDetails) ||
@@ -473,6 +488,7 @@ PaymentOptions.defaultProps = {
 
 PaymentOptions.propTypes = {
   selectedGateway: PropTypes.string,
+  paymentLoadedStatus: PropTypes.func.isRequired,
   data: PropTypes.array,
   toggleGateway: PropTypes.func.isRequired,
   setPaymentDetails: PropTypes.func.isRequired,
@@ -525,7 +541,8 @@ const mapDispatchToProps = dispatch =>
       validateForm: checkPaymentDetails,
       submitDetails: submitPaymentDetails,
       setError: setValidationError,
-      resetEasyEmi: resetEasyEmiState
+      resetEasyEmi: resetEasyEmiState,
+      paymentLoadedStatus: paymentLoaded
     },
     dispatch
   );

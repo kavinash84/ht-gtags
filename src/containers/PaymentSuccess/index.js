@@ -1,15 +1,14 @@
 import { provideHooks } from 'redial';
 import HomeTownLoader from 'containers/Loader';
-import { setOrderId } from 'redux/modules/app';
-import { isLoaded as isPaymentStatusLoaded } from 'redux/modules/paymentstatus';
+import { isLoaded as isPaymentStatusLoaded, load } from 'redux/modules/paymentstatus';
 
 const hooks = {
   fetch: async ({ store: { dispatch, getState } }) => {
     const {
-      app: { orderId }
+      app: { sessionId }
     } = getState();
-    if (orderId && isPaymentStatusLoaded(getState())) {
-      await dispatch(setOrderId(''));
+    if (sessionId && !isPaymentStatusLoaded(getState())) {
+      await dispatch(load(sessionId));
     }
   }
 };

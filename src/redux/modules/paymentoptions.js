@@ -511,7 +511,7 @@ const submitPaymentDetailsEasyEmi = (sessionId, data, cardType) => ({
   cardType
 });
 
-export const submitPaymentDetails = (sessionId, data, cardType, success) => {
+export const submitPaymentDetails = (sessionId, data, cardType, selectedGateway, walletType, success) => {
   if (data && 'EasyEmi' in data && (!success || success === undefined)) {
     return submitPaymentDetailsEasyEmi(sessionId, data, cardType);
   }
@@ -526,8 +526,10 @@ export const submitPaymentDetails = (sessionId, data, cardType, success) => {
         throw error;
       }
     },
+    walletType,
     data,
-    cardType
+    cardType,
+    selectedGateway
   };
 };
 

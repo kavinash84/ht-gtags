@@ -20,8 +20,6 @@ import * as notifActions from 'redux/modules/notifs';
 import Notifs from 'components/Notifs';
 import { isKeyExists } from 'utils/helper';
 
-import { load, isLoaded as isPaymentStatusLoaded } from 'redux/modules/paymentstatus';
-
 /* ====== Components ====== */
 import Alert from 'hometown-components-dev/lib/Alert';
 import ThemeProvider from 'hometown-components-dev/lib/ThemeProviderHtV1';
@@ -35,9 +33,8 @@ const SITE_URL_MOBILE = 'https://m.hometown.in';
   fetch: async ({ store: { dispatch, getState } }) => {
     const {
       pincode: { selectedPincode },
-      // app: { sessionId, csrfToken }
       app: {
- sessionId, csrfToken, orderId, walletName
+ sessionId, csrfToken
 }
     } = getState();
     const defaultPincode = selectedPincode === '' ? PINCODE : selectedPincode;
@@ -55,10 +52,6 @@ const SITE_URL_MOBILE = 'https://m.hometown.in';
     }
     if (getState().userLogin.isLoggedIn && !isProfileLoaded(getState())) {
       await dispatch(loadUserProfile()).catch(error => console.log(error));
-    }
-
-    if (orderId && !walletName && !isPaymentStatusLoaded(getState())) {
-      await dispatch(load(orderId)).catch(error => console.log(error));
     }
 
     if (sessionId && !isCartLoaded(getState())) {

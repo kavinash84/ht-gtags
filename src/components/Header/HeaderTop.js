@@ -12,7 +12,15 @@ import { getCartCount } from 'selectors/cart';
 import { getWishListCount } from 'selectors/wishlist';
 
 /* ====== Helpers ====== */
-import { SIGNUP_URL, HOME_URL, LOGIN_URL, MY_WISHLIST_URL, MY_PROFILE_URL, CART_URL } from 'helpers/Constants';
+import {
+  SIGNUP_URL,
+  HOME_URL,
+  LOGIN_URL,
+  MY_WISHLIST_URL,
+  MY_PROFILE_URL,
+  CART_URL,
+  DELIVERY_ADDRESS_URL
+} from 'helpers/Constants';
 import { titleCase, checkRedirection } from 'utils/helper';
 
 /* ====== Components ====== */
@@ -36,6 +44,7 @@ import ResponsiveModal from 'components/Modal';
 import PinCode from 'components/PinCode';
 import LoginForm from 'components/LoginForms';
 import SignupForm from 'components/Signup/SignupForm';
+import ProductSummaryList from 'components/Checkout/ProductSummaryList';
 
 const LogoIcon = require('../../../static/logo@2x.png');
 const PincodeModalIcon = require('../../../static/map-placeholder.svg');
@@ -116,10 +125,10 @@ export default class HeaderTop extends Component {
               <Image height={['auto', 'auto', 28]} src={LogoIcon} alt="Hometown" />
             </Link>
           </Col>
-          <Col width={4 / 12}>
+          <Col width={5.5 / 12}>
             <Search />
           </Col>
-          <Col width={5 / 12} flexDirection="row" justifyContent="flex-end">
+          <Col width={3.5 / 12} flexDirection="row" justifyContent="flex-end">
             {/* <Button variant="link" onClick={this.onOpenPincodeModal}>
               <Flex alignItems="center">
                 <LocationIcon />
@@ -136,14 +145,14 @@ export default class HeaderTop extends Component {
               variant="link"
               pl={20}
               sx={{
-                '& ~ div': {
+                '+ div': {
                   display: 'none',
                   '&:hover': {
                     display: 'block'
                   }
                 },
-                '&:hover': {
-                  '& ~ div': {
+                ':hover': {
+                  '& + div': {
                     display: 'block'
                   }
                 }
@@ -192,16 +201,147 @@ export default class HeaderTop extends Component {
                 </Box>
               </Card>
             </Box>
-            <Button variant="link" pl={20} onClick={isLoggedIn ? onClick(history) : this.onOpenLoginModal}>
+            <Button
+              variant="link"
+              pl={20}
+              onClick={isLoggedIn ? onClick(history) : this.onOpenLoginModal}
+              sx={{
+                '+ div': {
+                  display: 'none',
+                  '&:hover': {
+                    display: 'block'
+                  }
+                },
+                ':hover': {
+                  '& + div': {
+                    display: 'block'
+                  }
+                }
+              }}
+            >
               <Flex alignItems="center">
                 <FavIcon />
-                <Text variant="headerLabel">{isLoggedIn ? wishListCount : 0}</Text>
+                <Text variant="headerLabel" ml={5}>
+                  {isLoggedIn ? wishListCount : 0}
+                </Text>
               </Flex>
             </Button>
-            <Flex as={Link} to={CART_URL} sx={{ alignItems: 'center' }} pl={20}>
+            <Box pt={20} className="cart-popover" sx={{ position: 'relative' }}>
+              <Card variant="card.profileMore" width={244}>
+                <Box variant="card.profileMoreWrapper" px={15} py={15}>
+                  <Flex mx={-5} my={-5} sx={{ flexWrap: 'wrap' }}>
+                    <Box px={5} py={5}>
+                      <Image
+                        src="https://www.hometown.in/media/product/53/1253/12483/1-top_sel_160.jpg"
+                        alt=""
+                        width={64}
+                        height={64}
+                        sx={{ border: 'secondary' }}
+                      />
+                    </Box>
+                    <Box px={5} py={5}>
+                      <Image
+                        src="https://www.hometown.in/media/product/53/1253/12483/1-top_sel_160.jpg"
+                        alt=""
+                        width={64}
+                        height={64}
+                      />
+                    </Box>
+                  </Flex>
+                  <Box mt={10} mb={10}>
+                    <Text sx={{ fontSize: 14 }}>Already have a list?</Text>
+                  </Box>
+                  <Flex mx={-5}>
+                    <Box width={1 / 2} px={5}>
+                      <Button as={Link} to={DELIVERY_ADDRESS_URL} width={1}>
+                        SIGN IN
+                      </Button>
+                    </Box>
+                    <Box width={1 / 2} px={5}>
+                      <Button as={Link} to={CART_URL} variant="outline.primary" width={1}>
+                        VIEW ALL
+                      </Button>
+                    </Box>
+                  </Flex>
+                </Box>
+              </Card>
+            </Box>
+            <Flex
+              as={Link}
+              to={CART_URL}
+              pl={20}
+              alignItems="center"
+              sx={{
+                '+ div': {
+                  display: 'none',
+                  '&:hover': {
+                    display: 'block'
+                  }
+                },
+                ':hover': {
+                  '& + div': {
+                    display: 'block'
+                  }
+                }
+              }}
+            >
               <CartIcon />
-              <Text variant="headerLabel">{cartCount}</Text>
+              <Text variant="headerLabel" ml={5}>
+                {cartCount}
+              </Text>
             </Flex>
+            <Box pt={20} className="cart-popover" sx={{ position: 'relative' }}>
+              <Card variant="card.profileMore">
+                <Box bg="bgOffer" px={20} py={8} sx={{ fontSize: 16, color: 'white' }}>
+                  3 items in your cart
+                </Box>
+                <Box variant="card.profileMoreWrapper" px={0}>
+                  <Box
+                    mb={10}
+                    mx={15}
+                    width={300}
+                    sx={{
+                      borderBottom: 'divider'
+                    }}
+                  >
+                    <ProductSummaryList
+                      qty={2}
+                      productItem={{
+                        image: 'https://www.hometown.in/media/product/53/1253/12483/1-top_sel_160.jpg',
+                        unit_price: 2000,
+                        special_price: 2000,
+                        name: 'Logan Fabric Two Sea..',
+                        color: 'brown'
+                      }}
+                    />
+                    <ProductSummaryList
+                      qty={2}
+                      productItem={{
+                        image: 'https://www.hometown.in/media/product/53/1253/12483/1-top_sel_160.jpg',
+                        unit_price: 2000,
+                        special_price: 2000,
+                        name: 'Logan Fabric Two Sea..',
+                        color: 'brown'
+                      }}
+                    />
+                  </Box>
+                  <Box variant="col-12" pb={20} px={[0, 0, 16]}>
+                    <Flex justifyContent="space-between">
+                      <Text>Subtotal</Text>
+                      <Text>Rs. 1000</Text>
+                    </Flex>
+                  </Box>
+                  <Box px={16}>
+                    <Button width={1} as={Link} to={DELIVERY_ADDRESS_URL} mb={10}>
+                      CHECKOUT NOW
+                    </Button>
+                    <Button width={1} as={Link} to={CART_URL} variant="outline.primary">
+                      VIEW CART
+                    </Button>
+                  </Box>
+                </Box>
+              </Card>
+            </Box>
           </Col>
         </Row>
 

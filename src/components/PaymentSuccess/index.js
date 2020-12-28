@@ -12,7 +12,7 @@ import Img from 'hometown-components-dev/lib/ImageHtV1';
 import ImageShimmer from 'hometown-components-dev/lib/ImageShimmerHtV1';
 import ShippedTo from 'hometown-components-dev/lib/ShippedToHtV1';
 import { formatAmount } from 'utils/formatters';
-import Oops from './Oops';
+// import Oops from './Oops';
 
 const styles = require('./PaymentSuccess.scss');
 const PaymentSuccessIcon = require('../../../static/success.svg');
@@ -126,7 +126,7 @@ const PaymentSuccess = ({
       </Box>
     );
   }
-  return <Oops />;
+  return null;
 };
 
 PaymentSuccess.defaultProps = {
