@@ -69,7 +69,10 @@ const onClickLogout = dispatcher => e => {
     wishListCount: getWishListCount(wishlist),
     cartCount: getCartCount(cart),
     router,
-    profile
+    profile,
+    // cart,
+    cartItems: cart.data,
+    cartSummary: cart.summary
   }),
   {
     logoutUser: logout
@@ -81,6 +84,11 @@ export default class HeaderTop extends Component {
     openLogin: false,
     openSignup: false
   };
+  // componentDidMount() {
+  //   const { cart } = this.props;
+  //   console.log('cart check', cart);
+  // }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.isLoggedIn) {
       this.setState({
@@ -114,8 +122,16 @@ export default class HeaderTop extends Component {
 
   render() {
     const {
- isLoggedIn, history, wishListCount, cartCount, logoutUser, name
-} = this.props;
+      isLoggedIn,
+      history,
+      wishListCount,
+      cartCount,
+      logoutUser,
+      name,
+      // cart,
+      cartItems,
+      cartSummary
+    } = this.props;
 
     return (
       <Box>
@@ -293,7 +309,7 @@ export default class HeaderTop extends Component {
             <Box pt={20} className="cart-popover" sx={{ position: 'relative' }}>
               <Card variant="card.profileMore">
                 <Box bg="bgOffer" px={20} py={8} sx={{ fontSize: 16, color: 'white' }}>
-                  3 items in your cart
+                  {cartCount} items in your cart
                 </Box>
                 <Box variant="card.profileMoreWrapper" px={0}>
                   <Box
@@ -304,7 +320,7 @@ export default class HeaderTop extends Component {
                       borderBottom: 'divider'
                     }}
                   >
-                    <ProductSummaryList
+                    {/* <ProductSummaryList
                       qty={2}
                       productItem={{
                         image: 'https://www.hometown.in/media/product/53/1253/12483/1-top_sel_160.jpg',
@@ -323,12 +339,24 @@ export default class HeaderTop extends Component {
                         name: 'Logan Fabric Two Sea..',
                         color: 'brown'
                       }}
-                    />
+                    /> */}
+                    {cartItems.map(item => (
+                      <ProductSummaryList
+                        qty={item.qty}
+                        productItem={{
+                          image: `${item.product_info.image}`,
+                          unit_price: `${item.product_info.unit_price}`,
+                          special_price: `${item.product_info.special_price}`,
+                          name: `${item.product_info.name}`,
+                          color: `${item.product_info.color}`
+                        }}
+                      />
+                    ))}
                   </Box>
                   <Box variant="col-12" pb={20} px={[0, 0, 16]}>
                     <Flex justifyContent="space-between">
                       <Text>Subtotal</Text>
-                      <Text>Rs. 1000</Text>
+                      <Text>Rs. {cartSummary.total}</Text>
                     </Flex>
                   </Box>
                   <Box px={16}>
@@ -389,6 +417,8 @@ HeaderTop.defaultProps = {
   name: '',
   history: {},
   router: {},
+  cartItems: [],
+  cartSummary: {},
   logoutUser: () => {}
 };
 
@@ -399,5 +429,7 @@ HeaderTop.propTypes = {
   cartCount: PropTypes.number,
   logoutUser: PropTypes.func,
   router: PropTypes.object,
-  name: PropTypes.string
+  name: PropTypes.string,
+  cartItems: PropTypes.array,
+  cartSummary: PropTypes.object
 };
