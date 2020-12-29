@@ -72,7 +72,8 @@ const onClickLogout = dispatcher => e => {
     profile,
     // cart,
     cartItems: cart.data,
-    cartSummary: cart.summary
+    cartSummary: cart.summary,
+    wishlist
   }),
   {
     logoutUser: logout
@@ -84,10 +85,12 @@ export default class HeaderTop extends Component {
     openLogin: false,
     openSignup: false
   };
-  // componentDidMount() {
-  //   const { cart } = this.props;
-  //   console.log('cart check', cart);
-  // }
+  componentDidMount() {
+    const { cart } = this.props;
+    console.log('cart check', cart);
+    const { wishlist } = this.props;
+    console.log('wishlist check', wishlist);
+  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.isLoggedIn) {
@@ -95,6 +98,8 @@ export default class HeaderTop extends Component {
         openLogin: false
       });
     }
+    const { wishlist } = this.props;
+    console.log('wishlist check', wishlist);
   }
   onOpenPincodeModal = () => {
     this.setState({ openPincode: true });
@@ -130,7 +135,8 @@ export default class HeaderTop extends Component {
       name,
       // cart,
       cartItems,
-      cartSummary
+      cartSummary,
+      wishlist
     } = this.props;
 
     return (
@@ -245,7 +251,39 @@ export default class HeaderTop extends Component {
             <Box pt={20} className="cart-popover" sx={{ position: 'relative' }}>
               <Card variant="card.profileMore" width={244}>
                 <Box variant="card.profileMoreWrapper" px={15} py={15}>
-                  <Flex mx={-5} my={-5} sx={{ flexWrap: 'wrap' }}>
+                  {wishlist && wishlist.data.length > 0 && (
+                    <Flex mx={-5} my={-5} sx={{ flexWrap: 'wrap' }}>
+                      {wishlist.data.map(item => (
+                        <Box px={5} py={5}>
+                          <Image
+                            src={`${item.product_info.images[0].url}.jpg`}
+                            alt=""
+                            width={64}
+                            height={64}
+                            sx={{ border: 'secondary' }}
+                          />
+                        </Box>
+                      ))}
+                      {/* <Box px={5} py={5}>
+                      <Image
+                        src={`${wishlist.data[0].product_info.images[0].url}.jpg`}
+                        alt=""
+                        width={64}
+                        height={64}
+                        sx={{ border: 'secondary' }}
+                      />
+                    </Box>
+                    <Box px={5} py={5}>
+                      <Image
+                        src="https://www.hometown.in/media/product/53/1253/12483/1-top_sel_160.jpg"
+                        alt=""
+                        width={64}
+                        height={64}
+                      />
+                    </Box> */}
+                    </Flex>
+                  )}
+                  {/* <Flex mx={-5} my={-5} sx={{ flexWrap: 'wrap' }}>
                     <Box px={5} py={5}>
                       <Image
                         src="https://www.hometown.in/media/product/53/1253/12483/1-top_sel_160.jpg"
@@ -263,7 +301,7 @@ export default class HeaderTop extends Component {
                         height={64}
                       />
                     </Box>
-                  </Flex>
+                  </Flex> */}
                   <Box mt={10} mb={10}>
                     <Text sx={{ fontSize: 14 }}>Already have a list?</Text>
                   </Box>
@@ -419,6 +457,8 @@ HeaderTop.defaultProps = {
   router: {},
   cartItems: [],
   cartSummary: {},
+  cart: {},
+  wishlist: {},
   logoutUser: () => {}
 };
 
@@ -431,5 +471,7 @@ HeaderTop.propTypes = {
   router: PropTypes.object,
   name: PropTypes.string,
   cartItems: PropTypes.array,
-  cartSummary: PropTypes.object
+  cartSummary: PropTypes.object,
+  cart: PropTypes.object,
+  wishlist: PropTypes.object
 };
