@@ -107,15 +107,17 @@ class Coupon extends React.Component {
         {appliedCoupon ? (
           <Box py={15}>
             <Button variant="link" onClick={() => this.removeCoupon(appliedCoupon)}>
-              <Text display="flex" alignItems="center">
+              <Text display="flex" alignItems="center" color="primary">
                 <Image src={DiscountSuccessIcon} alt={appliedCoupon} mr={8} />
                 Applied:{' '}
-                <Text as="b" pl={4}>
+                <Text as="b" pl={4} color="primary">
                   {appliedCoupon}
                 </Text>
               </Text>
               <Text color="primary" display="flex" alignItems="center" pl={28} pt={5}>
-                Save <b>Rs. {formatAmount(couponDiscount)}</b>
+                <p>
+                  Save <b>Rs. {formatAmount(couponDiscount)}</b>
+                </p>
                 <Image
                   src={EditCouponIcon}
                   display="inline"

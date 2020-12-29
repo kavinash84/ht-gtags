@@ -94,11 +94,7 @@ export default class LoginFormContainer extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (
-      !this.state.mobilesubmitted &&
-      nextProps.getotpError &&
-      nextProps.getotpErrorMessage.includes('resend')
-    ) {
+    if (!this.state.mobilesubmitted && nextProps.getotpError && nextProps.getotpErrorMessage.includes('resend')) {
       this.setState({
         mobilesubmitted: true
       });
@@ -112,27 +108,19 @@ export default class LoginFormContainer extends Component {
   onChangeMobile = e => {
     const { value } = e.target;
     const checkError = !validateMobile(value);
-    if (
-      !allowNChar(value, 10) ||
-      (!allowTypeOf(value, 'number') && value.length > 0)
-    ) {
+    if (!allowNChar(value, 10) || (!allowTypeOf(value, 'number') && value.length > 0)) {
       return;
     }
     this.setState({
       mobile: value,
       mobileError: checkError,
       mobileErrorMessage:
-        value[0] === '0'
-          ? 'Mobile Number Must Not Start With 0'
-          : 'Enter 10 Digits Valid Mobile Number'
+        value[0] === '0' ? 'Mobile Number Must Not Start With 0' : 'Enter 10 Digits Valid Mobile Number'
     });
   };
   onChangeOtp = e => {
     const { value } = e.target;
-    if (
-      !allowNChar(value, 6) ||
-      (!allowTypeOf(value, 'number') && value.length > 0)
-    ) {
+    if (!allowNChar(value, 6) || (!allowTypeOf(value, 'number') && value.length > 0)) {
       return;
     }
     this.setState({
@@ -279,14 +267,8 @@ export default class LoginFormContainer extends Component {
       resend
     } = this.state;
     const {
-      loaded,
-      loading,
-      loggingIn,
-      askContact,
-      askName,
-      loginType,
-      askEmail
-    } = this.props;
+ loaded, loading, loggingIn, askContact, askName, loginType, askEmail
+} = this.props;
     return (
       <Row>
         <Box variant="col-4">
@@ -373,6 +355,7 @@ export default class LoginFormContainer extends Component {
               <GoogleLoginBtn
                 askContact={askContact}
                 loginType={loginType}
+                askName={askName}
                 loading={loading}
                 loggingIn={loggingIn}
               />
@@ -391,18 +374,8 @@ export default class LoginFormContainer extends Component {
               CREATE AN ACCOUNT
             </Heading>
           </Box>
-          <Heading fontSize={16}>
-            If you don't yet have HomeTown account, please register.
-          </Heading>
-          <Button
-            px={80}
-            mt={30}
-            height={42}
-            lineHeight={1.7}
-            fontWeight={600}
-            as={Link}
-            to={SIGNUP_URL}
-          >
+          <Heading fontSize={16}>If you don't yet have HomeTown account, please register.</Heading>
+          <Button px={80} mt={30} height={42} lineHeight={1.7} fontWeight={600} as={Link} to={SIGNUP_URL}>
             Register
           </Button>
         </Box>

@@ -43,11 +43,11 @@ export function isLoaded(globalState) {
   return globalState.paymentstatus && globalState.paymentstatus.loaded;
 }
 
-export const load = orderId => ({
+export const load = sessionId => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
   promise: async ({ client }) => {
     try {
-      const response = await client.get(`${PAYMENT_STATUS_API}?orderNo=${orderId}`);
+      const response = await client.get(`${PAYMENT_STATUS_API}/${sessionId}`);
       return response;
     } catch (error) {
       return error;

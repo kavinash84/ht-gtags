@@ -44,7 +44,7 @@ import ResponsiveModal from 'components/Modal';
 import PinCode from 'components/PinCode';
 import LoginForm from 'components/LoginForms';
 import SignupForm from 'components/Signup/SignupForm';
-import ProductSummaryList from 'components/checkout/ProductSummaryList';
+import ProductSummaryList from 'components/Checkout/ProductSummaryList';
 
 const LogoIcon = require('../../../static/logo@2x.png');
 const PincodeModalIcon = require('../../../static/map-placeholder.svg');
@@ -62,13 +62,17 @@ const onClickLogout = dispatcher => e => {
 @withRouter
 @connect(
   ({
- userLogin, wishlist, cart, router, profile }) => ({
+ userLogin, wishlist, cart, router, profile
+}) => ({
     isLoggedIn: userLogin.isLoggedIn,
     name: profile.data.first_name,
     wishListCount: getWishListCount(wishlist),
     cartCount: getCartCount(cart),
     router,
-    profile
+    profile,
+    // cart,
+    cartItems: cart.data,
+    cartSummary: cart.summary
   }),
   {
     logoutUser: logout
@@ -80,6 +84,11 @@ export default class HeaderTop extends Component {
     openLogin: false,
     openSignup: false
   };
+  // componentDidMount() {
+  //   const { cart } = this.props;
+  //   console.log('cart check', cart);
+  // }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.isLoggedIn) {
       this.setState({
@@ -108,9 +117,7 @@ export default class HeaderTop extends Component {
   handleClick = URL => e => {
     e.preventDefault();
     const { history, router } = this.props;
-    history.push(
-      `${URL}/?redirect=${checkRedirection(router.location.pathname)}`
-    );
+    history.push(`${URL}/?redirect=${checkRedirection(router.location.pathname)}`);
   };
 
   render() {
@@ -120,7 +127,10 @@ export default class HeaderTop extends Component {
       wishListCount,
       cartCount,
       logoutUser,
-      name
+      name,
+      // cart,
+      cartItems,
+      cartSummary
     } = this.props;
 
     return (
@@ -128,11 +138,7 @@ export default class HeaderTop extends Component {
         <Row sx={{ alignItems: 'center' }} mx={[0, 0, 0, -16]}>
           <Col width={3 / 12}>
             <Link to={HOME_URL}>
-              <Image
-                height={['auto', 'auto', 28]}
-                src={LogoIcon}
-                alt="Hometown"
-              />
+              <Image height={['auto', 'auto', 28]} src={LogoIcon} alt="Hometown" />
             </Link>
           </Col>
           <Col width={5.5 / 12}>
@@ -168,11 +174,7 @@ export default class HeaderTop extends Component {
                 }
               }}
             >
-              {isLoggedIn ? (
-                <Text variant="headerLabel">Hi {titleCase(name)}</Text>
-              ) : (
-                <UserIcon />
-              )}
+              {isLoggedIn ? <Text variant="headerLabel">Hi {titleCase(name)}</Text> : <UserIcon />}
             </Button>
             <Box pt={20} sx={{ position: 'relative' }}>
               <Card variant="card.profileMore">
@@ -274,10 +276,14 @@ export default class HeaderTop extends Component {
                   </Box>
                   <Flex mx={-5}>
                     <Box width={1 / 2} px={5}>
-                      <Button as={Link} to={DELIVERY_ADDRESS_URL} width={1}>SIGN IN</Button>
+                      <Button as={Link} to={DELIVERY_ADDRESS_URL} width={1}>
+                        SIGN IN
+                      </Button>
                     </Box>
                     <Box width={1 / 2} px={5}>
-                      <Button as={Link} to={CART_URL} variant="outline.primary" width={1}>VIEW ALL</Button>
+                      <Button as={Link} to={CART_URL} variant="outline.primary" width={1}>
+                        VIEW ALL
+                      </Button>
                     </Box>
                   </Flex>
                 </Box>
@@ -303,11 +309,15 @@ export default class HeaderTop extends Component {
               }}
             >
               <CartIcon />
-              <Text variant="headerLabel" ml={5}>{cartCount}</Text>
+              <Text variant="headerLabel" ml={5}>
+                {cartCount}
+              </Text>
             </Flex>
             <Box pt={20} className="cart-popover" sx={{ position: 'relative' }}>
               <Card variant="card.profileMore">
-                <Box bg="bgOffer" px={20} py={8} sx={{ fontSize: 16, color: 'white' }}>3 items in your cart</Box>
+                <Box bg="bgOffer" px={20} py={8} sx={{ fontSize: 16, color: 'white' }}>
+                  {cartCount} items in your cart
+                </Box>
                 <Box variant="card.profileMoreWrapper" px={0}>
                   <Box
                     mb={10}
@@ -317,7 +327,7 @@ export default class HeaderTop extends Component {
                       borderBottom: 'divider'
                     }}
                   >
-                    <ProductSummaryList
+                    {/* <ProductSummaryList
                       qty={2}
                       productItem={{
                         image: 'https://www.hometown.in/media/product/53/1253/12483/1-top_sel_160.jpg',
@@ -336,17 +346,33 @@ export default class HeaderTop extends Component {
                         name: 'Logan Fabric Two Sea..',
                         color: 'brown'
                       }}
-                    />
+                    /> */}
+                    {cartItems.map(item => (
+                      <ProductSummaryList
+                        qty={item.qty}
+                        productItem={{
+                          image: `${item.product_info.image}`,
+                          unit_price: `${item.product_info.unit_price}`,
+                          special_price: `${item.product_info.special_price}`,
+                          name: `${item.product_info.name}`,
+                          color: `${item.product_info.color}`
+                        }}
+                      />
+                    ))}
                   </Box>
                   <Box variant="col-12" pb={20} px={[0, 0, 16]}>
                     <Flex justifyContent="space-between">
                       <Text>Subtotal</Text>
-                      <Text>Rs. 1000</Text>
+                      <Text>Rs. {cartSummary.total}</Text>
                     </Flex>
                   </Box>
                   <Box px={16}>
-                    <Button width={1} as={Link} to={DELIVERY_ADDRESS_URL} mb={10}>CHECKOUT NOW</Button>
-                    <Button width={1} as={Link} to={CART_URL} variant="outline.primary">VIEW CART</Button>
+                    <Button width={1} as={Link} to={DELIVERY_ADDRESS_URL} mb={10}>
+                      CHECKOUT NOW
+                    </Button>
+                    <Button width={1} as={Link} to={CART_URL} variant="outline.primary">
+                      VIEW CART
+                    </Button>
                   </Box>
                 </Box>
               </Card>
@@ -361,13 +387,7 @@ export default class HeaderTop extends Component {
           open={this.state.openPincode}
         >
           <Box textAlign="center">
-            <Image
-              width="100px"
-              m="auto"
-              mb="1.5rem"
-              src={PincodeModalIcon}
-              alt="Pincode"
-            />
+            <Image width="100px" m="auto" mb="1.5rem" src={PincodeModalIcon} alt="Pincode" />
             <Heading fontSize={20} lineHeight={1.3} mb="1rem">
               Please enter your Pincode to serve you better
             </Heading>
@@ -404,6 +424,8 @@ HeaderTop.defaultProps = {
   name: '',
   history: {},
   router: {},
+  cartItems: [],
+  cartSummary: {},
   logoutUser: () => {}
 };
 
@@ -414,5 +436,7 @@ HeaderTop.propTypes = {
   cartCount: PropTypes.number,
   logoutUser: PropTypes.func,
   router: PropTypes.object,
-  name: PropTypes.string
+  name: PropTypes.string,
+  cartItems: PropTypes.array,
+  cartSummary: PropTypes.object
 };

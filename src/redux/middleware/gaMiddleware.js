@@ -500,83 +500,91 @@ export default function gaMiddleware() {
         if (type === 'PUSH_TO_DATALAYER' && pathname && pathname === '/payment-success') {
           const { data } = getState().paymentstatus;
           if (data) {
-            console.log(data, 'Data@#$%^&$$$$$$$$$$$$$');
             const {
-              cart_products: products,
+              cart_products: products = [],
               net_order_amount,
               shipping_charges,
               // transaction_id,
               order_no,
               coupon_code,
-              customer_type
+              customer_type,
+              unbxd_data: unbxdData = []
             } = data;
-            const unbxdData = [];
             const skus = [];
 
             let groupedProducts = [];
-            products.forEach(arr => {
-              if (groupedProducts[arr.sku] && groupedProducts[arr.sku].sku === arr.sku) {
-                groupedProducts[arr.sku].qty += 1;
-              } else {
-                groupedProducts[arr.sku] = arr;
-              }
-            });
-            groupedProducts = Object.values(groupedProducts);
-            console.log({ groupedProducts });
-            const cartList = groupedProducts.map(x => {
-              const {
-                // product_info: { product_id },
-                sku,
-                name,
-                qty,
-                price,
-                brand,
-                categories,
-                details: {
-                  attributes: { color },
-                  meta: { config_id }
+            let paymentObj = {};
+            if (products && products.length) {
+              products.forEach(arr => {
+                if (
+                  groupedProducts[arr.sku] &&
+                  groupedProducts[arr.sku].sku === arr.sku
+                ) {
+                  groupedProducts[arr.sku].qty += 1;
+                } else {
+                  groupedProducts[arr.sku] = arr;
                 }
-              } = x;
-              skus.push(sku);
-              unbxdData.push({
-                pid: config_id || '',
-                variantId: '',
-                qty: `${qty}`,
-                price: price.toFixed(2)
               });
-              return {
-                id: sku,
-                name,
-                quantity: qty,
-                variant: color,
-                category: categories ? categories.split('|').join('/') : '',
-                price,
-                brand
-              };
-            });
-            const paymentObj = {
-              event: 'purchase',
-              ecommerce: {
-                purchase: {
-                  actionField: {
-                    id: order_no,
-                    affiliation: 'Online Store',
-                    revenue: net_order_amount,
-                    tax: '0',
-                    shipping: shipping_charges,
-                    coupon: coupon_code || ''
-                  },
-                  products: [...cartList]
+              groupedProducts = Object.values(groupedProducts);
+              console.log({ groupedProducts });
+              const cartList = groupedProducts.map(x => {
+                const {
+                  // product_info: { product_id },
+                  sku,
+                  name,
+                  qty,
+                  price,
+                  brand,
+                  categories,
+                  details: {
+                    attributes: { color }
+                  }
+                } = x;
+                skus.push(sku);
+                return {
+                  id: sku,
+                  name,
+                  quantity: qty,
+                  variant: color,
+                  category: categories ? categories.split('|').join('/') : '',
+                  price,
+                  brand
+                };
+              });
+              paymentObj = {
+                event: 'purchase',
+                ecommerce: {
+                  purchase: {
+                    actionField: {
+                      id: order_no,
+                      affiliation: 'Online Store',
+                      revenue: net_order_amount,
+                      tax: '0',
+                      shipping: shipping_charges,
+                      coupon: coupon_code || ''
+                    },
+                    products: [...cartList]
+                  }
                 }
-              }
-            };
+              };
+            }
             window.google_tag_params.ecomm_pagetype = 'purchase';
             window.google_tag_params.ecomm_prodid = skus;
             window.google_tag_params.ecomm_totalvalue = net_order_amount;
             /* customer type */
-            const cust_type = customer_type === 'returning customer' ? 'Repeat' : 'Fresh';
-            window.dataLayer.push(paymentObj, { event: 'buyer_type', type: cust_type });
-            if (window && window.Unbxd && window.Unbxd.track && unbxdData.length) {
+            const cust_type =
+              customer_type === 'returning customer' ? 'Repeat' : 'Fresh';
+            window.dataLayer.push(paymentObj, {
+              event: 'buyer_type',
+              type: cust_type
+            });
+            console.log(window && window.Unbxd && window.Unbxd.track && unbxdData.length);
+            if (
+              window &&
+              window.Unbxd &&
+              window.Unbxd.track &&
+              unbxdData.length
+            ) {
               unbxdData.forEach(p => {
                 window.Unbxd.track('order', p);
               });

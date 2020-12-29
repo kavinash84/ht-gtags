@@ -70,10 +70,7 @@ export default function reducer(state = initialState, action = {}) {
         askEmail: action.error.askEmail || false,
         loginType: action.error.loginType || '',
         tokenData:
-          (action.error.askContact || action.error.askName) &&
-          action.error.tokenData
-            ? action.error.tokenData
-            : {}
+          (action.error.askContact || action.error.askName) && action.error.tokenData ? action.error.tokenData : {}
       };
     case LOGIN_AFTER_SIGNUP:
       return {
@@ -159,25 +156,21 @@ const setToken = ({ client }) => response => {
   client.setJwtToken(response.access_token);
 };
 
-export const isLoaded = globalState =>
-  globalState.login && globalState.login.loaded;
+export const isLoaded = globalState => globalState.login && globalState.login.loaded;
 
 export const login = data => ({
   types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
   promise: async ({ client }) => {
     try {
       /* eslint-disable max-len */
-      const username = data.otp
-        ? `mobile=${data.mobile}`
-        : `email=${data.email}`;
+      const username = data.otp ? `mobile=${data.mobile}` : `email=${data.email}`;
       const type = data.otp ? 'mobile' : 'email';
       const password = data.otp ? data.otp : data.password;
       const method = data.otp ? 'otp' : 'password';
       const mobile = data.otp ? '' : `&mobile=${data.phone}`;
       const name = data.name ? `&full_name=${data.name}` : '';
       // const postData = `${username}&password=${password}&type=${type}&method=${method}&grant_type=password&client_id=${clientId}&client_secret=${clientSecret}${mobile}${name}`;
-      const email =
-        data.email && type === 'mobile' ? `&email=${data.email}` : '';
+      const email = data.email && type === 'mobile' ? `&email=${data.email}` : '';
       const postData = `${username}&password=${password}&type=${type}&method=${method}&grant_type=password&client_id=${clientId}&client_secret=${clientSecret}${mobile}${name}${email}`;
       const response = await client.post(LOGIN_API, postData);
       setToken({ client })(response);
@@ -192,14 +185,15 @@ export const login = data => ({
     }
   }
 });
-export const googleLogin = (result, session, phone) => (dispatch, getState) =>
+export const googleLogin = (result, session, phone, username = null) => (dispatch, getState) =>
   dispatch({
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
     promise: async ({ client }) => {
       const {
         userLogin: { tokenData }
       } = getState();
-      const data = phone && tokenData.tokenId ? tokenData : result;
+      // const data = phone && tokenData.tokenId ? tokenData : result;
+      const data = (phone || username) && tokenData.tokenId ? tokenData : result;
       try {
         const {
           tokenId,
@@ -212,7 +206,8 @@ export const googleLogin = (result, session, phone) => (dispatch, getState) =>
           grant_type: 'password',
           session_id: session,
           phone,
-          full_name: name
+          full_name: name,
+          username
         };
         const response = await client.post(GOOGLE_LOGIN_API, postData);
         await setToken({ client })(response);

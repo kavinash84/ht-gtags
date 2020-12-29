@@ -21,15 +21,22 @@ import Header from 'components/Header';
 import ThankYou from 'newComponents/ThankYou';
 
 /**
- * Modules / Utils / Reducers
+ * Modules / Utils / Reducers /
  */
 import { formatAmount } from 'utils/formatters';
 import { formatProductURL } from 'utils/helper';
+import { paymentLoaded as setPaymentLoadStatus } from 'redux/modules/app';
 
-const mapStateToProps = ({ paymentstatus: { data, loaded, error } }) => ({
+const mapStateToProps = ({
+  paymentstatus: { data, loaded, error },
+  userLogin: { isLoggedIn },
+  app: { paymentLoaded }
+}) => ({
   data,
   loaded,
-  error
+  error,
+  isLoggedIn,
+  paymentLoaded
 });
 class PaymentSuccess extends Component {
   constructor(props) {
@@ -39,9 +46,10 @@ class PaymentSuccess extends Component {
     };
   }
   componentDidMount = () => {
-    console.log('Inside component did mount of payment success', this.props);
-    const { history, data, error } = this.props;
-    if (!data) history.push('/');
+    const {
+ history, data, error, paymentLoaded
+} = this.props;
+    if (data === 'An internal server error occurred' || paymentLoaded) { return history.push('/'); }
 
     if (data && error === '') {
       const { dispatch } = this.context.store;
@@ -49,8 +57,10 @@ class PaymentSuccess extends Component {
       dispatch({
         type: 'PUSH_TO_DATALAYER'
       });
+      dispatch(setPaymentLoadStatus(true));
     }
   };
+
   groupSimilarProducts = () => {
     const {
       data: { cart_products: cartProducts }
@@ -75,19 +85,20 @@ class PaymentSuccess extends Component {
     products = Object.values(products);
     this.setState({ products });
   };
+
   render() {
-    if (this.props.data) {
-      const {
-        data,
-        data: {
-          order_number: orderNo,
-          sub_total_amount: subTotal,
-          discount_coupon_value: discount,
-          net_order_amount: totalAmount,
-          shipping_charges: shippingCharges,
-          set_discount: setDiscount
-        } = ''
-      } = this.props;
+    const {
+      data,
+      data: {
+        order_number: orderNo,
+        sub_total_amount: subTotal,
+        discount_coupon_value: discount,
+        net_order_amount: totalAmount,
+        shipping_charges: shippingCharges,
+        set_discount: setDiscount
+      }
+    } = this.props;
+    if (data && shippingCharges) {
       const { products } = this.state;
       return (
         <Wrapper>
@@ -123,9 +134,16 @@ class PaymentSuccess extends Component {
                     </Box>
                   </Row>
                   {products.map(product => (
-                    <Row py={20} mx={0} alignItems="center" sx={{ position: 'relative', borderBottom: 'light' }}>
+                    <Row
+                      py={20}
+                      mx={0}
+                      alignItems="center"
+                      sx={{ position: 'relative', borderBottom: 'light' }}
+                    >
                       <Box variant="col-2" pl={0}>
-                        <Link to={formatProductURL(product.name, product.confSku)}>
+                        <Link
+                          to={formatProductURL(product.name, product.confSku)}
+                        >
                           <Image
                             width={1}
                             src={`${product.image}-top_sel_160.jpg`}
@@ -137,8 +155,14 @@ class PaymentSuccess extends Component {
                       <Box variant="col-4" pl={15}>
                         {/* <Link to="/"> */}
                         <Box mb="10px">
-                          <Link to={formatProductURL(product.name, product.confSku)}>
-                            <Heading color="heading" fontSize={16} lineHeight={1.4}>
+                          <Link
+                            to={formatProductURL(product.name, product.confSku)}
+                          >
+                            <Heading
+                              color="heading"
+                              fontSize={16}
+                              lineHeight={1.4}
+                            >
                               {product.name}
                             </Heading>
                           </Link>
@@ -188,12 +212,20 @@ class PaymentSuccess extends Component {
                       ) : null}
                       <Row m="0" py="1em" sx={{ borderTop: 'divider' }}>
                         <Box variant="col-6" p="0">
-                          <Text color="menuItem" fontSize={18} fontFamily="medium">
+                          <Text
+                            color="menuItem"
+                            fontSize={18}
+                            fontFamily="medium"
+                          >
                             Total Price :
                           </Text>
                         </Box>
                         <Box variant="col-6" p="0" textAlign="right">
-                          <Text color="menuItem" fontSize={18} fontFamily="medium">
+                          <Text
+                            color="menuItem"
+                            fontSize={18}
+                            fontFamily="medium"
+                          >
                             Rs {formatAmount(totalAmount)}
                           </Text>
                         </Box>
@@ -214,13 +246,15 @@ class PaymentSuccess extends Component {
 }
 PaymentSuccess.defaultProps = {
   data: '',
-  error: ''
+  error: '',
+  paymentLoaded: false
 };
 
 PaymentSuccess.propTypes = {
   data: PropTypes.object,
   error: PropTypes.string,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  paymentLoaded: PropTypes.bool
 };
 PaymentSuccess.contextTypes = {
   store: PropTypes.object.isRequired

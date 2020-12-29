@@ -143,7 +143,7 @@ export const validateAddress = (value, key) => {
       errorObject.errorMessage = isEmpty(value) ? 'Address 2 can not be empty' : 'Max 40 characters allowed';
       break;
     case 'address3':
-      errorObject.error = value.length > 40;
+      errorObject.error = !isEmpty(value) && value.length > 40;
       errorObject.errorMessage = 'Max 40 characters allowed';
       break;
     default:
@@ -179,3 +179,35 @@ export const validateVPA = vpa => /^[.a-zA-Z0-9\-_]{3,}@[A-Za-z0-9]+$/.test(vpa)
 //     name
 //   );
 /* eslint-enable */
+export const validateName = fullName => {
+  const nameSplit = fullName.trim().split(' ');
+  const firstName = nameSplit[0];
+  const lastName = nameSplit.splice(1).join(' ');
+
+  if (isEmpty(fullName)) {
+    return {
+      msg: 'Name Cannot be Left Empty !',
+      error: true
+    };
+  }
+  if (checkSpecialChar(fullName)) {
+    return {
+      msg: 'Numbers and special characters are not allowed !',
+      error: true
+    };
+  }
+  if (firstName.length > 50) {
+    return {
+      msg: 'First Name cannot be more than 50 characters',
+      error: true
+    };
+  }
+
+  if (lastName.length > 50) {
+    return {
+      msg: 'Last Name cannot be more than 50 characters',
+      error: true
+    };
+  }
+  return false;
+};
