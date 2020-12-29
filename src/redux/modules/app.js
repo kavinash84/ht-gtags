@@ -33,8 +33,7 @@ export default function reducer(state = initialState, action = {}) {
         loaded: true,
         sessionId: action.result.session,
         csrfToken: action.result.csrfToken,
-        city:
-          action.result.pincode_details && action.result.pincode_details[0].city
+        city: action.result.pincode_details && action.result.pincode_details[0].city
       };
     case LOAD_FAIL:
       return {
@@ -76,8 +75,7 @@ const setAppAuth = ({ client }) => async response => {
   await client.setSessionId(session);
 };
 
-export const isLoaded = globalState =>
-  globalState.app && globalState.app.loaded;
+export const isLoaded = globalState => globalState.app && globalState.app.loaded;
 
 export const generateSession = (pincode = PINCODE) => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
