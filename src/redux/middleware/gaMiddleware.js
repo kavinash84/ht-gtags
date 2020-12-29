@@ -516,10 +516,7 @@ export default function gaMiddleware() {
             let paymentObj = {};
             if (products && products.length) {
               products.forEach(arr => {
-                if (
-                  groupedProducts[arr.sku] &&
-                  groupedProducts[arr.sku].sku === arr.sku
-                ) {
+                if (groupedProducts[arr.sku] && groupedProducts[arr.sku].sku === arr.sku) {
                   groupedProducts[arr.sku].qty += 1;
                 } else {
                   groupedProducts[arr.sku] = arr;
@@ -572,19 +569,13 @@ export default function gaMiddleware() {
             window.google_tag_params.ecomm_prodid = skus;
             window.google_tag_params.ecomm_totalvalue = net_order_amount;
             /* customer type */
-            const cust_type =
-              customer_type === 'returning customer' ? 'Repeat' : 'Fresh';
+            const cust_type = customer_type === 'returning customer' ? 'Repeat' : 'Fresh';
             window.dataLayer.push(paymentObj, {
               event: 'buyer_type',
               type: cust_type
             });
             console.log(window && window.Unbxd && window.Unbxd.track && unbxdData.length);
-            if (
-              window &&
-              window.Unbxd &&
-              window.Unbxd.track &&
-              unbxdData.length
-            ) {
+            if (window && window.Unbxd && window.Unbxd.track && unbxdData.length) {
               unbxdData.forEach(p => {
                 window.Unbxd.track('order', p);
               });

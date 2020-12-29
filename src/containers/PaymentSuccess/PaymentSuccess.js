@@ -49,7 +49,9 @@ class PaymentSuccess extends Component {
     const {
  history, data, error, paymentLoaded
 } = this.props;
-    if (data === 'An internal server error occurred' || paymentLoaded) { return history.push('/'); }
+    if (data === 'An internal server error occurred' || paymentLoaded) {
+      return history.push('/');
+    }
 
     if (data && error === '') {
       const { dispatch } = this.context.store;
@@ -134,16 +136,9 @@ class PaymentSuccess extends Component {
                     </Box>
                   </Row>
                   {products.map(product => (
-                    <Row
-                      py={20}
-                      mx={0}
-                      alignItems="center"
-                      sx={{ position: 'relative', borderBottom: 'light' }}
-                    >
+                    <Row py={20} mx={0} alignItems="center" sx={{ position: 'relative', borderBottom: 'light' }}>
                       <Box variant="col-2" pl={0}>
-                        <Link
-                          to={formatProductURL(product.name, product.confSku)}
-                        >
+                        <Link to={formatProductURL(product.name, product.confSku)}>
                           <Image
                             width={1}
                             src={`${product.image}-top_sel_160.jpg`}
@@ -155,14 +150,8 @@ class PaymentSuccess extends Component {
                       <Box variant="col-4" pl={15}>
                         {/* <Link to="/"> */}
                         <Box mb="10px">
-                          <Link
-                            to={formatProductURL(product.name, product.confSku)}
-                          >
-                            <Heading
-                              color="heading"
-                              fontSize={16}
-                              lineHeight={1.4}
-                            >
+                          <Link to={formatProductURL(product.name, product.confSku)}>
+                            <Heading color="heading" fontSize={16} lineHeight={1.4}>
                               {product.name}
                             </Heading>
                           </Link>
@@ -212,20 +201,12 @@ class PaymentSuccess extends Component {
                       ) : null}
                       <Row m="0" py="1em" sx={{ borderTop: 'divider' }}>
                         <Box variant="col-6" p="0">
-                          <Text
-                            color="menuItem"
-                            fontSize={18}
-                            fontFamily="medium"
-                          >
+                          <Text color="menuItem" fontSize={18} fontFamily="medium">
                             Total Price :
                           </Text>
                         </Box>
                         <Box variant="col-6" p="0" textAlign="right">
-                          <Text
-                            color="menuItem"
-                            fontSize={18}
-                            fontFamily="medium"
-                          >
+                          <Text color="menuItem" fontSize={18} fontFamily="medium">
                             Rs {formatAmount(totalAmount)}
                           </Text>
                         </Box>
