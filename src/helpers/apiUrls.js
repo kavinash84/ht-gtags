@@ -82,6 +82,7 @@ export const BULK_ORDER = 'tesla/bulk-order';
 export const CASE_ORDER = 'tesla/users/insertcase';
 export const SUBSCRIPTION = 'tesla/users/subscribe-us';
 export const PROMOTIONS = 'tesla/static/text/promotions_react';
+export const RETURN_POLICY = 'tesla/static/landingpage/return_policy';
 export const CALL_BACK = 'tesla/call-back';
 
 /* Pincode */

@@ -71,6 +71,13 @@ const ReturnPolicy = () => (
               </li>
               <li>
                 <TextHtV1 color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
+                  In case of Damage or Missing Item for the ordered product in Category like Decor, Home Furnishing,
+                  Tableware, Kitchenware & Luggage Customer has to raised a Ticket within 15 days from the product
+                  delivered. Post that Time Period no ticket or complaints will be entertained from HomeTown Team.
+                </TextHtV1>
+              </li>
+              <li>
+                <TextHtV1 color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
                   Note: Products that have been assembled and/or installed cannot be returned or replaced, in case any
                   manufacturing defect, the product will be repaired under normal warranty terms.
                 </TextHtV1>
