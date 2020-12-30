@@ -39,6 +39,7 @@ const youtubeIcon = require('../../../static/youtube.svg');
 const instaIcon = require('../../../static/instagram.svg');
 const pinIcon = require('../../../static/pinterest.svg');
 // const bajajFinserveIcon = require('../../../static/bajaj-finserv.png');
+const ourAppIcon = require('../../../static/google-play-store.svg');
 
 const FooterLinks = ['Furniture', 'Home Furnishings', 'Home Décor', 'Home Decor', 'Tableware', 'Kitchenware', 'Bath'];
 
@@ -252,6 +253,16 @@ class Footer extends React.Component {
                     </Link>
                   </Li>
                 </Ul>
+              </Box>
+              <Box mb={15}>
+                <Heading variant="footerTitle">OUR APP</Heading>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://play.google.com/store/apps/details?id=com.fabfurnish.android"
+                >
+                  <Image src={ourAppIcon} alt="Our App" mt="1rem" width="178px" />
+                </a>
               </Box>
             </Col>
             <Col width={[1, 1, 4 / 12]} pl={[0, 0, 50]}>
