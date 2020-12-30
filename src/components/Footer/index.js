@@ -38,7 +38,7 @@ const twIcon = require('../../../static/twitter.svg');
 const youtubeIcon = require('../../../static/youtube.svg');
 const instaIcon = require('../../../static/instagram.svg');
 const pinIcon = require('../../../static/pinterest.svg');
-const bajajFinserveIcon = require('../../../static/bajaj-finserv.png');
+// const bajajFinserveIcon = require('../../../static/bajaj-finserv.png');
 
 const FooterLinks = ['Furniture', 'Home Furnishings', 'Home Décor', 'Home Decor', 'Tableware', 'Kitchenware', 'Bath'];
 
@@ -221,7 +221,7 @@ class Footer extends React.Component {
                     </a>
                   </Li>
                 </Ul> */}
-                <Image src={bajajFinserveIcon} alt="Bajaj Finserv" mt={20} />
+                {/* <Image src={bajajFinserveIcon} alt="Bajaj Finserv" mt={20} /> */}
               </Box>
             </Col>
             <Col width={[1, 2 / 3, 3 / 12]}>
