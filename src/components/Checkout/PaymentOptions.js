@@ -33,6 +33,7 @@ import {
   resetEasyEmiState
 } from 'redux/modules/paymentoptions';
 import { paymentLoaded } from 'redux/modules/app';
+import { togglePopUp } from 'redux/modules/webtochat';
 import { getCartList, getNotDelivered, getStockOutProducts } from 'selectors/cart';
 
 /**
@@ -89,6 +90,34 @@ const validateInput = details => {
 class PaymentOptions extends Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
+  };
+  state = {
+    popUpTimeoutId: null
+  };
+
+  componentDidMount() {
+    const { paymentTimeout } = this.props;
+    console.log('paymentTimeout', paymentTimeout);
+
+    const popUpTimeoutId = setTimeout(this.webToChat, paymentTimeout);
+    // eslint-disable-next-line react/no-did-mount-set-state
+    this.setState({ popUpTimeoutId });
+  }
+  componentWillUnmount() {
+    console.log('componentWillUnmount function in payment option');
+    const { toggleWebToChat } = this.props;
+    const { popUpTimeoutId } = this.state;
+    clearTimeout(popUpTimeoutId);
+    toggleWebToChat(false);
+  }
+  webToChat = () => {
+    const { toggleWebToChat, dismiss } = this.props;
+
+    const {
+      embedded_svc: { liveAgentAPI: { inviteButton: { isAvailable } = {} } = {} }
+    } = window;
+    console.log(isAvailable, !dismiss, 'webToChat function');
+    if (isAvailable && !dismiss) toggleWebToChat(true);
   };
   render() {
     const {
@@ -471,6 +500,7 @@ class PaymentOptions extends Component {
 }
 
 PaymentOptions.defaultProps = {
+  dismiss: false,
   selectedGateway: 'creditcard',
   data: [],
   summary: null,
@@ -487,6 +517,9 @@ PaymentOptions.defaultProps = {
 };
 
 PaymentOptions.propTypes = {
+  toggleWebToChat: PropTypes.func.isRequired,
+  dismiss: PropTypes.bool,
+  paymentTimeout: PropTypes.number.isRequired,
   selectedGateway: PropTypes.string,
   paymentLoadedStatus: PropTypes.func.isRequired,
   data: PropTypes.array,
@@ -513,6 +546,7 @@ const mapStateToProps = ({
   paymentoptions,
   cart: { checkingCart, cartChecked, summary },
   app: { sessionId },
+  webtochat: { paymentTimeout, dismiss },
   cart
 }) => ({
   selectedGateway: paymentoptions.selectedGateway,
@@ -530,7 +564,9 @@ const mapStateToProps = ({
   checkingCart,
   cartChecked,
   summary,
-  sessionId
+  sessionId,
+  paymentTimeout,
+  dismiss
 });
 
 const mapDispatchToProps = dispatch =>
@@ -542,7 +578,8 @@ const mapDispatchToProps = dispatch =>
       submitDetails: submitPaymentDetails,
       setError: setValidationError,
       resetEasyEmi: resetEasyEmiState,
-      paymentLoadedStatus: paymentLoaded
+      paymentLoadedStatus: paymentLoaded,
+      toggleWebToChat: togglePopUp
     },
     dispatch
   );
