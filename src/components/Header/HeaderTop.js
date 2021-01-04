@@ -363,30 +363,12 @@ export default class HeaderTop extends Component {
                     mb={10}
                     mx={15}
                     width={300}
+                    maxHeight={340}
                     sx={{
-                      borderBottom: 'divider'
+                      borderBottom: 'divider',
+                      overflow: 'auto'
                     }}
                   >
-                    {/* <ProductSummaryList
-                      qty={2}
-                      productItem={{
-                        image: 'https://www.hometown.in/media/product/53/1253/12483/1-top_sel_160.jpg',
-                        unit_price: 2000,
-                        special_price: 2000,
-                        name: 'Logan Fabric Two Sea..',
-                        color: 'brown'
-                      }}
-                    />
-                    <ProductSummaryList
-                      qty={2}
-                      productItem={{
-                        image: 'https://www.hometown.in/media/product/53/1253/12483/1-top_sel_160.jpg',
-                        unit_price: 2000,
-                        special_price: 2000,
-                        name: 'Logan Fabric Two Sea..',
-                        color: 'brown'
-                      }}
-                    /> */}
                     {cartItems.map(item => (
                       <ProductSummaryList
                         qty={item.qty}
@@ -400,10 +382,10 @@ export default class HeaderTop extends Component {
                       />
                     ))}
                   </Box>
-                  <Box variant="col-12" pb={20} px={[0, 0, 16]}>
-                    <Flex justifyContent="space-between">
-                      <Text>Subtotal</Text>
-                      <Text>Rs. {cartSummary.total}</Text>
+                  <Box pb={20} px={[0, 0, 16]}>
+                    <Flex width={7 / 12} justifyContent="space-between" ml="auto">
+                      <Text fontFamily="medium">Subtotal</Text>
+                      <Text fontFamily="medium">Rs. {cartSummary.total}</Text>
                     </Flex>
                   </Box>
                   <Box px={16}>

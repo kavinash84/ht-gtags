@@ -516,6 +516,7 @@ class DeliveryAddress extends Component {
                 itemsCount={summary.items_count}
                 discount={summary.coupon_discount}
                 coupon={summary.coupon}
+                hidecoupon={false}
               />
               <PaymentMethods />
             </Box>

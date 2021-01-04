@@ -18,8 +18,7 @@ import Row from 'hometown-components-dev/lib/RowHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import ProductSummaryList from './ProductSummaryList';
-import Coupon from './Coupon';
-// import Img from 'hometown-components/lib/Img';
+
 const editIcon = require('../../../static/edit-round.svg');
 
 const styles = require('./OrderSummary.scss');
@@ -39,14 +38,10 @@ const OrderSummary = ({
   coupon,
   results,
   history,
-  hidecoupon,
   landingPageLink,
   selectedForDemo
 }) => (
   <Row>
-    <Box variant="col-12" mb="1.25rem">
-      {!hidecoupon && <Coupon />}
-    </Box>
     {selectedForDemo && (
       <Row ml="0" mr="0" mb="1rem" alignItems="center" flexWrap="no-wrap" width="100%">
         <Image src={playButton} alt="Schedule store demo for selected products" height="32px" mr="10px" width="auto" />
@@ -85,8 +80,10 @@ const OrderSummary = ({
       mt={20}
       mx={15}
       width={1}
+      maxHeight={380}
       sx={{
-        borderBottom: 'divider'
+        borderBottom: 'divider',
+        overflow: 'auto'
       }}
     >
       {results.map(item => (
@@ -148,8 +145,7 @@ OrderSummary.defaultProps = {
   setDiscount: 0,
   results: [],
   landingPageLink: '',
-  selectedForDemo: false,
-  hidecoupon: false
+  selectedForDemo: false
 };
 
 OrderSummary.propTypes = {
@@ -163,7 +159,6 @@ OrderSummary.propTypes = {
   coupon: PropTypes.string.isRequired,
   results: PropTypes.array,
   history: PropTypes.object.isRequired,
-  hidecoupon: PropTypes.bool,
   landingPageLink: PropTypes.string,
   selectedForDemo: PropTypes.bool
 };
