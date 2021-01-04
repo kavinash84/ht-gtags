@@ -314,12 +314,14 @@ export default class HeaderTop extends Component {
                   </Box>
                   <Flex mx={-5}>
                     <Box width={1 / 2} px={5}>
-                      <Button as={Link} to={DELIVERY_ADDRESS_URL} width={1}>
-                        SIGN IN
-                      </Button>
+                      {!isLoggedIn && (
+                        <Button as={Link} to={LOGIN_URL} width={1}>
+                          SIGN IN
+                        </Button>
+                      )}
                     </Box>
                     <Box width={1 / 2} px={5}>
-                      <Button as={Link} to={CART_URL} variant="outline.primary" width={1}>
+                      <Button as={Link} to={MY_WISHLIST_URL} variant="outline.primary" width={1}>
                         VIEW ALL
                       </Button>
                     </Box>

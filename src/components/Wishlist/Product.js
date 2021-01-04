@@ -6,6 +6,7 @@ import ImageShimmer from 'hometown-components-dev/lib/ImageShimmerHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import WishlistBtn from 'hometown-components-dev/lib/WishlistButtonHtV1';
 
 import truck from '../../static/truck.svg';
 
@@ -25,10 +26,16 @@ const Product = props => {
     setProductPosition,
     productURL,
     deliveredBy,
-    pincode
+    pincode,
+    sku,
+    onClick,
+    isWishList,
+    skuLoading,
+    simpleSku
   } = props;
   return (
-    <Box>
+    <Box variant="col-12">
+      <WishlistBtn onClick={onClick(sku, simpleSku)} isWishList={isWishList} wishlistLoading={skuLoading} />
       <Link onClick={handleClick(setProductPosition, position)} to={productURL}>
         <Box>
           <ImageShimmer src={image} height={imgHeight}>
@@ -110,7 +117,12 @@ const Product = props => {
 
 Product.defaultProps = {
   imgHeight: '240px',
-  pincode: null
+  pincode: null,
+  sku: '',
+  onClick: () => {},
+  isWishList: true,
+  skuLoading: true,
+  simpleSku: null
 };
 
 Product.propTypes = {
@@ -123,7 +135,12 @@ Product.propTypes = {
   setProductPosition: PropTypes.func.isRequired,
   productURL: PropTypes.string.isRequired,
   deliveredBy: PropTypes.string.isRequired,
-  pincode: PropTypes.string
+  pincode: PropTypes.string,
+  sku: PropTypes.any,
+  onClick: PropTypes.func,
+  isWishList: PropTypes.bool,
+  skuLoading: PropTypes.bool,
+  simpleSku: PropTypes.any
 };
 
 export default Product;
