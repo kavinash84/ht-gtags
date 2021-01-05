@@ -92,7 +92,7 @@ class PaymentSuccess extends Component {
     const {
       data,
       data: {
-        order_number: orderNo,
+        order_no: orderNo,
         sub_total_amount: subTotal,
         discount_coupon_value: discount,
         net_order_amount: totalAmount,
@@ -100,7 +100,7 @@ class PaymentSuccess extends Component {
         set_discount: setDiscount
       }
     } = this.props;
-    if (data && shippingCharges) {
+    if (data && orderNo) {
       const { products } = this.state;
       return (
         <Wrapper>
