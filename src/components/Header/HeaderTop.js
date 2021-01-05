@@ -393,7 +393,7 @@ export default class HeaderTop extends Component {
                         productItem={{
                           image: `${item.product_info.image}`,
                           unit_price: `${item.product_info.unit_price}`,
-                          special_price: `${item.product_info.special_price}`,
+                          special_price: `${item.product_info.net_price}`,
                           name: `${item.product_info.name}`,
                           color: `${item.product_info.color}`
                         }}
