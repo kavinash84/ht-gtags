@@ -617,6 +617,7 @@ class ProductDetails extends React.Component {
                 isEmiAvailable={isEmiAvailable}
                 pincode={pincode.selectedPincode}
                 loading={deliveryDateLoading}
+                shippingCharge={meta.shipping_charge}
               >
                 <Pincode key="pincode" />
               </ServiceDetails>
