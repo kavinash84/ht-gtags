@@ -12,6 +12,7 @@ import stores from './modules/stores';
 import userLogin from './modules/login';
 import userSignUp from './modules/signUp';
 import updatepassword from './modules/updatepassword';
+import setpassword from './modules/setpassword';
 import profile from './modules/profile';
 import forgotpassword from './modules/forgotpassword';
 import category from './modules/category';
@@ -67,6 +68,7 @@ export default function createReducers(asyncReducers) {
     userLogin,
     userSignUp,
     updatepassword,
+    setpassword,
     profile,
     forgotpassword,
     productdetails,

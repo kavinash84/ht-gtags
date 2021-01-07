@@ -34,8 +34,8 @@ const ProductSummaryList = ({ productItem, qty }) => (
         <Heading variant="heading.small">
           ₹{' '}
           {productItem.special_price === 0
-            ? formatAmount(Number(productItem.unit_price) * Number(qty))
-            : formatAmount(Number(productItem.special_price) * Number(qty))}
+            ? formatAmount(Number(productItem.unit_price))
+            : formatAmount(Number(productItem.special_price))}
         </Heading>
         <Text fontSize={12} pb={8} pt={8}>
           {`Quantity : ${Number(qty)}`}

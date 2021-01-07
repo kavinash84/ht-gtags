@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 
 /* ====== Modules ====== */
 import { logout } from 'redux/modules/login';
+import { checkCart } from 'redux/modules/cart';
+import { addToSelectForDemo } from 'redux/modules/selectForDemo';
 
 /* ====== selectors ====== */
 import { getCartCount } from 'selectors/cart';
@@ -22,6 +24,7 @@ import {
   DELIVERY_ADDRESS_URL
 } from 'helpers/Constants';
 import { titleCase, checkRedirection } from 'utils/helper';
+import { formatAmount } from 'utils/formatters';
 
 /* ====== Components ====== */
 import Box from 'hometown-components-dev/lib/BoxHtV1';
@@ -59,10 +62,15 @@ const onClickLogout = dispatcher => e => {
   dispatcher();
 };
 
+const despatchClearSelectForDemo = dispatcheroEmpty => {
+  const state = [];
+  dispatcheroEmpty(state);
+};
+
 @withRouter
 @connect(
   ({
- userLogin, wishlist, cart, router, profile
+ userLogin, wishlist, cart, router, profile, app
 }) => ({
     isLoggedIn: userLogin.isLoggedIn,
     name: profile.data.first_name,
@@ -73,10 +81,14 @@ const onClickLogout = dispatcher => e => {
     // cart,
     cartItems: cart.data,
     cartSummary: cart.summary,
-    wishlist
+    wishlist,
+    addToSelectForDemo,
+    sessionId: app.sessionId
   }),
   {
-    logoutUser: logout
+    logoutUser: logout,
+    checkCart,
+    addToSelectForDemo
   }
 )
 export default class HeaderTop extends Component {
@@ -125,6 +137,12 @@ export default class HeaderTop extends Component {
     history.push(`${URL}/?redirect=${checkRedirection(router.location.pathname)}`);
   };
 
+  checkCartBeforeCheckout = (dispatcher, session) => dispatcheroEmpty => {
+    // e.preventDefault();
+    dispatcher(session);
+    despatchClearSelectForDemo(dispatcheroEmpty); // New
+  };
+
   render() {
     const {
       isLoggedIn,
@@ -136,7 +154,10 @@ export default class HeaderTop extends Component {
       // cart,
       cartItems,
       cartSummary,
-      wishlist
+      wishlist,
+      // checkCart,
+      sessionId,
+      // addToSelectForDemo
     } = this.props;
 
     return (
@@ -395,7 +416,9 @@ export default class HeaderTop extends Component {
                           unit_price: `${item.product_info.unit_price}`,
                           special_price: `${item.product_info.net_price}`,
                           name: `${item.product_info.name}`,
-                          color: `${item.product_info.color}`
+                          color: `${item.product_info.color}`,
+                          isDeliverable: `${item.product_info.is_deliverable}`,
+                          deliveryTimeMessage: `${item.product_info.delivery_time_text}`
                         }}
                       />
                     ))}
@@ -403,13 +426,24 @@ export default class HeaderTop extends Component {
                   <Box variant="col-12" pb={20} px={[0, 0, 16]}>
                     <Flex justifyContent="space-between">
                       <Text>Subtotal</Text>
-                      <Text>Rs. {cartSummary.total}</Text>
+                      <Text fontFamily="medium">Rs. {formatAmount(cartSummary.total)}</Text>
                     </Flex>
                   </Box>
                   <Box px={16}>
-                    <Button width={1} as={Link} to={DELIVERY_ADDRESS_URL} mb={10}>
-                      CHECKOUT NOW
-                    </Button>
+                    {cartItems.length > 0 && (
+                      <Button
+                        width={1}
+                        as={Link}
+                        onClick={() => {
+                          console.log('click check');
+                          this.checkCartBeforeCheckout(checkCart, sessionId)(addToSelectForDemo);
+                        }}
+                        to={DELIVERY_ADDRESS_URL}
+                        mb={10}
+                      >
+                        CHECKOUT NOW
+                      </Button>
+                    )}
                     <Button width={1} as={Link} to={CART_URL} variant="outline.primary">
                       VIEW CART
                     </Button>
@@ -482,5 +516,8 @@ HeaderTop.propTypes = {
   cartItems: PropTypes.array,
   cartSummary: PropTypes.object,
   cart: PropTypes.object,
-  wishlist: PropTypes.object
+  wishlist: PropTypes.object,
+  addToSelectForDemo: PropTypes.func.isRequired,
+  checkCart: PropTypes.func.isRequired,
+  sessionId: PropTypes.string.isRequired,
 };

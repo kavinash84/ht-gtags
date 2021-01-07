@@ -21,6 +21,7 @@ export const RESEND_OTP = 'tesla/otp/resend';
 export const USERPROFILE = 'tesla/users/details';
 export const UPDATEPROFILE = 'tesla/users/update-profile';
 export const UPDATE_PASSWORD = 'tesla/users/update-password';
+export const SET_PASSWORD = 'tesla/users/change-password';
 export const FORGOT_PASSWORD = 'tesla/users/forgot-password';
 export const CHECK_HASH = 'tesla/users/forgot-password/verify';
 export const RESET_PASSWORD = 'tesla/users/forgot-password/reset';
