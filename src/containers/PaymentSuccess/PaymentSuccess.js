@@ -24,10 +24,10 @@ import ThankYou from 'newComponents/ThankYou';
  * Modules / Utils / Reducers /
  */
 import { formatAmount } from 'utils/formatters';
-import { formatProductURL } from 'utils/helper';
+import { formatProductURL, allowNChar } from 'utils/helper';
 import { paymentLoaded as setPaymentLoadStatus } from 'redux/modules/app';
 import { validatePassword } from 'utils/validation';
-import { allowNChar } from 'utils/helper';
+
 import { isBlank } from 'js-utility-functions';
 import { setUserPassword } from 'redux/modules/setpassword';
 
@@ -409,7 +409,7 @@ PaymentSuccess.propTypes = {
   response: PropTypes.object
 };
 PaymentSuccess.contextTypes = {
-  store: PropTypes.object.isRequired,
+  store: PropTypes.object.isRequired
 };
 
 export default connect(mapStateToProps, null)(PaymentSuccess);

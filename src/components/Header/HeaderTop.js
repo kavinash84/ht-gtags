@@ -156,7 +156,7 @@ export default class HeaderTop extends Component {
       cartSummary,
       wishlist,
       // checkCart,
-      sessionId,
+      sessionId
       // addToSelectForDemo
     } = this.props;
 
@@ -519,5 +519,5 @@ HeaderTop.propTypes = {
   wishlist: PropTypes.object,
   addToSelectForDemo: PropTypes.func.isRequired,
   checkCart: PropTypes.func.isRequired,
-  sessionId: PropTypes.string.isRequired,
+  sessionId: PropTypes.string.isRequired
 };
