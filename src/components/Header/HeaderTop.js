@@ -49,6 +49,7 @@ import LoginForm from 'components/LoginForms';
 import SignupForm from 'components/Signup/SignupForm';
 import ProductSummaryList from 'components/Checkout/ProductSummaryList';
 
+
 const LogoIcon = require('../../../static/logo@2x.png');
 const PincodeModalIcon = require('../../../static/map-placeholder.svg');
 
@@ -95,11 +96,13 @@ export default class HeaderTop extends Component {
   state = {
     openPincode: false,
     openLogin: false,
-    openSignup: false
+    openSignup: false,
+    containsOutOfStock: true
   };
   componentDidMount() {
-    const { cart, wishlist, checkCart } = this.props;
+    const { cart, wishlist, checkCart, cartItems } = this.props;
     console.log('cart check', checkCart);
+    // this.containsOutOfStock(cartItems);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -108,7 +111,8 @@ export default class HeaderTop extends Component {
         openLogin: false
       });
     }
-    const { wishlist, cart } = this.props;
+    const { wishlist, cart, cartItems } = this.props;
+    this.containsOutOfStock(cartItems);
   }
   onOpenPincodeModal = () => {
     this.setState({ openPincode: true });
@@ -140,6 +144,23 @@ export default class HeaderTop extends Component {
     dispatcher(session);
     despatchClearSelectForDemo(dispatcheroEmpty); // New
   };
+
+  containsOutOfStock = (items) => {
+    items.forEach(item => {
+      if(item.product_info.stock > 0) {
+        this.setState({
+          containsOutOfStock: false
+        })
+        console.log(this.state);
+      }
+      else {
+        this.setState({
+          containsOutOfStock: true
+        })
+        console.log('else', this.state);
+      }      
+    });
+  }
 
   render() {
     const {
@@ -397,7 +418,7 @@ export default class HeaderTop extends Component {
                           special_price: `${item.product_info.net_price}`,
                           name: `${item.product_info.name}`,
                           color: `${item.product_info.color}`,
-                          isDeliverable: `${item.product_info.is_deliverable}`,
+                          stock: `${item.product_info.stock}`,
                           deliveryTimeMessage: `${item.product_info.delivery_time_text}`
                         }}
                       />
@@ -406,17 +427,31 @@ export default class HeaderTop extends Component {
                   <Box pb={20} px={[0, 0, 16]}>
                     <Flex width={7 / 12} justifyContent="space-between" ml="auto">
                       <Text fontFamily="medium">Subtotal</Text>
-                      <Text fontFamily="medium">Rs. {cartSummary.total}</Text>
+                      <Text fontFamily="medium">Rs. {formatAmount(cartSummary.total)}</Text>
                     </Flex>
                   </Box>
                   <Box px={16}>
-                    {cartItems.length > 0 && (
+                    {cartItems.length > 0 && !this.state.containsOutOfStock ? (
                       <Button
+                        // disabled={this.state.containsOutOfStock}
                         width={1}
                         as={Link}
                         onClick={() => this.checkCartBeforeCheckout(checkCart, sessionId)(addToSelectForDemo)}
                         to={DELIVERY_ADDRESS_URL}
                         mb={10}
+                        // disabled={this.containsOutOfStock(cartItems)}                        
+                      >
+                        CHECKOUT NOW
+                      </Button>
+                    ) : (
+                      <Button
+                        disabled={this.state.containsOutOfStock}
+                        width={1}
+                        // as={Link}
+                        // onClick={() => this.checkCartBeforeCheckout(checkCart, sessionId)(addToSelectForDemo)}
+                        // to={DELIVERY_ADDRESS_URL}
+                        mb={10}
+                        // disabled={this.containsOutOfStock(cartItems)}                        
                       >
                         CHECKOUT NOW
                       </Button>

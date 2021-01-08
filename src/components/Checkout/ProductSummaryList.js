@@ -31,7 +31,7 @@ const ProductSummaryList = ({ productItem, qty }) => (
         <Text fontSize={12} pb={8}>
           {productItem.color}
         </Text>
-        {productItem.isDeliverable ? (<Heading variant="heading.small">
+        {productItem.stock > 0 ? (<Heading variant="heading.small">
           ₹{' '}
           {productItem.special_price === 0
             ? formatAmount(Number(productItem.unit_price))
