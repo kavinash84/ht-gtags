@@ -98,10 +98,8 @@ export default class HeaderTop extends Component {
     openSignup: false
   };
   componentDidMount() {
-    const { cart } = this.props;
-    console.log('cart check', cart);
-    const { wishlist } = this.props;
-    console.log('wishlist check', wishlist);
+    const { cart, wishlist, checkCart } = this.props;
+    console.log('cart check', checkCart);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -111,8 +109,6 @@ export default class HeaderTop extends Component {
       });
     }
     const { wishlist, cart } = this.props;
-    console.log('cart check', cart);
-    console.log('wishlist check', wishlist);
   }
   onOpenPincodeModal = () => {
     this.setState({ openPincode: true });
@@ -140,6 +136,7 @@ export default class HeaderTop extends Component {
 
   checkCartBeforeCheckout = (dispatcher, session) => dispatcheroEmpty => {
     // e.preventDefault();
+    console.log('cart check console', dispatcher, session, dispatcheroEmpty);
     dispatcher(session);
     despatchClearSelectForDemo(dispatcheroEmpty); // New
   };
@@ -156,9 +153,9 @@ export default class HeaderTop extends Component {
       cartItems,
       cartSummary,
       wishlist,
-      // checkCart,
-      sessionId
-      // addToSelectForDemo
+      checkCart,
+      sessionId,
+      addToSelectForDemo
     } = this.props;
 
     return (
@@ -417,10 +414,7 @@ export default class HeaderTop extends Component {
                       <Button
                         width={1}
                         as={Link}
-                        onClick={() => {
-                          console.log('click check');
-                          this.checkCartBeforeCheckout(checkCart, sessionId)(addToSelectForDemo);
-                        }}
+                        onClick={() => this.checkCartBeforeCheckout(checkCart, sessionId)(addToSelectForDemo)}
                         to={DELIVERY_ADDRESS_URL}
                         mb={10}
                       >
