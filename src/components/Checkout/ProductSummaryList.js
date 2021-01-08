@@ -31,14 +31,16 @@ const ProductSummaryList = ({ productItem, qty }) => (
         <Text fontSize={12} pb={8}>
           {productItem.color}
         </Text>
-        {productItem.stock > 0 ? (<Heading variant="heading.small">
-          ₹{' '}
-          {productItem.special_price === 0
-            ? formatAmount(Number(productItem.unit_price))
-            : formatAmount(Number(productItem.special_price))}
-        </Heading>) : (<Heading variant="heading.small">
-          {productItem.deliveryTimeMessage}
-        </Heading>)}
+        {productItem.stock > 0 ? (
+          <Heading variant="heading.small">
+            ₹{' '}
+            {productItem.special_price === 0
+              ? formatAmount(Number(productItem.unit_price))
+              : formatAmount(Number(productItem.special_price))}
+          </Heading>
+        ) : (
+          <Heading variant="heading.small">{productItem.deliveryTimeMessage}</Heading>
+        )}
         {/* // <Heading variant="heading.small">
         //   ₹{' '}
         //   {productItem.special_price === 0

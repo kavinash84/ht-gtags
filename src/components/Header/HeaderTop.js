@@ -49,7 +49,6 @@ import LoginForm from 'components/LoginForms';
 import SignupForm from 'components/Signup/SignupForm';
 import ProductSummaryList from 'components/Checkout/ProductSummaryList';
 
-
 const LogoIcon = require('../../../static/logo@2x.png');
 const PincodeModalIcon = require('../../../static/map-placeholder.svg');
 
@@ -99,11 +98,11 @@ export default class HeaderTop extends Component {
     openSignup: false,
     containsOutOfStock: true
   };
-  componentDidMount() {
-    const { cart, wishlist, checkCart, cartItems } = this.props;
-    console.log('cart check', checkCart);
-    // this.containsOutOfStock(cartItems);
-  }
+  // componentDidMount() {
+  //   const { cart, wishlist, checkCart, cartItems } = this.props;
+  //   // console.log('cart check', checkCart);
+  //   // this.containsOutOfStock(cartItems);
+  // }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.isLoggedIn) {
@@ -111,7 +110,7 @@ export default class HeaderTop extends Component {
         openLogin: false
       });
     }
-    const { wishlist, cart, cartItems } = this.props;
+    const { cartItems } = this.props;
     this.containsOutOfStock(cartItems);
   }
   onOpenPincodeModal = () => {
@@ -145,22 +144,21 @@ export default class HeaderTop extends Component {
     despatchClearSelectForDemo(dispatcheroEmpty); // New
   };
 
-  containsOutOfStock = (items) => {
+  containsOutOfStock = items => {
     items.forEach(item => {
-      if(item.product_info.stock > 0) {
+      if (item.product_info.stock > 0) {
         this.setState({
           containsOutOfStock: false
-        })
+        });
         console.log(this.state);
-      }
-      else {
+      } else {
         this.setState({
           containsOutOfStock: true
-        })
+        });
         console.log('else', this.state);
-      }      
+      }
     });
-  }
+  };
 
   render() {
     const {
@@ -439,7 +437,6 @@ export default class HeaderTop extends Component {
                         onClick={() => this.checkCartBeforeCheckout(checkCart, sessionId)(addToSelectForDemo)}
                         to={DELIVERY_ADDRESS_URL}
                         mb={10}
-                        // disabled={this.containsOutOfStock(cartItems)}                        
                       >
                         CHECKOUT NOW
                       </Button>
@@ -451,7 +448,6 @@ export default class HeaderTop extends Component {
                         // onClick={() => this.checkCartBeforeCheckout(checkCart, sessionId)(addToSelectForDemo)}
                         // to={DELIVERY_ADDRESS_URL}
                         mb={10}
-                        // disabled={this.containsOutOfStock(cartItems)}                        
                       >
                         CHECKOUT NOW
                       </Button>
