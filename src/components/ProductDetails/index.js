@@ -65,6 +65,7 @@ import Pincode from './Pincode';
 import ProductDetailsCarousel from './Carousel';
 import Video from './Video';
 import ReviewFilter from './ReviewFilter';
+import UnbxdCompleteTheLook from './UnbxdCompleteTheLook';
 
 import demoIcon from '../../../static/play-button.svg';
 
@@ -1108,26 +1109,7 @@ class ProductDetails extends React.Component {
             )}
 
             {/* Complete the look */}
-            <Box py={20}>
-              <Box textAlign="center" mb={20}>
-                <Heading variant="heading.regular">Complete the look</Heading>
-              </Box>
-              <Row textAlign="center" flexWrap="wrap">
-                <CompleteTheLookCol src="https://www.hometown.in/media/cms/banner/cabinet.png" />
-                <CompleteTheLookCol src="https://www.hometown.in/media/cms/banner/chair.png" />
-                <CompleteTheLookCol src="https://www.hometown.in/media/cms/banner/curtain.png" />
-                <CompleteTheLookCol src="https://www.hometown.in/media/cms/banner/painting.png" />
-                <CompleteTheLookCol
-                  width="190px"
-                  height="190px"
-                  marginTop="53px"
-                  marginRight="104px"
-                  marginLeft="93px"
-                  src="https://www.hometown.in/media/cms/banner/pillow.png"
-                />
-                <CompleteTheLookCol src="https://www.hometown.in/media/cms/banner/table.png" />
-              </Row>
-            </Box>
+            <UnbxdCompleteTheLook />
 
             {/* Review List and Add review */}
             <Box id="review-section" pt={30} className={styles.reviewSection}>
