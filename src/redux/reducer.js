@@ -41,6 +41,7 @@ import cases from './modules/cases';
 import combinedbuy from './modules/combinedbuy';
 import landing from './modules/landing';
 import selectForDemo from './modules/selectForDemo';
+import webtochat from './modules/webtochat';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -96,6 +97,7 @@ export default function createReducers(asyncReducers) {
     mycases,
     landing,
     selectForDemo,
+    webtochat,
     ...asyncReducers
   };
 }

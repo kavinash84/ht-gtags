@@ -194,7 +194,7 @@ class PaymentSuccess extends Component {
     const {
       data,
       data: {
-        order_number: orderNo,
+        order_no: orderNo,
         sub_total_amount: subTotal,
         discount_coupon_value: discount,
         net_order_amount: totalAmount,
@@ -203,10 +203,8 @@ class PaymentSuccess extends Component {
       },
       response
     } = this.props;
-    const {
- loading, loaded, error, errorMessage, passwordUpdated
-} = response;
-    if (data && shippingCharges) {
+
+    if (data && orderNo) {
       const { products } = this.state;
       return (
         <Wrapper>

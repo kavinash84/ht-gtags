@@ -19,6 +19,7 @@ import { productPageTitle, productMetaDescription, productMetaKeywords } from 'u
 import { groupedAttributes as getgroupedAttributes, getBreadCrumbs, getSimpleSku } from 'selectors/product';
 import { getCartSKU } from 'selectors/cart';
 import { getSKUList } from 'selectors/wishlist';
+import { togglePopUp } from 'redux/modules/webtochat';
 
 /**
  * Components
@@ -52,6 +53,9 @@ import EmiOptions from 'hometown-components-dev/lib/ProductDetailsHtV1/EmiOption
 import Specs from 'hometown-components-dev/lib/ProductDetailsHtV1/Specs';
 import TitlePrice from 'hometown-components-dev/lib/ProductDetailsHtV1/TitlePrice';
 import WishListButton from 'hometown-components-dev/lib/WishlistButtonHtV1';
+// import Section from 'hometown-components-dev/lib/SectionHtV1';
+// import UnbxdRecentlyViewed from 'components/UnbxdRecentlyViewed/UnbxdRecentlyViewed';
+
 import LoginModal from 'containers/Login/LoginForm';
 import AddToCart from '../AddToCart';
 import BreadCrumb from './BreadCrumb';
@@ -172,7 +176,8 @@ const mapDispatchToProps = dispatch =>
       productPosition: setProductPosition,
       addToWaitList: wishListWaitList,
       toggleReviewBox: toggleReview,
-      updateQuantityFlag: setQuantityFlag
+      updateQuantityFlag: setQuantityFlag,
+      toggleWebToChat: togglePopUp
     },
     dispatch
   );
@@ -199,7 +204,8 @@ const mapStateToProps = ({
   wishlist,
   userLogin,
   combinedbuy,
-  cart
+  cart,
+  webtochat: { dismiss, pdpTimeout }
 }) => ({
   session: sessionId,
   product: productdetails.productDescription,
@@ -219,7 +225,9 @@ const mapStateToProps = ({
   breadcrumbs: getBreadCrumbs(productdetails),
   simpleSku: getSimpleSku(productdetails),
   quantityChange: cart.quantityChange,
-  skuItem: getCartSKU(cart, productdetails.productDescription.sku)
+  skuItem: getCartSKU(cart, productdetails.productDescription.sku),
+  dismiss,
+  pdpTimeout
 });
 
 const getSelectedColor = colors => {
@@ -252,7 +260,8 @@ class ProductDetails extends React.Component {
       selectedFilter: null,
       filterChanged: false,
       colorProducts: [],
-      isFurniture: false
+      isFurniture: false,
+      popUpTimeoutId: null
     };
   }
   componentDidMount() {
@@ -260,10 +269,15 @@ class ProductDetails extends React.Component {
     const {
       product,
       simpleSku,
-      pincode: { selectedPincode }
+      pincode: { selectedPincode },
+      pdpTimeout
     } = this.props;
+    console.log('componentDidMount function');
     dispatch(getCombinedBuy(simpleSku, selectedPincode));
     this.setDescriptionActive(product);
+    const popUpTimeoutId = setTimeout(this.webToChat, pdpTimeout);
+    // eslint-disable-next-line react/no-did-mount-set-state
+    this.setState({ popUpTimeoutId });
   }
   componentWillReceiveProps(nextProps) {
     const { colorproducts, product } = this.props;
@@ -277,6 +291,13 @@ class ProductDetails extends React.Component {
       this.addProductToColorProduct(nextProps.colorproducts);
     }
     this.isFurnitureTrue();
+  }
+  componentWillUnmount() {
+    console.log('componentWillUnmount function inside details page');
+    const { toggleWebToChat } = this.props;
+    const { popUpTimeoutId } = this.state;
+    clearTimeout(popUpTimeoutId);
+    toggleWebToChat(false);
   }
   onFilterChange = Filter => {
     const { reviews } = this.props;
@@ -344,6 +365,16 @@ class ProductDetails extends React.Component {
       ans = total && weight ? (weight / total).toFixed(1) : 0;
     }
     return Number(ans);
+  };
+  webToChat = () => {
+    // const { dispatch } = this.context.store;
+    const { toggleWebToChat, dismiss } = this.props;
+
+    const {
+      embedded_svc: { liveAgentAPI: { inviteButton: { isAvailable } = {} } = {} }
+    } = window;
+    console.log(isAvailable, !dismiss, 'webToChat function');
+    if (isAvailable && !dismiss) toggleWebToChat(true);
   };
   handleLoginModal = () => {
     this.setState({ openLogin: !this.state.openLogin });
@@ -1187,6 +1218,7 @@ class ProductDetails extends React.Component {
 }
 
 ProductDetails.defaultProps = {
+  dismiss: false,
   product: {},
   pincode: {},
   reviews: {},
@@ -1209,6 +1241,9 @@ DescriptionButton.propTypes = {
   active: PropTypes.string
 };
 ProductDetails.propTypes = {
+  toggleWebToChat: PropTypes.func.isRequired,
+  dismiss: PropTypes.bool,
+  pdpTimeout: PropTypes.number.isRequired,
   product: PropTypes.object,
   pincode: PropTypes.object,
   reviews: PropTypes.object,
