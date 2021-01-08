@@ -14,6 +14,10 @@ import Label from 'hometown-components-dev/lib/LabelHtV1';
 import Row from 'hometown-components-dev/lib/RowHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
+import FormInputHtV1 from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
+import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
+// import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
+// import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
 
 /* ====== Page Components ====== */
 import Footer from 'components/Footer';
@@ -56,7 +60,7 @@ import { setUserPassword } from 'redux/modules/setpassword';
     paymentLoaded,
     customerId
   }))
-class PaymentSuccess extends Component {
+export default class PaymentSuccess extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -203,8 +207,19 @@ class PaymentSuccess extends Component {
       },
       response
     } = this.props;
-
+    const {
+      loading, loaded, error, errorMessage, passwordUpdated
+    } = response;
+    const {
+      password,
+      passwordFeedBackError,
+      passwordFeedBackMessage,
+      confirmPassword,
+      confirmPasswordFeedBackError,
+      confirmPasswordFeedBackMessage
+    } = this.state;
     if (data && orderNo) {
+
       const { products } = this.state;
       return (
         <Wrapper>
@@ -220,12 +235,12 @@ class PaymentSuccess extends Component {
                     <ThankYou orderNo={orderNo} />
                   </Box>
                   <Box>
-                    <form onSubmit={onSubmitSetPassword}>
+                    <form onSubmit={this.onSubmitSetPassword}>
                       <FormInputHtV1
                         label="Type Password"
                         type="password"
                         placeholder=""
-                        onChange={onChangePassword}
+                        onChange={this.onChangePassword}
                         value={password}
                         feedBackError={passwordFeedBackError}
                         feedBackMessage={passwordFeedBackMessage}
@@ -234,7 +249,7 @@ class PaymentSuccess extends Component {
                         label="Confirm Password"
                         type="password"
                         placeholder=""
-                        onChange={onChangeConfirmPassword}
+                        onChange={this.onChangeConfirmPassword}
                         value={confirmPassword}
                         feedBackError={confirmPasswordFeedBackError}
                         feedBackMessage={confirmPasswordFeedBackMessage}
@@ -242,12 +257,12 @@ class PaymentSuccess extends Component {
                       <ButtonHtV1
                         width={200}
                         mt={10}
-                        disabled={loading || passwordFeedBackError || confirmPassworddFeedBackError}
+                        disabled={loading || passwordFeedBackError || confirmPasswordFeedBackError}
                       >
                         {response && !loading ? 'UPDATE PASSWORD' : 'Please wait...'}
                       </ButtonHtV1>
                       {response && loaded && passwordUpdated && (
-                        <LabelHtV1
+                        <Label
                           type="success"
                           ta="center"
                           fontSize="0.875rem"
@@ -259,11 +274,11 @@ class PaymentSuccess extends Component {
                         >
                           {' '}
                           Password Updated !{' '}
-                        </LabelHtV1>
+                        </Label>
                       )}
                       {error && !loaded && (
-                        <BoxHtV1>
-                          <LabelHtV1
+                        <Box>
+                          <Label
                             type="error"
                             ta="center"
                             fontSize="0.875rem"
@@ -277,8 +292,8 @@ class PaymentSuccess extends Component {
                             {errorMessage.current_password && 'Invalid Current Password !'}
                             {errorMessage.repeat_password && 'Confirm password not match !'}
                             {errorMessage.error_message && 'Something went wrong !'}
-                          </LabelHtV1>
-                        </BoxHtV1>
+                          </Label>
+                        </Box>
                       )}
                     </form>
                   </Box>
@@ -396,7 +411,8 @@ PaymentSuccess.defaultProps = {
   data: '',
   error: '',
   paymentLoaded: false,
-  response: {}
+  response: {},
+  customerId: ''
 };
 
 PaymentSuccess.propTypes = {
@@ -404,10 +420,11 @@ PaymentSuccess.propTypes = {
   error: PropTypes.string,
   history: PropTypes.object.isRequired,
   paymentLoaded: PropTypes.bool,
-  response: PropTypes.object
+  response: PropTypes.object,
+  customerId: PropTypes.any
 };
 PaymentSuccess.contextTypes = {
   store: PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps, null)(PaymentSuccess);
+// export default connect(mapStateToProps, null)(PaymentSuccess);

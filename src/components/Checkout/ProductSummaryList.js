@@ -31,12 +31,20 @@ const ProductSummaryList = ({ productItem, qty }) => (
         <Text fontSize={12} pb={8}>
           {productItem.color}
         </Text>
-        <Heading variant="heading.small">
+        {productItem.isDeliverable ? (<Heading variant="heading.small">
           ₹{' '}
           {productItem.special_price === 0
             ? formatAmount(Number(productItem.unit_price))
             : formatAmount(Number(productItem.special_price))}
-        </Heading>
+        </Heading>) : (<Heading variant="heading.small">
+          {productItem.deliveryTimeMessage}
+        </Heading>)}
+        {/* // <Heading variant="heading.small">
+        //   ₹{' '}
+        //   {productItem.special_price === 0
+        //     ? formatAmount(Number(productItem.unit_price))
+        //     : formatAmount(Number(productItem.special_price))}
+        // </Heading> */}
         <Text fontSize={12} pb={8} pt={8}>
           {`Quantity : ${Number(qty)}`}
         </Text>

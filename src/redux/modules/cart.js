@@ -287,6 +287,7 @@ export const addToCart = (key, sku, simpleSku, session, pincode, configId) => di
           qty: 1
         };
         const response = await client.post(ADDTOCART_API, postData);
+        console.log('response check', response);
         return response;
       } catch (error) {
         throw error;

@@ -110,7 +110,8 @@ export default class HeaderTop extends Component {
         openLogin: false
       });
     }
-    const { wishlist } = this.props;
+    const { wishlist, cart } = this.props;
+    console.log('cart check', cart);
     console.log('wishlist check', wishlist);
   }
   onOpenPincodeModal = () => {
