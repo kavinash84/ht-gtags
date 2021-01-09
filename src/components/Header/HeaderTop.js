@@ -24,7 +24,7 @@ import {
   DELIVERY_ADDRESS_URL
 } from 'helpers/Constants';
 import { titleCase, checkRedirection } from 'utils/helper';
-import { formatAmount } from 'utils/formatters';
+// import { formatAmount } from 'utils/formatters';
 
 /* ====== Components ====== */
 import Box from 'hometown-components-dev/lib/BoxHtV1';
@@ -96,13 +96,13 @@ export default class HeaderTop extends Component {
     openPincode: false,
     openLogin: false,
     openSignup: false,
-    containsOutOfStock: true
+    containsOutOfStock: false
   };
-  // componentDidMount() {
-  //   const { cart, wishlist, checkCart, cartItems } = this.props;
-  //   // console.log('cart check', checkCart);
-  //   // this.containsOutOfStock(cartItems);
-  // }
+  componentDidMount() {
+    const { cart, wishlist, checkCart, cartItems } = this.props;
+    // console.log('cart check', checkCart);
+    this.containsOutOfStock(cartItems);
+  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.isLoggedIn) {
@@ -158,6 +158,18 @@ export default class HeaderTop extends Component {
         console.log('else', this.state);
       }
     });
+  };
+
+  formatAmount = amount => {
+    if(amount) {
+      const amt = amount.toString();
+      const newAmt = Math.floor(amt).toString();
+      const lastThree = newAmt.substring(newAmt.length - 3);
+      const otherNumbers = newAmt.substring(0, newAmt.length - 3);
+      const newlastThree = otherNumbers !== '' ? `,${lastThree}` : lastThree;
+      const res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + newlastThree;
+      return res;
+    }
   };
 
   render() {
@@ -425,33 +437,35 @@ export default class HeaderTop extends Component {
                   <Box pb={20} px={[0, 0, 16]}>
                     <Flex width={7 / 12} justifyContent="space-between" ml="auto">
                       <Text fontFamily="medium">Subtotal</Text>
-                      <Text fontFamily="medium">Rs. {formatAmount(cartSummary.total)}</Text>
+                      <Text fontFamily="medium">Rs. {this.formatAmount(cartSummary.total)}</Text>
                     </Flex>
                   </Box>
                   <Box px={16}>
-                    {cartItems.length > 0 && !this.state.containsOutOfStock ? (
-                      <Button
-                        // disabled={this.state.containsOutOfStock}
-                        width={1}
-                        as={Link}
-                        onClick={() => this.checkCartBeforeCheckout(checkCart, sessionId)(addToSelectForDemo)}
-                        to={DELIVERY_ADDRESS_URL}
-                        mb={10}
-                      >
-                        CHECKOUT NOW
-                      </Button>
-                    ) : (
-                      <Button
-                        disabled={this.state.containsOutOfStock}
-                        width={1}
-                        // as={Link}
-                        // onClick={() => this.checkCartBeforeCheckout(checkCart, sessionId)(addToSelectForDemo)}
-                        // to={DELIVERY_ADDRESS_URL}
-                        mb={10}
-                      >
-                        CHECKOUT NOW
-                      </Button>
-                    )}
+                    {cartItems.length > 0 ? (
+                      <div>
+                        {!this.state.containsOutOfStock ? (
+                          <Button
+                            width={1}
+                            as={Link}
+                            onClick={() => this.checkCartBeforeCheckout(checkCart, sessionId)(addToSelectForDemo)}
+                            to={DELIVERY_ADDRESS_URL}
+                            mb={10}
+                          >
+                            CHECKOUT NOW
+                          </Button>
+                        ) : (
+                          <Button
+                            disabled={this.state.containsOutOfStock}
+                            width={1}
+                            // as={Link}
+                            // onClick={() => this.checkCartBeforeCheckout(checkCart, sessionId)(addToSelectForDemo)}
+                            // to={DELIVERY_ADDRESS_URL}
+                            mb={10}
+                          >
+                            CHECKOUT NOW
+                          </Button>
+                        )}
+                      </div>) : null}
                     <Button width={1} as={Link} to={CART_URL} variant="outline.primary">
                       VIEW CART
                     </Button>

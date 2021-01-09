@@ -39,7 +39,7 @@ const ProductSummaryList = ({ productItem, qty }) => (
               : formatAmount(Number(productItem.special_price))}
           </Heading>
         ) : (
-          <Heading variant="heading.small">{productItem.deliveryTimeMessage}</Heading>
+          <Heading variant="heading.small" color="rgb(173, 19, 19)">Currently, product is out of stock</Heading>
         )}
         {/* // <Heading variant="heading.small">
         //   ₹{' '}
