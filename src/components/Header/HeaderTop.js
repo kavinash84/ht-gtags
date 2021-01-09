@@ -99,7 +99,9 @@ export default class HeaderTop extends Component {
     containsOutOfStock: false
   };
   componentDidMount() {
-    const { cart, wishlist, checkCart, cartItems } = this.props;
+    const {
+ cart, wishlist, checkCart, cartItems
+} = this.props;
     // console.log('cart check', checkCart);
     this.containsOutOfStock(cartItems);
   }
@@ -161,7 +163,7 @@ export default class HeaderTop extends Component {
   };
 
   formatAmount = amount => {
-    if(amount) {
+    if (amount) {
       const amt = amount.toString();
       const newAmt = Math.floor(amt).toString();
       const lastThree = newAmt.substring(newAmt.length - 3);
@@ -465,7 +467,8 @@ export default class HeaderTop extends Component {
                             CHECKOUT NOW
                           </Button>
                         )}
-                      </div>) : null}
+                      </div>
+                    ) : null}
                     <Button width={1} as={Link} to={CART_URL} variant="outline.primary">
                       VIEW CART
                     </Button>
