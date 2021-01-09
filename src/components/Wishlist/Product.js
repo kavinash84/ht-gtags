@@ -56,7 +56,7 @@ const Product = props => {
             }}
           >
             {name}
-            <Image alt={''} src={wishListIcon} width="51px" height="23px" />
+            {/* <Image alt={''} src={wishListIcon} width="51px" height="23px" /> */}
           </Heading>
           <Box mb={6} textAlign="left">
             <Text as="span" fontSize={14} mr={10} color="heading" fontFamily="medium">
