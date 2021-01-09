@@ -96,7 +96,7 @@ export default class HeaderTop extends Component {
     openPincode: false,
     openLogin: false,
     openSignup: false,
-    containsOutOfStock: false
+    containsOutOfStock: true
   };
   componentDidMount() {
     const {
