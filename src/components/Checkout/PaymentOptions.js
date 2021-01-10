@@ -146,106 +146,97 @@ class PaymentOptions extends Component {
         <Row>
           <Col variant="col-8">
             {/* Product not deliverable */}
-            <Box>
-              {results.map((item, index) => (
-                <Box key={String(index)} mb={16}>
-                  {(!item.product_info.is_deliverable || isProductOutofStock(item.configurable_sku)) && (
-                    <Row key={item.id_customer_cart} mx={0} alignItems="center" sx={{ position: 'relative' }}>
-                      <Box variant="col-2" px={0}>
-                        <ImageShimmer
-                          src={item.product_info.image}
-                          height="100%"
-                          sx={{
-                            boxShadow: '0 1px 2px 0 #0000033'
-                          }}
-                        >
-                          {imageURL => (
-                            <Image
-                              width={1}
-                              src={imageURL}
-                              alt=""
-                              sx={{
-                                boxShadow: 'productThumb'
-                              }}
-                            />
-                          )}
-                        </ImageShimmer>
-                      </Box>
-                      <Box variant="col-6" pl={30} pr={0}>
-                        <Box mb={10}>
-                          <Heading color="heading" fontSize={16} lineHeight={1.4} fontWeight="normal">
-                            {item.product_info.name}
-                          </Heading>
-                        </Box>
-                        {item.product_info.color && (
-                          <Box mb={15}>
-                            <Text color="#575757">{item.product_info.color}</Text>
-                          </Box>
-                        )}
-                        <Box>
-                          <Label color="heading" fontSize={18}>
-                            ₹{' '}
-                            {item.product_info.special_price === 0
-                              ? formatAmount(Number(item.product_info.unit_price) * Number(item.qty))
-                              : formatAmount(Number(item.product_info.special_price) * Number(item.qty))}
-                          </Label>
-                        </Box>
-                      </Box>
-                      <Flex
-                        width={1}
-                        justifyContent="center"
-                        alignItems="center"
-                        flexDirection="column"
+            {results.map((item, index) => (
+              <Box key={String(index)}>
+                {(!item.product_info.is_deliverable || isProductOutofStock(item.configurable_sku)) && (
+                  <Row key={item.id_customer_cart} mb={16} mx={0} alignItems="center" sx={{ position: 'relative' }}>
+                    <Box variant="col-2" px={0}>
+                      <ImageShimmer
+                        src={item.product_info.image}
+                        height="100%"
                         sx={{
-                          position: 'absolute',
-                          height: '100%',
-                          textAlign: 'center',
-                          background: 'rgba(0, 0, 0, 0.7)',
-                          padding: 0,
-                          zIndex: 1,
-                          left: 0,
-                          top: 0,
-                          boxShadow: '2px 2px 7px 0 rgba(0, 0, 0, 0.1)'
+                          boxShadow: '0 1px 2px 0 #0000033'
                         }}
                       >
-                        <Heading color="white" fontSize={20}>
-                          {isProductOutofStock(item.configurable_sku)
-                            ? 'This product is out of stock please remove before proceed.'
-                            : "Sorry, this product isn't deliverable to selected pincode."}
+                        {imageURL => (
+                          <Image
+                            width={1}
+                            src={imageURL}
+                            alt=""
+                            sx={{
+                              boxShadow: 'productThumb'
+                            }}
+                          />
+                        )}
+                      </ImageShimmer>
+                    </Box>
+                    <Box variant="col-6" pl={30} pr={0}>
+                      <Box mb={10}>
+                        <Heading color="heading" fontSize={16} lineHeight={1.4} fontWeight="normal">
+                          {item.product_info.name}
                         </Heading>
-                        <Flex mt={15} justifyContent="center">
-                          <Link to="/checkout/delivery-address" sx={{ cursor: 'pointer' }}>
-                            <Label fontSize={16} color="primary">
-                              Edit Address{' '}
-                            </Label>
-                          </Link>
-                          <Box color="primary" mx={5}>
-                            /
-                          </Box>
-                          <Link to="/checkout/cart" sx={{ cursor: 'pointer' }}>
-                            <Label fontSize={16} color="primary">
-                              Edit Cart
-                            </Label>
-                          </Link>
-                        </Flex>
+                      </Box>
+                      {item.product_info.color && (
+                        <Box mb={15}>
+                          <Text color="#575757">{item.product_info.color}</Text>
+                        </Box>
+                      )}
+                      <Box>
+                        <Label color="heading" fontSize={18}>
+                          ₹{' '}
+                          {item.product_info.special_price === 0
+                            ? formatAmount(Number(item.product_info.unit_price) * Number(item.qty))
+                            : formatAmount(Number(item.product_info.special_price) * Number(item.qty))}
+                        </Label>
+                      </Box>
+                    </Box>
+                    <Flex
+                      width={1}
+                      justifyContent="center"
+                      alignItems="center"
+                      flexDirection="column"
+                      sx={{
+                        position: 'absolute',
+                        height: '100%',
+                        textAlign: 'center',
+                        background: 'rgba(0, 0, 0, 0.7)',
+                        padding: 0,
+                        zIndex: 1,
+                        left: 0,
+                        top: 0,
+                        boxShadow: '2px 2px 7px 0 rgba(0, 0, 0, 0.1)'
+                      }}
+                    >
+                      <Heading color="white" fontSize={20}>
+                        {isProductOutofStock(item.configurable_sku)
+                          ? 'This product is out of stock please remove before proceed.'
+                          : "Sorry, this product isn't deliverable to selected pincode."}
+                      </Heading>
+                      <Flex mt={15} justifyContent="center">
+                        <Link to="/checkout/delivery-address" sx={{ cursor: 'pointer' }}>
+                          <Label fontSize={16} color="primary">
+                            Edit Address{' '}
+                          </Label>
+                        </Link>
+                        <Box color="primary" mx={5}>
+                          /
+                        </Box>
+                        <Link to="/checkout/cart" sx={{ cursor: 'pointer' }}>
+                          <Label fontSize={16} color="primary">
+                            Edit Cart
+                          </Label>
+                        </Link>
                       </Flex>
-                    </Row>
-                  )}
-                </Box>
-              ))}
-            </Box>
-            <Box mb={20} mt={20}>
+                    </Flex>
+                  </Row>
+                )}
+              </Box>
+            ))}
+            <Box mb={20}>
               <Heading variant="heading.medium">Payment Method</Heading>
             </Box>
             <Row flexWrap="nowrap" ml={0} mr={0}>
-              <Row
-                mx={0}
-                mb={20}
-                justifyContent="space-between"
-                flexDirection="column"
-                maxHeight="360px"
-                minWidth={140}
-              >
+              <Row mx={0} flexDirection="column" maxHeight="360px" minWidth={140} width={201}>
                 {data.map((paymentType, index) => (
                   <Col key={String(`${paymentType}${index}`)} px={0}>
                     {CommonPayments(paymentType.paymentType, toggleGateway, selectedGateway, session, resetEasyEmi)}
@@ -253,7 +244,7 @@ class PaymentOptions extends Component {
                 ))}
               </Row>
               {/* Payment options form */}
-              <Box px={40} pt={30} ml={-1} pb={20} sx={{ border: 'secondary', maxWidth: '588px' }}>
+              <Box px={40} pt={30} ml={-1} pb={20} width="calc(100% - 199px)" sx={{ border: 'secondary' }}>
                 {/* UPI Form */}
                 {selectedGateway === 'Upi' && (
                   <UpiForm setPaymentDetails={setPaymentDetails} gateway={selectedGateway} padding="3rem 2rem" />
