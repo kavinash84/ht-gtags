@@ -50,11 +50,6 @@ import PaymentMethods from '../PaymentMethods/';
 import PaymentForm from './PaymentForm';
 import UpiForm from './UpiForm';
 
-/**
- * Icon
- */
-const calendarImage = require('../../../static/calendar.svg');
-
 const cartStyles = require('../Cart/Cart.scss');
 
 const nextStep = (
@@ -155,95 +150,48 @@ class PaymentOptions extends Component {
               {results.map((item, index) => (
                 <Box key={String(index)} mb={16}>
                   {(!item.product_info.is_deliverable || isProductOutofStock(item.configurable_sku)) && (
-                    <Row
-                      key={item.id_customer_cart}
-                      mx={0}
-                      px={16}
-                      py={16}
-                      flexWrap="nowrap"
-                      sx={{ border: 'secondary', position: 'relative' }}
-                    >
-                      <Box pr={16}>
-                        <ImageShimmer src={item.product_info.image} height="131px">
-                          {imageURL => <Image src={imageURL} alt="" />}
+                    <Row key={item.id_customer_cart} mx={0} alignItems="center" sx={{ position: 'relative' }}>
+                      <Box variant="col-2" px={0}>
+                        <ImageShimmer
+                          src={item.product_info.image}
+                          height="100%"
+                          sx={{
+                            boxShadow: '0 1px 2px 0 #0000033'
+                          }}
+                        >
+                          {imageURL => (
+                            <Image
+                              width={1}
+                              src={imageURL}
+                              alt=""
+                              sx={{
+                                boxShadow: 'productThumb'
+                              }}
+                            />
+                          )}
                         </ImageShimmer>
                       </Box>
-                      <Box>
+                      <Box variant="col-6" pl={30} pr={0}>
                         <Box mb={10}>
-                          <Label color="text" mt={0} fontSize={18}>
+                          <Heading color="heading" fontSize={16} lineHeight={1.4} fontWeight="normal">
                             {item.product_info.name}
-                          </Label>
+                          </Heading>
                         </Box>
-                        <Box mb={10}>
-                          <Flex alignItems="center" mb={5}>
-                            <Image width="initial" height={20} mr={10} src={calendarImage} />
-                            <Text color="label" fontSize={14}>
-                              Delivery Details
-                            </Text>
-                          </Flex>
-                          <Text
-                            color={item.product_info.delivery_time_text.indexOf('Sorry') === -1 ? 'green' : 'red'}
-                            fontSize={14}
-                          >
-                            {item.product_info.delivery_time_text}
-                          </Text>
-                        </Box>
-                        <Box mb={5}>Quantity: {item.qty}</Box>
-                        <Box mb={5}>
-                          {item.product_info.unit_price !== item.product_info.special_price &&
-                            item.product_info.special_price !== 0 && (
-                              <Label color="black" fontSize={14} mt={10}>
-                                <s>Rs. {formatAmount(item.product_info.unit_price)}</s>
-                              </Label>
-                            )}
-                        </Box>
-                        <Box mb={5}>
-                          <Label color="primary" fontSize={20} mt={0}>
-                            Rs.{' '}
+                        {item.product_info.color && (
+                          <Box mb={15}>
+                            <Text color="#575757">{item.product_info.color}</Text>
+                          </Box>
+                        )}
+                        <Box>
+                          <Label color="heading" fontSize={18}>
+                            ₹{' '}
                             {item.product_info.special_price === 0
-                              ? formatAmount(item.product_info.unit_price)
-                              : formatAmount(item.product_info.special_price)}
+                              ? formatAmount(Number(item.product_info.unit_price) * Number(item.qty))
+                              : formatAmount(Number(item.product_info.special_price) * Number(item.qty))}
                           </Label>
                         </Box>
-                        {/* {item.product_info.assembly_service && (
-                            <Box color="uspTitle" fontSize="0.75rem">
-                              <Image
-                                width="initial"
-                                height="20px"
-                                mr="0.625rem"
-                                mt="4px"
-                                mb="50px"
-                                float="left"
-                                src={assemblyIcon}
-                              />
-                              <Text color="#575757" fontSize="0.75rem" mt="0" mb="0">
-                                Assembly
-                              </Text>
-                              <Text fontSize="0.875rem" mt="0" mb="0">
-                                Offered By Hometown
-                              </Text>
-                              <Text fontSize="0.875rem" mt="0">
-                                <Button
-                                  className={cartStyles.popoverBtn}
-                                  fontSize="0.875rem"
-                                  color="#3cc0dc"
-                                  btnType="link"
-                                  p="0"
-                                >
-                                  Details
-                                </Button>
-                                <Box className={cartStyles.popover}>
-                                  <Text fontSize="0.875rem" mt="0" mb="0" ta="center">
-                                    Assembly will be done within 48hrs of Delivery & applicable within serviceable
-                                    limits
-                                  </Text>
-                                </Box>
-                              </Text>
-                            </Box>
-                          )} */}
                       </Box>
                       <Flex
-                        py={50}
                         width={1}
                         justifyContent="center"
                         alignItems="center"
@@ -251,7 +199,6 @@ class PaymentOptions extends Component {
                         sx={{
                           position: 'absolute',
                           height: '100%',
-                          margin: 0,
                           textAlign: 'center',
                           background: 'rgba(0, 0, 0, 0.7)',
                           padding: 0,
