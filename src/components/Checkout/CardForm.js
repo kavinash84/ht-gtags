@@ -73,10 +73,10 @@ const CardForm = ({
 }) => (
   <Box>
     <Flex alignItems="center">
-      <Image src={visaIcon} alt="Visa Card" mr={16} height={40} />
-      <Image src={maestroIcon} alt="Maestro" mr={16} height={40} />
-      <Image src={mastercardIcon} alt="Master Card" mr={16} height={40} />
-      <Image src={aeIcon} alt="Amex" mr={16} height={40} />
+      <Image src={visaIcon} alt="Visa Card" mr={16} height={40} sx={{ flexShrink: 0 }} />
+      <Image src={maestroIcon} alt="Maestro" mr={16} height={40} sx={{ flexShrink: 0 }} />
+      <Image src={mastercardIcon} alt="Master Card" mr={16} height={40} sx={{ flexShrink: 0 }} />
+      <Image src={aeIcon} alt="Amex" mr={16} height={40} sx={{ flexShrink: 0 }} />
     </Flex>
     <Box mb={20}>
       <Text variant="small" color="blackLight">

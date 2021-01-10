@@ -50,11 +50,6 @@ import PaymentMethods from '../PaymentMethods/';
 import PaymentForm from './PaymentForm';
 import UpiForm from './UpiForm';
 
-/**
- * Icon
- */
-const calendarImage = require('../../../static/calendar.svg');
-
 const cartStyles = require('../Cart/Cart.scss');
 
 const nextStep = (
@@ -151,154 +146,97 @@ class PaymentOptions extends Component {
         <Row>
           <Col variant="col-8">
             {/* Product not deliverable */}
-            <Box>
-              {results.map((item, index) => (
-                <Box key={String(index)} mb={16}>
-                  {(!item.product_info.is_deliverable || isProductOutofStock(item.configurable_sku)) && (
-                    <Row
-                      key={item.id_customer_cart}
-                      mx={0}
-                      px={16}
-                      py={16}
-                      flexWrap="nowrap"
-                      sx={{ border: 'secondary', position: 'relative' }}
-                    >
-                      <Box pr={16}>
-                        <ImageShimmer src={item.product_info.image} height="131px">
-                          {imageURL => <Image src={imageURL} alt="" />}
-                        </ImageShimmer>
-                      </Box>
-                      <Box>
-                        <Box mb={10}>
-                          <Label color="text" mt={0} fontSize={18}>
-                            {item.product_info.name}
-                          </Label>
-                        </Box>
-                        <Box mb={10}>
-                          <Flex alignItems="center" mb={5}>
-                            <Image width="initial" height={20} mr={10} src={calendarImage} />
-                            <Text color="label" fontSize={14}>
-                              Delivery Details
-                            </Text>
-                          </Flex>
-                          <Text
-                            color={item.product_info.delivery_time_text.indexOf('Sorry') === -1 ? 'green' : 'red'}
-                            fontSize={14}
-                          >
-                            {item.product_info.delivery_time_text}
-                          </Text>
-                        </Box>
-                        <Box mb={5}>Quantity: {item.qty}</Box>
-                        <Box mb={5}>
-                          {item.product_info.unit_price !== item.product_info.special_price &&
-                            item.product_info.special_price !== 0 && (
-                              <Label color="black" fontSize={14} mt={10}>
-                                <s>Rs. {formatAmount(item.product_info.unit_price)}</s>
-                              </Label>
-                            )}
-                        </Box>
-                        <Box mb={5}>
-                          <Label color="primary" fontSize={20} mt={0}>
-                            Rs.{' '}
-                            {item.product_info.special_price === 0
-                              ? formatAmount(item.product_info.unit_price)
-                              : formatAmount(item.product_info.special_price)}
-                          </Label>
-                        </Box>
-                        {/* {item.product_info.assembly_service && (
-                            <Box color="uspTitle" fontSize="0.75rem">
-                              <Image
-                                width="initial"
-                                height="20px"
-                                mr="0.625rem"
-                                mt="4px"
-                                mb="50px"
-                                float="left"
-                                src={assemblyIcon}
-                              />
-                              <Text color="#575757" fontSize="0.75rem" mt="0" mb="0">
-                                Assembly
-                              </Text>
-                              <Text fontSize="0.875rem" mt="0" mb="0">
-                                Offered By Hometown
-                              </Text>
-                              <Text fontSize="0.875rem" mt="0">
-                                <Button
-                                  className={cartStyles.popoverBtn}
-                                  fontSize="0.875rem"
-                                  color="#3cc0dc"
-                                  btnType="link"
-                                  p="0"
-                                >
-                                  Details
-                                </Button>
-                                <Box className={cartStyles.popover}>
-                                  <Text fontSize="0.875rem" mt="0" mb="0" ta="center">
-                                    Assembly will be done within 48hrs of Delivery & applicable within serviceable
-                                    limits
-                                  </Text>
-                                </Box>
-                              </Text>
-                            </Box>
-                          )} */}
-                      </Box>
-                      <Flex
-                        py={50}
-                        width={1}
-                        justifyContent="center"
-                        alignItems="center"
-                        flexDirection="column"
+            {results.map((item, index) => (
+              <Box key={String(index)}>
+                {(!item.product_info.is_deliverable || isProductOutofStock(item.configurable_sku)) && (
+                  <Row key={item.id_customer_cart} mb={16} mx={0} alignItems="center" sx={{ position: 'relative' }}>
+                    <Box variant="col-2" px={0}>
+                      <ImageShimmer
+                        src={item.product_info.image}
+                        height="100%"
                         sx={{
-                          position: 'absolute',
-                          height: '100%',
-                          margin: 0,
-                          textAlign: 'center',
-                          background: 'rgba(0, 0, 0, 0.7)',
-                          padding: 0,
-                          zIndex: 1,
-                          left: 0,
-                          top: 0,
-                          boxShadow: '2px 2px 7px 0 rgba(0, 0, 0, 0.1)'
+                          boxShadow: '0 1px 2px 0 #0000033'
                         }}
                       >
-                        <Heading color="white" fontSize={20}>
-                          {isProductOutofStock(item.configurable_sku)
-                            ? 'This product is out of stock please remove before proceed.'
-                            : "Sorry, this product isn't deliverable to selected pincode."}
+                        {imageURL => (
+                          <Image
+                            width={1}
+                            src={imageURL}
+                            alt=""
+                            sx={{
+                              boxShadow: 'productThumb'
+                            }}
+                          />
+                        )}
+                      </ImageShimmer>
+                    </Box>
+                    <Box variant="col-6" pl={30} pr={0}>
+                      <Box mb={10}>
+                        <Heading color="heading" fontSize={16} lineHeight={1.4} fontWeight="normal">
+                          {item.product_info.name}
                         </Heading>
-                        <Flex mt={15} justifyContent="center">
-                          <Link to="/checkout/delivery-address" sx={{ cursor: 'pointer' }}>
-                            <Label fontSize={16} color="primary">
-                              Edit Address{' '}
-                            </Label>
-                          </Link>
-                          <Box color="primary" mx={5}>
-                            /
-                          </Box>
-                          <Link to="/checkout/cart" sx={{ cursor: 'pointer' }}>
-                            <Label fontSize={16} color="primary">
-                              Edit Cart
-                            </Label>
-                          </Link>
-                        </Flex>
+                      </Box>
+                      {item.product_info.color && (
+                        <Box mb={15}>
+                          <Text color="#575757">{item.product_info.color}</Text>
+                        </Box>
+                      )}
+                      <Box>
+                        <Label color="heading" fontSize={18}>
+                          ₹{' '}
+                          {item.product_info.special_price === 0
+                            ? formatAmount(Number(item.product_info.unit_price) * Number(item.qty))
+                            : formatAmount(Number(item.product_info.special_price) * Number(item.qty))}
+                        </Label>
+                      </Box>
+                    </Box>
+                    <Flex
+                      width={1}
+                      justifyContent="center"
+                      alignItems="center"
+                      flexDirection="column"
+                      sx={{
+                        position: 'absolute',
+                        height: '100%',
+                        textAlign: 'center',
+                        background: 'rgba(0, 0, 0, 0.7)',
+                        padding: 0,
+                        zIndex: 1,
+                        left: 0,
+                        top: 0,
+                        boxShadow: '2px 2px 7px 0 rgba(0, 0, 0, 0.1)'
+                      }}
+                    >
+                      <Heading color="white" fontSize={20}>
+                        {isProductOutofStock(item.configurable_sku)
+                          ? 'This product is out of stock please remove before proceed.'
+                          : "Sorry, this product isn't deliverable to selected pincode."}
+                      </Heading>
+                      <Flex mt={15} justifyContent="center">
+                        <Link to="/checkout/delivery-address" sx={{ cursor: 'pointer' }}>
+                          <Label fontSize={16} color="primary">
+                            Edit Address{' '}
+                          </Label>
+                        </Link>
+                        <Box color="primary" mx={5}>
+                          /
+                        </Box>
+                        <Link to="/checkout/cart" sx={{ cursor: 'pointer' }}>
+                          <Label fontSize={16} color="primary">
+                            Edit Cart
+                          </Label>
+                        </Link>
                       </Flex>
-                    </Row>
-                  )}
-                </Box>
-              ))}
-            </Box>
-            <Box mb={20} mt={20}>
+                    </Flex>
+                  </Row>
+                )}
+              </Box>
+            ))}
+            <Box mb={20}>
               <Heading variant="heading.medium">Payment Method</Heading>
             </Box>
             <Row flexWrap="nowrap" ml={0} mr={0}>
-              <Row
-                mx={0}
-                mb={20}
-                justifyContent="space-between"
-                flexDirection="column"
-                maxHeight="360px"
-                minWidth={140}
-              >
+              <Row mx={0} flexDirection="column" maxHeight="360px" minWidth={140} width={201}>
                 {data.map((paymentType, index) => (
                   <Col key={String(`${paymentType}${index}`)} px={0}>
                     {CommonPayments(paymentType.paymentType, toggleGateway, selectedGateway, session, resetEasyEmi)}
@@ -306,7 +244,7 @@ class PaymentOptions extends Component {
                 ))}
               </Row>
               {/* Payment options form */}
-              <Box px={40} pt={30} ml={-1} pb={20} sx={{ border: 'secondary', maxWidth: '588px' }}>
+              <Box px={40} pt={30} ml={-1} pb={20} width="calc(100% - 199px)" sx={{ border: 'secondary' }}>
                 {/* UPI Form */}
                 {selectedGateway === 'Upi' && (
                   <UpiForm setPaymentDetails={setPaymentDetails} gateway={selectedGateway} padding="3rem 2rem" />
