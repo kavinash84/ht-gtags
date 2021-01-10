@@ -103,7 +103,7 @@ export default class HeaderTop extends Component {
  cart, wishlist, checkCart, cartItems
 } = this.props;
     // console.log('cart check', checkCart);
-    this.containsOutOfStock(cartItems);
+    this.containsOutOfStockFunc(cartItems);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -113,8 +113,9 @@ export default class HeaderTop extends Component {
       });
     }
     const { cartItems } = this.props;
-    this.containsOutOfStock(cartItems);
+    this.containsOutOfStockFunc(nextProps.cartItems);
   }
+
   onOpenPincodeModal = () => {
     this.setState({ openPincode: true });
   };
@@ -146,18 +147,13 @@ export default class HeaderTop extends Component {
     despatchClearSelectForDemo(dispatcheroEmpty); // New
   };
 
-  containsOutOfStock = items => {
+  containsOutOfStockFunc = items => {
     items.forEach(item => {
-      if (item.product_info.stock > 0) {
-        this.setState({
-          containsOutOfStock: false
-        });
-        console.log(this.state);
-      } else {
+      if (item.product_info.stock === 0) {
         this.setState({
           containsOutOfStock: true
         });
-        console.log('else', this.state);
+        // console.log(this.state);
       }
     });
   };
