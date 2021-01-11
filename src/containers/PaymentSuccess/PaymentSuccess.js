@@ -35,32 +35,22 @@ import { validatePassword } from 'utils/validation';
 import { isBlank } from 'js-utility-functions';
 import { setUserPassword } from 'redux/modules/setpassword';
 
-// const mapStateToProps = ({
-//   paymentstatus: { data, loaded, error },
-//   userLogin: { isLoggedIn },
-//   app: { paymentLoaded }
-// }) => ({
-//   data,
-//   loaded,
-//   error,
-//   isLoggedIn,
-//   paymentLoaded
-// });
-@connect(({
-    setpassword,
-    paymentstatus: { data, loaded, error },
-    userLogin: { isLoggedIn },
-    app: { paymentLoaded, cutomer_id: customerId }
-  }) => ({
-    response: setpassword,
-    data,
-    loaded,
-    error,
-    isLoggedIn,
-    paymentLoaded,
-    customerId
-  }))
-export default class PaymentSuccess extends Component {
+const mapStateToProps = ({
+  setpassword,
+  paymentstatus: { data, loaded, error },
+  userLogin: { isLoggedIn },
+  app: { paymentLoaded, cutomer_id: customerId }
+}) => ({
+  response: setpassword,
+  data,
+  loaded,
+  error,
+  isLoggedIn,
+  paymentLoaded,
+  customerId
+});
+
+class PaymentSuccess extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -208,8 +198,8 @@ export default class PaymentSuccess extends Component {
       response
     } = this.props;
     const {
-      loading, loaded, error, errorMessage, passwordUpdated
-    } = response;
+ loading, loaded, error, errorMessage, passwordUpdated
+} = response;
     const {
       password,
       passwordFeedBackError,
@@ -219,7 +209,6 @@ export default class PaymentSuccess extends Component {
       confirmPasswordFeedBackMessage
     } = this.state;
     if (data && orderNo) {
-
       const { products } = this.state;
       return (
         <Wrapper>
@@ -427,4 +416,4 @@ PaymentSuccess.contextTypes = {
   store: PropTypes.object.isRequired
 };
 
-// export default connect(mapStateToProps, null)(PaymentSuccess);
+export default connect(mapStateToProps, null)(PaymentSuccess);
