@@ -208,8 +208,8 @@ export default class PaymentSuccess extends Component {
       response
     } = this.props;
     const {
-      loading, loaded, error, errorMessage, passwordUpdated
-    } = response;
+ loading, loaded, error, errorMessage, passwordUpdated
+} = response;
     const {
       password,
       passwordFeedBackError,
@@ -219,7 +219,6 @@ export default class PaymentSuccess extends Component {
       confirmPasswordFeedBackMessage
     } = this.state;
     if (data && orderNo) {
-
       const { products } = this.state;
       return (
         <Wrapper>
