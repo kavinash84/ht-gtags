@@ -7,10 +7,17 @@ import TitleBar from 'components/TitleBar';
 
 const Grievance = () => (
   <BoxHtV1 type="block">
-    <TitleBar marginLeft="4rem" title="GRIEVANCE Dummy" />
+    <TitleBar marginLeftTop="7%" title="GRIEVANCE" />
     <SectionHtV1 mb="0" mt="-0.625rem" bg="sectionBgDark" boxShadow="0px 1px 6px 0px rgba(0,0,0,0.20)" display="flex">
       <ContainerHtV1 type="containerHtV1" pr="1.5rem" pl="1.5rem">
-        <SectionHtV1 boxShadow="1px 2px 5px 0px rgba(0,0,0,0.1)" bg="white" display="flex" mb="1rem" p="1.5rem">
+        <SectionHtV1
+          boxShadow="1px 2px 5px 0px rgba(0,0,0,0.1)"
+          bg="white"
+          display="flex"
+          mb="1rem"
+          p="1.5rem"
+          mt="1.5rem"
+        >
           <BoxHtV1>
             <TextHtV1 color="#8d8d8d" fontSize="1rem" mb="1.5rem" mt="0">
               At HomeTowm, it is our endeavor to provide the best in customer service. It is our priority to positively
