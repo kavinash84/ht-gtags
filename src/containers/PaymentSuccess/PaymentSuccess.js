@@ -213,7 +213,8 @@ class PaymentSuccess extends Component {
         shipping_charges: shippingCharges,
         set_discount: setDiscount
       },
-      response
+      response,
+      isLoggedIn
     } = this.props;
     const {
  loading, loaded, error, errorMessage, passwordUpdated
@@ -241,69 +242,71 @@ class PaymentSuccess extends Component {
                   <Box sx={{ boxShadow: 'profile', border: 'light' }}>
                     <ThankYou orderNo={orderNo} />
                   </Box>
-                  <Box>
-                    <form onSubmit={this.onSubmitSetPassword}>
-                      <FormInputHtV1
-                        // label="Type Password"
-                        type="password"
-                        placeholder="Type Password"
-                        onChange={this.onChangePassword}
-                        value={password}
-                        feedBackError={passwordFeedBackError}
-                        feedBackMessage={passwordFeedBackMessage}
-                      />
-                      <FormInputHtV1
-                        // label="Confirm Password"
-                        type="password"
-                        placeholder="Confirm Password"
-                        onChange={this.onChangeConfirmPassword}
-                        value={confirmPassword}
-                        feedBackError={confirmPasswordFeedBackError}
-                        feedBackMessage={confirmPasswordFeedBackMessage}
-                      />
-                      <ButtonHtV1
-                        width={200}
-                        mt={10}
-                        // disabled={loading || passwordFeedBackError || confirmPasswordFeedBackError}
-                      >
-                        {response && !loading ? 'UPDATE PASSWORD' : 'Please wait...'}
-                      </ButtonHtV1>
-                      {response && loaded && passwordUpdated && (
-                        <Label
-                          type="success"
-                          ta="center"
-                          fontSize="0.875rem"
-                          mt="1rem"
-                          display="block"
-                          color="#28a745"
-                          marginBottom="0"
-                          fontfamily="regular"
+                  {!isLoggedIn && (
+                    <Box>
+                      <form onSubmit={this.onSubmitSetPassword}>
+                        <FormInputHtV1
+                          // label="Type Password"
+                          type="password"
+                          placeholder="Type Password"
+                          onChange={this.onChangePassword}
+                          value={password}
+                          feedBackError={passwordFeedBackError}
+                          feedBackMessage={passwordFeedBackMessage}
+                        />
+                        <FormInputHtV1
+                          // label="Confirm Password"
+                          type="password"
+                          placeholder="Confirm Password"
+                          onChange={this.onChangeConfirmPassword}
+                          value={confirmPassword}
+                          feedBackError={confirmPasswordFeedBackError}
+                          feedBackMessage={confirmPasswordFeedBackMessage}
+                        />
+                        <ButtonHtV1
+                          width={200}
+                          mt={10}
+                          // disabled={loading || passwordFeedBackError || confirmPasswordFeedBackError}
                         >
-                          {' '}
-                          Password Updated !{' '}
-                        </Label>
-                      )}
-                      {error && !loaded && (
-                        <Box>
+                          {response && !loading ? 'UPDATE PASSWORD' : 'Please wait...'}
+                        </ButtonHtV1>
+                        {response && loaded && passwordUpdated && (
                           <Label
-                            type="error"
+                            type="success"
                             ta="center"
                             fontSize="0.875rem"
                             mt="1rem"
                             display="block"
-                            color="#dc3545"
+                            color="#28a745"
                             marginBottom="0"
                             fontfamily="regular"
                           >
-                            {errorMessage.new_password && 'Invalid new password !'}
-                            {errorMessage.current_password && 'Invalid Current Password !'}
-                            {errorMessage.repeat_password && 'Confirm password not match !'}
-                            {errorMessage.error_message && 'Something went wrong !'}
+                            {' '}
+                            Password Updated !{' '}
                           </Label>
-                        </Box>
-                      )}
-                    </form>
-                  </Box>
+                        )}
+                        {error && !loaded && (
+                          <Box>
+                            <Label
+                              type="error"
+                              ta="center"
+                              fontSize="0.875rem"
+                              mt="1rem"
+                              display="block"
+                              color="#dc3545"
+                              marginBottom="0"
+                              fontfamily="regular"
+                            >
+                              {errorMessage.new_password && 'Invalid new password !'}
+                              {errorMessage.current_password && 'Invalid Current Password !'}
+                              {errorMessage.repeat_password && 'Confirm password not match !'}
+                              {errorMessage.error_message && 'Something went wrong !'}
+                            </Label>
+                          </Box>
+                        )}
+                      </form>
+                    </Box>
+                  )}
                   <Row mx={0} mb={40} mt={60} justifyContent="center">
                     <Text fontFamily="medium" fontSize={28}>
                       Here’s what you ordered
@@ -419,7 +422,8 @@ PaymentSuccess.defaultProps = {
   error: '',
   paymentLoaded: false,
   response: {},
-  customerId: ''
+  customerId: '',
+  isLoggedIn: false
 };
 
 PaymentSuccess.propTypes = {
@@ -428,7 +432,8 @@ PaymentSuccess.propTypes = {
   history: PropTypes.object.isRequired,
   paymentLoaded: PropTypes.bool,
   response: PropTypes.object,
-  customerId: PropTypes.any
+  customerId: PropTypes.any,
+  isLoggedIn: PropTypes.bool
 };
 PaymentSuccess.contextTypes = {
   store: PropTypes.object.isRequired
