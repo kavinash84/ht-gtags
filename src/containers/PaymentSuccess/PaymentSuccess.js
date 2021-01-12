@@ -39,7 +39,7 @@ const mapStateToProps = ({
   setpassword,
   paymentstatus: { data, loaded, error },
   userLogin: { isLoggedIn },
-  app: { paymentLoaded, cutomer_id: customerId }
+  app: { paymentLoaded, customerId }
 }) => ({
   response: setpassword,
   data,
@@ -100,7 +100,7 @@ class PaymentSuccess extends Component {
     const {
       target: { value }
     } = e;
-    const checkError = value !== this.state.newPwd;
+    const checkError = value !== this.state.password;
     if (!allowNChar(value, 15)) {
       return;
     }
@@ -112,6 +112,7 @@ class PaymentSuccess extends Component {
   };
 
   onSubmitSetPassword = e => {
+    console.log('check set password');
     e.preventDefault();
     const {
       confirmPassword,
@@ -122,10 +123,22 @@ class PaymentSuccess extends Component {
       confirmPasswordErrorMessage
     } = this.state;
     const { customerId } = this.props;
+    console.log('customerId check', customerId);
     // const checkOldPwd = isBlank(oldPwd) || oldPwdError;
     const checkPassword = isBlank(password) || passwordError;
     const checkConfirmPassword = isBlank(confirmPassword) || confirmPasswordError;
+    console.log(
+      'parameter check',
+      password,
+      checkPassword,
+      passwordError,
+      confirmPassword,
+      confirmPasswordError,
+      checkConfirmPassword,
+      checkPassword
+    );
     if (password !== confirmPassword) {
+      console.log('password is not same');
       return this.setState({
         confirmPasswordError: true,
         confirmPasswordErrorMessage: "Confirm Password doesn't match"
@@ -133,6 +146,7 @@ class PaymentSuccess extends Component {
     }
 
     if (checkConfirmPassword || checkPassword) {
+      console.log('password is same');
       return this.setState({
         // oldPwdError: checkOldPwd,
         // oldPwdErrorMessage: checkOldPwd ? "Old Password can't be blank" : '',
@@ -143,6 +157,7 @@ class PaymentSuccess extends Component {
       });
     }
     const { dispatch } = this.context.store;
+    console.log('before dispatch');
     dispatch(setUserPassword({
         password,
         passwordError,
@@ -152,11 +167,14 @@ class PaymentSuccess extends Component {
         confirmPasswordErrorMessage,
         customerId
       }));
+    console.log('after dispatch');
+    console.log('before set state');
     this.setState({
       password: '',
       // oldPwd: '',
       confirmPassword: ''
     });
+    console.log('after set state');
   };
 
   groupSimilarProducts = () => {
@@ -226,18 +244,18 @@ class PaymentSuccess extends Component {
                   <Box>
                     <form onSubmit={this.onSubmitSetPassword}>
                       <FormInputHtV1
-                        label="Type Password"
+                        // label="Type Password"
                         type="password"
-                        placeholder=""
+                        placeholder="Type Password"
                         onChange={this.onChangePassword}
                         value={password}
                         feedBackError={passwordFeedBackError}
                         feedBackMessage={passwordFeedBackMessage}
                       />
                       <FormInputHtV1
-                        label="Confirm Password"
+                        // label="Confirm Password"
                         type="password"
-                        placeholder=""
+                        placeholder="Confirm Password"
                         onChange={this.onChangeConfirmPassword}
                         value={confirmPassword}
                         feedBackError={confirmPasswordFeedBackError}
@@ -246,7 +264,7 @@ class PaymentSuccess extends Component {
                       <ButtonHtV1
                         width={200}
                         mt={10}
-                        disabled={loading || passwordFeedBackError || confirmPasswordFeedBackError}
+                        // disabled={loading || passwordFeedBackError || confirmPasswordFeedBackError}
                       >
                         {response && !loading ? 'UPDATE PASSWORD' : 'Please wait...'}
                       </ButtonHtV1>
