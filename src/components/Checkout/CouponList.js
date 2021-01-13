@@ -119,7 +119,7 @@ class CouponList extends React.Component {
             <Text fontSize={14} fontFamily="medium" mb={10}>
               Other Offers
             </Text>
-            <Box sx={{ border: 'dividerLight' }}>
+            <Box sx={{ border: 'dividerLight', opacity: '0.5' }}>
               {unapplicablecoupons.map((item, index) => (
                 <Box
                   className={`${item.couponCode === appliedCoupon ? styles.active : ''}`}
@@ -140,6 +140,7 @@ class CouponList extends React.Component {
                         type="radio"
                         name="coupons"
                         id={`coupon-${String(index)}`}
+                        disabled
                       />
                       <Text
                         variant="small"
