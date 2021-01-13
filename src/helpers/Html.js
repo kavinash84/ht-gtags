@@ -326,6 +326,7 @@ export default class Html extends Component {
                   display: inline-block;
                   cursor: pointer;
                   background-color: #515151;
+                  color: #ffffff;
                 }
 
                 .embeddedServiceInvitationFooter>#acceptInvite {
