@@ -1008,7 +1008,7 @@ class ProductDetails extends React.Component {
             )}
 
             {/* Complete the look */}
-            <UnbxdCompleteTheLook />
+            <UnbxdCompleteTheLook configId={configId} />
 
             {/* Review List and Add review */}
             <Box id="review-section" pt={30} className={styles.reviewSection}>
