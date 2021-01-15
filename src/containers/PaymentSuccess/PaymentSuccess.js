@@ -35,32 +35,22 @@ import { validatePassword } from 'utils/validation';
 import { isBlank } from 'js-utility-functions';
 import { setUserPassword } from 'redux/modules/setpassword';
 
-// const mapStateToProps = ({
-//   paymentstatus: { data, loaded, error },
-//   userLogin: { isLoggedIn },
-//   app: { paymentLoaded }
-// }) => ({
-//   data,
-//   loaded,
-//   error,
-//   isLoggedIn,
-//   paymentLoaded
-// });
-@connect(({
-    setpassword,
-    paymentstatus: { data, loaded, error },
-    userLogin: { isLoggedIn },
-    app: { paymentLoaded, cutomer_id: customerId }
-  }) => ({
-    response: setpassword,
-    data,
-    loaded,
-    error,
-    isLoggedIn,
-    paymentLoaded,
-    customerId
-  }))
-export default class PaymentSuccess extends Component {
+const mapStateToProps = ({
+  setpassword,
+  paymentstatus: { data, loaded, error },
+  userLogin: { isLoggedIn },
+  app: { paymentLoaded, customerId }
+}) => ({
+  response: setpassword,
+  data,
+  loaded,
+  error,
+  isLoggedIn,
+  paymentLoaded,
+  customerId
+});
+
+class PaymentSuccess extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -110,7 +100,7 @@ export default class PaymentSuccess extends Component {
     const {
       target: { value }
     } = e;
-    const checkError = value !== this.state.newPwd;
+    const checkError = value !== this.state.password;
     if (!allowNChar(value, 15)) {
       return;
     }
@@ -122,6 +112,7 @@ export default class PaymentSuccess extends Component {
   };
 
   onSubmitSetPassword = e => {
+    console.log('check set password');
     e.preventDefault();
     const {
       confirmPassword,
@@ -132,10 +123,22 @@ export default class PaymentSuccess extends Component {
       confirmPasswordErrorMessage
     } = this.state;
     const { customerId } = this.props;
+    console.log('customerId check', customerId);
     // const checkOldPwd = isBlank(oldPwd) || oldPwdError;
     const checkPassword = isBlank(password) || passwordError;
     const checkConfirmPassword = isBlank(confirmPassword) || confirmPasswordError;
+    console.log(
+      'parameter check',
+      password,
+      checkPassword,
+      passwordError,
+      confirmPassword,
+      confirmPasswordError,
+      checkConfirmPassword,
+      checkPassword
+    );
     if (password !== confirmPassword) {
+      console.log('password is not same');
       return this.setState({
         confirmPasswordError: true,
         confirmPasswordErrorMessage: "Confirm Password doesn't match"
@@ -143,6 +146,7 @@ export default class PaymentSuccess extends Component {
     }
 
     if (checkConfirmPassword || checkPassword) {
+      console.log('password is same');
       return this.setState({
         // oldPwdError: checkOldPwd,
         // oldPwdErrorMessage: checkOldPwd ? "Old Password can't be blank" : '',
@@ -153,6 +157,7 @@ export default class PaymentSuccess extends Component {
       });
     }
     const { dispatch } = this.context.store;
+    console.log('before dispatch');
     dispatch(setUserPassword({
         password,
         passwordError,
@@ -162,11 +167,14 @@ export default class PaymentSuccess extends Component {
         confirmPasswordErrorMessage,
         customerId
       }));
+    console.log('after dispatch');
+    console.log('before set state');
     this.setState({
       password: '',
       // oldPwd: '',
       confirmPassword: ''
     });
+    console.log('after set state');
   };
 
   groupSimilarProducts = () => {
@@ -205,7 +213,8 @@ export default class PaymentSuccess extends Component {
         shipping_charges: shippingCharges,
         set_discount: setDiscount
       },
-      response
+      response,
+      isLoggedIn
     } = this.props;
     const {
  loading, loaded, error, errorMessage, passwordUpdated
@@ -233,69 +242,71 @@ export default class PaymentSuccess extends Component {
                   <Box sx={{ boxShadow: 'profile', border: 'light' }}>
                     <ThankYou orderNo={orderNo} />
                   </Box>
-                  <Box>
-                    <form onSubmit={this.onSubmitSetPassword}>
-                      <FormInputHtV1
-                        label="Type Password"
-                        type="password"
-                        placeholder=""
-                        onChange={this.onChangePassword}
-                        value={password}
-                        feedBackError={passwordFeedBackError}
-                        feedBackMessage={passwordFeedBackMessage}
-                      />
-                      <FormInputHtV1
-                        label="Confirm Password"
-                        type="password"
-                        placeholder=""
-                        onChange={this.onChangeConfirmPassword}
-                        value={confirmPassword}
-                        feedBackError={confirmPasswordFeedBackError}
-                        feedBackMessage={confirmPasswordFeedBackMessage}
-                      />
-                      <ButtonHtV1
-                        width={200}
-                        mt={10}
-                        disabled={loading || passwordFeedBackError || confirmPasswordFeedBackError}
-                      >
-                        {response && !loading ? 'UPDATE PASSWORD' : 'Please wait...'}
-                      </ButtonHtV1>
-                      {response && loaded && passwordUpdated && (
-                        <Label
-                          type="success"
-                          ta="center"
-                          fontSize="0.875rem"
-                          mt="1rem"
-                          display="block"
-                          color="#28a745"
-                          marginBottom="0"
-                          fontfamily="regular"
+                  {!isLoggedIn && (
+                    <Box>
+                      <form onSubmit={this.onSubmitSetPassword}>
+                        <FormInputHtV1
+                          // label="Type Password"
+                          type="password"
+                          placeholder="Type Password"
+                          onChange={this.onChangePassword}
+                          value={password}
+                          feedBackError={passwordFeedBackError}
+                          feedBackMessage={passwordFeedBackMessage}
+                        />
+                        <FormInputHtV1
+                          // label="Confirm Password"
+                          type="password"
+                          placeholder="Confirm Password"
+                          onChange={this.onChangeConfirmPassword}
+                          value={confirmPassword}
+                          feedBackError={confirmPasswordFeedBackError}
+                          feedBackMessage={confirmPasswordFeedBackMessage}
+                        />
+                        <ButtonHtV1
+                          width={200}
+                          mt={10}
+                          // disabled={loading || passwordFeedBackError || confirmPasswordFeedBackError}
                         >
-                          {' '}
-                          Password Updated !{' '}
-                        </Label>
-                      )}
-                      {error && !loaded && (
-                        <Box>
+                          {response && !loading ? 'UPDATE PASSWORD' : 'Please wait...'}
+                        </ButtonHtV1>
+                        {response && loaded && passwordUpdated && (
                           <Label
-                            type="error"
+                            type="success"
                             ta="center"
                             fontSize="0.875rem"
                             mt="1rem"
                             display="block"
-                            color="#dc3545"
+                            color="#28a745"
                             marginBottom="0"
                             fontfamily="regular"
                           >
-                            {errorMessage.new_password && 'Invalid new password !'}
-                            {errorMessage.current_password && 'Invalid Current Password !'}
-                            {errorMessage.repeat_password && 'Confirm password not match !'}
-                            {errorMessage.error_message && 'Something went wrong !'}
+                            {' '}
+                            Password Updated !{' '}
                           </Label>
-                        </Box>
-                      )}
-                    </form>
-                  </Box>
+                        )}
+                        {error && !loaded && (
+                          <Box>
+                            <Label
+                              type="error"
+                              ta="center"
+                              fontSize="0.875rem"
+                              mt="1rem"
+                              display="block"
+                              color="#dc3545"
+                              marginBottom="0"
+                              fontfamily="regular"
+                            >
+                              {errorMessage.new_password && 'Invalid new password !'}
+                              {errorMessage.current_password && 'Invalid Current Password !'}
+                              {errorMessage.repeat_password && 'Confirm password not match !'}
+                              {errorMessage.error_message && 'Something went wrong !'}
+                            </Label>
+                          </Box>
+                        )}
+                      </form>
+                    </Box>
+                  )}
                   <Row mx={0} mb={40} mt={60} justifyContent="center">
                     <Text fontFamily="medium" fontSize={28}>
                       Here’s what you ordered
@@ -411,7 +422,8 @@ PaymentSuccess.defaultProps = {
   error: '',
   paymentLoaded: false,
   response: {},
-  customerId: ''
+  customerId: '',
+  isLoggedIn: false
 };
 
 PaymentSuccess.propTypes = {
@@ -420,10 +432,11 @@ PaymentSuccess.propTypes = {
   history: PropTypes.object.isRequired,
   paymentLoaded: PropTypes.bool,
   response: PropTypes.object,
-  customerId: PropTypes.any
+  customerId: PropTypes.any,
+  isLoggedIn: PropTypes.bool
 };
 PaymentSuccess.contextTypes = {
   store: PropTypes.object.isRequired
 };
 
-// export default connect(mapStateToProps, null)(PaymentSuccess);
+export default connect(mapStateToProps, null)(PaymentSuccess);

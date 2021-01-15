@@ -119,8 +119,8 @@ class CouponList extends React.Component {
             <Text fontSize={14} fontFamily="medium" mb={10}>
               Other Offers
             </Text>
-            <Box sx={{ border: 'dividerLight' }}>
-              {unapplicablecoupons.map((item, index) => (
+            <Box sx={{ border: 'dividerLight', opacity: '0.5' }}>
+              {unapplicablecoupons.map(item => (
                 <Box
                   className={`${item.couponCode === appliedCoupon ? styles.active : ''}`}
                   key={item.couponCode}
@@ -128,18 +128,18 @@ class CouponList extends React.Component {
                   py={10}
                   sx={{ orderBottom: 'dividerLight' }}
                 >
-                  <Label
-                    htmlFor={`coupon-${String(index)}`}
-                    onClick={() => {
-                      handleClick(item.couponCode);
-                    }}
-                  >
+                  <Label>
+                    {/* // htmlFor={`coupon-${String(index)}`}
+                    // onClick={() => {
+                    //   handleClick(item.couponCode);
+                    // }} */}
                     <Flex alignItems="center">
                       <input
                         checked={item.couponCode.toLowerCase() === appliedCoupon.toLowerCase()}
                         type="radio"
                         name="coupons"
-                        id={`coupon-${String(index)}`}
+                        // id={`coupon-${String(index)}`}
+                        disabled
                       />
                       <Text
                         variant="small"

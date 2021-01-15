@@ -1,8 +1,8 @@
 import { SET_PASSWORD as SET_PASSWORD_API } from 'helpers/apiUrls';
 
-const SET_PASSWORD = 'updatePassword/UPDATE_PASSWORD';
-const SET_PASSWORD_SUCCESS = 'updatePassword/UPDATE_PASSWORD_SUCCESS';
-const SET_PASSWORD_FAIL = 'updatePassword/UPDATE_PASSWORD_FAIL';
+const SET_PASSWORD = 'setPassword/SET_PASSWORD';
+const SET_PASSWORD_SUCCESS = 'setPassword/SET_PASSWORD_SUCCESS';
+const SET_PASSWORD_FAIL = 'setPassword/SET_PASSWORD_FAIL';
 
 const initialState = {
   loaded: false
@@ -44,11 +44,11 @@ export const setUserPassword = data => ({
       /* eslint-disable max-len */
       const postData = {
         //   current_password: data.oldPwd,
-        id_customer: data.customerId,
         new_password: data.password,
-        confirm_password: data.confirmPassword
+        confirm_password: data.confirmPassword,
+        id_customer: data.customerId
       };
-      const response = await client.put(SET_PASSWORD_API, postData);
+      const response = await client.post(SET_PASSWORD_API, postData);
       return response;
     } catch (error) {
       throw error;

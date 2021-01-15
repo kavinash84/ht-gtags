@@ -65,6 +65,7 @@ import Pincode from './Pincode';
 import ProductDetailsCarousel from './Carousel';
 import Video from './Video';
 import ReviewFilter from './ReviewFilter';
+import UnbxdCompleteTheLook from './UnbxdCompleteTheLook';
 
 import demoIcon from '../../../static/play-button.svg';
 
@@ -907,129 +908,17 @@ class ProductDetails extends React.Component {
               {this.renderAttributes(groupedAttributes)}
             </Row>
 
-            {/* Description */}
-            {/* {activeSpec === 'details' ? (
-              <Box px="10%" py="2%" sx={{ display: 'flex' }}>
-                <Row>
-                  {ProductBrand && (
-                    <Col>
-                      <Row pb={10}>
-                        <Col width={125} fontWeight="bold">
-                          Brand
-                        </Col>
-                        <Col>{ProductBrand}</Col>
-                      </Row>
-                    </Col>
-                  )}
-                  {familyName && (
-                    <Col>
-                      <Row pb={10}>
-                        <Col fontWeight="bold">Family Name</Col>
-                        <Col>{familyName}</Col>
-                      </Row>
-                    </Col>
-                  )}
-                  {ProductColor && (
-                    <Col>
-                      <Row>
-                        <Col width={125} fontWeight="bold">
-                          Colour
-                        </Col>
-                        <Col>{ProductColor}</Col>
-                      </Row>
-                    </Col>
-                  )}
-                </Row>
-                <Row>
-                  {productDepth && (
-                    <Col>
-                      <Row pb={10}>
-                        <Col fontWeight="bold">Depth (mm)</Col>
-                        <Col>{productDepth}</Col>
-                      </Row>
-                    </Col>
-                  )}
-                  {productWidth && (
-                    <Col>
-                      <Row pb={10}>
-                        <Col fontWeight="bold">Width (mm)</Col>
-                        <Col>{productWidth}</Col>
-                      </Row>
-                    </Col>
-                  )}
-                  {productHeight && (
-                    <Col>
-                      <Row>
-                        <Col fontWeight="bold">Height (mm)</Col>
-                        <Col>{productHeight}</Col>
-                      </Row>
-                    </Col>
-                  )}
-                </Row>
-                <Row>
-                  {productWeight && (
-                    <Col>
-                      <Row pb={10}>
-                        <Col width={188} fontWeight="bold">
-                          Product Weight
-                        </Col>
-                        <Col>{productWeight}</Col>
-                      </Row>
-                    </Col>
-                  )}
-                  {productWeight && <Col>
-                    <Row pb={10}>
-                      <Col width={188} fontWeight="bold">
-                        Product Weight
-                      </Col>
-                      <Col>{productWeight}</Col>
-                    </Row>
-                  </Col>
-                  }
-                  {productMainMaterial && (
-                    <Col>
-                      <Row pb={10}>
-                        <Col fontWeight="bold">Product main Material</Col>
-                        <Col>{productMainMaterial}</Col>
-                      </Row>
-                    </Col>
-                  )}
-                  {skuSupplierConfig && (
-                    <Col>
-                      <Row>
-                        <Col width={188} fontWeight="bold">
-                          SKU
-                        </Col>
-                        <Col>{skuSupplierConfig}</Col>
-                      </Row>
-                    </Col>
-                  )}
-                </Row>
-              </Box>
-            ) : (
-              <Box px="10%">
-                {description && (
-                  <ProductDesc
-                    desc={activeDescription || ''}
-                    showmore={showmore}
-                    toggleShowMore={this.toggleShowMore}
-                  />
-                )}
-              </Box>
-            )} */}
             {activeSpec === 'details' ? (
               <Box px="5%" py="2%" sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
                 {groupedAttributes[0].Details.map(detail => {
                   if (detail.label !== 'Note') {
                     return (
-                      <Row width="33%">
-                        <Col>
-                          <Row pb={10}>
-                            <Col width={150} fontWeight="bold">
-                              {detail.label}
-                            </Col>
-                            <Col>{detail.value}</Col>
-                          </Row>
+                      <Row width="33%" pb={10}>
+                        <Col width={150} fontWeight="bold" fontSize={14} lineHeight={1.4}>
+                          {detail.label}
+                        </Col>
+                        <Col width="calc(100% - 150px)" fontSize={14} lineHeight={1.25}>
+                          {detail.value}
                         </Col>
                       </Row>
                     );
@@ -1061,9 +950,19 @@ class ProductDetails extends React.Component {
             )}
             {/* Usps */}
             <Row my={40} width={['80%', '80%', '60%']} justifyContent="space-between" mx="auto" flexWrap="nowrap">
-              <UspCol src={freeShippingIcon} text="Free Shipping" />
-              {isEmiAvailable && <UspCol src={emiIcon} text="EMI Options" />}
-              <UspCol src={warrentyIcon} text="1 Year Warranty" />
+              {!meta.shipping_charge && (
+                <div style={{ margin: 'auto' }}>
+                  <UspCol src={freeShippingIcon} text="Free Shipping" />
+                </div>
+              )}
+              {isEmiAvailable && (
+                <div style={{ margin: 'auto' }}>
+                  <UspCol src={emiIcon} text="EMI Options" />
+                </div>
+              )}
+              <div style={{ margin: 'auto' }}>
+                <UspCol src={warrentyIcon} text="1 Year Warranty" />
+              </div>
             </Row>
 
             {/* DIMENSIONS */}
@@ -1109,26 +1008,7 @@ class ProductDetails extends React.Component {
             )}
 
             {/* Complete the look */}
-            <Box py={20}>
-              <Box textAlign="center" mb={20}>
-                <Heading variant="heading.regular">Complete the look</Heading>
-              </Box>
-              <Row textAlign="center" flexWrap="wrap">
-                <CompleteTheLookCol src="https://www.hometown.in/media/cms/banner/cabinet.png" />
-                <CompleteTheLookCol src="https://www.hometown.in/media/cms/banner/chair.png" />
-                <CompleteTheLookCol src="https://www.hometown.in/media/cms/banner/curtain.png" />
-                <CompleteTheLookCol src="https://www.hometown.in/media/cms/banner/painting.png" />
-                <CompleteTheLookCol
-                  width="190px"
-                  height="190px"
-                  marginTop="53px"
-                  marginRight="104px"
-                  marginLeft="93px"
-                  src="https://www.hometown.in/media/cms/banner/pillow.png"
-                />
-                <CompleteTheLookCol src="https://www.hometown.in/media/cms/banner/table.png" />
-              </Row>
-            </Box>
+            <UnbxdCompleteTheLook configId={configId} />
 
             {/* Review List and Add review */}
             <Box id="review-section" pt={30} className={styles.reviewSection}>
