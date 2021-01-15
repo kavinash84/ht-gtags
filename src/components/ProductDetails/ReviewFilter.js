@@ -24,7 +24,7 @@ class ReviewFilter extends Component {
     return (
       <Box width={240} ml={16}>
         <Select
-          placeholder="Select review"
+          placeholder="Filter By Ratings"
           defaultValue={null}
           value={selectedFilterProp}
           onChange={onFilterChange}

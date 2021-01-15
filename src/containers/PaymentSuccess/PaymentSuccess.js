@@ -60,7 +60,8 @@ class PaymentSuccess extends Component {
       passwordErrorMessage: '',
       confirmPassword: '',
       confirmPasswordError: false,
-      confirmPasswordErrorMessage: ''
+      confirmPasswordErrorMessage: '',
+      showSetPassword: true
     };
   }
   componentDidMount = () => {
@@ -78,6 +79,18 @@ class PaymentSuccess extends Component {
         type: 'PUSH_TO_DATALAYER'
       });
       dispatch(setPaymentLoadStatus(true));
+    }
+  };
+
+  componentDidUpdate = prevProps => {
+    const { isLoggedIn, history } = this.props;
+    if (prevProps.isLoggedIn !== isLoggedIn && !isLoggedIn) {
+      // console.log('redirect check');
+      // return history.push('/');
+      this.setState({
+        showSetPassword: false
+      });
+      window.location = '/';
     }
   };
 
@@ -225,7 +238,8 @@ class PaymentSuccess extends Component {
       passwordFeedBackMessage,
       confirmPassword,
       confirmPasswordFeedBackError,
-      confirmPasswordFeedBackMessage
+      confirmPasswordFeedBackMessage,
+      showSetPassword
     } = this.state;
     if (data && orderNo) {
       const { products } = this.state;
@@ -242,7 +256,7 @@ class PaymentSuccess extends Component {
                   <Box sx={{ boxShadow: 'profile', border: 'light' }}>
                     <ThankYou orderNo={orderNo} />
                   </Box>
-                  {!isLoggedIn && (
+                  {showSetPassword && !isLoggedIn && (
                     <Box>
                       <form onSubmit={this.onSubmitSetPassword}>
                         <FormInputHtV1

@@ -656,14 +656,16 @@ class ProductDetails extends React.Component {
 
               {/* Reviews */}
               {!!weightedRating && reviewsData.length ? (
-                <ReviewDisplay
-                  ratings={weightedRating}
-                  reviews={reviewsData.length}
-                  count={5}
-                  pb={20}
-                  justifyContent="flex-start"
-                  sx={{ borderBottom: 'none' }}
-                >
+                <div style={{ display: 'flex' }}>
+                  <ReviewDisplay
+                    pr="5px"
+                    ratings={weightedRating}
+                    reviews={reviewsData.length}
+                    count={5}
+                    pb={20}
+                    justifyContent="flex-start"
+                    sx={{ borderBottom: 'none' }}
+                  />
                   <Box>
                     <a
                       variant="linkPrimary"
@@ -672,12 +674,15 @@ class ProductDetails extends React.Component {
                       sx={{
                         borderLeft: 'primary'
                       }}
-                      style={{ color: '#f15a22' }}
+                      style={{
+                        color: '#f15a22',
+                        fontSize: '14px'
+                      }}
                     >
-                      | Write a Review
+                      {' |'} Write a Review
                     </a>
                   </Box>
-                </ReviewDisplay>
+                </div>
               ) : (
                 <Box pb={20}>
                   <a

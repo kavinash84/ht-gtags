@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 
 /* ====== Modules ====== */
 import { logout } from 'redux/modules/login';
-import { checkCart } from 'redux/modules/cart';
+import { checkCart, loadCart } from 'redux/modules/cart';
+// import { loadCart } from 'redux/modules/cart';
 import { addToSelectForDemo } from 'redux/modules/selectForDemo';
 
 /* ====== selectors ====== */
@@ -21,8 +22,10 @@ import {
   MY_WISHLIST_URL,
   MY_PROFILE_URL,
   CART_URL,
-  DELIVERY_ADDRESS_URL
+  DELIVERY_ADDRESS_URL,
+  PINCODE
 } from 'helpers/Constants';
+// import { PINCODE } from 'helpers/Constants';
 import { titleCase, checkRedirection } from 'utils/helper';
 // import { formatAmount } from 'utils/formatters';
 
@@ -70,7 +73,7 @@ const despatchClearSelectForDemo = dispatcheroEmpty => {
 @withRouter
 @connect(
   ({
- userLogin, wishlist, cart, router, profile, app
+ userLogin, wishlist, cart, router, profile, app, pincode
 }) => ({
     isLoggedIn: userLogin.isLoggedIn,
     name: profile.data.first_name,
@@ -83,11 +86,14 @@ const despatchClearSelectForDemo = dispatcheroEmpty => {
     cartSummary: cart.summary,
     wishlist,
     addToSelectForDemo,
-    sessionId: app.sessionId
+    sessionId: app.sessionId,
+    // pincode: { selectedPincode },
+    selectedPincode: pincode.selectedPincode
   }),
   {
     logoutUser: logout,
     checkCart,
+    loadCart,
     addToSelectForDemo
   }
 )
@@ -142,7 +148,10 @@ export default class HeaderTop extends Component {
 
   checkCartBeforeCheckout = (dispatcher, session) => dispatcheroEmpty => {
     // e.preventDefault();
+    const { selectedPincode, loadCart } = this.props;
     console.log('cart check console', dispatcher, session, dispatcheroEmpty);
+    const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
+    loadCart(session, pincode).catch(error => console.log(error));
     dispatcher(session);
     despatchClearSelectForDemo(dispatcheroEmpty); // New
   };
@@ -369,9 +378,11 @@ export default class HeaderTop extends Component {
                       )}
                     </Box>
                     <Box width={1 / 2} px={5}>
-                      <Button as={Link} to={MY_WISHLIST_URL} variant="outline.primary" width={1}>
-                        VIEW ALL
-                      </Button>
+                      {isLoggedIn && (
+                        <Button as={Link} to={MY_WISHLIST_URL} variant="outline.primary" width={1}>
+                          VIEW ALL
+                        </Button>
+                      )}
                     </Box>
                   </Flex>
                 </Box>
@@ -540,5 +551,6 @@ HeaderTop.propTypes = {
   wishlist: PropTypes.object,
   addToSelectForDemo: PropTypes.func.isRequired,
   checkCart: PropTypes.func.isRequired,
-  sessionId: PropTypes.string.isRequired
+  sessionId: PropTypes.string.isRequired,
+  selectedPincode: PropTypes.any.isRequired
 };
