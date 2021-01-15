@@ -378,9 +378,11 @@ export default class HeaderTop extends Component {
                       )}
                     </Box>
                     <Box width={1 / 2} px={5}>
-                      {isLoggedIn && <Button as={Link} to={MY_WISHLIST_URL} variant="outline.primary" width={1}>
-                        VIEW ALL
-                      </Button>}
+                      {isLoggedIn && (
+                        <Button as={Link} to={MY_WISHLIST_URL} variant="outline.primary" width={1}>
+                          VIEW ALL
+                        </Button>
+                      )}
                     </Box>
                   </Flex>
                 </Box>

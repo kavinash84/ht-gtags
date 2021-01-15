@@ -82,17 +82,17 @@ class PaymentSuccess extends Component {
     }
   };
 
-  componentDidUpdate = (prevProps) => {
-    const { isLoggedIn, history } = this.props
-    if(prevProps.isLoggedIn !== isLoggedIn && !isLoggedIn) {
+  componentDidUpdate = prevProps => {
+    const { isLoggedIn, history } = this.props;
+    if (prevProps.isLoggedIn !== isLoggedIn && !isLoggedIn) {
       // console.log('redirect check');
       // return history.push('/');
       this.setState({
         showSetPassword: false
-      })
-      window.location='/';
+      });
+      window.location = '/';
     }
-  }
+  };
 
   onChangePassword = e => {
     const {
