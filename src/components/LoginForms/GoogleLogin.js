@@ -230,12 +230,20 @@ class GoogleLogin extends Component {
                     feedBackMessage={phoneErrorMessage}
                   />
                 </form>
-                <GoogleLoginBtn
+                {/* <GoogleLoginBtn
                   disabled={this.isValid()}
                   className="google-login-btn"
                   clientId="663311547699-jersj1hfflbl8gfukgsuvug8u1gc88nm.apps.googleusercontent.com"
                   onSuccess={onSuccess(loginViaLogin, session, phone)}
                   onFailure={onError}
+                > */}
+                <button
+                  disabled={this.isValid()}
+                  className="google-login-btn"
+                  onClick={e => {
+                    e.preventDefault();
+                    loginViaLogin({}, session, phone);
+                  }}
                 >
                   {loggingIn ? (
                     <span>
@@ -245,7 +253,8 @@ class GoogleLogin extends Component {
                   ) : (
                     'Update Contact Number'
                   )}
-                </GoogleLoginBtn>
+                  {/* </GoogleLoginBtn> */}
+                </button>
               </Text>
             </Box>
           ) : //   </Row>
