@@ -12,7 +12,7 @@ import Row from 'hometown-components-dev/lib/RowHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
-import GoogleLoginBtn from 'react-google-login';
+// import GoogleLoginBtn from 'react-google-login';
 
 const LoginModal = props => {
   const {
@@ -39,14 +39,14 @@ const LoginModal = props => {
     return true;
   };
 
-  const onError = error => e => {
-    console.log('Error occuried');
-    console.log(error, e);
-  };
+  // const onError = error => e => {
+  //   console.log('Error occuried');
+  //   console.log(error, e);
+  // };
 
-  const onSuccess = (dispatcher, session, phone) => result => {
-    dispatcher(result.tokenId, session, phone);
-  };
+  // const onSuccess = (dispatcher, session, phone) => result => {
+  //   dispatcher(result.tokenId, session, phone);
+  // };
 
   return (
     <div>
@@ -84,14 +84,7 @@ const LoginModal = props => {
             feedBackMessage={lastNameErrorMessage}
           />
         </form>
-        <GoogleLoginBtn
-          // disabled={!isValid()}
-          // className="google-login-btn"
-          // onClick={() => {
-          //   console.log(!isValid());
-          //   const username = `${firstName} ${lastName}`;
-          //   loginViaLogin({}, session, null, username);
-          // }}
+        {/* <GoogleLoginBtn
           disabled={!isValid()}
           className="google-login-btn"
           clientId="663311547699-jersj1hfflbl8gfukgsuvug8u1gc88nm.apps.googleusercontent.com"
@@ -101,6 +94,15 @@ const LoginModal = props => {
             loginViaLogin({}, session, null, username);
           }}
           onFailure={onError}
+        > */}
+        <button
+          disabled={!isValid()}
+          className="google-login-btn"
+          onClick={() => {
+            console.log(!isValid());
+            const username = `${firstName} ${lastName}`;
+            loginViaLogin({}, session, null, username);
+          }}
         >
           {loggingIn ? (
             <span>
@@ -110,7 +112,8 @@ const LoginModal = props => {
           ) : (
             'Update'
           )}
-        </GoogleLoginBtn>
+          {/* </GoogleLoginBtn> */}
+        </button>
       </Text>
     </div>
   );
