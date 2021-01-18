@@ -253,7 +253,8 @@ class PaymentSuccess extends Component {
             {data ? (
               <Container pt={60}>
                 <Box variant="col-10" mx="auto">
-                  <Box sx={{
+                  <Box
+                    sx={{
                       boxShadow: '4px 4px 4px 1px rgba(0, 0, 0, 0.14)',
                       borderRadius: 10,
                       overflow: 'auto',
@@ -264,7 +265,8 @@ class PaymentSuccess extends Component {
                     {showSetPassword && !isLoggedIn && (
                       <Box sx={{ bg: 'rgb(159 155 146 / 0.25)' }} py={44}>
                         <Box width={1 / 3} mx="auto" sx={{ position: 'relative' }}>
-                          <Box sx={{
+                          <Box
+                            sx={{
                               position: 'absolute',
                               left: 'calc(50% - 20px)',
                               top: -44,
@@ -272,7 +274,7 @@ class PaymentSuccess extends Component {
                               height: 0,
                               borderLeft: '20px solid transparent',
                               borderRight: '20px solid transparent',
-                              borderTop: '20px solid #FFF',
+                              borderTop: '20px solid #FFF'
                             }}
                           />
                           <form onSubmit={this.onSubmitSetPassword}>
