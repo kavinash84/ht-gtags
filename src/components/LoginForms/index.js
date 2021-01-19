@@ -186,7 +186,7 @@ export default class LoginForm extends Component {
           signupUrl={SIGNUP_URL}
           onForgotPasswordClick={this.onForgotPasswordClick}
         />
-        <ResponsiveModal classNames={{ modal: 'forgotModal' }} onCloseModal={this.handleModal} open={open}>
+        <ResponsiveModal classNames={{ modal: 'updateProfileModal' }} onCloseModal={this.handleModal} open={open}>
           <Row display="block" mr="0" ml="0" mb="10px">
             <Box textAlign="center">
               <Heading
