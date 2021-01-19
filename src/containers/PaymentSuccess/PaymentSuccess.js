@@ -277,6 +277,9 @@ class PaymentSuccess extends Component {
                               borderTop: '20px solid #FFF'
                             }}
                           />
+                          <Text mb={16} color="label" width={1} fontSize={16} fontFamily="medium">
+                            Set password & save your details for future
+                          </Text>
                           <form onSubmit={this.onSubmitSetPassword}>
                             <FormInputHtV1
                               // label="Type Password"
