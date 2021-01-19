@@ -72,18 +72,15 @@ class NavBar extends Component {
                 />
               </Fragment>
             ))}
-            <Text
-              as={LinkRedirect}
-              variant="menu"
-              href="https://beta.hometown.in/modular-kitchens/"
+            <Link
+              to="/modular-kitchens"
               title="Modular Kitchens"
               target="_blank"
               rel="noopener noreferrer"
-              onClick={exitOnClick}
-              minWidth="auto"
+              style={{ textDecoration: 'none', color: 'black', fontWeight: 'bold' }}
             >
               Modular Kitchens
-            </Text>
+            </Link>
 
             {/* More Button */}
             <Box sx={{ position: 'relative' }}>
