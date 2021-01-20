@@ -264,7 +264,7 @@ class PaymentSuccess extends Component {
                     <ThankYou orderNo={orderNo} />
                     {showSetPassword && !isLoggedIn && (
                       <Box sx={{ bg: 'rgb(159 155 146 / 0.25)' }} py={44}>
-                        <Box width={1 / 3} mx="auto" sx={{ position: 'relative' }}>
+                        <Box width={2 / 5} mx="auto" sx={{ position: 'relative' }}>
                           <Box
                             sx={{
                               position: 'absolute',
