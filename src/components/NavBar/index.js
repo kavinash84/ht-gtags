@@ -73,13 +73,17 @@ class NavBar extends Component {
               </Fragment>
             ))}
             <Link
+              href="https://beta.hometown.in/modular-kitchens/"
               to="/modular-kitchens"
               title="Modular Kitchens"
               target="_blank"
               rel="noopener noreferrer"
               style={{
- textDecoration: 'none', fontFamily: 'medium', color: 'black', fontWeight: 'bold'
-}}
+                textDecoration: 'none',
+                fontFamily: 'medium',
+                color: 'black',
+                fontWeight: 'bold'
+              }}
             >
               Modular Kitchens
             </Link>
