@@ -296,7 +296,9 @@ class Listing extends React.Component {
           onCloseModal={this.handleLoginModal}
           open={this.state.openLogin}
         >
-          <LoginModal />
+          <Box py={32} px={32}>
+            <LoginModal />
+          </Box>
         </ResponsiveModal>
       </Box>
     );
