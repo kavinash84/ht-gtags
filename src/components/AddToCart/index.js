@@ -32,9 +32,9 @@ const checkSKUItemsInCart = (list, sku, quantity) => {
 const LoaderIcon = require('../../../static/refresh.svg');
 // const CheckedIcon = require('../../../static/added-to-cart-icon.png');
 
-const onClick = (key, skuId, simpleSku, session, pincode, quantity, configId) => dispatcher => e => {
+const onClick = (key, skuId, simpleSku, session, pincode, configId, quantity) => dispatcher => e => {
   e.preventDefault();
-  dispatcher(key, skuId, simpleSku, session, pincode, quantity, configId);
+  dispatcher(key, skuId, simpleSku, session, pincode, configId, quantity);
 };
 
 const mapStateToProps = ({
@@ -93,10 +93,10 @@ const AddToCart = ({
               disabled={addLoading}
               onClick={e => {
                 if (quantityChange && updateQty !== 0 && checkStatus) {
-                  const handler = onClick(cartId, sku, simpleSku, session, pincode, updateQty, configId)(updateCart);
+                  const handler = onClick(cartId, sku, simpleSku, session, pincode, configId, updateQty)(updateCart);
                   handler(e);
                 } else {
-                  const handler = onClick(itemId, sku, simpleSku, session, pincode, configId)(addToCart);
+                  const handler = onClick(itemId, sku, simpleSku, session, pincode, configId, quantity)(addToCart);
                   handler(e);
                 }
               }}
