@@ -77,7 +77,9 @@ class NavBar extends Component {
               title="Modular Kitchens"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ textDecoration: 'none', color: 'black', fontWeight: 'bold' }}
+              style={{
+ textDecoration: 'none', fontFamily: 'medium', color: 'black', fontWeight: 'bold'
+}}
             >
               Modular Kitchens
             </Link>
