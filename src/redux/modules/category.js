@@ -51,6 +51,6 @@ export const setCategory = payLoad => ({
 
 export const loadCategory = id => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-  promise: ({ client }) => client.get(`${CATEGORY_PAGE}/${id}?newui=true`),
+  promise: ({ client }) => client.get(`${CATEGORY_PAGE}/${id}`),
   id
 });
