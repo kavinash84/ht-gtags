@@ -916,7 +916,7 @@ class ProductDetails extends React.Component {
             {activeSpec === 'details' ? (
               <Box px="5%" py="2%" sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
                 {groupedAttributes[0].Details.map(detail => {
-                  if (detail.label !== 'Note') {
+                  if (detail.label !== 'Note' && detail.label !== "What's in the box?") {
                     return (
                       <Row width="33%" pb={10}>
                         <Col width={150} fontWeight="bold" fontSize={14} lineHeight={1.4}>
