@@ -48,10 +48,10 @@ class BuyNow extends React.Component {
     }
   }
 
-  handleClick = (key, skuId, simpleSku, session, pincode, quantity, configId) => dispatcher => e => {
+  handleClick = (key, skuId, simpleSku, session, pincode, configId, quantity = 1) => dispatcher => e => {
     e.preventDefault();
     this.setState({ buynow: true });
-    dispatcher(key, skuId, simpleSku, session, pincode, quantity, configId);
+    dispatcher(key, skuId, simpleSku, session, pincode, configId, quantity);
   };
   render() {
     const {
@@ -102,7 +102,7 @@ BuyNow.defaultProps = {
   stateId: '',
   meta: '',
   isSoldOut: false,
-  history: {},
+  history: {}
 };
 
 BuyNow.propTypes = {

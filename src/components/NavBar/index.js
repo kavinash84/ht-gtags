@@ -172,11 +172,11 @@ class NavBar extends Component {
                   <Text
                     as={LinkRedirect}
                     variant="menuLight"
-                    href="https://beta.hometown.in/design-build/"
+                    href="https://stage.hometown.in/design-build/"
                     title="Design & Build"
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={exitOnClick}
+                    // onClick={exitOnClick}
                   >
                     Design & Build
                   </Text>
