@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import cookie from 'js-cookie';
 import { getCities, getOfferStripData, getMiddleBannerData } from 'selectors/homepage';
 import Select from 'react-select';
+import { Link } from 'react-router-dom';
 
 /* ====== Components ====== */
 import Body from 'hometown-components-dev/lib/BodyHtV1';
@@ -213,7 +214,7 @@ export default class Home extends Component {
               </Row>
               <Row>
                 <Col variant="colBasis" flexDirection="column">
-                  <a href="https://stage.hometown.in/design-build/" target="_blank0">
+                  <Link to="/design-build/" href="https://stage.hometown.in/design-build/" target="_blank0">
                     <Box mb={20} sx={{ position: 'relative' }}>
                       <Image src={sliderImage} />
                       <Image src={designBuildLogo} variant="image.logoHomeTown" />
@@ -221,10 +222,10 @@ export default class Home extends Component {
                     <Heading variant="heading.regular" textAlign="center">
                       Design and Build
                     </Heading>
-                  </a>
+                  </Link>
                 </Col>
                 <Col variant="colBasis" flexDirection="column">
-                  <a href="https://stage.hometown.in/modular-kitchens/" target="_blank1">
+                  <Link to="/modular-kitchens/" href="https://stage.hometown.in/modular-kitchens/" target="_blank1">
                     <Box mb={20} sx={{ position: 'relative' }}>
                       <Image src={bannerImage} />
                       <Image
@@ -235,7 +236,7 @@ export default class Home extends Component {
                     <Heading variant="heading.regular" textAlign="center">
                       Modular Kitchen
                     </Heading>
-                  </a>
+                  </Link>
                 </Col>
               </Row>
             </Container>
