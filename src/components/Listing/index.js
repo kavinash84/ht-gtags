@@ -69,7 +69,8 @@ class Listing extends React.Component {
     // openQuickView: false,
     // quickViewSku: '',
     // simpleSku: '',
-    openLogin: false
+    openLogin: false,
+    display: 'block'
   };
   componentWillMount() {
     // const {
@@ -89,7 +90,7 @@ class Listing extends React.Component {
         location: { pathname, state = {} }
       }
     } = this.props;
-
+    console.log(pathname);
     if (window && breadCrumbs && pathname.indexOf('search') === -1) {
       let url = '';
       breadCrumbs.forEach((item, i) => {
@@ -101,6 +102,10 @@ class Listing extends React.Component {
       });
       window.unbxd_category = url || 'None';
       console.log(`unbxd_category - did mount- url- ${url}`);
+    } else {
+      this.setState({
+        display: 'none'
+      });
     }
     if (window) {
       window.HT = {};
@@ -126,7 +131,7 @@ class Listing extends React.Component {
       });
     }
   }
-  async componentDidUpdate() {
+  async componentDidUpdate(prevState) {
     const {
       reloadListing,
       setReloadListing,
@@ -148,6 +153,10 @@ class Listing extends React.Component {
           }
         });
         window.unbxd_category = url || 'None';
+      } else if (prevState.display !== this.state.display) {
+        this.setState({
+          display: 'none'
+        });
       }
       const { dispatch } = this.context.store;
       await dispatch(setReloadListing(false));
@@ -156,6 +165,11 @@ class Listing extends React.Component {
         window.renderListing(false, state);
       }
     }
+    // if(prevState.display !== this.state.display) {
+    //   this.setState({
+    //     display: 'none'
+    //   })
+    // }
     this.props.history.location.action = '';
   }
   // onOpenQuickViewModal = (sku, simpleSku, soldOut, deliveredBy, rating) => {
@@ -279,16 +293,19 @@ class Listing extends React.Component {
     const {
  categoryName, productCount, breadCrumbs, history, categoryBar
 } = this.props;
+    const { display } = this.state;
     // const uniqueFilters = {};
+    console.log(display);
     return (
       <Box>
-        <TitleBar title={categoryName} productCount={productCount}>
+        <TitleBar title={categoryName} productCount={productCount} display={display}>
           <BreadCrumb categoryDetails={breadCrumbs} handleCategoryClick={this.handleCategoryClick} />
         </TitleBar>
         <CategoryBar
           pathname={history.location.pathname}
           categoryBar={categoryBar}
           handleCategoryClick={this.handleCategoryClick}
+          display={display}
         />
         <UnbxdListing />
         <ResponsiveModal
@@ -317,7 +334,8 @@ Listing.defaultProps = {
   isLoggedIn: false,
   // categoryquery: '',
   categoryBar: [],
-  reloadListing: false
+  reloadListing: false,
+  // display: 'block
 };
 
 Listing.propTypes = {
@@ -346,7 +364,8 @@ Listing.propTypes = {
   setPincodeToStore: PropTypes.func.isRequired,
   setPincodeFilterToStore: PropTypes.func.isRequired,
   reloadListing: PropTypes.bool,
-  setReloadListing: PropTypes.func.isRequired
+  setReloadListing: PropTypes.func.isRequired,
+  // display: PropTypes.string.isRequired
 };
 
 export default connect(null, mapDispatchToProps)(Listing);
