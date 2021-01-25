@@ -170,9 +170,10 @@ class NavBar extends Component {
                 </Box>
                 <Box>
                   <Text
-                    as={LinkRedirect}
+                    as={Link}
                     variant="menuLight"
-                    href="https://stage.hometown.in/design-build/"
+                    to="/design-build/"
+                    // href="https://stage.hometown.in/design-build/"
                     title="Design & Build"
                     target="_blank"
                     rel="noopener noreferrer"
