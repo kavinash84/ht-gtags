@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Helmet from 'react-helmet';
 import Select from 'react-select';
+import ReactStars from 'react-stars';
 
 /**
  * Modules / Utils / Reducers
@@ -33,13 +34,14 @@ import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Row from 'hometown-components-dev/lib/RowHtV1';
-
+import Label from 'hometown-components-dev/lib/LabelHtV1';
+import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
 /**
  * Page Components
  */
 import Section from 'hometown-components-dev/lib/SectionHtV1';
 import UnbxdRecentlyViewed from 'components/UnbxdRecentlyViewed/UnbxdRecentlyViewed';
-import AddReview from 'hometown-components-dev/lib/ReviewsHtV1/WriteReview';
+// import AddReview from 'hometown-components-dev/lib/ReviewsHtV1/WriteReview';
 import ColorOption from 'hometown-components-dev/lib/ProductDetailsHtV1/ColorOption';
 import CombinedBuy from 'components/CombinedBuy';
 import ProductDesc from 'hometown-components-dev/lib/ProductDetailsHtV1/ProductDesc';
@@ -247,7 +249,7 @@ class ProductDetails extends React.Component {
   };
   constructor(props) {
     super(props);
-    this.reviewsRef = React.createRef();
+    // this.reviewsRef = React.createRef();
     this.state = {
       openLogin: false,
       showmore: true,
@@ -262,8 +264,17 @@ class ProductDetails extends React.Component {
       filterChanged: false,
       colorProducts: [],
       isFurniture: false,
-      popUpTimeoutId: null
+      popUpTimeoutId: null,
+      name: '',
+      rating: 0,
+      review: '',
+      nameError: false,
+      nameErrorMessage: 'Name cannot be left Blank',
+      reviewError: false,
+      reviewErrorMessage: 'Review cannot be left Blank',
+      addreview: false
     };
+    this.reviewRef = React.createRef();
   }
   componentDidMount() {
     const { dispatch } = this.context.store;
@@ -439,6 +450,55 @@ class ProductDetails extends React.Component {
     });
   }
 
+  toggleAddReview = e => {
+    e.preventDefault();
+    this.setState(
+      {
+        rating: 0,
+        addreview: !this.state.addreview
+      },
+      () => {
+        if (this.state.addreview) {
+          this.reviewRef.current.scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest'
+          });
+          // this.reviewRef.current.focus();
+        }
+      }
+    );
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    const { onClickSubmit, catalogId } = this.props;
+    const { name, review, rating } = this.state;
+    const nameError = !(name.length > 0);
+    const reviewError = !(review.length > 0);
+    if (nameError || reviewError) {
+      return this.setState({
+        nameError,
+        reviewError
+      });
+    }
+    onClickSubmit(catalogId, { name, rating, review });
+  };
+
+  ratingChanged = newRating => {
+    this.setState({
+      rating: Number(newRating)
+    });
+  };
+
+  handleChange = e => {
+    e.preventDefault();
+    const { name, value } = e.target;
+    this.setState({
+      [name]: value,
+      [`${name}Error`]: false
+    });
+  };
+
   renderAttributes = items => {
     items.map((item, i) =>
       Object.keys(item).map(key => (
@@ -454,6 +514,7 @@ class ProductDetails extends React.Component {
         </DescriptionButton>
       )));
   };
+
   render() {
     const {
       product,
@@ -468,7 +529,7 @@ class ProductDetails extends React.Component {
       isLoggedIn,
       wishlistToggle,
       addToWaitList,
-      toggleReviewBox,
+      // toggleReviewBox,
       deliveryDateLoading,
       gattributes,
       breadcrumbs,
@@ -486,7 +547,14 @@ class ProductDetails extends React.Component {
       filterChanged,
       activeDescription,
       reviewDataSet,
-      showmorecolorproductsCount
+      showmorecolorproductsCount,
+      addreview,
+      nameError,
+      nameErrorMessage,
+      reviewError,
+      reviewErrorMessage,
+      // name,
+      review
     } = this.state;
     const {
       meta,
@@ -537,7 +605,8 @@ class ProductDetails extends React.Component {
     } = pricingDetails;
 
     const checkSpecialPrice = Number(specialPriceEmi) || Number(price);
-    const { adding, added, data: reviewsData = [] } = reviews;
+    // const { adding, added, data: reviewsData = [] } = reviews;
+    const { data: reviewsData = [] } = reviews;
     const offerImage = simples[simpleSku].groupedattributes.offer_image || null;
     const offerImageRedirect = simples[simpleSku].groupedattributes.offer_image_click_url || null;
     const { showmore, showmorecolorproducts } = this.state;
@@ -666,10 +735,22 @@ class ProductDetails extends React.Component {
                     justifyContent="flex-start"
                     sx={{ borderBottom: 'none' }}
                   />
+                  <a
+                    variant="linkPrimary"
+                    href="#review-section"
+                    style={{
+                      cursor: 'default'
+                    }}
+                  >
+                    <Label mr={5} color="primary" fontFamilly="medium" fontSize={14} sx={{ cursor: 'pointer' }}>
+                      {`Review${reviewsData.length !== 1 ? 's ' : ' '} `}
+                    </Label>
+                  </a>
                   <Box>
                     <a
                       variant="linkPrimary"
                       href="#review-section"
+                      onClick={this.toggleAddReview}
                       ml={10}
                       sx={{
                         borderLeft: 'primary'
@@ -688,6 +769,7 @@ class ProductDetails extends React.Component {
                   <a
                     variant="linkPrimary"
                     href="#review-section"
+                    onClick={this.toggleAddReview}
                     sx={{
                       borderLeft: 'primary'
                     }}
@@ -1020,7 +1102,7 @@ class ProductDetails extends React.Component {
               <Box textAlign="center" mb={30}>
                 <Heading variant="heading.regular">Reviews</Heading>
               </Box>
-              <AddReview
+              {/* <AddReview
                 ratings={weightedRating}
                 reviews={reviewsData.length}
                 count={5}
@@ -1031,11 +1113,82 @@ class ProductDetails extends React.Component {
                 adding={adding}
                 added={added}
                 toggleReview={toggleReviewBox}
+                addNewReview={addNewReview}
               >
                 {reviewsData.length > 0 && (
                   <ReviewFilter selectedFilterProp={selectedFilter} onFilterChange={this.onFilterChange} />
                 )}
-              </AddReview>
+              </AddReview> */}
+              <div ref={this.reviewRef}>
+                <Box width={1}>
+                  <ReviewDisplay ratings={weightedRating} reviews={reviewsData.length} count={5}>
+                    {/* {children} */}
+                    {reviewsData.length > 0 && (
+                      <ReviewFilter selectedFilterProp={selectedFilter} onFilterChange={this.onFilterChange} />
+                    )}
+                    <Button display={['none', 'block']} onClick={this.toggleAddReview}>
+                      Write a Review
+                    </Button>
+                  </ReviewDisplay>
+                  {addreview && (
+                    <form onSubmit={this.handleSubmit}>
+                      <Box width={[1, 1, 5 / 12]}>
+                        <Row alignItems="center" mx={0} mb={15}>
+                          <Label mr={10}>Rating</Label>
+                          <ReactStars
+                            count={5}
+                            onChange={this.ratingChanged}
+                            size={20}
+                            value={this.state.rating}
+                            half={false}
+                            color2="#ffd700"
+                          />
+                        </Row>
+                        <Box>
+                          <FormInput
+                            label="Name"
+                            type="text"
+                            placeholder="Name"
+                            name="name"
+                            value={this.state.name}
+                            feedBackError={nameError}
+                            feedBackMessage={nameErrorMessage}
+                            onChange={this.handleChange}
+                            // ref={(nameInp) => this.myInp = nameInp}
+                          />
+                        </Box>
+                        <Box marginBottom="0.3125rem">
+                          <FormInput
+                            type="textarea"
+                            label="Review"
+                            name="review"
+                            placeholder="Review"
+                            value={review}
+                            feedBackError={reviewError}
+                            feedBackMessage={reviewErrorMessage}
+                            onChange={this.handleChange}
+                            rows="3"
+                            height={80}
+                          />
+                        </Box>
+                        <Box>
+                          <Button
+                            type="submit"
+                            btnType="primary"
+                            size="large"
+                            fontFamily="regular"
+                            fontSize="0.875em"
+                            height="42px"
+                            lh="2"
+                          >
+                            SUBMIT
+                          </Button>
+                        </Box>
+                      </Box>
+                    </form>
+                  )}
+                </Box>
+              </div>
               <Reviews
                 variant="col-12"
                 reviewItems={filterChanged ? reviewDataSet : reviews.data}
@@ -1119,7 +1272,9 @@ ProductDetails.defaultProps = {
   simpleSku: '',
   quantityChange: false,
   skuItem: {},
-  session: ''
+  session: '',
+  catalogId: '',
+  onClickSubmit: () => {}
 };
 DescriptionButton.propTypes = {
   // eslint-disable-next-line react/require-default-props
@@ -1141,7 +1296,7 @@ ProductDetails.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   wishlistToggle: PropTypes.func.isRequired,
   addToWaitList: PropTypes.func.isRequired,
-  toggleReviewBox: PropTypes.func.isRequired,
+  // toggleReviewBox: PropTypes.func.isRequired,
   updateQuantityFlag: PropTypes.func.isRequired,
   deliveryDateLoading: PropTypes.bool,
   breadcrumbs: PropTypes.array.isRequired,
@@ -1151,6 +1306,8 @@ ProductDetails.propTypes = {
   combinedbuy: PropTypes.array,
   quantityChange: PropTypes.bool,
   skuItem: PropTypes.object,
-  session: PropTypes.string
+  session: PropTypes.string,
+  onClickSubmit: PropTypes.func,
+  catalogId: PropTypes.any
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
