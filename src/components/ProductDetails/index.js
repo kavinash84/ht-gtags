@@ -39,8 +39,8 @@ import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
 /**
  * Page Components
  */
-import Section from 'hometown-components-dev/lib/SectionHtV1';
-import UnbxdRecentlyViewed from 'components/UnbxdRecentlyViewed/UnbxdRecentlyViewed';
+// import Section from 'hometown-components-dev/lib/SectionHtV1';
+// import UnbxdRecentlyViewed from 'components/UnbxdRecentlyViewed/UnbxdRecentlyViewed';
 // import AddReview from 'hometown-components-dev/lib/ReviewsHtV1/WriteReview';
 import ColorOption from 'hometown-components-dev/lib/ProductDetailsHtV1/ColorOption';
 import CombinedBuy from 'components/CombinedBuy';
@@ -1235,9 +1235,9 @@ class ProductDetails extends React.Component {
           )}
 
           {/* Unbxd Recently Viewed */}
-          <Section>
+          {/* <Section>
             <UnbxdRecentlyViewed />
-          </Section>
+          </Section> */}
 
           {/* Login modal */}
           <ResponsiveModal
