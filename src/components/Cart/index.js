@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 // import { bindActionCreators } from 'redux';      //Old
 // import { bindActionCreators } from 'redux';      //New
@@ -27,6 +27,10 @@ import Row from 'hometown-components-dev/lib/RowHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import CloseIcon from 'hometown-components-dev/lib/Icons/Close';
 import * as actionCreatorsForDemo from 'redux/modules/selectForDemo'; // New
+import * as actionCreatorsForWishlist from 'redux/modules/wishlist';
+// import { groupedAttributes as getgroupedAttributes, getBreadCrumbs, getSimpleSku } from 'selectors/product';
+import ResponsiveModal from 'components/Modal';
+import LoginModal from 'containers/Login/LoginForm';
 
 /**
  * Page Components
@@ -42,6 +46,7 @@ const checkoutIcon = require('../../../static/checkout.svg');
 const location = require('../../../static/map-icon.svg');
 const orderTrackIcon = require('../../../static/shipped.svg');
 const demoBanner = require('../../../static/campaign/select-for-demo-banner.jpg');
+const saveForLaterIcon = require('../../../static/wishListIcon.png');
 
 const despatchClearSelectForDemo = dispatcheroEmpty => {
   const state = [];
@@ -97,6 +102,33 @@ const onClick = (
   dispatchero([...selectForDemo]);
   dispatcher(cartId, sessionId, pincode, qty, configId);
 };
+
+const addToWishlist = (
+  sku,
+  list,
+  dispatcher,
+  isUserLoggedIn,
+  onOpenLoginModal,
+  wishListWaitList,
+  simpleSku,
+  selectedPincode,
+  cartId,
+  sessionId,
+  pincode,
+  qty,
+  configId
+  // loadingList
+) => dispatcher2 => e => {
+  e.preventDefault();
+  if (isUserLoggedIn) {
+    dispatcher(list, sku, simpleSku, selectedPincode);
+    dispatcher2(cartId, sessionId, pincode, qty, configId);
+  } else {
+    wishListWaitList(sku, simpleSku, selectedPincode);
+    onOpenLoginModal();
+  }
+};
+
 const countCartItemNumbers = results => {
   let cartItemsNumber = 0;
   results.forEach(result => {
@@ -122,8 +154,17 @@ const handleCheckboxClick = (id, data, state) => dispatchero => e => {
   despatchSelectForDemo(id, data, state, dispatchero);
 };
 
+// const isInWishList = (list, id) => list.forEach( item => {
+//   if(item.wishlist_info.configurable_sku === id) {
+//     console.log(item.wishlist_info.configurable_sku === id);
+//     return true;
+//   }
+//   console.log(item.wishlist_info.configurable_sku === id);
+//   return false;
+// });
+
 const mapStateToProps = ({
- pincode, cart, app, selectForDemo
+ pincode, cart, app, selectForDemo, productdetails, wishlist, userLogin
 }) => ({
   currentId: cart.key,
   cartChecked: cart.cartChecked,
@@ -133,7 +174,13 @@ const mapStateToProps = ({
   // sessionId: app.sessionId   //Old
   sessionId: app.sessionId, // New
   demoLandingPageUrl: cart.demo_landing_page_url,
-  selectForDemo: selectForDemo.data
+  selectForDemo: selectForDemo.data,
+  product: productdetails.productDescription,
+  sku: productdetails.productDescription.sku,
+  wishListData: wishlist.data,
+  isLoggedIn: userLogin.isLoggedIn,
+  // simpleSku: getSimpleSku(productdetails),
+  loadingList: wishlist.data
 });
 
 const Cart = ({
@@ -141,6 +188,7 @@ const Cart = ({
   results,
   summary,
   removeFromCart,
+  toggleWishList,
   pincode,
   sessionId,
   currentId,
@@ -153,13 +201,38 @@ const Cart = ({
   demoLandingPageUrl,
   // eslint-disable-next-line no-shadow
   addToSelectForDemo,
-  selectForDemo
-  // demo_landing_page_url: demoLandingPageUrl
+  selectForDemo,
+  // demo_landing_page_url: demoLandingPageUrl,
+  // sku,
+  wishListData,
+  isLoggedIn,
+  wishListWaitList,
+  // simpleSku,
+  loadingList
 }) => {
   const cartItemLoading = customerCardId => cartUpdating && currentId === customerCardId;
   const isProductOutofStock = sku => outOfStockList.includes(sku);
   const isAnyProductOutofStoc = checkIsAnyProductOutofStoc(results, outOfStockList);
   const cartItemsNumber = countCartItemNumbers(results);
+
+  // const simpleSku = getSimpleSku(productdetails);
+
+  const [openLogin, setOpenLogin] = useState(false);
+  // const [disableBtn, setDisableBtn] = useState(false);
+
+  const handleLoginModal = () => {
+    setOpenLogin(!openLogin);
+  };
+
+  const isInWishList = (list, id) => {
+    let disableButton = false;
+    list.forEach(item => {
+      if (item.wishlist_info.configurable_sku === id) {
+        disableButton = true;
+      }
+    });
+    return disableButton;
+  };
 
   return (
     <Container my={[30, 30, 60]}>
@@ -275,14 +348,39 @@ const Cart = ({
                   </Flex>
                 </Box>
                 <Flex alignItems="center">
-                  {/* <Button variant="link" fontSize={12} display="flex" alignItems="center">
+                  <Button
+                    variant="link"
+                    fontSize={12}
+                    display="flex"
+                    alignItems="center"
+                    onClick={addToWishlist(
+                      item.configurable_sku,
+                      wishListData,
+                      toggleWishList,
+                      isLoggedIn,
+                      handleLoginModal,
+                      wishListWaitList,
+                      item.simple_sku,
+                      pincode,
+                      item.id_customer_cart,
+                      sessionId,
+                      pincode,
+                      item.qty,
+                      item.product_info.product_id,
+                      loadingList,
+                      item,
+                      selectForDemo
+                    )(removeFromCart)}
+                    // disabled="true"
+                    disabled={isInWishList(loadingList, item.configurable_sku)}
+                  >
                     <Image height={16} mr={10} src={saveForLaterIcon} />
-                    <Text fontSize={12}>Save for later</Text>
+                    <Text fontSize={12}>Add to wishlist</Text>
                   </Button>
                   <Text mx={8} fontSize={16}>
                     {' '}
                     |{' '}
-                  </Text> */}
+                  </Text>
                   <Button
                     variant="link"
                     fontSize={12}
@@ -478,6 +576,11 @@ const Cart = ({
           </Box>
         </Box>
       </Row>
+      <ResponsiveModal classNames={{ modal: 'loginModal' }} onCloseModal={handleLoginModal} open={openLogin}>
+        <Box py={32} px={32}>
+          <LoginModal />
+        </Box>
+      </ResponsiveModal>
     </Container>
   );
 };
@@ -498,7 +601,12 @@ Cart.propTypes = {
   handlePincodeModal: PropTypes.func.isRequired, // New
   demoLandingPageUrl: PropTypes.string,
   addToSelectForDemo: PropTypes.func.isRequired,
-  selectForDemo: PropTypes.object
+  selectForDemo: PropTypes.object,
+  toggleWishList: PropTypes.func.isRequired,
+  wishListData: PropTypes.array.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
+  wishListWaitList: PropTypes.any.isRequired,
+  loadingList: PropTypes.any.isRequired
   // store: PropTypes.object.isRequired
 };
 
@@ -521,5 +629,6 @@ Cart.defaultProps = {
 // export default connect(mapStateToProps, mapDispatchToProps)(Cart); //Old
 export default connect(mapStateToProps, {
   ...actionCreators,
-  ...actionCreatorsForDemo
+  ...actionCreatorsForDemo,
+  ...actionCreatorsForWishlist
 })(Cart); // New
