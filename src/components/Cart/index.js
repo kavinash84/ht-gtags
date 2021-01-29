@@ -576,11 +576,13 @@ const Cart = ({
           </Box>
         </Box>
       </Row>
-      <ResponsiveModal classNames={{ modal: 'loginModal' }} onCloseModal={handleLoginModal} open={openLogin}>
-        <Box py={32} px={32}>
-          <LoginModal />
-        </Box>
-      </ResponsiveModal>
+      {!isLoggedIn && (
+        <ResponsiveModal classNames={{ modal: 'loginModal' }} onCloseModal={handleLoginModal} open={openLogin}>
+          <Box py={32} px={32}>
+            <LoginModal />
+          </Box>
+        </ResponsiveModal>
+      )}
     </Container>
   );
 };
