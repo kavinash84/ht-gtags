@@ -400,7 +400,7 @@ const Cart = ({
                   >
                     <CloseIcon width={14} height={14} mr={10} /> Remove
                   </Button>
-                  {item.product_info.demo_product && (
+                  {/* {item.product_info.demo_product && (
                     <Box ml={15}>
                       <div className="checkbox">
                         <input
@@ -409,15 +409,32 @@ const Cart = ({
                           onClick={handleCheckboxClick(item.simple_sku, item, selectForDemo)(addToSelectForDemo)}
                           checked={isSelected(item.simple_sku, selectForDemo)}
                         />
-                        {/* eslint-disable-next-line jsx-a11y/label-has-for */}
+                        eslint-disable-next-line jsx-a11y/label-has-for
                         <label htmlFor={item.simple_sku} />
                       </div>
-                      <Label htmlFor="seeDemo" ml="10px">
+                      <Label htmlFor="seeDemo" ml="10px" fon>
                         Select for Demo
                       </Label>
                     </Box>
-                  )}
+                  )} */}
                 </Flex>
+                {item.product_info.demo_product && (
+                  <Box mt={15}>
+                    <div className="checkbox">
+                      <input
+                        type="checkbox"
+                        id={item.simple_sku}
+                        onClick={handleCheckboxClick(item.simple_sku, item, selectForDemo)(addToSelectForDemo)}
+                        checked={isSelected(item.simple_sku, selectForDemo)}
+                      />
+                      {/* eslint-disable-next-line jsx-a11y/label-has-for */}
+                      <label htmlFor={item.simple_sku} />
+                    </div>
+                    <Label htmlFor="seeDemo" ml="10px" fontSize="14px" fontWeight="bold">
+                      Select for Demo
+                    </Label>
+                  </Box>
+                )}
                 {/* {item.product_info.assembly_service && (
                     <Box color="uspTitle" fontSize="0.75rem">
                       <Image
