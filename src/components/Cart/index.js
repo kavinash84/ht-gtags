@@ -116,15 +116,28 @@ const addToWishlist = (
   sessionId,
   pincode,
   qty,
-  configId
-  // loadingList
+  configId,
+  loadingList
 ) => dispatcher2 => e => {
   e.preventDefault();
+
+  const isInWishList = (wList, id) => {
+    let disableButton = false;
+    wList.forEach(item => {
+      if (item.wishlist_info.configurable_sku === id) {
+        disableButton = true;
+      }
+    });
+    return disableButton;
+  };
+
   if (isUserLoggedIn) {
-    dispatcher(list, sku, simpleSku, selectedPincode);
+    if (!isInWishList(loadingList, sku)) {
+      dispatcher(list, sku, simpleSku, selectedPincode);
+    }
     dispatcher2(cartId, sessionId, pincode, qty, configId);
   } else {
-    wishListWaitList(sku, simpleSku, selectedPincode);
+    // wishListWaitList(sku, simpleSku, selectedPincode);
     onOpenLoginModal();
   }
 };
@@ -224,15 +237,15 @@ const Cart = ({
     setOpenLogin(!openLogin);
   };
 
-  const isInWishList = (list, id) => {
-    let disableButton = false;
-    list.forEach(item => {
-      if (item.wishlist_info.configurable_sku === id) {
-        disableButton = true;
-      }
-    });
-    return disableButton;
-  };
+  // const isInWishList = (list, id) => {
+  //   let disableButton = false;
+  //   list.forEach(item => {
+  //     if (item.wishlist_info.configurable_sku === id) {
+  //       disableButton = true;
+  //     }
+  //   });
+  //   return disableButton;
+  // };
 
   return (
     <Container my={[30, 30, 60]}>
@@ -372,7 +385,7 @@ const Cart = ({
                       selectForDemo
                     )(removeFromCart)}
                     // disabled="true"
-                    disabled={isInWishList(loadingList, item.configurable_sku)}
+                    // disabled={isInWishList(loadingList, item.configurable_sku)}
                   >
                     <Image height={16} mr={10} src={saveForLaterIcon} />
                     <Text fontSize={12}>Add to wishlist</Text>
