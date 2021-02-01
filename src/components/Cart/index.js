@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 // import { bindActionCreators } from 'redux';      //Old
 // import { bindActionCreators } from 'redux';      //New
@@ -132,6 +132,7 @@ const addToWishlist = (
   };
 
   if (isUserLoggedIn) {
+    // dispatcher3();
     if (!isInWishList(loadingList, sku)) {
       dispatcher(list, sku, simpleSku, selectedPincode);
     }
@@ -202,6 +203,7 @@ const Cart = ({
   summary,
   removeFromCart,
   toggleWishList,
+  loadWishlist,
   pincode,
   sessionId,
   currentId,
@@ -232,6 +234,12 @@ const Cart = ({
 
   const [openLogin, setOpenLogin] = useState(false);
   // const [disableBtn, setDisableBtn] = useState(false);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      loadWishlist();
+    }
+  }, [isLoggedIn]);
 
   const handleLoginModal = () => {
     setOpenLogin(!openLogin);
@@ -635,6 +643,7 @@ Cart.propTypes = {
   addToSelectForDemo: PropTypes.func.isRequired,
   selectForDemo: PropTypes.object,
   toggleWishList: PropTypes.func.isRequired,
+  loadWishlist: PropTypes.func.isRequired,
   wishListData: PropTypes.array.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
   wishListWaitList: PropTypes.any.isRequired,
