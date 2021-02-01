@@ -6,9 +6,7 @@ export default class UnbxdCompleteTheLook extends Component {
     this.setUnbxdPid();
   }
   componentDidUpdate(prevProps) {
-    console.log('inga daan pa prechane', this.props.configId, prevProps, prevProps.configId);
     if (prevProps.configId !== this.props.configId) {
-      console.log('CTL vela sseiyudhu');
       this.setUnbxdPid();
     }
   }
