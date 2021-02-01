@@ -253,74 +253,107 @@ class PaymentSuccess extends Component {
             {data ? (
               <Container pt={60}>
                 <Box variant="col-10" mx="auto">
-                  <Box sx={{ boxShadow: 'profile', border: 'light' }}>
+                  <Box
+                    sx={{
+                      boxShadow: '4px 4px 4px 1px rgba(0, 0, 0, 0.14)',
+                      borderRadius: 10,
+                      overflow: 'auto',
+                      border: 'light'
+                    }}
+                  >
                     <ThankYou orderNo={orderNo} />
-                  </Box>
-                  {showSetPassword && !isLoggedIn && (
-                    <Box>
-                      <form onSubmit={this.onSubmitSetPassword}>
-                        <FormInputHtV1
-                          // label="Type Password"
-                          type="password"
-                          placeholder="Type Password"
-                          onChange={this.onChangePassword}
-                          value={password}
-                          feedBackError={passwordFeedBackError}
-                          feedBackMessage={passwordFeedBackMessage}
-                        />
-                        <FormInputHtV1
-                          // label="Confirm Password"
-                          type="password"
-                          placeholder="Confirm Password"
-                          onChange={this.onChangeConfirmPassword}
-                          value={confirmPassword}
-                          feedBackError={confirmPasswordFeedBackError}
-                          feedBackMessage={confirmPasswordFeedBackMessage}
-                        />
-                        <ButtonHtV1
-                          width={200}
-                          mt={10}
-                          // disabled={loading || passwordFeedBackError || confirmPasswordFeedBackError}
-                        >
-                          {response && !loading ? 'UPDATE PASSWORD' : 'Please wait...'}
-                        </ButtonHtV1>
-                        {response && loaded && passwordUpdated && (
-                          <Label
-                            type="success"
-                            ta="center"
-                            fontSize="0.875rem"
-                            mt="1rem"
-                            display="block"
-                            color="#28a745"
-                            marginBottom="0"
-                            fontfamily="regular"
-                          >
-                            {' '}
-                            Password Updated !{' '}
-                          </Label>
-                        )}
-                        {error && !loaded && (
-                          <Box>
-                            <Label
-                              type="error"
-                              ta="center"
-                              fontSize="0.875rem"
-                              mt="1rem"
-                              display="block"
-                              color="#dc3545"
-                              marginBottom="0"
-                              fontfamily="regular"
+                    {showSetPassword && !isLoggedIn && (
+                      <Box sx={{ bg: 'rgb(159 155 146 / 0.25)' }} py={44}>
+                        <Box width={2 / 5} mx="auto" sx={{ position: 'relative' }}>
+                          <Box
+                            sx={{
+                              position: 'absolute',
+                              left: 'calc(50% - 20px)',
+                              top: -44,
+                              width: 0,
+                              height: 0,
+                              borderLeft: '20px solid transparent',
+                              borderRight: '20px solid transparent',
+                              borderTop: '20px solid #FFF'
+                            }}
+                          />
+                          <Text mb={16} color="label" width={1} fontSize={16} fontFamily="medium">
+                            Set password & save your details for future
+                          </Text>
+                          <form onSubmit={this.onSubmitSetPassword}>
+                            <FormInputHtV1
+                              // label="Type Password"
+                              type="password"
+                              placeholder="Type Password"
+                              onChange={this.onChangePassword}
+                              value={password}
+                              feedBackError={passwordFeedBackError}
+                              feedBackMessage={passwordFeedBackMessage}
+                              variant="inputTransparent"
+                              boxProps={{
+                                mb: 0
+                              }}
+                            />
+                            <FormInputHtV1
+                              // label="Confirm Password"
+                              type="password"
+                              placeholder="Confirm Password"
+                              onChange={this.onChangeConfirmPassword}
+                              value={confirmPassword}
+                              feedBackError={confirmPasswordFeedBackError}
+                              feedBackMessage={confirmPasswordFeedBackMessage}
+                              variant="inputTransparent"
+                              boxProps={{
+                                mb: 0
+                              }}
+                            />
+                            <ButtonHtV1
+                              width={1}
+                              mt={10}
+                              height={44}
+                              // disabled={loading || passwordFeedBackError || confirmPasswordFeedBackError}
                             >
-                              {errorMessage.new_password && 'Invalid new password !'}
-                              {errorMessage.current_password && 'Invalid Current Password !'}
-                              {errorMessage.repeat_password && 'Confirm password not match !'}
-                              {errorMessage.error_message && 'Something went wrong !'}
-                            </Label>
-                          </Box>
-                        )}
-                      </form>
-                    </Box>
-                  )}
+                              {response && !loading ? 'SET PASSWORD' : 'Please wait...'}
+                            </ButtonHtV1>
+                            {response && loaded && passwordUpdated && (
+                              <Label
+                                type="success"
+                                ta="center"
+                                fontSize="0.875rem"
+                                mt="1rem"
+                                display="block"
+                                color="#28a745"
+                                marginBottom="0"
+                                fontfamily="regular"
+                              >
+                                {' '}
+                                Password Updated !{' '}
+                              </Label>
+                            )}
+                            {error && !loaded && (
+                              <Box>
+                                <Label
+                                  type="error"
+                                  ta="center"
+                                  fontSize="0.875rem"
+                                  mt="1rem"
+                                  display="block"
+                                  color="#dc3545"
+                                  marginBottom="0"
+                                  fontfamily="regular"
+                                >
+                                  {errorMessage.new_password && 'Invalid new password !'}
+                                  {errorMessage.current_password && 'Invalid Current Password !'}
+                                  {errorMessage.repeat_password && 'Confirm password not match !'}
+                                  {errorMessage.error_message && 'Something went wrong !'}
+                                </Label>
+                              </Box>
+                            )}
+                          </form>
+                        </Box>
+                      </Box>
+                    )}
+                  </Box>
                   <Row mx={0} mb={40} mt={60} justifyContent="center">
                     <Text fontFamily="medium" fontSize={28}>
                       Here’s what you ordered
