@@ -57,15 +57,15 @@ export default class Html extends Component {
 
     if (process.env.SF_ENV && process.env.SF_ENV !== 'production') {
       SF_CHAT = {
-        url: 'https://praxisretail--devbox.my.salesforce.com',
-        liveAgentUrl: 'https://devbox-praxisretail.cs6.force.com/LiveAgent',
-        version: '00DN0000000Qxcj',
+        url: 'https://praxisretail--produat.my.salesforce.com',
+        liveAgentUrl: 'https://produat-praxisretail.cs6.force.com/LiveAgent',
+        version: '00DN0000000FXR7',
         baseLiveAgentContentURL: 'https://c.la1-c1cs-ukb.salesforceliveagent.com/content',
-        deploymentId: '572N000000000PH',
-        buttonId: '573N00000008PRm',
+        deploymentId: '5727F0000009ARB',
+        buttonId: '573N000000000sa',
         baseLiveAgentURL: 'https://d.la1-c1cs-ukb.salesforceliveagent.com/chat',
-        eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04IN0000000002MMAQ_168ff82d2a7',
-        jsUrl: 'https://praxisretail--devbox.my.salesforce.com/embeddedservice/5.0/esw.min.js'
+        eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I7F0000004DjiUAE_16c51bfeb82',
+        jsUrl: 'https://praxisretail--produat.my.salesforce.com/embeddedservice/5.0/esw.min.js'
       };
     }
     let unbxdScripts = {

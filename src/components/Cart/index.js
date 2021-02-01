@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 // import { bindActionCreators } from 'redux';      //Old
 // import { bindActionCreators } from 'redux';      //New
@@ -116,15 +116,29 @@ const addToWishlist = (
   sessionId,
   pincode,
   qty,
-  configId
-  // loadingList
+  configId,
+  loadingList
 ) => dispatcher2 => e => {
   e.preventDefault();
+
+  const isInWishList = (wList, id) => {
+    let disableButton = false;
+    wList.forEach(item => {
+      if (item.wishlist_info.configurable_sku === id) {
+        disableButton = true;
+      }
+    });
+    return disableButton;
+  };
+
   if (isUserLoggedIn) {
-    dispatcher(list, sku, simpleSku, selectedPincode);
+    // dispatcher3();
+    if (!isInWishList(loadingList, sku)) {
+      dispatcher(list, sku, simpleSku, selectedPincode);
+    }
     dispatcher2(cartId, sessionId, pincode, qty, configId);
   } else {
-    wishListWaitList(sku, simpleSku, selectedPincode);
+    // wishListWaitList(sku, simpleSku, selectedPincode);
     onOpenLoginModal();
   }
 };
@@ -189,6 +203,7 @@ const Cart = ({
   summary,
   removeFromCart,
   toggleWishList,
+  loadWishlist,
   pincode,
   sessionId,
   currentId,
@@ -220,19 +235,25 @@ const Cart = ({
   const [openLogin, setOpenLogin] = useState(false);
   // const [disableBtn, setDisableBtn] = useState(false);
 
+  useEffect(() => {
+    if (isLoggedIn) {
+      loadWishlist();
+    }
+  }, [isLoggedIn]);
+
   const handleLoginModal = () => {
     setOpenLogin(!openLogin);
   };
 
-  const isInWishList = (list, id) => {
-    let disableButton = false;
-    list.forEach(item => {
-      if (item.wishlist_info.configurable_sku === id) {
-        disableButton = true;
-      }
-    });
-    return disableButton;
-  };
+  // const isInWishList = (list, id) => {
+  //   let disableButton = false;
+  //   list.forEach(item => {
+  //     if (item.wishlist_info.configurable_sku === id) {
+  //       disableButton = true;
+  //     }
+  //   });
+  //   return disableButton;
+  // };
 
   return (
     <Container my={[30, 30, 60]}>
@@ -372,7 +393,7 @@ const Cart = ({
                       selectForDemo
                     )(removeFromCart)}
                     // disabled="true"
-                    disabled={isInWishList(loadingList, item.configurable_sku)}
+                    // disabled={isInWishList(loadingList, item.configurable_sku)}
                   >
                     <Image height={16} mr={10} src={saveForLaterIcon} />
                     <Text fontSize={12}>Add to wishlist</Text>
@@ -622,6 +643,7 @@ Cart.propTypes = {
   addToSelectForDemo: PropTypes.func.isRequired,
   selectForDemo: PropTypes.object,
   toggleWishList: PropTypes.func.isRequired,
+  loadWishlist: PropTypes.func.isRequired,
   wishListData: PropTypes.array.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
   wishListWaitList: PropTypes.any.isRequired,
