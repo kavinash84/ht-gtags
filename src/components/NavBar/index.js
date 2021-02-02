@@ -73,11 +73,17 @@ class NavBar extends Component {
               </Fragment>
             ))}
             <Link
+              href="https://beta.hometown.in/modular-kitchens/"
               to="/modular-kitchens"
               title="Modular Kitchens"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ textDecoration: 'none', color: 'black', fontWeight: 'bold' }}
+              style={{
+                textDecoration: 'none',
+                fontFamily: 'medium',
+                color: 'black',
+                fontWeight: 'bold'
+              }}
             >
               Modular Kitchens
             </Link>
@@ -164,13 +170,14 @@ class NavBar extends Component {
                 </Box>
                 <Box>
                   <Text
-                    as={LinkRedirect}
+                    as={Link}
                     variant="menuLight"
-                    href="https://beta.hometown.in/design-build/"
+                    to="/design-build/"
+                    // href="https://stage.hometown.in/design-build/"
                     title="Design & Build"
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={exitOnClick}
+                    // onClick={exitOnClick}
                   >
                     Design & Build
                   </Text>

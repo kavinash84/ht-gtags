@@ -503,7 +503,7 @@ export default class HeaderTop extends Component {
 
         {/* Login Modal */}
         <ResponsiveModal
-          classNames={{ modal: 'loginModal' }}
+          // classNames={{ modal: 'loginModal' }}
           onCloseModal={this.onCloseLoginModal}
           open={this.state.openLogin}
         >

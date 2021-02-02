@@ -30,7 +30,7 @@ const mapStateToProps = ({ pincode, app }) => ({
 
 const onClick = (cartId, skuId, simpleSku, session, pincode, qty, configId) => dispatcher => e => {
   e.preventDefault();
-  dispatcher(cartId, skuId, simpleSku, session, pincode, qty, configId);
+  dispatcher(cartId, skuId, simpleSku, session, pincode, configId, qty);
 };
 
 const ProductQuantity = ({
