@@ -1227,7 +1227,7 @@ class ProductDetails extends React.Component {
             <Row py={36}>
               <ProductCarousel
                 paddingTop="2.5rem"
-                title="Recommended for you"
+                title="RECOMMENDED FOR YOU"
                 data={relatedproductsList}
                 length={relatedproductsList.length}
               />
