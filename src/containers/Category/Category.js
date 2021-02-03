@@ -85,6 +85,7 @@ export default class Category extends Component {
     } = this.props;
     const { faq = [] } = category;
 
+    console.log(category.sections);
     /* eslint-disable react/no-danger */
     return (
       <Wrapper>
@@ -126,7 +127,9 @@ export default class Category extends Component {
             category.sections &&
             category.sections.map((cat, index) => (
               <Section key={String(index)}>
-                <Container>{CommonLayout(cat.component, cat.title, cat.data, cat.is_product)}</Container>
+                {cat.title !== '' && (
+                  <Container>{CommonLayout(cat.component, cat.title, cat.data, cat.is_product)}</Container>
+                )}
               </Section>
             ))}
           {category && (
