@@ -150,7 +150,7 @@ export default class Home extends Component {
           />
           <meta name="keywords" content="furniture, home-decor" />
           <meta name="robots" content="index, follow" />
-          <script type="application/ld+json">
+          {/* <script type="application/ld+json">
             {`
               {
                 "@context": "http://schema.org",
@@ -163,6 +163,32 @@ export default class Home extends Component {
                 }
               }
             `}
+          </script> */}
+          <script type="application/ld+json">
+            {`
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "HomeTown",
+              "url": "https://stage.hometown.in/",
+              "logo": "https://stage.hometown.in/dist/2.0.1/bab5098b6c1ea32db0ed253a12fe29e3.png",
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "1800-210-0004",
+                "contactType": "customer service",
+                "contactOption": "TollFree",
+                "areaServed": "IN",
+                "availableLanguage": "Hindi"
+              },
+              "sameAs": [
+                "https://www.facebook.com/hometown.in/",
+                "https://twitter.com/HomeTown_In/",
+                "https://www.instagram.com/hometownindia/",
+                "https://www.youtube.com/channel/UCBZGArWnKT6MYYwOsPCNjiw",
+                "https://in.pinterest.com/hometownstore/"
+              ]
+            }  
+          `}
           </script>
         </Helmet>
         <Body>
