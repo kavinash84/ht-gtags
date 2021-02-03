@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Helmet from 'react-helmet';
 
 /**
  * Modules / Selectors
@@ -145,6 +146,7 @@ export default class CartContainer extends Component {
 
     return (
       <Wrapper>
+        <Helmet title="Cart - HomeTown.in" />
         <Body>
           {/* Header */}
           <Header />
