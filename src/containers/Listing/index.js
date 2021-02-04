@@ -13,6 +13,7 @@ import {
   gaTrack as listingLoadTrack,
   setReloadListing
 } from 'redux/modules/products';
+import { getOfferStrip } from 'redux/modules/offer';
 import { PINCODE } from 'helpers/Constants';
 
 const hooks = {
@@ -65,6 +66,7 @@ const hooks = {
     //   prevFilter === 'clearAll' ||
     //   reloadListing
     // ) {
+    await dispatch(getOfferStrip());
     await dispatch(clearPreviousList());
     await dispatch(setCurrentPage(currentPage));
     await dispatch(clearPreviousSort());
