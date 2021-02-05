@@ -21,11 +21,7 @@ const CommonLayout = (component, categoryName, data, isProduct = false) => {
     case 4:
       return <ProductCarousel height="220px" title={categoryName} data={data} length={(data && data.length) || 0} />;
     default:
-      return (
-        <div style={{ display: 'none' }}>
-          <Carousel categoryName={categoryName} data={data} />
-        </div>
-      );
+      return <Carousel categoryName={categoryName} data={data} />;
   }
 };
 

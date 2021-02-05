@@ -40,6 +40,9 @@ export const CATEGORY_PAGE = 'tesla/categories';
 /* Wishlist */
 export const WISHLIST = 'tesla/wishlist';
 
+/* Listing */
+export const OFFER = 'tesla/categories/coupon';
+
 /* Cart */
 export const ADDTOCART = 'tesla/cart';
 export const ADDTOCARTCOMBINED = 'tesla/cart/combined-set-products';
