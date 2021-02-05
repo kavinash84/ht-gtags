@@ -29,6 +29,8 @@ const hooks = {
     let loadResults;
     const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
     const { search } = location;
+    const urlCategoryArr = location.pathname.split('/');
+    const urlCategory = urlCategoryArr[`${urlCategoryArr.length - 1}`];
     const getPage = search.split('page=')[1];
     const currentPage = getPage || 1;
     if (location.pathname === '/search') {
@@ -66,7 +68,7 @@ const hooks = {
     //   prevFilter === 'clearAll' ||
     //   reloadListing
     // ) {
-    await dispatch(getOfferStrip());
+    await dispatch(getOfferStrip(urlCategory));
     await dispatch(clearPreviousList());
     await dispatch(setCurrentPage(currentPage));
     await dispatch(clearPreviousSort());

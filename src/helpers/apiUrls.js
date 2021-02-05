@@ -41,7 +41,7 @@ export const CATEGORY_PAGE = 'tesla/categories';
 export const WISHLIST = 'tesla/wishlist';
 
 /* Listing */
-export const OFFER = 'tesla/categories/coupon/bath';
+export const OFFER = 'tesla/categories/coupon';
 
 /* Cart */
 export const ADDTOCART = 'tesla/cart';

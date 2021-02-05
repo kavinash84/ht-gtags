@@ -32,11 +32,11 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-export const getOfferStrip = () => ({
+export const getOfferStrip = urlCat => ({
   types: [SET_OFFER_STRIP, SET_OFFER_STRIP_SUCCESS, SET_OFFER_STRIP_FAILURE],
   promise: async ({ client }) => {
     try {
-      const response = await client.get(`${OFFER_API}`);
+      const response = await client.get(`${OFFER_API}/${urlCat}`);
       return response;
     } catch (error) {
       throw error;
