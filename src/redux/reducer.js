@@ -42,6 +42,7 @@ import combinedbuy from './modules/combinedbuy';
 import landing from './modules/landing';
 import selectForDemo from './modules/selectForDemo';
 import webtochat from './modules/webtochat';
+import offer from './modules/offer';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -98,6 +99,7 @@ export default function createReducers(asyncReducers) {
     landing,
     selectForDemo,
     webtochat,
+    offer,
     ...asyncReducers
   };
 }

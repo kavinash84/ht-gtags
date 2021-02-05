@@ -7,10 +7,6 @@ import { connect } from 'react-redux';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Body from 'hometown-components-dev/lib/BodyHtV1';
 import Container from 'hometown-components-dev/lib/ContainerHtV1';
-import Col from 'hometown-components-dev/lib/ColHtV1';
-import Heading from 'hometown-components-dev/lib/HeadingHtV1';
-import Row from 'hometown-components-dev/lib/RowHtV1';
-import Text from 'hometown-components-dev/lib/TextHtV1';
 import Section from 'hometown-components-dev/lib/SectionHtV1';
 import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 import SeoContent from 'hometown-components-dev/lib/SeoContent';
@@ -51,29 +47,29 @@ export default class Category extends Component {
     super(props);
     this.state = {};
   }
-  renderOffers = offers =>
-    offers.map(item => (
-      <Col
-        width={[1 / 2, 1 / 2, 1 / 4]}
-        textAlign="center"
-        sx={{
-          borderRight: 'whiteMedium',
-          '&:last-child': {
-            borderRight: 'none'
-          }
-        }}
-      >
-        <Text variant="textLight" color="white">
-          {item.offer || ''}
-        </Text>
-        <Heading variant="heading.medium" color="white" py={6}>
-          {item.title || ''}
-        </Heading>
-        <Heading fontSize={16} color="white">
-          {item.description || ''}
-        </Heading>
-      </Col>
-    ));
+  // renderOffers = offers =>
+  //   offers.map(item => (
+  //     <Col
+  //       width={[1 / 2, 1 / 2, 1 / 4]}
+  //       textAlign="center"
+  //       sx={{
+  //         borderRight: 'whiteMedium',
+  //         '&:last-child': {
+  //           borderRight: 'none'
+  //         }
+  //       }}
+  //     >
+  //       <Text variant="textLight" color="white">
+  //         {item.offer || ''}
+  //       </Text>
+  //       <Heading variant="heading.medium" color="white" py={6}>
+  //         {item.title || ''}
+  //       </Heading>
+  //       <Heading fontSize={16} color="white">
+  //         {item.description || ''}
+  //       </Heading>
+  //     </Col>
+  //   ));
   render() {
     const {
       category,
@@ -85,6 +81,7 @@ export default class Category extends Component {
     } = this.props;
     const { faq = [] } = category;
 
+    console.log(category.sections);
     /* eslint-disable react/no-danger */
     return (
       <Wrapper>
@@ -110,13 +107,13 @@ export default class Category extends Component {
           <Header />
 
           {/* Offer Bar */}
-          {category.offers && (
+          {/* {category.offers && (
             <Box bg="heading" pt={30} pb={20}>
               <Container>
                 <Row justifyContent="center">{this.renderOffers(category.offers || [])}</Row>
               </Container>
             </Box>
-          )}
+          )} */}
 
           {/* Main Slider */}
           {category && <MainSlider data={category.main} />}
@@ -126,7 +123,9 @@ export default class Category extends Component {
             category.sections &&
             category.sections.map((cat, index) => (
               <Section key={String(index)}>
-                <Container>{CommonLayout(cat.component, cat.title, cat.data, cat.is_product)}</Container>
+                {cat.title !== '' && (
+                  <Container>{CommonLayout(cat.component, cat.title, cat.data, cat.is_product)}</Container>
+                )}
               </Section>
             ))}
           {category && (
