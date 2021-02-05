@@ -190,7 +190,13 @@ class BulkOrder extends React.Component {
         <Box mt="-150px" sx={{ position: 'relative', zIndex: 1 }}>
           <Box>
             <Container pr={0} pl={0}>
-              <Box>
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}
+              >
                 <form
                   onSubmit={this.onSubmitForm}
                   id="custom_form"
@@ -299,7 +305,7 @@ class BulkOrder extends React.Component {
             </Container>
           </Box>
           <Row textAlign="center" my={30}>
-            <Box className={styles.divider} />
+            <Box className={styles.divider} mx="auto" />
           </Row>
           <Box textAlign="center">
             <Heading fontSize={24} color="black">
