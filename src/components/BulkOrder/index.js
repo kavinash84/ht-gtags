@@ -305,7 +305,7 @@ class BulkOrder extends React.Component {
             </Container>
           </Box>
           <Row textAlign="center" my={30}>
-            <Box className={styles.divider} />
+            <Box className={styles.divider} mx="auto" />
           </Row>
           <Box textAlign="center">
             <Heading fontSize={24} color="black">
