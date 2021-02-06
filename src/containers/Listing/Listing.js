@@ -163,10 +163,10 @@ export default class Listing extends Component {
           </Text> */}
         <a href={offer.offer.link}>
           <Box variant="textLight" color="white" py={2}>
-            {offer.offer.name.split('|')[0] || ''}
+            {(offer.offer.name && offer.offer.name.split('|')[0]) || ''}
           </Box>
           <Heading variant="heading.medium" color="white" py={2}>
-            {offer.offer.name.split('|')[1] || ''}
+            {(offer.offer.name && offer.offer.name.split('|')[1]) || ''}
           </Heading>
         </a>
         {/* <Heading fontSize={16} color="white">
@@ -190,13 +190,13 @@ export default class Listing extends Component {
             {item.offer.name || ''}
           </Text> */}
         <Box variant="textLight" color="white" py={2}>
-          {offer.coupon.name.split('|')[0] || ''}
+          {(offer.coupon.name && offer.coupon.name.split('|')[0]) || ''}
         </Box>
         <Heading variant="heading.medium" color="white" py={2}>
-          Upto {offer.coupon.name.split('|')[1] || ''}
+          Upto {(offer.coupon.name && offer.coupon.name.split('|')[1]) || ''}
         </Heading>
         <Heading variant="heading.medium" color="white" py={2}>
-          Coupon Code: {offer.coupon.code || ''}
+          Coupon Code: {(offer.coupon.code && offer.coupon.code) || ''}
         </Heading>
         {/* <Heading fontSize={16} color="white">
             {item.extra_offer.name || ''}
