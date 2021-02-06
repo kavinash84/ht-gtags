@@ -998,15 +998,29 @@ class ProductDetails extends React.Component {
             {activeSpec === 'details' ? (
               <Box px="5%" py="2%" sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
                 {groupedAttributes[0].Details.map(detail => {
-                  if (detail.label !== 'Note' && detail.label !== "What's in the box?") {
+                  // if (detail.label !== 'Note' && detail.label !== "What's in the box?") {
+                  if (detail.label !== 'Note') {
                     return (
                       <Row width="33%" pb={10}>
                         <Col width={150} fontWeight="bold" fontSize={14} lineHeight={1.4}>
                           {detail.label}
                         </Col>
-                        <Col width="calc(100% - 150px)" fontSize={14} lineHeight={1.25}>
-                          {detail.value}
-                        </Col>
+                        {detail.label !== "What's in the box?" ? (
+                          <Col width="calc(100% - 150px)" fontSize={14} lineHeight={1.25}>
+                            {detail.value}
+                          </Col>
+                        ) : (
+                          <Col
+                            mt="5px"
+                            mb="5px"
+                            itemProp="description"
+                            fontSize="0.875rem"
+                            dangerouslySetInnerHTML={{ __html: detail.value }}
+                            lh="1.6"
+                            color="rgba(0, 0, 0, 0.65)"
+                            fontFamily="light"
+                          />
+                        )}
                       </Row>
                     );
                   }
