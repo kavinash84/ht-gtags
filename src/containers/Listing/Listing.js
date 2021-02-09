@@ -198,9 +198,6 @@ export default class Listing extends Component {
           </Heading>
         )}
         <Heading variant="heading.medium" color="white" py={2}>
-          Upto {(offer.coupon.name && offer.coupon.name.split('|')[1]) || ''}
-        </Heading>
-        <Heading variant="heading.medium" color="white" py={2}>
           Coupon Code: {(offer.coupon.code && offer.coupon.code) || ''}
         </Heading>
         {/* <Heading fontSize={16} color="white">
