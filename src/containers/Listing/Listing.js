@@ -192,6 +192,11 @@ export default class Listing extends Component {
         <Box variant="textLight" color="white" py={2}>
           {(offer.coupon.name && offer.coupon.name.split('|')[0]) || ''}
         </Box>
+        {offer.coupon.name.split('|')[1] && (
+          <Heading variant="heading.medium" color="white" py={2}>
+            Upto {offer.coupon.name.split('|')[1] || ''}
+          </Heading>
+        )}
         <Heading variant="heading.medium" color="white" py={2}>
           Upto {(offer.coupon.name && offer.coupon.name.split('|')[1]) || ''}
         </Heading>
@@ -286,7 +291,7 @@ export default class Listing extends Component {
         <Body>
           <Header />
           {/* Offer banner */}
-          {offer && (
+          {offer && offer.data && offer.data.coupon && !offer.data.error && (
             <Box bg="heading" pt={30} pb={20}>
               <Container>
                 <Row justifyContent="center">{this.renderOffers(offer.data || [])}</Row>
