@@ -19,14 +19,18 @@ import Footer from 'components/Footer';
 import MainSlider from 'components/MainSlider';
 
 const getFaqs = faqs => {
-  const seoFaq = faqs.map(({ qus, ans }) => {
-    if (qus && ans) {
+  const seoFaq = JSON.parse(faqs).map(faq => {
+    // console.log(faq, 'QA check');
+    // console.log(Object.values(faq)[0]);
+    const ques = Object.values(faq)[0];
+    // console.log(faq.ans);
+    if (faq) {
       return {
         '@type': 'Question',
-        name: qus,
+        name: ques,
         acceptedAnswer: {
           '@type': 'Answer',
-          text: `<p>${ans}</p>`
+          text: faq.ans
         }
       };
     }
@@ -79,22 +83,22 @@ export default class Category extends Component {
         params: { category: currentCategory }
       }
     } = this.props;
-    const { faq = [] } = category;
+    const { cms_json: cmsJson } = seoInfo;
 
-    console.log(category.sections);
+    // console.log(JSON.parse(cms_json), 'cat check');
     /* eslint-disable react/no-danger */
     return (
       <Wrapper>
         <Helmet title={`${(seoInfo && seoInfo.page_title) || (currentCategory && currentCategory.toUpperCase())}`}>
           <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
           <meta name="description" content={seoInfo && seoInfo.meta_description} />
-          {faq.length ? (
+          {cmsJson.length ? (
             <script type="application/ld+json">
               {`
               {
                 "@context" : "http://schema.org",
                 "@type" : "FAQPage",
-                "mainEntity": ${getFaqs(faq)}
+                "mainEntity": ${getFaqs(cmsJson)}
               }
             `}
             </script>
