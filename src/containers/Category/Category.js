@@ -10,6 +10,10 @@ import Container from 'hometown-components-dev/lib/ContainerHtV1';
 import Section from 'hometown-components-dev/lib/SectionHtV1';
 import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 import SeoContent from 'hometown-components-dev/lib/SeoContent';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
 
 /* ====== Page Components ====== */
 import CommonLayout from 'components/Category/CommonLayout';
@@ -19,14 +23,18 @@ import Footer from 'components/Footer';
 import MainSlider from 'components/MainSlider';
 
 const getFaqs = faqs => {
-  const seoFaq = faqs.map(({ qus, ans }) => {
-    if (qus && ans) {
+  const seoFaq = JSON.parse(faqs).map(faq => {
+    // console.log(faq, 'QA check');
+    // console.log(Object.values(faq)[0]);
+    const ques = Object.values(faq)[0];
+    // console.log(faq.ans);
+    if (faq) {
       return {
         '@type': 'Question',
-        name: qus,
+        name: ques,
         acceptedAnswer: {
           '@type': 'Answer',
-          text: `<p>${ans}</p>`
+          text: faq.ans
         }
       };
     }
@@ -47,29 +55,29 @@ export default class Category extends Component {
     super(props);
     this.state = {};
   }
-  // renderOffers = offers =>
-  //   offers.map(item => (
-  //     <Col
-  //       width={[1 / 2, 1 / 2, 1 / 4]}
-  //       textAlign="center"
-  //       sx={{
-  //         borderRight: 'whiteMedium',
-  //         '&:last-child': {
-  //           borderRight: 'none'
-  //         }
-  //       }}
-  //     >
-  //       <Text variant="textLight" color="white">
-  //         {item.offer || ''}
-  //       </Text>
-  //       <Heading variant="heading.medium" color="white" py={6}>
-  //         {item.title || ''}
-  //       </Heading>
-  //       <Heading fontSize={16} color="white">
-  //         {item.description || ''}
-  //       </Heading>
-  //     </Col>
-  //   ));
+  renderOffers = offers =>
+    offers.map(item => (
+      <Col
+        width={[1 / 2, 1 / 2, 1 / 4]}
+        textAlign="center"
+        sx={{
+          borderRight: 'whiteMedium',
+          '&:last-child': {
+            borderRight: 'none'
+          }
+        }}
+      >
+        <Text variant="textLight" color="white">
+          {item.offer || ''}
+        </Text>
+        <Heading variant="heading.medium" color="white" py={6}>
+          {item.title || ''}
+        </Heading>
+        <Heading fontSize={16} color="white">
+          {item.description || ''}
+        </Heading>
+      </Col>
+    ));
   render() {
     const {
       category,
@@ -79,22 +87,22 @@ export default class Category extends Component {
         params: { category: currentCategory }
       }
     } = this.props;
-    const { faq = [] } = category;
+    const { cms_json: cmsJson } = seoInfo;
 
-    console.log(category.sections);
+    // console.log(JSON.parse(cms_json), 'cat check');
     /* eslint-disable react/no-danger */
     return (
       <Wrapper>
         <Helmet title={`${(seoInfo && seoInfo.page_title) || (currentCategory && currentCategory.toUpperCase())}`}>
           <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
           <meta name="description" content={seoInfo && seoInfo.meta_description} />
-          {faq.length ? (
+          {cmsJson.length ? (
             <script type="application/ld+json">
               {`
               {
                 "@context" : "http://schema.org",
                 "@type" : "FAQPage",
-                "mainEntity": ${getFaqs(faq)}
+                "mainEntity": ${getFaqs(cmsJson)}
               }
             `}
             </script>
@@ -107,13 +115,13 @@ export default class Category extends Component {
           <Header />
 
           {/* Offer Bar */}
-          {/* {category.offers && (
+          {category.offers && (
             <Box bg="heading" pt={30} pb={20}>
               <Container>
                 <Row justifyContent="center">{this.renderOffers(category.offers || [])}</Row>
               </Container>
             </Box>
-          )} */}
+          )}
 
           {/* Main Slider */}
           {category && <MainSlider data={category.main} />}
