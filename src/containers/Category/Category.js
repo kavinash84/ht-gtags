@@ -96,7 +96,7 @@ export default class Category extends Component {
         <Helmet title={`${(seoInfo && seoInfo.page_title) || (currentCategory && currentCategory.toUpperCase())}`}>
           <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
           <meta name="description" content={seoInfo && seoInfo.meta_description} />
-          {cmsJson.length ? (
+          {cmsJson && cmsJson.length ? (
             <script type="application/ld+json">
               {`
               {
