@@ -67,15 +67,31 @@ export default class Category extends Component {
           }
         }}
       >
-        <Text variant="textLight" color="white">
-          {item.offer || ''}
-        </Text>
-        <Heading variant="heading.medium" color="white" py={6}>
-          {item.title || ''}
-        </Heading>
-        <Heading fontSize={16} color="white">
-          {item.description || ''}
-        </Heading>
+        {item.link ? (
+          <a href={item.link}>
+            <Text variant="textLight" color="white">
+              {item.offer || ''}
+            </Text>
+            <Heading variant="heading.medium" color="white" py={6}>
+              {item.title || ''}
+            </Heading>
+            <Heading fontSize={16} color="white">
+              {item.description || ''}
+            </Heading>
+          </a>
+        ) : (
+          <div>
+            <Text variant="textLight" color="white">
+              {item.offer || ''}
+            </Text>
+            <Heading variant="heading.medium" color="white" py={6}>
+              {item.title || ''}
+            </Heading>
+            <Heading fontSize={16} color="white">
+              {item.description || ''}
+            </Heading>
+          </div>
+        )}
       </Col>
     ));
   render() {
