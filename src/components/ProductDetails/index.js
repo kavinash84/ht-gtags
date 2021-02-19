@@ -292,8 +292,8 @@ class ProductDetails extends React.Component {
     this.setState({ popUpTimeoutId });
   }
   componentWillReceiveProps(nextProps) {
-    const { colorproducts, product } = this.props;
-    console.log('product', product);
+    const { colorproducts } = this.props;
+    // console.log('product', product);
     if (nextProps.isLoggedIn) {
       this.setState({
         openLogin: false
@@ -827,7 +827,7 @@ class ProductDetails extends React.Component {
               {
                 <Box mb={20} mt={10}>
                   {combinedbuy.length ? (
-                    <Button variant="link" fontFamily="medium" fontSize={18}>
+                    <Button variant="link" fontFamily="medium" fontSize={18} mb={15}>
                       <a href="#combined_buy_offers" style={{ color: '#F15A22' }}>
                         {`See ${combinedbuy.length} Combined ${combinedbuy.length > 1 ? 'Offers' : 'Offer'}`}
                       </a>

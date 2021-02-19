@@ -22,6 +22,7 @@ import ProductNotFound from './ProductNotFound';
 }))
 export default class ProductDetails extends Component {
   render() {
+    console.log(this.props);
     const {
  loading, loaded, history, productDescription
 } = this.props;
@@ -33,11 +34,10 @@ export default class ProductDetails extends Component {
 
           {/* PDP Content */}
           {loading && !loaded && <ProductDetailsShimmer />}
-          {!loading && loaded && productDescription && !productDescription.error_message ? (
+          {!loading && loaded && productDescription && !productDescription.error_message && (
             <ProductDetailsContainer history={history} />
-          ) : (
-            <ProductNotFound />
           )}
+          {!loading && loaded && productDescription && productDescription.error_message && <ProductNotFound />}
 
           {/* Footer */}
           <Footer />
