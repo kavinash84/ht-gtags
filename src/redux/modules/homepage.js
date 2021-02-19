@@ -53,7 +53,7 @@ export const loadMainMenu = () => ({
 
 export const loadCategories = () => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-  promise: ({ client }) => client.get(HOMEPAGE_CATEGORIES)
+  promise: ({ client }) => client.get(`${HOMEPAGE_CATEGORIES}?newui=true`)
 });
 
 export const loadBanners = () => ({
