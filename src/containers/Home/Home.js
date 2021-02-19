@@ -212,19 +212,22 @@ export default class Home extends Component {
                 </Section>
               );
             }
-            return (
-              <Section variant="section.primary" key={String(index)}>
-                <Container>
-                  <LazyLoad height={200} offset={100}>
-                    <CategoryCarousel
-                      categoryName={category.title}
-                      subTitle={category.sub_title}
-                      data={category.values}
-                    />
-                  </LazyLoad>
-                </Container>
-              </Section>
-            );
+            if (category.id !== '5') {
+              return (
+                <Section variant="section.primary" key={String(index)}>
+                  <Container>
+                    <LazyLoad height={200} offset={100}>
+                      <CategoryCarousel
+                        categoryName={category.title}
+                        subTitle={category.sub_title}
+                        data={category.values}
+                      />
+                    </LazyLoad>
+                  </Container>
+                </Section>
+              );
+            }
+            return null;
           })}
 
           {/* Offer Banner */}
