@@ -272,7 +272,8 @@ class ProductDetails extends React.Component {
       nameErrorMessage: 'Name cannot be left Blank',
       reviewError: false,
       reviewErrorMessage: 'Review cannot be left Blank',
-      addreview: false
+      addreview: false,
+      openVideo: false
     };
     this.reviewRef = React.createRef();
   }
@@ -1043,11 +1044,23 @@ class ProductDetails extends React.Component {
             <Specs activeSpec={activeSpec} specs={groupedAttributes} pincode={pincode.selectedPincode} />
             {/* Video */}
             {groupedattributes && groupedattributes.youtubeid && (
-              <Row my={30}>
-                <Col variant="col-12">
-                  <Video id={getVideoID(groupedattributes.youtubeid)} />
-                </Col>
-              </Row>
+              // <Row my={30}>
+              //   <Col variant="col-12">
+              //     <Video id={getVideoID(groupedattributes.youtubeid)} />
+              //   </Col>
+              // </Row>
+              <div style={{ display: 'flex' }}>
+                <Button
+                  onClick={() => this.setState({ openVideo: true })}
+                  my={8}
+                  sx={{
+                    width: '60%',
+                    margin: 'auto'
+                  }}
+                >
+                  Watch video
+                </Button>
+              </div>
             )}
             {/* Usps */}
             <Row my={40} width={['80%', '80%', '60%']} justifyContent="space-between" mx="auto" flexWrap="nowrap">
@@ -1262,6 +1275,17 @@ class ProductDetails extends React.Component {
             <Box py={32} px={32}>
               <LoginModal />
             </Box>
+          </ResponsiveModal>
+          <ResponsiveModal
+            classNames={{ modal: 'videoModal' }}
+            open={this.state.openVideo}
+            onCloseModal={() => this.setState({ openVideo: false })}
+          >
+            <Row my={30}>
+              <Col variant="col-12">
+                <Video id={getVideoID(groupedattributes.youtubeid)} />
+              </Col>
+            </Row>
           </ResponsiveModal>
         </Container>
       </Box>
