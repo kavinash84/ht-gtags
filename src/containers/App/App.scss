@@ -857,6 +857,11 @@
 	  }
 	}
 
+	.videoModal {
+		height: 400px;
+		min-width: 70%;
+	}
+
 	/* Signup and Login Modal */
 	.signupModal,.loginModal {
 		max-width: inherit !important;
