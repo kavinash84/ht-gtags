@@ -858,8 +858,12 @@
 	}
 
 	.videoModal {
-		height: 400px;
+		height: 100%;
 		min-width: 70%;
+		padding: 0px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
 	/* Signup and Login Modal */

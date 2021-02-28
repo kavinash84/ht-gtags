@@ -47,6 +47,7 @@ import CombinedBuy from 'components/CombinedBuy';
 import ProductDesc from 'hometown-components-dev/lib/ProductDetailsHtV1/ProductDesc';
 import ProductCarousel from 'components/ProductCarousel';
 import ResponsiveModal from 'components/Modal';
+import ResponsiveVideoModal from 'components/Modal/ResponsiveVideoModal';
 import Reviews from 'hometown-components-dev/lib/ReviewsHtV1';
 import ReviewDisplay from 'hometown-components-dev/lib/ReviewsHtV1/ReviewDisplay';
 import ServiceDetails from 'hometown-components-dev/lib/ProductDetailsHtV1/ServiceDetails';
@@ -617,18 +618,19 @@ class ProductDetails extends React.Component {
     const productDescription = productMetaDescription(name, productType, material, color);
     const weightedRating = this.getWeightedAverageRatings();
     return (
-      <Box pt={30}>
-        <Helmet>
-          <title>{productPageTitle(name)}</title>
-          <meta name="keywords" content={productMetaKeywords(productType, material)} />
-          <meta name="description" content={productDescription} />
-          <meta property="og:url" content={productURL} />
-          <meta property="og:type" content="website" />
-          <meta property="og:title" content={name} />
-          <meta property="og:description" content={productDescription} />
-          <meta property="og:image" content={images && images.length > 0 && `${images[0].url}.jpg`} />
-          <script type="application/ld+json">
-            {`
+      <div>
+        <Box pt={30}>
+          <Helmet>
+            <title>{productPageTitle(name)}</title>
+            <meta name="keywords" content={productMetaKeywords(productType, material)} />
+            <meta name="description" content={productDescription} />
+            <meta property="og:url" content={productURL} />
+            <meta property="og:type" content="website" />
+            <meta property="og:title" content={name} />
+            <meta property="og:description" content={productDescription} />
+            <meta property="og:image" content={images && images.length > 0 && `${images[0].url}.jpg`} />
+            <script type="application/ld+json">
+              {`
                 {
                   "@context" : "http://schema.org",
                   "@type" : "Product",
@@ -651,485 +653,491 @@ class ProductDetails extends React.Component {
                   }
                 }
               `}
-          </script>
-        </Helmet>
-        <Container>
-          <Row mb={15}>
-            <Col>
-              <BreadCrumb breadcrumbs={breadcrumbs} />
-            </Col>
-          </Row>
-          <Row mb={40}>
-            {/* Left Column */}
-            <Col width={[1, 6 / 12, 6 / 12, 7 / 12]} pr={40}>
-              <Box sx={{ position: 'relative' }}>
-                {/* Product Slider */}
-                {images && <ProductDetailsCarousel data={images} title={meta.name} />}
+            </script>
+          </Helmet>
+          <Container>
+            <Row mb={15}>
+              <Col>
+                <BreadCrumb breadcrumbs={breadcrumbs} />
+              </Col>
+            </Row>
+            <Row mb={40}>
+              {/* Left Column */}
+              <Col width={[1, 6 / 12, 6 / 12, 7 / 12]} pr={40}>
+                <Box sx={{ position: 'relative' }}>
+                  {/* Product Slider */}
+                  {images && <ProductDetailsCarousel data={images} title={meta.name} />}
 
-                {/* Wishlist Button */}
-                <WishListButton
-                  onClick={onClickWishList(
-                    sku,
-                    wishListData,
-                    wishlistToggle,
-                    isLoggedIn,
-                    this.handleLoginModal,
-                    addToWaitList,
-                    simpleSku,
-                    pincode.selectedPincode
-                  )}
-                  isWishList={isInWishList(wishList, sku)}
-                  wishlistLoading={isInWishList(loadingList, sku)}
-                />
-              </Box>
-            </Col>
-            {/* Right Column */}
-            <Col width={[1, 6 / 12, 6 / 12, 5 / 12]}>
-              <div id="portal" className="portal" />
-              {/* Product title and price */}
-              <TitlePrice
-                name={name}
-                couponCode={couponCode}
-                offerDiscountPercentage={offerDiscountPercentage}
-                limitedTimeCouponDiscount={limitedTimeCouponDiscount}
-                maxPrice={maxPrice}
-                offerPrice={offerPrice}
-                totalSavings={totalSavings}
-                specialPrice={specialPrice}
-                totalDiscountPercentage={totalDiscountPercentage}
-                retailDiscount={retailDiscount}
-                ratings={rating}
-                count={count}
-                marginTop="1rem"
-                onClickReviews={this.onClickReviews}
-              />
-
-              {/* Product Share */}
-              {/* <ShareBar title={name} url={productURL} mt={10} /> */}
-
-              {/* Pincode and EMI options */}
-              <ServiceDetails
-                deliverBy={
-                  (deliveryInfo && deliveryInfo[0] && deliveryInfo[0].value) ||
-                  (deliveryDetails[0] && deliveryDetails[0] && deliveryDetails[0].value) ||
-                  ''
-                }
-                emiStarting={formatAmount(calculateLowestEmi(emidata, price))}
-                shipping={checkSpecialPrice}
-                isEmiAvailable={isEmiAvailable}
-                pincode={pincode.selectedPincode}
-                loading={deliveryDateLoading}
-                shippingCharge={meta.shipping_charge}
-              >
-                <Pincode key="pincode" />
-              </ServiceDetails>
-
-              {/* Reviews */}
-              {!!weightedRating && reviewsData.length ? (
-                <div style={{ display: 'flex' }}>
-                  <ReviewDisplay
-                    pr="5px"
-                    ratings={weightedRating}
-                    reviews={reviewsData.length}
-                    count={5}
-                    pb={20}
-                    justifyContent="flex-start"
-                    sx={{ borderBottom: 'none' }}
+                  {/* Wishlist Button */}
+                  <WishListButton
+                    onClick={onClickWishList(
+                      sku,
+                      wishListData,
+                      wishlistToggle,
+                      isLoggedIn,
+                      this.handleLoginModal,
+                      addToWaitList,
+                      simpleSku,
+                      pincode.selectedPincode
+                    )}
+                    isWishList={isInWishList(wishList, sku)}
+                    wishlistLoading={isInWishList(loadingList, sku)}
                   />
-                  <a
-                    variant="linkPrimary"
-                    href="#review-section"
-                    style={{
-                      cursor: 'default'
-                    }}
-                  >
-                    <Label mr={5} color="primary" fontFamilly="medium" fontSize={14} sx={{ cursor: 'pointer' }}>
-                      {`Review${reviewsData.length !== 1 ? 's ' : ' '} `}
-                    </Label>
-                  </a>
-                  <Box>
+                </Box>
+              </Col>
+              {/* Right Column */}
+              <Col width={[1, 6 / 12, 6 / 12, 5 / 12]}>
+                <div id="portal" className="portal" />
+                {/* Product title and price */}
+                <TitlePrice
+                  name={name}
+                  couponCode={couponCode}
+                  offerDiscountPercentage={offerDiscountPercentage}
+                  limitedTimeCouponDiscount={limitedTimeCouponDiscount}
+                  maxPrice={maxPrice}
+                  offerPrice={offerPrice}
+                  totalSavings={totalSavings}
+                  specialPrice={specialPrice}
+                  totalDiscountPercentage={totalDiscountPercentage}
+                  retailDiscount={retailDiscount}
+                  ratings={rating}
+                  count={count}
+                  marginTop="1rem"
+                  onClickReviews={this.onClickReviews}
+                />
+
+                {/* Product Share */}
+                {/* <ShareBar title={name} url={productURL} mt={10} /> */}
+
+                {/* Pincode and EMI options */}
+                <ServiceDetails
+                  deliverBy={
+                    (deliveryInfo && deliveryInfo[0] && deliveryInfo[0].value) ||
+                    (deliveryDetails[0] && deliveryDetails[0] && deliveryDetails[0].value) ||
+                    ''
+                  }
+                  emiStarting={formatAmount(calculateLowestEmi(emidata, price))}
+                  shipping={checkSpecialPrice}
+                  isEmiAvailable={isEmiAvailable}
+                  pincode={pincode.selectedPincode}
+                  loading={deliveryDateLoading}
+                  shippingCharge={meta.shipping_charge}
+                >
+                  <Pincode key="pincode" />
+                </ServiceDetails>
+
+                {/* Reviews */}
+                {!!weightedRating && reviewsData.length ? (
+                  <div style={{ display: 'flex' }}>
+                    <ReviewDisplay
+                      pr="5px"
+                      ratings={weightedRating}
+                      reviews={reviewsData.length}
+                      count={5}
+                      pb={20}
+                      justifyContent="flex-start"
+                      sx={{ borderBottom: 'none' }}
+                    />
+                    <a
+                      variant="linkPrimary"
+                      href="#review-section"
+                      style={{
+                        cursor: 'default'
+                      }}
+                    >
+                      <Label mr={5} color="primary" fontFamilly="medium" fontSize={14} sx={{ cursor: 'pointer' }}>
+                        {`Review${reviewsData.length !== 1 ? 's ' : ' '} `}
+                      </Label>
+                    </a>
+                    <Box>
+                      <a
+                        variant="linkPrimary"
+                        href="#review-section"
+                        onClick={this.toggleAddReview}
+                        ml={10}
+                        sx={{
+                          borderLeft: 'primary'
+                        }}
+                        style={{
+                          color: '#f15a22',
+                          fontSize: '14px'
+                        }}
+                      >
+                        {' |'} Write a Review
+                      </a>
+                    </Box>
+                  </div>
+                ) : (
+                  <Box pb={20}>
                     <a
                       variant="linkPrimary"
                       href="#review-section"
                       onClick={this.toggleAddReview}
-                      ml={10}
                       sx={{
                         borderLeft: 'primary'
                       }}
-                      style={{
-                        color: '#f15a22',
-                        fontSize: '14px'
-                      }}
+                      style={{ color: '#f15a22' }}
                     >
-                      {' |'} Write a Review
+                      Write a Review
                     </a>
                   </Box>
-                </div>
-              ) : (
-                <Box pb={20}>
-                  <a
-                    variant="linkPrimary"
-                    href="#review-section"
-                    onClick={this.toggleAddReview}
-                    sx={{
-                      borderLeft: 'primary'
-                    }}
-                    style={{ color: '#f15a22' }}
-                  >
-                    Write a Review
-                  </a>
-                </Box>
-              )}
-
-              {/* Color Options */}
-              {colorProducts.length > 0 && (
-                <Box pb={15}>
-                  <Heading fontSize="1em" color="textDark" fontFamily="medium" fontWeight="normal" mb={15}>
-                    {/* TODO: @nikhil replace static color */}
-                    Color Options: {getSelectedColor(colorProducts)}
-                  </Heading>
-                  <ColorOption
-                    data={colorProducts}
-                    showmorecolorproducts={showmorecolorproducts}
-                    toggleShowMoreColorProducts={this.toggleShowMoreColorProducts}
-                    currentlySelectedProductSku={product.sku}
-                    showmorecolorproductsCount={showmorecolorproductsCount}
-                  />
-                </Box>
-              )}
-
-              {/* Quantity */}
-              <Flex alignItems="center">
-                <Text fontFamily="regular" mr={10}>
-                  Qty.
-                </Text>
-                <Select
-                  placeholder=""
-                  options={qtyOptions(simples[simpleSku])}
-                  value={qtyOptions(simples[simpleSku]).length > 0 ? productQty : { value: 0, label: '0' }}
-                  defaultValue={1}
-                  styles={customStyles}
-                  isDisabled={!(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)}
-                  onChange={({ value }) => {
-                    this.handleSelectQty(value);
-                  }}
-                />
-              </Flex>
-
-              {/* EMI Options */}
-              <EmiOptions
-                emiStarting={formatAmount(calculateLowestEmi(emidata, price))}
-                isEmiAvailable={isEmiAvailable}
-              >
-                <EmiModal price={formatAmount(checkSpecialPrice)} data={emidata} key="emi" />
-              </EmiOptions>
-
-              {/* Offers */}
-              {
-                <Box mb={20} mt={10}>
-                  {combinedbuy.length ? (
-                    <Button variant="link" fontFamily="medium" fontSize={18} mb={15}>
-                      <a href="#combined_buy_offers" style={{ color: '#F15A22' }}>
-                        {`See ${combinedbuy.length} Combined ${combinedbuy.length > 1 ? 'Offers' : 'Offer'}`}
-                      </a>
-                    </Button>
-                  ) : (
-                    ''
-                  )}
-
-                  {offerImage && offerImageRedirect && (
-                    <a rel="noopener noreferrer" href={offerImageRedirect}>
-                      <Image src={offerImage} alt="" width="100%" />
-                    </a>
-                  )}
-                  {offerImage && !offerImageRedirect && <Image src={offerImage} alt="" width="100%" />}
-                </Box>
-              }
-              {demoProduct === '1' ? (
-                <Row ml="0" mr="0" mb="15px" mt="-10px" alignItems="center">
-                  <Image src={demoIcon} alt="Schedule you virtual live demo" width="24px" mr="10px" />
-                  <Text fontSize="14px" color="secondary" display="contents">
-                    Available for demo on the Cart page
-                  </Text>
-                </Row>
-              ) : null}
-
-              {/* Add to cart and Buy now buttons */}
-              <Row mx={-10}>
-                <Col variant="col-6" px={10}>
-                  <AddToCart
-                    skuItem={skuItem}
-                    quantityChange={quantityChange}
-                    quantity={productQty.value || 1}
-                    simpleSku={simpleSku}
-                    sku={sku}
-                    configId={configId}
-                    itemId={sku}
-                    isSoldOut={
-                      !(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)
-                    }
-                  />
-                </Col>
-                <Col variant="col-6" px={10}>
-                  <BuyNow
-                    quantity={productQty.value || 1}
-                    simpleSku={simpleSku}
-                    sku={sku}
-                    isSoldOut={
-                      !(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)
-                    }
-                  />
-                </Col>
-              </Row>
-
-              {/* Share on social media */}
-              <Row mt={30} mx={0}>
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={`http://www.facebook.com/sharer.php?u=${productURL}`}
-                >
-                  <SocialButton>
-                    <Image src={fbIcon} alt="Facebook" />
-                  </SocialButton>
-                </a>
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={`http://pinterest.com/pin/create/button/?url=${productURL}&description=${name}`}
-                >
-                  <SocialButton>
-                    <Image src={pinIcon} alt="Pinterest" />
-                  </SocialButton>
-                </a>
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={`mailto:?subject=${productPageTitle(name)}&body=${productURL}`}
-                >
-                  <SocialButton>
-                    <Image src={email} alt="Mail" />
-                  </SocialButton>
-                </a>
-              </Row>
-            </Col>
-          </Row>
-          <Box>
-            <Row
-              variant="row.contentCenter"
-              mx={0}
-              sx={{
-                borderTop: 'dividerBold',
-                borderBottom: 'dividerBold',
-                overflow: 'auto',
-                flexWrap: 'nowrap',
-                justifyContent: 'flex-start'
-              }}
-            >
-              <DescriptionButton
-                onClick={e => {
-                  e.preventDefault();
-                  this.setState({
-                    activeSpec: 'description',
-                    activeDescription: description
-                  });
-                }}
-                active={activeSpec === 'description'}
-              >
-                DESCRIPTION
-              </DescriptionButton>
-              <DescriptionButton
-                onClick={e => {
-                  e.preventDefault();
-                  this.setState({
-                    activeSpec: 'details',
-                    activeDescription: description
-                  });
-                }}
-                active={activeSpec === 'details'}
-              >
-                DETAILS
-              </DescriptionButton>
-              {careLabel && (
-                <DescriptionButton
-                  onClick={e => {
-                    e.preventDefault();
-                    this.setState({
-                      activeSpec: 'care',
-                      activeDescription: careLabel
-                    });
-                  }}
-                  active={activeSpec === 'care'}
-                >
-                  PRODUCT CARE INSTRUCTIONS
-                </DescriptionButton>
-              )}
-              {productWarranty && (
-                <DescriptionButton
-                  onClick={e => {
-                    e.preventDefault();
-                    this.setState({
-                      activeSpec: 'warranty',
-                      activeDescription: productWarranty
-                    });
-                  }}
-                  active={activeSpec === 'warranty'}
-                >
-                  SERVICE ASSURANCE / WARRANTY
-                </DescriptionButton>
-              )}
-              {returnAndCancel && (
-                <DescriptionButton
-                  onClick={e => {
-                    e.preventDefault();
-                    this.setState({
-                      activeSpec: 'return',
-                      activeDescription: returnAndCancel
-                    });
-                  }}
-                  active={activeSpec === 'return'}
-                >
-                  RETURN / CANCELLATION
-                </DescriptionButton>
-              )}
-
-              {this.renderAttributes(groupedAttributes)}
-            </Row>
-
-            {activeSpec === 'details' ? (
-              <Box px="5%" py="2%" sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-                {groupedAttributes[0].Details.map(detail => {
-                  // if (detail.label !== 'Note' && detail.label !== "What's in the box?") {
-                  if (detail.label !== 'Note') {
-                    return (
-                      <Row width="33%" pb={10}>
-                        <Col width={150} fontWeight="bold" fontSize={14} lineHeight={1.4}>
-                          {detail.label}
-                        </Col>
-                        {detail.label !== "What's in the box?" ? (
-                          <Col width="calc(100% - 150px)" fontSize={14} lineHeight={1.25}>
-                            {detail.value}
-                          </Col>
-                        ) : (
-                          <Col
-                            mt="5px"
-                            mb="5px"
-                            itemProp="description"
-                            fontSize="0.875rem"
-                            dangerouslySetInnerHTML={{ __html: detail.value }}
-                            lh="1.6"
-                            color="rgba(0, 0, 0, 0.65)"
-                            fontFamily="light"
-                          />
-                        )}
-                      </Row>
-                    );
-                  }
-                  return null;
-                })}
-              </Box>
-            ) : (
-              <Box px="10%">
-                {description && (
-                  <ProductDesc
-                    desc={activeDescription || ''}
-                    showmore={showmore}
-                    toggleShowMore={this.toggleShowMore}
-                  />
                 )}
-              </Box>
-            )}
 
-            {/* Specifications */}
-            <Specs activeSpec={activeSpec} specs={groupedAttributes} pincode={pincode.selectedPincode} />
-            {/* Video */}
-            {groupedattributes && groupedattributes.youtubeid && (
-              // <Row my={30}>
-              //   <Col variant="col-12">
-              //     <Video id={getVideoID(groupedattributes.youtubeid)} />
-              //   </Col>
-              // </Row>
-              <div style={{ display: 'flex' }}>
-                <Button
-                  onClick={() => this.setState({ openVideo: true })}
-                  my={8}
-                  sx={{
-                    width: '60%',
-                    margin: 'auto'
-                  }}
-                >
-                  Watch video
-                </Button>
-              </div>
-            )}
-            {/* Usps */}
-            <Row my={40} width={['80%', '80%', '60%']} justifyContent="space-between" mx="auto" flexWrap="nowrap">
-              {!meta.shipping_charge && (
-                <div style={{ margin: 'auto' }}>
-                  <UspCol src={freeShippingIcon} text="Free Shipping" />
-                </div>
-              )}
-              {isEmiAvailable && (
-                <div style={{ margin: 'auto' }}>
-                  <UspCol src={emiIcon} text="EMI Options" />
-                </div>
-              )}
-              <div style={{ margin: 'auto' }}>
-                <UspCol src={warrentyIcon} text="1 Year Warranty" />
-              </div>
-            </Row>
+                {/* Color Options */}
+                {colorProducts.length > 0 && (
+                  <Box pb={15}>
+                    <Heading fontSize="1em" color="textDark" fontFamily="medium" fontWeight="normal" mb={15}>
+                      {/* TODO: @nikhil replace static color */}
+                      Color Options: {getSelectedColor(colorProducts)}
+                    </Heading>
+                    <ColorOption
+                      data={colorProducts}
+                      showmorecolorproducts={showmorecolorproducts}
+                      toggleShowMoreColorProducts={this.toggleShowMoreColorProducts}
+                      currentlySelectedProductSku={product.sku}
+                      showmorecolorproductsCount={showmorecolorproductsCount}
+                    />
+                  </Box>
+                )}
 
-            {/* DIMENSIONS */}
-            {/* { isFurnitureTrue()} */}
-            {this.state.isFurniture && (height || width || depth) && (
-              <Box py={20} sx={{ borderTop: 'dividerLight' }}>
-                <Box textAlign="center" mb={30}>
-                  <Text variant="regular" fontSize={16} pb={5}>
-                    DIMENSIONS
+                {/* Quantity */}
+                <Flex alignItems="center">
+                  <Text fontFamily="regular" mr={10}>
+                    Qty.
                   </Text>
-                  <Heading variant="heading.regular">Will it fit in your room?</Heading>
+                  <Select
+                    placeholder=""
+                    options={qtyOptions(simples[simpleSku])}
+                    value={qtyOptions(simples[simpleSku]).length > 0 ? productQty : { value: 0, label: '0' }}
+                    defaultValue={1}
+                    styles={customStyles}
+                    isDisabled={
+                      !(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)
+                    }
+                    onChange={({ value }) => {
+                      this.handleSelectQty(value);
+                    }}
+                  />
+                </Flex>
+
+                {/* EMI Options */}
+                <EmiOptions
+                  emiStarting={formatAmount(calculateLowestEmi(emidata, price))}
+                  isEmiAvailable={isEmiAvailable}
+                >
+                  <EmiModal price={formatAmount(checkSpecialPrice)} data={emidata} key="emi" />
+                </EmiOptions>
+
+                {/* Offers */}
+                {
+                  <Box mb={20} mt={10}>
+                    {combinedbuy.length ? (
+                      <Button variant="link" fontFamily="medium" fontSize={18} mb={15}>
+                        <a href="#combined_buy_offers" style={{ color: '#F15A22' }}>
+                          {`See ${combinedbuy.length} Combined ${combinedbuy.length > 1 ? 'Offers' : 'Offer'}`}
+                        </a>
+                      </Button>
+                    ) : (
+                      ''
+                    )}
+
+                    {offerImage && offerImageRedirect && (
+                      <a rel="noopener noreferrer" href={offerImageRedirect}>
+                        <Image src={offerImage} alt="" width="100%" />
+                      </a>
+                    )}
+                    {offerImage && !offerImageRedirect && <Image src={offerImage} alt="" width="100%" />}
+                  </Box>
+                }
+                {demoProduct === '1' ? (
+                  <Row ml="0" mr="0" mb="15px" mt="-10px" alignItems="center">
+                    <Image src={demoIcon} alt="Schedule you virtual live demo" width="24px" mr="10px" />
+                    <Text fontSize="14px" color="secondary" display="contents">
+                      Available for demo on the Cart page
+                    </Text>
+                  </Row>
+                ) : null}
+
+                {/* Add to cart and Buy now buttons */}
+                <Row mx={-10}>
+                  <Col variant="col-6" px={10}>
+                    <AddToCart
+                      skuItem={skuItem}
+                      quantityChange={quantityChange}
+                      quantity={productQty.value || 1}
+                      simpleSku={simpleSku}
+                      sku={sku}
+                      configId={configId}
+                      itemId={sku}
+                      isSoldOut={
+                        !(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)
+                      }
+                    />
+                  </Col>
+                  <Col variant="col-6" px={10}>
+                    <BuyNow
+                      quantity={productQty.value || 1}
+                      simpleSku={simpleSku}
+                      sku={sku}
+                      isSoldOut={
+                        !(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)
+                      }
+                    />
+                  </Col>
+                </Row>
+
+                {/* Share on social media */}
+                <Row mt={30} mx={0}>
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={`http://www.facebook.com/sharer.php?u=${productURL}`}
+                  >
+                    <SocialButton>
+                      <Image src={fbIcon} alt="Facebook" />
+                    </SocialButton>
+                  </a>
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={`http://pinterest.com/pin/create/button/?url=${productURL}&description=${name}`}
+                  >
+                    <SocialButton>
+                      <Image src={pinIcon} alt="Pinterest" />
+                    </SocialButton>
+                  </a>
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={`mailto:?subject=${productPageTitle(name)}&body=${productURL}`}
+                  >
+                    <SocialButton>
+                      <Image src={email} alt="Mail" />
+                    </SocialButton>
+                  </a>
+                </Row>
+              </Col>
+            </Row>
+            <Box>
+              <Row
+                variant="row.contentCenter"
+                mx={0}
+                sx={{
+                  borderTop: 'dividerBold',
+                  borderBottom: 'dividerBold',
+                  overflow: 'auto',
+                  flexWrap: 'nowrap',
+                  justifyContent: 'flex-start'
+                }}
+              >
+                <DescriptionButton
+                  onClick={e => {
+                    e.preventDefault();
+                    this.setState({
+                      activeSpec: 'description',
+                      activeDescription: description
+                    });
+                  }}
+                  active={activeSpec === 'description'}
+                >
+                  DESCRIPTION
+                </DescriptionButton>
+                <DescriptionButton
+                  onClick={e => {
+                    e.preventDefault();
+                    this.setState({
+                      activeSpec: 'details',
+                      activeDescription: description
+                    });
+                  }}
+                  active={activeSpec === 'details'}
+                >
+                  DETAILS
+                </DescriptionButton>
+                {careLabel && (
+                  <DescriptionButton
+                    onClick={e => {
+                      e.preventDefault();
+                      this.setState({
+                        activeSpec: 'care',
+                        activeDescription: careLabel
+                      });
+                    }}
+                    active={activeSpec === 'care'}
+                  >
+                    PRODUCT CARE INSTRUCTIONS
+                  </DescriptionButton>
+                )}
+                {productWarranty && (
+                  <DescriptionButton
+                    onClick={e => {
+                      e.preventDefault();
+                      this.setState({
+                        activeSpec: 'warranty',
+                        activeDescription: productWarranty
+                      });
+                    }}
+                    active={activeSpec === 'warranty'}
+                  >
+                    SERVICE ASSURANCE / WARRANTY
+                  </DescriptionButton>
+                )}
+                {returnAndCancel && (
+                  <DescriptionButton
+                    onClick={e => {
+                      e.preventDefault();
+                      this.setState({
+                        activeSpec: 'return',
+                        activeDescription: returnAndCancel
+                      });
+                    }}
+                    active={activeSpec === 'return'}
+                  >
+                    RETURN / CANCELLATION
+                  </DescriptionButton>
+                )}
+
+                {this.renderAttributes(groupedAttributes)}
+              </Row>
+
+              {activeSpec === 'details' ? (
+                <Box px="5%" py="2%" sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+                  {groupedAttributes[0].Details.map(detail => {
+                    // if (detail.label !== 'Note' && detail.label !== "What's in the box?") {
+                    if (detail.label !== 'Note') {
+                      return (
+                        <Row width="33%" pb={10}>
+                          <Col width={150} fontWeight="bold" fontSize={14} lineHeight={1.4}>
+                            {detail.label}
+                          </Col>
+                          {detail.label !== "What's in the box?" ? (
+                            <Col width="calc(100% - 150px)" fontSize={14} lineHeight={1.25}>
+                              {detail.value}
+                            </Col>
+                          ) : (
+                            <Col
+                              mt="5px"
+                              mb="5px"
+                              itemProp="description"
+                              fontSize="0.875rem"
+                              dangerouslySetInnerHTML={{ __html: detail.value }}
+                              lh="1.6"
+                              color="rgba(0, 0, 0, 0.65)"
+                              fontFamily="light"
+                            />
+                          )}
+                        </Row>
+                      );
+                    }
+                    return null;
+                  })}
                 </Box>
-                <Box p={15} textAlign="center" sx={{ border: 'dividerLight' }}>
-                  {images && images.length > 2 ? (
-                    <Image src={`${images[2].url}-zoom.jpg`} alt="" />
-                  ) : (
-                    <Image src={`${images[0].url}-zoom.jpg`} alt="" />
+              ) : (
+                <Box px="10%">
+                  {description && (
+                    <ProductDesc
+                      desc={activeDescription || ''}
+                      showmore={showmore}
+                      toggleShowMore={this.toggleShowMore}
+                    />
                   )}
                 </Box>
-                <Box>
-                  <Row
-                    variant="row.contentCenter"
-                    mx={0}
+              )}
+
+              {/* Specifications */}
+              <Specs activeSpec={activeSpec} specs={groupedAttributes} pincode={pincode.selectedPincode} />
+              {/* Video */}
+              {groupedattributes && groupedattributes.youtubeid && (
+                // <Row my={30}>
+                //   <Col variant="col-12">
+                //     <Video id={getVideoID(groupedattributes.youtubeid)} />
+                //   </Col>
+                // </Row>
+                <div style={{ display: 'flex' }}>
+                  <Button
+                    onClick={() => this.setState({ openVideo: true })}
+                    my={8}
                     sx={{
-                      borderTop: 'dividerBold',
-                      borderBottom: 'dividerBold',
-                      padding: '20px 0',
-                      marginTop: '30px',
-                      justifyContent: 'flex-start'
+                      width: '60%',
+                      margin: 'auto'
                     }}
                   >
-                    <span className={styles.overolDimension}>
-                      Overall Dimension <span className={styles.dimensionUnit}>(Inches)</span>
-                    </span>
-                    <span className={styles.dimensionSpans}>{width && `Width : ${this.mmToInchConvert(width)}" `}</span>
-                    <span className={styles.dimensionSpans}>{depth && `Depth : ${this.mmToInchConvert(depth)}" `}</span>
-                    <span className={styles.dimensionSpans}>
-                      {height && `Height : ${this.mmToInchConvert(height)}" `}
-                    </span>
-                  </Row>
+                    Watch video
+                  </Button>
+                </div>
+              )}
+              {/* Usps */}
+              <Row my={40} width={['80%', '80%', '60%']} justifyContent="space-between" mx="auto" flexWrap="nowrap">
+                {!meta.shipping_charge && (
+                  <div style={{ margin: 'auto' }}>
+                    <UspCol src={freeShippingIcon} text="Free Shipping" />
+                  </div>
+                )}
+                {isEmiAvailable && (
+                  <div style={{ margin: 'auto' }}>
+                    <UspCol src={emiIcon} text="EMI Options" />
+                  </div>
+                )}
+                <div style={{ margin: 'auto' }}>
+                  <UspCol src={warrentyIcon} text="1 Year Warranty" />
+                </div>
+              </Row>
+
+              {/* DIMENSIONS */}
+              {/* { isFurnitureTrue()} */}
+              {this.state.isFurniture && (height || width || depth) && (
+                <Box py={20} sx={{ borderTop: 'dividerLight' }}>
+                  <Box textAlign="center" mb={30}>
+                    <Text variant="regular" fontSize={16} pb={5}>
+                      DIMENSIONS
+                    </Text>
+                    <Heading variant="heading.regular">Will it fit in your room?</Heading>
+                  </Box>
+                  <Box p={15} textAlign="center" sx={{ border: 'dividerLight' }}>
+                    {images && images.length > 2 ? (
+                      <Image src={`${images[2].url}-zoom.jpg`} alt="" />
+                    ) : (
+                      <Image src={`${images[0].url}-zoom.jpg`} alt="" />
+                    )}
+                  </Box>
+                  <Box>
+                    <Row
+                      variant="row.contentCenter"
+                      mx={0}
+                      sx={{
+                        borderTop: 'dividerBold',
+                        borderBottom: 'dividerBold',
+                        padding: '20px 0',
+                        marginTop: '30px',
+                        justifyContent: 'flex-start'
+                      }}
+                    >
+                      <span className={styles.overolDimension}>
+                        Overall Dimension <span className={styles.dimensionUnit}>(Inches)</span>
+                      </span>
+                      <span className={styles.dimensionSpans}>
+                        {width && `Width : ${this.mmToInchConvert(width)}" `}
+                      </span>
+                      <span className={styles.dimensionSpans}>
+                        {depth && `Depth : ${this.mmToInchConvert(depth)}" `}
+                      </span>
+                      <span className={styles.dimensionSpans}>
+                        {height && `Height : ${this.mmToInchConvert(height)}" `}
+                      </span>
+                    </Row>
+                  </Box>
                 </Box>
-              </Box>
-            )}
+              )}
 
-            {/* Complete the look */}
-            <UnbxdCompleteTheLook configId={configId} />
+              {/* Complete the look */}
+              <UnbxdCompleteTheLook configId={configId} />
 
-            {/* Review List and Add review */}
-            <Box id="review-section" pt={30} className={styles.reviewSection}>
-              <Box textAlign="center" mb={30}>
-                <Heading variant="heading.regular">Reviews</Heading>
-              </Box>
-              {/* <AddReview
+              {/* Review List and Add review */}
+              <Box id="review-section" pt={30} className={styles.reviewSection}>
+                <Box textAlign="center" mb={30}>
+                  <Heading variant="heading.regular">Reviews</Heading>
+                </Box>
+                {/* <AddReview
                 ratings={weightedRating}
                 reviews={reviewsData.length}
                 count={5}
@@ -1146,149 +1154,150 @@ class ProductDetails extends React.Component {
                   <ReviewFilter selectedFilterProp={selectedFilter} onFilterChange={this.onFilterChange} />
                 )}
               </AddReview> */}
-              <div ref={this.reviewRef}>
-                <Box width={1}>
-                  <ReviewDisplay ratings={weightedRating} reviews={reviewsData.length} count={5}>
-                    {/* {children} */}
-                    {reviewsData.length > 0 && (
-                      <ReviewFilter selectedFilterProp={selectedFilter} onFilterChange={this.onFilterChange} />
+                <div ref={this.reviewRef}>
+                  <Box width={1}>
+                    <ReviewDisplay ratings={weightedRating} reviews={reviewsData.length} count={5}>
+                      {/* {children} */}
+                      {reviewsData.length > 0 && (
+                        <ReviewFilter selectedFilterProp={selectedFilter} onFilterChange={this.onFilterChange} />
+                      )}
+                      <Button display={['none', 'block']} onClick={this.toggleAddReview}>
+                        Write a Review
+                      </Button>
+                    </ReviewDisplay>
+                    {addreview && (
+                      <form onSubmit={this.handleSubmit}>
+                        <Box width={[1, 1, 5 / 12]}>
+                          <Row alignItems="center" mx={0} mb={15}>
+                            <Label mr={10}>Rating</Label>
+                            <ReactStars
+                              count={5}
+                              onChange={this.ratingChanged}
+                              size={20}
+                              value={this.state.rating}
+                              half={false}
+                              color2="#ffd700"
+                            />
+                          </Row>
+                          <Box>
+                            <FormInput
+                              label="Name"
+                              type="text"
+                              placeholder="Name"
+                              name="name"
+                              value={this.state.name}
+                              feedBackError={nameError}
+                              feedBackMessage={nameErrorMessage}
+                              onChange={this.handleChange}
+                              // ref={(nameInp) => this.myInp = nameInp}
+                            />
+                          </Box>
+                          <Box marginBottom="0.3125rem">
+                            <FormInput
+                              type="textarea"
+                              label="Review"
+                              name="review"
+                              placeholder="Review"
+                              value={review}
+                              feedBackError={reviewError}
+                              feedBackMessage={reviewErrorMessage}
+                              onChange={this.handleChange}
+                              rows="3"
+                              height={80}
+                            />
+                          </Box>
+                          <Box>
+                            <Button
+                              type="submit"
+                              btnType="primary"
+                              size="large"
+                              fontFamily="regular"
+                              fontSize="0.875em"
+                              height="42px"
+                              lh="2"
+                            >
+                              SUBMIT
+                            </Button>
+                          </Box>
+                        </Box>
+                      </form>
                     )}
-                    <Button display={['none', 'block']} onClick={this.toggleAddReview}>
-                      Write a Review
-                    </Button>
-                  </ReviewDisplay>
-                  {addreview && (
-                    <form onSubmit={this.handleSubmit}>
-                      <Box width={[1, 1, 5 / 12]}>
-                        <Row alignItems="center" mx={0} mb={15}>
-                          <Label mr={10}>Rating</Label>
-                          <ReactStars
-                            count={5}
-                            onChange={this.ratingChanged}
-                            size={20}
-                            value={this.state.rating}
-                            half={false}
-                            color2="#ffd700"
-                          />
-                        </Row>
-                        <Box>
-                          <FormInput
-                            label="Name"
-                            type="text"
-                            placeholder="Name"
-                            name="name"
-                            value={this.state.name}
-                            feedBackError={nameError}
-                            feedBackMessage={nameErrorMessage}
-                            onChange={this.handleChange}
-                            // ref={(nameInp) => this.myInp = nameInp}
-                          />
-                        </Box>
-                        <Box marginBottom="0.3125rem">
-                          <FormInput
-                            type="textarea"
-                            label="Review"
-                            name="review"
-                            placeholder="Review"
-                            value={review}
-                            feedBackError={reviewError}
-                            feedBackMessage={reviewErrorMessage}
-                            onChange={this.handleChange}
-                            rows="3"
-                            height={80}
-                          />
-                        </Box>
-                        <Box>
-                          <Button
-                            type="submit"
-                            btnType="primary"
-                            size="large"
-                            fontFamily="regular"
-                            fontSize="0.875em"
-                            height="42px"
-                            lh="2"
-                          >
-                            SUBMIT
-                          </Button>
-                        </Box>
-                      </Box>
-                    </form>
-                  )}
-                </Box>
-              </div>
-              <Reviews
-                variant="col-12"
-                reviewItems={filterChanged ? reviewDataSet : reviews.data}
-                showReviews={showReviews}
-                showMoreReviews={this.showMoreReviews}
-              />
-            </Box>
-          </Box>
-          {/* Combined Offers */}
-          {combinedbuy.length > 0 && (
-            <Box id="combined_buy_offers" pt={48}>
-              <Box textAlign="center" mb={20}>
-                <Heading variant="heading.regular" sx={{ fontWeight: 400 }}>
-                  Combined Offers
-                </Heading>
+                  </Box>
+                </div>
+                <Reviews
+                  variant="col-12"
+                  reviewItems={filterChanged ? reviewDataSet : reviews.data}
+                  showReviews={showReviews}
+                  showMoreReviews={this.showMoreReviews}
+                />
               </Box>
-              {combinedbuy.map((item, index) => (
-                <Row key={String(index)} mx={0}>
-                  <CombinedBuy
-                    title={item.name}
-                    item={item}
-                    data={getProductsList(item.products || [])}
-                    length={item.products.length}
-                    price={item.total_price}
-                    setDiscount={item.discount ? Number(item.discount) : 0}
-                    discountedPrice={item.total_price_after_discount}
-                    handleCombinedBuy={() => this.handleCombinedBuy(item, pincode, session)}
-                  />
-                </Row>
-              ))}
             </Box>
-          )}
+            {/* Combined Offers */}
+            {combinedbuy.length > 0 && (
+              <Box id="combined_buy_offers" pt={48}>
+                <Box textAlign="center" mb={20}>
+                  <Heading variant="heading.regular" sx={{ fontWeight: 400 }}>
+                    Combined Offers
+                  </Heading>
+                </Box>
+                {combinedbuy.map((item, index) => (
+                  <Row key={String(index)} mx={0}>
+                    <CombinedBuy
+                      title={item.name}
+                      item={item}
+                      data={getProductsList(item.products || [])}
+                      length={item.products.length}
+                      price={item.total_price}
+                      setDiscount={item.discount ? Number(item.discount) : 0}
+                      discountedPrice={item.total_price_after_discount}
+                      handleCombinedBuy={() => this.handleCombinedBuy(item, pincode, session)}
+                    />
+                  </Row>
+                ))}
+              </Box>
+            )}
 
-          {/* Related Products List */}
-          {relatedproductsList.length > 0 && (
-            <Row py={36}>
-              <ProductCarousel
-                paddingTop="2.5rem"
-                title="RECOMMENDED FOR YOU"
-                data={relatedproductsList}
-                length={relatedproductsList.length}
-              />
-            </Row>
-          )}
+            {/* Related Products List */}
+            {relatedproductsList.length > 0 && (
+              <Row py={36}>
+                <ProductCarousel
+                  paddingTop="2.5rem"
+                  title="RECOMMENDED FOR YOU"
+                  data={relatedproductsList}
+                  length={relatedproductsList.length}
+                />
+              </Row>
+            )}
 
-          {/* Unbxd Recently Viewed */}
-          {/* <Section>
+            {/* Unbxd Recently Viewed */}
+            {/* <Section>
             <UnbxdRecentlyViewed />
           </Section> */}
 
-          {/* Login modal */}
-          <ResponsiveModal
-            classNames={{ modal: 'loginModal' }}
-            onCloseModal={this.handleLoginModal}
-            open={this.state.openLogin}
-          >
-            <Box py={32} px={32}>
-              <LoginModal />
-            </Box>
-          </ResponsiveModal>
-          <ResponsiveModal
-            classNames={{ modal: 'videoModal' }}
-            open={this.state.openVideo}
-            onCloseModal={() => this.setState({ openVideo: false })}
-          >
-            <Row my={30}>
-              <Col variant="col-12">
-                <Video id={getVideoID(groupedattributes.youtubeid)} />
-              </Col>
-            </Row>
-          </ResponsiveModal>
-        </Container>
-      </Box>
+            {/* Login modal */}
+            <ResponsiveModal
+              classNames={{ modal: 'loginModal' }}
+              onCloseModal={this.handleLoginModal}
+              open={this.state.openLogin}
+            >
+              <Box py={32} px={32}>
+                <LoginModal />
+              </Box>
+            </ResponsiveModal>
+          </Container>
+        </Box>
+        <ResponsiveVideoModal
+          classNames={{ modal: 'videoModal' }}
+          open={this.state.openVideo}
+          onCloseModal={() => this.setState({ openVideo: false })}
+        >
+          <Row width="100%">
+            <Col variant="col-12" px={40}>
+              <Video id={getVideoID(groupedattributes.youtubeid)} />
+            </Col>
+          </Row>
+        </ResponsiveVideoModal>
+      </div>
     );
   }
 }
