@@ -592,7 +592,7 @@ class ProductDetails extends React.Component {
     } = attributes;
     const simpleSku = Object.keys(simples)[0];
     const {
- name, price, special_price: specialPriceEmi, config_id: configId
+ name, price, special_price: specialPriceEmi, config_id: configId, dimension_image: dimensionImage
 } = meta;
     const {
       offer_discount_percentage: offerDiscountPercentage,
@@ -1095,7 +1095,7 @@ class ProductDetails extends React.Component {
                   </Box>
                   <Box p={15} textAlign="center" sx={{ border: 'dividerLight' }}>
                     {images && images.length > 2 ? (
-                      <Image src={`${images[2].url}-zoom.jpg`} alt="" />
+                      <Image src={dimensionImage ? `${dimensionImage}-zoom.jpg` : `${images[2].url}-zoom.jpg`} alt="" />
                     ) : (
                       <Image src={`${images[0].url}-zoom.jpg`} alt="" />
                     )}
