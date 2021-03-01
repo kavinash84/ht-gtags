@@ -1291,7 +1291,7 @@ class ProductDetails extends React.Component {
           open={this.state.openVideo}
           onCloseModal={() => this.setState({ openVideo: false })}
         >
-          <Row width="100%">
+          <Row width="100%" height="100%" py={60}>
             <Col variant="col-12" px={40}>
               <Video id={getVideoID(groupedattributes.youtubeid)} />
             </Col>
