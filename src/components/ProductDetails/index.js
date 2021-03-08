@@ -69,6 +69,7 @@ import ProductDetailsCarousel from './Carousel';
 import Video from './Video';
 import ReviewFilter from './ReviewFilter';
 import UnbxdCompleteTheLook from './UnbxdCompleteTheLook';
+import FreebieProduct from './FreebieProduct';
 
 import demoIcon from '../../../static/play-button.svg';
 
@@ -568,7 +569,8 @@ class ProductDetails extends React.Component {
       grouped_attributes: groupedAttributes,
       sku,
       groupedattributes,
-      reviews: { count, rating }
+      reviews: { count, rating },
+      bogo_bundle: bogoBundle
     } = product;
     // const { brand: ProductBrand } = meta;
     const {
@@ -798,6 +800,11 @@ class ProductDetails extends React.Component {
                       showmorecolorproductsCount={showmorecolorproductsCount}
                     />
                   </Box>
+                )}
+                {bogoBundle && bogoBundle.name && (
+                  <Row display="block" mb="0" mr="0.9375rem" ml="0.9375rem" className={styles.freebieProduct}>
+                    <FreebieProduct bogoBundle={bogoBundle} />
+                  </Row>
                 )}
 
                 {/* Quantity */}
