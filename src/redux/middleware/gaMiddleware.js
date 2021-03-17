@@ -83,7 +83,9 @@ export default function gaMiddleware() {
           } = window;
           const location = (payload && payload.pathname) || pathname;
           if (document.referrer !== '' && document.referrer !== hostname && isFirstHit !== 1) {
-            Object.defineProperty(document, 'referrer', { get: () => hostname });
+            Object.defineProperty(document, 'referrer', {
+              get: () => hostname
+            });
           }
           if (isFirstHit === 1) dispatch(resetReferrer());
           if (location === '/') {
@@ -591,20 +593,23 @@ export default function gaMiddleware() {
           if (pathname !== '/plan-your-kitchen') {
             if (data && data.length) {
               const imp = data[action.payload];
-              const obj = {
-                event: 'promotionImpression',
-                ecommerce: {
-                  promoView: {
-                    promotions: [
-                      {
-                        ...imp.meta,
-                        position: action.payload + 1,
-                        creative: imp.image
-                      }
-                    ]
+              let obj = {};
+              if (imp && imp.meta) {
+                obj = {
+                  event: 'promotionImpression',
+                  ecommerce: {
+                    promoView: {
+                      promotions: [
+                        {
+                          ...imp.meta,
+                          position: action.payload + 1,
+                          creative: imp.image
+                        }
+                      ]
+                    }
                   }
-                }
-              };
+                };
+              }
               window.dataLayer.push(obj);
             }
           }
