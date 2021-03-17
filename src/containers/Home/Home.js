@@ -33,9 +33,10 @@ import Title from 'components/Title';
 import Usp from 'components/Home/Usp';
 import UnbxdRecentlyViewed from 'components/UnbxdRecentlyViewed/UnbxdRecentlyViewed';
 
-const sliderImage = require('../../static/slider.png');
-const bannerImage = require('../../static/banner.png');
-const designBuildLogo = require('../../static/designBuildLogo.png');
+const sliderImage = require('../../../static/DnB.jpeg');
+const bannerImage = require('../../../static/modularKitchen.jpeg');
+// const designBuildLogo = require('../../static/designBuildLogo.png');
+const findAStoreImage = require('../../../static/findAStore.jpeg');
 
 // const OFFER_ID = 5;
 
@@ -246,7 +247,10 @@ export default class Home extends Component {
                   <Link to="/design-build/" href="https://stage.hometown.in/design-build/" target="_blank0">
                     <Box mb={20} sx={{ position: 'relative' }}>
                       <Image src={sliderImage} />
-                      <Image src={designBuildLogo} variant="image.logoHomeTown" />
+                      {/* <Image
+                        src={designBuildLogo}
+                        variant="image.logoHomeTown"
+                      /> */}
                     </Box>
                     <Heading variant="heading.regular" textAlign="center">
                       Design and Build
@@ -257,10 +261,10 @@ export default class Home extends Component {
                   <Link to="/modular-kitchens/" href="https://stage.hometown.in/modular-kitchens/" target="_blank1">
                     <Box mb={20} sx={{ position: 'relative' }}>
                       <Image src={bannerImage} />
-                      <Image
+                      {/* <Image
                         src="https://www.hometown.in/design-build/static/mkLogo.ae5caa06.png"
                         variant="image.logoHomeTown"
-                      />
+                      /> */}
                     </Box>
                     <Heading variant="heading.regular" textAlign="center">
                       Modular Kitchen
@@ -276,7 +280,7 @@ export default class Home extends Component {
             <Container>
               <Card
                 sx={{
-                  backgroundImage: 'url(https://static.hometown.in/media/cms/hometownnew/compressed/furniture.jpg)',
+                  backgroundImage: `url(${findAStoreImage})`,
                   backgroundSize: 'cover',
                   position: 'relative'
                 }}
