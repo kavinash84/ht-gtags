@@ -13,6 +13,7 @@ import {
   gaTrack as listingLoadTrack,
   setReloadListing
 } from 'redux/modules/products';
+import { getOfferStrip } from 'redux/modules/offer';
 import { PINCODE } from 'helpers/Constants';
 
 const hooks = {
@@ -28,6 +29,11 @@ const hooks = {
     let loadResults;
     const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
     const { search } = location;
+    const urlCategoryArr = location.pathname.split('/');
+    const urlCategory = urlCategoryArr[`${urlCategoryArr.length - 1}`]
+      ? urlCategoryArr[`${urlCategoryArr.length - 1}`]
+      : urlCategoryArr[`${urlCategoryArr.length - 2}`];
+    console.log(urlCategoryArr, urlCategory, 'url check');
     const getPage = search.split('page=')[1];
     const currentPage = getPage || 1;
     if (location.pathname === '/search') {
@@ -65,6 +71,7 @@ const hooks = {
     //   prevFilter === 'clearAll' ||
     //   reloadListing
     // ) {
+    await dispatch(getOfferStrip(urlCategory));
     await dispatch(clearPreviousList());
     await dispatch(setCurrentPage(currentPage));
     await dispatch(clearPreviousSort());

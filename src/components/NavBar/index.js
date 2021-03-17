@@ -81,8 +81,7 @@ class NavBar extends Component {
               style={{
                 textDecoration: 'none',
                 fontFamily: 'medium',
-                color: 'black',
-                fontWeight: 'bold'
+                color: 'black'
               }}
             >
               Modular Kitchens
@@ -170,13 +169,14 @@ class NavBar extends Component {
                 </Box>
                 <Box>
                   <Text
-                    as={LinkRedirect}
+                    as={Link}
                     variant="menuLight"
-                    href="https://beta.hometown.in/design-build/"
+                    to="/design-build/"
+                    // href="https://stage.hometown.in/design-build/"
                     title="Design & Build"
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={exitOnClick}
+                    // onClick={exitOnClick}
                   >
                     Design & Build
                   </Text>

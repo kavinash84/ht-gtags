@@ -18,3 +18,4 @@ coverage/
 jsconfig.json
 yarn.lock
 version.json
+.prettierrc

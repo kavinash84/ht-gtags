@@ -5,8 +5,10 @@ export default class UnbxdCompleteTheLook extends Component {
   componentDidMount() {
     this.setUnbxdPid();
   }
-  componentDidUpdate() {
-    this.setUnbxdPid();
+  componentDidUpdate(prevProps) {
+    if (prevProps.configId !== this.props.configId) {
+      this.setUnbxdPid();
+    }
   }
   setUnbxdPid() {
     console.log('setUnbxdPid function triggered');

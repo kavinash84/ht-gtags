@@ -83,7 +83,9 @@ export default function gaMiddleware() {
           } = window;
           const location = (payload && payload.pathname) || pathname;
           if (document.referrer !== '' && document.referrer !== hostname && isFirstHit !== 1) {
-            Object.defineProperty(document, 'referrer', { get: () => hostname });
+            Object.defineProperty(document, 'referrer', {
+              get: () => hostname
+            });
           }
           if (isFirstHit === 1) dispatch(resetReferrer());
           if (location === '/') {
@@ -512,19 +514,19 @@ export default function gaMiddleware() {
             } = data;
             const skus = [];
 
-            let groupedProducts = [];
+            // let groupedProducts = [];
             let paymentObj = {};
             if (products && products.length) {
-              products.forEach(arr => {
-                if (groupedProducts[arr.sku] && groupedProducts[arr.sku].sku === arr.sku) {
-                  groupedProducts[arr.sku].qty += 1;
-                } else {
-                  groupedProducts[arr.sku] = arr;
-                }
-              });
-              groupedProducts = Object.values(groupedProducts);
-              console.log({ groupedProducts });
-              const cartList = groupedProducts.map(x => {
+              // products.forEach(arr => {
+              //   if (groupedProducts[arr.sku] && groupedProducts[arr.sku].sku === arr.sku) {
+              //     groupedProducts[arr.sku].qty += 1;
+              //   } else {
+              //     groupedProducts[arr.sku] = arr;
+              //   }
+              // });
+              // groupedProducts = Object.values(groupedProducts);
+              // console.log({ groupedProducts });
+              const cartList = products.map(x => {
                 const {
                   // product_info: { product_id },
                   sku,
@@ -591,20 +593,23 @@ export default function gaMiddleware() {
           if (pathname !== '/plan-your-kitchen') {
             if (data && data.length) {
               const imp = data[action.payload];
-              const obj = {
-                event: 'promotionImpression',
-                ecommerce: {
-                  promoView: {
-                    promotions: [
-                      {
-                        ...imp.meta,
-                        position: action.payload + 1,
-                        creative: imp.image
-                      }
-                    ]
+              let obj = {};
+              if (imp && imp.meta) {
+                obj = {
+                  event: 'promotionImpression',
+                  ecommerce: {
+                    promoView: {
+                      promotions: [
+                        {
+                          ...imp.meta,
+                          position: action.payload + 1,
+                          creative: imp.image
+                        }
+                      ]
+                    }
                   }
-                }
-              };
+                };
+              }
               window.dataLayer.push(obj);
             }
           }

@@ -3,17 +3,12 @@ import Select from 'react-select';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-// import { withRouter } from 'react-router';
-import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
-// import { Label } from 'hometown-components-dev/lib/Label';
-import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
-import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
-// import { isEmpty } from 'utils/validation';
-import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
-import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
-// import FormInput from 'hometown-components-dev/lib/Forms/FormInput';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Section from 'hometown-components-dev/lib/SectionHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
 import { getDateFilters } from 'utils/helper';
 import { loadMyCases } from 'redux/modules/mycases';
 
@@ -101,11 +96,11 @@ class MyCasesContainer extends Component {
     const { data } = this.props;
     const { loading } = this.props;
     return (
-      <BoxHtV1 type="block" mb="2rem">
-        <SectionHtV1 display="flex" pt="1.25rem" mb="0" height="auto">
-          <ContainerHtV1 type="container" pr="0" pl="0" width="100%">
-            <RowHtV1 display="block" mr="0" ml="0" mb="1.5rem">
-              <BoxHtV1 col="3" mr="1rem" width="25%" float="left">
+      <Box>
+        <Section mt={0} pt="1.25rem" mb={0} height="auto">
+          <Box pr="0.5rem" pl="0.5rem" width={1}>
+            <Row mr={0} ml={0} mb="1.5rem">
+              <Box mr="1rem" width="25%" float="left">
                 <Select
                   placeholder="Select From Date"
                   defaultValue={null}
@@ -113,8 +108,8 @@ class MyCasesContainer extends Component {
                   onChange={this.onChangeDate}
                   options={getDateFilters(this.FILTER_CONFIG)}
                 />
-              </BoxHtV1>
-              <BoxHtV1 col="3" mr="1rem" width="25%" float="left">
+              </Box>
+              <Box mr="1rem" width="25%" float="left">
                 <Select
                   placeholder="Select Case Status"
                   defaultValue={null}
@@ -122,9 +117,9 @@ class MyCasesContainer extends Component {
                   onChange={this.onStatusChange}
                   options={this.STATUS_FILTER}
                 />
-              </BoxHtV1>
-              <BoxHtV1 col="1" mr="1rem" width="8.33%" float="left">
-                <ButtonHtV1
+              </Box>
+              <Box mr="1rem" width="8.33%">
+                <Button
                   disabled={loading}
                   onClick={this.getFilteredCases}
                   border="1px solid"
@@ -137,80 +132,70 @@ class MyCasesContainer extends Component {
                   fontSize="16px"
                 >
                   {loading ? 'Please Wait ...' : 'Find'}
-                </ButtonHtV1>
-              </BoxHtV1>
-            </RowHtV1>
-            <RowHtV1 display="block" mr="0" ml="0">
-              {data.map((item, index) => (
-                <BoxHtV1 col="12" key={String(index)} mb="20px">
-                  <ButtonHtV1
-                    ta="left"
-                    size="block"
-                    border="1px solid rgba(151, 151, 151, 0.47)"
-                    bc="rgba(151, 151, 151, 0.47)"
-                    btnType="btnOutline"
-                    p="0"
-                    onClick={() => this.handleClick(index)}
-                  >
-                    <RowHtV1 type="block" m="0" mb="1rem" className={styles.blockHeading} p="15px 15px !important">
-                      <BoxHtV1 col="6">
-                        <HeadingHtV1 fontSize="1rem" color="textLight" mb="0px" mt="0px" fontFamily="light">
-                          {`Case No - ${item.caseNumber || 'NA'}`}
-                        </HeadingHtV1>
-                      </BoxHtV1>
-                      <BoxHtV1 col="6" ta="right">
-                        {`Status - ${item.status || 'NA'}`}
-                      </BoxHtV1>
-                    </RowHtV1>
-                    <RowHtV1 p="15px 15px" type="block" m="0" mb="0.5rem" className={styles.blockBody}>
-                      <BoxHtV1 col="3" pr="10px">
-                        <TextHtV1 mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
-                          Created Date
-                        </TextHtV1>
-                        <TextHtV1 mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
-                          {item.CreatedDate || ''}
-                        </TextHtV1>
-                      </BoxHtV1>
-                      <BoxHtV1 col="4" pr="10px">
-                        <TextHtV1 whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
-                          Subject
-                        </TextHtV1>
-                        <TextHtV1 whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
-                          {item.subject || ''}
-                        </TextHtV1>
-                      </BoxHtV1>
-                      <BoxHtV1 col="2" pr="10px">
-                        <TextHtV1 whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
-                          Type
-                        </TextHtV1>
-                        <TextHtV1 whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
-                          {item.type || ''}
-                        </TextHtV1>
-                      </BoxHtV1>
-                      <BoxHtV1 col="3" pr="10px">
-                        <TextHtV1 whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
-                          Category
-                        </TextHtV1>
-                        <TextHtV1 whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
-                          {this.getMapping(item.category, item.subcategory, 'cat')}
-                        </TextHtV1>
-                      </BoxHtV1>
-                      {/* <Div col="3" pr="10px">
-                        <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
-                          SubCategory
-                        </Text>
-                        <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
-                          {this.getMapping(item.category, item.subcategory, 'subcat')}
-                        </Text>
-                      </Div> */}
-                    </RowHtV1>
-                  </ButtonHtV1>
-                </BoxHtV1>
-              ))}
-            </RowHtV1>
-          </ContainerHtV1>
-        </SectionHtV1>
-      </BoxHtV1>
+                </Button>
+              </Box>
+            </Row>
+            {data.map((item, index) => (
+              <Box mb="2.5rem" className={styles.blockWrapper} key={String(index)}>
+                {/* <Button
+                  ta="left"
+                  size="block"
+                  border="1px solid rgba(151, 151, 151, 0.47)"
+                  bc="rgba(151, 151, 151, 0.47)"
+                  btnType="btnOutline"
+                  p={0}
+                  onClick={() => this.handleClick(index)}
+                > */}
+                <Row m={0} className={styles.blockHeading}>
+                  <Box width={1 / 2}>
+                    <Heading fontSize="1rem" color="textLight" mb="0px" mt="0px" fontFamily="light">
+                      {`Case No - ${item.caseNumber || 'NA'}`}
+                    </Heading>
+                  </Box>
+                  <Box width={1 / 2} textAlign="right">
+                    {`Status - ${item.status || 'NA'}`}
+                  </Box>
+                </Row>
+                <Row className={styles.blockBody}>
+                  <Box width={3 / 12} pr={10}>
+                    <Text mt={0} color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
+                      Created Date
+                    </Text>
+                    <Text mt={8} color="rgba(0, 0, 0, 0.6)" fontFamily="light">
+                      {item.CreatedDate || ''}
+                    </Text>
+                  </Box>
+                  <Box width={3.5 / 12} pr={10}>
+                    <Text whiteSpace="normal" mt={0} color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
+                      Subject
+                    </Text>
+                    <Text whiteSpace="normal" mt={8} color="rgba(0, 0, 0, 0.6)" fontFamily="light">
+                      {item.subject || ''}
+                    </Text>
+                  </Box>
+                  <Box width={2.5 / 12} pr={10}>
+                    <Text whiteSpace="normal" mt={0} color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
+                      Type
+                    </Text>
+                    <Text whiteSpace="normal" mt={8} color="rgba(0, 0, 0, 0.6)" fontFamily="light">
+                      {item.type || ''}
+                    </Text>
+                  </Box>
+                  <Box width={3 / 12} pr={10}>
+                    <Text whiteSpace="normal" mt={0} color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
+                      Category
+                    </Text>
+                    <Text whiteSpace="normal" mt={8} color="rgba(0, 0, 0, 0.6)" fontFamily="light">
+                      {this.getMapping(item.category, item.subcategory, 'cat')}
+                    </Text>
+                  </Box>
+                </Row>
+                {/* </Button> */}
+              </Box>
+            ))}
+          </Box>
+        </Section>
+      </Box>
     );
   }
 }

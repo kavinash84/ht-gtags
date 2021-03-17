@@ -18,6 +18,10 @@ import Header from 'components/Header';
 import SeoContent from 'components/SeoContent';
 import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 import Body from 'hometown-components-dev/lib/BodyHtV1';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 
 import {
   getProducts,
@@ -59,7 +63,8 @@ import CANONICALS from 'data/canonical';
   selectedPincode: state.pincode.selectedPincode,
   sessionId: state.app.sessionId,
   cartSKUs: getCartListSKU(state.cart),
-  reloadListing: state.products.reloadListing
+  reloadListing: state.products.reloadListing,
+  offer: state.offer
 }))
 @withRouter
 export default class Listing extends Component {
@@ -89,7 +94,8 @@ export default class Listing extends Component {
     selectedPincode: PropTypes.string,
     sessionId: PropTypes.string.isRequired,
     cartSKUs: PropTypes.array,
-    reloadListing: PropTypes.bool
+    reloadListing: PropTypes.bool,
+    offer: PropTypes.object
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -117,7 +123,8 @@ export default class Listing extends Component {
     categoryBar: [],
     selectedPincode: '',
     cartSKUs: [],
-    reloadListing: false
+    reloadListing: false,
+    offer: {}
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.pincode !== this.props.pincode) {
@@ -130,6 +137,100 @@ export default class Listing extends Component {
       history.push(`${pathname}${search}`);
     }
   }
+  renderOffers = offer => (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        width: '90%'
+      }}
+    >
+      <Col
+        // width={[1 / 2, 1 / 2, 1 / 4]}
+        // width="30%"
+        textAlign="center"
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flex: 1,
+          borderRight: 'whiteMedium'
+        }}
+      >
+        {/* <Text variant="textLight" color="white">
+            {item.offer.name || ''}
+          </Text> */}
+        <a href={offer.offer.link}>
+          <Box variant="textLight" color="white" py={2}>
+            {(offer.offer.name && offer.offer.name.split('|')[0]) || ''}
+          </Box>
+          <Heading variant="heading.medium" color="white" py={2}>
+            {(offer.offer.name && offer.offer.name.split('|')[1]) || ''}
+          </Heading>
+        </a>
+        {/* <Heading fontSize={16} color="white">
+            {item.extra_offer.name || ''}
+          </Heading> */}
+      </Col>
+      <Col
+        // width={[1 / 2, 1 / 2, 1 / 4]}
+        // width="30%"
+        textAlign="center"
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flex: 1,
+          borderRight: 'whiteMedium'
+        }}
+      >
+        {/* <Text variant="textLight" color="white">
+            {item.offer.name || ''}
+          </Text> */}
+        <Box variant="textLight" color="white" py={2}>
+          {(offer.coupon.name && offer.coupon.name.split('|')[0]) || ''}
+        </Box>
+        {offer.coupon.name.split('|')[1] && (
+          <Heading variant="heading.medium" color="white" py={2}>
+            Upto {offer.coupon.name.split('|')[1] || ''}
+          </Heading>
+        )}
+        <Heading variant="heading.medium" color="white" py={2}>
+          Coupon Code: {(offer.coupon.code && offer.coupon.code) || ''}
+        </Heading>
+        {/* <Heading fontSize={16} color="white">
+            {item.extra_offer.name || ''}
+          </Heading> */}
+      </Col>
+      <Col
+        // width={[1 / 2, 1 / 2, 1 / 4]}
+        // width="30%"
+        textAlign="center"
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flex: 1
+        }}
+      >
+        {/* <Text variant="textLight" color="white">
+            {item.offer.name || ''}
+          </Text> */}
+        <a href={offer.extra_offer.link}>
+          <Heading variant="heading.medium" color="white" py={2}>
+            {offer.extra_offer.name || ''}
+          </Heading>
+        </a>
+        {/* <Heading fontSize={16} color="white">
+            {item.extra_offer.name || ''}
+          </Heading> */}
+      </Col>
+    </div>
+    // )
+  );
   render() {
     const {
       // loading,
@@ -157,7 +258,8 @@ export default class Listing extends Component {
       selectedPincode,
       sessionId,
       cartSKUs,
-      reloadListing
+      reloadListing,
+      offer
     } = this.props;
     let page;
     const {
@@ -168,6 +270,7 @@ export default class Listing extends Component {
     } else page = currentPage;
     const previousPage = !page || Number(page) === 1 ? '' : `?page=${page - 1}`;
     const NextPage = !page ? '?page=2' : `?page=${Number(page) + 1}`;
+    console.log(this.props);
     /* eslint-disable react/no-danger */
     return (
       <Wrapper>
@@ -184,6 +287,14 @@ export default class Listing extends Component {
         </Helmet>
         <Body>
           <Header />
+          {/* Offer banner */}
+          {offer && offer.data && offer.data.coupon && !offer.data.error && (
+            <Box bg="heading" pt={30} pb={20}>
+              <Container>
+                <Row justifyContent="center">{this.renderOffers(offer.data || [])}</Row>
+              </Container>
+            </Box>
+          )}
           {/* {!loaded && loading && !products.length && <ListingShimmer />} */}
           <Box>
             {/* {loaded && products.length && !shimmer ? (

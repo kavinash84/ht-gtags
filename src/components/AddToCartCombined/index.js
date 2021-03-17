@@ -90,7 +90,7 @@ const AddToCartCombined = ({
         <Row mx={0} alignItems="center">
           <Box as={Link} to={CART_URL} width={1}>
             <Button variant="outline.primary.large" width={240} sx={{ fontSize: 14 }}>
-              Added to Cart
+              Goto Cart
             </Button>
           </Box>
         </Row>
