@@ -68,27 +68,18 @@ export default class Html extends Component {
         jsUrl: 'https://praxisretail--produat.my.salesforce.com/embeddedservice/5.0/esw.min.js'
       };
     }
-    let unbxdScripts = {};
-    if (process.env.UNBXD && process.env.UNBXD === 'production') {
+    let unbxdScripts = {
+      autosuggestJs: 'https://libraries.unbxdapi.com/prod-hometown808961566375586_autosuggest.js',
+      autosuggestCss: 'https://libraries.unbxdapi.com/prod-hometown808961566375586_autosuggest.css',
+      searchJs: 'https://libraries.unbxdapi.com/prod-hometown808961566375586_search.js',
+      searchCss: 'https://libraries.unbxdapi.com/prod-hometown808961566375586_search.css'
+    };
+    if (process.env.UNBXD && process.env.UNBXD !== 'production') {
       unbxdScripts = {
-        autosuggestJs: 'https://libraries.unbxdapi.com/prod-hometown808961566375586_autosuggest.js',
-        autosuggestCss: 'https://libraries.unbxdapi.com/prod-hometown808961566375586_autosuggest.css',
-        searchJs: 'https://libraries.unbxdapi.com/prod-hometown808961566375586_search.js',
-        searchCss: 'https://libraries.unbxdapi.com/prod-hometown808961566375586_search.css'
-      };
-    } else if (process.env.UNBXD && process.env.UNBXD === 'beta') {
-      unbxdScripts = {
-        autosuggestJs: 'https://sandbox.unbxd.io/stage-hometown808961566375562_autosuggest.js',
-        autosuggestCss: 'https://sandbox.unbxd.io/stage-hometown808961566375562_autosuggest.css',
-        searchJs: 'https://sandbox.unbxd.io/stage-hometown808961566375562_search.js',
-        searchCss: 'https://sandbox.unbxd.io/stage-hometown808961566375562_search.css'
-      };
-    } else {
-      unbxdScripts = {
-        autosuggestJs: 'https://sandbox.unbxd.io/stage-hometown808961566375562_autosuggest.js',
-        autosuggestCss: 'https://sandbox.unbxd.io/stage-hometown808961566375562_autosuggest.css',
-        searchJs: 'https://sandbox.unbxd.io/stage-hometown808961566375562_search.js',
-        searchCss: 'https://sandbox.unbxd.io/stage-hometown808961566375562_search.css'
+        autosuggestJs: 'https://sandbox.unbxd.io/dev-hometown808961566375617_autosuggest.js',
+        autosuggestCss: 'https://sandbox.unbxd.io/dev-hometown808961566375617_autosuggest.css',
+        searchJs: 'https://sandbox.unbxd.io/dev-hometown808961566375617_search.js',
+        searchCss: 'https://sandbox.unbxd.io/dev-hometown808961566375617_search.css'
       };
     }
     const head = Helmet.renderStatic();
