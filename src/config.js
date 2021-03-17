@@ -23,13 +23,22 @@ module.exports = Object.assign(
       head: {
         titleTemplate: '%s',
         meta: [
-          { name: 'description', content: 'Buy Furniture, HomeDecor, Online !' },
+          {
+            name: 'description',
+            content: 'Buy Furniture, HomeDecor, Online !'
+          },
           { charset: 'utf-8' },
           { property: 'og:site_name', content: 'HomeTown' },
-          { property: 'og:image', content: 'https://www.hometown.in/images/local_v2/icons/homeTown_logo.png' },
+          {
+            property: 'og:image',
+            content: 'https://www.hometown.in/images/local_v2/icons/homeTown_logo.png'
+          },
           { property: 'og:locale', content: 'en_US' },
           { property: 'og:title', content: 'HomeTown.in' },
-          { property: 'og:description', content: 'Buy Furniture, Homeware Online' },
+          {
+            property: 'og:description',
+            content: 'Buy Furniture, Homeware Online'
+          },
           { property: 'og:card', content: 'summary' },
           { property: 'og:site', content: 'hometown' },
           { property: 'fb:app_id', content: '987405118075400' },

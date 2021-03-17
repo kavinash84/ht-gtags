@@ -133,10 +133,15 @@ app.use(bodyParser.json());
 }); */
 
 app.use('/checkout/finish/payment/', async (req, res) => {
+  console.log('inside /checkout/finish/payment/ route');
   try {
     const cookies = getCookie(req.header('cookie'), 'persist:root');
-    const session = JSON.parse(JSON.parse(cookies).app).sessionId;
-    const data = req.body;
+    const appData = JSON.parse(JSON.parse(cookies).app);
+    const { sessionId: cookieSession, walletType } = appData;
+    const {
+      body: data,
+      body: { udf1 }
+    } = req;
     const source = req.headers['user-agent'];
     let ua = { isMobile: false };
     if (source) {
@@ -148,6 +153,10 @@ app.use('/checkout/finish/payment/', async (req, res) => {
         ismsite: 1
       };
     }
+    let session = '';
+    if (walletType) {
+      session = cookieSession;
+    } else session = udf1;
     const options = {
       url: process.env.PAYMENT_URL,
       method: 'POST',
@@ -161,13 +170,17 @@ app.use('/checkout/finish/payment/', async (req, res) => {
       })
     };
     const response = await axios(options);
-    if (response && response.data && response.data.status === 'success') return res.redirect(PAYMENT_SUCCESS);
+
+    if (response && response.data && response.data.status === 'success') {
+      console.log(response.data);
+      return res.redirect(PAYMENT_SUCCESS);
+    }
+
     if (response && response.data) {
       return res.redirect(`${PAYMENT_FAILURE}/?order=${response.data.order_id}`);
     }
   } catch (error) {
-    console.log(error);
-    return res.redirect(PAYMENT_FAILURE);
+    return res.redirect(`${PAYMENT_FAILURE}`);
   }
 });
 /* eslint-disable max-len */
@@ -354,6 +367,7 @@ app.use(async (req, res) => {
     }
     const styleTags = sheet.getStyleElement();
     const bundles = getBundles(getChunks(), modules);
+
     const html = (
       <Html
         styleTags={styleTags}

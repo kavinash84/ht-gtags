@@ -6,6 +6,7 @@ import {
   processEasyEmi,
   submitPaymentDetails
 } from '../modules/paymentoptions';
+import { setOrderId, setWalletName } from '../modules/app';
 import { PAYMENT_SUCCESS, PAYMENT_FAILURE } from '../../helpers/Constants';
 
 export default function paymentsMiddleware() {
@@ -17,12 +18,14 @@ export default function paymentsMiddleware() {
     if (type === 'paymentOptions/SELECTED_PAYMENT_METHOD') {
       const { gateway, session } = action;
       dispatch(setSelectedGatewayInSession(gateway, session));
+      dispatch(setWalletName(''));
     }
     if (type === 'paymentOptions/SELECTED_PAYMENT_METHOD_DETAILS') {
       const { gateway, data } = action.payLoad;
       if (gateway === 'Wallet') {
         const { walletName } = data;
         dispatch(setWalletType(walletName, sessionId));
+        dispatch(setWalletName(walletName));
       }
       if (gateway === 'Emi') {
         const { emiCode } = data;
@@ -107,7 +110,14 @@ export default function paymentsMiddleware() {
       }
     }
     if (type === 'paymentOptions/SUBMIT_PAYMENT_DETAILS_SUCCESS') {
-      const { result, data } = action;
+      const { result, data, walletType } = action;
+      const {
+        form_data: { order_nr: orderNumber, customer_id: customerId }
+      } = result;
+      if (orderNumber) {
+        dispatch(setOrderId(orderNumber, customerId, walletType));
+      }
+
       if (data && data.EasyEmi) {
         if (Object.keys(data.EasyEmi).length > 0) {
           if (result && result.success) {

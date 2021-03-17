@@ -1,30 +1,27 @@
 import React from 'react';
-import ProductCarousel from 'components/ProductCarousel';
+import OfferBanner from '../Home/OfferBanner';
+import ProductCarousel from '../ProductCarousel';
 import Carousel from './Carousel';
-import GridLayout from './GridLayout';
+import GridLayout from '../Home/GridView';
 
-const CommonLayout = (component, categoryName, data, grid = 3) => {
+const CommonLayout = (component, categoryName, data, isProduct = false) => {
   switch (component) {
     case 1:
-      return <Carousel categoryName={categoryName} data={data} layout="square" />;
+      return <Carousel categoryName={categoryName} data={data} />;
     case 2:
-      return <Carousel categoryName={categoryName} data={data} layout="round" />;
+      return <GridLayout categoryName={categoryName} data={data} isProduct={isProduct} showList />;
     case 3:
-      return <GridLayout categoryName={categoryName} data={data} layout="square" layoutStyle="grid" col={grid} />;
-    case 4:
-      return <GridLayout categoryName={categoryName} data={data} layout="round" layoutStyle="grid" col={grid} />;
-    case 5:
       return (
-        <ProductCarousel
-          height="220px"
-          pb="1.5rem"
-          title={categoryName}
-          data={data}
-          length={(data && data.length) || 0}
+        <OfferBanner
+          image={data.length ? data[0].image_url : ''}
+          url={data.length ? data[0].url_key : ''}
+          target={data.length ? data[0].target : ''}
         />
       );
+    case 4:
+      return <ProductCarousel height="220px" title={categoryName} data={data} length={(data && data.length) || 0} />;
     default:
-      return <Carousel categoryName={categoryName} data={data} layout="square" />;
+      return <Carousel categoryName={categoryName} data={data} />;
   }
 };
 

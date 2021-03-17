@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Wishlist from 'components/Wishlist';
-import Div from 'hometown-components-dev/lib/Div';
-import Empty from 'hometown-components-dev/lib/Empty';
-import Img from 'hometown-components-dev/lib/Img';
-import Section from 'hometown-components-dev/lib/Section';
-import MyMenu from 'components/MyMenu';
-import MenuFooter from 'containers/MenuFooter';
+import Footer from 'components/Footer';
+import Header from 'components/Header';
+import Body from 'hometown-components-dev/lib/BodyHtV1';
+import Empty from 'hometown-components-dev/lib/EmptyHtV1';
+import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
+import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
+import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 import { getSKUList, getWishList } from '../../selectors/wishlist';
 
 const WishListIcon = require('../../../static/wishlist-empty.jpg');
@@ -30,14 +31,16 @@ export default class WishlistContainer extends Component {
   };
   render() {
     const { wishlistData, wishListedSKUs, loadingList } = this.props;
+    console.log(wishlistData, '@#$%^&*&^%$#@#$%^&*');
     return (
-      <Div>
-        <MenuFooter pageTitle="Wishlist">
-          <MyMenu page="wishlist" />
+      <Wrapper>
+        <Body>
+          {/* Header */}
+          <Header />
           {wishlistData && wishlistData.length ? (
             <Wishlist list={wishlistData} wishList={wishListedSKUs} loadingList={loadingList} />
           ) : (
-            <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
+            <SectionHtV1 display="flex" p="0.625rem" pt="1.25rem" mb="0">
               <Empty
                 title="No wishlisted products yet !!"
                 subTitle="Add items to it"
@@ -45,12 +48,14 @@ export default class WishlistContainer extends Component {
                 url="/"
                 bg="#fafafa"
               >
-                <Img src={WishListIcon} width="initial" m="auto" alt="No items yet !!" />
+                <ImageHtV1 src={WishListIcon} width="initial" m="auto" alt="No items yet !!" />
               </Empty>
-            </Section>
+            </SectionHtV1>
           )}
-        </MenuFooter>
-      </Div>
+          {/* Footer */}
+          <Footer />
+        </Body>
+      </Wrapper>
     );
   }
 }

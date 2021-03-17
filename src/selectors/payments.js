@@ -1,6 +1,15 @@
 import { createSelector } from 'reselect';
 
-const allowedOptions = () => ['CreditCard', 'DebitCard', 'NetBanking', 'Emi', 'CashOnDelivery', 'Wallet', 'EasyEmi'];
+const allowedOptions = () => [
+  'CreditCard',
+  'DebitCard',
+  'NetBanking',
+  'Emi',
+  'CashOnDelivery',
+  'Wallet',
+  'EasyEmi',
+  'Upi'
+];
 
 export const getPaymentState = options =>
   options.data && options.data.paymentData

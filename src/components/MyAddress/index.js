@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import Container from 'hometown-components-dev/lib/Container';
-import Div from 'hometown-components-dev/lib/Div';
-import Row from 'hometown-components-dev/lib/Row';
-import Section from 'hometown-components-dev/lib/Section';
-import Button from 'hometown-components-dev/lib/Buttons';
-import Text from 'hometown-components-dev/lib/Text';
-import FormInput from 'hometown-components-dev/lib/Forms/FormInput';
-import MyMenu from 'components/MyMenu';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Card from 'hometown-components-dev/lib/CardHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
 import { addAddress, updateAddress } from 'redux/modules/myaddress';
 // Validators
 import {
@@ -68,6 +67,7 @@ export default class DeliveryAddress extends Component {
   };
   constructor(props) {
     super(props);
+    this.formRef = React.createRef();
     this.state = {
       name: '',
       address1: '',
@@ -117,7 +117,6 @@ export default class DeliveryAddress extends Component {
     const {
  email, name, pincode, address1, address2, address3, phone
 } = this.state;
-
     const nameError = isEmpty(name);
     const emailError = isEmpty(email) || !validateEmail(email);
     const phoneError = isEmpty(phone) || validateMobile(phone).error;
@@ -158,7 +157,7 @@ export default class DeliveryAddress extends Component {
     this.setState({
       name: value,
       nameError: checkError || check,
-      nameErrorMessage: check ? 'Special character not allowed !' : nameErrorMessage
+      nameErrorMessage: check ? 'Numbers and special characters are not allowed !' : nameErrorMessage
     });
   };
   onChangeAddress = (e, key) => {
@@ -234,6 +233,11 @@ export default class DeliveryAddress extends Component {
       [name]: value
     });
   };
+  scrollToFormRef = () => {
+    const heightQt = window.innerHeight / 1.5;
+    const currentOffsetQt = this.formRef.current.offsetTop;
+    window.scrollTo(0, currentOffsetQt + heightQt);
+  };
   handleClick = index => {
     const { data } = this.props;
     const {
@@ -246,15 +250,15 @@ export default class DeliveryAddress extends Component {
       email,
       id_customer_address: addressId
     } = data[index];
-    const address1Data = validateAddress(address1, 'address1');
-    const address2Data = validateAddress(address2, 'address2');
-    const address3Data = validateAddress(address3, 'address3');
-    const address1Error = address1Data.error;
-    const address1ErrorMessage = address1Data.errorMessage;
-    const address2Error = address2Data.error;
-    const address2ErrorMessage = address2Data.errorMessage;
-    const address3Error = address3Data.error;
-    const address3ErrorMessage = address3Data.errorMessage;
+    const address1Data = address1 && (address1, 'address1');
+    const address2Data = address2 && validateAddress(address2, 'address2');
+    const address3Data = address3 && validateAddress(address3, 'address3');
+    const address1Error = address1Data && address1Data.error;
+    const address1ErrorMessage = address1Data && address1Data.errorMessage;
+    const address2Error = address2Data && address2Data.error;
+    const address2ErrorMessage = address2Data && address2Data.errorMessage;
+    const address3Error = address3Data && address3Data.error;
+    const address3ErrorMessage = address3Data && address3Data.errorMessage;
     this.setState({
       address1,
       address2,
@@ -265,15 +269,16 @@ export default class DeliveryAddress extends Component {
       address2ErrorMessage,
       address3Error,
       address3ErrorMessage,
-      addForm: false,
-      editForm: true,
       currentaddressindex: index,
       email,
       pincode,
       phone,
       name,
-      addressId
+      addressId,
+      addForm: false,
+      editForm: true
     });
+    this.scrollToFormRef();
   };
   handleSubmit = e => {
     const { dispatch } = this.context.store;
@@ -298,6 +303,7 @@ export default class DeliveryAddress extends Component {
       phone: '',
       name: ''
     });
+    this.scrollToFormRef();
   };
   checkDisabled = () => {
     const {
@@ -309,8 +315,6 @@ export default class DeliveryAddress extends Component {
   };
   render() {
     const {
-      emailError,
-      emailErrorMessage,
       phoneError,
       phoneErrorMessage,
       pincodeError,
@@ -338,49 +342,80 @@ export default class DeliveryAddress extends Component {
       currentaddressindex
       // gst
     } = this.state;
-    const { data, useremail } = this.props;
+    const { data } = this.props;
     const { loading } = this.props;
     return (
-      <Div type="block" mb="2rem">
-        <MyMenu page="address" />
-        <Section display="flex" pt="1.25rem" mb="0" height="auto">
-          <Container type="container" pr="0" pl="0">
-            <Row display="block" mr="0" ml="0">
-              {data.map((item, index) => (
-                <Div col="4" pr="0.625rem" key={`${item.id_address_customer || '_'}_${String(index)}`}>
-                  <button
-                    className={`${styles.addressBtn} ${index === currentaddressindex && styles.active}`}
-                    onClick={() => this.handleClick(index)}
-                  >
-                    <b>{item.full_name}</b>
-                    <br />
-                    {item.address1 || ''}
-                    {item.address2 && <br />}
-                    {item.address2 || ''}
-                    {item.address3 && <br />}
-                    {item.address3 || ''}
-                    <br />
-                    {item.city || ''}, {item.pincode || ''}
-                    <br />
-                    {item.state || ''}
-                    <br />
-                  </button>
-                </Div>
-              ))}
+      <Box type="block" mb="2rem">
+        {/* <MyMenu page="address" /> */}
+        <Box
+          sx={{
+            display: 'flex',
+            boxShadow: 'none',
+            height: 'auto',
+            position: 'relative',
+            marginBottom: '0',
+            padding: '1.25rem 0.9375rem 0.9375rem'
+          }}
+        >
+          <Row mx={0} width={1}>
+            {data.map((item, index) => (
+              <Box
+                col="4"
+                width="33.33%"
+                key={`${item.id_address_customer || '_'}_${String(index)}`}
+                px={8}
+                onClick={() => this.handleClick(index)}
+              >
+                <Card
+                  className={`${styles.addressBtn} ${index === currentaddressindex && styles.active}`}
+                  sx={{
+                    borderRadius: 4,
+                    bg: 'white',
+                    border: 'solid 2px #efefef',
+                    padding: '0.625rem 1rem',
+                    color: 'rgba(0, 0, 0, 0.6)',
+                    textAlign: 'left',
+                    lineHeight: 1.6,
+                    fontSize: 14,
+                    width: '100%',
+                    height: 135,
+                    marginBottom: 16
+                  }}
+                >
+                  <div className={styles.addressOuter}>
+                    <div className={styles.addressInner}>
+                      <b>{item.full_name}</b>
+                      <br />
+                      {item.address1 || ''}
+                      {item.address2 && <br />}
+                      {item.address2 || ''}
+                      {item.address3 && <br />}
+                      {item.address3 || ''}
+                      <br />
+                      {item.city || ''}, {item.pincode || ''}
+                      <br />
+                      {item.state || ''}
+                      <br />
+                    </div>
+                  </div>
+                </Card>
+              </Box>
+            ))}
 
-              <Div col="2">
-                <button className={styles.addAddressBtn} onClick={this.toggleAddAddresForm}>
-                  <img src={addIcon} alt="Add another address" />
-                  <Text color="rgba(0, 0, 0, 0.6)" ta="center">
-                    Add address
-                  </Text>
-                </button>
-              </Div>
-            </Row>
+            <Box col="2">
+              <Button className={styles.addAddressBtn} onClick={this.toggleAddAddresForm}>
+                <Image src={addIcon} alt="Add another address" />
+                <Text color="rgba(0, 0, 0, 0.6)" ta="center">
+                  Add address
+                </Text>
+              </Button>
+            </Box>
+          </Row>
+          <div ref={this.formRef}>
             {editForm && (
               <form onSubmit={this.handleSubmit}>
-                <Row display="block" mr="0" ml="0" mt="1rem">
-                  <Div col="5">
+                <Row display="block" mx={0} mt="1rem">
+                  <Box col="5">
                     <FormInput
                       label="Full Name *"
                       type="text"
@@ -441,48 +476,52 @@ export default class DeliveryAddress extends Component {
                       feedBackError={pincodeError}
                       feedBackMessage={pincodeErrorMessage}
                     />
-                    <FormInput
-                      label="Email ID *"
-                      type="text"
-                      placeholder=""
-                      onChange={this.onChangeEmail}
-                      value={useremail}
-                      feedBackError={emailError}
-                      feedBackMessage={emailErrorMessage}
-                    />
                     {/* <FormInput
-                      hide
-                      label="GST Number "
-                      type="text"
-                      placeholder=""
-                      onChange={this.onChangeGST}
-                      value={gst}
-                      feedBackError={gstError}
-                      feedBackMessage={gstErrorMessage}
-                    /> */}
-                  </Div>
+                    style={{ background: '#80808026' }}
+                    readonly
+                    label="Email ID *"
+                    type="text"
+                    placeholder=""
+                    onChange={() => {}}
+                    value={useremail}
+                    feedBackError={emailError}
+                    feedBackMessage={emailErrorMessage}
+                  /> */}
+                    {/* <FormInput
+                    hide
+                    label="GST Number "
+                    type="text"
+                    placeholder=""
+                    onChange={this.onChangeGST}
+                    value={gst}
+                    feedBackError={gstError}
+                    feedBackMessage={gstErrorMessage}
+                  /> */}
+                  </Box>
                 </Row>
-                <Row display="block" mr="0" ml="0">
-                  <Div col="2">
+                <Row display="block" mx={0}>
+                  <Box col="2">
                     <Button
                       size="block"
                       btnType="primary"
                       fontFamily="regular"
                       height="42px"
                       mt="1.5rem"
+                      width="100%"
                       onClick={this.handleSubmit}
                       disabled={this.checkDisabled()}
                     >
                       {loading ? 'Please wait ...' : 'Save'}
                     </Button>
-                  </Div>
+                  </Box>
                 </Row>
               </form>
             )}
+
             {addForm && (
               <form onSubmit={this.handleSubmit}>
-                <Row display="block" mr="0" ml="0" mt="1rem">
-                  <Div col="5">
+                <Row display="block" mx={0} mt="1rem">
+                  <Box col="5">
                     <FormInput
                       label="Full Name *"
                       type="text"
@@ -543,46 +582,47 @@ export default class DeliveryAddress extends Component {
                       feedBackError={pincodeError}
                       feedBackMessage={pincodeErrorMessage}
                     />
-                    <FormInput
-                      label="Email ID *"
-                      type="text"
-                      placeholder=""
-                      onChange={this.onChangeEmail}
-                      value={useremail}
-                      feedBackError={emailError}
-                      feedBackMessage={emailErrorMessage}
-                    />
                     {/* <FormInput
-                      label="GST Number "
-                      type="text"
-                      placeholder=""
-                      onChange={this.onChangeGST}
-                      value={gst}
-                      feedBackError={gstError}
-                      feedBackMessage={gstErrorMessage}
-                    /> */}
-                  </Div>
+                    label="Email ID *"
+                    type="text"
+                    placeholder=""
+                    onChange={this.onChangeEmail}
+                    value={useremail}
+                    feedBackError={emailError}
+                    feedBackMessage={emailErrorMessage}
+                  />}
+                  {/* <FormInput
+                    label="GST Number "
+                    type="text"
+                    placeholder=""
+                    onChange={this.onChangeGST}
+                    value={gst}
+                    feedBackError={gstError}
+                    feedBackMessage={gstErrorMessage}
+                  /> */}
+                  </Box>
                 </Row>
-                <Row display="block" mr="0" ml="0">
-                  <Div col="2">
+                <Row display="block" mx={0}>
+                  <Box col="2">
                     <Button
                       size="block"
                       btnType="primary"
                       fontFamily="regular"
                       height="42px"
                       mt="1.5rem"
+                      bg="rgb(249, 141, 41)"
                       onClick={this.handleSubmit}
                       disabled={this.checkDisabled()}
                     >
                       {loading ? 'Please wait ...' : 'Save'}
                     </Button>
-                  </Div>
+                  </Box>
                 </Row>
               </form>
             )}
-          </Container>
-        </Section>
-      </Div>
+          </div>
+        </Box>
+      </Box>
     );
   }
 }

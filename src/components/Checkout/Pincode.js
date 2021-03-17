@@ -2,11 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import FormInput from 'hometown-components-dev/lib/Forms/FormInput';
-import Div from 'hometown-components-dev/lib/Div';
 import * as actionCreators from 'redux/modules/address';
-
-const styles = require('./Pincode.scss');
+import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
 
 const onChange = (dispatcher, onChangePincode, loadPincodeDetails, formType) => e => {
   const {
@@ -29,21 +26,17 @@ const Pincode = ({
   feedBackMessage,
   formType
 }) => (
-  <Div className={styles.checkoutPincode} pt="0" pb="0.3125rem">
-    <FormInput
-      label="Pincode *"
-      type="text"
-      placeholder=""
-      backgroundColor="#fff"
-      borderColor="rgba(151,151,151,0.47)"
-      height="2.5rem"
-      onChange={onChange(setPincodeQuery, onChangePincode, loadPincodeDetails, formType)}
-      value={pincode}
-      feedBackError={feedBackError}
-      feedBackMessage={feedBackMessage}
-      id={id}
-    />
-  </Div>
+  <FormInput
+    label="Pincode *"
+    type="text"
+    placeholder=""
+    onChange={onChange(setPincodeQuery, onChangePincode, loadPincodeDetails, formType)}
+    value={pincode}
+    feedBackError={feedBackError}
+    feedBackMessage={feedBackMessage}
+    id={id}
+    variant="input"
+  />
 );
 
 Pincode.defaultProps = {

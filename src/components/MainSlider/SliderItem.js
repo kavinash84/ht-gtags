@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Img from 'hometown-components-dev/lib/Img';
+import CardHtV1 from 'hometown-components-dev/lib/CardHtV1';
+import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
 
 /* TO DO Add ProgressiveImage */
 const SliderItem = ({
@@ -9,14 +10,14 @@ const SliderItem = ({
 }) => {
   if (target) {
     return (
-      <a href={url} title={title} target={target} rel="noopener noreferrer" onClick={onClick}>
-        <Img src={image} alt={title} width="100%" />
-      </a>
+      <CardHtV1 href={url} title={title} target={target} rel="noopener noreferrer" onClick={onClick} as="a">
+        <ImageHtV1 src={image} alt={title} variant="image" />
+      </CardHtV1>
     );
   }
   return (
     <Link to={url} onClick={onClick}>
-      <Img src={image} alt={title} width="100%" />
+      <ImageHtV1 src={image} alt={title} variant="image" />
     </Link>
   );
 };

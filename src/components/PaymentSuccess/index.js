@@ -1,17 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Container from 'hometown-components-dev/lib/Container';
-import Div from 'hometown-components-dev/lib/Div';
-import Row from 'hometown-components-dev/lib/Row';
-import Section from 'hometown-components-dev/lib/Section';
-import ShippedTo from 'hometown-components-dev/lib/ShippedTo';
-import Heading from 'hometown-components-dev/lib/Heading';
-import Text from 'hometown-components-dev/lib/Text';
-import Img from 'hometown-components-dev/lib/Img';
-import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
+
+/**
+ * Components
+ */
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
+import Img from 'hometown-components-dev/lib/ImageHtV1';
+import ImageShimmer from 'hometown-components-dev/lib/ImageShimmerHtV1';
+import ShippedTo from 'hometown-components-dev/lib/ShippedToHtV1';
 import { formatAmount } from 'utils/formatters';
-import TitleBar from '../TitleBar';
-import Oops from './Oops';
+// import Oops from './Oops';
 
 const styles = require('./PaymentSuccess.scss');
 const PaymentSuccessIcon = require('../../../static/success.svg');
@@ -37,104 +38,95 @@ const PaymentSuccess = ({
  first_name, last_name, address1, city, postcode, state
 } = shipping_address;
     return (
-      <Div type="block">
-        <TitleBar title="Payment Success" />
-        <Container type="container" pr="0" pl="0">
-          <Section bg="sectionBgDark" display="block" mt="3rem" p="1.5rem" pt="1.5rem" pb="1.5rem" mb="0" height="auto">
-            <Row display="block" mr="0" ml="0" m-xs-l="0">
-              <Div col="12">
-                <Img width="4.5rem" mr="1rem" float="left" src={PaymentSuccessIcon} alt="Test" />
-                <Heading mt="0.625rem" mb="0.3125rem">
-                  Thank you for placing your order.
-                </Heading>
-                <Text fontSize="1rem" mb="0" mt="0">
-                  Your order number is <b>{order_no}</b> placed on &nbsp;
-                  <b>{order_date}</b>. You will shortly receive an e-mail and SMS confirming your order.
-                </Text>
-              </Div>
+      <Box>
+        <Row mx={0}>
+          <Box col="12">
+            <Img width="4.5rem" mr="1rem" float="left" src={PaymentSuccessIcon} alt="Test" />
+            <Heading mt="0.625rem" mb="0.3125rem">
+              Thank you for placing your order.
+            </Heading>
+            <Text fontSize="1rem" mb="0" mt="0">
+              Your order number is <b>{order_no}</b> placed on &nbsp;
+              <b>{order_date}</b>. You will shortly receive an e-mail and SMS confirming your order.
+            </Text>
+          </Box>
+        </Row>
+        <Row mx={0}>
+          <Box col="3" pr="1.5rem" pt="0">
+            <ShippedTo
+              name={`${first_name || ''} ${last_name || ''}`}
+              address={address1}
+              city={city}
+              pincode={postcode}
+              state={state}
+              edit={false}
+            />
+          </Box>
+          <Row col="9" pt="0">
+            <Row mr="0" ml="0" mb="1rem">
+              <Heading fontSize="1.25rem" color="textDark" mb="0px" mt="0px" fontFamily="regular">
+                Order Information
+              </Heading>
             </Row>
-          </Section>
-        </Container>
-        <Section display="flex" pt="3rem" pb="2.5rem" mb="0" height="auto">
-          <Container type="container" pr="0" pl="0">
-            <Row display="block" mr="0" ml="0">
-              <Div col="3" pr="1.5rem" pt="0">
-                <ShippedTo
-                  name={`${first_name || ''} ${last_name || ''}`}
-                  address={address1}
-                  city={city}
-                  pincode={postcode}
-                  state={state}
-                  edit={false}
-                />
-              </Div>
-              <Div col="9" pt="0">
-                <Row display="block" mr="0" ml="0" mb="1rem">
-                  <Heading fontSize="1.25rem" color="textDark" mb="0px" mt="0px" fontFamily="regular">
-                    Order Information
-                  </Heading>
-                </Row>
-                <Row type="block" m="0" mb="1.5rem" mt="0">
-                  <Div col="12">
-                    <table className="table">
-                      <tbody>
-                        <tr>
-                          <th colSpan="2">Product</th>
-                          <th>Delivery</th>
-                          <th width="100px">Quantity</th>
-                          <th width="150px" align="right">
-                            Cost
-                          </th>
-                        </tr>
-                        {cart_products.map((product, index) => (
-                          <tr key={String(index)}>
-                            <td>
-                              <ImageShimmer src={product.image_url} height="60px">
-                                {imageURL => <img className="thumb" src={imageURL} alt={product.name} />}
-                              </ImageShimmer>
-                            </td>
-                            <td>{product.name}</td>
-                            <td>{product.delivery_text}</td>
-                            <td>{product.qty}</td>
-                            <td align="right">Rs. {formatAmount(product.total_price)}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </Div>
-                </Row>
-                <Row type="block" m="0" mb="1.5rem" mt="0">
-                  <Div col="8" />
-                  <Div col="4" ta="right">
-                    <Div className={styles.totalAmountRow}>
-                      Sub-Total Amount : Rs. <b>{formatAmount(sub_total_amount)}</b>
-                    </Div>
-                    <Div className={styles.totalAmountRow}>
-                      Shipping Charges : Rs. <b>{formatAmount(shipping_charges)}</b>
-                    </Div>
-                    <Div className={styles.totalAmountRow}>
-                      Discount / Coupon Value : Rs. <b>{formatAmount(discount_coupon_value)}</b>
-                    </Div>
-                    {set_discount ? (
-                      <Div className={styles.totalAmountRow}>
-                        Combo Discount : Rs. <b>{formatAmount(Math.abs(set_discount))}</b>
-                      </Div>
-                    ) : (
-                      ''
-                    )}
-                    <Div className={styles.totalAmountRow}>
-                      Net Order Amount : Rs. <b>{formatAmount(net_order_amount)}</b>
-                    </Div>
-                  </Div>
-                </Row>
-              </Div>
+            <Row mb={15}>
+              <Box col="12">
+                <table className="table">
+                  <tbody>
+                    <tr>
+                      <th colSpan="2">Product</th>
+                      <th>Delivery</th>
+                      <th width="100px">Quantity</th>
+                      <th width="150px" align="right">
+                        Cost
+                      </th>
+                    </tr>
+                    {cart_products.map((product, index) => (
+                      <tr key={String(index)}>
+                        <td>
+                          <ImageShimmer src={product.image_url} height="60px">
+                            {imageURL => <img className="thumb" src={imageURL} alt={product.name} />}
+                          </ImageShimmer>
+                        </td>
+                        <td>{product.name}</td>
+                        <td>{product.delivery_text}</td>
+                        <td>{product.qty}</td>
+                        <td align="right">Rs. {formatAmount(product.total_price)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </Box>
             </Row>
-          </Container>
-        </Section>
-      </Div>
+            <Row mb={15}>
+              <Box col="8" />
+              <Box col="4" ta="right">
+                <Box className={styles.totalAmountRow}>
+                  Sub-Total Amount : Rs. <b>{formatAmount(sub_total_amount)}</b>
+                </Box>
+                <Box className={styles.totalAmountRow}>
+                  Shipping Charges : Rs. <b>{formatAmount(shipping_charges)}</b>
+                </Box>
+                <Box className={styles.totalAmountRow}>
+                  Discount / Coupon Value : Rs. <b>{formatAmount(discount_coupon_value)}</b>
+                </Box>
+                {set_discount ? (
+                  <Box className={styles.totalAmountRow}>
+                    Combo Discount : Rs. <b>{formatAmount(Math.abs(set_discount))}</b>
+                  </Box>
+                ) : (
+                  ''
+                )}
+                <Box className={styles.totalAmountRow}>
+                  Net Order Amount : Rs. <b>{formatAmount(net_order_amount)}</b>
+                </Box>
+              </Box>
+            </Row>
+          </Row>
+        </Row>
+      </Box>
     );
   }
-  return <Oops />;
+  return null;
 };
 
 PaymentSuccess.defaultProps = {

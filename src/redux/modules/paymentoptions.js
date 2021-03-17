@@ -89,7 +89,9 @@ const paymentJSON = {
 };
 
 const getURL = gateway => {
-  if (gateway === 'CreditCard' || gateway === 'DebitCard' || gateway === 'NetBanking') return `Payu/${gateway}`;
+  if (gateway === 'CreditCard' || gateway === 'DebitCard' || gateway === 'NetBanking' || gateway === 'Upi') {
+    return `Payu/${gateway}`;
+  }
   if (gateway === 'Emi' || gateway === 'EasyEmi' || gateway === 'Wallet' || gateway === 'CashOnDelivery') {
     return `${gateway}/${gateway}`;
   }
@@ -192,6 +194,14 @@ const paymentObject = (sessionId, selectedGateway, paymentData, cardType = 'visa
       easyemi_auth_response: easyEmiAuthResponse,
       easyemi_downpayment: easyEmiDownPayment
     };
+  } else if (selectedGateway === 'Upi') {
+    return {
+      ...paymentJSON,
+      session_id: sessionId,
+      payment_method_type: selectedGateway,
+      payment_method: 'Upi',
+      ...paymentData
+    };
   }
 };
 
@@ -236,7 +246,16 @@ const appendData = (gateway, state, data) => {
       };
     }
   }
-
+  if (data.Upi) {
+    // if (data.cardNumber.length > 19) {
+    // || !Number(data.cardNumber) removed
+    return {
+      [gateway]: {
+        ...state.paymentMethodDetails[gateway]
+      }
+    };
+    // }
+  }
   return {
     [gateway]: {
       ...state.paymentMethodDetails[gateway],
@@ -492,7 +511,7 @@ const submitPaymentDetailsEasyEmi = (sessionId, data, cardType) => ({
   cardType
 });
 
-export const submitPaymentDetails = (sessionId, data, cardType, success) => {
+export const submitPaymentDetails = (sessionId, data, cardType, selectedGateway, walletType, success) => {
   if (data && 'EasyEmi' in data && (!success || success === undefined)) {
     return submitPaymentDetailsEasyEmi(sessionId, data, cardType);
   }
@@ -507,8 +526,10 @@ export const submitPaymentDetails = (sessionId, data, cardType, success) => {
         throw error;
       }
     },
+    walletType,
     data,
-    cardType
+    cardType,
+    selectedGateway
   };
 };
 

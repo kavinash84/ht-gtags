@@ -1,9 +1,17 @@
 import React from 'react';
-import Div from 'hometown-components-dev/lib/Div';
-import Row from 'hometown-components-dev/lib/Row';
-import Heading from 'hometown-components-dev/lib/Heading';
-import Img from 'hometown-components-dev/lib/Img';
 
+/**
+ * Components
+ */
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Flex from 'hometown-components-dev/lib/FlexHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+
+/**
+ * Icons
+ */
 const aeIcon = require('../../../static/american-express.svg');
 const maestroIcon = require('../../../static/maestro.svg');
 const mastercardIcon = require('../../../static/mastercard.svg');
@@ -11,32 +19,45 @@ const visaIcon = require('../../../static/visa.svg');
 const intBankingIcon = require('../../../static/net-banking.png');
 const walletIcon = require('../../../static/wallet-icon.png');
 
-const PaymentMethods = () => (
-  <Div mt="1rem" pl="0.625rem" pr="0.625rem">
-    <Heading fontSize="1em" mb="0.625rem" color="secondary">
-      We Accept
+const PaymentMethods = props => (
+  <Box
+    textAlign="center"
+    pt={[20, 20, 10]}
+    pb={10}
+    sx={{ border: '2px solid #979797', position: 'relative' }}
+    m={['0 -15px', '0 -15px', 0]}
+    {...props}
+  >
+    <Heading
+      sx={{
+        position: 'absolute',
+        fontSize: 14,
+        top: [-13, -13, -7],
+        left: [16, 16, 40],
+        zIndex: 1,
+        color: '#474747',
+        bg: '#f5f5f5',
+        width: [150, 150, 'auto']
+      }}
+    >
+      Guaranteed Secure Checkout
     </Heading>
-    <Row ml="0" mr="0">
-      <Div col="2" mb="0" p="0 5px">
-        <Img src={visaIcon} alt="visaCard" width="100%" />
-      </Div>
-      <Div col="2" mb="0" p="0 5px">
-        <Img src={mastercardIcon} alt="Master Card" width="100%" />
-      </Div>
-      <Div col="2" mb="0" p="0 5px">
-        <Img src={maestroIcon} alt="Maestro" width="100%" />
-      </Div>
-      <Div col="2" mb="0" p="0 5px">
-        <Img src={aeIcon} alt="Amex" width="100%" />
-      </Div>
-      <Div col="2" mb="0" p="6px 5px">
-        <Img src={intBankingIcon} alt="Diners Club" width="100%" />
-      </Div>
-      <Div col="2" mb="0" p="5px 5px">
-        <Img height="24px" src={walletIcon} alt="Wallet" width="100%" />
-      </Div>
-    </Row>
-  </Div>
+    <Text variant="smallSecondary" py={5}>
+      verified by
+    </Text>
+    <Flex
+      justifyContent={['flex-start', 'flex-start', 'space-between']}
+      px={15}
+      sx={{ flexWrap: ['wrap', 'wrap', 'nowrap'] }}
+    >
+      <Image src={visaIcon} alt="visaCard" height={30} mr={[5, 5, 0]} mb={[5, 5, 0]} sx={{ flexShrink: 0 }} />
+      <Image src={mastercardIcon} alt="Master Card" height={30} mr={[5, 5, 0]} mb={[5, 5, 0]} sx={{ flexShrink: 0 }} />
+      <Image src={maestroIcon} alt="Maestro" height={30} mr={[5, 5, 0]} mb={[5, 5, 0]} sx={{ flexShrink: 0 }} />
+      <Image src={aeIcon} alt="Amex" height={30} mr={[5, 5, 0]} mb={[5, 5, 0]} sx={{ flexShrink: 0 }} />
+      <Image src={intBankingIcon} alt="Diners Club" height={30} mr={[5, 5, 0]} mb={[5, 5, 0]} sx={{ flexShrink: 0 }} />
+      <Image src={walletIcon} alt="Wallet" height={30} mr={[5, 5, 0]} mb={[5, 5, 0]} sx={{ flexShrink: 0 }} />
+    </Flex>
+  </Box>
 );
 
 export default PaymentMethods;

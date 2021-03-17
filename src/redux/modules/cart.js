@@ -29,6 +29,7 @@ const CHECKCART_SUCCESS = 'cart/CHECKCART_SUCCESS';
 const CHECKCART_FAIL = 'cart/CHECKCART_FAIL';
 const RESET_CART_CHECK = 'cart/RESET_CART_CHECK';
 const SET_CURRENT_KEY = 'cart/SET_CURRENT_KEY';
+const SET_QUANTITY_FLAG = 'cart/SET_QUANTITY_FLAG';
 
 const UPDATE_CART_SUMMARY_AFTER_COUPON = 'cart/UPDATE_CART_SUMMARY_AFTER_COUPON';
 
@@ -41,6 +42,7 @@ const initialState = {
   loading: false,
   data: [],
   summary: {},
+  demo_landing_page_url: '',
   loaded: false,
   addedToCart: false,
   cartUpdated: false,
@@ -48,7 +50,8 @@ const initialState = {
   checkingCart: false,
   cartChecked: false,
   key: '',
-  couponlistToggle: false
+  couponlistToggle: false,
+  quantityChange: false
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -63,6 +66,8 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         data: action.result && 'cart' in action.result ? action.result.cart : [],
         summary: action.result && 'summary' in action.result ? action.result.summary : {},
+        demo_landing_page_url:
+          action.result && 'demo_landing_page_url' in action.result ? action.result.demo_landing_page_url : '',
         loading: false,
         loaded: true,
         couponlistToggle: false
@@ -84,6 +89,7 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         addingToCart: false,
         addedToCart: true,
+        quantityChange: false,
         couponlistToggle: false,
         data: action.result && 'cart' in action.result ? action.result.cart.cart : [],
         summary: action.result && 'cart' in action.result ? action.result.cart.summary : {}
@@ -128,6 +134,7 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         cartUpdating: false,
         cartUpdated: true,
+        quantityChange: false,
         data: action.result && 'cart' in action.result ? action.result.cart.cart : [],
         summary: action.result && 'cart' in action.result ? action.result.cart.summary : {},
         couponlistToggle: false
@@ -226,6 +233,11 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         couponlistToggle: false
       };
+    case SET_QUANTITY_FLAG:
+      return {
+        ...state,
+        quantityChange: action.value
+      };
     case CLEAR_CART:
       return {
         ...initialState
@@ -261,7 +273,7 @@ export const loadCart = (session, pincode) => ({
   }
 });
 
-export const addToCart = (key, sku, simpleSku, session, pincode) => dispatch => {
+export const addToCart = (key, sku, simpleSku, session, pincode, configId) => dispatch => {
   dispatch(setCurrentKey(key));
   return dispatch({
     types: [ADD_TO_CART, ADD_TO_CART_SUCCESS, ADD_TO_CART_FAIL],
@@ -275,15 +287,21 @@ export const addToCart = (key, sku, simpleSku, session, pincode) => dispatch => 
           qty: 1
         };
         const response = await client.post(ADDTOCART_API, postData);
+        console.log('response check', response);
         return response;
       } catch (error) {
         throw error;
       }
-    }
+    },
+    configId,
+    key,
+    sku,
+    simpleSku,
+    pincode
   });
 };
 
-export const addToCartCombined = (setId, skus, sessionId, pincode, uniqueSetName) => dispatch => {
+export const addToCartCombined = (setId, skus, sessionId, pincode, configId, uniqueSetName) => dispatch => {
   dispatch(setCurrentKey(setId));
   return dispatch({
     types: [ADD_TO_CART_COMBINED, ADD_TO_CART_COMBINED_SUCCESS, ADD_TO_CART_COMBINED_FAIL],
@@ -301,11 +319,12 @@ export const addToCartCombined = (setId, skus, sessionId, pincode, uniqueSetName
       } catch (error) {
         throw error;
       }
-    }
+    },
+    configId
   });
 };
 
-export const updateCart = (cartId, sku, simpleSku, session, pincode, qty) => dispatch => {
+export const updateCart = (cartId, sku, simpleSku, session, pincode, qty, configId) => dispatch => {
   dispatch(setCurrentKey(cartId));
   return dispatch({
     types: [UPDATE_CART, UPDATE_CART_SUCCESS, UPDATE_CART_FAIL],
@@ -324,11 +343,13 @@ export const updateCart = (cartId, sku, simpleSku, session, pincode, qty) => dis
       } catch (error) {
         throw error;
       }
-    }
+    },
+    configId,
+    qty
   });
 };
 
-export const removeFromCart = (cartId, session, pincode = PINCODE) => dispatch => {
+export const removeFromCart = (cartId, session, pincode = PINCODE, qty = '', configId = '') => dispatch => {
   dispatch(setCurrentKey(cartId));
   return dispatch({
     types: [REMOVE_FROM_CART, REMOVE_FROM_CART_SUCCESS, REMOVE_FROM_CART_FAIL],
@@ -339,7 +360,9 @@ export const removeFromCart = (cartId, session, pincode = PINCODE) => dispatch =
       } catch (error) {
         throw error;
       }
-    }
+    },
+    qty,
+    configId
   });
 };
 
@@ -359,7 +382,9 @@ export const checkCart = sessionId => ({
   types: [CHECKCART, CHECKCART_SUCCESS, CHECKCART_FAIL],
   promise: async ({ client }) => {
     try {
-      const response = await client.post(`${CHECKCART_API}`, { session_id: sessionId });
+      const response = await client.post(`${CHECKCART_API}`, {
+        session_id: sessionId
+      });
       return response;
     } catch (error) {
       throw error;
@@ -385,4 +410,8 @@ export const toggleCouponList = () => ({
 });
 export const hideCouponList = () => ({
   type: HIDE_COUPON_LIST
+});
+export const setQuantityFlag = value => ({
+  type: SET_QUANTITY_FLAG,
+  value
 });

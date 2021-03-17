@@ -147,8 +147,8 @@
 	/* Wishlist Btn */
 	.wishListBtn {
 		position: absolute;
-		top: 10px;
-		right: 10px;
+		top: 5px;
+		right: -10px;
 		z-index: 1;
 		line-height: 1;
 		&:hover {
@@ -157,9 +157,8 @@
 		svg{
 			cursor: pointer;
 			overflow: visible;
-			width: 30px !important;
-			height: 30px !important;
-			background: #f5f5f5;
+			width: 48px !important;
+			height: 48px !important;
 			border-radius: 100%;
 			#heart{
 				transform-origin:center;
@@ -405,7 +404,7 @@
 		}
 	}
 	.slick-next {
-		right: -35px !important;
+		right: 15px !important;
 		z-index: 1 !important;
 		&:before {
       content: url('../../../static/right-arrow.png') !important;
@@ -415,7 +414,7 @@
     }
 	}
 	.slick-prev {
-		left: -35px !important;
+		left: 15px !important;
 		z-index: 1 !important;
 		&:before {
       content: url('../../../static/left-arrow.png') !important;
@@ -428,7 +427,26 @@
 		color: #000 !important;
 		font-size: 26px !important;
 	}
-
+	.homeCarouselSlider {
+		.slick-prev {
+			top: 40% !important;
+			left: -50px !important;
+		}
+		.slick-next {
+			top: 40% !important;
+			right: -50px !important;
+		}
+	}
+	.categoryCarousel {
+		.slick-prev {
+			top: 44% !important;
+			left: -50px !important;
+		}
+		.slick-next {
+			top: 44% !important;
+			right: -50px !important;
+		}
+	}
 	.prodDetailsCarousel {
 		padding-left: 80px;
 		.slick-next {
@@ -471,33 +489,28 @@
 		}
 	}
 	.pdpThumbSlider {
-		min-height: 360px;
-		padding-top: 50px;
-		padding-bottom: 50px;
+		padding-top: 20px;
 		.slick-prev {
-			left: calc(50% - 22px) !important;
-    	top: 0 !important;
-    	transform: rotate(90deg);
+			left: -44px !important;
+    	top: 78px !important;
 		}
 		.slick-next {
-			left: calc(50% - 22px) !important;
-			bottom: 0 !important;
-			transform: rotate(90deg);
-			top: initial !important;
+			right: -44px !important;
+			top: 78px !important;
+			// transform: rotate(90deg);
 		}
 		.pdpThumbSliderItem {
 			padding: 2px 0;
 		}
 		.slick-slide {
 			border: 3px solid #fff;
-			height: 111px;
 		}
 		.slick-current {
 			border: 3px solid $primary;
     	opacity: 0.8;
 		}
 		.slick-track {
-			height: 560px !important;
+			// height: 560px !important;
 		}
 	}
 	.prodCarousel {
@@ -515,6 +528,12 @@
 		}
 		.slick-prev {
 			left: -20px !important;
+		}
+	}
+	.recommendedSlider {
+		.slick-track {
+			margin-left: 0 !important;
+    	margin-right: auto !important;
 		}
 	}
 	.customModal {
@@ -564,10 +583,10 @@
 				border-right: none;
 				content: "";
 				height: 6px;
-				left: 2px;
+				left: 1px;
 				opacity: 0;
 				position: absolute;
-				top: 4px;
+				top: 2px;
 				-webkit-transform: rotate(-45deg);
 				-ms-transform: rotate(-45deg);
 				transform: rotate(-45deg);
@@ -805,9 +824,9 @@
 	}
 	.error {
 		color: #dc3545;
-	  font-size: 12px;
-	  margin-bottom: 0;
-	  font-family: regular;
+		font-size: 12px;
+		margin-bottom: 0;
+		font-family: regular;
 		text-transform: capitalize;
 	}
 	.react-autosuggest__suggestion {
@@ -842,6 +861,8 @@
 	.signupModal,.loginModal {
 		max-width: inherit !important;
 		padding: 0;
+		min-width: 400px;
+		width: 1000px;
 	}
 	.casesModal {
 		max-width: 480px;
@@ -896,6 +917,10 @@
 	}
 	.updateProfileModal {
     width: 25rem;
+    padding: 2rem 2.5rem;
+	}
+	.forgotPasswordModal {
+    width: 600px;
     padding: 2rem 2.5rem;
 	}
 	.google-login-btn {

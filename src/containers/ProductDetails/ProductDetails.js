@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ProductDetailsContainer from 'components/ProductDetails';
-import Menu from 'containers/MenuNew/index';
+
+/**
+ * Components
+ */
+import Body from 'hometown-components-dev/lib/BodyHtV1';
+import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
+
+/**
+ * Page Components
+ */
 import Footer from 'components/Footer';
-import Section from 'hometown-components-dev/lib/Section';
+import Header from 'components/Header';
+import ProductDetailsContainer from 'components/ProductDetails';
 import ProductDetailsShimmer from 'components/ProductDetails/ProductDetailsShimmer';
-import ProductNotFoundContainer from './ProductNotFound';
+import ProductNotFound from './ProductNotFound';
 
 @connect(({ productdetails }) => ({
   ...productdetails
@@ -17,19 +26,23 @@ export default class ProductDetails extends Component {
  loading, loaded, history, productDescription
 } = this.props;
     return (
-      <Section p="0" mb="0">
-        <div className="wrapper">
-          <Menu />
+      <Wrapper>
+        <Body>
+          {/* Header */}
+          <Header />
+
+          {/* PDP Content */}
           {loading && !loaded && <ProductDetailsShimmer />}
-          {!loading && loaded && productDescription && productDescription.error_message && <ProductNotFoundContainer />}
-          {!loading && !productDescription.error_message && loaded && (
-            <div>
-              <ProductDetailsContainer history={history} />
-            </div>
+          {!loading && loaded && productDescription && !productDescription.error_message ? (
+            <ProductDetailsContainer history={history} />
+          ) : (
+            <ProductNotFound />
           )}
-        </div>
-        <Footer />
-      </Section>
+
+          {/* Footer */}
+          <Footer />
+        </Body>
+      </Wrapper>
     );
   }
 }

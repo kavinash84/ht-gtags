@@ -1,6 +1,12 @@
 import { createSelector } from 'reselect';
 
 export const cartList = cart => cart.data || [];
+export const getSKU = (cart, skuId) => {
+  const data = cart.data || [];
+  const result = data.filter(item => item.configurable_sku === skuId);
+  const sku = result.length ? result[0] : {};
+  return sku;
+};
 
 export const cartSummary = cart =>
   cart.summary || {
@@ -11,6 +17,7 @@ export const getCartList = createSelector(
   [cartList],
   data => data.filter(item => item.product_info.product_id !== '') || []
 );
+export const getCartSKU = createSelector([getSKU], sku => sku);
 
 export const getCartCount = createSelector([cartSummary], items => items.items_count || 0);
 

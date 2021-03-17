@@ -8,6 +8,8 @@
       "listen_timeout": 15000,
       "env": {
         "NODE_ENV": "production",
+        "SF_ENV": "production",
+        "UNBXD": "production",
         "PORT": 8084,
         "NODE_PATH": "src",
         "APIHOST": "api.hometown.in/api/",
@@ -18,6 +20,8 @@
       },
       "env_beta": {
         "NODE_ENV": "production",
+        "SF_ENV": "beta",
+        "UNBXD": "beta",
         "PORT": 8084,
         "NODE_PATH": "src",
         "APIHOST": "beta-api.hometown.in/api/",
@@ -28,6 +32,8 @@
       },
       "env_stage": {
         "NODE_ENV": "production",
+        "SF_ENV": "stage",
+        "UNBXD": "stage",
         "PORT": 8084,
         "NODE_PATH": "src",
         "APIHOST": "stage-api.hometown.in/api/",

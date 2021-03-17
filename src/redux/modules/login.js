@@ -27,10 +27,13 @@ const initialState = {
   loggingOut: false,
   isLoggedOut: false,
   askContact: false,
+  askName: false,
   otp: '',
   error: false,
   errorMessage: '',
-  loginType: ''
+  loginType: '',
+  tokenData: {},
+  askEmail: false
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -51,7 +54,11 @@ export default function reducer(state = initialState, action = {}) {
         accessToken: action.result.access_token,
         refreshToken: action.result.refresh_token,
         meta: action.result.meta,
-        loginError: ''
+        askContact: false,
+        askName: false,
+        askEmail: false,
+        loginError: '',
+        tokenData: {}
       };
     case LOGIN_FAIL:
       return {
@@ -59,7 +66,11 @@ export default function reducer(state = initialState, action = {}) {
         loggingIn: false,
         loginError: action.error,
         askContact: action.error.askContact || false,
-        loginType: action.error.loginType || ''
+        askName: action.error.askName || false,
+        askEmail: action.error.askEmail || false,
+        loginType: action.error.loginType || '',
+        tokenData:
+          (action.error.askContact || action.error.askName) && action.error.tokenData ? action.error.tokenData : {}
       };
     case LOGIN_AFTER_SIGNUP:
       return {
@@ -70,7 +81,10 @@ export default function reducer(state = initialState, action = {}) {
         accessToken: action.data.access_token,
         refreshToken: action.data.refresh_token,
         meta: action.data.meta,
-        loginError: ''
+        loginError: '',
+        askContact: false,
+        askName: false,
+        tokenData: {}
       };
     case LOGOUT:
       return {
@@ -84,7 +98,10 @@ export default function reducer(state = initialState, action = {}) {
         isLoggedIn: false,
         accessToken: null,
         refreshToken: null,
-        isLoggedOut: action.result.success
+        isLoggedOut: action.result.success,
+        askContact: false,
+        askName: false,
+        tokenData: {}
       };
     case LOGOUT_FAIL:
       return {
@@ -133,7 +150,9 @@ const setToken = ({ client }) => response => {
     return;
   }
   /* setting cookie for server call */
-  cookie.set('Authorization', `Bearer ${response.access_token}`, { expires: 8 / 24 });
+  cookie.set('Authorization', `Bearer ${response.access_token}`, {
+    expires: 8 / 24
+  });
   client.setJwtToken(response.access_token);
 };
 
@@ -149,7 +168,10 @@ export const login = data => ({
       const password = data.otp ? data.otp : data.password;
       const method = data.otp ? 'otp' : 'password';
       const mobile = data.otp ? '' : `&mobile=${data.phone}`;
-      const postData = `${username}&password=${password}&type=${type}&method=${method}&grant_type=password&client_id=${clientId}&client_secret=${clientSecret}${mobile}`;
+      const name = data.name ? `&full_name=${data.name}` : '';
+      // const postData = `${username}&password=${password}&type=${type}&method=${method}&grant_type=password&client_id=${clientId}&client_secret=${clientSecret}${mobile}${name}`;
+      const email = data.email && type === 'mobile' ? `&email=${data.email}` : '';
+      const postData = `${username}&password=${password}&type=${type}&method=${method}&grant_type=password&client_id=${clientId}&client_secret=${clientSecret}${mobile}${name}${email}`;
       const response = await client.post(LOGIN_API, postData);
       setToken({ client })(response);
       return response;
@@ -163,37 +185,44 @@ export const login = data => ({
     }
   }
 });
-
-export const googleLogin = (result, session, phone) => ({
-  types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
-  promise: async ({ client }) => {
-    try {
+export const googleLogin = (result, session, phone, username = null) => (dispatch, getState) =>
+  dispatch({
+    types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
+    promise: async ({ client }) => {
       const {
-        tokenId,
-        profileObj: { name = '' }
-      } = result;
-      const postData = {
-        token: tokenId,
-        client_secret: clientSecret,
-        client_id: clientId,
-        grant_type: 'password',
-        session_id: session,
-        phone,
-        full_name: name
-      };
-      const response = await client.post(GOOGLE_LOGIN_API, postData);
-      await setToken({ client })(response);
-      return response;
-      // throw { askContact: true };
-    } catch (err) {
-      const error = {
-        ...err,
-        loginType: 'google'
-      };
-      throw error;
+        userLogin: { tokenData }
+      } = getState();
+      // const data = phone && tokenData.tokenId ? tokenData : result;
+      const data = (phone || username) && tokenData.tokenId ? tokenData : result;
+      try {
+        const {
+          tokenId,
+          profileObj: { name }
+        } = data;
+        const postData = {
+          token: tokenId,
+          client_secret: clientSecret,
+          client_id: clientId,
+          grant_type: 'password',
+          session_id: session,
+          phone,
+          full_name: name,
+          username
+        };
+        const response = await client.post(GOOGLE_LOGIN_API, postData);
+        await setToken({ client })(response);
+        return response;
+        // throw { askContact: true };
+      } catch (err) {
+        const error = {
+          ...err,
+          loginType: 'google',
+          tokenData: data
+        };
+        throw error;
+      }
     }
-  }
-});
+  });
 
 export const loginUserAfterSignUp = data => ({
   type: LOGIN_AFTER_SIGNUP,

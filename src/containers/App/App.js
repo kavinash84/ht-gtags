@@ -6,6 +6,7 @@ import { renderRoutes } from 'react-router-config';
 import { withRouter } from 'react-router';
 import { provideHooks } from 'redial';
 import Helmet from 'react-helmet';
+import WebToChat from 'containers/WebToChat';
 import { wrapDispatch } from 'multireducer';
 import { loadCategories, loadMainMenu, loadBanners, isLoaded as isSectionLoaded } from 'redux/modules/homepage';
 import { generateSession, isLoaded as isSessionSet } from 'redux/modules/app';
@@ -17,12 +18,15 @@ import { PINCODE } from 'helpers/Constants';
 import config from 'config';
 import Cookie from 'js-cookie';
 import * as notifActions from 'redux/modules/notifs';
+import { togglePopUp, dismiss } from 'redux/modules/webtochat';
 import Notifs from 'components/Notifs';
 import { isKeyExists } from 'utils/helper';
 
 /* ====== Components ====== */
 import Alert from 'hometown-components-dev/lib/Alert';
 import ThemeProvider from 'hometown-components-dev/lib/ThemeProviderHtV1';
+
+const styles = require('./App.scss');
 
 const { SITE_URL } = process.env;
 const SITE_URL_MOBILE = 'https://m.hometown.in';
@@ -49,6 +53,7 @@ const SITE_URL_MOBILE = 'https://m.hometown.in';
     if (getState().userLogin.isLoggedIn && !isProfileLoaded(getState())) {
       await dispatch(loadUserProfile()).catch(error => console.log(error));
     }
+
     if (sessionId && !isCartLoaded(getState())) {
       await dispatch(loadCart(sessionId, defaultPincode)).catch(error => console.log(error));
     }
@@ -76,9 +81,13 @@ const SITE_URL_MOBILE = 'https://m.hometown.in';
     pincode: state.pincode,
     app: state.app,
     notifs: state.notifs,
-    profile: state.profile
+    profile: state.profile,
+    cartSynced: state.cart.cartSynced,
+    webtochat: state.webtochat
   }),
   {
+    toggleWebToChat: togglePopUp,
+    dismissebToChat: dismiss,
     pushState: push,
     loginUser: loginUserAfterSignUp,
     ...notifActions
@@ -91,7 +100,8 @@ export default class App extends Component {
     pushState: PropTypes.func.isRequired,
     loginUser: PropTypes.func.isRequired,
     pincode: PropTypes.shape({
-      selectedPincode: PropTypes.string
+      selectedPincode: PropTypes.string,
+      isPincodeFilter: PropTypes.bool
     }),
     signUp: PropTypes.shape({
       response: PropTypes.object,
@@ -109,7 +119,10 @@ export default class App extends Component {
       global: PropTypes.array
     }).isRequired,
     notifSend: PropTypes.func.isRequired,
-    profile: PropTypes.object.isRequired
+    profile: PropTypes.object.isRequired,
+    cartSynced: PropTypes.bool.isRequired,
+    visible: PropTypes.bool.isRequired,
+    webtochat: PropTypes.object.isRequired
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -123,7 +136,8 @@ export default class App extends Component {
       loaded: false
     },
     pincode: {
-      selectedPincode: ''
+      selectedPincode: '',
+      isPincodeFilter: false
     }
   };
 
@@ -159,9 +173,13 @@ export default class App extends Component {
     }
     /* Split Test Cookie */
     Cookie.set('split_test', 'A', { expires: 365 });
+    if (window) {
+      window.getPincode = this.getSelectedPincode;
+      window.isPincodeFilter = this.getPincodeFilter;
+    }
   }
   componentWillReceiveProps(nextProps) {
-    if (window) {
+    if (window && window.embedded_svc) {
       const { profile } = nextProps;
       const { data = {} } = profile;
       const { email = '' } = data;
@@ -175,7 +193,23 @@ export default class App extends Component {
     if (this.props.location !== prevProps.location) {
       window.scrollTo(0, 0);
     }
+    if (this.props.cartSynced !== prevProps.cartSynced) {
+      window.unbxd.handleUserSwitch();
+      console.log('unbxd - window.unbxd.handleUserSwitch(); invoked on sync');
+    }
   }
+  getSelectedPincode = () => {
+    const {
+      pincode: { selectedPincode }
+    } = this.props;
+    return selectedPincode;
+  };
+  getPincodeFilter = () => {
+    const {
+      pincode: { isPincodeFilter }
+    } = this.props;
+    return isPincodeFilter;
+  };
   checkIfSlash = path => {
     let url = path;
     if (path.length && path[path.length - 1] === '/') {
@@ -184,8 +218,12 @@ export default class App extends Component {
     return url;
   };
   render() {
-    const styles = require('./App.scss');
-    const { location, route, notifs } = this.props;
+    const {
+      location,
+      route,
+      notifs,
+      webtochat: { visible }
+    } = this.props;
     const pathname = (location && location.pathname) || '/';
     const url = this.checkIfSlash(pathname);
     return (
@@ -222,17 +260,6 @@ export default class App extends Component {
                     };
                   `}
             </script>
-            <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async="" />
-            <script>
-              {`
-                  var OneSignal = window.OneSignal || [];
-                    OneSignal.push(function() {
-                      OneSignal.init({
-                        appId: "b2f22db2-b562-4530-8888-516550bfbe6d",
-                      });
-                    });
-                `}
-            </script>
           </Helmet>
         )}
         <main className={styles.appContent}>
@@ -240,6 +267,7 @@ export default class App extends Component {
             <Notifs namespace="global" NotifComponent={props => <Alert {...props} show={notifs.global.length} />} />
           </div>
           {renderRoutes(route.routes)}
+          <WebToChat handleOnClose={this.handleOnClose} handleOnAccept={this.handleOnAccept} visible={visible} />
         </main>
       </ThemeProvider>
     );

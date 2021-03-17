@@ -20,6 +20,63 @@ export default function gaMiddleware() {
             vpv: `${pathname}${search}`.trim()
           });
         }
+        // if (
+        //   (type === 'wishList/REMOVE_FROM_WISHLIST_SUCCESS' ||
+        //   type === 'wishList/ADD_TO_WISHLIST_SUCCESS' ||
+        //   type === 'wishList/LOAD_WISHLIST_SUCCESS') &&
+        //   window.unbxd &&
+        //   !!window.unbxd.toggleWishList
+        // ) {
+        //   const { sku, simpleSku } = action;
+        //   window.unbxd.toggleWishList(sku, simpleSku);
+        //   console.log('unbxd toggleWishList callback invoked with - ', sku, simpleSku);
+        // }
+        // if (type === 'categoryPage/LOAD_SUCCESS') {
+        //   const {
+        //     location: { pathname }
+        //   } = window;
+        //   const { id } = action;
+        //   if (window && window.Unbxd && id && pathname) {
+        //     window.Unbxd.track('categoryPage', {
+        //       page: pathname,
+        //       page_type: 'BOOLEAN',
+        //       page_name: id
+        //     });
+        //   }
+        // }
+        if (type === 'wishList/ADD_TO_WISHLIST_SUCCESS') {
+          const { sku, simpleSku, unbxd } = action;
+          if (unbxd) {
+            if (window && !!window.unbxd && !!window.unbxd.toggleWishList) {
+              window.unbxd.toggleWishList(sku, simpleSku);
+              console.log('unbxd toggleWishList callback invoked with - ', sku, simpleSku);
+            } else {
+              console.log('error in calling unbxd toggleWishList callback !');
+            }
+          }
+        }
+        // if ((type === 'login/LOGIN_SUCCESS' || type === 'login/LOGOUT_SUCCESS') && window && window.unbxd) {
+        //   window.unbxd.handleUserSwitch();
+        //   console.log(`unbxd - window.unbxd.handleUserSwitch(); invoked on -${type}`);
+        // }
+        if (
+          (type === 'cart/ADD_TO_CART_SUCCESS' ||
+            type === 'cart/UPDATE_CART_SUCCESS' ||
+            type === 'cart/REMOVE_FROM_CART_SUCCESS') &&
+          window &&
+          window.unbxd
+        ) {
+          window.unbxd.renderCartItemsonSRP();
+          console.log(`unbxd - window.unbxd.renderCartItemsonSRP(); invoked on -${type}`);
+        }
+        if (
+          (type === 'wishList/ADD_TO_WISHLIST_SUCCESS' || type === 'wishList/REMOVE_FROM_WISHLIST_SUCCESS') &&
+          window &&
+          window.unbxd
+        ) {
+          window.unbxd.renderWishListItemsOnSRP();
+          console.log(`unbxd - window.unbxd.renderWishListItemsOnSRP() invoked on -${type}`);
+        }
         if (type === '@@router/LOCATION_CHANGE') {
           const {
             location: { hostname, pathname }
@@ -39,7 +96,7 @@ export default function gaMiddleware() {
               window.google_tag_params.ecomm_totalvalue = getState().cart.summary.total;
               window.google_tag_params.ecomm_prodid = getCartListSKU(getState().cart);
             }
-          } else if (location === '/search/') {
+          } else if (location === '/search') {
             window.google_tag_params.ecomm_pagetype = 'searchresults';
           } else if (location === '/payment-success') {
             window.google_tag_params.ecomm_pagetype = 'purchase';
@@ -87,6 +144,16 @@ export default function gaMiddleware() {
               };
               window.dataLayer.push(eventObject);
             }
+          }
+        }
+        if (type === 'productdetails/LOAD_PRODUCT_DESCRIPTION_SUCCESS') {
+          const {
+            result: {
+              meta: { config_id: pid = '' }
+            }
+          } = action;
+          if (window && window.Unbxd && window.Unbxd.track && pid) {
+            window.Unbxd.track('product_view', { pid });
           }
         }
         if (type === 'productdetails/PRODUCT_DETAILS_TRACK') {
@@ -214,6 +281,21 @@ export default function gaMiddleware() {
               summary: { total }
             }
           } = action.result;
+          const {
+            result: { qty },
+            configId
+          } = action;
+          // if (!configId) {
+          //   window.unbxd.addToCart(key, sku, simpleSku, pincode);
+          //   console.log('unbxd addToCart callback invoked with - ', key, sku, simpleSku, pincode);
+          // }
+          if (window && window.Unbxd && window.Unbxd.track && configId && qty) {
+            window.Unbxd.track('addToCart', {
+              pid: configId,
+              variantId: '',
+              qty: `${qty}`
+            });
+          }
           const [product] =
             action.result && action.result.cart.cart.filter(item => item.id_customer_cart === idcustomerCart);
           const {
@@ -254,6 +336,18 @@ export default function gaMiddleware() {
               summary: { total }
             }
           } = action.result;
+          const {
+            result: { qty: productQty },
+            configId,
+            qty
+          } = action;
+          if (window && window.Unbxd && window.Unbxd.track && configId && productQty) {
+            window.Unbxd.track('addToCart', {
+              pid: configId,
+              variantId: '',
+              qty: `${productQty}`
+            });
+          }
           const [product] =
             action.result && action.result.cart.cart.filter(item => item.id_customer_cart === idcustomerCart);
           const {
@@ -276,7 +370,7 @@ export default function gaMiddleware() {
                       category,
                       list: 'Listing',
                       id: product.configurable_sku,
-                      quantity: product.qty
+                      quantity: Math.abs(qty)
                     }
                   ]
                 }
@@ -295,15 +389,17 @@ export default function gaMiddleware() {
               summary: { total }
             }
           } = action.result;
+          const { qty, configId } = action;
+          if (window && window.Unbxd && window.Unbxd.track && configId && qty) {
+            window.Unbxd.track('cartRemoval', {
+              pid: configId,
+              qty: `${qty}`
+            });
+          }
           const [product] = data.filter(item => item.id_customer_cart === Number(action.result.cartId));
           if (product) {
             const checkKey = isKeyExists(product.product_info, 'category_details');
-            const category = checkKey
-              ? checkKey
-                  .filter(x => x !== null)
-                  .map(item => item.url_key)
-                  .join('/')
-              : '';
+            const category = checkKey ? checkKey.filter(x => x !== null).join('/') : '';
             const {
  name, net_price: netprice, color, brand
 } = product.product_info;
@@ -344,18 +440,25 @@ export default function gaMiddleware() {
           const location = payload.pathname;
           if (location === '/checkout/delivery-address' || '/checkout/payment-options' || '/checkout/review-order') {
             const { data } = getState().cart;
+            const { searchQuery = '' } = getState().search;
             let products;
             if (data) {
               products = data.map(item => {
-                const { name, net_price: netprice, category_details: categoryDetails } = item.product_info;
+                const {
+                  name,
+                  net_price: netprice,
+                  category_details: categoryDetails,
+                  brand,
+                  color
+                } = item.product_info;
                 const category = categoryDetails ? categoryDetails.filter(x => x !== null).join('/') : '';
                 return {
                   name,
                   price: netprice,
-                  brand: '',
+                  brand,
                   id: item.configurable_sku,
                   category,
-                  variant: '',
+                  variant: color,
                   quantity: item.qty
                 };
               });
@@ -369,6 +472,9 @@ export default function gaMiddleware() {
                 }
               }
             };
+            if (location === '/search/' && searchQuery && window.Unbxd && window.Unbxd.track) {
+              window.Unbxd.track('search', { query: searchQuery });
+            }
             if (location === '/checkout/delivery-address') {
               eventObject.ecommerce.checkout.actionField.step = 1;
               eventObject.ecommerce.checkout.actionField.option = 'Shipping and Login';
@@ -395,59 +501,85 @@ export default function gaMiddleware() {
           const { data } = getState().paymentstatus;
           if (data) {
             const {
-              cart_products: products,
+              cart_products: products = [],
               net_order_amount,
               shipping_charges,
-              transaction_id,
+              // transaction_id,
+              order_no,
               coupon_code,
-              customer_type
+              customer_type,
+              unbxd_data: unbxdData = []
             } = data;
             const skus = [];
-            const cartList = products.map(x => {
-              const {
-                sku,
-                name,
-                qty,
-                price,
-                brand,
-                categories,
-                details: {
-                  attributes: { color }
+
+            let groupedProducts = [];
+            let paymentObj = {};
+            if (products && products.length) {
+              products.forEach(arr => {
+                if (groupedProducts[arr.sku] && groupedProducts[arr.sku].sku === arr.sku) {
+                  groupedProducts[arr.sku].qty += 1;
+                } else {
+                  groupedProducts[arr.sku] = arr;
                 }
-              } = x;
-              skus.push(sku);
-              return {
-                id: sku,
-                name,
-                quantity: qty,
-                variant: color,
-                category: categories ? categories.split('|').join('/') : '',
-                price,
-                brand
+              });
+              groupedProducts = Object.values(groupedProducts);
+              console.log({ groupedProducts });
+              const cartList = groupedProducts.map(x => {
+                const {
+                  // product_info: { product_id },
+                  sku,
+                  name,
+                  qty,
+                  price,
+                  brand,
+                  categories,
+                  details: {
+                    attributes: { color }
+                  }
+                } = x;
+                skus.push(sku);
+                return {
+                  id: sku,
+                  name,
+                  quantity: qty,
+                  variant: color,
+                  category: categories ? categories.split('|').join('/') : '',
+                  price,
+                  brand
+                };
+              });
+              paymentObj = {
+                event: 'purchase',
+                ecommerce: {
+                  purchase: {
+                    actionField: {
+                      id: order_no,
+                      affiliation: 'Online Store',
+                      revenue: net_order_amount,
+                      tax: '0',
+                      shipping: shipping_charges,
+                      coupon: coupon_code || ''
+                    },
+                    products: [...cartList]
+                  }
+                }
               };
-            });
-            const paymentObj = {
-              event: 'purchase',
-              ecommerce: {
-                purchase: {
-                  actionField: {
-                    id: transaction_id,
-                    affiliation: 'Online Store',
-                    revenue: net_order_amount,
-                    tax: '',
-                    shipping: shipping_charges,
-                    coupon: coupon_code || ''
-                  },
-                  products: [...cartList]
-                }
-              }
-            };
+            }
             window.google_tag_params.ecomm_pagetype = 'purchase';
             window.google_tag_params.ecomm_prodid = skus;
             window.google_tag_params.ecomm_totalvalue = net_order_amount;
             /* customer type */
             const cust_type = customer_type === 'returning customer' ? 'Repeat' : 'Fresh';
-            window.dataLayer.push(paymentObj, { event: 'buyer_type', type: cust_type });
+            window.dataLayer.push(paymentObj, {
+              event: 'buyer_type',
+              type: cust_type
+            });
+            console.log(window && window.Unbxd && window.Unbxd.track && unbxdData.length);
+            if (window && window.Unbxd && window.Unbxd.track && unbxdData.length) {
+              unbxdData.forEach(p => {
+                window.Unbxd.track('order', p);
+              });
+            }
           }
         }
         if (type === 'mainSlider/BANNER_IMPRESSION') {
@@ -532,13 +664,15 @@ export default function gaMiddleware() {
       }
       if (type === 'cart/ADD_TO_CART_COMBINED_SUCCESS') {
         const {
-          result: { uniqueSetName }
+          result: { uniqueSetName },
+          configId
         } = action;
         const {
           summary: { total }
         } = action.result;
         const items = action.result && action.result.cart ? action.result.cart : [];
         const products = [];
+        const unbxdData = [];
         items.forEach(item => {
           const {
  name, net_price: netprice, color, brand, category_details: categoryDetails
@@ -556,6 +690,14 @@ export default function gaMiddleware() {
           };
           products.push(event);
         });
+        configId.forEach(id => {
+          unbxdData.push({
+            pid: id || '',
+            variantId: '',
+            qty: '1'
+          });
+        });
+        console.log('Analytics for combined', unbxdData);
         window.dataLayer.push(
           {
             event: 'Combo_offer',
@@ -575,6 +717,12 @@ export default function gaMiddleware() {
             cart_total: total
           }
         );
+
+        if (window && window.Unbxd && window.Unbxd.track && unbxdData.length) {
+          unbxdData.forEach(p => {
+            window.Unbxd.track('addToCart', p);
+          });
+        }
       }
       if (type === 'loadStores/SET_SELECTED_STORE') {
         const {

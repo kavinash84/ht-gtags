@@ -1,6 +1,9 @@
 // import { isBlank } from 'js-utility-functions';
 
-export const isEmpty = value => value === undefined || value === null || value === '';
+export const isEmpty = rawValue => {
+  const value = rawValue ? rawValue.trim() : '';
+  return value === undefined || value === null || value === '';
+};
 const join = rules => (value, data, params) => rules.map(rule => rule(value, data, params)).filter(error => !!error)[0];
 
 export function email(value) {
@@ -133,11 +136,11 @@ export const validateAddress = (value, key) => {
   switch (key) {
     case 'address1':
       errorObject.error = isEmpty(value) || value.length > 40;
-      errorObject.errorMessage = isEmpty(value) ? 'Address 1 can not be empty' : 'Max 40 characters allowed';
+      errorObject.errorMessage = isEmpty(value) ? 'Address line 1 can not be empty' : 'Max 40 characters allowed';
       break;
     case 'address2':
-      errorObject.error = !isEmpty(value) && value.length > 40;
-      errorObject.errorMessage = 'Max 40 characters allowed';
+      errorObject.error = isEmpty(value) || value.length > 40;
+      errorObject.errorMessage = isEmpty(value) ? 'Address 2 can not be empty' : 'Max 40 characters allowed';
       break;
     case 'address3':
       errorObject.error = !isEmpty(value) && value.length > 40;
@@ -154,18 +157,57 @@ export const trimSpecialChar = text => {
 };
 
 export const checkSpecialChar = text => {
-  const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/; //eslint-disable-line
+  const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`0-9]/; //eslint-disable-line
   const check = format.test(text);
   return check;
 };
 
+export const checkDateOfBirth = picDate => {
+  const today = new Date().getTime();
+  let idate = picDate.split('-');
+  idate = new Date(idate[0], idate[1] - 1, idate[2]).getTime();
+  return today - idate < 0;
+};
 /*eslint-disable*/
 export const validateEmail = email =>
   /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
     email
   );
+export const validateVPA = vpa => /^[.a-zA-Z0-9\-_]{3,}@[A-Za-z0-9]+$/.test(vpa);
 // export const validateFullName = name =>
 //   /^[a-zA-Z]+ [a-zA-Z]+$/.test(
 //     name
 //   );
 /* eslint-enable */
+export const validateName = fullName => {
+  const nameSplit = fullName.trim().split(' ');
+  const firstName = nameSplit[0];
+  const lastName = nameSplit.splice(1).join(' ');
+
+  if (isEmpty(fullName)) {
+    return {
+      msg: 'Name Cannot be Left Empty !',
+      error: true
+    };
+  }
+  if (checkSpecialChar(fullName)) {
+    return {
+      msg: 'Numbers and special characters are not allowed !',
+      error: true
+    };
+  }
+  if (firstName.length > 50) {
+    return {
+      msg: 'First Name cannot be more than 50 characters',
+      error: true
+    };
+  }
+
+  if (lastName.length > 50) {
+    return {
+      msg: 'Last Name cannot be more than 50 characters',
+      error: true
+    };
+  }
+  return false;
+};

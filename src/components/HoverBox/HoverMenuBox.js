@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Img from 'hometown-components-dev/lib/Img';
-import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
+import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
+import ImageShimmerHtV1 from 'hometown-components-dev/lib/ImageShimmerHtV1';
 
 const styles = require('./HoverMenuBox.scss');
 
@@ -19,9 +19,9 @@ const HoverMenuBox = ({
                 <ul className={styles.list}>
                   <div className={styles.media}>
                     <div className={styles.catImgWrapper}>
-                      <ImageShimmer src={subCategory1.category_image} height="65px">
-                        {imageURL => <Img src={imageURL} alt={subCategory1.name} />}
-                      </ImageShimmer>
+                      <ImageShimmerHtV1 src={subCategory1.category_image} height="65px">
+                        {imageURL => <ImageHtV1 src={imageURL} alt={subCategory1.name} />}
+                      </ImageShimmerHtV1>
                     </div>
                     <div className={styles.mediaBody}>
                       <h4>

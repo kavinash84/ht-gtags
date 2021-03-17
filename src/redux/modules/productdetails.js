@@ -86,7 +86,8 @@ export const loadProductDescription = (sku, pincode) => ({
     } catch (error) {
       throw error;
     }
-  }
+  },
+  sku
 });
 
 export const getDelieveryInfo = (simpleSku, pincode) => ({

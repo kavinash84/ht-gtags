@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
-import Div from 'hometown-components-dev/lib/Div';
+
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
 
 const defaultSettings = {
   infinite: true,
@@ -33,11 +34,11 @@ export default class SlickSlider extends Component {
     const { children, settings, ...rest } = this.props;
     const newSettings = { ...defaultSettings, ...settings };
     return (
-      <Div mb="0.625rem">
+      <BoxHtV1>
         <Slider ref={this.slider} {...newSettings} {...rest}>
           {children}
         </Slider>
-      </Div>
+      </BoxHtV1>
     );
   }
 }

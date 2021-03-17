@@ -1,9 +1,3 @@
-import axios from 'axios';
-import { SUGGESTIONS as SUGGESTIONS_API } from 'helpers/apiUrls';
-import { urlKeyResults } from 'utils/helper';
-
-const { CancelToken } = axios;
-
 const LOAD = 'search/LOAD';
 const LOAD_SUCCESS = 'search/LOAD_SUCCESS';
 const LOAD_FAIL = 'search/LOAD_FAIL';
@@ -27,14 +21,14 @@ export default function reducer(state = initialState, action = {}) {
     case LOAD:
       return {
         ...state,
-        loading: true
+        loading: false
       };
     case LOAD_SUCCESS:
       return {
         ...state,
         loading: false,
-        loaded: true,
-        results: urlKeyResults(action.result)
+        loaded: false,
+        results: []
       };
     case LOAD_FAIL:
       return {
@@ -53,7 +47,7 @@ export default function reducer(state = initialState, action = {}) {
     case SHOW_RESULTS_ON_FOCUS:
       return {
         ...state,
-        showResults: true
+        showResults: false
       };
     case HIDE_RESULTS_ON_BLUR:
       return {
@@ -83,37 +77,6 @@ export default function reducer(state = initialState, action = {}) {
       return state;
   }
 }
-
-export const stopLoading = () => ({
-  type: STOP_LOADING
-});
-
-let cancel;
-export const load = query => (dispatch, getState) => {
-  const store = getState();
-  const {
-    search: { loading }
-  } = store;
-  if (loading) {
-    dispatch(stopLoading());
-    if (typeof cancel === 'function') cancel('cancelled previous search request');
-  }
-  return dispatch({
-    types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: async ({ client }) => {
-      try {
-        const response = await client.get(`${SUGGESTIONS_API}/${query}`, {
-          cancelToken: new CancelToken(c => {
-            cancel = c;
-          })
-        });
-        return response;
-      } catch (error) {
-        throw error;
-      }
-    }
-  });
-};
 
 export const setSearchQuery = query => ({
   type: SET_SEARCH_QUERY,

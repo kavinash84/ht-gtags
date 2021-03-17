@@ -2,35 +2,44 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Container from 'hometown-components-dev/lib/Container';
-import Row from 'hometown-components-dev/lib/Row';
-import Div from 'hometown-components-dev/lib/Div';
-import HeadingH4 from 'hometown-components-dev/lib/HeadingH4';
-import Img from 'hometown-components-dev/lib/Img';
-import Section from 'hometown-components-dev/lib/Section';
-import Text from 'hometown-components-dev/lib/Text';
-import FormInput from 'hometown-components-dev/lib/Forms/FormInput';
-import Button from 'hometown-components-dev/lib/Buttons';
-import { HOME_URL } from 'helpers/Constants';
+
+/**
+ * Helpers
+ */
 import { validateEmail } from 'utils/validation';
 import { sendData } from 'redux/modules/services';
 import { SUBSCRIPTION as SUBSCRIPTION_API } from 'helpers/apiUrls';
 
-const LogoIcon = require('../../../static/logo.png');
+/**
+ * Components
+ */
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import CallIcon from 'hometown-components-dev/lib/Icons/CallHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
+import EmailIcon from 'hometown-components-dev/lib/Icons/EmailHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import Li from 'hometown-components-dev/lib/LiHtV1';
+import LocationIcon from 'hometown-components-dev/lib/Icons/LocationHtV1';
+import LinkRedirect from 'hometown-components-dev/lib/LinkRedirectHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Section from 'hometown-components-dev/lib/SectionHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
+import Ul from 'hometown-components-dev/lib/UlHtV1';
+
+/**
+ * Icons
+ */
 const fbIcon = require('../../../static/facebook.svg');
 const twIcon = require('../../../static/twitter.svg');
-const ytIcon = require('../../../static/youtube.svg');
+const youtubeIcon = require('../../../static/youtube.svg');
 const instaIcon = require('../../../static/instagram.svg');
 const pinIcon = require('../../../static/pinterest.svg');
+// const bajajFinserveIcon = require('../../../static/bajaj-finserv.png');
 const ourAppIcon = require('../../../static/google-play-store.svg');
-const aeIcon = require('../../../static/american-express.svg');
-const maestroIcon = require('../../../static/maestro.svg');
-const mastercardIcon = require('../../../static/mastercard.svg');
-const visaIcon = require('../../../static/visa.svg');
-const intBankingIcon = require('../../../static/net-banking.png');
-const walletIcon = require('../../../static/wallet.svg');
-const styles = require('./Footer.scss');
-const { version } = require('../../../package.json');
 
 const FooterLinks = ['Furniture', 'Home Furnishings', 'Home Décor', 'Home Decor', 'Tableware', 'Kitchenware', 'Bath'];
 
@@ -40,6 +49,21 @@ const mapStateToProps = ({ services, homepage, notifs }) => ({
   notifs
 });
 
+const FooterMenuLink = ({ to, title }) => (
+  <Li>
+    <Link to={to}>
+      <Text variant="footerLink">{title}</Text>
+    </Link>
+  </Li>
+);
+
+const SocialLink = props => <LinkRedirect {...props} />;
+
+FooterMenuLink.propTypes = {
+  to: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired
+};
+
 class Footer extends React.Component {
   state = {
     email: '',
@@ -47,6 +71,7 @@ class Footer extends React.Component {
     emailErrorMessage: 'Please Enter a Valid Email',
     already: false
   };
+
   // componentDidMount() {
   //   if (!window._laq) {
   //     window._laq = [];
@@ -70,6 +95,7 @@ class Footer extends React.Component {
   // '00DN0000000Qxcj'
   // );
   // }
+
   componentWillReceiveProps(nextProps) {
     const { loaded, loading } = nextProps.subscribe;
     const { already } = this.state;
@@ -80,6 +106,7 @@ class Footer extends React.Component {
       });
     }
   }
+
   onChangeEmail = e => {
     const {
       target: { value }
@@ -90,6 +117,7 @@ class Footer extends React.Component {
       emailError: checkError
     });
   };
+
   handleSubmit = e => {
     e.preventDefault();
     const { sendFormData } = this.props;
@@ -105,291 +133,204 @@ class Footer extends React.Component {
     };
     sendFormData(SUBSCRIPTION_API, data, 'footer');
   };
+
   render() {
     let { menuItems } = this.props;
     menuItems = menuItems.filter(item => FooterLinks.includes(item.name));
+
     const {
  email, emailError, emailErrorMessage, already
 } = this.state;
     return (
-      <Div mb="0" p="0" pt="15px" pb="0" className={styles.footer}>
-        <Section bg="footerTop" mb="0" p="2.5rem 0 0">
-          <Container pr="0" pl="0">
-            <Row m="0" flexWrap="nowrap">
-              <Div col="6">
-                {!already ? (
-                  <form onSubmit={this.handleSubmit}>
-                    <Div col="9">
-                      <FormInput
-                        label=""
-                        onChange={this.onChangeEmail}
-                        value={email}
-                        type="text"
-                        placeholder=""
-                        feedBackError={emailError}
-                        feedBackMessage={emailErrorMessage}
-                      />
-                    </Div>
-                    <Div col="3">
-                      <Button
-                        btnType="primary"
-                        boder="solid 1px rgba(151,151,151,0.47)"
-                        fontFamily="regular"
-                        height="38px"
-                        mt="0"
-                        ml="-1px"
-                        onClick={this.handleSubmit}
-                      >
-                        Subscribe
-                      </Button>
-                    </Div>
-                  </form>
-                ) : (
-                  <Text color="green" fontSize="0.955rem" mt="0" mb="0" lh="2" ta="left">
-                    You have been successfully subscribed to the Newsletter
-                  </Text>
-                )}
-              </Div>
-              <Div col="3">
-                <HeadingH4 color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="0">
-                  CONTACT US
-                </HeadingH4>
-                <ul>
-                  <li>
-                    <a href="tel:1800-210-0004">Call Us: 1800-210-0004</a>
-                  </li>
-                  <li>
-                    <a href="mailto:care@hometown.in">Email: care@hometown.in</a>
-                  </li>
-                  <li>
-                    <Img
-                      id="liveagent_button_online_573N000000000Ub"
-                      style={{
-                        display: 'none',
-                        border: '0px none',
-                        cursor: 'pointer',
-                        height: '75px',
-                        width: '200px'
-                      }}
-                      onClick={() => {
-                        if (window.liveagent) {
-                          window.liveagent.startChat('573N000000000Ub');
-                        }
-                      }}
-                      src="https://devbox-praxisretail.cs6.force.com/LiveAgent/resource/1550482657000/Online_Chat_Button" //eslint-disable-line
-                      alt=""
-                    />
-                    <Img
-                      id="liveagent_button_offline_573N000000000Ub"
-                      style={{
-                        display: 'none',
-                        border: '0px none',
-                        cursor: 'pointer',
-                        height: '75px',
-                        width: '200px'
-                      }}
-                      onClick={() => {
-                        if (window.liveagent) {
-                          window.liveagent.startChat('573N000000000Ub');
-                        }
-                      }}
-                      src="https://devbox-praxisretail.cs6.force.com/LiveAgent/resource/1550482682000/Offline_Chat_Button" //eslint-disable-line
-                      alt=""
-                    />
-                  </li>
-                </ul>
-              </Div>
-              <Div col="3">
-                <HeadingH4 color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="0">
-                  FOLLOW US
-                </HeadingH4>
-                <ul className={styles.socials}>
-                  <li>
-                    <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/hometown.in/">
-                      <Img src={fbIcon} alt="Facebook" />
-                    </a>
-                  </li>
-                  <li>
-                    <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/HomeTown_In/">
-                      <Img src={twIcon} alt="Twitter" />
-                    </a>
-                  </li>
-                  <li>
-                    <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/hometownindia/">
-                      <Img src={instaIcon} alt="Instagram" />
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href="https://www.youtube.com/channel/UCBZGArWnKT6MYYwOsPCNjiw"
-                    >
-                      <Img src={ytIcon} alt="Youtube" />
-                    </a>
-                  </li>
-                  <li>
-                    <a target="_blank" rel="noopener noreferrer" href="https://in.pinterest.com/hometownstore/">
-                      <Img src={pinIcon} alt="Pinterest" />
-                    </a>
-                  </li>
-                </ul>
-              </Div>
-            </Row>
-          </Container>
-        </Section>
-        <Section bg="footerTop" mb="0" p="0.625rem 0 2rem">
-          <Container pr="0" pl="0">
-            <Row m="0" mb="1rem" flexWrap="nowrap">
-              {menuItems.map(menu =>
-                  menu.children &&
-                  menu.visibility === 'on' && (
-                    <Div key={menu.name} display="flexEqual">
-                      <HeadingH4 color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
-                        {menu.name}
-                      </HeadingH4>
-                      <ul>
-                        {/*eslint-disable*/}
-                        {menu.children.map(
-                          (subMenu, index) =>
-                            subMenu.visibility === 'on' &&
-                            index < 11 && (
-                              <li key={subMenu.name}>
-                                <Link to={`/${subMenu.url_key}`}>{subMenu.name}</Link>
-                              </li>
-                            )
-                        )}
-                        {/* eslint-enable */}
-                      </ul>
-                    </Div>
-                  ))}
-            </Row>
-            <Row m="0" flexWrap="nowrap">
-              <Div display="flexEqual" col="2">
-                <HeadingH4 color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
-                  ABOUT US
-                </HeadingH4>
-                <ul>
-                  <li>
-                    <Link to="/who-we-are">Who We Are</Link>
-                  </li>
-                  <li>
+      <Section bg="bgFooter" pt={30} pb={10} mb={0}>
+        <Container variant="container">
+          <Row m="0" mb="2rem" flexWrap="nowrap" justifyContent="space-between">
+            {menuItems.map(menu =>
+                menu.children &&
+                menu.visibility === 'on' && (
+                  <Box key={menu.name} display="flexEqual">
+                    <Heading color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="18px">
+                      {menu.name}
+                    </Heading>
+                    <Ul>
+                      {/*eslint-disable*/}
+                      {menu.children.map(
+                        (subMenu, index) =>
+                          subMenu.visibility === 'on' &&
+                          index < 11 && (
+                            <Li key={subMenu.name}>
+                              <Link to={`/${subMenu.url_key}`}>
+                                <Text variant="footerLink"> {subMenu.name}</Text>
+                              </Link>
+                            </Li>
+                          )
+                      )}
+                      {/* eslint-enable */}
+                    </Ul>
+                  </Box>
+                ))}
+          </Row>
+          <Row>
+            <Col width={[1, 2 / 3, 3 / 12]}>
+              <Box mb={24}>
+                <Heading variant="footerTitle">CUSTOMER SERVICE</Heading>
+                <Ul>
+                  <FooterMenuLink to="/track-order" title="Track Order" />
+                  <FooterMenuLink to="/return-policy" title="Returns" />
+                  <FooterMenuLink to="/cancellation" title="Cancellation" />
+                  <FooterMenuLink to="/faq" title="FAQ" />
+                  <FooterMenuLink to="/privacy-policy" title="Privacy Policy" />
+                  <FooterMenuLink to="/terms-and-conditions" title="Terms and Conditions" />
+                </Ul>
+              </Box>
+              <Box>
+                <Heading variant="footerTitle">ABOUT US</Heading>
+                <Ul>
+                  <FooterMenuLink to="/who-we-are" title="Who We Are" />
+                  <Li>
                     <a href="https://www.praxisretail.in/careers.html" rel="noreferrer noopener" target="_blank">
-                      Careers
+                      <Text variant="footerLink">Careers</Text>
                     </a>
-                  </li>
-                  <li>
-                    <Link to="/contact-us">Contact Us</Link>
-                  </li>
-                </ul>
-              </Div>
-              <Div display="flexEqual" col="2">
-                <HeadingH4 color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
-                  CUSTOMER SERVICE
-                </HeadingH4>
-                <ul>
-                  <li>
-                    <Link to="/track-order">Track Order</Link>
-                  </li>
-                  <li>
-                    <Link to="/return-policy">Returns</Link>
-                  </li>
-                  <li>
-                    <Link to="/cancellation">Cancellation</Link>
-                  </li>
-                  <li>
-                    <Link to="/faq">FAQ</Link>
-                  </li>
-                  <li>
-                    <Link to="/privacy-policy">Privacy Policy</Link>
-                  </li>
-                  <li>
-                    <Link to="/terms-and-conditions">Terms and Conditions</Link>
-                  </li>
-                </ul>
-              </Div>
-              <Div display="flexEqual" col="2">
-                <HeadingH4 color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
-                  USEFUL LINKS
-                </HeadingH4>
-                <ul>
-                  <li>
-                    <a href="/sitemap.html" target="_blank">
-                      Sitemap
+                  </Li>
+                  <FooterMenuLink to="/contact-us" title="Contact Us" />
+                </Ul>
+              </Box>
+            </Col>
+            <Col width={[1, 2 / 3, 2 / 12]}>
+              <Box mb={24}>
+                <Heading variant="footerTitle">USEFUL LINKS</Heading>
+                <Ul>
+                  <Li>
+                    <a href="/sitemap.html" rel="noreferrer noopener" target="_blank">
+                      <Text variant="footerLink">Sitemap</Text>
                     </a>
-                  </li>
-                  <li>
-                    <Link to="/promotions">Promotions</Link>
-                  </li>
-                </ul>
-              </Div>
-              <Div display="flexEqual" col="3">
-                <HeadingH4 color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
-                  OUR APP
-                </HeadingH4>
+                  </Li>
+                  <FooterMenuLink to="/promotions" title="Promotions" />
+                </Ul>
+              </Box>
+              <Box>
+                {/* <Heading variant="footerTitle">CATALOG</Heading>
+                <Ul>
+                  <Li>
+                    <a href="/" rel="noreferrer noopener" target="_blank">
+                      <Text variant="footerLink">Catalog Request</Text>
+                    </a>
+                  </Li>
+                  <Li>
+                    <a href="/" rel="noreferrer noopener" target="_blank">
+                      <Text variant="footerLink">eCatalogs</Text>
+                    </a>
+                  </Li>
+                </Ul> */}
+                {/* <Image src={bajajFinserveIcon} alt="Bajaj Finserv" mt={20} /> */}
+              </Box>
+            </Col>
+            <Col width={[1, 2 / 3, 3 / 12]}>
+              <Box mb={24}>
+                <Heading variant="footerTitle">CONTACT US</Heading>
+                <Ul>
+                  <Li>
+                    <a href="tel:1800-210-0004" rel="noreferrer noopener" target="_blank">
+                      <Text variant="footerLink" fontSize={16}>
+                        <CallIcon mr={10} /> 1800-210-0004
+                      </Text>
+                    </a>
+                  </Li>
+                  <Li>
+                    <a href="mailto:care@hometown.in" rel="noreferrer noopener" target="_blank">
+                      <Text variant="footerLink" fontSize={16}>
+                        <EmailIcon mr={10} />
+                        care@hometown.in
+                      </Text>
+                    </a>
+                  </Li>
+                  <Li>
+                    <Link to="/store-locator">
+                      <Text variant="footerLink" fontSize={16}>
+                        <LocationIcon mr={10} />
+                        Store Locator
+                      </Text>
+                    </Link>
+                  </Li>
+                </Ul>
+              </Box>
+              <Box mb={15}>
+                <Heading variant="footerTitle">OUR APP</Heading>
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
                   href="https://play.google.com/store/apps/details?id=com.fabfurnish.android"
                 >
-                  <Img src={ourAppIcon} alt="Our App" mt="1.2rem" width="178px" />
+                  <Image src={ourAppIcon} alt="Our App" mt="1rem" width="178px" />
                 </a>
-              </Div>
-              <Div display="flexEqual" col="3">
-                <HeadingH4 color="footerHeading" fontFamily="regular" fontSize="1.125rem" mt="1rem" pb="2px">
-                  PAYMENT METHODS
-                </HeadingH4>
-                <Row ml="0" mr="0" className={styles.paymentWrapper}>
-                  <Div col="2" p="0 5px">
-                    <Img src={visaIcon} alt="visaCard" width="100%" />
-                  </Div>
-                  <Div col="2" p="0 5px">
-                    <Img src={mastercardIcon} alt="Master Card" width="100%" />
-                  </Div>
-                  <Div col="2" p="0 5px">
-                    <Img src={maestroIcon} alt="Maestro" width="100%" />
-                  </Div>
-                  <Div col="2" p="0 5px">
-                    <Img src={aeIcon} alt="Amex" width="100%" />
-                  </Div>
-                  <Div col="2" p="5px 5px 0">
-                    <Img src={intBankingIcon} alt="Internet Banking" width="100%" />
-                  </Div>
-                  <Div col="2" p="3px 5px">
-                    <Img src={walletIcon} height="22px" alt="Wallet" width="100%" />
-                  </Div>
+              </Box>
+            </Col>
+            <Col width={[1, 1, 4 / 12]} pl={[0, 0, 50]}>
+              <Box
+                mb={17}
+                sx={{
+                  borderBottom: 'divider',
+                  display: 'flex',
+                  justifyContent: 'center'
+                }}
+              >
+                <Text variant="footerLink" px={24} sx={{ position: 'relative', bg: 'bgFooter', top: 12 }}>
+                  Subscribe Newsletter
+                </Text>
+              </Box>
+              {!already ? (
+                <form onSubmit={this.handleSubmit}>
+                  <Row>
+                    <Box width={9 / 12}>
+                      <FormInput
+                        label=""
+                        onChange={this.onChangeEmail}
+                        value={email}
+                        type="text"
+                        feedBackError={emailError}
+                        feedBackMessage={emailErrorMessage}
+                        variant="inputSearch"
+                        placeholder="Enter your email address"
+                      />
+                    </Box>
+                    <Box width={3 / 12}>
+                      <Button onClick={this.handleSubmit}>Subscribe</Button>
+                    </Box>
+                  </Row>
+                </form>
+              ) : (
+                <Row>
+                  <Text color="green" fontSize="0.955rem" mt="0" mb="0" lh="2" ta="left">
+                    You have been successfully subscribed to the Newsletter
+                  </Text>
                 </Row>
-              </Div>
-            </Row>
-          </Container>
-        </Section>
-        <Section bg="footerBottom" mb="0" p="0.625rem 0">
-          <Container pr="0" pl="0">
-            <Row m="0">
-              <Div col={6}>
-                <Link to={HOME_URL}>
-                  <Img
-                    src={LogoIcon}
-                    className={styles.footerLogo}
-                    alt="Hometown"
-                    height="40px"
-                    float="left"
-                    mr="1.5rem"
-                  />
-                </Link>
-                <Text color="#a6a6a6" fontSize="0.875rem" mb="0" lh="2" ta="left" mt="7px">
-                  © {new Date().getFullYear()} Praxis Home Retail Limited
-                </Text>
-              </Div>
-              <Div col={6} ta="left" alignSelf="center">
-                <Text color="rgba(166, 166, 166, 0.5)" fontSize="0.75rem" mt="0" mb="0" lh="2" ta="right" pr="4.5rem">
-                  v {version}
-                </Text>
-              </Div>
-            </Row>
-          </Container>
-        </Section>
-      </Div>
+              )}
+              <Row mt={15} sx={{ justifyContent: 'space-between' }}>
+                <SocialLink target="_blank" href="https://www.facebook.com/hometown.in/">
+                  <Image src={fbIcon} alt="Facebook" />
+                </SocialLink>
+                <SocialLink target="_blank" href="https://twitter.com/HomeTown_In/">
+                  <Image src={twIcon} alt="Twitter" />
+                </SocialLink>
+                <SocialLink target="_blank" href="https://www.youtube.com/channel/UCBZGArWnKT6MYYwOsPCNjiw">
+                  <Image src={youtubeIcon} alt="Youtube" />
+                </SocialLink>
+                <SocialLink target="_blank" href="https://www.instagram.com/hometownindia/">
+                  <Image src={instaIcon} alt="Instagram" />
+                </SocialLink>
+                <SocialLink target="_blank" href="https://in.pinterest.com/hometownstore/">
+                  <Image src={pinIcon} alt="Pinterest" />
+                </SocialLink>
+              </Row>
+            </Col>
+          </Row>
+          <Row variant="row.contentCenter" mt={30}>
+            <Text variant="footerLink" fontSize={16}>
+              © {new Date().getFullYear()} Praxis Home Retail Limited
+            </Text>
+          </Row>
+        </Container>
+      </Section>
     );
   }
 }

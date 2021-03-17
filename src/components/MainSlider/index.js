@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { triggerImpression, triggerClick } from 'redux/modules/analytics';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
 import SliderItem from './SliderItem';
 import SlickSlider from '../SlickSlider';
 
@@ -16,10 +17,16 @@ class MainSlider extends Component {
  data, triggerSlideChange, triggerSlideClick, reference, newSettings
 } = this.props;
     const finalSettings = { ...settings, ...newSettings };
+
     return (
-      <SlickSlider settings={finalSettings} afterChange={e => triggerSlideChange(e)} ref={reference}>
+      <SlickSlider
+        settings={finalSettings}
+        afterChange={e => triggerSlideChange(e)}
+        ref={reference}
+        className="mainSlider"
+      >
         {data.map((slide, index) => (
-          <div key={String(index)}>
+          <BoxHtV1 key={String(index)}>
             <SliderItem
               target={slide.target || ''}
               image={slide.image}
@@ -27,7 +34,7 @@ class MainSlider extends Component {
               title={slide.title || ''}
               onClick={() => triggerSlideClick(index)}
             />
-          </div>
+          </BoxHtV1>
         ))}
       </SlickSlider>
     );
@@ -48,4 +55,7 @@ MainSlider.propTypes = {
   newSettings: PropTypes.object
 };
 
-export default connect(null, { triggerSlideChange: triggerImpression, triggerSlideClick: triggerClick })(MainSlider);
+export default connect(null, {
+  triggerSlideChange: triggerImpression,
+  triggerSlideClick: triggerClick
+})(MainSlider);

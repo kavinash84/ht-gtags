@@ -3,6 +3,7 @@ export const BANNERS = 'tesla/banners/desktop';
 export const CATEGORY_MENU = 'tesla/categories';
 export const PINCODE = 'tesla/locations/pincode';
 export const HOMEPAGE_CATEGORIES = 'tesla/page-sections/home/categories';
+export const HOMEPAGE_INSTAFEEDS = 'tesla/page-sections/home/instafeeds';
 export const HOMEPAGE_TOP_SELLING = 'tesla/page-sections/home/products';
 export const STORES = 'tesla/stores';
 export const HASHTAGS = 'tesla/hashtags';
@@ -20,6 +21,7 @@ export const RESEND_OTP = 'tesla/otp/resend';
 export const USERPROFILE = 'tesla/users/details';
 export const UPDATEPROFILE = 'tesla/users/update-profile';
 export const UPDATE_PASSWORD = 'tesla/users/update-password';
+export const SET_PASSWORD = 'tesla/users/change-password';
 export const FORGOT_PASSWORD = 'tesla/users/forgot-password';
 export const CHECK_HASH = 'tesla/users/forgot-password/verify';
 export const RESET_PASSWORD = 'tesla/users/forgot-password/reset';
@@ -64,6 +66,8 @@ export const COUPON = 'tesla/cart/coupon';
 
 /* Payment Status */
 export const PAYMENT_STATUS = 'tesla/orders/success';
+// export const PAYMENT_STATUS = 'tesla/checkout/finishPayment';
+export const PAYMENT_FINISH_URL = 'tesla/checkout/finishPayment';
 
 /* Search Suggestions */
 export const SUGGESTIONS = 'tesla/search/suggestions';
@@ -79,7 +83,12 @@ export const BULK_ORDER = 'tesla/bulk-order';
 export const CASE_ORDER = 'tesla/users/insertcase';
 export const SUBSCRIPTION = 'tesla/users/subscribe-us';
 export const PROMOTIONS = 'tesla/static/text/promotions_react';
+export const RETURN_POLICY = 'tesla/static/landingpage/return_policy';
 export const CALL_BACK = 'tesla/call-back';
 
 /* Pincode */
 export const PINCODE_INFO = 'tesla/locations/pincode';
+
+/* Landing */
+export const LANDING_INFO = 'tesla/static/landingpage';
+export const LANDING_CATEGORY = 'tesla/static/landing/skucategories';

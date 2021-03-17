@@ -1,3 +1,4 @@
+// import { PAYMENT_STATUS as PAYMENT_STATUS_API } from 'helpers/apiUrls';
 import { PAYMENT_STATUS as PAYMENT_STATUS_API } from 'helpers/apiUrls';
 
 const LOAD = 'paymentstatus/LOAD';
@@ -38,6 +39,7 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 export function isLoaded(globalState) {
+  console.log('Is loaded', globalState.paymentstatus, globalState.paymentstatus.loaded);
   return globalState.paymentstatus && globalState.paymentstatus.loaded;
 }
 

@@ -2,11 +2,18 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import AddCart from 'hometown-components-dev/lib/Icons/AddCart';
-import Button from 'hometown-components-dev/lib/Buttons';
-import Img from 'hometown-components-dev/lib/Img';
-import Span from 'hometown-components-dev/lib/Span';
-import Div from 'hometown-components-dev/lib/Div';
+
+/**
+ * Components
+ */
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+
+/**
+ * Modules / Helpers / Selectors
+ */
 import * as actionCreators from 'redux/modules/cart';
 import { getCartListSKU } from 'selectors/cart';
 import { PINCODE, CART_URL } from 'helpers/Constants';
@@ -28,15 +35,17 @@ const checkSKUInCart = (list, sku) => {
   }
   return isAlreadyAdded;
 };
-const styles = require('../AddToCart/AddToCart.scss');
+
 const LoaderIcon = require('../../../static/refresh-black.svg');
-const CheckedIcon = require('../../../static/added-to-cart-icon.png');
 
 const onClick = (item, session, pincode) => dispatcher => e => {
   e.preventDefault();
-  const { id_catalog_buildyourset: setId, skus, unique_set_name: uniqueSetName = 'unknown' } = item;
+  const {
+ id_catalog_buildyourset: setId, skus, unique_set_name: uniqueSetName = 'unknown', products
+} = item;
+  const configId = products.map(val => val.meta.config_id);
   const simpleSKUS = skus.map(val => ({ simple_sku: val.sku, qty: Number(val.qty) }));
-  dispatcher(setId, simpleSKUS, session, pincode, uniqueSetName);
+  dispatcher(setId, simpleSKUS, session, pincode, configId, uniqueSetName);
 };
 
 const mapStateToProps = ({
@@ -58,12 +67,7 @@ const AddToCartCombined = ({
   skusData,
   products,
   cartSKUs,
-  stateId,
-  size,
-  height,
-  btnColor,
-  btnType,
-  fontSize
+  stateId
 }) => {
   const checkStatus = checkSKUInCart(cartSKUs, skusData);
   // const { skus } = skusData;
@@ -71,51 +75,26 @@ const AddToCartCombined = ({
   const addLoading = addingToCart && stateId === itemId;
   return (
     <Fragment>
-      <Fragment>
-        {!checkStatus ? (
-          <Button
-            btnType={btnType}
-            border="1px solid"
-            bc={btnColor === 'transparent' ? '#f98d29' : btnColor}
-            color={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
-            bg={btnColor === 'transparent' ? 'transparent' : btnColor}
-            p="4px 20px"
-            lh="1.5"
-            size={size}
-            disabled={addLoading}
-            onClick={onClick(skusData, session, pincode)(addToCartCombined)}
-            className={styles.addToCartBtn}
-            height={height}
-          >
-            {!addLoading && (
-              <AddCart width="18px" height="18px" va="middle" fill={btnColor === 'transparent' ? '#f98d29' : '#FFF'} />
-            )}
-            {addLoading && <Img className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />}
-            <Span
-              ml="2px"
-              fontSize={fontSize}
-              fontFamily="regular"
-              color={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
-              va="middle"
-              lh="1.8"
-            >
-              {addLoading ? 'Adding..' : `Add ${products && products.length ? `${products.length} items` : ''} to Cart`}
-            </Span>
-          </Button>
-        ) : (
-          <Div display="block" mb="0">
-            <span className={styles.addedToCart}>
-              <Img width="22px" src={CheckedIcon} display="inline" va="middle" mr="8px" />
+      {!checkStatus ? (
+        <Button
+          variant="outline.primary.large"
+          width={240}
+          disabled={addLoading}
+          onClick={onClick(skusData, session, pincode)(addToCartCombined)}
+          sx={{ fontSize: 14 }}
+        >
+          {addLoading && <Image className="spin" src={LoaderIcon} width="18px" mr={10} />}
+          {addLoading ? 'Adding..' : `Add ${products && products.length ? `${products.length} items` : ''} to Cart`}
+        </Button>
+      ) : (
+        <Row mx={0} alignItems="center">
+          <Box as={Link} to={CART_URL} width={1}>
+            <Button variant="outline.primary.large" width={240} sx={{ fontSize: 14 }}>
               Added to Cart
-            </span>
-            <Link className={`${styles.goToCart} ${height !== 'auto' && styles.heightFix} `} to={CART_URL}>
-              <Span ml="0" fontSize="12px" fontFamily="regular" color="#FFF" va="text-bottom" lh="1.5">
-                Go to Cart
-              </Span>
-            </Link>
-          </Div>
-        )}
-      </Fragment>
+            </Button>
+          </Box>
+        </Row>
+      )}
     </Fragment>
   );
 };
@@ -125,12 +104,7 @@ AddToCartCombined.defaultProps = {
   cartSKUs: [],
   skusData: {},
   products: [],
-  stateId: '',
-  size: 'default',
-  height: 'auto',
-  btnColor: '#f98d29',
-  btnType: 'custom',
-  fontSize: '16px'
+  stateId: ''
 };
 
 AddToCartCombined.propTypes = {
@@ -141,12 +115,7 @@ AddToCartCombined.propTypes = {
   addingToCart: PropTypes.bool,
   skusData: PropTypes.object,
   products: PropTypes.array,
-  cartSKUs: PropTypes.array,
-  size: PropTypes.string,
-  height: PropTypes.string,
-  btnColor: PropTypes.string,
-  btnType: PropTypes.string,
-  fontSize: PropTypes.string
+  cartSKUs: PropTypes.array
 };
 
 export default connect(mapStateToProps, { ...actionCreators })(AddToCartCombined);

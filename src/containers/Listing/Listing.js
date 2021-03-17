@@ -2,18 +2,23 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import Helmet from 'react-helmet';
-import Empty from 'hometown-components-dev/lib/Empty';
-import Img from 'hometown-components-dev/lib/Img';
-import Section from 'hometown-components-dev/lib/Section';
-import ListingContainer from 'components/Listing';
-import ListingShimmer from 'components/Listing/ListingShimmer';
 import { connect } from 'react-redux';
-import Menu from 'containers/MenuNew/index';
-import Footer from 'components/Footer';
 import { getSKUList } from 'selectors/wishlist';
+import { getCartListSKU } from 'selectors/cart';
 import { setReloadListing } from 'redux/modules/products';
-import Pagination from 'components/Pagination';
+
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+// import Img from 'hometown-components-dev/lib/ImageHtV1';
+// import Section from 'hometown-components-dev/lib/SectionHtV1';
+import ListingContainer from 'components/Listing';
+// import ListingShimmer from 'components/Listing/ListingShimmer';
+import Footer from 'components/Footer';
+import Header from 'components/Header';
+// import Pagination from 'components/Pagination';
 import SeoContent from 'components/SeoContent';
+import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
+import Body from 'hometown-components-dev/lib/BodyHtV1';
+
 import {
   getProducts,
   getCategoryName,
@@ -26,7 +31,7 @@ import {
 import { SITE_URL } from 'helpers/Constants';
 import CANONICALS from 'data/canonical';
 
-const SearchEmptyIcon = require('../../../static/search-empty.png');
+// const SearchEmptyIcon = require('../../../static/search-empty.png');
 
 @connect(state => ({
   loading: state.products.loading,
@@ -51,14 +56,17 @@ const SearchEmptyIcon = require('../../../static/search-empty.png');
   breadCrumbs: state.products.categoryDetails,
   currentPage: state.pagination.page,
   categoryBar: getl4(state),
-  selectedPincode: state.pincode.selectedPincode
+  selectedPincode: state.pincode.selectedPincode,
+  sessionId: state.app.sessionId,
+  cartSKUs: getCartListSKU(state.cart),
+  reloadListing: state.products.reloadListing
 }))
 @withRouter
 export default class Listing extends Component {
   static propTypes = {
-    loading: PropTypes.bool,
-    loaded: PropTypes.bool,
-    shimmer: PropTypes.bool,
+    // loading: PropTypes.bool,
+    // loaded: PropTypes.bool,
+    // shimmer: PropTypes.bool,
     products: PropTypes.array,
     metadata: PropTypes.array,
     category: PropTypes.string,
@@ -78,15 +86,18 @@ export default class Listing extends Component {
     breadCrumbs: PropTypes.array,
     currentPage: PropTypes.number,
     categoryBar: PropTypes.array,
-    selectedPincode: PropTypes.string
+    selectedPincode: PropTypes.string,
+    sessionId: PropTypes.string.isRequired,
+    cartSKUs: PropTypes.array,
+    reloadListing: PropTypes.bool
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
   static defaultProps = {
-    loading: false,
-    loaded: true,
-    shimmer: false,
+    // loading: false,
+    // loaded: true,
+    // shimmer: false,
     products: [],
     categoryName: '',
     category: '',
@@ -104,7 +115,9 @@ export default class Listing extends Component {
     breadCrumbs: [],
     currentPage: 1,
     categoryBar: [],
-    selectedPincode: ''
+    selectedPincode: '',
+    cartSKUs: [],
+    reloadListing: false
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.pincode !== this.props.pincode) {
@@ -119,9 +132,9 @@ export default class Listing extends Component {
   }
   render() {
     const {
-      loading,
-      loaded,
-      shimmer,
+      // loading,
+      // loaded,
+      // shimmer,
       products,
       categoryName,
       category,
@@ -141,7 +154,10 @@ export default class Listing extends Component {
       breadCrumbs,
       currentPage,
       categoryBar,
-      selectedPincode
+      selectedPincode,
+      sessionId,
+      cartSKUs,
+      reloadListing
     } = this.props;
     let page;
     const {
@@ -154,7 +170,7 @@ export default class Listing extends Component {
     const NextPage = !page ? '?page=2' : `?page=${Number(page) + 1}`;
     /* eslint-disable react/no-danger */
     return (
-      <Section p="0rem" mb="0">
+      <Wrapper>
         <Helmet>
           <title>{seoInfo && seoInfo.page_title}</title>
           <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
@@ -166,24 +182,12 @@ export default class Listing extends Component {
           {Number(page) === 2 && <link rel="prev" href={`${SITE_URL}${pathname}`} />}
           {productCount / 32 / Number(page) > 1 && <link rel="next" href={`${SITE_URL}${pathname}${NextPage}`} />}
         </Helmet>
-        <div className="wrapper">
-          <Menu />
-          {!loading && products.length === 0 && (
-            <Section display="flex" p="0.625rem" pt="1.25rem" mb="0">
-              <Empty
-                title="Sorry! No Results Found"
-                subTitle="Please check the Spelling or by a different search"
-                url="/"
-                bg="#fafafa"
-              >
-                <Img src={SearchEmptyIcon} width="initial" m="auto" alt="Sorry no results found" />
-              </Empty>
-            </Section>
-          )}
-          {!loaded && loading && !products.length && <ListingShimmer />}
-
-          {loaded && products.length && !shimmer ? (
-            <div>
+        <Body>
+          <Header />
+          {/* {!loaded && loading && !products.length && <ListingShimmer />} */}
+          <Box>
+            {/* {loaded && products.length && !shimmer ? (
+            <Box>
               <ListingContainer
                 wishList={wishListedSKUs}
                 wishListData={wishListData}
@@ -204,25 +208,46 @@ export default class Listing extends Component {
                 categoryBar={categoryBar}
                 selectedPincode={selectedPincode}
               />
-              <Pagination
-                loading={loading}
-                loaded={loaded}
-                history={history}
-                categoryquery={categoryquery}
-                pageRangeDisplayed={9}
-              />
-            </div>
+            </Box>
           ) : (
-            shimmer && <ListingShimmer />
-          )}
-        </div>
-        {seoInfo && seoInfo.seo_text && (
-          <SeoContent>
-            <div dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }} />
-          </SeoContent>
-        )}
-        <Footer />
-      </Section>
+            <Box display="flex" p="0.625rem" pt="1.25rem" mb="0">
+              <h1> No Items Found </h1>
+            </Box>
+          )} */}
+            <ListingContainer
+              wishList={wishListedSKUs}
+              wishListData={wishListData}
+              products={products}
+              categoryName={categoryName}
+              productCount={productCount}
+              category={category}
+              filters={filters}
+              sortBy={sortBy}
+              appliedFilters={appliedFilters}
+              history={history}
+              pincode={pincode}
+              isLoggedIn={isLoggedIn}
+              loadingList={loadingList}
+              metaResults={metadata}
+              categoryquery={categoryquery}
+              breadCrumbs={breadCrumbs}
+              categoryBar={categoryBar}
+              selectedPincode={selectedPincode}
+              sessionId={sessionId}
+              cartSKUs={cartSKUs}
+              reloadListing={reloadListing}
+              setReloadListing={setReloadListing}
+            />
+            {seoInfo && seoInfo.seo_text && (
+              <SeoContent>
+                <div dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }} />
+              </SeoContent>
+            )}
+          </Box>
+
+          <Footer />
+        </Body>
+      </Wrapper>
     );
   }
 }

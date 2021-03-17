@@ -1,19 +1,44 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import ProfileFormContainer from 'hometown-components-dev/lib/Forms/ProfileForm';
-import Section from 'hometown-components-dev/lib/Section';
-import Row from 'hometown-components-dev/lib/Row';
-import Heading from 'hometown-components-dev/lib/Heading';
-import Div from 'hometown-components-dev/lib/Div';
 import { validateEmail, isBlank } from 'js-utility-functions';
-import { validateMobile } from 'utils/validation';
+/**
+ * Components
+ */
+import ProfileFormContainer from 'hometown-components-dev/lib/FormsHtV1/ProfileFormHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Label from 'hometown-components-dev/lib/LabelHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+
+/**
+ * modules / utils
+ */
+import { validateMobile, checkSpecialChar, checkDateOfBirth } from 'utils/validation';
 import { updateUserProfile } from 'redux/modules/profile';
 import {
   // allowNChar,
   // allowTypeOf,
   isGSTNumber
 } from 'utils/helper';
+
+const ProfileViewRow = ({ title, value }) => (
+  <Row mb={20}>
+    <Col variant="col-3">
+      <Label fontFamily="light">{title}</Label>
+    </Col>
+    <Col variant="col-7">
+      <Label>{value}</Label>
+    </Col>
+  </Row>
+);
+
+ProfileViewRow.propTypes = {
+  title: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired
+};
 
 @connect(({ profile }) => ({
   profile: profile.data,
@@ -23,9 +48,15 @@ export default class ProfileForm extends Component {
   static propTypes = {
     profile: PropTypes.shape({
       contact_number: PropTypes.string,
+      customer_city: PropTypes.string,
       email: PropTypes.string,
       full_name: PropTypes.string,
-      gst: PropTypes.string
+      gst: PropTypes.string,
+      dob: PropTypes.string,
+      city: PropTypes.string,
+      gender: PropTypes.string,
+      birthday: PropTypes.string,
+      today: PropTypes.string
     }),
     response: PropTypes.object
   };
@@ -49,20 +80,34 @@ export default class ProfileForm extends Component {
     fullNameErrorMessage: '',
     gst: '',
     gstError: false,
-    gstErrorMessage: 'Enter a valid GST Number'
+    gstErrorMessage: 'Enter a valid GST Number',
+    dob: '',
+    today: '',
+    dobError: false,
+    dobErrorMessage: 'Invalid date of birth',
+    gender: 'male',
+    genderError: false,
+    genderErrorMessage: 'Enter a valid Gender',
+    city: '',
+    cityError: false,
+    cityErrorMessage: 'Enter a valid City',
+    showEditForm: false
   };
 
   componentWillMount() {
     const {
       profile: {
- full_name: fullName, email, contact_number: phone, gst
+ full_name: fullName, email, contact_number: phone, city, gst, dob, gender
 }
     } = this.props;
     this.setState({
       fullName: (fullName && fullName.trim()) || '',
       email,
       phone: phone || '',
-      gst
+      gst,
+      dob,
+      city,
+      gender
     });
   }
   // onChangePhone = e => {
@@ -95,44 +140,106 @@ export default class ProfileForm extends Component {
     const {
       target: { value }
     } = e;
-    const checkError = isBlank(value);
+    const checkError = isBlank(value) || checkSpecialChar(value);
     this.setState({
       fullName: value,
       fullNameError: checkError,
-      fullNameErrorMessage: checkError ? "Name can't be blank" : ''
+      fullNameErrorMessage: checkSpecialChar(value)
+        ? 'Numbers and special characters are not allowed !'
+        : 'Name Cannot be Left Empty !'
+    });
+  };
+  onChangeGender = e => {
+    const {
+      target: { value }
+    } = e;
+    this.setState({
+      gender: value
+    });
+  };
+  onChangeCity = e => {
+    const {
+      target: { value }
+    } = e;
+    const checkError = checkSpecialChar(value);
+    this.setState({
+      city: value,
+      cityError: checkError,
+      cityErrorMessage: 'Numbers and special characters are not allowed !'
+    });
+  };
+  onChangeDob = e => {
+    const {
+      target: { value }
+    } = e;
+    const checkError = checkDateOfBirth(value);
+    const newDate = value;
+    this.setState({
+      dob: newDate,
+      dobError: checkError
     });
   };
   onSubmitProfile = e => {
     e.preventDefault();
     const {
- email, fullName, phone, gst
+ email, fullName, phone, gst, dob
 } = this.state;
     const checkEmail = validateEmail(email, 'Invalid Email');
     const phoneError = !validateMobile(phone);
-    const checkFullName = isBlank(fullName);
+    const checkFullName = isBlank(fullName) || checkSpecialChar(fullName);
     const isGSTError = !isGSTNumber(gst);
-    if (checkEmail.error || checkFullName || phoneError) {
+    const checkDob = checkDateOfBirth(dob);
+    if (checkEmail.error || checkFullName || phoneError || checkDob) {
       return this.setState({
         emailError: checkEmail.error,
         emailErrorMessage: checkEmail.errorMessage,
         fullNameError: checkFullName,
-        fullNameErrorMessage: checkFullName ? "Name can't be blank" : '',
+        fullNameErrorMessage: checkSpecialChar(fullName)
+          ? 'Numbers and special characters are not allowed !'
+          : 'Name Cannot be Left Empty !',
         phoneError,
         gstError: isGSTError,
-        gstErrorMessage: 'Please enter a valid GST number !'
+        gstErrorMessage: 'Please enter a valid GST number !',
+        dobError: checkDob
       });
     }
     const { dispatch } = this.context.store;
+    console.log(dob, 'Dob on submit%%%%%%');
     dispatch(updateUserProfile(this.state));
   };
-
+  convertDateYyyy = date => {
+    let newdate = '';
+    if (date !== '' || date !== 'undefined' || date !== 'Invalid date') {
+      newdate = date.split('-');
+      if (newdate[0].length === 4) {
+        newdate = newdate.reverse().join('-');
+      } else {
+        newdate = date;
+      }
+    }
+    return newdate;
+  };
+  convertDateDd = date => {
+    let newdate = '';
+    if (date !== '' || date !== 'undefined' || date !== 'Invalid date') {
+      newdate = date.split('-');
+      if (newdate[0].length === 2) {
+        newdate = newdate.reverse().join('-');
+      } else {
+        newdate = date;
+      }
+    }
+    return newdate;
+  };
   render() {
-    const styles = require('./index.scss');
     const {
       email,
       phone,
       fullName,
       gst,
+      dob,
+      gender,
+      city,
       gstError,
       gstErrorMessage,
       emailError,
@@ -140,47 +247,83 @@ export default class ProfileForm extends Component {
       phoneError,
       phoneErrorMessage,
       fullNameError,
-      fullNameErrorMessage
+      fullNameErrorMessage,
+      dobError,
+      dobErrorMessage,
+      genderError,
+      genderErrorMessage,
+      cityError,
+      cityErrorMessage,
+      showEditForm
     } = this.state;
     const { response } = this.props;
+    console.log(dob, 'dob');
     return (
-      <div className={styles.formContainer}>
-        <Section mb="0.3125rem" pr="0.5rem" pl="0.5rem">
-          <Row display="block" mr="0" ml="0">
-            <Heading fontSize="1.25rem" color="textDark" mb="0px" mt="0px" fontFamily="light">
-              Profile Information
-            </Heading>
-          </Row>
-        </Section>
-        <div className={styles.formWrapper}>
-          <Section p="0.5rem" mb="0">
-            <Row display="block" mr="0" ml="0">
-              <Div>
-                <ProfileFormContainer
-                  email={email}
-                  onChangeEmail={() => {}}
-                  emailFeedBackError={emailError}
-                  emailFeedBackMessage={emailErrorMessage}
-                  gst={gst}
-                  onChangeGST={this.onChangeGST}
-                  gstFeedBackError={gstError}
-                  gstFeedBackMessage={gstErrorMessage}
-                  phone={phone}
-                  onChangePhone={() => {}}
-                  phoneFeedBackError={phoneError}
-                  phoneFeedBackMessage={phoneErrorMessage}
-                  fullName={fullName}
-                  onChangeFullName={this.onChangeFullName}
-                  fullNameFeedBackError={fullNameError}
-                  fullNameFeedBackMessage={fullNameErrorMessage}
-                  onSubmitProfile={this.onSubmitProfile}
-                  response={response}
-                />
-              </Div>
-            </Row>
-          </Section>
-        </div>
-      </div>
+      <Box>
+        <Box>
+          <Heading
+            fontSize={20}
+            color="textDark"
+            pb={16}
+            mb={30}
+            sx={{
+              borderBottom: 'divider'
+            }}
+          >
+            Profile Details
+          </Heading>
+          <Box>
+            <ProfileViewRow title="Full Name" value={fullName} />
+            <ProfileViewRow title="E-mail-ID" value={email} />
+            <ProfileViewRow title="Phone" value={phone} />
+            <ProfileViewRow title="Gender" value={gender} />
+            <ProfileViewRow title="Date of Birth" value={this.convertDateYyyy(dob)} />
+            <ProfileViewRow title="Location" value={city} />
+          </Box>
+        </Box>
+        <Box pt={50} pb={20}>
+          <Button variant="outline.primary" width={180} onClick={() => this.setState({ showEditForm: !showEditForm })}>
+            Edit
+          </Button>
+        </Box>
+        {showEditForm ? (
+          <Box>
+            <ProfileFormContainer
+              email={email}
+              onChangeEmail={() => {}}
+              emailFeedBackError={emailError}
+              emailFeedBackMessage={emailErrorMessage}
+              gst={gst}
+              onChangeGST={this.onChangeGST}
+              gstFeedBackError={gstError}
+              gstFeedBackMessage={gstErrorMessage}
+              phone={phone}
+              onChangePhone={() => {}}
+              phoneFeedBackError={phoneError}
+              phoneFeedBackMessage={phoneErrorMessage}
+              fullName={fullName}
+              onChangeFullName={this.onChangeFullName}
+              fullNameFeedBackError={fullNameError}
+              fullNameFeedBackMessage={fullNameErrorMessage}
+              dob={this.convertDateDd(dob)}
+              dobFeedBackError={dobError}
+              dobFeedBackMessage={dobErrorMessage}
+              gender={gender}
+              genderFeedBackError={genderError}
+              genderFeedBackMessage={genderErrorMessage}
+              city={city}
+              cityFeedBackError={cityError}
+              cityFeedBackMessage={cityErrorMessage}
+              onChangeGender={this.onChangeGender}
+              onChangeCity={this.onChangeCity}
+              onChangeDob={this.onChangeDob}
+              onCancelSubmit={() => this.setState({ showEditForm: !showEditForm })}
+              onSubmitProfile={this.onSubmitProfile}
+              response={response}
+            />
+          </Box>
+        ) : null}
+      </Box>
     );
   }
 }

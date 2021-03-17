@@ -3,17 +3,13 @@ import Select from 'react-select';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import Container from 'hometown-components-dev/lib/Container';
-// import Text from 'hometown-components-dev/lib/Text';
-import Div from 'hometown-components-dev/lib/Div';
-import Section from 'hometown-components-dev/lib/Section';
-import Row from 'hometown-components-dev/lib/Row';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Section from 'hometown-components-dev/lib/SectionHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
 import { getDateFilters } from 'utils/helper';
 import { loadMyOrders } from 'redux/modules/orders';
 import { loadOrdersTracking, closeModal, setCurrentOrder } from 'redux/modules/tracking';
-// import { Label } from 'hometown-components-dev/lib/Label';
-import MyMenu from 'components/MyMenu';
-import Button from 'hometown-components-dev/lib/Buttons';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import OrderBlock from './OrderBlock';
 
 // import ProductItems from '../../data/RecentlyViewedProducts.js';
@@ -39,7 +35,7 @@ const mapStateToProps = ({
   contactNumber
 });
 
-class MyOrder extends Component {
+class MyOrderContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -120,12 +116,11 @@ class MyOrder extends Component {
       setCurrentOrder: setOrderNumber
     } = this.props;
     return (
-      <Div type="block">
-        <MyMenu page="order" />
-        <Section display="flex" pt="1.25rem" mb="0" height="auto">
-          <Container type="container" pr="0.5rem" pl="0.5rem">
-            <Row display="block" mr="0" ml="0" mb="1.5rem">
-              <Div col="3" mr="1rem">
+      <Box>
+        <Section mt={0} pt="1.25rem" mb="0" height="auto">
+          <Box pr="0.5rem" pl="0.5rem" width={1}>
+            <Row mr="0" ml="0" mb="1.5rem">
+              <Box col="3" mr="1rem" width="25%">
                 <Select
                   placeholder="Select From Date"
                   defaultValue={null}
@@ -133,7 +128,7 @@ class MyOrder extends Component {
                   onChange={this.onChangeDate}
                   options={getDateFilters(this.FILTER_CONFIG)}
                 />
-              </Div>
+              </Box>
               {/* <Div col="3" mr="1rem" hide>
                 <Select
                   placeholder="Select Order Status"
@@ -143,22 +138,24 @@ class MyOrder extends Component {
                   options={this.STATUS_FILTER}
                 />
               </Div> */}
-              <Div col="2" mr="1rem">
+              <Box col="2" mr="1rem" width="16.65%">
                 <Button
                   disabled={loading}
                   onClick={this.getFilteredOrders}
                   border="1px solid"
-                  color="red"
                   lh="1.5"
                   size="block"
                   btnType="primary"
                   btnColor="#515151"
                   height="38px"
+                  width="100%"
+                  color="colors.white"
+                  bg="rgb(249, 141, 41)"
                   fontSize="16px"
                 >
                   {loading ? 'Please Wait ...' : 'Find'}
                 </Button>
-              </Div>
+              </Box>
             </Row>
             {results.map((item, index) => (
               <OrderBlock
@@ -169,18 +166,18 @@ class MyOrder extends Component {
                 closeModal={closeTrackingModal}
               />
             ))}
-          </Container>
+          </Box>
         </Section>
-      </Div>
+      </Box>
     );
   }
 }
-MyOrder.defaultProps = {
+MyOrderContainer.defaultProps = {
   results: [],
   loading: false,
   contactNumber: ''
 };
-MyOrder.propTypes = {
+MyOrderContainer.propTypes = {
   results: PropTypes.array,
   contactNumber: PropTypes.string,
   loading: PropTypes.bool,
@@ -189,4 +186,4 @@ MyOrder.propTypes = {
   setCurrentOrder: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired
 };
-export default connect(mapStateToProps, mapDispatchToProps)(MyOrder);
+export default connect(mapStateToProps, mapDispatchToProps)(MyOrderContainer);

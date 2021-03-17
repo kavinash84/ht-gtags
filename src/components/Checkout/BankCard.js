@@ -1,9 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Div from 'hometown-components-dev/lib/Div';
-import { Label } from 'hometown-components-dev/lib/Label';
 
-const styles = require('./Checkout.scss');
+/**
+ * Components
+ */
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
+import Flex from 'hometown-components-dev/lib/FlexHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import Label from 'hometown-components-dev/lib/LabelHtV1';
 
 const changeDetails = (dispatcher, gateway, name, detailkey) => () => {
   dispatcher({ gateway, data: { [detailkey]: name } });
@@ -12,14 +17,21 @@ const changeDetails = (dispatcher, gateway, name, detailkey) => () => {
 const BankCard = ({
  name, img, setPaymentDetails, gateway, detailkey, currentSelection
 }) => (
-  <Div col="4" pr="1rem" onClick={changeDetails(setPaymentDetails, gateway, name, detailkey)}>
-    <Div className={styles.bankCard}>
-      <input type="radio" name="bankOptions" id={`bankOptions${name}`} checked={currentSelection === name} />
-      <Label for={`bankOptions${name}`} bg="#FFF" mb="15px">
-        <img src={img} alt={name} />
+  <Col variant="col-4" onClick={changeDetails(setPaymentDetails, gateway, name, detailkey)} py={10}>
+    <Flex alignItems="center">
+      <Box
+        as="input"
+        type="radio"
+        name="bankOptions"
+        id={`bankOptions${name}`}
+        checked={currentSelection === name}
+        mr={10}
+      />
+      <Label for={`bankOptions${name}`} bg="white">
+        <Image src={img} alt={name} maxHeight={24} sx={{ flexShrink: 0 }} />
       </Label>
-    </Div>
-  </Div>
+    </Flex>
+  </Col>
 );
 
 BankCard.defaultProps = {

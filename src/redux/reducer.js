@@ -12,6 +12,7 @@ import stores from './modules/stores';
 import userLogin from './modules/login';
 import userSignUp from './modules/signUp';
 import updatepassword from './modules/updatepassword';
+import setpassword from './modules/setpassword';
 import profile from './modules/profile';
 import forgotpassword from './modules/forgotpassword';
 import category from './modules/category';
@@ -38,6 +39,9 @@ import analytics from './modules/analytics';
 import services from './modules/services';
 import cases from './modules/cases';
 import combinedbuy from './modules/combinedbuy';
+import landing from './modules/landing';
+import selectForDemo from './modules/selectForDemo';
+import webtochat from './modules/webtochat';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -57,13 +61,15 @@ export default function createReducers(asyncReducers) {
       products: homepage,
       offers: homepage,
       footer: homepage,
-      recentlyviewed: homepage
+      recentlyviewed: homepage,
+      instafeeds: homepage
     }),
     category,
     stores,
     userLogin,
     userSignUp,
     updatepassword,
+    setpassword,
     profile,
     forgotpassword,
     productdetails,
@@ -89,6 +95,9 @@ export default function createReducers(asyncReducers) {
     services,
     cases,
     mycases,
+    landing,
+    selectForDemo,
+    webtochat,
     ...asyncReducers
   };
 }

@@ -1,35 +1,55 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import AddCart from 'hometown-components-dev/lib/Icons/AddCart';
-import Button from 'hometown-components-dev/lib/Buttons';
-import Img from 'hometown-components-dev/lib/Img';
-import Span from 'hometown-components-dev/lib/Span';
-import Div from 'hometown-components-dev/lib/Div';
+
+/**
+ * Components
+ */
+// import AddCartIcon from 'hometown-components-dev/lib/Icons/AddCart';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+
+/**
+ * Modules / Helpers / Selectors
+ */
 import * as actionCreators from 'redux/modules/cart';
 import { getCartListSKU } from 'selectors/cart';
 import { PINCODE, CART_URL } from 'helpers/Constants';
 
 const checkSKUInCart = (list, sku) => list.includes(sku);
-const styles = require('./AddToCart.scss');
+const checkSKUItemsInCart = (list, sku, quantity) => {
+  let numberIsSame = false;
+  list.forEach(item => {
+    if (item.configurable_sku === sku && item.qty === quantity) {
+      numberIsSame = true;
+    }
+  });
+  return numberIsSame;
+};
 const LoaderIcon = require('../../../static/refresh.svg');
-const CheckedIcon = require('../../../static/added-to-cart-icon.png');
+// const CheckedIcon = require('../../../static/added-to-cart-icon.png');
 
-const onClick = (key, skuId, simpleSku, session, pincode) => dispatcher => e => {
+const onClick = (key, skuId, simpleSku, session, pincode, quantity, configId) => dispatcher => e => {
   e.preventDefault();
-  dispatcher(key, skuId, simpleSku, session, pincode);
+  dispatcher(key, skuId, simpleSku, session, pincode, quantity, configId);
 };
 
 const mapStateToProps = ({
- app: { sessionId }, pincode, cart, cart: { addingToCart, addedToCart, key }
+ app: { sessionId }, pincode, cart, cart: {
+ addingToCart, addedToCart, key, data
+}
 }) => ({
   session: sessionId,
   pincode: pincode.selectedPincode ? pincode.selectedPincode : PINCODE,
   addingToCart,
   addedToCart,
   stateId: key,
-  cartSKUs: getCartListSKU(cart)
+  cartSKUs: getCartListSKU(cart),
+  cart,
+  cartData: data
 });
 
 const AddToCart = ({
@@ -37,93 +57,70 @@ const AddToCart = ({
   simpleSku,
   sku,
   addToCart,
+  updateCart,
   pincode,
   cartSKUs,
   addingToCart,
   itemId,
   stateId,
-  size,
   isSoldOut,
+  quantity,
+  quantityChange,
+  skuItem,
+  cartData,
+  size,
   height,
-  btnColor,
-  btnType,
-  ta,
-  fontSize
+  configId
 }) => {
   const checkStatus = checkSKUInCart(cartSKUs, sku);
+  const checkSKUItem = checkSKUItemsInCart(cartData, sku, quantity);
   const addLoading = addingToCart && stateId === itemId;
+  const { id_customer_cart: cartId = '', qty } = skuItem;
+  const updateQty = qty ? quantity - qty : quantity;
   return (
-    <Div ta={ta}>
+    <Fragment>
       {isSoldOut ? (
-        <div>
-          <Button
-            btnType="custom"
-            border="1px solid"
-            bc="white"
-            color="red"
-            p="4px 8px"
-            size={size}
-            height={height}
-            lh="1.5"
-          >
-            <Span fontSize="12px" fontFamily="regular" color="red" va="text-top">
-              Out of Stock
-            </Span>
-          </Button>
-        </div>
+        <Button variant={`outline.error.${size}`} height={height}>
+          Out of Stock
+        </Button>
       ) : (
-        <div>
-          {!checkStatus ? (
+        <Fragment>
+          {!checkStatus || !checkSKUItem ? (
             <Button
-              btnType={btnType}
-              border="1px solid"
-              bc={btnColor === 'transparent' ? '#f98d29' : btnColor}
-              color={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
-              bg={btnColor === 'transparent' ? 'transparent' : btnColor}
-              p="4px 8px"
-              lh="1.5"
-              size={size}
-              disabled={addLoading}
-              onClick={onClick(itemId, sku, simpleSku, session, pincode)(addToCart)}
-              className={styles.addToCartBtn}
+              variant={`outline.primary.${size}`}
+              width={1}
               height={height}
+              disabled={addLoading}
+              onClick={e => {
+                if (quantityChange && updateQty !== 0 && checkStatus) {
+                  const handler = onClick(cartId, sku, simpleSku, session, pincode, updateQty, configId)(updateCart);
+                  handler(e);
+                } else {
+                  const handler = onClick(itemId, sku, simpleSku, session, pincode, configId)(addToCart);
+                  handler(e);
+                }
+              }}
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
             >
-              {!addLoading && (
-                <AddCart
-                  width="18px"
-                  height="18px"
-                  va="middle"
-                  fill={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
-                />
-              )}
-              {addLoading && <Img className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />}
-              <Span
-                ml="2px"
-                fontSize={fontSize}
-                fontFamily="regular"
-                color={btnColor === 'transparent' ? '#f98d29' : '#FFF'}
-                va="middle"
-                lh="1.8"
-              >
-                {addLoading ? 'Adding..' : 'Add to Cart'}
-              </Span>
+              {addLoading && <Image className="spin" src={LoaderIcon} width="18px" mr={10} />}
+              {addLoading ? 'Adding...' : 'Add to Cart'}
             </Button>
           ) : (
-            <Div display="block" mb="0">
-              <span className={styles.addedToCart}>
-                <Img width="22px" src={CheckedIcon} display="inline" va="middle" mr="8px" />
-                Added to Cart
-              </span>
-              <Link className={`${styles.goToCart} ${height !== 'auto' && styles.heightFix} `} to={CART_URL}>
-                <Span ml="0" fontSize="12px" fontFamily="regular" color="#FFF" va="text-bottom" lh="1.5">
-                  Go to Cart
-                </Span>
-              </Link>
-            </Div>
+            <Row mx={0} alignItems="center">
+              <Box as={Link} to={CART_URL} width={1}>
+                <Button variant="outline.primary.large" width={1}>
+                  GO TO CART
+                </Button>
+              </Box>
+            </Row>
           )}
-        </div>
+        </Fragment>
       )}
-    </Div>
+    </Fragment>
   );
 };
 
@@ -132,13 +129,14 @@ AddToCart.defaultProps = {
   addingToCart: false,
   itemId: '',
   stateId: '',
-  size: 'default',
   isSoldOut: false,
-  height: 'auto',
-  btnColor: '#f98d29',
-  btnType: 'custom',
-  ta: 'center',
-  fontSize: '16px'
+  quantity: 1,
+  quantityChange: false,
+  skuItem: {},
+  cartData: {},
+  size: 'large',
+  height: 44,
+  configId: ''
 };
 
 AddToCart.propTypes = {
@@ -148,16 +146,18 @@ AddToCart.propTypes = {
   session: PropTypes.string.isRequired,
   pincode: PropTypes.string.isRequired,
   addToCart: PropTypes.func.isRequired,
+  updateCart: PropTypes.func.isRequired,
   addingToCart: PropTypes.bool,
   itemId: PropTypes.string,
   stateId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  isSoldOut: PropTypes.bool,
+  quantity: PropTypes.number,
+  quantityChange: PropTypes.bool,
+  skuItem: PropTypes.object,
+  cartData: PropTypes.object,
   size: PropTypes.string,
-  height: PropTypes.string,
-  btnColor: PropTypes.string,
-  btnType: PropTypes.string,
-  ta: PropTypes.string,
-  fontSize: PropTypes.string,
-  isSoldOut: PropTypes.bool
+  height: PropTypes.number,
+  configId: PropTypes.string
 };
 
 export default connect(mapStateToProps, { ...actionCreators })(AddToCart);

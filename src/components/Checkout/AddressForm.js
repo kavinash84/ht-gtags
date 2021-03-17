@@ -3,9 +3,15 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from 'redux/modules/address';
-import FormInput from 'hometown-components-dev/lib/Forms/FormInput';
-import Div from 'hometown-components-dev/lib/Div';
-import Row from 'hometown-components-dev/lib/Row';
+
+/**
+ * Components
+ */
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
+import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
+import Label from 'hometown-components-dev/lib/LabelHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
 import Pincode from './Pincode';
 
 const mapStateToProps = ({ address }, props) => ({
@@ -59,9 +65,12 @@ const AddressForm = props => {
   } = props;
   const { formType, isLoggedIn, userEmail } = props;
   return (
-    <div>
-      <Row display="block" mr="0" ml="0">
-        <Div col="12">
+    <Box pt={30}>
+      <Box mb={20} pb={20} sx={{ borderBottom: 'divider' }}>
+        <Label variant="formHeading">Personal Details</Label>
+      </Box>
+      <Row>
+        <Col variant="col-12">
           <FormInput
             label="Full Name *"
             type="text"
@@ -70,12 +79,11 @@ const AddressForm = props => {
             value={fullName}
             feedBackError={fullNameFeedBackError}
             feedBackMessage={fullNameFeedBackMessage}
+            variant="input"
           />
-        </Div>
-      </Row>
-      <Row display="block" mr="0" ml="0">
+        </Col>
         {!isLoggedIn && (
-          <Div col="6" pr="10px">
+          <Col variant="col-6">
             <FormInput
               label="Email ID *"
               type={isLoggedIn ? 'hidden' : 'text'}
@@ -85,10 +93,11 @@ const AddressForm = props => {
               feedBackError={isLoggedIn ? false : emailFeedBackError}
               feedBackMessage={emailFeedBackMessage}
               readOnly={isLoggedIn}
+              variant="input"
             />
-          </Div>
+          </Col>
         )}
-        <Div col={!isLoggedIn ? '6' : '12'} pl={!isLoggedIn ? '10px' : '0'}>
+        <Col variant={!isLoggedIn ? 'col-6' : 'col-12'}>
           <FormInput
             label="Phone *"
             type="text"
@@ -97,49 +106,57 @@ const AddressForm = props => {
             value={phone}
             feedBackError={phoneFeedBackError}
             feedBackMessage={phoneFeedBackMessage}
+            variant="input"
           />
-        </Div>
+        </Col>
       </Row>
-      <Row display="block" mr="0" ml="0">
-        <Div col="4" pr="10px">
+      <Box mb={20} pb={20} mt={30} sx={{ borderBottom: 'divider' }}>
+        <Label variant="formHeading">{formType === 'billing' ? 'Billing' : 'Shipping'} Address</Label>
+      </Box>
+      <Row>
+        <Col variant="col-4">
           <FormInput
             id="add1"
-            label="Flat, House no., Building, Apartment: *"
+            label="Flat, House no., Building, Apartment*"
             type="textarea"
-            placeholder=""
             onChange={e => onChangeAddress1(formType, e.target.value.replace(/#/g, ''))}
             value={address1}
             feedBackError={addressFeedBackError1}
             feedBackMessage={addressFeedBackMessage1}
+            variant="input"
+            height="auto"
           />
-        </Div>
-        <Div col="4" pr="10px" pl="10px">
+        </Col>
+        <Col variant="col-4">
           <FormInput
             id="add2"
-            label="Area, Colony, Street, Sector:"
+            label="Area, Colony, Street, Sector: *"
             type="textarea"
-            placeholder=""
             onChange={e => onChangeAddress2(formType, e.target.value.replace(/#/g, ''))}
             value={address2}
             feedBackError={addressFeedBackError2}
             feedBackMessage={addressFeedBackMessage2}
+            variant="input"
+            height="auto"
           />
-        </Div>
-        <Div col="4" pl="10px">
+        </Col>
+        <Col variant="col-4">
           <FormInput
             id="add3"
-            label="Landmark,Village:"
+            label="Landmark,Village"
             type="textarea"
             placeholder=""
             onChange={e => onChangeAddress3(formType, e.target.value.replace(/#/g, ''))}
             value={address3}
             feedBackError={addressFeedBackError3}
             feedBackMessage={addressFeedBackMessage3}
+            variant="input"
+            height="auto"
           />
-        </Div>
+        </Col>
       </Row>
-      <Row display="block" mr="0" ml="0">
-        <Div col="6" pr="10px">
+      <Row>
+        <Col variant="col-6">
           <Pincode
             id="pincodeId"
             pincode={pincode}
@@ -148,21 +165,8 @@ const AddressForm = props => {
             onChangePincode={onChangePincode}
             feedBackMessage={pincodeFeedBackMessage}
           />
-        </Div>
-        <Div col="6" pr="10px">
-          <FormInput
-            label="City *"
-            type="text"
-            placeholder=""
-            value={city}
-            feedBackError={cityFeedBackError}
-            feedBackMessage={cityFeedBackMessage}
-            readOnly
-          />
-        </Div>
-      </Row>
-      <Row display="block" mr="0" ml="0">
-        <Div col="6" pr="10px">
+        </Col>
+        <Col variant="col-6">
           <FormInput
             label="State *"
             type="text"
@@ -171,23 +175,39 @@ const AddressForm = props => {
             feedBackError={stateFeedBackError}
             feedBackMessage={stateFeedBackMessage}
             readOnly
+            variant="input"
           />
-        </Div>
+        </Col>
+      </Row>
+      <Row>
+        <Col variant="col-6">
+          <FormInput
+            label="City *"
+            type="text"
+            placeholder=""
+            value={city}
+            feedBackError={cityFeedBackError}
+            feedBackMessage={cityFeedBackMessage}
+            readOnly
+            variant="input"
+          />
+        </Col>
         {formType !== 'billing' && (
-          <Div col="6" pr="10px">
+          <Col variant="col-6">
             <FormInput
-              label="GST"
+              label="GST(optional)"
               type="text"
               placeholder=""
               onChange={e => onChangeGST(formType, e.target.value)}
               value={gst}
               feedBackError={gstFeedBackError}
               feedBackMessage={gstFeedBackMessage}
+              variant="input"
             />
-          </Div>
+          </Col>
         )}
       </Row>
-    </div>
+    </Box>
   );
 };
 

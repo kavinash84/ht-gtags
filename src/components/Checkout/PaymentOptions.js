@@ -1,22 +1,28 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import Container from 'hometown-components-dev/lib/Container';
-import Div from 'hometown-components-dev/lib/Div';
-import Row from 'hometown-components-dev/lib/Row';
-import Img from 'hometown-components-dev/lib/Img';
-import Text from 'hometown-components-dev/lib/Text';
-import Section from 'hometown-components-dev/lib/Section';
-import Button from 'hometown-components-dev/lib/Buttons';
-import Heading from 'hometown-components-dev/lib/Heading';
-import { Label } from 'hometown-components-dev/lib/Label';
-import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
 
-import Footer from 'components/Footer';
+/**
+ * Components
+ */
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import ImageShimmer from 'hometown-components-dev/lib/ImageShimmerHtV1';
+import Label from 'hometown-components-dev/lib/LabelHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
+import Flex from 'hometown-components-dev/lib/FlexHtV1';
 
+/**
+ * modules / selectors / helpers
+ */
 import { formatAmount } from 'utils/formatters';
 import {
   setSelectedGateway,
@@ -26,46 +32,87 @@ import {
   setValidationError,
   resetEasyEmiState
 } from 'redux/modules/paymentoptions';
+import { paymentLoaded } from 'redux/modules/app';
+import { togglePopUp } from 'redux/modules/webtochat';
 import { getCartList, getNotDelivered, getStockOutProducts } from 'selectors/cart';
 
-// import BankCard from './BankCard';
-// import CardForm from './CardForm';
-import MenuCheckout from './MenuCheckout';
+/**
+ * Page Components
+ */
 import OrderSummary from './OrderSummary';
 import CommonPayments from './CommonPayments';
-import { validatePaymentDetails } from '../../utils/validation';
+import { validatePaymentDetails, validateVPA } from '../../utils/validation';
 import BankCard from './BankCard';
 import CardForm from './CardForm';
 import CardFormEasyEmi from './CardFormEasyEmi';
 import Emi from './Emi';
 import PaymentMethods from '../PaymentMethods/';
 import PaymentForm from './PaymentForm';
+import UpiForm from './UpiForm';
 
-const styles = require('./Checkout.scss');
 const cartStyles = require('../Cart/Cart.scss');
 
-// const nextStep = history => e => {
-//   e.preventDefault();
-//   history.push('/checkout/review-order');
-// };
-
-const calendarImage = require('../../../static/calendar.svg');
-const assemblyIcon = require('../../../static/cube-of-notes-stack.svg');
-
-const nextStep = (dispatcher, sessionId, paymentData, cardType) => e => {
+const nextStep = (
+  dispatcher,
+  paymentload,
+  sessionId,
+  paymentData,
+  cardType,
+  selectedGateway,
+  paymentMethodDetails
+) => e => {
   e.preventDefault();
-  dispatcher(sessionId, paymentData, cardType);
+  let walletType = '';
+  if (selectedGateway === 'Wallet') walletType = paymentMethodDetails[selectedGateway].walletName;
+  paymentload(false);
+  dispatcher(sessionId, paymentData, cardType, selectedGateway, walletType);
 };
 
 const onChangeDetails = (dispatcher, gateway) => e => {
   const { name, value } = e.target;
   dispatcher({ gateway, data: { [name]: value } });
 };
-
+const validateInput = details => {
+  if (details.Upi) {
+    const {
+      Upi: { upi_vpa: vpa }
+    } = details;
+    return !validateVPA(vpa);
+  }
+  return false;
+};
 @withRouter
 class PaymentOptions extends Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
+  };
+  state = {
+    popUpTimeoutId: null
+  };
+
+  componentDidMount() {
+    const { paymentTimeout } = this.props;
+    console.log('paymentTimeout', paymentTimeout);
+
+    const popUpTimeoutId = setTimeout(this.webToChat, paymentTimeout);
+    // eslint-disable-next-line react/no-did-mount-set-state
+    this.setState({ popUpTimeoutId });
+  }
+  componentWillUnmount() {
+    console.log('componentWillUnmount function in payment option');
+    const { toggleWebToChat } = this.props;
+    const { popUpTimeoutId } = this.state;
+    clearTimeout(popUpTimeoutId);
+    toggleWebToChat(false);
+  }
+  webToChat = () => {
+    const { toggleWebToChat, dismiss } = this.props;
+
+    const {
+      embedded_svc: { liveAgentAPI: { inviteButton: { isAvailable } = {} } = {} }
+    } = window;
+    console.log(isAvailable, !dismiss, 'webToChat function');
+    if (isAvailable && !dismiss) toggleWebToChat(true);
   };
   render() {
     const {
@@ -73,6 +120,7 @@ class PaymentOptions extends Component {
       selectedGateway,
       toggleGateway,
       setPaymentDetails,
+      paymentLoadedStatus,
       summary,
       submitting,
       history,
@@ -88,357 +136,309 @@ class PaymentOptions extends Component {
       submitted,
       error
     } = this.props;
+
     const [netBankingData] = data.filter(bank => bank.paymentType === 'NetBanking');
     const [WalletData] = data.filter(bank => bank.paymentType === 'Wallet');
     const isProductOutofStock = sku => outOfStockList.includes(sku);
+
     return (
-      <Div type="block">
-        <MenuCheckout history={history} page="payment" />
-        <Section display="flex" pt="1.25rem" pb="3.5rem" mb="0" height="auto">
-          <Container type="container" pr="2rem" pl="2rem">
-            <Row display="block" mr="0" ml="0">
-              <Div col="9" pr="1rem">
-                <Section display="flex" p="0" pt="0" pb="1.5rem" mb="0" height="auto">
-                  <Container type="container" pr="0" pl="0">
-                    <Row display="block" mr="0" ml="0">
-                      <Div col="12" pr="0" pt="0">
-                        {results.map((item, index) => (
-                          <div key={String(index)}>
-                            {(!item.product_info.is_deliverable || isProductOutofStock(item.configurable_sku)) && (
-                              <Row
-                                className={cartStyles.cartItem}
-                                type="block"
-                                m="0"
-                                mb="0"
-                                mt="0"
-                                key={item.id_customer_cart}
-                              >
-                                <Div className="td" col="2" pr="0.625rem">
-                                  <ImageShimmer src={item.product_info.image} height="131px">
-                                    {imageURL => <Img src={imageURL} alt="" />}
-                                  </ImageShimmer>
-                                </Div>
-                                <Div className="td" col="6" pr="2rem" pl="0.3125rem">
-                                  <Div mb="10px">
-                                    <Label color="text" mt="0">
-                                      {item.product_info.name}
-                                    </Label>
-                                  </Div>
-                                  <Div>
-                                    <Img
-                                      width="initial"
-                                      height="20px"
-                                      mr="0.625rem"
-                                      mt="3px"
-                                      float="left"
-                                      src={calendarImage}
-                                    />
-                                    <Text color="#575757" fontSize="0.75rem" mt="0" mb="0">
-                                      Delivery Details
-                                    </Text>
-                                    <Text
-                                      color={
-                                        item.product_info.delivery_time_text.indexOf('Sorry') === -1 ? 'green' : 'red'
-                                      }
-                                      fontSize="0.875rem"
-                                      mt="0"
-                                    >
-                                      {item.product_info.delivery_time_text}
-                                    </Text>
-                                  </Div>
-                                  {item.product_info.assembly_service && (
-                                    <Div color="uspTitle" fontSize="0.75rem">
-                                      <Img
-                                        width="initial"
-                                        height="20px"
-                                        mr="0.625rem"
-                                        mt="4px"
-                                        mb="50px"
-                                        float="left"
-                                        src={assemblyIcon}
-                                      />
-                                      <Text color="#575757" fontSize="0.75rem" mt="0" mb="0">
-                                        Assembly
-                                      </Text>
-                                      <Text fontSize="0.875rem" mt="0" mb="0">
-                                        Offered By Hometown
-                                      </Text>
-                                      <Text fontSize="0.875rem" mt="0">
-                                        <Button
-                                          className={cartStyles.popoverBtn}
-                                          fontSize="0.875rem"
-                                          color="#3cc0dc"
-                                          btnType="link"
-                                          p="0"
-                                        >
-                                          Details
-                                        </Button>
-                                        <div className={cartStyles.popover}>
-                                          <Text fontSize="0.875rem" mt="0" mb="0" ta="center">
-                                            Assembly will be done within 48hrs of Delivery & applicable within
-                                            serviceable limits
-                                          </Text>
-                                        </div>
-                                      </Text>
-                                    </Div>
-                                  )}
-                                </Div>
-                                <Div className="td" col="3" pr="0.625rem">
-                                  Quantity: {item.qty}
-                                  <br />
-                                  {item.product_info.unit_price !== item.product_info.special_price &&
-                                    item.product_info.special_price !== 0 && (
-                                      <Label color="black" fontSize="0.875rem" mt="0.625rem">
-                                        <s>Rs. {formatAmount(item.product_info.unit_price)}</s>
-                                      </Label>
-                                    )}
-                                  <br />
-                                  <Label color="primary" fontSize="1.25rem" mt="0">
-                                    Rs.{' '}
-                                    {item.product_info.special_price === 0
-                                      ? formatAmount(item.product_info.unit_price)
-                                      : formatAmount(item.product_info.special_price)}
-                                  </Label>
-                                </Div>
-                                <div className={cartStyles.loadingCart}>
-                                  <h4>
-                                    {/* eslint-disable*/}
-                                    {isProductOutofStock(item.configurable_sku)
-                                      ? 'This product is out of stock please remove before proceed.'
-                                      : "Sorry, this product isn't deliverable to selected pincode."}
-                                    <br />
-                                    {/* eslint-enable */}
-                                    <Link to="/checkout/delivery-address">
-                                      <Label fontSize="1rem" fontFamily="light" color="primary" p="0" mt="10px" mb="0">
-                                        Edit Address
-                                      </Label>
-                                    </Link>
-                                    <Link to="/checkout/cart">
-                                      <Label fontSize="1rem" fontFamily="light" color="primary" p="0" mt="10px" mb="0">
-                                        / Edit Cart
-                                      </Label>
-                                    </Link>
-                                  </h4>
-                                </div>
-                              </Row>
-                            )}
-                          </div>
-                        ))}
-                      </Div>
-                    </Row>
-                  </Container>
-                </Section>
-                <Row display="block" mr="0" ml="0">
-                  <Div col="12" bg="#969696">
-                    <Heading
-                      fontSize="1rem"
-                      ls="1px"
-                      mt="0.3125rem"
-                      mb="0.3125rem"
-                      color="white"
-                      p="10px 20px"
-                      pb="10px"
+      <Container my={[30, 30, 60]} px={[15, 15, 0]}>
+        <Row>
+          <Col variant="col-8">
+            {/* Product not deliverable */}
+            {results.map((item, index) => (
+              <Box key={String(index)}>
+                {(!item.product_info.is_deliverable || isProductOutofStock(item.configurable_sku)) && (
+                  <Row key={item.id_customer_cart} mb={16} mx={0} alignItems="center" sx={{ position: 'relative' }}>
+                    <Box variant="col-2" px={0}>
+                      <ImageShimmer
+                        src={item.product_info.image}
+                        height="100%"
+                        sx={{
+                          boxShadow: '0 1px 2px 0 #0000033'
+                        }}
+                      >
+                        {imageURL => (
+                          <Image
+                            width={1}
+                            src={imageURL}
+                            alt=""
+                            sx={{
+                              boxShadow: 'productThumb'
+                            }}
+                          />
+                        )}
+                      </ImageShimmer>
+                    </Box>
+                    <Box variant="col-6" pl={30} pr={0}>
+                      <Box mb={10}>
+                        <Heading color="heading" fontSize={16} lineHeight={1.4} fontWeight="normal">
+                          {item.product_info.name}
+                        </Heading>
+                      </Box>
+                      {item.product_info.color && (
+                        <Box mb={15}>
+                          <Text color="#575757">{item.product_info.color}</Text>
+                        </Box>
+                      )}
+                      <Box>
+                        <Label color="heading" fontSize={18}>
+                          ₹{' '}
+                          {item.product_info.special_price === 0
+                            ? formatAmount(Number(item.product_info.unit_price) * Number(item.qty))
+                            : formatAmount(Number(item.product_info.special_price) * Number(item.qty))}
+                        </Label>
+                      </Box>
+                    </Box>
+                    <Flex
+                      width={1}
+                      justifyContent="center"
+                      alignItems="center"
+                      flexDirection="column"
+                      sx={{
+                        position: 'absolute',
+                        height: '100%',
+                        textAlign: 'center',
+                        background: 'rgba(0, 0, 0, 0.7)',
+                        padding: 0,
+                        zIndex: 1,
+                        left: 0,
+                        top: 0,
+                        boxShadow: '2px 2px 7px 0 rgba(0, 0, 0, 0.1)'
+                      }}
                     >
-                      Select Payment Method
-                    </Heading>
-                  </Div>
-                </Row>
-                <Row display="block" mr="0" ml="0" mt="5px">
-                  <Div col="3">
-                    {data.map((paymentType, index) => (
-                      <div key={String(`${paymentType}${index}`)}>
-                        {CommonPayments(paymentType.paymentType, toggleGateway, selectedGateway, session, resetEasyEmi)}
-                      </div>
-                    ))}
-                  </Div>
-                  <Div col="9">
-                    <div className={styles.paymentFormOptions}>
-                      {selectedGateway === 'CreditCard' && (
-                        <Div col="12">
-                          <CardForm
-                            setPaymentDetails={setPaymentDetails}
-                            gateway={selectedGateway}
-                            padding="3rem 2rem"
-                          />
-                        </Div>
-                      )}
-                      {selectedGateway === 'DebitCard' && (
-                        <Div col="12">
-                          <CardForm
-                            setPaymentDetails={setPaymentDetails}
-                            gateway={selectedGateway}
-                            padding="3rem 2rem"
-                          />
-                        </Div>
-                      )}
-                      {selectedGateway === 'NetBanking' && (
-                        <Div col="12" className={styles.paymentBlock} p="3rem 2rem">
-                          <Div col="12" mb="1rem">
-                            <Label htmlFor="bankOptions1" color="textLight">
-                              Choose From Preferred Bank
-                            </Label>
-                          </Div>
-                          <BankCard
-                            setPaymentDetails={setPaymentDetails}
-                            gateway={selectedGateway}
-                            name="HDFB"
-                            detailkey="bankCode"
-                            img="https://static.hometown.in/media/cms/BankLOGO/hdfc.gif"
-                            currentSelection={paymentDetails.NetBanking.bankCode}
-                          />
-                          <BankCard
-                            setPaymentDetails={setPaymentDetails}
-                            gateway={selectedGateway}
-                            name="ICIB"
-                            detailkey="bankCode"
-                            img="https://static.hometown.in/media/cms/BankLOGO/icici.gif"
-                            currentSelection={paymentDetails.NetBanking.bankCode}
-                          />
-                          <BankCard
-                            setPaymentDetails={setPaymentDetails}
-                            gateway={selectedGateway}
-                            name="AXIB"
-                            detailkey="bankCode"
-                            img="https://static.hometown.in/media/cms/BankLOGO/axis.gif"
-                            currentSelection={paymentDetails.NetBanking.bankCode}
-                          />
-                          <BankCard
-                            setPaymentDetails={setPaymentDetails}
-                            gateway={selectedGateway}
-                            name="SBIB"
-                            detailkey="bankCode"
-                            img="https://static.hometown.in/media/cms/BankLOGO/sbi.gif"
-                            currentSelection={paymentDetails.NetBanking.bankCode}
-                          />
-                          <Div col="12" mt="1rem">
-                            <select
-                              className={`${styles.dropDown} ${styles.selectBank}`}
-                              name="bankCode"
-                              onChange={onChangeDetails(setPaymentDetails, selectedGateway)}
-                              value={paymentDetails.NetBanking.bankCode}
-                            >
-                              <option value="">Select Bank</option>
-                              {netBankingData &&
-                                netBankingData.netBankingBanks &&
-                                Object.keys(netBankingData.netBankingBanks).map((k, i) => (
-                                  <option value={k} key={k}>
-                                    {Object.values(netBankingData.netBankingBanks)[i]}
-                                  </option>
-                                ))}
-                            </select>
-                          </Div>
-                        </Div>
-                      )}
-                      {selectedGateway === 'Emi' && (
-                        <Emi
-                          selectedGateway={selectedGateway}
+                      <Heading color="white" fontSize={20}>
+                        {isProductOutofStock(item.configurable_sku)
+                          ? 'This product is out of stock please remove before proceed.'
+                          : "Sorry, this product isn't deliverable to selected pincode."}
+                      </Heading>
+                      <Flex mt={15} justifyContent="center">
+                        <Link to="/checkout/delivery-address" sx={{ cursor: 'pointer' }}>
+                          <Label fontSize={16} color="primary">
+                            Edit Address{' '}
+                          </Label>
+                        </Link>
+                        <Box color="primary" mx={5}>
+                          /
+                        </Box>
+                        <Link to="/checkout/cart" sx={{ cursor: 'pointer' }}>
+                          <Label fontSize={16} color="primary">
+                            Edit Cart
+                          </Label>
+                        </Link>
+                      </Flex>
+                    </Flex>
+                  </Row>
+                )}
+              </Box>
+            ))}
+            <Box mb={20}>
+              <Heading variant="heading.medium">Payment Method</Heading>
+            </Box>
+            <Row flexWrap="nowrap" ml={0} mr={0}>
+              <Row mx={0} flexDirection="column" maxHeight="360px" minWidth={140} width={201}>
+                {data.map((paymentType, index) => (
+                  <Col key={String(`${paymentType}${index}`)} px={0}>
+                    {CommonPayments(paymentType.paymentType, toggleGateway, selectedGateway, session, resetEasyEmi)}
+                  </Col>
+                ))}
+              </Row>
+              {/* Payment options form */}
+              <Box px={40} pt={30} ml={-1} pb={20} width="calc(100% - 199px)" sx={{ border: 'secondary' }}>
+                {/* UPI Form */}
+                {selectedGateway === 'Upi' && (
+                  <UpiForm setPaymentDetails={setPaymentDetails} gateway={selectedGateway} padding="3rem 2rem" />
+                )}
+                {selectedGateway === 'CreditCard' && (
+                  <CardForm
+                    setPaymentDetails={setPaymentDetails}
+                    gateway={selectedGateway}
+                    padding="2rem 2.5rem 1.5rem"
+                  />
+                )}
+                {selectedGateway === 'DebitCard' && (
+                  <CardForm
+                    setPaymentDetails={setPaymentDetails}
+                    gateway={selectedGateway}
+                    padding="2rem 2.5rem 1.5rem"
+                  />
+                )}
+                {selectedGateway === 'NetBanking' && (
+                  <Fragment>
+                    <Box pb={20}>
+                      <Label>Choose From Preferred Bank</Label>
+                    </Box>
+                    <Row>
+                      <BankCard
+                        setPaymentDetails={setPaymentDetails}
+                        gateway={selectedGateway}
+                        name="HDFB"
+                        detailkey="bankCode"
+                        img="https://static.hometown.in/media/cms/BankLOGO/hdfc.gif"
+                        currentSelection={paymentDetails.NetBanking.bankCode}
+                      />
+                      <BankCard
+                        setPaymentDetails={setPaymentDetails}
+                        gateway={selectedGateway}
+                        name="ICIB"
+                        detailkey="bankCode"
+                        img="https://static.hometown.in/media/cms/BankLOGO/icici.gif"
+                        currentSelection={paymentDetails.NetBanking.bankCode}
+                      />
+                      <BankCard
+                        setPaymentDetails={setPaymentDetails}
+                        gateway={selectedGateway}
+                        name="AXIB"
+                        detailkey="bankCode"
+                        img="https://static.hometown.in/media/cms/BankLOGO/axis.gif"
+                        currentSelection={paymentDetails.NetBanking.bankCode}
+                      />
+                      <BankCard
+                        setPaymentDetails={setPaymentDetails}
+                        gateway={selectedGateway}
+                        name="SBIB"
+                        detailkey="bankCode"
+                        img="https://static.hometown.in/media/cms/BankLOGO/sbi.gif"
+                        currentSelection={paymentDetails.NetBanking.bankCode}
+                      />
+                    </Row>
+                    <Box
+                      as="select"
+                      variant="input"
+                      name="bankCode"
+                      onChange={onChangeDetails(setPaymentDetails, selectedGateway)}
+                      value={paymentDetails.NetBanking.bankCode}
+                    >
+                      <option value="">Select Bank</option>
+                      {netBankingData &&
+                        netBankingData.netBankingBanks &&
+                        Object.keys(netBankingData.netBankingBanks).map((k, i) => (
+                          <option value={k} key={k}>
+                            {Object.values(netBankingData.netBankingBanks)[i]}
+                          </option>
+                        ))}
+                    </Box>
+                  </Fragment>
+                )}
+                {selectedGateway === 'Emi' && (
+                  <Emi
+                    selectedGateway={selectedGateway}
+                    setPaymentDetails={setPaymentDetails}
+                    currentSelection={paymentDetails.Emi.emiBank}
+                  />
+                )}
+                {selectedGateway === 'EasyEmi' && (
+                  <CardFormEasyEmi
+                    setPaymentDetails={setPaymentDetails}
+                    gateway={selectedGateway}
+                    padding="2rem 2.5rem 1.5rem"
+                  />
+                )}
+                {WalletData && selectedGateway === 'Wallet' && (
+                  <Fragment>
+                    <Box pb={20}>
+                      <Label htmlFor="bankOptions1">Select From your preferred Wallet</Label>
+                    </Box>
+                    <Row>
+                      {WalletData.isPaytmWalletEnable && (
+                        <BankCard
                           setPaymentDetails={setPaymentDetails}
-                          currentSelection={paymentDetails.Emi.emiBank}
+                          gateway={selectedGateway}
+                          name="Paytm"
+                          detailkey="walletName"
+                          currentSelection={paymentDetails.Wallet.walletName}
+                          img="https://static.hometown.in/images/local_v2/onestepcheckout/logo/paytm.jpg"
                         />
                       )}
-                      {selectedGateway === 'EasyEmi' && (
-                        <Div col="12">
-                          <CardFormEasyEmi
-                            setPaymentDetails={setPaymentDetails}
-                            gateway={selectedGateway}
-                            padding="3rem 2rem"
-                          />
-                        </Div>
+                      {WalletData.isPayuWalletEnable && (
+                        <BankCard
+                          setPaymentDetails={setPaymentDetails}
+                          gateway={selectedGateway}
+                          name="Payu"
+                          detailkey="walletName"
+                          currentSelection={paymentDetails.Wallet.walletName}
+                          img="https://static.hometown.in/images/local_v2/onestepcheckout/logo/payu.jpg"
+                        />
                       )}
-                      {WalletData && selectedGateway === 'Wallet' && (
-                        <Div col="12" className={styles.paymentBlock} p="3rem 2rem">
-                          <Div col="12" mb="1rem">
-                            <Label htmlFor="bankOptions1" color="textLight">
-                              Select From your preferred Wallet
-                            </Label>
-                          </Div>
-
-                          {WalletData.isPaytmWalletEnable && (
-                            <BankCard
-                              setPaymentDetails={setPaymentDetails}
-                              gateway={selectedGateway}
-                              name="Paytm"
-                              detailkey="walletName"
-                              currentSelection={paymentDetails.Wallet.walletName}
-                              img="https://static.hometown.in/images/local_v2/onestepcheckout/logo/paytm.jpg"
-                            />
-                          )}
-                          {WalletData.isPayuWalletEnable && (
-                            <BankCard
-                              setPaymentDetails={setPaymentDetails}
-                              gateway={selectedGateway}
-                              name="Payu"
-                              detailkey="walletName"
-                              currentSelection={paymentDetails.Wallet.walletName}
-                              img="https://static.hometown.in/images/local_v2/onestepcheckout/logo/payu.jpg"
-                            />
-                          )}
-                          {WalletData.isMobikwikWalletEnable && (
-                            <BankCard
-                              setPaymentDetails={setPaymentDetails}
-                              gateway={selectedGateway}
-                              name="Mobikwik"
-                              detailkey="walletName"
-                              currentSelection={paymentDetails.Wallet.walletName}
-                              img="https://static.hometown.in/images/local_v2/onestepcheckout/logo/mobikwik.jpg"
-                            />
-                          )}
-                        </Div>
+                      {WalletData.isMobikwikWalletEnable && (
+                        <BankCard
+                          setPaymentDetails={setPaymentDetails}
+                          gateway={selectedGateway}
+                          name="Mobikwik"
+                          detailkey="walletName"
+                          currentSelection={paymentDetails.Wallet.walletName}
+                          img="https://static.hometown.in/images/local_v2/onestepcheckout/logo/mobikwik.jpg"
+                        />
                       )}
-                    </div>
-                  </Div>
-                </Row>
-              </Div>
-              <Div col="3">
-                <OrderSummary
-                  itemsTotal={summary.items}
-                  setDiscount={summary.combined_set_discount}
-                  savings={summary.savings}
-                  shipping={summary.shipping_charges}
-                  totalCart={summary.total}
-                  onClick={() => null}
-                  discount={summary.coupon_discount}
-                  itemsCount={summary.items_count}
-                  hidebutton
-                  hidecoupon
-                />
-                <Row display="block" mr="0" ml="0">
-                  <Div col="12">
-                    <Button
-                      size="block"
-                      btnType="primary"
-                      fontFamily="regular"
-                      height="42px"
-                      fontSize="1.125rem"
-                      lh="1"
-                      borderRadius="0"
-                      // onClick={nextStep(history)}
-                      onClick={nextStep(submitDetails, session, paymentDetails, cardType)}
-                      disabled={
-                        validatePaymentDetails(paymentDetails) ||
-                        undelivered.length > 0 ||
-                        outOfStockList.length > 0 ||
-                        submitting ||
-                        (submitted && error === null)
-                      }
-                    >
-                      {submitting ? 'Please wait...' : 'Place Order'}
-                    </Button>
-                  </Div>
-                </Row>
-                <PaymentMethods />
-              </Div>
+                    </Row>
+                  </Fragment>
+                )}
+              </Box>
             </Row>
-          </Container>
-        </Section>
-        <Footer />
+          </Col>
+
+          {/* Order Summary */}
+          <Col variant="col-4">
+            <Box bg="sidebar" px={40} py={30}>
+              <Row className={cartStyles.orderSummaryCon}>
+                <Box>
+                  <OrderSummary
+                    history={history}
+                    results={results}
+                    itemsTotal={summary.items}
+                    setDiscount={summary.combined_set_discount}
+                    savings={summary.savings}
+                    shipping={summary.shipping_charges}
+                    totalCart={summary.total}
+                    onClick={() => null}
+                    discount={summary.coupon_discount}
+                    itemsCount={summary.items_count}
+                    coupon={summary.coupon}
+                    hidebutton
+                    hidecoupon
+                  />
+                </Box>
+                <Box className={cartStyles.orderSummaryOverly} />
+              </Row>
+              <Box width={1} pb={30}>
+                <Button
+                  type="default"
+                  height={48}
+                  fontSize={18}
+                  width={1}
+                  onClick={nextStep(
+                    submitDetails,
+                    paymentLoadedStatus,
+                    session,
+                    paymentDetails,
+                    cardType,
+                    selectedGateway,
+                    paymentDetails
+                  )}
+                  disabled={
+                    validateInput(paymentDetails) ||
+                    validatePaymentDetails(paymentDetails) ||
+                    undelivered.length > 0 ||
+                    outOfStockList.length > 0 ||
+                    submitting ||
+                    (submitted && error === null)
+                  }
+                >
+                  {submitting ? 'Please wait...' : 'Place Order'}
+                </Button>
+              </Box>
+              <PaymentMethods />
+            </Box>
+          </Col>
+        </Row>
         {paymentFormData && <PaymentForm />}
-      </Div>
+      </Container>
     );
   }
 }
 
 PaymentOptions.defaultProps = {
+  dismiss: false,
   selectedGateway: 'creditcard',
   data: [],
   summary: null,
@@ -455,7 +455,11 @@ PaymentOptions.defaultProps = {
 };
 
 PaymentOptions.propTypes = {
+  toggleWebToChat: PropTypes.func.isRequired,
+  dismiss: PropTypes.bool,
+  paymentTimeout: PropTypes.number.isRequired,
   selectedGateway: PropTypes.string,
+  paymentLoadedStatus: PropTypes.func.isRequired,
   data: PropTypes.array,
   toggleGateway: PropTypes.func.isRequired,
   setPaymentDetails: PropTypes.func.isRequired,
@@ -480,6 +484,7 @@ const mapStateToProps = ({
   paymentoptions,
   cart: { checkingCart, cartChecked, summary },
   app: { sessionId },
+  webtochat: { paymentTimeout, dismiss },
   cart
 }) => ({
   selectedGateway: paymentoptions.selectedGateway,
@@ -497,7 +502,9 @@ const mapStateToProps = ({
   checkingCart,
   cartChecked,
   summary,
-  sessionId
+  sessionId,
+  paymentTimeout,
+  dismiss
 });
 
 const mapDispatchToProps = dispatch =>
@@ -508,7 +515,9 @@ const mapDispatchToProps = dispatch =>
       validateForm: checkPaymentDetails,
       submitDetails: submitPaymentDetails,
       setError: setValidationError,
-      resetEasyEmi: resetEasyEmiState
+      resetEasyEmi: resetEasyEmiState,
+      paymentLoadedStatus: paymentLoaded,
+      toggleWebToChat: togglePopUp
     },
     dispatch
   );

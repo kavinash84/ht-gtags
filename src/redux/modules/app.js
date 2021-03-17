@@ -6,10 +6,17 @@ const LOAD_SUCCESS = 'app/LOAD_SUCCESS';
 const LOAD_FAIL = 'app/LOAD_FAIL';
 
 const SET_CITY = 'app/SET_CITY';
+const SET_ORDER_ID = 'app/SET_ORDER_ID';
+const SET_WALLET_NAME = 'app/SET_WALLET';
+const PAYMENT_LOADED = 'app/PAYMENT_LOADED';
 const initialState = {
   loaded: false,
   sessionId: '',
-  city: ''
+  city: '',
+  orderId: '',
+  walletName: '',
+  walletType: {},
+  paymentLoaded: false
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -39,6 +46,23 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         city: action.query.city
+      };
+    case SET_WALLET_NAME:
+      return {
+        ...state,
+        walletName: action.name
+      };
+    case SET_ORDER_ID:
+      return {
+        ...state,
+        orderId: action.id,
+        customerId: action.customerId,
+        walletType: action.walletType
+      };
+    case PAYMENT_LOADED:
+      return {
+        ...state,
+        paymentLoaded: action.status
       };
     default:
       return state;
@@ -71,4 +95,21 @@ export const generateSession = (pincode = PINCODE) => ({
 export const setCity = query => ({
   type: SET_CITY,
   query
+});
+
+export const setWalletName = name => ({
+  type: SET_WALLET_NAME,
+  name
+});
+
+export const setOrderId = (id, customerId, walletType) => ({
+  type: SET_ORDER_ID,
+  id,
+  customerId,
+  walletType
+});
+
+export const paymentLoaded = status => ({
+  type: PAYMENT_LOADED,
+  status
 });

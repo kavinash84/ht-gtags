@@ -3,9 +3,23 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import Helmet from 'react-helmet';
+
+/**
+ * Components
+ */
+import Body from 'hometown-components-dev/lib/BodyHtV1';
+import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
+
+/**
+ * Page Components
+ */
 import DeliveryAddress from 'components/Checkout/DeliveryAddress';
-import Menu from 'components/MenuWithLogoOnly';
-import Section from 'hometown-components-dev/lib/Section';
+import HeaderSecondary from 'components/HeaderSecondary';
+import Footer from 'components/Footer';
+
+/**
+ * modules / selectors / helpers
+ */
 import { loadMyAddress } from 'redux/modules/myaddress';
 import { getCartList } from 'selectors/cart';
 import { CART_URL } from 'helpers/Constants';
@@ -33,13 +47,15 @@ export default class DeliveryAddressContainer extends Component {
   }
   render() {
     return (
-      <Section p="0rem" mb="0">
+      <Wrapper>
         <Helmet title="Delivery Address" />
-        <div className="wrapper">
-          <Menu />
+        <Body>
+          {/* HeaderSecondary */}
+          <HeaderSecondary />
           <DeliveryAddress />
-        </div>
-      </Section>
+          <Footer />
+        </Body>
+      </Wrapper>
     );
   }
 }

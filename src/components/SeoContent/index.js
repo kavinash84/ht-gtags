@@ -1,31 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Container from 'hometown-components-dev/lib/Container';
-import SeoContentContainer from 'hometown-components-dev/lib/SeoContent';
-import Div from 'hometown-components-dev/lib/Div';
-import Row from 'hometown-components-dev/lib/Row';
-import Section from 'hometown-components-dev/lib/Section';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import SeoContent from 'hometown-components-dev/lib/SeoContent';
 
-const SeoContent = ({ children }) => (
-  <Div type="block" pb="2rem" pt="0">
-    <SeoContentContainer>
-      <Section pt="0.3125rem" pb="0.3125rem" mb="0.625rem">
-        <Container pr="0" pl="0">
-          <Row display="block" mr="0" ml="0">
-            <Div col="12">{children}</Div>
-          </Row>
-        </Container>
-      </Section>
-    </SeoContentContainer>
-  </Div>
+const Seo = ({ children }) => (
+  <SeoContent>
+    <Container>{children}</Container>
+  </SeoContent>
 );
 
-SeoContent.defaultProps = {
+Seo.defaultProps = {
   children: {}
 };
 
-SeoContent.propTypes = {
+Seo.propTypes = {
   children: PropTypes.objectOf(PropTypes.any)
 };
 
-export default SeoContent;
+export default Seo;

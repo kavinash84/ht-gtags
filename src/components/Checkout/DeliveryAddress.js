@@ -2,17 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import Container from 'hometown-components-dev/lib/Container';
-import Div from 'hometown-components-dev/lib/Div';
-import Row from 'hometown-components-dev/lib/Row';
-import Section from 'hometown-components-dev/lib/Section';
-import Button from 'hometown-components-dev/lib/Buttons';
-import Text from 'hometown-components-dev/lib/Text';
-import Theme from 'hometown-components-dev/lib/Theme';
-import { Label } from 'hometown-components-dev/lib/Label';
-import ResponsiveModal from 'components/Modal';
-import LoginModal from 'containers/Login/LoginForm';
-import Footer from 'components/Footer';
+
+/**
+ * modules / selectors / helpers
+ */
 import { sendDeliveryAddress, resetGuestRegisterFlag } from 'redux/modules/checkout';
 import { loadCoupons } from 'redux/modules/coupon';
 import { load } from 'redux/modules/paymentoptions';
@@ -21,19 +14,42 @@ import * as actionCreators from 'redux/modules/address';
 import { notifSend } from 'redux/modules/notifs';
 import { isBlank } from 'js-utility-functions';
 import { validateAddress } from 'utils/validation';
-import MenuCheckout from './MenuCheckout';
+
+/**
+ * Components
+ */
+import Flex from 'hometown-components-dev/lib/FlexHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Card from 'hometown-components-dev/lib/CardHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import Label from 'hometown-components-dev/lib/LabelHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+
+import { getCartList } from 'selectors/cart';
+/**
+ * Page Components
+ */
+import ResponsiveModal from 'components/Modal';
+import LoginModal from 'containers/Login/LoginForm';
 import AddressForm from './AddressForm';
 import OrderSummary from './OrderSummary';
-import PaymentMethods from '../PaymentMethods/';
+import PaymentMethods from '../PaymentMethods';
 
-// import { getNotDelivered } from 'selectors/cart';
-
-const addIcon = require('../../../static/round-add_circle_outline.svg');
+/**
+ * Icons
+ */
+const addIcon = require('../../../static/increase.svg');
 const styles = require('./DeliveryAddress.scss');
 
 const mapStateToProps = ({
  userLogin, app, checkout, myaddress, address, profile, cart
 }) => ({
+  results: getCartList(cart),
   isLoggedIn: userLogin.isLoggedIn,
   sessionId: app.sessionId,
   nextstep: checkout.nextstep,
@@ -103,9 +119,9 @@ class DeliveryAddress extends Component {
         dispatch(loadCoupons());
       }
     }
-    // if (nextProps.addresses.length > 0 && nextProps.addresses.length !== this.props.addresses.length) {
-    //   this.handleClick(0);
-    // }
+    if (nextProps.addresses.length > 0 && nextProps.addresses.length !== this.props.addresses.length) {
+      this.handleClick(0, nextProps.addresses);
+    }
     if (nextProps.nextstep.success && nextProps.nextstep.success !== nextstep.success) {
       const { history } = this.props;
       history.push('/checkout/payment-options');
@@ -192,14 +208,18 @@ class DeliveryAddress extends Component {
       setAddressError3,
       setPincodeError
     } = props;
-    const { addressform } = this.state;
+    // const { addressform } = this.state;
     const fullNameError = isBlank(fullName) || fullNameFeedBackError;
     const emailError = isBlank(email) || emailFeedBackError;
     const phoneError = isBlank(phone) || phoneFeedBackError;
     const pincodeError = isBlank(pincode) || pincodeFeedBackError;
-    const addressError1 = addressform ? validateAddress(address1, 'address1').error || address1FeedBackError1 : false;
-    const addressError2 = addressform ? validateAddress(address2, 'address2').error || addressFeedBackError2 : false;
-    const addressError3 = addressform ? validateAddress(address3, 'address3').error || addressFeedBackError3 : false;
+    // const addressError1 = isBlank(address1) || address1FeedBackError1;
+    // // addressform ? validateAddress(address1, 'address1').error || address1FeedBackError1 : false;
+    // const addressError2 = addressform ? validateAddress(address2, 'address2').error || addressFeedBackError2 : false;
+    // const addressError3 = addressform ? validateAddress(address3, 'address3').error || addressFeedBackError3 : false;
+    const addressError1 = validateAddress(address1, 'address1').error || address1FeedBackError1;
+    const addressError2 = validateAddress(address2, 'address2').error || addressFeedBackError2;
+    const addressError3 = validateAddress(address3, 'address3').error || addressFeedBackError3;
     if (fullNameError || emailError || pincodeError || phoneError || addressError1 || addressError2 || addressError3) {
       setNameError(formType, fullNameError);
       setEmailError(formType, emailError);
@@ -298,8 +318,8 @@ class DeliveryAddress extends Component {
     const { toggleShippingIsBilling } = this.props;
     toggleShippingIsBilling();
   };
-  handleClick = index => {
-    const { addresses, setAddress, loadPincodeDetails } = this.props;
+  handleClick = (index, addresses) => {
+    const { setAddress, loadPincodeDetails } = this.props;
     this.setState({
       addressform: false
     });
@@ -335,58 +355,76 @@ class DeliveryAddress extends Component {
       currentaddressindex,
       shippingIsBilling,
       userEmail,
-      summary
+      summary,
+      results
     } = this.props;
     const { addressform } = this.state;
     return (
-      <Div type="block">
-        <MenuCheckout page="delivery" history={history} />
-        <Section display="flex" pt="2.25rem" pb="2rem" mb="1rem" height="auto">
-          <Container type="container" pr="2rem" pl="2rem">
-            <Div col="9" mt="0" pr="1rem">
-              {!isLoggedIn && (
-                <Div col="12" className={styles.isLoggedIn}>
-                  <Label fontSize="1rem" mt="0" mb="0" color="textLight">
-                    Already have an account?
-                  </Label>
-                  <Button
-                    btnType="link"
-                    fontFamily="regular"
-                    height="18px"
-                    mt="-5px"
-                    fontSize="1rem"
-                    p="0 0.625rem"
-                    color={Theme.colors.primary}
-                    onClick={this.handleLoginModal}
-                    lh="1"
-                  >
-                    Login
-                  </Button>
-                  <ResponsiveModal
-                    classNames={{ modal: 'loginModal' }}
-                    onCloseModal={this.handleLoginModal}
-                    open={this.state.openLogin}
-                  >
+      <Container my={[60, 40, 60]} px={[24, 24, 0]}>
+        <Row>
+          <Col variant="col-8">
+            {/* For logged in */}
+            {!isLoggedIn && (
+              <Box className={styles.isLoggedIn}>
+                <Label fontSize="1rem" mt="0" mb="0" color="textLight">
+                  Already have an account?
+                </Label>
+                <Button variant="linkPrimary" fontSize={16} onClick={this.handleLoginModal} ml={10}>
+                  Login
+                </Button>
+                <ResponsiveModal
+                  classNames={{ modal: 'loginModal' }}
+                  onCloseModal={this.handleLoginModal}
+                  open={this.state.openLogin}
+                >
+                  <Box px={24} py={20}>
                     <LoginModal />
-                  </ResponsiveModal>
-                </Div>
-              )}
-              {isLoggedIn && (
-                <div>
-                  <Row display="block" mr="0" ml="0">
-                    <Div col="12">
-                      <Label fontSize="1.125rem" mb="0.875rem">
-                        Select Shipping Address
-                      </Label>
-                    </Div>
-                  </Row>
+                  </Box>
+                </ResponsiveModal>
+              </Box>
+            )}
 
-                  <Row display="block" mr="0" ml="0">
-                    {addresses.map((item, index) => (
-                      <Div className={styles.addressBlock} col="4" pr="0.625rem" key={item.id_customer_address}>
-                        <button
-                          className={`${styles.addressBtn} ${index === currentaddressindex ? styles.active : null}`}
-                          onClick={() => this.handleClick(index)}
+            {/* For not logged in */}
+            {isLoggedIn && (
+              <Box>
+                <Row mx={0} mb={20}>
+                  <Heading variant="heading.medium">Confirm Address</Heading>
+                </Row>
+                <Row mx={-10}>
+                  {addresses.map((item, index) => (
+                    <Col variant="col-6" px={10} mb={20} key={item.id_customer_address}>
+                      <Card
+                        variant="link"
+                        textAlign="left"
+                        px={0}
+                        py={0}
+                        height="100%"
+                        lineHeight={1.25}
+                        className={` ${styles.addressBtn} ${
+                          index === currentaddressindex ? styles.active : styles.deliveryAddress
+                        }`}
+                        onClick={() => this.handleClick(index, addresses)}
+                        sx={{
+                          border: index === currentaddressindex ? 'primaryLarge' : 'secondaryLarge',
+                          borderRadius: 3
+                        }}
+                      >
+                        <Box
+                          as="input"
+                          type="radio"
+                          name="address"
+                          checked={index === currentaddressindex}
+                          id={`address${item.id_customer_address}`}
+                          mr={10}
+                          sx={{ position: 'absolute', top: 18, left: 22 }}
+                        />
+                        <Text
+                          as="label"
+                          htmlFor={`address${item.id_customer_address}`}
+                          width={1}
+                          px={32}
+                          py={15}
+                          display="block"
                         >
                           <b>{item.full_name}</b>
                           <br />
@@ -400,94 +438,91 @@ class DeliveryAddress extends Component {
                           <br />
                           {item.state}
                           <br />
-                          <br />
                           {item.gst || ''}
-                          <br />
-                        </button>
-                      </Div>
-                    ))}
-
-                    <Div col="4" pr="0.625rem">
-                      <button className={styles.addAddressBtn} onClick={this.toggleAddAddress}>
-                        <img src={addIcon} alt="Add another address" />
-                        <Text color="rgba(0, 0, 0, 0.6)" ta="center">
-                          {addresses.length > 0 ? 'Add another address' : 'Add Address'}
                         </Text>
-                      </button>
-                    </Div>
-                  </Row>
-                </div>
-              )}
-              <Div col="12" mt="0">
-                <form onSubmit={this.handleSubmit}>
-                  <Row display="block" mr="0" ml="0">
-                    {(addressform || !isLoggedIn) && (
-                      <Div col="12" pr="0" mt="1rem">
-                        <Label fontSize="1.125rem" mb="0.875rem">
-                          Shipping Address
-                        </Label>
-                        <AddressForm formType="shipping" isLoggedIn={isLoggedIn} userEmail={userEmail} />
-                      </Div>
-                    )}
-                    <Div col="12" pr="0" mt="1.5rem">
-                      <div className="checkbox">
-                        <input
-                          type="checkbox"
-                          id="checkbox"
-                          checked={!shippingIsBilling}
-                          onChange={this.toggleBillingForm}
-                        />
-                        {/* eslint-disable */}
-                        <label htmlFor="checkbox" />
-                        {/* eslint-enable */}
-                      </div>
-                      <Label fontSize="0.875em" mt="0" mb="0" ml="0.625rem" htmlFor="checkbox">
-                        Different Billing Address ?
-                      </Label>
-                      {!shippingIsBilling && (
-                        <Div col="12" mt="11px">
-                          <AddressForm formType="billing" isLoggedIn={isLoggedIn} userEmail={userEmail} />
-                        </Div>
-                      )}
-                    </Div>
-                  </Row>
-                  <Row display="block" mr="0" ml="0">
-                    <Div col="5" mt="1.5rem">
-                      <Button
-                        type="submit"
-                        size="block"
-                        btnType="primary"
-                        fontFamily="regular"
-                        height="42px"
-                        mt="0.5rem"
-                        disabled={loading || this.checkParams()}
-                        fontSize="1.125rem"
-                      >
-                        {loading ? 'Loading...' : 'Save and Continue'}
-                      </Button>
-                    </Div>
-                  </Row>
-                </form>
-              </Div>
-            </Div>
-            <Div col="3" mt="0" pl="0.625rem">
+                      </Card>
+                    </Col>
+                  ))}
+
+                  <Col variant="col-12">
+                    <Button variant="link" onClick={this.toggleAddAddress} display="flex" alignItems="center">
+                      <Image src={addIcon} alt="Add new address" mr={10} />
+                      <Text variant="small">Add new address</Text>
+                    </Button>
+                  </Col>
+                </Row>
+              </Box>
+            )}
+
+            {/* Address Form */}
+            <form onSubmit={this.handleSubmit}>
+              <Row display="block" mr="0" ml="0">
+                {(addressform || !isLoggedIn) && (
+                  <Box variant="col-12" px={0}>
+                    <AddressForm formType="shipping" isLoggedIn={isLoggedIn} userEmail={userEmail} />
+                  </Box>
+                )}
+                <Box mt={15} width={1}>
+                  <Flex px={15} py={15} alignItems="center" sx={{ border: 'secondary' }}>
+                    <Box className="checkbox" mr={10}>
+                      <Box
+                        as="input"
+                        type="checkbox"
+                        id="checkbox"
+                        checked={!shippingIsBilling}
+                        onChange={this.toggleBillingForm}
+                      />
+                      {/* eslint-disable */}
+                      <Label htmlFor="checkbox" />
+                      {/* eslint-enable */}
+                    </Box>
+                    <Text variant="link" fontSize={14} htmlFor="checkbox" onClick={this.toggleBillingForm}>
+                      <p className={styles.difBillingAddress}> Different Billing Address ?</p>
+                    </Text>
+                  </Flex>
+
+                  {/* Billing Address */}
+                  {!shippingIsBilling && (
+                    <Box>
+                      <AddressForm formType="billing" isLoggedIn={isLoggedIn} userEmail={userEmail} />
+                    </Box>
+                  )}
+                </Box>
+              </Row>
+              <Row justifyContent="flex-end" mt={20}>
+                <Col textAlign="right">
+                  <Text pb={15} fontSize={14}>
+                    *Required
+                  </Text>
+                  <Button type="submit" disabled={loading || this.checkParams()}>
+                    {loading ? 'Loading...' : 'Save and Continue'}
+                  </Button>
+                </Col>
+              </Row>
+            </form>
+          </Col>
+
+          {/* Order Summary */}
+          <Col variant="col-4">
+            <Box bg="sidebar" px={[15, 15, 40]} py={[20, 20, 30]}>
               <OrderSummary
+                history={history}
+                results={results}
                 itemsTotal={summary.items}
                 setDiscount={summary.combined_set_discount}
                 savings={summary.savings}
                 shipping={summary.shipping_charges}
                 totalCart={summary.total}
-                onClick={() => null}
                 itemsCount={summary.items_count}
                 discount={summary.coupon_discount}
-                hidebutton
+                coupon={summary.coupon}
+                hidecoupon={false}
               />
               <PaymentMethods />
-            </Div>
-          </Container>
-        </Section>
-        <Footer />
-      </Div>
+            </Box>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
@@ -498,7 +533,8 @@ DeliveryAddress.defaultProps = {
   currentaddressindex: -1,
   userEmail: '',
   summary: null,
-  couponlistToggle: false
+  couponlistToggle: false,
+  results: []
 };
 DeliveryAddress.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
@@ -520,6 +556,7 @@ DeliveryAddress.propTypes = {
   loadPincodeDetails: PropTypes.func.isRequired,
   cart: PropTypes.object.isRequired,
   summary: PropTypes.object,
-  couponlistToggle: PropTypes.bool
+  couponlistToggle: PropTypes.bool,
+  results: PropTypes.array
 };
 export default connect(mapStateToProps, mapDispatchToProps)(DeliveryAddress);

@@ -1,48 +1,52 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import MainSlider from 'components/MainSlider';
-import Footer from 'components/Footer';
-import Section from 'hometown-components-dev/lib/Section';
-import Container from 'hometown-components-dev/lib/Container';
-import Heading from 'hometown-components-dev/lib/Heading';
-import Div from 'hometown-components-dev/lib/Div';
-import Row from 'hometown-components-dev/lib/Row';
-import Text from 'hometown-components-dev/lib/Text';
-import Theme from 'hometown-components-dev/lib/Theme';
-import Img from 'hometown-components-dev/lib/Img';
-import Button from 'hometown-components-dev/lib/Buttons';
-import StoresCarousel from 'components/Stores';
-import { getCities } from 'selectors/homepage';
-import { sendData, getData } from 'redux/modules/services';
-import { smoothScroll } from 'utils/helper';
-import Header from './Header';
-import SlickSlider from '../SlickSlider';
-import ModularKitchenForm from './ModularKitchenForm';
+/* eslint-disable */
 
-const styles = require('./ModularKitchen.scss');
+import React from 'react';
+
+// import PropTypes from 'prop-types';
+// import { connect } from 'react-redux';
+// import MainSlider from 'components/MainSlider';
+// import Footer from 'components/Footer';
+// import Section from 'hometown-components/lib/Section';
+// import Container from 'hometown-components/lib/Container';
+// import Heading from 'hometown-components/lib/Heading';
+// import Div from 'hometown-components/lib/Div';
+// import Row from 'hometown-components/lib/Row';
+// import Text from 'hometown-components/lib/Text';
+// import Theme from 'hometown-components/lib/Theme';
+// import Img from 'hometown-components/lib/Img';
+// import Button from 'hometown-components/lib/Buttons';
+// import StoresCarousel from 'components/Stores';
+// import { getCities } from 'selectors/homepage';
+// import { sendData, getData } from 'redux/modules/services';
+// import { smoothScroll } from 'utils/helper';
+// import Header from './Header';
+// import SlickSlider from '../SlickSlider';
+// import ModularKitchenForm from './ModularKitchenForm';
+
+// const styles = require('./ModularKitchen.scss');
 
 // const sliderData = require('../../data/MKSlider.js');
 // const steps6Img = require('../../../static/share-an-enquiry.jpg');
 // const CloseIcon = require('../../../static/minus-round.svg');
 // const OpenIcon = require('../../../static/plus-round.svg');
-const ProfessionalServicesIcon = require('../../../static/hand-shake.png');
-const ISOIcon = require('../../../static/iso-icon.png');
-const FiraIcon = require('../../../static/fira-icon.png');
-const QualityIcon = require('../../../static/quality.png');
-const Years10Icon = require('../../../static/years-icons.png');
-const Years5Icon = require('../../../static/years-icons.png');
-const Free6Icon = require('../../../static/free6--icon.png');
-const grassIcon = require('../../../static/grass.png');
-const hettichIcon = require('../../../static/hettich.png');
-const kessebIcon = require('../../../static/kesseb.png');
+// const ProfessionalServicesIcon = require('../../../static/hand-shake.png');
+// const ISOIcon = require('../../../static/iso-icon.png');
+// const FiraIcon = require('../../../static/fira-icon.png');
+// const QualityIcon = require('../../../static/quality.png');
+// const Years10Icon = require('../../../static/years-icons.png');
+// const Years5Icon = require('../../../static/years-icons.png');
+// const Free6Icon = require('../../../static/free6--icon.png');
+// const grassIcon = require('../../../static/grass.png');
+// const hettichIcon = require('../../../static/hettich.png');
+// const kessebIcon = require('../../../static/kesseb.png');
 
-const adjustSlides = length => ({
-  slidesToShow: length >= 1 ? 1 : length,
-  slidesToScroll: 1
-});
+// const adjustSlides = length => ({
+//   slidesToShow: length >= 1 ? 1 : length,
+//   slidesToScroll: 1
+// });
 
-@connect(
+{
+  /* @connect(
   ({ stores, services }) => ({
     cities: getCities(stores),
     ...services.modularkitchen
@@ -143,8 +147,7 @@ export default class ModularKitchen extends Component {
                   mb="0"
                   ta="center"
                 >
-                  Professional
-                  <br /> Services
+                  Professional<br /> Services
                 </Text>
               </Div>
               <Div display="flexEqual">
@@ -157,8 +160,7 @@ export default class ModularKitchen extends Component {
                   mb="0"
                   ta="center"
                 >
-                  ISO 9001 <br /> Certified
-                  <br /> Factory
+                  ISO 9001 <br /> Certified<br /> Factory
                 </Text>
               </Div>
               <Div display="flexEqual">
@@ -171,8 +173,7 @@ export default class ModularKitchen extends Component {
                   mb="0"
                   ta="center"
                 >
-                  FIRA
-                  <br /> certified
+                  FIRA<br /> certified
                 </Text>
               </Div>
               <Div display="flexEqual">
@@ -185,8 +186,7 @@ export default class ModularKitchen extends Component {
                   mb="0"
                   ta="center"
                 >
-                  Quality
-                  <br /> Fittings
+                  Quality<br /> Fittings
                 </Text>
               </Div>
               <Div display="flexEqual">
@@ -199,8 +199,7 @@ export default class ModularKitchen extends Component {
                   mb="0"
                   ta="center"
                 >
-                  10 years warranty
-                  <br /> Duratuf
+                  10 years warranty<br /> Duratuf
                 </Text>
               </Div>
               <Div display="flexEqual">
@@ -213,9 +212,7 @@ export default class ModularKitchen extends Component {
                   mb="0"
                   ta="center"
                 >
-                  5 years warranty
-                  <br /> Kitchen
-                  <br /> Furniture
+                  5 years warranty<br /> Kitchen<br /> Furniture
                 </Text>
               </Div>
               <Div display="flexEqual">
@@ -228,8 +225,7 @@ export default class ModularKitchen extends Component {
                   mb="0"
                   ta="center"
                 >
-                  6 Free
-                  <br /> Service Visits
+                  6 Free<br /> Service Visits
                 </Text>
               </Div>
             </Row>
@@ -307,20 +303,13 @@ export default class ModularKitchen extends Component {
                 <SlickSlider settings={adjustSlides(1)}>
                   <Div p="0 1rem">
                     <Text ta="center" fontSize="1rem" color="rgba(0,0,0,0.5)">
-                      This is humble note of appreciation for
-                      <br />
-                      the outstanding customer service provided by your
-                      <br />
-                      Modular Kitchen Department at HomeTown.
-                      <br />
-                      My special thanks to Ms. Priyanka & team for helping me
-                      <br />
-                      in customising my kitchen as per my requirements and
-                      <br />
-                      installing the same, well-within the committed time lines.
-                      <br />
-                      I am elated with the service quality of your team.
-                      <br />
+                      This is humble note of appreciation for<br />
+                      the outstanding customer service provided by your<br />
+                      Modular Kitchen Department at HomeTown.<br />
+                      My special thanks to Ms. Priyanka & team for helping me<br />
+                      in customising my kitchen as per my requirements and<br />
+                      installing the same, well-within the committed time lines.<br />
+                      I am elated with the service quality of your team.<br />
                       Keep the good work !
                     </Text>
                     <Heading ta="center" color="text" fontSize="1rem">
@@ -329,22 +318,14 @@ export default class ModularKitchen extends Component {
                   </Div>
                   <Div p="0 1rem">
                     <Text ta="center" fontSize="1rem" color="rgba(0,0,0,0.5)">
-                      After spending few years in Australia,
-                      <br />
-                      I was wondering whether I could get the same quality
-                      <br />
-                      of Kitchens & Home Furniture in India. We were pleasantly
-                      <br />
-                      surprised to see international quality furniture, kitchens
-                      <br />
-                      & more at HomeTown. My wife & I were really amazed with
-                      <br />
-                      how knowledgeable HomeTown’s Team was. They helped choose & build
-                      <br />
-                      the perfect kitchen and wardrobes for us - steeply step.
-                      <br />
-                      It feels great to have a living space that is tailor made
-                      <br />
+                      After spending few years in Australia,<br />
+                      I was wondering whether I could get the same quality<br />
+                      of Kitchens & Home Furniture in India. We were pleasantly<br />
+                      surprised to see international quality furniture, kitchens<br />
+                      & more at HomeTown. My wife & I were really amazed with<br />
+                      how knowledgeable HomeTown’s Team was. They helped choose & build<br />
+                      the perfect kitchen and wardrobes for us - steeply step.<br />
+                      It feels great to have a living space that is tailor made<br />
                       for our lifestyle and preferences.
                     </Text>
                     <Heading ta="center" color="text" fontSize="1rem">
@@ -354,16 +335,11 @@ export default class ModularKitchen extends Component {
 
                   <Div p="0 1rem">
                     <Text ta="center" fontSize="1rem" color="rgba(0,0,0,0.5)">
-                      I am extremely happy about my decision to come to HomeTown
-                      <br />
-                      for renovating my kitchen. After having spent weeks trying
-                      <br />
-                      to figure out designs & budget for my kitchen; it took just one
-                      <br />
-                      visit to HomeTown to answer all my queries.
-                      <br />
-                      You guys saved me a lot of trouble and time.
-                      <br />
+                      I am extremely happy about my decision to come to HomeTown<br />
+                      for renovating my kitchen. After having spent weeks trying<br />
+                      to figure out designs & budget for my kitchen; it took just one<br />
+                      visit to HomeTown to answer all my queries.<br />
+                      You guys saved me a lot of trouble and time.<br />
                       Thank you for the wonderful kitchen.
                     </Text>
                     <Heading ta="center" color="text" fontSize="1rem">
@@ -374,14 +350,10 @@ export default class ModularKitchen extends Component {
                   <Div p="0 1rem">
                     <Text ta="center" fontSize="1rem" color="rgba(0,0,0,0.5)">
                       Awesome work done by HomeTown team! <br />
-                      I was particularly impressed with how real the 3D designs looked.
-                      <br />
-                      It helped me take all the important decision even before starting the work.
-                      <br />
-                      The execution quality was very good without compromising on aesthetics or speed.
-                      <br />
-                      I keep getting complimented for my new kitchen & I never feel like leaving it at all.
-                      <br />
+                      I was particularly impressed with how real the 3D designs looked.<br />
+                      It helped me take all the important decision even before starting the work.<br />
+                      The execution quality was very good without compromising on aesthetics or speed.<br />
+                      I keep getting complimented for my new kitchen & I never feel like leaving it at all.<br />
                       Thank you HomeTown!
                     </Text>
                     <Heading ta="center" color="text" fontSize="1rem">
@@ -392,9 +364,11 @@ export default class ModularKitchen extends Component {
               </Div>
             </Row>
           </Container>
-        </Section>
+        </Section> */
+}
 
-        {/* <Section p="4rem 0" mb="0">
+{
+  /* <Section p="4rem 0" mb="0">
           <Container type="container" pr="0.5rem" pl="0.5rem">
             <Row ml="0" mr="0">
               <Div col="12" ta="center">
@@ -531,9 +505,11 @@ export default class ModularKitchen extends Component {
               </Div>
             </Row>
           </Container>
-        </Section> */}
+        </Section> */
+}
 
-        <Section p="1.5rem 0" mb="1.5rem" mt="1rem">
+{
+  /* <Section p="1.5rem 0" mb="1.5rem" mt="1rem">
           <Container type="container" pr="0.5rem" pl="0.5rem">
             <Row ml="0" mr="0">
               <Div col="1" />
@@ -604,4 +580,9 @@ ModularKitchen.defaultProps = {
 ModularKitchen.propTypes = {
   cities: PropTypes.array,
   data: PropTypes.object
-};
+}; */
+}
+
+const MKMicro = () => <div type="block">MK Micro Page Is Under Development</div>;
+
+export default MKMicro;

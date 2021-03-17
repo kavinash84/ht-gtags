@@ -4,17 +4,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 // import { withRouter } from 'react-router';
-import Container from 'hometown-components-dev/lib/Container';
-import Div from 'hometown-components-dev/lib/Div';
-import Row from 'hometown-components-dev/lib/Row';
+import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
 // import { Label } from 'hometown-components-dev/lib/Label';
-import Section from 'hometown-components-dev/lib/Section';
-import Button from 'hometown-components-dev/lib/Buttons';
+import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
+import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
 // import { isEmpty } from 'utils/validation';
-import Heading from 'hometown-components-dev/lib/Heading';
-import Text from 'hometown-components-dev/lib/Text';
+import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
+import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
 // import FormInput from 'hometown-components-dev/lib/Forms/FormInput';
-import MyMenu from 'components/MyMenu';
 import { getDateFilters } from 'utils/helper';
 import { loadMyCases } from 'redux/modules/mycases';
 
@@ -30,7 +29,7 @@ const mapStateToProps = ({ mycases, profile }) => ({
   contactNumber: profile.data.contact_number,
   salesforce_account_id: profile.data.salesforce_account_id
 });
-class MyCases extends Component {
+class MyCasesContainer extends Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
@@ -102,12 +101,11 @@ class MyCases extends Component {
     const { data } = this.props;
     const { loading } = this.props;
     return (
-      <Div type="block" mb="2rem">
-        <MyMenu page="address" />
-        <Section display="flex" pt="1.25rem" mb="0" height="auto">
-          <Container type="container" pr="0" pl="0">
-            <Row display="block" mr="0" ml="0" mb="1.5rem">
-              <Div col="3" mr="1rem">
+      <BoxHtV1 type="block" mb="2rem">
+        <SectionHtV1 display="flex" pt="1.25rem" mb="0" height="auto">
+          <ContainerHtV1 type="container" pr="0" pl="0" width="100%">
+            <RowHtV1 display="block" mr="0" ml="0" mb="1.5rem">
+              <BoxHtV1 col="3" mr="1rem" width="25%" float="left">
                 <Select
                   placeholder="Select From Date"
                   defaultValue={null}
@@ -115,8 +113,8 @@ class MyCases extends Component {
                   onChange={this.onChangeDate}
                   options={getDateFilters(this.FILTER_CONFIG)}
                 />
-              </Div>
-              <Div col="3" mr="1rem">
+              </BoxHtV1>
+              <BoxHtV1 col="3" mr="1rem" width="25%" float="left">
                 <Select
                   placeholder="Select Case Status"
                   defaultValue={null}
@@ -124,28 +122,28 @@ class MyCases extends Component {
                   onChange={this.onStatusChange}
                   options={this.STATUS_FILTER}
                 />
-              </Div>
-              <Div col="1" mr="1rem">
-                <Button
+              </BoxHtV1>
+              <BoxHtV1 col="1" mr="1rem" width="8.33%" float="left">
+                <ButtonHtV1
                   disabled={loading}
                   onClick={this.getFilteredCases}
                   border="1px solid"
-                  color="red"
+                  color="colors.white"
                   lh="1.5"
                   size="block"
                   btnType="primary"
-                  btnColor="#515151"
+                  bg="rgb(249, 141, 41)"
                   height="38px"
                   fontSize="16px"
                 >
                   {loading ? 'Please Wait ...' : 'Find'}
-                </Button>
-              </Div>
-            </Row>
-            <Row display="block" mr="0" ml="0">
+                </ButtonHtV1>
+              </BoxHtV1>
+            </RowHtV1>
+            <RowHtV1 display="block" mr="0" ml="0">
               {data.map((item, index) => (
-                <Div col="12" key={String(index)} mb="20px">
-                  <Button
+                <BoxHtV1 col="12" key={String(index)} mb="20px">
+                  <ButtonHtV1
                     ta="left"
                     size="block"
                     border="1px solid rgba(151, 151, 151, 0.47)"
@@ -154,49 +152,49 @@ class MyCases extends Component {
                     p="0"
                     onClick={() => this.handleClick(index)}
                   >
-                    <Row type="block" m="0" mb="1rem" className={styles.blockHeading} p="15px 15px !important">
-                      <Div col="6">
-                        <Heading fontSize="1rem" color="textLight" mb="0px" mt="0px" fontFamily="light">
+                    <RowHtV1 type="block" m="0" mb="1rem" className={styles.blockHeading} p="15px 15px !important">
+                      <BoxHtV1 col="6">
+                        <HeadingHtV1 fontSize="1rem" color="textLight" mb="0px" mt="0px" fontFamily="light">
                           {`Case No - ${item.caseNumber || 'NA'}`}
-                        </Heading>
-                      </Div>
-                      <Div col="6" ta="right">
+                        </HeadingHtV1>
+                      </BoxHtV1>
+                      <BoxHtV1 col="6" ta="right">
                         {`Status - ${item.status || 'NA'}`}
-                      </Div>
-                    </Row>
-                    <Row p="15px 15px" type="block" m="0" mb="0.5rem" className={styles.blockBody}>
-                      <Div col="3" pr="10px">
-                        <Text mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
+                      </BoxHtV1>
+                    </RowHtV1>
+                    <RowHtV1 p="15px 15px" type="block" m="0" mb="0.5rem" className={styles.blockBody}>
+                      <BoxHtV1 col="3" pr="10px">
+                        <TextHtV1 mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                           Created Date
-                        </Text>
-                        <Text mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
+                        </TextHtV1>
+                        <TextHtV1 mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
                           {item.CreatedDate || ''}
-                        </Text>
-                      </Div>
-                      <Div col="4" pr="10px">
-                        <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
+                        </TextHtV1>
+                      </BoxHtV1>
+                      <BoxHtV1 col="4" pr="10px">
+                        <TextHtV1 whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                           Subject
-                        </Text>
-                        <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
+                        </TextHtV1>
+                        <TextHtV1 whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
                           {item.subject || ''}
-                        </Text>
-                      </Div>
-                      <Div col="2" pr="10px">
-                        <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
+                        </TextHtV1>
+                      </BoxHtV1>
+                      <BoxHtV1 col="2" pr="10px">
+                        <TextHtV1 whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                           Type
-                        </Text>
-                        <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
+                        </TextHtV1>
+                        <TextHtV1 whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
                           {item.type || ''}
-                        </Text>
-                      </Div>
-                      <Div col="3" pr="10px">
-                        <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
+                        </TextHtV1>
+                      </BoxHtV1>
+                      <BoxHtV1 col="3" pr="10px">
+                        <TextHtV1 whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                           Category
-                        </Text>
-                        <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
+                        </TextHtV1>
+                        <TextHtV1 whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.6)" fontFamily="light">
                           {this.getMapping(item.category, item.subcategory, 'cat')}
-                        </Text>
-                      </Div>
+                        </TextHtV1>
+                      </BoxHtV1>
                       {/* <Div col="3" pr="10px">
                         <Text whiteSpace="normal" mt="0" color="rgba(0, 0, 0, 0.7)" fontFamily="medium">
                           SubCategory
@@ -205,19 +203,19 @@ class MyCases extends Component {
                           {this.getMapping(item.category, item.subcategory, 'subcat')}
                         </Text>
                       </Div> */}
-                    </Row>
-                  </Button>
-                </Div>
+                    </RowHtV1>
+                  </ButtonHtV1>
+                </BoxHtV1>
               ))}
-            </Row>
-          </Container>
-        </Section>
-      </Div>
+            </RowHtV1>
+          </ContainerHtV1>
+        </SectionHtV1>
+      </BoxHtV1>
     );
   }
 }
 
-MyCases.defaultProps = {
+MyCasesContainer.defaultProps = {
   data: [],
   loading: false,
   updated: false,
@@ -225,7 +223,7 @@ MyCases.defaultProps = {
   contactNumber: ''
 };
 
-MyCases.propTypes = {
+MyCasesContainer.propTypes = {
   data: PropTypes.array,
   loading: PropTypes.bool,
   updated: PropTypes.bool, //eslint-disable-line
@@ -233,4 +231,4 @@ MyCases.propTypes = {
   contactNumber: PropTypes.string,
   loadMyCases: PropTypes.func.isRequired
 };
-export default connect(mapStateToProps, mapDispatchToProps)(MyCases);
+export default connect(mapStateToProps, mapDispatchToProps)(MyCasesContainer);

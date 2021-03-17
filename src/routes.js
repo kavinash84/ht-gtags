@@ -16,7 +16,7 @@ import StoreLocator from 'containers/StoreLocator';
 /* auth */
 import Login from 'containers/Login';
 import Signup from 'containers/Signup';
-import ForgotPassword from 'containers/ForgotPassword';
+// import ForgotPassword from 'containers/ForgotPassword';
 import ResetPassword from 'containers/ResetPassword';
 
 /* products */
@@ -38,8 +38,12 @@ import ServiceSignUpContainer from 'components/ServiceSignUp';
 /* user */
 import Profile from 'containers/Profile';
 import MyOrder from 'containers/MyOrder';
+import OrderAndReturns from 'containers/OrderAndReturns';
 import MyAddress from 'containers/MyAddress';
 import MyCases from 'containers/MyCases';
+import MyDashBoard from 'containers/MyDashBoard';
+import Coupons from 'containers/Coupons';
+import SavedCards from 'containers/SavedCards';
 import Wishlist from 'containers/Wishlist';
 import TrackOrder from 'containers/TrackOrder';
 
@@ -60,6 +64,15 @@ import Terms from 'containers/Terms';
 import WhoWeAre from 'containers/WhoWeAre';
 import LoaderShimmer from 'containers/Loader/LoaderShimmer';
 import Promotions from 'containers/Promotions';
+import Gratification from 'containers/Gratification';
+
+// Landing Pages
+import WeddingCampaign from 'containers/WeddingCampaign';
+import ComboOffer from 'containers/ComboOffer';
+
+// campaign
+// import Announcement from 'containers/Announcement';
+import Campaigns from 'containers/Campaigns';
 
 import { categoryRoutes, listingRoutes } from 'helpers/Constants';
 
@@ -90,17 +103,53 @@ const routes = [
       { path: '/', exact: true, component: Home },
       { path: '/login', exact: true, component: isNotAuthenticated(Login) },
       { path: '/signup', exact: true, component: isNotAuthenticated(Signup) },
-      { path: '/forgot-password/verify/reset/:hash', exact: true, component: isNotAuthenticated(ResetPassword) },
-      { path: '/forgot-password', exact: true, component: isNotAuthenticated(ForgotPassword) },
+      {
+        path: '/forgot-password/verify/reset/:hash',
+        exact: true,
+        component: isNotAuthenticated(ResetPassword)
+      },
+      // { path: '/forgot-password', exact: true, component: isNotAuthenticated(ForgotPassword) },
       { path: '/wishlist', exact: true, component: isAuthenticated(Wishlist) },
       { path: '/checkout/cart', exact: true, component: Cart },
       { path: '/my-orders', exact: true, component: isAuthenticated(MyOrder) },
-      { path: '/my-address', exact: true, component: isAuthenticated(MyAddress) },
+      {
+        path: '/order-returns',
+        exact: true,
+        component: isAuthenticated(OrderAndReturns)
+      },
+      {
+        path: '/my-address',
+        exact: true,
+        component: isAuthenticated(MyAddress)
+      },
       { path: '/my-cases', exact: true, component: isAuthenticated(MyCases) },
       { path: '/profile', exact: true, component: isAuthenticated(Profile) },
-      { path: '/:productname?/sku/:skuId', exact: true, component: ProductDetails },
-      { path: '/checkout/delivery-address', exact: true, component: DeliveryAddress },
-      { path: '/checkout/payment-options', exact: true, component: PaymentOptions },
+      {
+        path: '/my-dashboard',
+        exact: true,
+        component: isAuthenticated(MyDashBoard)
+      },
+      { path: '/coupons', exact: true, component: isAuthenticated(Coupons) },
+      {
+        path: '/saved-cards',
+        exact: true,
+        component: isAuthenticated(SavedCards)
+      },
+      {
+        path: '/:productname?/sku/:skuId',
+        exact: true,
+        component: ProductDetails
+      },
+      {
+        path: '/checkout/delivery-address',
+        exact: true,
+        component: DeliveryAddress
+      },
+      {
+        path: '/checkout/payment-options',
+        exact: true,
+        component: PaymentOptions
+      },
       // { path: '/checkout/review-order', exact: true, component: ReviewOrder },
       { path: '/search', exact: false, component: Listing },
       { path: '/return-policy', exact: true, component: ReturnPolicy },
@@ -121,11 +170,28 @@ const routes = [
       { path: '/plan-your-kitchen', exact: true, component: PlanYourKitchen },
       { path: '/design-build', exact: true, component: DesignBuild },
       { path: '/payment-success', exact: true, component: PaymentSuccess },
-      { path: '/payment-failed/:orderId?', exact: true, component: PaymentFailure },
+      {
+        path: '/payment-failed/:orderId?',
+        exact: true,
+        component: PaymentFailure
+      },
       { path: '/bulk-order', exact: true, component: BulkOrder },
-      { path: '/service-signup', exact: true, component: ServiceSignUpContainer },
+      {
+        path: '/service-signup',
+        exact: true,
+        component: ServiceSignUpContainer
+      },
       { path: '/loader-shimmer', exact: true, component: LoaderShimmer },
       { path: '/promotions', exact: true, component: Promotions },
+      {
+        path: '/gratification',
+        exact: true,
+        component: isAuthenticated(Gratification)
+      },
+      { path: '/wedding-campaign', exact: true, component: WeddingCampaign },
+      { path: '/combo-offer', exact: true, component: ComboOffer },
+      // { path: '/announcement', exact: true, component: Announcement }
+      { path: '/offer/:type', exact: true, component: Campaigns },
       {
         path: `/:category(${createRegex(categoryRoutes)})`,
         exact: true,

@@ -1,9 +1,18 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import MenuFooter from 'containers/MenuFooter';
-import TrackOrderContainer from 'components/TrackOrder/TrackOrder';
+
+/* ====== Components ====== */
+import Body from 'hometown-components-dev/lib/BodyHtV1';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
+
+/* ====== Page Components ====== */
+import Footer from 'components/Footer';
+import Header from 'components/Header';
+import TrackOrderContainer from 'components/TrackOrder';
 import { trackOrder, closeStatusModal } from 'redux/modules/trackorder';
 
 const mapDispatchToProps = dispatch =>
@@ -42,15 +51,22 @@ class TrackOrder extends React.Component {
 
   render() {
     const { closeStatusModal: closeModal } = this.props;
+    /* eslint-disable max-len */
+    const seoDescription =
+      'Tracking the order that you placed with us? All you need to have is your order number. Visit our track order page at Hometown to know about your orders today!';
+    /* eslint-enable max-len */
     return (
-      <div>
-        <MenuFooter
-          pageTitle="Track Order - Hometown.in"
-          seoDescription="Tracking the order that you placed with us?
-            All you need to have is your order number.
-             Visit our track order page at Hometown to know about your orders today!"
-        >
-          <div>
+      <Wrapper>
+        <Helmet title="Track Order - Hometown.in" />
+        <Helmet>
+          <meta name="description" content={seoDescription} />
+        </Helmet>
+        <Body>
+          {/* Header */}
+          <Header />
+
+          {/* Container */}
+          <Container>
             <TrackOrderContainer
               status={this.state.status}
               handleChange={this.handleChange}
@@ -60,9 +76,12 @@ class TrackOrder extends React.Component {
               onChange={this.state.onChange}
               closeStatusModal={closeModal}
             />
-          </div>
-        </MenuFooter>
-      </div>
+          </Container>
+
+          {/* Footer */}
+          <Footer />
+        </Body>
+      </Wrapper>
     );
   }
 }

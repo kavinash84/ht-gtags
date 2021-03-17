@@ -6,16 +6,40 @@ import TopBar from 'components/TopBar/TopBar';
 import Container from 'hometown-components-dev/lib/Container';
 import Section from 'hometown-components-dev/lib/Section';
 import HoverMenuBox from 'components/HoverBox/HoverMenuBox';
+import { withRouter } from 'react-router';
 
+const navigateToCategory = history => category => {
+  history.push({
+    pathname: `${category.pathname}`,
+    search: `${category.search}`,
+    state: {
+      query: `${category.search}`,
+      path: `${category.pathname}`,
+      pincode: window.getPincode(),
+      pinSetByUser: window.isPincodeFilter()
+    }
+  });
+};
 @connect(({ homepage }) => ({
   menuItems: homepage.menu.data
 }))
-export default class Menu extends Component {
+export class Menu extends Component {
+  constructor(props) {
+    super(props);
+    this.exitOnClick = this.exitOnClick.bind(this);
+  }
   state = {
     currentMenu: '',
     hoverBox: false
   };
 
+  componentDidMount() {
+    const { history } = this.props;
+    // window.unbxd_autosuggest_fun();
+    console.log('window.unbxd_autosuggest_fun() in search page called---------');
+    window.HTCATEGORY = {};
+    window.HTCATEGORY.navigateToCategory = navigateToCategory(history);
+  }
   setCurrentMenuData = () => {
     const menuData = this.props.menuItems.find(menu => menu.id === this.state.currentMenu);
     if (menuData) {
@@ -38,12 +62,16 @@ export default class Menu extends Component {
       });
     }
   };
-
-  exitOnClick = () => {
+  exitOnClick(event) {
     this.setState({
       hoverBox: false
     });
-  };
+    event.preventDefault();
+    window.HTCATEGORY.navigateToCategory({
+      pathname: event.target.pathname,
+      search: event.target.search
+    });
+  }
 
   enterMenu = id => () => {
     this.setState(
@@ -108,5 +136,8 @@ Menu.defaultProps = {
   menuItems: []
 };
 Menu.propTypes = {
-  menuItems: PropTypes.array
+  menuItems: PropTypes.array,
+  history: PropTypes.object.isRequired
 };
+
+export default withRouter(Menu);

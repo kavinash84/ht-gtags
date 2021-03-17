@@ -3,12 +3,25 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+
+/**
+ * Components
+ */
+import Body from 'hometown-components-dev/lib/BodyHtV1';
+import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
+
+/**
+ * Page Components
+ */
+import PaymentOptions from 'components/Checkout/PaymentOptions';
+import HeaderSecondary from 'components/HeaderSecondary';
+
+/**
+ * modules / selectors / helpers
+ */
+import { CART_URL } from 'helpers/Constants';
 import { getPaymentOptions } from 'selectors/payments';
 import { getCartList } from 'selectors/cart';
-import Menu from 'components/MenuWithLogoOnly';
-import Section from 'hometown-components-dev/lib/Section';
-import PaymentOptions from 'components/Checkout/PaymentOptions';
-import { CART_URL } from 'helpers/Constants';
 
 @withRouter
 @connect(({ paymentoptions, cart, address: { shipping } }) => ({
@@ -30,13 +43,14 @@ export default class PaymentOptionsContainer extends Component {
   render() {
     const { availableOptions } = this.props;
     return (
-      <Section p="0rem" mb="0">
-        <Helmet title="Payment Options" />
-        <div className="wrapper">
-          <Menu />
+      <Wrapper>
+        <Helmet title="Delivery Address" />
+        <Body>
+          {/* HeaderSecondary */}
+          <HeaderSecondary shippingStep="active" paymentStep="active" />
           <PaymentOptions data={availableOptions} />
-        </div>
-      </Section>
+        </Body>
+      </Wrapper>
     );
   }
 }

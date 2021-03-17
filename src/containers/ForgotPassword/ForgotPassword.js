@@ -1,24 +1,43 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import Header from 'newComponents/Header';
+import { Link } from 'react-router-dom';
 
-// import Footer from 'components/Footer';
-import ForgotPasswordFormHtV1 from 'hometown-components-dev/lib/FormsHtV1/ForgotPasswordFormHtV1';
-import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
-import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
-import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
-import ImageShimmerHtV1 from 'hometown-components-dev/lib/ImageShimmerHtV1';
-import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
-import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
-import { LOGIN_URL } from 'helpers/Constants';
+/**
+ * Components
+ */
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Label from 'hometown-components-dev/lib/LabelHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import Section from 'hometown-components-dev/lib/SectionHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+
+/**
+ * Page Components
+ */
+import Footer from 'components/Footer';
+import ForgotPasswordForm from 'components/ForgotPasswordForm';
+import GoogleLoginBtn from 'components/LoginForms/GoogleLogin';
+import Header from 'components/Header';
+import ResponsiveModal from 'components/Modal';
+
+/**
+ * helpers / modules
+ */
+import { LOGIN_URL, SIGNUP_URL } from 'helpers/Constants';
 import { validateEmail } from 'js-utility-functions';
 import { forgotPassword } from 'redux/modules/forgotpassword';
 
+/**
+ * Icons
+ */
 const ForgotPasswordImg = require('../../../static/forgot-password-icon.png');
+// const OTPIcon = require('../../../static/otp.svg');
+const EmailIcon = require('../../../static/email-primary.svg');
 
 @connect(({ forgotpassword }) => ({
   response: forgotpassword
@@ -37,7 +56,8 @@ export default class ForgotPasswordContainer extends Component {
       email: '',
       emailError: false,
       emailErrorMessage: '',
-      submitted: false
+      submitted: false,
+      showLoginModal: true
     };
   }
 
@@ -67,6 +87,13 @@ export default class ForgotPasswordContainer extends Component {
     const { dispatch } = this.context.store;
     dispatch(forgotPassword(email));
   };
+
+  handleForgotPasswordModal = () => {
+    const { history } = this.props;
+    this.setState({ showLoginModal: !this.state.showLoginModal });
+    history.push('/login');
+  };
+
   render() {
     const styles = require('../Login/index.scss');
 
@@ -76,85 +103,106 @@ export default class ForgotPasswordContainer extends Component {
     const { response } = this.props;
     const { loaded, error } = response;
     return (
-      <SectionHtV1 p="0" mb="0">
+      <Section p="0" mb="0">
+        {/* Header */}
         <Header />
-        <BoxHtV1>
-          <ContainerHtV1 pr="0" pl="0">
-            <BoxHtV1 p="3rem 0 3rem">
-              <BoxHtV1 className={styles.userWrapper}>
-                <RowHtV1 display="block" mr="0" ml="0">
-                  <BoxHtV1 col={6}>
-                    <BoxHtV1 className={styles.imgWrapper}>
-                      {/*eslint-disable*/}
-                      <ImageShimmerHtV1
-                        src="https://static.hometown.in/media/cms/hometownnew/compressed/forgotpassword-sidebar-bg.jpg"
-                        height="596px"
+
+        {/* Container */}
+        <Container mt={[40, 40, 80]}>
+          <Row>
+            <Box maxWidth="50%" pl={16} pr={16}>
+              {loaded && !error && submitted ? (
+                <Box className={`${styles.responseBlock}`}>
+                  <Image src={ForgotPasswordImg} alt="" />
+                  <Row display="block" mr="0" ml="0">
+                    <Box mt="0">
+                      <Box className={styles.content}>
+                        <p>
+                          An email has been sent to <br />
+                          <b>{email}</b>
+                        </p>
+                        <p>Please follow the instructions to reset your password</p>
+                      </Box>
+                    </Box>
+                  </Row>
+                </Box>
+              ) : (
+                <Fragment>
+                  <ResponsiveModal
+                    classNames={{ modal: 'forgotPasswordModal' }}
+                    onCloseModal={this.handleForgotPasswordModal}
+                    open={this.state.showLoginModal}
+                  >
+                    <Box pb={30}>
+                      <ForgotPasswordForm
+                        email={email}
+                        onChangeEmail={this.onChangeEmail}
+                        emailFeedBackError={emailError}
+                        emailFeedBackMessage={emailErrorMessage}
+                        onSubmitForgot={this.onSubmitForgot}
+                        forgotResponse={response}
+                        loginUrl={LOGIN_URL}
+                      />
+                    </Box>
+                  </ResponsiveModal>
+                  <Row mx={0}>
+                    <Box variant="col-12" textAlign="center" mb={16}>
+                      <Label color="textLight" fontSize={15}>
+                        Or Continue with
+                      </Label>
+                    </Box>
+                    <Box variant="col-6" ta="center" mb="0" pr="0.625rem">
+                      <Button
+                        onClick={this.toggleLoginForm}
+                        variant="outline.secondary"
+                        height={42}
+                        justifyContent="center"
+                        alignItems="center"
+                        display="flex"
+                        width={1}
+                        sx={{
+                          border: 'divider',
+                          borderRadius: 3
+                        }}
                       >
-                        {imageURL => <ImageHtV1 src={imageURL} alt="" />}
-                      </ImageShimmerHtV1>
-                      {/* eslint-enable */}
-                    </BoxHtV1>
-                  </BoxHtV1>
-                  <BoxHtV1 col={6} p="1.25rem 3.5rem">
-                    {loaded && !error && submitted ? (
-                      <BoxHtV1 className={`${styles.responseBlock}`}>
-                        <ImageHtV1 src={ForgotPasswordImg} alt="" />
-                        <RowHtV1 display="block" mr="0" ml="0">
-                          <BoxHtV1 mt="0">
-                            <BoxHtV1 className={styles.content}>
-                              <p>
-                                An email has been sent to <br />
-                                <b>{email}</b>
-                              </p>
-                              <p>Please follow the instructions to reset your password</p>
-                            </BoxHtV1>
-                          </BoxHtV1>
-                        </RowHtV1>
-                      </BoxHtV1>
-                    ) : (
-                      <BoxHtV1 className={`${styles.formBlock} ${styles.forgotForm}`}>
-                        <RowHtV1 display="block" mt="1.5rem" mr="0" ml="0">
-                          <BoxHtV1 col="12" ta="center">
-                            <HeadingHtV1
-                              color="color676767"
-                              mt="0"
-                              mb="0"
-                              fontWeight="400"
-                              fontSize="2rem"
-                              ta="center"
-                              fontFamily="light"
-                            >
-                              Forgot password?
-                            </HeadingHtV1>
-                            <TextHtV1 color="color676767" ta="center" lh="1.6">
-                              Enter the e-mail address associated with your account <br />
-                              Click submit to have your password e-mailed to you.
-                            </TextHtV1>
-                          </BoxHtV1>
-                        </RowHtV1>
-                        <RowHtV1 display="block" mr="0" ml="0">
-                          <BoxHtV1 mt="0">
-                            <ForgotPasswordFormHtV1
-                              email={email}
-                              onChangeEmail={this.onChangeEmail}
-                              emailFeedBackError={emailError}
-                              emailFeedBackMessage={emailErrorMessage}
-                              onSubmitForgot={this.onSubmitForgot}
-                              forgotResponse={response}
-                              loginUrl={LOGIN_URL}
-                            />
-                          </BoxHtV1>
-                        </RowHtV1>
-                      </BoxHtV1>
-                    )}
-                  </BoxHtV1>
-                </RowHtV1>
-              </BoxHtV1>
-            </BoxHtV1>
-          </ContainerHtV1>
-        </BoxHtV1>
-        {/* <Footer /> */}
-      </SectionHtV1>
+                        <Image display="inline-block" src={EmailIcon} alt="OTP Login" va="sub" width={20} mr={10} />{' '}
+                        Email
+                      </Button>
+                    </Box>
+                    <Box variant="col-6">
+                      <GoogleLoginBtn />
+                    </Box>
+                  </Row>
+                </Fragment>
+              )}
+            </Box>
+            <Box maxWidth="50%" pr={16} pl={40}>
+              <Box
+                width={1}
+                mb={20}
+                sx={{
+                  borderBottom: 'divider'
+                }}
+              >
+                <Heading color="#1b2125" pb={20}>
+                  CREATE AN ACCOUNT
+                </Heading>
+              </Box>
+              <Heading fontSize={16}>If you don't yet have HomeTown account, please register.</Heading>
+              <Button px={80} mt={30} height={42} lineHeight={1.7} fontWeight={600} as={Link} to={SIGNUP_URL}>
+                Register
+              </Button>
+            </Box>
+          </Row>
+        </Container>
+
+        {/* Footer */}
+        <Footer />
+      </Section>
     );
   }
 }
+
+ForgotPasswordContainer.propTypes = {
+  history: PropTypes.object.isRequired
+};

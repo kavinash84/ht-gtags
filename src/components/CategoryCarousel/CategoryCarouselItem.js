@@ -1,48 +1,61 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Div from 'hometown-components-dev/lib/Div';
-import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
 import { Link } from 'react-router-dom';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
 
-const styles = require('./Slider.scss');
-
-const CategoryItem = ({ image, name, url }) => {
+const CategoryItem = ({
+ image, name, url, discount
+}) => {
   if (url) {
     return (
-      <Div className={styles.catSliderItem}>
-        <Link className={styles.link} to={url || '/'}>
-          <ImageShimmer src={image} height="283px">
-            {imageURL => <img src={imageURL} alt={name} />}
-          </ImageShimmer>
-          <div className={styles.content} ta="center">
-            <p className={styles.title}>{name}</p>
-          </div>
+      <Box variant="section.catSliderItem">
+        <Link to={url}>
+          {image && <Image src={image} alt={name} />}
+          {discount && (
+            <Text variant="catSliderDiscount" mt={16}>
+              {discount}
+            </Text>
+          )}
+          {name && (
+            <Text variant="catSliderTitle" mt={12} pb={5}>
+              {name}
+            </Text>
+          )}
         </Link>
-      </Div>
+      </Box>
     );
   }
   return (
-    <Div className={styles.catSliderItem}>
-      <ImageShimmer src={image} height="283px">
-        {imageURL => <img src={imageURL} alt={name} />}
-      </ImageShimmer>
-      <div className={styles.content} ta="center">
-        <p className={styles.title}>{name}</p>
-      </div>
-    </Div>
+    <Box variant="section.catSliderItem">
+      {image && <Image src={image} alt={name} />}
+      {discount && (
+        <Text variant="catSliderDiscount" mt={16}>
+          {discount}
+        </Text>
+      )}
+      {name && (
+        <Text variant="catSliderTitle" mt={12} pb={5}>
+          {name}
+        </Text>
+      )}
+    </Box>
   );
 };
 
 CategoryItem.defaultProps = {
   image: '',
   name: '',
-  url: ''
+  url: '',
+  discount: ''
 };
 
 CategoryItem.propTypes = {
   image: PropTypes.string,
   name: PropTypes.string,
-  url: PropTypes.string
+  url: PropTypes.string,
+  discount: PropTypes.string
 };
 
 export default CategoryItem;

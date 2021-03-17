@@ -1,105 +1,101 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Div from 'hometown-components-dev/lib/Div';
-import Span from 'hometown-components-dev/lib/Span';
-import Heading from 'hometown-components-dev/lib/HeadingH3';
-import Rating from 'hometown-components-dev/lib/Rating';
-import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
-import Img from 'hometown-components-dev/lib/Img';
-import Theme from 'hometown-components-dev/lib/Theme';
 import { Link } from 'react-router-dom';
 
-const styles = require('./Slider.scss');
+/* ====== Components ====== */
+import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+// import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+// import Text from 'hometown-components-dev/lib/TextHtV1';
+// import Rating from 'hometown-components-dev/lib/RatingHtV1';
+// import ImageShimmer from 'hometown-components-dev/lib/ImageShimmer';
 
-const judgeColor = rating => {
-  if (!rating) {
-    return '';
-  }
-  rating = parseInt(rating, 10);
-  if (rating < 2) {
-    return '#dc3545';
-  }
-  if (rating >= 2 && rating < 3) {
-    return '#f5a623';
-  }
-  if (rating >= 3) {
-    return '#28a745';
-  }
-};
+// const judgeColor = rating => {
+//   if (!rating) {
+//     return '';
+//   }
+//   rating = parseInt(rating, 10);
+//   if (rating < 2) {
+//     return '#dc3545';
+//   }
+//   if (rating >= 2 && rating < 3) {
+//     return '#f5a623';
+//   }
+//   if (rating >= 3) {
+//     return '#28a745';
+//   }
+// };
 
 const ProductItem = ({
- image, name, url, discPrice, price, rating, reviewsCount, percentage, height
+  image,
+  name,
+  url
+  // discPrice,
+  // price,
+  // rating,
+  // reviewsCount,
+  // percentage
+  // height
 }) => (
-  <Div className={styles.prodSliderItem}>
-    <Link className={styles.link} to={url}>
-      <ImageShimmer src={image} height={height}>
-        {imageURL => <Img alt={name} src={imageURL} width="100%" className={styles.prodImage} />}
-      </ImageShimmer>
-      <Div className={styles.content}>
-        <Heading mb="2px" color={Theme.colors.text} fontFamily="regular" fontSize="0.9375rem" ta="center">
-          {name}
-        </Heading>
+  <BoxHtV1 variant="section.catSliderItem">
+    <Link to={url}>
+      {/* <ImageShimmer src={image} height={height}> */}
+      {/* {imageURL => <Image alt={name} src={imageURL} width="100%" />} */}
+      {/* </ImageShimmer> */}
+      <Image alt={name} src={image} width="100%" />
+      {/* <BoxHtV1>
+        <Heading>{name}</Heading>
 
-        <Div mb="0px" ta="center">
-          <Span mr="0.3125rem" color={Theme.colors.text} fontSize="0.875em" fontFamily="regular">
-            {' '}
-            Rs. {discPrice || price}{' '}
-          </Span>
+        <BoxHtV1>
+          <Text>Rs. {discPrice || price}</Text>
           {discPrice && (
-            <Span mr="0" fontSize="0.75em" fontFamily="regular">
-              {' '}
+            <Text as="span">
               <s>Rs. {price}</s>
-            </Span>
-          )}
-          {rating > 0 && (
-            <Span ml="0.625rem">
-              <Rating color={judgeColor(rating)} rating={parseFloat(rating).toFixed(1)}>
-                ★ {rating}
-              </Rating>
-              <Span mr="0.625rem" fontSize="0.75rem" lh="1.7" va="text-top" color={Theme.colors.textExtraLight}>
-                ({reviewsCount})
-              </Span>
-            </Span>
-          )}
-        </Div>
-        <Div mb="0px" ta="center">
-          {' '}
+            </Text>
+          )} */}
+      {/* {rating > 0 && ( */}
+      {/* <Text>
+            <Rating color={judgeColor(4)} rating={parseFloat(4).toFixed(1)}>
+              ★ 4{rating}
+            </Rating>
+            <Text as="span">({reviewsCount})</Text>
+          </Text> */}
+      {/* )} */}
+      {/* </BoxHtV1>
+        <BoxHtV1>
           {percentage && (
-            <Span fontSize="0.75rem" fontFamily="regular">
-              Savings
-              <Span mr="0px" fontSize="0.75rem" border="none" fontFamily="regular" va="bottom">
-                {' '}
-                ({percentage}%)
-              </Span>
-            </Span>
+            <Text>
+              {' '}
+              Savings <Text as="span">({percentage}%)</Text>
+            </Text>
           )}
-        </Div>
-      </Div>
+        </BoxHtV1>
+      </BoxHtV1> */}
     </Link>
-  </Div>
+  </BoxHtV1>
 );
 
 ProductItem.defaultProps = {
   image: '',
-  name: '',
-  percentage: '',
-  rating: 0,
-  price: '',
-  discPrice: '',
-  reviewsCount: 0,
-  height: 0
+  name: ''
+  // percentage: '',
+  // rating: 0,
+  // price: '',
+  // discPrice: '',
+  // reviewsCount: 0
+  // height: 0
 };
 
 ProductItem.propTypes = {
   url: PropTypes.string.isRequired,
-  discPrice: PropTypes.string,
-  price: PropTypes.string,
   image: PropTypes.string,
-  name: PropTypes.string,
-  rating: PropTypes.number,
-  reviewsCount: PropTypes.number,
-  percentage: PropTypes.string,
-  height: PropTypes.string
+  name: PropTypes.string
+  // discPrice: PropTypes.string,
+  // price: PropTypes.string,
+  // rating: PropTypes.number,
+  // reviewsCount: PropTypes.number,
+  // percentage: PropTypes.string
+  // height: PropTypes.string
 };
 
 export default ProductItem;

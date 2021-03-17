@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { setCurrentLocation } from 'redux/modules/storelocator';
 
 /* ====== Page Components ====== */
-import StoreLocatorContainer from 'newComponents/StoreLocator';
+import StoreLocatorContainer from 'components/StoreLocator';
 import MenuFooter from 'containers/MenuFooter';
 
 const mapStateToProps = ({ storelocator }) => ({

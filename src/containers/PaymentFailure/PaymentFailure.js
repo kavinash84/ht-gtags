@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import PaymentFailure from 'components/PaymentFailure';
-import MenuFooter from 'containers/MenuFooter';
+
+/* ====== Components ====== */
+import Body from 'hometown-components-dev/lib/BodyHtV1';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
+
+/* ====== Page Components ====== */
+import Footer from 'components/Footer';
+import Header from 'components/Header';
+import PaymentFailure from 'newComponents/PaymentFailure';
 
 export default class PaymentFailureContainer extends Component {
   render() {
@@ -11,9 +19,20 @@ export default class PaymentFailureContainer extends Component {
       }
     } = this.props;
     return (
-      <MenuFooter pageTitle="Payment Failed">
-        <PaymentFailure orderId={orderId} />
-      </MenuFooter>
+      <Wrapper>
+        <Body>
+          {/* Header */}
+          <Header />
+
+          {/* Container */}
+          <Container mt={60}>
+            <PaymentFailure orderId={orderId} />
+          </Container>
+
+          {/* Footer */}
+          <Footer />
+        </Body>
+      </Wrapper>
     );
   }
 }
