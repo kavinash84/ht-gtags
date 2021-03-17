@@ -81,8 +81,7 @@ class NavBar extends Component {
               style={{
                 textDecoration: 'none',
                 fontFamily: 'medium',
-                color: 'black',
-                fontWeight: 'bold'
+                color: 'black'
               }}
             >
               Modular Kitchens
