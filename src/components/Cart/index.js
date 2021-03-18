@@ -163,8 +163,8 @@ const checkIsAnyProductOutofStoc = (results, outOfStockList) => {
 // const mapStateToProps = ({ pincode, cart, app }) => ({   //Old
 const isSelected = (id, state) => state.some(arr => arr.simpleSku === id);
 
-const handleCheckboxClick = (id, data, state) => dispatchero => e => {
-  console.log(e.target.value);
+const handleCheckboxClick = (id, data, state) => dispatchero => {
+  // console.log(e.target.value);
   despatchSelectForDemo(id, data, state, dispatchero);
 };
 

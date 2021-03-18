@@ -49,9 +49,9 @@ export default function gaMiddleware() {
           if (unbxd) {
             if (window && !!window.unbxd && !!window.unbxd.toggleWishList) {
               window.unbxd.toggleWishList(sku, simpleSku);
-              console.log('unbxd toggleWishList callback invoked with - ', sku, simpleSku);
+              // console.log('unbxd toggleWishList callback invoked with - ', sku, simpleSku);
             } else {
-              console.log('error in calling unbxd toggleWishList callback !');
+              // console.log('error in calling unbxd toggleWishList callback !');
             }
           }
         }
@@ -67,7 +67,7 @@ export default function gaMiddleware() {
           window.unbxd
         ) {
           window.unbxd.renderCartItemsonSRP();
-          console.log(`unbxd - window.unbxd.renderCartItemsonSRP(); invoked on -${type}`);
+          // console.log(`unbxd - window.unbxd.renderCartItemsonSRP(); invoked on -${type}`);
         }
         if (
           (type === 'wishList/ADD_TO_WISHLIST_SUCCESS' || type === 'wishList/REMOVE_FROM_WISHLIST_SUCCESS') &&
@@ -75,7 +75,7 @@ export default function gaMiddleware() {
           window.unbxd
         ) {
           window.unbxd.renderWishListItemsOnSRP();
-          console.log(`unbxd - window.unbxd.renderWishListItemsOnSRP() invoked on -${type}`);
+          // console.log(`unbxd - window.unbxd.renderWishListItemsOnSRP() invoked on -${type}`);
         }
         if (type === '@@router/LOCATION_CHANGE') {
           const {
@@ -576,7 +576,7 @@ export default function gaMiddleware() {
               event: 'buyer_type',
               type: cust_type
             });
-            console.log(window && window.Unbxd && window.Unbxd.track && unbxdData.length);
+            // console.log(window && window.Unbxd && window.Unbxd.track && unbxdData.length);
             if (window && window.Unbxd && window.Unbxd.track && unbxdData.length) {
               unbxdData.forEach(p => {
                 window.Unbxd.track('order', p);
@@ -702,7 +702,7 @@ export default function gaMiddleware() {
             qty: '1'
           });
         });
-        console.log('Analytics for combined', unbxdData);
+        // console.log('Analytics for combined', unbxdData);
         window.dataLayer.push(
           {
             event: 'Combo_offer',

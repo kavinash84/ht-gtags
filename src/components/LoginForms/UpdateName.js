@@ -30,8 +30,8 @@ const LoginModal = props => {
     onChangeFirstName
   } = props;
   const isValid = () => {
-    console.log('firstName && firstNameError', firstNameError);
-    console.log('lastName && lastNameError', lastNameError);
+    // console.log('firstName && firstNameError', firstNameError);
+    // console.log('lastName && lastNameError', lastNameError);
     if (firstNameError) return false;
     if (lastNameError) return false;
     if (!firstName) return false;
@@ -99,7 +99,7 @@ const LoginModal = props => {
           disabled={!isValid()}
           className="google-login-btn"
           onClick={() => {
-            console.log(!isValid());
+            // console.log(!isValid());
             const username = `${firstName} ${lastName}`;
             loginViaLogin({}, session, null, username);
           }}

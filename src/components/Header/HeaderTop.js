@@ -105,9 +105,7 @@ export default class HeaderTop extends Component {
     containsOutOfStock: false
   };
   componentDidMount() {
-    const {
- cart, wishlist, checkCart, cartItems
-} = this.props;
+    const { cartItems } = this.props;
     // console.log('cart check', checkCart);
     this.containsOutOfStockFunc(cartItems);
   }
@@ -118,7 +116,7 @@ export default class HeaderTop extends Component {
         openLogin: false
       });
     }
-    const { cartItems } = this.props;
+    // const { cartItems } = this.props;
     this.containsOutOfStockFunc(nextProps.cartItems);
   }
 
@@ -149,7 +147,7 @@ export default class HeaderTop extends Component {
   checkCartBeforeCheckout = (dispatcher, session) => dispatcheroEmpty => {
     // e.preventDefault();
     const { selectedPincode, loadCart } = this.props;
-    console.log('cart check console', dispatcher, session, dispatcheroEmpty);
+    // console.log('cart check console', dispatcher, session, dispatcheroEmpty);
     const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
     loadCart(session, pincode).catch(error => console.log(error));
     dispatcher(session);
@@ -552,5 +550,6 @@ HeaderTop.propTypes = {
   addToSelectForDemo: PropTypes.func.isRequired,
   checkCart: PropTypes.func.isRequired,
   sessionId: PropTypes.string.isRequired,
-  selectedPincode: PropTypes.any.isRequired
+  selectedPincode: PropTypes.any.isRequired,
+  loadCart: PropTypes.any.isRequired
 };

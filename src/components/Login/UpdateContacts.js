@@ -27,8 +27,8 @@ const LoginModal = props => {
     onChangePhone
   } = props;
   const isValid = () => {
-    console.log('firstName && firstNameError', firstNameError);
-    console.log('lastName && lastNameError', lastNameError);
+    // console.log('firstName && firstNameError', firstNameError);
+    // console.log('lastName && lastNameError', lastNameError);
     if (firstNameError) return false;
     if (lastNameError) return false;
     if (phoneError) return false;
@@ -92,7 +92,7 @@ const LoginModal = props => {
             className="google-login-btn"
             onClick={() => {
               const username = `${firstName} ${lastName}`;
-              console.log(!isValid(), session, phone, username);
+              // console.log(!isValid(), session, phone, username);
               loginViaLogin({}, session, phone, username);
             }}
           >

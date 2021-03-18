@@ -483,6 +483,12 @@ class ProductDetails extends React.Component {
         reviewError
       });
     }
+    this.setState({
+      addreview: !this.state.addreview,
+      name: '',
+      review: ''
+    });
+
     this.addReview(catalogId, { name, rating, review });
   };
 

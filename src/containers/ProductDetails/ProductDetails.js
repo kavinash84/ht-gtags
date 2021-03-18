@@ -22,7 +22,7 @@ import ProductNotFound from './ProductNotFound';
 }))
 export default class ProductDetails extends Component {
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     const {
  loading, loaded, history, productDescription
 } = this.props;

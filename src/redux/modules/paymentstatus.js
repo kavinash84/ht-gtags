@@ -39,7 +39,7 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 export function isLoaded(globalState) {
-  console.log('Is loaded', globalState.paymentstatus, globalState.paymentstatus.loaded);
+  // console.log('Is loaded', globalState.paymentstatus, globalState.paymentstatus.loaded);
   return globalState.paymentstatus && globalState.paymentstatus.loaded;
 }
 

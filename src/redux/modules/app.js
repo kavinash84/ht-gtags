@@ -85,8 +85,8 @@ export const generateSession = (pincode = PINCODE) => ({
       await setAppAuth({ client })(response);
       return response;
     } catch (error) {
-      console.log(error);
-      console.log('Unable to generate session');
+      // console.log(error);
+      // console.log('Unable to generate session');
       return error;
     }
   }

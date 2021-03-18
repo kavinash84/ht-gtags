@@ -39,12 +39,10 @@ import UnbxdRecommendedForYou from '../../components/Unbxd/unbxdRecommendedForYo
 const CartEmptyIcon = require('../../../static/emptyCart.png');
 const PincodeModalIcon = require('../../../static/map-placeholder.svg');
 
-const demoProductsBanner = cart => {
-  console.log('demoProducts function', cart);
-  console.log(cart.some(({ product_info: { demo_product: demoProduct } }) => demoProduct));
-  return cart.some(({ product_info: { demo_product: demoProduct } }) => demoProduct);
-};
-
+const demoProductsBanner = cart =>
+  // console.log('demoProducts function', cart);
+  // console.log(cart.some(({ product_info: { demo_product: demoProduct } }) => demoProduct));
+  cart.some(({ product_info: { demo_product: demoProduct } }) => demoProduct);
 @connect(
   ({
  cart, cart: {
@@ -100,7 +98,7 @@ export default class CartContainer extends Component {
   componentDidMount() {
     const { cartTimeout } = this.props;
     window.scroll(0, 0);
-    console.log(cartTimeout, 'cartTimeout');
+    // console.log(cartTimeout, 'cartTimeout');
     const popUpTimeoutId = setTimeout(this.webToChat, cartTimeout);
     // eslint-disable-next-line react/no-did-mount-set-state
     this.setState({ popUpTimeoutId });
@@ -114,7 +112,7 @@ export default class CartContainer extends Component {
     }
   }
   componentWillUnmount() {
-    console.log('componentWillUnmount function in cart');
+    // console.log('componentWillUnmount function in cart');
     const { toggleWebToChat } = this.props;
     const { popUpTimeoutId } = this.state;
     clearTimeout(popUpTimeoutId);
@@ -135,14 +133,14 @@ export default class CartContainer extends Component {
     const {
       embedded_svc: { liveAgentAPI: { inviteButton: { isAvailable } = {} } = {} }
     } = window;
-    console.log(isAvailable, !dismiss, 'webToChat function');
+    // console.log(isAvailable, !dismiss, 'webToChat function');
     if (isAvailable && !dismiss) toggleWebToChat(true);
   };
   render() {
     const {
- results, summary, loading, loaded, outOfStockList
+ results, summary, loading, outOfStockList
 } = this.props;
-    console.log(loaded);
+    // console.log(loaded);
 
     return (
       <Wrapper>

@@ -36,12 +36,12 @@ export default class PaymentPendingContainer extends Component {
     const {
  error, orderId, data, history
 } = this.props;
-    console.log('Component did mount inside pending payment', this.props);
+    // console.log('Component did mount inside pending payment', this.props);
 
     if (data) {
       const paymentStatus = data[orderId].payment_status;
 
-      console.log(data[orderId].payment_status);
+      // console.log(data[orderId].payment_status);
       if (error === '' && paymentStatus === 'failed') {
         history.push(PAYMENT_FAILURE);
       } else if (error === '' && paymentStatus === 'success') {
