@@ -16,6 +16,7 @@ import { formatAmount } from 'utils/formatters';
  * Components
  */
 import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
 import Flex from 'hometown-components-dev/lib/FlexHtV1';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import Container from 'hometown-components-dev/lib/ContainerHtV1';
@@ -47,6 +48,8 @@ const location = require('../../../static/map-icon.svg');
 const orderTrackIcon = require('../../../static/shipped.svg');
 const demoBanner = require('../../../static/campaign/select-for-demo-banner.jpg');
 const saveForLaterIcon = require('../../../static/wishListIcon.png');
+
+const styles = require('./Cart.scss');
 
 const despatchClearSelectForDemo = dispatcheroEmpty => {
   const state = [];
@@ -323,105 +326,106 @@ const Cart = ({
           {results.map(item => (
             <Box>
               {item.is_display ? (
-                <Row key={item.id_customer_cart} py={20} alignItems="center" sx={{ position: 'relative' }}>
-                  <Box variant="col-3" pr={0}>
-                    <Link to={formatProductURL(item.product_info.name, item.configurable_sku)}>
-                      <ImageShimmer
-                        src={item.product_info.image}
-                        height="100%"
-                        sx={{
-                          boxShadow: '0 1px 2px 0 #0000033'
-                        }}
-                      >
-                        {imageURL => (
-                          <Image
-                            width={1}
-                            src={imageURL}
-                            alt=""
-                            sx={{
-                              boxShadow: 'productThumb'
-                            }}
-                          />
-                        )}
-                      </ImageShimmer>
-                    </Link>
-                  </Box>
-                  <Box variant="col-5" pl={30}>
-                    <Link to={formatProductURL(item.product_info.name, item.configurable_sku)}>
-                      <Box mb={10}>
-                        <Heading color="heading" fontSize={16} lineHeight={1.4} fontWeight="normal">
-                          {item.product_info.name}
-                        </Heading>
-                      </Box>
-                      {item.product_info.color && (
-                        <Box mb={15}>
-                          <Text color="#575757">{item.product_info.color}</Text>
-                        </Box>
-                      )}
-                    </Link>
-                    <Box pb={20}>
-                      <Flex alignItems="center">
-                        <Image width="initial" height={20} mr={10} src={orderTrackIcon} />
-                        <Text
-                          color={item.product_info.delivery_time_text.indexOf('Currently') === -1 ? '#090909' : 'red'}
-                          fontSize={12}
+                <Box key={item.id_customer_cart} py={20}>
+                  <Row alignItems="center" sx={{ position: 'relative' }} pb={20}>
+                    <Box variant="col-3" pr={0}>
+                      <Link to={formatProductURL(item.product_info.name, item.configurable_sku)}>
+                        <ImageShimmer
+                          src={item.product_info.image}
+                          height="100%"
+                          sx={{
+                            boxShadow: '0 1px 2px 0 #0000033'
+                          }}
                         >
-                          {item.product_info.delivery_time_text}
-                        </Text>
-                      </Flex>
+                          {imageURL => (
+                            <Image
+                              width={1}
+                              src={imageURL}
+                              alt=""
+                              sx={{
+                                boxShadow: 'productThumb'
+                              }}
+                            />
+                          )}
+                        </ImageShimmer>
+                      </Link>
                     </Box>
-                    <Flex alignItems="center">
-                      <Button
-                        variant="link"
-                        fontSize={12}
-                        display="flex"
-                        alignItems="center"
-                        onClick={addToWishlist(
-                          item.configurable_sku,
-                          wishListData,
-                          toggleWishList,
-                          isLoggedIn,
-                          handleLoginModal,
-                          wishListWaitList,
-                          item.simple_sku,
-                          pincode,
-                          item.id_customer_cart,
-                          sessionId,
-                          pincode,
-                          item.qty,
-                          item.product_info.product_id,
-                          loadingList,
-                          item,
-                          selectForDemo
-                        )(removeFromCart)}
-                      >
-                        <Image height={16} mr={10} src={saveForLaterIcon} />
-                        <Text fontSize={12}>Add to wishlist</Text>
-                      </Button>
-                      <Text mx={8} fontSize={16}>
-                        {' '}
-                        |{' '}
-                      </Text>
-                      <Button
-                        variant="link"
-                        fontSize={12}
-                        display="flex"
-                        alignItems="center"
-                        disabled={cartItemLoading(item.id_customer_cart)}
-                        onClick={onClick(
-                          item.id_customer_cart,
-                          sessionId,
-                          pincode,
-                          item.qty,
-                          item.product_info.product_id,
-                          item.simple_sku,
-                          item,
-                          selectForDemo
-                        )(removeFromCart)(addToSelectForDemo)}
-                      >
-                        <CloseIcon width={14} height={14} mr={10} /> Remove
-                      </Button>
-                      {/* {item.product_info.demo_product && (
+                    <Box variant="col-5" pl={30}>
+                      <Link to={formatProductURL(item.product_info.name, item.configurable_sku)}>
+                        <Box mb={10}>
+                          <Heading color="heading" fontSize={16} lineHeight={1.4} fontWeight="normal">
+                            {item.product_info.name}
+                          </Heading>
+                        </Box>
+                        {item.product_info.color && (
+                          <Box mb={15}>
+                            <Text color="#575757">{item.product_info.color}</Text>
+                          </Box>
+                        )}
+                      </Link>
+                      <Box pb={20}>
+                        <Flex alignItems="center">
+                          <Image width="initial" height={20} mr={10} src={orderTrackIcon} />
+                          <Text
+                            color={item.product_info.delivery_time_text.indexOf('Currently') === -1 ? '#090909' : 'red'}
+                            fontSize={12}
+                          >
+                            {item.product_info.delivery_time_text}
+                          </Text>
+                        </Flex>
+                      </Box>
+                      <Flex alignItems="center">
+                        <Button
+                          variant="link"
+                          fontSize={12}
+                          display="flex"
+                          alignItems="center"
+                          onClick={addToWishlist(
+                            item.configurable_sku,
+                            wishListData,
+                            toggleWishList,
+                            isLoggedIn,
+                            handleLoginModal,
+                            wishListWaitList,
+                            item.simple_sku,
+                            pincode,
+                            item.id_customer_cart,
+                            sessionId,
+                            pincode,
+                            item.qty,
+                            item.product_info.product_id,
+                            loadingList,
+                            item,
+                            selectForDemo
+                          )(removeFromCart)}
+                        >
+                          <Image height={16} mr={10} src={saveForLaterIcon} />
+                          <Text fontSize={12}>Add to wishlist</Text>
+                        </Button>
+                        <Text mx={8} fontSize={16}>
+                          {' '}
+                          |{' '}
+                        </Text>
+                        <Button
+                          variant="link"
+                          fontSize={12}
+                          display="flex"
+                          alignItems="center"
+                          disabled={cartItemLoading(item.id_customer_cart)}
+                          onClick={onClick(
+                            item.id_customer_cart,
+                            sessionId,
+                            pincode,
+                            item.qty,
+                            item.product_info.product_id,
+                            item.simple_sku,
+                            item,
+                            selectForDemo
+                          )(removeFromCart)(addToSelectForDemo)}
+                        >
+                          <CloseIcon width={14} height={14} mr={10} /> Remove
+                        </Button>
+                        {/* {item.product_info.demo_product && (
                       <Box ml={15}>
                         <div className="checkbox">
                           <input
@@ -438,25 +442,25 @@ const Cart = ({
                         </Label>
                       </Box>
                     )} */}
-                    </Flex>
-                    {item.product_info.demo_product && (
-                      <Box mt={15}>
-                        <div className="checkbox">
-                          <input
-                            type="checkbox"
-                            id={item.simple_sku}
-                            onClick={handleCheckboxClick(item.simple_sku, item, selectForDemo)(addToSelectForDemo)}
-                            checked={isSelected(item.simple_sku, selectForDemo)}
-                          />
-                          {/* eslint-disable-next-line jsx-a11y/label-has-for */}
-                          <label htmlFor={item.simple_sku} />
-                        </div>
-                        <Label htmlFor="seeDemo" ml="10px" fontSize="14px" fontWeight="bold">
-                          Select for Demo
-                        </Label>
-                      </Box>
-                    )}
-                    {/* {item.product_info.assembly_service && (
+                      </Flex>
+                      {item.product_info.demo_product && (
+                        <Box mt={15}>
+                          <div className="checkbox">
+                            <input
+                              type="checkbox"
+                              id={item.simple_sku}
+                              onClick={handleCheckboxClick(item.simple_sku, item, selectForDemo)(addToSelectForDemo)}
+                              checked={isSelected(item.simple_sku, selectForDemo)}
+                            />
+                            {/* eslint-disable-next-line jsx-a11y/label-has-for */}
+                            <label htmlFor={item.simple_sku} />
+                          </div>
+                          <Label htmlFor="seeDemo" ml="10px" fontSize="14px" fontWeight="bold">
+                            Select for Demo
+                          </Label>
+                        </Box>
+                      )}
+                      {/* {item.product_info.assembly_service && (
                       <Box color="uspTitle" fontSize="0.75rem">
                         <Image
                           width="initial"
@@ -491,93 +495,86 @@ const Cart = ({
                         </Text>
                       </Box>
                     )} */}
-                  </Box>
-                  <Box variant="col-2" textAlign="center">
-                    <ProductQuantity
-                      cartItemLoading={cartItemLoading}
-                      cartId={item.id_customer_cart}
-                      quantity={item.qty}
-                      simpleSku={item.simple_sku}
-                      skuId={item.configurable_sku}
-                      configId={item.product_info && item.product_info.product_id ? item.product_info.product_id : ''}
-                    />
-                  </Box>
-                  <Box variant="col-2">
-                    <Label color="heading" fontSize={18}>
-                      ₹{' '}
-                      {item.product_info.special_price === 0
-                        ? formatAmount(Number(item.product_info.unit_price) * Number(item.qty))
-                        : formatAmount(Number(item.product_info.special_price) * Number(item.qty))}
-                    </Label>
-                  </Box>
+                    </Box>
+                    <Box variant="col-2" textAlign="center">
+                      <ProductQuantity
+                        cartItemLoading={cartItemLoading}
+                        cartId={item.id_customer_cart}
+                        quantity={item.qty}
+                        simpleSku={item.simple_sku}
+                        skuId={item.configurable_sku}
+                        configId={item.product_info && item.product_info.product_id ? item.product_info.product_id : ''}
+                      />
+                    </Box>
+                    <Box variant="col-2">
+                      <Label color="heading" fontSize={18}>
+                        ₹{' '}
+                        {item.product_info.special_price === 0
+                          ? formatAmount(Number(item.product_info.unit_price) * Number(item.qty))
+                          : formatAmount(Number(item.product_info.special_price) * Number(item.qty))}
+                      </Label>
+                    </Box>
 
-                  {isProductOutofStock(item.configurable_sku) && (
-                    <Flex
-                      alignItems="center"
-                      justifyContent="center"
-                      bg="overlayLight"
-                      flexDirection="column"
-                      sx={{
-                        position: 'absolute',
-                        width: 'calc(100% - 32px)',
-                        height: 'calc(100% - 40px)',
-                        zIndex: 1,
-                        left: 16,
-                        top: 20
-                      }}
-                    >
-                      <Heading fontSize={20} pb={10}>
-                        This product is out of stock please remove before proceed.
-                      </Heading>
-                      <Button
-                        variant="outline.primary"
-                        // onClick={onClick(
-                        //   item.id_customer_cart,
-                        //   sessionId,
-                        //   pincode
-                        // )(removeFromCart)}
-                        onClick={onClick(
-                          item.id_customer_cart,
-                          sessionId,
-                          pincode,
-                          item.qty,
-                          item.product_info.product_id,
-                          item.simple_sku,
-                          item,
-                          selectForDemo
-                        )(removeFromCart)(addToSelectForDemo)}
+                    {isProductOutofStock(item.configurable_sku) && (
+                      <Flex
+                        alignItems="center"
+                        justifyContent="center"
+                        bg="overlayLight"
+                        flexDirection="column"
+                        sx={{
+                          position: 'absolute',
+                          width: 'calc(100% - 32px)',
+                          height: 'calc(100% - 40px)',
+                          zIndex: 1,
+                          left: 16,
+                          top: 20
+                        }}
                       >
-                        Remove
-                      </Button>
-                    </Flex>
-                  )}
+                        <Heading fontSize={20} pb={10}>
+                          This product is out of stock please remove before proceed.
+                        </Heading>
+                        <Button
+                          variant="outline.primary"
+                          // onClick={onClick(
+                          //   item.id_customer_cart,
+                          //   sessionId,
+                          //   pincode
+                          // )(removeFromCart)}
+                          onClick={onClick(
+                            item.id_customer_cart,
+                            sessionId,
+                            pincode,
+                            item.qty,
+                            item.product_info.product_id,
+                            item.simple_sku,
+                            item,
+                            selectForDemo
+                          )(removeFromCart)(addToSelectForDemo)}
+                        >
+                          Remove
+                        </Button>
+                      </Flex>
+                    )}
+                  </Row>
 
                   {item.freebie_info && item.freebie_info.name && (
-                    <Box ml="16.65%" p="15px" style={{ background: '#fbfbfb' }}>
-                      <Box className="td" col="2" pr="0.625rem">
+                    <Box display="flex" ml="16.65%" p="15px" style={{ background: '#fbfbfb', position: 'relative' }}>
+                      <Col className="td" variant="col-2" pr="0.625rem">
                         <Link to={formatProductURL(item.freebie_info.name, item.configurable_sku)}>
                           <ImageShimmer src={item.freebie_info.image} height="100px">
                             {imageURL => <Image styles={{ width: '80%' }} src={imageURL} alt="" />}
                           </ImageShimmer>
                         </Link>
-                      </Box>
-                      <Box className="td" col="7" pr="1.5rem" pl="0.3125rem">
+                      </Col>
+                      <Col className="td" variant="col-7" pr="1.5rem" pl="0.3125rem">
                         <Link to={formatProductURL(item.freebie_info.name, item.configurable_sku)}>
                           <Box mb="10px">
-                            <Label color="text" mt="0">
+                            <Heading color="heading" fontSize={16} lineHeight={1.4} fontWeight="normal">
                               {item.freebie_info.name}
-                            </Label>
+                            </Heading>
                           </Box>
                         </Link>
                         <Box>
-                          {/* <Img
-                          width="initial"
-                          height="20px"
-                          mr="0.625rem"
-                          mt="3px"
-                          float="left"
-                          src={calendarImage}
-                        /> */}
                           <Text color="#575757" fontSize="0.75rem" mt="0" mb="0">
                             Delivery Details
                           </Text>
@@ -591,15 +588,6 @@ const Cart = ({
                         </Box>
                         {item.freebie_info.assembly_service && (
                           <Box color="uspTitle" fontSize="0.75rem">
-                            {/* <Img
-                          width="initial"
-                          height="20px"
-                          mr="0.625rem"
-                          mt="4px"
-                          mb="50px"
-                          float="left"
-                          src={assemblyIcon}
-                        /> */}
                             <Text color="#575757" fontSize="0.75rem" mt="0" mb="0">
                               Assembly
                             </Text>
@@ -625,7 +613,7 @@ const Cart = ({
                             </Text>
                           </Box>
                         )}
-                      </Box>
+                      </Col>
                       <Box className="td" col="3" pr="0.625rem">
                         <Row display="block" m="0">
                           <Box col="12" ta="left">
@@ -639,23 +627,20 @@ const Cart = ({
                             item.freebie_info.special_price !== 0 && (
                               <React.Fragment>
                                 <Label color="black" fontSize="0.875rem" mt="0">
-                                  <s>Rs. {formatAmount(Number(item.freebie_info.unit_price) * Number(item.qty))}</s>
+                                  Rs.{' '}
+                                  {item.freebie_info.special_price === 0
+                                    ? formatAmount(Number(item.freebie_info.unit_price) * Number(item.qty))
+                                    : formatAmount(Number(item.freebie_info.special_price) * Number(item.qty))}
                                 </Label>
                                 <br />
                               </React.Fragment>
                             )}
-                          <Label color="primary" fontSize="1.25rem" mt="3px">
-                            Rs.{' '}
-                            {item.freebie_info.special_price === 0
-                              ? formatAmount(Number(item.freebie_info.unit_price) * Number(item.qty))
-                              : formatAmount(Number(item.freebie_info.special_price) * Number(item.qty))}
-                          </Label>
                         </Box>
                       </Box>
-                      {/* <div className={styles.freebieCartItem} /> */}
+                      <Box className={styles.freebieCartItem} />
                     </Box>
                   )}
-                </Row>
+                </Box>
               ) : null}
             </Box>
           ))}
