@@ -46,6 +46,7 @@ import BankCard from './BankCard';
 import CardForm from './CardForm';
 import CardFormEasyEmi from './CardFormEasyEmi';
 import Emi from './Emi';
+import EmiZero from './EmiZero';
 import PaymentMethods from '../PaymentMethods/';
 import PaymentForm from './PaymentForm';
 import UpiForm from './UpiForm';
@@ -325,6 +326,13 @@ class PaymentOptions extends Component {
                     selectedGateway={selectedGateway}
                     setPaymentDetails={setPaymentDetails}
                     currentSelection={paymentDetails.Emi.emiBank}
+                  />
+                )}
+                {selectedGateway === 'EmiZero' && (
+                  <EmiZero
+                    selectedGateway={selectedGateway}
+                    setPaymentDetails={setPaymentDetails}
+                    currentSelection={paymentDetails.EmiZero.emiBank}
                   />
                 )}
                 {selectedGateway === 'EasyEmi' && (

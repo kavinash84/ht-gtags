@@ -46,6 +46,16 @@ const initial = {
     emiBank: '',
     emiCode: ''
   },
+  EmiZero: {
+    nameOnCard: '',
+    cardNumber: '',
+    type: 'other',
+    cvv: '',
+    expMonth: '',
+    expYear: '',
+    emiBank: '',
+    emiCode: ''
+  },
   NetBanking: {
     bankCode: ''
   },
@@ -181,6 +191,22 @@ const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEa
           />
           <PaymentTab
             title="EMI"
+            imageUrl={emiIcon}
+            htmlFor="paymentEmi"
+            onClick={onChangeGateway(onChange, paymentType, session)}
+          />
+        </Fragment>
+      );
+    case 'EmiZero':
+      return (
+        <Fragment key={paymentType}>
+          <PaymentInputRadio
+            value="Emi"
+            checked={selectedGateway === paymentType}
+            onChange={onChangeGateway(onChange, paymentType, session)}
+          />
+          <PaymentTab
+            title="Zero Cost EMI"
             imageUrl={emiIcon}
             htmlFor="paymentEmi"
             onClick={onChangeGateway(onChange, paymentType, session)}

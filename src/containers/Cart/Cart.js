@@ -73,7 +73,7 @@ export default class CartContainer extends Component {
     history: PropTypes.object.isRequired,
     resetCheckKey: PropTypes.func.isRequired,
     loading: PropTypes.bool,
-    loaded: PropTypes.bool,
+    // loaded: PropTypes.bool,
     dismiss: PropTypes.bool,
     cartTimeout: PropTypes.number.isRequired,
     toggleWebToChat: PropTypes.func.isRequired
@@ -87,28 +87,45 @@ export default class CartContainer extends Component {
     isCartChecked: false,
     outOfStockList: [],
     loading: false,
-    loaded: false,
+    // loaded: false,
     dismiss: false
   };
   state = {
-    openPincode: false,
-    popUpTimeoutId: null
+    popUpTimeoutId: null,
+    responsiveModalContent: null,
+    open: false,
+    emiPopUpShown: false
   };
 
   componentDidMount() {
-    const { cartTimeout } = this.props;
+    const {
+      cartTimeout,
+      summary: { total }
+    } = this.props;
     window.scroll(0, 0);
     // console.log(cartTimeout, 'cartTimeout');
     const popUpTimeoutId = setTimeout(this.webToChat, cartTimeout);
     // eslint-disable-next-line react/no-did-mount-set-state
     this.setState({ popUpTimeoutId });
+    this.checkForEmiEligibility(total);
   }
   componentWillReceiveProps(nextProps) {
-    const { isCartChecked, history, resetCheckKey } = this.props;
+    const {
+      isCartChecked,
+      history,
+      resetCheckKey,
+      summary: { total }
+    } = this.props;
+    const {
+      summary: { total: nextPropsTotal }
+    } = nextProps;
     if (!isCartChecked && nextProps.isCartChecked) {
       const { dispatch } = this.context.store;
       dispatch(resetCheckKey());
       return history.push('/checkout/delivery-address');
+    }
+    if (total !== nextPropsTotal) {
+      this.checkForEmiEligibility(nextPropsTotal);
     }
   }
   componentWillUnmount() {
@@ -118,12 +135,48 @@ export default class CartContainer extends Component {
     clearTimeout(popUpTimeoutId);
     toggleWebToChat(false);
   }
-  handlePincodeModal = e => {
+
+  checkForEmiEligibility = total => {
+    const { emiPopUpShown } = this.state;
+    console.log('checkForEmiEligibility function', total, emiPopUpShown);
+
+    if (total >= 20000 && !emiPopUpShown) {
+      this.setState({
+        open: true,
+        responsiveModalContent: 'emiModal',
+        emiPopUpShown: true
+      });
+    }
+  };
+
+  handleModal = e => {
     if (e) {
       e.preventDefault();
     }
     this.setState({
-      openPincode: !this.state.openPincode
+      open: !this.state.open
+    });
+  };
+
+  handlePincodeModal = e => {
+    const { open } = this.state;
+    if (e) {
+      e.preventDefault();
+    }
+    this.setState({
+      // openPincode: !open,
+      responsiveModalContent: open ? null : 'pincodeModal'
+    });
+  };
+
+  handleEmiModal = e => {
+    const { open } = this.state;
+    if (e) {
+      e.preventDefault();
+    }
+    this.setState({
+      open: !open,
+      responsiveModalContent: open ? null : 'emiModal'
     });
   };
   webToChat = () => {
@@ -140,6 +193,7 @@ export default class CartContainer extends Component {
     const {
  results, summary, loading, outOfStockList
 } = this.props;
+    const { responsiveModalContent, open } = this.state;
     // console.log(loaded);
 
     return (
@@ -189,25 +243,39 @@ export default class CartContainer extends Component {
           )}
 
           {/* Pincode Modal */}
-          <ResponsiveModal
-            classNames={{ modal: 'pincodeModal' }}
-            onCloseModal={this.handlePincodeModal}
-            open={this.state.openPincode}
-          >
-            <Box>
-              <Image width="100px" m="auto" mb="1.5rem" src={PincodeModalIcon} alt="Pincode" />
-              <Heading
-                ellipsis={false}
-                color="rgba(0.0.0.0.8)"
-                textAlign="center"
-                fontSize="1.375rem"
-                mb="1rem"
-                fontFamily="light"
-              >
-                Please enter your Pincode to serve you better
-              </Heading>
-              <PinCode color="#f2f2f2" onCloseModal={this.handlePincodeModal} />
-            </Box>
+          <ResponsiveModal classNames={{ modal: 'pincodeModal' }} onCloseModal={this.handleModal} open={open}>
+            {responsiveModalContent === 'pincodeModal' ? (
+              <Box>
+                <Image width="100px" m="auto" mb="1.5rem" src={PincodeModalIcon} alt="Pincode" />
+                <Heading
+                  ellipsis={false}
+                  color="rgba(0.0.0.0.8)"
+                  textAlign="center"
+                  fontSize="1.375rem"
+                  mb="1rem"
+                  fontFamily="light"
+                >
+                  Please enter your Pincode to serve you better
+                </Heading>
+                <PinCode color="#f2f2f2" onCloseModal={this.handlePincodeModal} />
+              </Box>
+            ) : null}
+
+            {responsiveModalContent === 'emiModal' ? (
+              <Box>
+                <Heading
+                  textAlign="center"
+                  fontSize="1.25rem"
+                  lineHeight="1.45"
+                  mb="0.625rem"
+                  mt="0"
+                  color="rgba(51, 51, 51, 0.85)"
+                  fontFamily="light"
+                >
+                  You are eligible for an interest free EMI for 3 months if you have a HDFC Debit/Credit Card
+                </Heading>
+              </Box>
+            ) : null}
           </ResponsiveModal>
 
           {/* Footer */}
