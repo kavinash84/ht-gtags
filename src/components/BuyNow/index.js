@@ -65,7 +65,8 @@ class BuyNow extends React.Component {
       itemId,
       stateId,
       isSoldOut,
-      meta: { config_id: configId }
+      meta: { config_id: configId },
+      quantity
     } = this.props;
     const checkStatus = checkSKUInCart(cartSKUs, sku);
     const addLoading = addingToCart && stateId === itemId;
@@ -77,7 +78,7 @@ class BuyNow extends React.Component {
               <Button
                 variant="primary.large"
                 disabled={addLoading}
-                onClick={this.handleClick(itemId, sku, simpleSku, session, pincode, configId)(addToCart)}
+                onClick={this.handleClick(itemId, sku, simpleSku, session, pincode, configId, quantity)(addToCart)}
               >
                 BUY NOW
               </Button>
@@ -118,6 +119,7 @@ BuyNow.propTypes = {
   isSoldOut: PropTypes.bool,
   addedToCart: PropTypes.bool.isRequired,
   history: PropTypes.object,
+  quantity: PropTypes.number.isRequired,
   meta: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
