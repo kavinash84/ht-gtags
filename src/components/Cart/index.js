@@ -449,7 +449,9 @@ const Cart = ({
                             <input
                               type="checkbox"
                               id={item.simple_sku}
-                              onClick={handleCheckboxClick(item.simple_sku, item, selectForDemo)(addToSelectForDemo)}
+                              onClick={() =>
+                                handleCheckboxClick(item.simple_sku, item, selectForDemo)(addToSelectForDemo)
+                              }
                               checked={isSelected(item.simple_sku, selectForDemo)}
                             />
                             {/* eslint-disable-next-line jsx-a11y/label-has-for */}
