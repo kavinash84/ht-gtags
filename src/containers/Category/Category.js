@@ -22,6 +22,9 @@ import Header from 'components/Header';
 import Footer from 'components/Footer';
 import MainSlider from 'components/MainSlider';
 
+const styles = require('./Category.scss');
+// import './Category.scss';
+
 const getFaqs = faqs => {
   const seoFaq = JSON.parse(faqs).map(faq => {
     // console.log(faq, 'QA check');
@@ -164,7 +167,9 @@ export default class Category extends Component {
           {seoInfo && seoInfo.seo_text && (
             <SeoContent>
               <Container>
-                <div dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }} />
+                <div className={styles.seoContent}>
+                  <div dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }} />
+                </div>
               </Container>
             </SeoContent>
           )}
