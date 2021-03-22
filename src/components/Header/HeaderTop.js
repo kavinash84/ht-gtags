@@ -72,7 +72,9 @@ const despatchClearSelectForDemo = dispatcheroEmpty => {
 
 @withRouter
 @connect(
-  ({ userLogin, wishlist, cart, router, profile, app, pincode }) => ({
+  ({
+ userLogin, wishlist, cart, router, profile, app, pincode
+}) => ({
     isLoggedIn: userLogin.isLoggedIn,
     name: profile.data.first_name,
     wishListCount: getWishListCount(wishlist),
@@ -139,9 +141,7 @@ export default class HeaderTop extends Component {
   handleClick = URL => e => {
     e.preventDefault();
     const { history, router } = this.props;
-    history.push(
-      `${URL}/?redirect=${checkRedirection(router.location.pathname)}`
-    );
+    history.push(`${URL}/?redirect=${checkRedirection(router.location.pathname)}`);
   };
 
   checkCartBeforeCheckout = (dispatcher, session) => dispatcheroEmpty => {
@@ -172,8 +172,7 @@ export default class HeaderTop extends Component {
       const lastThree = newAmt.substring(newAmt.length - 3);
       const otherNumbers = newAmt.substring(0, newAmt.length - 3);
       const newlastThree = otherNumbers !== '' ? `,${lastThree}` : lastThree;
-      const res =
-        otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + newlastThree;
+      const res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + newlastThree;
       return res;
     }
   };
@@ -200,11 +199,7 @@ export default class HeaderTop extends Component {
         <Row sx={{ alignItems: 'center' }} mx={[0, 0, 0, -16]}>
           <Col width={3 / 12}>
             <Link to={HOME_URL}>
-              <Image
-                height={['auto', 'auto', 28]}
-                src={LogoIcon}
-                alt="Hometown"
-              />
+              <Image height={['auto', 'auto', 28]} src={LogoIcon} alt="Hometown" />
             </Link>
           </Col>
           <Col width={5.5 / 12}>
@@ -240,11 +235,7 @@ export default class HeaderTop extends Component {
                 }
               }}
             >
-              {isLoggedIn ? (
-                <Text variant="headerLabel">Hi {titleCase(name)}</Text>
-              ) : (
-                <UserIcon />
-              )}
+              {isLoggedIn ? <Text variant="headerLabel">Hi {titleCase(name)}</Text> : <UserIcon />}
             </Button>
             <Box pt={20} sx={{ position: 'relative' }}>
               <Card variant="card.profileMore">
@@ -386,12 +377,7 @@ export default class HeaderTop extends Component {
                     </Box>
                     <Box width={1 / 2} px={5}>
                       {isLoggedIn && (
-                        <Button
-                          as={Link}
-                          to={MY_WISHLIST_URL}
-                          variant="outline.primary"
-                          width={1}
-                        >
+                        <Button as={Link} to={MY_WISHLIST_URL} variant="outline.primary" width={1}>
                           VIEW ALL
                         </Button>
                       )}
@@ -426,12 +412,7 @@ export default class HeaderTop extends Component {
             </Flex>
             <Box pt={20} className="cart-popover" sx={{ position: 'relative' }}>
               <Card variant="card.profileMore">
-                <Box
-                  bg="bgOffer"
-                  px={20}
-                  py={8}
-                  sx={{ fontSize: 16, color: 'white' }}
-                >
+                <Box bg="bgOffer" px={20} py={8} sx={{ fontSize: 16, color: 'white' }}>
                   {cartCount} items in your cart
                 </Box>
                 <Box variant="card.profileMoreWrapper" px={0}>
@@ -462,15 +443,9 @@ export default class HeaderTop extends Component {
                     ))}
                   </Box>
                   <Box pb={20} px={[0, 0, 16]}>
-                    <Flex
-                      width={7 / 12}
-                      justifyContent="space-between"
-                      ml="auto"
-                    >
+                    <Flex width={7 / 12} justifyContent="space-between" ml="auto">
                       <Text fontFamily="medium">Subtotal</Text>
-                      <Text fontFamily="medium">
-                        Rs. {this.formatAmount(cartSummary.total)}
-                      </Text>
+                      <Text fontFamily="medium">Rs. {this.formatAmount(cartSummary.total)}</Text>
                     </Flex>
                   </Box>
                   <Box px={16}>
@@ -480,12 +455,7 @@ export default class HeaderTop extends Component {
                           <Button
                             width={1}
                             as={Link}
-                            onClick={() =>
-                              this.checkCartBeforeCheckout(
-                                checkCart,
-                                sessionId
-                              )(addToSelectForDemo)
-                            }
+                            onClick={() => this.checkCartBeforeCheckout(checkCart, sessionId)(addToSelectForDemo)}
                             to={DELIVERY_ADDRESS_URL}
                             mb={10}
                           >
@@ -505,12 +475,7 @@ export default class HeaderTop extends Component {
                         )}
                       </div>
                     ) : null}
-                    <Button
-                      width={1}
-                      as={Link}
-                      to={CART_URL}
-                      variant="outline.primary"
-                    >
+                    <Button width={1} as={Link} to={CART_URL} variant="outline.primary">
                       VIEW CART
                     </Button>
                   </Box>
@@ -527,13 +492,7 @@ export default class HeaderTop extends Component {
           open={this.state.openPincode}
         >
           <Box textAlign="center">
-            <Image
-              width="100px"
-              m="auto"
-              mb="1.5rem"
-              src={PincodeModalIcon}
-              alt="Pincode"
-            />
+            <Image width="100px" m="auto" mb="1.5rem" src={PincodeModalIcon} alt="Pincode" />
             <Heading fontSize={20} lineHeight={1.3} mb="1rem">
               Please enter your Pincode to serve you better
             </Heading>

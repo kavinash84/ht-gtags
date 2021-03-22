@@ -29,12 +29,7 @@ const ProductSummaryList = ({ productItem, qty, itemInfo }) => (
           </Box>
           <Box variant="col-8" pl={10} pr={0}>
             <Box mb="10px">
-              <Heading
-                color="heading"
-                fontSize={[12, 12, 12, 14]}
-                lineHeight={1.4}
-                pb={5}
-              >
+              <Heading color="heading" fontSize={[12, 12, 12, 14]} lineHeight={1.4} pb={5}>
                 {productItem.name ? `${productItem.name.slice(0, 20)}..` : ''}
               </Heading>
               <Text fontSize={12} pb={8}>
@@ -49,12 +44,7 @@ const ProductSummaryList = ({ productItem, qty, itemInfo }) => (
                 // </Heading>
 
                 <Heading variant="heading.small">
-                  {console.log(
-                    productItem.net_price,
-                    productItem.unit_price,
-                    '....price check'
-                  )}
-                  ₹{' '}
+                  {console.log(productItem.net_price, productItem.unit_price, '....price check')}₹{' '}
                   {productItem.net_price > productItem.unit_price * qty
                     ? formatAmount(Number(productItem.unit_price) * qty)
                     : formatAmount(Number(productItem.net_price))}
@@ -94,15 +84,8 @@ const ProductSummaryList = ({ productItem, qty, itemInfo }) => (
               </Box>
               <Box variant="col-8" pl={10} pr={0}>
                 <Box mb="10px">
-                  <Heading
-                    color="heading"
-                    fontSize={[10, 10, 10, 12]}
-                    lineHeight={1.4}
-                    pb={2}
-                  >
-                    {itemInfo.freebie_info.name
-                      ? `${itemInfo.freebie_info.name.slice(0, 10)}..`
-                      : ''}
+                  <Heading color="heading" fontSize={[10, 10, 10, 12]} lineHeight={1.4} pb={2}>
+                    {itemInfo.freebie_info.name ? `${itemInfo.freebie_info.name.slice(0, 10)}..` : ''}
                   </Heading>
                   <Heading variant="heading.small" fontSize={12}>
                     ₹ Free
