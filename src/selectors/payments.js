@@ -8,7 +8,8 @@ const allowedOptions = () => [
   'CashOnDelivery',
   'Wallet',
   'EasyEmi',
-  'Upi'
+  'Upi',
+  'EmiZero'
 ];
 
 export const getPaymentState = options =>
