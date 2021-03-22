@@ -159,12 +159,13 @@ export default class CartContainer extends Component {
   };
 
   handlePincodeModal = e => {
+    console.log();
     const { open } = this.state;
     if (e) {
       e.preventDefault();
     }
     this.setState({
-      // openPincode: !open,
+      open: !this.state.open,
       responsiveModalContent: open ? null : 'pincodeModal'
     });
   };

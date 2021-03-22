@@ -511,9 +511,9 @@ const Cart = ({
                     <Box variant="col-2">
                       <Label color="heading" fontSize={18}>
                         ₹{' '}
-                        {item.product_info.special_price === 0
+                        {item.product_info.net_price > item.product_info.unit_price * item.qty
                           ? formatAmount(Number(item.product_info.unit_price) * Number(item.qty))
-                          : formatAmount(Number(item.product_info.special_price) * Number(item.qty))}
+                          : formatAmount(Number(item.product_info.net_price))}
                       </Label>
                     </Box>
 
@@ -630,9 +630,9 @@ const Cart = ({
                               <React.Fragment>
                                 <Label color="black" fontSize="0.875rem" mt="0">
                                   Rs.{' '}
-                                  {item.freebie_info.special_price === 0
+                                  {item.freebie_info.net_price > item.freebie_info.unit_price * item.qty
                                     ? formatAmount(Number(item.freebie_info.unit_price) * Number(item.qty))
-                                    : formatAmount(Number(item.freebie_info.special_price) * Number(item.qty))}
+                                    : formatAmount(Number(item.freebie_info.net_price) * Number(item.qty))}
                                 </Label>
                                 <br />
                               </React.Fragment>
