@@ -44,7 +44,7 @@ const ProductSummaryList = ({ productItem, qty, itemInfo }) => (
                 // </Heading>
 
                 <Heading variant="heading.small">
-                  {console.log(productItem.net_price, productItem.unit_price, '....price check')}₹{' '}
+                  ₹{' '}
                   {productItem.net_price > productItem.unit_price * qty
                     ? formatAmount(Number(productItem.unit_price) * qty)
                     : formatAmount(Number(productItem.net_price))}

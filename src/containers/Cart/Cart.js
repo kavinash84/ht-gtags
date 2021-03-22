@@ -138,7 +138,7 @@ export default class CartContainer extends Component {
 
   checkForEmiEligibility = total => {
     const { emiPopUpShown } = this.state;
-    console.log('checkForEmiEligibility function', total, emiPopUpShown);
+    // console.log('checkForEmiEligibility function', total, emiPopUpShown);
 
     if (total >= 20000 && !emiPopUpShown) {
       this.setState({
@@ -159,7 +159,6 @@ export default class CartContainer extends Component {
   };
 
   handlePincodeModal = e => {
-    console.log();
     const { open } = this.state;
     if (e) {
       e.preventDefault();
