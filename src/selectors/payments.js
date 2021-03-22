@@ -5,11 +5,11 @@ const allowedOptions = () => [
   'DebitCard',
   'NetBanking',
   'Emi',
+  'EmiZero',
   'CashOnDelivery',
   'Wallet',
   'EasyEmi',
-  'Upi',
-  'EmiZero'
+  'Upi'
 ];
 
 export const getPaymentState = options =>

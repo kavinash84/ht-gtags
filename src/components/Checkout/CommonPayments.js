@@ -206,7 +206,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEa
             onChange={onChangeGateway(onChange, paymentType, session)}
           />
           <PaymentTab
-            title="Zero Cost EMI"
+            title="No Cost EMI"
             imageUrl={emiIcon}
             htmlFor="paymentEmi"
             onClick={onChangeGateway(onChange, paymentType, session)}
