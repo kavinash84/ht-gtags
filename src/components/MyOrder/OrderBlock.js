@@ -226,6 +226,26 @@ class OrderBlock extends Component {
                       <span style={{ color: 'red' }}> Cancelled </span>
                     )}
                   </Text>
+                  {item.bob_order_item === 0 || item.bob_order_item === '0' ? (
+                    <Box>
+                      <Button
+                        fontSize="14px !important"
+                        hoverColor="white"
+                        color="white"
+                        bc="rgba(0,0,0,0.5)"
+                        btnType="btnOutline"
+                        p="3px 16px"
+                        onClick={() => {
+                          this.handleChange('openCaseModal', item, order);
+                        }}
+                        sx={{ borderRadius: '3px' }}
+                      >
+                        Help
+                      </Button>
+                    </Box>
+                  ) : (
+                    ''
+                  )}
                 </Box>
               </Flex>
             ))}
