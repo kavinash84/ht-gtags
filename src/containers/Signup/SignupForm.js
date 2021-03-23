@@ -168,7 +168,7 @@ export default class SignupFormContainer extends Component {
     const {
       target: { value }
     } = e;
-    console.log(value, '$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$');
+    // console.log(value, '$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$');
     this.setState({ policyAccepted: !this.state.policyAccepted });
   };
   onSubmitSignup = e => {

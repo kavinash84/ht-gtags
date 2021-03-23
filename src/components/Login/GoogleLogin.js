@@ -38,7 +38,7 @@ const onSuccess = (dispatcher, session, phone) => result => {
   dispatcher(result.tokenId, session, phone);
 };
 const onError = error => e => {
-  console.log('Error occuried');
+  // console.log('Error occuried');
   console.log(error, e);
 };
 

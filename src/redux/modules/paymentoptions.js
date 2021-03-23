@@ -169,6 +169,25 @@ const paymentObject = (sessionId, selectedGateway, paymentData, cardType = 'visa
       emi_cc_exp_year: expYear,
       emi_cc_security_code: cvv
     };
+  } else if (selectedGateway === 'EmiZero') {
+    const {
+ emiBank, emiCode, nameOnCard, cardNumber, cvv, expMonth, expYear, cardType: type
+} = paymentData;
+    return {
+      ...paymentJSON,
+      session_id: sessionId,
+      payment_method_type: 'Emi',
+      payment_method: 'Payu',
+      card_type: type,
+      emi_bank_name: emiBank,
+      emi_months: emiCode.match(/\d+/)[0].replace(/^0/, ''),
+      emi_cc_number: cardNumber,
+      emi_cc_card_type: cardType,
+      emi_cc_holder: nameOnCard,
+      emi_cc_exp_month: expMonth,
+      emi_cc_exp_year: expYear,
+      emi_cc_security_code: cvv
+    };
   } else if (selectedGateway === 'EasyEmi') {
     const {
       is_seamless: isSeamless,
@@ -203,6 +222,37 @@ const paymentObject = (sessionId, selectedGateway, paymentData, cardType = 'visa
       ...paymentData
     };
   }
+};
+const emiZero = result => {
+  console.log('Adding zero emi', result);
+  let {
+    paymentData: { paymentOSCConfig, methodPaymentGateways },
+    cart: {
+      // eslint-disable-next-line prefer-const
+      summary: { total }
+    }
+  } = result;
+  if (total < 20000) return result;
+
+  methodPaymentGateways = {
+    ...methodPaymentGateways,
+    EmiZero: { gateway: 'Payu', count: '0' }
+  };
+  paymentOSCConfig = {
+    ...paymentOSCConfig,
+    EmiZero: {
+      paymentType: 'EmiZero',
+      isEnable: true
+    }
+  };
+
+  result.paymentData = {
+    ...result.paymentData,
+    methodPaymentGateways,
+    paymentOSCConfig
+  };
+  console.log('Resilt of zero emi', result);
+  return result;
 };
 
 const initialState = {
@@ -282,7 +332,7 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: true,
-        data: action.result
+        data: emiZero(action.result, action.cart)
       };
     case LOAD_FAIL:
       return {
@@ -449,9 +499,10 @@ export default function reducer(state = initialState, action = {}) {
 //   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
 //   promise: ({ client }) => client.get(`${PAYMENT_OPTIONS}/${session}`)
 // });
-export const load = result => ({
+export const load = (result, cart) => ({
   type: LOAD_SUCCESS,
-  result
+  result,
+  cart
 });
 
 export const setSelectedGateway = (gateway, initial, session) => ({

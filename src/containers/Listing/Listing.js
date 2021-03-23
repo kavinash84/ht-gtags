@@ -270,7 +270,7 @@ export default class Listing extends Component {
     } else page = currentPage;
     const previousPage = !page || Number(page) === 1 ? '' : `?page=${page - 1}`;
     const NextPage = !page ? '?page=2' : `?page=${Number(page) + 1}`;
-    console.log(this.props);
+    // console.log(this.props);
     /* eslint-disable react/no-danger */
     return (
       <Wrapper>

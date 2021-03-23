@@ -69,6 +69,7 @@ import ProductDetailsCarousel from './Carousel';
 import Video from './Video';
 import ReviewFilter from './ReviewFilter';
 import UnbxdCompleteTheLook from './UnbxdCompleteTheLook';
+import FreebieProduct from './FreebieProduct';
 
 import demoIcon from '../../../static/play-button.svg';
 
@@ -286,7 +287,6 @@ class ProductDetails extends React.Component {
       pincode: { selectedPincode },
       pdpTimeout
     } = this.props;
-    console.log('componentDidMount function');
     dispatch(getCombinedBuy(simpleSku, selectedPincode));
     this.setDescriptionActive(product);
     const popUpTimeoutId = setTimeout(this.webToChat, pdpTimeout);
@@ -295,7 +295,6 @@ class ProductDetails extends React.Component {
   }
   componentWillReceiveProps(nextProps) {
     const { colorproducts } = this.props;
-    // console.log('product', product);
     if (nextProps.isLoggedIn) {
       this.setState({
         openLogin: false
@@ -307,7 +306,6 @@ class ProductDetails extends React.Component {
     this.isFurnitureTrue();
   }
   componentWillUnmount() {
-    console.log('componentWillUnmount function inside details page');
     const { toggleWebToChat } = this.props;
     const { popUpTimeoutId } = this.state;
     clearTimeout(popUpTimeoutId);
@@ -387,7 +385,6 @@ class ProductDetails extends React.Component {
     const {
       embedded_svc: { liveAgentAPI: { inviteButton: { isAvailable } = {} } = {} }
     } = window;
-    console.log(isAvailable, !dismiss, 'webToChat function');
     if (isAvailable && !dismiss) toggleWebToChat(true);
   };
   handleLoginModal = () => {
@@ -473,7 +470,11 @@ class ProductDetails extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { onClickSubmit, catalogId } = this.props;
+    const {
+      product: {
+        groupedattributes: { id_catalog_config: catalogId }
+      }
+    } = this.props;
     const { name, review, rating } = this.state;
     const nameError = !(name.length > 0);
     const reviewError = !(review.length > 0);
@@ -483,7 +484,13 @@ class ProductDetails extends React.Component {
         reviewError
       });
     }
-    onClickSubmit(catalogId, { name, rating, review });
+    this.setState({
+      addreview: !this.state.addreview,
+      name: '',
+      review: ''
+    });
+
+    this.addReview(catalogId, { name, rating, review });
   };
 
   ratingChanged = newRating => {
@@ -568,7 +575,8 @@ class ProductDetails extends React.Component {
       grouped_attributes: groupedAttributes,
       sku,
       groupedattributes,
-      reviews: { count, rating }
+      reviews: { count, rating },
+      bogo_bundle: bogoBundle
     } = product;
     // const { brand: ProductBrand } = meta;
     const {
@@ -799,6 +807,11 @@ class ProductDetails extends React.Component {
                     />
                   </Box>
                 )}
+                {bogoBundle && bogoBundle.name && (
+                  <Row display="block" mb="0" mr="0.9375rem" ml="0.9375rem" className={styles.freebieProduct}>
+                    <FreebieProduct bogoBundle={bogoBundle} />
+                  </Row>
+                )}
 
                 {/* Quantity */}
                 <Flex alignItems="center">
@@ -1001,7 +1014,15 @@ class ProductDetails extends React.Component {
               </Row>
 
               {activeSpec === 'details' ? (
-                <Box px="5%" py="2%" sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+                <Box
+                  px="5%"
+                  py="2%"
+                  sx={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    justifyContent: 'space-between'
+                  }}
+                >
                   {groupedAttributes[0].Details.map(detail => {
                     // if (detail.label !== 'Note' && detail.label !== "What's in the box?") {
                     if (detail.label !== 'Note') {
@@ -1319,9 +1340,9 @@ ProductDetails.defaultProps = {
   simpleSku: '',
   quantityChange: false,
   skuItem: {},
-  session: '',
-  catalogId: '',
-  onClickSubmit: () => {}
+  session: ''
+  // catalogId: '',
+  // onClickSubmit: () => {}
 };
 DescriptionButton.propTypes = {
   // eslint-disable-next-line react/require-default-props
@@ -1353,8 +1374,8 @@ ProductDetails.propTypes = {
   combinedbuy: PropTypes.array,
   quantityChange: PropTypes.bool,
   skuItem: PropTypes.object,
-  session: PropTypes.string,
-  onClickSubmit: PropTypes.func,
-  catalogId: PropTypes.any
+  session: PropTypes.string
+  // onClickSubmit: PropTypes.func,
+  // catalogId: PropTypes.any
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

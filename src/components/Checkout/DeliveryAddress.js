@@ -96,14 +96,15 @@ class DeliveryAddress extends Component {
   }
   componentWillReceiveProps(nextProps) {
     const {
- isLoggedIn, nextstep, clearShippingAddress, onChangeEmail, userEmail, couponlistToggle
+ isLoggedIn, nextstep, clearShippingAddress, onChangeEmail, userEmail, couponlistToggle, cart
 } = this.props;
     const { dispatch } = this.context.store;
     if (nextProps.nextstep !== nextstep && nextProps.paymentData) {
-      console.log(nextProps.paymentData);
+      // console.log(nextProps.paymentData);
       const { paymentData = {} } = nextProps;
       dispatch(load({
-          paymentData
+          paymentData,
+          cart
         }));
     }
     if (isLoggedIn && nextProps.userEmail !== userEmail) {

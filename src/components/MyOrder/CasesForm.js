@@ -279,6 +279,7 @@ class CasesFormContainer extends Component {
                 )}
                 <BoxHtV1 col="12">
                   <FormInputHtV1
+                    height="100px"
                     label="Description *"
                     type="textarea"
                     rows={5}
