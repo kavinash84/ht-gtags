@@ -402,7 +402,7 @@ export default class DeliveryAddress extends Component {
               </Box>
             ))}
 
-            <Box col="2">
+            <Box col="2" px={8}>
               <Button className={styles.addAddressBtn} onClick={this.toggleAddAddresForm}>
                 <Image src={addIcon} alt="Add another address" />
                 <Text color="rgba(0, 0, 0, 0.6)" ta="center">

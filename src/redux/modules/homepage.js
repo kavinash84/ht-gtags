@@ -1,7 +1,6 @@
 import {
   BANNERS,
   HOMEPAGE_CATEGORIES,
-  HOMEPAGE_INSTAFEEDS,
   HOMEPAGE_TOP_SELLING,
   CATEGORY_MENU,
   HASHTAGS,
@@ -53,7 +52,7 @@ export const loadMainMenu = () => ({
 
 export const loadCategories = () => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-  promise: ({ client }) => client.get(HOMEPAGE_CATEGORIES)
+  promise: ({ client }) => client.get(`${HOMEPAGE_CATEGORIES}?newui=true`)
 });
 
 export const loadBanners = () => ({
@@ -84,9 +83,4 @@ export const loadFooter = () => ({
 export const loadRecentlyViewed = () => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
   promise: ({ client }) => client.get(`${RECENTLY_VEIWED}`)
-});
-
-export const loadInstafeeds = () => ({
-  types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-  promise: ({ client }) => client.get(HOMEPAGE_INSTAFEEDS)
 });

@@ -7,13 +7,13 @@ import { connect } from 'react-redux';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Body from 'hometown-components-dev/lib/BodyHtV1';
 import Container from 'hometown-components-dev/lib/ContainerHtV1';
-import Col from 'hometown-components-dev/lib/ColHtV1';
-import Heading from 'hometown-components-dev/lib/HeadingHtV1';
-import Row from 'hometown-components-dev/lib/RowHtV1';
-import Text from 'hometown-components-dev/lib/TextHtV1';
 import Section from 'hometown-components-dev/lib/SectionHtV1';
 import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 import SeoContent from 'hometown-components-dev/lib/SeoContent';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
 
 /* ====== Page Components ====== */
 import CommonLayout from 'components/Category/CommonLayout';
@@ -23,14 +23,18 @@ import Footer from 'components/Footer';
 import MainSlider from 'components/MainSlider';
 
 const getFaqs = faqs => {
-  const seoFaq = faqs.map(({ qus, ans }) => {
-    if (qus && ans) {
+  const seoFaq = JSON.parse(faqs).map(faq => {
+    // console.log(faq, 'QA check');
+    // console.log(Object.values(faq)[0]);
+    const ques = Object.values(faq)[0];
+    // console.log(faq.ans);
+    if (faq) {
       return {
         '@type': 'Question',
-        name: qus,
+        name: ques,
         acceptedAnswer: {
           '@type': 'Answer',
-          text: `<p>${ans}</p>`
+          text: faq.ans
         }
       };
     }
@@ -63,15 +67,31 @@ export default class Category extends Component {
           }
         }}
       >
-        <Text variant="textLight" color="white">
-          {item.offer || ''}
-        </Text>
-        <Heading variant="heading.medium" color="white" py={6}>
-          {item.title || ''}
-        </Heading>
-        <Heading fontSize={16} color="white">
-          {item.description || ''}
-        </Heading>
+        {item.link ? (
+          <a href={item.link}>
+            <Text variant="textLight" color="white">
+              {item.offer || ''}
+            </Text>
+            <Heading variant="heading.medium" color="white" py={6}>
+              {item.title || ''}
+            </Heading>
+            <Heading fontSize={16} color="white">
+              {item.description || ''}
+            </Heading>
+          </a>
+        ) : (
+          <div>
+            <Text variant="textLight" color="white">
+              {item.offer || ''}
+            </Text>
+            <Heading variant="heading.medium" color="white" py={6}>
+              {item.title || ''}
+            </Heading>
+            <Heading fontSize={16} color="white">
+              {item.description || ''}
+            </Heading>
+          </div>
+        )}
       </Col>
     ));
   render() {
@@ -83,21 +103,22 @@ export default class Category extends Component {
         params: { category: currentCategory }
       }
     } = this.props;
-    const { faq = [] } = category;
+    const { cms_json: cmsJson } = seoInfo;
 
+    // console.log(JSON.parse(cms_json), 'cat check');
     /* eslint-disable react/no-danger */
     return (
       <Wrapper>
         <Helmet title={`${(seoInfo && seoInfo.page_title) || (currentCategory && currentCategory.toUpperCase())}`}>
           <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
           <meta name="description" content={seoInfo && seoInfo.meta_description} />
-          {faq.length ? (
+          {cmsJson && cmsJson.length ? (
             <script type="application/ld+json">
               {`
               {
                 "@context" : "http://schema.org",
                 "@type" : "FAQPage",
-                "mainEntity": ${getFaqs(faq)}
+                "mainEntity": ${getFaqs(cmsJson)}
               }
             `}
             </script>
@@ -126,7 +147,9 @@ export default class Category extends Component {
             category.sections &&
             category.sections.map((cat, index) => (
               <Section key={String(index)}>
-                <Container>{CommonLayout(cat.component, cat.title, cat.data, cat.is_product)}</Container>
+                {cat.title !== '' && (
+                  <Container>{CommonLayout(cat.component, cat.title, cat.data, cat.is_product)}</Container>
+                )}
               </Section>
             ))}
           {category && (

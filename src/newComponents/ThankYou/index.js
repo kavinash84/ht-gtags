@@ -5,12 +5,16 @@ import PropTypes from 'prop-types';
  */
 import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+
+const ThankYouIcon = require('../../../static/thankyou.png');
 
 const ThankYou = ({ title, subTitle, orderNo }) => (
   <Box py={60}>
-    <Text color="primary" textAlign="center" width={1} fontSize={80}>
+    {/* <Text color="primary" textAlign="center" width={1} fontSize={80}>
       {title}
-    </Text>
+    </Text> */}
+    {title !== null && <Image src={ThankYouIcon} sx={{ display: 'flex' }} width="initial" m="auto" alt="Thank you!" />}
     {subTitle !== null && (
       <Text mt={20} color="textLight" textAlign="center" width={1} fontSize={20} fontWeight={500}>
         Your order {orderNo} has been placed successfully.

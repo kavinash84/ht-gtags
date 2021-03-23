@@ -3,7 +3,7 @@ export const BANNERS = 'tesla/banners/desktop';
 export const CATEGORY_MENU = 'tesla/categories';
 export const PINCODE = 'tesla/locations/pincode';
 export const HOMEPAGE_CATEGORIES = 'tesla/page-sections/home/categories';
-export const HOMEPAGE_INSTAFEEDS = 'tesla/page-sections/home/instafeeds';
+// export const HOMEPAGE_INSTAFEEDS = 'tesla/page-sections/home/instafeeds';
 export const HOMEPAGE_TOP_SELLING = 'tesla/page-sections/home/products';
 export const STORES = 'tesla/stores';
 export const HASHTAGS = 'tesla/hashtags';
@@ -39,6 +39,9 @@ export const CATEGORY_PAGE = 'tesla/categories';
 
 /* Wishlist */
 export const WISHLIST = 'tesla/wishlist';
+
+/* Listing */
+export const OFFER = 'tesla/categories/coupon';
 
 /* Cart */
 export const ADDTOCART = 'tesla/cart';

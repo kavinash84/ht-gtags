@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import cookie from 'js-cookie';
 import { getCities, getOfferStripData, getMiddleBannerData } from 'selectors/homepage';
 import Select from 'react-select';
+import { Link } from 'react-router-dom';
 
 /* ====== Components ====== */
 import Body from 'hometown-components-dev/lib/BodyHtV1';
@@ -32,9 +33,10 @@ import Title from 'components/Title';
 import Usp from 'components/Home/Usp';
 import UnbxdRecentlyViewed from 'components/UnbxdRecentlyViewed/UnbxdRecentlyViewed';
 
-const sliderImage = require('../../static/slider.png');
-const bannerImage = require('../../static/banner.png');
-const designBuildLogo = require('../../static/designBuildLogo.png');
+const sliderImage = require('../../../static/DnB.jpeg');
+const bannerImage = require('../../../static/modularKitchen.jpeg');
+// const designBuildLogo = require('../../static/designBuildLogo.png');
+const findAStoreImage = require('../../../static/findAStore.jpeg');
 
 // const OFFER_ID = 5;
 
@@ -149,7 +151,7 @@ export default class Home extends Component {
           />
           <meta name="keywords" content="furniture, home-decor" />
           <meta name="robots" content="index, follow" />
-          <script type="application/ld+json">
+          {/* <script type="application/ld+json">
             {`
               {
                 "@context": "http://schema.org",
@@ -162,6 +164,32 @@ export default class Home extends Component {
                 }
               }
             `}
+          </script> */}
+          <script type="application/ld+json">
+            {`
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "HomeTown",
+              "url": "https://stage.hometown.in/",
+              "logo": "https://stage.hometown.in/dist/2.0.1/bab5098b6c1ea32db0ed253a12fe29e3.png",
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "1800-210-0004",
+                "contactType": "customer service",
+                "contactOption": "TollFree",
+                "areaServed": "IN",
+                "availableLanguage": "Hindi"
+              },
+              "sameAs": [
+                "https://www.facebook.com/hometown.in/",
+                "https://twitter.com/HomeTown_In/",
+                "https://www.instagram.com/hometownindia/",
+                "https://www.youtube.com/channel/UCBZGArWnKT6MYYwOsPCNjiw",
+                "https://in.pinterest.com/hometownstore/"
+              ]
+            }  
+          `}
           </script>
         </Helmet>
         <Body>
@@ -185,19 +213,22 @@ export default class Home extends Component {
                 </Section>
               );
             }
-            return (
-              <Section variant="section.primary" key={String(index)}>
-                <Container>
-                  <LazyLoad height={200} offset={100}>
-                    <CategoryCarousel
-                      categoryName={category.title}
-                      subTitle={category.sub_title}
-                      data={category.values}
-                    />
-                  </LazyLoad>
-                </Container>
-              </Section>
-            );
+            if (category.id !== '5') {
+              return (
+                <Section variant="section.primary" key={String(index)}>
+                  <Container>
+                    <LazyLoad height={200} offset={100}>
+                      <CategoryCarousel
+                        categoryName={category.title}
+                        subTitle={category.sub_title}
+                        data={category.values}
+                      />
+                    </LazyLoad>
+                  </Container>
+                </Section>
+              );
+            }
+            return null;
           })}
 
           {/* Offer Banner */}
@@ -213,29 +244,32 @@ export default class Home extends Component {
               </Row>
               <Row>
                 <Col variant="colBasis" flexDirection="column">
-                  <a href="https://beta.hometown.in/design-build/" target="_blank0">
+                  <Link to="/design-build/" href="https://stage.hometown.in/design-build/" target="_blank0">
                     <Box mb={20} sx={{ position: 'relative' }}>
                       <Image src={sliderImage} />
-                      <Image src={designBuildLogo} variant="image.logoHomeTown" />
+                      {/* <Image
+                        src={designBuildLogo}
+                        variant="image.logoHomeTown"
+                      /> */}
                     </Box>
                     <Heading variant="heading.regular" textAlign="center">
                       Design and Build
                     </Heading>
-                  </a>
+                  </Link>
                 </Col>
                 <Col variant="colBasis" flexDirection="column">
-                  <a href="https://beta.hometown.in/modular-kitchens/" target="_blank1">
+                  <Link to="/modular-kitchens/" href="https://stage.hometown.in/modular-kitchens/" target="_blank1">
                     <Box mb={20} sx={{ position: 'relative' }}>
                       <Image src={bannerImage} />
-                      <Image
+                      {/* <Image
                         src="https://www.hometown.in/design-build/static/mkLogo.ae5caa06.png"
                         variant="image.logoHomeTown"
-                      />
+                      /> */}
                     </Box>
                     <Heading variant="heading.regular" textAlign="center">
                       Modular Kitchen
                     </Heading>
-                  </a>
+                  </Link>
                 </Col>
               </Row>
             </Container>
@@ -246,7 +280,7 @@ export default class Home extends Component {
             <Container>
               <Card
                 sx={{
-                  backgroundImage: 'url(https://static.hometown.in/media/cms/hometownnew/compressed/furniture.jpg)',
+                  backgroundImage: `url(${findAStoreImage})`,
                   backgroundSize: 'cover',
                   position: 'relative'
                 }}
