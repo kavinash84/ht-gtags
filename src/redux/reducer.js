@@ -43,6 +43,7 @@ import landing from './modules/landing';
 import selectForDemo from './modules/selectForDemo';
 import webtochat from './modules/webtochat';
 import offer from './modules/offer';
+import feedback from './modules/feedback';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -100,6 +101,7 @@ export default function createReducers(asyncReducers) {
     selectForDemo,
     webtochat,
     offer,
+    feedback,
     ...asyncReducers
   };
 }
