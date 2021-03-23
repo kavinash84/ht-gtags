@@ -204,7 +204,7 @@ class OrderBlock extends Component {
                   <Box mb={6}>
                     {item.paid_price && (
                       <Text as="span" fontSize={14} mr={10} color="heading">
-                        ₹ {item.paid_price}
+                        Paid Amount : ₹ {formatAmount(item.paid_price)}
                       </Text>
                     )}
                     {/* <Text as="span" fontSize={14} mr={10} sx={{ textDecoration: 'line-through' }}>
