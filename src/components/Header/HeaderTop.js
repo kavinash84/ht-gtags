@@ -438,6 +438,7 @@ export default class HeaderTop extends Component {
                           stock: `${item.product_info.stock}`,
                           deliveryTimeMessage: `${item.product_info.delivery_time_text}`
                         }}
+                        itemInfo={item}
                       />
                     ))}
                   </Box>

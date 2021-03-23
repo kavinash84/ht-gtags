@@ -87,7 +87,12 @@ const OrderSummary = ({
       }}
     >
       {results.map(item => (
-        <ProductSummaryList sku={item.configurable_sku} qty={item.qty} productItem={item.product_info || {}} />
+        <ProductSummaryList
+          sku={item.configurable_sku}
+          qty={item.qty}
+          productItem={item.product_info || {}}
+          itemInfo={item}
+        />
       ))}
     </Box>
     <Box variant="col-12" pb={20} px={[0, 0, 16]}>
