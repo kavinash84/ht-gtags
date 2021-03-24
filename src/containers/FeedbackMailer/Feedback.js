@@ -3,23 +3,23 @@ import { connect } from 'react-redux';
 // import { withRouter } from 'react-router';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
-import Img from 'hometown-components-dev/lib/Img';
-import Div from 'hometown-components-dev/lib/Div';
-import Row from 'hometown-components-dev/lib/Row';
-import Text from 'hometown-components-dev/lib/Text';
-import Container from 'hometown-components-dev/lib/Container';
-import Input from 'hometown-components-dev/lib/Input';
-import Button from 'hometown-components-dev/lib/Buttons';
+import Img from 'hometown-components-dev/lib/ImageHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
 
 import ReactStars from 'react-stars';
 import * as actionCreators from 'redux/modules/feedback';
 import { bindActionCreators } from 'redux';
 
-// const LogoIcon = require('../../../static/logo.png');
-// const fbIcon = require('../../../static/facebook.png');
-// const twIcon = require('../../../static/twitter.png');
-// const ytIcon = require('../../../static/youtube.png');
-// const instaIcon = require('../../../static/instagram.png');
+const LogoIcon = require('../../../static/logo.png');
+const fbIcon = require('../../../static/facebook.png');
+const twIcon = require('../../../static/twitter.png');
+const ytIcon = require('../../../static/youtube.png');
+const instaIcon = require('../../../static/instagram.png');
 
 const xBtn = {
   position: 'absolute',
@@ -144,14 +144,13 @@ class FeedbackMailer extends React.Component {
       const formdata = new FormData();
       Object.values(formData).forEach(data => {
         const rating = parseInt(data.rating, 10);
-        formdata.append(`productId[${data.id}]`, data.id);
         if (data.rating) formdata.append(`productRating[${data.id}]`, `${rating}`);
         if (data.review) {
           formdata.append(`productReview[${data.id}]`, data.review);
         } else {
           formdata.append(`productReview[${data.id}]`, '');
         }
-        if (data.image) formdata.append(`uploadImage[${data.id}]`, data.image);
+        if (data.image) formdata.append('uploadImage', data.image);
       });
       formdata.append('customerMobile', mobile);
       formdata.append('products', `${prodIds}`);
@@ -361,12 +360,14 @@ class FeedbackMailer extends React.Component {
     //   );
     // }
     const renderProds = products.map(prod => (
-      <Div style={{ background: '#f0f0f0' }} p="20px" mb="10px">
+      <Box style={{ background: '#f0f0f0' }} p="20px" mb="10px">
         <Row alignItems="center" mb="20px">
-          <Div col="3" pl="15px" pr="15px">
-            <Text>Product Purchased</Text>
-          </Div>
-          <Row col="8" ml="0" mr="0" alignItems="center">
+          <Box variant="col-3" pl="15px" pr="15px">
+            <Text fontSize="0.875rem" fontFamily="regular">
+              Product Purchased
+            </Text>
+          </Box>
+          <Row variant="col-8" ml="0" mr="0" alignItems="center">
             <Img src={prod.img} height="64px" mr="15px" />
             <Text fontFamily="medium" fontSize="16px">
               {prod.name}
@@ -374,13 +375,15 @@ class FeedbackMailer extends React.Component {
           </Row>
         </Row>
         <Row alignItems="center" mb="20px">
-          <Div col="3" pl="15px" pr="15px">
-            <Text>Date of Purchase</Text>
-          </Div>
-          <Div col="3" pl="0" pr="15px">
-            <Input type="date" value={orderDate} disabled />
-          </Div>
-          <Div col="3" pl="0" pr="15px">
+          <Box variant="col-3" pl="15px" pr="15px">
+            <Text fontSize="0.875rem" fontFamily="regular">
+              Date of Purchase
+            </Text>
+          </Box>
+          <Box variant="col-3" pl="0" pr="15px">
+            <FormInput bg="white" fontSize="0.875rem" fontFamily="regular" type="date" value={orderDate} disabled />
+          </Box>
+          <Box variant="col-3" pl="0" pr="15px">
             <ReactStars
               count={5}
               onChange={val => this.ratingChanged(val, prod.id, prod)}
@@ -394,7 +397,7 @@ class FeedbackMailer extends React.Component {
                 {formData[`${prod.id}`].ratingErrorMessage}
               </Text>
             ) : null}
-          </Div>
+          </Box>
           <span
             style={{
               display: 'inline-block',
@@ -431,10 +434,12 @@ class FeedbackMailer extends React.Component {
           </span>
         </Row>
         <Row alignItems="center">
-          <Div col="3" pl="15px" pr="15px">
-            <Text>Product Review</Text>
-          </Div>
-          <Div col="3" pl="0" pr="15px">
+          <Box variant="col-3" pl="15px" pr="15px">
+            <Text fontSize="0.875rem" fontFamily="regular">
+              Product Review
+            </Text>
+          </Box>
+          <Box variant="col-3" pl="0" pr="15px">
             <textarea
               style={{
                 padding: '4px',
@@ -450,13 +455,15 @@ class FeedbackMailer extends React.Component {
                 {formData[`${prod.id}`].reviewErrorMessage}
               </Text>
             ) : null}
-          </Div>
-          <Div col="6" pl="15px" pr="15px">
+          </Box>
+          <Box variant="col-6" pl="15px" pr="15px">
             <Row ml="0" mr="0" alignItems="center">
-              <Div col="7" pl="0" pr="0">
-                <Text pr="15px">We love to see our product in your home</Text>
-              </Div>
-              <Div col="5" pl="15px" pr="15px">
+              <Box variant="col-7" pl="0" pr="0">
+                <Text fontSize="0.875rem" fontFamily="regular">
+                  We love to see our product in your home
+                </Text>
+              </Box>
+              <Box variant="col-5" pl="15px" pr="15px">
                 <label htmlFor={`file-input${prod.id}`}>
                   <span
                     style={{
@@ -483,15 +490,15 @@ class FeedbackMailer extends React.Component {
                     {images[`${prod.id}-img`].imgSizeErrorMessage}
                   </Text>
                 ) : null}
-                <Text color="grey" fontSize="12px">
+                <Text color="grey" fontSize="12px" mt="15">
                   {/* {formData[`${prod.id}`].imageErrorMessage} */}
                   {'Image size sould be less than 5Mb'}
                 </Text>
-              </Div>
+              </Box>
             </Row>
-          </Div>
+          </Box>
         </Row>
-      </Div>
+      </Box>
     ));
     return renderProds;
   };
@@ -508,9 +515,9 @@ class FeedbackMailer extends React.Component {
     return (
       <Container mt="30px">
         <Helmet title="Feedback" />
-        <Div
+        <Box
           type="flex"
-          col="9"
+          variant="col-9"
           m="auto"
           style={{
             justifyContent: 'center',
@@ -519,22 +526,24 @@ class FeedbackMailer extends React.Component {
             float: 'none'
           }}
         >
-          {/* <Div ta="center">
+          <Box textAlign="center">
             <Img src={LogoIcon} alt="Hometown" height="60px" width="auto" m="auto" />
-          </Div> */}
+          </Box>
           {!formSubmited ? (
-            <Div>
-              <Div mt="20px" mb="20px" ta="center">
-                <Text ta="center">Dear {customer}</Text>
-                <Text ta="center">
+            <Box>
+              <Box mt="20px" mb="20px" textAlign="center">
+                <Text fontSize="0.875rem" fontFamily="regular" textAlign="center">
+                  Dear {customer}
+                </Text>
+                <Text fontSize="0.875rem" textAlign="center">
                   Thank you for making us a part of your home. We hope we have met your expectaions in every sence.
                   <br />
                   We would love to hear from you on your experience with us.
                 </Text>
-              </Div>
+              </Box>
               {this.renderProducts(prodArr)}
               {prodArr && prodArr.length > 2 ? (
-                <Div mt="20px" ta="center">
+                <Box mt="20px" textAlign="center">
                   <Button
                     type="button"
                     style={{ background: '#000', color: '#FFF' }}
@@ -544,10 +553,10 @@ class FeedbackMailer extends React.Component {
                   >
                     {!showMore ? 'Show More' : 'Show Less'}
                   </Button>
-                </Div>
+                </Box>
               ) : null}
-              <Div mt="20px">
-                <Div ta="center" mb="30px">
+              <Box mt="20px">
+                <Box textAlign="center" mb="30px">
                   {/* {console.log(
                     "!validFeedback && loading",
                     !validFeedback,
@@ -562,18 +571,18 @@ class FeedbackMailer extends React.Component {
                     {loading ? 'Please Wait ...' : 'SUBMIT'}
                   </Button>
 
-                  <Div mt="20px" ta="center">
+                  <Box mt="20px" textAlign="center">
                     {!validFeedback && (
-                      <Text ta="center" fontSize="14px" color="red">
+                      <Text textAlign="center" fontSize="14px" color="red">
                         Please fill one form to submit your feedback
                       </Text>
                     )}
-                  </Div>
-                </Div>
-              </Div>
-            </Div>
+                  </Box>
+                </Box>
+              </Box>
+            </Box>
           ) : (
-            <Div
+            <Box
               type="flex"
               style={{
                 height: 300,
@@ -582,13 +591,13 @@ class FeedbackMailer extends React.Component {
                 alignItems: 'center'
               }}
             >
-              <Text ta="center" fontFamily="medium">
+              <Text textAlign="center" fontFamily="medium">
                 Thank you for your feedback
               </Text>
-            </Div>
+            </Box>
           )}
 
-          {/* <Div mb="10px">
+          <Box mb="10px">
             <Row ml="0" mr="0" justifyContent="center">
               <a href="https://www.facebook.com/hometown.in/" target="_blank" rel="noreferrer">
                 <Img src={fbIcon} alt="" height="40px" ml="10px" mr="10px" />
@@ -603,15 +612,15 @@ class FeedbackMailer extends React.Component {
                 <Img src={ytIcon} alt="" height="40px" ml="10px" mr="10px" />
               </a>
             </Row>
-          </Div>
-          <Div mb="20px">
-            <Text ta="center" fontFamily="medium">
+          </Box>
+          <Box mb="20px">
+            <Text as="p" fontSize="0.875rem" lineHeight="1.6" textAlign="center" fontFamily="medium">
               If you have any questions or issues, Please contact
               <br />
               18002100004(10am - 8pm) | care@hometown.in | www.hometown.in
             </Text>
-          </Div> */}
-        </Div>
+          </Box>
+        </Box>
       </Container>
     );
   }
