@@ -96,7 +96,7 @@ class Wishlist extends React.Component {
                 setProductPosition={productPosition}
                 productURL={formatProductURL(item.product_info.data.name, item.product_info.data.sku)}
               />
-              <Box mt={10} width="65%">
+              <Box mt={14} width="65%" m="auto">
                 <AddToCart
                   simpleSku={Object.keys(item.product_info.data.simples)[0]}
                   sku={item.product_info.data.sku}
