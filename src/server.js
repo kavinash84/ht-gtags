@@ -75,9 +75,11 @@ app.get('/', (req, res, next) => {
 /* check letter case and redirect */
 app.get('*', (req, res, next) => {
   if (req.path && req.path.indexOf('/sku/') < 0) {
-    if (req.path !== req.path.toLowerCase()) {
-      const redirect = req.path.toLowerCase();
-      return res.redirect(301, redirect);
+    if (req.path.indexOf('/feedback-mailer/') < 0) {
+      if (req.path !== req.path.toLowerCase()) {
+        const redirect = req.path.toLowerCase();
+        return res.redirect(301, redirect);
+      }
     }
   }
   return next();

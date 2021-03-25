@@ -396,7 +396,7 @@ class StoreLocator extends React.Component {
             />
             <Box
               pt={30}
-              width={450}
+              width={550}
               sx={{
                 position: 'absolute',
                 left: 30,
