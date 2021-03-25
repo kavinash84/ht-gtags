@@ -31,8 +31,11 @@ const checkSKUItemsInCart = (list, sku, quantity) => {
 };
 const LoaderIcon = require('../../../static/refresh.svg');
 // const CheckedIcon = require('../../../static/added-to-cart-icon.png');
+let selectedSku = '';
 
 const onClick = (key, skuId, simpleSku, session, pincode, configId, quantity) => dispatcher => e => {
+  selectedSku = skuId;
+  console.log(key, skuId, simpleSku, session, pincode, configId, quantity, 'bug fix');
   e.preventDefault();
   dispatcher(key, skuId, simpleSku, session, pincode, configId, quantity);
 };
@@ -87,10 +90,11 @@ const AddToCart = ({
         <Fragment>
           {!checkStatus || !checkSKUItem ? (
             <Button
-              variant={`outline.primary.${size}`}
+              // variant={`outline.primary.${size}`}
+              variant="outline.primary.large"
               width={1}
               height={height}
-              disabled={addLoading}
+              disabled={addLoading && selectedSku === sku}
               onClick={e => {
                 if (quantityChange && updateQty !== 0 && checkStatus) {
                   const handler = onClick(cartId, sku, simpleSku, session, pincode, configId, updateQty)(updateCart);
@@ -106,13 +110,14 @@ const AddToCart = ({
                 justifyContent: 'center'
               }}
             >
-              {addLoading && <Image className="spin" src={LoaderIcon} width="18px" mr={10} />}
-              {addLoading ? 'Adding...' : 'Add to Cart'}
+              {addLoading && selectedSku === sku && <Image className="spin" src={LoaderIcon} width="18px" mr={10} />}
+              {/* {console.log(shouldLoad, 'asdasdasdasd')} */}
+              {addLoading && selectedSku === sku ? 'Adding...' : 'Add to Cart'}
             </Button>
           ) : (
             <Row mx={0} alignItems="center">
               <Box as={Link} to={CART_URL} width={1}>
-                <Button variant="outline.primary.large" width={1}>
+                <Button variant="outline.primary.large" width={1} height={height}>
                   GO TO CART
                 </Button>
               </Box>
