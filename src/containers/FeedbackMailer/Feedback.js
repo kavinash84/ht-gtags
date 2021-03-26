@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 // import { withRouter } from 'react-router';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
+import { NotFound } from 'containers';
 import Img from 'hometown-components-dev/lib/ImageHtV1';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Row from 'hometown-components-dev/lib/RowHtV1';
@@ -63,7 +64,6 @@ class FeedbackMailer extends React.Component {
   }
 
   setValidErrorObject = val => {
-    // console.log(val, val.rating, "val check");
     if (!val.rating) {
       val = {
         ...val,
@@ -86,15 +86,6 @@ class FeedbackMailer extends React.Component {
     } else {
       val = { ...val, reviewError: false, reviewErrorMessage: '' };
     }
-    // if (!val.image) {
-    //   val = {
-    //     ...val,
-    //     imageError: true,
-    //     imageErrorMessage: "Image is required"
-    //   };
-    // } else {
-    //   val = { ...val, imageError: false, imageErrorMessage: "" };
-    // }
     return val;
   };
 
@@ -105,7 +96,6 @@ class FeedbackMailer extends React.Component {
   };
 
   validateForm = form => {
-    // console.log(Object.keys(form), form, " valid check");
     if (!Object.keys(form).length) return true;
 
     // add validation Error and Error message object
@@ -121,10 +111,8 @@ class FeedbackMailer extends React.Component {
 
     // Validate if there is any error
     return Object.keys(form).some(key => {
-      // console.log(form, form[key], "key");
       if (form[key].ratingError) return true;
       if (form[key].reviewError) return true;
-      // if (form[key].imageError) return true;
       return false;
     });
   };
@@ -134,7 +122,6 @@ class FeedbackMailer extends React.Component {
     const { formData } = this.state;
     const { customer, setFeedbackForm, mobile } = this.props;
     const valid = !this.validateForm(formData);
-    // console.log("Submit function valid", valid);
     this.setState({
       submitClicked: true,
       validFeedback: valid
@@ -228,9 +215,7 @@ class FeedbackMailer extends React.Component {
       }
     }
     const size = file.size / 1024 / 1024;
-    console.log(size, file.size, 'file size check');
     if (file && size <= 5 && !typeError) {
-      // console.log("state var for images");
       reader.onloadend = () => {
         this.setState(
           {
@@ -246,7 +231,6 @@ class FeedbackMailer extends React.Component {
             }
           },
           () => {
-            console.log(this.state.images, 'image size check');
             const { formData } = this.state;
             this.setState(
               {
@@ -265,8 +249,7 @@ class FeedbackMailer extends React.Component {
                     validFeedback: !this.validateForm(this.state.formData)
                   });
                 }
-              },
-              () => console.log(this.state, ' state check')
+              }
             );
           }
         );
@@ -286,8 +269,7 @@ class FeedbackMailer extends React.Component {
         }
       });
     } else {
-      this.setState(
-        {
+      this.setState({
           images: {
             ...this.state.images,
             [`${id}-img`]: {
@@ -298,67 +280,26 @@ class FeedbackMailer extends React.Component {
               imgSizeErrorMessage: 'Image size not within limits'
             }
           }
-        },
-        () => console.log(this.state.images, 'image size check')
-      );
+        });
     }
-
-    // const { formData } = this.state;
-    // this.setState(
-    //   {
-    //     formData: {
-    //       ...formData,
-    //       [`${id}`]: {
-    //         ...formData[`${id}`],
-    //         id: name.id,
-    //         image: e.target.files[0]
-    //       }
-    //     }
-    //   },
-    //   () => {
-    //     if (this.state.submitClicked) {
-    //       this.setState({
-    //         validFeedback: !this.validateForm(this.state.formData)
-    //       });
-    //     }
-    //   },
-    //   () => console.log(this.state, " state check")
-    // );
   };
 
   removeImage = id => {
     const { images, formData } = this.state;
-    // console.log(images, id);
     delete images[`${id}-img`];
     delete formData[`${id}`].image;
     this.setState({ ...this.state });
-    // this.setState(
-    //   {
-    //     images: {
-    //       [`${id}-img`]: {}
-    //     }
-    //   },
-    //   () => console.log(this.state)
-    // );
   };
 
   renderProducts = prodArr => {
     const { orderDate } = this.props;
     const { formData, images } = this.state;
-    // console.log("render");
     let products = [];
     if (!this.state.showMore) {
       products = prodArr.slice(0, 2);
     } else {
       products = prodArr;
     }
-    // if (Object.values(this.state.images).length) {
-    //   console.log(
-    //     products,
-    //     this.state.images["-img"].imagePreviewUrl,
-    //     "products"
-    //   );
-    // }
     const renderProds = products.map(prod => (
       <Box style={{ background: '#f0f0f0' }} p="20px" mb="10px">
         <Row alignItems="center" mb="20px">
@@ -422,15 +363,6 @@ class FeedbackMailer extends React.Component {
                 />
               </div>
             ) : null}
-            {/* {formData[`${prod.id}`] && formData[`${prod.id}`].image ? (
-              <img
-                src={
-                  this.state.images && this.state.images[`${prod.id}-img`]
-                    ? this.state.images[`${prod.id}-img`].imagePreviewUrl
-                    : null
-                }
-              />
-            ) : null} */}
           </span>
         </Row>
         <Row alignItems="center">
@@ -463,7 +395,7 @@ class FeedbackMailer extends React.Component {
                   We love to see our product in your home
                 </Text>
               </Box>
-              <Box variant="col-5" pl="15px" pr="15px">
+              <Box variant="col-5" px="15px" py="15px">
                 <label htmlFor={`file-input${prod.id}`}>
                   <span
                     style={{
@@ -481,19 +413,18 @@ class FeedbackMailer extends React.Component {
                   id={`file-input${prod.id}`}
                   style={{ display: 'none' }}
                   onChange={e => {
-                    // console.log(e, "upload image clicked");
                     this.uploadImageHandler(e, prod.id, prod);
                   }}
                 />
                 {images[`${prod.id}-img`] && images[`${prod.id}-img`].imgSizeError ? (
-                  <Text color="red" fontSize="12px">
+                  <Text color="red" fontSize="12px" mt="15">
                     {images[`${prod.id}-img`].imgSizeErrorMessage}
                   </Text>
-                ) : null}
-                <Text color="grey" fontSize="12px" mt="15">
-                  {/* {formData[`${prod.id}`].imageErrorMessage} */}
-                  {'Image size sould be less than 5Mb'}
-                </Text>
+                ) : (
+                  <Text color="grey" fontSize="12px" mt="15">
+                    {'Image size sould be less than 5Mb'}
+                  </Text>
+                )}
               </Box>
             </Row>
           </Box>
@@ -507,122 +438,121 @@ class FeedbackMailer extends React.Component {
     const {
       customer,
       prodArr,
-      feedback: { loading, formSubmit: formSubmited }
+      feedback: {
+ loading, formSubmit: formSubmited, error: pageLoadError, data
+}
     } = this.props;
 
     const { showMore, validFeedback } = this.state;
 
-    return (
-      <Container mt="30px">
-        <Helmet title="Feedback" />
-        <Box
-          type="flex"
-          variant="col-9"
-          m="auto"
-          style={{
-            justifyContent: 'center',
-            display: 'flex',
-            flexDirection: 'column',
-            float: 'none'
-          }}
-        >
-          <Box textAlign="center">
-            <Img src={LogoIcon} alt="Hometown" height="60px" width="auto" m="auto" />
-          </Box>
-          {!formSubmited ? (
-            <Box>
-              <Box mt="20px" mb="20px" textAlign="center">
-                <Text fontSize="0.875rem" fontFamily="regular" textAlign="center">
-                  Dear {customer}
-                </Text>
-                <Text fontSize="0.875rem" textAlign="center">
-                  Thank you for making us a part of your home. We hope we have met your expectaions in every sence.
-                  <br />
-                  We would love to hear from you on your experience with us.
-                </Text>
-              </Box>
-              {this.renderProducts(prodArr)}
-              {prodArr && prodArr.length > 2 ? (
-                <Box mt="20px" textAlign="center">
-                  <Button
-                    type="button"
-                    style={{ background: '#000', color: '#FFF' }}
-                    onClick={() => {
-                      this.showMoreHandler();
-                    }}
-                  >
-                    {!showMore ? 'Show More' : 'Show Less'}
-                  </Button>
+    if (!pageLoadError && Object.keys(data).length) {
+      return (
+        <Container mt="30px">
+          <Helmet title="Feedback" />
+          <Box
+            type="flex"
+            variant="col-9"
+            m="auto"
+            style={{
+              justifyContent: 'center',
+              display: 'flex',
+              flexDirection: 'column',
+              float: 'none'
+            }}
+          >
+            <Box textAlign="center">
+              <Img src={LogoIcon} alt="Hometown" height="60px" width="auto" m="auto" />
+            </Box>
+            {!formSubmited ? (
+              <Box>
+                <Box mt="20px" mb="20px" textAlign="center">
+                  <Text fontSize="0.875rem" fontFamily="regular" textAlign="center">
+                    Dear {customer}
+                  </Text>
+                  <Text fontSize="0.875rem" textAlign="center">
+                    Thank you for making us a part of your home. We hope we have met your expectaions in every sence.
+                    <br />
+                    We would love to hear from you on your experience with us.
+                  </Text>
                 </Box>
-              ) : null}
-              <Box mt="20px">
-                <Box textAlign="center" mb="30px">
-                  {/* {console.log(
-                    "!validFeedback && loading",
-                    !validFeedback,
-                    loading
-                  )} */}
-                  <Button
-                    disabled={loading || !validFeedback}
-                    type="submit"
-                    style={{ background: '#000', color: '#FFF' }}
-                    onClick={e => this.handleSubmit(e)}
-                  >
-                    {loading ? 'Please Wait ...' : 'SUBMIT'}
-                  </Button>
-
+                {this.renderProducts(prodArr)}
+                {prodArr && prodArr.length > 2 ? (
                   <Box mt="20px" textAlign="center">
-                    {!validFeedback && (
-                      <Text textAlign="center" fontSize="14px" color="red">
-                        Please fill one form to submit your feedback
-                      </Text>
-                    )}
+                    <Button
+                      type="button"
+                      style={{ background: '#000', color: '#FFF' }}
+                      onClick={() => {
+                        this.showMoreHandler();
+                      }}
+                    >
+                      {!showMore ? 'Show More' : 'Show Less'}
+                    </Button>
+                  </Box>
+                ) : null}
+                <Box mt="20px">
+                  <Box textAlign="center" mb="30px">
+                    <Button
+                      disabled={loading || !validFeedback}
+                      type="submit"
+                      style={{ background: '#000', color: '#FFF' }}
+                      onClick={e => this.handleSubmit(e)}
+                    >
+                      {loading ? 'Please Wait ...' : 'SUBMIT'}
+                    </Button>
+
+                    <Box mt="20px" textAlign="center">
+                      {!validFeedback && (
+                        <Text textAlign="center" fontSize="14px" color="red">
+                          Please fill one form to submit your feedback
+                        </Text>
+                      )}
+                    </Box>
                   </Box>
                 </Box>
               </Box>
+            ) : (
+              <Box
+                type="flex"
+                style={{
+                  height: 300,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}
+              >
+                <Text textAlign="center" fontFamily="medium">
+                  Thank you for your feedback
+                </Text>
+              </Box>
+            )}
+
+            <Box mb="10px">
+              <Row ml="0" mr="0" justifyContent="center">
+                <a href="https://www.facebook.com/hometown.in/" target="_blank" rel="noreferrer">
+                  <Img src={fbIcon} alt="" height="40px" ml="10px" mr="10px" />
+                </a>
+                <a href="https://twitter.com/HomeTown_In/" target="_blank" rel="noreferrer">
+                  <Img src={twIcon} alt="" height="40px" ml="10px" mr="10px" />
+                </a>
+                <a href="https://www.instagram.com/hometownindia/" target="_blank" rel="noreferrer">
+                  <Img src={instaIcon} alt="" height="40px" ml="10px" mr="10px" />
+                </a>
+                <a href="https://www.youtube.com/channel/UCBZGArWnKT6MYYwOsPCNjiw" target="_blank" rel="noreferrer">
+                  <Img src={ytIcon} alt="" height="40px" ml="10px" mr="10px" />
+                </a>
+              </Row>
             </Box>
-          ) : (
-            <Box
-              type="flex"
-              style={{
-                height: 300,
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}
-            >
-              <Text textAlign="center" fontFamily="medium">
-                Thank you for your feedback
+            <Box mb="20px">
+              <Text as="p" fontSize="0.875rem" lineHeight="1.6" textAlign="center" fontFamily="medium">
+                If you have any questions or issues, Please contact
+                <br />
+                18002100004(10am - 8pm) | care@hometown.in | www.hometown.in
               </Text>
             </Box>
-          )}
-
-          <Box mb="10px">
-            <Row ml="0" mr="0" justifyContent="center">
-              <a href="https://www.facebook.com/hometown.in/" target="_blank" rel="noreferrer">
-                <Img src={fbIcon} alt="" height="40px" ml="10px" mr="10px" />
-              </a>
-              <a href="https://twitter.com/HomeTown_In/" target="_blank" rel="noreferrer">
-                <Img src={twIcon} alt="" height="40px" ml="10px" mr="10px" />
-              </a>
-              <a href="https://www.instagram.com/hometownindia/" target="_blank" rel="noreferrer">
-                <Img src={instaIcon} alt="" height="40px" ml="10px" mr="10px" />
-              </a>
-              <a href="https://www.youtube.com/channel/UCBZGArWnKT6MYYwOsPCNjiw" target="_blank" rel="noreferrer">
-                <Img src={ytIcon} alt="" height="40px" ml="10px" mr="10px" />
-              </a>
-            </Row>
           </Box>
-          <Box mb="20px">
-            <Text as="p" fontSize="0.875rem" lineHeight="1.6" textAlign="center" fontFamily="medium">
-              If you have any questions or issues, Please contact
-              <br />
-              18002100004(10am - 8pm) | care@hometown.in | www.hometown.in
-            </Text>
-          </Box>
-        </Box>
-      </Container>
-    );
+        </Container>
+      );
+    } return <NotFound />;
   }
 }
 

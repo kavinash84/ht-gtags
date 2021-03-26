@@ -103,6 +103,7 @@ class Listing extends React.Component {
       window.unbxd_category = url || 'None';
       // console.log(`unbxd_category - did mount- url- ${url}`);
     } else {
+      // eslint-disable-next-line react/no-did-mount-set-state
       this.setState({
         display: 'none'
       });
@@ -154,6 +155,7 @@ class Listing extends React.Component {
         });
         window.unbxd_category = url || 'None';
       } else if (prevState.display !== this.state.display) {
+        // eslint-disable-next-line react/no-did-update-set-state
         this.setState({
           display: 'none'
         });
