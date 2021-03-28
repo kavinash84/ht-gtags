@@ -4,6 +4,7 @@ import { createPersistoid, persistCombineReducers, REGISTER } from 'redux-persis
 import thunkMiddleware from './middleware/thunkMiddleware';
 import clientMiddleware from './middleware/clientMiddleware';
 import gaMiddleware from './middleware/gaMiddleware';
+import admitadMiddleware from './middleware/admitadMiddleware';
 import userMiddleware from './middleware/userMiddleware';
 import paymentsMiddleware from './middleware/paymentsMiddleware';
 import notifyMiddleware from './middleware/notifyMiddleware';
@@ -65,7 +66,8 @@ export default function createStore({
     gaMiddleware(),
     userMiddleware(),
     paymentsMiddleware(),
-    notifyMiddleware()
+    notifyMiddleware(),
+    admitadMiddleware()
   ];
 
   if (__CLIENT__ && __DEVELOPMENT__) {
