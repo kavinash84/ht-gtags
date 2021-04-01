@@ -564,7 +564,8 @@ export default function gaMiddleware() {
                       coupon: coupon_code || ''
                     },
                     products: [...cartList]
-                  }
+                  },
+                  currencyCode: 'INR'
                 }
               };
             }
