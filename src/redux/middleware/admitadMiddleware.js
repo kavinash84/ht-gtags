@@ -1,9 +1,16 @@
-const getChannelForAdmitAd = name => {
-  const re = new RegExp(`${name}=([^;]+)`);
-  let value = re.exec(document.cookie);
-  value = value !== null ? unescape(value[1]) : null;
+import cookie from 'js-cookie';
 
-  const source = value;
+const getChannelForAdmitAd = name => {
+  // const re = new RegExp(`${name}=([^;]+)`);
+  // const value = re.exec(document.cookie);
+
+  // console.log('getChannelForAdmitAd function - value', value);
+
+  // const source = value !== null ? unescape(value[1]) : null;
+
+  // console.log('getChannelForAdmitAd function - source', source);
+  const source = cookie.get(name);
+  console.log('cookie source here', source);
   let channel = 'other';
   if (source === 'affiliate_admitad') {
     channel = 'adm';
@@ -61,7 +68,7 @@ export default function admitadMiddleware() {
             });
 
             const channel = getChannelForAdmitAd('source');
-
+            console.log('value of getChannelForAdmitAd', channel);
             if (window.ADMITAD.Invoice && window.ADMITAD.Invoice.referencesOrder) {
               window.ADMITAD.Invoice.referencesOrder = window.ADMITAD.Invoice.referencesOrder || [];
               window.ADMITAD.Invoice.referencesOrder.push({
@@ -69,6 +76,7 @@ export default function admitadMiddleware() {
                 orderedItem
               });
               window.ADMITAD.Invoice.broker = channel;
+              console.log('window.ADMITAD.Invoice.broker = channel - ', (window.ADMITAD.Invoice.broker = channel));
             }
           }
         }
