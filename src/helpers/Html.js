@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import serialize from 'serialize-javascript';
 import Helmet from 'react-helmet';
 import config from 'config';
-import { newRelic, admitad } from 'utils/tracking';
+import { newRelic, admitad, admitadSetCookie } from 'utils/tracking';
 
 const ONESIGNALID = 'b2f22db2-b562-4530-8888-516550bfbe6d';
 // const { version } = require('../../package.json');
@@ -517,6 +517,7 @@ export default class Html extends Component {
             charSet="UTF-8"
           />
           <script src={admitad.src} async onError={admitad.onerror}></script>
+          <script dangerouslySetInnerHTML={{ __html: admitadSetCookie }} />
         </body>
       </html>
     );
