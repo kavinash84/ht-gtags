@@ -12,8 +12,6 @@ const getChannelForAdmitAd = name => {
 };
 
 const groupSimilarProducts = products => {
-  console.log('groupSimilarProducts');
-  console.log(JSON.stringify(products));
   let groupedProducts = [];
 
   products.forEach(arr => {
@@ -32,7 +30,6 @@ export default function admitadMiddleware() {
     if (__CLIENT__) {
       const { type } = action;
       if (window && window.ADMITAD) {
-        console.log('Inside admitad window vairable');
         const {
           location: { pathname }
         } = getState().router;
@@ -40,7 +37,6 @@ export default function admitadMiddleware() {
           const {
             paymentstatus: { data }
           } = getState();
-          console.log('Hello World for admidAd', data);
 
           if (data) {
             const { cart_products: cartProducts = [], order_no: orderNo } = data;
@@ -64,14 +60,9 @@ export default function admitadMiddleware() {
               });
             });
 
-            console.log('Before push to dataLayar', orderedItem);
-
-            const channel = getChannelForAdmitAd();
-
-            console.log('Channel for admitad', channel);
+            const channel = getChannelForAdmitAd('source');
 
             if (window.ADMITAD.Invoice && window.ADMITAD.Invoice.referencesOrder) {
-              console.log('Log to check - Inside if condition of window.ADMITAD.Invoice', window.ADMITAD.Invoice);
               window.ADMITAD.Invoice.referencesOrder = window.ADMITAD.Invoice.referencesOrder || [];
               window.ADMITAD.Invoice.referencesOrder.push({
                 orderNumber: orderNo,
