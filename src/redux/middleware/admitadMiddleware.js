@@ -52,8 +52,8 @@ export default function admitadMiddleware() {
 
             const products = groupSimilarProducts(cartProducts);
 
-            products.forEach(x => {
-              const { sku, qty, price } = x;
+            // products.forEach(x => {
+            //   const { sku, qty, price } = x;
 
             //   orderedItem.push({
             //     Product: {
@@ -69,12 +69,12 @@ export default function admitadMiddleware() {
 
             orderedItem.push({
               Product: {
+                // eslint-disable-next-line max-len
                 productID: '', // internal product ID (not more than 100 characters). Not used for "Insurance and finance" program category- leave this string as blank like this
                 category: '1', // tariff code (see list below)
                 price: 'price', // Pass the total amount paid by user here.
                 priceCurrency: 'INR' // currency code in the ISO-4217 alfa-3 format
               },
-
               orderQuantity: '1', // product quantity. keep this as constant
               additionalType: 'sale' // always sale
             });
