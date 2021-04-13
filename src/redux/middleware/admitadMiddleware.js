@@ -55,16 +55,28 @@ export default function admitadMiddleware() {
             products.forEach(x => {
               const { sku, qty, price } = x;
 
-              orderedItem.push({
-                Product: {
-                  productID: sku,
-                  category: '1',
-                  price,
-                  priceCurrency: 'INR'
-                },
-                orderQuantity: qty,
-                additionalType: 'sale'
-              });
+            //   orderedItem.push({
+            //     Product: {
+            //       productID: sku,
+            //       category: '1',
+            //       price,
+            //       priceCurrency: 'INR'
+            //     },
+            //     orderQuantity: qty,
+            //     additionalType: 'sale'
+            //   });
+            // });
+
+            orderedItem.push({
+              Product: {
+                productID: '', // internal product ID (not more than 100 characters). Not used for "Insurance and finance" program category- leave this string as blank like this
+                category: '1', // tariff code (see list below)
+                price: 'price', // Pass the total amount paid by user here.
+                priceCurrency: 'INR' // currency code in the ISO-4217 alfa-3 format
+              },
+
+              orderQuantity: '1', // product quantity. keep this as constant
+              additionalType: 'sale' // always sale
             });
 
             const channel = getChannelForAdmitAd('source');
