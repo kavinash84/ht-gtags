@@ -343,7 +343,7 @@ export default class Html extends Component {
           />
         </head>
         <body>
-          {process.env.NODE_ENV !== 'development' && (
+          {/* {process.env.NODE_ENV !== 'development' && (
             <noscript>
               <iframe
                 src="https://www.googletagmanager.com/ns.html?id=GTM-T5VV7MZ"
@@ -353,7 +353,7 @@ export default class Html extends Component {
                 title="gaTag"
               />
             </noscript>
-          )}
+          )} */}
           <div id="content" dangerouslySetInnerHTML={{ __html: content }} />
           <script src={unbxdScripts.autosuggestJs} async="" />
           <link rel="stylesheet" type="text/css" href={unbxdScripts.autosuggestCss} />
