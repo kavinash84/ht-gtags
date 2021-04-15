@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { NotFound } from 'containers';
 import Img from 'hometown-components-dev/lib/ImageHtV1';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Flex from 'hometown-components-dev/lib/FlexHtV1';
 import Row from 'hometown-components-dev/lib/RowHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Container from 'hometown-components-dev/lib/ContainerHtV1';
@@ -270,17 +271,17 @@ class FeedbackMailer extends React.Component {
       });
     } else {
       this.setState({
-          images: {
-            ...this.state.images,
-            [`${id}-img`]: {
-              imageFile: file,
-              imagePreviewUrl: reader.result,
-              imgSizeError: true,
-              imgTypeError: false,
-              imgSizeErrorMessage: 'Image size not within limits'
-            }
+        images: {
+          ...this.state.images,
+          [`${id}-img`]: {
+            imageFile: file,
+            imagePreviewUrl: reader.result,
+            imgSizeError: true,
+            imgTypeError: false,
+            imgSizeErrorMessage: 'Image size not within limits'
           }
-        });
+        }
+      });
     }
   };
 
@@ -324,7 +325,10 @@ class FeedbackMailer extends React.Component {
           <Box variant="col-3" pl="0" pr="15px">
             <FormInput bg="white" fontSize="0.875rem" fontFamily="regular" type="date" value={orderDate} disabled />
           </Box>
-          <Box variant="col-3" pl="0" pr="15px">
+          <Flex variant="col-4" pl="15px" pr="15px" justifyContent="space-between">
+            <Text fontSize="0.875rem" fontFamily="regular">
+              Product Rating*
+            </Text>
             <ReactStars
               count={5}
               onChange={val => this.ratingChanged(val, prod.id, prod)}
@@ -338,33 +342,37 @@ class FeedbackMailer extends React.Component {
                 {formData[`${prod.id}`].ratingErrorMessage}
               </Text>
             ) : null}
+          </Flex>
+
+          <Box variant="col-2" pl="0" pr="15px" justifyContent="flex-start">
+            <span
+              style={{
+                display: 'inline-block',
+                // width: '60px',
+                marginLeft: '10px',
+                position: 'relative'
+              }}
+            >
+              {formData[`${prod.id}`] && formData[`${prod.id}`].image ? (
+                <div>
+                  <button style={xBtn} onClick={() => this.removeImage(prod.id, prod)}>
+                    X
+                  </button>
+                  <img
+                    src={
+                      this.state.images && this.state.images[`${prod.id}-img`]
+                        ? this.state.images[`${prod.id}-img`].imagePreviewUrl
+                        : null
+                    }
+                    alt=""
+                    style={{ height: '60px', width: '60px' }}
+                  />
+                </div>
+              ) : null}
+            </span>
           </Box>
-          <span
-            style={{
-              display: 'inline-block',
-              width: '60px',
-              marginLeft: '75px',
-              position: 'relative'
-            }}
-          >
-            {formData[`${prod.id}`] && formData[`${prod.id}`].image ? (
-              <div>
-                <button style={xBtn} onClick={() => this.removeImage(prod.id, prod)}>
-                  X
-                </button>
-                <img
-                  src={
-                    this.state.images && this.state.images[`${prod.id}-img`]
-                      ? this.state.images[`${prod.id}-img`].imagePreviewUrl
-                      : null
-                  }
-                  alt=""
-                  style={{ height: '60px', width: '60px' }}
-                />
-              </div>
-            ) : null}
-          </span>
         </Row>
+
         <Row alignItems="center">
           <Box variant="col-3" pl="15px" pr="15px">
             <Text fontSize="0.875rem" fontFamily="regular">
@@ -376,7 +384,6 @@ class FeedbackMailer extends React.Component {
               style={{
                 padding: '4px',
                 width: '195px',
-                height: '100px',
                 outline: 'none'
               }}
               type="text"
@@ -395,14 +402,17 @@ class FeedbackMailer extends React.Component {
                   We love to see our product in your home
                 </Text>
               </Box>
-              <Box variant="col-5" px="15px" py="15px">
+              <Box variant="col-5" px="15px" sx={{ top: '15px' }}>
                 <label htmlFor={`file-input${prod.id}`}>
                   <span
                     style={{
-                      padding: '7px 10px',
-                      border: '1px solid grey',
+                      padding: '7px',
+                      fontFamily: 'regular',
+                      fontSize: '0.875rem',
                       borderRadius: '5px',
-                      cursor: 'pointer'
+                      cursor: 'pointer',
+                      backgroundColor: '#D4D4D4',
+                      border: '1px solid grey'
                     }}
                   >
                     Upload image
@@ -466,11 +476,11 @@ class FeedbackMailer extends React.Component {
             {!formSubmited ? (
               <Box>
                 <Box mt="20px" mb="20px" textAlign="center">
-                  <Text fontSize="0.875rem" fontFamily="regular" textAlign="center">
+                  <Text fontSize="0.975rem" fontFamily="medium" textAlign="center" pb="10px">
                     Dear {customer}
                   </Text>
-                  <Text fontSize="0.875rem" textAlign="center">
-                    Thank you for making us a part of your home. We hope we have met your expectaions in every sence.
+                  <Text fontSize="0.975rem" fontFamily="medium" textAlign="center" lineHeight="1.2">
+                    Thank you for making us a part of your home. We hope we have met your expectaions in every sense.
                     <br />
                     We would love to hear from you on your experience with us.
                   </Text>
@@ -552,7 +562,8 @@ class FeedbackMailer extends React.Component {
           </Box>
         </Container>
       );
-    } return <NotFound />;
+    }
+    return <NotFound />;
   }
 }
 
