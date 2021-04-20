@@ -18,19 +18,19 @@ const getChannelForAdmitAd = name => {
   return channel;
 };
 
-const groupSimilarProducts = products => {
-  let groupedProducts = [];
+// const groupSimilarProducts = products => {
+//   let groupedProducts = [];
 
-  products.forEach(arr => {
-    if (groupedProducts[arr.sku] && groupedProducts[arr.sku].sku === arr.sku) {
-      groupedProducts[arr.sku].qty += 1;
-    } else {
-      groupedProducts[arr.sku] = arr;
-    }
-  });
-  groupedProducts = Object.values(groupedProducts);
-  return groupedProducts;
-};
+//   products.forEach(arr => {
+//     if (groupedProducts[arr.sku] && groupedProducts[arr.sku].sku === arr.sku) {
+//       groupedProducts[arr.sku].qty += 1;
+//     } else {
+//       groupedProducts[arr.sku] = arr;
+//     }
+//   });
+//   groupedProducts = Object.values(groupedProducts);
+//   return groupedProducts;
+// };
 
 export default function admitadMiddleware() {
   return ({ getState }) => next => action => {
@@ -46,25 +46,36 @@ export default function admitadMiddleware() {
           } = getState();
 
           if (data) {
-            const { cart_products: cartProducts = [], order_no: orderNo } = data;
+            const { order_no: orderNo, net_order_amount: newOrderAmount } = data;
 
             const orderedItem = [];
 
-            const products = groupSimilarProducts(cartProducts);
+            // const products = groupSimilarProducts(cartProducts);
 
-            products.forEach(x => {
-              const { sku, qty, price } = x;
+            // products.forEach(x => {
+            //   const { sku, qty, price } = x;
 
-              orderedItem.push({
-                Product: {
-                  productID: sku,
-                  category: '1',
-                  price,
-                  priceCurrency: 'INR'
-                },
-                orderQuantity: qty,
-                additionalType: 'sale'
-              });
+            //   orderedItem.push({
+            //     Product: {
+            //       productID: sku,
+            //       category: '1',
+            //       price,
+            //       priceCurrency: 'INR'
+            //     },
+            //     orderQuantity: qty,
+            //     additionalType: 'sale'
+            //   });
+            // });
+            orderedItem.push({
+              Product: {
+                productID: '', // internal product ID (not more than 100 characters).
+                // Not used for "Insurance and finance" program category- leave this string as blank like this
+                category: '1', // tariff code (see list below)
+                price: newOrderAmount, // Pass the total amount paid by user here.
+                priceCurrency: 'INR' // currency code in the ISO-4217 alfa-3 format
+              },
+              orderQuantity: '1', // product quantity. keep this as constant
+              additionalType: 'sale' // always sale
             });
 
             const channel = getChannelForAdmitAd('source');
