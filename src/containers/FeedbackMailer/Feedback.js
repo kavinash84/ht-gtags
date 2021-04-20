@@ -480,7 +480,7 @@ class FeedbackMailer extends React.Component {
                     Dear {customer}
                   </Text>
                   <Text fontSize="0.975rem" fontFamily="medium" textAlign="center" lineHeight="1.2">
-                    Thank you for making us a part of your home. We hope we have met your expectaions in every sense.
+                    Thank you for making us a part of your home. We hope we have met your expectations in every sense.
                     <br />
                     We would love to hear from you on your experience with us.
                   </Text>
