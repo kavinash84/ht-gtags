@@ -158,7 +158,7 @@ const paymentObject = (sessionId, selectedGateway, paymentData, cardType = 'visa
         ...paymentJSON,
         session_id: sessionId,
         payment_method_type: selectedGateway,
-        payment_method: 'BLF'
+        payment_method: 'BFL'
       };
     }
     const {
