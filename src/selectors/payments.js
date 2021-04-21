@@ -1,11 +1,11 @@
 import { createSelector } from 'reselect';
 
 const allowedOptions = () => [
+  'Emi',
+  'EmiZero',
   'CreditCard',
   'DebitCard',
   'NetBanking',
-  'EmiZero',
-  'Emi',
   'CashOnDelivery',
   'Wallet',
   'EasyEmi',

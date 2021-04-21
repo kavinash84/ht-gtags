@@ -15,6 +15,7 @@ import Row from 'hometown-components-dev/lib/RowHtV1';
 import { getEmiBanks } from 'selectors/payments';
 import BankCard from './BankCard';
 import CardForm from './CardForm';
+import BajajFinserve from './BajajFinserve';
 
 const mapStateToProps = ({ paymentoptions }) => ({
   selectedGateway: paymentoptions.selectedGateway,
@@ -33,6 +34,7 @@ const EMI = ({
   const currentBankDetails = emiBankDetails.filter(item => item.bank === details.emiBank)[0];
   return (
     <Box>
+      <BajajFinserve />
       <Box pb={20}>
         <Label>Choose From Preferred Bank (Available On Credit Cards Only)</Label>
       </Box>
