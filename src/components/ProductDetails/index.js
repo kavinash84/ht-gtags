@@ -838,7 +838,12 @@ class ProductDetails extends React.Component {
                   emiStarting={formatAmount(calculateLowestEmi(emidata, price))}
                   isEmiAvailable={isEmiAvailable}
                 >
-                  <EmiModal price={formatAmount(checkSpecialPrice)} data={emidata} key="emi" />
+                  <EmiModal
+                    price={formatAmount(checkSpecialPrice)}
+                    data={emidata}
+                    key="emi"
+                    specialPrice={checkSpecialPrice}
+                  />
                 </EmiOptions>
 
                 {/* Offers */}

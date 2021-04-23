@@ -20,7 +20,7 @@ import ResponsiveModal from 'components/Modal';
  */
 import { submitBflPaymentDetails } from 'redux/modules/paymentoptions';
 
-class BajajFinserve extends Component {
+class BajajFinance extends Component {
   static propTypes = {
     submitPaymentDetails: PropTypes.func.isRequired,
     session: PropTypes.string,
@@ -95,7 +95,7 @@ class BajajFinserve extends Component {
 
         <ResponsiveModal classNames={{ modal: 'bflModal' }} open={bflModal} onCloseModal={this.closeBflModal}>
           <Box py={32} px={32}>
-            <Text pt={10}>Redirecting you to BajajFinserve Payment Gateway</Text>
+            <Text pt={10}>Redirecting you to Bajaj Finance Payment Gateway</Text>
             <Text pt={10} textAlign="center">
               {countDown}
             </Text>
@@ -119,4 +119,4 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(BajajFinserve);
+export default connect(mapStateToProps, mapDispatchToProps)(BajajFinance);
