@@ -43,7 +43,7 @@ const CategoryBar = ({
     <div>
       {props.display !== 'none' && (
         <Section my={0} p={0}>
-          <Container className="categoryBarCarousel">
+          <Container className="categoryBarCarousel" px={10}>
             <SlickSlider settings={adjustSlides()}>
               {categoryBar &&
                 categoryBar
@@ -60,7 +60,14 @@ const CategoryBar = ({
                         <ImageShimmer src={item.icon_url} height="80px">
                           {imageURL => <Img width="80px" m="auto" src={imageURL} alt={item.name} />}
                         </ImageShimmer>
-                        <Label my={0} sx={{ textAlign: 'center', fontSize: 14, lineHeight: 1.3 }}>
+                        <Label
+                          my={0}
+                          sx={{
+                            textAlign: 'center',
+                            fontSize: 14,
+                            lineHeight: 1.3
+                          }}
+                        >
                           {item.name}
                         </Label>
                       </Link>

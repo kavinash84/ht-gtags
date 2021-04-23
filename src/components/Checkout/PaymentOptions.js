@@ -46,6 +46,7 @@ import BankCard from './BankCard';
 import CardForm from './CardForm';
 import CardFormEasyEmi from './CardFormEasyEmi';
 import Emi from './Emi';
+import EmiZero from './EmiZero';
 import PaymentMethods from '../PaymentMethods/';
 import PaymentForm from './PaymentForm';
 import UpiForm from './UpiForm';
@@ -92,14 +93,14 @@ class PaymentOptions extends Component {
 
   componentDidMount() {
     const { paymentTimeout } = this.props;
-    console.log('paymentTimeout', paymentTimeout);
+    // console.log('paymentTimeout', paymentTimeout);
 
     const popUpTimeoutId = setTimeout(this.webToChat, paymentTimeout);
     // eslint-disable-next-line react/no-did-mount-set-state
     this.setState({ popUpTimeoutId });
   }
   componentWillUnmount() {
-    console.log('componentWillUnmount function in payment option');
+    // console.log('componentWillUnmount function in payment option');
     const { toggleWebToChat } = this.props;
     const { popUpTimeoutId } = this.state;
     clearTimeout(popUpTimeoutId);
@@ -111,7 +112,7 @@ class PaymentOptions extends Component {
     const {
       embedded_svc: { liveAgentAPI: { inviteButton: { isAvailable } = {} } = {} }
     } = window;
-    console.log(isAvailable, !dismiss, 'webToChat function');
+    // console.log(isAvailable, !dismiss, 'webToChat function');
     if (isAvailable && !dismiss) toggleWebToChat(true);
   };
   render() {
@@ -325,6 +326,13 @@ class PaymentOptions extends Component {
                     selectedGateway={selectedGateway}
                     setPaymentDetails={setPaymentDetails}
                     currentSelection={paymentDetails.Emi.emiBank}
+                  />
+                )}
+                {selectedGateway === 'EmiZero' && (
+                  <EmiZero
+                    selectedGateway={selectedGateway}
+                    setPaymentDetails={setPaymentDetails}
+                    currentSelection={paymentDetails.EmiZero.emiBank}
                   />
                 )}
                 {selectedGateway === 'EasyEmi' && (

@@ -204,7 +204,7 @@ export default class ProfileForm extends Component {
       });
     }
     const { dispatch } = this.context.store;
-    console.log(dob, 'Dob on submit%%%%%%');
+    // console.log(dob, 'Dob on submit%%%%%%');
     dispatch(updateUserProfile(this.state));
   };
   convertDateYyyy = date => {
@@ -257,7 +257,7 @@ export default class ProfileForm extends Component {
       showEditForm
     } = this.state;
     const { response } = this.props;
-    console.log(dob, 'dob');
+    // console.log(dob, 'dob');
     return (
       <Box>
         <Box>

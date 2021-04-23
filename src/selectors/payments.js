@@ -4,6 +4,7 @@ const allowedOptions = () => [
   'CreditCard',
   'DebitCard',
   'NetBanking',
+  'EmiZero',
   'Emi',
   'CashOnDelivery',
   'Wallet',

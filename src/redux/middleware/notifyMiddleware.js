@@ -32,9 +32,7 @@ export default function userMiddleware() {
       case 'cart/ADD_TO_CART_COMBINED_FAIL':
         dispatch(notifSend({
             type: 'warning',
-            msg:
-              action.error ||
-              'Items not added in cart, please try after some time',
+            msg: action.error || 'Items not added in cart, please try after some time',
             dismissAfter: 2000
           }));
         break;
@@ -48,20 +46,14 @@ export default function userMiddleware() {
       case 'cart/UPDATE_CART_FAIL':
         dispatch(notifSend({
             type: 'warning',
-            msg:
-              (action.error.error_message &&
-                titleCase(action.error.error_message)) ||
-              SOME_ERROR,
+            msg: (action.error.error_message && titleCase(action.error.error_message)) || SOME_ERROR,
             dismissAfter: 4000
           }));
         break;
       case 'cart/REMOVE_FROM_CART_FAIL':
         dispatch(notifSend({
             type: 'warning',
-            msg:
-              (action.error.error_message &&
-                titleCase(action.error.error_message)) ||
-              SOME_ERROR,
+            msg: (action.error.error_message && titleCase(action.error.error_message)) || SOME_ERROR,
             dismissAfter: 4000
           }));
         break;
@@ -80,10 +72,8 @@ export default function userMiddleware() {
             type: 'warning',
             msg:
               (action.error.mobile && titleCase(action.error.mobile)) ||
-              (action.error.password &&
-                ` Passowrd : ${titleCase(action.error.password)}`) ||
-              (action.error.error_message &&
-                titleCase(action.error.error_message)) ||
+              (action.error.password && ` Passowrd : ${titleCase(action.error.password)}`) ||
+              (action.error.error_message && titleCase(action.error.error_message)) ||
               SOME_ERROR,
 
             dismissAfter: 4000
@@ -95,10 +85,7 @@ export default function userMiddleware() {
         dispatch(notifSend(
             {
               type: 'warning',
-              msg:
-                (action.error.error_message &&
-                  titleCase(action.error.error_message)) ||
-                SOME_ERROR,
+              msg: (action.error.error_message && titleCase(action.error.error_message)) || SOME_ERROR,
               dismissAfter: 4000
             },
             'coupon'
@@ -126,10 +113,7 @@ export default function userMiddleware() {
       case 'reviews/ADD_REVIEW_FAIL':
         dispatch(notifSend({
             type: 'warning',
-            msg:
-              (action.error.error_message &&
-                titleCase(action.error.error_message)) ||
-              SOME_ERROR,
+            msg: (action.error.error_message && titleCase(action.error.error_message)) || SOME_ERROR,
             dismissAfter: 4000
           }));
         break;
@@ -146,8 +130,7 @@ export default function userMiddleware() {
         dispatch(notifSend({
             type: 'warning',
             msg:
-              (action.error.error_message === 'invalid_grant' &&
-                'Incorrect Email or Password') ||
+              (action.error.error_message === 'invalid_grant' && 'Incorrect Email or Password') ||
               action.error.error_message ||
               'User Credentials Are Invalid',
             dismissAfter: 4000
@@ -166,31 +149,22 @@ export default function userMiddleware() {
       case 'login/GET_OTP_FAIL':
         dispatch(notifSend({
             type: 'warning',
-            msg:
-              (action.error && titleCase(action.error.error_message)) ||
-              SOME_ERROR,
+            msg: (action.error && titleCase(action.error.error_message)) || SOME_ERROR,
             dismissAfter: 4000
           }));
         break;
       // Delivery
       case 'checkout/SEND_DELIVERY_ADDRESS_FAIL': {
         let msg;
-        if (
-          action.error.error_message &&
-          action.error.error_message.indexOf('fullname') !== -1
-        ) {
+        if (action.error.error_message && action.error.error_message.indexOf('fullname') !== -1) {
           msg = 'Name Should Not Consists of Special Characters.';
         }
-        if (
-          action.error.error_message &&
-          action.error.error_message.indexOf('pincode') !== -1
-        ) {
+        if (action.error.error_message && action.error.error_message.indexOf('pincode') !== -1) {
           msg = 'Pincode is Not Valid !';
         }
         dispatch(notifSend({
             type: 'warning',
-            msg:
-              msg || (action.error && action.error.error_message) || SOME_ERROR,
+            msg: msg || (action.error && action.error.error_message) || SOME_ERROR,
             dismissAfter: 4000
           }));
         break;
@@ -238,24 +212,15 @@ export default function userMiddleware() {
       // Services
       case 'services/LOAD_FAIL': {
         let msg;
-        if (
-          action.error.error_message &&
-          action.error.error_message.indexOf('fullname') !== -1
-        ) {
+        if (action.error.error_message && action.error.error_message.indexOf('fullname') !== -1) {
           msg = 'Name Should Not Consists of Special Characters.';
         }
-        if (
-          action.error.error_message &&
-          action.error.error_message.indexOf('pincode') !== -1
-        ) {
+        if (action.error.error_message && action.error.error_message.indexOf('pincode') !== -1) {
           msg = 'Pincode is Not Valid !';
         }
         dispatch(notifSend({
             type: 'warning',
-            msg:
-              msg ||
-              (action.error && titleCase(action.error.error_message)) ||
-              SOME_ERROR,
+            msg: msg || (action.error && titleCase(action.error.error_message)) || SOME_ERROR,
             dismissAfter: 4000
           }));
         break;
@@ -280,9 +245,7 @@ export default function userMiddleware() {
       case 'profile/UPDATE_PROFILE_FAIL':
         dispatch(notifSend({
             type: 'warning',
-            msg:
-              (action.error && titleCase(action.error.error_message)) ||
-              SOME_ERROR,
+            msg: (action.error && titleCase(action.error.error_message)) || SOME_ERROR,
             dismissAfter: 4000
           }));
         break;
@@ -298,18 +261,14 @@ export default function userMiddleware() {
         dispatch(notifSend({
             type: 'warning',
             msg:
-              (action.error &&
-                action.error.new_password &&
-                titleCase(action.error.new_password)) ||
-              (action.error &&
-                action.error.current_password &&
-                titleCase(action.error.current_password)) ||
+              (action.error && action.error.new_password && titleCase(action.error.new_password)) ||
+              (action.error && action.error.current_password && titleCase(action.error.current_password)) ||
               SOME_ERROR,
             dismissAfter: 4000
           }));
         break;
       case 'cases/LOAD_SUCCESS':
-        console.log(action);
+        // console.log(action);
         const {
           result: { success, errors }
         } = action;
@@ -330,7 +289,7 @@ export default function userMiddleware() {
       // Landing page
       case 'landing/LANDING_SUBMIT_SUCCESS':
         const landingPageResult = action.result;
-        console.log(action);
+        // console.log(action);
         if (landingPageResult.error === '') {
           dispatch(notifSend({
               type: 'success',

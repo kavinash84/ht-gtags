@@ -95,3 +95,7 @@ export const PINCODE_INFO = 'tesla/locations/pincode';
 /* Landing */
 export const LANDING_INFO = 'tesla/static/landingpage';
 export const LANDING_CATEGORY = 'tesla/static/landing/skucategories';
+
+/* Feedback */
+export const GET_FEEDBACK_FORM = 'tesla/orders/sfdcorder-details';
+export const POST_FEEDBACK = 'tesla/static/landing/multi';

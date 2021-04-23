@@ -90,7 +90,7 @@ class Listing extends React.Component {
         location: { pathname, state = {} }
       }
     } = this.props;
-    console.log(pathname);
+    // console.log(pathname);
     if (window && breadCrumbs && pathname.indexOf('search') === -1) {
       let url = '';
       breadCrumbs.forEach((item, i) => {
@@ -101,7 +101,7 @@ class Listing extends React.Component {
         }
       });
       window.unbxd_category = url || 'None';
-      console.log(`unbxd_category - did mount- url- ${url}`);
+      // console.log(`unbxd_category - did mount- url- ${url}`);
     } else {
       this.setState({
         display: 'none'
@@ -120,7 +120,7 @@ class Listing extends React.Component {
       // window.unbxd_fun();
       if (window.renderListing) {
         window.renderListing(true, state);
-        console.log('window.renderListing(true); invoked in initial listing page ---------');
+        // console.log('window.renderListing(true); invoked in initial listing page ---------');
       }
     }
   }
@@ -160,7 +160,7 @@ class Listing extends React.Component {
       }
       const { dispatch } = this.context.store;
       await dispatch(setReloadListing(false));
-      console.log(state, state.path);
+      // console.log(state, state.path);
       if (state && state.path) {
         window.renderListing(false, state);
       }
@@ -231,11 +231,11 @@ class Listing extends React.Component {
         .then(() => {
           if (window && !!window.unbxd && !!window.unbxd.toggleWishList) {
             window.unbxd.toggleWishList(sku, simpleSku);
-            console.log('unbxd toggleWishList callback invoked with - ', sku, simpleSku);
+            // console.log('unbxd toggleWishList callback invoked with - ', sku, simpleSku);
           }
         })
         .catch(() => {
-          console.log('unbxd toggleWishList callback failed !');
+          // console.log('unbxd toggleWishList callback failed !');
         });
     } else {
       // if (window && !!window.unbxd && !!window.unbxd.toggleWishList) {
@@ -265,7 +265,7 @@ class Listing extends React.Component {
       .then(() => {
         if (window && !!window.unbxd && !!window.unbxd.addToCart) {
           window.unbxd.addToCart(key, skuId, simpleSku, pincode);
-          console.log('unbxd addToCart callback invoked with - ', key, skuId, simpleSku, pincode);
+          // console.log('unbxd addToCart callback invoked with - ', key, skuId, simpleSku, pincode);
         }
       })
       .catch(() => {
@@ -295,7 +295,7 @@ class Listing extends React.Component {
 } = this.props;
     const { display } = this.state;
     // const uniqueFilters = {};
-    console.log(display);
+    // console.log(display);
     return (
       <Box>
         <TitleBar title={categoryName} productCount={productCount} display={display}>
@@ -336,7 +336,7 @@ Listing.defaultProps = {
   isLoggedIn: false,
   // categoryquery: '',
   categoryBar: [],
-  reloadListing: false,
+  reloadListing: false
   // display: 'block
 };
 
@@ -366,7 +366,7 @@ Listing.propTypes = {
   setPincodeToStore: PropTypes.func.isRequired,
   setPincodeFilterToStore: PropTypes.func.isRequired,
   reloadListing: PropTypes.bool,
-  setReloadListing: PropTypes.func.isRequired,
+  setReloadListing: PropTypes.func.isRequired
   // display: PropTypes.string.isRequired
 };
 
