@@ -29,7 +29,7 @@ class BajajFinance extends Component {
 
   static defaultProps = {
     session: '',
-    selectedGateway: 'Emi'
+    selectedGateway: 'EmiZero'
   };
   constructor(props) {
     super(props);

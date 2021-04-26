@@ -152,15 +152,6 @@ const paymentObject = (sessionId, selectedGateway, paymentData, cardType = 'visa
       wallet: walletName
     };
   } else if (selectedGateway === 'Emi') {
-    // For Bajaj Finance EMI
-    if (!paymentData) {
-      return {
-        ...paymentJSON,
-        session_id: sessionId,
-        payment_method_type: selectedGateway,
-        payment_method: 'BFL'
-      };
-    }
     const {
  emiBank, emiCode, nameOnCard, cardNumber, cvv, expMonth, expYear
 } = paymentData;
@@ -179,6 +170,15 @@ const paymentObject = (sessionId, selectedGateway, paymentData, cardType = 'visa
       emi_cc_security_code: cvv
     };
   } else if (selectedGateway === 'EmiZero') {
+    // For Bajaj Finance EMI
+    if (!paymentData) {
+      return {
+        ...paymentJSON,
+        session_id: sessionId,
+        payment_method_type: selectedGateway,
+        payment_method: 'BFL'
+      };
+    }
     const {
  emiBank, emiCode, nameOnCard, cardNumber, cvv, expMonth, expYear, cardType: type
 } = paymentData;
@@ -267,7 +267,7 @@ const emiZero = result => {
 const initialState = {
   loaded: false,
   data: null,
-  selectedGateway: 'Emi',
+  selectedGateway: 'EmiZero',
   isFormValid: false,
   cardType: 'other',
   cardTypeError: null,
@@ -279,7 +279,7 @@ const initialState = {
       expMonth: '',
       expYear: ''
     },
-    Emi: {
+    EmiZero: {
       cardNumber: '',
       cvv: '',
       emiBank: '',

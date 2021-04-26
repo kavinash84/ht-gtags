@@ -12,6 +12,7 @@ import Label from 'hometown-components-dev/lib/LabelHtV1';
  */
 import BankCardForZeroEmi from './BankCardForZeroEmi';
 import CardForm from './CardForm';
+import BajajFinance from './BajajFinance';
 
 const mapStateToProps = ({ paymentoptions, cart }) => ({
   selectedGateway: paymentoptions.selectedGateway,
@@ -40,6 +41,7 @@ class EmiZero extends Component {
     } = this.props;
     return (
       <Box>
+        <BajajFinance />
         <Box pb={20}>
           <Label for="bankOptions1" color="textLight">
             Choose From Preferred Bank (Available on debit/credit cards for order value &gt; Rs. 20000)
