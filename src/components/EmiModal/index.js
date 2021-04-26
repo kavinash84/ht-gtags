@@ -17,43 +17,45 @@ import { formatAmount } from 'utils/formatters';
 
 const styles = require('./EmiModal.scss');
 
-const schemes = [{
-  schemeName: '12 by 3',
-  emiTenure: 9,
-  processingFee: 777,
-  interest: 10,
-  grossTenure: 12,
-}, {
-  schemeName: '9 by 2',
-  emiTenure: 7,
-  processingFee: 500,
-  interest: 8,
-  grossTenure: 9,
-}, {
-  schemeName: '6 by 1',
-  emiTenure: 5,
-  processingFee: 350,
-  interest: 6,
-  grossTenure: 6,
-}, {
-  schemeName: '3 by 0',
-  emiTenure: 3,
-  processingFee: 350,
-  interest: 5,
-  grossTenure: 3,
-}];
+const schemes = [
+  {
+    schemeName: '12 by 0',
+    emiTenure: 12,
+    processingFee: 0,
+    interest: 0,
+    grossTenure: 12
+  },
+  {
+    schemeName: '9 by 0',
+    emiTenure: 9,
+    processingFee: 0,
+    interest: 0,
+    grossTenure: 9
+  },
+  {
+    schemeName: '6 by 0',
+    emiTenure: 6,
+    processingFee: 0,
+    interest: 0,
+    grossTenure: 6
+  },
+  {
+    schemeName: '3 by 0',
+    emiTenure: 3,
+    processingFee: 0,
+    interest: 0,
+    grossTenure: 3
+  }
+];
 
-const calculateEMI = (price, interest, emiTenure) => {
-  // Computed as (CSP of the product * (1 +(X% / 12 * EMI Tenure)) / EMI Tenure)
-  const percentage = interest / 100;
-  const percentByMonth = percentage / 12;
-  const group1 = 1 + (percentByMonth * emiTenure);
-  const group2 = price * group1;
-  return parseInt(group2 / emiTenure);
-};
+// Computed as (CSP of the product * (1 +(X% / 12 * EMI Tenure)) / EMI Tenure)
+// B16*(1+B20/12*B21)/B21
+/* eslint-disable-next-line no-mixed-operators */
+const calculateEMI = (price, interest, emiTenure) => parseInt((price * (1 + (interest / 12) * emiTenure)) / emiTenure);
 
 // eslint-disable-next-line max-len
-const advancePayment = (specialPrice, interest, emiTenure, grossTenure) => calculateEMI(specialPrice, interest, emiTenure) * (grossTenure - emiTenure);
+const advancePayment = (specialPrice, interest, emiTenure, grossTenure) =>
+  calculateEMI(specialPrice, interest, emiTenure) * (grossTenure - emiTenure);
 export default class Emi extends Component {
   state = {
     open: true
@@ -119,32 +121,18 @@ export default class Emi extends Component {
 
                     {schemes.map(arr => {
                       const {
-                      schemeName, emiTenure, processingFee, interest, grossTenure
-                      } = arr;
+ schemeName, emiTenure, processingFee, interest, grossTenure
+} = arr;
 
                       return (
                         <tr className={styles.coloumn}>
-                          <td>
-                            {schemeName}
-                          </td>
-                          <td>
-                            {emiTenure} Months
-                          </td>
-                          <td>
-                            Rs. {processingFee}
-                          </td>
-                          <td>
-                            {interest}%
-                          </td>
-                          <td>
-                            Rs. {advancePayment(specialPrice, interest, emiTenure, grossTenure)}
-                          </td>
-                          <td>
-                            Rs. {processingFee + advancePayment(specialPrice, interest, emiTenure, grossTenure)}
-                          </td>
-                          <td>
-                            Rs. {calculateEMI(specialPrice, interest, emiTenure)}
-                          </td>
+                          <td>{schemeName}</td>
+                          <td>{emiTenure} Months</td>
+                          <td>Rs. {processingFee}</td>
+                          <td>{interest}%</td>
+                          <td>Rs. {advancePayment(specialPrice, interest, emiTenure, grossTenure)}</td>
+                          <td>Rs. {processingFee + advancePayment(specialPrice, interest, emiTenure, grossTenure)}</td>
+                          <td>Rs. {calculateEMI(specialPrice, interest, emiTenure)}</td>
                         </tr>
                       );
                     })}
