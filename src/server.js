@@ -134,6 +134,64 @@ app.use(bodyParser.json());
   }
 }); */
 
+app.use('/checkout/finish/bflpayment/', async (req, res) => {
+  console.log('inside /checkout/finish/bflpayment/ route');
+  try {
+    const bflOptions = {
+      url: process.env.BFL_PAYMENT_URL,
+      method: 'POST'
+    };
+
+    const bflResponse = await axios(bflOptions);
+    console.log('bflResponse', bflResponse.data);
+    if (bflResponse && bflResponse.data) {
+      const {
+        data: { customer_session_id: sessionId }
+      } = bflResponse;
+
+      const { body: data } = req;
+
+      const source = req.headers['user-agent'];
+      let ua = { isMobile: false };
+      if (source) {
+        ua = useragent.parse(source);
+      }
+      let additionalParam = {};
+      if (ua.isMobile) {
+        additionalParam = {
+          ismsite: 1
+        };
+      }
+      const options = {
+        url: process.env.PAYMENT_URL,
+        method: 'POST',
+        headers: {
+          Cookie: `PHPSESSID=${sessionId}; path=/; domain=.hometown.in`,
+          ContentType: 'application/x-www-form-urlencoded'
+        },
+        data: qs.stringify({
+          ...data,
+          ...additionalParam
+        })
+      };
+      const response = await axios(options);
+      console.log('Response from finish payment');
+      console.log(response);
+      if (response && response.data && response.data.status === 'success') {
+        console.log(response.data);
+        return res.redirect(PAYMENT_SUCCESS);
+      }
+
+      if (response && response.data) {
+        return res.redirect(`${PAYMENT_FAILURE}/?order=${response.data.order_id}`);
+      }
+    }
+  } catch (error) {
+    console.log('Error caught');
+    console.log(error);
+    return res.redirect(`${PAYMENT_FAILURE}`);
+  }
+});
 app.use('/checkout/finish/payment/', async (req, res) => {
   console.log('inside /checkout/finish/payment/ route');
   try {
