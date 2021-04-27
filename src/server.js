@@ -143,14 +143,17 @@ app.use('/checkout/finish/bflpayment/', async (req, res) => {
     };
 
     const bflResponse = await axios(bflOptions);
-    console.log('bflResponse', bflResponse.data);
+    console.log(' ==++==++== bflResponse to get session data ==++==++==');
+    console.log(bflResponse.data);
     if (bflResponse && bflResponse.data) {
+      console.log(' ==++==++== inside if -> successfully found session ==++==++==');
       const {
         data: { customer_session_id: sessionId }
       } = bflResponse;
 
       const { body: data } = req;
-
+      console.log(' ==++==++== post body for bfl payment gateway ==++==++==');
+      console.log('Data from bfl payment', req.body);
       const source = req.headers['user-agent'];
       let ua = { isMobile: false };
       if (source) {
@@ -174,15 +177,20 @@ app.use('/checkout/finish/bflpayment/', async (req, res) => {
           ...additionalParam
         })
       };
+      console.log(' ==++==++== post data for checkout/finish/payment ==++==++==');
+      console.log(options);
       const response = await axios(options);
-      console.log('Response from finish payment');
+      console.log(' ==++==++== Response from finish payment ==++==++==');
       console.log(response);
       if (response && response.data && response.data.status === 'success') {
+        console.log(' ==++==++== success from finish payment ==++==++==');
         console.log(response.data);
         return res.redirect(PAYMENT_SUCCESS);
       }
 
       if (response && response.data) {
+        console.log(' ==++==++== failure from finish payment ==++==++==');
+        console.log('response.data', response.data);
         return res.redirect(`${PAYMENT_FAILURE}/?order=${response.data.order_id}`);
       }
     }
