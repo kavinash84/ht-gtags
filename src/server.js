@@ -175,7 +175,11 @@ app.use('/checkout/finish/bflpayment/', async (req, res) => {
         headers: {
           Cookie: `PHPSESSID=${sessionId}; path=/; domain=.hometown.in`,
           ContentType: 'application/x-www-form-urlencoded'
-        }
+        },
+        data: qs.stringify({
+          ...data,
+          ...additionalParam
+        })
       };
       console.log(' ==++==++== post data for checkout/finish/payment ==++==++==');
       console.log(options);
