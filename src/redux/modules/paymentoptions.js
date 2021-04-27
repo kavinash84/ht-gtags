@@ -175,7 +175,7 @@ const paymentObject = (sessionId, selectedGateway, paymentData, cardType = 'visa
       return {
         ...paymentJSON,
         session_id: sessionId,
-        payment_method_type: selectedGateway,
+        payment_method_type: 'Emi',
         payment_method: 'BFL'
       };
     }

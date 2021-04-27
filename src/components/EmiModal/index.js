@@ -58,7 +58,7 @@ const advancePayment = (specialPrice, interest, emiTenure, grossTenure) =>
   calculateEMI(specialPrice, interest, emiTenure) * (grossTenure - emiTenure);
 export default class Emi extends Component {
   state = {
-    open: true
+    open: false
   };
   onOpenModal = () => {
     this.setState({ open: true });
