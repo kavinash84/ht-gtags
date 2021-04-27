@@ -137,9 +137,25 @@ app.use(bodyParser.json());
 app.use('/checkout/finish/bflpayment/', async (req, res) => {
   console.log('inside /checkout/finish/bflpayment/ route');
   try {
+    const { body: data } = req;
+    const source = req.headers['user-agent'];
+    let ua = { isMobile: false };
+    if (source) {
+      ua = useragent.parse(source);
+    }
+    let additionalParam = {};
+    if (ua.isMobile) {
+      additionalParam = {
+        ismsite: 1
+      };
+    }
     const bflOptions = {
       url: process.env.BFL_PAYMENT_URL,
-      method: 'POST'
+      method: 'POST',
+      data: qs.stringify({
+        ...data,
+        ...additionalParam
+      })
     };
 
     const bflResponse = await axios(bflOptions);
@@ -151,37 +167,21 @@ app.use('/checkout/finish/bflpayment/', async (req, res) => {
         data: { customer_session_id: sessionId }
       } = bflResponse;
 
-      const { body: data } = req;
       console.log(' ==++==++== post body for bfl payment gateway ==++==++==');
       console.log('Data from bfl payment', req.body);
-      const source = req.headers['user-agent'];
-      let ua = { isMobile: false };
-      if (source) {
-        ua = useragent.parse(source);
-      }
-      let additionalParam = {};
-      if (ua.isMobile) {
-        additionalParam = {
-          ismsite: 1
-        };
-      }
       const options = {
         url: process.env.PAYMENT_URL,
         method: 'POST',
         headers: {
           Cookie: `PHPSESSID=${sessionId}; path=/; domain=.hometown.in`,
           ContentType: 'application/x-www-form-urlencoded'
-        },
-        data: qs.stringify({
-          ...data,
-          ...additionalParam
-        })
+        }
       };
       console.log(' ==++==++== post data for checkout/finish/payment ==++==++==');
       console.log(options);
       const response = await axios(options);
       console.log(' ==++==++== Response from finish payment ==++==++==');
-      console.log(response);
+      console.log(response.data.status);
       if (response && response.data && response.data.status === 'success') {
         console.log(' ==++==++== success from finish payment ==++==++==');
         console.log(response.data);
