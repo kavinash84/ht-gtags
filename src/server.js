@@ -137,7 +137,7 @@ app.use(bodyParser.json());
 app.use('/checkout/finish/bflpayment/', async (req, res) => {
   console.log('inside /checkout/finish/bflpayment/ route');
   try {
-    const { body: data } = req;
+    const { body: bflResponseData } = req;
     const source = req.headers['user-agent'];
     let ua = { isMobile: false };
     if (source) {
@@ -153,7 +153,7 @@ app.use('/checkout/finish/bflpayment/', async (req, res) => {
       url: process.env.BFL_PAYMENT_URL,
       method: 'POST',
       data: qs.stringify({
-        ...data,
+        ...{ data: bflResponseData },
         ...additionalParam
       })
     };
@@ -177,7 +177,7 @@ app.use('/checkout/finish/bflpayment/', async (req, res) => {
           ContentType: 'application/x-www-form-urlencoded'
         },
         data: qs.stringify({
-          ...data,
+          ...{ data: bflResponseData },
           ...additionalParam
         })
       };
