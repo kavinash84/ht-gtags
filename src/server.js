@@ -153,7 +153,7 @@ app.use('/checkout/finish/bflpayment/', async (req, res) => {
       url: process.env.BFL_PAYMENT_URL,
       method: 'POST',
       data: qs.stringify({
-        ...{ data: bflResponseData },
+        ...bflResponseData,
         ...additionalParam
       })
     };
@@ -177,7 +177,7 @@ app.use('/checkout/finish/bflpayment/', async (req, res) => {
           ContentType: 'application/x-www-form-urlencoded'
         },
         data: qs.stringify({
-          ...{ data: bflResponseData },
+          ...bflResponseData,
           ...additionalParam
         })
       };
