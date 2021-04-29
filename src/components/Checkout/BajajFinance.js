@@ -73,8 +73,9 @@ class BajajFinance extends Component {
         paymentload(false);
         submitPaymentDetails(session, selectedGateway);
         window.clearInterval(countDownId);
+      } else {
+        this.setState({ countDown });
       }
-      this.setState({ countDown });
     }, 1000);
     this.setState({ countDownId, bflModal: true });
   };
