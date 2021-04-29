@@ -161,7 +161,7 @@ app.use('/checkout/finish/bflpayment/', async (req, res) => {
     const bflResponse = await axios(bflOptions);
     console.log(' ==++==++== bflResponse to get session data ==++==++==');
     console.log(bflResponse.data);
-    if (bflResponse && bflResponse.data) {
+    if (bflResponse && bflResponse.data && bflResponse.data.status === 'success') {
       console.log(' ==++==++== inside if -> successfully found session ==++==++==');
       const {
         data: { customer_session_id: sessionId }
@@ -198,6 +198,8 @@ app.use('/checkout/finish/bflpayment/', async (req, res) => {
         return res.redirect(`${PAYMENT_FAILURE}/?order=${response.data.order_id}`);
       }
     }
+
+    throw new Error('Session not found');
   } catch (error) {
     console.log('Error caught');
     console.log(error);

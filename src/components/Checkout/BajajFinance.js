@@ -18,17 +18,23 @@ import ResponsiveModal from 'components/Modal';
 /**
  * modules / selectors / helpers
  */
-import { submitBflPaymentDetails } from 'redux/modules/paymentoptions';
+import { submitBflPaymentDetails, setSelectedPaymentDetails } from 'redux/modules/paymentoptions';
+import { setEmiPaymentType, paymentLoaded } from 'redux/modules/app';
 
 class BajajFinance extends Component {
   static propTypes = {
     submitPaymentDetails: PropTypes.func.isRequired,
+    setPaymentDetails: PropTypes.func.isRequired,
     session: PropTypes.string,
-    selectedGateway: PropTypes.string
+    selectedGateway: PropTypes.string,
+    emiType: PropTypes.func.isRequired,
+    paymentLoaded: PropTypes.func.isRequired,
+    details: PropTypes.string
   };
 
   static defaultProps = {
     session: '',
+    details: '',
     selectedGateway: 'EmiZero'
   };
   constructor(props) {
@@ -41,29 +47,52 @@ class BajajFinance extends Component {
   }
 
   openBflModal = () => {
-    const { submitPaymentDetails, session, selectedGateway } = this.props;
+    const {
+      submitPaymentDetails,
+      session,
+      selectedGateway,
+      emiType,
+      paymentLoaded: paymentload,
+      setPaymentDetails
+    } = this.props;
+
+    setPaymentDetails({
+      gateway: 'EmiZero',
+      data: { emiCode: 'BFL', emiBank: 'bfl', cardType: 'credit' }
+    });
+
     const countDownId = setInterval(() => {
       let { countDown } = this.state;
       countDown -= 1;
+
+      console.log('Countdown value', countDown);
       if (!countDown) {
         this.closeBflModal();
-        submitPaymentDetails(session, selectedGateway);
-      } else {
-        this.setState({ countDown });
+        emiType('bfl');
+        paymentload(false);
+        return submitPaymentDetails(session, selectedGateway);
       }
+      this.setState({ countDown });
     }, 1000);
-
     this.setState({ countDownId, bflModal: true });
   };
 
   closeBflModal = () => {
     const { countDownId } = this.state;
-    clearInterval(countDownId);
-    this.setState({ bflModal: false, countDown: 5 });
+    const { setPaymentDetails } = this.props;
+    window.clearInterval(countDownId);
+    this.setState({ bflModal: false, countDown: 5, countDownId: '' });
+    setPaymentDetails({
+      gateway: 'EmiZero',
+      data: { emiCode: '', emiBank: '', cardType: '' }
+    });
   };
 
   render() {
     const { countDown, bflModal } = this.state;
+    const {
+      details: { emiCode }
+    } = this.props;
     return (
       <Box>
         <Box pb={20}>
@@ -71,14 +100,7 @@ class BajajFinance extends Component {
         </Box>
         <Col px={0} mb={30} pb={20} sx={{ borderBottom: '2px solid #97979733' }} onClick={this.openBflModal}>
           <Flex alignItems="center">
-            <Box
-              as="input"
-              type="radio"
-              name="bankOptions"
-              id={'bankOptionsBfl'}
-              // checked={currentSelection === name}
-              mr={10}
-            />
+            <Box as="input" type="radio" name="bankOptions" id={'bankOptionsBfl'} checked={emiCode === 'BFL'} mr={10} />
             <Label for={'bankOptionsBfl'} bg="white">
               <Image
                 src={
@@ -108,13 +130,17 @@ class BajajFinance extends Component {
 
 const mapStateToProps = ({ app, paymentoptions }) => ({
   session: app.session,
-  selectedGateway: paymentoptions.selectedGateway
+  selectedGateway: paymentoptions.selectedGateway,
+  details: paymentoptions.paymentMethodDetails.EmiZero
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      submitPaymentDetails: submitBflPaymentDetails
+      submitPaymentDetails: submitBflPaymentDetails,
+      setPaymentDetails: setSelectedPaymentDetails,
+      emiType: setEmiPaymentType,
+      paymentLoaded
     },
     dispatch
   );

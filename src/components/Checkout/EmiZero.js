@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 /**
+ * modules / selectors / helpers
+ */
+import { setEmiPaymentType } from 'redux/modules/app';
+/**
  * Components
  */
 import Box from 'hometown-components-dev/lib/BoxHtV1';
@@ -24,6 +28,7 @@ class EmiZero extends Component {
   componentDidMount() {
     const { dispatch } = this.context.store;
     const { setPaymentDetails } = this.props;
+    dispatch(setEmiPaymentType('hdfc'));
     dispatch(setPaymentDetails({
         gateway: 'EmiZero',
         data: { emiCode: 'EMI3', emiBank: 'hdfc', cardType: 'credit' }
