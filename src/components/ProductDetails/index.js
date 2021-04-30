@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import Helmet from 'react-helmet';
 import Select from 'react-select';
 import ReactStars from 'react-stars';
+import { withRouter } from 'react-router';
 
 /**
  * Modules / Utils / Reducers
@@ -116,6 +117,7 @@ const customStyles = {
 const DescriptionButton = props => (
   <Col minWidth="auto">
     <Button
+      id={'return-and-cancellation'}
       variant="link"
       fontWeight={500}
       fontSize={16}
@@ -245,6 +247,7 @@ const getSelectedColor = colors => {
   return activeColorName;
 };
 
+@withRouter
 class ProductDetails extends React.Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -282,19 +285,23 @@ class ProductDetails extends React.Component {
   componentDidMount() {
     const { dispatch } = this.context.store;
     const {
-      product,
+      // product,
       simpleSku,
       pincode: { selectedPincode },
       pdpTimeout
     } = this.props;
+
+    // this.setDescriptionActive(product);
+    this.hashLinkScroll();
+
     dispatch(getCombinedBuy(simpleSku, selectedPincode));
-    this.setDescriptionActive(product);
     const popUpTimeoutId = setTimeout(this.webToChat, pdpTimeout);
     // eslint-disable-next-line react/no-did-mount-set-state
     this.setState({ popUpTimeoutId });
   }
   componentWillReceiveProps(nextProps) {
     const { colorproducts } = this.props;
+
     if (nextProps.isLoggedIn) {
       this.setState({
         openLogin: false
@@ -506,6 +513,26 @@ class ProductDetails extends React.Component {
       [name]: value,
       [`${name}Error`]: false
     });
+  };
+
+  hashLinkScroll = () => {
+    const { hash } = window.location;
+    const {
+      product: {
+        attributes: { return: returnAndCancel }
+      }
+    } = this.props;
+    if (hash !== '') {
+      setTimeout(() => {
+        const id = hash.replace('#', '');
+        const element = document.getElementById(id);
+        if (element) element.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+      }, 1000);
+      this.setState({
+        activeSpec: 'return',
+        activeDescription: returnAndCancel
+      });
+    }
   };
 
   renderAttributes = items => {
