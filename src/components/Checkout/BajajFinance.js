@@ -132,7 +132,7 @@ class BajajFinance extends Component {
 }
 
 const mapStateToProps = ({ app, paymentoptions }) => ({
-  session: app.session,
+  session: app.sessionId,
   selectedGateway: paymentoptions.selectedGateway,
   details: paymentoptions.paymentMethodDetails.EmiZero
 });
