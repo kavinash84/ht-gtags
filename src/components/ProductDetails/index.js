@@ -116,17 +116,18 @@ const customStyles = {
  */
 const DescriptionButton = props => (
   <Col minWidth="auto">
-    <Button
-      id={'return-and-cancellation'}
-      variant="link"
-      fontWeight={500}
-      fontSize={16}
-      py={20}
-      color={props.active && '#fa6400'}
-      textTransform="uppercase"
-      sx={{ textTransform: 'uppercase', whiteSpace: 'nowrap' }}
-      {...props}
-    />
+    <div id={`${props.tab}`}>
+      <Button
+        variant="link"
+        fontWeight={500}
+        fontSize={16}
+        py={20}
+        color={props.active && '#fa6400'}
+        textTransform="uppercase"
+        sx={{ textTransform: 'uppercase', whiteSpace: 'nowrap' }}
+        {...props}
+      />
+    </div>
   </Col>
 );
 
@@ -352,15 +353,15 @@ class ProductDetails extends React.Component {
         behavior: 'smooth'
       });
     } catch (e) {
-      window.scroll(0, this.reviewsRef.current.offsetTop);
+      // window.scroll(0, this.reviewsRef.current.offsetTop);
     }
   };
-  setDescriptionActive = product => {
-    const {
-      attributes: { description }
-    } = product;
-    this.setState({ activeDescription: description });
-  };
+  // setDescriptionActive = product => {
+  //   const {
+  //     attributes: { description }
+  //   } = product;
+  //   this.setState({ activeDescription: description });
+  // };
   getWeightedAverageRatings = () => {
     const {
       reviews: { data = [] }
@@ -519,18 +520,48 @@ class ProductDetails extends React.Component {
     const { hash } = window.location;
     const {
       product: {
-        attributes: { return: returnAndCancel }
+        attributes: {
+ return: returnAndCancel, product_warranty: productWarranty, care_label: careLabel, description
+}
       }
     } = this.props;
+    let id = hash.replace('#', '');
+    const tabElement = {
+      'return-and-cancellation': {
+        tableName: 'return',
+        tabComponent: returnAndCancel
+      },
+      'service-assurance-warranty': {
+        tableName: 'warranty',
+        tabComponent: productWarranty
+      },
+      careLabel: {
+        tableName: 'care',
+        tabComponent: careLabel
+      },
+      details: {
+        tableName: 'details',
+        tabComponent: description
+      },
+      description: {
+        tableName: 'description',
+        tabComponent: description
+      }
+    };
     if (hash !== '') {
       setTimeout(() => {
-        const id = hash.replace('#', '');
         const element = document.getElementById(id);
         if (element) element.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
       }, 1000);
       this.setState({
-        activeSpec: 'return',
-        activeDescription: returnAndCancel
+        activeSpec: tabElement[`${id}`].tableName,
+        activeDescription: tabElement[`${id}`].tabComponent
+      });
+    } else {
+      id = 'description';
+      this.setState({
+        activeSpec: tabElement[`${id}`].tableName,
+        activeDescription: tabElement[`${id}`].tabComponent
       });
     }
   };
@@ -984,6 +1015,7 @@ class ProductDetails extends React.Component {
                     });
                   }}
                   active={activeSpec === 'description'}
+                  tab={'description'}
                 >
                   DESCRIPTION
                 </DescriptionButton>
@@ -996,6 +1028,7 @@ class ProductDetails extends React.Component {
                     });
                   }}
                   active={activeSpec === 'details'}
+                  tab={'details'}
                 >
                   DETAILS
                 </DescriptionButton>
@@ -1009,6 +1042,7 @@ class ProductDetails extends React.Component {
                       });
                     }}
                     active={activeSpec === 'care'}
+                    tab={'product-care-instructions'}
                   >
                     PRODUCT CARE INSTRUCTIONS
                   </DescriptionButton>
@@ -1023,6 +1057,7 @@ class ProductDetails extends React.Component {
                       });
                     }}
                     active={activeSpec === 'warranty'}
+                    tab={'service-assurance-warranty'}
                   >
                     SERVICE ASSURANCE / WARRANTY
                   </DescriptionButton>
@@ -1037,6 +1072,7 @@ class ProductDetails extends React.Component {
                       });
                     }}
                     active={activeSpec === 'return'}
+                    tab={'return-and-cancellation'}
                   >
                     RETURN / CANCELLATION
                   </DescriptionButton>
@@ -1376,9 +1412,14 @@ ProductDetails.defaultProps = {
   // catalogId: '',
   // onClickSubmit: () => {}
 };
+DescriptionButton.defaultProps = {
+  tab: ''
+};
+
 DescriptionButton.propTypes = {
   // eslint-disable-next-line react/require-default-props
-  active: PropTypes.string
+  active: PropTypes.string,
+  tab: PropTypes.string
 };
 ProductDetails.propTypes = {
   toggleWebToChat: PropTypes.func.isRequired,
