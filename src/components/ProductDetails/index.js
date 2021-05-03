@@ -552,7 +552,7 @@ class ProductDetails extends React.Component {
       setTimeout(() => {
         const element = document.getElementById(id);
         if (element) element.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
-      }, 1000);
+      }, 3000);
       this.setState({
         activeSpec: tabElement[`${id}`].tableName,
         activeDescription: tabElement[`${id}`].tabComponent
