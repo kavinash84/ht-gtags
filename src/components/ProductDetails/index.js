@@ -535,7 +535,8 @@ class ProductDetails extends React.Component {
         tableName: 'warranty',
         tabComponent: productWarranty
       },
-      careLabel: {
+
+      'product-care-instructions': {
         tableName: 'care',
         tabComponent: careLabel
       },
@@ -548,11 +549,12 @@ class ProductDetails extends React.Component {
         tabComponent: description
       }
     };
-    if (hash !== '') {
+    if (hash !== '' && tabElement[`${id}`]) {
       setTimeout(() => {
         const element = document.getElementById(id);
         if (element) element.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
       }, 3000);
+      console.log(id, tabElement[`${id}`], 'id for tabElement');
       this.setState({
         activeSpec: tabElement[`${id}`].tableName,
         activeDescription: tabElement[`${id}`].tabComponent
