@@ -3,7 +3,7 @@ const listingBestOffers = [
     id: 1,
     title: 'Best Offers',
     description: 'Best Offers',
-    image: require('../../static/best-offers-01.jpeg'),
+    image: require('../../static/campaign/best-offers-01.jpeg'),
     type: 'webview_layout',
     meta: { name: 'Best Offers', id: 'Best Offers' }
   },
@@ -11,7 +11,7 @@ const listingBestOffers = [
     id: 2,
     title: 'Best Offers',
     description: 'Best Offers',
-    image: require('../../static/best-offers-02.jpeg'),
+    image: require('../../static/campaign/best-offers-02.jpeg'),
     type: 'webview_layout',
     meta: { name: 'Best Offers', id: 'Best Offers' }
   },
@@ -19,7 +19,7 @@ const listingBestOffers = [
     id: 3,
     title: 'Best Offers',
     description: 'Best Offers',
-    image: require('../../static/best-offers-03.jpeg'),
+    image: require('../../static/campaign/best-offers-03.jpeg'),
     type: 'webview_layout',
     meta: { name: 'Best Offers', id: 'Best Offers' }
   },
@@ -27,7 +27,7 @@ const listingBestOffers = [
     id: 4,
     title: 'Best Offers',
     description: 'Best Offers',
-    image: require('../../static/best-offers-04.jpeg'),
+    image: require('../../static/campaign/best-offers-04.jpeg'),
     type: 'webview_layout',
     meta: { name: 'Best Offers', id: 'Best Offers' }
   }
