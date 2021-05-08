@@ -63,5 +63,5 @@ const listingBestOffers = [
   }
 ];
 
-const listingBestOffersPath = ['/hot-deals/furniture-deals', '/hot-deals', '/home-furnishings/mothers-day'];
+const listingBestOffersPath = ['/hot-deals/furniture-deals', '/hot-deals', '/home-furnishings/special-offer'];
 export default { listingBestOffers, listingBestOffersPath };
