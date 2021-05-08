@@ -267,6 +267,9 @@ export default class Listing extends Component {
     const previousPage = !page || Number(page) === 1 ? '' : `?page=${page - 1}`;
     const NextPage = !page ? '?page=2' : `?page=${Number(page) + 1}`;
     const showBestOffers = listingBestOffersPath.some(arr => arr === pathname);
+    let banners = [];
+    if (showBestOffers) banners = listingBestOffers[0][pathname].images;
+    // console.log('listingBestOffers[pathname]', listingBestOffers[0][pathname]);
     /* eslint-disable react/no-danger */
     return (
       <Wrapper>
@@ -291,7 +294,7 @@ export default class Listing extends Component {
               </Container>
             </Box>
           )}
-          {showBestOffers ? <MainSlider data={listingBestOffers} /> : null}
+          {showBestOffers ? <MainSlider data={banners} /> : null}
           <Box>
             <ListingContainer
               wishList={wishListedSKUs}
