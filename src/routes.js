@@ -29,6 +29,7 @@ import ModularKitchen from 'containers/ModularKitchenMicro';
 import PlanYourKitchen from 'containers/PlanYourKitchen';
 import DesignBuild from 'containers/DesignBuild';
 import BulkOrder from 'containers/BulkOrder';
+import Brand from 'containers/Brand';
 import ContactUs from 'containers/ContactUs';
 import Feedback from 'containers/Feedback';
 import FeedbackMailer from 'containers/FeedbackMailer';
@@ -178,6 +179,7 @@ const routes = [
         component: PaymentFailure
       },
       { path: '/bulk-order', exact: true, component: BulkOrder },
+      { path: '/brand/laura-ashley', exact: true, component: Brand },
       {
         path: '/service-signup',
         exact: true,

@@ -8,7 +8,13 @@ import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
 const SliderItem = ({
  title, image, url, onClick, target
 }) => {
-  if (target) {
+  if (!target && !url) {
+    return (
+      <CardHtV1 title={title} rel="noopener noreferrer" as="a">
+        <ImageHtV1 src={image} alt={title} variant="image" />
+      </CardHtV1>
+    );
+  } else if (target) {
     return (
       <CardHtV1 href={url} title={title} target={target} rel="noopener noreferrer" onClick={onClick} as="a">
         <ImageHtV1 src={image} alt={title} variant="image" />
