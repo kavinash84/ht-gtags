@@ -42,6 +42,8 @@ const CartEmptyIcon = require('../../../static/emptyCart.png');
 const PincodeModalIcon = require('../../../static/map-placeholder.svg');
 const BajajFinance = require('../../../static/bajaj-finance.png');
 
+const HdfcLogo = 'https://static.hometown.in/media/cms/BankLOGO/hdfc.gif';
+
 const demoProductsBanner = cart =>
   // console.log('demoProducts function', cart);
   // console.log(cart.some(({ product_info: { demo_product: demoProduct } }) => demoProduct));
@@ -50,7 +52,12 @@ const demoProductsBanner = cart =>
 const BflPopMessage = () => (
   <Box>
     <Flex justifyContent="center">
-      <img height={30} src={BajajFinance} alt="baja-finance" />
+      <Flex mr={20}>
+        <img height={30} src={BajajFinance} alt="baja-finance" />
+      </Flex>
+      <Flex>
+        <img height={30} src={HdfcLogo} alt="hdfc" />
+      </Flex>
     </Flex>
     <Heading
       textAlign="center"
@@ -81,7 +88,7 @@ const BflPopMessage = () => (
 const HdfcPopMessage = () => (
   <Box>
     <Flex justifyContent="center">
-      <img height={30} src={'https://static.hometown.in/media/cms/BankLOGO/hdfc.gif'} alt="baja-finance" />
+      <img height={30} src={HdfcLogo} alt="hfdc" />
     </Flex>
     <Heading
       textAlign="center"
