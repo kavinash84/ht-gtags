@@ -81,8 +81,7 @@ export default class Emi extends Component {
                 <Heading color="text" margin="0.9375em 0 0.3125em" fontFamily="700" textAlign="left">
                   Bajaj Finance For Rs.{` ${price}`}
                   <Box fontSize="0.875rem" mt={5}>
-                    Available for Bajaj EMI Card Customers. <br />
-                    Minimum Cart Value is Rs. {bflMinAmount}
+                    Available for Bajaj EMI Card Customers. Minimum Cart Value is Rs. {formatAmount(bflMinAmount)}
                   </Box>
                   <Box fontSize="0.875rem">(Including shipping charge)</Box>
                 </Heading>
