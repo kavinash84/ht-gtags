@@ -210,7 +210,8 @@ const mapStateToProps = ({
   userLogin,
   combinedbuy,
   cart,
-  webtochat: { dismiss, pdpTimeout }
+  webtochat: { dismiss, pdpTimeout },
+  paymentoptions
 }) => ({
   session: sessionId,
   product: productdetails.productDescription,
@@ -232,7 +233,8 @@ const mapStateToProps = ({
   quantityChange: cart.quantityChange,
   skuItem: getCartSKU(cart, productdetails.productDescription.sku),
   dismiss,
-  pdpTimeout
+  pdpTimeout,
+  bflMinAmount: paymentoptions.bflMinAmount
 });
 
 const getSelectedColor = colors => {
@@ -545,7 +547,8 @@ class ProductDetails extends React.Component {
       combinedbuy,
       loadingList,
       quantityChange,
-      skuItem
+      skuItem,
+      bflMinAmount
     } = this.props;
     const {
       activeSpec,
@@ -843,6 +846,7 @@ class ProductDetails extends React.Component {
                     data={emidata}
                     key="emi"
                     specialPrice={checkSpecialPrice}
+                    bflMinAmount={bflMinAmount}
                   />
                 </EmiOptions>
 
@@ -1379,7 +1383,8 @@ ProductDetails.propTypes = {
   combinedbuy: PropTypes.array,
   quantityChange: PropTypes.bool,
   skuItem: PropTypes.object,
-  session: PropTypes.string
+  session: PropTypes.string,
+  bflMinAmount: PropTypes.number.isRequired
   // onClickSubmit: PropTypes.func,
   // catalogId: PropTypes.any
 };

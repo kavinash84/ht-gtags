@@ -21,6 +21,7 @@ import BajajFinance from './BajajFinance';
 const mapStateToProps = ({ paymentoptions, cart }) => ({
   selectedGateway: paymentoptions.selectedGateway,
   details: paymentoptions.paymentMethodDetails.EmiZero,
+  bflMinAmount: paymentoptions.bflMinAmount,
   cart
 });
 
@@ -42,11 +43,12 @@ class EmiZero extends Component {
       details,
       cart: {
         summary: { total }
-      }
+      },
+      bflMinAmount
     } = this.props;
     return (
       <Box>
-        <BajajFinance />
+        {total > bflMinAmount ? <BajajFinance bflMinAmount={bflMinAmount} /> : null}
         <Box pb={20}>
           <Label for="bankOptions1" color="textLight">
             Choose From Preferred Bank (Available on debit/credit cards for order value &gt; Rs. 20000)
@@ -123,5 +125,6 @@ EmiZero.propTypes = {
   selectedGateway: PropTypes.string.isRequired,
   setPaymentDetails: PropTypes.func.isRequired,
   cart: PropTypes.func.isRequired,
-  details: PropTypes.object.isRequired
+  details: PropTypes.object.isRequired,
+  bflMinAmount: PropTypes.number.isRequired
 };

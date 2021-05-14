@@ -232,6 +232,18 @@ const paymentObject = (sessionId, selectedGateway, paymentData, cardType = 'visa
     };
   }
 };
+
+const getSelectedGateway = data => {
+  console.log('getSelectedGateway function', data);
+  const {
+    cart: {
+      summary: { total }
+    }
+  } = data;
+
+  return total < 20000 ? 'Emi' : 'EmiZero';
+};
+
 const emiZero = result => {
   console.log('Adding zero emi', result);
   let {
@@ -267,12 +279,12 @@ const emiZero = result => {
 const initialState = {
   loaded: false,
   data: null,
-  selectedGateway: 'EmiZero',
+  selectedGateway: 'Emi',
   isFormValid: false,
   cardType: 'other',
   cardTypeError: null,
   paymentMethodDetails: {
-    CreditCard: {
+    Emi: {
       nameOnCard: '',
       cardNumber: '',
       cvv: '',
@@ -290,6 +302,7 @@ const initialState = {
       type: 'other'
     }
   },
+  bflMinAmount: 25000,
   submitting: false,
   submitted: false
 };
@@ -351,7 +364,8 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: true,
-        data: emiZero(action.result, action.cart)
+        data: emiZero(action.result, action.cart),
+        selectedGateway: getSelectedGateway(action.result)
       };
     case LOAD_FAIL:
       return {
