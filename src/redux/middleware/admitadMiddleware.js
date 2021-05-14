@@ -80,16 +80,14 @@ export default function admitadMiddleware() {
             });
 
             const channel = getChannelForAdmitAd('source');
-            console.log('value of getChannelForAdmitAd', channel);
             if (window.ADMITAD.Invoice && window.ADMITAD.Invoice.referencesOrder) {
-              console.log('inside if of admitad', window.ADMITAD);
               window.ADMITAD.Invoice.referencesOrder = window.ADMITAD.Invoice.referencesOrder || [];
               window.ADMITAD.Invoice.referencesOrder.push({
                 orderNumber: orderNo,
                 orderedItem
               });
               window.ADMITAD.Invoice.broker = channel;
-              console.log('window.ADMITAD.Invoice.broker = channel - ', (window.ADMITAD.Invoice.broker = channel));
+              window.ADMITAD.Invoice.category = '1';
             }
           }
         }
