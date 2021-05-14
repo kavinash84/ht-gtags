@@ -52,7 +52,7 @@ import LoginForm from 'components/LoginForms';
 import SignupForm from 'components/Signup/SignupForm';
 import ProductSummaryList from 'components/Checkout/ProductSummaryList';
 
-const LogoIcon = require('../../../static/logo@2x.png');
+const LogoIcon = require('../../../static/logo.png');
 const PincodeModalIcon = require('../../../static/map-placeholder.svg');
 
 const onClick = history => e => {
@@ -199,7 +199,7 @@ export default class HeaderTop extends Component {
         <Row sx={{ alignItems: 'center' }} mx={[0, 0, 0, -16]}>
           <Col width={3 / 12}>
             <Link to={HOME_URL}>
-              <Image height={['auto', 'auto', 28]} src={LogoIcon} alt="Hometown" />
+              <Image height={['auto', 'auto', 50]} src={LogoIcon} alt="Hometown" />
             </Link>
           </Col>
           <Col width={5.5 / 12}>
