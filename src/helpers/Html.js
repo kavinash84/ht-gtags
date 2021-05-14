@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import serialize from 'serialize-javascript';
 import Helmet from 'react-helmet';
 import config from 'config';
-import { newRelic } from 'utils/tracking';
+import { newRelic, admitad, admitadSetCookie } from 'utils/tracking';
 
 const ONESIGNALID = 'b2f22db2-b562-4530-8888-516550bfbe6d';
 // const { version } = require('../../package.json');
@@ -343,7 +343,7 @@ export default class Html extends Component {
           />
         </head>
         <body>
-          {process.env.NODE_ENV !== 'development' && (
+          {/* {process.env.NODE_ENV !== 'development' && (
             <noscript>
               <iframe
                 src="https://www.googletagmanager.com/ns.html?id=GTM-T5VV7MZ"
@@ -353,7 +353,7 @@ export default class Html extends Component {
                 title="gaTag"
               />
             </noscript>
-          )}
+          )} */}
           <div id="content" dangerouslySetInnerHTML={{ __html: content }} />
           <script src={unbxdScripts.autosuggestJs} async="" />
           <link rel="stylesheet" type="text/css" href={unbxdScripts.autosuggestCss} />
@@ -365,20 +365,6 @@ export default class Html extends Component {
             async=""
             src="https://d21gpk1vhmjuf5.cloudfront.net/unbxdAnalytics.js"
           ></script>
-
-          {/* <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.js"></script>
-
-          <script
-            type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"
-          ></script>
-
-          <script src="/js/_devkeys.js"></script>
-          <script src="/js/lib-autosuggest.js"></script>
-          <script src="/js/unbxd_autosuggest.js"></script>
-          <script type="text/javascript" src="/js/_lib-search.js"></script>
-          <script type="text/javascript" src="/js/base-search.js"></script>
-          <script type="text/javascript" src="/js/unbxd_search.js"></script> */}
           {store && (
             <script
               dangerouslySetInnerHTML={{
@@ -399,21 +385,6 @@ export default class Html extends Component {
               }}
             />
           ) : null}
-          {/* <Helmet>
-            {process.env.NODE_ENV !== 'development' ? (
-              <Fragment>
-                <script src="https://cdn.ravenjs.com/3.24.0/raven.min.js" crossOrigin="anonymous" />
-                <script>
-                  {`
-                  Raven.config('https://e072a281afc44732a8976d0615f0e310@sentry.io/1254610', {
-                  release: '${version.replace(/\./g, '-')}',
-                  environment: 'production',
-                  }).install()
-                `}
-                </script>
-              </Fragment>
-            ) : null}
-          </Helmet> */}
           <script type="text/javascript" src="https://service.force.com/embeddedservice/5.0/esw.min.js" />
           <script
             type="text/javascript"
@@ -545,6 +516,8 @@ export default class Html extends Component {
             }}
             charSet="UTF-8"
           />
+          <script src={admitad.src} async onError={admitad.onerror}></script>
+          <script dangerouslySetInnerHTML={{ __html: admitadSetCookie }} />
         </body>
       </html>
     );

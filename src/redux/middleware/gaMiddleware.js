@@ -185,7 +185,8 @@ export default function gaMiddleware() {
                     id: sku
                   }
                 ]
-              }
+              },
+              currencyCode: 'INR'
             }
           };
           window.google_tag_params.ecomm_prodid = sku;
@@ -563,7 +564,8 @@ export default function gaMiddleware() {
                       coupon: coupon_code || ''
                     },
                     products: [...cartList]
-                  }
+                  },
+                  currencyCode: 'INR'
                 }
               };
             }

@@ -8,13 +8,10 @@ import { getCartListSKU } from 'selectors/cart';
 import { setReloadListing } from 'redux/modules/products';
 
 import Box from 'hometown-components-dev/lib/BoxHtV1';
-// import Img from 'hometown-components-dev/lib/ImageHtV1';
-// import Section from 'hometown-components-dev/lib/SectionHtV1';
 import ListingContainer from 'components/Listing';
-// import ListingShimmer from 'components/Listing/ListingShimmer';
+import MainSlider from 'components/MainSlider';
 import Footer from 'components/Footer';
 import Header from 'components/Header';
-// import Pagination from 'components/Pagination';
 import SeoContent from 'components/SeoContent';
 import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 import Body from 'hometown-components-dev/lib/BodyHtV1';
@@ -34,8 +31,7 @@ import {
 } from 'selectors/products';
 import { SITE_URL } from 'helpers/Constants';
 import CANONICALS from 'data/canonical';
-
-// const SearchEmptyIcon = require('../../../static/search-empty.png');
+import { listingBestOffers, listingBestOffersPath } from 'data/best-offers';
 
 @connect(state => ({
   loading: state.products.loading,
@@ -270,7 +266,10 @@ export default class Listing extends Component {
     } else page = currentPage;
     const previousPage = !page || Number(page) === 1 ? '' : `?page=${page - 1}`;
     const NextPage = !page ? '?page=2' : `?page=${Number(page) + 1}`;
-    // console.log(this.props);
+    const showBestOffers = listingBestOffersPath.some(arr => arr === pathname);
+    let banners = [];
+    if (showBestOffers) banners = listingBestOffers[0][pathname].images;
+    // console.log('listingBestOffers[pathname]', listingBestOffers[0][pathname]);
     /* eslint-disable react/no-danger */
     return (
       <Wrapper>
@@ -295,36 +294,8 @@ export default class Listing extends Component {
               </Container>
             </Box>
           )}
-          {/* {!loaded && loading && !products.length && <ListingShimmer />} */}
+          {showBestOffers ? <MainSlider data={banners} /> : null}
           <Box>
-            {/* {loaded && products.length && !shimmer ? (
-            <Box>
-              <ListingContainer
-                wishList={wishListedSKUs}
-                wishListData={wishListData}
-                products={products}
-                categoryName={categoryName}
-                productCount={productCount}
-                category={category}
-                filters={filters}
-                sortBy={sortBy}
-                appliedFilters={appliedFilters}
-                history={history}
-                pincode={pincode}
-                isLoggedIn={isLoggedIn}
-                loadingList={loadingList}
-                metaResults={metadata}
-                categoryquery={categoryquery}
-                breadCrumbs={breadCrumbs}
-                categoryBar={categoryBar}
-                selectedPincode={selectedPincode}
-              />
-            </Box>
-          ) : (
-            <Box display="flex" p="0.625rem" pt="1.25rem" mb="0">
-              <h1> No Items Found </h1>
-            </Box>
-          )} */}
             <ListingContainer
               wishList={wishListedSKUs}
               wishListData={wishListData}
