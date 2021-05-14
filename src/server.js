@@ -134,6 +134,78 @@ app.use(bodyParser.json());
   }
 }); */
 
+app.use('/checkout/finish/bflpayment/', async (req, res) => {
+  console.log('inside /checkout/finish/bflpayment/ route');
+  try {
+    const { body: bflResponseData } = req;
+    const source = req.headers['user-agent'];
+    let ua = { isMobile: false };
+    if (source) {
+      ua = useragent.parse(source);
+    }
+    let additionalParam = {};
+    if (ua.isMobile) {
+      additionalParam = {
+        ismsite: 1
+      };
+    }
+    const bflOptions = {
+      url: process.env.BFL_PAYMENT_URL,
+      method: 'POST',
+      data: qs.stringify({
+        ...bflResponseData,
+        ...additionalParam
+      })
+    };
+
+    const bflResponse = await axios(bflOptions);
+    console.log(' ==++==++== bflResponse to get session data ==++==++==');
+    console.log(bflResponse.data);
+    if (bflResponse && bflResponse.data && bflResponse.data.status === 'success') {
+      console.log(' ==++==++== inside if -> successfully found session ==++==++==');
+      const {
+        data: { customer_session_id: sessionId }
+      } = bflResponse;
+
+      console.log(' ==++==++== post body for bfl payment gateway ==++==++==');
+      console.log('Data from bfl payment', req.body);
+      const options = {
+        url: process.env.PAYMENT_URL,
+        method: 'POST',
+        headers: {
+          Cookie: `PHPSESSID=${sessionId}; path=/; domain=.hometown.in`,
+          ContentType: 'application/x-www-form-urlencoded'
+        },
+        data: qs.stringify({
+          ...bflResponseData,
+          ...additionalParam
+        })
+      };
+      console.log(' ==++==++== post data for checkout/finish/payment ==++==++==');
+      console.log(options);
+      const response = await axios(options);
+      console.log(' ==++==++== Response from finish payment ==++==++==');
+      console.log(response.data.status);
+      if (response && response.data && response.data.status === 'success') {
+        console.log(' ==++==++== success from finish payment ==++==++==');
+        console.log(response.data);
+        return res.redirect(PAYMENT_SUCCESS);
+      }
+
+      if (response && response.data) {
+        console.log(' ==++==++== failure from finish payment ==++==++==');
+        console.log('response.data', response.data);
+        return res.redirect(`${PAYMENT_FAILURE}/?order=${response.data.order_id}`);
+      }
+    }
+
+    throw new Error('Session not found');
+  } catch (error) {
+    console.log('Error caught');
+    console.log(error);
+    return res.redirect(`${PAYMENT_FAILURE}`);
+  }
+});
 app.use('/checkout/finish/payment/', async (req, res) => {
   console.log('inside /checkout/finish/payment/ route');
   try {

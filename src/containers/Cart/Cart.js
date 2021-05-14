@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -14,6 +15,7 @@ import { togglePopUp } from 'redux/modules/webtochat';
  * Components
  */
 import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Flex from 'hometown-components-dev/lib/FlexHtV1';
 import Body from 'hometown-components-dev/lib/BodyHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
@@ -38,17 +40,79 @@ import UnbxdRecommendedForYou from '../../components/Unbxd/unbxdRecommendedForYo
  */
 const CartEmptyIcon = require('../../../static/emptyCart.png');
 const PincodeModalIcon = require('../../../static/map-placeholder.svg');
+const BajajFinance = require('../../../static/bajaj-finance.png');
+
+const HdfcLogo = 'https://static.hometown.in/media/cms/BankLOGO/hdfc.gif';
 
 const demoProductsBanner = cart =>
   // console.log('demoProducts function', cart);
   // console.log(cart.some(({ product_info: { demo_product: demoProduct } }) => demoProduct));
   cart.some(({ product_info: { demo_product: demoProduct } }) => demoProduct);
+
+const BflPopMessage = () => (
+  <Box>
+    <Flex justifyContent="center">
+      <Flex mr={20}>
+        <img height={30} src={BajajFinance} alt="baja-finance" />
+      </Flex>
+      <Flex>
+        <img height={30} src={HdfcLogo} alt="hdfc" />
+      </Flex>
+    </Flex>
+    <Heading
+      textAlign="center"
+      fontSize="1.1rem"
+      lineHeight="1.55"
+      mb="0.625rem"
+      mt="0.625rem"
+      color="rgba(51, 51, 51, 0.85)"
+      fontFamily="light"
+    >
+      You are eligible for a zero-down payment No Cost EMI from Bajaj Finance if you have a{' '}
+      <strong>Bajaj Finance EMI Card</strong>.
+    </Heading>
+    <Heading
+      textAlign="center"
+      fontSize="1.1rem"
+      lineHeight="1.55"
+      mb="0.625rem"
+      mt="0.625rem"
+      color="rgba(51, 51, 51, 0.85)"
+      fontFamily="light"
+    >
+      You are also eligible for an interest free EMI for 3 months if you have a <strong>HDFC Credit/Debit Card</strong>.
+    </Heading>
+  </Box>
+);
+
+const HdfcPopMessage = () => (
+  <Box>
+    <Flex justifyContent="center">
+      <img height={30} src={HdfcLogo} alt="hfdc" />
+    </Flex>
+    <Heading
+      textAlign="center"
+      fontSize="1.1rem"
+      lineHeight="1.55"
+      mb="0.625rem"
+      mt="0.625rem"
+      color="rgba(51, 51, 51, 0.85)"
+      fontFamily="light"
+    >
+      You are also eligible for an interest free EMI for 3 months if you have a <strong>HDFC Credit/Debit Card</strong>.
+    </Heading>
+  </Box>
+);
+
 @connect(
   ({
- cart, cart: {
+    cart,
+    cart: {
  cartChecked, summary, error, loading, loaded
-}, webtochat: { dismiss, cartTimeout }
-}) => ({
+},
+    webtochat: { dismiss, cartTimeout },
+    paymentoptions
+  }) => ({
     results: getCartList(cart),
     outOfStockList: getStockOutProducts(cart),
     isCartChecked: cartChecked,
@@ -57,7 +121,8 @@ const demoProductsBanner = cart =>
     loading,
     loaded,
     dismiss,
-    cartTimeout
+    cartTimeout,
+    bflMinAmount: paymentoptions.bflMinAmount
   }),
   {
     resetCheckKey: resetCheck,
@@ -76,7 +141,8 @@ export default class CartContainer extends Component {
     // loaded: PropTypes.bool,
     dismiss: PropTypes.bool,
     cartTimeout: PropTypes.number.isRequired,
-    toggleWebToChat: PropTypes.func.isRequired
+    toggleWebToChat: PropTypes.func.isRequired,
+    bflMinAmount: PropTypes.number.isRequired
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -191,10 +257,15 @@ export default class CartContainer extends Component {
   };
   render() {
     const {
- results, summary, loading, outOfStockList
-} = this.props;
-    const { responsiveModalContent, open } = this.state;
-    // console.log(loaded);
+      results,
+      summary,
+      summary: { total },
+      loading,
+      outOfStockList,
+      bflMinAmount
+    } = this.props;
+    const { responsiveModalContent, open, emiPopUpShown } = this.state;
+    const modalClass = emiPopUpShown ? 'noCostEmiModal' : 'pincodeModal';
 
     return (
       <Wrapper>
@@ -243,7 +314,7 @@ export default class CartContainer extends Component {
           )}
 
           {/* Pincode Modal */}
-          <ResponsiveModal classNames={{ modal: 'pincodeModal' }} onCloseModal={this.handleModal} open={open}>
+          <ResponsiveModal classNames={{ modal: modalClass }} onCloseModal={this.handleModal} open={open}>
             {responsiveModalContent === 'pincodeModal' ? (
               <Box>
                 <Image width="100px" m="auto" mb="1.5rem" src={PincodeModalIcon} alt="Pincode" />
@@ -262,19 +333,7 @@ export default class CartContainer extends Component {
             ) : null}
 
             {responsiveModalContent === 'emiModal' ? (
-              <Box>
-                <Heading
-                  textAlign="center"
-                  fontSize="1.25rem"
-                  lineHeight="1.45"
-                  mb="0.625rem"
-                  mt="0"
-                  color="rgba(51, 51, 51, 0.85)"
-                  fontFamily="light"
-                >
-                  You are eligible for an interest free EMI for 3 months if you have a HDFC Debit/Credit Card
-                </Heading>
-              </Box>
+              <Box>{total > bflMinAmount ? <BflPopMessage /> : <HdfcPopMessage />}</Box>
             ) : null}
           </ResponsiveModal>
 

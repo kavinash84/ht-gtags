@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 /* ====== Components ====== */
 import Body from 'hometown-components-dev/lib/BodyHtV1';
@@ -10,13 +11,15 @@ import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 import Footer from 'components/Footer';
 import Header from 'components/Header';
 import PaymentFailure from 'newComponents/PaymentFailure';
+import BflPaymentFailure from 'newComponents/BflPaymentFailure';
 
-export default class PaymentFailureContainer extends Component {
+class PaymentFailureContainer extends Component {
   render() {
     const {
       match: {
         params: { orderId }
-      }
+      },
+      emiPaymentType
     } = this.props;
     return (
       <Wrapper>
@@ -26,7 +29,7 @@ export default class PaymentFailureContainer extends Component {
 
           {/* Container */}
           <Container mt={60}>
-            <PaymentFailure orderId={orderId} />
+            {emiPaymentType === 'bfl' ? <BflPaymentFailure /> : <PaymentFailure orderId={orderId} />}
           </Container>
 
           {/* Footer */}
@@ -40,5 +43,20 @@ export default class PaymentFailureContainer extends Component {
 PaymentFailureContainer.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.object
-  }).isRequired
+  }).isRequired,
+  emiPaymentType: PropTypes.string
 };
+
+PaymentFailureContainer.defaultProps = {
+  emiPaymentType: ''
+};
+
+PaymentFailureContainer.contextTypes = {
+  store: PropTypes.object.isRequired
+};
+
+const mapStateToProps = ({ app: { emiPaymentType } }) => ({
+  emiPaymentType
+});
+
+export default connect(mapStateToProps, null)(PaymentFailureContainer);
