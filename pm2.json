@@ -16,7 +16,7 @@
         "APIPORT": 443,
         "SITE_URL": "https://www.hometown.in",
         "PAYMENT_URL": "https://alice.hometown.in/checkout/finish/payment/",
-        "BFL_PAYMENT_URL": "http://alice.hometown.in/checkout/finish/bflpayment/",
+        "BFL_PAYMENT_URL": "https://alice.hometown.in/checkout/finish/bflpayment/",
         "TZ": "Asia/Kolkata"
       },
       "env_beta": {
