@@ -80,7 +80,9 @@ export default function admitadMiddleware() {
             });
 
             const channel = getChannelForAdmitAd('source');
+            console.log('Create orderItem for ADMITAD', orderedItem);
             if (window.ADMITAD.Invoice && window.ADMITAD.Invoice.referencesOrder) {
+              console.log('inside if object exist for admitad and invoice', window.ADMITAD);
               window.ADMITAD.Invoice.referencesOrder = window.ADMITAD.Invoice.referencesOrder || [];
               window.ADMITAD.Invoice.referencesOrder.push({
                 orderNumber: orderNo,
@@ -88,6 +90,7 @@ export default function admitadMiddleware() {
               });
               window.ADMITAD.Invoice.broker = channel;
               window.ADMITAD.Invoice.category = '1';
+              console.log('window variable set', window.ADMITAD);
             }
           }
         }
