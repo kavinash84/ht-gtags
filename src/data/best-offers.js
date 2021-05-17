@@ -6,7 +6,7 @@ const listingBestOffers = [
           id: 1,
           title: 'Best Offers',
           description: 'Best Offers',
-          image: 'https://www.hometown.in/media/cms/icons/Bhushan/HT_Akshay-tritya-sale-web-banner.jpg',
+          image: require('../../static/campaign/best-offers-05.jpeg'),
           type: 'webview_layout',
           meta: { name: 'Best Offers', id: 'Best Offers' }
         }
@@ -18,7 +18,7 @@ const listingBestOffers = [
           id: 1,
           title: 'Best Offers',
           description: 'Best Offers',
-          image: 'https://www.hometown.in/media/cms/icons/Bhushan/HT_Akshay-tritya-sale-web-banner.jpg',
+          image: require('../../static/campaign/best-offers-05.jpeg'),
           type: 'webview_layout',
           meta: { name: 'Best Offers', id: 'Best Offers' }
         }
