@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 /**
+ * modules / selectors / helpers
+ */
+import { setEmiPaymentType } from 'redux/modules/app';
+/**
  * Components
  */
 import Box from 'hometown-components-dev/lib/BoxHtV1';
@@ -12,10 +16,12 @@ import Label from 'hometown-components-dev/lib/LabelHtV1';
  */
 import BankCardForZeroEmi from './BankCardForZeroEmi';
 import CardForm from './CardForm';
+import BajajFinance from './BajajFinance';
 
 const mapStateToProps = ({ paymentoptions, cart }) => ({
   selectedGateway: paymentoptions.selectedGateway,
   details: paymentoptions.paymentMethodDetails.EmiZero,
+  bflMinAmount: paymentoptions.bflMinAmount,
   cart
 });
 
@@ -23,6 +29,7 @@ class EmiZero extends Component {
   componentDidMount() {
     const { dispatch } = this.context.store;
     const { setPaymentDetails } = this.props;
+    dispatch(setEmiPaymentType('hdfc'));
     dispatch(setPaymentDetails({
         gateway: 'EmiZero',
         data: { emiCode: 'EMI3', emiBank: 'hdfc', cardType: 'credit' }
@@ -36,10 +43,12 @@ class EmiZero extends Component {
       details,
       cart: {
         summary: { total }
-      }
+      },
+      bflMinAmount
     } = this.props;
     return (
       <Box>
+        {total > bflMinAmount ? <BajajFinance bflMinAmount={bflMinAmount} /> : null}
         <Box pb={20}>
           <Label for="bankOptions1" color="textLight">
             Choose From Preferred Bank (Available on debit/credit cards for order value &gt; Rs. 20000)
@@ -116,5 +125,6 @@ EmiZero.propTypes = {
   selectedGateway: PropTypes.string.isRequired,
   setPaymentDetails: PropTypes.func.isRequired,
   cart: PropTypes.func.isRequired,
-  details: PropTypes.object.isRequired
+  details: PropTypes.object.isRequired,
+  bflMinAmount: PropTypes.number.isRequired
 };

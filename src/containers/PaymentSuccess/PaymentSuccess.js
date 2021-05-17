@@ -29,7 +29,7 @@ import ThankYou from 'newComponents/ThankYou';
  */
 import { formatAmount } from 'utils/formatters';
 import { formatProductURL, allowNChar } from 'utils/helper';
-import { paymentLoaded as setPaymentLoadStatus } from 'redux/modules/app';
+import { paymentLoaded as setPaymentLoadStatus, setEmiPaymentType } from 'redux/modules/app';
 import { validatePassword } from 'utils/validation';
 
 import { isBlank } from 'js-utility-functions';
@@ -79,6 +79,7 @@ class PaymentSuccess extends Component {
         type: 'PUSH_TO_DATALAYER'
       });
       dispatch(setPaymentLoadStatus(true));
+      dispatch(setEmiPaymentType(''));
     }
   };
 
@@ -87,6 +88,7 @@ class PaymentSuccess extends Component {
     if (prevProps.isLoggedIn !== isLoggedIn && !isLoggedIn) {
       // console.log('redirect check');
       // return history.push('/');
+      // eslint-disable-next-line react/no-did-update-set-state
       this.setState({
         showSetPassword: false
       });

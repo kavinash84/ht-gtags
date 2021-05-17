@@ -1,11 +1,11 @@
 import { createSelector } from 'reselect';
 
 const allowedOptions = () => [
+  'EmiZero',
+  'Emi',
   'CreditCard',
   'DebitCard',
   'NetBanking',
-  'EmiZero',
-  'Emi',
   'CashOnDelivery',
   'Wallet',
   'EasyEmi',
@@ -50,4 +50,7 @@ export const getEasyEmiConfig = createSelector(
 );
 
 export const getEmiBanks = createSelector([getAllEMIBanks], banks =>
-  Object.values(banks.bankDetails).map(x => ({ bank: x.bank, values: Object.values(x.emiOptions) })));
+  // eslint-disable-next-line max-len
+  Object.keys(banks).length
+    ? Object.values(banks.bankDetails).map(x => ({ bank: x.bank, values: Object.values(x.emiOptions) }))
+    : []);

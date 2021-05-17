@@ -24,7 +24,7 @@ const listingBestOffers = [
         }
       ]
     },
-    '/home-furnishings/mothers-day': {
+    '/home-furnishings/special-offer': {
       images: [
         {
           id: 1,

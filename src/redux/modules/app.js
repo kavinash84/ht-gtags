@@ -9,6 +9,7 @@ const SET_CITY = 'app/SET_CITY';
 const SET_ORDER_ID = 'app/SET_ORDER_ID';
 const SET_WALLET_NAME = 'app/SET_WALLET';
 const PAYMENT_LOADED = 'app/PAYMENT_LOADED';
+const EMI_PAYMENT_TYPE = 'app/EMI_PAYMENT_TYPE';
 const initialState = {
   loaded: false,
   sessionId: '',
@@ -16,7 +17,8 @@ const initialState = {
   orderId: '',
   walletName: '',
   walletType: {},
-  paymentLoaded: false
+  paymentLoaded: false,
+  emiPaymentType: ''
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -63,6 +65,11 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         paymentLoaded: action.status
+      };
+    case EMI_PAYMENT_TYPE:
+      return {
+        ...state,
+        emiPaymentType: action.name
       };
     default:
       return state;
@@ -112,4 +119,9 @@ export const setOrderId = (id, customerId, walletType) => ({
 export const paymentLoaded = status => ({
   type: PAYMENT_LOADED,
   status
+});
+
+export const setEmiPaymentType = name => ({
+  type: EMI_PAYMENT_TYPE,
+  name
 });

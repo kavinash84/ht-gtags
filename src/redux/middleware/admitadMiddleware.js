@@ -41,6 +41,7 @@ export default function admitadMiddleware() {
           location: { pathname }
         } = getState().router;
         if (type === 'PUSH_TO_DATALAYER' && pathname && pathname === '/payment-success') {
+          console.log('inside if /payment-success', window.ADMITAD);
           const {
             paymentstatus: { data }
           } = getState();
@@ -79,7 +80,6 @@ export default function admitadMiddleware() {
             });
 
             const channel = getChannelForAdmitAd('source');
-            console.log('value of getChannelForAdmitAd', channel);
             if (window.ADMITAD.Invoice && window.ADMITAD.Invoice.referencesOrder) {
               window.ADMITAD.Invoice.referencesOrder = window.ADMITAD.Invoice.referencesOrder || [];
               window.ADMITAD.Invoice.referencesOrder.push({
@@ -87,7 +87,7 @@ export default function admitadMiddleware() {
                 orderedItem
               });
               window.ADMITAD.Invoice.broker = channel;
-              console.log('window.ADMITAD.Invoice.broker = channel - ', (window.ADMITAD.Invoice.broker = channel));
+              window.ADMITAD.Invoice.category = '1';
             }
           }
         }

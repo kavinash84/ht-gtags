@@ -170,6 +170,15 @@ const paymentObject = (sessionId, selectedGateway, paymentData, cardType = 'visa
       emi_cc_security_code: cvv
     };
   } else if (selectedGateway === 'EmiZero') {
+    // For Bajaj Finance EMI
+    if (!paymentData) {
+      return {
+        ...paymentJSON,
+        session_id: sessionId,
+        payment_method_type: 'Emi',
+        payment_method: 'BFL'
+      };
+    }
     const {
  emiBank, emiCode, nameOnCard, cardNumber, cvv, expMonth, expYear, cardType: type
 } = paymentData;
@@ -223,6 +232,18 @@ const paymentObject = (sessionId, selectedGateway, paymentData, cardType = 'visa
     };
   }
 };
+
+const getSelectedGateway = data => {
+  console.log('getSelectedGateway function', data);
+  const {
+    cart: {
+      summary: { total }
+    }
+  } = data;
+
+  return total < 20000 ? 'Emi' : 'EmiZero';
+};
+
 const emiZero = result => {
   console.log('Adding zero emi', result);
   let {
@@ -258,19 +279,30 @@ const emiZero = result => {
 const initialState = {
   loaded: false,
   data: null,
-  selectedGateway: 'CreditCard',
+  selectedGateway: 'Emi',
   isFormValid: false,
   cardType: 'other',
   cardTypeError: null,
   paymentMethodDetails: {
-    CreditCard: {
+    Emi: {
       nameOnCard: '',
       cardNumber: '',
       cvv: '',
       expMonth: '',
       expYear: ''
+    },
+    EmiZero: {
+      cardNumber: '',
+      cvv: '',
+      emiBank: '',
+      emiCode: '',
+      expMonth: '',
+      expYear: '',
+      nameOnCard: '',
+      type: 'other'
     }
   },
+  bflMinAmount: 25000,
   submitting: false,
   submitted: false
 };
@@ -332,7 +364,8 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: true,
-        data: emiZero(action.result, action.cart)
+        data: emiZero(action.result, action.cart),
+        selectedGateway: getSelectedGateway(action.result)
       };
     case LOAD_FAIL:
       return {
@@ -583,6 +616,23 @@ export const submitPaymentDetails = (sessionId, data, cardType, selectedGateway,
     selectedGateway
   };
 };
+
+export const submitBflPaymentDetails = (sessionId, selectedGateway) => ({
+  types: [SUBMIT_PAYMENT_DETAILS, SUBMIT_PAYMENT_DETAILS_SUCCESS, SUBMIT_PAYMENT_DETAILS_FAIL],
+  promise: async ({ client }) => {
+    try {
+      const postData = paymentObject(sessionId, selectedGateway);
+      const response = await client.post('tesla/orders', postData);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+  // walletType,
+  // data,
+  // cardType,
+  // selectedGateway
+});
 
 export const verifyEasyEmi = (data, session) => ({
   types: [SUBMIT_EASY_EMI_PAYMENT_VERIFY, SUBMIT_EASY_EMI_PAYMENT_VERIFY_SUCCESS, SUBMIT_EASY_EMI_PAYMENT_VERIFY_FAIL],
