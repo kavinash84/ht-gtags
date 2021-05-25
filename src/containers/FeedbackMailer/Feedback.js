@@ -321,7 +321,7 @@ class FeedbackMailer extends React.Component {
           </Box>
           <Row variant="col-8" ml="0" mr="0" alignItems="center">
             {console.log(prod.img, prod.name, 'img and name')}
-            <Img src={prod.img} height="64px" mr="15px" />
+            <Img src={prod.img ? prod.img : null} height="64px" mr="15px" />
             <Text fontFamily="medium" fontSize="16px">
               {prod.name}
             </Text>
