@@ -310,6 +310,7 @@ class FeedbackMailer extends React.Component {
     } else {
       products = prodArr;
     }
+    console.log(products, 'products');
     const renderProds = products.map(prod => (
       <Box style={{ background: '#f0f0f0' }} p="20px" mb="10px">
         <Row alignItems="center" mb="20px">
@@ -319,6 +320,7 @@ class FeedbackMailer extends React.Component {
             </Text>
           </Box>
           <Row variant="col-8" ml="0" mr="0" alignItems="center">
+            {console.log(prod.img, prod.name, 'img and name')}
             <Img src={prod.img} height="64px" mr="15px" />
             <Text fontFamily="medium" fontSize="16px">
               {prod.name}
