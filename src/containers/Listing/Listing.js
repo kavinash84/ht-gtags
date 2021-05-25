@@ -320,11 +320,9 @@ export default class Listing extends Component {
               </Container>
             </Box>
           )}
-          {showBestOffers ? (
-            <Box sx={btnStyle} onClick={this.scrollDown}>
-              <MainSlider data={banners} />
-            </Box>
-          ) : null}
+          <Box sx={btnStyle} onClick={this.scrollDown}>
+            <MainSlider data={banners} />
+          </Box>
           <div ref={this.listingRef}>
             <Box>
               <ListingContainer
