@@ -3,11 +3,14 @@ export const BANNERS = 'tesla/banners/desktop';
 export const CATEGORY_MENU = 'tesla/categories';
 export const PINCODE = 'tesla/locations/pincode';
 export const HOMEPAGE_CATEGORIES = 'tesla/page-sections/home/categories';
-// export const HOMEPAGE_INSTAFEEDS = 'tesla/page-sections/home/instafeeds';
 export const HOMEPAGE_TOP_SELLING = 'tesla/page-sections/home/products';
 export const STORES = 'tesla/stores';
 export const HASHTAGS = 'tesla/hashtags';
 export const STATIC_BLOCK = 'tesla/static';
+export const TERMS = 'tesla/static/landingpage/terms_and_conditions';
+export const CANCELLATION = 'tesla/static/landingpage/cancellation_policy';
+export const PRIVACY = 'tesla/static/landingpage/privacy-policy';
+export const RETURN = 'tesla/static/landingpage/return_policy';
 
 /* Authentication */
 export const LOGIN = 'tesla/authentication/login';
@@ -42,6 +45,7 @@ export const WISHLIST = 'tesla/wishlist';
 
 /* Listing */
 export const OFFER = 'tesla/categories/coupon';
+export const LISTING_BANNER = 'tesla/static/listing_page_best_offer';
 
 /* Cart */
 export const ADDTOCART = 'tesla/cart';
@@ -86,7 +90,6 @@ export const BULK_ORDER = 'tesla/bulk-order';
 export const CASE_ORDER = 'tesla/users/insertcase';
 export const SUBSCRIPTION = 'tesla/users/subscribe-us';
 export const PROMOTIONS = 'tesla/static/text/promotions_react';
-export const RETURN_POLICY = 'tesla/static/landingpage/return_policy';
 export const CALL_BACK = 'tesla/call-back';
 
 /* Pincode */

@@ -300,25 +300,28 @@ class Listing extends React.Component {
     // console.log(display);
     return (
       <Box>
-        <TitleBar title={categoryName} productCount={productCount} display={display}>
-          <BreadCrumb categoryDetails={breadCrumbs} handleCategoryClick={this.handleCategoryClick} />
-        </TitleBar>
-        <CategoryBar
-          pathname={history.location.pathname}
-          categoryBar={categoryBar}
-          handleCategoryClick={this.handleCategoryClick}
-          display={display}
-        />
-        <UnbxdListing />
-        <ResponsiveModal
-          classNames={{ modal: 'loginModal' }}
-          onCloseModal={this.handleLoginModal}
-          open={this.state.openLogin}
-        >
-          <Box py={32} px={32}>
-            <LoginModal />
-          </Box>
-        </ResponsiveModal>
+        {/* <BestOfferBanners bannerData={bannerData} history={history} /> */}
+        <Box>
+          <TitleBar title={categoryName} productCount={productCount} display={display}>
+            <BreadCrumb categoryDetails={breadCrumbs} handleCategoryClick={this.handleCategoryClick} />
+          </TitleBar>
+          <CategoryBar
+            pathname={history.location.pathname}
+            categoryBar={categoryBar}
+            handleCategoryClick={this.handleCategoryClick}
+            display={display}
+          />
+          <UnbxdListing />
+          <ResponsiveModal
+            classNames={{ modal: 'loginModal' }}
+            onCloseModal={this.handleLoginModal}
+            open={this.state.openLogin}
+          >
+            <Box py={32} px={32}>
+              <LoginModal />
+            </Box>
+          </ResponsiveModal>
+        </Box>
       </Box>
     );
   }
