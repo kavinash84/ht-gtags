@@ -5,11 +5,11 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { getSKUList } from 'selectors/wishlist';
 import { getCartListSKU } from 'selectors/cart';
+import { storesList as getStaticData } from 'selectors/homepage';
 import { setReloadListing } from 'redux/modules/products';
 
 import Box from 'hometown-components-dev/lib/BoxHtV1';
 import ListingContainer from 'components/Listing';
-import MainSlider from 'components/MainSlider';
 import Footer from 'components/Footer';
 import Header from 'components/Header';
 import SeoContent from 'components/SeoContent';
@@ -31,7 +31,7 @@ import {
 } from 'selectors/products';
 import { SITE_URL } from 'helpers/Constants';
 import CANONICALS from 'data/canonical';
-import { listingBestOffers, listingBestOffersPath } from 'data/best-offers';
+// import { listingBestOffers, listingBestOffersPath } from 'data/best-offers';
 
 @connect(state => ({
   loading: state.products.loading,
@@ -60,7 +60,8 @@ import { listingBestOffers, listingBestOffersPath } from 'data/best-offers';
   sessionId: state.app.sessionId,
   cartSKUs: getCartListSKU(state.cart),
   reloadListing: state.products.reloadListing,
-  offer: state.offer
+  offer: state.offer,
+  bannerData: getStaticData(state.listingbanners)
 }))
 @withRouter
 export default class Listing extends Component {
@@ -91,7 +92,8 @@ export default class Listing extends Component {
     sessionId: PropTypes.string.isRequired,
     cartSKUs: PropTypes.array,
     reloadListing: PropTypes.bool,
-    offer: PropTypes.object
+    offer: PropTypes.object,
+    bannerData: PropTypes.object
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -120,7 +122,8 @@ export default class Listing extends Component {
     selectedPincode: '',
     cartSKUs: [],
     reloadListing: false,
-    offer: {}
+    offer: {},
+    bannerData: {}
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.pincode !== this.props.pincode) {
@@ -255,7 +258,8 @@ export default class Listing extends Component {
       sessionId,
       cartSKUs,
       reloadListing,
-      offer
+      offer,
+      bannerData
     } = this.props;
     let page;
     const {
@@ -266,9 +270,9 @@ export default class Listing extends Component {
     } else page = currentPage;
     const previousPage = !page || Number(page) === 1 ? '' : `?page=${page - 1}`;
     const NextPage = !page ? '?page=2' : `?page=${Number(page) + 1}`;
-    const showBestOffers = listingBestOffersPath.some(arr => arr === pathname);
-    let banners = [];
-    if (showBestOffers) banners = listingBestOffers[0][pathname].images;
+    // const showBestOffers = listingBestOffersPath.some(arr => arr === pathname);
+    // let banners = [];
+    // if (showBestOffers) banners = listingBestOffers[0][pathname].images;
     // console.log('listingBestOffers[pathname]', listingBestOffers[0][pathname]);
     /* eslint-disable react/no-danger */
     return (
@@ -294,7 +298,8 @@ export default class Listing extends Component {
               </Container>
             </Box>
           )}
-          {showBestOffers ? <MainSlider data={banners} /> : null}
+          {/* {showBestOffers ? <MainSlider data={banners} /> : null}
+          <BestOfferBanners /> */}
           <Box>
             <ListingContainer
               wishList={wishListedSKUs}
@@ -319,6 +324,7 @@ export default class Listing extends Component {
               cartSKUs={cartSKUs}
               reloadListing={reloadListing}
               setReloadListing={setReloadListing}
+              bannerData={bannerData}
             />
             {seoInfo && seoInfo.seo_text && (
               <SeoContent>
