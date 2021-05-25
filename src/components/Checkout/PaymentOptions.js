@@ -321,14 +321,14 @@ class PaymentOptions extends Component {
                     </Box>
                   </Fragment>
                 )}
-                {selectedGateway === 'Emi' && (
+                {selectedGateway === 'Emi' && paymentDetails.Emi && (
                   <Emi
                     selectedGateway={selectedGateway}
                     setPaymentDetails={setPaymentDetails}
                     currentSelection={paymentDetails.Emi.emiBank}
                   />
                 )}
-                {selectedGateway === 'EmiZero' && (
+                {selectedGateway === 'EmiZero' && paymentDetails.EmiZero && (
                   <EmiZero
                     selectedGateway={selectedGateway}
                     setPaymentDetails={setPaymentDetails}

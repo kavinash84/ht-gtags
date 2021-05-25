@@ -32,7 +32,7 @@ import BulkOrder from 'containers/BulkOrder';
 import Brand from 'containers/Brand';
 import ContactUs from 'containers/ContactUs';
 import Feedback from 'containers/Feedback';
-// import FeedbackMailer from 'containers/FeedbackMailer';
+import FeedbackMailer from 'containers/FeedbackMailer';
 import ServiceRequest from 'containers/ServiceRequest';
 import CaseRequest from 'containers/CaseRequest';
 import ServiceSignUpContainer from 'components/ServiceSignUp';
@@ -165,7 +165,7 @@ const routes = [
       { path: '/store-locator', exact: true, component: StoreLocator },
       { path: '/contact-us', exact: true, component: ContactUs },
       { path: '/feedback', exact: true, component: Feedback },
-      // { path: '/feedback-mailer/:id', exact: true, component: FeedbackMailer },
+      { path: '/feedback-mailer/:id', exact: true, component: FeedbackMailer },
       { path: '/service-request', exact: true, component: ServiceRequest },
       { path: '/case-request', exact: true, component: CaseRequest },
       { path: '/grievance', exact: true, component: Grievance },

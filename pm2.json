@@ -16,6 +16,7 @@
         "APIPORT": 443,
         "SITE_URL": "https://www.hometown.in",
         "PAYMENT_URL": "https://alice.hometown.in/checkout/finish/payment/",
+        "BFL_PAYMENT_URL": "https://alice.hometown.in/checkout/finish/bflpayment/",
         "TZ": "Asia/Kolkata"
       },
       "env_beta": {
@@ -28,6 +29,7 @@
         "APIPORT": 443,
         "SITE_URL": "https://beta.hometown.in",
         "PAYMENT_URL": "https://beta-alice.hometown.in/checkout/finish/payment/",
+        "BFL_PAYMENT_URL": "http://beta-alice.hometown.in/checkout/finish/bflpayment/",
         "TZ": "Asia/Kolkata"
       },
       "env_stage": {
@@ -40,6 +42,7 @@
         "APIPORT": 443,
         "SITE_URL": "https://stage.hometown.in",
         "PAYMENT_URL": "https://stage-alice.hometown.in/checkout/finish/payment/",
+        "BFL_PAYMENT_URL": "http://stage-alice.hometown.in/checkout/finish/bflpayment/",
         "TZ": "Asia/Kolkata"
       }
     }]
