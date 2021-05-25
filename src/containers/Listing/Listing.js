@@ -10,6 +10,7 @@ import { setReloadListing } from 'redux/modules/products';
 
 import Box from 'hometown-components-dev/lib/BoxHtV1';
 import ListingContainer from 'components/Listing';
+import BestOfferBanners from 'components/Listing/BestOfferBanners';
 import Footer from 'components/Footer';
 import Header from 'components/Header';
 import SeoContent from 'components/SeoContent';
@@ -32,6 +33,14 @@ import {
 import { SITE_URL } from 'helpers/Constants';
 import CANONICALS from 'data/canonical';
 // import { listingBestOffers, listingBestOffersPath } from 'data/best-offers';
+
+const btnStyle = {
+  backgroundColor: 'transparent',
+  padding: '0px',
+  margin: '0px',
+  outline: 'none',
+  border: 'none'
+};
 
 @connect(state => ({
   loading: state.products.loading,
@@ -125,6 +134,12 @@ export default class Listing extends Component {
     offer: {},
     bannerData: {}
   };
+
+  constructor(props) {
+    super(props);
+    this.listingRef = React.createRef();
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.pincode !== this.props.pincode) {
       const { dispatch } = this.context.store;
@@ -136,6 +151,14 @@ export default class Listing extends Component {
       history.push(`${pathname}${search}`);
     }
   }
+
+  scrollDown = () => {
+    this.listingRef.current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  };
+
   renderOffers = offer => (
     <div
       style={{
@@ -230,6 +253,7 @@ export default class Listing extends Component {
     </div>
     // )
   );
+
   render() {
     const {
       // loading,
@@ -298,41 +322,45 @@ export default class Listing extends Component {
               </Container>
             </Box>
           )}
-          {/* {showBestOffers ? <MainSlider data={banners} /> : null}
-          <BestOfferBanners /> */}
+
+          {/* Listing page best offer banners */}
+          <button style={btnStyle} onClick={() => this.scrollDown(bannerData)}>
+            <BestOfferBanners bannerData={bannerData} history={history} />
+          </button>
           <Box>
-            <ListingContainer
-              wishList={wishListedSKUs}
-              wishListData={wishListData}
-              products={products}
-              categoryName={categoryName}
-              productCount={productCount}
-              category={category}
-              filters={filters}
-              sortBy={sortBy}
-              appliedFilters={appliedFilters}
-              history={history}
-              pincode={pincode}
-              isLoggedIn={isLoggedIn}
-              loadingList={loadingList}
-              metaResults={metadata}
-              categoryquery={categoryquery}
-              breadCrumbs={breadCrumbs}
-              categoryBar={categoryBar}
-              selectedPincode={selectedPincode}
-              sessionId={sessionId}
-              cartSKUs={cartSKUs}
-              reloadListing={reloadListing}
-              setReloadListing={setReloadListing}
-              bannerData={bannerData}
-            />
+            <div ref={this.listingRef}>
+              <ListingContainer
+                wishList={wishListedSKUs}
+                wishListData={wishListData}
+                products={products}
+                categoryName={categoryName}
+                productCount={productCount}
+                category={category}
+                filters={filters}
+                sortBy={sortBy}
+                appliedFilters={appliedFilters}
+                history={history}
+                pincode={pincode}
+                isLoggedIn={isLoggedIn}
+                loadingList={loadingList}
+                metaResults={metadata}
+                categoryquery={categoryquery}
+                breadCrumbs={breadCrumbs}
+                categoryBar={categoryBar}
+                selectedPincode={selectedPincode}
+                sessionId={sessionId}
+                cartSKUs={cartSKUs}
+                reloadListing={reloadListing}
+                setReloadListing={setReloadListing}
+                bannerData={bannerData}
+              />
+            </div>
             {seoInfo && seoInfo.seo_text && (
               <SeoContent>
                 <div dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }} />
               </SeoContent>
             )}
           </Box>
-
           <Footer />
         </Body>
       </Wrapper>

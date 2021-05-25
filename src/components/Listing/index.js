@@ -16,7 +16,6 @@ import BreadCrumb from './BreadCrumb';
 import CategoryBar from './CategoryBar';
 import TitleBar from './TitleBar';
 import UnbxdListing from './UnbxdListing';
-import BestOfferBanners from './BestOfferBanners';
 
 // const sortByList = require('data/sortby');
 
@@ -294,14 +293,14 @@ class Listing extends React.Component {
   };
   render() {
     const {
- categoryName, productCount, breadCrumbs, history, categoryBar, bannerData
+ categoryName, productCount, breadCrumbs, history, categoryBar
 } = this.props;
     const { display } = this.state;
     // const uniqueFilters = {};
     // console.log(display);
     return (
       <Box>
-        <BestOfferBanners bannerData={bannerData} history={history} />
+        {/* <BestOfferBanners bannerData={bannerData} history={history} /> */}
         <Box>
           <TitleBar title={categoryName} productCount={productCount} display={display}>
             <BreadCrumb categoryDetails={breadCrumbs} handleCategoryClick={this.handleCategoryClick} />
@@ -342,8 +341,7 @@ Listing.defaultProps = {
   isLoggedIn: false,
   // categoryquery: '',
   categoryBar: [],
-  reloadListing: false,
-  bannerData: {}
+  reloadListing: false
   // display: 'block
 };
 
@@ -373,8 +371,7 @@ Listing.propTypes = {
   setPincodeToStore: PropTypes.func.isRequired,
   setPincodeFilterToStore: PropTypes.func.isRequired,
   reloadListing: PropTypes.bool,
-  setReloadListing: PropTypes.func.isRequired,
-  bannerData: PropTypes.object
+  setReloadListing: PropTypes.func.isRequired
   // display: PropTypes.string.isRequired
 };
 
