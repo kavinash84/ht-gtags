@@ -39,7 +39,9 @@ export default function admitadMiddleware() {
       if (window && window.ADMITAD) {
         const {
           location: { pathname }
-        } = getState().router;
+        } = window;
+        console.log(type, pathname);
+        console.log('type === PUSH_TO_DATALAYER', type === 'PUSH_TO_DATALAYER');
         if (type === 'PUSH_TO_DATALAYER' && pathname && pathname === '/payment-success') {
           console.log('inside if /payment-success', window.ADMITAD);
           const {
