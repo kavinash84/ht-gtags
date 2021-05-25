@@ -60,9 +60,22 @@ class FeedbackMailer extends React.Component {
       formData: {},
       validFeedback: true,
       submitClicked: false,
-      images: {}
+      images: {},
+      products: []
     };
   }
+
+  componentDidMount() {
+    this.initialRender();
+  }
+
+  // componentDidUpdate() {
+  //   const { showMore } = this.state;
+  //   const { prodArr } = this.props;
+  //   this.setState({
+  //     products: !showMore ? prodArr.slice(0,2) : prodArr
+  //   })
+  // }
 
   setValidErrorObject = val => {
     if (!val.rating) {
@@ -90,10 +103,28 @@ class FeedbackMailer extends React.Component {
     return val;
   };
 
-  showMoreHandler = () => {
+  initialRender = () => {
+    const { showMore } = this.state;
+    const { prodArr } = this.props;
     this.setState({
-      showMore: !this.state.showMore
+      products: !showMore ? prodArr.slice(0, 2) : prodArr
     });
+  };
+
+  showMoreHandler = () => {
+    // const { showMore } = this.state;
+    const { prodArr } = this.props;
+    this.setState(
+      {
+        showMore: !this.state.showMore
+      },
+      () => {
+        // console.log(this.state.showMore, 'showMore');
+        this.setState({
+          products: this.state.showMore ? prodArr : prodArr.slice(0, 2)
+        });
+      }
+    );
   };
 
   validateForm = form => {
@@ -292,15 +323,16 @@ class FeedbackMailer extends React.Component {
     this.setState({ ...this.state });
   };
 
-  renderProducts = prodArr => {
+  renderProducts = () => {
     const { orderDate } = this.props;
-    const { formData, images } = this.state;
-    let products = [];
-    if (!this.state.showMore) {
-      products = prodArr.slice(0, 2);
-    } else {
-      products = prodArr;
-    }
+    const { formData, images, products } = this.state;
+    // let products = [];
+    // if (!this.state.showMore) {
+    //   // products = prodArr.slice(0, 2);
+    //   products = prodArr;
+    // } else {
+    //   products = prodArr;
+    // }
     const renderProds = products.map(prod => (
       <Box style={{ background: '#f0f0f0' }} p="20px" mb="10px">
         <Row alignItems="center" mb="20px">
