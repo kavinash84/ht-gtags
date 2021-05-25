@@ -45,6 +45,7 @@ export const WISHLIST = 'tesla/wishlist';
 
 /* Listing */
 export const OFFER = 'tesla/categories/coupon';
+export const LISTING_BANNER = 'tesla/static/listing_page_best_offer';
 
 /* Cart */
 export const ADDTOCART = 'tesla/cart';

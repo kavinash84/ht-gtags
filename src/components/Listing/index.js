@@ -16,6 +16,7 @@ import BreadCrumb from './BreadCrumb';
 import CategoryBar from './CategoryBar';
 import TitleBar from './TitleBar';
 import UnbxdListing from './UnbxdListing';
+import BestOfferBanners from './BestOfferBanners';
 
 // const sortByList = require('data/sortby');
 
@@ -293,32 +294,35 @@ class Listing extends React.Component {
   };
   render() {
     const {
- categoryName, productCount, breadCrumbs, history, categoryBar
+ categoryName, productCount, breadCrumbs, history, categoryBar, bannerData
 } = this.props;
     const { display } = this.state;
     // const uniqueFilters = {};
     // console.log(display);
     return (
       <Box>
-        <TitleBar title={categoryName} productCount={productCount} display={display}>
-          <BreadCrumb categoryDetails={breadCrumbs} handleCategoryClick={this.handleCategoryClick} />
-        </TitleBar>
-        <CategoryBar
-          pathname={history.location.pathname}
-          categoryBar={categoryBar}
-          handleCategoryClick={this.handleCategoryClick}
-          display={display}
-        />
-        <UnbxdListing />
-        <ResponsiveModal
-          classNames={{ modal: 'loginModal' }}
-          onCloseModal={this.handleLoginModal}
-          open={this.state.openLogin}
-        >
-          <Box py={32} px={32}>
-            <LoginModal />
-          </Box>
-        </ResponsiveModal>
+        <BestOfferBanners bannerData={bannerData} history={history} />
+        <Box>
+          <TitleBar title={categoryName} productCount={productCount} display={display}>
+            <BreadCrumb categoryDetails={breadCrumbs} handleCategoryClick={this.handleCategoryClick} />
+          </TitleBar>
+          <CategoryBar
+            pathname={history.location.pathname}
+            categoryBar={categoryBar}
+            handleCategoryClick={this.handleCategoryClick}
+            display={display}
+          />
+          <UnbxdListing />
+          <ResponsiveModal
+            classNames={{ modal: 'loginModal' }}
+            onCloseModal={this.handleLoginModal}
+            open={this.state.openLogin}
+          >
+            <Box py={32} px={32}>
+              <LoginModal />
+            </Box>
+          </ResponsiveModal>
+        </Box>
       </Box>
     );
   }
@@ -338,7 +342,8 @@ Listing.defaultProps = {
   isLoggedIn: false,
   // categoryquery: '',
   categoryBar: [],
-  reloadListing: false
+  reloadListing: false,
+  bannerData: {}
   // display: 'block
 };
 
@@ -368,7 +373,8 @@ Listing.propTypes = {
   setPincodeToStore: PropTypes.func.isRequired,
   setPincodeFilterToStore: PropTypes.func.isRequired,
   reloadListing: PropTypes.bool,
-  setReloadListing: PropTypes.func.isRequired
+  setReloadListing: PropTypes.func.isRequired,
+  bannerData: PropTypes.object
   // display: PropTypes.string.isRequired
 };
 
