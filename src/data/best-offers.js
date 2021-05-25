@@ -42,7 +42,7 @@ const listingBestOffers = [
           id: 1,
           title: 'Best Offers',
           description: 'Best Offers',
-          image: require('../../static/campaign/best-offers-05.jpeg'),
+          image: require('../../static/campaign/best-offers-07.jpeg'),
           type: 'webview_layout',
           meta: { name: 'Best Offers', id: 'Best Offers' }
         }
@@ -54,7 +54,7 @@ const listingBestOffers = [
           id: 1,
           title: 'Best Offers',
           description: 'Best Offers',
-          image: require('../../static/campaign/best-offers-05.jpeg'),
+          image: require('../../static/campaign/best-offers-06.jpeg'),
           type: 'webview_layout',
           meta: { name: 'Best Offers', id: 'Best Offers' }
         }
