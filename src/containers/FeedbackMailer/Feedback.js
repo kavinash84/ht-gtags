@@ -64,14 +64,14 @@ class FeedbackMailer extends React.Component {
     };
   }
 
-  componentDidMount() {
-    const { getFeedbackForm } = this.props;
-    const pathName = window.location.pathname;
-    const id = pathName.split('/')[`${pathName.split('/').length - 1}`];
-    // console.log(pathName.split('/')[`${pathName.split('/').length - 1}`])
-    // console.log(pathName.split('/'), pathName.split('/').length, 'pathname')
-    getFeedbackForm(id);
-  }
+  // componentDidMount() {
+  //   const { getFeedbackForm } = this.props;
+  //   const pathName = window.location.pathname;
+  //   const id = pathName.split('/')[`${pathName.split('/').length - 1}`];
+  //   // console.log(pathName.split('/')[`${pathName.split('/').length - 1}`])
+  //   // console.log(pathName.split('/'), pathName.split('/').length, 'pathname')
+  //   getFeedbackForm(id);
+  // }
 
   setValidErrorObject = val => {
     if (!val.rating) {
@@ -590,7 +590,7 @@ FeedbackMailer.propTypes = {
   prodArr: PropTypes.array,
   orderDate: PropTypes.string,
   setFeedbackForm: PropTypes.func.isRequired,
-  getFeedbackForm: PropTypes.func.isRequired,
+  // getFeedbackForm: PropTypes.func.isRequired,
   mobile: PropTypes.string,
   feedback: PropTypes.object.isRequired
 };
