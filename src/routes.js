@@ -39,6 +39,7 @@ import ServiceSignUpContainer from 'components/ServiceSignUp';
 
 /* user */
 import Profile from 'containers/Profile';
+import MyHomeWallet from 'containers/MyHomeWallet';
 import MyOrder from 'containers/MyOrder';
 import OrderAndReturns from 'containers/OrderAndReturns';
 import MyAddress from 'containers/MyAddress';
@@ -126,6 +127,7 @@ const routes = [
       },
       { path: '/my-cases', exact: true, component: isAuthenticated(MyCases) },
       { path: '/profile', exact: true, component: isAuthenticated(Profile) },
+      { path: '/my-hometown-wallet', exact: true, component: isAuthenticated(MyHomeWallet) },
       {
         path: '/my-dashboard',
         exact: true,
