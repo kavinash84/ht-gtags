@@ -211,7 +211,7 @@ class PaymentOptions extends Component {
                       <Heading color="white" fontSize={20}>
                         {isProductOutofStock(item.configurable_sku)
                           ? 'This product is out of stock please remove before proceed.'
-                          : "Sorry, this product isn't deliverable to selected pincode."}
+                          : "Sorry, this product isn't available to selected pincode"}
                       </Heading>
                       <Flex mt={15} justifyContent="center">
                         <Link to="/checkout/delivery-address" sx={{ cursor: 'pointer' }}>
