@@ -13,7 +13,7 @@ import BannerTop from '../../../static/HT-Exclusive/BannerDesk1.png';
 import Banner2 from '../../../static/HT-Exclusive/BannerDesk2.png';
 import Banner3 from '../../../static/HT-Exclusive/BannerDesk3.png';
 import Banner4 from '../../../static/HT-Exclusive/BannerDesk4.png';
-import Banner5 from '../../../static/HT-Exclusive/BannerDesk5.png';
+// import Banner5 from '../../../static/HT-Exclusive/BannerDesk5.png';
 import CarouselImg1 from '../../../static/HT-Exclusive/CarouselImg1.png';
 import CarouselImg2 from '../../../static/HT-Exclusive/CarouselImg2.png';
 import CarouselImg3 from '../../../static/HT-Exclusive/CarouselImg3.png';
@@ -77,7 +77,7 @@ export class HtExclusive extends Component {
         {
           url: CarouselImg6,
           name: 'Dressers',
-          link: '/furniture/bedroom-furniture/chest-of-drawers'
+          link: '/furniture/bedroom-furniture/dressing-tables'
         },
         {
           url: CarouselImg7,
@@ -104,7 +104,7 @@ export class HtExclusive extends Component {
         {
           url: CarouselImg11,
           name: 'Bar & Counter Stools',
-          link: '/furniture/bar-furniture'
+          link: '/furniture/bar-furniture/bar-chairs-and-stools'
         },
         {
           url: CarouselImg12,
@@ -124,7 +124,7 @@ export class HtExclusive extends Component {
         {
           url: CarouselImg15,
           name: 'Bar Carts',
-          link: '/furniture/bar-furniture/bar-cabinets'
+          link: '/furniture/bar-furniture/serving-trolleys'
         }
       ]
     };
@@ -139,11 +139,20 @@ export class HtExclusive extends Component {
           <Img src={BannerTop} alt="" />
         </Box>
         <Box sx={{ width: '100%' }}>
-          <Text style={{ textAlign: 'center', fontFamily: 'Arial', lineHeight: '1.5rem' }} px="40px" py="20px">
+          <Text
+            style={{
+              textAlign: 'center',
+              fontFamily: 'Arial',
+              lineHeight: '1.7rem',
+              fontSize: '1.3rem'
+            }}
+            px="40px"
+            py="20px"
+          >
             For over a decade, Hometown has established high and unparallel quality and industry standard in the
             furniture gamut. HT Exclusive is to present to you the best of the best products, aesthetics and values
           </Text>
-          <Link to="/furniture/living-room-furniture/">
+          <Link to="/furniture/living-room-furniture">
             <Img src={Banner2} alt="" />
           </Link>
         </Box>
@@ -179,7 +188,7 @@ export class HtExclusive extends Component {
           </SlickSlider>
         </Box>
         <Box>
-          <Link to="/furniture/bedroom-furniture/">
+          <Link to="/furniture/bedroom-furniture">
             <Img src={Banner3} alt="" />
           </Link>
         </Box>
@@ -215,7 +224,7 @@ export class HtExclusive extends Component {
           </SlickSlider>
         </Box>
         <Box>
-          <Link to="/furniture/dining-kitchen-furniture/">
+          <Link to="/furniture/dining-kitchen-furniture">
             <Img src={Banner4} alt="" />
           </Link>
         </Box>
@@ -250,11 +259,11 @@ export class HtExclusive extends Component {
             ))}
           </SlickSlider>
         </Box>
-        <Box>
+        {/* <Box>
           <Link to="/furniture">
             <Img src={Banner5} alt="" />
           </Link>
-        </Box>
+        </Box> */}
       </Container>
     );
   }
