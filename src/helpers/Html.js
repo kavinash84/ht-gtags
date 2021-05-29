@@ -78,10 +78,10 @@ export default class Html extends Component {
       };
     } else if (process.env.UNBXD && process.env.UNBXD === 'beta') {
       unbxdScripts = {
-        autosuggestJs: 'https://sandbox.unbxd.io/stage-hometown808961566375562_autosuggest.js',
-        autosuggestCss: 'https://sandbox.unbxd.io/stage-hometown808961566375562_autosuggest.css',
-        searchJs: 'https://sandbox.unbxd.io/stage-hometown808961566375562_search.js',
-        searchCss: 'https://sandbox.unbxd.io/stage-hometown808961566375562_search.css'
+        autosuggestJs: 'https://sandbox.unbxd.io/dev-hometown808961566375617_autosuggest.js',
+        autosuggestCss: 'https://sandbox.unbxd.io/dev-hometown808961566375617_autosuggest.css',
+        searchJs: 'https://sandbox.unbxd.io/dev-hometown808961566375617_search.js',
+        searchCss: 'https://sandbox.unbxd.io/dev-hometown808961566375617_search.css'
       };
     } else {
       unbxdScripts = {
