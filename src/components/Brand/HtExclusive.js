@@ -134,9 +134,9 @@ export class HtExclusive extends Component {
     const { carouselItem1, carouselItem2, carouselItem3 } = this.state;
 
     return (
-      <Container mt="0px" pl="0px" pr="0px">
+      <Container mt="0px" pl="0px" pr="0px" sx={{ maxWidth: '100% !important' }}>
         <Box>
-          <Img src={BannerTop} alt="" />
+          <Img src={BannerTop} alt="" width="100%" />
         </Box>
         <Box sx={{ width: '100%' }}>
           <Text
@@ -153,10 +153,10 @@ export class HtExclusive extends Component {
             furniture gamut. HT Exclusive is to present to you the best of the best products, aesthetics and values
           </Text>
           <Link to="/furniture/living-room-furniture">
-            <Img src={Banner2} alt="" />
+            <Img src={Banner2} alt="" width="100%" sx={{ aspectRatio: '2.1' }} />
           </Link>
         </Box>
-        <Box style={{ padding: '15px', height: '200px' }}>
+        <Box style={{ padding: '20px' }}>
           <SlickSlider mb="0" mr="5px" ml="5px" settings={adjustSlides(carouselItem1.length)}>
             {carouselItem1.map((slide, index) => (
               <div key={String(index)}>
@@ -166,33 +166,35 @@ export class HtExclusive extends Component {
                     src={slide.url}
                     style={{
                       borderRadius: '50%',
-                      height: '150px',
-                      width: '150px',
+                      height: '175px',
+                      width: '175px',
                       margin: '3px auto'
                     }}
                     alt=""
                   />
-                  <p
-                    style={{
-                      textAlign: 'center',
-                      fontSize: '0.9rem',
-                      textDecoration: 'none',
-                      color: 'grey'
-                    }}
-                  >
-                    {slide.name}
-                  </p>
                 </Link>
+                <p
+                  style={{
+                    textAlign: 'center',
+                    fontSize: '1.1rem',
+                    textDecoration: 'none',
+                    color: 'grey',
+                    padding: '10px',
+                    fontWeight: 'bold'
+                  }}
+                >
+                  {slide.name}
+                </p>
               </div>
             ))}
           </SlickSlider>
         </Box>
         <Box>
           <Link to="/furniture/bedroom-furniture">
-            <Img src={Banner3} alt="" />
+            <Img src={Banner3} alt="" width="100%" sx={{ aspectRatio: '2.1' }} />
           </Link>
         </Box>
-        <Box style={{ padding: '15px', height: '200px' }}>
+        <Box style={{ padding: '20px' }}>
           <SlickSlider mb="0" mr="5px" ml="5px" settings={adjustSlides(carouselItem2.length)}>
             {carouselItem2.map((slide, index) => (
               <div key={String(index)}>
@@ -202,33 +204,35 @@ export class HtExclusive extends Component {
                     src={slide.url}
                     style={{
                       borderRadius: '50%',
-                      height: '150px',
-                      width: '150px',
+                      height: '175px',
+                      width: '175px',
                       margin: '3px auto'
                     }}
                     alt=""
                   />
-                  <p
-                    style={{
-                      textAlign: 'center',
-                      fontSize: '0.9rem',
-                      textDecoration: 'none',
-                      color: 'grey'
-                    }}
-                  >
-                    {slide.name}
-                  </p>
                 </Link>
+                <p
+                  style={{
+                    textAlign: 'center',
+                    fontSize: '1.1rem',
+                    textDecoration: 'none',
+                    color: 'grey',
+                    padding: '10px',
+                    fontWeight: 'bold'
+                  }}
+                >
+                  {slide.name}
+                </p>
               </div>
             ))}
           </SlickSlider>
         </Box>
         <Box>
           <Link to="/furniture/dining-kitchen-furniture">
-            <Img src={Banner4} alt="" />
+            <Img src={Banner4} alt="" width="100%" sx={{ aspectRatio: '2.2' }} />
           </Link>
         </Box>
-        <Box style={{ padding: '15px', height: '200px' }}>
+        <Box style={{ padding: '20px' }}>
           <SlickSlider mb="0" mr="5px" ml="5px" settings={adjustSlides(carouselItem3.length)}>
             {carouselItem3.map((slide, index) => (
               <div key={String(index)}>
@@ -238,23 +242,25 @@ export class HtExclusive extends Component {
                     src={slide.url}
                     style={{
                       borderRadius: '50%',
-                      height: '150px',
-                      width: '150px',
+                      height: '175px',
+                      width: '175px',
                       margin: '5px auto'
                     }}
                     alt=""
                   />
-                  <p
-                    style={{
-                      textAlign: 'center',
-                      fontSize: '0.9rem',
-                      textDecoration: 'none',
-                      color: 'grey'
-                    }}
-                  >
-                    {slide.name}
-                  </p>
                 </Link>
+                <p
+                  style={{
+                    textAlign: 'center',
+                    fontSize: '1.1rem',
+                    textDecoration: 'none',
+                    color: 'grey',
+                    padding: '10px',
+                    fontWeight: 'bold'
+                  }}
+                >
+                  {slide.name}
+                </p>
               </div>
             ))}
           </SlickSlider>
