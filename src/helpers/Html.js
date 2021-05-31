@@ -112,6 +112,7 @@ export default class Html extends Component {
           <meta name="apple-mobile-web-app-status-bar-style" content="black" />
           <meta name="apple-mobile-web-app-title" content="HomeTown Web" />
           <meta name="theme-color" content="#3677dd" />
+          <meta name="facebook-domain-verification" content="zcpr8ig8hh8z1idybyhitvi7j4nic4" />
           <link rel="manifest" href="/manifest.json" />
           {/* eslint-disable */}
           <link rel="preconnect" href="https://connect.facebook.net" crossOrigin="" />
