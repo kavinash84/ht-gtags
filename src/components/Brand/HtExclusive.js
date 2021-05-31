@@ -149,7 +149,7 @@ export class HtExclusive extends Component {
             px="40px"
             py="20px"
           >
-            For over a decade, Hometown has established high and unparallel quality and industry standard in the
+            For over a decade, Hometown has established high and unparallel quality and industry standards in the
             furniture gamut. HT Exclusive is to present to you the best of the best products, aesthetics and values
           </Text>
           <Link to="/furniture/living-room-furniture">
