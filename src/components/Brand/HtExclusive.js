@@ -55,7 +55,7 @@ export class HtExclusive extends Component {
         {
           url: CarouselImg2,
           name: 'Chairs',
-          link: '/furniture/living-room-furniture/ht-exclusive-living/chairs'
+          link: '/furniture/living-room-furniture/ht-exclusive-living/accent-chairs'
         },
         {
           url: CarouselImg3,
