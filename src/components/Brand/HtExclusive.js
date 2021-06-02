@@ -9,26 +9,26 @@ import Text from 'hometown-components-dev/lib/TextHtV1';
 import SlickSlider from '../SlickSlider';
 // import Usp from 'components/Usp';
 
-import BannerTop from '../../../static/HT-Exclusive/BannerDesk1.png';
-import Banner2 from '../../../static/HT-Exclusive/BannerDesk2.png';
-import Banner3 from '../../../static/HT-Exclusive/BannerDesk3.png';
-import Banner4 from '../../../static/HT-Exclusive/BannerDesk4.png';
+import BannerTop from '../../../static/HT-Exclusive/Banner01.jpg';
+import Banner2 from '../../../static/HT-Exclusive/Banner02.jpg';
+import Banner3 from '../../../static/HT-Exclusive/Banner03.jpg';
+import Banner4 from '../../../static/HT-Exclusive/Banner04.jpg';
 // import Banner5 from '../../../static/HT-Exclusive/BannerDesk5.png';
-import CarouselImg1 from '../../../static/HT-Exclusive/CarouselImg1.png';
-import CarouselImg2 from '../../../static/HT-Exclusive/CarouselImg2.png';
-import CarouselImg3 from '../../../static/HT-Exclusive/CarouselImg3.png';
-import CarouselImg4 from '../../../static/HT-Exclusive/CarouselImg4.png';
-import CarouselImg5 from '../../../static/HT-Exclusive/CarouselImg5.png';
-import CarouselImg6 from '../../../static/HT-Exclusive/CarouselImg6.png';
-import CarouselImg7 from '../../../static/HT-Exclusive/CarouselImg7.png';
-import CarouselImg8 from '../../../static/HT-Exclusive/CarouselImg8.png';
-import CarouselImg9 from '../../../static/HT-Exclusive/CarouselImg9.png';
-import CarouselImg10 from '../../../static/HT-Exclusive/CarouselImg10.png';
-import CarouselImg11 from '../../../static/HT-Exclusive/CarouselImg11.png';
-import CarouselImg12 from '../../../static/HT-Exclusive/CarouselImg12.png';
-import CarouselImg13 from '../../../static/HT-Exclusive/CarouselImg13.png';
-import CarouselImg14 from '../../../static/HT-Exclusive/CarouselImg14.png';
-import CarouselImg15 from '../../../static/HT-Exclusive/CarouselImg15.png';
+import CarouselImg1 from '../../../static/HT-Exclusive/Living Room/Sofas.png';
+import CarouselImg2 from '../../../static/HT-Exclusive/Living Room/chairs.png';
+import CarouselImg3 from '../../../static/HT-Exclusive/Living Room/center-tables.png';
+import CarouselImg4 from '../../../static/HT-Exclusive/Living Room/TV-Units.png';
+import CarouselImg5 from '../../../static/HT-Exclusive/Living Room/End-Tables.png';
+import CarouselImg6 from '../../../static/HT-Exclusive/Bedroom/Dressers.png';
+import CarouselImg7 from '../../../static/HT-Exclusive/Bedroom/Night-Stands.png';
+import CarouselImg8 from '../../../static/HT-Exclusive/Bedroom/Beds.png';
+import CarouselImg9 from '../../../static/HT-Exclusive/Bedroom/Mattresses.png';
+import CarouselImg10 from '../../../static/HT-Exclusive/Bedroom/Armoires.png';
+import CarouselImg11 from '../../../static/HT-Exclusive/Dining Room/Consloe-Tables.png';
+import CarouselImg12 from '../../../static/HT-Exclusive/Dining Room/Dining-Chairs.png';
+import CarouselImg13 from '../../../static/HT-Exclusive/Dining Room/Dining-Tables.png';
+import CarouselImg14 from '../../../static/HT-Exclusive/Dining Room/Dining-Sets.png';
+import CarouselImg15 from '../../../static/HT-Exclusive/Dining Room/Sideboards.png';
 
 // import Heading from 'hometown-components/lib/Heading'
 
