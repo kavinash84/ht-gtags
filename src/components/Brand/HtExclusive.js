@@ -149,8 +149,8 @@ export class HtExclusive extends Component {
             px="40px"
             py="20px"
           >
-            For over a decade, Hometown has established high and unparallel quality and industry standards in the
-            furniture gamut. HT Exclusive is to present to you the best of the best products, aesthetics and values
+            Bring home the exclusive furniture collections unsurpassed in form, function and design. Whether you are
+            reimagining one room or your entire space, HomeTown exclusives add the perfect touch of elegance and beauty.
           </Text>
           <Link to="/furniture/living-room-furniture/ht-exclusive-living">
             <Img src={Banner2} alt="" width="100%" sx={{ aspectRatio: '2.1' }} />
