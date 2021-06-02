@@ -6,7 +6,7 @@ import { renderRoutes } from 'react-router-config';
 import { withRouter } from 'react-router';
 import { provideHooks } from 'redial';
 import Helmet from 'react-helmet';
-import WebToChat from 'containers/WebToChat';
+// import WebToChat from 'containers/WebToChat';
 import { wrapDispatch } from 'multireducer';
 import { loadCategories, loadMainMenu, loadBanners, isLoaded as isSectionLoaded } from 'redux/modules/homepage';
 import { generateSession, isLoaded as isSessionSet } from 'redux/modules/app';
@@ -267,7 +267,11 @@ export default class App extends Component {
             <Notifs namespace="global" NotifComponent={props => <Alert {...props} show={notifs.global.length} />} />
           </div>
           {renderRoutes(route.routes)}
-          <WebToChat handleOnClose={this.handleOnClose} handleOnAccept={this.handleOnAccept} visible={visible} />
+          {/* <WebToChat
+            handleOnClose={this.handleOnClose}
+            handleOnAccept={this.handleOnAccept}
+            visible={visible}
+          /> */}
         </main>
       </ThemeProvider>
     );
