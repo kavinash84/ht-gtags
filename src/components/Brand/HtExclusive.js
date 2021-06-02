@@ -50,81 +50,81 @@ export class HtExclusive extends Component {
         {
           url: CarouselImg1,
           name: 'Sofas & Sectionals',
-          link: '/furniture/living-room-furniture/sofas'
+          link: '/furniture/living-room-furniture/ht-exclusive-living/sofa--sectionals'
         },
         {
           url: CarouselImg2,
           name: 'Chairs',
-          link: '/furniture/living-room-furniture/accent-chairs'
+          link: '/furniture/living-room-furniture/ht-exclusive-living/accent-chairs'
         },
         {
           url: CarouselImg3,
           name: 'Coffee Tables',
-          link: '/furniture/living-room-furniture/coffee-tables'
+          link: '/furniture/living-room-furniture/ht-exclusive-living/coffee-table'
         },
         {
           url: CarouselImg4,
           name: 'TV Stands & Entertainment Centers',
-          link: '/furniture/living-room-furniture/tv-units'
+          link: '/furniture/living-room-furniture/ht-exclusive-living/entertainment-unit'
         },
         {
           url: CarouselImg5,
           name: 'End & Side Tables',
-          link: '/furniture/living-room-furniture/end-tables'
+          link: '/furniture/living-room-furniture/ht-exclusive-living/side-table'
         }
       ],
       carouselItem2: [
         {
           url: CarouselImg6,
           name: 'Dressers',
-          link: '/furniture/bedroom-furniture/dressing-tables'
+          link: '/furniture/bedroom-furniture/ht-exclusive-bedroom/dressers'
         },
         {
           url: CarouselImg7,
           name: 'Nightstands',
-          link: '/furniture/bedroom-furniture/bedside-tables'
+          link: '/furniture/bedroom-furniture/ht-exclusive-bedroom/night-stand'
         },
         {
           url: CarouselImg8,
           name: 'Beds',
-          link: '/furniture/bedroom-furniture/beds'
+          link: '/furniture/bedroom-furniture/ht-exclusive-bedroom/bed'
         },
         {
           url: CarouselImg9,
           name: 'Mattresses',
-          link: '/furniture/mattresses'
+          link: '/furniture/bedroom-furniture/ht-exclusive-bedroom/bed-mattresses'
         },
         {
           url: CarouselImg10,
           name: 'Armoires',
-          link: '/furniture/bedroom-furniture/wardrobes'
+          link: '/furniture/bedroom-furniture/ht-exclusive-bedroom/bedroom-wardrobe'
         }
       ],
       carouselItem3: [
         {
           url: CarouselImg11,
           name: 'Bar & Counter Stools',
-          link: '/furniture/bar-furniture/bar-chairs-and-stools'
+          link: '/furniture/bar-furniture/ht-exclusive-bar-furniture/bar--counter-stools'
         },
         {
           url: CarouselImg12,
           name: 'Dining Chairs & Benches',
-          link: '/furniture/dining-kitchen-furniture/dining-chairs'
+          link: '/furniture/dining-kitchen-furniture/ht-exclusive-dining--kitchen/dining-chair'
         },
         {
           url: CarouselImg13,
           name: 'Dining Tables',
-          link: '/furniture/dining-kitchen-furniture/dining-tables'
+          link: '/furniture/dining-kitchen-furniture/ht-exclusive-dining--kitchen/dining-table'
         },
         {
           url: CarouselImg14,
           name: 'Sideboards & Buffet Tables',
-          link: '/furniture/dining-kitchen-furniture/storage-sideboards'
+          link: '/furniture/dining-kitchen-furniture/ht-exclusive-dining--kitchen/storage-sideboard'
         },
         {
           url: CarouselImg15,
           name: 'Bar Carts',
-          link: '/furniture/bar-furniture/serving-trolleys'
+          link: '/furniture/bar-furniture/ht-exclusive-bar-furniture/serving-trolley'
         }
       ]
     };
@@ -190,7 +190,7 @@ export class HtExclusive extends Component {
           </SlickSlider>
         </Box>
         <Box>
-          <Link to="/furniture/bedroom-furniture">
+          <Link to="/furniture/bedroom-furniture/ht-exclusive-bedroom">
             <Img src={Banner3} alt="" width="100%" sx={{ aspectRatio: '2.1' }} />
           </Link>
         </Box>
@@ -228,7 +228,7 @@ export class HtExclusive extends Component {
           </SlickSlider>
         </Box>
         <Box>
-          <Link to="/furniture/dining-kitchen-furniture">
+          <Link to="/furniture/dining-kitchen-furniture/ht-exclusive-dining--kitchen">
             <Img src={Banner4} alt="" width="100%" sx={{ aspectRatio: '2.2' }} />
           </Link>
         </Box>
