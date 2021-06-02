@@ -1,3 +1,4 @@
+/* eslint-disable radix */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 /**
@@ -16,6 +17,45 @@ import { formatAmount } from 'utils/formatters';
 
 const styles = require('./EmiModal.scss');
 
+const schemes = [
+  {
+    schemeName: '12 by 0',
+    emiTenure: 12,
+    processingFee: 0,
+    interest: 0,
+    grossTenure: 12
+  },
+  {
+    schemeName: '9 by 0',
+    emiTenure: 9,
+    processingFee: 0,
+    interest: 0,
+    grossTenure: 9
+  },
+  {
+    schemeName: '6 by 0',
+    emiTenure: 6,
+    processingFee: 0,
+    interest: 0,
+    grossTenure: 6
+  },
+  {
+    schemeName: '3 by 0',
+    emiTenure: 3,
+    processingFee: 0,
+    interest: 0,
+    grossTenure: 3
+  }
+];
+
+// Computed as (CSP of the product * (1 +(X% / 12 * EMI Tenure)) / EMI Tenure)
+// B16*(1+B20/12*B21)/B21
+/* eslint-disable-next-line no-mixed-operators */
+const calculateEMI = (price, interest, emiTenure) => parseInt((price * (1 + (interest / 12) * emiTenure)) / emiTenure);
+
+// eslint-disable-next-line max-len
+const advancePayment = (specialPrice, interest, emiTenure, grossTenure) =>
+  calculateEMI(specialPrice, interest, emiTenure) * (grossTenure - emiTenure);
 export default class Emi extends Component {
   state = {
     open: false
@@ -27,8 +67,9 @@ export default class Emi extends Component {
     this.setState({ open: false });
   };
   render() {
-    const { price } = this.props;
+    const { price, specialPrice } = this.props;
     let { data } = this.props;
+    console.log(this.props, 'this.props');
     data = data && data.sort((a, b) => Number(a.bank_code) - Number(b.bank_code));
     return (
       <Box>
@@ -44,7 +85,87 @@ export default class Emi extends Component {
             <Row ml={16} mr={16}>
               <Box col="12" textAlign="center">
                 <Heading color="text" margin="0.9375em 0 0.3125em" fontFamily="700" textAlign="left">
-                  EMI Options For Rs.
+                  Bajaj Finance For Rs.{` ${price}`}
+                  <Box fontSize="0.875rem">(Including shipping charge)</Box>
+                </Heading>
+              </Box>
+            </Row>
+
+            <Row mr={16} ml={16} pl={0} pr={0}>
+              <Box col="12" pt="1.25rem" paddingBottom="1.25rem" className={styles.tableWrapper}>
+                <table cellSpacing="0" cellPadding="5">
+                  <tbody>
+                    <tr className={styles.tableHead}>
+                      <th>
+                        <Box>Scheme Name</Box>
+                      </th>
+                      <th>
+                        <Box>EMI Tenure</Box>
+                      </th>
+                      <th>
+                        <Box>Processing Fee</Box>
+                      </th>
+                      <th>
+                        <Box>% Interest</Box>
+                      </th>
+                      <th>
+                        <Box>Advance EMI</Box>
+                      </th>
+                      <th>
+                        <Box>Downpayment</Box>
+                      </th>
+                      <th>
+                        <Box>EMI</Box>
+                      </th>
+                    </tr>
+
+                    {schemes.map(arr => {
+                      const {
+ schemeName, emiTenure, processingFee, interest, grossTenure
+} = arr;
+
+                      return (
+                        <tr className={styles.coloumn}>
+                          <td>{schemeName}</td>
+                          <td>{emiTenure} Months</td>
+                          <td>Rs. {processingFee}</td>
+                          <td>{interest}%</td>
+                          <td>Rs. {advancePayment(specialPrice, interest, emiTenure, grossTenure)}</td>
+                          <td>Rs. {processingFee + advancePayment(specialPrice, interest, emiTenure, grossTenure)}</td>
+                          <td>Rs. {calculateEMI(specialPrice, interest, emiTenure)}</td>
+                        </tr>
+                      );
+                    })}
+
+                    {/* {data.length > 0 &&
+                      data.map((bank, index) => (
+                        <tr key={String(index)} className={styles.coloumn}>
+                          <td>
+                            <Box className={styles.bankImgWrapper}>
+                              <img src={bank.bank_logo_url} alt={bank.gateway_type} />
+                            </Box>
+                          </td>
+                          {bank.slabs.map((slab, i) => {
+                            const values = Object.values(slab.slab_keys);
+                            return (
+                              <td className="" key={String(i)}>
+                                <Box>
+                                  {values[3] && <p>Rs. {formatAmount(values[3])} p.m.</p>}
+                                  {values[3] && <p>Interest Rate {values[0]}%</p>}
+                                </Box>
+                              </td>
+                            );
+                          })}
+                        </tr>
+                      ))} */}
+                  </tbody>
+                </table>
+              </Box>
+            </Row>
+            <Row ml={16} mr={16}>
+              <Box col="12" textAlign="center">
+                <Heading color="text" margin="0.9375em 0 0.3125em" fontFamily="700" textAlign="left">
+                  Bank Options For Rs.
                   {` ${price}`} <Box fontSize="0.875rem">(Including shipping charge)</Box>
                 </Heading>
               </Box>
@@ -111,10 +232,12 @@ export default class Emi extends Component {
 
 Emi.defaultProps = {
   data: [],
-  price: ''
+  price: '',
+  specialPrice: ''
 };
 
 Emi.propTypes = {
   data: PropTypes.array,
-  price: PropTypes.string
+  price: PropTypes.string,
+  specialPrice: PropTypes.string
 };
