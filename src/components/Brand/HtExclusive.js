@@ -49,7 +49,7 @@ export class HtExclusive extends Component {
       carouselItem1: [
         {
           url: CarouselImg1,
-          name: 'Fabric Sofa',
+          name: 'Sofas & Sectionals',
           link: '/furniture/living-room-furniture/sofas'
         },
         {
