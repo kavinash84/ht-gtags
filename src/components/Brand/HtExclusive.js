@@ -104,7 +104,7 @@ export class HtExclusive extends Component {
         {
           url: CarouselImg11,
           name: 'Bar & Counter Stools',
-          link: '/furniture/bar-furniture/ht-exclusive-bar-furniture/bar--counter-stools'
+          link: '/furniture/bar-furniture/bar-chairs-and-stools'
         },
         {
           url: CarouselImg12,
@@ -124,7 +124,7 @@ export class HtExclusive extends Component {
         {
           url: CarouselImg15,
           name: 'Bar Carts',
-          link: '/furniture/bar-furniture/ht-exclusive-bar-furniture/serving-trolley'
+          link: '/furniture/bar-furniture/serving-trolleys'
         }
       ]
     };
