@@ -17,7 +17,6 @@ class MainSlider extends Component {
  data, triggerSlideChange, triggerSlideClick, reference, newSettings
 } = this.props;
     const finalSettings = { ...settings, ...newSettings };
-
     return (
       <SlickSlider
         settings={finalSettings}

@@ -16,15 +16,9 @@ import ResponsiveModal from 'components/Modal';
 import { formatAmount } from 'utils/formatters';
 
 const styles = require('./EmiModal.scss');
+const bajajFinance = require('../../../static/bajaj-finance.png');
 
 const schemes = [
-  {
-    schemeName: '12 by 0',
-    emiTenure: 12,
-    processingFee: 0,
-    interest: 0,
-    grossTenure: 12
-  },
   {
     schemeName: '9 by 0',
     emiTenure: 9,
@@ -67,7 +61,7 @@ export default class Emi extends Component {
     this.setState({ open: false });
   };
   render() {
-    const { price, specialPrice } = this.props;
+    const { price, specialPrice, bflMinAmount } = this.props;
     let { data } = this.props;
     console.log(this.props, 'this.props');
     data = data && data.sort((a, b) => Number(a.bank_code) - Number(b.bank_code));
@@ -86,6 +80,9 @@ export default class Emi extends Component {
               <Box col="12" textAlign="center">
                 <Heading color="text" margin="0.9375em 0 0.3125em" fontFamily="700" textAlign="left">
                   Bajaj Finance For Rs.{` ${price}`}
+                  <Box fontSize="0.875rem" mt={5}>
+                    Available for Bajaj EMI Card Customers. Minimum Cart Value is Rs. {formatAmount(bflMinAmount)}
+                  </Box>
                   <Box fontSize="0.875rem">(Including shipping charge)</Box>
                 </Heading>
               </Box>
@@ -96,6 +93,7 @@ export default class Emi extends Component {
                 <table cellSpacing="0" cellPadding="5">
                   <tbody>
                     <tr className={styles.tableHead}>
+                      <th />
                       <th>
                         <Box>Scheme Name</Box>
                       </th>
@@ -126,6 +124,11 @@ export default class Emi extends Component {
 
                       return (
                         <tr className={styles.coloumn}>
+                          <td>
+                            <Box>
+                              <img height={30} src={bajajFinance} alt="baja-finance" />
+                            </Box>
+                          </td>
                           <td>{schemeName}</td>
                           <td>{emiTenure} Months</td>
                           <td>Rs. {processingFee}</td>
@@ -239,5 +242,6 @@ Emi.defaultProps = {
 Emi.propTypes = {
   data: PropTypes.array,
   price: PropTypes.string,
-  specialPrice: PropTypes.string
+  specialPrice: PropTypes.string,
+  bflMinAmount: PropTypes.number.isRequired
 };

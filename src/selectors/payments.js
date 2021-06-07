@@ -51,4 +51,6 @@ export const getEasyEmiConfig = createSelector(
 
 export const getEmiBanks = createSelector([getAllEMIBanks], banks =>
   // eslint-disable-next-line max-len
-  banks.length ? Object.values(banks.bankDetails).map(x => ({ bank: x.bank, values: Object.values(x.emiOptions) })) : []);
+  Object.keys(banks).length
+    ? Object.values(banks.bankDetails).map(x => ({ bank: x.bank, values: Object.values(x.emiOptions) }))
+    : []);

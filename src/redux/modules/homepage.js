@@ -84,3 +84,8 @@ export const loadRecentlyViewed = () => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
   promise: ({ client }) => client.get(`${RECENTLY_VEIWED}`)
 });
+
+export const loadStaticPage = API => ({
+  types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
+  promise: ({ client }) => client.get(API)
+});

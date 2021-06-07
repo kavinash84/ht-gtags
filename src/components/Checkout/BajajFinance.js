@@ -18,6 +18,7 @@ import ResponsiveModal from 'components/Modal';
 /**
  * modules / selectors / helpers
  */
+import { formatAmount } from 'utils/formatters';
 import { submitBflPaymentDetails, setSelectedPaymentDetails } from 'redux/modules/paymentoptions';
 import { setEmiPaymentType, paymentLoaded } from 'redux/modules/app';
 
@@ -29,7 +30,8 @@ class BajajFinance extends Component {
     selectedGateway: PropTypes.string,
     emiType: PropTypes.func.isRequired,
     paymentLoaded: PropTypes.func.isRequired,
-    details: PropTypes.string
+    details: PropTypes.string,
+    bflMinAmount: PropTypes.number.isRequired
   };
 
   static defaultProps = {
@@ -94,12 +96,13 @@ class BajajFinance extends Component {
   render() {
     const { countDown, bflModal } = this.state;
     const {
-      details: { emiCode }
+      details: { emiCode },
+      bflMinAmount
     } = this.props;
     return (
       <Box>
         <Box pb={20}>
-          <Label>Available for Bajaj EMI Card Holders</Label>
+          <Label>Available for Bajaj EMI Card Holders for order value &gt; Rs {formatAmount(bflMinAmount)}</Label>
         </Box>
         <Col px={0} mb={30} pb={20} sx={{ borderBottom: '2px solid #97979733' }} onClick={this.openBflModal}>
           <Flex alignItems="center">
@@ -132,7 +135,7 @@ class BajajFinance extends Component {
 }
 
 const mapStateToProps = ({ app, paymentoptions }) => ({
-  session: app.session,
+  session: app.sessionId,
   selectedGateway: paymentoptions.selectedGateway,
   details: paymentoptions.paymentMethodDetails.EmiZero
 });

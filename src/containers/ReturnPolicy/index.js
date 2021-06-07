@@ -1,19 +1,19 @@
-import HomeTownLoader from 'containers/Loader';
 import { provideHooks } from 'redial';
-import { getReturnPolicy, gotData } from 'redux/modules/services';
-import { RETURN_POLICY as RETURN_POLICY_API } from 'helpers/apiUrls';
+import { wrapDispatch } from 'multireducer';
+import HomeTownLoader from 'containers/Loader';
+import { loadStaticPage, isLoaded as isSectionLoaded } from 'redux/modules/homepage';
+import { RETURN } from 'helpers/apiUrls';
+
+const hooks = {
+  defer: ({ store: { dispatch, getState } }) => {
+    if (!isSectionLoaded(getState(), 'returnpolicy')) {
+      wrapDispatch(dispatch, 'returnpolicy')(loadStaticPage(RETURN)).catch(error => console.log(error));
+    }
+  }
+};
 
 const ReturnPolicy = HomeTownLoader({
   loader: () => import('./ReturnPolicy' /* webpackChunkName: 'ReturnPolicy' */)
 });
-
-// export default ReturnPolicy;
-const hooks = {
-  fetch: async ({ store: { dispatch, getState } }) => {
-    if (!gotData(getState(), 'returnpolicy')) {
-      await dispatch(getReturnPolicy(RETURN_POLICY_API, 'returnpolicy'));
-    }
-  }
-};
 
 export default provideHooks(hooks)(ReturnPolicy);
