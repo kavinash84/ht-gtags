@@ -185,7 +185,7 @@ class BulkOrder extends React.Component {
     return (
       <Box>
         <Box>
-          <Image src={bannerImage} alt="" />
+          <Image src={bannerImage} alt="bulk-order-banner" />
         </Box>
         <Box mt="-150px" sx={{ position: 'relative', zIndex: 1 }}>
           <Box>
@@ -318,7 +318,7 @@ class BulkOrder extends React.Component {
                 <Box px={30}>
                   <Image
                     src="https://www.hometown.in/media/cms/hometownv2/hometownnew/cart-icon.png"
-                    alt=""
+                    alt="cart-icon"
                     m="auto"
                     width="130px"
                   />
@@ -329,7 +329,7 @@ class BulkOrder extends React.Component {
                 <Box px={30}>
                   <Image
                     src="https://www.hometown.in/media/cms/hometownv2/hometownnew/price-points-icon.png"
-                    alt=""
+                    alt="price-points"
                     m="auto"
                     width="130px"
                   />
@@ -340,7 +340,7 @@ class BulkOrder extends React.Component {
                 <Box px={30}>
                   <Image
                     src="https://www.hometown.in/media/cms/hometownv2/hometownnew/quality-icon.png"
-                    alt=""
+                    alt="Assured-quality"
                     m="auto"
                     width="130px"
                   />
@@ -351,7 +351,7 @@ class BulkOrder extends React.Component {
                 <Box px={30}>
                   <Image
                     src="https://www.hometown.in/media/cms/hometownv2/hometownnew/year-warranty-icon.png"
-                    alt=""
+                    alt="warranty"
                     m="auto"
                     width="130px"
                   />

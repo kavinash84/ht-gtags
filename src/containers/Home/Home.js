@@ -137,11 +137,15 @@ export default class Home extends Component {
 
   render() {
     const {
+
+     
  banners, middleBanner, homepageCategories, cities
 } = this.props;
     const citiesList = cities.map(item => ({ value: item, label: item }));
     const { citySelectError, cityErrorMessage } = this.state;
     return (
+
+      
       /* eslint-disable max-len */
       <Wrapper>
         <Helmet title="Online Furniture Shopping, Buy Decor Items in India - HomeTown.in">
@@ -246,7 +250,8 @@ export default class Home extends Component {
                 <Col variant="colBasis" flexDirection="column">
                   <Link to="/design-build/" href="https://stage.hometown.in/design-build/" target="_blank0">
                     <Box mb={20} sx={{ position: 'relative' }}>
-                      <Image src={sliderImage} />
+                      <Image src={sliderImage} alt="design-and-build" />
+                     
                       {/* <Image
                         src={designBuildLogo}
                         variant="image.logoHomeTown"
@@ -260,7 +265,7 @@ export default class Home extends Component {
                 <Col variant="colBasis" flexDirection="column">
                   <Link to="/modular-kitchens/" href="https://stage.hometown.in/modular-kitchens/" target="_blank1">
                     <Box mb={20} sx={{ position: 'relative' }}>
-                      <Image src={bannerImage} />
+                      <Image src={bannerImage} alt="modular-kitchen" />
                       {/* <Image
                         src="https://www.hometown.in/design-build/static/mkLogo.ae5caa06.png"
                         variant="image.logoHomeTown"
