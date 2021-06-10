@@ -538,9 +538,9 @@ class StoreLocator extends React.Component {
                         </Flex>
                       </Box>
                       <Box width={110} pl={20}>
-                        <Image alt={item.store}  src={item.image_url || 'https://via.placeholder.com/110x110'}/>
+                        <Image alt={item.store} src={item.image_url || 'https://via.placeholder.com/110x110'} />
                         {/* {console.log(item.store)} */}
-                      </Box> 
+                      </Box>
                     </Li>
                   ))}
                 </Ul>
