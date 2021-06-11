@@ -205,7 +205,7 @@ class BulkOrder extends React.Component {
                   className="bulk-order-form"
                 >
                   <Box className={styles.formList}>
-                    <Text ta="center" mt={0} mb="15px" fontSize="36px">
+                    <Text as="h1" ta="center" mt={0} mb="15px" fontSize="36px">
                       {'Corporate Gifting'}
                     </Text>
                     <Row ml="-15px" mr="-15px">

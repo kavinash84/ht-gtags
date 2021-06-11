@@ -38,7 +38,7 @@ const ContactUs = () => (
           }}
         >
           <BoxHtV1>
-            <HeadingHtV1 mt="0" color="textDark" fontSize="0.875rem" fontFamily="medium" lineHeight="1.5">
+            <HeadingHtV1 as="h1" mt="0" color="textDark" fontSize="0.875rem" fontFamily="medium" lineHeight="1.5">
               HOMETOWN CARE
             </HeadingHtV1>
             <TextHtV1 color="#8d8d8d" fontSize="0.75rem" mb="0" lineHeight="1.5">
