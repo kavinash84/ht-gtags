@@ -4,14 +4,14 @@ import Text from 'hometown-components-dev/lib/TextHtV1';
 import Flex from 'hometown-components-dev/lib/FlexHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 
-const styles = require('./Icons.scss');
+const styles = require('./PdpStripe.scss');
 
 const warranty = require('../../../static/pdp icons/36-months-warranty.png');
 const Emi = require('../../../static/pdp icons/EMI-icon.png');
 const safe = require('../../../static/pdp icons/Free-&-Safe-delivery-icon.png');
 const noquestion = require('../../../static/pdp icons/No-questions-asked-returns.png');
 
-const Icons = () =>{
+const Stripes = () => {
     return ( 
       <Box>
         <Flex col-3 justifyContent="center" alignItems="center" >
@@ -38,4 +38,4 @@ const Icons = () =>{
       </Box>
      );
 };
-export default Icons;
+export default Stripes;

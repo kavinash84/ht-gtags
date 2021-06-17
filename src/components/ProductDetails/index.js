@@ -70,9 +70,10 @@ import Video from './Video';
 import ReviewFilter from './ReviewFilter';
 import UnbxdCompleteTheLook from './UnbxdCompleteTheLook';
 import FreebieProduct from './FreebieProduct';
-import Icons from './Icons';
+import Stripes from './PdpStripe';
 
 import demoIcon from '../../../static/play-button.svg';
+
 
 /**
  * Images / Icons
@@ -719,8 +720,8 @@ class ProductDetails extends React.Component {
                 />
 
                 {/* icons */}
-                <Icons />   
-                                         
+                <Stripes />   
+
                 {/* Product Share */}
                 {/* <ShareBar title={name} url={productURL} mt={10} /> */}
 
