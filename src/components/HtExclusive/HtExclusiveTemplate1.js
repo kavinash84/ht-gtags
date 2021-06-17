@@ -8,7 +8,7 @@ import Text from 'hometown-components-dev/lib/TextHtV1';
 import Col from 'hometown-components-dev/lib/ColHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 
-// import Separator from '../../../static/htexclusive/separator.svg';
+import Separator from '../../../static/htexclusive/separator.svg';
 import Arrow from '../../../static/arrow_forward.svg';
 
 const styles = require('./HtExclusive.scss');
@@ -51,7 +51,7 @@ function HtExclusiveTemplate1({ data }) {
               </Text>
             </Col>
             <Flex>
-              {/* <Image src={Separator} alt="seperator" className={styles.separator} /> */}
+              <Image src={Separator} alt="seperator" className={styles.separator} />
             </Flex>
             <Col variant="col-3" px="0" py="0">
               <Text className={styles.subTitlesBold} as="h3">
@@ -62,7 +62,7 @@ function HtExclusiveTemplate1({ data }) {
               </Text>
             </Col>
             <Flex>
-              {/* <Image src={Separator} alt="seperator" className={styles.separator} /> */}
+              <Image src={Separator} alt="seperator" className={styles.separator} />
             </Flex>
             <Col variant="col-3" px="0" py="0">
               <Text className={styles.subTitlesBold} as="h3">
