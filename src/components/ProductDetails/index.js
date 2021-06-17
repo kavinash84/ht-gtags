@@ -70,6 +70,7 @@ import Video from './Video';
 import ReviewFilter from './ReviewFilter';
 import UnbxdCompleteTheLook from './UnbxdCompleteTheLook';
 import FreebieProduct from './FreebieProduct';
+import Icons from './Icons';
 
 import demoIcon from '../../../static/play-button.svg';
 
@@ -717,6 +718,9 @@ class ProductDetails extends React.Component {
                   onClickReviews={this.onClickReviews}
                 />
 
+                {/* icons */}
+                <Icons />   
+                                         
                 {/* Product Share */}
                 {/* <ShareBar title={name} url={productURL} mt={10} /> */}
 
