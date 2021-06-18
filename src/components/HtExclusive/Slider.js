@@ -8,7 +8,7 @@ import Text from 'hometown-components-dev/lib/TextHtV1';
 import SlickSlider from '../SlickSlider';
 
 const adjustSlides = length => ({
-  slidesToShow: length >= 2 ? 1.5 : length,
+  slidesToShow: length >= 2 ? 3 : length,
   slidesToScroll: 1,
   autoplay: false,
   infinite: false
