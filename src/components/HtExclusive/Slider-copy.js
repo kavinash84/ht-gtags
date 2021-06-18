@@ -1,20 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
-import Image from 'hometown-components-dev/lib/ImageHtV1';
-import Text from 'hometown-components-dev/lib/TextHtV1';
 
 import SlickSlider from '../SlickSlider';
 
 const adjustSlides = length => ({
-  slidesToShow: length >= 2 ? 3 : length,
+  slidesToShow: length >= 1 ? 3 : length,
   slidesToScroll: 1,
   autoplay: false,
   infinite: false
 });
 
-function Slider({ collection }) {
+function Slider({ collection, children }) {
   return (
     <Box>
       <Box p="15px">
@@ -22,10 +19,11 @@ function Slider({ collection }) {
           {collection.length &&
             collection.map((slide, index) => (
               <Box key={String(index)}>
-                <Link to={slide.link}>
+                {/* <Link to={slide.link}>
                   <Image src={slide.url} alt={`ht-exclusive-carousel-${index}`} />
                   <Text textAlign="center">{slide.name}</Text>
-                </Link>
+                </Link> */}
+                {children}
               </Box>
             ))}
         </SlickSlider>
@@ -35,7 +33,8 @@ function Slider({ collection }) {
 }
 
 Slider.propTypes = {
-  collection: PropTypes.array
+  collection: PropTypes.array,
+  children: PropTypes.object.isRequired
 };
 
 Slider.defaultProps = {

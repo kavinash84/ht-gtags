@@ -44,8 +44,17 @@
   text-align: center;
 }
 
+.description {
+  margin: 20px 0;
+  line-height: 40px !important;
+  font-size: 22px;
+  text-align: left;
+}
+
 .avatar {
   border-radius: 50%;
+  height: 450px;
+  width: 450px;
 }
 
 .horizontalSeperator {
@@ -70,4 +79,42 @@
 .imageCollection {
   height: 250px;
   width: 250px;
+}
+
+.paymentOptions {
+  padding: 0 30px;
+  margin: 0 50px;
+  height: 180px;
+  width: 300px;
+  background-color: #fff;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Options {
+  padding: 0 10px;
+  margin: 0 20px;
+  height: 500px;
+  background-color: #fff;
+  flex-direction: column;
+  justify-content: center;
+  // align-items: center;
+}
+
+.main {
+  display: flex;
+  width: 100%;
+}
+.left {
+  width: 40%;
+  margin-left: 3%;
+}
+.right {
+  width: 60%;
+  margin-right: 3%;
+}
+.shopButton {
+  display: flex;
+  margin-top: 20px;
 }
