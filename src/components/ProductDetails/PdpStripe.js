@@ -32,9 +32,7 @@ const Stripes = () => {
             <Text fontSize="9px" lineHeight="13px">Free and Safe Delivery</Text>
           </Box>
         </Flex>
-        <div className={styles.dots}>
-            
-        </div>
+        <div className={styles.dots} />
       </Box>
      );
 };
