@@ -71,3 +71,24 @@
   height: 250px;
   width: 250px;
 }
+
+.paymentOptions {
+  padding: 0 30px;
+  margin: 0 40px;
+  height: 180px;
+  width: 300px;
+  background-color: #fff;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Options {
+  padding: 0 10px;
+  margin: 0 20px;
+  height: 500px;
+  background-color: #fff;
+  flex-direction: column;
+  justify-content: center;
+  // align-items: center;
+}
