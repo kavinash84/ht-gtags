@@ -1,6 +1,5 @@
 import React from 'react';
-import Container from 'hometown-components-dev/lib/ContainerHtV1';
-
+import Section from 'hometown-components-dev/lib/SectionHtV1';
 import Logo from 'components/HtExclusive/Logo';
 import HtExclusiveTemplate1 from 'components/HtExclusive/HtExclusiveTemplate1';
 import HtExclusiveTemplate2 from 'components/HtExclusive/HtExclusiveTemplate2';
@@ -17,7 +16,7 @@ function HtExclusive() {
   } = htExclusiveData;
 
   return (
-    <Container pt="50px" px="0">
+    <Section pt="10px" px="0" >
       {/* <Menu /> */}
       <Logo />
       <HtExclusiveTemplate1 data={section1} />
@@ -28,7 +27,7 @@ function HtExclusive() {
       {/* <HtExclusiveTemplate3 data={section6} />
       <HtExclusiveTemplate4 data={section7} /> */}
       <Footer />
-    </Container>
+    </Section>
   );
 }
 
