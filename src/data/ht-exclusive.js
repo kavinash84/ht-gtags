@@ -18,39 +18,39 @@ const htExclusiveData = {
     imageCollection: [
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/sofas/sofas.png',
-        alt: 'sofa-collection',
+        alt: 'Sofas',
         title: 'Sofas',
         link: '/furniture/living-room-furniture/sofas'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/sofas/loungers.png',
-        alt: 'sofa-collection',
+        alt: 'Loungers',
         title: 'Loungers',
-        link: '/furniture/living-room-furniture/sofas'
+        link: '/furniture/living-room-furniture/loungers'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/sofas/recliners.png',
-        alt: 'sofa-collection',
+        alt: 'Recliners',
         title: 'Recliners',
-        link: '/furniture/living-room-furniture/sofas'
+        link: '/furniture/living-room-furniture/recliners'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/sofas/accent-chairs.png',
-        alt: 'sofa-collection',
+        alt: 'Accent Chairs',
         title: 'Accent Chairs',
-        link: '/furniture/living-room-furniture/sofas'
+        link: '/furniture/living-room-furniture/accent-chairs'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/sofas/tv-units.png',
-        alt: 'sofa-collection',
+        alt: 'TV Units',
         title: 'TV Units',
-        link: '/furniture/living-room-furniture/sofas'
+        link: '/furniture/living-room-furniture/tv-units'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/sofas/coffee-tables.png',
-        alt: 'sofa-collection',
+        alt: 'Coffee Tables',
         title: 'Coffee Tables',
-        link: '/furniture/living-room-furniture/sofas'
+        link: '/furniture/living-room-furniture/coffee-tables'
       }
     ],
     link: '/furniture/living-room-furniture'
@@ -62,39 +62,39 @@ const htExclusiveData = {
     imageCollection: [
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/beds/king-bed.png',
-        alt: 'sofa-collection',
+        alt: 'King Beds',
         title: 'King Beds',
-        link: '/furniture/living-room-furniture/sofas'
+        link: 'furniture/beds/king-size-beds'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/beds/queen-beds.png',
-        alt: 'sofa-collection',
+        alt: 'Queen Beds',
         title: 'Queen Beds',
-        link: '/furniture/living-room-furniture/sofas'
+        link: '/furniture/beds/queen-size-beds'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/beds/day-beds.png',
-        alt: 'sofa-collection',
+        alt: 'Daily Beds',
         title: 'Daily Beds',
-        link: '/furniture/living-room-furniture/sofas'
+        link: '/furniture/bedroom-furniture/beds'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/beds/wardrobes.png',
-        alt: 'sofa-collection',
+        alt: 'Wardrobes',
         title: 'Wardrobes',
-        link: '/furniture/living-room-furniture/sofas'
+        link: '/furniture/bedroom-furniture/wardrobes'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/beds/dressers.png',
-        alt: 'sofa-collection',
+        alt: 'Dressers & Night Stands',
         title: 'Dressers & Night Stands',
-        link: '/furniture/living-room-furniture/sofas'
+        link: '/furniture/bedroom-furniture/dressing-tables'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/beds/mattresses.png',
-        alt: 'sofa-collection',
+        alt: 'Mattresses',
         title: 'Mattresses',
-        link: '/furniture/living-room-furniture/sofas'
+        link: '/furniture/mattresses'
       }
     ],
     link: '/furniture/bedroom-furniture'
@@ -106,39 +106,39 @@ const htExclusiveData = {
     imageCollection: [
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/dining/6-seater-dining.png',
-        alt: 'sofa-collection',
+        alt: '6 Seater Dining Sets',
         title: '6 Seater Dining Sets',
-        link: '/furniture/living-room-furniture/sofas'
+        link: '/furniture/dining-sets/six-seater-dining-sets'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/dining/4-seater-dining.png',
-        alt: 'sofa-collection',
+        alt: '4 Seater Dining Sets',
         title: '4 Seater Dining Sets',
-        link: '/furniture/living-room-furniture/sofas'
+        link: '/furniture/dining-sets/four-seater-dining-sets'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/dining/6-seater-sets.png',
-        alt: 'sofa-collection',
+        alt: '6 Seater Dining Tables',
         title: '6 Seater Dining Tables',
-        link: '/furniture/living-room-furniture/sofas'
+        link: '/furniture/dining-tables/six-seater-dining-tables'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/dining/4-seater-table.png',
-        alt: 'sofa-collection',
+        alt: '4 Seater Dining Tables',
         title: '4 Seater Dining Tables',
-        link: '/furniture/living-room-furniture/sofas'
+        link: '/furniture/dining-tables/four-seater-dining-tables'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/dining/sideboards.png',
-        alt: 'sofa-collection',
+        alt: 'Sideboards',
         title: 'Sideboards',
-        link: '/furniture/living-room-furniture/sofas'
+        link: '/furniture/dining-kitchen-furniture/storage-sideboards'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/dining/chairs.png',
-        alt: 'sofa-collection',
+        alt: 'Chairs',
         title: 'Chairs',
-        link: '/furniture/living-room-furniture/sofas'
+        link: '/furniture/dining-kitchen-furniture/dining-chairs'
       }
     ],
     link: '/furniture/dining-kitchen-furniture'
