@@ -49,15 +49,15 @@ function HtExclusiveTemplate1({ data }) {
               <Image src={Separator} alt="seperator" className={styles.separator} />
             </Flex>
             <Col variant="col-3" px="0" py="0">
-              <Text className={styles.subTitlesBold}>{subTitles[1].boldText}</Text>
-              <Text className={styles.subTitlesLight}>{subTitles[1].normalText}</Text>
+              <h3 className={styles.subTitlesBold}>{subTitles[1].boldText}</h3>
+              <span className={styles.subTitlesLight}>{subTitles[1].normalText}</span>
             </Col>
             <Flex>
               <Image src={Separator} alt="seperator" className={styles.separator} />
             </Flex>
             <Col variant="col-3" px="0" py="0">
-              <Text className={styles.subTitlesBold}>{subTitles[2].boldText}</Text>
-              <Text className={styles.subTitlesLight}>{subTitles[2].normalText}</Text>
+              <h3 className={styles.subTitlesBold}>{subTitles[2].boldText}</h3>
+              <span className={styles.subTitlesLight}>{subTitles[2].normalText}</span>
             </Col>
           </Flex>
         </Box>
