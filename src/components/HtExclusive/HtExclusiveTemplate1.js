@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Flex from 'hometown-components-dev/lib/RowHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
-// import Text from 'hometown-components-dev/lib/TextHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
 import Col from 'hometown-components-dev/lib/ColHtV1';
 // import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 
@@ -25,7 +25,9 @@ function HtExclusiveTemplate1({ data }) {
           <h2 className={styles.headerTitle}>{headerTitle}</h2>
           <Link to={headerLink}>
             <Flex justifyContent="center" alignItems="center">
-              <div className={styles.subTitle}>{headerSubtitle}</div>
+              <Text fontSize="30px" className={styles.subTitle}>
+                {headerSubtitle}
+              </Text>
               <Image src={Arrow} />
             </Flex>
           </Link>

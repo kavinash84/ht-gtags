@@ -8,7 +8,7 @@ import Text from 'hometown-components-dev/lib/TextHtV1';
 import Section from 'hometown-components-dev/lib/SectionHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import SlickSlider from '../SlickSlider';
-import Slider from './Slider';
+// import Slider from './Slider';
 
 import Arrow from '../../../static/arrow_forward.svg';
 
@@ -37,10 +37,12 @@ function HtExclusiveTemplate3({ data }) {
           <Heading as="h2" pt="20px" fontSize="40px">
             {mainTitle}
           </Heading>
-          <Text className={styles.description}>{description}</Text>
+          <Text fontSize="26px" m="25px 0" className={styles.description}>
+            {description}
+          </Text>
         </Box>
 
-        <Box p="15px">
+        <Box p="25px">
           <SlickSlider settings={adjustSlides(12)}>
             {collection.length &&
               collection.map((slide, index) => (
