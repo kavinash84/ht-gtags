@@ -11,7 +11,7 @@ import Col from 'hometown-components-dev/lib/ColHtV1';
 
 import Arrow from '../../../static/arrow_forward.svg';
 
-const styles = require('./HtzExclusive.scss');
+const styles = require('./HtExclusive.scss');
 
 function HtExclusiveTemplate2({ data }) {
   const {
