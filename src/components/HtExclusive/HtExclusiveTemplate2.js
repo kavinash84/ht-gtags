@@ -6,12 +6,12 @@ import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Flex from 'hometown-components-dev/lib/FlexHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
-import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+// import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import Col from 'hometown-components-dev/lib/ColHtV1';
 
 import Arrow from '../../../static/arrow_forward.svg';
 
-const styles = require('./HtExclusive.scss');
+const styles = require('./HtzExclusive.scss');
 
 function HtExclusiveTemplate2({ data }) {
   const {
@@ -21,14 +21,10 @@ function HtExclusiveTemplate2({ data }) {
   return (
     <Box>
       <Box bg="#F5F5F5" py="20">
-        <Heading textAlign="center" as="h2" pb="10" className={styles.headerTitle}>
-          {mainTitle}
-        </Heading>
+        <h2 className={styles.headerTitle}>{mainTitle}</h2>
         <Link to={link}>
           <Flex justifyContent="center" alignItems="center">
-            <Text textAlign="center" className={styles.subTitle}>
-              {subTitle}
-            </Text>
+            <div className={styles.subTitle}>{subTitle}</div>
             <Image src={Arrow} />
           </Flex>
         </Link>

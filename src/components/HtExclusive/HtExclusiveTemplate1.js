@@ -25,9 +25,7 @@ function HtExclusiveTemplate1({ data }) {
           <h2 className={styles.headerTitle}>{headerTitle}</h2>
           <Link to={headerLink}>
             <Flex justifyContent="center" alignItems="center">
-              <div textAlign="center" className={styles.subTitle}>
-                {headerSubtitle}
-              </div>
+              <div className={styles.subTitle}>{headerSubtitle}</div>
               <Image src={Arrow} />
             </Flex>
           </Link>
@@ -40,9 +38,7 @@ function HtExclusiveTemplate1({ data }) {
       <div className={styles.desContainer}>
         <Box bg="#252525" height="240px">
           <Box pa="25px">
-            <h2 className={styles.descriptionTitle} as="h2">
-              {mainTitle}
-            </h2>
+            <h2 className={styles.descriptionTitle}>{mainTitle}</h2>
           </Box>
           <Flex pb="25px" px="7.5rem" justifyContent="space-between">
             <Col variant="col-3" px="0" py="0">
