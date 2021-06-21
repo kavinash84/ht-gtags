@@ -10,7 +10,7 @@ import SlickSlider from '../SlickSlider';
 import Arrow from '../../../static/arrow_forward.svg';
 
 // import Slider from './Slider';
-import Slider from './Slider-copy';
+// import Slider from './Slider-copy';
 
 const adjustSlides = length => ({
   slidesToShow: length >= 1 ? 3 : length,
@@ -43,7 +43,7 @@ function HtExclusiveTemplate4({ data }) {
         <Heading as="h2" pt="20px" textAlign="center" fontSize="40px">
           {mainTitle}
         </Heading>
-        <Text className={styles.descriptionText}>{description}</Text>
+        <div className={styles.descriptionText}>{description}</div>
       </Box>
 
       <Box p="15px">
