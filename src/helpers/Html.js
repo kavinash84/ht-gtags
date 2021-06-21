@@ -47,10 +47,10 @@ export default class Html extends Component {
       url: 'https://praxisretail.my.salesforce.com',
       liveAgentUrl: 'https://praxisretail.secure.force.com/LiveAgent',
       version: '00D7F000006O16S',
-      baseLiveAgentContentURL: 'https://c.la2-c2-hnd.salesforceliveagent.com/content',
+      baseLiveAgentContentURL: 'https://c.la2-c2-ukb.salesforceliveagent.com/content',
       deploymentId: '5727F0000009ARB',
       buttonId: '5732y000000PHDP',
-      baseLiveAgentURL: 'https://d.la2-c2-hnd.salesforceliveagent.com/chat',
+      baseLiveAgentURL: 'https://d.la2-c2-ukb.salesforceliveagent.com/chat',
       eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I7F0000004DjiUAE_16c51bfeb82',
       jsUrl: 'https://praxisretail.my.salesforce.com/embeddedservice/5.0/esw.min.js'
     };
