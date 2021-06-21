@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Flex from 'hometown-components-dev/lib/RowHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
-import Text from 'hometown-components-dev/lib/TextHtV1';
+// import Text from 'hometown-components-dev/lib/TextHtV1';
 import Col from 'hometown-components-dev/lib/ColHtV1';
 // import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 
@@ -61,7 +61,7 @@ function HtExclusiveTemplate1({ data }) {
             </Col>
           </Flex>
         </Box>
-        <Text className={styles.descriptionText}>{description}</Text>
+        <div className={styles.descriptionText}>{description}</div>
       </div>
     </Box>
   );
