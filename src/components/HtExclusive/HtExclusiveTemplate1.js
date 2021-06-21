@@ -7,7 +7,7 @@ import Flex from 'hometown-components-dev/lib/RowHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Col from 'hometown-components-dev/lib/ColHtV1';
-import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+// import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 
 import Separator from '../../../static/htexclusive/separator.svg';
 import Arrow from '../../../static/arrow_forward.svg';
@@ -22,14 +22,12 @@ function HtExclusiveTemplate1({ data }) {
     <Box>
       {headerTitle && headerSubtitle && (
         <Box bg="#F5F5F5" pb="10">
-          <Heading textAlign="center" as="h2" pb="10" className={styles.headerTitle}>
-            {headerTitle}
-          </Heading>
+          <h2 className={styles.headerTitle}>{headerTitle}</h2>
           <Link to={headerLink}>
             <Flex justifyContent="center" alignItems="center">
-              <Text textAlign="center" className={styles.subTitle}>
+              <div textAlign="center" className={styles.subTitle}>
                 {headerSubtitle}
-              </Text>
+              </div>
               <Image src={Arrow} />
             </Flex>
           </Link>
@@ -42,40 +40,28 @@ function HtExclusiveTemplate1({ data }) {
       <div className={styles.desContainer}>
         <Box bg="#252525" height="240px">
           <Box pa="25px">
-            <Text className={styles.descriptionTitle} as="h2">
+            <h2 className={styles.descriptionTitle} as="h2">
               {mainTitle}
-            </Text>
+            </h2>
           </Box>
           <Flex pb="25px" px="7.5rem" justifyContent="space-between">
             <Col variant="col-3" px="0" py="0">
-              <Text className={styles.subTitlesBold} as="h3">
-                {subTitles[0].boldText}
-              </Text>
-              <Text className={styles.subTitlesLight} as="span">
-                {subTitles[0].normalText}
-              </Text>
+              <h3 className={styles.subTitlesBold}>{subTitles[0].boldText}</h3>
+              <span className={styles.subTitlesLight}>{subTitles[0].normalText}</span>
             </Col>
             <Flex>
               <Image src={Separator} alt="seperator" className={styles.separator} />
             </Flex>
             <Col variant="col-3" px="0" py="0">
-              <Text className={styles.subTitlesBold} as="h3">
-                {subTitles[1].boldText}
-              </Text>
-              <Text className={styles.subTitlesLight} as="span">
-                {subTitles[1].normalText}
-              </Text>
+              <h3 className={styles.subTitlesBold}>{subTitles[1].boldText}</h3>
+              <span className={styles.subTitlesLight}>{subTitles[1].normalText}</span>
             </Col>
             <Flex>
               <Image src={Separator} alt="seperator" className={styles.separator} />
             </Flex>
             <Col variant="col-3" px="0" py="0">
-              <Text className={styles.subTitlesBold} as="h3">
-                {subTitles[2].boldText}
-              </Text>
-              <Text className={styles.subTitlesLight} as="span">
-                {subTitles[2].normalText}
-              </Text>
+              <h3 className={styles.subTitlesBold}>{subTitles[2].boldText}</h3>
+              <span className={styles.subTitlesLight}>{subTitles[2].normalText}</span>
             </Col>
           </Flex>
         </Box>
