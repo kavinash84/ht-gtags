@@ -68,7 +68,6 @@ import WhoWeAre from 'containers/WhoWeAre';
 import LoaderShimmer from 'containers/Loader/LoaderShimmer';
 import Promotions from 'containers/Promotions';
 import Gratification from 'containers/Gratification';
-import HtExclusive from 'containers/HtExclusive';
 
 // Landing Pages
 import WeddingCampaign from 'containers/WeddingCampaign';
@@ -175,7 +174,6 @@ const routes = [
       { path: '/plan-your-kitchen', exact: true, component: PlanYourKitchen },
       { path: '/design-build', exact: true, component: DesignBuild },
       { path: '/payment-success', exact: true, component: PaymentSuccess },
-      { path: '/brand/ht-exclusive', exact: true, component: HtExclusive },
       {
         path: '/payment-failed/:orderId?',
         exact: true,
