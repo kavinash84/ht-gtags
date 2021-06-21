@@ -39,7 +39,7 @@ function HtExclusiveTemplate1({ data }) {
         <Image src={banner} alt="chester-furniture" height="850px" width="100%" />
       </Box>
 
-      <Box className={styles.desContainer}>
+      <div className={styles.desContainer}>
         <Box bg="#252525" height="240px">
           <Box pa="25px">
             <Text className={styles.descriptionTitle} as="h2">
@@ -80,7 +80,7 @@ function HtExclusiveTemplate1({ data }) {
           </Flex>
         </Box>
         <Text className={styles.descriptionText}>{description}</Text>
-      </Box>
+      </div>
     </Box>
   );
 }
