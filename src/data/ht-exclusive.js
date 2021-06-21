@@ -19,34 +19,41 @@ const htExclusiveData = {
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/sofas/sofas.png',
         alt: 'sofa-collection',
-        title: 'Sofas'
+        title: 'Sofas',
+        link: '/furniture/living-room-furniture/sofas'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/sofas/loungers.png',
         alt: 'sofa-collection',
-        title: 'Loungers'
+        title: 'Loungers',
+        link: '/furniture/living-room-furniture/sofas'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/sofas/recliners.png',
         alt: 'sofa-collection',
-        title: 'Recliners'
+        title: 'Recliners',
+        link: '/furniture/living-room-furniture/sofas'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/sofas/accent-chairs.png',
         alt: 'sofa-collection',
-        title: 'Accent Chairs'
+        title: 'Accent Chairs',
+        link: '/furniture/living-room-furniture/sofas'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/sofas/tv-units.png',
         alt: 'sofa-collection',
-        title: 'TV Units'
+        title: 'TV Units',
+        link: '/furniture/living-room-furniture/sofas'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/sofas/coffee-tables.png',
         alt: 'sofa-collection',
-        title: 'Coffee Tables'
+        title: 'Coffee Tables',
+        link: '/furniture/living-room-furniture/sofas'
       }
-    ]
+    ],
+    link: '/furniture/living-room-furniture'
   },
   section3: {
     mainTitle: 'favorite bedroom, pieces back in stock',
@@ -56,34 +63,41 @@ const htExclusiveData = {
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/beds/king-bed.png',
         alt: 'sofa-collection',
-        title: 'King Beds'
+        title: 'King Beds',
+        link: '/furniture/living-room-furniture/sofas'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/beds/queen-beds.png',
         alt: 'sofa-collection',
-        title: 'Queen Beds'
+        title: 'Queen Beds',
+        link: '/furniture/living-room-furniture/sofas'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/beds/day-beds.png',
         alt: 'sofa-collection',
-        title: 'Daily Beds'
+        title: 'Daily Beds',
+        link: '/furniture/living-room-furniture/sofas'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/beds/wardrobes.png',
         alt: 'sofa-collection',
-        title: 'Wardrobes'
+        title: 'Wardrobes',
+        link: '/furniture/living-room-furniture/sofas'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/beds/dressers.png',
         alt: 'sofa-collection',
-        title: 'Dressers & Night Stands'
+        title: 'Dressers & Night Stands',
+        link: '/furniture/living-room-furniture/sofas'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/beds/mattresses.png',
         alt: 'sofa-collection',
-        title: 'Mattresses'
+        title: 'Mattresses',
+        link: '/furniture/living-room-furniture/sofas'
       }
-    ]
+    ],
+    link: '/furniture/bedroom-furniture'
   },
   section4: {
     mainTitle: 'family that eats together, stays happy',
@@ -93,38 +107,46 @@ const htExclusiveData = {
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/dining/6-seater-dining.png',
         alt: 'sofa-collection',
-        title: '6 Seater Dining Sets'
+        title: '6 Seater Dining Sets',
+        link: '/furniture/living-room-furniture/sofas'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/dining/4-seater-dining.png',
         alt: 'sofa-collection',
-        title: '4 Seater Dining Sets'
+        title: '4 Seater Dining Sets',
+        link: '/furniture/living-room-furniture/sofas'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/dining/6-seater-sets.png',
         alt: 'sofa-collection',
-        title: '6 Seater Dining Tables'
+        title: '6 Seater Dining Tables',
+        link: '/furniture/living-room-furniture/sofas'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/dining/4-seater-table.png',
         alt: 'sofa-collection',
-        title: '4 Seater Dining Tables'
+        title: '4 Seater Dining Tables',
+        link: '/furniture/living-room-furniture/sofas'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/dining/sideboards.png',
         alt: 'sofa-collection',
-        title: 'Sideboards'
+        title: 'Sideboards',
+        link: '/furniture/living-room-furniture/sofas'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/dining/chairs.png',
         alt: 'sofa-collection',
-        title: 'Chairs'
+        title: 'Chairs',
+        link: '/furniture/living-room-furniture/sofas'
       }
-    ]
+    ],
+    link: '/furniture/dining-kitchen-furniture'
   },
   section5: {
     headerTitle: 'favourite destination for recliners',
     headerSubtitle: 'Shop Now',
+    headerLink: '/furniture/living-room-furniture/recliners',
     banner: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template1/recliners/recliners-2.png',
     mainTitle: 'Recline, Relax And Rewind',
     subTitles: [
@@ -142,65 +164,56 @@ const htExclusiveData = {
     banner: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template3/bristol/bristol-recliner.png',
     collection: [
       {
-        url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template3/bristol/bristol-3-seater.png',
-        name: 'Sofas',
-        link: '/furniture/living-room-furniture/ht-exclusive-living/sofa--sectionals'
+        url: 'https://www.hometown.in/media/product/08/0253/25525/1-catalog_360.jpg',
+        name: 'Bristol Half Leather Single Seater',
+        link: '/bristol-half-leather-single-seater-recliner-in-black-colour-by-hometown/sku/HO340SO19AVOHTFUR'
       },
       {
-        url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template3/bristol/bristol-3-seater.png',
-        name: 'Chairs',
-        link: '/furniture/living-room-furniture/accent-chairs'
+        url: 'https://www.hometown.in/media/product/97/0253/95881/1-catalog_360.jpg',
+        name: 'Bristol Half Leather Two Seater Recliner',
+        link: '/bristol-half-leather-two-seater-recliner-in-black-colour-by-hometown/sku/HO340SO20AVNHTFUR'
       },
       {
-        url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template3/bristol/bristol-3-seater.png',
-        name: 'Coffee Tables',
-        link: '/furniture/living-room-furniture/ht-exclusive-living/coffee-table'
+        url: 'https://www.hometown.in/media/product/87/0253/36049/1-catalog_360.jpg',
+        name: 'Bristol Half Leather Two Seater Recliner',
+        link: '/bristol-half-leather-three-seater-recliner-in-black-colour-by-hometown/sku/HO340SO21AVMHTFUR'
       },
       {
-        url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template3/bristol/bristol-3-seater.png',
-        name: 'TV Stands & Entertainment Centers',
-        link: '/furniture/living-room-furniture/ht-exclusive-living/entertainment-unit'
-      },
-      {
-        url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template3/bristol/bristol-3-seater.png',
-        name: 'End & Side Tables',
-        link: '/furniture/living-room-furniture/ht-exclusive-living/side-table'
+        url: 'https://www.hometown.in/media/product/77/0253/96272/1-catalog_360.jpg',
+        name: 'Bristol Half Leather Single Seater',
+        link: '/bristol-half-leather-single-seater-recliner-in-brown-colour-by-hometown/sku/HO340SO22AVLHTFUR'
       }
-    ]
+    ],
+    link: '/search?q=bristol%20recliners'
   },
-
   section7: {
-    mainTitle: ' Eclairs Recliners',
+    mainTitle: 'Eclairs Recliners',
     description:
       'The Eclairs recliner lends a touch of aristocratic elegance with its beautiful two tone leatherette upholstered look. With its world class reclining mechanism and enduring quality, it’s a must have for every home',
     banner: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template3/eclairs/eclairs-recliner.png',
     collection: [
       {
-        url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template3/eclairs/eclairs-3-seater.png',
-        name: 'Sofas',
-        link: '/furniture/living-room-furniture/ht-exclusive-living/sofa--sectionals'
+        url: 'https://www.hometown.in/media/product/37/4953/17238/1-catalog_360.jpg',
+        name: 'Eclairs Fabric Three Seater',
+        link: '/eclairs-fabric-three-seater-recliner-in-tan-colour-by-hometown/sku/HO340FU26LTXHTFUR'
       },
       {
-        url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template3/eclairs/eclairs-3-seater.png',
-        name: 'Chairs',
-        link: '/furniture/living-room-furniture/accent-chairs'
+        url: 'https://www.hometown.in/media/product/27/4953/12969/1-catalog_360.jpg',
+        name: 'Eclairs Fabric Two Seater',
+        link: '/eclairs-fabric-two-seater-recliner-in-tan-colour-by-hometown/sku/HO340FU27LTWHTFUR'
       },
       {
-        url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template3/eclairs/eclairs-3-seater.png',
-        name: 'Coffee Tables',
-        link: '/furniture/living-room-furniture/ht-exclusive-living/coffee-table'
+        url: 'https://www.hometown.in/media/product/92/6163/16372/1-catalog_360.jpg',
+        name: 'Eclairs Solid Wood Single Seat',
+        link: '/eclairs-solid-wood-single-seat-recliner-in-beige-colour-by-hometown/sku/HO340FU70OYVHTFUR'
       },
       {
-        url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template3/eclairs/eclairs-3-seater.png',
-        name: 'TV Stands & Entertainment Centers',
-        link: '/furniture/living-room-furniture/ht-exclusive-living/entertainment-unit'
-      },
-      {
-        url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template3/eclairs/eclairs-3-seater.png',
-        name: 'End & Side Tables',
-        link: '/furniture/living-room-furniture/ht-exclusive-living/side-table'
+        url: 'https://www.hometown.in/media/product/03/6163/48935/1-catalog_360.jpg',
+        name: 'Eclairs Solid Wood Two Seat',
+        link: '/eclairs-solid-wood-two-seat-recliner-in-beige-colour-by-hometown/sku/HO340FU69OYWHTFUR'
       }
-    ]
+    ],
+    link: '/search?q=eclairs%20recliners'
   },
   section8: {
     mainTitle: 'Bradford Recliners',
@@ -209,31 +222,27 @@ const htExclusiveData = {
     banner: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template3/bradford/bradford-recliners.png',
     collection: [
       {
-        url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template3/bradford/bradford-3-seater.png',
-        name: 'Sofas',
-        link: '/furniture/living-room-furniture/ht-exclusive-living/sofa--sectionals'
+        url: 'https://www.hometown.in/media/product/47/0253/17307/1-catalog_360.jpg',
+        name: 'Bradford Fabric Single Seater',
+        link: '/bradford-fabric-single-seater-recliner-in-camel-colour-by-hometown/sku/HO340SO25AVIHTFUR'
       },
       {
-        url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template3/bradford/bradford-3-seater.png',
-        name: 'Chairs',
-        link: '/furniture/living-room-furniture/accent-chairs'
+        url: 'https://www.hometown.in/media/product/40/3853/14267/1-catalog_360.jpg',
+        name: 'Bradford Fabric Three Seater',
+        link: '/bradford-fabric-three-seater-recliner-in-brown-colour-by-hometown/sku/HO340FU95KAYHTFUR'
       },
       {
-        url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template3/bradford/bradford-3-seater.png',
-        name: 'Coffee Tables',
-        link: '/furniture/living-room-furniture/ht-exclusive-living/coffee-table'
+        url: 'https://www.hometown.in/media/product/20/3853/37122/1-catalog_360.jpg',
+        name: 'Bradford Fabric Two Seater',
+        link: '/bradford-fabric-two-seater-recliner-in-brown-colour-by-hometown/sku/HO340FU97KAWHTFUR'
       },
       {
-        url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template3/bradford/bradford-3-seater.png',
-        name: 'TV Stands & Entertainment Centers',
-        link: '/furniture/living-room-furniture/ht-exclusive-living/entertainment-unit'
-      },
-      {
-        url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template3/bradford/bradford-3-seater.png',
-        name: 'End & Side Tables',
-        link: '/furniture/living-room-furniture/ht-exclusive-living/side-table'
+        url: 'https://www.hometown.in/media/product/81/1253/51518/1-catalog_360.jpg',
+        name: 'Bradford Fabric Two Seater',
+        link: '/bradford-fabric-two-seater-recliner-in-camel-colour-by-hometown/sku/HO340SO81AXAHTFUR'
       }
-    ]
+    ],
+    link: '/search?q=bradford%20recliners'
   },
   section9: {
     headerTitle: 'Shop by style',
@@ -244,28 +253,18 @@ const htExclusiveData = {
     collection: [
       {
         url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template4/traditional/shop-living.png',
-        name: 'Sofas only',
+        name: 'SHOP LIVING',
         link: '/furniture/living-room-furniture/ht-exclusive-living/sofa--sectionals'
       },
       {
         url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template4/traditional/shop-dining.png',
-        name: 'Chairs',
+        name: 'Shop Dining',
         link: '/furniture/living-room-furniture/accent-chairs'
       },
       {
         url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template4/traditional/shop-living.png',
-        name: 'Coffee Tables',
+        name: 'Shop Bedroom',
         link: '/furniture/living-room-furniture/ht-exclusive-living/coffee-table'
-      },
-      {
-        url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template4/traditional/shop-dining.png',
-        name: 'TV Stands & Entertainment Centers',
-        link: '/furniture/living-room-furniture/ht-exclusive-living/entertainment-unit'
-      },
-      {
-        url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template4/traditional/shop-living.png',
-        name: 'End & Side Tables',
-        link: '/furniture/living-room-furniture/ht-exclusive-living/side-table'
       }
     ]
   },
@@ -300,6 +299,32 @@ const htExclusiveData = {
         url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template4/traditional/shop-living.png',
         name: 'End & Side Tables',
         link: '/furniture/living-room-furniture/ht-exclusive-living/side-table'
+      }
+    ]
+  },
+  section11: {
+    headerTitle: 'Easy Finance',
+    mainTitle: 'Modern Urbane',
+    collection: [
+      {
+        url: 'https://static.hometown.in/media/cms/BankLOGO/hdfc.gif',
+        title: '0% Interest',
+        desc: 'On upto 6 months EMI for orders above 3000'
+      },
+      {
+        url: 'https://static.hometown.in/media/cms/BankLOGO/hdfc.gif',
+        title: '0% Interest',
+        desc: 'On upto 6 months EMI for orders above 3000'
+      },
+      {
+        url: 'https://static.hometown.in/media/cms/BankLOGO/hdfc.gif',
+        title: '0% Interest',
+        desc: 'On upto 6 months EMI for orders above 3000'
+      },
+      {
+        url: 'https://static.hometown.in/media/cms/BankLOGO/hdfc.gif',
+        title: '0% Interest',
+        desc: 'On upto 6 months EMI for orders above 3000'
       }
     ]
   }

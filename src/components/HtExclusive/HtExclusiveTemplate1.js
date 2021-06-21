@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Flex from 'hometown-components-dev/lib/RowHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
@@ -15,19 +16,23 @@ const styles = require('./HtExclusive.scss');
 
 function HtExclusiveTemplate1({ data }) {
   const {
-    mainTitle, subTitles, description, banner, headerTitle, headerSubtitle
-  } = data;
+ mainTitle, subTitles, description, banner, headerTitle, headerSubtitle, headerLink
+} = data;
   return (
     <Box>
       {headerTitle && headerSubtitle && (
-        <Box bg="#F5F5F5" pb="10" >
-          <Heading textAlign="center" as="h2" pb="10" className={styles.headerTitle} >
+        <Box bg="#F5F5F5" pb="10">
+          <Heading textAlign="center" as="h2" pb="10" className={styles.headerTitle}>
             {headerTitle}
           </Heading>
-          <Flex justifyContent="center" alignItems="center">
-            <Text textAlign="center" className={styles.subTitle}>{headerSubtitle}</Text>
-            <Image src={Arrow} />
-          </Flex>
+          <Link to={headerLink}>
+            <Flex justifyContent="center" alignItems="center">
+              <Text textAlign="center" className={styles.subTitle}>
+                {headerSubtitle}
+              </Text>
+              <Image src={Arrow} />
+            </Flex>
+          </Link>
         </Box>
       )}
       <Box>
@@ -35,7 +40,7 @@ function HtExclusiveTemplate1({ data }) {
       </Box>
 
       <Box className={styles.desContainer}>
-        <Box bg="#252525" height="240px" >
+        <Box bg="#252525" height="240px">
           <Box pa="25px">
             <Text className={styles.descriptionTitle} as="h2">
               {mainTitle}

@@ -6,8 +6,16 @@ import Flex from 'hometown-components-dev/lib/FlexHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import SlickSlider from '../SlickSlider';
 
-import Slider from './Slider-copy';
+// import Slider from './Slider-copy';
+
+const adjustSlides = length => ({
+  slidesToShow: length >= 1 ? 3.3 : length,
+  slidesToScroll: 1,
+  autoplay: false,
+  infinite: false
+});
 
 const styles = require('./HtExclusive.scss');
 
@@ -23,21 +31,28 @@ function HtExclusiveTemplate5({ data }) {
           <Box className={styles.horizontalSeperator} />
         </Flex>
         <Box>
-          <Slider collection={collection}>
-            <Flex className={styles.paymentOptions}>
-              <Box width="140px" pb={20} ml="-100px">
-                <Image src="https://static.hometown.in/media/cms/BankLOGO/hdfc.gif" alt="bank-option" />
-              </Box>
-              <Box>
-                <Text as="h2" pb="10px" fontSize="16px">
-                  0% Interest
-                </Text>
-                <Text as="span" fontSize="14px">
-                  On upto 6 months EMI for orders above 3000
-                </Text>
-              </Box>
-            </Flex>
-          </Slider>
+          <Box p="15px">
+            <SlickSlider settings={adjustSlides(12)}>
+              {collection.length &&
+                collection.map((slide, index) => (
+                  <Box key={String(index)} p="10px">
+                    <Flex className={styles.paymentOptions}>
+                      <Box width="140px" pb={20} ml="-100px">
+                        <Image src={slide.url} alt="bank-option" />
+                      </Box>
+                      <Box>
+                        <Text as="h2" pb="10px" fontSize="16px">
+                          {slide.title}
+                        </Text>
+                        <Text as="span" fontSize="14px">
+                          {slide.desc}
+                        </Text>
+                      </Box>
+                    </Flex>
+                  </Box>
+                ))}
+            </SlickSlider>
+          </Box>
         </Box>
       </Box>
     </Box>

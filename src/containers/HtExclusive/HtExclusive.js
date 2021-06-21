@@ -13,11 +13,21 @@ import htExclusiveData from '../../data/ht-exclusive';
 
 function HtExclusive() {
   const {
-    section1, section2, section3, section4, section5, section6, section7, section8, section9, section10
+    section1,
+    section2,
+    section3,
+    section4,
+    section5,
+    section6,
+    section7,
+    section8,
+    section9,
+    section10,
+    section11
   } = htExclusiveData;
 
   return (
-    <Section pt="10px" px="0" >
+    <Section pt="10px" px="0">
       {/* <Menu /> */}
       <Logo />
       <HtExclusiveTemplate1 data={section1} />
@@ -30,7 +40,7 @@ function HtExclusive() {
       <HtExclusiveTemplate3 data={section8} />
       <HtExclusiveTemplate4 data={section9} />
       <HtExclusiveTemplate4 data={section10} />
-      <HtExclusiveTemplate5 data={section10} />
+      <HtExclusiveTemplate5 data={section11} />
       <Footer />
     </Section>
   );
