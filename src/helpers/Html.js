@@ -43,31 +43,31 @@ export default class Html extends Component {
     const {
  assets, store, content, bundles, styleTags
 } = this.props;
-    // let SF_CHAT = {
-    //   url: 'https://praxisretail.my.salesforce.com',
-    //   liveAgentUrl: 'https://praxisretail.secure.force.com/LiveAgent',
-    //   version: '00D7F000006O16S',
-    //   baseLiveAgentContentURL: 'https://c.la2-c2-hnd.salesforceliveagent.com/content',
-    //   deploymentId: '5727F0000009ARB',
-    //   buttonId: '5732y000000PHDP',
-    //   baseLiveAgentURL: 'https://d.la2-c2-hnd.salesforceliveagent.com/chat',
-    //   eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I7F0000004DjiUAE_16c51bfeb82',
-    //   jsUrl: 'https://praxisretail.my.salesforce.com/embeddedservice/5.0/esw.min.js'
-    // };
+    let SF_CHAT = {
+      url: 'https://praxisretail.my.salesforce.com',
+      liveAgentUrl: 'https://praxisretail.secure.force.com/LiveAgent',
+      version: '00D7F000006O16S',
+      baseLiveAgentContentURL: 'https://c.la2-c2-hnd.salesforceliveagent.com/content',
+      deploymentId: '5727F0000009ARB',
+      buttonId: '5732y000000PHDP',
+      baseLiveAgentURL: 'https://d.la2-c2-hnd.salesforceliveagent.com/chat',
+      eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I7F0000004DjiUAE_16c51bfeb82',
+      jsUrl: 'https://praxisretail.my.salesforce.com/embeddedservice/5.0/esw.min.js'
+    };
 
-    // if (process.env.SF_ENV && process.env.SF_ENV !== 'production') {
-    //   SF_CHAT = {
-    //     url: 'https://praxisretail--produat.my.salesforce.com',
-    //     liveAgentUrl: 'https://produat-praxisretail.cs6.force.com/LiveAgent',
-    //     version: '00DN0000000FXR7',
-    //     baseLiveAgentContentURL: 'https://c.la1-c1cs-ukb.salesforceliveagent.com/content',
-    //     deploymentId: '5727F0000009ARB',
-    //     buttonId: '573N000000000sa',
-    //     baseLiveAgentURL: 'https://d.la1-c1cs-ukb.salesforceliveagent.com/chat',
-    //     eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I7F0000004DjiUAE_16c51bfeb82',
-    //     jsUrl: 'https://praxisretail--produat.my.salesforce.com/embeddedservice/5.0/esw.min.js'
-    //   };
-    // }
+    if (process.env.SF_ENV && process.env.SF_ENV !== 'production') {
+      SF_CHAT = {
+        url: 'https://praxisretail--produat.my.salesforce.com',
+        liveAgentUrl: 'https://produat-praxisretail.cs6.force.com/LiveAgent',
+        version: '00DN0000000FXR7',
+        baseLiveAgentContentURL: 'https://c.la1-c1cs-ukb.salesforceliveagent.com/content',
+        deploymentId: '5727F0000009ARB',
+        buttonId: '573N000000000sa',
+        baseLiveAgentURL: 'https://d.la1-c1cs-ukb.salesforceliveagent.com/chat',
+        eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I7F0000004DjiUAE_16c51bfeb82',
+        jsUrl: 'https://praxisretail--produat.my.salesforce.com/embeddedservice/5.0/esw.min.js'
+      };
+    }
     let unbxdScripts = {};
     if (process.env.UNBXD && process.env.UNBXD === 'production') {
       unbxdScripts = {
@@ -153,6 +153,204 @@ export default class Html extends Component {
             <style dangerouslySetInnerHTML={{ __html: '#content{display:none}' }} />
           ) : null}
           {process.env.NODE_ENV !== 'development' && <script dangerouslySetInnerHTML={{ __html: newRelic }} />}
+          <style
+            dangerouslySetInnerHTML={{
+              __html: `
+                .embeddedServiceHelpButton .helpButton .uiButton {
+                  background-color: #515151;
+                  background: #515151!important;
+                  font-family: "Salesforce Sans", sans-serif;
+                  box-sizing: content-box;
+                  font-weight: bold;
+                  font-size: 16px;
+                }
+                .embeddedServiceHelpButton .helpButton .uiButton:focus {
+                  outline: 1px solid #555555;
+                }
+                .embeddedServiceSidebarForm .backgroundImg, .embeddedServiceSidebarForm .backgroundImgColorMask {
+                  height: 35px!important;
+                }
+                span#headerTextLabel {
+                  color: #ffffff;
+                }
+                .embeddedServiceHelpButton .embeddedServiceIcon::before {
+                  color: #FFF !important;
+                }
+                .embeddedServiceSidebarExtendedHeader {
+                  margin: 0 18px !important;
+                  border-radius: 0 0 8px 8px;
+                }
+                .message {
+                  border-style: hidden;
+                  border-width: 1px;
+                  color: white;
+                  padding: 6px 8px 6px 6px;
+                  margin: 0px !important;
+                }
+                .embeddedServiceLiveAgentStateChatHeader:not(.alert) .message {
+                  white-space: normal !important;
+                }
+                .embeddedServiceLiveAgentStateChatHeader .content {
+                  height: 168px !important;
+                }
+                @font-face {
+                  font-family: 'Salesforce Sans';
+                  src: url('https://www.sfdcstatic.com/system/shared/common/assets/fonts/SalesforceSans/SalesforceSans-Regular.woff') format('woff'),
+                  url('https://www.sfdcstatic.com/system/shared/common/assets/fonts/SalesforceSans/SalesforceSans-Regular.ttf') format('truetype');
+                }
+                #custom_snapins_invite {
+                  background-color: #FFFFFF;
+                  font-family: "Salesforce Sans", sans-serif;
+                  overflow: visible;
+                  border-radius: 8px;
+                  /* visibility: visible; */
+                  position: fixed;
+                  bottom: 60px;
+                  right: 15px;
+                }
+
+                .embeddedServiceInvitation {
+                  background-color: transparent;
+                  max-width: 290px;
+                  max-height: 210px;
+                  -webkit-box-shadow: 0 7px 12px rgba(0, 0, 0, 0.28);
+                  -moz-box-shadow: 0 7px 12px rgba(0, 0, 0, 0.28);
+                  box-shadow: 0 7px 12px rgba(0, 0, 0, 0.28);
+                }
+
+                @media only screen and (min-width: 48em) {
+
+                  /*mobile*/
+                  .embeddedServiceInvitation {
+                    max-width: 332px;
+                    max-height: 210px;
+                  }
+                }
+
+                .embeddedServiceInvitation>.embeddedServiceInvitationHeader {
+                  width: inherit;
+                  height: 50px;
+                  line-height: 32px;
+                  padding: 10px;
+                  color: #FFFFFF;
+                  background-color: #515151;
+                  overflow: initial;
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: stretch;
+                  border-top-left-radius: 8px;
+                  border-top-right-radius: 8px;
+                }
+
+                .embeddedServiceInvitationHeader #embeddedServiceAvatar {
+                  width: 32px;
+                  height: 32px;
+                  border-radius: 50%;
+                }
+
+                .embeddedServiceInvitationHeader .embeddedServiceTitleText {
+                  font-size: 18px;
+                  color: #FFFFFF;
+                  overflow: hidden;
+                  word-wrap: normal;
+                  white-space: nowrap;
+                  text-overflow: ellipsis;
+                  align-self: stretch;
+                  flex-grow: 1;
+                  max-width: 100%;
+                  margin: 0 12px;
+                }
+
+                .embeddedServiceInvitationHeader .embeddedServiceCloseIcon {
+                  border: none;
+                  border-radius: 3px;
+                  cursor: pointer;
+                  position: relative;
+                  bottom: 3%;
+                  background-color: transparent;
+                  width: 32px;
+                  height: 32px;
+                  font-size: 23px;
+                  color: #FFFFFF;
+                }
+
+                .embeddedServiceInvitationHeader .embeddedServiceCloseIcon:focus {
+                  outline: none;
+                }
+
+                .embeddedServiceInvitationHeader .embeddedServiceCloseIcon:focus::before {
+                  content: " ";
+                  position: absolute;
+                  top: 11%;
+                  left: 7%;
+                  width: 85%;
+                  height: 85%;
+                  background-color: rgba(255, 255, 255, 0.2);
+                  border-radius: 4px;
+                  pointer-events: visible;
+                }
+
+                .embeddedServiceInvitationHeader .embeddedServiceCloseIcon:active,
+                .embeddedServiceCloseIcon:hover {
+                  background-color: #FFFFFF;
+                  color: rgba(0, 0, 0, 0.7);
+                  opacity: 0.7;
+                }
+
+                .embeddedServiceInvitation>.embeddedServiceInvitationBody {
+                  background-color: #FFFFFF;
+                  max-height: 110px;
+                  min-width: 260px;
+                  margin: 0 8px;
+                  font-size: 14px;
+                  line-height: 20px;
+                  overflow: auto;
+                }
+
+                .embeddedServiceInvitationBody p {
+                  color: #333333;
+                  padding: 8px;
+                  margin: 12px 0;
+                }
+
+                .embeddedServiceInvitation>.embeddedServiceInvitationFooter {
+                  width: inherit;
+                  color: #FFFFFF;
+                  text-align: right;
+                  background-color: #FFFFFF;
+                  // padding: 10px;
+                  max-height: 50px;
+                  border-bottom-left-radius: 8px;
+                  border-bottom-right-radius: 8px;
+                }
+
+                .embeddedServiceInvitationFooter>.embeddedServiceActionButton {
+                  font-size: 14px;
+                  max-height: 40px;
+                  border: none;
+                  border-radius: 4px;
+                  padding: 10px;
+                  margin: 4px;
+                  text-align: center;
+                  text-decoration: none;
+                  display: inline-block;
+                  cursor: pointer;
+                  background-color: #515151;
+                  color: #ffffff;
+                }
+
+                .embeddedServiceInvitationFooter>#acceptInvite {
+                  background-color: #333333;
+                  color: #FFFFFF;
+                }
+
+                .embeddedServiceInvitationFooter>#rejectInvite {
+                  background-color: #FFFFFF;
+                  color: #333333;
+                }
+                `
+            }}
+          />
         </head>
         <body>
           {/* {process.env.NODE_ENV !== 'development' && (
@@ -197,6 +395,123 @@ export default class Html extends Component {
               }}
             />
           ) : null}
+          <script type="text/javascript" src="https://service.force.com/embeddedservice/5.0/esw.min.js" />
+          <script
+            type="text/javascript"
+            src="https://c.la1-c1-hnd.salesforceliveagent.com/content/g/js/47.0/deployment.js"
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+               liveagent.init('${SF_CHAT.baseLiveAgentURL}', '${SF_CHAT.deploymentId}', '${SF_CHAT.version}');
+             `
+            }}
+            charSet="UTF-8"
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                var emailId ='';
+                var initESW = function(gslbBaseURL) {
+                  embedded_svc.settings.displayHelpButton = true;
+                  embedded_svc.settings.language = '';
+                  embedded_svc.settings.defaultMinimizedText = 'Chat With Us';
+                  //embedded_svc.settings.disabledMinimizedText = '...'; //(Defaults to Agent Offline)
+                  //embedded_svc.settings.loadingText = 'Chat started'; //(Defaults to Loading)
+                  //embedded_svc.settings.storageDomain = 'yourdomain.com'; //(Sets the domain for your deployment so that visitors can navigate subdomains during a chat session)
+                  // Settings for Live Agent
+                  //embedded_svc.settings.directToButtonRouting = function(prechatFormData) {
+                  // Dynamically changes the button ID based on what the visitor enters in the pre-chat form.
+                  // Returns a valid button ID.
+                  //};
+                  embedded_svc.settings.prepopulatedPrechatFields = {
+                    Email : emailId
+                  };
+                  //Sets the auto-population of pre-chat form fields
+                  //embedded_svc.settings.fallbackRouting = []; //An array of button IDs, user IDs, or userId_buttonId
+                  //embedded_svc.settings.offlineSupportMinimizedText = '...'; //(Defaults to Contact Us)
+                  embedded_svc.settings.extraPrechatInfo = [{
+                    "entityFieldMaps": [{
+                      "doCreate":false,
+                      "doFind":true,
+                      "fieldName":"PersonEmail",
+                      "isExactMatch":true,
+                      "label":"Email"
+                    }],
+                    "entityName": "Account",
+                    "linkToEntityName": "Case",
+                    "linkToEntityField": "AccountId"
+                  },
+                  {
+                    "entityName": "Case",
+                    "showOnCreate": true,
+                    "saveToTranscript": "CaseId",
+                    "entityFieldMaps": [{
+                      "isExactMatch": false,
+                      "fieldName": "Subject",
+                      "doCreate": true,
+                      "doFind": false,
+                      "label": "CaseSubject"
+                    },
+                    {
+                      "isExactMatch": false,
+                      "fieldName": "Status",
+                      "doCreate": true,
+                      "doFind": false,
+                      "label": "CaseStatus"
+                    },
+                    {
+                      "isExactMatch": false,
+                      "fieldName": "Origin",
+                      "doCreate": true,
+                      "doFind": false,
+                      "label": "CaseOrigin"
+                    }]
+                  }];
+                  embedded_svc.settings.extraPrechatFormDetails = [{
+                    "label": "CaseSubject",
+                    "value": "Live Chat",
+                    "displayToAgent": true
+                  }, {
+                    "label": "CaseStatus",
+                    "value": "Open",
+                    "displayToAgent": false
+                  }, {
+                    "label": "CaseOrigin",
+                    "value": "Chat",
+                    "displayToAgent": true
+                  }];
+                  embedded_svc.settings.enabledFeatures = ['LiveAgent'];
+                  embedded_svc.settings.entryFeature = 'LiveAgent';
+                embedded_svc.init(
+                  '${SF_CHAT.url}',
+                  '${SF_CHAT.liveAgentUrl}',
+                  gslbBaseURL,
+                   '${SF_CHAT.version}',
+                  'Chat_Deployment',
+                  {
+                    baseLiveAgentContentURL: '${SF_CHAT.baseLiveAgentContentURL}',
+                    deploymentId: '${SF_CHAT.deploymentId}',
+                    buttonId: '${SF_CHAT.buttonId}',
+                    baseLiveAgentURL: '${SF_CHAT.baseLiveAgentURL}',
+                    eswLiveAgentDevName: '${SF_CHAT.eswLiveAgentDevName}',
+                    isOfflineSupportEnabled: true
+                  }
+                );
+              };
+              if (!window.embedded_svc) {
+                var s = document.createElement('script');
+               s.setAttribute('src', '${SF_CHAT.jsUrl}');
+                s.onload = function() {
+                  initESW(null);
+                };
+                document.body.appendChild(s);
+              } else {
+                initESW('https://service.force.com');
+              }`
+            }}
+            charSet="UTF-8"
+          />
           <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async="" />
           <script
             dangerouslySetInnerHTML={{
