@@ -26,7 +26,8 @@ function HtExclusiveTemplate4({ data }) {
  headerTitle, mainTitle, description, banner, collection
 } = data;
   return (
-    <Box>
+    <Box mb="60px">
+      {headerTitle &&
       <Box bg="#F5F5F5" py="20">
         <Heading textAlign="center" as="h2" pb="10" pt="20" fontSize="50px">
           {headerTitle}
@@ -35,31 +36,32 @@ function HtExclusiveTemplate4({ data }) {
           <Box className={styles.horizontalSeperator} />
         </Flex>
       </Box>
+    }
       <Box>
         <Image src={banner} alt="chester-furniture" width="100%" Height="800px" />
       </Box>
 
-      <Box py="1rem" px="3rem">
+      <Box width="1000px" margin="0 auto">
         <Heading as="h2" pt="20px" textAlign="center" fontSize="40px">
           {mainTitle}
         </Heading>
         <div className={styles.descriptionText}>{description}</div>
       </Box>
 
-      <Box p="15px">
+      <Box width="1000px" margin="0 auto">
         <SlickSlider settings={adjustSlides(12)}>
           {collection.length &&
             collection.map((slide, index) => (
               <Box key={String(index)}>
                 <Flex className={styles.Options}>
-                  <Box width="350px">
+                  <Box width="300px">
                     <Image src={slide.url} alt="bank-option" height="350px" width="400px" />
                   </Box>
                   <Box>
                     <Link to={slide.link}>
                       <Flex justifyContent="flex-start" alignItems="center">
                         <Box pr="5px">
-                          <Text as="h2" py="10px" fontSize="25px" textAlign="left" width="100%">
+                          <Text as="h2" py="10px" fontSize="25px" textAlign="left" >
                             {slide.name}
                           </Text>
                         </Box>

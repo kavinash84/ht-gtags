@@ -35,8 +35,8 @@ function HtExclusiveTemplate2({ data }) {
         <Image src={banner} alt="chester-furniture" height="800px" width="100%" />
       </Box>
 
-      <Box>
-        <Flex flexWrap="wrap" px="20" py="20">
+      <Box width="1000px" margin="0 auto">
+        <Flex flexWrap="wrap" px="20" py="20" >
           {imageCollection.map(arr => (
             <Col variant="col-4" py="20px">
               <Link to={arr.link} cursor="pointer">

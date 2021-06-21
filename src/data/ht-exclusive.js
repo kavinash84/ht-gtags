@@ -253,7 +253,7 @@ const htExclusiveData = {
     collection: [
       {
         url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template4/traditional/shop-living.png',
-        name: 'SHOP LIVING',
+        name: 'Shop Living',
         link: '/furniture/living-room-furniture/ht-exclusive-living/sofa--sectionals'
       },
       {
@@ -269,7 +269,6 @@ const htExclusiveData = {
     ]
   },
   section10: {
-    headerTitle: 'Shop by style',
     mainTitle: 'Modern Urbane',
     description:
       'An urban modern style stems from cosmopolitan influence—think designer apartments in a major city -that fuses together opposing, yet complementary, design elements. Modern lines, contemporary styles, graphic, giving the home a hip yet comfortable and welcoming feel.',

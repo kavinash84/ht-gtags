@@ -22,22 +22,22 @@ const styles = require('./HtExclusive.scss');
 function HtExclusiveTemplate5({ data }) {
   const { headerTitle, collection } = data;
   return (
-    <Box>
+    <Box mb="-50px">
       <Box bg="#F5EEEE" py="20">
-        <Heading textAlign="center" as="h2" pb="10" pt="20" fontSize="50px">
+        <Heading textAlign="center" as="h2" pb="10" pt="20" fontSize="40px">
           {headerTitle}
         </Heading>
         <Flex justifyContent="center">
           <Box className={styles.horizontalSeperator} />
         </Flex>
         <Box>
-          <Box p="15px">
+          <Box width="1000px" margin="20px auto">
             <SlickSlider settings={adjustSlides(12)}>
               {collection.length &&
                 collection.map((slide, index) => (
                   <Box key={String(index)} p="10px">
                     <Flex className={styles.paymentOptions}>
-                      <Box width="140px" pb={20} ml="-100px">
+                      <Box width="140px" pb={20} ml="-85px">
                         <Image src={slide.url} alt="bank-option" />
                       </Box>
                       <Box>
