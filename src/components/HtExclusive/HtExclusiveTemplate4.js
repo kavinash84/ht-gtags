@@ -27,16 +27,16 @@ function HtExclusiveTemplate4({ data }) {
 } = data;
   return (
     <Box mb="60px">
-      {headerTitle &&
-      <Box bg="#F5F5F5" py="20">
-        <Heading textAlign="center" as="h2" pb="10" pt="20" fontSize="50px">
-          {headerTitle}
-        </Heading>
-        <Flex justifyContent="center">
-          <Box className={styles.horizontalSeperator} />
-        </Flex>
-      </Box>
-    }
+      {headerTitle && (
+        <Box bg="#F5F5F5" py="20">
+          <Heading textAlign="center" as="h2" pb="10" pt="20" fontSize="50px">
+            {headerTitle}
+          </Heading>
+          <Flex justifyContent="center">
+            <Box className={styles.horizontalSeperator} />
+          </Flex>
+        </Box>
+      )}
       <Box>
         <Image src={banner} alt="chester-furniture" width="100%" Height="800px" />
       </Box>
@@ -57,11 +57,11 @@ function HtExclusiveTemplate4({ data }) {
                   <Box width="300px">
                     <Image src={slide.url} alt="bank-option" height="350px" width="400px" />
                   </Box>
-                  <Box>
+                  <Box mt="20px">
                     <Link to={slide.link}>
                       <Flex justifyContent="flex-start" alignItems="center">
                         <Box pr="5px">
-                          <Text as="h2" py="10px" fontSize="25px" textAlign="left" >
+                          <Text as="h2" py="10px" fontSize="25px" textAlign="left">
                             {slide.name}
                           </Text>
                         </Box>

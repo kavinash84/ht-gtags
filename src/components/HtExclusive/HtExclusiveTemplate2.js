@@ -20,11 +20,11 @@ function HtExclusiveTemplate2({ data }) {
   console.log('data', data);
   return (
     <Box>
-      <Box bg="#F5F5F5" py="20">
+      <Box bg="#F5F5F5">
         <h2 className={styles.headerTitle}>{mainTitle}</h2>
         <Link to={link}>
           <Flex justifyContent="center" alignItems="center">
-            <Text fontSize="30px" className={styles.subTitle}>
+            <Text fontSize="30px" fontWeight="bold" className={styles.subTitle}>
               {subTitle}
             </Text>
             <Image src={Arrow} />
@@ -36,7 +36,7 @@ function HtExclusiveTemplate2({ data }) {
       </Box>
 
       <Box width="1000px" margin="0 auto">
-        <Flex flexWrap="wrap" px="20" py="20" >
+        <Flex flexWrap="wrap" px="20px" pb="40px" pt="20px">
           {imageCollection.map(arr => (
             <Col variant="col-4" py="20px">
               <Link to={arr.link} cursor="pointer">

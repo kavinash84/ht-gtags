@@ -276,28 +276,18 @@ const htExclusiveData = {
     collection: [
       {
         url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template4/traditional/shop-living.png',
-        name: 'Sofas only',
+        name: 'Shop Living',
         link: '/furniture/living-room-furniture/ht-exclusive-living/sofa--sectionals'
       },
       {
         url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template4/traditional/shop-dining.png',
-        name: 'Chairs',
+        name: 'Shop Dining',
         link: '/furniture/living-room-furniture/accent-chairs'
       },
       {
         url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template4/traditional/shop-living.png',
-        name: 'Coffee Tables',
+        name: 'Shop Bedroom',
         link: '/furniture/living-room-furniture/ht-exclusive-living/coffee-table'
-      },
-      {
-        url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template4/traditional/shop-dining.png',
-        name: 'TV Stands & Entertainment Centers',
-        link: '/furniture/living-room-furniture/ht-exclusive-living/entertainment-unit'
-      },
-      {
-        url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template4/traditional/shop-living.png',
-        name: 'End & Side Tables',
-        link: '/furniture/living-room-furniture/ht-exclusive-living/side-table'
       }
     ]
   },
@@ -306,22 +296,22 @@ const htExclusiveData = {
     mainTitle: 'Modern Urbane',
     collection: [
       {
-        url: 'https://static.hometown.in/media/cms/BankLOGO/hdfc.gif',
+        url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/easyfinance/hdfc-logo.png',
         title: 'Extra 10% Cashback on',
         desc: 'HDFC debit and credit cards. Conditions apply. Know more'
       },
       {
-        url: 'https://static.hometown.in/media/cms/BankLOGO/hdfc.gif',
+        url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/easyfinance/bajaj-finserv-logo.png',
         title: '0% Interest',
         desc: 'On upto 6 months EMI for orders above 3000'
       },
       {
-        url: 'https://static.hometown.in/media/cms/BankLOGO/hdfc.gif',
+        url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/easyfinance/hdfc-logo.png',
         title: '0% Interest',
         desc: 'On upto 6 months EMI for orders above 3000'
       },
       {
-        url: 'https://static.hometown.in/media/cms/BankLOGO/hdfc.gif',
+        url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/easyfinance/bajaj-finserv-logo.png',
         title: '0% Interest',
         desc: 'On upto 6 months EMI for orders above 3000'
       }

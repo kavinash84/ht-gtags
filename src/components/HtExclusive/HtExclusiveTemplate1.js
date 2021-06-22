@@ -19,7 +19,7 @@ function HtExclusiveTemplate1({ data }) {
  mainTitle, subTitles, description, banner, headerTitle, headerSubtitle, headerLink
 } = data;
   return (
-    <Box>
+    <Box mb="-60px">
       {headerTitle && headerSubtitle && (
         <Box bg="#F5F5F5" pb="10">
           <h2 className={styles.headerTitle}>{headerTitle}</h2>
@@ -63,7 +63,7 @@ function HtExclusiveTemplate1({ data }) {
             </Col>
           </Flex>
         </Box>
-        <div className={styles.descriptionText}>{description}</div>
+        <Text className={styles.descriptionText}>{description}</Text>
       </div>
     </Box>
   );

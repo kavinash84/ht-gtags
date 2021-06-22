@@ -41,7 +41,7 @@ function HtExclusiveTemplate5({ data }) {
                         <Image src={slide.url} alt="bank-option" />
                       </Box>
                       <Box>
-                        <Text as="h2" pb="10px" fontSize="16px">
+                        <Text as="h2" fontSize="16px">
                           {slide.title}
                         </Text>
                         <Text as="span" fontSize="14px">

@@ -34,15 +34,15 @@ function HtExclusiveTemplate3({ data }) {
       </Section>
       <Section className={styles.right}>
         <Box>
-          <Heading as="h2" fontSize="35px" ml="5px" >
+          <Heading as="h2" fontSize="35px" ml="5px">
             {mainTitle}
           </Heading>
-          <Text fontSize="26px" m="20px 0 20px 5px" className={styles.description}>
+          <Text m="20px 0 20px 5px" className={styles.description}>
             {description}
           </Text>
         </Box>
 
-        <Box >
+        <Box>
           <SlickSlider settings={adjustSlides(12)}>
             {collection.length &&
               collection.map((slide, index) => (
