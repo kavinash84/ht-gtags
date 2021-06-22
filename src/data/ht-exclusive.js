@@ -9,11 +9,11 @@ const htExclusiveData = {
       { boldText: 'quality', normalText: 'and comfort' }
     ],
     description:
-      'Take home our exclusive furniture collection - unsurpassed in form, function and design. Whether you are reimagining one room or your entire home, HomeTown Exclusives add the perfect touch of elegance and beauty.'
+      'Unsurpassed in form, function and design, HomeTown Exclusives add the perfect touch of elegance and beauty to your home.'
   },
   section2: {
-    mainTitle: 'most loved & best reviewed',
-    subTitle: 'Shop living room exclusives',
+    mainTitle: 'our most loved sofas',
+    subTitle: 'SHOP LIVING ROOM EXCLUSIVES',
     banner: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/sofas/sofas-banner-2.png',
     imageCollection: [
       {
@@ -56,8 +56,8 @@ const htExclusiveData = {
     link: '/furniture/living-room-furniture'
   },
   section3: {
-    mainTitle: 'favorite bedroom, pieces back in stock',
-    subTitle: 'Shop bedroom exclusives',
+    mainTitle: 'most loved and best reviewed',
+    subTitle: 'SHOP BEDROOM EXCLUSIVES',
     banner: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/beds/bed-banners.jpg',
     imageCollection: [
       {
@@ -100,8 +100,8 @@ const htExclusiveData = {
     link: '/furniture/bedroom-furniture'
   },
   section4: {
-    mainTitle: 'family that eats together, stays happy',
-    subTitle: 'Shop Dining Room Exclusives',
+    mainTitle: 'welcome to the table',
+    subTitle: 'SHOP DINING ROOM EXCLUSIVES',
     banner: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/dining/dining-banner.jpg',
     imageCollection: [
       {
@@ -145,7 +145,7 @@ const htExclusiveData = {
   },
   section5: {
     headerTitle: 'favourite destination for recliners',
-    headerSubtitle: 'Shop Now',
+    headerSubtitle: 'SHOP RECLINERS',
     headerLink: '/furniture/living-room-furniture/recliners',
     banner: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template1/recliners/recliners-2.png',
     mainTitle: 'Recline, Relax And Rewind',
@@ -155,12 +155,12 @@ const htExclusiveData = {
       { boldText: 'comfort', normalText: 'and style' }
     ],
     description:
-      'Kick back or lean in, stretch out or sit tight, our best in class recliners are the perfect choice. We have mastered the art of reclined seating with unparalleled comfort, unmatched quality and latest technology.'
+      'Sit back and relax. We have mastered the art of reclined seating with latest technology that offers unparalleled comfort and unmatched quality'
   },
   section6: {
     mainTitle: 'Bristol Recliners',
     description:
-      'The Bristol recliner in high gloss superior bovine leather upholstery brings style and superiority to any living room. With high backrest and bucket seats, it’s unmatched comfort.',
+      'The Bristol recliner in high gloss superior bovine leather upholstery, high backrest and bucket seats brings style and flamboyance to any space.',
     banner: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template3/bristol/bristol-recliner.png',
     collection: [
       {
@@ -189,7 +189,7 @@ const htExclusiveData = {
   section7: {
     mainTitle: 'Eclairs Recliners',
     description:
-      'The Eclairs recliner lends a touch of aristocratic elegance with its beautiful two tone leatherette upholstered look. With its world class reclining mechanism and enduring quality, it’s a must have for every home',
+      'The Eclairs recliner lends a touch of aristocracy to your living area. It’s beautiful two tone leatherette upholstered look, smooth reclining mechanism and superior quality, it’s a must have in every home.',
     banner: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template3/eclairs/eclairs-recliner.png',
     collection: [
       {
@@ -218,7 +218,7 @@ const htExclusiveData = {
   section8: {
     mainTitle: 'Bradford Recliners',
     description:
-      'The Bradford fabric recliner is an unparalleled seating experience. With its plush lounger softness and sink in feeling, transforms you into a warm congenial space',
+      'The Bradford recliner is an unparalleled seating experience. It’s plush lounger softness and sink in comfort is sure to transform you into a warm congenial space',
     banner: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template3/bradford/bradford-recliners.png',
     collection: [
       {
@@ -248,7 +248,7 @@ const htExclusiveData = {
     headerTitle: 'Shop by style',
     mainTitle: 'Traditional Classic',
     description:
-      'Traditional Classic is a timeless style taking cues from the 18th and 19th centuries, incorporating traditional design influenced by European decor, one can see a lot of regal influence in the furniture. Furniture is intricate - a bit ornate; like clawfoot tubs, tufted upholstery, and carved wood',
+      'Traditional classic is a timeless style. Inspired by the 18th century European deco, the designs have a regal influence. The collection is intricate and ornate with tufted upholstery, carved wood, claw foot tubs and traditional designs.',
     banner: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template4/traditional/traditional-banner-2.png',
     collection: [
       {
@@ -271,7 +271,7 @@ const htExclusiveData = {
   section10: {
     mainTitle: 'Modern Urbane',
     description:
-      'An urban modern style stems from cosmopolitan influence—think designer apartments in a major city -that fuses together opposing, yet complementary, design elements. Modern lines, contemporary styles, graphic, giving the home a hip yet comfortable and welcoming feel.',
+      'Our Modern Urbane collection has a strong cosmopolitan influence with its clean modern lines and contemporary styling. With contrasting yet complementary design elements, this collection is perfect for any modern day city apartment.',
     banner: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template4/modern/modern-banner-2.png',
     collection: [
       {
@@ -307,8 +307,8 @@ const htExclusiveData = {
     collection: [
       {
         url: 'https://static.hometown.in/media/cms/BankLOGO/hdfc.gif',
-        title: '0% Interest',
-        desc: 'On upto 6 months EMI for orders above 3000'
+        title: 'Extra 10% Cashback on',
+        desc: 'HDFC debit and credit cards. Conditions apply. Know more'
       },
       {
         url: 'https://static.hometown.in/media/cms/BankLOGO/hdfc.gif',
