@@ -17,37 +17,37 @@ const htExclusiveData = {
     banner: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/sofas/sofas-banner-2.png',
     imageCollection: [
       {
-        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/sofas/sofas.png',
+        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/sofas/sofas-1.png',
         alt: 'Sofas',
         title: 'Sofas',
         link: '/furniture/living-room-furniture/sofas'
       },
       {
-        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/sofas/loungers.png',
+        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/sofas/loungers-1.png',
         alt: 'Loungers',
         title: 'Loungers',
         link: '/furniture/living-room-furniture/loungers'
       },
       {
-        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/sofas/recliners.png',
+        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/sofas/recliners-1.png',
         alt: 'Recliners',
         title: 'Recliners',
         link: '/furniture/living-room-furniture/recliners'
       },
       {
-        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/sofas/accent-chairs.png',
+        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/sofas/accent-chairs-1.png',
         alt: 'Accent Chairs',
         title: 'Accent Chairs',
         link: '/furniture/living-room-furniture/accent-chairs'
       },
       {
-        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/sofas/tv-units.png',
+        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/sofas/tv-units-1.png',
         alt: 'TV Units',
         title: 'TV Units',
         link: '/furniture/living-room-furniture/tv-units'
       },
       {
-        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/sofas/coffee-tables.png',
+        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/sofas/coffee-tables-1.png',
         alt: 'Coffee Tables',
         title: 'Coffee Tables',
         link: '/furniture/living-room-furniture/coffee-tables'
@@ -61,37 +61,37 @@ const htExclusiveData = {
     banner: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/beds/bed-banners.jpg',
     imageCollection: [
       {
-        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/beds/king-bed.png',
+        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/beds/king-bed-1.png',
         alt: 'King Beds',
         title: 'King Beds',
         link: 'furniture/beds/king-size-beds'
       },
       {
-        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/beds/queen-beds.png',
+        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/beds/queen-bed-1.png',
         alt: 'Queen Beds',
         title: 'Queen Beds',
         link: '/furniture/beds/queen-size-beds'
       },
       {
-        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/beds/day-beds.png',
+        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/beds/day-bed-1.png',
         alt: 'Daily Beds',
         title: 'Daily Beds',
         link: '/furniture/bedroom-furniture/beds'
       },
       {
-        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/beds/wardrobes.png',
+        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/beds/wardrobes-1.png',
         alt: 'Wardrobes',
         title: 'Wardrobes',
         link: '/furniture/bedroom-furniture/wardrobes'
       },
       {
-        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/beds/dressers.png',
+        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/beds/dressers-1.png',
         alt: 'Dressers & Night Stands',
         title: 'Dressers & Night Stands',
         link: '/furniture/bedroom-furniture/dressing-tables'
       },
       {
-        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/beds/mattresses.png',
+        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/beds/matteresses-1.png',
         alt: 'Mattresses',
         title: 'Mattresses',
         link: '/furniture/mattresses'
@@ -105,37 +105,37 @@ const htExclusiveData = {
     banner: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/dining/dining-banner.jpg',
     imageCollection: [
       {
-        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/dining/6-seater-dining.png',
+        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/dining/6-seater-dining-1.png',
         alt: '6 Seater Dining Sets',
         title: '6 Seater Dining Sets',
         link: '/furniture/dining-sets/six-seater-dining-sets'
       },
       {
-        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/dining/4-seater-dining.png',
+        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/dining/4-seater-dining-1.png',
         alt: '4 Seater Dining Sets',
         title: '4 Seater Dining Sets',
         link: '/furniture/dining-sets/four-seater-dining-sets'
       },
       {
-        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/dining/6-seater-sets.png',
+        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/dining/6-seater-table-1.png',
         alt: '6 Seater Dining Tables',
         title: '6 Seater Dining Tables',
         link: '/furniture/dining-tables/six-seater-dining-tables'
       },
       {
-        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/dining/4-seater-table.png',
+        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/dining/4-seater-table-1.png',
         alt: '4 Seater Dining Tables',
         title: '4 Seater Dining Tables',
         link: '/furniture/dining-tables/four-seater-dining-tables'
       },
       {
-        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/dining/sideboards.png',
+        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/dining/sideboards-1.png',
         alt: 'Sideboards',
         title: 'Sideboards',
         link: '/furniture/dining-kitchen-furniture/storage-sideboards'
       },
       {
-        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/dining/chairs.png',
+        image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/dining/chairs-1.png',
         alt: 'Chairs',
         title: 'Chairs',
         link: '/furniture/dining-kitchen-furniture/dining-chairs'
