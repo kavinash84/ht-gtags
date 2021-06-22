@@ -9,8 +9,11 @@ import Text from 'hometown-components-dev/lib/TextHtV1';
 import Col from 'hometown-components-dev/lib/ColHtV1';
 // import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 
+import CategoryBannerImage from './CategoryBannerImage';
+import HtExclusiveContainer from './HtExclusiveContainer';
+
+import CategoryHeader from './Header';
 import Separator from '../../../static/htexclusive/separator.svg';
-import Arrow from '../../../static/htexclusive/forward-arrow.svg';
 
 const styles = require('./HtExclusive.scss');
 
@@ -21,52 +24,54 @@ function HtExclusiveTemplate1({ data }) {
   return (
     <Box mb="-60px">
       {headerTitle && headerSubtitle && (
-        <Box bg="#F5F5F5" pb="10">
-          <h2 className={styles.headerTitle}>{headerTitle}</h2>
-          <Link to={headerLink}>
-            <Flex justifyContent="center" alignItems="center">
-              <Text fontSize="30px" fontWeight="bold" className={styles.subTitle}>
-                {headerSubtitle}
-              </Text>
-              <Image src={Arrow} ml="5px" height="10px" width="20px" />
-            </Flex>
-          </Link>
-        </Box>
+        <CategoryHeader mainTitle={headerTitle} subTitle={headerSubtitle} link={headerLink} />
       )}
-      <Box>
-        <Image src={banner} alt="chester-furniture" height="850px" width="100%" />
-      </Box>
 
-      <div className={styles.desContainer}>
-        <Box bg="#252525" height="240px">
-          <Box pa="25px">
-            <h2 className={styles.descriptionTitle}>{mainTitle}</h2>
+      <CategoryBannerImage banner={banner} />
+
+      <HtExclusiveContainer>
+        <Box
+          sx={{
+            position: 'relative',
+            bottom: '120px'
+          }}
+        >
+          <Box
+            sx={{
+              backgroundColor: '#252525',
+              height: '250px'
+            }}
+          >
+            <Box pa="25px">
+              <h2 className={styles.descriptionTitle}>{mainTitle}</h2>
+            </Box>
+            <Flex pb="25px" px="7.5rem" justifyContent="space-between">
+              <Col variant="col-3" px="0" py="0">
+                <h3 className={styles.subTitlesBold}>{subTitles[0].boldText}</h3>
+                <span className={styles.subTitlesLight}>{subTitles[0].normalText}</span>
+              </Col>
+              <Flex>
+                <Image src={Separator} alt="seperator" className={styles.separator} />
+              </Flex>
+              <Col variant="col-3" px="0" py="0">
+                <h3 className={styles.subTitlesBold}>{subTitles[1].boldText}</h3>
+                <span className={styles.subTitlesLight}>{subTitles[1].normalText}</span>
+              </Col>
+              <Flex>
+                <Image src={Separator} alt="seperator" className={styles.separator} />
+              </Flex>
+              <Col variant="col-3" px="0" py="0">
+                <h3 className={styles.subTitlesBold}>{subTitles[2].boldText}</h3>
+                <span className={styles.subTitlesLight}>{subTitles[2].normalText}</span>
+              </Col>
+            </Flex>
           </Box>
-          <Flex pb="25px" px="7.5rem" justifyContent="space-between">
-            <Col variant="col-3" px="0" py="0">
-              <h3 className={styles.subTitlesBold}>{subTitles[0].boldText}</h3>
-              <span className={styles.subTitlesLight}>{subTitles[0].normalText}</span>
-            </Col>
-            <Flex>
-              <Image src={Separator} alt="seperator" className={styles.separator} />
-            </Flex>
-            <Col variant="col-3" px="0" py="0">
-              <h3 className={styles.subTitlesBold}>{subTitles[1].boldText}</h3>
-              <span className={styles.subTitlesLight}>{subTitles[1].normalText}</span>
-            </Col>
-            <Flex>
-              <Image src={Separator} alt="seperator" className={styles.separator} />
-            </Flex>
-            <Col variant="col-3" px="0" py="0">
-              <h3 className={styles.subTitlesBold}>{subTitles[2].boldText}</h3>
-              <span className={styles.subTitlesLight}>{subTitles[2].normalText}</span>
-            </Col>
-          </Flex>
+
+          <Text sx={{ margin: '20px 0', fontSize: '26px' }} className={styles.descriptionText}>
+            {description}
+          </Text>
         </Box>
-        <Text sx={{ margin: '20px 0', fontSize: '26px' }} className={styles.descriptionText}>
-          {description}
-        </Text>
-      </div>
+      </HtExclusiveContainer>
     </Box>
   );
 }

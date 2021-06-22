@@ -9,7 +9,9 @@ import Text from 'hometown-components-dev/lib/TextHtV1';
 // import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import Col from 'hometown-components-dev/lib/ColHtV1';
 
-import Arrow from '../../../static/htexclusive/forward-arrow.svg';
+import CategoryBannerImage from './CategoryBannerImage';
+import HtExclusiveContainer from './HtExclusiveContainer';
+import CategoryHeader from './Header';
 
 const styles = require('./HtExclusive.scss');
 
@@ -20,22 +22,11 @@ function HtExclusiveTemplate2({ data }) {
   console.log('data', data);
   return (
     <Box>
-      <Box bg="#F5F5F5" py="10px">
-        <h2 className={styles.headerTitle}>{mainTitle}</h2>
-        <Link to={link}>
-          <Flex justifyContent="center" alignItems="center">
-            <Text fontSize="30px" fontWeight="bold" className={styles.subTitle}>
-              {subTitle}
-            </Text>
-            <Image src={Arrow} ml="5px" height="10px" width="20px" />
-          </Flex>
-        </Link>
-      </Box>
-      <Box>
-        <Image src={banner} alt="chester-furniture" height="800px" width="100%" />
-      </Box>
+      <CategoryHeader mainTitle={mainTitle} subTitle={subTitle} link={link} />
 
-      <Box width="1000px" margin="0 auto">
+      <CategoryBannerImage banner={banner} />
+
+      <HtExclusiveContainer>
         <Flex flexWrap="wrap" px="20px" pb="40px" pt="20px">
           {imageCollection.map(arr => (
             <Col variant="col-4" py="20px">
@@ -44,7 +35,7 @@ function HtExclusiveTemplate2({ data }) {
                   <Image src={arr.image} alt={arr.alt} className={styles.imageCollection} />
                 </Flex>
                 <Box py="10px">
-                  <Text textAlign="center" fontWeight="bold" fontSize="25px">
+                  <Text textAlign="center" fontWeight="bold" fontSize="33px">
                     {arr.title}
                   </Text>
                 </Box>
@@ -52,7 +43,7 @@ function HtExclusiveTemplate2({ data }) {
             </Col>
           ))}
         </Flex>
-      </Box>
+      </HtExclusiveContainer>
     </Box>
   );
 }

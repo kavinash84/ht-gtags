@@ -1,8 +1,6 @@
 .desContainer {
-  margin: 0 auto;
   position: relative;
   bottom: 120px;
-  width: 900px;
 }
 
 .descriptionTitle {
@@ -52,13 +50,15 @@
 
 .avatar {
   border-radius: 50%;
-  height: 400px;
-  width: 400px;
+  height: 455px;
+  width: 455px;
+  aspect-ratio: 1;
+  object-fit: cover;
 }
 
 .horizontalSeperator {
   box-sizing: border-box;
-  width: 20px;
+  width: 30px;
   height: 2px;
   border-bottom: 2px solid #222222;
   margin-top: 10px;
@@ -67,7 +67,7 @@
 .headerTitle {
   font-size: 50px;
   line-height: 75px;
-  padding-bottom: 10px;
+  padding: 10px 0;
   text-align: center;
 }
 
@@ -79,8 +79,10 @@
 }
 
 .imageCollection {
-  height: 200px;
-  width: 200px;
+  height: 360px;
+  width: 360px;
+  aspect-ratio: 1;
+  object-fit: cover;
 }
 
 .paymentOptions {
@@ -101,12 +103,6 @@
   justify-content: center;
   // align-items: center;
 }
-
-.main {
-  display: flex;
-  width: 1000px;
-  margin: 0 auto;
-}
 .left {
   width: 40%;
 }
@@ -118,6 +114,8 @@
   display: flex;
   margin-top: 20px;
   margin-left: 10px;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .imageCat {

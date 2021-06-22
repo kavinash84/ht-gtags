@@ -3,12 +3,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Flex from 'hometown-components-dev/lib/FlexHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
-import Section from 'hometown-components-dev/lib/SectionHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import SlickSlider from '../SlickSlider';
-// import Slider from './Slider';
+
+import HtExclusiveContainer from './HtExclusiveContainer';
 
 import Arrow from '../../../static/htexclusive/forward-arrow.svg';
 
@@ -26,44 +28,46 @@ function HtExclusiveTemplate3({ data }) {
  mainTitle, description, banner, collection, link, shop
 } = data;
   return (
-    <div className={styles.main}>
-      <Section className={styles.left}>
-        <Box>
+    <HtExclusiveContainer className={styles.main}>
+      <Flex py="50px">
+        <Col variant="col-5" justifyContent="center" alignItems="center">
           <Image className={styles.avatar} src={banner} alt="chester-furniture" />
-        </Box>
-      </Section>
-      <Section className={styles.right}>
-        <Box>
-          <Heading as="h2" fontSize="35px" ml="5px">
-            {mainTitle}
-          </Heading>
-          <Text sx={{ margin: '20px 0 20px 5px', fontSize: '26px' }} className={styles.description}>
-            {description}
-          </Text>
-        </Box>
+        </Col>
+        <Col variant="col-7">
+          <Box>
+            <Heading as="h2" fontSize="35px" ml="5px">
+              {mainTitle}
+            </Heading>
+            <Text sx={{ margin: '20px 0 20px 5px', fontSize: '26px' }} className={styles.description}>
+              {description}
+            </Text>
+          </Box>
 
-        <Box>
-          <SlickSlider settings={adjustSlides(12)}>
-            {collection.length &&
-              collection.map((slide, index) => (
-                <Box key={String(index)} p="10px">
-                  <Link to={slide.link}>
-                    <Image height="60%" src={slide.url} alt={`ht-exclusive-carousel-${index}`} pb="10px" />
-                    <Text textAlign="center">{slide.name}</Text>
-                  </Link>
-                </Box>
-              ))}
-          </SlickSlider>
-        </Box>
+          <Box>
+            <SlickSlider settings={adjustSlides(12)}>
+              {collection.length &&
+                collection.map((slide, index) => (
+                  <Box key={String(index)} p="10px">
+                    <Link to={slide.link}>
+                      <Image height="60%" src={slide.url} alt={`ht-exclusive-carousel-${index}`} pb="10px" />
+                      <Text textAlign="center">{slide.name}</Text>
+                    </Link>
+                  </Box>
+                ))}
+            </SlickSlider>
+          </Box>
 
-        <Link to={link}>
-          <div className={styles.shopButton}>
-            <Heading mr="5px">{shop}</Heading>
-            <Image src={Arrow} ml="5px" height="10px" width="20px" />
-          </div>
-        </Link>
-      </Section>
-    </div>
+          <Link to={link}>
+            <div className={styles.shopButton}>
+              <Heading fontSize="30px" mr="5px">
+                {shop}
+              </Heading>
+              <Image ml="5px" textAlign="left" src={Arrow} height="30px" width="20px" />
+            </div>
+          </Link>
+        </Col>
+      </Flex>
+    </HtExclusiveContainer>
   );
 }
 HtExclusiveTemplate3.propTypes = {

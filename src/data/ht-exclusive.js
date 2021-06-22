@@ -185,7 +185,7 @@ const htExclusiveData = {
       }
     ],
     link: '/search?q=bristol%20recliners',
-    shop: 'Shop Leather RECLINERS'
+    shop: 'SHOP LEATHER RECLINERS'
   },
   section7: {
     mainTitle: 'Eclairs Recliners',
@@ -215,7 +215,7 @@ const htExclusiveData = {
       }
     ],
     link: '/search?q=eclairs%20recliners',
-    shop: 'Shop Leatherette RECLINERS'
+    shop: 'SHOP LEATHERETTE RECLINERS'
   },
   section8: {
     mainTitle: 'Bradford Recliners',
@@ -245,7 +245,7 @@ const htExclusiveData = {
       }
     ],
     link: '/search?q=bradford%20recliners',
-    shop: 'Shop Fabric RECLINERS'
+    shop: 'SHOP FABRIC RECLINERS'
   },
   section9: {
     headerTitle: 'Shop by style',
@@ -302,16 +302,6 @@ const htExclusiveData = {
         url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/easyfinance/hdfc-logo.png',
         title: 'Extra 10% Cashback on',
         desc: 'HDFC debit and credit cards. Conditions apply. Know more'
-      },
-      {
-        url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/easyfinance/bajaj-finserv-logo.png',
-        title: '0% Interest',
-        desc: 'On upto 6 months EMI for orders above 3000'
-      },
-      {
-        url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/easyfinance/hdfc-logo.png',
-        title: '0% Interest',
-        desc: 'On upto 6 months EMI for orders above 3000'
       },
       {
         url: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/easyfinance/bajaj-finserv-logo.png',
