@@ -20,7 +20,7 @@ const htExclusiveData = {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/sofas/sofas-1.png',
         alt: 'Sofas',
         title: 'Sofas',
-        link: 'furniture/ht-exclusives/living/sofas-ex'
+        link: '/furniture/ht-exclusives/living/sofas-ex'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/sofas/loungers-1.png',
