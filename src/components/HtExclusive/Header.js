@@ -13,7 +13,7 @@ const styles = require('./HtExclusive.scss');
 function Header({
  mainTitle, link, subTitle, horizontalSeperator
 }) {
-  if (mainTitle && subTitle) {
+  if (mainTitle) {
     return (
       <Box>
         <Box bg="#F5F5F5" py="20px">
