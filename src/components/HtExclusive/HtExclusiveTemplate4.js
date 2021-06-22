@@ -7,7 +7,7 @@ import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import SlickSlider from '../SlickSlider';
-import Arrow from '../../../static/arrow_forward.svg';
+import Arrow from '../../../static/htexclusive/forward-arrow.svg';
 
 // import Slider from './Slider';
 // import Slider from './Slider-copy';

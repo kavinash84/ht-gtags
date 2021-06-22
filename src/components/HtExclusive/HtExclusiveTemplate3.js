@@ -10,7 +10,7 @@ import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import SlickSlider from '../SlickSlider';
 // import Slider from './Slider';
 
-import Arrow from '../../../static/arrow_forward.svg';
+import Arrow from '../../../static/htexclusive/forward-arrow.svg';
 
 const adjustSlides = length => ({
   slidesToShow: length >= 1 ? 3.3 : length,
@@ -59,7 +59,7 @@ function HtExclusiveTemplate3({ data }) {
         <Link to={link}>
           <div className={styles.shopButton}>
             <Heading mr="5px">{shop}</Heading>
-            <Image src={Arrow} />
+            <Image src={Arrow} ml="5px" height="10px" width="20px" />
           </div>
         </Link>
       </Section>

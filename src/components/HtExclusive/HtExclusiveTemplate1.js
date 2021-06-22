@@ -10,7 +10,7 @@ import Col from 'hometown-components-dev/lib/ColHtV1';
 // import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 
 import Separator from '../../../static/htexclusive/separator.svg';
-import Arrow from '../../../static/arrow_forward.svg';
+import Arrow from '../../../static/htexclusive/forward-arrow.svg';
 
 const styles = require('./HtExclusive.scss');
 
@@ -28,7 +28,7 @@ function HtExclusiveTemplate1({ data }) {
               <Text fontSize="30px" fontWeight="bold" className={styles.subTitle}>
                 {headerSubtitle}
               </Text>
-              <Image src={Arrow} />
+              <Image src={Arrow} ml="5px" height="10px" width="20px" />
             </Flex>
           </Link>
         </Box>
