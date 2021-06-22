@@ -25,7 +25,7 @@ function HtExclusiveTemplate1({ data }) {
           <h2 className={styles.headerTitle}>{headerTitle}</h2>
           <Link to={headerLink}>
             <Flex justifyContent="center" alignItems="center">
-              <Text fontSize="30px" className={styles.subTitle}>
+              <Text fontSize="30px" fontWeight="bold" className={styles.subTitle}>
                 {headerSubtitle}
               </Text>
               <Image src={Arrow} />

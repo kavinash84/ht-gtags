@@ -184,7 +184,8 @@ const htExclusiveData = {
         link: '/bristol-half-leather-single-seater-recliner-in-brown-colour-by-hometown/sku/HO340SO22AVLHTFUR'
       }
     ],
-    link: '/search?q=bristol%20recliners'
+    link: '/search?q=bristol%20recliners',
+    shop: 'Shop Leather RECLINERS'
   },
   section7: {
     mainTitle: 'Eclairs Recliners',
@@ -213,7 +214,8 @@ const htExclusiveData = {
         link: '/eclairs-solid-wood-two-seat-recliner-in-beige-colour-by-hometown/sku/HO340FU69OYWHTFUR'
       }
     ],
-    link: '/search?q=eclairs%20recliners'
+    link: '/search?q=eclairs%20recliners',
+    shop: 'Shop Leatherette RECLINERS'
   },
   section8: {
     mainTitle: 'Bradford Recliners',
@@ -242,7 +244,8 @@ const htExclusiveData = {
         link: '/bradford-fabric-two-seater-recliner-in-camel-colour-by-hometown/sku/HO340SO81AXAHTFUR'
       }
     ],
-    link: '/search?q=bradford%20recliners'
+    link: '/search?q=bradford%20recliners',
+    shop: 'Shop Fabric RECLINERS'
   },
   section9: {
     headerTitle: 'Shop by style',

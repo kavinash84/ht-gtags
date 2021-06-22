@@ -23,7 +23,7 @@ const styles = require('./HtExclusive.scss');
 
 function HtExclusiveTemplate3({ data }) {
   const {
- mainTitle, description, banner, collection, link
+ mainTitle, description, banner, collection, link, shop
 } = data;
   return (
     <div className={styles.main}>
@@ -37,7 +37,7 @@ function HtExclusiveTemplate3({ data }) {
           <Heading as="h2" fontSize="35px" ml="5px">
             {mainTitle}
           </Heading>
-          <Text m="20px 0 20px 5px" className={styles.description}>
+          <Text sx={{ margin: '20px 0 20px 5px', fontSize: '26px' }} className={styles.description}>
             {description}
           </Text>
         </Box>
@@ -57,10 +57,10 @@ function HtExclusiveTemplate3({ data }) {
         </Box>
 
         <Link to={link}>
-          <Box className={styles.shopButton}>
-            <Heading mr="5px">SHOPPING LEATHER RECLINERS</Heading>
+          <div className={styles.shopButton}>
+            <Heading mr="5px">{shop}</Heading>
             <Image src={Arrow} />
-          </Box>
+          </div>
         </Link>
       </Section>
     </div>
@@ -76,7 +76,8 @@ HtExclusiveTemplate3.defaultProps = {
     description: '',
     collection: [],
     banner: '',
-    link: ''
+    link: '',
+    shop: ''
   }
 };
 

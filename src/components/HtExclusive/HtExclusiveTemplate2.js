@@ -20,7 +20,7 @@ function HtExclusiveTemplate2({ data }) {
   console.log('data', data);
   return (
     <Box>
-      <Box bg="#F5F5F5">
+      <Box bg="#F5F5F5" py="10px">
         <h2 className={styles.headerTitle}>{mainTitle}</h2>
         <Link to={link}>
           <Flex justifyContent="center" alignItems="center">
