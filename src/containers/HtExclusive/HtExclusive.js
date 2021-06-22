@@ -21,8 +21,8 @@ function HtExclusive() {
     section6,
     section7,
     section8,
-    section9,
-    section10,
+    // section9,
+    // section10,
     section11
   } = htExclusiveData;
 
@@ -38,8 +38,8 @@ function HtExclusive() {
       <HtExclusiveTemplate3 data={section6} />
       <HtExclusiveTemplate3 data={section7} />
       <HtExclusiveTemplate3 data={section8} />
-      <HtExclusiveTemplate4 data={section9} />
-      <HtExclusiveTemplate4 data={section10} />
+      {/* <HtExclusiveTemplate4 data={section9} />
+      <HtExclusiveTemplate4 data={section10} /> */}
       <HtExclusiveTemplate5 data={section11} />
       <Footer />
     </Box>

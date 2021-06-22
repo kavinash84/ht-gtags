@@ -25,8 +25,12 @@ const styles = require('./HtExclusive.scss');
 
 function HtExclusiveTemplate3({ data }) {
   const {
- mainTitle, description, banner, collection, link, shop
-} = data;
+    mainTitle,
+    description,
+    banner,
+    collection
+    //  link, shop
+  } = data;
   return (
     <HtExclusiveContainer className={styles.main}>
       <Flex py="50px">
@@ -57,14 +61,14 @@ function HtExclusiveTemplate3({ data }) {
             </SlickSlider>
           </Box>
 
-          <Link to={link}>
+          {/* <Link to={link}>
             <div className={styles.shopButton}>
               <Heading fontSize="30px" mr="5px">
                 {shop}
               </Heading>
               <Image ml="5px" textAlign="left" src={Arrow} height="30px" width="20px" />
             </div>
-          </Link>
+          </Link> */}
         </Col>
       </Flex>
     </HtExclusiveContainer>
