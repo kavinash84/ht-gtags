@@ -63,7 +63,9 @@ function HtExclusiveTemplate1({ data }) {
             </Col>
           </Flex>
         </Box>
-        <Text className={styles.descriptionText}>{description}</Text>
+        <Text sx={{ margin: '20px 0', fontSize: '26px' }} className={styles.descriptionText}>
+          {description}
+        </Text>
       </div>
     </Box>
   );

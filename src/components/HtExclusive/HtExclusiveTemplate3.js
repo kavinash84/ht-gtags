@@ -26,7 +26,7 @@ function HtExclusiveTemplate3({ data }) {
  mainTitle, description, banner, collection, link
 } = data;
   return (
-    <Box className={styles.main}>
+    <div className={styles.main}>
       <Section className={styles.left}>
         <Box>
           <Image className={styles.avatar} src={banner} alt="chester-furniture" />
@@ -63,7 +63,7 @@ function HtExclusiveTemplate3({ data }) {
           </Box>
         </Link>
       </Section>
-    </Box>
+    </div>
   );
 }
 HtExclusiveTemplate3.propTypes = {
