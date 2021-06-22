@@ -38,7 +38,7 @@ const htExclusiveData = {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/sofas/accent-chairs-1.png',
         alt: 'Accent Chairs',
         title: 'Accent Chairs',
-        link: '/furniture/living-room-furniture/accent-chairs'
+        link: '/brand/ht-exclusive'
       },
       {
         image: 'https://www.hometown.in/media/cms/hometownnew/ht-exclusive/template2/sofas/tv-units-1.png',
