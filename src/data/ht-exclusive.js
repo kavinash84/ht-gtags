@@ -53,7 +53,7 @@ const htExclusiveData = {
         link: '/furniture/ht-exclusives/living/coffee-tables-ex'
       }
     ],
-    link: '/furniture/ht-exclusives/living/sofas-ex'
+    link: '/furniture/ht-exclusives/living'
   },
   section3: {
     mainTitle: 'most loved and best reviewed',
