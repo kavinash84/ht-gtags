@@ -423,12 +423,6 @@ class PaymentSuccess extends Component {
                   <Row>
                     <Box variant="col-2" />
                     <Box variant="col-9" pt={20} pb={20}>
-                      {instantDiscount && (
-                        <Flex mb={20} justifyContent="space-between">
-                          <Text>Instant Discount : </Text>
-                          <Text>Rs {formatAmount(instantDiscount)}</Text>
-                        </Flex>
-                      )}
                       <Flex mb={20} justifyContent="space-between">
                         <Text>Subtotal : </Text>
                         <Text>Rs {formatAmount(subTotal)}</Text>
@@ -441,6 +435,12 @@ class PaymentSuccess extends Component {
                         <Text>Discount : </Text>
                         <Text>Rs {formatAmount(discount)}</Text>
                       </Flex>
+                      {instantDiscount && (
+                        <Flex mb={20} justifyContent="space-between">
+                          <Text>Instant Discount : </Text>
+                          <Text>Rs {formatAmount(instantDiscount)}</Text>
+                        </Flex>
+                      )}
                       {setDiscount ? (
                         <Flex mb={20} justifyContent="space-between">
                           <Text>Combo Discount : </Text>
