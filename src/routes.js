@@ -30,7 +30,7 @@ import PlanYourKitchen from 'containers/PlanYourKitchen';
 import DesignBuild from 'containers/DesignBuild';
 import BulkOrder from 'containers/BulkOrder';
 import Brand from 'containers/Brand';
-import HtExclusive from 'containers/Brand/HtExclusive';
+import HtExclusive from 'containers/HtExclusive';
 import ContactUs from 'containers/ContactUs';
 import Feedback from 'containers/Feedback';
 import FeedbackMailer from 'containers/FeedbackMailer';
