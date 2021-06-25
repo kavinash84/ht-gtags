@@ -326,14 +326,13 @@ app.get(/^\/(.*)\/$/, async (req, res, next) => {
 
 /* seo redirection erros */
 app.get(/\/(%e2%80%9dhttp|%e2%80%9dhttps\/)/, async (req, res) => {
-  console.log('JSON.strignfy', JSON.stringify(req.params));
-  const errorPath = req.path;
-  if (errorPath) {
-    const validPath = errorPath.split('%e2%80%9dhttp')[0];
-    console.log('[validPath, rest]', validPath);
-    return res.redirect(301, validPath);
+  const regex = /(^\/[a-zA-Z-_]+).*$/gm;
+  const validPath = regex.exec(req.path);
+
+  if (validPath) {
+    return res.redirect(301, validPath[1]);
   }
-  return res.redirect(301, '/furniture');
+  return res.redirect(301, '/');
 });
 
 app.use(async (req, res) => {
