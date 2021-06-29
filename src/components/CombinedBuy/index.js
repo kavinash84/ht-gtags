@@ -83,7 +83,7 @@ const ProductCarousel = ({
               =
             </Label>
             <Label mb={0} ml={16} fontSize={20} color="textExtraLight">
-              Total
+              Total
               <Box ml={0} mt={3} color="rgba(0,0,0,0.8)" fontSize={20}>
                 {discountedPrice ? formatAmount(discountedPrice) : ''}
                 <Box display="inline" mr={28} ml={10} color="rgba(0,0,0,0.5)" fontSize={16}>

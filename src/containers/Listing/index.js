@@ -14,6 +14,7 @@ import {
   setReloadListing
 } from 'redux/modules/products';
 import { getOfferStrip } from 'redux/modules/offer';
+import { load as loadListingBanners, isLoaded as isStoresLoaded } from 'redux/modules/listingbanners';
 import { PINCODE } from 'helpers/Constants';
 
 const hooks = {
@@ -91,6 +92,10 @@ const hooks = {
     // } else {
     //   await dispatch(setReloadListing(true));
     // }
+
+    if (!isStoresLoaded(getState())) {
+      await dispatch(loadListingBanners()).catch(error => console.log(error));
+    }
   },
   done: ({ store: { dispatch } }) => dispatch(listingLoadTrack())
 };
