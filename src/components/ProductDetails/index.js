@@ -75,7 +75,6 @@ import Stripes from './PdpStripe';
 
 import demoIcon from '../../../static/play-button.svg';
 
-
 /**
  * Images / Icons
  */
@@ -665,8 +664,15 @@ class ProductDetails extends React.Component {
     } = attributes;
     const simpleSku = Object.keys(simples)[0];
     const {
- name, brand, price, special_price: specialPriceEmi, config_id: configId, dimension_image: dimensionImage
-} = meta;
+      name,
+      brand,
+      price,
+      special_price: specialPriceEmi,
+      config_id: configId,
+      dimension_image: dimensionImage,
+      warranty_period: warrantyPeriod = 0,
+      fk_catalog_supplier: fkCatalogSupplier = null
+    } = meta;
     const {
       offer_discount_percentage: offerDiscountPercentage,
       coupon_code: couponCode,
@@ -781,7 +787,21 @@ class ProductDetails extends React.Component {
                 />
 
                 {/* icons */}
-                <Stripes />   
+                <Stripes
+                  emi={formatAmount(calculateLowestEmi(emidata, price))}
+                  isEmiAvailable={isEmiAvailable}
+                  warrantyPeriod={warrantyPeriod}
+                  fkCatalogSupplier={fkCatalogSupplier}
+                  brand={brand}
+                >
+                  <EmiModal
+                    price={formatAmount(checkSpecialPrice)}
+                    data={emidata}
+                    key="emi"
+                    specialPrice={checkSpecialPrice}
+                    bflMinAmount={bflMinAmount}
+                  />
+                </Stripes>
 
                 {/* Product Share */}
                 {/* <ShareBar title={name} url={productURL} mt={10} /> */}

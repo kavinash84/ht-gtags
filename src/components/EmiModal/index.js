@@ -67,7 +67,7 @@ export default class Emi extends Component {
     data = data && data.sort((a, b) => Number(a.bank_code) - Number(b.bank_code));
     return (
       <Box>
-        <Button variant="link" color="primary" fontSize={16} fontFamily="medium" onClick={this.onOpenModal} mt={3}>
+        <Button ml="0" variant="link" fontSize="8px" onClick={this.onOpenModal}>
           Know more >
         </Button>
         <ResponsiveModal

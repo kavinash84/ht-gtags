@@ -1,4 +1,7 @@
 .boxes {
+  img {
+    object-fit: cover!important;
+  }
   display: flex;
   flex-direction: row;
   justify-content: center;
