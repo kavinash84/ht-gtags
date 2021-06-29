@@ -30,6 +30,7 @@ import PlanYourKitchen from 'containers/PlanYourKitchen';
 import DesignBuild from 'containers/DesignBuild';
 import BulkOrder from 'containers/BulkOrder';
 import Brand from 'containers/Brand';
+import HtExclusive from 'containers/HtExclusive';
 import ContactUs from 'containers/ContactUs';
 import Feedback from 'containers/Feedback';
 import FeedbackMailer from 'containers/FeedbackMailer';
@@ -180,6 +181,7 @@ const routes = [
       },
       { path: '/bulk-order', exact: true, component: BulkOrder },
       { path: '/brand/laura-ashley', exact: true, component: Brand },
+      { path: '/brand/ht-exclusive', exact: true, component: HtExclusive },
       {
         path: '/service-signup',
         exact: true,

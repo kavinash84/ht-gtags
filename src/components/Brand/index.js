@@ -162,7 +162,7 @@ class Brand extends React.Component {
                 </Text> */}
                 <Image src={brandLogo} alt="" sx={{ width: '100%', marginBottom: '10px' }} />
                 <Text textAlign="center" fontSize={20} lineHeight={1.4} sx={{ letterSpacing: '0.1em' }}>
-                  Discover our stunning collection from Laura Ashley, the quintessintial British brand. <br />
+                  Discover our stunning collection from Laura Ashley, the quintessential British brand. <br />
                   With ornate detailing, plush textures, sophisticated styles, timeless designs <br />
                   and rich colourways, this luxurious collection ensures your home <br />
                   displays an extension of your personality.

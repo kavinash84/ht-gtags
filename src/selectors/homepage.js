@@ -32,3 +32,10 @@ export const getOfferStripData = createSelector([staticBlockData], data => isKey
 
 export const getMiddleBannerData = createSelector([staticBlockData], data =>
   isKeyExists(data, 'items.text.middle_banner'));
+
+export const getMetaDescription = createSelector([staticBlockData], data =>
+  isKeyExists(data, 'items.meta_description'));
+
+export const getTitle = createSelector([staticBlockData], data => isKeyExists(data, 'items.page_title'));
+
+export const getText = createSelector([staticBlockData], data => isKeyExists(data, 'items.text'));

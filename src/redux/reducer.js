@@ -43,6 +43,7 @@ import landing from './modules/landing';
 import selectForDemo from './modules/selectForDemo';
 import webtochat from './modules/webtochat';
 import offer from './modules/offer';
+import listingbanners from './modules/listingbanners';
 import feedback from './modules/feedback';
 
 export default function createReducers(asyncReducers) {
@@ -64,7 +65,11 @@ export default function createReducers(asyncReducers) {
       offers: homepage,
       footer: homepage,
       recentlyviewed: homepage,
-      instafeeds: homepage
+      instafeeds: homepage,
+      terms: homepage,
+      cancellation: homepage,
+      privacy: homepage,
+      returnpolicy: homepage
     }),
     category,
     stores,
@@ -102,6 +107,7 @@ export default function createReducers(asyncReducers) {
     webtochat,
     offer,
     feedback,
+    listingbanners,
     ...asyncReducers
   };
 }

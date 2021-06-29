@@ -24,6 +24,66 @@ const listingBestOffers = [
         }
       ]
     },
+    '/furniture/dining-kitchen-furniture/dining-sets': {
+      images: [
+        {
+          id: 1,
+          title: 'Best Offers',
+          description: 'Best Offers',
+          image: require('../../static/campaign/best-offers-05.jpeg'),
+          type: 'webview_layout',
+          meta: { name: 'Best Offers', id: 'Best Offers' }
+        }
+      ]
+    },
+    '/furniture/bedroom-furniture/beds': {
+      images: [
+        {
+          id: 1,
+          title: 'Best Offers',
+          description: 'Best Offers',
+          image: require('../../static/campaign/best-offers-07.jpeg'),
+          type: 'webview_layout',
+          meta: { name: 'Best Offers', id: 'Best Offers' }
+        }
+      ]
+    },
+    '/furniture/bedroom-furniture/wardrobes': {
+      images: [
+        {
+          id: 1,
+          title: 'Best Offers',
+          description: 'Best Offers',
+          image: require('../../static/campaign/best-offers-06.jpeg'),
+          type: 'webview_layout',
+          meta: { name: 'Best Offers', id: 'Best Offers' }
+        }
+      ]
+    },
+    '/furniture/living-room-furniture/sofas': {
+      images: [
+        {
+          id: 1,
+          title: 'Best Offers',
+          description: 'Best Offers',
+          image: require('../../static/campaign/best-offers-05.jpeg'),
+          type: 'webview_layout',
+          meta: { name: 'Best Offers', id: 'Best Offers' }
+        }
+      ]
+    },
+    '/furniture/study-office-furniture/study-tables': {
+      images: [
+        {
+          id: 1,
+          title: 'Best Offers',
+          description: 'Best Offers',
+          image: require('../../static/campaign/best-offers-05.jpeg'),
+          type: 'webview_layout',
+          meta: { name: 'Best Offers', id: 'Best Offers' }
+        }
+      ]
+    },
     '/home-furnishings/special-offer': {
       images: [
         {
@@ -63,5 +123,14 @@ const listingBestOffers = [
   }
 ];
 
-const listingBestOffersPath = ['/hot-deals/furniture-deals', '/hot-deals', '/home-furnishings/special-offer'];
+const listingBestOffersPath = [
+  '/hot-deals/furniture-deals',
+  '/hot-deals',
+  '/furniture/dining-kitchen-furniture/dining-sets',
+  '/furniture/bedroom-furniture/beds',
+  '/furniture/bedroom-furniture/wardrobes',
+  '/furniture/living-room-furniture/sofas',
+  '/furniture/study-office-furniture/study-tables',
+  '/home-furnishings/special-offer'
+];
 export default { listingBestOffers, listingBestOffersPath };
