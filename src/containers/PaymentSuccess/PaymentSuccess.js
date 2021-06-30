@@ -435,12 +435,12 @@ class PaymentSuccess extends Component {
                         <Text>Discount : </Text>
                         <Text>Rs {formatAmount(discount)}</Text>
                       </Flex>
-                      {instantDiscount && (
+                      {instantDiscount ? (
                         <Flex mb={20} justifyContent="space-between">
                           <Text>Instant Discount : </Text>
                           <Text>Rs {formatAmount(instantDiscount)}</Text>
                         </Flex>
-                      )}
+                      ) : null}
                       {setDiscount ? (
                         <Flex mb={20} justifyContent="space-between">
                           <Text>Combo Discount : </Text>
