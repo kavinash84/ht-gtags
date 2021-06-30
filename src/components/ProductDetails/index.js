@@ -786,7 +786,7 @@ class ProductDetails extends React.Component {
                   onClickReviews={this.onClickReviews}
                 />
 
-                {/* icons */}
+                {/* PDP Strip Icons */}
                 <Stripes
                   emi={formatAmount(calculateLowestEmi(emidata, price))}
                   isEmiAvailable={isEmiAvailable}
@@ -803,10 +803,7 @@ class ProductDetails extends React.Component {
                   />
                 </Stripes>
 
-                {/* Product Share */}
-                {/* <ShareBar title={name} url={productURL} mt={10} /> */}
-
-                {/* Pincode and EMI options */}
+                {/* Pincode */}
                 <ServiceDetails
                   deliverBy={
                     (deliveryInfo && deliveryInfo[0] && deliveryInfo[0].value) ||
@@ -884,7 +881,6 @@ class ProductDetails extends React.Component {
                 {colorProducts.length > 0 && (
                   <Box pb={15}>
                     <Heading fontSize="1em" color="textDark" fontFamily="medium" fontWeight="normal" mb={15}>
-                      {/* TODO: @nikhil replace static color */}
                       Color Options: {getSelectedColor(colorProducts)}
                     </Heading>
                     <ColorOption
@@ -921,21 +917,6 @@ class ProductDetails extends React.Component {
                     }}
                   />
                 </Flex>
-
-                {/* EMI Options */}
-                <EmiOptions
-                  emiStarting={formatAmount(calculateLowestEmi(emidata, price))}
-                  isEmiAvailable={isEmiAvailable}
-                >
-                  <EmiModal
-                    price={formatAmount(checkSpecialPrice)}
-                    data={emidata}
-                    key="emi"
-                    specialPrice={checkSpecialPrice}
-                    bflMinAmount={bflMinAmount}
-                  />
-                </EmiOptions>
-
                 {/* Offers */}
                 {
                   <Box mb={20} mt={10}>
