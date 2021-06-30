@@ -8,10 +8,11 @@
   align-items: center;
 }
 .dots {
-  width: 100%;
-  height: 1px;
-  border: none;
-  border-top: 1px dashed rgb(200, 193, 193);
-  color: #fff;
-  background-color: #fff;
+  border-top: 1px dashed rgb(210, 210, 210);
+}
+
+.pdpStripeIcons {
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
 }
