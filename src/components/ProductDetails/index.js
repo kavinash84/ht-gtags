@@ -640,7 +640,8 @@ class ProductDetails extends React.Component {
       sku,
       groupedattributes,
       reviews: { count, rating },
-      bogo_bundle: bogoBundle
+      bogo_bundle: bogoBundle,
+      free_visit: freeVisit = 'no'
     } = product;
     // const { brand: ProductBrand } = meta;
     const {
@@ -793,6 +794,7 @@ class ProductDetails extends React.Component {
                   warrantyPeriod={warrantyPeriod}
                   fkCatalogSupplier={fkCatalogSupplier}
                   brand={brand}
+                  freeVisit={freeVisit}
                 >
                   <EmiModal
                     price={formatAmount(checkSpecialPrice)}

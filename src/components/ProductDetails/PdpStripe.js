@@ -16,7 +16,7 @@ const Noquestion = require('../../../static/pdp-icons/No-questions-asked-returns
 const ServiceCamp = require('../../../static/pdp-icons/service-camp-icon.png');
 
 const Stripes = ({
- emi, isEmiAvailable, warrantyPeriod, fkCatalogSupplier, brand, children
+ emi, isEmiAvailable, warrantyPeriod, fkCatalogSupplier, brand, freeVisit, children
 }) => {
   console.log('fkCatalogSupplier brand', fkCatalogSupplier, brand);
   const isFurnitureCategory = fkCatalogSupplier === '38';
@@ -56,7 +56,7 @@ const Stripes = ({
             Free and Safe Delivery
           </Text>
         </Col>
-        {isFurnitureCategory ? (
+        {freeVisit === 'yes' ? (
           <Col variant="col-2" m="5px auto" px="0" alignItems="center">
             <Image className={styles.pdpStripeIcons} src={ServiceCamp} />
             <Text fontSize=" 10px" lineHeight="13px" textAlign="center">
@@ -76,14 +76,16 @@ Stripes.propTypes = {
   brand: PropTypes.string,
   isEmiAvailable: PropTypes.bool,
   warrantyPeriod: PropTypes.string,
-  children: PropTypes.object.isRequired
+  children: PropTypes.object.isRequired,
+  freeVisit: PropTypes.string
 };
 
 Stripes.defaultProps = {
   emi: 0,
   brand: '',
   isEmiAvailable: false,
-  warrantyPeriod: ''
+  warrantyPeriod: '',
+  freeVisit: 'no'
 };
 
 export default Stripes;
