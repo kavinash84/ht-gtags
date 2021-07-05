@@ -324,8 +324,8 @@ export default class Listing extends Component {
           )}
 
           {/* Listing page best offer banners */}
-          <Box sx={btnStyle} onClick={() => this.scrollDown(bannerData)}>
-            <BestOfferBanners bannerData={bannerData} history={history} />
+          <Box sx={btnStyle}>
+            <BestOfferBanners bannerData={bannerData} history={history} onImageClick={this.scrollDown} />
           </Box>
           <Box>
             <div ref={this.listingRef}>
