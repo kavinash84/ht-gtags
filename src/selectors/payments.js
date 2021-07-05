@@ -1,15 +1,15 @@
 import { createSelector } from 'reselect';
 
 const allowedOptions = () => [
-  'EmiZero',
-  'Emi',
   'CreditCard',
   'DebitCard',
   'NetBanking',
+  'Upi',
+  'EmiZero',
+  'Emi',
   'CashOnDelivery',
   'Wallet',
-  'EasyEmi',
-  'Upi'
+  'EasyEmi'
 ];
 
 export const getPaymentState = options =>

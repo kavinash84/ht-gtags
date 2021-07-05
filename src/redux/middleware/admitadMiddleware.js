@@ -1,14 +1,6 @@
 import cookie from 'js-cookie';
 
 const getChannelForAdmitAd = name => {
-  // const re = new RegExp(`${name}=([^;]+)`);
-  // const value = re.exec(document.cookie);
-
-  // console.log('getChannelForAdmitAd function - value', value);
-
-  // const source = value !== null ? unescape(value[1]) : null;
-
-  // console.log('getChannelForAdmitAd function - source', source);
   const source = cookie.get(name);
   console.log('cookie source here', source);
   let channel = 'other';
@@ -18,20 +10,6 @@ const getChannelForAdmitAd = name => {
   return channel;
 };
 
-// const groupSimilarProducts = products => {
-//   let groupedProducts = [];
-
-//   products.forEach(arr => {
-//     if (groupedProducts[arr.sku] && groupedProducts[arr.sku].sku === arr.sku) {
-//       groupedProducts[arr.sku].qty += 1;
-//     } else {
-//       groupedProducts[arr.sku] = arr;
-//     }
-//   });
-//   groupedProducts = Object.values(groupedProducts);
-//   return groupedProducts;
-// };
-
 export default function admitadMiddleware() {
   return ({ getState }) => next => action => {
     if (__CLIENT__) {
@@ -39,7 +17,9 @@ export default function admitadMiddleware() {
       if (window && window.ADMITAD) {
         const {
           location: { pathname }
-        } = getState().router;
+        } = window;
+        // console.log(type, pathname);
+        // console.log('type === PUSH_TO_DATALAYER', type === 'PUSH_TO_DATALAYER');
         if (type === 'PUSH_TO_DATALAYER' && pathname && pathname === '/payment-success') {
           console.log('inside if /payment-success', window.ADMITAD);
           const {
@@ -50,23 +30,6 @@ export default function admitadMiddleware() {
             const { order_no: orderNo, net_order_amount: newOrderAmount } = data;
 
             const orderedItem = [];
-
-            // const products = groupSimilarProducts(cartProducts);
-
-            // products.forEach(x => {
-            //   const { sku, qty, price } = x;
-
-            //   orderedItem.push({
-            //     Product: {
-            //       productID: sku,
-            //       category: '1',
-            //       price,
-            //       priceCurrency: 'INR'
-            //     },
-            //     orderQuantity: qty,
-            //     additionalType: 'sale'
-            //   });
-            // });
             orderedItem.push({
               Product: {
                 productID: '', // internal product ID (not more than 100 characters).
@@ -80,7 +43,9 @@ export default function admitadMiddleware() {
             });
 
             const channel = getChannelForAdmitAd('source');
+            // console.log('Create orderItem for ADMITAD', orderedItem);
             if (window.ADMITAD.Invoice && window.ADMITAD.Invoice.referencesOrder) {
+              // console.log('inside if object exist for admitad and invoice', window.ADMITAD);
               window.ADMITAD.Invoice.referencesOrder = window.ADMITAD.Invoice.referencesOrder || [];
               window.ADMITAD.Invoice.referencesOrder.push({
                 orderNumber: orderNo,
@@ -88,6 +53,7 @@ export default function admitadMiddleware() {
               });
               window.ADMITAD.Invoice.broker = channel;
               window.ADMITAD.Invoice.category = '1';
+              console.log('ADMITAD window variable successfully added', window.ADMITAD);
             }
           }
         }

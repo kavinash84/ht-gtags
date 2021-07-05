@@ -31,13 +31,14 @@ const SliderItem = ({
 SliderItem.defaultProps = {
   title: '',
   image: '',
-  target: ''
+  target: '',
+  url: ''
 };
 
 SliderItem.propTypes = {
   title: PropTypes.string,
   image: PropTypes.string,
-  url: PropTypes.string.isRequired,
+  url: PropTypes.string,
   target: PropTypes.string,
   onClick: PropTypes.func.isRequired
 };
