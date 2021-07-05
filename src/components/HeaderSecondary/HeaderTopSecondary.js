@@ -12,13 +12,13 @@ import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Row from 'hometown-components-dev/lib/RowHtV1';
 import Step from './Step';
 
-const LogoIcon = require('../../../static/logo@2x.png');
+const LogoIcon = require('../../../static/logo.png');
 
 const HeaderTopSecondary = ({ shippingStep, paymentStep }) => (
   <Row alignItems="center" mr={[0, 0, 0, -16]} ml={[0, 0, 0, -16]}>
     <Col width={3 / 12}>
       <Link to={HOME_URL}>
-        <Image height={['auto', 'auto', 24]} src={LogoIcon} alt="Hometown" HtV1 />
+        <Image height={['auto', 'auto', 50]} src={LogoIcon} alt="Hometown" HtV1 />
       </Link>
     </Col>
     <Col width={6 / 12}>

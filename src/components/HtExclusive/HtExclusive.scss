@@ -1,0 +1,124 @@
+.desContainer {
+  position: relative;
+  bottom: 120px;
+}
+
+.descriptionTitle {
+  padding: 2rem 5rem;
+  line-height: 57px !important;
+  color: white;
+  font-size: 35px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.subTitlesBold {
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: 5px;
+  font-size: 22px;
+  line-height: 37px;
+}
+
+.subTitlesLight {
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  white-space: nowrap;
+  font-size: 22px;
+  line-height: 37px;
+}
+
+.separator {
+  height: 80px;
+  width: 2px;
+}
+
+.descriptionText {
+  margin: 20px 0;
+  line-height: 35px !important;
+  font-size: 26px;
+  text-align: center;
+}
+
+.description {
+  line-height: 35px !important;
+  font-size: 26px;
+  text-align: left;
+}
+
+.avatar {
+  border-radius: 50%;
+  height: 455px;
+  width: 455px;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.horizontalSeperator {
+  box-sizing: border-box;
+  width: 30px;
+  height: 2px;
+  border-bottom: 2px solid #222222;
+  margin-top: 10px;
+}
+
+.headerTitle {
+  font-size: 50px;
+  line-height: 75px;
+  padding: 10px 0;
+  text-align: center;
+}s
+
+.subTitle {
+  margin-right: 5px;
+  cursor: pointer;
+  text-align: center;
+  color: black !important;
+}
+
+.imageCollection {
+  height: 360px;
+  width: 360px;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.paymentOptions {
+  padding: 0 30px;
+  height: 180px;
+  width: 280px;
+  background-color: #fff;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Options {
+  padding: 0 10px;
+  margin: 0 20px;
+  background-color: #fff;
+  flex-direction: column;
+  justify-content: center;
+  // align-items: center;
+}
+.left {
+  width: 40%;
+}
+.right {
+  width: 60%;
+  padding-left: 30px;
+}
+.shopButton {
+  display: flex;
+  margin-top: 20px;
+  margin-left: 10px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.imageCat {
+  width: 900px;
+  margin: 0 auto;
+}

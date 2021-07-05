@@ -47,10 +47,10 @@ export default class Html extends Component {
       url: 'https://praxisretail.my.salesforce.com',
       liveAgentUrl: 'https://praxisretail.secure.force.com/LiveAgent',
       version: '00D7F000006O16S',
-      baseLiveAgentContentURL: 'https://c.la2-c2-hnd.salesforceliveagent.com/content',
+      baseLiveAgentContentURL: 'https://c.la2-c2-ukb.salesforceliveagent.com/content',
       deploymentId: '5727F0000009ARB',
       buttonId: '5732y000000PHDP',
-      baseLiveAgentURL: 'https://d.la2-c2-hnd.salesforceliveagent.com/chat',
+      baseLiveAgentURL: 'https://d.la2-c2-ukb.salesforceliveagent.com/chat',
       eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I7F0000004DjiUAE_16c51bfeb82',
       jsUrl: 'https://praxisretail.my.salesforce.com/embeddedservice/5.0/esw.min.js'
     };
@@ -60,26 +60,35 @@ export default class Html extends Component {
         url: 'https://praxisretail--produat.my.salesforce.com',
         liveAgentUrl: 'https://produat-praxisretail.cs6.force.com/LiveAgent',
         version: '00DN0000000FXR7',
-        baseLiveAgentContentURL: 'https://c.la1-c1cs-ukb.salesforceliveagent.com/content',
+        baseLiveAgentContentURL: 'https://c.la1-c1cs-hnd.salesforceliveagent.com/content',
         deploymentId: '5727F0000009ARB',
         buttonId: '573N000000000sa',
-        baseLiveAgentURL: 'https://d.la1-c1cs-ukb.salesforceliveagent.com/chat',
+        baseLiveAgentURL: 'https://d.la1-c1cs-hnd.salesforceliveagent.com/chat',
         eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I7F0000004DjiUAE_16c51bfeb82',
         jsUrl: 'https://praxisretail--produat.my.salesforce.com/embeddedservice/5.0/esw.min.js'
       };
     }
-    let unbxdScripts = {
-      autosuggestJs: 'https://libraries.unbxdapi.com/prod-hometown808961566375586_autosuggest.js',
-      autosuggestCss: 'https://libraries.unbxdapi.com/prod-hometown808961566375586_autosuggest.css',
-      searchJs: 'https://libraries.unbxdapi.com/prod-hometown808961566375586_search.js',
-      searchCss: 'https://libraries.unbxdapi.com/prod-hometown808961566375586_search.css'
-    };
-    if (process.env.UNBXD && process.env.UNBXD !== 'production') {
+    let unbxdScripts = {};
+    if (process.env.UNBXD && process.env.UNBXD === 'production') {
+      unbxdScripts = {
+        autosuggestJs: 'https://libraries.unbxdapi.com/prod-hometown808961566375586_autosuggest.js',
+        autosuggestCss: 'https://libraries.unbxdapi.com/prod-hometown808961566375586_autosuggest.css',
+        searchJs: 'https://libraries.unbxdapi.com/prod-hometown808961566375586_search.js',
+        searchCss: 'https://libraries.unbxdapi.com/prod-hometown808961566375586_search.css'
+      };
+    } else if (process.env.UNBXD && process.env.UNBXD === 'beta') {
       unbxdScripts = {
         autosuggestJs: 'https://sandbox.unbxd.io/dev-hometown808961566375617_autosuggest.js',
         autosuggestCss: 'https://sandbox.unbxd.io/dev-hometown808961566375617_autosuggest.css',
         searchJs: 'https://sandbox.unbxd.io/dev-hometown808961566375617_search.js',
         searchCss: 'https://sandbox.unbxd.io/dev-hometown808961566375617_search.css'
+      };
+    } else {
+      unbxdScripts = {
+        autosuggestJs: 'https://sandbox.unbxd.io/stage-hometown808961566375562_autosuggest.js',
+        autosuggestCss: 'https://sandbox.unbxd.io/stage-hometown808961566375562_autosuggest.css',
+        searchJs: 'https://sandbox.unbxd.io/stage-hometown808961566375562_search.js',
+        searchCss: 'https://sandbox.unbxd.io/stage-hometown808961566375562_search.css'
       };
     }
     const head = Helmet.renderStatic();
@@ -103,6 +112,7 @@ export default class Html extends Component {
           <meta name="apple-mobile-web-app-status-bar-style" content="black" />
           <meta name="apple-mobile-web-app-title" content="HomeTown Web" />
           <meta name="theme-color" content="#3677dd" />
+          <meta name="facebook-domain-verification" content="zcpr8ig8hh8z1idybyhitvi7j4nic4" />
           <link rel="manifest" href="/manifest.json" />
           {/* eslint-disable */}
           <link rel="preconnect" href="https://connect.facebook.net" crossOrigin="" />

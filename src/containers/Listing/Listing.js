@@ -5,16 +5,14 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { getSKUList } from 'selectors/wishlist';
 import { getCartListSKU } from 'selectors/cart';
+import { storesList as getStaticData } from 'selectors/homepage';
 import { setReloadListing } from 'redux/modules/products';
 
 import Box from 'hometown-components-dev/lib/BoxHtV1';
-// import Img from 'hometown-components-dev/lib/ImageHtV1';
-// import Section from 'hometown-components-dev/lib/SectionHtV1';
 import ListingContainer from 'components/Listing';
-// import ListingShimmer from 'components/Listing/ListingShimmer';
+import BestOfferBanners from 'components/Listing/BestOfferBanners';
 import Footer from 'components/Footer';
 import Header from 'components/Header';
-// import Pagination from 'components/Pagination';
 import SeoContent from 'components/SeoContent';
 import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 import Body from 'hometown-components-dev/lib/BodyHtV1';
@@ -34,8 +32,15 @@ import {
 } from 'selectors/products';
 import { SITE_URL } from 'helpers/Constants';
 import CANONICALS from 'data/canonical';
+// import { listingBestOffers, listingBestOffersPath } from 'data/best-offers';
 
-// const SearchEmptyIcon = require('../../../static/search-empty.png');
+const btnStyle = {
+  backgroundColor: 'transparent',
+  padding: '0px',
+  margin: '0px',
+  outline: 'none',
+  border: 'none'
+};
 
 @connect(state => ({
   loading: state.products.loading,
@@ -64,7 +69,8 @@ import CANONICALS from 'data/canonical';
   sessionId: state.app.sessionId,
   cartSKUs: getCartListSKU(state.cart),
   reloadListing: state.products.reloadListing,
-  offer: state.offer
+  offer: state.offer,
+  bannerData: getStaticData(state.listingbanners)
 }))
 @withRouter
 export default class Listing extends Component {
@@ -95,7 +101,8 @@ export default class Listing extends Component {
     sessionId: PropTypes.string.isRequired,
     cartSKUs: PropTypes.array,
     reloadListing: PropTypes.bool,
-    offer: PropTypes.object
+    offer: PropTypes.object,
+    bannerData: PropTypes.object
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -124,8 +131,15 @@ export default class Listing extends Component {
     selectedPincode: '',
     cartSKUs: [],
     reloadListing: false,
-    offer: {}
+    offer: {},
+    bannerData: {}
   };
+
+  constructor(props) {
+    super(props);
+    this.listingRef = React.createRef();
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.pincode !== this.props.pincode) {
       const { dispatch } = this.context.store;
@@ -137,6 +151,14 @@ export default class Listing extends Component {
       history.push(`${pathname}${search}`);
     }
   }
+
+  scrollDown = () => {
+    this.listingRef.current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  };
+
   renderOffers = offer => (
     <div
       style={{
@@ -231,6 +253,7 @@ export default class Listing extends Component {
     </div>
     // )
   );
+
   render() {
     const {
       // loading,
@@ -259,7 +282,8 @@ export default class Listing extends Component {
       sessionId,
       cartSKUs,
       reloadListing,
-      offer
+      offer,
+      bannerData
     } = this.props;
     let page;
     const {
@@ -270,7 +294,10 @@ export default class Listing extends Component {
     } else page = currentPage;
     const previousPage = !page || Number(page) === 1 ? '' : `?page=${page - 1}`;
     const NextPage = !page ? '?page=2' : `?page=${Number(page) + 1}`;
-    // console.log(this.props);
+    // const showBestOffers = listingBestOffersPath.some(arr => arr === pathname);
+    // let banners = [];
+    // if (showBestOffers) banners = listingBestOffers[0][pathname].images;
+    // console.log('listingBestOffers[pathname]', listingBestOffers[0][pathname]);
     /* eslint-disable react/no-danger */
     return (
       <Wrapper>
@@ -295,10 +322,13 @@ export default class Listing extends Component {
               </Container>
             </Box>
           )}
-          {/* {!loaded && loading && !products.length && <ListingShimmer />} */}
+
+          {/* Listing page best offer banners */}
+          <Box sx={btnStyle}>
+            <BestOfferBanners bannerData={bannerData} history={history} onImageClick={this.scrollDown} />
+          </Box>
           <Box>
-            {/* {loaded && products.length && !shimmer ? (
-            <Box>
+            <div ref={this.listingRef}>
               <ListingContainer
                 wishList={wishListedSKUs}
                 wishListData={wishListData}
@@ -318,44 +348,19 @@ export default class Listing extends Component {
                 breadCrumbs={breadCrumbs}
                 categoryBar={categoryBar}
                 selectedPincode={selectedPincode}
+                sessionId={sessionId}
+                cartSKUs={cartSKUs}
+                reloadListing={reloadListing}
+                setReloadListing={setReloadListing}
+                bannerData={bannerData}
               />
-            </Box>
-          ) : (
-            <Box display="flex" p="0.625rem" pt="1.25rem" mb="0">
-              <h1> No Items Found </h1>
-            </Box>
-          )} */}
-            <ListingContainer
-              wishList={wishListedSKUs}
-              wishListData={wishListData}
-              products={products}
-              categoryName={categoryName}
-              productCount={productCount}
-              category={category}
-              filters={filters}
-              sortBy={sortBy}
-              appliedFilters={appliedFilters}
-              history={history}
-              pincode={pincode}
-              isLoggedIn={isLoggedIn}
-              loadingList={loadingList}
-              metaResults={metadata}
-              categoryquery={categoryquery}
-              breadCrumbs={breadCrumbs}
-              categoryBar={categoryBar}
-              selectedPincode={selectedPincode}
-              sessionId={sessionId}
-              cartSKUs={cartSKUs}
-              reloadListing={reloadListing}
-              setReloadListing={setReloadListing}
-            />
+            </div>
             {seoInfo && seoInfo.seo_text && (
               <SeoContent>
                 <div dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }} />
               </SeoContent>
             )}
           </Box>
-
           <Footer />
         </Body>
       </Wrapper>

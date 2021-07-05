@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import Helmet from 'react-helmet';
 import Select from 'react-select';
 import ReactStars from 'react-stars';
+import { withRouter } from 'react-router';
 
 /**
  * Modules / Utils / Reducers
@@ -70,6 +71,7 @@ import Video from './Video';
 import ReviewFilter from './ReviewFilter';
 import UnbxdCompleteTheLook from './UnbxdCompleteTheLook';
 import FreebieProduct from './FreebieProduct';
+import Stripes from './PdpStripe';
 
 import demoIcon from '../../../static/play-button.svg';
 
@@ -115,16 +117,18 @@ const customStyles = {
  */
 const DescriptionButton = props => (
   <Col minWidth="auto">
-    <Button
-      variant="link"
-      fontWeight={500}
-      fontSize={16}
-      py={20}
-      color={props.active && '#fa6400'}
-      textTransform="uppercase"
-      sx={{ textTransform: 'uppercase', whiteSpace: 'nowrap' }}
-      {...props}
-    />
+    <div id={`${props.tab}`}>
+      <Button
+        variant="link"
+        fontWeight={500}
+        fontSize={16}
+        py={20}
+        color={props.active && '#fa6400'}
+        textTransform="uppercase"
+        sx={{ textTransform: 'uppercase', whiteSpace: 'nowrap' }}
+        {...props}
+      />
+    </div>
   </Col>
 );
 
@@ -210,7 +214,8 @@ const mapStateToProps = ({
   userLogin,
   combinedbuy,
   cart,
-  webtochat: { dismiss, pdpTimeout }
+  webtochat: { dismiss, pdpTimeout },
+  paymentoptions
 }) => ({
   session: sessionId,
   product: productdetails.productDescription,
@@ -232,7 +237,8 @@ const mapStateToProps = ({
   quantityChange: cart.quantityChange,
   skuItem: getCartSKU(cart, productdetails.productDescription.sku),
   dismiss,
-  pdpTimeout
+  pdpTimeout,
+  bflMinAmount: paymentoptions.bflMinAmount
 });
 
 const getSelectedColor = colors => {
@@ -245,6 +251,7 @@ const getSelectedColor = colors => {
   return activeColorName;
 };
 
+@withRouter
 class ProductDetails extends React.Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -282,19 +289,23 @@ class ProductDetails extends React.Component {
   componentDidMount() {
     const { dispatch } = this.context.store;
     const {
-      product,
+      // product,
       simpleSku,
       pincode: { selectedPincode },
       pdpTimeout
     } = this.props;
+
+    // this.setDescriptionActive(product);
+    this.hashLinkScroll();
+
     dispatch(getCombinedBuy(simpleSku, selectedPincode));
-    this.setDescriptionActive(product);
     const popUpTimeoutId = setTimeout(this.webToChat, pdpTimeout);
     // eslint-disable-next-line react/no-did-mount-set-state
     this.setState({ popUpTimeoutId });
   }
   componentWillReceiveProps(nextProps) {
     const { colorproducts } = this.props;
+
     if (nextProps.isLoggedIn) {
       this.setState({
         openLogin: false
@@ -345,15 +356,15 @@ class ProductDetails extends React.Component {
         behavior: 'smooth'
       });
     } catch (e) {
-      window.scroll(0, this.reviewsRef.current.offsetTop);
+      // window.scroll(0, this.reviewsRef.current.offsetTop);
     }
   };
-  setDescriptionActive = product => {
-    const {
-      attributes: { description }
-    } = product;
-    this.setState({ activeDescription: description });
-  };
+  // setDescriptionActive = product => {
+  //   const {
+  //     attributes: { description }
+  //   } = product;
+  //   this.setState({ activeDescription: description });
+  // };
   getWeightedAverageRatings = () => {
     const {
       reviews: { data = [] }
@@ -508,6 +519,58 @@ class ProductDetails extends React.Component {
     });
   };
 
+  hashLinkScroll = () => {
+    const { hash } = window.location;
+    const {
+      product: {
+        attributes: {
+ return: returnAndCancel, product_warranty: productWarranty, care_label: careLabel, description
+}
+      }
+    } = this.props;
+    let id = hash.replace('#', '');
+    const tabElement = {
+      'return-and-cancellation': {
+        tableName: 'return',
+        tabComponent: returnAndCancel
+      },
+      'service-assurance-warranty': {
+        tableName: 'warranty',
+        tabComponent: productWarranty
+      },
+
+      'product-care-instructions': {
+        tableName: 'care',
+        tabComponent: careLabel
+      },
+      details: {
+        tableName: 'details',
+        tabComponent: description
+      },
+      description: {
+        tableName: 'description',
+        tabComponent: description
+      }
+    };
+    if (hash !== '' && tabElement[`${id}`]) {
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) element.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+      }, 3000);
+      console.log(id, tabElement[`${id}`], 'id for tabElement');
+      this.setState({
+        activeSpec: tabElement[`${id}`].tableName,
+        activeDescription: tabElement[`${id}`].tabComponent
+      });
+    } else {
+      id = 'description';
+      this.setState({
+        activeSpec: tabElement[`${id}`].tableName,
+        activeDescription: tabElement[`${id}`].tabComponent
+      });
+    }
+  };
+
   renderAttributes = items => {
     items.map((item, i) =>
       Object.keys(item).map(key => (
@@ -545,7 +608,8 @@ class ProductDetails extends React.Component {
       combinedbuy,
       loadingList,
       quantityChange,
-      skuItem
+      skuItem,
+      bflMinAmount
     } = this.props;
     const {
       activeSpec,
@@ -576,7 +640,8 @@ class ProductDetails extends React.Component {
       sku,
       groupedattributes,
       reviews: { count, rating },
-      bogo_bundle: bogoBundle
+      bogo_bundle: bogoBundle,
+      free_visit: freeVisit = 'no'
     } = product;
     // const { brand: ProductBrand } = meta;
     const {
@@ -600,8 +665,15 @@ class ProductDetails extends React.Component {
     } = attributes;
     const simpleSku = Object.keys(simples)[0];
     const {
- name, price, special_price: specialPriceEmi, config_id: configId, dimension_image: dimensionImage
-} = meta;
+      name,
+      brand,
+      price,
+      special_price: specialPriceEmi,
+      config_id: configId,
+      dimension_image: dimensionImage,
+      warranty_period: warrantyPeriod = 0,
+      fk_catalog_supplier: fkCatalogSupplier = null
+    } = meta;
     const {
       offer_discount_percentage: offerDiscountPercentage,
       coupon_code: couponCode,
@@ -699,6 +771,7 @@ class ProductDetails extends React.Component {
                 {/* Product title and price */}
                 <TitlePrice
                   name={name}
+                  brand={brand}
                   couponCode={couponCode}
                   offerDiscountPercentage={offerDiscountPercentage}
                   limitedTimeCouponDiscount={limitedTimeCouponDiscount}
@@ -714,10 +787,25 @@ class ProductDetails extends React.Component {
                   onClickReviews={this.onClickReviews}
                 />
 
-                {/* Product Share */}
-                {/* <ShareBar title={name} url={productURL} mt={10} /> */}
+                {/* PDP Strip Icons */}
+                <Stripes
+                  emi={formatAmount(calculateLowestEmi(emidata, price))}
+                  isEmiAvailable={isEmiAvailable}
+                  warrantyPeriod={warrantyPeriod}
+                  fkCatalogSupplier={fkCatalogSupplier}
+                  brand={brand}
+                  freeVisit={freeVisit}
+                >
+                  <EmiModal
+                    price={formatAmount(checkSpecialPrice)}
+                    data={emidata}
+                    key="emi"
+                    specialPrice={checkSpecialPrice}
+                    bflMinAmount={bflMinAmount}
+                  />
+                </Stripes>
 
-                {/* Pincode and EMI options */}
+                {/* Pincode */}
                 <ServiceDetails
                   deliverBy={
                     (deliveryInfo && deliveryInfo[0] && deliveryInfo[0].value) ||
@@ -795,7 +883,6 @@ class ProductDetails extends React.Component {
                 {colorProducts.length > 0 && (
                   <Box pb={15}>
                     <Heading fontSize="1em" color="textDark" fontFamily="medium" fontWeight="normal" mb={15}>
-                      {/* TODO: @nikhil replace static color */}
                       Color Options: {getSelectedColor(colorProducts)}
                     </Heading>
                     <ColorOption
@@ -832,20 +919,6 @@ class ProductDetails extends React.Component {
                     }}
                   />
                 </Flex>
-
-                {/* EMI Options */}
-                <EmiOptions
-                  emiStarting={formatAmount(calculateLowestEmi(emidata, price))}
-                  isEmiAvailable={isEmiAvailable}
-                >
-                  <EmiModal
-                    price={formatAmount(checkSpecialPrice)}
-                    data={emidata}
-                    key="emi"
-                    specialPrice={checkSpecialPrice}
-                  />
-                </EmiOptions>
-
                 {/* Offers */}
                 {
                   <Box mb={20} mt={10}>
@@ -957,6 +1030,7 @@ class ProductDetails extends React.Component {
                     });
                   }}
                   active={activeSpec === 'description'}
+                  tab={'description'}
                 >
                   DESCRIPTION
                 </DescriptionButton>
@@ -969,6 +1043,7 @@ class ProductDetails extends React.Component {
                     });
                   }}
                   active={activeSpec === 'details'}
+                  tab={'details'}
                 >
                   DETAILS
                 </DescriptionButton>
@@ -982,6 +1057,7 @@ class ProductDetails extends React.Component {
                       });
                     }}
                     active={activeSpec === 'care'}
+                    tab={'product-care-instructions'}
                   >
                     PRODUCT CARE INSTRUCTIONS
                   </DescriptionButton>
@@ -996,6 +1072,7 @@ class ProductDetails extends React.Component {
                       });
                     }}
                     active={activeSpec === 'warranty'}
+                    tab={'service-assurance-warranty'}
                   >
                     SERVICE ASSURANCE / WARRANTY
                   </DescriptionButton>
@@ -1010,6 +1087,7 @@ class ProductDetails extends React.Component {
                       });
                     }}
                     active={activeSpec === 'return'}
+                    tab={'return-and-cancellation'}
                   >
                     RETURN / CANCELLATION
                   </DescriptionButton>
@@ -1349,9 +1427,14 @@ ProductDetails.defaultProps = {
   // catalogId: '',
   // onClickSubmit: () => {}
 };
+DescriptionButton.defaultProps = {
+  tab: ''
+};
+
 DescriptionButton.propTypes = {
   // eslint-disable-next-line react/require-default-props
-  active: PropTypes.string
+  active: PropTypes.string,
+  tab: PropTypes.string
 };
 ProductDetails.propTypes = {
   toggleWebToChat: PropTypes.func.isRequired,
@@ -1379,7 +1462,8 @@ ProductDetails.propTypes = {
   combinedbuy: PropTypes.array,
   quantityChange: PropTypes.bool,
   skuItem: PropTypes.object,
-  session: PropTypes.string
+  session: PropTypes.string,
+  bflMinAmount: PropTypes.number.isRequired
   // onClickSubmit: PropTypes.func,
   // catalogId: PropTypes.any
 };

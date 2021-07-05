@@ -304,6 +304,13 @@ export default function userMiddleware() {
             }));
         }
         break;
+        case 'feedback/SET_FEEDBACK_FORM_FAILURE':
+          dispatch(notifSend({
+            type: 'warning',
+            msg: action.error && action.error.error ? action.error.error : SOME_ERROR,
+            dismissAfter: 4000
+          }));
+          break;
       default:
         break;
     }

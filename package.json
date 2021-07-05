@@ -7,7 +7,7 @@
     "Ankit <ankit.patel@hometown.in>"
   ],
   "license": "MIT",
-  "version": "2.0.4",
+  "version": "2.5.1",
   "repository": {
     "type": "git",
     "url": "https://bitbucket.org/hometown-tech/frontend/"
@@ -23,9 +23,9 @@
   "main": "bin/server.js",
   "scripts": {
     "start": "concurrently --kill-others \"npm run start-prod\"",
-    "start-prod": "cross-env NODE_PATH=src UNBXD=production SF_ENV=production NODE_ENV=production PORT=8084 SITE_URL=https://www.hometown.in APIHOST=api.hometown.in/api/ APIPORT=443 PAYMENT_URL=https://alice.hometown.in/checkout/finish/payment/ node ./bin/server.js",
-    "build": "cross-env NODE_ENV=production UNBXD=production PAYMENT_URL=https://alice.hometown.in/checkout/finish/payment/ webpack --colors --display-error-details --config=webpack/prod.config.js",
-    "start-beta": "cross-env NODE_PATH=src UNBXD=beta NODE_ENV=production PORT=8084 SITE_URL=https://beta.hometown.in APIHOST=api.hometown.in/api/ APIPORT=443 PAYMENT_URL=https://beta-alice.hometown.in/checkout/finish/payment/ BFL_PAYMENT_URL=http://beta-alice.hometown.in/checkout/finish/bflpayment/ node ./bin/server.js",
+    "start-prod": "cross-env NODE_PATH=src UNBXD=production SF_ENV=production NODE_ENV=production PORT=8084 SITE_URL=https://www.hometown.in APIHOST=api.hometown.in/api/ APIPORT=443 PAYMENT_URL=https://alice.hometown.in/checkout/finish/payment/ BFL_PAYMENT_URL=https://alice.hometown.in/checkout/finish/bflpayment/ node ./bin/server.js",
+    "build": "cross-env NODE_ENV=production UNBXD=production PAYMENT_URL=https://alice.hometown.in/checkout/finish/payment/ BFL_PAYMENT_URL=https://alice.hometown.in/checkout/finish/bflpayment/ webpack --colors --display-error-details --config=webpack/prod.config.js",
+    "start-beta": "cross-env NODE_PATH=src UNBXD=beta NODE_ENV=production PORT=8084 SITE_URL=https://beta.hometown.in APIHOST=beta-api.hometown.in/api/ APIPORT=443 PAYMENT_URL=https://beta-alice.hometown.in/checkout/finish/payment/ BFL_PAYMENT_URL=http://beta-alice.hometown.in/checkout/finish/bflpayment/ node ./bin/server.js",
     "build-beta": "cross-env NODE_ENV=production UNBXD=beta PAYMENT_URL=https://beta-alice.hometown.in/checkout/finish/payment/ BFL_PAYMENT_URL=http://beta-alice.hometown.in/checkout/finish/bflpayment/ webpack --colors --display-error-details --config=webpack/beta.config.js",
     "start-stage": "cross-env NODE_PATH=src UNBXD=stage NODE_ENV=production PORT=8084 SITE_URL=https://stage.hometown.in APIHOST=stage-api.hometown.in/api/ APIPORT=443 PAYMENT_URL=https://stage-alice.hometown.in/checkout/finish/payment/ BFL_PAYMENT_URL=http://stage-alice.hometown.in/checkout/finish/bflpayment/ node ./bin/server.js",
     "build-stage": "cross-env NODE_ENV=production UNBXD=stage PAYMENT_URL=https://stage-alice.hometown.in/checkout/finish/payment/ BFL_PAYMENT_URL=http://stage-alice.hometown.in/checkout/finish/bflpayment/ webpack --colors --display-error-details --config=webpack/stage.config.js",
@@ -72,7 +72,7 @@
     "express-session": "^1.15.5",
     "express-useragent": "^1.0.12",
     "history": "^4.7.2",
-    "hometown-components-dev": "^1.0.51",
+    "hometown-components-dev": "^1.0.67",
     "http-proxy": "^1.16.2",
     "is-promise": "^2.1.0",
     "js-cookie": "^2.1.3",

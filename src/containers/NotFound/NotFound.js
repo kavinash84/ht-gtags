@@ -43,7 +43,7 @@ class NotFound extends Component {
               subTitle="Please check the Spelling or by a different search"
               btnName="Go Back Home"
               url="/"
-              bg="#fafafa"
+              // bg="#fafafa"
             >
               <Img src={SearchEmptyIcon} width="initial" m="1.25rem auto" alt="Sorry no results found" />
             </EmptyHtV1>

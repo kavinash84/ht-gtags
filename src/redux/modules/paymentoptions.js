@@ -232,6 +232,18 @@ const paymentObject = (sessionId, selectedGateway, paymentData, cardType = 'visa
     };
   }
 };
+
+// const getSelectedGateway = data => {
+//   console.log('getSelectedGateway function', data);
+//   const {
+//     cart: {
+//       summary: { total }
+//     }
+//   } = data;
+
+//   return total < 20000 ? 'Emi' : 'EmiZero';
+// };
+
 const emiZero = result => {
   console.log('Adding zero emi', result);
   let {
@@ -260,14 +272,13 @@ const emiZero = result => {
     methodPaymentGateways,
     paymentOSCConfig
   };
-  console.log('Resilt of zero emi', result);
   return result;
 };
 
 const initialState = {
   loaded: false,
   data: null,
-  selectedGateway: 'EmiZero',
+  selectedGateway: 'CreditCard',
   isFormValid: false,
   cardType: 'other',
   cardTypeError: null,
@@ -278,18 +289,9 @@ const initialState = {
       cvv: '',
       expMonth: '',
       expYear: ''
-    },
-    EmiZero: {
-      cardNumber: '',
-      cvv: '',
-      emiBank: '',
-      emiCode: '',
-      expMonth: '',
-      expYear: '',
-      nameOnCard: '',
-      type: 'other'
     }
   },
+  bflMinAmount: 25000,
   submitting: false,
   submitted: false
 };
