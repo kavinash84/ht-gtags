@@ -1,15 +1,13 @@
 .desContainer {
-  margin: 0 auto;
   position: relative;
   bottom: 120px;
-  width: 1000px;
 }
 
 .descriptionTitle {
   padding: 2rem 5rem;
   line-height: 57px !important;
-  color: white !important;
-  font-size: 40px;
+  color: white;
+  font-size: 35px;
   text-align: center;
   font-weight: bold;
 }
@@ -19,7 +17,7 @@
   font-weight: bold;
   text-align: center;
   padding-bottom: 5px;
-  font-size: 26px;
+  font-size: 22px;
   line-height: 37px;
 }
 
@@ -28,7 +26,7 @@
   font-size: 14px;
   text-align: center;
   white-space: nowrap;
-  font-size: 26px;
+  font-size: 22px;
   line-height: 37px;
 }
 
@@ -39,26 +37,28 @@
 
 .descriptionText {
   margin: 20px 0;
-  line-height: 49px !important;
-  font-size: 32px;
+  line-height: 35px !important;
+  font-size: 26px;
   text-align: center;
 }
 
 .description {
-  line-height: 40px !important;
-  font-size: 22px;
+  line-height: 35px !important;
+  font-size: 26px;
   text-align: left;
 }
 
 .avatar {
   border-radius: 50%;
-  height: 450px;
-  width: 450px;
+  height: 455px;
+  width: 455px;
+  aspect-ratio: 1;
+  object-fit: cover;
 }
 
 .horizontalSeperator {
   box-sizing: border-box;
-  width: 20px;
+  width: 30px;
   height: 2px;
   border-bottom: 2px solid #222222;
   margin-top: 10px;
@@ -67,7 +67,7 @@
 .headerTitle {
   font-size: 50px;
   line-height: 75px;
-  padding-bottom: 10px;
+  padding: 10px 0;
   text-align: center;
 }s
 
@@ -79,15 +79,16 @@
 }
 
 .imageCollection {
-  height: 250px;
-  width: 250px;
+  height: 360px;
+  width: 360px;
+  aspect-ratio: 1;
+  object-fit: cover;
 }
 
 .paymentOptions {
   padding: 0 30px;
-  margin: 0 50px;
   height: 180px;
-  width: 300px;
+  width: 280px;
   background-color: #fff;
   flex-direction: column;
   justify-content: center;
@@ -102,20 +103,22 @@
   justify-content: center;
   // align-items: center;
 }
-
-.main {
-  display: flex;
-  width: 100%;
-}
 .left {
   width: 40%;
-  margin-left: 3%;
 }
 .right {
   width: 60%;
-  margin-right: 3%;
+  padding-left: 30px;
 }
 .shopButton {
   display: flex;
   margin-top: 20px;
+  margin-left: 10px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.imageCat {
+  width: 900px;
+  margin: 0 auto;
 }

@@ -14,7 +14,7 @@ const adjustSlides = length => ({
 function Slider({ collection, children }) {
   return (
     <Box>
-      <Box p="15px">
+      <Box pr="15px">
         <SlickSlider settings={adjustSlides(12)}>
           {collection.length &&
             collection.map((slide, index) => (

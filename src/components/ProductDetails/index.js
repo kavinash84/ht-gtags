@@ -663,8 +663,13 @@ class ProductDetails extends React.Component {
     } = attributes;
     const simpleSku = Object.keys(simples)[0];
     const {
- name, price, special_price: specialPriceEmi, config_id: configId, dimension_image: dimensionImage
-} = meta;
+      name,
+      brand,
+      price,
+      special_price: specialPriceEmi,
+      config_id: configId,
+      dimension_image: dimensionImage
+    } = meta;
     const {
       offer_discount_percentage: offerDiscountPercentage,
       coupon_code: couponCode,
@@ -762,6 +767,7 @@ class ProductDetails extends React.Component {
                 {/* Product title and price */}
                 <TitlePrice
                   name={name}
+                  brand={brand}
                   couponCode={couponCode}
                   offerDiscountPercentage={offerDiscountPercentage}
                   limitedTimeCouponDiscount={limitedTimeCouponDiscount}

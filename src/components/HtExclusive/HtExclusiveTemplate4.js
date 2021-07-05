@@ -7,10 +7,11 @@ import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import SlickSlider from '../SlickSlider';
-import Arrow from '../../../static/arrow_forward.svg';
+import Arrow from '../../../static/htexclusive/forward-arrow.svg';
 
-// import Slider from './Slider';
-// import Slider from './Slider-copy';
+import CategoryBannerImage from './CategoryBannerImage';
+import HtExclusiveContainer from './HtExclusiveContainer';
+import CategoryHeader from './Header';
 
 const adjustSlides = length => ({
   slidesToShow: length >= 1 ? 3 : length,
@@ -26,45 +27,42 @@ function HtExclusiveTemplate4({ data }) {
  headerTitle, mainTitle, description, banner, collection
 } = data;
   return (
-    <Box>
-      <Box bg="#F5F5F5" py="20">
-        <Heading textAlign="center" as="h2" pb="10" pt="20" fontSize="50px">
-          {headerTitle}
-        </Heading>
-        <Flex justifyContent="center">
-          <Box className={styles.horizontalSeperator} />
-        </Flex>
-      </Box>
-      <Box>
-        <Image src={banner} alt="chester-furniture" width="100%" Height="800px" />
-      </Box>
+    <Box mb="60px">
+      <CategoryHeader mainTitle={headerTitle} horizontalSeperator />
 
-      <Box py="1rem" px="3rem">
+      <CategoryBannerImage banner={banner} />
+
+      <HtExclusiveContainer>
         <Heading as="h2" pt="20px" textAlign="center" fontSize="40px">
           {mainTitle}
         </Heading>
-        <div className={styles.descriptionText}>{description}</div>
-      </Box>
 
-      <Box p="15px">
+        <div className={styles.descriptionText}>{description}</div>
+
         <SlickSlider settings={adjustSlides(12)}>
           {collection.length &&
             collection.map((slide, index) => (
               <Box key={String(index)}>
                 <Flex className={styles.Options}>
-                  <Box width="350px">
-                    <Image src={slide.url} alt="bank-option" height="350px" width="400px" />
-                  </Box>
-                  <Box>
+                  <Image
+                    sx={{
+                      height: '400px',
+                      width: '400px',
+                      objectFit: 'cover'
+                    }}
+                    src={slide.url}
+                    alt="bank-option"
+                  />
+                  <Box mt="20px">
                     <Link to={slide.link}>
                       <Flex justifyContent="flex-start" alignItems="center">
                         <Box pr="5px">
-                          <Text as="h2" py="10px" fontSize="25px" textAlign="left" width="100%">
+                          <Text as="h2" py="10px" fontSize="25px" textAlign="left">
                             {slide.name}
                           </Text>
                         </Box>
                         <Box>
-                          <Image textAlign="left" src={Arrow} height="20px" width="20px" />
+                          <Image ml="5px" textAlign="left" src={Arrow} height="20px" width="20px" />
                         </Box>
                       </Flex>
                     </Link>
@@ -73,7 +71,7 @@ function HtExclusiveTemplate4({ data }) {
               </Box>
             ))}
         </SlickSlider>
-      </Box>
+      </HtExclusiveContainer>
     </Box>
   );
 }
