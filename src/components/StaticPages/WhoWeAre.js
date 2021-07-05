@@ -16,7 +16,7 @@ const WhoWeAre = () => (
       <BoxHtV1 className={styles.staticPageWrapper} type="block" pt="2rem" pb="2.5rem">
         <RowHtV1 ml="0" mr="0">
           <BoxHtV1>
-            <HeadingHtV1 mb="1em">Who We Are</HeadingHtV1>
+            <HeadingHtV1 as="h1" mb="1em">Who We Are</HeadingHtV1>
             <TextHtV1 color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem" lineHeight="1.5">
               Over the past 10 years, HomeTown has been bringing the latest designs & fashion to Indian homes. HomeTown
               offers the widest and best in class range in furniture, home furnishings & decor, modular kitchens, home

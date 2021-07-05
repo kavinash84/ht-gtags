@@ -324,6 +324,17 @@ app.get(/^\/(.*)\/$/, async (req, res, next) => {
   return next();
 });
 
+/* seo redirection erros */
+app.get(/\/(%e2%80%9dhttp|%e2%80%9dhttps\/)/, async (req, res) => {
+  const regex = /(^\/[a-zA-Z-_]+).*$/gm;
+  const validPath = regex.exec(req.path);
+
+  if (validPath) {
+    return res.redirect(301, validPath[1]);
+  }
+  return res.redirect(301, '/');
+});
+
 app.use(async (req, res) => {
   if (__DEVELOPMENT__) {
     // Do not cache webpack stats: the script file would change since
