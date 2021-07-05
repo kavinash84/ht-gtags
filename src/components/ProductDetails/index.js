@@ -71,6 +71,7 @@ import Video from './Video';
 import ReviewFilter from './ReviewFilter';
 import UnbxdCompleteTheLook from './UnbxdCompleteTheLook';
 import FreebieProduct from './FreebieProduct';
+import Stripes from './PdpStripe';
 
 import demoIcon from '../../../static/play-button.svg';
 
@@ -639,7 +640,8 @@ class ProductDetails extends React.Component {
       sku,
       groupedattributes,
       reviews: { count, rating },
-      bogo_bundle: bogoBundle
+      bogo_bundle: bogoBundle,
+      free_visit: freeVisit = 'no'
     } = product;
     // const { brand: ProductBrand } = meta;
     const {
@@ -668,7 +670,9 @@ class ProductDetails extends React.Component {
       price,
       special_price: specialPriceEmi,
       config_id: configId,
-      dimension_image: dimensionImage
+      dimension_image: dimensionImage,
+      warranty_period: warrantyPeriod = 0,
+      fk_catalog_supplier: fkCatalogSupplier = null
     } = meta;
     const {
       offer_discount_percentage: offerDiscountPercentage,
@@ -783,10 +787,25 @@ class ProductDetails extends React.Component {
                   onClickReviews={this.onClickReviews}
                 />
 
-                {/* Product Share */}
-                {/* <ShareBar title={name} url={productURL} mt={10} /> */}
+                {/* PDP Strip Icons */}
+                <Stripes
+                  emi={formatAmount(calculateLowestEmi(emidata, price))}
+                  isEmiAvailable={isEmiAvailable}
+                  warrantyPeriod={warrantyPeriod}
+                  fkCatalogSupplier={fkCatalogSupplier}
+                  brand={brand}
+                  freeVisit={freeVisit}
+                >
+                  <EmiModal
+                    price={formatAmount(checkSpecialPrice)}
+                    data={emidata}
+                    key="emi"
+                    specialPrice={checkSpecialPrice}
+                    bflMinAmount={bflMinAmount}
+                  />
+                </Stripes>
 
-                {/* Pincode and EMI options */}
+                {/* Pincode */}
                 <ServiceDetails
                   deliverBy={
                     (deliveryInfo && deliveryInfo[0] && deliveryInfo[0].value) ||
@@ -864,7 +883,6 @@ class ProductDetails extends React.Component {
                 {colorProducts.length > 0 && (
                   <Box pb={15}>
                     <Heading fontSize="1em" color="textDark" fontFamily="medium" fontWeight="normal" mb={15}>
-                      {/* TODO: @nikhil replace static color */}
                       Color Options: {getSelectedColor(colorProducts)}
                     </Heading>
                     <ColorOption
@@ -901,21 +919,6 @@ class ProductDetails extends React.Component {
                     }}
                   />
                 </Flex>
-
-                {/* EMI Options */}
-                <EmiOptions
-                  emiStarting={formatAmount(calculateLowestEmi(emidata, price))}
-                  isEmiAvailable={isEmiAvailable}
-                >
-                  <EmiModal
-                    price={formatAmount(checkSpecialPrice)}
-                    data={emidata}
-                    key="emi"
-                    specialPrice={checkSpecialPrice}
-                    bflMinAmount={bflMinAmount}
-                  />
-                </EmiOptions>
-
                 {/* Offers */}
                 {
                   <Box mb={20} mt={10}>
