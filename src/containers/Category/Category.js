@@ -15,12 +15,17 @@ import Col from 'hometown-components-dev/lib/ColHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 
+/* ====== Selectors ====== */
+import { getText } from 'selectors/homepage';
+
 /* ====== Page Components ====== */
 import CommonLayout from 'components/Category/CommonLayout';
 import UnbxdTopSellers from 'components/Category/UnbxdTopSellers';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import MainSlider from 'components/MainSlider';
+import TitleBar from 'components/Listing/TitleBar';
+import BreadCrumb from './BreadCrumb';
 
 const styles = require('./Category.scss');
 // import './Category.scss';
@@ -48,9 +53,13 @@ const getFaqs = faqs => {
 // const getSubMenu = (categories, key) =>
 //   categories && categories.filter(category => category.url_key === key)[0].children;
 
-@connect(({ homepage: { menu }, category: { data } }) => ({
+@connect(({
+ homepage: { menu }, category, category: { data }, pincode
+}) => ({
   menu: menu.data,
+  pincode: pincode.selectedPincode,
   category: data && data.items && data.items.text,
+  categoryText: getText(category),
   seoInfo: data && data.seo && data.seo.items
 }))
 export default class Category extends Component {
@@ -58,6 +67,17 @@ export default class Category extends Component {
     super(props);
     this.state = {};
   }
+
+  handleCategoryClick(event) {
+    event.preventDefault();
+    const { selectedPincode } = this.props;
+    window.HTCATEGORY.navigateToCategory({
+      pathname: event.currentTarget.pathname,
+      search: event.currentTarget.search,
+      pincode: selectedPincode
+    });
+  }
+
   renderOffers = offers =>
     offers.map(item => (
       <Col
@@ -101,14 +121,13 @@ export default class Category extends Component {
     const {
       category,
       seoInfo,
-      // menu,
+      categoryText: { title: pageTitle },
       match: {
         params: { category: currentCategory }
       }
     } = this.props;
     const { cms_json: cmsJson } = seoInfo;
 
-    // console.log(JSON.parse(cms_json), 'cat check');
     /* eslint-disable react/no-danger */
     return (
       <Wrapper>
@@ -144,6 +163,11 @@ export default class Category extends Component {
 
           {/* Main Slider */}
           {category && <MainSlider data={category.main} />}
+
+          {/* Breadcrumb */}
+          <TitleBar title="Home Furnishings">
+            <BreadCrumb urlKey={currentCategory} name={pageTitle} handleCategoryClick={this.handleCategoryClick} />
+          </TitleBar>
 
           {/* Category Carousel */}
           {category &&
@@ -187,7 +211,9 @@ Category.defaultProps = {
   // menu: [],
   seoInfo: {
     seo_text: ''
-  }
+  },
+  selectedPincode: '',
+  categoryText: { title: '' }
 };
 
 Category.propTypes = {
@@ -196,5 +222,7 @@ Category.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.object.isRequired
   }).isRequired,
-  seoInfo: PropTypes.object
+  seoInfo: PropTypes.object,
+  selectedPincode: PropTypes.string,
+  categoryText: PropTypes.object
 };

@@ -14,7 +14,7 @@ const settings = {
 class MainSlider extends Component {
   render() {
     const {
- data, triggerSlideChange, triggerSlideClick, reference, newSettings
+ data, triggerSlideChange, triggerSlideClick, reference, newSettings, onImageClick
 } = this.props;
     const finalSettings = { ...settings, ...newSettings };
     return (
@@ -32,6 +32,7 @@ class MainSlider extends Component {
               url={slide.url_key}
               title={slide.title || ''}
               onClick={() => triggerSlideClick(index)}
+              onImageClick={onImageClick}
             />
           </BoxHtV1>
         ))}
@@ -43,7 +44,8 @@ class MainSlider extends Component {
 MainSlider.defaultProps = {
   data: [],
   reference: null,
-  newSettings: {}
+  newSettings: {},
+  onImageClick: () => {}
 };
 
 MainSlider.propTypes = {
@@ -51,7 +53,8 @@ MainSlider.propTypes = {
   triggerSlideChange: PropTypes.func.isRequired,
   triggerSlideClick: PropTypes.func.isRequired,
   reference: PropTypes.object,
-  newSettings: PropTypes.object
+  newSettings: PropTypes.object,
+  onImageClick: PropTypes.func
 };
 
 export default connect(null, {

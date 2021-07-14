@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import MainSlider from 'components/MainSlider';
 
@@ -16,9 +17,16 @@ const getBanners = ({
   return banners;
 };
 
-export default class BestOfferBanners extends Component {
+class BestOfferBanners extends Component {
   render() {
+    const { onImageClick } = this.props;
     const banners = getBanners(this.props);
-    return <div>{banners.length ? <MainSlider data={banners} /> : null}</div>;
+    return <div>{banners.length ? <MainSlider data={banners} onImageClick={onImageClick} /> : null}</div>;
   }
 }
+
+BestOfferBanners.propTypes = {
+  onImageClick: PropTypes.func.isRequired
+};
+
+export default BestOfferBanners;

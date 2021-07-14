@@ -1,0 +1,18 @@
+.boxes {
+  img {
+    object-fit: cover!important;
+  }
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.dots {
+  border-top: 1px dashed rgb(210, 210, 210);
+}
+
+.pdpStripeIcons {
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
+}
