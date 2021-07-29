@@ -35,6 +35,8 @@ import { validatePassword } from 'utils/validation';
 import { isBlank } from 'js-utility-functions';
 import { setUserPassword } from 'redux/modules/setpassword';
 
+import PixelAnalytics from './PixelAnalytics';
+
 const mapStateToProps = ({
   setpassword,
   paymentstatus: { data, loaded, error },
@@ -455,6 +457,7 @@ class PaymentSuccess extends Component {
                     </Box>
                   </Row>
                 </Box>
+                <PixelAnalytics transactionId={orderNo} amount={totalAmount} />
               </Container>
             ) : null}
             {/* Footer */}
