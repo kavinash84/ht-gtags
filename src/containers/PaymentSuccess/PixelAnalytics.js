@@ -6,6 +6,7 @@ function PixelAnalytics({ transactionId, amount }) {
     <div>
       {/* Offer Conversion: Hometown CPS */}
       <img
+        style={{ visibility: 'hidden' }}
         src={`https://logicsd.go2cloud.org/aff_l?offer_id=18&adv_sub=${transactionId}&amount=${amount}`}
         width="1"
         height="1"
