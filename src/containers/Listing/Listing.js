@@ -42,6 +42,27 @@ const btnStyle = {
   border: 'none'
 };
 
+const getFaqs = faqs => {
+  const seoFaq = JSON.parse(faqs).map(faq => {
+    // console.log(faq, 'QA check');
+    // console.log(Object.values(faq)[0]);
+    const ques = Object.values(faq)[0];
+    // console.log(faq.ans);
+    if (faq) {
+      return {
+        '@type': 'Question',
+        name: ques,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: faq.ans
+        }
+      };
+    }
+    return '';
+  });
+  return JSON.stringify(seoFaq);
+};
+
 @connect(state => ({
   loading: state.products.loading,
   loaded: state.products.loaded,
@@ -285,6 +306,8 @@ export default class Listing extends Component {
       offer,
       bannerData
     } = this.props;
+    const { cms_json: cmsJson } = seoInfo;
+    console.log(seoInfo, 'seoInfo');
     let page;
     const {
       location: { search, pathname }
@@ -305,6 +328,19 @@ export default class Listing extends Component {
           <title>{seoInfo && seoInfo.page_title}</title>
           <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
           <meta name="description" content={seoInfo && seoInfo.meta_description} />
+          {cmsJson && cmsJson.length ? (
+            <script type="application/ld+json">
+              {`
+              {
+                "@context" : "http://schema.org",
+                "@type" : "FAQPage",
+                "mainEntity": ${getFaqs(cmsJson)}
+              }
+            `}
+            </script>
+          ) : (
+            ''
+          )}
           {CANONICALS[pathname] && <link rel="canonical" href={`${SITE_URL}${CANONICALS[pathname]}`} />}
           {previousPage !== '' && Number(page) !== 2 && (
             <link rel="prev" href={`${SITE_URL}${pathname}${previousPage}`} />

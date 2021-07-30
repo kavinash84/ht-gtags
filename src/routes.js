@@ -162,7 +162,7 @@ const routes = [
       { path: '/faq', exact: true, component: FAQ },
       { path: '/who-we-are', exact: true, component: WhoWeAre },
       { path: '/store/:city/:storeName', exact: true, component: Stores },
-      { path: '/track-order', exact: true, component: TrackOrder },
+      { path: '/track-order/:orderno?', exact: true, component: TrackOrder },
       { path: '/store-locator', exact: true, component: StoreLocator },
       { path: '/contact-us', exact: true, component: ContactUs },
       { path: '/feedback', exact: true, component: Feedback },
