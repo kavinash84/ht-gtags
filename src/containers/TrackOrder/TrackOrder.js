@@ -39,15 +39,16 @@ class TrackOrder extends React.Component {
     const orderNum = urlArray ? urlArray.split('=')[1] : undefined;
     console.log(orderNum, urlArray, 'orderNum');
     if (orderNum) {
-      this.setStatus();
+      this.setStatus(orderNum);
       dispatch(trackOrder(orderNum));
     }
   };
 
-  setStatus = () => {
+  setStatus = orderNum => {
     this.setState({
       status: true,
-      onChange: false
+      onChange: false,
+      orderId: orderNum
     });
   };
 
