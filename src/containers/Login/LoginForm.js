@@ -4,14 +4,14 @@ import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
 
 /* ====== Modules ====== */
-import { login, getOtp, resendOtp, clearLoginState } from 'redux/modules/login';
+import { login, getOtp, resendOtp, birthdateCheck, clearLoginState } from 'redux/modules/login';
 
 /* ====== Helpers ====== */
 import { allowNChar, allowTypeOf } from 'utils/helper';
 
 /* ====== Validations ====== */
 // import { validateMobile, isEmpty, checkSpecialChar } from 'utils/validation';
-import { validateMobile, validateName, validateEmail } from 'utils/validation';
+import { validateMobile, validateName, validateEmail, validateDob } from 'utils/validation';
 import { SIGNUP_URL } from 'helpers/Constants';
 
 /* ====== Components ====== */
@@ -28,9 +28,10 @@ import Text from 'hometown-components-dev/lib/TextHtV1';
 import LoginForm from 'components/LoginForms';
 import GoogleLoginBtn from 'components/LoginForms/GoogleLogin';
 import LoginViaOtp from 'components/LoginForms/LoginViaOtp';
+import UpdateProfileModal from './UpdateProfile';
 
 // const styles = require('./index.scss');
-
+const LoaderIcon = require('../../../static/refresh.svg');
 const OTPIcon = require('../../../static/otp.svg');
 const EmailIcon = require('../../../static/email-primary.svg');
 
@@ -44,8 +45,10 @@ const EmailIcon = require('../../../static/email-primary.svg');
   loading: state.userLogin.loading,
   loggingIn: state.userLogin.loggingIn,
   askContact: state.userLogin.askContact,
+  askBirthDate: state.userLogin.askBirthDate,
   askEmail: state.userLogin.askEmail,
   askName: state.userLogin.askName,
+  skipBirthdateCheck: state.userLogin.skipBirthdateCheck,
   loginType: state.userLogin.loginType
 }))
 export default class LoginFormContainer extends Component {
@@ -58,6 +61,8 @@ export default class LoginFormContainer extends Component {
     loaded: PropTypes.bool,
     loggingIn: PropTypes.bool,
     askContact: PropTypes.bool,
+    askBirthDate: PropTypes.bool,
+    skipBirthdateCheck: PropTypes.bool,
     askEmail: PropTypes.bool,
     askName: PropTypes.bool
   };
@@ -72,6 +77,8 @@ export default class LoginFormContainer extends Component {
     loading: false,
     loggingIn: false,
     askContact: false,
+    askBirthDate: false,
+    skipBirthdateCheck: false,
     askEmail: false,
     askName: false,
     loginType: ''
@@ -80,6 +87,9 @@ export default class LoginFormContainer extends Component {
   state = {
     loginviaotp: false,
     mobile: '',
+    phone: '',
+    phoneError: false,
+    phoneErrorMessage: 'Enter Valid 10 Digit Phone Number',
     otp: '',
     otpError: false,
     name: '',
@@ -89,6 +99,9 @@ export default class LoginFormContainer extends Component {
     email: '',
     emailError: false,
     emailErrorMessage: 'Please Enter Valid Email ',
+    dob: '',
+    dobError: false,
+    dobErrorMessage: 'Enter Valid Date',
     mobilesubmitted: false,
     resend: false
   };
@@ -233,6 +246,10 @@ export default class LoginFormContainer extends Component {
     const { dispatch } = this.context.store;
     dispatch(login(this.state));
   };
+  handleModal = () => {
+    const { dispatch } = this.context.store;
+    dispatch(clearLoginState());
+  };
   handleResend = () => {
     this.setState({
       mobilesubmitted: false,
@@ -248,12 +265,57 @@ export default class LoginFormContainer extends Component {
     });
     dispatch(clearLoginState());
   };
+  onChangeDob = () => {
+    const value = '1995-10-02';
+    const checkError = !validateDob(value).error;
+
+    this.setState({
+      dob: value,
+      dobError: checkError,
+      dobErrorMessage: validateDob(value).msg
+    });
+  };
+  onSubmitDob = () => {
+    const { dob } = this.state;
+    const isInvalid = validateDob(dob).error;
+    if (isInvalid) {
+      return this.setState({
+        nameError: true,
+        nameErrorMessage: validateDob(dob).msg
+      });
+    }
+    onSkipDob = () => {
+      this.birthdateChecker(true);
+      const { dispatch } = this.context.store;
+      const data = {
+        ...this.state,
+        skipBirthdateCheck: true
+      };
+      dispatch(login(data));
+    };
+    birthdateChecker = status => {
+      const { dispatch } = this.context.store;
+      dispatch(birthdateCheck(status));
+    }
+    const { dispatch } = this.context.store;
+    dispatch(login(this.state));
+  };
+  isValid = () => {
+    const { askContact, askName, askBirthDate } = this.props;
+    const { phone, name, dob } = this.state;
+    const isInvalidPhone = askContact && !validateMobile(phone);
+    const isInvalidName = askName && validateName(name).error;
+    const isInvalidDob = askBirthDate && validateDob(dob).error;
+    const disabled = isInvalidPhone || isInvalidName || isInvalidDob;
+    return disabled;
+  };
 
   render() {
     const {
       mobile,
-      mobileError,
-      mobileErrorMessage,
+      phone,
+      phoneError,
+      phoneErrorMessage,
       otp,
       name,
       nameError,
@@ -264,11 +326,17 @@ export default class LoginFormContainer extends Component {
       email,
       emailError,
       emailErrorMessage,
-      resend
+      resend,
+      dob,
+      dobError,
+      dobErrorMessage
     } = this.state;
     const {
- loaded, loading, loggingIn, askContact, askName, loginType, askEmail
+ loaded, loading, loggingIn, askContact, askName, loginType, askEmail, askBirthDate, skipBirthdateCheck,
 } = this.props;
+const open = (askContact || askName || askBirthDate) && loginType && loginType === 'hometown';
+console.log(this.props);
+const isValidField = this.isValid();
     return (
       <Row>
         <Box variant="col-4">
@@ -282,20 +350,50 @@ export default class LoginFormContainer extends Component {
           </Box>
           <Box>
             {!this.state.loginviaotp ? (
-              <LoginForm
-                askName={askName}
-                askContact={askContact}
-                loginType={loginType}
-                loading={loading}
-                loggingIn={loggingIn}
-              />
+              <div>
+                <LoginForm
+                  askName={askName}
+                  askContact={askContact}
+                  loginType={loginType}
+                  loading={loading}
+                  loggingIn={loggingIn}
+                />
+                <UpdateProfileModal
+                  askName={askName}
+                  askContact={askContact}
+                  askBirthDate={askBirthDate}
+                  skipBirthdateCheck={skipBirthdateCheck}
+                  open={open}
+                  name={name}
+                  nameError={nameError}
+                  nameErrorMessage={nameErrorMessage}
+                  phone={phone}
+                  phoneError={phoneError}
+                  phoneErrorMessage={phoneErrorMessage}
+                  dob={dob}
+                  dobError={dobError}
+                  dobErrorMessage={dobErrorMessage}
+                  isValidField={isValidField}
+                  loggingIn={loggingIn}
+                  LoaderIcon={LoaderIcon}
+                  handleModal={this.handleModal}
+                  onSubmitLogin={this.onSubmitLogin}
+                  onChangeName={this.onChangeName}
+                  onChangePhone={this.onChangePhone}
+                  onChangeDob={this.onChangeDob}
+                  birthdateCheck={this.birthdateChecker}
+                />
+              </div>
             ) : (
               <LoginViaOtp
                 onChangeMobile={this.onChangeMobile}
                 onChangeOtp={this.onChangeOtp}
+                onChangeDob={this.onChangeDob}
+                onSubmitDob={this.onSubmitDob}
                 onSubmitMobileNumber={this.onSubmitMobileNumber}
                 onSubmitOtp={this.onSubmitOtp}
                 otp={otp}
+                onSkipDob={this.onSkipDob}
                 otpError={otpError}
                 otpErrorMessage={otpErrorMessage}
                 onChangeName={this.onChangeName}
@@ -313,6 +411,9 @@ export default class LoginFormContainer extends Component {
                 handleResend={this.handleResend}
                 resend={resend}
                 askName={askName}
+                dob={dob}
+                dobError={dobError}
+                dobErrorMessage={dobErrorMessage}
                 onSubmitNameAndEmail={this.onSubmitNameAndEmail}
                 onSubmitEmail={this.onSubmitEmail}
                 email={email}
@@ -320,6 +421,8 @@ export default class LoginFormContainer extends Component {
                 emailErrorMessage={emailErrorMessage}
                 askEmail={askEmail}
                 onChangeEmail={this.onChangeEmail}
+                askBirthDate={askBirthDate}
+                skipBirthdateCheck={skipBirthdateCheck}
               />
             )}
           </Box>
@@ -358,6 +461,7 @@ export default class LoginFormContainer extends Component {
                 askName={askName}
                 loading={loading}
                 loggingIn={loggingIn}
+                askBirthDate={askBirthDate}
               />
             </Box>
           </Row>

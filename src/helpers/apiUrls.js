@@ -22,6 +22,9 @@ export const RESEND_OTP = 'tesla/otp/resend';
 
 /* Account */
 export const USERPROFILE = 'tesla/users/details';
+export const FUTUREPAYSTATUS = 'tesla/futurePay/futurePay-wallet-status';
+export const LINKFUTUREPAY = 'tesla/futurePay/create-wallet';
+export const TRANSACTIONHISTORY = 'tesla/futurePay/transactionDetails';
 export const UPDATEPROFILE = 'tesla/users/update-profile';
 export const UPDATE_PASSWORD = 'tesla/users/update-password';
 export const SET_PASSWORD = 'tesla/users/change-password';

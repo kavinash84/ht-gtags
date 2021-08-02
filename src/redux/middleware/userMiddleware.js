@@ -1,6 +1,6 @@
 import { PINCODE } from 'helpers/Constants';
 import cookie from 'js-cookie';
-import { clearUserProfile, loadUserProfile } from '../modules/profile';
+import { clearUserProfile, loadUserProfile, checkFuturePay, setFuturePayStatus } from '../modules/profile';
 import { clearWishList, syncWishList } from '../modules/wishlist';
 import { clearLoginState, loginUserAfterSignUp, logout } from '../modules/login';
 import { generateSession } from '../modules/app';
@@ -49,8 +49,17 @@ export default function userMiddleware() {
     if (type === 'login/LOGIN_SUCCESS') {
       dispatch(synCart(sessionId, pincode));
       dispatch(loadUserProfile());
+      dispatch(checkFuturePay());
       cookie.set('PROMO_SIGNUP', 'AVOID', { expires: 7 });
       if (waitlist !== '') dispatch(syncWishList());
+    }
+    if (type === 'profile/FUTUREPAY_STATUS_SUCCESS') {
+      const {
+        result: { walletLinkStatus }
+      } = action;
+      if (!walletLinkStatus) {
+        dispatch(setFuturePayStatus(true));
+      }
     }
     if (type === 'login/LOGOUT_SUCCESS') {
       dispatch(generateSession());

@@ -126,6 +126,7 @@ export default class SignupFormContainer extends Component {
       passwordErrorMessage
     } = this.state;
     const { loading } = this.props;
+    console.log(this.props);
 
     return (
       <BoxHtV1>
@@ -162,6 +163,10 @@ export default class SignupFormContainer extends Component {
                     onChangeEmail={this.onChangeEmail}
                     emailFeedBackError={emailError}
                     emailFeedBackMessage={emailErrorMessage}
+                    name={name}
+                    onChangeName={this.onChangeName}
+                    nameFeedBackError={nameError}
+                    nameFeedBackMessage={nameErrorMessage}
                     phone={phone}
                     onChangePhone={this.onChangePhone}
                     phoneFeedBackError={phoneError}
@@ -171,8 +176,12 @@ export default class SignupFormContainer extends Component {
                     passwordFeedBackError={passwordError}
                     passwordFeedBackMessage={passwordErrorMessage}
                     onSubmitSignup={this.onSubmitSignup}
-                    loading={loading}
+                    signUpResponse={signUpResponse}
+                    // loading={loading}
                     loginUrl={LOGIN_URL}
+                    date={showDateField(dob, this.onChangeDob)}
+                    dobFeedBackMessage={dobErrorMessage}
+                    dobFeedBackError={dobError}
                   />
                 </ColHtV1>
               </RowHtV1>

@@ -4,14 +4,14 @@ import { loadUserProfile, isLoaded as isUserProfileLoaded } from 'redux/modules/
 
 const hooks = {
   fetch: async ({ store: { dispatch, getState } }) => {
-    // if (!isUserProfileLoaded(getState())) {
-    //   await dispatch(loadUserProfile()).catch(error => console.log(error));
-    // }
+    if (!isUserProfileLoaded(getState())) {
+      await dispatch(loadUserProfile()).catch(error => console.log(error));
+    }
   }
 };
 
-const MyHomeWallet = HomeTownLoader({
+const Profile = HomeTownLoader({
   loader: () => import('./MyHomeWallet' /* webpackChunkName: 'MyHomeWallet' */)
 });
 
-export default provideHooks(hooks)(MyHomeWallet);
+export default provideHooks(hooks)(Profile);

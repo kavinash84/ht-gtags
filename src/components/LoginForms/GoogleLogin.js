@@ -13,7 +13,7 @@ import { validateMobile, validateName } from 'utils/validation';
 import { allowNChar, allowTypeOf } from 'utils/helper';
 
 /* ====== Modules ====== */
-import { googleLogin, clearLoginState } from 'redux/modules/login';
+import { googleLogin, clearLoginState, birthdateCheck } from 'redux/modules/login';
 
 /* ====== Components ====== */
 import FormInputHtV1 from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
@@ -25,12 +25,14 @@ import Image from 'hometown-components-dev/lib/ImageHtV1';
 
 import UpdateName from './UpdateName';
 import UpdateContacts from './UpdateContacts';
+import UpdateDob from './UpdateDob';
 
 const LoaderIcon = require('../../../static/refresh-black.svg');
 
-const mapStateToProps = ({ app }) => ({
+const mapStateToProps = ({ app, userLogin }) => ({
   session: app.sessionId,
-  userLogin: app.userLogin
+  userLogin: app.userLogin,
+  skipBirthdateCheck: userLogin.skipBirthdateCheck
 });
 
 const onSuccess = (dispatcher, session, phone) => result => {
@@ -54,6 +56,9 @@ const mapDispatchToProps = dispatch =>
 const GoogleIcon = require('../../../static/google.svg');
 
 class GoogleLogin extends Component {
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -110,6 +115,19 @@ class GoogleLogin extends Component {
       lastNameError: isInvalid
     });
   };
+  onChangeDob = value => {
+    const checkError = validateDob(value).error;
+
+    this.setState({
+      dob: value,
+      dobError: checkError,
+      dobErrorMessage: validateDob(value).msg
+    });
+  };
+  birthdateCheck = status => {
+    const { dispatch } = this.context.store;
+    dispatch(birthdateCheck(status));
+  };
 
   handleModal = () => {
     this.props.clearLogin();
@@ -121,7 +139,7 @@ class GoogleLogin extends Component {
   };
   render() {
     const {
- loginViaLogin, session, askContact, askName, loginType, loggingIn
+ loginViaLogin, session, askContact, askName, askBirthDate, loginType, loggingIn, skipBirthdateCheck
 } = this.props;
     // const { phone, phoneError, phoneErrorMessage } = this.state;
     // const open = askContact && loginType && loginType === 'google';
@@ -135,7 +153,10 @@ class GoogleLogin extends Component {
       firstNameErrorMessage,
       lastName,
       lastNameError,
-      lastNameErrorMessage
+      lastNameErrorMessage,
+      dob,
+      dobError,
+      dobErrorMessage
     } = this.state;
     const open = (askContact || askName) && loginType && loginType === 'google';
 
@@ -203,6 +224,19 @@ class GoogleLogin extends Component {
               onChangeLastName={this.onChangeLastName}
               loginViaLogin={loginViaLogin}
               // onSubmitForm={this.onSubmitForm}
+            />
+          ) : askBirthDate ? (
+            <UpdateDob
+              session={session}
+              loggingIn={loggingIn}
+              dob={dob}
+              dobError={dobError}
+              dobErrorMessage={dobErrorMessage}
+              onChangeDob={this.onChangeDob}
+              LoaderIcon={LoaderIcon}
+              skipBirthdateCheck={skipBirthdateCheck}
+              birthdateCheck={this.birthdateCheck}
+              loginViaLogin={loginViaLogin}
             />
           ) : askContact ? (
             <Box>

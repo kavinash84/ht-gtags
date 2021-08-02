@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import { withRouter } from 'react-router';
+import DatePicker from 'components/Form/DatePicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import './Signdatepicker.css';
 
 /* ====== Modules ====== */
 
@@ -18,7 +22,8 @@ import {
   validateEmail,
   isEmpty,
   checkSpecialChar,
-  checkDateOfBirth
+  checkDateOfBirth,
+  validateDob
 } from 'utils/validation';
 
 /* ====== Components ====== */
@@ -40,6 +45,22 @@ import SignUpForm from 'hometown-components-dev/lib/FormsHtV1/SignUpFormHtV1';
 
 const OTPIcon = require('../../../static/otp.svg');
 const EmailIcon = require('../../../static/email-primary.svg');
+
+const validateDate = (dob) => {
+  if (dob) return false;
+  return true;
+};
+
+const showDateField = (dob, onChange) => (
+  <DatePicker
+    selected={dob}
+    onChange={onChange}
+    maxDate={new Date()}
+    showMonthDropdown
+    showYearDropdown
+    dropdownMode="select"
+  />
+);
 
 @connect(({ userSignUp, app }) => ({
   loading: userSignUp.loading,
@@ -141,11 +162,9 @@ export default class SignupFormContainer extends Component {
       cityErrorMessage: 'Numbers and special characters are not allowed !'
     });
   };
-  onChangeDob = e => {
-    const {
-      target: { value }
-    } = e;
-    const checkError = checkDateOfBirth(value);
+  onChangeDob = value => {
+    console.log({ value }, value, 'value');
+    const checkError = value && validateDob(value);
     this.setState({
       dob: value,
       dobError: checkError
@@ -203,12 +222,17 @@ export default class SignupFormContainer extends Component {
         phoneError: checkPhone,
         passwordError: checkPassword.error,
         cityError: checkCity,
-        dobError: checkDob
+        dobError: checkDob,
       });
     }
+    const dobValue = moment(dob).format('YYYY-MM-DD');
+    const data = {
+      ...this.state,
+      dob: dobValue
+    };
     const { dispatch } = this.context.store;
     const { session } = this.props;
-    dispatch(signUp(this.state, session, signupOrigin));
+    dispatch(signUp(data, session));
   };
 
   toggleLoginForm = () => {
@@ -330,9 +354,10 @@ export default class SignupFormContainer extends Component {
                 onChangePassword={this.onChangePassword}
                 passwordFeedBackError={passwordError}
                 passwordFeedBackMessage={passwordErrorMessage}
-                dob={dob}
+                dob="2002-06-12"
                 dobFeedBackError={dobError}
                 dobFeedBackMessage={dobErrorMessage}
+                // selected={dob}
                 gender={gender}
                 genderFeedBackError={genderError}
                 genderFeedBackMessage={genderErrorMessage}
@@ -347,6 +372,8 @@ export default class SignupFormContainer extends Component {
                 onSubmitSignup={this.onSubmitSignup}
                 loading={loading}
                 loginUrl={LOGIN_URL}
+                // date={<DatePicker/>}
+                date={showDateField(dob, this.onChangeDob)}
               />
             </Col>
           </Row>

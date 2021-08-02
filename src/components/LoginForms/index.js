@@ -23,7 +23,7 @@ import ForgotPasswordModal from 'components/ForgotPasswordModal';
  * utility / modules / helper / validation
  */
 import { validateEmail, isBlank } from 'js-utility-functions';
-import { validateMobile, isEmpty, checkSpecialChar } from 'utils/validation';
+import { validateMobile, isEmpty, checkSpecialChar, validateName, validateDob } from 'utils/validation';
 import { allowNChar, allowTypeOf } from 'utils/helper';
 import { login, clearLoginState } from 'redux/modules/login';
 import { SIGNUP_URL } from 'helpers/Constants';
@@ -34,7 +34,8 @@ import { SIGNUP_URL } from 'helpers/Constants';
 const LoaderIcon = require('../../../static/refresh-black.svg');
 
 @connect(state => ({
-  loginResponse: state.userLogin
+  loginResponse: state.userLogin,
+  askBirthDate: state.userLogin.askBirthDate,
 }))
 export default class LoginForm extends Component {
   static propTypes = {
@@ -42,6 +43,7 @@ export default class LoginForm extends Component {
       isLoggedIn: PropTypes.bool.isRequired
     }).isRequired,
     askContact: PropTypes.bool.isRequired,
+    askBirthDate: PropTypes.bool,
     askName: PropTypes.bool.isRequired,
     loginType: PropTypes.string.isRequired,
     loggingIn: PropTypes.bool.isRequired
@@ -60,6 +62,9 @@ export default class LoginForm extends Component {
     phone: '',
     phoneError: false,
     phoneErrorMessage: 'Enter Valid 10 Digit Phone Number',
+    dob: '',
+    dobError: false,
+    dobErrorMessage: 'Enter Valid Date',
     name: '',
     nameError: false,
     nameErrorMessage: 'Please enter a name without special characters',
@@ -92,26 +97,34 @@ export default class LoginForm extends Component {
       passwordErrorMessage: checkError ? "Password can't be blank" : ''
     });
   };
-  onSubmitLogin = e => {
+  onSubmitLogin = (e, skipBirthdateCheck = false) => {
     e.preventDefault();
     const {
- email, password, phone, name
+ email, password, phone, name, dob
 } = this.state;
     const checkEmail = validateEmail(email, 'Invalid Email');
     const checkMobile = phone ? !validateMobile(phone) : false;
+    const checkDob = dob ? validateDob(dob).error : false;
     const checkName = !isEmpty(name) ? checkSpecialChar(name) : false;
     const checkPassword = isBlank(password);
-    if (checkEmail.error || checkPassword || checkMobile || checkName) {
+    if (checkEmail.error || checkPassword || checkMobile || checkName || checkDob) {
       return this.setState({
         nameError: checkName,
+        nameErrorMessage: validateName(name).msg,
         emailError: checkEmail.error,
         emailErrorMessage: checkEmail.errorMessage,
         passwordError: checkPassword,
-        passwordErrorMessage: checkPassword ? "Password can't be blank" : ''
+        passwordErrorMessage: checkPassword ? "Password can't be blank" : '',
+        dobError: checkDob,
+        dobErrorMessage: checkDob ? "Date of birth can't be blank" : ''
       });
     }
     const { dispatch } = this.context.store;
-    dispatch(login(this.state));
+    const data = {
+      ...this.state,
+      skipBirthdateCheck
+    };
+    dispatch(login(data));
   };
   onChangePhone = e => {
     const {
@@ -128,6 +141,27 @@ export default class LoginForm extends Component {
         value[0] === '0' ? 'Mobile Number Must Not Start With 0' : 'Enter 10 Digits Valid Mobile Number'
     });
   };
+  onChangeDob = value => {
+    const checkError = validateDob(value).error;
+
+    this.setState({
+      dob: value,
+      dobError: checkError,
+      dobErrorMessage: validateDob(value).msg
+    });
+  };
+  onSubmitDob = () => {
+    const { dob } = this.state;
+    const isInvalid = validateDob(dob).error;
+    if (isInvalid) {
+      return this.setState({
+        nameError: true,
+        nameErrorMessage: validateDob(dob).msg
+      });
+    }
+    const { dispatch } = this.context.store;
+    dispatch(login(this.state));
+  };
   onChangeName = e => {
     const {
       target: { value }
@@ -138,16 +172,18 @@ export default class LoginForm extends Component {
       nameError: checkError
     });
   };
+  
   handleModal = () => {
     const { dispatch } = this.context.store;
     dispatch(clearLoginState());
   };
   isValid = () => {
-    const { askContact, askName } = this.props;
-    const { phone, name } = this.state;
+    const { askContact, askName, askBirthDate } = this.props;
+    const { phone, name, dob } = this.state;
     const isInvalidPhone = askContact && !validateMobile(phone);
     const isInvalidName = askName && (isEmpty(name) || checkSpecialChar(name));
-    const disabled = isInvalidPhone || isInvalidName;
+    const isInvalidDob = askBirthDate && validateDob(dob).error;
+    const disabled = isInvalidPhone || isInvalidName || isInvalidDob;
     return disabled;
   };
   render() {
@@ -161,14 +197,17 @@ export default class LoginForm extends Component {
       phone,
       phoneError,
       phoneErrorMessage,
+      dob,
+      dobError,
+      dobErrorMessage,
       name,
       nameError,
       nameErrorMessage
     } = this.state;
     const {
- loginResponse, askContact, loginType, askName, loggingIn
+ loginResponse, askContact, loginType, askName, loggingIn, askBirthDate
 } = this.props;
-    const open = (askContact || askName) && loginType && loginType === 'hometown';
+    const open = (askContact || askName || askBirthDate) && loginType && loginType === 'hometown';
     const isValidField = this.isValid();
     return (
       <Box p={24}>
@@ -208,6 +247,8 @@ export default class LoginForm extends Component {
                   ? 'Please update your name !'
                   : askContact
                   ? 'Please update your contact number!'
+                  : askBirthDate
+                  ? 'Please update your date of birth!'
                   : ''}
               </Text>
             </Box>
@@ -241,6 +282,17 @@ export default class LoginForm extends Component {
                     value={phone}
                     feedBackError={phoneError}
                     feedBackMessage={phoneErrorMessage}
+                  />
+                )}
+                {askBirthDate && (
+                  <FormInput
+                    label=""
+                    type="text"
+                    placeholder="Enter your date of birth!"
+                    onChange={this.onChangeDob}
+                    value={dob}
+                    feedBackError={dobError}
+                    feedBackMessage={dobErrorMessage}
                   />
                 )}
               </form>

@@ -51,6 +51,8 @@ import PaymentMethods from '../PaymentMethods/';
 import PaymentForm from './PaymentForm';
 import UpiForm from './UpiForm';
 
+import WalletBalance from './WalletBalance';
+
 const cartStyles = require('../Cart/Cart.scss');
 
 const nextStep = (
@@ -60,14 +62,68 @@ const nextStep = (
   paymentData,
   cardType,
   selectedGateway,
-  paymentMethodDetails
+  paymentMethodDetails,
+  futurePayRedeeemAmount,
+  isPayFromHtWallet,
+  total
 ) => e => {
   e.preventDefault();
-  let walletType = '';
-  if (selectedGateway === 'Wallet') walletType = paymentMethodDetails[selectedGateway].walletName;
   paymentload(false);
-  dispatcher(sessionId, paymentData, cardType, selectedGateway, walletType);
+  dispatcher(
+    sessionId,
+    paymentData,
+    cardType,
+    selectedGateway,
+    paymentMethodDetails,
+    futurePayRedeeemAmount,
+    isPayFromHtWallet,
+    total
+  );
 };
+
+const mapStateToProps = ({
+  app,
+  paymentoptions,
+  cart: { checkingCart, cartChecked, summary },
+  app: { sessionId },
+  cart
+}) => ({
+  isPayFromHtWallet: paymentoptions.isPayFromHtWallet,
+  futurePayRedeeemAmount: paymentoptions.futurePayRedeeemAmount,
+  selectedGateway: paymentoptions.selectedGateway,
+  paymentMethodDetails: paymentoptions.paymentMethodDetails,
+  isFormValid: paymentoptions.isFormValid,
+  paymentDetails: paymentoptions.paymentMethodDetails,
+  checkingCart,
+  cartChecked,
+  summary,
+  sessionId,
+  error: paymentoptions.error,
+  submitting: paymentoptions.submitting,
+  submitted: paymentoptions.submitted,
+  cardType: paymentoptions.cardType,
+  paymentFormData: paymentoptions.formData,
+  session: app.sessionId,
+  results: getCartList(cart),
+  undelivered: getNotDelivered(cart),
+  outOfStockList: getStockOutProducts(cart),
+  futurPayProfile: getFuturePayProfile(profile),
+  futurePayError: paymentoptions.futurePayRedeemAmountError
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      toggleGateway: setSelectedGateway,
+      setPaymentDetails: setSelectedPaymentDetails,
+      validateForm: checkPaymentDetails,
+      submitDetails: submitPaymentDetails,
+      paymentLoadedStatus: paymentLoaded,
+      setError: setValidationError,
+      resetEasyEmi: resetEasyEmiState
+    },
+    dispatch
+  );
 
 const onChangeDetails = (dispatcher, gateway) => e => {
   const { name, value } = e.target;
@@ -118,6 +174,8 @@ class PaymentOptions extends Component {
   render() {
     const {
       data,
+      futurePayRedeeemAmount,
+      isPayFromHtWallet,
       selectedGateway,
       toggleGateway,
       setPaymentDetails,
@@ -135,7 +193,10 @@ class PaymentOptions extends Component {
       undelivered,
       resetEasyEmi,
       submitted,
-      error
+      error,
+      summary: { total },
+      futurPayProfile,
+      futurePayError
     } = this.props;
 
     const [netBankingData] = data.filter(bank => bank.paymentType === 'NetBanking');
@@ -234,13 +295,14 @@ class PaymentOptions extends Component {
               </Box>
             ))}
             <Box mb={20}>
-              <Heading variant="heading.medium">Payment Method</Heading>
+              {/* <Heading variant="heading.medium">Payment Method</Heading> */}
+              <WalletBalance />
             </Box>
             <Row flexWrap="nowrap" ml={0} mr={0}>
               <Row mx={0} flexDirection="column" maxHeight="360px" minWidth={140} width={201}>
                 {data.map((paymentType, index) => (
                   <Col key={String(`${paymentType}${index}`)} px={0}>
-                    {CommonPayments(paymentType.paymentType, toggleGateway, selectedGateway, session, resetEasyEmi)}
+                    {CommonPayments(paymentType.paymentType, toggleGateway, selectedGateway, session, resetEasyEmi, futurePayRedeemAmount, total, isPayFromHtWallet)}
                   </Col>
                 ))}
               </Row>
@@ -409,6 +471,13 @@ class PaymentOptions extends Component {
                 <Box className={cartStyles.orderSummaryOverly} />
               </Row>
               <Box width={1} pb={30}>
+                <Label color="text" fontFamily="regular" fontSize="0.75rem" lh="1.5" mb="0.625rem" mt="0">
+                  Cart Subtotal :
+                </Label>
+                <Label className={styles.totalCartPrice} color="textDark" fontWeight="700" fontSize="16px">
+                  {' '}
+                  Rs.{total ? formatAmount(total) : null}
+                </Label>
                 <Button
                   type="default"
                   height={48}
@@ -421,11 +490,15 @@ class PaymentOptions extends Component {
                     paymentDetails,
                     cardType,
                     selectedGateway,
-                    paymentDetails
+                    paymentDetails,
+                    futurePayRedeeemAmount,
+                    isPayFromHtWallet,
+                    total
                   )}
                   disabled={
                     validateInput(paymentDetails) ||
                     validatePaymentDetails(paymentDetails) ||
+                    futurePayError ||
                     undelivered.length > 0 ||
                     outOfStockList.length > 0 ||
                     submitting ||
@@ -459,7 +532,10 @@ PaymentOptions.defaultProps = {
   cardType: 'other',
   undelivered: [],
   submitted: false,
-  error: null
+  error: null,
+  summary: {},
+  futurPayProfile: {},
+  futurePayError: false
 };
 
 PaymentOptions.propTypes = {
@@ -470,6 +546,8 @@ PaymentOptions.propTypes = {
   paymentLoadedStatus: PropTypes.func.isRequired,
   data: PropTypes.array,
   toggleGateway: PropTypes.func.isRequired,
+  isPayFromHtWallet: PropTypes.number.isRequired,
+  futurePayRedeeemAmount: PropTypes.number.isRequired,
   setPaymentDetails: PropTypes.func.isRequired,
   summary: PropTypes.object,
   history: PropTypes.object,
@@ -484,50 +562,53 @@ PaymentOptions.propTypes = {
   submitDetails: PropTypes.func.isRequired,
   resetEasyEmi: PropTypes.func.isRequired,
   submitted: PropTypes.bool,
-  error: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.array])
+  error: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.array]),
+  summary: PropTypes.object,
+  futurPayProfile: PropTypes.object,
+  futurePayError: PropTypes.bool
 };
 
-const mapStateToProps = ({
-  app,
-  paymentoptions,
-  cart: { checkingCart, cartChecked, summary },
-  app: { sessionId },
-  webtochat: { paymentTimeout, dismiss },
-  cart
-}) => ({
-  selectedGateway: paymentoptions.selectedGateway,
-  isFormValid: paymentoptions.isFormValid,
-  paymentDetails: paymentoptions.paymentMethodDetails,
-  error: paymentoptions.error,
-  submitting: paymentoptions.submitting,
-  submitted: paymentoptions.submitted,
-  session: app.sessionId,
-  paymentFormData: paymentoptions.formData,
-  cardType: paymentoptions.cardType,
-  results: getCartList(cart),
-  outOfStockList: getStockOutProducts(cart),
-  undelivered: getNotDelivered(cart),
-  checkingCart,
-  cartChecked,
-  summary,
-  sessionId,
-  paymentTimeout,
-  dismiss
-});
+// const mapStateToProps = ({
+//   app,
+//   paymentoptions,
+//   cart: { checkingCart, cartChecked, summary },
+//   app: { sessionId },
+//   webtochat: { paymentTimeout, dismiss },
+//   cart
+// }) => ({
+//   selectedGateway: paymentoptions.selectedGateway,
+//   isFormValid: paymentoptions.isFormValid,
+//   paymentDetails: paymentoptions.paymentMethodDetails,
+//   error: paymentoptions.error,
+//   submitting: paymentoptions.submitting,
+//   submitted: paymentoptions.submitted,
+//   session: app.sessionId,
+//   paymentFormData: paymentoptions.formData,
+//   cardType: paymentoptions.cardType,
+//   results: getCartList(cart),
+//   outOfStockList: getStockOutProducts(cart),
+//   undelivered: getNotDelivered(cart),
+//   checkingCart,
+//   cartChecked,
+//   summary,
+//   sessionId,
+//   paymentTimeout,
+//   dismiss
+// });
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      toggleGateway: setSelectedGateway,
-      setPaymentDetails: setSelectedPaymentDetails,
-      validateForm: checkPaymentDetails,
-      submitDetails: submitPaymentDetails,
-      setError: setValidationError,
-      resetEasyEmi: resetEasyEmiState,
-      paymentLoadedStatus: paymentLoaded,
-      toggleWebToChat: togglePopUp
-    },
-    dispatch
-  );
+// const mapDispatchToProps = dispatch =>
+//   bindActionCreators(
+//     {
+//       toggleGateway: setSelectedGateway,
+//       setPaymentDetails: setSelectedPaymentDetails,
+//       validateForm: checkPaymentDetails,
+//       submitDetails: submitPaymentDetails,
+//       setError: setValidationError,
+//       resetEasyEmi: resetEasyEmiState,
+//       paymentLoadedStatus: paymentLoaded,
+//       toggleWebToChat: togglePopUp
+//     },
+//     dispatch
+//   );
 
 export default connect(mapStateToProps, mapDispatchToProps)(PaymentOptions);

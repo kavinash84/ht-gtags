@@ -8,7 +8,7 @@ import GoogleLoginBtn from 'react-google-login';
 
 /* ====== Validations ====== */
 // import { validateMobile } from 'utils/validation';
-import { validateMobile, validateName } from 'utils/validation';
+import { validateMobile, validateName, validateDob } from 'utils/validation';
 
 /* ====== Helpers ====== */
 import { allowNChar, allowTypeOf } from 'utils/helper';
@@ -26,6 +26,7 @@ import Image from 'hometown-components-dev/lib/ImageHtV1';
 
 import UpdateName from './UpdateName';
 import UpdateContacts from './UpdateContacts';
+import UpdateDob from './UpdateDob';
 
 const LoaderIcon = require('../../../static/refresh-black.svg');
 
@@ -112,7 +113,17 @@ class GoogleLogin extends Component {
       lastNameError: isInvalid
     });
   };
+  onChangeDob = () => {
+    console.log('Onchange dob');
+    const value = '1995-10-02';
+    const checkError = !validateDob(value).error;
 
+    this.setState({
+      dob: value,
+      dobError: checkError,
+      dobErrorMessage: validateDob(value).msg
+    });
+  };
   handleModal = () => {
     this.props.clearLogin();
   };
@@ -123,12 +134,15 @@ class GoogleLogin extends Component {
   };
   render() {
     const {
- loginViaLogin, session, askContact, askName, loginType, loggingIn
+ loginViaLogin, session, askContact, askName, loginType, loggingIn, askBirthDate
 } = this.props;
     // const { phone, phoneError, phoneErrorMessage } = this.state;
     // const open = askContact && loginType && loginType === 'google';
     const {
       // eslint-disable-next-line max-len
+      dob,
+      dobError,
+      dobErrorMessage,
       phone,
       phoneError,
       phoneErrorMessage,
@@ -139,7 +153,7 @@ class GoogleLogin extends Component {
       lastNameError,
       lastNameErrorMessage
     } = this.state;
-    const open = (askContact || askName) && loginType && loginType === 'google';
+    const open = (askContact || askName || askBirthDate) && loginType && loginType === 'google';
 
     return (
       <Box>
@@ -191,6 +205,16 @@ class GoogleLogin extends Component {
               onChangeLastName={this.onChangeLastName}
               loginViaLogin={loginViaLogin}
               // onSubmitForm={this.onSubmitForm}
+            />
+          ) : askBirthDate ? (
+            <UpdateDob
+              session={session}
+              loggingIn={loggingIn}
+              dob={dob}
+              dobError={dobError}
+              dobErrorMessage={dobErrorMessage}
+              onChangeDob={this.onChangeDob}
+              loginViaLogin={loginViaLogin}
             />
           ) : askContact ? (
             <Box>
@@ -295,6 +319,7 @@ GoogleLogin.propTypes = {
   askContact: PropTypes.bool.isRequired,
   askName: PropTypes.bool.isRequired,
   loginType: PropTypes.string.isRequired,
+  askBirthDate: PropTypes.bool.isRequired,
   loggingIn: PropTypes.bool.isRequired
 };
 

@@ -1,0 +1,29 @@
+.hometownWallet {
+    padding: 10px 50px;
+  }
+  
+  
+  .checkbox input{
+    height:20px;
+    width: 20px;
+    border:1px sold #E3E3E3;
+    margin-right: 5px;
+    position: relative;
+  }
+  .checkbox label{
+    font-size:14px;
+    position: absolute;
+    top:2px;
+    bottom:2px;
+  }
+  
+  
+  .amount input{
+  height:45px;
+  width:120px;
+  border-radius: 5px;
+  border: 1px solid #E3E3E3;
+  font-size:12px;
+  color: #999999;
+  padding:10px 14px;
+  }

@@ -1,4 +1,5 @@
-// import { isBlank } from 'js-utility-functions';
+import { isBlank } from 'js-utility-functions';
+import moment from 'moment';
 
 export const isEmpty = rawValue => {
   const value = rawValue ? rawValue.trim() : '';
@@ -209,5 +210,46 @@ export const validateName = fullName => {
       error: true
     };
   }
+  return false;
+};
+
+// export const validateDob = dob => {
+//   if (isEmpty(dob)) {
+//     return {
+//       msg: 'Date of Birth Cannot be Left Empty !',
+//       error: true
+//     };
+//   }
+//   return false;
+// };
+
+export const validateDob = dob => {
+  console.log(moment().isSameOrBefore(moment(dob)), 'moment(dob).isSameOrBefore(moment())');
+  if (!dob) {
+    return {
+      msg: 'Date of Birth Cannot be Left Empty !',
+      error: true
+    };
+  }
+  if (moment().isSameOrBefore(moment(dob))) {
+    return {
+      msg: 'Date of Birth Cannot be Future Date !',
+      error: true
+    };
+  }
+  return false;
+};
+
+export const validateFuturePay = (balance, cartValue) => {
+  console.log('validateFuturePay', balance, cartValue);
+  // If balance is greater than available balance
+
+  if (balance > cartValue) {
+    return {
+      msg: 'Balance cannot be more than cart value',
+      error: true
+    };
+  }
+
   return false;
 };

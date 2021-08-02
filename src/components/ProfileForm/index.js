@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { validateEmail, isBlank } from 'js-utility-functions';
+import moment from 'moment';
 /**
  * Components
  */
@@ -13,16 +14,31 @@ import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import Label from 'hometown-components-dev/lib/LabelHtV1';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
 
+
 /**
  * modules / utils
  */
 import { validateMobile, checkSpecialChar, checkDateOfBirth } from 'utils/validation';
+import { validateName, validateDob } from 'utils/validation';
 import { updateUserProfile } from 'redux/modules/profile';
 import {
   // allowNChar,
   // allowTypeOf,
   isGSTNumber
 } from 'utils/helper';
+
+import DatePicker from 'components/Form/DatePicker';
+
+const showDateField = (dob, onChange) => (
+  <DatePicker
+    selected={dob}
+    onChange={onChange}
+    maxDate={new Date()}
+    showMonthDropdown
+    showYearDropdown
+    dropdownMode="select"
+  />
+);
 
 const ProfileViewRow = ({ title, value }) => (
   <Row mb={20}>
@@ -65,7 +81,8 @@ export default class ProfileForm extends Component {
   };
   static defaultProps = {
     profile: {},
-    response: {}
+    response: {},
+    dob: ''
   };
 
   state = {
@@ -100,12 +117,16 @@ export default class ProfileForm extends Component {
  full_name: fullName, email, contact_number: phone, city, gst, dob, gender
 }
     } = this.props;
+    const dob1 =
+      dob === "Invalid date"
+        ? ""
+        : new Date(moment(dob, "DD-MM-YYYY").toString());
     this.setState({
       fullName: (fullName && fullName.trim()) || '',
       email,
       phone: phone || '',
       gst,
-      dob,
+      dob: dob1 || '',
       city,
       gender
     });
@@ -168,14 +189,10 @@ export default class ProfileForm extends Component {
       cityErrorMessage: 'Numbers and special characters are not allowed !'
     });
   };
-  onChangeDob = e => {
-    const {
-      target: { value }
-    } = e;
-    const checkError = checkDateOfBirth(value);
-    const newDate = value;
+  onChangeDob = value => {
+    const checkError = value && validateDob(value);
     this.setState({
-      dob: newDate,
+      dob: value,
       dobError: checkError
     });
   };
@@ -188,7 +205,7 @@ export default class ProfileForm extends Component {
     const phoneError = !validateMobile(phone);
     const checkFullName = isBlank(fullName) || checkSpecialChar(fullName);
     const isGSTError = !isGSTNumber(gst);
-    const checkDob = checkDateOfBirth(dob);
+    const checkDob = validateDob(dob);
     if (checkEmail.error || checkFullName || phoneError || checkDob) {
       return this.setState({
         emailError: checkEmail.error,
@@ -232,6 +249,7 @@ export default class ProfileForm extends Component {
     return newdate;
   };
   render() {
+    const styles = require("./index.scss");
     const {
       email,
       phone,
@@ -305,7 +323,8 @@ export default class ProfileForm extends Component {
               onChangeFullName={this.onChangeFullName}
               fullNameFeedBackError={fullNameError}
               fullNameFeedBackMessage={fullNameErrorMessage}
-              dob={this.convertDateDd(dob)}
+              // dob={this.convertDateDd(dob)}
+              dob={dob}
               dobFeedBackError={dobError}
               dobFeedBackMessage={dobErrorMessage}
               gender={gender}
@@ -320,6 +339,7 @@ export default class ProfileForm extends Component {
               onCancelSubmit={() => this.setState({ showEditForm: !showEditForm })}
               onSubmitProfile={this.onSubmitProfile}
               response={response}
+              date={showDateField(dob, this.onChangeDob)}
             />
           </Box>
         ) : null}
