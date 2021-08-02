@@ -64,6 +64,11 @@ export const relatedProductsList = createSelector([relatedproducts], items => it
 export const getSEOInfo = createSelector([productMeta], seoInfo =>
   seoInfo && seoInfo.seo && Object.keys(seoInfo.seo).length > 0 ? seoInfo.seo.items : null);
 
+export const getCMSJson = createSelector(
+  [productMeta],
+  seoInfo => (seoInfo && seoInfo.seo && Object.keys(seoInfo.seo).length > 0 && seoInfo.seo.items ? seoInfo.seo.items.cms_json : null)
+)
+
 export const getCategoryDetails = createSelector([productMeta], item => item.category_details || []);
 
 export const getl4 = state => {
