@@ -28,7 +28,8 @@ import {
   getFilters,
   getAppliedFilters,
   getSEOInfo,
-  getl4
+  getl4,
+  getCMSJson
 } from 'selectors/products';
 import { SITE_URL } from 'helpers/Constants';
 import CANONICALS from 'data/canonical';
@@ -83,6 +84,7 @@ const getFaqs = faqs => {
   sortBy: state.products.filters.sortBy,
   categoryquery: state.products.category,
   seoInfo: getSEOInfo(state),
+  cmsJson: getCMSJson(state),
   breadCrumbs: state.products.categoryDetails,
   currentPage: state.pagination.page,
   categoryBar: getl4(state),
@@ -115,6 +117,7 @@ export default class Listing extends Component {
     categoryquery: PropTypes.string.isRequired,
     isLoggedIn: PropTypes.bool,
     seoInfo: PropTypes.object,
+    cmsJson: PropTypes.object,
     breadCrumbs: PropTypes.array,
     currentPage: PropTypes.number,
     categoryBar: PropTypes.array,
@@ -146,6 +149,7 @@ export default class Listing extends Component {
     sortBy: '',
     isLoggedIn: false,
     seoInfo: {},
+    cmsJson: {},
     breadCrumbs: [],
     currentPage: 1,
     categoryBar: [],
@@ -296,6 +300,7 @@ export default class Listing extends Component {
       sortBy,
       categoryquery,
       seoInfo,
+      cmsJson,
       breadCrumbs,
       currentPage,
       categoryBar,
@@ -306,8 +311,6 @@ export default class Listing extends Component {
       offer,
       bannerData
     } = this.props;
-    const { cms_json: cmsJson } = seoInfo;
-    console.log(seoInfo, 'seoInfo');
     let page;
     const {
       location: { search, pathname }
