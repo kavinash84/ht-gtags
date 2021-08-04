@@ -8,6 +8,7 @@ import Container from 'hometown-components-dev/lib/ContainerHtV1';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
 
 /* ====== Page Components ====== */
+import FuturePayModal from 'components/MyHomeWallet/FuturePayModal';
 import HoverMenuBox from '../HoverBox/HoverMenuBox';
 import NavBar from '../NavBar';
 import HeaderTop from './HeaderTop';
@@ -151,6 +152,7 @@ class Header extends Component {
             )}
           </Container>
         </Box>
+        <FuturePayModal />
       </Box>
     );
   }

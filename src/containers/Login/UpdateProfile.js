@@ -19,7 +19,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import './datepicker.css';
 
 const formatDate = date => {
-  console.log({ date }, 'inside formate date');
   if (date) {
     return moment(date, 'YYYY-MM-DD').toDate();
   }
@@ -40,7 +39,7 @@ const Title = ({ askName, askContact, askBirthDate }) => {
 };
 
 const AskName = ({
-  onChangeName, name, nameError, nameErrorMessage
+ onChangeName, name, nameError, nameErrorMessage
 }) => (
   <FormInput
     label=""
@@ -54,7 +53,7 @@ const AskName = ({
 );
 
 const AskContact = ({
-  onChangePhone, phone, phoneError, phoneErrorMessage
+ onChangePhone, phone, phoneError, phoneErrorMessage
 }) => (
   <FormInput
     label=""
@@ -74,7 +73,7 @@ class AskBirthDate extends Component {
   render() {
     const { showDobInput } = this.state;
     const {
-      skipBirthdateCheck,
+      // skipBirthdateCheck,
       birthdateCheck,
       onChangeDob,
       dob,
@@ -85,7 +84,6 @@ class AskBirthDate extends Component {
       LoaderIcon,
       loggingIn
     } = this.props;
-
     if (showDobInput) {
       return (
         <Div>
@@ -222,7 +220,11 @@ function UpdateProfile({
             </form>
             {skipBirthdateCheck && (
               <button
-                style={isValidField ? { backgroundColor: 'grey' } : { backgroundColor: '#f98d29' }}
+                style={
+                  isValidField
+                    ? { backgroundColor: 'grey', marginTop: '20px' }
+                    : { backgroundColor: '#f98d29', marginTop: '20px' }
+                }
                 disabled={isValidField}
                 className="google-login-btn"
                 onClick={e => onSubmitLogin(e)}
@@ -237,6 +239,38 @@ function UpdateProfile({
     </div>
   );
 }
+
+Title.propTypes = {
+  askContact: PropTypes.bool.isRequired,
+  askName: PropTypes.bool.isRequired,
+  askBirthDate: PropTypes.bool.isRequired
+};
+
+AskName.propTypes = {
+  onChangeName: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  nameError: PropTypes.bool.isRequired,
+  nameErrorMessage: PropTypes.string.isRequired
+};
+
+AskContact.propTypes = {
+  onChangePhone: PropTypes.func.isRequired,
+  phone: PropTypes.string.isRequired,
+  phoneError: PropTypes.bool.isRequired,
+  phoneErrorMessage: PropTypes.string.isRequired
+};
+
+AskBirthDate.propTypes = {
+  birthdateCheck: PropTypes.any.isRequired,
+  onChangeDob: PropTypes.func.isRequired,
+  dob: PropTypes.string.isRequired,
+  dobError: PropTypes.bool.isRequired,
+  dobErrorMessage: PropTypes.string.isRequired,
+  isValidField: PropTypes.bool.isRequired,
+  LoaderIcon: PropTypes.string.isRequired,
+  onSubmitLogin: PropTypes.func.isRequired,
+  loggingIn: PropTypes.bool.isRequired
+};
 
 UpdateProfile.propTypes = {
   loggingIn: PropTypes.bool.isRequired,
@@ -259,7 +293,9 @@ UpdateProfile.propTypes = {
   phoneErrorMessage: PropTypes.string.isRequired,
   dob: PropTypes.string.isRequired,
   dobError: PropTypes.bool.isRequired,
-  dobErrorMessage: PropTypes.string.isRequired
+  dobErrorMessage: PropTypes.string.isRequired,
+  birthdateCheck: PropTypes.any.isRequired,
+  skipBirthdateCheck: PropTypes.bool.isRequired
 };
 
 export default UpdateProfile;

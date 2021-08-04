@@ -45,8 +45,8 @@ const SUBMIT_PAYMENT_DETAILS_FUTURE_PAY_FAIL = 'paymentOptions/SUBMIT_PAYMENT_DE
 
 const paymentJSON = {
   session_id: '',
-  future_pay_redeeem_amount:'',
-  isPayFromHTWallet:'',
+  future_pay_redeeem_amount: '',
+  isPayFromHTWallet: '',
   payment_method_type: '',
   payment_method: '',
   cc_number: '',
@@ -103,12 +103,26 @@ const getURL = gateway => {
   if (gateway === 'CreditCard' || gateway === 'DebitCard' || gateway === 'NetBanking' || gateway === 'Upi') {
     return `Payu/${gateway}`;
   }
-  if (gateway === 'Emi' || gateway === 'EasyEmi' || gateway === 'Wallet' || gateway === 'CashOnDelivery' || gateway === 'FuturePay') {
+  if (
+    gateway === 'Emi' ||
+    gateway === 'EasyEmi' ||
+    gateway === 'Wallet' ||
+    gateway === 'CashOnDelivery' ||
+    gateway === 'FuturePay'
+  ) {
     return `${gateway}/${gateway}`;
   }
 };
 
-const paymentObject = (sessionId, selectedGateway, paymentData, cardType = 'visa', futurePayRedeemAmount, isPayFromHtWallet, totalCartAmount) => {
+const paymentObject = (
+  sessionId,
+  selectedGateway,
+  paymentData,
+  cardType = 'visa',
+  futurePayRedeemAmount,
+  isPayFromHtWallet,
+  totalCartAmount
+) => {
   if (selectedGateway === 'CreditCard') {
     const {
  cardNumber, cvv, expMonth, expYear, nameOnCard
@@ -280,7 +294,7 @@ const paymentObject = (sessionId, selectedGateway, paymentData, cardType = 'visa
       card_type: 'CC',
       totalCartAmount
     };
-  };
+  }
 };
 
 const getSelectedGateway = data => {
@@ -587,18 +601,18 @@ export default function reducer(state = initialState, action = {}) {
           }
         }
       };
-      case SET_HTWALLET_CHECKBOX:
-        return{
-          ...state,
-          isPayFromHtWallet: action.data
-        };
-      case FUTURE_PAY_AMOUNT:
-        return{
-          ...state,
-          futurePayRedeemAmount:action.amount,
-          futurePayRedeemAmountError: validateFuturePay(action.amount, action.cartValue).error,
-          futurePayRedeemAmountErrorMessage: validateFuturePay(action.amount, action.cartValue).msg
-        }
+    case SET_HTWALLET_CHECKBOX:
+      return {
+        ...state,
+        isPayFromHtWallet: action.data
+      };
+    case FUTURE_PAY_AMOUNT:
+      return {
+        ...state,
+        futurePayRedeemAmount: action.amount,
+        futurePayRedeemAmountError: validateFuturePay(action.amount, action.cartValue).error,
+        futurePayRedeemAmountErrorMessage: validateFuturePay(action.amount, action.cartValue).msg
+      };
     default:
       return state;
   }
@@ -682,36 +696,46 @@ export const submitPaymentDetailsFuturePay = (
   totalCartAmount,
   success
 ) => ({
-    types: [
-      SUBMIT_PAYMENT_DETAILS_FUTURE_PAY,
-      SUBMIT_PAYMENT_DETAILS_FUTURE_PAY_SUCCESS,
-      SUBMIT_PAYMENT_DETAILS_FUTURE_PAY_FAIL
-    ],
-    promise: async ({ client }) => {
-      try {
-        const postData = paymentObject(
-          sessionId,
-          Object.keys(data)[0],
-          Object.values(data)[0],
-          cardType,
-          futurePayRedeemAmount,
-          isPayFromHtWallet,
-          totalCartAmount,
-          success
-        );
-        const response = await client.post('tesla/orders', postData);
-        return response;
-      } catch (error) {
-        throw error;
-      }
-    },
-    walletType,
-    data,
-    cardType,
-    selectedGateway
-  });
+  types: [
+    SUBMIT_PAYMENT_DETAILS_FUTURE_PAY,
+    SUBMIT_PAYMENT_DETAILS_FUTURE_PAY_SUCCESS,
+    SUBMIT_PAYMENT_DETAILS_FUTURE_PAY_FAIL
+  ],
+  promise: async ({ client }) => {
+    try {
+      const postData = paymentObject(
+        sessionId,
+        Object.keys(data)[0],
+        Object.values(data)[0],
+        cardType,
+        futurePayRedeemAmount,
+        isPayFromHtWallet,
+        totalCartAmount,
+        success
+      );
+      const response = await client.post('tesla/orders', postData);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  },
+  walletType,
+  data,
+  cardType,
+  selectedGateway
+});
 
-export const submitPaymentDetails = (sessionId, data, cardType, selectedGateway, walletType, futurePayRedeemAmount, isPayFromHtWallet, totalCartAmount, success) => {
+export const submitPaymentDetails = (
+  sessionId,
+  data,
+  cardType,
+  selectedGateway,
+  walletType,
+  futurePayRedeemAmount,
+  isPayFromHtWallet,
+  totalCartAmount,
+  success
+) => {
   if (data && 'EasyEmi' in data && (!success || success === undefined)) {
     return submitPaymentDetailsEasyEmi(sessionId, data, cardType);
   }
@@ -732,7 +756,16 @@ export const submitPaymentDetails = (sessionId, data, cardType, selectedGateway,
     types: [SUBMIT_PAYMENT_DETAILS, SUBMIT_PAYMENT_DETAILS_SUCCESS, SUBMIT_PAYMENT_DETAILS_FAIL],
     promise: async ({ client }) => {
       try {
-        const postData = paymentObject(sessionId, Object.keys(data)[0], Object.values(data)[0], cardType, futurePayRedeemAmount, isPayFromHtWallet, totalCartAmount, success);
+        const postData = paymentObject(
+          sessionId,
+          Object.keys(data)[0],
+          Object.values(data)[0],
+          cardType,
+          futurePayRedeemAmount,
+          isPayFromHtWallet,
+          totalCartAmount,
+          success
+        );
         const response = await client.post('tesla/orders', postData);
         return response;
       } catch (error) {
@@ -799,12 +832,23 @@ export const resetEasyEmiState = () => ({
   type: RESET_EASY_EMI
 });
 
-export const isPayFromWallet = data => ({
+// export const isPayFromWallet = data => ({
+//   type: SET_HTWALLET_CHECKBOX,
+//   data
+// });
+
+export const setHtWallet = data => ({
   type: SET_HTWALLET_CHECKBOX,
   data
 });
 
-export const futurePayAmount = (amount, cartValue) => ({
+// export const futurePayAmount = (amount, cartValue) => ({
+//   type: FUTURE_PAY_AMOUNT,
+//   amount,
+//   cartValue
+// });
+
+export const setFuturePayAmount = (amount, cartValue) => ({
   type: FUTURE_PAY_AMOUNT,
   amount,
   cartValue

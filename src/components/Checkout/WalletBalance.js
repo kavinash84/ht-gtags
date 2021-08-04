@@ -47,7 +47,7 @@ const handleCheckBox = (checked, session, total, balance, toggleHtWallet, toggle
 };
 
 @connect(({
-  paymentoptions, profile, cart, app
+ paymentoptions, profile, cart, app
 }) => ({
   session: app.sessionId,
   futurPayProfile: getFuturePayProfile(profile),
@@ -135,11 +135,11 @@ class WalletBalance extends Component {
 
     return (
       <Div>
-        <Text ta="center" color="#323131" fontSize="14px">
+        <Text ta="center" color="#323131" mb={20} fontSize="1rem">
           HomeTown Wallet Balance
         </Text>
         <Text ta="center" fontSize="24px" fontWeight="bold">
-          <span style={{ fontSize: '14px' }}>₹ </span>
+          <span>₹ </span>
           {balance}
         </Text>
 
@@ -155,7 +155,9 @@ class WalletBalance extends Component {
                     handleCheckBox(checked, session, total, balance, toggleHtWallet, toggleGateway)
                   }
                 />
-                <label htmlFor="checkbox">Use Balance Amount:</label>
+                <label htmlFor="checkbox" className={styles.label}>
+                  Use Balance Amount:
+                </label>
               </Div>
               <Div col="5" className={styles.amount}>
                 {/* FIXME: Chenage it to hometown component */}

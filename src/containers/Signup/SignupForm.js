@@ -5,7 +5,6 @@ import moment from 'moment';
 import { withRouter } from 'react-router';
 import DatePicker from 'components/Form/DatePicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import './Signdatepicker.css';
 
 /* ====== Modules ====== */
 
@@ -43,13 +42,15 @@ import LoginForm from 'components/LoginForms';
 import LoginViaOtp from 'components/LoginForms/LoginViaOtp';
 import SignUpForm from 'hometown-components-dev/lib/FormsHtV1/SignUpFormHtV1';
 
+import './Signdatepicker.css';
+
 const OTPIcon = require('../../../static/otp.svg');
 const EmailIcon = require('../../../static/email-primary.svg');
 
-const validateDate = (dob) => {
-  if (dob) return false;
-  return true;
-};
+// const validateDate = dob => {
+//   if (dob) return false;
+//   return true;
+// };
 
 const showDateField = (dob, onChange) => (
   <DatePicker
@@ -64,13 +65,15 @@ const showDateField = (dob, onChange) => (
 
 @connect(({ userSignUp, app }) => ({
   loading: userSignUp.loading,
-  session: app.sessionId
+  session: app.sessionId,
+  signUpResponse: userSignUp
 }))
 @withRouter
 export default class SignupFormContainer extends Component {
   static propTypes = {
     session: PropTypes.string.isRequired,
-    loading: PropTypes.bool
+    loading: PropTypes.bool,
+    signUpResponse: PropTypes.object.isRequired
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -163,7 +166,6 @@ export default class SignupFormContainer extends Component {
     });
   };
   onChangeDob = value => {
-    console.log({ value }, value, 'value');
     const checkError = value && validateDob(value);
     this.setState({
       dob: value,
@@ -184,19 +186,19 @@ export default class SignupFormContainer extends Component {
     });
   };
   onChangePolicy = e => {
-    const {
-      target: { value }
-    } = e;
-    // console.log(value, '$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$');
+    e.preventDefault();
+    // const {
+    //   target: { value }
+    // } = e;
     this.setState({ policyAccepted: !this.state.policyAccepted });
   };
   onSubmitSignup = e => {
     e.preventDefault();
-    const {
-      target: { action }
-    } = e;
-    const isRedirect = action ? action.indexOf('redirect') !== -1 : false;
-    const signupOrigin = isRedirect ? 'Top Nav' : 'Pop-up';
+    // const {
+    //   target: { action }
+    // } = e;
+    // const isRedirect = action ? action.indexOf('redirect') !== -1 : false;
+    // const signupOrigin = isRedirect ? 'Top Nav' : 'Pop-up';
     const {
       name,
       email,
@@ -222,7 +224,7 @@ export default class SignupFormContainer extends Component {
         phoneError: checkPhone,
         passwordError: checkPassword.error,
         cityError: checkCity,
-        dobError: checkDob,
+        dobError: checkDob
       });
     }
     const dobValue = moment(dob).format('YYYY-MM-DD');
@@ -268,8 +270,7 @@ export default class SignupFormContainer extends Component {
       cityErrorMessage,
       policyAccepted
     } = this.state;
-    const { loading } = this.props;
-
+    const { loading, signUpResponse } = this.props;
     return (
       <Row>
         <Col variant="col-4">
@@ -354,10 +355,15 @@ export default class SignupFormContainer extends Component {
                 onChangePassword={this.onChangePassword}
                 passwordFeedBackError={passwordError}
                 passwordFeedBackMessage={passwordErrorMessage}
-                dob="2002-06-12"
+                onSubmitSignup={this.onSubmitSignup}
+                signUpResponse={signUpResponse}
+                loginUrl={LOGIN_URL}
+                phonemandatory
+                date={showDateField(dob, this.onChangeDob)}
+                // dobFeedBackMessage={dobErrorMessage}
+                // dobFeedBackError={dobError}
                 dobFeedBackError={dobError}
                 dobFeedBackMessage={dobErrorMessage}
-                // selected={dob}
                 gender={gender}
                 genderFeedBackError={genderError}
                 genderFeedBackMessage={genderErrorMessage}
@@ -366,14 +372,12 @@ export default class SignupFormContainer extends Component {
                 cityFeedBackMessage={cityErrorMessage}
                 onChangeGender={this.onChangeGender}
                 onChangeCity={this.onChangeCity}
-                onChangeDob={this.onChangeDob}
+                // onChangeDob={this.onChangeDob}
                 onChangePolicy={this.onChangePolicy}
                 policyAccepted={policyAccepted}
-                onSubmitSignup={this.onSubmitSignup}
                 loading={loading}
-                loginUrl={LOGIN_URL}
                 // date={<DatePicker/>}
-                date={showDateField(dob, this.onChangeDob)}
+                // date={showDateField(dob, this.onChangeDob)}
               />
             </Col>
           </Row>

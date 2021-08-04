@@ -11,8 +11,8 @@ import { allowNChar, allowTypeOf } from 'utils/helper';
 
 /* ====== Validations ====== */
 // import { validateMobile, isEmpty, checkSpecialChar } from 'utils/validation';
-import { validateMobile, validateName, validateEmail, validateDob } from 'utils/validation';
-import { SIGNUP_URL } from 'helpers/Constants';
+import { validateMobile, validateName, validateEmail, validateDob, isEmpty, checkSpecialChar } from 'utils/validation';
+import { FORGOT_PASSWORD_URL, SIGNUP_URL } from 'helpers/Constants';
 
 /* ====== Components ====== */
 import Box from 'hometown-components-dev/lib/BoxHtV1';
@@ -25,7 +25,8 @@ import Text from 'hometown-components-dev/lib/TextHtV1';
 // import ImageShimmer from 'hometown-components-dev/lib/ImageShimmerHtV1';
 
 /* ====== Page Components ====== */
-import LoginForm from 'components/LoginForms';
+// import LoginForm from 'components/LoginForms';
+import LoginForm from 'hometown-components-dev/lib/FormsHtV1/LoginFormHtV1';
 import GoogleLoginBtn from 'components/LoginForms/GoogleLogin';
 import LoginViaOtp from 'components/LoginForms/LoginViaOtp';
 import UpdateProfileModal from './UpdateProfile';
@@ -53,6 +54,9 @@ const EmailIcon = require('../../../static/email-primary.svg');
 }))
 export default class LoginFormContainer extends Component {
   static propTypes = {
+    loginResponse: PropTypes.shape({
+      isLoggedIn: PropTypes.bool.isRequired
+    }).isRequired,
     getotpError: PropTypes.bool,
     getotpErrorMessage: PropTypes.string,
     otpSent: PropTypes.bool,
@@ -65,6 +69,10 @@ export default class LoginFormContainer extends Component {
     skipBirthdateCheck: PropTypes.bool,
     askEmail: PropTypes.bool,
     askName: PropTypes.bool
+    // onChangeDob: PropTypes.func,
+    // dob: PropTypes.string,
+    // dobError: PropTypes.string,
+    // dobErrorMessage: PropTypes.string
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
@@ -103,7 +111,10 @@ export default class LoginFormContainer extends Component {
     dobError: false,
     dobErrorMessage: 'Enter Valid Date',
     mobilesubmitted: false,
-    resend: false
+    resend: false,
+    password: '',
+    passwordError: '',
+    passwordErrorMessage: ''
   };
 
   componentWillReceiveProps(nextProps) {
@@ -246,28 +257,24 @@ export default class LoginFormContainer extends Component {
     const { dispatch } = this.context.store;
     dispatch(login(this.state));
   };
-  handleModal = () => {
-    const { dispatch } = this.context.store;
-    dispatch(clearLoginState());
-  };
-  handleResend = () => {
+  onChangePhone = e => {
+    const {
+      target: { value }
+    } = e;
+    const checkError = !validateMobile(value);
+    if (!allowNChar(value, 10) || (!allowTypeOf(value, 'number') && value.length > 0)) {
+      return;
+    }
     this.setState({
-      mobilesubmitted: false,
-      resend: true
+      phone: value,
+      phoneError: checkError,
+      phoneErrorMessage:
+        value[0] === '0' ? 'Mobile Number Must Not Start With 0' : 'Enter 10 Digits Valid Mobile Number'
     });
   };
-  toggleLoginForm = () => {
-    const { dispatch } = this.context.store;
-    this.setState({
-      loginviaotp: !this.state.loginviaotp,
-      resend: false,
-      mobilesubmitted: false
-    });
-    dispatch(clearLoginState());
-  };
-  onChangeDob = () => {
-    const value = '1995-10-02';
-    const checkError = !validateDob(value).error;
+  onChangeDob = value => {
+    // const value = '1995-10-02';
+    const checkError = validateDob(value).error;
 
     this.setState({
       dob: value,
@@ -284,21 +291,81 @@ export default class LoginFormContainer extends Component {
         nameErrorMessage: validateDob(dob).msg
       });
     }
-    onSkipDob = () => {
-      this.birthdateChecker(true);
-      const { dispatch } = this.context.store;
-      const data = {
-        ...this.state,
-        skipBirthdateCheck: true
-      };
-      dispatch(login(data));
-    };
-    birthdateChecker = status => {
-      const { dispatch } = this.context.store;
-      dispatch(birthdateCheck(status));
-    }
     const { dispatch } = this.context.store;
     dispatch(login(this.state));
+  };
+  onSkipDob = () => {
+    this.birthdateChecker(true);
+    const { dispatch } = this.context.store;
+    const data = {
+      ...this.state,
+      skipBirthdateCheck: true
+    };
+    dispatch(login(data));
+  };
+  onChangePassword = e => {
+    const {
+      target: { value }
+    } = e;
+    const checkError = isEmpty(value);
+    this.setState({
+      password: value,
+      passwordError: checkError,
+      passwordErrorMessage: checkError ? "Password can't be blank" : ''
+    });
+  };
+  onSubmitLogin = (e, skipBirthdateCheck = false) => {
+    e.preventDefault();
+    const {
+ email, password, phone, name, dob
+} = this.state;
+
+    const checkEmail = !validateEmail(email, 'Invalid Email');
+    const checkMobile = phone ? !validateMobile(phone) : false;
+    const checkDob = dob ? validateDob(dob).error : false;
+    const checkName = !isEmpty(name) ? validateName(name) : false;
+    const checkPassword = isEmpty(password);
+    if (checkEmail.error || checkPassword || checkMobile || checkName || checkDob) {
+      return this.setState({
+        nameError: checkName,
+        nameErrorMessage: validateName(name).msg,
+        emailError: checkEmail.error,
+        emailErrorMessage: checkEmail.errorMessage,
+        passwordError: checkPassword,
+        passwordErrorMessage: checkPassword ? "Password can't be blank" : '',
+        dobError: checkDob,
+        dobErrorMessage: checkDob ? "Date of birth can't be blank" : ''
+      });
+    }
+    const { dispatch } = this.context.store;
+    const data = {
+      ...this.state,
+      skipBirthdateCheck
+    };
+    dispatch(login(data));
+  };
+  birthdateChecker = status => {
+    const { dispatch } = this.context.store;
+    dispatch(birthdateCheck(status));
+  };
+  toggleLoginForm = () => {
+    const { dispatch } = this.context.store;
+    this.setState({
+      loginviaotp: !this.state.loginviaotp,
+      resend: false,
+      mobilesubmitted: false
+    });
+    dispatch(clearLoginState());
+  };
+  handleResend = () => {
+    this.setState({
+      mobilesubmitted: false,
+      resend: true
+    });
+  };
+  handleModal = () => {
+    const { dispatch } = this.context.store;
+    dispatch(clearLoginState());
   };
   isValid = () => {
     const { askContact, askName, askBirthDate } = this.props;
@@ -313,6 +380,8 @@ export default class LoginFormContainer extends Component {
   render() {
     const {
       mobile,
+      mobileError,
+      mobileErrorMessage,
       phone,
       phoneError,
       phoneErrorMessage,
@@ -329,14 +398,25 @@ export default class LoginFormContainer extends Component {
       resend,
       dob,
       dobError,
-      dobErrorMessage
+      dobErrorMessage,
+      password,
+      passwordError,
+      passwordErrorMessage
     } = this.state;
     const {
- loaded, loading, loggingIn, askContact, askName, loginType, askEmail, askBirthDate, skipBirthdateCheck,
-} = this.props;
-const open = (askContact || askName || askBirthDate) && loginType && loginType === 'hometown';
-console.log(this.props);
-const isValidField = this.isValid();
+      loaded,
+      loading,
+      loggingIn,
+      askContact,
+      askName,
+      loginType,
+      askEmail,
+      askBirthDate,
+      skipBirthdateCheck,
+      loginResponse
+    } = this.props;
+    const open = (askContact || askName || askBirthDate) && loginType && loginType === 'hometown';
+    const isValidField = this.isValid();
     return (
       <Row>
         <Box variant="col-4">
@@ -352,11 +432,18 @@ const isValidField = this.isValid();
             {!this.state.loginviaotp ? (
               <div>
                 <LoginForm
-                  askName={askName}
-                  askContact={askContact}
-                  loginType={loginType}
-                  loading={loading}
-                  loggingIn={loggingIn}
+                  email={email}
+                  onChangeEmail={this.onChangeEmail}
+                  emailFeedBackError={emailError}
+                  emailFeedBackMessage={emailErrorMessage}
+                  password={password}
+                  onChangePassword={this.onChangePassword}
+                  passwordFeedBackError={passwordError}
+                  passwordFeedBackMessage={passwordErrorMessage}
+                  onSubmitLogin={this.onSubmitLogin}
+                  loginResponse={loginResponse}
+                  forgotUrl={FORGOT_PASSWORD_URL}
+                  signupUrl={SIGNUP_URL}
                 />
                 <UpdateProfileModal
                   askName={askName}

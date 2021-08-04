@@ -35,6 +35,7 @@ import {
 import { paymentLoaded } from 'redux/modules/app';
 import { togglePopUp } from 'redux/modules/webtochat';
 import { getCartList, getNotDelivered, getStockOutProducts } from 'selectors/cart';
+import { getFuturePayProfile } from 'selectors/userprofile';
 
 /**
  * Page Components
@@ -53,6 +54,7 @@ import UpiForm from './UpiForm';
 
 import WalletBalance from './WalletBalance';
 
+const styles = require('./Checkout.scss');
 const cartStyles = require('../Cart/Cart.scss');
 
 const nextStep = (
@@ -63,7 +65,7 @@ const nextStep = (
   cardType,
   selectedGateway,
   paymentMethodDetails,
-  futurePayRedeeemAmount,
+  futurePayRedeemAmount,
   isPayFromHtWallet,
   total
 ) => e => {
@@ -75,7 +77,7 @@ const nextStep = (
     cardType,
     selectedGateway,
     paymentMethodDetails,
-    futurePayRedeeemAmount,
+    futurePayRedeemAmount,
     isPayFromHtWallet,
     total
   );
@@ -86,10 +88,11 @@ const mapStateToProps = ({
   paymentoptions,
   cart: { checkingCart, cartChecked, summary },
   app: { sessionId },
-  cart
+  cart,
+  profile
 }) => ({
   isPayFromHtWallet: paymentoptions.isPayFromHtWallet,
-  futurePayRedeeemAmount: paymentoptions.futurePayRedeeemAmount,
+  futurePayRedeemAmount: paymentoptions.futurePayRedeemAmount,
   selectedGateway: paymentoptions.selectedGateway,
   paymentMethodDetails: paymentoptions.paymentMethodDetails,
   isFormValid: paymentoptions.isFormValid,
@@ -120,7 +123,8 @@ const mapDispatchToProps = dispatch =>
       submitDetails: submitPaymentDetails,
       paymentLoadedStatus: paymentLoaded,
       setError: setValidationError,
-      resetEasyEmi: resetEasyEmiState
+      resetEasyEmi: resetEasyEmiState,
+      toggleWebToChat: togglePopUp
     },
     dispatch
   );
@@ -149,14 +153,12 @@ class PaymentOptions extends Component {
 
   componentDidMount() {
     const { paymentTimeout } = this.props;
-    // console.log('paymentTimeout', paymentTimeout);
 
     const popUpTimeoutId = setTimeout(this.webToChat, paymentTimeout);
     // eslint-disable-next-line react/no-did-mount-set-state
     this.setState({ popUpTimeoutId });
   }
   componentWillUnmount() {
-    // console.log('componentWillUnmount function in payment option');
     const { toggleWebToChat } = this.props;
     const { popUpTimeoutId } = this.state;
     clearTimeout(popUpTimeoutId);
@@ -168,13 +170,12 @@ class PaymentOptions extends Component {
     const {
       embedded_svc: { liveAgentAPI: { inviteButton: { isAvailable } = {} } = {} }
     } = window;
-    // console.log(isAvailable, !dismiss, 'webToChat function');
     if (isAvailable && !dismiss) toggleWebToChat(true);
   };
   render() {
     const {
       data,
-      futurePayRedeeemAmount,
+      futurePayRedeemAmount,
       isPayFromHtWallet,
       selectedGateway,
       toggleGateway,
@@ -195,7 +196,7 @@ class PaymentOptions extends Component {
       submitted,
       error,
       summary: { total },
-      futurPayProfile,
+      // futurPayProfile,
       futurePayError
     } = this.props;
 
@@ -302,7 +303,16 @@ class PaymentOptions extends Component {
               <Row mx={0} flexDirection="column" maxHeight="360px" minWidth={140} width={201}>
                 {data.map((paymentType, index) => (
                   <Col key={String(`${paymentType}${index}`)} px={0}>
-                    {CommonPayments(paymentType.paymentType, toggleGateway, selectedGateway, session, resetEasyEmi, futurePayRedeemAmount, total, isPayFromHtWallet)}
+                    {CommonPayments(
+                      paymentType.paymentType,
+                      toggleGateway,
+                      selectedGateway,
+                      session,
+                      resetEasyEmi,
+                      futurePayRedeemAmount,
+                      total,
+                      isPayFromHtWallet
+                    )}
                   </Col>
                 ))}
               </Row>
@@ -491,7 +501,7 @@ class PaymentOptions extends Component {
                     cardType,
                     selectedGateway,
                     paymentDetails,
-                    futurePayRedeeemAmount,
+                    futurePayRedeemAmount,
                     isPayFromHtWallet,
                     total
                   )}
@@ -522,7 +532,7 @@ PaymentOptions.defaultProps = {
   dismiss: false,
   selectedGateway: 'creditcard',
   data: [],
-  summary: null,
+  // summary: null,
   submitting: false,
   session: '',
   history: {},
@@ -534,7 +544,7 @@ PaymentOptions.defaultProps = {
   submitted: false,
   error: null,
   summary: {},
-  futurPayProfile: {},
+  // futurPayProfile: {},
   futurePayError: false
 };
 
@@ -547,9 +557,9 @@ PaymentOptions.propTypes = {
   data: PropTypes.array,
   toggleGateway: PropTypes.func.isRequired,
   isPayFromHtWallet: PropTypes.number.isRequired,
-  futurePayRedeeemAmount: PropTypes.number.isRequired,
+  futurePayRedeemAmount: PropTypes.number.isRequired,
   setPaymentDetails: PropTypes.func.isRequired,
-  summary: PropTypes.object,
+  // summary: PropTypes.object,
   history: PropTypes.object,
   session: PropTypes.string,
   paymentDetails: PropTypes.object.isRequired,
@@ -564,7 +574,7 @@ PaymentOptions.propTypes = {
   submitted: PropTypes.bool,
   error: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.array]),
   summary: PropTypes.object,
-  futurPayProfile: PropTypes.object,
+  // futurPayProfile: PropTypes.object,
   futurePayError: PropTypes.bool
 };
 

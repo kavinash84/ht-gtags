@@ -1,9 +1,9 @@
 /* eslint-disable react/no-unused-state */
 import ResponsiveModal from 'components/Modal';
-import Button from 'hometown-components/lib/Buttons';
-import Div from 'hometown-components/lib/Div';
-import FormInput from 'hometown-components/lib/Forms/FormInput';
-import Heading from 'hometown-components/lib/Heading';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Div from 'hometown-components-dev/lib/BoxHtV1';
+import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
@@ -34,29 +34,43 @@ export default class FuturePayModal extends React.Component {
     timerref: ''
   };
 
-  createWallet = mobile => e => {
-    e.preventDefault();
-    const { resend } = this.state;
-    const { dispatch } = this.context.store;
-    if (resend) {
-      return dispatch(resendOtp(mobile));
+  componentWillReceiveProps(nextProps) {
+    if (!this.state.mobilesubmitted && nextProps.getotpError && nextProps.getotpErrorMessage.includes('resend')) {
+      this.setState({
+        mobilesubmitted: true
+      });
     }
-    dispatch(getOtp(mobile));
-  };
+    if (nextProps.otpSent && nextProps.otpSent !== this.props.otpSent) {
+      this.setState({
+        mobilesubmitted: true
+      });
+    }
+  }
 
-  onChangeMobile = e => {
-    const { value } = e.target;
-    const checkError = !validateMobile(value);
-    if (!allowNChar(value, 10) || (!allowTypeOf(value, 'number') && value.length > 0)) {
-      return;
+  componentDidUpdate(nextProps, prevState) {
+    if (this.state.mobilesubmitted && this.state.mobilesubmitted !== prevState.mobilesubmitted) {
+      const timerref = setInterval(() => {
+        if (this.state.resendtimer <= 1) {
+          clearInterval(this.state.timerref);
+        }
+        this.setState(prevstate => ({
+          resendtimer: prevstate.resendtimer - 1
+        }));
+      }, 1000);
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({ timerref });
     }
-    this.setState({
-      mobile: value,
-      mobileError: checkError,
-      mobileErrorMessage:
-        value[0] === '0' ? 'Mobile Number Must Not Start With 0' : 'Enter 10 Digits Valid Mobile Number'
-    });
-  };
+
+    if (this.props.setFuturePayStatus !== nextProps.setFuturePayStatus) {
+      const {
+        profile: { mobile = 0 },
+        setFuturePayStatus,
+        skipBirthdateCheck
+      } = this.props;
+      const { dispatch } = this.context.store;
+      if (setFuturePayStatus && !skipBirthdateCheck) dispatch(getOtp(mobile));
+    }
+  }
 
   onSubmitOtp = e => {
     e.preventDefault();
@@ -81,10 +95,17 @@ export default class FuturePayModal extends React.Component {
     });
   };
 
-  handleResend = () => {
+  onChangeMobile = e => {
+    const { value } = e.target;
+    const checkError = !validateMobile(value);
+    if (!allowNChar(value, 10) || (!allowTypeOf(value, 'number') && value.length > 0)) {
+      return;
+    }
     this.setState({
-      mobilesubmitted: false,
-      resend: true
+      mobile: value,
+      mobileError: checkError,
+      mobileErrorMessage:
+        value[0] === '0' ? 'Mobile Number Must Not Start With 0' : 'Enter 10 Digits Valid Mobile Number'
     });
   };
 
@@ -93,50 +114,28 @@ export default class FuturePayModal extends React.Component {
     dispatch(toggleFuturePayModal(false));
   };
 
-  componentDidUpdate(nextProps, prevState) {
-    if (this.state.mobilesubmitted && this.state.mobilesubmitted !== prevState.mobilesubmitted) {
-      const timerref = setInterval(() => {
-        if (this.state.resendtimer <= 1) {
-          clearInterval(this.state.timerref);
-        }
-        this.setState(prevstate => ({
-          resendtimer: prevstate.resendtimer - 1
-        }));
-      }, 1000);
-      // eslint-disable-next-line react/no-did-update-set-state
-      this.setState({ timerref });
-    }
+  handleResend = () => {
+    this.setState({
+      mobilesubmitted: false,
+      resend: true
+    });
+  };
 
-    if (this.props.setFuturePayStatus !== nextProps.setFuturePayStatus) {
-      console.log('Inside cdu', this.props.setFuturePayStatus);
-      const {
-        profile: { mobile = 0 },
-        setFuturePayStatus,
-        skipBirthdateCheck
-      } = this.props;
-      const { dispatch } = this.context.store;
-      if (setFuturePayStatus && !skipBirthdateCheck) dispatch(getOtp(mobile));
+  createWallet = mobile => e => {
+    e.preventDefault();
+    const { resend } = this.state;
+    const { dispatch } = this.context.store;
+    if (resend) {
+      return dispatch(resendOtp(mobile));
     }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (!this.state.mobilesubmitted && nextProps.getotpError && nextProps.getotpErrorMessage.includes('resend')) {
-      this.setState({
-        mobilesubmitted: true
-      });
-    }
-    if (nextProps.otpSent && nextProps.otpSent !== this.props.otpSent) {
-      this.setState({
-        mobilesubmitted: true
-      });
-    }
-  }
+    dispatch(getOtp(mobile));
+  };
 
   render() {
     const { setFuturePayStatus, loggingIn, skipBirthdateCheck } = this.props;
     const {
-      otp, otpError, otpErrorMessage, resend, resendtimer
-    } = this.state;
+ otp, otpError, otpErrorMessage, resend, resendtimer
+} = this.state;
     const open = !skipBirthdateCheck && setFuturePayStatus;
     return (
       <div>
