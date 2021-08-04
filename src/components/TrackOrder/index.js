@@ -95,7 +95,7 @@ class TrackOrder extends Component {
               </ResponsiveModal>
             ) : (
               <Label fontSize="0.75rem" lh="1.8" mb="1.125rem">
-                {loaded && orderId && !onChange ? (
+                {loaded && !onChange ? (
                   <b style={{ color: 'red' }}>
                     {data.status === 'canceled'
                       ? 'This Order is Cancelled !'
