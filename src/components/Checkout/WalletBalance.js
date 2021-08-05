@@ -132,20 +132,20 @@ class WalletBalance extends Component {
       futurePayAmount,
       isPayFromHtWallet
     } = this.props;
-
+    console.log(balance, 'balance');
     return (
-      <Div>
-        <Text ta="center" color="#323131" mb={20} fontSize="1rem">
+      <Div pl="5%">
+        <Text ta="center" color="#323131" mb={20} fontSize="1.2rem">
           HomeTown Wallet Balance
         </Text>
         <Text ta="center" fontSize="24px" fontWeight="bold">
           <span>₹ </span>
-          {balance}
+          {balance || 0}
         </Text>
 
         {parseInt(balance) ? (
           <Div>
-            <Flex justifyContent="space-between" alignItems="center" className={styles.hometownWallet}>
+            <Flex justifyContent="space-between" alignItems="center" ml={0} mr={0} className={styles.hometownWallet}>
               <Div col="7" className={styles.checkbox}>
                 {/* FIXME: Change it to hometown component */}
                 <input

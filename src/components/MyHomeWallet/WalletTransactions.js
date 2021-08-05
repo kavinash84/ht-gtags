@@ -38,13 +38,6 @@ const validateDate = (from, to) => {
   hasMoreTrans: profile.hasMoreTrans
 }))
 export class WalletTransactions extends Component {
-  state = {
-    fromDate: '',
-    toDate: '',
-    count: 5,
-    pageNo: 0
-  };
-
   static propTypes = {
     profile: PropTypes.shape({
       fromDate: PropTypes.number,
@@ -62,6 +55,13 @@ export class WalletTransactions extends Component {
       toDate: ''
     }),
     transactionHistory: []
+  };
+
+  state = {
+    fromDate: '',
+    toDate: '',
+    count: 5,
+    pageNo: 0
   };
 
   onChangeToDate = value => {
@@ -84,11 +84,11 @@ export class WalletTransactions extends Component {
     this.setState({ pageNo });
 
     dispatch(load({
-      toDate: moment(toDate).format('DD/MM/YYYY'),
-      fromDate: moment(fromDate).format('DD/MM/YYYY'),
-      count,
-      pageNo
-    }));
+        toDate: moment(toDate).format('DD/MM/YYYY'),
+        fromDate: moment(fromDate).format('DD/MM/YYYY'),
+        count,
+        pageNo
+      }));
   };
 
   render() {
@@ -121,7 +121,7 @@ export class WalletTransactions extends Component {
           <Div col="2">
             <Button
               width="50px"
-              height="50px"
+              height="38px"
               className={styles.searchTransactions}
               disabled={validateDate(toDate, fromDate)}
               borderRadius="5px"

@@ -37,7 +37,7 @@ const initialState = {
   loginType: '',
   tokenData: {},
   askEmail: false,
-  skipBirthdateCheck: false,
+  skipBirthdateCheck: false
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -75,7 +75,9 @@ export default function reducer(state = initialState, action = {}) {
         askBirthDate: action.error.askBirthDate || false,
         loginType: action.error.loginType || '',
         tokenData:
-          (action.error.askContact || action.error.askName || action.error.askBirthDate) && action.error.tokenData ? action.error.tokenData : {}
+          (action.error.askContact || action.error.askName || action.error.askBirthDate) && action.error.tokenData
+            ? action.error.tokenData
+            : {}
       };
     case LOGIN_AFTER_SIGNUP:
       return {
@@ -119,14 +121,16 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: true,
         loaded: false,
-        otpSent: false
+        otpSent: false,
+        loginViaOtp: false
       };
     case GET_OTP_SUCCESS:
       return {
         ...state,
         otpSent: true,
         loading: false,
-        loaded: true
+        loaded: true,
+        loginViaOtp: true
       };
     case GET_OTP_FAIL:
       return {
@@ -135,6 +139,7 @@ export default function reducer(state = initialState, action = {}) {
         loaded: true,
         otpError: true,
         otpSent: false,
+        loginViaOtp: false,
         errorMessage: action.error.error_message
       };
     case CLEAR_LOGIN_STATE:
@@ -183,8 +188,9 @@ export const login = data => ({
       const dob = data.dob ? `&dob=${data.dob}` : '';
       const email = data.email && type === 'mobile' ? `&email=${data.email}` : '';
       const skipBirthdateCheck = data.skipBirthdateCheck ? data.skipBirthdateCheck : false;
+      const skipOtpValidation = data.skipOtpValidation ? data.skipOtpValidation : false;
       console.log({ skipBirthdateCheck });
-      const postData = `${username}&password=${password}${dob}&skipBirthdateCheck=${skipBirthdateCheck}&type=${type}&method=${method}&grant_type=password&client_id=${clientId}&client_secret=${clientSecret}${mobile}${name}${email}`;
+      const postData = `${username}&password=${password}${dob}&skipBirthdateCheck=${skipBirthdateCheck}&skipOtpValidation=${skipOtpValidation}&type=${type}&method=${method}&grant_type=password&client_id=${clientId}&client_secret=${clientSecret}${mobile}${name}${email}`;
       const response = await client.post(LOGIN_API, postData);
       setToken({ client })(response);
       return response;
@@ -198,7 +204,10 @@ export const login = data => ({
     }
   }
 });
-export const googleLogin = (result, session, phone, username = null, dob = null, skipBirthdateCheck = false) => (dispatch, getState) =>
+export const googleLogin = (result, session, phone, username = null, dob = null, skipBirthdateCheck = false) => (
+  dispatch,
+  getState
+) =>
   dispatch({
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
     promise: async ({ client }) => {

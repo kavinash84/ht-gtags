@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 /* ====== Modules ====== */
 import { login, getOtp, resendOtp, birthdateCheck, clearLoginState } from 'redux/modules/login';
@@ -197,7 +198,11 @@ export default class LoginFormContainer extends Component {
       });
     }
     const { dispatch } = this.context.store;
-    dispatch(login(this.state));
+    const data = {
+      ...this.state,
+      skipOtpValidation: true
+    };
+    dispatch(login(data));
   };
   onSubmitName = e => {
     e.preventDefault();
@@ -209,7 +214,11 @@ export default class LoginFormContainer extends Component {
       });
     }
     const { dispatch } = this.context.store;
-    dispatch(login(this.state));
+    const data = {
+      ...this.state,
+      skipOtpValidation: true
+    };
+    dispatch(login(data));
   };
 
   // Same code is being repeated ?
@@ -223,7 +232,11 @@ export default class LoginFormContainer extends Component {
       });
     }
     const { dispatch } = this.context.store;
-    dispatch(login(this.state));
+    const data = {
+      ...this.state,
+      skipOtpValidation: true
+    };
+    dispatch(login(data));
   };
   onSubmitNameAndEmail = e => {
     e.preventDefault();
@@ -242,7 +255,11 @@ export default class LoginFormContainer extends Component {
     }
 
     const { dispatch } = this.context.store;
-    dispatch(login(this.state));
+    const data = {
+      ...this.state,
+      skipOtpValidation: true
+    };
+    dispatch(login(data));
   };
 
   onSubmitEmail = e => {
@@ -255,7 +272,11 @@ export default class LoginFormContainer extends Component {
     }
 
     const { dispatch } = this.context.store;
-    dispatch(login(this.state));
+    const data = {
+      ...this.state,
+      skipOtpValidation: true
+    };
+    dispatch(login(data));
   };
   onChangePhone = e => {
     const {
@@ -292,14 +313,21 @@ export default class LoginFormContainer extends Component {
       });
     }
     const { dispatch } = this.context.store;
-    dispatch(login(this.state));
+    const data = {
+      ...this.state,
+      skipOtpValidation: true,
+      dob: moment(dob).format('YYYY-MM-DD')
+    };
+    dispatch(login(data));
   };
   onSkipDob = () => {
     this.birthdateChecker(true);
     const { dispatch } = this.context.store;
     const data = {
       ...this.state,
-      skipBirthdateCheck: true
+      skipBirthdateCheck: true,
+      skipOtpValidation: true,
+      dob: ''
     };
     dispatch(login(data));
   };
@@ -340,7 +368,9 @@ export default class LoginFormContainer extends Component {
     const { dispatch } = this.context.store;
     const data = {
       ...this.state,
-      skipBirthdateCheck
+      skipBirthdateCheck,
+      skipOtpValidation: false,
+      dob: dob ? moment(dob).format('YYYY-MM-DD') : ''
     };
     dispatch(login(data));
   };

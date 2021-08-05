@@ -139,7 +139,7 @@ const paymentObject = (
       cc_exp_year: expYear,
       cc_security_code: cvv,
       pg_cc: 'CC',
-      future_pay_redeem_amount: futurePayRedeemAmount,
+      future_pay_redeem_amount: isPayFromHtWallet ? futurePayRedeemAmount : 0,
       isPayFromHTWallet: isPayFromHtWallet,
       totalCartAmount
     };
@@ -159,7 +159,7 @@ const paymentObject = (
       dc_exp_year: expYear,
       dc_security_code: cvv,
       pg_dc: 'DC',
-      future_pay_redeem_amount: futurePayRedeemAmount,
+      future_pay_redeem_amount: isPayFromHtWallet ? futurePayRedeemAmount : 0,
       isPayFromHTWallet: isPayFromHtWallet,
       totalCartAmount
     };
@@ -172,7 +172,7 @@ const paymentObject = (
       payment_method: 'Payu',
       netbanking_bankname: bankCode,
       pg_nb: 'NB',
-      future_pay_redeem_amount: futurePayRedeemAmount,
+      future_pay_redeem_amount: isPayFromHtWallet ? futurePayRedeemAmount : 0,
       isPayFromHTWallet: isPayFromHtWallet,
       totalCartAmount
     };
@@ -184,7 +184,7 @@ const paymentObject = (
       payment_method_type: selectedGateway,
       payment_method: walletName,
       wallet: walletName,
-      future_pay_redeem_amount: futurePayRedeemAmount,
+      future_pay_redeem_amount: isPayFromHtWallet ? futurePayRedeemAmount : 0,
       isPayFromHTWallet: isPayFromHtWallet,
       totalCartAmount
     };
@@ -205,7 +205,7 @@ const paymentObject = (
       emi_cc_exp_month: expMonth,
       emi_cc_exp_year: expYear,
       emi_cc_security_code: cvv,
-      future_pay_redeem_amount: futurePayRedeemAmount,
+      future_pay_redeem_amount: isPayFromHtWallet ? futurePayRedeemAmount : 0,
       isPayFromHTWallet: isPayFromHtWallet,
       totalCartAmount
     };
@@ -217,7 +217,7 @@ const paymentObject = (
         session_id: sessionId,
         payment_method_type: 'Emi',
         payment_method: 'BFL',
-        future_pay_redeem_amount: futurePayRedeemAmount,
+        future_pay_redeem_amount: isPayFromHtWallet ? futurePayRedeemAmount : 0,
         isPayFromHTWallet: isPayFromHtWallet,
         totalCartAmount
       };
@@ -239,7 +239,7 @@ const paymentObject = (
       emi_cc_exp_month: expMonth,
       emi_cc_exp_year: expYear,
       emi_cc_security_code: cvv,
-      future_pay_redeem_amount: futurePayRedeemAmount,
+      future_pay_redeem_amount: isPayFromHtWallet ? futurePayRedeemAmount : 0,
       isPayFromHTWallet: isPayFromHtWallet,
       totalCartAmount
     };
@@ -267,7 +267,7 @@ const paymentObject = (
       easyemi_processingFees: processingFees,
       easyemi_auth_response: easyEmiAuthResponse,
       easyemi_downpayment: easyEmiDownPayment,
-      future_pay_redeem_amount: futurePayRedeemAmount,
+      future_pay_redeem_amount: isPayFromHtWallet ? futurePayRedeemAmount : 0,
       isPayFromHTWallet: isPayFromHtWallet,
       totalCartAmount
     };
@@ -278,7 +278,7 @@ const paymentObject = (
       session_id: sessionId,
       payment_method_type: selectedGateway,
       payment_method: 'Upi',
-      future_pay_redeem_amount: futurePayRedeemAmount,
+      future_pay_redeem_amount: isPayFromHtWallet ? futurePayRedeemAmount : 0,
       isPayFromHTWallet: isPayFromHtWallet,
       totalCartAmount
     };
@@ -288,7 +288,7 @@ const paymentObject = (
       session_id: sessionId,
       payment_method_type: 'Wallet',
       payment_method: 'FuturePay',
-      future_pay_redeem_amount: futurePayRedeemAmount,
+      future_pay_redeem_amount: isPayFromHtWallet ? futurePayRedeemAmount : 0,
       isPayFromHTWallet: isPayFromHtWallet,
       wallet: 'Wallet',
       card_type: 'CC',

@@ -4,22 +4,26 @@ import { connect } from 'react-redux';
 
 /* ====== Components ====== */
 import Box from 'hometown-components-dev/lib/BoxHtV1';
-import Body from 'hometown-components-dev/lib/BodyHtV1';
+// import Body from 'hometown-components-dev/lib/BodyHtV1';
 import Container from 'hometown-components-dev/lib/ContainerHtV1';
-import Row from 'hometown-components-dev/lib/RowHtV1';
-import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
+// import Row from 'hometown-components-dev/lib/RowHtV1';
+// import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 import Section from 'hometown-components-dev/lib/SectionHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
 
 /* ====== Page Components ====== */
 import Footer from 'components/Footer';
 import Header from 'components/Header';
-import Menu from 'components/MyMenu';
+// import Menu from 'components/MyMenu';
 import WalletTransactions from 'components/MyHomeWallet/WalletTransactions';
-import DashboardHeader from '../DashbordHeader/Header';
+// import DashboardHeader from '../DashbordHeader/Header';
+import FuturePayModal from 'components/MyHomeWallet/FuturePayModal';
 
 import { getFuturePayProfile } from 'selectors/userprofile';
+import { setFuturePayStatus as toggleFuturePayModal } from 'redux/modules/profile';
+import { birthdateCheck } from 'redux/modules/login';
 import { formatAmount } from 'utils/formatters';
 
 const MidBanner = require('../../../static/banners/mid-banner1.jpeg');
@@ -30,37 +34,69 @@ const styles = require('./HtWallet.scss');
   profile: profile.data,
   futurPayProfile: getFuturePayProfile(profile)
 }))
-
 export class MyHomeWallet extends Component {
   static propTypes = {
-    prop: PropTypes
+    futurPayProfile: PropTypes.shape({
+      AvailableBalance: PropTypes.number,
+      TopUpBalance: PropTypes.number,
+      status: PropTypes.bool
+    })
+  };
+
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  };
+
+  static defaultProps = {
+    futurPayProfile: { AvailableBalance: 0, TopUpBalance: 0, status: false }
   };
 
   render() {
     const {
-      futurPayProfile: { AvailableBalance: balance, TopUpBalance: limit }
+      futurPayProfile: { AvailableBalance: balance, TopUpBalance: limit, status }
     } = this.props;
     return (
-      <div className="wrapper">
-        <Menu />
+      <div className="wrapper dummy">
+        {/* <Menu /> */}
+        <Header />
         <Section mt="1.5rem">
           <Container pl="1.563rem" pr="1.563rem">
-            <Box>
-              <Text ta="center" mb="0.313rem" fontSize="14px">
-                Total Balance
-              </Text>
-              <Text ta="center" mb="0" mt="0" fontFamily="medium" fontSize="24px">
-                ₹ {formatAmount(balance)}
-              </Text>
-              <Text ta="center" mb="0.625rem" mt="0.625rem" fontSize="14px">
-                Max limit: ₹ {formatAmount(limit)}
-              </Text>
-            </Box>
+            {status === 'success' ? (
+              <Box>
+                <Text ta="center" mb="0.313rem" fontSize="14px">
+                  Total Balance
+                </Text>
+                <Text ta="center" mb="0" mt="0" fontFamily="medium" fontSize="24px">
+                  ₹ {formatAmount(balance)}
+                </Text>
+                <Text ta="center" mb="0.625rem" mt="0.625rem" fontSize="14px">
+                  Max limit: ₹ {formatAmount(limit)}
+                </Text>
+              </Box>
+            ) : (
+              <Box mt={60} sx={{ display: 'flex', justifyContent: 'center' }}>
+                <Text ta="center" mt="0" fontFamily="medium" fontSize="14px">
+                  <Text mb={20}>Currently you dont have wallet would you like to create it ?</Text>
+                  <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <Button
+                      onClick={() => {
+                        const { dispatch } = this.context.store;
+                        dispatch(toggleFuturePayModal(true));
+                        dispatch(birthdateCheck(false));
+                      }}
+                    >
+                      Create Wallet
+                    </Button>
+                  </Box>
+                </Text>
+              </Box>
+            )}
+            <FuturePayModal />
           </Container>
         </Section>
 
         {/* Mid banner */}
-        <Box mt="2.25rem" mb="1.5rem">
+        <Box mt="2.25rem" mb="1.5rem" sx={{ display: 'flex', justifyContent: 'center' }}>
           <Image className={styles.midBanner} src={MidBanner} alt="MidBanner" />
         </Box>
 
@@ -68,7 +104,7 @@ export class MyHomeWallet extends Component {
         <Box bg="#F7F7F7">
           <Container pl="1.563rem" pr="1.563rem">
             <Box>
-              <Text fontFamily="medium" fontSize="14px">
+              <Text fontFamily="medium" fontSize="14px" mt={10} mb={10}>
                 Transaction History
               </Text>
               <WalletTransactions />
@@ -81,7 +117,7 @@ export class MyHomeWallet extends Component {
   }
 }
 
-export default MyHomeWallet
+export default MyHomeWallet;
 
 // const MyHomeTownWallet = () => (
 //   <Wrapper>

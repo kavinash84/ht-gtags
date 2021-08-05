@@ -1,10 +1,11 @@
 /* eslint-disable max-len */
-import { 
-  USERPROFILE as USERPROFILE_API, 
-  UPDATEPROFILE as UPDATEPROFILE_API, 
+import {
+  USERPROFILE as USERPROFILE_API,
+  UPDATEPROFILE as UPDATEPROFILE_API,
   TRANSACTIONHISTORY as TRANSACTION_HISTORY_API,
   FUTUREPAYSTATUS as FUTURE_PAY_STATUS_API,
-  LINKFUTUREPAY as LINK_FUTURE_PAY_API } from 'helpers/apiUrls';
+  LINKFUTUREPAY as LINK_FUTURE_PAY_API
+} from 'helpers/apiUrls';
 
 const LOAD = 'profile/LOAD';
 const LOAD_SUCCESS = 'profile/LOAD_SUCCESS';
@@ -12,9 +13,9 @@ const LOAD_FAIL = 'profile/LOAD_FAIL';
 const UPDATE_PROFILE = 'profile/UPDATE_PROFILE';
 const UPDATE_PROFILE_SUCCESS = 'profile/UPDATE_PROFILE_SUCCESS';
 const UPDATE_PROFILE_FAIL = 'profile/UPDATE_PROFILE_FAIL';
-const UPDATE_TRANSACTION = "profile/UPDATE_TRANSACTION";
-const UPDATE_TRANSACTION_SUCCESS = "profile/UPDATE_TRANSACTION_SUCCESS";
-const UPDATE_TRANSACTION_FAIL = "profile/UPDATE_TRANSACTION_FAIL";
+const UPDATE_TRANSACTION = 'profile/UPDATE_TRANSACTION';
+const UPDATE_TRANSACTION_SUCCESS = 'profile/UPDATE_TRANSACTION_SUCCESS';
+const UPDATE_TRANSACTION_FAIL = 'profile/UPDATE_TRANSACTION_FAIL';
 const FUTUREPAY_STATUS = 'profile/FUTUREPAY_STATUS';
 const FUTUREPAY_STATUS_SUCCESS = 'profile/FUTUREPAY_STATUS_SUCCESS';
 const FUTUREPAY_STATUS_FAIL = 'profile/FUTUREPAY_STATUS_FAIL';
@@ -92,7 +93,7 @@ export default function reducer(state = initialState, action = {}) {
         // transactionHistory: hasMoreTrans
         //   ? [...state.transactionHistory, ...action.result.TransactionHistory]
         //   : action.result.TransactionHistory,
-        transactionHistory:[...state.transactionHistory, ...action.result.TransactionHistory],
+        transactionHistory: [...state.transactionHistory, ...action.result.TransactionHistory],
         hasMoreTrans
       };
     case UPDATE_TRANSACTION_FAIL:
@@ -177,11 +178,7 @@ export const updateUserProfile = data => ({
 });
 
 export const getTransactionHistory = data => ({
-  types: [
-    UPDATE_TRANSACTION,
-    UPDATE_TRANSACTION_SUCCESS,
-    UPDATE_TRANSACTION_FAIL
-  ],
+  types: [UPDATE_TRANSACTION, UPDATE_TRANSACTION_SUCCESS, UPDATE_TRANSACTION_FAIL],
   promise: async ({ client }) => {
     try {
       const postData = {
@@ -193,7 +190,7 @@ export const getTransactionHistory = data => ({
       const response = await client.post(TRANSACTION_HISTORY_API, postData);
       return response;
     } catch (error) {
-      console.log("Logged In Profile Reducer catch", error);
+      console.log('Logged In Profile Reducer catch', error);
       throw error;
     }
   }
@@ -218,7 +215,7 @@ export const setFuturePayStatus = status => ({
   status
 });
 
-export const linkFuturePay = otp => ({
+export const linkFuturePay = data => ({
   types: [LINK_FUTURE_PAY, LINK_FUTURE_PAY_SUCCESS, LINK_FUTURE_PAY_FAIL],
-  promise: async ({ client }) => client.post(LINK_FUTURE_PAY_API, { OTP: otp })
+  promise: async ({ client }) => client.post(LINK_FUTURE_PAY_API, data)
 });

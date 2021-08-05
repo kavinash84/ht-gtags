@@ -1,5 +1,6 @@
 .hometownWallet {
-  padding: 10px 50px;
+  padding: 10px 0px;
+  padding-left: 0px;
 }
 
 .checkbox input {
@@ -16,9 +17,13 @@
   // bottom: 2px;
 }
 
+.amount {
+  width: 40%;
+}
+
 .amount input {
   height: 45px;
-  width: 120px;
+  width: 100%;
   border-radius: 5px;
   border: 1px solid #e3e3e3;
   font-size: 12px;

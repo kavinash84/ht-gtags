@@ -10,8 +10,8 @@ import './Form.module.css';
 function DatePickerForm({ onChange, ...props }) {
   return (
     <div className={styles.profile_datepicker}>
-      <p className={styles.label}>Date of birth*</p>
-      <DatePicker className={styles.custom_profile_datepic} {...props} onChange={onChange} />
+      <p className={styles.label}>Date of birth *</p>
+      <DatePicker {...props} onChange={onChange} />
     </div>
   );
 }

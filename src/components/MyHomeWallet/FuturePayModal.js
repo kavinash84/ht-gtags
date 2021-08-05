@@ -17,6 +17,7 @@ import { validateMobile } from 'utils/validation';
   profile: profile.data,
   loading: userLogin.loading,
   loggingIn: userLogin.loggingIn,
+  loginViaOtp: userLogin.otpSent,
   getotpErrorMessage: userLogin.getotpErrorMessage,
   otpSent: userLogin.otpSent,
   skipBirthdateCheck: userLogin.skipBirthdateCheck
@@ -31,8 +32,30 @@ export default class FuturePayModal extends React.Component {
     mobilesubmitted: false,
     resend: false,
     resendtimer: 30,
-    timerref: ''
+    timerref: '',
+    loginViaOtp: this.props.loginViaOtp
   };
+
+  componentDidMount() {
+    const {
+      profile: { mobile = 0 },
+      setFuturePayStatus,
+      skipBirthdateCheck,
+      loginViaOtp
+    } = this.props;
+    if (this.props.setFuturePayStatus) {
+      const { dispatch } = this.context.store;
+
+      if (loginViaOtp && setFuturePayStatus && !skipBirthdateCheck) {
+        // If login is via otp
+        console.log('All values true, linking wallet');
+        dispatch(linkFuturePay({ skipOtpValidation: true }));
+      } else if (setFuturePayStatus && !skipBirthdateCheck) {
+        // If login via google/email
+        dispatch(getOtp(mobile));
+      }
+    }
+  }
 
   componentWillReceiveProps(nextProps) {
     if (!this.state.mobilesubmitted && nextProps.getotpError && nextProps.getotpErrorMessage.includes('resend')) {
@@ -60,16 +83,6 @@ export default class FuturePayModal extends React.Component {
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ timerref });
     }
-
-    if (this.props.setFuturePayStatus !== nextProps.setFuturePayStatus) {
-      const {
-        profile: { mobile = 0 },
-        setFuturePayStatus,
-        skipBirthdateCheck
-      } = this.props;
-      const { dispatch } = this.context.store;
-      if (setFuturePayStatus && !skipBirthdateCheck) dispatch(getOtp(mobile));
-    }
   }
 
   onSubmitOtp = e => {
@@ -81,7 +94,7 @@ export default class FuturePayModal extends React.Component {
       });
     }
     const { dispatch } = this.context.store;
-    dispatch(linkFuturePay(otp));
+    dispatch(linkFuturePay({ OTP: otp }));
   };
 
   onChangeOtp = e => {
@@ -134,9 +147,10 @@ export default class FuturePayModal extends React.Component {
   render() {
     const { setFuturePayStatus, loggingIn, skipBirthdateCheck } = this.props;
     const {
- otp, otpError, otpErrorMessage, resend, resendtimer
+ otp, otpError, otpErrorMessage, resend, resendtimer, loginViaOtp
 } = this.state;
-    const open = !skipBirthdateCheck && setFuturePayStatus;
+    const walletNotCreated = !skipBirthdateCheck && setFuturePayStatus;
+    const open = walletNotCreated && !loginViaOtp;
     return (
       <div>
         <ResponsiveModal
@@ -215,7 +229,8 @@ FuturePayModal.propTypes = {
   getotpError: PropTypes.bool,
   getotpErrorMessage: PropTypes.string,
   otpSent: PropTypes.bool,
-  profile: PropTypes.object
+  profile: PropTypes.object,
+  loginViaOtp: PropTypes.bool
 };
 
 FuturePayModal.defaultProps = {
@@ -225,5 +240,6 @@ FuturePayModal.defaultProps = {
   getotpError: false,
   getotpErrorMessage: '',
   otpSent: false,
+  loginViaOtp: false,
   profile: { mobile: '' }
 };

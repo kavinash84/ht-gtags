@@ -26,8 +26,9 @@ const navigateToCategory = history => category => {
     }
   });
 };
-@connect(({ homepage }) => ({
-  menuItems: homepage.menu.data
+@connect(({ homepage, profile }) => ({
+  menuItems: homepage.menu.data,
+  walletNotCreated: profile.setFuturePayStatus
 }))
 class Header extends Component {
   state = {
@@ -125,7 +126,7 @@ class Header extends Component {
 
   render() {
     const { hoverBox, currentMenuData } = this.state;
-    const { menuItems } = this.props;
+    const { menuItems, walletNotCreated } = this.props;
 
     return (
       <Box bg="white" sx={{ position: 'sticky', top: 0, zIndex: 30 }}>
@@ -152,18 +153,20 @@ class Header extends Component {
             )}
           </Container>
         </Box>
-        <FuturePayModal />
+        {walletNotCreated && <FuturePayModal />}
       </Box>
     );
   }
 }
 
 Header.defaultProps = {
-  menuItems: []
+  menuItems: [],
+  walletNotCreated: false
 };
 Header.propTypes = {
   menuItems: PropTypes.array,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  walletNotCreated: PropTypes.bool
 };
 
 export default withRouter(Header);

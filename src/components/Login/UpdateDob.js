@@ -5,7 +5,7 @@ import moment from 'moment';
 // Components
 import Heading from 'hometown-components/lib/Heading';
 import Text from 'hometown-components/lib/Text';
-import FormInput from 'hometown-components/lib/Forms/FormInput';
+// import FormInput from 'hometown-components/lib/Forms/FormInput';
 import Row from 'hometown-components/lib/Row';
 import Img from 'hometown-components/lib/Img';
 import Div from 'hometown-components/lib/Div';
@@ -29,7 +29,7 @@ class UpdateDob extends Component {
     const { showDobInput } = this.state;
     const {
       session,
-      skipBirthdateCheck,
+      // skipBirthdateCheck,
       birthdateCheck,
       onChangeDob,
       dob,
@@ -44,10 +44,10 @@ class UpdateDob extends Component {
       <div>
         <Row display="block" mr="0" ml="0" mb="10px">
           <div col="12" ta="center">
-            <Heading color="color676767" mt="0" mb="0" fontWeight="400" fontSize="26px" ta="center" fontFamily="light">
+            <Heading color="color676767" mt="0" mb={20} fontWeight="400" fontSize="26px" ta="center" fontFamily="light">
               Update Profile
             </Heading>
-            <Text color="color676767" ta="center">
+            <Text color="color67676" ta="center" mb={20}>
               'Your wallet is not created. Would you like to create a wallet?'
             </Text>
             {showDobInput ? (
@@ -71,7 +71,7 @@ class UpdateDob extends Component {
                 </button>
               </Div>
             ) : (
-              <Div style={{ display: 'flex' }}>
+              <Div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <button
                   style={{ margin: '0 10px' }}
                   className="google-login-btn"
@@ -123,7 +123,8 @@ class UpdateDob extends Component {
 UpdateDob.defaultProps = {
   dob: '',
   dobErrorMessage: '',
-  session: ''
+  session: '',
+  LoaderIcon: ''
 };
 
 UpdateDob.propTypes = {
@@ -133,7 +134,9 @@ UpdateDob.propTypes = {
   dob: PropTypes.instanceOf(Date),
   dobError: PropTypes.bool.isRequired,
   dobErrorMessage: PropTypes.string,
-  session: PropTypes.string
+  session: PropTypes.string,
+  birthdateCheck: PropTypes.string.isRequired,
+  LoaderIcon: PropTypes.string
 };
 
 export default UpdateDob;

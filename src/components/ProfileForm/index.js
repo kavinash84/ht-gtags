@@ -14,12 +14,10 @@ import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import Label from 'hometown-components-dev/lib/LabelHtV1';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
 
-
 /**
  * modules / utils
  */
-import { validateMobile, checkSpecialChar, checkDateOfBirth } from 'utils/validation';
-import { validateName, validateDob } from 'utils/validation';
+import { validateMobile, checkSpecialChar, validateDob } from 'utils/validation';
 import { updateUserProfile } from 'redux/modules/profile';
 import {
   // allowNChar,
@@ -81,8 +79,7 @@ export default class ProfileForm extends Component {
   };
   static defaultProps = {
     profile: {},
-    response: {},
-    dob: ''
+    response: {}
   };
 
   state = {
@@ -117,10 +114,7 @@ export default class ProfileForm extends Component {
  full_name: fullName, email, contact_number: phone, city, gst, dob, gender
 }
     } = this.props;
-    const dob1 =
-      dob === "Invalid date"
-        ? ""
-        : new Date(moment(dob, "DD-MM-YYYY").toString());
+    const dob1 = dob === 'Invalid date' ? '' : new Date(moment(dob, 'DD-MM-YYYY').toString());
     this.setState({
       fullName: (fullName && fullName.trim()) || '',
       email,
@@ -227,12 +221,16 @@ export default class ProfileForm extends Component {
   convertDateYyyy = date => {
     let newdate = '';
     if (date !== '' || date !== 'undefined' || date !== 'Invalid date') {
-      newdate = date.split('-');
-      if (newdate[0].length === 4) {
-        newdate = newdate.reverse().join('-');
-      } else {
-        newdate = date;
-      }
+      // newdate = date.split('-');
+      // if (newdate[0].length === 4) {
+      //   newdate = newdate.reverse().join('-');
+      // } else {
+      //   newdate = date;
+      // }
+      const dt = new Date(date);
+      const mnth = `0${dt.getMonth() + 1}`.slice(-2);
+      const day = `0${dt.getDate()}`.slice(-2);
+      newdate = [date.getFullYear(), mnth, day].reverse().join('-');
     }
     return newdate;
   };
@@ -249,7 +247,7 @@ export default class ProfileForm extends Component {
     return newdate;
   };
   render() {
-    const styles = require("./index.scss");
+    // const styles = require('./index.scss');
     const {
       email,
       phone,

@@ -276,7 +276,7 @@ LoginViaOtp.propTypes = {
   otp: PropTypes.string,
   otpError: PropTypes.bool,
   otpErrorMessage: PropTypes.string,
-  dob: PropTypes.string,
+  dob: PropTypes.instanceOf(Date),
   dobError: PropTypes.bool,
   dobErrorMessage: PropTypes.string,
   loading: PropTypes.bool.isRequired,

@@ -27,17 +27,17 @@ class UpdateDobviaOtp extends Component {
   render() {
     const { showDobInput } = this.state;
     const {
-      onSkipDob, onChangeDob, dob, dobError, dobErrorMessage, LoaderIcon, loggingIn, onSubmitDob
-    } = this.props;
+ onSkipDob, onChangeDob, dob, dobError, dobErrorMessage, LoaderIcon, loggingIn, onSubmitDob
+} = this.props;
 
     return (
       <div>
         <Row display="block" mr="0" ml="0" mb="10px">
           <div col="12" ta="center">
-            <Heading color="color676767" mt="0" mb="0" fontWeight="400" fontSize="26px" ta="center" fontFamily="light">
+            <Heading color="color676767" mt="0" mb={20} fontWeight="400" fontSize="26px" ta="center" fontFamily="light">
               Update Profile
             </Heading>
-            <Text color="color676767" ta="center">
+            <Text color="color676767" ta="center" mb={20}>
               'Your wallet is not created. Would you like to create a wallet?'
             </Text>
             {showDobInput ? (
@@ -62,7 +62,7 @@ class UpdateDobviaOtp extends Component {
                 </button>
               </Div>
             ) : (
-              <Div style={{ display: 'flex' }}>
+              <Div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <button
                   style={{ margin: '0 10px' }}
                   className="google-login-btn"
