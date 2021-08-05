@@ -52,7 +52,7 @@ import ResponsiveVideoModal from 'components/Modal/ResponsiveVideoModal';
 import Reviews from 'hometown-components-dev/lib/ReviewsHtV1';
 import ReviewDisplay from 'hometown-components-dev/lib/ReviewsHtV1/ReviewDisplay';
 import ServiceDetails from 'hometown-components-dev/lib/ProductDetailsHtV1/ServiceDetails';
-import EmiOptions from 'hometown-components-dev/lib/ProductDetailsHtV1/EmiOptions';
+// import EmiOptions from 'hometown-components-dev/lib/ProductDetailsHtV1/EmiOptions';
 // import ShareBar from 'components/ShareBar';
 import Specs from 'hometown-components-dev/lib/ProductDetailsHtV1/Specs';
 import TitlePrice from 'hometown-components-dev/lib/ProductDetailsHtV1/TitlePrice';
@@ -641,7 +641,8 @@ class ProductDetails extends React.Component {
       groupedattributes,
       reviews: { count, rating },
       bogo_bundle: bogoBundle,
-      free_visit: freeVisit = 'no'
+      free_visit: freeVisit = 'no',
+      free_installation: freeInstallation = 'no'
     } = product;
     // const { brand: ProductBrand } = meta;
     const {
@@ -795,6 +796,7 @@ class ProductDetails extends React.Component {
                   fkCatalogSupplier={fkCatalogSupplier}
                   brand={brand}
                   freeVisit={freeVisit}
+                  freeInstallation={freeInstallation}
                 >
                   <EmiModal
                     price={formatAmount(checkSpecialPrice)}
