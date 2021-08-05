@@ -1,16 +1,16 @@
 /* eslint-disable no-nested-ternary */
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import UpdateDobviaOtp from "./updateDob";
-import { login } from "redux/modules/login";
+// import { login } from 'redux/modules/login';
 
 /* ====== Components ====== */
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Flex from 'hometown-components-dev/lib/FlexHtV1';
-import FormInputHtV1 from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
+import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
+import UpdateDobviaOtp from './UpdateDob';
 
-const LoaderIcon = require("../../../static/refresh.svg");
+const LoaderIcon = require('../../../static/refresh.svg');
 
 export default class LoginViaOtp extends React.Component {
   static contextTypes = {
@@ -18,7 +18,7 @@ export default class LoginViaOtp extends React.Component {
   };
   state = {
     resendtimer: 30,
-    timerref: ""
+    timerref: ''
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.mobilesubmitted && nextProps.mobilesubmitted !== this.props.mobilesubmitted) {
@@ -89,7 +89,7 @@ export default class LoginViaOtp extends React.Component {
       <Box>
         {!mobilesubmitted ? (
           <form onSubmit={onSubmitMobileNumber}>
-            <FormInputHtV1
+            <FormInput
               label="Phone no.*"
               onChange={onChangeMobile}
               value={mobile}
@@ -141,7 +141,7 @@ export default class LoginViaOtp extends React.Component {
           </form>
         ) : askName ? (
           <form onSubmit={onSubmitName}>
-            <FormInputHtV1
+            <FormInput
               label="Name"
               onChange={onChangeName}
               value={name}
@@ -218,7 +218,7 @@ export default class LoginViaOtp extends React.Component {
         ) : (
           <Fragment>
             <form onSubmit={onSubmitOtp}>
-              <FormInputHtV1
+              <FormInput
                 label="OTP"
                 onChange={onChangeOtp}
                 value={otp}
