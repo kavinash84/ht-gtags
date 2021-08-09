@@ -1,4 +1,3 @@
-import { isBlank } from 'js-utility-functions';
 import moment from 'moment';
 
 export const isEmpty = rawValue => {

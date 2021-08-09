@@ -98,29 +98,29 @@ export class WalletTransactions extends Component {
     return (
       <div>
         <Row justifyContent="space-between" mb="1.5rem" ml="0" mr="0">
-          <Div col="4">
+          <Div style={{width:'40%'}}>
             <Div>
               <DatePicker dateFormat="dd/MM/yyyy" selected={fromDate} onSelect={this.onChangeFromDate} />
             </Div>
             <Div>
-              <Text mt="0.313rem" ml="0.625rem" color="#999999" fontSize="10px">
+              <Text mt="0.313rem" ml="0.625rem" color="#999999" fontSize="14px">
                 From Date
               </Text>
             </Div>
           </Div>
-          <Div col="4">
+          <Div style={{width:'40%'}}>
             <Div>
               <DatePicker dateFormat="dd/MM/yyyy" selected={toDate} onSelect={this.onChangeToDate} />
             </Div>
             <Div>
-              <Text mt="0.313rem" ml="0.625rem" color="#999999" fontSize="10px">
+              <Text mt="0.313rem" ml="0.625rem" color="#999999" fontSize="14px">
                 To Date
               </Text>
             </Div>
           </Div>
-          <Div col="2">
+          <Div>
             <Button
-              width="50px"
+              width="4rem"
               height="38px"
               className={styles.searchTransactions}
               disabled={validateDate(toDate, fromDate)}

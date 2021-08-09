@@ -16,7 +16,7 @@ import Button from 'hometown-components-dev/lib/ButtonHtV1';
 /* ====== Page Components ====== */
 import Footer from 'components/Footer';
 import Header from 'components/Header';
-// import Menu from 'components/MyMenu';
+import MyMenu from 'components/MyMenu';
 import WalletTransactions from 'components/MyHomeWallet/WalletTransactions';
 // import DashboardHeader from '../DashbordHeader/Header';
 import FuturePayModal from 'components/MyHomeWallet/FuturePayModal';
@@ -25,6 +25,7 @@ import { getFuturePayProfile } from 'selectors/userprofile';
 import { setFuturePayStatus as toggleFuturePayModal } from 'redux/modules/profile';
 import { birthdateCheck } from 'redux/modules/login';
 import { formatAmount } from 'utils/formatters';
+import Row from 'hometown-components-dev/lib/RowHtV1';
 
 const MidBanner = require('../../../static/banners/mid-banner1.jpeg');
 
@@ -59,58 +60,71 @@ export class MyHomeWallet extends Component {
       <div className="wrapper dummy">
         {/* <Menu /> */}
         <Header />
-        <Section mt="1.5rem">
-          <Container pl="1.563rem" pr="1.563rem">
-            {status === 'success' ? (
-              <Box>
-                <Text ta="center" mb="0.313rem" fontSize="14px">
-                  Total Balance
-                </Text>
-                <Text ta="center" mb="0" mt="0" fontFamily="medium" fontSize="24px">
-                  ₹ {formatAmount(balance)}
-                </Text>
-                <Text ta="center" mb="0.625rem" mt="0.625rem" fontSize="14px">
-                  Max limit: ₹ {formatAmount(limit)}
-                </Text>
-              </Box>
-            ) : (
-              <Box mt={60} sx={{ display: 'flex', justifyContent: 'center' }}>
-                <Text ta="center" mt="0" fontFamily="medium" fontSize="14px">
-                  <Text mb={20}>Currently you dont have wallet would you like to create it ?</Text>
-                  <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                    <Button
-                      onClick={() => {
-                        const { dispatch } = this.context.store;
-                        dispatch(toggleFuturePayModal(true));
-                        dispatch(birthdateCheck(false));
-                      }}
+        <Row mr={0} ml={0} p="0px 1rem" pt={40} sx={{maxWidth: '1180px'}} m="auto">
+          <Box width={[3 / 12, 3 / 12, 2 / 12]} pr={30}>
+            <MyMenu page="hometownwallet" />
+          </Box>
+          <Box width={[9 / 12, 9 / 12, 10 / 12]} pl={30} sx={{ borderLeft: 'divider' }}>
+            <Section mt="1.5rem">
+              <Container pl="1.563rem" pr="1.563rem">
+                {status === 'success' ? (
+                  <Box>
+                    <Text sx={{ textAlign: 'center' }} mb="1rem" fontSize="2rem">
+                      Total Balance
+                    </Text>
+                    <Text 
+                      sx={{ textAlign: 'center' }} 
+                      color="orangered" 
+                      mb="1rem" 
+                      mt="0" 
+                      fontFamily="medium" 
+                      fontSize="3rem"
                     >
-                      Create Wallet
-                    </Button>
+                      ₹ {formatAmount(balance)}
+                    </Text>
+                    <Text sx={{ textAlign: 'center' }} mb="0.625rem" mt="0.625rem" fontSize="1.5rem">
+                      Max limit: ₹ {formatAmount(limit)}
+                    </Text>
                   </Box>
-                </Text>
-              </Box>
-            )}
-            <FuturePayModal />
-          </Container>
-        </Section>
-
-        {/* Mid banner */}
-        <Box mt="2.25rem" mb="1.5rem" sx={{ display: 'flex', justifyContent: 'center' }}>
-          <Image className={styles.midBanner} src={MidBanner} alt="MidBanner" />
-        </Box>
-
-        {/* Transaction history */}
-        <Box bg="#F7F7F7">
-          <Container pl="1.563rem" pr="1.563rem">
-            <Box>
-              <Text fontFamily="medium" fontSize="14px" mt={10} mb={10}>
-                Transaction History
-              </Text>
-              <WalletTransactions />
+                ) : (
+                  <Box mt={60} sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <Text ta="center" mt="0" fontFamily="medium" fontSize="14px">
+                      <Text mb={20}>Currently you dont have wallet would you like to create it ?</Text>
+                      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                        <Button
+                          onClick={() => {
+                            const { dispatch } = this.context.store;
+                            dispatch(toggleFuturePayModal(true));
+                            dispatch(birthdateCheck(false));
+                          }}
+                        >
+                          Create Wallet
+                        </Button>
+                      </Box>
+                    </Text>
+                  </Box>
+                )}
+                <FuturePayModal />
+              </Container>
+            </Section>
+            {/* Mid banner */}
+            <Box mt="2.25rem" mb="1.5rem" sx={{ display: 'flex', justifyContent: 'center' }}>
+              <Image className={styles.midBanner} src={MidBanner} alt="MidBanner" />
             </Box>
-          </Container>
-        </Box>
+
+            {/* Transaction history */}
+            <Box bg="#F7F7F7">
+              <Container pl="1.563rem" pr="1.563rem" pt="0.7rem">
+                <Box>
+                  <Text fontFamily="medium" fontSize="14px" mt="1rem" mb="1rem">
+                    Transaction History
+                  </Text>
+                  <WalletTransactions />
+                </Box>
+              </Container>
+            </Box>
+          </Box>
+        </Row>
         <Footer />
       </div>
     );
