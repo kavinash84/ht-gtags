@@ -82,17 +82,13 @@ export default function reducer(state = initialState, action = {}) {
       };
     // eslint-disable-next-line no-case-declarations
     case UPDATE_TRANSACTION_SUCCESS:
-      // TODO - error handling
-      // Set clear transaction history
+      // TODO Set clear transaction history
       const hasMoreTrans =
         action.result && 'TransactionHistory' in action.result ? action.result.TransactionHistory.length > 0 : false;
       return {
         ...state,
         loading: false,
         loaded: true,
-        // transactionHistory: hasMoreTrans
-        //   ? [...state.transactionHistory, ...action.result.TransactionHistory]
-        //   : action.result.TransactionHistory,
         transactionHistory: [...state.transactionHistory, ...action.result.TransactionHistory],
         hasMoreTrans
       };

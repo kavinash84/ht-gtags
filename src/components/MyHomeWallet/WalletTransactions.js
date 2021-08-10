@@ -61,7 +61,7 @@ export class WalletTransactions extends Component {
     fromDate: '',
     toDate: '',
     count: 5,
-    pageNo: 0
+    pageNo: 1
   };
 
   onChangeToDate = value => {
@@ -98,7 +98,7 @@ export class WalletTransactions extends Component {
     return (
       <div>
         <Row justifyContent="space-between" mb="1.5rem" ml="0" mr="0">
-          <Div style={{width:'40%'}}>
+          <Div style={{ width: '40%' }}>
             <Div>
               <DatePicker dateFormat="dd/MM/yyyy" selected={fromDate} onSelect={this.onChangeFromDate} />
             </Div>
@@ -108,7 +108,7 @@ export class WalletTransactions extends Component {
               </Text>
             </Div>
           </Div>
-          <Div style={{width:'40%'}}>
+          <Div style={{ width: '40%' }}>
             <Div>
               <DatePicker dateFormat="dd/MM/yyyy" selected={toDate} onSelect={this.onChangeToDate} />
             </Div>

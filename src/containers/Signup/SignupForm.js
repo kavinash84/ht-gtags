@@ -43,6 +43,8 @@ import LoginViaOtp from 'components/LoginForms/LoginViaOtp';
 import SignUpForm from 'hometown-components-dev/lib/FormsHtV1/SignUpFormHtV1';
 
 import './Signdatepicker.css';
+import CreateWalletModal from './createWalletModal';
+import { validateName } from '../../utils/validation';
 
 const OTPIcon = require('../../../static/otp.svg');
 const EmailIcon = require('../../../static/email-primary.svg');
@@ -105,7 +107,8 @@ export default class SignupFormContainer extends Component {
       city: '',
       cityError: false,
       cityErrorMessage: 'global err message',
-      policyAccepted: false
+      policyAccepted: false,
+      showModal: false
     };
   }
   onChangeEmail = e => {
@@ -192,8 +195,8 @@ export default class SignupFormContainer extends Component {
     // } = e;
     this.setState({ policyAccepted: !this.state.policyAccepted });
   };
-  onSubmitSignup = e => {
-    e.preventDefault();
+  onSubmitSignup = otp => {
+    // e.preventDefault();
     // const {
     //   target: { action }
     // } = e;
@@ -228,13 +231,54 @@ export default class SignupFormContainer extends Component {
       });
     }
     const dobValue = moment(dob).format('YYYY-MM-DD');
-    const data = {
-      ...this.state,
-      dob: dobValue
-    };
+    let data = {};
+    if (otp) {
+      data = {
+        ...this.state,
+        dob: dobValue,
+        otp
+      };
+    } else {
+      data = {
+        ...this.state,
+        dob: dobValue
+      };
+    }
     const { dispatch } = this.context.store;
     const { session } = this.props;
     dispatch(signUp(data, session));
+  };
+
+  preOnsubmitSignup = e => {
+    e.preventDefault();
+    const {
+ name, email, password, phone, dob
+} = this.state;
+    const checkName = validateName(name).error;
+    const checkEmail = !validateEmail(email);
+    const checkPhone = !validateMobile(phone);
+    const checkPassword = validatePassword(password);
+    const checkDob = validateDob(dob);
+
+    if (checkName || checkEmail || checkPassword.error || checkPhone || checkDob) {
+      return this.setState({
+        nameError: checkName,
+        emailError: checkEmail,
+        phoneError: checkPhone,
+        passwordError: checkPassword.error,
+        nameErrorMessage: validateName(name).msg,
+        dobError: checkDob
+      });
+    }
+    this.handleModal();
+  };
+
+  handleModal = () => {
+    this.setState({ showModal: !this.state.showModal });
+  };
+
+  handleYes = otp => {
+    this.onSubmitSignup(otp);
   };
 
   toggleLoginForm = () => {
@@ -355,7 +399,7 @@ export default class SignupFormContainer extends Component {
                 onChangePassword={this.onChangePassword}
                 passwordFeedBackError={passwordError}
                 passwordFeedBackMessage={passwordErrorMessage}
-                onSubmitSignup={this.onSubmitSignup}
+                onSubmitSignup={this.preOnsubmitSignup}
                 signUpResponse={signUpResponse}
                 loginUrl={LOGIN_URL}
                 phonemandatory
@@ -382,6 +426,13 @@ export default class SignupFormContainer extends Component {
             </Col>
           </Row>
         </Box>
+        <CreateWalletModal
+          showModal={this.state.showModal}
+          handleModal={this.handleModal}
+          handleNo={this.onSubmitSignup}
+          handleYes={this.handleYes}
+          mobile={phone}
+        />
       </Row>
     );
   }

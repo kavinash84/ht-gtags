@@ -37,13 +37,23 @@ const handleChange = (value, total, futurePayAmount) => {
 const handleCheckBox = (checked, session, total, balance, toggleHtWallet, toggleGateway) => {
   const fullPayment = balance > total;
 
-  if (checked && fullPayment) {
+  if (checked) {
     toggleHtWallet(1);
-    toggleGateway('FuturePay', { walletName: 'futurepay' }, session);
+    if (fullPayment) {
+      toggleGateway('FuturePay', { walletName: 'futurepay' }, session);
+    } else {
+      toggleGateway('CreditCard', initial.CreditCard, session);
+    }
   } else {
     toggleHtWallet(0);
     toggleGateway('CreditCard', initial.CreditCard, session);
   }
+
+  // if (fullPayment) {
+  //   toggleGateway('FuturePay', { walletName: 'futurepay' }, session);
+  // } else {
+  //   toggleGateway('CreditCard', initial.CreditCard, session);
+  // }
 };
 
 @connect(({
@@ -76,14 +86,17 @@ class WalletBalance extends Component {
       cartSummary: { total },
       session,
       futurePayAmount,
-      toggleGateway
+      toggleGateway,
+      toggleHtWallet
     } = this.props;
 
     if (balance > total) {
       futurePayAmount(total, total);
-      toggleGateway('FuturePay', initial.FuturePay, session);
+      toggleGateway('FuturePay', 'futurepay', session);
+      toggleHtWallet(1);
     } else {
       futurePayAmount(balance, total);
+      toggleHtWallet(0);
     }
   }
 
@@ -151,6 +164,7 @@ class WalletBalance extends Component {
                 <input
                   type="checkbox"
                   id="check"
+                  checked={isPayFromHtWallet}
                   onClick={({ target: { checked } }) =>
                     handleCheckBox(checked, session, total, balance, toggleHtWallet, toggleGateway)
                   }
