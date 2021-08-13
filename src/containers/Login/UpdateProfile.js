@@ -171,7 +171,6 @@ function UpdateProfile({
           modal: 'updateProfileModal'
         }}
       >
-        {console.log(this.props, skipBirthdateCheck, 'props')}
         <Row display="block" mr="0" ml="0" mb="10px">
           <Div col="12" ta="center">
             <Heading
