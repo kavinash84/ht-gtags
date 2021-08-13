@@ -42,7 +42,7 @@ const Stripes = ({
             </Text>
           </Col>
         ) : null}
-        {warrantyPeriod ? (
+        {warrantyPeriod && warrantyPeriod !== 'None' ? (
           <Col variant="col-2" m="5px auto" px="0" alignItems="center">
             <Image className={styles.pdpStripeIcons} src={Warranty} />
             <Text fontSize=" 10px" lineHeight="13px" textAlign="center">
