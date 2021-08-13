@@ -67,7 +67,7 @@ const Stripes = ({
         {freeInstallation === 'Yes' ? (
           <Col variant="col-2" m="5px auto" px="0" alignItems="center">
             <Image className={styles.pdpStripeIcons} src={freeinstallation} />
-            <Text fontSize="9px" mt="0" ta="center" maxWidth="80px" lineHeight="13px">
+            <Text fontSize="10px" textAlign="center" lineHeight="13px">
               Free Installation
             </Text>
           </Col>
