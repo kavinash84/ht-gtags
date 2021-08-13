@@ -223,7 +223,7 @@ export const validateName = fullName => {
 // };
 
 export const validateDob = dob => {
-  console.log(moment().isSameOrBefore(moment(dob)), 'moment(dob).isSameOrBefore(moment())');
+  // console.log(moment().isSameOrBefore(moment(dob)), 'moment(dob).isSameOrBefore(moment())');
   if (!dob) {
     return {
       msg: 'Date of Birth Cannot be Left Empty !',

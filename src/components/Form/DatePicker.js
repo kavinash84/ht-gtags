@@ -7,21 +7,29 @@ import styles from './Form.module.scss';
 import './Form.module.css';
 
 // FIXME - change it to HTC
-function DatePickerForm({ onChange, ...props }) {
+function DatePickerForm({
+ onChange, dobError, dobErrorMessage, ...props
+}) {
   return (
     <div className={styles.profile_datepicker}>
       <p className={styles.label}>Date of birth *</p>
       <DatePicker {...props} onChange={onChange} />
+      {console.log(dobError, 'dobError')}
+      {dobError ? <p className={styles.error}>{dobErrorMessage}</p> : null}
     </div>
   );
 }
 
 DatePickerForm.propTypes = {
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  dobError: PropTypes.bool,
+  dobErrorMessage: PropTypes.string
 };
 
 DatePickerForm.defaultProps = {
-  onChange: () => {}
+  onChange: () => {},
+  dobError: false,
+  dobErrorMessage: ''
 };
 
 export default DatePickerForm;

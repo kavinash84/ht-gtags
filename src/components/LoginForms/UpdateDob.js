@@ -28,16 +28,18 @@ class UpdateDob extends Component {
   render() {
     const { showDobInput } = this.state;
     const {
-      session,
+      // session,
       // skipBirthdateCheck,
-      birthdateCheck,
+      // birthdateCheck,
       onChangeDob,
       dob,
       dobError,
       dobErrorMessage,
-      loginViaLogin,
+      // loginViaLogin,
       LoaderIcon,
-      loggingIn
+      loggingIn,
+      onSubmitDob,
+      onSkipDob
     } = this.props;
 
     return (
@@ -53,7 +55,15 @@ class UpdateDob extends Component {
             {showDobInput ? (
               <Div>
                 <Div mb="0.625rem">
-                  <DatePicker dateFormat="dd/MM/yyyy" selected={formatDate(dob)} onSelect={onChangeDob} />
+                  <DatePicker
+                    dateFormat="dd/MM/yyyy"
+                    maxDate={new Date()}
+                    showMonthDropdown
+                    showYearDropdown
+                    dropdownMode="select"
+                    selected={formatDate(dob)}
+                    onSelect={onChangeDob}
+                  />
 
                   {dobError && <FeedBackMessage type="error">{dobErrorMessage}</FeedBackMessage>}
                 </Div>
@@ -62,8 +72,9 @@ class UpdateDob extends Component {
                   disabled={dobError}
                   className="google-login-btn"
                   onClick={() => {
-                    const dobValue = moment(dob).format('YYYY-MM-DD');
-                    loginViaLogin({}, session, null, null, dobValue, false);
+                    // const dobValue = moment(dob).format('YYYY-MM-DD');
+                    // loginViaLogin({}, session, null, null, dobValue, false);
+                    onSubmitDob();
                   }}
                 >
                   {loggingIn && <Img className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />}
@@ -83,8 +94,9 @@ class UpdateDob extends Component {
                   style={{ margin: '0 10px' }}
                   className="google-login-btn"
                   onClick={() => {
-                    loginViaLogin({}, session, null, null, null, true);
-                    birthdateCheck(true);
+                    // loginViaLogin({}, session, null, null, null, true);
+                    // birthdateCheck(true);
+                    onSkipDob();
                   }}
                 >
                   No
@@ -123,19 +135,21 @@ class UpdateDob extends Component {
 UpdateDob.defaultProps = {
   dob: '',
   dobErrorMessage: '',
-  session: '',
+  // session: '',
   LoaderIcon: ''
 };
 
 UpdateDob.propTypes = {
-  loginViaLogin: PropTypes.func.isRequired,
+  // loginViaLogin: PropTypes.func.isRequired,
   onChangeDob: PropTypes.func.isRequired,
   loggingIn: PropTypes.bool.isRequired,
   dob: PropTypes.instanceOf(Date),
   dobError: PropTypes.bool.isRequired,
   dobErrorMessage: PropTypes.string,
-  session: PropTypes.string,
-  birthdateCheck: PropTypes.string.isRequired,
+  // session: PropTypes.string,
+  onSubmitDob: PropTypes.func.isRequired,
+  // birthdateCheck: PropTypes.string.isRequired,
+  onSkipDob: PropTypes.func.isRequired,
   LoaderIcon: PropTypes.string
 };
 

@@ -27,13 +27,15 @@ import {
 
 import DatePicker from 'components/Form/DatePicker';
 
-const showDateField = (dob, onChange) => (
+const showDateField = (dob, onChange, dobError, dobErrorMessage) => (
   <DatePicker
     selected={dob}
     onChange={onChange}
     maxDate={new Date()}
     showMonthDropdown
     showYearDropdown
+    dobError={dobError}
+    dobErrorMessage={dobErrorMessage}
     dropdownMode="select"
   />
 );
@@ -185,6 +187,7 @@ export default class ProfileForm extends Component {
   };
   onChangeDob = value => {
     const checkError = value && validateDob(value);
+    console.log(checkError, 'checkError');
     this.setState({
       dob: value,
       dobError: checkError
@@ -193,12 +196,12 @@ export default class ProfileForm extends Component {
   onSubmitProfile = e => {
     e.preventDefault();
     const {
- email, fullName, phone, gst, dob
+ email, fullName, phone, dob
 } = this.state;
     const checkEmail = validateEmail(email, 'Invalid Email');
     const phoneError = !validateMobile(phone);
     const checkFullName = isBlank(fullName) || checkSpecialChar(fullName);
-    const isGSTError = !isGSTNumber(gst);
+    // const isGSTError = !isGSTNumber(gst);
     const checkDob = validateDob(dob);
     if (checkEmail.error || checkFullName || phoneError || checkDob) {
       return this.setState({
@@ -209,8 +212,8 @@ export default class ProfileForm extends Component {
           ? 'Numbers and special characters are not allowed !'
           : 'Name Cannot be Left Empty !',
         phoneError,
-        gstError: isGSTError,
-        gstErrorMessage: 'Please enter a valid GST number !',
+        // gstError: isGSTError,
+        // gstErrorMessage: 'Please enter a valid GST number !',
         dobError: checkDob
       });
     }
@@ -230,7 +233,7 @@ export default class ProfileForm extends Component {
       const dt = new Date(date);
       const mnth = `0${dt.getMonth() + 1}`.slice(-2);
       const day = `0${dt.getDate()}`.slice(-2);
-      newdate = [date.getFullYear(), mnth, day].reverse().join('-');
+      newdate = date ? [date.getFullYear(), mnth, day].reverse().join('-') : '';
     }
     return newdate;
   };
@@ -337,7 +340,7 @@ export default class ProfileForm extends Component {
               onCancelSubmit={() => this.setState({ showEditForm: !showEditForm })}
               onSubmitProfile={this.onSubmitProfile}
               response={response}
-              date={showDateField(dob, this.onChangeDob)}
+              date={showDateField(dob, this.onChangeDob, dobError, dobErrorMessage)}
             />
           </Box>
         ) : null}

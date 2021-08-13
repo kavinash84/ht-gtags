@@ -144,9 +144,18 @@ export class WalletTransactions extends Component {
                 </Text>
               </Div>
               <Div col="3">
-                <Text ta="right" color="red" fontFamily="medium">
+                {/* <Text ta="right" color="red" fontFamily="medium">
                   - ₹ {formatAmount(arr.Amount)}
-                </Text>
+                </Text> */}
+                {arr.TransType === 'Debit' ? (
+                  <Text textAlign="right" color="red" fontFamily="medium">
+                    - ₹ {formatAmount(arr.Amount)}
+                  </Text>
+                ) : (
+                  <Text textAlign="right" color="#21CDA9" fontFamily="medium">
+                    + ₹ {formatAmount(arr.Amount)}
+                  </Text>
+                )}
                 <Text fontSize="0.75rem" color="#999999" ta="right">
                   {formatDate(arr.TransDate)}
                 </Text>

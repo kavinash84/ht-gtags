@@ -91,6 +91,7 @@ class AskBirthDate extends Component {
             <DatePicker
               placeholderText="Enter your date of birth!"
               // dateFormat="dd/MM/yyyy"
+              maxDate={new Date()}
               selected={formatDate(dob)}
               showMonthDropdown
               showYearDropdown
