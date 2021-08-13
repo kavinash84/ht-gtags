@@ -12,15 +12,23 @@ const styles = require('./PdpStripe.scss');
 const Warranty = require('../../../static/pdp-icons/36-months-warranty.png');
 const Emi = require('../../../static/pdp-icons/EMI-icon.png');
 const Safe = require('../../../static/pdp-icons/Free-&-Safe-delivery-icon.png');
-const Noquestion = require('../../../static/pdp-icons/No-questions-asked-returns.png');
+// const Noquestion = require('../../../static/pdp-icons/No-questions-asked-returns.png');
 const ServiceCamp = require('../../../static/pdp-icons/service-camp-icon.png');
+const freeinstallation = require('../../../static/pdp-icons/free-installation.png');
 
 const Stripes = ({
- emi, isEmiAvailable, warrantyPeriod, fkCatalogSupplier, brand, freeVisit, children
+  emi,
+  isEmiAvailable,
+  warrantyPeriod,
+  fkCatalogSupplier,
+  brand,
+  freeVisit,
+  children,
+  freeInstallation
 }) => {
   console.log('fkCatalogSupplier brand', fkCatalogSupplier, brand);
-  const isFurnitureCategory = fkCatalogSupplier === '38';
-  const noQuestionsAsked = isFurnitureCategory && brand === 'HomeTown';
+  // const isFurnitureCategory = fkCatalogSupplier === '38';
+  // const noQuestionsAsked = isFurnitureCategory && brand === 'HomeTown';
   return (
     <Box>
       <Box className={styles.dots} />
@@ -42,21 +50,29 @@ const Stripes = ({
             </Text>
           </Col>
         ) : null}
-        {noQuestionsAsked ? (
+        {/* {noQuestionsAsked ? (
           <Col variant="col-2" m="5px auto" px="0" alignItems="center">
             <Image className={styles.pdpStripeIcons} src={Noquestion} />
             <Text fontSize=" 10px" lineHeight="13px" textAlign="center">
               No Questions asked Cancellation
             </Text>
           </Col>
-        ) : null}
+        ) : null} */}
         <Col variant="col-2" m="5px auto" px="0" alignItems="center">
           <Image className={styles.pdpStripeIcons} src={Safe} />
           <Text fontSize=" 10px" lineHeight="13px" textAlign="center">
             Free and Safe Delivery
           </Text>
         </Col>
-        {freeVisit === 'yes' ? (
+        {freeInstallation === 'Yes' ? (
+          <Col variant="col-2" m="5px auto" px="0" alignItems="center">
+            <Image className={styles.pdpStripeIcons} src={freeinstallation} />
+            <Text fontSize="10px" textAlign="center" lineHeight="13px">
+              Free Installation
+            </Text>
+          </Col>
+        ) : null}
+        {freeVisit === 'Yes' ? (
           <Col variant="col-2" m="5px auto" px="0" alignItems="center">
             <Image className={styles.pdpStripeIcons} src={ServiceCamp} />
             <Text fontSize=" 10px" lineHeight="13px" textAlign="center">
@@ -77,7 +93,8 @@ Stripes.propTypes = {
   isEmiAvailable: PropTypes.bool,
   warrantyPeriod: PropTypes.string,
   children: PropTypes.object.isRequired,
-  freeVisit: PropTypes.string
+  freeVisit: PropTypes.string,
+  freeInstallation: PropTypes.string
 };
 
 Stripes.defaultProps = {
@@ -85,7 +102,8 @@ Stripes.defaultProps = {
   brand: '',
   isEmiAvailable: false,
   warrantyPeriod: '',
-  freeVisit: 'no'
+  freeVisit: 'no',
+  freeInstallation: 'no'
 };
 
 export default Stripes;
