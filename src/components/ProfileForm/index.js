@@ -294,7 +294,7 @@ export default class ProfileForm extends Component {
             <ProfileViewRow title="Phone" value={phone} />
             <ProfileViewRow title="Gender" value={gender} />
             <ProfileViewRow title="Date of Birth" value={this.convertDateYyyy(dob)} />
-            <ProfileViewRow title="Location" value={city} />
+            <ProfileViewRow title="City" value={city} />
           </Box>
         </Box>
         <Box pt={50} pb={20}>

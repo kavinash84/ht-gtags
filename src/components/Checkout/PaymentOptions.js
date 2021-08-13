@@ -54,7 +54,7 @@ import UpiForm from './UpiForm';
 
 import WalletBalance from './WalletBalance';
 
-const styles = require('./Checkout.scss');
+// const styles = require('./Checkout.scss');
 const cartStyles = require('../Cart/Cart.scss');
 
 const nextStep = (
@@ -481,13 +481,6 @@ class PaymentOptions extends Component {
                 <Box className={cartStyles.orderSummaryOverly} />
               </Row>
               <Box width={1} pb={30}>
-                <Label color="text" fontFamily="regular" fontSize="0.75rem" lh="1.5" mb="0.625rem" mt="0">
-                  Cart Subtotal :
-                </Label>
-                <Label className={styles.totalCartPrice} color="textDark" fontWeight="700" fontSize="16px">
-                  {' '}
-                  Rs.{total ? formatAmount(total) : null}
-                </Label>
                 <Button
                   type="default"
                   height={48}

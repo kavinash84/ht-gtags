@@ -37,7 +37,7 @@ class CreateWalletModal extends Component {
               <Heading
                 color="color676767"
                 mt="0"
-                mb="0"
+                mb="20px"
                 fontWeight="400"
                 fontSize="26px"
                 ta="center"
@@ -45,7 +45,7 @@ class CreateWalletModal extends Component {
               >
                 Update Profile
               </Heading>
-              <Text color="color676767" ta="center">
+              <Text color="color676767" ta="center" mb="20px">
                 'Your wallet is not created. Would you like to create a wallet?'
               </Text>
               {sendOtp ? (

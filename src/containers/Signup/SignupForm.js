@@ -21,7 +21,6 @@ import {
   validateEmail,
   isEmpty,
   checkSpecialChar,
-  checkDateOfBirth,
   validateDob
 } from 'utils/validation';
 
@@ -188,11 +187,12 @@ export default class SignupFormContainer extends Component {
       passwordError: checkError.error
     });
   };
-  onChangePolicy = e => {
-    e.preventDefault();
+  onChangePolicy = () => {
+    // e.preventDefault();
     // const {
     //   target: { value }
     // } = e;
+    // console.log('clciked policy');
     this.setState({ policyAccepted: !this.state.policyAccepted });
   };
   onSubmitSignup = otp => {
@@ -216,7 +216,7 @@ export default class SignupFormContainer extends Component {
     const checkPhone = isEmpty(phone) || !validateMobile(phone);
     const checkPassword = validatePassword(password);
     const checkCity = checkSpecialChar(city);
-    const checkDob = checkDateOfBirth(dob);
+    const checkDob = validateDob(dob);
     if (checkName || checkEmail || checkPassword.error || checkPhone || checkDob) {
       return this.setState({
         nameError: checkName,

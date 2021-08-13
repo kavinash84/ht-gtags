@@ -60,7 +60,7 @@ export class MyHomeWallet extends Component {
       <div className="wrapper dummy">
         {/* <Menu /> */}
         <Header />
-        <Row mr={0} ml={0} p="0px 1rem" pt={40} sx={{maxWidth: '1180px'}} m="auto">
+        <Row mr={0} ml={0} p="0px 1rem" pt={40} sx={{ maxWidth: '1180px' }} m="auto">
           <Box width={[3 / 12, 3 / 12, 2 / 12]} pr={30}>
             <MyMenu page="hometownwallet" />
           </Box>
@@ -72,12 +72,12 @@ export class MyHomeWallet extends Component {
                     <Text sx={{ textAlign: 'center' }} mb="1rem" fontSize="2rem">
                       Total Balance
                     </Text>
-                    <Text 
-                      sx={{ textAlign: 'center' }} 
-                      color="orangered" 
-                      mb="1rem" 
-                      mt="0" 
-                      fontFamily="medium" 
+                    <Text
+                      sx={{ textAlign: 'center' }}
+                      color="orangered"
+                      mb="1rem"
+                      mt="0"
+                      fontFamily="medium"
                       fontSize="3rem"
                     >
                       ₹ {formatAmount(balance)}
@@ -108,9 +108,11 @@ export class MyHomeWallet extends Component {
               </Container>
             </Section>
             {/* Mid banner */}
-            <Box mt="2.25rem" mb="1.5rem" sx={{ display: 'flex', justifyContent: 'center' }}>
-              <Image className={styles.midBanner} src={MidBanner} alt="MidBanner" />
-            </Box>
+            {status !== 'success' ? (
+              <Box mt="2.25rem" mb="1.5rem" sx={{ display: 'flex', justifyContent: 'center' }}>
+                <Image className={styles.midBanner} src={MidBanner} alt="MidBanner" />
+              </Box>
+            ) : null}
 
             {/* Transaction history */}
             <Box bg="#F7F7F7">

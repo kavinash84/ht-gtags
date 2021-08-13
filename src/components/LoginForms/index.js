@@ -35,7 +35,7 @@ const LoaderIcon = require('../../../static/refresh-black.svg');
 
 @connect(state => ({
   loginResponse: state.userLogin,
-  askBirthDate: state.userLogin.askBirthDate,
+  askBirthDate: state.userLogin.askBirthDate
 }))
 export default class LoginForm extends Component {
   static propTypes = {
@@ -43,7 +43,7 @@ export default class LoginForm extends Component {
       isLoggedIn: PropTypes.bool.isRequired
     }).isRequired,
     askContact: PropTypes.bool.isRequired,
-    askBirthDate: PropTypes.bool,
+    askBirthDate: PropTypes.bool.isRequired,
     askName: PropTypes.bool.isRequired,
     loginType: PropTypes.string.isRequired,
     loggingIn: PropTypes.bool.isRequired
@@ -172,7 +172,7 @@ export default class LoginForm extends Component {
       nameError: checkError
     });
   };
-  
+
   handleModal = () => {
     const { dispatch } = this.context.store;
     dispatch(clearLoginState());
@@ -231,7 +231,7 @@ export default class LoginForm extends Component {
               <Heading
                 color="color676767"
                 mt="0"
-                mb="0"
+                mb="10px"
                 fontWeight="400"
                 fontSize="26px"
                 ta="center"

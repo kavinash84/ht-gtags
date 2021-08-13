@@ -130,9 +130,11 @@ export default function userMiddleware() {
         dispatch(notifSend({
             type: 'warning',
             msg:
-              (action.error.error_message === 'invalid_grant' && 'Incorrect Email or Password') ||
-              action.error.error_message ||
-              'User Credentials Are Invalid',
+              action.error.error_message === 'Birth Date Does not Exist'
+                ? 'Please update Date of Birth'
+                : (action.error.error_message === 'invalid_grant' && 'Incorrect Email or Password') ||
+                  action.error.error_message ||
+                  'User Credentials Are Invalid',
             dismissAfter: 4000
           }));
         break;

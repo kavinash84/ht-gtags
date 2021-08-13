@@ -90,8 +90,11 @@ class AskBirthDate extends Component {
           <Div mb="0.625rem">
             <DatePicker
               placeholderText="Enter your date of birth!"
-              dateFormat="dd/MM/yyyy"
+              // dateFormat="dd/MM/yyyy"
               selected={formatDate(dob)}
+              showMonthDropdown
+              showYearDropdown
+              dropdownMode="select"
               onSelect={onChangeDob}
             />
 
@@ -168,12 +171,21 @@ function UpdateProfile({
           modal: 'updateProfileModal'
         }}
       >
+        {console.log(this.props, skipBirthdateCheck, 'props')}
         <Row display="block" mr="0" ml="0" mb="10px">
           <Div col="12" ta="center">
-            <Heading color="color676767" mt="0" mb="0" fontWeight="400" fontSize="26px" ta="center" fontFamily="light">
+            <Heading
+              color="color676767"
+              mt="0"
+              mb="20px"
+              fontWeight="400"
+              fontSize="26px"
+              ta="center"
+              fontFamily="light"
+            >
               Update Profile
             </Heading>
-            <Text color="color676767" ta="center">
+            <Text color="color676767" ta="center" mb={20}>
               <Title askName={askName} askContact={askContact} askBirthDate={askBirthDate} />
             </Text>
           </Div>
