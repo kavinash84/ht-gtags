@@ -43,10 +43,10 @@ class CreateWalletModal extends Component {
                 ta="center"
                 fontFamily="light"
               >
-                Update Profile
+                HomeTown Wallet
               </Heading>
-              <Text color="color676767" ta="center" mb="20px">
-                'Your wallet is not created. Would you like to create a wallet?'
+              <Text color="color676767" ta="center">
+                'Would you like to create a wallet?'
               </Text>
               {sendOtp ? (
                 <Div>
