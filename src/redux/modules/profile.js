@@ -24,6 +24,7 @@ const LINK_FUTURE_PAY_SUCCESS = 'profile/LINK_FUTURE_PAY_SUCCESS';
 const LINK_FUTURE_PAY_FAIL = 'profile/LINK_FUTURE_PAY_FAIL';
 const SET_FUTURE_PAY_STATUS = 'profile/SET_FUTURE_PAY_STATUS';
 const CLEAR_PROFILE = 'profile/CLEAR_PROFILE';
+const CLEAR_TRANSACTION_HISTORY = 'profile/CLEAR_TRANSACTION_HISTORY';
 
 const initialState = {
   loading: false,
@@ -143,6 +144,11 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...initialState
       };
+      case CLEAR_TRANSACTION_HISTORY:
+        return {
+          ...state,
+          transactionHistory: []
+        };
     default:
       return state;
   }
@@ -214,4 +220,8 @@ export const setFuturePayStatus = status => ({
 export const linkFuturePay = data => ({
   types: [LINK_FUTURE_PAY, LINK_FUTURE_PAY_SUCCESS, LINK_FUTURE_PAY_FAIL],
   promise: async ({ client }) => client.post(LINK_FUTURE_PAY_API, data)
+});
+
+export const clearTransactionHistory = () => ({
+  type: CLEAR_TRANSACTION_HISTORY
 });

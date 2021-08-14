@@ -82,9 +82,6 @@ export class MyHomeWallet extends Component {
                     >
                       ₹ {formatAmount(balance)}
                     </Text>
-                    <Text sx={{ textAlign: 'center' }} mb="0.625rem" mt="0.625rem" fontSize="1.5rem">
-                      Max limit: ₹ {formatAmount(limit)}
-                    </Text>
                   </Box>
                 ) : (
                   <Box mt={60} sx={{ display: 'flex', justifyContent: 'center' }}>

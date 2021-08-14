@@ -5,7 +5,7 @@ import moment from 'moment';
 import DatePicker from 'react-datepicker';
 
 // redux
-import { getTransactionHistory as load } from 'redux/modules/profile';
+import { getTransactionHistory as load, clearTransactionHistory } from 'redux/modules/profile';
 
 // selectors - utils
 import { getTransactionHistory } from 'selectors/userprofile';
@@ -68,12 +68,22 @@ export class WalletTransactions extends Component {
     this.setState({
       toDate: value
     });
+    const { dispatch } = this.context.store;
+    const { fromDate } = this.state;
+    if (fromDate) {
+      dispatch(clearTransactionHistory());
+  }
   };
 
   onChangeFromDate = value => {
     this.setState({
       fromDate: value
     });
+    const { dispatch } = this.context.store;
+    const { toDate } = this.state;
+    if (toDate) {
+    dispatch(clearTransactionHistory());
+  }
   };
 
   getTransaction = (e, pageNo) => {
@@ -127,7 +137,7 @@ export class WalletTransactions extends Component {
               borderRadius="5px"
               onClick={e => this.getTransaction(e, pageNo)}
             >
-              <Image width={20} height={10} src={RightArrowRed} alt="Find" />
+              <Image width={20} height={10} src={RightArrow} alt="Find" />
             </Button>
           </Div>
         </Row>

@@ -13,6 +13,7 @@ import Text from 'hometown-components-dev/lib/TextHtV1';
 import { setHtWallet, setFuturePayAmount, setSelectedGateway } from 'redux/modules/paymentoptions';
 import { getFuturePayProfile } from 'selectors/userprofile';
 import { PAYMENT_SUCCESS, PAYMENT_FAILURE } from 'helpers/Constants';
+import { formatAmount } from 'utils/formatters';
 
 const styles = require('./walletBalance.scss');
 
@@ -153,7 +154,7 @@ class WalletBalance extends Component {
         </Text>
         <Text ta="center" fontSize="24px" fontWeight="bold">
           <span>₹ </span>
-          {balance || 0}
+          {formatAmount(balance) || 0}
         </Text>
 
         {parseInt(balance) ? (
