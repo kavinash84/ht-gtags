@@ -102,15 +102,9 @@ class WalletBalance extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props && this.props.futurePay) {
-      const {
-        futurePay: {
-          futurePay: { status }
-        },
-        history
-      } = this.props;
-
-      if (status === 'success') {
+    if (this.props && this.props.futurePay && this.props.futurePay.futurePay) {
+      const { futurePay, history } = this.props;
+      if (futurePay.futurePay.status === 'success') {
         history.push(PAYMENT_SUCCESS);
       } else {
         history.push(PAYMENT_FAILURE);

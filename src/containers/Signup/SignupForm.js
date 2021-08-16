@@ -53,15 +53,22 @@ const EmailIcon = require('../../../static/email-primary.svg');
 //   return true;
 // };
 
-const showDateField = (dob, onChange) => (
-  <DatePicker
-    selected={dob}
-    onChange={onChange}
-    maxDate={new Date()}
-    showMonthDropdown
-    showYearDropdown
-    dropdownMode="select"
-  />
+const showDateField = (dob, onChange, dobError, dobErrorMessage) => (
+  <Box>
+    <DatePicker
+      selected={dob}
+      onChange={onChange}
+      maxDate={new Date()}
+      showMonthDropdown
+      showYearDropdown
+      dropdownMode="select"
+    />
+    {dobError ? (
+      <Text color="#dc3545" fontSize="12px" mt={0} mb={10}>
+        {dobErrorMessage}
+      </Text>
+    ) : null}
+  </Box>
 );
 
 @connect(({ userSignUp, app }) => ({
@@ -188,20 +195,9 @@ export default class SignupFormContainer extends Component {
     });
   };
   onChangePolicy = () => {
-    // e.preventDefault();
-    // const {
-    //   target: { value }
-    // } = e;
-    // console.log('clciked policy');
     this.setState({ policyAccepted: !this.state.policyAccepted });
   };
   onSubmitSignup = otp => {
-    // e.preventDefault();
-    // const {
-    //   target: { action }
-    // } = e;
-    // const isRedirect = action ? action.indexOf('redirect') !== -1 : false;
-    // const signupOrigin = isRedirect ? 'Top Nav' : 'Pop-up';
     const {
       name,
       email,
@@ -403,10 +399,10 @@ export default class SignupFormContainer extends Component {
                 signUpResponse={signUpResponse}
                 loginUrl={LOGIN_URL}
                 phonemandatory
-                date={showDateField(dob, this.onChangeDob)}
+                date={showDateField(dob, this.onChangeDob, dobError ? dobError.error : dobError, dobErrorMessage)}
                 // dobFeedBackMessage={dobErrorMessage}
                 // dobFeedBackError={dobError}
-                dobFeedBackError={dobError}
+                dobFeedBackError={dobError ? dobError.error : dobError}
                 dobFeedBackMessage={dobErrorMessage}
                 gender={gender}
                 genderFeedBackError={genderError}

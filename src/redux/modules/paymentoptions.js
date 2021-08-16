@@ -45,7 +45,7 @@ const SUBMIT_PAYMENT_DETAILS_FUTURE_PAY_FAIL = 'paymentOptions/SUBMIT_PAYMENT_DE
 
 const paymentJSON = {
   session_id: '',
-  future_pay_redeeem_amount: '',
+  future_pay_redeem_amount: '',
   isPayFromHTWallet: '',
   payment_method_type: '',
   payment_method: '',
@@ -360,7 +360,8 @@ const initialState = {
   isPayFromHtWallet: 0,
   bflMinAmount: 25000,
   submitting: false,
-  submitted: false
+  submitted: false,
+  futurePay: {}
 };
 
 const appendData = (gateway, state, data) => {
@@ -421,7 +422,8 @@ export default function reducer(state = initialState, action = {}) {
         loading: false,
         loaded: true,
         data: emiZero(action.result, action.cart),
-        selectedGateway: getSelectedGateway(action.result)
+        selectedGateway: getSelectedGateway(action.result),
+        futurePay: {}
       };
     case LOAD_FAIL:
       return {

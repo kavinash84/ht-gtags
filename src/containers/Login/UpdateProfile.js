@@ -32,7 +32,7 @@ const Title = ({ askName, askContact, askBirthDate }) => {
   else if (askBirthDate) text = 'Your wallet is not created. Would you like to create a wallet?';
 
   return (
-    <Text color="color676767" ta="center">
+    <Text color="color676767" textAlign="center">
       {text}
     </Text>
   );
@@ -87,6 +87,9 @@ class AskBirthDate extends Component {
     if (showDobInput) {
       return (
         <Div>
+          <Text color="color676767" textAlign="center" mb={20}>
+            Pleasse Update Date of Birth
+          </Text>
           <Div mb="0.625rem">
             <DatePicker
               placeholderText="Enter your date of birth!"
@@ -173,25 +176,25 @@ function UpdateProfile({
         }}
       >
         <Row display="block" mr="0" ml="0" mb="10px">
-          <Div col="12" ta="center">
+          <Div col="12" textAlign="center">
             <Heading
               color="color676767"
               mt="0"
               mb="20px"
               fontWeight="400"
               fontSize="26px"
-              ta="center"
+              textAlign="center"
               fontFamily="light"
             >
               Update Profile
             </Heading>
-            <Text color="color676767" ta="center" mb={20}>
+            <Text color="color676767" textAlign="center" mb={20}>
               <Title askName={askName} askContact={askContact} askBirthDate={askBirthDate} />
             </Text>
           </Div>
         </Row>
-        <Div ta="center">
-          <Text ta="center" fontSize="1.25rem" mb="0.625rem" mt="0" color="rgba(51, 51, 51, 0.85)">
+        <Div textAlign="center">
+          <Text textAlign="center" fontSize="1.25rem" mb="0.625rem" mt="0" color="rgba(51, 51, 51, 0.85)">
             <form
               onSubmit={onSubmitLogin}
               id="custom_form"
