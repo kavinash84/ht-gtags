@@ -386,6 +386,8 @@ export default class LoginFormContainer extends Component {
       mobilesubmitted: false,
       email: '',
       password: '',
+      otp: '',
+      otpError: false
     });
     dispatch(clearLoginState());
   };

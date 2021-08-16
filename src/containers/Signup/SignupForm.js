@@ -266,7 +266,14 @@ export default class SignupFormContainer extends Component {
         dobError: checkDob
       });
     }
-    this.handleModal();
+    const myBirthday = new Date(dob);
+    const currentDate = `${new Date().toJSON().slice(0, 10)} 01:00:00`;
+    const myAge = Math.floor((Date.now(currentDate) - myBirthday) / 31557600000);
+    if (myAge > 18) {
+      this.handleModal();
+    } else {
+      this.onSubmitSignup();
+    }
   };
 
   handleModal = () => {

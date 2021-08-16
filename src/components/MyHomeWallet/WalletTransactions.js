@@ -16,14 +16,14 @@ import Row from 'hometown-components-dev/lib/RowHtV1';
 import Div from 'hometown-components-dev/lib/BoxHtV1';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
-import Image from 'hometown-components-dev/lib/ImageHtV1';
+// import Image from 'hometown-components-dev/lib/ImageHtV1';
 import 'react-datepicker/dist/react-datepicker.css';
 import './datepicker.css';
 
 const styles = require('./index.scss');
 
-const RightArrowRed = require('../../../static/arrow_forward_red.svg');
-const RightArrow = require('../../../static/forward-arrow.svg');
+// const RightArrowRed = require('../../../static/arrow_forward_red.svg');
+// const RightArrow = require('../../../static/forward-arrow.svg');
 
 const formatDate = date => moment(date, 'DD-MM-YYYY h:mm:ss').format('DD/MM/YYYY');
 
@@ -64,6 +64,11 @@ export class WalletTransactions extends Component {
     pageNo: 1
   };
 
+  componentDidMount() {
+    const { dispatch } = this.context.store;
+    dispatch(clearTransactionHistory());
+  }
+
   onChangeToDate = value => {
     this.setState({
       toDate: value
@@ -72,7 +77,7 @@ export class WalletTransactions extends Component {
     const { fromDate } = this.state;
     if (fromDate) {
       dispatch(clearTransactionHistory());
-  }
+    }
   };
 
   onChangeFromDate = value => {
@@ -82,17 +87,17 @@ export class WalletTransactions extends Component {
     const { dispatch } = this.context.store;
     const { toDate } = this.state;
     if (toDate) {
-    dispatch(clearTransactionHistory());
-  }
+      dispatch(clearTransactionHistory());
+    }
   };
 
-  getTransaction = (e, pageNo) => {
+  getTransaction = (e, pageNo, clearList) => {
     e.preventDefault();
     const { dispatch } = this.context.store;
     const { toDate, fromDate, count } = this.state;
 
     this.setState({ pageNo });
-
+    if (clearList) dispatch(clearTransactionHistory());
     dispatch(load({
         toDate: moment(toDate).format('DD/MM/YYYY'),
         fromDate: moment(fromDate).format('DD/MM/YYYY'),
@@ -135,9 +140,10 @@ export class WalletTransactions extends Component {
               className={styles.searchTransactions}
               disabled={validateDate(toDate, fromDate)}
               borderRadius="5px"
-              onClick={e => this.getTransaction(e, pageNo)}
+              onClick={e => this.getTransaction(e, pageNo, true)}
             >
-              <Image width={20} height={10} src={RightArrow} alt="Find" />
+              {/* <Image width={20} height={10} src={RightArrow} alt="Find" /> */}
+              GO
             </Button>
           </Div>
         </Row>
@@ -146,7 +152,7 @@ export class WalletTransactions extends Component {
 
         {history.length ? (
           history.map(arr => (
-            <Row key={arr.ID} m="1rem 0" bg="white" p="0.625rem">
+            <Row key={arr.ID} m="1rem 0" bg="white" p="0.625rem" justifyContent="space-between">
               <Div col="9">
                 <Text>{arr.WalletOwner}</Text>
                 <Text fontSize="0.75rem" color="#999999">
@@ -179,11 +185,20 @@ export class WalletTransactions extends Component {
         )}
 
         {hasMoreTrans ? (
-          <Div>
-            <Row justifyContent="center" alignItems="center" onClick={e => this.getTransaction(e, 1 + pageNo)}>
-              <Text fontFamily="medium">SHOW MORE</Text>
-              <Image src={RightArrow} alt="Find" ml="5px" height="10px" width="20px" />
-            </Row>
+          <Div style={{ display: 'flex' }}>
+            <Button m="auto">
+              <Row
+                justifyContent="center"
+                alignItems="center"
+                p="0px 1rem"
+                onClick={e => this.getTransaction(e, 1 + pageNo, false)}
+              >
+                <Text fontFamily="medium" color="white">
+                  SHOW MORE
+                </Text>
+                {/* <Image src={RightArrow} alt="Find" ml="5px" height="10px" width="20px" /> */}
+              </Row>
+            </Button>
           </Div>
         ) : null}
       </div>
