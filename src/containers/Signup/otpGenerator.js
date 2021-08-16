@@ -7,7 +7,8 @@ import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { getOtp, resendOtp } from 'redux/modules/login';
+// import { getOtp, resendOtp } from 'redux/modules/login';
+import { getOtpfromSignUp, resendOtpfromSignUp } from 'redux/modules/login';
 import { allowNChar, allowTypeOf } from 'utils/helper';
 
 @connect(({ userLogin }) => ({
@@ -31,7 +32,7 @@ export default class OtpGenerator extends React.Component {
 
   componentDidMount() {
     const { dispatch } = this.context.store;
-    dispatch(getOtp(this.props.mobile));
+    dispatch(getOtpfromSignUp(this.props.mobile));
     this.resendTimer();
   }
 
@@ -91,7 +92,7 @@ export default class OtpGenerator extends React.Component {
       resend: true
     });
     const { dispatch } = this.context.store;
-    dispatch(resendOtp(this.props.mobile));
+    dispatch(resendOtpfromSignUp(this.props.mobile));
   };
 
   resendTimer = () => {
@@ -123,7 +124,7 @@ export default class OtpGenerator extends React.Component {
             lh="1.5"
             fontFamily="light"
           >
-            We've sent an otp to your registered mobile
+            We've sent an otp to your mobile
           </Heading>
           <Div ta="center">
             <form onSubmit={this.onSubmitOtp}>

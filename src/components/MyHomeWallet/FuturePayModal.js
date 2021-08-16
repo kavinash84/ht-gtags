@@ -20,7 +20,8 @@ import { validateMobile } from 'utils/validation';
   loginViaOtp: userLogin.otpSent,
   getotpErrorMessage: userLogin.getotpErrorMessage,
   otpSent: userLogin.otpSent,
-  skipBirthdateCheck: userLogin.skipBirthdateCheck
+  skipBirthdateCheck: userLogin.skipBirthdateCheck,
+  askBirthDate: userLogin.askBirthDate
 }))
 export default class FuturePayModal extends React.Component {
   static contextTypes = {
@@ -33,7 +34,8 @@ export default class FuturePayModal extends React.Component {
     resend: false,
     resendtimer: 30,
     timerref: '',
-    loginViaOtp: this.props.loginViaOtp
+    loginViaOtp: this.props.loginViaOtp,
+    showConfirmationModal: false
   };
 
   componentDidMount() {
@@ -41,18 +43,27 @@ export default class FuturePayModal extends React.Component {
       profile: { mobile = 0 },
       setFuturePayStatus,
       skipBirthdateCheck,
-      loginViaOtp
+      loginViaOtp,
+      askBirthDate
     } = this.props;
+    /* eslint-disable */
     if (this.props.setFuturePayStatus) {
       const { dispatch } = this.context.store;
-
       if (loginViaOtp && setFuturePayStatus && !skipBirthdateCheck) {
         // If login is via otp
-        console.log('All values true, linking wallet');
-        dispatch(linkFuturePay({ skipOtpValidation: true }));
+        if (askBirthDate) {
+          dispatch(linkFuturePay({ skipOtpValidation: true }));
+        } else {
+          this.setState({ showConfirmationModal: true });
+        }
       } else if (setFuturePayStatus && !skipBirthdateCheck) {
         // If login via google/email
-        dispatch(getOtp(mobile));
+        if (askBirthDate) {
+          dispatch(getOtp(mobile));
+        } else {
+          this.setState({ showConfirmationModal: true });
+        }
+        console.log('askBirthDateaskBirthDate', askBirthDate);
       }
     }
   }
@@ -132,6 +143,11 @@ export default class FuturePayModal extends React.Component {
       mobilesubmitted: false,
       resend: true
     });
+    const { dispatch } = this.context.store;
+    const {
+      profile: { mobile = 0 }
+    } = this.props;
+    dispatch(resendOtp(mobile));
   };
 
   createWallet = mobile => e => {
@@ -143,14 +159,36 @@ export default class FuturePayModal extends React.Component {
     }
     dispatch(getOtp(mobile));
   };
+  handleYes = () => {
+    this.setState({ showConfirmationModal: false });
+    const { dispatch } = this.context.store;
+    const {
+      profile: { mobile = 0 }
+    } = this.props;
+    dispatch(getOtp(mobile));
+  };
+
+  handleNo = () => {
+    this.setState({ showConfirmationModal: false });
+    this.handleModal();
+  };
+
+  handleOTPYes = () => {
+    this.setState({ showConfirmationModal: false });
+    const { dispatch } = this.context.store;
+    dispatch(linkFuturePay({ skipOtpValidation: true }));
+  };
 
   render() {
     const { setFuturePayStatus, loggingIn, skipBirthdateCheck } = this.props;
     const {
- otp, otpError, otpErrorMessage, resend, resendtimer, loginViaOtp
+ otp, otpError, otpErrorMessage, resend, resendtimer, loginViaOtp, showConfirmationModal
 } = this.state;
     const walletNotCreated = !skipBirthdateCheck && setFuturePayStatus;
     const open = walletNotCreated && !loginViaOtp;
+
+    const openLoginViaOtp = loginViaOtp && showConfirmationModal && setFuturePayStatus;
+
     return (
       <div>
         <ResponsiveModal
@@ -160,6 +198,95 @@ export default class FuturePayModal extends React.Component {
           }}
           onCloseModal={this.handleModal}
           open={open}
+        >
+          {showConfirmationModal ? (
+            <Div>
+              <Heading
+                ellipsis={false}
+                color="rgba(0.0.0.0.8)"
+                ta="center"
+                fontSize="1.125rem"
+                mb="1rem"
+                mt="1rem"
+                lh="1.5"
+                fontFamily="light"
+              >
+                Your wallet is not created would you like to create it?
+              </Heading>
+              <Div style={{ display: 'flex' }}>
+                <button style={{ margin: '0 10px' }} className="google-login-btn" onClick={() => this.handleYes()}>
+                  Yes
+                </button>
+                <button style={{ margin: '0 10px' }} className="google-login-btn" onClick={() => this.handleNo()}>
+                  No
+                </button>
+              </Div>
+            </Div>
+          ) : (
+            <Div>
+              <Heading
+                ellipsis={false}
+                color="rgba(0.0.0.0.8)"
+                ta="center"
+                fontSize="1.125rem"
+                mb="1rem"
+                mt="1rem"
+                lh="1.5"
+                fontFamily="light"
+              >
+                We've sent an otp to your registered mobile
+              </Heading>
+              <Div ta="center">
+                <form onSubmit={this.onSubmitOtp}>
+                  <FormInput
+                    label="OTP"
+                    onChange={this.onChangeOtp}
+                    value={otp}
+                    type="text"
+                    placeholder="******"
+                    feedBackError={otpError}
+                    feedBackMessage={otpErrorMessage}
+                  />
+                  <Button
+                    btnType="primary"
+                    size="block"
+                    boder="solid 1px rgba(151,151,151,0.47)"
+                    fontFamily="regular"
+                    height="38px"
+                    mt="0"
+                    ml="-1px"
+                    onClick={this.onSubmitOtp}
+                    disabled={loggingIn}
+                  >
+                    SUBMIT
+                  </Button>
+                </form>
+                {!resend && (
+                  <Button
+                    boder="solid 1px rgba(151,151,151,0.47)"
+                    fontFamily="regular"
+                    height="30px"
+                    mt="5px"
+                    ml="-1px"
+                    pt="0"
+                    pb="0"
+                    onClick={this.handleResend}
+                    disabled={resendtimer > 0}
+                  >
+                    RESEND OTP {resendtimer > 0 ? resendtimer : ''}
+                  </Button>
+                )}
+              </Div>
+            </Div>
+          )}
+        </ResponsiveModal>
+        <ResponsiveModal
+          classNames={{
+            overlay: 'futurePayModalModal',
+            modal: 'futurePayModal'
+          }}
+          onCloseModal={this.handleModal}
+          open={openLoginViaOtp}
         >
           <Div>
             <Heading
@@ -172,48 +299,15 @@ export default class FuturePayModal extends React.Component {
               lh="1.5"
               fontFamily="light"
             >
-              We've sent an otp to your registered mobile
+              Your wallet is not created would you like to create it?
             </Heading>
-            <Div ta="center">
-              <form onSubmit={this.onSubmitOtp}>
-                <FormInput
-                  label="OTP"
-                  onChange={this.onChangeOtp}
-                  value={otp}
-                  type="text"
-                  placeholder="******"
-                  feedBackError={otpError}
-                  feedBackMessage={otpErrorMessage}
-                />
-                <Button
-                  btnType="primary"
-                  size="block"
-                  boder="solid 1px rgba(151,151,151,0.47)"
-                  fontFamily="regular"
-                  height="38px"
-                  mt="0"
-                  ml="-1px"
-                  onClick={this.onSubmitOtp}
-                  disabled={loggingIn}
-                >
-                  SUBMIT
-                </Button>
-              </form>
-              {!resend && (
-                <Button
-                  boder="solid 1px rgba(151,151,151,0.47)"
-                  fontFamily="regular"
-                  height="30px"
-                  mt="5px"
-                  ml="-1px"
-                  pt="0"
-                  pb="0"
-                  onClick={this.handleResend}
-                  disabled={resendtimer > 0}
-                >
-                  RESEND OTP {resendtimer > 0 ? resendtimer : ''}
-                </Button>
-              )}
+            <Div style={{ display: 'flex' }}>
+              <button style={{ margin: '0 10px' }} className="google-login-btn" onClick={() => this.handleOTPYes()}>
+                Yes
+              </button>
+              <button style={{ margin: '0 10px' }} className="google-login-btn" onClick={() => this.handleNo()}>
+                No
+              </button>
             </Div>
           </Div>
         </ResponsiveModal>
@@ -230,7 +324,8 @@ FuturePayModal.propTypes = {
   getotpErrorMessage: PropTypes.string,
   otpSent: PropTypes.bool,
   profile: PropTypes.object,
-  loginViaOtp: PropTypes.bool
+  loginViaOtp: PropTypes.bool,
+  askBirthDate: PropTypes.bool,
 };
 
 FuturePayModal.defaultProps = {
@@ -241,5 +336,6 @@ FuturePayModal.defaultProps = {
   getotpErrorMessage: '',
   otpSent: false,
   loginViaOtp: false,
+  askBirthDate: false,
   profile: { mobile: '' }
 };

@@ -383,7 +383,9 @@ export default class LoginFormContainer extends Component {
     this.setState({
       loginviaotp: !this.state.loginviaotp,
       resend: false,
-      mobilesubmitted: false
+      mobilesubmitted: false,
+      email: '',
+      password: '',
     });
     dispatch(clearLoginState());
   };

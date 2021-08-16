@@ -19,6 +19,8 @@ export const GOOGLE_LOGIN = 'tesla/authentication/login/google';
 export const LOGOUT = 'tesla/users/logout';
 export const OTP = 'tesla/otp';
 export const RESEND_OTP = 'tesla/otp/resend';
+export const SIGNUP_OTP = '/tesla/otp/send-otp-wallet';
+export const RESEND_SIGNUP_OTP = '';
 
 /* Account */
 export const USERPROFILE = 'tesla/users/details';
