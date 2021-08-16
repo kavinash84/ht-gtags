@@ -223,13 +223,14 @@ export default class ProfileForm extends Component {
   };
   convertDateYyyy = date => {
     let newdate = '';
-    if (date !== '' || date !== 'undefined' || date !== 'Invalid date') {
+    if (date !== '' || date !== 'undefined' || date !== 'Invalid Date') {
       // newdate = date.split('-');
       // if (newdate[0].length === 4) {
       //   newdate = newdate.reverse().join('-');
       // } else {
       //   newdate = date;
       // }
+      console.log(date, 'date');
       const dt = new Date(date);
       const mnth = `0${dt.getMonth() + 1}`.slice(-2);
       const day = `0${dt.getDate()}`.slice(-2);
@@ -275,8 +276,11 @@ export default class ProfileForm extends Component {
       cityErrorMessage,
       showEditForm
     } = this.state;
-    const { response } = this.props;
-    // console.log(dob, 'dob');
+    const { response, profile } = this.props;
+    // console.log(dob, (dob == 'Invalid Date'), typeof(dob), 'dob');
+    const today = new Date();
+    const validDob = dob == 'Invalid Date' ? today : dob;
+    console.log(validDob, 'validDob');
     return (
       <Box>
         <Box>
@@ -296,7 +300,7 @@ export default class ProfileForm extends Component {
             <ProfileViewRow title="E-mail-ID" value={email} />
             <ProfileViewRow title="Phone" value={phone} />
             <ProfileViewRow title="Gender" value={gender} />
-            <ProfileViewRow title="Date of Birth" value={this.convertDateYyyy(dob)} />
+            <ProfileViewRow title="Date of Birth" value={profile.dob} />
             <ProfileViewRow title="City" value={city} />
           </Box>
         </Box>
@@ -340,7 +344,7 @@ export default class ProfileForm extends Component {
               onCancelSubmit={() => this.setState({ showEditForm: !showEditForm })}
               onSubmitProfile={this.onSubmitProfile}
               response={response}
-              date={showDateField(dob, this.onChangeDob, dobError, dobErrorMessage)}
+              date={showDateField(validDob, this.onChangeDob, dobError, dobErrorMessage)}
             />
           </Box>
         ) : null}

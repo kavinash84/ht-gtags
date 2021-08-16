@@ -14,7 +14,6 @@ function DatePickerForm({
     <div className={styles.profile_datepicker}>
       <p className={styles.label}>Date of birth *</p>
       <DatePicker {...props} onChange={onChange} />
-      {console.log(dobError, 'dobError')}
       {dobError ? <p className={styles.error}>{dobErrorMessage}</p> : null}
     </div>
   );
