@@ -73,12 +73,12 @@ input[type='file'] {
   display: block;
   width: 100%;
   height: 38px !important;
-  font-size: 0.875em;
-  border-radius: 2px !important;
+  font-size: 14px;
+  border-radius: 3px !important;
   font-size: 14px;
   padding-left: 10px;
   background-color: #fff;
-  border: 1px solid rgba(151, 151, 151, 0.47);
+  border: 1px solid rgb(159, 155, 146);
 }
 .react-datepicker-popper {
   z-index: 1001 !important;
