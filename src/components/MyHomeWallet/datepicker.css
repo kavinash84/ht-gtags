@@ -15,9 +15,9 @@
   display: block;
   width: 105px;
   height: 38px !important;
-  border-radius: 2px;
+  border-radius: 3px !important;
   background-color: #fff;
-  border: 1px solid rgba(151, 151, 151, 0.47);
-  font-size: 0.875em;
+  border: 1px solid rgb(159, 155, 146);
+  font-size: 14px;
   border-radius: 2px !important;
 }
