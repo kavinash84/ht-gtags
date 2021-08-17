@@ -22,7 +22,7 @@ import WalletTransactions from 'components/MyHomeWallet/WalletTransactions';
 import FuturePayModal from 'components/MyHomeWallet/FuturePayModal';
 
 import { getFuturePayProfile } from 'selectors/userprofile';
-import { setFuturePayStatus as toggleFuturePayModal } from 'redux/modules/profile';
+import { setFuturePayStatus as toggleFuturePayModal, loadUserProfile } from 'redux/modules/profile';
 import { birthdateCheck } from 'redux/modules/login';
 import { formatAmount } from 'utils/formatters';
 import Row from 'hometown-components-dev/lib/RowHtV1';
@@ -52,9 +52,14 @@ export class MyHomeWallet extends Component {
     futurPayProfile: { AvailableBalance: 0, TopUpBalance: 0, status: false }
   };
 
+  componentDidMount() {
+    const { dispatch } = this.context.store;
+    dispatch(loadUserProfile());
+  }
+
   render() {
     const {
-      futurPayProfile: { AvailableBalance: balance, TopUpBalance: limit, status }
+      futurPayProfile: { AvailableBalance: balance, status }
     } = this.props;
     return (
       <div className="wrapper dummy">
