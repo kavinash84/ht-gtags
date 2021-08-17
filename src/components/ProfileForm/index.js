@@ -187,7 +187,6 @@ export default class ProfileForm extends Component {
   };
   onChangeDob = value => {
     const checkError = value && validateDob(value);
-    console.log(checkError, 'checkError');
     this.setState({
       dob: value,
       dobError: checkError
@@ -218,19 +217,15 @@ export default class ProfileForm extends Component {
       });
     }
     const { dispatch } = this.context.store;
-    // console.log(dob, 'Dob on submit%%%%%%');
-    dispatch(updateUserProfile(this.state));
+    const data = {
+      ...this.state,
+      dob: dob ? moment(dob, 'DD-MM-YYYY').format('YYYY-MM-DD') : ''
+    };
+    dispatch(updateUserProfile(data));
   };
   convertDateYyyy = date => {
     let newdate = '';
     if (date !== '' || date !== 'undefined' || date !== 'Invalid Date') {
-      // newdate = date.split('-');
-      // if (newdate[0].length === 4) {
-      //   newdate = newdate.reverse().join('-');
-      // } else {
-      //   newdate = date;
-      // }
-      console.log(date, 'date');
       const dt = new Date(date);
       const mnth = `0${dt.getMonth() + 1}`.slice(-2);
       const day = `0${dt.getDate()}`.slice(-2);
@@ -277,10 +272,8 @@ export default class ProfileForm extends Component {
       showEditForm
     } = this.state;
     const { response, profile } = this.props;
-    // console.log(dob, (dob == 'Invalid Date'), typeof(dob), 'dob');
     const today = new Date();
     const validDob = dob == 'Invalid Date' ? today : dob;
-    console.log(validDob, 'validDob');
     return (
       <Box>
         <Box>
