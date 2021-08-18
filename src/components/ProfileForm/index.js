@@ -190,11 +190,11 @@ export default class ProfileForm extends Component {
     const {
       profile: { wallet_created: walletCreationStatus }
     } = this.props;
-    if (walletCreationStatus) {
+    if (walletCreationStatus === "1") {
       const newDob = new Date(value);
       const currentDate = `${new Date().toJSON().slice(0, 10)} 01:00:00`;
       const myAge = Math.floor((Date.now(currentDate) - newDob) / 31557600000);
-      if (myAge > 18) {
+      if (myAge > 10) {
         this.setState({
           dob: value,
           dobError: checkError

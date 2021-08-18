@@ -15,7 +15,6 @@ import { FeedBackMessage } from 'hometown-components-dev/lib/LabelHtV1';
 import DatePicker from 'components/Form/DatePicker';
 
 const formatDate = date => {
-  console.log({ date }, 'inside formate date');
   if (date) {
     return moment(date, 'YYYY-MM-DD').toDate();
   }
@@ -64,8 +63,11 @@ class UpdateDob extends Component {
                     selected={formatDate(dob)}
                     onSelect={onChangeDob}
                   />
-
-                  {dobError && <FeedBackMessage type="error">{dobErrorMessage}</FeedBackMessage>}
+                  {dobError && (
+                    <Text mt={10} color="red" fontSize="12px">
+                      {dobErrorMessage}
+                    </Text>
+                  )}
                 </Div>
                 <button
                   style={dobError ? { backgroundColor: 'grey' } : { backgroundColor: '#f98d29' }}

@@ -166,7 +166,16 @@ export default class FuturePayModal extends React.Component {
     const {
       profile: { mobile = 0 }
     } = this.props;
-    dispatch(getOtp(mobile));
+    const newDob = new Date(dob);
+    const currentDate = `${new Date().toJSON().slice(0, 10)} 01:00:00`;
+    const myAge = Math.floor((Date.now(currentDate) - newDob) / 31557600000);
+    if (myAge > 10) {
+      this.setState({ showConfirmationModal: false, ageError: false });
+      // const { dispatch } = this.context.store;
+      dispatch(getOtp(mobile));
+    } else {
+      this.setState({ ageError: true });
+    }
   };
 
   handleNo = () => {
@@ -238,6 +247,11 @@ export default class FuturePayModal extends React.Component {
                   No
                 </button>
               </Div>
+              {ageError ? (
+              <Text mt={10} textAlign="center" color="red" fontSize="14px">
+                User should be atleast 10 years old to create wallet.
+              </Text>
+            ) : null}
             </Div>
           ) : (
             <Div>
@@ -328,7 +342,7 @@ export default class FuturePayModal extends React.Component {
             </Div>
             {ageError ? (
               <Text mt={10} textAlign="center" color="red" fontSize="14px">
-                User should be atleast 10 years old to create wallet
+                User should be atleast 10 years old to create wallet.
               </Text>
             ) : null}
           </Div>

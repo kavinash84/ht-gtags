@@ -41,7 +41,8 @@ const styles = require('./HtWallet.scss');
   profile: profile.data,
   futurPayProfile: getFuturePayProfile(profile),
   futurPay: profile.futurePayStatus,
-  loggingIn: userLogin.loggingIn
+  loggingIn: userLogin.loggingIn,
+  loggedIn: userLogin.isLoggedIn
 }))
 export class MyHomeWallet extends Component {
   static propTypes = {
@@ -51,7 +52,8 @@ export class MyHomeWallet extends Component {
       status: PropTypes.bool
     }),
     profile: PropTypes.object,
-    loggingIn: PropTypes.bool
+    loggingIn: PropTypes.bool,
+    LoggedIn: PropTypes.bool
   };
 
   static contextTypes = {
@@ -61,7 +63,8 @@ export class MyHomeWallet extends Component {
   static defaultProps = {
     futurPayProfile: { AvailableBalance: 0, TopUpBalance: 0, status: false },
     profile: {},
-    loggingIn: false
+    loggingIn: false,
+    LoggedIn: false
   };
 
   state = {
@@ -69,12 +72,14 @@ export class MyHomeWallet extends Component {
     otpErrorMessage: 'OTP Should be 6 Characters',
     resend: false,
     resendtimer: 30,
-    open: false
+    open: false,
+    validAge: false
   };
 
   componentDidMount() {
     const { dispatch } = this.context.store;
     dispatch(loadUserProfile());
+    this.ageCheck()
   }
 
   componentDidUpdate(nextProps, prevState) {
@@ -136,14 +141,25 @@ export class MyHomeWallet extends Component {
     });
   };
 
+  ageCheck = () => {
+    const { dob } = this.props.profile;
+    const newDob = new Date(dob);
+    const currentDate = `${new Date().toJSON().slice(0, 10)} 01:00:00`;
+    const myAge = Math.floor((Date.now(currentDate) - newDob) / 31557600000);
+    this.setState({
+      validAge : myAge > 10 ? true : false
+    })
+  }
+
   render() {
     const {
       futurPayProfile: { AvailableBalance: balance, status },
       profile: { mobile = 0 },
-      loggingIn
+      loggingIn,
+      loggedIn
     } = this.props;
     const {
- otp, otpError, otpErrorMessage, resend, resendtimer, open
+ otp, otpError, otpErrorMessage, resend, resendtimer, open, validAge
 } = this.state;
     return (
       <div className="wrapper dummy">
@@ -178,12 +194,15 @@ export class MyHomeWallet extends Component {
                       <Text mb={20}>Currently you dont have wallet would you like to create it ?</Text>
                       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                         <Button
+                          disabled={!validAge}
                           onClick={() => {
                             const { dispatch } = this.context.store;
                             // dispatch(toggleFuturePayModal(true));
-                            this.handleModal(true);
-                            dispatch(birthdateCheck(false));
-                            dispatch(getOtp(mobile));
+                            if(validAge) {
+                              this.handleModal(true);
+                              dispatch(birthdateCheck(false));
+                              dispatch(getOtp(mobile));
+                            }
                           }}
                         >
                           Create Wallet
@@ -194,6 +213,7 @@ export class MyHomeWallet extends Component {
                 )}
 
                 {/* <FuturePayModal /> */}
+                {!validAge ? <Text textAlign="center" mt={20}>Note: User should be atleast 10 years old to create Wallet</Text>: null}
 
                 <ResponsiveModal
                   classNames={{
@@ -262,7 +282,7 @@ export class MyHomeWallet extends Component {
               </Container>
             </Section>
             {/* Mid banner */}
-            {status !== 'success' ? (
+            {!loggedIn ? (
               <Box mt="2.25rem" mb="1.5rem" sx={{ display: 'flex', justifyContent: 'center' }}>
                 <Image className={styles.midBanner} src={MidBanner} alt="MidBanner" />
               </Box>
