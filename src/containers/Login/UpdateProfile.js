@@ -12,7 +12,6 @@ import ResponsiveModal from 'components/Modal';
 import Img from 'hometown-components-dev/lib/ImageHtV1';
 import Div from 'hometown-components-dev/lib/BoxHtV1';
 // import Button from 'hometown-components/lib/Buttons';
-import { FeedBackMessage } from 'hometown-components-dev/lib/LabelHtV1';
 
 // Css
 import 'react-datepicker/dist/react-datepicker.css';
@@ -101,12 +100,15 @@ class AskBirthDate extends Component {
               dropdownMode="select"
               onSelect={onChangeDob}
             />
-
-            {dobError && <FeedBackMessage type="error">{dobErrorMessage}</FeedBackMessage>}
+            {dobError && (
+              <Text mt={10} color="red" fontSize="12px">
+                {dobErrorMessage}
+              </Text>
+            )}
           </Div>
           <button
-            style={isValidField ? { backgroundColor: 'grey' } : { backgroundColor: '#f98d29' }}
-            disabled={isValidField}
+            style={isValidField || dobError ? { backgroundColor: 'grey' } : { backgroundColor: '#f98d29' }}
+            disabled={isValidField || dobError}
             className="google-login-btn"
             onClick={e => onSubmitLogin(e)}
           >

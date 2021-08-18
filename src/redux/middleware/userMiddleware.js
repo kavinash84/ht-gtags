@@ -61,6 +61,9 @@ export default function userMiddleware() {
         dispatch(setFuturePayStatus(true));
       }
     }
+    if (type === 'profile/LINK_FUTURE_PAY_SUCCESS') {
+      dispatch(loadUserProfile());
+    }
     if (type === 'login/LOGOUT_SUCCESS') {
       dispatch(generateSession());
       dispatch(clearUserProfile());

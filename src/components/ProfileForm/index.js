@@ -187,10 +187,31 @@ export default class ProfileForm extends Component {
   };
   onChangeDob = value => {
     const checkError = value && validateDob(value);
-    this.setState({
-      dob: value,
-      dobError: checkError
-    });
+    const {
+      profile: { wallet_created: walletCreationStatus }
+    } = this.props;
+    if (walletCreationStatus) {
+      const newDob = new Date(value);
+      const currentDate = `${new Date().toJSON().slice(0, 10)} 01:00:00`;
+      const myAge = Math.floor((Date.now(currentDate) - newDob) / 31557600000);
+      if (myAge > 18) {
+        this.setState({
+          dob: value,
+          dobError: checkError
+        });
+      } else {
+        this.setState({
+          // dob: value,
+          dobError: true,
+          dobErrorMessage: 'Wallet user can not be less than 18 years old'
+        });
+      }
+    } else {
+      this.setState({
+        dob: value,
+        dobError: checkError
+      });
+    }
   };
   onSubmitProfile = e => {
     e.preventDefault();

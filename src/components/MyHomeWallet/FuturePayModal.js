@@ -4,6 +4,7 @@ import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import Div from 'hometown-components-dev/lib/BoxHtV1';
 import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
@@ -35,7 +36,8 @@ export default class FuturePayModal extends React.Component {
     resendtimer: 30,
     timerref: '',
     loginViaOtp: this.props.loginViaOtp,
-    showConfirmationModal: false
+    showConfirmationModal: false,
+    ageError: false
   };
 
   componentDidMount() {
@@ -63,7 +65,6 @@ export default class FuturePayModal extends React.Component {
         } else {
           this.setState({ showConfirmationModal: true });
         }
-        console.log('askBirthDateaskBirthDate', askBirthDate);
       }
     }
   }
@@ -174,21 +175,37 @@ export default class FuturePayModal extends React.Component {
   };
 
   handleOTPYes = () => {
-    this.setState({ showConfirmationModal: false });
-    const { dispatch } = this.context.store;
-    dispatch(linkFuturePay({ skipOtpValidation: true }));
+    const {
+      profile: { dob }
+    } = this.props;
+    const newDob = new Date(dob);
+    const currentDate = `${new Date().toJSON().slice(0, 10)} 01:00:00`;
+    const myAge = Math.floor((Date.now(currentDate) - newDob) / 31557600000);
+    if (myAge > 10) {
+      this.setState({ showConfirmationModal: false, ageError: false });
+      const { dispatch } = this.context.store;
+      dispatch(linkFuturePay({ skipOtpValidation: true }));
+    } else {
+      this.setState({ ageError: true });
+    }
   };
 
   render() {
     const { setFuturePayStatus, loggingIn, skipBirthdateCheck } = this.props;
     const {
- otp, otpError, otpErrorMessage, resend, resendtimer, loginViaOtp, showConfirmationModal
-} = this.state;
+      otp,
+      otpError,
+      otpErrorMessage,
+      resend,
+      resendtimer,
+      loginViaOtp,
+      showConfirmationModal,
+      ageError
+    } = this.state;
     const walletNotCreated = !skipBirthdateCheck && setFuturePayStatus;
     const open = walletNotCreated && !loginViaOtp;
 
     const openLoginViaOtp = loginViaOtp && showConfirmationModal && setFuturePayStatus;
-
     return (
       <div>
         <ResponsiveModal
@@ -309,6 +326,11 @@ export default class FuturePayModal extends React.Component {
                 No
               </button>
             </Div>
+            {ageError ? (
+              <Text mt={10} textAlign="center" color="red" fontSize="14px">
+                User should be atleast 10 years old to create wallet
+              </Text>
+            ) : null}
           </Div>
         </ResponsiveModal>
       </div>
@@ -325,7 +347,7 @@ FuturePayModal.propTypes = {
   otpSent: PropTypes.bool,
   profile: PropTypes.object,
   loginViaOtp: PropTypes.bool,
-  askBirthDate: PropTypes.bool,
+  askBirthDate: PropTypes.bool
 };
 
 FuturePayModal.defaultProps = {
