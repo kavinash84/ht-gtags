@@ -274,13 +274,13 @@ const paymentObject = (
   } else if (selectedGateway === 'Upi') {
     return {
       ...paymentJSON,
-      ...paymentData,
       session_id: sessionId,
       payment_method_type: selectedGateway,
       payment_method: 'Upi',
       future_pay_redeem_amount: isPayFromHtWallet ? futurePayRedeemAmount : 0,
       isPayFromHTWallet: isPayFromHtWallet,
-      totalCartAmount
+      totalCartAmount,
+      ...paymentData
     };
   } else if (selectedGateway === 'FuturePay') {
     return {
