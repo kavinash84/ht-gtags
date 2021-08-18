@@ -34,7 +34,7 @@ class UpdateDob extends Component {
       dob,
       dobError,
       dobErrorMessage,
-      // loginViaLogin,
+      loginViaLogin,
       LoaderIcon,
       loggingIn,
       onSubmitDob,
@@ -74,9 +74,9 @@ class UpdateDob extends Component {
                   disabled={dobError}
                   className="google-login-btn"
                   onClick={() => {
-                    // const dobValue = moment(dob).format('YYYY-MM-DD');
-                    // loginViaLogin({}, session, null, null, dobValue, false);
-                    onSubmitDob();
+                    const dobValue = moment(dob).format('YYYY-MM-DD');
+                    loginViaLogin({}, session, null, null, dobValue, false);
+                    // onSubmitDob();
                   }}
                 >
                   {loggingIn && <Img className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />}
@@ -96,9 +96,9 @@ class UpdateDob extends Component {
                   style={{ margin: '0 10px' }}
                   className="google-login-btn"
                   onClick={() => {
-                    // loginViaLogin({}, session, null, null, null, true);
-                    // birthdateCheck(true);
-                    onSkipDob();
+                    loginViaLogin({}, session, null, null, null, true);
+                    birthdateCheck(true);
+                    // onSkipDob();
                   }}
                 >
                   No
@@ -142,7 +142,7 @@ UpdateDob.defaultProps = {
 };
 
 UpdateDob.propTypes = {
-  // loginViaLogin: PropTypes.func.isRequired,
+  loginViaLogin: PropTypes.func.isRequired,
   onChangeDob: PropTypes.func.isRequired,
   loggingIn: PropTypes.bool.isRequired,
   dob: PropTypes.instanceOf(Date),

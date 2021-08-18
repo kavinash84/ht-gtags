@@ -158,8 +158,7 @@ class GoogleLogin extends Component {
       dobError,
       dobErrorMessage
     } = this.state;
-    const open = (askContact || askName) && loginType && loginType === 'google';
-
+    const open = (askContact || askName || askBirthDate) && loginType && loginType === 'google';
     return (
       <Box>
         <Box
