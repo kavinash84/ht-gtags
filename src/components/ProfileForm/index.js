@@ -203,7 +203,7 @@ export default class ProfileForm extends Component {
         this.setState({
           // dob: value,
           dobError: true,
-          dobErrorMessage: 'Wallet user can not be less than 18 years old'
+          dobErrorMessage: 'Wallet user shoud be atleast 10 years old'
         });
       }
     } else {
