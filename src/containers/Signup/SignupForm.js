@@ -71,23 +71,41 @@ const showDateField = (dob, onChange, dobError, dobErrorMessage) => (
   </Box>
 );
 
-@connect(({ userSignUp, app }) => ({
-  loading: userSignUp.loading,
+@connect(({ userSignUp, app, userLogin }) => ({
+  // loading: userSignUp.loading,
   session: app.sessionId,
-  signUpResponse: userSignUp
+  signUpResponse: userSignUp,
+  askContact: userLogin.askContact,
+  askBirthDate: userLogin.askBirthDate,
+  askName: userLogin.askName,
+  loginType: userLogin.loginType,
+  loading: userLogin.loading,
+  loggingIn: userLogin.loggingIn
 }))
 @withRouter
 export default class SignupFormContainer extends Component {
   static propTypes = {
     session: PropTypes.string.isRequired,
+    // loading: PropTypes.bool,
+    signUpResponse: PropTypes.object.isRequired,
+    askContact: PropTypes.bool,
+    askBirthDate: PropTypes.bool,
+    askName: PropTypes.bool,
+    loginType: PropTypes.string,
     loading: PropTypes.bool,
-    signUpResponse: PropTypes.object.isRequired
+    loggingIn: PropTypes.bool
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
   static defaultProps = {
-    loading: false
+    // loading: false,
+    askContact: false,
+    askBirthDate: false,
+    askName: false,
+    loginType: '',
+    loading: false,
+    loggingIn: false
   };
   constructor() {
     super();
@@ -317,7 +335,9 @@ export default class SignupFormContainer extends Component {
       cityErrorMessage,
       policyAccepted
     } = this.state;
-    const { loading, signUpResponse } = this.props;
+    const {
+ loading, signUpResponse, askContact, askBirthDate, askName, loginType, loggingIn
+} = this.props;
     return (
       <Row>
         <Col variant="col-4">
@@ -370,7 +390,14 @@ export default class SignupFormContainer extends Component {
               </Button>
             </Box>
             <Box variant="col-6">
-              <GoogleLoginBtn loading={loading} />
+              <GoogleLoginBtn
+                askContact={askContact}
+                loginType={loginType}
+                askName={askName}
+                loading={loading}
+                loggingIn={loggingIn}
+                askBirthDate={askBirthDate}
+              />
             </Box>
           </Row>
         </Col>
