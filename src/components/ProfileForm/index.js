@@ -216,13 +216,13 @@ export default class ProfileForm extends Component {
   onSubmitProfile = e => {
     e.preventDefault();
     const {
- email, fullName, phone, dob
+ email, fullName, phone, dob, dobError
 } = this.state;
     const checkEmail = validateEmail(email, 'Invalid Email');
     const phoneError = !validateMobile(phone);
     const checkFullName = isBlank(fullName) || checkSpecialChar(fullName);
     // const isGSTError = !isGSTNumber(gst);
-    const checkDob = validateDob(dob);
+    const checkDob = validateDob(dob) && dobError;
     if (checkEmail.error || checkFullName || phoneError || checkDob) {
       return this.setState({
         emailError: checkEmail.error,

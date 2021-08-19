@@ -74,9 +74,9 @@ class UpdateDob extends Component {
                   disabled={dobError}
                   className="google-login-btn"
                   onClick={() => {
-                    // const dobValue = moment(dob).format('YYYY-MM-DD');
-                    // loginViaLogin({}, session, null, null, dobValue, false);
-                    onSubmitDob();
+                    const dobValue = moment(dob).format('YYYY-MM-DD');
+                    loginViaLogin({}, session, null, null, dobValue, false);
+                    // onSubmitDob();
                   }}
                 >
                   {loggingIn && <Img className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />}
@@ -96,9 +96,9 @@ class UpdateDob extends Component {
                   style={{ margin: '0 10px' }}
                   className="google-login-btn"
                   onClick={() => {
-                    // loginViaLogin({}, session, null, null, null, true);
-                    // birthdateCheck(true);
-                    onSkipDob();
+                    loginViaLogin({}, session, null, null, null, true);
+                    birthdateCheck(true);
+                    // onSkipDob();
                   }}
                 >
                   No
