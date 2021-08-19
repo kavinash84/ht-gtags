@@ -202,7 +202,7 @@ export class MyHomeWallet extends Component {
                             if (validAge) {
                               this.handleModal(true);
                               dispatch(birthdateCheck(false));
-                              dispatch(getOtp(mobile));
+                              // dispatch(getOtp(mobile));
                             }
                           }}
                         >

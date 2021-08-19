@@ -148,29 +148,29 @@ export default function reducer(state = initialState, action = {}) {
         loginViaOtp: false,
         errorMessage: action.error.error_message
       };
-      case GET_OTP_SIGNUP:
-        return {
-          ...state,
-          loading: true,
-          loaded: false,
-          otpSent: false,
-        };
-      case GET_OTP_SUCCESS_SIGNUP:
-        return {
-          ...state,
-          otpSent: true,
-          loading: false,
-          loaded: true
-        };
-      case GET_OTP_FAIL_SIGNUP:
-        return {
-          ...state,
-          loading: false,
-          loaded: true,
-          otpError: true,
-          otpSent: false,
-          errorMessage: action.error.error_message
-        };
+    case GET_OTP_SIGNUP:
+      return {
+        ...state,
+        loading: true,
+        loaded: false,
+        otpSent: false
+      };
+    case GET_OTP_SUCCESS_SIGNUP:
+      return {
+        ...state,
+        otpSent: true,
+        loading: false,
+        loaded: true
+      };
+    case GET_OTP_FAIL_SIGNUP:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        otpError: true,
+        otpSent: false,
+        errorMessage: action.error.error_message
+      };
     case CLEAR_LOGIN_STATE:
       return {
         ...initialState
@@ -233,17 +233,23 @@ export const login = data => ({
     }
   }
 });
-export const googleLogin = (result, session, phone, username = null, dob = null, skipBirthdateCheck = false) => (
-  dispatch,
-  getState
-) =>
+
+export const googleLogin = (
+  result,
+  session,
+  phone = null,
+  username = null,
+  dob = null,
+  skipBirthdateCheck = false,
+  otp = null,
+  createWallet
+) => (dispatch, getState) =>
   dispatch({
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
     promise: async ({ client }) => {
       const {
         userLogin: { tokenData }
       } = getState();
-      // const data = phone && tokenData.tokenId ? tokenData : result;
       const data = (phone || username || dob || skipBirthdateCheck) && tokenData.tokenId ? tokenData : result;
       try {
         const {
@@ -260,12 +266,13 @@ export const googleLogin = (result, session, phone, username = null, dob = null,
           full_name: name,
           username,
           dob,
-          skipBirthdateCheck
+          CreateWallet: createWallet,
+          skipBirthdateCheck,
+          otp
         };
         const response = await client.post(GOOGLE_LOGIN_API, postData);
-        await setToken({ client })(response);
+        setToken({ client })(response);
         return response;
-        // throw { askContact: true };
       } catch (err) {
         const error = {
           ...err,

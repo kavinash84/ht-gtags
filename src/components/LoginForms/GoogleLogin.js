@@ -27,6 +27,7 @@ import Image from 'hometown-components-dev/lib/ImageHtV1';
 import UpdateName from './UpdateName';
 import UpdateContacts from './UpdateContacts';
 import UpdateDob from './UpdateDobGoogle';
+import UpdateContactAndDob from './UpdateContactAndDob';
 
 const LoaderIcon = require('../../../static/refresh-black.svg');
 
@@ -37,7 +38,7 @@ const mapStateToProps = ({ app, userLogin }) => ({
 });
 
 const onSuccess = (dispatcher, session, phone) => result => {
-  dispatcher(result, session, phone);
+  dispatcher(result, session, phone, null, null, false, null, true);
 };
 
 const onError = error => e => {
@@ -71,9 +72,91 @@ class GoogleLogin extends Component {
       firstNameErrorMessage: 'Please enter a valid first name',
       lastName: '',
       lastNameError: false,
-      lastNameErrorMessage: 'Please enter a valid last name'
+      lastNameErrorMessage: 'Please enter a valid last name',
+      otp: '',
+      otpErrorMessage: 'OTP Should be 6 Characters',
+      resend: false,
+      mobilesubmitted: false,
+      open: false,
+      resendtimer: 30
     };
   }
+
+  componentWillReceiveProps(nextProps) {
+    if (!this.state.mobilesubmitted && nextProps.getotpError && nextProps.getotpErrorMessage.includes('resend')) {
+      this.setState({
+        mobilesubmitted: true
+      });
+    }
+    if (nextProps.otpSent && nextProps.otpSent !== this.props.otpSent) {
+      this.setState({
+        mobilesubmitted: true
+      });
+    }
+  }
+
+  componentDidUpdate(nextProps, prevState) {
+    if (this.state.mobilesubmitted && this.state.mobilesubmitted !== prevState.mobilesubmitted) {
+      const timerref = setInterval(() => {
+        if (this.state.resendtimer <= 1) {
+          clearInterval(this.state.timerref);
+        }
+        this.setState(prevstate => ({
+          resendtimer: prevstate.resendtimer - 1
+        }));
+      }, 1000);
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({ timerref });
+    }
+  }
+
+  onSubmitMobileNumber = e => {
+    e.preventDefault();
+    const { phone, resend, dob } = this.state;
+    const checkmobile = !validateMobile(phone);
+    const { session, skipBirthdateCheck, loginViaLogin } = this.props;
+
+    if (checkmobile) {
+      return this.setState({
+        phoneError: true,
+        phoneErrorMessage: 'Please Enter Valid Mobile Number'
+      });
+    }
+    const { dispatch } = this.context.store;
+    if (resend) {
+      return dispatch(resendOtp(this.state.phone));
+    }
+
+    loginViaLogin({}, session, phone, null, dob, true, null, false);
+    this.setState({
+      mobilesubmitted: true
+    });
+  };
+
+  onSubmitMobileAndDob = e => {
+    e.preventDefault();
+    const {
+ phone, resend, dob, otp
+} = this.state;
+    const checkmobile = !validateMobile(phone);
+    const { session, skipBirthdateCheck, loginViaLogin } = this.props;
+
+    if (checkmobile) {
+      return this.setState({
+        phoneError: true,
+        phoneErrorMessage: 'Please Enter Valid Mobile Number'
+      });
+    }
+    const { dispatch } = this.context.store;
+    if (resend) {
+      return dispatch(resendOtp(this.state.phone));
+    }
+
+    loginViaLogin({}, session, phone, null, dob, false, otp, true);
+    this.setState({
+      mobilesubmitted: true
+    });
+  };
   onChangePhone = e => {
     const {
       target: { value }
@@ -136,6 +219,43 @@ class GoogleLogin extends Component {
     //   dobErrorMessage: validateDob(value).msg
     // });
   };
+  onChangeOtp = e => {
+    const { value } = e.target;
+    if (!allowNChar(value, 6) || (!allowTypeOf(value, 'number') && value.length > 0)) {
+      return;
+    }
+    this.setState({
+      otp: value,
+      otpError: false
+    });
+  };
+  onSubmitOtp = e => {
+    e.preventDefault();
+    const { otp, phone, dob } = this.state;
+    const { session, skipBirthdateCheck } = this.props;
+    if (otp.length < 6) {
+      return this.setState({
+        otpError: true
+      });
+    }
+    const { dispatch } = this.context.store;
+    const data = {
+      ...this.state,
+      skipOtpValidation: true
+    };
+    // dispatch(linkFuturePay({ skipOtpValidation: true }));
+    // dispatch(this.props.loginViaLogin({}, session, phone, null ,dob, skipBirthdateCheck, otp, true));
+    // dispatch(loadUserProfile());
+  };
+  handleResend = () => {
+    this.setState({
+      // mobilesubmitted: false,
+      resend: true
+    });
+    const { dispatch } = this.context.store;
+    const { phone } = this.state;
+    dispatch(resendOtp(phone));
+  };
   birthdateCheck = status => {
     const { dispatch } = this.context.store;
     dispatch(birthdateCheck(status));
@@ -175,7 +295,13 @@ class GoogleLogin extends Component {
       lastNameErrorMessage,
       dob,
       dobError,
-      dobErrorMessage
+      dobErrorMessage,
+      mobilesubmitted,
+      otp,
+      otpError,
+      otpErrorMessage,
+      resend,
+      resendtimer
     } = this.state;
     const open = (askContact || askName || askBirthDate) && loginType && loginType === 'google';
     return (
@@ -226,6 +352,34 @@ class GoogleLogin extends Component {
               onChangeLastName={this.onChangeLastName}
               onChangePhone={this.onChangePhone}
               loginViaLogin={loginViaLogin}
+            />
+          ) : askContact && askBirthDate ? (
+            <UpdateContactAndDob
+              session={session}
+              loggingIn={loggingIn}
+              phone={phone}
+              phoneError={phoneError}
+              phoneErrorMessage={phoneErrorMessage}
+              onChangePhone={this.onChangePhone}
+              dob={dob}
+              dobError={dobError}
+              dobErrorMessage={dobErrorMessage}
+              onChangeDob={this.onChangeDob}
+              onSubmitMobileNumber={this.onSubmitMobileNumber}
+              onSubmitMobileAndDob={this.onSubmitMobileAndDob}
+              mobilesubmitted={mobilesubmitted}
+              LoaderIcon={LoaderIcon}
+              skipBirthdateCheck={skipBirthdateCheck}
+              birthdateCheck={this.birthdateCheck}
+              loginViaLogin={loginViaLogin}
+              onSubmitOtp={this.onSubmitOtp}
+              onChangeOtp={this.onChangeOtp}
+              otp={otp}
+              otpError={otpError}
+              otpErrorMessage={otpErrorMessage}
+              resend={resend}
+              resendtimer={resendtimer}
+              handleResend={this.handleModal}
             />
           ) : askName ? (
             <UpdateName

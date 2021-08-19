@@ -97,6 +97,21 @@ export default class FuturePayModal extends React.Component {
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ timerref });
     }
+    if (this.props.setFuturePayStatus && !this.state.otpReceived) {
+      console.log(this.state.otpReceived, 'otp received');
+      const {
+        profile: { mobile = 0 }
+      } = this.props;
+      const { dispatch } = this.context.store;
+      this.setState(
+        {
+          otpReceived: true
+        },
+        () => {
+          if (!this.state.otpReceived) dispatch(getOtp(mobile));
+        }
+      );
+    }
   }
 
   onSubmitOtp = e => {
@@ -118,7 +133,8 @@ export default class FuturePayModal extends React.Component {
     }
     this.setState({
       otp: value,
-      otpError: false
+      otpError: false,
+      otpReceived: false
     });
   };
 
