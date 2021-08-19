@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import Heading from 'hometown-components/lib/Heading';
-import Text from 'hometown-components/lib/Text';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
 import PropTypes from 'prop-types';
-import FormInput from 'hometown-components/lib/Forms/FormInput';
-import Row from 'hometown-components/lib/Row';
-import Div from 'hometown-components/lib/Div';
-import { FeedBackMessage } from 'hometown-components/lib/Label';
+import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Div from 'hometown-components-dev/lib/BoxHtV1';
+import { FeedBackMessage } from 'hometown-components-dev/lib/LabelHtV1';
 import DatePicker from 'components/Form/DatePicker';
 
 const formatDate = date => {

@@ -78,7 +78,6 @@ class GoogleLogin extends Component {
     };
   }
  
-
   componentWillReceiveProps(nextProps) {
     console.log(nextProps, 'nextProps');
     if (!this.state.mobilesubmitted && nextProps.getotpError && nextProps.getotpErrorMessage.includes('resend')) {
@@ -226,6 +225,10 @@ class GoogleLogin extends Component {
     } = this.state;
     dispatch(resendOtp(phone));
   };
+  birthdateCheck = status => {
+    const { dispatch } = this.context.store;
+    dispatch(birthdateCheck(status));
+  };
   handleModal = () => {
     this.props.clearLogin();
   };
@@ -236,7 +239,7 @@ class GoogleLogin extends Component {
   };
   render() {
     const {
- loginViaLogin, session, askContact, askName, loginType, loggingIn, askBirthDate
+ loginViaLogin, session, askContact, askName, loginType, loggingIn, askBirthDate, skipBirthdateCheck
 } = this.props;
     // const { phone, phoneError, phoneErrorMessage } = this.state;
     // const open = askContact && loginType && loginType === 'google';
@@ -274,7 +277,7 @@ class GoogleLogin extends Component {
           <Image display="inline-block" src={GoogleIcon} alt="Google" va="sub" width="18px" mr="10px" />
           GOOGLE
         </GoogleLoginBtn>
-        <ResponsiveModal classNames={{ modal: 'updateProfileModal' }} onCloseModal={this.handleModal} open={open}>
+        <ResponsiveModal classNames={{ overlay: 'bulkOrderOverlayModal', modal: 'updateProfileModal' }} onCloseModal={this.handleModal} open={open}>
           {/* <Row>
             <Box variant="col-12">
               <Heading>Update Profile</Heading>
@@ -282,7 +285,7 @@ class GoogleLogin extends Component {
           {askName && askContact ? (
             <UpdateContacts
               session={session}
-              loggingIn={loggingIn}
+              loggingIn={loggingIn} 
               LoaderIcon={LoaderIcon}
               firstName={firstName}
               firstNameError={firstNameError}
