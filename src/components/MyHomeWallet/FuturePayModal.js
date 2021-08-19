@@ -232,8 +232,7 @@ export default class FuturePayModal extends React.Component {
     } = this.state;
     const walletNotCreated = !skipBirthdateCheck && setFuturePayStatus;
     const open = walletNotCreated && !loginViaOtp && !ageError;
-    console.log(showConfirmationModal, 'this modal');
-    const openLoginViaOtp = loginViaOtp && showConfirmationModal && setFuturePayStatus;
+    const openLoginViaOtp = loginViaOtp && showConfirmationModal && setFuturePayStatus && !ageError;
     return (
       <div>
         <ResponsiveModal
