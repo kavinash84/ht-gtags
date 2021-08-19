@@ -7,7 +7,7 @@ import ResponsiveModal from 'components/Modal';
 import GoogleLoginBtn from 'react-google-login';
 
 /* ====== Validations ====== */
-import { validateMobile, validateName } from 'utils/validation';
+import { validateMobile, validateName, validateDob } from 'utils/validation';
 
 /* ====== Helpers ====== */
 import { allowNChar, allowTypeOf } from 'utils/helper';
@@ -25,7 +25,7 @@ import Image from 'hometown-components-dev/lib/ImageHtV1';
 
 import UpdateName from './UpdateName';
 import UpdateContacts from './UpdateContacts';
-import UpdateDob from './UpdateDob';
+import UpdateDob from './UpdateDobGoogle';
 
 const LoaderIcon = require('../../../static/refresh-black.svg');
 
@@ -117,12 +117,23 @@ class GoogleLogin extends Component {
   };
   onChangeDob = value => {
     const checkError = validateDob(value).error;
-
-    this.setState({
-      dob: value,
-      dobError: checkError,
-      dobErrorMessage: validateDob(value).msg
-    });
+    const newDob = new Date(value);
+    const currentDate = `${new Date().toJSON().slice(0, 10)} 01:00:00`;
+    const myAge = Math.floor((Date.now(currentDate) - newDob) / 31557600000);
+    if (myAge > 10) {
+      this.setState({
+        dob: value,
+        dobError: checkError,
+        dobErrorMessage: validateDob(value).msg
+      });
+    } else {
+      this.setState({ dobError: true, dobErrorMessage: 'Wallet user should be atleast 10 years old' });
+    }
+    // this.setState({
+    //   dob: value,
+    //   dobError: checkError,
+    //   dobErrorMessage: validateDob(value).msg
+    // });
   };
   birthdateCheck = status => {
     const { dispatch } = this.context.store;

@@ -221,7 +221,7 @@ export class MyHomeWallet extends Component {
                     overlay: 'futurePayModalModal',
                     modal: 'futurePayModal'
                   }}
-                  onCloseModal={this.handleModal}
+                  onCloseModal={() => this.handleModal(false)}
                   open={open}
                 >
                   <Box>

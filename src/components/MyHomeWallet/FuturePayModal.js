@@ -67,6 +67,7 @@ export default class FuturePayModal extends React.Component {
         }
       }
     }
+    this.checkAge();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -215,6 +216,20 @@ export default class FuturePayModal extends React.Component {
     }
   };
 
+  checkAge = () => {
+    const {
+      profile: { dob }
+    } = this.props;
+    const newDob = new Date(dob);
+    const currentDate = `${new Date().toJSON().slice(0, 10)} 01:00:00`;
+    const myAge = Math.floor((Date.now(currentDate) - newDob) / 31557600000);
+    if (myAge > 10) {
+      this.setState({ ageError: false });
+    } else {
+      this.setState({ ageError: true });
+    }
+  }
+
   render() {
     const { setFuturePayStatus, loggingIn, skipBirthdateCheck } = this.props;
     const {
@@ -228,7 +243,7 @@ export default class FuturePayModal extends React.Component {
       ageError
     } = this.state;
     const walletNotCreated = !skipBirthdateCheck && setFuturePayStatus;
-    const open = walletNotCreated && !loginViaOtp;
+    const open = walletNotCreated && !loginViaOtp && !ageError;
     console.log(showConfirmationModal, 'this modal')
     const openLoginViaOtp = loginViaOtp && showConfirmationModal && setFuturePayStatus;
     return (
