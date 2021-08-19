@@ -58,6 +58,7 @@ ProfileViewRow.propTypes = {
 
 @connect(({ profile }) => ({
   profile: profile.data,
+  futurePay: profile.data.futurPayProfile,
   response: profile
 }))
 export default class ProfileForm extends Component {
@@ -72,16 +73,19 @@ export default class ProfileForm extends Component {
       city: PropTypes.string,
       gender: PropTypes.string,
       birthday: PropTypes.string,
-      today: PropTypes.string
+      today: PropTypes.string,
+      wallet_created: PropTypes.any
     }),
-    response: PropTypes.object
+    response: PropTypes.object,
+    futurePay: PropTypes.object
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
   static defaultProps = {
     profile: {},
-    response: {}
+    response: {},
+    futurePay: {}
   };
 
   state = {
@@ -188,9 +192,10 @@ export default class ProfileForm extends Component {
   onChangeDob = value => {
     const checkError = value && validateDob(value);
     const {
+      futurePay,
       profile: { wallet_created: walletCreationStatus }
     } = this.props;
-    if (walletCreationStatus === "1") {
+    if (walletCreationStatus === '1' || futurePay.status === 'success') {
       const newDob = new Date(value);
       const currentDate = `${new Date().toJSON().slice(0, 10)} 01:00:00`;
       const myAge = Math.floor((Date.now(currentDate) - newDob) / 31557600000);
@@ -211,6 +216,7 @@ export default class ProfileForm extends Component {
         dob: value,
         dobError: checkError
       });
+      // }
     }
   };
   onSubmitProfile = e => {
@@ -222,7 +228,7 @@ export default class ProfileForm extends Component {
     const phoneError = !validateMobile(phone);
     const checkFullName = isBlank(fullName) || checkSpecialChar(fullName);
     // const isGSTError = !isGSTNumber(gst);
-    const checkDob = validateDob(dob) && dobError;
+    const checkDob = validateDob(dob) || dobError;
     if (checkEmail.error || checkFullName || phoneError || checkDob) {
       return this.setState({
         emailError: checkEmail.error,
