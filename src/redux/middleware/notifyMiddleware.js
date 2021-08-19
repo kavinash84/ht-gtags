@@ -324,7 +324,7 @@ export default function userMiddleware() {
       case 'profile/LINK_FUTURE_PAY_FAIL':
         dispatch(notifSend({
             type: 'warning',
-            msg: action.error && action.error.error ? action.error.error : SOME_ERROR,
+            msg: action.error && action.error.error_message ? action.error.error_message : SOME_ERROR,
             dismissAfter: 4000
           }));
         break;
