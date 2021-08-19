@@ -233,7 +233,7 @@ export const login = data => ({
     }
   }
 });
-export const googleLogin = (result, session, phone, username = null, dob = null, skipBirthdateCheck = false) => (
+export const googleLogin = (result, session, phone = null, username = null, dob = null, skipBirthdateCheck = false, otp = null, createWallet) => (
   dispatch,
   getState
 ) =>
@@ -260,7 +260,9 @@ export const googleLogin = (result, session, phone, username = null, dob = null,
           full_name: name,
           username,
           dob,
-          skipBirthdateCheck
+          skipBirthdateCheck,
+          createWallet,
+          otp
         };
         const response = await client.post(GOOGLE_LOGIN_API, postData);
         await setToken({ client })(response);

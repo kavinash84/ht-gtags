@@ -79,7 +79,7 @@ export class MyHomeWallet extends Component {
   componentDidMount() {
     const { dispatch } = this.context.store;
     dispatch(loadUserProfile());
-    this.ageCheck()
+    this.ageCheck();
   }
 
   componentDidUpdate(nextProps, prevState) {
@@ -147,8 +147,8 @@ export class MyHomeWallet extends Component {
     const currentDate = `${new Date().toJSON().slice(0, 10)} 01:00:00`;
     const myAge = Math.floor((Date.now(currentDate) - newDob) / 31557600000);
     this.setState({
-      validAge : myAge > 10 ? true : false
-    })
+      validAge: myAge > 10 ? true : false
+    });
   }
 
   render() {
@@ -198,10 +198,10 @@ export class MyHomeWallet extends Component {
                           onClick={() => {
                             const { dispatch } = this.context.store;
                             // dispatch(toggleFuturePayModal(true));
-                            if(validAge) {
+                            if (validAge) {
                               this.handleModal(true);
                               dispatch(birthdateCheck(false));
-                              dispatch(getOtp(mobile));
+                              // dispatch(getOtp(mobile));
                             }
                           }}
                         >
@@ -213,7 +213,8 @@ export class MyHomeWallet extends Component {
                 )}
 
                 {/* <FuturePayModal /> */}
-                {!validAge ? <Text textAlign="center" mt={20}>Note: User should be atleast 10 years old to create Wallet</Text>: null}
+                {!validAge ? <Text textAlign="center" mt={20}>Note: User
+                  should be atleast 10 years old to create Wallet</Text> : null}
 
                 <ResponsiveModal
                   classNames={{

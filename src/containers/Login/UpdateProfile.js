@@ -87,7 +87,7 @@ class AskBirthDate extends Component {
       return (
         <Div>
           <Text color="color676767" textAlign="center" mb={20}>
-            Pleasse Update Date of Birth
+            Please Update Date of Birth
           </Text>
           <Div mb="0.625rem">
             <DatePicker
