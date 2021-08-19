@@ -296,7 +296,7 @@ export default class LoginFormContainer extends Component {
   onChangeDob = value => {
     // const value = '1995-10-02';
     const checkError = validateDob(value).error;
-    const newDob = new Date(value);
+    const newDob = moment(value, 'DD-MM-YYYY').toDate();
     const currentDate = `${new Date().toJSON().slice(0, 10)} 01:00:00`;
     const myAge = Math.floor((Date.now(currentDate) - newDob) / 31557600000);
     // this.setState({

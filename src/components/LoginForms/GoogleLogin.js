@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ResponsiveModal from 'components/Modal';
 import GoogleLoginBtn from 'react-google-login';
+import moment from 'moment';
 
 /* ====== Validations ====== */
 import { validateMobile, validateName, validateDob } from 'utils/validation';
@@ -117,7 +118,7 @@ class GoogleLogin extends Component {
   };
   onChangeDob = value => {
     const checkError = validateDob(value).error;
-    const newDob = new Date(value);
+    const newDob = moment(value, 'DD-MM-YYYY').toDate();
     const currentDate = `${new Date().toJSON().slice(0, 10)} 01:00:00`;
     const myAge = Math.floor((Date.now(currentDate) - newDob) / 31557600000);
     if (myAge > 10) {
@@ -150,8 +151,15 @@ class GoogleLogin extends Component {
   };
   render() {
     const {
- loginViaLogin, session, askContact, askName, askBirthDate, loginType, loggingIn, skipBirthdateCheck
-} = this.props;
+      loginViaLogin,
+      session,
+      askContact,
+      askName,
+      askBirthDate,
+      loginType,
+      loggingIn,
+      skipBirthdateCheck
+    } = this.props;
     // const { phone, phoneError, phoneErrorMessage } = this.state;
     // const open = askContact && loginType && loginType === 'google';
     const {
@@ -350,7 +358,9 @@ GoogleLogin.propTypes = {
   askContact: PropTypes.bool.isRequired,
   askName: PropTypes.bool.isRequired,
   loginType: PropTypes.string.isRequired,
-  loggingIn: PropTypes.bool.isRequired
+  loggingIn: PropTypes.bool.isRequired,
+  askBirthDate: PropTypes.bool.isRequired,
+  skipBirthdateCheck: PropTypes.bool.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GoogleLogin);

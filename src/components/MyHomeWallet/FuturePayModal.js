@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unused-state */
+import moment from 'moment';
 import ResponsiveModal from 'components/Modal';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import Div from 'hometown-components-dev/lib/BoxHtV1';
@@ -167,7 +168,7 @@ export default class FuturePayModal extends React.Component {
     const {
       profile: { mobile = 0, dob }
     } = this.props;
-    const newDob = new Date(dob);
+    const newDob = moment(dob, 'DD-MM-YYYY').toDate();
     const currentDate = `${new Date().toJSON().slice(0, 10)} 01:00:00`;
     const myAge = Math.floor((Date.now(currentDate) - newDob) / 31557600000);
     console.log('inside yes');
@@ -191,7 +192,7 @@ export default class FuturePayModal extends React.Component {
     const {
       profile: { dob }
     } = this.props;
-    const newDob = new Date(dob);
+    const newDob = moment(dob, 'DD-MM-YYYY').toDate();
     const currentDate = `${new Date().toJSON().slice(0, 10)} 01:00:00`;
     const myAge = Math.floor((Date.now(currentDate) - newDob) / 31557600000);
     if (myAge > 10) {
@@ -207,7 +208,7 @@ export default class FuturePayModal extends React.Component {
     const {
       profile: { dob }
     } = this.props;
-    const newDob = new Date(dob);
+    const newDob = moment(dob, 'DD-MM-YYYY').toDate();
     const currentDate = `${new Date().toJSON().slice(0, 10)} 01:00:00`;
     const myAge = Math.floor((Date.now(currentDate) - newDob) / 31557600000);
     if (myAge > 10) {

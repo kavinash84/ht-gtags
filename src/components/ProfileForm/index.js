@@ -196,7 +196,7 @@ export default class ProfileForm extends Component {
       profile: { wallet_created: walletCreationStatus }
     } = this.props;
     if (walletCreationStatus === '1' || futurePay.status === 'success') {
-      const newDob = new Date(value);
+      const newDob = moment(value, 'DD-MM-YYYY').toDate();
       const currentDate = `${new Date().toJSON().slice(0, 10)} 01:00:00`;
       const myAge = Math.floor((Date.now(currentDate) - newDob) / 31557600000);
       if (myAge > 10) {

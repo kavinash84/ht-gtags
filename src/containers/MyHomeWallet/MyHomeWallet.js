@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
 /* ====== Components ====== */
 import Box from 'hometown-components-dev/lib/BoxHtV1';
@@ -53,7 +54,7 @@ export class MyHomeWallet extends Component {
     }),
     profile: PropTypes.object,
     loggingIn: PropTypes.bool,
-    LoggedIn: PropTypes.bool
+    loggedIn: PropTypes.bool
   };
 
   static contextTypes = {
@@ -64,7 +65,7 @@ export class MyHomeWallet extends Component {
     futurPayProfile: { AvailableBalance: 0, TopUpBalance: 0, status: false },
     profile: {},
     loggingIn: false,
-    LoggedIn: false
+    loggedIn: false
   };
 
   state = {
@@ -79,7 +80,7 @@ export class MyHomeWallet extends Component {
   componentDidMount() {
     const { dispatch } = this.context.store;
     dispatch(loadUserProfile());
-    this.ageCheck()
+    this.ageCheck();
   }
 
   componentDidUpdate(nextProps, prevState) {
@@ -143,13 +144,13 @@ export class MyHomeWallet extends Component {
 
   ageCheck = () => {
     const { dob } = this.props.profile;
-    const newDob = new Date(dob);
+    const newDob = moment(dob, 'DD-MM-YYYY').toDate();
     const currentDate = `${new Date().toJSON().slice(0, 10)} 01:00:00`;
     const myAge = Math.floor((Date.now(currentDate) - newDob) / 31557600000);
     this.setState({
-      validAge : myAge > 10 ? true : false
-    })
-  }
+      validAge: myAge > 10
+    });
+  };
 
   render() {
     const {
@@ -198,7 +199,7 @@ export class MyHomeWallet extends Component {
                           onClick={() => {
                             const { dispatch } = this.context.store;
                             // dispatch(toggleFuturePayModal(true));
-                            if(validAge) {
+                            if (validAge) {
                               this.handleModal(true);
                               dispatch(birthdateCheck(false));
                               dispatch(getOtp(mobile));
@@ -213,7 +214,11 @@ export class MyHomeWallet extends Component {
                 )}
 
                 {/* <FuturePayModal /> */}
-                {!validAge ? <Text textAlign="center" mt={20}>Note: User should be atleast 10 years old to create Wallet</Text>: null}
+                {!validAge ? (
+                  <Text textAlign="center" mt={20}>
+                    Note: User should be atleast 10 years old to create Wallet
+                  </Text>
+                ) : null}
 
                 <ResponsiveModal
                   classNames={{
