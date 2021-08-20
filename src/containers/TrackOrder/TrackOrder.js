@@ -31,6 +31,27 @@ class TrackOrder extends React.Component {
     orderId: '',
     onChange: false
   };
+
+  componentDidMount = () => {
+    const { dispatch } = this.context.store;
+    const url = window.location || '';
+    const urlArray = url.pathname ? url.pathname.split('/')[2] : '';
+    const orderNum = urlArray ? urlArray.split('=')[1] : undefined;
+    console.log(orderNum, urlArray, 'orderNum');
+    if (orderNum) {
+      this.setStatus(orderNum);
+      dispatch(trackOrder(orderNum));
+    }
+  };
+
+  setStatus = orderNum => {
+    this.setState({
+      status: true,
+      onChange: false,
+      orderId: orderNum
+    });
+  };
+
   handleSubmit = e => {
     const { dispatch } = this.context.store;
     e.preventDefault();
