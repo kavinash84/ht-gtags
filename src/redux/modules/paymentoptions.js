@@ -297,16 +297,16 @@ const paymentObject = (
   }
 };
 
-// const getSelectedGateway = data => {
-//   console.log('getSelectedGateway function', data);
-//   const {
-//     cart: {
-//       summary: { total }
-//     }
-//   } = data;
+const getSelectedGateway = data => {
+  console.log('getSelectedGateway function', data);
+  const {
+    cart: {
+      summary: { total }
+    }
+  } = data;
 
-//   return total < 20000 ? 'Emi' : 'EmiZero';
-// };
+  return total < 20000 ? 'Emi' : 'EmiZero';
+};
 
 const emiZero = result => {
   console.log('Adding zero emi', result);
