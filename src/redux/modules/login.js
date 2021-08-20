@@ -4,7 +4,9 @@ import {
   GOOGLE_LOGIN as GOOGLE_LOGIN_API,
   LOGOUT as LOGOUT_API,
   OTP as OTP_API,
-  RESEND_OTP as RESEND_OTP_API
+  RESEND_OTP as RESEND_OTP_API,
+  SIGNUP_OTP as SIGNUP_OTP_API,
+  RESEND_SIGNUP_OTP as RESEND_SIGNUP_OTP_API
 } from 'helpers/apiUrls';
 import { clientId, clientSecret } from 'helpers/Constants';
 
@@ -21,19 +23,27 @@ const GET_OTP = 'login/GET_OTP';
 const GET_OTP_SUCCESS = 'login/GET_OTP_SUCCESS';
 const GET_OTP_FAIL = 'login/GET_OTP_FAIL';
 
+const GET_OTP_SIGNUP = 'signUp/GET_OTP_SIGNUP';
+const GET_OTP_SUCCESS_SIGNUP = 'signUp/GET_OTP_SUCCESS_SIGNUP';
+const GET_OTP_FAIL_SIGNUP = 'signUp/GET_OTP_FAIL_SIGNUP';
+
+const BIRTH_DATE_CHECK = 'login/BIRTH_DATE_CHECK';
+
 const initialState = {
   loaded: false,
   isLoggedIn: false,
   loggingOut: false,
   isLoggedOut: false,
   askContact: false,
+  askBirthDate: false,
   askName: false,
   otp: '',
   error: false,
   errorMessage: '',
   loginType: '',
   tokenData: {},
-  askEmail: false
+  askEmail: false,
+  skipBirthdateCheck: false
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -68,9 +78,12 @@ export default function reducer(state = initialState, action = {}) {
         askContact: action.error.askContact || false,
         askName: action.error.askName || false,
         askEmail: action.error.askEmail || false,
+        askBirthDate: action.error.askBirthDate || false,
         loginType: action.error.loginType || '',
         tokenData:
-          (action.error.askContact || action.error.askName) && action.error.tokenData ? action.error.tokenData : {}
+          (action.error.askContact || action.error.askName || action.error.askBirthDate) && action.error.tokenData
+            ? action.error.tokenData
+            : {}
       };
     case LOGIN_AFTER_SIGNUP:
       return {
@@ -114,16 +127,42 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: true,
         loaded: false,
-        otpSent: false
+        otpSent: false,
+        loginViaOtp: false
       };
     case GET_OTP_SUCCESS:
       return {
         ...state,
         otpSent: true,
         loading: false,
-        loaded: true
+        loaded: true,
+        loginViaOtp: true
       };
     case GET_OTP_FAIL:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        otpError: true,
+        otpSent: false,
+        loginViaOtp: false,
+        errorMessage: action.error.error_message
+      };
+    case GET_OTP_SIGNUP:
+      return {
+        ...state,
+        loading: true,
+        loaded: false,
+        otpSent: false
+      };
+    case GET_OTP_SUCCESS_SIGNUP:
+      return {
+        ...state,
+        otpSent: true,
+        loading: false,
+        loaded: true
+      };
+    case GET_OTP_FAIL_SIGNUP:
       return {
         ...state,
         loading: false,
@@ -135,6 +174,11 @@ export default function reducer(state = initialState, action = {}) {
     case CLEAR_LOGIN_STATE:
       return {
         ...initialState
+      };
+    case BIRTH_DATE_CHECK:
+      return {
+        ...state,
+        skipBirthdateCheck: action.status
       };
     default:
       return state;
@@ -170,8 +214,12 @@ export const login = data => ({
       const mobile = data.otp ? '' : `&mobile=${data.phone}`;
       const name = data.name ? `&full_name=${data.name}` : '';
       // const postData = `${username}&password=${password}&type=${type}&method=${method}&grant_type=password&client_id=${clientId}&client_secret=${clientSecret}${mobile}${name}`;
+      const dob = data.dob ? `&dob=${data.dob}` : '';
       const email = data.email && type === 'mobile' ? `&email=${data.email}` : '';
-      const postData = `${username}&password=${password}&type=${type}&method=${method}&grant_type=password&client_id=${clientId}&client_secret=${clientSecret}${mobile}${name}${email}`;
+      const skipBirthdateCheck = data.skipBirthdateCheck ? data.skipBirthdateCheck : false;
+      const skipOtpValidation = data.skipOtpValidation ? data.skipOtpValidation : false;
+      console.log({ skipBirthdateCheck });
+      const postData = `${username}&password=${password}${dob}&skipBirthdateCheck=${skipBirthdateCheck}&skipOtpValidation=${skipOtpValidation}&type=${type}&method=${method}&grant_type=password&client_id=${clientId}&client_secret=${clientSecret}${mobile}${name}${email}`;
       const response = await client.post(LOGIN_API, postData);
       setToken({ client })(response);
       return response;
@@ -185,15 +233,24 @@ export const login = data => ({
     }
   }
 });
-export const googleLogin = (result, session, phone, username = null) => (dispatch, getState) =>
+
+export const googleLogin = (
+  result,
+  session,
+  phone = null,
+  username = null,
+  dob = null,
+  skipBirthdateCheck = false,
+  otp = null,
+  createWallet
+) => (dispatch, getState) =>
   dispatch({
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
     promise: async ({ client }) => {
       const {
         userLogin: { tokenData }
       } = getState();
-      // const data = phone && tokenData.tokenId ? tokenData : result;
-      const data = (phone || username) && tokenData.tokenId ? tokenData : result;
+      const data = (phone || username || dob || skipBirthdateCheck) && tokenData.tokenId ? tokenData : result;
       try {
         const {
           tokenId,
@@ -207,12 +264,15 @@ export const googleLogin = (result, session, phone, username = null) => (dispatc
           session_id: session,
           phone,
           full_name: name,
-          username
+          username,
+          dob,
+          CreateWallet: createWallet,
+          skipBirthdateCheck,
+          otp
         };
         const response = await client.post(GOOGLE_LOGIN_API, postData);
-        await setToken({ client })(response);
+        setToken({ client })(response);
         return response;
-        // throw { askContact: true };
       } catch (err) {
         const error = {
           ...err,
@@ -276,4 +336,37 @@ export const resendOtp = mobile => ({
       throw err;
     }
   }
+});
+
+export const getOtpfromSignUp = mobile => ({
+  types: [GET_OTP_SIGNUP, GET_OTP_SUCCESS_SIGNUP, GET_OTP_FAIL_SIGNUP],
+  promise: async ({ client }) => {
+    try {
+      const postData = {
+        mobile
+      };
+      await client.post(SIGNUP_OTP_API, postData);
+    } catch (err) {
+      throw err;
+    }
+  }
+});
+
+export const resendOtpfromSignUp = mobile => ({
+  types: [GET_OTP_SIGNUP, GET_OTP_SUCCESS_SIGNUP, GET_OTP_FAIL_SIGNUP],
+  promise: async ({ client }) => {
+    try {
+      const postData = {
+        mobile
+      };
+      await client.post(RESEND_SIGNUP_OTP_API, postData);
+    } catch (err) {
+      throw err;
+    }
+  }
+});
+
+export const birthdateCheck = status => ({
+  type: BIRTH_DATE_CHECK,
+  status
 });

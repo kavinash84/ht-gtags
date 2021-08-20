@@ -21,7 +21,7 @@ const LoginModal = props => {
     session,
     loginViaLogin,
     loggingIn,
-    LoaderIcon,
+    // LoaderIcon,
     onChangeLastName,
     onChangeFirstName,
     onChangePhone
@@ -123,7 +123,7 @@ LoginModal.defaultProps = {
 
 LoginModal.propTypes = {
   loginViaLogin: PropTypes.func.isRequired,
-  LoaderIcon: PropTypes.string.isRequired,
+  // LoaderIcon: PropTypes.string.isRequired,
   onChangeLastName: PropTypes.func.isRequired,
   onChangeFirstName: PropTypes.func.isRequired,
   onChangePhone: PropTypes.func.isRequired,

@@ -19,9 +19,14 @@ export const GOOGLE_LOGIN = 'tesla/authentication/login/google';
 export const LOGOUT = 'tesla/users/logout';
 export const OTP = 'tesla/otp';
 export const RESEND_OTP = 'tesla/otp/resend';
+export const SIGNUP_OTP = '/tesla/otp/send-otp-wallet';
+export const RESEND_SIGNUP_OTP = '';
 
 /* Account */
 export const USERPROFILE = 'tesla/users/details';
+export const FUTUREPAYSTATUS = 'tesla/futurePay/futurePay-wallet-status';
+export const LINKFUTUREPAY = 'tesla/futurePay/create-wallet';
+export const TRANSACTIONHISTORY = 'tesla/futurePay/transactionDetails';
 export const UPDATEPROFILE = 'tesla/users/update-profile';
 export const UPDATE_PASSWORD = 'tesla/users/update-password';
 export const SET_PASSWORD = 'tesla/users/change-password';

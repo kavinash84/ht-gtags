@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { validateEmail, isBlank } from 'js-utility-functions';
+import moment from 'moment';
 /**
  * Components
  */
@@ -16,13 +17,28 @@ import Box from 'hometown-components-dev/lib/BoxHtV1';
 /**
  * modules / utils
  */
-import { validateMobile, checkSpecialChar, checkDateOfBirth } from 'utils/validation';
+import { validateMobile, checkSpecialChar, validateDob } from 'utils/validation';
 import { updateUserProfile } from 'redux/modules/profile';
 import {
   // allowNChar,
   // allowTypeOf,
   isGSTNumber
 } from 'utils/helper';
+
+import DatePicker from 'components/Form/DatePicker';
+
+const showDateField = (dob, onChange, dobError, dobErrorMessage) => (
+  <DatePicker
+    selected={dob}
+    onChange={onChange}
+    maxDate={new Date()}
+    showMonthDropdown
+    showYearDropdown
+    dobError={dobError}
+    dobErrorMessage={dobErrorMessage}
+    dropdownMode="select"
+  />
+);
 
 const ProfileViewRow = ({ title, value }) => (
   <Row mb={20}>
@@ -42,6 +58,7 @@ ProfileViewRow.propTypes = {
 
 @connect(({ profile }) => ({
   profile: profile.data,
+  futurePay: profile.data.futurPayProfile,
   response: profile
 }))
 export default class ProfileForm extends Component {
@@ -56,16 +73,19 @@ export default class ProfileForm extends Component {
       city: PropTypes.string,
       gender: PropTypes.string,
       birthday: PropTypes.string,
-      today: PropTypes.string
+      today: PropTypes.string,
+      wallet_created: PropTypes.any
     }),
-    response: PropTypes.object
+    response: PropTypes.object,
+    futurePay: PropTypes.object
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
   static defaultProps = {
     profile: {},
-    response: {}
+    response: {},
+    futurePay: {}
   };
 
   state = {
@@ -100,12 +120,13 @@ export default class ProfileForm extends Component {
  full_name: fullName, email, contact_number: phone, city, gst, dob, gender
 }
     } = this.props;
+    const dob1 = dob === 'Invalid date' ? '' : new Date(moment(dob, 'DD-MM-YYYY').toString());
     this.setState({
       fullName: (fullName && fullName.trim()) || '',
       email,
       phone: phone || '',
       gst,
-      dob,
+      dob: dob1 || '',
       city,
       gender
     });
@@ -168,27 +189,46 @@ export default class ProfileForm extends Component {
       cityErrorMessage: 'Numbers and special characters are not allowed !'
     });
   };
-  onChangeDob = e => {
+  onChangeDob = value => {
+    const checkError = value && validateDob(value);
     const {
-      target: { value }
-    } = e;
-    const checkError = checkDateOfBirth(value);
-    const newDate = value;
-    this.setState({
-      dob: newDate,
-      dobError: checkError
-    });
+      futurePay,
+      profile: { wallet_created: walletCreationStatus }
+    } = this.props;
+    if (walletCreationStatus === '1' || futurePay.status === 'success') {
+      const newDob = moment(value, 'DD-MM-YYYY').toDate();
+      const currentDate = `${new Date().toJSON().slice(0, 10)} 01:00:00`;
+      const myAge = Math.floor((Date.now(currentDate) - newDob) / 31557600000);
+      if (myAge > 10) {
+        this.setState({
+          dob: value,
+          dobError: checkError
+        });
+      } else {
+        this.setState({
+          // dob: value,
+          dobError: true,
+          dobErrorMessage: 'Wallet user shoud be atleast 10 years old'
+        });
+      }
+    } else {
+      this.setState({
+        dob: value,
+        dobError: checkError
+      });
+      // }
+    }
   };
   onSubmitProfile = e => {
     e.preventDefault();
     const {
- email, fullName, phone, gst, dob
+ email, fullName, phone, dob, dobError
 } = this.state;
     const checkEmail = validateEmail(email, 'Invalid Email');
     const phoneError = !validateMobile(phone);
     const checkFullName = isBlank(fullName) || checkSpecialChar(fullName);
-    const isGSTError = !isGSTNumber(gst);
-    const checkDob = checkDateOfBirth(dob);
+    // const isGSTError = !isGSTNumber(gst);
+    const checkDob = validateDob(dob) || dobError;
     if (checkEmail.error || checkFullName || phoneError || checkDob) {
       return this.setState({
         emailError: checkEmail.error,
@@ -198,24 +238,25 @@ export default class ProfileForm extends Component {
           ? 'Numbers and special characters are not allowed !'
           : 'Name Cannot be Left Empty !',
         phoneError,
-        gstError: isGSTError,
-        gstErrorMessage: 'Please enter a valid GST number !',
+        // gstError: isGSTError,
+        // gstErrorMessage: 'Please enter a valid GST number !',
         dobError: checkDob
       });
     }
     const { dispatch } = this.context.store;
-    // console.log(dob, 'Dob on submit%%%%%%');
-    dispatch(updateUserProfile(this.state));
+    const data = {
+      ...this.state,
+      dob: dob ? moment(dob, 'DD-MM-YYYY').format('YYYY-MM-DD') : ''
+    };
+    dispatch(updateUserProfile(data));
   };
   convertDateYyyy = date => {
     let newdate = '';
-    if (date !== '' || date !== 'undefined' || date !== 'Invalid date') {
-      newdate = date.split('-');
-      if (newdate[0].length === 4) {
-        newdate = newdate.reverse().join('-');
-      } else {
-        newdate = date;
-      }
+    if (date !== '' || date !== 'undefined' || date !== 'Invalid Date') {
+      const dt = new Date(date);
+      const mnth = `0${dt.getMonth() + 1}`.slice(-2);
+      const day = `0${dt.getDate()}`.slice(-2);
+      newdate = date ? [date.getFullYear(), mnth, day].reverse().join('-') : '';
     }
     return newdate;
   };
@@ -232,6 +273,7 @@ export default class ProfileForm extends Component {
     return newdate;
   };
   render() {
+    // const styles = require('./index.scss');
     const {
       email,
       phone,
@@ -256,8 +298,9 @@ export default class ProfileForm extends Component {
       cityErrorMessage,
       showEditForm
     } = this.state;
-    const { response } = this.props;
-    // console.log(dob, 'dob');
+    const { response, profile } = this.props;
+    const today = new Date();
+    const validDob = dob == 'Invalid Date' ? today : dob;
     return (
       <Box>
         <Box>
@@ -277,8 +320,8 @@ export default class ProfileForm extends Component {
             <ProfileViewRow title="E-mail-ID" value={email} />
             <ProfileViewRow title="Phone" value={phone} />
             <ProfileViewRow title="Gender" value={gender} />
-            <ProfileViewRow title="Date of Birth" value={this.convertDateYyyy(dob)} />
-            <ProfileViewRow title="Location" value={city} />
+            <ProfileViewRow title="Date of Birth" value={profile.dob} />
+            <ProfileViewRow title="City" value={city} />
           </Box>
         </Box>
         <Box pt={50} pb={20}>
@@ -305,7 +348,8 @@ export default class ProfileForm extends Component {
               onChangeFullName={this.onChangeFullName}
               fullNameFeedBackError={fullNameError}
               fullNameFeedBackMessage={fullNameErrorMessage}
-              dob={this.convertDateDd(dob)}
+              // dob={this.convertDateDd(dob)}
+              dob={dob}
               dobFeedBackError={dobError}
               dobFeedBackMessage={dobErrorMessage}
               gender={gender}
@@ -320,6 +364,7 @@ export default class ProfileForm extends Component {
               onCancelSubmit={() => this.setState({ showEditForm: !showEditForm })}
               onSubmitProfile={this.onSubmitProfile}
               response={response}
+              date={showDateField(validDob, this.onChangeDob, dobError, dobErrorMessage)}
             />
           </Box>
         ) : null}

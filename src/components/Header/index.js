@@ -8,6 +8,7 @@ import Container from 'hometown-components-dev/lib/ContainerHtV1';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
 
 /* ====== Page Components ====== */
+import FuturePayModal from 'components/MyHomeWallet/FuturePayModal';
 import HoverMenuBox from '../HoverBox/HoverMenuBox';
 import NavBar from '../NavBar';
 import HeaderTop from './HeaderTop';
@@ -25,8 +26,9 @@ const navigateToCategory = history => category => {
     }
   });
 };
-@connect(({ homepage }) => ({
-  menuItems: homepage.menu.data
+@connect(({ homepage, profile }) => ({
+  menuItems: homepage.menu.data,
+  walletNotCreated: profile.setFuturePayStatus
 }))
 class Header extends Component {
   state = {
@@ -124,7 +126,7 @@ class Header extends Component {
 
   render() {
     const { hoverBox, currentMenuData } = this.state;
-    const { menuItems } = this.props;
+    const { menuItems, walletNotCreated } = this.props;
 
     return (
       <Box bg="white" sx={{ position: 'sticky', top: 0, zIndex: 30 }}>
@@ -151,17 +153,20 @@ class Header extends Component {
             )}
           </Container>
         </Box>
+        {walletNotCreated && <FuturePayModal />}
       </Box>
     );
   }
 }
 
 Header.defaultProps = {
-  menuItems: []
+  menuItems: [],
+  walletNotCreated: false
 };
 Header.propTypes = {
   menuItems: PropTypes.array,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  walletNotCreated: PropTypes.bool
 };
 
 export default withRouter(Header);

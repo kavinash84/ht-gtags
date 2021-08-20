@@ -131,7 +131,13 @@ const onChangeGateway = (dispatcher, value, session) => () => {
   dispatcher(value, initial[value], session);
 };
 
-const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEasyEmi) => {
+const validatePaymentDetails = (futurePayRedeemAmount, total, isPayFromHtWallet) => {
+  const fullPayment = futurePayRedeemAmount === total;
+  return isPayFromHtWallet && fullPayment;
+};
+
+
+const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEasyEmi, futurePayRedeemAmount, total, isPayFromHtWallet) => {
   switch (paymentType) {
     case 'CreditCard':
       return (
@@ -139,6 +145,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEa
           <PaymentInputRadio
             value="CreditCard"
             checked={selectedGateway === paymentType}
+            disabled={validatePaymentDetails(futurePayRedeemAmount, total, isPayFromHtWallet)}
             onChange={onChangeGateway(onChange, paymentType, session)}
           />
           <PaymentTab
@@ -155,6 +162,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEa
           <PaymentInputRadio
             value="DebitCard"
             checked={selectedGateway === paymentType}
+            disabled={validatePaymentDetails(futurePayRedeemAmount, total, isPayFromHtWallet)}
             onChange={onChangeGateway(onChange, paymentType, session)}
           />
           <PaymentTab
@@ -171,6 +179,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEa
           <PaymentInputRadio
             value="NetBanking"
             checked={selectedGateway === paymentType}
+            disabled={validatePaymentDetails(futurePayRedeemAmount, total, isPayFromHtWallet)}
             onChange={onChangeGateway(onChange, paymentType, session)}
           />
           <PaymentTab
@@ -187,6 +196,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEa
           <PaymentInputRadio
             value="Emi"
             checked={selectedGateway === paymentType}
+            disabled={validatePaymentDetails(futurePayRedeemAmount, total, isPayFromHtWallet)}
             onChange={onChangeGateway(onChange, paymentType, session)}
           />
           <PaymentTab
@@ -203,6 +213,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEa
           <PaymentInputRadio
             value="Emi"
             checked={selectedGateway === paymentType}
+            disabled={validatePaymentDetails(futurePayRedeemAmount, total, isPayFromHtWallet)}
             onChange={onChangeGateway(onChange, paymentType, session)}
           />
           <PaymentTab
@@ -219,6 +230,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEa
           <PaymentInputRadio
             value="Wallet"
             checked={selectedGateway === paymentType}
+            disabled={validatePaymentDetails(futurePayRedeemAmount, total, isPayFromHtWallet)}
             onChange={onChangeGateway(onChange, paymentType, session)}
           />
           <PaymentTab
@@ -235,6 +247,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEa
           <PaymentInputRadio
             value="EasyEmi"
             checked={selectedGateway === paymentType}
+            disabled={validatePaymentDetails(futurePayRedeemAmount, total, isPayFromHtWallet)}
             onChange={() => {
               resetEasyEmi();
               onChangeGateway(onChange, paymentType, session)();
@@ -255,6 +268,7 @@ const CommonPayments = (paymentType, onChange, selectedGateway, session, resetEa
             value="Upi"
             name="paymentOption"
             checked={selectedGateway === paymentType}
+            disabled={validatePaymentDetails(futurePayRedeemAmount, total, isPayFromHtWallet)}
             onChange={onChangeGateway(onChange, paymentType, session)}
           />
           <PaymentTab

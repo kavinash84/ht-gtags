@@ -5,15 +5,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ResponsiveModal from 'components/Modal';
 import GoogleLoginBtn from 'react-google-login';
+import moment from 'moment';
 
 /* ====== Validations ====== */
-import { validateMobile, validateName } from 'utils/validation';
+import { validateMobile, validateName, validateDob } from 'utils/validation';
 
 /* ====== Helpers ====== */
 import { allowNChar, allowTypeOf } from 'utils/helper';
 
 /* ====== Modules ====== */
-import { googleLogin, clearLoginState } from 'redux/modules/login';
+import { googleLogin, clearLoginState, birthdateCheck } from 'redux/modules/login';
 
 /* ====== Components ====== */
 import FormInputHtV1 from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
@@ -25,16 +26,19 @@ import Image from 'hometown-components-dev/lib/ImageHtV1';
 
 import UpdateName from './UpdateName';
 import UpdateContacts from './UpdateContacts';
+import UpdateDob from './UpdateDobGoogle';
+import UpdateContactAndDob from './UpdateContactAndDob';
 
 const LoaderIcon = require('../../../static/refresh-black.svg');
 
-const mapStateToProps = ({ app }) => ({
+const mapStateToProps = ({ app, userLogin }) => ({
   session: app.sessionId,
-  userLogin: app.userLogin
+  userLogin: app.userLogin,
+  skipBirthdateCheck: userLogin.skipBirthdateCheck
 });
 
 const onSuccess = (dispatcher, session, phone) => result => {
-  dispatcher(result, session, phone);
+  dispatcher(result, session, phone, null, null, false, null, true);
 };
 
 const onError = error => e => {
@@ -54,6 +58,9 @@ const mapDispatchToProps = dispatch =>
 const GoogleIcon = require('../../../static/google.svg');
 
 class GoogleLogin extends Component {
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -65,9 +72,91 @@ class GoogleLogin extends Component {
       firstNameErrorMessage: 'Please enter a valid first name',
       lastName: '',
       lastNameError: false,
-      lastNameErrorMessage: 'Please enter a valid last name'
+      lastNameErrorMessage: 'Please enter a valid last name',
+      otp: '',
+      otpErrorMessage: 'OTP Should be 6 Characters',
+      resend: false,
+      mobilesubmitted: false,
+      open: false,
+      resendtimer: 30
     };
   }
+
+  componentWillReceiveProps(nextProps) {
+    if (!this.state.mobilesubmitted && nextProps.getotpError && nextProps.getotpErrorMessage.includes('resend')) {
+      this.setState({
+        mobilesubmitted: true
+      });
+    }
+    if (nextProps.otpSent && nextProps.otpSent !== this.props.otpSent) {
+      this.setState({
+        mobilesubmitted: true
+      });
+    }
+  }
+
+  componentDidUpdate(nextProps, prevState) {
+    if (this.state.mobilesubmitted && this.state.mobilesubmitted !== prevState.mobilesubmitted) {
+      const timerref = setInterval(() => {
+        if (this.state.resendtimer <= 1) {
+          clearInterval(this.state.timerref);
+        }
+        this.setState(prevstate => ({
+          resendtimer: prevstate.resendtimer - 1
+        }));
+      }, 1000);
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({ timerref });
+    }
+  }
+
+  onSubmitMobileNumber = e => {
+    e.preventDefault();
+    const { phone, resend, dob } = this.state;
+    const checkmobile = !validateMobile(phone);
+    const { session, skipBirthdateCheck, loginViaLogin } = this.props;
+
+    if (checkmobile) {
+      return this.setState({
+        phoneError: true,
+        phoneErrorMessage: 'Please Enter Valid Mobile Number'
+      });
+    }
+    const { dispatch } = this.context.store;
+    if (resend) {
+      return dispatch(resendOtp(this.state.phone));
+    }
+
+    loginViaLogin({}, session, phone, null, dob, true, null, false);
+    this.setState({
+      mobilesubmitted: true
+    });
+  };
+
+  onSubmitMobileAndDob = e => {
+    e.preventDefault();
+    const {
+ phone, resend, dob, otp
+} = this.state;
+    const checkmobile = !validateMobile(phone);
+    const { session, skipBirthdateCheck, loginViaLogin } = this.props;
+
+    if (checkmobile) {
+      return this.setState({
+        phoneError: true,
+        phoneErrorMessage: 'Please Enter Valid Mobile Number'
+      });
+    }
+    const { dispatch } = this.context.store;
+    if (resend) {
+      return dispatch(resendOtp(this.state.phone));
+    }
+
+    loginViaLogin({}, session, phone, null, dob, false, otp, true);
+    this.setState({
+      mobilesubmitted: true
+    });
+  };
   onChangePhone = e => {
     const {
       target: { value }
@@ -110,6 +199,67 @@ class GoogleLogin extends Component {
       lastNameError: isInvalid
     });
   };
+  onChangeDob = value => {
+    const checkError = validateDob(value).error;
+    const newDob = moment(value, 'DD-MM-YYYY').toDate();
+    const currentDate = `${new Date().toJSON().slice(0, 10)} 01:00:00`;
+    const myAge = Math.floor((Date.now(currentDate) - newDob) / 31557600000);
+    if (myAge > 10) {
+      this.setState({
+        dob: value,
+        dobError: checkError,
+        dobErrorMessage: validateDob(value).msg
+      });
+    } else {
+      this.setState({ dobError: true, dobErrorMessage: 'Wallet user should be atleast 10 years old' });
+    }
+    // this.setState({
+    //   dob: value,
+    //   dobError: checkError,
+    //   dobErrorMessage: validateDob(value).msg
+    // });
+  };
+  onChangeOtp = e => {
+    const { value } = e.target;
+    if (!allowNChar(value, 6) || (!allowTypeOf(value, 'number') && value.length > 0)) {
+      return;
+    }
+    this.setState({
+      otp: value,
+      otpError: false
+    });
+  };
+  onSubmitOtp = e => {
+    e.preventDefault();
+    const { otp, phone, dob } = this.state;
+    const { session, skipBirthdateCheck } = this.props;
+    if (otp.length < 6) {
+      return this.setState({
+        otpError: true
+      });
+    }
+    const { dispatch } = this.context.store;
+    const data = {
+      ...this.state,
+      skipOtpValidation: true
+    };
+    // dispatch(linkFuturePay({ skipOtpValidation: true }));
+    // dispatch(this.props.loginViaLogin({}, session, phone, null ,dob, skipBirthdateCheck, otp, true));
+    // dispatch(loadUserProfile());
+  };
+  handleResend = () => {
+    this.setState({
+      // mobilesubmitted: false,
+      resend: true
+    });
+    const { dispatch } = this.context.store;
+    const { phone } = this.state;
+    dispatch(resendOtp(phone));
+  };
+  birthdateCheck = status => {
+    const { dispatch } = this.context.store;
+    dispatch(birthdateCheck(status));
+  };
 
   handleModal = () => {
     this.props.clearLogin();
@@ -121,8 +271,15 @@ class GoogleLogin extends Component {
   };
   render() {
     const {
- loginViaLogin, session, askContact, askName, loginType, loggingIn
-} = this.props;
+      loginViaLogin,
+      session,
+      askContact,
+      askName,
+      askBirthDate,
+      loginType,
+      loggingIn,
+      skipBirthdateCheck
+    } = this.props;
     // const { phone, phoneError, phoneErrorMessage } = this.state;
     // const open = askContact && loginType && loginType === 'google';
     const {
@@ -135,10 +292,18 @@ class GoogleLogin extends Component {
       firstNameErrorMessage,
       lastName,
       lastNameError,
-      lastNameErrorMessage
+      lastNameErrorMessage,
+      dob,
+      dobError,
+      dobErrorMessage,
+      mobilesubmitted,
+      otp,
+      otpError,
+      otpErrorMessage,
+      resend,
+      resendtimer
     } = this.state;
-    const open = (askContact || askName) && loginType && loginType === 'google';
-
+    const open = (askContact || askName || askBirthDate) && loginType && loginType === 'google';
     return (
       <Box>
         <Box
@@ -188,6 +353,34 @@ class GoogleLogin extends Component {
               onChangePhone={this.onChangePhone}
               loginViaLogin={loginViaLogin}
             />
+          ) : askContact && askBirthDate ? (
+            <UpdateContactAndDob
+              session={session}
+              loggingIn={loggingIn}
+              phone={phone}
+              phoneError={phoneError}
+              phoneErrorMessage={phoneErrorMessage}
+              onChangePhone={this.onChangePhone}
+              dob={dob}
+              dobError={dobError}
+              dobErrorMessage={dobErrorMessage}
+              onChangeDob={this.onChangeDob}
+              onSubmitMobileNumber={this.onSubmitMobileNumber}
+              onSubmitMobileAndDob={this.onSubmitMobileAndDob}
+              mobilesubmitted={mobilesubmitted}
+              LoaderIcon={LoaderIcon}
+              skipBirthdateCheck={skipBirthdateCheck}
+              birthdateCheck={this.birthdateCheck}
+              loginViaLogin={loginViaLogin}
+              onSubmitOtp={this.onSubmitOtp}
+              onChangeOtp={this.onChangeOtp}
+              otp={otp}
+              otpError={otpError}
+              otpErrorMessage={otpErrorMessage}
+              resend={resend}
+              resendtimer={resendtimer}
+              handleResend={this.handleModal}
+            />
           ) : askName ? (
             <UpdateName
               session={session}
@@ -203,6 +396,19 @@ class GoogleLogin extends Component {
               onChangeLastName={this.onChangeLastName}
               loginViaLogin={loginViaLogin}
               // onSubmitForm={this.onSubmitForm}
+            />
+          ) : askBirthDate ? (
+            <UpdateDob
+              session={session}
+              loggingIn={loggingIn}
+              dob={dob}
+              dobError={dobError}
+              dobErrorMessage={dobErrorMessage}
+              onChangeDob={this.onChangeDob}
+              LoaderIcon={LoaderIcon}
+              skipBirthdateCheck={skipBirthdateCheck}
+              birthdateCheck={this.birthdateCheck}
+              loginViaLogin={loginViaLogin}
             />
           ) : askContact ? (
             <Box>
@@ -306,7 +512,9 @@ GoogleLogin.propTypes = {
   askContact: PropTypes.bool.isRequired,
   askName: PropTypes.bool.isRequired,
   loginType: PropTypes.string.isRequired,
-  loggingIn: PropTypes.bool.isRequired
+  loggingIn: PropTypes.bool.isRequired,
+  askBirthDate: PropTypes.bool.isRequired,
+  skipBirthdateCheck: PropTypes.bool.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GoogleLogin);
