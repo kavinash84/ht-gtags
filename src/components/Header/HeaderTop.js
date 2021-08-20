@@ -105,9 +105,11 @@ export default class HeaderTop extends Component {
     containsOutOfStock: false
   };
   componentDidMount() {
-    const { cartItems } = this.props;
-    // console.log('cart check', checkCart);
+    const { cartItems, sessionId } = this.props;
     this.containsOutOfStockFunc(cartItems);
+    const { selectedPincode } = this.props;
+    const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
+    this.props.loadCart(sessionId, pincode).catch(error => console.log(error));
   }
 
   componentWillReceiveProps(nextProps) {
@@ -146,10 +148,9 @@ export default class HeaderTop extends Component {
 
   checkCartBeforeCheckout = (dispatcher, session) => dispatcheroEmpty => {
     // e.preventDefault();
-    const { selectedPincode, loadCart } = this.props;
-    // console.log('cart check console', dispatcher, session, dispatcheroEmpty);
+    const { selectedPincode } = this.props;
     const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
-    loadCart(session, pincode).catch(error => console.log(error));
+    this.props.loadCart(session, pincode).catch(error => console.log(error));
     dispatcher(session);
     despatchClearSelectForDemo(dispatcheroEmpty); // New
   };
@@ -160,7 +161,6 @@ export default class HeaderTop extends Component {
         this.setState({
           containsOutOfStock: true
         });
-        // console.log(this.state);
       }
     });
   };
@@ -189,9 +189,9 @@ export default class HeaderTop extends Component {
       cartItems,
       cartSummary,
       wishlist,
-      checkCart,
-      sessionId,
-      addToSelectForDemo
+      // checkCart,
+      sessionId
+      // addToSelectForDemo
     } = this.props;
 
     return (
@@ -455,7 +455,12 @@ export default class HeaderTop extends Component {
                           <Button
                             width={1}
                             as={Link}
-                            onClick={() => this.checkCartBeforeCheckout(checkCart, sessionId)(addToSelectForDemo)}
+                            onClick={() =>
+                              this.checkCartBeforeCheckout(
+                                this.props.checkCart,
+                                sessionId
+                              )(this.props.addToSelectForDemo)
+                            }
                             to={DELIVERY_ADDRESS_URL}
                             mb={10}
                           >
@@ -531,7 +536,7 @@ HeaderTop.defaultProps = {
   router: {},
   cartItems: [],
   cartSummary: {},
-  cart: {},
+  // cart: {},
   wishlist: {},
   logoutUser: () => {}
 };
@@ -546,7 +551,7 @@ HeaderTop.propTypes = {
   name: PropTypes.string,
   cartItems: PropTypes.array,
   cartSummary: PropTypes.object,
-  cart: PropTypes.object,
+  // cart: PropTypes.object,
   wishlist: PropTypes.object,
   addToSelectForDemo: PropTypes.func.isRequired,
   checkCart: PropTypes.func.isRequired,

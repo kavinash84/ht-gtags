@@ -67,6 +67,10 @@ export const signUp = (data, session, signupOrigin) => ({
         password: data.password,
         session_id: session
       };
+      if (data.otp) {
+        postData.CreateWallet = true;
+        postData.otp = data.otp;
+      }
       const response = await client.post(SIGNUP_API, postData);
       await setToken({ client })(response);
       response.origin = signupOrigin || 'unknown';

@@ -130,9 +130,11 @@ export default function userMiddleware() {
         dispatch(notifSend({
             type: 'warning',
             msg:
-              (action.error.error_message === 'invalid_grant' && 'Incorrect Email or Password') ||
-              action.error.error_message ||
-              'User Credentials Are Invalid',
+              action.error.error_message === 'Birth Date Does not Exist'
+                ? 'Please update Date of Birth'
+                : (action.error.error_message === 'invalid_grant' && 'Incorrect Email or Password') ||
+                  action.error.error_message ||
+                  'User Credentials Are Invalid',
             dismissAfter: 4000
           }));
         break;
@@ -304,13 +306,28 @@ export default function userMiddleware() {
             }));
         }
         break;
-        case 'feedback/SET_FEEDBACK_FORM_FAILURE':
-          dispatch(notifSend({
+      case 'feedback/SET_FEEDBACK_FORM_FAILURE':
+        dispatch(notifSend({
             type: 'warning',
             msg: action.error && action.error.error ? action.error.error : SOME_ERROR,
             dismissAfter: 4000
           }));
-          break;
+        break;
+      // FuturePay
+      case 'profile/LINK_FUTURE_PAY_SUCCESS':
+        dispatch(notifSend({
+            type: 'success',
+            msg: action.successMessage ? action.successMessage : 'Wallet Created Successfully',
+            dismissAfter: 4000
+          }));
+        break;
+      case 'profile/LINK_FUTURE_PAY_FAIL':
+        dispatch(notifSend({
+            type: 'warning',
+            msg: action.error && action.error.error_message ? action.error.error_message : SOME_ERROR,
+            dismissAfter: 4000
+          }));
+        break;
       default:
         break;
     }

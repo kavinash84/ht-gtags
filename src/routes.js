@@ -16,7 +16,7 @@ import StoreLocator from 'containers/StoreLocator';
 /* auth */
 import Login from 'containers/Login';
 import Signup from 'containers/Signup';
-// import ForgotPassword from 'containers/ForgotPassword';
+import ForgotPassword from 'containers/ForgotPassword';
 import ResetPassword from 'containers/ResetPassword';
 
 /* products */
@@ -40,6 +40,7 @@ import ServiceSignUpContainer from 'components/ServiceSignUp';
 
 /* user */
 import Profile from 'containers/Profile';
+import MyHomeWallet from 'containers/MyHomeWallet';
 import MyOrder from 'containers/MyOrder';
 import OrderAndReturns from 'containers/OrderAndReturns';
 import MyAddress from 'containers/MyAddress';
@@ -111,7 +112,7 @@ const routes = [
         exact: true,
         component: isNotAuthenticated(ResetPassword)
       },
-      // { path: '/forgot-password', exact: true, component: isNotAuthenticated(ForgotPassword) },
+      { path: '/forgot-password', exact: true, component: isNotAuthenticated(ForgotPassword) },
       { path: '/wishlist', exact: true, component: isAuthenticated(Wishlist) },
       { path: '/checkout/cart', exact: true, component: Cart },
       { path: '/my-orders', exact: true, component: isAuthenticated(MyOrder) },
@@ -127,6 +128,7 @@ const routes = [
       },
       { path: '/my-cases', exact: true, component: isAuthenticated(MyCases) },
       { path: '/profile', exact: true, component: isAuthenticated(Profile) },
+      { path: '/my-hometown-wallet', exact: true, component: isAuthenticated(MyHomeWallet) },
       {
         path: '/my-dashboard',
         exact: true,
