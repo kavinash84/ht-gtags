@@ -35,6 +35,8 @@ import { validatePassword } from 'utils/validation';
 import { isBlank } from 'js-utility-functions';
 import { setUserPassword } from 'redux/modules/setpassword';
 
+import PixelAnalytics from './PixelAnalytics';
+
 const mapStateToProps = ({
   setpassword,
   paymentstatus: { data, loaded, error },
@@ -222,6 +224,7 @@ class PaymentSuccess extends Component {
       data,
       data: {
         order_no: orderNo,
+        instant_discount: instantDiscount = 0,
         sub_total_amount: subTotal,
         discount_coupon_value: discount,
         net_order_amount: totalAmount,
@@ -434,6 +437,12 @@ class PaymentSuccess extends Component {
                         <Text>Discount : </Text>
                         <Text>Rs {formatAmount(discount)}</Text>
                       </Flex>
+                      {instantDiscount ? (
+                        <Flex mb={20} justifyContent="space-between">
+                          <Text>Instant Discount : </Text>
+                          <Text>Rs {formatAmount(instantDiscount)}</Text>
+                        </Flex>
+                      ) : null}
                       {setDiscount ? (
                         <Flex mb={20} justifyContent="space-between">
                           <Text>Combo Discount : </Text>
@@ -455,6 +464,7 @@ class PaymentSuccess extends Component {
                     </Box>
                   </Row>
                 </Box>
+                <PixelAnalytics transactionId={orderNo} amount={totalAmount} />
               </Container>
             ) : null}
             {/* Footer */}
@@ -467,7 +477,24 @@ class PaymentSuccess extends Component {
   }
 }
 PaymentSuccess.defaultProps = {
-  data: '',
+  data: {
+    order_date: '',
+    shipping_address: {
+      first_name: '',
+      last_name: '',
+      address1: '',
+      city: '',
+      postcode: '',
+      state: ''
+    },
+    instant_discount: 0,
+    sub_total_amount: 0,
+    shipping_charges: 0,
+    discount_coupon_value: 0,
+    set_discount: 0,
+    net_order_amount: 0,
+    cart_products: []
+  },
   error: '',
   paymentLoaded: false,
   response: {},
@@ -476,7 +503,25 @@ PaymentSuccess.defaultProps = {
 };
 
 PaymentSuccess.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.shape({
+    order_no: PropTypes.string.isRequired,
+    order_date: PropTypes.string,
+    shipping_address: PropTypes.shape({
+      first_name: PropTypes.string,
+      last_name: PropTypes.string,
+      address1: PropTypes.string,
+      city: PropTypes.string,
+      postcode: PropTypes.string,
+      state: PropTypes.string
+    }),
+    cart_products: PropTypes.array,
+    instant_discount: PropTypes.number,
+    sub_total_amount: PropTypes.number,
+    shipping_charges: PropTypes.number,
+    discount_coupon_value: PropTypes.number,
+    set_discount: PropTypes.number,
+    net_order_amount: PropTypes.number
+  }),
   error: PropTypes.string,
   history: PropTypes.object.isRequired,
   paymentLoaded: PropTypes.bool,

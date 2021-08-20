@@ -30,6 +30,7 @@ import PlanYourKitchen from 'containers/PlanYourKitchen';
 import DesignBuild from 'containers/DesignBuild';
 import BulkOrder from 'containers/BulkOrder';
 import Brand from 'containers/Brand';
+import HtExclusive from 'containers/HtExclusive';
 import ContactUs from 'containers/ContactUs';
 import Feedback from 'containers/Feedback';
 import FeedbackMailer from 'containers/FeedbackMailer';
@@ -163,7 +164,7 @@ const routes = [
       { path: '/faq', exact: true, component: FAQ },
       { path: '/who-we-are', exact: true, component: WhoWeAre },
       { path: '/store/:city/:storeName', exact: true, component: Stores },
-      { path: '/track-order', exact: true, component: TrackOrder },
+      { path: '/track-order/:orderno?', exact: true, component: TrackOrder },
       { path: '/store-locator', exact: true, component: StoreLocator },
       { path: '/contact-us', exact: true, component: ContactUs },
       { path: '/feedback', exact: true, component: Feedback },
@@ -182,6 +183,7 @@ const routes = [
       },
       { path: '/bulk-order', exact: true, component: BulkOrder },
       { path: '/brand/laura-ashley', exact: true, component: Brand },
+      { path: '/brand/ht-exclusive', exact: true, component: HtExclusive },
       {
         path: '/service-signup',
         exact: true,

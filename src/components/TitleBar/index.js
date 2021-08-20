@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 
 const TitleBar = ({ title, productCount, marginLeftTop }) => (
-  <Heading ml={marginLeftTop} mt="2rem">
+  <Heading as="h1" ml={marginLeftTop} mt="2rem">
     {title} {productCount && `(${productCount})`}
   </Heading>
 );

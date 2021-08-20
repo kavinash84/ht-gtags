@@ -1,0 +1,22 @@
+.slick-arrow {
+  top: 45% !important;
+}
+
+.slick-next {
+  right: -15px !important;
+}
+
+.slick-prev {
+  left: -15px !important;
+}
+
+.heading {
+  text-align: center;
+  font-size: 1.1rem;
+  color: white;
+}
+
+.bg-blue {
+  padding: 20px 40px;
+  background: #2c3f49;
+}

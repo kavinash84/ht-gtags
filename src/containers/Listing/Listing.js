@@ -28,7 +28,8 @@ import {
   getFilters,
   getAppliedFilters,
   getSEOInfo,
-  getl4
+  getl4,
+  getCMSJson
 } from 'selectors/products';
 import { SITE_URL } from 'helpers/Constants';
 import CANONICALS from 'data/canonical';
@@ -40,6 +41,27 @@ const btnStyle = {
   margin: '0px',
   outline: 'none',
   border: 'none'
+};
+
+const getFaqs = faqs => {
+  const seoFaq = JSON.parse(faqs).map(faq => {
+    // console.log(faq, 'QA check');
+    // console.log(Object.values(faq)[0]);
+    const ques = Object.values(faq)[0];
+    // console.log(faq.ans);
+    if (faq) {
+      return {
+        '@type': 'Question',
+        name: ques,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: faq.ans
+        }
+      };
+    }
+    return '';
+  });
+  return JSON.stringify(seoFaq);
 };
 
 @connect(state => ({
@@ -62,6 +84,7 @@ const btnStyle = {
   sortBy: state.products.filters.sortBy,
   categoryquery: state.products.category,
   seoInfo: getSEOInfo(state),
+  cmsJson: getCMSJson(state),
   breadCrumbs: state.products.categoryDetails,
   currentPage: state.pagination.page,
   categoryBar: getl4(state),
@@ -94,6 +117,7 @@ export default class Listing extends Component {
     categoryquery: PropTypes.string.isRequired,
     isLoggedIn: PropTypes.bool,
     seoInfo: PropTypes.object,
+    cmsJson: PropTypes.object,
     breadCrumbs: PropTypes.array,
     currentPage: PropTypes.number,
     categoryBar: PropTypes.array,
@@ -125,6 +149,7 @@ export default class Listing extends Component {
     sortBy: '',
     isLoggedIn: false,
     seoInfo: {},
+    cmsJson: {},
     breadCrumbs: [],
     currentPage: 1,
     categoryBar: [],
@@ -275,6 +300,7 @@ export default class Listing extends Component {
       sortBy,
       categoryquery,
       seoInfo,
+      cmsJson,
       breadCrumbs,
       currentPage,
       categoryBar,
@@ -305,6 +331,19 @@ export default class Listing extends Component {
           <title>{seoInfo && seoInfo.page_title}</title>
           <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
           <meta name="description" content={seoInfo && seoInfo.meta_description} />
+          {cmsJson && cmsJson.length ? (
+            <script type="application/ld+json">
+              {`
+              {
+                "@context" : "http://schema.org",
+                "@type" : "FAQPage",
+                "mainEntity": ${getFaqs(cmsJson)}
+              }
+            `}
+            </script>
+          ) : (
+            ''
+          )}
           {CANONICALS[pathname] && <link rel="canonical" href={`${SITE_URL}${CANONICALS[pathname]}`} />}
           {previousPage !== '' && Number(page) !== 2 && (
             <link rel="prev" href={`${SITE_URL}${pathname}${previousPage}`} />
@@ -324,8 +363,8 @@ export default class Listing extends Component {
           )}
 
           {/* Listing page best offer banners */}
-          <Box sx={btnStyle} onClick={() => this.scrollDown(bannerData)}>
-            <BestOfferBanners bannerData={bannerData} history={history} />
+          <Box sx={btnStyle}>
+            <BestOfferBanners bannerData={bannerData} history={history} onImageClick={this.scrollDown} />
           </Box>
           <Box>
             <div ref={this.listingRef}>

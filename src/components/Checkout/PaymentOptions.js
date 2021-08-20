@@ -273,7 +273,7 @@ class PaymentOptions extends Component {
                       <Heading color="white" fontSize={20}>
                         {isProductOutofStock(item.configurable_sku)
                           ? 'This product is out of stock please remove before proceed.'
-                          : "Sorry, this product isn't deliverable to selected pincode."}
+                          : "Sorry, this product isn't available to selected pincode"}
                       </Heading>
                       <Flex mt={15} justifyContent="center">
                         <Link to="/checkout/delivery-address" sx={{ cursor: 'pointer' }}>
@@ -336,7 +336,7 @@ class PaymentOptions extends Component {
                     padding="2rem 2.5rem 1.5rem"
                   />
                 )}
-                {selectedGateway === 'NetBanking' && (
+                {/* {selectedGateway === 'NetBanking' && (
                   <Fragment>
                     <Box pb={20}>
                       <Label>Choose From Preferred Bank</Label>
@@ -345,116 +345,137 @@ class PaymentOptions extends Component {
                       <BankCard
                         setPaymentDetails={setPaymentDetails}
                         gateway={selectedGateway}
-                        name="HDFB"
-                        detailkey="bankCode"
-                        img="https://static.hometown.in/media/cms/BankLOGO/hdfc.gif"
-                        currentSelection={paymentDetails.NetBanking.bankCode}
+                        padding="2rem 2.5rem 1.5rem"
                       />
-                      <BankCard
+                    )}
+                    {selectedGateway === 'DebitCard' && (
+                      <CardForm
                         setPaymentDetails={setPaymentDetails}
                         gateway={selectedGateway}
-                        name="ICIB"
-                        detailkey="bankCode"
-                        img="https://static.hometown.in/media/cms/BankLOGO/icici.gif"
-                        currentSelection={paymentDetails.NetBanking.bankCode}
+                        padding="2rem 2.5rem 1.5rem"
                       />
-                      <BankCard
+                    )} */}
+                    {selectedGateway === 'NetBanking' && (
+                      <Fragment>
+                        <Box pb={20}>
+                          <Label>Choose From Preferred Bank</Label>
+                        </Box>
+                        <Row>
+                          <BankCard
+                            setPaymentDetails={setPaymentDetails}
+                            gateway={selectedGateway}
+                            name="HDFB"
+                            detailkey="bankCode"
+                            img="https://static.hometown.in/media/cms/BankLOGO/hdfc.gif"
+                            currentSelection={paymentDetails.NetBanking.bankCode}
+                          />
+                          <BankCard
+                            setPaymentDetails={setPaymentDetails}
+                            gateway={selectedGateway}
+                            name="ICIB"
+                            detailkey="bankCode"
+                            img="https://static.hometown.in/media/cms/BankLOGO/icici.gif"
+                            currentSelection={paymentDetails.NetBanking.bankCode}
+                          />
+                          <BankCard
+                            setPaymentDetails={setPaymentDetails}
+                            gateway={selectedGateway}
+                            name="AXIB"
+                            detailkey="bankCode"
+                            img="https://static.hometown.in/media/cms/BankLOGO/axis.gif"
+                            currentSelection={paymentDetails.NetBanking.bankCode}
+                          />
+                          <BankCard
+                            setPaymentDetails={setPaymentDetails}
+                            gateway={selectedGateway}
+                            name="SBIB"
+                            detailkey="bankCode"
+                            img="https://static.hometown.in/media/cms/BankLOGO/sbi.gif"
+                            currentSelection={paymentDetails.NetBanking.bankCode}
+                          />
+                        </Row>
+                        <Box
+                          as="select"
+                          variant="input"
+                          name="bankCode"
+                          onChange={onChangeDetails(setPaymentDetails, selectedGateway)}
+                          value={paymentDetails.NetBanking.bankCode}
+                        >
+                          <option value="">Select Bank</option>
+                          {netBankingData &&
+                            netBankingData.netBankingBanks &&
+                            Object.keys(netBankingData.netBankingBanks).map((k, i) => (
+                              <option value={k} key={k}>
+                                {Object.values(netBankingData.netBankingBanks)[i]}
+                              </option>
+                            ))}
+                        </Box>
+                      </Fragment>
+                    )}
+                    {selectedGateway === 'Emi' && paymentDetails.Emi && (
+                      <Emi
+                        selectedGateway={selectedGateway}
+                        setPaymentDetails={setPaymentDetails}
+                        currentSelection={paymentDetails.Emi.emiBank}
+                      />
+                    )}
+                    {selectedGateway === 'EmiZero' && paymentDetails.EmiZero && (
+                      <EmiZero
+                        selectedGateway={selectedGateway}
+                        setPaymentDetails={setPaymentDetails}
+                        currentSelection={paymentDetails.EmiZero.emiBank}
+                      />
+                    )}
+                    {selectedGateway === 'EasyEmi' && (
+                      <CardFormEasyEmi
                         setPaymentDetails={setPaymentDetails}
                         gateway={selectedGateway}
-                        name="AXIB"
-                        detailkey="bankCode"
-                        img="https://static.hometown.in/media/cms/BankLOGO/axis.gif"
-                        currentSelection={paymentDetails.NetBanking.bankCode}
+                        padding="2rem 2.5rem 1.5rem"
                       />
-                      <BankCard
-                        setPaymentDetails={setPaymentDetails}
-                        gateway={selectedGateway}
-                        name="SBIB"
-                        detailkey="bankCode"
-                        img="https://static.hometown.in/media/cms/BankLOGO/sbi.gif"
-                        currentSelection={paymentDetails.NetBanking.bankCode}
-                      />
-                    </Row>
-                    <Box
-                      as="select"
-                      variant="input"
-                      name="bankCode"
-                      onChange={onChangeDetails(setPaymentDetails, selectedGateway)}
-                      value={paymentDetails.NetBanking.bankCode}
-                    >
-                      <option value="">Select Bank</option>
-                      {netBankingData &&
-                        netBankingData.netBankingBanks &&
-                        Object.keys(netBankingData.netBankingBanks).map((k, i) => (
-                          <option value={k} key={k}>
-                            {Object.values(netBankingData.netBankingBanks)[i]}
-                          </option>
-                        ))}
-                    </Box>
-                  </Fragment>
-                )}
-                {selectedGateway === 'Emi' && paymentDetails.Emi && (
-                  <Emi
-                    selectedGateway={selectedGateway}
-                    setPaymentDetails={setPaymentDetails}
-                    currentSelection={paymentDetails.Emi.emiBank}
-                  />
-                )}
-                {selectedGateway === 'EmiZero' && paymentDetails.EmiZero && (
-                  <EmiZero
-                    selectedGateway={selectedGateway}
-                    setPaymentDetails={setPaymentDetails}
-                    currentSelection={paymentDetails.EmiZero.emiBank}
-                  />
-                )}
-                {selectedGateway === 'EasyEmi' && (
-                  <CardFormEasyEmi
-                    setPaymentDetails={setPaymentDetails}
-                    gateway={selectedGateway}
-                    padding="2rem 2.5rem 1.5rem"
-                  />
-                )}
-                {WalletData && selectedGateway === 'Wallet' && (
-                  <Fragment>
-                    <Box pb={20}>
-                      <Label htmlFor="bankOptions1">Select From your preferred Wallet</Label>
-                    </Box>
-                    <Row>
-                      {WalletData.isPaytmWalletEnable && (
-                        <BankCard
-                          setPaymentDetails={setPaymentDetails}
-                          gateway={selectedGateway}
-                          name="Paytm"
-                          detailkey="walletName"
-                          currentSelection={paymentDetails.Wallet.walletName}
-                          img="https://static.hometown.in/images/local_v2/onestepcheckout/logo/paytm.jpg"
-                        />
-                      )}
-                      {WalletData.isPayuWalletEnable && (
-                        <BankCard
-                          setPaymentDetails={setPaymentDetails}
-                          gateway={selectedGateway}
-                          name="Payu"
-                          detailkey="walletName"
-                          currentSelection={paymentDetails.Wallet.walletName}
-                          img="https://static.hometown.in/images/local_v2/onestepcheckout/logo/payu.jpg"
-                        />
-                      )}
-                      {WalletData.isMobikwikWalletEnable && (
-                        <BankCard
-                          setPaymentDetails={setPaymentDetails}
-                          gateway={selectedGateway}
-                          name="Mobikwik"
-                          detailkey="walletName"
-                          currentSelection={paymentDetails.Wallet.walletName}
-                          img="https://static.hometown.in/images/local_v2/onestepcheckout/logo/mobikwik.jpg"
-                        />
-                      )}
-                    </Row>
-                  </Fragment>
-                )}
-              </Box>
-            </Row>
+                    )}
+                    {WalletData && selectedGateway === 'Wallet' && (
+                      <Fragment>
+                        <Box pb={20}>
+                          <Label htmlFor="bankOptions1">Select From your preferred Wallet</Label>
+                        </Box>
+                        <Row>
+                          {WalletData.isPaytmWalletEnable && (
+                            <BankCard
+                              setPaymentDetails={setPaymentDetails}
+                              gateway={selectedGateway}
+                              name="Paytm"
+                              detailkey="walletName"
+                              currentSelection={paymentDetails.Wallet.walletName}
+                              img="https://static.hometown.in/images/local_v2/onestepcheckout/logo/paytm.jpg"
+                            />
+                          )}
+                          {WalletData.isPayuWalletEnable && (
+                            <BankCard
+                              setPaymentDetails={setPaymentDetails}
+                              gateway={selectedGateway}
+                              name="Payu"
+                              detailkey="walletName"
+                              currentSelection={paymentDetails.Wallet.walletName}
+                              img="https://static.hometown.in/images/local_v2/onestepcheckout/logo/payu.jpg"
+                            />
+                          )}
+                          {WalletData.isMobikwikWalletEnable && (
+                            <BankCard
+                              setPaymentDetails={setPaymentDetails}
+                              gateway={selectedGateway}
+                              name="Mobikwik"
+                              detailkey="walletName"
+                              currentSelection={paymentDetails.Wallet.walletName}
+                              img="https://static.hometown.in/images/local_v2/onestepcheckout/logo/mobikwik.jpg"
+                            />
+                          )}
+                        </Row>
+                      </Fragment>
+                    )}
+                  </Box>
+                </Row>
+              {/* </Box>
+            ) : null} */}
           </Col>
 
           {/* Order Summary */}
