@@ -26,13 +26,15 @@ import WalletTransactions from 'components/MyHomeWallet/WalletTransactions';
 import ResponsiveModal from 'components/Modal';
 
 import { getFuturePayProfile } from 'selectors/userprofile';
-import { linkFuturePay, loadUserProfile } from 'redux/modules/profile';
+import { linkFuturePay, loadUserProfile, updateUserProfile } from 'redux/modules/profile';
 import { birthdateCheck, getOtp, resendOtp } from 'redux/modules/login';
+import { validateDob } from 'utils/validation';
 
 // import { linkFuturePay, setFuturePayStatus as toggleFuturePayModal } from 'redux/modules/profile';
 import { formatAmount } from 'utils/formatters';
 import { allowNChar, allowTypeOf } from 'utils/helper';
 import Row from 'hometown-components-dev/lib/RowHtV1';
+import UpdateDobModal from './updateDob';
 
 const MidBanner = require('../../../static/banners/mid-banner1.jpeg');
 
@@ -74,7 +76,11 @@ export class MyHomeWallet extends Component {
     resend: false,
     resendtimer: 30,
     open: false,
-    validAge: false
+    validAge: false,
+    askBirthDate: false,
+    dob: '',
+    dobError: false,
+    dobErrorMessage: 'Wallet user should be at least 10 years old'
   };
 
   componentDidMount() {
@@ -124,6 +130,59 @@ export class MyHomeWallet extends Component {
     });
   };
 
+  onChangeDob = value => {
+    const checkError = validateDob(value).error;
+    const newDob = moment(value, 'DD-MM-YYYY').toDate();
+    const currentDate = `${new Date().toJSON().slice(0, 10)} 01:00:00`;
+    const myAge = Math.floor((Date.now(currentDate) - newDob) / 31557600000);
+    if (myAge > 10) {
+      this.setState({
+        dob: value,
+        dobError: checkError
+      });
+    } else {
+      this.setState({
+        dob: value,
+        dobError: true,
+        dobErrorMessage: 'Wallet user can not be less than 10 years old'
+      });
+    }
+  };
+
+  onSubmitDob = () => {
+    const { dob } = this.state;
+    const {
+ email, mobile, full_name: fullName, gst, city, gender
+} = this.props.profile;
+    // const {
+    //   profile: { mobile = 0 }
+    // } = this.props;
+    const isInvalid = validateDob(dob).error;
+    const { dispatch } = this.context.store;
+    const postData = {
+      email,
+      phone: mobile,
+      fullName,
+      gst,
+      dob,
+      city,
+      gender
+    };
+    console.log(postData, 'postData');
+    dispatch(updateUserProfile(postData));
+    if (!isInvalid) {
+      this.setState(
+        {
+          open: true
+        },
+        () => {
+          dispatch(birthdateCheck(false));
+          dispatch(getOtp(mobile));
+        }
+      );
+    }
+  };
+
   handleResend = () => {
     this.setState({
       // mobilesubmitted: false,
@@ -142,26 +201,50 @@ export class MyHomeWallet extends Component {
     });
   };
 
+  handleModalDob = () => {
+    this.setState({
+      askBirthDate: !this.state.askBirthDate
+    });
+  };
+
   ageCheck = () => {
     const { dob } = this.props.profile;
-    const newDob = moment(dob, 'DD-MM-YYYY').toDate();
-    const currentDate = `${new Date().toJSON().slice(0, 10)} 01:00:00`;
-    const myAge = Math.floor((Date.now(currentDate) - newDob) / 31557600000);
-    this.setState({
-      validAge: myAge > 10
-    });
+    if (dob) {
+      const newDob = moment(dob, 'DD-MM-YYYY').toDate();
+      const currentDate = `${new Date().toJSON().slice(0, 10)} 01:00:00`;
+      const myAge = Math.floor((Date.now(currentDate) - newDob) / 31557600000);
+      this.setState({
+        validAge: myAge > 10
+      });
+    } else {
+      this.setState({
+        validAge: true
+      });
+    }
   };
 
   render() {
     const {
       futurPayProfile: { AvailableBalance: balance, status },
       profile: { mobile = 0 },
+      profile: { dob: profileDob },
       loggingIn,
       loggedIn
     } = this.props;
     const {
- otp, otpError, otpErrorMessage, resend, resendtimer, open, validAge
-} = this.state;
+      otp,
+      otpError,
+      otpErrorMessage,
+      resend,
+      resendtimer,
+      open,
+      validAge,
+      askBirthDate,
+      dob,
+      dobError,
+      dobErrorMessage
+    } = this.state;
+    // console.log(profileDob, 'profileDOb')
     return (
       <div className="wrapper dummy">
         {/* <Menu /> */}
@@ -199,10 +282,14 @@ export class MyHomeWallet extends Component {
                           onClick={() => {
                             const { dispatch } = this.context.store;
                             // dispatch(toggleFuturePayModal(true));
-                            if (validAge) {
+                            if (profileDob && validAge) {
                               this.handleModal(true);
                               dispatch(birthdateCheck(false));
-                              // dispatch(getOtp(mobile));
+                              dispatch(getOtp(mobile));
+                            } else {
+                              this.setState({
+                                askBirthDate: true
+                              });
                             }
                           }}
                         >
@@ -212,6 +299,18 @@ export class MyHomeWallet extends Component {
                     </Text>
                   </Box>
                 )}
+
+                {askBirthDate ? (
+                  <UpdateDobModal
+                    open={askBirthDate}
+                    dob={dob}
+                    dobError={dobError}
+                    dobErrorMessage={dobErrorMessage}
+                    handleModal={this.handleModalDob}
+                    onChangeDob={this.onChangeDob}
+                    onSubmitDob={this.onSubmitDob}
+                  />
+                ) : null}
 
                 {/* <FuturePayModal /> */}
                 {!validAge ? (
@@ -294,16 +393,18 @@ export class MyHomeWallet extends Component {
             ) : null}
 
             {/* Transaction history */}
-            <Box bg="#F7F7F7">
-              <Container pl="1.563rem" pr="1.563rem" pt="0.7rem">
-                <Box>
-                  <Text fontFamily="medium" fontSize="14px" mt="1rem" mb="1rem">
-                    Transaction History
-                  </Text>
-                  <WalletTransactions />
-                </Box>
-              </Container>
-            </Box>
+            {status === 'success' ? (
+              <Box bg="#F7F7F7">
+                <Container pl="1.563rem" pr="1.563rem" pt="0.7rem">
+                  <Box>
+                    <Text fontFamily="medium" fontSize="14px" mt="1rem" mb="1rem">
+                      Transaction History
+                    </Text>
+                    <WalletTransactions />
+                  </Box>
+                </Container>
+              </Box>
+            ) : null}
           </Box>
         </Row>
         <Footer />
