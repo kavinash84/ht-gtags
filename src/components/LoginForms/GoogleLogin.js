@@ -39,7 +39,7 @@ const mapStateToProps = ({ app, userLogin }) => ({
 });
 
 const onSuccess = (dispatcher, session, phone) => result => {
-  dispatcher(result, session, phone, null, null, false, null, true);
+  dispatcher(result, session, phone, null, null, false, null);
 };
 
 const onError = error => e => {
