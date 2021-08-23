@@ -148,13 +148,13 @@ export default function userMiddleware() {
         break;
 
       // OTP
-      case 'login/GET_OTP_FAIL':
-        dispatch(notifSend({
-            type: 'warning',
-            msg: (action.error && titleCase(action.error.error_message)) || SOME_ERROR,
-            dismissAfter: 4000
-          }));
-        break;
+      // case 'login/GET_OTP_FAIL':
+      //   dispatch(notifSend({
+      //       type: 'warning',
+      //       msg: (action.error && titleCase(action.error.error_message)) || SOME_ERROR,
+      //       dismissAfter: 4000
+      //     }));
+      //   break;
       // Delivery
       case 'checkout/SEND_DELIVERY_ADDRESS_FAIL': {
         let msg;
