@@ -15,7 +15,7 @@ import { allowNChar, allowTypeOf } from 'utils/helper';
 
 /* ====== Modules ====== */
 import { googleLogin, clearLoginState, birthdateCheck, resendOtpfromSignUp, resendOtp } from 'redux/modules/login';
-import { linkFuturePay } from 'redux/modules/profile';
+// import { linkFuturePay } from 'redux/modules/profile';
 
 /* ====== Components ====== */
 import FormInputHtV1 from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
@@ -39,7 +39,7 @@ const mapStateToProps = ({ app, userLogin }) => ({
 });
 
 const onSuccess = (dispatcher, session, phone) => result => {
-  dispatcher(result, session, phone, null, null, false, null);
+  dispatcher(result, session, phone, null, null, false, null, true);
 };
 
 const onError = error => e => {
@@ -157,7 +157,7 @@ class GoogleLogin extends Component {
     this.setState({
       mobilesubmitted: true
     });
-    dispatch(linkFuturePay({ skipOtpValidation: true }));
+    // dispatch(linkFuturePay({ skipOtpValidation: true }));
   };
   onChangePhone = e => {
     const {
