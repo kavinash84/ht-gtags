@@ -14,7 +14,8 @@ import { validateMobile, validateName, validateDob } from 'utils/validation';
 import { allowNChar, allowTypeOf } from 'utils/helper';
 
 /* ====== Modules ====== */
-import { googleLogin, clearLoginState, birthdateCheck } from 'redux/modules/login';
+import { googleLogin, clearLoginState, birthdateCheck, resendOtpfromSignUp, resendOtp } from 'redux/modules/login';
+import { linkFuturePay } from 'redux/modules/profile';
 
 /* ====== Components ====== */
 import FormInputHtV1 from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
@@ -77,7 +78,7 @@ class GoogleLogin extends Component {
       otpErrorMessage: 'OTP Should be 6 Characters',
       resend: false,
       mobilesubmitted: false,
-      open: false,
+      // open: false,
       resendtimer: 30
     };
   }
@@ -114,7 +115,7 @@ class GoogleLogin extends Component {
     e.preventDefault();
     const { phone, resend, dob } = this.state;
     const checkmobile = !validateMobile(phone);
-    const { session, skipBirthdateCheck, loginViaLogin } = this.props;
+    const { session, loginViaLogin } = this.props;
 
     if (checkmobile) {
       return this.setState({
@@ -139,7 +140,8 @@ class GoogleLogin extends Component {
  phone, resend, dob, otp
 } = this.state;
     const checkmobile = !validateMobile(phone);
-    const { session, skipBirthdateCheck, loginViaLogin } = this.props;
+    const { session, loginViaLogin } = this.props;
+    const { dispatch } = this.context.store;
 
     if (checkmobile) {
       return this.setState({
@@ -147,15 +149,15 @@ class GoogleLogin extends Component {
         phoneErrorMessage: 'Please Enter Valid Mobile Number'
       });
     }
-    const { dispatch } = this.context.store;
     if (resend) {
-      return dispatch(resendOtp(this.state.phone));
+      return dispatch(resendOtpfromSignUp(this.state.phone));
     }
 
     loginViaLogin({}, session, phone, null, dob, false, otp, true);
     this.setState({
       mobilesubmitted: true
     });
+    dispatch(linkFuturePay({ skipOtpValidation: true }));
   };
   onChangePhone = e => {
     const {
@@ -213,11 +215,6 @@ class GoogleLogin extends Component {
     } else {
       this.setState({ dobError: true, dobErrorMessage: 'Wallet user should be atleast 10 years old' });
     }
-    // this.setState({
-    //   dob: value,
-    //   dobError: checkError,
-    //   dobErrorMessage: validateDob(value).msg
-    // });
   };
   onChangeOtp = e => {
     const { value } = e.target;
@@ -231,18 +228,12 @@ class GoogleLogin extends Component {
   };
   onSubmitOtp = e => {
     e.preventDefault();
-    const { otp, phone, dob } = this.state;
-    const { session, skipBirthdateCheck } = this.props;
+    const { otp } = this.state;
     if (otp.length < 6) {
       return this.setState({
         otpError: true
       });
     }
-    const { dispatch } = this.context.store;
-    const data = {
-      ...this.state,
-      skipOtpValidation: true
-    };
     // dispatch(linkFuturePay({ skipOtpValidation: true }));
     // dispatch(this.props.loginViaLogin({}, session, phone, null ,dob, skipBirthdateCheck, otp, true));
     // dispatch(loadUserProfile());
@@ -280,8 +271,6 @@ class GoogleLogin extends Component {
       loggingIn,
       skipBirthdateCheck
     } = this.props;
-    // const { phone, phoneError, phoneErrorMessage } = this.state;
-    // const open = askContact && loginType && loginType === 'google';
     const {
       // eslint-disable-next-line max-len
       phone,
@@ -415,7 +404,9 @@ class GoogleLogin extends Component {
               <Row>
                 <Box variant="col-12">
                   <Heading>{'Update Profile'}</Heading>
-                  <Text>{'Mobile number is required to login'}</Text>
+                  <Text mt={15} mb={10}>
+                    {'Mobile number is required to login'}
+                  </Text>
                 </Box>
               </Row>
               <Text ta="center" fontSize="1.25rem" mb="0.625rem" mt="0" color="rgba(51, 51, 51, 0.85)">
@@ -463,42 +454,7 @@ class GoogleLogin extends Component {
                 </button>
               </Text>
             </Box>
-          ) : //   </Row>
-          //   <form
-          //     onSubmit={this.onSubmitForm}
-          //     id="custom_form"
-          //     name="custom_form"
-          //     encType="multipart/form-data"
-          //     className="bulk-order-form"
-          //   >
-          //     <FormInputHtV1
-          //       label=""
-          //       type="text"
-          //       placeholder=""
-          //       onChange={this.onChangePhone}
-          //       value={phone}
-          //       feedBackError={phoneError}
-          //       feedBackMessage={phoneErrorMessage}
-          //     />
-          //   </form>
-          //   <GoogleLoginBtn
-          //     disabled={this.isValid()}
-          //     className="google-login-btn"
-          //     clientId="663311547699-jersj1hfflbl8gfukgsuvug8u1gc88nm.apps.googleusercontent.com"
-          //     onSuccess={onSuccess(loginViaLogin, session, phone)}
-          //     onFailure={onError}
-          //   >
-          //     {loggingIn ? (
-          //       <span>
-          //         Please Wait
-          //         <Image className="spin" src={LoaderIcon} display="inline" width="18px" va="sub" />
-          //       </span>
-          //     ) : (
-          //       'Update Contact Number'
-          //     )}
-          //   </GoogleLoginBtn>
-          // </Text>
-          null}
+          ) : null}
         </ResponsiveModal>
       </Box>
     );
@@ -514,7 +470,10 @@ GoogleLogin.propTypes = {
   loginType: PropTypes.string.isRequired,
   loggingIn: PropTypes.bool.isRequired,
   askBirthDate: PropTypes.bool.isRequired,
-  skipBirthdateCheck: PropTypes.bool.isRequired
+  skipBirthdateCheck: PropTypes.bool.isRequired,
+  getotpError: PropTypes.bool.isRequired,
+  getotpErrorMessage: PropTypes.string.isRequired,
+  otpSent: PropTypes.bool.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GoogleLogin);

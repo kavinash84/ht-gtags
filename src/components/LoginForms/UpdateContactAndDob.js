@@ -11,7 +11,6 @@ import Row from 'hometown-components-dev/lib/RowHtV1';
 import Img from 'hometown-components-dev/lib/ImageHtV1';
 import Div from 'hometown-components-dev/lib/BoxHtV1';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
-import { FeedBackMessage } from 'hometown-components-dev/lib/LabelHtV1';
 
 // Custom Components
 import DatePicker from 'components/Form/DatePicker';
