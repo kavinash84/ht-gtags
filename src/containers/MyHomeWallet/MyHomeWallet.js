@@ -173,6 +173,7 @@ export class MyHomeWallet extends Component {
     if (!isInvalid) {
       this.setState(
         {
+          askBirthDate: false,
           open: true
         },
         () => {
