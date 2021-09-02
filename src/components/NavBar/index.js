@@ -39,27 +39,44 @@ class NavBar extends Component {
           <Row variant="row.nav" pt={[8, 8, 0]}>
             {main.map((menuItem, i) => (
               <Fragment>
-                <Text
-                  as={Link}
-                  variant="menu"
-                  onClick={exitOnClick}
-                  title={menuItem.name}
-                  to={`/${menuItem.url_key}`}
-                  key={`${menuItem.id}_${String(i)}`}
-                  onMouseEnter={handleEnter(menuItem.id)}
-                  minWidth="auto"
-                >
-                  {menuItem.name === 'Hot Deals' ? (
-                    <Fragment>
-                      <Label as={Absolute} variant="menuNew">
-                        New
-                      </Label>
+                {menuItem.url_key.startsWith('http') ? (
+                  <Box>
+                    <Text
+                      as={LinkRedirect}
+                      variant="menuLight"
+                      href={menuItem.url_key}
+                      title={menuItem.name}
+                      download
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       {menuItem.name}
-                    </Fragment>
-                  ) : (
-                    menuItem.name
-                  )}
-                </Text>
+                    </Text>
+                  </Box>
+                ) : (
+                  <Text
+                    as={Link}
+                    variant="menu"
+                    onClick={exitOnClick}
+                    title={menuItem.name}
+                    to={`/${menuItem.url_key}`}
+                    key={`${menuItem.id}_${String(i)}`}
+                    onMouseEnter={handleEnter(menuItem.id)}
+                    minWidth="auto"
+                  >
+                    {menuItem.name === 'Hot Deals' ? (
+                      <Fragment>
+                        <Label as={Absolute} variant="menuNew">
+                          New
+                        </Label>
+                        {menuItem.name}
+                      </Fragment>
+                    ) : (
+                      menuItem.name
+                    )}
+                  </Text>
+                )}
+
                 <Image
                   display={['block', 'block', 'none']}
                   width={12}
@@ -72,7 +89,7 @@ class NavBar extends Component {
                 />
               </Fragment>
             ))}
-            <Link
+            {/* <Link
               href="https://beta.hometown.in/modular-kitchens/"
               to="/modular-kitchens"
               title="Modular Kitchens"
@@ -85,7 +102,7 @@ class NavBar extends Component {
               }}
             >
               Modular Kitchens
-            </Link>
+            </Link> */}
 
             {/* More Button */}
             <Box sx={{ position: 'relative' }}>
@@ -141,21 +158,40 @@ class NavBar extends Component {
               />
               <Card sx={{ position: 'absolute', zIndex: '1111' }} variant="card.moreDropdown" px={0} py={0}>
                 {more &&
-                  more.map((menuItem, i) => (
-                    <Box key={`${menuItem.id}_${String(i)}`}>
-                      <Text
-                        as={Link}
-                        variant="menuLight"
-                        onClick={exitOnClick}
-                        onMouseEnter={handleEnter('')}
-                        title={menuItem.name}
-                        to={`/${menuItem.url_key}`}
-                      >
-                        {menuItem.name || 'Hometown'}
-                      </Text>
-                    </Box>
-                  ))}
-                <Box>
+                  more.map((menuItem, i) => {
+                    if (menuItem.url_key.startsWith('http')) {
+                      return (
+                        <Box>
+                          <Text
+                            as={LinkRedirect}
+                            variant="menuLight"
+                            href={menuItem.url_key}
+                            title={menuItem.name}
+                            download
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {menuItem.name}
+                          </Text>
+                        </Box>
+                      );
+                    }
+                    return (
+                      <Box key={`${menuItem.id}_${String(i)}`}>
+                        <Text
+                          as={Link}
+                          variant="menuLight"
+                          onClick={exitOnClick}
+                          onMouseEnter={handleEnter('')}
+                          title={menuItem.name}
+                          to={`/${menuItem.url_key}`}
+                        >
+                          {menuItem.name || 'Hometown'}
+                        </Text>
+                      </Box>
+                    );
+                  })}
+                {/* <Box>
                   <Text
                     as={Link}
                     variant="menuLight"
@@ -206,7 +242,7 @@ class NavBar extends Component {
                   >
                     Blog
                   </Text>
-                </Box>
+                </Box> */}
               </Card>
             </Box>
           </Row>
