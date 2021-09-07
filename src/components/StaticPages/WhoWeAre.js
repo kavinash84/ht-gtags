@@ -16,7 +16,9 @@ const WhoWeAre = () => (
       <BoxHtV1 className={styles.staticPageWrapper} type="block" pt="2rem" pb="2.5rem">
         <RowHtV1 ml="0" mr="0">
           <BoxHtV1>
-            <HeadingHtV1 as="h1" mb="1em">Who We Are</HeadingHtV1>
+            <HeadingHtV1 as="h1" mb="1em">
+              Who We Are
+            </HeadingHtV1>
             <TextHtV1 color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem" lineHeight="1.5">
               Over the past 10 years, HomeTown has been bringing the latest designs & fashion to Indian homes. HomeTown
               offers the widest and best in class range in furniture, home furnishings & decor, modular kitchens, home
@@ -38,7 +40,7 @@ const WhoWeAre = () => (
             </TextHtV1>
             <TextHtV1 color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem" lineHeight="1.5">
               From classy sofas to chic dining sets to kitchen essentials and artifacts, we offer everything to beautify
-              your living space. Since 2006, we’ve grown to over 40 stores across 22 cities. Keeping pace with the
+              your living space. Since 2006, we’ve grown to over 44 stores across 28 cities. Keeping pace with the
               tech-savvy world, we have maintained a strong web presence with prompt online services.
             </TextHtV1>
           </BoxHtV1>
