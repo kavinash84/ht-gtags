@@ -20,7 +20,7 @@ const WhoWeAre = () => (
               Who We Are
             </HeadingHtV1>
             <TextHtV1 color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem" lineHeight="1.5">
-              Over the past 10 years, HomeTown has been bringing the latest designs & fashion to Indian homes. HomeTown
+              Since 2006, HomeTown has been bringing the latest designs & fashion to Indian homes. HomeTown
               offers the widest and best in class range in furniture, home furnishings & decor, modular kitchens, home
               improvement and more. Part of the Future Group, HomeTown brings an enjoyable and hassle-free homemaking
               experience to all its valuable customers with varying lifestyles and preferences.
