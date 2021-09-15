@@ -54,27 +54,55 @@ class NavBar extends Component {
                     </Text>
                   </Box>
                 ) : (
-                  <Text
-                    as={Link}
-                    variant="menu"
-                    onClick={exitOnClick}
-                    title={menuItem.name}
-                    to={`/${menuItem.url_key}`}
-                    key={`${menuItem.id}_${String(i)}`}
-                    onMouseEnter={handleEnter(menuItem.id)}
-                    minWidth="auto"
-                  >
-                    {menuItem.name === 'Hot Deals' ? (
-                      <Fragment>
-                        <Label as={Absolute} variant="menuNew">
-                          New
-                        </Label>
-                        {menuItem.name}
-                      </Fragment>
+                  <Fragment>
+                    {/* eslint-disable */}
+                    {menuItem.hasOwnProperty('target') ? (
+                      <Text
+                        as={Link}
+                        variant="menu"
+                        // onClick={exitOnClick}
+                        title={menuItem.name}
+                        to={`/${menuItem.url_key}`}
+                        key={`${menuItem.id}_${String(i)}`}
+                        onMouseEnter={handleEnter(menuItem.id)}
+                        minWidth="auto"
+                        target={menuItem.target}
+                      >
+                        {menuItem.name === 'Hot Deals' ? (
+                          <Fragment>
+                            <Label as={Absolute} variant="menuNew">
+                              New
+                            </Label>
+                            {menuItem.name}
+                          </Fragment>
+                        ) : (
+                          menuItem.name
+                        )}
+                      </Text>
                     ) : (
-                      menuItem.name
+                      <Text
+                        as={Link}
+                        variant="menu"
+                        onClick={exitOnClick}
+                        title={menuItem.name}
+                        to={`/${menuItem.url_key}`}
+                        key={`${menuItem.id}_${String(i)}`}
+                        onMouseEnter={handleEnter(menuItem.id)}
+                        minWidth="auto"
+                      >
+                        {menuItem.name === 'Hot Deals' ? (
+                          <Fragment>
+                            <Label as={Absolute} variant="menuNew">
+                              New
+                            </Label>
+                            {menuItem.name}
+                          </Fragment>
+                        ) : (
+                          menuItem.name
+                        )}
+                      </Text>
                     )}
-                  </Text>
+                  </Fragment>
                 )}
 
                 <Image
@@ -89,20 +117,6 @@ class NavBar extends Component {
                 />
               </Fragment>
             ))}
-            {/* <Link
-              href="https://beta.hometown.in/modular-kitchens/"
-              to="/modular-kitchens"
-              title="Modular Kitchens"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                textDecoration: 'none',
-                fontFamily: 'medium',
-                color: 'black'
-              }}
-            >
-              Modular Kitchens
-            </Link> */}
 
             {/* More Button */}
             <Box sx={{ position: 'relative' }}>
@@ -176,6 +190,23 @@ class NavBar extends Component {
                         </Box>
                       );
                     }
+                    if (menuItem.hasOwnProperty('target')) {
+                      return (
+                        <Box key={`${menuItem.id}_${String(i)}`}>
+                          <Text
+                            as={Link}
+                            variant="menuLight"
+                            // onClick={exitOnClick}
+                            onMouseEnter={handleEnter('')}
+                            title={menuItem.name}
+                            to={`/${menuItem.url_key}`}
+                            target={menuItem.target}
+                          >
+                            {menuItem.name || 'Hometown'}
+                          </Text>
+                        </Box>
+                      );
+                    }
                     return (
                       <Box key={`${menuItem.id}_${String(i)}`}>
                         <Text
@@ -191,58 +222,6 @@ class NavBar extends Component {
                       </Box>
                     );
                   })}
-                {/* <Box>
-                  <Text
-                    as={Link}
-                    variant="menuLight"
-                    onClick={exitOnClick}
-                    to="/bulk-order"
-                    onMouseEnter={handleEnter('')}
-                    title="Bulk Order"
-                  >
-                    Bulk Order
-                  </Text>
-                </Box>
-                <Box>
-                  <Text
-                    as={Link}
-                    variant="menuLight"
-                    to="/design-build/"
-                    // href="https://stage.hometown.in/design-build/"
-                    title="Design & Build"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    // onClick={exitOnClick}
-                  >
-                    Design & Build
-                  </Text>
-                </Box>
-                <Box>
-                  <Text
-                    as={LinkRedirect}
-                    variant="menuLight"
-                    href="https://hometown.in/media/Institutional+Catalogue.pdf"
-                    title="Festive Gifts Catalogue"
-                    download
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Gifting Catalogue
-                  </Text>
-                </Box>
-                <Box>
-                  <Text
-                    as={LinkRedirect}
-                    variant="menuLight"
-                    href="https://blog.hometown.in"
-                    title="Hometown Blog"
-                    download
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Blog
-                  </Text>
-                </Box> */}
               </Card>
             </Box>
           </Row>
