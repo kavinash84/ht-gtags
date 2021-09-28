@@ -684,7 +684,8 @@ class ProductDetails extends React.Component {
       total_savings: totalSavings,
       limited_time_coupon_discount: limitedTimeCouponDiscount,
       total_discount_percentage: totalDiscountPercentage,
-      mrp: maxPrice
+      mrp: maxPrice,
+      discount_type: discountType
     } = pricingDetails;
 
     const checkSpecialPrice = Number(specialPriceEmi) || Number(price);
@@ -774,6 +775,7 @@ class ProductDetails extends React.Component {
                   name={name}
                   brand={brand}
                   couponCode={couponCode}
+                  discountType={discountType}
                   offerDiscountPercentage={offerDiscountPercentage}
                   limitedTimeCouponDiscount={limitedTimeCouponDiscount}
                   maxPrice={maxPrice}
