@@ -99,7 +99,7 @@ const ContactUs = () => (
                 </HeadingHtV1>
                 <TextHtV1 color="#8d8d8d" fontSize="0.875rem" mb="0" mt="0.625rem" lineHeight="1.5">
                   TollFree – 1800-210-0004 <br />
-                  10.00 a.m. to 8.00 p.m., 365days
+                  10.00 a.m. to 7.00 p.m., 365days
                 </TextHtV1>
               </SectionHtV1>
               <SectionHtV1
