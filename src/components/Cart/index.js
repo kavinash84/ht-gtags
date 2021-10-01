@@ -201,7 +201,7 @@ const mapStateToProps = ({
 });
 
 const Cart = ({
-  demoProductsBanner,
+  // demoProductsBanner,
   results,
   summary,
   removeFromCart,
@@ -316,13 +316,18 @@ const Cart = ({
             {/* <button onClick={handleClickDemo} >TRIAL</button> */}
           </Row>
 
-          {demoProductsBanner && (
+          {/* {demoProductsBanner && (
             <Row type="block" m="0" mb="0" mt="0">
               <Box>
                 <Image src={demoBanner} alt="" />
               </Box>
             </Row>
-          )}
+          )} */}
+          <Row type="block" m="0" mb="0" mt="0">
+            <Box>
+              <Image src={demoBanner} alt="" />
+            </Box>
+          </Row>
           {results.map(item => (
             <Box>
               {item.is_display ? (
@@ -719,7 +724,7 @@ const Cart = ({
 };
 
 Cart.propTypes = {
-  demoProductsBanner: PropTypes.bool,
+  // demoProductsBanner: PropTypes.bool,
   results: PropTypes.array,
   summary: PropTypes.object,
   pincode: PropTypes.string,
@@ -745,7 +750,7 @@ Cart.propTypes = {
 };
 
 Cart.defaultProps = {
-  demoProductsBanner: false,
+  // demoProductsBanner: false,
   results: [],
   summary: null,
   pincode: '',

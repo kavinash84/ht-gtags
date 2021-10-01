@@ -26,7 +26,7 @@ const checkoutIcon = require('../../../static/checkout.svg');
 
 const styles = require('../Checkout/OrderSummary.scss');
 
-const demoBanner = require('../../../static/campaign/select-for-demo-mini-banner.jpg');
+// const demoBanner = require('../../../static/campaign/select-for-demo-mini-banner.jpg');
 
 const OrderSummary = ({
   itemsTotal,
@@ -78,11 +78,6 @@ const OrderSummary = ({
         </Box>
       </Row>
     )} */}
-    <Row ml="0" mr="0" mb="1rem" alignItems="center" flexWrap="no-wrap" width="100%">
-      <Box>
-        <Image src={demoBanner} alt="" />
-      </Box>
-    </Row>
     <Box variant="col-12" pb={20}>
       <Flex mb={[10, 10, 20]} justifyContent="space-between">
         <Text>Subtotal</Text>
