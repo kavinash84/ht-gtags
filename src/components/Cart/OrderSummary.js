@@ -41,9 +41,9 @@ const OrderSummary = ({
   disabled,
   outOfStockList,
   discount,
-  btnText,
-  landingPageLink,
-  selectedForDemo
+  btnText
+  // landingPageLink,
+  // selectedForDemo
 }) => (
   <Row>
     <Col width={1}>
@@ -69,7 +69,7 @@ const OrderSummary = ({
       <Coupon />
     </Box>
 
-    {selectedForDemo && (
+    {/* {selectedForDemo && (
       <Row ml="0" mr="0" mb="1rem" alignItems="center" flexWrap="no-wrap" width="100%">
         <Box>
           <a href={landingPageLink} rel="noreferrer" target="_blank">
@@ -77,7 +77,12 @@ const OrderSummary = ({
           </a>
         </Box>
       </Row>
-    )}
+    )} */}
+    <Row ml="0" mr="0" mb="1rem" alignItems="center" flexWrap="no-wrap" width="100%">
+      <Box>
+        <Image src={demoBanner} alt="" />
+      </Box>
+    </Row>
     <Box variant="col-12" pb={20}>
       <Flex mb={[10, 10, 20]} justifyContent="space-between">
         <Text>Subtotal</Text>
@@ -146,9 +151,9 @@ OrderSummary.defaultProps = {
   disabled: false,
   discount: 0,
   btnText: 'Place Order',
-  setDiscount: 0,
-  landingPageLink: '',
-  selectedForDemo: false
+  setDiscount: 0
+  // landingPageLink: '',
+  // selectedForDemo: false
 };
 
 OrderSummary.propTypes = {
@@ -164,9 +169,9 @@ OrderSummary.propTypes = {
   outOfStockList: PropTypes.array,
   disabled: PropTypes.bool,
   discount: PropTypes.number,
-  btnText: PropTypes.string,
-  landingPageLink: PropTypes.string,
-  selectedForDemo: PropTypes.bool
+  btnText: PropTypes.string
+  // landingPageLink: PropTypes.string,
+  // selectedForDemo: PropTypes.bool
 };
 
 export default OrderSummary;

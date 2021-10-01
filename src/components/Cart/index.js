@@ -462,6 +462,13 @@ const Cart = ({
                           </Label>
                         </Box>
                       )}
+                      {item.product_info.offer_message ? (
+                        <Box mt="1rem">
+                          <Text color="orangered" fontSize="1rem" style={{ fontWeight: 'bold' }}>
+                            {item.product_info.offer_message}
+                          </Text>
+                        </Box>
+                      ) : null}
                       {/* {item.product_info.assembly_service && (
                       <Box color="uspTitle" fontSize="0.75rem">
                         <Image
