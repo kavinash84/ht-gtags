@@ -46,7 +46,8 @@ import PaymentMethods from '../PaymentMethods';
 const checkoutIcon = require('../../../static/checkout.svg');
 const location = require('../../../static/map-icon.svg');
 const orderTrackIcon = require('../../../static/shipped.svg');
-const demoBanner = require('../../../static/campaign/select-for-demo-banner.jpg');
+// const demoBanner = require('../../../static/campaign/select-for-demo-banner.jpg');
+const cashbackBanner = require('../../../static/campaign/Cart-banner.jpg');
 const saveForLaterIcon = require('../../../static/wishListIcon.png');
 
 const styles = require('./Cart.scss');
@@ -325,7 +326,9 @@ const Cart = ({
           )} */}
           <Row type="block" m="0" mb="0" mt="0">
             <Box>
-              <Image src={demoBanner} alt="" />
+              <Link to="/terms-and-conditions">
+                <Image src={cashbackBanner} alt="" />
+              </Link>
             </Box>
           </Row>
           {results.map(item => (
