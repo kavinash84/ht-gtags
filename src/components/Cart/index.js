@@ -296,6 +296,13 @@ const Cart = ({
               </Button>
             </Row>
           </Row>
+          <Row type="block" m="0" mb="0" mt="1rem">
+            <Box>
+              <Link to="/promotions">
+                <Image src={cashbackBanner} alt="" />
+              </Link>
+            </Box>
+          </Row>
           <Row
             mt={30}
             mb={10}
@@ -324,13 +331,6 @@ const Cart = ({
               </Box>
             </Row>
           )} */}
-          <Row type="block" m="0" mb="0" mt="0">
-            <Box>
-              <Link to="/promotions">
-                <Image src={cashbackBanner} alt="" />
-              </Link>
-            </Box>
-          </Row>
           {results.map(item => (
             <Box>
               {item.is_display ? (
