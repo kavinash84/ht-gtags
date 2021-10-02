@@ -326,7 +326,7 @@ const Cart = ({
           )} */}
           <Row type="block" m="0" mb="0" mt="0">
             <Box>
-              <Link to="/terms-and-conditions">
+              <Link to="/promotions">
                 <Image src={cashbackBanner} alt="" />
               </Link>
             </Box>
