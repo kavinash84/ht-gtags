@@ -46,8 +46,8 @@ import PaymentMethods from '../PaymentMethods';
 const checkoutIcon = require('../../../static/checkout.svg');
 const location = require('../../../static/map-icon.svg');
 const orderTrackIcon = require('../../../static/shipped.svg');
-// const demoBanner = require('../../../static/campaign/select-for-demo-banner.jpg');
-const cashbackBanner = require('../../../static/campaign/Cart-banner.jpg');
+const demoBanner = require('../../../static/campaign/select-for-demo-banner.jpg');
+// const cashbackBanner = require('../../../static/campaign/Cart-banner.jpg');
 const saveForLaterIcon = require('../../../static/wishListIcon.png');
 
 const styles = require('./Cart.scss');
@@ -296,13 +296,20 @@ const Cart = ({
               </Button>
             </Row>
           </Row>
-          <Row type="block" m="0" mb="0" mt="1rem">
+          {/* <Row type="block" m="0" mb="0" mt="1rem">
             <Box>
               <Link to="/promotions">
                 <Image src={cashbackBanner} alt="" />
               </Link>
             </Box>
-          </Row>
+          </Row> */}
+          {demoProductsBanner && (
+            <Row type="block" m="0" mb="0" mt="0">
+              <Box>
+                <Image src={demoBanner} alt="" />
+              </Box>
+            </Row>
+          )}
           <Row
             mt={30}
             mb={10}
@@ -323,14 +330,6 @@ const Cart = ({
             </Box>
             {/* <button onClick={handleClickDemo} >TRIAL</button> */}
           </Row>
-
-          {/* {demoProductsBanner && (
-            <Row type="block" m="0" mb="0" mt="0">
-              <Box>
-                <Image src={demoBanner} alt="" />
-              </Box>
-            </Row>
-          )} */}
           {results.map(item => (
             <Box>
               {item.is_display ? (
