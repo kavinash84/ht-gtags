@@ -304,7 +304,7 @@ const Cart = ({
             </Box>
           </Row> */}
           {demoProductsBanner && (
-            <Row type="block" m="0" mb="0" mt="0">
+            <Row type="block" m="0" mb="0" mt="1rem">
               <Box>
                 <Image src={demoBanner} alt="" />
               </Box>
