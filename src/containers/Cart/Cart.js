@@ -80,6 +80,17 @@ const BflPopMessage = () => (
       color="rgba(51, 51, 51, 0.85)"
       fontFamily="light"
     >
+      You are eligible for additional 5% instant discount using <strong>HDFC Credit Card.</strong>.
+    </Heading>
+    <Heading
+      textAlign="center"
+      fontSize="1.1rem"
+      lineHeight="1.55"
+      mb="0.625rem"
+      mt="0.625rem"
+      color="rgba(51, 51, 51, 0.85)"
+      fontFamily="light"
+    >
       You are also eligible for an interest free EMI for 3 months if you have a <strong>HDFC Credit/Debit Card</strong>.
     </Heading>
   </Box>
@@ -90,6 +101,17 @@ const HdfcPopMessage = () => (
     <Flex justifyContent="center">
       <img height={30} src={HdfcLogo} alt="hfdc" />
     </Flex>
+    <Heading
+      textAlign="center"
+      fontSize="1.1rem"
+      lineHeight="1.55"
+      mb="0.625rem"
+      mt="0.625rem"
+      color="rgba(51, 51, 51, 0.85)"
+      fontFamily="light"
+    >
+      You are eligible for additional 5% instant discount using <strong>HDFC Credit Card.</strong>.
+    </Heading>
     <Heading
       textAlign="center"
       fontSize="1.1rem"
