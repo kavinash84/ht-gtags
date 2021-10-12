@@ -80,7 +80,7 @@ const BflPopMessage = () => (
       color="rgba(51, 51, 51, 0.85)"
       fontFamily="light"
     >
-      You are eligible for additional 5% instant discount using <strong>HDFC Credit Card.</strong>.
+      You are eligible for additional 5% instant discount using <strong>HDFC Credit Card.</strong>
     </Heading>
     <Heading
       textAlign="center"
@@ -110,7 +110,7 @@ const HdfcPopMessage = () => (
       color="rgba(51, 51, 51, 0.85)"
       fontFamily="light"
     >
-      You are eligible for additional 5% instant discount using <strong>HDFC Credit Card.</strong>.
+      You are eligible for additional 5% instant discount using <strong>HDFC Credit Card.</strong>
     </Heading>
     <Heading
       textAlign="center"
@@ -139,7 +139,7 @@ const HdfcPopMessageNew = () => (
       color="rgba(51, 51, 51, 0.85)"
       fontFamily="light"
     >
-      You are eligible for additional 5% instant discount using <strong>HDFC Credit Card.</strong>.
+      You are eligible for additional 5% instant discount using <strong>HDFC Credit Card.</strong>
     </Heading>
   </Box>
 );
