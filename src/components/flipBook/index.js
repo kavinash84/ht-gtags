@@ -41,7 +41,7 @@ class FlipBook extends Component {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Download
+              Please click here to download the Catalogue
             </Text>
           </div>
         ) : null}
