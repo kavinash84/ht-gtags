@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import Text from 'hometown-components-dev/lib/TextHtV1';
-import PropTypes from 'prop-types';
-import LinkRedirect from 'hometown-components-dev/lib/LinkRedirectHtV1';
+// import { connect } from 'react-redux';
+// import Text from 'hometown-components-dev/lib/TextHtV1';
+// import PropTypes from 'prop-types';
+// import LinkRedirect from 'hometown-components-dev/lib/LinkRedirectHtV1';
 /** eslint-disable* */
-@connect(
-  ({ homepage }) => ({
-    menu: homepage.menu.data
-  }),
-  null
-)
+// @connect(
+//   ({ homepage }) => ({
+//     menu: homepage.menu.data
+//   }),
+//   null
+// )
 class FlipBook extends Component {
   state = {
     // open: false
   };
   handleClick = () => {};
   render() {
-    const { menu } = this.props;
-    const found = menu.find(menuItem => menuItem.name === 'Festive Catalog') || '';
+    // const { menu } = this.props;
+    // const found = menu.find(menuItem => menuItem.name === 'Festive Catalog') || '';
     return (
       <div>
         <iframe
@@ -30,7 +30,7 @@ class FlipBook extends Component {
           allowFullScreen
           title="Festival Catalog"
         />
-        {found ? (
+        {/* {found ? (
           <div>
             <Text
               as={LinkRedirect}
@@ -44,14 +44,14 @@ class FlipBook extends Component {
               Please click here to download the Catalogue
             </Text>
           </div>
-        ) : null}
+        ) : null} */}
       </div>
     );
   }
 }
 
-FlipBook.propTypes = {
-  menu: PropTypes.array.isRequired
-};
+// FlipBook.propTypes = {
+//   menu: PropTypes.array.isRequired
+// };
 
 export default FlipBook;
