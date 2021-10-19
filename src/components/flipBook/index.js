@@ -28,7 +28,7 @@ class FlipBook extends Component {
           scrolling="no"
           frameBorder="0"
           allowFullScreen
-          title="Festive Catalog"
+          title="Festival Catalog"
         />
         {found ? (
           <div>
