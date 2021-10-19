@@ -31,7 +31,7 @@ class FlipBook extends Component {
           title="Festive Catalog"
         />
         {found ? (
-          <div style={{ width: '90px' }}>
+          <div>
             <Text
               as={LinkRedirect}
               variant="menuLight"
