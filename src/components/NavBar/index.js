@@ -41,17 +41,23 @@ class NavBar extends Component {
               <Fragment>
                 {menuItem.url_key.startsWith('http') ? (
                   <Box>
-                    <Text
-                      as={LinkRedirect}
-                      variant="menuLight"
-                      href={menuItem.url_key}
-                      title={menuItem.name}
-                      download
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {menuItem.name}
-                    </Text>
+                    {menuItem.name === 'Festive Catalog' ? (
+                      <Text as={Link} to="/flipBook" target="_blank">
+                        {menuItem.name}
+                      </Text>
+                    ) : (
+                      <Text
+                        as={LinkRedirect}
+                        variant="menuLight"
+                        href={menuItem.url_key}
+                        title={menuItem.name}
+                        download
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {menuItem.name}
+                      </Text>
+                    )}
                   </Box>
                 ) : (
                   <Fragment>
@@ -176,17 +182,23 @@ class NavBar extends Component {
                     if (menuItem.url_key.startsWith('http')) {
                       return (
                         <Box>
-                          <Text
-                            as={LinkRedirect}
-                            variant="menuLight"
-                            href={menuItem.url_key}
-                            title={menuItem.name}
-                            download
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            {menuItem.name}
-                          </Text>
+                          {menuItem.name === 'Festive Catalog' ? (
+                            <Text variant="menuLight" as={Link} to="/flipBook" target="_blank">
+                              {menuItem.name}
+                            </Text>
+                          ) : (
+                            <Text
+                              as={LinkRedirect}
+                              variant="menuLight"
+                              href={menuItem.url_key}
+                              title={menuItem.name}
+                              download
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {menuItem.name}
+                            </Text>
+                          )}
                         </Box>
                       );
                     }

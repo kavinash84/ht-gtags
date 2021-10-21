@@ -77,6 +77,7 @@ import ComboOffer from 'containers/ComboOffer';
 // campaign
 // import Announcement from 'containers/Announcement';
 import Campaigns from 'containers/Campaigns';
+import FlipBokContainer from 'containers/FlipBookContainer';
 
 import { categoryRoutes, listingRoutes } from 'helpers/Constants';
 
@@ -155,6 +156,7 @@ const routes = [
         exact: true,
         component: PaymentOptions
       },
+      { path: '/flipBook', exact: true, component: FlipBokContainer },
       // { path: '/checkout/review-order', exact: true, component: ReviewOrder },
       { path: '/search', exact: false, component: Listing },
       { path: '/return-policy', exact: true, component: ReturnPolicy },
