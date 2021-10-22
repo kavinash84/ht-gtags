@@ -80,17 +80,6 @@ const BflPopMessage = () => (
       color="rgba(51, 51, 51, 0.85)"
       fontFamily="light"
     >
-      You are eligible for additional 5% instant discount using <strong>HDFC Credit Card.</strong>
-    </Heading>
-    <Heading
-      textAlign="center"
-      fontSize="1.1rem"
-      lineHeight="1.55"
-      mb="0.625rem"
-      mt="0.625rem"
-      color="rgba(51, 51, 51, 0.85)"
-      fontFamily="light"
-    >
       You are also eligible for an interest free EMI for 3 months if you have a <strong>HDFC Credit/Debit Card</strong>.
     </Heading>
   </Box>
@@ -110,36 +99,7 @@ const HdfcPopMessage = () => (
       color="rgba(51, 51, 51, 0.85)"
       fontFamily="light"
     >
-      You are eligible for additional 5% instant discount using <strong>HDFC Credit Card.</strong>
-    </Heading>
-    <Heading
-      textAlign="center"
-      fontSize="1.1rem"
-      lineHeight="1.55"
-      mb="0.625rem"
-      mt="0.625rem"
-      color="rgba(51, 51, 51, 0.85)"
-      fontFamily="light"
-    >
       You are also eligible for an interest free EMI for 3 months if you have a <strong>HDFC Credit/Debit Card</strong>.
-    </Heading>
-  </Box>
-);
-const HdfcPopMessageNew = () => (
-  <Box>
-    <Flex justifyContent="center">
-      <img height={30} src={HdfcLogo} alt="hfdc" />
-    </Flex>
-    <Heading
-      textAlign="center"
-      fontSize="1.1rem"
-      lineHeight="1.55"
-      mb="0.625rem"
-      mt="0.625rem"
-      color="rgba(51, 51, 51, 0.85)"
-      fontFamily="light"
-    >
-      You are eligible for additional 5% instant discount using <strong>HDFC Credit Card.</strong>
     </Heading>
   </Box>
 );
@@ -246,7 +206,7 @@ export default class CartContainer extends Component {
     const { emiPopUpShown } = this.state;
     // console.log('checkForEmiEligibility function', total, emiPopUpShown);
 
-    if (total >= 15000 && !emiPopUpShown) {
+    if (total >= 20000 && !emiPopUpShown) {
       this.setState({
         open: true,
         responsiveModalContent: 'emiModal',
@@ -373,13 +333,7 @@ export default class CartContainer extends Component {
             ) : null}
 
             {responsiveModalContent === 'emiModal' ? (
-              <Box>
-                {total > bflMinAmount ? (
-                  <BflPopMessage />
-                ) : (
-                  <div>{total > 20000 ? <HdfcPopMessage /> : <HdfcPopMessageNew />}</div>
-                )}
-              </Box>
+              <Box>{total > bflMinAmount ? <BflPopMessage /> : <HdfcPopMessage />}</Box>
             ) : null}
           </ResponsiveModal>
 
