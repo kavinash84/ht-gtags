@@ -1112,7 +1112,7 @@ class ProductDetails extends React.Component {
                 >
                   {groupedAttributes[0].Details.map(detail => {
                     // if (detail.label !== 'Note' && detail.label !== "What's in the box?") {
-                    if (detail.label !== 'Note') {
+                    if (detail.label !== 'Note' && detail.value) {
                       return (
                         <Row width="33%" pb={10}>
                           <Col width={150} fontWeight="bold" fontSize={14} lineHeight={1.4}>
