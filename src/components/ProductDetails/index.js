@@ -1190,9 +1190,11 @@ class ProductDetails extends React.Component {
                     <UspCol src={emiIcon} text="EMI Options" />
                   </div>
                 )}
-                <div style={{ margin: 'auto' }}>
-                  <UspCol src={warrentyIcon} text={uspWarranty} />
-                </div>
+                {warrantyPeriod && warrantyPeriod !== 'None' ? (
+                  <div style={{ margin: 'auto' }}>
+                    <UspCol src={warrentyIcon} text={uspWarranty} />
+                  </div>
+                ) : null}
               </Row>
 
               {/* DIMENSIONS */}
