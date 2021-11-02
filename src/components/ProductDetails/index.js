@@ -673,7 +673,8 @@ class ProductDetails extends React.Component {
       config_id: configId,
       dimension_image: dimensionImage,
       warranty_period: warrantyPeriod = 0,
-      fk_catalog_supplier: fkCatalogSupplier = null
+      fk_catalog_supplier: fkCatalogSupplier = null,
+      categories
     } = meta;
     const {
       offer_discount_percentage: offerDiscountPercentage,
@@ -699,6 +700,8 @@ class ProductDetails extends React.Component {
     const productURL = `${SITE_URL}${formatProductURL(name, sku)}`;
     const productDescription = productMetaDescription(name, productType, material, color);
     const weightedRating = this.getWeightedAverageRatings();
+    const isFurnitureStripe = categories.split('|').includes('131');
+    const uspWarranty = `${warrantyPeriod} Warranty`;
     return (
       <div>
         <Box pt={30}>
@@ -799,6 +802,7 @@ class ProductDetails extends React.Component {
                   brand={brand}
                   freeVisit={freeVisit}
                   freeInstallation={freeInstallation}
+                  isFurnitureStripe={isFurnitureStripe}
                 >
                   <EmiModal
                     price={formatAmount(checkSpecialPrice)}
@@ -1186,9 +1190,11 @@ class ProductDetails extends React.Component {
                     <UspCol src={emiIcon} text="EMI Options" />
                   </div>
                 )}
-                <div style={{ margin: 'auto' }}>
-                  <UspCol src={warrentyIcon} text="1 Year Warranty" />
-                </div>
+                {warrantyPeriod && warrantyPeriod !== 'None' ? (
+                  <div style={{ margin: 'auto' }}>
+                    <UspCol src={warrentyIcon} text={uspWarranty} />
+                  </div>
+                ) : null}
               </Row>
 
               {/* DIMENSIONS */}

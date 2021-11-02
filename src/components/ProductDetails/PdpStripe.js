@@ -20,37 +20,37 @@ const Stripes = ({
   emi,
   isEmiAvailable,
   warrantyPeriod,
-  fkCatalogSupplier,
-  brand,
+  // fkCatalogSupplier,
+  // brand,
   freeVisit,
   children,
-  freeInstallation
-}) => {
-  console.log('fkCatalogSupplier brand', fkCatalogSupplier, brand);
+  freeInstallation,
+  isFurnitureStripe
+}) => (
+  // console.log('fkCatalogSupplier brand', fkCatalogSupplier, brand);
   // const isFurnitureCategory = fkCatalogSupplier === '38';
   // const noQuestionsAsked = isFurnitureCategory && brand === 'HomeTown';
-  return (
-    <Box>
-      <Box className={styles.dots} />
-      <Flex justifyContent="flex-start" alignItems="baseline">
-        {isEmiAvailable ? (
-          <Col variant="col-2" m="5px auto" px="0" alignItems="center">
-            <Image className={styles.pdpStripeIcons} src={Emi} />
-            <Text fontSize=" 10px" lineHeight="13px" textAlign="center">
-              EMI from ₹{emi}
-              <a href>{children}</a>{' '}
-            </Text>
-          </Col>
-        ) : null}
-        {warrantyPeriod && warrantyPeriod !== 'None' ? (
-          <Col variant="col-2" m="5px auto" px="0" alignItems="center">
-            <Image className={styles.pdpStripeIcons} src={Warranty} />
-            <Text fontSize=" 10px" lineHeight="13px" textAlign="center">
-              {warrantyPeriod} Warranty
-            </Text>
-          </Col>
-        ) : null}
-        {/* {noQuestionsAsked ? (
+  <Box>
+    <Box className={styles.dots} />
+    <Flex justifyContent="flex-start" alignItems="baseline">
+      {isEmiAvailable ? (
+        <Col variant="col-2" m="5px auto" px="0" alignItems="center">
+          <Image className={styles.pdpStripeIcons} src={Emi} />
+          <Text fontSize=" 10px" lineHeight="13px" textAlign="center">
+            EMI from ₹{emi}
+            <a href>{children}</a>{' '}
+          </Text>
+        </Col>
+      ) : null}
+      {warrantyPeriod && warrantyPeriod !== 'None' ? (
+        <Col variant="col-2" m="5px auto" px="0" alignItems="center">
+          <Image className={styles.pdpStripeIcons} src={Warranty} />
+          <Text fontSize=" 10px" lineHeight="13px" textAlign="center">
+            {warrantyPeriod} Warranty
+          </Text>
+        </Col>
+      ) : null}
+      {/* {noQuestionsAsked ? (
           <Col variant="col-2" m="5px auto" px="0" alignItems="center">
             <Image className={styles.pdpStripeIcons} src={Noquestion} />
             <Text fontSize=" 10px" lineHeight="13px" textAlign="center">
@@ -58,52 +58,54 @@ const Stripes = ({
             </Text>
           </Col>
         ) : null} */}
+      {isFurnitureStripe ? (
         <Col variant="col-2" m="5px auto" px="0" alignItems="center">
           <Image className={styles.pdpStripeIcons} src={Safe} />
           <Text fontSize=" 10px" lineHeight="13px" textAlign="center">
             Free and Safe Delivery
           </Text>
         </Col>
-        {freeInstallation === 'Yes' ? (
-          <Col variant="col-2" m="5px auto" px="0" alignItems="center">
-            <Image className={styles.pdpStripeIcons} src={freeinstallation} />
-            <Text fontSize="10px" textAlign="center" lineHeight="13px">
-              Free Installation
-            </Text>
-          </Col>
-        ) : null}
-        {freeVisit === 'Yes' ? (
-          <Col variant="col-2" m="5px auto" px="0" alignItems="center">
-            <Image className={styles.pdpStripeIcons} src={ServiceCamp} />
-            <Text fontSize=" 10px" lineHeight="13px" textAlign="center">
-              4 Free Service Visits
-            </Text>
-          </Col>
-        ) : null}
-      </Flex>
-      <Box className={styles.dots} />
-    </Box>
-  );
-};
-
+      ) : null}
+      {freeInstallation === 'Yes' ? (
+        <Col variant="col-2" m="5px auto" px="0" alignItems="center">
+          <Image className={styles.pdpStripeIcons} src={freeinstallation} />
+          <Text fontSize="10px" textAlign="center" lineHeight="13px">
+            Free Installation
+          </Text>
+        </Col>
+      ) : null}
+      {freeVisit === 'Yes' ? (
+        <Col variant="col-2" m="5px auto" px="0" alignItems="center">
+          <Image className={styles.pdpStripeIcons} src={ServiceCamp} />
+          <Text fontSize=" 10px" lineHeight="13px" textAlign="center">
+            4 Free Service Visits
+          </Text>
+        </Col>
+      ) : null}
+    </Flex>
+    <Box className={styles.dots} />
+  </Box>
+);
 Stripes.propTypes = {
   emi: PropTypes.string,
-  fkCatalogSupplier: PropTypes.number.isRequired,
-  brand: PropTypes.string,
+  // fkCatalogSupplier: PropTypes.number.isRequired,
+  // brand: PropTypes.string,
   isEmiAvailable: PropTypes.bool,
   warrantyPeriod: PropTypes.string,
   children: PropTypes.object.isRequired,
   freeVisit: PropTypes.string,
-  freeInstallation: PropTypes.string
+  freeInstallation: PropTypes.string,
+  isFurnitureStripe: PropTypes.bool
 };
 
 Stripes.defaultProps = {
   emi: 0,
-  brand: '',
+  // brand: '',
   isEmiAvailable: false,
   warrantyPeriod: '',
   freeVisit: 'no',
-  freeInstallation: 'no'
+  freeInstallation: 'no',
+  isFurnitureStripe: false
 };
 
 export default Stripes;

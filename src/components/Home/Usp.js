@@ -26,7 +26,7 @@ const Usp = () => (
       <RowHtV1 justifyContent="space-around">
         <UspItem src={usp1Icon}>
           Free Delivery <br />
-          Above Rs.499
+          Above Rs.999
         </UspItem>
         <UspItem src={usp2Icon}>
           Assured <br />
@@ -37,8 +37,7 @@ const Usp = () => (
           Finance
         </UspItem>
         <UspItem src={usp4Icon}>
-          1 Year <br />
-          Warranty*
+          Upto <br />3 years warranty*
         </UspItem>
         <UspItem src={usp5Icon}>
           Free Assembly <br />
