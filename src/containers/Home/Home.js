@@ -214,7 +214,7 @@ export default class Home extends Component {
           <MainSlider data={banners} />
 
           {/* USPs */}
-          <Usp />
+          {/* <Usp /> */}
           <ShopByCategories />
           {/* Category Carousel */}
           {homepageCategories.map((category, index) => {

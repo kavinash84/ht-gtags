@@ -3,15 +3,15 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 /* ====== Components ====== */
-import Box from "hometown-components-dev/lib/Div";
+// import BoxHtV1 from "hometown-components-dev/lib/Div";
 // import Flex from 'hometown-components/lib/Flex';
-import Text from "hometown-components-dev/lib/Text";
-import Image from "hometown-components-dev/lib/Img";
+import TextHtV1 from "hometown-components-dev/lib/TextHtV1";
+import Img from "hometown-components-dev/lib/Img";
 
 const CategoryBlock = ({ src, title, to }) => (
-  <Box style={{ width: "30%", margin: "20px 5px 5px 5px" }}>
+  <div style={{ width: "30%", margin: "20px 5px 5px 5px" }}>
     <Link to={to}>
-      <Box
+      <div
         style={{
           display: "flex",
           flexDirection: "column",
@@ -23,7 +23,7 @@ const CategoryBlock = ({ src, title, to }) => (
         width={1}
         py={0}
       >
-        <Image
+        <Img
           src={src}
           alt={title}
           m={5}
@@ -31,20 +31,22 @@ const CategoryBlock = ({ src, title, to }) => (
           width="90%"
           style={{ zIndex: 10 }}
         />
-        <Box
+        <div
           mt="-58px"
           style={{
             backgroundColor: "#F2F2F2",
-            padding: "30px 44px",
+            position: "relative",
+            top: "-85px",
+            padding: "42px 70px",
             borderRadius: "5px"
           }}
         />
-        <Text fontSize="12px" color="label" mt="5px">
+        <TextHtV1 fontSize="12px" color="label" mt="5px">
           {title}
-        </Text>
-      </Box>
+        </TextHtV1>
+      </div>
     </Link>
-  </Box>
+  </div>
 );
 
 CategoryBlock.propTypes = {
