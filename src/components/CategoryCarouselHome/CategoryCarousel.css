@@ -1,0 +1,33 @@
+/* .starContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.coupon {
+  position: absolute;
+  bottom: 15px;
+  z-index: 1000;
+  font-size: 0.7rem;
+  background: #f15a22;
+  padding: 5px 10px;
+  color: white;
+}
+
+.couponSticker {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  height: 45px;
+  width: 45px;
+  z-index: 1000;
+  color: white;
+  background: #f15a22;
+  border-radius: 50%;
+  font-size: 0.6rem;
+  padding: 10px;
+  text-align: center;
+}
+
+.slick-track {
+  width: 100%;
+} */
