@@ -34,7 +34,7 @@ const CategoryBlock = ({ src, title, to }) => (
             borderRadius: '5px'
           }}
         />
-        <TextHtV1 fontSize="12px" color="label" mt="5px">
+        <TextHtV1 fontSize="12px" color="label" mt="0px">
           {title}
         </TextHtV1>
       </div>
