@@ -27,7 +27,7 @@ import Text from "hometown-components-dev/lib/TextHtV1";
 import Wrapper from "hometown-components-dev/lib/WrapperHtV1";
 
 /* ====== Page Components ====== */
-import CategoryCarousel from "components/CategoryCarousel";
+// import CategoryCarousel from "components/CategoryCarousel";
 import OfferBanner from "components/Home/OfferBanner";
 import Footer from "components/Footer";
 import Header from "components/Header";
@@ -233,11 +233,11 @@ export default class Home extends Component {
                 <Section variant="section.primary" key={String(index)}>
                   <Container>
                     <LazyLoad height={200} offset={100}>
-                      <CategoryCarousel
+                      {/* <CategoryCarousel
                         categoryName={category.title}
                         subTitle={category.sub_title}
                         data={category.values}
-                      />
+                      /> */}
                     </LazyLoad>
                   </Container>
                 </Section>

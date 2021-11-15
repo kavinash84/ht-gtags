@@ -32,12 +32,13 @@ const ShopByCategories = () => (
     p="16px 20px"
     mt="40px"
     pb="10px"
+    width="100%"
     style={{ float: "none", display: "block" }}
   >
     <HeadingHtV1
       fontFamily="medium"
       style={{ textAlign: "center", color: "#323131" }}
-      fontSize="22px"
+      fontSize="30px"
       mt="25px"
       mb="10px"
     >
@@ -53,7 +54,13 @@ const ShopByCategories = () => (
     />
     <RowHtV1
       justifyContent="space-around"
-      style={{ width: "50%", margin: "auto", display: "flex" }}
+      style={{
+        width: "90%",
+        margin: "auto",
+        display: "flex",
+        marginLeft: "5%",
+        marginRight: "5%"
+      }}
     >
       <CategoryBlock to="/furniture" src={shopByCat01} title="Furniture" />
       <CategoryBlock

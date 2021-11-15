@@ -9,10 +9,10 @@
   align-items: center;
 }
 .card {
-  width: 17rem;
+  width: 20rem;
   background-color: #ffffff;
   display: flex;
-  height: 280px;
+  height: 340px;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
@@ -20,7 +20,7 @@
   box-shadow: 0.5rem 0.5rem 3rem rgba(0, 0, 0, 0.2);
 }
 img {
-  width: 17rem;
+  width: 20rem;
   height: auto;
   object-fit: cover;
   margin-top: -10rem;
