@@ -217,7 +217,7 @@ export default class Home extends Component {
           {/* USPs */}
           {/* <Usp /> */}
           <HomeContainer />
-          {/* Category Carousel */}
+          {/* Category Carousel
           {homepageCategories.map((category, index) => {
             if (category.view && category.view === "list") {
               return (
@@ -233,18 +233,18 @@ export default class Home extends Component {
                 <Section variant="section.primary" key={String(index)}>
                   <Container>
                     <LazyLoad height={200} offset={100}>
-                      {/* <CategoryCarousel
+                      <CategoryCarousel
                         categoryName={category.title}
                         subTitle={category.sub_title}
                         data={category.values}
-                      /> */}
+                      />
                     </LazyLoad>
                   </Container>
                 </Section>
               );
             }
             return null;
-          })}
+          })} */}
 
           {/* Offer Banner */}
           <LazyLoad>
@@ -369,9 +369,9 @@ export default class Home extends Component {
           </Section>
 
           {/* Unbxd Recently Viewed */}
-          <Section>
+          {/* <Section>
             <UnbxdRecentlyViewed />
-          </Section>
+          </Section> */}
 
           {/* Share and Inspire */}
           {/* {instafeeds && !!instafeeds.length && (

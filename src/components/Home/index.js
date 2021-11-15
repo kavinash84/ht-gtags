@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import HeadingHtV1 from "hometown-components-dev/lib/HeadingHtV1";
 import Image from "hometown-components-dev/lib/ImageHtV1";
 import CategoryCarouselLook from "../../components/CategoryCarouselLook";
+import CategoryCarousel from "../../components/CategoryCarouselHome";
 
 // Shop by room
 // const shopByRoom01 = require("../../../static/new-home/shopbyroom01.png");
@@ -97,6 +98,11 @@ class HomeContainer extends Component {
         </div>
         {/* shop by categories */}
         <ShopByCategories />
+        {/* shop by room */}
+
+        <div mt="20px" mb="15px" style={{ display: "block" }}>
+          <CategoryCarousel />
+        </div>
 
         {/* deals of the day section */}
         <DealsOfTheDay />

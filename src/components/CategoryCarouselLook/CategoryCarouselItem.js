@@ -20,11 +20,12 @@ const CategoryItem = () => {
           flexDirection: "row",
           flexWrap: "wrap",
           justifyContent: "center",
-          alignItems: "center"
+          alignItems: "center",
+          margin: "0px 0 20px 0"
         }}
       >
         <div
-          className="GetTheLookCard"
+          // className="GetTheLookCard"
           style={{
             width: "22rem",
             display: "flex",
@@ -42,7 +43,7 @@ const CategoryItem = () => {
             width="90%"
             style={{ zIndex: 10 }}
           />
-          <h3 className="title">
+          <h3 className="get-the-look-title">
             Tiago Engieered Wood King bed without storage in Wenge Colour
           </h3>
         </div>
@@ -54,7 +55,7 @@ const CategoryItem = () => {
             flexDirection: "column",
             alignItems: "flex-start",
             justifyContent: "flex-start",
-            margin: "30px 30px 0px 10px"
+            margin: "30px 30px 10px 10px"
           }}
         >
           <Img
@@ -64,7 +65,7 @@ const CategoryItem = () => {
             width="90%"
             style={{ zIndex: 10 }}
           />
-          <h3 className="title">
+          <h3 className="get-the-look-title">
             Tiago Engieered Wood Night Stand in Wenge Colour
           </h3>
         </div>
@@ -76,7 +77,7 @@ const CategoryItem = () => {
             flexDirection: "column",
             alignItems: "flex-start",
             justifyContent: "flex-start",
-            margin: "30px 30px 0px 10px"
+            margin: "30px 30px 10px 10px"
           }}
         >
           <Img
@@ -86,7 +87,7 @@ const CategoryItem = () => {
             width="90%"
             style={{ zIndex: 10 }}
           />
-          <h3 className="title">
+          <h3 className="get-the-look-title">
             Tiago Engieered Wood Dresser with mirror in Wenge Colour
           </h3>
         </div>

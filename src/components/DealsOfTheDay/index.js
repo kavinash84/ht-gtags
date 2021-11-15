@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { Component } from "react";
 
-import DealsOfTheDayCards from './DealsOfTheDay';
+import DealsOfTheDayCards from "./DealsOfTheDay";
 
-const DealsOfTheDay = () => (
-  <div>
-    <DealsOfTheDayCards />
-  </div>
-  );
+class DealsOfTheDay extends Component {
+  render() {
+    return (
+      <div>
+        <DealsOfTheDayCards />
+      </div>
+    );
+  }
+}
 
 export default DealsOfTheDay;
