@@ -6,6 +6,7 @@ import HeadingHtV1 from "hometown-components-dev/lib/HeadingHtV1";
 import Image from "hometown-components-dev/lib/ImageHtV1";
 import CategoryCarouselLook from "../../components/CategoryCarouselLook";
 import CategoryCarousel from "../../components/CategoryCarouselHome";
+import StyleYourHome from "../../components/StyleYourHome";
 
 // Shop by room
 // const shopByRoom01 = require("../../../static/new-home/shopbyroom01.png");
@@ -15,6 +16,10 @@ import CategoryCarousel from "../../components/CategoryCarouselHome";
 
 const bestseatbanner01 = require("../../../static/new-home/bestseatbanner01.png");
 const secondBanner = require("../../../static/new-home/bannerImage.png");
+
+// sales of the day
+const salesOfTheDay01 = require("../../../static/new-home/saleoftheday01.png");
+const salesOfTheDay02 = require("../../../static/new-home/saleoftheday02.png");
 
 // Get the look
 // const GetTheLook01 = require("../../../static/new-home/getthelook01.png");
@@ -92,7 +97,8 @@ class HomeContainer extends Component {
               width: "90%",
               alignItems: "center",
               marginLeft: "5%",
-              marginRight: "5%"
+              marginRight: "5%",
+              zIndex: "10px"
             }}
           />
         </div>
@@ -106,6 +112,42 @@ class HomeContainer extends Component {
 
         {/* deals of the day section */}
         <DealsOfTheDay />
+
+        {/* sale of the day */}
+
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-evenly",
+            alignContent: "center"
+          }}
+        >
+          <Image
+            mt="50px"
+            mb="30px"
+            src={salesOfTheDay01}
+            style={{
+              width: "45%",
+              alignItems: "center",
+
+              marginLeft: "2.5%",
+              zIndex: "10"
+            }}
+          />
+          <Image
+            mt="50px"
+            mb="30px"
+            src={salesOfTheDay02}
+            style={{
+              width: "45%",
+              alignItems: "center",
+
+              marginRight: "2.5%",
+              zIndex: "10"
+            }}
+          />
+        </div>
 
         {/* Beast seat in the house */}
         <div>
@@ -159,6 +201,9 @@ class HomeContainer extends Component {
         <div pl="30px" pr="30px" pt="30px" pb="20px" mb="10px" bg="#F9F9F9">
           <CategoryCarouselLook />
         </div>
+
+        {/* style your home */}
+        <StyleYourHome />
       </div>
     );
   }

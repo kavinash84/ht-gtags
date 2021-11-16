@@ -20,20 +20,17 @@ const CategoryItem = () => {
           flexDirection: "row",
           flexWrap: "wrap",
           justifyContent: "center",
-          alignItems: "center",
-          margin: "0px 0 20px 0"
+          alignItems: "center"
         }}
       >
         <div
-          // className="GetTheLookCard"
           style={{
             width: "22rem",
             display: "flex",
             height: "360px",
             flexDirection: "column",
             alignItems: "flex-start",
-            justifyContent: "flex-start",
-            margin: "30px 30px 0px 10px"
+            justifyContent: "flex-start"
           }}
         >
           <Img
@@ -54,8 +51,7 @@ const CategoryItem = () => {
             height: "360px",
             flexDirection: "column",
             alignItems: "flex-start",
-            justifyContent: "flex-start",
-            margin: "30px 30px 10px 10px"
+            justifyContent: "flex-start"
           }}
         >
           <Img
@@ -76,8 +72,7 @@ const CategoryItem = () => {
             height: "360px",
             flexDirection: "column",
             alignItems: "flex-start",
-            justifyContent: "flex-start",
-            margin: "30px 30px 10px 10px"
+            justifyContent: "flex-start"
           }}
         >
           <Img

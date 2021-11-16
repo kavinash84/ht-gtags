@@ -15,10 +15,10 @@ const CategoryBlock = ({ src, title, to }) => {
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "flex-end",
-            height: "100%"
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            alignItems: "center"
           }}
           height={96}
           width={1}

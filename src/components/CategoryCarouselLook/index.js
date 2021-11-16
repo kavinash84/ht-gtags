@@ -14,8 +14,8 @@ export default class CategoryCarousel extends Component {
           fontFamily="medium"
           style={{ textAlign: "center", color: "#323131" }}
           fontSize="25px"
-          mt="30px"
-          mb="10px"
+          mt="50px"
+          mb="20px"
         >
           Get The Look
         </HeadingHtV1>

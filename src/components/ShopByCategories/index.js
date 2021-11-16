@@ -40,7 +40,7 @@ const ShopByCategories = () => {
         fontFamily="medium"
         style={{ textAlign: "center", color: "#323131" }}
         fontSize="30px"
-        mt="25px"
+        mt="35px"
         mb="10px"
       >
         Shop By Categories
@@ -56,11 +56,11 @@ const ShopByCategories = () => {
       <RowHtV1
         justifyContent="space-around"
         style={{
-          width: "90%",
+          width: "80%",
           margin: "auto",
           display: "flex",
-          marginLeft: "5%",
-          marginRight: "5%"
+          marginLeft: "10%",
+          marginRight: "10%"
         }}
       >
         <CategoryBlock to="/furniture" src={shopByCat01} title="Furniture" />
