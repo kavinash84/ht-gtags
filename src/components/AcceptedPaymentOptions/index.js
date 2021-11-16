@@ -23,7 +23,7 @@ const AcceptedPaymentOptions = () => (
     <Heading color="textSecondary" fontWeight="normal" fontSize={[15, 15, 18]} pb={10}>
       Accepted Payment Options
     </Heading>
-    <Flex >
+    <Flex>
       <Image src={visaIcon} alt="visaCard" height={30} />
       <Image src={mastercardIcon} alt="Master Card" height={30} />
       <Image src={maestroIcon} alt="Maestro" height={30} />

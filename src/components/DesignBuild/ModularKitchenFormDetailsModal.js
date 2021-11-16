@@ -7,6 +7,7 @@ import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import { allowNChar, allowTypeOf } from 'utils/helper';
 import FormInput from './FormInput';
 import './Style.css';
+
 const dayjs = require('dayjs');
 
 const minDate = () =>

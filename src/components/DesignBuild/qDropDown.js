@@ -12,7 +12,9 @@ export default class QDropDown extends Component {
     this.setState({ isOpen: !this.state.isOpen });
   };
   render() {
-    const { title, description, length, index } = this.props;
+    const {
+ title, description, length, index
+} = this.props;
     return (
       <Box
         style={{

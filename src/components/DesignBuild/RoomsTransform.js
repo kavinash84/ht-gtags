@@ -12,57 +12,68 @@ const imageSrc = require('../../../static/categories/dbadvantage.png');
 const styles = require('./Designbuild.scss');
 
 @connect(({ designBuild }) => ({
-    designBuild,
-    SpacesWeTransform: designBuild.data.items.text.SpacesWeTransform
-  }))
-
+  designBuild,
+  SpacesWeTransform: designBuild.data.items.text.SpacesWeTransform
+}))
 class RoomsWeTransform extends React.Component {
-    render() {
-        const { SpacesWeTransform } = this.props;
-        return (
-          <Section style={{ fontFamily: 'Helvetica Neue' }}>
-            <Box style={{
- fontSize: '40px', fontWeight: 600, marginBottom: '5px', color: 'black', textAlign: 'center'
-}}
-            >
-              Rooms We Transform
-              <div style={{
- width: '30px', borderTop: '2px solid #222222', margin: 'auto', marginTop: '15px'
-}}
-              />
+  render() {
+    const { SpacesWeTransform } = this.props;
+    return (
+      <Section style={{ fontFamily: 'Helvetica Neue' }}>
+        <Box
+          style={{
+            fontSize: '40px',
+            fontWeight: 600,
+            marginBottom: '5px',
+            color: 'black',
+            textAlign: 'center'
+          }}
+        >
+          Rooms We Transform
+          <div
+            style={{
+              width: '30px',
+              borderTop: '2px solid #222222',
+              margin: 'auto',
+              marginTop: '15px'
+            }}
+          />
+        </Box>
+        <Row justifyContent="center" style={{ width: '100%', margin: 'auto' }}>
+          {SpacesWeTransform.values.map(slide => (
+            <Box style={{ width: '40%', margin: '30px 10px 10px' }}>
+              {/* <Link to={slide.url_key}> */}
+              <Image src={slide.imgSrc} alt={slide.title} m={5} height="auto" width="100%" />
+              <Text
+                fontSize="30px"
+                color="label"
+                mt="10px"
+                style={{ textAlign: 'center', color: 'black', fontWeight: '600' }}
+              >
+                {slide.title}
+              </Text>
+              <Text
+                fontSize="20px"
+                color="label"
+                mt="15px"
+                style={{
+                  textAlign: 'center',
+                  color: '#999999',
+                  lineHeight: '30px',
+                  width: '90%',
+                  marginLeft: '5%'
+                }}
+              >
+                {slide.description}
+              </Text>
+
+              {/* </Link> */}
             </Box>
-            <Row justifyContent="center" style={{ width: '100%', margin: 'auto' }}>
-              {SpacesWeTransform.values.map(slide => (
-                <Box style={{ width: '40%', margin: '30px 10px 10px' }}>
-                  {/* <Link to={slide.url_key}> */}
-                  <Image src={slide.imgSrc} alt={slide.title} m={5} height="auto" width="100%" />
-                  <Text
-                    fontSize="30px"
-                    color="label"
-                    mt="10px"
-                    style={{ textAlign: 'center', color: 'black', fontWeight: '600' }}
-                  >
-                    {slide.title}
-                  </Text>
-                  <Text
-                    fontSize="20px"
-                    color="label"
-                    mt="15px"
-                    style={{
- textAlign: 'center', color: '#999999', lineHeight: '30px', width: '90%', marginLeft: '5%'
-}}
-                  >
-                    {slide.description}
-                  </Text>
-
-                  {/* </Link> */}
-                </Box>
           ))}
-            </Row>
-
-          </Section>
-        );
-    }
+        </Row>
+      </Section>
+    );
+  }
 }
 
 export default RoomsWeTransform;

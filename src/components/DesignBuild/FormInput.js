@@ -5,7 +5,9 @@ import InputField from 'hometown-components-dev/lib/InputFieldHtV1';
 import TextArea from 'hometown-components-dev/lib/TextAreaHtV1';
 import { Label, FeedBackMessage } from 'hometown-components-dev/lib/LabelHtV1';
 
-const FormInput = ({ label, name, type, feedBackMessage, feedBackError, ...rest }) => {
+const FormInput = ({
+ label, name, type, feedBackMessage, feedBackError, ...rest
+}) => {
   const inputProps = {
     type,
     name,

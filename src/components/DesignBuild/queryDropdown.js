@@ -56,17 +56,17 @@ export default class QueryDropDownContainer extends Component {
         <Box style={{ paddingTop: '10px', paddingBottom: '0px' }}>
           {initialItems.map((item, i) => {
             if (i + 1 <= length) {
- return (
-   <div>
-     <QDropDown
-       title={item.title}
-       description={item.description}
-       lenght={queries.values.length}
-       index={i}
-     />
-   </div>
+              return (
+                <div>
+                  <QDropDown
+                    title={item.title}
+                    description={item.description}
+                    lenght={queries.values.length}
+                    index={i}
+                  />
+                </div>
               );
-}
+            }
           })}
           <Box
             style={{

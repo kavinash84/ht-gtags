@@ -9,20 +9,20 @@ import RoomsWeTransform from './RoomsTransform';
 import Header from './Header';
 
 class DesignBuildContainer extends React.Component {
-    render() {
-        return (
-          <div style={{ fontFamily: 'Helvetica Neue' }}>
-            <Header />
-            <TopBanner />
-            <WhyChose />
-            <DandBAdvantage />
-            <QueryDropDownContainer />
-            <BeginJourney />
-            <RoomsWeTransform />
-            {/* <ModularKitchenForm /> */}
-          </div>
-        );
-    }
+  render() {
+    return (
+      <div style={{ fontFamily: 'Helvetica Neue' }}>
+        <Header />
+        <TopBanner />
+        <WhyChose />
+        <DandBAdvantage />
+        <QueryDropDownContainer />
+        <BeginJourney />
+        <RoomsWeTransform />
+        {/* <ModularKitchenForm /> */}
+      </div>
+    );
+  }
 }
 
 export default DesignBuildContainer;

@@ -79,15 +79,14 @@ const setDataPicker = (currentTime = '', notMin) => {
 const setPreferredTime = ({ timeSlots }) => {
   const prefferedTime = document.getElementById('preferredTime');
 
-  prefferedTime.innerHTML = `<option value="" disabled selected>Preferred Timeline*</option>`;
+  prefferedTime.innerHTML = '<option value="" disabled selected>Preferred Timeline*</option>';
   prefferedTime.insertAdjacentHTML(
     'beforeend',
     timeSlots.map(arr => {
       if (arr > 12) {
         return `<option value="${arr - 12} pm">${arr - 12} pm</option>`;
-      } else {
-        return `<option value="${arr} pm">${arr} pm</option>`;
       }
+        return `<option value="${arr} pm">${arr} pm</option>`;
     })
   );
 };
@@ -285,7 +284,9 @@ export default class ModularKitchen extends Component {
     let medium = 'Website';
 
     const { sendFormData } = this.props;
-    const { name, phone, email, pincode, address, city, state, date, selectedState, time, prefferedTime } = this.state;
+    const {
+ name, phone, email, pincode, address, city, state, date, selectedState, time, prefferedTime
+} = this.state;
     const nameError = isEmpty(name) || validateFullname(name) || checkSpecialChar(name);
     const phoneError = !validateMobile(phone);
     const stateCheck = !selectedState;
@@ -317,9 +318,9 @@ export default class ModularKitchen extends Component {
       const utmSource = urlString.searchParams.get('utm_source');
       const utmCampaign = urlString.searchParams.get('utm_campaign');
       const utmMedium = urlString.searchParams.get('utm_medium');
-      source = utmSource ? utmSource : source;
-      campaign = utmCampaign ? utmCampaign : campaign;
-      medium = utmMedium ? utmMedium : medium;
+      source = utmSource || source;
+      campaign = utmCampaign || campaign;
+      medium = utmMedium || medium;
     }
     const data = {
       campaign,
@@ -371,7 +372,9 @@ export default class ModularKitchen extends Component {
   // };
   render() {
     // const { loading, loaded, modularkitchen } = this.props;
-    const { name, email, phone, address, pincode, service, city, state, date, selectedState, time } = this.state;
+    const {
+ name, email, phone, address, pincode, service, city, state, date, selectedState, time
+} = this.state;
     // const correctIcon = require('../../../static/correct.svg');
     const {
       nameError,
@@ -576,7 +579,7 @@ export default class ModularKitchen extends Component {
                           outline: 'none',
                           backgroundColor: 'white'
                         }}
-                      ></select>
+                      />
                     </div>
                   </div>
                   {timeError ? (

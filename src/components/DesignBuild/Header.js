@@ -11,28 +11,41 @@ const logo = require('../../static/duracucine.png');
 const styles = require('./Designbuild.scss');
 
 class Header extends React.Component {
-    render() {
-        return (
-          <Section style={{
- display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '10px', marginBottom: '10px', fontFamily: 'Helvetica Neue'
-}}
+  render() {
+    return (
+      <Section
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginTop: '10px',
+          marginBottom: '10px',
+          fontFamily: 'Helvetica Neue'
+        }}
+      >
+        <div style={{ marginLeft: '10%' }}>
+          <Image src={logo} />
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Text style={{ marginRight: '40px' }}>Plan Your Kitchen</Text>
+          <Text style={{ marginRight: '40px' }}>About Us</Text>
+          <Button
+            style={{
+              width: '200px',
+              height: '50px',
+              backgroundColor: 'white',
+              color: '#F47020',
+              border: '1px solid #F47020',
+              borderRadius: '5px',
+              marginRight: '150px'
+            }}
           >
-            <div style={{ marginLeft: '10%' }}>
-              <Image src={logo} />
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <Text style={{ marginRight: '40px' }}>Plan Your Kitchen</Text>
-              <Text style={{ marginRight: '40px' }}>About Us</Text>
-              <Button style={{
- width: '200px', height: '50px', backgroundColor: 'white', color: '#F47020', border: '1px solid #F47020', borderRadius: '5px', marginRight: '150px'
-}}
-              >
-                Request Quote
-              </Button>
-            </div>
-          </Section>
-        );
-    }
+            Request Quote
+          </Button>
+        </div>
+      </Section>
+    );
+  }
 }
 
 export default Header;

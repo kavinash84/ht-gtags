@@ -36,7 +36,7 @@ class ShopbyCatItem extends Component {
           <Div
             className={`${styles.sliderItem}`}
             style={{
-              paddingRight: '0px',
+              paddingRight: '0px'
               // pointerEvents: ['/modular-wardrobe'].includes(data.url_key) ? 'none' : ''
             }}
           >
@@ -104,7 +104,9 @@ class ShopbyCatItem extends Component {
         return (
           <Div
             className={`${styles.sliderItem}`}
-            style={{ padding: '15px', background: 'white', paddingBottom: '0px', paddingTop: '5px' }}
+            style={{
+ padding: '15px', background: 'white', paddingBottom: '0px', paddingTop: '5px'
+}}
           >
             {/* <Link className={styles.link} to={data.url_key}> */}
             <div className={styles.link}>
@@ -125,12 +127,18 @@ class ShopbyCatItem extends Component {
                     </Text>
                   </Div>
                   <Div style={{ width: '40%', marginTop: '-30px', display: 'flex' }}>
-                    <div className={styles.profileImg} style={{ backgroundImage: `url(${data.profileImg})` }}></div>
+                    <div className={styles.profileImg} style={{ backgroundImage: `url(${data.profileImg})` }} />
                   </Div>
                 </Div>
               </Div>
-              <Div style={{ background: '#F5F5F5', padding: '20px', textAlign: 'center', marginTop: '5px' }}>
-                <Div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+              <Div style={{
+ background: '#F5F5F5', padding: '20px', textAlign: 'center', marginTop: '5px'
+}}
+              >
+                <Div style={{
+ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%'
+}}
+                >
                   {[...Array(data.review).keys()].map(item => (
                     <img src={star} alt="starr" style={{ margin: '5px 3px' }} key={item} />
                   ))}
@@ -142,7 +150,9 @@ class ShopbyCatItem extends Component {
                   <span className={styles.content8_desc_2}>{data.reviewDescription}</span>
                 </Text>
                 <Div
-                  style={{ textAlign: 'center', fontWeight: '500', fontSize: '14px', color: 'black', marginTop: '5px' }}
+                  style={{
+ textAlign: 'center', fontWeight: '500', fontSize: '14px', color: 'black', marginTop: '5px'
+}}
                 >
                   - {data.customerName}
                 </Div>
@@ -159,11 +169,16 @@ class ShopbyCatItem extends Component {
               <div className={styles.link}>
                 <img src={data.imgSrc} alt={data.title} style={{ marginTop: '15px' }} />
                 <Div style={{ marginTop: '20px' }}>
-                  <Text style={{ fontWeight: 600, color: '#575757', lineHeight: 1.3, margin: '0px' }}>
+                  <Text style={{
+ fontWeight: 600, color: '#575757', lineHeight: 1.3, margin: '0px'
+}}
+                  >
                     {data.title}
                   </Text>
                   <div
-                    style={{ lineHeight: 1.3, color: '#575757', margin: '0px', maxHeight: '37px', overflow: 'hidden' }}
+                    style={{
+ lineHeight: 1.3, color: '#575757', margin: '0px', maxHeight: '37px', overflow: 'hidden'
+}}
                   >
                     {data.description}
                   </div>
@@ -181,7 +196,10 @@ class ShopbyCatItem extends Component {
               <div style={{ height: '105px' }}>
                 <img src={data.imgSrc} alt={data.title} style={{ height: '100%', width: 'auto', margin: 'auto' }} />
               </div>
-              <Div style={{ fontSize: '14px', fontWeight: 500, textAlign: 'left', marginTop: '10px' }}>
+              <Div style={{
+ fontSize: '14px', fontWeight: 500, textAlign: 'left', marginTop: '10px'
+}}
+              >
                 {data.title}
               </Div>
             </div>
@@ -228,7 +246,7 @@ class ShopbyCatItem extends Component {
     const scrollPosition = sessionStorage.getItem('scrollPosition');
     if (scrollPosition) {
       window.scrollTo(0, parseInt(scrollPosition));
-      setTimeout(function() {
+      setTimeout(() => {
         sessionStorage.removeItem('scrollPosition');
       }, 2000);
     }
