@@ -45,6 +45,7 @@ import webtochat from './modules/webtochat';
 import offer from './modules/offer';
 import listingbanners from './modules/listingbanners';
 import feedback from './modules/feedback';
+import designBuild from './modules/designbuild';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -108,6 +109,7 @@ export default function createReducers(asyncReducers) {
     offer,
     feedback,
     listingbanners,
+    designBuild,
     ...asyncReducers
   };
 }

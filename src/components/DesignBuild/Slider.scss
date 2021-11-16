@@ -1,0 +1,152 @@
+@import "../../theme/_variables";
+@import "../../theme/_mixins";
+
+.sliderItem {
+  padding-right: 15px;
+  .link {
+    .curosalImg {
+    }
+    .contnet3_description {
+      line-height: 1.3;
+      color: #888888;
+      text-align: left;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+      font-size: 14px;
+    }
+    .content3 {
+      color: #888888;
+      padding: 10px;
+      padding-top: 3px;
+      .name {
+        font-size: 16px;
+      }
+      .description {
+      }
+    }
+    .content4_description {
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+      font-size: 14px;
+    }
+    .content4 {
+      color: #888888;
+      padding: 3px 10px 0px;
+      .name {
+        font-size: 16px;
+        font-weight: 600;
+        text-align: center;
+        color: black;
+        margin: 10px 0px;
+      }
+      .description {
+        margin-bottom: 20px;
+        text-align: center;
+      }
+    }
+    .content7_description{
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+      font-size: 14px;
+    }
+    .content7 {
+      color: #888888;
+      padding: 10px 10px;
+      .name {
+        font-size: 16px;
+        font-weight: 600;
+        text-align: center;
+        color: black;
+        margin: 10px 0px;
+      }
+      .description {
+        margin-bottom: 5px;
+        text-align: center;
+      }
+    }
+    .content8_desc_1 {
+      color: #888888;
+      text-align: left;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+      font-size: 14px;
+    }
+    .content8_desc_2 {
+      color: #888888;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+      font-size: 14px;
+    }
+    .content8 {
+      color: #888888;
+      .name {
+        font-size: 16px;
+        font-weight: 600;
+        text-align: left;
+        color: black;
+        margin: 10px 0px;
+      }
+      .description {
+        text-align: left;
+      }
+      .profileImg {
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+      }
+    }
+    .content {
+      font-size: 16px;
+      color: black;
+      text-align: left;
+      margin-top: 5px;
+    }
+  }
+}
+.finacesliderItem {
+  padding-right: 15px;
+  .link {
+    .curosalImg {
+      max-height: 20px;
+    }
+    .content11 {
+      color: #888888;
+      margin-top: 10px;
+      .title {
+        font-size: 16px;
+        line-height: 0;
+        color: black;
+        line-height: 1.3;
+        margin: 0;
+        font-weight: 600;
+      }
+      .description {
+        font-size: 14px;
+        line-height: 1.3;
+      }
+    }
+  }
+}
