@@ -43,7 +43,13 @@ const ShopByCategories = () => (
         marginBottom: "10px"
       }}
     />
-    <RowHtV1 justifyContent="center" ml="-5px" mr="-5px" mt="25px">
+    <RowHtV1
+      justifyContent="center"
+      ml="-5px"
+      mr="-5px"
+      mt="25px"
+      style={{ maxWidth: "1400px" }}
+    >
       <CategoryBlock
         to="/home-decor/vases-flowers"
         src={styleYourHome01}
