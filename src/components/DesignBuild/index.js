@@ -3,10 +3,11 @@ import BeginJourney from './BeginJourney';
 import QueryDropDownContainer from './queryDropdown';
 import TopBanner from './TopBanner';
 import WhyChose from './Whychose';
-import DandBAdvantage from './DandBAdvantage';
+// import DandBAdvantage from './DandBAdvantage';
 import RoomsWeTransform from './RoomsTransform';
 // import ModularKitchenForm from './ModularKitchenForm';
 import Header from './Header';
+import DandBAdvantage from './DesignBuildAdavntage/DandBAdvantage';
 
 class DesignBuildContainer extends React.Component {
   render() {
