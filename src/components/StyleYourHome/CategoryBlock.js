@@ -41,7 +41,7 @@ const CategoryBlock = ({ src, to, title }) => {
           <div
             style={{
               background: "#F2F2F2",
-              padding: "4px 10px",
+              padding: "15px 10px",
               width: "85%",
               marginTop: "15px",
               textAlign: "center",

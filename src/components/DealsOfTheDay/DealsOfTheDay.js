@@ -47,7 +47,7 @@ class DealsOfTheDayCards extends Component {
             </h3>
             <p className="Para-one">By Hometown</p>
             <p className="price">
-              Price: &#8377;16,9999
+              Price: &#8377;16,999
               <span className="price-discount">&#8377;28,500</span>
               <span className="price-off">30% off</span>
             </p>
