@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import ShopOurBestsellersCards from "./ShopOurBestsellersCards";
+import ShopOurBestsellersCards from './ShopOurBestsellersCards';
 
 class ShopOurBestsellers extends Component {
   render() {
