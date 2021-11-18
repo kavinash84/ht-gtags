@@ -5,10 +5,12 @@ import { Link } from "react-router-dom";
 import HeadingHtV1 from "hometown-components-dev/lib/HeadingHtV1";
 import Image from "hometown-components-dev/lib/ImageHtV1";
 import CategoryCarouselLook from "../../components/CategoryCarouselLook";
+
 import CategoryCarousel from "../../components/CategoryCarouselHome";
 import StyleYourHome from "../../components/StyleYourHome";
 import ShopOurBestsellers from "../../components/ShopOurBestsellers";
-
+import CategoryCarouselLookTwo from "../../components/CategoryCarouselLookTwo";
+import ShopGiftsByPrice from "../../components/ShopGiftsByPrice";
 // Shop by room
 // const shopByRoom01 = require("../../../static/new-home/shopbyroom01.png");
 // const shopByRoom02 = require("../../../static/new-home/shopbyroom02.png");
@@ -20,6 +22,7 @@ const secondBanner = require("../../../static/new-home/bannerImage.png");
 const GiftBanner01 = require("../../../static/new-home/giftbanner01.png");
 const GiftBanner02 = require("../../../static/new-home/giftbanner02.png");
 const TogetherInTheMoment = require("../../../static/new-home/togetherinthemomentbanner.png");
+const ShopOurNewArrivalsBanner = require("../../../static/new-home/shopOurNewArrivalBanner.png");
 const MidBanner = require("../../../static/new-home/midbanner.png");
 const WorkFromHome01 = require("../../../static/new-home/WorkFromHome01.png");
 const WorkFromHome02 = require("../../../static/new-home/WorkFromHome02.png");
@@ -57,6 +60,10 @@ const ForABetterSleep01 = require("../../../static/new-home/ForABetterSleep01.pn
 const ForABetterSleep02 = require("../../../static/new-home/ForABetterSleep02.png");
 const ForABetterSleep03 = require("../../../static/new-home/ForABetterSleep03.png");
 const ForABetterSleep04 = require("../../../static/new-home/ForABetterSleep04.png");
+
+// easy finance
+const HdfcLogo = require("../../../static/new-home/hdfc-logo.png");
+const BajajLogo = require("../../../static/new-home/bajaj-logo.png");
 
 class HomeContainer extends Component {
   state = {
@@ -227,7 +234,8 @@ class HomeContainer extends Component {
           </Link>
         </div>
         {/* get the look */}
-        <div pl="30px" pr="30px" pt="30px" pb="20px" mb="10px" bg="#F9F9F9">
+
+        <div>
           <CategoryCarouselLook />
         </div>
 
@@ -373,6 +381,10 @@ class HomeContainer extends Component {
             </div>
           </Link>
         </div>
+        {/* shop gifts by price */}
+        <div>
+          <ShopGiftsByPrice />
+        </div>
         {/* Together In the moment */}
         <div>
           <HeadingHtV1
@@ -387,7 +399,7 @@ class HomeContainer extends Component {
           >
             Together In the moment
           </HeadingHtV1>
-          <Link to="/furniture/living-room-furniture/sofas">
+          <Link to="/furniture/dining-kitchen-furniture/dining-sets">
             <HeadingHtV1
               fontFamily="medium"
               style={{
@@ -434,43 +446,79 @@ class HomeContainer extends Component {
         </div>
 
         {/* shop our new arrivals in furniture */}
-        {/* wfh Favourites are back */}
-
-        <div
-          style={{
-            display: "flex",
-            width: "100%",
-            flexDirection: "column",
-            justifyContent: "space-evenly",
-            alignContent: "center"
-          }}
-        >
+        <div>
           <HeadingHtV1
+            mb="20px"
+            mt="40px"
+            fontSize="30px"
             style={{
               textAlign: "center",
-              color: "#323131",
-              fontFamily: "medium",
-              margin: "30px 0 10px 0px"
+              color: "#222222",
+              fontFamily: "medium"
             }}
-            fontSize="30px"
           >
-            Wfh Favourites Are Back
+            Shop Our New Arrivals In Furniture
           </HeadingHtV1>
           <div
             style={{
-              fontSize: "15px",
-              color: "gray",
-              display: "flex",
-              justifyContent: "center",
-              alignContent: "center",
-              margin: "10px 250px 20px 250px",
-              textAlign: "center"
+              width: "30px",
+              borderTop: "2px solid #222222",
+              margin: "auto",
+              marginBottom: "10px"
             }}
-          >
-            Desks and Chairs are ready to ship.
-          </div>
+          />
+          <Link to="/furniture/new-arrival">
+            <Image
+              mt="30px"
+              src={ShopOurNewArrivalsBanner}
+              style={{
+                width: "90%",
+                alignItems: "center",
+                marginLeft: "5%",
+                marginRight: "5%"
+              }}
+            />
+          </Link>
+        </div>
 
-          {/* <HeadingHtV1
+        {/* wfh Favourites are back */}
+        <div>
+          <Link to="/furniture/study-office-furniture">
+            <div
+              style={{
+                display: "flex",
+                width: "100%",
+                flexDirection: "column",
+                justifyContent: "space-evenly",
+                alignContent: "center"
+              }}
+            >
+              <HeadingHtV1
+                style={{
+                  textAlign: "center",
+                  color: "#323131",
+                  fontFamily: "medium",
+                  margin: "30px 0 10px 0px"
+                }}
+                fontSize="30px"
+              >
+                Wfh Favourites Are Back
+              </HeadingHtV1>
+              <div
+                style={{
+                  fontSize: "15px",
+                  color: "gray",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignContent: "center",
+                  margin: "10px 250px 20px 250px",
+                  textAlign: "center"
+                }}
+              >
+                Desks and Chairs are ready to ship.
+              </div>
+
+              {/* <HeadingHtV1
               style={{
                 textAlign: "center",
                 fontSize: "12px",
@@ -491,33 +539,35 @@ class HomeContainer extends Component {
                 alt="Arrow"
               />
             </HeadingHtV1> */}
-          <div
-            style={{
-              display: "flex",
-              margin: "0 10%",
-              justifyContent: "space-evenly",
-              alignContent: "center"
-            }}
-          >
-            <Image
-              style={{
-                width: "45%",
-                alignItems: "center",
+              <div
+                style={{
+                  display: "flex",
+                  margin: "0 10%",
+                  justifyContent: "space-evenly",
+                  alignContent: "center"
+                }}
+              >
+                <Image
+                  style={{
+                    width: "45%",
+                    alignItems: "center",
 
-                zIndex: "10"
-              }}
-              src={WorkFromHome01}
-            />
-            <Image
-              style={{
-                width: "45%",
-                alignItems: "center",
+                    zIndex: "10"
+                  }}
+                  src={WorkFromHome01}
+                />
+                <Image
+                  style={{
+                    width: "45%",
+                    alignItems: "center",
 
-                zIndex: "10"
-              }}
-              src={WorkFromHome02}
-            />
-          </div>
+                    zIndex: "10"
+                  }}
+                  src={WorkFromHome02}
+                />
+              </div>
+            </div>
+          </Link>
         </div>
         {/* Trends we love */}
         <div>
@@ -534,17 +584,17 @@ class HomeContainer extends Component {
           >
             Trends We Love
           </HeadingHtV1>
-          {/* <Link to="/home-decor/trends/bahama-luxe"> */}
-
-          <Image
-            mt="10px"
-            src={TrendsWeLove01}
-            style={{
-              width: "75%",
-              alignItems: "center",
-              marginLeft: "12%"
-            }}
-          />
+          <Link to="/home-decor/trends/bahama-luxe">
+            <Image
+              mt="10px"
+              src={TrendsWeLove01}
+              style={{
+                width: "75%",
+                alignItems: "center",
+                marginLeft: "12%"
+              }}
+            />
+          </Link>
           <Image
             mt="60px"
             src={TrendsWeLove02}
@@ -572,7 +622,6 @@ class HomeContainer extends Component {
               marginLeft: "12%"
             }}
           />
-          {/* </Link> */}
         </div>
         {/* for your master suite */}
 
@@ -589,7 +638,7 @@ class HomeContainer extends Component {
           >
             For Your Master Suite
           </HeadingHtV1>
-          <Link to="/furniture/living-room-furniture/sofas">
+          <Link to="/furniture/bedroom-furniture">
             <HeadingHtV1
               fontFamily="medium"
               style={{
@@ -623,11 +672,15 @@ class HomeContainer extends Component {
             />
           </Link>
         </div>
+        {/* get the look two */}
+        <div>
+          <CategoryCarouselLookTwo />
+        </div>
         {/* our bedding favourites */}
         <div>
           <HeadingHtV1
             mb="20px"
-            mt="50px"
+            mt="90px"
             fontSize="30px"
             style={{
               textAlign: "center",
@@ -637,7 +690,7 @@ class HomeContainer extends Component {
           >
             Our Bedding Favourites
           </HeadingHtV1>
-          <Link to="/furniture/living-room-furniture/sofas">
+          <Link to="/home-furnishings/bedding">
             <HeadingHtV1
               fontFamily="medium"
               style={{
@@ -730,7 +783,7 @@ class HomeContainer extends Component {
             }}
           />
           {/* </Link> */}
-          <div mt="30px">
+          <div>
             <div
               style={{
                 display: "flex",
@@ -926,6 +979,181 @@ class HomeContainer extends Component {
                   marginBottom: "20px"
                 }}
               />
+            </div>
+          </div>
+        </div>
+        {/* Easy finance - static images */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            padding: "20px 30px",
+            marginTop: "30px",
+            backgroundColor: "#F5EEEE"
+          }}
+        >
+          <HeadingHtV1
+            pb="0px"
+            pt="10px"
+            ta="center"
+            mb="10px"
+            style={{
+              color: "#323131",
+              whiteSpace: "normal",
+              fontFamily: "medium"
+            }}
+          >
+            Easy Finance
+          </HeadingHtV1>
+          <div
+            style={{
+              width: "30px",
+              borderTop: "2px solid #222222",
+              margin: "auto",
+              marginBottom: "20px"
+            }}
+          />
+          <div
+            style={{
+              display: "flex",
+              width: "80%",
+              justifyContent: "center",
+              margin: "10px 5% 30px 5%"
+            }}
+          >
+            <div style={{ width: "20%", margin: "0 10px" }}>
+              <div
+                style={{
+                  height: "230px",
+                  backgroundColor: "white",
+                  paddingTop: "30px",
+                  paddingBottom: "30px",
+                  paddingLeft: "30px",
+                  paddingRight: "30px",
+                  display: "flex",
+                  justifyContent: "space-evenly",
+                  alignContent: "center",
+                  flexDirection: "column"
+                }}
+              >
+                <Image src={HdfcLogo} width="90%" style={{ zIndex: "10" }} />
+                <HeadingHtV1
+                  fontSize="20px"
+                  mb="5px"
+                  lineHeight="23px"
+                  style={{ color: "#575757" }}
+                >
+                  Upto 10% Cashback
+                </HeadingHtV1>
+                <div
+                  fontSize="10px"
+                  lineHeight="18px"
+                  style={{ color: "#575757" }}
+                >
+                  On debit and credit cards
+                </div>
+              </div>
+            </div>
+            <div style={{ width: "20%", margin: "0 10px" }}>
+              <div
+                style={{
+                  height: "230px",
+                  backgroundColor: "white",
+                  paddingTop: "30px",
+                  paddingBottom: "30px",
+                  paddingLeft: "30px",
+                  paddingRight: "30px",
+                  display: "flex",
+                  justifyContent: "space-evenly",
+                  alignContent: "center",
+                  flexDirection: "column"
+                }}
+              >
+                <Image src={BajajLogo} width="90%" style={{ zIndex: "10" }} />
+                <HeadingHtV1
+                  fontSize="20px"
+                  mb="5px"
+                  lineHeight="23px"
+                  style={{ color: "#575757" }}
+                >
+                  0% Interest
+                </HeadingHtV1>
+                <div
+                  fontSize="15px"
+                  lineHeight="18px"
+                  style={{ color: "#575757" }}
+                >
+                  On upto 6 months EMI for orders above 3000
+                </div>
+              </div>
+            </div>
+            <div style={{ width: "20%", margin: "0 10px" }}>
+              <div
+                style={{
+                  height: "230px",
+                  backgroundColor: "white",
+                  paddingTop: "30px",
+                  paddingBottom: "30px",
+                  paddingLeft: "30px",
+                  paddingRight: "30px",
+                  display: "flex",
+                  justifyContent: "space-evenly",
+                  alignContent: "center",
+                  flexDirection: "column"
+                }}
+              >
+                <Image src={HdfcLogo} width="90%" style={{ zIndex: "10" }} />
+                <HeadingHtV1
+                  fontSize="20px"
+                  mb="5px"
+                  lineHeight="23px"
+                  style={{ color: "#575757" }}
+                >
+                  Upto 10% Cashback
+                </HeadingHtV1>
+                <div
+                  fontSize="15px"
+                  lineHeight="18px"
+                  style={{ color: "#575757" }}
+                >
+                  On debit and credit cards
+                </div>
+              </div>
+            </div>
+            <div style={{ width: "20%", margin: "0 10px" }}>
+              <div
+                style={{
+                  height: "230px",
+                  backgroundColor: "white",
+                  paddingTop: "30px",
+                  paddingBottom: "30px",
+                  paddingLeft: "30px",
+                  paddingRight: "30px",
+                  display: "flex",
+                  justifyContent: "space-evenly",
+                  alignContent: "center",
+                  flexDirection: "column"
+                }}
+              >
+                <Image src={BajajLogo} width="90%" style={{ zIndex: "10" }} />
+                <HeadingHtV1
+                  fontSize="20px"
+                  mb="5px"
+                  lineHeight="23px"
+                  style={{ color: "#575757" }}
+                >
+                  0% Interest
+                </HeadingHtV1>
+                <div
+                  fontSize="8px"
+                  lineHeight="18px"
+                  style={{ color: "#575757" }}
+                >
+                  On upto 6 months EMI for orders above 3000
+                </div>
+              </div>
             </div>
           </div>
         </div>

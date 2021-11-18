@@ -4,13 +4,13 @@ import React, { Component } from "react";
 // import Title from 'components/Title';
 import HeadingHtV1 from "hometown-components-dev/lib/HeadingHtV1";
 // import SlickSlider from "components/SlickSlider";
-import CategoryCarouselItem from "./CategoryCarouselItem";
+import CategoryCarouselItemTwo from "./CategoryCarouselItemTwo";
 
-const GetTheLook01 = require("../../../static/new-home/getthelook01.png");
-const GetTheLook02 = require("../../../static/new-home/getthelook02.png");
-const GetTheLook03 = require("../../../static/new-home/getthelook03.png");
+const GetTheLook04 = require("../../../static/new-home/getthelook04.png");
+const GetTheLook05 = require("../../../static/new-home/getthelook05.png");
+const GetTheLook06 = require("../../../static/new-home/getthelook06.png");
 
-export default class CategoryCarousel extends Component {
+export default class CategoryCarouselTwo extends Component {
   render() {
     return (
       <div>
@@ -33,16 +33,16 @@ export default class CategoryCarousel extends Component {
             alignItems: "center"
           }}
         >
-          <CategoryCarouselItem
-            src={GetTheLook01}
+          <CategoryCarouselItemTwo
+            src={GetTheLook04}
             title="Tiago Engieered Wood King bed without storage in Wenge Colour"
           />
-          <CategoryCarouselItem
-            src={GetTheLook02}
+          <CategoryCarouselItemTwo
+            src={GetTheLook05}
             title="Tiago Engieered Wood Night Stand in Wenge Colour"
           />
-          <CategoryCarouselItem
-            src={GetTheLook03}
+          <CategoryCarouselItemTwo
+            src={GetTheLook06}
             title="Tiago Engieered Wood Dresser with mirror in Wenge Colour"
           />
         </div>

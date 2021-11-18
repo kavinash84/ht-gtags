@@ -18,10 +18,14 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  margin: 180px 30px 0px 10px;
+  margin-top: 180px;
+  margin-right: 30px;
+  margin-bottom: 0;
+  margin-left: 10px;
+
   box-shadow: 0.5rem 0.5rem 3rem rgba(0, 0, 0, 0.2);
 }
-img {
+.ShopOurBestsellers-img {
   width: 20rem;
   height: auto;
   object-fit: cover;

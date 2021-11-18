@@ -6,7 +6,7 @@ import Img from "hometown-components-dev/lib/Img";
 // import TextHtV1 from "hometown-components-dev/lib/TextHtV1";
 // import ReactStars from "react-stars";
 
-import "./CategoryCarousel.css";
+import "./CategoryCarouselTwo.css";
 const CategoryItem = ({ src, title }) => {
   return (
     <div>
@@ -36,7 +36,7 @@ const CategoryItem = ({ src, title }) => {
             width="90%"
             style={{ zIndex: 10 }}
           />
-          <h3 className="get-the-look-title-one">{title}</h3>
+          <h3 className="get-the-look-title-two">{title}</h3>
         </div>
       </div>
     </div>

@@ -1,14 +1,14 @@
-.wrapper {
+.DealsOfTheDay-wrapper {
   margin-top: 60px;
 }
-.card-wrapper {
+.DealsOfTheDay-card-wrapper {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
-.card {
+.DealsOfTheDay-card {
   width: 20rem;
   background-color: #ffffff;
   display: flex;
@@ -19,7 +19,7 @@
   margin: 180px 30px 0px 10px;
   box-shadow: 0.5rem 0.5rem 3rem rgba(0, 0, 0, 0.2);
 }
-img {
+.DealsOfTheDay-image {
   width: 20rem;
   height: auto;
   object-fit: cover;
@@ -27,10 +27,10 @@ img {
   z-index: 999;
   border: 1px solid#ebeef8;
 }
-.deal-end-tag {
+.DealsOfTheDay-deal-end-tag {
   font-size: 12px;
 }
-.card-title {
+.DealsOfTheDay-card-title {
   font-size: 13px;
   color: #000;
   margin: 20px 10px 0 10px;
@@ -38,39 +38,39 @@ img {
   letter-spacing: 0.6px;
   line-height: 16px;
 }
-.Para-one {
+.DealsOfTheDay-Para-one {
   font-size: 10px;
   color: gray;
   margin-left: 10px;
   margin-top: 5px;
 }
-.price {
+.DealsOfTheDay-price {
   font-size: 10px;
   color: #000;
   font-weight: bold;
   margin-left: 10px;
   margin-top: 14px;
 }
-.price .price-discount {
+.DealsOfTheDay-price .DealsOfTheDay-price-discount {
   color: gray;
   padding: 0 7px;
   font-weight: normal;
 }
-.price .price-off {
+.DealsOfTheDay-price .DealsOfTheDay-price-off {
   color: #ff6700;
   font-weight: normal;
 }
-.discount {
+.DealsOfTheDay-discount {
   color: #000;
   font-size: 10px;
   margin-left: 10px;
   margin-top: 12px;
 }
-.discount .discount-new {
+.DealsOfTheDay-discount .DealsOfTheDay-discount-new {
   color: #ff6700;
   font-weight: bold;
 }
-.Deals-off-the-day-button {
+.DealsOfTheDay-Deals-off-the-day-button {
   color: #000;
   font-size: 10px;
   font-weight: bold;

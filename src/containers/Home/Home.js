@@ -247,16 +247,16 @@ export default class Home extends Component {
           })} */}
 
           {/* Offer Banner */}
-          <LazyLoad>
+          {/* <LazyLoad>
             <OfferBanner
               image={middleBanner.image_url}
               url={middleBanner.url_key}
               target={middleBanner.target || ""}
             />
-          </LazyLoad>
+          </LazyLoad> */}
 
           {/* LET US DESIGN FOR YOU */}
-          <Section>
+          {/* <Section>
             <Container>
               <Row justifyContent="center">
                 <Title title="LET US DESIGN FOR YOU" />
@@ -270,10 +270,7 @@ export default class Home extends Component {
                   >
                     <Box mb={20} sx={{ position: "relative" }}>
                       <Image src={sliderImage} alt="design-and-build" />
-                      {/* <Image
-                        src={designBuildLogo}
-                        variant="image.logoHomeTown"
-                      /> */}
+                     
                     </Box>
                     <Heading variant="heading.regular" textAlign="center">
                       Design and Build
@@ -288,10 +285,7 @@ export default class Home extends Component {
                   >
                     <Box mb={20} sx={{ position: "relative" }}>
                       <Image src={bannerImage} alt="modular-kitchen" />
-                      {/* <Image
-                        src="https://www.hometown.in/design-build/static/mkLogo.ae5caa06.png"
-                        variant="image.logoHomeTown"
-                      /> */}
+                     
                     </Box>
                     <Heading variant="heading.regular" textAlign="center">
                       Modular Kitchen
@@ -300,7 +294,7 @@ export default class Home extends Component {
                 </Col>
               </Row>
             </Container>
-          </Section>
+          </Section> */}
 
           {/* Store Locator */}
           <Section>
@@ -369,9 +363,9 @@ export default class Home extends Component {
           </Section>
 
           {/* Unbxd Recently Viewed */}
-          {/* <Section>
+          <Section>
             <UnbxdRecentlyViewed />
-          </Section> */}
+          </Section>
 
           {/* Share and Inspire */}
           {/* {instafeeds && !!instafeeds.length && (
