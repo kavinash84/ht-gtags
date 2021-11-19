@@ -1,45 +1,45 @@
-import React, { Component } from "react";
-import ShopByCategories from "../ShopByCategories";
-import DealsOfTheDay from "../DealsOfTheDay/index";
-import { Link } from "react-router-dom";
-import HeadingHtV1 from "hometown-components-dev/lib/HeadingHtV1";
-import Image from "hometown-components-dev/lib/ImageHtV1";
-import CategoryCarouselLook from "../../components/CategoryCarouselLook";
+import React, { Component } from 'react';
+import ShopByCategories from '../ShopByCategories';
+import DealsOfTheDay from '../DealsOfTheDay/index';
+import { Link } from 'react-router-dom';
+import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import CategoryCarouselLook from '../../components/CategoryCarouselLook';
 
-import CategoryCarousel from "../../components/CategoryCarouselHome";
-import StyleYourHome from "../../components/StyleYourHome";
-import ShopOurBestsellers from "../../components/ShopOurBestsellers";
-import CategoryCarouselLookTwo from "../../components/CategoryCarouselLookTwo";
-import ShopGiftsByPrice from "../../components/ShopGiftsByPrice";
+import CategoryCarousel from '../../components/CategoryCarouselHome';
+import StyleYourHome from '../../components/StyleYourHome';
+import ShopOurBestsellers from '../../components/ShopOurBestsellers';
+import CategoryCarouselLookTwo from '../../components/CategoryCarouselLookTwo';
+import ShopGiftsByPrice from '../../components/ShopGiftsByPrice';
 // Shop by room
 // const shopByRoom01 = require("../../../static/new-home/shopbyroom01.png");
 // const shopByRoom02 = require("../../../static/new-home/shopbyroom02.png");
 // const shopByRoom03 = require("../../../static/new-home/shopbyroom01.png");
 // const shopByRoom04 = require("../../../static/new-home/shopbyroom02.png");
 
-const bestseatbanner01 = require("../../../static/new-home/bestseatbanner01.png");
-const secondBanner = require("../../../static/new-home/bannerImage.png");
-const GiftBanner01 = require("../../../static/new-home/giftbanner01.png");
-const GiftBanner02 = require("../../../static/new-home/giftbanner02.png");
-const TogetherInTheMoment = require("../../../static/new-home/togetherinthemomentbanner.png");
-const ShopOurNewArrivalsBanner = require("../../../static/new-home/shopOurNewArrivalBanner.png");
-const MidBanner = require("../../../static/new-home/midbanner.png");
-const WorkFromHome01 = require("../../../static/new-home/WorkFromHome01.png");
-const WorkFromHome02 = require("../../../static/new-home/WorkFromHome02.png");
-const OurBeddingFev = require("../../../static/new-home/ourbeddingfev.png");
-const MasterSuite = require("../../../static/new-home/mastersuite01.png");
-const TrendsWeLove01 = require("../../../static/new-home/trendswelove01.png");
-const TrendsWeLove02 = require("../../../static/new-home/trendswelove02.png");
-const TrendsWeLove03 = require("../../../static/new-home/trendswelove03.png");
-const TrendsWeLove04 = require("../../../static/new-home/trendswelove04.png");
-const ShopTheRoomBanner01 = require("../../../static/new-home/ShopTheRoomBanner01.png");
-const modularKitchenBanner = require("../../../static/new-home/modularKitchenBanner.png");
-const HomeInteriorsBannner = require("../../../static/new-home/HomeInteriorsBannner.png");
-const TheWayWeAre01 = require("../../../static/new-home/thewaywere01.png");
-const TheWayWeAre02 = require("../../../static/new-home/thewaywere02.png");
+const bestseatbanner01 = require('../../../static/new-home/bestseatbanner01.png');
+const secondBanner = require('../../../static/new-home/bannerImage.png');
+const GiftBanner01 = require('../../../static/new-home/giftbanner01.png');
+const GiftBanner02 = require('../../../static/new-home/giftbanner02.png');
+const TogetherInTheMoment = require('../../../static/new-home/togetherinthemomentbanner.png');
+const ShopOurNewArrivalsBanner = require('../../../static/new-home/shopOurNewArrivalBanner.png');
+const MidBanner = require('../../../static/new-home/midbanner.png');
+const WorkFromHome01 = require('../../../static/new-home/WorkFromHome01.png');
+const WorkFromHome02 = require('../../../static/new-home/WorkFromHome02.png');
+const OurBeddingFev = require('../../../static/new-home/ourbeddingfev.png');
+const MasterSuite = require('../../../static/new-home/mastersuite01.png');
+const TrendsWeLove01 = require('../../../static/new-home/trendswelove01.png');
+const TrendsWeLove02 = require('../../../static/new-home/trendswelove02.png');
+const TrendsWeLove03 = require('../../../static/new-home/trendswelove03.png');
+const TrendsWeLove04 = require('../../../static/new-home/trendswelove04.png');
+const ShopTheRoomBanner01 = require('../../../static/new-home/ShopTheRoomBanner01.png');
+const modularKitchenBanner = require('../../../static/new-home/modularKitchenBanner.png');
+const HomeInteriorsBannner = require('../../../static/new-home/HomeInteriorsBannner.png');
+const TheWayWeAre01 = require('../../../static/new-home/thewaywere01.png');
+const TheWayWeAre02 = require('../../../static/new-home/thewaywere02.png');
 // sales of the day
-const salesOfTheDay01 = require("../../../static/new-home/saleoftheday01.png");
-const salesOfTheDay02 = require("../../../static/new-home/saleoftheday02.png");
+const salesOfTheDay01 = require('../../../static/new-home/saleoftheday01.png');
+const salesOfTheDay02 = require('../../../static/new-home/saleoftheday02.png');
 
 // Get the look
 // const GetTheLook01 = require("../../../static/new-home/getthelook01.png");
@@ -50,21 +50,21 @@ const salesOfTheDay02 = require("../../../static/new-home/saleoftheday02.png");
 // const GetTheLook06 = require("../../../static/new-home/getthelook06.png");
 
 // Shop Homeware
-const IndoorFountain = require("../../../static/new-home/Homeware01.png");
-const Pillow = require("../../../static/new-home/Homeware02.png");
-const Curtains = require("../../../static/new-home/Homeware03.png");
-const Containers = require("../../../static/new-home/Homeware04.png");
+const IndoorFountain = require('../../../static/new-home/Homeware01.png');
+const Pillow = require('../../../static/new-home/Homeware02.png');
+const Curtains = require('../../../static/new-home/Homeware03.png');
+const Containers = require('../../../static/new-home/Homeware04.png');
 
 // For a better sleep
-const ForABetterSleep = require("../../../static/new-home/ForABetterSleep.png");
-const ForABetterSleep01 = require("../../../static/new-home/ForABetterSleep01.png");
-const ForABetterSleep02 = require("../../../static/new-home/ForABetterSleep02.png");
-const ForABetterSleep03 = require("../../../static/new-home/ForABetterSleep03.png");
-const ForABetterSleep04 = require("../../../static/new-home/ForABetterSleep04.png");
+const ForABetterSleep = require('../../../static/new-home/ForABetterSleep.png');
+const ForABetterSleep01 = require('../../../static/new-home/ForABetterSleep01.png');
+const ForABetterSleep02 = require('../../../static/new-home/ForABetterSleep02.png');
+const ForABetterSleep03 = require('../../../static/new-home/ForABetterSleep03.png');
+const ForABetterSleep04 = require('../../../static/new-home/ForABetterSleep04.png');
 
 // easy finance
-const HdfcLogo = require("../../../static/new-home/hdfc-logo.png");
-const BajajLogo = require("../../../static/new-home/bajaj-logo.png");
+const HdfcLogo = require('../../../static/new-home/hdfc-logo.png');
+const BajajLogo = require('../../../static/new-home/bajaj-logo.png');
 
 class HomeContainer extends Component {
   state = {
@@ -131,11 +131,11 @@ class HomeContainer extends Component {
             mb="30px"
             src={secondBanner}
             style={{
-              width: "90%",
-              alignItems: "center",
-              marginLeft: "5%",
-              marginRight: "5%",
-              zIndex: "10px"
+              width: '90%',
+              alignItems: 'center',
+              marginLeft: '5%',
+              marginRight: '5%',
+              zIndex: '10px'
             }}
           />
         </div>
@@ -143,7 +143,7 @@ class HomeContainer extends Component {
         <ShopByCategories shopByCategories={shopByCategories} />
         {/* shop by room */}
 
-        <div mt="20px" mb="15px" style={{ display: "block" }}>
+        <div mt="20px" mb="15px" style={{ display: 'block' }}>
           <CategoryCarousel />
         </div>
 
@@ -154,10 +154,10 @@ class HomeContainer extends Component {
 
         <div
           style={{
-            display: "flex",
-            width: "100%",
-            justifyContent: "space-evenly",
-            alignContent: "center"
+            display: 'flex',
+            width: '100%',
+            justifyContent: 'space-evenly',
+            alignContent: 'center'
           }}
         >
           <Image
@@ -165,11 +165,11 @@ class HomeContainer extends Component {
             mb="30px"
             src={salesOfTheDay01}
             style={{
-              width: "45%",
-              alignItems: "center",
+              width: '45%',
+              alignItems: 'center',
 
-              marginLeft: "2.5%",
-              zIndex: "10"
+              marginLeft: '2.5%',
+              zIndex: '10'
             }}
           />
           <Image
@@ -177,11 +177,11 @@ class HomeContainer extends Component {
             mb="30px"
             src={salesOfTheDay02}
             style={{
-              width: "45%",
-              alignItems: "center",
+              width: '45%',
+              alignItems: 'center',
 
-              marginRight: "2.5%",
-              zIndex: "10"
+              marginRight: '2.5%',
+              zIndex: '10'
             }}
           />
         </div>
@@ -193,9 +193,9 @@ class HomeContainer extends Component {
             mt="40px"
             fontSize="30px"
             style={{
-              textAlign: "center",
-              color: "#222222",
-              fontFamily: "medium"
+              textAlign: 'center',
+              color: '#222222',
+              fontFamily: 'medium'
             }}
           >
             Best Seat In the House
@@ -204,13 +204,13 @@ class HomeContainer extends Component {
             <HeadingHtV1
               fontFamily="medium"
               style={{
-                textAlign: "center",
-                fontSize: "13px",
-                fontWeight: "bold",
-                color: "#222222"
+                textAlign: 'center',
+                fontSize: '13px',
+                fontWeight: 'bold',
+                color: '#222222'
               }}
             >
-              SHOP SOFAS AND RECLINERS{" "}
+              SHOP SOFAS AND RECLINERS{' '}
               {/* <img
                 style={{
                   display: "inline",
@@ -226,10 +226,10 @@ class HomeContainer extends Component {
               mt="30px"
               src={bestseatbanner01}
               style={{
-                width: "90%",
-                alignItems: "center",
-                marginLeft: "5%",
-                marginRight: "5%"
+                width: '90%',
+                alignItems: 'center',
+                marginLeft: '5%',
+                marginRight: '5%'
               }}
             />
           </Link>
@@ -246,48 +246,32 @@ class HomeContainer extends Component {
         {/* Shop homeware */}
         <div
           style={{
-            marginBottom: "20px",
-            width: "100%",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignContent: "center"
+            marginBottom: '20px',
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignContent: 'center'
           }}
         >
-          <div style={{ margin: "15px 10%" }}>
+          <div style={{ margin: '15px 10%' }}>
             <Link to="/home-decor/garden">
-              <Image
-                style={{ width: "90%", marginLeft: "40px" }}
-                src={IndoorFountain}
-                alt="IndoorFountain"
-              />
+              <Image style={{ width: '90%', marginLeft: '40px' }} src={IndoorFountain} alt="IndoorFountain" />
             </Link>
           </div>
-          <div style={{ margin: "15px 10%" }}>
+          <div style={{ margin: '15px 10%' }}>
             <Link to="/home-furnishings/pillows/memory-foam-pillows">
-              <Image
-                src={Pillow}
-                alt="Pillow"
-                style={{ width: "90%", marginLeft: "40px" }}
-              />
+              <Image src={Pillow} alt="Pillow" style={{ width: '90%', marginLeft: '40px' }} />
             </Link>
           </div>
-          <div style={{ margin: "15px 10%" }}>
+          <div style={{ margin: '15px 10%' }}>
             <Link to="/home-furnishings/curtains">
-              <Image
-                src={Curtains}
-                alt="Curtains"
-                style={{ width: "90%", marginLeft: "40px" }}
-              />
+              <Image src={Curtains} alt="Curtains" style={{ width: '90%', marginLeft: '40px' }} />
             </Link>
           </div>
-          <div style={{ margin: "15px 10%" }}>
+          <div style={{ margin: '15px 10%' }}>
             <Link to="/kitchenware/food-storage">
-              <Image
-                src={Containers}
-                alt="Containers"
-                style={{ width: "90%", marginLeft: "40px" }}
-              />
+              <Image src={Containers} alt="Containers" style={{ width: '90%', marginLeft: '40px' }} />
             </Link>
           </div>
         </div>
@@ -296,20 +280,20 @@ class HomeContainer extends Component {
 
         <div
           style={{
-            display: "flex",
-            width: "100%",
-            flexDirection: "column",
-            justifyContent: "space-evenly",
-            alignContent: "center"
+            display: 'flex',
+            width: '100%',
+            flexDirection: 'column',
+            justifyContent: 'space-evenly',
+            alignContent: 'center'
           }}
         >
           <HeadingHtV1
             mb="10px"
             style={{
-              textAlign: "center",
-              color: "#323131",
-              fontFamily: "medium",
-              margin: "20px 0"
+              textAlign: 'center',
+              color: '#323131',
+              fontFamily: 'medium',
+              margin: '20px 0'
             }}
             fontSize="30px"
           >
@@ -317,28 +301,27 @@ class HomeContainer extends Component {
           </HeadingHtV1>
           <div
             style={{
-              fontSize: "15px",
-              color: "gray",
-              display: "flex",
-              justifyContent: "center",
-              alignContent: "center",
-              margin: "0 250px",
-              textAlign: "center"
+              fontSize: '15px',
+              color: 'gray',
+              display: 'flex',
+              justifyContent: 'center',
+              alignContent: 'center',
+              margin: '0 250px',
+              textAlign: 'center'
             }}
           >
-            Casual get-togethers or intimate soirees, our dining room furniture
-            collection has the perfect pieces to make every moment into a
-            memorable one. Shop dining room sets, dining chairs, bar stools,
-            sideboards or serving trolleys
+            Casual get-togethers or intimate soirees, our dining room furniture collection has the perfect pieces to
+            make every moment into a memorable one. Shop dining room sets, dining chairs, bar stools, sideboards or
+            serving trolleys
           </div>
           <Link to="/gifts">
             <HeadingHtV1
               style={{
-                textAlign: "center",
-                fontSize: "12px",
-                fontFamily: "medium",
-                color: "#222222",
-                margin: "30px 20px"
+                textAlign: 'center',
+                fontSize: '12px',
+                fontFamily: 'medium',
+                color: '#222222',
+                margin: '30px 20px'
               }}
             >
               SHOP GIFTING
@@ -355,27 +338,27 @@ class HomeContainer extends Component {
             </HeadingHtV1>
             <div
               style={{
-                display: "flex",
-                margin: "0 10%",
-                justifyContent: "space-evenly",
-                alignContent: "center"
+                display: 'flex',
+                margin: '0 10%',
+                justifyContent: 'space-evenly',
+                alignContent: 'center'
               }}
             >
               <Image
                 style={{
-                  width: "45%",
-                  alignItems: "center",
+                  width: '45%',
+                  alignItems: 'center',
 
-                  zIndex: "10"
+                  zIndex: '10'
                 }}
                 src={GiftBanner01}
               />
               <Image
                 style={{
-                  width: "45%",
-                  alignItems: "center",
+                  width: '45%',
+                  alignItems: 'center',
 
-                  zIndex: "10"
+                  zIndex: '10'
                 }}
                 src={GiftBanner02}
               />
@@ -393,9 +376,9 @@ class HomeContainer extends Component {
             mt="40px"
             fontSize="30px"
             style={{
-              textAlign: "center",
-              color: "#222222",
-              fontFamily: "medium"
+              textAlign: 'center',
+              color: '#222222',
+              fontFamily: 'medium'
             }}
           >
             Together In the moment
@@ -404,10 +387,10 @@ class HomeContainer extends Component {
             <HeadingHtV1
               fontFamily="medium"
               style={{
-                textAlign: "center",
-                fontSize: "13px",
-                fontWeight: "bold",
-                color: "#222222"
+                textAlign: 'center',
+                fontSize: '13px',
+                fontWeight: 'bold',
+                color: '#222222'
               }}
             >
               SHOP DINNING SET
@@ -426,10 +409,10 @@ class HomeContainer extends Component {
               mt="30px"
               src={TogetherInTheMoment}
               style={{
-                width: "90%",
-                alignItems: "center",
-                marginLeft: "5%",
-                marginRight: "5%"
+                width: '90%',
+                alignItems: 'center',
+                marginLeft: '5%',
+                marginRight: '5%'
               }}
             />
           </Link>
@@ -438,23 +421,23 @@ class HomeContainer extends Component {
 
         <div
           style={{
-            display: "flex",
-            width: "80%",
-            flexDirection: "row",
-            justifyContent: "center",
-            alignContent: "center",
-            marginTop: "20px",
-            marginBottom: "30px",
-            margin: "5% 10%"
+            display: 'flex',
+            width: '80%',
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignContent: 'center',
+            marginTop: '20px',
+            marginBottom: '30px',
+            margin: '5% 10%'
           }}
         >
-          <div style={{ width: "" }}>
+          <div style={{ width: '' }}>
             <Image
               style={{
-                width: "90%",
-                alignItems: "center",
+                width: '90%',
+                alignItems: 'center',
 
-                zIndex: "10"
+                zIndex: '10'
               }}
               src={TheWayWeAre02}
             />
@@ -462,41 +445,29 @@ class HomeContainer extends Component {
 
           <div
             style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-evenly",
-              alignItems: "center",
-              width: "40%",
-              marginLeft: "-40px"
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-evenly',
+              alignItems: 'center',
+              width: '40%',
+              marginLeft: '-40px'
             }}
           >
-            <HeadingHtV1
-              fontSize="30px"
-              textAlign="center"
-              ml="10px"
-              mr="10px"
-              fontWeight="bold"
-            >
+            <HeadingHtV1 fontSize="30px" textAlign="center" ml="10px" mr="10px" fontWeight="bold">
               The way we're
             </HeadingHtV1>
-            <HeadingHtV1
-              fontSize="30px"
-              textAlign="center"
-              ml="10px"
-              mr="10px"
-              mt="-40px"
-            >
+            <HeadingHtV1 fontSize="30px" textAlign="center" ml="10px" mr="10px" mt="-40px">
               Entertaining Now
             </HeadingHtV1>
             <Link to="/tableware">
               <HeadingHtV1
                 fontFamily="medium"
                 style={{
-                  textAlign: "center",
-                  fontSize: "13px",
-                  fontWeight: "bold",
-                  color: "#222222",
-                  marginTop: "-38px"
+                  textAlign: 'center',
+                  fontSize: '13px',
+                  fontWeight: 'bold',
+                  color: '#222222',
+                  marginTop: '-38px'
                 }}
               >
                 SHOP TABLEWARE
@@ -514,9 +485,9 @@ class HomeContainer extends Component {
             </Link>
             <Image
               style={{
-                alignItems: "center",
+                alignItems: 'center',
 
-                zIndex: "10"
+                zIndex: '10'
               }}
               src={TheWayWeAre01}
             />
@@ -524,14 +495,9 @@ class HomeContainer extends Component {
         </div>
 
         {/* Mid banner */}
-        <div style={{ marginTop: "30px" }}>
+        <div style={{ marginTop: '30px' }}>
           {/* <Link to="/furniture"> */}
-          <Image
-            src={MidBanner}
-            width="90%"
-            alt="MidBanner"
-            style={{ display: "block", margin: "0 5%" }}
-          />
+          <Image src={MidBanner} width="90%" alt="MidBanner" style={{ display: 'block', margin: '0 5%' }} />
           {/* </Link> */}
         </div>
 
@@ -542,19 +508,19 @@ class HomeContainer extends Component {
             mt="40px"
             fontSize="30px"
             style={{
-              textAlign: "center",
-              color: "#222222",
-              fontFamily: "medium"
+              textAlign: 'center',
+              color: '#222222',
+              fontFamily: 'medium'
             }}
           >
             Shop Our New Arrivals In Furniture
           </HeadingHtV1>
           <div
             style={{
-              width: "30px",
-              borderTop: "2px solid #222222",
-              margin: "auto",
-              marginBottom: "10px"
+              width: '30px',
+              borderTop: '2px solid #222222',
+              margin: 'auto',
+              marginBottom: '10px'
             }}
           />
           <Link to="/furniture/new-arrival">
@@ -562,10 +528,10 @@ class HomeContainer extends Component {
               mt="30px"
               src={ShopOurNewArrivalsBanner}
               style={{
-                width: "90%",
-                alignItems: "center",
-                marginLeft: "5%",
-                marginRight: "5%"
+                width: '90%',
+                alignItems: 'center',
+                marginLeft: '5%',
+                marginRight: '5%'
               }}
             />
           </Link>
@@ -576,19 +542,19 @@ class HomeContainer extends Component {
           <Link to="/furniture/study-office-furniture">
             <div
               style={{
-                display: "flex",
-                width: "100%",
-                flexDirection: "column",
-                justifyContent: "space-evenly",
-                alignContent: "center"
+                display: 'flex',
+                width: '100%',
+                flexDirection: 'column',
+                justifyContent: 'space-evenly',
+                alignContent: 'center'
               }}
             >
               <HeadingHtV1
                 style={{
-                  textAlign: "center",
-                  color: "#323131",
-                  fontFamily: "medium",
-                  margin: "30px 0 10px 0px"
+                  textAlign: 'center',
+                  color: '#323131',
+                  fontFamily: 'medium',
+                  margin: '30px 0 10px 0px'
                 }}
                 fontSize="30px"
               >
@@ -596,13 +562,13 @@ class HomeContainer extends Component {
               </HeadingHtV1>
               <div
                 style={{
-                  fontSize: "15px",
-                  color: "gray",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignContent: "center",
-                  margin: "10px 250px 20px 250px",
-                  textAlign: "center"
+                  fontSize: '15px',
+                  color: 'gray',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignContent: 'center',
+                  margin: '10px 250px 20px 250px',
+                  textAlign: 'center'
                 }}
               >
                 Desks and Chairs are ready to ship.
@@ -631,27 +597,27 @@ class HomeContainer extends Component {
             </HeadingHtV1> */}
               <div
                 style={{
-                  display: "flex",
-                  margin: "0 10%",
-                  justifyContent: "space-evenly",
-                  alignContent: "center"
+                  display: 'flex',
+                  margin: '0 10%',
+                  justifyContent: 'space-evenly',
+                  alignContent: 'center'
                 }}
               >
                 <Image
                   style={{
-                    width: "45%",
-                    alignItems: "center",
+                    width: '45%',
+                    alignItems: 'center',
 
-                    zIndex: "10"
+                    zIndex: '10'
                   }}
                   src={WorkFromHome01}
                 />
                 <Image
                   style={{
-                    width: "45%",
-                    alignItems: "center",
+                    width: '45%',
+                    alignItems: 'center',
 
-                    zIndex: "10"
+                    zIndex: '10'
                   }}
                   src={WorkFromHome02}
                 />
@@ -665,11 +631,11 @@ class HomeContainer extends Component {
             mt="60px"
             fontSize="30px"
             style={{
-              width: "100%",
-              textAlign: "left",
-              marginLeft: "12%",
-              color: "#222222",
-              fontFamily: "medium"
+              width: '100%',
+              textAlign: 'left',
+              marginLeft: '12%',
+              color: '#222222',
+              fontFamily: 'medium'
             }}
           >
             Trends We Love
@@ -679,9 +645,9 @@ class HomeContainer extends Component {
               mt="10px"
               src={TrendsWeLove01}
               style={{
-                width: "75%",
-                alignItems: "center",
-                marginLeft: "12%"
+                width: '75%',
+                alignItems: 'center',
+                marginLeft: '12%'
               }}
             />
           </Link>
@@ -689,27 +655,27 @@ class HomeContainer extends Component {
             mt="60px"
             src={TrendsWeLove02}
             style={{
-              width: "75%",
-              alignItems: "center",
-              marginLeft: "12%"
+              width: '75%',
+              alignItems: 'center',
+              marginLeft: '12%'
             }}
           />
           <Image
             mt="60px"
             src={TrendsWeLove03}
             style={{
-              width: "75%",
-              alignItems: "center",
-              marginLeft: "12%"
+              width: '75%',
+              alignItems: 'center',
+              marginLeft: '12%'
             }}
           />
           <Image
             mt="60px"
             src={TrendsWeLove04}
             style={{
-              width: "75%",
-              alignItems: "center",
-              marginLeft: "12%"
+              width: '75%',
+              alignItems: 'center',
+              marginLeft: '12%'
             }}
           />
         </div>
@@ -721,9 +687,9 @@ class HomeContainer extends Component {
             mt="50px"
             fontSize="30px"
             style={{
-              textAlign: "center",
-              color: "#222222",
-              fontFamily: "medium"
+              textAlign: 'center',
+              color: '#222222',
+              fontFamily: 'medium'
             }}
           >
             For Your Master Suite
@@ -732,10 +698,10 @@ class HomeContainer extends Component {
             <HeadingHtV1
               fontFamily="medium"
               style={{
-                textAlign: "center",
-                fontSize: "13px",
-                fontWeight: "bold",
-                color: "#222222"
+                textAlign: 'center',
+                fontSize: '13px',
+                fontWeight: 'bold',
+                color: '#222222'
               }}
             >
               SHOP BEDROOMS
@@ -754,10 +720,10 @@ class HomeContainer extends Component {
               mt="30px"
               src={MasterSuite}
               style={{
-                width: "90%",
-                alignItems: "center",
-                marginLeft: "5%",
-                marginRight: "5%"
+                width: '90%',
+                alignItems: 'center',
+                marginLeft: '5%',
+                marginRight: '5%'
               }}
             />
           </Link>
@@ -773,9 +739,9 @@ class HomeContainer extends Component {
             mt="90px"
             fontSize="30px"
             style={{
-              textAlign: "center",
-              color: "#222222",
-              fontFamily: "medium"
+              textAlign: 'center',
+              color: '#222222',
+              fontFamily: 'medium'
             }}
           >
             Our Bedding Favourites
@@ -784,10 +750,10 @@ class HomeContainer extends Component {
             <HeadingHtV1
               fontFamily="medium"
               style={{
-                textAlign: "center",
-                fontSize: "13px",
-                fontWeight: "bold",
-                color: "#222222"
+                textAlign: 'center',
+                fontSize: '13px',
+                fontWeight: 'bold',
+                color: '#222222'
               }}
             >
               SHOP BEDDING
@@ -806,26 +772,25 @@ class HomeContainer extends Component {
               mt="30px"
               src={OurBeddingFev}
               style={{
-                width: "90%",
-                alignItems: "center",
-                marginLeft: "5%",
-                marginRight: "5%"
+                width: '90%',
+                alignItems: 'center',
+                marginLeft: '5%',
+                marginRight: '5%'
               }}
             />
           </Link>
           <div
             style={{
-              fontSize: "15px",
-              color: "gray",
-              display: "flex",
-              justifyContent: "center",
-              alignContent: "center",
-              margin: "20px 250px 40px 250px",
-              textAlign: "center"
+              fontSize: '15px',
+              color: 'gray',
+              display: 'flex',
+              justifyContent: 'center',
+              alignContent: 'center',
+              margin: '20px 250px 40px 250px',
+              textAlign: 'center'
             }}
           >
-            Bring plus style and comfort to Your bedroom with our wide range of
-            bedsheet, comforters, duvets
+            Bring plus style and comfort to Your bedroom with our wide range of bedsheet, comforters, duvets
           </div>
         </div>
 
@@ -833,16 +798,16 @@ class HomeContainer extends Component {
 
         <div
           style={{
-            paddingLeft: "30px",
-            paddingRight: "30px"
+            paddingLeft: '30px',
+            paddingRight: '30px'
           }}
         >
           <div className="gradient-sleep">
             <HeadingHtV1
               style={{
-                textAlign: "center",
-                color: "#323131",
-                fontFamily: "medium"
+                textAlign: 'center',
+                color: '#323131',
+                fontFamily: 'medium'
               }}
               fontSize="30px"
               mb="10px"
@@ -855,10 +820,10 @@ class HomeContainer extends Component {
           </div>
           <div
             style={{
-              width: "30px",
-              borderTop: "2px solid #222222",
-              margin: "auto",
-              marginBottom: "20px"
+              width: '30px',
+              borderTop: '2px solid #222222',
+              margin: 'auto',
+              marginBottom: '20px'
             }}
           />
           {/* <Link to="/furniture/bedroom-furniture"> */}
@@ -866,36 +831,36 @@ class HomeContainer extends Component {
             src={ForABetterSleep}
             alt="ForABetterSleep"
             style={{
-              width: "90%",
-              alignItems: "center",
-              marginLeft: "5%",
-              marginRight: "5%"
+              width: '90%',
+              alignItems: 'center',
+              marginLeft: '5%',
+              marginRight: '5%'
             }}
           />
           {/* </Link> */}
           <div>
             <div
               style={{
-                display: "flex",
-                width: "90%",
-                justifyContent: "center",
-                margin: "30px 5%"
+                display: 'flex',
+                width: '90%',
+                justifyContent: 'center',
+                margin: '30px 5%'
               }}
             >
-              <div style={{ width: "20%", margin: "0 10px" }}>
+              <div style={{ width: '20%', margin: '0 10px' }}>
                 <Link to="/furniture/mattresses">
                   <Image src={ForABetterSleep01} alt="ForABetterSleep01" />
                   <div
                     style={{
-                      background: "#FFFFFF",
-                      padding: "15px 10px",
-                      width: "85%",
-                      margin: "-45px auto 0px",
-                      position: "relative",
-                      opacity: "90%",
-                      textAlign: "center",
-                      fontSize: "14px",
-                      color: "black"
+                      background: '#FFFFFF',
+                      padding: '15px 10px',
+                      width: '85%',
+                      margin: '-45px auto 0px',
+                      position: 'relative',
+                      opacity: '90%',
+                      textAlign: 'center',
+                      fontSize: '14px',
+                      color: 'black'
                       // fontWeight: 'bolder'
                     }}
                   >
@@ -903,60 +868,60 @@ class HomeContainer extends Component {
                   </div>
                 </Link>
               </div>
-              <div style={{ width: "20%", margin: "0 10px" }}>
+              <div style={{ width: '20%', margin: '0 10px' }}>
                 <Link to="/home-furnishings/pillows">
                   <Image src={ForABetterSleep02} alt="ForABetterSleep02" />
                   <div
                     style={{
-                      background: "#FFFFFF",
-                      padding: "15px 10px",
-                      width: "85%",
-                      margin: "-45px auto 0px",
-                      position: "relative",
-                      opacity: "90%",
-                      textAlign: "center",
-                      fontSize: "14px",
-                      color: "black"
+                      background: '#FFFFFF',
+                      padding: '15px 10px',
+                      width: '85%',
+                      margin: '-45px auto 0px',
+                      position: 'relative',
+                      opacity: '90%',
+                      textAlign: 'center',
+                      fontSize: '14px',
+                      color: 'black'
                     }}
                   >
                     Pillows
                   </div>
                 </Link>
               </div>
-              <div style={{ width: "20%", margin: "0 10px" }}>
+              <div style={{ width: '20%', margin: '0 10px' }}>
                 <Link to="/home-furnishings/bedding/comforters">
                   <Image src={ForABetterSleep03} alt="ForABetterSleep03" />
                   <div
                     style={{
-                      background: "#FFFFFF",
-                      padding: "15px 10px",
-                      width: "85%",
-                      margin: "-45px auto 0px",
-                      position: "relative",
-                      opacity: "90%",
-                      textAlign: "center",
-                      fontSize: "14px",
-                      color: "black"
+                      background: '#FFFFFF',
+                      padding: '15px 10px',
+                      width: '85%',
+                      margin: '-45px auto 0px',
+                      position: 'relative',
+                      opacity: '90%',
+                      textAlign: 'center',
+                      fontSize: '14px',
+                      color: 'black'
                     }}
                   >
                     Comforters
                   </div>
                 </Link>
               </div>
-              <div style={{ width: "20%", margin: "0 10px" }}>
+              <div style={{ width: '20%', margin: '0 10px' }}>
                 <Link to="/home-furnishings/protectors/mattress-protectors">
                   <Image src={ForABetterSleep04} alt="ForABetterSleep04" />
                   <div
                     style={{
-                      background: "#FFFFFF",
-                      padding: "15px 10px",
-                      width: "85%",
-                      margin: "-45px auto 0px",
-                      position: "relative",
-                      opacity: "90%",
-                      textAlign: "center",
-                      fontSize: "14px",
-                      color: "black"
+                      background: '#FFFFFF',
+                      padding: '15px 10px',
+                      width: '85%',
+                      margin: '-45px auto 0px',
+                      position: 'relative',
+                      opacity: '90%',
+                      textAlign: 'center',
+                      fontSize: '14px',
+                      color: 'black'
                     }}
                   >
                     Mattress Protectors
@@ -968,73 +933,8 @@ class HomeContainer extends Component {
         </div>
         {/* shop our bestsellers */}
         <ShopOurBestsellers />
-
-        {/* shop the room */}
-
-        <div>
-          <HeadingHtV1
-            mb="20px"
-            mt="50px"
-            fontSize="30px"
-            style={{
-              textAlign: "center",
-              color: "#222222",
-              fontFamily: "medium"
-            }}
-          >
-            Shop The Room
-          </HeadingHtV1>
-          <Link to="/furniture/living-room-furniture/sofas">
-            <HeadingHtV1
-              fontFamily="medium"
-              style={{
-                textAlign: "center",
-                fontSize: "13px",
-                fontWeight: "bold",
-                color: "#222222"
-              }}
-            >
-              SHOP THE LOOK
-              {/* <img
-                style={{
-                  display: "inline",
-                  marginLeft: "-8px",
-                  height: "10px",
-                  width: "40px"
-                }}
-                src={arrowForward}
-                alt="Arrow"
-              /> */}
-            </HeadingHtV1>
-            <Image
-              mt="30px"
-              src={ShopTheRoomBanner01}
-              style={{
-                width: "90%",
-                alignItems: "center",
-                marginLeft: "5%",
-                marginRight: "5%"
-              }}
-            />
-          </Link>
-          <div
-            style={{
-              fontSize: "15px",
-              color: "gray",
-              display: "flex",
-              justifyContent: "center",
-              alignContent: "center",
-              margin: "20px 250px 40px 250px",
-              textAlign: "center"
-            }}
-          >
-            A glamorous upgrade from the classic living room, we have created a
-            blue and mixed matal haven for the contemporary homemaker
-          </div>
-        </div>
-
         {/* D&B and MK */}
-        <div
+        {/* <div
           style={{
             marginTop: "50px",
             paddingLeft: "50px",
@@ -1071,17 +971,144 @@ class HomeContainer extends Component {
               />
             </div>
           </div>
+        </div> */}
+        <div style={{ position: 'relative', marginTop: '10%' }}>
+          <div
+            style={{
+              border: '2px solid black',
+              padding: '20px 10px',
+              position: 'absolute',
+              height: '165vh',
+              width: '70%',
+              zIndex: '-10',
+              margin: '0% 15%'
+            }}
+          />
+          <div
+            style={{
+              display: 'flex',
+              textAlign: 'center',
+              alignContent: 'center',
+              justifyContent: 'center',
+              flexDirection: 'column'
+            }}
+          >
+            <div
+              style={{
+                color: '#323131',
+                marginTop: '20px',
+                fontFamily: 'medium',
+                marginBottom: '10px',
+                fontSize: '30px'
+              }}
+            >
+              Customise Your Home With Us
+            </div>
+            <div
+              style={{
+                width: '30px',
+                borderTop: '2px solid #222222',
+                margin: 'auto',
+                marginBottom: '20px'
+              }}
+            />
+            <Image
+              mt="30px"
+              src={modularKitchenBanner}
+              style={{
+                width: '90%',
+                alignItems: 'center',
+                marginLeft: '5%',
+                marginRight: '5%'
+              }}
+            />
+            <Image
+              mt="30px"
+              src={HomeInteriorsBannner}
+              style={{
+                width: '90%',
+                alignItems: 'center',
+                marginLeft: '5%',
+                marginRight: '5%'
+              }}
+            />
+          </div>
         </div>
+
+        {/* shop the room */}
+
+        <div>
+          <HeadingHtV1
+            mb="20px"
+            mt="100px"
+            fontSize="30px"
+            style={{
+              textAlign: 'center',
+              color: '#222222',
+              fontFamily: 'medium'
+            }}
+          >
+            Shop The Room
+          </HeadingHtV1>
+          <Link to="/furniture/living-room-furniture/sofas">
+            <HeadingHtV1
+              fontFamily="medium"
+              style={{
+                textAlign: 'center',
+                fontSize: '13px',
+                fontWeight: 'bold',
+                color: '#222222'
+              }}
+            >
+              SHOP THE LOOK
+              {/* <img
+                style={{
+                  display: "inline",
+                  marginLeft: "-8px",
+                  height: "10px",
+                  width: "40px"
+                }}
+                src={arrowForward}
+                alt="Arrow"
+              /> */}
+            </HeadingHtV1>
+            <Image
+              mt="30px"
+              src={ShopTheRoomBanner01}
+              style={{
+                width: '90%',
+                alignItems: 'center',
+                marginLeft: '5%',
+                marginRight: '5%'
+              }}
+            />
+          </Link>
+          <div
+            style={{
+              fontSize: '15px',
+              color: 'gray',
+              display: 'flex',
+              justifyContent: 'center',
+              alignContent: 'center',
+              margin: '20px 250px 40px 250px',
+              textAlign: 'center'
+            }}
+          >
+            A glamorous upgrade from the classic living room, we have created a blue and mixed matal haven for the
+            contemporary homemaker
+          </div>
+        </div>
+
         {/* Easy finance - static images */}
         <div
           style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
-            padding: "20px 30px",
-            marginTop: "30px",
-            backgroundColor: "#F5EEEE"
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'column',
+            padding: '20px 30px',
+            marginTop: '30px',
+            backgroundColor: '#F5EEEE'
           }}
         >
           <HeadingHtV1
@@ -1090,157 +1117,121 @@ class HomeContainer extends Component {
             ta="center"
             mb="10px"
             style={{
-              color: "#323131",
-              whiteSpace: "normal",
-              fontFamily: "medium"
+              color: '#323131',
+              whiteSpace: 'normal',
+              fontFamily: 'medium'
             }}
           >
             Easy Finance
           </HeadingHtV1>
           <div
             style={{
-              width: "30px",
-              borderTop: "2px solid #222222",
-              margin: "auto",
-              marginBottom: "20px"
+              width: '30px',
+              borderTop: '2px solid #222222',
+              margin: 'auto',
+              marginBottom: '20px'
             }}
           />
           <div
             style={{
-              display: "flex",
-              width: "80%",
-              justifyContent: "center",
-              margin: "10px 5% 30px 5%"
+              display: 'flex',
+              width: '80%',
+              justifyContent: 'center',
+              margin: '10px 5% 30px 5%'
             }}
           >
-            <div style={{ width: "20%", margin: "0 10px" }}>
+            <div style={{ width: '20%', margin: '0 10px' }}>
               <div
                 style={{
-                  height: "230px",
-                  backgroundColor: "white",
-                  paddingTop: "30px",
-                  paddingBottom: "30px",
-                  paddingLeft: "30px",
-                  paddingRight: "30px",
-                  display: "flex",
-                  justifyContent: "space-evenly",
-                  alignContent: "center",
-                  flexDirection: "column"
+                  height: '230px',
+                  backgroundColor: 'white',
+                  paddingTop: '30px',
+                  paddingBottom: '30px',
+                  paddingLeft: '30px',
+                  paddingRight: '30px',
+                  display: 'flex',
+                  justifyContent: 'space-evenly',
+                  alignContent: 'center',
+                  flexDirection: 'column'
                 }}
               >
-                <Image src={HdfcLogo} width="90%" style={{ zIndex: "10" }} />
-                <HeadingHtV1
-                  fontSize="20px"
-                  mb="5px"
-                  lineHeight="23px"
-                  style={{ color: "#575757" }}
-                >
+                <Image src={HdfcLogo} width="90%" style={{ zIndex: '10' }} />
+                <HeadingHtV1 fontSize="20px" mb="5px" lineHeight="23px" style={{ color: '#575757' }}>
                   Upto 10% Cashback
                 </HeadingHtV1>
-                <div
-                  fontSize="10px"
-                  lineHeight="18px"
-                  style={{ color: "#575757" }}
-                >
+                <div fontSize="10px" lineHeight="18px" style={{ color: '#575757' }}>
                   On debit and credit cards
                 </div>
               </div>
             </div>
-            <div style={{ width: "20%", margin: "0 10px" }}>
+            <div style={{ width: '20%', margin: '0 10px' }}>
               <div
                 style={{
-                  height: "230px",
-                  backgroundColor: "white",
-                  paddingTop: "30px",
-                  paddingBottom: "30px",
-                  paddingLeft: "30px",
-                  paddingRight: "30px",
-                  display: "flex",
-                  justifyContent: "space-evenly",
-                  alignContent: "center",
-                  flexDirection: "column"
+                  height: '230px',
+                  backgroundColor: 'white',
+                  paddingTop: '30px',
+                  paddingBottom: '30px',
+                  paddingLeft: '30px',
+                  paddingRight: '30px',
+                  display: 'flex',
+                  justifyContent: 'space-evenly',
+                  alignContent: 'center',
+                  flexDirection: 'column'
                 }}
               >
-                <Image src={BajajLogo} width="90%" style={{ zIndex: "10" }} />
-                <HeadingHtV1
-                  fontSize="20px"
-                  mb="5px"
-                  lineHeight="23px"
-                  style={{ color: "#575757" }}
-                >
+                <Image src={BajajLogo} width="90%" style={{ zIndex: '10' }} />
+                <HeadingHtV1 fontSize="20px" mb="5px" lineHeight="23px" style={{ color: '#575757' }}>
                   0% Interest
                 </HeadingHtV1>
-                <div
-                  fontSize="15px"
-                  lineHeight="18px"
-                  style={{ color: "#575757" }}
-                >
+                <div fontSize="15px" lineHeight="18px" style={{ color: '#575757' }}>
                   On upto 6 months EMI for orders above 3000
                 </div>
               </div>
             </div>
-            <div style={{ width: "20%", margin: "0 10px" }}>
+            <div style={{ width: '20%', margin: '0 10px' }}>
               <div
                 style={{
-                  height: "230px",
-                  backgroundColor: "white",
-                  paddingTop: "30px",
-                  paddingBottom: "30px",
-                  paddingLeft: "30px",
-                  paddingRight: "30px",
-                  display: "flex",
-                  justifyContent: "space-evenly",
-                  alignContent: "center",
-                  flexDirection: "column"
+                  height: '230px',
+                  backgroundColor: 'white',
+                  paddingTop: '30px',
+                  paddingBottom: '30px',
+                  paddingLeft: '30px',
+                  paddingRight: '30px',
+                  display: 'flex',
+                  justifyContent: 'space-evenly',
+                  alignContent: 'center',
+                  flexDirection: 'column'
                 }}
               >
-                <Image src={HdfcLogo} width="90%" style={{ zIndex: "10" }} />
-                <HeadingHtV1
-                  fontSize="20px"
-                  mb="5px"
-                  lineHeight="23px"
-                  style={{ color: "#575757" }}
-                >
+                <Image src={HdfcLogo} width="90%" style={{ zIndex: '10' }} />
+                <HeadingHtV1 fontSize="20px" mb="5px" lineHeight="23px" style={{ color: '#575757' }}>
                   Upto 10% Cashback
                 </HeadingHtV1>
-                <div
-                  fontSize="15px"
-                  lineHeight="18px"
-                  style={{ color: "#575757" }}
-                >
+                <div fontSize="15px" lineHeight="18px" style={{ color: '#575757' }}>
                   On debit and credit cards
                 </div>
               </div>
             </div>
-            <div style={{ width: "20%", margin: "0 10px" }}>
+            <div style={{ width: '20%', margin: '0 10px' }}>
               <div
                 style={{
-                  height: "230px",
-                  backgroundColor: "white",
-                  paddingTop: "30px",
-                  paddingBottom: "30px",
-                  paddingLeft: "30px",
-                  paddingRight: "30px",
-                  display: "flex",
-                  justifyContent: "space-evenly",
-                  alignContent: "center",
-                  flexDirection: "column"
+                  height: '230px',
+                  backgroundColor: 'white',
+                  paddingTop: '30px',
+                  paddingBottom: '30px',
+                  paddingLeft: '30px',
+                  paddingRight: '30px',
+                  display: 'flex',
+                  justifyContent: 'space-evenly',
+                  alignContent: 'center',
+                  flexDirection: 'column'
                 }}
               >
-                <Image src={BajajLogo} width="90%" style={{ zIndex: "10" }} />
-                <HeadingHtV1
-                  fontSize="20px"
-                  mb="5px"
-                  lineHeight="23px"
-                  style={{ color: "#575757" }}
-                >
+                <Image src={BajajLogo} width="90%" style={{ zIndex: '10' }} />
+                <HeadingHtV1 fontSize="20px" mb="5px" lineHeight="23px" style={{ color: '#575757' }}>
                   0% Interest
                 </HeadingHtV1>
-                <div
-                  fontSize="8px"
-                  lineHeight="18px"
-                  style={{ color: "#575757" }}
-                >
+                <div fontSize="8px" lineHeight="18px" style={{ color: '#575757' }}>
                   On upto 6 months EMI for orders above 3000
                 </div>
               </div>
