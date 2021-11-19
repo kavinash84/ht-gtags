@@ -1,48 +1,44 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import LazyLoad from "react-lazyload";
-import Helmet from "react-helmet";
-import { connect } from "react-redux";
-import cookie from "js-cookie";
-import {
-  getCities,
-  getOfferStripData,
-  getMiddleBannerData
-} from "selectors/homepage";
-import Select from "react-select";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import LazyLoad from 'react-lazyload';
+import Helmet from 'react-helmet';
+import { connect } from 'react-redux';
+import cookie from 'js-cookie';
+import { getCities, getOfferStripData, getMiddleBannerData } from 'selectors/homepage';
+import Select from 'react-select';
+import { Link } from 'react-router-dom';
 
 /* ====== Components ====== */
-import Body from "hometown-components-dev/lib/BodyHtV1";
-import Box from "hometown-components-dev/lib/BoxHtV1";
-import Button from "hometown-components-dev/lib/ButtonHtV1";
-import Card from "hometown-components-dev/lib/CardHtV1";
-import Container from "hometown-components-dev/lib/ContainerHtV1";
-import Col from "hometown-components-dev/lib/ColHtV1";
-import Heading from "hometown-components-dev/lib/HeadingHtV1";
-import Image from "hometown-components-dev/lib/ImageHtV1";
-import Row from "hometown-components-dev/lib/RowHtV1";
-import Section from "hometown-components-dev/lib/SectionHtV1";
-import Text from "hometown-components-dev/lib/TextHtV1";
-import Wrapper from "hometown-components-dev/lib/WrapperHtV1";
+import Body from 'hometown-components-dev/lib/BodyHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Card from 'hometown-components-dev/lib/CardHtV1';
+import Container from 'hometown-components-dev/lib/ContainerHtV1';
+import Col from 'hometown-components-dev/lib/ColHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Section from 'hometown-components-dev/lib/SectionHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
+import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 
 /* ====== Page Components ====== */
 // import CategoryCarousel from "components/CategoryCarousel";
-import OfferBanner from "components/Home/OfferBanner";
-import Footer from "components/Footer";
-import Header from "components/Header";
-import GridView from "components/Home/GridView";
-import MainSlider from "components/MainSlider";
-import Title from "components/Title";
-import HomeContainer from "../../components/Home/index";
-import Usp from "components/Home/Usp";
-import UnbxdRecentlyViewed from "components/UnbxdRecentlyViewed/UnbxdRecentlyViewed";
-import ShopByCategories from "../../components/ShopByCategories";
+import OfferBanner from 'components/Home/OfferBanner';
+import Footer from 'components/Footer';
+import Header from 'components/Header';
+import GridView from 'components/Home/GridView';
+import MainSlider from 'components/MainSlider';
+import Title from 'components/Title';
+import HomeContainer from '../../components/Home/index';
+import Usp from 'components/Home/Usp';
+import UnbxdRecentlyViewed from 'components/UnbxdRecentlyViewed/UnbxdRecentlyViewed';
+import ShopByCategories from '../../components/ShopByCategories';
 
-const sliderImage = require("../../../static/DnB.jpeg");
-const bannerImage = require("../../../static/modularKitchen.jpeg");
+const sliderImage = require('../../../static/DnB.jpeg');
+const bannerImage = require('../../../static/modularKitchen.jpeg');
 // const designBuildLogo = require('../../static/designBuildLogo.png');
-const findAStoreImage = require("../../../static/findAStore.jpeg");
+const findAStoreImage = require('../../../static/findAStore.jpeg');
 
 // const OFFER_ID = 5;
 
@@ -55,33 +51,25 @@ const customDropdownStyles = {
     ...provided,
     height: 48,
     borderRadius: 0,
-    border: "none",
-    backgroundColor: "rgba(255,255,255, 0.8)"
+    border: 'none',
+    backgroundColor: 'rgba(255,255,255, 0.8)'
   }),
   placeholder: provided => ({
     ...provided,
-    color: "#4a4949"
+    color: '#4a4949'
   }),
   indicatorsContainer: provided => ({
     ...provided,
     path: {
-      fill: "#4a4949"
+      fill: '#4a4949'
     }
   })
 };
 
-@connect(
-  ({
+@connect(({
     homepage: {
-      categories,
-      banners,
-      products,
-      hashtags,
-      offers,
-      recentlyviewed,
-      instafeeds,
-      homepagecmsdata
-    },
+ categories, banners, products, hashtags, offers, recentlyviewed, instafeeds, homepagecmsdata
+},
     stores,
     userLogin
   }) => ({
@@ -95,28 +83,24 @@ const customDropdownStyles = {
     middleBanner: getMiddleBannerData(offers),
     recentlyviewed: recentlyviewed.data,
     isLoggedIn: userLogin.isLoggedIn,
-    homepagecmsdata: homepagecmsdata.data.items
-  })
-)
+    homepagecmsdata: homepagecmsdata.data.items.text
+  }))
 export default class Home extends Component {
   state = {
     showRibbon: true,
     openSignup: false,
-    selectedCity: "",
+    selectedCity: '',
     citySelectError: false,
-    cityErrorMessage: "Please select your nearest city"
+    cityErrorMessage: 'Please select your nearest city'
   };
   componentDidMount() {
     const { isLoggedIn } = this.props;
-    if (!isLoggedIn && !(cookie.get("PROMO_SIGNUP") === "AVOID")) {
+    if (!isLoggedIn && !(cookie.get('PROMO_SIGNUP') === 'AVOID')) {
       this.signupmodalreference = setTimeout(() => this.handleModal(), 45000);
     }
   }
   componentWillReceiveProps(nextProps) {
-    if (
-      nextProps.isLoggedIn &&
-      nextProps.isLoggedIn !== this.props.isLoggedIn
-    ) {
+    if (nextProps.isLoggedIn && nextProps.isLoggedIn !== this.props.isLoggedIn) {
       this.setState({
         openSignup: !this.state.openSignup
       });
@@ -132,7 +116,7 @@ export default class Home extends Component {
     const { selectedCity } = this.state;
     if (selectedCity) {
       this.props.history.push({
-        pathname: "/store-locator",
+        pathname: '/store-locator',
         state: { city: selectedCity }
       });
     } else {
@@ -144,7 +128,7 @@ export default class Home extends Component {
   handleModal = () => {
     this.setState({ openSignup: !this.state.openSignup }, () => {
       if (!this.state.openSignup) {
-        cookie.set("PROMO_SIGNUP", "AVOID", { expires: 2 });
+        cookie.set('PROMO_SIGNUP', 'AVOID', { expires: 2 });
       }
     });
   };
@@ -156,16 +140,12 @@ export default class Home extends Component {
 
   render() {
     const {
-      banners,
-      middleBanner,
-      homepageCategories,
-      cities,
-      homepagecmsdata
-    } = this.props;
+ banners, middleBanner, homepageCategories, cities, homepagecmsdata
+} = this.props;
     const citiesList = cities.map(item => ({ value: item, label: item }));
     const { citySelectError, cityErrorMessage } = this.state;
 
-    console.log("-----------", homepagecmsdata);
+    console.log('-----------', homepagecmsdata);
     return (
       /* eslint-disable max-len */
       <Wrapper>
@@ -280,7 +260,7 @@ export default class Home extends Component {
                   >
                     <Box mb={20} sx={{ position: "relative" }}>
                       <Image src={sliderImage} alt="design-and-build" />
-                     
+
                     </Box>
                     <Heading variant="heading.regular" textAlign="center">
                       Design and Build
@@ -295,7 +275,7 @@ export default class Home extends Component {
                   >
                     <Box mb={20} sx={{ position: "relative" }}>
                       <Image src={bannerImage} alt="modular-kitchen" />
-                     
+
                     </Box>
                     <Heading variant="heading.regular" textAlign="center">
                       Modular Kitchen
@@ -312,8 +292,8 @@ export default class Home extends Component {
               <Card
                 sx={{
                   backgroundImage: `url(${findAStoreImage})`,
-                  backgroundSize: "cover",
-                  position: "relative"
+                  backgroundSize: 'cover',
+                  position: 'relative'
                 }}
               >
                 <Box
@@ -321,28 +301,20 @@ export default class Home extends Component {
                   width={1}
                   bg="rgba(0,0,0,0.5)"
                   sx={{
-                    position: "absolute",
+                    position: 'absolute',
                     top: 0,
                     left: 0,
                     right: 0,
                     bottom: 0
                   }}
                 />
-                <Row
-                  height={380}
-                  variant="row.contentCenter"
-                  sx={{ position: "relative" }}
-                  flexDirection="column"
-                >
+                <Row height={380} variant="row.contentCenter" sx={{ position: 'relative' }} flexDirection="column">
                   <Box textAlign="center" mb={30}>
                     <Heading variant="heading.large" color="white" mb={10}>
                       FIND A STORE NEAR YOU
                     </Heading>
-                    <Text
-                      variant="regular"
-                      color={citySelectError ? "red" : "white"}
-                    >
-                      {citySelectError ? cityErrorMessage : ""}
+                    <Text variant="regular" color={citySelectError ? 'red' : 'white'}>
+                      {citySelectError ? cityErrorMessage : ''}
                     </Text>
                   </Box>
                   <Row>
@@ -358,12 +330,7 @@ export default class Home extends Component {
                         });
                       }}
                     />
-                    <Button
-                      onClick={this.mapHandler}
-                      width={275}
-                      ml={30}
-                      variant="primary.large"
-                    >
+                    <Button onClick={this.mapHandler} width={275} ml={30} variant="primary.large">
                       LOCATE A STORE
                     </Button>
                   </Row>
