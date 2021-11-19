@@ -8,9 +8,9 @@ import { Link } from "react-router-dom";
 import TextHtV1 from "hometown-components-dev/lib/TextHtV1";
 import Img from "hometown-components-dev/lib/Img";
 
-const CategoryBlock = ({ src, title, to }) => {
+const CategoryBlock = ({ src, title, to, index }) => {
   return (
-    <div style={{ width: "14%", margin: "20px 5px 5px 5px" }}>
+    <div key={index} style={{ width: "14%", margin: "20px 5px 5px 5px" }}>
       <Link to={to}>
         <div
           style={{

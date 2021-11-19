@@ -27,7 +27,10 @@ const shopByCat10 = require("../../../static/new-home/shopbycat10.png");
 const shopByCat11 = require("../../../static/new-home/shopbycat11.png");
 const shopByCat12 = require("../../../static/new-home/shopbycat12.png");
 
-const ShopByCategories = () => {
+const ShopByCategories = ({ shopByCategories }) => {
+  {
+    console.log("shopByCategories", shopByCategories);
+  }
   return (
     <div
       p="16px 20px"
@@ -43,7 +46,7 @@ const ShopByCategories = () => {
         mt="35px"
         mb="10px"
       >
-        Shop By Categories
+        {shopByCategories.mainTitle}
       </HeadingHtV1>
       <RowHtV1 justifyContent="center" mx={0} mb={0}></RowHtV1>
       <div
@@ -63,7 +66,7 @@ const ShopByCategories = () => {
           marginRight: "10%"
         }}
       >
-        <CategoryBlock to="/furniture" src={shopByCat01} title="Furniture" />
+        {/* <CategoryBlock to="/furniture" src={shopByCat01} title="Furniture" />
         <CategoryBlock
           to="/furniture/living-room-furniture/sofas"
           src={shopByCat02}
@@ -111,15 +114,15 @@ const ShopByCategories = () => {
           to="/kitchenware"
           src={shopByCat12}
           title="Kitchenware"
-        />
-        {/* {shopByCategories.categories.map((val, index) => (
+        /> */}
+        {shopByCategories.categories.map((val, index) => (
           <CategoryBlock
             to={val.url_key}
             src={val.image}
             title={val.title}
             index={index}
           />
-        ))} */}
+        ))}
       </RowHtV1>
     </div>
   );

@@ -121,7 +121,7 @@ class HomeContainer extends Component {
     // ]
   };
   render() {
-    // const { shopByCategories } = this.props;
+    const { shopByCategories } = this.props;
     return (
       <div>
         {/* 2nd banner */}
@@ -140,7 +140,7 @@ class HomeContainer extends Component {
           />
         </div>
         {/* shop by categories */}
-        <ShopByCategories />
+        <ShopByCategories shopByCategories={shopByCategories} />
         {/* shop by room */}
 
         <div mt="20px" mb="15px" style={{ display: "block" }}>
