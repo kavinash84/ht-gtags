@@ -19,8 +19,8 @@ export default class QDropDown extends Component {
       <Box
         style={{
           background: this.state.isOpen ? 'white' : 'white',
-          width: '80%',
-          marginLeft: '10%'
+          width: '90%',
+          marginLeft: '5%'
         }}
       >
         {this.state.isOpen ? (

@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import Row from 'hometown-components-dev/lib/RowHtV1';
-import Div from 'hometown-components-dev/lib/BoxHtV1';
-import Heading from 'hometown-components-dev/lib/HeadingHtV1';
-import Text from 'hometown-components-dev/lib/TextHtV1';
-import Button from 'hometown-components-dev/lib/ButtonHtV1';
-import { allowNChar, allowTypeOf } from 'utils/helper';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ResponsiveModal from 'components/Modal';
-import FormInput from './FormInput';
+import Row from 'hometown-components-dev/lib/RowHtV1';
+import Div from 'hometown-components-dev/lib/BoxHtV1';
+import Flex from 'hometown-components-dev/lib/FlexHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Img from 'hometown-components-dev/lib/ImageHtV1';
+import Text from 'hometown-components-dev/lib/TextHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
+
+import { allowNChar, allowTypeOf } from 'utils/helper';
 import { SERVICE_SIGNUPS, PINCODE as PINCODE_API } from 'helpers/apiUrls';
 import { sendData, getData } from 'redux/modules/services';
 import {
@@ -40,65 +42,64 @@ const getTimeSlots = (start, end) => {
 const setDataPicker = (currentTime = '', notMin) => {
   let options = {};
 
-  const datePicker = document.getElementById('preferredDate');
+  // const datePicker = document.getElementById('preferredDate');
 
-  const slotTimeLimit = moment('20:00', 'HH:mm');
+  // const slotTimeLimit = moment('20:00', 'HH:mm');
 
-  if (currentTime.isAfter(slotTimeLimit) && notMin) {
-    options = {
-      min: moment()
-        .add(1, 'd')
-        .format('YYYY-MM-DD'),
-      value: moment()
-        .add(1, 'd')
-        .format('YYYY-MM-DD'),
-      timeSlots: getTimeSlots(12, 20)
-    };
-  } else if (currentTime.isAfter(slotTimeLimit) && !notMin) {
-    options = {
-      min: moment().format('YYYY-MM-DD'),
-      value: moment()
-        .add(1, 'd')
-        .format('YYYY-MM-DD'),
-      timeSlots: getTimeSlots(12, 20)
-    };
-  } else {
-    options = {
-      min: moment().format('YYYY-MM-DD'),
-      value: moment().format('YYYY-MM-DD'),
-      timeSlots: getTimeSlots(startTime(currentTime.add(1, 'h')), 20)
-    };
-  }
+  // if (currentTime.isAfter(slotTimeLimit) && notMin) {
+  //   options = {
+  //     min: moment()
+  //       .add(1, 'd')
+  //       .format('YYYY-MM-DD'),
+  //     value: moment()
+  //       .add(1, 'd')
+  //       .format('YYYY-MM-DD'),
+  //     timeSlots: getTimeSlots(12, 20)
+  //   };
+  // } else if (currentTime.isAfter(slotTimeLimit) && !notMin) {
+  //   options = {
+  //     min: moment().format('YYYY-MM-DD'),
+  //     value: moment()
+  //       .add(1, 'd')
+  //       .format('YYYY-MM-DD'),
+  //     timeSlots: getTimeSlots(12, 20)
+  //   };
+  // } else {
+  //   options = {
+  //     min: moment().format('YYYY-MM-DD'),
+  //     value: moment().format('YYYY-MM-DD'),
+  //     timeSlots: getTimeSlots(startTime(currentTime.add(1, 'h')), 20)
+  //   };
+  // }
 
-  Object.keys(options).forEach(key => {
-    datePicker.setAttribute(key, options[key]);
-  });
+  // Object.keys(options).forEach(key => {
+  //   datePicker.setAttribute(key, options[key]);
+  // });
   return options;
 };
 
 const setPreferredTime = ({ timeSlots }) => {
-  const prefferedTime = document.getElementById('preferredTime');
-
-  prefferedTime.innerHTML = '<option value="" disabled selected>Preferred Timeline*</option>';
-  prefferedTime.insertAdjacentHTML(
-    'beforeend',
-    timeSlots.map(arr => {
-      if (arr > 12) {
-        return `<option value="${arr - 12} pm">${arr - 12} pm</option>`;
-      }
-        return `<option value="${arr} pm">${arr} pm</option>`;
-    })
-  );
+  // const prefferedTime = document.getElementById('preferredTime');
+  // prefferedTime.innerHTML = `<option value="" disabled selected>Preferred Timeline*</option>`;
+  // prefferedTime.insertAdjacentHTML(
+  //   'beforeend',
+  //   timeSlots.map(arr => {
+  //     if (arr > 12) {
+  //       return `<option value="${arr - 12} pm">${arr - 12} pm</option>`;
+  //     } else {
+  //       return `<option value="${arr} pm">${arr} pm</option>`;
+  //     }
+  //   })
+  // );
 };
 
 const setDate = () => {
-  const datePicker = document.getElementById('preferredDate');
-
-  let datePickerOptions = {};
-  if (datePicker) {
-    datePickerOptions = setDataPicker(moment(), true);
-    setPreferredTime(datePickerOptions);
-  }
+  // const datePicker = document.getElementById('preferredDate');
+  // let datePickerOptions = {};
+  // if (datePicker) {
+  //   datePickerOptions = setDataPicker(moment(), true);
+  //   setPreferredTime(datePickerOptions);
+  // }
 };
 
 @connect(
@@ -284,9 +285,7 @@ export default class ModularKitchen extends Component {
     let medium = 'Website';
 
     const { sendFormData } = this.props;
-    const {
- name, phone, email, pincode, address, city, state, date, selectedState, time, prefferedTime
-} = this.state;
+    const { name, phone, email, pincode, address, city, state, date, selectedState, time, prefferedTime } = this.state;
     const nameError = isEmpty(name) || validateFullname(name) || checkSpecialChar(name);
     const phoneError = !validateMobile(phone);
     const stateCheck = !selectedState;
@@ -297,7 +296,7 @@ export default class ModularKitchen extends Component {
     const dateError = isEmpty(date);
     const checkDate = !date;
     const checkTime = !prefferedTime;
-    if (nameError || phoneError || emailError || cityError || stateError || dateError || checkTime) {
+    if (nameError || phoneError || emailError || cityError || stateError) {
       this.setState({
         nameError,
         phoneError,
@@ -318,9 +317,9 @@ export default class ModularKitchen extends Component {
       const utmSource = urlString.searchParams.get('utm_source');
       const utmCampaign = urlString.searchParams.get('utm_campaign');
       const utmMedium = urlString.searchParams.get('utm_medium');
-      source = utmSource || source;
-      campaign = utmCampaign || campaign;
-      medium = utmMedium || medium;
+      source = utmSource ? utmSource : source;
+      campaign = utmCampaign ? utmCampaign : campaign;
+      medium = utmMedium ? utmMedium : medium;
     }
     const data = {
       campaign,
@@ -330,13 +329,13 @@ export default class ModularKitchen extends Component {
       pincode,
       city,
       state: selectedState,
-      date,
-      time: prefferedTime,
+      // date,
+      // time: prefferedTime,
       mobile: phone,
       medium,
       service: 2,
       source,
-      mkLead: 'Online consultaion',
+      // mkLead: 'Online consultaion',
       devicePlatform: 'msite'
     };
     // this.setState({
@@ -372,9 +371,7 @@ export default class ModularKitchen extends Component {
   // };
   render() {
     // const { loading, loaded, modularkitchen } = this.props;
-    const {
- name, email, phone, address, pincode, service, city, state, date, selectedState, time
-} = this.state;
+    const { name, email, phone, address, pincode, service, city, state, date, selectedState, time } = this.state;
     // const correctIcon = require('../../../static/correct.svg');
     const {
       nameError,
@@ -400,70 +397,110 @@ export default class ModularKitchen extends Component {
     } = this.state;
     return (
       <div>
-        <Div p="20px 5px" mt="20px" style={{ backgroundColor: '#F5EEEE' }}>
-          <Row m="0 1rem">
-            <Div col="12" pr="0.625rem" pl="0.625rem">
-              <Heading mb="20px" mt="10px" ta="center" color="#000000" fontSize="21px" fontFamily="medium">
-                Speak To Our Interior Experts
+        <Div mt="20px">
+            <Div pr="0.625rem" pl="0.625rem">
+              <Heading mb="20px" mt="80px" color="#000000" fontSize="30px" fontFamily="medium" style={{textAlign: "center", fontWeight: "bold", lineHeight:'40px'}}>
+                Speak To Our Interior <br /> Experts
               </Heading>
             </Div>
-          </Row>
           <Div>
             <form onSubmit={this.onSubmitForm}>
-              <Row m="0 1rem">
-                <Div col="12" pr="0.625rem" pl="0.625rem">
-                  <FormInput
+              
+                <Div>
+                  <input
                     label=""
                     type="text"
-                    placeholder="Name*"
+                    placeholder="Name"
                     onChange={this.onChangeName}
                     value={name}
-                    feedBackError={nameError}
-                    feedBackMessage={nameErrorMessage}
+                    // feedBackError={nameError}
+                    // feedBackMessage={nameErrorMessage}
+                    style={{
+                    height: '50px',
+                    width: '60%',
+                    paddingLeft:'10px',
+                    marginLeft: '20%',
+                    backgroundColor: 'white',
+                    borderRadius: '5px',
+                    border:'none',
+                    outline:'none',
+                    marginBottom:'15px',
+                    marginTop: '15px'
+          }}
                   />
                 </Div>
-                <Div col="12" pr="0.625rem" pl="0.625rem">
-                  <FormInput
+                <Div >
+                  <input
                     label=""
                     type="text"
-                    placeholder="Mobile No.*"
+                    placeholder="Mobile No."
                     onChange={this.onChangePhone}
                     value={phone}
-                    feedBackError={phoneError}
-                    feedBackMessage={phoneErrorMessage}
+                    // feedBackError={phoneError}
+                    // feedBackMessage={phoneErrorMessage}
+                    style={{
+                    height: '50px',
+                    width: '60%',
+                    paddingLeft:'10px',
+                    marginLeft: '20%',
+                    backgroundColor: 'white',
+                    borderRadius: '5px',
+                    border:'none',
+                    outline:'none',
+                    marginBottom:'15px'
+          }}
                   />
                 </Div>
-              </Row>
-              <Row m="0 1rem">
-                <Div col="12" pr="0.625rem" pl="0.625rem">
-                  <FormInput
+                <Div>
+                  <input
                     label=""
                     type="email"
-                    placeholder="Email ID*"
+                    placeholder="Email ID"
                     onChange={this.onChangeEmail}
                     value={email}
-                    feedBackError={emailError}
-                    feedBackMessage={emailErrorMessage}
+                    // feedBackError={emailError}
+                    // feedBackMessage={emailErrorMessage}
+                    style={{
+                    height: '50px',
+                    width: '60%',
+                    paddingLeft:'10px',
+                    marginLeft: '20%',
+                    backgroundColor: 'white',
+                    borderRadius: '5px',
+                    border:'none',
+                    outline:'none',
+                    marginBottom:'15px'
+          }}
                   />
                 </Div>
-                <Div col="12" pr="0.625rem" pl="0.625rem">
-                  <FormInput
+                <Div >
+                  <input
                     label=""
                     type="text"
-                    placeholder="City*"
+                    placeholder="City"
                     onChange={this.onChangeCity}
                     value={city}
-                    feedBackError={cityError}
-                    feedBackMessage={cityErrorMessage}
+                    // feedBackError={cityError}
+                    // feedBackMessage={cityErrorMessage}
+                    style={{
+                    height: '50px',
+                    width: '60%',
+                    paddingLeft:'10px',
+                    marginLeft: '20%',
+                    backgroundColor: 'white',
+                    borderRadius: '5px',
+                    border:'none',
+                    outline:'none',
+                    marginBottom:'15px'
+          }}
                   />
                 </Div>
-              </Row>
-              <Row m="0 1rem">
-                <Div col="12" pr="0.625rem" pl="0.625rem">
+                <Div >
                   <div className="select-wrapper">
                     <div
                       style={{
-                        width: '100%',
+                        width: '60%',
+                        marginLeft: '20%',
                         borderRadius: '5px',
                         height: '50px',
                         borderColor: '#E3E3E3',
@@ -506,7 +543,7 @@ export default class ModularKitchen extends Component {
                     </Text>
                   ) : null}
                 </Div>
-                <Div col="12" pr="0.625rem" pl="0.625rem">
+                {/* <Div col="12" pr="0.625rem" pl="0.625rem">
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <label
                       style={{
@@ -549,8 +586,8 @@ export default class ModularKitchen extends Component {
                       {dateErrorMessage}
                     </Text>
                   ) : null}
-                </Div>
-                <Div col="12" pr="0.625rem" pl="0.625rem">
+                </Div> */}
+                {/* <Div col="12" pr="0.625rem" pl="0.625rem">
                   <div className="select-wrapper">
                     <div
                       style={{
@@ -579,7 +616,7 @@ export default class ModularKitchen extends Component {
                           outline: 'none',
                           backgroundColor: 'white'
                         }}
-                      />
+                      ></select>
                     </div>
                   </div>
                   {timeError ? (
@@ -587,26 +624,25 @@ export default class ModularKitchen extends Component {
                       {timeErrorMessage}
                     </Text>
                   ) : null}
-                </Div>
+                </Div> */}
                 <Div col="12" style={{ display: 'flex' }} pr="0.625rem" pl="0.625rem">
                   <Button
-                    mt="20px"
+                    mt="10px"
                     style={{
-                      borderColor: '#F47020',
+                      border: '1px solid #F47020',
                       color: '#F47020',
                       backgroundColor: '#FFFFFF',
                       borderRadius: '5px'
                     }}
                     fontFamily="regular"
                     height="50px"
-                    m="auto"
+                    m="40px auto 0px"
                     pl="5%"
                     pr="5%"
                   >
                     Book a Consultation
                   </Button>
                 </Div>
-              </Row>
             </form>
           </Div>
         </Div>

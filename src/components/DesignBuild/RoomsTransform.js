@@ -19,7 +19,7 @@ class RoomsWeTransform extends React.Component {
   render() {
     const { SpacesWeTransform } = this.props;
     return (
-      <Section style={{ fontFamily: 'Helvetica Neue' }}>
+      <Section>
         <Box
           style={{
             fontSize: '40px',

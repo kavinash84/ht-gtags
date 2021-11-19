@@ -31,7 +31,7 @@ class WhyChose extends React.Component {
             Indian homes.
           </Text>
         </Box>
-        <Box mt="20px">
+        <Box mt="20px" className={styles.pos}>
           <Image
             src="https://www.hometown.in/media/cms/D/Top-Image-Living1.jpg"
             alt="topbanner"
@@ -40,7 +40,7 @@ class WhyChose extends React.Component {
             style={{ objectFit: 'cover' }}
           />
         </Box>
-        <Box className={styles.whyus}>
+        <div className={styles.whyus}>
           <div className={styles.outerbox1}>
             <div style={{ borderRight: '2px dashed #707070' }} className={styles.innerbox}>
               <text className={styles.boldtext}>27</text>
@@ -85,7 +85,7 @@ class WhyChose extends React.Component {
               <text>Pricing</text>
             </div>
           </div>
-        </Box>
+        </div>
       </Box>
     );
   }

@@ -19,8 +19,7 @@ class Header extends React.Component {
           justifyContent: 'space-between',
           alignItems: 'center',
           marginTop: '10px',
-          marginBottom: '10px',
-          fontFamily: 'Helvetica Neue'
+          marginBottom: '10px'
         }}
       >
         <div style={{ marginLeft: '10%' }}>
@@ -30,6 +29,7 @@ class Header extends React.Component {
           <Text style={{ marginRight: '40px' }}>Plan Your Kitchen</Text>
           <Text style={{ marginRight: '40px' }}>About Us</Text>
           <Button
+              onClick={this.props.handleModal}
             style={{
               width: '200px',
               height: '50px',
@@ -37,7 +37,7 @@ class Header extends React.Component {
               color: '#F47020',
               border: '1px solid #F47020',
               borderRadius: '5px',
-              marginRight: '150px'
+              marginRight: '150px',
             }}
           >
             Request Quote

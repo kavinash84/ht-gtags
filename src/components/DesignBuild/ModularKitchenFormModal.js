@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ResponsiveModal from 'components/Modal';
-// import ModularKitchenForm from './ModularKitchenFormDetailsModal';
-import FormInput from './FormInput';
 import Row from 'hometown-components-dev/lib/RowHtV1';
 import Div from 'hometown-components-dev/lib/BoxHtV1';
+import Flex from 'hometown-components-dev/lib/FlexHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Img from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
+
 import { allowNChar, allowTypeOf } from 'utils/helper';
 import { SERVICE_SIGNUPS, PINCODE as PINCODE_API } from 'helpers/apiUrls';
 import { sendData, getData } from 'redux/modules/services';
@@ -24,7 +25,7 @@ import stores from '../../data/Stores.js';
 
 import moment from 'moment';
 
-const styles = require('./ModularKitchen.scss');
+const styles = require('./Designbuild.scss');
 
 const startTime = date =>
   date
@@ -44,65 +45,15 @@ const getTimeSlots = (start, end) => {
 const setDataPicker = (currentTime = '', notMin) => {
   let options = {};
 
-  const datePicker = document.getElementById('preferredDateModal');
-
-  const slotTimeLimit = moment('20:00', 'HH:mm');
-
-  if (currentTime.isAfter(slotTimeLimit) && notMin) {
-    options = {
-      min: moment()
-        .add(1, 'd')
-        .format('YYYY-MM-DD'),
-      value: moment()
-        .add(1, 'd')
-        .format('YYYY-MM-DD'),
-      timeSlots: getTimeSlots(12, 20)
-    };
-  } else if (currentTime.isAfter(slotTimeLimit) && !notMin) {
-    options = {
-      min: moment().format('YYYY-MM-DD'),
-      value: moment()
-        .add(1, 'd')
-        .format('YYYY-MM-DD'),
-      timeSlots: getTimeSlots(12, 20)
-    };
-  } else {
-    options = {
-      min: moment().format('YYYY-MM-DD'),
-      value: moment().format('YYYY-MM-DD'),
-      timeSlots: getTimeSlots(startTime(currentTime.add(1, 'h')), 20)
-    };
-  }
-
-  Object.keys(options).forEach(key => {
-    datePicker.setAttribute(key, options[key]);
-  });
   return options;
 };
 
 const setPreferredTime = ({ timeSlots }) => {
-  const prefferedTime = document.getElementById('preferredTimeModal');
-
-  prefferedTime.innerHTML = '<option value="" disabled selected>Preferred Timeline*</option>';
-  prefferedTime.insertAdjacentHTML(
-    'beforeend',
-    timeSlots.map(arr => {
-      if (arr > 12) {
-        return `<option value="${arr - 12} pm">${arr - 12} pm</option>`;
-      }
-        return `<option value="${arr} pm">${arr} pm</option>`;
-    })
-  );
+ 
 };
 
 const setDate = () => {
-  const datePicker = document.getElementById('preferredDateModal');
-
-  let datePickerOptions = {};
-  if (datePicker) {
-    datePickerOptions = setDataPicker(moment(), true);
-    setPreferredTime(datePickerOptions);
-  }
+ 
 };
 
 @connect(
@@ -146,12 +97,7 @@ export default class ModularKitchen extends Component {
   }
 
   componentWillReceiveProps(nextprops) {
-    // if (nextprops.data && nextprops.data !== this.props.data) {
-    //   this.setState({
-    //     city: nextprops.data.city,
-    //     state: nextprops.data.state
-    //   });
-    // }
+  
     if (nextprops.loaded && nextprops.loaded === this.props.loaded) {
       this.setState({
         // open: true,
@@ -250,26 +196,7 @@ export default class ModularKitchen extends Component {
       stateError: checkError
     });
   };
-  // onChangeDate = e => {
-  //   const {
-  //     target: { value }
-  //   } = e;
-  //   const selectedDate = value.split('-');
-  //   const today = new Date();
-  //   const selectedValue = new Date(selectedDate[0], selectedDate[1] -1, selectedDate[2]);
-  //   const checkError = !value;
-  //   if(selectedValue > today) {
-  //     this.setState({
-  //       date: value,
-  //       dateError: checkError,
-  //     });
-  //   } else {
-  //     this.setState({
-  //       dateError: true,
-  //       dateErrorMessage: 'Enter a future date'
-  //     });
-  //   }
-  // }
+ 
   onInputDateChange = e => {
     e.preventDefault();
     let { value } = e.target;
@@ -284,13 +211,7 @@ export default class ModularKitchen extends Component {
         dateError: checkError
       });
     }
-    // else {
-    //   this.setState({
-    //     dateError: true,
-    //     dateErrorMessage: 'Enter a future date'
-    //   });
-    // }
-    // let { target: value } = e;
+  
     value = moment(value, 'YYYY-MM-DD').isBefore() ? moment() : moment(value, 'YYYY-MM-DD');
     datePickerOptions = setDataPicker(value, false);
     setPreferredTime(datePickerOptions);
@@ -321,9 +242,7 @@ export default class ModularKitchen extends Component {
     let medium = 'Website';
 
     const { sendFormData } = this.props;
-    const {
- name, phone, email, pincode, address, city, state, date, selectedState, time, prefferedTime
-} = this.state;
+    const { name, phone, email, pincode, address, city, state, date, selectedState, time, prefferedTime } = this.state;
     const nameError = isEmpty(name) || validateFullname(name) || checkSpecialChar(name);
     const phoneError = !validateMobile(phone);
     const stateCheck = !selectedState;
@@ -334,7 +253,7 @@ export default class ModularKitchen extends Component {
     const dateError = isEmpty(date);
     const checkDate = !date;
     const checkTime = !prefferedTime;
-    if (nameError || phoneError || emailError || cityError || stateError || dateError || checkTime) {
+    if (nameError || phoneError || emailError || cityError || stateError) {
       this.setState({
         nameError,
         phoneError,
@@ -355,9 +274,9 @@ export default class ModularKitchen extends Component {
       const utmSource = urlString.searchParams.get('utm_source');
       const utmCampaign = urlString.searchParams.get('utm_campaign');
       const utmMedium = urlString.searchParams.get('utm_medium');
-      source = utmSource || source;
-      campaign = utmCampaign || campaign;
-      medium = utmMedium || medium;
+      source = utmSource ? utmSource : source;
+      campaign = utmCampaign ? utmCampaign : campaign;
+      medium = utmMedium ? utmMedium : medium;
     }
     const data = {
       campaign,
@@ -367,20 +286,20 @@ export default class ModularKitchen extends Component {
       pincode,
       city,
       state: selectedState,
-      date,
-      time: prefferedTime,
+      // date,
+      // time: prefferedTime,
       mobile: phone,
       medium,
       service: 2,
       source,
-      mkLead: 'Online consultaion',
+      // mkLead: 'Online consultaion',
       devicePlatform: 'msite'
     };
-    this.props.handleScript();
     this.props.handleModalWithSave();
     // this.setState({
     //   open: true
     // });
+    this.props.handleScript();
     sendFormData(SERVICE_SIGNUPS, data, 'modularkitchen');
   };
 
@@ -409,9 +328,7 @@ export default class ModularKitchen extends Component {
   // };
   render() {
     // const { loading, loaded } = this.props;
-    const {
- name, email, phone, address, pincode, service, city, state, date, selectedState, time
-} = this.state;
+    const { name, email, phone, address, pincode, service, city, state, date, selectedState, time } = this.state;
     // const correctIcon = require('../../../static/correct.svg');
     const {
       nameError,
@@ -436,90 +353,130 @@ export default class ModularKitchen extends Component {
       timeErrorMessage
     } = this.state;
     return (
-      <div>
-        <Div
-          p="20px 5px"
-          mt="50px"
-          style={{ backgroundColor: '#FFFFFF', borderBottomLeftRadius: '20px', borderBottomRightRadius: '20px' }}
+     
+       <Div style={{ padding:'0', backgroundColor: '#FBF2ED'}}>
+              <Flex style={{width:'90%',height:'90vh'}}>
+                  <Img src="https://www.hometown.in/media/cms/D/Top-Image-Living1.jpg" style={{width: '50%', height: '90vh'}}/>
+                  <Div style={{width:'50%', height:'90vh', backgroundColor: '#FBF2ED'}}>
+                  <Div
+          style={{ padding:'0', borderBottomLeftRadius: '20px', borderBottomRightRadius: '20px' }}
         >
-          <Row m="0 1rem" ml="0px" mr="0px">
-            <Div col="12" pr="0px" pl="0px">
+          <Row m="0" ml="0px" mr="0px">
+            <Div pr="0px" pl="0px">
               <Heading
                 mb="10px"
                 mt="10px"
-                ta="center"
                 color="#000000"
                 fontSize="22px"
                 fontFamily="medium"
-                style={{ whiteSpace: 'normal' }}
+                style={{ whiteSpace: 'normal', textAlign: 'center', marginLeft:'100px'}}
               >
-                Speak To Our Design Experts
+                Speak To Our Interior <br /> Experts
               </Heading>
             </Div>
           </Row>
-          <Row mr="0px" ml="0px" justifyContent="center">
-            <Text mt="0px" ta="center" color="#666666" fontSize="14px">
-              Get expert opinion for free
-            </Text>
-          </Row>
           <Div>
             <form onSubmit={this.onSubmitForm}>
-              <Row m="0 1rem">
-                <Div col="12" pr="0px" pl="0px">
-                  <FormInput
+              
+                <Div >
+                  <input
                     label=""
                     type="text"
                     placeholder="Name*"
                     onChange={this.onChangeName}
                     value={name}
-                    feedBackError={nameError}
-                    feedBackMessage={nameErrorMessage}
+                    // feedBackError={nameError}
+                    // feedBackMessage={nameErrorMessage}
+                    style={{
+                    height: '50px',
+                    width: '80%',
+                    paddingLeft:'10px',
+                    marginLeft: '20%',
+                    backgroundColor: 'white',
+                    borderRadius: '5px',
+                    border:'none',
+                    outline:'none',
+                    marginBottom:'15px',
+                    marginTop: '15px'
+          }}
                   />
                 </Div>
-                <Div col="12" pr="0px" pl="0px">
-                  <FormInput
+                <Div >
+                  <input
                     label=""
                     type="text"
                     placeholder="Mobile No.*"
                     onChange={this.onChangePhone}
                     value={phone}
-                    feedBackError={phoneError}
-                    feedBackMessage={phoneErrorMessage}
+                    // feedBackError={phoneError}
+                    // feedBackMessage={phoneErrorMessage}
+                    style={{
+                    height: '50px',
+                    width: '80%',
+                    paddingLeft:'10px',
+                    marginLeft: '20%',
+                    backgroundColor: 'white',
+                    borderRadius: '5px',
+                    border:'none',
+                    outline:'none',
+                    marginBottom:'15px'
+          }}
                   />
                 </Div>
-              </Row>
-              <Row m="0 1rem">
-                <Div col="12" pr="0px" pl="0px">
-                  <FormInput
+              
+                <Div >
+                  <input
                     label=""
                     type="email"
                     placeholder="Email ID*"
                     onChange={this.onChangeEmail}
                     value={email}
-                    feedBackError={emailError}
-                    feedBackMessage={emailErrorMessage}
+                    // feedBackError={emailError}
+                    // feedBackMessage={emailErrorMessage}
+                    style={{
+                    height: '50px',
+                    width: '80%',
+                    paddingLeft:'10px',
+                    marginLeft: '20%',
+                    backgroundColor: 'white',
+                    borderRadius: '5px',
+                    border:'none',
+                    outline:'none',
+                    marginBottom:'15px'
+          }}
                   />
                 </Div>
-                <Div col="12" pr="0px" pl="0px">
-                  <FormInput
+                <Div col="12" >
+                  <input
                     label=""
                     type="text"
                     placeholder="City*"
                     onChange={this.onChangeCity}
                     value={city}
-                    feedBackError={cityError}
-                    feedBackMessage={cityErrorMessage}
+                    // feedBackError={cityError}
+                    // feedBackMessage={cityErrorMessage}
+                    style={{
+                    height: '50px',
+                    width: '80%',
+                    paddingLeft:'10px',
+                    marginLeft: '20%',
+                    backgroundColor: 'white',
+                    borderRadius: '5px',
+                    border:'none',
+                    outline:'none',
+                    marginBottom:'15px'
+          }}
                   />
                 </Div>
-              </Row>
-              <Row m="0 1rem">
-                <Div col="12" pr="0px" pl="0px">
+              
+                <Div >
                   <div className="select-wrapper">
                     <select
                       onChange={this.onChangeState}
                       placeholder="State/Region*"
                       style={{
-                        width: '100%',
+                        width: '80%',
+                        marginLeft: '20%',
                         borderRadius: '5px',
                         height: '50px',
                         borderColor: '#E3E3E3',
@@ -547,116 +504,31 @@ export default class ModularKitchen extends Component {
                     </Text>
                   ) : null}
                 </Div>
-                <Div col="12" pr="0px" pl="0px" className="select-wrapper-date">
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <label
-                      style={{
-                        marginRight: '5px',
-                        marginBottom: '10px',
-                        height: '50px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        backgroundColor: 'white',
-                        borderRadius: '5px',
-                        border: '1px solid rgb(227, 227, 227)',
-                        padding: '0px 8px',
-                        fontSize: '14px',
-                        color: 'rgb(126, 117, 117)'
-                      }}
-                    >
-                      Date*
-                    </label>
-                    <input
-                      type="date"
-                      id="preferredDateModal"
-                      value={date}
-                      onChange={this.onInputDateChange}
-                      style={{
-                        borderRadius: '5px',
-                        height: '50px',
-                        padding: '0px 8px',
-                        fontSize: '14px',
-                        color: '#7E7575',
-                        marginBottom: '10px',
-                        outline: 'none',
-                        backgroundColor: 'white',
-                        border: '1px solid #E3E3E3',
-                        flexGrow: '1'
-                      }}
-                    />
-                  </div>
-                  {dateError ? (
-                    <Text color="#dc3545" fontSize="13px" mt="0px">
-                      {dateErrorMessage}
-                    </Text>
-                  ) : null}
-                </Div>
-                <Div col="12" pr="0px" pl="0px">
-                  <div className="select-wrapper">
-                    <select
-                      id="preferredTimeModal"
-                      onChange={this.onChangeTime}
-                      style={{
-                        width: '100%',
-                        borderRadius: '5px',
-                        height: '50px',
-                        borderColor: '#E3E3E3',
-                        padding: '0px 8px',
-                        fontSize: '14px',
-                        color: '#7E7575',
-                        marginBottom: '10px',
-                        outline: 'none',
-                        backgroundColor: 'white'
-                      }}
-                    />
-                  </div>
-                  {timeError ? (
-                    <Text fontSize="13px" color="#dc3545" mt="0px">
-                      {timeErrorMessage}
-                    </Text>
-                  ) : null}
-                </Div>
-                <Div col="12" style={{ display: 'flex' }} pr="0.625rem" pl="0.625rem">
+                <Div style={{ display: 'flex' }}>
                   <Button
                     mt="20px"
                     style={{
-                      borderColor: '#F47020',
+                      border: '1px solid #F47020',
                       color: '#F47020',
                       backgroundColor: '#FFFFFF',
-                      borderRadius: '5px'
+                      borderRadius: '5px',
+                      marginLeft: '24%',
                     }}
                     fontFamily="regular"
                     height="50px"
-                    m="auto"
+                    m="40px auto 0px"
                     pl="15%"
                     pr="15%"
                   >
-                    Book Appointment
+                    Book a consultation
                   </Button>
                 </Div>
-              </Row>
             </form>
           </Div>
         </Div>
-        {/* {!loading && loaded ? (
-          <ResponsiveModal
-            classNames={{ modal: 'mkModal' }}
-            onCloseModal={() => this.setState({ open: false })}
-            open={this.state.open}
-          >
-            <Div
-              mt="50px"
-              p="50px 15%"
-              style={{ backgroundColor: '#FFFFFF', borderBottomLeftRadius: '20px', borderBottomRightRadius: '20px' }}
-            >
-              <Heading ta="center" fontSize="22px" mb="50px" mt="10px" color="#000000" style={{ whiteSpace: 'normal' }}>
-                Thank you for your Interest, Our Team will get in touch with you Shortly
-              </Heading>
-              <Img m="0 auto 5px" width="100px" src={correctIcon} alt="Reload Page" />
+                  </Div>
+              </Flex>
             </Div>
-          </ResponsiveModal>
-        ) : null} */}
-      </div>
     );
   }
 }

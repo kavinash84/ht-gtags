@@ -21,7 +21,7 @@ const DBItem = ({ component, data }) => {
           </div>
 
           <Div className={styles.content3}>
-            <Text style={{ fontSize: "18px", fontWeight: "600", textAlign:'left' }}>
+            <Text style={{ fontSize: "18px", fontWeight: "600", textAlign:'center' }}>
               {data.title}
             </Text>
             <p className={styles.contnet3_description}>{data.description}</p>

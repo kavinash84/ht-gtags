@@ -6,7 +6,7 @@ import DBCarousel from "./DBCourosel";
 const styles = require("../Designbuild.scss");
 
 const adjustSlides = length => ({
-  slidesToShow: 2.5,
+  slidesToShow:4,
   slidesToScroll: 1,
   infinite: false,
   autoplay: false,
@@ -22,18 +22,19 @@ const adjustSlides = length => ({
 
 @connect(({ designBuild }) => ({
   designBuild,
-  dbAdvantage: designBuild.data.items.text.dbAdvantage
+  shopFurniture: designBuild.data.items.text.shopFurniture
 }))
-export default class DandBAdvantage extends Component {
+
+export default class ShopFurniture extends Component {
   render() {
-    const { dbAdvantage } = this.props;
+    const { shopFurniture } = this.props;
     return (
       <Div
         style={{
           backgroundColor: "#FFFFFF",
           padding: "30px 30px 10px",
           textAlign: "center",
-          marginTop: "180px"
+          marginTop: "40px"
         }}
       >
         <Div
@@ -41,18 +42,25 @@ export default class DandBAdvantage extends Component {
             fontSize: "40px",
             fontWeight: "600",
             marginBottom: "20px",
-            color: "black",
-            fontFamily: "hel"
+            color: "black"
           }}
         >
-          {dbAdvantage.title}
+          {shopFurniture.title}
+          <div
+            style={{
+              width: '30px',
+              borderTop: '2px solid #222222',
+              margin: 'auto',
+              marginTop: '15px'
+            }}
+          />
         </Div>
         <Div style={{ fontSize: "20px", color: "#888888", marginBottom: "40px" }}>
-          {dbAdvantage.subtitle}
+          {shopFurniture.description}
         </Div>
         <Div style={{ paddingBottom: "", width: '80%', marginLeft: "10%"}}>
           <DBCarousel
-            data={dbAdvantage.values}
+            data={shopFurniture.values}
             settings={adjustSlides}
             component={3}
           />

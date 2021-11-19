@@ -25,7 +25,6 @@ class TopBanner extends React.Component {
           <Text
             style={{
               color: '#666666',
-              fontFamily: 'Helvetica Neue',
               fontSize: '18px',
               textAlign: 'center',
               padding: '20px 20px',

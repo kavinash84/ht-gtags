@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import Input from 'hometown-components-dev/lib/InputFieldLabelHtV1';
 import InputField from 'hometown-components-dev/lib/InputFieldHtV1';
 import TextArea from 'hometown-components-dev/lib/TextAreaHtV1';
-import { Label, FeedBackMessage } from 'hometown-components-dev/lib/LabelHtV1';
+// import Text from 'hometown-components-dev/lib/TextHtV1';
+import {  FeedBackMessage } from 'hometown-components-dev/lib/LabelHtV1';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Label from './Label';
+import Text from 'hometown-components-dev/lib/TextHtV1';
 
 const FormInput = ({
  label, name, type, feedBackMessage, feedBackError, ...rest
@@ -16,15 +20,30 @@ const FormInput = ({
     ...rest
   };
   return (
-    <InputField mb="0.625rem">
-      {!(type === 'hidden') && (
-        <Label fontSize="0.875em" mb="0.625rem">
+    // <Box mb="0.625rem">
+    <Box
+    // as={type === 'textarea' ? 'textarea' : 'input'}
+    // type={type}
+    // variant="input"
+    width={1}
+    // {...props}
+    sx={{
+      '&:focus': {
+        outline: 'none'
+      },
+      // ...sx
+    }}
+  >
+      {/* {!(type === 'hidden') && (
+         <Label fontSize="0.875em" mb="0.625rem">
           {label}
         </Label>
-      )}
+      )} */}
+      {/* <Text variant="inputFieldLabel" mb={5} /> */}
+      
       {(type === 'text' || type === 'password' || type === 'email' || type === 'number' || type === 'hidden') && (
-        <Input
-          {...inputProps}
+        <input
+          // {...inputProps}
           name={name}
           style={{
             height: '50px',
@@ -34,9 +53,10 @@ const FormInput = ({
           }}
         />
       )}
-      {type === 'textarea' && <TextArea {...inputProps} name={name} />}
-      {feedBackError && !(type === 'hidden') && <FeedBackMessage type="error">{feedBackMessage}</FeedBackMessage>}
-    </InputField>
+      {/* {type === 'textarea' && <TextArea {...inputProps} name={name} />} */}
+      {feedBackError  && <Text type="error">{feedBackMessage}</Text>}
+      {console.log (feedBackMessage, 'feedBackMessage')}
+    </Box>
   );
 };
 

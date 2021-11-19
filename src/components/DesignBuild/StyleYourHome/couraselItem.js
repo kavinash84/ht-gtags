@@ -20,12 +20,26 @@ const DBItem = ({ component, data }) => {
             />
           </div>
 
-          <Div className={styles.content3}>
-            <Text style={{ fontSize: "18px", fontWeight: "600", textAlign:'left' }}>
+          {/* <Div className={styles.content12}>
+            <Text style={{ fontSize: "18px", fontWeight: "600", textAlign:'center' }}>
               {data.title}
             </Text>
-            <p className={styles.contnet3_description}>{data.description}</p>
-          </Div>
+          </Div> */}
+          <div
+          style={{
+            background: '#F2F2F2',
+            padding: '10px 10px',
+            width: '75%',
+            marginLeft: '18%',
+            marginTop: '-15px',
+            textAlign: 'center',
+            fontSize: '14px',
+            fontWeight: 'bolder',
+            opacity: '90%'
+          }}
+        >
+          {data.title}
+        </div>
         </div>
       </Div>
     </Box>

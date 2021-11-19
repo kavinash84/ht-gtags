@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
-// import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import { connect } from 'react-redux';
-import QDropDown from './qDropDown';
+import Steps from './Steps';
 
 // const styles = require('./Designbuild.scss');
 const arrowForward = require('../../../static/newHomepage/newForwardArrow.svg');
@@ -11,7 +11,7 @@ const arrowForward = require('../../../static/newHomepage/newForwardArrow.svg');
   designBuild,
   queries: designBuild.data.items.text.queries
 }))
-export default class QueryDropDownContainer extends Component {
+export default class StepsMain extends Component {
   state = {
     initialItems: [],
     length: 0
@@ -27,10 +27,10 @@ export default class QueryDropDownContainer extends Component {
     return (
       <Box
         style={{
-          backgroundColor: 'white',
+          backgroundColor: '#F5F5F5',
           paddingTop: '30px',
           marginTop: '30px',
-          paddingBottom: '0px'
+          paddingBottom: '0px',
         }}
       >
         <Box
@@ -42,22 +42,14 @@ export default class QueryDropDownContainer extends Component {
             textAlign: 'center'
           }}
         >
-          {queries.title}
-          <div
-            style={{
-              width: '30px',
-              borderTop: '2px solid #222222',
-              margin: 'auto',
-              marginTop: '10px'
-            }}
-          />
+        5 Steps to Your <br /> Dream Home
         </Box>
         <Box style={{ paddingTop: '10px', paddingBottom: '0px' }}>
           {initialItems.map((item, i) => {
             if (i + 1 <= length) {
               return (
                 <div>
-                  <QDropDown
+                  <Steps
                     title={item.title}
                     description={item.description}
                     lenght={queries.values.length}
@@ -73,7 +65,6 @@ export default class QueryDropDownContainer extends Component {
               display: 'flex',
               justifyContent: 'center',
               padding: '10px 10px 0px',
-              backgroundColor: 'white'
             }}
           >
             {/* <div
@@ -100,6 +91,19 @@ export default class QueryDropDownContainer extends Component {
                 alt="Arrow"
               />
             </div> */}
+
+            <Button
+            style={{
+              width: '200px',
+              height: '50px',
+              backgroundColor: 'white',
+              color: '#F47020',
+              border: '1px solid #F47020',
+              borderRadius: '5px'
+            }}
+          >
+            Book Consultation
+          </Button>
           </Box>
         </Box>
       </Box>
