@@ -35,7 +35,8 @@ const TrendsWeLove04 = require("../../../static/new-home/trendswelove04.png");
 const ShopTheRoomBanner01 = require("../../../static/new-home/ShopTheRoomBanner01.png");
 const modularKitchenBanner = require("../../../static/new-home/modularKitchenBanner.png");
 const HomeInteriorsBannner = require("../../../static/new-home/HomeInteriorsBannner.png");
-
+const TheWayWeAre01 = require("../../../static/new-home/thewaywere01.png");
+const TheWayWeAre02 = require("../../../static/new-home/thewaywere02.png");
 // sales of the day
 const salesOfTheDay01 = require("../../../static/new-home/saleoftheday01.png");
 const salesOfTheDay02 = require("../../../static/new-home/saleoftheday02.png");
@@ -120,7 +121,7 @@ class HomeContainer extends Component {
     // ]
   };
   render() {
-    // const { getTheLook1 } = this.state;
+    // const { shopByCategories } = this.props;
     return (
       <div>
         {/* 2nd banner */}
@@ -433,6 +434,95 @@ class HomeContainer extends Component {
             />
           </Link>
         </div>
+        {/* The way we're Entertaining now */}
+
+        <div
+          style={{
+            display: "flex",
+            width: "80%",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignContent: "center",
+            marginTop: "20px",
+            marginBottom: "30px",
+            margin: "5% 10%"
+          }}
+        >
+          <div style={{ width: "" }}>
+            <Image
+              style={{
+                width: "90%",
+                alignItems: "center",
+
+                zIndex: "10"
+              }}
+              src={TheWayWeAre02}
+            />
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-evenly",
+              alignItems: "center",
+              width: "40%",
+              marginLeft: "-40px"
+            }}
+          >
+            <HeadingHtV1
+              fontSize="30px"
+              textAlign="center"
+              ml="10px"
+              mr="10px"
+              fontWeight="bold"
+            >
+              The way we're
+            </HeadingHtV1>
+            <HeadingHtV1
+              fontSize="30px"
+              textAlign="center"
+              ml="10px"
+              mr="10px"
+              mt="-40px"
+            >
+              Entertaining Now
+            </HeadingHtV1>
+            <Link to="/tableware">
+              <HeadingHtV1
+                fontFamily="medium"
+                style={{
+                  textAlign: "center",
+                  fontSize: "13px",
+                  fontWeight: "bold",
+                  color: "#222222",
+                  marginTop: "-38px"
+                }}
+              >
+                SHOP TABLEWARE
+                {/* <img
+                style={{
+                  display: "inline",
+                  marginLeft: "-8px",
+                  height: "10px",
+                  width: "40px"
+                }}
+                src={arrowForward}
+                alt="Arrow"
+              /> */}
+              </HeadingHtV1>
+            </Link>
+            <Image
+              style={{
+                alignItems: "center",
+
+                zIndex: "10"
+              }}
+              src={TheWayWeAre01}
+            />
+          </div>
+        </div>
+
         {/* Mid banner */}
         <div style={{ marginTop: "30px" }}>
           {/* <Link to="/furniture"> */}

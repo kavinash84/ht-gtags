@@ -112,6 +112,14 @@ const ShopByCategories = () => {
           src={shopByCat12}
           title="Kitchenware"
         />
+        {/* {shopByCategories.categories.map((val, index) => (
+          <CategoryBlock
+            to={val.url_key}
+            src={val.image}
+            title={val.title}
+            index={index}
+          />
+        ))} */}
       </RowHtV1>
     </div>
   );

@@ -5,12 +5,13 @@ import {
   CATEGORY_MENU,
   HASHTAGS,
   STATIC_BLOCK,
-  RECENTLY_VEIWED
-} from 'helpers/apiUrls';
+  RECENTLY_VEIWED,
+  HOMEPAGE_NEW_DESIGN
+} from "helpers/apiUrls";
 
-const LOAD = 'hompageCategories/LOAD';
-const LOAD_SUCCESS = 'hompageCategories/LOAD_SUCCESS';
-const LOAD_FAIL = 'hompageCategories/LOAD_FAIL';
+const LOAD = "hompageCategories/LOAD";
+const LOAD_SUCCESS = "hompageCategories/LOAD_SUCCESS";
+const LOAD_FAIL = "hompageCategories/LOAD_FAIL";
 
 const initialState = {
   loaded: false,
@@ -43,7 +44,8 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-export const isLoaded = (globalState, key) => globalState.homepage[key] && globalState.homepage[key].loaded;
+export const isLoaded = (globalState, key) =>
+  globalState.homepage[key] && globalState.homepage[key].loaded;
 
 export const loadMainMenu = () => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
@@ -72,7 +74,8 @@ export const loadTopSelling = () => ({
 
 export const loadOffers = () => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-  promise: ({ client }) => client.get(`${STATIC_BLOCK}/home_page_offerstrip_react_2`)
+  promise: ({ client }) =>
+    client.get(`${STATIC_BLOCK}/home_page_offerstrip_react_2`)
 });
 
 export const loadFooter = () => ({
@@ -88,4 +91,9 @@ export const loadRecentlyViewed = () => ({
 export const loadStaticPage = API => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
   promise: ({ client }) => client.get(API)
+});
+
+export const loadHomePage = () => ({
+  types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
+  promise: ({ client }) => client.get(HOMEPAGE_NEW_DESIGN)
 });
