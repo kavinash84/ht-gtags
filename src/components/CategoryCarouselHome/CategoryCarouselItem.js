@@ -7,7 +7,7 @@ import HeadingHtV1 from "hometown-components-dev/lib/HeadingHtV1";
 // import Text from 'hometown-components/lib/Text';
 // import ReactStars from "react-stars";
 
-// const arrowForward = require("../../../static/newHomepage/newForwardArrow.svg");
+const arrowForward = require("../../../static/new-home/newForwardArrow.svg");
 import "./CategoryCarousel.css";
 const shopByRoom01 = require("../../../static/new-home/shopbyroom01.png");
 const shopByRoom02 = require("../../../static/new-home/shopbyroom02.png");
@@ -58,7 +58,19 @@ class CategoryItem extends Component {
             collection has something for everyone home. Shop sofas, recliners,
             coffee tables, end tables, meedia units, ottomans and much more
           </p>
-          <div className="shop-by-room-button">EXPLORE</div>
+          <div className="shop-by-room-button">
+            EXPLORE
+            <img
+              style={{
+                display: "inline",
+                marginLeft: "-3px",
+                height: "10px",
+                width: "40px"
+              }}
+              src={arrowForward}
+              alt="Arrow"
+            />
+          </div>
         </div>
         <div
           style={{
@@ -92,7 +104,19 @@ class CategoryItem extends Component {
             memorable one. Shop dining room sets, dining chairs, bar stools,
             sideboards or serving trolleys
           </p>
-          <div className="shop-by-room-button">EXPLORE</div>
+          <div className="shop-by-room-button">
+            EXPLORE
+            <img
+              style={{
+                display: "inline",
+                marginLeft: "-3px",
+                height: "10px",
+                width: "40px"
+              }}
+              src={arrowForward}
+              alt="Arrow"
+            />
+          </div>
         </div>
       </div>
     );
