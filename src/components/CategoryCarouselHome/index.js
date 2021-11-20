@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 // import PropTypes from "prop-types";
-// import BoxHtV1 from 'hometown-components/lib/Div';
+
 import HeadingHtV1 from "hometown-components-dev/lib/HeadingHtV1";
-// import Title from 'components/Title';
+
 // import SlickSlider from 'components/SlickSlider';
 import CategoryCarouselItem from "components/CategoryCarouselHome/CategoryCarouselItem";
 
@@ -10,6 +10,7 @@ import "./CategoryCarousel.css";
 
 export default class CategoryCarousel extends Component {
   render() {
+    const { shopByRooms } = this.props;
     // const { categoryName, data } = this.props;
     return (
       <div
@@ -27,7 +28,8 @@ export default class CategoryCarousel extends Component {
           mb="10px"
           pt="30px"
         >
-          Shop By Rooms
+          Shop By Room
+          {/* {shopByRooms.mainTitle} */}
         </HeadingHtV1>
 
         <div
@@ -38,7 +40,15 @@ export default class CategoryCarousel extends Component {
             marginBottom: "20px"
           }}
         />
-
+        {/* {shopByRooms.rooms.map(slide => (
+          <CategoryCarouselItem
+            image={slide.image}
+            subHeading={slide.title}
+            description={slide.description}
+            url={slide.url_key}
+          />
+          
+        ))} */}
         <CategoryCarouselItem />
       </div>
     );

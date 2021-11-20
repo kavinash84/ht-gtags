@@ -1,10 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 // import { Link } from "react-router-dom";
-// // import Box from 'hometown-components/lib/Div';
+
 import Img from "hometown-components-dev/lib/Img";
-// import TextHtV1 from "hometown-components-dev/lib/TextHtV1";
-// import ReactStars from "react-stars";
 
 import "./CategoryCarouselTwo.css";
 const CategoryItem = ({ src, title }) => {

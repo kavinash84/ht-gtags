@@ -164,7 +164,31 @@ export default class Home extends Component {
     } = this.props;
     const citiesList = cities.map(item => ({ value: item, label: item }));
     const { citySelectError, cityErrorMessage } = this.state;
-    const { shopByCategories } = homepagecmsdata;
+    const {
+      secondbanner,
+      shopByCategories,
+      shopByRooms,
+      dealsOfthedaybannerone,
+      dealsOfthedaybannerTwo,
+      bestSeat,
+      getTheLook,
+      styleYourHome,
+      homePageBanners,
+      gifting,
+      shopGiftByPrice,
+      togetherInMoment,
+      TheWayWeAreEntertainingNow,
+      midbanner,
+      shopOurNewArrivalFurniture,
+      wfhAreBack,
+      trendsWeLove1,
+      forYourMasterSuite,
+      getTheLook2,
+      ourBeddingFavourites,
+      forBetterSleep,
+      customiseYourHome,
+      shopTheRoom
+    } = homepagecmsdata;
 
     console.log("-----------", homepagecmsdata);
     return (
@@ -227,7 +251,31 @@ export default class Home extends Component {
 
           {/* USPs */}
           {/* <Usp /> */}
-          <HomeContainer shopByCategories={shopByCategories} />
+          <HomeContainer
+            secondbanner={secondbanner}
+            shopByCategories={shopByCategories}
+            shopByRooms={shopByRooms}
+            dealsOfthedaybannerone={dealsOfthedaybannerone}
+            dealsOfthedaybannerTwo={dealsOfthedaybannerTwo}
+            bestSeat={bestSeat}
+            getTheLook={getTheLook}
+            styleYourHome={styleYourHome}
+            homePageBanners={homePageBanners}
+            gifting={gifting}
+            shopGiftByPrice={shopGiftByPrice}
+            togetherInMoment={togetherInMoment}
+            TheWayWeAreEntertainingNow={TheWayWeAreEntertainingNow}
+            midbanner={midbanner}
+            shopOurNewArrivalFurniture={shopOurNewArrivalFurniture}
+            wfhAreBack={wfhAreBack}
+            trendsWeLove1={trendsWeLove1}
+            forYourMasterSuite={forYourMasterSuite}
+            getTheLook2={getTheLook2}
+            ourBeddingFavourites={ourBeddingFavourites}
+            forBetterSleep={forBetterSleep}
+            customiseYourHome={customiseYourHome}
+            shopTheRoom={shopTheRoom}
+          />
           {/* Category Carousel
           {homepageCategories.map((category, index) => {
             if (category.view && category.view === "list") {

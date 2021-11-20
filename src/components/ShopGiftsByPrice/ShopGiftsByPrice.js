@@ -6,6 +6,8 @@ import PropTypes from "prop-types";
 
 import RowHtV1 from "hometown-components-dev/lib/RowHtV1";
 
+const arrowForward = require("../../../static/new-home/newForwardArrow.svg");
+
 import "./ShopGiftsByPrice.css";
 
 const ShopGiftsByPriceCards = ({ src, title, button }) => {
@@ -26,7 +28,19 @@ const ShopGiftsByPriceCards = ({ src, title, button }) => {
 
           <h3 className="ShopGiftsByPrice-card-title">{title}</h3>
 
-          <p className="ShopGiftsByPrice-button">{button}</p>
+          <p className="ShopGiftsByPrice-button">
+            {button}
+            <img
+              style={{
+                display: "inline",
+                marginLeft: "-3px",
+                height: "10px",
+                width: "40px"
+              }}
+              src={arrowForward}
+              alt="Arrow"
+            />
+          </p>
         </div>
       </div>
     </div>

@@ -1,17 +1,12 @@
 import React, { Component } from "react";
-// import PropTypes from "prop-types";
-// import BoxHtV1 from 'hometown-components/lib/Div';
-// import Title from 'components/Title';
+
 import HeadingHtV1 from "hometown-components-dev/lib/HeadingHtV1";
 // import SlickSlider from "components/SlickSlider";
 import CategoryCarouselItem from "./CategoryCarouselItem";
 
-const GetTheLook01 = require("../../../static/new-home/getthelook01.png");
-const GetTheLook02 = require("../../../static/new-home/getthelook02.png");
-const GetTheLook03 = require("../../../static/new-home/getthelook03.png");
-
 export default class CategoryCarousel extends Component {
   render() {
+    const { getTheLook } = this.props;
     return (
       <div>
         <HeadingHtV1
@@ -21,7 +16,7 @@ export default class CategoryCarousel extends Component {
           mt="50px"
           mb="20px"
         >
-          Get The Look
+          {getTheLook.mainTitle}
         </HeadingHtV1>
 
         <div
@@ -33,18 +28,9 @@ export default class CategoryCarousel extends Component {
             alignItems: "center"
           }}
         >
-          <CategoryCarouselItem
-            src={GetTheLook01}
-            title="Tiago Engieered Wood King bed without storage in Wenge Colour"
-          />
-          <CategoryCarouselItem
-            src={GetTheLook02}
-            title="Tiago Engieered Wood Night Stand in Wenge Colour"
-          />
-          <CategoryCarouselItem
-            src={GetTheLook03}
-            title="Tiago Engieered Wood Dresser with mirror in Wenge Colour"
-          />
+          {getTheLook.data.map(val => (
+            <CategoryCarouselItem src={val.image} title={val.title} />
+          ))}
         </div>
       </div>
     );
