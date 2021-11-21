@@ -1,72 +1,114 @@
-import React from 'react';
-// import Container from 'hometown-components/lib/Container';
-// import PropTypes from 'prop-types';
-// import Div from 'hometown-components/lib/Div';
-// import Row from 'hometown-components/lib/Row';
-// import Section from 'hometown-components/lib/Section';
-// import Heading from 'hometown-components/lib/Heading';
-// import Text from 'hometown-components/lib/Text';
-// import Img from 'hometown-components/lib/Img';
-// import MenuWithBreadcrumb from 'components/MenuWithBreadcrumb';
+import React, { Component } from "react";
+// import Container from "hometown-components/lib/Container";
+import PropTypes from "prop-types";
 
-// const storesImg = require('../../../static/storedemoimg.jpg');
+import Row from "hometown-components-dev/lib/RowHtV1";
 
-// export default class StoreDetails extends Component {
-//   render() {
-//     const { store } = this.props;
-//     return (
-//       <Div type="block">
-//         <MenuWithBreadcrumb storeName={store.store} />
-//         <Section display="flex" pt="2.5rem" pb="4.5rem" mb="0" height="auto">
-//           <Container type="container" pr="1rem" pl="1rem">
-//             <Row display="block" mr="0" ml="0" mb="1.25rem  ">
-//               <Div col="12">
-//                 <Img src={storesImg} alt="Stores" width="100%" />
-//               </Div>
-//             </Row>
-//             <Row display="block" mr="0.625rem" ml="0.625rem">
-//               <Div col="4">
-//                 <Heading fontSize="1em" mb="0.625rem" color="secondary">
-//                   STORE ADDRESS
-//                 </Heading>
-//                 <Text fontSize="0.875em" mb="0rem" mt="0.3125rem" color="rgba(0, 0, 0, 0.5)">
-//                   {store.address || null}
-//                 </Text>
-//                 <Text fontSize="0.875em" mb="0rem" mt="0.3125rem" color="rgba(0, 0, 0, 0.5)">
-//                   {store.city || null}, {store.state || null}, {store.pincode || null}
-//                 </Text>
-//               </Div>
-//               <Div col="2">
-//                 <Heading fontSize="1em" mb="0.625rem" color="secondary">
-//                   TIMING
-//                 </Heading>
-//                 <Text fontSize="0.875em" mb="0rem" mt="0.3125rem" color="rgba(0, 0, 0, 0.5)">
-//                   {store.timings || null}
-//                 </Text>
-//               </Div>
-//               <Div col="2">
-//                 <Heading fontSize="1em" mb="0.625rem" color="secondary">
-//                   PHONE
-//                 </Heading>
-//                 <Text fontSize="0.875em" mb="0rem" mt="0.3125rem" color="rgba(0, 0, 0, 0.5)">
-//                   {store.phone || null}
-//                 </Text>
-//               </Div>
-//             </Row>
-//           </Container>
-//         </Section>
-//       </Div>
-//     );
-//   }
-// }
+import HeadingHtV1 from "hometown-components-dev/lib/HeadingHtV1";
+// import Text from "hometown-components/lib/Text";
+import Image from "hometown-components-dev/lib/ImageHtV1";
 
-// StoreDetails.defaultProps = {
-//   store: {}
-// };
+const storesImg = require("../../../static/storedemoimg.jpg");
 
-// StoreDetails.propTypes = {
-//   store: PropTypes.object
-// };
-const StoreDetails = () => <div type="block">Page Is Under Development</div>;
+export default class StoreDetails extends Component {
+  render() {
+    const { store } = this.props;
+    return (
+      <div type="block">
+        <div
+          style={{
+            display: "flex",
+            paddingTop: "2.5rem",
+            paddingBottom: "2.5rem",
+            height: "auto"
+          }}
+        >
+          <div style={{ paddingRight: "0", paddingLeft: "0" }} type="container">
+            <Row display="block" mr="0" ml="0" mb="1.25rem  ">
+              <div col="12">
+                <Image src={storesImg} alt="Stores" width="100%" />
+              </div>
+            </Row>
+            <Row display="block" mr="0" ml="0">
+              <div col="12">
+                <HeadingHtV1
+                  fontSize="0.875rem"
+                  mb="0.625rem"
+                  color="secondary"
+                >
+                  STORE ADDRESS
+                </HeadingHtV1>
+                <div
+                  style={{
+                    fontSize: "0.75rem",
+                    marginBottom: "0rem",
+                    marginTop: "0.3125rem",
+                    color: "black"
+                  }}
+                >
+                  {store.address || null}
+                </div>
+                <div
+                  style={{
+                    fontSize: "0.75rem",
+                    marginBottom: "0rem",
+                    marginTop: "0.3125rem",
+                    color: "black"
+                  }}
+                >
+                  {store.city || null}, {store.state || null},{" "}
+                  {store.pincode || null}
+                </div>
+              </div>
+              <div col="12">
+                <HeadingHtV1
+                  fontSize="0.875rem"
+                  mb="0.625rem"
+                  color="secondary"
+                >
+                  TIMING
+                </HeadingHtV1>
+                <div
+                  style={{
+                    fontSize: "0.75rem",
+                    marginBottom: "0rem",
+                    marginTop: "0.3125rem",
+                    color: "black"
+                  }}
+                >
+                  {store.timings || null}
+                </div>
+              </div>
+              <div col="12">
+                <HeadingHtV1
+                  fontSize="0.875rem"
+                  mb="0.625rem"
+                  color="secondary"
+                >
+                  PHONE
+                </HeadingHtV1>
+                <div
+                  style={{
+                    fontSize: "0.75rem",
+                    marginBottom: "0rem",
+                    marginTop: "0.3125rem",
+                    color: "black"
+                  }}
+                >
+                  {store.phone || null}
+                </div>
+              </div>
+            </Row>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+StoreDetails.defaultProps = {
+  store: {}
+};
 
-export default StoreDetails;
+StoreDetails.propTypes = {
+  store: PropTypes.object
+};

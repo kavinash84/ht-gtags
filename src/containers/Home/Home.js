@@ -248,10 +248,8 @@ export default class Home extends Component {
         <Body>
           {/* Header */}
           <Header />
-
           {/* Main Slider */}
           <MainSlider data={banners} />
-
           {/* USPs */}
           {/* <Usp /> */}
           <HomeContainer
@@ -308,7 +306,6 @@ export default class Home extends Component {
             }
             return null;
           })} */}
-
           {/* Offer Banner */}
           {/* <LazyLoad>
             <OfferBanner
@@ -317,7 +314,6 @@ export default class Home extends Component {
               target={middleBanner.target || ""}
             />
           </LazyLoad> */}
-
           {/* LET US DESIGN FOR YOU */}
           {/* <Section>
             <Container>
@@ -358,8 +354,7 @@ export default class Home extends Component {
               </Row>
             </Container>
           </Section> */}
-
-          {/* Store Locator */}
+          Store Locator
           <Section>
             <Container>
               <Card
@@ -424,12 +419,10 @@ export default class Home extends Component {
               </Card>
             </Container>
           </Section>
-
           {/* Unbxd Recently Viewed */}
           <Section>
             <UnbxdRecentlyViewed />
           </Section>
-
           {/* Share and Inspire */}
           {/* {instafeeds && !!instafeeds.length && (
             <Section variant="section.primary">
@@ -460,7 +453,6 @@ export default class Home extends Component {
               </Container>
             </Section>
           )} */}
-
           {/* Footer */}
           <Footer />
         </Body>

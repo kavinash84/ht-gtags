@@ -1,92 +1,88 @@
-import React from 'react';
-// import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
-// import Title from 'components/Title';
-// import Section from 'hometown-components/lib/Section';
-// import Container from 'hometown-components/lib/Container';
-// import Row from 'hometown-components/lib/Row';
-// import Div from 'hometown-components/lib/Div';
-// import { hyphenedString } from 'utils/helper';
-// import { filterStoreList } from 'selectors/homepage';
-// import { gaVisitEvent } from 'redux/modules/stores';
-// import StoresCarouselItem from './StoresCarouselItem';
-// import StoreListItem from './StoreListItem';
-// import SlickSlider from '../SlickSlider';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-// const settings = {
-//   slidesToShow: 6,
-//   slidesToScroll: 6,
-//   autoplay: false,
-//   infinite: false
-// };
-// const mapDispatchToProps = dispatch => bindActionCreators({ gaVisitEvent }, dispatch);
-// const mapStateToProps = ({ stores }) => ({
-//   filteredStores: filterStoreList(stores)
-// });
-// class StoresCarousel extends Component {
-//   render() {
-//     const { cities, filteredStores, gaVisitEvent: recordStoreVisit } = this.props;
-//     return (
-//       <Section p="0" pt="2.5rem" pb="2rem" mb="0" className="storeCarousel">
-//         <Container pr="0" pl="0">
-//           <Row type="block" m="0" mb="0.5rem">
-//             {cities && cities.length > 0 && <Title title="Stores" subTitle="" />}
-//           </Row>
-//           <Row type="block" m="0" mb="0.5rem">
-//             <Div col={12} p="0 0.75rem 0.5rem">
-//               <SlickSlider settings={settings}>
-//                 {cities.map((city, index) => (
-//                   <div key={String(index)}>
-//                     <StoresCarouselItem city={city} />
-//                   </div>
-//                 ))}
-//               </SlickSlider>
-//             </Div>
-//           </Row>
-//           <Row type="block" m="0 1.5rem 0.5rem">
-//             {filteredStores.map((store, index) => {
-//               const url =
-//                 store.meta.url.length > 0
-//                   ? store.meta.url
-//                   : `/store/${hyphenedString(store.city)
-// .toLowerCase()}/${hyphenedString(store.store).toLowerCase()}`;
-//               return (
-//                 <StoreListItem
-//                   key={String(index)}
-//                   city={store.city}
-//                   store={store.store}
-//                   address={store.address}
-//                   pincode={store.pincode}
-//                   state={store.state}
-//                   phone={store.phone}
-//                   url={url}
-//                   visitHandler={recordStoreVisit}
-//                 />
-//               );
-//             })}
-//           </Row>
-//         </Container>
-//       </Section>
-//     );
-//   }
-// }
+import Row from "hometown-components-dev/lib/RowHtV1";
+// import Div from "hometown-components/lib/Div";
+import HeadingHtV1 from "hometown-components-dev/lib/HeadingHtV1";
+// import Col from 'hometown-components-dev/lib/ColHtV1';
 
-// StoresCarousel.defaultProps = {
-//   cities: [],
-//   filteredStores: []
-// };
+import { filterStoreList } from "selectors/homepage";
+import StoresCarouselItem from "./StoresCarouselItem";
 
-// StoresCarousel.propTypes = {
-//   cities: PropTypes.array,
-//   filteredStores: PropTypes.array,
-//   gaVisitEvent: PropTypes.func.isRequired
-// };
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(StoresCarousel);
+import SlickSlider from "../SlickSlider";
 
-const Stores = () => <div type="block">/Page Is Under Development</div>;
+const settings = {
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  autoplay: false,
+  infinite: false
+};
 
-export default Stores;
+@connect(({ stores }) => ({
+  filteredStores: filterStoreList(stores),
+  stores
+}))
+export default class StoresCarousel extends Component {
+  render() {
+    const { cities } = this.props;
+    return (
+      <div
+        style={{ padding: "1rem 0 0 0", marginBottom: "0" }}
+        className="storeCarousel"
+      >
+        <div style={{ paddingRight: "0", paddingLeft: "0" }}>
+          <Row type="block" m="0" mb="5px">
+            {/* <Title title="Stores" subTitle="" /> */}
+            <div
+              style={{
+                backgroundImage: "linear-gradient(to bottom, #EDEDED99, white)",
+                margin: "0px 40px",
+                width: "100%"
+              }}
+            >
+              <HeadingHtV1
+                mb="5px"
+                fontFamily="medium"
+                fontSize="22px"
+                m="auto"
+                style={{ textAlign: "center", color: "#222222" }}
+              >
+                Stores
+              </HeadingHtV1>
+            </div>
+          </Row>
+          <div
+            style={{
+              width: "30px",
+              borderTop: "2px solid #222222",
+              margin: "auto",
+              marginBottom: "10px"
+            }}
+          />
+          <Row type="block" m="0" mb="0.5rem">
+            <div style={{ padding: "0 0.75rem 0.5rem" }} col={12}>
+              <SlickSlider settings={settings}>
+                {cities.map((city, index) => (
+                  <div key={String(index)}>
+                    <StoresCarouselItem city={city} />
+                  </div>
+                ))}
+              </SlickSlider>
+            </div>
+          </Row>
+        </div>
+      </div>
+    );
+  }
+}
+
+StoresCarousel.defaultProps = {
+  cities: []
+  // filteredStores: []
+};
+
+StoresCarousel.propTypes = {
+  cities: PropTypes.array
+  // filteredStores: PropTypes.array
+};

@@ -1,38 +1,72 @@
-import React from 'react';
-// import PropTypes from 'prop-types';
-// import { bindActionCreators } from 'redux';
-// import { connect } from 'react-redux';
-// import { setCity } from 'redux/modules/stores';
+import React from "react";
+import PropTypes from "prop-types";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { setCity, gaVisitEvent } from "redux/modules/stores";
+import { hyphenedString } from "utils/helper";
+import StoreListItem from "./StoreListItem";
+import SlickSlider from "../SlickSlider";
 
-// const styles = require('./StoresCarousel.scss');
+import "./slickArrow.css";
 
-// const onClick = (dispatcher, city) => e => {
-//   e.preventDefault();
-//   dispatcher(city);
-// };
+const styles = require("./StoresCarousel.scss");
 
-// const mapStateToProps = ({ stores }) => ({
-//   selectedCity: stores.selectedCity
-// });
+const settings = {
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  autoplay: false,
+  infinite: false
+};
 
-// const mapDispatchToProps = dispatch => bindActionCreators({ setSelectedCity: setCity }, dispatch);
+const mapStateToProps = ({ stores }) => ({
+  stores: stores.data.items.text
+});
 
-// const StoresCarouselItem = ({ city, setSelectedCity, selectedCity }) => (
-//   <div className={`${styles.storeSliderItem} ${selectedCity === city ? styles.active : ''}`}>
-//     <button className={styles.link} onClick={onClick(setSelectedCity, city.toUpperCase())}>
-//       {city}
-//     </button>
-//   </div>
-// );
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ setSelectedCity: setCity, gaVisitEvent }, dispatch);
 
-// StoresCarouselItem.propTypes = {
-//   city: PropTypes.string.isRequired,
-//   setSelectedCity: PropTypes.func.isRequired,
-//   selectedCity: PropTypes.string.isRequired
-// };
+const StoresCarouselItem = ({
+  city,
+  stores,
+  gaVisitEvent: recordStoreVisit
+}) => (
+  <div className={`storeCarouselItem ${styles.storeSliderItem}`}>
+    <button className={styles.link}>{city}</button>
+    <SlickSlider settings={settings}>
+      {stores
+        .filter(item => item.city.toUpperCase() === city)
+        .map((store, index) => (
+          <StoreListItem
+            key={String(index)}
+            city={store.city}
+            store={store.store}
+            address={store.address}
+            pincode={store.pincode}
+            state={store.state}
+            phone={store.phone}
+            gaVisitHandler={recordStoreVisit}
+            /*eslint-disable*/
+            url={
+              store.meta.url.length > 0
+                ? store.meta.url
+                : `/store/${hyphenedString(
+                    store.city
+                  ).toLowerCase()}/${hyphenedString(store.store).toLowerCase()}`
+            }
+            /* eslint-enable */
+          />
+        ))}
+    </SlickSlider>
+  </div>
+);
 
-// export default connect(mapStateToProps, mapDispatchToProps)(StoresCarouselItem);
+StoresCarouselItem.defaultProps = {
+  stores: []
+};
+StoresCarouselItem.propTypes = {
+  city: PropTypes.string.isRequired,
+  stores: PropTypes.array,
+  gaVisitEvent: PropTypes.func.isRequired
+};
 
-const StoreCarouselItem = () => <div type="block">Page Is Under Development</div>;
-
-export default StoreCarouselItem;
+export default connect(mapStateToProps, mapDispatchToProps)(StoresCarouselItem);
