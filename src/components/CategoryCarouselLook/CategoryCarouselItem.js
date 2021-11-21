@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import Img from "hometown-components-dev/lib/Img";
 
-import "./CategoryCarousel.css";
+// import "./CategoryCarousel.css";
 const CategoryItem = ({ src, title }) => {
   return (
     <div>

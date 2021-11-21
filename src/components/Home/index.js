@@ -11,6 +11,7 @@ import StyleYourHome from "../../components/StyleYourHome";
 import ShopOurBestsellers from "../../components/ShopOurBestsellers";
 import CategoryCarouselLookTwo from "../../components/CategoryCarouselLookTwo";
 import ShopGiftsByPrice from "../../components/ShopGiftsByPrice";
+// import ShopByRooms from "./shopByRoom/shopByRoom";
 
 // easy finance
 const HdfcLogo = require("../../../static/new-home/hdfc-logo.png");
@@ -69,7 +70,7 @@ class HomeContainer extends Component {
         <div mt="20px" mb="15px" style={{ display: "block" }}>
           <CategoryCarousel shopByRooms={shopByRooms} />
         </div>
-
+        {/* <ShopByRooms /> */}
         {/* deals of the day section */}
         <DealsOfTheDay />
 

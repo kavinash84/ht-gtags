@@ -354,20 +354,21 @@ export default class Home extends Component {
               </Row>
             </Container>
           </Section> */}
-          Store Locator
+
           <Section>
             <Container>
               <Card
                 sx={{
-                  backgroundImage: `url(${findAStoreImage})`,
+                  // backgroundImage: `url(${findAStoreImage})`,
                   backgroundSize: "cover",
                   position: "relative"
                 }}
               >
                 <Box
+                  // style={{ boxShadow: "0.5rem 0.5rem 3rem rgba(0, 0, 0, 0.2)" }}
                   height="100%"
                   width={1}
-                  bg="rgba(0,0,0,0.5)"
+                  bg="#fff"
                   sx={{
                     position: "absolute",
                     top: 0,
@@ -377,23 +378,77 @@ export default class Home extends Component {
                   }}
                 />
                 <Row
-                  height={380}
+                  height={300}
                   variant="row.contentCenter"
                   sx={{ position: "relative" }}
                   flexDirection="column"
                 >
                   <Box textAlign="center" mb={30}>
-                    <Heading variant="heading.large" color="white" mb={10}>
-                      FIND A STORE NEAR YOU
-                    </Heading>
-                    <Text
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexDirection: "column"
+                      }}
+                    >
+                      <Heading variant="heading.large" color="black" mb={10}>
+                        Stores
+                      </Heading>
+                      <div
+                        style={{
+                          width: "30px",
+                          borderTop: "2px solid #222222",
+                          margin: "auto",
+                          marginTop: "10px"
+                        }}
+                      />
+                      <div
+                        style={{
+                          fontSize: "20px",
+                          border: "1px solid #fcd6c0",
+                          padding: "15px 80px",
+                          marginTop: "30px",
+                          width: "300px",
+                          borderRadius: "5px"
+                        }}
+                      >
+                        MUMBAI
+                      </div>
+                      <div
+                        style={{
+                          fontSize: "13px",
+
+                          padding: "10px 100px",
+                          marginTop: "10px"
+                        }}
+                      >
+                        Mumbai, vikhroli
+                      </div>
+                      <p
+                        style={{
+                          fontSize: "13px",
+                          color: "gray",
+                          padding: "10px 100px",
+                          marginTop: "0px",
+                          lineHeight: "17px"
+                        }}
+                      >
+                        lorem ipsum dolor sit amet,consectrator sed adipoli,
+                        lorem ipsum <br /> dolor sit amet,consectrator sed
+                        adipoli ipsum dolor sit amet,consectrator sed adipoli{" "}
+                        <br />
+                        consectrator sed adipoli ipsum dolor sit amet
+                      </p>
+                    </div>
+                    {/* <Text
                       variant="regular"
                       color={citySelectError ? "red" : "white"}
                     >
                       {citySelectError ? cityErrorMessage : ""}
-                    </Text>
+                    </Text> */}
                   </Box>
-                  <Row>
+                  {/* <Row>
                     <Select
                       placeholder="Select City"
                       defaultValue={null}
@@ -414,7 +469,7 @@ export default class Home extends Component {
                     >
                       LOCATE A STORE
                     </Button>
-                  </Row>
+                  </Row> */}
                 </Row>
               </Card>
             </Container>
