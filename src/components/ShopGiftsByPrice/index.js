@@ -2,7 +2,8 @@ import React, { Component } from "react";
 
 import ShopGiftsByPriceCards from "./ShopGiftsByPrice";
 import HeadingHtV1 from "hometown-components-dev/lib/HeadingHtV1";
-
+const LeftArrow = require("../../../static/new-home/leftArrow.svg");
+const RightArrow = require("../../../static/new-home/rightArrow.svg");
 class ShopGiftsByPrice extends Component {
   render() {
     const { shopGiftByPrice } = this.props;
@@ -24,6 +25,7 @@ class ShopGiftsByPrice extends Component {
             alignItems: "center"
           }}
         >
+          <img src={LeftArrow} />
           {shopGiftByPrice.items.map(val => (
             <ShopGiftsByPriceCards
               src={val.image}
@@ -31,6 +33,7 @@ class ShopGiftsByPrice extends Component {
               button="SHOP NOW"
             />
           ))}
+          <img src={RightArrow} />
         </div>
       </div>
     );

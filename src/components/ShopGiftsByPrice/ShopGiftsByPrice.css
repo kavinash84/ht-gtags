@@ -1,6 +1,7 @@
 .ShopGiftsByPrice-wrapper {
   margin-top: -35px;
   height: 480px;
+  width: 260px;
 }
 .ShopGiftsByPrice-card-wrapper {
   display: flex;
@@ -21,11 +22,12 @@
   box-shadow: 0.5rem 0.5rem 3rem rgba(0, 0, 0, 0.2);
 }
 .ShopGiftsByPrice-img {
-  width: 15rem;
+  width: 14rem;
   height: auto;
   object-fit: cover;
   margin-top: 0.5rem;
   margin-left: 7px;
+  margin-right: 7px;
   z-index: 999;
   border: 1px solid#ebeef8;
 }
