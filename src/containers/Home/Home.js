@@ -80,7 +80,8 @@ const customDropdownStyles = {
       offers,
       recentlyviewed,
       instafeeds,
-      homepagecmsdata
+      homepagecmsdata,
+      dealoftheday
     },
     stores,
     userLogin
@@ -95,7 +96,8 @@ const customDropdownStyles = {
     middleBanner: getMiddleBannerData(offers),
     recentlyviewed: recentlyviewed.data,
     isLoggedIn: userLogin.isLoggedIn,
-    homepagecmsdata: homepagecmsdata.data.items.text
+    homepagecmsdata: homepagecmsdata.data.items.text,
+    dealoftheday: dealoftheday.data
   })
 )
 export default class Home extends Component {
@@ -160,7 +162,8 @@ export default class Home extends Component {
       middleBanner,
       homepageCategories,
       cities,
-      homepagecmsdata
+      homepagecmsdata,
+      dealoftheday
     } = this.props;
     const citiesList = cities.map(item => ({ value: item, label: item }));
     const { citySelectError, cityErrorMessage } = this.state;
@@ -190,7 +193,7 @@ export default class Home extends Component {
       shopTheRoom
     } = homepagecmsdata;
 
-    console.log("-----------", homepagecmsdata);
+    console.log("-----------", dealoftheday);
     return (
       /* eslint-disable max-len */
       <Wrapper>
@@ -252,6 +255,7 @@ export default class Home extends Component {
           {/* USPs */}
           {/* <Usp /> */}
           <HomeContainer
+            dealoftheday={dealoftheday}
             secondbanner={secondbanner}
             shopByCategories={shopByCategories}
             shopByRooms={shopByRooms}

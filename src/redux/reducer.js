@@ -70,7 +70,8 @@ export default function createReducers(asyncReducers) {
       cancellation: homepage,
       privacy: homepage,
       homepagecmsdata: homepage,
-      returnpolicy: homepage
+      returnpolicy: homepage,
+      dealoftheday: homepage
     }),
     category,
     stores,

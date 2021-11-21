@@ -6,7 +6,8 @@ import {
   HASHTAGS,
   STATIC_BLOCK,
   RECENTLY_VEIWED,
-  HOMEPAGE_NEW_DESIGN
+  HOMEPAGE_NEW_DESIGN,
+  DEAL_OF_THE_DAY
 } from "helpers/apiUrls";
 
 const LOAD = "hompageCategories/LOAD";
@@ -96,4 +97,16 @@ export const loadStaticPage = API => ({
 export const loadHomePage = () => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
   promise: ({ client }) => client.get(HOMEPAGE_NEW_DESIGN)
+});
+
+// export const loadDealOfTheDay = pincode => ({
+//   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
+//   promise: ({ client }) => client.get(`${DEAL_OF_THE_DAY}` + `${pincode}`)
+// });
+export const loadDealOfTheDay = pincode => ({
+  types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
+  promise: ({ client }) =>
+    client.get(
+      `tesla/static/homepagecoupons/deal_of_the_day?pincode=${pincode}`
+    )
 });
