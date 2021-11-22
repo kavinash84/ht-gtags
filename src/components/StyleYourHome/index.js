@@ -32,9 +32,10 @@ const ShopByCategories = ({ styleYourHome }) => (
     />
     <RowHtV1
       justifyContent="center"
-      ml="-5px"
-      mr="-5px"
+      ml="auto"
+      mr="auto"
       mt="25px"
+      mb="25px"
       style={{ maxWidth: "1400px" }}
     >
       {styleYourHome.data.map((val, index) => (
