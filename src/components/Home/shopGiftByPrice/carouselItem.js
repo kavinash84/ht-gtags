@@ -10,7 +10,7 @@ const arrowForward = require("../../../../static/new-home/newForwardArrow.svg");
 
 const DBItem = ({ component, data }) => {
   return (
-    <Box variant="section.catSliderItem" style={{ padding: "0 20px" }}>
+    <Box variant="section.catSliderItem" style={{ padding: "20px 20px" }}>
       <Div
         className={`${styles.sliderItem} ${styles.sliderItemtwo}`}
         style={{
