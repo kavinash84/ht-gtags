@@ -7,7 +7,7 @@ import Row from "hometown-components-dev/lib/RowHtV1";
 import Button from "hometown-components-dev/lib/ButtonHtV1";
 import Text from "hometown-components-dev/lib/TextHtV1";
 import { Link } from "react-router-dom";
-import { PropTypes } from "prop-types";
+import PropTypes from 'prop-types';
 import {
   validateMobile,
   validateEmail,

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Section from "hometown-components-dev/lib/SectionHtV1";
 import Div from "hometown-components-dev/lib/BoxHtV1";
 import Img from "hometown-components-dev/lib/ImageHtV1";
-import { PropTypes } from "prop-types";
+import PropTypes from "prop-types";
 import Reviews from "./Reviews";
 import SortAndFilter from "./sortAndFilter";
 import { loadReviewsList } from "../../redux/modules/reviews";
