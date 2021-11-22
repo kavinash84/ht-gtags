@@ -1,0 +1,129 @@
+.titleContainer {
+  text-align: center;
+  color: #323131;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding-top: 30px;
+  .title {
+    font-size: 50px;
+    font-weight: 600;
+  }
+  .titleBottom {
+    margin-top: 10px;
+    width: 5%;
+    border: 1px solid #323131;
+  }
+}
+.reviewsContainer {
+  margin-top: 30px;
+  height: auto;
+
+  .reviewListContainer {
+    margin-top: 5px;
+    display: flex;
+    width: 100%;
+    justify-content: start;
+    flex-wrap: wrap;
+    height: auto;
+    padding: 40px 0px;
+    .reviewContainer {
+      margin: 10px;
+      width: 23%;
+      height: 520px;
+      margin-bottom: 40px;
+      // border: 1px solid black;
+      .customerName {
+        font-size: 29px;
+        color: #17245b;
+        font-weight: 600;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 100%;
+        overflow: hidden;
+      }
+      .subDetails {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 5px;
+        .ratings {
+          display: flex;
+          img {
+            margin-right: 3px;
+          }
+        }
+        .logoContainer {
+          display: flex;
+          justify-content: end;
+          width: 20%;
+        }
+        .location {
+          font-size: 24px;
+          color: #666666;
+          margin-top: 5px;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          width: 90%;
+          overflow: hidden;
+        }
+      }
+      .productImage {
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 5px;
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+      .reviewDetails {
+        font-size: 24px;
+        color: #000000;
+        line-height: normal;
+        background-image: url("../../../static/Review/quote.svg");
+        background-position-x: left;
+        background-position-y: top;
+        background-repeat: no-repeat;
+        padding-top: 10px;
+        margin-top: 10px;
+        min-height: 50px;
+        .reviewText {
+          display: -webkit-box;
+          width: 100%;
+          -webkit-line-clamp: 4;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+      }
+      .date {
+        font-size: 20px;
+        margin-top: 10px;
+        font-size: 10px;
+        color: #666666;
+      }
+    }
+  }
+  .showMore {
+    text-align: center;
+    color: #222222;
+    font-size: 20px;
+    font-weight: 600;
+    width: 100%;
+    padding-bottom: 40px;
+    cursor: pointer;
+  }
+}
+
+// filter and sort
+
+.filterAndSort {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #666666;
+}

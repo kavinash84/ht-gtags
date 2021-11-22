@@ -80,6 +80,7 @@ import Campaigns from 'containers/Campaigns';
 import FlipBokContainer from 'containers/FlipBookContainer';
 
 import { categoryRoutes, listingRoutes } from 'helpers/Constants';
+import Review from './containers/Review';
 
 const createRegex = data => data.join('|');
 
@@ -212,6 +213,7 @@ const routes = [
         exact: true,
         component: Listing
       },
+      { path: '/reviews', exact: true, component: Review },
 
       { component: NotFound }
     ]

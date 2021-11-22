@@ -1,0 +1,102 @@
+.customSlider {
+  position: relative;
+  margin-top: 15px;
+  .rangeLabelsContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 97%;
+    margin-left: 1%;
+    .rangeLabels {
+      font-size: 14px;
+      color: #999999;
+    }
+  }
+
+  input {
+    background: #f5eeee;
+  }
+  /*Chrome*/
+  @media screen and (-webkit-min-device-pixel-ratio: 0) {
+    .slider1 {
+      overflow: hidden;
+      width: 100%;
+      -webkit-appearance: none;
+      background-color: #999999;
+      border-radius: 5px;
+    }
+
+    .slider1::-webkit-slider-runnable-track {
+      height: 10px;
+      -webkit-appearance: none;
+      color: #222222;
+      margin-top: -1px;
+    }
+
+    .slider1::-webkit-slider-thumb {
+      cursor: ew-resize;
+      background: #f47020;
+      box-shadow: -81vw 0 0 80vw #222222;
+      height: 20px;
+      width: 20px;
+      border-radius: 11px;
+      cursor: pointer;
+      -webkit-appearance: none;
+      margin-top: -5px;
+    }
+  }
+  /** FF*/
+  .slider1::-moz-range-progress {
+    background-color: #222222;
+  }
+  .slider1::-moz-range-track {
+    background-color: #999999;
+  }
+  /* IE*/
+  .slider1::-ms-fill-lower {
+    background-color: #222222;
+  }
+  .slider1::-ms-fill-upper {
+    background-color: #999999;
+  }
+  /*Chrome*/
+  @media screen and (-webkit-min-device-pixel-ratio: 0) {
+    .slider2 {
+      width: 100%;
+      -webkit-appearance: none;
+      background-color: transparent;
+    }
+
+    .slider2::-webkit-slider-runnable-track {
+      height: 10px;
+      -webkit-appearance: none;
+      color: transparent;
+      margin-top: -1px;
+      border-radius: 5px;
+    }
+
+    .slider2::-webkit-slider-thumb {
+      cursor: ew-resize;
+      background: #f47020;
+      height: 20px;
+      width: 20px;
+      border-radius: 11px;
+      cursor: pointer;
+      -webkit-appearance: none;
+      margin-top: -5px;
+    }
+  }
+  /** FF*/
+  .slider2::-moz-range-progress {
+    background-color: transparent;
+  }
+  .slider2::-moz-range-track {
+    background-color: transparent;
+  }
+  /* IE*/
+  .slider2::-ms-fill-lower {
+    background-color: transparent;
+  }
+  .slider2::-ms-fill-upper {
+    background-color: transparent;
+  }
+}
