@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Input from "hometown-components/lib/Input";
-import InputField from "hometown-components/lib/InputField";
-import TextArea from "hometown-components/lib/TextArea";
-import { Label, FeedBackMessage } from "hometown-components/lib/Label";
+// import Input from "hometown-components/lib/Input";
+import InputField from "hometown-components-dev/lib/InputFieldHtV1";
+// import TextArea from "hometown-components/lib/TextArea";
+import { Label, FeedBackMessage } from "hometown-components-dev/lib/LabelHtV1";
 
 const FormInput = ({
   label,
@@ -22,33 +22,34 @@ const FormInput = ({
     ...rest
   };
   return (
-    <InputField mb="0.625rem" style={style}>
-      {!(type === "hidden") && (
-        <Label fontSize="0.875em" mb="0.625rem">
-          {label}
-        </Label>
-      )}
-      {(type === "text" ||
-        type === "password" ||
-        type === "email" ||
-        type === "number" ||
-        type === "hidden") && (
-        <Input
-          {...inputProps}
-          name={name}
-          style={{
-            height: "50px",
-            backgroundColor: "white",
-            borderRadius: "5px",
-            borderColor: "rgb(227, 227, 227)"
-          }}
-        />
-      )}
-      {type === "textarea" && <TextArea {...inputProps} name={name} />}
-      {feedBackError && !(type === "hidden") && (
-        <FeedBackMessage type="error">{feedBackMessage}</FeedBackMessage>
-      )}
-    </InputField>
+    // <InputField mb="0.625rem" style={style}>
+    //   {!(type === "hidden") && (
+    //     <Label fontSize="0.875em" mb="0.625rem">
+    //       {label}
+    //     </Label>
+    //   )}
+    //   {(type === "text" ||
+    //     type === "password" ||
+    //     type === "email" ||
+    //     type === "number" ||
+    //     type === "hidden") && (
+    //     <input
+    //       {...inputProps}
+    //       name={name}
+    //       style={{
+    //         height: "50px",
+    //         backgroundColor: "white",
+    //         borderRadius: "5px",
+    //         borderColor: "rgb(227, 227, 227)"
+    //       }}
+    //     />
+    //   )}
+    //   {type === "textarea" && <textarea {...inputProps} name={name} />}
+    //   {feedBackError && !(type === "hidden") && (
+    //     <FeedBackMessage type="error">{feedBackMessage}</FeedBackMessage>
+    //   )}
+    // </InputField>
+    <div></div>
   );
 };
 

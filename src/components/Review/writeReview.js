@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Section from "hometown-components/lib/Section";
-import Div from "hometown-components/lib/Div";
-import Img from "hometown-components/lib/Img";
-import Row from "hometown-components/lib/Row";
-import Button from "hometown-components/lib/Buttons";
-import Text from "hometown-components/lib/Text";
+import Section from "hometown-components-dev/lib/SectionHtV1";
+import Div from "hometown-components-dev/lib/BoxHtV1";
+import Img from "hometown-components-dev/lib/ImageHtV1";
+import Row from "hometown-components-dev/lib/RowHtV1";
+import Button from "hometown-components-dev/lib/ButtonHtV1";
+import Text from "hometown-components-dev/lib/TextHtV1";
 import { Link } from "react-router-dom";
 import { PropTypes } from "prop-types";
 import {
@@ -15,17 +15,18 @@ import {
   validateFullname,
   checkSpecialChar
 } from "utils/validation";
-import FormInput from "./FormInput";
 import CustomSlider from "./slider";
 import {
   addCustomerReview,
   loadProductsListForReview
 } from "../../redux/modules/reviews";
+import { FormInput } from "./FormInput";
 
 const CloseIcon = require("../../../static/Review/closeIcon.svg");
 const PlusIcon = require("../../../static/Review/plusIcon.svg");
 const StarEmpty = require("../../../static/Review/starEmpty.svg");
 const StarFilled = require("../../../static/Review/starFilled.svg");
+const ReviewBanner = require("../../../static/Review/ReviewBanner.png");
 
 const styles = require("./writeReview.scss");
 

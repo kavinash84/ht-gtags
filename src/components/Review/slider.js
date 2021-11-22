@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Div from "hometown-components/lib/Div";
+import Div from "hometown-components-dev/lib/BoxHtV1";
 
 const styles = require("./slider.scss");
 export default class CustomSlider extends Component {
