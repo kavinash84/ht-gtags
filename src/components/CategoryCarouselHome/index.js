@@ -49,6 +49,7 @@ export default class CategoryCarousel extends Component {
           />
           
         ))} */}
+
         <CategoryCarouselItem />
       </div>
     );

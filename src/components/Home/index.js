@@ -532,7 +532,8 @@ class HomeContainer extends Component {
                   display: "flex",
                   margin: "0 10%",
                   justifyContent: "space-evenly",
-                  alignContent: "center"
+                  alignContent: "center",
+                  position: "relative"
                 }}
               >
                 <Image
