@@ -7,15 +7,24 @@ import Text from 'hometown-components-dev/lib/TextHtV1';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import Section from 'hometown-components-dev/lib/SectionHtV1';
 import StepsMain from './StepsMain';
+import { connect } from 'react-redux';
 
 const styles = require('./Designbuild.scss');
 
+@connect(({ designBuild }) => ({
+    designBuild,
+    stepsToDreamhome: designBuild.data.items.text.stepsToDreamhome
+  }))
+
 class StepsToYourHome extends React.Component {
     render() { 
+        const {
+            stepsToDreamhome
+           } = this.props;
         return(
             <Box mt="70px">
               <Flex >
-                  <Image src="https://www.hometown.in/media/cms/D/Top-Image-Living1.jpg" style={{width: '55%', height: '750px'}}/>
+                  <Image src={stepsToDreamhome.image} style={{width: '55%', height: '750px'}}/>
                   <Box style={{width:'45%', height:'750px', backgroundColor: '#F5F5F5'}}>
                       <StepsMain />
                   </Box>

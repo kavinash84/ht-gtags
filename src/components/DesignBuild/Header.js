@@ -7,7 +7,6 @@ import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
 
-const logo = require('../../static/duracucine.png');
 const styles = require('./Designbuild.scss');
 
 class Header extends React.Component {
@@ -23,7 +22,7 @@ class Header extends React.Component {
         }}
       >
         <div style={{ marginLeft: '10%' }}>
-          <Image src={logo} />
+          <Image src='https://www.hometown.in/media/cms/designbuild/hometownlogo.png' style={{width:'80%'}} />
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Text style={{ marginRight: '40px' }}>Plan Your Kitchen</Text>

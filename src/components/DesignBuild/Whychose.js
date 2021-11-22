@@ -6,12 +6,19 @@ import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import { connect } from 'react-redux';
 
 const logo = require('../../static/designBuildLogo.png');
 const styles = require('./Designbuild.scss');
 
+@connect(({ designBuild }) => ({
+  designBuild,
+  whyChooseUs: designBuild.data.items.text.whyChooseUs
+}))
+
 class WhyChose extends React.Component {
   render() {
+    const { whyChooseUs }  = this.props;
     return (
       <Box mt="80px">
         <Box>
@@ -27,13 +34,12 @@ class WhyChose extends React.Component {
               marginTop: '25px'
             }}
           >
-            At DuraCucine, we bring you more than 15 years of expertise in kitchen solutions that are perfected for the
-            Indian homes.
+            {whyChooseUs.description}
           </Text>
         </Box>
         <Box mt="20px" className={styles.pos}>
           <Image
-            src="https://www.hometown.in/media/cms/D/Top-Image-Living1.jpg"
+            src={whyChooseUs.image}
             alt="topbanner"
             width="100%"
             height="550px"

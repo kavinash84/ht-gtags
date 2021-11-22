@@ -5,23 +5,31 @@ import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import { connect } from 'react-redux';
 
 const logo = require('../../static/designBuildLogo.png');
 const styles = require('./Designbuild.scss');
 
+@connect(({ designBuild }) => ({
+  designBuild,
+  topBanner: designBuild.data.items.text.topBanner
+}))
+
 class TopBanner extends React.Component {
+ 
   render() {
+    const { topBanner }  = this.props;
     return (
       <Box className={styles.main}>
         <Image
-          src="https://www.hometown.in/media/cms/D/Top-Image-Living1.jpg"
+          src={topBanner.img}
           alt="topbanner"
           width="100%"
           height="550px"
           style={{ objectFit: 'cover' }}
         />
         <Box style={{ height: '70%', width: '300px', backgroundColor: 'white' }} className={styles.sub}>
-          <Image src={logo} alt="topbanner" style={{ objectFit: 'cover', width: '50%', marginLeft: '25%' }} />
+          <Image src={topBanner.image} alt="topbanner" style={{ objectFit: 'cover', width: '50%', marginLeft: '25%' }} />
           <Text
             style={{
               color: '#666666',
@@ -31,7 +39,7 @@ class TopBanner extends React.Component {
               lineHeight: '30px'
             }}
           >
-            One-Stop Customised Interior Design Solutions With Professional Exceution
+{topBanner.description}
           </Text>
           <Button
             style={{

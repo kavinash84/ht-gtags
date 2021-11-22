@@ -7,7 +7,7 @@ const Arrow = require('../../../static/categories/Line.svg');
 
 @connect(({ designBuild }) => ({
     designBuild,
-    stepsToHome: designBuild.data.items.text.stepsToHome
+    stepsToDreamhome: designBuild.data.items.text.stepsToDreamhome
   }))
 
 class Steps extends React.Component {
@@ -73,7 +73,7 @@ class Steps extends React.Component {
                     style={{
                       display: 'flex',
                       justifyContent: 'space-between',
-                      width: '95%',
+                      width: '90%',
                       marginLeft: '5%',
                       alignItems: 'center',
                       fontSize: '20px'

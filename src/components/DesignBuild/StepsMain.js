@@ -9,7 +9,7 @@ const arrowForward = require('../../../static/newHomepage/newForwardArrow.svg');
 
 @connect(({ designBuild }) => ({
   designBuild,
-  queries: designBuild.data.items.text.queries
+  stepsToDreamhome: designBuild.data.items.text.stepsToDreamhome
 }))
 export default class StepsMain extends Component {
   state = {
@@ -17,12 +17,12 @@ export default class StepsMain extends Component {
     length: 0
   };
   componentDidMount() {
-    const { queries } = this.props;
-    this.setState({ initialItems: queries.values });
+    const { stepsToDreamhome } = this.props;
+    this.setState({ initialItems: stepsToDreamhome.values });
     this.setState({ length: 7 });
   }
   render() {
-    const { queries } = this.props;
+    const { stepsToDreamhome } = this.props;
     const { initialItems, length } = this.state;
     return (
       <Box
@@ -36,15 +36,17 @@ export default class StepsMain extends Component {
         <Box
           style={{
             fontSize: '40px',
+            lineHeight: '50px',
             fontWeight: 600,
             marginBottom: '10px',
             color: 'black',
-            textAlign: 'center'
+            textAlign: 'left',
+            marginLeft:'10%'
           }}
         >
         5 Steps to Your <br /> Dream Home
         </Box>
-        <Box style={{ paddingTop: '10px', paddingBottom: '0px' }}>
+        <Box style={{ paddingTop: '30px', paddingBottom: '30px' }}>
           {initialItems.map((item, i) => {
             if (i + 1 <= length) {
               return (
@@ -52,7 +54,7 @@ export default class StepsMain extends Component {
                   <Steps
                     title={item.title}
                     description={item.description}
-                    lenght={queries.values.length}
+                    lenght={stepsToDreamhome.values.length}
                     index={i}
                   />
                 </div>
