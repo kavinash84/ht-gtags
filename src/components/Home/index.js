@@ -10,7 +10,7 @@ import CategoryCarouselLook from "../../components/CategoryCarouselLook";
 import StyleYourHome from "../../components/StyleYourHome";
 import ShopOurBestsellers from "../../components/ShopOurBestsellers";
 import CategoryCarouselLookTwo from "../../components/CategoryCarouselLookTwo";
-import ShopGiftsByPrice from "../../components/ShopGiftsByPrice";
+import ShopGiftByPrice from "./shopGiftByPrice/ShopGiftByPrice";
 import ShopByRooms from "./shopByRoom/shopByRoom";
 
 // easy finance
@@ -32,7 +32,7 @@ class HomeContainer extends Component {
       styleYourHome,
       homePageBanners,
       gifting,
-      shopGiftByPrice,
+
       togetherInMoment,
       TheWayWeAreEntertainingNow,
       midbanner,
@@ -282,7 +282,7 @@ class HomeContainer extends Component {
         </div>
         {/* shop gifts by price */}
         <div>
-          <ShopGiftsByPrice shopGiftByPrice={shopGiftByPrice} />
+          <ShopGiftByPrice />
         </div>
         {/* Together In the moment */}
         <div>
