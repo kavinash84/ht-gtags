@@ -1,5 +1,8 @@
 .writeReviewContainer {
   background-color: #f5eeee;
+  display: flex;
+  width: 100%;
+  align-items: center;
   .close {
     display: flex;
     justify-content: end;
@@ -10,13 +13,13 @@
   }
   .writeTitle {
     text-align: center;
-    color: #17245b;
+    color: #18191f;
     align-items: center;
     display: flex;
     flex-direction: column;
     margin: 15px 0px;
     .title {
-      font-size: 22px;
+      font-size: 36px;
       font-weight: 600;
     }
     .titleBottom {
@@ -29,19 +32,21 @@
     .mobileInputContainer {
       display: flex;
       width: 100%;
+      align-items: center;
       .getDetailsBtn {
         border: 1px solid #f47020;
         border-radius: 5px;
         padding: 10px;
         background: white;
         color: #f47020;
-        height: 83%;
+        height: 70%;
         margin-left: -10px;
         font-size: 11px;
         width: 24%;
         display: flex;
         justify-content: center;
         align-items: center;
+        cursor: pointer;
       }
     }
   }
@@ -49,9 +54,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: white;
-    box-shadow: -4px -15px 27px -13px rgba(0, 0, 0, 0.24) !important;
-    -webkit-box-shadow: -4px -15px 27px -13px rgba(0, 0, 0, 0.24) !important;
-    -moz-box-shadow: -4px -15px 27px -13px rgba(0, 0, 0, 0.24) !important;
+    width: 100%;
   }
 }

@@ -7,7 +7,7 @@ import Row from "hometown-components-dev/lib/RowHtV1";
 import Button from "hometown-components-dev/lib/ButtonHtV1";
 import Text from "hometown-components-dev/lib/TextHtV1";
 import { Link } from "react-router-dom";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import {
   validateMobile,
   validateEmail,
@@ -20,13 +20,12 @@ import {
   addCustomerReview,
   loadProductsListForReview
 } from "../../redux/modules/reviews";
-import { FormInput } from "./FormInput";
+import FormInput from "./FormInput";
 
-const CloseIcon = require("../../../static/Review/closeIcon.svg");
 const PlusIcon = require("../../../static/Review/plusIcon.svg");
 const StarEmpty = require("../../../static/Review/starEmpty.svg");
 const StarFilled = require("../../../static/Review/starFilled.svg");
-const ReviewBanner = require("../../../static/Review/ReviewBanner.png");
+const ReviewBanner = require("../../../static/Review/writeReviewformImage.png");
 
 const styles = require("./writeReview.scss");
 
@@ -275,388 +274,392 @@ export default class WriteReview extends Component {
     const { loading, stores } = this.props;
     console.log(stores, "stores");
     return (
-      <Section p="0" mb="0" className={styles.writeReviewContainer}>
-        <Div style={{ background: "#f5eeee", padding: "15px 15px 0px" }}>
-          <Div className={styles.close}>
-            <Link to="/reviews">
-              <Img src={CloseIcon} alt="Close" />
-            </Link>
+      <Section p="0" mb="0" style={{ padding: "0% 7%" }}>
+        <Div className={styles.writeReviewContainer}>
+          <Div style={{ width: "50%" }}>
+            <Img src={ReviewBanner} alt="Banner" />
           </Div>
-          <Div className={styles.writeTitle}>
-            <Div className={styles.title}>Write Your Review</Div>
-            <Div className={styles.titleBottom} />
-          </Div>
-          <Div className={styles.writeFormContainer}>
-            <form onSubmit={this.onSubmitForm}>
-              <Row m="0">
-                <Div col="12" ta="left">
-                  <FormInput
-                    label=""
-                    type="text"
-                    placeholder="Name*"
-                    onChange={this.onChangeName}
-                    value={name}
-                    feedBackError={nameError}
-                    feedBackMessage={nameErrorMsg}
-                  />
-                </Div>
-                <Div col="12" className={styles.mobileInputContainer} ta="left">
-                  <FormInput
-                    label=""
-                    type="text"
-                    placeholder="Mobile No.*"
-                    style={{ width: "80%" }}
-                    onChange={this.onChangeMobile}
-                    value={mobile}
-                    feedBackError={mobileError}
-                    feedBackMessage={mobileErrorMsg}
-                  />
-                  <div
-                    className={styles.getDetailsBtn}
-                    style={{ height: mobileError ? "63%" : "83%" }}
-                    onClick={() => {
-                      const mobileValError = !validateMobile(mobile);
-                      if (!(mobileValError || loading)) {
-                        this.handleGetDetails();
-                      } else {
-                        this.setState({ mobileError: true });
-                      }
-                    }}
-                  >
-                    Get Details
-                  </div>
-                </Div>
-              </Row>
-              <Row m="0">
-                <Div col="12" ta="left">
-                  <FormInput
-                    label=""
-                    type="email"
-                    placeholder="Email ID"
-                    onChange={this.onChangeEmail}
-                    value={email}
-                    feedBackError={emailError}
-                    feedBackMessage={emailErrorMsg}
-                  />
-                </Div>
-              </Row>
-              <Row m="0">
-                <Div col="6" ta="left">
-                  <FormInput
-                    label=""
-                    type="text"
-                    placeholder="City"
-                    onChange={this.onChangeCity}
-                    value={city}
-                    feedBackError={cityError}
-                    feedBackMessage={cityErrorMsg}
-                  />
-                </Div>
-                <Div
-                  col="6"
-                  style={{ width: "47%", marginLeft: "3%" }}
-                  ta="left"
-                >
-                  <div className="select-wrapper">
-                    <div
-                      style={{
-                        width: "100%",
-                        borderRadius: "5px",
-                        height: "50px",
-                        borderColor: "#E3E3E3",
-                        padding: "0px 8px",
-                        fontSize: "14px",
-                        color: "#7E7575",
-                        marginBottom: "10px",
-                        outline: "none",
-                        backgroundColor: "white"
-                      }}
-                    >
-                      <select
-                        onChange={this.onChangeOffline}
-                        placeholder="Offline"
-                        style={{
-                          width: "100%",
-                          height: "50px",
-                          border: "none",
-                          fontSize: "14px",
-                          color: "#7E7575",
-                          marginBottom: "10px",
-                          outline: "none",
-                          backgroundColor: "white"
-                        }}
-                      >
-                        <option value="Offline" selected>
-                          Offline
-                        </option>
-                        <option value="Online">Online</option>
-                      </select>
-                    </div>
-                  </div>
-                  {offlineError ? (
-                    <Text color="#dc3545" fontSize="13px" mt="0px">
-                      {offlineErrorMsg}
-                    </Text>
-                  ) : null}
-                </Div>
-              </Row>
-              <Row m="0">
-                <Div col="12" ta="left">
-                  <div className="select-wrapper">
-                    <div
-                      style={{
-                        width: "100%",
-                        borderRadius: "5px",
-                        height: "50px",
-                        borderColor: "#E3E3E3",
-                        padding: "0px 8px",
-                        fontSize: "14px",
-                        color: "#7E7575",
-                        marginBottom: "10px",
-                        outline: "none",
-                        backgroundColor: "white"
-                      }}
-                    >
-                      <select
-                        onChange={this.onChangeStore}
-                        placeholder="Select Store"
-                        style={{
-                          width: "100%",
-                          height: "50px",
-                          border: "none",
-                          fontSize: "14px",
-                          color: "#7E7575",
-                          marginBottom: "10px",
-                          outline: "none",
-                          backgroundColor: "white"
-                        }}
-                      >
-                        <option value="Select Store" disabled selected>
-                          Select Store
-                        </option>
-                        {stores.map(val => (
-                          <option key={val.id} value={val.store}>
-                            {val.store}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-                  {storeError ? (
-                    <Text color="#dc3545" fontSize="13px" mt="0px">
-                      {storeErrorMsg}
-                    </Text>
-                  ) : null}
-                </Div>
-                <Div col="12" ta="left">
-                  <div className="select-wrapper">
-                    <div
-                      style={{
-                        width: "100%",
-                        borderRadius: "5px",
-                        height: "50px",
-                        borderColor: "#E3E3E3",
-                        padding: "0px 8px",
-                        fontSize: "14px",
-                        color: "#7E7575",
-                        marginBottom: "10px",
-                        outline: "none",
-                        backgroundColor: "white"
-                      }}
-                    >
-                      <select
-                        onChange={this.onChangeProduct}
-                        placeholder="Select Product"
-                        style={{
-                          width: "100%",
-                          height: "50px",
-                          border: "none",
-                          fontSize: "14px",
-                          color: "#7E7575",
-                          marginBottom: "10px",
-                          outline: "none",
-                          backgroundColor: "white"
-                        }}
-                      >
-                        <option value="Select Product" disabled selected>
-                          Select Product
-                        </option>
-                        {/* {state.map(val => (
-                          <option key={val.id} value={val.option}>
-                            {val.option}
-                          </option>
-                        ))} */}
-                      </select>
-                    </div>
-                  </div>
-                  {productError ? (
-                    <Text color="#dc3545" fontSize="13px" mt="0px">
-                      {productErrorMsg}
-                    </Text>
-                  ) : null}
-                </Div>
-                <Div col="12" style={{ position: "relative" }} ta="left">
-                  <div
-                    onClick={() => {
-                      document.getElementById("imagesUploadForReview").click();
-                    }}
+          <Div
+            style={{
+              background: "#f5eeee",
+              padding: "15px 15px 0px",
+              width: "50%",
+              padding: "0% 10%"
+            }}
+          >
+            <Div className={styles.writeTitle}>
+              <Div className={styles.title}>Write Your Review</Div>
+              <Div className={styles.titleBottom} />
+            </Div>
+            <Div className={styles.writeFormContainer}>
+              <form onSubmit={this.onSubmitForm}>
+                <Row m="0">
+                  <Div col="24" style={{ width: "100%" }}>
+                    <FormInput
+                      label=""
+                      type="text"
+                      placeholder="Name*"
+                      onChange={this.onChangeName}
+                      value={name}
+                      feedBackError={nameError}
+                      feedBackMessage={nameErrorMsg}
+                    />
+                  </Div>
+                  <Div
+                    col="24"
+                    className={styles.mobileInputContainer}
+                    style={{ width: "100%" }}
                   >
                     <FormInput
                       label=""
                       type="text"
-                      placeholder="Add Images"
-                      disabled={true}
-                      value={addImg ? "Images Added" : ""}
-                      feedBackError={addImgError}
-                      feedBackMessage={addImgErrorMsg}
+                      placeholder="Mobile No.*"
+                      style={{ width: "80%" }}
+                      onChange={this.onChangeMobile}
+                      value={mobile}
+                      feedBackError={mobileError}
+                      feedBackMessage={mobileErrorMsg}
                     />
-                    <Img
-                      src={PlusIcon}
-                      alt="ADD"
+                    <div
+                      className={styles.getDetailsBtn}
                       style={{
-                        width: "20px",
-                        height: "20px",
-                        padding: "3px",
-                        border: "1px solid #999999",
-                        borderRadius: "4px",
+                        height: mobileError ? "59%" : "80%",
+                        marginBottom: mobileError ? "20px" : "",
+                        marginTop: "10px"
+                      }}
+                      onClick={() => {
+                        const mobileValError = !validateMobile(mobile);
+                        if (!(mobileValError || loading)) {
+                          this.handleGetDetails();
+                        } else {
+                          this.setState({ mobileError: true });
+                        }
+                      }}
+                    >
+                      Get Details
+                    </div>
+                  </Div>
+                </Row>
+                <Row m="0">
+                  <Div col="12" style={{ width: "100%" }}>
+                    <FormInput
+                      label=""
+                      type="email"
+                      placeholder="Email ID"
+                      onChange={this.onChangeEmail}
+                      value={email}
+                      feedBackError={emailError}
+                      feedBackMessage={emailErrorMsg}
+                    />
+                  </Div>
+                </Row>
+                <Row m="0" style={{ alignItems: "center" }}>
+                  <Div col="6" style={{ marginBottom: "9px" }}>
+                    <FormInput
+                      label=""
+                      type="text"
+                      placeholder="City"
+                      onChange={this.onChangeCity}
+                      value={city}
+                      feedBackError={cityError}
+                      feedBackMessage={cityErrorMsg}
+                    />
+                  </Div>
+                  <Div
+                    col="6"
+                    style={{
+                      width: "42%",
+                      marginLeft: "3%",
+                      marginTop: "10px"
+                    }}
+                  >
+                    <div className="select-wrapper">
+                      <div
+                        style={{
+                          width: "100%",
+                          borderRadius: "5px",
+                          height: "50px",
+                          borderColor: "#E3E3E3",
+                          padding: "0px 8px",
+                          fontSize: "14px",
+                          color: "#7E7575",
+                          marginBottom: "10px",
+                          outline: "none",
+                          backgroundColor: "white"
+                        }}
+                      >
+                        <select
+                          onChange={this.onChangeOffline}
+                          placeholder="Offline"
+                          style={{
+                            width: "100%",
+                            height: "50px",
+                            border: "none",
+                            fontSize: "14px",
+                            color: "#7E7575",
+                            outline: "none",
+                            backgroundColor: "white"
+                          }}
+                        >
+                          <option value="Offline" selected>
+                            Offline
+                          </option>
+                          <option value="Online">Online</option>
+                        </select>
+                      </div>
+                    </div>
+                    {offlineError ? (
+                      <Text color="#dc3545" fontSize="13px" mt="0px">
+                        {offlineErrorMsg}
+                      </Text>
+                    ) : null}
+                  </Div>
+                </Row>
+                <Row m="0">
+                  <Div col="12" style={{ width: "100%" }}>
+                    <div className="select-wrapper">
+                      <div
+                        style={{
+                          width: "100%",
+                          borderRadius: "5px",
+                          height: "50px",
+                          borderColor: "#E3E3E3",
+                          padding: "0px 8px",
+                          fontSize: "14px",
+                          color: "#7E7575",
+                          marginBottom: "10px",
+                          outline: "none",
+                          backgroundColor: "white"
+                        }}
+                      >
+                        <select
+                          onChange={this.onChangeStore}
+                          placeholder="Select Store"
+                          style={{
+                            width: "100%",
+                            height: "50px",
+                            border: "none",
+                            fontSize: "14px",
+                            color: "#7E7575",
+                            marginBottom: "10px",
+                            outline: "none",
+                            backgroundColor: "white"
+                          }}
+                        >
+                          <option value="Select Store" disabled selected>
+                            Select Store
+                          </option>
+                          {stores.map(val => (
+                            <option key={val.id} value={val.store}>
+                              {val.store}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+                    {storeError ? (
+                      <Text color="#dc3545" fontSize="13px" mt="0px" mb="4px">
+                        {storeErrorMsg}
+                      </Text>
+                    ) : null}
+                  </Div>
+                  <Div col="12" style={{ width: "100%" }}>
+                    <div className="select-wrapper">
+                      <div
+                        style={{
+                          width: "100%",
+                          borderRadius: "5px",
+                          height: "50px",
+                          borderColor: "#E3E3E3",
+                          padding: "0px 8px",
+                          fontSize: "14px",
+                          color: "#7E7575",
+                          // marginBottom: "10px",
+                          outline: "none",
+                          backgroundColor: "white"
+                        }}
+                      >
+                        <select
+                          onChange={this.onChangeProduct}
+                          placeholder="Select Product"
+                          style={{
+                            width: "100%",
+                            height: "50px",
+                            border: "none",
+                            fontSize: "14px",
+                            color: "#7E7575",
+                            // marginBottom: "10px",
+                            outline: "none",
+                            backgroundColor: "white"
+                          }}
+                        >
+                          <option value="Select Product" disabled selected>
+                            Select Product
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    {productError ? (
+                      <Text color="#dc3545" fontSize="13px" mt="4px">
+                        {productErrorMsg}
+                      </Text>
+                    ) : null}
+                  </Div>
+                  <Div col="12" style={{ position: "relative", width: "100%" }}>
+                    <div
+                      onClick={() => {
+                        document
+                          .getElementById("imagesUploadForReview")
+                          .click();
+                      }}
+                    >
+                      <FormInput
+                        label=""
+                        type="text"
+                        placeholder="Add Images"
+                        disabled={true}
+                        value={addImg ? "Images Added" : ""}
+                        feedBackError={addImgError}
+                        feedBackMessage={addImgErrorMsg}
+                      />
+                      <Img
+                        src={PlusIcon}
+                        alt="ADD"
+                        style={{
+                          width: "20px",
+                          height: "20px",
+                          padding: "3px",
+                          border: "1px solid #999999",
+                          borderRadius: "4px",
+                          position: "absolute",
+                          top: "29%",
+                          right: "4%"
+                        }}
+                      />
+                    </div>
+                    <input
+                      type="file"
+                      id="imagesUploadForReview"
+                      onChange={this.handleFileUpload}
+                      multiple="multiple"
+                      accept="image/png, image/gif, image/jpeg"
+                      style={{
                         position: "absolute",
-                        top: "24%",
-                        right: "4%"
+                        top: "2%",
+                        right: "2%",
+                        zIndex: -1
                       }}
                     />
-                  </div>
-                  <input
-                    type="file"
-                    id="imagesUploadForReview"
-                    onChange={this.handleFileUpload}
-                    multiple="multiple"
-                    accept="image/png, image/gif, image/jpeg"
-                    style={{
-                      position: "absolute",
-                      top: "2%",
-                      right: "2%",
-                      zIndex: -1
-                    }}
-                  />
-                </Div>
-                <Div col="12" ta="left">
-                  <textarea
-                    placeholder="Write a review here…."
-                    name="review"
-                    value={description}
-                    onChange={this.handleDescription}
-                    rows="4"
-                    style={{
-                      borderColor: "rgb(227, 227, 227)",
-                      background: "white",
-                      borderRadius: "5px",
-                      padding: "10px",
-                      width: "100%"
-                    }}
-                  />
-                  {descriptionError ? (
-                    <Text color="#dc3545" fontSize="13px" mt="0px">
-                      {descriptionErrorMsg}
-                    </Text>
-                  ) : null}
-                </Div>
-                <Div
-                  style={{
-                    display: "flex",
-                    width: "100%",
-                    justifyContent: "center",
-                    marginTop: "15px"
-                  }}
-                >
+                  </Div>
+                  <Div col="12" style={{ width: "100%", marginTop: "10px" }}>
+                    <textarea
+                      placeholder="Write a review here…."
+                      name="review"
+                      value={description}
+                      onChange={this.handleDescription}
+                      rows="4"
+                      style={{
+                        borderColor: "rgb(227, 227, 227)",
+                        background: "white",
+                        borderRadius: "5px",
+                        padding: "10px",
+                        width: "100%"
+                      }}
+                    />
+                    {descriptionError ? (
+                      <Text color="#dc3545" fontSize="13px" mt="0px">
+                        {descriptionErrorMsg}
+                      </Text>
+                    ) : null}
+                  </Div>
                   <Div
                     style={{
                       display: "flex",
-                      width: "70%",
-                      justifyContent: "center"
+                      width: "100%",
+                      justifyContent: "center",
+                      marginTop: "15px"
                     }}
                   >
-                    <Img
-                      src={1 <= ratings ? StarFilled : StarEmpty}
-                      width="20px"
-                      height="20px"
-                      style={{ marginLeft: "5px" }}
-                      onClick={() => this.onChangeRating(1)}
-                    />
-                    <Img
-                      src={2 <= ratings ? StarFilled : StarEmpty}
-                      width="20px"
-                      height="20px"
-                      style={{ marginLeft: "5px" }}
-                      onClick={() => this.onChangeRating(2)}
-                    />
-                    <Img
-                      src={3 <= ratings ? StarFilled : StarEmpty}
-                      width="20px"
-                      height="20px"
-                      style={{ marginLeft: "5px" }}
-                      onClick={() => this.onChangeRating(3)}
-                    />
-                    <Img
-                      src={4 <= ratings ? StarFilled : StarEmpty}
-                      width="20px"
-                      height="20px"
-                      style={{ marginLeft: "5px" }}
-                      onClick={() => this.onChangeRating(4)}
-                    />
-                    <Img
-                      src={5 <= ratings ? StarFilled : StarEmpty}
-                      width="20px"
-                      height="20px"
-                      style={{ marginLeft: "5px" }}
-                      onClick={() => this.onChangeRating(5)}
-                    />
+                    <Div
+                      style={{
+                        display: "flex",
+                        width: "70%",
+                        justifyContent: "center"
+                      }}
+                    >
+                      <Img
+                        src={1 <= ratings ? StarFilled : StarEmpty}
+                        width="20px"
+                        height="20px"
+                        style={{ marginLeft: "5px" }}
+                        onClick={() => this.onChangeRating(1)}
+                      />
+                      <Img
+                        src={2 <= ratings ? StarFilled : StarEmpty}
+                        width="20px"
+                        height="20px"
+                        style={{ marginLeft: "5px" }}
+                        onClick={() => this.onChangeRating(2)}
+                      />
+                      <Img
+                        src={3 <= ratings ? StarFilled : StarEmpty}
+                        width="20px"
+                        height="20px"
+                        style={{ marginLeft: "5px" }}
+                        onClick={() => this.onChangeRating(3)}
+                      />
+                      <Img
+                        src={4 <= ratings ? StarFilled : StarEmpty}
+                        width="20px"
+                        height="20px"
+                        style={{ marginLeft: "5px" }}
+                        onClick={() => this.onChangeRating(4)}
+                      />
+                      <Img
+                        src={5 <= ratings ? StarFilled : StarEmpty}
+                        width="20px"
+                        height="20px"
+                        style={{ marginLeft: "5px" }}
+                        onClick={() => this.onChangeRating(5)}
+                      />
+                    </Div>
                   </Div>
-                </Div>
-                <CustomSlider
-                  ratings={ratings}
-                  handleChange={this.onChangeRating}
-                />
-                <button
-                  type="submit"
-                  id="reviewSubmitBtn"
-                  onClick={this.onSubmitForm}
-                  style={{ visibility: "hidden" }}
-                >
-                  submit
-                </button>
-              </Row>
-            </form>
+                  <CustomSlider
+                    ratings={ratings}
+                    handleChange={this.onChangeRating}
+                  />
+                  <Div
+                    col="12"
+                    pr="0rem"
+                    pl="0rem"
+                    className={styles.bottomFixedSubmit}
+                  >
+                    <Button
+                      style={{
+                        color: "#F47020",
+                        border: "1px solid #f47020",
+                        background: "#FFFFFF",
+                        borderRadius: "5px",
+                        fontSize: "14px",
+                        width: "100%",
+                        fontWeight: 600,
+                        margin: "10px"
+                      }}
+                      fontFamily="regular"
+                      height="50px"
+                      m="0"
+                      pl="5%"
+                      pr="5%"
+                      onClick={this.onSubmitForm}
+                      disabled={loading}
+                    >
+                      {loading ? "Submiting Review..." : "Submit Review"}
+                    </Button>
+                  </Div>
+                </Row>
+              </form>
+            </Div>
           </Div>
-        </Div>
-        <Div
-          col="12"
-          pr="0.625rem"
-          pl="0.625rem"
-          className={styles.bottomFixedSubmit}
-        >
-          <Button
-            style={{
-              borderColor: "#F47020",
-              color: "#F47020",
-              backgroundColor: "#FFFFFF",
-              borderRadius: "5px",
-              fontSize: "14px",
-              width: "100%",
-              fontWeight: 600,
-              margin: "10px"
-            }}
-            fontFamily="regular"
-            height="50px"
-            m="0"
-            pl="5%"
-            pr="5%"
-            onClick={() => {
-              document.getElementById("reviewSubmitBtn").click();
-            }}
-            disabled={loading}
-          >
-            {loading ? "Submiting Review..." : "Submit Review"}
-          </Button>
         </Div>
       </Section>
     );
