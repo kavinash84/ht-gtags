@@ -6,12 +6,12 @@ import HeadingHtV1 from "hometown-components-dev/lib/HeadingHtV1";
 import Image from "hometown-components-dev/lib/ImageHtV1";
 import CategoryCarouselLook from "../../components/CategoryCarouselLook";
 
-import CategoryCarousel from "../../components/CategoryCarouselHome";
+// import CategoryCarousel from "../../components/CategoryCarouselHome";
 import StyleYourHome from "../../components/StyleYourHome";
 import ShopOurBestsellers from "../../components/ShopOurBestsellers";
 import CategoryCarouselLookTwo from "../../components/CategoryCarouselLookTwo";
 import ShopGiftsByPrice from "../../components/ShopGiftsByPrice";
-// import ShopByRooms from "./shopByRoom/shopByRoom";
+import ShopByRooms from "./shopByRoom/shopByRoom";
 
 // easy finance
 const HdfcLogo = require("../../../static/new-home/hdfc-logo.png");
@@ -67,10 +67,10 @@ class HomeContainer extends Component {
         <ShopByCategories shopByCategories={shopByCategories} />
         {/* shop by room */}
 
-        <div mt="20px" mb="15px" style={{ display: "block" }}>
+        {/* <div mt="20px" mb="15px" style={{ display: "block" }}>
           <CategoryCarousel shopByRooms={shopByRooms} />
-        </div>
-        {/* <ShopByRooms /> */}
+        </div> */}
+        <ShopByRooms />
         {/* deals of the day section */}
         <DealsOfTheDay />
 
