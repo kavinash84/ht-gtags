@@ -394,7 +394,7 @@ class HomeContainer extends Component {
                   fontSize: "13px",
                   fontWeight: "bold",
                   color: "#222222",
-                  marginTop: "-38px"
+                  marginTop: "-15px"
                 }}
               >
                 {TheWayWeAreEntertainingNow.buttonTitle}
