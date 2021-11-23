@@ -188,7 +188,7 @@ class HomeContainer extends Component {
             <div style={{ margin: "15px 10%" }}>
               <Link to={val.url_key}>
                 <Image
-                  style={{ width: "90%", marginLeft: "40px" }}
+                  style={{ width: "91%" }}
                   src={val.image}
                   alt="IndoorFountain"
                 />
