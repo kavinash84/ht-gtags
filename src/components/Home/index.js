@@ -49,16 +49,21 @@ class HomeContainer extends Component {
     return (
       <div>
         {/* 2nd banner */}
-        <div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignContent: "center"
+          }}
+        >
           <Image
             mt="50px"
             mb="30px"
             src={secondbanner.image}
             style={{
-              width: "90%",
+              width: "82%",
               alignItems: "center",
-              marginLeft: "5%",
-              marginRight: "5%",
+              maxWidth: "1200px",
               zIndex: "10px"
             }}
           />

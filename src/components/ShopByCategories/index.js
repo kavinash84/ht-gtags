@@ -60,10 +60,9 @@ const ShopByCategories = ({ shopByCategories }) => {
         justifyContent="space-around"
         style={{
           width: "80%",
-          margin: "auto",
+          margin: "auto 15%",
           display: "flex",
-          marginLeft: "10%",
-          marginRight: "10%"
+          maxWidth: "1220px"
         }}
       >
         {/* <CategoryBlock to="/furniture" src={shopByCat01} title="Furniture" />

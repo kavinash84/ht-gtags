@@ -21,12 +21,13 @@ const CategoryBlock = ({ src, to, title }) => (
     <Link to={to}>
       <div
         style={{
-          width: "22rem",
+          width: "25rem",
           display: "flex",
           height: "360px",
           flexDirection: "column",
           alignItems: "flex-start",
-          justifyContent: "flex-start"
+          justifyContent: "flex-start",
+          marginTop: "40px"
         }}
       >
         <Image
