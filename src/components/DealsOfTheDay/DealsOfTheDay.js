@@ -115,6 +115,7 @@ class DealsOfTheDayCards extends Component {
             <p className="DealsOfTheDay-Deals-off-the-day-button">SHOP NOW</p>
           </div>
         </div>
+
         {/* </Link> */}
       </div>
     );

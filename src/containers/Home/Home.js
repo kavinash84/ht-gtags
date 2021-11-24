@@ -193,7 +193,7 @@ export default class Home extends Component {
       shopTheRoom
     } = homepagecmsdata;
 
-    console.log("-----------", dealoftheday);
+    console.log("12222998888", dealoftheday);
     return (
       /* eslint-disable max-len */
       <Wrapper>
