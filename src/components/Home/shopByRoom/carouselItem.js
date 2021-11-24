@@ -21,7 +21,8 @@ class DBItem extends React.Component {
             // paddingRight: '0px',
             backgroundColor: "#F5F5F5",
             padding: "0px 0px 20px 0",
-            height: "600px"
+            height: "600px",
+            marginRight: "20px"
             // pointerEvents: ['/modular-wardrobe'].includes(data.url_key) ? 'none' : ''
           }}
         >
@@ -45,9 +46,13 @@ class DBItem extends React.Component {
                 }}
               />
             </div>
-            <Div className={styles.content4}>
+            <Div className={styles.content4} style={{ marginLeft: "-10px" }}>
               <Div
-                style={{ fontSize: "20px", textAlign: "left" }}
+                style={{
+                  fontSize: "20px",
+                  textAlign: "left",
+                  marginTop: "25px"
+                }}
                 className={styles.name}
               >
                 {data.title}

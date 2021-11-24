@@ -75,8 +75,8 @@ export default class ShopByRooms extends Component {
     return (
       <Div
         style={{
-          backgroundColor: "#FFFFFF",
-          padding: "30px 30px 10px",
+          backgroundColor: "#F3F5F7",
+          padding: "30px 30px 30px",
           textAlign: "center",
           marginTop: "40px"
         }}

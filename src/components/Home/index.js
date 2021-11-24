@@ -968,8 +968,7 @@ class HomeContainer extends Component {
                   width: "68%",
                   alignItems: "center",
                   marginLeft: "5%",
-                  marginRight: "5%",
-                  HoverMenuBox: "none"
+                  marginRight: "5%"
                 }}
               />
             </Link>
