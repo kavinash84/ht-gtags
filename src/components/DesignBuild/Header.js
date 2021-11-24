@@ -6,6 +6,7 @@ import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import { Link } from 'react-router-dom';
 
 const styles = require('./Designbuild.scss');
 
@@ -25,8 +26,12 @@ class Header extends React.Component {
           <Image src='https://www.hometown.in/media/cms/designbuild/hometownlogo.png' style={{width:'80%'}} />
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Text style={{ marginRight: '40px' }}>Plan Your Kitchen</Text>
-          <Text style={{ marginRight: '40px' }}>About Us</Text>
+        <Link to="plan-your-kitchen">
+          <Text style={{ marginRight: '40px', cursor: 'pointer' }}>Plan Your Kitchen</Text>
+          </Link>
+          <Link to="who-we-are">
+          <Text style={{ marginRight: '40px', cursor: 'pointer' }}>About Us</Text>
+          </Link>
           <Button
               onClick={this.props.handleModal}
             style={{
