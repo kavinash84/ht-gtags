@@ -21,7 +21,8 @@ import {
   validateFullname,
   checkSpecialChar
 } from 'utils/validation';
-import stores from '../../data/Stores.js';
+
+// import stores from '../../data/Stores.js';
 
 import moment from 'moment';
 
