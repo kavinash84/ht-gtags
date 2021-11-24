@@ -11,7 +11,10 @@ export default class DBCarousel extends Component {
     const { data, settings, component } = this.props;
     return (
       <BoxHtV1>
-        <div className="carousel-one">
+        <div
+          className="carousel-one"
+          style={{ width: "90%", marginLeft: "5%", marginRight: "5%" }}
+        >
           <SlickSlider
             settings={settings(data.length)}
             className="homeCarouselSlider"

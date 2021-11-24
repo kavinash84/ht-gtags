@@ -16,7 +16,7 @@ const ShopByCategories = ({ styleYourHome }) => (
         fontFamily="medium"
         style={{ textAlign: "center", color: "#323131" }}
         fontSize="30px"
-        mt="40px"
+        mt="90px"
         mb="10px"
       >
         {styleYourHome.mainTitle}
@@ -34,7 +34,7 @@ const ShopByCategories = ({ styleYourHome }) => (
       justifyContent="center"
       ml="auto"
       mr="auto"
-      mt="25px"
+      mt="0px"
       mb="25px"
       style={{ maxWidth: "1400px" }}
     >

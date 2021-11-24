@@ -48,7 +48,8 @@ const CategoryBlock = ({ src, to, title }) => (
             opacity: "90%",
             textAlign: "center",
             fontSize: "20px",
-            color: "black"
+            color: "black",
+            fontWeight: "bold"
           }}
         >
           {title}

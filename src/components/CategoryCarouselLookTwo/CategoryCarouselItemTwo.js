@@ -19,7 +19,7 @@ const CategoryItem = ({ src, title }) => {
       >
         <div
           style={{
-            width: "22rem",
+            width: "25rem",
             display: "flex",
             height: "360px",
             flexDirection: "column",

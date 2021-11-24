@@ -39,21 +39,13 @@ export default class ShopGiftByPrice extends Component {
       >
         <Div
           style={{
-            fontSize: "40px",
+            fontSize: "30px",
             fontWeight: "600",
-            marginBottom: "20px",
+
             color: "black"
           }}
         >
           {shopGiftByPrice.mainTitle}
-          <div
-            style={{
-              width: "30px",
-              borderTop: "2px solid #222222",
-              margin: "auto",
-              marginTop: "15px"
-            }}
-          />
         </Div>
 
         <Div

@@ -1,5 +1,5 @@
 .DealsOfTheDay-wrapper {
-  margin-top: 60px;
+  margin-top: 80px;
 }
 .DealsOfTheDay-card-wrapper {
   width: 100%;
@@ -13,7 +13,7 @@
   width: 22rem;
   background-color: #ffffff;
   display: flex;
-  height: 340px;
+  height: 360px;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;

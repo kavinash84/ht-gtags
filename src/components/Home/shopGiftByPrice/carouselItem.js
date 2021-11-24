@@ -17,7 +17,8 @@ const DBItem = ({ component, data }) => {
           // paddingRight: '0px',
           backgroundColor: "#ffffff",
           padding: "20px 0px",
-          height: "320px"
+          height: "320px",
+          marginTop: "25px"
 
           // pointerEvents: ['/modular-wardrobe'].includes(data.url_key) ? 'none' : ''
         }}
@@ -39,7 +40,7 @@ const DBItem = ({ component, data }) => {
           </div>
           <Div className={styles.content4}>
             <Div
-              style={{ fontSize: "15px", textAlign: "left" }}
+              style={{ fontSize: "16px", textAlign: "left", color: "#323F38" }}
               className={styles.name}
             >
               {data.title}
@@ -47,10 +48,12 @@ const DBItem = ({ component, data }) => {
 
             <Heading
               style={{ textAlign: "left" }}
-              fontSize="13px"
+              fontSize="12px"
               fontFamily="regular"
+              fontWeight="bold"
               color="black"
               mt="20px"
+              color="#323F38"
             >
               SHOP NOW
               <img

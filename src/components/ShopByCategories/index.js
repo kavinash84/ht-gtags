@@ -43,7 +43,7 @@ const ShopByCategories = ({ shopByCategories }) => {
         fontFamily="medium"
         style={{ textAlign: "center", color: "#323131" }}
         fontSize="30px"
-        mt="35px"
+        mt="45px"
         mb="10px"
       >
         {shopByCategories.mainTitle}
@@ -59,10 +59,12 @@ const ShopByCategories = ({ shopByCategories }) => {
       <RowHtV1
         justifyContent="space-around"
         style={{
-          width: "80%",
-          margin: "auto 15%",
+          width: "90%",
+          margin: "auto 11%",
           display: "flex",
-          maxWidth: "1220px"
+          justifyContent: "center",
+          alignItems: "flex-end",
+          maxWidth: "1330px"
         }}
       >
         {/* <CategoryBlock to="/furniture" src={shopByCat01} title="Furniture" />
