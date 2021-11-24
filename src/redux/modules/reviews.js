@@ -19,9 +19,12 @@ const GET_PRODUCTSFOR_REVIEW = "reviews/GET_PRODUCTSFOR_REVIEW";
 const GET_PRODUCTSFOR_REVIEW_SUCCESS = "reviews/GET_PRODUCTSFOR_REVIEW_SUCCESS";
 const GET_PRODUCTSFOR_REVIEW_FAIL = "reviews/GET_PRODUCTSFOR_REVIEW_FAIL";
 
+const TOGGLE_PAGE_NO = "reviews/TOGGLE_PAGE_NO";
+
 const initialState = {
   data: [],
   reviewsList: [],
+  pageNo: null,
   productsToBeReviewed: [],
   endOfList: false,
   adding: false,
@@ -48,6 +51,11 @@ export default function reducer(state = initialState, action = {}) {
         loading: false,
         loaded: false,
         error: action.error
+      };
+    case TOGGLE_PAGE_NO:
+      return {
+        ...state,
+        pageNo: action.result
       };
     case ADD_REVIEW:
       return {
@@ -86,9 +94,12 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: true,
-        reviewsList: [...state.reviewsList, ...action.result],
+        reviewsList:
+          state.pageNo === 1
+            ? action.result
+            : [...state.reviewsList, ...action.result],
         endOfList: Array.isArray(action.result)
-          ? action.result.length
+          ? !(action.result.length < 7)
             ? false
             : true
           : true
@@ -197,4 +208,9 @@ export const addCustomerReview = data => ({
       throw error;
     }
   }
+});
+
+export const togglePageNumber = result => ({
+  type: TOGGLE_PAGE_NO,
+  result
 });

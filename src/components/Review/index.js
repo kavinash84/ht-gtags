@@ -5,7 +5,7 @@ import Img from "hometown-components-dev/lib/ImageHtV1";
 import PropTypes from "prop-types";
 import Reviews from "./Reviews";
 import SortAndFilter from "./sortAndFilter";
-import { loadReviewsList } from "../../redux/modules/reviews";
+import { loadReviewsList, togglePageNumber } from "../../redux/modules/reviews";
 
 const arrowForward = require("../../../static/Review/ReviewBanner.png");
 
@@ -17,7 +17,7 @@ export default class ReviewComponentsContainer extends Component {
     super(props);
   }
   state = {
-    pageNo: 1,
+    pageNo: 0,
     pageSize: 8,
     filterValue: "",
     sortValue: "",
@@ -35,45 +35,49 @@ export default class ReviewComponentsContainer extends Component {
   }
   handlePagination = () => {
     const { pageNo, pageSize } = this.state;
+    const { dispatch } = this.context.store;
+    dispatch(togglePageNumber(null));
     this.setState({ pageNo: pageNo + 1 });
   };
   applySort = value => {
     const { dispatch } = this.context.store;
+    dispatch(togglePageNumber(1));
     const { pageNo, pageSize, filterValue2, sortValue } = this.state;
     let data = ``;
     if (value) {
       data = filterValue2
-        ? `pageNo=${1}&pageSize=${8}&filter=${filterValue2}&sort=${value}`
-        : `pageNo=${1}&pageSize=${8}&sort=${value}`;
+        ? `pageNo=${0}&pageSize=${8}&rating=${filterValue2}&sort=${value}`
+        : `pageNo=${0}&pageSize=${8}&sort=${value}`;
     } else {
       data = filterValue2
-        ? `pageNo=${1}&pageSize=${8}&filter=${filterValue2}`
-        : `pageNo=${1}&pageSize=${8}`;
+        ? `pageNo=${0}&pageSize=${8}&rating=${filterValue2}`
+        : `pageNo=${0}&pageSize=${8}`;
     }
     dispatch(loadReviewsList(data));
     this.setState({
       sortValue2: value,
-      pageNo: 1,
+      pageNo: 0,
       pageSize: 8
     });
   };
   applyFilter = value => {
     const { dispatch } = this.context.store;
+    dispatch(togglePageNumber(1));
     const { pageNo, pageSize, filterValue, sortValue2 } = this.state;
     let data = ``;
     if (value) {
       data = sortValue2
-        ? `pageNo=${1}&pageSize=${8}&sort=${sortValue2}&filter=${value}`
-        : `pageNo=${1}&pageSize=${8}&filter=${value}`;
+        ? `pageNo=${0}&pageSize=${8}&sort=${sortValue2}&rating=${value}`
+        : `pageNo=${0}&pageSize=${8}&rating=${value}`;
     } else {
       data = sortValue2
-        ? `pageNo=${1}&pageSize=${8}&sort=${sortValue2}`
-        : `pageNo=${1}&pageSize=${8}`;
+        ? `pageNo=${0}&pageSize=${8}&sort=${sortValue2}`
+        : `pageNo=${0}&pageSize=${8}`;
     }
     dispatch(loadReviewsList(data));
     this.setState({
       filterValue2: value,
-      pageNo: 1,
+      pageNo: 0,
       pageSize: 8
     });
   };
@@ -84,11 +88,11 @@ export default class ReviewComponentsContainer extends Component {
       const { pageNo, pageSize, filterValue2, sortValue2 } = this.state;
       let data = ``;
       if (sortValue2 && filterValue2) {
-        data = `pageNo=${pageNo}&pageSize=${pageSize}&filter=${filterValue2}&sort=${sortValue2}`;
+        data = `pageNo=${pageNo}&pageSize=${pageSize}&rating=${filterValue2}&sort=${sortValue2}`;
       } else if (sortValue2) {
         data = `pageNo=${pageNo}&pageSize=${pageSize}&sort=${sortValue2}`;
       } else if (filterValue2) {
-        data = `pageNo=${pageNo}&pageSize=${pageSize}&filter=${filterValue2}`;
+        data = `pageNo=${pageNo}&pageSize=${pageSize}&rating=${filterValue2}`;
       } else {
         data = `pageNo=${pageNo}&pageSize=${pageSize}`;
       }

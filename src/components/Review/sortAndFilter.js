@@ -118,9 +118,9 @@ export default class SortAndFilter extends Component {
               Sort By
             </option>
             {[
-              { name: "Newest First", id: "newestFirst" },
-              { name: "Oldest First", id: "oldestFirst" },
-              { name: "Popular", id: "popular" }
+              { name: "Newest First", id: "Newest" },
+              { name: "Oldest First", id: "Oldest" },
+              { name: "Popular", id: "Popular" }
             ].map(val => (
               <option key={val} value={val.id}>
                 {val.name}
