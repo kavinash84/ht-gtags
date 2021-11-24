@@ -11,9 +11,9 @@ import { connect } from 'react-redux';
 const logo = require('../../static/designBuildLogo.png');
 const styles = require('./Designbuild.scss');
 
-@connect(({ designBuild }) => ({
-  designBuild,
-  whyChooseUs: designBuild.data.items.text.whyChooseUs
+@connect(({ designbuild }) => ({
+  designbuild,
+  whyChooseUs: designbuild.data.items.text.whyChooseUs
 }))
 
 class WhyChose extends React.Component {

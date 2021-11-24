@@ -20,9 +20,9 @@ const adjustSlides = length => ({
   )
 });
 
-@connect(({ designBuild }) => ({
-  designBuild,
-  servicesOffered: designBuild.data.items.text.servicesOffered
+@connect(({ designbuild }) => ({
+  designbuild,
+  servicesOffered: designbuild.data.items.text.servicesOffered
 }))
 export default class ServicesOffer extends Component {
   render() {

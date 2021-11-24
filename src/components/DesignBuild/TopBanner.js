@@ -7,12 +7,12 @@ import Text from 'hometown-components-dev/lib/TextHtV1';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import { connect } from 'react-redux';
 
-const logo = require('../../static/designBuildLogo.png');
+// const logo = require('../../static/designBuildLogo.svg');
 const styles = require('./Designbuild.scss');
 
-@connect(({ designBuild }) => ({
-  designBuild,
-  topBanner: designBuild.data.items.text.topBanner
+@connect(({ designbuild }) => ({
+  designbuild,
+  topBanner: designbuild.data.items.text.topBanner
 }))
 
 class TopBanner extends React.Component {

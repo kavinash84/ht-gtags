@@ -20,9 +20,9 @@ const adjustSlides = length => ({
   )
 });
 
-@connect(({ designBuild }) => ({
-  designBuild,
-  shopFurniture: designBuild.data.items.text.shopFurniture
+@connect(({ designbuild }) => ({
+  designbuild,
+  shopFurniture: designbuild.data.items.text.shopFurniture
 }))
 
 export default class ShopFurniture extends Component {

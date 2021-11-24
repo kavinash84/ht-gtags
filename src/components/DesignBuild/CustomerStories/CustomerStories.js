@@ -20,9 +20,9 @@ const adjustSlides = length => ({
   )
 });
 
-@connect(({ designBuild }) => ({
-  designBuild,
-  customerStories: designBuild.data.items.text.customerStories
+@connect(({ designbuild }) => ({
+  designbuild,
+  customerStories: designbuild.data.items.text.customerStories
 }))
 
 export default class CustomerStories extends Component {
