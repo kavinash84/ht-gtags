@@ -1,6 +1,6 @@
 import HomeTownLoader from 'containers/Loader';
 import { provideHooks } from 'redial';
-import { loadStores, isLoaded as isStoresLoaded } from 'redux/modules/stores';
+// import { loadStores, isLoaded as isStoresLoaded } from 'redux/modules/stores';
 import { loadDesignBuildData } from 'redux/modules/designbuild';
 
 const hooks = {
@@ -9,12 +9,12 @@ const hooks = {
     // if (!gotData(getState(), 'modularkitchen')) {
     //   await dispatch(getData(`${STATIC_BLOCK_API}/modular_kitchen_react`, 'modularkitchen'));
     // }
-  },
-  defer: ({ store: { dispatch, getState } }) => {
-    if (!isStoresLoaded(getState())) {
-      dispatch(loadStores()).catch(error => console.log(error));
-    }
   }
+  // defer: ({ store: { dispatch, getState } }) => {
+  //   if (!isStoresLoaded(getState())) {
+  //     dispatch(loadStores()).catch(error => console.log(error));
+  //   }
+  // }
 };
 
 const DesignBuild = HomeTownLoader({
