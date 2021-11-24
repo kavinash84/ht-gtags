@@ -22,12 +22,12 @@ const adjustSlides = length => ({
 
 @connect(({ designbuild }) => ({
   designbuild,
-  shopFurniture: designbuild.data.items.text.shopFurniture
+  blogs: designbuild.data.items.text.blogs
 }))
 
 export default class Blogs extends Component {
   render() {
-    const { shopFurniture } = this.props;
+    const { blogs } = this.props;
     return (
       <Div
         style={{
@@ -45,7 +45,7 @@ export default class Blogs extends Component {
             color: "black"
           }}
         >
-          {shopFurniture.title}
+          {blogs.title}
           <div
             style={{
               width: '30px',
@@ -57,11 +57,11 @@ export default class Blogs extends Component {
           />
         </Div>
         <Div style={{ fontSize: "20px", color: "#888888", marginBottom: "40px" }}>
-          {shopFurniture.description}
+          {blogs.description}
         </Div>
         <Div style={{ paddingBottom: "", width: '86%', marginLeft: "6.5%"}}>
           <DBCarousel
-            data={shopFurniture.values}
+            data={blogs.values}
             settings={adjustSlides}
             component={3}
           />
