@@ -32,11 +32,11 @@ const ShopByCategories = ({ styleYourHome }) => (
     />
     <RowHtV1
       justifyContent="center"
-      ml="auto"
-      mr="auto"
+      ml="5%"
+      mr="5%"
       mt="0px"
       mb="25px"
-      style={{ maxWidth: "1400px" }}
+      width="90%"
     >
       {styleYourHome.data.map((val, index) => (
         <CategoryBlock
