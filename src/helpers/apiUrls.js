@@ -107,3 +107,6 @@ export const LANDING_CATEGORY = 'tesla/static/landing/skucategories';
 /* Feedback */
 export const GET_FEEDBACK_FORM = 'tesla/orders/sfdcorder-details';
 export const POST_FEEDBACK = 'tesla/static/landing/multi';
+
+/* design and build */
+export const DESIGN_BUILD = 'tesla/static/design_and_build_v1_desktop';
