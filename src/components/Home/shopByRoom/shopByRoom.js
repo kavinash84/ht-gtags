@@ -104,13 +104,13 @@ export default class ShopByRooms extends Component {
         </Div>
         <Div
           style={{
-            width: "70%",
+            width: "80%",
             display: "flex",
             flexDirection: "row",
             flexWrap: "wrap",
             justifyContent: "space-evenly",
             alignItems: "center",
-            margin: "20px 15% 0 "
+            margin: "20px 10% 0 "
           }}
         >
           <DBCarousel data={shopByRoom} settings={adjustSlides} component={3} />

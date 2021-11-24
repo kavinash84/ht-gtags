@@ -54,7 +54,9 @@ class HomeContainer extends Component {
           style={{
             display: "flex",
             justifyContent: "center",
-            alignContent: "center"
+            alignContent: "center",
+            width: "80%",
+            margin: "0 10%"
           }}
         >
           <Image
@@ -62,9 +64,6 @@ class HomeContainer extends Component {
             mb="30px"
             src={secondbanner.image}
             style={{
-              width: "82%",
-              alignItems: "center",
-              maxWidth: "1175px",
               zIndex: "10px"
             }}
           />
@@ -177,9 +176,9 @@ class HomeContainer extends Component {
         {/* Shop homeware */}
         <div
           style={{
-            marginBottom: "20px",
-            width: "100%",
+            width: "80%",
             display: "flex",
+            margin: "0 10% 20px",
             flexDirection: "column",
             justifyContent: "center",
             alignContent: "center"
@@ -188,16 +187,13 @@ class HomeContainer extends Component {
           {homePageBanners.map((val, index) => (
             <div
               style={{
-                maxWidth: "1200px",
-                marginLeft: "16.5%",
-                marginRight: "15%",
                 marginTop: "30px",
                 marginBottom: "10px"
               }}
             >
               <Link to={val.url_key}>
                 <Image
-                  style={{ width: "97%" }}
+                  // style={{ width: "97%" }}
                   src={val.image}
                   alt="IndoorFountain"
                 />
@@ -235,9 +231,11 @@ class HomeContainer extends Component {
               fontSize: "15px",
               color: "gray",
               display: "flex",
+              width: "60%",
+              margin: "0 20%",
               justifyContent: "center",
               alignContent: "center",
-              margin: "0 460px",
+
               textAlign: "center"
             }}
           >
@@ -269,9 +267,9 @@ class HomeContainer extends Component {
             <div
               style={{
                 display: "flex",
-                maxWidth: "1260",
-                marginLeft: "13%",
-                marginRight: "15%",
+                width: "85%",
+                marginLeft: "7.5%",
+                marginRight: "7.5%",
                 justifyContent: "space-evenly",
                 alignContent: "center"
               }}
@@ -354,13 +352,13 @@ class HomeContainer extends Component {
         <div
           style={{
             display: "flex",
-            width: "67%",
+            width: "80%",
             flexDirection: "row",
             justifyContent: "center",
             alignContent: "center",
             marginTop: "20px",
             marginBottom: "30px",
-            margin: "3% 16%"
+            margin: "3% 10%"
           }}
         >
           <div style={{ width: "" }}>
@@ -550,9 +548,9 @@ class HomeContainer extends Component {
               <div
                 style={{
                   display: "flex",
-                  maxWidth: "1260px",
-                  marginLeft: "14%",
-                  marginRight: "15%",
+                  width: "80%",
+                  marginLeft: "10%",
+                  marginRight: "10%",
                   justifyContent: "space-evenly",
                   alignContent: "center",
                   position: "relative"
@@ -587,9 +585,9 @@ class HomeContainer extends Component {
             mt="70px"
             fontSize="30px"
             style={{
-              width: "100%",
+              width: "70%",
               textAlign: "left",
-              marginLeft: "16%",
+              marginLeft: "12.5%",
               color: "#222222",
               fontFamily: "medium"
             }}
@@ -601,10 +599,11 @@ class HomeContainer extends Component {
               mt="10px"
               src={trendsWeLove1.image1}
               style={{
-                width: "67%",
-                maxWidth: "1260px",
+                width: "75%",
+
                 alignItems: "center",
-                marginLeft: "16%"
+                marginLeft: "12.5%",
+                marginRight: "12.5%"
               }}
             />
           </Link>
@@ -612,30 +611,33 @@ class HomeContainer extends Component {
             mt="60px"
             src={trendsWeLove1.image2}
             style={{
-              width: "67%",
-              maxWidth: "1260px",
+              width: "75%",
+
               alignItems: "center",
-              marginLeft: "16%"
+              marginLeft: "12.5%",
+              marginRight: "12.5%"
             }}
           />
           <Image
             mt="60px"
             src={trendsWeLove1.image3}
             style={{
-              width: "67%",
-              maxWidth: "1260px",
+              width: "75%",
+
               alignItems: "center",
-              marginLeft: "16%"
+              marginLeft: "12.5%",
+              marginRight: "12.5%"
             }}
           />
           <Image
             mt="60px"
             src={trendsWeLove1.image4}
             style={{
-              width: "67%",
-              maxWidth: "1260px",
+              width: "75%",
+
               alignItems: "center",
-              marginLeft: "16%"
+              marginLeft: "12.5%",
+              marginRight: "12.5%"
             }}
           />
         </div>

@@ -51,8 +51,8 @@ export default class ShopGiftByPrice extends Component {
         <Div
           style={{
             paddingBottom: "",
-            width: "80%",
-            marginLeft: "10%"
+            width: "90%",
+            marginLeft: "5%"
           }}
         >
           <DBCarousel

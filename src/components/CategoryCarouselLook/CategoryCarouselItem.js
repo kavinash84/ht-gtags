@@ -22,7 +22,7 @@ class CategoryItem extends React.Component {
         >
           <div
             style={{
-              width: "25rem",
+              width: "20rem",
               display: "flex",
               height: "360px",
               flexDirection: "column",
