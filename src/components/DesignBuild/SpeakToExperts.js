@@ -16,7 +16,7 @@ class SpeakToExperts extends React.Component {
             <Box mt="70px">
               <Flex >
                   <Image src="https://www.hometown.in/media/cms/D/Top-Image-Living1.jpg" style={{width: '50%', height: '700px'}}/>
-                  <Box style={{width:'50%', height:'700px', backgroundColor: '#F5EEEEB8'}}>
+                  <Box style={{width:'50%', height:'700px', backgroundColor: '#FBF2ED'}}>
                     <ModularKitchen />
                   </Box>
               </Flex>

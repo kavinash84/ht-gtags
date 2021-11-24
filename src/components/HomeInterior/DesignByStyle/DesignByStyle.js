@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import Div from "hometown-components-dev/lib/BoxHtV1";
 import { connect } from "react-redux";
-import DBCarousel from "./DBCourosel";
+import DBCarousel from "./DBCarousel";
 
-const styles = require("../Designbuild.scss");
+const styles = require("../HomeInterior.scss");
 
 const adjustSlides = length => ({
-  slidesToShow:4,
+  slidesToShow: 2,
   slidesToScroll: 1,
   infinite: false,
   autoplay: false,
@@ -20,19 +20,18 @@ const adjustSlides = length => ({
   )
 });
 
-@connect(({ designBuild }) => ({
-  designBuild,
-  shopFurniture: designBuild.data.items.text.shopFurniture
+@connect(({ homeinterior }) => ({
+  homeinterior,
+  dbAdvantage: homeinterior.data.items.text.dbServices
 }))
-
-export default class Blogs extends Component {
+export default class DesignByStyle extends Component {
   render() {
-    const { shopFurniture } = this.props;
+    const { dbAdvantage } = this.props;
     return (
       <Div
         style={{
-          backgroundColor: "#FFFFFF",
-          padding: "30px 30px 10px",
+          backgroundColor: "#F3F5F7",
+          padding: "30px 30px 20px",
           textAlign: "center",
           marginTop: "40px"
         }}
@@ -45,23 +44,22 @@ export default class Blogs extends Component {
             color: "black"
           }}
         >
-          {shopFurniture.title}
+          {dbAdvantage.title}
           <div
             style={{
               width: '30px',
               borderTop: '2px solid #222222',
-              
               margin: 'auto',
               marginTop: '15px'
             }}
           />
         </Div>
         <Div style={{ fontSize: "20px", color: "#888888", marginBottom: "40px" }}>
-          {shopFurniture.description}
+          {dbAdvantage.subtitle}
         </Div>
-        <Div style={{ paddingBottom: "", width: '86%', marginLeft: "6.5%"}}>
+        <Div style={{  paddingBottom: "", width: '80%', marginLeft: "10%"}}>
           <DBCarousel
-            data={shopFurniture.values}
+            data={dbAdvantage.values}
             settings={adjustSlides}
             component={3}
           />

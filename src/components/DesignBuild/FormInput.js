@@ -1,16 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Input from 'hometown-components-dev/lib/InputFieldLabelHtV1';
-import InputField from 'hometown-components-dev/lib/InputFieldHtV1';
-import TextArea from 'hometown-components-dev/lib/TextAreaHtV1';
-// import Text from 'hometown-components-dev/lib/TextHtV1';
-import {  FeedBackMessage } from 'hometown-components-dev/lib/LabelHtV1';
-import Box from 'hometown-components-dev/lib/BoxHtV1';
-import Label from './Label';
-import Text from 'hometown-components-dev/lib/TextHtV1';
+import React from "react";
+import PropTypes from "prop-types";
 
 const FormInput = ({
- label, name, type, feedBackMessage, feedBackError, ...rest
+  label,
+  name,
+  type,
+  feedBackMessage,
+  feedBackError,
+  ...rest
 }) => {
   const inputProps = {
     type,
@@ -20,43 +17,38 @@ const FormInput = ({
     ...rest
   };
   return (
-    // <Box mb="0.625rem">
-    <Box
-    // as={type === 'textarea' ? 'textarea' : 'input'}
-    // type={type}
-    // variant="input"
-    width={1}
-    // {...props}
-    sx={{
-      '&:focus': {
-        outline: 'none'
-      },
-      // ...sx
-    }}
-  >
-      {/* {!(type === 'hidden') && (
-         <Label fontSize="0.875em" mb="0.625rem">
+    <div style={{ width: "60%" , marginLeft:"20%"}}>
+      {!(type === "hidden") && (
+        <div m style={{ fontSize: "0.875em", marginBottom: "0.625rem" }}>
           {label}
-        </Label>
-      )} */}
-      {/* <Text variant="inputFieldLabel" mb={5} /> */}
-      
-      {(type === 'text' || type === 'password' || type === 'email' || type === 'number' || type === 'hidden') && (
+        </div>
+      )}
+      {(type === "text" ||
+        type === "password" ||
+        type === "email" ||
+        type === "number" ||
+        type === "hidden") && (
         <input
-          // {...inputProps}
+          {...inputProps}
           name={name}
           style={{
-            height: '50px',
-            backgroundColor: 'white',
-            borderRadius: '5px',
-            borderColor: 'rgb(227, 227, 227)'
+            height: "50px",
+            backgroundColor: "white",
+            borderRadius: "5px",
+            borderColor: "rgb(227, 227, 227)",
+            width: "100%",
+            border: "1px solid #E3E3E3",
+            padding: "5px 10px"
           }}
         />
       )}
-      {/* {type === 'textarea' && <TextArea {...inputProps} name={name} />} */}
-      {feedBackError  && <Text type="error">{feedBackMessage}</Text>}
-      {console.log (feedBackMessage, 'feedBackMessage')}
-    </Box>
+      {type === "textarea" && <textarea {...inputProps} name={name} />}
+      {feedBackError && !(type === "hidden") && (
+        <div style={{ color: "#dc3545", padding: "3px", fontSize: "14px" }}>
+          {feedBackMessage}
+        </div>
+      )}
+    </div>
   );
 };
 
@@ -75,13 +67,13 @@ FormInput.propTypes = {
 };
 
 FormInput.defaultProps = {
-  value: '',
-  feedBackMessage: '',
+  value: "",
+  feedBackMessage: "",
   feedBackError: false,
   required: false,
   name: null,
   rows: 3,
-  type: 'text'
+  type: "text"
 };
 
 export default FormInput;

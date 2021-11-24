@@ -46,6 +46,8 @@ import offer from './modules/offer';
 import listingbanners from './modules/listingbanners';
 import feedback from './modules/feedback';
 import designBuild from './modules/designbuild';
+import homeinterior from './modules/homeinterior';
+import modularwardrobe from './modules/modularwardrobe';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -110,6 +112,8 @@ export default function createReducers(asyncReducers) {
     feedback,
     listingbanners,
     designBuild,
+    homeinterior,
+    modularwardrobe,
     ...asyncReducers
   };
 }

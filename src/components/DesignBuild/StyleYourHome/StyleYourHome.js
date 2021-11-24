@@ -58,7 +58,7 @@ export default class StyleYourHome extends Component {
         <Div style={{ fontSize: "20px", color: "#888888", marginBottom: "40px" }}>
           {styleHome.description}
         </Div>
-        <Div style={{ paddingBottom: "", width: '80%', marginLeft: "10%"}}>
+        <Div style={{ paddingBottom: "", width: '86%', marginLeft: "6.5%"}}>
           <DBCarousel
             data={styleHome.values}
             settings={adjustSlides}

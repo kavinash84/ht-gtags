@@ -19,6 +19,7 @@ import Section from 'hometown-components-dev/lib/SectionHtV1';
 import Div from 'hometown-components-dev/lib/BoxHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import ModularKitchenFormModal from './ModularKitchenFormModal';
+
 class DesignBuildContainer extends React.Component {
 
   state = {
@@ -53,11 +54,11 @@ class DesignBuildContainer extends React.Component {
     const { showScript } = this.state;
     return (
       <div>
-        <Header handleModal={this.handleModal}/>
-        <TopBanner  handleModal={this.handleModal} />
+        <Header/>
+        <TopBanner  />
         <WhyChose />
         <DandBAdvantage />
-        <StepsToYourHome handleModal={this.handleModal}/>
+        <StepsToYourHome/>
         <DesignServices />
         <SpeakToExperts />
         <RoomsWeTransform />
@@ -65,7 +66,7 @@ class DesignBuildContainer extends React.Component {
         <CustomerStories />
         <ShopFurniture />
         <StyleYourHome />
-        <BeginJourney handleModal={this.handleModal}/>
+        <BeginJourney/>
         <Blogs />
         <QueryDropDownContainer />
 

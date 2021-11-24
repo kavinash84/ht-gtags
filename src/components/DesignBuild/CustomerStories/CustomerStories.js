@@ -58,7 +58,7 @@ export default class CustomerStories extends Component {
         <Div style={{ fontSize: "20px", color: "#888888", marginBottom: "40px" }}>
           {customerStories.description}
         </Div>
-        <Div style={{ paddingBottom: "", width: '80%', marginLeft: "10%"}}>
+        <Div style={{ paddingBottom: "", width: '86%', marginLeft: "6.5%"}}>
           <DBCarousel
             data={customerStories.values}
             settings={adjustSlides}

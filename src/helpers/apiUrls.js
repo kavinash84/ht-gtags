@@ -110,3 +110,9 @@ export const POST_FEEDBACK = 'tesla/static/landing/multi';
 
 /* design and build */
 export const DESIGN_BUILD = 'tesla/static/design_and_build_v1_desktop';
+
+/* home interior */
+export const HOME_INTERIOR = 'tesla/static/home_interior_desktop_v1';
+
+/* modular wardrobe */
+export const MODULAR_WARDROBE = 'tesla/static/modular_wardrobe_desktop';

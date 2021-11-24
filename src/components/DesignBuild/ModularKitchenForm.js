@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ResponsiveModal from 'components/Modal';
+import FormInput from './FormInput';
 import Row from 'hometown-components-dev/lib/RowHtV1';
 import Div from 'hometown-components-dev/lib/BoxHtV1';
 import Flex from 'hometown-components-dev/lib/FlexHtV1';
@@ -397,105 +398,65 @@ export default class ModularKitchen extends Component {
     } = this.state;
     return (
       <div>
-        <Div mt="20px">
-            <Div pr="0.625rem" pl="0.625rem">
-              <Heading mb="20px" mt="80px" color="#000000" fontSize="30px" fontFamily="medium" style={{textAlign: "center", fontWeight: "bold", lineHeight:'40px'}}>
+        <Div style={{ backgroundColor: '#FBF2ED' }}>
+          
+            <Div>
+              <Heading  color="#000000" fontSize="24px" fontFamily="medium" style={{textAlign: 'center', lineHeight: '30px', marginTop: '50px', marginBottom:'30px'}}>
                 Speak To Our Interior <br /> Experts
               </Heading>
             </Div>
+          
           <Div>
             <form onSubmit={this.onSubmitForm}>
-              
+             
                 <Div>
-                  <input
+                  <FormInput
                     label=""
                     type="text"
                     placeholder="Name"
                     onChange={this.onChangeName}
                     value={name}
-                    // feedBackError={nameError}
-                    // feedBackMessage={nameErrorMessage}
-                    style={{
-                    height: '50px',
-                    width: '60%',
-                    paddingLeft:'10px',
-                    marginLeft: '20%',
-                    backgroundColor: 'white',
-                    borderRadius: '5px',
-                    border:'none',
-                    outline:'none',
-                    marginBottom:'15px',
-                    marginTop: '15px'
-          }}
+                    feedBackError={nameError}
+                    feedBackMessage={nameErrorMessage}
+                   
                   />
                 </Div>
-                <Div >
-                  <input
+                <Div>
+                  <FormInput
                     label=""
                     type="text"
                     placeholder="Mobile No."
                     onChange={this.onChangePhone}
                     value={phone}
-                    // feedBackError={phoneError}
-                    // feedBackMessage={phoneErrorMessage}
-                    style={{
-                    height: '50px',
-                    width: '60%',
-                    paddingLeft:'10px',
-                    marginLeft: '20%',
-                    backgroundColor: 'white',
-                    borderRadius: '5px',
-                    border:'none',
-                    outline:'none',
-                    marginBottom:'15px'
-          }}
+                    feedBackError={phoneError}
+                    feedBackMessage={phoneErrorMessage}
                   />
                 </Div>
                 <Div>
-                  <input
+                  <FormInput
                     label=""
                     type="email"
                     placeholder="Email ID"
                     onChange={this.onChangeEmail}
                     value={email}
-                    // feedBackError={emailError}
-                    // feedBackMessage={emailErrorMessage}
-                    style={{
-                    height: '50px',
-                    width: '60%',
-                    paddingLeft:'10px',
-                    marginLeft: '20%',
-                    backgroundColor: 'white',
-                    borderRadius: '5px',
-                    border:'none',
-                    outline:'none',
-                    marginBottom:'15px'
-          }}
+                    feedBackError={emailError}
+                    feedBackMessage={emailErrorMessage}
                   />
                 </Div>
-                <Div >
-                  <input
+                <Div>
+                  <FormInput
                     label=""
                     type="text"
                     placeholder="City"
                     onChange={this.onChangeCity}
                     value={city}
-                    // feedBackError={cityError}
-                    // feedBackMessage={cityErrorMessage}
-                    style={{
-                    height: '50px',
-                    width: '60%',
-                    paddingLeft:'10px',
-                    marginLeft: '20%',
-                    backgroundColor: 'white',
-                    borderRadius: '5px',
-                    border:'none',
-                    outline:'none',
-                    marginBottom:'15px'
-          }}
+                    feedBackError={cityError}
+                    feedBackMessage={cityErrorMessage}
                   />
                 </Div>
-                <Div >
+     
+         
+                <Div>
                   <div className="select-wrapper">
                     <div
                       style={{
@@ -503,21 +464,22 @@ export default class ModularKitchen extends Component {
                         marginLeft: '20%',
                         borderRadius: '5px',
                         height: '50px',
-                        borderColor: '#E3E3E3',
+                        border: '1px solid #E3E3E3',
                         padding: '0px 8px',
                         fontSize: '14px',
                         color: '#7E7575',
-                        marginBottom: '10px',
+                        marginBottom:'10px',
+                        marginTop: '0.625rem',
                         outline: 'none',
                         backgroundColor: 'white'
                       }}
                     >
                       <select
                         onChange={this.onChangeState}
-                        placeholder="State*"
+                        placeholder="State"
                         style={{
                           width: '100%',
-                          height: '50px',
+                          height: '47px',
                           border: 'none',
                           fontSize: '14px',
                           color: '#7E7575',
@@ -527,7 +489,7 @@ export default class ModularKitchen extends Component {
                         }}
                       >
                         <option value="State/Region" disabled selected>
-                          State/Region*
+                          State/Region
                         </option>
                         {state.map(val => (
                           <option key={val.id} value={val.option}>
@@ -538,7 +500,7 @@ export default class ModularKitchen extends Component {
                     </div>
                   </div>
                   {stateError ? (
-                    <Text color="#dc3545" fontSize="13px" mt="0px">
+                    <Text color="#dc3545" fontSize="14px" mt="0px" style={{marginLeft:'20%'}}>
                       {stateErrorMessage}
                     </Text>
                   ) : null}
@@ -627,16 +589,17 @@ export default class ModularKitchen extends Component {
                 </Div> */}
                 <Div col="12" style={{ display: 'flex' }} pr="0.625rem" pl="0.625rem">
                   <Button
-                    mt="10px"
+                    mt="20px"
                     style={{
                       border: '1px solid #F47020',
                       color: '#F47020',
                       backgroundColor: '#FFFFFF',
-                      borderRadius: '5px'
+                      borderRadius: '5px',
+                      textTransform:'none'
                     }}
                     fontFamily="regular"
                     height="50px"
-                    m="40px auto 0px"
+                    m="40px auto 0"
                     pl="5%"
                     pr="5%"
                   >

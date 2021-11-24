@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Div from "hometown-components-dev/lib/BoxHtV1";
 import { connect } from "react-redux";
-import DBCarousel from "./DBCourosel";
+import DBCarousel from "./DBCarousel";
 
-const styles = require("../Designbuild.scss");
+const styles = require("../HomeInterior.scss");
 
 const adjustSlides = length => ({
   slidesToShow:4,
@@ -20,12 +20,12 @@ const adjustSlides = length => ({
   )
 });
 
-@connect(({ designBuild }) => ({
-  designBuild,
-  shopFurniture: designBuild.data.items.text.shopFurniture
+@connect(({ homeinterior }) => ({
+  homeinterior,
+  shopFurniture: homeinterior.data.items.text.shopFurniture
 }))
 
-export default class Blogs extends Component {
+export default class ShopNow extends Component {
   render() {
     const { shopFurniture } = this.props;
     return (
@@ -50,7 +50,6 @@ export default class Blogs extends Component {
             style={{
               width: '30px',
               borderTop: '2px solid #222222',
-              
               margin: 'auto',
               marginTop: '15px'
             }}
@@ -59,7 +58,7 @@ export default class Blogs extends Component {
         <Div style={{ fontSize: "20px", color: "#888888", marginBottom: "40px" }}>
           {shopFurniture.description}
         </Div>
-        <Div style={{ paddingBottom: "", width: '86%', marginLeft: "6.5%"}}>
+        <Div style={{ paddingBottom: "", width: '80%', marginLeft: "10%"}}>
           <DBCarousel
             data={shopFurniture.values}
             settings={adjustSlides}
