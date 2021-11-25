@@ -31,6 +31,7 @@ const styles = require("./writeReview.scss");
 
 @connect(({ reviews, stores }) => ({
   productsToBeReviewed: reviews.productsToBeReviewed,
+  productsLoader: reviews.productsLoader,
   stores: stores.data.items.text,
   loading: reviews.loading
 }))
@@ -51,7 +52,7 @@ export default class WriteReview extends Component {
     city: "",
     cityError: "",
     cityErrorMsg: "City field is Required",
-    offline: "",
+    offline: "offline",
     offlineError: "",
     offlineErrorMsg: "Offline field is Required",
     store: "",
@@ -201,8 +202,8 @@ export default class WriteReview extends Component {
       store,
       addImg
     } = this.state;
-    const nameError =
-      isEmpty(name) || validateFullname(name) || checkSpecialChar(name);
+    const nameError = isEmpty(name) || checkSpecialChar(name);
+    // || validateFullname(name)
     const mobileError = !validateMobile(mobile);
     const emailError = !validateEmail(email);
     const descriptionError = isEmpty(description);
@@ -210,7 +211,7 @@ export default class WriteReview extends Component {
     const offlineError = isEmpty(offline);
     const productError = isEmpty(product);
     const storeError = isEmpty(store);
-    const addImgError = isEmpty(addImg);
+    const addImgError = addImg === "" ? true : false;
 
     if (
       nameError ||
@@ -236,8 +237,18 @@ export default class WriteReview extends Component {
       });
     } else {
       const { dispatch } = this.context.store;
-      dispatch(addCustomerReview(this.state));
-      console.log(this.state);
+      console.log("noerror", this.state.addImg[0], this.state.addImg.length);
+      let formdata = new FormData();
+      formdata.append("name", this.state.name);
+      formdata.append("rating", this.state.ratings);
+      formdata.append("review", this.state.description);
+      formdata.append("email", this.state.email);
+      formdata.append("mobile", this.state.mobile);
+      formdata.append("city", this.state.city);
+      formdata.append("storeType", this.state.offline);
+      formdata.append("storeName", this.state.store);
+      formdata.append("image", this.state.addImg[0]);
+      dispatch(addCustomerReview(this.state.product, formdata));
     }
   };
   render() {
@@ -271,7 +282,12 @@ export default class WriteReview extends Component {
       addImgErrorMsg,
       ratings
     } = this.state;
-    const { loading, stores } = this.props;
+    const {
+      loading,
+      stores,
+      productsLoader,
+      productsToBeReviewed
+    } = this.props;
     console.log(stores, "stores");
     return (
       <Section p="0" mb="0" style={{ padding: "0% 7%" }}>
@@ -323,20 +339,22 @@ export default class WriteReview extends Component {
                     <div
                       className={styles.getDetailsBtn}
                       style={{
-                        height: mobileError ? "59%" : "80%",
+                        height: mobileError ? "50%" : "81%",
                         marginBottom: mobileError ? "20px" : "",
                         marginTop: "10px"
                       }}
                       onClick={() => {
-                        const mobileValError = !validateMobile(mobile);
-                        if (!(mobileValError || loading)) {
-                          this.handleGetDetails();
-                        } else {
-                          this.setState({ mobileError: true });
+                        if (!productsLoader) {
+                          const mobileValError = !validateMobile(mobile);
+                          if (!(mobileValError || loading)) {
+                            this.handleGetDetails();
+                          } else {
+                            this.setState({ mobileError: true });
+                          }
                         }
                       }}
                     >
-                      Get Details
+                      {productsLoader ? "Loading...!" : "Get Details"}
                     </div>
                   </Div>
                 </Row>
@@ -400,11 +418,12 @@ export default class WriteReview extends Component {
                             outline: "none",
                             backgroundColor: "white"
                           }}
+                          value={this.state.offline}
                         >
-                          <option value="Offline" selected>
+                          <option value="offline" selected>
                             Offline
                           </option>
-                          <option value="Online">Online</option>
+                          <option value="online">Online</option>
                         </select>
                       </div>
                     </div>
@@ -496,6 +515,14 @@ export default class WriteReview extends Component {
                           <option value="Select Product" disabled selected>
                             Select Product
                           </option>
+                          {productsToBeReviewed.map(val => (
+                            <option
+                              key={val.article_code}
+                              value={val.article_code}
+                            >
+                              {val.product_name}
+                            </option>
+                          ))}
                         </select>
                       </div>
                     </div>
@@ -532,7 +559,7 @@ export default class WriteReview extends Component {
                           border: "1px solid #999999",
                           borderRadius: "4px",
                           position: "absolute",
-                          top: "29%",
+                          top: "37%",
                           right: "4%"
                         }}
                       />

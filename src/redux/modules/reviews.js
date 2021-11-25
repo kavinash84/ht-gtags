@@ -26,6 +26,7 @@ const initialState = {
   reviewsList: [],
   pageNo: null,
   productsToBeReviewed: [],
+
   endOfList: false,
   adding: false,
   added: false,
@@ -132,20 +133,22 @@ export default function reducer(state = initialState, action = {}) {
     case GET_PRODUCTSFOR_REVIEW:
       return {
         ...state,
-        loading: true
+        productsLoader: true
       };
     case GET_PRODUCTSFOR_REVIEW_SUCCESS:
       return {
         ...state,
-        loading: false,
-        loaded: true,
+        productsLoader: false,
         productsToBeReviewed: action.result
       };
     case GET_PRODUCTSFOR_REVIEW_FAIL:
       return {
         ...state,
-        loading: false,
-        loaded: false,
+        productsLoader: false,
+        // productsToBeReviewed:
+        //   Array.isArray(action.result) && action.result.length
+        //     ? action.result
+        //     : [],
         error: action.error
       };
     default:
@@ -169,7 +172,7 @@ export const loadProductsListForReview = data => ({
     GET_PRODUCTSFOR_REVIEW_SUCCESS,
     GET_PRODUCTSFOR_REVIEW_FAIL
   ],
-  promise: ({ client }) => client.get(`tesla/ratings/reviews?${data}`)
+  promise: ({ client }) => client.get(`tesla/orders/orders2?mobile=${data}`)
 });
 
 export const toggleReview = () => ({
@@ -193,7 +196,7 @@ export const addReview = (sku, data) => ({
   }
 });
 
-export const addCustomerReview = data => ({
+export const addCustomerReview = (sku, data) => ({
   types: [
     ADD_CUSTOMER_REVIEW,
     ADD_CUSTOMER_REVIEW_SUCCESS,
@@ -202,7 +205,10 @@ export const addCustomerReview = data => ({
   promise: async ({ client }) => {
     try {
       /* eslint-disable max-len */
-      const response = await client.post(`tesla/ratings/`, data);
+      const response = await client.post(
+        `tesla/ratings/add-review-new/${sku}`,
+        data
+      );
       return response;
     } catch (error) {
       throw error;
