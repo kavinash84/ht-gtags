@@ -22,12 +22,12 @@ const adjustSlides = length => ({
 
 @connect(({ homeinterior }) => ({
   homeinterior,
-  shopFurniture: homeinterior.data.items.text.shopFurniture
+  shopNow: homeinterior.data.items.text.shopNow
 }))
 
 export default class ShopNow extends Component {
   render() {
-    const { shopFurniture } = this.props;
+    const { shopNow } = this.props;
     return (
       <Div
         style={{
@@ -45,7 +45,7 @@ export default class ShopNow extends Component {
             color: "black"
           }}
         >
-          {shopFurniture.title}
+          {shopNow.title}
           <div
             style={{
               width: '30px',
@@ -56,11 +56,11 @@ export default class ShopNow extends Component {
           />
         </Div>
         <Div style={{ fontSize: "20px", color: "#888888", marginBottom: "40px" }}>
-          {shopFurniture.description}
+          {shopNow.description}
         </Div>
-        <Div style={{ paddingBottom: "", width: '80%', marginLeft: "10%"}}>
+        <Div style={{ paddingBottom: "", width: '86%', marginLeft: "6.5%"}}>
           <DBCarousel
-            data={shopFurniture.values}
+            data={shopNow.values}
             settings={adjustSlides}
             component={3}
           />

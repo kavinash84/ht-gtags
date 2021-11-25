@@ -6,7 +6,7 @@ import DBCarousel from "./DBCarousel";
 const styles = require("../ModularWardrobe.scss");
 
 const adjustSlides = length => ({
-  slidesToShow: 2.5,
+  slidesToShow: 3,
   slidesToScroll: 1,
   infinite: false,
   autoplay: false,
@@ -22,36 +22,36 @@ const adjustSlides = length => ({
 
 @connect(({ modularwardrobe }) => ({
   modularwardrobe,
-  dbAdvantage: modularwardrobe.data.items.text.dbAdvantage
+  dbServices: modularwardrobe.data.items.text.dbServices
 }))
-export default class WardrobesForEveryone extends Component {
+export default class Finishes extends Component {
   render() {
-    const { dbAdvantage } = this.props;
+    const { dbServices } = this.props;
     return (
       <Div
         style={{
           backgroundColor: "#FFFFFF",
           padding: "30px 30px 10px",
           textAlign: "center",
-          marginTop: "180px"
+          marginTop: "40px"
         }}
       >
         <Div
           style={{
-            fontSize: "40px",
+            fontSize: "30px",
             fontWeight: "600",
             marginBottom: "20px",
             color: "black"
           }}
         >
-          {dbAdvantage.title}
+          {dbServices.title}
         </Div>
         <Div style={{ fontSize: "20px", color: "#888888", marginBottom: "40px" }}>
-          {dbAdvantage.subtitle}
+        Choose from a wide range of shutter finishes that Duracucini has to offer, built apt to suit your usage and lifestyle
         </Div>
-        <Div style={{ paddingBottom: "", width: '86%', marginLeft: "6.5%"}}>
+        <Div style={{  paddingBottom: "", width: '86%', marginLeft: "6.5%"}}>
           <DBCarousel
-            data={dbAdvantage.values}
+            data={dbServices.values}
             settings={adjustSlides}
             component={3}
           />

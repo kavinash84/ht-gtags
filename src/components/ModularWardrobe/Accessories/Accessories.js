@@ -6,7 +6,7 @@ import DBCarousel from "./DBCarousel";
 const styles = require("../ModularWardrobe.scss");
 
 const adjustSlides = length => ({
-  slidesToShow: 2.5,
+  slidesToShow: 2,
   slidesToScroll: 1,
   infinite: false,
   autoplay: false,
@@ -24,7 +24,7 @@ const adjustSlides = length => ({
   modularwardrobe,
   dbAdvantage: modularwardrobe.data.items.text.dbAdvantage
 }))
-export default class WardrobesForEveryone extends Component {
+export default class Accessories extends Component {
   render() {
     const { dbAdvantage } = this.props;
     return (
@@ -45,9 +45,15 @@ export default class WardrobesForEveryone extends Component {
           }}
         >
           {dbAdvantage.title}
-        </Div>
-        <Div style={{ fontSize: "20px", color: "#888888", marginBottom: "40px" }}>
-          {dbAdvantage.subtitle}
+          <div
+            style={{
+              width: '30px',
+              borderTop: '2px solid #222222',
+              
+              margin: 'auto',
+              marginTop: '15px'
+            }}
+          />
         </Div>
         <Div style={{ paddingBottom: "", width: '86%', marginLeft: "6.5%"}}>
           <DBCarousel

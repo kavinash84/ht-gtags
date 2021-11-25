@@ -178,3 +178,22 @@
   -webkit-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.11);
   -moz-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.11);
 }
+
+.namess{
+    font-size: 16px;
+    font-weight: 600;
+    text-align: left;
+    color: black;
+    margin: 20px 0px 15px;
+}
+
+.content4_description4 {
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  font-size: 16px;
+  line-height:20px;
+}

@@ -6,7 +6,7 @@ import DBCarousel from "./DBCarousel";
 const styles = require("../ModularWardrobe.scss");
 
 const adjustSlides = length => ({
-  slidesToShow: 2.5,
+  slidesToShow: 1,
   slidesToScroll: 1,
   infinite: false,
   autoplay: false,
@@ -22,18 +22,17 @@ const adjustSlides = length => ({
 
 @connect(({ modularwardrobe }) => ({
   modularwardrobe,
-  dbAdvantage: modularwardrobe.data.items.text.dbAdvantage
+  customerStories: modularwardrobe.data.items.text.customerStories
 }))
-export default class WardrobesForEveryone extends Component {
+export default class CustomerStories extends Component {
   render() {
-    const { dbAdvantage } = this.props;
+    const { customerStories } = this.props;
     return (
       <Div
         style={{
-          backgroundColor: "#FFFFFF",
-          padding: "30px 30px 10px",
+          padding: "30px 30px 20px",
           textAlign: "center",
-          marginTop: "180px"
+          marginTop: "40px"
         }}
       >
         <Div
@@ -44,14 +43,19 @@ export default class WardrobesForEveryone extends Component {
             color: "black"
           }}
         >
-          {dbAdvantage.title}
+          {customerStories.title}
+          <div
+            style={{
+              width: '30px',
+              borderTop: '2px solid #222222',
+              margin: 'auto',
+              marginTop: '15px'
+            }}
+          />
         </Div>
-        <Div style={{ fontSize: "20px", color: "#888888", marginBottom: "40px" }}>
-          {dbAdvantage.subtitle}
-        </Div>
-        <Div style={{ paddingBottom: "", width: '86%', marginLeft: "6.5%"}}>
+        <Div style={{  paddingBottom: "", width: '80%', marginLeft: "10%"}}>
           <DBCarousel
-            data={dbAdvantage.values}
+            data={customerStories.values}
             settings={adjustSlides}
             component={3}
           />

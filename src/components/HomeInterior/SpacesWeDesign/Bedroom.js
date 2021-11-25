@@ -25,11 +25,11 @@ const adjustSlides = length => ({
 
 @connect(({ homeinterior }) => ({
   homeinterior,
-  livingRoom: homeinterior.data.items.text.livingRoom
+  bedRoom: homeinterior.data.items.text.bedRoom
 }))
-export default class livingRoom extends Component {
+export default class Bedroom extends Component {
   render() {
-    const { livingRoom } = this.props;
+    const { bedRoom } = this.props;
     return (
       <Div
         style={{
@@ -40,7 +40,7 @@ export default class livingRoom extends Component {
         }}
       >
        <Div style={{ width:"90%", marginLeft:"5%" }}>
-         <Image src={livingRoom.image}/>
+         <Image src={bedRoom.image}/>
        </Div>
        <Div>
          <Heading
@@ -56,12 +56,12 @@ export default class livingRoom extends Component {
        </Div>
        <Div style={{height: '100%', width: '100%', backgroundColor:'#F8F2F2', display:'flex'}}>
         <Div style={{width:'30%' , paddingLeft: '10%', paddingTop:'90px'}}>
-           <Heading style={{fontSize:'24px', textAlign:'left'}}>{livingRoom.title}</Heading>
-           <Text style={{fontSize:'16px', textAlign:'left', color:'#888888', width:'80%', lineHeight:'26px', marginTop:'15px'}}>{livingRoom.description}</Text>
+           <Heading style={{fontSize:'24px', textAlign:'left'}}>{bedRoom.title}</Heading>
+           <Text style={{fontSize:'16px', textAlign:'left', color:'#888888', width:'80%', lineHeight:'26px', marginTop:'15px'}}>{bedRoom.description}</Text>
         </Div>
         <Div style={{  paddingBottom: "40px", width: '60%', paddingTop: "80px"}}>
           <DBCarousel
-            data={livingRoom.values}
+            data={bedRoom.values}
             settings={adjustSlides}
             component={3}
           />

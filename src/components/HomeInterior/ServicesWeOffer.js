@@ -13,11 +13,11 @@ const styles = require('./HomeInterior.scss');
 
 @connect(({ homeinterior }) => ({
   homeinterior,
-  SpacesWeTransform: homeinterior.data.items.text.SpacesWeTransform
+  ServicesOffer: homeinterior.data.items.text.ServicesOffer
 }))
-class RoomsWeTransform extends React.Component {
+class ServicesWeOffer extends React.Component {
   render() {
-    const { SpacesWeTransform } = this.props;
+    const { ServicesOffer } = this.props;
     return (
       <Section>
         <Box
@@ -29,18 +29,16 @@ class RoomsWeTransform extends React.Component {
             textAlign: 'center'
           }}
         >
-          Rooms We Transform
-          <div
-            style={{
-              width: '30px',
-              borderTop: '2px solid #222222',
-              margin: 'auto',
-              marginTop: '15px'
-            }}
-          />
+          {ServicesOffer.title}
+         
         </Box>
+        <Text
+                style={{fontSize: "19px", color: "#888888", marginBottom: "20px", width: "70%", textAlign: 'center', marginLeft: '15%', marginTop: '30px' }}
+                >
+                {ServicesOffer.subtitle}
+                </Text>
         <Row justifyContent="center" style={{ width: '100%', margin: 'auto' }}>
-          {SpacesWeTransform.values.map(slide => (
+          {ServicesOffer.values.map(slide => (
             <Box style={{ width: '25%', margin: '30px 10px 10px' }}>
               {/* <Link to={slide.url_key}> */}
               <Image src={slide.imgSrc} alt={slide.title} m={5} height="auto" width="100%" />
@@ -75,4 +73,4 @@ class RoomsWeTransform extends React.Component {
   }
 }
 
-export default RoomsWeTransform;
+export default ServicesWeOffer;

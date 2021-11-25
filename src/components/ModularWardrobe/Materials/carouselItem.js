@@ -16,33 +16,33 @@ const DBItem = ({ component, data }) => {
             style={{
               // paddingRight: '0px',
               backgroundColor:'#F5F5F5',
-              padding: '20px 10px',
-              height: '450px'
+              padding: '20px 0px',
+              height: '380px'
               // pointerEvents: ['/modular-wardrobe'].includes(data.url_key) ? 'none' : ''
             }}
           >
-            {/* <Link
+            <Link
               className={styles.link}
               to={data.url_key}
               onClick={() => {
                 sessionStorage.setItem('scrollPosition', window.pageYOffset);
               }}
-            > */}
-              <div style={{ height: '300px' }}>
+            >
+              <div style={{ height: '200px' }}>
                 <img
                   src={data.imgSrc}
                   alt={data.title}
                   className={styles.curosalImg}
-                  style={{ height: '100%', width: '100%', margin: 'auto'}}
+                  style={{ height: '100%', width: '90%', margin: 'auto'}}
                 />
               </div>
               <Div className={styles.content4}>
-                <Div style={{fontSize: '20px', textAlign: 'left'}} className={styles.namess}>{data.title}</Div>
+                <Div style={{fontSize: '20px', textAlign: 'left'}} className={styles.name}>{data.title}</Div>
                 <div style={{ display: 'table-cell' }}>
-                  <p className={styles.content4_description4}>{data.description}</p>
+                  <p className={styles.content4_description}>{data.description}</p>
                 </div>
-                {/* <Heading style={{textAlign:'left'}} fontSize="14px" fontFamily="regular" color="black" mt="20px">
-                  KNOW MORE */}
+                <Heading style={{textAlign:'left'}} fontSize="14px" fontFamily="regular" color="black" mt="20px">
+                  KNOW MORE
                   {/* <img
                     style={{
                       display: 'inline',
@@ -53,9 +53,9 @@ const DBItem = ({ component, data }) => {
                     src={}
                     alt="Arrow"
                   /> */}
-                {/* </Heading> */}
+                </Heading>
               </Div>
-            {/* </Link> */}
+            </Link>
           </Div>
     </Box>
   );

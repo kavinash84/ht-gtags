@@ -12,12 +12,13 @@ const DBItem = ({ component, data }) => {
   return (
     <Box variant="section.catSliderItem">
       <Div
-            className={`${styles.sliderItem} ${styles.sliderItemtwo}`}
+            className={`${styles.sliderItem} ${styles.sliderItemtwo} ${styles.shadow}`}
             style={{
               // paddingRight: '0px',
               backgroundColor:'white',
               padding: '20px 0px',
-              height: '320px'
+              height: '320px',
+              margin: '10px 8px'
               // pointerEvents: ['/modular-wardrobe'].includes(data.url_key) ? 'none' : ''
             }}
           >

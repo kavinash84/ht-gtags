@@ -13,35 +13,35 @@ const styles = require('./HomeInterior.scss');
 
 @connect(({ homeinterior }) => ({
   homeinterior,
-  SpacesWeTransform: homeinterior.data.items.text.SpacesWeTransform
+  letUsHelp: homeinterior.data.items.text.letUsHelp
 }))
 class LetUsHelpYou extends React.Component {
   render() {
-    const { SpacesWeTransform } = this.props;
+    const { letUsHelp } = this.props;
     return (
       <Section>
         <Box
           style={{
             fontSize: '30px',
             fontWeight: 600,
-            marginBottom: '10px',
             color: 'black',
-            textAlign: 'left'
+            textAlign: 'left',
+            marginLeft:'10%'
           }}
         >
-          Let Us Help You
+          {letUsHelp.title}
          
         </Box>
         <Row justifyContent="center" style={{ width: '100%', margin: 'auto' }}>
-          {SpacesWeTransform.values.map(slide => (
-            <Box style={{ width: '20%', margin: '30px 10px 10px' }}>
+          {letUsHelp.values.map(slide => (
+            <Box style={{ width: '19%', margin: '30px 10px 10px' }}>
               {/* <Link to={slide.url_key}> */}
               <Image src={slide.imgSrc} alt={slide.title} m={5} height="auto" width="100%" />
               <Text
-                fontSize="22px"
+                fontSize="20px"
                 color="label"
                 mt="10px"
-                style={{ textAlign: 'center', color: 'black', fontWeight: '600' }}
+                style={{ textAlign: 'center', color: '#323131', fontWeight: '600' }}
               >
                 {slide.title}
               </Text>

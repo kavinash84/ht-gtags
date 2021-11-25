@@ -22,11 +22,11 @@ const adjustSlides = length => ({
 
 @connect(({ homeinterior }) => ({
   homeinterior,
-  dbAdvantage: homeinterior.data.items.text.dbServices
+  designStyle: homeinterior.data.items.text.designStyle
 }))
 export default class DesignByStyle extends Component {
   render() {
-    const { dbAdvantage } = this.props;
+    const { designStyle } = this.props;
     return (
       <Div
         style={{
@@ -44,7 +44,7 @@ export default class DesignByStyle extends Component {
             color: "black"
           }}
         >
-          {dbAdvantage.title}
+          {designStyle.title}
           <div
             style={{
               width: '30px',
@@ -55,11 +55,11 @@ export default class DesignByStyle extends Component {
           />
         </Div>
         <Div style={{ fontSize: "20px", color: "#888888", marginBottom: "40px" }}>
-          {dbAdvantage.subtitle}
+          {designStyle.subtitle}
         </Div>
-        <Div style={{  paddingBottom: "", width: '80%', marginLeft: "10%"}}>
+        <Div style={{  paddingBottom: "", width: '86%', marginLeft: "6.5%"}}>
           <DBCarousel
-            data={dbAdvantage.values}
+            data={designStyle.values}
             settings={adjustSlides}
             component={3}
           />
