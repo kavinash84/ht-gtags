@@ -43,7 +43,8 @@ class HomeContainer extends Component {
       ourBeddingFavourites,
       forBetterSleep,
       customiseYourHome,
-      shopTheRoom
+      shopTheRoom,
+      isLoggedIn
     } = this.props;
     return (
       <div>
@@ -128,7 +129,12 @@ class HomeContainer extends Component {
           >
             {bestSeat.mainTitle}
           </HeadingHtV1>
-          <Link to={bestSeat.url_key}>
+          <Link
+            onClick={() => {
+              sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
+            }}
+            to={bestSeat.url_key}
+          >
             <HeadingHtV1
               fontFamily="medium"
               style={{
@@ -176,9 +182,9 @@ class HomeContainer extends Component {
         {/* Shop homeware */}
         <div
           style={{
-            width: "80%",
+            width: "1200px",
             display: "flex",
-            margin: "0 10% 20px",
+            margin: "auto",
             flexDirection: "column",
             justifyContent: "center",
             alignContent: "center"
@@ -191,7 +197,15 @@ class HomeContainer extends Component {
                 marginBottom: "10px"
               }}
             >
-              <Link to={val.url_key}>
+              <Link
+                onClick={() => {
+                  sessionStorage.setItem(
+                    "HtscrollPosition",
+                    window.pageYOffset
+                  );
+                }}
+                to={val.url_key}
+              >
                 <Image
                   // style={{ width: "97%" }}
                   src={val.image}
@@ -241,7 +255,12 @@ class HomeContainer extends Component {
           >
             {gifting.description}
           </div>
-          <Link to={gifting.url_key}>
+          <Link
+            onClick={() => {
+              sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
+            }}
+            to={gifting.url_key}
+          >
             <HeadingHtV1
               style={{
                 textAlign: "center",
@@ -267,9 +286,9 @@ class HomeContainer extends Component {
             <div
               style={{
                 display: "flex",
-                width: "85%",
-                marginLeft: "7.5%",
-                marginRight: "7.5%",
+                width: "90%",
+                marginLeft: "5%",
+                marginRight: "5%",
                 justifyContent: "space-evenly",
                 alignContent: "center"
               }}
@@ -313,7 +332,12 @@ class HomeContainer extends Component {
           >
             {togetherInMoment.mainTitle}
           </HeadingHtV1>
-          <Link to={togetherInMoment.url_key}>
+          <Link
+            onClick={() => {
+              sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
+            }}
+            to={togetherInMoment.url_key}
+          >
             <HeadingHtV1
               fontFamily="medium"
               style={{
@@ -402,7 +426,15 @@ class HomeContainer extends Component {
               >
                 {TheWayWeAreEntertainingNow.mainTitleTwo}
               </HeadingHtV1>
-              <Link to={TheWayWeAreEntertainingNow.url_key}>
+              <Link
+                onClick={() => {
+                  sessionStorage.setItem(
+                    "HtscrollPosition",
+                    window.pageYOffset
+                  );
+                }}
+                to={TheWayWeAreEntertainingNow.url_key}
+              >
                 <HeadingHtV1
                   fontFamily="medium"
                   style={{
@@ -439,16 +471,26 @@ class HomeContainer extends Component {
         </div>
 
         {/* Mid banner */}
-        <div style={{ marginTop: "50px" }}>
-          {/* <Link to="/furniture"> */}
-          <Image
-            src={midbanner.image}
-            width="90%"
-            alt="MidBanner"
-            style={{ display: "block", margin: "0 5%" }}
-          />
-          {/* </Link> */}
-        </div>
+
+        {!isLoggedIn ? (
+          <div style={{ marginTop: "50px" }}>
+            <Link
+              to={midbanner.url_key}
+              onClick={() => {
+                sessionStorage.setItem("", window.pageYOffset);
+              }}
+            >
+              <Image
+                src={midbanner.image}
+                width="90%"
+                alt="MidBanner"
+                style={{ display: "block", margin: "0 5%" }}
+              />
+            </Link>
+          </div>
+        ) : null}
+
+        {/* </Link> */}
 
         {/* shop our new arrivals in furniture */}
         <div>
@@ -472,7 +514,12 @@ class HomeContainer extends Component {
               marginBottom: "10px"
             }}
           />
-          <Link to={shopOurNewArrivalFurniture.url_key}>
+          <Link
+            onClick={() => {
+              sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
+            }}
+            to={shopOurNewArrivalFurniture.url_key}
+          >
             <Image
               mt="15px"
               src={shopOurNewArrivalFurniture.image}
@@ -488,7 +535,12 @@ class HomeContainer extends Component {
 
         {/* wfh Favourites are back */}
         <div>
-          <Link to={wfhAreBack.url_key}>
+          <Link
+            onClick={() => {
+              sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
+            }}
+            to={wfhAreBack.url_key}
+          >
             <div
               style={{
                 display: "flex",
@@ -594,7 +646,12 @@ class HomeContainer extends Component {
           >
             {trendsWeLove1.mainTitle}
           </HeadingHtV1>
-          <Link to={trendsWeLove1.url_key}>
+          <Link
+            onClick={() => {
+              sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
+            }}
+            to={trendsWeLove1.url_key}
+          >
             <Image
               mt="10px"
               src={trendsWeLove1.image1}
@@ -656,7 +713,12 @@ class HomeContainer extends Component {
           >
             {forYourMasterSuite.mainTitle}
           </HeadingHtV1>
-          <Link to={forYourMasterSuite.url_key}>
+          <Link
+            onClick={() => {
+              sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
+            }}
+            to={forYourMasterSuite.url_key}
+          >
             <HeadingHtV1
               fontFamily="medium"
               style={{
@@ -710,7 +772,12 @@ class HomeContainer extends Component {
           >
             {ourBeddingFavourites.mainTitle}
           </HeadingHtV1>
-          <Link to={ourBeddingFavourites.url_key}>
+          <Link
+            onClick={() => {
+              sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
+            }}
+            to={ourBeddingFavourites.url_key}
+          >
             <HeadingHtV1
               fontFamily="medium"
               style={{
@@ -813,7 +880,15 @@ class HomeContainer extends Component {
               }}
             >
               <div style={{ width: "20%", margin: "0 10px" }}>
-                <Link to={forBetterSleep.data[0].url_key}>
+                <Link
+                  onClick={() => {
+                    sessionStorage.setItem(
+                      "HtscrollPosition",
+                      window.pageYOffset
+                    );
+                  }}
+                  to={forBetterSleep.data[0].url_key}
+                >
                   <Image
                     src={forBetterSleep.data[0].image}
                     alt="ForABetterSleep01"
@@ -837,7 +912,15 @@ class HomeContainer extends Component {
                 </Link>
               </div>
               <div style={{ width: "20%", margin: "0 10px" }}>
-                <Link to={forBetterSleep.data[1].url_key}>
+                <Link
+                  onClick={() => {
+                    sessionStorage.setItem(
+                      "HtscrollPosition",
+                      window.pageYOffset
+                    );
+                  }}
+                  to={forBetterSleep.data[1].url_key}
+                >
                   <Image
                     src={forBetterSleep.data[1].image}
                     alt="ForABetterSleep02"
@@ -860,7 +943,15 @@ class HomeContainer extends Component {
                 </Link>
               </div>
               <div style={{ width: "20%", margin: "0 10px" }}>
-                <Link to={forBetterSleep.data[2].url_key}>
+                <Link
+                  onClick={() => {
+                    sessionStorage.setItem(
+                      "HtscrollPosition",
+                      window.pageYOffset
+                    );
+                  }}
+                  to={forBetterSleep.data[2].url_key}
+                >
                   <Image
                     src={forBetterSleep.data[2].image}
                     alt="ForABetterSleep03"
@@ -883,7 +974,15 @@ class HomeContainer extends Component {
                 </Link>
               </div>
               <div style={{ width: "20%", margin: "0 10px" }}>
-                <Link to={forBetterSleep.data[3].url_key}>
+                <Link
+                  onClick={() => {
+                    sessionStorage.setItem(
+                      "HtscrollPosition",
+                      window.pageYOffset
+                    );
+                  }}
+                  to={forBetterSleep.data[3].url_key}
+                >
                   <Image
                     src={forBetterSleep.data[3].image}
                     alt="ForABetterSleep04"
@@ -952,7 +1051,12 @@ class HomeContainer extends Component {
                 marginBottom: "20px"
               }}
             />
-            <Link to={customiseYourHome.url_key1}>
+            <Link
+              onClick={() => {
+                sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
+              }}
+              to={customiseYourHome.url_key1}
+            >
               <Image
                 mt="30px"
                 src={customiseYourHome.image1}
@@ -964,7 +1068,12 @@ class HomeContainer extends Component {
                 }}
               />
             </Link>
-            <Link to={customiseYourHome.url_key2}>
+            <Link
+              onClick={() => {
+                sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
+              }}
+              to={customiseYourHome.url_key2}
+            >
               <Image
                 mt="30px"
                 src={customiseYourHome.image2}
@@ -994,7 +1103,12 @@ class HomeContainer extends Component {
           >
             {shopTheRoom.mainTitle}
           </HeadingHtV1>
-          <Link to={shopTheRoom.url_key}>
+          <Link
+            onClick={() => {
+              sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
+            }}
+            to={shopTheRoom.url_key}
+          >
             <HeadingHtV1
               fontFamily="medium"
               style={{
@@ -1220,6 +1334,19 @@ class HomeContainer extends Component {
       </div>
     );
   }
+  componentDidMount() {
+    this.handleScrollPosition();
+  }
+
+  handleScrollPosition = () => {
+    const scrollPosition = sessionStorage.getItem("HtscrollPosition");
+    if (scrollPosition) {
+      window.scrollTo(0, parseInt(scrollPosition));
+      setTimeout(function() {
+        sessionStorage.removeItem("HtscrollPosition");
+      }, 2000);
+    }
+  };
 }
 
 export default HomeContainer;

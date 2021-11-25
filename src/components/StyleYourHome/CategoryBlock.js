@@ -21,7 +21,7 @@ const CategoryBlock = ({ src, to, title }) => (
     <Link to={to}>
       <div
         style={{
-          width: "25rem",
+          width: "410px",
           display: "flex",
           height: "360px",
           flexDirection: "column",

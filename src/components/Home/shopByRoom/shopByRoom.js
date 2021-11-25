@@ -26,7 +26,6 @@ const adjustSlides = length => ({
 }))
 export default class ShopByRooms extends Component {
   render() {
-    console.log("998888999999999", shopByRooms);
     const { shopByRooms } = this.props;
     return (
       <Div

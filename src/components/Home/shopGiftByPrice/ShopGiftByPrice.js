@@ -26,7 +26,6 @@ const adjustSlides = length => ({
 }))
 export default class ShopGiftByPrice extends Component {
   render() {
-    console.log(this.props.homepagecmsdata, "homepagecmsdata123");
     const { shopGiftByPrice } = this.props;
     return (
       <Div
@@ -51,8 +50,8 @@ export default class ShopGiftByPrice extends Component {
         <Div
           style={{
             paddingBottom: "",
-            width: "90%",
-            marginLeft: "5%"
+            width: "100%",
+            margin: "auto"
           }}
         >
           <DBCarousel

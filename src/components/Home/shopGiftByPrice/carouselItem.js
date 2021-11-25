@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Box from "hometown-components-dev/lib/BoxHtV1";
 import Div from "hometown-components-dev/lib/BoxHtV1";
-import Text from "hometown-components-dev/lib/TextHtV1";
+// import Text from "hometown-components-dev/lib/TextHtV1";
 import Heading from "hometown-components-dev/lib/HeadingHtV1";
 
 const styles = require("../Slider.scss");
