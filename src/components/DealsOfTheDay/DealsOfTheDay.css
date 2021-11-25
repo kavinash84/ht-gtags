@@ -10,7 +10,7 @@
   align-items: center;
 }
 .DealsOfTheDay-card {
-  width: 22rem;
+  width: 20rem;
   background-color: #ffffff;
   display: flex;
   height: 360px;
@@ -21,7 +21,7 @@
   box-shadow: 0.5rem 0.5rem 3rem rgba(0, 0, 0, 0.2);
 }
 .DealsOfTheDay-image {
-  width: 22rem;
+  width: 20rem;
   height: auto;
   object-fit: cover;
   margin-top: -10rem;

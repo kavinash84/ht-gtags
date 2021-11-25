@@ -17,12 +17,14 @@ class CategoryItem extends React.Component {
             flexDirection: "row",
             flexWrap: "wrap",
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
+            width: "90%",
+            margin: "auto"
           }}
         >
           <div
             style={{
-              width: "410px",
+              width: "400px",
               display: "flex",
               height: "360px",
               flexDirection: "column",
