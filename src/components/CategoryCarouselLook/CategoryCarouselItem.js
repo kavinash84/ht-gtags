@@ -8,7 +8,7 @@ import Img from "hometown-components-dev/lib/Img";
 
 class CategoryItem extends React.Component {
   render() {
-    const { src, title } = this.props;
+    const { src, title, url } = this.props;
     return (
       <div>
         <div
@@ -30,33 +30,34 @@ class CategoryItem extends React.Component {
               justifyContent: "flex-start"
             }}
           >
-            {/* <Link
+            <Link
               to={url}
               onClick={() => {
                 sessionStorage.setItem("GetThelookscroll", window.pageYOffset);
               }}
-            > */}
-            <Img
-              src={src}
-              m={5}
-              height="auto"
-              width="90%"
-              style={{ zIndex: 10 }}
-            />
-            <h3
-              style={{
-                fontSize: "16px",
-                fontWeight: "300",
-                margin: " 20px 15px 0 5px",
-                wordSpacing: "2px",
-                letterSpacing: "0.6px",
-                lineHeight: "18px"
-              }}
-              className="get-the-look-titleOne"
             >
-              {title}
-            </h3>
-            {/* </Link> */}
+              <Img
+                src={src}
+                m={5}
+                height="auto"
+                width="90%"
+                style={{ zIndex: 10 }}
+              />
+              <h3
+                style={{
+                  fontSize: "16px",
+                  fontWeight: "300",
+                  margin: " 20px 15px 0 5px",
+                  wordSpacing: "2px",
+                  letterSpacing: "0.6px",
+                  lineHeight: "18px",
+                  color: "black"
+                }}
+                className="get-the-look-titleOne"
+              >
+                {title}
+              </h3>
+            </Link>
           </div>
         </div>
       </div>
@@ -77,6 +78,7 @@ class CategoryItem extends React.Component {
 }
 CategoryItem.propTypes = {
   src: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired
 };
 export default CategoryItem;

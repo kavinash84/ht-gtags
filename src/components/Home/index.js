@@ -9,10 +9,9 @@ import CategoryCarouselLook from "../../components/CategoryCarouselLook";
 // import CategoryCarousel from "../../components/CategoryCarouselHome";
 import StyleYourHome from "../../components/StyleYourHome";
 import ShopOurBestsellers from "../../components/ShopOurBestsellers";
-import CategoryCarouselLookTwo from "../../components/CategoryCarouselLookTwo";
+
 import ShopGiftByPrice from "./shopGiftByPrice/ShopGiftByPrice";
 import ShopByRooms from "./shopByRoom/shopByRoom";
-import HoverMenuBox from "../HoverBox/HoverMenuBox";
 
 // easy finance
 const HdfcLogo = require("../../../static/new-home/hdfc-logo.png");
@@ -33,7 +32,6 @@ class HomeContainer extends Component {
       styleYourHome,
       homePageBanners,
       gifting,
-
       togetherInMoment,
       TheWayWeAreEntertainingNow,
       midbanner,
@@ -75,8 +73,8 @@ class HomeContainer extends Component {
         {/* <div mt="20px" mb="15px" style={{ display: "block" }}>
           <CategoryCarousel shopByRooms={shopByRooms} />
         </div> */}
-        <div style={{ backgroundColor: "#F3F5F7" }}>
-          <ShopByRooms />
+        <div>
+          <ShopByRooms shopByRooms={shopByRooms} />
         </div>
 
         {/* deals of the day section */}
@@ -164,10 +162,12 @@ class HomeContainer extends Component {
             />
           </Link>
         </div>
-        {/* get the look */}
+        {/* get the look one */}
 
         <div>
-          <CategoryCarouselLook getTheLook={getTheLook} />
+          {getTheLook.data.length ? (
+            <CategoryCarouselLook getTheLook={getTheLook} />
+          ) : null}
         </div>
 
         {/* style your home */}
@@ -692,7 +692,9 @@ class HomeContainer extends Component {
         </div>
         {/* get the look two */}
         <div>
-          <CategoryCarouselLookTwo getTheLook2={getTheLook2} />
+          {getTheLook2.id === "2" || getTheLook2.id === 2 ? (
+            <CategoryCarouselLook getTheLook={getTheLook2} />
+          ) : null}
         </div>
         {/* our bedding favourites */}
         <div>

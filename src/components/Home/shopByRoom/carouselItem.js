@@ -12,7 +12,7 @@ const styles = require("../Slider.scss");
 
 class DBItem extends React.Component {
   render() {
-    const { component, data } = this.props;
+    const { data } = this.props;
     return (
       <Box variant="section.catSliderItem">
         <Div
@@ -36,7 +36,7 @@ class DBItem extends React.Component {
             <div style={{ height: "400px" }}>
               <img
                 src={data.image}
-                alt={data.title}
+                alt={data.image}
                 className={styles.curosalImg}
                 style={{
                   height: "100%",

@@ -30,7 +30,11 @@ export default class CategoryCarousel extends Component {
           }}
         >
           {getTheLook.data.map(val => (
-            <CategoryCarouselItem src={val.image} title={val.title} />
+            <CategoryCarouselItem
+              src={val.image}
+              title={val.title}
+              url={val.url_key}
+            />
           ))}
         </div>
       </div>
