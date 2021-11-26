@@ -286,9 +286,8 @@ class HomeContainer extends Component {
             <div
               style={{
                 display: "flex",
-                width: "90%",
-                marginLeft: "5%",
-                marginRight: "5%",
+                width: "85%",
+                margin: "auto",
                 justifyContent: "space-evenly",
                 alignContent: "center"
               }}
@@ -1017,7 +1016,7 @@ class HomeContainer extends Component {
               border: "2px solid black",
               padding: "20px 10px",
               position: "absolute",
-              height: "165vh",
+              height: "105%",
               width: "50%",
               zIndex: "-10",
               margin: "0% 25%"
@@ -1061,10 +1060,10 @@ class HomeContainer extends Component {
                 mt="30px"
                 src={customiseYourHome.image1}
                 style={{
-                  width: "68%",
+                  width: "80%",
                   alignItems: "center",
-                  marginLeft: "5%",
-                  marginRight: "5%"
+                  marginLeft: "10%",
+                  marginRight: "10%"
                 }}
               />
             </Link>
@@ -1078,10 +1077,10 @@ class HomeContainer extends Component {
                 mt="30px"
                 src={customiseYourHome.image2}
                 style={{
-                  width: "68%",
+                  width: "80%",
                   alignItems: "center",
-                  marginLeft: "5%",
-                  marginRight: "5%"
+                  marginLeft: "10%",
+                  marginRight: "10%"
                 }}
               />
             </Link>
