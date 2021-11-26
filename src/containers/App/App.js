@@ -13,7 +13,8 @@ import {
   loadMainMenu,
   loadBanners,
   loadDealOfTheDay,
-  isLoaded as isSectionLoaded
+  isLoaded as isSectionLoaded,
+  loadBestSellers
 } from "redux/modules/homepage";
 import { generateSession, isLoaded as isSessionSet } from "redux/modules/app";
 import { loginUserAfterSignUp, login } from "redux/modules/login";
@@ -83,6 +84,12 @@ const SITE_URL_MOBILE = "https://m.hometown.in";
         dispatch,
         "dealoftheday"
       )(loadDealOfTheDay(defaultPincode)).catch(error => console.log(error));
+    }
+    if (!isSectionLoaded(getState(), "bestsellers")) {
+      await wrapDispatch(
+        dispatch,
+        "bestsellers"
+      )(loadBestSellers(defaultPincode)).catch(error => console.log(error));
     }
   },
   defer: ({ store: { dispatch, getState } }) => {

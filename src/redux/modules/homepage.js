@@ -110,3 +110,9 @@ export const loadDealOfTheDay = pincode => ({
       `tesla/static/homepagecoupons/deal_of_the_day?pincode=${pincode}`
     )
 });
+
+export const loadBestSellers = pincode => ({
+  types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
+  promise: ({ client }) =>
+    client.get(`tesla/static/homepagecoupons/best_sellers?pincode=${pincode}`)
+});

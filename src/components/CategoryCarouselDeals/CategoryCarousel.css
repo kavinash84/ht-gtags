@@ -52,17 +52,24 @@
 }
 
 .csp {
-  color: #999999 !important;
+  color: #000 !important;
   font-weight: bold;
   font-size: 12px;
-  margin-left: 10px;
+
+  margin-right: 10px;
 }
 
 .mrp {
   color: #999999 !important;
   font-weight: bold;
 }
-
+.mrpoff {
+  color: #f47121;
+  font-weight: bold;
+  font-size: 12px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
 .slick-prev {
   left: -60px !important;
 }

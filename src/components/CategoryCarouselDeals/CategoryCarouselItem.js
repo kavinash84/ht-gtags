@@ -9,7 +9,7 @@ import { formatAmount } from "utils/formatters";
 import "./CategoryCarousel.css";
 import "../Home/Slider.css";
 
-// const arrowForward = require("../../../static/newHomepage/newForwardArrow.svg");
+const arrowForward = require("../../../static/new-home/newForwardArrow.svg");
 
 const CategoryItem = ({
   image,
@@ -79,7 +79,7 @@ const CategoryItem = ({
           {name ? (
             <Text
               ta="left"
-              fontSize="12px"
+              fontSize="14px"
               mt="12px"
               mb="0"
               lineHeight="1.2rem"
@@ -114,18 +114,24 @@ const CategoryItem = ({
             <div>
               <p className="mrpCsp">
                 {hasSpecialPrice ? (
-                  <span className="mrpWithCsp">₹{formatAmount(maxPrice)}</span>
-                ) : null}
-
-                {hasSpecialPrice ? (
                   <span>
-                    <span className="csp">₹{formatAmount(specialPrice)}</span>
+                    <span className="csp">
+                      Price: ₹{formatAmount(specialPrice)}
+                    </span>
                   </span>
                 ) : (
                   <span>
                     <span className="mrp">₹{formatAmount(maxPrice)}</span>
                   </span>
                 )}
+                {hasSpecialPrice ? (
+                  <span className="mrpWithCsp">₹{formatAmount(maxPrice)}</span>
+                ) : null}
+                {percentageOff ? (
+                  <span className="mrpoff" style={{ fontWeight: "bold" }}>
+                    {percentageOff}%Off
+                  </span>
+                ) : null}
               </p>
             </div>
           ) : null}
@@ -133,29 +139,13 @@ const CategoryItem = ({
           {/* Product Coupon */}
           {hasCoupon ? (
             <Box style={{ display: "flex", alignItems: "center" }}>
-              {percentageOff ? (
-                <Text
-                  fontSize="0.7rem"
-                  mt="0px"
-                  mb="0px"
-                  mr="5px"
-                  mt="5px"
-                  style={{ fontWeight: "bold" }}
-                >
-                  {percentageOff}%Off
-                </Text>
-              ) : null}
               <Box
                 style={{
-                  border: "2px dashed #FDE2D2",
-                  borderRadius: "5px",
                   float: "none",
                   display: "block"
                 }}
-                bg="#FFF8F8"
                 mt="9px"
                 mb="5px"
-                pl="5px"
               >
                 <Text fontSize="10px" lineHeight="1.2rem" mt="3px" mb="3px">
                   Use:{" "}
@@ -177,7 +167,7 @@ const CategoryItem = ({
           {delivery ? (
             <Text
               ta="left"
-              fontSize="11px"
+              fontSize="12px"
               style={{
                 fontWeight: "bold",
                 color: "gray"
@@ -190,26 +180,30 @@ const CategoryItem = ({
 
           {/* Product Link */}
 
-          {/* <Link
-          to={url}
-          style={{
-            fontSize: '12px',
-            display: 'flex',
-            fontWeight: 'bold',
-            alignItems: 'center'
-          }}
-        >
-          SHOP NOW
-          <img
+          <Link
+            to={url}
             style={{
-              display: 'inline',
-              marginLeft: '-5px',
-              height: '10px',
-              width: '40px'
+              fontSize: "11px",
+              display: "flex",
+              fontWeight: "bold",
+              alignItems: "center",
+              color: "black",
+              marginTop: "15px",
+              marginBottom: "20px"
             }}
-            src={arrowForward}
-            alt="Arrow"
-          /> */}
+          >
+            SHOP NOW
+            <img
+              style={{
+                display: "inline",
+                marginLeft: "-5px",
+                height: "10px",
+                width: "40px"
+              }}
+              src={arrowForward}
+              alt="Arrow"
+            />
+          </Link>
         </Link>
       ) : null}
     </Box>

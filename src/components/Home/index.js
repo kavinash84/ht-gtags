@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import ShopByCategories from "../ShopByCategories";
-import DealsOfTheDay from "../DealsOfTheDay/index";
+
 import { Link } from "react-router-dom";
 import HeadingHtV1 from "hometown-components-dev/lib/HeadingHtV1";
 import Image from "hometown-components-dev/lib/ImageHtV1";
 import CategoryCarouselLook from "../../components/CategoryCarouselLook";
 import CategoryCarouselDeals from "../../components/CategoryCarouselDeals";
 
-// import CategoryCarousel from "../../components/CategoryCarouselHome";
 import StyleYourHome from "../../components/StyleYourHome";
-import ShopOurBestsellers from "../../components/ShopOurBestsellers";
 
 import ShopGiftByPrice from "./shopGiftByPrice/ShopGiftByPrice";
 import ShopByRooms from "./shopByRoom/shopByRoom";
@@ -24,6 +22,7 @@ class HomeContainer extends Component {
   render() {
     const {
       dealoftheday,
+      bestsellers,
       secondbanner,
       shopByCategories,
       shopByRooms,
@@ -46,7 +45,8 @@ class HomeContainer extends Component {
       forBetterSleep,
       customiseYourHome,
       shopTheRoom,
-      isLoggedIn
+      isLoggedIn,
+      easyFinance
     } = this.props;
     return (
       <div>
@@ -73,9 +73,6 @@ class HomeContainer extends Component {
         <ShopByCategories shopByCategories={shopByCategories} />
         {/* shop by room */}
 
-        {/* <div mt="20px" mb="15px" style={{ display: "block" }}>
-          <CategoryCarousel shopByRooms={shopByRooms} />
-        </div> */}
         <div>
           <ShopByRooms shopByRooms={shopByRooms} />
         </div>
@@ -86,13 +83,12 @@ class HomeContainer extends Component {
           <div>
             <CategoryCarouselDeals
               categoryName="Deals Of The Day"
-              colSize="45%"
+              colSize="20%"
               id={1}
               data={dealoftheday}
             />
           </div>
         ) : null}
-        {/* <DealsOfTheDay /> */}
 
         {/* sale of the day */}
 
@@ -1020,7 +1016,18 @@ class HomeContainer extends Component {
           </div>
         </div>
         {/* shop our bestsellers */}
-        <ShopOurBestsellers />
+
+        {console.log(bestsellers, "bestsellers")}
+        {bestsellers && bestsellers.length ? (
+          <Div pl="10px" pr="10px" mt="30px" mb="15px" bg="#F7F0F0">
+            <CategoryCarouselDeals
+              categoryName="Shop our Bestsellers"
+              colSize="45%"
+              id={2}
+              data={bestsellers}
+            />
+          </Div>
+        ) : null}
         {/* D&B and MK */}
 
         <div style={{ position: "relative", marginTop: "10%" }}>
@@ -1185,13 +1192,14 @@ class HomeContainer extends Component {
             pt="10px"
             ta="center"
             mb="10px"
+            fontSize="30px"
             style={{
               color: "#323131",
               whiteSpace: "normal",
               fontFamily: "medium"
             }}
           >
-            Easy Finance
+            {easyFinance.headerTitle}
           </HeadingHtV1>
           <div
             style={{
@@ -1224,21 +1232,25 @@ class HomeContainer extends Component {
                   flexDirection: "column"
                 }}
               >
-                <Image src={HdfcLogo} width="90%" style={{ zIndex: "10" }} />
+                <Image
+                  src={easyFinance.data[0].url}
+                  width="90%"
+                  style={{ zIndex: "10" }}
+                />
                 <HeadingHtV1
                   fontSize="20px"
                   mb="5px"
                   lineHeight="23px"
                   style={{ color: "#575757" }}
                 >
-                  Upto 10% Cashback
+                  {easyFinance.data[0].title}
                 </HeadingHtV1>
                 <div
                   fontSize="10px"
                   lineHeight="18px"
                   style={{ color: "#575757" }}
                 >
-                  On debit and credit cards
+                  {easyFinance.data[0].desc}
                 </div>
               </div>
             </div>
@@ -1257,21 +1269,25 @@ class HomeContainer extends Component {
                   flexDirection: "column"
                 }}
               >
-                <Image src={BajajLogo} width="90%" style={{ zIndex: "10" }} />
+                <Image
+                  src={easyFinance.data[1].url}
+                  width="90%"
+                  style={{ zIndex: "10" }}
+                />
                 <HeadingHtV1
                   fontSize="20px"
                   mb="5px"
                   lineHeight="23px"
                   style={{ color: "#575757" }}
                 >
-                  0% Interest
+                  {easyFinance.data[1].title}
                 </HeadingHtV1>
                 <div
                   fontSize="15px"
                   lineHeight="18px"
                   style={{ color: "#575757" }}
                 >
-                  On upto 6 months EMI for orders above 3000
+                  {easyFinance.data[1].desc}
                 </div>
               </div>
             </div>
@@ -1290,21 +1306,25 @@ class HomeContainer extends Component {
                   flexDirection: "column"
                 }}
               >
-                <Image src={HdfcLogo} width="90%" style={{ zIndex: "10" }} />
+                <Image
+                  src={easyFinance.data[2].url}
+                  width="90%"
+                  style={{ zIndex: "10" }}
+                />
                 <HeadingHtV1
                   fontSize="20px"
                   mb="5px"
                   lineHeight="23px"
                   style={{ color: "#575757" }}
                 >
-                  Upto 10% Cashback
+                  {easyFinance.data[2].title}
                 </HeadingHtV1>
                 <div
                   fontSize="15px"
                   lineHeight="18px"
                   style={{ color: "#575757" }}
                 >
-                  On debit and credit cards
+                  {easyFinance.data[2].desc}
                 </div>
               </div>
             </div>
@@ -1323,21 +1343,25 @@ class HomeContainer extends Component {
                   flexDirection: "column"
                 }}
               >
-                <Image src={BajajLogo} width="90%" style={{ zIndex: "10" }} />
+                <Image
+                  src={easyFinance.data[3].url}
+                  width="90%"
+                  style={{ zIndex: "10" }}
+                />
                 <HeadingHtV1
                   fontSize="20px"
                   mb="5px"
                   lineHeight="23px"
                   style={{ color: "#575757" }}
                 >
-                  0% Interest
+                  {easyFinance.data[3].title}
                 </HeadingHtV1>
                 <div
                   fontSize="8px"
                   lineHeight="18px"
                   style={{ color: "#575757" }}
                 >
-                  On upto 6 months EMI for orders above 3000
+                  {easyFinance.data[3].desc}
                 </div>
               </div>
             </div>

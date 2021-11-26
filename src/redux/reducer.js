@@ -71,7 +71,8 @@ export default function createReducers(asyncReducers) {
       privacy: homepage,
       homepagecmsdata: homepage,
       returnpolicy: homepage,
-      dealoftheday: homepage
+      dealoftheday: homepage,
+      bestsellers: homepage
     }),
     category,
     stores,

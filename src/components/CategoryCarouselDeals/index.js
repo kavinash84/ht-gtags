@@ -13,15 +13,16 @@ const adjustSlides = length => ({
   slidesToScroll: 1,
   autoplay: false,
   infinite: false,
-  dots: true,
-  arrows: true,
-  customPaging: i => (
-    <div
-      style={{
-        borderTop: "1px solid #848C7F"
-      }}
-    ></div>
-  )
+  dots: false,
+  arrows: true
+  // customPaging: i => (
+  //   <div
+  //     style={{
+  //       marginTop: "20px",
+  //       borderTop: "1px solid red"
+  //     }}
+  //   ></div>
+  // )
 });
 
 export default class CategoryCarousel extends Component {
@@ -62,25 +63,18 @@ export default class CategoryCarousel extends Component {
           <Heading
             fontFamily="medium"
             style={{ textAlign: "center", color: "#323131" }}
-            fontSize="22px"
-            mt="0px"
-            mb="10px"
+            fontSize="30px"
+            mt="40px"
+            mb="20px"
           >
             {categoryName}
           </Heading>
         )}
-        {/* <div
-          style={{
-            width: "0px",
-            borderTop: "2px solid #222222",
-            margin: "auto",
-            marginBottom: "10px"
-          }}
-        /> */}
+
         <SlickSlider
-          style={{ width: "80%", marginLeft: "10%" }}
+          style={{ width: "80%", marginLeft: "10%", marginRight: "10%" }}
           className="mainSlider"
-          settings={adjustSlides(8)}
+          settings={adjustSlides(4)}
         >
           {data.map(slide => (
             <div className="card">
