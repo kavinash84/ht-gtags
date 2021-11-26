@@ -22,18 +22,18 @@ const adjustSlides = length => ({
 
 @connect(({ modularwardrobe }) => ({
   modularwardrobe,
-  dbAdvantage: modularwardrobe.data.items.text.dbAdvantage
+  wardrobesEveryone: modularwardrobe.data.items.text.wardrobesEveryone
 }))
 export default class WardrobesForEveryone extends Component {
   render() {
-    const { dbAdvantage } = this.props;
+    const { wardrobesEveryone } = this.props;
     return (
       <Div
         style={{
           backgroundColor: "#FFFFFF",
           padding: "30px 30px 10px",
           textAlign: "center",
-          marginTop: "180px"
+          marginTop: "130px"
         }}
       >
         <Div
@@ -44,14 +44,14 @@ export default class WardrobesForEveryone extends Component {
             color: "black"
           }}
         >
-          {dbAdvantage.title}
+          {wardrobesEveryone.title}
         </Div>
         <Div style={{ fontSize: "20px", color: "#888888", marginBottom: "40px" }}>
-          {dbAdvantage.subtitle}
+          {wardrobesEveryone.subtitle}
         </Div>
         <Div style={{ paddingBottom: "", width: '86%', marginLeft: "6.5%"}}>
           <DBCarousel
-            data={dbAdvantage.values}
+            data={wardrobesEveryone.values}
             settings={adjustSlides}
             component={3}
           />

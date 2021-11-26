@@ -22,12 +22,12 @@ const adjustSlides = length => ({
 
 @connect(({ modularwardrobe }) => ({
   modularwardrobe,
-  shopFurniture: modularwardrobe.data.items.text.shopFurniture
+  shopnow: modularwardrobe.data.items.text.shopnow
 }))
 
-export default class ShopFurniture extends Component {
+export default class ShopNow extends Component {
   render() {
-    const { shopFurniture } = this.props;
+    const { shopnow } = this.props;
     return (
       <Div
         style={{
@@ -45,7 +45,7 @@ export default class ShopFurniture extends Component {
             color: "black"
           }}
         >
-          {shopFurniture.title}
+          {shopnow.title}
           <div
             style={{
               width: '30px',
@@ -56,11 +56,11 @@ export default class ShopFurniture extends Component {
           />
         </Div>
         <Div style={{ fontSize: "20px", color: "#888888", marginBottom: "40px" }}>
-          {shopFurniture.description}
+          {shopnow.description}
         </Div>
         <Div style={{ paddingBottom: "", width: '86%', marginLeft: "6.5%"}}>
           <DBCarousel
-            data={shopFurniture.values}
+            data={shopnow.values}
             settings={adjustSlides}
             component={3}
           />

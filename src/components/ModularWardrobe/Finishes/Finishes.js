@@ -22,11 +22,11 @@ const adjustSlides = length => ({
 
 @connect(({ modularwardrobe }) => ({
   modularwardrobe,
-  dbServices: modularwardrobe.data.items.text.dbServices
+  finishes: modularwardrobe.data.items.text.finishes
 }))
 export default class Finishes extends Component {
   render() {
-    const { dbServices } = this.props;
+    const { finishes } = this.props;
     return (
       <Div
         style={{
@@ -44,14 +44,14 @@ export default class Finishes extends Component {
             color: "black"
           }}
         >
-          {dbServices.title}
+          {finishes.title}
         </Div>
         <Div style={{ fontSize: "20px", color: "#888888", marginBottom: "40px" }}>
         Choose from a wide range of shutter finishes that Duracucini has to offer, built apt to suit your usage and lifestyle
         </Div>
         <Div style={{  paddingBottom: "", width: '86%', marginLeft: "6.5%"}}>
           <DBCarousel
-            data={dbServices.values}
+            data={finishes.values}
             settings={adjustSlides}
             component={3}
           />

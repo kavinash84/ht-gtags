@@ -1,7 +1,7 @@
 import React from 'react';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
 // import Flex from 'hometown-components-dev/lib/FlexHtV1';
-// import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
@@ -29,13 +29,36 @@ class TopBanner extends React.Component {
           style={{ objectFit: 'cover' }}
         />
         <Box style={{ height: '70%', width: '300px', backgroundColor: 'white' }} className={styles.sub}>
-          <Image src={topBanner.image} alt="topbanner" style={{ objectFit: 'cover', width: '50%', marginLeft: '25%' }} />
+          {/* <Image src={topBanner.image} alt="topbanner" style={{ objectFit: 'cover', width: '50%', marginLeft: '25%' }} /> */}
+          <Text
+            style={{
+              color: '#323131',
+              fontSize: '29px',
+              textAlign: 'center',
+              padding: '70px 20px 0px',
+              lineHeight: '30px',
+              backgroundColor: '#F8F2F2'
+            }}
+          >
+ Modular Wardrobes
+          </Text>
+          <Heading
+            style={{
+              color: '#323131',
+              fontSize: '29px',
+              textAlign: 'center',
+              padding: ' 5px 20px',
+              lineHeight: '30px'
+            }}
+          >
+ at Home<span style={{color: '#F15922'}}>Town</span>
+          </Heading>
           <Text
             style={{
               color: '#666666',
-              fontSize: '18px',
+              fontSize: '16px',
               textAlign: 'center',
-              padding: '20px 20px',
+              padding: '15px 20px 25px',
               lineHeight: '30px'
             }}
           >

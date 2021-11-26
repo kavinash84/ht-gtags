@@ -22,18 +22,18 @@ const adjustSlides = length => ({
 
 @connect(({ modularwardrobe }) => ({
   modularwardrobe,
-  dbAdvantage: modularwardrobe.data.items.text.dbAdvantage
+  accessories: modularwardrobe.data.items.text.accessories
 }))
 export default class Accessories extends Component {
   render() {
-    const { dbAdvantage } = this.props;
+    const { accessories } = this.props;
     return (
       <Div
         style={{
           backgroundColor: "#FFFFFF",
           padding: "30px 30px 10px",
           textAlign: "center",
-          marginTop: "180px"
+          marginTop: "60px"
         }}
       >
         <Div
@@ -44,12 +44,12 @@ export default class Accessories extends Component {
             color: "black"
           }}
         >
-          {dbAdvantage.title}
+          {accessories.title}
           <div
             style={{
               width: '30px',
               borderTop: '2px solid #222222',
-              
+              marginBottom:'10px',
               margin: 'auto',
               marginTop: '15px'
             }}
@@ -57,7 +57,7 @@ export default class Accessories extends Component {
         </Div>
         <Div style={{ paddingBottom: "", width: '86%', marginLeft: "6.5%"}}>
           <DBCarousel
-            data={dbAdvantage.values}
+            data={accessories.values}
             settings={adjustSlides}
             component={3}
           />

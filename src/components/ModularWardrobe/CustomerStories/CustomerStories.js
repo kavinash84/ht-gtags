@@ -49,11 +49,12 @@ export default class CustomerStories extends Component {
               width: '30px',
               borderTop: '2px solid #222222',
               margin: 'auto',
-              marginTop: '15px'
+              marginTop: '15px',
+              marginBottom: '20px'
             }}
           />
         </Div>
-        <Div style={{  paddingBottom: "", width: '80%', marginLeft: "10%"}}>
+        <Div style={{  paddingBottom: "", width: '86%', marginLeft: "6.5%"}}>
           <DBCarousel
             data={customerStories.values}
             settings={adjustSlides}

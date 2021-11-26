@@ -21,13 +21,13 @@ const DBItem = ({ component, data }) => {
               // pointerEvents: ['/modular-wardrobe'].includes(data.url_key) ? 'none' : ''
             }}
           >
-            <Link
+            {/* <Link
               className={styles.link}
               to={data.url_key}
               onClick={() => {
                 sessionStorage.setItem('scrollPosition', window.pageYOffset);
               }}
-            >
+            > */}
               <div style={{ height: '200px' }}>
                 <img
                   src={data.imgSrc}
@@ -37,12 +37,12 @@ const DBItem = ({ component, data }) => {
                 />
               </div>
               <Div className={styles.content4}>
-                <Div style={{fontSize: '20px', textAlign: 'left'}} className={styles.name}>{data.title}</Div>
+                <Div style={{fontSize: '20px', textAlign: 'left'}} className={styles.name2}>{data.title}</Div>
                 <div style={{ display: 'table-cell' }}>
-                  <p className={styles.content4_description}>{data.description}</p>
+                  <p className={styles.content11_description}>{data.description}</p>
                 </div>
-                <Heading style={{textAlign:'left'}} fontSize="14px" fontFamily="regular" color="black" mt="20px">
-                  KNOW MORE
+                {/* <Heading style={{textAlign:'left'}} fontSize="14px" fontFamily="regular" color="black" mt="20px">
+                  KNOW MORE */}
                   {/* <img
                     style={{
                       display: 'inline',
@@ -53,9 +53,9 @@ const DBItem = ({ component, data }) => {
                     src={}
                     alt="Arrow"
                   /> */}
-                </Heading>
+                {/* </Heading> */}
               </Div>
-            </Link>
+            {/* </Link> */}
           </Div>
     </Box>
   );

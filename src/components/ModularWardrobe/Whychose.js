@@ -51,44 +51,35 @@ class WhyChose extends React.Component {
             <div style={{ borderRight: '2px dashed #707070' }} className={styles.innerbox}>
               <text className={styles.boldtext}>27</text>
               <text>cities</text>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
             </div>
             <div style={{ borderRight: '2px dashed #707070' }} className={styles.innerbox}>
               <text className={styles.boldtext}>45</text>
-              <text>Design</text>
-              <text>Studios</text>
+              <text>Design Studios</text>
             </div>
             <div style={{ borderRight: '2px dashed #707070' }} className={styles.innerbox}>
-              <text className={styles.boldtext}>1.5 MILLION+</text> <text>Homes</text>
-              <text>Designed</text>
+              <text className={styles.boldtext}>1.5 MILLION+</text> <text>Homes Designed</text>
             </div>
             <div className={styles.innerbox}>
               <text className={styles.boldtext}>END TO END</text>
-              <text>Project</text>
-              <text>Management</text>
+              <text>Project Management</text>
             </div>
           </div>
           <div className={styles.outerbox2}>
             <div style={{ borderRight: '2px dashed #707070' }} className={styles.innerbox}>
               <text className={styles.boldtext}>100+</text>
-              <text>In-House</text>
-              <text>Designers</text>
+              <text>In-House Designers</text>
             </div>
             <div style={{ borderRight: '2px dashed #707070' }} className={styles.innerbox}>
               <text className={styles.boldtext}>200+</text>
-              <text>Empanelled</text>
-              <text>Contractors</text>
+              <text>Empanelled Contractors</text>
             </div>
             <div style={{ borderRight: '2px dashed #707070' }} className={styles.innerbox}>
               <text className={styles.boldtext}>FREE</text>
-              <text>Service</text>
-              <text>Visits</text>
+              <text>Service Visits</text>
             </div>
             <div className={styles.innerbox}>
               <text className={styles.boldtext}>100%</text>
-              <text>Transparent</text>
-              <text>Pricing</text>
+              <text>Transparent Pricing</text>
             </div>
           </div>
         </div>
