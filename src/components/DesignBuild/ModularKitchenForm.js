@@ -104,9 +104,9 @@ const setDate = () => {
 };
 
 @connect(
-  ({ services, designBuild }) => ({
-    prefferedTime: designBuild.data.items.text.prefferedTime,
-    state: designBuild.data.items.text.state,
+  ({ services, designbuild }) => ({
+    prefferedTime: designbuild.data.items.text.prefferedTime,
+    state: designbuild.data.items.text.state,
     ...services.modularkitchen
   }),
   { sendFormData: sendData, loadPincodeDetails: getData }

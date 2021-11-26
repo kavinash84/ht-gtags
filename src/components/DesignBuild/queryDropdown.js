@@ -7,9 +7,9 @@ import QDropDown from './qDropDown';
 // const styles = require('./Designbuild.scss');
 const arrowForward = require('../../../static/newHomepage/newForwardArrow.svg');
 
-@connect(({ designBuild }) => ({
-  designBuild,
-  queries: designBuild.data.items.text.queries
+@connect(({ designbuild }) => ({
+  designbuild,
+  queries: designbuild.data.items.text.queries
 }))
 export default class QueryDropDownContainer extends Component {
   state = {

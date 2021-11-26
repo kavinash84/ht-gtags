@@ -1,7 +1,7 @@
 import HomeTownLoader from 'containers/Loader';
 import { provideHooks } from 'redial';
 import { loadStores, isLoaded as isStoresLoaded } from 'redux/modules/stores';
-import { loadDesignBuildData } from 'redux/modules/designBuild';
+import { loadDesignBuildData } from 'redux/modules/designbuild';
 
 const hooks = {
   fetch: async ({ store: { dispatch } }) => {

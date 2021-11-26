@@ -11,9 +11,9 @@ import Button from 'hometown-components-dev/lib/ButtonHtV1';
 const imageSrc = require('../../../static/categories/dbadvantage.png');
 const styles = require('./Designbuild.scss');
 
-@connect(({ designBuild }) => ({
-  designBuild,
-  SpacesWeTransform: designBuild.data.items.text.SpacesWeTransform
+@connect(({ designbuild }) => ({
+  designbuild,
+  SpacesWeTransform: designbuild.data.items.text.SpacesWeTransform
 }))
 class RoomsWeTransform extends React.Component {
   render() {

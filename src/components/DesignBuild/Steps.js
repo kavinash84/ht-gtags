@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 const styles = require('./Designbuild.scss');
 const Arrow = require('../../../static/categories/Line.svg');
 
-@connect(({ designBuild }) => ({
-    designBuild,
-    stepsToDreamhome: designBuild.data.items.text.stepsToDreamhome
+@connect(({ designbuild }) => ({
+    designbuild,
+    stepsToDreamhome: designbuild.data.items.text.stepsToDreamhome
   }))
 
 class Steps extends React.Component {

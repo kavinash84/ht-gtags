@@ -20,9 +20,9 @@ const adjustSlides = length => ({
   )
 });
 
-@connect(({ designBuild }) => ({
-  designBuild,
-  styleHome: designBuild.data.items.text.styleHome
+@connect(({ designbuild }) => ({
+  designbuild,
+  styleHome: designbuild.data.items.text.styleHome
 }))
 
 export default class StyleYourHome extends Component {

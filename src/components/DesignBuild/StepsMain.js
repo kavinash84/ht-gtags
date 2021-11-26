@@ -7,9 +7,9 @@ import Steps from './Steps';
 // const styles = require('./Designbuild.scss');
 const arrowForward = require('../../../static/newHomepage/newForwardArrow.svg');
 
-@connect(({ designBuild }) => ({
-  designBuild,
-  stepsToDreamhome: designBuild.data.items.text.stepsToDreamhome
+@connect(({ designbuild }) => ({
+  designbuild,
+  stepsToDreamhome: designbuild.data.items.text.stepsToDreamhome
 }))
 export default class StepsMain extends Component {
   state = {
