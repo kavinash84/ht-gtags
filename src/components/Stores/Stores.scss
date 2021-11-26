@@ -2,6 +2,9 @@
 @import "../../theme/_mixins";
 
 .storeBlock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 1.125rem;
   // background: #f7f7f7;
   margin: 0 0.5rem 0;
@@ -29,4 +32,7 @@
       border: solid 1px $primary;
     }
   }
+}
+.storeContainer {
+  text-align: center !important;
 }

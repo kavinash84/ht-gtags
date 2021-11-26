@@ -47,13 +47,13 @@ class CategoryItem extends React.Component {
               <h3
                 style={{
                   fontSize: "16px",
-                  fontWeight: "300",
+                  fontWeight: "600",
                   margin: " 20px 15px 0 5px",
                   wordSpacing: "2px",
                   letterSpacing: "0.6px",
                   lineHeight: "18px",
                   color: "black",
-                  fontFamily: "reguler"
+                  fontFamily: "light"
                 }}
                 className="get-the-look-titleOne"
               >

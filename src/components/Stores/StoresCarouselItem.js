@@ -32,31 +32,6 @@ const StoresCarouselItem = ({
 }) => (
   <div className={`storeCarouselItem ${styles.storeSliderItem}`}>
     <button className={styles.link}>{city}</button>
-    <SlickSlider settings={settings}>
-      {stores
-        .filter(item => item.city.toUpperCase() === city)
-        .map((store, index) => (
-          <StoreListItem
-            key={String(index)}
-            city={store.city}
-            store={store.store}
-            address={store.address}
-            pincode={store.pincode}
-            state={store.state}
-            phone={store.phone}
-            gaVisitHandler={recordStoreVisit}
-            /*eslint-disable*/
-            url={
-              store.meta.url.length > 0
-                ? store.meta.url
-                : `/store/${hyphenedString(
-                    store.city
-                  ).toLowerCase()}/${hyphenedString(store.store).toLowerCase()}`
-            }
-            /* eslint-enable */
-          />
-        ))}
-    </SlickSlider>
   </div>
 );
 

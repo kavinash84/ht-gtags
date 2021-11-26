@@ -2,10 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Row from "hometown-components-dev/lib/RowHtV1";
-// import Div from "hometown-components/lib/Div";
-// import Text from "hometown-components/lib/Text";
-import HeadingHtV1 from "hometown-components-dev/lib/HeadingHtV1";
-// import Img from 'hometown-components/lib/Img';
+import Div from "hometown-components-dev/lib/BoxHtV1";
+import Heading from "hometown-components-dev/lib/HeadingHtV1";
+import Text from "hometown-components-dev/lib/TextHtV1";
 
 const styles = require("./Stores.scss");
 
@@ -19,7 +18,7 @@ const StoreListItem = ({
   url,
   gaVisitHandler
 }) => (
-  <div style={{ marginTop: "10px" }} col={12}>
+  <Div col={12} mt="10px" mb="0" textAlign="center">
     <div //eslint-disable-line
       onClick={e => {
         e.preventDefault();
@@ -35,8 +34,8 @@ const StoreListItem = ({
       <Link to={url}>
         {/* <Img src="https://static.hometown.in/media/cms/hometownv2/compressed/New-Delhi.jpg" alt="" /> */}
         <Row type="block" m="0">
-          <div>
-            <HeadingHtV1
+          <Div>
+            <Heading
               ta="center"
               color="textDark"
               fontSize="1em"
@@ -45,42 +44,39 @@ const StoreListItem = ({
               mb="5px"
             >
               {store}
-            </HeadingHtV1>
-            <div
-              style={{
-                textAlign: "center",
-                color: "black",
-                fontSize: "0.875rem",
-                marginBottom: "0.12rem"
-              }}
+            </Heading>
+            <Text
+              ta="center"
+              color="rgba(0,0,0,0.5)"
+              fontSize="0.875em"
+              mb="0.125rem"
+              mt="0"
             >
               {address}
-            </div>
-            <div
-              style={{
-                textAlign: "center",
-                color: "black",
-                fontSize: "0.875rem",
-                marginBottom: "0.12rem"
-              }}
+            </Text>
+            <Text
+              ta="center"
+              color="rgba(0,0,0,0.5)"
+              fontSize="0.875em"
+              mb="0.125rem"
+              mt="0"
             >
               {city}, {state}, {pincode}
-            </div>
-            <div
-              style={{
-                textAlign: "center",
-                color: "black",
-                fontSize: "0.875rem",
-                marginBottom: "0.12rem"
-              }}
+            </Text>
+            <Text
+              ta="center"
+              color="rgba(0,0,0,0.5)"
+              fontSize="0.875em"
+              mb="0"
+              mt="0"
             >
               {phone}
-            </div>
-          </div>
+            </Text>
+          </Div>
         </Row>
       </Link>
     </div>
-  </div>
+  </Div>
 );
 
 StoreListItem.defaultProps = {

@@ -42,7 +42,7 @@ import ShopByCategories from "../../components/ShopByCategories";
 const sliderImage = require("../../../static/DnB.jpeg");
 const bannerImage = require("../../../static/modularKitchen.jpeg");
 // const designBuildLogo = require('../../static/designBuildLogo.png');
-const findAStoreImage = require("../../../static/findAStore.jpeg");
+import StoresCarousel from "components/Stores";
 
 // const OFFER_ID = 5;
 
@@ -355,7 +355,7 @@ export default class Home extends Component {
             </Container>
           </Section> */}
 
-          <Section>
+          {/* <Section>
             <Container>
               <Card
                 sx={{
@@ -441,39 +441,13 @@ export default class Home extends Component {
                         consectrator sed adipoli ipsum dolor sit amet
                       </p>
                     </div>
-                    {/* <Text
-                      variant="regular"
-                      color={citySelectError ? "red" : "white"}
-                    >
-                      {citySelectError ? cityErrorMessage : ""}
-                    </Text> */}
+                  
                   </Box>
-                  {/* <Row>
-                    <Select
-                      placeholder="Select City"
-                      defaultValue={null}
-                      options={citiesList}
-                      styles={customDropdownStyles}
-                      onChange={({ value }) => {
-                        this.setState({
-                          selectedCity: value,
-                          citySelectError: false
-                        });
-                      }}
-                    />
-                    <Button
-                      onClick={this.mapHandler}
-                      width={275}
-                      ml={30}
-                      variant="primary.large"
-                    >
-                      LOCATE A STORE
-                    </Button>
-                  </Row> */}
+                 
                 </Row>
               </Card>
             </Container>
-          </Section>
+          </Section> */}
           {/* Unbxd Recently Viewed */}
           <Section>
             <UnbxdRecentlyViewed />
@@ -509,6 +483,9 @@ export default class Home extends Component {
             </Section>
           )} */}
           {/* Footer */}
+          <LazyLoad height={168} once>
+            <StoresCarousel cities={cities} />
+          </LazyLoad>
           <Footer />
         </Body>
       </Wrapper>

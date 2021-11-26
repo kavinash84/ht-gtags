@@ -1,107 +1,82 @@
 import React, { Component } from "react";
 // import Container from "hometown-components/lib/Container";
 import PropTypes from "prop-types";
-
+import Div from "hometown-components-dev/lib/BoxHtV1";
+import Section from "hometown-components-dev/lib/SectionHtV1";
+import Container from "hometown-components-dev/lib/ContainerHtV1";
 import Row from "hometown-components-dev/lib/RowHtV1";
+import Text from "hometown-components-dev/lib/TextHtV1";
+import Heading from "hometown-components-dev/lib/HeadingHtV1";
 
-import HeadingHtV1 from "hometown-components-dev/lib/HeadingHtV1";
-// import Text from "hometown-components/lib/Text";
-import Image from "hometown-components-dev/lib/ImageHtV1";
+import Img from "hometown-components-dev/lib/ImageHtV1";
 
 const storesImg = require("../../../static/storedemoimg.jpg");
-
+const styles = require("./Stores.scss");
 export default class StoreDetails extends Component {
   render() {
     const { store } = this.props;
     return (
-      <div type="block">
-        <div
-          style={{
-            display: "flex",
-            paddingTop: "2.5rem",
-            paddingBottom: "2.5rem",
-            height: "auto"
-          }}
-        >
-          <div style={{ paddingRight: "0", paddingLeft: "0" }} type="container">
+      <Div type="block">
+        <Section display="flex" pt="2.5rem" pb="2.5rem" mb="0" height="auto">
+          <Container type="container" pr="0" pl="0">
             <Row display="block" mr="0" ml="0" mb="1.25rem  ">
-              <div col="12">
-                <Image src={storesImg} alt="Stores" width="100%" />
-              </div>
+              <Div col="12">
+                <Img src={storesImg} alt="Stores" width="100%" />
+              </Div>
             </Row>
             <Row display="block" mr="0" ml="0">
-              <div col="12">
-                <HeadingHtV1
-                  fontSize="0.875rem"
-                  mb="0.625rem"
-                  color="secondary"
-                >
+              <Div col="12" mb="0.625rem">
+                <Heading fontSize="0.875rem" mb="0.625rem" color="secondary">
                   STORE ADDRESS
-                </HeadingHtV1>
-                <div
-                  style={{
-                    fontSize: "0.75rem",
-                    marginBottom: "0rem",
-                    marginTop: "0.3125rem",
-                    color: "black"
-                  }}
+                </Heading>
+                <Text
+                  fontSize="0.75em"
+                  mb="0rem"
+                  mt="0.3125rem"
+                  color="rgba(0, 0, 0, 0.5)"
                 >
                   {store.address || null}
-                </div>
-                <div
-                  style={{
-                    fontSize: "0.75rem",
-                    marginBottom: "0rem",
-                    marginTop: "0.3125rem",
-                    color: "black"
-                  }}
+                </Text>
+                <Text
+                  fontSize="0.75em"
+                  mb="0rem"
+                  mt="0.3125rem"
+                  color="rgba(0, 0, 0, 0.5)"
                 >
                   {store.city || null}, {store.state || null},{" "}
                   {store.pincode || null}
-                </div>
-              </div>
-              <div col="12">
-                <HeadingHtV1
-                  fontSize="0.875rem"
-                  mb="0.625rem"
-                  color="secondary"
-                >
+                </Text>
+              </Div>
+              <Div col="12" mb="0.625rem">
+                <Heading fontSize="0.875rem" mb="0.625rem" color="secondary">
                   TIMING
-                </HeadingHtV1>
-                <div
-                  style={{
-                    fontSize: "0.75rem",
-                    marginBottom: "0rem",
-                    marginTop: "0.3125rem",
-                    color: "black"
-                  }}
+                </Heading>
+                <Text
+                  fontSize="0.75em"
+                  mb="0rem"
+                  mt="0.3125rem"
+                  color="rgba(0, 0, 0, 0.5)"
                 >
                   {store.timings || null}
-                </div>
-              </div>
-              <div col="12">
-                <HeadingHtV1
-                  fontSize="0.875rem"
-                  mb="0.625rem"
-                  color="secondary"
-                >
+                </Text>
+              </Div>
+              <Div col="12">
+                <Heading fontSize="0.875rem" mb="0.625rem" color="secondary">
                   PHONE
-                </HeadingHtV1>
-                <div
-                  style={{
-                    fontSize: "0.75rem",
-                    marginBottom: "0rem",
-                    marginTop: "0.3125rem",
-                    color: "black"
-                  }}
+                </Heading>
+                <Text
+                  fontSize="0.75em"
+                  mb="0rem"
+                  mt="0.3125rem"
+                  color="rgba(0, 0, 0, 0.5)"
                 >
                   {store.phone || null}
-                </div>
-              </div>
+                </Text>
+              </Div>
             </Row>
-          </div>
-        </div>
-      </div>
+          </Container>
+        </Section>
+      </Div>
     );
   }
 }
