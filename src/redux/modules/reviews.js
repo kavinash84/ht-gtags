@@ -172,7 +172,8 @@ export const loadProductsListForReview = data => ({
     GET_PRODUCTSFOR_REVIEW_SUCCESS,
     GET_PRODUCTSFOR_REVIEW_FAIL
   ],
-  promise: ({ client }) => client.get(`tesla/orders/orders2?mobile=${data}`)
+  promise: ({ client }) =>
+    client.get(`tesla/orders/get-orders-by-mobile?mobile=${data}`)
 });
 
 export const toggleReview = () => ({

@@ -517,8 +517,8 @@ export default class WriteReview extends Component {
                           </option>
                           {productsToBeReviewed.map(val => (
                             <option
-                              key={val.article_code}
-                              value={val.article_code}
+                              key={val.fk_catalog_config}
+                              value={val.fk_catalog_config}
                             >
                               {val.product_name}
                             </option>
