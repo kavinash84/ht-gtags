@@ -8,9 +8,20 @@ import Image from "hometown-components-dev/lib/ImageHtV1";
 const arrowForward = require("../../../../static/new-home/newForwardArrow.svg");
 const styles = require("../Slider.scss");
 
-// import "./CategoryCarousel.css";
-
 class DBItem extends React.Component {
+  componentDidMount() {
+    this.handleScrollPosition();
+  }
+
+  handleScrollPosition = () => {
+    const scrollPosition = sessionStorage.getItem("HtscrollPosition");
+    if (scrollPosition) {
+      window.scrollTo(0, parseInt(scrollPosition));
+      setTimeout(function() {
+        sessionStorage.removeItem("HtscrollPosition");
+      }, 2000);
+    }
+  };
   render() {
     const { data } = this.props;
     return (
@@ -18,12 +29,10 @@ class DBItem extends React.Component {
         <Div
           className={`${styles.sliderItem}`}
           style={{
-            // paddingRight: '0px',
             backgroundColor: "#F5F5F5",
             padding: "0px 0px 20px 0",
             height: "600px",
             marginRight: "20px"
-            // pointerEvents: ['/modular-wardrobe'].includes(data.url_key) ? 'none' : ''
           }}
         >
           <Link
@@ -87,19 +96,6 @@ class DBItem extends React.Component {
       </Box>
     );
   }
-  // componentDidMount() {
-  //   this.handleScrollPosition();
-  // }
-
-  // handleScrollPosition = () => {
-  //   const scrollPosition = sessionStorage.getItem("ShopByRoomscroll");
-  //   if (scrollPosition) {
-  //     window.scrollTo(0, parseInt(scrollPosition));
-  //     setTimeout(function() {
-  //       sessionStorage.removeItem("ShopByRoomscroll");
-  //     }, 2000);
-  //   }
-  // };
 }
 
 export default DBItem;

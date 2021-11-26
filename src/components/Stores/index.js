@@ -30,7 +30,7 @@ const mapDispatchToProps = dispatch =>
 
 class StoresCarousel extends Component {
   state = {
-    activeSlide: "",
+    activeSlide: "Ahmedabad",
     selectedStores: []
   };
   nextClick = e => {
@@ -56,80 +56,85 @@ class StoresCarousel extends Component {
       // afterChange: this.nextClick
     };
     const { cities, stores2, gaVisitEvent } = this.props;
-    console.log(this.state.activeSlide, "activeSlide");
+    // console.log(this.state.localCities, cities, "activeSlide");
     return (
       <Section p="0" pt="1rem" pb="0" mb="0" className="storeCarousel">
-        <Container pr="0" pl="0" bg="">
-          <Row type="block" m="0" mb="5px">
-            {/* <Title title="Stores" subTitle="" /> */}
+        {Array.isArray(cities) && cities.length && (
+          <Container pr="0" pl="0" bg="">
+            <Row type="block" m="0" mb="5px">
+              {/* <Title title="Stores" subTitle="" /> */}
+              <div
+                style={{
+                  backgroundImage:
+                    "linear-gradient(to bottom, #EDEDED99, white)",
+                  margin: "20px 40px",
+                  width: "100%",
+                  paddingTop: "40px"
+                }}
+              >
+                <Heading
+                  mb="5px"
+                  fontFamily="medium"
+                  fontSize="30px"
+                  m="auto"
+                  style={{ textAlign: "center", color: "#222222" }}
+                >
+                  Stores
+                </Heading>
+              </div>
+            </Row>
             <div
               style={{
-                backgroundImage: "linear-gradient(to bottom, #EDEDED99, white)",
-                margin: "20px 40px",
-                width: "100%",
-                paddingTop: "40px"
+                width: "30px",
+                borderTop: "2px solid #222222",
+                margin: "auto",
+                marginBottom: "10px"
               }}
-            >
-              <Heading
-                mb="5px"
-                fontFamily="medium"
-                fontSize="30px"
-                m="auto"
-                style={{ textAlign: "center", color: "#222222" }}
-              >
-                Stores
-              </Heading>
-            </div>
-          </Row>
-          <div
-            style={{
-              width: "30px",
-              borderTop: "2px solid #222222",
-              margin: "auto",
-              marginBottom: "10px"
-            }}
-          />
-          <Row type="block" m="0" mb="0.5rem">
-            <Div col={12} p="0 0.75rem 0.5rem">
-              <SlickSlider settings={settings1}>
-                {cities.map((city, index) => (
-                  <div key={String(index)}>
-                    <StoresCarouselItem city={city} />
-                  </div>
-                ))}
-              </SlickSlider>
-              {stores2.data && (
-                <SlickSlider settings={settings2}>
-                  {stores2.data.items.text
-                    .filter(
-                      item => item.city.toUpperCase() === this.state.activeSlide
-                    )
-                    .map((store, index) => (
-                      <StoreListItem
-                        key={String(index)}
-                        city={store.city}
-                        store={store.store}
-                        address={store.address}
-                        pincode={store.pincode}
-                        state={store.state}
-                        phone={store.phone}
-                        gaVisitHandler={gaVisitEvent.recordStoreVisit}
-                        url={
-                          store.meta.url.length > 0
-                            ? store.meta.url
-                            : `/store/${hyphenedString(
-                                store.city
-                              ).toLowerCase()}/${hyphenedString(
-                                store.store
-                              ).toLowerCase()}`
-                        }
-                      />
-                    ))}
+            />
+            <Row type="block" m="0" mb="0.5rem">
+              <Div col={12} p="0 0.75rem 0.5rem">
+                <SlickSlider settings={settings1}>
+                  {cities.map((city, index) => (
+                    <div key={String(index)}>
+                      <StoresCarouselItem city={city} />
+                    </div>
+                  ))}
                 </SlickSlider>
-              )}
-            </Div>
-          </Row>
-        </Container>
+                {stores2.data && (
+                  <SlickSlider settings={settings2}>
+                    {stores2.data.items.text
+                      .filter(
+                        item =>
+                          item.city.toUpperCase() ===
+                          this.state.activeSlide.toUpperCase()
+                      )
+                      .map((store, index) => (
+                        <StoreListItem
+                          key={String(index)}
+                          city={store.city}
+                          store={store.store}
+                          address={store.address}
+                          pincode={store.pincode}
+                          state={store.state}
+                          phone={store.phone}
+                          gaVisitHandler={gaVisitEvent.recordStoreVisit}
+                          url={
+                            store.meta.url.length > 0
+                              ? store.meta.url
+                              : `/store/${hyphenedString(
+                                  store.city
+                                ).toLowerCase()}/${hyphenedString(
+                                  store.store
+                                ).toLowerCase()}`
+                          }
+                        />
+                      ))}
+                  </SlickSlider>
+                )}
+              </Div>
+            </Row>
+          </Container>
+        )}
       </Section>
     );
   }

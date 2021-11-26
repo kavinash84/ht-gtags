@@ -1346,19 +1346,6 @@ class HomeContainer extends Component {
       </div>
     );
   }
-  componentDidMount() {
-    this.handleScrollPosition();
-  }
-
-  handleScrollPosition = () => {
-    const scrollPosition = sessionStorage.getItem("HtscrollPosition");
-    if (scrollPosition) {
-      window.scrollTo(0, parseInt(scrollPosition));
-      setTimeout(function() {
-        sessionStorage.removeItem("HtscrollPosition");
-      }, 2000);
-    }
-  };
 }
 
 export default HomeContainer;
