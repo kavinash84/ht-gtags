@@ -34,7 +34,7 @@ class CategoryItem extends React.Component {
             <Link
               to={url}
               onClick={() => {
-                sessionStorage.setItem("GetThelookscroll", window.pageYOffset);
+                sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
               }}
             >
               <Img

@@ -16,10 +16,7 @@ class CategoryBlock extends React.Component {
         <Link
           to={to}
           onClick={() => {
-            sessionStorage.setItem(
-              "ShopByCatscrollPosition",
-              window.pageYOffset
-            );
+            sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
           }}
         >
           <div
@@ -61,19 +58,19 @@ class CategoryBlock extends React.Component {
       </div>
     );
   }
-  componentDidMount() {
-    this.handleScrollPosition();
-  }
+  // componentDidMount() {
+  //   this.handleScrollPosition();
+  // }
 
-  handleScrollPosition = () => {
-    const scrollPosition = sessionStorage.getItem("ShopByCatscrollPosition");
-    if (scrollPosition) {
-      window.scrollTo(0, parseInt(scrollPosition));
-      setTimeout(function() {
-        sessionStorage.removeItem("ShopByCatscrollPosition");
-      }, 2000);
-    }
-  };
+  // handleScrollPosition = () => {
+  //   const scrollPosition = sessionStorage.getItem("ShopByCatscrollPosition");
+  //   if (scrollPosition) {
+  //     window.scrollTo(0, parseInt(scrollPosition));
+  //     setTimeout(function() {
+  //       sessionStorage.removeItem("ShopByCatscrollPosition");
+  //     }, 2000);
+  //   }
+  // };
 }
 CategoryBlock.propTypes = {
   src: PropTypes.string.isRequired,

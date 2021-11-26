@@ -51,7 +51,12 @@ const CategoryItem = ({
       ) : null}
 
       {url ? (
-        <Link to={url}>
+        <Link
+          to={url}
+          onClick={() => {
+            sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
+          }}
+        >
           {/* Product Image */}
           {image ? (
             <div style={{ position: "relative" }}>

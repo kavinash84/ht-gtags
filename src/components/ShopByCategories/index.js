@@ -14,18 +14,18 @@ import HeadingHtV1 from "hometown-components-dev/lib/HeadingHtV1";
 // import Title from 'components/Title';
 import CategoryBlock from "./CategoryBlock";
 
-const shopByCat01 = require("../../../static/new-home/shopbycat01.png");
-const shopByCat02 = require("../../../static/new-home/shopbycat02.png");
-const shopByCat03 = require("../../../static/new-home/shopbycat03.png");
-const shopByCat04 = require("../../../static/new-home/shopbycat04.png");
-const shopByCat05 = require("../../../static/new-home/shopbycat05.png");
-const shopByCat06 = require("../../../static/new-home/shopbycat06.png");
-const shopByCat07 = require("../../../static/new-home/shopbycat07.png");
-const shopByCat08 = require("../../../static/new-home/shopbycat08.png");
-const shopByCat09 = require("../../../static/new-home/shopbycat09.png");
-const shopByCat10 = require("../../../static/new-home/shopbycat10.png");
-const shopByCat11 = require("../../../static/new-home/shopbycat11.png");
-const shopByCat12 = require("../../../static/new-home/shopbycat12.png");
+// const shopByCat01 = require("../../../static/new-home/shopbycat01.png");
+// const shopByCat02 = require("../../../static/new-home/shopbycat02.png");
+// const shopByCat03 = require("../../../static/new-home/shopbycat03.png");
+// const shopByCat04 = require("../../../static/new-home/shopbycat04.png");
+// const shopByCat05 = require("../../../static/new-home/shopbycat05.png");
+// const shopByCat06 = require("../../../static/new-home/shopbycat06.png");
+// const shopByCat07 = require("../../../static/new-home/shopbycat07.png");
+// const shopByCat08 = require("../../../static/new-home/shopbycat08.png");
+// const shopByCat09 = require("../../../static/new-home/shopbycat09.png");
+// const shopByCat10 = require("../../../static/new-home/shopbycat10.png");
+// const shopByCat11 = require("../../../static/new-home/shopbycat11.png");
+// const shopByCat12 = require("../../../static/new-home/shopbycat12.png");
 
 const ShopByCategories = ({ shopByCategories }) => {
   {

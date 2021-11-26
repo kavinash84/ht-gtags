@@ -30,7 +30,7 @@ class DBItem extends React.Component {
             className={styles.link}
             to={data.url_key}
             onClick={() => {
-              sessionStorage.setItem("ShopByRoomscroll", window.pageYOffset);
+              sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
             }}
           >
             <div style={{ height: "400px" }}>
@@ -87,19 +87,19 @@ class DBItem extends React.Component {
       </Box>
     );
   }
-  componentDidMount() {
-    this.handleScrollPosition();
-  }
+  // componentDidMount() {
+  //   this.handleScrollPosition();
+  // }
 
-  handleScrollPosition = () => {
-    const scrollPosition = sessionStorage.getItem("ShopByRoomscroll");
-    if (scrollPosition) {
-      window.scrollTo(0, parseInt(scrollPosition));
-      setTimeout(function() {
-        sessionStorage.removeItem("ShopByRoomscroll");
-      }, 2000);
-    }
-  };
+  // handleScrollPosition = () => {
+  //   const scrollPosition = sessionStorage.getItem("ShopByRoomscroll");
+  //   if (scrollPosition) {
+  //     window.scrollTo(0, parseInt(scrollPosition));
+  //     setTimeout(function() {
+  //       sessionStorage.removeItem("ShopByRoomscroll");
+  //     }, 2000);
+  //   }
+  // };
 }
 
 export default DBItem;

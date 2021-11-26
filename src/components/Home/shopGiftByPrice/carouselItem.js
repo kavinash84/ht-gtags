@@ -27,7 +27,7 @@ const DBItem = ({ component, data }) => {
           className={styles.link}
           to={data.url_key}
           onClick={() => {
-            sessionStorage.setItem("scrollPosition", window.pageYOffset);
+            sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
           }}
         >
           <div style={{ height: "200px" }}>

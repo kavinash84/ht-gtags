@@ -19,7 +19,12 @@ const CategoryBlock = ({ src, to, title }) => (
       width: "30%"
     }}
   >
-    <Link to={to}>
+    <Link
+      to={to}
+      onClick={() => {
+        sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
+      }}
+    >
       <div
         style={{
           width: "auto",

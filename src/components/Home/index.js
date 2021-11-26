@@ -489,7 +489,7 @@ class HomeContainer extends Component {
             <Link
               to={midbanner.url_key}
               onClick={() => {
-                sessionStorage.setItem("", window.pageYOffset);
+                sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
               }}
             >
               <Image
