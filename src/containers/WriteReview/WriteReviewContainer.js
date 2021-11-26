@@ -8,9 +8,9 @@ export default class WriteReviewContainer extends Component {
   render() {
     return (
       <Wrapper>
-        {/* <Header /> */}
+        <Header />
         <WriteReview />
-        {/* <Footer /> */}
+        <Footer />
       </Wrapper>
     );
   }

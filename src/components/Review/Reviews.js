@@ -84,7 +84,7 @@ export default class Reviews extends Component {
                         }}
                       />
                     </Div>
-                    <Div className={styles.location}>Mumbai</Div>
+                    <Div className={styles.location}>{item.city}</Div>
                   </Div>
                   <Div className={styles.logoContainer}>
                     <Img src={Star} width="60px" height="60px" alt="Star" />

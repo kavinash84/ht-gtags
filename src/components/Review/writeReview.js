@@ -339,7 +339,7 @@ export default class WriteReview extends Component {
                     <div
                       className={styles.getDetailsBtn}
                       style={{
-                        height: mobileError ? "50%" : "81%",
+                        height: mobileError ? "57%" : "81%",
                         marginBottom: mobileError ? "20px" : "",
                         marginTop: "10px"
                       }}
