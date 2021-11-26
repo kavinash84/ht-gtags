@@ -15,15 +15,16 @@ const CategoryBlock = ({ src, to, title }) => (
       flexDirection: "row",
       flexWrap: "wrap",
       justifyContent: "center",
-      alignItems: "center"
+      alignItems: "center",
+      width: "30%"
     }}
   >
     <Link to={to}>
       <div
         style={{
-          width: "400px",
+          width: "auto",
           display: "flex",
-          height: "360px",
+
           flexDirection: "column",
           alignItems: "flex-start",
           justifyContent: "flex-start",

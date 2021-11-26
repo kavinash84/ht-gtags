@@ -182,7 +182,7 @@ class HomeContainer extends Component {
         {/* Shop homeware */}
         <div
           style={{
-            width: "1200px",
+            width: "80%",
             display: "flex",
             margin: "auto",
             flexDirection: "column",

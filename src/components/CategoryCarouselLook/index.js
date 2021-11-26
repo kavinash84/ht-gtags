@@ -26,7 +26,8 @@ export default class CategoryCarousel extends Component {
             flexWrap: "wrap",
             justifyContent: "center",
             alignItems: "center",
-            width: "100%"
+            width: "90%",
+            margin: "0 5%"
           }}
         >
           {getTheLook.data.map(val => (

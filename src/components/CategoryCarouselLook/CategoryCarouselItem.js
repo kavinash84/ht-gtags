@@ -10,7 +10,7 @@ class CategoryItem extends React.Component {
   render() {
     const { src, title, url } = this.props;
     return (
-      <div>
+      <div style={{ width: "30%" }}>
         <div
           style={{
             display: "flex",
@@ -18,15 +18,14 @@ class CategoryItem extends React.Component {
             flexWrap: "wrap",
             justifyContent: "center",
             alignItems: "center",
-            width: "90%",
+            // width: "90%",
             margin: "auto"
           }}
         >
           <div
             style={{
-              width: "400px",
               display: "flex",
-              height: "360px",
+
               flexDirection: "column",
               alignItems: "flex-start",
               justifyContent: "flex-start"
