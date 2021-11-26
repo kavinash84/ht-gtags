@@ -1,8 +1,8 @@
 import { DESIGN_BUILD } from 'helpers/apiUrls';
 
-const LOAD = 'designBuild/LOAD';
-const LOAD_SUCCESS = 'designBuild/LOAD_SUCCESS';
-const LOAD_FAIL = 'designBuild/LOAD_FAIL';
+const LOAD = 'designbuild/LOAD';
+const LOAD_SUCCESS = 'designbuild/LOAD_SUCCESS';
+const LOAD_FAIL = 'designbuild/LOAD_FAIL';
 
 const initialState = {
   loaded: false,
