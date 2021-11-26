@@ -62,3 +62,10 @@
   color: #999999 !important;
   font-weight: bold;
 }
+
+.slick-prev {
+  left: -60px !important;
+}
+.slick-next {
+  right: -60px !important;
+}

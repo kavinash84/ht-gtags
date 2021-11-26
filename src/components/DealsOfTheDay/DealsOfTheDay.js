@@ -14,23 +14,6 @@ class DealsOfTheDayCards extends Component {
   render() {
     return (
       <div className="DealsOfTheDay-wrapper">
-        <HeadingHtV1
-          fontFamily="medium"
-          style={{ textAlign: "center", color: "#323131" }}
-          fontSize="30px"
-          mt="25px"
-          mb="10px"
-        >
-          Deals Of The day
-        </HeadingHtV1>
-        <RowHtV1 justifyContent="center" mx={0} mb={0} />
-        <div
-          style={{
-            width: "30px",
-            borderTop: "2px solid #222222",
-            margin: "auto"
-          }}
-        />
         {/* <Link to={to}> */}
         <div className="DealsOfTheDay-card-wrapper">
           <div className="DealsOfTheDay-card">

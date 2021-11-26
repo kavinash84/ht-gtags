@@ -52,7 +52,8 @@ class CategoryItem extends React.Component {
                   wordSpacing: "2px",
                   letterSpacing: "0.6px",
                   lineHeight: "18px",
-                  color: "black"
+                  color: "black",
+                  fontFamily: "reguler"
                 }}
                 className="get-the-look-titleOne"
               >

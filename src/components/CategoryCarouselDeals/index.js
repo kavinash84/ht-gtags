@@ -1,20 +1,27 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import BoxHtV1 from 'hometown-components/lib/Div';
-import Heading from 'hometown-components/lib/Heading';
-import Title from 'components/Title';
-import SlickSlider from 'components/SlickSlider';
-import CategoryCarouselItem from 'components/CategoryCarouselDeals/CategoryCarouselItem';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import Box from "hometown-components-dev/lib/BoxHtV1";
+import Heading from "hometown-components-dev/lib/HeadingHtV1";
+// import Title from "components/Title";
+import SlickSlider from "components/SlickSlider";
+import CategoryCarouselItem from "components/CategoryCarouselDeals/CategoryCarouselItem";
 
-import './CategoryCarousel.css';
+import "./CategoryCarousel.css";
 
 const adjustSlides = length => ({
-  slidesToShow: length >= 1 ? 1.3 : length,
+  slidesToShow: 3,
   slidesToScroll: 1,
   autoplay: false,
   infinite: false,
   dots: true,
-  arrows: false
+  arrows: true,
+  customPaging: i => (
+    <div
+      style={{
+        borderTop: "1px solid #848C7F"
+      }}
+    ></div>
+  )
 });
 
 export default class CategoryCarousel extends Component {
@@ -50,11 +57,11 @@ export default class CategoryCarousel extends Component {
     const { data, categoryName, id } = this.props;
 
     return (
-      <BoxHtV1 p="20px">
-        {(categoryName !== '' || categoryName !== null) && (
+      <Box p="40px">
+        {(categoryName !== "" || categoryName !== null) && (
           <Heading
             fontFamily="medium"
-            style={{ textAlign: 'center', color: '#323131' }}
+            style={{ textAlign: "center", color: "#323131" }}
             fontSize="22px"
             mt="0px"
             mb="10px"
@@ -62,22 +69,26 @@ export default class CategoryCarousel extends Component {
             {categoryName}
           </Heading>
         )}
-        <div
+        {/* <div
           style={{
-            width: '30px',
-            borderTop: '2px solid #222222',
-            margin: 'auto',
-            marginBottom: '10px'
+            width: "0px",
+            borderTop: "2px solid #222222",
+            margin: "auto",
+            marginBottom: "10px"
           }}
-        />
-        <SlickSlider className="mainSlider" settings={adjustSlides(8)}>
+        /> */}
+        <SlickSlider
+          style={{ width: "80%", marginLeft: "10%" }}
+          className="mainSlider"
+          settings={adjustSlides(8)}
+        >
           {data.map(slide => (
             <div className="card">
               <CategoryCarouselItem
                 id={id}
                 image={slide.image_url}
-                name={slide.name || ''}
-                brand={slide.brand_name || ''}
+                name={slide.name || ""}
+                brand={slide.brand_name || ""}
                 maxPrice={slide.mrp}
                 offerPrice={slide.csp}
                 coupon={slide.coupon_code}
@@ -96,15 +107,20 @@ export default class CategoryCarousel extends Component {
             </div>
           ))}
         </SlickSlider>
-        <BoxHtV1 bg="#F7F0F0" style={{ height: '300px', width: '100vw', zIndex: -1 }} mt="-270px" ml="-30px" />
-      </BoxHtV1>
+        <Box
+          bg="#F7F0F0"
+          style={{ height: "400px", width: "100vw", zIndex: -1 }}
+          mt="-22%"
+          ml="-30px"
+        />
+      </Box>
     );
   }
 }
 
 CategoryCarousel.defaultProps = {
   data: [],
-  categoryName: '',
+  categoryName: "",
   // subTitle: '',
   id: 0
 };

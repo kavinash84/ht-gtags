@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import HeadingHtV1 from "hometown-components-dev/lib/HeadingHtV1";
 import Image from "hometown-components-dev/lib/ImageHtV1";
 import CategoryCarouselLook from "../../components/CategoryCarouselLook";
+import CategoryCarouselDeals from "../../components/CategoryCarouselDeals";
 
 // import CategoryCarousel from "../../components/CategoryCarouselHome";
 import StyleYourHome from "../../components/StyleYourHome";
@@ -22,6 +23,7 @@ const arrowForward = require("../../../static/new-home/newForwardArrow.svg");
 class HomeContainer extends Component {
   render() {
     const {
+      dealoftheday,
       secondbanner,
       shopByCategories,
       shopByRooms,
@@ -78,8 +80,19 @@ class HomeContainer extends Component {
           <ShopByRooms shopByRooms={shopByRooms} />
         </div>
 
-        {/* deals of the day section */}
-        <DealsOfTheDay />
+        {/* Deals of the day */}
+
+        {dealoftheday && dealoftheday.length ? (
+          <div>
+            <CategoryCarouselDeals
+              categoryName="Deals Of The Day"
+              colSize="45%"
+              id={1}
+              data={dealoftheday}
+            />
+          </div>
+        ) : null}
+        {/* <DealsOfTheDay /> */}
 
         {/* sale of the day */}
 
