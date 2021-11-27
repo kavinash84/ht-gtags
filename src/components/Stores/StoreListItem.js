@@ -18,7 +18,7 @@ const StoreListItem = ({
   url,
   gaVisitHandler
 }) => (
-  <Div col={12} mt="10px" mb="0" textAlign="center">
+  <Div col={12} mt="10px" mb="10px" textAlign="center">
     <div //eslint-disable-line
       onClick={e => {
         e.preventDefault();

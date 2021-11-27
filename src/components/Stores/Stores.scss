@@ -7,7 +7,7 @@
   align-items: center;
   padding: 1.125rem;
   // background: #f7f7f7;
-  margin: 0 0.5rem 0;
+  margin: 0 0.5rem 0px;
   cursor: pointer;
   a {
     &:hover {
@@ -35,4 +35,7 @@
 }
 .storeContainer {
   text-align: center !important;
+}
+.slick-next:before {
+  display: none;
 }

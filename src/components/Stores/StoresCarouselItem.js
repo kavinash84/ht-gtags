@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { setCity, gaVisitEvent } from "redux/modules/stores";
-import { hyphenedString } from "utils/helper";
-import StoreListItem from "./StoreListItem";
-import SlickSlider from "../SlickSlider";
+// import { hyphenedString } from "utils/helper";
+// import StoreListItem from "./StoreListItem";
+// import SlickSlider from "../SlickSlider";
 
 import "./slickArrow.css";
 
@@ -30,9 +30,7 @@ const StoresCarouselItem = ({
   stores,
   gaVisitEvent: recordStoreVisit
 }) => (
-  <div className={`storeCarouselItem ${styles.storeSliderItem}`}>
-    <button className={styles.link}>{city}</button>
-  </div>
+  <div className={`storeCarouselItem ${styles.storeSliderItem}`}>{city}</div>
 );
 
 StoresCarouselItem.defaultProps = {
