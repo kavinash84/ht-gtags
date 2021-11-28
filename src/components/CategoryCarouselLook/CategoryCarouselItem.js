@@ -41,7 +41,7 @@ class CategoryItem extends React.Component {
                 src={src}
                 m={5}
                 height="auto"
-                width="90%"
+                width="93%"
                 style={{ zIndex: 10 }}
               />
               <h3

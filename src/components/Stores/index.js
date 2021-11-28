@@ -117,7 +117,7 @@ class StoresCarousel extends Component {
                   }}
                 >
                   <div
-                    style={{ position: "absolute", top: "65%", left: "35%" }}
+                    style={{ position: "absolute", top: "64%", left: "35%" }}
                   >
                     <img
                       onClick={this.previous}
@@ -135,10 +135,11 @@ class StoresCarousel extends Component {
                       position: "absolute",
                       width: "25%",
                       left: "38%",
-                      top: "63%"
+                      top: "62%"
                     }}
                   >
                     <Slider
+                      arrows={false}
                       settings={settings1}
                       ref={c => (this.slider = c)}
                       className={styles.slickNext}
@@ -151,7 +152,7 @@ class StoresCarousel extends Component {
                     </Slider>
                   </div>
                   <div
-                    style={{ position: "absolute", top: "65%", left: "64%" }}
+                    style={{ position: "absolute", top: "64%", left: "64%" }}
                   >
                     <img
                       onClick={this.next}

@@ -40,7 +40,7 @@ const CategoryBlock = ({ src, to, title }) => (
           src={src}
           alt={title}
           height="auto"
-          width="90%"
+          width="95%"
           // style={{ zIndex: "10" }}
         />
 
