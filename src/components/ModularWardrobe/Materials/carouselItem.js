@@ -37,9 +37,9 @@ const DBItem = ({ component, data }) => {
                 />
               </div>
               <Div className={styles.content4}>
-                <Div style={{fontSize: '20px', textAlign: 'left'}} className={styles.name2}>{data.title}</Div>
+              <Div style={{fontSize: '20px', textAlign: 'left',  fontSize: '16px' , fontWeight: '600',textAlign: 'left',color: 'black',   margin: '20px 15px'}} >{data.title}</Div>
                 <div style={{ display: 'table-cell' }}>
-                  <p className={styles.content11_description}>{data.description}</p>
+                  <p style={{textAlign: 'left', overflow: 'hidden', fontSize: '14px', lineHeight:'20px', marginLeft: '15px',color:'#888888',  width: '85%'}}>{data.description}</p>
                 </div>
                 {/* <Heading style={{textAlign:'left'}} fontSize="14px" fontFamily="regular" color="black" mt="20px">
                   KNOW MORE */}

@@ -20,7 +20,7 @@ const DBItem = ({ component, data }) => {
                   src={data.imgSrc}
                   alt={data.title}
                   className={styles.curosalImg}
-                  style={{ height: '100%', width: 'auto', margin: 'auto' }}
+                  style={{ height: '100%', width: '100%', margin: 'auto' }}
                 />
               </div>
               <Div className={styles.content8}>

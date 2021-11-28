@@ -7,7 +7,7 @@ import SpacesWeDesign from './Spaces';
 import LetUsHelpYou from './LetusHelp';
 import LivingRoom from './SpacesWeDesign/LivingRoom';
 import Kitchen from './SpacesWeDesign/Kitchen';
-import BedRoom from './SpacesWeDesign/BedRoom';
+import Bedroom from './SpacesWeDesign/Bedroom';
 import ShopNow from './ShopNow/ShopNow';
 import CustomerStories from './CustomerStories/CustomerStories';
 
@@ -22,7 +22,7 @@ class HomeInteriorContainer extends React.Component {
             <SpacesWeDesign />
             <LivingRoom />
             <Kitchen />
-            <BedRoom />
+            <Bedroom />
             <CustomerStories />
             <ShopNow />
             <LetUsHelpYou />
