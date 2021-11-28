@@ -27,7 +27,7 @@ class Steps extends React.Component {
               backgroundColor: '#FFFFFF',
               boxShadow: '0px 5px 10px #0000001A',
               position: 'absolute',
-              top: '12%',
+              top: '13%',
               right: '0'
             }}
             p="10px 30px"
