@@ -7,7 +7,7 @@ export default () => (
   <div className="wrapper">
       {/* <MenuFooter pageTitle="Design & Build"> */}
     <DesignBuildContainer />
-    {/* <Footer /> */}
+    <Footer />
     {/* </MenuFooter> */}
   </div>
 );

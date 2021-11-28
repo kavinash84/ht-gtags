@@ -14,7 +14,6 @@ const DBItem = ({ component, data }) => {
       <Div
             className={`${styles.sliderItem}`}
             style={{
-              // paddingRight: '0px',
               backgroundColor:'#F5F5F5',
               padding: '20px 0px',
               height: '380px'
