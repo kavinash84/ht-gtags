@@ -11,6 +11,7 @@ import StyleYourHome from "../../components/StyleYourHome";
 
 import ShopGiftByPrice from "./shopGiftByPrice/ShopGiftByPrice";
 import ShopByRooms from "./shopByRoom/shopByRoom";
+import ShopOurNewArrivals from "../ShopOurNewArrivals";
 
 // easy finance
 // const HdfcLogo = require("../../../static/new-home/hdfc-logo.png");
@@ -435,7 +436,7 @@ class HomeContainer extends Component {
                   marginLeft: "-40px"
                 }}
               >
-                <div style={{ marginBottom: "-70px" }}>
+                <div style={{ marginBottom: "-90px" }}>
                   <HeadingHtV1
                     fontSize="30px"
                     textAlign="center"
@@ -482,7 +483,8 @@ class HomeContainer extends Component {
                   style={{
                     alignItems: "center",
                     marginTop: "135px",
-                    zIndex: "10"
+                    zIndex: "10",
+                    height: "75%"
                   }}
                   src={TheWayWeAreEntertainingNow.image2}
                 />
@@ -513,7 +515,7 @@ class HomeContainer extends Component {
         {/* </Link> */}
 
         {/* shop our new arrivals in furniture */}
-        <div>
+        {/* <div>
           <HeadingHtV1
             mb="20px"
             mt="70px"
@@ -551,7 +553,10 @@ class HomeContainer extends Component {
               }}
             />
           </Link>
-        </div>
+        </div> */}
+        <ShopOurNewArrivals
+          shopOurNewArrivalFurniture={shopOurNewArrivalFurniture}
+        />
 
         {/* wfh Favourites are back */}
         <div>

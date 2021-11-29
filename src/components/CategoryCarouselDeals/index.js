@@ -137,8 +137,8 @@ export default class CategoryCarousel extends Component {
         <Box
           bg="#F7F0F0"
           style={{ height: "400px", width: "100vw", zIndex: -1 }}
-          mt="-22%"
-          ml="-30px"
+          mt="-21.5%"
+          ml="-40px"
         />
       </Box>
     );
