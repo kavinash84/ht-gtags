@@ -63,9 +63,9 @@ export default class CategoryCarousel extends Component {
           <Heading
             fontFamily="medium"
             style={{ textAlign: "center", color: "#323131" }}
-            fontSize="30px"
+            fontSize="35px"
             mt="40px"
-            mb="20px"
+            mb="30px"
           >
             {categoryName}
           </Heading>

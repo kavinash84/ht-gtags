@@ -17,8 +17,8 @@ const DBItem = ({ component, data }) => {
           // paddingRight: '0px',
           backgroundColor: "#ffffff",
           padding: "20px 0px",
-          height: "320px",
-          marginTop: "25px"
+
+          marginTop: "auto"
 
           // pointerEvents: ['/modular-wardrobe'].includes(data.url_key) ? 'none' : ''
         }}
@@ -30,12 +30,17 @@ const DBItem = ({ component, data }) => {
             sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
           }}
         >
-          <div style={{ height: "200px" }}>
+          <div>
             <img
               src={data.image}
               alt={data.title}
               className={styles.curosalImg}
-              style={{ height: "100%", width: "90%", margin: "auto" }}
+              style={{
+                height: "auto",
+                width: "90%",
+                margin: "auto",
+                objectFit: "contain"
+              }}
             />
           </div>
           <Div className={styles.content4}>

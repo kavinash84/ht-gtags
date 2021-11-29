@@ -37,10 +37,11 @@ export default class ShopByRooms extends Component {
         }}
       >
         <Div
+          fontWeight="bold"
           style={{
-            fontSize: "30px",
+            fontSize: "35px",
             fontWeight: "600",
-            marginBottom: "20px",
+            marginBottom: "40px",
             color: "black"
           }}
         >

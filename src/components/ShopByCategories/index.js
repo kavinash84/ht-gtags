@@ -41,8 +41,9 @@ const ShopByCategories = ({ shopByCategories }) => {
     >
       <HeadingHtV1
         fontFamily="medium"
+        fontWeight="bold"
         style={{ textAlign: "center", color: "#323131" }}
-        fontSize="30px"
+        fontSize="35px"
         mt="45px"
         mb="10px"
       >
