@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ShopByCategories from "../ShopByCategories";
-
+import Div from "hometown-components-dev/lib/BoxHtV1";
 import { Link } from "react-router-dom";
 import HeadingHtV1 from "hometown-components-dev/lib/HeadingHtV1";
 import Image from "hometown-components-dev/lib/ImageHtV1";

@@ -5,12 +5,13 @@ import { triggerImpression, triggerClick } from "redux/modules/analytics";
 import BoxHtV1 from "hometown-components-dev/lib/BoxHtV1";
 import SliderItem from "./SliderItem";
 import SlickSlider from "../SlickSlider";
-
+// import "../Home/Slider.css";
 const settings = {
   slidesToShow: 1,
   slidesToScroll: 1,
-  arrows: true
-
+  autoplay: true,
+  dots: true,
+  arrows: false
   // customPaging: i => (
   //   <div
   //     style={{
@@ -32,11 +33,12 @@ class MainSlider extends Component {
     } = this.props;
     const finalSettings = { ...settings, ...newSettings };
     return (
+      // <div className="carousel-one">
       <SlickSlider
         settings={finalSettings}
         afterChange={e => triggerSlideChange(e)}
         ref={reference}
-        className="mainSlider "
+        className="mainSlider"
       >
         {data.map((slide, index) => (
           <BoxHtV1 key={String(index)}>
@@ -51,6 +53,7 @@ class MainSlider extends Component {
           </BoxHtV1>
         ))}
       </SlickSlider>
+      // </div>
     );
   }
 }
