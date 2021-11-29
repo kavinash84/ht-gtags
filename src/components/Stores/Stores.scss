@@ -36,8 +36,16 @@
 .storeContainer {
   text-align: center !important;
 }
-.slickNext {
+.slick-next:before {
+  display: none;
 }
-// .slider .slick-prev {
-//   display: none;
-// }
+.custome_store_slider {
+  img {
+    width: 15px !important;
+  }
+}
+.storesTitle {
+  h2 {
+    padding-top: 20px;
+  }
+}

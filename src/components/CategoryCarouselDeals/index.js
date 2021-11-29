@@ -8,13 +8,46 @@ import CategoryCarouselItem from "components/CategoryCarouselDeals/CategoryCarou
 
 import "./CategoryCarousel.css";
 
+const LeftArrow = require("../../../static/new-home/roundedArrowLeft.svg");
+const RightArrow = require("../../../static/new-home/roundedArrowRight.svg");
+
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <React.Fragment>
+      <img
+        className={className}
+        src={RightArrow}
+        onClick={onClick}
+        style={{ ...style, margin: 0, width: "15px" }}
+      />
+    </React.Fragment>
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <React.Fragment>
+      <img
+        className={className}
+        src={LeftArrow}
+        onClick={onClick}
+        style={{ ...style, margin: 0, width: "15px" }}
+      />
+    </React.Fragment>
+  );
+}
+
 const adjustSlides = length => ({
   slidesToShow: 3,
   slidesToScroll: 1,
   autoplay: false,
   infinite: false,
   dots: false,
-  arrows: true
+  arrows: true,
+  nextArrow: <SampleNextArrow />,
+  prevArrow: <SamplePrevArrow />
   // customPaging: i => (
   //   <div
   //     style={{
@@ -63,9 +96,9 @@ export default class CategoryCarousel extends Component {
           <Heading
             fontFamily="medium"
             style={{ textAlign: "center", color: "#323131" }}
-            fontSize="35px"
+            fontSize="30px"
             mt="40px"
-            mb="30px"
+            mb="20px"
           >
             {categoryName}
           </Heading>

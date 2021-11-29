@@ -4,7 +4,38 @@ import BoxHtV1 from "hometown-components-dev/lib/BoxHtV1";
 import SlickSlider from "components/SlickSlider";
 import DBItem from "./carouselItem";
 
+const LeftArrow = require("../../../../static/new-home/roundedArrowLeft.svg");
+const RightArrow = require("../../../../static/new-home/roundedArrowRight.svg");
+
 import "../Slider.css";
+
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <React.Fragment>
+      <img
+        className={className}
+        src={RightArrow}
+        onClick={onClick}
+        style={{ ...style, margin: 0, width: "15px" }}
+      />
+    </React.Fragment>
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <React.Fragment>
+      <img
+        className={className}
+        src={LeftArrow}
+        onClick={onClick}
+        style={{ ...style, margin: 0, width: "15px" }}
+      />
+    </React.Fragment>
+  );
+}
 
 export default class DBCarousel extends Component {
   render() {
@@ -13,7 +44,11 @@ export default class DBCarousel extends Component {
       <BoxHtV1>
         <div className="carousel-one">
           <SlickSlider
-            settings={settings(data.length)}
+            settings={{
+              ...settings(data.length),
+              nextArrow: <SampleNextArrow />,
+              prevArrow: <SamplePrevArrow />
+            }}
             className="homeCarouselSlider"
           >
             {data.map(slide => (

@@ -9,17 +9,17 @@ import Slider from "react-slick";
 import Div from "hometown-components-dev/lib/BoxHtV1";
 import Heading from "hometown-components-dev/lib/HeadingHtV1";
 // import Col from 'hometown-components-dev/lib/ColHtV1';
-const LeftArrow = require("../../../static/new-home/arrowLeft.svg");
-const RightArrow = require("../../../static/new-home/arrowRight.svg");
 import { setCity, gaVisitEvent } from "redux/modules/stores";
-
 import StoreListItem from "./StoreListItem";
-
 import { filterStoreList } from "selectors/homepage";
 import StoresCarouselItem from "./StoresCarouselItem";
-
 import SlickSlider from "../SlickSlider";
+
+const LeftArrow = require("../../../static/new-home/arrowLeft.svg");
+const RightArrow = require("../../../static/new-home/arrowRight.svg");
+
 const styles = require("./Stores.scss");
+
 const mapStateToProps = ({ stores }) => ({
   filteredStores: filterStoreList(stores),
   stores2: stores,
@@ -29,20 +29,37 @@ const mapStateToProps = ({ stores }) => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ setSelectedCity: setCity, gaVisitEvent }, dispatch);
 
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <React.Fragment>
+      <img
+        className={className}
+        src={RightArrow}
+        onClick={onClick}
+        style={{ ...style, margin: 0, width: "15px" }}
+      />
+    </React.Fragment>
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <React.Fragment>
+      <img
+        className={className}
+        src={LeftArrow}
+        onClick={onClick}
+        style={{ ...style, margin: 0, width: "15px" }}
+      />
+    </React.Fragment>
+  );
+}
+
 class StoresCarousel extends Component {
-  constructor(props) {
-    super(props);
-    this.next = this.next.bind(this);
-    this.previous = this.previous.bind(this);
-  }
-  next() {
-    this.slider.slickNext();
-  }
-  previous() {
-    this.slider.slickPrev();
-  }
   state = {
-    activeSlide: "Ahmedabad",
+    activeSlide: "AHMEDABAD",
     selectedStores: []
   };
   nextClick = e => {
@@ -55,9 +72,11 @@ class StoresCarousel extends Component {
       slidesToShow: 1,
       slidesToScroll: 1,
       autoplay: false,
+      arrows: true,
       infinite: false,
-
-      afterChange: this.nextClick
+      afterChange: this.nextClick,
+      nextArrow: <SampleNextArrow />,
+      prevArrow: <SamplePrevArrow />
     };
     const settings2 = {
       slidesToShow: 1,
@@ -68,111 +87,81 @@ class StoresCarousel extends Component {
       // afterChange: this.nextClick
     };
     const { cities, stores2, gaVisitEvent } = this.props;
-    // console.log(this.state.localCities, cities, "activeSlide");
+    console.log(this.state.activeSlide, "activeSlide");
     return (
       <Section p="0" pt="1rem" pb="0" mb="0" className="storeCarousel">
-        {Array.isArray(cities) && cities.length && (
-          <Container pr="0" pl="0" bg="">
-            <Row type="block" m="0" mb="5px">
-              {/* <Title title="Stores" subTitle="" /> */}
-              <div
-                style={{
-                  backgroundImage:
-                    "linear-gradient(to bottom, #EDEDED99, white)",
-                  margin: "20px 40px",
-                  width: "100%",
-                  paddingTop: "40px"
-                }}
-              >
-                <Heading
-                  mb="5px"
-                  fontFamily="medium"
-                  fontSize="30px"
-                  m="auto"
-                  style={{ textAlign: "center", color: "#222222" }}
-                >
-                  Stores
-                </Heading>
-              </div>
-            </Row>
+        <Container pr="0" pl="0" bg="">
+          <Row type="block" m="0" mb="5px" mt="20px">
+            {/* <Title title="Stores" subTitle="" /> */}
             <div
               style={{
-                width: "30px",
-                borderTop: "2px solid #222222",
-                margin: "auto",
-                marginBottom: "40px"
+                backgroundImage: "linear-gradient(to bottom, #EDEDED99, white)",
+                margin: "0px 40px",
+                width: "100%"
               }}
-            />
+              className={styles.storesTitle}
+            >
+              <Heading
+                mb="5px"
+                fontFamily="medium"
+                fontSize="28px"
+                m="auto"
+                style={{
+                  textAlign: "center",
+                  color: "#222222"
+                }}
+              >
+                Stores
+              </Heading>
+            </div>
+          </Row>
+          <div
+            style={{
+              width: "30px",
+              borderTop: "2px solid #222222",
+              margin: "auto",
+              marginBottom: "10px"
+            }}
+          />
+          {Array.isArray(cities) && cities.length && (
             <Row type="block" m="0" mb="0.5rem">
               <Div col={12} p="0 0.75rem 0.5rem">
                 <div
                   style={{
-                    textAlign: "center",
-                    width: "40%",
-                    height: "50%",
-                    margin: "auto",
-                    border: "1px solid #fcd6c0",
-                    borderRadius: "5px"
+                    display: "flex",
+                    width: "100%",
+                    justifyContent: "center"
                   }}
                 >
                   <div
-                    style={{ position: "absolute", top: "64%", left: "35%" }}
-                  >
-                    <img
-                      onClick={this.previous}
-                      style={{
-                        display: "inline",
-
-                        height: "10px"
-                      }}
-                      src={LeftArrow}
-                      alt="Arrow"
-                    />
-                  </div>
-                  <div
                     style={{
-                      position: "absolute",
-                      width: "25%",
-                      left: "38%",
-                      top: "62%"
+                      display: "flex",
+                      width: "30%",
+                      justifyContent: "center",
+                      border: "1px solid #FCD6C0",
+                      padding: "10px"
                     }}
                   >
-                    <Slider
-                      // arrows={false}
-                      settings={settings1}
-                      ref={c => (this.slider = c)}
-                      className={styles.slickNext}
+                    <div
+                      style={{ width: "50%" }}
+                      className={styles.custome_store_slider}
                     >
-                      {cities.map((city, index) => (
-                        <div key={String(index)}>
-                          <StoresCarouselItem city={city} />
-                        </div>
-                      ))}
-                    </Slider>
-                  </div>
-                  <div
-                    style={{ position: "absolute", top: "64%", left: "64%" }}
-                  >
-                    <img
-                      onClick={this.next}
-                      style={{
-                        display: "inline",
-
-                        height: "10px"
-                      }}
-                      src={RightArrow}
-                      alt="Arrow"
-                    />
+                      <SlickSlider settings={settings1}>
+                        {cities.map((city, index) => (
+                          <div key={String(index)}>
+                            <StoresCarouselItem city={city} />
+                          </div>
+                        ))}
+                      </SlickSlider>
+                    </div>
                   </div>
                 </div>
-
                 {stores2.data && (
                   <SlickSlider settings={settings2}>
                     {stores2.data.items.text
                       .filter(
                         item =>
-                          item.city.toUpperCase() ===
-                          this.state.activeSlide.toUpperCase()
+                          item.city.toUpperCase() === this.state.activeSlide
                       )
                       .map((store, index) => (
                         <StoreListItem
@@ -199,8 +188,8 @@ class StoresCarousel extends Component {
                 )}
               </Div>
             </Row>
-          </Container>
-        )}
+          )}
+        </Container>
       </Section>
     );
   }
