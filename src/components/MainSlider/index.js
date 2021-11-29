@@ -1,21 +1,27 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { triggerImpression, triggerClick } from 'redux/modules/analytics';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import SliderItem from './SliderItem';
-import SlickSlider from '../SlickSlider';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { triggerImpression, triggerClick } from "redux/modules/analytics";
+import BoxHtV1 from "hometown-components-dev/lib/BoxHtV1";
+import SliderItem from "./SliderItem";
+import SlickSlider from "../SlickSlider";
 
 const settings = {
   slidesToShow: 1,
-  slidesToScroll: 1
+  slidesToScroll: 1,
+  arrows: true
 };
 
 class MainSlider extends Component {
   render() {
     const {
- data, triggerSlideChange, triggerSlideClick, reference, newSettings, onImageClick
-} = this.props;
+      data,
+      triggerSlideChange,
+      triggerSlideClick,
+      reference,
+      newSettings,
+      onImageClick
+    } = this.props;
     const finalSettings = { ...settings, ...newSettings };
     return (
       <SlickSlider
@@ -27,10 +33,10 @@ class MainSlider extends Component {
         {data.map((slide, index) => (
           <BoxHtV1 key={String(index)}>
             <SliderItem
-              target={slide.target || ''}
+              target={slide.target || ""}
               image={slide.image}
               url={slide.url_key}
-              title={slide.title || ''}
+              title={slide.title || ""}
               onClick={() => triggerSlideClick(index)}
               onImageClick={onImageClick}
             />

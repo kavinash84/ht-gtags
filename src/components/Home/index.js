@@ -13,8 +13,8 @@ import ShopGiftByPrice from "./shopGiftByPrice/ShopGiftByPrice";
 import ShopByRooms from "./shopByRoom/shopByRoom";
 
 // easy finance
-const HdfcLogo = require("../../../static/new-home/hdfc-logo.png");
-const BajajLogo = require("../../../static/new-home/bajaj-logo.png");
+// const HdfcLogo = require("../../../static/new-home/hdfc-logo.png");
+// const BajajLogo = require("../../../static/new-home/bajaj-logo.png");
 
 const arrowForward = require("../../../static/new-home/newForwardArrow.svg");
 
@@ -50,25 +50,32 @@ class HomeContainer extends Component {
     } = this.props;
     return (
       <div>
-        {/* 2nd banner */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignContent: "center",
-            width: "80%",
-            margin: "0 10%"
+        <Link
+          onClick={() => {
+            sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
           }}
+          to={secondbanner.url_key}
         >
-          <Image
-            mt="50px"
-            mb="30px"
-            src={secondbanner.image}
+          {/* 2nd banner */}
+          <div
             style={{
-              zIndex: "10px"
+              display: "flex",
+              justifyContent: "center",
+              alignContent: "center",
+              width: "80%",
+              margin: "0 10%"
             }}
-          />
-        </div>
+          >
+            <Image
+              mt="50px"
+              mb="30px"
+              src={secondbanner.image}
+              style={{
+                zIndex: "10px"
+              }}
+            />
+          </div>
+        </Link>
         {/* shop by categories */}
         <ShopByCategories shopByCategories={shopByCategories} />
         {/* shop by room */}
@@ -91,39 +98,45 @@ class HomeContainer extends Component {
         ) : null}
 
         {/* sale of the day */}
-
-        <div
-          style={{
-            display: "flex",
-            width: "100%",
-            justifyContent: "space-evenly",
-            alignContent: "center",
-            marginTop: "70px"
+        <Link
+          onClick={() => {
+            sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
           }}
-          dealsOfthedaybannerone={dealsOfthedaybannerone}
+          to={dealsOfthedaybannerone.url_key}
         >
-          <Image
-            mt="50px"
-            mb="30px"
-            src={dealsOfthedaybannerone.image}
+          <div
             style={{
-              width: "45%",
-
-              zIndex: "10"
+              display: "flex",
+              width: "100%",
+              justifyContent: "space-evenly",
+              alignContent: "center",
+              marginTop: "70px"
             }}
-          />
-          <Image
-            mt="50px"
-            mb="30px"
-            src={dealsOfthedaybannerTwo.image}
-            style={{
-              width: "45%",
+            dealsOfthedaybannerone={dealsOfthedaybannerone}
+          >
+            <Image
+              mt="50px"
+              mb="30px"
+              src={dealsOfthedaybannerone.image}
+              style={{
+                width: "45%",
 
-              zIndex: "10"
-            }}
-          />
-        </div>
+                zIndex: "10"
+              }}
+            />
 
+            <Image
+              mt="50px"
+              mb="30px"
+              src={dealsOfthedaybannerTwo.image}
+              style={{
+                width: "45%",
+
+                zIndex: "10"
+              }}
+            />
+          </div>
+        </Link>
         {/* Beast seat in the house  */}
         <div>
           <HeadingHtV1
@@ -380,104 +393,102 @@ class HomeContainer extends Component {
           </Link>
         </div>
         {/* The way we're Entertaining now */}
-
-        <div
-          style={{
-            display: "flex",
-            width: "80%",
-            flexDirection: "row",
-            justifyContent: "center",
-            alignContent: "center",
-            marginTop: "20px",
-            marginBottom: "30px",
-            margin: "3% 10%"
-          }}
-        >
-          <div style={{ width: "" }}>
-            <Image
-              style={{
-                width: "90%",
-                alignItems: "center",
-
-                zIndex: "10"
-              }}
-              src={TheWayWeAreEntertainingNow.image1}
-            />
-          </div>
-
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "flex-end",
-              alignItems: "center",
-              width: "40%",
-              marginLeft: "-40px"
+        <div>
+          <Link
+            onClick={() => {
+              sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
             }}
+            to={TheWayWeAreEntertainingNow.url_key}
           >
-            <div style={{ marginBottom: "-70px" }}>
-              <HeadingHtV1
-                fontSize="30px"
-                textAlign="center"
-                ml="10px"
-                mr="10px"
-                fontWeight="bold"
-              >
-                {TheWayWeAreEntertainingNow.mainTitleOne}
-              </HeadingHtV1>
-              <HeadingHtV1
-                fontSize="30px"
-                textAlign="center"
-                ml="10px"
-                mr="10px"
-                mt="6px"
-              >
-                {TheWayWeAreEntertainingNow.mainTitleTwo}
-              </HeadingHtV1>
-              <Link
-                onClick={() => {
-                  sessionStorage.setItem(
-                    "HtscrollPosition",
-                    window.pageYOffset
-                  );
-                }}
-                to={TheWayWeAreEntertainingNow.url_key}
-              >
-                <HeadingHtV1
-                  fontFamily="medium"
-                  style={{
-                    textAlign: "center",
-                    fontSize: "13px",
-                    fontWeight: "bold",
-                    color: "#222222",
-                    marginTop: "15px"
-                  }}
-                >
-                  {TheWayWeAreEntertainingNow.buttonTitle}
-                  <img
-                    style={{
-                      display: "inline",
-                      marginLeft: "-3px",
-                      height: "10px",
-                      width: "40px"
-                    }}
-                    src={arrowForward}
-                    alt="Arrow"
-                  />
-                </HeadingHtV1>
-              </Link>
-            </div>
-            <Image
+            <div
               style={{
-                alignItems: "center",
-                marginTop: "135px",
-                zIndex: "10"
+                display: "flex",
+                width: "80%",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignContent: "center",
+                marginTop: "20px",
+                marginBottom: "30px",
+                margin: "3% 10%"
               }}
-              src={TheWayWeAreEntertainingNow.image2}
-            />
-          </div>
-        </div>
+            >
+              <div style={{ width: "" }}>
+                <Image
+                  style={{
+                    width: "90%",
+                    alignItems: "center",
 
+                    zIndex: "10"
+                  }}
+                  src={TheWayWeAreEntertainingNow.image1}
+                />
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-end",
+                  alignItems: "center",
+                  width: "40%",
+                  marginLeft: "-40px"
+                }}
+              >
+                <div style={{ marginBottom: "-70px" }}>
+                  <HeadingHtV1
+                    fontSize="30px"
+                    textAlign="center"
+                    ml="10px"
+                    mr="10px"
+                    fontWeight="bold"
+                  >
+                    {TheWayWeAreEntertainingNow.mainTitleOne}
+                  </HeadingHtV1>
+                  <HeadingHtV1
+                    fontSize="30px"
+                    textAlign="center"
+                    ml="10px"
+                    mr="10px"
+                    mt="6px"
+                  >
+                    {TheWayWeAreEntertainingNow.mainTitleTwo}
+                  </HeadingHtV1>
+
+                  <HeadingHtV1
+                    fontFamily="medium"
+                    style={{
+                      textAlign: "center",
+                      fontSize: "13px",
+                      fontWeight: "bold",
+                      color: "#222222",
+                      marginTop: "15px"
+                    }}
+                  >
+                    {TheWayWeAreEntertainingNow.buttonTitle}
+                    <img
+                      style={{
+                        display: "inline",
+                        marginLeft: "-3px",
+                        height: "10px",
+                        width: "40px"
+                      }}
+                      src={arrowForward}
+                      alt="Arrow"
+                    />
+                  </HeadingHtV1>
+                </div>
+                <Image
+                  style={{
+                    alignItems: "center",
+                    marginTop: "135px",
+                    zIndex: "10"
+                  }}
+                  src={TheWayWeAreEntertainingNow.image2}
+                />
+              </div>
+            </div>
+          </Link>
+        </div>
         {/* Mid banner */}
 
         {!isLoggedIn ? (
@@ -543,48 +554,42 @@ class HomeContainer extends Component {
 
         {/* wfh Favourites are back */}
         <div>
-          <Link
-            onClick={() => {
-              sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
+          <div
+            style={{
+              display: "flex",
+              width: "100%",
+              flexDirection: "column",
+              justifyContent: "space-evenly",
+              alignContent: "center",
+              marginTop: "40px"
             }}
-            to={wfhAreBack.url_key}
           >
+            <HeadingHtV1
+              style={{
+                textAlign: "center",
+                color: "#323131",
+                fontFamily: "medium",
+                margin: "30px 0 10px 0px"
+              }}
+              fontSize="30px"
+            >
+              {wfhAreBack.mainTitle}
+            </HeadingHtV1>
             <div
               style={{
+                fontSize: "15px",
+                color: "gray",
                 display: "flex",
-                width: "100%",
-                flexDirection: "column",
-                justifyContent: "space-evenly",
+                justifyContent: "center",
                 alignContent: "center",
-                marginTop: "40px"
+                margin: "10px 250px 20px 250px",
+                textAlign: "center"
               }}
             >
-              <HeadingHtV1
-                style={{
-                  textAlign: "center",
-                  color: "#323131",
-                  fontFamily: "medium",
-                  margin: "30px 0 10px 0px"
-                }}
-                fontSize="30px"
-              >
-                {wfhAreBack.mainTitle}
-              </HeadingHtV1>
-              <div
-                style={{
-                  fontSize: "15px",
-                  color: "gray",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignContent: "center",
-                  margin: "10px 250px 20px 250px",
-                  textAlign: "center"
-                }}
-              >
-                {wfhAreBack.description}
-              </div>
+              {wfhAreBack.description}
+            </div>
 
-              {/* <HeadingHtV1
+            {/* <HeadingHtV1
                 style={{
                   textAlign: "center",
                   fontSize: "12px",
@@ -605,6 +610,7 @@ class HomeContainer extends Component {
                   alt="Arrow"
                 />
               </HeadingHtV1> */}
+            <div>
               <div
                 style={{
                   display: "flex",
@@ -618,26 +624,24 @@ class HomeContainer extends Component {
               >
                 <Image
                   style={{
-                    width: "45%",
                     alignItems: "center",
-
+                    margin: "0 2.5%",
                     zIndex: "10"
                   }}
-                  src={wfhAreBack.image1}
+                  src={wfhAreBack.data[0].image1}
                 />
 
                 <Image
                   style={{
-                    width: "45%",
                     alignItems: "center",
-
+                    margin: "0 2.5%",
                     zIndex: "10"
                   }}
-                  src={wfhAreBack.image2}
+                  src={wfhAreBack.data[1].image2}
                 />
               </div>
             </div>
-          </Link>
+          </div>
         </div>
         {/* Trends we love */}
         <div>
@@ -658,11 +662,11 @@ class HomeContainer extends Component {
             onClick={() => {
               sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
             }}
-            to={trendsWeLove1.url_key}
+            to={trendsWeLove1.data[0].url_key}
           >
             <Image
               mt="10px"
-              src={trendsWeLove1.image1}
+              src={trendsWeLove1.data[0].image1}
               style={{
                 width: "75%",
 
@@ -672,39 +676,60 @@ class HomeContainer extends Component {
               }}
             />
           </Link>
-          <Image
-            mt="60px"
-            src={trendsWeLove1.image2}
-            style={{
-              width: "75%",
-
-              alignItems: "center",
-              marginLeft: "12.5%",
-              marginRight: "12.5%"
+          <Link
+            onClick={() => {
+              sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
             }}
-          />
-          <Image
-            mt="60px"
-            src={trendsWeLove1.image3}
-            style={{
-              width: "75%",
+            to={trendsWeLove1.data[1].url_key}
+          >
+            <Image
+              mt="60px"
+              src={trendsWeLove1.data[1].image2}
+              style={{
+                width: "75%",
 
-              alignItems: "center",
-              marginLeft: "12.5%",
-              marginRight: "12.5%"
+                alignItems: "center",
+                marginLeft: "12.5%",
+                marginRight: "12.5%"
+              }}
+            />
+          </Link>
+          <Link
+            onClick={() => {
+              sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
             }}
-          />
-          <Image
-            mt="60px"
-            src={trendsWeLove1.image4}
-            style={{
-              width: "75%",
+            to={trendsWeLove1.data[2].url_key}
+          >
+            <Image
+              mt="60px"
+              src={trendsWeLove1.data[2].image3}
+              style={{
+                width: "75%",
 
-              alignItems: "center",
-              marginLeft: "12.5%",
-              marginRight: "12.5%"
+                alignItems: "center",
+                marginLeft: "12.5%",
+                marginRight: "12.5%"
+              }}
+            />
+          </Link>
+          <Link
+            onClick={() => {
+              sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
             }}
-          />
+            to={trendsWeLove1.data[3].url_key}
+          >
+            <Image
+              mt="60px"
+              src={trendsWeLove1.data[3].image4}
+              style={{
+                width: "75%",
+
+                alignItems: "center",
+                marginLeft: "12.5%",
+                marginRight: "12.5%"
+              }}
+            />
+          </Link>
         </div>
         {/* for your master suite */}
 
