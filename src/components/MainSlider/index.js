@@ -5,20 +5,20 @@ import { triggerImpression, triggerClick } from "redux/modules/analytics";
 import BoxHtV1 from "hometown-components-dev/lib/BoxHtV1";
 import SliderItem from "./SliderItem";
 import SlickSlider from "../SlickSlider";
-// import "../Home/Slider.css";
+
+import "./MainSlider.css";
+
 const settings = {
   slidesToShow: 1,
   slidesToScroll: 1,
-  autoplay: true,
   dots: true,
-  arrows: false
-  // customPaging: i => (
-  //   <div
-  //     style={{
-  //       borderTop: "1px solid #848C7F"
-  //     }}
-  //   />
-  // )
+  customPaging: i => (
+    <div
+      style={{
+        borderTop: "1px solid #848C7F"
+      }}
+    ></div>
+  )
 };
 
 class MainSlider extends Component {
@@ -33,27 +33,27 @@ class MainSlider extends Component {
     } = this.props;
     const finalSettings = { ...settings, ...newSettings };
     return (
-      // <div className="carousel-one">
-      <SlickSlider
-        settings={finalSettings}
-        afterChange={e => triggerSlideChange(e)}
-        ref={reference}
-        className="mainSlider"
-      >
-        {data.map((slide, index) => (
-          <BoxHtV1 key={String(index)}>
-            <SliderItem
-              target={slide.target || ""}
-              image={slide.image}
-              url={slide.url_key}
-              title={slide.title || ""}
-              onClick={() => triggerSlideClick(index)}
-              onImageClick={onImageClick}
-            />
-          </BoxHtV1>
-        ))}
-      </SlickSlider>
-      // </div>
+      <React.Fragment className="Maincarousel-one">
+        <SlickSlider
+          settings={finalSettings}
+          afterChange={e => triggerSlideChange(e)}
+          ref={reference}
+          className="mainSlider"
+        >
+          {data.map((slide, index) => (
+            <BoxHtV1 key={String(index)}>
+              <SliderItem
+                target={slide.target || ""}
+                image={slide.image}
+                url={slide.url_key}
+                title={slide.title || ""}
+                onClick={() => triggerSlideClick(index)}
+                onImageClick={onImageClick}
+              />
+            </BoxHtV1>
+          ))}
+        </SlickSlider>
+      </React.Fragment>
     );
   }
 }
