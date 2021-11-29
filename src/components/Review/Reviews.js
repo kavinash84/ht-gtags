@@ -28,7 +28,7 @@ export default class Reviews extends Component {
         <Div className={styles.reviewListContainer}>
           {ReviewsData.map(item => (
             <Div className={styles.reviewContainer}>
-              <Link to={item.pdp_link ? item.pdp_link : item.link || ""}>
+              <Link to={item.link || ""}>
                 <Div className={styles.customerName}>{item.nickname}</Div>
                 <Div className={styles.subDetails}>
                   <Div style={{ width: "80%" }}>
