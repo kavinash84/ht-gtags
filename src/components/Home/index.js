@@ -642,8 +642,8 @@ class HomeContainer extends Component {
                     style={{
                       background: "#000",
                       padding: "15px 10px",
-                      width: "45%",
-                      margin: "-48px 99px 0px",
+                      width: "43%",
+                      margin: "-48px 30% 0px",
                       position: "relative",
                       opacity: "0.8",
                       textAlign: "center",
@@ -659,7 +659,7 @@ class HomeContainer extends Component {
                         height: "10px",
                         width: "40px"
                       }}
-                      src={arrowForward}
+                      src={ShopNowarrowForward}
                       alt="Arrow"
                     />
                   </div>
@@ -683,8 +683,8 @@ class HomeContainer extends Component {
                     style={{
                       background: "#000",
                       padding: "15px 10px",
-                      width: "45%",
-                      margin: "-48px 99px 0px",
+                      width: "43%",
+                      margin: "-48px 30% 0px",
                       position: "relative",
                       opacity: "0.8",
                       textAlign: "center",
@@ -700,7 +700,7 @@ class HomeContainer extends Component {
                         height: "10px",
                         width: "40px"
                       }}
-                      src={arrowForward}
+                      src={ShopNowarrowForward}
                       alt="Arrow"
                     />
                   </div>

@@ -56,7 +56,6 @@ class StoresCarousel extends Component {
       slidesToScroll: 1,
       autoplay: false,
       infinite: false,
-      arrows: false,
 
       afterChange: this.nextClick
     };
@@ -139,7 +138,7 @@ class StoresCarousel extends Component {
                     }}
                   >
                     <Slider
-                      arrows={false}
+                      // arrows={false}
                       settings={settings1}
                       ref={c => (this.slider = c)}
                       className={styles.slickNext}

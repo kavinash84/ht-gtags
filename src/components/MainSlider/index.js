@@ -36,7 +36,7 @@ class MainSlider extends Component {
         settings={finalSettings}
         afterChange={e => triggerSlideChange(e)}
         ref={reference}
-        className="mainSlider"
+        className="mainSlider "
       >
         {data.map((slide, index) => (
           <BoxHtV1 key={String(index)}>
