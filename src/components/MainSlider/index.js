@@ -33,12 +33,12 @@ class MainSlider extends Component {
     } = this.props;
     const finalSettings = { ...settings, ...newSettings };
     return (
-      <React.Fragment className="Maincarousel-one">
+      <React.Fragment>
         <SlickSlider
           settings={finalSettings}
           afterChange={e => triggerSlideChange(e)}
           ref={reference}
-          className="mainSlider"
+          className="maincarousel_one"
         >
           {data.map((slide, index) => (
             <BoxHtV1 key={String(index)}>

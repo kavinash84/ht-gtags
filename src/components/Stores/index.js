@@ -139,7 +139,8 @@ class StoresCarousel extends Component {
                       width: "30%",
                       justifyContent: "center",
                       border: "1px solid #FCD6C0",
-                      padding: "10px"
+                      padding: "10px",
+                      borderRadius: "4px"
                     }}
                   >
                     <div

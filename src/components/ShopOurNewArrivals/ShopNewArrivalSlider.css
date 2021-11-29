@@ -1,14 +1,14 @@
-.maincarousel_one .slick-dots {
+.ShopBannercarousel_one .slick-dots {
   /* margin-top: 15px; */
   position: relative;
 }
 
-.maincarousel_one .slick-dots li {
+.ShopBannercarousel_one .slick-dots li {
   margin-left: 0px;
   margin-right: 0px;
 }
 
-.maincarousel_one .slick-dots li.slick-active div {
+.ShopBannercarousel_one .slick-dots li.slick-active div {
   border-top: 3px solid black !important;
   margin-top: -1px;
 }

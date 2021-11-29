@@ -3,36 +3,83 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Image from "hometown-components-dev/lib/ImageHtV1";
 
-class SlideItems extends React.Component {
-  render() {
-    const { src, url } = this.props;
-
+/* TO DO Add ProgressiveImage */
+const SliderItem = ({ image, url, onClick, target, onImageClick }) => {
+  if (!target && !url) {
     return (
-      <div>
-        <Link
-          onClick={() => {
-            sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
+      <Link
+        onClick={() => {
+          sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
+        }}
+        to={url}
+      >
+        <Image
+          mt="15px"
+          src={image}
+          style={{
+            width: "90%",
+            alignItems: "center",
+            marginLeft: "5%",
+            marginRight: "5%"
           }}
-          to={url}
-        >
-          <Image
-            mt="15px"
-            src={src}
-            style={{
-              width: "90%",
-              alignItems: "center",
-              marginLeft: "5%",
-              marginRight: "5%"
-            }}
-          />
-        </Link>
-      </div>
+        />
+      </Link>
+    );
+  } else if (target) {
+    return (
+      <Link
+        onClick={() => {
+          sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
+        }}
+        to={url}
+      >
+        <Image
+          mt="15px"
+          src={image}
+          style={{
+            width: "90%",
+            alignItems: "center",
+            marginLeft: "5%",
+            marginRight: "5%"
+          }}
+        />
+      </Link>
     );
   }
-}
-SlideItems.propTypes = {
-  src: PropTypes.string.isRequired,
-
-  url: PropTypes.string.isRequired
+  return (
+    <Link
+      onClick={() => {
+        sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
+      }}
+      to={url}
+    >
+      <Image
+        mt="15px"
+        src={image}
+        style={{
+          width: "90%",
+          alignItems: "center",
+          marginLeft: "5%",
+          marginRight: "5%"
+        }}
+      />
+    </Link>
+  );
 };
-export default SlideItems;
+
+SliderItem.defaultProps = {
+  image: "",
+  target: "",
+  url: "",
+  onImageClick: () => {}
+};
+
+SliderItem.propTypes = {
+  image: PropTypes.string,
+  url: PropTypes.string,
+  target: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
+  onImageClick: PropTypes.func
+};
+
+export default SliderItem;
