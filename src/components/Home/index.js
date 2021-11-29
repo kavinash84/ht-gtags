@@ -17,6 +17,7 @@ import ShopByRooms from "./shopByRoom/shopByRoom";
 // const BajajLogo = require("../../../static/new-home/bajaj-logo.png");
 
 const arrowForward = require("../../../static/new-home/newForwardArrow.svg");
+const ShopNowarrowForward = require("../../../static/new-home/shopnowarrow.svg");
 
 class HomeContainer extends Component {
   render() {
@@ -98,45 +99,45 @@ class HomeContainer extends Component {
         ) : null}
 
         {/* sale of the day */}
-        <Link
-          onClick={() => {
-            sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
+
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-evenly",
+            alignContent: "center",
+            marginTop: "70px"
           }}
-          to={dealsOfthedaybannerone.url_key}
+          dealsOfthedaybannerone={dealsOfthedaybannerone}
         >
-          <div
-            style={{
-              display: "flex",
-              width: "100%",
-              justifyContent: "space-evenly",
-              alignContent: "center",
-              marginTop: "70px"
+          <Link
+            onClick={() => {
+              sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
             }}
-            dealsOfthedaybannerone={dealsOfthedaybannerone}
+            to={dealsOfthedaybannerone.url_key}
+            style={{
+              width: "45%",
+
+              zIndex: "10"
+            }}
           >
-            <Image
-              mt="50px"
-              mb="30px"
-              src={dealsOfthedaybannerone.image}
-              style={{
-                width: "45%",
+            <Image mt="50px" mb="30px" src={dealsOfthedaybannerone.image} />
+          </Link>
+          <Link
+            onClick={() => {
+              sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
+            }}
+            to={dealsOfthedaybannerTwo.url_key}
+            style={{
+              width: "45%",
 
-                zIndex: "10"
-              }}
-            />
+              zIndex: "10"
+            }}
+          >
+            <Image mt="50px" mb="30px" src={dealsOfthedaybannerTwo.image} />
+          </Link>
+        </div>
 
-            <Image
-              mt="50px"
-              mb="30px"
-              src={dealsOfthedaybannerTwo.image}
-              style={{
-                width: "45%",
-
-                zIndex: "10"
-              }}
-            />
-          </div>
-        </Link>
         {/* Beast seat in the house  */}
         <div>
           <HeadingHtV1
@@ -622,23 +623,88 @@ class HomeContainer extends Component {
                   position: "relative"
                 }}
               >
-                <Image
+                <Link
+                  onClick={() => {
+                    sessionStorage.setItem(
+                      "HtscrollPosition",
+                      window.pageYOffset
+                    );
+                  }}
+                  to={wfhAreBack.data[0].url_key}
                   style={{
                     alignItems: "center",
                     margin: "0 2.5%",
                     zIndex: "10"
                   }}
-                  src={wfhAreBack.data[0].image1}
-                />
-
-                <Image
+                >
+                  <Image src={wfhAreBack.data[0].image1} />
+                  <div
+                    style={{
+                      background: "#000",
+                      padding: "15px 10px",
+                      width: "45%",
+                      margin: "-48px 99px 0px",
+                      position: "relative",
+                      opacity: "0.8",
+                      textAlign: "center",
+                      fontSize: "15px",
+                      color: "white"
+                    }}
+                  >
+                    SHOP NOW
+                    <img
+                      style={{
+                        display: "inline",
+                        marginLeft: "-3px",
+                        height: "10px",
+                        width: "40px"
+                      }}
+                      src={arrowForward}
+                      alt="Arrow"
+                    />
+                  </div>
+                </Link>
+                <Link
+                  onClick={() => {
+                    sessionStorage.setItem(
+                      "HtscrollPosition",
+                      window.pageYOffset
+                    );
+                  }}
+                  to={wfhAreBack.data[1].url_key}
                   style={{
                     alignItems: "center",
                     margin: "0 2.5%",
                     zIndex: "10"
                   }}
-                  src={wfhAreBack.data[1].image2}
-                />
+                >
+                  <Image src={wfhAreBack.data[1].image2} />
+                  <div
+                    style={{
+                      background: "#000",
+                      padding: "15px 10px",
+                      width: "45%",
+                      margin: "-48px 99px 0px",
+                      position: "relative",
+                      opacity: "0.8",
+                      textAlign: "center",
+                      fontSize: "15px",
+                      color: "white"
+                    }}
+                  >
+                    SHOP NOW
+                    <img
+                      style={{
+                        display: "inline",
+                        marginLeft: "-3px",
+                        height: "10px",
+                        width: "40px"
+                      }}
+                      src={arrowForward}
+                      alt="Arrow"
+                    />
+                  </div>
+                </Link>
               </div>
             </div>
           </div>

@@ -10,6 +10,14 @@ const settings = {
   slidesToShow: 1,
   slidesToScroll: 1,
   arrows: true
+
+  // customPaging: i => (
+  //   <div
+  //     style={{
+  //       borderTop: "1px solid #848C7F"
+  //     }}
+  //   />
+  // )
 };
 
 class MainSlider extends Component {
