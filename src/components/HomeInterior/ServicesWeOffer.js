@@ -54,6 +54,7 @@ class ServicesWeOffer extends React.Component {
             </Box>
           ))}
           <Button
+          onClick={this.props.handleModal}
             style={{
               width: '350px',
               height: '50px',

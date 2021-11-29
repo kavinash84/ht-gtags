@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ResponsiveModal from 'components/Modal';
-// import ModularKitchenForm from './ModularKitchenFormDetailsModal';
-import FormInputModal from './FormInputModal';
-import Flex from 'hometown-components-dev/lib/FlexHtV1';
-import Div from 'hometown-components-dev/lib/BoxHtV1';
-import Section from 'hometown-components-dev/lib/SectionHtV1';
+import FormInput from './FormInput';
 import Row from 'hometown-components-dev/lib/RowHtV1';
+import Div from 'hometown-components-dev/lib/BoxHtV1';
+import Flex from 'hometown-components-dev/lib/FlexHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import Img from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
@@ -24,11 +22,8 @@ import {
   validateFullname,
   checkSpecialChar
 } from 'utils/validation';
-// import stores from '../../data/Stores.js';
 
 import moment from 'moment';
-
-import './Slider.css';
 
 const startTime = date =>
   date
@@ -48,7 +43,7 @@ const getTimeSlots = (start, end) => {
 const setDataPicker = (currentTime = '', notMin) => {
   let options = {};
 
-  // const datePicker = document.getElementById('preferredDateModal');
+  // const datePicker = document.getElementById('preferredDate');
 
   // const slotTimeLimit = moment('20:00', 'HH:mm');
 
@@ -85,7 +80,7 @@ const setDataPicker = (currentTime = '', notMin) => {
 };
 
 const setPreferredTime = ({ timeSlots }) => {
-  // const prefferedTime = document.getElementById('preferredTimeModal');
+  // const prefferedTime = document.getElementById('preferredTime');
   // prefferedTime.innerHTML = `<option value="" disabled selected>Preferred Timeline*</option>`;
   // prefferedTime.insertAdjacentHTML(
   //   'beforeend',
@@ -100,7 +95,7 @@ const setPreferredTime = ({ timeSlots }) => {
 };
 
 const setDate = () => {
-  // const datePicker = document.getElementById('preferredDateModal');
+  // const datePicker = document.getElementById('preferredDate');
   // let datePickerOptions = {};
   // if (datePicker) {
   //   datePickerOptions = setDataPicker(moment(), true);
@@ -109,14 +104,14 @@ const setDate = () => {
 };
 
 @connect(
-  ({ services, designbuild }) => ({
-    prefferedTime: designbuild.data.items.text.prefferedTime,
-    state: designbuild.data.items.text.state,
+  ({ services, modularwardrobe }) => ({
+    prefferedTime: modularwardrobe.data.items.text.prefferedTime,
+    state: modularwardrobe.data.items.text.state,
     ...services.modularkitchen
   }),
   { sendFormData: sendData, loadPincodeDetails: getData }
 )
-export default class ModularKitchenFormModal extends Component {
+export default class ModularKitchen extends Component {
   state = {
     name: '',
     nameErrorMessage: 'Enter Valid Full Name',
@@ -137,7 +132,7 @@ export default class ModularKitchenFormModal extends Component {
     date: '',
     dateError: '',
     dateErrorMessage: 'Enter Valid Date',
-    // open: false,
+    open: false,
     prefferedTime: '',
     time: '',
     timeError: '',
@@ -149,13 +144,7 @@ export default class ModularKitchenFormModal extends Component {
   }
 
   componentWillReceiveProps(nextprops) {
-    // if (nextprops.data && nextprops.data !== this.props.data) {
-    //   this.setState({
-    //     city: nextprops.data.city,
-    //     state: nextprops.data.state
-    //   });
-    // }
-    if (nextprops.loaded && nextprops.loaded === this.props.loaded) {
+    if (nextprops.loaded && nextprops.loaded !== this.props.loaded) {
       this.setState({
         // open: true,
         name: '',
@@ -253,26 +242,6 @@ export default class ModularKitchenFormModal extends Component {
       stateError: checkError
     });
   };
-  // onChangeDate = e => {
-  //   const {
-  //     target: { value }
-  //   } = e;
-  //   const selectedDate = value.split('-');
-  //   const today = new Date();
-  //   const selectedValue = new Date(selectedDate[0], selectedDate[1] -1, selectedDate[2]);
-  //   const checkError = !value;
-  //   if(selectedValue > today) {
-  //     this.setState({
-  //       date: value,
-  //       dateError: checkError,
-  //     });
-  //   } else {
-  //     this.setState({
-  //       dateError: true,
-  //       dateErrorMessage: 'Enter a future date'
-  //     });
-  //   }
-  // }
   onInputDateChange = e => {
     e.preventDefault();
     let { value } = e.target;
@@ -287,13 +256,6 @@ export default class ModularKitchenFormModal extends Component {
         dateError: checkError
       });
     }
-    // else {
-    //   this.setState({
-    //     dateError: true,
-    //     dateErrorMessage: 'Enter a future date'
-    //   });
-    // }
-    // let { target: value } = e;
     value = moment(value, 'YYYY-MM-DD').isBefore() ? moment() : moment(value, 'YYYY-MM-DD');
     datePickerOptions = setDataPicker(value, false);
     setPreferredTime(datePickerOptions);
@@ -377,11 +339,11 @@ export default class ModularKitchenFormModal extends Component {
       // mkLead: 'Online consultaion',
       devicePlatform: 'msite'
     };
-    this.props.handleModalWithSave();
     // this.setState({
     //   open: true
     // });
     this.props.handleScript();
+    this.props.handleModalWithSave();
     sendFormData(SERVICE_SIGNUPS, data, 'modularkitchen');
   };
 
@@ -409,7 +371,7 @@ export default class ModularKitchenFormModal extends Component {
   //   });
   // };
   render() {
-    // const { loading, loaded } = this.props;
+    // const { loading, loaded, modularkitchen } = this.props;
     const { name, email, phone, address, pincode, service, city, state, date, selectedState, time } = this.state;
     // const correctIcon = require('../../../static/correct.svg');
     const {
@@ -436,31 +398,19 @@ export default class ModularKitchenFormModal extends Component {
     } = this.state;
     return (
       <div>
-
-<Div style={{width:'100%'}}>
-              <Flex>
-                  <Img src="https://www.hometown.in/media/cms/D/Top-Image-Living1.jpg" style={{width: '50%', height:'90vh', borderTopLeftRadius:'20px', borderBottomLeftRadius:'20px'}}/>
-                  <Div style={{width:'50%', height:'90vh', backgroundColor: '#FBF2ED', borderTopRightRadius:'20px', borderBottomRightRadius:'20px'}}>
-                  <Div
-          p="20px 5px"
-          mt="10px"
-        >
+        <Div style={{ backgroundColor: '#FBF2ED' }}>
+          
             <Div>
-              <Heading
-                mb="15px"
-                mt="10px"
-                color="#000000"
-                fontSize="18px"
-                fontFamily="medium"
-                style={{ whiteSpace: 'normal', textAlign:'center', lineHeight:'25px'}}
-              >
-                Speak To Our Interior <br />  Experts
+              <Heading  color="#000000" fontSize="24px" fontFamily="medium" style={{textAlign: 'center', lineHeight: '30px', marginTop: '50px', marginBottom:'30px'}}>
+                Speak To Our Interior <br /> Experts
               </Heading>
             </Div>
+          
           <Div>
             <form onSubmit={this.onSubmitForm}>
+             
                 <Div>
-                  <FormInputModal
+                  <FormInput
                     label=""
                     type="text"
                     placeholder="Name"
@@ -472,7 +422,7 @@ export default class ModularKitchenFormModal extends Component {
                   />
                 </Div>
                 <Div>
-                  <FormInputModal
+                  <FormInput
                     label=""
                     type="text"
                     placeholder="Mobile No."
@@ -480,11 +430,10 @@ export default class ModularKitchenFormModal extends Component {
                     value={phone}
                     feedBackError={phoneError}
                     feedBackMessage={phoneErrorMessage}
-
                   />
                 </Div>
                 <Div>
-                  <FormInputModal
+                  <FormInput
                     label=""
                     type="email"
                     placeholder="Email ID"
@@ -495,7 +444,7 @@ export default class ModularKitchenFormModal extends Component {
                   />
                 </Div>
                 <Div>
-                  <FormInputModal
+                  <FormInput
                     label=""
                     type="text"
                     placeholder="City"
@@ -505,16 +454,16 @@ export default class ModularKitchenFormModal extends Component {
                     feedBackMessage={cityErrorMessage}
                   />
                 </Div>
+     
+         
                 <Div>
                   <div className="select-wrapper">
-                    <select
-                      onChange={this.onChangeState}
-                      placeholder="State/Region"
+                    <div
                       style={{
-                        width: '70%',
-                        marginLeft: '15%',
+                        width: '60%',
+                        marginLeft: '20%',
                         borderRadius: '5px',
-                        height: '40px',
+                        height: '50px',
                         border: '1px solid #E3E3E3',
                         padding: '0px 8px',
                         fontSize: '14px',
@@ -522,27 +471,41 @@ export default class ModularKitchenFormModal extends Component {
                         marginBottom:'10px',
                         marginTop: '0.625rem',
                         outline: 'none',
-                        border:'none',
                         backgroundColor: 'white'
                       }}
                     >
-                      <option value="State/Region" disabled selected>
-                        State/Region
-                      </option>
-                      {state.map(val => (
-                        <option key={val.id} value={val.option}>
-                          {val.option}
+                      <select
+                        onChange={this.onChangeState}
+                        placeholder="State"
+                        style={{
+                          width: '100%',
+                          height: '47px',
+                          border: 'none',
+                          fontSize: '14px',
+                          color: '#7E7575',
+                          marginBottom: '10px',
+                          outline: 'none',
+                          backgroundColor: 'white'
+                        }}
+                      >
+                        <option value="State/Region" disabled selected>
+                          State/Region
                         </option>
-                      ))}
-                    </select>
+                        {state.map(val => (
+                          <option key={val.id} value={val.option}>
+                            {val.option}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
                   {stateError ? (
-                    <Text color="#dc3545" fontSize="13px" mt="0px" style={{marginLeft:'15%'}}>
+                    <Text color="#dc3545" fontSize="14px" mt="0px" style={{marginLeft:'20%'}}>
                       {stateErrorMessage}
                     </Text>
                   ) : null}
                 </Div>
-                {/* <Div col="12" pr="0px" pl="0px" className="select-wrapper-date">
+                {/* <Div col="12" pr="0.625rem" pl="0.625rem">
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <label
                       style={{
@@ -563,7 +526,7 @@ export default class ModularKitchenFormModal extends Component {
                     </label>
                     <input
                       type="date"
-                      id="preferredDateModal"
+                      id="preferredDate"
                       value={date}
                       onChange={this.onInputDateChange}
                       style={{
@@ -586,11 +549,9 @@ export default class ModularKitchenFormModal extends Component {
                     </Text>
                   ) : null}
                 </Div> */}
-                {/* <Div col="12" pr="0px" pl="0px">
+                {/* <Div col="12" pr="0.625rem" pl="0.625rem">
                   <div className="select-wrapper">
-                    <select
-                      id="preferredTimeModal"
-                      onChange={this.onChangeTime}
+                    <div
                       style={{
                         width: '100%',
                         borderRadius: '5px',
@@ -603,7 +564,22 @@ export default class ModularKitchenFormModal extends Component {
                         outline: 'none',
                         backgroundColor: 'white'
                       }}
-                    ></select>
+                    >
+                      <select
+                        id="preferredTime"
+                        onChange={this.onChangeTime}
+                        style={{
+                          width: '100%',
+                          height: '50px',
+                          border: 'none',
+                          fontSize: '14px',
+                          color: '#7E7575',
+                          marginBottom: '10px',
+                          outline: 'none',
+                          backgroundColor: 'white'
+                        }}
+                      ></select>
+                    </div>
                   </div>
                   {timeError ? (
                     <Text fontSize="13px" color="#dc3545" mt="0px">
@@ -611,9 +587,9 @@ export default class ModularKitchenFormModal extends Component {
                     </Text>
                   ) : null}
                 </Div> */}
-                <Div col="12" style={{ display: 'flex' }}>
+                <Div col="12" style={{ display: 'flex' }} pr="0.625rem" pl="0.625rem">
                   <Button
-                    mt="25px"
+                    mt="20px"
                     style={{
                       border: '1px solid #F47020',
                       color: '#F47020',
@@ -622,9 +598,10 @@ export default class ModularKitchenFormModal extends Component {
                       textTransform:'none'
                     }}
                     fontFamily="regular"
-                    height="40px"
-                    m="15px auto"
-                    width="45%"
+                    height="50px"
+                    m="40px auto 0"
+                    pl="5%"
+                    pr="5%"
                   >
                     Book a Consultation
                   </Button>
@@ -632,11 +609,6 @@ export default class ModularKitchenFormModal extends Component {
             </form>
           </Div>
         </Div>
-                  </Div>
-              </Flex>
-            </Div>
-
-        
         {/* {!loading && loaded ? (
           <ResponsiveModal
             classNames={{ modal: 'mkModal' }}
@@ -660,14 +632,14 @@ export default class ModularKitchenFormModal extends Component {
   }
 }
 
-ModularKitchenFormModal.defaultProps = {
+ModularKitchen.defaultProps = {
   loading: false,
   loaded: false,
   data: {},
   loadPincodeDetails: () => {},
   sendFormData: () => {}
 };
-ModularKitchenFormModal.propTypes = {
+ModularKitchen.propTypes = {
   loading: PropTypes.bool,
   loaded: PropTypes.bool,
   loadPincodeDetails: PropTypes.func,

@@ -95,6 +95,7 @@ export default class StepsMain extends Component {
             </div> */}
 
             <Button
+            onClick={this.props.handleModal}
             style={{
               width: '200px',
               height: '50px',

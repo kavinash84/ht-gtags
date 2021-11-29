@@ -21,3 +21,10 @@
 .offset .slick-slide:first-child:not(.slick-active) ~ .slick-slide {
   transform: translate3d(20%, 0px, 0px);
 }
+
+.styles_modal__gNwvD{
+  padding:0rem !important;
+  height:90vh !important;
+  border-radius: 20px !important;
+  width:80% !important;
+}

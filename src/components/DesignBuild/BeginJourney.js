@@ -21,6 +21,7 @@ class BeginJourney extends React.Component {
                 Begin The Journey To <br /> Your Dream <br /> Home Interiors
               </Heading>
               <Button
+              onClick={this.props.handleModal}
                 style={{
                   width: '200px',
                   height: '50px',

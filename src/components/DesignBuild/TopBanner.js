@@ -42,6 +42,7 @@ class TopBanner extends React.Component {
 {topBanner.description}
           </Text>
           <Button
+           onClick={this.props.handleModal}
             style={{
               width: '80%',
               height: '50px',

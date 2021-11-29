@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const FormInput = ({
+const FormInputModal = ({
   label,
   name,
   type,
@@ -17,9 +17,9 @@ const FormInput = ({
     ...rest
   };
   return (
-    <div style={{ width: "60%" , marginLeft:"20%", outline:'none', border:'none'}}>
+    <div style={{ width: "70%" , marginLeft:"15%", outline:'none', border:'none'}}>
       {!(type === "hidden") && (
-        <div m style={{ fontSize: "0.875em", marginBottom: "0.625rem" }}>
+        <div m style={{ fontSize: "12px", marginBottom: "0.625rem" }}>
           {label}
         </div>
       )}
@@ -32,19 +32,20 @@ const FormInput = ({
           {...inputProps}
           name={name}
           style={{
-            height: "50px",
+            height: "40px",
             backgroundColor: "white",
             borderRadius: "5px",
             borderColor: "rgb(227, 227, 227)",
             width: "100%",
-            border: "1px solid #E3E3E3",
-            padding: "5px 10px"
+            border: "none",
+            padding: "5px 10px",
+            outline:"none"
           }}
         />
       )}
       {type === "textarea" && <textarea {...inputProps} name={name} />}
       {feedBackError && !(type === "hidden") && (
-        <div style={{ color: "#dc3545", padding: "3px", fontSize: "14px" }}>
+        <div style={{ color: "#dc3545", padding: "3px", fontSize: "13px" }}>
           {feedBackMessage}
         </div>
       )}
@@ -52,7 +53,7 @@ const FormInput = ({
   );
 };
 
-FormInput.propTypes = {
+FormInputModal.propTypes = {
   label: PropTypes.string.isRequired,
   type: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
@@ -66,7 +67,7 @@ FormInput.propTypes = {
   rows: PropTypes.number
 };
 
-FormInput.defaultProps = {
+FormInputModal.defaultProps = {
   value: "",
   feedBackMessage: "",
   feedBackError: false,
@@ -76,4 +77,4 @@ FormInput.defaultProps = {
   type: "text"
 };
 
-export default FormInput;
+export default FormInputModal;
