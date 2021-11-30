@@ -12,7 +12,7 @@ import StyleYourHome from "../../components/StyleYourHome";
 import ShopGiftByPrice from "./shopGiftByPrice/ShopGiftByPrice";
 import ShopByRooms from "./shopByRoom/shopByRoom";
 import ShopOurNewArrivals from "../ShopOurNewArrivals";
-
+import "./Slider.css";
 // easy finance
 // const HdfcLogo = require("../../../static/new-home/hdfc-logo.png");
 // const BajajLogo = require("../../../static/new-home/bajaj-logo.png");
@@ -416,6 +416,7 @@ class HomeContainer extends Component {
             >
               <div style={{ width: "" }}>
                 <Image
+                  className="thewayweare"
                   style={{
                     width: "90%",
                     alignItems: "center",
@@ -480,6 +481,7 @@ class HomeContainer extends Component {
                   </HeadingHtV1>
                 </div>
                 <Image
+                  className="thewayweare"
                   style={{
                     alignItems: "center",
                     marginTop: "135px",
@@ -1171,6 +1173,7 @@ class HomeContainer extends Component {
                 sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
               }}
               to={customiseYourHome.url_key1}
+              className="customise"
             >
               <Image
                 mt="30px"
@@ -1184,6 +1187,7 @@ class HomeContainer extends Component {
               />
             </Link>
             <Link
+              className="customise"
               onClick={() => {
                 sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
               }}

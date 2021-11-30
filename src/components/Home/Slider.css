@@ -21,3 +21,9 @@
 .offset .slick-slide:first-child:not(.slick-active) ~ .slick-slide {
   transform: translate3d(20%, 0px, 0px);
 }
+.customise:hover {
+  opacity: 1;
+}
+.thewayweare:hover {
+  opacity: 0.8;
+}
