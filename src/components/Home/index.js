@@ -526,7 +526,7 @@ class HomeContainer extends Component {
         </div>
         {/* Mid banner */}
 
-        {!isLoggedIn ? (
+        {/* {!isLoggedIn ? (
           <div style={{ marginTop: "50px" }}>
             <Link
               to={midbanner.url_key}
@@ -542,7 +542,7 @@ class HomeContainer extends Component {
               />
             </Link>
           </div>
-        ) : null}
+        ) : null} */}
 
         {/* </Link> */}
 
