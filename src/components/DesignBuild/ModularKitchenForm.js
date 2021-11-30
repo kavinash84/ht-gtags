@@ -401,7 +401,7 @@ export default class ModularKitchen extends Component {
         <Div style={{ backgroundColor: '#FBF2ED' }}>
           
             <Div>
-              <Heading  color="#000000" fontSize="24px" fontFamily="medium" style={{textAlign: 'center', lineHeight: '30px', marginTop: '50px', marginBottom:'30px'}}>
+              <Heading  color="#000000" fontSize="24px" fontFamily="medium" style={{textAlign: 'center', lineHeight: '30px', marginTop: '100px', marginBottom:'30px'}}>
                 Speak To Our Interior <br /> Experts
               </Heading>
             </Div>

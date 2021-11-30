@@ -12,12 +12,14 @@ const DBItem = ({ component, data }) => {
       <Div className={`${styles.sliderItem}`}>
         <div className={styles.link}>
           <div style={{ height: "250px" }}>
+          <Link to={data.url_key}>
             <img
               src={data.imgSrc}
               alt={data.title}
               className={styles.curosalImg}
               style={{ height: "100%", width: "100%", margin: "0 10px"}}
             />
+            </Link>
           </div>
 
           <Div className={styles.content3}>

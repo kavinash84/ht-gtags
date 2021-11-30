@@ -30,10 +30,11 @@ class BeginJourney extends React.Component {
                   border: '1px solid #F47020',
                   borderRadius: '5px',
                   marginLeft: '20%',
-                  marginTop: '50px'
+                  marginTop: '50px',
+                  textTransform:'none'
                 }}
               >
-                Speak to Expert
+                Speak to our Expert
               </Button>
             </Flex>
           </Box>

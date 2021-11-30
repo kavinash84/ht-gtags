@@ -15,22 +15,24 @@ class Header extends React.Component {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          marginTop: '10px',
-          marginBottom: '10px'
+          marginTop: '9px',
+          marginBottom: '9px'
         }}
       >
         <div style={{ marginLeft: '10%' }}>
-          <Image src='https://www.hometown.in/media/cms/designbuild/hometownlogo.png' style={{width:'80%'}} />
+        <Link to="/">
+          <Image src='https://www.hometown.in/media/cms/designbuild/hometownlogo.png' style={{width:'60%', cursor: 'pointer'}} />
+        </Link>
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Link to="plan-your-kitchen">
-          <Text style={{ marginRight: '20px' }}>Plan Your Kitchen</Text>
+          <Text style={{ marginRight: '20px' , fontWeight:'600', fontSize:'14px'}}>Plan Your Kitchen</Text>
           </Link>
           <Link to="design-build">
-          <Text style={{ marginRight: '20px' }}>Design & Build</Text>
+          <Text style={{ marginRight: '20px', fontWeight:'600', fontSize:'14px'}}>Design & Build</Text>
           </Link>
           <Link to="who-we-are">
-          <Text style={{ marginRight: '20px' }}>About Us</Text>
+          <Text style={{ marginRight: '20px' , fontWeight:'600', fontSize:'14px'}}>About Us</Text>
           </Link>
           <Button
               onClick={this.props.handleModal}
@@ -42,6 +44,7 @@ class Header extends React.Component {
               border: '1px solid #F47020',
               borderRadius: '5px',
               marginRight: '150px',
+              textTransform:'none'
             }}
           >
             Request Quote

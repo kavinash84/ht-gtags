@@ -52,7 +52,7 @@ export default class livingRoom extends Component {
             color: 'black',
             textAlign: 'center'
           }}>
-         Key Elements of the Living Room</Heading>
+         {livingRoom.key}</Heading>
        </Div>
        <Div style={{height: '100%', width: '100%', backgroundColor:'#F8F2F2', display:'flex'}}>
         <Div style={{width:'30%' , paddingLeft: '10%', paddingTop:'90px'}}>

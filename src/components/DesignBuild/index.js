@@ -10,7 +10,7 @@ import DandBAdvantage from './DesignBuildAdavntage/DandBAdvantage';
 import DesignServices from './DesignServices/DesignServices';
 import ServicesOffer from './ServicesOffer/ServicesOffer';
 import StepsToYourHome from './StepsToHome';
-import SpeakToExperts from './SpeakToExperts';
+// import SpeakToExperts from './SpeakToExperts';
 import ShopFurniture from './ShopFurniture/ShopFurniture';
 import StyleYourHome from './StyleYourHome/StyleYourHome';
 import Blogs from './Blogs/Blogs';
@@ -21,8 +21,11 @@ import Div from 'hometown-components-dev/lib/BoxHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import Flex from 'hometown-components-dev/lib/FlexHtV1';
 import ModularKitchenFormModal from './ModularKitchenFormModal';
-import './Slider.css';
+import Image from 'hometown-components-dev/lib/ImageHtV1';
+import ModularKitchen from './ModularKitchenForm';
 
+import './Slider.css';
+const styles = require('./Designbuild.scss');
 const check = require('../../../static/check.svg');
 
 import { allowNChar, allowTypeOf } from 'utils/helper';
@@ -76,7 +79,16 @@ class DesignBuildContainer extends React.Component {
         <DandBAdvantage />
         <StepsToYourHome />
         <DesignServices />
-        <SpeakToExperts />
+        {/* <SpeakToExperts /> */}
+        <Div mt="70px">
+              <Flex >
+                  <Image src="https://www.hometown.in/media/cms/D/Top-Image-Living1.jpg" style={{width: '50%', height: '700px'}}/>
+                  <Div style={{width:'50%', height:'700px', backgroundColor: '#FBF2ED'}}>
+                    <ModularKitchen handleModalWithSave={this.handleModalWithSave} handleScript={this.handleScript}/>
+                  </Div>
+              </Flex>
+            </Div>
+
         <RoomsWeTransform />
         <ServicesOffer />
         <CustomerStories />

@@ -5,6 +5,7 @@ import Div from "hometown-components-dev/lib/BoxHtV1";
 import Text from "hometown-components-dev/lib/TextHtV1";
 
 const styles = require('../Slider.scss');
+const star = require('../../../../static/newHomepage/Polygon.svg');
 
 const DBItem = ({ component, data }) => {
   return (
@@ -36,20 +37,20 @@ const DBItem = ({ component, data }) => {
                   </Div>
                 </Div>
               </Div>
-              <Div style={{ background: '#F5F5F5', padding: '20px', textAlign: 'center', marginTop: '5px' }}>
-                {/* <Div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+              <Div style={{ background: '#F5F5F5', padding: '20px', textAlign: 'center', marginTop: '0px' }}>
+                <Div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
                   {[...Array(data.review).keys()].map(item => (
-                    <img src={star} alt="starr" style={{ margin: '5px 3px' }} key={item} />
+                    <img src={star} alt="starr" style={{ margin: '0px 3px 5px', width:'20px', height:'20px' }} key={item} />
                   ))}
-                </Div> */}
+                </Div>
                 <Div style={{ marginTop: '5px' }}>
                   {data.review}/<span style={{ fontSize: '12px' }}>5</span>
                 </Div>
-                <Text style={{ color: '#888888', textAlign: 'center', display: 'table-cell' }}>
+                <Text style={{ color: '#888888', textAlign: 'center', display: 'table-cell' , marginTop: '10px'}}>
                   <span className={styles.content8_desc_2}>{data.reviewDescription}</span>
                 </Text>
                 <Div
-                  style={{ textAlign: 'center', fontWeight: '500', fontSize: '14px', color: 'black', marginTop: '5px' }}
+                  style={{ textAlign: 'center', fontWeight: '500', fontSize: '14px', color: 'black', marginTop: '10px' }}
                 >
                   - {data.customerName}
                 </Div>

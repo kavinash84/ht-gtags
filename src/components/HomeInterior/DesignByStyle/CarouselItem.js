@@ -17,7 +17,7 @@ const DBItem = ({ component, data }) => {
               // paddingRight: '0px',
               backgroundColor:'#F5F5F5',
               padding: '20px 10px',
-              height: '450px'
+              height: '500px'
               // pointerEvents: ['/modular-wardrobe'].includes(data.url_key) ? 'none' : ''
             }}
           >
@@ -28,7 +28,7 @@ const DBItem = ({ component, data }) => {
                 sessionStorage.setItem('scrollPosition', window.pageYOffset);
               }}
             > */}
-              <div style={{ height: '300px' }}>
+              <div style={{ height: '350px' }}>
                 <img
                   src={data.imgSrc}
                   alt={data.title}
@@ -37,9 +37,9 @@ const DBItem = ({ component, data }) => {
                 />
               </div>
               <Div className={styles.content4}>
-                <Div style={{fontSize: '20px', textAlign: 'left', fontSize: '16px',fontWeight: '600',textAlign: 'left',  color: 'desktopblack',margin: '20px 0px 15px'}} >{data.title}</Div>
+                <Div style={{fontSize: '22px', textAlign: 'left',fontWeight: '600',textAlign: 'left',  color: 'desktopblack',margin: '20px 0px 15px'}} >{data.title}</Div>
                 <div style={{ display: 'table-cell' }}>
-                  <p style={{textAlign: 'left',fontSize: '16px', lineHeight: '20px'}}>{data.description}</p>
+                  <p style={{textAlign: 'left',fontSize: '14px', lineHeight: '20px'}}>{data.description}</p>
                 </div>
                 {/* <Heading style={{textAlign:'left'}} fontSize="14px" fontFamily="regular" color="black" mt="20px">
                   KNOW MORE */}

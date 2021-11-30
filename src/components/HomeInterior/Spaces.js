@@ -8,8 +8,15 @@ import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
 
+
+@connect(({ homeinterior }) => ({
+    homeinterior,
+    spaces: homeinterior.data.items.text.spaces
+  }))
+
 class SpacesWeDesign extends React.Component {
     render() { 
+        const { spaces }  = this.props;
         return (
             <Box mt="70px">
                 <Heading 
@@ -20,12 +27,12 @@ class SpacesWeDesign extends React.Component {
             color: 'black',
             textAlign: 'center'
           }}>
-                Spaces We Design
+                {spaces.title}
                 </Heading>
                 <Text
                 style={{fontSize: "20px", color: "#888888", marginBottom: "40px", width: "70%", textAlign: 'center', marginLeft: '15%', marginTop: '30px' }}
                 >
-                As one of the largest design set-up with over 15 years of experience in home interiors, no one offers what we do
+               {spaces.subtitle}
                 </Text>
             </Box>
         );

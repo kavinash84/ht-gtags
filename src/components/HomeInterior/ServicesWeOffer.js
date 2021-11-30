@@ -39,7 +39,7 @@ class ServicesWeOffer extends React.Component {
                 </Text>
         <Row justifyContent="center" style={{ width: '100%', margin: 'auto' }}>
           {ServicesOffer.values.map(slide => (
-            <Box style={{ width: '25%', margin: '25px 10px 50px' }}>
+            <Box style={{ width: '25%', margin: '25px 18px 50px' }}>
               {/* <Link to={slide.url_key}> */}
               <Image src={slide.imgSrc} alt={slide.title} m={5} height="100%" width="100%" />
               <Text

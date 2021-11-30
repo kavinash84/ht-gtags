@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from "react-router-dom";
 import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Section from 'hometown-components-dev/lib/SectionHtV1';
 import Row from 'hometown-components-dev/lib/RowHtV1';
@@ -35,8 +36,8 @@ class LetUsHelpYou extends React.Component {
         <Row justifyContent="center" style={{ width: '100%', margin: 'auto' }}>
           {letUsHelp.values.map(slide => (
             <Box style={{ width: '19%', margin: '30px 10px 10px' }}>
-              {/* <Link to={slide.url_key}> */}
-              <Image src={slide.imgSrc} alt={slide.title} m={5} height="auto" width="100%" />
+              <Link to={slide.url_key}>
+              <Image src={slide.imgSrc} alt={slide.title} m={5} height="240px" width="100%" />
               <Text
                 fontSize="20px"
                 color="label"
@@ -45,7 +46,7 @@ class LetUsHelpYou extends React.Component {
               >
                 {slide.title}
               </Text>
-              {/* </Link> */}
+              </Link>
             </Box>
           ))}
         </Row>

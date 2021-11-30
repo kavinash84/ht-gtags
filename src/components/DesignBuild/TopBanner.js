@@ -25,17 +25,17 @@ class TopBanner extends React.Component {
           src={topBanner.img}
           alt="topbanner"
           width="100%"
-          height="550px"
+          height="650px"
           style={{ objectFit: 'cover' }}
         />
         <Box style={{ height: '70%', width: '300px', backgroundColor: 'white' }} className={styles.sub}>
-          <Image src={topBanner.image} alt="topbanner" style={{ objectFit: 'cover', width: '50%', marginLeft: '25%' }} />
+          <Image src={topBanner.image} alt="topbanner" style={{ objectFit: 'cover', width: '85%', marginLeft: '7.5%' }} />
           <Text
             style={{
               color: '#666666',
-              fontSize: '18px',
+              fontSize: '16px',
               textAlign: 'center',
-              padding: '20px 20px',
+              padding: '0px 30px 10px',
               lineHeight: '30px'
             }}
           >
@@ -44,12 +44,12 @@ class TopBanner extends React.Component {
           <Button
            onClick={this.props.handleModal}
             style={{
-              width: '80%',
+              width: '70%',
               height: '50px',
               backgroundColor: 'white',
               color: '#F47020',
               border: '1px solid #F47020',
-              marginLeft: '10%',
+              marginLeft: '15%',
               borderRadius: '5px'
             }}
           >
