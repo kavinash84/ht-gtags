@@ -102,9 +102,9 @@ class StoresCarousel extends Component {
               className={styles.storesTitle}
             >
               <Heading
-                mb="5px"
+                mb="10px"
                 fontFamily="medium"
-                fontSize="28px"
+                fontSize="32px"
                 m="auto"
                 style={{
                   textAlign: "center",

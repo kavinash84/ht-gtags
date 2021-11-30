@@ -15,9 +15,9 @@ const ShopByCategories = ({ styleYourHome }) => (
       <HeadingHtV1
         fontFamily="medium"
         style={{ textAlign: "center", color: "#323131" }}
-        fontSize="30px"
+        fontSize="35px"
         mt="90px"
-        mb="10px"
+        mb="20px"
       >
         {styleYourHome.mainTitle}
       </HeadingHtV1>

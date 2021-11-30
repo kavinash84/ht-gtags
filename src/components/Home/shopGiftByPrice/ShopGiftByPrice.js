@@ -38,9 +38,9 @@ export default class ShopGiftByPrice extends Component {
       >
         <Div
           style={{
-            fontSize: "30px",
+            fontSize: "35px",
             fontWeight: "600",
-
+            marginBottom: "20px",
             color: "black"
           }}
         >

@@ -38,7 +38,7 @@ class ShopOurNewArrivals extends Component {
         <HeadingHtV1
           mb="20px"
           mt="70px"
-          fontSize="30px"
+          fontSize="35px"
           style={{
             textAlign: "center",
             color: "#222222",

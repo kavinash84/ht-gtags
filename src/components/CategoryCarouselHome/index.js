@@ -23,9 +23,9 @@ export default class CategoryCarousel extends Component {
         <HeadingHtV1
           fontFamily="medium"
           style={{ textAlign: "center", color: "#323131" }}
-          fontSize="30px"
+          fontSize="35px"
           mt="40px"
-          mb="10px"
+          mb="30px"
           pt="30px"
         >
           Shop By Room

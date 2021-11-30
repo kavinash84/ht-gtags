@@ -12,9 +12,9 @@ export default class CategoryCarousel extends Component {
         <HeadingHtV1
           fontFamily="medium"
           style={{ textAlign: "center", color: "#323131" }}
-          fontSize="25px"
-          mt="50px"
-          mb="20px"
+          fontSize="35px"
+          mt="60px"
+          mb="50px"
         >
           {getTheLook.mainTitle}
         </HeadingHtV1>

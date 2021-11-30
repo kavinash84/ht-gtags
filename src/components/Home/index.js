@@ -260,13 +260,13 @@ class HomeContainer extends Component {
               fontFamily: "medium",
               margin: "20px 0"
             }}
-            fontSize="30px"
+            fontSize="35px"
           >
             {gifting.mainTitle}
           </HeadingHtV1>
           <div
             style={{
-              fontSize: "15px",
+              fontSize: "20px",
               color: "gray",
               display: "flex",
               width: "60%",
@@ -344,9 +344,9 @@ class HomeContainer extends Component {
         {/* Together In the moment */}
         <div>
           <HeadingHtV1
-            mb="20px"
+            mb="30px"
             mt="10px"
-            fontSize="30px"
+            fontSize="35px"
             style={{
               textAlign: "center",
               color: "#222222",
@@ -365,7 +365,7 @@ class HomeContainer extends Component {
               fontFamily="medium"
               style={{
                 textAlign: "center",
-                fontSize: "13px",
+                fontSize: "15px",
                 fontWeight: "bold",
                 color: "#222222"
               }}
@@ -439,7 +439,7 @@ class HomeContainer extends Component {
               >
                 <div style={{ marginBottom: "-90px" }}>
                   <HeadingHtV1
-                    fontSize="30px"
+                    fontSize="35px"
                     textAlign="center"
                     ml="10px"
                     mr="10px"
@@ -448,7 +448,7 @@ class HomeContainer extends Component {
                     {TheWayWeAreEntertainingNow.mainTitleOne}
                   </HeadingHtV1>
                   <HeadingHtV1
-                    fontSize="30px"
+                    fontSize="35px"
                     textAlign="center"
                     ml="10px"
                     mr="10px"
@@ -461,7 +461,7 @@ class HomeContainer extends Component {
                     fontFamily="medium"
                     style={{
                       textAlign: "center",
-                      fontSize: "13px",
+                      fontSize: "15px",
                       fontWeight: "bold",
                       color: "#222222",
                       marginTop: "15px"
@@ -579,18 +579,18 @@ class HomeContainer extends Component {
                 fontFamily: "medium",
                 margin: "30px 0 10px 0px"
               }}
-              fontSize="30px"
+              fontSize="35px"
             >
               {wfhAreBack.mainTitle}
             </HeadingHtV1>
             <div
               style={{
-                fontSize: "15px",
+                fontSize: "18px",
                 color: "gray",
                 display: "flex",
                 justifyContent: "center",
                 alignContent: "center",
-                margin: "10px 250px 20px 250px",
+                margin: "10px 250px 40px 250px",
                 textAlign: "center"
               }}
             >
@@ -720,7 +720,8 @@ class HomeContainer extends Component {
         <div>
           <HeadingHtV1
             mt="70px"
-            fontSize="30px"
+            mb="20px"
+            fontSize="35px"
             style={{
               width: "70%",
               textAlign: "left",
@@ -810,7 +811,7 @@ class HomeContainer extends Component {
           <HeadingHtV1
             mb="20px"
             mt="80px"
-            fontSize="30px"
+            fontSize="35px"
             style={{
               textAlign: "center",
               color: "#222222",
@@ -829,7 +830,7 @@ class HomeContainer extends Component {
               fontFamily="medium"
               style={{
                 textAlign: "center",
-                fontSize: "13px",
+                fontSize: "15px",
                 fontWeight: "bold",
                 color: "#222222"
               }}
@@ -869,7 +870,7 @@ class HomeContainer extends Component {
           <HeadingHtV1
             mb="20px"
             mt="150px"
-            fontSize="30px"
+            fontSize="35px"
             style={{
               textAlign: "center",
               color: "#222222",
@@ -888,7 +889,7 @@ class HomeContainer extends Component {
               fontFamily="medium"
               style={{
                 textAlign: "center",
-                fontSize: "13px",
+                fontSize: "15px",
                 fontWeight: "bold",
                 color: "#222222"
               }}
@@ -918,7 +919,7 @@ class HomeContainer extends Component {
           </Link>
           <div
             style={{
-              fontSize: "15px",
+              fontSize: "20px",
               color: "gray",
               display: "flex",
               justifyContent: "center",
@@ -946,7 +947,7 @@ class HomeContainer extends Component {
                 marginRight: "5%"
               }}
               backgroundColor="#EDEDED99"
-              fontSize="30px"
+              fontSize="35px"
               mt="30px"
               pb="30px"
               pt="30px"
@@ -1154,8 +1155,8 @@ class HomeContainer extends Component {
                 color: "#323131",
                 marginTop: "20px",
                 fontFamily: "medium",
-                marginBottom: "10px",
-                fontSize: "30px"
+                marginBottom: "20px",
+                fontSize: "35px"
               }}
             >
               {customiseYourHome.mainTitle}
@@ -1212,8 +1213,8 @@ class HomeContainer extends Component {
         <div>
           <HeadingHtV1
             mb="20px"
-            mt="100px"
-            fontSize="30px"
+            mt="150px"
+            fontSize="35px"
             style={{
               textAlign: "center",
               color: "#222222",
@@ -1232,7 +1233,7 @@ class HomeContainer extends Component {
               fontFamily="medium"
               style={{
                 textAlign: "center",
-                fontSize: "13px",
+                fontSize: "15px",
                 fontWeight: "bold",
                 color: "#222222"
               }}
@@ -1292,7 +1293,7 @@ class HomeContainer extends Component {
             pt="10px"
             ta="center"
             mb="10px"
-            fontSize="30px"
+            fontSize="35px"
             style={{
               color: "#323131",
               whiteSpace: "normal",
