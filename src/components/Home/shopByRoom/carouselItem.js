@@ -19,7 +19,7 @@ class DBItem extends React.Component {
       window.scrollTo(0, parseInt(scrollPosition));
       setTimeout(function() {
         sessionStorage.removeItem("HtscrollPosition");
-      }, 700);
+      }, 1000);
     }
   };
   render() {
