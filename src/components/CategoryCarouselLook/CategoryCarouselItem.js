@@ -46,12 +46,12 @@ class CategoryItem extends React.Component {
               />
               <h3
                 style={{
-                  fontSize: "20px",
+                  fontSize: "17px",
                   width: "95%",
                   margin: " 20px 15px 0 5px",
-                  wordSpacing: "3px",
-                  letterSpacing: "0.8px",
-                  lineHeight: "28px",
+                  wordSpacing: "2px",
+                  letterSpacing: "0.7px",
+                  lineHeight: "25px",
                   color: "#383838",
                   fontFamily: "light"
                 }}
