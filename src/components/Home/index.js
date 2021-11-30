@@ -111,32 +111,58 @@ class HomeContainer extends Component {
           }}
           dealsOfthedaybannerone={dealsOfthedaybannerone}
         >
-          <Link
-            onClick={() => {
-              sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
-            }}
-            to={dealsOfthedaybannerone.url_key}
-            style={{
-              width: "45%",
+          {dealsOfthedaybannerone.url_key ? (
+            <Link
+              onClick={() => {
+                sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
+              }}
+              to={dealsOfthedaybannerone.url_key}
+              style={{
+                width: "45%",
 
-              zIndex: "10"
-            }}
-          >
-            <Image mt="50px" mb="30px" src={dealsOfthedaybannerone.image} />
-          </Link>
-          <Link
-            onClick={() => {
-              sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
-            }}
-            to={dealsOfthedaybannerTwo.url_key}
-            style={{
-              width: "45%",
+                zIndex: "10"
+              }}
+            >
+              <Image mt="50px" mb="30px" src={dealsOfthedaybannerone.image} />
+            </Link>
+          ) : (
+            <Image
+              style={{
+                width: "45%",
 
-              zIndex: "10"
-            }}
-          >
-            <Image mt="50px" mb="30px" src={dealsOfthedaybannerTwo.image} />
-          </Link>
+                zIndex: "10"
+              }}
+              mt="50px"
+              mb="30px"
+              src={dealsOfthedaybannerone.image}
+            />
+          )}
+          {dealsOfthedaybannerTwo.url_key ? (
+            <Link
+              onClick={() => {
+                sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
+              }}
+              to={dealsOfthedaybannerTwo.url_key}
+              style={{
+                width: "45%",
+
+                zIndex: "10"
+              }}
+            >
+              <Image mt="50px" mb="30px" src={dealsOfthedaybannerTwo.image} />
+            </Link>
+          ) : (
+            <Image
+              mt="50px"
+              mb="30px"
+              src={dealsOfthedaybannerTwo.image}
+              style={{
+                width: "45%",
+
+                zIndex: "10"
+              }}
+            />
+          )}
         </div>
 
         {/* Beast seat in the house  */}
@@ -279,63 +305,67 @@ class HomeContainer extends Component {
           >
             {gifting.description}
           </div>
-          <Link
-            onClick={() => {
-              sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
+
+          <HeadingHtV1
+            style={{
+              textAlign: "center",
+              fontSize: "15px",
+              fontFamily: "medium",
+              color: "#222222",
+              margin: "30px 20px"
             }}
-            to={gifting.url_key}
           >
-            <HeadingHtV1
+            {gifting.buttonTitle}
+
+            <img
               style={{
-                textAlign: "center",
-                fontSize: "15px",
-                fontFamily: "medium",
-                color: "#222222",
-                margin: "30px 20px"
+                display: "inline",
+                marginLeft: "-3px",
+                height: "10px",
+                width: "40px"
+              }}
+              src={arrowForward}
+              alt="Arrow"
+            />
+          </HeadingHtV1>
+          <div
+            style={{
+              display: "flex",
+              width: "85%",
+              margin: "auto",
+              justifyContent: "space-evenly",
+              alignContent: "center"
+            }}
+          >
+            <Link
+              onClick={() => {
+                sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
+              }}
+              to={gifting.url_key_gift1}
+              style={{
+                width: "45%",
+                alignItems: "center",
+
+                zIndex: "10"
               }}
             >
-              {gifting.buttonTitle}
-
-              <img
-                style={{
-                  display: "inline",
-                  marginLeft: "-3px",
-                  height: "10px",
-                  width: "40px"
-                }}
-                src={arrowForward}
-                alt="Arrow"
-              />
-            </HeadingHtV1>
-            <div
+              <Image src={gifting.image1} />
+            </Link>
+            <Link
+              onClick={() => {
+                sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
+              }}
+              to={gifting.url_key_gift2}
               style={{
-                display: "flex",
-                width: "85%",
-                margin: "auto",
-                justifyContent: "space-evenly",
-                alignContent: "center"
+                width: "45%",
+                alignItems: "center",
+
+                zIndex: "10"
               }}
             >
-              <Image
-                style={{
-                  width: "45%",
-                  alignItems: "center",
-
-                  zIndex: "10"
-                }}
-                src={gifting.image1}
-              />
-              <Image
-                style={{
-                  width: "45%",
-                  alignItems: "center",
-
-                  zIndex: "10"
-                }}
-                src={gifting.image2}
-              />
-            </div>
-          </Link>
+              <Image src={gifting.image2} />
+            </Link>
+          </div>
         </div>
         {/* shop gifts by price */}
         <div>
