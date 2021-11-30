@@ -1175,6 +1175,7 @@ class HomeContainer extends Component {
               }}
               to={customiseYourHome.url_key1}
               className="customise"
+              target="_blank0"
             >
               <Image
                 mt="30px"
@@ -1193,6 +1194,7 @@ class HomeContainer extends Component {
                 sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
               }}
               to={customiseYourHome.url_key2}
+              target="_blank1"
             >
               <Image
                 mt="30px"
