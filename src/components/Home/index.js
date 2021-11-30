@@ -101,7 +101,7 @@ class HomeContainer extends Component {
 
         {/* sale of the day */}
 
-        <div
+        {/* <div
           style={{
             display: "flex",
             width: "100%",
@@ -163,7 +163,7 @@ class HomeContainer extends Component {
               }}
             />
           )}
-        </div>
+        </div> */}
 
         {/* Beast seat in the house  */}
         <div>
@@ -368,9 +368,9 @@ class HomeContainer extends Component {
           </div>
         </div>
         {/* shop gifts by price */}
-        <div>
+        {/* <div>
           <ShopGiftByPrice />
-        </div>
+        </div> */}
         {/* Together In the moment */}
         <div>
           <HeadingHtV1
@@ -526,7 +526,7 @@ class HomeContainer extends Component {
         </div>
         {/* Mid banner */}
 
-        {!isLoggedIn ? (
+        {/* {!isLoggedIn ? (
           <div style={{ marginTop: "50px" }}>
             <Link
               to={midbanner.url_key}
@@ -542,7 +542,7 @@ class HomeContainer extends Component {
               />
             </Link>
           </div>
-        ) : null}
+        ) : null} */}
 
         {/* </Link> */}
 
@@ -1242,7 +1242,7 @@ class HomeContainer extends Component {
 
         {/* shop the room */}
 
-        <div>
+        {/* <div>
           <HeadingHtV1
             mb="20px"
             mt="150px"
@@ -1306,7 +1306,7 @@ class HomeContainer extends Component {
           >
             {shopTheRoom.description}
           </div>
-        </div>
+        </div> */}
 
         {/* Easy finance - static images */}
         <div
@@ -1424,7 +1424,7 @@ class HomeContainer extends Component {
                 </div>
               </div>
             </div>
-            <div style={{ width: "20%", margin: "0 10px" }}>
+            {/* <div style={{ width: "20%", margin: "0 10px" }}>
               <div
                 style={{
                   height: "230px",
@@ -1460,8 +1460,8 @@ class HomeContainer extends Component {
                   {easyFinance.data[2].desc}
                 </div>
               </div>
-            </div>
-            <div style={{ width: "20%", margin: "0 10px" }}>
+            </div> */}
+            {/* <div style={{ width: "20%", margin: "0 10px" }}>
               <div
                 style={{
                   height: "230px",
@@ -1496,8 +1496,8 @@ class HomeContainer extends Component {
                 >
                   {easyFinance.data[3].desc}
                 </div>
-              </div>
-            </div>
+              </div> 
+            </div>*/}
           </div>
         </div>
       </div>
