@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { withRouter } from "react-router";
 
 /* ====== Components ====== */
-import Container from 'hometown-components-dev/lib/ContainerHtV1';
-import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Container from "hometown-components-dev/lib/ContainerHtV1";
+import Box from "hometown-components-dev/lib/BoxHtV1";
 
 /* ====== Page Components ====== */
-import FuturePayModal from 'components/MyHomeWallet/FuturePayModal';
-import HoverMenuBox from '../HoverBox/HoverMenuBox';
-import NavBar from '../NavBar';
-import HeaderTop from './HeaderTop';
-import TopBar from './TopBar';
+import FuturePayModal from "components/MyHomeWallet/FuturePayModal";
+import HoverMenuBox from "../HoverBox/HoverMenuBox";
+import NavBar from "../NavBar";
+import HeaderTop from "./HeaderTop";
+import TopBar from "./TopBar";
 
 const navigateToCategory = history => category => {
   history.push({
@@ -32,7 +32,7 @@ const navigateToCategory = history => category => {
 }))
 class Header extends Component {
   state = {
-    currentMenu: '',
+    currentMenu: "",
     hoverBox: false
   };
 
@@ -44,7 +44,9 @@ class Header extends Component {
   }
 
   setCurrentMenuData = () => {
-    const menuData = this.props.menuItems.find(menu => menu.id === this.state.currentMenu);
+    const menuData = this.props.menuItems.find(
+      menu => menu.id === this.state.currentMenu
+    );
     if (menuData) {
       if (menuData.children) {
         if (menuData.children.length > 0) {
@@ -91,7 +93,7 @@ class Header extends Component {
     if (currentMenu === id) {
       this.setState(
         {
-          currentMenu: ''
+          currentMenu: ""
         },
         this.setCurrentMenuData
       );
@@ -108,7 +110,7 @@ class Header extends Component {
   leaveMenu = () => {
     this.setState({
       hoverBox: false,
-      currentMenu: ''
+      currentMenu: ""
     });
   };
 
@@ -119,8 +121,8 @@ class Header extends Component {
   leaveHoverBox = () => {
     this.setState({
       hoverBox: false,
-      currentMenu: '',
-      currentMenuData: ''
+      currentMenu: "",
+      currentMenuData: ""
     });
   };
 
@@ -129,32 +131,34 @@ class Header extends Component {
     const { menuItems, walletNotCreated } = this.props;
 
     return (
-      <Box bg="white" sx={{ position: 'sticky', top: 0, zIndex: 30 }}>
+      <React.Fragment>
         <TopBar />
-        <Box pt={15} sx={{ borderBottom: 'solid 1px #727070' }}>
-          <Container pr="0" pl="0" mb={10}>
-            <HeaderTop />
-          </Container>
-          <NavBar
-            exitOnClick={this.exitOnClick}
-            handleEnter={this.enterMenu}
-            handleClick={this.clickMenu}
-            handleLeave={this.leaveMenu}
-            menuItems={menuItems}
-          />
-          <Container pr="0" pl="0">
-            {hoverBox && (
-              <HoverMenuBox
-                handleEnter={this.enterHoverBox}
-                handleLeave={this.leaveHoverBox}
-                menuData={currentMenuData}
-                exitOnClick={this.exitOnClick}
-              />
-            )}
-          </Container>
+        <Box bg="white" sx={{ position: "sticky", top: 0, zIndex: 30 }}>
+          <Box pt={15} sx={{ borderBottom: "solid 1px #727070" }}>
+            <Container pr="0" pl="0" mb={10}>
+              <HeaderTop />
+            </Container>
+            <NavBar
+              exitOnClick={this.exitOnClick}
+              handleEnter={this.enterMenu}
+              handleClick={this.clickMenu}
+              handleLeave={this.leaveMenu}
+              menuItems={menuItems}
+            />
+            <Container pr="0" pl="0">
+              {hoverBox && (
+                <HoverMenuBox
+                  handleEnter={this.enterHoverBox}
+                  handleLeave={this.leaveHoverBox}
+                  menuData={currentMenuData}
+                  exitOnClick={this.exitOnClick}
+                />
+              )}
+            </Container>
+          </Box>
+          {walletNotCreated && <FuturePayModal />}
         </Box>
-        {walletNotCreated && <FuturePayModal />}
-      </Box>
+      </React.Fragment>
     );
   }
 }
