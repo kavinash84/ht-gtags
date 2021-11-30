@@ -38,6 +38,7 @@ export const categoryRoutes = [
   'home-improvement',
   'kitchenware',
   'tableware',
+  'kitchenware-tableware',
   'bath'
 ];
 
