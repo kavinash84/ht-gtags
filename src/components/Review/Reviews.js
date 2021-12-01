@@ -31,19 +31,19 @@ export default class Reviews extends Component {
   };
   getLogo = flag => {
     switch (flag) {
-      case "Amazon":
+      case "amazon":
         return <Img src={amazon} alt="Amazon" width="60px" height="60px" />;
-      case "Bajaj":
+      case "bajaj":
         return <Img src={bajaj} alt="Bajaj" width="60px" height="60px" />;
-      case "Facebook":
+      case "facebook":
         return <Img src={facebook} alt="Facebook" width="60px" height="60px" />;
-      case "Flipkart":
+      case "flipkart":
         return <Img src={flipcart} alt="Flipkart" width="60px" height="60px" />;
-      case "Hometown":
+      case "hometown":
         return <Img src={ht} alt="Hometown" width="60px" height="60px" />;
-      case "Mayantra":
+      case "mayantra":
         return <Img src={myntra} alt="Mayantra" width="60px" height="60px" />;
-      case "Pepperfry":
+      case "pepperfry":
         return (
           <Img src={pepperfry} alt="Pepperfry" width="60px" height="60px" />
         );
@@ -58,79 +58,155 @@ export default class Reviews extends Component {
         <Div className={styles.reviewListContainer}>
           {ReviewsData.map(item => (
             <Div className={styles.reviewContainer}>
-              <Link to={item.link || ""}>
-                <Div className={styles.customerName}>{item.nickname}</Div>
-                <Div className={styles.subDetails}>
-                  <Div style={{ width: "80%" }}>
-                    <Div className={styles.ratings}>
-                      <Img
-                        src={Star}
-                        width="24px"
-                        height="24px"
-                        alt="Star"
-                        style={{
-                          display:
-                            1 <= Math.floor(item.ratings) ? "block" : "none"
-                        }}
-                      />
-                      <Img
-                        src={Star}
-                        width="24px"
-                        height="24px"
-                        alt="Star"
-                        style={{
-                          display:
-                            2 <= Math.floor(item.ratings) ? "block" : "none"
-                        }}
-                      />
-                      <Img
-                        src={Star}
-                        width="24px"
-                        height="24px"
-                        alt="Star"
-                        style={{
-                          display:
-                            3 <= Math.floor(item.ratings) ? "block" : "none"
-                        }}
-                      />
-                      <Img
-                        src={Star}
-                        width="24px"
-                        height="24px"
-                        alt="Star"
-                        style={{
-                          display:
-                            4 <= Math.floor(item.ratings) ? "block" : "none"
-                        }}
-                      />
-                      <Img
-                        src={Star}
-                        width="24px"
-                        height="24px"
-                        alt="Star"
-                        style={{
-                          display:
-                            5 <= Math.floor(item.ratings) ? "block" : "none"
-                        }}
-                      />
+              {item.link.startsWith("https") ? (
+                <a href={item.link || ""} target="_blank">
+                  <Div className={styles.customerName}>{item.nickname}</Div>
+                  <Div className={styles.subDetails}>
+                    <Div style={{ width: "80%" }}>
+                      <Div className={styles.ratings}>
+                        <Img
+                          src={Star}
+                          width="24px"
+                          height="24px"
+                          alt="Star"
+                          style={{
+                            display:
+                              1 <= Math.floor(item.ratings) ? "block" : "none"
+                          }}
+                        />
+                        <Img
+                          src={Star}
+                          width="24px"
+                          height="24px"
+                          alt="Star"
+                          style={{
+                            display:
+                              2 <= Math.floor(item.ratings) ? "block" : "none"
+                          }}
+                        />
+                        <Img
+                          src={Star}
+                          width="24px"
+                          height="24px"
+                          alt="Star"
+                          style={{
+                            display:
+                              3 <= Math.floor(item.ratings) ? "block" : "none"
+                          }}
+                        />
+                        <Img
+                          src={Star}
+                          width="24px"
+                          height="24px"
+                          alt="Star"
+                          style={{
+                            display:
+                              4 <= Math.floor(item.ratings) ? "block" : "none"
+                          }}
+                        />
+                        <Img
+                          src={Star}
+                          width="24px"
+                          height="24px"
+                          alt="Star"
+                          style={{
+                            display:
+                              5 <= Math.floor(item.ratings) ? "block" : "none"
+                          }}
+                        />
+                      </Div>
+                      <Div className={styles.location}>{item.city}</Div>
                     </Div>
-                    <Div className={styles.location}>{item.city}</Div>
+                    <Div className={styles.logoContainer}>
+                      {/* <Img src={Star} width="60px" height="60px" alt="Star" /> */}
+                      {this.getLogo(item.flag)}
+                    </Div>
                   </Div>
-                  <Div className={styles.logoContainer}>
-                    {/* <Img src={Star} width="60px" height="60px" alt="Star" /> */}
-                    {this.getLogo(item.flag)}
+                  <Div className={styles.productImage}>
+                    <Img src={item.product_image} alt="Star" />
                   </Div>
-                </Div>
-                <Div className={styles.productImage}>
-                  <Img src={item.product_image} alt="Star" />
-                </Div>
-                <Div className={styles.reviewDetails}>
-                  <Div className={styles.reviewText}>{item.detail}</Div>
-                </Div>
-                <Div className={styles.date} style={{ fontSize: "20px" }}>
-                  {this.getDate(item.created_at)}
-                </Div>
-              </Link>
+                  <Div className={styles.reviewDetails}>
+                    <Div className={styles.reviewText}>{item.detail}</Div>
+                  </Div>
+                  <Div className={styles.date} style={{ fontSize: "20px" }}>
+                    {this.getDate(item.created_at)}
+                  </Div>
+                </a>
+              ) : (
+                <Link to={item.link || ""}>
+                  <Div className={styles.customerName}>{item.nickname}</Div>
+                  <Div className={styles.subDetails}>
+                    <Div style={{ width: "80%" }}>
+                      <Div className={styles.ratings}>
+                        <Img
+                          src={Star}
+                          width="24px"
+                          height="24px"
+                          alt="Star"
+                          style={{
+                            display:
+                              1 <= Math.floor(item.ratings) ? "block" : "none"
+                          }}
+                        />
+                        <Img
+                          src={Star}
+                          width="24px"
+                          height="24px"
+                          alt="Star"
+                          style={{
+                            display:
+                              2 <= Math.floor(item.ratings) ? "block" : "none"
+                          }}
+                        />
+                        <Img
+                          src={Star}
+                          width="24px"
+                          height="24px"
+                          alt="Star"
+                          style={{
+                            display:
+                              3 <= Math.floor(item.ratings) ? "block" : "none"
+                          }}
+                        />
+                        <Img
+                          src={Star}
+                          width="24px"
+                          height="24px"
+                          alt="Star"
+                          style={{
+                            display:
+                              4 <= Math.floor(item.ratings) ? "block" : "none"
+                          }}
+                        />
+                        <Img
+                          src={Star}
+                          width="24px"
+                          height="24px"
+                          alt="Star"
+                          style={{
+                            display:
+                              5 <= Math.floor(item.ratings) ? "block" : "none"
+                          }}
+                        />
+                      </Div>
+                      <Div className={styles.location}>{item.city}</Div>
+                    </Div>
+                    <Div className={styles.logoContainer}>
+                      {/* <Img src={Star} width="60px" height="60px" alt="Star" /> */}
+                      {this.getLogo(item.flag)}
+                    </Div>
+                  </Div>
+                  <Div className={styles.productImage}>
+                    <Img src={item.product_image} alt="Star" />
+                  </Div>
+                  <Div className={styles.reviewDetails}>
+                    <Div className={styles.reviewText}>{item.detail}</Div>
+                  </Div>
+                  <Div className={styles.date} style={{ fontSize: "20px" }}>
+                    {this.getDate(item.created_at)}
+                  </Div>
+                </Link>
+              )}
             </Div>
           ))}
         </Div>
