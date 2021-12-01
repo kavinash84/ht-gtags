@@ -333,7 +333,10 @@ export default class CartContainer extends Component {
             ) : null}
 
             {responsiveModalContent === 'emiModal' ? (
-              <Box>{total > bflMinAmount ? <BflPopMessage /> : <HdfcPopMessage />}</Box>
+              <Box>
+                {/* {total > bflMinAmount ? <BflPopMessage /> : <HdfcPopMessage />} */}
+                <HdfcPopMessage />
+              </Box>
             ) : null}
           </ResponsiveModal>
 
