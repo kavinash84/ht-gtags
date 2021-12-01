@@ -2,14 +2,21 @@
 @import "../../theme/_mixins";
 
 .storeSliderItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   .link {
     background-color: rgba(255, 255, 255, 0);
-    border: solid 1px rgba(0, 0, 0, 0.35);
+    border: solid 1px #fcd6c0;
+    border-radius: 5px;
     color: rgba(0, 0, 0, 0.5);
-    width: calc(100% - 15px);
-    padding: 10px 5px;
-    font-size: 13px;
-    margin: 0 10px;
+    // width: calc(100% - 100px);
+    width: 40%;
+    padding: 20px 5px;
+    font-size: 20px;
+    font-weight: bold;
+    margin: auto;
     text-transform: uppercase;
     white-space: nowrap;
     &.active {
@@ -17,6 +24,7 @@
       border: solid 1px $primary;
     }
   }
+  padding: 5px 30px;
   &.active {
     .link {
       color: $primary;
