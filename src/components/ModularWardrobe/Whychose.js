@@ -48,15 +48,15 @@ class WhyChose extends React.Component {
         </Box>
         <div className={styles.whyus}>
           <div className={styles.outerbox1}>
-            <div style={{ borderRight: '2px dashed #707070' }} className={styles.innerbox}>
+            <div style={{ borderRight: '2px dashed #DCDCDC' }} className={styles.innerbox}>
               <text className={styles.boldtext}>27</text>
               <text>cities</text>
             </div>
-            <div style={{ borderRight: '2px dashed #707070' }} className={styles.innerbox}>
+            <div style={{ borderRight: '2px dashed #DCDCDC' }} className={styles.innerbox}>
               <text className={styles.boldtext}>45</text>
               <text>Design Studios</text>
             </div>
-            <div style={{ borderRight: '2px dashed #707070' }} className={styles.innerbox}>
+            <div style={{ borderRight: '2px dashed #DCDCDC' }} className={styles.innerbox}>
               <text className={styles.boldtext}>1.5 MILLION+</text> <text>Homes Designed</text>
             </div>
             <div className={styles.innerbox}>
@@ -65,15 +65,15 @@ class WhyChose extends React.Component {
             </div>
           </div>
           <div className={styles.outerbox2}>
-            <div style={{ borderRight: '2px dashed #707070' }} className={styles.innerbox}>
+            <div style={{ borderRight: '2px dashed #DCDCDC' }} className={styles.innerbox}>
               <text className={styles.boldtext}>100+</text>
               <text>In-House Designers</text>
             </div>
-            <div style={{ borderRight: '2px dashed #707070' }} className={styles.innerbox}>
+            <div style={{ borderRight: '2px dashed #DCDCDC' }} className={styles.innerbox}>
               <text className={styles.boldtext}>200+</text>
               <text>Empanelled Contractors</text>
             </div>
-            <div style={{ borderRight: '2px dashed #707070' }} className={styles.innerbox}>
+            <div style={{ borderRight: '2px dashed #DCDCDC' }} className={styles.innerbox}>
               <text className={styles.boldtext}>FREE</text>
               <text>Service Visits</text>
             </div>

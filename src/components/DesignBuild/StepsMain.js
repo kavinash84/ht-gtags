@@ -14,8 +14,14 @@ const arrowForward = require('../../../static/newHomepage/newForwardArrow.svg');
 export default class StepsMain extends Component {
   state = {
     initialItems: [],
-    length: 0
+    length: 0,
+    isOpen: ''
   };
+
+  handleClick = (index) => {
+    this.setState({ isOpen: index });
+  };
+
   componentDidMount() {
     const { stepsToDreamhome } = this.props;
     this.setState({ initialItems: stepsToDreamhome.values });
@@ -29,14 +35,14 @@ export default class StepsMain extends Component {
         style={{
           backgroundColor: '#F5F5F5',
           paddingTop: '30px',
-          marginTop: '30px',
+          marginTop: '70px',
           paddingBottom: '0px',
         }}
       >
         <Box
           style={{
-            fontSize: '40px',
-            lineHeight: '50px',
+            fontSize: '35px',
+            lineHeight: '45px',
             fontWeight: 600,
             marginBottom: '10px',
             color: 'black',
@@ -55,6 +61,8 @@ export default class StepsMain extends Component {
                     title={item.title}
                     description={item.description}
                     lenght={stepsToDreamhome.values.length}
+                    handleClick={this.handleClick}
+                    isOpen={this.state.isOpen}
                     index={i}
                   />
                 </div>
@@ -64,11 +72,11 @@ export default class StepsMain extends Component {
           <Box
             style={{
               width: '100%',
-              display: 'flex',
-              justifyContent: 'center',
               padding: '10px 10px 0px',
+              marginTop:'40px'
             }}
           >
+          
             {/* <div
               style={{
                 color: 'black',
@@ -102,7 +110,8 @@ export default class StepsMain extends Component {
               backgroundColor: 'white',
               color: '#F47020',
               border: '1px solid #F47020',
-              borderRadius: '5px'
+              borderRadius: '5px',
+              marginLeft:'14%'
             }}
           >
             Book Consultation

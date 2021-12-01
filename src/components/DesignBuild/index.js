@@ -60,7 +60,7 @@ class DesignBuildContainer extends React.Component {
       this.setState({
         open: true
       });
-    }, 1000);
+    }, 500);
   };
 
   handleScript = () => {
@@ -148,7 +148,7 @@ class DesignBuildContainer extends React.Component {
 
                     <Heading 
                        mb="15px"
-                       mt="100px"
+                       mt="120px"
                       color="#000000"
                     fontSize="18px"
                 fontFamily="medium"

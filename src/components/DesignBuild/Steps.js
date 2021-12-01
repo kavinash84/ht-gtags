@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 
 const styles = require('./Designbuild.scss');
 const Arrow = require('../../../static/categories/Line.svg');
+const dot = require('../../../static/newHomepage/dots.png');
+const blink = require('../../../static/newHomepage/blink.svg');
+const line = require('../../../static/newHomepage/line.svg');
+
 
 @connect(({ designbuild }) => ({
     designbuild,
@@ -11,44 +15,44 @@ const Arrow = require('../../../static/categories/Line.svg');
   }))
 
 class Steps extends React.Component {
-    state = {
-        isOpen: false
-      };
-      handleClick = () => {
-        this.setState({ isOpen: !this.state.isOpen });
-      };
+
       render() {
         const {
-     title, description, length, index
+     title, description, length, index, isOpen
     } = this.props;
         return (
           <Box
             style={{
-              background: this.state.isOpen ? '#F5F5F5' : '#F5F5F5',
+              background: isOpen ? '#F5F5F5' : '#F5F5F5',
               width: '100'
             }}
           >
-            {this.state.isOpen ? (
-              <div style={{ padding: '0px 30px' }} onClick={this.handleClick}>
+            {isOpen === index ? (
+              <div style={{ padding: '0px 30px' }} onClick={()=>{if (isOpen === index){this.props.handleClick('') } else{this.props.handleClick(index)} }}>
                 <Box>
+               
                   <Box
                     style={{
-                      padding: '20px 0px 22px'
+                      padding: '18px 0px 22px'
                     }}
                   >
                     <div
                       style={{
                         display: 'flex',
                         justifyContent: 'space-between',
-                        width: '90%',
-                        marginLeft: '5%',
+                        width: '80%',
+                        marginLeft: '10%',
                         alignItems: 'center',
                         color: 'black',
                         cursor: 'pointer',
-                        fontSize: '20px',
+                        fontSize: '16px',
+                        fontWeight: 'bold'
                       }}
                     >
-                      <div>{title}</div>
+                    <div style={{display:'flex'}}>
+                   <img src={blink} style={{width:'20px', height:'20px', marginLeft:'-26px'}}/>
+                      <div style={{textAlign:'left', marginLeft:'10px', marginTop:'2px', cursor: 'pointer'}}>{title}</div>
+                      </div>
                       <Box
                         style={{
                           textAlign: 'right'
@@ -62,24 +66,30 @@ class Steps extends React.Component {
                 </Box>
               </div>
             ) : (
-              <div style={{ padding: '0px 30px' }} onClick={this.handleClick}>
+              <div style={{ padding: '0px 30px' }} onClick={()=>{if (isOpen === index){this.props.handleClick('') } else{this.props.handleClick(index)} }}>
+              
                 <Box
                   style={{
-                    padding: '20px 0px 22px',
+                    padding: '18px 0px 22px',
                     // borderBottom: index + 1 === length ? 'none' : '1px solid #E3E3E3'
                   }}
                 >
+                
                   <div
                     style={{
                       display: 'flex',
                       justifyContent: 'space-between',
-                      width: '90%',
-                      marginLeft: '5%',
+                      width: '80%',
+                      marginLeft: '10%',
                       alignItems: 'center',
-                      fontSize: '20px'
+                      fontSize: '16px',
+                      fontWeight: 'bold'
                     }}
                   >
-                    <div className={styles.title2}>{title}</div>
+                   <div style={{display:'flex'}}>
+                   <img src={dot} style={{width:'10px', height:'10px', marginLeft:'-20px'}}/>
+                      <div style={{textAlign:'left', marginLeft:'15px', marginTop:'-2px', cursor: 'pointer'}}>{title}</div>
+                      </div>
                     <Box
                       style={{
                         textAlign: 'right'
@@ -87,6 +97,7 @@ class Steps extends React.Component {
                     >
                       <img src={Arrow} alt="aarow" />
                     </Box>
+                  
                   </div>
                 </Box>
               </div>
