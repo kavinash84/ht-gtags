@@ -5,26 +5,21 @@ const styles = require('./Designbuild.scss');
 const Arrow = require('../../../static/categories/Line.svg');
 
 export default class QDropDown extends Component {
-  state = {
-    isOpen: false
-  };
-  handleClick = () => {
-    this.setState({ isOpen: !this.state.isOpen });
-  };
+ 
   render() {
     const {
- title, description, length, index
+ title, description, length, index, isOpen
 } = this.props;
     return (
       <Box
         style={{
-          background: this.state.isOpen ? 'white' : 'white',
+          background: isOpen ? 'white' : 'white',
           width: '90%',
           marginLeft: '5%'
         }}
       >
-        {this.state.isOpen ? (
-          <div style={{ padding: '0px 30px' }} onClick={this.handleClick}>
+        {isOpen === index ? (
+          <div style={{ padding: '0px 30px' }} onClick={()=>{if (isOpen === index){this.props.handleClick('') } else{this.props.handleClick(index)} }}>
             <Box style={{ borderBottom: index + 1 === length ? 'none' : '1px solid #E3E3E3' }}>
               <Box
                 style={{
@@ -55,7 +50,7 @@ export default class QDropDown extends Component {
             </Box>
           </div>
         ) : (
-          <div style={{ padding: '0px 30px' }} onClick={this.handleClick}>
+          <div style={{ padding: '0px 30px' }} onClick={()=>{if (isOpen === index){this.props.handleClick('') } else{this.props.handleClick(index)} }}>
             <Box
               style={{
                 padding: '20px 0px 22px',

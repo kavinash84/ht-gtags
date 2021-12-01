@@ -14,7 +14,12 @@ const arrowForward = require('../../../static/newHomepage/newForwardArrow.svg');
 export default class QueryDropDownContainer extends Component {
   state = {
     initialItems: [],
-    length: 0
+    length: 0,
+    isOpen: ''
+  };
+
+  handleClick = (index) => {
+    this.setState({ isOpen: index });
   };
   componentDidMount() {
     const { queries } = this.props;
@@ -61,6 +66,8 @@ export default class QueryDropDownContainer extends Component {
                     title={item.title}
                     description={item.description}
                     lenght={queries.values.length}
+                    handleClick={this.handleClick}
+                    isOpen={this.state.isOpen}
                     index={i}
                   />
                 </div>

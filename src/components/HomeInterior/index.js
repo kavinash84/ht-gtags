@@ -34,6 +34,8 @@ import { sendData, getData } from 'redux/modules/services';
   )
 
 class HomeInteriorContainer extends React.Component {
+  
+ 
 
     state = {
         openModal: false,

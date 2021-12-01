@@ -28,6 +28,7 @@ import { sendData, getData } from 'redux/modules/services';
 @connect(
   ({ services, modularwardrobe, userLogin, profile }) => ({
     modularwardrobe,
+    typeswardrobes: modularwardrobe.data.items.text.typeswardrobes,
     ...services.modularkitchen
   }),
   { sendFormData: sendData, loadPincodeDetails: getData }
@@ -63,7 +64,7 @@ class ModularWardrobeContainer extends React.Component {
   }
 
     render() { 
-      const { whyChooseUs, isLoggedIn, fullName, loading, loaded } = this.props;
+      const { whyChooseUs, isLoggedIn, fullName, loading, loaded , typeswardrobes} = this.props;
         const { showScript } = this.state;
         return (
             <div>
@@ -82,7 +83,7 @@ class ModularWardrobeContainer extends React.Component {
             textAlign: "center"
           }}
         >
-          Select From A Range Of Wardrobe Collection
+         {typeswardrobes.mainTitle} 
           <div
             style={{
               width: '30px',

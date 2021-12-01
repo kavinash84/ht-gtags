@@ -17,17 +17,18 @@ class Steps extends React.Component {
         const { newWardrobe } = this.props;
         return (
          <Box style={{width: '100%', marginTop: '50px', position: 'relative'}}>
-             <Image src="https://www.hometown.in/media/cms/designbuild/whychose.png" style={{width: '85%',height:'100%', minHeight: '450px'}}/>
+             <Image src={newWardrobe.image} style={{width: '85%',height:'80%', minHeight: '80%'}}/>
              <Box style={{ display: 'flex' }}>
           <Box
             m="auto"
             style={{
-              width: '30%',
+              width: '35%',
+              height: '80%',
               border: '1px solid #FCE1D1',
               backgroundColor: '#FFFFFF',
               boxShadow: '0px 5px 10px #0000001A',
               position: 'absolute',
-              top: '13%',
+              top: '10%',
               right: '0'
             }}
             p="10px 30px"

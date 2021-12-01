@@ -25,15 +25,15 @@ class TopBanner extends React.Component {
           src={topBanner.img}
           alt="topbanner"
           width="100%"
-          height="550px"
+          height="650px"
           style={{ objectFit: 'cover' }}
         />
-        <Box style={{ height: '70%', width: '300px', backgroundColor: 'white' }} className={styles.sub}>
+        <Box style={{ height: '50%', width: '350px', backgroundColor: 'white' }} className={styles.sub}>
           {/* <Image src={topBanner.image} alt="topbanner" style={{ objectFit: 'cover', width: '50%', marginLeft: '25%' }} /> */}
           <Text
             style={{
               color: '#323131',
-              fontSize: '29px',
+              fontSize: '35px',
               textAlign: 'center',
               padding: '70px 20px 0px',
               lineHeight: '30px',
@@ -45,7 +45,7 @@ class TopBanner extends React.Component {
           <Heading
             style={{
               color: '#323131',
-              fontSize: '29px',
+              fontSize: '35px',
               textAlign: 'center',
               padding: ' 5px 20px',
               lineHeight: '30px'
@@ -58,7 +58,7 @@ class TopBanner extends React.Component {
               color: '#666666',
               fontSize: '16px',
               textAlign: 'center',
-              padding: '15px 20px 25px',
+              padding: '15px 25px 25px',
               lineHeight: '30px'
             }}
           >
@@ -67,12 +67,12 @@ class TopBanner extends React.Component {
           <Button
           onClick={this.props.handleModal}
             style={{
-              width: '80%',
+              width: '60%',
               height: '50px',
               backgroundColor: 'white',
               color: '#F47020',
               border: '1px solid #F47020',
-              marginLeft: '10%',
+              marginLeft: '20%',
               borderRadius: '5px',
               textTransform:'none'
             }}

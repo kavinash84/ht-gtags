@@ -6,13 +6,33 @@ import Text from "hometown-components-dev/lib/TextHtV1";
 
 const styles = require('../Slider.scss');
 
-const DBItem = ({ component, data }) => {
-  return (
-    <Box variant="section.catSliderItem">
+
+class DBItem  extends React.Component {
+
+  componentDidMount() {
+    this.handleScrollPosition();
+  }
+
+  handleScrollPosition = () => {
+    const scrollPosition = sessionStorage.getItem("HomeInteriorscrollPosition");
+    if (scrollPosition) {
+      window.scrollTo(0, parseInt(scrollPosition));
+      setTimeout(function() {
+        sessionStorage.removeItem("HomeInteriorscrollPosition");
+      }, 2000);
+    }
+  }
+  render() { 
+    const {data} = this.props;
+    return (
+      <Box variant="section.catSliderItem">
       <Div className={`${styles.sliderItem}`}>
         <div className={styles.link}>
           <div style={{ height: "250px" }}>
-          <Link to={data.url_key}>
+          <Link to={data.url_key}
+               onClick={() => {
+              sessionStorage.setItem("HomeInteriorscrollPosition", window.pageYOffset);
+            }}>
             <img
               src={data.imgSrc}
               alt={data.title}
@@ -31,7 +51,8 @@ const DBItem = ({ component, data }) => {
         </div>
       </Div>
     </Box>
-  );
-};
-
+    );
+  }
+}
+ 
 export default DBItem;

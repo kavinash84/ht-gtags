@@ -11,12 +11,12 @@ const DBItem = ({ component, data }) => {
     <Box variant="section.catSliderItem">
       <Div className={`${styles.sliderItem}`}>
         <div className={styles.link}>
-          <div style={{ height: "300px" }}>
+          <div style={{ height: "350px" }}>
             <img
               src={data.imgSrc}
               alt={data.title}
               className={styles.curosalImg}
-              style={{ height: "100%", width: "auto", margin: "0 10px"}}
+              style={{ height: "100%", width: "100%", margin: "0 10px"}}
             />
           </div>
 
@@ -24,7 +24,7 @@ const DBItem = ({ component, data }) => {
             <Text style={{ fontSize: "18px", fontWeight: "600", textAlign:'left' }}>
               {data.title}
             </Text>
-            <p className={styles.contnet3_description}>{data.description}</p>
+            <p className={styles.contnet3_description} style={{fontSize:'14px', lineHeight:'20px'}}>{data.description}</p>
           </Div>
         </div>
       </Div>

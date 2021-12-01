@@ -17,6 +17,7 @@ const styles = require('./HomeInterior.scss');
   letUsHelp: homeinterior.data.items.text.letUsHelp
 }))
 class LetUsHelpYou extends React.Component {
+ 
   render() {
     const { letUsHelp } = this.props;
     return (
@@ -36,7 +37,10 @@ class LetUsHelpYou extends React.Component {
         <Row justifyContent="center" style={{ width: '100%', margin: 'auto' }}>
           {letUsHelp.values.map(slide => (
             <Box style={{ width: '19%', margin: '30px 10px 10px' }}>
-              <Link to={slide.url_key}>
+              <Link to={slide.url_key}
+               onClick={() => {
+              sessionStorage.setItem("HomeInteriorscrollPosition", window.pageYOffset);
+            }}>
               <Image src={slide.imgSrc} alt={slide.title} m={5} height="240px" width="100%" />
               <Text
                 fontSize="20px"
