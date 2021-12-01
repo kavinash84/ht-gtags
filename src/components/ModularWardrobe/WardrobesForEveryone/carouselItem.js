@@ -11,7 +11,7 @@ const DBItem = ({ component, data }) => {
     <Box variant="section.catSliderItem">
       <Div className={`${styles.sliderItem}`}>
         <div className={styles.link}>
-          <div style={{ height: "350px" }}>
+          <div>
             <img
               src={data.imgSrc}
               alt={data.title}

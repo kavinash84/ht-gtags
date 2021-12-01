@@ -8,9 +8,26 @@ import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 const styles = require('../Slider.scss');
 const arrowForward = require('../../../../static/newHomepage/newForwardArrow.svg');
 
-const DBItem = ({ component, data }) => {
-  return (
-    <Box variant="section.catSliderItem">
+class DBItem extends React.Component {
+
+  componentDidMount() {
+    this.handleScrollPosition();
+  }
+
+  handleScrollPosition = () => {
+    const scrollPosition = sessionStorage.getItem("DesignBuildscrollPosition");
+    if (scrollPosition) {
+      window.scrollTo(0, parseInt(scrollPosition));
+      setTimeout(function() {
+        sessionStorage.removeItem("DesignBuildscrollPosition");
+      }, 2000);
+    }
+  }
+
+  render() { 
+    const {data} = this.props;
+    return (
+<Box variant="section.catSliderItem">
       <Div
             className={`${styles.sliderItem}`}
             style={{
@@ -25,8 +42,8 @@ const DBItem = ({ component, data }) => {
               className={styles.link}
               to={data.url_key}
               onClick={() => {
-                sessionStorage.setItem('scrollPosition', window.pageYOffset);
-              }}
+              sessionStorage.setItem("DesignBuildscrollPosition", window.pageYOffset);
+            }}
             >
               <div style={{ height: '220px' }}>
                 <img
@@ -58,7 +75,8 @@ const DBItem = ({ component, data }) => {
             </Link>
           </Div>
     </Box>
-  );
-};
-
+    );
+  }
+}
+ 
 export default DBItem;

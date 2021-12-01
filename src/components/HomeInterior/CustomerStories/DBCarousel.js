@@ -5,7 +5,36 @@ import SlickSlider from "components/SlickSlider";
 import DBItem from "./CarouselItem";
 
 import '../Slider.css';
+const nextArrow = require('../../../../static/newHomepage/nextArrow.svg');
+const previousArrow = require('../../../../static/newHomepage/previousArrow.svg');
 
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <React.Fragment>
+      <img
+        className={className}
+        src={nextArrow}
+        onClick={onClick}
+        style={{ ...style, marginRight:"20px", width: "15px" }}
+      />
+    </React.Fragment>
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <React.Fragment>
+      <img
+        className={className}
+        src={previousArrow}
+        onClick={onClick}
+        style={{ ...style, marginLeft:"20px", width: "15px" }}
+      />
+    </React.Fragment>
+  );
+}
 export default class DBCarousel extends Component {
   render() {
     const { data, settings, component } = this.props;
@@ -13,7 +42,11 @@ export default class DBCarousel extends Component {
       <BoxHtV1>
         <div className="carousel-one">
         <SlickSlider
-          settings={settings(data.length)}
+         settings={{
+              ...settings(data.length),
+              nextArrow: <SampleNextArrow />,
+              prevArrow: <SamplePrevArrow />
+            }}
           className="homeCarouselSlider"
         >
           {data.map(slide => (

@@ -11,7 +11,10 @@ const DBItem = ({ component, data }) => {
     <Box variant="section.catSliderItem">
       <Div className={`${styles.sliderItem}`}>
         <div className={styles.link}>
-      <Link to={data.url_key}>
+      <Link to={data.url_key}
+      onClick={() => {
+              sessionStorage.setItem("DesignBuildscrollPosition", window.pageYOffset);
+            }}>
           <div style={{ height: "300px" }}>
             <img
               src={data.imgSrc}

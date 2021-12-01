@@ -28,3 +28,12 @@
   border-radius: 20px !important;
   width:80% !important;
 }
+
+.slick-prev, .slick-next{
+  height:80px !important;
+  width: 80px !important;
+}
+
+.slick-prev, .slick-next{
+top:40% !important;
+}

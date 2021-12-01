@@ -28,3 +28,15 @@
   border-radius: 20px !important;
   width:80% !important;
 }
+
+.slick-prev, .slick-next{
+  height:80px !important;
+  width: 80px !important;
+}
+
+.homeCarouselSlider .slick-next{
+top:45% !important;
+}
+.homeCarouselSlider .slick-prev{
+top:45% !important;
+}
