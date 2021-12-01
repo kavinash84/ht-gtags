@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Section from "hometown-components-dev/lib/SectionHtV1";
 import Div from "hometown-components-dev/lib/BoxHtV1";
 import Img from "hometown-components-dev/lib/ImageHtV1";
@@ -12,6 +13,9 @@ const arrowForward = require("../../../static/Review/ReviewBanner.png");
 const styles = require("./BreadCrumb.scss");
 const styles2 = require("./index.scss");
 
+@connect(({ reviews }) => ({
+  ReviewsData: reviews.reviewsList
+}))
 export default class ReviewComponentsContainer extends Component {
   constructor(props) {
     super(props);
@@ -30,8 +34,16 @@ export default class ReviewComponentsContainer extends Component {
   componentDidMount() {
     const { dispatch } = this.context.store;
     const { pageNo, pageSize } = this.state;
-    const data = `pageNo=${pageNo}&pageSize=${pageSize}`;
-    dispatch(loadReviewsList(data));
+    const { ReviewsData } = this.props;
+    // const data = `pageNo=${pageNo}&pageSize=${pageSize}`;
+    // dispatch(loadReviewsList(data));
+    // if (Array.isArray(ReviewsData.length)) {
+    if (ReviewsData.length === 0) {
+      const data = `pageNo=${pageNo}&pageSize=${pageSize}`;
+      console.log(ReviewsData, "ReviewsData");
+      dispatch(loadReviewsList(data));
+    }
+    // }
   }
   handlePagination = () => {
     const { pageNo, pageSize } = this.state;

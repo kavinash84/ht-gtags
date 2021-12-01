@@ -292,8 +292,8 @@ export default class WriteReview extends Component {
     return (
       <Section p="0" mb="0" style={{ padding: "0% 7%" }}>
         <Div className={styles.writeReviewContainer}>
-          <Div style={{ width: "50%" }}>
-            <Img src={ReviewBanner} alt="Banner" />
+          <Div style={{ width: "50%", height: "100%" }}>
+            <Img src={ReviewBanner} alt="Banner" style={{ height: "100%" }} />
           </Div>
           <Div
             style={{
@@ -339,9 +339,9 @@ export default class WriteReview extends Component {
                     <div
                       className={styles.getDetailsBtn}
                       style={{
-                        height: mobileError ? "57%" : "81%",
-                        marginBottom: mobileError ? "20px" : "",
-                        marginTop: "10px"
+                        height: mobileError ? "74%" : "74%"
+                        // marginBottom: mobileError ? "20px" : ""
+                        // marginTop: "10px"
                       }}
                       onClick={() => {
                         if (!productsLoader) {
@@ -371,8 +371,8 @@ export default class WriteReview extends Component {
                     />
                   </Div>
                 </Row>
-                <Row m="0" style={{ alignItems: "center" }}>
-                  <Div col="6" style={{ marginBottom: "9px" }}>
+                <Row m="0" style={{}}>
+                  <Div col="6" m="0px" style={{ marginBottom: "" }}>
                     <FormInput
                       label=""
                       type="text"
@@ -385,10 +385,11 @@ export default class WriteReview extends Component {
                   </Div>
                   <Div
                     col="6"
+                    mb="0px"
                     style={{
                       width: "42%",
-                      marginLeft: "3%",
-                      marginTop: "10px"
+                      marginLeft: "3%"
+                      // marginTop: "10px"
                     }}
                   >
                     <div className="select-wrapper">
@@ -427,11 +428,15 @@ export default class WriteReview extends Component {
                         </select>
                       </div>
                     </div>
-                    {offlineError ? (
-                      <Text color="#dc3545" fontSize="13px" mt="0px">
-                        {offlineErrorMsg}
-                      </Text>
-                    ) : null}
+                    {/* {offlineError ? ( */}
+                    <Text
+                      color={offlineError ? "#dc3545" : "transparent"}
+                      fontSize="11px"
+                      mt="0px"
+                    >
+                      {offlineErrorMsg}
+                    </Text>
+                    {/* ) : null} */}
                   </Div>
                 </Row>
                 <Row m="0">
@@ -446,7 +451,7 @@ export default class WriteReview extends Component {
                           padding: "0px 8px",
                           fontSize: "14px",
                           color: "#7E7575",
-                          marginBottom: "10px",
+                          // marginBottom: "10px",
                           outline: "none",
                           backgroundColor: "white"
                         }}
@@ -460,7 +465,7 @@ export default class WriteReview extends Component {
                             border: "none",
                             fontSize: "14px",
                             color: "#7E7575",
-                            marginBottom: "10px",
+                            // marginBottom: "10px",
                             outline: "none",
                             backgroundColor: "white"
                           }}
@@ -476,11 +481,16 @@ export default class WriteReview extends Component {
                         </select>
                       </div>
                     </div>
-                    {storeError ? (
-                      <Text color="#dc3545" fontSize="13px" mt="0px" mb="4px">
-                        {storeErrorMsg}
-                      </Text>
-                    ) : null}
+                    {/* {storeError ? ( */}
+                    <Text
+                      color={storeError ? "#dc3545" : "transparent"}
+                      fontSize="11px"
+                      mt="0px"
+                      mb="4px"
+                    >
+                      {storeErrorMsg}
+                    </Text>
+                    {/* ) : null} */}
                   </Div>
                   <Div col="12" style={{ width: "100%" }}>
                     <div className="select-wrapper">
@@ -526,11 +536,15 @@ export default class WriteReview extends Component {
                         </select>
                       </div>
                     </div>
-                    {productError ? (
-                      <Text color="#dc3545" fontSize="13px" mt="4px">
-                        {productErrorMsg}
-                      </Text>
-                    ) : null}
+                    {/* {productError ? ( */}
+                    <Text
+                      color={productError ? "#dc3545" : "transparent"}
+                      fontSize="11px"
+                      mt="4px"
+                    >
+                      {productErrorMsg}
+                    </Text>
+                    {/* ) : null} */}
                   </Div>
                   <Div col="12" style={{ position: "relative", width: "100%" }}>
                     <div
@@ -559,7 +573,7 @@ export default class WriteReview extends Component {
                           border: "1px solid #999999",
                           borderRadius: "4px",
                           position: "absolute",
-                          top: "37%",
+                          top: "23%",
                           right: "4%"
                         }}
                       />
@@ -578,7 +592,7 @@ export default class WriteReview extends Component {
                       }}
                     />
                   </Div>
-                  <Div col="12" style={{ width: "100%", marginTop: "10px" }}>
+                  <Div col="12" style={{ width: "100%" }}>
                     <textarea
                       placeholder="Write a review here…."
                       name="review"
@@ -590,14 +604,19 @@ export default class WriteReview extends Component {
                         background: "white",
                         borderRadius: "5px",
                         padding: "10px",
-                        width: "100%"
+                        width: "100%",
+                        fontFamily: "regular"
                       }}
                     />
-                    {descriptionError ? (
-                      <Text color="#dc3545" fontSize="13px" mt="0px">
-                        {descriptionErrorMsg}
-                      </Text>
-                    ) : null}
+                    {/* {descriptionError ? ( */}
+                    <Text
+                      color={descriptionError ? "#dc3545" : "transparent"}
+                      fontSize="11px"
+                      mt="0px"
+                    >
+                      {descriptionErrorMsg}
+                    </Text>
+                    {/* ) : null} */}
                   </Div>
                   <Div
                     style={{

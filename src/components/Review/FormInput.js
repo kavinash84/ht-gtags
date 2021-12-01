@@ -22,11 +22,11 @@ const FormInput = ({
   };
   return (
     <div style={{ width: "100%" }}>
-      {!(type === "hidden") && (
+      {/* {!(type === "hidden") && (
         <div m style={{ fontSize: "0.875em", marginBottom: "0.625rem" }}>
           {label}
         </div>
-      )}
+      )} */}
       {(type === "text" ||
         type === "password" ||
         type === "email" ||
@@ -47,11 +47,18 @@ const FormInput = ({
         />
       )}
       {type === "textarea" && <textarea {...inputProps} name={name} />}
-      {feedBackError && !(type === "hidden") && (
-        <div style={{ color: "#dc3545", padding: "3px", fontSize: "14px" }}>
-          {feedBackMessage}
-        </div>
-      )}
+      {/* {feedBackError && !(type === "hidden") && ( */}
+      <div
+        style={{
+          color:
+            feedBackError && !(type === "hidden") ? "#dc3545" : "transparent",
+          padding: "3px",
+          fontSize: "11px"
+        }}
+      >
+        {feedBackMessage}
+      </div>
+      {/* )} */}
     </div>
   );
 };

@@ -7,6 +7,14 @@ import { Link } from "react-router-dom";
 // import ReviewsData from "./ReviewsData";
 
 const Star = require("../../../static/Review/star.svg");
+const amazon = require("../../../static/Review/amazon.svg");
+const bajaj = require("../../../static/Review/bajaj.png");
+const facebook = require("../../../static/Review/facebook.svg");
+const flipcart = require("../../../static/Review/flipcart.svg");
+const ht = require("../../../static/Review/ht.svg");
+const insta = require("../../../static/Review/insta.svg");
+const myntra = require("../../../static/Review/myntra.svg");
+const pepperfry = require("../../../static/Review/pepperfry.svg");
 
 const styles = require("./index.scss");
 
@@ -20,6 +28,28 @@ export default class Reviews extends Component {
     const d = new Date(date);
     const arr = d.toString().split(" ");
     return `${arr[2]}th ${arr[1]} ${arr[3]}`;
+  };
+  getLogo = flag => {
+    switch (flag) {
+      case "Amazon":
+        return <Img src={amazon} alt="Amazon" width="60px" height="60px" />;
+      case "Bajaj":
+        return <Img src={bajaj} alt="Bajaj" width="60px" height="60px" />;
+      case "Facebook":
+        return <Img src={facebook} alt="Facebook" width="60px" height="60px" />;
+      case "Flipkart":
+        return <Img src={flipcart} alt="Flipkart" width="60px" height="60px" />;
+      case "Hometown":
+        return <Img src={ht} alt="Hometown" width="60px" height="60px" />;
+      case "Mayantra":
+        return <Img src={myntra} alt="Mayantra" width="60px" height="60px" />;
+      case "Pepperfry":
+        return (
+          <Img src={pepperfry} alt="Pepperfry" width="60px" height="60px" />
+        );
+      default:
+        return <Img src={insta} alt="Instagram" width="60px" height="60px" />;
+    }
   };
   render() {
     const { handlePagination, EndOfList, loading, ReviewsData } = this.props;
@@ -87,7 +117,8 @@ export default class Reviews extends Component {
                     <Div className={styles.location}>{item.city}</Div>
                   </Div>
                   <Div className={styles.logoContainer}>
-                    <Img src={Star} width="60px" height="60px" alt="Star" />
+                    {/* <Img src={Star} width="60px" height="60px" alt="Star" /> */}
+                    {this.getLogo(item.flag)}
                   </Div>
                 </Div>
                 <Div className={styles.productImage}>
