@@ -148,7 +148,7 @@ class DesignBuildContainer extends React.Component {
 
                     <Heading 
                        mb="15px"
-                       mt="120px"
+                       mt="40%"
                       color="#000000"
                     fontSize="18px"
                 fontFamily="medium"

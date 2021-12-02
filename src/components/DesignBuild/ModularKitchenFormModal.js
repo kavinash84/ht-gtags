@@ -448,7 +448,7 @@ export default class ModularKitchenFormModal extends Component {
             <Div>
               <Heading
                 mb="15px"
-                mt="10px"
+                mt="15%"
                 color="#000000"
                 fontSize="18px"
                 fontFamily="medium"
