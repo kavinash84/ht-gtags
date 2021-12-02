@@ -52,7 +52,7 @@ export default class StepsMain extends Component {
         >
         5 Steps to Your <br /> Dream Home
         </Box>
-        <Box style={{ paddingTop: '30px', paddingBottom: '30px' }}>
+        <Box style={{ paddingTop: '30px', paddingBottom: '30px', marginLeft:'7%' }}>
           {initialItems.map((item, i) => {
             if (i + 1 <= length) {
               return (
@@ -117,7 +117,7 @@ export default class StepsMain extends Component {
               color: '#F47020',
               border: '1px solid #F47020',
               borderRadius: '5px',
-              marginLeft:'14%'
+              marginLeft:'9%'
             }}
           >
             Book Consultation
