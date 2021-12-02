@@ -31,8 +31,10 @@ const styles = require("./writeReview.scss");
 
 @connect(({ reviews, stores }) => ({
   productsToBeReviewed: reviews.productsToBeReviewed,
+  cmsData: reviews.cmsData.items.text,
   productsLoader: reviews.productsLoader,
   stores: stores.data.items.text,
+  reviewAdded: reviews.reviewAdded,
   loading: reviews.loading
 }))
 export default class WriteReview extends Component {
@@ -202,16 +204,17 @@ export default class WriteReview extends Component {
       store,
       addImg
     } = this.state;
-    const nameError = isEmpty(name) || checkSpecialChar(name);
-    // || validateFullname(name)
+    const nameError =
+      isEmpty(name) || validateFullname(name) || checkSpecialChar(name);
     const mobileError = !validateMobile(mobile);
     const emailError = !validateEmail(email);
     const descriptionError = isEmpty(description);
     const cityError = isEmpty(city);
     const offlineError = isEmpty(offline);
     const productError = isEmpty(product);
-    const storeError = isEmpty(store);
-    const addImgError = addImg === "" ? true : false;
+    const storeError =
+      this.state.offline === "offline" ? isEmpty(store) : false;
+    // const addImgError = addImg === "" ? true : false;
 
     if (
       nameError ||
@@ -221,9 +224,11 @@ export default class WriteReview extends Component {
       cityError ||
       offlineError ||
       productError ||
-      storeError ||
-      addImgError
+      storeError
+      //  ||
+      // addImgError
     ) {
+      console.log("error");
       this.setState({
         nameError,
         mobileError,
@@ -232,8 +237,8 @@ export default class WriteReview extends Component {
         cityError,
         offlineError,
         productError,
-        storeError,
-        addImgError
+        storeError
+        // addImgError
       });
     } else {
       const { dispatch } = this.context.store;
@@ -246,11 +251,37 @@ export default class WriteReview extends Component {
       formdata.append("mobile", this.state.mobile);
       formdata.append("city", this.state.city);
       formdata.append("storeType", this.state.offline);
-      formdata.append("storeName", this.state.store);
-      formdata.append("image", this.state.addImg[0]);
+      if (this.state.offline === "offline") {
+        formdata.append("storeName", this.state.store);
+      }
+      if (this.state.addImg) {
+        formdata.append("image", this.state.addImg[0]);
+      }
+
       dispatch(addCustomerReview(this.state.product, formdata));
     }
+    console.log("noerror");
   };
+  componentWillReceiveProps(nextProps) {
+    if (
+      nextProps.reviewAdded &&
+      nextProps.reviewAdded !== this.props.reviewAdded
+    ) {
+      this.setState({
+        name: "",
+        mobile: "",
+        email: "",
+        description: "",
+        city: "",
+        offline: "offline",
+        product: "",
+        store: "",
+        addImg: "",
+        ratings: 1
+      });
+      document.getElementById("reviewBackBtn").click();
+    }
+  }
   render() {
     const {
       name,
@@ -293,7 +324,11 @@ export default class WriteReview extends Component {
       <Section p="0" mb="0" style={{ padding: "0% 7%" }}>
         <Div className={styles.writeReviewContainer}>
           <Div style={{ width: "50%", height: "100%" }}>
-            <Img src={ReviewBanner} alt="Banner" style={{ height: "100%" }} />
+            <Img
+              src={this.props.cmsData.desktop.write}
+              alt="Banner"
+              style={{ height: "100%" }}
+            />
           </Div>
           <Div
             style={{
@@ -354,7 +389,7 @@ export default class WriteReview extends Component {
                         }
                       }}
                     >
-                      {productsLoader ? "Loading...!" : "Get Details"}
+                      {productsLoader ? "Loading...!" : "Get my order details"}
                     </div>
                   </Div>
                 </Row>
@@ -469,6 +504,9 @@ export default class WriteReview extends Component {
                             outline: "none",
                             backgroundColor: "white"
                           }}
+                          disabled={
+                            this.state.offline === "online" ? true : false
+                          }
                         >
                           <option value="Select Store" disabled selected>
                             Select Store
@@ -483,7 +521,11 @@ export default class WriteReview extends Component {
                     </div>
                     {/* {storeError ? ( */}
                     <Text
-                      color={storeError ? "#dc3545" : "transparent"}
+                      color={
+                        storeError && this.state.offline === "offline"
+                          ? "#dc3545"
+                          : "transparent"
+                      }
                       fontSize="11px"
                       mt="0px"
                       mb="4px"
@@ -689,7 +731,8 @@ export default class WriteReview extends Component {
                         fontSize: "14px",
                         width: "100%",
                         fontWeight: 600,
-                        margin: "10px"
+                        margin: "10px",
+                        marginRight: "-30px"
                       }}
                       fontFamily="regular"
                       height="50px"
@@ -701,6 +744,13 @@ export default class WriteReview extends Component {
                     >
                       {loading ? "Submiting Review..." : "Submit Review"}
                     </Button>
+                    <Link
+                      id="reviewBackBtn"
+                      to="/reviews"
+                      style={{ visibility: "hidden" }}
+                    >
+                      back
+                    </Link>
                   </Div>
                 </Row>
               </form>

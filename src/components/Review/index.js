@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from 'react-router-dom';
 import Section from "hometown-components-dev/lib/SectionHtV1";
 import Div from "hometown-components-dev/lib/BoxHtV1";
 import Img from "hometown-components-dev/lib/ImageHtV1";
@@ -14,7 +15,8 @@ const styles = require("./BreadCrumb.scss");
 const styles2 = require("./index.scss");
 
 @connect(({ reviews }) => ({
-  ReviewsData: reviews.reviewsList
+  ReviewsData: reviews.reviewsList,
+  cmsData: reviews.cmsData.items.text
 }))
 export default class ReviewComponentsContainer extends Component {
   constructor(props) {
@@ -123,11 +125,13 @@ export default class ReviewComponentsContainer extends Component {
             marginBottom: "30px"
           }}
         >
-          <Img
-            src={arrowForward}
-            alt="Banner"
-            style={{ width: "100%", height: "auto" }}
-          />
+          <Link to="/writereview">
+            <Img
+              src={this.props.cmsData.desktop.top}
+              alt="Banner"
+              style={{ width: "100%", height: "auto" }}
+            />
+          </Link>
         </Div>
         <Div
           style={{
@@ -151,7 +155,7 @@ export default class ReviewComponentsContainer extends Component {
         </Div>
         <Div style={{ width: "100%", height: "auto", padding: "0% 7%" }}>
           <Img
-            src={arrowForward}
+            src={this.props.cmsData.desktop.bottom}
             alt="Banner"
             style={{ width: "100%", height: "auto" }}
           />

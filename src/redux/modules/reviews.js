@@ -1,3 +1,5 @@
+import { REVIEWBANNERES } from "../../helpers/apiUrls";
+
 const LOAD_REVIEW = "reviews/LOAD_REVIEW";
 const LOAD_REVIEW_SUCCESS = "reviews/LOAD_REVIEW_SUCCESS";
 const LOAD_REVIEW_FAIL = "reviews/LOAD_REVIEW_FAIL";
@@ -19,6 +21,10 @@ const GET_PRODUCTSFOR_REVIEW = "reviews/GET_PRODUCTSFOR_REVIEW";
 const GET_PRODUCTSFOR_REVIEW_SUCCESS = "reviews/GET_PRODUCTSFOR_REVIEW_SUCCESS";
 const GET_PRODUCTSFOR_REVIEW_FAIL = "reviews/GET_PRODUCTSFOR_REVIEW_FAIL";
 
+const LOAD_REVIEW_BANNERES = "reviews/LOAD_REVIEW_BANNERES";
+const LOAD_REVIEW_BANNERES_SUCCESS = "reviews/LOAD_REVIEW_BANNERES_SUCCESS";
+const LOAD_REVIEW_BANNERES_FAIL = "reviews/LOAD_REVIEW_BANNERES_FAIL";
+
 const TOGGLE_PAGE_NO = "reviews/TOGGLE_PAGE_NO";
 
 const initialState = {
@@ -26,10 +32,11 @@ const initialState = {
   reviewsList: [],
   pageNo: null,
   productsToBeReviewed: [],
-
+  cmsData: {},
   endOfList: false,
   adding: false,
   added: false,
+  reviewAdded: false,
   error: false
 };
 export default function reducer(state = initialState, action = {}) {
@@ -115,20 +122,24 @@ export default function reducer(state = initialState, action = {}) {
     case ADD_CUSTOMER_REVIEW:
       return {
         ...state,
-        loading: true
+        loading: true,
+        reviewAdded: false
       };
     case ADD_CUSTOMER_REVIEW_SUCCESS:
       return {
         ...state,
         loading: false,
-        loaded: true
+        loaded: true,
+        productsToBeReviewed: [],
+        reviewAdded: true
       };
     case ADD_CUSTOMER_REVIEW_FAIL:
       return {
         ...state,
         loading: false,
         loaded: false,
-        error: action.error
+        error: action.error,
+        reviewAdded: false
       };
     case GET_PRODUCTSFOR_REVIEW:
       return {
@@ -149,6 +160,20 @@ export default function reducer(state = initialState, action = {}) {
         //   Array.isArray(action.result) && action.result.length
         //     ? action.result
         //     : [],
+        error: action.error
+      };
+    case LOAD_REVIEW_BANNERES:
+      return {
+        ...state
+      };
+    case LOAD_REVIEW_BANNERES_SUCCESS:
+      return {
+        ...state,
+        cmsData: action.result
+      };
+    case LOAD_REVIEW_BANNERES_FAIL:
+      return {
+        ...state,
         error: action.error
       };
     default:
@@ -220,4 +245,13 @@ export const addCustomerReview = (sku, data) => ({
 export const togglePageNumber = result => ({
   type: TOGGLE_PAGE_NO,
   result
+});
+
+export const loadReviewsBanneres = () => ({
+  types: [
+    LOAD_REVIEW_BANNERES,
+    LOAD_REVIEW_BANNERES_SUCCESS,
+    LOAD_REVIEW_BANNERES_FAIL
+  ],
+  promise: ({ client }) => client.get(REVIEWBANNERES)
 });

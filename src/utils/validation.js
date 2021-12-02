@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { isBlank } from 'js-utility-functions';
 
 export const isEmpty = rawValue => {
   const value = rawValue ? rawValue.trim() : '';
@@ -174,6 +175,22 @@ export const validateEmail = email =>
     email
   );
 export const validateVPA = vpa => /^[.a-zA-Z0-9\-_]{3,}@[A-Za-z0-9]+$/.test(vpa);
+
+export const validateFullname = value => {
+  if (isBlank(value)) {
+    return true;
+    // return validationProps(true, 'Please enter your first name and last name');
+  } else if (value.length < 3) {
+    return true;
+    // return validationProps(true, 'Name should be atleast 3 characters');
+  } else if (!/^[a-zA-Z]+ [a-zA-Z]+$/.test(value)) {
+    return true;
+    // return validationProps(true, 'Please enter firstname, lastname seperated with a space.');
+  }
+  return false;
+  // return validationProps(false, '');
+};
+
 // export const validateFullName = name =>
 //   /^[a-zA-Z]+ [a-zA-Z]+$/.test(
 //     name
