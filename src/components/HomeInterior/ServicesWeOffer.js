@@ -26,7 +26,8 @@ class ServicesWeOffer extends React.Component {
             fontWeight: 600,
             marginBottom: '5px',
             color: 'black',
-            textAlign: 'center'
+            textAlign: 'center',
+            marginTop: '80px'
           }}
         >
           {ServicesOffer.title}

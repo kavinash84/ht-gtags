@@ -33,7 +33,7 @@ export default class DesignByStyle extends Component {
           backgroundColor: "#F3F5F7",
           padding: "30px 30px 20px",
           textAlign: "center",
-          marginTop: "40px"
+          marginTop: "70px"
         }}
       >
         <Div

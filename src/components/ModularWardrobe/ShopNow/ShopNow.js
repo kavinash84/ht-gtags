@@ -34,7 +34,7 @@ export default class ShopNow extends Component {
           backgroundColor: "#FFFFFF",
           padding: "30px 30px 10px",
           textAlign: "center",
-          marginTop: "40px"
+          marginTop: "60px"
         }}
       >
         <Div

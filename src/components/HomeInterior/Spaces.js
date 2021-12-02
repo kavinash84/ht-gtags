@@ -18,7 +18,7 @@ class SpacesWeDesign extends React.Component {
     render() { 
         const { spaces }  = this.props;
         return (
-            <Box mt="70px">
+            <Box mt="90px">
                 <Heading 
                  style={{
             fontSize: '40px',
@@ -30,7 +30,7 @@ class SpacesWeDesign extends React.Component {
                 {spaces.title}
                 </Heading>
                 <Text
-                style={{fontSize: "20px", color: "#888888", marginBottom: "40px", width: "70%", textAlign: 'center', marginLeft: '15%', marginTop: '30px' }}
+                style={{fontSize: "20px", color: "#888888", marginBottom: "10px", width: "70%", textAlign: 'center', marginLeft: '15%', marginTop: '30px', lineHeight: '30px'}}
                 >
                {spaces.subtitle}
                 </Text>

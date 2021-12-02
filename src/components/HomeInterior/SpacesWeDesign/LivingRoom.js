@@ -36,7 +36,7 @@ export default class livingRoom extends Component {
           backgroundColor: "#FFFFFF",
           padding: "30px 0px 10px",
           textAlign: "center",
-          marginTop: "40px"
+          marginTop: "20px"
         }}
       >
        <Div style={{ width:"90%", marginLeft:"5%" }}>

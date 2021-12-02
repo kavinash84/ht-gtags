@@ -10,7 +10,7 @@ import Button from 'hometown-components-dev/lib/ButtonHtV1';
 class BeginJourney extends React.Component {
   render() {
     return (
-      <Box mt="200px">
+      <Box mt="250px">
         <Flex style={{ width: '100%' }}>
           <Box style={{ width: '70%', height: '370px', backgroundColor: '#F5EEEE' }}>
             <Flex style={{ flexDirection: 'column' }}>

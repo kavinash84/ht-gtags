@@ -33,7 +33,7 @@ export default class WardrobesForEveryone extends Component {
           backgroundColor: "#FFFFFF",
           padding: "30px 30px 10px",
           textAlign: "center",
-          marginTop: "130px"
+          marginTop: "150px"
         }}
       >
         <Div

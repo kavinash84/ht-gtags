@@ -79,7 +79,7 @@ class ModularWardrobeContainer extends React.Component {
             fontWeight: "600",
             marginBottom: "10px",
             color: "black",
-            marginTop: "80px",
+            marginTop: "100px",
             textAlign: "center"
           }}
         >
