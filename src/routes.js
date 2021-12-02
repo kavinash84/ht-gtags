@@ -28,6 +28,8 @@ import Cart from 'containers/Cart';
 import ModularKitchen from 'containers/ModularKitchenMicro';
 import PlanYourKitchen from 'containers/PlanYourKitchen';
 import DesignBuild from 'containers/DesignBuild';
+import HomeInterior from 'containers/HomeInterior';
+import ModularWardrobe from 'containers/ModularWardrobe';
 import BulkOrder from 'containers/BulkOrder';
 import Brand from 'containers/Brand';
 import HtExclusive from 'containers/HtExclusive';
@@ -177,6 +179,8 @@ const routes = [
       { path: '/modular-kitchens', exact: true, component: ModularKitchen },
       { path: '/plan-your-kitchen', exact: true, component: PlanYourKitchen },
       { path: '/design-build', exact: true, component: DesignBuild },
+      { path: '/home-interior', exact: true, component: HomeInterior },
+      { path: '/modular-wardrobe', exact: true, component: ModularWardrobe },
       { path: '/payment-success', exact: true, component: PaymentSuccess },
       {
         path: '/payment-failed/:orderId?',
