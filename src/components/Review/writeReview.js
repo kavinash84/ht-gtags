@@ -69,7 +69,8 @@ export default class WriteReview extends Component {
     description: "",
     descriptionError: "",
     descriptionErrorMsg: "Description field is Required",
-    ratings: 1
+    ratings: 1,
+    getDetailsHit: false
   };
 
   onChangeRating = e => {
@@ -87,17 +88,14 @@ export default class WriteReview extends Component {
   };
   onChangeMobile = e => {
     if (e.target.value) {
-      this.setState({ mobile: e.target.value, mobileError: false });
-    } else {
+      const checkError = !validateMobile(e.target.value);
       this.setState({
-        mobileError: true,
-        mobile: ""
+        mobile: e.target.value,
+        mobileError: checkError,
+        getDetailsHit: !checkError ? true : false,
+        product: ""
       });
-    }
-  };
-  onChangeMobile = e => {
-    if (e.target.value) {
-      this.setState({ mobile: e.target.value, mobileError: false });
+      document.getElementById("selectprodForReview").value = "";
     } else {
       this.setState({
         mobileError: true,
@@ -190,6 +188,7 @@ export default class WriteReview extends Component {
     console.log("clicked");
     const { dispatch } = this.context.store;
     dispatch(loadProductsListForReview(this.state.mobile));
+    this.setState({ getDetailsHit: false });
   };
   onSubmitForm = e => {
     e.preventDefault();
@@ -311,7 +310,8 @@ export default class WriteReview extends Component {
       storeErrorMsg,
       addImgError,
       addImgErrorMsg,
-      ratings
+      ratings,
+      getDetailsHit
     } = this.state;
     const {
       loading,
@@ -368,15 +368,25 @@ export default class WriteReview extends Component {
                       style={{ width: "80%" }}
                       onChange={this.onChangeMobile}
                       value={mobile}
-                      feedBackError={mobileError}
-                      feedBackMessage={mobileErrorMsg}
+                      feedBackError={
+                        mobileError
+                          ? mobileError
+                          : getDetailsHit
+                          ? getDetailsHit
+                          : false
+                      }
+                      feedBackMessage={
+                        mobileError
+                          ? mobileErrorMsg
+                          : getDetailsHit
+                          ? "Please click on get details to get all your product details"
+                          : mobileErrorMsg
+                      }
                     />
                     <div
                       className={styles.getDetailsBtn}
                       style={{
                         height: mobileError ? "74%" : "74%"
-                        // marginBottom: mobileError ? "20px" : ""
-                        // marginTop: "10px"
                       }}
                       onClick={() => {
                         if (!productsLoader) {
@@ -553,6 +563,7 @@ export default class WriteReview extends Component {
                         <select
                           onChange={this.onChangeProduct}
                           placeholder="Select Product"
+                          id="selectprodForReview"
                           style={{
                             width: "100%",
                             height: "50px",
@@ -564,7 +575,7 @@ export default class WriteReview extends Component {
                             backgroundColor: "white"
                           }}
                         >
-                          <option value="Select Product" disabled selected>
+                          <option value="" disabled selected>
                             Select Product
                           </option>
                           {productsToBeReviewed.map(val => (
