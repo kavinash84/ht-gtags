@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Flex from 'hometown-components-dev/lib/FlexHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
@@ -7,8 +8,14 @@ import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
 
+@connect(({ designbuild }) => ({
+  designbuild,
+  beginJourney: designbuild.data.items.text.beginJourney
+}))
+
 class BeginJourney extends React.Component {
   render() {
+    const { beginJourney } = this.props;
     return (
       <Box mt="250px">
         <Flex style={{ width: '100%' }}>
@@ -38,11 +45,10 @@ class BeginJourney extends React.Component {
               </Button>
             </Flex>
           </Box>
-          <Box
+          <Image src={beginJourney.imageSrc}
             style={{
               width: '30%',
               height: '520px',
-              backgroundColor: '#F0DFDF',
               marginTop: '-150px'
             }}
           />
