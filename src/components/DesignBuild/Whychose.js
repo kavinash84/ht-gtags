@@ -47,49 +47,22 @@ class WhyChose extends React.Component {
           />
         </Box>
         <div className={styles.whyus}>
-          <div className={styles.outerbox1}>
+
+        <div className={styles.outerbox1}>
+        {whyChooseUs.data1.map(slide => (
             <div style={{ borderRight: '2px dashed #DCDCDC' }} className={styles.innerbox}>
-              <text className={styles.boldtext}>27</text>
-              <text>cities</text>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
+              <text className={styles.boldtext}>{slide.text1}</text>
+              <text>{slide.text2}</text>
             </div>
-            <div style={{ borderRight: '2px dashed #DCDCDC' }} className={styles.innerbox}>
-              <text className={styles.boldtext}>45</text>
-              <text>Design</text>
-              <text>Studios</text>
-            </div>
-            <div style={{ borderRight: '2px dashed #DCDCDC' }} className={styles.innerbox}>
-              <text className={styles.boldtext}>1.5 MILLION+</text> <text>Homes</text>
-              <text>Designed</text>
-            </div>
-            <div className={styles.innerbox}>
-              <text className={styles.boldtext}>END TO END</text>
-              <text>Project</text>
-              <text>Management</text>
-            </div>
+            ))}
           </div>
           <div className={styles.outerbox2}>
+          {whyChooseUs.data2.map(slide => (
             <div style={{ borderRight: '2px dashed #DCDCDC' }} className={styles.innerbox}>
-              <text className={styles.boldtext}>100+</text>
-              <text>In-House</text>
-              <text>Designers</text>
+              <text className={styles.boldtext}>{slide.text1}</text>
+              <text>{slide.text2}</text>
             </div>
-            <div style={{ borderRight: '2px dashed #DCDCDC' }} className={styles.innerbox}>
-              <text className={styles.boldtext}>200+</text>
-              <text>Empanelled</text>
-              <text>Contractors</text>
-            </div>
-            <div style={{ borderRight: '2px dashed #DCDCDC' }} className={styles.innerbox}>
-              <text className={styles.boldtext}>FREE</text>
-              <text>Service</text>
-              <text>Visits</text>
-            </div>
-            <div className={styles.innerbox}>
-              <text className={styles.boldtext}>100%</text>
-              <text>Transparent</text>
-              <text>Pricing</text>
-            </div>
+            ))}
           </div>
         </div>
       </Box>
