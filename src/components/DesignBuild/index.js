@@ -82,7 +82,7 @@ class DesignBuildContainer extends React.Component {
         {/* <SpeakToExperts /> */}
         <Div mt="70px">
               <Flex >
-                  <Image src="https://www.hometown.in/media/cms/D/Top-Image-Living1.jpg" style={{width: '50%', height: '700px'}}/>
+                  <Image src="https://www.hometown.in/media/cms/designbuild/speaktoExperts.png" style={{width: '50%', height: '700px'}}/>
                   <Div style={{width:'50%', height:'700px', backgroundColor: '#FBF2ED'}}>
                     <ModularKitchen handleModalWithSave={this.handleModalWithSave} handleScript={this.handleScript}/>
                   </Div>

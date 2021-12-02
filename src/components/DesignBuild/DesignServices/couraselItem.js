@@ -20,7 +20,7 @@ class DBItem extends React.Component {
       window.scrollTo(0, parseInt(scrollPosition));
       setTimeout(function() {
         sessionStorage.removeItem("DesignBuildscrollPosition");
-      }, 2000);
+      }, 800);
     }
   }
 
@@ -53,7 +53,7 @@ class DBItem extends React.Component {
                   style={{ height: '100%', width: '90%', margin: 'auto'}}
                 />
               </div>
-              <Div className={styles.content4}>
+              <Div className={styles.content4} style={{paddingLeft:'5%'}}>
                 <Div style={{fontSize: '18px', textAlign: 'left'}} className={styles.name}>{data.title}</Div>
                 <div style={{ display: 'table-cell' }}>
                   <p className={styles.content4_description}>{data.description}</p>

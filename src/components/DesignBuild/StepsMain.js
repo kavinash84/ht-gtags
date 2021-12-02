@@ -56,7 +56,13 @@ export default class StepsMain extends Component {
           {initialItems.map((item, i) => {
             if (i + 1 <= length) {
               return (
-                <div>
+                <div  style={{
+                  // height: '120px',
+                  // width: '1px',
+                  borderLeft: '2px dashed #F47020',
+                  // marginTop: '-125px',
+                  // marginRight: '-10px'
+                }}>
                   <Steps
                     title={item.title}
                     description={item.description}

@@ -50,8 +50,8 @@ class Steps extends React.Component {
                       }}
                     >
                     <div style={{display:'flex'}}>
-                   <img src={blink} style={{width:'20px', height:'20px', marginLeft:'-26px'}}/>
-                      <div style={{textAlign:'left', marginLeft:'10px', marginTop:'2px', cursor: 'pointer'}}>{title}</div>
+                   <img src={blink} style={{width:'20px', height:'20px', marginLeft:'-25px', marginTop:'-2px'}}/>
+                      <div style={{textAlign:'left', marginLeft:'10px', marginTop:'0px', cursor: 'pointer'}}>{title}</div>
                       </div>
                       <Box
                         style={{
