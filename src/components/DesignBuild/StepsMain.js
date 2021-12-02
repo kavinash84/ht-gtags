@@ -59,7 +59,7 @@ export default class StepsMain extends Component {
                 <div  style={{
                   // height: '120px',
                   // width: '1px',
-                  borderLeft: '2px dashed #F47020',
+                  // borderLeft: '2px dashed #F47020',
                   // marginTop: '-125px',
                   // marginRight: '-10px'
                 }}>
