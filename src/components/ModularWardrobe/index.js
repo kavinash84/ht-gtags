@@ -150,7 +150,7 @@ class ModularWardrobeContainer extends React.Component {
 
                     <Heading 
                        mb="15px"
-                       mt="100px"
+                       mt="50%"
                       color="#000000"
                     fontSize="18px"
                 fontFamily="medium"

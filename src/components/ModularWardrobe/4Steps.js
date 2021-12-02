@@ -31,7 +31,7 @@ class Steps extends React.Component {
               top: '10%',
               right: '0'
             }}
-            p="10px 30px"
+            p="10px 50px"
             pb="30px"
           >
             <Heading
@@ -40,7 +40,7 @@ class Steps extends React.Component {
               fontSize="26px"
               fontFamily="regular"
               p="0 10px"
-              style={{ whiteSpace: 'normal', lineHeight: '31px' , fontWeight:'bold', marginTop:'30px', marginBottom:'15px',lineHeight:'34px'}}
+              style={{ whiteSpace: 'normal', lineHeight: '31px' , fontWeight:'bold', marginTop:'8%', marginBottom:'15px',lineHeight:'34px'}}
             >
               {newWardrobe.title}
             </Heading>
