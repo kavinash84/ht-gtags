@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import BeginJourney from './BeginJourney';
-import QueryDropDownContainer from './queryDropdown';
+// import QueryDropDownContainer from './queryDropdown';
 import TopBanner from './TopBanner';
 import WhyChose from './Whychose';
 import RoomsWeTransform from './RoomsTransform';
@@ -13,8 +13,8 @@ import StepsToYourHome from './StepsToHome';
 // import SpeakToExperts from './SpeakToExperts';
 import ShopFurniture from './ShopFurniture/ShopFurniture';
 import StyleYourHome from './StyleYourHome/StyleYourHome';
-import Blogs from './Blogs/Blogs';
-import CustomerStories from './CustomerStories/CustomerStories';
+// import Blogs from './Blogs/Blogs';
+// import CustomerStories from './CustomerStories/CustomerStories';
 import ResponsiveModal from 'components/Modal';
 import Section from 'hometown-components-dev/lib/SectionHtV1';
 import Div from 'hometown-components-dev/lib/BoxHtV1';
@@ -91,12 +91,12 @@ class DesignBuildContainer extends React.Component {
 
         <RoomsWeTransform />
         <ServicesOffer />
-        <CustomerStories />
+        {/* <CustomerStories /> */}
         <ShopFurniture />
         <StyleYourHome />
         <BeginJourney handleModal={this.handleModal} />
-        <Blogs />
-        <QueryDropDownContainer />
+        {/* <Blogs /> */}
+        {/* <QueryDropDownContainer /> */}
 
          <Section p="0" mb="0">
           <ResponsiveModal

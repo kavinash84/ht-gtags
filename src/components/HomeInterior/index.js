@@ -5,12 +5,12 @@ import TopBanner from './TopBanner';
 import ServicesWeOffer from './ServicesWeOffer';
 import DesignByStyle from './DesignByStyle/DesignByStyle';
 import SpacesWeDesign from './Spaces';
-import LetUsHelpYou from './LetusHelp';
+// import LetUsHelpYou from './LetusHelp';
 import LivingRoom from './SpacesWeDesign/LivingRoom';
 import Kitchen from './SpacesWeDesign/Kitchen';
 import Bedroom from './SpacesWeDesign/Bedroom';
 import ShopNow from './ShopNow/ShopNow';
-import CustomerStories from './CustomerStories/CustomerStories';
+// import CustomerStories from './CustomerStories/CustomerStories';
 import ModularKitchenFormModal from './ModularKitchenFormModal';
 import ResponsiveModal from 'components/Modal';
 import Section from 'hometown-components-dev/lib/SectionHtV1';
@@ -78,9 +78,9 @@ class HomeInteriorContainer extends React.Component {
             <LivingRoom />
             <Kitchen />
             <Bedroom />
-            <CustomerStories />
+            {/* <CustomerStories /> */}
             <ShopNow />
-            <LetUsHelpYou />
+            {/* <LetUsHelpYou /> */}
 
             <Section p="0" mb="0">
           <ResponsiveModal

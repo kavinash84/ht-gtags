@@ -8,7 +8,7 @@ import Materials from './Materials/Materials';
 import WhyChose from './Whychose';
 import Finishes from './Finishes/Finishes';
 import Accessories from './Accessories/Accessories';
-import CustomerStories from './CustomerStories/CustomerStories';
+// import CustomerStories from './CustomerStories/CustomerStories';
 import ShopNow from './ShopNow/ShopNow';
 import Steps from './4Steps';
 import ModularKitchenFormModal from './ModularKitchenFormModal';
@@ -97,7 +97,7 @@ class ModularWardrobeContainer extends React.Component {
                <Materials />
                <Finishes />
                <Accessories />
-               <CustomerStories />
+               {/* <CustomerStories /> */}
                <ShopNow />
 
                <Section p="0" mb="0">
