@@ -375,7 +375,7 @@ class HomeContainer extends Component {
         <div>
           <HeadingHtV1
             mb="30px"
-            mt="10px"
+            mt="50px"
             fontSize="35px"
             style={{
               textAlign: "center",
@@ -1316,7 +1316,7 @@ class HomeContainer extends Component {
             alignItems: "center",
             flexDirection: "column",
             padding: "20px 30px",
-            marginTop: "70px",
+            marginTop: "80px",
             backgroundColor: "#F5EEEE"
           }}
         >
