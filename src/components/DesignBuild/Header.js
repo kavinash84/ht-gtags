@@ -28,9 +28,9 @@ class Header extends React.Component {
         </Link>
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Link to="plan-your-kitchen">
+        {/* <Link to="plan-your-kitchen">
           <Text style={{ marginRight: '40px', cursor: 'pointer' , fontWeight:'600', fontSize:'14px'}}>Plan Your Kitchen</Text>
-          </Link>
+          </Link> */}
           <Link to="who-we-are">
           <Text style={{ marginRight: '40px', cursor: 'pointer',fontWeight:'600', fontSize:'14px' }}>About Us</Text>
           </Link>
