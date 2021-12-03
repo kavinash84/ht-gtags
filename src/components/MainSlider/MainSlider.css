@@ -1,3 +1,8 @@
+.maincarousel_one {
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
 .maincarousel_one .slick-dots {
   /* margin-top: 15px; */
   position: relative;
