@@ -6,7 +6,6 @@ import Img from "hometown-components-dev/lib/ImageHtV1";
 import Row from "hometown-components-dev/lib/RowHtV1";
 import Button from "hometown-components-dev/lib/ButtonHtV1";
 import Text from "hometown-components-dev/lib/TextHtV1";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
   validateMobile,
@@ -286,7 +285,8 @@ export default class WriteReview extends Component {
         addImg: "",
         ratings: 1
       });
-      document.getElementById("reviewBackBtn").click();
+      document.getElementById("selectprodForReview").value = "";
+      document.getElementById("selectStoreforReview").value = "";
     }
   }
   render() {
@@ -522,11 +522,12 @@ export default class WriteReview extends Component {
                             outline: "none",
                             backgroundColor: "white"
                           }}
+                          id="selectStoreforReview"
                           disabled={
                             this.state.offline === "online" ? true : false
                           }
                         >
-                          <option value="Select Store" disabled selected>
+                          <option value="" disabled selected>
                             Select Store
                           </option>
                           {stores.map(val => (
@@ -763,13 +764,6 @@ export default class WriteReview extends Component {
                     >
                       {loading ? "Submiting Review..." : "Submit Review"}
                     </Button>
-                    <Link
-                      id="reviewBackBtn"
-                      to="/reviews"
-                      style={{ visibility: "hidden" }}
-                    >
-                      back
-                    </Link>
                   </Div>
                 </Row>
               </form>

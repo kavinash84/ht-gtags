@@ -33,10 +33,12 @@
       float: left;
       position: relative;
       margin: 0 0 20px 0;
-      padding: 0 5px;
+      padding: 20px 15px;
       display: initial;
       box-sizing: border-box;
-      // border: 1px solid black;
+      background: #ffffff;
+      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+      border-radius: 3px;
       .customerName {
         font-size: 24px;
         color: #17245b;
