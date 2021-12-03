@@ -1,0 +1,29 @@
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper select {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.select-wrapper-date select {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.select-wrapper::after {
+  content: "▼";
+  font-size: 12px;
+  top: 18px;
+  right: 15px;
+  position: absolute;
+}
+
+.select-wrapper-date::after {
+  content: "";
+  font-size: 12px;
+  top: 18px;
+  right: 15px;
+  position: absolute;
+}
