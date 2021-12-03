@@ -365,7 +365,7 @@ export default class WriteReview extends Component {
                       label=""
                       type="text"
                       placeholder="Mobile No.*"
-                      style={{ width: "80%" }}
+                      style={{ width: "100%" }}
                       onChange={this.onChangeMobile}
                       value={mobile}
                       feedBackError={
@@ -386,7 +386,7 @@ export default class WriteReview extends Component {
                     <div
                       className={styles.getDetailsBtn}
                       style={{
-                        height: mobileError ? "74%" : "74%"
+                        height: mobileError ? "54%" : "54%"
                       }}
                       onClick={() => {
                         if (!productsLoader) {

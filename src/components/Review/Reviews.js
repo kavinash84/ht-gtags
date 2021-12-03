@@ -25,9 +25,15 @@ const styles = require("./index.scss");
 }))
 export default class Reviews extends Component {
   getDate = date => {
-    const d = new Date(date);
-    const arr = d.toString().split(" ");
-    return `${arr[2]}th ${arr[1]} ${arr[3]}`;
+    let d = new Date(date) || "";
+    d = new Date("2013-03-10T02:00:00Z");
+    const result =
+      d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+    console.log(result);
+    return result;
+    // const d = new Date(date);
+    // const arr = d.toString().split(" ");
+    // return `${arr[2]}th ${arr[1]} ${arr[3]}`;
   };
   getLogo = flag => {
     switch (flag) {
@@ -123,7 +129,7 @@ export default class Reviews extends Component {
                     </Div>
                   </Div>
                   <Div className={styles.productImage}>
-                    <Img src={item.product_image} alt="Star" />
+                    <Img src={item.product_image} alt="Product Image" />
                   </Div>
                   <Div className={styles.reviewDetails}>
                     <Div className={styles.reviewText}>{item.detail}</Div>
@@ -197,7 +203,7 @@ export default class Reviews extends Component {
                     </Div>
                   </Div>
                   <Div className={styles.productImage}>
-                    <Img src={item.product_image} alt="Star" />
+                    <Img src={item.product_image} alt="Product Image" />
                   </Div>
                   <Div className={styles.reviewDetails}>
                     <Div className={styles.reviewText}>{item.detail}</Div>
@@ -209,6 +215,18 @@ export default class Reviews extends Component {
               )}
             </Div>
           ))}
+          {ReviewsData.length === 0 ? (
+            <div
+              style={{
+                fontSize: "24px",
+                fontWeight: 600,
+                textAlign: "center",
+                width: "100%"
+              }}
+            >
+              No Reviews Found
+            </div>
+          ) : null}
         </Div>
         {EndOfList ? null : (
           <div

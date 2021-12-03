@@ -31,7 +31,7 @@ export default class SortAndFilter extends Component {
             onChange={this.onChangeFilter}
             placeholder="FILTER BY"
             style={{
-              width: "100%",
+              width: "93%",
               height: "50px",
               border: "none",
               fontSize: "20px",
@@ -101,7 +101,7 @@ export default class SortAndFilter extends Component {
             onChange={this.onChangeSort}
             placeholder="Sort By"
             style={{
-              width: "100%",
+              width: "70%",
               height: "50px",
               border: "none",
               fontSize: "20px",
