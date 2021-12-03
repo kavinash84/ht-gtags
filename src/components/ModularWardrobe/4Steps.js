@@ -92,7 +92,7 @@ class Steps extends React.Component {
                 style={{ fontSize: '14px' , textTransform:'none', border: '1px solid #F47020', borderRadius:'5px'}}
                 onClick={this.props.handleModal}
               >
-                Start Now
+                Speak to our Experts
               </Button>
             </Box>
           </Box>

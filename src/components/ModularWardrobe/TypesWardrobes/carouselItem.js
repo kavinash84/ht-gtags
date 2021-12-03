@@ -16,7 +16,7 @@ const DBItem = ({ component, data }) => {
             style={{
               backgroundColor:'#F5F5F5',
               padding: '20px 0px',
-              height: '410px'
+              height: '440px'
               // pointerEvents: ['/modular-wardrobe'].includes(data.url_key) ? 'none' : ''
             }}
           >
