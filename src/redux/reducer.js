@@ -45,6 +45,9 @@ import webtochat from "./modules/webtochat";
 import offer from "./modules/offer";
 import listingbanners from "./modules/listingbanners";
 import feedback from "./modules/feedback";
+import homeinterior from './modules/homeinterior';
+import modularwardrobe from './modules/modularwardrobe';
+import designbuild from './modules/designbuild';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -111,6 +114,9 @@ export default function createReducers(asyncReducers) {
     offer,
     feedback,
     listingbanners,
+    homeinterior,
+    modularwardrobe,
+    designbuild,
     ...asyncReducers
   };
 }

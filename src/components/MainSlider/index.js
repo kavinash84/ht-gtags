@@ -8,10 +8,42 @@ import SlickSlider from "../SlickSlider";
 
 import "./MainSlider.css";
 
+const LeftArrow = require("../../../static/new-home/roundedArrowLeft.svg");
+const RightArrow = require("../../../static/new-home/roundedArrowRight.svg");
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <React.Fragment>
+      <img
+        className={className}
+        src={RightArrow}
+        onClick={onClick}
+        style={{ ...style, marginRight: "-20px", width: "15px" }}
+      />
+    </React.Fragment>
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <React.Fragment>
+      <img
+        className={className}
+        src={LeftArrow}
+        onClick={onClick}
+        style={{ ...style, marginLeft: "-20px", width: "15px" }}
+      />
+    </React.Fragment>
+  );
+}
+
 const settings = {
   slidesToShow: 1,
   slidesToScroll: 1,
   dots: true,
+  nextArrow: <SampleNextArrow />,
+  prevArrow: <SamplePrevArrow />,
   customPaging: i => (
     <div
       style={{
@@ -36,6 +68,11 @@ class MainSlider extends Component {
       <React.Fragment>
         <SlickSlider
           settings={finalSettings}
+          // settings={{
+          //   finalSettings,
+          //   nextArrow: <SampleNextArrow />,
+          //   prevArrow: <SamplePrevArrow />
+          // }}
           afterChange={e => triggerSlideChange(e)}
           ref={reference}
           className="maincarousel_one"
