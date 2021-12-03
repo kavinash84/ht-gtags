@@ -26,7 +26,6 @@ const styles = require("./index.scss");
 export default class Reviews extends Component {
   getDate = date => {
     let d = new Date(date) || "";
-    d = new Date("2013-03-10T02:00:00Z");
     const result =
       d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
     console.log(result);

@@ -253,6 +253,14 @@ export default class WriteReview extends Component {
       if (this.state.offline === "offline") {
         formdata.append("storeName", this.state.store);
       }
+      const selectedSku = this.state.product;
+      const arr = [...this.props.productsToBeReviewed];
+      const foundSkuProduct = arr.find(
+        item => item.fk_catalog_config === +selectedSku
+      );
+      if (foundSkuProduct) {
+        formdata.append("sku", foundSkuProduct.sku);
+      }
       if (this.state.addImg) {
         formdata.append("image", this.state.addImg[0]);
       }
