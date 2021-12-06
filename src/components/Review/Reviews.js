@@ -63,7 +63,7 @@ export default class Reviews extends Component {
         <Div className={styles.reviewListContainer}>
           {ReviewsData.map(item => (
             <Div className={styles.reviewContainer}>
-              {item.link.startsWith("https") ? (
+              {item.link && item.link.startsWith("https") ? (
                 <a href={item.link || ""} target="_blank">
                   <Div className={styles.customerName}>{item.nickname}</Div>
                   <Div className={styles.subDetails}>
