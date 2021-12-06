@@ -39,7 +39,7 @@ export default class Reviews extends Component {
       case "amazon":
         return <Img src={amazon} alt="Amazon" width="60px" height="60px" />;
       case "bajaj":
-        return <Img src={bajaj} alt="Bajaj" width="60px" height="60px" />;
+        return <Img src={bajaj} alt="Bajaj" width="60px" height="36px" />;
       case "facebook":
         return <Img src={facebook} alt="Facebook" width="60px" height="60px" />;
       case "flipkart":
