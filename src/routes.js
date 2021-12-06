@@ -85,9 +85,6 @@ import { categoryRoutes, listingRoutes } from "helpers/Constants";
 import Review from "./containers/Review";
 import WriteReview from "./containers/WriteReview";
 
-import Review from "./containers/Review";
-import WriteReview from "./containers/WriteReview";
-
 const createRegex = data => data.join("|");
 
 const locationHelper = locationHelperBuilder({});
