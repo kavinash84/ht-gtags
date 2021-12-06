@@ -751,8 +751,7 @@ export default class WriteReview extends Component {
                         fontSize: "14px",
                         width: "100%",
                         fontWeight: 600,
-                        margin: "10px",
-                        marginRight: "-30px"
+                        margin: "10px"
                       }}
                       fontFamily="regular"
                       height="50px"

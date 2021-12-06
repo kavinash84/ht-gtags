@@ -21,18 +21,19 @@
 
   .reviewListContainer {
     margin-top: 5px;
+    margin-left: -5px;
     padding: 40px 0px;
     display: flex;
     width: 100%;
     flex-wrap: wrap;
-    justify-content: space-between;
+    // justify-content: space-between;
     .reviewContainer {
-      margin: 10px;
+      // margin: 10px;
       height: 450px;
       width: 23%;
       float: left;
       position: relative;
-      margin: 0 0 20px 0;
+      margin: 0 0 20px 20px;
       padding: 20px 15px;
       display: initial;
       box-sizing: border-box;
