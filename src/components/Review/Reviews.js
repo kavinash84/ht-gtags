@@ -27,7 +27,7 @@ export default class Reviews extends Component {
   getDate = date => {
     let d = new Date(date) || "";
     const result =
-      d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+      d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
     console.log(result);
     return result;
     // const d = new Date(date);

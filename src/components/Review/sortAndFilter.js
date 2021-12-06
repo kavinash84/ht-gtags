@@ -79,7 +79,8 @@ export default class SortAndFilter extends Component {
           style={{
             display: "flex",
             alignItems: "center",
-            width: sortValue ? "27%" : "13%"
+            width: sortValue ? "27%" : "13%",
+            justifyContent: "end"
           }}
         >
           {sortValue && (
@@ -90,7 +91,8 @@ export default class SortAndFilter extends Component {
                 marginRight: "20%",
                 whiteSpace: "nowrap",
                 cursor: "pointer",
-                marginBottom: "5px"
+                marginBottom: "5px",
+                justifyContent
               }}
               onClick={() => this.props.applySort("")}
             >
