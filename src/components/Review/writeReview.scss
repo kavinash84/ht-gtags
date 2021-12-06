@@ -30,16 +30,14 @@
   }
   .writeFormContainer {
     .mobileInputContainer {
-      display: flex;
+      position: relative;
       width: 100%;
-      // align-items: center;
       .getDetailsBtn {
         border: 1px solid #f47020;
         border-radius: 5px;
         padding: 10px;
         background: #f47020;
         color: white;
-        // height: 70%;
         margin-left: -90px;
         margin-top: 7px;
         font-size: 11px;
@@ -48,6 +46,9 @@
         justify-content: center;
         align-items: center;
         cursor: pointer;
+        position: absolute;
+        top: 0;
+        right: 7px;
       }
     }
   }

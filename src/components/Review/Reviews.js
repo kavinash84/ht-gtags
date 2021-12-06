@@ -138,79 +138,177 @@ export default class Reviews extends Component {
                   </Div>
                 </a>
               ) : (
-                <Link to={item.link || ""}>
-                  <Div className={styles.customerName}>{item.nickname}</Div>
-                  <Div className={styles.subDetails}>
-                    <Div style={{ width: "80%" }}>
-                      <Div className={styles.ratings}>
-                        <Img
-                          src={Star}
-                          width="24px"
-                          height="24px"
-                          alt="Star"
-                          style={{
-                            display:
-                              1 <= Math.floor(item.ratings) ? "block" : "none"
-                          }}
-                        />
-                        <Img
-                          src={Star}
-                          width="24px"
-                          height="24px"
-                          alt="Star"
-                          style={{
-                            display:
-                              2 <= Math.floor(item.ratings) ? "block" : "none"
-                          }}
-                        />
-                        <Img
-                          src={Star}
-                          width="24px"
-                          height="24px"
-                          alt="Star"
-                          style={{
-                            display:
-                              3 <= Math.floor(item.ratings) ? "block" : "none"
-                          }}
-                        />
-                        <Img
-                          src={Star}
-                          width="24px"
-                          height="24px"
-                          alt="Star"
-                          style={{
-                            display:
-                              4 <= Math.floor(item.ratings) ? "block" : "none"
-                          }}
-                        />
-                        <Img
-                          src={Star}
-                          width="24px"
-                          height="24px"
-                          alt="Star"
-                          style={{
-                            display:
-                              5 <= Math.floor(item.ratings) ? "block" : "none"
-                          }}
-                        />
+                <React.Fragment>
+                  {item.link ? (
+                    <Link to={item.link || ""}>
+                      <Div className={styles.customerName}>{item.nickname}</Div>
+                      <Div className={styles.subDetails}>
+                        <Div style={{ width: "80%" }}>
+                          <Div className={styles.ratings}>
+                            <Img
+                              src={Star}
+                              width="24px"
+                              height="24px"
+                              alt="Star"
+                              style={{
+                                display:
+                                  1 <= Math.floor(item.ratings)
+                                    ? "block"
+                                    : "none"
+                              }}
+                            />
+                            <Img
+                              src={Star}
+                              width="24px"
+                              height="24px"
+                              alt="Star"
+                              style={{
+                                display:
+                                  2 <= Math.floor(item.ratings)
+                                    ? "block"
+                                    : "none"
+                              }}
+                            />
+                            <Img
+                              src={Star}
+                              width="24px"
+                              height="24px"
+                              alt="Star"
+                              style={{
+                                display:
+                                  3 <= Math.floor(item.ratings)
+                                    ? "block"
+                                    : "none"
+                              }}
+                            />
+                            <Img
+                              src={Star}
+                              width="24px"
+                              height="24px"
+                              alt="Star"
+                              style={{
+                                display:
+                                  4 <= Math.floor(item.ratings)
+                                    ? "block"
+                                    : "none"
+                              }}
+                            />
+                            <Img
+                              src={Star}
+                              width="24px"
+                              height="24px"
+                              alt="Star"
+                              style={{
+                                display:
+                                  5 <= Math.floor(item.ratings)
+                                    ? "block"
+                                    : "none"
+                              }}
+                            />
+                          </Div>
+                          <Div className={styles.location}>{item.city}</Div>
+                        </Div>
+                        <Div className={styles.logoContainer}>
+                          {/* <Img src={Star} width="60px" height="60px" alt="Star" /> */}
+                          {this.getLogo(item.flag)}
+                        </Div>
                       </Div>
-                      <Div className={styles.location}>{item.city}</Div>
-                    </Div>
-                    <Div className={styles.logoContainer}>
-                      {/* <Img src={Star} width="60px" height="60px" alt="Star" /> */}
-                      {this.getLogo(item.flag)}
-                    </Div>
-                  </Div>
-                  <Div className={styles.productImage}>
-                    <Img src={item.product_image} alt="Product Image" />
-                  </Div>
-                  <Div className={styles.reviewDetails}>
-                    <Div className={styles.reviewText}>{item.detail}</Div>
-                  </Div>
-                  <Div className={styles.date} style={{ fontSize: "20px" }}>
-                    {this.getDate(item.created_at)}
-                  </Div>
-                </Link>
+                      <Div className={styles.productImage}>
+                        <Img src={item.product_image} alt="Product Image" />
+                      </Div>
+                      <Div className={styles.reviewDetails}>
+                        <Div className={styles.reviewText}>{item.detail}</Div>
+                      </Div>
+                      <Div className={styles.date} style={{ fontSize: "20px" }}>
+                        {this.getDate(item.created_at)}
+                      </Div>
+                    </Link>
+                  ) : (
+                    <React.Fragment>
+                      <Div className={styles.customerName}>{item.nickname}</Div>
+                      <Div className={styles.subDetails}>
+                        <Div style={{ width: "80%" }}>
+                          <Div className={styles.ratings}>
+                            <Img
+                              src={Star}
+                              width="24px"
+                              height="24px"
+                              alt="Star"
+                              style={{
+                                display:
+                                  1 <= Math.floor(item.ratings)
+                                    ? "block"
+                                    : "none"
+                              }}
+                            />
+                            <Img
+                              src={Star}
+                              width="24px"
+                              height="24px"
+                              alt="Star"
+                              style={{
+                                display:
+                                  2 <= Math.floor(item.ratings)
+                                    ? "block"
+                                    : "none"
+                              }}
+                            />
+                            <Img
+                              src={Star}
+                              width="24px"
+                              height="24px"
+                              alt="Star"
+                              style={{
+                                display:
+                                  3 <= Math.floor(item.ratings)
+                                    ? "block"
+                                    : "none"
+                              }}
+                            />
+                            <Img
+                              src={Star}
+                              width="24px"
+                              height="24px"
+                              alt="Star"
+                              style={{
+                                display:
+                                  4 <= Math.floor(item.ratings)
+                                    ? "block"
+                                    : "none"
+                              }}
+                            />
+                            <Img
+                              src={Star}
+                              width="24px"
+                              height="24px"
+                              alt="Star"
+                              style={{
+                                display:
+                                  5 <= Math.floor(item.ratings)
+                                    ? "block"
+                                    : "none"
+                              }}
+                            />
+                          </Div>
+                          <Div className={styles.location}>{item.city}</Div>
+                        </Div>
+                        <Div className={styles.logoContainer}>
+                          {/* <Img src={Star} width="60px" height="60px" alt="Star" /> */}
+                          {this.getLogo(item.flag)}
+                        </Div>
+                      </Div>
+                      <Div className={styles.productImage}>
+                        <Img src={item.product_image} alt="Product Image" />
+                      </Div>
+                      <Div className={styles.reviewDetails}>
+                        <Div className={styles.reviewText}>{item.detail}</Div>
+                      </Div>
+                      <Div className={styles.date} style={{ fontSize: "20px" }}>
+                        {this.getDate(item.created_at)}
+                      </Div>
+                    </React.Fragment>
+                  )}
+                </React.Fragment>
               )}
             </Div>
           ))}
