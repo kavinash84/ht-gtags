@@ -2,9 +2,12 @@
 @import "../../theme/_mixins";
 
 .storeBlock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 1.125rem;
-  background: #f7f7f7;
-  margin: 0 0.5rem 1rem;
+  // background: #f7f7f7;
+  margin: 0 0.5rem 0px;
   cursor: pointer;
   a {
     &:hover {
@@ -28,5 +31,21 @@
       background-color: rgba(255, 255, 255, 0);
       border: solid 1px $primary;
     }
+  }
+}
+.storeContainer {
+  text-align: center !important;
+}
+.slick-next:before {
+  display: none;
+}
+.custome_store_slider {
+  img {
+    width: 15px !important;
+  }
+}
+.storesTitle {
+  h2 {
+    padding-top: 20px;
   }
 }

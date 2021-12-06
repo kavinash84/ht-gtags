@@ -1,13 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 /* ====== Components ====== */
-import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Box from "hometown-components-dev/lib/BoxHtV1";
 
 /* ====== Page Components ====== */
-import Title from 'components/Title';
-import SlickSlider from 'components/SlickSlider';
-import CategoryCarouselItem from 'components/CategoryCarousel/CategoryCarouselItem';
+import Title from "components/Title";
+import SlickSlider from "components/SlickSlider";
+// import CategoryCarouselItem from 'components/CategoryCarousel/CategoryCarouselItem';
 
 const adjustSlides = length => ({
   slidesToShow: length >= 4 ? 4 : length,
@@ -17,11 +17,16 @@ const adjustSlides = length => ({
 
 const CategoryCarousel = ({ data, categoryName }) => (
   <Box>
-    {categoryName !== null && <Title title={categoryName} subTitle="" textAlign="center" />}
-    <SlickSlider settings={adjustSlides(data.length)} className="categoryCarousel">
+    {categoryName !== null && (
+      <Title title={categoryName} subTitle="" textAlign="center" />
+    )}
+    <SlickSlider
+      settings={adjustSlides(data.length)}
+      className="categoryCarousel"
+    >
       {data.map((slide, index) => (
         <div key={String(index)}>
-          <CategoryCarouselItem image={slide.image} name={slide.title} url={slide.url_key} />
+          {/* <CategoryCarouselItem image={slide.image} name={slide.title} url={slide.url_key} /> */}
         </div>
       ))}
     </SlickSlider>
@@ -30,7 +35,7 @@ const CategoryCarousel = ({ data, categoryName }) => (
 
 CategoryCarousel.defaultProps = {
   data: [],
-  categoryName: ''
+  categoryName: ""
 };
 
 CategoryCarousel.propTypes = {

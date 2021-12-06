@@ -28,6 +28,8 @@ import Cart from "containers/Cart";
 import ModularKitchen from "containers/ModularKitchenMicro";
 import PlanYourKitchen from "containers/PlanYourKitchen";
 import DesignBuild from "containers/DesignBuild";
+import HomeInterior from "containers/HomeInterior";
+import ModularWardrobe from "containers/ModularWardrobe";
 import BulkOrder from "containers/BulkOrder";
 import Brand from "containers/Brand";
 import HtExclusive from "containers/HtExclusive";
@@ -80,6 +82,9 @@ import Campaigns from "containers/Campaigns";
 import FlipBokContainer from "containers/FlipBookContainer";
 
 import { categoryRoutes, listingRoutes } from "helpers/Constants";
+import Review from "./containers/Review";
+import WriteReview from "./containers/WriteReview";
+
 import Review from "./containers/Review";
 import WriteReview from "./containers/WriteReview";
 
@@ -188,6 +193,8 @@ const routes = [
       { path: "/modular-kitchens", exact: true, component: ModularKitchen },
       { path: "/plan-your-kitchen", exact: true, component: PlanYourKitchen },
       { path: "/design-build", exact: true, component: DesignBuild },
+      { path: "/home-interior", exact: true, component: HomeInterior },
+      { path: "/modular-wardrobe", exact: true, component: ModularWardrobe },
       { path: "/payment-success", exact: true, component: PaymentSuccess },
       {
         path: "/payment-failed/:orderId?",
@@ -211,6 +218,8 @@ const routes = [
       },
       { path: "/wedding-campaign", exact: true, component: WeddingCampaign },
       { path: "/combo-offer", exact: true, component: ComboOffer },
+      { path: "/reviews", exact: true, component: Review },
+      { path: "/writeReview", exact: true, component: WriteReview },
       // { path: '/announcement', exact: true, component: Announcement }
       { path: "/offer/:type", exact: true, component: Campaigns },
       {
