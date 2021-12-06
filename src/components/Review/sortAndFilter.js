@@ -91,8 +91,7 @@ export default class SortAndFilter extends Component {
                 marginRight: "20%",
                 whiteSpace: "nowrap",
                 cursor: "pointer",
-                marginBottom: "5px",
-                justifyContent
+                marginBottom: "5px"
               }}
               onClick={() => this.props.applySort("")}
             >
