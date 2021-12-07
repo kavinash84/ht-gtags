@@ -46,7 +46,7 @@ export default class Reviews extends Component {
         return <Img src={flipcart} alt="Flipkart" width="60px" height="60px" />;
       case "hometown":
         return <Img src={ht} alt="Hometown" width="60px" height="60px" />;
-      case "mayantra":
+      case "myntra":
         return <Img src={myntra} alt="Mayantra" width="60px" height="60px" />;
       case "pepperfry":
         return (
@@ -131,7 +131,9 @@ export default class Reviews extends Component {
                     <Img src={item.product_image} alt="Product Image" />
                   </Div>
                   <Div className={styles.reviewDetails}>
-                    <Div className={styles.reviewText}>{item.detail}</Div>
+                    <Div className={styles.reviewText} title={item.detail}>
+                      {item.detail}
+                    </Div>
                   </Div>
                   <Div className={styles.date} style={{ fontSize: "20px" }}>
                     {this.getDate(item.created_at)}
@@ -217,7 +219,9 @@ export default class Reviews extends Component {
                         <Img src={item.product_image} alt="Product Image" />
                       </Div>
                       <Div className={styles.reviewDetails}>
-                        <Div className={styles.reviewText}>{item.detail}</Div>
+                        <Div className={styles.reviewText} title={item.detail}>
+                          {item.detail}
+                        </Div>
                       </Div>
                       <Div className={styles.date} style={{ fontSize: "20px" }}>
                         {this.getDate(item.created_at)}
@@ -301,7 +305,9 @@ export default class Reviews extends Component {
                         <Img src={item.product_image} alt="Product Image" />
                       </Div>
                       <Div className={styles.reviewDetails}>
-                        <Div className={styles.reviewText}>{item.detail}</Div>
+                        <Div className={styles.reviewText} title={item.detail}>
+                          {item.detail}
+                        </Div>
                       </Div>
                       <Div className={styles.date} style={{ fontSize: "20px" }}>
                         {this.getDate(item.created_at)}
