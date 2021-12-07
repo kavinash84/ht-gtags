@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Helmet from "react-helmet";
 import BeginJourney from './BeginJourney';
 // import QueryDropDownContainer from './queryDropdown';
 import TopBanner from './TopBanner';
@@ -35,6 +36,7 @@ import { sendData, getData } from 'redux/modules/services';
 @connect(
   ({ services, designbuild, userLogin, profile }) => ({
     designbuild,
+    topBanner: designbuild.data.items.text.topBanner,
     ...services.modularkitchen
   }),
   { sendFormData: sendData, loadPincodeDetails: getData }
@@ -69,10 +71,16 @@ class DesignBuildContainer extends React.Component {
     })
   }
   render() {
-    const { whyChooseUs, isLoggedIn, fullName, loading, loaded } = this.props;
+    const { whyChooseUs, isLoggedIn, fullName, loading, loaded , topBanner} = this.props;
     const { showScript } = this.state;
     return (
       <div>
+       <Helmet title={topBanner.title}>
+          <meta
+            name="description"
+            content="HomeTown - Shop online for Furniture, Home Decor, Furnishings, Kitchenware, Dining Products at best prices from HomeTown.in. Get best furniture and home decor products ☆Upto 40% Off, ☆Fast Shipping, ☆High Quality, ☆Premium, ☆Luxury furniture to beautify your ☆bedroom, ☆kitchen, ☆dining room, ☆living and ☆outdoor space ☆Original ☆0% EMI ☆Free Assembly ☆Safe Shipping."
+          />
+         </Helmet>
         <Header handleModal={this.handleModal} />
         <TopBanner  handleModal={this.handleModal} />
         <WhyChose />
