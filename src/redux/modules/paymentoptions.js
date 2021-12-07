@@ -421,8 +421,8 @@ export default function reducer(state = initialState, action = {}) {
         loading: false,
         loaded: true,
         data: emiZero(action.result, action.cart),
-        selectedGateway: getSelectedGateway(action.result),
-        futurePay: {}
+        // selectedGateway: getSelectedGateway(action.result),
+        // futurePay: {}
       };
     case LOAD_FAIL:
       return {

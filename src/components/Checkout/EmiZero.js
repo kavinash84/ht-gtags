@@ -48,7 +48,7 @@ class EmiZero extends Component {
     } = this.props;
     return (
       <Box>
-        {total > bflMinAmount ? <BajajFinance bflMinAmount={bflMinAmount} /> : null}
+        {/* {total > bflMinAmount ? <BajajFinance bflMinAmount={bflMinAmount} /> : null} */}
         <Box pb={20}>
           <Label for="bankOptions1" color="textLight">
             Choose From Preferred Bank (Available on debit/credit cards for order value &gt; Rs. 20000)
