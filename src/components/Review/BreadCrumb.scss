@@ -1,0 +1,44 @@
+@import "../../theme/_variables";
+@import "../../theme/_mixins";
+
+.breadCrumbList {
+  padding: 0;
+  margin: 0;
+  li {
+    list-style: none;
+    display: inline-block;
+    position: relative;
+    padding-right: 10px;
+    padding-left: 20px;
+    line-height: 1;
+    &:first-child {
+      padding-left: 0;
+    }
+    &:after {
+      content: url("../../../static/next.svg");
+      position: absolute;
+      right: -13px;
+      font-size: 14px;
+      height: 14px;
+      line-height: 1.2;
+      top: 1px;
+    }
+    &:last-child {
+      &:after {
+        display: none;
+      }
+    }
+    a {
+      color: rgba(7, 7, 7, 0.75);
+      font-size: 0.875rem;
+    }
+  }
+}
+
+.BreadCrumb_wrapper2 {
+  padding: 15px;
+  background-color: #fff8f4;
+  color: #999999;
+  // margin-bottom: 15px;
+  margin-top: 12%;
+}

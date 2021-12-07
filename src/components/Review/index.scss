@@ -1,0 +1,142 @@
+.titleContainer {
+  text-align: center;
+  color: #323131;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding-top: 30px;
+  .title {
+    font-size: 50px;
+    font-weight: 600;
+  }
+  .titleBottom {
+    margin-top: 10px;
+    width: 5%;
+    border: 1px solid #323131;
+  }
+}
+.reviewsContainer {
+  margin-top: 30px;
+  height: auto;
+
+  .reviewListContainer {
+    margin-top: 5px;
+    margin-left: -5px;
+    padding: 40px 0px;
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    // justify-content: space-between;
+    .reviewContainer {
+      // margin: 10px;
+      height: 450px;
+      width: 23%;
+      float: left;
+      position: relative;
+      margin: 0 0 20px 20px;
+      padding: 20px 15px;
+      display: initial;
+      box-sizing: border-box;
+      background: #ffffff;
+      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+      border-radius: 3px;
+      .customerName {
+        font-size: 24px;
+        color: #17245b;
+        font-weight: 600;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 100%;
+        overflow: hidden;
+        padding-bottom: 5px;
+      }
+      .subDetails {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 5px;
+        .ratings {
+          display: flex;
+          img {
+            margin-right: 3px;
+          }
+        }
+        .logoContainer {
+          display: flex;
+          justify-content: end;
+          width: 15%;
+          height: auto;
+        }
+        .location {
+          font-size: 20px;
+          color: #666666;
+          margin-top: 5px;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          width: 90%;
+          overflow: hidden;
+          padding-bottom: 5px;
+        }
+      }
+      .productImage {
+        display: flex;
+        width: 100%;
+        position: relative;
+        text-align: center;
+        height: 40%;
+        img {
+          // width: -webkit-fill-available;
+          vertical-align: bottom;
+          max-height: 100%;
+          margin: auto;
+        }
+      }
+      .reviewDetails {
+        font-size: 20px;
+        color: #000000;
+        line-height: normal;
+        background-image: url("../../../static/Review/quote.svg");
+        background-position-x: left;
+        background-position-y: top;
+        background-repeat: no-repeat;
+        padding-top: 10px;
+        margin-top: 10px;
+        min-height: 50px;
+        .reviewText {
+          display: -webkit-box;
+          width: 100%;
+          -webkit-line-clamp: 4;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          height: 100px;
+          font-size: 20px;
+        }
+      }
+      .date {
+        font-size: 20px;
+        margin-top: 10px;
+        font-size: 10px;
+        color: #666666;
+      }
+    }
+  }
+  .showMore {
+    text-align: center;
+    color: #222222;
+    font-size: 20px;
+    font-weight: 600;
+    width: 100%;
+    padding-bottom: 40px;
+    cursor: pointer;
+  }
+}
+
+// filter and sort
+
+.filterAndSort {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #666666;
+}

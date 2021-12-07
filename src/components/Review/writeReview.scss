@@ -1,0 +1,61 @@
+.writeReviewContainer {
+  background-color: #f5eeee;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  .close {
+    display: flex;
+    justify-content: end;
+    img {
+      width: 15px;
+      height: 15px;
+    }
+  }
+  .writeTitle {
+    text-align: center;
+    color: #18191f;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0px;
+    .title {
+      font-size: 36px;
+      font-weight: 600;
+    }
+    .titleBottom {
+      margin-top: 5px;
+      width: 10%;
+      border: 1px solid #17245b;
+    }
+  }
+  .writeFormContainer {
+    .mobileInputContainer {
+      position: relative;
+      width: 100%;
+      .getDetailsBtn {
+        border: 1px solid #f47020;
+        border-radius: 5px;
+        padding: 10px;
+        background: #f47020;
+        color: white;
+        margin-left: -90px;
+        margin-top: 7px;
+        font-size: 11px;
+        width: 24%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        right: 7px;
+      }
+    }
+  }
+  .bottomFixedSubmit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+}

@@ -108,6 +108,8 @@ export const LANDING_CATEGORY = "tesla/static/landing/skucategories";
 export const GET_FEEDBACK_FORM = "tesla/orders/sfdcorder-details";
 export const POST_FEEDBACK = "tesla/static/landing/multi";
 
+/*review banneres*/
+export const REVIEWBANNERES = "tesla/static/reviewsbanneres";
 // home page
 export const HOMEPAGE_NEW_DESIGN = "tesla/static/homepage_new_desktop_v1";
 
@@ -115,10 +117,10 @@ export const HOMEPAGE_NEW_DESIGN = "tesla/static/homepage_new_desktop_v1";
 export const DEAL_OF_THE_DAY = "tesla/static/homepagecoupons/deal_of_the_day";
 
 /* design and build */
-export const DESIGN_BUILD = 'tesla/static/design_and_build_v1_desktop';
+export const DESIGN_BUILD = "tesla/static/design_and_build_v1_desktop";
 
 /* home interior */
-export const HOME_INTERIOR = 'tesla/static/home_interior_desktop_v1';
+export const HOME_INTERIOR = "tesla/static/home_interior_desktop_v1";
 
 /* modular wardrobe */
-export const MODULAR_WARDROBE = 'tesla/static/modular_wardrobe_desktop';
+export const MODULAR_WARDROBE = "tesla/static/modular_wardrobe_desktop";
