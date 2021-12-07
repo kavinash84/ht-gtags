@@ -1,3 +1,8 @@
+.maincarousel_one {
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
 .maincarousel_one .slick-dots {
   /* margin-top: 15px; */
   position: relative;
@@ -16,4 +21,14 @@
 .offset .slick-slide:first-child:not(.slick-active),
 .offset .slick-slide:first-child:not(.slick-active) ~ .slick-slide {
   transform: translate3d(20%, 0px, 0px);
+}
+
+.slick-prev,
+.slick-next {
+  height: 80px !important;
+  width: 80px !important;
+}
+.slick-prev,
+.slick-next {
+  top: 40% !important;
 }
