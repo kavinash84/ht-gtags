@@ -104,13 +104,14 @@ export default function reducer(state = initialState, action = {}) {
         loaded: true,
         reviewsList:
           state.pageNo === 1
-            ? action.result
-            : [...state.reviewsList, ...action.result],
-        endOfList: Array.isArray(action.result)
-          ? !(action.result.length < 7)
-            ? false
-            : true
-          : true
+            ? action.result.reviews
+            : [...state.reviewsList, ...action.result.reviews],
+        endOfList: action.result.isLastPage
+        // endOfList: Array.isArray(action.result)
+        //   ? !(action.result.length < 7)
+        //     ? false
+        //     : true
+        //   : true
       };
     case LOAD_REVIEW_LIST_FAIL:
       return {
