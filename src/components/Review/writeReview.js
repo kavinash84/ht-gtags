@@ -619,9 +619,9 @@ export default class WriteReview extends Component {
                       <FormInput
                         label=""
                         type="text"
-                        placeholder="Add Images"
+                        placeholder="Add Image"
                         disabled={true}
-                        value={addImg ? "Images Added" : ""}
+                        value={addImg ? "Image Added" : ""}
                         feedBackError={addImgError}
                         feedBackMessage={addImgErrorMsg}
                       />
