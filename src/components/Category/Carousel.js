@@ -7,7 +7,7 @@ import Box from "hometown-components-dev/lib/BoxHtV1";
 /* ====== Page Components ====== */
 import Title from "components/Title";
 import SlickSlider from "components/SlickSlider";
-// import CategoryCarouselItem from 'components/CategoryCarousel/CategoryCarouselItem';
+import CategoryCarouselItem from 'components/CategoryCarousel/CategoryCarouselItem';
 
 const adjustSlides = length => ({
   slidesToShow: length >= 4 ? 4 : length,
@@ -26,7 +26,7 @@ const CategoryCarousel = ({ data, categoryName }) => (
     >
       {data.map((slide, index) => (
         <div key={String(index)}>
-          {/* <CategoryCarouselItem image={slide.image} name={slide.title} url={slide.url_key} /> */}
+          <CategoryCarouselItem image={slide.image} name={slide.title} url={slide.url_key} />
         </div>
       ))}
     </SlickSlider>

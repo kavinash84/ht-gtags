@@ -375,7 +375,7 @@ class HomeContainer extends Component {
         <div>
           <HeadingHtV1
             mb="30px"
-            mt="50px"
+            mt="60px"
             fontSize="35px"
             style={{
               textAlign: "center",
