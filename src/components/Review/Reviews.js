@@ -46,7 +46,7 @@ export default class Reviews extends Component {
       case "flipkart":
         return <Img src={flipcart} alt="Flipkart" width="60px" height="60px" />;
       case "hometown":
-        return <Img src={ht} alt="Hometown" width="60px" height="60px" />;
+        return <Img src={ht} alt="Hometown" width="60px" height="35px" />;
       case "myntra":
         return <Img src={myntra} alt="Mayantra" width="60px" height="60px" />;
       case "pepperfry":
