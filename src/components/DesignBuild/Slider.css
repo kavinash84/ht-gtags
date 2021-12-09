@@ -24,9 +24,9 @@
 
 .styles_modal__gNwvD{
   padding:0rem !important;
-  height:90vh !important;
+  /* height:90vh !important; */
   border-radius: 20px !important;
-  width:80% !important;
+  /* width:80% !important; */
 }
 
 .slick-prev, .slick-next{
