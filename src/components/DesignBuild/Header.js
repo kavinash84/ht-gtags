@@ -9,7 +9,7 @@ import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import { Link } from 'react-router-dom';
 
 const styles = require('./Designbuild.scss');
-
+const LogoIcon = require('../../../static/logo.png');
 class Header extends React.Component {
   render() {
     return (
@@ -24,7 +24,7 @@ class Header extends React.Component {
       >
         <div style={{ marginLeft: '10%' }}>
         <Link to="/">
-          <Image src='https://www.hometown.in/media/cms/designbuild/hometownlogo.png' style={{width:'60%', cursor: 'pointer'}} />
+          <Image src={LogoIcon} alt="logo" style={{width:'90%', cursor: 'pointer', marginTop: '5px'}} />
         </Link>
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
