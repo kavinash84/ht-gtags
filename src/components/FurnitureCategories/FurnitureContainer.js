@@ -5,40 +5,68 @@ import Div from "hometown-components-dev/lib/Div";
 import Section from "hometown-components-dev/lib/Section";
 import { connect } from "react-redux";
 import MainFurnitureSlider from "./MainFurnitureSlider";
-// import ShopByCategories from "./shopByCategories";
-
+import ShopByCategory from "./ShopByCategory/ShopByCategory";
+import CommonLayout from "./CommonLayout/CommonLayout";
 @connect(({ homepage: { menu }, category, category: { data } }) => ({
   menu: menu.data,
   category: data && data.items && data.items.text,
-  //   categoryText: getText(category),
   seoInfo: data && data.seo && data.seo.items
 }))
 
 class FurnitureContainer extends React.Component {
-  getBgColor = comp => {
-    switch (comp) {
-      case 2:
-        return "linear-gradient(to right, rgb(234, 234, 234), white)";
-        break;
-      case 5:
-        return "#F9F9F9";
-        break;
-      case 13:
-        return "#F5EEEE";
-        break;
-      default:
-        return "#FFFFFF";
-    }
-  };
+
   render() {
     const {
       category
-      //   categoryText: { title: pageTitle }
     } = this.props;
     return (
       <Section p="0" mb="0">
         <div className="wrapper">
           {category && <MainFurnitureSlider data={category.main} mb="0" style={{width:'100%'}} />}
+          
+          {category &&
+                  category.sections &&
+                  category.sections.map((cat, index) => (
+                    <div key={String(index)} style={{ width: '100%' }}>
+                      {cat.component === 1 ? (
+                        <ShopByCategory title={cat.title} data={cat.data} />
+                      ) : (
+                        ''
+                      )}   
+                      {cat.component === 3 ? (
+                        <CommonLayout title={cat.title} data={cat.data} />
+                      ) : (
+                        ''
+                      )} 
+                      {cat.component === 4 ? (
+                        <CommonLayout title={cat.title} data={cat.data} />
+                      ) : (
+                        ''
+                      )} 
+                      {cat.component === 6 ? (
+                        <CommonLayout title={cat.title} data={cat.data} />
+                      ) : (
+                        ''
+                      )} 
+                      {cat.component === 8 ? (
+                        <CommonLayout title={cat.title} data={cat.data} />
+                      ) : (
+                        ''
+                      )} 
+                      {cat.component === 9 ? (
+                        <CommonLayout title={cat.title} data={cat.data} />
+                      ) : (
+                        ''
+                      )} 
+                      {cat.component === 20 ? (
+                        <CommonLayout title={cat.title} data={cat.data} />
+                      ) : (
+                        ''
+                      )} 
+
+                    </div>
+                  ))}
+          
         </div>
       </Section>
     );

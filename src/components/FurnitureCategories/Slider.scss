@@ -16,7 +16,7 @@
       -webkit-line-clamp: 4;
       -webkit-box-orient: vertical;
       display: -webkit-box;
-      font-size: 16px;
+      font-size: 14px;
     }
     .content3 {
       color: #888888;
@@ -35,12 +35,12 @@
       -webkit-line-clamp: 4;
       -webkit-box-orient: vertical;
       display: -webkit-box;
-      font-size: 16px;
-      line-height: 20px;
+      font-size: 14px;
+      line-height:20px;
     }
     .content4 {
       color: #888888;
-      padding: 3px 30px 0px;
+      padding: 3px 16px 0px;
       .name {
         font-size: 16px;
         font-weight: 600;
@@ -53,7 +53,7 @@
         text-align: center;
       }
     }
-    .content7_description {
+    .content7_description{
       text-align: center;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -153,17 +153,12 @@
   }
 }
 
-.content12 {
+.content12{
   color: black;
   padding: 10px;
   padding-top: 10px;
-  width: 70%;
+  width:70%;
   margin-left: 20%;
-  background: rgb(170, 143, 143);
+  background:rgb(170, 143, 143);
 }
-.sliderItemtwo {
-  box-shadow: 0.5rem 0.5rem 3rem rgba(182, 182, 182, 0.2);
-  margin-top: 50px;
-  margin-bottom: 60px;
-  padding: "0 20px 0 30px";
-}
+
