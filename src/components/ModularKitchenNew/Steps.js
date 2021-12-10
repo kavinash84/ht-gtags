@@ -3,10 +3,10 @@ import Box from "hometown-components-dev/lib/BoxHtV1";
 import { connect } from "react-redux";
 
 const styles = require("./ModularKitchen.scss");
-const Arrow = require("../../../static/newHomePage/Arrow.svg");
-const ArrowRotate = require("../../../static/newHomePage/ArrowRotate.svg");
-const dot = require("../../../static/newHomePage/dot.svg");
-const blink = require("../../../static/newHomePage/blink.svg");
+// const Arrow = require("../../../static/newHomePage/Arrow.svg");
+// const ArrowRotate = require("../../../static/newHomePage/ArrowRotate.svg");
+// const dot = require("../../../static/newHomePage/dot.svg");
+// const blink = require("../../../static/newHomePage/blink.svg");
 // const line = require("../../../static/newHomepage/line.svg");
 
 @connect(({ modularkitchen }) => ({
@@ -65,7 +65,7 @@ class Steps extends React.Component {
                   }}
                 >
                   <div style={{ display: "flex" }}>
-                    <img
+                    {/* <img
                       src={blink}
                       style={{
                         width: "20px",
@@ -73,7 +73,7 @@ class Steps extends React.Component {
                         marginLeft: "-10px",
                         marginTop: "-2px"
                       }}
-                    />
+                    /> */}
                     <div
                       style={{
                         textAlign: "left",
@@ -90,11 +90,11 @@ class Steps extends React.Component {
                       textAlign: "right"
                     }}
                   >
-                    <img
+                    {/* <img
                       src={ArrowRotate}
                       alt="aarow"
                       className={styles.iconrotate}
-                    />
+                    /> */}
                   </Box>
                 </div>
               </Box>
@@ -140,7 +140,7 @@ class Steps extends React.Component {
                 }}
               >
                 <div style={{ display: "flex" }}>
-                  <img
+                  {/* <img
                     src={dot}
                     style={{
                       width: "7px",
@@ -148,7 +148,7 @@ class Steps extends React.Component {
                       marginLeft: "-5px",
                       marginTop: index === 3 ? "5px" : "0px"
                     }}
-                  />
+                  /> */}
                   <div
                     style={{
                       textAlign: "left",
@@ -166,7 +166,7 @@ class Steps extends React.Component {
                     textAlign: "right"
                   }}
                 >
-                  <img src={Arrow} alt="aarow" style={{ cursor: "pointer" }} />
+                  {/* <img src={Arrow} alt="aarow" style={{ cursor: "pointer" }} /> */}
                 </Box>
               </div>
             </Box>
