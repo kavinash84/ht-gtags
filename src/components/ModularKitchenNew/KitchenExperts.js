@@ -12,7 +12,7 @@ import Section from "hometown-components-dev/lib/SectionHtV1";
 import Flex from "hometown-components-dev/lib/FlexHtV1";
 import Heading from "hometown-components-dev/lib/HeadingHtV1";
 
-// const check = require("../../../static/newHomePage/check.svg");
+const check = require("../../../static/new-home/check.svg");
 const styles = require("./ModularKitchen.scss");
 
 @connect(
@@ -125,7 +125,7 @@ class KitchenExperts extends React.Component {
                             Get In Touch <br /> With You Shortly
                           </Heading>
                         </Box>
-                        {/* <img
+                        <img
                           src={check}
                           style={{
                             width: "60px",
@@ -133,7 +133,7 @@ class KitchenExperts extends React.Component {
                             margin: "30px auto",
                             display: "block"
                           }}
-                        /> */}
+                        />
                       </Box>
                     </Box>
                   </Flex>

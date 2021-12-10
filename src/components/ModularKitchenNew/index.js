@@ -23,7 +23,7 @@ import { allowNChar, allowTypeOf } from "utils/helper";
 import { SERVICE_SIGNUPS, PINCODE as PINCODE_API } from "helpers/apiUrls";
 import { sendData, getData } from "redux/modules/services";
 import StepsToYourHome from "./StepsToHome";
-// const check = require("../../../static/newHomePage/check.svg");
+const check = require("../../../static/new-home/check.svg");
 @connect(
   ({ services, modularkitchen, userLogin, profile }) => ({
     modularkitchen,
@@ -135,7 +135,7 @@ class ModularKitchenNewContainer extends React.Component {
                             Get In Touch <br /> With You Shortly
                           </Heading>
                         </Div>
-                        {/* <img
+                        <img
                           src={check}
                           style={{
                             width: "60px",
@@ -143,7 +143,7 @@ class ModularKitchenNewContainer extends React.Component {
                             margin: "30px auto",
                             display: "block"
                           }}
-                        /> */}
+                        />
                       </Div>
                     </Div>
                   </Flex>

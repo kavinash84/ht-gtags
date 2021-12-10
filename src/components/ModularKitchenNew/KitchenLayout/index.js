@@ -17,7 +17,7 @@ import { sendData, getData } from "redux/modules/services";
 import "./KitchenLayout.css";
 const LeftArrow = require("../../../../static/new-home/roundedArrowLeft.svg");
 const RightArrow = require("../../../../static/new-home/roundedArrowRight.svg");
-// const check = require("../../../../static/newHomePage/check.svg");
+const check = require("../../../../static/new-home/check.svg");
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
@@ -210,7 +210,7 @@ class KitchenLayout extends Component {
                             Get In Touch <br /> With You Shortly
                           </Heading>
                         </BoxHtV1>
-                        {/* <img
+                        <img
                           src={check}
                           style={{
                             width: "60px",
@@ -218,7 +218,7 @@ class KitchenLayout extends Component {
                             margin: "30px auto",
                             display: "block"
                           }}
-                        /> */}
+                        />
                       </BoxHtV1>
                     </BoxHtV1>
                   </Flex>

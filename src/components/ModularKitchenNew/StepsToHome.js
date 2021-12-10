@@ -15,7 +15,7 @@ import { connect } from "react-redux";
 // const styles = require("./Designbuild.scss");
 import "./Slider.css";
 
-// const check = require("../../../static/newHomePage/check.svg");
+const check = require("../../../static/new-home/check.svg");
 
 import { sendData, getData } from "redux/modules/services";
 
@@ -127,7 +127,7 @@ class StepsToYourHome extends React.Component {
                             Get In Touch <br /> With You Shortly
                           </Heading>
                         </Div>
-                        {/* <img
+                        <img
                           src={check}
                           style={{
                             width: "60px",
@@ -135,7 +135,7 @@ class StepsToYourHome extends React.Component {
                             margin: "30px auto",
                             display: "block"
                           }}
-                        /> */}
+                        />
                       </Div>
                     </Div>
                   </Flex>
