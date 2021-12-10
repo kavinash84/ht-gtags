@@ -188,7 +188,7 @@ const routes = [
       { path: "/service-request", exact: true, component: ServiceRequest },
       { path: "/case-request", exact: true, component: CaseRequest },
       { path: "/grievance", exact: true, component: Grievance },
-      { path: "/modular-kitchens", exact: true, component: ModularKitchenNew },
+      { path: "/modular-kitchen", exact: true, component: ModularKitchenNew },
       { path: "/plan-your-kitchen", exact: true, component: PlanYourKitchen },
       { path: "/design-build", exact: true, component: DesignBuild },
       { path: "/home-interior", exact: true, component: HomeInterior },
