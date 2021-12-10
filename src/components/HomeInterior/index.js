@@ -93,7 +93,7 @@ class HomeInteriorContainer extends React.Component {
 
             <Section p="0" mb="0">
           <ResponsiveModal
-            classNames={{ modal: 'mkModal' }}
+            classNames={{ modal: 'designbuildmodal' }}
             onCloseModal={this.handleModal}
             open={this.state.openModal}
             style={{padding:'0rem'}}
@@ -103,7 +103,7 @@ class HomeInteriorContainer extends React.Component {
           <Div>
             {!loading && loaded ? (
               <ResponsiveModal
-                classNames={{ modal: 'mkModal' }}
+                classNames={{ modal: 'designbuildmodal' }}
                 onCloseModal={() => this.setState({ open: false })}
                 open={this.state.open}
               >
