@@ -20,7 +20,7 @@ import Heading from "hometown-components-dev/lib/HeadingHtV1";
 import Flex from "hometown-components-dev/lib/FlexHtV1";
 import "./Slider.css";
 
-const Check = require("../../../static/newHomePage/check.svg");
+// const Check = require("../../../static/newHomePage/check.svg");
 
 import { allowNChar, allowTypeOf } from "utils/helper";
 import { SERVICE_SIGNUPS, PINCODE as PINCODE_API } from "helpers/apiUrls";
@@ -173,7 +173,7 @@ class HomeInteriorContainer extends React.Component {
                             Get In Touch <br /> With You Shortly
                           </Heading>
                         </Div>
-                        <img
+                        {/* <img
                           src={Check}
                           style={{
                             width: "60px",
@@ -181,7 +181,7 @@ class HomeInteriorContainer extends React.Component {
                             margin: "30px auto",
                             display: "block"
                           }}
-                        />
+                        /> */}
                       </Div>
                     </Div>
                   </Flex>
