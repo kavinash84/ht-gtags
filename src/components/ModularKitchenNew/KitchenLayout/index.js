@@ -155,7 +155,7 @@ class KitchenLayout extends Component {
 
         <Section p="0" mb="0">
           <ResponsiveModal
-            classNames={{ modal: "mkModal" }}
+            classNames={{ modal: "modularKitchenModel" }}
             onCloseModal={this.handleModal}
             open={this.state.openModal}
             style={{ padding: "0rem" }}
@@ -168,7 +168,7 @@ class KitchenLayout extends Component {
           <BoxHtV1>
             {!loading && loaded ? (
               <ResponsiveModal
-                classNames={{ modal: "mkModal" }}
+                classNames={{ modal: "modularKitchenModel" }}
                 onCloseModal={() => this.setState({ open: false })}
                 open={this.state.open}
               >

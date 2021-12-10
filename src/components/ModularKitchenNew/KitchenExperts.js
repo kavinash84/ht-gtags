@@ -15,13 +15,15 @@ import Heading from "hometown-components-dev/lib/HeadingHtV1";
 const check = require("../../../static/newHomePage/check.svg");
 const styles = require("./ModularKitchen.scss");
 
-@connect(({ services, modularkitchen }) => ({
-  modularkitchen,
-  ...services.modularkitchen,
-  speakourkitchenexperts: modularkitchen.data.items.text.speakourkitchenexperts
-}),
-{ sendFormData: sendData, loadPincodeDetails: getData })
-
+@connect(
+  ({ services, modularkitchen }) => ({
+    modularkitchen,
+    ...services.modularkitchen,
+    speakourkitchenexperts:
+      modularkitchen.data.items.text.speakourkitchenexperts
+  }),
+  { sendFormData: sendData, loadPincodeDetails: getData }
+)
 class KitchenExperts extends React.Component {
   state = {
     openModal: false,
@@ -57,29 +59,31 @@ class KitchenExperts extends React.Component {
     const { speakourkitchenexperts } = this.props;
     return (
       <div>
-      <Box className={styles.main} style={{ marginTop: "60px" }}>
-        <Image
-          src="https://www.hometown.in/media/cms/Rectangle_2643.png"
-          alt="topbanner"
-          width="80%"
-          height="700px"
-          marginLeft="10%"
-          marginRight="10%"
-          // style={{ objectFit: "cover" }}
-        />
-        <Box
-          style={{ height: "90%", width: "450px", opacity: "0.8" }}
-          className={styles.boxTwo}
-        >
-          <ModularKitchenForm handleModalWithSave={this.handleModalWithSave} handleScript={this.handleScript} />
+        <Box className={styles.main} style={{ marginTop: "60px" }}>
+          <Image
+            src="https://www.hometown.in/media/cms/Rectangle_2643.png"
+            alt="topbanner"
+            width="80%"
+            height="700px"
+            marginLeft="10%"
+            marginRight="10%"
+            // style={{ objectFit: "cover" }}
+          />
+          <Box
+            style={{ height: "90%", width: "450px", opacity: "0.8" }}
+            className={styles.boxTwo}
+          >
+            <ModularKitchenForm
+              handleModalWithSave={this.handleModalWithSave}
+              handleScript={this.handleScript}
+            />
+          </Box>
         </Box>
-
-      </Box>
-      <Section p="0" mb="0">
+        <Section p="0" mb="0">
           <Box>
             {!loading && loaded ? (
               <ResponsiveModal
-                classNames={{ modal: "mkModal" }}
+                classNames={{ modal: "modularKitchenModel" }}
                 onCloseModal={() => this.setState({ open: false })}
                 open={this.state.open}
               >
@@ -138,7 +142,7 @@ class KitchenExperts extends React.Component {
             ) : null}
           </Box>
         </Section>
-        </div>
+      </div>
     );
   }
 }

@@ -1,5 +1,6 @@
 import { routerReducer } from "react-router-redux";
 import multireducer from "multireducer";
+import modularkitchen from "./modules/modularkitchen";
 import app from "./modules/app";
 import cart from "./modules/cart";
 import products from "./modules/products";
