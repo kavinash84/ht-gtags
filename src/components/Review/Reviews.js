@@ -46,7 +46,7 @@ export default class Reviews extends Component {
       case "flipkart":
         return <Img src={flipcart} alt="Flipkart" width="60px" height="60px" />;
       case "hometown":
-        return <Img src={ht} alt="Hometown" width="60px" height="60px" />;
+        return <Img src={ht} alt="Hometown" width="60px" height="42px" />;
       case "myntra":
         return <Img src={myntra} alt="Mayantra" width="60px" height="60px" />;
       case "pepperfry":
@@ -124,7 +124,12 @@ export default class Reviews extends Component {
                         </Div>
                         <Div className={styles.location}>{item.city}</Div>
                       </Div>
-                      <Div className={styles.logoContainer}>
+                      <Div
+                        className={styles.logoContainer}
+                        style={{
+                          width: item.flag === "hometown" ? "19%" : "15%"
+                        }}
+                      >
                         {/* <Img src={Star} width="60px" height="60px" alt="Star" /> */}
                         {this.getLogo(item.flag)}
                       </Div>
@@ -215,7 +220,12 @@ export default class Reviews extends Component {
                             </Div>
                             <Div className={styles.location}>{item.city}</Div>
                           </Div>
-                          <Div className={styles.logoContainer}>
+                          <Div
+                            className={styles.logoContainer}
+                            style={{
+                              width: item.flag === "hometown" ? "19%" : "15%"
+                            }}
+                          >
                             {/* <Img src={Star} width="60px" height="60px" alt="Star" /> */}
                             {this.getLogo(item.flag)}
                           </Div>
@@ -301,7 +311,12 @@ export default class Reviews extends Component {
                           </Div>
                           <Div className={styles.location}>{item.city}</Div>
                         </Div>
-                        <Div className={styles.logoContainer}>
+                        <Div
+                          className={styles.logoContainer}
+                          style={{
+                            width: item.flag === "hometown" ? "19%" : "15%"
+                          }}
+                        >
                           {/* <Img src={Star} width="60px" height="60px" alt="Star" /> */}
                           {this.getLogo(item.flag)}
                         </Div>

@@ -1,34 +1,30 @@
-import React, { Component } from "react";
-import ResponsiveModal from "components/Modal";
-import ModularKitchenFormModal from "./ModularKitchenFormModal";
-import Div from "hometown-components-dev/lib/BoxHtV1";
-import Flex from "hometown-components-dev/lib/FlexHtV1";
-import Heading from "hometown-components-dev/lib/HeadingHtV1";
+import React from "react";
+import Box from "hometown-components-dev/lib/BoxHtV1";
+// import Flex from 'hometown-components-dev/lib/FlexHtV1';
 import Image from "hometown-components-dev/lib/ImageHtV1";
 import Text from "hometown-components-dev/lib/TextHtV1";
 import Button from "hometown-components-dev/lib/ButtonHtV1";
-import Section from "hometown-components-dev/lib/SectionHtV1";
-import StepsMain from "./StepsMain";
+import ModularKitchenForm from "./ModularKitchenForm";
+import ResponsiveModal from "components/Modal";
 import { connect } from "react-redux";
-
-const styles = require("./Designbuild.scss");
-import "./Slider.css";
-
-const check = require("../../../static/check.svg");
-
-import { allowNChar, allowTypeOf } from "utils/helper";
-import { SERVICE_SIGNUPS, PINCODE as PINCODE_API } from "helpers/apiUrls";
 import { sendData, getData } from "redux/modules/services";
+import Section from "hometown-components-dev/lib/SectionHtV1";
+import Flex from "hometown-components-dev/lib/FlexHtV1";
+import Heading from "hometown-components-dev/lib/HeadingHtV1";
+
+const check = require("../../../static/new-home/check.svg");
+const styles = require("./ModularKitchen.scss");
 
 @connect(
-  ({ services, designbuild }) => ({
-    designbuild,
+  ({ services, modularkitchen }) => ({
+    modularkitchen,
     ...services.modularkitchen,
-    stepsToDreamhome: designbuild.data.items.text.stepsToDreamhome
+    speakourkitchenexperts:
+      modularkitchen.data.items.text.speakourkitchenexperts
   }),
   { sendFormData: sendData, loadPincodeDetails: getData }
 )
-class StepsToYourHome extends React.Component {
+class KitchenExperts extends React.Component {
   state = {
     openModal: false,
     open: false,
@@ -48,7 +44,7 @@ class StepsToYourHome extends React.Component {
       this.setState({
         open: true
       });
-    }, 1000);
+    }, 500);
   };
 
   handleScript = () => {
@@ -56,67 +52,42 @@ class StepsToYourHome extends React.Component {
       showScript: true
     });
   };
+
   render() {
-    const { stepsToDreamhome, loading, loaded } = this.props;
+    const { whyChooseUs, isLoggedIn, fullName, loading, loaded } = this.props;
+    const { showScript } = this.state;
+    const { speakourkitchenexperts } = this.props;
     return (
-      <Div mt="70px">
-        <Flex>
+      <div>
+        <Box className={styles.main} style={{ marginTop: "60px" }}>
           <Image
-            src={stepsToDreamhome.image}
-            style={{ width: "55%", height: "750px" }}
+            src="https://www.hometown.in/media/cms/Rectangle_2643.png"
+            alt="topbanner"
+            width="80%"
+            height="700px"
+            marginLeft="10%"
+            marginRight="10%"
+            // style={{ objectFit: "cover" }}
           />
-          <Div
-            style={{
-              width: "45%",
-              height: "750px",
-              backgroundColor: "#F5F5F5"
-            }}
+          <Box
+            style={{ height: "90%", width: "450px", opacity: "0.8" }}
+            className={styles.boxTwo}
           >
-            <StepsMain handleModal={this.handleModal} />
-          </Div>
-        </Flex>
-        <Section p="0" mb="0">
-          <ResponsiveModal
-            classNames={{ modal: "designbuildmodal" }}
-            onCloseModal={this.handleModal}
-            open={this.state.openModal}
-            style={{ padding: "0rem" }}
-          >
-            <ModularKitchenFormModal
+            <ModularKitchenForm
               handleModalWithSave={this.handleModalWithSave}
               handleScript={this.handleScript}
             />
-          </ResponsiveModal>
-          <Div>
+          </Box>
+        </Box>
+        <Section p="0" mb="0">
+          <Box>
             {!loading && loaded ? (
               <ResponsiveModal
-                classNames={{ modal: "designbuildmodal" }}
+                classNames={{ modal: "modularKitchenModel" }}
                 onCloseModal={() => this.setState({ open: false })}
                 open={this.state.open}
               >
-                {/* <Div
-                  mt="50px"
-                  p="50px 15%"
-                  style={{
-                    backgroundColor: '#FFFFFF',
-                    borderBottomLeftRadius: '20px',
-                    borderBottomRightRadius: '20px'
-                  }}
-                >
-                  <Heading
-                    ta="center"
-                    fontSize="22px"
-                    mb="50px"
-                    mt="10px"
-                    color="#000000"
-                    style={{ whiteSpace: 'normal' }}
-                  >
-                    Thank you for your Interest, Our Team will get in touch with you Shortly
-                  </Heading> */}
-                {/* <Img m="0 auto 5px" width="100px" src={correctIcon} alt="Reload Page" /> */}
-                {/* </Div> */}
-
-                <Div style={{ width: "100%" }}>
+                <Box style={{ width: "100%" }}>
                   <Flex>
                     <img
                       src="https://www.hometown.in/media/cms/D/Top-Image-Living1.jpg"
@@ -127,7 +98,7 @@ class StepsToYourHome extends React.Component {
                         borderBottomLeftRadius: "20px"
                       }}
                     />
-                    <Div
+                    <Box
                       style={{
                         width: "50%",
                         height: "90vh",
@@ -136,11 +107,11 @@ class StepsToYourHome extends React.Component {
                         borderBottomRightRadius: "20px"
                       }}
                     >
-                      <Div p="20px 5px" mt="20px">
-                        <Div>
+                      <Box p="20px 5px" mt="20px">
+                        <Box>
                           <Heading
                             mb="15px"
-                            mt="100px"
+                            mt="40%"
                             color="#000000"
                             fontSize="18px"
                             fontFamily="medium"
@@ -153,7 +124,7 @@ class StepsToYourHome extends React.Component {
                             Thank You For Your <br /> Interest, Our Team Will
                             Get In Touch <br /> With You Shortly
                           </Heading>
-                        </Div>
+                        </Box>
                         <img
                           src={check}
                           style={{
@@ -163,17 +134,16 @@ class StepsToYourHome extends React.Component {
                             display: "block"
                           }}
                         />
-                      </Div>
-                    </Div>
+                      </Box>
+                    </Box>
                   </Flex>
-                </Div>
+                </Box>
               </ResponsiveModal>
             ) : null}
-          </Div>
+          </Box>
         </Section>
-      </Div>
+      </div>
     );
   }
 }
-
-export default StepsToYourHome;
+export default KitchenExperts;

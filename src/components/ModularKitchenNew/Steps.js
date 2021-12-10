@@ -2,15 +2,16 @@ import React, { Component } from "react";
 import Box from "hometown-components-dev/lib/BoxHtV1";
 import { connect } from "react-redux";
 
-const styles = require("./Designbuild.scss");
-const Arrow = require("../../../static/categories/Line.svg");
-const dot = require("../../../static/newHomepage/dots.png");
+const styles = require("./ModularKitchen.scss");
+const Arrow = require("../../../static/new-home/Arrow.svg");
+const ArrowRotate = require("../../../static/new-home/ArrowRotate.svg");
+const dot = require("../../../static/new-home/dot.svg");
 const blink = require("../../../static/new-home/blink.svg");
-const line = require("../../../static/newHomepage/line.svg");
+const line = require("../../../static/new-home/line.svg");
 
-@connect(({ designbuild }) => ({
-  designbuild,
-  stepsToDreamhome: designbuild.data.items.text.stepsToDreamhome
+@connect(({ modularkitchen }) => ({
+  modularkitchen,
+  stepsToDreamhome: modularkitchen.data.items.text.stepsToDreamhome
 }))
 class Steps extends React.Component {
   render() {
@@ -18,7 +19,7 @@ class Steps extends React.Component {
     return (
       <Box
         style={{
-          background: isOpen ? "#F5F5F5" : "#F5F5F5",
+          background: isOpen ? "#FFFFFF" : "#FFFFFF",
           width: "100"
         }}
       >
@@ -36,18 +37,17 @@ class Steps extends React.Component {
             <Box
               style={{
                 // padding: "18px 0px 22px",
-                borderLeft: "2px dashed #F47020"
+                borderLeft: "2px dashed #F57831"
               }}
             >
               <Box
                 style={{
-                  // padding: "18px 0px 22px",
                   padding:
                     index === 0
-                      ? "0px 0px 22px"
-                      : index === 4
-                      ? "18px 0px 0px"
-                      : "18px 0px 22px"
+                      ? "-5px 0px 15px"
+                      : index === 3
+                      ? "-5px 0px 10px"
+                      : "-5px 0px 22px"
                   // borderLeft: "2px dashed #F47020"
                 }}
               >
@@ -77,8 +77,8 @@ class Steps extends React.Component {
                     <div
                       style={{
                         textAlign: "left",
-                        marginLeft: "10px",
-                        marginTop: "0px",
+                        marginLeft: "7px",
+                        marginTop: "-1px",
                         cursor: "pointer"
                       }}
                     >
@@ -91,7 +91,7 @@ class Steps extends React.Component {
                     }}
                   >
                     <img
-                      src={Arrow}
+                      src={ArrowRotate}
                       alt="aarow"
                       className={styles.iconrotate}
                     />
@@ -100,7 +100,7 @@ class Steps extends React.Component {
               </Box>
               <div
                 className={styles.descriptionSam}
-                style={{ paddingTop: index === 4 ? "15px" : "0px" }}
+                style={{ paddingTop: index === 3 ? "5px" : "0px" }}
               >
                 {description}
               </div>
@@ -122,10 +122,10 @@ class Steps extends React.Component {
                 padding:
                   index === 0
                     ? "0px 0px 22px"
-                    : index === 4
+                    : index === 3
                     ? "18px 0px 0px"
                     : "18px 0px 22px",
-                borderLeft: "2px dashed #F47020"
+                borderLeft: "2px dashed #F57831"
               }}
             >
               <div
@@ -143,10 +143,10 @@ class Steps extends React.Component {
                   <img
                     src={dot}
                     style={{
-                      width: "10px",
-                      height: "10px",
+                      width: "7px",
+                      height: "7px",
                       marginLeft: "-5px",
-                      marginTop: index === 4 ? "5px" : "0px"
+                      marginTop: index === 3 ? "5px" : "0px"
                     }}
                   />
                   <div
@@ -154,7 +154,8 @@ class Steps extends React.Component {
                       textAlign: "left",
                       marginLeft: "15px",
                       marginTop: "-2px",
-                      cursor: "pointer"
+                      cursor: "pointer",
+                      marginBottom: index === 3 ? "-2px" : "0px"
                     }}
                   >
                     {title}
@@ -165,7 +166,7 @@ class Steps extends React.Component {
                     textAlign: "right"
                   }}
                 >
-                  <img src={Arrow} alt="aarow" />
+                  <img src={Arrow} alt="aarow" style={{ cursor: "pointer" }} />
                 </Box>
               </div>
             </Box>

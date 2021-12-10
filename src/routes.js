@@ -27,6 +27,7 @@ import Cart from "containers/Cart";
 /* services */
 import ModularKitchen from "containers/ModularKitchenMicro";
 import PlanYourKitchen from "containers/PlanYourKitchen";
+import ModularKitchenNew from "containers/ModularKitchenNew";
 import DesignBuild from "containers/DesignBuild";
 import HomeInterior from "containers/HomeInterior";
 import ModularWardrobe from "containers/ModularWardrobe";
@@ -187,7 +188,7 @@ const routes = [
       { path: "/service-request", exact: true, component: ServiceRequest },
       { path: "/case-request", exact: true, component: CaseRequest },
       { path: "/grievance", exact: true, component: Grievance },
-      { path: "/modular-kitchens", exact: true, component: ModularKitchen },
+      { path: "/modular-kitchen", exact: true, component: ModularKitchenNew },
       { path: "/plan-your-kitchen", exact: true, component: PlanYourKitchen },
       { path: "/design-build", exact: true, component: DesignBuild },
       { path: "/home-interior", exact: true, component: HomeInterior },

@@ -1,30 +1,29 @@
 import React, { Component } from "react";
 import ResponsiveModal from "components/Modal";
-import ModularKitchenFormModal from "./ModularKitchenFormModal";
+
+import ModularKitchenFormModal from "./ ModularKitchenFormModal";
 import Div from "hometown-components-dev/lib/BoxHtV1";
 import Flex from "hometown-components-dev/lib/FlexHtV1";
 import Heading from "hometown-components-dev/lib/HeadingHtV1";
 import Image from "hometown-components-dev/lib/ImageHtV1";
-import Text from "hometown-components-dev/lib/TextHtV1";
-import Button from "hometown-components-dev/lib/ButtonHtV1";
+// import Text from "hometown-components-dev/lib/TextHtV1";
+// import Button from "hometown-components-dev/lib/ButtonHtV1";
 import Section from "hometown-components-dev/lib/SectionHtV1";
 import StepsMain from "./StepsMain";
 import { connect } from "react-redux";
 
-const styles = require("./Designbuild.scss");
+// const styles = require("./Designbuild.scss");
 import "./Slider.css";
 
-const check = require("../../../static/check.svg");
+const check = require("../../../static/new-home/check.svg");
 
-import { allowNChar, allowTypeOf } from "utils/helper";
-import { SERVICE_SIGNUPS, PINCODE as PINCODE_API } from "helpers/apiUrls";
 import { sendData, getData } from "redux/modules/services";
 
 @connect(
-  ({ services, designbuild }) => ({
-    designbuild,
+  ({ services, modularkitchen }) => ({
+    modularkitchen,
     ...services.modularkitchen,
-    stepsToDreamhome: designbuild.data.items.text.stepsToDreamhome
+    stepsToDreamhome: modularkitchen.data.items.text.stepsToDreamhome
   }),
   { sendFormData: sendData, loadPincodeDetails: getData }
 )
@@ -59,25 +58,21 @@ class StepsToYourHome extends React.Component {
   render() {
     const { stepsToDreamhome, loading, loaded } = this.props;
     return (
-      <Div mt="70px">
-        <Flex>
-          <Image
-            src={stepsToDreamhome.image}
-            style={{ width: "55%", height: "750px" }}
-          />
-          <Div
-            style={{
-              width: "45%",
-              height: "750px",
-              backgroundColor: "#F5F5F5"
-            }}
-          >
-            <StepsMain handleModal={this.handleModal} />
-          </Div>
-        </Flex>
+      <Div>
+        <Div
+          style={{
+            height: "470px",
+            width: "100%",
+            backgroundColor: "#FFFFFF",
+            boxShadow: "0px 5px 10px #0000001A"
+          }}
+        >
+          <StepsMain handleModal={this.handleModal} />
+        </Div>
+
         <Section p="0" mb="0">
           <ResponsiveModal
-            classNames={{ modal: "designbuildmodal" }}
+            classNames={{ modal: "modularKitchenModel" }}
             onCloseModal={this.handleModal}
             open={this.state.openModal}
             style={{ padding: "0rem" }}
@@ -90,32 +85,10 @@ class StepsToYourHome extends React.Component {
           <Div>
             {!loading && loaded ? (
               <ResponsiveModal
-                classNames={{ modal: "designbuildmodal" }}
+                classNames={{ modal: "modularKitchenModel" }}
                 onCloseModal={() => this.setState({ open: false })}
                 open={this.state.open}
               >
-                {/* <Div
-                  mt="50px"
-                  p="50px 15%"
-                  style={{
-                    backgroundColor: '#FFFFFF',
-                    borderBottomLeftRadius: '20px',
-                    borderBottomRightRadius: '20px'
-                  }}
-                >
-                  <Heading
-                    ta="center"
-                    fontSize="22px"
-                    mb="50px"
-                    mt="10px"
-                    color="#000000"
-                    style={{ whiteSpace: 'normal' }}
-                  >
-                    Thank you for your Interest, Our Team will get in touch with you Shortly
-                  </Heading> */}
-                {/* <Img m="0 auto 5px" width="100px" src={correctIcon} alt="Reload Page" /> */}
-                {/* </Div> */}
-
                 <Div style={{ width: "100%" }}>
                   <Flex>
                     <img
@@ -158,7 +131,7 @@ class StepsToYourHome extends React.Component {
                           src={check}
                           style={{
                             width: "60px",
-                            height: "60x",
+                            height: "60px",
                             margin: "30px auto",
                             display: "block"
                           }}
