@@ -4,7 +4,7 @@ import Image from "hometown-components-dev/lib/ImageHtV1";
 import Text from "hometown-components-dev/lib/TextHtV1";
 import Button from "hometown-components-dev/lib/ButtonHtV1";
 import { Link } from "react-router-dom";
-
+const LogoIcon = require("../../../static/logo.png");
 const styles = require("./ModularKitchen.scss");
 
 class Header extends React.Component {
@@ -22,8 +22,9 @@ class Header extends React.Component {
         <div style={{ marginLeft: "10%" }}>
           <Link to="/">
             <Image
-              src="https://www.hometown.in/media/cms/designbuild/hometownlogo.png"
-              style={{ width: "60%", cursor: "pointer" }}
+              src={LogoIcon}
+              alt="logo"
+              style={{ width: "90%", cursor: "pointer", marginTop: "5px" }}
             />
           </Link>
         </div>
