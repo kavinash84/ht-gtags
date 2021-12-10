@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 const styles = require("./Designbuild.scss");
 const Arrow = require("../../../static/categories/Line.svg");
 const dot = require("../../../static/newHomepage/dots.png");
-const blink = require("../../../static/newHomePage/blink.svg");
+const blink = require("../../../static/new-home/blink.svg");
 const line = require("../../../static/newHomepage/line.svg");
 
 @connect(({ designbuild }) => ({
