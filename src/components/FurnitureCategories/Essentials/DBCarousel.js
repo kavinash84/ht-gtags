@@ -17,7 +17,7 @@ function SampleNextArrow(props) {
         className={className}
         src={RightArrow}
         onClick={onClick}
-        style={{ ...style, margin: 0, width: "15px" }}
+        style={{ ...style, width: "15px" }}
       />
     </React.Fragment>
   );
@@ -31,7 +31,7 @@ function SamplePrevArrow(props) {
         className={className}
         src={LeftArrow}
         onClick={onClick}
-        style={{ ...style, margin: 0, width: "15px" }}
+        style={{ ...style,  width: "15px" }}
       />
     </React.Fragment>
   );

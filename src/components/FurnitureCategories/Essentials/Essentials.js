@@ -55,8 +55,8 @@ export default class Essentials extends Component {
         <Div
           style={{
             paddingBottom: "",
-            width: "100%",
-            margin: "auto"
+            width: '86%',
+             marginLeft: "6.5%",
           }}
         >
           <DBCarousel
