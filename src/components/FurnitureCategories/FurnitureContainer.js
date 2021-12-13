@@ -7,6 +7,12 @@ import { connect } from "react-redux";
 import MainFurnitureSlider from "./MainFurnitureSlider";
 import ShopByCategory from "./ShopByCategory/ShopByCategory";
 import CommonLayout from "./CommonLayout/CommonLayout";
+import ShopOurNewArrivals from "./ShopOurNewArrivals";
+import Essentials from './Essentials/Essentials';
+import LetUsHelpYou from './LetUsHelp';
+import ShopMattress from './ShopMattress';
+import BannerImage from './BannerImage';
+import Outdoor from './Outdoor';
 @connect(({ homepage: { menu }, category, category: { data } }) => ({
   menu: menu.data,
   category: data && data.items && data.items.text,
@@ -33,37 +39,86 @@ class FurnitureContainer extends React.Component {
                       ) : (
                         ''
                       )}   
-                      {cat.component === 3 ? (
+                      {cat.component === 2 ? (
                         <CommonLayout title={cat.title} data={cat.data} />
                       ) : (
                         ''
                       )} 
+                      {cat.component === 3 ? (
+                        <ShopOurNewArrivals mainTitle={cat.mainTitle} data={cat.data}
+        />
+                      ) : (
+                        ''
+                      )}
+
                       {cat.component === 4 ? (
                         <CommonLayout title={cat.title} data={cat.data} />
                       ) : (
                         ''
                       )} 
-                      {cat.component === 6 ? (
-                        <CommonLayout title={cat.title} data={cat.data} />
+                      {cat.component === 5 ? (
+                        <Essentials mainTitle={cat.title} data={cat.data} />
                       ) : (
                         ''
                       )} 
+
+                      {cat.component === 6 ? (
+                        <CommonLayout title={cat.title} data={cat.data} />
+                        
+                      ) : (
+                        ''
+                      )} 
+
+                      {cat.component === 7 ? (
+                        <BannerImage alt={cat.title} src={cat.image} url_key={cat.url_key} />
+                      ) : (
+                        ''
+                      )}
+                      
                       {cat.component === 8 ? (
                         <CommonLayout title={cat.title} data={cat.data} />
                       ) : (
                         ''
                       )} 
-                      {cat.component === 9 ? (
-                        <CommonLayout title={cat.title} data={cat.data} />
-                      ) : (
-                        ''
-                      )} 
-                      {cat.component === 20 ? (
-                        <CommonLayout title={cat.title} data={cat.data} />
-                      ) : (
-                        ''
-                      )} 
 
+                      {cat.component === 9 ? (
+                        <BannerImage alt={cat.title} src={cat.image} url_key={cat.url_key} />
+                      ) : (
+                        ''
+                      )}
+
+                      {cat.component === 10 ? (
+                        <CommonLayout title={cat.title} data={cat.data} />
+                      ) : (
+                        ''
+                      )} 
+                      {cat.component === 11 ? (
+                        <CommonLayout title={cat.title} data={cat.data} />
+                      ) : (
+                        ''
+                      )} 
+                      
+                      {cat.component === 12 ? (
+                        <Outdoor title={cat.title} image1={cat.image1} subtitle1={cat.subtitle1} url_key1={cat.url_key1} image2={cat.image2} subtitle2={cat.subtitle2} url_key2={cat.url_key2} />
+                      ) : (
+                        ''
+                      )} 
+                      
+                      {cat.component === 13 ? (
+                        <ShopMattress image={cat.image} url_key={cat.url_key} title={cat.title}/>
+                      ) : (
+                        ''
+                      )}
+       
+                      {cat.component === 14 ? (
+                        <LetUsHelpYou title={cat.title} data={cat.data}
+        />
+                      ) : (
+                        ''
+                      )}
+
+
+                
                     </div>
                   ))}
           
