@@ -9,17 +9,51 @@ import Text from "hometown-components-dev/lib/TextHtV1";
 import Img from "hometown-components-dev/lib/ImageHtV1";
 import SlickSlider from "../SlickSlider";
 const style = require("./PlanYourKitchen.scss");
+
+const LeftArrow = require("../../../static/new-home/roundedArrowLeft.svg");
+const RightArrow = require("../../../static/new-home/roundedArrowRight.svg");
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <React.Fragment>
+      <img
+        className={className}
+        src={RightArrow}
+        onClick={onClick}
+        style={{ ...style, marginRight: "-3%", width: "15px" }}
+      />
+    </React.Fragment>
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <React.Fragment>
+      <img
+        className={className}
+        src={LeftArrow}
+        onClick={onClick}
+        style={{ ...style, marginLeft: "-4%", width: "15px" }}
+      />
+    </React.Fragment>
+  );
+}
 const adjustSlides = length => ({
   slidesToShow: 3,
   slidesToScroll: 1,
   autoplay: false,
-  infinite: false
+  infinite: false,
+  nextArrow: <SampleNextArrow />,
+  prevArrow: <SamplePrevArrow />
 });
 const adjustSlidesitems = length => ({
   slidesToShow: 4,
   slidesToScroll: 1,
   autoplay: false,
-  infinite: false
+  infinite: false,
+  nextArrow: <SampleNextArrow />,
+  prevArrow: <SamplePrevArrow />
 });
 @connect(({ planyourkitchen }) => ({
   planyourkitchen,
