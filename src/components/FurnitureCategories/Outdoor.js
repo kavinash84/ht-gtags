@@ -57,7 +57,7 @@ class Outdoor extends React.Component {
               <Link to={url_key1}>
               <Image src={image1} alt="outdoor" m={5} height="400px" width="100%" />
               <Text
-                fontSize="20px"
+                fontSize="22px"
                 color="label"
                 mt="10px"
                 style={{ textAlign: 'center', color: '#323131', fontWeight: '600' }}
