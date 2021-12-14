@@ -25,7 +25,8 @@ class LetUsHelpYou extends React.Component {
             fontWeight: 600,
             color: 'black',
             textAlign: 'left',
-            marginLeft:'10%'
+            marginLeft:'10%',
+            marginTop:'80px',
           }}
         >
           {title}

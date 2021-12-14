@@ -44,7 +44,6 @@ export default class DBCarousel extends Component {
       <BoxHtV1>
         <div
           className="carousel-one"
-          style={{ width: "90%", marginLeft: "5%", marginRight: "5%" }}
         >
           <SlickSlider
             settings={{
@@ -52,7 +51,7 @@ export default class DBCarousel extends Component {
               nextArrow: <SampleNextArrow />,
               prevArrow: <SamplePrevArrow />
             }}
-            className="homeCarouselSlider"
+            className="furnitureSlider"
           >
             {data.map(slide => (
               <div key={slide}>

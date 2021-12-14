@@ -30,12 +30,12 @@ export default class Essentials extends Component {
           backgroundColor: "#F9F9F9",
           padding: "30px 30px 10px",
           textAlign: "center",
-          marginTop: "40px"
+          marginTop: "80px"
         }}
       >
         <Div
           style={{
-            fontSize: "35px",
+            fontSize: "40px",
             fontWeight: "600",
             marginBottom: "20px",
             color: "black"
