@@ -26,11 +26,7 @@ const DBItem = ({ component, data }) => {
             }}
           >
             <Link
-              className={styles.link}
               to={data.url_key}
-              onClick={() => {
-                sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
-              }}
             >
               <div>
                 <img
@@ -45,14 +41,13 @@ const DBItem = ({ component, data }) => {
                   }}
                 />
               </div>
-              <Div className={styles.content4}>
+              <Div style={{paddingLeft:"10px"}}>
                 <Div
                   style={{
                     fontSize: "16px",
                     textAlign: "left",
                     color: "#323F38"
                   }}
-                  className={styles.name}
                 >
                   {data.title}
                 </Div>
@@ -62,7 +57,6 @@ const DBItem = ({ component, data }) => {
                     textAlign: "left",
                     color: "#323F38"
                   }}
-                  className={styles.name}
                 >
                   {data.subtitle}
                 </Div>

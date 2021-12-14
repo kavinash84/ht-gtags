@@ -24,11 +24,10 @@ const DBItem = ({ component, data }) => {
             />
           </div>
           </Link>
-          <Div className={styles.content3}>
-            <Text style={{ fontSize: "18px", fontWeight: "600", textAlign:'left' }}>
+          <Div>
+            <Text style={{ fontSize: "18px", fontWeight: "600", textAlign:'left', padding: '15px 10px 10px'}}>
               {data.title}
             </Text>
-            <p className={styles.contnet3_description}>{data.description}</p>
           </Div>
         </div>
       </Div>

@@ -39,7 +39,7 @@ class ShopOurNewArrivals extends Component {
       <React.Fragment>
         <HeadingHtV1
           mb="20px"
-          mt="70px"
+          mt="100px"
           fontSize="35px"
           style={{
             textAlign: "center",

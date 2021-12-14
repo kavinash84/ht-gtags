@@ -30,7 +30,7 @@ export default class CommonLayout extends Component {
           backgroundColor: "#FFFFFF",
           padding: "30px 30px 10px",
           textAlign: "center",
-          marginTop: "60px"
+          marginTop: "80px"
         }}
       >
         <Div
