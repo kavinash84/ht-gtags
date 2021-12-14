@@ -25,7 +25,7 @@ const DBItem = ({ component, data }) => {
           </div>
           </Link>
           <Div>
-            <Text style={{ fontSize: "18px", fontWeight: "600", textAlign:'left', padding: '15px 10px 10px'}}>
+            <Text style={{ fontSize: "20px", fontWeight: "600", textAlign:'left', padding: '15px 10px 10px'}}>
               {data.title}
             </Text>
           </Div>

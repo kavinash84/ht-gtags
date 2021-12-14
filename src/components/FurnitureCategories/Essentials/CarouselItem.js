@@ -44,7 +44,7 @@ const DBItem = ({ component, data }) => {
               <Div style={{paddingLeft:"10px"}}>
                 <Div
                   style={{
-                    fontSize: "16px",
+                    fontSize: "18px",
                     textAlign: "left",
                     color: "#323F38"
                   }}
@@ -53,7 +53,7 @@ const DBItem = ({ component, data }) => {
                 </Div>
                 <Div
                   style={{
-                    fontSize: "16px",
+                    fontSize: "18px",
                     textAlign: "left",
                     color: "#323F38"
                   }}
@@ -63,7 +63,7 @@ const DBItem = ({ component, data }) => {
 
                 <Heading
                   style={{ textAlign: "left" }}
-                  fontSize="12px"
+                  fontSize="14px"
                   fontFamily="regular"
                   fontWeight="bold"
                   color="#F47020"
