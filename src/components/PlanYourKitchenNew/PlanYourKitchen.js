@@ -197,7 +197,7 @@ class StepsToPlanYourKitchen extends React.Component {
           </Div>
         </Div>
         {/* step 2 */}
-        <Div mt="10px">
+        <Div mt="0px">
           <Heading
             ta="center"
             pt="15px"
@@ -380,7 +380,7 @@ class StepsToPlanYourKitchen extends React.Component {
         </Div>
 
         {/* step 3 */}
-        <Div mt="30px">
+        <Div mt="100px">
           <Heading
             ta="center"
             pt="15px"
@@ -566,7 +566,7 @@ class StepsToPlanYourKitchen extends React.Component {
           </div>
         </Div>
         {/* step 4 */}
-        <Div mt="30px" mb="30px">
+        <Div mt="100px">
           <Heading
             ta="center"
             pt="15px"
@@ -816,7 +816,7 @@ class StepsToPlanYourKitchen extends React.Component {
           </Row>
         </Div>
         {/* step 5 */}
-        <Div mt="0px">
+        <Div mt="100px">
           <Heading
             ta="center"
             pt="15px"
@@ -980,7 +980,7 @@ class StepsToPlanYourKitchen extends React.Component {
           </div>
         </Div>
         {/* step 6 */}
-        <Div mt="30px" mb="30px">
+        <Div mt="100px">
           <Heading
             ta="center"
             pt="15px"
@@ -1033,7 +1033,7 @@ class StepsToPlanYourKitchen extends React.Component {
           </Div>
         </Div>
         {/* step 7 */}
-        <Div mt="10px" mb="30px">
+        <Div mt="100px" mb="30px">
           <Heading
             ta="center"
             pt="15px"
@@ -1292,7 +1292,7 @@ class StepsToPlanYourKitchen extends React.Component {
           </div>
         </Div>
         {/* step 8 */}
-        <Div mt="0px" mb="30px">
+        <Div mt="90px">
           <Heading
             ta="center"
             pt="15px"
