@@ -35,7 +35,7 @@ class Header extends React.Component {
             alignItems: "center"
           }}
         >
-          <Text
+          {/* <Text
             style={{
               marginRight: "20px",
               fontWeight: "600",
@@ -43,7 +43,7 @@ class Header extends React.Component {
             }}
           >
             Plan Your Kitchen
-          </Text>
+          </Text> */}
 
           <Link to="design-build">
             <Text
