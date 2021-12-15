@@ -26,6 +26,7 @@ import Footer from 'components/Footer';
 import MainSlider from 'components/MainSlider';
 import TitleBar from 'components/Listing/TitleBar';
 import BreadCrumb from './BreadCrumb';
+import FurnitureContainer from "../../components/FurnitureCategories/FurnitureContainer";
 
 const styles = require('./Category.scss');
 // import './Category.scss';
@@ -135,7 +136,7 @@ export default class Category extends Component {
           <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
           <meta name="description" content={seoInfo && seoInfo.meta_description} />
           {cmsJson && cmsJson.length ? (
-            <script type="application/ld+json">
+            <script type="application/ldjson">
               {`
               {
                 "@context" : "http://schema.org",
@@ -151,6 +152,13 @@ export default class Category extends Component {
         <Body>
           {/* Header */}
           <Header />
+
+          <div>
+            {" "}
+            {currentCategory === "furniture" ? (
+              <FurnitureContainer />
+            ) : (
+  <div>
 
           {/* Offer Bar */}
           {category.offers && (
@@ -198,6 +206,9 @@ export default class Category extends Component {
             </SeoContent>
           )}
 
+          </div>
+            )}
+          </div>
           {/* Footer */}
           <Footer />
         </Body>
