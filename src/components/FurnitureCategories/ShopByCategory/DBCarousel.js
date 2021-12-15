@@ -47,7 +47,6 @@ export default class DBCarousel extends Component {
               nextArrow: <SampleNextArrow />,
               prevArrow: <SamplePrevArrow />
             }}
-            className="furnitureSlider"
         >
           {data.map(slide => (
             <div key={slide}>
