@@ -4,8 +4,8 @@ import BoxHtV1 from "hometown-components-dev/lib/BoxHtV1";
 import SlickSlider from "components/SlickSlider";
 import DBItem from "./CarouselItem";
 
-const LeftArrow = require("../../../../static/new-home/roundedArrowLeft.svg");
-const RightArrow = require("../../../../static/new-home/roundedArrowRight.svg");
+const previousArrow = require("../../../../static/newHomepage/previousArrow.svg");
+const nextArrow = require("../../../../static/newHomepage/nextArrow.svg");
 
 import "../Slider.css";
 
@@ -15,7 +15,7 @@ function SampleNextArrow(props) {
     <React.Fragment>
       <img
         className={className}
-        src={RightArrow}
+        src={nextArrow}
         onClick={onClick}
         style={{ ...style, width: "15px" }}
       />
@@ -29,7 +29,7 @@ function SamplePrevArrow(props) {
     <React.Fragment>
       <img
         className={className}
-        src={LeftArrow}
+        src={previousArrow}
         onClick={onClick}
         style={{ ...style,  width: "15px" }}
       />
@@ -51,7 +51,6 @@ export default class DBCarousel extends Component {
               nextArrow: <SampleNextArrow />,
               prevArrow: <SamplePrevArrow />
             }}
-            className="furnitureSlider"
           >
             {data.map(slide => (
               <div key={slide}>

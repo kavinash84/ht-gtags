@@ -3,14 +3,19 @@
 
 .breadCrumb_container {
   display: flex;
+  height:100%;
+  width:100%;
+  background-color: #fff8f4;
+  color: #999999;
   .homeList {
     &:after {
       content: url("../../../static/next.svg");
-      padding: 5px;
+      padding: 10px;
     }
     a {
-      color: rgba(7, 7, 7, 0.75);
+      color: #999999;
       font-size: 0.875rem;
+      margin-top: 1px;
     }
   }
 }
@@ -27,6 +32,7 @@
     line-height: 1;
     &:first-child {
       padding-left: 0;
+      margin-top:2px;
     }
     &:after {
       content: url("../../../static/next.svg");
@@ -43,8 +49,9 @@
       }
     }
     a {
-      color: rgba(7, 7, 7, 0.75);
+      color: #999999;
       font-size: 0.875rem;
+      margin-top: 1px;
     }
   }
 }
