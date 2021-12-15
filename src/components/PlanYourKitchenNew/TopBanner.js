@@ -27,7 +27,7 @@ class TopBanner extends React.Component {
           style={{ objectFit: "cover" }}
         />
         <Box
-          style={{ height: "80%", width: "350px", backgroundColor: "#FFF8F4" }}
+          style={{ height: "75%", width: "350px", backgroundColor: "#FFF8F4" }}
           className={styles.subsection}
         >
           {/* <Image src={topBanner.image} alt="topbanner" style={{ objectFit: 'cover', width: '50%', marginLeft: '25%' }} /> */}
