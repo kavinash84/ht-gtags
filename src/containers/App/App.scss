@@ -18,6 +18,16 @@
     border-radius: 20px;
   }
 
+  .furnitureSlider{
+    .slick-next{
+      height:70px !important; 
+      width: 70px !important;
+    }
+    .slick-prev{
+      height:70px !important; 
+      width: 70px !important;
+    }
+  }
   .shadow {
     box-shadow: 0 5px 13px 0 rgba(0, 0, 0, 0.14);
   }
