@@ -32,7 +32,6 @@ const DBItem = ({ component, data }) => {
                 <img
                   src={data.image}
                   alt={data.title}
-                  className={styles.curosalImg}
                   style={{
                     height: "auto",
                     width: "100%",
@@ -46,7 +45,9 @@ const DBItem = ({ component, data }) => {
                   style={{
                     fontSize: "18px",
                     textAlign: "left",
-                    color: "#323F38"
+                    color: "#323F38",
+                    fontWeight: "600",
+                    padding:"10px"
                   }}
                 >
                   {data.title}
@@ -55,7 +56,9 @@ const DBItem = ({ component, data }) => {
                   style={{
                     fontSize: "18px",
                     textAlign: "left",
-                    color: "#323F38"
+                    color: "#323F38",
+                    fontWeight: "600",
+                    padding:"10px"
                   }}
                 >
                   {data.subtitle}
@@ -89,13 +92,12 @@ const DBItem = ({ component, data }) => {
               // pointerEvents: ['/modular-wardrobe'].includes(data.url_key) ? 'none' : ''
             }}
           >
-            <div className={styles.link}>
+            <div>
             <Link to={data.url_key}>
               <div>
                 <img
                   src={data.image}
                   alt={data.title}
-                  className={styles.curosalImg}
                   style={{
                     height: "auto",
                     width: "100%",
@@ -104,14 +106,15 @@ const DBItem = ({ component, data }) => {
                   }}
                 />
               </div>
-              <Div className={styles.content4}>
+              <Div>
                 <Div
                   style={{
                     fontSize: "16px",
                     textAlign: "left",
-                    color: "#323F38"
+                    color: "#323F38",
+                    fontWeight: "600",
+                    padding:"10px"
                   }}
-                  className={styles.name}
                 >
                   {data.title}
                 </Div>
@@ -119,15 +122,16 @@ const DBItem = ({ component, data }) => {
                   style={{
                     fontSize: "16px",
                     textAlign: "left",
-                    color: "#323F38"
+                    color: "#323F38",
+                    fontWeight: "600",
+                    padding:"5px 10px 5px"
                   }}
-                  className={styles.name}
                 >
                   {data.subtitle}
                 </Div>
 
                 <Heading
-                  style={{ textAlign: "left" }}
+                  style={{ textAlign: "left", paddingLeft:"10px" }}
                   fontSize="12px"
                   fontFamily="regular"
                   fontWeight="bold"
