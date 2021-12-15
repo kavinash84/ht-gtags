@@ -278,7 +278,7 @@ export default class Emi extends Component {
                           </td>
                           <td>
                             <Box className={styles.bankImgWrapper}>
-                              INR 2500
+                              INR {bank.min_order_amt}
                             </Box>
                           </td>
                           {bank.slabs.map((slab, i) => {
