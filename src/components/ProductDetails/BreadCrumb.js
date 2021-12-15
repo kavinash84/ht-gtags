@@ -41,7 +41,7 @@ const BreadCrumb = ({ breadcrumbs }) => {
                     <strong>{item.name}</strong>
                   )}
                 </Text>
-                <meta itemProp="position" content={index + 2} />
+                <meta itemProp="position" content={index + 1} />
               </Link>
             </Li>
           );
