@@ -1,6 +1,20 @@
 @import "../../theme/_variables";
 @import "../../theme/_mixins";
 
+.breadCrumb_container {
+  display: flex;
+  .homeList {
+    &:after {
+      content: url("../../../static/next.svg");
+      padding: 5px;
+    }
+    a {
+      color: rgba(7, 7, 7, 0.75);
+      font-size: 0.875rem;
+    }
+  }
+}
+
 .breadCrumbList {
   padding: 0;
   margin: 0;
@@ -15,7 +29,7 @@
       padding-left: 0;
     }
     &:after {
-      content: url('../../../static/next.svg');
+      content: url("../../../static/next.svg");
       position: absolute;
       right: -13px;
       font-size: 14px;
