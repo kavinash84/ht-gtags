@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 const styles = require("./Designbuild.scss");
 const Arrow = require("../../../static/categories/Line.svg");
 const dot = require("../../../static/newHomepage/dots.png");
-const blink = require("../../../static/newHomepage/blink.svg");
+const blink = require("../../../static/new-home/blink.svg");
 const line = require("../../../static/newHomepage/line.svg");
 
 @connect(({ designbuild }) => ({
@@ -42,7 +42,12 @@ class Steps extends React.Component {
               <Box
                 style={{
                   // padding: "18px 0px 22px",
-                   padding: index === 0 ? '0px 0px 22px' : index === 4 ? '18px 0px 0px' : "18px 0px 22px",
+                  padding:
+                    index === 0
+                      ? "0px 0px 22px"
+                      : index === 4
+                      ? "18px 0px 0px"
+                      : "18px 0px 22px"
                   // borderLeft: "2px dashed #F47020"
                 }}
               >
@@ -93,9 +98,12 @@ class Steps extends React.Component {
                   </Box>
                 </div>
               </Box>
-              <div className={styles.descriptionSam}
-              style={{paddingTop:index === 4 ? "15px" : "0px"}}
-              >{description}</div>
+              <div
+                className={styles.descriptionSam}
+                style={{ paddingTop: index === 4 ? "15px" : "0px" }}
+              >
+                {description}
+              </div>
             </Box>
           </div>
         ) : (
@@ -111,7 +119,12 @@ class Steps extends React.Component {
           >
             <Box
               style={{
-                padding: index === 0 ? '0px 0px 22px' : index === 4 ? '18px 0px 0px' : "18px 0px 22px",
+                padding:
+                  index === 0
+                    ? "0px 0px 22px"
+                    : index === 4
+                    ? "18px 0px 0px"
+                    : "18px 0px 22px",
                 borderLeft: "2px dashed #F47020"
               }}
             >
@@ -133,7 +146,7 @@ class Steps extends React.Component {
                       width: "10px",
                       height: "10px",
                       marginLeft: "-5px",
-                      marginTop:index === 4 ? "5px" : "0px"
+                      marginTop: index === 4 ? "5px" : "0px"
                     }}
                   />
                   <div
