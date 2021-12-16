@@ -21,12 +21,3 @@
 .offset .slick-slide:first-child:not(.slick-active) ~ .slick-slide {
   transform: translate3d(20%, 0px, 0px);
 }
-
-/* .furnitureSlider .slick-next{
-  height:70px; 
-  width: 70px;
-  }
-  .furnitureSlider .slick-prev{
-  height:70px; 
-  width: 70px;
-  } */

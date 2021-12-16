@@ -5,8 +5,8 @@ import SlickSlider from "components/SlickSlider";
 import DBItem from "./CarouselItem";
 
 import '../Slider.css';
-const nextArrow = require('../../../../static/newHomepage/nextArrow.svg');
-const previousArrow = require('../../../../static/newHomepage/previousArrow.svg');
+const nextArrow = require('../../../../static/new-home/roundedArrowRight.svg');
+const previousArrow = require('../../../../static/new-home/roundedArrowLeft.svg');
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;

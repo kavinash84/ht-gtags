@@ -4,8 +4,8 @@ import BoxHtV1 from "hometown-components-dev/lib/BoxHtV1";
 import SlickSlider from "components/SlickSlider";
 import DBItem from "./CarouselItem";
 
-const previousArrow = require("../../../../static/newHomepage/previousArrow.svg");
-const nextArrow = require("../../../../static/newHomepage/nextArrow.svg");
+const nextArrow = require('../../../../static/new-home/roundedArrowRight.svg');
+const previousArrow = require('../../../../static/new-home/roundedArrowLeft.svg');
 
 import "../Slider.css";
 
