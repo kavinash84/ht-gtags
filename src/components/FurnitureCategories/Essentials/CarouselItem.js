@@ -47,7 +47,7 @@ const DBItem = ({ component, data }) => {
                     textAlign: "left",
                     color: "#323F38",
                     fontWeight: "600",
-                    padding:"10px"
+                    paddingTop:"15px"
                   }}
                 >
                   {data.title}
@@ -58,10 +58,10 @@ const DBItem = ({ component, data }) => {
                     textAlign: "left",
                     color: "#323F38",
                     fontWeight: "600",
-                    padding:"10px"
+                    paddingTop:"10px"
                   }}
                 >
-                  {data.subtitle}
+                  starting ₹{data.price}
                 </Div>
 
                 <Heading
@@ -71,7 +71,6 @@ const DBItem = ({ component, data }) => {
                   fontWeight="bold"
                   color="#F47020"
                   mt="20px"
-                  color="#323F38"
                 >
                   SHOP NOW
                 </Heading>
