@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const styles = require("./BreadCrumb.scss");
+const homelogo = require('../../../static/categories/ht-home.svg');
 
 const cleanTail = url => {
   if (url[url.length - 1] === "/") {
@@ -27,7 +28,7 @@ const BreadCrumb = ({ urlKey, name, handleCategoryClick }) => {
     <div className={styles.breadCrumb_container}>
       <div className={styles.homeList}>
         <Link to="/">
-          <span>Home</span>
+          <span><img alt="Home" src={homelogo} /></span>
         </Link>
       </div>
       <ul

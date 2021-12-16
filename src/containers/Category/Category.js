@@ -156,7 +156,12 @@ export default class Category extends Component {
           <div>
             {" "}
             {currentCategory === "furniture" ? (
+              <div>
+              <TitleBar title="Home Furnishings">
+            <BreadCrumb urlKey={currentCategory} name={pageTitle} handleCategoryClick={this.handleCategoryClick} />
+             </TitleBar>
               <FurnitureContainer />
+              </div>
             ) : (
   <div>
 
