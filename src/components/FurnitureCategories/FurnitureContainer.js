@@ -99,17 +99,17 @@ class FurnitureContainer extends React.Component {
                       ) : (
                         ''
                       )} 
-                      {/* {cat.component === 12 ? (
+                      {cat.component === 12 ? (
                         <CommonLayout title={cat.title} data={cat.data} />
                       ) : (
                         ''
-                      )}  */}
+                      )} 
                       
-                      {/* {cat.component === 13 ? (
+                      {cat.component === 13 ? (
                         <Outdoor title={cat.title} image1={cat.image1} subtitle1={cat.subtitle1} url_key1={cat.url_key1} image2={cat.image2} subtitle2={cat.subtitle2} url_key2={cat.url_key2} />
                       ) : (
                         ''
-                      )}  */}
+                      )} 
                       
                       {cat.component === 14 ? (
                         <ShopMattress image={cat.image} url_key={cat.url_key} title={cat.title}/>
@@ -117,12 +117,12 @@ class FurnitureContainer extends React.Component {
                         ''
                       )}
        
-                      {/* {cat.component === 15 ? (
+                       {cat.component === 15 ? (
                         <LetUsHelpYou title={cat.title} data={cat.data}
         />
                       ) : (
                         ''
-                      )} */}
+                      )} 
 
 
                 
