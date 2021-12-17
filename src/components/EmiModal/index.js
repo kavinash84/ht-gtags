@@ -260,9 +260,9 @@ export default class Emi extends Component {
                       <th>
                         <Box>24 Months</Box>
                       </th>
-                      {/* <th>
+                      <th>
                         <Box>36 Months</Box>
-                      </th> */}
+                      </th>
                     </tr>
 
                     {data.length > 0 &&
