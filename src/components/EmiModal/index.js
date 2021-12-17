@@ -239,9 +239,9 @@ export default class Emi extends Component {
                       <th>
                         <Box />
                       </th>
-                      <th>
+                      {/* <th>
                         <Box>Minimum Amt.</Box>
-                      </th>
+                      </th> */}
                       <th>
                         <Box>3 Months</Box>
                       </th>
@@ -276,11 +276,11 @@ export default class Emi extends Component {
                               />
                             </Box>
                           </td>
-                          <td>
+                          {/* <td>
                             <Box className={styles.bankImgWrapper}>
                               INR {bank.min_order_amt}
                             </Box>
-                          </td>
+                          </td> */}
                           {bank.slabs.map((slab, i) => {
                             const values = Object.values(slab.slab_keys);
                             return (
