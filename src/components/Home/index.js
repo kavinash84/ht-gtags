@@ -375,7 +375,7 @@ class HomeContainer extends Component {
         <div>
           <HeadingHtV1
             mb="30px"
-            mt="50px"
+            mt="60px"
             fontSize="35px"
             style={{
               textAlign: "center",
@@ -1350,80 +1350,42 @@ class HomeContainer extends Component {
               margin: "10px 5% 30px 5%"
             }}
           >
-            <div style={{ width: "20%", margin: "0 10px" }}>
-              <div
-                style={{
-                  height: "230px",
-                  backgroundColor: "white",
-                  paddingTop: "30px",
-                  paddingBottom: "30px",
-                  paddingLeft: "30px",
-                  paddingRight: "30px",
-                  display: "flex",
-                  justifyContent: "space-evenly",
-                  alignContent: "center",
-                  flexDirection: "column"
-                }}
-              >
-                <Image
-                  src={easyFinance.data[0].url}
-                  width="90%"
-                  style={{ zIndex: "10" }}
-                />
-                <HeadingHtV1
-                  fontSize="20px"
-                  mb="5px"
-                  lineHeight="23px"
-                  style={{ color: "#575757" }}
-                >
-                  {easyFinance.data[0].title}
-                </HeadingHtV1>
+            {easyFinance.data.map(item => (
+              <div style={{ width: "20%", margin: "0 10px" }}>
                 <div
-                  fontSize="10px"
-                  lineHeight="18px"
-                  style={{ color: "#575757" }}
+                  style={{
+                    height: "230px",
+                    backgroundColor: "white",
+                    paddingTop: "30px",
+                    paddingBottom: "30px",
+                    paddingLeft: "30px",
+                    paddingRight: "30px",
+                    display: "flex",
+                    justifyContent: "space-evenly",
+                    alignContent: "center",
+                    flexDirection: "column"
+                  }}
                 >
-                  {easyFinance.data[0].desc}
+                  <Image src={item.url} width="90%" style={{ zIndex: "10" }} />
+                  <HeadingHtV1
+                    fontSize="20px"
+                    mb="5px"
+                    lineHeight="23px"
+                    style={{ color: "#575757" }}
+                  >
+                    {item.title}
+                  </HeadingHtV1>
+                  <div
+                    fontSize="10px"
+                    lineHeight="18px"
+                    style={{ color: "#575757" }}
+                  >
+                    {item.desc}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div style={{ width: "20%", margin: "0 10px" }}>
-              <div
-                style={{
-                  height: "230px",
-                  backgroundColor: "white",
-                  paddingTop: "30px",
-                  paddingBottom: "30px",
-                  paddingLeft: "30px",
-                  paddingRight: "30px",
-                  display: "flex",
-                  justifyContent: "space-evenly",
-                  alignContent: "center",
-                  flexDirection: "column"
-                }}
-              >
-                <Image
-                  src={easyFinance.data[1].url}
-                  width="90%"
-                  style={{ zIndex: "10" }}
-                />
-                <HeadingHtV1
-                  fontSize="20px"
-                  mb="5px"
-                  lineHeight="23px"
-                  style={{ color: "#575757" }}
-                >
-                  {easyFinance.data[1].title}
-                </HeadingHtV1>
-                <div
-                  fontSize="15px"
-                  lineHeight="18px"
-                  style={{ color: "#575757" }}
-                >
-                  {easyFinance.data[1].desc}
-                </div>
-              </div>
-            </div>
+            ))}
+
             {/* <div style={{ width: "20%", margin: "0 10px" }}>
               <div
                 style={{

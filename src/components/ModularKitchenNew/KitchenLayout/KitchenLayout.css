@@ -1,0 +1,31 @@
+.ShopBannercarousel_one {
+  width: 100%;
+}
+.ShopBannercarousel_one .slick-dots {
+  /* margin-top: 15px; */
+  position: relative;
+}
+
+.ShopBannercarousel_one .slick-dots li {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.ShopBannercarousel_one .slick-dots li.slick-active div {
+  border-top: 3px solid black !important;
+  margin-top: -1px;
+}
+
+.offset .slick-slide:first-child:not(.slick-active),
+.offset .slick-slide:first-child:not(.slick-active) ~ .slick-slide {
+  transform: translate3d(20%, 0px, 0px);
+}
+.slick-prev,
+.slick-next {
+  height: 80px !important;
+  width: 80px !important;
+}
+.slick-prev,
+.slick-next {
+  top: 40% !important;
+}

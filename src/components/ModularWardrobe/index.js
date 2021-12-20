@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Helmet from "react-helmet";
 import Header from './Header';
 import TopBanner from './TopBanner';
 import WardrobesForEveryone from './WardrobesForEveryone/WardrobeForEveryone';
@@ -28,6 +29,7 @@ import { sendData, getData } from 'redux/modules/services';
 @connect(
   ({ services, modularwardrobe, userLogin, profile }) => ({
     modularwardrobe,
+    topBanner: modularwardrobe.data.items.text.topBanner,
     typeswardrobes: modularwardrobe.data.items.text.typeswardrobes,
     ...services.modularkitchen
   }),
@@ -64,10 +66,17 @@ class ModularWardrobeContainer extends React.Component {
   }
 
     render() { 
-      const { whyChooseUs, isLoggedIn, fullName, loading, loaded , typeswardrobes} = this.props;
+      const { whyChooseUs, isLoggedIn, fullName, loading, loaded , typeswardrobes, topBanner} = this.props;
         const { showScript } = this.state;
         return (
             <div>
+            <Helmet title={topBanner.title}>
+          <meta
+            name="description"
+            content="HomeTown - Shop online for Furniture, Home Decor, Furnishings, Kitchenware, Dining Products at best prices from HomeTown.in. Get best furniture and home decor products ☆Upto 40% Off, ☆Fast Shipping, ☆High Quality, ☆Premium, ☆Luxury furniture to beautify your ☆bedroom, ☆kitchen, ☆dining room, ☆living and ☆outdoor space ☆Original ☆0% EMI ☆Free Assembly ☆Safe Shipping."
+          />
+         </Helmet>
+
                 <Header handleModal={this.handleModal}/>
                 <TopBanner handleModal={this.handleModal}/> 
                <WhyChose />
@@ -102,7 +111,7 @@ class ModularWardrobeContainer extends React.Component {
 
                <Section p="0" mb="0">
           <ResponsiveModal
-            classNames={{ modal: 'mkModal' }}
+            classNames={{ modal: 'designbuildmodal' }}
             onCloseModal={this.handleModal}
             open={this.state.openModal}
             style={{padding:'0rem'}}
@@ -112,7 +121,7 @@ class ModularWardrobeContainer extends React.Component {
           <Div>
             {!loading && loaded ? (
               <ResponsiveModal
-                classNames={{ modal: 'mkModal' }}
+                classNames={{ modal: 'designbuildmodal' }}
                 onCloseModal={() => this.setState({ open: false })}
                 open={this.state.open}
               >
