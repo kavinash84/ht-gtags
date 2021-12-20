@@ -13,6 +13,7 @@ const settings = {
   slidesToScroll: 1,
   dots: true,
   autoplay: false,
+  arrows: false,
   customPaging: i => (
     <div
       style={{
@@ -55,6 +56,7 @@ class MainSliderTwo extends Component {
             marginBottom: "10px"
           }}
         /> */}
+
         <SlickSlider
           settings={finalSettings}
           afterChange={e => triggerSlideChange(e)}

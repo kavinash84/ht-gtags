@@ -17,10 +17,8 @@ const SliderItem = ({ image, url, onClick, target, onImageClick }) => {
           mt="15px"
           src={image}
           style={{
-            width: "90%",
-            alignItems: "center",
-            marginLeft: "5%",
-            marginRight: "5%"
+            width: "100%",
+            alignItems: "center"
           }}
         />
       </Link>
@@ -37,10 +35,8 @@ const SliderItem = ({ image, url, onClick, target, onImageClick }) => {
           mt="15px"
           src={image}
           style={{
-            width: "90%",
-            alignItems: "center",
-            marginLeft: "5%",
-            marginRight: "5%"
+            width: "100%",
+            alignItems: "center"
           }}
         />
       </Link>
@@ -57,10 +53,8 @@ const SliderItem = ({ image, url, onClick, target, onImageClick }) => {
         mt="15px"
         src={image}
         style={{
-          width: "90%",
-          alignItems: "center",
-          marginLeft: "5%",
-          marginRight: "5%"
+          width: "100%",
+          alignItems: "center"
         }}
       />
     </Link>
