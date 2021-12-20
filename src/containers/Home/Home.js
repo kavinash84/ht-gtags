@@ -161,6 +161,7 @@ export default class Home extends Component {
   render() {
     const {
       banners,
+
       middleBanner,
       homepageCategories,
       cities,
@@ -172,6 +173,7 @@ export default class Home extends Component {
     const { citySelectError, cityErrorMessage } = this.state;
     const {
       secondbanner,
+      secondmainbanner,
       shopByCategories,
       shopByRooms,
       dealsOfthedaybannerone,
@@ -261,6 +263,7 @@ export default class Home extends Component {
             dealoftheday={dealoftheday}
             secondbanner={secondbanner}
             shopByCategories={shopByCategories}
+            secondmainbanner={secondmainbanner}
             shopByRooms={shopByRooms}
             dealsOfthedaybannerone={dealsOfthedaybannerone}
             dealsOfthedaybannerTwo={dealsOfthedaybannerTwo}
