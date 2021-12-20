@@ -8,12 +8,43 @@ import SlickSlider from "../SlickSlider";
 import HeadingHtV1 from "hometown-components-dev/lib/HeadingHtV1";
 import "./ShopNewArrivalSlider.css";
 
+const LeftArrow = require("../../../static/new-home/roundedArrowLeft.svg");
+const RightArrow = require("../../../static/new-home/roundedArrowRight.svg");
+
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <React.Fragment>
+      <img
+        className={className}
+        src={RightArrow}
+        onClick={onClick}
+        style={{ ...style, marginRight: "150px", width: "15px" }}
+      />
+    </React.Fragment>
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <React.Fragment>
+      <img
+        className={className}
+        src={LeftArrow}
+        onClick={onClick}
+        style={{ ...style, marginLeft: "150px", width: "15px" }}
+      />
+    </React.Fragment>
+  );
+}
+
 const settings = {
   slidesToShow: 1,
   slidesToScroll: 1,
   dots: true,
-  autoplay: false,
-  arrows: false,
+  nextArrow: <SampleNextArrow />,
+  prevArrow: <SamplePrevArrow />,
   customPaging: i => (
     <div
       style={{

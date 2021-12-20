@@ -82,7 +82,7 @@ class HomeContainer extends Component {
         {/* shop by categories */}
         <ShopByCategories shopByCategories={shopByCategories} />
         {/* mid banner */}
-        <div>
+        <div style={{marginBottom:'40px'}}>
           <MainSliderTwo secondmainbanner={secondmainbanner} />
         </div>
         {/* shop by room */}
