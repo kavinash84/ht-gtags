@@ -28,7 +28,7 @@ const BankCard = ({
         mr={10}
       />
       <Label for={`bankOptions${name}`} bg="white">
-        <Image src={img} alt={name} maxHeight={24} sx={{ flexShrink: 0 }} />
+        <Image src={img} alt={name} maxHeight={35} sx={{ flexShrink: 0 }} />
       </Label>
     </Flex>
   </Col>
