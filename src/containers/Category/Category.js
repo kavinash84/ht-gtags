@@ -1,34 +1,34 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Helmet from 'react-helmet';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import Helmet from "react-helmet";
+import { connect } from "react-redux";
 
 /* ====== Components ====== */
-import Box from 'hometown-components-dev/lib/BoxHtV1';
-import Body from 'hometown-components-dev/lib/BodyHtV1';
-import Container from 'hometown-components-dev/lib/ContainerHtV1';
-import Section from 'hometown-components-dev/lib/SectionHtV1';
-import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
-import SeoContent from 'hometown-components-dev/lib/SeoContent';
-import Row from 'hometown-components-dev/lib/RowHtV1';
-import Col from 'hometown-components-dev/lib/ColHtV1';
-import Heading from 'hometown-components-dev/lib/HeadingHtV1';
-import Text from 'hometown-components-dev/lib/TextHtV1';
+import Box from "hometown-components-dev/lib/BoxHtV1";
+import Body from "hometown-components-dev/lib/BodyHtV1";
+import Container from "hometown-components-dev/lib/ContainerHtV1";
+import Section from "hometown-components-dev/lib/SectionHtV1";
+import Wrapper from "hometown-components-dev/lib/WrapperHtV1";
+import SeoContent from "hometown-components-dev/lib/SeoContent";
+import Row from "hometown-components-dev/lib/RowHtV1";
+import Col from "hometown-components-dev/lib/ColHtV1";
+import Heading from "hometown-components-dev/lib/HeadingHtV1";
+import Text from "hometown-components-dev/lib/TextHtV1";
 
 /* ====== Selectors ====== */
-import { getText } from 'selectors/homepage';
+import { getText } from "selectors/homepage";
 
 /* ====== Page Components ====== */
-import CommonLayout from 'components/Category/CommonLayout';
-import UnbxdTopSellers from 'components/Category/UnbxdTopSellers';
-import Header from 'components/Header';
-import Footer from 'components/Footer';
-import MainSlider from 'components/MainSlider';
-import TitleBar from 'components/Listing/TitleBar';
-import BreadCrumb from './BreadCrumb';
+import CommonLayout from "components/Category/CommonLayout";
+import UnbxdTopSellers from "components/Category/UnbxdTopSellers";
+import Header from "components/Header";
+import Footer from "components/Footer";
+import MainSlider from "components/MainSlider";
+import TitleBar from "components/Listing/TitleBar";
+import BreadCrumb from "./BreadCrumb";
 import FurnitureContainer from "../../components/FurnitureCategories/FurnitureContainer";
-
-const styles = require('./Category.scss');
+import HomewareContainer from "../../components/HomewareCat/HomewareContainer";
+const styles = require("./Category.scss");
 // import './Category.scss';
 
 const getFaqs = faqs => {
@@ -39,24 +39,22 @@ const getFaqs = faqs => {
     // console.log(faq.ans);
     if (faq) {
       return {
-        '@type': 'Question',
+        "@type": "Question",
         name: ques,
         acceptedAnswer: {
-          '@type': 'Answer',
+          "@type": "Answer",
           text: faq.ans
         }
       };
     }
-    return '';
+    return "";
   });
   return JSON.stringify(seoFaq);
 };
 // const getSubMenu = (categories, key) =>
 //   categories && categories.filter(category => category.url_key === key)[0].children;
 
-@connect(({
- homepage: { menu }, category, category: { data }, pincode
-}) => ({
+@connect(({ homepage: { menu }, category, category: { data }, pincode }) => ({
   menu: menu.data,
   pincode: pincode.selectedPincode,
   category: data && data.items && data.items.text,
@@ -85,34 +83,34 @@ export default class Category extends Component {
         width={[1 / 2, 1 / 2, 1 / 4]}
         textAlign="center"
         sx={{
-          borderRight: 'whiteMedium',
-          '&:last-child': {
-            borderRight: 'none'
+          borderRight: "whiteMedium",
+          "&:last-child": {
+            borderRight: "none"
           }
         }}
       >
         {item.link ? (
           <a href={item.link}>
             <Text variant="textLight" color="white">
-              {item.offer || ''}
+              {item.offer || ""}
             </Text>
             <Heading variant="heading.medium" color="white" py={6}>
-              {item.title || ''}
+              {item.title || ""}
             </Heading>
             <Heading fontSize={16} color="white">
-              {item.description || ''}
+              {item.description || ""}
             </Heading>
           </a>
         ) : (
           <div>
             <Text variant="textLight" color="white">
-              {item.offer || ''}
+              {item.offer || ""}
             </Text>
             <Heading variant="heading.medium" color="white" py={6}>
-              {item.title || ''}
+              {item.title || ""}
             </Heading>
             <Heading fontSize={16} color="white">
-              {item.description || ''}
+              {item.description || ""}
             </Heading>
           </div>
         )}
@@ -132,9 +130,15 @@ export default class Category extends Component {
     /* eslint-disable react/no-danger */
     return (
       <Wrapper>
-        <Helmet title={`${(seoInfo && seoInfo.page_title) || (currentCategory && currentCategory.toUpperCase())}`}>
+        <Helmet
+          title={`${(seoInfo && seoInfo.page_title) ||
+            (currentCategory && currentCategory.toUpperCase())}`}
+        >
           <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
-          <meta name="description" content={seoInfo && seoInfo.meta_description} />
+          <meta
+            name="description"
+            content={seoInfo && seoInfo.meta_description}
+          />
           {cmsJson && cmsJson.length ? (
             <script type="application/ldjson">
               {`
@@ -146,7 +150,7 @@ export default class Category extends Component {
             `}
             </script>
           ) : (
-            ''
+            ""
           )}
         </Helmet>
         <Body>
@@ -157,61 +161,80 @@ export default class Category extends Component {
             {" "}
             {currentCategory === "furniture" ? (
               <div>
-              <TitleBar title="Home Furnishings">
-            <BreadCrumb urlKey={currentCategory} name={pageTitle} handleCategoryClick={this.handleCategoryClick} />
-             </TitleBar>
-              <FurnitureContainer />
+                <TitleBar title="Home Furnishings">
+                  <BreadCrumb
+                    urlKey={currentCategory}
+                    name={pageTitle}
+                    handleCategoryClick={this.handleCategoryClick}
+                  />
+                </TitleBar>
+                <FurnitureContainer />
               </div>
+            ) : currentCategory === "home-decor" ? (
+              <HomewareContainer />
             ) : (
-  <div>
-
-          {/* Offer Bar */}
-          {category.offers && (
-            <Box bg="heading" pt={30} pb={20}>
-              <Container>
-                <Row justifyContent="center">{this.renderOffers(category.offers || [])}</Row>
-              </Container>
-            </Box>
-          )}
-
-          {/* Main Slider */}
-          {category && <MainSlider data={category.main} />}
-
-          {/* Breadcrumb */}
-          <TitleBar title="Home Furnishings">
-            <BreadCrumb urlKey={currentCategory} name={pageTitle} handleCategoryClick={this.handleCategoryClick} />
-          </TitleBar>
-
-          {/* Category Carousel */}
-          {category &&
-            category.sections &&
-            category.sections.map((cat, index) => (
-              <Section key={String(index)}>
-                {cat.title !== '' && (
-                  <Container>{CommonLayout(cat.component, cat.title, cat.data, cat.is_product)}</Container>
+              <div>
+                {/* Offer Bar */}
+                {category.offers && (
+                  <Box bg="heading" pt={30} pb={20}>
+                    <Container>
+                      <Row justifyContent="center">
+                        {this.renderOffers(category.offers || [])}
+                      </Row>
+                    </Container>
+                  </Box>
                 )}
-              </Section>
-            ))}
-          {category && (
-            <Box display="inline-block" width="100%">
-              <Container>
-                <UnbxdTopSellers category={category.title} />
-              </Container>
-            </Box>
-          )}
 
-          {/* SEO Content */}
-          {seoInfo && seoInfo.seo_text && (
-            <SeoContent>
-              <Container>
-                <div className={styles.seoContent}>
-                  <div dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }} />
-                </div>
-              </Container>
-            </SeoContent>
-          )}
+                {/* Main Slider */}
+                {category && <MainSlider data={category.main} />}
 
-          </div>
+                {/* Breadcrumb */}
+                <TitleBar title="Home Furnishings">
+                  <BreadCrumb
+                    urlKey={currentCategory}
+                    name={pageTitle}
+                    handleCategoryClick={this.handleCategoryClick}
+                  />
+                </TitleBar>
+
+                {/* Category Carousel */}
+                {category &&
+                  category.sections &&
+                  category.sections.map((cat, index) => (
+                    <Section key={String(index)}>
+                      {cat.title !== "" && (
+                        <Container>
+                          {CommonLayout(
+                            cat.component,
+                            cat.title,
+                            cat.data,
+                            cat.is_product
+                          )}
+                        </Container>
+                      )}
+                    </Section>
+                  ))}
+                {category && (
+                  <Box display="inline-block" width="100%">
+                    <Container>
+                      <UnbxdTopSellers category={category.title} />
+                    </Container>
+                  </Box>
+                )}
+
+                {/* SEO Content */}
+                {seoInfo && seoInfo.seo_text && (
+                  <SeoContent>
+                    <Container>
+                      <div className={styles.seoContent}>
+                        <div
+                          dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }}
+                        />
+                      </div>
+                    </Container>
+                  </SeoContent>
+                )}
+              </div>
             )}
           </div>
           {/* Footer */}
@@ -226,10 +249,10 @@ Category.defaultProps = {
   category: [],
   // menu: [],
   seoInfo: {
-    seo_text: ''
+    seo_text: ""
   },
-  selectedPincode: '',
-  categoryText: { title: '' }
+  selectedPincode: "",
+  categoryText: { title: "" }
 };
 
 Category.propTypes = {

@@ -1,62 +1,74 @@
-require('babel-polyfill');
+require("babel-polyfill");
 
 // Webpack config for development
-var fs = require('fs');
-var path = require('path');
-var webpack = require('webpack');
-var helpers = require('./helpers');
+var fs = require("fs");
+var path = require("path");
+var webpack = require("webpack");
+var helpers = require("./helpers");
 
-var assetsPath = path.resolve(__dirname, '../static/dist');
-var host = (process.env.HOST || 'localhost');
-var port = (+process.env.PORT + 1) || 3001;
+var assetsPath = path.resolve(__dirname, "../static/dist");
+var host = process.env.HOST || "localhost";
+var port = +process.env.PORT + 1 || 3001;
 
-var ReactLoadablePlugin = require('react-loadable/webpack').ReactLoadablePlugin;
+var ReactLoadablePlugin = require("react-loadable/webpack").ReactLoadablePlugin;
 
 // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
-var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
-var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools'));
+var WebpackIsomorphicToolsPlugin = require("webpack-isomorphic-tools/plugin");
+var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
+  require("./webpack-isomorphic-tools")
+);
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-var babelrc = fs.readFileSync('./.babelrc');
+var babelrc = fs.readFileSync("./.babelrc");
 var babelrcObject = {};
 
 try {
   babelrcObject = JSON.parse(babelrc);
 } catch (err) {
-  console.error('==>     ERROR: Error parsing your .babelrc.');
+  console.error("==>     ERROR: Error parsing your .babelrc.");
   console.error(err);
 }
 
-var babelrcObjectDevelopment = babelrcObject.env && babelrcObject.env.development || {};
+var babelrcObjectDevelopment =
+  (babelrcObject.env && babelrcObject.env.development) || {};
 
 // merge global and dev-only plugins
 var combinedPlugins = babelrcObject.plugins || [];
 combinedPlugins = combinedPlugins.concat(babelrcObjectDevelopment.plugins);
 
-var babelLoaderQuery = Object.assign({}, babelrcObject, babelrcObjectDevelopment, { plugins: combinedPlugins });
+var babelLoaderQuery = Object.assign(
+  {},
+  babelrcObject,
+  babelrcObjectDevelopment,
+  { plugins: combinedPlugins }
+);
 delete babelLoaderQuery.env;
 
-var validDLLs = helpers.isValidDLLs('vendor', assetsPath);
-if (process.env.WEBPACK_DLLS === '1' && !validDLLs) {
-  process.env.WEBPACK_DLLS = '0';
-  console.warn('webpack dlls disabled');
+var validDLLs = helpers.isValidDLLs("vendor", assetsPath);
+if (process.env.WEBPACK_DLLS === "1" && !validDLLs) {
+  process.env.WEBPACK_DLLS = "0";
+  console.warn("webpack dlls disabled");
 }
 
-var webpackConfig = module.exports = {
-  devtool: 'inline-source-map',
-  context: path.resolve(__dirname, '..'),
+var webpackConfig = (module.exports = {
+  devtool: "inline-source-map",
+  context: path.resolve(__dirname, ".."),
   entry: {
-    'main': [
-      'webpack-hot-middleware/client?path=http://' + host + ':' + port + '/__webpack_hmr',
-      'react-hot-loader/patch',
-      './src/client.js'
+    main: [
+      "webpack-hot-middleware/client?path=http://" +
+        host +
+        ":" +
+        port +
+        "/__webpack_hmr",
+      "react-hot-loader/patch",
+      "./src/client.js"
     ]
   },
   output: {
     path: assetsPath,
-    filename: '[name]-[hash].js',
-    chunkFilename: '[name]-[chunkhash].js',
-    publicPath: 'http://' + host + ':' + port + '/dist/'
+    filename: "[name]-[hash].js",
+    chunkFilename: "[name]-[chunkhash].js",
+    publicPath: "http://" + host + ":" + port + "/dist/"
   },
   performance: {
     hints: false
@@ -65,61 +77,71 @@ var webpackConfig = module.exports = {
     rules: [
       {
         test: /\.jsx?$/,
-        loader: 'happypack/loader?id=jsx',
-        include: [path.resolve(__dirname, '../src')]
-      }, {
-        test: /\.json$/,
-        loader: 'happypack/loader?id=json',
-        include: [path.resolve(__dirname, '../src')]
-      }, {
-        test: /\.less$/,
-        loader: 'happypack/loader?id=less',
-        include: [path.resolve(__dirname, '../src')]
-      }, {
-        test: /\.scss$/,
-        loader: 'happypack/loader?id=sass',
-        include: [path.resolve(__dirname, '../src')]
+        loader: "happypack/loader?id=jsx",
+        include: [path.resolve(__dirname, "../src")]
       },
-       {
+      {
+        test: /\.json$/,
+        loader: "happypack/loader?id=json",
+        include: [path.resolve(__dirname, "../src")]
+      },
+      {
+        test: /\.less$/,
+        loader: "happypack/loader?id=less",
+        include: [path.resolve(__dirname, "../src")]
+      },
+      {
+        test: /\.scss$/,
+        loader: "happypack/loader?id=sass",
+        include: [path.resolve(__dirname, "../src")]
+      },
+      {
         test: /\.css$/,
-        loader: 'style-loader!css-loader',
-        include: [path.resolve(__dirname, '../src'), path.resolve(__dirname, '../node_modules')]
+        loader: "style-loader!css-loader",
+        include: [
+          path.resolve(__dirname, "../src"),
+          path.resolve(__dirname, "../node_modules")
+        ]
       },
       {
         test: /\.woff?(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader',
+        loader: "url-loader",
         options: {
           limit: 10240,
-          mimetype: 'application/font-woff'
+          mimetype: "application/font-woff"
         }
       },
       {
         test: /\.woff2?(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader',
+        loader: "url-loader",
         options: {
           limit: 10240,
-          mimetype: 'application/font-woff'
+          mimetype: "application/font-woff"
         }
-      }, {
+      },
+      {
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader',
+        loader: "url-loader",
         options: {
           limit: 10240,
-          mimetype: 'application/octet-stream'
+          mimetype: "application/octet-stream"
         }
-      }, {
+      },
+      {
         test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'file-loader'
-      }, {
+        loader: "file-loader"
+      },
+      {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader',
+        loader: "url-loader",
         options: {
           limit: 10240,
-          mimetype: 'image/svg+xml'
+          mimetype: "image/svg+xml"
         }
-      }, {
-        test: webpackIsomorphicToolsPlugin.regular_expression('images'),
-        loader: 'url-loader',
+      },
+      {
+        test: webpackIsomorphicToolsPlugin.regular_expression("images"),
+        loader: "url-loader",
         options: {
           limit: 10240
         }
@@ -127,29 +149,26 @@ var webpackConfig = module.exports = {
     ]
   },
   resolve: {
-    modules: [
-      'src',
-      'node_modules'
-    ],
-    extensions: ['.json', '.js', '.jsx', '.css']
+    modules: ["src", "node_modules"],
+    extensions: [".json", ".js", ".jsx", ".css"]
   },
   plugins: [
     new webpack.LoaderOptionsPlugin({
       test: /\.(less|scss|css)/,
       options: {
-        postcss: function (webpack) {
+        postcss: function(webpack) {
           return [
             require("postcss-import")({ addDependencyTo: webpack }),
             require("postcss-url")(),
-            require("postcss-cssnext")({ browsers: 'last 2 version' }),
-            require('lost')(),
+            require("postcss-cssnext")({ browsers: "last 2 version" }),
+            require("lost")(),
             // add your "plugins" here
             // ...
             // and if you want to compress,
             // just use css-loader option that already use cssnano under the hood
             require("postcss-browser-reporter")(),
-            require("postcss-reporter")(),
-          ]
+            require("postcss-reporter")()
+          ];
         }
       }
     }),
@@ -160,87 +179,95 @@ var webpackConfig = module.exports = {
     new webpack.IgnorePlugin(/webpack-stats\.json$/),
 
     new webpack.DefinePlugin({
-      'process.env.APIHOST': '"stage-api.hometown.in/api/"',
-      'process.env.SITE_URL': '"localhost:3000"',
-      'process.env.PAYMENT_URL': '"https://stage-alice.hometown.in/checkout/finish/payment/"',
+      "process.env.APIHOST": '"beta-api.hometown.in/api/"',
+      "process.env.SITE_URL": '"localhost:3000"',
+      "process.env.PAYMENT_URL":
+        '"https://beta-alice.hometown.in/checkout/finish/payment/"',
       __CLIENT__: true,
       __SERVER__: false,
       __DEVELOPMENT__: true,
-      __DEVTOOLS__: true  // <-------- DISABLE redux-devtools HERE
+      __DEVTOOLS__: true // <-------- DISABLE redux-devtools HERE
     }),
 
     webpackIsomorphicToolsPlugin.development(),
 
     new ReactLoadablePlugin({
-      filename: path.join(assetsPath, 'loadable-chunks.json')
+      filename: path.join(assetsPath, "loadable-chunks.json")
     }),
 
-    helpers.createHappyPlugin('jsx', [
+    helpers.createHappyPlugin("jsx", [
       {
-        loader: 'react-hot-loader/webpack'
-      }, {
-        loader: 'babel-loader',
+        loader: "react-hot-loader/webpack"
+      },
+      {
+        loader: "babel-loader",
         options: babelLoaderQuery
-      }, {
-        loader: 'eslint-loader',
+      },
+      {
+        loader: "eslint-loader",
         options: { emitWarning: true }
       }
     ]),
-    helpers.createHappyPlugin('less', [
+    helpers.createHappyPlugin("less", [
       {
-        loader: 'style-loader',
+        loader: "style-loader",
         options: { sourceMap: true }
-      }, {
-        loader: 'css-loader',
+      },
+      {
+        loader: "css-loader",
         options: {
           modules: true,
           importLoaders: 2,
           sourceMap: true,
-          localIdentName: '[local]___[hash:base64:5]'
+          localIdentName: "[local]___[hash:base64:5]"
         }
-      }, {
-        loader: 'postcss-loader',
+      },
+      {
+        loader: "postcss-loader",
         options: {
           sourceMap: true
         }
-      }, {
-        loader: 'less-loader',
+      },
+      {
+        loader: "less-loader",
         options: {
-          outputStyle: 'expanded',
+          outputStyle: "expanded",
           sourceMap: true
         }
       }
     ]),
-    helpers.createHappyPlugin('sass', [
+    helpers.createHappyPlugin("sass", [
       {
-        loader: 'style-loader',
+        loader: "style-loader",
         options: { sourceMap: true }
-      }, {
-        loader: 'css-loader',
+      },
+      {
+        loader: "css-loader",
         options: {
           modules: true,
           importLoaders: 2,
           sourceMap: true,
-          localIdentName: '[local]___[hash:base64:5]'
+          localIdentName: "[local]___[hash:base64:5]"
         }
-      }, {
-        loader: 'postcss-loader',
+      },
+      {
+        loader: "postcss-loader",
         options: {
           sourceMap: true
         }
-      }, {
-        loader: 'sass-loader',
+      },
+      {
+        loader: "sass-loader",
         options: {
-          outputStyle: 'expanded',
+          outputStyle: "expanded",
           sourceMap: true
         }
       }
-    ]),
+    ])
     // new BundleAnalyzerPlugin() // Bundle analyzer
   ]
-};
+});
 
-
-if (process.env.WEBPACK_DLLS === '1' && validDLLs) {
-  helpers.installVendorDLL(webpackConfig, 'vendor');
+if (process.env.WEBPACK_DLLS === "1" && validDLLs) {
+  helpers.installVendorDLL(webpackConfig, "vendor");
 }
