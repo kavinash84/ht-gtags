@@ -53,7 +53,7 @@ const EMI = ({
             name={bank.bank}
             img={
               ["citibank", "AMEX", "IndusInd", "Bob", "Yes"].includes(bank.bank)
-                ? `https://www.hometown.in/media/cms/D/BanklLogo/${bank.bank}.png`
+                ? `https://www.hometown.in/media/cms/Bank/${bank.bank}.jpeg`
                 : `https://static.hometown.in/media/cms/BankLOGO/${bank.bank}.gif`
             }
             currentSelection={currentSelection}
