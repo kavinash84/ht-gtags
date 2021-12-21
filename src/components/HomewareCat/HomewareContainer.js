@@ -6,12 +6,14 @@ import Section from "hometown-components-dev/lib/Section";
 import { connect } from "react-redux";
 import MainFurnitureSlider from "../FurnitureCategories/MainFurnitureSlider";
 import ShopByCategory from "./ShopByCategory/ShopByCategory";
+import ShopByCollection from "./ShopByCollection";
 // import CommonLayout from "./CommonLayout/CommonLayout";
+
 // import ShopOurNewArrivals from "./ShopOurNewArrivals";
-// import Essentials from "./Essentials/Essentials";
+import BestBuy from "./BestBuy/BestBuy";
 // import LetUsHelpYou from "./LetUsHelp";
 // import ShopMattress from "./ShopMattress";
-// import BannerImage from "./BannerImage";
+import BannerImage from "./BannerImage";
 // import Outdoor from "./Outdoor";
 // import BestSeller from "./BestSeller";
 @connect(({ homepage: { menu }, category, category: { data } }) => ({
@@ -39,6 +41,34 @@ class HomewareContainer extends React.Component {
               <div key={String(index)} style={{ width: "100%" }}>
                 {cat.component === 1 ? (
                   <ShopByCategory title={cat.title} data={cat.data} />
+                ) : (
+                  ""
+                )}
+                {cat.component === 2 ? (
+                  <BannerImage
+                    alt={cat.title}
+                    src={cat.image}
+                    url_key={cat.url_key}
+                  />
+                ) : (
+                  ""
+                )}
+                {cat.component === 3 ? (
+                  <ShopByCollection title={cat.title} data={cat.data} />
+                ) : (
+                  ""
+                )}
+                {cat.component === 4 ? (
+                  <BestBuy mainTitle={cat.title} data={cat.data} />
+                ) : (
+                  ""
+                )}
+                {cat.component === 5 ? (
+                  <BannerImage
+                    alt={cat.title}
+                    src={cat.image}
+                    url_key={cat.url_key}
+                  />
                 ) : (
                   ""
                 )}
