@@ -8,7 +8,7 @@ import Section from 'hometown-components-dev/lib/SectionHtV1';
 const TitleBar = ({ children, ...props }) => (
   <div>
     {props.display !== 'none' && (
-      <Section my={0} p="18px 10px" bg="#fff8f4">
+      <Section my={0} p="18px 10px" bg="bg">
         <Container type="container" pr="0" pl="0">
           {children}
         </Container>

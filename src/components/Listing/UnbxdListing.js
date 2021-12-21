@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Helmet from 'react-helmet';
 
 export default class SearchResults extends Component {
   // componentDidMount() {
@@ -24,6 +25,10 @@ export default class SearchResults extends Component {
   render() {
     return (
       <React.Fragment>
+      <Helmet>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.7.0/nouislider.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.7.0/nouislider.css" />
+      </Helmet>
         <div id="listing-ht">
           <div className="empty_div" />
           <div id="hometown_1573910556">
