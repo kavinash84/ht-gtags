@@ -14,11 +14,13 @@ import Row from "hometown-components-dev/lib/RowHtV1";
  */
 import { getEmiBanks } from "selectors/payments";
 import BankCard from "./BankCard";
+import DebitBankCard from "./DebitBankCard";
 import CardForm from "./CardForm";
 
 const mapStateToProps = ({ paymentoptions }) => ({
   selectedGateway: paymentoptions.selectedGateway,
   emiBankDetails: getEmiBanks(paymentoptions),
+  emiDebitCardDetails: paymentoptions.data.paymentData.emiDebitCardDetails,
   details: paymentoptions.paymentMethodDetails.Emi
 });
 
@@ -31,17 +33,19 @@ const EMI = ({
   selectedGateway,
   setPaymentDetails,
   emiBankDetails,
+  emiDebitCardDetails,
   details,
   currentSelection
 }) => {
   const currentBankDetails = emiBankDetails.filter(
     item => item.bank === details.emiBank
   )[0];
+  const currentDebitBankDetails = Object.keys(emiDebitCardDetails);
   return (
     <Box>
-      <Box pb={20}>
+      <Box pb={20} >
         <Label>
-          Choose From Preferred Bank (Available On Credit Cards Only)
+          Choose From Preferred Bank (Available On Credit Cards)
         </Label>
       </Box>
       <Row pb={20}>
@@ -61,6 +65,30 @@ const EMI = ({
           />
         ))}
       </Row>
+
+      <Box pb={20} mt="50px">
+        <Label>
+          Choose From Preferred Bank (Available On Debit Cards)
+        </Label>
+      </Box>
+      <Row pb={20}>
+        {currentDebitBankDetails.map(bank => (
+          <DebitBankCard
+            setPaymentDetails={setPaymentDetails}
+            gateway={selectedGateway}
+            detailkey="emiBank"
+            name={bank}
+            img={
+              ["citibank", "AMEX", "IndusInd", "Bob", "Yes"].includes(bank)
+                ? `https://www.hometown.in/media/cms/Bank/${bank}.jpeg`
+                : `https://static.hometown.in/media/cms/BankLOGO/${bank}.gif`
+            }
+            currentSelection={currentSelection}
+            key={bank}
+          />
+        ))}
+      </Row>
+
       {currentBankDetails && (
         <Box>
           <Box sx={{ overflow: "auto" }}>

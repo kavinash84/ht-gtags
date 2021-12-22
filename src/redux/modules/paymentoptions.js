@@ -43,10 +43,13 @@ const SUBMIT_PAYMENT_DETAILS_FUTURE_PAY = 'paymentOptions/SUBMIT_PAYMENT_DETAILS
 const SUBMIT_PAYMENT_DETAILS_FUTURE_PAY_SUCCESS = 'paymentOptions/SUBMIT_PAYMENT_DETAILS_FUTURE_PAY_SUCCESS';
 const SUBMIT_PAYMENT_DETAILS_FUTURE_PAY_FAIL = 'paymentOptions/SUBMIT_PAYMENT_DETAILS_FUTURE_PAY_FAIL';
 
+const SET_CARD_TYPE_CREDIT="paymentOption/SET_CARD_TYPE_CREDIT";
+
 const paymentJSON = {
   session_id: '',
   future_pay_redeem_amount: '',
   isPayFromHTWallet: '',
+  isCreditSelected:"",
   payment_method_type: '',
   payment_method: '',
   cc_number: '',
@@ -343,6 +346,7 @@ const initialState = {
   loaded: false,
   data: null,
   selectedGateway: 'CreditCard',
+  isCreditSelected:false,
   isFormValid: false,
   cardType: 'other',
   cardTypeError: null,
@@ -614,6 +618,13 @@ export default function reducer(state = initialState, action = {}) {
         futurePayRedeemAmountError: validateFuturePay(action.amount, action.cartValue).error,
         futurePayRedeemAmountErrorMessage: validateFuturePay(action.amount, action.cartValue).msg
       };
+
+      case SET_CARD_TYPE_CREDIT:
+        return {
+          ...state,
+          isCreditSelected : action.result
+        }
+
     default:
       return state;
   }
@@ -854,3 +865,8 @@ export const setFuturePayAmount = (amount, cartValue) => ({
   amount,
   cartValue
 });
+
+export const setCreditCard = (result) => ({
+  type: SET_CARD_TYPE_CREDIT,
+  result
+ });

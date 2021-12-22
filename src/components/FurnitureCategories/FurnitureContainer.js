@@ -82,7 +82,7 @@ class FurnitureContainer extends React.Component {
                         ''
                       )} 
                       {cat.component === 9 ? (
-                        <BestSeller />
+                        <BestSeller category={cat.title}/>
                       ) : (
                         ''
                       )} 
