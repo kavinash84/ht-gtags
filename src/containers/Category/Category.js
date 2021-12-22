@@ -28,6 +28,7 @@ import TitleBar from "components/Listing/TitleBar";
 import BreadCrumb from "./BreadCrumb";
 import FurnitureContainer from "../../components/FurnitureCategories/FurnitureContainer";
 import HomewareContainer from "../../components/HomewareCat/HomewareContainer";
+import HomeFurnishingContainer from "../../components/HomewareCat/HomeFurnishingContainer";
 const styles = require("./Category.scss");
 // import './Category.scss';
 
@@ -172,6 +173,8 @@ export default class Category extends Component {
               </div>
             ) : currentCategory === "home-decor" ? (
               <HomewareContainer />
+            ) : currentCategory === "home-furnishings" ? (
+              <HomeFurnishingContainer />
             ) : (
               <div>
                 {/* Offer Bar */}
