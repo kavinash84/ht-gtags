@@ -9,7 +9,7 @@ const adjustSlides = length => ({
   slidesToShow: 4,
   slidesToScroll: 1,
   infinite: false,
-  autoplay: false,
+  autoplay: true,
   dots: false,
 
   customPaging: i => (

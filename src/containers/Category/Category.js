@@ -29,6 +29,7 @@ import BreadCrumb from "./BreadCrumb";
 import FurnitureContainer from "../../components/FurnitureCategories/FurnitureContainer";
 import HomewareContainer from "../../components/HomewareCat/HomewareContainer";
 import HomeFurnishingContainer from "../../components/HomewareCat/HomeFurnishingContainer";
+import TablewareKitchenware from "../../components/HomewareCat/TablewareKitchenware";
 const styles = require("./Category.scss");
 // import './Category.scss';
 
@@ -175,6 +176,8 @@ export default class Category extends Component {
               <HomewareContainer />
             ) : currentCategory === "home-furnishings" ? (
               <HomeFurnishingContainer />
+            ) : currentCategory === "tableware-kitchenware" ? (
+              <TablewareKitchenware />
             ) : (
               <div>
                 {/* Offer Bar */}
