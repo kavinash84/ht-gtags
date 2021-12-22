@@ -16,6 +16,7 @@ import BestBuy from "./BestBuy/BestBuy";
 import BannerImage from "./BannerImage";
 // import Outdoor from "./Outdoor";
 // import BestSeller from "./BestSeller";
+import RecommendForYou from "./RecommendForYou/RecommendForYou";
 @connect(({ homepage: { menu }, category, category: { data } }) => ({
   menu: menu.data,
   category: data && data.items && data.items.text,
@@ -69,6 +70,11 @@ class HomewareContainer extends React.Component {
                     src={cat.image}
                     url_key={cat.url_key}
                   />
+                ) : (
+                  ""
+                )}
+                {cat.component === 6 ? (
+                  <RecommendForYou title={cat.title} data={cat.data} />
                 ) : (
                   ""
                 )}
