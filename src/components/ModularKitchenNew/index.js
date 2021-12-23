@@ -75,7 +75,7 @@ class ModularKitchenNewContainer extends React.Component {
           {showScript ? (
             // <!-- Facebook Pixel Code -->
             <script>
-              {window.addEventListener("load", function() {
+              {`window.addEventListener("load", function() {
                 var x = 0;
                 var myVar = setInterval(function() {
                   if (
@@ -90,7 +90,7 @@ class ModularKitchenNewContainer extends React.Component {
                     clearInterval(myVar);
                   }
                 }, 1000);
-              })}
+              })`}
             </script>
           ) : // <!-- End Facebook Pixel Code -->
           null}
