@@ -59,7 +59,7 @@ const EMI = ({
             detailkey="emiBank"
             name={bank.bank}
             img={
-              ["citibank", "AMEX", "IndusInd", "Bob", "Yes"].includes(bank.bank)
+              ["citibank", "AMEX", "IndusInd", "Bob", "Yes", "federal"].includes(bank.bank)
                 ? `https://www.hometown.in/media/cms/Bank/${bank.bank}.jpeg`
                 : `https://static.hometown.in/media/cms/BankLOGO/${bank.bank}.gif`
             }
@@ -160,7 +160,7 @@ const EMI = ({
             detailkey="emiBank"
             name={bank}
             img={
-              ["citibank", "AMEX", "IndusInd", "Bob", "Yes"].includes(bank)
+              ["citibank", "AMEX", "IndusInd", "Bob", "Yes" , "federal"].includes(bank)
                 ? `https://www.hometown.in/media/cms/Bank/${bank}.jpeg`
                 : `https://static.hometown.in/media/cms/BankLOGO/${bank}.gif`
             }
