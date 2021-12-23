@@ -16,6 +16,7 @@ import CustomerStories from "./CustomerStories/CustomerStories";
 import MakeItYourOwn from "./MakeItYourOwn";
 import DreamKitchen from "./DreamKitchen";
 import OurPartners from "./OurPartners";
+import Helmet from "react-helmet";
 import Div from "hometown-components-dev/lib/BoxHtV1";
 import ModularKitchenFormModal from "./ ModularKitchenFormModal";
 import FourSteps from "./FourSteps";
@@ -35,6 +36,7 @@ class ModularKitchenNewContainer extends React.Component {
   state = {
     openModal: false,
     open: false,
+    showScript: false,
     showScript: false
   };
   handleModal = () => {
@@ -58,12 +60,41 @@ class ModularKitchenNewContainer extends React.Component {
     this.setState({
       showScript: true
     });
+    setTimeout(() => {
+      this.setState({
+        showScript: false
+      });
+    }, 2000);
   };
   render() {
     const { whyChooseUs, isLoggedIn, fullName, loading, loaded } = this.props;
     const { showScript } = this.state;
     return (
       <div>
+        <Helmet>
+          {showScript ? (
+            // <!-- Facebook Pixel Code -->
+            <script>
+              {window.addEventListener("load", function() {
+                var x = 0;
+                var myVar = setInterval(function() {
+                  if (
+                    jQuery("h2:contains(Thank You For Your)").is(":visible")
+                  ) {
+                    if (x == 0) {
+                      gtag("event", "conversion", {
+                        send_to: "AW-832074530/h7wJCMXmzdcCEKLm4YwD"
+                      });
+                      x = 1;
+                    }
+                    clearInterval(myVar);
+                  }
+                }, 1000);
+              })}
+            </script>
+          ) : // <!-- End Facebook Pixel Code -->
+          null}
+        </Helmet>
         <Header handleModal={this.handleModal} />
         <TopBanner handleModal={this.handleModal} />
         <HomeTownAdvantage />
