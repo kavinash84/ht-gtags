@@ -42,7 +42,8 @@ function SamplePrevArrow(props) {
 const adjustSlides = length => ({
   slidesToShow: 3,
   slidesToScroll: 1,
-  autoplay: false,
+  autoplay: true,
+  speed: 500,
   infinite: false,
   nextArrow: <SampleNextArrow />,
   prevArrow: <SamplePrevArrow />
@@ -50,7 +51,8 @@ const adjustSlides = length => ({
 const adjustSlidesitems = length => ({
   slidesToShow: 4,
   slidesToScroll: 1,
-  autoplay: false,
+  autoplay: true,
+  speed: 500,
   infinite: false,
   nextArrow: <SampleNextArrow />,
   prevArrow: <SamplePrevArrow />
