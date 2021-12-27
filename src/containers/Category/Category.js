@@ -31,7 +31,7 @@ import HomewareContainer from "../../components/HomewareCat/HomewareContainer";
 import HomeFurnishingContainer from "../../components/HomewareCat/HomeFurnishingContainer";
 import TablewareKitchenware from "../../components/HomewareCat/TablewareKitchenware";
 const styles = require("./Category.scss");
-// import './Category.scss';
+// import "./Category.scss";
 
 const getFaqs = faqs => {
   const seoFaq = JSON.parse(faqs).map(faq => {
@@ -53,8 +53,9 @@ const getFaqs = faqs => {
   });
   return JSON.stringify(seoFaq);
 };
-// const getSubMenu = (categories, key) =>
-//   categories && categories.filter(category => category.url_key === key)[0].children;
+const getSubMenu = (categories, key) =>
+  categories &&
+  categories.filter(category => category.url_key === key)[0].children;
 
 @connect(({ homepage: { menu }, category, category: { data }, pincode }) => ({
   menu: menu.data,
@@ -127,7 +128,7 @@ export default class Category extends Component {
         params: { category: currentCategory }
       }
     } = this.props;
-    // const { cms_json: cmsJson } = seoInfo;
+    const { cms_json: cmsJson } = seoInfo;
 
     /* eslint-disable react/no-danger */
     return (
@@ -141,7 +142,7 @@ export default class Category extends Component {
             name="description"
             content={seoInfo && seoInfo.meta_description}
           />
-          {/* {cmsJson && cmsJson.length ? (
+          {cmsJson && cmsJson.length ? (
             <script type="application/ldjson">
               {`
               {
@@ -153,7 +154,7 @@ export default class Category extends Component {
             </script>
           ) : (
             ""
-          )} */}
+          )}
         </Helmet>
         <Body>
           {/* Header */}
@@ -227,20 +228,19 @@ export default class Category extends Component {
                     </Container>
                   </Box>
                 )}
-
-                {/* SEO Content */}
-                {/* {seoInfo && seoInfo.seo_text && (
-                  <SeoContent>
-                    <Container>
-                      <div className={styles.seoContent}>
-                        <div
-                          dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }}
-                        />
-                      </div>
-                    </Container>
-                  </SeoContent>
-                )} */}
               </div>
+            )}
+            {/* SEO Content */}
+            {seoInfo && seoInfo.seo_text && (
+              <SeoContent>
+                <Container>
+                  <div className={styles.seoContent}>
+                    <div
+                      dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }}
+                    />
+                  </div>
+                </Container>
+              </SeoContent>
             )}
           </div>
           {/* Footer */}
