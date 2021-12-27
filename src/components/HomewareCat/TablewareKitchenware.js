@@ -15,7 +15,7 @@ import BestBuy from "./BestBuy/BestBuy";
 // import ShopMattress from "./ShopMattress";
 import BannerImage from "./BannerImage";
 // import Outdoor from "./Outdoor";
-// import BestSeller from "./BestSeller";
+import BestSeller from "./BestSeller";
 import RecommendForYou from "./RecommendForYou/RecommendForYou";
 @connect(({ homepage: { menu }, category, category: { data } }) => ({
   menu: menu.data,
@@ -73,109 +73,12 @@ class TablewareKitchenware extends React.Component {
                 ) : (
                   ""
                 )}
-                {cat.component === 6 ? (
+                {cat.component === 6 ? <BestSeller /> : ""}
+                {cat.component === 7 ? (
                   <RecommendForYou title={cat.title} data={cat.data} />
                 ) : (
                   ""
                 )}
-                {/* {cat.component === 2 ? (
-                  <CommonLayout title={cat.title} data={cat.data} />
-                ) : (
-                  ""
-                )}
-                {cat.component === 3 ? (
-                  <ShopOurNewArrivals
-                    mainTitle={cat.mainTitle}
-                    data={cat.data}
-                  />
-                ) : (
-                  ""
-                )}
-
-                {cat.component === 4 ? (
-                  <CommonLayout title={cat.title} data={cat.data} />
-                ) : (
-                  ""
-                )}
-                {cat.component === 5 ? (
-                  <Essentials mainTitle={cat.title} data={cat.data} />
-                ) : (
-                  ""
-                )}
-
-                {cat.component === 6 ? (
-                  <CommonLayout title={cat.title} data={cat.data} />
-                ) : (
-                  ""
-                )}
-
-                {cat.component === 7 ? (
-                  <BannerImage
-                    alt={cat.title}
-                    src={cat.image}
-                    url_key={cat.url_key}
-                  />
-                ) : (
-                  ""
-                )}
-
-                {cat.component === 8 ? (
-                  <CommonLayout title={cat.title} data={cat.data} />
-                ) : (
-                  ""
-                )}
-                {cat.component === 9 ? <BestSeller /> : ""}
-
-                {cat.component === 10 ? (
-                  <BannerImage
-                    alt={cat.title}
-                    src={cat.image}
-                    url_key={cat.url_key}
-                  />
-                ) : (
-                  ""
-                )}
-
-                {cat.component === 11 ? (
-                  <CommonLayout title={cat.title} data={cat.data} />
-                ) : (
-                  ""
-                )}
-                {cat.component === 12 ? (
-                  <CommonLayout title={cat.title} data={cat.data} />
-                ) : (
-                  ""
-                )}
-
-                {cat.component === 13 ? (
-                  <Outdoor
-                    title={cat.title}
-                    image1={cat.image1}
-                    subtitle1={cat.subtitle1}
-                    url_key1={cat.url_key1}
-                    image2={cat.image2}
-                    subtitle2={cat.subtitle2}
-                    url_key2={cat.url_key2}
-                  />
-                ) : (
-                  ""
-                )}
-
-                {cat.component === 14 ? (
-                  <ShopMattress
-                    image={cat.image}
-                    url_key={cat.url_key}
-                    title={cat.title}
-                  />
-                ) : (
-                  ""
-                )}
-
-                {cat.component === 15 ? (
-                  <LetUsHelpYou title={cat.title} data={cat.data} />
-                ) : (
-                  ""
-                )} */}
               </div>
             ))}
         </div>
