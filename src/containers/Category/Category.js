@@ -53,9 +53,9 @@ const getFaqs = faqs => {
   });
   return JSON.stringify(seoFaq);
 };
-const getSubMenu = (categories, key) =>
-  categories &&
-  categories.filter(category => category.url_key === key)[0].children;
+// const getSubMenu = (categories, key) =>
+//   categories &&
+//   categories.filter(category => category.url_key === key)[0].children;
 
 @connect(({ homepage: { menu }, category, category: { data }, pincode }) => ({
   menu: menu.data,
@@ -128,7 +128,7 @@ export default class Category extends Component {
         params: { category: currentCategory }
       }
     } = this.props;
-    const { cms_json: cmsJson } = seoInfo;
+    // const { cms_json: cmsJson } = seoInfo;
 
     /* eslint-disable react/no-danger */
     return (
@@ -142,7 +142,7 @@ export default class Category extends Component {
             name="description"
             content={seoInfo && seoInfo.meta_description}
           />
-          {cmsJson && cmsJson.length ? (
+          {/* {cmsJson && cmsJson.length ? (
             <script type="application/ldjson">
               {`
               {
@@ -154,7 +154,7 @@ export default class Category extends Component {
             </script>
           ) : (
             ""
-          )}
+          )} */}
         </Helmet>
         <Body>
           {/* Header */}
@@ -231,7 +231,7 @@ export default class Category extends Component {
               </div>
             )}
             {/* SEO Content */}
-            {seoInfo && seoInfo.seo_text && (
+            {/* {seoInfo && seoInfo.seo_text && (
               <SeoContent>
                 <Container>
                   <div className={styles.seoContent}>
@@ -241,7 +241,7 @@ export default class Category extends Component {
                   </div>
                 </Container>
               </SeoContent>
-            )}
+            )} */}
           </div>
           {/* Footer */}
           <Footer />
