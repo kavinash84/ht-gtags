@@ -12,7 +12,7 @@ class ShopByCollection extends React.Component {
           <HeadingHtV1
             fontFamily="medium"
             style={{ textAlign: "center", color: "#323131" }}
-            fontSize="35px"
+            fontSize="40px"
             mt="90px"
             mb="20px"
           >
