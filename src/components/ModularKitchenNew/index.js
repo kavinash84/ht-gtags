@@ -75,22 +75,20 @@ class ModularKitchenNewContainer extends React.Component {
           {showScript ? (
             // <!-- Facebook Pixel Code -->
             <script>
-              {`window.addEventListener("load", function() {
+              {`
+               window.addEventListener('load',function(){
                 var x = 0;
-                var myVar = setInterval(function() {
-                  if (
-                    jQuery("h2:contains(Thank You For Your)").is(":visible")
-                  ) {
-                    if (x == 0) {
-                      gtag("event", "conversion", {
-                        send_to: "AW-832074530/h7wJCMXmzdcCEKLm4YwD"
-                      });
+                var myVar = setInterval(function(){
+                  if(jQuery('h2:contains(Thank You For Your)').is(":visible")){
+                    if(x == 0){
+                      gtag('event', 'conversion', {'send_to': 'AW-832074530/h7wJCMXmzdcCEKLm4YwD'});
                       x = 1;
                     }
                     clearInterval(myVar);
                   }
                 }, 1000);
-              })`}
+              });
+              `}
             </script>
           ) : // <!-- End Facebook Pixel Code -->
           null}
