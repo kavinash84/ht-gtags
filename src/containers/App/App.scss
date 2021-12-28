@@ -9,13 +9,22 @@
     margin: 0 auto;
     padding: 0 15px;
   }
-  .furnitureSlider{
-    .slick-next{
-      height:70px !important; 
+  .modularKitchenModel {
+    padding: 0rem;
+    border-radius: 20px;
+  }
+  .designbuildmodal {
+    padding: 0rem;
+    border-radius: 20px;
+  }
+
+  .furnitureSlider {
+    .slick-next {
+      height: 70px !important;
       width: 70px !important;
     }
-    .slick-prev{
-      height:70px !important; 
+    .slick-prev {
+      height: 70px !important;
       width: 70px !important;
     }
   }
