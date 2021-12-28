@@ -21,22 +21,22 @@ const changeDetails = (dispatcher, gateway, name, detailkey) => {
     isCreditSelected : paymentoptions.isCreditSelected
   }))
 
-class BankCard extends React.Component {
+class DebitBankCard extends React.Component {
 
-  static contextTypes = {
-    store: PropTypes.object.isRequired
-  };
-
-handleClick = (value) => {
-  const { dispatch } = this.context.store;
-  dispatch(setCreditCard(value));
-}
+    static contextTypes = {
+        store: PropTypes.object.isRequired
+      };
+    
+    handleClick = (value) => {
+      const { dispatch } = this.context.store;
+      dispatch(setCreditCard(value));
+    }
 
   render() { 
     const {name, img, setPaymentDetails, gateway, detailkey, currentSelection, isCreditSelected} = this.props;
     return (
       <Col variant="col-4" onClick={() =>{
-        this.handleClick(true);
+        this.handleClick(false);
         changeDetails(setPaymentDetails, gateway, name, detailkey);
         }
        } py={10}>
@@ -44,12 +44,12 @@ handleClick = (value) => {
         <Box
           as="input"
           type="radio"
-          name="bankOptions"
-          id={`bankOptions${name}`}
-          checked={currentSelection === name && isCreditSelected }
+          name="debitcardbankOptions"
+          id={`debitcardbankOptions${name}`}
+          checked={currentSelection === name && !isCreditSelected }
           mr={10}
         />
-        <Label for={`bankOptions${name}`} bg="white">
+        <Label for={`debitcardbankOptions${name}`} bg="white">
           <Image src={img} alt={name} maxHeight={30} sx={{ flexShrink: 0 }} />
         </Label>
       </Flex>
@@ -58,15 +58,15 @@ handleClick = (value) => {
   }
 }
  
-export default BankCard;
+export default DebitBankCard;
 
-BankCard.defaultProps = {
+DebitBankCard.defaultProps = {
   img: '',
   name: '',
   currentSelection: ''
 };
 
-BankCard.propTypes = {
+DebitBankCard.propTypes = {
   img: PropTypes.string,
   name: PropTypes.string,
   detailkey: PropTypes.string.isRequired,
