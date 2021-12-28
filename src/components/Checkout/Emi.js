@@ -151,15 +151,13 @@ const EMI = ({
         </Box>
       )}
 
-      {Array.isArray(currentDebitBankDetails)
-        ? currentDebitBankDetails.length && (
-            <Box pb={20} mt="50px">
-              <Label>
-                Choose From Preferred Bank (Available On Debit Cards)
-              </Label>
-            </Box>
-          )
-        : null}
+      {Array.isArray(currentDebitBankDetails) ? (
+        currentDebitBankDetails.length ? (
+          <Box pb={20} mt="50px">
+            <Label>Choose From Preferred Bank (Available On Debit Cards)</Label>
+          </Box>
+        ) : null
+      ) : null}
 
       <Row pb={20}>
         {currentDebitBankDetails.map(bank => (
