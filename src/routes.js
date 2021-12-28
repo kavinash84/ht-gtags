@@ -85,6 +85,7 @@ import FlipBokContainer from "containers/FlipBookContainer";
 import { categoryRoutes, listingRoutes } from "helpers/Constants";
 import Review from "./containers/Review";
 import WriteReview from "./containers/WriteReview";
+import NewHomepage from "./components/NewHomepage";
 
 const createRegex = data => data.join("|");
 
@@ -190,6 +191,7 @@ const routes = [
       { path: "/grievance", exact: true, component: Grievance },
       { path: "/modular-kitchens", exact: true, component: ModularKitchenNew },
       { path: "/plan-your-kitchen", exact: true, component: PlanYourKitchen },
+      { path: "/make-space-for-new", exact: true, component: NewHomepage },
       { path: "/design-build", exact: true, component: DesignBuild },
       { path: "/home-interior", exact: true, component: HomeInterior },
       { path: "/modular-wardrobe", exact: true, component: ModularWardrobe },
