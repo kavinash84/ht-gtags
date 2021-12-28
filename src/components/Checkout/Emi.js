@@ -46,10 +46,8 @@ const EMI = ({
   const currentBank = details.emiBank;
   return (
     <Box>
-      <Box pb={20} >
-        <Label>
-          Choose From Preferred Bank (Available On Credit Cards)
-        </Label>
+      <Box pb={20}>
+        <Label>Choose From Preferred Bank (Available On Credit Cards)</Label>
       </Box>
       <Row pb={20}>
         {emiBankDetails.map(bank => (
@@ -59,7 +57,14 @@ const EMI = ({
             detailkey="emiBank"
             name={bank.bank}
             img={
-              ["citibank", "AMEX", "IndusInd", "Bob", "Yes", "federal"].includes(bank.bank)
+              [
+                "citibank",
+                "AMEX",
+                "IndusInd",
+                "Bob",
+                "Yes",
+                "federal"
+              ].includes(bank.bank)
                 ? `https://www.hometown.in/media/cms/Bank/${bank.bank}.jpeg`
                 : `https://static.hometown.in/media/cms/BankLOGO/${bank.bank}.gif`
             }
@@ -145,13 +150,17 @@ const EMI = ({
           </Box>
         </Box>
       )}
-      
-      
-      <Box pb={20} mt="50px">
-        <Label>
-          Choose From Preferred Bank (Available On Debit Cards)
-        </Label>
-      </Box>
+
+      {Array.isArray(currentDebitBankDetails)
+        ? currentDebitBankDetails.length && (
+            <Box pb={20} mt="50px">
+              <Label>
+                Choose From Preferred Bank (Available On Debit Cards)
+              </Label>
+            </Box>
+          )
+        : null}
+
       <Row pb={20}>
         {currentDebitBankDetails.map(bank => (
           <DebitBankCard
@@ -160,7 +169,14 @@ const EMI = ({
             detailkey="emiBank"
             name={bank}
             img={
-              ["citibank", "AMEX", "IndusInd", "Bob", "Yes" , "federal"].includes(bank)
+              [
+                "citibank",
+                "AMEX",
+                "IndusInd",
+                "Bob",
+                "Yes",
+                "federal"
+              ].includes(bank)
                 ? `https://www.hometown.in/media/cms/Bank/${bank}.jpeg`
                 : `https://static.hometown.in/media/cms/BankLOGO/${bank}.gif`
             }
@@ -169,92 +185,92 @@ const EMI = ({
           />
         ))}
       </Row>
-      
-      {!isCreditSelected ? (
-      <Box>
-      {emiDebitCardDetails[currentBank] &&(
-        <Box>
-          <Box sx={{ overflow: "auto" }}>
-            <Box
-              as="table"
-              width={1}
-              mb={20}
-              sx={{
-                borderCollapse: "collapse",
-                border: "secondary",
-                "& tr": {
-                  border: "secondary"
-                },
-                "& td": {
-                  border: "secondary",
-                  p: "5px 8px",
-                  fontSize: 14
-                },
-                "& th": {
-                  border: "secondary",
-                  p: "10px 10px",
-                  fontSize: 14
-                }
-              }}
-            >
-              <tbody>
-                <tr>
-                  <th />
-                  <th width="85px">Tenure</th>
-                  <th>Annual Interest Rate</th>
-                  <th>EMI Interest</th>
-                  <th>Total Cost</th>
-                  <th>Monthly Instalments</th>
-                </tr>
 
-                {emiDebitCardDetails[currentBank] &&
-                 emiDebitCardDetails[currentBank].emiOptions &&
-                 Object.values(
-                  emiDebitCardDetails[currentBank].emiOptions
-                  ).map((item, index) => (
-                  <tr key={String(index)}>
-                    <td align="center">
-                      <input
-                        type="radio"
-                        onChange={onChangeDetails(
-                          setPaymentDetails,
-                          selectedGateway
-                        )}
-                        name="emiCode"
-                        value={item.emiCode}
-                      />
-                    </td>
-                    <td>{item.value} Months</td>
-                    <td>{item.interestRate}%</td>
-                    <td>
-                      Rs.
-                      {Math.round(item.emiInterest)}
-                    </td>
-                    <td>
-                      Rs.
-                      {Math.round(item.totalAmount)}
-                    </td>
-                    <td>
-                      Rs.
-                      {Math.round(item.EMI)}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
+      {!isCreditSelected ? (
+        <Box>
+          {emiDebitCardDetails[currentBank] && (
+            <Box>
+              <Box sx={{ overflow: "auto" }}>
+                <Box
+                  as="table"
+                  width={1}
+                  mb={20}
+                  sx={{
+                    borderCollapse: "collapse",
+                    border: "secondary",
+                    "& tr": {
+                      border: "secondary"
+                    },
+                    "& td": {
+                      border: "secondary",
+                      p: "5px 8px",
+                      fontSize: 14
+                    },
+                    "& th": {
+                      border: "secondary",
+                      p: "10px 10px",
+                      fontSize: 14
+                    }
+                  }}
+                >
+                  <tbody>
+                    <tr>
+                      <th />
+                      <th width="85px">Tenure</th>
+                      <th>Annual Interest Rate</th>
+                      <th>EMI Interest</th>
+                      <th>Total Cost</th>
+                      <th>Monthly Instalments</th>
+                    </tr>
+
+                    {emiDebitCardDetails[currentBank] &&
+                      emiDebitCardDetails[currentBank].emiOptions &&
+                      Object.values(
+                        emiDebitCardDetails[currentBank].emiOptions
+                      ).map((item, index) => (
+                        <tr key={String(index)}>
+                          <td align="center">
+                            <input
+                              type="radio"
+                              onChange={onChangeDetails(
+                                setPaymentDetails,
+                                selectedGateway
+                              )}
+                              name="emiCode"
+                              value={item.emiCode}
+                            />
+                          </td>
+                          <td>{item.value} Months</td>
+                          <td>{item.interestRate}%</td>
+                          <td>
+                            Rs.
+                            {Math.round(item.emiInterest)}
+                          </td>
+                          <td>
+                            Rs.
+                            {Math.round(item.totalAmount)}
+                          </td>
+                          <td>
+                            Rs.
+                            {Math.round(item.EMI)}
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </Box>
+              </Box>
+              <Box>
+                <CardForm
+                  setPaymentDetails={setPaymentDetails}
+                  gateway={selectedGateway}
+                  padding="1rem 0rem 0"
+                />
+              </Box>
             </Box>
-          </Box>
-          <Box>
-            <CardForm
-              setPaymentDetails={setPaymentDetails}
-              gateway={selectedGateway}
-              padding="1rem 0rem 0"
-            />
-          </Box>
+          )}
         </Box>
-      )}
-      </Box>
       ) : null}
-      </Box>
+    </Box>
   );
 };
 
