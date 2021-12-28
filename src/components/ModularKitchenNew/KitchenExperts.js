@@ -61,7 +61,7 @@ class KitchenExperts extends React.Component {
       <div>
         <Box className={styles.main} style={{ marginTop: "60px" }}>
           <Image
-            src="https://www.hometown.in/media/cms/Rectangle_2643.png"
+            src={speakourkitchenexperts.image}
             alt="topbanner"
             width="80%"
             height="700px"
