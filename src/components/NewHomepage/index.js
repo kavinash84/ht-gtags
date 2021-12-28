@@ -17,7 +17,8 @@ class NewHomepage extends Component {
         },
         {
           id: 1,
-          url: "https://www.youtube.com/embed/s3eSu8pu0lE",
+
+          url: "https://www.youtube.com/embed/_2_45l2qR4A",
           title: "Make Space for New with HomeTown Dining Tables"
         },
         {
@@ -27,7 +28,7 @@ class NewHomepage extends Component {
         },
         {
           id: 3,
-          url: "https://www.youtube.com/embed/_2_45l2qR4A",
+          url: "https://www.youtube.com/embed/s3eSu8pu0lE",
           title: "Make Space for New with HomeTown Recliners"
         }
       ]
@@ -49,15 +50,22 @@ class NewHomepage extends Component {
             style={{
               display: "flex",
               justifyContent: "center",
-              alignContent: "center",
+              alignItems: "center",
               marginTop: "1%"
             }}
           >
             <img style={{ width: "15%", height: "auto" }} src={MakeSpaceLogo} />
-            <img
-              style={{ width: "15%", height: "100px", alignSelf: "center" }}
-              src={HomeTownLogo}
-            />
+            <Link
+              onClick={() => {
+                sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
+              }}
+              to="/"
+            >
+              <img
+                style={{ width: "100%", height: "100px" }}
+                src={HomeTownLogo}
+              />
+            </Link>
           </div>
           {/* main vedio */}
           {this.state.videos.map((video, index) => (
@@ -86,9 +94,9 @@ class NewHomepage extends Component {
               </p>
             </div>
           ))}
-
-          {/* vedios section */}
-          {/* {this.state.videos.map((video, index) => (
+        </div>
+        {/* vedios section */}
+        {/* {this.state.videos.map((video, index) => (
             <div
               style={{
                 display: "flex",
@@ -115,12 +123,12 @@ class NewHomepage extends Component {
             </div>
           ))} */}
 
-          {/* who are we section */}
-        </div>
-        <div style={{ width: "90%", marginLeft: "5%" }}>
-          <HeadingHtV1
+        {/* who are we section */}
+
+        <div style={{ width: "90%", marginLeft: "5%", marginTop: "20px" }}>
+          {/* <HeadingHtV1
             mb="20px"
-            mt="20px"
+            mt="10px"
             fontSize="30px"
             style={{
               color: "#000",
@@ -128,7 +136,7 @@ class NewHomepage extends Component {
             }}
           >
             Who are we
-          </HeadingHtV1>
+          </HeadingHtV1> */}
           <p style={{ fontSize: "20px", color: "#888888" }}>
             From building your first home together to experiencing the joy of
             welcoming your first child, to seeing your children grow up, to
@@ -148,7 +156,12 @@ class NewHomepage extends Component {
             to="/"
           >
             <p
-              style={{ margin: "10px 0 20px", fontSize: "18px", color: "#000" }}
+              style={{
+                margin: "20px 0 20px",
+                fontSize: "18px",
+                color: " rgba(51,51,51,0.85)",
+                fontWeight: "bold"
+              }}
             >
               Know more
             </p>
