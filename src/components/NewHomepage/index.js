@@ -17,9 +17,8 @@ class NewHomepage extends Component {
         },
         {
           id: 1,
-
-          url: "https://www.youtube.com/embed/_2_45l2qR4A",
-          title: "Make Space for New with HomeTown Dining Tables"
+          title: "Make Space for New with HomeTown Recliners",
+          url: "https://www.youtube.com/embed/_2_45l2qR4A"
         },
         {
           id: 2,
@@ -29,7 +28,7 @@ class NewHomepage extends Component {
         {
           id: 3,
           url: "https://www.youtube.com/embed/s3eSu8pu0lE",
-          title: "Make Space for New with HomeTown Recliners"
+          title: "Make Space for New with HomeTown Dining Tables"
         }
       ]
     };
