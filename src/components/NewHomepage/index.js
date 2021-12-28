@@ -125,7 +125,7 @@ class NewHomepage extends Component {
         {/* who are we section */}
 
         <div style={{ width: "90%", marginLeft: "5%", marginTop: "20px" }}>
-          {/* <HeadingHtV1
+          <HeadingHtV1
             mb="20px"
             mt="10px"
             fontSize="30px"
@@ -134,8 +134,8 @@ class NewHomepage extends Component {
               fontFamily: "medium"
             }}
           >
-            Who are we
-          </HeadingHtV1> */}
+            make space for new
+          </HeadingHtV1>
           <p style={{ fontSize: "20px", color: "#888888" }}>
             From building your first home together to experiencing the joy of
             welcoming your first child, to seeing your children grow up, to
