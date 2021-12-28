@@ -8,7 +8,7 @@ import CategoryCarouselLook from "../../components/CategoryCarouselLook";
 import CategoryCarouselDeals from "../../components/CategoryCarouselDeals";
 
 import StyleYourHome from "../../components/StyleYourHome";
-
+import MainSliderTwo from "../../components/mainSlider2";
 import ShopGiftByPrice from "./shopGiftByPrice/ShopGiftByPrice";
 import ShopByRooms from "./shopByRoom/shopByRoom";
 import ShopOurNewArrivals from "../ShopOurNewArrivals";
@@ -26,6 +26,7 @@ class HomeContainer extends Component {
       dealoftheday,
       bestsellers,
       secondbanner,
+      secondmainbanner,
       shopByCategories,
       shopByRooms,
       dealsOfthedaybannerone,
@@ -80,6 +81,10 @@ class HomeContainer extends Component {
         </Link>
         {/* shop by categories */}
         <ShopByCategories shopByCategories={shopByCategories} />
+        {/* mid banner */}
+        <div style={{marginBottom:'40px'}}>
+          <MainSliderTwo secondmainbanner={secondmainbanner} />
+        </div>
         {/* shop by room */}
 
         <div>
