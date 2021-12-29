@@ -540,6 +540,7 @@ export default function reducer(state = initialState, action = {}) {
         error: null
       };
     case SUBMIT_PAYMENT_DETAILS_SUCCESS:
+      debugger;
       return {
         ...state,
         submitting: false,
@@ -839,7 +840,7 @@ export const submitPaymentDetails = (
           success
         );
         postData =
-          selectedGateway === "Emi"
+          selectedGateway === "Emi" || selectedGateway === "EmiZero"
             ? { ...postData, card_type: isCreditSelected ? "credit" : "debit" }
             : { ...postData };
         const response = await client.post("tesla/orders", postData);
