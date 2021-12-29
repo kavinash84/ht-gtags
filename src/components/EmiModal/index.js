@@ -53,13 +53,17 @@ const advancePayment = (specialPrice, interest, emiTenure, grossTenure) =>
   calculateEMI(specialPrice, interest, emiTenure) * (grossTenure - emiTenure);
 export default class Emi extends Component {
   state = {
-    open: false
+    open: false,
+    isNoCost: false
   };
   onOpenModal = () => {
     this.setState({ open: true });
   };
   onCloseModal = () => {
     this.setState({ open: false });
+  };
+  handleCheckClick = value => {
+    this.setState({ isNoCost: value });
   };
   render() {
     const { price, specialPrice, bflMinAmount } = this.props;
@@ -187,7 +191,7 @@ export default class Emi extends Component {
                       );
                     })} */}
 
-                    {/* {data.length > 0 &&
+            {/* {data.length > 0 &&
                       data.map((bank, index) => (
                         <tr key={String(index)} className={styles.coloumn}>
                           <td>
@@ -208,7 +212,7 @@ export default class Emi extends Component {
                           })}
                         </tr>
                       ))} */}
-                  {/* </tbody>
+            {/* </tbody>
                 </table>
               </Box>
             </Row> */}
@@ -224,6 +228,38 @@ export default class Emi extends Component {
                   {` ${price}`}{" "}
                   <Box fontSize="0.875rem">(Including shipping charge)</Box>
                 </Heading>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    marginTop: "15px",
+                    color: "rgba(51,51,51,0.85)"
+                  }}
+                >
+                  <div onClick={() => this.handleCheckClick(false)}>
+                    <input
+                      type="radio"
+                      id="Cost_emi_radio"
+                      name="Cost_emi_radio"
+                      checked={!this.state.isNoCost}
+                    />
+                    <label for="Cost_emi_radio" style={{ marginLeft: "3px" }}>
+                      Show Emi
+                    </label>
+                  </div>
+                  <div onClick={() => this.handleCheckClick(true)}>
+                    <input
+                      type="radio"
+                      id="noCost_emi_radio"
+                      name="noCost_emi_radio"
+                      checked={this.state.isNoCost}
+                    />
+                    <label for="noCost_emi_radio" style={{ marginLeft: "3px" }}>
+                      Show NoCost Emi
+                    </label>
+                  </div>
+                </div>
               </Box>
             </Row>
             <Row mr={16} ml={16} pl={0} pr={0}>
@@ -273,7 +309,7 @@ export default class Emi extends Component {
                               <img
                                 src={bank.bank_logo_url}
                                 alt={bank.gateway_type}
-                                style={{maxWidth:'110px'}}
+                                style={{ maxWidth: "110px" }}
                               />
                             </Box>
                           </td>
