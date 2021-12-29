@@ -111,7 +111,7 @@ const EmiZero = ({
                       <th />
                       <th width="85px">Tenure</th>
                       <th>Annual Interest Rate</th>
-                      <th>EMI Interest</th>
+                      {/* <th>EMI Interest</th> */}
                       <th>Total Cost</th>
                       <th>Monthly Instalments</th>
                     </tr>
@@ -134,10 +134,10 @@ const EmiZero = ({
                             </td>
                             <td>{item.value} Months</td>
                             <td>{item.interestRate}%</td>
-                            <td>
+                            {/* <td>
                               Rs.
                               {Math.round(item.emiInterest)}
-                            </td>
+                            </td> */}
                             <td>
                               Rs.
                               {Math.round(item.totalAmount)}
@@ -233,7 +233,7 @@ const EmiZero = ({
                       <th />
                       <th width="85px">Tenure</th>
                       <th>Annual Interest Rate</th>
-                      <th>EMI Interest</th>
+                      {/* <th>EMI Interest</th> */}
                       <th>Total Cost</th>
                       <th>Monthly Instalments</th>
                     </tr>
@@ -256,10 +256,10 @@ const EmiZero = ({
                             </td>
                             <td>{item.value} Months</td>
                             <td>{item.interestRate}%</td>
-                            <td>
+                            {/* <td>
                               Rs.
                               {Math.round(item.emiInterest)}
-                            </td>
+                            </td> */}
                             <td>
                               Rs.
                               {Math.round(item.totalAmount)}
