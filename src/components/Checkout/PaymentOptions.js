@@ -63,6 +63,7 @@ const nextStep = (
   sessionId,
   paymentData,
   cardType,
+  isCreditSelected,
   selectedGateway,
   paymentMethodDetails,
   futurePayRedeemAmount,
@@ -75,6 +76,7 @@ const nextStep = (
     sessionId,
     paymentData,
     cardType,
+    isCreditSelected,
     selectedGateway,
     paymentMethodDetails,
     futurePayRedeemAmount,
@@ -94,6 +96,7 @@ const mapStateToProps = ({
   isPayFromHtWallet: paymentoptions.isPayFromHtWallet,
   futurePayRedeemAmount: paymentoptions.futurePayRedeemAmount,
   selectedGateway: paymentoptions.selectedGateway,
+  isCreditSelected: paymentoptions.isCreditSelected,
   paymentMethodDetails: paymentoptions.paymentMethodDetails,
   isFormValid: paymentoptions.isFormValid,
   paymentDetails: paymentoptions.paymentMethodDetails,
@@ -197,6 +200,7 @@ class PaymentOptions extends Component {
       error,
       summary: { total },
       // futurPayProfile,
+      isCreditSelected,
       futurePayError
     } = this.props;
 
@@ -513,6 +517,7 @@ class PaymentOptions extends Component {
                     session,
                     paymentDetails,
                     cardType,
+                    isCreditSelected,
                     selectedGateway,
                     paymentDetails,
                     futurePayRedeemAmount,

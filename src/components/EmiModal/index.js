@@ -84,7 +84,7 @@ export default class Emi extends Component {
           open={this.state.open}
         >
           <Box className={styles.emiModalWrapper}>
-            <Row ml={16} mr={16}>
+            {/* <Row ml={16} mr={16}>
               <Box col="12" textAlign="center">
                 <Heading
                   color="text"
@@ -100,9 +100,9 @@ export default class Emi extends Component {
                   <Box fontSize="0.875rem">(Including shipping charge)</Box>
                 </Heading>
               </Box>
-            </Row>
+            </Row> */}
 
-            <Row mr={16} ml={16} pl={0} pr={0}>
+            {/* <Row mr={16} ml={16} pl={0} pr={0}>
               <Box
                 col="12"
                 pt="1.25rem"
@@ -185,7 +185,7 @@ export default class Emi extends Component {
                           </td>
                         </tr>
                       );
-                    })}
+                    })} */}
 
                     {/* {data.length > 0 &&
                       data.map((bank, index) => (
@@ -208,10 +208,10 @@ export default class Emi extends Component {
                           })}
                         </tr>
                       ))} */}
-                  </tbody>
+                  {/* </tbody>
                 </table>
               </Box>
-            </Row>
+            </Row> */}
             <Row ml={16} mr={16}>
               <Box col="12" textAlign="center">
                 <Heading
@@ -273,6 +273,7 @@ export default class Emi extends Component {
                               <img
                                 src={bank.bank_logo_url}
                                 alt={bank.gateway_type}
+                                style={{maxWidth:'110px'}}
                               />
                             </Box>
                           </td>

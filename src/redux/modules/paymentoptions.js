@@ -1,114 +1,135 @@
-import { PAYMENT_OPTIONS } from 'helpers/apiUrls';
-import { getCardType, validateFuturePay } from '../../utils/validation';
+import { PAYMENT_OPTIONS } from "helpers/apiUrls";
+import { getCardType, validateFuturePay } from "../../utils/validation";
 
-const LOAD = 'paymentOptions/LOAD';
-const LOAD_SUCCESS = 'paymentOptions/LOAD_SUCCESS';
-const LOAD_FAIL = 'paymentOptions/LOAD_FAIL';
-const SELECTED_PAYMENT_METHOD = 'paymentOptions/SELECTED_PAYMENT_METHOD';
-const SELECTED_PAYMENT_METHOD_DETAILS = 'paymentOptions/SELECTED_PAYMENT_METHOD_DETAILS';
-const CHECK_PAYMENT_DETAILS = 'paymentOptions/CHECK_PAYMENT_DETAILS';
+const LOAD = "paymentOptions/LOAD";
+const LOAD_SUCCESS = "paymentOptions/LOAD_SUCCESS";
+const LOAD_FAIL = "paymentOptions/LOAD_FAIL";
+const SELECTED_PAYMENT_METHOD = "paymentOptions/SELECTED_PAYMENT_METHOD";
+const SELECTED_PAYMENT_METHOD_DETAILS =
+  "paymentOptions/SELECTED_PAYMENT_METHOD_DETAILS";
+const CHECK_PAYMENT_DETAILS = "paymentOptions/CHECK_PAYMENT_DETAILS";
 
-const SET_PAYMENT_METHOD = 'paymentOptions/SET_PAYMENT_METHOD';
-const SET_PAYMENT_METHOD_SUCCESS = 'paymentOptions/SET_PAYMENT_METHOD_SUCCESS';
-const SET_PAYMENT_METHOD_FAIL = 'paymentOptions/SET_PAYMENT_METHOD_FAIL';
+const SET_PAYMENT_METHOD = "paymentOptions/SET_PAYMENT_METHOD";
+const SET_PAYMENT_METHOD_SUCCESS = "paymentOptions/SET_PAYMENT_METHOD_SUCCESS";
+const SET_PAYMENT_METHOD_FAIL = "paymentOptions/SET_PAYMENT_METHOD_FAIL";
 
-const SUBMIT_EASY_EMI_PAYMENT_VERIFY = 'paymentOptions/SUBMIT_EASY_EMI_PAYMENT_VERIFY';
-const SUBMIT_EASY_EMI_PAYMENT_VERIFY_SUCCESS = 'paymentOptions/SUBMIT_EASY_EMI_PAYMENT_VERIFY_SUCCESS';
-const SUBMIT_EASY_EMI_PAYMENT_VERIFY_FAIL = 'paymentOptions/SUBMIT_EASY_EMI_PAYMENT_VERIFY_FAIL';
+const SUBMIT_EASY_EMI_PAYMENT_VERIFY =
+  "paymentOptions/SUBMIT_EASY_EMI_PAYMENT_VERIFY";
+const SUBMIT_EASY_EMI_PAYMENT_VERIFY_SUCCESS =
+  "paymentOptions/SUBMIT_EASY_EMI_PAYMENT_VERIFY_SUCCESS";
+const SUBMIT_EASY_EMI_PAYMENT_VERIFY_FAIL =
+  "paymentOptions/SUBMIT_EASY_EMI_PAYMENT_VERIFY_FAIL";
 
-const SUBMIT_EASY_EMI_PAYMENT_PROCESS = 'paymentOptions/SUBMIT_EASY_EMI_PAYMENT_PROCESS';
-const SUBMIT_EASY_EMI_PAYMENT_PROCESS_SUCCESS = 'paymentOptions/SUBMIT_EASY_EMI_PAYMENT_PROCESS_SUCCESS';
-const SUBMIT_EASY_EMI_PAYMENT_PROCESS_FAIL = 'paymentOptions/SUBMIT_EASY_EMI_PAYMENT_PROCESS_FAIL';
+const SUBMIT_EASY_EMI_PAYMENT_PROCESS =
+  "paymentOptions/SUBMIT_EASY_EMI_PAYMENT_PROCESS";
+const SUBMIT_EASY_EMI_PAYMENT_PROCESS_SUCCESS =
+  "paymentOptions/SUBMIT_EASY_EMI_PAYMENT_PROCESS_SUCCESS";
+const SUBMIT_EASY_EMI_PAYMENT_PROCESS_FAIL =
+  "paymentOptions/SUBMIT_EASY_EMI_PAYMENT_PROCESS_FAIL";
 
-const SUBMIT_PAYMENT_DETAILS = 'paymentOptions/SUBMIT_PAYMENT_DETAILS';
-const SUBMIT_PAYMENT_DETAILS_SUCCESS = 'paymentOptions/SUBMIT_PAYMENT_DETAILS_SUCCESS';
-const SUBMIT_PAYMENT_DETAILS_FAIL = 'paymentOptions/SUBMIT_PAYMENT_DETAILS_FAIL';
-const SET_VALIDATION_ERROR = 'paymentOptions/SET_VALIDATION_ERROR';
+const SUBMIT_PAYMENT_DETAILS = "paymentOptions/SUBMIT_PAYMENT_DETAILS";
+const SUBMIT_PAYMENT_DETAILS_SUCCESS =
+  "paymentOptions/SUBMIT_PAYMENT_DETAILS_SUCCESS";
+const SUBMIT_PAYMENT_DETAILS_FAIL =
+  "paymentOptions/SUBMIT_PAYMENT_DETAILS_FAIL";
+const SET_VALIDATION_ERROR = "paymentOptions/SET_VALIDATION_ERROR";
 
-const SET_CARD_TYPE = 'paymentOptions/SET_CARD_TYPE';
-const SET_CARD_TYPE_SUCCESS = 'paymentOptions/SET_CARD_TYPE_SUCCESS';
-const SET_CARD_TYPE_FAIL = 'paymentOptions/SET_CARD_TYPE_FAIL';
+const SET_CARD_TYPE = "paymentOptions/SET_CARD_TYPE";
+const SET_CARD_TYPE_SUCCESS = "paymentOptions/SET_CARD_TYPE_SUCCESS";
+const SET_CARD_TYPE_FAIL = "paymentOptions/SET_CARD_TYPE_FAIL";
 
-const SET_CARD_COMPANY = 'paymentOption/SET_CARD_COMPANY';
+const SET_CARD_COMPANY = "paymentOption/SET_CARD_COMPANY";
 
-const RESET_EASY_EMI = 'paymentOption/RESET_EASY_EMI';
+const RESET_EASY_EMI = "paymentOption/RESET_EASY_EMI";
 
-const SUBMIT_PAYMENT_DETAILS_EASY_EMI = 'paymentOptions/SUBMIT_PAYMENT_DETAILS_EASY_EMI';
+const SUBMIT_PAYMENT_DETAILS_EASY_EMI =
+  "paymentOptions/SUBMIT_PAYMENT_DETAILS_EASY_EMI";
 
-const SET_HTWALLET_CHECKBOX = 'paymentOption/SET_HTWALLET_CHECKBOX';
+const SET_HTWALLET_CHECKBOX = "paymentOption/SET_HTWALLET_CHECKBOX";
 
-const FUTURE_PAY_AMOUNT = 'paymentOption/FUTURE_PAY_AMOUNT';
+const FUTURE_PAY_AMOUNT = "paymentOption/FUTURE_PAY_AMOUNT";
 // future pay full payment
-const SUBMIT_PAYMENT_DETAILS_FUTURE_PAY = 'paymentOptions/SUBMIT_PAYMENT_DETAILS_FUTURE_PAY';
-const SUBMIT_PAYMENT_DETAILS_FUTURE_PAY_SUCCESS = 'paymentOptions/SUBMIT_PAYMENT_DETAILS_FUTURE_PAY_SUCCESS';
-const SUBMIT_PAYMENT_DETAILS_FUTURE_PAY_FAIL = 'paymentOptions/SUBMIT_PAYMENT_DETAILS_FUTURE_PAY_FAIL';
+const SUBMIT_PAYMENT_DETAILS_FUTURE_PAY =
+  "paymentOptions/SUBMIT_PAYMENT_DETAILS_FUTURE_PAY";
+const SUBMIT_PAYMENT_DETAILS_FUTURE_PAY_SUCCESS =
+  "paymentOptions/SUBMIT_PAYMENT_DETAILS_FUTURE_PAY_SUCCESS";
+const SUBMIT_PAYMENT_DETAILS_FUTURE_PAY_FAIL =
+  "paymentOptions/SUBMIT_PAYMENT_DETAILS_FUTURE_PAY_FAIL";
+
+const SET_CARD_TYPE_CREDIT = "paymentOption/SET_CARD_TYPE_CREDIT";
 
 const paymentJSON = {
-  session_id: '',
-  future_pay_redeem_amount: '',
-  isPayFromHTWallet: '',
-  payment_method_type: '',
-  payment_method: '',
-  cc_number: '',
-  cc_card_type: '',
-  cc_holder: '',
-  cc_exp_month: '',
-  cc_exp_year: '',
-  cc_security_code: '',
-  pg_cc: '',
-  dc_number: '',
-  dc_card_type: '',
-  dc_holder: '',
-  dc_exp_month: '',
-  dc_exp_year: '',
-  dc_security_code: '',
-  pg_dc: '',
-  netbanking_bankname: '',
-  pg_nb: '',
-  emi_bank_name: '',
-  emi_months: '',
-  emi_cc_number: '',
-  emi_cc_card_type: '',
-  emi_cc_holder: '',
-  emi_cc_exp_month: '',
-  emi_cc_exp_year: '',
-  emi_cc_security_code: '',
-  partpay_cc_number: '',
-  partpay_cc_card_type: '',
-  partpay_cc_holder: '',
-  partpay_cc_exp_month: '',
-  partpay_cc_exp_year: '',
-  partpay_cc_security_code: '',
-  partpay_cc_pg: '',
-  partpay_dc_number: '',
-  partpay_dc_card_type: '',
-  partpay_dc_holder: '',
-  partpay_dc_exp_month: '',
-  partpay_dc_exp_year: '',
-  partpay_dc_security_code: '',
-  partpay_dc_pg: '',
-  partpay_netbanking_bankname: '',
-  partpay_netbanking_pg: '',
-  wallet: '',
-  easyemi_otp_code: '',
-  easyemi_emi_code: '',
-  easyemi_order_number: '',
-  easyemi_tenure: '',
-  easyemi_processingFees: '',
-  easyemi_auth_response: '[{}]',
+  session_id: "",
+  future_pay_redeem_amount: "",
+  isPayFromHTWallet: "",
+  isCreditSelected: "",
+  payment_method_type: "",
+  payment_method: "",
+  cc_number: "",
+  cc_card_type: "",
+  cc_holder: "",
+  cc_exp_month: "",
+  cc_exp_year: "",
+  cc_security_code: "",
+  pg_cc: "",
+  dc_number: "",
+  dc_card_type: "",
+  dc_holder: "",
+  dc_exp_month: "",
+  dc_exp_year: "",
+  dc_security_code: "",
+  pg_dc: "",
+  netbanking_bankname: "",
+  pg_nb: "",
+  emi_bank_name: "",
+  emi_months: "",
+  emi_cc_number: "",
+  emi_cc_card_type: "",
+  emi_cc_holder: "",
+  emi_cc_exp_month: "",
+  emi_cc_exp_year: "",
+  emi_cc_security_code: "",
+  partpay_cc_number: "",
+  partpay_cc_card_type: "",
+  partpay_cc_holder: "",
+  partpay_cc_exp_month: "",
+  partpay_cc_exp_year: "",
+  partpay_cc_security_code: "",
+  partpay_cc_pg: "",
+  partpay_dc_number: "",
+  partpay_dc_card_type: "",
+  partpay_dc_holder: "",
+  partpay_dc_exp_month: "",
+  partpay_dc_exp_year: "",
+  partpay_dc_security_code: "",
+  partpay_dc_pg: "",
+  partpay_netbanking_bankname: "",
+  partpay_netbanking_pg: "",
+  wallet: "",
+  easyemi_otp_code: "",
+  easyemi_emi_code: "",
+  easyemi_order_number: "",
+  easyemi_tenure: "",
+  easyemi_processingFees: "",
+  easyemi_auth_response: "[{}]",
   easyemi_downpayment: 0
 };
 
 const getURL = gateway => {
-  if (gateway === 'CreditCard' || gateway === 'DebitCard' || gateway === 'NetBanking' || gateway === 'Upi') {
+  if (
+    gateway === "CreditCard" ||
+    gateway === "DebitCard" ||
+    gateway === "NetBanking" ||
+    gateway === "Upi"
+  ) {
     return `Payu/${gateway}`;
   }
   if (
-    gateway === 'Emi' ||
-    gateway === 'EasyEmi' ||
-    gateway === 'Wallet' ||
-    gateway === 'CashOnDelivery' ||
-    gateway === 'FuturePay'
+    gateway === "Emi" ||
+    gateway === "EasyEmi" ||
+    gateway === "Wallet" ||
+    gateway === "CashOnDelivery" ||
+    gateway === "FuturePay"
   ) {
     return `${gateway}/${gateway}`;
   }
@@ -118,65 +139,61 @@ const paymentObject = (
   sessionId,
   selectedGateway,
   paymentData,
-  cardType = 'visa',
+  cardType = "visa",
   futurePayRedeemAmount,
   isPayFromHtWallet,
   totalCartAmount
 ) => {
-  if (selectedGateway === 'CreditCard') {
-    const {
- cardNumber, cvv, expMonth, expYear, nameOnCard
-} = paymentData;
+  if (selectedGateway === "CreditCard") {
+    const { cardNumber, cvv, expMonth, expYear, nameOnCard } = paymentData;
     return {
       ...paymentJSON,
       session_id: sessionId,
       payment_method_type: selectedGateway,
-      payment_method: 'Payu',
+      payment_method: "Payu",
       cc_number: cardNumber,
       cc_card_type: cardType,
       cc_holder: nameOnCard,
       cc_exp_month: expMonth,
       cc_exp_year: expYear,
       cc_security_code: cvv,
-      pg_cc: 'CC',
+      pg_cc: "CC",
       future_pay_redeem_amount: isPayFromHtWallet ? futurePayRedeemAmount : 0,
       isPayFromHTWallet: isPayFromHtWallet,
       totalCartAmount
     };
-  } else if (selectedGateway === 'DebitCard') {
-    const {
- cardNumber, cvv, expMonth, expYear, nameOnCard
-} = paymentData;
+  } else if (selectedGateway === "DebitCard") {
+    const { cardNumber, cvv, expMonth, expYear, nameOnCard } = paymentData;
     return {
       ...paymentJSON,
       session_id: sessionId,
       payment_method_type: selectedGateway,
-      payment_method: 'Payu',
+      payment_method: "Payu",
       dc_number: cardNumber,
       dc_card_type: cardType,
       dc_holder: nameOnCard,
       dc_exp_month: expMonth,
       dc_exp_year: expYear,
       dc_security_code: cvv,
-      pg_dc: 'DC',
+      pg_dc: "DC",
       future_pay_redeem_amount: isPayFromHtWallet ? futurePayRedeemAmount : 0,
       isPayFromHTWallet: isPayFromHtWallet,
       totalCartAmount
     };
-  } else if (selectedGateway === 'NetBanking') {
+  } else if (selectedGateway === "NetBanking") {
     const { bankCode } = paymentData;
     return {
       ...paymentJSON,
       session_id: sessionId,
       payment_method_type: selectedGateway,
-      payment_method: 'Payu',
+      payment_method: "Payu",
       netbanking_bankname: bankCode,
-      pg_nb: 'NB',
+      pg_nb: "NB",
       future_pay_redeem_amount: isPayFromHtWallet ? futurePayRedeemAmount : 0,
       isPayFromHTWallet: isPayFromHtWallet,
       totalCartAmount
     };
-  } else if (selectedGateway === 'Wallet') {
+  } else if (selectedGateway === "Wallet") {
     const { walletName } = paymentData;
     return {
       ...paymentJSON,
@@ -188,17 +205,24 @@ const paymentObject = (
       isPayFromHTWallet: isPayFromHtWallet,
       totalCartAmount
     };
-  } else if (selectedGateway === 'Emi') {
+  } else if (selectedGateway === "Emi") {
     const {
- emiBank, emiCode, nameOnCard, cardNumber, cvv, expMonth, expYear
-} = paymentData;
+      emiBank,
+      emiCode,
+      nameOnCard,
+      cardNumber,
+      cvv,
+      expMonth,
+      expYear
+    } = paymentData;
     return {
       ...paymentJSON,
       session_id: sessionId,
       payment_method_type: selectedGateway,
-      payment_method: 'Payu',
+      payment_method: "Payu",
+      no_cost: 0,
       emi_bank_name: emiBank,
-      emi_months: emiCode.match(/\d+/)[0].replace(/^0/, ''),
+      emi_months: emiCode.match(/\d+/)[0].replace(/^0/, ""),
       emi_cc_number: cardNumber,
       emi_cc_card_type: cardType,
       emi_cc_holder: nameOnCard,
@@ -209,30 +233,38 @@ const paymentObject = (
       isPayFromHTWallet: isPayFromHtWallet,
       totalCartAmount
     };
-  } else if (selectedGateway === 'EmiZero') {
+  } else if (selectedGateway === "EmiZero") {
     // For Bajaj Finance EMI
     if (!paymentData) {
       return {
         ...paymentJSON,
         session_id: sessionId,
-        payment_method_type: 'Emi',
-        payment_method: 'BFL',
+        payment_method_type: "Emi",
+        payment_method: "BFL",
         future_pay_redeem_amount: isPayFromHtWallet ? futurePayRedeemAmount : 0,
         isPayFromHTWallet: isPayFromHtWallet,
         totalCartAmount
       };
     }
     const {
- emiBank, emiCode, nameOnCard, cardNumber, cvv, expMonth, expYear, cardType: type
-} = paymentData;
+      emiBank,
+      emiCode,
+      nameOnCard,
+      cardNumber,
+      cvv,
+      expMonth,
+      expYear,
+      cardType: type
+    } = paymentData;
     return {
       ...paymentJSON,
       session_id: sessionId,
-      payment_method_type: 'Emi',
-      payment_method: 'Payu',
+      payment_method_type: "Emi",
+      payment_method: "Payu",
       card_type: type,
+      no_cost: 1,
       emi_bank_name: emiBank,
-      emi_months: emiCode.match(/\d+/)[0].replace(/^0/, ''),
+      emi_months: emiCode.match(/\d+/)[0].replace(/^0/, ""),
       emi_cc_number: cardNumber,
       emi_cc_card_type: cardType,
       emi_cc_holder: nameOnCard,
@@ -243,7 +275,7 @@ const paymentObject = (
       isPayFromHTWallet: isPayFromHtWallet,
       totalCartAmount
     };
-  } else if (selectedGateway === 'EasyEmi') {
+  } else if (selectedGateway === "EasyEmi") {
     const {
       is_seamless: isSeamless,
       easyemi_otp_code: otp,
@@ -258,7 +290,7 @@ const paymentObject = (
       ...paymentJSON,
       session_id: sessionId,
       payment_method_type: selectedGateway,
-      payment_method: 'EasyEmi',
+      payment_method: "EasyEmi",
       is_seamless: isSeamless,
       easyemi_otp_code: otp,
       easyemi_emi_code: emiCode,
@@ -271,45 +303,45 @@ const paymentObject = (
       isPayFromHTWallet: isPayFromHtWallet,
       totalCartAmount
     };
-  } else if (selectedGateway === 'Upi') {
+  } else if (selectedGateway === "Upi") {
     return {
       ...paymentJSON,
       session_id: sessionId,
       payment_method_type: selectedGateway,
-      payment_method: 'Upi',
+      payment_method: "Upi",
       future_pay_redeem_amount: isPayFromHtWallet ? futurePayRedeemAmount : 0,
       isPayFromHTWallet: isPayFromHtWallet,
       totalCartAmount,
       ...paymentData
     };
-  } else if (selectedGateway === 'FuturePay') {
+  } else if (selectedGateway === "FuturePay") {
     return {
       ...paymentJSON,
       session_id: sessionId,
-      payment_method_type: 'Wallet',
-      payment_method: 'FuturePay',
+      payment_method_type: "Wallet",
+      payment_method: "FuturePay",
       future_pay_redeem_amount: isPayFromHtWallet ? futurePayRedeemAmount : 0,
       isPayFromHTWallet: isPayFromHtWallet,
-      wallet: 'Wallet',
-      card_type: 'CC',
+      wallet: "Wallet",
+      card_type: "CC",
       totalCartAmount
     };
   }
 };
 
 const getSelectedGateway = data => {
-  console.log('getSelectedGateway function', data);
+  console.log("getSelectedGateway function", data);
   const {
     cart: {
       summary: { total }
     }
   } = data;
 
-  return total < 20000 ? 'Emi' : 'EmiZero';
+  return total < 20000 ? "Emi" : "EmiZero";
 };
 
 const emiZero = result => {
-  console.log('Adding zero emi', result);
+  console.log("Adding zero emi", result);
   let {
     paymentData: { paymentOSCConfig, methodPaymentGateways },
     cart: {
@@ -321,12 +353,12 @@ const emiZero = result => {
 
   methodPaymentGateways = {
     ...methodPaymentGateways,
-    EmiZero: { gateway: 'Payu', count: '0' }
+    EmiZero: { gateway: "Payu", count: "0" }
   };
   paymentOSCConfig = {
     ...paymentOSCConfig,
     EmiZero: {
-      paymentType: 'EmiZero',
+      paymentType: "EmiZero",
       isEnable: true
     }
   };
@@ -342,17 +374,18 @@ const emiZero = result => {
 const initialState = {
   loaded: false,
   data: null,
-  selectedGateway: 'CreditCard',
+  selectedGateway: "CreditCard",
+  isCreditSelected: false,
   isFormValid: false,
-  cardType: 'other',
+  cardType: "other",
   cardTypeError: null,
   paymentMethodDetails: {
     CreditCard: {
-      nameOnCard: '',
-      cardNumber: '',
-      cvv: '',
-      expMonth: '',
-      expYear: ''
+      nameOnCard: "",
+      cardNumber: "",
+      cvv: "",
+      expMonth: "",
+      expYear: ""
     }
   },
   futurePayRedeemAmount: 0,
@@ -420,7 +453,7 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: true,
-        data: emiZero(action.result, action.cart),
+        data: emiZero(action.result, action.cart)
         // selectedGateway: getSelectedGateway(action.result),
         // futurePay: {}
       };
@@ -482,7 +515,11 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         isFormValid: true,
-        paymentMethodDetails: appendData(action.payLoad.gateway, state, action.payLoad.data),
+        paymentMethodDetails: appendData(
+          action.payLoad.gateway,
+          state,
+          action.payLoad.data
+        ),
         error: []
       };
     case CHECK_PAYMENT_DETAILS:
@@ -510,6 +547,7 @@ export default function reducer(state = initialState, action = {}) {
         formData: action.result,
         error: null
       };
+
     case SUBMIT_PAYMENT_DETAILS_FAIL:
       return {
         ...state,
@@ -598,7 +636,7 @@ export default function reducer(state = initialState, action = {}) {
           ...state.paymentMethodDetails,
           EasyEmi: {
             ...state.paymentMethodDetails.EasyEmi,
-            easyemi_otp_code: ''
+            easyemi_otp_code: ""
           }
         }
       };
@@ -611,9 +649,22 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         futurePayRedeemAmount: action.amount,
-        futurePayRedeemAmountError: validateFuturePay(action.amount, action.cartValue).error,
-        futurePayRedeemAmountErrorMessage: validateFuturePay(action.amount, action.cartValue).msg
+        futurePayRedeemAmountError: validateFuturePay(
+          action.amount,
+          action.cartValue
+        ).error,
+        futurePayRedeemAmountErrorMessage: validateFuturePay(
+          action.amount,
+          action.cartValue
+        ).msg
       };
+
+    case SET_CARD_TYPE_CREDIT:
+      return {
+        ...state,
+        isCreditSelected: action.result
+      };
+
     default:
       return state;
   }
@@ -637,18 +688,33 @@ export const setSelectedGateway = (gateway, initial, session) => ({
 });
 
 export const setSelectedGatewayInSession = (gateway, session) => ({
-  types: [SET_PAYMENT_METHOD, SET_PAYMENT_METHOD_SUCCESS, SET_PAYMENT_METHOD_FAIL],
-  promise: ({ client }) => client.get(`${PAYMENT_OPTIONS}/${getURL(gateway)}/${session}`)
+  types: [
+    SET_PAYMENT_METHOD,
+    SET_PAYMENT_METHOD_SUCCESS,
+    SET_PAYMENT_METHOD_FAIL
+  ],
+  promise: ({ client }) =>
+    client.get(`${PAYMENT_OPTIONS}/${getURL(gateway)}/${session}`)
 });
 
 export const setWalletType = (walletName, session) => ({
-  types: [SET_PAYMENT_METHOD, SET_PAYMENT_METHOD_SUCCESS, SET_PAYMENT_METHOD_FAIL],
-  promise: ({ client }) => client.get(`${PAYMENT_OPTIONS}/${walletName}/Wallet/${session}`)
+  types: [
+    SET_PAYMENT_METHOD,
+    SET_PAYMENT_METHOD_SUCCESS,
+    SET_PAYMENT_METHOD_FAIL
+  ],
+  promise: ({ client }) =>
+    client.get(`${PAYMENT_OPTIONS}/${walletName}/Wallet/${session}`)
 });
 
 export const setEmiOption = (emiBank, months, session) => ({
-  types: [SET_PAYMENT_METHOD, SET_PAYMENT_METHOD_SUCCESS, SET_PAYMENT_METHOD_FAIL],
-  promise: ({ client }) => client.get(`${PAYMENT_OPTIONS}/Emi/Payu/${emiBank}/${months}/${session}`)
+  types: [
+    SET_PAYMENT_METHOD,
+    SET_PAYMENT_METHOD_SUCCESS,
+    SET_PAYMENT_METHOD_FAIL
+  ],
+  promise: ({ client }) =>
+    client.get(`${PAYMENT_OPTIONS}/Emi/Payu/${emiBank}/${months}/${session}`)
 });
 
 export const setSelectedPaymentDetails = payLoad => ({
@@ -714,7 +780,7 @@ export const submitPaymentDetailsFuturePay = (
         totalCartAmount,
         success
       );
-      const response = await client.post('tesla/orders', postData);
+      const response = await client.post("tesla/orders", postData);
       return response;
     } catch (error) {
       throw error;
@@ -730,6 +796,7 @@ export const submitPaymentDetails = (
   sessionId,
   data,
   cardType,
+  isCreditSelected,
   selectedGateway,
   walletType,
   futurePayRedeemAmount,
@@ -737,10 +804,10 @@ export const submitPaymentDetails = (
   totalCartAmount,
   success
 ) => {
-  if (data && 'EasyEmi' in data && (!success || success === undefined)) {
+  if (data && "EasyEmi" in data && (!success || success === undefined)) {
     return submitPaymentDetailsEasyEmi(sessionId, data, cardType);
   }
-  if (data && 'FuturePay' in data) {
+  if (data && "FuturePay" in data) {
     return submitPaymentDetailsFuturePay(
       sessionId,
       data,
@@ -754,10 +821,14 @@ export const submitPaymentDetails = (
     );
   }
   return {
-    types: [SUBMIT_PAYMENT_DETAILS, SUBMIT_PAYMENT_DETAILS_SUCCESS, SUBMIT_PAYMENT_DETAILS_FAIL],
+    types: [
+      SUBMIT_PAYMENT_DETAILS,
+      SUBMIT_PAYMENT_DETAILS_SUCCESS,
+      SUBMIT_PAYMENT_DETAILS_FAIL
+    ],
     promise: async ({ client }) => {
       try {
-        const postData = paymentObject(
+        let postData = paymentObject(
           sessionId,
           Object.keys(data)[0],
           Object.values(data)[0],
@@ -767,7 +838,11 @@ export const submitPaymentDetails = (
           totalCartAmount,
           success
         );
-        const response = await client.post('tesla/orders', postData);
+        postData =
+          selectedGateway === "Emi"
+            ? { ...postData, card_type: isCreditSelected ? "credit" : "debit" }
+            : { ...postData };
+        const response = await client.post("tesla/orders", postData);
         return response;
       } catch (error) {
         throw error;
@@ -781,11 +856,15 @@ export const submitPaymentDetails = (
 };
 
 export const submitBflPaymentDetails = (sessionId, selectedGateway) => ({
-  types: [SUBMIT_PAYMENT_DETAILS, SUBMIT_PAYMENT_DETAILS_SUCCESS, SUBMIT_PAYMENT_DETAILS_FAIL],
+  types: [
+    SUBMIT_PAYMENT_DETAILS,
+    SUBMIT_PAYMENT_DETAILS_SUCCESS,
+    SUBMIT_PAYMENT_DETAILS_FAIL
+  ],
   promise: async ({ client }) => {
     try {
       const postData = paymentObject(sessionId, selectedGateway);
-      const response = await client.post('tesla/orders', postData);
+      const response = await client.post("tesla/orders", postData);
       return response;
     } catch (error) {
       throw error;
@@ -798,10 +877,17 @@ export const submitBflPaymentDetails = (sessionId, selectedGateway) => ({
 });
 
 export const verifyEasyEmi = (data, session) => ({
-  types: [SUBMIT_EASY_EMI_PAYMENT_VERIFY, SUBMIT_EASY_EMI_PAYMENT_VERIFY_SUCCESS, SUBMIT_EASY_EMI_PAYMENT_VERIFY_FAIL],
+  types: [
+    SUBMIT_EASY_EMI_PAYMENT_VERIFY,
+    SUBMIT_EASY_EMI_PAYMENT_VERIFY_SUCCESS,
+    SUBMIT_EASY_EMI_PAYMENT_VERIFY_FAIL
+  ],
   promise: async ({ client }) => {
     try {
-      const response = await client.post(`${PAYMENT_OPTIONS}/easy-emi/verify/${session}`, data);
+      const response = await client.post(
+        `${PAYMENT_OPTIONS}/easy-emi/verify/${session}`,
+        data
+      );
       return response;
     } catch (error) {
       throw error;
@@ -809,7 +895,13 @@ export const verifyEasyEmi = (data, session) => ({
   }
 });
 
-export const processEasyEmi = (data, session, gateway, processingFees, cardType) => ({
+export const processEasyEmi = (
+  data,
+  session,
+  gateway,
+  processingFees,
+  cardType
+) => ({
   types: [
     SUBMIT_EASY_EMI_PAYMENT_PROCESS,
     SUBMIT_EASY_EMI_PAYMENT_PROCESS_SUCCESS,
@@ -817,7 +909,10 @@ export const processEasyEmi = (data, session, gateway, processingFees, cardType)
   ],
   promise: async ({ client }) => {
     try {
-      const response = await client.post(`${PAYMENT_OPTIONS}/easy-emi/process/${session}`, data);
+      const response = await client.post(
+        `${PAYMENT_OPTIONS}/easy-emi/process/${session}`,
+        data
+      );
       return response;
     } catch (error) {
       throw error;
@@ -853,4 +948,9 @@ export const setFuturePayAmount = (amount, cartValue) => ({
   type: FUTURE_PAY_AMOUNT,
   amount,
   cartValue
+});
+
+export const setCreditCard = result => ({
+  type: SET_CARD_TYPE_CREDIT,
+  result
 });
