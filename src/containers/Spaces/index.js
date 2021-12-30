@@ -1,7 +1,6 @@
-import { provideHooks } from 'redial';
-import HomeTownLoader from 'containers/Loader';
-import { loadSpacesData } from '../../redux/modules/spaces';
-
+import { provideHooks } from "redial";
+import HomeTownLoader from "containers/Loader";
+import { loadSpacesData } from "../../redux/modules/spaces";
 
 const hooks = {
   fetch: async ({ store: { dispatch, getState } }) => {
@@ -16,7 +15,7 @@ const hooks = {
 };
 
 const Spaces = HomeTownLoader({
-  loader: () => import('./Spaces' /* webpackChunkName: 'Spaces' */)
+  loader: () => import("./Spaces" /* webpackChunkName: 'Spaces' */)
 });
 
 export default provideHooks(hooks)(Spaces);
