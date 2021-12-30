@@ -45,6 +45,16 @@ const schemes = [
 // Computed as (CSP of the product * (1 +(X% / 12 * EMI Tenure)) / EMI Tenure)
 // B16*(1+B20/12*B21)/B21
 /* eslint-disable-next-line no-mixed-operators */
+
+const formatPrice = price => {
+  let newPrice = 0;
+  if (price.length > 3 && price !== null) {
+    newPrice = Number(price.replace(",", ""));
+    return newPrice;
+  }
+  return Number(price);
+};
+
 const calculateEMI = (price, interest, emiTenure) =>
   parseInt((price * (1 + (interest / 12) * emiTenure)) / emiTenure);
 
@@ -53,7 +63,8 @@ const advancePayment = (specialPrice, interest, emiTenure, grossTenure) =>
   calculateEMI(specialPrice, interest, emiTenure) * (grossTenure - emiTenure);
 export default class Emi extends Component {
   state = {
-    open: false
+    open: false,
+    isNoCost: false
   };
   onOpenModal = () => {
     this.setState({ open: true });
@@ -61,12 +72,14 @@ export default class Emi extends Component {
   onCloseModal = () => {
     this.setState({ open: false });
   };
+  handleCheckClick = value => {
+    this.setState({ isNoCost: value });
+  };
   render() {
     const { price, specialPrice, bflMinAmount } = this.props;
     let { data } = this.props;
-    console.log(this.props, "this.props");
-    data =
-      data && data.sort((a, b) => Number(a.bank_code) - Number(b.bank_code));
+    // data =
+    //   data && data.sort((a, b) => Number(a.bank_code) - Number(b.bank_code));
     return (
       <Box>
         <Button
@@ -187,7 +200,7 @@ export default class Emi extends Component {
                       );
                     })} */}
 
-                    {/* {data.length > 0 &&
+            {/* {data.length > 0 &&
                       data.map((bank, index) => (
                         <tr key={String(index)} className={styles.coloumn}>
                           <td>
@@ -208,7 +221,7 @@ export default class Emi extends Component {
                           })}
                         </tr>
                       ))} */}
-                  {/* </tbody>
+            {/* </tbody>
                 </table>
               </Box>
             </Row> */}
@@ -224,6 +237,43 @@ export default class Emi extends Component {
                   {` ${price}`}{" "}
                   <Box fontSize="0.875rem">(Including shipping charge)</Box>
                 </Heading>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    marginTop: "15px",
+                    color: "rgba(51,51,51,0.85)"
+                  }}
+                >
+                  <div onClick={() => this.handleCheckClick(false)}>
+                    <input
+                      type="radio"
+                      id="Cost_emi_radio"
+                      name="Cost_emi_radio"
+                      checked={!this.state.isNoCost}
+                    />
+                    <label for="Cost_emi_radio" style={{ marginLeft: "3px" }}>
+                      Emi
+                    </label>
+                  </div>
+                  {formatPrice(price) < 10000 ? null : (
+                    <div onClick={() => this.handleCheckClick(true)}>
+                      <input
+                        type="radio"
+                        id="noCost_emi_radio"
+                        name="noCost_emi_radio"
+                        checked={this.state.isNoCost}
+                      />
+                      <label
+                        for="noCost_emi_radio"
+                        style={{ marginLeft: "3px" }}
+                      >
+                        No Cost Emi
+                      </label>
+                    </div>
+                  )}
+                </div>
               </Box>
             </Row>
             <Row mr={16} ml={16} pl={0} pr={0}>
@@ -265,40 +315,87 @@ export default class Emi extends Component {
                       </th>
                     </tr>
 
-                    {data.length > 0 &&
-                      data.map((bank, index) => (
-                        <tr key={String(index)} className={styles.coloumn}>
-                          <td>
-                            <Box className={styles.bankImgWrapper}>
-                              <img
-                                src={bank.bank_logo_url}
-                                alt={bank.gateway_type}
-                                style={{maxWidth:'110px'}}
-                              />
-                            </Box>
-                          </td>
-                          <td>
-                            <Box className={styles.bankImgWrapper}>
-                              INR {bank.min_order_amt}
-                            </Box>
-                          </td>
-                          {bank.slabs.map((slab, i) => {
-                            const values = Object.values(slab.slab_keys);
-                            return (
-                              <td className="" key={String(i)}>
-                                <Box>
-                                  {values[3] && (
-                                    <p>Rs. {formatAmount(values[3])} p.m.</p>
-                                  )}
-                                  {values[3] && (
-                                    <p>Interest Rate {values[0]}%</p>
-                                  )}
+                    {!this.state.isNoCost ? (
+                      <React.Fragment>
+                        {Array.isArray(data.emi) &&
+                          data.emi.length > 0 &&
+                          data.emi.map((bank, index) => (
+                            <tr key={String(index)} className={styles.coloumn}>
+                              <td>
+                                <Box className={styles.bankImgWrapper}>
+                                  <img
+                                    src={bank.bank_logo_url}
+                                    alt={bank.gateway_type}
+                                    style={{ maxWidth: "110px" }}
+                                  />
                                 </Box>
                               </td>
-                            );
-                          })}
-                        </tr>
-                      ))}
+                              <td>
+                                <Box className={styles.bankImgWrapper}>
+                                  INR {bank.min_order_amt}
+                                </Box>
+                              </td>
+                              {bank.slabs.map((slab, i) => {
+                                const values = Object.values(slab.slab_keys);
+                                return (
+                                  <td className="" key={String(i)}>
+                                    <Box>
+                                      {values[3] && (
+                                        <p>
+                                          Rs. {formatAmount(values[3])} p.m.
+                                        </p>
+                                      )}
+                                      {values[3] && (
+                                        <p>Interest Rate {values[0]}%</p>
+                                      )}
+                                    </Box>
+                                  </td>
+                                );
+                              })}
+                            </tr>
+                          ))}
+                      </React.Fragment>
+                    ) : (
+                      <React.Fragment>
+                        {Array.isArray(data.noCostEmi) &&
+                          data.noCostEmi.length > 0 &&
+                          data.noCostEmi.map((bank, index) => (
+                            <tr key={String(index)} className={styles.coloumn}>
+                              <td>
+                                <Box className={styles.bankImgWrapper}>
+                                  <img
+                                    src={bank.bank_logo_url}
+                                    alt={bank.gateway_type}
+                                    style={{ maxWidth: "110px" }}
+                                  />
+                                </Box>
+                              </td>
+                              <td>
+                                <Box className={styles.bankImgWrapper}>
+                                  INR {bank.min_order_amt}
+                                </Box>
+                              </td>
+                              {bank.slabs.map((slab, i) => {
+                                const values = Object.values(slab.slab_keys);
+                                return (
+                                  <td className="" key={String(i)}>
+                                    <Box>
+                                      {values[3] && (
+                                        <p>
+                                          Rs. {formatAmount(values[3])} p.m.
+                                        </p>
+                                      )}
+                                      {values[3] && (
+                                        <p>Interest Rate {values[0]}%</p>
+                                      )}
+                                    </Box>
+                                  </td>
+                                );
+                              })}
+                            </tr>
+                          ))}
+                      </React.Fragment>
+                    )}
                   </tbody>
                 </table>
               </Box>
