@@ -173,11 +173,13 @@ export default class Category extends Component {
                 </TitleBar>
                 <FurnitureContainer />
               </div>
-            ) : currentCategory === "home-decor" ? (
-              <HomewareContainer />
-            ) : currentCategory === "home-furnishings" ? (
-              <HomeFurnishingContainer />
-            ) : currentCategory === "tableware-kitchenware" ? (
+            ) : // : currentCategory === "home-decor" ? (
+            //   <HomewareContainer />
+            // ) : currentCategory === "home-furnishings" ? (
+            //   <HomeFurnishingContainer />
+            // )
+
+            currentCategory === "tableware-kitchenware" ? (
               <TablewareKitchenware />
             ) : (
               <div>
