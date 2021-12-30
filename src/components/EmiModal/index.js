@@ -245,7 +245,7 @@ export default class Emi extends Component {
                       checked={!this.state.isNoCost}
                     />
                     <label for="Cost_emi_radio" style={{ marginLeft: "3px" }}>
-                      Show Emi
+                      Emi
                     </label>
                   </div>
                   <div onClick={() => this.handleCheckClick(true)}>
@@ -256,7 +256,7 @@ export default class Emi extends Component {
                       checked={this.state.isNoCost}
                     />
                     <label for="noCost_emi_radio" style={{ marginLeft: "3px" }}>
-                      Show NoCost Emi
+                      No Cost Emi
                     </label>
                   </div>
                 </div>
@@ -301,40 +301,85 @@ export default class Emi extends Component {
                       </th>
                     </tr>
 
-                    {data.length > 0 &&
-                      data.map((bank, index) => (
-                        <tr key={String(index)} className={styles.coloumn}>
-                          <td>
-                            <Box className={styles.bankImgWrapper}>
-                              <img
-                                src={bank.bank_logo_url}
-                                alt={bank.gateway_type}
-                                style={{ maxWidth: "110px" }}
-                              />
-                            </Box>
-                          </td>
-                          <td>
-                            <Box className={styles.bankImgWrapper}>
-                              INR {bank.min_order_amt}
-                            </Box>
-                          </td>
-                          {bank.slabs.map((slab, i) => {
-                            const values = Object.values(slab.slab_keys);
-                            return (
-                              <td className="" key={String(i)}>
-                                <Box>
-                                  {values[3] && (
-                                    <p>Rs. {formatAmount(values[3])} p.m.</p>
-                                  )}
-                                  {values[3] && (
-                                    <p>Interest Rate {values[0]}%</p>
-                                  )}
+                    {!this.state.isNoCost ? (
+                      <React.Fragment>
+                        {data.emi.length > 0 &&
+                          data.emi.map((bank, index) => (
+                            <tr key={String(index)} className={styles.coloumn}>
+                              <td>
+                                <Box className={styles.bankImgWrapper}>
+                                  <img
+                                    src={bank.bank_logo_url}
+                                    alt={bank.gateway_type}
+                                    style={{ maxWidth: "110px" }}
+                                  />
                                 </Box>
                               </td>
-                            );
-                          })}
-                        </tr>
-                      ))}
+                              <td>
+                                <Box className={styles.bankImgWrapper}>
+                                  INR {bank.min_order_amt}
+                                </Box>
+                              </td>
+                              {bank.slabs.map((slab, i) => {
+                                const values = Object.values(slab.slab_keys);
+                                return (
+                                  <td className="" key={String(i)}>
+                                    <Box>
+                                      {values[3] && (
+                                        <p>
+                                          Rs. {formatAmount(values[3])} p.m.
+                                        </p>
+                                      )}
+                                      {values[3] && (
+                                        <p>Interest Rate {values[0]}%</p>
+                                      )}
+                                    </Box>
+                                  </td>
+                                );
+                              })}
+                            </tr>
+                          ))}
+                      </React.Fragment>
+                    ) : (
+                      <React.Fragment>
+                        {data.noCostEmi.length > 0 &&
+                          data.noCostEmi.map((bank, index) => (
+                            <tr key={String(index)} className={styles.coloumn}>
+                              <td>
+                                <Box className={styles.bankImgWrapper}>
+                                  <img
+                                    src={bank.bank_logo_url}
+                                    alt={bank.gateway_type}
+                                    style={{ maxWidth: "110px" }}
+                                  />
+                                </Box>
+                              </td>
+                              <td>
+                                <Box className={styles.bankImgWrapper}>
+                                  INR {bank.min_order_amt}
+                                </Box>
+                              </td>
+                              {bank.slabs.map((slab, i) => {
+                                const values = Object.values(slab.slab_keys);
+                                return (
+                                  <td className="" key={String(i)}>
+                                    <Box>
+                                      {values[3] && (
+                                        <p>
+                                          Rs. {formatAmount(values[3])} p.m.
+                                        </p>
+                                      )}
+                                      {values[3] && (
+                                        <p>Interest Rate {values[0]}%</p>
+                                      )}
+                                    </Box>
+                                  </td>
+                                );
+                              })}
+                            </tr>
+                          ))}
+                      </React.Fragment>
+                    )}
                   </tbody>
                 </table>
               </Box>

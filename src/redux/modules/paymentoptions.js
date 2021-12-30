@@ -337,7 +337,7 @@ const getSelectedGateway = data => {
     }
   } = data;
 
-  return total < 20000 ? "Emi" : "EmiZero";
+  return total < 10000 ? "Emi" : "EmiZero";
 };
 
 const emiZero = result => {
@@ -349,7 +349,7 @@ const emiZero = result => {
       summary: { total }
     }
   } = result;
-  if (total < 20000) return result;
+  if (total < 10000) return result;
 
   methodPaymentGateways = {
     ...methodPaymentGateways,
