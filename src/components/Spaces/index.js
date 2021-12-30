@@ -17,21 +17,8 @@ import ShopByCategory from "./ShopCategory";
   offerZone: spaces.data.items.text.offerZone
 }))
 class SpacesContainer extends React.Component {
-  componentDidMount() {
-    this.handleScrollPosition();
-  }
-
-  handleScrollPosition = () => {
-    const scrollPosition = sessionStorage.getItem("SpacesScrollPosition");
-    if (scrollPosition) {
-      window.scrollTo(0, parseInt(scrollPosition));
-      setTimeout(function() {
-        sessionStorage.removeItem("SpacesScrollPosition");
-      }, 800);
-    }
-  };
   render() {
-    const { general, topBanner, offerZone } = this.props;
+    const { general, topBanner } = this.props;
     return (
       <Section style={{ maxWidth: "1440px", margin: "0 auto" }}>
         <SpaceSlider data={topBanner.values} />
@@ -50,7 +37,7 @@ class SpacesContainer extends React.Component {
                 );
               }}
             >
-              <Div mt="40px" style={{ width: "80%", marginLeft: "10%" }}>
+              <Div mt="40px" style={{ width: "85%", marginLeft: "7.5%" }}>
                 <Image src={slide.imgSrc} alt="general" />
               </Div>
             </Link>

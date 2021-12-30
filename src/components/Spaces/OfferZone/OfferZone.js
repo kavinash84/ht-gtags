@@ -58,8 +58,8 @@ export default class OfferZone extends Component {
         <Div
           style={{
             paddingBottom: "",
-            width: "86%",
-            marginLeft: "7%"
+            width: "90%",
+            marginLeft: "5%"
           }}
         >
           <DBCarousel

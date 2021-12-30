@@ -10,19 +10,6 @@ import Heading from "hometown-components-dev/lib/HeadingHtV1";
   newArrivals: spaces.data.items.text.newArrivals
 }))
 export default class Arrivals extends Component {
-  // componentDidMount() {
-  //   this.handleScrollPosition();
-  // }
-
-  // handleScrollPosition = () => {
-  //   const scrollPosition = sessionStorage.getItem('HiscrollPosition');
-  //   if (scrollPosition) {
-  //     window.scrollTo(0, parseInt(scrollPosition));
-  //     setTimeout(function() {
-  //       sessionStorage.removeItem('HiscrollPosition');
-  //     }, 2000);
-  //   }
-  // };
 
   render() {
     const { newArrivals } = this.props;
@@ -55,7 +42,7 @@ export default class Arrivals extends Component {
             sessionStorage.setItem("SpacesScrollPosition", window.pageYOffset);
           }}
         >
-          <Div style={{ width: "80%", marginLeft: "10%" }}>
+          <Div style={{ width: "85%", marginLeft: "7.5%" }}>
             <Image src={newArrivals.image} alt="arrival" />
           </Div>
         </Link>

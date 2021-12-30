@@ -21,7 +21,7 @@ export default class ShopByCategory extends Component {
         pt="0"
         className="catCarousel"
         mb="0"
-        style={{ width: "90%", marginLeft: "5%" }}
+        style={{ width: "95%", marginLeft: "2%" }}
       >
         <Section pr="15px" pl="0" mb="0px">
           <Div mb="25px" mt="40px" ml="10px">
@@ -69,9 +69,10 @@ export default class ShopByCategory extends Component {
                     width="100%"
                   />
                   <Text
-                    fontSize="10pt"
+                    fontSize="12pt"
                     color="label"
                     mt="5px"
+                    fontWeight="bold"
                     style={{ textAlign: "center" }}
                   >
                     {slide.title}
