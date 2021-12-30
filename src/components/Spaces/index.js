@@ -37,7 +37,7 @@ class SpacesContainer extends React.Component {
                 );
               }}
             >
-              <Div mt="40px" style={{ width: "85%", marginLeft: "7.5%" }}>
+              <Div mt="40px" style={{ width: "82%", marginLeft: "9%" }}>
                 <Image src={slide.imgSrc} alt="general" />
               </Div>
             </Link>

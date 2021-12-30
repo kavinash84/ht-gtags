@@ -42,7 +42,7 @@ export default class KidsCollection extends Component {
             sessionStorage.setItem("SpacesScrollPosition", window.pageYOffset);
           }}
         >
-          <Div mt="10px" pb="50px" style={{ width: "85%", marginLeft: "7.5%" }}>
+          <Div mt="10px" pb="50px" style={{ width: "82%", marginLeft: "9%" }}>
             <Image src={kidsCollection.image} alt="kids" />
           </Div>
         </Link>
