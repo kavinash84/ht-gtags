@@ -68,9 +68,8 @@ export default class Emi extends Component {
   render() {
     const { price, specialPrice, bflMinAmount } = this.props;
     let { data } = this.props;
-    console.log(this.props, "this.props");
-    data =
-      data && data.sort((a, b) => Number(a.bank_code) - Number(b.bank_code));
+    // data =
+    //   data && data.sort((a, b) => Number(a.bank_code) - Number(b.bank_code));
     return (
       <Box>
         <Button

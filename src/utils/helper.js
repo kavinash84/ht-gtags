@@ -225,7 +225,7 @@ export const calculateSavings = (price, discPrice) => Math.round(parseInt(price,
 
 export const calculateLowestEmi = (data, price) => {
   let lowest = Number(price);
-  data.map(item => {
+  data.emi.map(item => {
     item.slabs.map(slab => {
       if (slab.slab_keys.emi && slab.slab_keys.emi < lowest) {
         lowest = slab.slab_keys.emi;

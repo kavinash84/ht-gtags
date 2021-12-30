@@ -206,7 +206,7 @@ export default class CartContainer extends Component {
     const { emiPopUpShown } = this.state;
     // console.log('checkForEmiEligibility function', total, emiPopUpShown);
 
-    if (total >= 10000 && !emiPopUpShown) {
+    if (total >= 20000 && !emiPopUpShown) {
       this.setState({
         open: true,
         responsiveModalContent: 'emiModal',

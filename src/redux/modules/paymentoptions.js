@@ -540,7 +540,6 @@ export default function reducer(state = initialState, action = {}) {
         error: null
       };
     case SUBMIT_PAYMENT_DETAILS_SUCCESS:
-      debugger;
       return {
         ...state,
         submitting: false,
