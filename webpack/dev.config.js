@@ -160,9 +160,9 @@ var webpackConfig = module.exports = {
     new webpack.IgnorePlugin(/webpack-stats\.json$/),
 
     new webpack.DefinePlugin({
-      'process.env.APIHOST': '"stage-api.hometown.in/api/"',
+      'process.env.APIHOST': '"beta-api.hometown.in/api/"',
       'process.env.SITE_URL': '"localhost:3000"',
-      'process.env.PAYMENT_URL': '"https://stage-alice.hometown.in/checkout/finish/payment/"',
+      'process.env.PAYMENT_URL': '"https://beta-alice.hometown.in/checkout/finish/payment/"',
       __CLIENT__: true,
       __SERVER__: false,
       __DEVELOPMENT__: true,

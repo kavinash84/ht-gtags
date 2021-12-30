@@ -1,130 +1,300 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-/**
- * modules / selectors / helpers
- */
-import { setEmiPaymentType } from 'redux/modules/app';
 /**
  * Components
  */
-import Box from 'hometown-components-dev/lib/BoxHtV1';
-import Label from 'hometown-components-dev/lib/LabelHtV1';
+import Box from "hometown-components-dev/lib/BoxHtV1";
+import Label from "hometown-components-dev/lib/LabelHtV1";
+import Row from "hometown-components-dev/lib/RowHtV1";
+
 /**
  * Page Components
  */
-import BankCardForZeroEmi from './BankCardForZeroEmi';
-import CardForm from './CardForm';
-import BajajFinance from './BajajFinance';
+import { getEmiBanks } from "selectors/payments";
+import BankCard from "./BankCard";
+import DebitBankCard from "./DebitBankCard";
+import CardForm from "./CardForm";
 
-const mapStateToProps = ({ paymentoptions, cart }) => ({
+const mapStateToProps = ({ paymentoptions }) => ({
   selectedGateway: paymentoptions.selectedGateway,
+  noCostDebit: paymentoptions.data.paymentData.noCostEmiDetails.debit,
+  noCostCredit: paymentoptions.data.paymentData.noCostEmiDetails.credit,
   details: paymentoptions.paymentMethodDetails.EmiZero,
-  bflMinAmount: paymentoptions.bflMinAmount,
-  cart
+  isCreditSelected: paymentoptions.isCreditSelected
 });
 
-class EmiZero extends Component {
-  componentDidMount() {
-    const { dispatch } = this.context.store;
-    const { setPaymentDetails } = this.props;
-    dispatch(setEmiPaymentType('hdfc'));
-    dispatch(setPaymentDetails({
-        gateway: 'EmiZero',
-        data: { emiCode: 'EMI3', emiBank: 'hdfc', cardType: 'credit' }
-      }));
-  }
+const onChangeDetails = (dispatcher, gateway) => e => {
+  const { name, value } = e.target;
+  dispatcher({ gateway, data: { [name]: value } });
+};
 
-  render() {
-    const {
-      selectedGateway,
-      setPaymentDetails,
-      details,
-      cart: {
-        summary: { total }
-      },
-      bflMinAmount
-    } = this.props;
-    return (
-      <Box>
-        {/* {total > bflMinAmount ? <BajajFinance bflMinAmount={bflMinAmount} /> : null} */}
-        <Box pb={20}>
-          <Label for="bankOptions1" color="textLight">
-            Choose From Preferred Bank (Available on debit/credit cards for order value &gt; Rs. 20000)
-          </Label>
-        </Box>
-        <Box pb={20}>
-          <BankCardForZeroEmi
+const EmiZero = ({
+  selectedGateway,
+  setPaymentDetails,
+  noCostDebit,
+  noCostCredit,
+  details,
+  currentSelection,
+  isCreditSelected
+}) => {
+  const noCostDebitNames = Object.keys(noCostDebit);
+  const noCostcreditNames = Object.keys(noCostCredit);
+  const currentBank = details.emiBank;
+  return (
+    <Box>
+      {/* Debit Cards */}
+
+      {Array.isArray(noCostDebitNames) ? (
+        noCostDebitNames.length ? (
+          <Box pb={20} mt="50px">
+            <Label>Choose From Preferred Bank (Available On Debit Cards)</Label>
+          </Box>
+        ) : null
+      ) : null}
+
+      <Row pb={20}>
+        {noCostDebitNames.map(bank => (
+          <DebitBankCard
             setPaymentDetails={setPaymentDetails}
             gateway={selectedGateway}
-            details={details}
             detailkey="emiBank"
-            name={'hdfc'}
-            img={'https://static.hometown.in/media/cms/BankLOGO/hdfc.gif'}
-            currentSelection={'hdfc'}
-            key={'hdfc'}
+            name={bank}
+            img={
+              [
+                "citibank",
+                "AMEX",
+                "IndusInd",
+                "Bob",
+                "Yes",
+                "federal"
+              ].includes(bank)
+                ? `https://www.hometown.in/media/cms/Bank/${bank}.jpeg`
+                : `https://static.hometown.in/media/cms/BankLOGO/${bank}.gif`
+            }
+            currentSelection={currentSelection}
+            key={bank}
           />
-        </Box>
+        ))}
+      </Row>
+
+      {!isCreditSelected ? (
         <Box>
-          <Box>
-            <Box
-              as="table"
-              width={1}
-              mb={20}
-              sx={{
-                borderCollapse: 'collapse',
-                border: 'secondary',
-                '& tr': {
-                  border: 'secondary'
-                },
-                '& td': {
-                  border: 'secondary',
-                  p: '5px 8px',
-                  fontSize: 14
-                },
-                '& th': {
-                  border: 'secondary',
-                  p: '10px 10px',
-                  fontSize: 14
-                }
-              }}
-            >
-              <tbody>
-                <tr>
-                  <th width="85px">Tenure</th>
-                  <th>Annual Interest Rate</th>
-                  <th>Total Cost</th>
-                  <th>Monthly Instalments</th>
-                </tr>
-                <tr>
-                  <td> 3 Months</td>
-                  <td>0%</td>
-                  <td>Rs. {Math.round(total)}</td>
-                  <td>Rs. {Math.round(total / 3)}</td>
-                </tr>
-              </tbody>
-            </Box>
+          {noCostDebit[currentBank] && (
             <Box>
-              <CardForm setPaymentDetails={setPaymentDetails} gateway={selectedGateway} padding="1rem 0rem 0" />
+              <Box sx={{ overflow: "auto" }}>
+                <Box
+                  as="table"
+                  width={1}
+                  mb={20}
+                  sx={{
+                    borderCollapse: "collapse",
+                    border: "secondary",
+                    "& tr": {
+                      border: "secondary"
+                    },
+                    "& td": {
+                      border: "secondary",
+                      p: "5px 8px",
+                      fontSize: 14
+                    },
+                    "& th": {
+                      border: "secondary",
+                      p: "10px 10px",
+                      fontSize: 14
+                    }
+                  }}
+                >
+                  <tbody>
+                    <tr>
+                      <th />
+                      <th width="85px">Tenure</th>
+                      <th>Annual Interest Rate</th>
+                      {/* <th>EMI Interest</th> */}
+                      <th>Total Cost</th>
+                      <th>Monthly Instalments</th>
+                    </tr>
+
+                    {noCostDebit[currentBank] &&
+                      noCostDebit[currentBank].emiOptions &&
+                      Object.values(noCostDebit[currentBank].emiOptions).map(
+                        (item, index) => (
+                          <tr key={String(index)}>
+                            <td align="center">
+                              <input
+                                type="radio"
+                                onChange={onChangeDetails(
+                                  setPaymentDetails,
+                                  selectedGateway
+                                )}
+                                name="emiCode"
+                                value={item.emiCode}
+                              />
+                            </td>
+                            <td>{item.value} Months</td>
+                            <td>{item.interestRate}%</td>
+                            {/* <td>
+                              Rs.
+                              {Math.round(item.emiInterest)}
+                            </td> */}
+                            <td>
+                              Rs.
+                              {Math.round(item.totalAmount)}
+                            </td>
+                            <td>
+                              Rs.
+                              {Math.round(item.EMI)}
+                            </td>
+                          </tr>
+                        )
+                      )}
+                  </tbody>
+                </Box>
+              </Box>
+              <Box>
+                <CardForm
+                  setPaymentDetails={setPaymentDetails}
+                  gateway={selectedGateway}
+                  padding="1rem 0rem 0"
+                />
+              </Box>
             </Box>
-          </Box>
+          )}
         </Box>
-      </Box>
-    );
-  }
-}
+      ) : null}
+
+      {/* Credit Cards */}
+
+      {Array.isArray(noCostcreditNames) ? (
+        noCostcreditNames.length ? (
+          <Box pb={20} mt="50px">
+            <Label>
+              Choose From Preferred Bank (Available On Credit Cards)
+            </Label>
+          </Box>
+        ) : null
+      ) : null}
+
+      <Row pb={20}>
+        {noCostcreditNames.map(bank => (
+          <BankCard
+            setPaymentDetails={setPaymentDetails}
+            gateway={selectedGateway}
+            detailkey="emiBank"
+            name={bank}
+            img={
+              [
+                "citibank",
+                "AMEX",
+                "IndusInd",
+                "Bob",
+                "Yes",
+                "federal"
+              ].includes(bank)
+                ? `https://www.hometown.in/media/cms/Bank/${bank}.jpeg`
+                : `https://static.hometown.in/media/cms/BankLOGO/${bank}.gif`
+            }
+            currentSelection={currentSelection}
+            key={bank}
+          />
+        ))}
+      </Row>
+
+      {isCreditSelected ? (
+        <Box>
+          {noCostCredit[currentBank] && (
+            <Box>
+              <Box sx={{ overflow: "auto" }}>
+                <Box
+                  as="table"
+                  width={1}
+                  mb={20}
+                  sx={{
+                    borderCollapse: "collapse",
+                    border: "secondary",
+                    "& tr": {
+                      border: "secondary"
+                    },
+                    "& td": {
+                      border: "secondary",
+                      p: "5px 8px",
+                      fontSize: 14
+                    },
+                    "& th": {
+                      border: "secondary",
+                      p: "10px 10px",
+                      fontSize: 14
+                    }
+                  }}
+                >
+                  <tbody>
+                    <tr>
+                      <th />
+                      <th width="85px">Tenure</th>
+                      <th>Annual Interest Rate</th>
+                      {/* <th>EMI Interest</th> */}
+                      <th>Total Cost</th>
+                      <th>Monthly Instalments</th>
+                    </tr>
+
+                    {noCostCredit[currentBank] &&
+                      noCostCredit[currentBank].emiOptions &&
+                      Object.values(noCostCredit[currentBank].emiOptions).map(
+                        (item, index) => (
+                          <tr key={String(index)}>
+                            <td align="center">
+                              <input
+                                type="radio"
+                                onChange={onChangeDetails(
+                                  setPaymentDetails,
+                                  selectedGateway
+                                )}
+                                name="emiCode"
+                                value={item.emiCode}
+                              />
+                            </td>
+                            <td>{item.value} Months</td>
+                            <td>{item.interestRate}%</td>
+                            {/* <td>
+                              Rs.
+                              {Math.round(item.emiInterest)}
+                            </td> */}
+                            <td>
+                              Rs.
+                              {Math.round(item.totalAmount)}
+                            </td>
+                            <td>
+                              Rs.
+                              {Math.round(item.EMI)}
+                            </td>
+                          </tr>
+                        )
+                      )}
+                  </tbody>
+                </Box>
+              </Box>
+              <Box>
+                <CardForm
+                  setPaymentDetails={setPaymentDetails}
+                  gateway={selectedGateway}
+                  padding="1rem 0rem 0"
+                />
+              </Box>
+            </Box>
+          )}
+        </Box>
+      ) : null}
+    </Box>
+  );
+};
 
 export default connect(mapStateToProps, null)(EmiZero);
-
-EmiZero.contextTypes = {
-  store: PropTypes.object.isRequired
-};
 
 EmiZero.propTypes = {
   selectedGateway: PropTypes.string.isRequired,
   setPaymentDetails: PropTypes.func.isRequired,
-  cart: PropTypes.func.isRequired,
+  emiBankDetails: PropTypes.array.isRequired,
   details: PropTypes.object.isRequired,
-  bflMinAmount: PropTypes.number.isRequired
+  currentSelection: PropTypes.string.isRequired
 };
