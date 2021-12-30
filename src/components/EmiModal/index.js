@@ -45,6 +45,16 @@ const schemes = [
 // Computed as (CSP of the product * (1 +(X% / 12 * EMI Tenure)) / EMI Tenure)
 // B16*(1+B20/12*B21)/B21
 /* eslint-disable-next-line no-mixed-operators */
+
+const formatPrice = price => {
+  let newPrice = 0;
+  if (price.length > 3 && price !== null) {
+    newPrice = Number(price.replace(",", ""));
+    return newPrice;
+  }
+  return Number(price);
+};
+
 const calculateEMI = (price, interest, emiTenure) =>
   parseInt((price * (1 + (interest / 12) * emiTenure)) / emiTenure);
 
@@ -247,17 +257,22 @@ export default class Emi extends Component {
                       Emi
                     </label>
                   </div>
-                  <div onClick={() => this.handleCheckClick(true)}>
-                    <input
-                      type="radio"
-                      id="noCost_emi_radio"
-                      name="noCost_emi_radio"
-                      checked={this.state.isNoCost}
-                    />
-                    <label for="noCost_emi_radio" style={{ marginLeft: "3px" }}>
-                      No Cost Emi
-                    </label>
-                  </div>
+                  {formatPrice(price) < 10000 ? null : (
+                    <div onClick={() => this.handleCheckClick(true)}>
+                      <input
+                        type="radio"
+                        id="noCost_emi_radio"
+                        name="noCost_emi_radio"
+                        checked={this.state.isNoCost}
+                      />
+                      <label
+                        for="noCost_emi_radio"
+                        style={{ marginLeft: "3px" }}
+                      >
+                        No Cost Emi
+                      </label>
+                    </div>
+                  )}
                 </div>
               </Box>
             </Row>
@@ -302,7 +317,8 @@ export default class Emi extends Component {
 
                     {!this.state.isNoCost ? (
                       <React.Fragment>
-                        {data.emi.length > 0 &&
+                        {Array.isArray(data.emi) &&
+                          data.emi.length > 0 &&
                           data.emi.map((bank, index) => (
                             <tr key={String(index)} className={styles.coloumn}>
                               <td>
@@ -341,7 +357,8 @@ export default class Emi extends Component {
                       </React.Fragment>
                     ) : (
                       <React.Fragment>
-                        {data.noCostEmi.length > 0 &&
+                        {Array.isArray(data.noCostEmi) &&
+                          data.noCostEmi.length > 0 &&
                           data.noCostEmi.map((bank, index) => (
                             <tr key={String(index)} className={styles.coloumn}>
                               <td>
