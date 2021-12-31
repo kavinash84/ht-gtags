@@ -54,7 +54,6 @@ export default class SearchResults extends Component {
                   <div class="unbxd-pagination-container"></div>
                 </div>
               </div>
-              <div id="unbxd_recommended_for_you" class="widget_padding"></div>
             </div>
           </div>
         </div>
