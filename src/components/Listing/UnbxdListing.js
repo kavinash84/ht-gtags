@@ -36,24 +36,22 @@ export default class SearchResults extends Component {
         <div id="listing-ht">
           <div className="empty_div" />
           <div id="hometown_1573910556">
-            <div class="unbxd-container">
-              <div class="unbxd-left-col">
-                <div class="unbxd-filter-container">
-                  <div class="unbxd-filter-header">
-                    <span>FILTER BY</span>
-                    <button class="unbxd-clearall-filter">CLEAR FILTERS</button>
+            <div class="unbxd-wrapper">
+              <div class="unbxd-loader"></div>
+              <div class="unbxd-container">
+                <div class="unbxd-left-col">
+                  <div class="unbxd-filter-container"></div>
+                </div>
+                <div class="unbxd-right-col">
+                  <div class="unbxd-top-container">
+                    <div class="unbxd-view"></div>
+                    <div class="unbxd-sortby"></div>
+                    <div class="unbxd-location"></div>
                   </div>
-                  <div class="unbxd-filter-body"></div>
-                </div>
-              </div>
-              <div class="unbxd-right-col">
-                <div class="unbxd-top-container">
-                  <div class="unbxd-view"></div>
-                  <div class="unbxd-sortby"></div>
-                  <div class="unbxd-location"></div>
-                </div>
-                <div class="unbxd-bottom-container">
-                  <div class="unbxd-products-container"></div>
+                  <div class="unbxd-bottom-container">
+                    <div class="unbxd-products-container"></div>
+                  </div>
+                  <div class="unbxd-pagination-container"></div>
                 </div>
               </div>
             </div>
