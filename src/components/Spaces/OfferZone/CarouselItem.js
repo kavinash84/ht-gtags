@@ -39,7 +39,15 @@ class DBItem extends React.Component {
                 // pointerEvents: ['/modular-wardrobe'].includes(data.url_key) ? 'none' : ''
               }}
             >
-              <Link to={data.url_key}>
+              <Link
+                to={data.url_key}
+                onClick={() => {
+                  sessionStorage.setItem(
+                    "SpacesScrollPosition",
+                    window.pageYOffset
+                  );
+                }}
+              >
                 <div>
                   <img
                     src={data.imgSrc}
