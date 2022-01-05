@@ -77,6 +77,9 @@ import Gratification from "containers/Gratification";
 import WeddingCampaign from "containers/WeddingCampaign";
 import ComboOffer from "containers/ComboOffer";
 
+// brand pageoffset
+import Spaces from "./containers/Spaces";
+
 // campaign
 // import Announcement from 'containers/Announcement';
 import Campaigns from "containers/Campaigns";
@@ -236,6 +239,7 @@ const routes = [
       },
       { path: "/reviews", exact: true, component: Review },
       { path: "/writeReview", exact: true, component: WriteReview },
+      { path: "/spaces", exact: true, component: Spaces },
       { component: NotFound }
     ]
   }
