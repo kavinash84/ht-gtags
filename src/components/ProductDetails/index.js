@@ -69,7 +69,7 @@ import Pincode from './Pincode';
 import ProductDetailsCarousel from './Carousel';
 import Video from './Video';
 import ReviewFilter from './ReviewFilter';
-import UnbxdCompleteTheLook from './UnbxdCompleteTheLook';
+// import UnbxdCompleteTheLook from './UnbxdCompleteTheLook';
 import FreebieProduct from './FreebieProduct';
 import Stripes from './PdpStripe';
 
@@ -1244,7 +1244,7 @@ class ProductDetails extends React.Component {
               )}
 
               {/* Complete the look */}
-              <UnbxdCompleteTheLook configId={configId} />
+              {/* <UnbxdCompleteTheLook configId={configId} /> */}
 
               {/* Review List and Add review */}
               <Box id="review-section" pt={30} className={styles.reviewSection}>
