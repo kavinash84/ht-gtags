@@ -9,7 +9,7 @@ const RightArrow = require("../../../static/new-home/roundedArrowRight.svg");
 import "./Slider.css";
 
 const settings = length => ({
-  slidesToShow: 2,
+  slidesToShow: 3,
   slidesToScroll: 1,
   infinite: false,
   autoplay: false,
