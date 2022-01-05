@@ -42,8 +42,8 @@ export default class Arrivals extends Component {
             sessionStorage.setItem("SpacesScrollPosition", window.pageYOffset);
           }}
         >
-          <Div style={{ width: "85%", marginLeft: "7.5%" }}>
-            <Image src={newArrivals.image} alt="arrival" />
+          <Div >
+            <Image src={newArrivals.image} alt="arrival" style={{ width: "85%", marginLeft: "7.5%" }}/>
           </Div>
         </Link>
       </Div>
