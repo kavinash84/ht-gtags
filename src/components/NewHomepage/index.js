@@ -134,7 +134,7 @@ class NewHomepage extends Component {
               fontFamily: "medium"
             }}
           >
-            make space for new
+            Make Space for New
           </HeadingHtV1>
           <p style={{ fontSize: "20px", color: "#888888" }}>
             From building your first home together to experiencing the joy of
@@ -152,7 +152,7 @@ class NewHomepage extends Component {
             onClick={() => {
               sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
             }}
-            to="/"
+            to="https://www.hometown.in/?utm_source=Landing-Page&utm_medium=CPV&utm_campaign=MSFN-Brand-Relaunch"
           >
             <p
               style={{
@@ -162,7 +162,7 @@ class NewHomepage extends Component {
                 fontWeight: "bold"
               }}
             >
-              Know more
+              Visit Our Website
             </p>
           </Link>
         </div>
