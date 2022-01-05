@@ -53,9 +53,9 @@ const getFaqs = faqs => {
   });
   return JSON.stringify(seoFaq);
 };
-// const getSubMenu = (categories, key) =>
-//   categories &&
-//   categories.filter(category => category.url_key === key)[0].children;
+const getSubMenu = (categories, key) =>
+  categories &&
+  categories.filter(category => category.url_key === key)[0].children;
 
 @connect(({ homepage: { menu }, category, category: { data }, pincode }) => ({
   menu: menu.data,
@@ -189,11 +189,58 @@ export default class Category extends Component {
                 </div>
               </div>
             ) : // : currentCategory === "home-decor" ? (
-            //   <HomewareContainer />
+            //   <div>
+            //     <TitleBar title="Home Decor">
+            //       <BreadCrumb
+            //         urlKey={currentCategory}
+            //         name={pageTitle}
+            //         handleCategoryClick={this.handleCategoryClick}
+            //       />
+            //     </TitleBar>
+            //     <HomewareContainer />
+            //     <div>
+            //       {seoInfo && seoInfo.seo_text && (
+            //         <SeoContent>
+            //           <Container>
+            //             <div className={styles.seoContent}>
+            //               <div
+            //                 dangerouslySetInnerHTML={{
+            //                   __html: seoInfo.seo_text
+            //                 }}
+            //               />
+            //             </div>
+            //           </Container>
+            //         </SeoContent>
+            //       )}
+            //     </div>
+            //   </div>
             // ) : currentCategory === "home-furnishings" ? (
-            //   <HomeFurnishingContainer />
+            //   <div>
+            //     <TitleBar title="Home Furnishing">
+            //       <BreadCrumb
+            //         urlKey={currentCategory}
+            //         name={pageTitle}
+            //         handleCategoryClick={this.handleCategoryClick}
+            //       />
+            //     </TitleBar>
+            //     <HomeFurnishingContainer />
+            //     <div>
+            //       {seoInfo && seoInfo.seo_text && (
+            //         <SeoContent>
+            //           <Container>
+            //             <div className={styles.seoContent}>
+            //               <div
+            //                 dangerouslySetInnerHTML={{
+            //                   __html: seoInfo.seo_text
+            //                 }}
+            //               />
+            //             </div>
+            //           </Container>
+            //         </SeoContent>
+            //       )}
+            //     </div>
+            //   </div>
             // )
-
             currentCategory === "tableware-kitchenware" ? (
               <TablewareKitchenware />
             ) : (

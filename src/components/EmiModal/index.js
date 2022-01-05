@@ -246,32 +246,40 @@ export default class Emi extends Component {
                     color: "rgba(51,51,51,0.85)"
                   }}
                 >
-                  <div onClick={() => this.handleCheckClick(false)}>
-                    <input
-                      type="radio"
-                      id="Cost_emi_radio"
-                      name="Cost_emi_radio"
-                      checked={!this.state.isNoCost}
-                    />
-                    <label for="Cost_emi_radio" style={{ marginLeft: "3px" }}>
-                      Emi
-                    </label>
-                  </div>
                   {formatPrice(price) < 10000 ? null : (
-                    <div onClick={() => this.handleCheckClick(true)}>
-                      <input
-                        type="radio"
-                        id="noCost_emi_radio"
-                        name="noCost_emi_radio"
-                        checked={this.state.isNoCost}
-                      />
-                      <label
-                        for="noCost_emi_radio"
-                        style={{ marginLeft: "3px" }}
-                      >
-                        No Cost Emi
-                      </label>
-                    </div>
+                    <React.Fragment>
+                      <div onClick={() => this.handleCheckClick(false)}>
+                        <input
+                          type="radio"
+                          id="Cost_emi_radio"
+                          name="Cost_emi_radio"
+                          checked={!this.state.isNoCost}
+                        />
+                        <label
+                          for="Cost_emi_radio"
+                          style={{ marginLeft: "3px" }}
+                        >
+                          Emi
+                        </label>
+                      </div>
+                      {Array.isArray(data.noCostEmi) &&
+                      data.noCostEmi.length ? (
+                        <div onClick={() => this.handleCheckClick(true)}>
+                          <input
+                            type="radio"
+                            id="noCost_emi_radio"
+                            name="noCost_emi_radio"
+                            checked={this.state.isNoCost}
+                          />
+                          <label
+                            for="noCost_emi_radio"
+                            style={{ marginLeft: "3px" }}
+                          >
+                            No Cost Emi
+                          </label>
+                        </div>
+                      ) : null}
+                    </React.Fragment>
                   )}
                 </div>
               </Box>
