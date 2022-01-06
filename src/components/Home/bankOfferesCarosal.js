@@ -9,7 +9,7 @@ const RightArrow = require("../../../static/new-home/roundedArrowRight.svg");
 import "./Slider.css";
 
 const settings = length => ({
-  slidesToShow: 3,
+  slidesToShow: length > 4 ? 4 : length,
   slidesToScroll: 1,
   infinite: false,
   autoplay: false,
@@ -65,11 +65,12 @@ export default class BankOfferes extends Component {
           className="homeBankOfferesSlider"
         >
           {easyFinance.data.map(item => (
-            <div style={{ width: "20%", margin: "0 10px" }}>
+            <div style={{ margin: "0 10px" }}>
               <Link to="/promotions">
                 <div
                   style={{
-                    padding: "10px"
+                    padding: "10px",
+                    width: "210px"
                   }}
                 >
                   <div
