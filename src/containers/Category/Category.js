@@ -188,59 +188,60 @@ export default class Category extends Component {
                   )}
                 </div>
               </div>
-            ) : currentCategory === "home-decor" ? (
-              <div>
-                <TitleBar title="Home Decor">
-                  <BreadCrumb
-                    urlKey={currentCategory}
-                    name={pageTitle}
-                    handleCategoryClick={this.handleCategoryClick}
-                  />
-                </TitleBar>
-                <HomewareContainer />
-                <div>
-                  {seoInfo && seoInfo.seo_text && (
-                    <SeoContent>
-                      <Container>
-                        <div className={styles.seoContent}>
-                          <div
-                            dangerouslySetInnerHTML={{
-                              __html: seoInfo.seo_text
-                            }}
-                          />
-                        </div>
-                      </Container>
-                    </SeoContent>
-                  )}
-                </div>
-              </div>
-            ) : currentCategory === "home-furnishings" ? (
-              <div>
-                <TitleBar title="Home Furnishing">
-                  <BreadCrumb
-                    urlKey={currentCategory}
-                    name={pageTitle}
-                    handleCategoryClick={this.handleCategoryClick}
-                  />
-                </TitleBar>
-                <HomeFurnishingContainer />
-                <div>
-                  {seoInfo && seoInfo.seo_text && (
-                    <SeoContent>
-                      <Container>
-                        <div className={styles.seoContent}>
-                          <div
-                            dangerouslySetInnerHTML={{
-                              __html: seoInfo.seo_text
-                            }}
-                          />
-                        </div>
-                      </Container>
-                    </SeoContent>
-                  )}
-                </div>
-              </div>
-            ) : currentCategory === "tableware-kitchenware" ? (
+            ) : // : currentCategory === "home-decor" ? (
+            //   <div>
+            //     <TitleBar title="Home Decor">
+            //       <BreadCrumb
+            //         urlKey={currentCategory}
+            //         name={pageTitle}
+            //         handleCategoryClick={this.handleCategoryClick}
+            //       />
+            //     </TitleBar>
+            //     <HomewareContainer />
+            //     <div>
+            //       {seoInfo && seoInfo.seo_text && (
+            //         <SeoContent>
+            //           <Container>
+            //             <div className={styles.seoContent}>
+            //               <div
+            //                 dangerouslySetInnerHTML={{
+            //                   __html: seoInfo.seo_text
+            //                 }}
+            //               />
+            //             </div>
+            //           </Container>
+            //         </SeoContent>
+            //       )}
+            //     </div>
+            //   </div>
+            // ) : currentCategory === "home-furnishings" ? (
+            //   <div>
+            //     <TitleBar title="Home Furnishing">
+            //       <BreadCrumb
+            //         urlKey={currentCategory}
+            //         name={pageTitle}
+            //         handleCategoryClick={this.handleCategoryClick}
+            //       />
+            //     </TitleBar>
+            //     <HomeFurnishingContainer />
+            //     <div>
+            //       {seoInfo && seoInfo.seo_text && (
+            //         <SeoContent>
+            //           <Container>
+            //             <div className={styles.seoContent}>
+            //               <div
+            //                 dangerouslySetInnerHTML={{
+            //                   __html: seoInfo.seo_text
+            //                 }}
+            //               />
+            //             </div>
+            //           </Container>
+            //         </SeoContent>
+            //       )}
+            //     </div>
+            //   </div>
+            // )
+            currentCategory === "tableware-kitchenware" ? (
               <TablewareKitchenware />
             ) : (
               <div>
