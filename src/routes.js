@@ -26,7 +26,7 @@ import Cart from "containers/Cart";
 
 /* services */
 import ModularKitchen from "containers/ModularKitchenMicro";
-import PlanYourKitchen from "containers/PlanYourKitchen";
+import PlanYourKitchenNew from "containers/PlanYourKitchenNew";
 import ModularKitchenNew from "containers/ModularKitchenNew";
 import DesignBuild from "containers/DesignBuild";
 import HomeInterior from "containers/HomeInterior";

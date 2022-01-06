@@ -1,15 +1,12 @@
 import React, { Component } from "react";
 import Section from "hometown-components-dev/lib/SectionHtV1";
-import Box from "hometown-components-dev/lib/BoxHtV1";
-import Flex from "hometown-components-dev/lib/FlexHtV1";
-import Heading from "hometown-components-dev/lib/HeadingHtV1";
 import Image from "hometown-components-dev/lib/ImageHtV1";
 import Text from "hometown-components-dev/lib/TextHtV1";
 import Button from "hometown-components-dev/lib/ButtonHtV1";
 import { Link } from "react-router-dom";
-
-const styles = require("./Designbuild.scss");
 const LogoIcon = require("../../../static/logo.png");
+// const styles = require("./ModularKitchen.scss");
+
 class Header extends React.Component {
   render() {
     return (
@@ -38,23 +35,31 @@ class Header extends React.Component {
             alignItems: "center"
           }}
         >
-          <Link to="/plan-your-kitchen">
+          {/* <Text
+            style={{
+              marginRight: "20px",
+              fontWeight: "600",
+              fontSize: "14px"
+            }}
+          >
+            Plan Your Kitchen
+          </Text> */}
+
+          <Link to="design-build">
             <Text
               style={{
-                marginRight: "40px",
-                cursor: "pointer",
+                marginRight: "20px",
                 fontWeight: "600",
                 fontSize: "14px"
               }}
             >
-              Plan Your Kitchen
+              Design & Build
             </Text>
           </Link>
           <Link to="who-we-are">
             <Text
               style={{
-                marginRight: "40px",
-                cursor: "pointer",
+                marginRight: "20px",
                 fontWeight: "600",
                 fontSize: "14px"
               }}
