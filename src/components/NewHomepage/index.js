@@ -152,7 +152,7 @@ class NewHomepage extends Component {
             onClick={() => {
               sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
             }}
-            to="https://www.hometown.in/?utm_source=Landing-Page&utm_medium=CPV&utm_campaign=MSFN-Brand-Relaunch"
+            to="/?utm_source=Landing-Page&utm_medium=CPV&utm_campaign=MSFN-Brand-Relaunch"
           >
             <p
               style={{
