@@ -31,6 +31,7 @@ import { togglePopUp } from 'redux/modules/webtochat';
  * Components
  */
 import Box from 'hometown-components-dev/lib/BoxHtV1';
+import Div from "hometown-components/lib/Div";
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import Col from 'hometown-components-dev/lib/ColHtV1';
 import Container from 'hometown-components-dev/lib/ContainerHtV1';
@@ -41,6 +42,7 @@ import Text from 'hometown-components-dev/lib/TextHtV1';
 import Row from 'hometown-components-dev/lib/RowHtV1';
 import Label from 'hometown-components-dev/lib/LabelHtV1';
 import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
+import Section from 'hometown-components-dev/lib/SectionHtV1';
 /**
  * Page Components
  */
@@ -78,6 +80,7 @@ import FreebieProduct from './FreebieProduct';
 import Stripes from './PdpStripe';
 
 import demoIcon from '../../../static/play-button.svg';
+import { BackgroundMasker } from 'hometown-components-dev/lib/Shimmer';
 
 /**
  * Images / Icons
@@ -805,20 +808,41 @@ class ProductDetails extends React.Component {
                   count={count}
                   onClickReviews={this.onClickReviews}
                 />
-                {colorProducts.length > 0 && (
-                  <Box pb={15}>
-                    <Heading fontSize="1em" color="textDark" fontFamily="medium" fontWeight="normal" mb={15}>
-                      Color Options: {getSelectedColor(colorProducts)}
-                    </Heading>
-                    <ColorOption
-                      data={colorProducts}
-                      showmorecolorproducts={showmorecolorproducts}
-                      toggleShowMoreColorProducts={this.toggleShowMoreColorProducts}
-                      currentlySelectedProductSku={product.sku}
-                      showmorecolorproductsCount={showmorecolorproductsCount}
-                    />
-                  </Box>
-                )}
+                <Row display="block" mt="0" mb="0" mr="1rem" ml="1rem" style={{ width: '100%' }}>
+                  <div style={{ width: '50%' }}>
+                    <Section mt="0" mb="0.3125rem" p="0">
+                      {colorProducts.length > 0 && (
+                        <Box pb={15}>
+                          <Heading fontSize="1em" color="textDark" fontFamily="medium" fontWeight="normal" mb={15}>
+                            Color Options: {getSelectedColor(colorProducts)}
+                          </Heading>
+                          <ColorOption
+                            data={colorProducts}
+                            showmorecolorproducts={showmorecolorproducts}
+                            toggleShowMoreColorProducts={this.toggleShowMoreColorProducts}
+                            currentlySelectedProductSku={product.sku}
+                            showmorecolorproductsCount={showmorecolorproductsCount}
+                          />
+                        </Box>
+                      )}
+                    </Section>
+                  </div>
+                  <div style={{ width: '50%' }}>
+                    <button style={{
+                      width: '90%',
+                      padding: " 10px",
+                      color: "#323131",
+                      fontSize: "18px",
+                      border: "1px solid #707070",
+                      backgroundColor: "#fff"
+                    }} >
+                      More options
+                    </button>
+
+                  </div>
+
+                </Row>
+
                 {/* PDP Strip Icons */}
                 <Stripes
                   emi={formatAmount(calculateLowestEmi(emidata, price))}
