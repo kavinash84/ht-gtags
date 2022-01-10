@@ -16,7 +16,11 @@ import { setProductPosition } from 'redux/modules/productdetails';
 import { getCombinedBuy } from 'redux/modules/combinedbuy';
 import { addToCartCombined, setQuantityFlag } from 'redux/modules/cart';
 import { formatAmount } from 'utils/formatters';
-import { calculateLowestEmi, getVideoID, formatProductURL } from 'utils/helper';
+import { EMI_THRESHOLD } from 'helpers/Constants';
+import {
+  calculateLowestEmi, getVideoID, formatProductURL, calculateTotalSavings, calculateDiscount,
+  calculateSavings,
+} from 'utils/helper';
 import { productPageTitle, productMetaDescription, productMetaKeywords } from 'utils/seo';
 import { groupedAttributes as getgroupedAttributes, getBreadCrumbs, getSimpleSku } from 'selectors/product';
 import { getCartSKU } from 'selectors/cart';
@@ -55,7 +59,7 @@ import ServiceDetails from 'hometown-components-dev/lib/ProductDetailsHtV1/Servi
 // import EmiOptions from 'hometown-components-dev/lib/ProductDetailsHtV1/EmiOptions';
 // import ShareBar from 'components/ShareBar';
 import Specs from 'hometown-components-dev/lib/ProductDetailsHtV1/Specs';
-import TitlePrice from 'hometown-components-dev/lib/ProductDetailsHtV1/TitlePrice';
+import TitlePrice from './TitlePrice';
 import WishListButton from 'hometown-components-dev/lib/WishlistButtonHtV1';
 // import Section from 'hometown-components-dev/lib/SectionHtV1';
 // import UnbxdRecentlyViewed from 'components/UnbxdRecentlyViewed/UnbxdRecentlyViewed';
@@ -524,8 +528,8 @@ class ProductDetails extends React.Component {
     const {
       product: {
         attributes: {
- return: returnAndCancel, product_warranty: productWarranty, care_label: careLabel, description
-}
+          return: returnAndCancel, product_warranty: productWarranty, care_label: careLabel, description
+        }
       }
     } = this.props;
     let id = hash.replace('#', '');
@@ -570,7 +574,20 @@ class ProductDetails extends React.Component {
       });
     }
   };
-
+  getOfferDetails = (offerDetails, price, specialPrice) => {
+    const { offer_price: offerPrice = 0, coupon_code: couponCode = '' } = offerDetails;
+    const finalPrice = Number(specialPrice) || Number(price);
+    const priceToShow = offerPrice ? finalPrice - Number(offerPrice) : 0;
+    const couponBasePrice = Number(finalPrice);
+    const couponValue = offerPrice / couponBasePrice;
+    const couponPercentageValue = Math.round(couponValue * 100);
+    return {
+      offerPrice: formatAmount(priceToShow),
+      couponCode,
+      offerAmount: offerPrice,
+      couponPercentageValue
+    };
+  };
   renderAttributes = items => {
     items.map((item, i) =>
       Object.keys(item).map(key => (
@@ -669,9 +686,10 @@ class ProductDetails extends React.Component {
       name,
       brand,
       price,
-      special_price: specialPriceEmi,
+      special_price: specialPrice,
+      offer_details: offerDetails = {},
       config_id: configId,
-      dimension_image: dimensionImage,
+      shipping_charge: shippingCharge,
       warranty_period: warrantyPeriod = 0,
       fk_catalog_supplier: fkCatalogSupplier = null,
       categories
@@ -680,7 +698,6 @@ class ProductDetails extends React.Component {
       offer_discount_percentage: offerDiscountPercentage,
       coupon_code: couponCode,
       offer_price: offerPrice,
-      special_price: specialPrice,
       retail_discount: retailDiscount,
       total_savings: totalSavings,
       limited_time_coupon_discount: limitedTimeCouponDiscount,
@@ -688,14 +705,15 @@ class ProductDetails extends React.Component {
       mrp: maxPrice,
       discount_type: discountType
     } = pricingDetails;
-
-    const checkSpecialPrice = Number(specialPriceEmi) || Number(price);
+    const checkSpecialPrice = Number(specialPrice) || Number(price);
+    const isEmiAvailable = Number(checkSpecialPrice) >= EMI_THRESHOLD;
+    // const checkSpecialPrice = Number(specialPriceEmi) || Number(price);
     // const { adding, added, data: reviewsData = [] } = reviews;
     const { data: reviewsData = [] } = reviews;
     const offerImage = simples[simpleSku].groupedattributes.offer_image || null;
     const offerImageRedirect = simples[simpleSku].groupedattributes.offer_image_click_url || null;
     const { showmore, showmorecolorproducts } = this.state;
-    const isEmiAvailable = Number(checkSpecialPrice) >= 3000;
+    // const isEmiAvailable = Number(checkSpecialPrice) >= 3000;
     const { main_material: material, color, category_type: productType } = gattributes;
     const productURL = `${SITE_URL}${formatProductURL(name, sku)}`;
     const productDescription = productMetaDescription(name, productType, material, color);
@@ -754,7 +772,7 @@ class ProductDetails extends React.Component {
                   {images && <ProductDetailsCarousel data={images} title={meta.name} />}
 
                   {/* Wishlist Button */}
-                  <WishListButton
+                  {/* <WishListButton
                     onClick={onClickWishList(
                       sku,
                       wishListData,
@@ -767,7 +785,7 @@ class ProductDetails extends React.Component {
                     )}
                     isWishList={isInWishList(wishList, sku)}
                     wishlistLoading={isInWishList(loadingList, sku)}
-                  />
+                  /> */}
                 </Box>
               </Col>
               {/* Right Column */}
@@ -777,22 +795,30 @@ class ProductDetails extends React.Component {
                 <TitlePrice
                   name={name}
                   brand={brand}
-                  couponCode={couponCode}
-                  discountType={discountType}
-                  offerDiscountPercentage={offerDiscountPercentage}
-                  limitedTimeCouponDiscount={limitedTimeCouponDiscount}
-                  maxPrice={maxPrice}
-                  offerPrice={offerPrice}
-                  totalSavings={totalSavings}
-                  specialPrice={specialPrice}
-                  totalDiscountPercentage={totalDiscountPercentage}
-                  retailDiscount={retailDiscount}
+                  price={formatAmount(price)}
+                  offerDetails={this.getOfferDetails(offerDetails, price, specialPrice)}
+                  discPrice={formatAmount(checkSpecialPrice)}
+                  savingsRs={formatAmount(calculateSavings(price, checkSpecialPrice || '', offerPrice))}
+                  savingTotal={calculateTotalSavings(price, checkSpecialPrice || '')}
+                  savingsPercentage={calculateDiscount(price, checkSpecialPrice, offerPrice)}
                   ratings={rating}
                   count={count}
-                  marginTop="1rem"
                   onClickReviews={this.onClickReviews}
                 />
-
+                {colorProducts.length > 0 && (
+                  <Box pb={15}>
+                    <Heading fontSize="1em" color="textDark" fontFamily="medium" fontWeight="normal" mb={15}>
+                      Color Options: {getSelectedColor(colorProducts)}
+                    </Heading>
+                    <ColorOption
+                      data={colorProducts}
+                      showmorecolorproducts={showmorecolorproducts}
+                      toggleShowMoreColorProducts={this.toggleShowMoreColorProducts}
+                      currentlySelectedProductSku={product.sku}
+                      showmorecolorproductsCount={showmorecolorproductsCount}
+                    />
+                  </Box>
+                )}
                 {/* PDP Strip Icons */}
                 <Stripes
                   emi={formatAmount(calculateLowestEmi(emidata, price))}
@@ -872,36 +898,23 @@ class ProductDetails extends React.Component {
                     </Box>
                   </div>
                 ) : (
-                  <Box pb={20}>
-                    <a
-                      variant="linkPrimary"
-                      href="#review-section"
-                      onClick={this.toggleAddReview}
-                      sx={{
-                        borderLeft: 'primary'
-                      }}
-                      style={{ color: '#f15a22' }}
-                    >
-                      Write a Review
+                    <Box pb={20}>
+                      <a
+                        variant="linkPrimary"
+                        href="#review-section"
+                        onClick={this.toggleAddReview}
+                        sx={{
+                          borderLeft: 'primary'
+                        }}
+                        style={{ color: '#f15a22' }}
+                      >
+                        Write a Review
                     </a>
-                  </Box>
-                )}
+                    </Box>
+                  )}
 
                 {/* Color Options */}
-                {colorProducts.length > 0 && (
-                  <Box pb={15}>
-                    <Heading fontSize="1em" color="textDark" fontFamily="medium" fontWeight="normal" mb={15}>
-                      Color Options: {getSelectedColor(colorProducts)}
-                    </Heading>
-                    <ColorOption
-                      data={colorProducts}
-                      showmorecolorproducts={showmorecolorproducts}
-                      toggleShowMoreColorProducts={this.toggleShowMoreColorProducts}
-                      currentlySelectedProductSku={product.sku}
-                      showmorecolorproductsCount={showmorecolorproductsCount}
-                    />
-                  </Box>
-                )}
+
                 {bogoBundle && bogoBundle.name && (
                   <Row display="block" mb="0" mr="0.9375rem" ml="0.9375rem" className={styles.freebieProduct}>
                     <FreebieProduct bogoBundle={bogoBundle} />
@@ -937,8 +950,8 @@ class ProductDetails extends React.Component {
                         </a>
                       </Button>
                     ) : (
-                      ''
-                    )}
+                        ''
+                      )}
 
                     {offerImage && offerImageRedirect && (
                       <a rel="noopener noreferrer" href={offerImageRedirect}>
@@ -1127,17 +1140,17 @@ class ProductDetails extends React.Component {
                               {detail.value}
                             </Col>
                           ) : (
-                            <Col
-                              mt="5px"
-                              mb="5px"
-                              itemProp="description"
-                              fontSize="0.875rem"
-                              dangerouslySetInnerHTML={{ __html: detail.value }}
-                              lh="1.6"
-                              color="rgba(0, 0, 0, 0.65)"
-                              fontFamily="light"
-                            />
-                          )}
+                              <Col
+                                mt="5px"
+                                mb="5px"
+                                itemProp="description"
+                                fontSize="0.875rem"
+                                dangerouslySetInnerHTML={{ __html: detail.value }}
+                                lh="1.6"
+                                color="rgba(0, 0, 0, 0.65)"
+                                fontFamily="light"
+                              />
+                            )}
                         </Row>
                       );
                     }
@@ -1145,16 +1158,16 @@ class ProductDetails extends React.Component {
                   })}
                 </Box>
               ) : (
-                <Box px="10%">
-                  {description && (
-                    <ProductDesc
-                      desc={activeDescription || ''}
-                      showmore={showmore}
-                      toggleShowMore={this.toggleShowMore}
-                    />
-                  )}
-                </Box>
-              )}
+                  <Box px="10%">
+                    {description && (
+                      <ProductDesc
+                        desc={activeDescription || ''}
+                        showmore={showmore}
+                        toggleShowMore={this.toggleShowMore}
+                      />
+                    )}
+                  </Box>
+                )}
 
               {/* Specifications */}
               <Specs activeSpec={activeSpec} specs={groupedAttributes} pincode={pincode.selectedPincode} />
@@ -1207,13 +1220,13 @@ class ProductDetails extends React.Component {
                     </Text>
                     <Heading variant="heading.regular">Will it fit in your room?</Heading>
                   </Box>
-                  <Box p={15} textAlign="center" sx={{ border: 'dividerLight' }}>
+                  {/* <Box p={15} textAlign="center" sx={{ border: 'dividerLight' }}>
                     {images && images.length > 2 ? (
                       <Image src={dimensionImage ? `${dimensionImage}-zoom.jpg` : `${images[2].url}-zoom.jpg`} alt="" />
                     ) : (
-                      <Image src={`${images[0].url}-zoom.jpg`} alt="" />
-                    )}
-                  </Box>
+                        <Image src={`${images[0].url}-zoom.jpg`} alt="" />
+                      )}
+                  </Box> */}
                   <Box>
                     <Row
                       variant="row.contentCenter"
@@ -1303,7 +1316,7 @@ class ProductDetails extends React.Component {
                               feedBackError={nameError}
                               feedBackMessage={nameErrorMessage}
                               onChange={this.handleChange}
-                              // ref={(nameInp) => this.myInp = nameInp}
+                            // ref={(nameInp) => this.myInp = nameInp}
                             />
                           </Box>
                           <Box marginBottom="0.3125rem">
