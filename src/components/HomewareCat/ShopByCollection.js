@@ -29,9 +29,9 @@ class ShopByCollection extends React.Component {
         />
         <div
           style={{
-            width: "80%",
+            width: "100%",
             display: "flex",
-            margin: "auto",
+            // margin: "auto",
             flexDirection: "column",
             justifyContent: "center",
             alignContent: "center"
@@ -40,6 +40,9 @@ class ShopByCollection extends React.Component {
           {data.map((val, index) => (
             <div
               style={{
+                justifyContent: "center",
+                alignContent: "center",
+                display: "flex",
                 marginTop: "30px",
                 marginBottom: "10px"
               }}

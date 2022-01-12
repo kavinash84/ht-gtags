@@ -13,6 +13,7 @@ import ShopGiftByPrice from "./shopGiftByPrice/ShopGiftByPrice";
 import ShopByRooms from "./shopByRoom/shopByRoom";
 import ShopOurNewArrivals from "../ShopOurNewArrivals";
 import "./Slider.css";
+import BankOfferes from "./bankOfferesCarosal";
 // easy finance
 // const HdfcLogo = require("../../../static/new-home/hdfc-logo.png");
 // const BajajLogo = require("../../../static/new-home/bajaj-logo.png");
@@ -82,7 +83,7 @@ class HomeContainer extends Component {
         {/* shop by categories */}
         <ShopByCategories shopByCategories={shopByCategories} />
         {/* mid banner */}
-        <div style={{marginBottom:'40px'}}>
+        <div style={{ marginBottom: "40px" }}>
           <MainSliderTwo secondmainbanner={secondmainbanner} />
         </div>
         {/* shop by room */}
@@ -1347,125 +1348,7 @@ class HomeContainer extends Component {
               marginBottom: "20px"
             }}
           />
-          <div
-            style={{
-              display: "flex",
-              width: "70%",
-              justifyContent: "center",
-              margin: "10px 5% 30px 5%"
-            }}
-          >
-            {easyFinance.data.map(item => (
-              <div style={{ width: "20%", margin: "0 10px" }}>
-                <div
-                  style={{
-                    height: "230px",
-                    backgroundColor: "white",
-                    paddingTop: "30px",
-                    paddingBottom: "30px",
-                    paddingLeft: "30px",
-                    paddingRight: "30px",
-                    display: "flex",
-                    justifyContent: "space-evenly",
-                    alignContent: "center",
-                    flexDirection: "column"
-                  }}
-                >
-                  <Image src={item.url} width="90%" style={{ zIndex: "10" }} />
-                  <HeadingHtV1
-                    fontSize="20px"
-                    mb="5px"
-                    lineHeight="23px"
-                    style={{ color: "#575757" }}
-                  >
-                    {item.title}
-                  </HeadingHtV1>
-                  <div
-                    fontSize="10px"
-                    lineHeight="18px"
-                    style={{ color: "#575757" }}
-                  >
-                    {item.desc}
-                  </div>
-                </div>
-              </div>
-            ))}
-
-            {/* <div style={{ width: "20%", margin: "0 10px" }}>
-              <div
-                style={{
-                  height: "230px",
-                  backgroundColor: "white",
-                  paddingTop: "30px",
-                  paddingBottom: "30px",
-                  paddingLeft: "30px",
-                  paddingRight: "30px",
-                  display: "flex",
-                  justifyContent: "space-evenly",
-                  alignContent: "center",
-                  flexDirection: "column"
-                }}
-              >
-                <Image
-                  src={easyFinance.data[2].url}
-                  width="90%"
-                  style={{ zIndex: "10" }}
-                />
-                <HeadingHtV1
-                  fontSize="20px"
-                  mb="5px"
-                  lineHeight="23px"
-                  style={{ color: "#575757" }}
-                >
-                  {easyFinance.data[2].title}
-                </HeadingHtV1>
-                <div
-                  fontSize="15px"
-                  lineHeight="18px"
-                  style={{ color: "#575757" }}
-                >
-                  {easyFinance.data[2].desc}
-                </div>
-              </div>
-            </div> */}
-            {/* <div style={{ width: "20%", margin: "0 10px" }}>
-              <div
-                style={{
-                  height: "230px",
-                  backgroundColor: "white",
-                  paddingTop: "30px",
-                  paddingBottom: "30px",
-                  paddingLeft: "30px",
-                  paddingRight: "30px",
-                  display: "flex",
-                  justifyContent: "space-evenly",
-                  alignContent: "center",
-                  flexDirection: "column"
-                }}
-              >
-                <Image
-                  src={easyFinance.data[3].url}
-                  width="90%"
-                  style={{ zIndex: "10" }}
-                />
-                <HeadingHtV1
-                  fontSize="20px"
-                  mb="5px"
-                  lineHeight="23px"
-                  style={{ color: "#575757" }}
-                >
-                  {easyFinance.data[3].title}
-                </HeadingHtV1>
-                <div
-                  fontSize="8px"
-                  lineHeight="18px"
-                  style={{ color: "#575757" }}
-                >
-                  {easyFinance.data[3].desc}
-                </div>
-              </div> 
-            </div>*/}
-          </div>
+          <BankOfferes easyFinance={easyFinance} />
         </div>
       </div>
     );

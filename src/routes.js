@@ -26,7 +26,7 @@ import Cart from "containers/Cart";
 
 /* services */
 import ModularKitchen from "containers/ModularKitchenMicro";
-import PlanYourKitchen from "containers/PlanYourKitchen";
+import PlanYourKitchenNew from "containers/PlanYourKitchenNew";
 import ModularKitchenNew from "containers/ModularKitchenNew";
 import DesignBuild from "containers/DesignBuild";
 import HomeInterior from "containers/HomeInterior";
@@ -76,6 +76,9 @@ import Gratification from "containers/Gratification";
 // Landing Pages
 import WeddingCampaign from "containers/WeddingCampaign";
 import ComboOffer from "containers/ComboOffer";
+
+// brand pageoffset
+import Spaces from "./containers/Spaces";
 
 // campaign
 // import Announcement from 'containers/Announcement';
@@ -190,7 +193,7 @@ const routes = [
       { path: "/case-request", exact: true, component: CaseRequest },
       { path: "/grievance", exact: true, component: Grievance },
       { path: "/modular-kitchens", exact: true, component: ModularKitchenNew },
-      { path: "/plan-your-kitchen", exact: true, component: PlanYourKitchen },
+      { path: "/plan-your-kitchen", exact: true, component: PlanYourKitchenNew },
       { path: "/make-space-for-new", exact: true, component: NewHomepage },
       { path: "/design-build", exact: true, component: DesignBuild },
       { path: "/home-interior", exact: true, component: HomeInterior },
@@ -236,6 +239,7 @@ const routes = [
       },
       { path: "/reviews", exact: true, component: Review },
       { path: "/writeReview", exact: true, component: WriteReview },
+      { path: "/spaces", exact: true, component: Spaces },
       { component: NotFound }
     ]
   }

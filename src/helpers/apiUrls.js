@@ -128,3 +128,7 @@ export const MODULAR_WARDROBE = "tesla/static/modular_wardrobe_desktop";
 export const MODULARKITCHEN_NEW = "tesla/static/modular_kitchen_desktop_v1";
 // plan your kitchen
 // export const PLANYOURKITCHEN_NEW = "tesla/static/planyour_kitchen_desktop_v1";
+
+// spaces
+export const SPACES = "tesla/static/spaces_v1_desktop";
+export const PLANYOURKITCHEN_NEW = "tesla/static/planyour_kitchen_desktop_v1";
