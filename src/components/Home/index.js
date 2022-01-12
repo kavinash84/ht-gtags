@@ -104,7 +104,42 @@ class HomeContainer extends Component {
             />
           </div>
         ) : null}
-
+        {/* Easy finance - static images */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            padding: "20px 30px",
+            marginTop: "80px",
+            backgroundColor: "#F5EEEE"
+          }}
+        >
+          <HeadingHtV1
+            pb="0px"
+            pt="10px"
+            ta="center"
+            mb="10px"
+            fontSize="35px"
+            style={{
+              color: "#323131",
+              whiteSpace: "normal",
+              fontFamily: "medium"
+            }}
+          >
+            {easyFinance.headerTitle}
+          </HeadingHtV1>
+          <div
+            style={{
+              width: "30px",
+              borderTop: "2px solid #222222",
+              margin: "auto",
+              marginBottom: "20px"
+            }}
+          />
+          <BankOfferes easyFinance={easyFinance} />
+        </div>
         {/* sale of the day */}
 
         {/* <div
@@ -1314,42 +1349,7 @@ class HomeContainer extends Component {
           </div>
         </div> */}
 
-        {/* Easy finance - static images */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
-            padding: "20px 30px",
-            marginTop: "80px",
-            backgroundColor: "#F5EEEE"
-          }}
-        >
-          <HeadingHtV1
-            pb="0px"
-            pt="10px"
-            ta="center"
-            mb="10px"
-            fontSize="35px"
-            style={{
-              color: "#323131",
-              whiteSpace: "normal",
-              fontFamily: "medium"
-            }}
-          >
-            {easyFinance.headerTitle}
-          </HeadingHtV1>
-          <div
-            style={{
-              width: "30px",
-              borderTop: "2px solid #222222",
-              margin: "auto",
-              marginBottom: "20px"
-            }}
-          />
-          <BankOfferes easyFinance={easyFinance} />
-        </div>
+
       </div>
     );
   }
