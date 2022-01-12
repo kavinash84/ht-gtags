@@ -43,7 +43,7 @@ const adjustSlides = length => ({
   slidesToShow: 3,
   slidesToScroll: 1,
   autoplay: true,
-  speed: 4000,
+  autoplaySpeed: 5000,
   infinite: true,
   nextArrow: <SampleNextArrow />,
   prevArrow: <SamplePrevArrow />
@@ -52,7 +52,7 @@ const adjustSlidesitems = length => ({
   slidesToShow: 4,
   slidesToScroll: 1,
   autoplay: true,
-  speed: 4000,
+  autoplaySpeed: 5000,
   infinite: true,
   nextArrow: <SampleNextArrow />,
   prevArrow: <SamplePrevArrow />
