@@ -35,7 +35,7 @@ class Header extends React.Component {
             alignItems: "center"
           }}
         >
-          {/* <Link to="plan-your-kitchen">
+          <Link to="/plan-your-kitchen">
             <Text
               style={{
                 marginRight: "20px",
@@ -45,8 +45,8 @@ class Header extends React.Component {
             >
               Plan Your Kitchen
             </Text>
-          </Link> */}
-          {/* <Link to="design-build">
+          </Link>
+          <Link to="design-build">
             <Text
               style={{
                 marginRight: "20px",
@@ -56,7 +56,7 @@ class Header extends React.Component {
             >
               Design & Build
             </Text>
-          </Link> */}
+          </Link>
           <Link to="who-we-are">
             <Text
               style={{
