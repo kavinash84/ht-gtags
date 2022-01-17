@@ -65,7 +65,6 @@ import TitlePrice from './TitlePrice';
 import WishListButton from 'hometown-components-dev/lib/WishlistButtonHtV1';
 // import Section from 'hometown-components-dev/lib/SectionHtV1';
 // import UnbxdRecentlyViewed from 'components/UnbxdRecentlyViewed/UnbxdRecentlyViewed';
-
 import LoginModal from 'containers/Login/LoginForm';
 import AddToCart from '../AddToCart';
 import BreadCrumb from './BreadCrumb';
@@ -81,6 +80,7 @@ import Stripes from './PdpStripe';
 
 import demoIcon from '../../../static/play-button.svg';
 import { BackgroundMasker } from 'hometown-components-dev/lib/Shimmer';
+import PdpModal from './PdpModal/PdpModal';
 
 /**
  * Images / Icons
@@ -258,6 +258,7 @@ const getSelectedColor = colors => {
   return activeColorName;
 };
 
+
 @withRouter
 class ProductDetails extends React.Component {
   static contextTypes = {
@@ -267,6 +268,7 @@ class ProductDetails extends React.Component {
     super(props);
     // this.reviewsRef = React.createRef();
     this.state = {
+      open: false,
       openLogin: false,
       showmore: true,
       showmorecolorproducts: true,
@@ -293,6 +295,14 @@ class ProductDetails extends React.Component {
     };
     this.reviewRef = React.createRef();
   }
+
+  onOpenPdpModal = () => {
+    this.setState({ open: true });
+  };
+  onClosePdpModal = () => {
+    this.setState({ open: false });
+  };
+
   componentDidMount() {
     const { dispatch } = this.context.store;
     const {
@@ -835,10 +845,17 @@ class ProductDetails extends React.Component {
                       fontSize: "18px",
                       border: "1px solid #707070",
                       backgroundColor: "#fff"
-                    }} >
+                    }} 
+                    onClick={this.onOpenPdpModal}>
                       More options
                     </button>
-
+                    <ResponsiveModal
+          classNames={{ modal: 'pdpmodal'}}
+          onCloseModal={this.onClosePdpModal}
+          open={this.state.open}
+        >
+          <PdpModal />
+        </ResponsiveModal>
                   </div>
 
                 </Row>
