@@ -16,8 +16,8 @@ const canonicals = {
   '/home-furnishings/bath-accessories/tumblers-homefurnishings/': '/bath/bath-accessories/tumblers/',
   '/home-furnishings/bath-accessories/soap-dish-homefurnishings/': '/bath/bath-accessories/soap-dish/',
   '/home-furnishings/bath-accessories/shower-rods-homefurnishings/': '/bath/bath-accessories/shower-rods/',
-  '/kitchenware/kitchen-linen/table-mat/': '/tableware/table-essentials/table-mats/',
-  '/kitchenware/kitchen-linen/table-cover/': '/tableware/table-essentials/table-covers/',
+  '/tableware-kitchenware/tabletop-accessories/': '/tableware-kitchenware/tabletop-accessories/',
+  '/tableware-kitchenware/table-cover/': '/tableware-kitchenware/tabletop-accessories/',
 
   '/bath/bath-linen': '/home-furnishings/bath-linens/',
   '/bath/bath-linen/bath-towels': '/home-furnishings/bath-linen/bath-towels-homefurnishings/',
@@ -34,8 +34,8 @@ const canonicals = {
   '/home-furnishings/bath-accessories/toothbrush-holders-homefurnishingss': '/bath/bath-accessories/tumblers/',
   '/home-furnishings/bath-accessories/soap-dish-homefurnishings': '/bath/bath-accessories/soap-dish/',
   '/home-furnishings/bath-accessories/shower-rods-homefurnishings': '/bath/bath-accessories/shower-rods/',
-  '/kitchenware/kitchen-linen/table-mat': '/tableware/table-essentials/table-mats/',
-  '/kitchenware/kitchen-linen/table-cover': '/tableware/table-essentials/table-covers/'
+  '/tableware-kitchenware/tabletop-accessories': '/tableware-kitchenware/tabletop-accessories/',
+  '/tableware-kitchenware/table-cover': '/tableware-kitchenware/tabletop-accessories/'
 };
 
 export default canonicals;

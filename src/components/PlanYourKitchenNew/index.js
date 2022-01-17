@@ -16,7 +16,7 @@ const check = require("../../../static/new-home/check.svg");
   ({ services, planyourkitchen, userLogin, profile }) => ({
     planyourkitchen,
     pktopBanner: planyourkitchen.data.items.text.pktopBanner,
-    ...services.planyourkitchen
+    ...services.modularkitchen
   }),
   { sendFormData: sendData, loadPincodeDetails: getData }
 )
@@ -47,6 +47,11 @@ class PlanYourKitchenNewContainer extends React.Component {
     this.setState({
       showScript: true
     });
+    setTimeout(() => {
+      this.setState({
+        showScript: false
+      });
+    }, 2000);
   };
   render() {
     const {
