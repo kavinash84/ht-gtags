@@ -6,6 +6,8 @@ import Helmet from 'react-helmet';
 import Select from 'react-select';
 import ReactStars from 'react-stars';
 import { withRouter } from 'react-router';
+import LazyLoad from "react-lazyload";
+import SlickSlider from '../SlickSlider';
 
 /**
  * Modules / Utils / Reducers
@@ -31,7 +33,7 @@ import { togglePopUp } from 'redux/modules/webtochat';
  * Components
  */
 import Box from 'hometown-components-dev/lib/BoxHtV1';
-import Div from "hometown-components/lib/Div";
+import Div from 'hometown-components-dev/lib/BoxHtV1';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import Col from 'hometown-components-dev/lib/ColHtV1';
 import Container from 'hometown-components-dev/lib/ContainerHtV1';
@@ -43,6 +45,7 @@ import Row from 'hometown-components-dev/lib/RowHtV1';
 import Label from 'hometown-components-dev/lib/LabelHtV1';
 import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
 import Section from 'hometown-components-dev/lib/SectionHtV1';
+import Img from 'hometown-components-dev/lib/ImageHtV1';
 /**
  * Page Components
  */
@@ -96,7 +99,14 @@ const pinIcon = require('../../../static/pinterest-pdp.svg');
  * styles
  */
 const styles = require('./productIndex.scss');
-
+const adjustSlides = length => ({
+  slidesToShow: length >= 1 ? 1.3 : length,
+  slidesToScroll: 1,
+  autoplay: false,
+  infinite: false,
+  dots: false,
+  arrows: false
+});
 const qtyOptions = sku => {
   if (sku.meta) {
     let qty = sku.meta.quantity;
@@ -845,17 +855,17 @@ class ProductDetails extends React.Component {
                       fontSize: "18px",
                       border: "1px solid #707070",
                       backgroundColor: "#fff"
-                    }} 
-                    onClick={this.onOpenPdpModal}>
+                    }}
+                      onClick={this.onOpenPdpModal}>
                       More options
                     </button>
                     <ResponsiveModal
-          classNames={{ modal: 'pdpmodal'}}
-          onCloseModal={this.onClosePdpModal}
-          open={this.state.open}
-        >
-          <PdpModal />
-        </ResponsiveModal>
+                      classNames={{ modal: 'pdpmodal' }}
+                      onCloseModal={this.onClosePdpModal}
+                      open={this.state.open}
+                    >
+                      <PdpModal />
+                    </ResponsiveModal>
                   </div>
 
                 </Row>
@@ -1424,7 +1434,35 @@ class ProductDetails extends React.Component {
                 ))}
               </Box>
             )}
+            {/* bought together */}
+            <LazyLoad height={150}>
+              <Section>
+                <Heading color="#222222" ta="center">
+                  Bought Together
+                </Heading>
+                <Div>
+                  <SlickSlider className="mainSlider" settings={adjustSlides(8)}>
+                    <Div
 
+                      style={{ position: 'relative', borderRadius: '5px', height: 'auto' }}
+                      p="10px"
+                      bg="white"
+                    >
+                      <div style={{ position: 'relative', height: '250px', display: 'flex' }}>
+                        <Img
+                          src="https://www.hometown.in/media/cms/hometownnew/desktopnewhomepage/shopbycat/shopbycat01.png"
+                          alt="BT!"
+                          height="100%"
+                          width="auto%"
+                          m="auto"
+                          style={{ border: '2px solid #FAF4F2' }}
+                        />
+                      </div>
+                    </Div>
+                  </SlickSlider>
+                </Div>
+              </Section>
+            </LazyLoad>
             {/* Related Products List */}
             {relatedproductsList.length > 0 && (
               <Row py={36}>
@@ -1465,6 +1503,8 @@ class ProductDetails extends React.Component {
             </Col>
           </Row>
         </ResponsiveVideoModal>
+
+
       </div>
     );
   }
