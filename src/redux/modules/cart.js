@@ -355,7 +355,9 @@ export const removeFromCart = (cartId, session, pincode = PINCODE, qty = '', con
     types: [REMOVE_FROM_CART, REMOVE_FROM_CART_SUCCESS, REMOVE_FROM_CART_FAIL],
     promise: async ({ client }) => {
       try {
-        const response = await client.delete(`${ADDTOCART_API}/${cartId}/${session}/${pincode}`);
+        const response = await client.delete(`${ADDTOCART_API}/${pincode}`, {
+          data: cartId
+        });
         return response;
       } catch (error) {
         throw error;
