@@ -32,7 +32,7 @@ import HomeFurnishingContainer from "../../components/HomewareCat/HomeFurnishing
 import TablewareKitchenware from "../../components/HomewareCat/TablewareKitchenware";
 const styles = require("./Category.scss");
 // import "./Category.scss";
-import { Redirect } from 'react-router-dom';
+
 
 const getFaqs = faqs => {
   const seoFaq = JSON.parse(faqs).map(faq => {
@@ -247,13 +247,16 @@ export default class Category extends Component {
                 :
                 currentCategory === "tableware-kitchenware" ? (
                   <TablewareKitchenware />
-                ) :
+                )
+                  :
                   currentCategory === "tableware" ? (
                     <Redirect to="/tableware-kitchenware" />
                   ) :
                     currentCategory === "kitchenware" ? (
                       <Redirect to="/tableware-kitchenware" />
-                    ) : (
+                    )
+
+                      : (
                         <div>
                           {/* Offer Bar */}
                           {category.offers && (
