@@ -40,6 +40,7 @@ export const PRODUCT_DELIVERY_DETAILS = "tesla/product/delivery-detail";
 export const RELATED_PRODUCTS = "tesla/product/related-products";
 export const RECENTLY_VEIWED = "tesla/recently-viewed";
 export const EMI_OPTIONS = "tesla/bank-emi";
+export const BOUGHT_TOGETHER = "tesla/product/catalog-bought-together";
 export const COMBINED_BUY = "tesla/product/combined-set-products";
 /* Category Page */
 

@@ -1,4 +1,4 @@
-import { PRODUCT_DETAIL, PRODUCT_DELIVERY_DETAILS } from 'helpers/apiUrls';
+import { PRODUCT_DETAIL, PRODUCT_DELIVERY_DETAILS, BOUGHT_TOGETHER } from 'helpers/apiUrls';
 
 const LOAD_PRODUCT_DESCRIPTION = 'productdetails/LOAD_PRODUCT_DESCRIPTION';
 const LOAD_PRODUCT_DESCRIPTION_SUCCESS = 'productdetails/LOAD_PRODUCT_DESCRIPTION_SUCCESS';
@@ -8,6 +8,9 @@ const GET_DELIVERY_DETAILS = 'productdetails/GET_DELIVERY_DETAILS';
 const GET_DELIVERY_DETAILS_SUCCESS = 'productdetails/GET_DELIVERY_DETAILS_SUCCESS';
 const GET_DELIVERY_DETAILS_FAIL = 'productdetails/GET_DELIVERY_DETAILS_FAIL';
 
+const LOAD_BOUGHT_TOGETHER = 'productdetails/LOAD_BOUGHT_TOGETHER';
+const LOAD_BOUGHT_TOGETHER_SUCCESS = 'productdetails/LOAD_BOUGHT_TOGETHER_FAIL';
+const LOAD_BOUGHT_TOGETHER_FAIL = 'productdetails/LOAD_BOUGHT_TOGETHER_FAIL';
 const SET_PROUDUCT_POSITION = 'products/SET_PROUDUCT_POSITION';
 
 const PRODUCT_DETAILS_TRACK = 'productdetails/PRODUCT_DETAILS_TRACK';
@@ -46,6 +49,26 @@ export default function reducer(state = initialState, action = {}) {
         loaded: false,
         error: action.error
       };
+    case LOAD_BOUGHT_TOGETHER:
+      return {
+        ...state,
+        loading: true,
+        loaded: false
+      }
+    case LOAD_BOUGHT_TOGETHER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        boughtTogether: action.result
+      }
+    case LOAD_BOUGHT_TOGETHER_FAIL:
+      return {
+        ...state,
+        loading: false,
+        loaded: false,
+        error: action.error
+      }
     case GET_DELIVERY_DETAILS:
       return {
         ...state,
@@ -101,7 +124,22 @@ export const getDelieveryInfo = (simpleSku, pincode) => ({
     }
   }
 });
-
+export const loadBoughtTogether = (sku) => ({
+  types: [LOAD_BOUGHT_TOGETHER, LOAD_BOUGHT_TOGETHER_SUCCESS, LOAD_BOUGHT_TOGETHER_FAIL],
+  promise: async ({ client }) => {
+    try {
+      const postData = {
+        sku: sku
+      };
+      const response = await client.post(BOUGHT_TOGETHER, postData);
+      response.sku = sku;
+      return response;
+    } catch (error) {
+      return error;
+    }
+  },
+  sku
+});
 export const setProductPosition = payLoad => ({
   type: SET_PROUDUCT_POSITION,
   payLoad
