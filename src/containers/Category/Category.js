@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Helmet from "react-helmet";
 import { connect } from "react-redux";
-
+import { Redirect } from "react-router-dom"
 /* ====== Components ====== */
 import Box from "hometown-components-dev/lib/BoxHtV1";
 import Body from "hometown-components-dev/lib/BodyHtV1";
@@ -32,6 +32,7 @@ import HomeFurnishingContainer from "../../components/HomewareCat/HomeFurnishing
 import TablewareKitchenware from "../../components/HomewareCat/TablewareKitchenware";
 const styles = require("./Category.scss");
 // import "./Category.scss";
+import { Redirect } from 'react-router-dom';
 
 const getFaqs = faqs => {
   const seoFaq = JSON.parse(faqs).map(faq => {
@@ -246,57 +247,63 @@ export default class Category extends Component {
                 :
                 currentCategory === "tableware-kitchenware" ? (
                   <TablewareKitchenware />
-                ) : (
-                    <div>
-                      {/* Offer Bar */}
-                      {category.offers && (
-                        <Box bg="heading" pt={30} pb={20}>
-                          <Container>
-                            <Row justifyContent="center">
-                              {this.renderOffers(category.offers || [])}
-                            </Row>
-                          </Container>
-                        </Box>
-                      )}
-
-                      {/* Main Slider */}
-                      {category && <MainSlider data={category.main} />}
-
-                      {/* Breadcrumb */}
-                      <TitleBar title="Home Furnishings">
-                        <BreadCrumb
-                          urlKey={currentCategory}
-                          name={pageTitle}
-                          handleCategoryClick={this.handleCategoryClick}
-                        />
-                      </TitleBar>
-
-                      {/* Category Carousel */}
-                      {category &&
-                        category.sections &&
-                        category.sections.map((cat, index) => (
-                          <Section key={String(index)}>
-                            {cat.title !== "" && (
+                ) :
+                  currentCategory === "tableware" ? (
+                    <Redirect to="/tableware-kitchenware" />
+                  ) :
+                    currentCategory === "kitchenware" ? (
+                      <Redirect to="/tableware-kitchenware" />
+                    ) : (
+                        <div>
+                          {/* Offer Bar */}
+                          {category.offers && (
+                            <Box bg="heading" pt={30} pb={20}>
                               <Container>
-                                {CommonLayout(
-                                  cat.component,
-                                  cat.title,
-                                  cat.data,
-                                  cat.is_product
-                                )}
+                                <Row justifyContent="center">
+                                  {this.renderOffers(category.offers || [])}
+                                </Row>
                               </Container>
-                            )}
-                          </Section>
-                        ))}
-                      {category && (
-                        <Box display="inline-block" width="100%">
-                          <Container>
-                            <UnbxdTopSellers category={category.title} />
-                          </Container>
-                        </Box>
+                            </Box>
+                          )}
+
+                          {/* Main Slider */}
+                          {category && <MainSlider data={category.main} />}
+
+                          {/* Breadcrumb */}
+                          <TitleBar title="Home Furnishings">
+                            <BreadCrumb
+                              urlKey={currentCategory}
+                              name={pageTitle}
+                              handleCategoryClick={this.handleCategoryClick}
+                            />
+                          </TitleBar>
+
+                          {/* Category Carousel */}
+                          {category &&
+                            category.sections &&
+                            category.sections.map((cat, index) => (
+                              <Section key={String(index)}>
+                                {cat.title !== "" && (
+                                  <Container>
+                                    {CommonLayout(
+                                      cat.component,
+                                      cat.title,
+                                      cat.data,
+                                      cat.is_product
+                                    )}
+                                  </Container>
+                                )}
+                              </Section>
+                            ))}
+                          {category && (
+                            <Box display="inline-block" width="100%">
+                              <Container>
+                                <UnbxdTopSellers category={category.title} />
+                              </Container>
+                            </Box>
+                          )}
+                        </div>
                       )}
-                    </div>
-                  )}
             {/* SEO Content */}
             {seoInfo && seoInfo.seo_text && (
               <SeoContent>
