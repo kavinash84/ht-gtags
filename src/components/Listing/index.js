@@ -1,21 +1,21 @@
 // import Label from 'hometown-components-dev/lib/LabelHtV1';
-import ResponsiveModal from "components/Modal";
-import LoginModal from "containers/Login/LoginForm";
-import Box from "hometown-components-dev/lib/BoxHtV1";
-import PropTypes from "prop-types";
-import React from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { addToCart } from "redux/modules/cart";
-import { setPincode, setPincodeFilter } from "redux/modules/pincode";
-import { setProductPosition } from "redux/modules/productdetails";
-import { toggleWishList, wishListWaitList } from "redux/modules/wishlist";
-import { formatProductURL } from "utils/helper";
+import ResponsiveModal from 'components/Modal';
+import LoginModal from 'containers/Login/LoginForm';
+import Box from 'hometown-components-dev/lib/BoxHtV1';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { addToCart } from 'redux/modules/cart';
+import { setPincode, setPincodeFilter } from 'redux/modules/pincode';
+import { setProductPosition } from 'redux/modules/productdetails';
+import { toggleWishList, wishListWaitList } from 'redux/modules/wishlist';
+import { formatProductURL } from 'utils/helper';
 // import ScrollToTop from '../ScrollToTop';
-import BreadCrumb from "./BreadCrumb";
-import CategoryBar from "./CategoryBar";
-import TitleBar from "./TitleBar";
-import UnbxdListing from "./UnbxdListing";
+import BreadCrumb from './BreadCrumb';
+import CategoryBar from './CategoryBar';
+import TitleBar from './TitleBar';
+import UnbxdListing from './UnbxdListing';
 
 // const sortByList = require('data/sortby');
 
@@ -70,7 +70,7 @@ class Listing extends React.Component {
     // quickViewSku: '',
     // simpleSku: '',
     openLogin: false,
-    display: "block"
+    display: 'block'
   };
   componentWillMount() {
     // const {
@@ -91,8 +91,8 @@ class Listing extends React.Component {
       }
     } = this.props;
     // console.log(pathname);
-    if (window && breadCrumbs && pathname.indexOf("search") === -1) {
-      let url = "";
+    if (window && breadCrumbs && pathname.indexOf('search') === -1) {
+      let url = '';
       breadCrumbs.forEach((item, i) => {
         if (i === breadCrumbs.length - 1) {
           url += `${item.name}`;
@@ -100,12 +100,12 @@ class Listing extends React.Component {
           url += `${item.name}>`;
         }
       });
-      window.unbxd_category = url || "None";
+      window.unbxd_category = url || 'None';
       // console.log(`unbxd_category - did mount- url- ${url}`);
     } else {
       // eslint-disable-next-line react/no-did-mount-set-state
       this.setState({
-        display: "none"
+        display: 'none'
       });
     }
     if (window) {
@@ -144,8 +144,8 @@ class Listing extends React.Component {
       // This is to prevent calling rendering listing when moving away from listing page
       const { breadCrumbs } = this.props;
       // const { breadCrumbs} = this.state.product.categoryDetails
-      if (window && breadCrumbs && pathname.indexOf("search") === -1) {
-        let url = "";
+      if (window && breadCrumbs && pathname.indexOf('search') === -1) {
+        let url = '';
         breadCrumbs.forEach((item, i) => {
           if (i === breadCrumbs.length - 1) {
             url += `${item.name}`;
@@ -153,11 +153,11 @@ class Listing extends React.Component {
             url += `${item.name}>`;
           }
         });
-        window.unbxd_category = url || "None";
+        window.unbxd_category = url || 'None';
       } else if (prevState.display !== this.state.display) {
         // eslint-disable-next-line react/no-did-update-set-state
         this.setState({
-          display: "none"
+          display: 'none'
         });
       }
       const { dispatch } = this.context.store;
@@ -172,7 +172,7 @@ class Listing extends React.Component {
     //     display: 'none'
     //   })
     // }
-    this.props.history.location.action = "";
+    this.props.history.location.action = '';
   }
   // onOpenQuickViewModal = (sku, simpleSku, soldOut, deliveredBy, rating) => {
   //   this.setState({
@@ -221,17 +221,13 @@ class Listing extends React.Component {
   //   history.push(link);
   // };
   componentWillUnmount() {
-    window.unbxd_category = "";
+    window.unbxd_category = '';
   }
   onClickWishList = (sku, simpleSku) => {
     // e.preventDefault();
     const {
-      wishlistToggle,
-      wishListData,
-      isLoggedIn,
-      addToWaitList,
-      selectedPincode
-    } = this.props;
+ wishlistToggle, wishListData, isLoggedIn, addToWaitList, selectedPincode
+} = this.props;
     if (isLoggedIn) {
       wishlistToggle(wishListData, sku, simpleSku, selectedPincode)
         .then(() => {
@@ -275,7 +271,7 @@ class Listing extends React.Component {
         }
       })
       .catch(() => {
-        console.log("unbxd addToCart callback failed !");
+        console.log('unbxd addToCart callback failed !');
       });
   };
   isInCart = sku => {
@@ -289,7 +285,7 @@ class Listing extends React.Component {
   };
   gotoCart = () => {
     const { history } = this.props;
-    const cartURL = "/checkout/cart";
+    const cartURL = '/checkout/cart';
     history.push(cartURL);
   };
   handleLoginModal = () => {
@@ -297,12 +293,8 @@ class Listing extends React.Component {
   };
   render() {
     const {
-      categoryName,
-      productCount,
-      breadCrumbs,
-      history,
-      categoryBar
-    } = this.props;
+ categoryName, productCount, breadCrumbs, history, categoryBar
+} = this.props;
     const { display } = this.state;
     // const uniqueFilters = {};
     // console.log(display);
@@ -310,20 +302,9 @@ class Listing extends React.Component {
       <Box>
         {/* <BestOfferBanners bannerData={bannerData} history={history} /> */}
         <Box>
-          {/* <TitleBar
-            title={categoryName}
-            productCount={productCount}
-            display={display}
-          > */}
-          <BreadCrumb
-            categoryDetails={breadCrumbs}
-            handleCategoryClick={this.handleCategoryClick}
-          />
-          {/* </TitleBar> */}
-          <div class="unbxd-page-title">
-            <div class="unbxd-page-name"></div>
-            <div class="unbxd-page-spellcheck"></div>
-          </div>
+          <TitleBar title={categoryName} productCount={productCount} display={display}>
+            <BreadCrumb categoryDetails={breadCrumbs} handleCategoryClick={this.handleCategoryClick} />
+          </TitleBar>
           <CategoryBar
             pathname={history.location.pathname}
             categoryBar={categoryBar}
@@ -332,7 +313,7 @@ class Listing extends React.Component {
           />
           <UnbxdListing />
           <ResponsiveModal
-            classNames={{ modal: "loginModal" }}
+            classNames={{ modal: 'loginModal' }}
             onCloseModal={this.handleLoginModal}
             open={this.state.openLogin}
           >
@@ -349,8 +330,8 @@ class Listing extends React.Component {
 Listing.defaultProps = {
   wishList: [],
   wishListData: [],
-  categoryName: "",
-  productCount: "",
+  categoryName: '',
+  productCount: '',
   // category: '',
   // filters: [],
   // appliedFilters: [],
