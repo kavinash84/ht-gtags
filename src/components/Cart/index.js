@@ -476,7 +476,9 @@ const Cart = ({
                           fontSize={12}
                           display="flex"
                           alignItems="center"
-                          disabled={cartItemLoading(item.id_customer_cart)}
+                          disabled={cartItemLoading(
+                            item.product_info.product_id
+                          )}
                           onClick={onClick(
                             // item.id_customer_cart,
                             {
