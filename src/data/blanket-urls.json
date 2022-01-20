@@ -219,8 +219,8 @@
 	"/furniture/tables-living-room/hometown/": "/furniture/living-room-furniture/",
 	"/furniture/shoe-racks/hometown/": "/furniture/shoe-racks/",
 	"/furniture/wall-entertainment-units/hometown/": "/furniture/living-room-furniture/tv-units/",
-  "/furniture/bedroom/hometown/": "/furniture/bedroom-furniture/",
-  "/furniture/beds/hometown/":"/furniture/bedroom-furniture/beds/",
+	"/furniture/bedroom/hometown/": "/furniture/bedroom-furniture/",
+	"/furniture/beds/hometown/": "/furniture/bedroom-furniture/beds/",
 	"/furniture/all-beds/hometown/": "/furniture/bedroom-furniture/beds/",
 	"/furniture/single-beds/hometown/": "/furniture/beds/single-beds/",
 	"/furniture/queen-double-size-beds/hometown/": "/furniture/beds/queen-size-beds/",
@@ -375,5 +375,6 @@
 	"/lighting/outdoor-wall-lights/hometown/": "/home-decor/lamps-lighting/",
 	"/lighting/outdoor-lights/outdoor-wall-lights/outdoor-upward-mount/hometown/": "/home-decor/lamps-lighting/",
 	"/lighting/outdoor-lights/outdoor-wall-lights/outdoor-downward-mount/hometown/": "/home-decor/lamps-lighting/",
-	"/lighting/outdoor-lights/outdoor-wall-lights/pillar-post-lights/hometown/": "/home-decor/lamps-lighting/"
+	"/lighting/outdoor-lights/outdoor-wall-lights/pillar-post-lights/hometown/": "/home-decor/lamps-lighting/",
+	"/tableware/table-essentials": "tableware-kitchenware/tableessentials"
 }
