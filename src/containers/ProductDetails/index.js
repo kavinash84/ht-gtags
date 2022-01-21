@@ -1,6 +1,6 @@
 import HomeTownLoader from 'containers/Loader';
 import { provideHooks } from 'redial';
-import { loadProductDescription, gaTrack as productLoadGaTrack } from 'redux/modules/productdetails';
+import { loadProductDescription, gaTrack as productLoadGaTrack, loadBoughtTogether } from 'redux/modules/productdetails';
 import { loadColorProducts } from 'redux/modules/colorproducts';
 import { load as loadRelatedProducts } from 'redux/modules/relatedproducts';
 import { loadEmiOptions } from 'redux/modules/emioptions';
@@ -17,6 +17,7 @@ const hooks = {
     const pincode = selectedPincode || PINCODE;
     if (currentsku !== params.skuId) {
       await dispatch(loadProductDescription(params.skuId, pincode));
+      await dispatch(loadBoughtTogether(params.skuId));
     }
   },
   defer: ({ store: { dispatch, getState }, params }) => {
