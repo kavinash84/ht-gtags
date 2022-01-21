@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const styles = require("./BreadCrumb.scss");
+const homelogo = require('../../../static/categories/ht-home.svg');
 
 const cleanTail = url => {
   if (url[url.length - 1] === "/") {
@@ -24,10 +25,10 @@ const formatLink = url => {
 const BreadCrumb = ({ categoryDetails, handleCategoryClick }) => {
   let link = "";
   return (
-    <div className={styles.breadCrumb_container}>
+    <div className={styles.breadCrumb_container} style={{ backgroundColor: '#FFF8F4', padding:'1rem'}}>
       <div className={styles.homeList}>
-        <Link to="/">
-          <span>Home</span>
+      <Link to="/">
+          <span><img alt="Home" src={homelogo} /></span>
         </Link>
       </div>
       <ul
@@ -52,7 +53,13 @@ const BreadCrumb = ({ categoryDetails, handleCategoryClick }) => {
                     itemProp="item"
                     to={`/${formatLink(link)}`}
                   >
-                    <span itemProp="name">{item.name}</span>
+                    <span itemProp="name"
+                     className={
+                        index === categoryDetails.length - 1
+                          ? `${styles.lastBreadCrumb}`
+                          : ""
+                      }
+                    >{item.name}</span>
                     <meta itemProp="position" content={index + 1} />
                   </Link>
                 </li>
