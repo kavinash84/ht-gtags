@@ -136,7 +136,7 @@ export default class CategoryCarousel extends Component {
         </SlickSlider>
         <Box
           bg="#F7F0F0"
-          style={{ height: "400px", width: "100vw", zIndex: -1 }}
+          style={{ height: "360px", width: "100vw", zIndex: -1 }}
           mt="-21%"
           ml="-40px"
         />
