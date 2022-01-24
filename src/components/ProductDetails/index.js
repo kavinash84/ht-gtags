@@ -699,6 +699,7 @@ class ProductDetails extends React.Component {
       fk_catalog_supplier: fkCatalogSupplier = null,
       categories
     } = meta;
+    console.log("salman", meta);
     const {
       offer_discount_percentage: offerDiscountPercentage,
       coupon_code: couponCode,
@@ -867,7 +868,9 @@ class ProductDetails extends React.Component {
                         paddingTop: "15px"
                       }}
                     >
-                      Extra 10% HT wallet cashback
+                      {` Extra ${Math.round(
+                        ht_wallet_cashback
+                      )}% HT wallet cashback`}
                     </div>
                   ) : null}
                 </div>
