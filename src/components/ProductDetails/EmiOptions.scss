@@ -1,0 +1,87 @@
+.desContainer {
+  // margin: 0 30px;
+  position: relative;
+  bottom: 40px;
+  width: 80%;
+  text-align: center;
+}
+
+.descriptionTitle {
+  // padding: 1rem 1rem;
+  // line-height: 28px !important;
+  color: white !important;
+  font-size: 16px;
+  text-align: center;
+  font-weight: bold;
+  line-height: 30px;
+}
+
+.subTitlesBold {
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  // padding-bottom: 5px;
+  font-size: 16px;
+  margin: 0;
+}
+
+.subTitlesLight {
+  color: white;
+  font-size: 14px;
+  text-align: center !important;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.seperator {
+  height: 55px;
+  width: 1px;
+}
+
+.descriptionText {
+  margin: 20px 0;
+  line-height: 24px !important;
+  font-size: 16px;
+  text-align: center;
+  font-family: light;
+}
+
+.avatar {
+  border-radius: 50%;
+  height: 300px;
+  width: 300px;
+  margin: 0 auto !important;
+  // max-width: 90% !important;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.horizontalSeperator {
+  box-sizing: border-box;
+  width: 20px !important;
+  height: 2px;
+  border-bottom: 2px solid #222222;
+  margin: 10px 0;
+}
+.paymentOptions {
+  padding: 8px 10px;
+  background-color: #fff;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid grey;
+  border-radius: 0.5rem;
+}
+
+.templateTitle {
+  text-align: center;
+  margin-bottom: 0;
+  padding-bottom: 5px;
+  font-size: 20px;
+}
+
+.templateSubtitle {
+  text-align: center;
+  font-weight: bold;
+  font-size: 11px;
+}

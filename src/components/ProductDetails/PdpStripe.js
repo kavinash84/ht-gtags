@@ -1,20 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import Box from 'hometown-components-dev/lib/BoxHtV1';
-import Text from 'hometown-components-dev/lib/TextHtV1';
-import Flex from 'hometown-components-dev/lib/FlexHtV1';
-import Col from 'hometown-components-dev/lib/ColHtV1';
-import Image from 'hometown-components-dev/lib/ImageHtV1';
+import Box from "hometown-components-dev/lib/BoxHtV1";
+import Text from "hometown-components-dev/lib/TextHtV1";
+import Flex from "hometown-components-dev/lib/FlexHtV1";
+import Col from "hometown-components-dev/lib/ColHtV1";
+import Image from "hometown-components-dev/lib/ImageHtV1";
 
-const styles = require('./PdpStripe.scss');
+const styles = require("./PdpStripe.scss");
 
-const Warranty = require('../../../static/pdp-icons/36-months-warranty.png');
-const Emi = require('../../../static/pdp-icons/EMI-icon.png');
-const Safe = require('../../../static/pdp-icons/Free-&-Safe-delivery-icon.png');
+const Warranty = require("../../../static/pdp-icons/36-months-warranty.png");
+const Emi = require("../../../static/pdp-icons/EMI-icon.png");
+const Safe = require("../../../static/pdp-icons/Free-&-Safe-delivery-icon.png");
+const Noquestion = require("../../../static/pdp-icons/No-questions-asked-returns.png");
 // const Noquestion = require('../../../static/pdp-icons/No-questions-asked-returns.png');
-const ServiceCamp = require('../../../static/pdp-icons/service-camp-icon.png');
-const freeinstallation = require('../../../static/pdp-icons/free-installation.png');
+const ServiceCamp = require("../../../static/pdp-icons/service-camp-icon.png");
+const freeinstallation = require("../../../static/pdp-icons/free-installation.png");
 
 const Stripes = ({
   emi,
@@ -31,18 +32,17 @@ const Stripes = ({
   // const isFurnitureCategory = fkCatalogSupplier === '38';
   // const noQuestionsAsked = isFurnitureCategory && brand === 'HomeTown';
   <Box>
-    <Box className={styles.dots} />
     <Flex justifyContent="flex-start" alignItems="baseline">
       {isEmiAvailable ? (
         <Col variant="col-2" m="5px auto" px="0" alignItems="center">
           <Image className={styles.pdpStripeIcons} src={Emi} />
           <Text fontSize=" 10px" lineHeight="13px" textAlign="center">
             EMI from ₹{emi}
-            <a href>{children}</a>{' '}
+            <a href>{children}</a>{" "}
           </Text>
         </Col>
       ) : null}
-      {warrantyPeriod && warrantyPeriod !== 'None' ? (
+      {warrantyPeriod && warrantyPeriod !== "None" ? (
         <Col variant="col-2" m="5px auto" px="0" alignItems="center">
           <Image className={styles.pdpStripeIcons} src={Warranty} />
           <Text fontSize=" 10px" lineHeight="13px" textAlign="center">
@@ -66,15 +66,15 @@ const Stripes = ({
           </Text>
         </Col>
       ) : null}
-      {freeInstallation === 'Yes' ? (
+      {freeInstallation === "Yes" ? (
         <Col variant="col-2" m="5px auto" px="0" alignItems="center">
-          <Image className={styles.pdpStripeIcons} src={freeinstallation} />
+          <Image className={styles.pdpStripeIcons} src={Noquestion} />
           <Text fontSize="10px" textAlign="center" lineHeight="13px">
             Free Installation
           </Text>
         </Col>
       ) : null}
-      {freeVisit === 'Yes' ? (
+      {freeVisit === "Yes" ? (
         <Col variant="col-2" m="5px auto" px="0" alignItems="center">
           <Image className={styles.pdpStripeIcons} src={ServiceCamp} />
           <Text fontSize=" 10px" lineHeight="13px" textAlign="center">
@@ -83,7 +83,6 @@ const Stripes = ({
         </Col>
       ) : null}
     </Flex>
-    <Box className={styles.dots} />
   </Box>
 );
 Stripes.propTypes = {
@@ -102,9 +101,9 @@ Stripes.defaultProps = {
   emi: 0,
   // brand: '',
   isEmiAvailable: false,
-  warrantyPeriod: '',
-  freeVisit: 'no',
-  freeInstallation: 'no',
+  warrantyPeriod: "",
+  freeVisit: "no",
+  freeInstallation: "no",
   isFurnitureStripe: false
 };
 

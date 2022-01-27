@@ -1,154 +1,187 @@
-import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
-import Container from 'hometown-components-dev/lib/ContainerHtV1';
-import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import React, { Fragment } from "react";
+import PropTypes from "prop-types";
+import Container from "hometown-components-dev/lib/ContainerHtV1";
+import Heading from "hometown-components-dev/lib/HeadingHtV1";
 // import HeadingH5 from 'components/HeadingH5';
-import Row from 'hometown-components-dev/lib/RowHtV1';
+import Row from "hometown-components-dev/lib/RowHtV1";
 // import span from 'components/span';
-import Section from 'hometown-components-dev/lib/SectionHtV1';
-import Div from 'hometown-components-dev/lib/BoxHtV1';
-import ReactStars from 'react-stars';
-import styled from 'styled-components';
+import Section from "hometown-components-dev/lib/SectionHtV1";
+import Div from "hometown-components-dev/lib/BoxHtV1";
+import ReactStars from "react-stars";
+import styled from "styled-components";
 
 const ReviewWrapper = styled(Div)`
   right: -11%;
-  
+
   width: 45%;
   position: absolute;
 `;
 
 const TitlePrice = ({
-  name, price, discPrice, savingsRs, savingsPercentage, count, ratings, onClickReviews
+  name,
+  brand,
+  price,
+  discPrice,
+  savingsRs,
+  savingsPercentage,
+  count,
+  ratings,
+  onClickReviews
 }) => (
-    <Section mb="0.3125rem" p="0">
-      <Container type="container" pr="1rem" pl="1rem">
+  <Section mb="0.3125rem" p="0">
+    <Container type="container" pr="1rem" pl="1rem">
+      <Row display="block" mr="0" ml="0">
+        <Heading
+          itemProp="name"
+          fontSize="30px"
+          color="#222222"
+          mb="0"
+          mt="5px"
+          lh="1.7"
+          fontFamily="medium"
+          ellipsis={false}
+          pb="5px"
+        >
+          {name}
+        </Heading>
+        <div
+          style={{
+            fontSize: "20px",
+            color: "#323131",
+            fontFamily: "medium"
+          }}
+          itemProp="brand"
+        >
+          By {brand}
+        </div>
         <Row display="block" mr="0" ml="0">
-          <Heading
-            itemProp="name"
-            fontSize="30px"
-            color="#222222"
-            mb="0"
-            mt="5px"
-            lh="1.7"
-            fontFamily="medium"
-            ellipsis={false}
-            pb="5px"
-          >
-            {name}
-          </Heading>
-          <Row display="block" mr="0" ml="0">
-            <Div col="12">
-              <h5
-                itemProp="offers"
-                itemScope
-                itemType="http://schema.org/Offer"
-                fontSize="1.125em"
-                color="primary"
-                mb="0px"
-                pb="0"
-                mt="0px"
-                fontFamily="regular"
-                ellipsis={false}
+          <Div col="12">
+            <h5
+              style={{ fontSize: "1.125em", color: "black" }}
+              itemProp="offers"
+              itemScope
+              itemType="http://schema.org/Offer"
+              ellipsis={false}
+            >
+              {/* <span
+                style={{
+                  content: "INR",
+                  color: "#f98d29",
+                  fontSize: "1.375rem"
+                }}
+                va="text-top"
+                itemProp="priceCurrency"
               >
+                ₹
+              </span> */}
+              <span
+                style={{ color: "#f98d29", fontSize: "1.375rem" }}
+                itemProp="price"
+                content={discPrice.split(",").join("")}
+              >
+                {discPrice}
+              </span>
+              {price !== discPrice && (
                 <span
-                  va="text-top"
-                  itemProp="priceCurrency"
-                  content="INR"
-                  color="#f98d29"
-                  fontSize="1.375rem"
-                >₹</span>
+                  style={{
+                    fontSize: "0.875rem",
+                    color: "rgba(0, 0, 0, 0.4)",
+                    marginLeft: "0.75rem",
+                    fontFamily: "light",
+                    lineHeight: "2.2"
+                  }}
+                  fontSize=""
+                  fontFamily="light"
+                  type="lt"
+                  va="middle"
+                >
+                  ₹{price}
+                </span>
+              )}
+              {price !== discPrice && (
                 <span
-                  itemProp="price"
-                  va="text-top"
-                  content={discPrice.split(',').join('')}
-                  color="#f98d29"
-                  fontSize="1.375rem"
-                >{discPrice}</span>
-                {price !== discPrice &&
+                  style={{
+                    fontSize: "0.75rem",
+                    color: "rgba(0, 0, 0, 0.4)",
+                    marginLeft: "7px",
+                    fontFamily: "regular",
+                    lineHeight: "1.85"
+                  }}
+                >
+                  (incl. of all taxes)
+                </span>
+              )}
+            </h5>
+            <h5
+              style={{
+                fontSize: "1rem",
+                color: "rgba(0, 0, 0, 0.8)",
+                paddingBottom: "2px",
+                fontFamily: "medium"
+              }}
+              itemScope
+              itemType=""
+            >
+              {price !== discPrice && (
+                <span
+                  style={{
+                    fontSize: "0.75rem",
+                    color: "rgba(0, 0, 0, 0.4)",
+                    fontFamily: "light"
+                  }}
+                  va="middle"
+                >
+                  Saving ₹{savingsRs} ({savingsPercentage}% OFF)
+                </span>
+              )}
+            </h5>
+          </Div>
+          <Div col="12" ta="right" mt="2px">
+            {ratings !== 0 && (
+              <Row display="block" mr="-44px" ml="0">
+                <Div col="12" onClick={onClickReviews}>
+                  <ReactStars
+                    count={5}
+                    className="ratings"
+                    size={18}
+                    value={Number(ratings)}
+                    half
+                    edit={false}
+                    color2="rgb(255, 215, 0)"
+                  />
                   <span
+                    className="ratingsCount"
                     fontSize="0.875rem"
-                    color="rgba(0, 0, 0, 0.4)"
-                    ml="0.75rem"
-                    fontFamily="light"
-                    type="lt"
-                    va="middle"
-                    lh="2.2"
-                  >₹{price}</span>
-                }
-                {price !== discPrice &&
-                  <span
-                    fontSize="0.75rem"
-                    color="rgba(0, 0, 0, 0.4)"
-                    ml="7px"
-                    fontFamily="regular"
-                    va="text-top"
-                    lh="1.85"
+                    color="#29d"
+                    float="left"
+                    mt="4px"
                   >
-                    (incl. of all taxes)
-              </span>
-                }
-              </h5>
-              <h5
-                itemScope
-                itemType=""
-                fontSize="1rem"
-                color="textDark"
-                mb="0px"
-                pb="2px"
-                mt="0px"
-                fontFamily="medium"
-              >
-                {price !== discPrice &&
-                  <span
-                    fontSize="0.75rem"
-                    color="rgba(0, 0, 0, 0.4)"
-                    ml="0"
-                    fontFamily="light"
-                    va="middle"
-                  >Saving ₹{savingsRs}
-                    {' '}({savingsPercentage}% OFF)
-              </span>
-                }
-              </h5>
-            </Div>
-            <Div col="12" ta="right" mt="2px">
-              {ratings !== 0 &&
-                <Row display="block" mr="-44px" ml="0" >
-                  <Div col="12" onClick={onClickReviews}>
-                    <ReactStars
-                      count={5}
-                      className="ratings"
-                      size={18}
-                      value={Number(ratings)}
-                      half
-                      edit={false}
-                      color2="rgb(255, 215, 0)"
-                    />
-                    <span
-                      className="ratingsCount"
-                      fontSize="0.875rem"
-                      color="#29d"
-                      float="left"
-                      mt="4px"
-                    >({count} Review{Number(count) === 1 ? '' : 's'})</span>
-                    <div className="hide" itemProp="aggregateRating" itemScope itemType="http://schema.org/AggregateRating">
-                      Rated
-                  <span itemProp="ratingValue">{ratings}</span>/5 based on
-                  <span itemProp="reviewCount">{count}</span>
+                    ({count} Review{Number(count) === 1 ? "" : "s"})
+                  </span>
+                  <div
+                    className="hide"
+                    itemProp="aggregateRating"
+                    itemScope
+                    itemType="http://schema.org/AggregateRating"
+                  >
+                    Rated
+                    <span itemProp="ratingValue">{ratings}</span>/5 based on
+                    <span itemProp="reviewCount">{count}</span>
                     customer reviews
-                </div>
-                  </Div>
-                </Row>
-              }
-            </Div>
-          </Row>
+                  </div>
+                </Div>
+              </Row>
+            )}
+          </Div>
         </Row>
-      </Container>
-    </Section>
-  );
+      </Row>
+    </Container>
+  </Section>
+);
 
 TitlePrice.propTypes = {
   name: PropTypes.string,
+  brand: PropTypes.string,
   price: PropTypes.string,
   discPrice: PropTypes.string,
   savingsPercentage: PropTypes.string,
@@ -159,14 +192,15 @@ TitlePrice.propTypes = {
 };
 
 TitlePrice.defaultProps = {
-  name: '',
-  price: '',
-  discPrice: '',
-  savingsPercentage: '',
-  savingsRs: '',
+  name: "",
+  brand: "",
+  price: "",
+  discPrice: "",
+  savingsPercentage: "",
+  savingsRs: "",
   count: 0,
   ratings: 0,
-  onClickReviews: () => { }
+  onClickReviews: () => {}
 };
 
 export default TitlePrice;
