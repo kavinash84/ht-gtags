@@ -81,9 +81,9 @@ import WishListButton from "hometown-components-dev/lib/WishlistButtonHtV1";
 // import Section from 'hometown-components-dev/lib/SectionHtV1';
 // import UnbxdRecentlyViewed from 'components/UnbxdRecentlyViewed/UnbxdRecentlyViewed';
 import LoginModal from "containers/Login/LoginForm";
-import AddToCart from "../AddToCart";
+import AddToCart from "./pdpAddToCart";
 import BreadCrumb from "./BreadCrumb";
-import BuyNow from "../BuyNow";
+import BuyNow from "./pdpBuyNow";
 import EmiModal from "../EmiModal";
 import EmiOptions from "./EmiOptions";
 import Pincode from "./Pincode";
@@ -1040,6 +1040,136 @@ class ProductDetails extends React.Component {
                 >
                   <Pincode key="pincode" />
                 </ServiceDetails>
+                {/* Add to cart and Buy now buttons */}
+                <Div>
+                  <Row
+                    ml="0rem"
+                    mr="0rem"
+                    mb="0rem"
+                    justifyContent="space-between"
+                    style={{
+                      marginBottom: "30px",
+                      width: "100%",
+                      zIndex: "1000",
+                      backgroundColor: "white"
+                    }}
+                  >
+                    <BuyNow
+                      quantity={productQty.value || 1}
+                      simpleSku={simpleSku}
+                      sku={sku}
+                      size="block"
+                      btnType="primary"
+                      isSoldOut={
+                        !(
+                          simples[simpleSku].meta.quantity &&
+                          parseInt(simples[simpleSku].meta.quantity, 10) > 0
+                        )
+                      }
+                    />
+                    <Row
+                      ml="0px"
+                      mr="0px"
+                      style={{ width: "30%" }}
+                      justifyContent="flex-end"
+                    >
+                      <Row
+                        ml="0px"
+                        mr="0px"
+                        justifyContent="center"
+                        style={{
+                          alignItems: "center",
+                          width: "80%",
+                          border: "1px solid #E9916B",
+                          borderRadius: "5px"
+                        }}
+                      >
+                        <Button
+                          width="30%"
+                          pl="0.5rem"
+                          pr="0.5rem"
+                          style={{ border: "none" }}
+                          // onClick={() => this.handleQty("decrement")}
+                        >
+                          -
+                        </Button>
+                        <Div style={{ width: "30%", textAlign: "center" }}>
+                          {/* {prodQty} */}qua
+                        </Div>
+                        <Button
+                          width="30%"
+                          pl="0.5rem"
+                          pr="0.5rem"
+                          style={{ border: "none" }}
+                          // onClick={() => this.handleQty("increment")}
+                        >
+                          +
+                        </Button>
+                      </Row>
+                    </Row>
+                    <AddToCart
+                      skuItem={skuItem}
+                      quantityChange={quantityChange}
+                      quantity={productQty.value || 1}
+                      simpleSku={simpleSku}
+                      sku={sku}
+                      configId={configId}
+                      itemId={sku}
+                      isSoldOut={
+                        !(
+                          simples[simpleSku].meta.quantity &&
+                          parseInt(simples[simpleSku].meta.quantity, 10) > 0
+                        )
+                      }
+                    />
+                    <Row
+                      ml="0px"
+                      mr="0px"
+                      style={{ width: "30%" }}
+                      justifyContent="flex-end"
+                    >
+                      <Row
+                        ml="0px"
+                        mr="0px"
+                        justifyContent="center"
+                        style={{
+                          alignItems: "center",
+                          width: "80%",
+                          border: "1px solid #515151",
+                          borderRadius: "5px"
+                        }}
+                      >
+                        {/* <Button
+                          onClick={onClickWishList(
+                            sku,
+                            wishListData,
+                            wishlistToggle,
+                            isLoggedIn,
+                            history,
+                            addToWaitList,
+                            router,
+                            simpleSku,
+                            pincode.selectedPincode
+                          )}
+                          // isWishList={isInWishList(wishList, sku)}
+                          // wishlistLoading={isInWishList(loadingList, sku)}
+                          p="0"
+                          border="none"
+                        >
+                          <Img
+                            src={
+                              isInWishList(wishList, sku)
+                                ? WishlistIconSelect
+                                : WishlistIcon
+                            }
+                            alt="wishlist icon"
+                            width="24px"
+                          />
+                        </Button> */}
+                      </Row>
+                    </Row>
+                  </Row>
+                </Div>
 
                 {/* Reviews */}
                 {!!weightedRating && reviewsData.length ? (
@@ -1159,40 +1289,6 @@ class ProductDetails extends React.Component {
                     </Text>
                   </Row>
                 ) : null}
-
-                {/* Add to cart and Buy now buttons */}
-                <Row mx={-10}>
-                  <Col variant="col-6" px={10}>
-                    <AddToCart
-                      skuItem={skuItem}
-                      quantityChange={quantityChange}
-                      quantity={productQty.value || 1}
-                      simpleSku={simpleSku}
-                      sku={sku}
-                      configId={configId}
-                      itemId={sku}
-                      isSoldOut={
-                        !(
-                          simples[simpleSku].meta.quantity &&
-                          parseInt(simples[simpleSku].meta.quantity, 10) > 0
-                        )
-                      }
-                    />
-                  </Col>
-                  <Col variant="col-6" px={10}>
-                    <BuyNow
-                      quantity={productQty.value || 1}
-                      simpleSku={simpleSku}
-                      sku={sku}
-                      isSoldOut={
-                        !(
-                          simples[simpleSku].meta.quantity &&
-                          parseInt(simples[simpleSku].meta.quantity, 10) > 0
-                        )
-                      }
-                    />
-                  </Col>
-                </Row>
 
                 {/* Share on social media */}
                 <Row mt={30} mx={0}>
