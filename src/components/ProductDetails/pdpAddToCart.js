@@ -102,9 +102,10 @@ const AddToCart = ({
     <Fragment>
       {isSoldOut ? (
         <Button
+          backgroundColor="#626463"
           variant={`outline.error.${size}`}
           height={height}
-          style={{ width: "70%" }}
+          style={{ width: "70%", color: "#FFFFFF", borderColor: "#626463" }}
         >
           Out of Stock
         </Button>
@@ -112,7 +113,10 @@ const AddToCart = ({
         <Fragment>
           {!checkStatus || !checkSKUItem ? (
             <Button
+              backgroundColor="#626463"
+              borderColor="#626463"
               width="70%"
+              color="#FFFFFF"
               // variant={`outline.primary.${size}`}
               variant="outline.primary.large"
               height={height}
@@ -158,6 +162,9 @@ const AddToCart = ({
             <Row mx={0} alignItems="center">
               <Box as={Link} to={CART_URL} style={{ width: "70%" }}>
                 <Button
+                  border="1px solid #626463"
+                  backgroundColor="#626463"
+                  color="#FFFFFF"
                   variant="outline.primary.large"
                   width={1}
                   height={height}

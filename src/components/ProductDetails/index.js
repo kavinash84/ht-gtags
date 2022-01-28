@@ -104,9 +104,12 @@ import PdpModal from "./PdpModal/PdpModal";
 const freeShippingIcon = require("../../../static/free-shipping.svg");
 const warrentyIcon = require("../../../static/warrenty.svg");
 const emiIcon = require("../../../static/emi.svg");
+const WishlistIcon = require("../../../static/pdp-icons/wishlist.png");
+const WishlistIconSelect = require("../../../static/pdp-icons/wishlistSelect.png");
 const fbIcon = require("../../../static/fb-pdp.svg");
 const email = require("../../../static/email-pdp.svg");
 const pinIcon = require("../../../static/pinterest-pdp.svg");
+const DownArrow = require("../../../static/pdp-icons/down-arrow.svg");
 
 /**
  * styles
@@ -850,20 +853,6 @@ class ProductDetails extends React.Component {
                   )}
 
                   {/* Wishlist Button */}
-                  {/* <WishListButton
-                    onClick={onClickWishList(
-                      sku,
-                      wishListData,
-                      wishlistToggle,
-                      isLoggedIn,
-                      this.handleLoginModal,
-                      addToWaitList,
-                      simpleSku,
-                      pincode.selectedPincode
-                    )}
-                    isWishList={isInWishList(wishList, sku)}
-                    wishlistLoading={isInWishList(loadingList, sku)}
-                  /> */}
                 </Box>
               </Col>
               {/* Right Column */}
@@ -922,6 +911,7 @@ class ProductDetails extends React.Component {
                       onClick={this.onOpenPdpModal}
                     >
                       More options
+                      <Image src={DownArrow} style={{ marginLeft: "10px" }} />
                     </button>
                     <ResponsiveModal
                       classNames={{ modal: "pdpmodal" }}
@@ -1070,6 +1060,7 @@ class ProductDetails extends React.Component {
                     <Row
                       ml="0px"
                       mr="0px"
+                      height="45px"
                       style={{ width: "30%" }}
                       justifyContent="flex-end"
                     >
@@ -1085,6 +1076,8 @@ class ProductDetails extends React.Component {
                         }}
                       >
                         <Button
+                          backgroundColor="#fff"
+                          color="#000"
                           width="30%"
                           pl="0.5rem"
                           pr="0.5rem"
@@ -1094,9 +1087,11 @@ class ProductDetails extends React.Component {
                           -
                         </Button>
                         <Div style={{ width: "30%", textAlign: "center" }}>
-                          {/* {prodQty} */}qua
+                          {/* {prodQty} */}1
                         </Div>
                         <Button
+                          backgroundColor="#fff"
+                          color="#000"
                           width="30%"
                           pl="0.5rem"
                           pr="0.5rem"
@@ -1122,6 +1117,20 @@ class ProductDetails extends React.Component {
                         )
                       }
                     />
+                    {/* <WishListButton
+                      onClick={onClickWishList(
+                        sku,
+                        wishListData,
+                        wishlistToggle,
+                        isLoggedIn,
+                        this.handleLoginModal,
+                        addToWaitList,
+                        simpleSku,
+                        pincode.selectedPincode
+                      )}
+                      isWishList={isInWishList(wishList, sku)}
+                      wishlistLoading={isInWishList(loadingList, sku)}
+                    /> */}
                     <Row
                       ml="0px"
                       mr="0px"
@@ -1132,6 +1141,7 @@ class ProductDetails extends React.Component {
                         ml="0px"
                         mr="0px"
                         justifyContent="center"
+                        backgroundColor="#fff"
                         style={{
                           alignItems: "center",
                           width: "80%",
@@ -1139,22 +1149,24 @@ class ProductDetails extends React.Component {
                           borderRadius: "5px"
                         }}
                       >
-                        {/* <Button
+                        <button
+                          style={{
+                            padding: "0",
+                            border: "none",
+                            backgroundColor: "#ffffff"
+                          }}
                           onClick={onClickWishList(
                             sku,
                             wishListData,
                             wishlistToggle,
                             isLoggedIn,
-                            history,
+                            this.handleLoginModal,
                             addToWaitList,
-                            router,
                             simpleSku,
                             pincode.selectedPincode
                           )}
                           // isWishList={isInWishList(wishList, sku)}
                           // wishlistLoading={isInWishList(loadingList, sku)}
-                          p="0"
-                          border="none"
                         >
                           <Img
                             src={
@@ -1165,7 +1177,7 @@ class ProductDetails extends React.Component {
                             alt="wishlist icon"
                             width="24px"
                           />
-                        </Button> */}
+                        </button>
                       </Row>
                     </Row>
                   </Row>

@@ -88,7 +88,9 @@ class BuyNow extends React.Component {
           <Fragment>
             {!checkStatus ? (
               <Button
+                backgroundColor="#E9916B"
                 width="70%"
+                marginBottom="10px"
                 variant="primary.large"
                 disabled={addLoading}
                 onClick={this.handleClick(
