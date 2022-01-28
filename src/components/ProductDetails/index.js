@@ -58,6 +58,7 @@ import Label from "hometown-components-dev/lib/LabelHtV1";
 import FormInput from "hometown-components-dev/lib/FormsHtV1/FormInputHtV1";
 import Section from "hometown-components-dev/lib/SectionHtV1";
 import Img from "hometown-components-dev/lib/ImageHtV1";
+
 /**
  * Page Components
  */
@@ -84,6 +85,7 @@ import LoginModal from "containers/Login/LoginForm";
 import AddToCart from "./pdpAddToCart";
 import BreadCrumb from "./BreadCrumb";
 import BuyNow from "./pdpBuyNow";
+import ShareBar from "./pdpShareBar";
 import EmiModal from "../EmiModal";
 import EmiOptions from "./EmiOptions";
 import Pincode from "./Pincode";
@@ -93,7 +95,7 @@ import ReviewFilter from "./ReviewFilter";
 // import UnbxdCompleteTheLook from './UnbxdCompleteTheLook';
 import FreebieProduct from "./FreebieProduct";
 import Stripes from "./PdpStripe";
-
+const ShareIcon = require("../../../static/pdp-icons/share.png");
 import demoIcon from "../../../static/play-button.svg";
 import { BackgroundMasker } from "hometown-components-dev/lib/Shimmer";
 import PdpModal from "./PdpModal/PdpModal";
@@ -289,6 +291,9 @@ const getSelectedColor = colors => {
 class ProductDetails extends React.Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
+  };
+  state = {
+    displayShareBar: false
   };
   constructor(props) {
     super(props);
@@ -566,7 +571,11 @@ class ProductDetails extends React.Component {
       [`${name}Error`]: false
     });
   };
-
+  handleShareBar = () => {
+    this.setState({
+      displayShareBar: !this.state.displayShareBar
+    });
+  };
   hashLinkScroll = () => {
     const { hash } = window.location;
     const {
@@ -764,6 +773,7 @@ class ProductDetails extends React.Component {
       mrp: maxPrice,
       discount_type: discountType
     } = pricingDetails;
+    const { displayShareBar } = this.state;
     const checkSpecialPrice = Number(specialPrice) || Number(price);
     const isEmiAvailable = Number(checkSpecialPrice) >= EMI_THRESHOLD;
     // const checkSpecialPrice = Number(specialPriceEmi) || Number(price);
@@ -1182,7 +1192,30 @@ class ProductDetails extends React.Component {
                     </Row>
                   </Row>
                 </Div>
-
+                {/* share product */}
+                <Div>
+                  <Div
+                    style={{
+                      display: "flex",
+                      justifyContent: "flex-start",
+                      alignItems: "center",
+                      marginBottom: "30px"
+                    }}
+                  >
+                    <Img
+                      src={ShareIcon}
+                      height="22px"
+                      width="auto"
+                      style={{ display: "inline-block" }}
+                    />
+                    <Text ml="0.5rem" onClick={this.handleShareBar}>
+                      Share this product
+                    </Text>
+                  </Div>
+                  {displayShareBar ? (
+                    <ShareBar title={name} url={productURL} mt="10px" />
+                  ) : null}
+                </Div>
                 {/* Reviews */}
                 {!!weightedRating && reviewsData.length ? (
                   <div style={{ display: "flex" }}>
