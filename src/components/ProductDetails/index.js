@@ -1217,7 +1217,7 @@ class ProductDetails extends React.Component {
                   ) : null}
                 </Div>
                 {/* Reviews */}
-                {!!weightedRating && reviewsData.length ? (
+                {/* {!!weightedRating && reviewsData.length ? (
                   <div style={{ display: "flex" }}>
                     <ReviewDisplay
                       pr="5px"
@@ -1277,11 +1277,11 @@ class ProductDetails extends React.Component {
                       Write a Review
                     </a>
                   </Box>
-                )}
+                )} */}
 
                 {/* Color Options */}
 
-                {bogoBundle && bogoBundle.name && (
+                {/* {bogoBundle && bogoBundle.name && (
                   <Row
                     display="block"
                     mb="0"
@@ -1291,10 +1291,10 @@ class ProductDetails extends React.Component {
                   >
                     <FreebieProduct bogoBundle={bogoBundle} />
                   </Row>
-                )}
+                )} */}
 
                 {/* Quantity */}
-                <Flex alignItems="center">
+                {/* <Flex alignItems="center">
                   <Text fontFamily="regular" mr={10}>
                     Qty.
                   </Text>
@@ -1318,10 +1318,10 @@ class ProductDetails extends React.Component {
                       this.handleSelectQty(value);
                     }}
                   />
-                </Flex>
+                </Flex> */}
                 {/* Offers */}
 
-                {demoProduct === "1" ? (
+                {/* {demoProduct === "1" ? (
                   <Row ml="0" mr="0" mb="15px" mt="-10px" alignItems="center">
                     <Image
                       src={demoIcon}
@@ -1333,10 +1333,10 @@ class ProductDetails extends React.Component {
                       Available for demo on the Cart page
                     </Text>
                   </Row>
-                ) : null}
+                ) : null} */}
 
                 {/* Share on social media */}
-                <Row mt={30} mx={0}>
+                {/* <Row mt={30} mx={0}>
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
@@ -1366,11 +1366,11 @@ class ProductDetails extends React.Component {
                       <Image src={email} alt="Mail" />
                     </SocialButton>
                   </a>
-                </Row>
+                </Row> */}
               </Col>
             </Row>
             <Box>
-              <Row
+              {/* <Row
                 variant="row.contentCenter"
                 mx={0}
                 sx={{
@@ -1454,9 +1454,9 @@ class ProductDetails extends React.Component {
                 )}
 
                 {this.renderAttributes(groupedAttributes)}
-              </Row>
+              </Row> */}
 
-              {activeSpec === "details" ? (
+              {/* {activeSpec === "details" ? (
                 <Box
                   px="5%"
                   py="2%"
@@ -1515,16 +1515,16 @@ class ProductDetails extends React.Component {
                     />
                   )}
                 </Box>
-              )}
+              )} */}
 
               {/* Specifications */}
-              <Specs
+              {/* <Specs
                 activeSpec={activeSpec}
                 specs={groupedAttributes}
                 pincode={pincode.selectedPincode}
-              />
+              /> */}
               {/* Video */}
-              {groupedattributes && groupedattributes.youtubeid && (
+              {/* {groupedattributes && groupedattributes.youtubeid && (
                 // <Row my={30}>
                 //   <Col variant="col-12">
                 //     <Video id={getVideoID(groupedattributes.youtubeid)} />
@@ -1542,9 +1542,9 @@ class ProductDetails extends React.Component {
                     Watch video
                   </Button>
                 </div>
-              )}
+              )} */}
               {/* Usps */}
-              <Row
+              {/* <Row
                 my={40}
                 width={["80%", "80%", "60%"]}
                 justifyContent="space-between"
@@ -1566,7 +1566,7 @@ class ProductDetails extends React.Component {
                     <UspCol src={warrentyIcon} text={uspWarranty} />
                   </div>
                 ) : null}
-              </Row>
+              </Row> */}
 
               {/* DIMENSIONS */}
               {/* { isFurnitureTrue()} */}
@@ -1587,7 +1587,7 @@ class ProductDetails extends React.Component {
                         <Image src={`${images[0].url}-zoom.jpg`} alt="" />
                       )}
                   </Box> */}
-                  <Box>
+                  {/* <Box>
                     <Row
                       variant="row.contentCenter"
                       mx={0}
@@ -1613,7 +1613,7 @@ class ProductDetails extends React.Component {
                         {height && `Height : ${this.mmToInchConvert(height)}" `}
                       </span>
                     </Row>
-                  </Box>
+                  </Box> */}
                 </Box>
               )}
 
@@ -1731,7 +1731,7 @@ class ProductDetails extends React.Component {
               </Box>
             </Box>
             {/* Combined Offers */}
-            {combinedbuy.length > 0 && (
+            {/* {combinedbuy.length > 0 && (
               <Box id="combined_buy_offers" pt={48}>
                 <Box textAlign="center" mb={20}>
                   <Heading variant="heading.regular" sx={{ fontWeight: 400 }}>
@@ -1755,7 +1755,7 @@ class ProductDetails extends React.Component {
                   </Row>
                 ))}
               </Box>
-            )}
+            )} */}
             {/* bought together */}
             <LazyLoad height={150}>
               <Section>
