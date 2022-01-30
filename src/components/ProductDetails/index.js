@@ -1625,23 +1625,6 @@ class ProductDetails extends React.Component {
                 <Box textAlign="center" mb={30}>
                   <Heading variant="heading.regular">Reviews</Heading>
                 </Box>
-                {/* <AddReview
-                ratings={weightedRating}
-                reviews={reviewsData.length}
-                count={5}
-                variant="col-8"
-                catalogId={groupedattributes.id_catalog_config}
-                loaded
-                onClickSubmit={this.addReview}
-                adding={adding}
-                added={added}
-                toggleReview={toggleReviewBox}
-                addNewReview={addNewReview}
-              >
-                {reviewsData.length > 0 && (
-                  <ReviewFilter selectedFilterProp={selectedFilter} onFilterChange={this.onFilterChange} />
-                )}
-              </AddReview> */}
                 <div ref={this.reviewRef}>
                   <Box width={1}>
                     <ReviewDisplay
