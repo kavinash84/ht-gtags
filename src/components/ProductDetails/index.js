@@ -76,7 +76,6 @@ import ReviewDisplay from "hometown-components-dev/lib/ReviewsHtV1/ReviewDisplay
 import ServiceDetails from "hometown-components-dev/lib/ProductDetailsHtV1/ServiceDetails";
 // import EmiOptions from 'hometown-components-dev/lib/ProductDetailsHtV1/EmiOptions';
 // import ShareBar from 'components/ShareBar';
-import Specs from "hometown-components-dev/lib/ProductDetailsHtV1/Specs";
 import TitlePrice from "./TitlePrice";
 import WishListButton from "hometown-components-dev/lib/WishlistButtonHtV1";
 // import Section from 'hometown-components-dev/lib/SectionHtV1';
@@ -99,6 +98,8 @@ const ShareIcon = require("../../../static/pdp-icons/share.png");
 import demoIcon from "../../../static/play-button.svg";
 import { BackgroundMasker } from "hometown-components-dev/lib/Shimmer";
 import PdpModal from "./PdpModal/PdpModal";
+import Specs from "./Specs/specs";
+import BaughtTogether from "./boughtTogether";
 
 /**
  * Images / Icons
@@ -322,7 +323,8 @@ class ProductDetails extends React.Component {
       reviewError: false,
       reviewErrorMessage: "Review cannot be left Blank",
       addreview: false,
-      openVideo: false
+      openVideo: false,
+      showReviews: false
     };
     this.reviewRef = React.createRef();
   }
@@ -1216,570 +1218,170 @@ class ProductDetails extends React.Component {
                     <ShareBar title={name} url={productURL} mt="10px" />
                   ) : null}
                 </Div>
-                {/* Reviews */}
-                {/* {!!weightedRating && reviewsData.length ? (
-                  <div style={{ display: "flex" }}>
-                    <ReviewDisplay
-                      pr="5px"
-                      ratings={weightedRating}
-                      reviews={reviewsData.length}
-                      count={5}
-                      pb={20}
-                      justifyContent="flex-start"
-                      sx={{ borderBottom: "none" }}
-                    />
-                    <a
-                      variant="linkPrimary"
-                      href="#review-section"
-                      style={{
-                        cursor: "default"
-                      }}
-                    >
-                      <Label
-                        mr={5}
-                        color="primary"
-                        fontFamilly="medium"
-                        fontSize={14}
-                        sx={{ cursor: "pointer" }}
-                      >
-                        {`Review${reviewsData.length !== 1 ? "s " : " "} `}
-                      </Label>
-                    </a>
-                    <Box>
-                      <a
-                        variant="linkPrimary"
-                        href="#review-section"
-                        onClick={this.toggleAddReview}
-                        ml={10}
-                        sx={{
-                          borderLeft: "primary"
-                        }}
-                        style={{
-                          color: "#f15a22",
-                          fontSize: "14px"
-                        }}
-                      >
-                        {" |"} Write a Review
-                      </a>
-                    </Box>
-                  </div>
-                ) : (
-                  <Box pb={20}>
-                    <a
-                      variant="linkPrimary"
-                      href="#review-section"
-                      onClick={this.toggleAddReview}
-                      sx={{
-                        borderLeft: "primary"
-                      }}
-                      style={{ color: "#f15a22" }}
-                    >
-                      Write a Review
-                    </a>
-                  </Box>
-                )} */}
-
-                {/* Color Options */}
-
-                {/* {bogoBundle && bogoBundle.name && (
-                  <Row
-                    display="block"
-                    mb="0"
-                    mr="0.9375rem"
-                    ml="0.9375rem"
-                    className={styles.freebieProduct}
-                  >
-                    <FreebieProduct bogoBundle={bogoBundle} />
-                  </Row>
-                )} */}
-
-                {/* Quantity */}
-                {/* <Flex alignItems="center">
-                  <Text fontFamily="regular" mr={10}>
-                    Qty.
-                  </Text>
-                  <Select
-                    placeholder=""
-                    options={qtyOptions(simples[simpleSku])}
-                    value={
-                      qtyOptions(simples[simpleSku]).length > 0
-                        ? productQty
-                        : { value: 0, label: "0" }
-                    }
-                    defaultValue={1}
-                    styles={customStyles}
-                    isDisabled={
-                      !(
-                        simples[simpleSku].meta.quantity &&
-                        parseInt(simples[simpleSku].meta.quantity, 10) > 0
-                      )
-                    }
-                    onChange={({ value }) => {
-                      this.handleSelectQty(value);
-                    }}
+                <div>
+                  <Specs
+                    specs={groupedAttributes}
+                    prodDetail={true}
+                    pincode={pincode.selectedPincode}
                   />
-                </Flex> */}
-                {/* Offers */}
 
-                {/* {demoProduct === "1" ? (
-                  <Row ml="0" mr="0" mb="15px" mt="-10px" alignItems="center">
-                    <Image
-                      src={demoIcon}
-                      alt="Schedule you virtual live demo"
-                      width="24px"
-                      mr="10px"
-                    />
-                    <Text fontSize="14px" color="secondary" display="contents">
-                      Available for demo on the Cart page
-                    </Text>
-                  </Row>
-                ) : null} */}
-
-                {/* Share on social media */}
-                {/* <Row mt={30} mx={0}>
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={`http://www.facebook.com/sharer.php?u=${productURL}`}
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      background: "#f5f5f5",
+                      width: "100%",
+                      color: "rgba(0,0,0,0.6)",
+                      border: "1px solid #d4d4d4",
+                      borderBottom: !this.state.showReviews
+                        ? "1px solid #d4d4d4"
+                        : "none",
+                      padding: "15px 20px",
+                      cursor: "pointer",
+                      fontSize: " 0.875rem"
+                    }}
+                    onClick={() => {
+                      this.setState({ showReviews: !this.state.showReviews });
+                    }}
                   >
-                    <SocialButton>
-                      <Image src={fbIcon} alt="Facebook" />
-                    </SocialButton>
-                  </a>
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={`http://pinterest.com/pin/create/button/?url=${productURL}&description=${name}`}
-                  >
-                    <SocialButton>
-                      <Image src={pinIcon} alt="Pinterest" />
-                    </SocialButton>
-                  </a>
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={`mailto:?subject=${productPageTitle(
-                      name
-                    )}&body=${productURL}`}
-                  >
-                    <SocialButton>
-                      <Image src={email} alt="Mail" />
-                    </SocialButton>
-                  </a>
-                </Row> */}
+                    <h4>Reviews</h4>
+                    <span>{this.state.showReviews ? "-" : "+"}</span>
+                  </div>
+                  {this.state.showReviews ? (
+                    <div
+                      style={{
+                        background: "#f5f5f5",
+                        width: "100%",
+                        border: "1px solid #d4d4d4",
+                        borderTop: "none",
+                        padding: "0px 20px 15px"
+                      }}
+                    >
+                      <Box
+                        id="review-section"
+                        pt={30}
+                        className={styles.reviewSection}
+                      >
+                        <div ref={this.reviewRef}>
+                          <Box width={1}>
+                            <form onSubmit={this.handleSubmit}>
+                              <Box>
+                                <h6
+                                  style={{
+                                    color: "rgba(0,0,0,0.6)",
+                                    margin: "0px 0px 10px"
+                                  }}
+                                >
+                                  Write a Review
+                                </h6>
+                                <Box>
+                                  <FormInput
+                                    label="Name"
+                                    type="text"
+                                    placeholder="Name"
+                                    name="name"
+                                    value={this.state.name}
+                                    feedBackError={nameError}
+                                    feedBackMessage={nameErrorMessage}
+                                    onChange={this.handleChange}
+                                    // ref={(nameInp) => this.myInp = nameInp}
+                                  />
+                                </Box>
+                                <Box marginBottom="0.3125rem">
+                                  <FormInput
+                                    type="textarea"
+                                    label="Review"
+                                    name="review"
+                                    placeholder="Review"
+                                    value={review}
+                                    feedBackError={reviewError}
+                                    feedBackMessage={reviewErrorMessage}
+                                    onChange={this.handleChange}
+                                    rows="3"
+                                    height={80}
+                                  />
+                                </Box>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    alignItems: "center"
+                                  }}
+                                >
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      justifyContent: "space-between",
+                                      alignItems: "center"
+                                    }}
+                                  >
+                                    <Label mr={10}>Rating</Label>
+                                    <ReactStars
+                                      count={5}
+                                      onChange={this.ratingChanged}
+                                      size={20}
+                                      value={this.state.rating}
+                                      half={false}
+                                      color2="#ffd700"
+                                    />
+                                  </div>
+                                  <Box>
+                                    <Button
+                                      type="submit"
+                                      btnType="primary"
+                                      size="large"
+                                      fontFamily="regular"
+                                      fontSize="0.875em"
+                                      height="42px"
+                                      lh="2"
+                                    >
+                                      SUBMIT
+                                    </Button>
+                                  </Box>
+                                </div>
+                              </Box>
+                            </form>
+                            <ReviewDisplay
+                              ratings={weightedRating}
+                              reviews={reviewsData.length}
+                              count={5}
+                            >
+                              {/* {children} */}
+                              {reviewsData.length > 0 && (
+                                <ReviewFilter
+                                  selectedFilterProp={selectedFilter}
+                                  onFilterChange={this.onFilterChange}
+                                />
+                              )}
+                            </ReviewDisplay>
+                          </Box>
+                        </div>
+                        <Reviews
+                          variant="col-12"
+                          reviewItems={
+                            filterChanged ? reviewDataSet : reviews.data
+                          }
+                          showReviews={showReviews}
+                          showMoreReviews={this.showMoreReviews}
+                        />
+                      </Box>
+                    </div>
+                  ) : null}
+                </div>
               </Col>
             </Row>
-            <Box>
-              {/* <Row
-                variant="row.contentCenter"
-                mx={0}
-                sx={{
-                  borderTop: "dividerBold",
-                  borderBottom: "dividerBold",
-                  overflow: "auto",
-                  flexWrap: "nowrap",
-                  justifyContent: "flex-start"
-                }}
-              >
-                <DescriptionButton
-                  onClick={e => {
-                    e.preventDefault();
-                    this.setState({
-                      activeSpec: "description",
-                      activeDescription: description
-                    });
-                  }}
-                  active={activeSpec === "description"}
-                  tab={"description"}
-                >
-                  DESCRIPTION
-                </DescriptionButton>
-                <DescriptionButton
-                  onClick={e => {
-                    e.preventDefault();
-                    this.setState({
-                      activeSpec: "details",
-                      activeDescription: description
-                    });
-                  }}
-                  active={activeSpec === "details"}
-                  tab={"details"}
-                >
-                  DETAILS
-                </DescriptionButton>
-                {careLabel && (
-                  <DescriptionButton
-                    onClick={e => {
-                      e.preventDefault();
-                      this.setState({
-                        activeSpec: "care",
-                        activeDescription: careLabel
-                      });
-                    }}
-                    active={activeSpec === "care"}
-                    tab={"product-care-instructions"}
-                  >
-                    PRODUCT CARE INSTRUCTIONS
-                  </DescriptionButton>
-                )}
-                {productWarranty && (
-                  <DescriptionButton
-                    onClick={e => {
-                      e.preventDefault();
-                      this.setState({
-                        activeSpec: "warranty",
-                        activeDescription: productWarranty
-                      });
-                    }}
-                    active={activeSpec === "warranty"}
-                    tab={"service-assurance-warranty"}
-                  >
-                    SERVICE ASSURANCE / WARRANTY
-                  </DescriptionButton>
-                )}
-                {returnAndCancel && (
-                  <DescriptionButton
-                    onClick={e => {
-                      e.preventDefault();
-                      this.setState({
-                        activeSpec: "return",
-                        activeDescription: returnAndCancel
-                      });
-                    }}
-                    active={activeSpec === "return"}
-                    tab={"return-and-cancellation"}
-                  >
-                    RETURN / CANCELLATION
-                  </DescriptionButton>
-                )}
-
-                {this.renderAttributes(groupedAttributes)}
-              </Row> */}
-
-              {/* {activeSpec === "details" ? (
-                <Box
-                  px="5%"
-                  py="2%"
-                  sx={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    justifyContent: "space-between"
-                  }}
-                >
-                  {groupedAttributes[0].Details.map(detail => {
-                    // if (detail.label !== 'Note' && detail.label !== "What's in the box?") {
-                    if (detail.label !== "Note" && detail.value) {
-                      return (
-                        <Row width="33%" pb={10}>
-                          <Col
-                            width={150}
-                            fontWeight="bold"
-                            fontSize={14}
-                            lineHeight={1.4}
-                          >
-                            {detail.label}
-                          </Col>
-                          {detail.label !== "What's in the box?" ? (
-                            <Col
-                              width="calc(100% - 150px)"
-                              fontSize={14}
-                              lineHeight={1.25}
-                            >
-                              {detail.value}
-                            </Col>
-                          ) : (
-                            <Col
-                              mt="5px"
-                              mb="5px"
-                              itemProp="description"
-                              fontSize="0.875rem"
-                              dangerouslySetInnerHTML={{ __html: detail.value }}
-                              lh="1.6"
-                              color="rgba(0, 0, 0, 0.65)"
-                              fontFamily="light"
-                            />
-                          )}
-                        </Row>
-                      );
-                    }
-                    return null;
-                  })}
-                </Box>
-              ) : (
-                <Box px="10%">
-                  {description && (
-                    <ProductDesc
-                      desc={activeDescription || ""}
-                      showmore={showmore}
-                      toggleShowMore={this.toggleShowMore}
-                    />
-                  )}
-                </Box>
-              )} */}
-
-              {/* Specifications */}
-              {/* <Specs
-                activeSpec={activeSpec}
-                specs={groupedAttributes}
-                pincode={pincode.selectedPincode}
-              /> */}
-              {/* Video */}
-              {/* {groupedattributes && groupedattributes.youtubeid && (
-                // <Row my={30}>
-                //   <Col variant="col-12">
-                //     <Video id={getVideoID(groupedattributes.youtubeid)} />
-                //   </Col>
-                // </Row>
-                <div style={{ display: "flex" }}>
-                  <Button
-                    onClick={() => this.setState({ openVideo: true })}
-                    my={8}
-                    sx={{
-                      width: "60%",
-                      margin: "auto"
-                    }}
-                  >
-                    Watch video
-                  </Button>
-                </div>
-              )} */}
-              {/* Usps */}
-              {/* <Row
-                my={40}
-                width={["80%", "80%", "60%"]}
-                justifyContent="space-between"
-                mx="auto"
-                flexWrap="nowrap"
-              >
-                {!meta.shipping_charge && (
-                  <div style={{ margin: "auto" }}>
-                    <UspCol src={freeShippingIcon} text="Free Shipping" />
-                  </div>
-                )}
-                {isEmiAvailable && (
-                  <div style={{ margin: "auto" }}>
-                    <UspCol src={emiIcon} text="EMI Options" />
-                  </div>
-                )}
-                {warrantyPeriod && warrantyPeriod !== "None" ? (
-                  <div style={{ margin: "auto" }}>
-                    <UspCol src={warrentyIcon} text={uspWarranty} />
-                  </div>
-                ) : null}
-              </Row> */}
-
-              {/* DIMENSIONS */}
-              {/* { isFurnitureTrue()} */}
-              {this.state.isFurniture && (height || width || depth) && (
-                <Box py={20} sx={{ borderTop: "dividerLight" }}>
-                  <Box textAlign="center" mb={30}>
-                    <Text variant="regular" fontSize={16} pb={5}>
-                      DIMENSIONS
-                    </Text>
-                    <Heading variant="heading.regular">
-                      Will it fit in your room?
-                    </Heading>
-                  </Box>
-                  {/* <Box p={15} textAlign="center" sx={{ border: 'dividerLight' }}>
-                    {images && images.length > 2 ? (
-                      <Image src={dimensionImage ? `${dimensionImage}-zoom.jpg` : `${images[2].url}-zoom.jpg`} alt="" />
-                    ) : (
-                        <Image src={`${images[0].url}-zoom.jpg`} alt="" />
-                      )}
-                  </Box> */}
-                  {/* <Box>
-                    <Row
-                      variant="row.contentCenter"
-                      mx={0}
-                      sx={{
-                        borderTop: "dividerBold",
-                        borderBottom: "dividerBold",
-                        padding: "20px 0",
-                        marginTop: "30px",
-                        justifyContent: "flex-start"
-                      }}
-                    >
-                      <span className={styles.overolDimension}>
-                        Overall Dimension{" "}
-                        <span className={styles.dimensionUnit}>(Inches)</span>
-                      </span>
-                      <span className={styles.dimensionSpans}>
-                        {width && `Width : ${this.mmToInchConvert(width)}" `}
-                      </span>
-                      <span className={styles.dimensionSpans}>
-                        {depth && `Depth : ${this.mmToInchConvert(depth)}" `}
-                      </span>
-                      <span className={styles.dimensionSpans}>
-                        {height && `Height : ${this.mmToInchConvert(height)}" `}
-                      </span>
-                    </Row>
-                  </Box> */}
-                </Box>
-              )}
-
-              {/* Complete the look */}
-              {/* <UnbxdCompleteTheLook configId={configId} /> */}
-
-              {/* Review List and Add review */}
-              <Box id="review-section" pt={30} className={styles.reviewSection}>
-                <Box textAlign="center" mb={30}>
-                  <Heading variant="heading.regular">Reviews</Heading>
-                </Box>
-                <div ref={this.reviewRef}>
-                  <Box width={1}>
-                    <ReviewDisplay
-                      ratings={weightedRating}
-                      reviews={reviewsData.length}
-                      count={5}
-                    >
-                      {/* {children} */}
-                      {reviewsData.length > 0 && (
-                        <ReviewFilter
-                          selectedFilterProp={selectedFilter}
-                          onFilterChange={this.onFilterChange}
-                        />
-                      )}
-                      <Button
-                        display={["none", "block"]}
-                        onClick={this.toggleAddReview}
-                      >
-                        Write a Review
-                      </Button>
-                    </ReviewDisplay>
-                    {addreview && (
-                      <form onSubmit={this.handleSubmit}>
-                        <Box width={[1, 1, 5 / 12]}>
-                          <Row alignItems="center" mx={0} mb={15}>
-                            <Label mr={10}>Rating</Label>
-                            <ReactStars
-                              count={5}
-                              onChange={this.ratingChanged}
-                              size={20}
-                              value={this.state.rating}
-                              half={false}
-                              color2="#ffd700"
-                            />
-                          </Row>
-                          <Box>
-                            <FormInput
-                              label="Name"
-                              type="text"
-                              placeholder="Name"
-                              name="name"
-                              value={this.state.name}
-                              feedBackError={nameError}
-                              feedBackMessage={nameErrorMessage}
-                              onChange={this.handleChange}
-                              // ref={(nameInp) => this.myInp = nameInp}
-                            />
-                          </Box>
-                          <Box marginBottom="0.3125rem">
-                            <FormInput
-                              type="textarea"
-                              label="Review"
-                              name="review"
-                              placeholder="Review"
-                              value={review}
-                              feedBackError={reviewError}
-                              feedBackMessage={reviewErrorMessage}
-                              onChange={this.handleChange}
-                              rows="3"
-                              height={80}
-                            />
-                          </Box>
-                          <Box>
-                            <Button
-                              type="submit"
-                              btnType="primary"
-                              size="large"
-                              fontFamily="regular"
-                              fontSize="0.875em"
-                              height="42px"
-                              lh="2"
-                            >
-                              SUBMIT
-                            </Button>
-                          </Box>
-                        </Box>
-                      </form>
-                    )}
-                  </Box>
-                </div>
-                <Reviews
-                  variant="col-12"
-                  reviewItems={filterChanged ? reviewDataSet : reviews.data}
-                  showReviews={showReviews}
-                  showMoreReviews={this.showMoreReviews}
-                />
-              </Box>
-            </Box>
-            {/* Combined Offers */}
-            {/* {combinedbuy.length > 0 && (
-              <Box id="combined_buy_offers" pt={48}>
-                <Box textAlign="center" mb={20}>
-                  <Heading variant="heading.regular" sx={{ fontWeight: 400 }}>
-                    Combined Offers
-                  </Heading>
-                </Box>
-                {combinedbuy.map((item, index) => (
-                  <Row key={String(index)} mx={0}>
-                    <CombinedBuy
-                      title={item.name}
-                      item={item}
-                      data={getProductsList(item.products || [])}
-                      length={item.products.length}
-                      price={item.total_price}
-                      setDiscount={item.discount ? Number(item.discount) : 0}
-                      discountedPrice={item.total_price_after_discount}
-                      handleCombinedBuy={() =>
-                        this.handleCombinedBuy(item, pincode, session)
-                      }
-                    />
-                  </Row>
-                ))}
-              </Box>
-            )} */}
             {/* bought together */}
             <LazyLoad height={150}>
               <Section>
-                <Heading color="#222222" ta="center">
+                <h2 style={{ color: "#222222", textAlign: "center" }}>
                   Bought Together
-                </Heading>
-                <Div>
-                  <SlickSlider
-                    className="mainSlider"
-                    settings={adjustSlides(8)}
-                  >
-                    <Div
-                      style={{
-                        position: "relative",
-                        borderRadius: "5px",
-                        height: "auto"
-                      }}
-                      p="10px"
-                      bg="white"
-                    >
-                      <div
-                        style={{
-                          position: "relative",
-                          height: "250px",
-                          display: "flex"
-                        }}
-                      >
-                        <Img
-                          src="https://www.hometown.in/media/cms/hometownnew/desktopnewhomepage/shopbycat/shopbycat01.png"
-                          alt="BT!"
-                          height="100%"
-                          width="auto%"
-                          m="auto"
-                          style={{ border: "2px solid #FAF4F2" }}
-                        />
-                      </div>
-                    </Div>
-                  </SlickSlider>
-                </Div>
+                </h2>
+                <BaughtTogether data={[]} />
               </Section>
             </LazyLoad>
+            {/* Complete the look */}
+            {/* <UnbxdCompleteTheLook configId={configId} /> */}
             {/* Related Products List */}
             {relatedproductsList.length > 0 && (
               <Row py={36}>
@@ -1794,8 +1396,8 @@ class ProductDetails extends React.Component {
 
             {/* Unbxd Recently Viewed */}
             {/* <Section>
-            <UnbxdRecentlyViewed />
-          </Section> */}
+              <UnbxdRecentlyViewed />
+            </Section> */}
 
             {/* Login modal */}
             <ResponsiveModal
