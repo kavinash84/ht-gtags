@@ -65,7 +65,7 @@ import Img from "hometown-components-dev/lib/ImageHtV1";
 // import Section from 'hometown-components-dev/lib/SectionHtV1';
 // import UnbxdRecentlyViewed from 'components/UnbxdRecentlyViewed/UnbxdRecentlyViewed';
 // import AddReview from 'hometown-components-dev/lib/ReviewsHtV1/WriteReview';
-import ColorOption from "hometown-components-dev/lib/ProductDetailsHtV1/ColorOption";
+import ColorOption from "./ColorOption";
 import CombinedBuy from "components/CombinedBuy";
 import ProductDesc from "hometown-components-dev/lib/ProductDetailsHtV1/ProductDesc";
 import ProductCarousel from "components/ProductCarousel";
@@ -882,10 +882,10 @@ class ProductDetails extends React.Component {
                   style={{ width: "100%" }}
                 >
                   <div style={{ width: "50%" }}>
-                    <Section mt="0" mb="0.3125rem" p="0">
+                    <Section mt="10px" mb="0.3125rem" p="0">
                       {colorProducts.length > 0 && (
                         <Box pb={15}>
-                          <Heading
+                          {/* <Heading
                             fontSize="1em"
                             color="textDark"
                             fontFamily="medium"
@@ -893,7 +893,7 @@ class ProductDetails extends React.Component {
                             mb={15}
                           >
                             Color Options: {getSelectedColor(colorProducts)}
-                          </Heading>
+                          </Heading> */}
                           <ColorOption
                             data={colorProducts}
                             showmorecolorproducts={showmorecolorproducts}
@@ -910,7 +910,7 @@ class ProductDetails extends React.Component {
                     </Section>
                   </div>
 
-                  <div style={{ width: "50%" }}>
+                  <div style={{ width: "50%", marginTop: "20px" }}>
                     <button
                       style={{
                         width: "90%",
@@ -1377,7 +1377,8 @@ class ProductDetails extends React.Component {
                 <h2 style={{ color: "#222222", textAlign: "center" }}>
                   Bought Together
                 </h2>
-                <BaughtTogether data={[]} />
+                {/* <BaughtTogether data={[]} /> */}
+              
               </Section>
             </LazyLoad>
             {/* Complete the look */}
