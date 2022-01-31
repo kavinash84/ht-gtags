@@ -697,6 +697,24 @@ class ProductDetails extends React.Component {
       displayShareBar: !this.state.displayShareBar
     });
   };
+  handleQty = value => {
+    const { prodQty } = this.state;
+    if (value === 'increment' && prodQty < 6) {
+      this.setState(
+        {
+          prodQty: this.state.prodQty + 1
+        },
+        () => this.updatebtTotal('inc', 'no index')
+      );
+    } else if (value === 'decrement' && prodQty > 1) {
+      this.setState(
+        {
+          prodQty: this.state.prodQty - 1
+        },
+        () => this.updatebtTotal('dec', 'no index')
+      );
+    }
+  };
   hashLinkScroll = () => {
     const { hash } = window.location;
     const {
@@ -1316,12 +1334,12 @@ class ProductDetails extends React.Component {
                           pl="0.5rem"
                           pr="0.5rem"
                           style={{ border: "none" }}
-                        // onClick={() => this.handleQty("decrement")}
+                          onClick={() => this.handleQty("decrement")}
                         >
                           -
                         </Button>
                         <Div style={{ width: "30%", textAlign: "center" }}>
-                          {/* {prodQty} */}1
+                          {prodQty}
                         </Div>
                         <Button
                           backgroundColor="#fff"
@@ -1330,7 +1348,7 @@ class ProductDetails extends React.Component {
                           pl="0.5rem"
                           pr="0.5rem"
                           style={{ border: "none" }}
-                        // onClick={() => this.handleQty("increment")}
+                          onClick={() => this.handleQty("increment")}
                         >
                           +
                         </Button>
