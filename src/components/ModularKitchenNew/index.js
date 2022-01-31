@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Header from "./Header";
 import Section from "hometown-components-dev/lib/SectionHtV1";
 import Flex from "hometown-components-dev/lib/FlexHtV1";
+import Container from "hometown-components-dev/lib/ContainerHtV1";
 import Heading from "hometown-components-dev/lib/HeadingHtV1";
 import { connect } from "react-redux";
 import HomeTownAdvantage from "./HomeTownAdvantage";
@@ -18,6 +19,7 @@ import DreamKitchen from "./DreamKitchen";
 import OurPartners from "./OurPartners";
 import Helmet from "react-helmet";
 import Div from "hometown-components-dev/lib/BoxHtV1";
+import SeoContent from "hometown-components-dev/lib/SeoContent";
 import ModularKitchenFormModal from "./ ModularKitchenFormModal";
 import FourSteps from "./FourSteps";
 import { allowNChar, allowTypeOf } from "utils/helper";
@@ -28,6 +30,10 @@ const check = require("../../../static/new-home/check.svg");
 @connect(
   ({ services, modularkitchen, userLogin, profile }) => ({
     modularkitchen,
+    seoInfo:
+      modularkitchen.data &&
+      modularkitchen.data.seo &&
+      modularkitchen.data.seo.items,
     ...services.modularkitchen
   }),
   { sendFormData: sendData, loadPincodeDetails: getData }
@@ -67,7 +73,14 @@ class ModularKitchenNewContainer extends React.Component {
     }, 2000);
   };
   render() {
-    const { whyChooseUs, isLoggedIn, fullName, loading, loaded } = this.props;
+    const {
+      whyChooseUs,
+      isLoggedIn,
+      fullName,
+      loading,
+      loaded,
+      seoInfo
+    } = this.props;
     const { showScript } = this.state;
     return (
       <div>
@@ -181,6 +194,16 @@ class ModularKitchenNewContainer extends React.Component {
             ) : null}
           </Div>
         </Section>
+        {/* SEO Content */}
+        {seoInfo && seoInfo.seo_text && (
+          <SeoContent>
+            <Container>
+              <div>
+                <div dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }} />
+              </div>
+            </Container>
+          </SeoContent>
+        )}
       </div>
     );
   }
