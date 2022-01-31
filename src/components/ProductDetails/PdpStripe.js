@@ -35,7 +35,7 @@ const Stripes = ({
     <Flex justifyContent="flex-start" alignItems="baseline">
       {isEmiAvailable ? (
         <Col variant="col-2" m="5px auto" px="0" alignItems="center">
-          <Image className={styles.pdpStripeIcons} src={Emi} />
+          <Image className={styles.pdpStripeIcons} src={Emi}  />
           <Text fontSize=" 10px" lineHeight="13px" textAlign="center">
             EMI from ₹{emi}
             <a href>{children}</a>{" "}

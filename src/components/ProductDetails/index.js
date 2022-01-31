@@ -117,6 +117,7 @@ const DownArrow = require("../../../static/pdp-icons/down-arrow.svg");
 /**
  * styles
  */
+
 const styles = require("./productIndex.scss");
 const adjustSlides = length => ({
   slidesToShow: length >= 1 ? 1.3 : length,
@@ -1921,6 +1922,108 @@ class ProductDetails extends React.Component {
                 ) : null}
               </Section>
             </LazyLoad>
+            {displayBTModal && !boughtTogether.error_message ? (
+              <Section
+                pl="0px"
+                pr="0px"
+                style={{
+                  position: "fixed",
+                  height: "100vh",
+                  width: "100%",
+                  top: "0px",
+                  backgroundColor: "rgba(0, 0, 0, 0.5)",
+                  zIndex: "1"
+                }}
+              >
+                <Div
+                  style={{
+                    position: "absolute",
+                    bottom: "0px",
+                    height: "50vh",
+                    backgroundColor: "white",
+                    borderRadius: "5px 5px 0px 0px",
+                    overflowY: "auto"
+                  }}
+                >
+                  <Row
+                    mt="1rem"
+                    mr="0px"
+                    ml="0px"
+                    mb="1rem"
+                    style={{
+                      justifyContent: "space-between",
+                      alignItems: "center"
+                    }}
+                  >
+                    <Div style={{ width: "50%" }}>
+                      <Heading ta="center" color="#323131" fontSize="1rem">
+                        More Options
+                      </Heading>
+                    </Div>
+                    <Div
+                      style={{
+                        width: "50%",
+                        display: "flex",
+                        justifyContent: "flex-end"
+                      }}
+                    >
+                      <Img
+                        src={CloseIcon}
+                        onClick={() => this.handleBTModel(false)}
+                        alt="close button"
+                        height="20px"
+                      />
+                    </Div>
+                  </Row>
+                  {boughtTogether && boughtTogether.length
+                    ? boughtTogether.map((prod, index) => (
+                        <Link to={prod.link}>
+                          <Div
+                            key={index}
+                            pl="1rem"
+                            pr="1rem"
+                            mb="1rem"
+                            style={{ height: "100px" }}
+                          >
+                            <Row
+                              justifyContent="space-between"
+                              ml="0px"
+                              mr="0px"
+                              style={{ height: "100px" }}
+                            >
+                              <Div style={{ width: "40%", height: "100%" }}>
+                                <Img
+                                  src={prod.image}
+                                  alt="BT1"
+                                  m="auto"
+                                  style={{ height: "100%", width: "auto" }}
+                                />
+                              </Div>
+                              <Div style={{ width: "50%" }}>
+                                <Heading
+                                  fontSize="12px"
+                                  color="#323131"
+                                  style={{ whiteSpace: "normal" }}
+                                >
+                                  {prod.name.split("").length > 50
+                                    ? `${prod.name.slice(0, 50)}....`
+                                    : prod.name}
+                                </Heading>
+                                <Text fontSize="12px" color="#F47020" mt="0px">
+                                  {prod.pricing_details.coupon_code
+                                    ? `Offer Price: ₹${prod.pricing_details.offer_price}`
+                                    : `Price: ₹${prod.pricing_details.special_price}`}
+                                  {/* Offer Price: ₹{prod.special_price} */}
+                                </Text>
+                              </Div>
+                            </Row>
+                          </Div>
+                        </Link>
+                      ))
+                    : null}
+                </Div>
+              </Section>
+            ) : null}
             {/* Complete the look */}
             {/* <UnbxdCompleteTheLook configId={configId} /> */}
             {/* Related Products List */}
