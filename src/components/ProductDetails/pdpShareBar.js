@@ -25,7 +25,7 @@ const ShareBar = ({ url, title, ...rest }) => (
             className={styles.button}
             mr="1rem"
           >
-            <Img src={wappIcon} alt="Whatsapp" width="auto" height="100%" />
+            <Img src={wappIcon} alt="Whatsapp" width="auto" height="100%" backgroundColor="#ffffff" />
           </Button>
         </a>
       </li>
@@ -41,7 +41,7 @@ const ShareBar = ({ url, title, ...rest }) => (
             className={styles.button}
             mr="1rem"
           >
-            <Img src={fbIcon} alt="Facebook" width="auto" height="100%" />
+            <Img src={fbIcon} alt="Facebook" width="auto" height="100%" backgroundColor="#ffffff" />
           </Button>
         </a>
       </li>
@@ -57,7 +57,7 @@ const ShareBar = ({ url, title, ...rest }) => (
             className={styles.button}
             mr="1rem"
           >
-            <Img src={pintIcon} alt="Pinterest" width="auto" height="100%" />
+            <Img src={pintIcon} alt="Pinterest" width="auto" height="100%" backgroundColor="#ffffff" />
           </Button>
         </a>
       </li>
@@ -68,7 +68,7 @@ const ShareBar = ({ url, title, ...rest }) => (
           href={`mailto:?subject=${title}&body=${url}`}
         >
           <Button btnType="link" p="5px 3px" className={styles.button}>
-            <Img src={emailIcon} alt="Email" width="auto" height="100%" />
+            <Img src={emailIcon} alt="Email" width="auto" height="100%" backgroundColor="#ffffff" />
           </Button>
         </a>
       </li>
