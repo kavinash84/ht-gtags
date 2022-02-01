@@ -1,0 +1,170 @@
+
+.paymentOptionSection {
+  &:first-child {
+    padding-top: 1rem;
+  }
+  &:last-child {
+    padding-bottom: 1rem;
+  }
+}
+.loadingCart {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  border-radius: 5px;
+  // background: rgba(0, 0, 0, 0.7);
+  background: rgba(255, 255, 255, 0.9);
+  z-index: 1;
+  left: 0;
+  top: 0;
+  margin-top: 0;
+  box-shadow: 2px 2px 7px 0 rgba(0, 0, 0, 0.1);
+  h4 {
+    margin-top: calc(50% - 100px);
+    margin-bottom: 0;
+    padding: 10px;
+    font-size: 1rem;
+    line-height: 1.5;
+    font-family: light;
+  }
+  p {
+    margin: 10px 0 0;
+    font-size: 0.75rem;
+  }
+}
+.freebieRow {
+  position: relative;
+  padding-top: 10px;
+}
+.freebieCartItem {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.7);
+  opacity: 0.5;
+  padding: 0;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  // border: 1px solid rgba(221, 221, 221, 0.68);
+  // box-shadow: 2px 2px 7px 0 rgba(0, 0, 0, 0.1);
+  display: flex;
+}
+.pincodeCheck {
+  background: #f2f2f2;
+  padding: 10px 0px 0px  10%;
+  width: 100%;
+  .address_wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    .address_container {
+      font-size: 16px;
+      .filtered_address {
+        font-weight: 600;
+        color: black;
+      }
+      .full_address {
+        font-weight: 500;
+        color: #999999;
+        font-size: 10px;
+        margin-top: 5px;
+      }
+    }
+  }
+}
+
+
+//pincode
+
+.pincode {
+  position: relative !important;
+  width: 87% !important;
+  max-width: 100% !important;
+  input[type="text"] {
+    background: #f7f7f7;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    height: 2.5rem;
+    padding: 10px 10px;
+    font-size: 14px;
+    width: 100%;
+    &:focus,
+    &:active,
+    &:hover {
+      outline: none;
+    }
+  }
+  .searchIcon {
+    position: absolute;
+    right: 10px;
+    width: 20px;
+    top: 10px;
+  }
+  .searchList {
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+    transition: height 0s ease-in-out 0.5s, height 0.5s ease-in-out;
+    position: absolute;
+    left: 0;
+    top: 45px;
+    z-index: 2;
+    &.active {
+      visibility: visible;
+      opacity: 1;
+      transition-delay: 0s;
+      max-height: 160px;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 42px;
+    }
+  }
+  ul {
+    padding-left: 0;
+    background: rgb(242, 242, 242);
+    border: solid 1px rgba(0, 0, 0, 0.03);
+    padding: 15px;
+    margin: 0;
+    max-height: 225px;
+    overflow: auto;
+    z-index: 100;
+    li {
+      list-style: none;
+      padding-bottom: 10px;
+      &:last-child {
+        padding-bottom: 0;
+      }
+      button {
+        font-size: 0.875em;
+        color: #666666;
+        background: transparent;
+        border: none;
+        width: 100%;
+        text-align: left;
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+    }
+  }
+  .closeBtn {
+    position: absolute;
+    right: 10px;
+    width: 20px;
+    top: 10px;
+    img {
+      width: 20px;
+    }
+  }
+}
+
+//unbox people also bought
+.unbox_alosbought {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}

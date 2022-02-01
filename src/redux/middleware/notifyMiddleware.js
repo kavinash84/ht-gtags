@@ -480,6 +480,15 @@ export default function userMiddleware() {
           })
         );
         break;
+        case "lackpackages/SAVE_PACKAGE_CATALOG_SUCCESS":
+        dispatch(
+          notifSend({
+            type: "success",
+            msg: "Your selections are saved now",
+            dismissAfter: 4000
+          })
+        );
+        break;
       default:
         break;
     }
