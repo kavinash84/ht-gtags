@@ -8,7 +8,7 @@ import ReactStars from "react-stars";
 import { withRouter } from "react-router";
 import LazyLoad from "react-lazyload";
 import SlickSlider from "../SlickSlider";
-
+import { Link } from "react-router-dom"
 /**
  * Modules / Utils / Reducers
  */
@@ -58,7 +58,7 @@ import Label from "hometown-components-dev/lib/LabelHtV1";
 import FormInput from "hometown-components-dev/lib/FormsHtV1/FormInputHtV1";
 import Section from "hometown-components-dev/lib/SectionHtV1";
 import Img from "hometown-components-dev/lib/ImageHtV1";
-
+const cartIcon = require('../../../static/pdp-icons/cart.png');
 /**
  * Page Components
  */
@@ -101,6 +101,7 @@ import { BackgroundMasker } from "hometown-components-dev/lib/Shimmer";
 import PdpModal from "./PdpModal/PdpModal";
 import Specs from "./Specs/specs";
 // import BaughtTogether from "./boughtTogether";
+import props from '../../../static/dist/dlls/dll__vendor';
 
 /**
  * Images / Icons
@@ -296,14 +297,7 @@ class ProductDetails extends React.Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
-  state = {
-    displayShareBar: false,
-    btProds: [this.props.product.meta, ...this.props.boughtTogether],
-    btProdQty: {
-      commonQty: 0
-    },
-    prodQty: 1
-  };
+
   updatebtProdQty = () => {
     const { btProds } = this.state;
     btProds.forEach((prod, index) => {
@@ -419,6 +413,12 @@ class ProductDetails extends React.Component {
     super(props);
     // this.reviewsRef = React.createRef();
     this.state = {
+      displayShareBar: false,
+      btProds: [this.props.product.meta, ...this.props.boughtTogether],
+      btProdQty: {
+        commonQty: 0
+      },
+      prodQty: 1,
       open: false,
       openLogin: false,
       showmore: true,
@@ -911,7 +911,7 @@ class ProductDetails extends React.Component {
       bflMinAmount,
       financeOption
     } = this.props;
-    console.log("yass-salman", this.props);
+    console.log("yass-salman", this.state);
     const {
       activeSpec,
       showReviews,
@@ -981,6 +981,7 @@ class ProductDetails extends React.Component {
     } = meta;
 
     const {
+      special_price: csp,
       offer_discount_percentage: offerDiscountPercentage,
       coupon_code: couponCode,
       offer_price: offerPrice,
@@ -1600,6 +1601,7 @@ class ProductDetails extends React.Component {
                 {/* <BaughtTogether data={[]} /> */}
                 {!boughtTogether.error_message ? (
                   <Section>
+                    {/* {console.log("bough to gether ", this.state, this.props)} */}
                     <Div>
                       <SlickSlider
                         className="mainSlider"
