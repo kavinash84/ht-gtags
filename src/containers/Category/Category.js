@@ -128,6 +128,7 @@ export default class Category extends Component {
         params: { category: currentCategory }
       }
     } = this.props;
+    // const { cms_json: cmsJson } = seoInfo;
 
     /* eslint-disable react/no-danger */
     return (
@@ -160,7 +161,6 @@ export default class Category extends Component {
           <Header />
 
           <div>
-            {" "}
             {currentCategory === "furniture" ? (
               <div>
                 <TitleBar title="Home Furnishings">
@@ -182,45 +182,8 @@ export default class Category extends Component {
                   />
                 </TitleBar>
                 <HomewareContainer />
-                <div>
-                  <TitleBar title="Home Decor">
-                    <BreadCrumb
-                      urlKey={currentCategory}
-                      name={pageTitle}
-                      handleCategoryClick={this.handleCategoryClick}
-                    />
-                  </TitleBar>
-                  <HomewareContainer />
-                </div>
               </div>
-            ) : // : currentCategory === "home-furnishings" ? (
-            //   <div>
-            //     <TitleBar title="Home Furnishing">
-            //       <BreadCrumb
-            //         urlKey={currentCategory}
-            //         name={pageTitle}
-            //         handleCategoryClick={this.handleCategoryClick}
-            //       />
-            //     </TitleBar>
-            //     <HomeFurnishingContainer />
-            //     <div>
-            //       {seoInfo && seoInfo.seo_text && (
-            //         <SeoContent>
-            //           <Container>
-            //             <div className={styles.seoContent}>
-            //               <div
-            //                 dangerouslySetInnerHTML={{
-            //                   __html: seoInfo.seo_text
-            //                 }}
-            //               />
-            //             </div>
-            //           </Container>
-            //         </SeoContent>
-            //       )}
-            //     </div>
-            //   </div>
-            // )
-            currentCategory === "tableware-kitchenware" ? (
+            ) : currentCategory === "tableware-kitchenware" ? (
               <TablewareKitchenware />
             ) : currentCategory === "tableware" ? (
               <Redirect to="/tableware-kitchenware" />
