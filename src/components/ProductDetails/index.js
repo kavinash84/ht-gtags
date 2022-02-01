@@ -1715,14 +1715,14 @@ class ProductDetails extends React.Component {
                                 {prod.name ? (
                                   <Text
                                     ta="left"
-                                    fontSize="12px"
-                                    mt="12px"
-                                    mb="3px"
+                                    fontSize="22px"
+                                    mt="15px"
+                                    mb="5px"
                                     style={{
                                       height: "40px",
                                       fontWeight: "bold"
                                     }}
-                                    lineHeight="1.3rem"
+                                    lineHeight="1.8rem"
                                   >
                                     {prod.name.split("").length > 50
                                       ? `${prod.name.slice(0, 50)}....`
@@ -1732,14 +1732,14 @@ class ProductDetails extends React.Component {
                                 {index !== 0 ? (
                                   <Text
                                     ta="left"
-                                    fontSize="12px"
-                                    mt="0px"
+                                    fontSize="16px"
+                                    mt="20px"
                                     mb="3px"
                                     style={{
                                       height: "30px",
                                       fontWeight: "bold"
                                     }}
-                                    lineHeight="1.3rem"
+                                    lineHeight="1.5rem"
                                   >
                                     {prod.pricing_details.coupon_code
                                       ? `Offer Price: ₹ ${prod.pricing_details.offer_price}`
@@ -1779,16 +1779,19 @@ class ProductDetails extends React.Component {
                                     justifyContent="center"
                                     style={{
                                       alignItems: "center",
-                                      width: "50%",
+                                      width: "30%",
                                       border: "1px solid #E9916B",
-                                      borderRadius: "5px"
+                                      borderRadius: "5px",
+                                      padding: "5px"
                                     }}
                                   >
                                     <Button
                                       width="30%"
                                       pl="0.5rem"
                                       pr="0.5rem"
-                                      style={{ border: "none" }}
+                                      backgroundColor="#fff"
+                                      color="black"
+                                      style={{ border: "none", backgroundColor: "#fff !important " }}
                                       onClick={() => {
                                         if (index === 0) {
                                           if (
@@ -1857,7 +1860,9 @@ class ProductDetails extends React.Component {
                                       width="30%"
                                       pl="0.5rem"
                                       pr="0.5rem"
-                                      style={{ border: "none" }}
+                                      backgroundColor="#fff"
+                                      color="black"
+                                      style={{ border: "none", backgroundColor: "#fff !important " }}
                                       onClick={() => {
                                         if (
                                           this.state.btProdQty[`${prod.sku}`] <
