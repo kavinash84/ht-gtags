@@ -171,21 +171,6 @@ export default class Category extends Component {
                   />
                 </TitleBar>
                 <FurnitureContainer />
-                <div>
-                  {seoInfo && seoInfo.seo_text && (
-                    <SeoContent>
-                      <Container>
-                        <div className={styles.seoContent}>
-                          <div
-                            dangerouslySetInnerHTML={{
-                              __html: seoInfo.seo_text
-                            }}
-                          />
-                        </div>
-                      </Container>
-                    </SeoContent>
-                  )}
-                </div>
               </div>
             ) : currentCategory === "home-decor" ? (
               <div>
@@ -198,19 +183,14 @@ export default class Category extends Component {
                 </TitleBar>
                 <HomewareContainer />
                 <div>
-                  {seoInfo && seoInfo.seo_text && (
-                    <SeoContent>
-                      <Container>
-                        <div className={styles.seoContent}>
-                          <div
-                            dangerouslySetInnerHTML={{
-                              __html: seoInfo.seo_text
-                            }}
-                          />
-                        </div>
-                      </Container>
-                    </SeoContent>
-                  )}
+                  <TitleBar title="Home Decor">
+                    <BreadCrumb
+                      urlKey={currentCategory}
+                      name={pageTitle}
+                      handleCategoryClick={this.handleCategoryClick}
+                    />
+                  </TitleBar>
+                  <HomewareContainer />
                 </div>
               </div>
             ) : // : currentCategory === "home-furnishings" ? (

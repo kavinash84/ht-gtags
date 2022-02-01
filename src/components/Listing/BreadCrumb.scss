@@ -3,10 +3,12 @@
 
 .breadCrumb_container {
   display: flex;
+  height:100%;
+  width:100%;
   .homeList {
     &:after {
       content: url("../../../static/next.svg");
-      padding: 5px;
+      padding: 10px;
     }
     a {
       color: rgba(7, 7, 7, 0.75);
@@ -46,5 +48,12 @@
       color: rgba(7, 7, 7, 0.75);
       font-size: 0.875rem;
     }
+          span {
+              color: rgba(99, 99, 99, 0.75);
+            }
   }
 }
+
+.lastBreadCrumb {
+    color: #f57831 !important;
+  }
