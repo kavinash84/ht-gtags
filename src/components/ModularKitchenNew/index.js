@@ -84,7 +84,12 @@ class ModularKitchenNewContainer extends React.Component {
     const { showScript } = this.state;
     return (
       <div>
-        <Helmet>
+        <Helmet title={`${(seoInfo && seoInfo.page_title) || ""}`}>
+          <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
+          <meta
+            name="description"
+            content={seoInfo && seoInfo.meta_description}
+          />
           {showScript ? (
             // <!-- Facebook Pixel Code -->
             <script>

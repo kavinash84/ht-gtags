@@ -84,10 +84,11 @@ class ModularWardrobeContainer extends React.Component {
     const { showScript } = this.state;
     return (
       <div>
-        <Helmet title={topBanner.title}>
+        <Helmet title={`${(seoInfo && seoInfo.page_title) || ""}`}>
+          <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
           <meta
             name="description"
-            content="HomeTown - Shop online for Furniture, Home Decor, Furnishings, Kitchenware, Dining Products at best prices from HomeTown.in. Get best furniture and home decor products ☆Upto 40% Off, ☆Fast Shipping, ☆High Quality, ☆Premium, ☆Luxury furniture to beautify your ☆bedroom, ☆kitchen, ☆dining room, ☆living and ☆outdoor space ☆Original ☆0% EMI ☆Free Assembly ☆Safe Shipping."
+            content={seoInfo && seoInfo.meta_description}
           />
         </Helmet>
 
