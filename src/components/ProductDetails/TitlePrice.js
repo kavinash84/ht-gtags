@@ -23,7 +23,7 @@ const TitlePrice = ({
   ratings,
   onClickReviews
 }) => (
-    <Section mb="0.3125rem" p="0" mt="20px">
+    <Section mb="0.3125rem" p="0" mt="0px" paddingLeft="0">
       <Container type="container" pr="1rem" pl="1rem">
         <Row display="block" mr="0" ml="0">
           <Heading

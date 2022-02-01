@@ -27,8 +27,8 @@ const ImgWrapper = styled.div`
   background: #fff;
   position: relative;
   box-sizing: border-box;
-  width: 60px;
-  height: 61px;
+  width: 50px;
+  height: 50px;
   margin-right: 0.5rem;
   margin-bottom: 0.3125rem;
 `;
@@ -63,43 +63,43 @@ const ColorOption = ({
   toggleShowMoreColorProducts,
   showmorecolorproducts
 }) => (
-  <Row mr="0" ml="0" mb="1rem" display="block">
-    <ColorOptions active={!showmorecolorproducts}>
-      {data.map((item, index) => (
-        <LinkCustom
-          to={`/${urlName(item.meta.name)}/sku/${item.groupedattributes.sku}`}
-          key={String(index)}
-        >
-          <ImgWrapper>
-            <ImageShimmer src={`${item.image}.jpg`} height="60px">
-              {imageURL => (
-                <ProductImg src={imageURL} alt={item.meta.name} width="60px" />
-              )}
-            </ImageShimmer>
-          </ImgWrapper>
-        </LinkCustom>
-      ))}
-    </ColorOptions>
-    {data.length > 5 && (
-      <Div>
-        <Button
-          btnType="link"
-          size="block"
-          ta="right"
-          color="#f98d29"
-          pt="15px"
-          pr="64px"
-          onClick={toggleShowMoreColorProducts}
-        >
-          {showmorecolorproducts ? "Show More Products" : "Show Less"}
-        </Button>
-      </Div>
-    )}
-  </Row>
-);
+    <Row mr="0" ml="0" mb="0" display="block">
+      <ColorOptions active={!showmorecolorproducts}>
+        {data.map((item, index) => (
+          <LinkCustom
+            to={`/${urlName(item.meta.name)}/sku/${item.groupedattributes.sku}`}
+            key={String(index)}
+          >
+            <ImgWrapper>
+              <ImageShimmer src={`${item.image}.jpg`} height="60px">
+                {imageURL => (
+                  <ProductImg src={imageURL} alt={item.meta.name} width="60px" />
+                )}
+              </ImageShimmer>
+            </ImgWrapper>
+          </LinkCustom>
+        ))}
+      </ColorOptions>
+      {data.length > 5 && (
+        <Div>
+          <Button
+            btnType="link"
+            size="block"
+            ta="right"
+            color="#f98d29"
+            pt="15px"
+            pr="64px"
+            onClick={toggleShowMoreColorProducts}
+          >
+            {showmorecolorproducts ? "Show More Products" : "Show Less"}
+          </Button>
+        </Div>
+      )}
+    </Row>
+  );
 ColorOption.defaultProps = {
   showmorecolorproducts: true,
-  toggleShowMoreColorProducts: () => {}
+  toggleShowMoreColorProducts: () => { }
 };
 ColorOption.propTypes = {
   data: PropTypes.array.isRequired,

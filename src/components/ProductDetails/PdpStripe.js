@@ -32,7 +32,7 @@ const Stripes = ({
     // const isFurnitureCategory = fkCatalogSupplier === '38';
     // const noQuestionsAsked = isFurnitureCategory && brand === 'HomeTown';
     <Box>
-      <Flex justifyContent="flex-start" alignItems="baseline">
+      <Flex justifyContent="flex-start" alignItems="baseline" marginLeft="10px">
         {isEmiAvailable ? (
           <Col variant="col-2" m="5px auto" px="0" alignItems="center">
             <Image className={styles.pdpStripeIcons} src={Emi} />
