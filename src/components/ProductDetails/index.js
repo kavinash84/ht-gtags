@@ -943,7 +943,8 @@ class ProductDetails extends React.Component {
       reviews: { count, rating },
       bogo_bundle: bogoBundle,
       free_visit: freeVisit = "no",
-      free_installation: freeInstallation = "no"
+      free_installation: freeInstallation = "no",
+      swatch_image: swatchImage
     } = product;
     // const { brand: ProductBrand } = meta;
     const {
@@ -1112,25 +1113,17 @@ class ProductDetails extends React.Component {
                     <Section mt="10px" mb="0.3125rem" p="0">
                       {colorProducts.length > 0 && (
                         <Box pb={15}>
-                          {/* <Heading
-                            fontSize="1em"
-                            color="textDark"
-                            fontFamily="medium"
-                            fontWeight="normal"
-                            mb={15}
-                          >
-                            Color Options: {getSelectedColor(colorProducts)}
-                          </Heading> */}
                           <ColorOption
+                            currentImage={swatchImage}
                             data={colorProducts}
                             showmorecolorproducts={showmorecolorproducts}
                             toggleShowMoreColorProducts={
                               this.toggleShowMoreColorProducts
                             }
-                            currentlySelectedProductSku={product.sku}
-                            showmorecolorproductsCount={
-                              showmorecolorproductsCount
-                            }
+                          // currentlySelectedProductSku={product.sku}
+                          // showmorecolorproductsCount={
+                          //   showmorecolorproductsCount
+                          // }
                           />
                         </Box>
                       )}
