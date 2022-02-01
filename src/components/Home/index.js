@@ -112,7 +112,7 @@ class HomeContainer extends Component {
             alignItems: "center",
             flexDirection: "column",
             padding: "20px 30px",
-            marginTop: "80px",
+            marginTop: "20px",
             backgroundColor: "#F5EEEE"
           }}
         >
