@@ -7,45 +7,45 @@ const styles = require("./Pdp.scss");
 
 const pdpModal = {
 
-    items: [
-      {
-				image: "https://www.hometown.in/media/cms/hometownnew/desktopnewhomepage/shopbycat/shopgiftbyprice01.png",
-				title: "Delight Leatherette Two Seater Sofa in Ivory Colour",
-        price:"16999",
-				url_key: ""
-			},
-			{
-				image: "https://www.hometown.in/media/cms/hometownnew/desktopnewhomepage/shopbycat/shopgiftbyprice01.png",
-				title: "Delight Leatherette Two Seater Sofa in Ivory Colour",
-        price:"16999",
-				url_key: ""
-			},
-			{
-				image: "https://www.hometown.in/media/cms/hometownnew/desktopnewhomepage/shopbycat/shopgiftbyprice01.png",
-				title: "Delight Leatherette Two Seater Sofa in Ivory Colour",
-        price:"16999",
-				url_key: ""
-			},
-      {
-				image: "https://www.hometown.in/media/cms/hometownnew/desktopnewhomepage/shopbycat/shopgiftbyprice01.png",
-				title: "Delight Leatherette Two Seater Sofa in Ivory Colour",
-        price:"16999",
-				url_key: ""
-			},
-			{
-				image: "https://www.hometown.in/media/cms/hometownnew/desktopnewhomepage/shopbycat/shopgiftbyprice01.png",
-				title: "Delight Leatherette Two Seater Sofa in Ivory Colour",
-        price:"16999",
-				url_key: ""
-			},
-			{
-				image: "https://www.hometown.in/media/cms/hometownnew/desktopnewhomepage/shopbycat/shopgiftbyprice01.png",
-				title: "Delight Leatherette Two Seater Sofa in Ivory Colour",
-        price:"16999",
-				url_key: ""
-			}
-    ]
-  }
+  items: [
+    {
+      image: "https://www.hometown.in/media/cms/yearendsale/Rectangle_303.png",
+      title: "Delight Leatherette Two Seater Sofa in Ivory Colour",
+      price: "16999",
+      url_key: ""
+    },
+    {
+      image: "https://www.hometown.in/media/cms/yearendsale/Rectangle_304.png",
+      title: "Delight Leatherette Two Seater Sofa in Ivory Colour",
+      price: "16999",
+      url_key: ""
+    },
+    {
+      image: "https://www.hometown.in/media/cms/yearendsale/Rectangle_304.png",
+      title: "Delight Leatherette Two Seater Sofa in Ivory Colour",
+      price: "16999",
+      url_key: ""
+    },
+    {
+      image: "https://www.hometown.in/media/cms/yearendsale/Rectangle_303.png",
+      title: "Delight Leatherette Two Seater Sofa in Ivory Colour",
+      price: "16999",
+      url_key: ""
+    },
+    {
+      image: "https://www.hometown.in/media/cms/yearendsale/Rectangle_304.png",
+      title: "Delight Leatherette Two Seater Sofa in Ivory Colour",
+      price: "16999",
+      url_key: ""
+    },
+    {
+      image: "https://www.hometown.in/media/cms/yearendsale/Rectangle_304.png",
+      title: "Delight Leatherette Two Seater Sofa in Ivory Colour",
+      price: "16999",
+      url_key: ""
+    }
+  ]
+}
 
 const adjustSlides = length => ({
   slidesToShow: 3,
