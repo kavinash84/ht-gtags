@@ -1649,7 +1649,7 @@ class ProductDetails extends React.Component {
                     display: "flex",
                     width: "100%",
                     justifyContent: "center",
-                    margin: "10px 5% 30px 5%"
+                    // margin: "10px 5% 30px 5%"
                   }}
                 >
 
