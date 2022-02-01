@@ -124,20 +124,28 @@ const RightArrow = require("../../../static/new-home/roundedArrowRight.svg");
 
 const styles = require("./productIndex.scss");
 
-const settings = {
-  slidesToShow: 1,
+// const settings = {
+//   slidesToShow: 1,
+//   slidesToScroll: 1,
+//   dots: true,
+//   nextArrow: <SampleNextArrow />,
+//   prevArrow: <SamplePrevArrow />,
+//   customPaging: i => (
+//     <div
+//       style={{
+//         borderTop: "1px solid #848C7F"
+//       }}
+//     ></div>
+//   )
+// };
+const adjustSlides = length => ({
+  slidesToShow: length >= 3 ? 3 : length,
   slidesToScroll: 1,
-  dots: true,
-  nextArrow: <SampleNextArrow />,
-  prevArrow: <SamplePrevArrow />,
-  customPaging: i => (
-    <div
-      style={{
-        borderTop: "1px solid #848C7F"
-      }}
-    ></div>
-  )
-};
+  autoplay: false,
+  infinite: false,
+  dots: false,
+  arrows: false
+});
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
   return (
@@ -165,14 +173,7 @@ function SamplePrevArrow(props) {
     </React.Fragment>
   );
 }
-const adjustSlides = length => ({
-  slidesToShow: length >= 1 ? 1.3 : length,
-  slidesToScroll: 1,
-  autoplay: false,
-  infinite: false,
-  dots: false,
-  arrows: false
-});
+
 const qtyOptions = sku => {
   if (sku.meta) {
     let qty = sku.meta.quantity;
@@ -1646,95 +1647,108 @@ class ProductDetails extends React.Component {
                 <div
                   style={{
                     display: "flex",
-                    width: "70%",
+                    width: "100%",
                     justifyContent: "center",
                     margin: "10px 5% 30px 5%"
                   }}
                 >
-                  <SlickSlider
-                    settings={{
-                      // ...settings(data.length),
-                      nextArrow: <SampleNextArrow />,
-                      prevArrow: <SamplePrevArrow />
-                    }}
-                    className="homeBankOfferesSlider"
-                  >
-                    {!boughtTogether.error_message ? (
-                      <Section>
-                        {/* {console.log("bough to gether ", this.state, this.props)} */}
-                        <Div>
-                          <SlickSlider
-                            className="mainSlider"
-                            settings={adjustSlides(8)}
-                          >
-                            {btProds && btProds.length
-                              ? btProds.map((prod, index) => (
-                                <Div
-                                  key={index}
-                                  style={{
-                                    position: "relative",
-                                    borderRadius: "5px",
-                                    height: "auto"
-                                  }}
-                                  p="10px"
-                                  bg="white"
-                                >
-                                  {index === 0 ? (
-                                    <div
-                                      style={{
-                                        position: "relative",
-                                        height: "250px",
-                                        display: "flex"
-                                      }}
-                                    >
+
+                  {!boughtTogether.error_message ? (
+                    <Section >
+                      {/* {console.log("bough to gether ", this.state, this.props)} */}
+                      <Div>
+                        <SlickSlider
+                          className="mainSlider"
+                          settings={adjustSlides(8)}
+                        >
+                          {btProds && btProds.length
+                            ? btProds.map((prod, index) => (
+                              <Div
+
+                                key={index}
+                                style={{
+                                  position: "relative",
+                                  borderRadius: "5px",
+                                  height: "auto"
+                                }}
+                                p="10px"
+                                bg="white"
+                              >
+                                {index === 0 ? (
+                                  <div
+                                    style={{
+                                      position: "relative",
+                                      height: "250px",
+                                      display: "flex"
+                                    }}
+                                  >
+                                    <Img
+                                      src={`${product.image}.jpg`}
+                                      alt="BT!"
+                                      height="100%"
+                                      width="auto%"
+                                      m="auto"
+                                      style={{ border: "2px solid #FAF4F2" }}
+                                    />
+                                  </div>
+                                ) : prod.image ? (
+                                  <div
+                                    style={{
+                                      position: "relative",
+                                      height: "250px",
+                                      display: "flex"
+                                    }}
+                                  >
+                                    <Link to={prod.link}>
                                       <Img
-                                        src={`${product.image}.jpg`}
+                                        src={prod.image}
                                         alt="BT!"
                                         height="100%"
                                         width="auto%"
                                         m="auto"
                                         style={{ border: "2px solid #FAF4F2" }}
                                       />
-                                    </div>
-                                  ) : prod.image ? (
-                                    <div
-                                      style={{
-                                        position: "relative",
-                                        height: "250px",
-                                        display: "flex"
-                                      }}
-                                    >
-                                      <Link to={prod.link}>
-                                        <Img
-                                          src={prod.image}
-                                          alt="BT!"
-                                          height="100%"
-                                          width="auto%"
-                                          m="auto"
-                                          style={{ border: "2px solid #FAF4F2" }}
-                                        />
-                                      </Link>
-                                    </div>
-                                  ) : null}
+                                    </Link>
+                                  </div>
+                                ) : null}
 
-                                  {prod.name ? (
-                                    <Text
-                                      ta="left"
-                                      fontSize="12px"
-                                      mt="12px"
-                                      mb="3px"
-                                      style={{
-                                        height: "40px",
-                                        fontWeight: "bold"
-                                      }}
-                                      lineHeight="1.3rem"
-                                    >
-                                      {prod.name.split("").length > 50
-                                        ? `${prod.name.slice(0, 50)}....`
-                                        : prod.name}
-                                    </Text>
-                                  ) : null}
-                                  {index !== 0 ? (
+                                {prod.name ? (
+                                  <Text
+                                    ta="left"
+                                    fontSize="12px"
+                                    mt="12px"
+                                    mb="3px"
+                                    style={{
+                                      height: "40px",
+                                      fontWeight: "bold"
+                                    }}
+                                    lineHeight="1.3rem"
+                                  >
+                                    {prod.name.split("").length > 50
+                                      ? `${prod.name.slice(0, 50)}....`
+                                      : prod.name}
+                                  </Text>
+                                ) : null}
+                                {index !== 0 ? (
+                                  <Text
+                                    ta="left"
+                                    fontSize="12px"
+                                    mt="0px"
+                                    mb="3px"
+                                    style={{
+                                      height: "30px",
+                                      fontWeight: "bold"
+                                    }}
+                                    lineHeight="1.3rem"
+                                  >
+                                    {prod.pricing_details.coupon_code
+                                      ? `Offer Price: ₹ ${prod.pricing_details.offer_price}`
+                                      : prod.pricing_details.special_price !==
+                                        "0"
+                                        ? `Price: ₹ ${prod.pricing_details.special_price}`
+                                        : `Price: ₹ ${prod.pricing_details.mrp}`}
+                                  </Text>
+                                ) : (
                                     <Text
                                       ta="left"
                                       fontSize="12px"
@@ -1746,127 +1760,41 @@ class ProductDetails extends React.Component {
                                       }}
                                       lineHeight="1.3rem"
                                     >
-                                      {prod.pricing_details.coupon_code
-                                        ? `Offer Price: ₹ ${prod.pricing_details.offer_price}`
-                                        : prod.pricing_details.special_price !==
-                                          "0"
-                                          ? `Price: ₹ ${prod.pricing_details.special_price}`
-                                          : `Price: ₹ ${prod.pricing_details.mrp}`}
+                                      {couponCode
+                                        ? `Offer Price: ₹ ${offerPrice}`
+                                        : csp !== "0"
+                                          ? `Price: ₹ ${csp}`
+                                          : `Price: ₹ ${mrp}`}
                                     </Text>
-                                  ) : (
-                                      <Text
-                                        ta="left"
-                                        fontSize="12px"
-                                        mt="0px"
-                                        mb="3px"
-                                        style={{
-                                          height: "30px",
-                                          fontWeight: "bold"
-                                        }}
-                                        lineHeight="1.3rem"
-                                      >
-                                        {couponCode
-                                          ? `Offer Price: ₹ ${offerPrice}`
-                                          : csp !== "0"
-                                            ? `Price: ₹ ${csp}`
-                                            : `Price: ₹ ${mrp}`}
-                                      </Text>
-                                    )}
+                                  )}
+                                <Row
+                                  ml="0px"
+                                  mr="0px"
+                                  style={{ width: "100%" }}
+                                  justifyContent="flex-start"
+                                >
                                   <Row
                                     ml="0px"
                                     mr="0px"
-                                    style={{ width: "100%" }}
-                                    justifyContent="flex-start"
+                                    justifyContent="center"
+                                    style={{
+                                      alignItems: "center",
+                                      width: "50%",
+                                      border: "1px solid #E9916B",
+                                      borderRadius: "5px"
+                                    }}
                                   >
-                                    <Row
-                                      ml="0px"
-                                      mr="0px"
-                                      justifyContent="center"
-                                      style={{
-                                        alignItems: "center",
-                                        width: "50%",
-                                        border: "1px solid #E9916B",
-                                        borderRadius: "5px"
-                                      }}
-                                    >
-                                      <Button
-                                        width="30%"
-                                        pl="0.5rem"
-                                        pr="0.5rem"
-                                        style={{ border: "none" }}
-                                        onClick={() => {
-                                          if (index === 0) {
-                                            if (
-                                              this.state.btProdQty[
-                                              `${prod.sku}`
-                                              ] > 1
-                                            ) {
-                                              this.setState(
-                                                prevState => {
-                                                  // btProdQty : btProdQty[`${prod.name}`] += 1
-                                                  let btProdQty = Object.assign(
-                                                    {},
-                                                    prevState.btProdQty
-                                                  ); //creating copy of state variable btProdQty
-                                                  btProdQty[`${prod.sku}`] -= 1;
-                                                  return { btProdQty };
-                                                },
-                                                () => {
-                                                  this.updatebtTotal(
-                                                    "dec",
-                                                    index
-                                                  );
-                                                }
-                                              );
-                                            }
-                                          } else {
-                                            if (
-                                              this.state.btProdQty[
-                                              `${prod.sku}`
-                                              ] > 0
-                                            ) {
-                                              this.setState(
-                                                prevState => {
-                                                  // btProdQty : btProdQty[`${prod.name}`] += 1
-                                                  let btProdQty = Object.assign(
-                                                    {},
-                                                    prevState.btProdQty
-                                                  ); //creating copy of state variable btProdQty
-                                                  btProdQty[`${prod.sku}`] -= 1;
-                                                  return { btProdQty };
-                                                },
-                                                () => {
-                                                  this.updatebtTotal(
-                                                    "dec",
-                                                    index
-                                                  );
-                                                }
-                                              );
-                                            }
-                                          }
-                                        }}
-                                      >
-                                        -
-                                    </Button>
-                                      <Div
-                                        style={{
-                                          width: "30%",
-                                          textAlign: "center"
-                                        }}
-                                      >
-                                        {btProdQty[`${prod.sku}`]
-                                          ? btProdQty[`${prod.sku}`]
-                                          : btProdQty.commonQty}
-                                      </Div>
-                                      <Button
-                                        width="30%"
-                                        pl="0.5rem"
-                                        pr="0.5rem"
-                                        style={{ border: "none" }}
-                                        onClick={() => {
+                                    <Button
+                                      width="30%"
+                                      pl="0.5rem"
+                                      pr="0.5rem"
+                                      style={{ border: "none" }}
+                                      onClick={() => {
+                                        if (index === 0) {
                                           if (
-                                            this.state.btProdQty[`${prod.sku}`] <
-                                            5
+                                            this.state.btProdQty[
+                                            `${prod.sku}`
+                                            ] > 1
                                           ) {
                                             this.setState(
                                               prevState => {
@@ -1875,29 +1803,114 @@ class ProductDetails extends React.Component {
                                                   {},
                                                   prevState.btProdQty
                                                 ); //creating copy of state variable btProdQty
-                                                btProdQty[`${prod.sku}`] += 1;
+                                                btProdQty[`${prod.sku}`] -= 1;
                                                 return { btProdQty };
                                               },
                                               () => {
-                                                this.updatebtTotal("inc", index);
+                                                this.updatebtTotal(
+                                                  "dec",
+                                                  index
+                                                );
                                               }
                                             );
                                           }
-                                        }}
-                                      >
-                                        +
-                                    </Button>
-                                    </Row>
-                                    <Div
-                                      ml="1rem"
-                                      style={{
-                                        width: "40%",
-                                        display: "flex",
-                                        justifyContent: "flex-start",
-                                        alignItems: "center"
+                                        } else {
+                                          if (
+                                            this.state.btProdQty[
+                                            `${prod.sku}`
+                                            ] > 0
+                                          ) {
+                                            this.setState(
+                                              prevState => {
+                                                // btProdQty : btProdQty[`${prod.name}`] += 1
+                                                let btProdQty = Object.assign(
+                                                  {},
+                                                  prevState.btProdQty
+                                                ); //creating copy of state variable btProdQty
+                                                btProdQty[`${prod.sku}`] -= 1;
+                                                return { btProdQty };
+                                              },
+                                              () => {
+                                                this.updatebtTotal(
+                                                  "dec",
+                                                  index
+                                                );
+                                              }
+                                            );
+                                          }
+                                        }
                                       }}
                                     >
-                                      {index === 0 ? (
+                                      -
+                                    </Button>
+                                    <Div
+                                      style={{
+                                        width: "30%",
+                                        textAlign: "center"
+                                      }}
+                                    >
+                                      {btProdQty[`${prod.sku}`]
+                                        ? btProdQty[`${prod.sku}`]
+                                        : btProdQty.commonQty}
+                                    </Div>
+                                    <Button
+                                      width="30%"
+                                      pl="0.5rem"
+                                      pr="0.5rem"
+                                      style={{ border: "none" }}
+                                      onClick={() => {
+                                        if (
+                                          this.state.btProdQty[`${prod.sku}`] <
+                                          5
+                                        ) {
+                                          this.setState(
+                                            prevState => {
+                                              // btProdQty : btProdQty[`${prod.name}`] += 1
+                                              let btProdQty = Object.assign(
+                                                {},
+                                                prevState.btProdQty
+                                              ); //creating copy of state variable btProdQty
+                                              btProdQty[`${prod.sku}`] += 1;
+                                              return { btProdQty };
+                                            },
+                                            () => {
+                                              this.updatebtTotal("inc", index);
+                                            }
+                                          );
+                                        }
+                                      }}
+                                    >
+                                      +
+                                    </Button>
+                                  </Row>
+                                  <Div
+                                    ml="1rem"
+                                    style={{
+                                      width: "40%",
+                                      display: "flex",
+                                      justifyContent: "flex-start",
+                                      alignItems: "center"
+                                    }}
+                                  >
+                                    {index === 0 ? (
+                                      <Img
+                                        src={cartIcon}
+                                        alt="Cart icon"
+                                        height="20px"
+                                        style={{ width: "auto" }}
+                                        onClick={() =>
+                                          this.props.btAddToCart(
+                                            prod.sku,
+                                            prod.sku,
+                                            simpleSku,
+                                            session,
+                                            pincode.selectedPincode,
+                                            prod.configId,
+                                            btProdQty[`${prod.sku}`]
+                                          )
+                                        }
+                                      />
+                                    ) : (
                                         <Img
                                           src={cartIcon}
                                           alt="Cart icon"
@@ -1907,7 +1920,7 @@ class ProductDetails extends React.Component {
                                             this.props.btAddToCart(
                                               prod.sku,
                                               prod.sku,
-                                              simpleSku,
+                                              Object.keys(prod.simples)[0],
                                               session,
                                               pincode.selectedPincode,
                                               prod.configId,
@@ -1915,33 +1928,15 @@ class ProductDetails extends React.Component {
                                             )
                                           }
                                         />
-                                      ) : (
-                                          <Img
-                                            src={cartIcon}
-                                            alt="Cart icon"
-                                            height="20px"
-                                            style={{ width: "auto" }}
-                                            onClick={() =>
-                                              this.props.btAddToCart(
-                                                prod.sku,
-                                                prod.sku,
-                                                Object.keys(prod.simples)[0],
-                                                session,
-                                                pincode.selectedPincode,
-                                                prod.configId,
-                                                btProdQty[`${prod.sku}`]
-                                              )
-                                            }
-                                          />
-                                        )}
-                                    </Div>
-                                  </Row>
-                                </Div>
-                              ))
-                              : null}
-                          </SlickSlider>
-                        </Div>
-                        {/* <Div>
+                                      )}
+                                  </Div>
+                                </Row>
+                              </Div>
+                            ))
+                            : null}
+                        </SlickSlider>
+                      </Div>
+                      {/* <Div>
                       <Text
                         ta="center"
                         mb="0px"
@@ -1994,9 +1989,9 @@ class ProductDetails extends React.Component {
                         </Link>
                       )}
                     </Div> */}
-                      </Section>
-                    ) : null}
-                  </SlickSlider>
+                    </Section>
+                  ) : null}
+
                 </div>
 
               </Section>
