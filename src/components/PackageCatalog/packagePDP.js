@@ -7,10 +7,11 @@ import Text from "hometown-components-dev/lib/TextHtV1";
 import { calculateLowestEmi } from "utils/helper";
 // import EmiModal from "containers/EmiModal/EmiModal";
 import { EMI_THRESHOLD } from "helpers/Constants";
-import ProductDesc from "hometown-components/lib/ProductDetails/ProductDesc";
+import ProductDesc from 'hometown-components-dev/lib/ProductDetailsHtV1/ProductDesc';
 import { formatAmount } from "utils/formatters";
-import Specs from "hometown-components/lib/ProductDetails/Specs";
+import Specs from 'hometown-components-dev/lib/ProductDetailsHtV1/Specs';
 import Stripes from "../ProductDetails/PdpStripe";
+import PackageDetailSlider from './Carousel';
 // import MainFurnitureSlider from "../furnitureCategories/mainSlider";
 
 const styles = require("./index.scss");
@@ -132,6 +133,7 @@ export default class PackagePDP extends Component {
             <div style={{ height: "75vh", overflow: "auto" }}>
               <Section p="0" m="0">
                 {/* <MainFurnitureSlider data={carosalData} mb="0" /> */}
+              <PackageDetailSlider data={carosalData}  />
               </Section>
               <Section p="10px 20px" mb="0">
                 {formatPrice(csp) < formatPrice(mrp) ? (

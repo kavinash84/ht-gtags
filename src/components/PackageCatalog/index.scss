@@ -1,8 +1,8 @@
 .PackageCatalogContainer {
   .PackageCatalog_info_container {
-    -webkit-box-shadow: -1px 46px 28px -58px rgba(0, 0, 0, 0.45);
-    -moz-box-shadow: -1px 46px 28px -58px rgba(0, 0, 0, 0.45);
-    box-shadow: -1px 46px 28px -58px rgba(0, 0, 0, 0.45);
+    // -webkit-box-shadow: -1px 46px 28px -58px rgba(0, 0, 0, 0.45);
+    // -moz-box-shadow: -1px 46px 28px -58px rgba(0, 0, 0, 0.45);
+    // box-shadow: -1px 46px 28px -58px rgba(0, 0, 0, 0.45);
   }
   .caroselItem {
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -136,6 +136,8 @@
 .package_plp_container {
   padding: 20px;
   overflow: auto;
+  width: 80%;
+  margin-left: 10%;
   .listContainer {
     display: flex;
     justify-content: space-between;
@@ -144,7 +146,7 @@
     margin-top: 20px;
     max-height: 85vh;
     overflow: auto;
-    padding-bottom: 70px;
+    padding-bottom: 100px;
     .caroselItem {
       width: 47%;
       box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -177,8 +179,10 @@
     right: 0;
     display: flex;
     justify-content: center;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px -5px 15px;
+    
     button {
-      width: 90%;
+      width: 20%;
       border-radius: 5px;
       padding: 15px;
       background: white;

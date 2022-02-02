@@ -271,7 +271,7 @@ export default class ProductsList extends Component {
                 onClick={() => this.handleSelect()}
                 disabled={this.checkDisabled()}
               >
-                Submit
+                Select
               </button>
             </div>
           </React.Fragment>
