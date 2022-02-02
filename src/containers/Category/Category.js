@@ -57,13 +57,21 @@ const getSubMenu = (categories, key) =>
   categories &&
   categories.filter(category => category.url_key === key)[0].children;
 
-@connect(({ homepage: { menu }, category, category: { data }, pincode }) => ({
-  menu: menu.data,
-  pincode: pincode.selectedPincode,
-  category: data && data.items && data.items.text,
-  categoryText: getText(category),
-  seoInfo: data && data.seo && data.seo.items
-}))
+@connect(
+  ({
+    homepage: { menu },
+    category,
+    category: { data, currentCategory },
+    pincode
+  }) => ({
+    menu: menu.data,
+    pincode: pincode.selectedPincode,
+    category: data && data.items && data.items.text,
+    currentCategory,
+    categoryText: getText(category),
+    seoInfo: data && data.seo && data.seo.items
+  })
+)
 export default class Category extends Component {
   constructor(props) {
     super(props);
@@ -124,9 +132,10 @@ export default class Category extends Component {
       category,
       seoInfo,
       categoryText: { title: pageTitle },
-      match: {
-        params: { category: currentCategory }
-      }
+      currentCategory
+      // match: {
+      //   params: { category: currentCategory }
+      // }
     } = this.props;
     // const { cms_json: cmsJson } = seoInfo;
 
@@ -191,53 +200,57 @@ export default class Category extends Component {
               <Redirect to="/tableware-kitchenware" />
             ) : (
               <div>
-                {/* Offer Bar */}
-                {category.offers && (
-                  <Box bg="heading" pt={30} pb={20}>
-                    <Container>
-                      <Row justifyContent="center">
-                        {this.renderOffers(category.offers || [])}
-                      </Row>
-                    </Container>
-                  </Box>
-                )}
-
-                {/* Main Slider */}
-                {category && <MainSlider data={category.main} />}
-
-                {/* Breadcrumb */}
-                <TitleBar title="Home Furnishings">
-                  <BreadCrumb
-                    urlKey={currentCategory}
-                    name={pageTitle}
-                    handleCategoryClick={this.handleCategoryClick}
-                  />
-                </TitleBar>
-
-                {/* Category Carousel */}
-                {category &&
-                  category.sections &&
-                  category.sections.map((cat, index) => (
-                    <Section key={String(index)}>
-                      {cat.title !== "" && (
+                {category ? (
+                  <React.Fragment>
+                    {/* Offer Bar */}
+                    {category.offers && (
+                      <Box bg="heading" pt={30} pb={20}>
                         <Container>
-                          {CommonLayout(
-                            cat.component,
-                            cat.title,
-                            cat.data,
-                            cat.is_product
-                          )}
+                          <Row justifyContent="center">
+                            {this.renderOffers(category.offers || [])}
+                          </Row>
                         </Container>
-                      )}
-                    </Section>
-                  ))}
-                {category && (
-                  <Box display="inline-block" width="100%">
-                    <Container>
-                      <UnbxdTopSellers category={category.title} />
-                    </Container>
-                  </Box>
-                )}
+                      </Box>
+                    )}
+
+                    {/* Main Slider */}
+                    {category && <MainSlider data={category.main} />}
+
+                    {/* Breadcrumb */}
+                    <TitleBar title="Home Furnishings">
+                      <BreadCrumb
+                        urlKey={currentCategory}
+                        name={pageTitle}
+                        handleCategoryClick={this.handleCategoryClick}
+                      />
+                    </TitleBar>
+
+                    {/* Category Carousel */}
+                    {category &&
+                      category.sections &&
+                      category.sections.map((cat, index) => (
+                        <Section key={String(index)}>
+                          {cat.title !== "" && (
+                            <Container>
+                              {CommonLayout(
+                                cat.component,
+                                cat.title,
+                                cat.data,
+                                cat.is_product
+                              )}
+                            </Container>
+                          )}
+                        </Section>
+                      ))}
+                    {category && (
+                      <Box display="inline-block" width="100%">
+                        <Container>
+                          <UnbxdTopSellers category={category.title} />
+                        </Container>
+                      </Box>
+                    )}
+                  </React.Fragment>
+                ) : null}
               </div>
             )}
             {/* SEO Content */}
