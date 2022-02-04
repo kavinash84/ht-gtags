@@ -132,7 +132,6 @@ export const loadBoughtTogether = (sku) => ({
         sku: sku
       };
       const response = await client.post(BOUGHT_TOGETHER, postData);
-      response.sku = sku;
       return response;
     } catch (error) {
       return error;

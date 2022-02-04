@@ -7,8 +7,7 @@ import Select from "react-select";
 import ReactStars from "react-stars";
 import { withRouter } from "react-router";
 import LazyLoad from "react-lazyload";
-import SlickSlider from "../SlickSlider";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 /**
  * Modules / Utils / Reducers
  */
@@ -58,7 +57,6 @@ import Label from "hometown-components-dev/lib/LabelHtV1";
 import FormInput from "hometown-components-dev/lib/FormsHtV1/FormInputHtV1";
 import Section from "hometown-components-dev/lib/SectionHtV1";
 import Img from "hometown-components-dev/lib/ImageHtV1";
-const cartIcon = require('../../../static/pdp-icons/cart.png');
 /**
  * Page Components
  */
@@ -77,7 +75,7 @@ import ServiceDetails from "hometown-components-dev/lib/ProductDetailsHtV1/Servi
 // import EmiOptions from 'hometown-components-dev/lib/ProductDetailsHtV1/EmiOptions';
 // import ShareBar from 'components/ShareBar';
 import TitlePrice from "./TitlePrice";
-import HeadingTitlePrice from "./HeadingTitlePrice"
+import HeadingTitlePrice from "./HeadingTitlePrice";
 import WishListButton from "hometown-components-dev/lib/WishlistButtonHtV1";
 // import Section from 'hometown-components-dev/lib/SectionHtV1';
 // import UnbxdRecentlyViewed from 'components/UnbxdRecentlyViewed/UnbxdRecentlyViewed';
@@ -100,8 +98,7 @@ import demoIcon from "../../../static/play-button.svg";
 import { BackgroundMasker } from "hometown-components-dev/lib/Shimmer";
 import PdpModal from "./PdpModal/PdpModal";
 import Specs from "./Specs/specs";
-// import BaughtTogether from "./boughtTogether";
-import props from '../../../static/dist/dlls/dll__vendor';
+import BaughtTogether from "./baughtTogether";
 
 /**
  * Images / Icons
@@ -123,56 +120,6 @@ const RightArrow = require("../../../static/new-home/roundedArrowRight.svg");
  */
 
 const styles = require("./productIndex.scss");
-
-// const settings = {
-//   slidesToShow: 1,
-//   slidesToScroll: 1,
-//   dots: true,
-//   nextArrow: <SampleNextArrow />,
-//   prevArrow: <SamplePrevArrow />,
-//   customPaging: i => (
-//     <div
-//       style={{
-//         borderTop: "1px solid #848C7F"
-//       }}
-//     ></div>
-//   )
-// };
-const adjustSlides = length => ({
-  slidesToShow: length >= 3 ? 3 : length,
-  slidesToScroll: 1,
-  autoplay: false,
-  infinite: false,
-  dots: false,
-  arrows: false
-});
-function SampleNextArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <React.Fragment>
-      <img
-        className={className}
-        src={RightArrow}
-        onClick={onClick}
-        style={{ ...style, margin: 0, width: "15px", top: "55%" }}
-      />
-    </React.Fragment>
-  );
-}
-
-function SamplePrevArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <React.Fragment>
-      <img
-        className={className}
-        src={LeftArrow}
-        onClick={onClick}
-        style={{ ...style, margin: 0, width: "15px", top: "55%" }}
-      />
-    </React.Fragment>
-  );
-}
 
 const qtyOptions = sku => {
   if (sku.meta) {
@@ -343,126 +290,11 @@ class ProductDetails extends React.Component {
     store: PropTypes.object.isRequired
   };
 
-  updatebtProdQty = () => {
-    const { btProds } = this.state;
-    btProds.forEach((prod, index) => {
-      this.setState(prevState => {
-        let btProdQty = Object.assign({}, prevState.btProdQty); //creating copy of state variable btProdQty
-        if (index === 0 || index === 1) {
-          btProdQty[`${prod.sku}`] = 1;
-        } else {
-          btProdQty[`${prod.sku}`] = 0;
-        }
-        return { btProdQty };
-      });
-    });
-  };
-  updatebtTotal = (val, i) => {
-    const {
-      product: {
-        pricing_details: { coupon_code: couponCode }
-      },
-      product
-    } = this.props;
-    const { btProdQty, prodQty, btProds } = this.state;
-    btProds.forEach((prod, index) => {
-      if (btProdQty[`${prod.sku}`] && index === i) {
-        if (val === "inc") {
-          if (index === 0) {
-            this.setState({
-              btTotal:
-                this.state.btTotal +
-                Number(formatPrice(product.pricing_details.offer_price))
-            });
-          } else if (prod.pricing_details.coupon_code === couponCode) {
-            this.setState({
-              btTotal:
-                this.state.btTotal +
-                Number(formatPrice(prod.pricing_details.offer_price))
-            });
-          } else {
-            this.setState({
-              btTotal: this.state.btTotal + Number(prod.special_price)
-            });
-          }
-        } else if (val === "dec") {
-          if (index === 0) {
-            this.setState({
-              btTotal:
-                this.state.btTotal -
-                Number(formatPrice(product.pricing_details.offer_price))
-            });
-          } else if (prod.pricing_details.coupon_code === couponCode) {
-            this.setState({
-              btTotal:
-                this.state.btTotal -
-                Number(formatPrice(prod.pricing_details.offer_price))
-            });
-          } else {
-            this.setState({
-              btTotal: this.state.btTotal - Number(prod.special_price)
-            });
-          }
-        }
-      } else if (!btProdQty[`${prod.sku}`] && index === i) {
-        if (val === "inc") {
-          if (index === 0) {
-            this.setState({
-              btTotal:
-                this.state.btTotal +
-                Number(formatPrice(product.pricing_details.offer_price)) *
-                btProdQty[`${prod.sku}`]
-            });
-          } else if (prod.pricing_details.coupon_code === couponCode) {
-            this.setState({
-              btTotal:
-                this.state.btTotal +
-                Number(formatPrice(prod.pricing_details.offer_price)) *
-                btProdQty[`${prod.sku}`]
-            });
-          } else {
-            this.setState({
-              btTotal:
-                this.state.btTotal +
-                Number(prod.special_price) * btProdQty[`${prod.sku}`]
-            });
-          }
-        } else if (val === "dec") {
-          if (index === 0) {
-            this.setState({
-              btTotal:
-                this.state.btTotal -
-                Number(formatPrice(product.pricing_details.offer_price)) *
-                (btProdQty[`${prod.sku}`] + 1)
-            });
-          } else if (prod.pricing_details.coupon_code === couponCode) {
-            this.setState({
-              btTotal:
-                this.state.btTotal -
-                Number(formatPrice(prod.pricing_details.offer_price)) *
-                (btProdQty[`${prod.sku}`] + 1)
-            });
-          } else {
-            this.setState({
-              btTotal:
-                this.state.btTotal -
-                Number(prod.special_price) * (btProdQty[`${prod.sku}`] + 1)
-            });
-          }
-        }
-      }
-    });
-  };
-
   constructor(props) {
     super(props);
     // this.reviewsRef = React.createRef();
     this.state = {
       displayShareBar: false,
-      btProds: [this.props.product.meta, ...this.props.boughtTogether],
-      btProdQty: {
-        commonQty: 0
-      },
       prodQty: 1,
       open: false,
       openLogin: false,
@@ -744,19 +576,19 @@ class ProductDetails extends React.Component {
   };
   handleQty = value => {
     const { prodQty } = this.state;
-    if (value === 'increment' && prodQty < 6) {
+    if (value === "increment" && prodQty < 6) {
       this.setState(
         {
           prodQty: this.state.prodQty + 1
         },
-        () => this.updatebtTotal('inc', 'no index')
+        () => this.updatebtTotal("inc", "no index")
       );
-    } else if (value === 'decrement' && prodQty > 1) {
+    } else if (value === "decrement" && prodQty > 1) {
       this.setState(
         {
           prodQty: this.state.prodQty - 1
         },
-        () => this.updatebtTotal('dec', 'no index')
+        () => this.updatebtTotal("dec", "no index")
       );
     }
   };
@@ -852,84 +684,7 @@ class ProductDetails extends React.Component {
       ))
     );
   };
-  setbtTotal = () => {
-    const { btProds } = this.state;
-    const {
-      boughtTogether,
-      product,
-      product: {
-        pricing_details: { coupon_code: couponCode }
-      }
-    } = this.props;
-    if (btProds.length > 1 && boughtTogether !== "Method Not Allowed") {
-      if (couponCode) {
-        if (btProds[1].pricing_details.coupon_code) {
-          this.setState({
-            btTotal:
-              Number(formatPrice(product.pricing_details.offer_price)) +
-              Number(formatPrice(btProds[1].pricing_details.offer_price))
-          });
-        } else {
-          this.setState({
-            btTotal:
-              Number(formatPrice(product.pricing_details.offer_price)) +
-              (Number(formatPrice(btProds[1].pricing_details.special_price))
-                ? Number(formatPrice(btProds[1].pricing_details.special_price))
-                : Number(formatPrice(btProds[1].pricing_details.mrp)))
-          });
-        }
-      } else {
-        this.setState({
-          btTotal:
-            (Number(formatPrice(product.pricing_details.special_price))
-              ? Number(formatPrice(product.pricing_details.special_price))
-              : Number(formatPrice(product.pricing_details.mrp))) +
-            (Number(formatPrice(btProds[1].pricing_details.special_price))
-              ? Number(formatPrice(btProds[1].pricing_details.special_price))
-              : Number(formatPrice(btProds[1].pricing_details.mrp)))
-        });
-      }
-    }
-  };
 
-  buySet = e => {
-    e.preventDefault();
-    const { session, pincode, product, btAddToCart } = this.props;
-    const { simples, meta, sku } = product;
-    const { config_id: configId } = meta;
-    const simpleSku = Object.keys(simples)[0];
-    const { btProds, btProdQty, prodQty } = this.state;
-    const pin = pincode.selectedPincode ? pincode.selectedPincode : PINCODE;
-    // btAddToCart(sku, sku, simpleSku, session, pin, configId, prodQty);
-    btProds.forEach((prod, index) => {
-      if (index === 0) {
-        if (btProdQty[`${prod.sku}`]) {
-          btAddToCart(
-            prod.sku,
-            prod.sku,
-            simpleSku,
-            session,
-            pin,
-            prod.configId,
-            btProdQty[`${prod.sku}`]
-          );
-        }
-      } else {
-        const simpleSKU = Object.keys(prod.simples)[0];
-        if (btProdQty[`${prod.sku}`]) {
-          btAddToCart(
-            prod.sku,
-            prod.sku,
-            simpleSKU,
-            session,
-            pin,
-            prod.configId,
-            btProdQty[`${prod.sku}`]
-          );
-        }
-      }
-    });
-  };
   render() {
     const {
       product,
@@ -1037,15 +792,7 @@ class ProductDetails extends React.Component {
       mrp: maxPrice,
       discount_type: discountType
     } = pricingDetails;
-    const {
-      prodDetail,
-      displayBTModal,
-      displayShareBar,
-      prodQty,
-      btProdQty,
-      btTotal,
-      btProds
-    } = this.state;
+    const { prodDetail, displayBTModal, displayShareBar, prodQty } = this.state;
     const checkSpecialPrice = Number(specialPrice) || Number(price);
     const isEmiAvailable = Number(checkSpecialPrice) >= EMI_THRESHOLD;
     // const checkSpecialPrice = Number(specialPriceEmi) || Number(price);
@@ -1096,10 +843,11 @@ class ProductDetails extends React.Component {
                   "@type" : "Product",
                   "url": "${productURL || ""}",
                   "name" : "${name.replace(/['"]+/g, "")}",
-                  "image" : ${images && images.length && images[0].url
-                  ? `["${images[0].url}.jpg"]`
-                  : []
-                },
+                  "image" : ${
+                    images && images.length && images[0].url
+                      ? `["${images[0].url}.jpg"]`
+                      : []
+                  },
                   "description" : "${productDescription.replace(/['"]+/g, "")}",
                   "sku": "${sku || ""}",
                   "brand" : {
@@ -1141,10 +889,7 @@ class ProductDetails extends React.Component {
                 <div id="portal" className="portal" />
 
                 {/* Product title  */}
-                <HeadingTitlePrice
-                  name={name}
-                  brand={brand}
-                />
+                <HeadingTitlePrice name={name} brand={brand} />
 
                 {/* color option */}
                 <Row
@@ -1166,10 +911,10 @@ class ProductDetails extends React.Component {
                             toggleShowMoreColorProducts={
                               this.toggleShowMoreColorProducts
                             }
-                          // currentlySelectedProductSku={product.sku}
-                          // showmorecolorproductsCount={
-                          //   showmorecolorproductsCount
-                          // }
+                            // currentlySelectedProductSku={product.sku}
+                            // showmorecolorproductsCount={
+                            //   showmorecolorproductsCount
+                            // }
                           />
                         </Box>
                       )}
@@ -1201,19 +946,6 @@ class ProductDetails extends React.Component {
                     </div>
                   ) : null}
                   <TitlePrice
-
-                    price={formatAmount(price)}
-                    offerDetails={this.getOfferDetails(offerDetails, price, specialPrice)}
-                    discPrice={formatAmount(checkSpecialPrice)}
-                    savingsRs={formatAmount(calculateSavings(price, checkSpecialPrice || '', offerPrice))}
-                    savingTotal={calculateTotalSavings(price, checkSpecialPrice || '')}
-                    savingsPercentage={calculateDiscount(price, checkSpecialPrice, offerPrice)}
-                    ratings={rating}
-                    count={count}
-                    onClickReviews={this.onClickReviews}
-                  />
-                  {/* Product price */}
-                  {/* <TitlePrice
                     price={formatAmount(price)}
                     offerDetails={this.getOfferDetails(
                       offerDetails,
@@ -1240,46 +972,40 @@ class ProductDetails extends React.Component {
                     ratings={rating}
                     count={count}
                     onClickReviews={this.onClickReviews}
-                  /> */}
-                  {
-                    <Box mb={20} mt={10}>
-                      {combinedbuy.length ? (
-                        <Button
-                          variant="link"
-                          fontFamily="medium"
-                          fontSize={18}
-                          mb={15}
+                  />
+                  {/* Product price */}
+                  <Box mb={20} mt={10}>
+                    {combinedbuy.length ? (
+                      <Button
+                        variant="link"
+                        fontFamily="medium"
+                        fontSize={18}
+                        mb={15}
+                      >
+                        <a
+                          href="#combined_buy_offers"
+                          style={{ color: "#F15A22" }}
                         >
-                          <a
-                            href="#combined_buy_offers"
-                            style={{ color: "#F15A22" }}
-                          >
-                            {`See ${combinedbuy.length} Combined ${combinedbuy.length > 1 ? "Offers" : "Offer"
-                              }`}
-                          </a>
-                        </Button>
-                      ) : (
-                          ""
-                        )}
-
-                      {offerImage && offerImageRedirect && (
-                        <a rel="noopener noreferrer" href={offerImageRedirect}>
-                          <Image src={offerImage} alt="" width="100%" />
+                          {`See ${combinedbuy.length} Combined ${
+                            combinedbuy.length > 1 ? "Offers" : "Offer"
+                          }`}
                         </a>
-                      )}
-                      {offerImage && !offerImageRedirect && (
+                      </Button>
+                    ) : (
+                      ""
+                    )}
+
+                    {offerImage && offerImageRedirect && (
+                      <a rel="noopener noreferrer" href={offerImageRedirect}>
                         <Image src={offerImage} alt="" width="100%" />
-                      )}
-                    </Box>
-                  }
+                      </a>
+                    )}
+                    {offerImage && !offerImageRedirect && (
+                      <Image src={offerImage} alt="" width="100%" />
+                    )}
+                  </Box>
                 </Row>
 
-                {/* emi cards */}
-                {/* <LazyLoad height={150}>
-                  <Div mt="5px">
-                    <EmiOptions data={financeOption} />
-                  </Div>
-                </LazyLoad> */}
                 {/* PDP Strip Icons */}
                 <Stripes
                   emi={formatAmount(calculateLowestEmi(emidata, price))}
@@ -1443,8 +1169,8 @@ class ProductDetails extends React.Component {
                             simpleSku,
                             pincode.selectedPincode
                           )}
-                        // isWishList={isInWishList(wishList, sku)}
-                        // wishlistLoading={isInWishList(loadingList, sku)}
+                          // isWishList={isInWishList(wishList, sku)}
+                          // wishlistLoading={isInWishList(loadingList, sku)}
                         >
                           <Img
                             src={
@@ -1551,7 +1277,7 @@ class ProductDetails extends React.Component {
                                     feedBackError={nameError}
                                     feedBackMessage={nameErrorMessage}
                                     onChange={this.handleChange}
-                                  // ref={(nameInp) => this.myInp = nameInp}
+                                    // ref={(nameInp) => this.myInp = nameInp}
                                   />
                                 </Box>
                                 <Box marginBottom="0.3125rem">
@@ -1639,470 +1365,8 @@ class ProductDetails extends React.Component {
             </Row>
             {/* bought together */}
             <LazyLoad height={150}>
-              <Section>
-                <h2 style={{ color: "#222222", textAlign: "center" }}>
-                  Bought Together
-                </h2>
-
-                <div
-                  style={{
-                    display: "flex",
-                    width: "100%",
-                    justifyContent: "center",
-                    // margin: "10px 5% 30px 5%"
-                  }}
-                >
-
-                  {!boughtTogether.error_message ? (
-                    <Section >
-                      {/* {console.log("bough to gether ", this.state, this.props)} */}
-                      <Div>
-                        <SlickSlider
-                          className="mainSlider"
-                          settings={adjustSlides(8)}
-                        >
-                          {btProds && btProds.length
-                            ? btProds.map((prod, index) => (
-                              <Div
-
-                                key={index}
-                                style={{
-                                  position: "relative",
-                                  borderRadius: "5px",
-                                  height: "auto"
-                                }}
-                                p="10px"
-                                bg="white"
-                              >
-                                {index === 0 ? (
-                                  <div
-                                    style={{
-                                      position: "relative",
-                                      height: "250px",
-                                      display: "flex"
-                                    }}
-                                  >
-                                    <Img
-                                      src={`${product.image}.jpg`}
-                                      alt="BT!"
-                                      height="100%"
-                                      width="auto%"
-                                      m="auto"
-                                      style={{ border: "2px solid #FAF4F2" }}
-                                    />
-                                  </div>
-                                ) : prod.image ? (
-                                  <div
-                                    style={{
-                                      position: "relative",
-                                      height: "250px",
-                                      display: "flex"
-                                    }}
-                                  >
-                                    <Link to={prod.link}>
-                                      <Img
-                                        src={prod.image}
-                                        alt="BT!"
-                                        height="100%"
-                                        width="auto%"
-                                        m="auto"
-                                        style={{ border: "2px solid #FAF4F2" }}
-                                      />
-                                    </Link>
-                                  </div>
-                                ) : null}
-
-                                {prod.name ? (
-                                  <Text
-                                    ta="left"
-                                    fontSize="22px"
-                                    mt="15px"
-                                    mb="5px"
-                                    style={{
-                                      height: "40px",
-                                      fontWeight: "bold"
-                                    }}
-                                    lineHeight="1.8rem"
-                                  >
-                                    {prod.name.split("").length > 50
-                                      ? `${prod.name.slice(0, 50)}....`
-                                      : prod.name}
-                                  </Text>
-                                ) : null}
-                                {index !== 0 ? (
-                                  <Text
-                                    ta="left"
-                                    fontSize="16px"
-                                    mt="20px"
-                                    mb="3px"
-                                    style={{
-                                      height: "30px",
-                                      fontWeight: "bold"
-                                    }}
-                                    lineHeight="1.5rem"
-                                  >
-                                    {prod.pricing_details.coupon_code
-                                      ? `Offer Price: ₹ ${prod.pricing_details.offer_price}`
-                                      : prod.pricing_details.special_price !==
-                                        "0"
-                                        ? `Price: ₹ ${prod.pricing_details.special_price}`
-                                        : `Price: ₹ ${prod.pricing_details.mrp}`}
-                                  </Text>
-                                ) : (
-                                    <Text
-                                      ta="left"
-                                      fontSize="12px"
-                                      mt="0px"
-                                      mb="3px"
-                                      style={{
-                                        height: "30px",
-                                        fontWeight: "bold"
-                                      }}
-                                      lineHeight="1.3rem"
-                                    >
-                                      {couponCode
-                                        ? `Offer Price: ₹ ${offerPrice}`
-                                        : csp !== "0"
-                                          ? `Price: ₹ ${csp}`
-                                          : `Price: ₹ ${mrp}`}
-                                    </Text>
-                                  )}
-                                <Row
-                                  ml="0px"
-                                  mr="0px"
-                                  style={{ width: "100%" }}
-                                  justifyContent="flex-start"
-                                >
-                                  <Row
-                                    ml="0px"
-                                    mr="0px"
-                                    justifyContent="center"
-                                    style={{
-                                      alignItems: "center",
-                                      width: "30%",
-                                      border: "1px solid #E9916B",
-                                      borderRadius: "5px",
-                                      padding: "5px"
-                                    }}
-                                  >
-                                    <Button
-                                      width="30%"
-                                      pl="0.5rem"
-                                      pr="0.5rem"
-                                      backgroundColor="#fff"
-                                      color="black"
-                                      style={{ border: "none", backgroundColor: "#fff !important " }}
-                                      onClick={() => {
-                                        if (index === 0) {
-                                          if (
-                                            this.state.btProdQty[
-                                            `${prod.sku}`
-                                            ] > 1
-                                          ) {
-                                            this.setState(
-                                              prevState => {
-                                                // btProdQty : btProdQty[`${prod.name}`] += 1
-                                                let btProdQty = Object.assign(
-                                                  {},
-                                                  prevState.btProdQty
-                                                ); //creating copy of state variable btProdQty
-                                                btProdQty[`${prod.sku}`] -= 1;
-                                                return { btProdQty };
-                                              },
-                                              () => {
-                                                this.updatebtTotal(
-                                                  "dec",
-                                                  index
-                                                );
-                                              }
-                                            );
-                                          }
-                                        } else {
-                                          if (
-                                            this.state.btProdQty[
-                                            `${prod.sku}`
-                                            ] > 0
-                                          ) {
-                                            this.setState(
-                                              prevState => {
-                                                // btProdQty : btProdQty[`${prod.name}`] += 1
-                                                let btProdQty = Object.assign(
-                                                  {},
-                                                  prevState.btProdQty
-                                                ); //creating copy of state variable btProdQty
-                                                btProdQty[`${prod.sku}`] -= 1;
-                                                return { btProdQty };
-                                              },
-                                              () => {
-                                                this.updatebtTotal(
-                                                  "dec",
-                                                  index
-                                                );
-                                              }
-                                            );
-                                          }
-                                        }
-                                      }}
-                                    >
-                                      -
-                                    </Button>
-                                    <Div
-                                      style={{
-                                        width: "30%",
-                                        textAlign: "center"
-                                      }}
-                                    >
-                                      {btProdQty[`${prod.sku}`]
-                                        ? btProdQty[`${prod.sku}`]
-                                        : btProdQty.commonQty}
-                                    </Div>
-                                    <Button
-                                      width="30%"
-                                      pl="0.5rem"
-                                      pr="0.5rem"
-                                      backgroundColor="#fff"
-                                      color="black"
-                                      style={{ border: "none", backgroundColor: "#fff !important " }}
-                                      onClick={() => {
-                                        if (
-                                          this.state.btProdQty[`${prod.sku}`] <
-                                          5
-                                        ) {
-                                          this.setState(
-                                            prevState => {
-                                              // btProdQty : btProdQty[`${prod.name}`] += 1
-                                              let btProdQty = Object.assign(
-                                                {},
-                                                prevState.btProdQty
-                                              ); //creating copy of state variable btProdQty
-                                              btProdQty[`${prod.sku}`] += 1;
-                                              return { btProdQty };
-                                            },
-                                            () => {
-                                              this.updatebtTotal("inc", index);
-                                            }
-                                          );
-                                        }
-                                      }}
-                                    >
-                                      +
-                                    </Button>
-                                  </Row>
-                                  <Div
-                                    ml="1rem"
-                                    style={{
-                                      width: "40%",
-                                      display: "flex",
-                                      justifyContent: "flex-start",
-                                      alignItems: "center"
-                                    }}
-                                  >
-                                    {index === 0 ? (
-                                      <Img
-                                        src={cartIcon}
-                                        alt="Cart icon"
-                                        height="20px"
-                                        style={{ width: "auto" }}
-                                        onClick={() =>
-                                          this.props.btAddToCart(
-                                            prod.sku,
-                                            prod.sku,
-                                            simpleSku,
-                                            session,
-                                            pincode.selectedPincode,
-                                            prod.configId,
-                                            btProdQty[`${prod.sku}`]
-                                          )
-                                        }
-                                      />
-                                    ) : (
-                                        <Img
-                                          src={cartIcon}
-                                          alt="Cart icon"
-                                          height="20px"
-                                          style={{ width: "auto" }}
-                                          onClick={() =>
-                                            this.props.btAddToCart(
-                                              prod.sku,
-                                              prod.sku,
-                                              Object.keys(prod.simples)[0],
-                                              session,
-                                              pincode.selectedPincode,
-                                              prod.configId,
-                                              btProdQty[`${prod.sku}`]
-                                            )
-                                          }
-                                        />
-                                      )}
-                                  </Div>
-                                </Row>
-                              </Div>
-                            ))
-                            : null}
-                        </SlickSlider>
-                      </Div>
-                      {/* <Div>
-                      <Text
-                        ta="center"
-                        mb="0px"
-                        fontSize="14px"
-                        color="#222222"
-                        style={{ fontWeight: "bold" }}
-                      >
-                        Total Price: ₹ {formatAmount(btTotal)}
-                      </Text>
-                      {couponCode ? (
-                        <Text ta="center" mt="0px" fontSize="14px">
-                          Price inclusive of Extra {offerDiscountPercentage}%
-                          Use Code:{" "}
-                          <Span fontSize="14px" color="#E9916B" tt="uppercase">
-                            {couponCode}
-                          </Span>
-                        </Text>
-                      ) : null}
-                      {!checkStatus ? (
-                        <Button
-                          style={{
-                            backgroundColor: "#E9916B",
-                            borderRadius: "5px",
-                            color: "white",
-                            width: "40%",
-                            display: "block"
-                          }}
-                          m="auto"
-                          mt="1rem"
-                          onClick={this.buySet}
-                        >
-                          {addLoading ? "Adding.." : "Buy Set"}
-                        </Button>
-                      ) : (
-                        <Link to="/checkout/cart">
-                          <Button
-                            style={{
-                              backgroundColor: "#E9916B",
-                              borderRadius: "5px",
-                              color: "white",
-                              width: "40%",
-                              display: "block"
-                            }}
-                            m="auto"
-                            mt="1rem"
-                            // onClick={this.buySet}
-                          >
-                            Go to Cart
-                          </Button>
-                        </Link>
-                      )}
-                    </Div> */}
-                    </Section>
-                  ) : null}
-
-                </div>
-
-              </Section>
+              <BaughtTogether />
             </LazyLoad>
-            {displayBTModal && !boughtTogether.error_message ? (
-              <Section
-                pl="0px"
-                pr="0px"
-                style={{
-                  position: "fixed",
-                  height: "100vh",
-                  width: "100%",
-                  top: "0px",
-                  backgroundColor: "rgba(0, 0, 0, 0.5)",
-                  zIndex: "1"
-                }}
-              >
-                <Div
-                  style={{
-                    position: "absolute",
-                    bottom: "0px",
-                    height: "50vh",
-                    backgroundColor: "white",
-                    borderRadius: "5px 5px 0px 0px",
-                    overflowY: "auto"
-                  }}
-                >
-                  <Row
-                    mt="1rem"
-                    mr="0px"
-                    ml="0px"
-                    mb="1rem"
-                    style={{
-                      justifyContent: "space-between",
-                      alignItems: "center"
-                    }}
-                  >
-                    <Div style={{ width: "50%" }}>
-                      <Heading ta="center" color="#323131" fontSize="1rem">
-                        More Options
-                      </Heading>
-                    </Div>
-                    <Div
-                      style={{
-                        width: "50%",
-                        display: "flex",
-                        justifyContent: "flex-end"
-                      }}
-                    >
-                      <Img
-                        src={CloseIcon}
-                        onClick={() => this.handleBTModel(false)}
-                        alt="close button"
-                        height="20px"
-                      />
-                    </Div>
-                  </Row>
-                  {boughtTogether && boughtTogether.length
-                    ? boughtTogether.map((prod, index) => (
-                      <Link to={prod.link}>
-                        <Div
-                          key={index}
-                          pl="1rem"
-                          pr="1rem"
-                          mb="1rem"
-                          style={{ height: "100px" }}
-                        >
-                          <Row
-                            justifyContent="space-between"
-                            ml="0px"
-                            mr="0px"
-                            style={{ height: "100px" }}
-                          >
-                            <Div style={{ width: "40%", height: "100%" }}>
-                              <Img
-                                src={prod.image}
-                                alt="BT1"
-                                m="auto"
-                                style={{ height: "100%", width: "auto" }}
-                              />
-                            </Div>
-                            <Div style={{ width: "50%" }}>
-                              <Heading
-                                fontSize="12px"
-                                color="#323131"
-                                style={{ whiteSpace: "normal" }}
-                              >
-                                {prod.name.split("").length > 50
-                                  ? `${prod.name.slice(0, 50)}....`
-                                  : prod.name}
-                              </Heading>
-                              <Text fontSize="12px" color="#F47020" mt="0px">
-                                {prod.pricing_details.coupon_code
-                                  ? `Offer Price: ₹${prod.pricing_details.offer_price}`
-                                  : `Price: ₹${prod.pricing_details.special_price}`}
-                                {/* Offer Price: ₹{prod.special_price} */}
-                              </Text>
-                            </Div>
-                          </Row>
-                        </Div>
-                      </Link>
-                    ))
-                    : null}
-                </Div>
-              </Section>
-            ) : null}
             {/* Complete the look */}
             {/* <UnbxdCompleteTheLook configId={configId} /> */}
             {/* Related Products List */}
