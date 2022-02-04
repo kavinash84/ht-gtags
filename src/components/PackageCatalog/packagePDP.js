@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Section from 'hometown-components-dev/lib/SectionHtV1';
+import Section from "hometown-components-dev/lib/SectionHtV1";
 import PropTypes from "prop-types";
 import Text from "hometown-components-dev/lib/TextHtV1";
 // import Span from "hometown-components/lib/Span";
 import { calculateLowestEmi } from "utils/helper";
 // import EmiModal from "containers/EmiModal/EmiModal";
 import { EMI_THRESHOLD } from "helpers/Constants";
-import ProductDesc from 'hometown-components-dev/lib/ProductDetailsHtV1/ProductDesc';
+import ProductDesc from "hometown-components-dev/lib/ProductDetailsHtV1/ProductDesc";
 import { formatAmount } from "utils/formatters";
-import Specs from 'hometown-components-dev/lib/ProductDetailsHtV1/Specs';
+import Specs from "hometown-components-dev/lib/ProductDetailsHtV1/Specs";
 import Stripes from "../ProductDetails/PdpStripe";
-import PackageDetailSlider from './Carousel';
+import PackageDetailSlider from "./Carousel";
 // import MainFurnitureSlider from "../furnitureCategories/mainSlider";
 
 const styles = require("./index.scss");
@@ -126,33 +126,47 @@ export default class PackagePDP extends Component {
       <div className={styles.package_pdp_container}>
         {packageCatalog.categories && (
           <React.Fragment>
-            <div style={{ padding: "25px 40px 20px 30px" }}>
-              <h3 className={styles.prod_title}>{name}</h3>
-              <div style={{ fontWeight: 600 }}>By {brand}</div>
-            </div>
-            <div style={{ height: "75vh", overflow: "auto" }}>
-              <Section p="0" m="0">
-                {/* <MainFurnitureSlider data={carosalData} mb="0" /> */}
-              <PackageDetailSlider data={carosalData}  />
-              </Section>
-              <Section p="10px 20px" mb="0">
-                {formatPrice(csp) < formatPrice(mrp) ? (
-                  <Text
-                    mt="0px"
-                    color="#E9916B"
-                    fontSize="1rem"
-                    className={styles.price}
-                  >
-                    {formatPrice(csp) !== 0 ? `₹${csp}` : `₹${mrp}`}
-                    <span>
-                      {formatPrice(csp) !== 0 ? (
-                        <Text
-                          ml="10px"
-                          fontSize="12px"
-                          color="#999999"
-                          className={styles.pricecut}
-                        >
-                          ₹{mrp}{" "}
+            <div style={{display:'flex', width: '100%'}}>
+              <div style={{width:'50%', marginLeft: '3%'}}>
+                <Section p="0" m="0">
+                  <PackageDetailSlider data={carosalData} />
+                </Section>
+              </div>
+              <div style={{width:'50%', marginLeft:'3%', marginRight:'5%'}}>
+                <Section p="10px 20px" mb="0">
+                  <div style={{ padding: "25px 0px 20px 0px" }}>
+                    <h3 style={{ lineHeight: "30px"}} className={styles.prod_title}>{name}</h3>
+                    <div style={{ fontWeight: 600 , marginTop: "10px" }}>By {brand}</div>
+                  </div>
+                  {formatPrice(csp) < formatPrice(mrp) ? (
+                    <Text
+                      mt="0px"
+                      color="#E9916B"
+                      fontSize="1rem"
+                      className={styles.price}
+                    >
+                      {formatPrice(csp) !== 0 ? `₹${csp}` : `₹${mrp}`}
+                      <span>
+                        {formatPrice(csp) !== 0 ? (
+                          <Text
+                            ml="10px"
+                            fontSize="12px"
+                            color="#999999"
+                            className={styles.pricecut}
+                          >
+                            ₹{mrp}{" "}
+                            <Text
+                              // mt="0px"
+                              color="#999999"
+                              fontSize="12px"
+                              pl="5px"
+                              className={styles.pricecut}
+                              style={{ textDecoration: "none" }}
+                            >
+                              <del>MRP</del> (Inclusive of all taxes)
+                            </Text>
+                          </Text>
+                        ) : (
                           <Text
                             // mt="0px"
                             color="#999999"
@@ -161,114 +175,103 @@ export default class PackagePDP extends Component {
                             className={styles.pricecut}
                             style={{ textDecoration: "none" }}
                           >
-                            <del>MRP</del> (Inclusive of all taxes)
+                            MRP (Inclusive of all taxes)
                           </Text>
-                        </Text>
-                      ) : (
-                        <Text
-                          // mt="0px"
-                          color="#999999"
-                          fontSize="12px"
-                          pl="5px"
-                          className={styles.pricecut}
-                          style={{ textDecoration: "none" }}
-                        >
-                          MRP (Inclusive of all taxes)
-                        </Text>
-                      )}
-                    </span>
-                  </Text>
-                ) : (
-                  <Text
-                    color="#E9916B"
-                    fontSize="1rem"
-                    className={styles.price}
-                  >
-                    ₹{mrp}{" "}
-                    <Text
-                      // mt="0px"
-                      color="#999999"
-                      fontSize="12px"
-                      pl="5px"
-                      className={styles.pricecut}
-                      style={{ textDecoration: "none" }}
-                    >
-                      MRP (Inclusive of all taxes)
+                        )}
+                      </span>
                     </Text>
-                  </Text>
-                )}
-                {totalSavings !== "0" ? (
-                  <Text mt="0px" color="#626463" fontSize="12px">
-                    Total Savings ₹ {totalSavings} ({totalDiscountPercentage}%
-                    OFF)
-                  </Text>
-                ) : null}
-                <div
-                  style={{
-                    color: "#666666",
-                    fontWeight: 600,
-                    fontSize: "14px",
-                    padding: "5px 0px 20px"
-                  }}
-                >
-                  {(deliveryDetails &&
-                    deliveryDetails[0] &&
-                    deliveryDetails[0].value) ||
-                    ""}
-                </div>
-                <Stripes
-                  emi={formatAmount(calculateLowestEmi(emidata, price))}
-                  isEmiAvailable={false}
-                  warrantyPeriod={warrantyPeriod}
-                  fkCatalogSupplier={fkCatalogSupplier}
-                  brand={brand}
-                  freeVisit={freeVisit}
-                  freeInstallation={freeInstallation}
-                  isFurniture={isFurniture}
-                >
-                  {/* <EmiModal
+                  ) : (
+                    <Text
+                      color="#E9916B"
+                      fontSize="1rem"
+                      className={styles.price}
+                    >
+                      ₹{mrp}{" "}
+                      <Text
+                        // mt="0px"
+                        color="#999999"
+                        fontSize="12px"
+                        pl="5px"
+                        className={styles.pricecut}
+                        style={{ textDecoration: "none" }}
+                      >
+                        MRP (Inclusive of all taxes)
+                      </Text>
+                    </Text>
+                  )}
+                  {totalSavings !== "0" ? (
+                    <Text mt="0px" color="#626463" fontSize="12px">
+                      Total Savings ₹ {totalSavings} ({totalDiscountPercentage}%
+                      OFF)
+                    </Text>
+                  ) : null}
+                  <div
+                    style={{
+                      color: "#666666",
+                      fontWeight: 600,
+                      fontSize: "14px",
+                      padding: "20px 0px 20px"
+                    }}
+                  >
+                    {(deliveryDetails &&
+                      deliveryDetails[0] &&
+                      deliveryDetails[0].value) ||
+                      ""}
+                  </div>
+                  <Stripes
+                    emi={formatAmount(calculateLowestEmi(emidata, price))}
+                    isEmiAvailable={false}
+                    warrantyPeriod={warrantyPeriod}
+                    fkCatalogSupplier={fkCatalogSupplier}
+                    brand={brand}
+                    freeVisit={freeVisit}
+                    freeInstallation={freeInstallation}
+                    isFurniture={isFurniture}
+                  >
+                    {/* <EmiModal
                     price={formatAmount(checkSpecialPrice)}
                     data={emidata}
                     key="emi"
                     specialPrice={checkSpecialPrice}
                     bflMinAmount={bflMinAmount}
                   /> */}
-                </Stripes>
-              </Section>
-              <Section p="0px" mb="0" className={styles.custom_spec}>
-                <div
-                  style={{
-                    color: "#1d1d1d",
-                    background: "rgb(249, 249, 249)",
-                    fontSize: "16px",
-                    fontWeight: 600,
-                    padding: "15px 20px",
-                    borderBottom: "1px solid #a6a5a5",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center"
-                  }}
-                  onClick={this.toggleShowMore}
-                >
-                  <span>Product Details</span>
-                  <img src={ArrowDown} alt="Arrow Down" />
-                </div>
-                <div>
-                  {description && this.state.showmore && (
-                    <ProductDesc
-                      desc={description || ""}
-                      details={groupedAttributes[0].Details}
-                      showmore={true}
-                      toggleShowMore={() => {}}
-                    />
-                  )}
-                </div>
-                <Specs
-                  specs={groupedAttributes}
-                  prodDetail={this.state.prodDetail}
-                  pincode={pincode}
-                />
-              </Section>
+                  </Stripes>
+                </Section>
+                <Section p="0px" mb="0" className={styles.custom_spec}>
+                  <div
+                    style={{
+                      color: "#1d1d1d",
+                      background: "rgb(249, 249, 249)",
+                      fontSize: "16px",
+                      fontWeight: 600,
+                      padding: "15px 20px",
+                      borderBottom: "1px solid #a6a5a5",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center"
+                    }}
+                    onClick={this.toggleShowMore}
+                  >
+                    <span>Product Details</span>
+                    <img src={ArrowDown} alt="Arrow Down" />
+                  </div>
+                  <div>
+                    {description && this.state.showmore && (
+                      <ProductDesc
+                        desc={description || ""}
+                        details={groupedAttributes[0].Details}
+                        showmore={true}
+                        toggleShowMore={() => {}}
+                      />
+                    )}
+                  </div>
+                  <Specs
+                    specs={groupedAttributes}
+                    prodDetail={this.state.prodDetail}
+                    pincode={pincode}
+                  />
+                </Section>
+              </div>
             </div>
           </React.Fragment>
         )}

@@ -152,11 +152,16 @@ class CaroselContainer extends Component {
             </button>
           </div>
           <div style={{ background: "#FFF8F4" , marginTop: "20px"}}>
-            <div style={{ paddingBottom: "15px" }}>
+            <div style={{ paddingBottom: "15px"}}>
               <SlickSlider settings={adjustSlides(products.length)}>
                 {products.map((slide, i) => (
-                  <div key={String(i)}>
-                    <div className={styles.caroselItem}>
+                  <div key={String(i)} style={{ width: "100%"}}>
+                    <div className={styles.caroselItem}
+                     style={{
+          width:
+          products.length > 2 ? "auto" : "50%"
+        }}
+                    >
                       <div
                         style={{ position: "relative" }}
                         onClick={() => {

@@ -16,8 +16,8 @@ const styles = require("./index.scss");
 const arrowForward = require("../../../static/onelacPackage/onelacTopBanner.png");
 const PackageBanner = require("../../../static/onelacPackage/onelacTopBanner.png");
 
-const adjustSlides = (length, index) => ({
-  slidesToShow:3,
+const adjustSlidess = (length) => ({
+  slidesToShow: length >= 3 ? 3 : length,
   slidesToScroll: 1,
   infinite: false,
   autoplay: false,
@@ -141,7 +141,7 @@ export default class OneLacPackage extends Component {
                         ? styles.activeTabContainer
                         : styles.tabContainer
                     }
-                    style={{marginLeft:"30px"}}
+                    style={{marginLeft:"30px", cursor: "pointer"}}
                   >
                     <div
                       className={
@@ -161,29 +161,8 @@ export default class OneLacPackage extends Component {
             style={{ background: "#FFF8F4", width: "100%", padding: "30px" }}
           >
             
-              {/* <div>
-                <div style={{ marginBottom: "20px" }}>
-                  <img
-                    src={PackageBanner}
-                    alt="Banner"
-                    onClick={() => this.handleBannerClick(true, pack.id)}
-                  />
-                  {pack.pseudoItemsCount ? (
-                    <div
-                      className={styles.slectedStatus}
-                      onClick={() => this.handleBannerClick(true, pack.id)}
-                    >
-                      <div>
-                        {pack.pseudoItemsCount}/{pack.totalQty} Products Saved
-                      </div>
-                      <div>View All</div>
-                    </div>
-                  ) : null}
-                </div>
-              </div> */}
-              <SlickSlider settings={adjustSlides}>
+              <SlickSlider settings={adjustSlidess}>
               {packages_data.tabs[activeTab].package.map(pack => (
-                <div>
                 <div style={{ marginBottom: "20px" }}>
                   <img
                     src={PackageBanner}
@@ -202,7 +181,6 @@ export default class OneLacPackage extends Component {
                     </div>
                   ) : null}
                 </div>
-              </div>
               ))}
             </SlickSlider>
           </div>

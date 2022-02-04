@@ -60,7 +60,7 @@ export default class PackageDetailSlider extends Component {
             slidesToShow={showSlides(data)}
             swipeToSlide
             focusOnSelect
-            className="pdpThumbSlider"
+            className="pdpThumbSlider2"
             centerPadding="30px"
             variableWidth={true}
             beforeChange={(currentSlide, nextSlide) => {
