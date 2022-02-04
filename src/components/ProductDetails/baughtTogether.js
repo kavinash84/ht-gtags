@@ -13,9 +13,20 @@ import Row from "hometown-components-dev/lib/RowHtV1";
 import { getCartListSKU } from "selectors/cart";
 import { PINCODE } from "helpers/Constants";
 import { addToCart } from "redux/modules/cart";
+import { formatAmount } from "utils/formatters";
+
 import SlickSlider from "../SlickSlider";
 
-const cartIcon = require("../../../static/pdp-icons/cart.png");
+// const cartIcon = require("../../../static/pdp-icons/cart.png");
+
+const formatPrice = price => {
+  let newPrice = 0;
+  if (price.length > 3 && price !== null) {
+    newPrice = Number(price.replace(",", ""));
+    return newPrice;
+  }
+  return Number(price);
+};
 
 const checkSKUInCart = (list, sku) => list.includes(sku);
 
@@ -289,17 +300,20 @@ class BaughtTogether extends React.Component {
     this.setbtTotal();
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.prodQty !== this.props.prodQty) {
+      if (prevProps.prodQty < this.props.prodQty) {
+        this.updatebtTotal("inc", "no index");
+      } else {
+        this.updatebtTotal("dec", "no index");
+      }
+    }
+  }
+
   render() {
     const { btProds, btProdQty, btTotal } = this.state;
-    const {
-      cartSKUs,
-      product,
-      addingToCart,
-      stateId,
-      session,
-      pincode
-    } = this.props;
-    const { sku, simples, pricing_details: pricingDetails } = product;
+    const { cartSKUs, product, addingToCart, stateId } = this.props;
+    const { sku, pricing_details: pricingDetails } = product;
     const {
       mrp,
       special_price: csp,
@@ -309,10 +323,9 @@ class BaughtTogether extends React.Component {
     } = pricingDetails;
     const checkStatus = checkSKUInCart(cartSKUs, sku);
     const addLoading = addingToCart && stateId === sku;
-    const simpleSku = Object.keys(simples)[0];
     return (
       <React.Fragment>
-        {btProds && btProds.length ? (
+        {btProds && Array.isArray(btProds) && btProds.length > 1 ? (
           <Section>
             <Heading color="#222222" ta="center">
               Bought Together
@@ -512,53 +525,6 @@ class BaughtTogether extends React.Component {
                               +
                             </Button>
                           </Row>
-                          <Div
-                            ml="1rem"
-                            style={{
-                              width: "40%",
-                              display: "flex",
-                              justifyContent: "flex-start",
-                              alignItems: "center"
-                            }}
-                          >
-                            {index === 0 ? (
-                              <Img
-                                src={cartIcon}
-                                alt="Cart icon"
-                                height="20px"
-                                style={{ width: "auto" }}
-                                onClick={() =>
-                                  this.props.btAddToCart(
-                                    prod.sku,
-                                    prod.sku,
-                                    simpleSku,
-                                    session,
-                                    pincode.selectedPincode,
-                                    prod.configId,
-                                    btProdQty[`${prod.sku}`]
-                                  )
-                                }
-                              />
-                            ) : (
-                              <Img
-                                src={cartIcon}
-                                alt="Cart icon"
-                                height="20px"
-                                style={{ width: "auto" }}
-                                onClick={() =>
-                                  this.props.btAddToCart(
-                                    prod.sku,
-                                    prod.sku,
-                                    Object.keys(prod.simples)[0],
-                                    session,
-                                    pincode.selectedPincode,
-                                    prod.configId,
-                                    btProdQty[`${prod.sku}`]
-                                  )
-                                }
-                              />
-                            )}
-                          </Div>
                         </Row>
                       </Div>
                     ))

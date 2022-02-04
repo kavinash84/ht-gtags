@@ -250,7 +250,7 @@ const mapStateToProps = ({
 }) => ({
   session: sessionId,
   product: productdetails.productDescription,
-  // financeOption: productdetails.financeOptions.items.text,
+  financeOption: productdetails.financeOptions.items.text,
   reviews,
   pincode,
   combinedbuy: combinedbuy.results,
@@ -577,19 +577,13 @@ class ProductDetails extends React.Component {
   handleQty = value => {
     const { prodQty } = this.state;
     if (value === "increment" && prodQty < 6) {
-      this.setState(
-        {
-          prodQty: this.state.prodQty + 1
-        },
-        () => this.updatebtTotal("inc", "no index")
-      );
+      this.setState({
+        prodQty: this.state.prodQty + 1
+      });
     } else if (value === "decrement" && prodQty > 1) {
-      this.setState(
-        {
-          prodQty: this.state.prodQty - 1
-        },
-        () => this.updatebtTotal("dec", "no index")
-      );
+      this.setState({
+        prodQty: this.state.prodQty - 1
+      });
     }
   };
   hashLinkScroll = () => {
@@ -1004,6 +998,9 @@ class ProductDetails extends React.Component {
                       <Image src={offerImage} alt="" width="100%" />
                     )}
                   </Box>
+                  <Box>
+                    <EmiOptions data={financeOption} />
+                  </Box>
                 </Row>
 
                 {/* PDP Strip Icons */}
@@ -1365,7 +1362,7 @@ class ProductDetails extends React.Component {
             </Row>
             {/* bought together */}
             <LazyLoad height={150}>
-              <BaughtTogether />
+              <BaughtTogether prodQty={prodQty} />
             </LazyLoad>
             {/* Complete the look */}
             {/* <UnbxdCompleteTheLook configId={configId} /> */}

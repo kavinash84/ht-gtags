@@ -3,7 +3,8 @@ import { provideHooks } from "redial";
 import {
   loadProductDescription,
   gaTrack as productLoadGaTrack,
-  loadBoughtTogether
+  loadBoughtTogether,
+  getfinanceOptions
 } from "redux/modules/productdetails";
 import { loadColorProducts } from "redux/modules/colorproducts";
 import { load as loadRelatedProducts } from "redux/modules/relatedproducts";
@@ -19,9 +20,9 @@ const hooks = {
       pincode: { selectedPincode }
     } = getState();
     const pincode = selectedPincode || PINCODE;
+    dispatch(getfinanceOptions());
     if (currentsku !== params.skuId) {
       await dispatch(loadProductDescription(params.skuId, pincode));
-      // await dispatch(loadBoughtTogether(params.skuId));
     }
   },
   defer: ({ store: { dispatch, getState }, params }) => {

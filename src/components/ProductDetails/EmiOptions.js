@@ -2,19 +2,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Div from "hometown-components-dev/lib/BoxHtV1";
-// import Flex from 'hometown-components-dev/lib/FlexHtV1';
-// import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Text from "hometown-components-dev/lib/TextHtV1";
 import Heading from "hometown-components-dev/lib/HeadingHtV1";
 import { Link } from "react-router-dom";
-// import Div from 'hometown-components/lib/Div';
-// import Flex from 'hometown-components/lib/Row';
-// import Image from 'hometown-components/lib/Img';
-// import Text from 'hometown-components/lib/Text';
-// import Heading from 'hometown-components/lib/Heading';
 import SlickSlider from "../SlickSlider";
-
-// import Slider from './Slider-copy';
 
 const styles = require("./EmiOptions.scss");
 
@@ -33,9 +24,6 @@ function HtExclusiveTemplate4({ data }) {
         <Heading color="grey" fontSize="13px" ta="left" mb="0">
           {headerTitle}
         </Heading>
-        {/* <Flex justifyContent="center">
-          <Div className={styles.horizontalSeperator} />
-        </Flex> */}
         <Div>
           <Div pl="0px" pr="30px">
             <SlickSlider settings={adjustSlides(12)}>
@@ -44,9 +32,6 @@ function HtExclusiveTemplate4({ data }) {
                   <Div key={String(index)} p="10px 0px" pr="10px">
                     <Div className={styles.paymentOptions}>
                       <Link to="/promotions">
-                        {/* <Div pt={'20px'} pb={'10px'}>
-                        <Image width="110px" src={slide.url} alt="bank-option" />
-                      </Div> */}
                         <Div>
                           <Text
                             fontSize="11px"

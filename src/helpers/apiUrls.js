@@ -42,6 +42,7 @@ export const RECENTLY_VEIWED = "tesla/recently-viewed";
 export const EMI_OPTIONS = "tesla/bank-emi";
 export const BOUGHT_TOGETHER = "tesla/product/catalog-bought-together";
 export const COMBINED_BUY = "tesla/product/combined-set-products";
+export const PRODUCT_FINANCE_OPTIONS = "tesla/static/finance_options_new";
 /* Category Page */
 
 export const CATEGORY_PAGE = "tesla/categories";
