@@ -372,7 +372,7 @@ export default class ModularKitchenFormModal extends Component {
       // time: prefferedTime,
       mobile: phone,
       medium,
-      service: 3,
+      service: 2,
       source,
       // mkLead: 'Online consultaion',
       devicePlatform: 'msite'
