@@ -31,7 +31,7 @@ export default class SudoCart extends Component {
             fontWeight: 600,
             position: "absolute",
             top: "25px",
-            left: "20px",
+            left: "9%",
             zIndex: 2
           }}
         >

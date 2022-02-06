@@ -142,7 +142,7 @@ export default class SelectedItems extends Component {
                           </Link>
                         </button>
                         <span
-                          style={{ color: "#E9916B", fontSize: "11px" }}
+                          style={{ color: "#E9916B", fontSize: "11px" , marginLeft:"10px"}}
                           onClick={() => {
                             const { dispatch } = this.context.store;
                             const { openProdModal } = this.props;

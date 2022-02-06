@@ -39,6 +39,7 @@ import LoginModal from "containers/Login/LoginForm";
 import ProductQuantity from "./UpdateProductQuantity";
 import OrderSummary from "./OrderSummary";
 import PaymentMethods from "../PaymentMethods";
+import ProductItem from "./Product";
 
 /**
  * Images
@@ -872,21 +873,11 @@ const Cart = ({
                   )}
                 </Box>
               ) : null}
-              {/* {isPackage ? ( */}
-          <div
-            style={{
-              color: "white",
-              background: "#999999",
-              borderRadius: "7px",
-              width: "100%",
-              padding: "15px",
-              textAlign: "center",
-              marginTop: "-7px"
-            }}>
-            CLICK HERE TO CHECK ALL PRODUCTS
-           </div>
               
-              {/* :null} */}
+              <ProductItem  
+                 isPackage={item.product_info.packageId ? true : false}
+                      packageId={item.product_info.packageId}
+              />
             </Box>
           ))}
         </Box>
