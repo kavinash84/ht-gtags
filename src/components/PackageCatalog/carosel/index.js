@@ -127,7 +127,7 @@ class CaroselContainer extends Component {
             <div
               style={{
                 color: "#323131",
-                fontSize: "19px",
+                fontSize: "22px",
                 fontWeight: 600,
                 marginBottom: "10px"
               }}
@@ -143,9 +143,10 @@ class CaroselContainer extends Component {
                 border: "none",
                 background: "#EA9671",
                 opacity: this.checkDisabled() ? "0.4" : "1",
-                width: "100px",
-                height: "35px",
-                borderRadius: "5px"
+                width: "120px",
+                height: "40px",
+                borderRadius: "5px",
+                fontSize: "16px"
               }}
             >
               Select
@@ -214,9 +215,9 @@ class CaroselContainer extends Component {
                         <div
                           className={styles.prod_title}
                           style={{
-                            fontSize: "12px",
+                            fontSize: "16px",
                             color: "#323131",
-                            lineHeight: "normal"
+                            lineHeight: "20px"
                           }}
                         >
                           {slide.meta.name}
@@ -231,7 +232,7 @@ class CaroselContainer extends Component {
                           <div
                             style={{
                               color: "#E9916B",
-                              fontSize: "12px",
+                              fontSize: "14px",
                               marginTop: "5px"
                             }}
                             onClick={() => {

@@ -103,8 +103,8 @@ export default class OneLacPackage extends Component {
             style={{
               textAlign: "center",
               color: "#666666",
-              fontSize: "18px",
-              lineHeight: "28px",
+              fontSize: "24px",
+              lineHeight: "38px",
               padding: "40px 100px"
             }}
           >
@@ -131,7 +131,7 @@ export default class OneLacPackage extends Component {
                 }}
           >
           </div>
-          <div style={{ display: "flex", marginLeft: "9%", marginRight: "9%"}}>
+          <div style={{ display: "flex", marginLeft: "9%", marginRight: "9%", fontSize:"20px"}}>
             {packages_data.tabs.map((item, i) => {
               if (Array.isArray(item.package) && item.package.length) {
                 return (

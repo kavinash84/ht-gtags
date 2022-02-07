@@ -359,7 +359,7 @@ export default class PackageCatalog extends Component {
             <div
               style={{
                 color: "#323131",
-                fontSize: "24px",
+                fontSize: "28px",
                 fontWeight: 600,
                 marginBottom: "20px"
               }}
@@ -367,14 +367,14 @@ export default class PackageCatalog extends Component {
               {packageCatalog.title}
             </div>
             <div
-              style={{ color: "#323131", fontSize: "15px", fontWeight: 600 , marginBottom:"20px"}}
+              style={{ color: "#323131", fontSize: "18px", fontWeight: 600 , marginBottom:"20px"}}
             >
               {packageCatalog.subtitle}
             </div>
             <div
               style={{
                 color: "#E9916B",
-                fontSize: "18px",
+                fontSize: "22px",
                 fontWeight: 600,
                 margin: "10px 0px"
               }}
@@ -383,7 +383,7 @@ export default class PackageCatalog extends Component {
               <span
                 style={{
                   color: "#999999",
-                  fontSize: "15px"
+                  fontSize: "18px"
                 }}
               >
                 (inclusive of taxes)
@@ -396,7 +396,7 @@ export default class PackageCatalog extends Component {
                     <div
                       style={{
                         color: "#605F5F",
-                        fontSize: "15px",
+                        fontSize: "18px",
                         fontWeight: 600,
                         marginTop: "15px"
                       }}
@@ -406,7 +406,7 @@ export default class PackageCatalog extends Component {
                     <div
                       style={{
                         marginTop: "10px",
-                        fontSize: "12px",
+                        fontSize: "15px",
                         color: "#605F5F",
                         maxHeight: "50px",
                         overflow: "auto"
@@ -425,7 +425,7 @@ export default class PackageCatalog extends Component {
                   <span
                     style={{
                       color: "#605F5F",
-                      fontSize: "14px",
+                      fontSize: "15px",
                       cursor: "pointer"
                     }}
                     onClick={this.handleModal}
@@ -471,8 +471,8 @@ export default class PackageCatalog extends Component {
                 // background: "#D5D9D7",
                 opacity:
                   this.state.totalSelected !== packageCatalog.totalQty
-                    ? "0.5"
-                    : "1"
+                    ? "1.5"
+                    : "2"
               }}
             >
               {proceedLoader ? "Loading..." : "Proceed"}
