@@ -106,12 +106,12 @@ class BuyNow extends React.Component {
                 BUY NOW
               </Button>
             ) : (
-              <Box as={Link} variant="primary.large" to={CART_URL}>
-                <Button variant="primary.large" width={1}>
-                  BUY NOW
+                <Box as={Link} variant="primary.large" to={CART_URL}>
+                  <Button variant="primary.large" width="320px">
+                    BUY NOW
                 </Button>
-              </Box>
-            )}
+                </Box>
+              )}
           </Fragment>
         )}
       </Fragment>

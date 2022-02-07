@@ -1144,6 +1144,8 @@ class ProductDetails extends React.Component {
                         style={{
                           alignItems: "center",
                           width: "80%",
+                          height: "45px",
+                          marginTop: "5px",
                           border: "1px solid #515151",
                           borderRadius: "5px"
                         }}
