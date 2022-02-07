@@ -837,11 +837,10 @@ class ProductDetails extends React.Component {
                   "@type" : "Product",
                   "url": "${productURL || ""}",
                   "name" : "${name.replace(/['"]+/g, "")}",
-                  "image" : ${
-                    images && images.length && images[0].url
-                      ? `["${images[0].url}.jpg"]`
-                      : []
-                  },
+                  "image" : ${images && images.length && images[0].url
+                  ? `["${images[0].url}.jpg"]`
+                  : []
+                },
                   "description" : "${productDescription.replace(/['"]+/g, "")}",
                   "sku": "${sku || ""}",
                   "brand" : {
@@ -905,10 +904,10 @@ class ProductDetails extends React.Component {
                             toggleShowMoreColorProducts={
                               this.toggleShowMoreColorProducts
                             }
-                            // currentlySelectedProductSku={product.sku}
-                            // showmorecolorproductsCount={
-                            //   showmorecolorproductsCount
-                            // }
+                          // currentlySelectedProductSku={product.sku}
+                          // showmorecolorproductsCount={
+                          //   showmorecolorproductsCount
+                          // }
                           />
                         </Box>
                       )}
@@ -980,14 +979,13 @@ class ProductDetails extends React.Component {
                           href="#combined_buy_offers"
                           style={{ color: "#F15A22" }}
                         >
-                          {`See ${combinedbuy.length} Combined ${
-                            combinedbuy.length > 1 ? "Offers" : "Offer"
-                          }`}
+                          {`See ${combinedbuy.length} Combined ${combinedbuy.length > 1 ? "Offers" : "Offer"
+                            }`}
                         </a>
                       </Button>
                     ) : (
-                      ""
-                    )}
+                        ""
+                      )}
 
                     {offerImage && offerImageRedirect && (
                       <a rel="noopener noreferrer" href={offerImageRedirect}>
@@ -1166,8 +1164,8 @@ class ProductDetails extends React.Component {
                             simpleSku,
                             pincode.selectedPincode
                           )}
-                          // isWishList={isInWishList(wishList, sku)}
-                          // wishlistLoading={isInWishList(loadingList, sku)}
+                        // isWishList={isInWishList(wishList, sku)}
+                        // wishlistLoading={isInWishList(loadingList, sku)}
                         >
                           <Img
                             src={
@@ -1190,7 +1188,8 @@ class ProductDetails extends React.Component {
                       display: "flex",
                       justifyContent: "flex-start",
                       alignItems: "center",
-                      marginBottom: "30px"
+                      marginBottom: "20px",
+                      cursor: "pointer"
                     }}
                   >
                     <Img
@@ -1204,7 +1203,7 @@ class ProductDetails extends React.Component {
                     </Text>
                   </Div>
                   {displayShareBar ? (
-                    <ShareBar title={name} url={productURL} mt="10px" />
+                    <ShareBar title={name} url={productURL} mt="10px" mb="30px" />
                   ) : null}
                 </Div>
                 <div>
@@ -1235,7 +1234,9 @@ class ProductDetails extends React.Component {
                     }}
                   >
                     <h4>Reviews</h4>
-                    <span>{this.state.showReviews ? "-" : "+"}</span>
+                    <span>{this.state.showReviews ?
+                      <Image src={DownArrow} style={{ marginLeft: "10px" }} /> :
+                      <Image src={DownArrow} style={{ marginLeft: "10px" }} />}</span>
                   </div>
                   {this.state.showReviews ? (
                     <div
@@ -1274,7 +1275,7 @@ class ProductDetails extends React.Component {
                                     feedBackError={nameError}
                                     feedBackMessage={nameErrorMessage}
                                     onChange={this.handleChange}
-                                    // ref={(nameInp) => this.myInp = nameInp}
+                                  // ref={(nameInp) => this.myInp = nameInp}
                                   />
                                 </Box>
                                 <Box marginBottom="0.3125rem">

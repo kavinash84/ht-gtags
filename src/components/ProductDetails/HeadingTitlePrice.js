@@ -20,7 +20,7 @@ const HeadingTitlePrice = ({
         <Row display="block" mr="0" ml="0">
           <Heading
             itemProp="name"
-            fontSize="30px"
+            fontSize="22px"
             color="#222222"
             mb="0"
             mt="5px"
@@ -34,7 +34,7 @@ const HeadingTitlePrice = ({
 
           <div
             style={{
-              fontSize: "20px",
+              fontSize: "18px",
               color: "#323131",
               fontFamily: "medium"
             }}

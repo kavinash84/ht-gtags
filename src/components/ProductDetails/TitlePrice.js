@@ -83,7 +83,8 @@ const TitlePrice = ({
                         fontSize: "0.75rem",
                         color: "rgba(0, 0, 0, 0.4)",
                         fontFamily: "light",
-                        marginLeft: "0.75rem"
+                        marginLeft: "0.75rem",
+                        textDecoration: "line-through"
                       }}
                       va="middle"
                     >
@@ -107,7 +108,7 @@ const TitlePrice = ({
                   )}
                 </div>
                 <span
-                  style={{ color: "#f98d29", fontSize: "1.375rem" }}
+                  style={{ color: "#f98d29", fontSize: "20px" }}
                   itemProp="price"
                   va="text-top"
                   content={discPrice.split(",").join("")}

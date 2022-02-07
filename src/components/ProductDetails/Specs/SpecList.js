@@ -4,6 +4,8 @@ import Div from "hometown-components-dev/lib/BoxHtV1";
 import Row from "hometown-components-dev/lib/RowHtV1";
 import Button from "hometown-components-dev/lib/ButtonHtV1";
 import Spec from "./spec";
+const DownArrow = require("../../../../static/pdp-icons/down-arrow.svg");
+import Img from "hometown-components-dev/lib/ImageHtV1";
 
 const SpecRow = styled(Row)`
   box-sizing: border-box;
@@ -79,7 +81,8 @@ class SpecList extends Component {
               mt="-4px"
               color="rgba(0,0,0,0.6)"
             >
-              {show ? "-" : "+"}
+              {show ? <Img src={DownArrow} style={{ marginLeft: "10px" }} />
+                : <Img src={DownArrow} style={{ marginLeft: "10px" }} />}
             </Button>
           </SpecHeading>
           {show && (

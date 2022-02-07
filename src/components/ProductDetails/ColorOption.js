@@ -46,7 +46,7 @@ const ImgWrapper = styled.div`
 
 const ColorOptions = styled(Div)`
   max-height: 150px;
-  overflow: auto;
+  overflow:hidden;
   ${props =>
     props.active && {
       maxHeight: "inherit"
@@ -63,7 +63,7 @@ const ColorOption = ({
   toggleShowMoreColorProducts,
   showmorecolorproducts
 }) => (
-    <Row mr="0" ml="0" mb="0" display="block">
+    <Row mr="0" ml="0" mb="0" display="block" >
       <ColorOptions active={!showmorecolorproducts}>
         {data.map((item, index) => (
           <LinkCustom

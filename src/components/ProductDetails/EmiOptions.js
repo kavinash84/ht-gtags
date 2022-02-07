@@ -13,7 +13,8 @@ const adjustSlides = length => ({
   slidesToShow: length >= 2 ? 1.4 : length,
   slidesToScroll: 1,
   autoplay: false,
-  infinite: false
+  infinite: false,
+  arrows: false
 });
 
 function HtExclusiveTemplate4({ data }) {
@@ -21,7 +22,7 @@ function HtExclusiveTemplate4({ data }) {
   return (
     <Div m="0px 1rem">
       <Div bg="white" py="20">
-        <Heading color="grey" fontSize="13px" ta="left" mb="0">
+        <Heading color="grey" fontSize="15px" ta="left" mb="0">
           {headerTitle}
         </Heading>
         <Div>
@@ -34,14 +35,14 @@ function HtExclusiveTemplate4({ data }) {
                       <Link to="/promotions">
                         <Div>
                           <Text
-                            fontSize="11px"
+                            fontSize="13px"
                             style={{ fontWeight: "bold" }}
                             mt="0"
                             mb="0.3rem"
                           >
                             {slide.title}
                           </Text>
-                          <Text fontSize="11px" mt="0" mb="0">
+                          <Text fontSize="13px" mt="0" mb="0" lh="16px">
                             {slide.desc}
                           </Text>
                         </Div>
