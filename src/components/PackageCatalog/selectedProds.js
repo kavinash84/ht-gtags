@@ -96,7 +96,8 @@ export default class SelectedItems extends Component {
                     <div className={styles.selected_prod_details}>
                       <div
                         style={{
-                          fontSize: "15px",
+                          fontSize: "22px",
+                          lineHeight: "30px",
                           color: "#323131",
                           fontWeight: 600
                         }}
@@ -106,7 +107,7 @@ export default class SelectedItems extends Component {
                       </div>
                       <div
                         style={{
-                          fontSize: "13px",
+                          fontSize: "16px",
                           color: "#999999",
                           display: "flex",
                           justifyContent: "space-between",
@@ -120,11 +121,12 @@ export default class SelectedItems extends Component {
                         style={{
                           display: "flex",
                           justifyContent: "space-between",
-                          alignItems: "center"
+                          alignItems: "center",
+                          marginTop: "5px"
                         }}
                       >
                       <div>
-                      <span>Qty: 1</span>
+                      <span style={{fontSize: "18px "}}>Qty: 1</span>
                       </div>
                       <div>
                         <button
@@ -133,6 +135,7 @@ export default class SelectedItems extends Component {
                             dispatch(selectSkuForPlp(item.simpleSku));
                             dispatch(togglePLPModal(true));
                           }}
+                          style={{padding:"14px 35px", fontSize:"18px"}}
                         >
                           <Link
                             to={`/package-catalog/${packageId}`}
@@ -142,7 +145,7 @@ export default class SelectedItems extends Component {
                           </Link>
                         </button>
                         <span
-                          style={{ color: "#E9916B", fontSize: "11px" , marginLeft:"10px"}}
+                          style={{ color: "#E9916B", fontSize: "15px" , marginLeft:"10px"}}
                           onClick={() => {
                             const { dispatch } = this.context.store;
                             const { openProdModal } = this.props;
