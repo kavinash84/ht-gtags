@@ -17,6 +17,9 @@ import { formatAmount } from "utils/formatters";
 
 import SlickSlider from "../SlickSlider";
 
+const LeftArrow = require("../../../static/new-home/roundedArrowLeft.svg");
+const RightArrow = require("../../../static/new-home/roundedArrowRight.svg");
+
 // const cartIcon = require("../../../static/pdp-icons/cart.png");
 
 const formatPrice = price => {
@@ -29,15 +32,6 @@ const formatPrice = price => {
 };
 
 const checkSKUInCart = (list, sku) => list.includes(sku);
-
-const adjustSlides = length => ({
-  slidesToShow: length >= 3 ? 3 : length,
-  slidesToScroll: 1,
-  autoplay: false,
-  infinite: false,
-  dots: false,
-  arrows: false
-});
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
@@ -66,6 +60,16 @@ function SamplePrevArrow(props) {
     </React.Fragment>
   );
 }
+
+const adjustSlides = length => ({
+  slidesToShow: length >= 3 ? 3 : length,
+  slidesToScroll: 1,
+  autoplay: false,
+  infinite: false,
+  dots: false,
+  nextArrow: <SampleNextArrow />,
+  prevArrow: <SamplePrevArrow />
+});
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -327,11 +331,17 @@ class BaughtTogether extends React.Component {
       <React.Fragment>
         {btProds && Array.isArray(btProds) && btProds.length > 1 ? (
           <Section>
-            <Heading color="#222222" ta="center">
+            <Heading
+              color="#222222"
+              style={{ textAlign: "center", marginBottom: "20px" }}
+            >
               Bought Together
             </Heading>
             <Div>
-              <SlickSlider className="mainSlider" settings={adjustSlides(8)}>
+              <SlickSlider
+                className="mainSlider"
+                settings={adjustSlides((btProds && btProds.length) || 0)}
+              >
                 {btProds && btProds.length
                   ? btProds.map((prod, index) => (
                       <Div
@@ -366,7 +376,8 @@ class BaughtTogether extends React.Component {
                             style={{
                               position: "relative",
                               height: "250px",
-                              display: "flex"
+                              display: "flex",
+                              justifyContent: "center"
                             }}
                           >
                             <Link to={prod.link}>
@@ -401,7 +412,7 @@ class BaughtTogether extends React.Component {
                             fontSize="12px"
                             mt="0px"
                             mb="3px"
-                            style={{ height: "30px", fontWeight: "bold" }}
+                            style={{ height: "30px", fontWeight: 600 }}
                             lineHeight="1.3rem"
                           >
                             {prod.pricing_details.coupon_code
@@ -416,7 +427,7 @@ class BaughtTogether extends React.Component {
                             fontSize="12px"
                             mt="0px"
                             mb="3px"
-                            style={{ height: "30px", fontWeight: "bold" }}
+                            style={{ height: "30px", fontWeight: 600 }}
                             lineHeight="1.3rem"
                           >
                             {couponCode
@@ -438,7 +449,7 @@ class BaughtTogether extends React.Component {
                             justifyContent="center"
                             style={{
                               alignItems: "center",
-                              width: "50%",
+                              width: "30%",
                               border: "1px solid #E9916B",
                               borderRadius: "5px"
                             }}
@@ -447,7 +458,11 @@ class BaughtTogether extends React.Component {
                               width="30%"
                               pl="0.5rem"
                               pr="0.5rem"
-                              style={{ border: "none" }}
+                              style={{
+                                border: "none",
+                                backgroundColor: "transparent",
+                                color: "black"
+                              }}
                               onClick={() => {
                                 if (index === 0) {
                                   if (this.state.btProdQty[`${prod.sku}`] > 1) {
@@ -502,7 +517,11 @@ class BaughtTogether extends React.Component {
                               width="30%"
                               pl="0.5rem"
                               pr="0.5rem"
-                              style={{ border: "none" }}
+                              style={{
+                                border: "none",
+                                backgroundColor: "transparent",
+                                color: "black"
+                              }}
                               onClick={() => {
                                 if (this.state.btProdQty[`${prod.sku}`] < 5) {
                                   this.setState(
@@ -531,32 +550,24 @@ class BaughtTogether extends React.Component {
                   : null}
               </SlickSlider>
             </Div>
-            <Div>
-              <Text
-                ta="center"
-                mb="0px"
-                fontSize="14px"
-                color="#222222"
-                style={{ fontWeight: "bold" }}
-              >
-                Total Price: ₹ {formatAmount(btTotal)}
-              </Text>
-              {couponCode ? (
-                <Text ta="center" mt="0px" fontSize="14px">
-                  Price inclusive of Extra {offerDiscountPercentage}% Use Code:{" "}
-                  <Span fontSize="14px" color="#E9916B" tt="uppercase">
-                    {couponCode}
-                  </Span>
-                </Text>
-              ) : null}
+            <Div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column"
+              }}
+            >
               {!checkStatus ? (
                 <Button
                   style={{
                     backgroundColor: "#E9916B",
                     borderRadius: "5px",
                     color: "white",
-                    width: "40%",
-                    display: "block"
+                    width: "10%",
+                    display: "block",
+                    fontWeight: 600,
+                    marginBottom: "20px"
                   }}
                   m="auto"
                   mt="1rem"
@@ -571,8 +582,10 @@ class BaughtTogether extends React.Component {
                       backgroundColor: "#E9916B",
                       borderRadius: "5px",
                       color: "white",
-                      width: "40%",
-                      display: "block"
+                      width: "10%",
+                      display: "block",
+                      fontWeight: 600,
+                      marginBottom: "20px"
                     }}
                     m="auto"
                     mt="1rem"
@@ -581,6 +594,23 @@ class BaughtTogether extends React.Component {
                   </Button>
                 </Link>
               )}
+              <Text
+                ta="center"
+                mb="0px"
+                fontSize="14px"
+                color="#222222"
+                style={{ fontWeight: "bold" }}
+              >
+                Total Price: ₹ {formatAmount(btTotal)}
+              </Text>
+              {couponCode ? (
+                <Text ta="center" mt="10px" fontSize="14px">
+                  Price inclusive of Extra {offerDiscountPercentage}% Use Code:{" "}
+                  <Span fontSize="14px" color="#E9916B" tt="uppercase">
+                    {couponCode}
+                  </Span>
+                </Text>
+              ) : null}
             </Div>
           </Section>
         ) : null}
