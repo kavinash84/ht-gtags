@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Helmet from "react-helmet";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom"
+import { Redirect } from "react-router-dom";
 /* ====== Components ====== */
 import Box from "hometown-components-dev/lib/BoxHtV1";
 import Body from "hometown-components-dev/lib/BodyHtV1";
@@ -33,7 +33,6 @@ import TablewareKitchenware from "../../components/HomewareCat/TablewareKitchenw
 const styles = require("./Category.scss");
 // import "./Category.scss";
 
-
 const getFaqs = faqs => {
   const seoFaq = JSON.parse(faqs).map(faq => {
     // console.log(faq, 'QA check');
@@ -58,13 +57,21 @@ const getSubMenu = (categories, key) =>
   categories &&
   categories.filter(category => category.url_key === key)[0].children;
 
-@connect(({ homepage: { menu }, category, category: { data }, pincode }) => ({
-  menu: menu.data,
-  pincode: pincode.selectedPincode,
-  category: data && data.items && data.items.text,
-  categoryText: getText(category),
-  seoInfo: data && data.seo && data.seo.items
-}))
+@connect(
+  ({
+    homepage: { menu },
+    category,
+    category: { data, currentCategory },
+    pincode
+  }) => ({
+    menu: menu.data,
+    pincode: pincode.selectedPincode,
+    category: data && data.items && data.items.text,
+    currentCategory,
+    categoryText: getText(category),
+    seoInfo: data && data.seo && data.seo.items
+  })
+)
 export default class Category extends Component {
   constructor(props) {
     super(props);
@@ -106,18 +113,18 @@ export default class Category extends Component {
             </Heading>
           </a>
         ) : (
-            <div>
-              <Text variant="textLight" color="white">
-                {item.offer || ""}
-              </Text>
-              <Heading variant="heading.medium" color="white" py={6}>
-                {item.title || ""}
-              </Heading>
-              <Heading fontSize={16} color="white">
-                {item.description || ""}
-              </Heading>
-            </div>
-          )}
+          <div>
+            <Text variant="textLight" color="white">
+              {item.offer || ""}
+            </Text>
+            <Heading variant="heading.medium" color="white" py={6}>
+              {item.title || ""}
+            </Heading>
+            <Heading fontSize={16} color="white">
+              {item.description || ""}
+            </Heading>
+          </div>
+        )}
       </Col>
     ));
   render() {
@@ -125,9 +132,10 @@ export default class Category extends Component {
       category,
       seoInfo,
       categoryText: { title: pageTitle },
-      match: {
-        params: { category: currentCategory }
-      }
+      currentCategory
+      // match: {
+      //   params: { category: currentCategory }
+      // }
     } = this.props;
     // const { cms_json: cmsJson } = seoInfo;
 
@@ -143,26 +151,25 @@ export default class Category extends Component {
             name="description"
             content={seoInfo && seoInfo.meta_description}
           />
-          {/* {cmsJson && cmsJson.length ? (
+          {seoInfo && seoInfo.cms_json && seoInfo.cms_json.length ? (
             <script type="application/ldjson">
               {`
               {
                 "@context" : "http://schema.org",
                 "@type" : "FAQPage",
-                "mainEntity": ${getFaqs(cmsJson)}
+                "mainEntity": ${getFaqs(seoInfo.cms_json)}
               }
             `}
             </script>
           ) : (
             ""
-          )} */}
+          )}
         </Helmet>
         <Body>
           {/* Header */}
           <Header />
 
           <div>
-            {" "}
             {currentCategory === "furniture" ? (
               <div>
                 <TitleBar title="Home Furnishings">
@@ -174,109 +181,78 @@ export default class Category extends Component {
                 </TitleBar>
                 <FurnitureContainer />
               </div>
-            ) :
-              currentCategory === "home-decor" ? (
-                <div>
-                  <TitleBar title="Home Decor">
-                    <BreadCrumb
-                      urlKey={currentCategory}
-                      name={pageTitle}
-                      handleCategoryClick={this.handleCategoryClick}
-                    />
-                  </TitleBar>
-                  <HomewareContainer />
-                </div>
-              )
-                // : currentCategory === "home-furnishings" ? (
-                //   <div>
-                //     <TitleBar title="Home Furnishing">
-                //       <BreadCrumb
-                //         urlKey={currentCategory}
-                //         name={pageTitle}
-                //         handleCategoryClick={this.handleCategoryClick}
-                //       />
-                //     </TitleBar>
-                //     <HomeFurnishingContainer />
-                //     <div>
-                //       {seoInfo && seoInfo.seo_text && (
-                //         <SeoContent>
-                //           <Container>
-                //             <div className={styles.seoContent}>
-                //               <div
-                //                 dangerouslySetInnerHTML={{
-                //                   __html: seoInfo.seo_text
-                //                 }}
-                //               />
-                //             </div>
-                //           </Container>
-                //         </SeoContent>
-                //       )}
-                //     </div>
-                //   </div>
-                // ) 
-                :
-                currentCategory === "tableware-kitchenware" ? (
-                  <TablewareKitchenware />
-                )
-                  :
-                  currentCategory === "tableware" ? (
-                    <Redirect to="/tableware-kitchenware" />
-                  ) :
-                    currentCategory === "kitchenware" ? (
-                      <Redirect to="/tableware-kitchenware" />
-                    )
+            ) : currentCategory === "home-decor" ? (
+              <div>
+                <TitleBar title="Home Decor">
+                  <BreadCrumb
+                    urlKey={currentCategory}
+                    name={pageTitle}
+                    handleCategoryClick={this.handleCategoryClick}
+                  />
+                </TitleBar>
+                <HomewareContainer />
+              </div>
+            ) : currentCategory === "tableware-kitchenware" ? (
+              <TablewareKitchenware />
+            ) : currentCategory === "tableware" ? (
+              <Redirect to="/tableware-kitchenware" />
+            ) : currentCategory === "kitchenware" ? (
+              <Redirect to="/tableware-kitchenware" />
+            ) : (
+              <div>
+                {category ? (
+                  <React.Fragment>
+                    {/* Offer Bar */}
+                    {category.offers && (
+                      <Box bg="heading" pt={30} pb={20}>
+                        <Container>
+                          <Row justifyContent="center">
+                            {this.renderOffers(category.offers || [])}
+                          </Row>
+                        </Container>
+                      </Box>
+                    )}
 
-                      : (
-                        <div>
-                          {/* Offer Bar */}
-                          {category.offers && (
-                            <Box bg="heading" pt={30} pb={20}>
-                              <Container>
-                                <Row justifyContent="center">
-                                  {this.renderOffers(category.offers || [])}
-                                </Row>
-                              </Container>
-                            </Box>
+                    {/* Main Slider */}
+                    {category && <MainSlider data={category.main} />}
+
+                    {/* Breadcrumb */}
+                    <TitleBar title="Home Furnishings">
+                      <BreadCrumb
+                        urlKey={currentCategory}
+                        name={pageTitle}
+                        handleCategoryClick={this.handleCategoryClick}
+                      />
+                    </TitleBar>
+
+                    {/* Category Carousel */}
+                    {category &&
+                      category.sections &&
+                      category.sections.map((cat, index) => (
+                        <Section key={String(index)}>
+                          {cat.title !== "" && (
+                            <Container>
+                              {CommonLayout(
+                                cat.component,
+                                cat.title,
+                                cat.data,
+                                cat.is_product
+                              )}
+                            </Container>
                           )}
-
-                          {/* Main Slider */}
-                          {category && <MainSlider data={category.main} />}
-
-                          {/* Breadcrumb */}
-                          <TitleBar title="Home Furnishings">
-                            <BreadCrumb
-                              urlKey={currentCategory}
-                              name={pageTitle}
-                              handleCategoryClick={this.handleCategoryClick}
-                            />
-                          </TitleBar>
-
-                          {/* Category Carousel */}
-                          {category &&
-                            category.sections &&
-                            category.sections.map((cat, index) => (
-                              <Section key={String(index)}>
-                                {cat.title !== "" && (
-                                  <Container>
-                                    {CommonLayout(
-                                      cat.component,
-                                      cat.title,
-                                      cat.data,
-                                      cat.is_product
-                                    )}
-                                  </Container>
-                                )}
-                              </Section>
-                            ))}
-                          {category && (
-                            <Box display="inline-block" width="100%">
-                              <Container>
-                                <UnbxdTopSellers category={category.title} />
-                              </Container>
-                            </Box>
-                          )}
-                        </div>
-                      )}
+                        </Section>
+                      ))}
+                    {category && (
+                      <Box display="inline-block" width="100%">
+                        <Container>
+                          <UnbxdTopSellers category={category.title} />
+                        </Container>
+                      </Box>
+                    )}
+                  </React.Fragment>
+                ) : null}
+              </div>
+            )}
             {/* SEO Content */}
             {seoInfo && seoInfo.seo_text && (
               <SeoContent>
