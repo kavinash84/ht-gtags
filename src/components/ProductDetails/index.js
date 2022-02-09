@@ -837,10 +837,11 @@ class ProductDetails extends React.Component {
                   "@type" : "Product",
                   "url": "${productURL || ""}",
                   "name" : "${name.replace(/['"]+/g, "")}",
-                  "image" : ${images && images.length && images[0].url
-                  ? `["${images[0].url}.jpg"]`
-                  : []
-                },
+                  "image" : ${
+                    images && images.length && images[0].url
+                      ? `["${images[0].url}.jpg"]`
+                      : []
+                  },
                   "description" : "${productDescription.replace(/['"]+/g, "")}",
                   "sku": "${sku || ""}",
                   "brand" : {
@@ -904,10 +905,10 @@ class ProductDetails extends React.Component {
                             toggleShowMoreColorProducts={
                               this.toggleShowMoreColorProducts
                             }
-                          // currentlySelectedProductSku={product.sku}
-                          // showmorecolorproductsCount={
-                          //   showmorecolorproductsCount
-                          // }
+                            // currentlySelectedProductSku={product.sku}
+                            // showmorecolorproductsCount={
+                            //   showmorecolorproductsCount
+                            // }
                           />
                         </Box>
                       )}
@@ -979,13 +980,14 @@ class ProductDetails extends React.Component {
                           href="#combined_buy_offers"
                           style={{ color: "#F15A22" }}
                         >
-                          {`See ${combinedbuy.length} Combined ${combinedbuy.length > 1 ? "Offers" : "Offer"
-                            }`}
+                          {`See ${combinedbuy.length} Combined ${
+                            combinedbuy.length > 1 ? "Offers" : "Offer"
+                          }`}
                         </a>
                       </Button>
                     ) : (
-                        ""
-                      )}
+                      ""
+                    )}
 
                     {offerImage && offerImageRedirect && (
                       <a rel="noopener noreferrer" href={offerImageRedirect}>
@@ -1166,8 +1168,8 @@ class ProductDetails extends React.Component {
                             simpleSku,
                             pincode.selectedPincode
                           )}
-                        // isWishList={isInWishList(wishList, sku)}
-                        // wishlistLoading={isInWishList(loadingList, sku)}
+                          // isWishList={isInWishList(wishList, sku)}
+                          // wishlistLoading={isInWishList(loadingList, sku)}
                         >
                           <Img
                             src={
@@ -1205,7 +1207,12 @@ class ProductDetails extends React.Component {
                     </Text>
                   </Div>
                   {displayShareBar ? (
-                    <ShareBar title={name} url={productURL} mt="10px" mb="30px" />
+                    <ShareBar
+                      title={name}
+                      url={productURL}
+                      mt="10px"
+                      mb="30px"
+                    />
                   ) : null}
                 </Div>
                 <div>
@@ -1236,9 +1243,13 @@ class ProductDetails extends React.Component {
                     }}
                   >
                     <h4>Reviews</h4>
-                    <span>{this.state.showReviews ?
-                      <Image src={DownArrow} style={{ marginLeft: "10px" }} /> :
-                      <Image src={DownArrow} style={{ marginLeft: "10px" }} />}</span>
+                    <span>
+                      {this.state.showReviews ? (
+                        <Image src={DownArrow} style={{ marginLeft: "10px" }} />
+                      ) : (
+                        <Image src={DownArrow} style={{ marginLeft: "10px" }} />
+                      )}
+                    </span>
                   </div>
                   {this.state.showReviews ? (
                     <div
@@ -1259,17 +1270,16 @@ class ProductDetails extends React.Component {
                           <Box width={1}>
                             <form onSubmit={this.handleSubmit}>
                               <Box>
-                                <h6
+                                <h5
                                   style={{
                                     color: "rgba(0,0,0,0.6)",
                                     margin: "0px 0px 10px"
                                   }}
                                 >
                                   Write a Review
-                                </h6>
+                                </h5>
                                 <Box>
                                   <FormInput
-                                    label="Name"
                                     type="text"
                                     placeholder="Name"
                                     name="name"
@@ -1277,13 +1287,13 @@ class ProductDetails extends React.Component {
                                     feedBackError={nameError}
                                     feedBackMessage={nameErrorMessage}
                                     onChange={this.handleChange}
-                                  // ref={(nameInp) => this.myInp = nameInp}
+                                    // ref={(nameInp) => this.myInp = nameInp}
+                                    style={{ border: "1px solid #E3E3E3", fontSize:"12px" , borderRadius:"5px"}}
                                   />
                                 </Box>
                                 <Box marginBottom="0.3125rem">
                                   <FormInput
                                     type="textarea"
-                                    label="Review"
                                     name="review"
                                     placeholder="Review"
                                     value={review}
@@ -1291,7 +1301,8 @@ class ProductDetails extends React.Component {
                                     feedBackMessage={reviewErrorMessage}
                                     onChange={this.handleChange}
                                     rows="3"
-                                    height={80}
+                                    height={100}
+                                    style={{ border: "1px solid #E3E3E3", fontSize:"12px" , borderRadius:"5px" }}
                                   />
                                 </Box>
                                 <div
@@ -1308,11 +1319,11 @@ class ProductDetails extends React.Component {
                                       alignItems: "center"
                                     }}
                                   >
-                                    <Label mr={10}>Rating</Label>
+                                    <Label style={{fontSize:'14px', marginLeft:'15px'}} mr={10}>Rating</Label>
                                     <ReactStars
                                       count={5}
                                       onChange={this.ratingChanged}
-                                      size={20}
+                                      size={25}
                                       value={this.state.rating}
                                       half={false}
                                       color2="#ffd700"
@@ -1327,6 +1338,7 @@ class ProductDetails extends React.Component {
                                       fontSize="0.875em"
                                       height="42px"
                                       lh="2"
+                                      style={{width:'130px', borderRadius:'5px'}}
                                     >
                                       SUBMIT
                                     </Button>
@@ -1338,6 +1350,7 @@ class ProductDetails extends React.Component {
                               ratings={weightedRating}
                               reviews={reviewsData.length}
                               count={5}
+                              style={{marginTop:'10px'}}
                             >
                               {/* {children} */}
                               {reviewsData.length > 0 && (
