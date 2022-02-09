@@ -98,7 +98,7 @@ export default class OneLacPackage extends Component {
               <DeliveryAddress />
             </Container>
           </Section>
-          <img src={packages_data.banner} alt="Banner" style={{width: "100%"}}/>
+          <img src={packages_data.banner} alt="Banner" style={{width: "100%", height: "450px"}}/>
           <div
             style={{
               textAlign: "center",
@@ -168,6 +168,7 @@ export default class OneLacPackage extends Component {
                     src={PackageBanner}
                     alt="Banner"
                     onClick={() => this.handleBannerClick(true, pack.id)}
+                    style={{cursor:'pointer'}}
                   />
                   {pack.pseudoItemsCount ? (
                     <div

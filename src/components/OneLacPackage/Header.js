@@ -26,48 +26,6 @@ class Header extends React.Component {
             />
           </Link>
         </div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginRight: "10%"
-          }}
-        >
-          <Link to="/plan-your-kitchen">
-            <Text
-              style={{
-                marginRight: "20px",
-                fontWeight: "600",
-                fontSize: "14px"
-              }}
-            >
-              Plan Your Kitchen
-            </Text>
-          </Link>
-          <Link to="design-build">
-            <Text
-              style={{
-                marginRight: "20px",
-                fontWeight: "600",
-                fontSize: "14px"
-              }}
-            >
-              Design & Build
-            </Text>
-          </Link>
-          <Link to="who-we-are">
-            <Text
-              style={{
-                marginRight: "20px",
-                fontWeight: "600",
-                fontSize: "14px"
-              }}
-            >
-              About Us
-            </Text>
-          </Link>
-        </div>
       </Section>
     );
   }

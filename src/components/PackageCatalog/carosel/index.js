@@ -146,7 +146,8 @@ class CaroselContainer extends Component {
                 width: "120px",
                 height: "40px",
                 borderRadius: "5px",
-                fontSize: "16px"
+                fontSize: "16px", 
+                cursor: "pointer"
               }}
             >
               Select
@@ -184,7 +185,7 @@ class CaroselContainer extends Component {
                           <img
                             src={Checked}
                             alt="Checked"
-                            style={{ position: "absolute", right: 0, top: 0, width:'auto' }}
+                            style={{ position: "absolute", right: 0, top: 0, width:'auto', cursor: "pointer"}}
                           />
                         ) : (
                           <img
@@ -194,7 +195,8 @@ class CaroselContainer extends Component {
                               position: "absolute",
                               right: "8px",
                               top: "8px",
-                              width: "auto"
+                              width: "auto",
+                               cursor: "pointer"
                             }}
                           />
                         )}
@@ -202,6 +204,7 @@ class CaroselContainer extends Component {
                           <img
                             src={`${slide.image}-catalog_360.jpg`}
                             alt="product image"
+                            style={{cursor: "pointer"}}
                           />
                         </div>
                       </div>
@@ -233,7 +236,8 @@ class CaroselContainer extends Component {
                             style={{
                               color: "#E9916B",
                               fontSize: "14px",
-                              marginTop: "5px"
+                              marginTop: "5px",
+                              cursor:"pointer"
                             }}
                             onClick={() => {
                               const { dispatch } = this.context.store;

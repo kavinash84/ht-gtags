@@ -454,7 +454,7 @@ export default class PackageCatalog extends Component {
               disabled={!this.state.totalSelected}
               className={styles.saveBtn}
               onClick={this.handleSave}
-              style={{ opacity: !this.state.totalSelected ? "0.5" : "1" }}
+              style={{ opacity: !this.state.totalSelected ? "0.5" : "1" , cursor: "pointer"}}
             >
               Save
             </button>
@@ -472,7 +472,9 @@ export default class PackageCatalog extends Component {
                 opacity:
                   this.state.totalSelected !== packageCatalog.totalQty
                     ? "1.5"
-                    : "2"
+                    : "2",
+                    cursor: "pointer",
+                    backgroundColor: this.state.totalSelected !== packageCatalog.totalQty ? "#F2F2F2" : "#ea9671"
               }}
             >
               {proceedLoader ? "Loading..." : "Proceed"}

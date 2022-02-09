@@ -91,7 +91,8 @@ class ProductItem extends Component {
               width: "100%",
               padding: "15px",
               textAlign: "center",
-              marginTop: "-7px"
+              marginTop: "-7px",
+              cursor: "pointer"
             }}
             onClick={this.handleSCModal}
           >

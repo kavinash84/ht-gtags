@@ -270,6 +270,7 @@ export default class ProductsList extends Component {
               <button
                 onClick={() => this.handleSelect()}
                 disabled={this.checkDisabled()}
+                style={{cursor: "pointer"}}
               >
                 Select
               </button>

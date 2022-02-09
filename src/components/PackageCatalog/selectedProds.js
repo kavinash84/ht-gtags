@@ -136,7 +136,7 @@ export default class SelectedItems extends Component {
                             dispatch(selectSkuForPlp(item.simpleSku));
                             dispatch(togglePLPModal(true));
                           }}
-                          style={{padding:"14px 35px", fontSize:"18px"}}
+                          style={{padding:"14px 35px", fontSize:"18px", cursor: "pointer"}}
                         >
                           <Link
                             to={`/package-catalog/${packageId}`}
@@ -146,7 +146,7 @@ export default class SelectedItems extends Component {
                           </Link>
                         </button>
                         <span
-                          style={{ color: "#E9916B", fontSize: "15px" , marginLeft:"10px"}}
+                          style={{ color: "#E9916B", fontSize: "15px" , marginLeft:"10px", cursor: "pointer"}}
                           onClick={() => {
                             const { dispatch } = this.context.store;
                             const { openProdModal } = this.props;
@@ -235,12 +235,12 @@ export default class SelectedItems extends Component {
                           <div>
                             <button
                               onClick={() => this.props.handlePlpModal(index)}
-                              style={{padding:"14px 35px", fontSize:"18px"}}
+                              style={{padding:"14px 35px", fontSize:"18px", cursor: "pointer"}}
                             >
                               Replace
                             </button>
                             <span
-                              style={{ color: "#E9916B", fontSize: "15px" , marginLeft: "10px"}}
+                              style={{ color: "#E9916B", fontSize: "15px" , marginLeft: "10px", cursor: "pointer"}}
                               onClick={() => {
                                 if (!isSudoCart)
                                   this.handleProdModal({
