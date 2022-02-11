@@ -47,6 +47,7 @@ const FooterLinks = [
   "Home Décor",
   "Home Decor",
   "Tableware",
+  "Tableware & Kitchenware",
   "Kitchenware",
   "Bath"
 ];

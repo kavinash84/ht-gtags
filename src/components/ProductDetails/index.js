@@ -1,94 +1,102 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import Helmet from 'react-helmet';
-import Select from 'react-select';
-import ReactStars from 'react-stars';
-import { withRouter } from 'react-router';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import Helmet from "react-helmet";
+import Select from "react-select";
+import ReactStars from "react-stars";
+import { withRouter } from "react-router";
 
 /**
  * Modules / Utils / Reducers
  */
-import { addReview, toggleReview } from 'redux/modules/reviews';
-import { toggleWishList, wishListWaitList } from 'redux/modules/wishlist';
-import { setProductPosition } from 'redux/modules/productdetails';
-import { getCombinedBuy } from 'redux/modules/combinedbuy';
-import { addToCartCombined, setQuantityFlag } from 'redux/modules/cart';
-import { formatAmount } from 'utils/formatters';
-import { calculateLowestEmi, getVideoID, formatProductURL } from 'utils/helper';
-import { productPageTitle, productMetaDescription, productMetaKeywords } from 'utils/seo';
-import { groupedAttributes as getgroupedAttributes, getBreadCrumbs, getSimpleSku } from 'selectors/product';
-import { getCartSKU } from 'selectors/cart';
-import { getSKUList } from 'selectors/wishlist';
-import { togglePopUp } from 'redux/modules/webtochat';
+import { addReview, toggleReview } from "redux/modules/reviews";
+import { toggleWishList, wishListWaitList } from "redux/modules/wishlist";
+import { setProductPosition } from "redux/modules/productdetails";
+import { getCombinedBuy } from "redux/modules/combinedbuy";
+import { addToCartCombined, setQuantityFlag } from "redux/modules/cart";
+import { formatAmount } from "utils/formatters";
+import { calculateLowestEmi, getVideoID, formatProductURL } from "utils/helper";
+import {
+  productPageTitle,
+  productMetaDescription,
+  productMetaKeywords
+} from "utils/seo";
+import {
+  groupedAttributes as getgroupedAttributes,
+  getBreadCrumbs,
+  getSimpleSku
+} from "selectors/product";
+import { getCartSKU } from "selectors/cart";
+import { getSKUList } from "selectors/wishlist";
+import { togglePopUp } from "redux/modules/webtochat";
 
 /**
  * Components
  */
-import Box from 'hometown-components-dev/lib/BoxHtV1';
-import Button from 'hometown-components-dev/lib/ButtonHtV1';
-import Col from 'hometown-components-dev/lib/ColHtV1';
-import Container from 'hometown-components-dev/lib/ContainerHtV1';
-import Flex from 'hometown-components-dev/lib/FlexHtV1';
-import Heading from 'hometown-components-dev/lib/HeadingHtV1';
-import Image from 'hometown-components-dev/lib/ImageHtV1';
-import Text from 'hometown-components-dev/lib/TextHtV1';
-import Row from 'hometown-components-dev/lib/RowHtV1';
-import Label from 'hometown-components-dev/lib/LabelHtV1';
-import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
+import Box from "hometown-components-dev/lib/BoxHtV1";
+import Button from "hometown-components-dev/lib/ButtonHtV1";
+import Col from "hometown-components-dev/lib/ColHtV1";
+import Container from "hometown-components-dev/lib/ContainerHtV1";
+import Flex from "hometown-components-dev/lib/FlexHtV1";
+import Heading from "hometown-components-dev/lib/HeadingHtV1";
+import Image from "hometown-components-dev/lib/ImageHtV1";
+import Text from "hometown-components-dev/lib/TextHtV1";
+import Row from "hometown-components-dev/lib/RowHtV1";
+import Label from "hometown-components-dev/lib/LabelHtV1";
+import FormInput from "hometown-components-dev/lib/FormsHtV1/FormInputHtV1";
 /**
  * Page Components
  */
 // import Section from 'hometown-components-dev/lib/SectionHtV1';
 // import UnbxdRecentlyViewed from 'components/UnbxdRecentlyViewed/UnbxdRecentlyViewed';
 // import AddReview from 'hometown-components-dev/lib/ReviewsHtV1/WriteReview';
-import ColorOption from 'hometown-components-dev/lib/ProductDetailsHtV1/ColorOption';
-import CombinedBuy from 'components/CombinedBuy';
-import ProductDesc from 'hometown-components-dev/lib/ProductDetailsHtV1/ProductDesc';
-import ProductCarousel from 'components/ProductCarousel';
-import ResponsiveModal from 'components/Modal';
-import ResponsiveVideoModal from 'components/Modal/ResponsiveVideoModal';
-import Reviews from 'hometown-components-dev/lib/ReviewsHtV1';
-import ReviewDisplay from 'hometown-components-dev/lib/ReviewsHtV1/ReviewDisplay';
-import ServiceDetails from 'hometown-components-dev/lib/ProductDetailsHtV1/ServiceDetails';
+import ColorOption from "hometown-components-dev/lib/ProductDetailsHtV1/ColorOption";
+import CombinedBuy from "components/CombinedBuy";
+import ProductDesc from "hometown-components-dev/lib/ProductDetailsHtV1/ProductDesc";
+import ProductCarousel from "components/ProductCarousel";
+import ResponsiveModal from "components/Modal";
+import ResponsiveVideoModal from "components/Modal/ResponsiveVideoModal";
+import Reviews from "hometown-components-dev/lib/ReviewsHtV1";
+import ReviewDisplay from "hometown-components-dev/lib/ReviewsHtV1/ReviewDisplay";
+import ServiceDetails from "hometown-components-dev/lib/ProductDetailsHtV1/ServiceDetails";
 // import EmiOptions from 'hometown-components-dev/lib/ProductDetailsHtV1/EmiOptions';
 // import ShareBar from 'components/ShareBar';
-import Specs from 'hometown-components-dev/lib/ProductDetailsHtV1/Specs';
-import TitlePrice from 'hometown-components-dev/lib/ProductDetailsHtV1/TitlePrice';
-import WishListButton from 'hometown-components-dev/lib/WishlistButtonHtV1';
+import Specs from "hometown-components-dev/lib/ProductDetailsHtV1/Specs";
+import TitlePrice from "hometown-components-dev/lib/ProductDetailsHtV1/TitlePrice";
+import WishListButton from "hometown-components-dev/lib/WishlistButtonHtV1";
 // import Section from 'hometown-components-dev/lib/SectionHtV1';
 // import UnbxdRecentlyViewed from 'components/UnbxdRecentlyViewed/UnbxdRecentlyViewed';
 
-import LoginModal from 'containers/Login/LoginForm';
-import AddToCart from '../AddToCart';
-import BreadCrumb from './BreadCrumb';
-import BuyNow from '../BuyNow';
-import EmiModal from '../EmiModal';
-import Pincode from './Pincode';
-import ProductDetailsCarousel from './Carousel';
-import Video from './Video';
-import ReviewFilter from './ReviewFilter';
+import LoginModal from "containers/Login/LoginForm";
+import AddToCart from "../AddToCart";
+import BreadCrumb from "./BreadCrumb";
+import BuyNow from "../BuyNow";
+import EmiModal from "../EmiModal";
+import Pincode from "./Pincode";
+import ProductDetailsCarousel from "./Carousel";
+import Video from "./Video";
+import ReviewFilter from "./ReviewFilter";
 // import UnbxdCompleteTheLook from './UnbxdCompleteTheLook';
-import FreebieProduct from './FreebieProduct';
-import Stripes from './PdpStripe';
+import FreebieProduct from "./FreebieProduct";
+import Stripes from "./PdpStripe";
 
-import demoIcon from '../../../static/play-button.svg';
+import demoIcon from "../../../static/play-button.svg";
 
 /**
  * Images / Icons
  */
-const freeShippingIcon = require('../../../static/free-shipping.svg');
-const warrentyIcon = require('../../../static/warrenty.svg');
-const emiIcon = require('../../../static/emi.svg');
-const fbIcon = require('../../../static/fb-pdp.svg');
-const email = require('../../../static/email-pdp.svg');
-const pinIcon = require('../../../static/pinterest-pdp.svg');
+const freeShippingIcon = require("../../../static/free-shipping.svg");
+const warrentyIcon = require("../../../static/warrenty.svg");
+const emiIcon = require("../../../static/emi.svg");
+const fbIcon = require("../../../static/fb-pdp.svg");
+const email = require("../../../static/email-pdp.svg");
+const pinIcon = require("../../../static/pinterest-pdp.svg");
 
 /**
  * styles
  */
-const styles = require('./productIndex.scss');
+const styles = require("./productIndex.scss");
 
 const qtyOptions = sku => {
   if (sku.meta) {
@@ -105,10 +113,10 @@ const qtyOptions = sku => {
 
 const customStyles = {
   control: () => ({
-    width: '75px',
-    display: 'flex',
-    borderRadius: '2px',
-    border: '1px solid rgba(0, 0, 0, 0.25)'
+    width: "75px",
+    display: "flex",
+    borderRadius: "2px",
+    border: "1px solid rgba(0, 0, 0, 0.25)"
   })
 };
 
@@ -123,9 +131,9 @@ const DescriptionButton = props => (
         fontWeight={500}
         fontSize={16}
         py={20}
-        color={props.active && '#fa6400'}
+        color={props.active && "#fa6400"}
         textTransform="uppercase"
-        sx={{ textTransform: 'uppercase', whiteSpace: 'nowrap' }}
+        sx={{ textTransform: "uppercase", whiteSpace: "nowrap" }}
         {...props}
       />
     </div>
@@ -242,7 +250,7 @@ const mapStateToProps = ({
 });
 
 const getSelectedColor = colors => {
-  let activeColorName = '';
+  let activeColorName = "";
   colors.forEach(color => {
     if (color.activeColor === true) {
       activeColorName = color.meta.color_family;
@@ -264,23 +272,23 @@ class ProductDetails extends React.Component {
       showmore: true,
       showmorecolorproducts: true,
       showmorecolorproductsCount: 5,
-      activeSpec: 'description',
+      activeSpec: "description",
       activeDescription: null,
       showReviews: 2,
-      productQty: { value: 1, label: '1' },
+      productQty: { value: 1, label: "1" },
       reviewDataSet: [],
       selectedFilter: null,
       filterChanged: false,
       colorProducts: [],
       isFurniture: false,
       popUpTimeoutId: null,
-      name: '',
+      name: "",
       rating: 0,
-      review: '',
+      review: "",
       nameError: false,
-      nameErrorMessage: 'Name cannot be left Blank',
+      nameErrorMessage: "Name cannot be left Blank",
       reviewError: false,
-      reviewErrorMessage: 'Review cannot be left Blank',
+      reviewErrorMessage: "Review cannot be left Blank",
       addreview: false,
       openVideo: false
     };
@@ -327,17 +335,17 @@ class ProductDetails extends React.Component {
     const filterdData = [];
     reviews.data.forEach(review => {
       review.options.forEach(options => {
-        if (Filter.value === '1-Star' && options.option_value === '1') {
+        if (Filter.value === "1-Star" && options.option_value === "1") {
           filterdData.push(review);
-        } else if (Filter.value === '2-Star' && options.option_value === '2') {
+        } else if (Filter.value === "2-Star" && options.option_value === "2") {
           filterdData.push(review);
-        } else if (Filter.value === '3-Star' && options.option_value === '3') {
+        } else if (Filter.value === "3-Star" && options.option_value === "3") {
           filterdData.push(review);
-        } else if (Filter.value === '4-Star' && options.option_value === '4') {
+        } else if (Filter.value === "4-Star" && options.option_value === "4") {
           filterdData.push(review);
-        } else if (Filter.value === '5-Star' && options.option_value === '5') {
+        } else if (Filter.value === "5-Star" && options.option_value === "5") {
           filterdData.push(review);
-        } else if (Filter.value === 'All-ratings') {
+        } else if (Filter.value === "All-ratings") {
           filterdData.push(review);
         }
       });
@@ -353,7 +361,7 @@ class ProductDetails extends React.Component {
       const { top } = this.reviewsRef.current.getBoundingClientRect();
       window.scroll({
         top: Number(top - 60),
-        behavior: 'smooth'
+        behavior: "smooth"
       });
     } catch (e) {
       // window.scroll(0, this.reviewsRef.current.offsetTop);
@@ -394,7 +402,9 @@ class ProductDetails extends React.Component {
     const { toggleWebToChat, dismiss } = this.props;
 
     const {
-      embedded_svc: { liveAgentAPI: { inviteButton: { isAvailable } = {} } = {} }
+      embedded_svc: {
+        liveAgentAPI: { inviteButton: { isAvailable } = {} } = {}
+      }
     } = window;
     if (isAvailable && !dismiss) toggleWebToChat(true);
   };
@@ -437,7 +447,10 @@ class ProductDetails extends React.Component {
     const { showmorecolorproductsCount } = this.state;
     this.setState({
       showmorecolorproducts: !this.state.showmorecolorproducts,
-      showmorecolorproductsCount: showmorecolorproductsCount > 5 ? 5 : showmorecolorproductsCount + colorProducts.length
+      showmorecolorproductsCount:
+        showmorecolorproductsCount > 5
+          ? 5
+          : showmorecolorproductsCount + colorProducts.length
     });
   };
   showMoreReviews = () => {
@@ -454,7 +467,7 @@ class ProductDetails extends React.Component {
 
   isFurnitureTrue() {
     this.props.product.meta.category_details.forEach(cat => {
-      if (cat.id === '131') {
+      if (cat.id === "131") {
         this.setState({ isFurniture: true });
       }
     });
@@ -470,8 +483,8 @@ class ProductDetails extends React.Component {
       () => {
         if (this.state.addreview) {
           this.reviewRef.current.scrollIntoView({
-            behavior: 'smooth',
-            block: 'nearest'
+            behavior: "smooth",
+            block: "nearest"
           });
           // this.reviewRef.current.focus();
         }
@@ -497,8 +510,8 @@ class ProductDetails extends React.Component {
     }
     this.setState({
       addreview: !this.state.addreview,
-      name: '',
-      review: ''
+      name: "",
+      review: ""
     });
 
     this.addReview(catalogId, { name, rating, review });
@@ -524,46 +537,54 @@ class ProductDetails extends React.Component {
     const {
       product: {
         attributes: {
- return: returnAndCancel, product_warranty: productWarranty, care_label: careLabel, description
-}
+          return: returnAndCancel,
+          product_warranty: productWarranty,
+          care_label: careLabel,
+          description
+        }
       }
     } = this.props;
-    let id = hash.replace('#', '');
+    let id = hash.replace("#", "");
     const tabElement = {
-      'return-and-cancellation': {
-        tableName: 'return',
+      "return-and-cancellation": {
+        tableName: "return",
         tabComponent: returnAndCancel
       },
-      'service-assurance-warranty': {
-        tableName: 'warranty',
+      "service-assurance-warranty": {
+        tableName: "warranty",
         tabComponent: productWarranty
       },
 
-      'product-care-instructions': {
-        tableName: 'care',
+      "product-care-instructions": {
+        tableName: "care",
         tabComponent: careLabel
       },
       details: {
-        tableName: 'details',
+        tableName: "details",
         tabComponent: description
       },
       description: {
-        tableName: 'description',
+        tableName: "description",
         tabComponent: description
       }
     };
-    if (hash !== '' && tabElement[`${id}`]) {
+    if (hash !== "" && tabElement[`${id}`]) {
       setTimeout(() => {
         const element = document.getElementById(id);
-        if (element) element.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+        if (element)
+          element.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+            inline: "nearest"
+          });
       }, 3000);
-      console.log(id, tabElement[`${id}`], 'id for tabElement');
+      console.log(id, tabElement[`${id}`], "id for tabElement");
       this.setState({
         activeSpec: tabElement[`${id}`].tableName,
         activeDescription: tabElement[`${id}`].tabComponent
       });
     } else {
-      id = 'description';
+      id = "description";
       this.setState({
         activeSpec: tabElement[`${id}`].tableName,
         activeDescription: tabElement[`${id}`].tabComponent
@@ -584,7 +605,8 @@ class ProductDetails extends React.Component {
         >
           {key}
         </DescriptionButton>
-      )));
+      ))
+    );
   };
 
   render() {
@@ -641,8 +663,8 @@ class ProductDetails extends React.Component {
       groupedattributes,
       reviews: { count, rating },
       bogo_bundle: bogoBundle,
-      free_visit: freeVisit = 'no',
-      free_installation: freeInstallation = 'no'
+      free_visit: freeVisit = "no",
+      free_installation: freeInstallation = "no"
     } = product;
     // const { brand: ProductBrand } = meta;
     const {
@@ -669,6 +691,7 @@ class ProductDetails extends React.Component {
       name,
       brand,
       price,
+      ht_wallet_cashback = null,
       special_price: specialPriceEmi,
       config_id: configId,
       dimension_image: dimensionImage,
@@ -676,6 +699,7 @@ class ProductDetails extends React.Component {
       fk_catalog_supplier: fkCatalogSupplier = null,
       categories
     } = meta;
+    console.log("salman", meta);
     const {
       offer_discount_percentage: offerDiscountPercentage,
       coupon_code: couponCode,
@@ -693,37 +717,57 @@ class ProductDetails extends React.Component {
     // const { adding, added, data: reviewsData = [] } = reviews;
     const { data: reviewsData = [] } = reviews;
     const offerImage = simples[simpleSku].groupedattributes.offer_image || null;
-    const offerImageRedirect = simples[simpleSku].groupedattributes.offer_image_click_url || null;
+    const offerImageRedirect =
+      simples[simpleSku].groupedattributes.offer_image_click_url || null;
     const { showmore, showmorecolorproducts } = this.state;
     const isEmiAvailable = Number(checkSpecialPrice) >= 3000;
-    const { main_material: material, color, category_type: productType } = gattributes;
+    const {
+      main_material: material,
+      color,
+      category_type: productType
+    } = gattributes;
     const productURL = `${SITE_URL}${formatProductURL(name, sku)}`;
-    const productDescription = productMetaDescription(name, productType, material, color);
+    const productDescription = productMetaDescription(
+      name,
+      productType,
+      material,
+      color
+    );
     const weightedRating = this.getWeightedAverageRatings();
-    const isFurnitureStripe = categories.split('|').includes('131');
+    const isFurnitureStripe = categories.split("|").includes("131");
     const uspWarranty = `${warrantyPeriod} Warranty`;
     return (
       <div>
         <Box pt={30}>
           <Helmet>
             <title>{productPageTitle(name)}</title>
-            <meta name="keywords" content={productMetaKeywords(productType, material)} />
+            <meta
+              name="keywords"
+              content={productMetaKeywords(productType, material)}
+            />
             <meta name="description" content={productDescription} />
             <meta property="og:url" content={productURL} />
             <meta property="og:type" content="website" />
             <meta property="og:title" content={name} />
             <meta property="og:description" content={productDescription} />
-            <meta property="og:image" content={images && images.length > 0 && `${images[0].url}.jpg`} />
+            <meta
+              property="og:image"
+              content={images && images.length > 0 && `${images[0].url}.jpg`}
+            />
             <script type="application/ld+json">
               {`
                 {
                   "@context" : "http://schema.org",
                   "@type" : "Product",
-                  "url": "${productURL || ''}",
-                  "name" : "${name.replace(/['"]+/g, '')}",
-                  "image" : ${images && images.length && images[0].url ? `["${images[0].url}.jpg"]` : []},
-                  "description" : "${productDescription.replace(/['"]+/g, '')}",
-                  "sku": "${sku || ''}",
+                  "url": "${productURL || ""}",
+                  "name" : "${name.replace(/['"]+/g, "")}",
+                  "image" : ${
+                    images && images.length && images[0].url
+                      ? `["${images[0].url}.jpg"]`
+                      : []
+                  },
+                  "description" : "${productDescription.replace(/['"]+/g, "")}",
+                  "sku": "${sku || ""}",
                   "brand" : {
                     "@type" : "Brand",
                     "name" : "HomeTown",
@@ -731,9 +775,9 @@ class ProductDetails extends React.Component {
                   },
                   "offers" : {
                     "@type" : "Offer",
-                    "url": "${productURL || ''}",
+                    "url": "${productURL || ""}",
                     "priceCurrency": "INR",
-                    "price": "${checkSpecialPrice || ''}",
+                    "price": "${checkSpecialPrice || ""}",
                     "availability": "https://schema.org/InStock"
                   }
                 }
@@ -749,9 +793,11 @@ class ProductDetails extends React.Component {
             <Row mb={40}>
               {/* Left Column */}
               <Col width={[1, 6 / 12, 6 / 12, 7 / 12]} pr={40}>
-                <Box sx={{ position: 'relative' }}>
+                <Box sx={{ position: "relative" }}>
                   {/* Product Slider */}
-                  {images && <ProductDetailsCarousel data={images} title={meta.name} />}
+                  {images && (
+                    <ProductDetailsCarousel data={images} title={meta.name} />
+                  )}
 
                   {/* Wishlist Button */}
                   <WishListButton
@@ -812,13 +858,32 @@ class ProductDetails extends React.Component {
                     bflMinAmount={bflMinAmount}
                   />
                 </Stripes>
-
+                {/* discount text */}
+                <div ht_wallet_cashback={ht_wallet_cashback}>
+                  {ht_wallet_cashback ? (
+                    <div
+                      style={{
+                        color: "#E9916B",
+                        fontSize: "16px",
+                        paddingTop: "15px"
+                      }}
+                    >
+                      {` Extra ${Math.round(
+                        ht_wallet_cashback
+                      )}% HT wallet cashback`}
+                    </div>
+                  ) : null}
+                </div>
                 {/* Pincode */}
                 <ServiceDetails
                   deliverBy={
-                    (deliveryInfo && deliveryInfo[0] && deliveryInfo[0].value) ||
-                    (deliveryDetails[0] && deliveryDetails[0] && deliveryDetails[0].value) ||
-                    ''
+                    (deliveryInfo &&
+                      deliveryInfo[0] &&
+                      deliveryInfo[0].value) ||
+                    (deliveryDetails[0] &&
+                      deliveryDetails[0] &&
+                      deliveryDetails[0].value) ||
+                    ""
                   }
                   emiStarting={formatAmount(calculateLowestEmi(emidata, price))}
                   shipping={checkSpecialPrice}
@@ -832,7 +897,7 @@ class ProductDetails extends React.Component {
 
                 {/* Reviews */}
                 {!!weightedRating && reviewsData.length ? (
-                  <div style={{ display: 'flex' }}>
+                  <div style={{ display: "flex" }}>
                     <ReviewDisplay
                       pr="5px"
                       ratings={weightedRating}
@@ -840,17 +905,23 @@ class ProductDetails extends React.Component {
                       count={5}
                       pb={20}
                       justifyContent="flex-start"
-                      sx={{ borderBottom: 'none' }}
+                      sx={{ borderBottom: "none" }}
                     />
                     <a
                       variant="linkPrimary"
                       href="#review-section"
                       style={{
-                        cursor: 'default'
+                        cursor: "default"
                       }}
                     >
-                      <Label mr={5} color="primary" fontFamilly="medium" fontSize={14} sx={{ cursor: 'pointer' }}>
-                        {`Review${reviewsData.length !== 1 ? 's ' : ' '} `}
+                      <Label
+                        mr={5}
+                        color="primary"
+                        fontFamilly="medium"
+                        fontSize={14}
+                        sx={{ cursor: "pointer" }}
+                      >
+                        {`Review${reviewsData.length !== 1 ? "s " : " "} `}
                       </Label>
                     </a>
                     <Box>
@@ -860,14 +931,14 @@ class ProductDetails extends React.Component {
                         onClick={this.toggleAddReview}
                         ml={10}
                         sx={{
-                          borderLeft: 'primary'
+                          borderLeft: "primary"
                         }}
                         style={{
-                          color: '#f15a22',
-                          fontSize: '14px'
+                          color: "#f15a22",
+                          fontSize: "14px"
                         }}
                       >
-                        {' |'} Write a Review
+                        {" |"} Write a Review
                       </a>
                     </Box>
                   </div>
@@ -878,9 +949,9 @@ class ProductDetails extends React.Component {
                       href="#review-section"
                       onClick={this.toggleAddReview}
                       sx={{
-                        borderLeft: 'primary'
+                        borderLeft: "primary"
                       }}
-                      style={{ color: '#f15a22' }}
+                      style={{ color: "#f15a22" }}
                     >
                       Write a Review
                     </a>
@@ -890,20 +961,34 @@ class ProductDetails extends React.Component {
                 {/* Color Options */}
                 {colorProducts.length > 0 && (
                   <Box pb={15}>
-                    <Heading fontSize="1em" color="textDark" fontFamily="medium" fontWeight="normal" mb={15}>
+                    <Heading
+                      fontSize="1em"
+                      color="textDark"
+                      fontFamily="medium"
+                      fontWeight="normal"
+                      mb={15}
+                    >
                       Color Options: {getSelectedColor(colorProducts)}
                     </Heading>
                     <ColorOption
                       data={colorProducts}
                       showmorecolorproducts={showmorecolorproducts}
-                      toggleShowMoreColorProducts={this.toggleShowMoreColorProducts}
+                      toggleShowMoreColorProducts={
+                        this.toggleShowMoreColorProducts
+                      }
                       currentlySelectedProductSku={product.sku}
                       showmorecolorproductsCount={showmorecolorproductsCount}
                     />
                   </Box>
                 )}
                 {bogoBundle && bogoBundle.name && (
-                  <Row display="block" mb="0" mr="0.9375rem" ml="0.9375rem" className={styles.freebieProduct}>
+                  <Row
+                    display="block"
+                    mb="0"
+                    mr="0.9375rem"
+                    ml="0.9375rem"
+                    className={styles.freebieProduct}
+                  >
                     <FreebieProduct bogoBundle={bogoBundle} />
                   </Row>
                 )}
@@ -916,11 +1001,18 @@ class ProductDetails extends React.Component {
                   <Select
                     placeholder=""
                     options={qtyOptions(simples[simpleSku])}
-                    value={qtyOptions(simples[simpleSku]).length > 0 ? productQty : { value: 0, label: '0' }}
+                    value={
+                      qtyOptions(simples[simpleSku]).length > 0
+                        ? productQty
+                        : { value: 0, label: "0" }
+                    }
                     defaultValue={1}
                     styles={customStyles}
                     isDisabled={
-                      !(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)
+                      !(
+                        simples[simpleSku].meta.quantity &&
+                        parseInt(simples[simpleSku].meta.quantity, 10) > 0
+                      )
                     }
                     onChange={({ value }) => {
                       this.handleSelectQty(value);
@@ -931,13 +1023,23 @@ class ProductDetails extends React.Component {
                 {
                   <Box mb={20} mt={10}>
                     {combinedbuy.length ? (
-                      <Button variant="link" fontFamily="medium" fontSize={18} mb={15}>
-                        <a href="#combined_buy_offers" style={{ color: '#F15A22' }}>
-                          {`See ${combinedbuy.length} Combined ${combinedbuy.length > 1 ? 'Offers' : 'Offer'}`}
+                      <Button
+                        variant="link"
+                        fontFamily="medium"
+                        fontSize={18}
+                        mb={15}
+                      >
+                        <a
+                          href="#combined_buy_offers"
+                          style={{ color: "#F15A22" }}
+                        >
+                          {`See ${combinedbuy.length} Combined ${
+                            combinedbuy.length > 1 ? "Offers" : "Offer"
+                          }`}
                         </a>
                       </Button>
                     ) : (
-                      ''
+                      ""
                     )}
 
                     {offerImage && offerImageRedirect && (
@@ -945,12 +1047,19 @@ class ProductDetails extends React.Component {
                         <Image src={offerImage} alt="" width="100%" />
                       </a>
                     )}
-                    {offerImage && !offerImageRedirect && <Image src={offerImage} alt="" width="100%" />}
+                    {offerImage && !offerImageRedirect && (
+                      <Image src={offerImage} alt="" width="100%" />
+                    )}
                   </Box>
                 }
-                {demoProduct === '1' ? (
+                {demoProduct === "1" ? (
                   <Row ml="0" mr="0" mb="15px" mt="-10px" alignItems="center">
-                    <Image src={demoIcon} alt="Schedule you virtual live demo" width="24px" mr="10px" />
+                    <Image
+                      src={demoIcon}
+                      alt="Schedule you virtual live demo"
+                      width="24px"
+                      mr="10px"
+                    />
                     <Text fontSize="14px" color="secondary" display="contents">
                       Available for demo on the Cart page
                     </Text>
@@ -969,7 +1078,10 @@ class ProductDetails extends React.Component {
                       configId={configId}
                       itemId={sku}
                       isSoldOut={
-                        !(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)
+                        !(
+                          simples[simpleSku].meta.quantity &&
+                          parseInt(simples[simpleSku].meta.quantity, 10) > 0
+                        )
                       }
                     />
                   </Col>
@@ -979,7 +1091,10 @@ class ProductDetails extends React.Component {
                       simpleSku={simpleSku}
                       sku={sku}
                       isSoldOut={
-                        !(simples[simpleSku].meta.quantity && parseInt(simples[simpleSku].meta.quantity, 10) > 0)
+                        !(
+                          simples[simpleSku].meta.quantity &&
+                          parseInt(simples[simpleSku].meta.quantity, 10) > 0
+                        )
                       }
                     />
                   </Col>
@@ -1008,7 +1123,9 @@ class ProductDetails extends React.Component {
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
-                    href={`mailto:?subject=${productPageTitle(name)}&body=${productURL}`}
+                    href={`mailto:?subject=${productPageTitle(
+                      name
+                    )}&body=${productURL}`}
                   >
                     <SocialButton>
                       <Image src={email} alt="Mail" />
@@ -1022,23 +1139,23 @@ class ProductDetails extends React.Component {
                 variant="row.contentCenter"
                 mx={0}
                 sx={{
-                  borderTop: 'dividerBold',
-                  borderBottom: 'dividerBold',
-                  overflow: 'auto',
-                  flexWrap: 'nowrap',
-                  justifyContent: 'flex-start'
+                  borderTop: "dividerBold",
+                  borderBottom: "dividerBold",
+                  overflow: "auto",
+                  flexWrap: "nowrap",
+                  justifyContent: "flex-start"
                 }}
               >
                 <DescriptionButton
                   onClick={e => {
                     e.preventDefault();
                     this.setState({
-                      activeSpec: 'description',
+                      activeSpec: "description",
                       activeDescription: description
                     });
                   }}
-                  active={activeSpec === 'description'}
-                  tab={'description'}
+                  active={activeSpec === "description"}
+                  tab={"description"}
                 >
                   DESCRIPTION
                 </DescriptionButton>
@@ -1046,12 +1163,12 @@ class ProductDetails extends React.Component {
                   onClick={e => {
                     e.preventDefault();
                     this.setState({
-                      activeSpec: 'details',
+                      activeSpec: "details",
                       activeDescription: description
                     });
                   }}
-                  active={activeSpec === 'details'}
-                  tab={'details'}
+                  active={activeSpec === "details"}
+                  tab={"details"}
                 >
                   DETAILS
                 </DescriptionButton>
@@ -1060,12 +1177,12 @@ class ProductDetails extends React.Component {
                     onClick={e => {
                       e.preventDefault();
                       this.setState({
-                        activeSpec: 'care',
+                        activeSpec: "care",
                         activeDescription: careLabel
                       });
                     }}
-                    active={activeSpec === 'care'}
-                    tab={'product-care-instructions'}
+                    active={activeSpec === "care"}
+                    tab={"product-care-instructions"}
                   >
                     PRODUCT CARE INSTRUCTIONS
                   </DescriptionButton>
@@ -1075,12 +1192,12 @@ class ProductDetails extends React.Component {
                     onClick={e => {
                       e.preventDefault();
                       this.setState({
-                        activeSpec: 'warranty',
+                        activeSpec: "warranty",
                         activeDescription: productWarranty
                       });
                     }}
-                    active={activeSpec === 'warranty'}
-                    tab={'service-assurance-warranty'}
+                    active={activeSpec === "warranty"}
+                    tab={"service-assurance-warranty"}
                   >
                     SERVICE ASSURANCE / WARRANTY
                   </DescriptionButton>
@@ -1090,12 +1207,12 @@ class ProductDetails extends React.Component {
                     onClick={e => {
                       e.preventDefault();
                       this.setState({
-                        activeSpec: 'return',
+                        activeSpec: "return",
                         activeDescription: returnAndCancel
                       });
                     }}
-                    active={activeSpec === 'return'}
-                    tab={'return-and-cancellation'}
+                    active={activeSpec === "return"}
+                    tab={"return-and-cancellation"}
                   >
                     RETURN / CANCELLATION
                   </DescriptionButton>
@@ -1104,26 +1221,35 @@ class ProductDetails extends React.Component {
                 {this.renderAttributes(groupedAttributes)}
               </Row>
 
-              {activeSpec === 'details' ? (
+              {activeSpec === "details" ? (
                 <Box
                   px="5%"
                   py="2%"
                   sx={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    justifyContent: 'space-between'
+                    display: "flex",
+                    flexWrap: "wrap",
+                    justifyContent: "space-between"
                   }}
                 >
                   {groupedAttributes[0].Details.map(detail => {
                     // if (detail.label !== 'Note' && detail.label !== "What's in the box?") {
-                    if (detail.label !== 'Note' && detail.value) {
+                    if (detail.label !== "Note" && detail.value) {
                       return (
                         <Row width="33%" pb={10}>
-                          <Col width={150} fontWeight="bold" fontSize={14} lineHeight={1.4}>
+                          <Col
+                            width={150}
+                            fontWeight="bold"
+                            fontSize={14}
+                            lineHeight={1.4}
+                          >
                             {detail.label}
                           </Col>
                           {detail.label !== "What's in the box?" ? (
-                            <Col width="calc(100% - 150px)" fontSize={14} lineHeight={1.25}>
+                            <Col
+                              width="calc(100% - 150px)"
+                              fontSize={14}
+                              lineHeight={1.25}
+                            >
                               {detail.value}
                             </Col>
                           ) : (
@@ -1148,7 +1274,7 @@ class ProductDetails extends React.Component {
                 <Box px="10%">
                   {description && (
                     <ProductDesc
-                      desc={activeDescription || ''}
+                      desc={activeDescription || ""}
                       showmore={showmore}
                       toggleShowMore={this.toggleShowMore}
                     />
@@ -1157,7 +1283,11 @@ class ProductDetails extends React.Component {
               )}
 
               {/* Specifications */}
-              <Specs activeSpec={activeSpec} specs={groupedAttributes} pincode={pincode.selectedPincode} />
+              <Specs
+                activeSpec={activeSpec}
+                specs={groupedAttributes}
+                pincode={pincode.selectedPincode}
+              />
               {/* Video */}
               {groupedattributes && groupedattributes.youtubeid && (
                 // <Row my={30}>
@@ -1165,13 +1295,13 @@ class ProductDetails extends React.Component {
                 //     <Video id={getVideoID(groupedattributes.youtubeid)} />
                 //   </Col>
                 // </Row>
-                <div style={{ display: 'flex' }}>
+                <div style={{ display: "flex" }}>
                   <Button
                     onClick={() => this.setState({ openVideo: true })}
                     my={8}
                     sx={{
-                      width: '60%',
-                      margin: 'auto'
+                      width: "60%",
+                      margin: "auto"
                     }}
                   >
                     Watch video
@@ -1179,19 +1309,25 @@ class ProductDetails extends React.Component {
                 </div>
               )}
               {/* Usps */}
-              <Row my={40} width={['80%', '80%', '60%']} justifyContent="space-between" mx="auto" flexWrap="nowrap">
+              <Row
+                my={40}
+                width={["80%", "80%", "60%"]}
+                justifyContent="space-between"
+                mx="auto"
+                flexWrap="nowrap"
+              >
                 {!meta.shipping_charge && (
-                  <div style={{ margin: 'auto' }}>
+                  <div style={{ margin: "auto" }}>
                     <UspCol src={freeShippingIcon} text="Free Shipping" />
                   </div>
                 )}
                 {isEmiAvailable && (
-                  <div style={{ margin: 'auto' }}>
+                  <div style={{ margin: "auto" }}>
                     <UspCol src={emiIcon} text="EMI Options" />
                   </div>
                 )}
-                {warrantyPeriod && warrantyPeriod !== 'None' ? (
-                  <div style={{ margin: 'auto' }}>
+                {warrantyPeriod && warrantyPeriod !== "None" ? (
+                  <div style={{ margin: "auto" }}>
                     <UspCol src={warrentyIcon} text={uspWarranty} />
                   </div>
                 ) : null}
@@ -1200,16 +1336,29 @@ class ProductDetails extends React.Component {
               {/* DIMENSIONS */}
               {/* { isFurnitureTrue()} */}
               {this.state.isFurniture && (height || width || depth) && (
-                <Box py={20} sx={{ borderTop: 'dividerLight' }}>
+                <Box py={20} sx={{ borderTop: "dividerLight" }}>
                   <Box textAlign="center" mb={30}>
                     <Text variant="regular" fontSize={16} pb={5}>
                       DIMENSIONS
                     </Text>
-                    <Heading variant="heading.regular">Will it fit in your room?</Heading>
+                    <Heading variant="heading.regular">
+                      Will it fit in your room?
+                    </Heading>
                   </Box>
-                  <Box p={15} textAlign="center" sx={{ border: 'dividerLight' }}>
+                  <Box
+                    p={15}
+                    textAlign="center"
+                    sx={{ border: "dividerLight" }}
+                  >
                     {images && images.length > 2 ? (
-                      <Image src={dimensionImage ? `${dimensionImage}-zoom.jpg` : `${images[2].url}-zoom.jpg`} alt="" />
+                      <Image
+                        src={
+                          dimensionImage
+                            ? `${dimensionImage}-zoom.jpg`
+                            : `${images[2].url}-zoom.jpg`
+                        }
+                        alt=""
+                      />
                     ) : (
                       <Image src={`${images[0].url}-zoom.jpg`} alt="" />
                     )}
@@ -1219,15 +1368,16 @@ class ProductDetails extends React.Component {
                       variant="row.contentCenter"
                       mx={0}
                       sx={{
-                        borderTop: 'dividerBold',
-                        borderBottom: 'dividerBold',
-                        padding: '20px 0',
-                        marginTop: '30px',
-                        justifyContent: 'flex-start'
+                        borderTop: "dividerBold",
+                        borderBottom: "dividerBold",
+                        padding: "20px 0",
+                        marginTop: "30px",
+                        justifyContent: "flex-start"
                       }}
                     >
                       <span className={styles.overolDimension}>
-                        Overall Dimension <span className={styles.dimensionUnit}>(Inches)</span>
+                        Overall Dimension{" "}
+                        <span className={styles.dimensionUnit}>(Inches)</span>
                       </span>
                       <span className={styles.dimensionSpans}>
                         {width && `Width : ${this.mmToInchConvert(width)}" `}
@@ -1270,12 +1420,22 @@ class ProductDetails extends React.Component {
               </AddReview> */}
                 <div ref={this.reviewRef}>
                   <Box width={1}>
-                    <ReviewDisplay ratings={weightedRating} reviews={reviewsData.length} count={5}>
+                    <ReviewDisplay
+                      ratings={weightedRating}
+                      reviews={reviewsData.length}
+                      count={5}
+                    >
                       {/* {children} */}
                       {reviewsData.length > 0 && (
-                        <ReviewFilter selectedFilterProp={selectedFilter} onFilterChange={this.onFilterChange} />
+                        <ReviewFilter
+                          selectedFilterProp={selectedFilter}
+                          onFilterChange={this.onFilterChange}
+                        />
                       )}
-                      <Button display={['none', 'block']} onClick={this.toggleAddReview}>
+                      <Button
+                        display={["none", "block"]}
+                        onClick={this.toggleAddReview}
+                      >
                         Write a Review
                       </Button>
                     </ReviewDisplay>
@@ -1364,7 +1524,9 @@ class ProductDetails extends React.Component {
                       price={item.total_price}
                       setDiscount={item.discount ? Number(item.discount) : 0}
                       discountedPrice={item.total_price_after_discount}
-                      handleCombinedBuy={() => this.handleCombinedBuy(item, pincode, session)}
+                      handleCombinedBuy={() =>
+                        this.handleCombinedBuy(item, pincode, session)
+                      }
                     />
                   </Row>
                 ))}
@@ -1390,7 +1552,7 @@ class ProductDetails extends React.Component {
 
             {/* Login modal */}
             <ResponsiveModal
-              classNames={{ modal: 'loginModal' }}
+              classNames={{ modal: "loginModal" }}
               onCloseModal={this.handleLoginModal}
               open={this.state.openLogin}
             >
@@ -1401,7 +1563,7 @@ class ProductDetails extends React.Component {
           </Container>
         </Box>
         <ResponsiveVideoModal
-          classNames={{ modal: 'videoModal' }}
+          classNames={{ modal: "videoModal" }}
           open={this.state.openVideo}
           onCloseModal={() => this.setState({ openVideo: false })}
         >
@@ -1423,22 +1585,22 @@ ProductDetails.defaultProps = {
   reviews: {},
   colorproducts: [],
   relatedproductsList: [],
-  deliveryInfo: '',
+  deliveryInfo: "",
   emidata: [],
   wishList: [],
   wishListData: [],
   deliveryDateLoading: false,
   loadingList: [],
   combinedbuy: [],
-  simpleSku: '',
+  simpleSku: "",
   quantityChange: false,
   skuItem: {},
-  session: ''
+  session: ""
   // catalogId: '',
   // onClickSubmit: () => {}
 };
 DescriptionButton.defaultProps = {
-  tab: ''
+  tab: ""
 };
 
 DescriptionButton.propTypes = {

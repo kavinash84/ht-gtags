@@ -104,7 +104,6 @@ class HomeContainer extends Component {
             />
           </div>
         ) : null}
-
         {/* sale of the day */}
 
         {/* <div
@@ -1165,7 +1164,7 @@ class HomeContainer extends Component {
         ) : null}
         {/* D&B and MK */}
 
-        <div style={{ position: "relative", marginTop: "10%" }}>
+        <div style={{ position: "relative", marginTop: "10%", marginBottom: "10%" }}>
           <div
             style={{
               border: "2px solid black",
