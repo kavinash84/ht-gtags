@@ -106,6 +106,7 @@ import BaughtTogether from "./baughtTogether";
 const freeShippingIcon = require("../../../static/free-shipping.svg");
 const warrentyIcon = require("../../../static/warrenty.svg");
 const emiIcon = require("../../../static/emi.svg");
+const CloseIcon = require("../../../static/close-icon.svg");
 const WishlistIcon = require("../../../static/pdp-icons/wishlist.png");
 const WishlistIconSelect = require("../../../static/pdp-icons/wishlistSelect.png");
 const fbIcon = require("../../../static/fb-pdp.svg");
@@ -932,9 +933,17 @@ class ProductDetails extends React.Component {
                   {boughtTogether && boughtTogether.length ? (
                     <LazyLoad height={150}>
                       <Div mt="1rem" style={{ width: '50%', display: 'flex', justifyContent: 'flex-end' }}>
-                        <Button style={{ width: '90%' }} onClick={() => this.handleBTModel(true)}>
+                        <Button style={{
+                          width: "90%",
+                          padding: " 10px",
+                          color: "#323131",
+                          fontSize: "18px",
+                          border: "1px solid #707070",
+                          backgroundColor: "#fff"
+                        }} onClick={() => this.handleBTModel(true)}>
                           More options
-                  </Button>
+                          <Image src={DownArrow} style={{ marginLeft: "10px" }} />
+                        </Button>
                       </Div>
                     </LazyLoad>
                   ) : null}
