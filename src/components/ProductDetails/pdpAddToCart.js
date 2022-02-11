@@ -101,14 +101,15 @@ const AddToCart = ({
   return (
     <Fragment>
       {isSoldOut ? (
-        <Button
-          backgroundColor="#626463"
-          variant={`outline.error.${size}`}
-          height={height}
-          style={{ width: "320px", color: "#FFFFFF", borderColor: "#626463" }}
-        >
-          Out of Stock
-        </Button>
+        // <Button
+        //   backgroundColor="#626463"
+        //   variant={`outline.error.${size}`}
+        //   height={height}
+        //   style={{ width: "320px", color: "#FFFFFF", borderColor: "#626463" }}
+        // >
+        //   Out of Stock
+        // </Button>
+        null
       ) : (
           <Fragment>
             {!checkStatus || !checkSKUItem ? (

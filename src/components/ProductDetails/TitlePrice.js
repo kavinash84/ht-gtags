@@ -24,7 +24,7 @@ const TitlePrice = ({
   onClickReviews
 }) => (
     <Section mb="0.3125rem" p="0" mt="0px" paddingLeft="0">
-      <Container type="container" pr="1rem" pl="1rem">
+      <div type="container" pr="1rem" >
         <Row display="block" mr="0" ml="0">
           <Heading
             itemProp="name"
@@ -169,7 +169,7 @@ const TitlePrice = ({
             </Div>
           </Row>
         </Row>
-      </Container>
+      </div>
     </Section>
   );
 

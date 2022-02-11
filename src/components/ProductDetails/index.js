@@ -208,7 +208,14 @@ const onClickWishList = (
 };
 
 const isInWishList = (list, id) => list.includes(id);
-
+const formatPrice = price => {
+  let newPrice = 0;
+  if (price.length > 3 && price !== null) {
+    newPrice = Number(price.replace(",", ""));
+    return newPrice;
+  }
+  return Number(price);
+};
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
@@ -297,6 +304,7 @@ class ProductDetails extends React.Component {
       displayShareBar: false,
       prodQty: 1,
       open: false,
+      isSoldOut: false,
       openLogin: false,
       showmore: true,
       displayBTModal: false,
@@ -690,6 +698,7 @@ class ProductDetails extends React.Component {
       pincode,
       session,
       reviews,
+      isSoldOut,
       relatedproductsList,
       boughtTogether,
       deliveryInfo,
@@ -772,6 +781,7 @@ class ProductDetails extends React.Component {
       price,
       special_price: specialPrice,
       offer_details: offerDetails = {},
+      ht_wallet_cashback = null,
       config_id: configId,
       shipping_charge: shippingCharge,
       warranty_period: warrantyPeriod = 0,
@@ -780,6 +790,7 @@ class ProductDetails extends React.Component {
     } = meta;
 
     const {
+      mrp,
       special_price: csp,
       offer_discount_percentage: offerDiscountPercentage,
       coupon_code: couponCode,
@@ -842,11 +853,10 @@ class ProductDetails extends React.Component {
                   "@type" : "Product",
                   "url": "${productURL || ""}",
                   "name" : "${name.replace(/['"]+/g, "")}",
-                  "image" : ${
-                    images && images.length && images[0].url
-                      ? `["${images[0].url}.jpg"]`
-                      : []
-                  },
+                  "image" : ${images && images.length && images[0].url
+                  ? `["${images[0].url}.jpg"]`
+                  : []
+                },
                   "description" : "${productDescription.replace(/['"]+/g, "")}",
                   "sku": "${sku || ""}",
                   "brand" : {
@@ -910,17 +920,17 @@ class ProductDetails extends React.Component {
                             toggleShowMoreColorProducts={
                               this.toggleShowMoreColorProducts
                             }
-                            // currentlySelectedProductSku={product.sku}
-                            // showmorecolorproductsCount={
-                            //   showmorecolorproductsCount
-                            // }
+                          // currentlySelectedProductSku={product.sku}
+                          // showmorecolorproductsCount={
+                          //   showmorecolorproductsCount
+                          // }
                           />
                         </Box>
                       )}
                     </Section>
                   </div>
                   {boughtTogether && boughtTogether.length ? (
-                    <LazyLoad placeholder={<PlaceHolderShimmer />} height={150}>
+                    <LazyLoad height={150}>
                       <Div mt="1rem" style={{ width: '50%', display: 'flex', justifyContent: 'flex-end' }}>
                         <Button style={{ width: '90%' }} onClick={() => this.handleBTModel(true)}>
                           More options
@@ -953,7 +963,7 @@ class ProductDetails extends React.Component {
                       </ResponsiveModal>
                     </div>
                   ) : null} */}
-                  <TitlePrice
+                  {/* <TitlePrice
                     price={formatAmount(price)}
                     offerDetails={this.getOfferDetails(
                       offerDetails,
@@ -980,7 +990,8 @@ class ProductDetails extends React.Component {
                     ratings={rating}
                     count={count}
                     onClickReviews={this.onClickReviews}
-                  />
+                  /> */}
+
                   {/* Product price */}
                   <Box mb={20} mt={10}>
                     {combinedbuy.length ? (
@@ -994,15 +1005,197 @@ class ProductDetails extends React.Component {
                           href="#combined_buy_offers"
                           style={{ color: "#F15A22" }}
                         >
-                          {`See ${combinedbuy.length} Combined ${
-                            combinedbuy.length > 1 ? "Offers" : "Offer"
-                          }`}
+                          {`See ${combinedbuy.length} Combined ${combinedbuy.length > 1 ? "Offers" : "Offer"
+                            }`}
                         </a>
                       </Button>
                     ) : (
-                      ""
-                    )}
+                        ""
+                      )}
+                    <Div m="0px">
+                      {formatPrice(csp) < formatPrice(mrp) ? (
+                        <Text
+                          mt="0px"
+                          color="#E9916B"
+                          fontSize="1.1rem"
+                          fontWeight="bold"
+                          height="35px"
 
+                        >
+                          {formatPrice(csp) !== 0 ? `₹${csp}` : `₹${mrp}`}
+                          <span>
+                            {formatPrice(csp) !== 0 ? (
+                              <Text
+                                ml="10px"
+                                fontSize="1.1rem"
+                                color="#999999"
+                                fontWeight="bold"
+                                textDecoration="line-through"
+                                display="inline-block"
+
+                              >
+                                <del>   ₹{mrp}{" "}  </del>
+                                <Text
+                                  // mt="0px"
+                                  color="#999999"
+                                  fontSize="1.1rem"
+                                  pl="5px"
+                                  fontWeight="bold"
+                                  textDecoration="line-through"
+                                  display="inline-block"
+
+                                  style={{ textDecoration: "none" }}
+                                >
+                                  MRP(Inclusive of all taxes)
+                          </Text>
+                              </Text>
+                            ) : (
+                                <Text
+                                  // mt="0px"
+                                  color="#999999"
+                                  fontSize="1.1rem"
+                                  pl="5px"
+                                  fontWeight="bold"
+                                  textDecoration="line-through"
+                                  display="inline-block"
+
+                                  style={{ textDecoration: "none" }}
+                                >
+                                  MRP (Inclusive of all taxes)
+                                </Text>
+                              )}
+                          </span>
+                        </Text>
+                      ) : (
+                          <Text
+                            color="#E9916B"
+                            fontSize="1.2rem"
+                            fontWeight="bold"
+                            height="35px"
+
+                          >
+                            ₹{mrp}{" "}
+                            <Text
+                              // mt="0px"
+                              color="#999999"
+                              fontSize="1.1rem"
+                              pl="5px"
+                              fontWeight="bold"
+                              textDecoration="line-through"
+                              display="inline-block"
+
+                              style={{ textDecoration: "none" }}
+                            >
+                              MRP (Inclusive of all taxes)
+                    </Text>
+                          </Text>
+                        )}
+                      {couponCode ? (
+                        // {!!isOfferExist && price !== discPrice &&
+                        <Div>
+                          <Div>
+                            <Heading
+                              itemProp="offers"
+                              itemScope
+                              itemType="http://schema.org/Offer"
+                              ellipsis={false}
+                              display="flex"
+                              pt="5px"
+                              pb="2px"
+                              mt="0"
+                              mb="0.5rem"
+                            >
+                              <Div style={{ width: "34%" }}>
+                                <span
+                                  style={{ color: "#E9916B", fontSize: "1.3rem" }}
+                                  itemProp="priceCurrency"
+                                  content="INR"
+
+                                >
+                                  Offer Price :
+                          </span>
+                              </Div>
+                              <Div style={{ width: "calc(100% - 100px)" }}>
+                                <span
+                                  style={{ color: "#E9916B", fontSize: "1.3rem" }}
+                                  itemProp="price"
+                                  content={formatAmount(checkSpecialPrice)}
+
+                                >
+                                  ₹{offerPrice}
+                                </span>
+                              </Div>
+                            </Heading>
+                            {/* <Div pb="5px" style={{ borderBottom: 'dashed 1px #d2d2d2' }}>
+                      <span fontSize="12px" color="#626463" fontFamily="regular">
+                        ({`Extra ${couponPercentageValue}% OFF, Use Coupon `}
+                        <span fontSize="12px" color="#E9916B" fontFamily="regular" tt="uppercase">
+                          {` ${couponCode}`}
+                        </span>
+                        )
+                      </span>
+                    </Div> */}
+                          </Div>
+                        </Div>
+                      ) : null}
+                      <Div>
+                        {couponCode ? (
+                          <Text mt="0px" mb="0px" color="#626463" fontSize="16px">
+                            {discountType === "fixed"
+                              ? `Price inclusive of Extra ₹${limitedTimeCouponDiscount} OFF, Use Coupon`
+                              : `Price inclusive of Extra ${offerDiscountPercentage}% OFF, Use Coupon`}
+                            <span
+                              style={{
+                                fontSize: "14px",
+                                color: "#E9916B",
+                                marginLeft: "5px",
+                                textTransform: "uppercase"
+
+                              }}
+
+                            >
+                              {couponCode}
+                            </span>
+                          </Text>
+                        ) : null}
+                        <div ht_wallet_cashback={ht_wallet_cashback}>
+                          {ht_wallet_cashback ? (
+                            <div
+                              style={{
+                                color: "#E9916B",
+                                fontSize: "16px"
+                              }}
+                            >
+                              {` Extra ${Math.round(
+                                ht_wallet_cashback
+                              )}% HT wallet cashback`}
+                            </div>
+                          ) : null}
+                        </div>
+                        {totalSavings !== "0" ? (
+                          <Text mt="0px" color="#626463" fontSize="16px" marginTop="5px" marginBottom="20px">
+                            Total Savings ₹ {totalSavings} ({totalDiscountPercentage}%
+                      OFF)
+                          </Text>
+                        ) : null}
+                      </Div>
+                    </Div>
+                    {/* out of stock text */}
+                    {!(
+                      simples[simpleSku].meta.quantity &&
+                      parseInt(simples[simpleSku].meta.quantity, 10) > 0
+                    ) ?
+                      <div
+                        style={{
+                          color: "#f98d29",
+                          fontSize: "16px",
+                          fontWeight: "bold",
+                          marginBottom: "20px"
+                        }}>
+                        Out of stack
+                        </div>
+                      : null}
+                    {/* banner */}
                     {offerImage && offerImageRedirect && (
                       <a rel="noopener noreferrer" href={offerImageRedirect}>
                         <Image src={offerImage} alt="" width="100%" />
@@ -1038,8 +1231,10 @@ class ProductDetails extends React.Component {
                 </Stripes>
 
                 {/* Pincode */}
-
-                <ServiceDetails
+                {!(
+                  simples[simpleSku].meta.quantity &&
+                  parseInt(simples[simpleSku].meta.quantity, 10) > 0
+                ) ? null : <ServiceDetails
                   deliverBy={
                     (deliveryInfo &&
                       deliveryInfo[0] &&
@@ -1056,8 +1251,10 @@ class ProductDetails extends React.Component {
                   loading={deliveryDateLoading}
                   shippingCharge={meta.shipping_charge}
                 >
-                  <Pincode key="pincode" />
-                </ServiceDetails>
+
+
+                  </ServiceDetails>}
+
                 {/* Add to cart and Buy now buttons */}
                 <Div>
                   <Row
@@ -1085,51 +1282,57 @@ class ProductDetails extends React.Component {
                         )
                       }
                     />
-                    <Row
-                      ml="0px"
-                      mr="0px"
-                      height="45px"
-                      style={{ width: "30%" }}
-                      justifyContent="flex-end"
-                    >
+
+                    {!(
+                      simples[simpleSku].meta.quantity &&
+                      parseInt(simples[simpleSku].meta.quantity, 10) > 0
+                    ) ? null :
                       <Row
                         ml="0px"
                         mr="0px"
-                        justifyContent="center"
-                        style={{
-                          alignItems: "center",
-                          width: "80%",
-                          border: "1px solid #E9916B",
-                          borderRadius: "5px"
-                        }}
+                        height="45px"
+                        style={{ width: "30%" }}
+                        justifyContent="flex-end"
                       >
-                        <Button
-                          backgroundColor="#fff"
-                          color="#000"
-                          width="30%"
-                          pl="0.5rem"
-                          pr="0.5rem"
-                          style={{ border: "none" }}
-                          onClick={() => this.handleQty("decrement")}
+                        <Row
+                          ml="0px"
+                          mr="0px"
+                          justifyContent="center"
+                          style={{
+                            alignItems: "center",
+                            width: "80%",
+                            border: "1px solid #E9916B",
+                            borderRadius: "5px"
+                          }}
                         >
-                          -
-                        </Button>
-                        <Div style={{ width: "30%", textAlign: "center" }}>
-                          {prodQty}
-                        </Div>
-                        <Button
-                          backgroundColor="#fff"
-                          color="#000"
-                          width="30%"
-                          pl="0.5rem"
-                          pr="0.5rem"
-                          style={{ border: "none" }}
-                          onClick={() => this.handleQty("increment")}
-                        >
-                          +
-                        </Button>
+                          <Button
+                            backgroundColor="#fff"
+                            color="#000"
+                            width="30%"
+                            pl="0.5rem"
+                            pr="0.5rem"
+                            style={{ border: "none" }}
+                            onClick={() => this.handleQty("decrement")}
+                          >
+                            -
+                     </Button>
+                          <Div style={{ width: "30%", textAlign: "center" }}>
+                            {prodQty}
+                          </Div>
+                          <Button
+                            backgroundColor="#fff"
+                            color="#000"
+                            width="30%"
+                            pl="0.5rem"
+                            pr="0.5rem"
+                            style={{ border: "none" }}
+                            onClick={() => this.handleQty("increment")}
+                          >
+                            +
+                     </Button>
+                        </Row>
                       </Row>
-                    </Row>
+                    }
                     <AddToCart
                       skuItem={skuItem}
                       quantityChange={quantityChange}
@@ -1145,58 +1348,64 @@ class ProductDetails extends React.Component {
                         )
                       }
                     />
-
-                    <Row
-                      ml="0px"
-                      mr="0px"
-                      style={{ width: "30%" }}
-                      justifyContent="flex-end"
-                    >
+                    {!(
+                      simples[simpleSku].meta.quantity &&
+                      parseInt(simples[simpleSku].meta.quantity, 10) > 0
+                    ) ? null :
                       <Row
                         ml="0px"
                         mr="0px"
-                        justifyContent="center"
-                        backgroundColor="#fff"
-                        style={{
-                          alignItems: "center",
-                          width: "80%",
-                          height: "45px",
-                          marginTop: "5px",
-                          border: "1px solid #515151",
-                          borderRadius: "5px"
-                        }}
+                        style={{ width: "30%" }}
+                        justifyContent="flex-end"
                       >
-                        <button
+                        <Row
+                          ml="0px"
+                          mr="0px"
+                          justifyContent="center"
+                          backgroundColor="#fff"
                           style={{
-                            padding: "0",
-                            border: "none",
-                            backgroundColor: "#ffffff"
+                            alignItems: "center",
+                            width: "80%",
+                            height: "45px",
+                            marginTop: "5px",
+                            border: "1px solid #515151",
+                            borderRadius: "5px"
                           }}
-                          onClick={onClickWishList(
-                            sku,
-                            wishListData,
-                            wishlistToggle,
-                            isLoggedIn,
-                            this.handleLoginModal,
-                            addToWaitList,
-                            simpleSku,
-                            pincode.selectedPincode
-                          )}
+                        >
+                          <button
+                            style={{
+                              padding: "0",
+                              border: "none",
+                              backgroundColor: "#ffffff"
+                            }}
+                            onClick={onClickWishList(
+                              sku,
+                              wishListData,
+                              wishlistToggle,
+                              isLoggedIn,
+                              this.handleLoginModal,
+                              addToWaitList,
+                              simpleSku,
+                              pincode.selectedPincode
+                            )}
                           // isWishList={isInWishList(wishList, sku)}
                           // wishlistLoading={isInWishList(loadingList, sku)}
-                        >
-                          <Img
-                            src={
-                              isInWishList(wishList, sku)
-                                ? WishlistIconSelect
-                                : WishlistIcon
-                            }
-                            alt="wishlist icon"
-                            width="24px"
-                          />
-                        </button>
-                      </Row>
-                    </Row>
+                          >
+                            <Img
+                              src={
+                                isInWishList(wishList, sku)
+                                  ? WishlistIconSelect
+                                  : WishlistIcon
+                              }
+                              alt="wishlist icon"
+                              width="24px"
+                            />
+                          </button>
+                        </Row>
+                      </Row>}
+
+
+
                   </Row>
                 </Div>
                 {/* share product */}
@@ -1261,8 +1470,8 @@ class ProductDetails extends React.Component {
                       {this.state.showReviews ? (
                         <Image src={DownArrow} style={{ marginLeft: "10px" }} />
                       ) : (
-                        <Image src={DownArrow} style={{ marginLeft: "10px" }} />
-                      )}
+                          <Image src={DownArrow} style={{ marginLeft: "10px" }} />
+                        )}
                     </span>
                   </div>
                   {this.state.showReviews ? (
@@ -1302,7 +1511,7 @@ class ProductDetails extends React.Component {
                                     feedBackMessage={nameErrorMessage}
                                     onChange={this.handleChange}
                                     // ref={(nameInp) => this.myInp = nameInp}
-                                    style={{ border: "1px solid #E3E3E3", fontSize:"12px" , borderRadius:"5px"}}
+                                    style={{ border: "1px solid #E3E3E3", fontSize: "12px", borderRadius: "5px" }}
                                   />
                                 </Box>
                                 <Box marginBottom="0.3125rem">
@@ -1316,7 +1525,7 @@ class ProductDetails extends React.Component {
                                     onChange={this.handleChange}
                                     rows="3"
                                     height={100}
-                                    style={{ border: "1px solid #E3E3E3", fontSize:"12px" , borderRadius:"5px" }}
+                                    style={{ border: "1px solid #E3E3E3", fontSize: "12px", borderRadius: "5px" }}
                                   />
                                 </Box>
                                 <div
@@ -1333,7 +1542,7 @@ class ProductDetails extends React.Component {
                                       alignItems: "center"
                                     }}
                                   >
-                                    <Label style={{fontSize:'14px', marginLeft:'15px'}} mr={10}>Rating</Label>
+                                    <Label style={{ fontSize: '14px', marginLeft: '15px' }} mr={10}>Rating</Label>
                                     <ReactStars
                                       count={5}
                                       onChange={this.ratingChanged}
@@ -1352,7 +1561,7 @@ class ProductDetails extends React.Component {
                                       fontSize="0.875em"
                                       height="42px"
                                       lh="2"
-                                      style={{width:'130px', borderRadius:'5px'}}
+                                      style={{ width: '130px', borderRadius: '5px' }}
                                     >
                                       SUBMIT
                                     </Button>
@@ -1364,7 +1573,7 @@ class ProductDetails extends React.Component {
                               ratings={weightedRating}
                               reviews={reviewsData.length}
                               count={5}
-                              style={{marginTop:'10px'}}
+                              style={{ marginTop: '10px' }}
                             >
                               {/* {children} */}
                               {reviewsData.length > 0 && (
@@ -1538,6 +1747,7 @@ DescriptionButton.propTypes = {
   tab: PropTypes.string
 };
 ProductDetails.propTypes = {
+  isSoldOut: PropTypes.bool,
   toggleWebToChat: PropTypes.func.isRequired,
   dismiss: PropTypes.bool,
   pdpTimeout: PropTypes.number.isRequired,
@@ -1564,8 +1774,8 @@ ProductDetails.propTypes = {
   quantityChange: PropTypes.bool,
   skuItem: PropTypes.object,
   session: PropTypes.string,
-  bflMinAmount: PropTypes.number.isRequired
-  // onClickSubmit: PropTypes.func,
+  bflMinAmount: PropTypes.number.isRequired,
+  onClickSubmit: PropTypes.func.isRequired,
   // catalogId: PropTypes.any
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
