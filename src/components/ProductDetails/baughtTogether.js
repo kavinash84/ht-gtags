@@ -178,14 +178,14 @@ class BaughtTogether extends React.Component {
               btTotal:
                 this.state.btTotal +
                 Number(formatPrice(product.pricing_details.offer_price)) *
-                  btProdQty[`${prod.sku}`]
+                btProdQty[`${prod.sku}`]
             });
           } else if (prod.pricing_details.coupon_code === couponCode) {
             this.setState({
               btTotal:
                 this.state.btTotal +
                 Number(formatPrice(prod.pricing_details.offer_price)) *
-                  btProdQty[`${prod.sku}`]
+                btProdQty[`${prod.sku}`]
             });
           } else {
             this.setState({
@@ -200,14 +200,14 @@ class BaughtTogether extends React.Component {
               btTotal:
                 this.state.btTotal -
                 Number(formatPrice(product.pricing_details.offer_price)) *
-                  (btProdQty[`${prod.sku}`] + 1)
+                (btProdQty[`${prod.sku}`] + 1)
             });
           } else if (prod.pricing_details.coupon_code === couponCode) {
             this.setState({
               btTotal:
                 this.state.btTotal -
                 Number(formatPrice(prod.pricing_details.offer_price)) *
-                  (btProdQty[`${prod.sku}`] + 1)
+                (btProdQty[`${prod.sku}`] + 1)
             });
           } else {
             this.setState({
@@ -344,84 +344,84 @@ class BaughtTogether extends React.Component {
               >
                 {btProds && btProds.length
                   ? btProds.map((prod, index) => (
-                      <Div
-                        key={index}
-                        style={{
-                          position: "relative",
-                          borderRadius: "5px",
-                          height: "auto"
-                        }}
-                        p="10px"
-                        bg="white"
-                      >
-                        {index === 0 ? (
-                          <div
-                            style={{
-                              position: "relative",
-                              height: "250px",
-                              display: "flex"
-                            }}
-                          >
+                    <Div
+                      key={index}
+                      style={{
+                        position: "relative",
+                        borderRadius: "5px",
+                        height: "auto"
+                      }}
+                      p="10px"
+                      bg="white"
+                    >
+                      {index === 0 ? (
+                        <div
+                          style={{
+                            position: "relative",
+                            height: "250px",
+                            display: "flex"
+                          }}
+                        >
+                          <Img
+                            src={`${product.image}.jpg`}
+                            alt="BT!"
+                            height="100%"
+                            width="auto%"
+                            m="auto"
+                            style={{ border: "2px solid #FAF4F2" }}
+                          />
+                        </div>
+                      ) : prod.image ? (
+                        <div
+                          style={{
+                            position: "relative",
+                            height: "250px",
+                            display: "flex",
+                            justifyContent: "center"
+                          }}
+                        >
+                          <Link to={prod.link}>
                             <Img
-                              src={`${product.image}.jpg`}
+                              src={prod.image}
                               alt="BT!"
                               height="100%"
                               width="auto%"
                               m="auto"
                               style={{ border: "2px solid #FAF4F2" }}
                             />
-                          </div>
-                        ) : prod.image ? (
-                          <div
-                            style={{
-                              position: "relative",
-                              height: "250px",
-                              display: "flex",
-                              justifyContent: "center"
-                            }}
-                          >
-                            <Link to={prod.link}>
-                              <Img
-                                src={prod.image}
-                                alt="BT!"
-                                height="100%"
-                                width="auto%"
-                                m="auto"
-                                style={{ border: "2px solid #FAF4F2" }}
-                              />
-                            </Link>
-                          </div>
-                        ) : null}
-                        {prod.name ? (
-                          <Text
-                            ta="left"
-                            fontSize="12px"
-                            mt="12px"
-                            mb="3px"
-                            style={{ height: "40px", fontWeight: "bold" }}
-                            lineHeight="1.3rem"
-                          >
-                            {prod.name.split("").length > 50
-                              ? `${prod.name.slice(0, 50)}....`
-                              : prod.name}
-                          </Text>
-                        ) : null}
-                        {index !== 0 ? (
-                          <Text
-                            ta="left"
-                            fontSize="12px"
-                            mt="0px"
-                            mb="3px"
-                            style={{ height: "30px", fontWeight: 600 }}
-                            lineHeight="1.3rem"
-                          >
-                            {prod.pricing_details.coupon_code
-                              ? `Offer Price: ₹ ${prod.pricing_details.offer_price}`
-                              : prod.pricing_details.special_price !== "0"
+                          </Link>
+                        </div>
+                      ) : null}
+                      {prod.name ? (
+                        <Text
+                          ta="left"
+                          fontSize="12px"
+                          mt="12px"
+                          mb="3px"
+                          style={{ height: "40px", fontWeight: "bold" }}
+                          lineHeight="1.3rem"
+                        >
+                          {prod.name.split("").length > 50
+                            ? `${prod.name.slice(0, 50)}....`
+                            : prod.name}
+                        </Text>
+                      ) : null}
+                      {index !== 0 ? (
+                        <Text
+                          ta="left"
+                          fontSize="12px"
+                          mt="0px"
+                          mb="3px"
+                          style={{ height: "30px", fontWeight: 600 }}
+                          lineHeight="1.3rem"
+                        >
+                          {prod.pricing_details.coupon_code
+                            ? `Offer Price: ₹ ${prod.pricing_details.offer_price}`
+                            : prod.pricing_details.special_price !== "0"
                               ? `Price: ₹ ${prod.pricing_details.special_price}`
                               : `Price: ₹ ${prod.pricing_details.mrp}`}
-                          </Text>
-                        ) : (
+                        </Text>
+                      ) : (
                           <Text
                             ta="left"
                             fontSize="12px"
@@ -433,97 +433,39 @@ class BaughtTogether extends React.Component {
                             {couponCode
                               ? `Offer Price: ₹ ${offerPrice}`
                               : csp !== "0"
-                              ? `Price: ₹ ${csp}`
-                              : `Price: ₹ ${mrp}`}
+                                ? `Price: ₹ ${csp}`
+                                : `Price: ₹ ${mrp}`}
                           </Text>
                         )}
+                      <Row
+                        ml="0px"
+                        mr="0px"
+                        style={{ width: "100%" }}
+                        justifyContent="flex-start"
+                      >
                         <Row
                           ml="0px"
                           mr="0px"
-                          style={{ width: "100%" }}
-                          justifyContent="flex-start"
+                          justifyContent="center"
+                          style={{
+                            alignItems: "center",
+                            width: "30%",
+                            border: "1px solid #E9916B",
+                            borderRadius: "5px"
+                          }}
                         >
-                          <Row
-                            ml="0px"
-                            mr="0px"
-                            justifyContent="center"
+                          <Button
+                            width="30%"
+                            pl="0.5rem"
+                            pr="0.5rem"
                             style={{
-                              alignItems: "center",
-                              width: "30%",
-                              border: "1px solid #E9916B",
-                              borderRadius: "5px"
+                              border: "none",
+                              backgroundColor: "transparent",
+                              color: "black"
                             }}
-                          >
-                            <Button
-                              width="30%"
-                              pl="0.5rem"
-                              pr="0.5rem"
-                              style={{
-                                border: "none",
-                                backgroundColor: "transparent",
-                                color: "black"
-                              }}
-                              onClick={() => {
-                                if (index === 0) {
-                                  if (this.state.btProdQty[`${prod.sku}`] > 1) {
-                                    this.setState(
-                                      prevState => {
-                                        // btProdQty : btProdQty[`${prod.name}`] += 1
-                                        let btProdQty = Object.assign(
-                                          {},
-                                          prevState.btProdQty
-                                        ); //creating copy of state variable btProdQty
-                                        btProdQty[`${prod.sku}`] -= 1;
-                                        return { btProdQty };
-                                      },
-                                      () => {
-                                        this.updatebtTotal("dec", index);
-                                      }
-                                    );
-                                  }
-                                } else {
-                                  if (this.state.btProdQty[`${prod.sku}`] > 0) {
-                                    this.setState(
-                                      prevState => {
-                                        // btProdQty : btProdQty[`${prod.name}`] += 1
-                                        let btProdQty = Object.assign(
-                                          {},
-                                          prevState.btProdQty
-                                        ); //creating copy of state variable btProdQty
-                                        btProdQty[`${prod.sku}`] -= 1;
-                                        return { btProdQty };
-                                      },
-                                      () => {
-                                        this.updatebtTotal("dec", index);
-                                      }
-                                    );
-                                  }
-                                }
-                              }}
-                            >
-                              -
-                            </Button>
-                            <Div
-                              style={{
-                                width: "30%",
-                                textAlign: "center"
-                              }}
-                            >
-                              {btProdQty[`${prod.sku}`]
-                                ? btProdQty[`${prod.sku}`]
-                                : btProdQty.commonQty}
-                            </Div>
-                            <Button
-                              width="30%"
-                              pl="0.5rem"
-                              pr="0.5rem"
-                              style={{
-                                border: "none",
-                                backgroundColor: "transparent",
-                                color: "black"
-                              }}
-                              onClick={() => {
-                                if (this.state.btProdQty[`${prod.sku}`] < 5) {
+                            onClick={() => {
+                              if (index === 0) {
+                                if (this.state.btProdQty[`${prod.sku}`] > 1) {
                                   this.setState(
                                     prevState => {
                                       // btProdQty : btProdQty[`${prod.name}`] += 1
@@ -531,22 +473,80 @@ class BaughtTogether extends React.Component {
                                         {},
                                         prevState.btProdQty
                                       ); //creating copy of state variable btProdQty
-                                      btProdQty[`${prod.sku}`] += 1;
+                                      btProdQty[`${prod.sku}`] -= 1;
                                       return { btProdQty };
                                     },
                                     () => {
-                                      this.updatebtTotal("inc", index);
+                                      this.updatebtTotal("dec", index);
                                     }
                                   );
                                 }
-                              }}
-                            >
-                              +
+                              } else {
+                                if (this.state.btProdQty[`${prod.sku}`] > 0) {
+                                  this.setState(
+                                    prevState => {
+                                      // btProdQty : btProdQty[`${prod.name}`] += 1
+                                      let btProdQty = Object.assign(
+                                        {},
+                                        prevState.btProdQty
+                                      ); //creating copy of state variable btProdQty
+                                      btProdQty[`${prod.sku}`] -= 1;
+                                      return { btProdQty };
+                                    },
+                                    () => {
+                                      this.updatebtTotal("dec", index);
+                                    }
+                                  );
+                                }
+                              }
+                            }}
+                          >
+                            -
                             </Button>
-                          </Row>
+                          <Div
+                            style={{
+                              width: "30%",
+                              textAlign: "center"
+                            }}
+                          >
+                            {btProdQty[`${prod.sku}`]
+                              ? btProdQty[`${prod.sku}`]
+                              : btProdQty.commonQty}
+                          </Div>
+                          <Button
+                            width="30%"
+                            pl="0.5rem"
+                            pr="0.5rem"
+                            style={{
+                              border: "none",
+                              backgroundColor: "transparent",
+                              color: "black"
+                            }}
+                            onClick={() => {
+                              if (this.state.btProdQty[`${prod.sku}`] < 5) {
+                                this.setState(
+                                  prevState => {
+                                    // btProdQty : btProdQty[`${prod.name}`] += 1
+                                    let btProdQty = Object.assign(
+                                      {},
+                                      prevState.btProdQty
+                                    ); //creating copy of state variable btProdQty
+                                    btProdQty[`${prod.sku}`] += 1;
+                                    return { btProdQty };
+                                  },
+                                  () => {
+                                    this.updatebtTotal("inc", index);
+                                  }
+                                );
+                              }
+                            }}
+                          >
+                            +
+                            </Button>
                         </Row>
-                      </Div>
-                    ))
+                      </Row>
+                    </Div>
+                  ))
                   : null}
               </SlickSlider>
             </Div>
@@ -576,24 +576,24 @@ class BaughtTogether extends React.Component {
                   {addLoading ? "Adding.." : "Buy Set"}
                 </Button>
               ) : (
-                <Link to="/checkout/cart">
-                  <Button
-                    style={{
-                      backgroundColor: "#E9916B",
-                      borderRadius: "5px",
-                      color: "white",
-                      width: "10%",
-                      display: "block",
-                      fontWeight: 600,
-                      marginBottom: "20px"
-                    }}
-                    m="auto"
-                    mt="1rem"
-                  >
-                    Go to Cart
+                  <Link to="/checkout/cart">
+                    <Button
+                      style={{
+                        backgroundColor: "#E9916B",
+                        borderRadius: "5px",
+                        color: "white",
+                        width: "10%",
+                        display: "block",
+                        fontWeight: 600,
+                        marginBottom: "20px"
+                      }}
+                      m="auto"
+                      mt="1rem"
+                    >
+                      Go to Cart
                   </Button>
-                </Link>
-              )}
+                  </Link>
+                )}
               <Text
                 ta="center"
                 mb="0px"
@@ -606,9 +606,9 @@ class BaughtTogether extends React.Component {
               {couponCode ? (
                 <Text ta="center" mt="10px" fontSize="14px">
                   Price inclusive of Extra {offerDiscountPercentage}% Use Code:{" "}
-                  <Span fontSize="14px" color="#E9916B" tt="uppercase">
+                  <span fontSize="14px" color="#E9916B" tt="uppercase">
                     {couponCode}
-                  </Span>
+                  </span>
                 </Text>
               ) : null}
             </Div>
