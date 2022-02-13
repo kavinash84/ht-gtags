@@ -1620,7 +1620,7 @@ class ProductDetails extends React.Component {
               style={{
                 position: 'absolute',
                 bottom: '0px',
-                height: '50%',
+                height: '60%',
                 width: "100%",
                 backgroundColor: 'white',
                 borderRadius: '5px 5px 0px 0px',
