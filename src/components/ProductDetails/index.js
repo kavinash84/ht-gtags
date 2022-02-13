@@ -99,6 +99,7 @@ import { BackgroundMasker } from "hometown-components-dev/lib/Shimmer";
 import PdpModal from "./PdpModal/PdpModal";
 import Specs from "./Specs/specs";
 import BaughtTogether from "./baughtTogether";
+import MoreOption from "./moreOption"
 
 /**
  * Images / Icons
@@ -947,59 +948,7 @@ class ProductDetails extends React.Component {
                       </Div>
                     </LazyLoad>
                   ) : null}
-                  {/* {boughtTogether && boughtTogether.length ? (
-                    <div style={{ width: "50%", marginTop: "20px" }}>
-                      <button
-                        style={{
-                          width: "90%",
-                          padding: " 10px",
-                          color: "#323131",
-                          fontSize: "18px",
-                          border: "1px solid #707070",
-                          backgroundColor: "#fff"
-                        }}
-                        onClick={this.onOpenPdpModal}
-                      >
-                        More options
-                        <Image src={DownArrow} style={{ marginLeft: "10px" }} />
-                      </button>
-                      <ResponsiveModal
-                        classNames={{ modal: "pdpmodal" }}
-                        onCloseModal={this.onClosePdpModal}
-                        open={this.state.open}
-                      >
-                        <PdpModal />
-                      </ResponsiveModal>
-                    </div>
-                  ) : null} */}
-                  {/* <TitlePrice
-                    price={formatAmount(price)}
-                    offerDetails={this.getOfferDetails(
-                      offerDetails,
-                      price,
-                      specialPrice
-                    )}
-                    discPrice={formatAmount(checkSpecialPrice)}
-                    savingsRs={formatAmount(
-                      calculateSavings(
-                        price,
-                        checkSpecialPrice || "",
-                        offerPrice
-                      )
-                    )}
-                    savingTotal={calculateTotalSavings(
-                      price,
-                      checkSpecialPrice || ""
-                    )}
-                    savingsPercentage={calculateDiscount(
-                      price,
-                      checkSpecialPrice,
-                      offerPrice
-                    )}
-                    ratings={rating}
-                    count={count}
-                    onClickReviews={this.onClickReviews}
-                  /> */}
+
 
                   {/* Product price */}
                   <Box mb={20} mt={10}>
@@ -1671,7 +1620,8 @@ class ProductDetails extends React.Component {
               style={{
                 position: 'absolute',
                 bottom: '0px',
-                height: '50vh',
+                height: '50%',
+                width: "100%",
                 backgroundColor: 'white',
                 borderRadius: '5px 5px 0px 0px',
                 overflowY: 'auto'
@@ -1679,25 +1629,21 @@ class ProductDetails extends React.Component {
             >
               <Row
                 mt="1rem"
-                mr="0px"
+                mr="10px"
                 ml="0px"
                 mb="1rem"
-                style={{ justifyContent: 'space-between', alignItems: 'center' }}
+                style={{ justifyContent: 'flex-end', alignItems: 'center' }}
               >
-                <Div style={{ width: '50%' }}>
-                  <Heading ta="center" color="#323131" fontSize="1rem">
-                    More Options
-                  </Heading>
-                </Div>
+
                 <Div style={{ width: '50%', display: 'flex', justifyContent: 'flex-end' }}>
                   <Img src={CloseIcon} onClick={() => this.handleBTModel(false)} alt="close button" height="20px" />
                 </Div>
               </Row>
-              {boughtTogether && boughtTogether.length
+              {/* {boughtTogether && boughtTogether.length
                 ? boughtTogether.map((prod, index) => (
                   <Link to={prod.link}>
                     <Div key={index} pl="1rem" pr="1rem" mb="1rem" style={{ height: '100px' }}>
-                      <Row justifyContent="space-between" ml="0px" mr="0px" style={{ height: '100px' }}>
+                      <div justifyContent="space-between" ml="0px" mr="0px" style={{ height: '100px' }}>
                         <Div style={{ width: '40%', height: '100%' }}>
                           <Img src={prod.image} alt="BT1" m="auto" style={{ height: '100%', width: 'auto' }} />
                         </Div>
@@ -1709,14 +1655,15 @@ class ProductDetails extends React.Component {
                             {prod.pricing_details.coupon_code
                               ? `Offer Price: ₹${prod.pricing_details.offer_price}`
                               : `Price: ₹${prod.pricing_details.special_price}`}
-                            {/* Offer Price: ₹{prod.special_price} */}
+
                           </Text>
                         </Div>
-                      </Row>
+                      </div>
                     </Div>
                   </Link>
                 ))
-                : null}
+                : null} */}
+              <MoreOption prodQty={prodQty} />
             </Div>
           </Section>
         ) : null}
