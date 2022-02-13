@@ -1630,39 +1630,16 @@ class ProductDetails extends React.Component {
               <Row
                 mt="1rem"
                 mr="10px"
-                ml="0px"
+                ml="10px"
                 mb="1rem"
                 style={{ justifyContent: 'flex-end', alignItems: 'center' }}
               >
 
                 <Div style={{ width: '50%', display: 'flex', justifyContent: 'flex-end' }}>
-                  <Img src={CloseIcon} onClick={() => this.handleBTModel(false)} alt="close button" height="20px" />
+                  <Img src={CloseIcon} onClick={() => this.handleBTModel(false)} alt="close button" height="30px" />
                 </Div>
               </Row>
-              {/* {boughtTogether && boughtTogether.length
-                ? boughtTogether.map((prod, index) => (
-                  <Link to={prod.link}>
-                    <Div key={index} pl="1rem" pr="1rem" mb="1rem" style={{ height: '100px' }}>
-                      <div justifyContent="space-between" ml="0px" mr="0px" style={{ height: '100px' }}>
-                        <Div style={{ width: '40%', height: '100%' }}>
-                          <Img src={prod.image} alt="BT1" m="auto" style={{ height: '100%', width: 'auto' }} />
-                        </Div>
-                        <Div style={{ width: '50%' }}>
-                          <Heading fontSize="12px" color="#323131" style={{ whiteSpace: 'normal' }}>
-                            {prod.name.split('').length > 50 ? `${prod.name.slice(0, 50)}....` : prod.name}
-                          </Heading>
-                          <Text fontSize="12px" color="#F47020" mt="0px">
-                            {prod.pricing_details.coupon_code
-                              ? `Offer Price: ₹${prod.pricing_details.offer_price}`
-                              : `Price: ₹${prod.pricing_details.special_price}`}
 
-                          </Text>
-                        </Div>
-                      </div>
-                    </Div>
-                  </Link>
-                ))
-                : null} */}
               <MoreOption prodQty={prodQty} />
             </Div>
           </Section>

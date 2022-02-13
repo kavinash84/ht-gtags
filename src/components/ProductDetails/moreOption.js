@@ -20,12 +20,6 @@ import SlickSlider from "../SlickSlider";
 const LeftArrow = require("../../../static/new-home/roundedArrowLeft.svg");
 const RightArrow = require("../../../static/new-home/roundedArrowRight.svg");
 
-
-
-
-
-
-
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;
     return (
@@ -55,7 +49,7 @@ function SamplePrevArrow(props) {
 }
 
 const adjustSlides = length => ({
-    slidesToShow: length >= 3 ? 3 : length,
+    slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: false,
     infinite: false,
@@ -101,21 +95,9 @@ class BaughtTogether extends React.Component {
             btTotal: 0
         };
     }
-
-
-
-
-
-
-
-
-
-
     render() {
         const { btProds, } = this.state;
         const { boughtTogether } = this.props;
-
-
         return (
             <React.Fragment>
                 {btProds && Array.isArray(btProds) && btProds.length > 1 ? (
@@ -151,9 +133,9 @@ class BaughtTogether extends React.Component {
                                                         src={prod.image}
                                                         alt="BT!"
                                                         height="100%"
-                                                        width="auto%"
+
                                                         m="auto"
-                                                        style={{ border: "2px solid #FAF4F2" }}
+                                                        style={{ border: "2px solid #FAF4F2", width: "auto" }}
                                                     />
                                                 </div>
 
@@ -162,7 +144,7 @@ class BaughtTogether extends React.Component {
 
                                                 <Text
                                                     ta="left"
-                                                    fontSize="12px"
+                                                    fontSize="20px"
                                                     mt="12px"
                                                     mb="3px"
                                                     style={{ height: "40px", fontWeight: "bold" }}
@@ -173,8 +155,9 @@ class BaughtTogether extends React.Component {
 
 
                                                 <Text
+                                                    color="#F47020"
                                                     ta="left"
-                                                    fontSize="12px"
+                                                    fontSize="20px"
                                                     mt="0px"
                                                     mb="3px"
                                                     style={{ height: "30px", fontWeight: 600 }}
