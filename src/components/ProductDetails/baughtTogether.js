@@ -366,9 +366,9 @@ class BaughtTogether extends React.Component {
                             src={`${product.image}.jpg`}
                             alt="BT!"
                             height="100%"
-                            width="auto%"
+                            width="auto"
                             m="auto"
-                            style={{ border: "2px solid #FAF4F2" }}
+                            style={{ border: "2px solid #FAF4F2", width: "auto" }}
                           />
                         </div>
                       ) : prod.image ? (
@@ -385,15 +385,15 @@ class BaughtTogether extends React.Component {
                               src={prod.image}
                               alt="BT!"
                               height="100%"
-                              width="auto%"
+                              width="auto"
                               m="auto"
-                              style={{ border: "2px solid #FAF4F2" }}
+                              style={{ border: "2px solid #FAF4F2", width: "auto" }}
                             />
                           </Link>
                         </div>
                       ) : null}
                       {prod.name ? (
-                        <Text
+                        <h5
                           ta="left"
                           fontSize="16px"
                           mt="12px"
@@ -404,10 +404,10 @@ class BaughtTogether extends React.Component {
                           {prod.name.split("").length > 50
                             ? `${prod.name.slice(0, 50)}....`
                             : prod.name}
-                        </Text>
+                        </h5>
                       ) : null}
                       {index !== 0 ? (
-                        <Text
+                        <h5
                           ta="left"
                           fontSize="16px"
                           mt="0px"
@@ -420,9 +420,9 @@ class BaughtTogether extends React.Component {
                             : prod.pricing_details.special_price !== "0"
                               ? `Price: ₹ ${prod.pricing_details.special_price}`
                               : `Price: ₹ ${prod.pricing_details.mrp}`}
-                        </Text>
+                        </h5>
                       ) : (
-                          <Text
+                          <h5
                             ta="left"
                             fontSize="12px"
                             mt="0px"
@@ -435,7 +435,7 @@ class BaughtTogether extends React.Component {
                               : csp !== "0"
                                 ? `Price: ₹ ${csp}`
                                 : `Price: ₹ ${mrp}`}
-                          </Text>
+                          </h5>
                         )}
                       <Row
                         ml="0px"
