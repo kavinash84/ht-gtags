@@ -39,6 +39,7 @@ function SamplePrevArrow(props) {
 
 export default class DBCarousel extends Component {
   render() {
+
     const { data, settings, component } = this.props;
     return (
       <BoxHtV1>
