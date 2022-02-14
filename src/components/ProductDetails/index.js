@@ -1152,7 +1152,7 @@ class ProductDetails extends React.Component {
                           fontWeight: "bold",
                           marginBottom: "20px"
                         }}>
-                        Out of stack
+                        Out of Stock
                         </div>
                       : null}
                     {/* banner */}
@@ -1427,7 +1427,9 @@ class ProductDetails extends React.Component {
                   >
                     <h4>Reviews</h4>
                     <span>
+
                       {this.state.showReviews ? (
+
                         <Image src={DownArrow} style={{ marginLeft: "10px" }} />
                       ) : (
                           <Image src={DownArrow} style={{ marginLeft: "10px" }} />

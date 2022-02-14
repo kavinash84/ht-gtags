@@ -395,7 +395,7 @@ class BaughtTogether extends React.Component {
                       {prod.name ? (
                         <Text
                           ta="left"
-                          fontSize="12px"
+                          fontSize="16px"
                           mt="12px"
                           mb="3px"
                           style={{ height: "40px", fontWeight: "bold" }}
@@ -409,7 +409,7 @@ class BaughtTogether extends React.Component {
                       {index !== 0 ? (
                         <Text
                           ta="left"
-                          fontSize="12px"
+                          fontSize="16px"
                           mt="0px"
                           mb="3px"
                           style={{ height: "30px", fontWeight: 600 }}
