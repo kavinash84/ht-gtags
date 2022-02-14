@@ -112,10 +112,7 @@ class CaroselContainer extends Component {
             index + 1 === packageCatalog.categories.length ? "120px" : "0px"
         }}
       >
-        <div
-        style={{width: "81%",
-              marginLeft:"9%",
-              paddingTop:"20px"}}>
+        <div style={{ width: "81%", marginLeft: "9%", paddingTop: "20px" }}>
           <div
             style={{
               display: "flex",
@@ -146,142 +143,256 @@ class CaroselContainer extends Component {
                 width: "120px",
                 height: "40px",
                 borderRadius: "5px",
-                fontSize: "16px", 
+                fontSize: "16px",
                 cursor: "pointer"
               }}
             >
               Select
             </button>
           </div>
-          <div style={{ background: "#FFF8F4" , marginTop: "20px"}}>
-            <div style={{ paddingBottom: "15px"}}>
-              <SlickSlider settings={adjustSlides(products.length)}>
-                {products.map((slide, i) => (
-                  <div key={String(i)} style={{ width: "100%"}}>
-                    <div className={styles.caroselItem}
-                     style={{
-          width:
-          products.length > 2 ? "auto" : "50%"
-        }}
-                    >
-                      <div
-                        style={{ position: "relative" }}
-                        onClick={() => {
-                          if (!slide.isDeliverable) {
-                            const { dispatch } = this.context.store;
-                            dispatch(
-                              notifSend({
-                                type: "warning",
-                                msg: `This product is not deliverable at this pincode`,
-                                dismissAfter: 3000
-                              })
-                            );
-                          } else {
-                            this.handleClick(i, slide.isSelected);
-                          }
-                        }}
-                      >
-                        {slide.isSelected ? (
-                          <img
-                            src={Checked}
-                            alt="Checked"
-                            style={{ position: "absolute", right: 0, top: 0, width:'auto', cursor: "pointer"}}
-                          />
-                        ) : (
-                          <img
-                            src={UnChecked}
-                            alt="UnChecked"
-                            style={{
-                              position: "absolute",
-                              right: "8px",
-                              top: "8px",
-                              width: "auto",
-                               cursor: "pointer"
-                            }}
-                          />
-                        )}
-                        <div className={styles.caroselImg}>
-                          <img
-                            src={`${slide.image}-catalog_360.jpg`}
-                            alt="product image"
-                            style={{cursor: "pointer"}}
-                          />
-                        </div>
-                      </div>
-                      <div
-                        style={{
-                          background: "#FFFFFF",
-                          padding: "15px",
-                          minHeight: "91px"
-                        }}
-                      >
+          <div style={{ background: "#FFF8F4", marginTop: "20px" }}>
+            <div style={{ paddingBottom: "15px" }}>
+              {products.length <= 2 ? (
+                <div style={{display: "flex" , width: "100%"}}>
+                  {products.map((slide, i) => (
+                    <div key={String(i)} style={{ width: "33%" }}>
+                      <div className={styles.caroselItem}>
                         <div
-                          className={styles.prod_title}
-                          style={{
-                            fontSize: "16px",
-                            color: "#323131",
-                            lineHeight: "20px"
+                          style={{ position: "relative" }}
+                          onClick={() => {
+                            if (!slide.isDeliverable) {
+                              const { dispatch } = this.context.store;
+                              dispatch(
+                                notifSend({
+                                  type: "warning",
+                                  msg: `This product is not deliverable at this pincode`,
+                                  dismissAfter: 3000
+                                })
+                              );
+                            } else {
+                              this.handleClick(i, slide.isSelected);
+                            }
                           }}
                         >
-                          {slide.meta.name}
+                          {slide.isSelected ? (
+                            <img
+                              src={Checked}
+                              alt="Checked"
+                              style={{
+                                position: "absolute",
+                                right: 0,
+                                top: 0,
+                                width: "auto",
+                                cursor: "pointer"
+                              }}
+                            />
+                          ) : (
+                            <img
+                              src={UnChecked}
+                              alt="UnChecked"
+                              style={{
+                                position: "absolute",
+                                right: "8px",
+                                top: "8px",
+                                width: "auto",
+                                cursor: "pointer"
+                              }}
+                            />
+                          )}
+                          <div className={styles.caroselImg}>
+                            <img
+                              src={`${slide.image}-catalog_360.jpg`}
+                              alt="product image"
+                              style={{ cursor: "pointer" }}
+                            />
+                          </div>
                         </div>
                         <div
                           style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center"
+                            background: "#FFFFFF",
+                            padding: "15px",
+                            minHeight: "105px"
                           }}
                         >
                           <div
+                            className={styles.prod_title}
                             style={{
-                              color: "#E9916B",
-                              fontSize: "14px",
-                              marginTop: "5px",
-                              cursor:"pointer"
-                            }}
-                            onClick={() => {
-                              const { dispatch } = this.context.store;
-                              dispatch(
-                                setPdpIndex({
-                                  catIndex: index,
-                                  prodIndex: i
-                                })
-                              );
-                              dispatch(toggleProdModal(true));
+                              fontSize: "16px",
+                              color: "#323131",
+                              lineHeight: "20px"
                             }}
                           >
-                            More Info
+                            {slide.meta.name}
                           </div>
-                          {!slide.isDeliverable ? (
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "center"
+                            }}
+                          >
                             <div
                               style={{
-                                fontSize: "13px",
-                                fontWeight: 600,
-                                marginTop: "5px"
+                                color: "#E9916B",
+                                fontSize: "14px",
+                                marginTop: "5px",
+                                cursor: "pointer"
+                              }}
+                              onClick={() => {
+                                const { dispatch } = this.context.store;
+                                dispatch(
+                                  setPdpIndex({
+                                    catIndex: index,
+                                    prodIndex: i
+                                  })
+                                );
+                                dispatch(toggleProdModal(true));
                               }}
                             >
-                              Not Deliverable
+                              More Info
                             </div>
-                          ) : null}
+                            {!slide.isDeliverable ? (
+                              <div
+                                style={{
+                                  fontSize: "13px",
+                                  fontWeight: 600,
+                                  marginTop: "5px"
+                                }}
+                              >
+                                Not Deliverable
+                              </div>
+                            ) : null}
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </SlickSlider>
+                  ))}
+                </div>
+              ) : (
+                <SlickSlider settings={adjustSlides(products.length)}>
+                  {products.map((slide, i) => (
+                    <div key={String(i)} style={{ width: "100%" }}>
+                      <div
+                        className={styles.caroselItem}
+                        //            style={{
+                        // width:
+                        // products.length > 2 ? "auto" : "50%"
+                        // }}
+                      >
+                        <div
+                          style={{ position: "relative" }}
+                          onClick={() => {
+                            if (!slide.isDeliverable) {
+                              const { dispatch } = this.context.store;
+                              dispatch(
+                                notifSend({
+                                  type: "warning",
+                                  msg: `This product is not deliverable at this pincode`,
+                                  dismissAfter: 3000
+                                })
+                              );
+                            } else {
+                              this.handleClick(i, slide.isSelected);
+                            }
+                          }}
+                        >
+                          {slide.isSelected ? (
+                            <img
+                              src={Checked}
+                              alt="Checked"
+                              style={{
+                                position: "absolute",
+                                right: 0,
+                                top: 0,
+                                width: "auto",
+                                cursor: "pointer"
+                              }}
+                            />
+                          ) : (
+                            <img
+                              src={UnChecked}
+                              alt="UnChecked"
+                              style={{
+                                position: "absolute",
+                                right: "8px",
+                                top: "8px",
+                                width: "auto",
+                                cursor: "pointer"
+                              }}
+                            />
+                          )}
+                          <div className={styles.caroselImg}>
+                            <img
+                              src={`${slide.image}-catalog_360.jpg`}
+                              alt="product image"
+                              style={{ cursor: "pointer" }}
+                            />
+                          </div>
+                        </div>
+                        <div
+                          style={{
+                            background: "#FFFFFF",
+                            padding: "15px",
+                            minHeight: "105px"
+                          }}
+                        >
+                          <div
+                            className={styles.prod_title}
+                            style={{
+                              fontSize: "16px",
+                              color: "#323131",
+                              lineHeight: "20px"
+                            }}
+                          >
+                            {slide.meta.name}
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "center"
+                            }}
+                          >
+                            <div
+                              style={{
+                                color: "#E9916B",
+                                fontSize: "14px",
+                                marginTop: "5px",
+                                cursor: "pointer"
+                              }}
+                              onClick={() => {
+                                const { dispatch } = this.context.store;
+                                dispatch(
+                                  setPdpIndex({
+                                    catIndex: index,
+                                    prodIndex: i
+                                  })
+                                );
+                                dispatch(toggleProdModal(true));
+                              }}
+                            >
+                              More Info
+                            </div>
+                            {!slide.isDeliverable ? (
+                              <div
+                                style={{
+                                  fontSize: "13px",
+                                  fontWeight: 600,
+                                  marginTop: "5px"
+                                }}
+                              >
+                                Not Deliverable
+                              </div>
+                            ) : null}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </SlickSlider>
+              )}
             </div>
           </div>
-          {/* <div
-            style={{
-              width: "100%",
-              textAlign: "center",
-              fontSize: "17px",
-              color: "#323131",
-              fontWeight: 600
-            }}
-          >
-            Select your 2nd product to confirm
-          </div> */}
         </div>
       </Div>
     );
