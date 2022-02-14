@@ -49,7 +49,7 @@ function SamplePrevArrow(props) {
 }
 
 const adjustSlides = length => ({
-    slidesToShow: 3,
+    slidesToShow: length >= 2 ? 2 : length,
     slidesToScroll: 1,
     autoplay: false,
     infinite: false,
@@ -114,7 +114,7 @@ class BaughtTogether extends React.Component {
                             >
                                 <SlickSlider
 
-                                    settings={adjustSlides}
+                                    settings={adjustSlides((btProds && btProds.length) || 0)}
                                 >
                                     {boughtTogether && boughtTogether.length
                                         ? boughtTogether.map((prod, index) => (
