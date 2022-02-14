@@ -8,6 +8,7 @@ import ReactStars from "react-stars";
 import { withRouter } from "react-router";
 import LazyLoad from "react-lazyload";
 import { Link } from "react-router-dom";
+
 /**
  * Modules / Utils / Reducers
  */
@@ -57,6 +58,7 @@ import Label from "hometown-components-dev/lib/LabelHtV1";
 import FormInput from "hometown-components-dev/lib/FormsHtV1/FormInputHtV1";
 import Section from "hometown-components-dev/lib/SectionHtV1";
 import Img from "hometown-components-dev/lib/ImageHtV1";
+
 /**
  * Page Components
  */
@@ -69,8 +71,9 @@ import ProductDesc from "hometown-components-dev/lib/ProductDetailsHtV1/ProductD
 import ProductCarousel from "components/ProductCarousel";
 import ResponsiveModal from "components/Modal";
 import ResponsiveVideoModal from "components/Modal/ResponsiveVideoModal";
-import Reviews from "hometown-components-dev/lib/ReviewsHtV1";
-import ReviewDisplay from "hometown-components-dev/lib/ReviewsHtV1/ReviewDisplay";
+import Reviews from "./ReviewsHtV1";
+import ReviewDisplay from "./ReviewDisplay";
+import TotalReviewDisplay from "./TotalReviewDisplay";
 import ServiceDetails from "hometown-components-dev/lib/ProductDetailsHtV1/ServiceDetails";
 // import EmiOptions from 'hometown-components-dev/lib/ProductDetailsHtV1/EmiOptions';
 // import ShareBar from 'components/ShareBar';
@@ -1412,6 +1415,7 @@ class ProductDetails extends React.Component {
                       alignItems: "center",
                       background: "#f5f5f5",
                       width: "100%",
+                      height: "50px",
                       color: "rgba(0,0,0,0.6)",
                       border: "1px solid #d4d4d4",
                       borderBottom: !this.state.showReviews
@@ -1425,16 +1429,36 @@ class ProductDetails extends React.Component {
                       this.setState({ showReviews: !this.state.showReviews });
                     }}
                   >
-                    <h4>Reviews</h4>
-                    <span>
+                    <h4 style={{ color: "#222222" }}>Reviews </h4>
 
-                      {this.state.showReviews ? (
 
-                        <Image src={DownArrow} style={{ marginLeft: "10px" }} />
-                      ) : (
+                    <div>
+
+                      <TotalReviewDisplay
+                        ratings={weightedRating}
+                        reviews={reviewsData.length}
+                        count={5}
+                        style={{ marginTop: '10px' }}
+                      >
+                        {/* 
+                        {reviewsData.length > 0 && (
+                          <ReviewFilter
+                            selectedFilterProp={selectedFilter}
+                            onFilterChange={this.onFilterChange}
+                          />
+                        )} */}
+                        {this.state.showReviews ? (
+
                           <Image src={DownArrow} style={{ marginLeft: "10px" }} />
-                        )}
-                    </span>
+                        ) : (
+                            <Image src={DownArrow} style={{ marginLeft: "10px" }} />
+                          )}
+                      </TotalReviewDisplay>
+
+
+
+
+                    </div>
                   </div>
                   {this.state.showReviews ? (
                     <div
@@ -1463,6 +1487,7 @@ class ProductDetails extends React.Component {
                                 >
                                   Write a Review
                                 </h5>
+
                                 <Box>
                                   <FormInput
                                     type="text"
@@ -1516,6 +1541,7 @@ class ProductDetails extends React.Component {
                                   </div>
                                   <Box>
                                     <Button
+                                      backgroundColor="#E9916B"
                                       type="submit"
                                       btnType="primary"
                                       size="large"
