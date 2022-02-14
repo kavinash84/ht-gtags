@@ -933,14 +933,16 @@ class ProductDetails extends React.Component {
                   </div>
                   {boughtTogether && boughtTogether.length ? (
                     <LazyLoad height={150}>
-                      <Div mt="1rem" style={{ width: '50%', display: 'flex', justifyContent: 'flex-end' }}>
+                      <Div mt="1rem" mb="1rem" style={{ width: '50%', display: 'flex', justifyContent: 'flex-end' }}>
                         <Button style={{
                           width: "90%",
                           padding: " 10px",
                           color: "#323131",
-                          fontSize: "18px",
+                          fontSize: "16px",
                           border: "1px solid #707070",
-                          backgroundColor: "#fff"
+                          borderRadius: "4px",
+                          backgroundColor: "#fff",
+                          textTransform: "capitalize"
                         }} onClick={() => this.handleBTModel(true)}>
                           More options
                           <Image src={DownArrow} style={{ marginLeft: "10px" }} />
@@ -1533,7 +1535,7 @@ class ProductDetails extends React.Component {
                               count={5}
                               style={{ marginTop: '10px' }}
                             >
-                              {/* {children} */}
+
                               {reviewsData.length > 0 && (
                                 <ReviewFilter
                                   selectedFilterProp={selectedFilter}
