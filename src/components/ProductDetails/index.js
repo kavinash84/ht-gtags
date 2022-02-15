@@ -99,7 +99,7 @@ import Stripes from "./PdpStripe";
 const ShareIcon = require("../../../static/pdp-icons/share.png");
 import demoIcon from "../../../static/play-button.svg";
 import { BackgroundMasker } from "hometown-components-dev/lib/Shimmer";
-import PdpModal from "./PdpModal/PdpModal";
+
 import Specs from "./Specs/specs";
 import BaughtTogether from "./baughtTogether";
 import MoreOption from "./moreOption"
@@ -339,12 +339,12 @@ class ProductDetails extends React.Component {
     this.reviewRef = React.createRef();
   }
 
-  onOpenPdpModal = () => {
-    this.setState({ open: true });
-  };
-  onClosePdpModal = () => {
-    this.setState({ open: false });
-  };
+  // onOpenPdpModal = () => {
+  //   this.setState({ open: true });
+  // };
+  // onClosePdpModal = () => {
+  //   this.setState({ open: false });
+  // };
 
   componentDidMount() {
     const { dispatch } = this.context.store;
