@@ -108,7 +108,7 @@ const HdfcPopMessage = () => (
   ({
     cart,
     cart: {
- cartChecked, summary, error, loading, loaded
+ cartChecked, summary, error, loading, loaded, initialLoading
 },
     webtochat: { dismiss, cartTimeout },
     paymentoptions
@@ -118,6 +118,7 @@ const HdfcPopMessage = () => (
     isCartChecked: cartChecked,
     summary,
     error,
+    initialLoading,
     loading,
     loaded,
     dismiss,
@@ -138,7 +139,7 @@ export default class CartContainer extends Component {
     history: PropTypes.object.isRequired,
     resetCheckKey: PropTypes.func.isRequired,
     loading: PropTypes.bool,
-    // loaded: PropTypes.bool,
+    initialLoading: PropTypes.bool,
     dismiss: PropTypes.bool,
     cartTimeout: PropTypes.number.isRequired,
     toggleWebToChat: PropTypes.func.isRequired,
@@ -153,6 +154,7 @@ export default class CartContainer extends Component {
     isCartChecked: false,
     outOfStockList: [],
     loading: false,
+    initialLoading:false,
     // loaded: false,
     dismiss: false
   };
@@ -261,6 +263,7 @@ export default class CartContainer extends Component {
       summary,
       summary: { total },
       loading,
+      initialLoading,
       outOfStockList,
       bflMinAmount
     } = this.props;
@@ -297,13 +300,30 @@ export default class CartContainer extends Component {
                   type="error"
                 />
               )}
-              <Cart
+              { initialLoading ? (
+                <div
+                style={{
+                  height: "calc(100vh - 60px)",
+                  display: "flex",
+                  width: "100%",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  fontSize: "20px",
+                  fontWeight: 600
+                }}
+              >
+                Please Wait...
+              </div>
+              ) : (
+                <Cart
                 demoProductsBanner={demoProductsBanner(results)}
                 results={results}
                 summary={summary}
                 outOfStockList={outOfStockList}
                 handlePincodeModal={this.handlePincodeModal}
               />
+              )}
+             
               <Section>
                 {/* Unbxd recommended for you */}
                 <UnbxdRecommendedForYou />

@@ -140,6 +140,7 @@ const getCurrentPackage = data => {
 
 const initialState = {
   loading: false,
+  initialLoading:false,
   data: [],
   summary: {},
   packageItems: [],
@@ -161,7 +162,8 @@ export default function reducer(state = initialState, action = {}) {
     case LOAD_CART:
       return {
         ...state,
-        loading: true
+        loading: true,
+        initialLoading: true
       };
     case LOAD_CART_SUCCESS:
       return {
@@ -180,6 +182,7 @@ export default function reducer(state = initialState, action = {}) {
             : "",
         loading: false,
         loaded: true,
+        initialLoading: false,
         currentPackage: getCurrentPackage(action.result),
         packageItems: formatPackageItems(action.result),
         couponlistToggle: false
@@ -188,6 +191,7 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         loading: false,
+        initialLoading: false,
         loaded: false
       };
     case ADD_TO_CART:
