@@ -239,7 +239,7 @@ export default class PackagePDP extends Component {
                   </Stripes>
                 </Section>
                 <Section p="0px" mb="0" className={styles.custom_spec}>
-                  <div
+                  {/* <div
                     style={{
                       color: "#1d1d1d",
                       background: "rgb(249, 249, 249)",
@@ -255,8 +255,8 @@ export default class PackagePDP extends Component {
                   >
                     <span>Product Details</span>
                     <img src={ArrowDown} alt="Arrow Down" />
-                  </div>
-                  <div>
+                  </div> */}
+                  {/* <div>
                     {description && this.state.showmore && (
                       <ProductDesc
                         desc={description || ""}
@@ -265,7 +265,7 @@ export default class PackagePDP extends Component {
                         toggleShowMore={() => {}}
                       />
                     )}
-                  </div>
+                  </div> */}
                   <Specs
                     specs={groupedAttributes}
                     prodDetail={this.state.prodDetail}
