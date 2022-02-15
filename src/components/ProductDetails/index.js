@@ -1139,7 +1139,7 @@ class ProductDetails extends React.Component {
                       <Image src={offerImage} alt="" width="100%" />
                     )}
                   </Box>
-                  <Box>
+                  <Box style={{ width: "100%" }}>
                     <EmiOptions data={financeOption} />
                   </Box>
                 </Row>
