@@ -13,6 +13,7 @@ const Description = styled(Text)`
   }
   ul {
     padding-left: 15px;
+    line-height:20px;
     li {
       font-family: light;
     }
@@ -23,12 +24,12 @@ const Spec = ({ spec }) => {
   const { label, value } = spec;
   return (
     <Row display="block" m="0" pb="2px">
-      <div>
+      <div style={{ fontStyle: "normal" }}>
         {label !== "Care Instructions" &&
           label !== "Returns / Cancellation" &&
           label !== "Service Assurance / Warranty" && (
             <Div col="6">
-              <Label color="secondary" lh="1.6" fontFamily="regular">
+              <Label lh="1.6" fontFamily="regular" color=" rgba(0, 0, 0, 0.65)">
                 {label}
               </Label>
             </Div>
@@ -36,20 +37,20 @@ const Spec = ({ spec }) => {
         <Div
           col={
             label === "Care Instructions" ||
-            label === "Note" ||
-            label === "Service Assurance / Warranty" ||
-            label === "Returns / Cancellation"
+              label === "Note" ||
+              label === "Service Assurance / Warranty" ||
+              label === "Returns / Cancellation"
               ? "12"
               : "6"
           }
         >
           <Description
-            mt="5px"
-            mb="5px"
+            mt="7px"
+            mb="7px"
             itemProp="description"
             fontSize="0.875rem"
             dangerouslySetInnerHTML={{ __html: value }}
-            lh="1.6"
+            lh="1.8"
             color="rgba(0, 0, 0, 0.65)"
             fontFamily="light"
           />
