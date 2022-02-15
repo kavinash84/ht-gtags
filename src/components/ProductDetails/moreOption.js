@@ -49,7 +49,7 @@ function SamplePrevArrow(props) {
 }
 
 const adjustSlides = length => ({
-    slidesToShow: length >= 2 ? 2 : length,
+    slidesToShow: length >= 3 ? 3 : length,
     slidesToScroll: 1,
     autoplay: false,
     infinite: false,
@@ -142,7 +142,7 @@ class BaughtTogether extends React.Component {
                                                             alt="BT!"
                                                             height="100%"
 
-                                                            m="auto"
+
                                                             style={{ border: "2px solid #FAF4F2", width: "auto" }}
                                                         />
                                                     </div>
@@ -150,16 +150,21 @@ class BaughtTogether extends React.Component {
 
 
 
-                                                    <Text
-                                                        ta="left"
-                                                        fontSize="20px"
-                                                        mt="12px"
-                                                        mb="5px"
-                                                        style={{ height: "40px", fontWeight: "bold" }}
-                                                        lineHeight="1.3rem"
+                                                    <h5
+                                                        style={{
+                                                            textAlign: "left",
+                                                            fontSize: "20px",
+                                                            marginTop: "12px",
+                                                            marginBottom: "5px",
+                                                            height: "40px",
+                                                            fontWeight: "bold",
+                                                            lineHeight: "1.3rem",
+                                                            color: "#323F38"
+                                                        }}
+
                                                     >
                                                         {prod.name.split('').length > 50 ? `${prod.name.slice(0, 50)}....` : prod.name}
-                                                    </Text>
+                                                    </h5>
 
 
                                                     <Text

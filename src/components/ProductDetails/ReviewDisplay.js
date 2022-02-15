@@ -31,7 +31,7 @@ const ReviewDisplay = ({ children, labelProps, ...props }) => (
             color2="#222222"
           />
           <Label ml={10} color="#222222" fontFamilly="medium" fontSize={14} {...labelProps}>
-            {`${props.ratings}/${props.reviews}`}
+            {`${props.ratings}/${5}`}
           </Label>
           {children[0]}
         </Flex>

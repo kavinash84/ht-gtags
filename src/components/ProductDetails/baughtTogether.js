@@ -367,7 +367,7 @@ class BaughtTogether extends React.Component {
                             alt="BT!"
                             height="100%"
                             width="auto"
-                            m="auto"
+
                             style={{ border: "2px solid #FAF4F2", width: "auto" }}
                           />
                         </div>
@@ -377,7 +377,7 @@ class BaughtTogether extends React.Component {
                             position: "relative",
                             height: "250px",
                             display: "flex",
-                            justifyContent: "center"
+
                           }}
                         >
                           <Link to={prod.link}>
@@ -386,7 +386,7 @@ class BaughtTogether extends React.Component {
                               alt="BT!"
                               height="100%"
                               width="auto"
-                              m="auto"
+
                               style={{ border: "2px solid #FAF4F2", width: "auto" }}
                             />
                           </Link>
@@ -394,7 +394,15 @@ class BaughtTogether extends React.Component {
                       ) : null}
                       {prod.name ? (
                         <h5
-                          style={{ textAlign: "left", fontSize: "16px", marginTop: "12px", marginBottom: "3px", height: "40px", fontWeight: "bold", lineHeight: "1.3rem" }}
+                          style={{
+                            textAlign: "left",
+                            fontSize: "16px",
+                            marginTop: "12px",
+                            marginBottom: "3px",
+                            height: "40px",
+                            fontWeight: "bold",
+                            lineHeight: "1.3rem"
+                          }}
 
                           lineHeight="1.3rem"
                         >
@@ -405,7 +413,15 @@ class BaughtTogether extends React.Component {
                       ) : null}
                       {index !== 0 ? (
                         <h5
-                          style={{ textAlign: "left", fontSize: "16px", marginTop: "12px", marginBottom: "3px", height: "40px", fontWeight: "bold", lineHeight: "1.3rem" }}
+                          style={{
+                            textAlign: "left",
+                            fontSize: "16px",
+                            marginTop: "12px",
+                            marginBottom: "3px",
+                            height: "40px",
+                            fontWeight: "bold",
+                            lineHeight: "1.3rem"
+                          }}
                         >
                           {prod.pricing_details.coupon_code
                             ? `Offer Price: ₹ ${prod.pricing_details.offer_price}`
@@ -415,7 +431,15 @@ class BaughtTogether extends React.Component {
                         </h5>
                       ) : (
                           <h5
-                            style={{ textAlign: "left", fontSize: "16px", marginTop: "12px", marginBottom: "3px", height: "40px", fontWeight: "bold", lineHeight: "1.3rem" }}
+                            style={{
+                              textAlign: "left",
+                              fontSize: "16px",
+                              marginTop: "12px",
+                              marginBottom: "3px",
+                              height: "40px",
+                              fontWeight: "bold",
+                              lineHeight: "1.3rem"
+                            }}
                           >
                             {couponCode
                               ? `Offer Price: ₹ ${offerPrice}`
@@ -569,7 +593,7 @@ class BaughtTogether extends React.Component {
                         backgroundColor: "#E9916B",
                         borderRadius: "5px",
                         color: "white",
-                        width: "10%",
+                        width: "100%",
                         display: "block",
                         fontWeight: 600,
                         marginBottom: "20px"
