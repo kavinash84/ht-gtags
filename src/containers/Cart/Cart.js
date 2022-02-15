@@ -291,17 +291,8 @@ export default class CartContainer extends Component {
                 <Image src={CartEmptyIcon} width="initial" m="auto" alt="Sorry no results found" />
               </Empty>
             </Section>
-          ) : null}
-          {!loading && results && results.length !== 0 ? (
-            <Box className="asdfgh">
-              {outOfStockList && outOfStockList.length > 0 && (
-                <Notifications
-                  msg="One or more items in your cart are out of stock. Please remove to continue"
-                  type="error"
-                />
-              )}
-              { initialLoading ? (
-                <div
+          ) : ( initialLoading ? (
+            <div
                 style={{
                   height: "calc(100vh - 60px)",
                   display: "flex",
@@ -314,16 +305,22 @@ export default class CartContainer extends Component {
               >
                 Please Wait...
               </div>
-              ) : (
-                <Cart
+          ) : null )}
+          {!loading && results && results.length !== 0 ? (
+            <Box className="asdfgh">
+              {outOfStockList && outOfStockList.length > 0 && (
+                <Notifications
+                  msg="One or more items in your cart are out of stock. Please remove to continue"
+                  type="error"
+                />
+              )}
+              <Cart
                 demoProductsBanner={demoProductsBanner(results)}
                 results={results}
                 summary={summary}
                 outOfStockList={outOfStockList}
                 handlePincodeModal={this.handlePincodeModal}
               />
-              )}
-             
               <Section>
                 {/* Unbxd recommended for you */}
                 <UnbxdRecommendedForYou />
