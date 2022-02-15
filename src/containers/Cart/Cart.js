@@ -278,20 +278,7 @@ export default class CartContainer extends Component {
           <Header />
 
           {/* {loading && !loaded && <CartShimmer />} */}
-          {results && results.length === 0 ? (
-            <Section display="flex" padding="0.625rem" paddingTop="1.25rem" mb={0}>
-              <Empty
-                title="Your Cart is Empty!"
-                subTitle="Looks like you haven’t made your choice yet."
-                btnName="Shop Now"
-                url="/"
-                subTitleWidth="43%"
-                p="10"
-              >
-                <Image src={CartEmptyIcon} width="initial" m="auto" alt="Sorry no results found" />
-              </Empty>
-            </Section>
-          ) : ( initialLoading ? (
+          { initialLoading ? ( 
             <div
                 style={{
                   height: "calc(100vh - 60px)",
@@ -305,7 +292,22 @@ export default class CartContainer extends Component {
               >
                 Please Wait...
               </div>
-          ) : null )}
+          ) : (
+          results && results.length === 0 ? (
+            <Section display="flex" padding="0.625rem" paddingTop="1.25rem" mb={0}>
+              <Empty
+                title="Your Cart is Empty!"
+                subTitle="Looks like you haven’t made your choice yet."
+                btnName="Shop Now"
+                url="/"
+                subTitleWidth="43%"
+                p="10"
+              >
+                <Image src={CartEmptyIcon} width="initial" m="auto" alt="Sorry no results found" />
+              </Empty>
+            </Section>
+          ) 
+             : null )}
           {!loading && results && results.length !== 0 ? (
             <Box className="asdfgh">
               {outOfStockList && outOfStockList.length > 0 && (
