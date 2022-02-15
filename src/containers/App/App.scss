@@ -18,6 +18,37 @@
     border-radius: 20px;
   }
 
+    .PackageModal {
+        padding: 0;
+        width: 50%;
+        border-radius: 20px;
+        background-color: white;
+        z-index: 1000000;
+      }
+      .PackageListingModal {
+        padding: 0;
+        width: 100%;
+        background-color: white;
+        z-index: 1000000;
+        margin-bottom: 0px;
+        max-width: 100%;
+      }
+      .PackageDisplayModal {
+        padding: 0;
+        width: 100%;
+        max-width: 100%;
+        background-color: white;
+        z-index: 1000000;
+        margin-bottom: 0px;
+        .styles_closeButton__20ID4 {
+          top: 22px;
+          z-index: 2;
+        }
+      }
+      .PackageListingOverlay {
+        padding: 0px;
+      }
+
   .shadow {
     box-shadow: 0 5px 13px 0 rgba(0, 0, 0, 0.14);
   }
@@ -504,6 +535,34 @@
   }
   .pdpThumbSlider {
     padding-top: 20px;
+    .slick-prev {
+      left: -44px !important;
+      top: 78px !important;
+    }
+    .slick-next {
+      right: -44px !important;
+      top: 78px !important;
+      // transform: rotate(90deg);
+    }
+    .pdpThumbSliderItem {
+      padding: 2px 0;
+    }
+    .slick-slide {
+      border: 3px solid #fff;
+    }
+    .slick-current {
+      border: 3px solid $primary;
+      opacity: 0.8;
+    }
+    .slick-track {
+      // height: 560px !important;
+    }
+  }
+
+  .pdpThumbSlider2 {
+    padding-top: 20px;
+    width: 85%;
+    margin-left: 7%;
     .slick-prev {
       left: -44px !important;
       top: 78px !important;

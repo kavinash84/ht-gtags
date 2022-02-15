@@ -24,6 +24,8 @@ const STOP_LOADING = 'pincode/STOP_LOADING';
 const SET_PINCODE_FILTER = 'pincode/SET_PINCODE_FILTER';
 const SET_PINCODE_DETAILS = 'pincode/SET_PINCODE_DETAILS';
 
+const LOGOUT_SUCCESS = "login/LOGOUT_SUCCESS";
+
 const initialState = {
   loading: false,
   loaded: false,
@@ -139,6 +141,15 @@ export default function reducer(state = initialState, action = {}) {
         loading: false,
         loaded: true
       };
+      case LOGOUT_SUCCESS:
+              return {
+                ...state,
+                selectedPincode: "110001",
+                pincodeQuery: "",
+                city: null,
+                loading: false,
+                loaded: true
+              };
     default:
       return state;
   }

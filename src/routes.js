@@ -54,6 +54,11 @@ import SavedCards from "containers/SavedCards";
 import Wishlist from "containers/Wishlist";
 import TrackOrder from "containers/TrackOrder";
 
+//packages
+
+import PackageCatalog from "./containers/PackageCatalog";
+import oneLacPackage from "./containers/oneLacPackage";
+
 /* checkout */
 import DeliveryAddress from "containers/DeliveryAddress";
 import PaymentOptions from "containers/PaymentOptions";
@@ -240,6 +245,12 @@ const routes = [
       { path: "/reviews", exact: true, component: Review },
       { path: "/writeReview", exact: true, component: WriteReview },
       { path: "/spaces", exact: true, component: Spaces },
+      { path: "/packages", exact: true, component: oneLacPackage },
+            {
+              path: "/package-catalog/:packageid",
+              exact: true,
+              component: PackageCatalog
+            },
       { component: NotFound }
     ]
   }
