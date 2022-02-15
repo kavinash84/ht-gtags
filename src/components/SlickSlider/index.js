@@ -10,7 +10,7 @@ const defaultSettings = {
   infinite: true,
   dots: false,
   speed: 500,
-  autoplay: true,
+  autoplay: false,
   autoplaySpeed: 5000,
   pauseOnHover: true,
   lazyLoad: true
