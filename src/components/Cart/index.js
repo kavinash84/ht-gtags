@@ -383,10 +383,15 @@ const Cart = ({
                   >
                     <Box variant="col-3" pr={0}>
                       <Link
-                        to={formatProductURL(
-                          item.product_info.name,
-                          item.configurable_sku
-                        )}
+                        to={
+                          item.product_info.packageId
+                            ? `/package-catalog/${item.product_info.packageId}`
+                            : formatProductURL(
+                                item.product_info.name,
+                                item.configurable_sku
+                              )
+                        }
+          
                       >
                         <ImageShimmer
                           src={item.product_info.image}
@@ -879,10 +884,10 @@ const Cart = ({
                   )}
                 </Box>
               ) : null}
-              
-              <ProductItem  
-                 isPackage={item.product_info.packageId ? true : false}
-                      packageId={item.product_info.packageId}
+
+              <ProductItem
+                isPackage={item.product_info.packageId ? true : false}
+                packageId={item.product_info.packageId}
               />
             </Box>
           ))}
