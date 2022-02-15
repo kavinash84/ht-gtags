@@ -759,26 +759,7 @@ class ProductDetails extends React.Component {
       free_installation: freeInstallation = "no",
       swatch_image: swatchImage
     } = product;
-    // const { brand: ProductBrand } = meta;
-    const {
-      // color: ProductColor,
-      description,
-      demo_product: demoProduct = {},
-      // main_material: productMainMaterial,
-      return: returnAndCancel,
-      product_height: height,
-      product_width: width,
-      product_depth: depth,
-      care_label: careLabel,
-      product_warranty: productWarranty
 
-      // family_name: familyName,
-      // product_depth: productDepth,
-      // product_height: productHeight,
-      // product_weight: productWeight,
-      // product_width: productWidth,
-      // sku_supplier_config: skuSupplierConfig
-    } = attributes;
     const simpleSku = Object.keys(simples)[0];
     const {
       name,
@@ -1089,15 +1070,7 @@ class ProductDetails extends React.Component {
                                 </span>
                               </Div>
                             </Heading>
-                            {/* <Div pb="5px" style={{ borderBottom: 'dashed 1px #d2d2d2' }}>
-                      <span fontSize="12px" color="#626463" fontFamily="regular">
-                        ({`Extra ${couponPercentageValue}% OFF, Use Coupon `}
-                        <span fontSize="12px" color="#E9916B" fontFamily="regular" tt="uppercase">
-                          {` ${couponCode}`}
-                        </span>
-                        )
-                      </span>
-                    </Div> */}
+
                           </Div>
                         </Div>
                       ) : null}
@@ -1650,7 +1623,7 @@ class ProductDetails extends React.Component {
               style={{
                 position: 'absolute',
                 bottom: '0px',
-                height: '60%',
+                height: '70%',
                 width: "100%",
                 backgroundColor: 'white',
                 borderRadius: '5px 5px 0px 0px',

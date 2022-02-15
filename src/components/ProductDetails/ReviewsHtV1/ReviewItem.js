@@ -27,7 +27,7 @@ const ReviewsItems = ({ review, labelProps, ...props }) =>
             color2="#222222"
           />
           <Label ml={10} color="#222222" fontFamilly="medium" fontSize={14} {...labelProps}>
-            {`${props.ratings}/${props.reviews}`}
+            ({review.options[0].option_value || null})
           </Label>
           {/* {children[0]} */}
         </Row>
