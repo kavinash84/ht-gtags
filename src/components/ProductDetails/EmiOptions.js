@@ -20,7 +20,7 @@ const adjustSlides = length => ({
 function HtExclusiveTemplate4({ data }) {
   const { headerTitle, collection } = data;
   return (
-    <Div m="0px 1rem 0 0">
+    <Div m="0px 1rem 0 0" style={{ width: "100%" }}>
       <Div bg="white" py="20">
         <Heading color="grey" fontSize="15px" ta="left" mb="0">
           {headerTitle}
