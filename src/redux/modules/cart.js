@@ -39,6 +39,25 @@ const CLEAR_CART = "cart/CLEAR_CART";
 const TOGGLE_COUPON_LIST = "cart/TOGGLE_COUPON_LIST";
 const HIDE_COUPON_LIST = "cart/HIDE_COUPON_LIST";
 
+const formatCartData = data => {
+  if (Array.isArray(data)) {
+    let arr = data.map(item => {
+      return {
+        ...item,
+        product_info: {
+          ...item.product_info,
+          stock: item.stock,
+          image: item.image,
+          unit_price: parseInt(item.product_info.price),
+          net_price: parseInt(item.product_info.special_price)
+        }
+      };
+    });
+    return arr;
+  }
+  return [];
+};
+
 const checkForPackages = cartData => {
   if (Array.isArray(cartData.packages)) {
     return cartData.cart;
@@ -186,7 +205,7 @@ export default function reducer(state = initialState, action = {}) {
         couponlistToggle: false,
         data:
           action.result && "cart" in action.result
-            ? checkForPackages(action.result.cart)
+            ? formatCartData(action.result.cart.cart)
             : [],
         summary:
           action.result && "cart" in action.result
