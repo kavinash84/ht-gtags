@@ -153,7 +153,7 @@ class BaughtTogether extends React.Component {
                                                     <h5
                                                         style={{
                                                             textAlign: "left",
-                                                            fontSize: "20px",
+                                                            fontSize: "18px",
                                                             marginTop: "12px",
                                                             marginBottom: "5px",
                                                             height: "40px",
@@ -170,7 +170,7 @@ class BaughtTogether extends React.Component {
                                                     <Text
                                                         color="#F47020"
                                                         ta="left"
-                                                        fontSize="20px"
+                                                        fontSize="18px"
                                                         mt="0px"
                                                         mb="3px"
                                                         style={{ height: "30px", fontWeight: 600 }}
