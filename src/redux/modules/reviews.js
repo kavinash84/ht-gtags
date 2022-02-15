@@ -216,6 +216,7 @@ export const addReview = (sku, data) => ({
         review: data.review
       };
       const response = await client.post(`tesla/ratings/${sku}`, postData);
+
       return response;
     } catch (error) {
       throw error;
