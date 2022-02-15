@@ -394,11 +394,8 @@ class BaughtTogether extends React.Component {
                       ) : null}
                       {prod.name ? (
                         <h5
-                          ta="left"
-                          fontSize="16px"
-                          mt="12px"
-                          mb="3px"
-                          style={{ height: "40px", fontWeight: "bold" }}
+                          style={{ textAlign: "left", fontSize: "16px", marginTop: "12px", marginBottom: "3px", height: "40px", fontWeight: "bold", lineHeight: "1.3rem" }}
+
                           lineHeight="1.3rem"
                         >
                           {prod.name.split("").length > 50
@@ -408,12 +405,7 @@ class BaughtTogether extends React.Component {
                       ) : null}
                       {index !== 0 ? (
                         <h5
-                          ta="left"
-                          fontSize="16px"
-                          mt="0px"
-                          mb="3px"
-                          style={{ height: "30px", fontWeight: 600 }}
-                          lineHeight="1.3rem"
+                          style={{ textAlign: "left", fontSize: "16px", marginTop: "12px", marginBottom: "3px", height: "40px", fontWeight: "bold", lineHeight: "1.3rem" }}
                         >
                           {prod.pricing_details.coupon_code
                             ? `Offer Price: ₹ ${prod.pricing_details.offer_price}`
@@ -423,12 +415,7 @@ class BaughtTogether extends React.Component {
                         </h5>
                       ) : (
                           <h5
-                            ta="left"
-                            fontSize="12px"
-                            mt="0px"
-                            mb="3px"
-                            style={{ height: "30px", fontWeight: 600 }}
-                            lineHeight="1.3rem"
+                            style={{ textAlign: "left", fontSize: "16px", marginTop: "12px", marginBottom: "3px", height: "40px", fontWeight: "bold", lineHeight: "1.3rem" }}
                           >
                             {couponCode
                               ? `Offer Price: ₹ ${offerPrice}`

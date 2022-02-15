@@ -154,7 +154,7 @@ class BaughtTogether extends React.Component {
                                                         ta="left"
                                                         fontSize="20px"
                                                         mt="12px"
-                                                        mb="3px"
+                                                        mb="5px"
                                                         style={{ height: "40px", fontWeight: "bold" }}
                                                         lineHeight="1.3rem"
                                                     >
