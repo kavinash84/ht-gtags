@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import ResponsiveModal from "components/Modal";
-import Section from 'hometown-components-dev/lib/SectionHtV1';
+import Section from "hometown-components-dev/lib/SectionHtV1";
 import Container from "hometown-components-dev/lib/ContainerHtV1";
 import { PINCODE } from "helpers/Constants";
 import SlickSlider from "../SlickSlider";
@@ -16,20 +16,44 @@ const styles = require("./index.scss");
 const arrowForward = require("../../../static/onelacPackage/onelacTopBanner.png");
 const PackageBanner = require("../../../static/onelacPackage/onelacTopBanner.png");
 
-const adjustSlidess = (length) => ({
-  slidesToShow: length >= 3 ? 3 : length,
-  slidesToScroll: 1,
+const nextArrow = require("../../../static/new-home/roundedArrowRight.svg");
+const previousArrow = require("../../../static/new-home/roundedArrowLeft.svg");
+
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <React.Fragment>
+      <img
+        className={className}
+        src={nextArrow}
+        onClick={onClick}
+        style={{ ...style, width: "15px" }}
+      />
+    </React.Fragment>
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <React.Fragment>
+      <img
+        className={className}
+        src={previousArrow}
+        onClick={onClick}
+        style={{ ...style, width: "15px" }}
+      />
+    </React.Fragment>
+  );
+}
+
+const settings = {
+  dots: false,
   infinite: false,
   autoplay: false,
-  dots: true,
-  customPaging: i => (
-    <div
-      style={{
-        borderTop: "1px solid #848C7F"
-      }}
-    ></div>
-  )
-});
+  slidesToShow: 3,
+  slidesToScroll: 3
+};
 
 @connect(({ userLogin, lackpackages, pincode }) => ({
   packages_data: lackpackages.packages_data,
@@ -94,11 +118,20 @@ export default class OneLacPackage extends Component {
             <PackageBreadCrumb isPacakge={false} />
           </div>
           <Section mb="0px" p="0px" pr="0px" pl="0px" mt="0px">
-            <Container type="container" pr="0px" pl="0px" style={{maxWidth:'2000px'}}>
+            <Container
+              type="container"
+              pr="0px"
+              pl="0px"
+              style={{ maxWidth: "2000px" }}
+            >
               <DeliveryAddress />
             </Container>
           </Section>
-          <img src={packages_data.banner} alt="Banner" style={{width: "100%", height: "450px"}}/>
+          <img
+            src={packages_data.banner}
+            alt="Banner"
+            style={{ width: "100%", height: "450px" }}
+          />
           <div
             style={{
               textAlign: "center",
@@ -122,16 +155,22 @@ export default class OneLacPackage extends Component {
             Select Your Packages
           </div>
           <div
-             style={{
-                  width: "30px",
-                  borderTop: "2px solid #222222",
-                  margin: "auto",
-                  marginBottom: "40px",
-                  marginTop: "20px"
-                }}
+            style={{
+              width: "30px",
+              borderTop: "2px solid #222222",
+              margin: "auto",
+              marginBottom: "40px",
+              marginTop: "20px"
+            }}
+          ></div>
+          <div
+            style={{
+              display: "flex",
+              marginLeft: "9%",
+              marginRight: "9%",
+              fontSize: "20px"
+            }}
           >
-          </div>
-          <div style={{ display: "flex", marginLeft: "9%", marginRight: "9%", fontSize:"20px"}}>
             {packages_data.tabs.map((item, i) => {
               if (Array.isArray(item.package) && item.package.length) {
                 return (
@@ -141,7 +180,7 @@ export default class OneLacPackage extends Component {
                         ? styles.activeTabContainer
                         : styles.tabContainer
                     }
-                    style={{marginLeft:"30px", cursor: "pointer"}}
+                    style={{ marginLeft: "30px", cursor: "pointer" }}
                   >
                     <div
                       className={
@@ -157,33 +196,40 @@ export default class OneLacPackage extends Component {
             })}
           </div>
           <div
-          className="carousel-one"
+            className="carousel-one"
             style={{ background: "#FFF8F4", width: "100%", padding: "30px" }}
           >
-            
-              <SlickSlider settings={adjustSlidess}>
-              {packages_data.tabs[activeTab].package.map(pack => (
-                <div style={{ marginBottom: "20px" }}>
-                  <img
-                    src={PackageBanner}
-                    alt="Banner"
-                    onClick={() => this.handleBannerClick(true, pack.id)}
-                    style={{cursor:'pointer'}}
-                  />
-                  {pack.pseudoItemsCount ? (
-                    <div
-                      className={styles.slectedStatus}
+            <div style={{ width: "80%", marginLeft: "10%" }}>
+              <SlickSlider
+                settings={{
+                  ...settings,
+                  nextArrow: <SampleNextArrow />,
+                  prevArrow: <SamplePrevArrow />
+                }}
+              >
+                {packages_data.tabs[activeTab].package.map(pack => (
+                  <div style={{ marginBottom: "30px" }}>
+                    <img
+                      src={PackageBanner}
+                      alt="Banner"
                       onClick={() => this.handleBannerClick(true, pack.id)}
-                    >
-                      <div>
-                        {pack.pseudoItemsCount}/{pack.totalQty} Products Saved
+                      style={{ cursor: "pointer", height: "250px" , width:'90%' }}
+                    />
+                    {pack.pseudoItemsCount ? (
+                      <div
+                        className={styles.slectedStatus}
+                        onClick={() => this.handleBannerClick(true, pack.id)}
+                      >
+                        <div>
+                          {pack.pseudoItemsCount}/{pack.totalQty} Products Saved
+                        </div>
+                        <div>View All</div>
                       </div>
-                      <div>View All</div>
-                    </div>
-                  ) : null}
-                </div>
-              ))}
-            </SlickSlider>
+                    ) : null}
+                  </div>
+                ))}
+              </SlickSlider>
+            </div>
           </div>
         </div>
         <ResponsiveModal

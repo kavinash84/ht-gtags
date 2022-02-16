@@ -415,10 +415,14 @@ const Cart = ({
                     </Box>
                     <Box variant="col-5" pl={30}>
                       <Link
-                        to={formatProductURL(
-                          item.product_info.name,
-                          item.configurable_sku
-                        )}
+                         to={
+                          item.product_info.packageId
+                            ? `/package-catalog/${item.product_info.packageId}`
+                            : formatProductURL(
+                                item.product_info.name,
+                                item.configurable_sku
+                              )
+                        }
                       >
                         <Box mb={10}>
                           <Heading

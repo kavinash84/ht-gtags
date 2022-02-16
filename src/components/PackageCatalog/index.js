@@ -122,8 +122,9 @@ export default class PackageCatalog extends Component {
       dispatch(savePackageCatalog(postData));
     } else {
       history.push(`/login/?redirect=${checkRedirection(router.location)}`);
-      dispatch(toggleSavePostLogin(true));
+      dispatch(toggleSavePostLogin(false));
     }
+    console.log(router ,'router');
   };
 
   handleDeletePackage = () => {
