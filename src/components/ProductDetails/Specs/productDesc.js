@@ -42,14 +42,10 @@ const ProductDesc = ({ desc, showmore, toggleShowMore }) => {
             col="12"
             className={desc.length > 120 && showmore ? "showLess" : "showmore"}
           >
-            <h6 style={{marginTop:"0px", fontSize="1em", fontFamily="light"}}>
+            <h6 style={{ marginTop: "0px", fontSize="1em", fontFamily="light" }}>
               Description
             </h6>
-            <Description
-              itemProp="description"
-              fontSize="0.875rem"
-              dangerouslySetInnerHTML={{ __html: desc }}
-            />
+
           </Div>
           {desc.length > 120 && (
             <Button
