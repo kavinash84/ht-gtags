@@ -8,7 +8,7 @@ import Heading from "hometown-components-dev/lib/HeadingHtV1";
 // import Text from 'components/Text';
 import Section from 'hometown-components-dev/lib/SectionHtV1';
 import Button from "hometown-components-dev/lib/ButtonHtV1";
-import Theme from 'hometown-components/lib/Theme';
+// import Theme from 'hometown-components/lib/Theme';
 
 const formatDescription = desc => {
   desc.split('<br>').join('').split('&nbsp;').join('');
