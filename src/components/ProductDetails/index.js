@@ -1098,7 +1098,8 @@ class ProductDetails extends React.Component {
                               style={{
                                 color: "#E9916B",
                                 fontSize: "16px",
-                                marginBottom: "10px"
+                                marginBottom: "10px",
+                                marginTop: "10px"
                               }}
                             >
                               {` Extra ${Math.round(

@@ -45,7 +45,7 @@ const ImgWrapper = styled.div`
 // `;
 
 const ColorOptions = styled(Div)`
-  max-height: 150px;
+  max-height: 115px;
   overflow:hidden;
   ${props =>
     props.active && {
@@ -83,15 +83,17 @@ const ColorOption = ({
       {data.length > 5 && (
         <Div>
           <Button
+            fontSize="13px"
+            backgroundColor="#ffffff"
             btnType="link"
             size="block"
             ta="right"
-            color="#f98d29"
+            color="#222222"
             pt="15px"
             pr="64px"
             onClick={toggleShowMoreColorProducts}
           >
-            {showmorecolorproducts ? "Show More Products" : "Show Less"}
+            {showmorecolorproducts ? "Show More" : "Show Less"}
           </Button>
         </Div>
       )}
