@@ -67,7 +67,7 @@ import Img from "hometown-components-dev/lib/ImageHtV1";
 // import AddReview from 'hometown-components-dev/lib/ReviewsHtV1/WriteReview';
 import ColorOption from "./ColorOption";
 import CombinedBuy from "components/CombinedBuy";
-import ProductDesc from "./ProductDesc";
+import ProductDesc from "./Specs/productDesc";
 import ProductCarousel from "components/ProductCarousel";
 import ResponsiveModal from "components/Modal";
 import ResponsiveVideoModal from "components/Modal/ResponsiveVideoModal";
@@ -1376,16 +1376,15 @@ class ProductDetails extends React.Component {
                   ) : null}
                 </Div>
                 <div>
-
+                  <ProductDesc
+                    desc={description || ""}
+                  />
                   <Specs
                     specs={groupedAttributes}
                     prodDetail={true}
                     pincode={pincode.selectedPincode}
                   />
-                  <ProductDesc
-                    desc={description || ""}
 
-                  />
                   <div
                     style={{
                       display: "flex",
