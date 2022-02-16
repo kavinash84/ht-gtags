@@ -132,7 +132,7 @@ export default class PackagePDP extends Component {
                   <PackageDetailSlider data={carosalData} />
                 </Section>
               </div>
-              <div style={{width:'50%', marginLeft:'3%', marginRight:'5%'}}>
+              <div style={{width:'50%', marginLeft:'1%', marginRight:'5%'}}>
                 <Section p="10px 20px" mb="0">
                   <div style={{ padding: "25px 0px 20px 0px" }}>
                     <h3 style={{ lineHeight: "30px"}} className={styles.prod_title}>{name}</h3>

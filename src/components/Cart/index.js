@@ -641,7 +641,7 @@ const Cart = ({
                       </Box>
                     )} */}
                     </Box>
-                    {item.product_info.packageId ? null : (
+                    {item.product_info.packageId ? (nbsp) : (
                       <Box variant="col-2" textAlign="center">
                         <ProductQuantity
                           cartItemLoading={cartItemLoading}
