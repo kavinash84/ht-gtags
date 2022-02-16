@@ -9,8 +9,7 @@ import ProductDesc from "hometown-components-dev/lib/ProductDetailsHtV1/ProductD
 import { formatAmount } from "utils/formatters";
 import Specs from "./Specs/specs";
 import Stripes from "../ProductDetails/PdpStripe";
-// import PackageDetailSlider from "./Carousel";
-import NewSlider from "./NewCarousel";
+import PackageDetailSlider from "./Carousel";
 
 const styles = require("./index.scss");
 const ArrowDown = require("../../../static/onelacPackage/arrowDown.svg");
@@ -114,12 +113,7 @@ export default class PackagePDP extends Component {
     const checkSpecialPrice = Number(specialPrice) || Number(price);
     const isEmiAvailable = Number(checkSpecialPrice) >= EMI_THRESHOLD;
     const isFurniture = categories.split("|").includes("131");
-    // const carosalData = images.map(item => {
-    //   return {
-    //     image: `${item.url}-catalog_360.jpg`,
-    //     m_image: `${item.url}-catalog_360.jpg`
-    //   };
-    // });
+
     const carosalData = images.map( item=> {
       return {
         url: `${item.url}`,
@@ -135,9 +129,7 @@ export default class PackagePDP extends Component {
             <div style={{display:'flex', width: '100%'}}>
               <div style={{width:'50%', marginLeft: '3%'}}>
                 <Section p="0" m="0">
-                  {/* <PackageDetailSlider data={carosalData} /> */}
-                  <NewSlider data={carosalData}/>
-                 
+                  <PackageDetailSlider data={carosalData} />
                 </Section>
               </div>
               <div style={{width:'50%', marginLeft:'3%', marginRight:'5%'}}>
