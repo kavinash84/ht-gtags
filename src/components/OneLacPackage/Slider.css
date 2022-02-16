@@ -27,3 +27,6 @@
   height: 80px !important;
   width: 80px !important;
 }
+.slick-prev{
+  margin-left: -30px !important;
+}
