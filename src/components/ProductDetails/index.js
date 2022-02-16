@@ -1097,7 +1097,8 @@ class ProductDetails extends React.Component {
                             <div
                               style={{
                                 color: "#E9916B",
-                                fontSize: "16px"
+                                fontSize: "16px",
+                                marginBottom: "10px"
                               }}
                             >
                               {` Extra ${Math.round(
@@ -1164,21 +1165,7 @@ class ProductDetails extends React.Component {
                   />
                 </Stripes>
                 {/* discount text */}
-                <div ht_wallet_cashback={ht_wallet_cashback}>
-                  {ht_wallet_cashback ? (
-                    <div
-                      style={{
-                        color: "#E9916B",
-                        fontSize: "16px",
-                        paddingTop: "15px"
-                      }}
-                    >
-                      {` Extra ${Math.round(
-                        ht_wallet_cashback
-                      )}% HT wallet cashback`}
-                    </div>
-                  ) : null}
-                </div>
+
                 {/* Pincode */}
                 {!(
                   simples[simpleSku].meta.quantity &&
@@ -1415,7 +1402,7 @@ class ProductDetails extends React.Component {
                       this.setState({ showReviews: !this.state.showReviews });
                     }}
                   >
-                    <h4 style={{ color: "#222222" }}>Reviews </h4>
+                    <h4 style={{ color: "rgba(0, 0, 0, 0.65)" }}>Reviews </h4>
 
 
                     <div>
