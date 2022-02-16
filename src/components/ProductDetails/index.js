@@ -93,7 +93,7 @@ import Pincode from "./Pincode";
 import ProductDetailsCarousel from "./Carousel";
 import Video from "./Video";
 import ReviewFilter from "./ReviewFilter";
-// import UnbxdCompleteTheLook from './UnbxdCompleteTheLook';
+import UnbxdCompleteTheLook from './UnbxdCompleteTheLook';
 import FreebieProduct from "./FreebieProduct";
 import Stripes from "./PdpStripe";
 const ShareIcon = require("../../../static/pdp-icons/share.png");
@@ -649,7 +649,7 @@ class ProductDetails extends React.Component {
             inline: "nearest"
           });
       }, 3000);
-      console.log(id, tabElement[`${id}`], "id for tabElement");
+      // console.log(id, tabElement[`${id}`], "id for tabElement");
       this.setState({
         activeSpec: tabElement[`${id}`].tableName,
         activeDescription: tabElement[`${id}`].tabComponent
@@ -723,7 +723,7 @@ class ProductDetails extends React.Component {
       bflMinAmount,
       financeOption
     } = this.props;
-    console.log("yass-salman", this.state);
+
     const {
       activeSpec,
       showReviews,
@@ -1416,13 +1416,7 @@ class ProductDetails extends React.Component {
                         count={5}
                         style={{ marginTop: '10px' }}
                       >
-                        {/* 
-                        {reviewsData.length > 0 && (
-                          <ReviewFilter
-                            selectedFilterProp={selectedFilter}
-                            onFilterChange={this.onFilterChange}
-                          />
-                        )} */}
+
                         {this.state.showReviews ? (
 
                           <Image src={DownArrow} style={{ marginLeft: "10px" }} />
@@ -1473,7 +1467,7 @@ class ProductDetails extends React.Component {
                                     feedBackError={nameError}
                                     feedBackMessage={nameErrorMessage}
                                     onChange={this.handleChange}
-                                    // ref={(nameInp) => this.myInp = nameInp}
+
                                     style={{ border: "1px solid #E3E3E3", fontSize: "12px", borderRadius: "5px" }}
                                   />
                                 </Box>
@@ -1567,8 +1561,13 @@ class ProductDetails extends React.Component {
             <LazyLoad height={150}>
               <BaughtTogether prodQty={prodQty} />
             </LazyLoad>
+
+
+
             {/* Complete the look */}
-            {/* <UnbxdCompleteTheLook configId={configId} /> */}
+            <UnbxdCompleteTheLook configId={configId} />
+
+
             {/* Related Products List */}
             {relatedproductsList.length > 0 && (
               <Row py={36}>

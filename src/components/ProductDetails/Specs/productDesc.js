@@ -36,7 +36,7 @@ const ProductDesc = ({ desc, showmore, toggleShowMore }) => {
   desc = formatDescription(desc);
   return (
     <Section mb="0.3125rem" pr="0" pl="0" pt="0" mt="0">
-      <Container type="container" pr="1rem" pl="1rem">
+      <Container type="container" pr="1rem" pl="0">
         <Row display="block" mb="0" mr="0" ml="0">
           <Div col="12" className={(desc.length > 120 && showmore) ? 'showLess' : 'showmore'}>
 
