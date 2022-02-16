@@ -3,17 +3,14 @@ import { connect } from "react-redux";
 import Section from "hometown-components-dev/lib/SectionHtV1";
 import PropTypes from "prop-types";
 import Text from "hometown-components-dev/lib/TextHtV1";
-// import Span from "hometown-components/lib/Span";
 import { calculateLowestEmi } from "utils/helper";
-// import EmiModal from "containers/EmiModal/EmiModal";
 import { EMI_THRESHOLD } from "helpers/Constants";
 import ProductDesc from "hometown-components-dev/lib/ProductDetailsHtV1/ProductDesc";
 import { formatAmount } from "utils/formatters";
-// import Specs from "hometown-components-dev/lib/ProductDetailsHtV1/Specs";
 import Specs from "./Specs/specs";
 import Stripes from "../ProductDetails/PdpStripe";
-import PackageDetailSlider from "./Carousel";
-// import MainFurnitureSlider from "../furnitureCategories/mainSlider";
+// import PackageDetailSlider from "./Carousel";
+import NewSlider from "./NewCarousel";
 
 const styles = require("./index.scss");
 const ArrowDown = require("../../../static/onelacPackage/arrowDown.svg");
@@ -117,12 +114,20 @@ export default class PackagePDP extends Component {
     const checkSpecialPrice = Number(specialPrice) || Number(price);
     const isEmiAvailable = Number(checkSpecialPrice) >= EMI_THRESHOLD;
     const isFurniture = categories.split("|").includes("131");
-    const carosalData = images.map(item => {
+    // const carosalData = images.map(item => {
+    //   return {
+    //     image: `${item.url}-catalog_360.jpg`,
+    //     m_image: `${item.url}-catalog_360.jpg`
+    //   };
+    // });
+    const carosalData = images.map( item=> {
       return {
-        image: `${item.url}-catalog_360.jpg`,
-        m_image: `${item.url}-catalog_360.jpg`
+        url: `${item.url}`,
+        title: '',
+        id_catalog_product_image:item.image
       };
     });
+    console.log(carosalData, 'data')
     return (
       <div className={styles.package_pdp_container}>
         {packageCatalog.categories && (
@@ -130,7 +135,9 @@ export default class PackagePDP extends Component {
             <div style={{display:'flex', width: '100%'}}>
               <div style={{width:'50%', marginLeft: '3%'}}>
                 <Section p="0" m="0">
-                  <PackageDetailSlider data={carosalData} />
+                  {/* <PackageDetailSlider data={carosalData} /> */}
+                  <NewSlider data={carosalData}/>
+                 
                 </Section>
               </div>
               <div style={{width:'50%', marginLeft:'3%', marginRight:'5%'}}>

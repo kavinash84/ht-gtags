@@ -13,7 +13,7 @@ const CategoryItem = ({ image, name }) => (
     {(imageURL, error) => {
       if (error) return <Image alt={name} src={imageURL} height={[300, 300, 400, 545]} />;
       return (
-        <ReactImageMagnify
+        {/* <ReactImageMagnify
           {...{
             smallImage: {
               alt: name,
@@ -33,7 +33,7 @@ const CategoryItem = ({ image, name }) => (
             },
             enlargedImageContainerClassName: 'enlarge'
           }}
-        />
+        /> */}
       );
     }}
   </ImageShimmer>
