@@ -38,7 +38,7 @@ const ReviewDisplay = ({ children, labelProps, ...props }) => (
       )
       : (
         <Flex alignItems="center">
-          <Label ml={10} color="heading" fontSize={14} {...labelProps}>
+          <Label ml={10} color="#666666" fontSize={14} {...labelProps}>
             No Reviews
           </Label>
         </Flex>

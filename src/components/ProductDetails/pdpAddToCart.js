@@ -121,43 +121,19 @@ const AddToCart = ({
                 // variant={`outline.primary.${size}`}
                 variant="outline.primary.large"
                 height={height}
-                disabled={addLoading && selectedSku === sku}
-                onClick={e => {
-                  if (quantityChange && updateQty !== 0 && checkStatus) {
-                    const handler = onClick(
-                      cartId,
-                      sku,
-                      simpleSku,
-                      session,
-                      pincode,
-                      configId,
-                      updateQty
-                    )(updateCart);
-                    handler(e);
-                  } else {
-                    const handler = onClick(
-                      itemId,
-                      sku,
-                      simpleSku,
-                      session,
-                      pincode,
-                      configId,
-                      quantity
-                    )(addToCart);
-                    handler(e);
-                  }
-                }}
+                disabled={addLoading}
+                onClick={onClick(itemId, sku, simpleSku, session, pincode, configId, quantity)(addToCart)}
                 sx={{
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center"
                 }}
               >
-                {addLoading && selectedSku === sku && (
+                {/* {addLoading && selectedSku === sku && (
                   <Image className="spin" src={LoaderIcon} width="18px" mr={10} />
-                )}
+                )} */}
                 {/* {console.log(shouldLoad, 'asdasdasdasd')} */}
-                {addLoading && selectedSku === sku ? "Adding..." : "Add to Cart"}
+                {addLoading ? "Adding..." : "Add to Cart"}
               </Button>
             ) : (
                 <Row mx={0} alignItems="center">

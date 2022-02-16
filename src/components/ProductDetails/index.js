@@ -1200,7 +1200,7 @@ class ProductDetails extends React.Component {
                   loading={deliveryDateLoading}
                   shippingCharge={meta.shipping_charge}
                 >
-
+                    <Pincode key="pincode" />
 
                   </ServiceDetails>}
 
@@ -1522,7 +1522,7 @@ class ProductDetails extends React.Component {
                                       size={25}
                                       value={this.state.rating}
                                       half={false}
-                                      color2="#ffd700"
+                                      color2="#222222"
                                     />
                                   </div>
                                   <Box>

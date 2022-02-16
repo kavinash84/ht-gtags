@@ -26,16 +26,16 @@ const ReviewsItems = ({ review, labelProps, ...props }) =>
             edit={false}
             color2="#222222"
           />
-          <Label ml={10} color="#222222" fontFamilly="medium" fontSize={14} {...labelProps}>
+          <Label ml={10} color="#666666" fontFamilly="medium" fontSize={14} {...labelProps}>
             ({review.options[0].option_value || null})
           </Label>
           {/* {children[0]} */}
         </Row>
-        <Heading variant="heading.small" fontWeight="normal" fontSize={[14, 16, 16]} color="black" pb={5}>
+        <Heading variant="heading.small" fontWeight="normal" fontSize={[14, 16, 16]} color="#666666" pb={5}>
           {review.nickname || review.customer_name || null}
         </Heading>
         <Text
-          color="black"
+          color="#666666"
           variant="small"
           lineHeight={1.5}
           fontSize={[12, 14, 14]}
