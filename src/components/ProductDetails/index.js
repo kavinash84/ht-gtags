@@ -67,7 +67,7 @@ import Img from "hometown-components-dev/lib/ImageHtV1";
 // import AddReview from 'hometown-components-dev/lib/ReviewsHtV1/WriteReview';
 import ColorOption from "./ColorOption";
 import CombinedBuy from "components/CombinedBuy";
-import ProductDesc from "hometown-components-dev/lib/ProductDetailsHtV1/ProductDesc";
+import ProductDesc from "./ProductDesc";
 import ProductCarousel from "components/ProductCarousel";
 import ResponsiveModal from "components/Modal";
 import ResponsiveVideoModal from "components/Modal/ResponsiveVideoModal";
@@ -758,7 +758,7 @@ class ProductDetails extends React.Component {
       free_installation: freeInstallation = "no",
       swatch_image: swatchImage
     } = product;
-
+    const { description, demo_product: demoProduct = {} } = attributes;
     const simpleSku = Object.keys(simples)[0];
     const {
       name,
@@ -1376,12 +1376,16 @@ class ProductDetails extends React.Component {
                   ) : null}
                 </Div>
                 <div>
+
                   <Specs
                     specs={groupedAttributes}
                     prodDetail={true}
                     pincode={pincode.selectedPincode}
                   />
+                  <ProductDesc
+                    desc={description || ""}
 
+                  />
                   <div
                     style={{
                       display: "flex",
