@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import ResponsiveModal from "components/Modal";
 // import Container from "hometown-components/lib/Container";
-import Section from 'hometown-components-dev/lib/SectionHtV1';
+import Section from "hometown-components-dev/lib/SectionHtV1";
 import { checkRedirection } from "utils/helper";
 // import ReviewMenu from "../ReviewMenu";
 // import BreadCrumb from "../../containers/Category/BreadCrumb";
@@ -121,29 +121,16 @@ export default class PackageCatalog extends Component {
     if (isLoggedIn) {
       dispatch(savePackageCatalog(postData));
     } else {
-      history.push(`/login/?redirect=${checkRedirection(router.location)}`);
+      history.push(
+        `/login/?redirect=${checkRedirection(router.location).pathname}`
+      );
       dispatch(toggleSavePostLogin(false));
     }
-    console.log(router ,'router');
   };
 
   handleDeletePackage = () => {
     const { history } = this.props;
     history.push(`/checkout/cart`);
-    // const { dispatch } = this.context.store;
-    // const { cartPackage, selectedPincode, packageItems } = this.props;
-    // const skus = packageItems.map(item => {
-    //   return { simple_sku: item.simpleSku, qty: 1 };
-    // });
-    // const cartId = {
-    //   skuData: skus,
-    //   packageId: cartPackage
-    // };
-    // const sessionId = "";
-    // const qty = 1;
-    // const configId = cartPackage;
-    // const pincode = selectedPincode;
-    // dispatch(removeFromCart(cartId, sessionId, pincode, qty, configId));
   };
 
   handlePreProceed = () => {
@@ -327,7 +314,10 @@ export default class PackageCatalog extends Component {
       <div className="wrapper">
         <div className={styles.PackageCatalogContainer}>
           {/* <ReviewMenu backBtn={true} menuIcon={false} /> */}
-          <div className={BreadCrumpstyles.BreadCrumb_wrapper2} style={{marginTop:"0"}}>
+          <div
+            className={BreadCrumpstyles.BreadCrumb_wrapper2}
+            style={{ marginTop: "0" }}
+          >
             <PackageBreadCrumb isPacakge={true} />
           </div>
           {/* <Section mb="0px" p="0px" pr="0px" pl="0px">
@@ -335,107 +325,122 @@ export default class PackageCatalog extends Component {
               <DeliveryAddress />
             </Container>
           </Section> */}
-          <div style={{display:"flex", width: "100%", backgroundColor:"#FFF8F4"}}>
-          <Section
-            p="0"
-            m="0"
+          <div
             style={{
               display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              width: "40%",
-              marginLeft:"10%",
-              marginBottom:"40px",
-              marginTop:"20px"
+              width: "100%",
+              backgroundColor: "#FFF8F4"
             }}
           >
-            {/* <MainFurnitureSlider data={carosalData} mb="0" /> */}
-            <img src={packageCatalog.images} alt="Banner" style={{width:'100%'}}/>
-          </Section>
-          <Section
-            style={{ padding: "0px 50px", zIndex: 1 , marginTop:"20px"}}
-            className={styles.PackageCatalog_info_container}
-            mb="0"
-          >
-            <div
+            <Section
+              p="0"
+              m="0"
               style={{
-                color: "#323131",
-                fontSize: "28px",
-                fontWeight: 600,
-                marginBottom: "20px"
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "40%",
+                marginLeft: "10%",
+                marginBottom: "40px",
+                marginTop: "20px"
               }}
             >
-              {packageCatalog.title}
-            </div>
-            <div
-              style={{ color: "#323131", fontSize: "18px", fontWeight: 600 , marginBottom:"20px"}}
+              {/* <MainFurnitureSlider data={carosalData} mb="0" /> */}
+              <img
+                src={packageCatalog.images}
+                alt="Banner"
+                style={{ width: "100%" }}
+              />
+            </Section>
+            <Section
+              style={{ padding: "0px 50px", zIndex: 1, marginTop: "20px" }}
+              className={styles.PackageCatalog_info_container}
+              mb="0"
             >
-              {packageCatalog.subtitle}
-            </div>
-            <div
-              style={{
-                color: "#E9916B",
-                fontSize: "22px",
-                fontWeight: 600,
-                margin: "10px 0px"
-              }}
-            >
-              ₹{packageCatalog.price}{" "}
-              <span
+              <div
                 style={{
-                  color: "#999999",
-                  fontSize: "18px"
+                  color: "#323131",
+                  fontSize: "28px",
+                  fontWeight: 600,
+                  marginBottom: "20px"
                 }}
               >
-                (inclusive of taxes)
-              </span>
-            </div>
-            <div>
+                {packageCatalog.title}
+              </div>
+              <div
+                style={{
+                  color: "#323131",
+                  fontSize: "18px",
+                  fontWeight: 600,
+                  marginBottom: "20px"
+                }}
+              >
+                {packageCatalog.subtitle}
+              </div>
+              <div
+                style={{
+                  color: "#E9916B",
+                  fontSize: "22px",
+                  fontWeight: 600,
+                  margin: "10px 0px"
+                }}
+              >
+                ₹{packageCatalog.price}{" "}
+                <span
+                  style={{
+                    color: "#999999",
+                    fontSize: "18px"
+                  }}
+                >
+                  (inclusive of taxes)
+                </span>
+              </div>
+              <div>
+                {Array.isArray(packageCatalog.emiOptions) &&
+                  packageCatalog.emiOptions.length && (
+                    <div>
+                      <div
+                        style={{
+                          color: "#605F5F",
+                          fontSize: "18px",
+                          fontWeight: 600,
+                          marginTop: "15px"
+                        }}
+                      >
+                        Emi Options
+                      </div>
+                      <div
+                        style={{
+                          marginTop: "10px",
+                          fontSize: "15px",
+                          color: "#605F5F",
+                          maxHeight: "50px",
+                          overflow: "auto"
+                        }}
+                      >
+                        {packageCatalog.emiOptions.map((item, i) => {
+                          if (!i) return <div>{item.mobile}</div>;
+                        })}
+                      </div>
+                    </div>
+                  )}
+              </div>
               {Array.isArray(packageCatalog.emiOptions) &&
                 packageCatalog.emiOptions.length && (
-                  <div>
-                    <div
+                  <div style={{ marginTop: "25px" }}>
+                    <span
                       style={{
                         color: "#605F5F",
-                        fontSize: "18px",
-                        fontWeight: 600,
-                        marginTop: "15px"
-                      }}
-                    >
-                      Emi Options
-                    </div>
-                    <div
-                      style={{
-                        marginTop: "10px",
                         fontSize: "15px",
-                        color: "#605F5F",
-                        maxHeight: "50px",
-                        overflow: "auto"
+                        cursor: "pointer"
                       }}
+                      onClick={this.handleModal}
                     >
-                      {packageCatalog.emiOptions.map((item, i) => {
-                        if (!i) return <div>{item.mobile}</div>;
-                      })}
-                    </div>
+                      More info {`>`}
+                    </span>
                   </div>
                 )}
-            </div>
-            {Array.isArray(packageCatalog.emiOptions) &&
-              packageCatalog.emiOptions.length && (
-                <div style={{marginTop: "25px"}}>
-                  <span
-                    style={{
-                      color: "#605F5F",
-                      fontSize: "15px",
-                      cursor: "pointer"
-                    }}
-                    onClick={this.handleModal}
-                  >
-                    More info {`>`}
-                  </span>
-                </div>
-              )}
-          </Section>
+            </Section>
           </div>
           {packageCatalog.categories.map((catItem, i) => (
             <Catagories
@@ -446,7 +451,7 @@ export default class PackageCatalog extends Component {
           ))}
         </div>
         <div className={styles.package_bottom_fixed}>
-          <div style={{ marginLeft:'10%', padding:'40px 10px 40px'}}>
+          <div style={{ marginLeft: "10%", padding: "40px 10px 40px" }}>
             <span>{this.state.totalSelected}</span>/{packageCatalog.totalQty}{" "}
             Items Selected
           </div>
@@ -455,7 +460,10 @@ export default class PackageCatalog extends Component {
               disabled={!this.state.totalSelected}
               className={styles.saveBtn}
               onClick={this.handleSave}
-              style={{ opacity: !this.state.totalSelected ? "0.5" : "1" , cursor: "pointer"}}
+              style={{
+                opacity: !this.state.totalSelected ? "0.5" : "1",
+                cursor: "pointer"
+              }}
             >
               Save
             </button>
@@ -474,8 +482,11 @@ export default class PackageCatalog extends Component {
                   this.state.totalSelected !== packageCatalog.totalQty
                     ? "1.5"
                     : "2",
-                    cursor: "pointer",
-                    backgroundColor: this.state.totalSelected !== packageCatalog.totalQty ? "#F2F2F2" : "#ea9671"
+                cursor: "pointer",
+                backgroundColor:
+                  this.state.totalSelected !== packageCatalog.totalQty
+                    ? "#F2F2F2"
+                    : "#ea9671"
               }}
             >
               {proceedLoader ? "Loading..." : "Proceed"}

@@ -60,9 +60,9 @@ const formatCartData = data => {
 
 const checkForPackages = cartData => {
   if (Array.isArray(cartData.packages)) {
-    return cartData.cart;
+    return formatCartData(cartData.cart);
   } else if (cartData.packages && Object.keys(cartData.packages).length === 0) {
-    return cartData.cart;
+    return formatCartData(cartData.cart);
   } else {
     let arrayOfObj = Object.values(cartData.packages).map(item => {
       return {
@@ -109,7 +109,7 @@ const checkForPackages = cartData => {
         updated_at: ""
       };
     });
-    return [...cartData.cart, ...arrayOfObj];
+    return [...formatCartData(cartData.cart), ...arrayOfObj];
   }
 };
 
@@ -140,7 +140,7 @@ const getCurrentPackage = data => {
 
 const initialState = {
   loading: false,
-  initialLoading:false,
+  initialLoading: false,
   data: [],
   summary: {},
   packageItems: [],
@@ -207,9 +207,13 @@ export default function reducer(state = initialState, action = {}) {
         addedToCart: true,
         quantityChange: false,
         couponlistToggle: false,
+        // data:
+        //   action.result && "cart" in action.result
+        //     ? formatCartData(action.result.cart.cart)
+        //     : [],
         data:
           action.result && "cart" in action.result
-            ? formatCartData(action.result.cart.cart)
+            ? checkForPackages({...action.result.cart , packages:action.result.packages , packageItems: action.result.packageItems})
             : [],
         summary:
           action.result && "cart" in action.result
