@@ -49,7 +49,7 @@ export default class PackageDetailSlider extends Component {
             afterChange={currentSlide => {
               console.log('after in slider1', currentSlide);
             }}
-            style={{width: '80%', marginLeft:'10%', marginTop:'30px'}}
+            style={{width: '80%', marginLeft:'10%', marginTop:'30px', marginBottom:'-60px'}}
           >
             {data.map(slide => (
               <Box  key={slide.id_catalog_product_image} style={{marginTop:'30px'}}>
