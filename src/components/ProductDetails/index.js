@@ -1207,7 +1207,7 @@ class ProductDetails extends React.Component {
                     }}
                   >
                     <BuyNow
-                      quantity={productQty.value || 1}
+                      quantity={this.state.prodQty || 1}
                       simpleSku={simpleSku}
                       sku={sku}
                       size="block"
@@ -1273,7 +1273,7 @@ class ProductDetails extends React.Component {
                     <AddToCart
                       skuItem={skuItem}
                       quantityChange={quantityChange}
-                      quantity={productQty.value || 1}
+                      quantity={this.state.prodQty || 1}
                       simpleSku={simpleSku}
                       sku={sku}
                       configId={configId}
@@ -1376,10 +1376,9 @@ class ProductDetails extends React.Component {
                   ) : null}
                 </Div>
                 <div>
-                  <ProductDesc
-                    desc={description || ""}
-                  />
+
                   <Specs
+                    desc={description || ""}
                     specs={groupedAttributes}
                     prodDetail={true}
                     pincode={pincode.selectedPincode}

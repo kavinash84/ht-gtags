@@ -35,34 +35,18 @@ ul {
 const ProductDesc = ({ desc, showmore, toggleShowMore }) => {
   desc = formatDescription(desc);
   return (
-    <Section mb="0.3125rem" pr="0" pl="0" pt="0">
+    <Section mb="0.3125rem" pr="0" pl="0" pt="0" mt="0">
       <Container type="container" pr="1rem" pl="1rem">
         <Row display="block" mb="0" mr="0" ml="0">
           <Div col="12" className={(desc.length > 120 && showmore) ? 'showLess' : 'showmore'}>
-            <Heading
-              mt="0rem"
-              color="textLight"
-              fontSize="1em"
-              fontFamily="light"
-            >Description</Heading>
+
             <Description
               itemProp="description"
               fontSize="0.875rem"
               dangerouslySetInnerHTML={{ __html: desc }}
             />
           </Div>
-          {desc.length > 120 && <Button
-            pl="0"
-            pr="0"
-            mb="0"
-            size="block"
-            ta="left"
-            backgroundColor="#fff"
-            color="#222"
-            btnType="link"
-            onClick={toggleShowMore}
-            fontSize="0.875rem"
-          >{showmore ? 'Show More...' : 'Show Less'}</Button>}
+
         </Row>
       </Container>
     </Section>

@@ -3,11 +3,12 @@ import Container from "hometown-components-dev/lib/ContainerHtV1";
 import Section from "hometown-components-dev/lib/SectionHtV1";
 import SpecList from "./SpecList";
 
-const Specs = ({ specs }) => (
+const Specs = ({ specs, desc }) => (
   <Section mb="0rem" p="0" mt="0rem">
     <Container type="container" pr="0rem" pl="0rem">
+
       {specs.map((spec, index) => (
-        <SpecList list={spec} key={String(index)} />
+        <SpecList desc={desc} index={index} list={spec} key={String(index)} />
       ))}
     </Container>
   </Section>
