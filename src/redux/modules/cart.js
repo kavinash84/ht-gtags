@@ -42,16 +42,20 @@ const HIDE_COUPON_LIST = "cart/HIDE_COUPON_LIST";
 const formatCartData = data => {
   if (Array.isArray(data)) {
     let arr = data.map(item => {
-      return {
-        ...item,
-        product_info: {
-          ...item.product_info,
-          stock: item.stock,
-          image: item.image,
-          unit_price: parseInt(item.product_info.price),
-          net_price: parseInt(item.product_info.special_price)
-        }
-      };
+      if (item.product_info.packageId) {
+        return item;
+      } else {
+        return {
+          ...item,
+          product_info: {
+            ...item.product_info,
+            stock: item.stock,
+            image: item.image,
+            unit_price: parseInt(item.product_info.price),
+            net_price: parseInt(item.product_info.special_price)
+          }
+        };
+      }
     });
     return arr;
   }
@@ -60,9 +64,9 @@ const formatCartData = data => {
 
 const checkForPackages = cartData => {
   if (Array.isArray(cartData.packages)) {
-    return formatCartData(cartData.cart);
+    return cartData.cart;
   } else if (cartData.packages && Object.keys(cartData.packages).length === 0) {
-    return formatCartData(cartData.cart);
+    return cartData.cart;
   } else {
     let arrayOfObj = Object.values(cartData.packages).map(item => {
       return {
@@ -109,7 +113,7 @@ const checkForPackages = cartData => {
         updated_at: ""
       };
     });
-    return [...formatCartData(cartData.cart), ...arrayOfObj];
+    return [...cartData.cart, ...arrayOfObj];
   }
 };
 
@@ -213,7 +217,13 @@ export default function reducer(state = initialState, action = {}) {
         //     : [],
         data:
           action.result && "cart" in action.result
-            ? checkForPackages({...action.result.cart , packages:action.result.packages , packageItems: action.result.packageItems})
+            ? formatCartData(
+                checkForPackages({
+                  ...action.result.cart,
+                  packages: action.result.packages,
+                  packageItems: action.result.packageItems
+                })
+              )
             : [],
         summary:
           action.result && "cart" in action.result
