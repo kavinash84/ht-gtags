@@ -3,7 +3,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import Row from "hometown-components-dev/lib/RowHtV1";
 import Img from "hometown-components-dev/lib/ImageHtV1";
-// import Button from 'components/Buttons';
+import Button from "hometown-components-dev/lib/ButtonHtV1";
 import Div from "hometown-components-dev/lib/BoxHtV1";
 import { Link } from "react-router-dom";
 import ImageShimmer from "hometown-components-dev/lib/ImageShimmerHtV1";
@@ -45,7 +45,7 @@ const ImgWrapper = styled.div`
 // `;
 
 const ColorOptions = styled(Div)`
-  max-height: 150px;
+  max-height: 115px;
   overflow:hidden;
   ${props =>
     props.active && {
@@ -83,15 +83,17 @@ const ColorOption = ({
       {data.length > 5 && (
         <Div>
           <Button
+            fontSize="13px"
+            backgroundColor="#ffffff"
             btnType="link"
             size="block"
             ta="right"
-            color="#f98d29"
+            color="#222222"
             pt="15px"
             pr="64px"
             onClick={toggleShowMoreColorProducts}
           >
-            {showmorecolorproducts ? "Show More Products" : "Show Less"}
+            {showmorecolorproducts ? "Show More" : "Show Less"}
           </Button>
         </Div>
       )}

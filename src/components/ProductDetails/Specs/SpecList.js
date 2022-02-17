@@ -4,6 +4,7 @@ import Div from "hometown-components-dev/lib/BoxHtV1";
 import Row from "hometown-components-dev/lib/RowHtV1";
 import Button from "hometown-components-dev/lib/ButtonHtV1";
 import Spec from "./spec";
+import ProductDesc from "./productDesc"
 const DownArrow = require("../../../../static/pdp-icons/down-arrow.svg");
 import Img from "hometown-components-dev/lib/ImageHtV1";
 
@@ -59,10 +60,11 @@ class SpecList extends Component {
     });
   };
   render() {
-    const { list } = this.props;
+    const { list, desc, index } = this.props;
     const { show } = this.state;
     const specName = Object.keys(list)[0];
     const values = Object.values(list)[0];
+
     return (
       <SpecRow display="block" m="0" mb="0rem">
         <Div col="12" mb="0" style={{ width: "100%" }}>
@@ -87,9 +89,15 @@ class SpecList extends Component {
           </SpecHeading>
           {show && (
             <SpecListWrapper p="1rem" pb="0">
+              {index === 0 ? <ProductDesc
+                desc={desc}
+              /> : null}
+
               {values.map((eachSpec, specIndex) => (
                 <Spec spec={eachSpec} key={String(specIndex)} />
+
               ))}
+              {show}
             </SpecListWrapper>
           )}
         </Div>

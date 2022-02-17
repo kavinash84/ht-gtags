@@ -67,7 +67,7 @@ import Img from "hometown-components-dev/lib/ImageHtV1";
 // import AddReview from 'hometown-components-dev/lib/ReviewsHtV1/WriteReview';
 import ColorOption from "./ColorOption";
 import CombinedBuy from "components/CombinedBuy";
-import ProductDesc from "hometown-components-dev/lib/ProductDetailsHtV1/ProductDesc";
+import ProductDesc from "./Specs/productDesc";
 import ProductCarousel from "components/ProductCarousel";
 import ResponsiveModal from "components/Modal";
 import ResponsiveVideoModal from "components/Modal/ResponsiveVideoModal";
@@ -93,7 +93,7 @@ import Pincode from "./Pincode";
 import ProductDetailsCarousel from "./Carousel";
 import Video from "./Video";
 import ReviewFilter from "./ReviewFilter";
-// import UnbxdCompleteTheLook from './UnbxdCompleteTheLook';
+import UnbxdCompleteTheLook from './UnbxdCompleteTheLook';
 import FreebieProduct from "./FreebieProduct";
 import Stripes from "./PdpStripe";
 const ShareIcon = require("../../../static/pdp-icons/share.png");
@@ -649,7 +649,7 @@ class ProductDetails extends React.Component {
             inline: "nearest"
           });
       }, 3000);
-      console.log(id, tabElement[`${id}`], "id for tabElement");
+      // console.log(id, tabElement[`${id}`], "id for tabElement");
       this.setState({
         activeSpec: tabElement[`${id}`].tableName,
         activeDescription: tabElement[`${id}`].tabComponent
@@ -723,7 +723,7 @@ class ProductDetails extends React.Component {
       bflMinAmount,
       financeOption
     } = this.props;
-    console.log("yass-salman", this.state);
+
     const {
       activeSpec,
       showReviews,
@@ -758,7 +758,7 @@ class ProductDetails extends React.Component {
       free_installation: freeInstallation = "no",
       swatch_image: swatchImage
     } = product;
-
+    const { description, demo_product: demoProduct = {} } = attributes;
     const simpleSku = Object.keys(simples)[0];
     const {
       name,
@@ -1097,7 +1097,9 @@ class ProductDetails extends React.Component {
                             <div
                               style={{
                                 color: "#E9916B",
-                                fontSize: "16px"
+                                fontSize: "16px",
+                                marginBottom: "10px",
+                                marginTop: "10px"
                               }}
                             >
                               {` Extra ${Math.round(
@@ -1164,21 +1166,7 @@ class ProductDetails extends React.Component {
                   />
                 </Stripes>
                 {/* discount text */}
-                <div ht_wallet_cashback={ht_wallet_cashback}>
-                  {ht_wallet_cashback ? (
-                    <div
-                      style={{
-                        color: "#E9916B",
-                        fontSize: "16px",
-                        paddingTop: "15px"
-                      }}
-                    >
-                      {` Extra ${Math.round(
-                        ht_wallet_cashback
-                      )}% HT wallet cashback`}
-                    </div>
-                  ) : null}
-                </div>
+
                 {/* Pincode */}
                 {!(
                   simples[simpleSku].meta.quantity &&
@@ -1200,7 +1188,7 @@ class ProductDetails extends React.Component {
                   loading={deliveryDateLoading}
                   shippingCharge={meta.shipping_charge}
                 >
-
+                    <Pincode key="pincode" />
 
                   </ServiceDetails>}
 
@@ -1219,7 +1207,7 @@ class ProductDetails extends React.Component {
                     }}
                   >
                     <BuyNow
-                      quantity={productQty.value || 1}
+                      quantity={this.state.prodQty || 1}
                       simpleSku={simpleSku}
                       sku={sku}
                       size="block"
@@ -1285,7 +1273,7 @@ class ProductDetails extends React.Component {
                     <AddToCart
                       skuItem={skuItem}
                       quantityChange={quantityChange}
-                      quantity={productQty.value || 1}
+                      quantity={this.state.prodQty || 1}
                       simpleSku={simpleSku}
                       sku={sku}
                       configId={configId}
@@ -1388,7 +1376,9 @@ class ProductDetails extends React.Component {
                   ) : null}
                 </Div>
                 <div>
+
                   <Specs
+                    desc={description || ""}
                     specs={groupedAttributes}
                     prodDetail={true}
                     pincode={pincode.selectedPincode}
@@ -1415,7 +1405,7 @@ class ProductDetails extends React.Component {
                       this.setState({ showReviews: !this.state.showReviews });
                     }}
                   >
-                    <h4 style={{ color: "#222222" }}>Reviews </h4>
+                    <h4 style={{ color: "rgba(0, 0, 0, 0.65)" }}>Reviews </h4>
 
 
                     <div>
@@ -1426,13 +1416,7 @@ class ProductDetails extends React.Component {
                         count={5}
                         style={{ marginTop: '10px' }}
                       >
-                        {/* 
-                        {reviewsData.length > 0 && (
-                          <ReviewFilter
-                            selectedFilterProp={selectedFilter}
-                            onFilterChange={this.onFilterChange}
-                          />
-                        )} */}
+
                         {this.state.showReviews ? (
 
                           <Image src={DownArrow} style={{ marginLeft: "10px" }} />
@@ -1483,7 +1467,7 @@ class ProductDetails extends React.Component {
                                     feedBackError={nameError}
                                     feedBackMessage={nameErrorMessage}
                                     onChange={this.handleChange}
-                                    // ref={(nameInp) => this.myInp = nameInp}
+
                                     style={{ border: "1px solid #E3E3E3", fontSize: "12px", borderRadius: "5px" }}
                                   />
                                 </Box>
@@ -1522,7 +1506,7 @@ class ProductDetails extends React.Component {
                                       size={25}
                                       value={this.state.rating}
                                       half={false}
-                                      color2="#ffd700"
+                                      color2="#222222"
                                     />
                                   </div>
                                   <Box>
@@ -1577,8 +1561,13 @@ class ProductDetails extends React.Component {
             <LazyLoad height={150}>
               <BaughtTogether prodQty={prodQty} />
             </LazyLoad>
+
+
+
             {/* Complete the look */}
-            {/* <UnbxdCompleteTheLook configId={configId} /> */}
+            <UnbxdCompleteTheLook configId={configId} />
+
+
             {/* Related Products List */}
             {relatedproductsList.length > 0 && (
               <Row py={36}>
