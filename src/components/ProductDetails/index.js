@@ -321,7 +321,7 @@ class ProductDetails extends React.Component {
       reviewDataSet: [],
       selectedFilter: null,
       filterChanged: false,
-      colorProducts: [],
+      colorproducts: [],
       isFurniture: false,
       popUpTimeoutId: null,
       name: "",
@@ -466,15 +466,15 @@ class ProductDetails extends React.Component {
     const { dispatch } = this.context.store;
     dispatch(addReview(sku, data));
   };
-  addProductToColorProduct = colorProducts => {
+  addProductToColorProduct = colorproducts => {
     const { product } = this.props;
-    if (colorProducts.length > 0) {
-      colorProducts = colorProducts.map(arr => ({
+    if (colorproducts.length > 0) {
+      colorproducts = colorproducts.map(arr => ({
         ...arr,
         activeColor: false
       }));
-      colorProducts.push({ ...product, activeColor: true });
-      this.setState({ colorProducts });
+      colorproducts.push({ ...product, activeColor: true });
+      this.setState({ colorproducts });
     }
   };
   toggleShowMore = () => {
@@ -494,14 +494,8 @@ class ProductDetails extends React.Component {
     dispatch(addToCartCombined(setId, simpleSKUS, session, selectedPincode));
   };
   toggleShowMoreColorProducts = () => {
-    const { colorProducts } = this.state;
-    const { showmorecolorproductsCount } = this.state;
     this.setState({
-      showmorecolorproducts: !this.state.showmorecolorproducts,
-      showmorecolorproductsCount:
-        showmorecolorproductsCount > 5
-          ? 5
-          : showmorecolorproductsCount + colorProducts.length
+      showmorecolorproducts: !this.state.showmorecolorproducts
     });
   };
   showMoreReviews = () => {
@@ -700,6 +694,7 @@ class ProductDetails extends React.Component {
     const {
       product,
       pincode,
+      colorproducts,
       session,
       reviews,
       isSoldOut,
@@ -728,7 +723,7 @@ class ProductDetails extends React.Component {
       activeSpec,
       showReviews,
       productQty,
-      colorProducts,
+      // colorproducts,
       selectedFilter,
       filterChanged,
       activeDescription,
@@ -895,11 +890,11 @@ class ProductDetails extends React.Component {
                 >
                   <div style={{ width: "50%" }}>
                     <Section mt="10px" mb="0.3125rem" p="0">
-                      {colorProducts.length > 0 && (
+                      {colorproducts.length > 0 && (
                         <Box pb={15}>
                           <ColorOption
                             currentImage={swatchImage}
-                            data={colorProducts}
+                            data={colorproducts}
                             showmorecolorproducts={showmorecolorproducts}
                             toggleShowMoreColorProducts={
                               this.toggleShowMoreColorProducts
