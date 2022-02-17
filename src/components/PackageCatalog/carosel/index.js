@@ -274,10 +274,6 @@ class CaroselContainer extends Component {
                     <div key={String(i)} style={{ width: "100%" }}>
                       <div
                         className={styles.caroselItem}
-                        //            style={{
-                        // width:
-                        // products.length > 2 ? "auto" : "50%"
-                        // }}
                       >
                         <div
                           style={{ position: "relative" }}

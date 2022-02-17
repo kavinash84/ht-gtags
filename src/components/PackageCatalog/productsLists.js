@@ -164,7 +164,7 @@ export default class ProductsList extends Component {
             {this.state.products && (
               <div className={styles.listContainer}>
                 {this.state.products.map((slide, i) => (
-                  <div className={styles.caroselItem} key={String(i)}>
+                  <div className={styles.caroselItem} key={String(i)} style={{ width: "33%" }}>
                     <div
                       style={{ position: "relative" }}
                       onClick={() => {
@@ -216,9 +216,10 @@ export default class ProductsList extends Component {
                       <div
                         className={styles.prod_title}
                         style={{
-                          fontSize: "12px",
+                          fontSize: "16px",
                           color: "#323131",
-                          lineHeight: "normal"
+                          lineHeight: "20px",
+                          marginTop: "-10px"
                         }}
                       >
                         {slide.meta.name}
@@ -233,7 +234,7 @@ export default class ProductsList extends Component {
                         <div
                           style={{
                             color: "#E9916B",
-                            fontSize: "12px",
+                            fontSize: "14px",
                             marginTop: "5px"
                           }}
                           onClick={() => {

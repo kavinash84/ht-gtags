@@ -210,7 +210,7 @@ export default class OneLacPackage extends Component {
                 {packages_data.tabs[activeTab].package.map(pack => (
                   <div style={{ marginBottom: "30px" }}>
                     <img
-                      src={PackageBanner}
+                      src={pack.img}
                       alt="Banner"
                       onClick={() => this.handleBannerClick(true, pack.id)}
                       style={{ cursor: "pointer", height: "250px" , width:'90%' }}
