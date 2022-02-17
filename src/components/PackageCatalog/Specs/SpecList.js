@@ -82,8 +82,8 @@ class SpecList extends Component {
               mt="-4px"
               color="rgba(0,0,0,0.6)"
             >
-              {show ? <Img src={ArrowDown} style={{ marginLeft: "10px" }} />
-                : <Img src={ArrowDown} style={{ marginLeft: "10px" }} />}
+              {show ? <Img src={ArrowDown} style={{ marginLeft: "10px", cursor:'pointer' }} />
+                : <Img src={ArrowDown} style={{ marginLeft: "10px" , cursor:'pointer'}} />}
             </Button>
           </SpecHeading>
           {show && (
