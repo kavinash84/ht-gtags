@@ -465,6 +465,8 @@ const Cart = ({
                         </Flex>
                       </Box>
                       <Flex alignItems="center">
+                       {item.product_info.packageId ?  null :(
+                         <div>
                         <Button
                           variant="link"
                           fontSize={12}
@@ -502,6 +504,9 @@ const Cart = ({
                           {" "}
                           |{" "}
                         </Text>
+                        </div>
+                       )}
+                     
                         <Button
                           variant="link"
                           fontSize={12}
