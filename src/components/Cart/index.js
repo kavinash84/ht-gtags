@@ -391,7 +391,6 @@ const Cart = ({
                                 item.configurable_sku
                               )
                         }
-          
                       >
                         <ImageShimmer
                           src={item.product_info.image}
@@ -415,7 +414,7 @@ const Cart = ({
                     </Box>
                     <Box variant="col-5" pl={30}>
                       <Link
-                         to={
+                        to={
                           item.product_info.packageId
                             ? `/package-catalog/${item.product_info.packageId}`
                             : formatProductURL(
@@ -465,48 +464,48 @@ const Cart = ({
                         </Flex>
                       </Box>
                       <Flex alignItems="center">
-                       {item.product_info.packageId ?  null :(
-                         <div>
-                        <Button
-                          variant="link"
-                          fontSize={12}
-                          display="flex"
-                          alignItems="center"
-                          onClick={addToWishlist(
-                            item.configurable_sku,
-                            wishListData,
-                            toggleWishList,
-                            isLoggedIn,
-                            handleLoginModal,
-                            wishListWaitList,
-                            item.simple_sku,
-                            pincode,
-                            // item.id_customer_cart,
-                            {
-                              skuData: [
-                                { simple_sku: item.simple_sku, qty: item.qty }
-                              ],
-                              packageId: false
-                            },
-                            sessionId,
-                            pincode,
-                            item.qty,
-                            item.product_info.product_id,
-                            loadingList,
-                            item,
-                            selectForDemo
-                          )(removeFromCart)}
-                        >
-                          <Image height={16} mr={10} src={saveForLaterIcon} />
-                          <Text fontSize={12}>Add to wishlist</Text>
-                        </Button>
-                        <Text mx={8} fontSize={16}>
-                          {" "}
-                          |{" "}
-                        </Text>
-                        </div>
-                       )}
-                     
+                        {item.product_info.packageId ? null : (
+                          <Button
+                            variant="link"
+                            fontSize={12}
+                            display="flex"
+                            alignItems="center"
+                            onClick={addToWishlist(
+                              item.configurable_sku,
+                              wishListData,
+                              toggleWishList,
+                              isLoggedIn,
+                              handleLoginModal,
+                              wishListWaitList,
+                              item.simple_sku,
+                              pincode,
+                              // item.id_customer_cart,
+                              {
+                                skuData: [
+                                  { simple_sku: item.simple_sku, qty: item.qty }
+                                ],
+                                packageId: false
+                              },
+                              sessionId,
+                              pincode,
+                              item.qty,
+                              item.product_info.product_id,
+                              loadingList,
+                              item,
+                              selectForDemo
+                            )(removeFromCart)}
+                          >
+                            <Image height={16} mr={10} src={saveForLaterIcon} />
+                            <Text fontSize={12}>Add to wishlist</Text>
+                          </Button>
+                        )}
+                        {item.product_info.packageId ? null : (
+                          <Text mx={8} fontSize={16}>
+                            {" "}
+                            |{" "}
+                          </Text>
+                        )}
+
                         <Button
                           variant="link"
                           fontSize={12}
@@ -646,7 +645,11 @@ const Cart = ({
                       </Box>
                     )} */}
                     </Box>
-                    {item.product_info.packageId ? <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div> : (
+                    {item.product_info.packageId ? (
+                      <div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      </div>
+                    ) : (
                       <Box variant="col-2" textAlign="center">
                         <ProductQuantity
                           cartItemLoading={cartItemLoading}
