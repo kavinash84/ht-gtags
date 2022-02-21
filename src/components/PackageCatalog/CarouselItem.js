@@ -11,7 +11,7 @@ const CarouselItem = ({ image, name}) => (
     {(imageURL, error) => {
       if (error) return <Image alt={name} src={imageURL} height={[300, 300, 400, 545]} />;
       return (
-        <Image src={image} alt={name} style={{width: '500px', height: '500px'}}/>
+        <Image src={image} alt={name} style={{width: '500px', height: '500px', margin: "auto"}}/>
       );
     }}
   </ImageShimmer>
