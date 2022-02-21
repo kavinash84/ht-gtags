@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 import PackageCatalog from "../../components/PackageCatalog";
 import { setCurrentPackage } from "../../redux/modules/lackpackages";
-import Header from "components/OneLacPackage/Header";
+import Header from "components/Header";
 
 export default class PackageCatlogContainer extends Component {
   static contextTypes = {
