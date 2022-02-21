@@ -863,7 +863,7 @@ class ProductDetails extends React.Component {
             <Row mb={40}>
               {/* Left Column */}
               <Col width={[1, 6 / 12, 6 / 12, 7 / 12]} pr={40}>
-                <Box sx={{ position: "relative" }}>
+                <Box style={{ position: "sticky", top: "0" }}>
                   {/* Product Slider */}
                   {images && (
                     <ProductDetailsCarousel data={images} title={meta.name} />
@@ -874,7 +874,7 @@ class ProductDetails extends React.Component {
               </Col>
               {/* Right Column */}
               <Col width={[1, 6 / 12, 6 / 12, 5 / 12]}>
-                <div id="portal" className="portal" />
+                <div id="portal" className="portal" style={{ position: "sticky", top: "0" }} />
 
                 {/* Product title  */}
                 <HeadingTitlePrice name={name} brand={brand} />
