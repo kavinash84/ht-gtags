@@ -205,6 +205,7 @@ const mapStateToProps = ({
 }) => ({
   currentId: cart.key,
   cartChecked: cart.cartChecked,
+  packageItems: cart.packageItems,
   checkingCart: cart.checkingCart,
   cartUpdating: cart.cartUpdating,
   pincode: pincode.selectedPincode,
@@ -231,6 +232,7 @@ const getSkusData = data => {
 const Cart = ({
   demoProductsBanner,
   results,
+  packageItems,
   summary,
   removeFromCart,
   toggleWishList,
@@ -298,7 +300,11 @@ const Cart = ({
         <Box variant="col-8">
           <Row alignItems="center">
             <Box variant="col-8">
-              <Heading>My Shopping Cart : {cartItemsNumber} Items</Heading>
+              {packageItems.length > 0 ? (
+                <Heading>My Shopping Cart : {cartItemsNumber + (packageItems.length) - (1) } Items</Heading>
+              ) : (
+                <Heading>My Shopping Cart : {cartItemsNumber} Items</Heading>
+              )}
             </Box>
             <Box variant="col-4" textAlign="right">
               <Button
