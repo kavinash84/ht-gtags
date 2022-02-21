@@ -204,6 +204,7 @@ const mapStateToProps = ({
   isPackage
 }) => ({
   currentId: cart.key,
+  packageItems: cart.packageItems,
   cartChecked: cart.cartChecked,
   checkingCart: cart.checkingCart,
   cartUpdating: cart.cartUpdating,
@@ -255,7 +256,8 @@ const Cart = ({
   wishListWaitList,
   // simpleSku,
   loadingList,
-  isPackage
+  isPackage,
+  packageItems
 }) => {
   const cartItemLoading = customerCardId =>
     cartUpdating && currentId === customerCardId;
@@ -298,7 +300,14 @@ const Cart = ({
         <Box variant="col-8">
           <Row alignItems="center">
             <Box variant="col-8">
-              <Heading>My Shopping Cart : {cartItemsNumber} Items</Heading>
+              {packageItems ? (
+                <Heading>
+                  My Shopping Cart : {cartItemsNumber + (packageItems.length) - 1}{" "}
+                  Items
+                </Heading>
+              ) : (
+                <Heading>My Shopping Cart : {cartItemsNumber} Items</Heading>
+              )}
             </Box>
             <Box variant="col-4" textAlign="right">
               <Button
