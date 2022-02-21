@@ -217,7 +217,7 @@ class CaroselContainer extends Component {
                           <div
                             className={styles.prod_title}
                             style={{
-                              fontSize: "16px",
+                              fontSize: "18px",
                               color: "#323131",
                               lineHeight: "20px"
                             }}
@@ -235,7 +235,7 @@ class CaroselContainer extends Component {
                               style={{
                                 color: "#E9916B",
                                 fontSize: "14px",
-                                marginTop: "5px",
+                                marginTop: "8px",
                                 cursor: "pointer"
                               }}
                               onClick={() => {
