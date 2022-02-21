@@ -67,6 +67,7 @@ import TitlePrice from "hometown-components-dev/lib/ProductDetailsHtV1/TitlePric
 import WishListButton from "hometown-components-dev/lib/WishlistButtonHtV1";
 // import Section from 'hometown-components-dev/lib/SectionHtV1';
 // import UnbxdRecentlyViewed from 'components/UnbxdRecentlyViewed/UnbxdRecentlyViewed';
+// import UnbxdRecommendedForYou from "../../components/Unbxd/unbxdRecommendedForYou";
 
 import LoginModal from "containers/Login/LoginForm";
 import AddToCart from "../AddToCart";
@@ -82,6 +83,7 @@ import FreebieProduct from "./FreebieProduct";
 import Stripes from "./PdpStripe";
 
 import demoIcon from "../../../static/play-button.svg";
+import UnbxdRecommendedForYou from "../Unbxd/unbxdRecommendedForYou";
 
 /**
  * Images / Icons
@@ -1552,7 +1554,8 @@ class ProductDetails extends React.Component {
             )}
 
             {/* Recommend for you */}
-            <div id="unbxd_recommended_for_you" />
+            {/* <div id="unbxd_recommended_for_you" /> */}
+            <UnbxdRecommendedForYou />
 
             {/* Related Products List */}
             {/* {relatedproductsList.length > 0 && (
