@@ -111,6 +111,15 @@ const qtyOptions = sku => {
   }
 };
 
+const formatPrice = price => {
+  let newPrice = 0;
+  if (price.length > 3 && price !== null) {
+    newPrice = Number(price.replace(",", ""));
+    return newPrice;
+  }
+  return Number(price);
+};
+
 const customStyles = {
   control: () => ({
     width: "75px",
@@ -297,7 +306,9 @@ class ProductDetails extends React.Component {
   componentDidMount() {
     const { dispatch } = this.context.store;
     const {
-      // product,
+      product: {
+        meta: { config_id: pid = "" }
+      },
       simpleSku,
       pincode: { selectedPincode },
       pdpTimeout
@@ -310,6 +321,9 @@ class ProductDetails extends React.Component {
     const popUpTimeoutId = setTimeout(this.webToChat, pdpTimeout);
     // eslint-disable-next-line react/no-did-mount-set-state
     this.setState({ popUpTimeoutId });
+    if (window && window.Unbxd && window.Unbxd.track && pid) {
+      window.Unbxd.track("product_view", { pid });
+    }
   }
   componentWillReceiveProps(nextProps) {
     const { colorproducts } = this.props;
@@ -777,7 +791,11 @@ class ProductDetails extends React.Component {
                     "@type" : "Offer",
                     "url": "${productURL || ""}",
                     "priceCurrency": "INR",
-                    "price": "${checkSpecialPrice || ""}",
+                    "price": "${
+                      Number(formatPrice(offerPrice))
+                        ? Number(formatPrice(offerPrice))
+                        : Number(specialPrice) || Number(price) || ""
+                    }",
                     "availability": "https://schema.org/InStock"
                   }
                 }
@@ -1533,8 +1551,11 @@ class ProductDetails extends React.Component {
               </Box>
             )}
 
+            {/* Recommend for you */}
+            <div id="unbxd_recommended_for_you" />
+
             {/* Related Products List */}
-            {relatedproductsList.length > 0 && (
+            {/* {relatedproductsList.length > 0 && (
               <Row py={36}>
                 <ProductCarousel
                   paddingTop="2.5rem"
@@ -1543,7 +1564,7 @@ class ProductDetails extends React.Component {
                   length={relatedproductsList.length}
                 />
               </Row>
-            )}
+            )} */}
 
             {/* Unbxd Recently Viewed */}
             {/* <Section>
