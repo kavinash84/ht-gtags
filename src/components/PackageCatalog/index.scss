@@ -19,7 +19,6 @@
     }
     .prod_title {
       display: -webkit-box;
-      max-width: 200px;
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
       overflow: hidden;
@@ -164,6 +163,7 @@
       }
       .prod_title {
         display: -webkit-box;
+        max-width: 150px;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
         overflow: hidden;
