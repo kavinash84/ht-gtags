@@ -15,7 +15,7 @@ const HeadingTitlePrice = ({
   brand
 
 }) => (
-    <Section mb="0.3125rem" p="0">
+    <Section mb="0.3125rem" p="0" mt="0">
       <Container type="container" pr="1rem" pl="1rem">
         <Row display="block" mr="0" ml="0">
           <Heading

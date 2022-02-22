@@ -862,7 +862,7 @@ class ProductDetails extends React.Component {
             </Row>
             <Row mb={40}>
               {/* Left Column */}
-              <Col width={[1, 6 / 12, 6 / 12, 7 / 12]} pr={40}>
+              <Col width={[1, 5 / 12, 5 / 12, 6 / 12]} pr={40}>
                 <Box style={{ position: "sticky", top: "0" }}>
                   {/* Product Slider */}
                   {images && (
