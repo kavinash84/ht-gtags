@@ -1,5 +1,6 @@
 /* Homepage */
 export const BANNERS = "tesla/banners/desktop";
+export const WARRANTY = "tesla/static/new_warranty";
 export const CATEGORY_MENU = "tesla/categories";
 export const PINCODE = "tesla/locations/pincode";
 export const HOMEPAGE_CATEGORIES = "tesla/page-sections/home/categories";
