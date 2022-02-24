@@ -94,6 +94,8 @@ import { categoryRoutes, listingRoutes } from "helpers/Constants";
 import Review from "./containers/Review";
 import WriteReview from "./containers/WriteReview";
 import NewHomepage from "./components/NewHomepage";
+import WarrantyPage from "./containers/warranty";
+import ExchangeOffer from "./containers/Exchange-offer";
 
 const createRegex = data => data.join("|");
 
@@ -198,7 +200,11 @@ const routes = [
       { path: "/case-request", exact: true, component: CaseRequest },
       { path: "/grievance", exact: true, component: Grievance },
       { path: "/modular-kitchens", exact: true, component: ModularKitchenNew },
-      { path: "/plan-your-kitchen", exact: true, component: PlanYourKitchenNew },
+      {
+        path: "/plan-your-kitchen",
+        exact: true,
+        component: PlanYourKitchenNew
+      },
       { path: "/make-space-for-new", exact: true, component: NewHomepage },
       { path: "/design-build", exact: true, component: DesignBuild },
       { path: "/home-interior", exact: true, component: HomeInterior },
@@ -245,12 +251,14 @@ const routes = [
       { path: "/reviews", exact: true, component: Review },
       { path: "/writeReview", exact: true, component: WriteReview },
       { path: "/spaces", exact: true, component: Spaces },
+      { path: "/warranty", exact: true, component: WarrantyPage },
+      { path: "/exchange-offers", exact: true, component: ExchangeOffer },
       { path: "/packages", exact: true, component: oneLacPackage },
-            {
-              path: "/package-catalog/:packageid",
-              exact: true,
-              component: PackageCatalog
-            },
+      {
+        path: "/package-catalog/:packageid",
+        exact: true,
+        component: PackageCatalog
+      },
       { component: NotFound }
     ]
   }

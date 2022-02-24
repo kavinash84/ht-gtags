@@ -1,39 +1,42 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 /**
  * modules / formatters
  */
-import { applyCoupon, removeCoupon } from 'redux/modules/coupon';
-import { toggleCouponList, hideCouponList } from 'redux/modules/cart';
-import { formatAmount } from 'utils/formatters';
+import { applyCoupon, removeCoupon } from "redux/modules/coupon";
+import { toggleCouponList, hideCouponList } from "redux/modules/cart";
+import { formatAmount } from "utils/formatters";
 
 /**
  * Components
  */
-import Heading from 'hometown-components-dev/lib/HeadingHtV1';
-import Box from 'hometown-components-dev/lib/BoxHtV1';
-import Flex from 'hometown-components-dev/lib/FlexHtV1';
-import Button from 'hometown-components-dev/lib/ButtonHtV1';
-import Image from 'hometown-components-dev/lib/ImageHtV1';
-import Text from 'hometown-components-dev/lib/TextHtV1';
-import InputField from 'hometown-components-dev/lib/InputFieldHtV1';
-import LocalInlineNotification from '../../components/LocalInlineNotification';
-import CouponList from './CouponList';
-import Notifs from '../../components/Notifs';
+import Heading from "hometown-components-dev/lib/HeadingHtV1";
+import Box from "hometown-components-dev/lib/BoxHtV1";
+import Flex from "hometown-components-dev/lib/FlexHtV1";
+import Button from "hometown-components-dev/lib/ButtonHtV1";
+import Image from "hometown-components-dev/lib/ImageHtV1";
+import Text from "hometown-components-dev/lib/TextHtV1";
+import InputField from "hometown-components-dev/lib/InputFieldHtV1";
+import ResponsiveModal from "components/Modal";
+import LocalInlineNotification from "../../components/LocalInlineNotification";
+import CouponList from "./CouponList";
+import Notifs from "../../components/Notifs";
+import ExchangeWarning from "./ExchangeWarning";
 
 /**
  * Icons
  */
-const EditCouponIcon = require('../../../static/edit.svg');
-const DiscountSuccessIcon = require('../../../static/percentage-green.svg');
+const EditCouponIcon = require("../../../static/edit.svg");
+const DiscountSuccessIcon = require("../../../static/percentage-green.svg");
 
-const styles = require('./Coupon.scss');
+const styles = require("./Coupon.scss");
 
-@connect(({
- pincode, app, coupon, cart, notifs
-}) => ({
+const modalClass = "noCostEmiModal";
+// : "pincodeModal"
+
+@connect(({ pincode, app, coupon, cart, notifs }) => ({
   pincode: pincode.selectedPincode,
   sessionId: app.sessionId,
   coupon,
@@ -45,10 +48,30 @@ class Coupon extends React.Component {
     store: PropTypes.object.isRequired
   };
   state = {
-    coupon: ''
+    coupon: "",
+    open: false
   };
 
   handleApply = e => {
+    if (e) {
+      e.preventDefault();
+    }
+    console.log(this.state.coupon);
+    if (
+      this.state.coupon &&
+      this.state.coupon.toLocaleLowerCase() === "exchange25"
+    ) {
+      this.setState({ open: true });
+    } else {
+      const { pincode, sessionId } = this.props;
+      const { dispatch } = this.context.store;
+      dispatch(applyCoupon(this.state.coupon, sessionId, pincode));
+      // this.toggleMoreCoupons();
+      this.hideMoreCoupons();
+    }
+  };
+
+  handleApplyFromModal = e => {
     if (e) {
       e.preventDefault();
     }
@@ -57,7 +80,9 @@ class Coupon extends React.Component {
     dispatch(applyCoupon(this.state.coupon, sessionId, pincode));
     // this.toggleMoreCoupons();
     this.hideMoreCoupons();
+    this.handleModal();
   };
+
   removeCoupon = coupon => {
     const { pincode, sessionId } = this.props;
     const { dispatch } = this.context.store;
@@ -88,13 +113,22 @@ class Coupon extends React.Component {
     const { dispatch } = this.context.store;
     dispatch(hideCouponList());
   };
+  handleModal = e => {
+    if (e) {
+      e.preventDefault();
+    }
+    this.setState({
+      open: !this.state.open
+    });
+  };
+  handleNo = () => {
+    this.setState({ coupon: "", open: false });
+  };
   render() {
     const {
       cart,
       notifs,
-      coupon: {
- loading, coupons, getingcoupon, unapplicablecoupons
-},
+      coupon: { loading, coupons, getingcoupon, unapplicablecoupons },
       pincode,
       sessionId
     } = this.props;
@@ -106,15 +140,24 @@ class Coupon extends React.Component {
       <Box className={styles.applyCoupon}>
         {appliedCoupon ? (
           <Box py={15}>
-            <Button variant="link" onClick={() => this.removeCoupon(appliedCoupon)}>
+            <Button
+              variant="link"
+              onClick={() => this.removeCoupon(appliedCoupon)}
+            >
               <Text display="flex" alignItems="center" color="primary">
                 <Image src={DiscountSuccessIcon} alt={appliedCoupon} mr={8} />
-                Applied:{' '}
+                Applied:{" "}
                 <Text as="b" pl={4} color="primary">
                   {appliedCoupon}
                 </Text>
               </Text>
-              <Text color="primary" display="flex" alignItems="center" pl={28} pt={5}>
+              <Text
+                color="primary"
+                display="flex"
+                alignItems="center"
+                pl={28}
+                pt={5}
+              >
                 <p>
                   Save <b>Rs. {formatAmount(couponDiscount)}</b>
                 </p>
@@ -146,13 +189,23 @@ class Coupon extends React.Component {
                     height={36}
                     width="80%"
                   />
-                  <Button disabled={loading || (notifs.coupon && notifs.coupon.length > 0)} onClick={this.handleApply}>
+                  <Button
+                    disabled={
+                      loading || (notifs.coupon && notifs.coupon.length > 0)
+                    }
+                    onClick={this.handleApply}
+                  >
                     Apply
                   </Button>
                 </Flex>
               </form>
               {notifs.coupon && (
-                <Notifs namespace="coupon" NotifComponent={props => <LocalInlineNotification {...props} />} />
+                <Notifs
+                  namespace="coupon"
+                  NotifComponent={props => (
+                    <LocalInlineNotification {...props} />
+                  )}
+                />
               )}
             </Box>
           </Box>
@@ -163,9 +216,9 @@ class Coupon extends React.Component {
             p="0"
             color="primary"
             variant="link"
-            sx={{ textDecoration: 'underline' }}
+            sx={{ textDecoration: "underline" }}
           >
-            {couponlistToggle ? 'Hide Coupons' : ' View Applicable Coupons'}
+            {couponlistToggle ? "Hide Coupons" : " View Applicable Coupons"}
           </Button>
         </Box>
         {couponlistToggle && (
@@ -179,6 +232,16 @@ class Coupon extends React.Component {
             unapplicablecoupons={unapplicablecoupons}
           />
         )}
+        <ResponsiveModal
+          classNames={{ modal: "designbuildmodal" }}
+          onCloseModal={this.handleModal}
+          open={this.state.open}
+        >
+          <ExchangeWarning
+            handleYes={this.handleApplyFromModal}
+            handleNo={this.handleNo}
+          />
+        </ResponsiveModal>
       </Box>
     );
   }
@@ -191,8 +254,8 @@ Coupon.propTypes = {
   notifs: PropTypes.object
 };
 Coupon.defaultProps = {
-  sessionId: '',
-  pincode: '',
+  sessionId: "",
+  pincode: "",
   cart: {},
   coupon: {},
   notifs: {}

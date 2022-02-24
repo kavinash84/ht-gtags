@@ -1,0 +1,45 @@
+.btn {
+  height: 36px;
+  border-radius: 3px;
+  background-color: #dc4c3a;
+  color: #FFF;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.flexFlow {
+  flex-flow: wrap;
+}
+
+.flexFlowRow {
+  flex-flow: row;
+}
+
+.labelWidth {
+  width: 100px;
+  flex-shrink: 0;
+}
+
+// .contactForm {
+//   //position: relative;
+// }
+
+.formThankYou {
+  position: fixed;
+  bottom: 0;
+  width: calc(100% + 60px);
+  left: 0;
+  border-radius: 0;
+  z-index: 1;
+}
+
+.landingInput {
+  border-radius: 5px;
+  height: 48px !important;
+  width: calc(100% - 100px);
+}
+
+input[type="file"] {
+  border-radius: 0;
+  height: 40px !important;
+}
