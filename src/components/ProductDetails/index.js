@@ -321,7 +321,7 @@ class ProductDetails extends React.Component {
       reviewDataSet: [],
       selectedFilter: null,
       filterChanged: false,
-      colorproducts: [],
+      // colorproducts: [],
       isFurniture: false,
       popUpTimeoutId: null,
       name: "",
@@ -362,19 +362,19 @@ class ProductDetails extends React.Component {
     // eslint-disable-next-line react/no-did-mount-set-state
     this.setState({ popUpTimeoutId });
   }
-  componentWillReceiveProps(nextProps) {
-    const { colorproducts } = this.props;
+  // componentWillReceiveProps(nextProps) {
+  //   const { colorproducts } = this.props;
 
-    if (nextProps.isLoggedIn) {
-      this.setState({
-        openLogin: false
-      });
-    }
-    if (nextProps.colorproducts !== colorproducts) {
-      this.addProductToColorProduct(nextProps.colorproducts);
-    }
-    this.isFurnitureTrue();
-  }
+  //   if (nextProps.isLoggedIn) {
+  //     this.setState({
+  //       openLogin: false
+  //     });
+  //   }
+  //   if (nextProps.colorproducts !== colorproducts) {
+  //     this.addProductToColorProduct(nextProps.colorproducts);
+  //   }
+  //   this.isFurnitureTrue();
+  // }
   componentWillUnmount() {
     const { toggleWebToChat } = this.props;
     const { popUpTimeoutId } = this.state;
@@ -466,17 +466,17 @@ class ProductDetails extends React.Component {
     const { dispatch } = this.context.store;
     dispatch(addReview(sku, data));
   };
-  addProductToColorProduct = colorproducts => {
-    const { product } = this.props;
-    if (colorproducts.length > 0) {
-      colorproducts = colorproducts.map(arr => ({
-        ...arr,
-        activeColor: false
-      }));
-      colorproducts.push({ ...product, activeColor: true });
-      this.setState({ colorproducts });
-    }
-  };
+  // addProductToColorProduct = colorproducts => {
+  //   const { product } = this.props;
+  //   if (colorproducts.length > 0) {
+  //     colorproducts = colorproducts.map(arr => ({
+  //       ...arr,
+  //       activeColor: false
+  //     }));
+  //     colorproducts.push({ ...product, activeColor: true });
+  //     this.setState({ colorproducts });
+  //   }
+  // };
   toggleShowMore = () => {
     this.setState({
       showmore: !this.state.showmore
@@ -862,8 +862,8 @@ class ProductDetails extends React.Component {
             </Row>
             <Row mb={40}>
               {/* Left Column */}
-              <Col width={[1, 6 / 12, 6 / 12, 7 / 12]} pr={40}>
-                <Box style={{ position: "sticky", top: "0" }}>
+              <Col width={[1, 2 / 12, 5 / 12, 6 / 12]} pr={40}>
+                <Box style={{ position: "sticky", top: "0", left: "0" }}>
                   {/* Product Slider */}
                   {images && (
                     <ProductDetailsCarousel data={images} title={meta.name} />
@@ -893,16 +893,12 @@ class ProductDetails extends React.Component {
                       {colorproducts.length > 0 && (
                         <Box pb={15}>
                           <ColorOption
-                            currentImage={swatchImage}
                             data={colorproducts}
+                            currentImage={swatchImage}
                             showmorecolorproducts={showmorecolorproducts}
                             toggleShowMoreColorProducts={
                               this.toggleShowMoreColorProducts
                             }
-                          // currentlySelectedProductSku={product.sku}
-                          // showmorecolorproductsCount={
-                          //   showmorecolorproductsCount
-                          // }
                           />
                         </Box>
                       )}
