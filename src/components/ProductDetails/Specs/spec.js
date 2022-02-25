@@ -76,6 +76,23 @@ class Spec extends React.Component {
               marginTop: "8px"
             }}
           >
+          {label === "Care Instructions" || label === "Returns / Cancellation" || label === "Service Assurance / Warranty" ? (
+            <div>
+              {label !== "Care Instructions" &&
+                label !== "Returns / Cancellation" &&
+                label !== "Service Assurance / Warranty" && (
+                  <Div col="6">
+                    <Label
+                      lh="1.6"
+                      fontFamily="regular"
+                      color=" rgba(0, 0, 0, 0.65)"
+                    >
+                      {label}
+                    </Label>
+                  </Div>
+                )}
+            </div>
+          ):(
             <div style={{ width: "50%" }}>
               {label !== "Care Instructions" &&
                 label !== "Returns / Cancellation" &&
@@ -91,6 +108,8 @@ class Spec extends React.Component {
                   </Div>
                 )}
             </div>
+          )}
+            
             <div>
               <Div
                 col={
