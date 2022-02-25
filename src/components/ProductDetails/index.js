@@ -6,6 +6,8 @@ import Helmet from "react-helmet";
 import Select from "react-select";
 import ReactStars from "react-stars";
 import { withRouter } from "react-router";
+import LazyLoad from "react-lazyload";
+import { Link } from "react-router-dom";
 
 /**
  * Modules / Utils / Reducers
@@ -16,7 +18,15 @@ import { setProductPosition } from "redux/modules/productdetails";
 import { getCombinedBuy } from "redux/modules/combinedbuy";
 import { addToCartCombined, setQuantityFlag } from "redux/modules/cart";
 import { formatAmount } from "utils/formatters";
-import { calculateLowestEmi, getVideoID, formatProductURL } from "utils/helper";
+import { EMI_THRESHOLD } from "helpers/Constants";
+import {
+  calculateLowestEmi,
+  getVideoID,
+  formatProductURL,
+  calculateTotalSavings,
+  calculateDiscount,
+  calculateSavings
+} from "utils/helper";
 import {
   productPageTitle,
   productMetaDescription,
@@ -35,6 +45,7 @@ import { togglePopUp } from "redux/modules/webtochat";
  * Components
  */
 import Box from "hometown-components-dev/lib/BoxHtV1";
+import Div from "hometown-components-dev/lib/BoxHtV1";
 import Button from "hometown-components-dev/lib/ButtonHtV1";
 import Col from "hometown-components-dev/lib/ColHtV1";
 import Container from "hometown-components-dev/lib/ContainerHtV1";
@@ -45,45 +56,53 @@ import Text from "hometown-components-dev/lib/TextHtV1";
 import Row from "hometown-components-dev/lib/RowHtV1";
 import Label from "hometown-components-dev/lib/LabelHtV1";
 import FormInput from "hometown-components-dev/lib/FormsHtV1/FormInputHtV1";
+import Section from "hometown-components-dev/lib/SectionHtV1";
+import Img from "hometown-components-dev/lib/ImageHtV1";
+
 /**
  * Page Components
  */
 // import Section from 'hometown-components-dev/lib/SectionHtV1';
 // import UnbxdRecentlyViewed from 'components/UnbxdRecentlyViewed/UnbxdRecentlyViewed';
 // import AddReview from 'hometown-components-dev/lib/ReviewsHtV1/WriteReview';
-import ColorOption from "hometown-components-dev/lib/ProductDetailsHtV1/ColorOption";
+import ColorOption from "./ColorOption";
 import CombinedBuy from "components/CombinedBuy";
-import ProductDesc from "hometown-components-dev/lib/ProductDetailsHtV1/ProductDesc";
+import ProductDesc from "./Specs/productDesc";
 import ProductCarousel from "components/ProductCarousel";
 import ResponsiveModal from "components/Modal";
 import ResponsiveVideoModal from "components/Modal/ResponsiveVideoModal";
-import Reviews from "hometown-components-dev/lib/ReviewsHtV1";
-import ReviewDisplay from "hometown-components-dev/lib/ReviewsHtV1/ReviewDisplay";
+import Reviews from "./ReviewsHtV1";
+import ReviewDisplay from "./ReviewDisplay";
+import TotalReviewDisplay from "./TotalReviewDisplay";
 import ServiceDetails from "hometown-components-dev/lib/ProductDetailsHtV1/ServiceDetails";
 // import EmiOptions from 'hometown-components-dev/lib/ProductDetailsHtV1/EmiOptions';
 // import ShareBar from 'components/ShareBar';
-import Specs from "hometown-components-dev/lib/ProductDetailsHtV1/Specs";
-import TitlePrice from "hometown-components-dev/lib/ProductDetailsHtV1/TitlePrice";
+import TitlePrice from "./TitlePrice";
+import HeadingTitlePrice from "./HeadingTitlePrice";
 import WishListButton from "hometown-components-dev/lib/WishlistButtonHtV1";
 // import Section from 'hometown-components-dev/lib/SectionHtV1';
 // import UnbxdRecentlyViewed from 'components/UnbxdRecentlyViewed/UnbxdRecentlyViewed';
-// import UnbxdRecommendedForYou from "../../components/Unbxd/unbxdRecommendedForYou";
-
 import LoginModal from "containers/Login/LoginForm";
-import AddToCart from "../AddToCart";
+import AddToCart from "./pdpAddToCart";
 import BreadCrumb from "./BreadCrumb";
-import BuyNow from "../BuyNow";
+import BuyNow from "./pdpBuyNow";
+import ShareBar from "./pdpShareBar";
 import EmiModal from "../EmiModal";
+import EmiOptions from "./EmiOptions";
 import Pincode from "./Pincode";
 import ProductDetailsCarousel from "./Carousel";
 import Video from "./Video";
 import ReviewFilter from "./ReviewFilter";
-// import UnbxdCompleteTheLook from './UnbxdCompleteTheLook';
+import UnbxdCompleteTheLook from './UnbxdCompleteTheLook';
 import FreebieProduct from "./FreebieProduct";
 import Stripes from "./PdpStripe";
-
+const ShareIcon = require("../../../static/pdp-icons/share.png");
 import demoIcon from "../../../static/play-button.svg";
-import UnbxdRecommendedForYou from "../Unbxd/unbxdRecommendedForYou";
+import { BackgroundMasker } from "hometown-components-dev/lib/Shimmer";
+
+import Specs from "./Specs/specs";
+import BaughtTogether from "./baughtTogether";
+import MoreOption from "./moreOption"
 
 /**
  * Images / Icons
@@ -91,10 +110,16 @@ import UnbxdRecommendedForYou from "../Unbxd/unbxdRecommendedForYou";
 const freeShippingIcon = require("../../../static/free-shipping.svg");
 const warrentyIcon = require("../../../static/warrenty.svg");
 const emiIcon = require("../../../static/emi.svg");
+const CloseIcon = require("../../../static/close-icon.svg");
+const WishlistIcon = require("../../../static/pdp-icons/wishlist.png");
+const WishlistIconSelect = require("../../../static/pdp-icons/wishlistSelect.png");
 const fbIcon = require("../../../static/fb-pdp.svg");
 const email = require("../../../static/email-pdp.svg");
 const pinIcon = require("../../../static/pinterest-pdp.svg");
+const DownArrow = require("../../../static/pdp-icons/down-arrow.svg");
 
+const LeftArrow = require("../../../static/new-home/roundedArrowLeft.svg");
+const RightArrow = require("../../../static/new-home/roundedArrowRight.svg");
 /**
  * styles
  */
@@ -113,14 +138,14 @@ const qtyOptions = sku => {
   }
 };
 
-const formatPrice = price => {
-  let newPrice = 0;
-  if (price.length > 3 && price !== null) {
-    newPrice = Number(price.replace(",", ""));
-    return newPrice;
-  }
-  return Number(price);
-};
+// const formatPrice = price => {
+//   let newPrice = 0;
+//   if (price.length > 3 && price !== null) {
+//     newPrice = Number(price.replace(",", ""));
+//     return newPrice;
+//   }
+//   return Number(price);
+// };
 
 const customStyles = {
   control: () => ({
@@ -196,7 +221,14 @@ const onClickWishList = (
 };
 
 const isInWishList = (list, id) => list.includes(id);
-
+const formatPrice = price => {
+  let newPrice = 0;
+  if (price.length > 3 && price !== null) {
+    newPrice = Number(price.replace(",", ""));
+    return newPrice;
+  }
+  return Number(price);
+};
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
@@ -238,10 +270,12 @@ const mapStateToProps = ({
 }) => ({
   session: sessionId,
   product: productdetails.productDescription,
+  financeOption: productdetails.financeOptions.items.text,
   reviews,
   pincode,
   combinedbuy: combinedbuy.results,
   deliveryDateLoading: productdetails.deliveryDateLoading,
+  boughtTogether: productdetails.boughtTogether,
   colorproducts: colorproducts.list,
   relatedproductsList: relatedproducts.data,
   deliveryInfo: productdetails.deliveryDetails,
@@ -275,12 +309,18 @@ class ProductDetails extends React.Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
+
   constructor(props) {
     super(props);
     // this.reviewsRef = React.createRef();
     this.state = {
+      displayShareBar: false,
+      prodQty: 1,
+      open: false,
+      isSoldOut: false,
       openLogin: false,
       showmore: true,
+      displayBTModal: false,
       showmorecolorproducts: true,
       showmorecolorproductsCount: 5,
       activeSpec: "description",
@@ -290,7 +330,7 @@ class ProductDetails extends React.Component {
       reviewDataSet: [],
       selectedFilter: null,
       filterChanged: false,
-      colorProducts: [],
+      // colorproducts: [],
       isFurniture: false,
       popUpTimeoutId: null,
       name: "",
@@ -301,10 +341,19 @@ class ProductDetails extends React.Component {
       reviewError: false,
       reviewErrorMessage: "Review cannot be left Blank",
       addreview: false,
-      openVideo: false
+      openVideo: false,
+      showReviews: false
     };
     this.reviewRef = React.createRef();
   }
+
+  // onOpenPdpModal = () => {
+  //   this.setState({ open: true });
+  // };
+  // onClosePdpModal = () => {
+  //   this.setState({ open: false });
+  // };
+
   componentDidMount() {
     const { dispatch } = this.context.store;
     const {
@@ -327,19 +376,19 @@ class ProductDetails extends React.Component {
       window.Unbxd.track("product_view", { pid });
     }
   }
-  componentWillReceiveProps(nextProps) {
-    const { colorproducts } = this.props;
+  // componentWillReceiveProps(nextProps) {
+  //   const { colorproducts } = this.props;
 
-    if (nextProps.isLoggedIn) {
-      this.setState({
-        openLogin: false
-      });
-    }
-    if (nextProps.colorproducts !== colorproducts) {
-      this.addProductToColorProduct(nextProps.colorproducts);
-    }
-    this.isFurnitureTrue();
-  }
+  //   if (nextProps.isLoggedIn) {
+  //     this.setState({
+  //       openLogin: false
+  //     });
+  //   }
+  //   if (nextProps.colorproducts !== colorproducts) {
+  //     this.addProductToColorProduct(nextProps.colorproducts);
+  //   }
+  //   this.isFurnitureTrue();
+  // }
   componentWillUnmount() {
     const { toggleWebToChat } = this.props;
     const { popUpTimeoutId } = this.state;
@@ -431,17 +480,17 @@ class ProductDetails extends React.Component {
     const { dispatch } = this.context.store;
     dispatch(addReview(sku, data));
   };
-  addProductToColorProduct = colorProducts => {
-    const { product } = this.props;
-    if (colorProducts.length > 0) {
-      colorProducts = colorProducts.map(arr => ({
-        ...arr,
-        activeColor: false
-      }));
-      colorProducts.push({ ...product, activeColor: true });
-      this.setState({ colorProducts });
-    }
-  };
+  // addProductToColorProduct = colorproducts => {
+  //   const { product } = this.props;
+  //   if (colorproducts.length > 0) {
+  //     colorproducts = colorproducts.map(arr => ({
+  //       ...arr,
+  //       activeColor: false
+  //     }));
+  //     colorproducts.push({ ...product, activeColor: true });
+  //     this.setState({ colorproducts });
+  //   }
+  // };
   toggleShowMore = () => {
     this.setState({
       showmore: !this.state.showmore
@@ -459,14 +508,8 @@ class ProductDetails extends React.Component {
     dispatch(addToCartCombined(setId, simpleSKUS, session, selectedPincode));
   };
   toggleShowMoreColorProducts = () => {
-    const { colorProducts } = this.state;
-    const { showmorecolorproductsCount } = this.state;
     this.setState({
-      showmorecolorproducts: !this.state.showmorecolorproducts,
-      showmorecolorproductsCount:
-        showmorecolorproductsCount > 5
-          ? 5
-          : showmorecolorproductsCount + colorProducts.length
+      showmorecolorproducts: !this.state.showmorecolorproducts
     });
   };
   showMoreReviews = () => {
@@ -538,7 +581,11 @@ class ProductDetails extends React.Component {
       rating: Number(newRating)
     });
   };
-
+  handleBTModel = value => {
+    this.setState({
+      displayBTModal: value
+    });
+  };
   handleChange = e => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -547,7 +594,23 @@ class ProductDetails extends React.Component {
       [`${name}Error`]: false
     });
   };
-
+  handleShareBar = () => {
+    this.setState({
+      displayShareBar: !this.state.displayShareBar
+    });
+  };
+  handleQty = value => {
+    const { prodQty } = this.state;
+    if (value === "increment" && prodQty < 6) {
+      this.setState({
+        prodQty: this.state.prodQty + 1
+      });
+    } else if (value === "decrement" && prodQty > 1) {
+      this.setState({
+        prodQty: this.state.prodQty - 1
+      });
+    }
+  };
   hashLinkScroll = () => {
     const { hash } = window.location;
     const {
@@ -594,7 +657,7 @@ class ProductDetails extends React.Component {
             inline: "nearest"
           });
       }, 3000);
-      console.log(id, tabElement[`${id}`], "id for tabElement");
+      // console.log(id, tabElement[`${id}`], "id for tabElement");
       this.setState({
         activeSpec: tabElement[`${id}`].tableName,
         activeDescription: tabElement[`${id}`].tabComponent
@@ -607,7 +670,23 @@ class ProductDetails extends React.Component {
       });
     }
   };
-
+  getOfferDetails = (offerDetails, price, specialPrice) => {
+    const {
+      offer_price: offerPrice = 0,
+      coupon_code: couponCode = ""
+    } = offerDetails;
+    const finalPrice = Number(specialPrice) || Number(price);
+    const priceToShow = offerPrice ? finalPrice - Number(offerPrice) : 0;
+    const couponBasePrice = Number(finalPrice);
+    const couponValue = offerPrice / couponBasePrice;
+    const couponPercentageValue = Math.round(couponValue * 100);
+    return {
+      offerPrice: formatAmount(priceToShow),
+      couponCode,
+      offerAmount: offerPrice,
+      couponPercentageValue
+    };
+  };
   renderAttributes = items => {
     items.map((item, i) =>
       Object.keys(item).map(key => (
@@ -629,9 +708,12 @@ class ProductDetails extends React.Component {
     const {
       product,
       pincode,
+      colorproducts,
       session,
       reviews,
+      isSoldOut,
       relatedproductsList,
+      boughtTogether,
       deliveryInfo,
       emidata,
       wishList,
@@ -647,13 +729,15 @@ class ProductDetails extends React.Component {
       loadingList,
       quantityChange,
       skuItem,
-      bflMinAmount
+      bflMinAmount,
+      financeOption
     } = this.props;
+
     const {
       activeSpec,
       showReviews,
       productQty,
-      colorProducts,
+      // colorproducts,
       selectedFilter,
       filterChanged,
       activeDescription,
@@ -680,47 +764,30 @@ class ProductDetails extends React.Component {
       reviews: { count, rating },
       bogo_bundle: bogoBundle,
       free_visit: freeVisit = "no",
-      free_installation: freeInstallation = "no"
+      free_installation: freeInstallation = "no",
+      swatch_image: swatchImage
     } = product;
-    // const { brand: ProductBrand } = meta;
-    const {
-      // color: ProductColor,
-      description,
-      demo_product: demoProduct = {},
-      // main_material: productMainMaterial,
-      return: returnAndCancel,
-      product_height: height,
-      product_width: width,
-      product_depth: depth,
-      care_label: careLabel,
-      product_warranty: productWarranty
-
-      // family_name: familyName,
-      // product_depth: productDepth,
-      // product_height: productHeight,
-      // product_weight: productWeight,
-      // product_width: productWidth,
-      // sku_supplier_config: skuSupplierConfig
-    } = attributes;
+    const { description, demo_product: demoProduct = {} } = attributes;
     const simpleSku = Object.keys(simples)[0];
     const {
       name,
       brand,
       price,
+      special_price: specialPrice,
+      offer_details: offerDetails = {},
       ht_wallet_cashback = null,
-      special_price: specialPriceEmi,
       config_id: configId,
-      dimension_image: dimensionImage,
+      shipping_charge: shippingCharge,
       warranty_period: warrantyPeriod = 0,
       fk_catalog_supplier: fkCatalogSupplier = null,
       categories
     } = meta;
-    console.log("salman", meta);
     const {
+      mrp,
+      special_price: csp,
       offer_discount_percentage: offerDiscountPercentage,
       coupon_code: couponCode,
       offer_price: offerPrice,
-      special_price: specialPrice,
       retail_discount: retailDiscount,
       total_savings: totalSavings,
       limited_time_coupon_discount: limitedTimeCouponDiscount,
@@ -728,15 +795,17 @@ class ProductDetails extends React.Component {
       mrp: maxPrice,
       discount_type: discountType
     } = pricingDetails;
-
-    const checkSpecialPrice = Number(specialPriceEmi) || Number(price);
+    const { prodDetail, displayBTModal, displayShareBar, prodQty } = this.state;
+    const checkSpecialPrice = Number(specialPrice) || Number(price);
+    const isEmiAvailable = Number(checkSpecialPrice) >= EMI_THRESHOLD;
+    // const checkSpecialPrice = Number(specialPriceEmi) || Number(price);
     // const { adding, added, data: reviewsData = [] } = reviews;
     const { data: reviewsData = [] } = reviews;
     const offerImage = simples[simpleSku].groupedattributes.offer_image || null;
     const offerImageRedirect =
       simples[simpleSku].groupedattributes.offer_image_click_url || null;
     const { showmore, showmorecolorproducts } = this.state;
-    const isEmiAvailable = Number(checkSpecialPrice) >= 3000;
+    // const isEmiAvailable = Number(checkSpecialPrice) >= 3000;
     const {
       main_material: material,
       color,
@@ -777,11 +846,10 @@ class ProductDetails extends React.Component {
                   "@type" : "Product",
                   "url": "${productURL || ""}",
                   "name" : "${name.replace(/['"]+/g, "")}",
-                  "image" : ${
-                    images && images.length && images[0].url
-                      ? `["${images[0].url}.jpg"]`
-                      : []
-                  },
+                  "image" : ${images && images.length && images[0].url
+                  ? `["${images[0].url}.jpg"]`
+                  : []
+                },
                   "description" : "${productDescription.replace(/['"]+/g, "")}",
                   "sku": "${sku || ""}",
                   "brand" : {
@@ -793,11 +861,10 @@ class ProductDetails extends React.Component {
                     "@type" : "Offer",
                     "url": "${productURL || ""}",
                     "priceCurrency": "INR",
-                    "price": "${
-                      Number(formatPrice(offerPrice))
-                        ? Number(formatPrice(offerPrice))
-                        : Number(specialPrice) || Number(price) || ""
-                    }",
+                    "price": "${Number(formatPrice(offerPrice))
+                  ? Number(formatPrice(offerPrice))
+                  : Number(specialPrice) || Number(price) || ""
+                }",
                     "availability": "https://schema.org/InStock"
                   }
                 }
@@ -812,52 +879,280 @@ class ProductDetails extends React.Component {
             </Row>
             <Row mb={40}>
               {/* Left Column */}
-              <Col width={[1, 6 / 12, 6 / 12, 7 / 12]} pr={40}>
-                <Box sx={{ position: "relative" }}>
+              <Col width={[1, 2 / 12, 5 / 12, 6 / 12]} pr={40}>
+                <Box style={{ position: "sticky", top: "0", left: "0" }}>
                   {/* Product Slider */}
                   {images && (
                     <ProductDetailsCarousel data={images} title={meta.name} />
                   )}
 
                   {/* Wishlist Button */}
-                  <WishListButton
-                    onClick={onClickWishList(
-                      sku,
-                      wishListData,
-                      wishlistToggle,
-                      isLoggedIn,
-                      this.handleLoginModal,
-                      addToWaitList,
-                      simpleSku,
-                      pincode.selectedPincode
-                    )}
-                    isWishList={isInWishList(wishList, sku)}
-                    wishlistLoading={isInWishList(loadingList, sku)}
-                  />
                 </Box>
               </Col>
               {/* Right Column */}
               <Col width={[1, 6 / 12, 6 / 12, 5 / 12]}>
-                <div id="portal" className="portal" />
-                {/* Product title and price */}
-                <TitlePrice
-                  name={name}
-                  brand={brand}
-                  couponCode={couponCode}
-                  discountType={discountType}
-                  offerDiscountPercentage={offerDiscountPercentage}
-                  limitedTimeCouponDiscount={limitedTimeCouponDiscount}
-                  maxPrice={maxPrice}
-                  offerPrice={offerPrice}
-                  totalSavings={totalSavings}
-                  specialPrice={specialPrice}
-                  totalDiscountPercentage={totalDiscountPercentage}
-                  retailDiscount={retailDiscount}
-                  ratings={rating}
-                  count={count}
-                  marginTop="1rem"
-                  onClickReviews={this.onClickReviews}
-                />
+                <div id="portal" className="portal" style={{ position: "sticky", top: "0" }} />
+
+                {/* Product title  */}
+                <HeadingTitlePrice name={name} brand={brand} />
+
+                {/* color option */}
+                <Row
+                  display="block"
+                  mt="0"
+                  mb="0"
+                  mr="1rem"
+                  ml="1rem"
+                  style={{ width: "100%" }}
+                >
+                  <div style={{ width: "50%" }}>
+                    <Section mt="10px" mb="0.3125rem" p="0">
+                      {colorproducts.length > 0 && (
+                        <Box pb={15}>
+                          <ColorOption
+                            data={colorproducts}
+                            currentImage={swatchImage}
+                            showmorecolorproducts={showmorecolorproducts}
+                            toggleShowMoreColorProducts={
+                              this.toggleShowMoreColorProducts
+                            }
+                          />
+                        </Box>
+                      )}
+                    </Section>
+                  </div>
+                  {boughtTogether && boughtTogether.length ? (
+                    <LazyLoad height={150}>
+                      <Div mt="1rem" mb="1rem" style={{ width: '50%', display: 'flex', justifyContent: 'flex-end' }}>
+                        <Button style={{
+                          width: "90%",
+                          padding: " 10px",
+                          color: "#323131",
+                          fontSize: "16px",
+                          border: "1px solid #707070",
+                          borderRadius: "4px",
+                          backgroundColor: "#fff",
+                          textTransform: "capitalize"
+                        }} onClick={() => this.handleBTModel(true)}>
+                          More options
+                          <Image src={DownArrow} style={{ marginLeft: "10px" }} />
+                        </Button>
+                      </Div>
+                    </LazyLoad>
+                  ) : null}
+
+
+                  {/* Product price */}
+                  <Box mb={20} mt={10}>
+                    {combinedbuy.length ? (
+                      <Button
+                        variant="link"
+                        fontFamily="medium"
+                        fontSize={18}
+                        mb={15}
+                      >
+                        <a
+                          href="#combined_buy_offers"
+                          style={{ color: "#F15A22" }}
+                        >
+                          {`See ${combinedbuy.length} Combined ${combinedbuy.length > 1 ? "Offers" : "Offer"
+                            }`}
+                        </a>
+                      </Button>
+                    ) : (
+                        ""
+                      )}
+                    <Div m="0px">
+                      {formatPrice(csp) < formatPrice(mrp) ? (
+                        <Text
+                          mt="0px"
+                          color="#E9916B"
+                          fontSize="1.1rem"
+                          fontWeight="bold"
+                          height="35px"
+
+                        >
+                          {formatPrice(csp) !== 0 ? `₹${csp}` : `₹${mrp}`}
+                          <span>
+                            {formatPrice(csp) !== 0 ? (
+                              <Text
+                                ml="10px"
+                                fontSize="1.1rem"
+                                color="#999999"
+                                fontWeight="bold"
+                                textDecoration="line-through"
+                                display="inline-block"
+
+                              >
+                                <del>   ₹{mrp}{" "}  </del>
+                                <Text
+                                  // mt="0px"
+                                  color="#999999"
+                                  fontSize="1.1rem"
+                                  pl="5px"
+                                  fontWeight="bold"
+                                  textDecoration="line-through"
+                                  display="inline-block"
+
+                                  style={{ textDecoration: "none" }}
+                                >
+                                  MRP(Inclusive of all taxes)
+                          </Text>
+                              </Text>
+                            ) : (
+                                <Text
+                                  // mt="0px"
+                                  color="#999999"
+                                  fontSize="1.1rem"
+                                  pl="5px"
+                                  fontWeight="bold"
+                                  textDecoration="line-through"
+                                  display="inline-block"
+
+                                  style={{ textDecoration: "none" }}
+                                >
+                                  MRP (Inclusive of all taxes)
+                                </Text>
+                              )}
+                          </span>
+                        </Text>
+                      ) : (
+                          <Text
+                            color="#E9916B"
+                            fontSize="1.2rem"
+                            fontWeight="bold"
+                            height="35px"
+
+                          >
+                            ₹{mrp}{" "}
+                            <Text
+                              // mt="0px"
+                              color="#999999"
+                              fontSize="1.1rem"
+                              pl="5px"
+                              fontWeight="bold"
+                              textDecoration="line-through"
+                              display="inline-block"
+
+                              style={{ textDecoration: "none" }}
+                            >
+                              MRP (Inclusive of all taxes)
+                    </Text>
+                          </Text>
+                        )}
+                      {couponCode ? (
+                        // {!!isOfferExist && price !== discPrice &&
+                        <Div>
+                          <Div>
+                            <Heading
+                              itemProp="offers"
+                              itemScope
+                              itemType="http://schema.org/Offer"
+                              ellipsis={false}
+                              display="flex"
+                              pt="5px"
+                              pb="2px"
+                              mt="0"
+                              mb="0.5rem"
+                            >
+                              <Div style={{ width: "34%" }}>
+                                <span
+                                  style={{ color: "#E9916B", fontSize: "1.3rem" }}
+                                  itemProp="priceCurrency"
+                                  content="INR"
+
+                                >
+                                  Offer Price :
+                          </span>
+                              </Div>
+                              <Div style={{ width: "calc(100% - 100px)" }}>
+                                <span
+                                  style={{ color: "#E9916B", fontSize: "1.3rem" }}
+                                  itemProp="price"
+                                  content={formatAmount(checkSpecialPrice)}
+
+                                >
+                                  ₹{offerPrice}
+                                </span>
+                              </Div>
+                            </Heading>
+
+                          </Div>
+                        </Div>
+                      ) : null}
+                      <Div>
+                        {couponCode ? (
+                          <Text mt="0px" mb="0px" color="#626463" fontSize="16px">
+                            {discountType === "fixed"
+                              ? `Price inclusive of Extra ₹${limitedTimeCouponDiscount} OFF, Use Coupon`
+                              : `Price inclusive of Extra ${offerDiscountPercentage}% OFF, Use Coupon`}
+                            <span
+                              style={{
+                                fontSize: "14px",
+                                color: "#E9916B",
+                                marginLeft: "5px",
+                                textTransform: "uppercase"
+
+                              }}
+
+                            >
+                              {couponCode}
+                            </span>
+                          </Text>
+                        ) : null}
+                        <div ht_wallet_cashback={ht_wallet_cashback}>
+                          {ht_wallet_cashback ? (
+                            <div
+                              style={{
+                                color: "#E9916B",
+                                fontSize: "16px",
+                                marginBottom: "10px",
+                                marginTop: "10px"
+                              }}
+                            >
+                              {` Extra ${Math.round(
+                                ht_wallet_cashback
+                              )}% HT wallet cashback`}
+                            </div>
+                          ) : null}
+                        </div>
+                        {totalSavings !== "0" ? (
+                          <Text mt="0px" color="#626463" fontSize="16px" marginTop="5px" marginBottom="20px">
+                            Total Savings ₹ {totalSavings} ({totalDiscountPercentage}%
+                      OFF)
+                          </Text>
+                        ) : null}
+                      </Div>
+                    </Div>
+                    {/* out of stock text */}
+                    {!(
+                      simples[simpleSku].meta.quantity &&
+                      parseInt(simples[simpleSku].meta.quantity, 10) > 0
+                    ) ?
+                      <div
+                        style={{
+                          color: "#f98d29",
+                          fontSize: "16px",
+                          fontWeight: "bold",
+                          marginBottom: "20px"
+                        }}>
+                        Out of Stock
+                        </div>
+                      : null}
+                    {/* banner */}
+                    {offerImage && offerImageRedirect && (
+                      <a rel="noopener noreferrer" href={offerImageRedirect}>
+                        <Image src={offerImage} alt="" width="100%" />
+                      </a>
+                    )}
+                    {offerImage && !offerImageRedirect && (
+                      <Image src={offerImage} alt="" width="100%" />
+                    )}
+                  </Box>
+                  <Box style={{ width: "100%" }}>
+                    <EmiOptions data={financeOption} />
+                  </Box>
+                </Row>
 
                 {/* PDP Strip Icons */}
                 <Stripes
@@ -879,23 +1174,12 @@ class ProductDetails extends React.Component {
                   />
                 </Stripes>
                 {/* discount text */}
-                <div ht_wallet_cashback={ht_wallet_cashback}>
-                  {ht_wallet_cashback ? (
-                    <div
-                      style={{
-                        color: "#E9916B",
-                        fontSize: "16px",
-                        paddingTop: "15px"
-                      }}
-                    >
-                      {` Extra ${Math.round(
-                        ht_wallet_cashback
-                      )}% HT wallet cashback`}
-                    </div>
-                  ) : null}
-                </div>
+
                 {/* Pincode */}
-                <ServiceDetails
+                {!(
+                  simples[simpleSku].meta.quantity &&
+                  parseInt(simples[simpleSku].meta.quantity, 10) > 0
+                ) ? null : <ServiceDetails
                   deliverBy={
                     (deliveryInfo &&
                       deliveryInfo[0] &&
@@ -905,194 +1189,99 @@ class ProductDetails extends React.Component {
                       deliveryDetails[0].value) ||
                     ""
                   }
-                  emiStarting={formatAmount(calculateLowestEmi(emidata, price))}
+                  // emiStarting={formatAmount(calculateLowestEmi(emidata, price))}
                   shipping={checkSpecialPrice}
-                  isEmiAvailable={isEmiAvailable}
+                  // isEmiAvailable={isEmiAvailable}
                   pincode={pincode.selectedPincode}
                   loading={deliveryDateLoading}
                   shippingCharge={meta.shipping_charge}
                 >
-                  <Pincode key="pincode" />
-                </ServiceDetails>
+                    <Pincode key="pincode" />
 
-                {/* Reviews */}
-                {!!weightedRating && reviewsData.length ? (
-                  <div style={{ display: "flex" }}>
-                    <ReviewDisplay
-                      pr="5px"
-                      ratings={weightedRating}
-                      reviews={reviewsData.length}
-                      count={5}
-                      pb={20}
-                      justifyContent="flex-start"
-                      sx={{ borderBottom: "none" }}
-                    />
-                    <a
-                      variant="linkPrimary"
-                      href="#review-section"
-                      style={{
-                        cursor: "default"
-                      }}
-                    >
-                      <Label
-                        mr={5}
-                        color="primary"
-                        fontFamilly="medium"
-                        fontSize={14}
-                        sx={{ cursor: "pointer" }}
-                      >
-                        {`Review${reviewsData.length !== 1 ? "s " : " "} `}
-                      </Label>
-                    </a>
-                    <Box>
-                      <a
-                        variant="linkPrimary"
-                        href="#review-section"
-                        onClick={this.toggleAddReview}
-                        ml={10}
-                        sx={{
-                          borderLeft: "primary"
-                        }}
-                        style={{
-                          color: "#f15a22",
-                          fontSize: "14px"
-                        }}
-                      >
-                        {" |"} Write a Review
-                      </a>
-                    </Box>
-                  </div>
-                ) : (
-                  <Box pb={20}>
-                    <a
-                      variant="linkPrimary"
-                      href="#review-section"
-                      onClick={this.toggleAddReview}
-                      sx={{
-                        borderLeft: "primary"
-                      }}
-                      style={{ color: "#f15a22" }}
-                    >
-                      Write a Review
-                    </a>
-                  </Box>
-                )}
-
-                {/* Color Options */}
-                {colorProducts.length > 0 && (
-                  <Box pb={15}>
-                    <Heading
-                      fontSize="1em"
-                      color="textDark"
-                      fontFamily="medium"
-                      fontWeight="normal"
-                      mb={15}
-                    >
-                      Color Options: {getSelectedColor(colorProducts)}
-                    </Heading>
-                    <ColorOption
-                      data={colorProducts}
-                      showmorecolorproducts={showmorecolorproducts}
-                      toggleShowMoreColorProducts={
-                        this.toggleShowMoreColorProducts
-                      }
-                      currentlySelectedProductSku={product.sku}
-                      showmorecolorproductsCount={showmorecolorproductsCount}
-                    />
-                  </Box>
-                )}
-                {bogoBundle && bogoBundle.name && (
-                  <Row
-                    display="block"
-                    mb="0"
-                    mr="0.9375rem"
-                    ml="0.9375rem"
-                    className={styles.freebieProduct}
-                  >
-                    <FreebieProduct bogoBundle={bogoBundle} />
-                  </Row>
-                )}
-
-                {/* Quantity */}
-                <Flex alignItems="center">
-                  <Text fontFamily="regular" mr={10}>
-                    Qty.
-                  </Text>
-                  <Select
-                    placeholder=""
-                    options={qtyOptions(simples[simpleSku])}
-                    value={
-                      qtyOptions(simples[simpleSku]).length > 0
-                        ? productQty
-                        : { value: 0, label: "0" }
-                    }
-                    defaultValue={1}
-                    styles={customStyles}
-                    isDisabled={
-                      !(
-                        simples[simpleSku].meta.quantity &&
-                        parseInt(simples[simpleSku].meta.quantity, 10) > 0
-                      )
-                    }
-                    onChange={({ value }) => {
-                      this.handleSelectQty(value);
-                    }}
-                  />
-                </Flex>
-                {/* Offers */}
-                {
-                  <Box mb={20} mt={10}>
-                    {combinedbuy.length ? (
-                      <Button
-                        variant="link"
-                        fontFamily="medium"
-                        fontSize={18}
-                        mb={15}
-                      >
-                        <a
-                          href="#combined_buy_offers"
-                          style={{ color: "#F15A22" }}
-                        >
-                          {`See ${combinedbuy.length} Combined ${
-                            combinedbuy.length > 1 ? "Offers" : "Offer"
-                          }`}
-                        </a>
-                      </Button>
-                    ) : (
-                      ""
-                    )}
-
-                    {offerImage && offerImageRedirect && (
-                      <a rel="noopener noreferrer" href={offerImageRedirect}>
-                        <Image src={offerImage} alt="" width="100%" />
-                      </a>
-                    )}
-                    {offerImage && !offerImageRedirect && (
-                      <Image src={offerImage} alt="" width="100%" />
-                    )}
-                  </Box>
-                }
-                {demoProduct === "1" ? (
-                  <Row ml="0" mr="0" mb="15px" mt="-10px" alignItems="center">
-                    <Image
-                      src={demoIcon}
-                      alt="Schedule you virtual live demo"
-                      width="24px"
-                      mr="10px"
-                    />
-                    <Text fontSize="14px" color="secondary" display="contents">
-                      Available for demo on the Cart page
-                    </Text>
-                  </Row>
-                ) : null}
+                  </ServiceDetails>}
 
                 {/* Add to cart and Buy now buttons */}
-                <Row mx={-10}>
-                  <Col variant="col-6" px={10}>
+                <Div>
+                  <Row
+                    ml="0rem"
+                    mr="0rem"
+                    mb="0rem"
+                    justifyContent="space-between"
+                    style={{
+                      marginBottom: "30px",
+                      width: "100%",
+                      zIndex: "1000",
+                      backgroundColor: "white"
+                    }}
+                  >
+                    <BuyNow
+                      quantity={this.state.prodQty || 1}
+                      simpleSku={simpleSku}
+                      sku={sku}
+                      size="block"
+                      btnType="primary"
+                      isSoldOut={
+                        !(
+                          simples[simpleSku].meta.quantity &&
+                          parseInt(simples[simpleSku].meta.quantity, 10) > 0
+                        )
+                      }
+                    />
+
+                    {!(
+                      simples[simpleSku].meta.quantity &&
+                      parseInt(simples[simpleSku].meta.quantity, 10) > 0
+                    ) ? null :
+                      <Row
+                        ml="0px"
+                        mr="0px"
+                        height="45px"
+                        style={{ width: "30%" }}
+                        justifyContent="flex-end"
+                      >
+                        <Row
+                          ml="0px"
+                          mr="0px"
+                          justifyContent="center"
+                          style={{
+                            alignItems: "center",
+                            width: "80%",
+                            border: "1px solid #E9916B",
+                            borderRadius: "5px"
+                          }}
+                        >
+                          <Button
+                            backgroundColor="#fff"
+                            color="#000"
+                            width="30%"
+                            pl="0.5rem"
+                            pr="0.5rem"
+                            style={{ border: "none" }}
+                            onClick={() => this.handleQty("decrement")}
+                          >
+                            -
+                     </Button>
+                          <Div style={{ width: "30%", textAlign: "center" }}>
+                            {prodQty}
+                          </Div>
+                          <Button
+                            backgroundColor="#fff"
+                            color="#000"
+                            width="30%"
+                            pl="0.5rem"
+                            pr="0.5rem"
+                            style={{ border: "none" }}
+                            onClick={() => this.handleQty("increment")}
+                          >
+                            +
+                     </Button>
+                        </Row>
+                      </Row>
+                    }
                     <AddToCart
                       skuItem={skuItem}
                       quantityChange={quantityChange}
-                      quantity={productQty.value || 1}
+                      quantity={this.state.prodQty || 1}
                       simpleSku={simpleSku}
                       sku={sku}
                       configId={configId}
@@ -1104,458 +1293,292 @@ class ProductDetails extends React.Component {
                         )
                       }
                     />
-                  </Col>
-                  <Col variant="col-6" px={10}>
-                    <BuyNow
-                      quantity={productQty.value || 1}
-                      simpleSku={simpleSku}
-                      sku={sku}
-                      isSoldOut={
-                        !(
-                          simples[simpleSku].meta.quantity &&
-                          parseInt(simples[simpleSku].meta.quantity, 10) > 0
-                        )
-                      }
-                    />
-                  </Col>
-                </Row>
-
-                {/* Share on social media */}
-                <Row mt={30} mx={0}>
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={`http://www.facebook.com/sharer.php?u=${productURL}`}
-                  >
-                    <SocialButton>
-                      <Image src={fbIcon} alt="Facebook" />
-                    </SocialButton>
-                  </a>
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={`http://pinterest.com/pin/create/button/?url=${productURL}&description=${name}`}
-                  >
-                    <SocialButton>
-                      <Image src={pinIcon} alt="Pinterest" />
-                    </SocialButton>
-                  </a>
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={`mailto:?subject=${productPageTitle(
-                      name
-                    )}&body=${productURL}`}
-                  >
-                    <SocialButton>
-                      <Image src={email} alt="Mail" />
-                    </SocialButton>
-                  </a>
-                </Row>
-              </Col>
-            </Row>
-            <Box>
-              <Row
-                variant="row.contentCenter"
-                mx={0}
-                sx={{
-                  borderTop: "dividerBold",
-                  borderBottom: "dividerBold",
-                  overflow: "auto",
-                  flexWrap: "nowrap",
-                  justifyContent: "flex-start"
-                }}
-              >
-                <DescriptionButton
-                  onClick={e => {
-                    e.preventDefault();
-                    this.setState({
-                      activeSpec: "description",
-                      activeDescription: description
-                    });
-                  }}
-                  active={activeSpec === "description"}
-                  tab={"description"}
-                >
-                  DESCRIPTION
-                </DescriptionButton>
-                <DescriptionButton
-                  onClick={e => {
-                    e.preventDefault();
-                    this.setState({
-                      activeSpec: "details",
-                      activeDescription: description
-                    });
-                  }}
-                  active={activeSpec === "details"}
-                  tab={"details"}
-                >
-                  DETAILS
-                </DescriptionButton>
-                {careLabel && (
-                  <DescriptionButton
-                    onClick={e => {
-                      e.preventDefault();
-                      this.setState({
-                        activeSpec: "care",
-                        activeDescription: careLabel
-                      });
-                    }}
-                    active={activeSpec === "care"}
-                    tab={"product-care-instructions"}
-                  >
-                    PRODUCT CARE INSTRUCTIONS
-                  </DescriptionButton>
-                )}
-                {productWarranty && (
-                  <DescriptionButton
-                    onClick={e => {
-                      e.preventDefault();
-                      this.setState({
-                        activeSpec: "warranty",
-                        activeDescription: productWarranty
-                      });
-                    }}
-                    active={activeSpec === "warranty"}
-                    tab={"service-assurance-warranty"}
-                  >
-                    SERVICE ASSURANCE / WARRANTY
-                  </DescriptionButton>
-                )}
-                {returnAndCancel && (
-                  <DescriptionButton
-                    onClick={e => {
-                      e.preventDefault();
-                      this.setState({
-                        activeSpec: "return",
-                        activeDescription: returnAndCancel
-                      });
-                    }}
-                    active={activeSpec === "return"}
-                    tab={"return-and-cancellation"}
-                  >
-                    RETURN / CANCELLATION
-                  </DescriptionButton>
-                )}
-
-                {this.renderAttributes(groupedAttributes)}
-              </Row>
-
-              {activeSpec === "details" ? (
-                <Box
-                  px="5%"
-                  py="2%"
-                  sx={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    justifyContent: "space-between"
-                  }}
-                >
-                  {groupedAttributes[0].Details.map(detail => {
-                    // if (detail.label !== 'Note' && detail.label !== "What's in the box?") {
-                    if (detail.label !== "Note" && detail.value) {
-                      return (
-                        <Row width="33%" pb={10}>
-                          <Col
-                            width={150}
-                            fontWeight="bold"
-                            fontSize={14}
-                            lineHeight={1.4}
+                    {!(
+                      simples[simpleSku].meta.quantity &&
+                      parseInt(simples[simpleSku].meta.quantity, 10) > 0
+                    ) ? null :
+                      <Row
+                        ml="0px"
+                        mr="0px"
+                        style={{ width: "30%" }}
+                        justifyContent="flex-end"
+                      >
+                        <Row
+                          ml="0px"
+                          mr="0px"
+                          justifyContent="center"
+                          backgroundColor="#fff"
+                          style={{
+                            alignItems: "center",
+                            width: "80%",
+                            height: "45px",
+                            marginTop: "5px",
+                            border: "1px solid #515151",
+                            borderRadius: "5px"
+                          }}
+                        >
+                          <button
+                            style={{
+                              padding: "0",
+                              border: "none",
+                              backgroundColor: "#ffffff"
+                            }}
+                            onClick={onClickWishList(
+                              sku,
+                              wishListData,
+                              wishlistToggle,
+                              isLoggedIn,
+                              this.handleLoginModal,
+                              addToWaitList,
+                              simpleSku,
+                              pincode.selectedPincode
+                            )}
+                          // isWishList={isInWishList(wishList, sku)}
+                          // wishlistLoading={isInWishList(loadingList, sku)}
                           >
-                            {detail.label}
-                          </Col>
-                          {detail.label !== "What's in the box?" ? (
-                            <Col
-                              width="calc(100% - 150px)"
-                              fontSize={14}
-                              lineHeight={1.25}
-                            >
-                              {detail.value}
-                            </Col>
-                          ) : (
-                            <Col
-                              mt="5px"
-                              mb="5px"
-                              itemProp="description"
-                              fontSize="0.875rem"
-                              dangerouslySetInnerHTML={{ __html: detail.value }}
-                              lh="1.6"
-                              color="rgba(0, 0, 0, 0.65)"
-                              fontFamily="light"
+                            <Img
+                              src={
+                                isInWishList(wishList, sku)
+                                  ? WishlistIconSelect
+                                  : WishlistIcon
+                              }
+                              alt="wishlist icon"
+                              width="24px"
                             />
-                          )}
+                          </button>
                         </Row>
-                      );
-                    }
-                    return null;
-                  })}
-                </Box>
-              ) : (
-                <Box px="10%">
-                  {description && (
-                    <ProductDesc
-                      desc={activeDescription || ""}
-                      showmore={showmore}
-                      toggleShowMore={this.toggleShowMore}
-                    />
-                  )}
-                </Box>
-              )}
+                      </Row>}
 
-              {/* Specifications */}
-              <Specs
-                activeSpec={activeSpec}
-                specs={groupedAttributes}
-                pincode={pincode.selectedPincode}
-              />
-              {/* Video */}
-              {groupedattributes && groupedattributes.youtubeid && (
-                // <Row my={30}>
-                //   <Col variant="col-12">
-                //     <Video id={getVideoID(groupedattributes.youtubeid)} />
-                //   </Col>
-                // </Row>
-                <div style={{ display: "flex" }}>
-                  <Button
-                    onClick={() => this.setState({ openVideo: true })}
-                    my={8}
-                    sx={{
-                      width: "60%",
-                      margin: "auto"
+
+
+                  </Row>
+                </Div>
+                {/* share product */}
+                <Div>
+                  <Div
+                    style={{
+                      display: "flex",
+                      justifyContent: "flex-start",
+                      alignItems: "center",
+                      marginBottom: "20px",
+                      cursor: "pointer"
                     }}
                   >
-                    Watch video
-                  </Button>
-                </div>
-              )}
-              {/* Usps */}
-              <Row
-                my={40}
-                width={["80%", "80%", "60%"]}
-                justifyContent="space-between"
-                mx="auto"
-                flexWrap="nowrap"
-              >
-                {!meta.shipping_charge && (
-                  <div style={{ margin: "auto" }}>
-                    <UspCol src={freeShippingIcon} text="Free Shipping" />
-                  </div>
-                )}
-                {isEmiAvailable && (
-                  <div style={{ margin: "auto" }}>
-                    <UspCol src={emiIcon} text="EMI Options" />
-                  </div>
-                )}
-                {warrantyPeriod && warrantyPeriod !== "None" ? (
-                  <div style={{ margin: "auto" }}>
-                    <UspCol src={warrentyIcon} text={uspWarranty} />
-                  </div>
-                ) : null}
-              </Row>
-
-              {/* DIMENSIONS */}
-              {/* { isFurnitureTrue()} */}
-              {this.state.isFurniture && (height || width || depth) && (
-                <Box py={20} sx={{ borderTop: "dividerLight" }}>
-                  <Box textAlign="center" mb={30}>
-                    <Text variant="regular" fontSize={16} pb={5}>
-                      DIMENSIONS
+                    <Img
+                      src={ShareIcon}
+                      height="22px"
+                      width="auto"
+                      style={{ display: "inline-block" }}
+                    />
+                    <Text ml="0.5rem" onClick={this.handleShareBar}>
+                      Share this product
                     </Text>
-                    <Heading variant="heading.regular">
-                      Will it fit in your room?
-                    </Heading>
-                  </Box>
-                  <Box
-                    p={15}
-                    textAlign="center"
-                    sx={{ border: "dividerLight" }}
+                  </Div>
+                  {displayShareBar ? (
+                    <ShareBar
+                      title={name}
+                      url={productURL}
+                      mt="10px"
+                      mb="30px"
+                    />
+                  ) : null}
+                </Div>
+                <div>
+
+                  <Specs
+                    desc={description || ""}
+                    specs={groupedAttributes}
+                    prodDetail={true}
+                    pincode={pincode.selectedPincode}
+                  />
+
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      background: "#f5f5f5",
+                      width: "100%",
+                      height: "50px",
+                      color: "rgba(0,0,0,0.6)",
+                      border: "1px solid #d4d4d4",
+                      borderBottom: !this.state.showReviews
+                        ? "1px solid #d4d4d4"
+                        : "none",
+                      padding: "15px 20px",
+                      cursor: "pointer",
+                      fontSize: " 0.875rem"
+                    }}
+                    onClick={() => {
+                      this.setState({ showReviews: !this.state.showReviews });
+                    }}
                   >
-                    {images && images.length > 2 ? (
-                      <Image
-                        src={
-                          dimensionImage
-                            ? `${dimensionImage}-zoom.jpg`
-                            : `${images[2].url}-zoom.jpg`
-                        }
-                        alt=""
-                      />
-                    ) : (
-                      <Image src={`${images[0].url}-zoom.jpg`} alt="" />
-                    )}
-                  </Box>
-                  <Box>
-                    <Row
-                      variant="row.contentCenter"
-                      mx={0}
-                      sx={{
-                        borderTop: "dividerBold",
-                        borderBottom: "dividerBold",
-                        padding: "20px 0",
-                        marginTop: "30px",
-                        justifyContent: "flex-start"
+                    <h4 style={{ color: "rgba(0, 0, 0, 0.65)" }}>Reviews </h4>
+
+
+                    <div>
+
+                      <TotalReviewDisplay
+                        ratings={weightedRating}
+                        reviews={reviewsData.length}
+                        count={5}
+                        style={{ marginTop: '10px' }}
+                      >
+
+                        {this.state.showReviews ? (
+
+                          <Image src={DownArrow} style={{ marginLeft: "10px" }} />
+                        ) : (
+                            <Image src={DownArrow} style={{ marginLeft: "10px" }} />
+                          )}
+                      </TotalReviewDisplay>
+
+
+
+
+                    </div>
+                  </div>
+                  {this.state.showReviews ? (
+                    <div
+                      style={{
+                        background: "#f5f5f5",
+                        width: "100%",
+                        border: "1px solid #d4d4d4",
+                        borderTop: "none",
+                        padding: "0px 20px 15px"
                       }}
                     >
-                      <span className={styles.overolDimension}>
-                        Overall Dimension{" "}
-                        <span className={styles.dimensionUnit}>(Inches)</span>
-                      </span>
-                      <span className={styles.dimensionSpans}>
-                        {width && `Width : ${this.mmToInchConvert(width)}" `}
-                      </span>
-                      <span className={styles.dimensionSpans}>
-                        {depth && `Depth : ${this.mmToInchConvert(depth)}" `}
-                      </span>
-                      <span className={styles.dimensionSpans}>
-                        {height && `Height : ${this.mmToInchConvert(height)}" `}
-                      </span>
-                    </Row>
-                  </Box>
-                </Box>
-              )}
-
-              {/* Complete the look */}
-              {/* <UnbxdCompleteTheLook configId={configId} /> */}
-
-              {/* Review List and Add review */}
-              <Box id="review-section" pt={30} className={styles.reviewSection}>
-                <Box textAlign="center" mb={30}>
-                  <Heading variant="heading.regular">Reviews</Heading>
-                </Box>
-                {/* <AddReview
-                ratings={weightedRating}
-                reviews={reviewsData.length}
-                count={5}
-                variant="col-8"
-                catalogId={groupedattributes.id_catalog_config}
-                loaded
-                onClickSubmit={this.addReview}
-                adding={adding}
-                added={added}
-                toggleReview={toggleReviewBox}
-                addNewReview={addNewReview}
-              >
-                {reviewsData.length > 0 && (
-                  <ReviewFilter selectedFilterProp={selectedFilter} onFilterChange={this.onFilterChange} />
-                )}
-              </AddReview> */}
-                <div ref={this.reviewRef}>
-                  <Box width={1}>
-                    <ReviewDisplay
-                      ratings={weightedRating}
-                      reviews={reviewsData.length}
-                      count={5}
-                    >
-                      {/* {children} */}
-                      {reviewsData.length > 0 && (
-                        <ReviewFilter
-                          selectedFilterProp={selectedFilter}
-                          onFilterChange={this.onFilterChange}
-                        />
-                      )}
-                      <Button
-                        display={["none", "block"]}
-                        onClick={this.toggleAddReview}
+                      <Box
+                        id="review-section"
+                        pt={30}
+                        className={styles.reviewSection}
                       >
-                        Write a Review
-                      </Button>
-                    </ReviewDisplay>
-                    {addreview && (
-                      <form onSubmit={this.handleSubmit}>
-                        <Box width={[1, 1, 5 / 12]}>
-                          <Row alignItems="center" mx={0} mb={15}>
-                            <Label mr={10}>Rating</Label>
-                            <ReactStars
+                        <div ref={this.reviewRef}>
+                          <Box width={1}>
+                            <form onSubmit={this.handleSubmit}>
+                              <Box>
+                                <h5
+                                  style={{
+                                    color: "rgba(0,0,0,0.6)",
+                                    margin: "0px 0px 10px"
+                                  }}
+                                >
+                                  Write a Review
+                                </h5>
+
+                                <Box>
+                                  <FormInput
+                                    type="text"
+                                    placeholder="Name"
+                                    name="name"
+                                    value={this.state.name}
+                                    feedBackError={nameError}
+                                    feedBackMessage={nameErrorMessage}
+                                    onChange={this.handleChange}
+
+                                    style={{ border: "1px solid #E3E3E3", fontSize: "12px", borderRadius: "5px" }}
+                                  />
+                                </Box>
+                                <Box marginBottom="0.3125rem">
+                                  <FormInput
+                                    type="textarea"
+                                    name="review"
+                                    placeholder="Review"
+                                    value={review}
+                                    feedBackError={reviewError}
+                                    feedBackMessage={reviewErrorMessage}
+                                    onChange={this.handleChange}
+                                    rows="3"
+                                    height={100}
+                                    style={{ border: "1px solid #E3E3E3", fontSize: "12px", borderRadius: "5px" }}
+                                  />
+                                </Box>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    alignItems: "center"
+                                  }}
+                                >
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      justifyContent: "space-between",
+                                      alignItems: "center"
+                                    }}
+                                  >
+                                    <Label style={{ fontSize: '14px', marginLeft: '15px' }} mr={10}>Rating</Label>
+                                    <ReactStars
+                                      count={5}
+                                      onChange={this.ratingChanged}
+                                      size={25}
+                                      value={this.state.rating}
+                                      half={false}
+                                      color2="#222222"
+                                    />
+                                  </div>
+                                  <Box>
+                                    <Button
+                                      backgroundColor="#E9916B"
+                                      type="submit"
+                                      btnType="primary"
+                                      size="large"
+                                      fontFamily="regular"
+                                      fontSize="0.875em"
+                                      height="42px"
+                                      lh="2"
+                                      style={{ width: '130px', borderRadius: '5px' }}
+                                    >
+                                      SUBMIT
+                                    </Button>
+                                  </Box>
+                                </div>
+                              </Box>
+                            </form>
+                            <ReviewDisplay
+                              ratings={weightedRating}
+                              reviews={reviewsData.length}
                               count={5}
-                              onChange={this.ratingChanged}
-                              size={20}
-                              value={this.state.rating}
-                              half={false}
-                              color2="#ffd700"
-                            />
-                          </Row>
-                          <Box>
-                            <FormInput
-                              label="Name"
-                              type="text"
-                              placeholder="Name"
-                              name="name"
-                              value={this.state.name}
-                              feedBackError={nameError}
-                              feedBackMessage={nameErrorMessage}
-                              onChange={this.handleChange}
-                              // ref={(nameInp) => this.myInp = nameInp}
-                            />
-                          </Box>
-                          <Box marginBottom="0.3125rem">
-                            <FormInput
-                              type="textarea"
-                              label="Review"
-                              name="review"
-                              placeholder="Review"
-                              value={review}
-                              feedBackError={reviewError}
-                              feedBackMessage={reviewErrorMessage}
-                              onChange={this.handleChange}
-                              rows="3"
-                              height={80}
-                            />
-                          </Box>
-                          <Box>
-                            <Button
-                              type="submit"
-                              btnType="primary"
-                              size="large"
-                              fontFamily="regular"
-                              fontSize="0.875em"
-                              height="42px"
-                              lh="2"
+                              style={{ marginTop: '10px' }}
                             >
-                              SUBMIT
-                            </Button>
+
+                              {reviewsData.length > 0 && (
+                                <ReviewFilter
+                                  selectedFilterProp={selectedFilter}
+                                  onFilterChange={this.onFilterChange}
+                                />
+                              )}
+                            </ReviewDisplay>
                           </Box>
-                        </Box>
-                      </form>
-                    )}
-                  </Box>
+                        </div>
+                        <Reviews
+                          variant="col-12"
+                          reviewItems={
+                            filterChanged ? reviewDataSet : reviews.data
+                          }
+                          showReviews={showReviews}
+                          showMoreReviews={this.showMoreReviews}
+                        />
+                      </Box>
+                    </div>
+                  ) : null}
                 </div>
-                <Reviews
-                  variant="col-12"
-                  reviewItems={filterChanged ? reviewDataSet : reviews.data}
-                  showReviews={showReviews}
-                  showMoreReviews={this.showMoreReviews}
-                />
-              </Box>
-            </Box>
-            {/* Combined Offers */}
-            {combinedbuy.length > 0 && (
-              <Box id="combined_buy_offers" pt={48}>
-                <Box textAlign="center" mb={20}>
-                  <Heading variant="heading.regular" sx={{ fontWeight: 400 }}>
-                    Combined Offers
-                  </Heading>
-                </Box>
-                {combinedbuy.map((item, index) => (
-                  <Row key={String(index)} mx={0}>
-                    <CombinedBuy
-                      title={item.name}
-                      item={item}
-                      data={getProductsList(item.products || [])}
-                      length={item.products.length}
-                      price={item.total_price}
-                      setDiscount={item.discount ? Number(item.discount) : 0}
-                      discountedPrice={item.total_price_after_discount}
-                      handleCombinedBuy={() =>
-                        this.handleCombinedBuy(item, pincode, session)
-                      }
-                    />
-                  </Row>
-                ))}
-              </Box>
-            )}
+              </Col>
+            </Row>
+            {/* bought together */}
+            <LazyLoad height={150}>
+              <BaughtTogether prodQty={prodQty} />
+            </LazyLoad>
+
+
+
+            {/* Complete the look */}
+            <UnbxdCompleteTheLook configId={configId} />
+
 
             {/* Recommend for you */}
             {/* <div id="unbxd_recommended_for_you" /> */}
-            <UnbxdRecommendedForYou />
+            {/* <UnbxdRecommendedForYou /> */}
 
             {/* Related Products List */}
             {/* {relatedproductsList.length > 0 && (
@@ -1571,8 +1594,8 @@ class ProductDetails extends React.Component {
 
             {/* Unbxd Recently Viewed */}
             {/* <Section>
-            <UnbxdRecentlyViewed />
-          </Section> */}
+              <UnbxdRecentlyViewed />
+            </Section> */}
 
             {/* Login modal */}
             <ResponsiveModal
@@ -1597,6 +1620,47 @@ class ProductDetails extends React.Component {
             </Col>
           </Row>
         </ResponsiveVideoModal>
+        {displayBTModal && !boughtTogether.error_message ? (
+          <Section
+            pl="0px"
+            pr="0px"
+            style={{
+              position: 'fixed',
+              height: '100vh',
+              width: '100%',
+              top: '0px',
+              backgroundColor: 'rgba(0, 0, 0, 0.5)',
+              zIndex: '1'
+            }}
+          >
+            <Div
+              style={{
+                position: 'absolute',
+                bottom: '0px',
+                height: '70%',
+                width: "100%",
+                backgroundColor: 'white',
+                borderRadius: '5px 5px 0px 0px',
+                overflowY: 'auto'
+              }}
+            >
+              <Row
+                mt="1rem"
+                mr="10px"
+                ml="10px"
+                mb="1rem"
+                style={{ justifyContent: 'flex-end', alignItems: 'center' }}
+              >
+
+                <Div style={{ width: '50%', display: 'flex', justifyContent: 'flex-end' }}>
+                  <Img src={CloseIcon} onClick={() => this.handleBTModel(false)} alt="close button" height="30px" />
+                </Div>
+              </Row>
+
+              <MoreOption prodQty={prodQty} />
+            </Div>
+          </Section>
+        ) : null}
       </div>
     );
   }
@@ -1633,6 +1697,7 @@ DescriptionButton.propTypes = {
   tab: PropTypes.string
 };
 ProductDetails.propTypes = {
+  isSoldOut: PropTypes.bool,
   toggleWebToChat: PropTypes.func.isRequired,
   dismiss: PropTypes.bool,
   pdpTimeout: PropTypes.number.isRequired,
@@ -1659,8 +1724,8 @@ ProductDetails.propTypes = {
   quantityChange: PropTypes.bool,
   skuItem: PropTypes.object,
   session: PropTypes.string,
-  bflMinAmount: PropTypes.number.isRequired
-  // onClickSubmit: PropTypes.func,
+  bflMinAmount: PropTypes.number.isRequired,
+  onClickSubmit: PropTypes.func.isRequired,
   // catalogId: PropTypes.any
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

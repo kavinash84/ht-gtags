@@ -18,6 +18,10 @@ export const filterStoresByCity = (stores, city) => {
     return stores.filter(store => store.city.toLowerCase() === city.toLowerCase());
   }
 };
+export const calculateTotalSavings = (price, discPrice) => {
+  const value = Math.round(parseInt(price, 10) - parseInt(discPrice, 10));
+  return value;
+};
 
 export const hyphenedString = name => name.split(' ').join('-');
 
@@ -29,8 +33,8 @@ export const formFilterLink = (key, selected) => {
     query = paramLink.filter(param => param !== paramLink[1]);
   } else query = paramLink;
   const encode = btoa(JSON.stringify({
-      params: query
-    }));
+    params: query
+  }));
   return `${encode}/?${splitLink[1]}`;
 };
 
@@ -199,8 +203,8 @@ export const getParamsDetailFromLink = (query, filter) => {
   }
 
   const {
- urlquery, material, price, discount, sortby, sortBy, pageno
-} = x;
+    urlquery, material, price, discount, sortby, sortBy, pageno
+  } = x;
   return {
     query,
     modifiedQuery,

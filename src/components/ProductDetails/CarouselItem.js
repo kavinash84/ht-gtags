@@ -28,8 +28,8 @@ const CategoryItem = ({ image, name }) => (
             },
             enlargedImagePortalId: 'portal',
             enlargedImageContainerDimensions: {
-              width: '75%',
-              height: '75%'
+              width: '50%',
+              height: '50%'
             },
             enlargedImageContainerClassName: 'enlarge'
           }}
