@@ -464,8 +464,7 @@ export default class ContactUs extends Component {
               const { history } = this.props;
               history.push({
                 pathname: "/exchange-offers",
-                search:
-                  "?submit=thankyou&&utm_source=Website&&utm_medium=Website&&utm_campaign=Website"
+                search: `?submit=thankyou&utm_source=${source}&utm_medium=${medium}&utm_campaign=${campaign}&utm_term=${term}`
               });
               switchUI({
                 email,
