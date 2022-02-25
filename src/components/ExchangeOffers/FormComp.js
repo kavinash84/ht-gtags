@@ -323,10 +323,27 @@ export default class ContactUs extends Component {
       imageFile
     } = this.state;
     const { switchUI } = this.props;
-    let source = "Website";
-    let campaign = "Website";
-    let medium = "Website";
-    console.log("On submit firstname", firstName);
+
+    const urlParams = new URLSearchParams(window.location.search);
+    console.log(
+      urlParams.get("utm_source"),
+      urlParams.get("utm_campaign"),
+      urlParams.get("utm_medium"),
+      urlParams.get("utm_term")
+    );
+    let source = urlParams.get("utm_source")
+      ? urlParams.get("utm_source")
+      : "Website";
+    let campaign = urlParams.get("utm_campaign")
+      ? urlParams.get("utm_campaign")
+      : "Website";
+    let medium = urlParams.get("utm_medium")
+      ? urlParams.get("utm_medium")
+      : "Website";
+    let term = urlParams.get("utm_term")
+      ? urlParams.get("utm_term")
+      : "Website";
+
     const checkFirstName = validateName(firstName);
     const checkFirstNameCharAndNum = checkSpecialCharAndNum(firstName);
     const checkLastName = validateName(lastName);
@@ -403,6 +420,7 @@ export default class ContactUs extends Component {
     formData.append("source", source);
     formData.append("campaign", campaign);
     formData.append("medium", medium);
+    formData.append("term", term);
     this.setState({
       isSubmiting: true
     });
