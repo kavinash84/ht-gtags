@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import Helmet from 'react-helmet';
+import Helmet from "react-helmet";
 import landingMainSlider from "../../../static/exchange-landing-banner.jpg";
 import landingCategory from "../../../static/landing-category.jpg";
 import Form from "./FormComp";
@@ -35,6 +35,19 @@ class LandingPage extends Component {
     }
     return (
       <section>
+        <Helmet title={`Exchange-offeres`}>
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=AW-832074530"
+          ></script>
+          <script>
+            {` window.dataLayer = window.dataLayer || [];
+               function gtag(){dataLayer.push(arguments);}
+               gtag('js', new Date());
+
+               gtag('config', 'AW-832074530'); `}
+          </script>
+        </Helmet>
         <LandingPageLogo />
         <div>
           <img

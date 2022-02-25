@@ -21,35 +21,19 @@ class SuccessPage extends Component {
     return (
       <section>
         <Helmet title={`Exchange-offeres`}>
-          <script type="text/javascript">
-            {`
-              !function(f,b,e,v,n,t,s)
-              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-              n.queue=[];t=b.createElement(e);t.async=!0;
-              t.src=v;s=b.getElementsByTagName(e)[0];
-              s.parentNode.insertBefore(t,s)}(window, document,'script',
-              'https://connect.facebook.net/en_US/fbevents.js');
-              fbq('init', '171725297723956');
-              fbq('track', 'Lead');
-            `}
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=AW-832074530"
+          ></script>
+          <script>
+            {` window.dataLayer = window.dataLayer || [];
+               function gtag(){dataLayer.push(arguments);}
+               gtag('js', new Date());
+
+               gtag('config', 'AW-832074530'); `}
           </script>
-          <script type="text/javascript">
-            {`
-              window.addEventListener('load',function(){
-                var x = 0;
-                var myVar = setInterval(function(){
-                  if(jQuery('h2:contains(Thank You For Your)').is(":visible")){
-                    if(x == 0){
-                      gtag('event', 'conversion', {'send_to': 'AW-832074530/h7wJCMXmzdcCEKLm4YwD'});
-                      x = 1;
-                    }
-                    clearInterval(myVar);
-                  }
-                }, 1000);
-              });
-            `}
+          <script>
+            {` gtag('event', 'conversion', {'send_to': 'AW-832074530/j9-7CM6CpqQDEKLm4YwD'}); `}
           </script>
         </Helmet>
         <LandingPageLogo />
