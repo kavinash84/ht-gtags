@@ -65,7 +65,7 @@ class Pincode extends React.Component {
     const { setPincodeQuery, setPincode, pincodeQuery } = this.props;
     const { validationError, validationErrorMessage } = this.state;
     return (
-      <Div className={styles.pdpPincode} pt="0" pb="0.3125rem" ml="20px">
+      <Div className={styles.pdpPincode} pt="0" pb="0.3125rem" ml="0px">
         <form onSubmit={this.setPincodeInStore(setPincode, pincodeQuery)}>
           {/* <Text color="textFilter" fontSize={16} sx={{ display: 'flex', alignItems: 'center' }} pr={10}>
               <LocationIcon color="bgPrimary" height={28} width={28} mr={5} ml={-7} />

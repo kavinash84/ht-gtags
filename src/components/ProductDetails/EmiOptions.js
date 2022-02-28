@@ -26,7 +26,7 @@ function HtExclusiveTemplate4({ data }) {
           {headerTitle}
         </Heading>
         <Div>
-          <Div pl="0px" pr="30px">
+          <Div pl="0px" pr="0px">
             <SlickSlider settings={adjustSlides(12)}>
               {collection.length &&
                 collection.map((slide, index) => (
