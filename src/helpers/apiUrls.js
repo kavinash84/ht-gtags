@@ -120,6 +120,9 @@ export const DEAL_OF_THE_DAY = "tesla/static/homepagecoupons/deal_of_the_day";
 /* design and build */
 export const DESIGN_BUILD = "tesla/static/design_and_build_v1_desktop";
 
+/* exchange offer */
+export const EXCHANGE_OFFER = "tesla/static/exchange-offer";
+
 /* home interior */
 export const HOME_INTERIOR = "tesla/static/home_interior_desktop_v1";
 

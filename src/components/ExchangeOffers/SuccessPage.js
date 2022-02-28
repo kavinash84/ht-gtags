@@ -1,9 +1,16 @@
 import React, { Component } from "react";
 import Helmet from "react-helmet";
+import { connect } from "react-redux";
 import landingMainSlider from "../../../static/success-banner.jpg";
 import mapIcon from "../../../static/map-icon.svg";
 import LandingPageLogo from "./LandingPageLogo";
 
+@connect(({ designbuild }) => ({
+  seoInfo:
+    designbuild.exchangeOffer &&
+    designbuild.exchangeOffer.seo &&
+    designbuild.exchangeOffer.seo.items
+}))
 class SuccessPage extends Component {
   componentDidMount() {
     // if (window && window.dataLayer) {
@@ -18,9 +25,15 @@ class SuccessPage extends Component {
     // }
   }
   render() {
+    const { seoInfo } = this.props;
     return (
       <section>
-        <Helmet title={`Exchange-offeres`}>
+        <Helmet title={`${(seoInfo && seoInfo.page_title) || ""}`}>
+          <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
+          <meta
+            name="description"
+            content={seoInfo && seoInfo.meta_description}
+          />
           <script
             async
             src="https://www.googletagmanager.com/gtag/js?id=AW-832074530"
