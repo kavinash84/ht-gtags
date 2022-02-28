@@ -1525,9 +1525,9 @@ class ProductDetails extends React.Component {
               </Col>
             </Row>
             {/* bought together */}
-            <LazyLoad height={150}>
-              <BaughtTogether prodQty={prodQty} />
-            </LazyLoad>
+
+            <BaughtTogether prodQty={prodQty} />
+
 
 
 
