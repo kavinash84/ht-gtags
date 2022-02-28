@@ -113,18 +113,18 @@ export default class Category extends Component {
             </Heading>
           </a>
         ) : (
-          <div>
-            <Text variant="textLight" color="white">
-              {item.offer || ""}
-            </Text>
-            <Heading variant="heading.medium" color="white" py={6}>
-              {item.title || ""}
-            </Heading>
-            <Heading fontSize={16} color="white">
-              {item.description || ""}
-            </Heading>
-          </div>
-        )}
+            <div>
+              <Text variant="textLight" color="white">
+                {item.offer || ""}
+              </Text>
+              <Heading variant="heading.medium" color="white" py={6}>
+                {item.title || ""}
+              </Heading>
+              <Heading fontSize={16} color="white">
+                {item.description || ""}
+              </Heading>
+            </div>
+          )}
       </Col>
     ));
   render() {
@@ -152,7 +152,7 @@ export default class Category extends Component {
             content={seoInfo && seoInfo.meta_description}
           />
           {seoInfo && seoInfo.cms_json && seoInfo.cms_json.length ? (
-            <script type="application/ldjson">
+            <script type="application/ld+json">
               {`
               {
                 "@context" : "http://schema.org",
@@ -162,8 +162,8 @@ export default class Category extends Component {
             `}
             </script>
           ) : (
-            ""
-          )}
+              ""
+            )}
         </Helmet>
         <Body>
           {/* Header */}
@@ -199,60 +199,60 @@ export default class Category extends Component {
             ) : currentCategory === "kitchenware" ? (
               <Redirect to="/tableware-kitchenware" />
             ) : (
-              <div>
-                {category ? (
-                  <React.Fragment>
-                    {/* Offer Bar */}
-                    {category.offers && (
-                      <Box bg="heading" pt={30} pb={20}>
-                        <Container>
-                          <Row justifyContent="center">
-                            {this.renderOffers(category.offers || [])}
-                          </Row>
-                        </Container>
-                      </Box>
-                    )}
-
-                    {/* Main Slider */}
-                    {category && <MainSlider data={category.main} />}
-
-                    {/* Breadcrumb */}
-                    <TitleBar title="Home Furnishings">
-                      <BreadCrumb
-                        urlKey={currentCategory}
-                        name={pageTitle}
-                        handleCategoryClick={this.handleCategoryClick}
-                      />
-                    </TitleBar>
-
-                    {/* Category Carousel */}
-                    {category &&
-                      category.sections &&
-                      category.sections.map((cat, index) => (
-                        <Section key={String(index)}>
-                          {cat.title !== "" && (
-                            <Container>
-                              {CommonLayout(
-                                cat.component,
-                                cat.title,
-                                cat.data,
-                                cat.is_product
+                        <div>
+                          {category ? (
+                            <React.Fragment>
+                              {/* Offer Bar */}
+                              {category.offers && (
+                                <Box bg="heading" pt={30} pb={20}>
+                                  <Container>
+                                    <Row justifyContent="center">
+                                      {this.renderOffers(category.offers || [])}
+                                    </Row>
+                                  </Container>
+                                </Box>
                               )}
-                            </Container>
-                          )}
-                        </Section>
-                      ))}
-                    {category && (
-                      <Box display="inline-block" width="100%">
-                        <Container>
-                          <UnbxdTopSellers category={category.title} />
-                        </Container>
-                      </Box>
-                    )}
-                  </React.Fragment>
-                ) : null}
-              </div>
-            )}
+
+                              {/* Main Slider */}
+                              {category && <MainSlider data={category.main} />}
+
+                              {/* Breadcrumb */}
+                              <TitleBar title="Home Furnishings">
+                                <BreadCrumb
+                                  urlKey={currentCategory}
+                                  name={pageTitle}
+                                  handleCategoryClick={this.handleCategoryClick}
+                                />
+                              </TitleBar>
+
+                              {/* Category Carousel */}
+                              {category &&
+                                category.sections &&
+                                category.sections.map((cat, index) => (
+                                  <Section key={String(index)}>
+                                    {cat.title !== "" && (
+                                      <Container>
+                                        {CommonLayout(
+                                          cat.component,
+                                          cat.title,
+                                          cat.data,
+                                          cat.is_product
+                                        )}
+                                      </Container>
+                                    )}
+                                  </Section>
+                                ))}
+                              {category && (
+                                <Box display="inline-block" width="100%">
+                                  <Container>
+                                    <UnbxdTopSellers category={category.title} />
+                                  </Container>
+                                </Box>
+                              )}
+                            </React.Fragment>
+                          ) : null}
+                        </div>
+                      )}
             {/* SEO Content */}
             {seoInfo && seoInfo.seo_text && (
               <SeoContent>
