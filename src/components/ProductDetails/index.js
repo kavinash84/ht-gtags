@@ -138,14 +138,6 @@ const qtyOptions = sku => {
   }
 };
 
-// const formatPrice = price => {
-//   let newPrice = 0;
-//   if (price.length > 3 && price !== null) {
-//     newPrice = Number(price.replace(",", ""));
-//     return newPrice;
-//   }
-//   return Number(price);
-// };
 
 const customStyles = {
   control: () => ({
@@ -347,12 +339,6 @@ class ProductDetails extends React.Component {
     this.reviewRef = React.createRef();
   }
 
-  // onOpenPdpModal = () => {
-  //   this.setState({ open: true });
-  // };
-  // onClosePdpModal = () => {
-  //   this.setState({ open: false });
-  // };
 
   componentDidMount() {
     const { dispatch } = this.context.store;
@@ -376,19 +362,7 @@ class ProductDetails extends React.Component {
       window.Unbxd.track("product_view", { pid });
     }
   }
-  // componentWillReceiveProps(nextProps) {
-  //   const { colorproducts } = this.props;
 
-  //   if (nextProps.isLoggedIn) {
-  //     this.setState({
-  //       openLogin: false
-  //     });
-  //   }
-  //   if (nextProps.colorproducts !== colorproducts) {
-  //     this.addProductToColorProduct(nextProps.colorproducts);
-  //   }
-  //   this.isFurnitureTrue();
-  // }
   componentWillUnmount() {
     const { toggleWebToChat } = this.props;
     const { popUpTimeoutId } = this.state;
@@ -432,12 +406,7 @@ class ProductDetails extends React.Component {
       // window.scroll(0, this.reviewsRef.current.offsetTop);
     }
   };
-  // setDescriptionActive = product => {
-  //   const {
-  //     attributes: { description }
-  //   } = product;
-  //   this.setState({ activeDescription: description });
-  // };
+
   getWeightedAverageRatings = () => {
     const {
       reviews: { data = [] }
@@ -480,17 +449,7 @@ class ProductDetails extends React.Component {
     const { dispatch } = this.context.store;
     dispatch(addReview(sku, data));
   };
-  // addProductToColorProduct = colorproducts => {
-  //   const { product } = this.props;
-  //   if (colorproducts.length > 0) {
-  //     colorproducts = colorproducts.map(arr => ({
-  //       ...arr,
-  //       activeColor: false
-  //     }));
-  //     colorproducts.push({ ...product, activeColor: true });
-  //     this.setState({ colorproducts });
-  //   }
-  // };
+
   toggleShowMore = () => {
     this.setState({
       showmore: !this.state.showmore
@@ -503,7 +462,7 @@ class ProductDetails extends React.Component {
       simple_sku: val.sku,
       qty: Number(val.qty)
     }));
-    // set_id, skus, session_id, pincode
+
     const { dispatch } = this.context.store;
     dispatch(addToCartCombined(setId, simpleSKUS, session, selectedPincode));
   };
