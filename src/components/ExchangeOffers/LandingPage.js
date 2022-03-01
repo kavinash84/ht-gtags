@@ -12,8 +12,8 @@ import LandingPageLogo from "./LandingPageLogo";
 @connect(({ designbuild }) => ({
   seoInfo:
     designbuild.exchangeOffer &&
-    designbuild.exchangeOffer.seo &&
-    designbuild.exchangeOffer.seo.items
+    designbuild.exchangeOffer &&
+    designbuild.exchangeOffer.items
 }))
 class LandingPage extends Component {
   constructor(props) {
