@@ -873,7 +873,7 @@ class ProductDetails extends React.Component {
                 </Box>
               </Col>
               {/* Right Column */}
-              <Col width={[1, 6 / 12, 6 / 12, 5 / 12]}>
+              <Col width={[1, 6 / 12, 6 / 12, 6 / 12]}>
                 <div
                   id="portal"
                   className="portal"
