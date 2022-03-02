@@ -507,26 +507,29 @@ class DeliveryAddress extends Component {
 
           </Col>
 
-          {/* Order Summary */}
-          {/* <Col variant="col-4">
-            <Box bg="sidebar" px={[15, 15, 40]} py={[20, 20, 30]}>
-              <OrderSummary
-                history={history}
-                results={results}
-                itemsTotal={summary.items}
-                setDiscount={summary.combined_set_discount}
-                savings={summary.savings}
-                shipping={summary.shipping_charges}
-                totalCart={summary.total}
-                itemsCount={summary.items_count}
-                discount={summary.coupon_discount}
-                coupon={summary.coupon}
-                hidecoupon={false}
-              />
-              <PaymentMethods />
-            </Box>
-          </Col> */}
         </Row>
+        <Div className={styles.deliverBtnWrapper}>
+          <button
+            style={{
+              border: '1px solid #F47020',
+              borderRadius: '4px',
+              padding: '15px 35px',
+              background: 'white',
+              color: '#F47020',
+              fontSize: '14px'
+            }}
+            // disabled={loading || this.checkParams()}
+            disabled={loading}
+            onClick={
+              isLoggedIn && !addNewAddress && (currentaddressindex === -1 || currentaddressindex === null)
+                ? this.isAddressSelected
+                : this.handleSubmit
+            }
+          >
+            {loading ? 'Loading...' : 'Save and Continue'}
+          </button>
+        </Div>
+
       </Container>
     );
   }

@@ -159,3 +159,15 @@
 .checkbox_container input:checked ~ .checkmark {
   background-color: #f47020;
 }
+.deliverBtnWrapper {
+  position: fixed !important;
+  bottom: 0;
+  background: #fff;
+  padding: 10px 30px;
+  box-shadow: 0 -7px 14px -9px rgba(124, 122, 122, 0.5);
+  height: 100px;
+  text-align: center;
+  button {
+    width: 100%;
+  }
+}
