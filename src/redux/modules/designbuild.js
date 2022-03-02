@@ -1,4 +1,4 @@
-import { DESIGN_BUILD, WARRANTY } from "helpers/apiUrls";
+import { DESIGN_BUILD, WARRANTY, EXCHANGE_OFFER } from "helpers/apiUrls";
 
 const LOAD = "designbuild/LOAD";
 const LOAD_SUCCESS = "designbuild/LOAD_SUCCESS";
@@ -12,10 +12,15 @@ const LOAD_WARRANTY_CAT = "staticPage/LOAD_WARRANTY_CAT";
 const LOAD_WARRANTY_CAT_SUCCESS = "staticPage/LOAD_WARRANTY_CAT_SUCCESS";
 const LOAD_WARRANTY_CAT_FAIL = "staticPage/LOAD_WARRANTY_CAT_FAIL";
 
+const LOAD_EXCHANGE_OFFER = "staticPage/LOAD_EXCHANGE_OFFER";
+const LOAD_EXCHANGE_OFFER_SUCCESS = "staticPage/LOAD_EXCHANGE_OFFER_SUCCESS";
+const LOAD_EXCHANGE_OFFER_FAIL = "staticPage/LOAD_EXCHANGE_OFFER_FAIL";
+
 const initialState = {
   loaded: false,
   data: [],
   warranty: "",
+  exchangeOffer: "",
   warrantyCat: ""
 };
 
@@ -78,6 +83,25 @@ export default function reducer(state = initialState, action = {}) {
         loaded: false,
         error: action.error
       };
+    case LOAD_EXCHANGE_OFFER:
+      return {
+        ...state,
+        loading: true
+      };
+    case LOAD_EXCHANGE_OFFER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        exchangeOffer: action.result
+      };
+    case LOAD_EXCHANGE_OFFER_FAIL:
+      return {
+        ...state,
+        loading: false,
+        loaded: false,
+        error: action.error
+      };
     default:
       return state;
   }
@@ -96,4 +120,13 @@ export const loadWarranty = () => ({
 export const loadWarrantyCat = key => ({
   types: [LOAD_WARRANTY_CAT, LOAD_WARRANTY_CAT_SUCCESS, LOAD_WARRANTY_CAT_FAIL],
   promise: ({ client }) => client.get(`tesla/static/landingpage/${key}`)
+});
+
+export const loadExchangeOffer = () => ({
+  types: [
+    LOAD_EXCHANGE_OFFER,
+    LOAD_EXCHANGE_OFFER_SUCCESS,
+    LOAD_EXCHANGE_OFFER_FAIL
+  ],
+  promise: ({ client }) => client.get(EXCHANGE_OFFER)
 });

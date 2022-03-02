@@ -1,9 +1,16 @@
 import React, { Component } from "react";
 import Helmet from "react-helmet";
+import { connect } from "react-redux";
 import landingMainSlider from "../../../static/success-banner.jpg";
 import mapIcon from "../../../static/map-icon.svg";
 import LandingPageLogo from "./LandingPageLogo";
 
+@connect(({ designbuild }) => ({
+  seoInfo:
+    designbuild.exchangeOffer &&
+    designbuild.exchangeOffer &&
+    designbuild.exchangeOffer.items
+}))
 class SuccessPage extends Component {
   componentDidMount() {
     // if (window && window.dataLayer) {
@@ -18,9 +25,15 @@ class SuccessPage extends Component {
     // }
   }
   render() {
+    const { seoInfo } = this.props;
     return (
       <section>
-        <Helmet title={`Exchange-offeres`}>
+        <Helmet title={`${(seoInfo && seoInfo.page_title) || ""}`}>
+          <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
+          <meta
+            name="description"
+            content={seoInfo && seoInfo.meta_description}
+          />
           <script
             async
             src="https://www.googletagmanager.com/gtag/js?id=AW-832074530"
@@ -35,7 +48,29 @@ class SuccessPage extends Component {
           <script>
             {` gtag('event', 'conversion', {'send_to': 'AW-832074530/j9-7CM6CpqQDEKLm4YwD'}); `}
           </script>
+          <script type="text/javascript">
+            {`
+             !function(f,b,e,v,n,t,s)
+             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+             n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+             if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+             n.queue=[];t=b.createElement(e);t.async=!0;
+             t.src=v;s=b.getElementsByTagName(e)[0];
+             s.parentNode.insertBefore(t,s)}(window, document,'script',
+             'https://connect.facebook.net/en_US/fbevents.js');
+             fbq('init', '171725297723956');
+             fbq('track', 'Lead');
+            `}
+          </script>
         </Helmet>
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style="display:none"
+            src="https://www.facebook.com/tr?id=171725297723956&ev=PageView&noscript=1"
+          />
+        </noscript>
         <LandingPageLogo />
         <img
           src={landingMainSlider}
@@ -125,6 +160,7 @@ class SuccessPage extends Component {
             </div>
           </div>
         </div>
+        <img src="https://ttrk.ringocount.com/pixel?adid=621c50fcfba3a36de041935b" />
       </section>
     );
   }

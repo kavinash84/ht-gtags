@@ -4,6 +4,8 @@ import ResponsiveModal from "components/Modal";
 import Section from "hometown-components-dev/lib/SectionHtV1";
 import Container from "hometown-components-dev/lib/ContainerHtV1";
 import { PINCODE } from "helpers/Constants";
+import Helmet from "react-helmet";
+import SeoContent from "hometown-components-dev/lib/SeoContent";
 import SlickSlider from "../SlickSlider";
 
 import DeliveryAddress from "./deliveryAddress";
@@ -57,7 +59,8 @@ const settings = {
 
 @connect(({ userLogin, lackpackages, pincode }) => ({
   packages_data: lackpackages.packages_data,
-  selectedPincode: pincode.selectedPincode
+  selectedPincode: pincode.selectedPincode,
+  seoInfo: lackpackages && lackpackages.seo && lackpackages.seo.items
 }))
 export default class OneLacPackage extends Component {
   state = {
@@ -110,9 +113,16 @@ export default class OneLacPackage extends Component {
 
   render() {
     const { activeTab } = this.state;
-    const { packages_data } = this.props;
+    const { packages_data, seoInfo } = this.props;
     return (
       <div className="wrapper">
+        <Helmet title={`${(seoInfo && seoInfo.page_title) || ""}`}>
+          <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
+          <meta
+            name="description"
+            content={seoInfo && seoInfo.meta_description}
+          />
+        </Helmet>
         <div className={styles.selectyourPackContainer}>
           <div className={BreadCrumpstyles.BreadCrumb_wrapper2}>
             <PackageBreadCrumb isPacakge={false} />
@@ -213,7 +223,11 @@ export default class OneLacPackage extends Component {
                       src={pack.img}
                       alt="Banner"
                       onClick={() => this.handleBannerClick(true, pack.id)}
-                      style={{ cursor: "pointer", height: "250px" , width:'90%' }}
+                      style={{
+                        cursor: "pointer",
+                        height: "250px",
+                        width: "90%"
+                      }}
                     />
                     {pack.pseudoItemsCount ? (
                       <div
@@ -272,6 +286,16 @@ export default class OneLacPackage extends Component {
             />
           </div>
         </ResponsiveModal>
+        {/* SEO Content */}
+        {seoInfo && seoInfo.seo_text && (
+          <SeoContent>
+            <Container>
+              <div>
+                <div dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }} />
+              </div>
+            </Container>
+          </SeoContent>
+        )}
       </div>
     );
   }
