@@ -493,7 +493,7 @@ class DeliveryAddress extends Component {
                 </Div>
                 <div style={{ padding: '5px', width: '100%', background: '#f7f7f7', marginTop: '35px' }} />
                 {!shippingIsBilling && (
-                  <Row display="block" mr="0" ml="0" mt="1.5rem" mb="0" pl="15px" pr="15px">
+                  <Row display="block" mr="0" ml="0" mt="1.5rem" mb="0" pl="15px" pr="15px" width="100%">
                     <Div col="12">
                       <Div style={{ fontSize: '14px', fontWeight: '600', marginBottom: '15px', color: '#323131' }}>
                         Add Billing Address

@@ -13,7 +13,7 @@ import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
 import Label from 'hometown-components-dev/lib/LabelHtV1';
 import Row from 'hometown-components-dev/lib/RowHtV1';
 import Pincode from './Pincode';
-
+const styles = require('./addressForm.scss');
 const mapStateToProps = ({ address }, props) => ({
   ...address[props.formType]
 });
@@ -65,149 +65,101 @@ const AddressForm = props => {
   } = props;
   const { formType, isLoggedIn, userEmail } = props;
   return (
-    <Box pt={30}>
-      <Box mb={20} pb={20} sx={{ borderBottom: 'divider' }}>
-        <Label variant="formHeading">Personal Details</Label>
-      </Box>
-      <Row>
-        <Col variant="col-12">
-          <FormInput
-            label="Full Name *"
-            type="text"
-            placeholder=""
-            onChange={e => onChangeFullName(formType, e.target.value)}
-            value={fullName}
-            feedBackError={fullNameFeedBackError}
-            feedBackMessage={fullNameFeedBackMessage}
-            variant="input"
-          />
-        </Col>
-        {!isLoggedIn && (
-          <Col variant="col-6">
-            <FormInput
-              label="Email ID *"
-              type={isLoggedIn ? 'hidden' : 'text'}
-              placeholder=""
-              onChange={e => onChangeEmail(formType, e.target.value)}
-              value={isLoggedIn ? userEmail : email}
-              feedBackError={isLoggedIn ? false : emailFeedBackError}
-              feedBackMessage={emailFeedBackMessage}
-              readOnly={isLoggedIn}
-              variant="input"
-            />
-          </Col>
-        )}
-        <Col variant={!isLoggedIn ? 'col-6' : 'col-12'}>
-          <FormInput
-            label="Phone *"
-            type="text"
-            placeholder=""
-            onChange={e => onChangePhone(formType, e.target.value)}
-            value={phone}
-            feedBackError={phoneFeedBackError}
-            feedBackMessage={phoneFeedBackMessage}
-            variant="input"
-          />
-        </Col>
-      </Row>
-      <Box mb={20} pb={20} mt={30} sx={{ borderBottom: 'divider' }}>
-        <Label variant="formHeading">{formType === 'billing' ? 'Billing' : 'Shipping'} Address</Label>
-      </Box>
-      <Row>
-        <Col variant="col-4">
-          <FormInput
-            id="add1"
-            label="Flat, House no., Building, Apartment*"
-            type="textarea"
-            onChange={e => onChangeAddress1(formType, e.target.value.replace(/#/g, ''))}
-            value={address1}
-            feedBackError={addressFeedBackError1}
-            feedBackMessage={addressFeedBackMessage1}
-            variant="input"
-            height="auto"
-          />
-        </Col>
-        <Col variant="col-4">
-          <FormInput
-            id="add2"
-            label="Area, Colony, Street, Sector: *"
-            type="textarea"
-            onChange={e => onChangeAddress2(formType, e.target.value.replace(/#/g, ''))}
-            value={address2}
-            feedBackError={addressFeedBackError2}
-            feedBackMessage={addressFeedBackMessage2}
-            variant="input"
-            height="auto"
-          />
-        </Col>
-        <Col variant="col-4">
-          <FormInput
-            id="add3"
-            label="Landmark,Village"
-            type="textarea"
-            placeholder=""
-            onChange={e => onChangeAddress3(formType, e.target.value.replace(/#/g, ''))}
-            value={address3}
-            feedBackError={addressFeedBackError3}
-            feedBackMessage={addressFeedBackMessage3}
-            variant="input"
-            height="auto"
-          />
-        </Col>
-      </Row>
-      <Row>
-        <Col variant="col-6">
-          <Pincode
-            id="pincodeId"
-            pincode={pincode}
-            formType={formType}
-            feedBackError={pincodeFeedBackError}
-            onChangePincode={onChangePincode}
-            feedBackMessage={pincodeFeedBackMessage}
-          />
-        </Col>
-        <Col variant="col-6">
-          <FormInput
-            label="State *"
-            type="text"
-            placeholder=""
-            value={state}
-            feedBackError={stateFeedBackError}
-            feedBackMessage={stateFeedBackMessage}
-            readOnly
-            variant="input"
-          />
-        </Col>
-      </Row>
-      <Row>
-        <Col variant="col-6">
-          <FormInput
-            label="City *"
-            type="text"
-            placeholder=""
-            value={city}
-            feedBackError={cityFeedBackError}
-            feedBackMessage={cityFeedBackMessage}
-            readOnly
-            variant="input"
-          />
-        </Col>
-        {formType !== 'billing' && (
-          <Col variant="col-6">
-            <FormInput
-              label="GST(optional)"
-              type="text"
-              placeholder=""
-              onChange={e => onChangeGST(formType, e.target.value)}
-              value={gst}
-              feedBackError={gstFeedBackError}
-              feedBackMessage={gstFeedBackMessage}
-              variant="input"
-            />
-          </Col>
-        )}
-      </Row>
-    </Box>
+    <div className={styles.AddressFormContainer} style={{ width: "100%" }}>
+      <FormInput
+        label=""
+        type="text"
+        placeholder="Full Name *"
+        onChange={e => onChangeFullName(formType, e.target.value)}
+        value={fullName}
+        feedBackError={fullNameFeedBackError}
+        feedBackMessage={fullNameFeedBackMessage}
+      />
+      <FormInput
+        label=""
+        type={isLoggedIn ? 'hidden' : 'text'}
+        placeholder="Email ID *"
+        onChange={e => onChangeEmail(formType, e.target.value)}
+        value={isLoggedIn ? userEmail : email}
+        feedBackError={isLoggedIn ? false : emailFeedBackError}
+        feedBackMessage={emailFeedBackMessage}
+        readOnly={isLoggedIn}
+      />
+      <FormInput
+        label=""
+        type="text"
+        placeholder="Phone *"
+        onChange={e => onChangePhone(formType, e.target.value)}
+        value={phone}
+        feedBackError={phoneFeedBackError}
+        feedBackMessage={phoneFeedBackMessage}
+      />
+      <FormInput
+        label=""
+        type="text"
+        placeholder="Flat, House no., Building, Apartment: *"
+        onChange={e => onChangeAddress1(formType, e.target.value.replace(/#/g, ''))}
+        value={address1}
+        feedBackError={addressFeedBackError1}
+        feedBackMessage={addressFeedBackMessage1}
+      />
+      <FormInput
+        label=""
+        type="text"
+        placeholder="Area, Colony, Street, Sector: *"
+        onChange={e => onChangeAddress2(formType, e.target.value.replace(/#/g, ''))}
+        value={address2}
+        feedBackError={addressFeedBackError2}
+        feedBackMessage={addressFeedBackMessage2}
+      />
+      <FormInput
+        label=""
+        type="text"
+        placeholder="Landmark,Village: "
+        onChange={e => onChangeAddress3(formType, e.target.value.replace(/#/g, ''))}
+        value={address3}
+        feedBackError={addressFeedBackError3}
+        feedBackMessage={addressFeedBackMessage3}
+      />
+      <div className={styles.pincode_city}>
+        <Pincode
+          pincode={pincode}
+          formType={formType}
+          feedBackError={pincodeFeedBackError}
+          onChangePincode={onChangePincode}
+          feedBackMessage={pincodeFeedBackMessage}
+        />
+        <FormInput
+          label=""
+          type="text"
+          placeholder="City *"
+          value={city}
+          feedBackError={cityFeedBackError}
+          feedBackMessage={cityFeedBackMessage}
+          readOnly
+        />
+      </div>
+      <FormInput
+        label=""
+        type="text"
+        placeholder="State *"
+        value={state}
+        feedBackError={stateFeedBackError}
+        feedBackMessage={stateFeedBackMessage}
+        readOnly
+      />
+      {formType !== 'billing' && (
+        <FormInput
+          label=""
+          type="text"
+          placeholder="GST(optional)"
+          onChange={e => onChangeGST(formType, e.target.value)}
+          value={gst}
+          feedBackError={gstFeedBackError}
+          feedBackMessage={gstFeedBackMessage}
+        />
+      )}
+    </div>
   );
 };
 
