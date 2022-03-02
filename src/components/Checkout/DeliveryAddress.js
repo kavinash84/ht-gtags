@@ -14,7 +14,9 @@ import * as actionCreators from 'redux/modules/address';
 import { notifSend } from 'redux/modules/notifs';
 import { isBlank } from 'js-utility-functions';
 import { validateAddress } from 'utils/validation';
-
+const BackIcon = require('../../../static/cart/back.svg');
+const CloseIcon = require('../../../static/cart/close.svg');
+const addIcon = require('../../../static/cart/addAddressicon.svg');
 /**
  * Components
  */
@@ -29,7 +31,8 @@ import Label from 'hometown-components-dev/lib/LabelHtV1';
 import Row from 'hometown-components-dev/lib/RowHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
-
+import Div from 'hometown-components-dev/lib/BoxHtV1';
+import Section from 'hometown-components-dev/lib/SectionHtV1';
 import { getCartList } from 'selectors/cart';
 /**
  * Page Components
@@ -43,11 +46,11 @@ import PaymentMethods from '../PaymentMethods';
 /**
  * Icons
  */
-const addIcon = require('../../../static/increase.svg');
+// const addIcon = require('../../../static/increase.svg');
 const styles = require('./DeliveryAddress.scss');
 
 const mapStateToProps = ({
- userLogin, app, checkout, myaddress, address, profile, cart
+  userLogin, app, checkout, myaddress, address, profile, cart
 }) => ({
   results: getCartList(cart),
   isLoggedIn: userLogin.isLoggedIn,
@@ -55,6 +58,7 @@ const mapStateToProps = ({
   nextstep: checkout.nextstep,
   paymentData: checkout.paymentData,
   loading: checkout.loading,
+  addNewAddress: address.addNewAddress,
   addresses: myaddress.data,
   currentaddressindex: address.shipping.index,
   shippingIsBilling: address.shippingIsBilling,
@@ -78,8 +82,8 @@ class DeliveryAddress extends Component {
     const { dispatch } = this.context.store;
     const { cart, history } = this.props;
     const {
- nextstep, isLoggedIn, onChangeEmail, userEmail
-} = this.props;
+      nextstep, isLoggedIn, onChangeEmail, userEmail
+    } = this.props;
     if (isLoggedIn) {
       onChangeEmail('shipping', userEmail);
       onChangeEmail('billing', userEmail);
@@ -96,16 +100,16 @@ class DeliveryAddress extends Component {
   }
   componentWillReceiveProps(nextProps) {
     const {
- isLoggedIn, nextstep, clearShippingAddress, onChangeEmail, userEmail, couponlistToggle, cart
-} = this.props;
+      isLoggedIn, nextstep, clearShippingAddress, onChangeEmail, userEmail, couponlistToggle, cart
+    } = this.props;
     const { dispatch } = this.context.store;
     if (nextProps.nextstep !== nextstep && nextProps.paymentData) {
       // console.log(nextProps.paymentData);
       const { paymentData = {} } = nextProps;
       dispatch(load({
-          paymentData,
-          cart
-        }));
+        paymentData,
+        cart
+      }));
     }
     if (isLoggedIn && nextProps.userEmail !== userEmail) {
       onChangeEmail('shipping', nextProps.userEmail);
@@ -273,44 +277,44 @@ class DeliveryAddress extends Component {
             ? 'Please Add new Address  /  Select delivery Address '
             : 'Please Fill All Details Correctly !';
         dispatch(notifSend({
-            type: 'warning',
-            msg: message,
-            dismissAfter: 2000
-          }));
+          type: 'warning',
+          msg: message,
+          dismissAfter: 2000
+        }));
       } else {
         const { sessionId } = this.props;
         dispatch(sendDeliveryAddress(
-            sessionId,
-            {
-              shippingIsBilling,
-              shippingAddress: shippingForm.data,
-              billingAddress: shippingForm.data,
-              cartTotal
-            },
-            isLoggedIn
-          ));
+          sessionId,
+          {
+            shippingIsBilling,
+            shippingAddress: shippingForm.data,
+            billingAddress: shippingForm.data,
+            cartTotal
+          },
+          isLoggedIn
+        ));
       }
     } else {
       const shippingForm = this.formValdiator(this.props, shipping, 'shipping');
       const billingForm = this.formValdiator(this.props, billing, 'billing');
       if (shippingForm.error || billingForm.error) {
         dispatch(notifSend({
-            type: 'warning',
-            msg: 'Fill All Details Correctly',
-            dismissAfter: 2000
-          }));
+          type: 'warning',
+          msg: 'Fill All Details Correctly',
+          dismissAfter: 2000
+        }));
       } else {
         const { sessionId } = this.props;
         dispatch(sendDeliveryAddress(
-            sessionId,
-            {
-              shippingIsBilling,
-              shippingAddress: shippingForm.data,
-              billingAddress: billingForm.data,
-              cartTotal
-            },
-            isLoggedIn
-          ));
+          sessionId,
+          {
+            shippingIsBilling,
+            shippingAddress: shippingForm.data,
+            billingAddress: billingForm.data,
+            cartTotal
+          },
+          isLoggedIn
+        ));
       }
     }
   };
@@ -357,13 +361,40 @@ class DeliveryAddress extends Component {
       shippingIsBilling,
       userEmail,
       summary,
-      results
+      results,
+      addNewAddress
     } = this.props;
     const { addressform } = this.state;
     return (
-      <Container my={[60, 40, 60]} px={[24, 24, 0]}>
+      <Container my={[60, 60, 60]} px={[24, 24, 0]}>
+
+        {isLoggedIn && !addNewAddress && (
+          <Div col="12" pb="0.625rem">
+            <button className={styles.addAddressBtn} onClick={this.toggleAddAddress}>
+              <Text color="rgb(0,0,0)" ta="left" mt="0" mb="0" >
+                <img className={styles.addAddressBtnIcon} src={addIcon} alt="Add New Address" />
+                {addresses.length > 0 ? 'Add New Address' : 'Add Address'}
+              </Text>
+            </button>
+          </Div>
+        )}
+        {addNewAddress && (
+
+          <Div className={styles.addNewAddressHeader}>
+            <Button bg="transparent" border="none" onClick={this.toggleAddAddress} p="0">
+              {' '}
+              <img src={BackIcon} alt="Close" /> <span>Add New Address</span>
+            </Button>
+
+            <Button bg="transparent" border="none" onClick={this.toggleAddAddress} p="0">
+              {' '}
+              <img src={CloseIcon} alt="Close" />{' '}
+            </Button>
+          </Div>
+        )}
+
         <Row>
-          <Col variant="col-8">
+          <Col variant="col-12">
             {/* For logged in */}
             {!isLoggedIn && (
               <Box className={styles.isLoggedIn}>
@@ -389,50 +420,30 @@ class DeliveryAddress extends Component {
             {isLoggedIn && (
               <Box>
                 <Row mx={0} mb={20}>
-                  <Heading variant="heading.medium">Confirm Address</Heading>
+                  <Heading variant="heading.medium">My Saved Address</Heading>
                 </Row>
                 <Row mx={-10}>
                   {addresses.map((item, index) => (
-                    <Col variant="col-6" px={10} mb={20} key={item.id_customer_address}>
-                      <Card
-                        variant="link"
-                        textAlign="left"
-                        px={0}
-                        py={0}
-                        height="100%"
-                        lineHeight={1.25}
-                        className={` ${styles.addressBtn} ${
-                          index === currentaddressindex ? styles.active : styles.deliveryAddress
-                        }`}
-                        onClick={() => this.handleClick(index, addresses)}
-                        sx={{
-                          border: index === currentaddressindex ? 'primaryLarge' : 'secondaryLarge',
-                          borderRadius: 3
-                        }}
-                      >
-                        <Box
-                          as="input"
-                          type="radio"
-                          name="address"
-                          checked={index === currentaddressindex}
-                          id={`address${item.id_customer_address}`}
-                          mr={10}
-                          sx={{ position: 'absolute', top: 18, left: 22 }}
-                        />
-                        <Text
-                          as="label"
-                          htmlFor={`address${item.id_customer_address}`}
-                          width={1}
-                          px={32}
-                          py={15}
-                          display="block"
-                        >
-                          <b>{item.full_name}</b>
-                          <br />
+                    <Col variant="col-12" px={10} mb={20} key={item.id_customer_address}>
+                      <button className={`${styles.addressBtn}`} onClick={() => this.handleClick(index)}>
+                        <div className={styles.customCheckbox}>
+                          <div style={{ marginTop: "10px" }}>
+                            {index === currentaddressindex ? (
+                              <div className={styles.checked}>
+                                <div className={styles.filled} />
+                              </div>
+                            ) : (
+                                <div className={styles.unchecked}></div>
+                              )}
+                          </div>
+                          <div className={styles.checkboxLabel}> {item.full_name} </div>
+                        </div>
+                        <div style={{ marginLeft: "30px", color: "#999999" }}>
                           {item.address1}
-                          {item.address2 && <br />}
+                          {item.address1}
                           {item.address2}
-                          {item.address3 && <br />}
+                          {item.address2}
+                          {item.address3}
                           {item.address3}
                           <br />
                           {item.city}, {item.pincode}
@@ -440,71 +451,64 @@ class DeliveryAddress extends Component {
                           {item.state}
                           <br />
                           {item.gst || ''}
-                        </Text>
-                      </Card>
+                        </div>
+                      </button>
                     </Col>
                   ))}
 
-                  <Col variant="col-12">
-                    <Button variant="link" onClick={this.toggleAddAddress} display="flex" alignItems="center">
-                      <Image src={addIcon} alt="Add new address" mr={10} />
-                      <Text variant="small">Add new address</Text>
-                    </Button>
-                  </Col>
+
                 </Row>
               </Box>
             )}
 
             {/* Address Form */}
             <form onSubmit={this.handleSubmit}>
-              <Row display="block" mr="0" ml="0">
-                {(addressform || !isLoggedIn) && (
-                  <Box variant="col-12" px={0}>
-                    <AddressForm formType="shipping" isLoggedIn={isLoggedIn} userEmail={userEmail} />
-                  </Box>
-                )}
-                <Box mt={15} width={1}>
-                  <Flex px={15} py={15} alignItems="center" sx={{ border: 'secondary' }}>
-                    <Box className="checkbox" mr={10}>
-                      <Box
-                        as="input"
+              {(addressform || !isLoggedIn) && (
+                <Div style={{ background: '#FFFFFF' }} pl="15px" pr="15px">
+                  {!isLoggedIn && (
+                    <Div style={{ fontSize: '14px', fontWeight: '600', marginBottom: '15px', color: '#323131' }}>
+                      Or Continue As Guest
+                    </Div>
+                  )}
+                  <AddressForm formType="shipping" isLoggedIn={isLoggedIn} userEmail={userEmail} />
+                </Div>
+              )}
+
+              <Row display="block" mr="0" ml="0" mt="1rem" mb="2.5rem">
+                <Div col="12" mb="10x" style={{ marginBottom: '15px' }} pl="15px" pr="15px">
+
+                  <div display="inline-block">
+                    <label className={styles.checkbox_container} htmlFor="checkbox">
+                      Billing Address Same As Shipping Address
+                      <input
                         type="checkbox"
                         id="checkbox"
-                        checked={!shippingIsBilling}
+                        checked={shippingIsBilling}
                         onChange={this.toggleBillingForm}
                       />
-                      {/* eslint-disable */}
-                      <Label htmlFor="checkbox" />
-                      {/* eslint-enable */}
-                    </Box>
-                    <Text variant="link" fontSize={14} htmlFor="checkbox" onClick={this.toggleBillingForm}>
-                      <p className={styles.difBillingAddress}> Different Billing Address ?</p>
-                    </Text>
-                  </Flex>
+                      <span className={styles.checkmark}></span>
+                    </label>
+                  </div>
 
-                  {/* Billing Address */}
-                  {!shippingIsBilling && (
-                    <Box>
-                      <AddressForm formType="billing" isLoggedIn={isLoggedIn} userEmail={userEmail} />
-                    </Box>
-                  )}
-                </Box>
-              </Row>
-              <Row justifyContent="flex-end" mt={20}>
-                <Col textAlign="right">
-                  <Text pb={15} fontSize={14}>
-                    *Required
-                  </Text>
-                  <Button type="submit" disabled={loading || this.checkParams()}>
-                    {loading ? 'Loading...' : 'Save and Continue'}
-                  </Button>
-                </Col>
+                </Div>
+                <div style={{ padding: '5px', width: '100%', background: '#f7f7f7', marginTop: '35px' }} />
+                {!shippingIsBilling && (
+                  <Row display="block" mr="0" ml="0" mt="1.5rem" mb="0" pl="15px" pr="15px">
+                    <Div col="12">
+                      <Div style={{ fontSize: '14px', fontWeight: '600', marginBottom: '15px', color: '#323131' }}>
+                        Add Billing Address
+                      </Div>
+                    </Div>
+                    <AddressForm formType="billing" isLoggedIn={isLoggedIn} userEmail={userEmail} />
+                  </Row>
+                )}
               </Row>
             </form>
+
           </Col>
 
           {/* Order Summary */}
-          <Col variant="col-4">
+          {/* <Col variant="col-4">
             <Box bg="sidebar" px={[15, 15, 40]} py={[20, 20, 30]}>
               <OrderSummary
                 history={history}
@@ -521,7 +525,7 @@ class DeliveryAddress extends Component {
               />
               <PaymentMethods />
             </Box>
-          </Col>
+          </Col> */}
         </Row>
       </Container>
     );
