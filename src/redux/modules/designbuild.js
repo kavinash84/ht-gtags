@@ -12,10 +12,13 @@ const LOAD_WARRANTY_CAT = "staticPage/LOAD_WARRANTY_CAT";
 const LOAD_WARRANTY_CAT_SUCCESS = "staticPage/LOAD_WARRANTY_CAT_SUCCESS";
 const LOAD_WARRANTY_CAT_FAIL = "staticPage/LOAD_WARRANTY_CAT_FAIL";
 
+const EXCHANGE_OFFER_SUCCESS = "staticPage/EXCHANGE_OFFER_SUCCESS";
+
 const initialState = {
   loaded: false,
   data: [],
   warranty: "",
+  exchangeOfferCoupon: "",
   warrantyCat: ""
 };
 
@@ -78,10 +81,22 @@ export default function reducer(state = initialState, action = {}) {
         loaded: false,
         error: action.error
       };
+    case EXCHANGE_OFFER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        exchangeOfferCoupon: action.result
+      };
     default:
       return state;
   }
 }
+
+export const setExchangeCoupon = result => ({
+  type: EXCHANGE_OFFER_SUCCESS,
+  result
+});
 
 export const loadDesignBuildData = () => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Select from "react-select";
+// import Select from "react-select";
 // import {
 //   Button,
 //   Alert,
@@ -27,6 +27,7 @@ import {
 // import DropDown from '../Form/DropDown';
 import styles from "./Form/Form.module.css";
 import { apiInstanceTest } from "./axios";
+import { setExchangeCoupon } from "../../redux/modules/designbuild";
 
 const customStyles = {
   container: () => ({
@@ -462,6 +463,8 @@ export default class ContactUs extends Component {
             },
             () => {
               const { history } = this.props;
+              const { dispatch } = this.context.store;
+              dispatch(setExchangeCoupon(response.data.coupon));
               history.push({
                 pathname: "/exchange-offers",
                 search: `?submit=thankyou&utm_source=${source}&utm_medium=${medium}&utm_campaign=${campaign}&utm_term=${term}`
